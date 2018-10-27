@@ -292,7 +292,7 @@ namespace yli
             glDisable(GL_BLEND);
         }
 
-        void Font2D::print_text2D(const TextStruct& text_struct)
+        void Font2D::print_text2D(const TextStruct& text_struct) const
         {
             if (text_struct.text.empty())
             {
@@ -332,7 +332,7 @@ namespace yli
                 std::size_t text_size,
                 std::size_t font_size,
                 const std::string text,
-                const std::string font_texture_file_format)
+                const std::string font_texture_file_format) const
         {
             this->print_text2D(screen_width, screen_height, x, y, text_size, font_size, text, font_texture_file_format, "left", "bottom");
         }

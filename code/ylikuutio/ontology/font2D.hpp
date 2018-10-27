@@ -114,7 +114,7 @@ namespace yli
                         const std::string horizontal_alignment,
                         const std::string vertical_alignment) const;
 
-                void print_text2D(const TextStruct& text_struct);
+                void print_text2D(const TextStruct& text_struct) const;
 
                 void print_text2D(
                         std::size_t screen_width,
@@ -124,7 +124,7 @@ namespace yli
                         std::size_t text_size,
                         std::size_t font_size,
                         const std::string text,
-                        const std::string font_texture_file_format);
+                        const std::string font_texture_file_format) const;
 
             private:
                 GLuint texture;      // Texture containing the glyphs, reterned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
