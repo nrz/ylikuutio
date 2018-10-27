@@ -102,7 +102,7 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
-                void printText2D(
+                void print_text2D(
                         std::size_t screen_width,
                         std::size_t screen_height,
                         std::size_t x,
@@ -114,9 +114,9 @@ namespace yli
                         const std::string horizontal_alignment,
                         const std::string vertical_alignment) const;
 
-                void printText2D(const TextStruct& text_struct);
+                void print_text2D(const TextStruct& text_struct);
 
-                void printText2D(
+                void print_text2D(
                         std::size_t screen_width,
                         std::size_t screen_height,
                         std::size_t x,

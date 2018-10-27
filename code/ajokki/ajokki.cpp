@@ -1109,7 +1109,7 @@ int main(const int argc, const char* const argv[])
             text_struct.text = angles_and_coordinates_string;
             text_struct.horizontal_alignment = "left";
             text_struct.vertical_alignment = "bottom";
-            my_font2D->printText2D(text_struct);
+            my_font2D->print_text2D(text_struct);
 
             if (my_universe->in_help_mode && my_universe->can_display_help_screen)
             {
@@ -1119,7 +1119,7 @@ int main(const int argc, const char* const argv[])
                 text_struct.text = help_text_string;
                 text_struct.horizontal_alignment = "left";
                 text_struct.vertical_alignment = "top";
-                my_font2D->printText2D(text_struct);
+                my_font2D->print_text2D(text_struct);
             }
 
             if (my_universe->testing_spherical_terrain_in_use)
@@ -1130,7 +1130,7 @@ int main(const int argc, const char* const argv[])
                 text_struct.text = spherical_coordinates_string;
                 text_struct.horizontal_alignment = "left";
                 text_struct.vertical_alignment = "bottom";
-                my_font2D->printText2D(text_struct);
+                my_font2D->print_text2D(text_struct);
             }
 
             // print time data on top left corner.
@@ -1139,7 +1139,7 @@ int main(const int argc, const char* const argv[])
             text_struct.text = time_string;
             text_struct.horizontal_alignment = "left";
             text_struct.vertical_alignment = "top";
-            my_font2D->printText2D(text_struct);
+            my_font2D->print_text2D(text_struct);
 
             if (ms_frame_text_ready)
             {
@@ -1149,7 +1149,7 @@ int main(const int argc, const char* const argv[])
                 text_struct.text = ms_frame_text;
                 text_struct.horizontal_alignment = "right";
                 text_struct.vertical_alignment = "top";
-                my_font2D->printText2D(text_struct);
+                my_font2D->print_text2D(text_struct);
             }
 
             yli::opengl::enable_depth_test();

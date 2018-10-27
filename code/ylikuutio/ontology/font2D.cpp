@@ -55,7 +55,7 @@ namespace yli
             return 0; // `Font2D` has no children.
         }
 
-        void Font2D::printText2D(
+        void Font2D::print_text2D(
                 std::size_t screen_width,
                 std::size_t screen_height,
                 std::size_t x,
@@ -292,11 +292,11 @@ namespace yli
             glDisable(GL_BLEND);
         }
 
-        void Font2D::printText2D(const TextStruct& text_struct)
+        void Font2D::print_text2D(const TextStruct& text_struct)
         {
             if (text_struct.text.empty())
             {
-                printText2D(
+                this->print_text2D(
                         text_struct.screen_width,
                         text_struct.screen_height,
                         text_struct.x,
@@ -310,7 +310,7 @@ namespace yli
             }
             else
             {
-                printText2D(
+                this->print_text2D(
                         text_struct.screen_width,
                         text_struct.screen_height,
                         text_struct.x,
@@ -324,7 +324,7 @@ namespace yli
             }
         }
 
-        void Font2D::printText2D(
+        void Font2D::print_text2D(
                 std::size_t screen_width,
                 std::size_t screen_height,
                 std::size_t x,
@@ -334,7 +334,7 @@ namespace yli
                 const std::string text,
                 const std::string font_texture_file_format)
         {
-            printText2D(screen_width, screen_height, x, y, text_size, font_size, text, font_texture_file_format, "left", "bottom");
+            this->print_text2D(screen_width, screen_height, x, y, text_size, font_size, text, font_texture_file_format, "left", "bottom");
         }
     }
 }
