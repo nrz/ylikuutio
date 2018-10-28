@@ -16,16 +16,22 @@
 // Include standard headers
 #include <cstddef>   // std::size_t
 #include <string>    // std::string
+#include <queue>     // std::queue
+#include <vector>    // std::vector
 
 namespace yli
 {
     namespace ontology
     {
         class Universe;
+        class Text2D;
 
         class Font2D: public yli::ontology::Entity
         {
             public:
+                void bind_text2D(yli::ontology::Text2D* const text2D);
+                void unbind_text2D(const std::size_t childID);
+
                 // constructor.
                 Font2D(
                         yli::ontology::Universe* const universe,
@@ -40,6 +46,8 @@ namespace yli
                     this->screen_width = screen_width;
                     this->screen_height = screen_height;
                     this->font_texture_file_format = font_texture_file_format;
+
+                    this->number_of_text2Ds = 0;
 
                     // get `childID` from `Universe` and set pointer to this `Font2D`.
                     this->bind_to_parent();
@@ -143,6 +151,10 @@ namespace yli
                 void bind_to_parent();
 
                 yli::ontology::Universe* parent; // pointer to the `Universe`.
+
+                std::vector<yli::ontology::Text2D*> text2D_pointer_vector;
+                std::queue<std::size_t> free_text2D_ID_queue;
+                std::size_t number_of_text2Ds;
 
                 GLuint texture;      // Texture containing the glyphs, reterned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
                 GLuint vertexbuffer; // Buffer containing the vertices
