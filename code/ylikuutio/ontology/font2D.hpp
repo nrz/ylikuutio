@@ -5,6 +5,7 @@
 #include "text_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/load/texture_loader.hpp"
+#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -36,6 +37,9 @@ namespace yli
                 {
                     // constructor.
                     this->parent = universe;
+
+                    // get `childID` from `Universe` and set pointer to this `Font2D`.
+                    this->bind_to_parent();
 
                     // Initialize class members with some dummy values.
                     this->vertexbuffer                     = 0;
@@ -127,7 +131,12 @@ namespace yli
                         const std::string text,
                         const std::string font_texture_file_format) const;
 
+                template<class T1>
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
+
             private:
+                void bind_to_parent();
+
                 yli::ontology::Universe* parent; // pointer to the `Universe`.
 
                 GLuint texture;      // Texture containing the glyphs, reterned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).

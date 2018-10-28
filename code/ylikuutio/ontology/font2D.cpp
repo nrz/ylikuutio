@@ -1,6 +1,7 @@
 #include "font2D.hpp"
 #include "universe.hpp"
 #include "text_struct.hpp"
+#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -23,6 +24,22 @@ namespace yli
 {
     namespace ontology
     {
+        void Font2D::bind_to_parent()
+        {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Universe* const universe = this->parent;
+
+            if (universe == nullptr)
+            {
+                std::cerr << "ERROR: `Font2D::bind_to_parent`: `universe` is `nullptr`!\n";
+                return;
+            }
+
+            // get `childID` from the `Universe` and set pointer to this `Font2D`.
+            universe->bind_font2D(this);
+        }
+
         Font2D::~Font2D()
         {
             // destructor.

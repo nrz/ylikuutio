@@ -81,6 +81,16 @@ namespace yli
                     this->number_of_worlds);
         }
 
+        void Universe::bind_font2D(yli::ontology::Font2D* const font2D)
+        {
+            // get `childID` from `Universe` and set pointer to `font2D`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::Font2D*>(
+                    font2D,
+                    this->font2D_pointer_vector,
+                    this->free_font2D_ID_queue,
+                    this->number_of_font2Ds);
+        }
+
         Universe::~Universe()
         {
             // destructor.
