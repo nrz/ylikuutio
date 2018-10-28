@@ -146,7 +146,6 @@ namespace ajokki
         helsinki_east_downtown_terrain_species_struct.is_terrain = true;
         helsinki_east_downtown_terrain_species_struct.x_step = 4;
         helsinki_east_downtown_terrain_species_struct.z_step = 4;
-        helsinki_east_downtown_terrain_species_struct.should_ylikuutio_use_real_texture_coordinates = false;
         std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_terrain_species_entity ...\n";
         yli::ontology::Entity* const helsinki_east_downtown_terrain_species_entity = entity_factory->create_Species(helsinki_east_downtown_terrain_species_struct);
         std::cout << "Creating yli::ontology::Species* helsinki_east_downtown_terrain_species ...\n";

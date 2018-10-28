@@ -560,6 +560,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/symbiosis_struct.hpp
     code/ylikuutio/ontology/terrain_generation_callbacks.cpp
     code/ylikuutio/ontology/terrain_generation_callbacks.hpp
+    code/ylikuutio/ontology/text2D.hpp
+    code/ylikuutio/ontology/text2D.cpp
     code/ylikuutio/ontology/text3D.hpp
     code/ylikuutio/ontology/text3D.cpp
     code/ylikuutio/ontology/text3D_struct.hpp

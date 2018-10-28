@@ -5,10 +5,19 @@
 #include <cstddef> // std::size_t
 #include <string>  // std::string
 
+namespace yli
+{
+    namespace ontology
+    {
+        class Font2D;
+    }
+}
+
 typedef struct TextStruct
 {
     TextStruct()
-        : screen_width(0),
+        : font2D_parent(nullptr),
+        screen_width(0),
         screen_height(0),
         x(0),
         y(0),
@@ -17,6 +26,8 @@ typedef struct TextStruct
     {
         // constructor.
     }
+
+    yli::ontology::Font2D* font2D_parent;
     std::size_t screen_width;
     std::size_t screen_height;
     std::size_t x;

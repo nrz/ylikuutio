@@ -252,7 +252,7 @@ namespace yli
             // Convert current input into std::string.
             std::size_t characters_for_line = this->universe->get_window_width() / this->universe->get_text_size();
 
-            // Draw the console to screen using `font2D::printText2D`.
+            // Draw the console to screen using `font2D::print_text2D`.
             TextStruct text_struct;
             text_struct.screen_width = this->universe->get_window_width();
             text_struct.screen_height = this->universe->get_window_height();
@@ -335,7 +335,7 @@ namespace yli
                 }
             }
 
-            font2D->printText2D(text_struct);
+            font2D->print_text2D(text_struct);
         }
 
         bool Console::get_in_console() const

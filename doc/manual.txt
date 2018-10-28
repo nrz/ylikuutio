@@ -74,3 +74,9 @@ To exit Ajokki:
 `ciao`
 `heippa`
 `sayonara`
+
+External libraries
+
+Assimp is to be used only in `yli_convert` file conversion tool.
+The actual asset loading is done using OpenFBX for `.fbx` files and
+custom file loaders for other supported file formats.

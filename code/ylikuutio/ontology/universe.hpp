@@ -274,6 +274,7 @@ namespace yli
         {
             public:
                 void bind_world(yli::ontology::World* const world);
+                void bind_font2D(yli::ontology::Font2D* const font2D);
 
                 // constructor.
                 Universe(const UniverseStruct& universe_struct)
@@ -567,6 +568,10 @@ namespace yli
                 std::vector<yli::ontology::World*> world_pointer_vector;
                 std::queue<std::size_t> free_worldID_queue;
                 std::size_t number_of_worlds;
+
+                std::vector<yli::ontology::Font2D*> font2D_pointer_vector;
+                std::queue<std::size_t> free_font2D_ID_queue;
+                std::size_t number_of_font2Ds;
 
                 yli::ontology::World* active_world;
                 yli::ontology::Font2D* active_font2D;

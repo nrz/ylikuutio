@@ -105,8 +105,7 @@ namespace yli
 
         yli::ontology::Entity* World::get_parent() const
         {
-            // `World` has no parent.
-            return nullptr;
+            return this->parent;
         }
 
         std::size_t World::get_number_of_children() const

@@ -59,8 +59,8 @@ namespace yli
                 yli::ontology::Entity* create_VectorFont(const VectorFontStruct& vector_font_struct);
                 yli::ontology::Entity* create_Text3D(Text3DStruct& text3D_struct);
                 yli::ontology::Entity* create_Font2D(
-                        GLuint screen_width,
-                        GLuint screen_height,
+                        std::size_t screen_width,
+                        std::size_t screen_height,
                         const std::string& texture_filename,
                         const std::string& font_texture_file_format);
                 yli::ontology::Entity* create_Camera(CameraStruct& camera_struct);

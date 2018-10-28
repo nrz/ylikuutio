@@ -81,6 +81,16 @@ namespace yli
                     this->number_of_worlds);
         }
 
+        void Universe::bind_font2D(yli::ontology::Font2D* const font2D)
+        {
+            // get `childID` from `Universe` and set pointer to `font2D`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::Font2D*>(
+                    font2D,
+                    this->font2D_pointer_vector,
+                    this->free_font2D_ID_queue,
+                    this->number_of_font2Ds);
+        }
+
         Universe::~Universe()
         {
             // destructor.
@@ -110,6 +120,19 @@ namespace yli
                 // render this `Universe` by calling `render()` function of the active `World`.
                 this->active_world->render();
             }
+
+            yli::opengl::disable_depth_test();
+
+            // Render the `Console` (including current input).
+            this->console_pointer->render();
+
+            // render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
+            yli::ontology::render_children<yli::ontology::Font2D*>(this->font2D_pointer_vector);
+
+            yli::opengl::enable_depth_test();
+
+            // Swap buffers.
+            SDL_GL_SwapWindow(this->get_window());
 
             this->postrender();
         }

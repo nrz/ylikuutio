@@ -35,6 +35,7 @@
 #include "code/ylikuutio/console/console_callback_object.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
+#include "code/ylikuutio/ontology/text2D.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
@@ -788,6 +789,75 @@ int main(const int argc, const char* const argv[])
     SDL_Event sdl_event;
     std::string ms_frame_text;
 
+    // Print angles and cartesian coordinates on bottom left corner.
+    TextStruct angles_and_coordinates_text_struct;
+    angles_and_coordinates_text_struct.font2D_parent = my_font2D;
+    angles_and_coordinates_text_struct.screen_width = my_universe->get_window_width();
+    angles_and_coordinates_text_struct.screen_height = my_universe->get_window_height();
+    angles_and_coordinates_text_struct.x = 0;
+    angles_and_coordinates_text_struct.y = 0;
+    angles_and_coordinates_text_struct.text_size = my_universe->get_text_size();
+    angles_and_coordinates_text_struct.font_size = my_universe->get_font_size();
+    angles_and_coordinates_text_struct.font_texture_file_format = "bmp";
+    angles_and_coordinates_text_struct.horizontal_alignment = "left";
+    angles_and_coordinates_text_struct.vertical_alignment = "bottom";
+    yli::ontology::Text2D* angles_and_coordinates_text2D = new yli::ontology::Text2D(my_universe, angles_and_coordinates_text_struct);
+
+    // Print spherical coordinates on second line from the bottom left.
+    TextStruct spherical_coordinates_text_struct;
+    spherical_coordinates_text_struct.font2D_parent = my_font2D;
+    spherical_coordinates_text_struct.screen_width = my_universe->get_window_width();
+    spherical_coordinates_text_struct.screen_height = my_universe->get_window_height();
+    spherical_coordinates_text_struct.x = 0;
+    spherical_coordinates_text_struct.y = 2 * my_universe->get_text_size();
+    spherical_coordinates_text_struct.text_size = my_universe->get_text_size();
+    spherical_coordinates_text_struct.font_size = my_universe->get_font_size();
+    spherical_coordinates_text_struct.horizontal_alignment = "left";
+    spherical_coordinates_text_struct.vertical_alignment = "bottom";
+    yli::ontology::Text2D* spherical_coordinates_text2D = new yli::ontology::Text2D(my_universe, spherical_coordinates_text_struct);
+
+    // Print time data on top left corner.
+    TextStruct time_text_struct;
+    time_text_struct.font2D_parent = my_font2D;
+    time_text_struct.screen_width = my_universe->get_window_width();
+    time_text_struct.screen_height = my_universe->get_window_height();
+    time_text_struct.x = 0;
+    time_text_struct.y = my_universe->get_window_height();
+    time_text_struct.text_size = my_universe->get_text_size();
+    time_text_struct.font_size = my_universe->get_font_size();
+    time_text_struct.font_texture_file_format = "bmp";
+    time_text_struct.horizontal_alignment = "left";
+    time_text_struct.vertical_alignment = "top";
+    yli::ontology::Text2D* time_text2D = new yli::ontology::Text2D(my_universe, time_text_struct);
+
+    // Print help text.
+    TextStruct help_text_struct;
+    help_text_struct.font2D_parent = my_font2D;
+    help_text_struct.screen_width = my_universe->get_window_width();
+    help_text_struct.screen_height = my_universe->get_window_height();
+    help_text_struct.x = 0;
+    help_text_struct.y = my_universe->get_window_height() - (3 * my_universe->get_text_size());
+    help_text_struct.text_size = my_universe->get_text_size();
+    help_text_struct.font_size = my_universe->get_font_size();
+    help_text_struct.font_texture_file_format = "bmp";
+    help_text_struct.horizontal_alignment = "left";
+    help_text_struct.vertical_alignment = "top";
+    yli::ontology::Text2D* help_text2D = new yli::ontology::Text2D(my_universe, help_text_struct);
+
+    // Print frame rate data on top right corner.
+    TextStruct frame_rate_text_struct;
+    frame_rate_text_struct.font2D_parent = my_font2D;
+    frame_rate_text_struct.screen_width = my_universe->get_window_width();
+    frame_rate_text_struct.screen_height = my_universe->get_window_height();
+    frame_rate_text_struct.x = my_universe->get_window_width();;
+    frame_rate_text_struct.y = my_universe->get_window_height();
+    frame_rate_text_struct.text_size = my_universe->get_text_size();
+    frame_rate_text_struct.font_size = my_universe->get_font_size();
+    frame_rate_text_struct.font_texture_file_format = "bmp";
+    frame_rate_text_struct.horizontal_alignment = "right";
+    frame_rate_text_struct.vertical_alignment = "top";
+    yli::ontology::Text2D* frame_rate_text2D = new yli::ontology::Text2D(my_universe, frame_rate_text_struct);
+
     while (!is_exit_requested)
     {
         const double current_time_in_main_loop = yli::time::get_time();
@@ -808,6 +878,7 @@ int main(const int argc, const char* const argv[])
                     ms_frame_text_stringstream << std::fixed << std::setprecision(2) << 1000.0f / static_cast<double>(number_of_frames) << " ms/frame; " <<
                         number_of_frames << " Hz";
                     ms_frame_text = ms_frame_text_stringstream.str();
+                    frame_rate_text2D->change_string(ms_frame_text);
                     ms_frame_text_ready = true;
                     number_of_frames = 0;
                 }
@@ -1036,21 +1107,6 @@ int main(const int argc, const char* const argv[])
             // Gravity etc.
             my_universe->do_physics();
 
-            // Render the `Universe`.
-            my_universe->render();
-
-            yli::opengl::disable_depth_test();
-
-            // Render the `Console` (including current input).
-            my_console->render();
-
-            TextStruct text_struct;
-            text_struct.screen_width = my_universe->get_window_width();
-            text_struct.screen_height = my_universe->get_window_height();
-            text_struct.text_size = my_universe->get_text_size();
-            text_struct.font_size = my_universe->get_font_size();
-            text_struct.font_texture_file_format = "bmp";
-
             std::stringstream angles_and_coordinates_stringstream;
             angles_and_coordinates_stringstream << std::fixed << std::setprecision(2) <<
                 my_universe->current_camera_horizontal_angle << "," <<
@@ -1062,16 +1118,20 @@ int main(const int argc, const char* const argv[])
                 my_universe->current_camera_cartesian_coordinates.y << "," <<
                 my_universe->current_camera_cartesian_coordinates.z << ")";
             const std::string angles_and_coordinates_string = angles_and_coordinates_stringstream.str();
+            angles_and_coordinates_text2D->change_string(angles_and_coordinates_string);
 
             std::stringstream time_stringstream;
             time_stringstream << std::fixed << std::setprecision(2) << yli::time::get_time() << " sec";
             const std::string time_string = time_stringstream.str();
+            time_text2D->change_string(time_string);
 
             const std::string on_string = "on";
             const std::string off_string = "off";
 
-            std::stringstream help_text_stringstream;
-            help_text_stringstream <<
+            if (my_universe->in_help_mode && my_universe->can_display_help_screen)
+            {
+                std::stringstream help_text_stringstream;
+                help_text_stringstream <<
                     "Ajokki 0.0.3\\n"
                     "\\n"
                     "arrow keys\\n"
@@ -1089,9 +1149,13 @@ int main(const int argc, const char* const argv[])
                     "P  pink geometric tiles texture\\n" <<
                     "T  terrain species\\n" <<
                     "A  suzanne species\\n";
-            const std::string help_text_string = help_text_stringstream.str();
-
-            std::string spherical_coordinates_string;
+                const std::string help_text_string = help_text_stringstream.str();
+                help_text2D->change_string(help_text_string);
+            }
+            else
+            {
+                help_text2D->change_string("");
+            }
 
             if (my_universe->testing_spherical_terrain_in_use)
             {
@@ -1100,62 +1164,16 @@ int main(const int argc, const char* const argv[])
                     "rho:" << my_universe->current_camera_spherical_coordinates.rho <<
                     "theta:" << my_universe->current_camera_spherical_coordinates.theta <<
                     "phi:" << my_universe->current_camera_spherical_coordinates.phi;
-                spherical_coordinates_string = spherical_coordinates_stringstream.str();
+                std::string spherical_coordinates_string = spherical_coordinates_stringstream.str();
+                spherical_coordinates_text2D->change_string(spherical_coordinates_string);
             }
-
-            // print cartesian coordinates on bottom left corner.
-            text_struct.x = 0;
-            text_struct.y = 0;
-            text_struct.text = angles_and_coordinates_string;
-            text_struct.horizontal_alignment = "left";
-            text_struct.vertical_alignment = "bottom";
-            my_font2D->printText2D(text_struct);
-
-            if (my_universe->in_help_mode && my_universe->can_display_help_screen)
+            else
             {
-                // print help text.
-                text_struct.x = 0;
-                text_struct.y = my_universe->get_window_height() - (3 * my_universe->get_text_size());
-                text_struct.text = help_text_string;
-                text_struct.horizontal_alignment = "left";
-                text_struct.vertical_alignment = "top";
-                my_font2D->printText2D(text_struct);
+                spherical_coordinates_text2D->change_string("");
             }
 
-            if (my_universe->testing_spherical_terrain_in_use)
-            {
-                // print spherical coordinates on bottom left corner.
-                text_struct.x = 0;
-                text_struct.y += 2 * my_universe->get_text_size();
-                text_struct.text = spherical_coordinates_string;
-                text_struct.horizontal_alignment = "left";
-                text_struct.vertical_alignment = "bottom";
-                my_font2D->printText2D(text_struct);
-            }
-
-            // print time data on top left corner.
-            text_struct.x = 0;
-            text_struct.y = static_cast<GLuint>(my_universe->get_window_height());
-            text_struct.text = time_string;
-            text_struct.horizontal_alignment = "left";
-            text_struct.vertical_alignment = "top";
-            my_font2D->printText2D(text_struct);
-
-            if (ms_frame_text_ready)
-            {
-                // print frame rate data on top right corner.
-                text_struct.x = my_universe->get_window_width();
-                text_struct.y = my_universe->get_window_height();
-                text_struct.text = ms_frame_text;
-                text_struct.horizontal_alignment = "right";
-                text_struct.vertical_alignment = "top";
-                my_font2D->printText2D(text_struct);
-            }
-
-            yli::opengl::enable_depth_test();
-
-            // Swap buffers.
-            SDL_GL_SwapWindow(my_universe->get_window());
+            // Render the `Universe`.
+            my_universe->render();
 
             my_universe->finalize_delta_time_loop();
         }
