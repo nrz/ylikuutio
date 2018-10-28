@@ -70,6 +70,11 @@ namespace yli
             return 0; // `Font2D` has no children.
         }
 
+        const std::string& Font2D::get_font_texture_file_format() const
+        {
+            return this->font_texture_file_format;
+        }
+
         void Font2D::print_text2D(
                 std::size_t screen_width,
                 std::size_t screen_height,
