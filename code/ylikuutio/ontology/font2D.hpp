@@ -55,14 +55,14 @@ namespace yli
                     this->screen_height_uniform_ID         = 0;
 
                     // Initialize texture
-                    if (font_texture_file_format == "bmp" || font_texture_file_format == "BMP")
+                    if (this->font_texture_file_format == "bmp" || this->font_texture_file_format == "BMP")
                     {
                         if (!yli::load::load_BMP_texture(texture_filename, this->image_width, this->image_height, this->image_size, this->texture))
                         {
                             std::cerr << "ERROR: loading BMP texture failed!\n";
                         }
                     }
-                    else if (font_texture_file_format == "dds" || font_texture_file_format == "DDS")
+                    else if (this->font_texture_file_format == "dds" || this->font_texture_file_format == "DDS")
                     {
                         if (!yli::load::load_DDS_texture(texture_filename, this->image_width, this->image_height, this->image_size, this->texture))
                         {
@@ -71,33 +71,33 @@ namespace yli
                     }
                     else
                     {
-                        std::cerr << "ERROR: invalid font texture file format: " << font_texture_file_format << "\n";
+                        std::cerr << "ERROR: invalid font texture file format: " << this->font_texture_file_format << "\n";
                         std::cerr << "supported font texture file formats: bmp, BMP, dds, DDS.\n";
                         this->texture = 0;
                         return;
                     }
 
                     // Initialize VBO
-                    glGenBuffers(1, &vertexbuffer);
-                    glGenBuffers(1, &uvbuffer);
+                    glGenBuffers(1, &this->vertexbuffer);
+                    glGenBuffers(1, &this->uvbuffer);
 
                     // Initialize Shader
                     programID = yli::load::load_shaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
 
                     // Get a handle for our buffers
-                    vertex_position_in_screenspaceID = glGetAttribLocation(programID, "vertexPosition_screenspace");
-                    vertexUVID = glGetAttribLocation(programID, "vertexUV");
+                    vertex_position_in_screenspaceID = glGetAttribLocation(this->programID, "vertexPosition_screenspace");
+                    vertexUVID = glGetAttribLocation(this->programID, "vertexUV");
 
                     // Initialize uniforms' IDs
-                    Text2DUniformID = glGetUniformLocation(programID, "myTextureSampler");
+                    Text2DUniformID = glGetUniformLocation(this->programID, "myTextureSampler");
 
                     // Initialize uniform window width.
-                    screen_width_uniform_ID = glGetUniformLocation(programID, "screen_width");
-                    glUniform1i(screen_width_uniform_ID, screen_width);
+                    screen_width_uniform_ID = glGetUniformLocation(this->programID, "screen_width");
+                    glUniform1i(this->screen_width_uniform_ID, this->screen_width);
 
                     // Initialize uniform window height.
-                    screen_height_uniform_ID = glGetUniformLocation(programID, "screen_height");
-                    glUniform1i(screen_height_uniform_ID, screen_height);
+                    screen_height_uniform_ID = glGetUniformLocation(this->programID, "screen_height");
+                    glUniform1i(this->screen_height_uniform_ID, this->screen_height);
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Font2D*";
