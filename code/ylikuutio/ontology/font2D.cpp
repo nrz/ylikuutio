@@ -96,17 +96,7 @@ namespace yli
             return this->font_texture_file_format;
         }
 
-        void Font2D::print_text2D(
-                std::size_t screen_width,
-                std::size_t screen_height,
-                std::size_t x,
-                std::size_t y,
-                std::size_t text_size,
-                std::size_t font_size,
-                const std::string text,
-                const std::string font_texture_file_format,
-                const std::string horizontal_alignment,
-                const std::string vertical_alignment) const
+        void Font2D::prepare_to_print(std::size_t screen_width, std::size_t screen_height)
         {
             // Bind shader
             glUseProgram(this->programID);
@@ -125,7 +115,20 @@ namespace yli
 
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        }
 
+        void Font2D::print_text2D(
+                std::size_t screen_width,
+                std::size_t screen_height,
+                std::size_t x,
+                std::size_t y,
+                std::size_t text_size,
+                std::size_t font_size,
+                const std::string text,
+                const std::string font_texture_file_format,
+                const std::string horizontal_alignment,
+                const std::string vertical_alignment) const
+        {
             // If horizontal alignment is `"left"`, each line begins from the same x coordinate.
             // If horizontal alignment is `"left"` and vertical alignment is `"top"`,
             // then there is no need to check the text beforehand for newlines.

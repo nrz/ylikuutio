@@ -1041,6 +1041,8 @@ int main(const int argc, const char* const argv[])
 
             yli::opengl::disable_depth_test();
 
+            my_font2D->prepare_to_print(my_universe->get_window_width(), my_universe->get_window_height());
+
             // Render the `Console` (including current input).
             my_console->render();
 
