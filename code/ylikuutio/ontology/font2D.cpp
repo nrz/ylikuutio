@@ -96,7 +96,7 @@ namespace yli
             return this->font_texture_file_format;
         }
 
-        void Font2D::prepare_to_print(std::size_t screen_width, std::size_t screen_height)
+        void Font2D::prepare_to_print()
         {
             // Bind shader
             glUseProgram(this->programID);
@@ -105,21 +105,19 @@ namespace yli
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, this->texture);
             // Set our "myTextureSampler" sampler to user Material Unit 0
-            glUniform1i(Text2DUniformID, 0);
+            glUniform1i(this->Text2DUniformID, 0);
 
             // Set screen width.
-            glUniform1i(screen_width_uniform_ID, screen_width);
+            glUniform1i(this->screen_width_uniform_ID, this->screen_width);
 
             // Set screen height.
-            glUniform1i(screen_height_uniform_ID, screen_height);
+            glUniform1i(this->screen_height_uniform_ID, this->screen_height);
 
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         }
 
         void Font2D::print_text2D(
-                std::size_t screen_width,
-                std::size_t screen_height,
                 std::size_t x,
                 std::size_t y,
                 std::size_t text_size,
@@ -341,8 +339,6 @@ namespace yli
             if (text_struct.text.empty())
             {
                 this->print_text2D(
-                        text_struct.screen_width,
-                        text_struct.screen_height,
                         text_struct.x,
                         text_struct.y,
                         text_struct.text_size,
@@ -355,8 +351,6 @@ namespace yli
             else
             {
                 this->print_text2D(
-                        text_struct.screen_width,
-                        text_struct.screen_height,
                         text_struct.x,
                         text_struct.y,
                         text_struct.text_size,
@@ -369,8 +363,6 @@ namespace yli
         }
 
         void Font2D::print_text2D(
-                std::size_t screen_width,
-                std::size_t screen_height,
                 std::size_t x,
                 std::size_t y,
                 std::size_t text_size,
@@ -378,7 +370,7 @@ namespace yli
                 const std::string text,
                 const std::string font_texture_file_format) const
         {
-            this->print_text2D(screen_width, screen_height, x, y, text_size, font_size, text, font_texture_file_format, "left", "bottom");
+            this->print_text2D(x, y, text_size, font_size, text, font_texture_file_format, "left", "bottom");
         }
     }
 }

@@ -120,11 +120,9 @@ namespace yli
 
                 const std::string& get_font_texture_file_format() const;
 
-                void prepare_to_print(std::size_t screen_width, std::size_t screen_height);
+                void prepare_to_print();
 
                 void print_text2D(
-                        std::size_t screen_width,
-                        std::size_t screen_height,
                         std::size_t x,
                         std::size_t y,
                         std::size_t text_size,
@@ -137,8 +135,6 @@ namespace yli
                 void print_text2D(const TextStruct& text_struct) const;
 
                 void print_text2D(
-                        std::size_t screen_width,
-                        std::size_t screen_height,
                         std::size_t x,
                         std::size_t y,
                         std::size_t text_size,
