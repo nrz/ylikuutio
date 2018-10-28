@@ -37,6 +37,9 @@ namespace yli
                 {
                     // constructor.
                     this->parent = universe;
+                    this->screen_width = screen_width;
+                    this->screen_height = screen_height;
+                    this->font_texture_file_format = font_texture_file_format;
 
                     // get `childID` from `Universe` and set pointer to this `Font2D`.
                     this->bind_to_parent();
@@ -149,6 +152,10 @@ namespace yli
                 GLuint screen_width_uniform_ID;          // Location of the program's window width uniform.
                 GLuint screen_height_uniform_ID;         // Location of the program's window height uniform.
 
+                std::string font_texture_file_format;
+
+                std::size_t screen_width;
+                std::size_t screen_height;
                 std::size_t image_width;
                 std::size_t image_height;
                 std::size_t image_size;
