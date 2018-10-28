@@ -90,21 +90,21 @@ namespace yli
                     glGenBuffers(1, &this->uvbuffer);
 
                     // Initialize Shader
-                    programID = yli::load::load_shaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
+                    this->programID = yli::load::load_shaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
 
                     // Get a handle for our buffers
-                    vertex_position_in_screenspaceID = glGetAttribLocation(this->programID, "vertexPosition_screenspace");
-                    vertexUVID = glGetAttribLocation(this->programID, "vertexUV");
+                    this->vertex_position_in_screenspaceID = glGetAttribLocation(this->programID, "vertexPosition_screenspace");
+                    this->vertexUVID = glGetAttribLocation(this->programID, "vertexUV");
 
                     // Initialize uniforms' IDs
-                    Text2DUniformID = glGetUniformLocation(this->programID, "myTextureSampler");
+                    this->Text2DUniformID = glGetUniformLocation(this->programID, "myTextureSampler");
 
                     // Initialize uniform window width.
-                    screen_width_uniform_ID = glGetUniformLocation(this->programID, "screen_width");
+                    this->screen_width_uniform_ID = glGetUniformLocation(this->programID, "screen_width");
                     glUniform1i(this->screen_width_uniform_ID, this->screen_width);
 
                     // Initialize uniform window height.
-                    screen_height_uniform_ID = glGetUniformLocation(this->programID, "screen_height");
+                    this->screen_height_uniform_ID = glGetUniformLocation(this->programID, "screen_height");
                     glUniform1i(this->screen_height_uniform_ID, this->screen_height);
 
                     // `yli::ontology::Entity` member variables begin here.
