@@ -104,8 +104,8 @@ namespace yli
         }
 
         yli::ontology::Entity* EntityFactory::create_Font2D(
-                GLuint screen_width,
-                GLuint screen_height,
+                std::size_t screen_width,
+                std::size_t screen_height,
                 const std::string& texture_filename,
                 const std::string& font_texture_file_format)
         {
