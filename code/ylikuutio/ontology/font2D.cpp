@@ -2,6 +2,7 @@
 #include "universe.hpp"
 #include "text2D.hpp"
 #include "text_struct.hpp"
+#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -70,6 +71,7 @@ namespace yli
         Font2D::~Font2D()
         {
             // destructor.
+            std::cout << "This font will be destroyed.\n";
 
             // Delete buffers
             glDeleteBuffers(1, &this->vertexbuffer);
@@ -80,6 +82,10 @@ namespace yli
 
             // Delete shader
             glDeleteProgram(this->programID);
+
+            // destroy all texts of this font.
+            std::cout << "All texts of this font will be destroyed.\n";
+            yli::hierarchy::delete_children<yli::ontology::Text2D*>(this->text2D_pointer_vector, this->number_of_text2Ds);
         }
 
         yli::ontology::Entity* Font2D::get_parent() const
@@ -97,12 +103,27 @@ namespace yli
             return yli::ontology::get_number_of_descendants(this->text2D_pointer_vector);
         }
 
+        std::size_t Font2D::get_text_size() const
+        {
+            return this->text_size;
+        }
+
+        std::size_t Font2D::get_font_size() const
+        {
+            return this->font_size;
+        }
+
         const std::string& Font2D::get_font_texture_file_format() const
         {
             return this->font_texture_file_format;
         }
 
-        void Font2D::prepare_to_print()
+        GLuint Font2D::get_programID() const
+        {
+            return this->programID;
+        }
+
+        void Font2D::prepare_to_print() const
         {
             // Bind shader
             glUseProgram(this->programID);
@@ -123,6 +144,16 @@ namespace yli
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         }
 
+        void Font2D::render()
+        {
+            this->prepare_to_print();
+
+            // render this `Font2D` by calling `render()` function of each `Text2D`.
+            yli::ontology::render_children<yli::ontology::Text2D*>(this->text2D_pointer_vector);
+
+            glDisable(GL_BLEND);
+        }
+
         void Font2D::print_text2D(
                 std::size_t x,
                 std::size_t y,
@@ -133,6 +164,8 @@ namespace yli
                 const std::string horizontal_alignment,
                 const std::string vertical_alignment) const
         {
+            this->prepare_to_print();
+
             // If horizontal alignment is `"left"`, each line begins from the same x coordinate.
             // If horizontal alignment is `"left"` and vertical alignment is `"top"`,
             // then there is no need to check the text beforehand for newlines.

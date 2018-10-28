@@ -121,6 +121,19 @@ namespace yli
                 this->active_world->render();
             }
 
+            yli::opengl::disable_depth_test();
+
+            // Render the `Console` (including current input).
+            this->console_pointer->render();
+
+            // render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
+            yli::ontology::render_children<yli::ontology::Font2D*>(this->font2D_pointer_vector);
+
+            yli::opengl::enable_depth_test();
+
+            // Swap buffers.
+            SDL_GL_SwapWindow(this->get_window());
+
             this->postrender();
         }
 

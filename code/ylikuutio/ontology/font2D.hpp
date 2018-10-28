@@ -37,6 +37,8 @@ namespace yli
                         yli::ontology::Universe* const universe,
                         std::size_t screen_width,
                         std::size_t screen_height,
+                        std::size_t text_size,
+                        std::size_t font_size,
                         const std::string& texture_filename,
                         const std::string& font_texture_file_format)
                     : Entity(universe)
@@ -46,6 +48,8 @@ namespace yli
                     this->screen_width = screen_width;
                     this->screen_height = screen_height;
                     this->font_texture_file_format = font_texture_file_format;
+                    this->text_size = text_size;
+                    this->font_size = font_size;
 
                     this->number_of_text2Ds = 0;
 
@@ -118,9 +122,14 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
+                std::size_t get_text_size() const;
+                std::size_t get_font_size() const;
                 const std::string& get_font_texture_file_format() const;
+                GLuint get_programID() const;
 
-                void prepare_to_print();
+                void prepare_to_print() const;
+
+                void render();
 
                 void print_text2D(
                         std::size_t x,
@@ -171,6 +180,8 @@ namespace yli
                 std::size_t image_width;
                 std::size_t image_height;
                 std::size_t image_size;
+                std::size_t text_size;
+                std::size_t font_size;
         };
     }
 }

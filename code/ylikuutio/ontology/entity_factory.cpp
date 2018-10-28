@@ -113,6 +113,8 @@ namespace yli
                     this->universe,
                     universe->get_window_width(),
                     universe->get_window_height(),
+                    universe->get_text_size(),
+                    universe->get_font_size(),
                     texture_filename.c_str(),
                     font_texture_file_format.c_str());
         }
