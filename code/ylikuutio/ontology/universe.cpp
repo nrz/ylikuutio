@@ -637,10 +637,10 @@ namespace yli
 
                 // create FBO (off-screen framebuffer object):
                 GLuint fb = 0;
-                glGenFramebuffersEXT(1, &fb);
+                glGenFramebuffers(1, &fb);
 
                 // bind offscreen buffer.
-                glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fb);
+                glBindFramebuffer(GL_FRAMEBUFFER, fb);
 
                 // create texture.
                 GLuint tex;
@@ -668,7 +668,7 @@ namespace yli
                 const std::size_t number_of_elements = number_color_channels * number_of_texels;
                 uint8_t* const result_array = new uint8_t[number_of_elements];
 
-                glReadBuffer(GL_COLOR_ATTACHMENT0_EXT);
+                glReadBuffer(GL_COLOR_ATTACHMENT0);
                 glReadPixels(0, 0, texture_width, texture_height, GL_RGB, GL_UNSIGNED_BYTE, result_array);
 
                 const std::vector<uint8_t> result_vector(result_array, result_array + number_of_elements);
@@ -676,10 +676,11 @@ namespace yli
                 yli::file::binary_write(result_vector, filename);
 
                 delete[] result_array;
-                glDeleteFramebuffersEXT(1, &fb);
+                glDeleteFramebuffers(1, &fb);
 
                 // bind onscreen buffer.
-                glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+                glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
             }
 
             return nullptr;
