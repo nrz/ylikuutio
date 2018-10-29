@@ -83,7 +83,7 @@ namespace yli
             // Initialize `console_bottom_y` to 0.
             // `console_bottom_y` should be set by `activate_console_bottom_y` anyway.
             std::cout << "Initializing console_bottom_y\n";
-            this->console_top_y = 0;
+            this->console_bottom_y = 0;
 
             // Initialize `console_left_x` to 0.
             // `console_left_x` should be set by `activate_console_left_x` anyway.
