@@ -198,7 +198,8 @@ namespace yli
 
             /* verify the type of file */
             const std::size_t dds_magic_number_size_in_bytes = 4; // "DDS "
-            char filecode_char[dds_magic_number_size_in_bytes];
+            char filecode_char[dds_magic_number_size_in_bytes + 1];
+            filecode_char[dds_magic_number_size_in_bytes] = 0; // terminate with 0.
 
             if (std::fread(filecode_char, 1, dds_magic_number_size_in_bytes, fp) != dds_magic_number_size_in_bytes)
             {
