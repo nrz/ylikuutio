@@ -636,7 +636,7 @@ namespace yli
                 const std::size_t texture_height = universe->window_height;;
 
                 // create FBO (off-screen framebuffer object):
-                GLuint fb;
+                GLuint fb = 0;
                 glGenFramebuffersEXT(1, &fb);
 
                 // bind offscreen buffer.
