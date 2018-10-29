@@ -632,6 +632,9 @@ namespace yli
 
                 // http://www.mathematik.uni-dortmund.de/~goeddeke/gpgpu/tutorial.html
 
+                const std::size_t texture_width = universe->window_width;
+                const std::size_t texture_height = universe->window_height;;
+
                 // create FBO (off-screen framebuffer object):
                 GLuint fb;
                 glGenFramebuffersEXT(1, &fb);
@@ -650,8 +653,6 @@ namespace yli
                 glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
                 glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 
-                const std::size_t texture_width = universe->window_width;
-                const std::size_t texture_height = universe->window_height;;
 
                 // define texture.
                 glTexImage2D(GL_TEXTURE_RECTANGLE_ARB, 0, GL_RGB, texture_width, texture_height, 0, GL_BGR, GL_UNSIGNED_BYTE, 0);
