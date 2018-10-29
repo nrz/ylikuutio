@@ -291,6 +291,7 @@ namespace yli
                     this->planet_radius    = NAN;     // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
                     this->terrain_species  = nullptr;
                     this->active_world     = nullptr;
+                    this->active_font2D    = nullptr;
 
                     this->background_red   = NAN;
                     this->background_green = NAN;
@@ -351,6 +352,7 @@ namespace yli
                     this->can_display_help_screen          = true;
 
                     this->number_of_worlds = 0;
+                    this->number_of_font2Ds = 0;
 
                     this->context = nullptr;
                     this->window  = nullptr;

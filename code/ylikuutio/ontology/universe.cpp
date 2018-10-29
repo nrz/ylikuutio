@@ -630,34 +630,40 @@ namespace yli
             {
                 const std::string filename = command_parameters[0];
 
-                // http://www.mathematik.uni-dortmund.de/~goeddeke/gpgpu/tutorial.html
-
-                // create FBO (off-screen framebuffer object):
-                GLuint fb;
-                glGenFramebuffersEXT(1, &fb);
-
-                // bind offscreen buffer.
-                glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fb);
-
-                // create texture.
-                GLuint tex;
-                glGenTextures(1, &tex);
-                glBindTexture(GL_TEXTURE_RECTANGLE_ARB, tex);
-
-                glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_WRAP_S, GL_REPEAT);
-                glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-                glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-                glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
+                // https://learnopengl.com/Advanced-OpenGL/Framebuffers
 
                 const std::size_t texture_width = universe->window_width;
                 const std::size_t texture_height = universe->window_height;;
 
+                // create FBO (off-screen framebuffer object):
+                GLuint fb = 0;
+                glGenFramebuffers(1, &fb);
+
+                // bind offscreen buffer.
+                glBindFramebuffer(GL_FRAMEBUFFER, fb);
+
+                // create texture.
+                GLuint tex;
+                glGenTextures(1, &tex);
+                glBindTexture(GL_TEXTURE_2D, tex);
+
                 // define texture.
-                glTexImage2D(GL_TEXTURE_RECTANGLE_ARB, 0, GL_RGB, texture_width, texture_height, 0, GL_BGR, GL_UNSIGNED_BYTE, 0);
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture_width, texture_height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+
+                // poor filtering.
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
                 // attach texture.
-                glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_RECTANGLE_ARB, tex, 0);
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0);
+
+                GLuint render_buffer;
+                glGenRenderbuffers(1, &render_buffer);
+                glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, texture_width, texture_height);
+                glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, render_buffer);
+                glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
                 universe->render(); // render to framebuffer.
 
@@ -667,7 +673,7 @@ namespace yli
                 const std::size_t number_of_elements = number_color_channels * number_of_texels;
                 uint8_t* const result_array = new uint8_t[number_of_elements];
 
-                glReadBuffer(GL_COLOR_ATTACHMENT0_EXT);
+                glReadBuffer(GL_COLOR_ATTACHMENT0);
                 glReadPixels(0, 0, texture_width, texture_height, GL_RGB, GL_UNSIGNED_BYTE, result_array);
 
                 const std::vector<uint8_t> result_vector(result_array, result_array + number_of_elements);
@@ -675,10 +681,11 @@ namespace yli
                 yli::file::binary_write(result_vector, filename);
 
                 delete[] result_array;
-                glDeleteFramebuffersEXT(1, &fb);
+                glDeleteFramebuffers(1, &fb);
 
                 // bind onscreen buffer.
-                glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+                glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
             }
 
             return nullptr;
