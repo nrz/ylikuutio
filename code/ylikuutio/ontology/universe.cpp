@@ -630,7 +630,7 @@ namespace yli
             {
                 const std::string filename = command_parameters[0];
 
-                // http://www.mathematik.uni-dortmund.de/~goeddeke/gpgpu/tutorial.html
+                // https://learnopengl.com/Advanced-OpenGL/Framebuffers
 
                 const std::size_t texture_width = universe->window_width;
                 const std::size_t texture_height = universe->window_height;;
