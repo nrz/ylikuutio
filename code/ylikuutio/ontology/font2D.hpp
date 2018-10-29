@@ -65,6 +65,9 @@ namespace yli
                     this->Text2DUniformID                  = 0;
                     this->screen_width_uniform_ID          = 0;
                     this->screen_height_uniform_ID         = 0;
+                    this->image_width                      = 0;
+                    this->image_height                     = 0;
+                    this->image_size                       = 0;
 
                     // Initialize texture
                     if (this->font_texture_file_format == "bmp" || this->font_texture_file_format == "BMP")
