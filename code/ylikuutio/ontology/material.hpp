@@ -59,6 +59,9 @@ namespace yli
                     this->number_of_chunk_masters  = 0;
                     this->texture                  = 0; // some dummy value.
                     this->openGL_textureID         = 0; // some dummy value.
+                    this->image_width              = 0;
+                    this->image_height             = 0;
+                    this->image_size               = 0;
 
                     if (!this->is_symbiont_material)
                     {
