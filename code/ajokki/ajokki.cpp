@@ -881,7 +881,7 @@ int main(const int argc, const char* const argv[])
                 }
 
                 // `last_time_to_display_FPS` needs to be incremented to avoid infinite loop.
-                last_time_to_display_FPS += 1.0;
+                last_time_to_display_FPS += 1.0f;
 
                 // Update audio also (in case the sound has reached the end).
                 audio_master.update();
