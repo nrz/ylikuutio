@@ -11,8 +11,8 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
-#include <iterator>      // std::back_inserter
 #include <iostream>      // std::cout, std::cin, std::cerr
+#include <iterator>      // std::back_inserter
 #include <limits>        // std::numeric_limits
 #include <list>          // std::list
 #include <memory>        // std::make_shared, std::shared_ptr
