@@ -775,8 +775,6 @@ int main(const int argc, const char* const argv[])
     double last_time_for_display_sync = yli::time::get_time();
     int32_t number_of_frames = 0;
 
-    bool ms_frame_text_ready = false;
-
     bool is_exit_requested = false;
     bool has_mouse_focus = true;
 
@@ -879,7 +877,6 @@ int main(const int argc, const char* const argv[])
                         number_of_frames << " Hz";
                     ms_frame_text = ms_frame_text_stringstream.str();
                     frame_rate_text2D->change_string(ms_frame_text);
-                    ms_frame_text_ready = true;
                     number_of_frames = 0;
                 }
 
