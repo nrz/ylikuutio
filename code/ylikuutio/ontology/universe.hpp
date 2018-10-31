@@ -292,6 +292,7 @@ namespace yli
                     this->terrain_species  = nullptr;
                     this->active_world     = nullptr;
                     this->active_font2D    = nullptr;
+                    this->console_pointer  = nullptr;
 
                     this->background_red   = NAN;
                     this->background_green = NAN;
