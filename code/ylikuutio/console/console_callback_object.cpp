@@ -1,4 +1,5 @@
 #include "console_callback_object.hpp"
+#include "code/ylikuutio/callback_system/callback_parameter.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
