@@ -53,6 +53,11 @@ namespace yli
             void print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::console::Console* const console);
     }
 
+    namespace ontology
+    {
+        class Universe;
+    }
+
     namespace console
     {
         class Console
