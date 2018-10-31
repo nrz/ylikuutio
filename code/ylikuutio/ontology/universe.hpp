@@ -303,6 +303,8 @@ namespace yli
                     this->window        = nullptr;
                     this->window_width  = universe_struct.window_width;
                     this->window_height = universe_struct.window_height;
+                    this->framebuffer_width  = universe_struct.framebuffer_width;
+                    this->framebuffer_height = universe_struct.framebuffer_height;
                     this->window_title  = universe_struct.window_title;
                     this->is_headless   = universe_struct.is_headless;
 
@@ -594,6 +596,8 @@ namespace yli
                 SDL_Window* window;
                 std::size_t window_width;
                 std::size_t window_height;
+                std::size_t framebuffer_width;
+                std::size_t framebuffer_height;
                 std::string window_title;
                 bool is_headless;
 
