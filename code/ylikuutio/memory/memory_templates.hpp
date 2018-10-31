@@ -1,4 +1,6 @@
 // Include standard headers
+#include <cstddef> // std::size_t
+
 namespace yli
 {
     namespace memory
