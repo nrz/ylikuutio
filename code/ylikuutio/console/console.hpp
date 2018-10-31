@@ -3,10 +3,6 @@
 
 #include "console_command_callback.hpp"
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
-#include "code/ylikuutio/callback_system/callback_parameter.hpp"
-#include "code/ylikuutio/callback_system/callback_object.hpp"
-#include "code/ylikuutio/callback_system/callback_engine.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include GLEW
@@ -47,6 +43,18 @@
 
 namespace yli
 {
+    namespace callback_system
+    {
+        class CallbackEngine;
+        class CallbackObject;
+        class CallbackParameter;
+    }
+
+    namespace datatypes
+    {
+        class AnyValue;
+    }
+
     namespace map
     {
         template <class T1>
