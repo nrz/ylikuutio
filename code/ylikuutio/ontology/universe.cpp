@@ -30,6 +30,7 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/file/file_writer.hpp"
+#include "code/ylikuutio/memory/memory_templates.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 #include "code/ylikuutio/common/pi.hpp"
@@ -675,6 +676,8 @@ namespace yli
 
                 glReadBuffer(GL_COLOR_ATTACHMENT0);
                 glReadPixels(0, 0, texture_width, texture_height, GL_RGB, GL_UNSIGNED_BYTE, result_array);
+
+                yli::memory::flip_vertically(result_array, 3 * texture_width, texture_height);
 
                 const std::vector<uint8_t> result_vector(result_array, result_array + number_of_elements);
 
