@@ -634,7 +634,7 @@ namespace yli
                 // https://learnopengl.com/Advanced-OpenGL/Framebuffers
 
                 const std::size_t texture_width = universe->window_width;
-                const std::size_t texture_height = universe->window_height;;
+                const std::size_t texture_height = universe->window_height;
 
                 // create FBO (off-screen framebuffer object):
                 GLuint fb = 0;
