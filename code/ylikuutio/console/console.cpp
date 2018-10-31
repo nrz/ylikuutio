@@ -468,5 +468,28 @@ namespace yli
                 this->cursor_index = this->current_input.size();
             }
         }
+
+        // Console command callbacks begin here.
+
+        std::shared_ptr<yli::datatypes::AnyValue> Console::clear(
+                yli::console::Console* const console,
+                yli::ontology::Entity* const universe_entity,
+                const std::vector<std::string>& command_parameters)
+        {
+            if (console != nullptr)
+            {
+                console->in_history = false;
+                console->in_historical_input = false;
+                console->history_line_i = 0;
+                console->historical_input_i = 0;
+                console->command_history.clear();
+                console->console_history.clear();
+                console->current_input.clear();
+            }
+
+            return nullptr;
+        }
+
+        // Public callbacks end here.
     }
 }

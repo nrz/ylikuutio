@@ -306,6 +306,13 @@ namespace yli
                         std::vector<yli::callback_system::CallbackParameter*>&,
                         yli::console::Console* console);
 
+                // Console command callbacks begin here.
+
+                static std::shared_ptr<yli::datatypes::AnyValue> clear(
+                        yli::console::Console* const console,
+                        yli::ontology::Entity* const universe_entity,
+                        const std::vector<std::string>& command_parameters);
+
                 // Public callbacks end here.
 
                 template <class T1>
