@@ -1,3 +1,6 @@
+#ifndef __MEMORY_TEMPLATES_HPP_INCLUDED
+#define __MEMORY_TEMPLATES_HPP_INCLUDED
+
 // Include standard headers
 #include <cstddef> // std::size_t
 
@@ -17,3 +20,5 @@ namespace yli
             }
     }
 }
+
+#endif
