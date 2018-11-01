@@ -561,6 +561,11 @@ namespace yli
                 bool can_toggle_help_mode;
                 bool can_display_help_screen;
 
+                GLclampf background_red;
+                GLclampf background_green;
+                GLclampf background_blue;
+                GLclampf background_alpha;
+
             private:
                 bool compute_and_update_matrices_from_inputs();
 
@@ -585,11 +590,6 @@ namespace yli
 
                 // Named entities are stored here so that they can be recalled, if needed.
                 std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
-
-                GLclampf background_red;
-                GLclampf background_green;
-                GLclampf background_blue;
-                GLclampf background_alpha;
 
                 // Variables related to the window.
                 std::shared_ptr<SDL_GLContext> context;
