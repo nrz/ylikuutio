@@ -663,6 +663,7 @@ namespace yli
 
                 GLuint render_buffer;
                 glGenRenderbuffers(1, &render_buffer);
+                glBindRenderbuffer(GL_RENDERBUFFER, render_buffer);
                 glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, texture_width, texture_height);
                 glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, render_buffer);
                 glBindFramebuffer(GL_FRAMEBUFFER, 0);
