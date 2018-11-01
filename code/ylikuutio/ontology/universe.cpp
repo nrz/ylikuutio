@@ -101,7 +101,7 @@ namespace yli
             std::cout << "All worlds of this universe will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, this->number_of_worlds);
 
-            delete this->console_pointer;
+            delete this->console;
             delete this->active_font2D;
 
             SDL_Quit();
@@ -125,7 +125,7 @@ namespace yli
             yli::opengl::disable_depth_test();
 
             // Render the `Console` (including current input).
-            this->console_pointer->render();
+            this->console->render();
 
             // render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
             yli::ontology::render_children<yli::ontology::Font2D*>(this->font2D_pointer_vector);
@@ -710,12 +710,12 @@ namespace yli
 
         yli::console::Console* Universe::get_console() const
         {
-            return this->console_pointer;
+            return this->console;
         }
 
         void Universe::set_console(yli::console::Console* console)
         {
-            this->console_pointer = console;
+            this->console = console;
         }
 
         float Universe::get_planet_radius() const

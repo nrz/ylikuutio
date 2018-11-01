@@ -292,7 +292,7 @@ namespace yli
                     this->terrain_species  = nullptr;
                     this->active_world     = nullptr;
                     this->active_font2D    = nullptr;
-                    this->console_pointer  = nullptr;
+                    this->console          = nullptr;
 
                     this->background_red   = NAN;
                     this->background_green = NAN;
@@ -386,7 +386,7 @@ namespace yli
                     // TODO: add option to enable/disable vsync in the console.
                     SDL_GL_SetSwapInterval(0);
 
-                    this->console_pointer = new yli::console::Console(
+                    this->console = new yli::console::Console(
                             this,
                             universe_struct.current_keypress_callback_engine_vector_pointer_pointer,
                             universe_struct.current_keyrelease_callback_engine_vector_pointer_pointer);
@@ -581,7 +581,7 @@ namespace yli
                 yli::ontology::World* active_world;
                 yli::ontology::Font2D* active_font2D;
 
-                yli::console::Console* console_pointer;     // pointer to `Console`.
+                yli::console::Console* console;       // pointer to `Console`.
 
                 // Named entities are stored here so that they can be recalled, if needed.
                 std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
