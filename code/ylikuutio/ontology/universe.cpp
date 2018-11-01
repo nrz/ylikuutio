@@ -644,11 +644,6 @@ namespace yli
                 return nullptr;
             }
 
-            if (!yli::opengl::has_ext_framebuffer_object())
-            {
-                return nullptr;
-            }
-
             if (command_parameters.size() == 1)
             {
                 const std::string filename = command_parameters[0];
