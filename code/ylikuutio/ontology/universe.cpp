@@ -642,6 +642,7 @@ namespace yli
 
                 // bind offscreen buffer.
                 glBindFramebuffer(GL_FRAMEBUFFER, fb);
+                yli::opengl::enable_depth_test();
 
                 // create texture.
                 GLuint tex;
