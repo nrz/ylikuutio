@@ -138,6 +138,28 @@ namespace yli
             this->postrender();
         }
 
+        void Universe::render_without_changing_depth_test()
+        {
+            this->prerender();
+
+            if (this->active_world != nullptr)
+            {
+                // render this `Universe` by calling `render()` function of the active `World`.
+                this->active_world->render();
+            }
+
+            // Render the `Console` (including current input).
+            this->console->render();
+
+            // render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
+            yli::ontology::render_children<yli::ontology::Font2D*>(this->font2D_pointer_vector);
+
+            // Swap buffers.
+            SDL_GL_SwapWindow(this->get_window());
+
+            this->postrender();
+        }
+
         void Universe::set_active_world(yli::ontology::World* const world)
         {
             this->active_world = world;

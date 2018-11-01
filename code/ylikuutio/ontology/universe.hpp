@@ -405,6 +405,9 @@ namespace yli
                 // this method renders the active `Scene` of this `Universe`.
                 void render();
 
+                // this method renders the active `Scene` of this `Universe`.
+                void render_without_changing_depth_test();
+
                 // this method stes the active `World`.
                 void set_active_world(yli::ontology::World* const world);
 
