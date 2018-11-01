@@ -655,8 +655,8 @@ namespace yli
 
                 // https://learnopengl.com/Advanced-OpenGL/Framebuffers
 
-                const std::size_t texture_width = universe->window_width;
-                const std::size_t texture_height = universe->window_height;
+                const std::size_t texture_width = universe->framebuffer_width;
+                const std::size_t texture_height = universe->framebuffer_height;
 
                 // create FBO (off-screen framebuffer object):
                 GLuint fb = 0;
@@ -664,7 +664,6 @@ namespace yli
 
                 // bind offscreen buffer.
                 glBindFramebuffer(GL_FRAMEBUFFER, fb);
-                yli::opengl::enable_depth_test();
 
                 // create texture.
                 GLuint tex;
@@ -688,9 +687,24 @@ namespace yli
                 glBindRenderbuffer(GL_RENDERBUFFER, render_buffer);
                 glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, texture_width, texture_height);
                 glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, render_buffer);
-                glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-                universe->render(); // render to framebuffer.
+                if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+                {
+                    std::cerr << "ERROR: `Universe::screenshot`: framebuffer is not complete!\n";
+                }
+
+                glBindFramebuffer(GL_FRAMEBUFFER, fb);
+
+                yli::opengl::set_background_color(
+                        universe->background_red,
+                        universe->background_green,
+                        universe->background_blue,
+                        universe->background_alpha);
+
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+                glViewport(0, 0, texture_width, texture_height);
+                universe->render_without_changing_depth_test(); // render to framebuffer.
 
                 // transfer data from GPU texture to CPU array.
                 const std::size_t number_color_channels = 3;
@@ -713,6 +727,14 @@ namespace yli
                 // bind onscreen buffer.
                 glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
+                yli::opengl::set_background_color(
+                        universe->background_red,
+                        universe->background_green,
+                        universe->background_blue,
+                        universe->background_alpha);
+
+                glClear(GL_COLOR_BUFFER_BIT);
+                glViewport(0, 0, universe->window_width, universe->window_height);
             }
 
             return nullptr;
