@@ -3,7 +3,6 @@
 
 #include "console.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
-#include "code/ylikuutio/callback_system/callback_engine.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers
@@ -13,6 +12,7 @@ namespace yli
 {
     namespace callback_system
     {
+        class CallbackEngine;
         class CallbackParameter;
     }
 

@@ -30,6 +30,7 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/file/file_writer.hpp"
+#include "code/ylikuutio/memory/memory_templates.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 #include "code/ylikuutio/common/pi.hpp"
@@ -100,7 +101,7 @@ namespace yli
             std::cout << "All worlds of this universe will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, this->number_of_worlds);
 
-            delete this->console_pointer;
+            delete this->console;
             delete this->active_font2D;
 
             SDL_Quit();
@@ -124,12 +125,34 @@ namespace yli
             yli::opengl::disable_depth_test();
 
             // Render the `Console` (including current input).
-            this->console_pointer->render();
+            this->console->render();
 
             // render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
             yli::ontology::render_children<yli::ontology::Font2D*>(this->font2D_pointer_vector);
 
             yli::opengl::enable_depth_test();
+
+            // Swap buffers.
+            SDL_GL_SwapWindow(this->get_window());
+
+            this->postrender();
+        }
+
+        void Universe::render_without_changing_depth_test()
+        {
+            this->prerender();
+
+            if (this->active_world != nullptr)
+            {
+                // render this `Universe` by calling `render()` function of the active `World`.
+                this->active_world->render();
+            }
+
+            // Render the `Console` (including current input).
+            this->console->render();
+
+            // render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
+            yli::ontology::render_children<yli::ontology::Font2D*>(this->font2D_pointer_vector);
 
             // Swap buffers.
             SDL_GL_SwapWindow(this->get_window());
@@ -621,19 +644,14 @@ namespace yli
                 return nullptr;
             }
 
-            if (!yli::opengl::has_ext_framebuffer_object())
-            {
-                return nullptr;
-            }
-
             if (command_parameters.size() == 1)
             {
                 const std::string filename = command_parameters[0];
 
                 // https://learnopengl.com/Advanced-OpenGL/Framebuffers
 
-                const std::size_t texture_width = universe->window_width;
-                const std::size_t texture_height = universe->window_height;;
+                const std::size_t texture_width = universe->framebuffer_width;
+                const std::size_t texture_height = universe->framebuffer_height;
 
                 // create FBO (off-screen framebuffer object):
                 GLuint fb = 0;
@@ -661,11 +679,27 @@ namespace yli
 
                 GLuint render_buffer;
                 glGenRenderbuffers(1, &render_buffer);
+                glBindRenderbuffer(GL_RENDERBUFFER, render_buffer);
                 glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, texture_width, texture_height);
                 glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, render_buffer);
-                glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-                universe->render(); // render to framebuffer.
+                if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+                {
+                    std::cerr << "ERROR: `Universe::screenshot`: framebuffer is not complete!\n";
+                }
+
+                glBindFramebuffer(GL_FRAMEBUFFER, fb);
+
+                yli::opengl::set_background_color(
+                        universe->background_red,
+                        universe->background_green,
+                        universe->background_blue,
+                        universe->background_alpha);
+
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+                glViewport(0, 0, texture_width, texture_height);
+                universe->render_without_changing_depth_test(); // render to framebuffer.
 
                 // transfer data from GPU texture to CPU array.
                 const std::size_t number_color_channels = 3;
@@ -675,6 +709,8 @@ namespace yli
 
                 glReadBuffer(GL_COLOR_ATTACHMENT0);
                 glReadPixels(0, 0, texture_width, texture_height, GL_RGB, GL_UNSIGNED_BYTE, result_array);
+
+                yli::memory::flip_vertically(result_array, 3 * texture_width, texture_height);
 
                 const std::vector<uint8_t> result_vector(result_array, result_array + number_of_elements);
 
@@ -686,6 +722,14 @@ namespace yli
                 // bind onscreen buffer.
                 glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
+                yli::opengl::set_background_color(
+                        universe->background_red,
+                        universe->background_green,
+                        universe->background_blue,
+                        universe->background_alpha);
+
+                glClear(GL_COLOR_BUFFER_BIT);
+                glViewport(0, 0, universe->window_width, universe->window_height);
             }
 
             return nullptr;
@@ -705,12 +749,12 @@ namespace yli
 
         yli::console::Console* Universe::get_console() const
         {
-            return this->console_pointer;
+            return this->console;
         }
 
         void Universe::set_console(yli::console::Console* console)
         {
-            this->console_pointer = console;
+            this->console = console;
         }
 
         float Universe::get_planet_radius() const

@@ -3,10 +3,6 @@
 
 #include "console_command_callback.hpp"
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
-#include "code/ylikuutio/callback_system/callback_parameter.hpp"
-#include "code/ylikuutio/callback_system/callback_object.hpp"
-#include "code/ylikuutio/callback_system/callback_engine.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include GLEW
@@ -47,10 +43,27 @@
 
 namespace yli
 {
+    namespace callback_system
+    {
+        class CallbackEngine;
+        class CallbackObject;
+        class CallbackParameter;
+    }
+
+    namespace datatypes
+    {
+        class AnyValue;
+    }
+
     namespace map
     {
         template <class T1>
             void print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::console::Console* const console);
+    }
+
+    namespace ontology
+    {
+        class Universe;
     }
 
     namespace console
@@ -292,6 +305,13 @@ namespace yli
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
                         yli::console::Console* console);
+
+                // Console command callbacks begin here.
+
+                static std::shared_ptr<yli::datatypes::AnyValue> clear(
+                        yli::console::Console* const console,
+                        yli::ontology::Entity* const universe_entity,
+                        const std::vector<std::string>& command_parameters);
 
                 // Public callbacks end here.
 

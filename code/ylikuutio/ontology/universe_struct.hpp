@@ -10,9 +10,11 @@
 typedef struct UniverseStruct
 {
     UniverseStruct()
-        : window_title("Ylikuutio 0.0.1"),
+        : window_title("Ylikuutio 0.0.3"),
         window_width(1600),
         window_height(900),
+        framebuffer_width(6400),
+        framebuffer_height(3600),
         text_size(40),
         font_size(16),
         max_FPS(50000),        // default value max 50000 frames per second.
@@ -31,6 +33,8 @@ typedef struct UniverseStruct
     std::string window_title;
     std::size_t window_width;
     std::size_t window_height;
+    std::size_t framebuffer_width;
+    std::size_t framebuffer_height;
     std::size_t text_size;
     std::size_t font_size;
     std::size_t max_FPS;

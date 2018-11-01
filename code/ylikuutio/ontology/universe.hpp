@@ -292,6 +292,7 @@ namespace yli
                     this->terrain_species  = nullptr;
                     this->active_world     = nullptr;
                     this->active_font2D    = nullptr;
+                    this->console          = nullptr;
 
                     this->background_red   = NAN;
                     this->background_green = NAN;
@@ -302,6 +303,8 @@ namespace yli
                     this->window        = nullptr;
                     this->window_width  = universe_struct.window_width;
                     this->window_height = universe_struct.window_height;
+                    this->framebuffer_width  = universe_struct.framebuffer_width;
+                    this->framebuffer_height = universe_struct.framebuffer_height;
                     this->window_title  = universe_struct.window_title;
                     this->is_headless   = universe_struct.is_headless;
 
@@ -383,7 +386,7 @@ namespace yli
                     // TODO: add option to enable/disable vsync in the console.
                     SDL_GL_SetSwapInterval(0);
 
-                    this->console_pointer = new yli::console::Console(
+                    this->console = new yli::console::Console(
                             this,
                             universe_struct.current_keypress_callback_engine_vector_pointer_pointer,
                             universe_struct.current_keyrelease_callback_engine_vector_pointer_pointer);
@@ -401,6 +404,9 @@ namespace yli
 
                 // this method renders the active `Scene` of this `Universe`.
                 void render();
+
+                // this method renders the active `Scene` of this `Universe`.
+                void render_without_changing_depth_test();
 
                 // this method stes the active `World`.
                 void set_active_world(yli::ontology::World* const world);
@@ -558,6 +564,11 @@ namespace yli
                 bool can_toggle_help_mode;
                 bool can_display_help_screen;
 
+                GLclampf background_red;
+                GLclampf background_green;
+                GLclampf background_blue;
+                GLclampf background_alpha;
+
             private:
                 bool compute_and_update_matrices_from_inputs();
 
@@ -578,21 +589,18 @@ namespace yli
                 yli::ontology::World* active_world;
                 yli::ontology::Font2D* active_font2D;
 
-                yli::console::Console* console_pointer;     // pointer to `Console`.
+                yli::console::Console* console;       // pointer to `Console`.
 
                 // Named entities are stored here so that they can be recalled, if needed.
                 std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
-
-                GLclampf background_red;
-                GLclampf background_green;
-                GLclampf background_blue;
-                GLclampf background_alpha;
 
                 // Variables related to the window.
                 std::shared_ptr<SDL_GLContext> context;
                 SDL_Window* window;
                 std::size_t window_width;
                 std::size_t window_height;
+                std::size_t framebuffer_width;
+                std::size_t framebuffer_height;
                 std::string window_title;
                 bool is_headless;
 

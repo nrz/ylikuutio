@@ -483,6 +483,19 @@ namespace yli
             GLclampf alpha = static_cast<GLclampf>(alpha_any_value->float_value);
 
             yli::opengl::set_background_color(red, green, blue, alpha);
+
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            universe->background_red = red;
+            universe->background_green = green;
+            universe->background_blue = blue;
+            universe->background_alpha = alpha;
+
             return nullptr;
         }
 

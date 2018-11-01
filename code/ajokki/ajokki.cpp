@@ -768,6 +768,7 @@ int main(const int argc, const char* const argv[])
     // Other callbacks.
     my_console->add_command_callback("help", &ajokki::help);
     my_console->add_command_callback("version", &ajokki::version);
+    my_console->add_command_callback("clear", &yli::console::Console::clear);
     my_console->add_command_callback("screenshot", &yli::ontology::Universe::screenshot);
 
     // For speed computation
