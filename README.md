@@ -227,7 +227,7 @@ A: Ylikuutio uses right-handed world coordinates, so X grows eastward, Z grows s
 ## Implemented functionality
 * 3D rendering
 * 2D text
-* support for different height map formats (SRTM, LAZ)
+* support for different height map formats (SRTM, BMP)
 * instant rebinding of instances of classes belonging to ontological hierarchy
 * callbacks
 * fully functioning in-game console

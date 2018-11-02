@@ -541,6 +541,8 @@ namespace yli
                     }
                 }
 
+                console->current_input.clear();
+
                 if (is_command)
                 {
                     // Call the corresponding console command callback, if there is one.
@@ -551,7 +553,6 @@ namespace yli
                     }
                 }
 
-                console->current_input.clear();
                 console->in_historical_input = false;
                 console->cursor_it = console->current_input.begin();
                 console->cursor_index = 0;
