@@ -31,6 +31,7 @@ namespace yli
                 std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer)
         {
             // constructor.
+            this->should_be_rendered = true;
             this->cursor_it = this->current_input.begin();
             this->cursor_index = 0;
             this->in_history = false;
@@ -233,7 +234,7 @@ namespace yli
 
         void Console::render() const
         {
-            if (!this->in_console)
+            if (!this->in_console || !this->should_be_rendered)
             {
                 return;
             }
