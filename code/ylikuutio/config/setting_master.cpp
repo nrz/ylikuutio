@@ -522,6 +522,29 @@ namespace yli
             return nullptr;
         }
 
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_should_be_rendered(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        {
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (setting_master->setting_pointer_map.count("should_be_rendered") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<yli::datatypes::AnyValue> should_be_rendered_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["should_be_rendered"]->setting_value);
+
+            if (should_be_rendered_any_value == nullptr || should_be_rendered_any_value->type != yli::datatypes::BOOL)
+            {
+                return nullptr;
+            }
+
+            entity->should_be_rendered = should_be_rendered_any_value->bool_value;
+            return nullptr;
+        }
+
         std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_spherical_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
@@ -1295,6 +1318,16 @@ namespace yli
 
             console->set_console_right_x(console_right_x_any_value->uint32_t_value);
             return nullptr;
+        }
+
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_should_be_rendered(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        {
+            if (entity == nullptr)
+            {
+                return nullptr;
+            }
+
+            return std::make_shared<yli::datatypes::AnyValue>(entity->should_be_rendered);
         }
 
         std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_cartesian_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)

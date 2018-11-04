@@ -146,12 +146,15 @@ namespace yli
 
         void Font2D::render()
         {
-            this->prepare_to_print();
+            if (this->should_be_rendered)
+            {
+                this->prepare_to_print();
 
-            // render this `Font2D` by calling `render()` function of each `Text2D`.
-            yli::ontology::render_children<yli::ontology::Text2D*>(this->text2D_pointer_vector);
+                // render this `Font2D` by calling `render()` function of each `Text2D`.
+                yli::ontology::render_children<yli::ontology::Text2D*>(this->text2D_pointer_vector);
 
-            glDisable(GL_BLEND);
+                glDisable(GL_BLEND);
+            }
         }
 
         void Font2D::print_text2D(

@@ -140,6 +140,11 @@ namespace yli
 
         void Universe::render_without_changing_depth_test()
         {
+            if (!this->should_be_rendered)
+            {
+                return;
+            }
+
             this->prerender();
 
             if (this->active_world != nullptr)

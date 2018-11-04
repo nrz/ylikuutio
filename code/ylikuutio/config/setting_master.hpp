@@ -70,6 +70,7 @@ namespace yli
 
                 static std::shared_ptr<yli::datatypes::AnyValue> activate_wireframe(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
+                static std::shared_ptr<yli::datatypes::AnyValue> activate_should_be_rendered(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
                 static std::shared_ptr<yli::datatypes::AnyValue> activate_spherical_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
                 static std::shared_ptr<yli::datatypes::AnyValue> activate_rho(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
                 static std::shared_ptr<yli::datatypes::AnyValue> activate_theta(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
@@ -98,6 +99,7 @@ namespace yli
                 static std::shared_ptr<yli::datatypes::AnyValue> activate_console_left_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
                 static std::shared_ptr<yli::datatypes::AnyValue> activate_console_right_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
+                static std::shared_ptr<yli::datatypes::AnyValue> read_should_be_rendered(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
                 static std::shared_ptr<yli::datatypes::AnyValue> read_cartesian_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
                 static std::shared_ptr<yli::datatypes::AnyValue> read_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
                 static std::shared_ptr<yli::datatypes::AnyValue> read_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);

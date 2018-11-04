@@ -61,7 +61,7 @@ namespace yli
 
         void World::render()
         {
-            if (this->active_scene != nullptr)
+            if (this->should_be_rendered && this->active_scene != nullptr)
             {
                 this->prerender();
 
