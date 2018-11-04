@@ -226,7 +226,7 @@ namespace yli
                     std::vector<glm::vec3>& temp_vertices,
                     std::vector<glm::vec2>& temp_UVs)
             {
-                std::cout << "interpolating center vertices.\n";
+                std::cout << "Interpolating center vertices.\n";
 
                 if (image_width < 2 || image_height < 2)
                 {

@@ -282,7 +282,7 @@ namespace yli
 
                             if (is_debug_mode)
                             {
-                                std::printf("glyph name: %s\n", char_glyph_name);
+                                std::printf("Glyph name: %s\n", char_glyph_name);
                             }
 
                             SVG_data_pointer = ++closing_double_quote_pointer;
@@ -314,7 +314,7 @@ namespace yli
                     {
                         if (is_debug_mode)
                         {
-                            std::printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
+                            std::printf("Opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
                         }
 
                         opening_double_quote_pointer++;
@@ -325,7 +325,7 @@ namespace yli
                         {
                             if (is_debug_mode)
                             {
-                                std::printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+                                std::printf("Closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
                             }
 
                             has_glyph_unicode = true;
@@ -341,7 +341,7 @@ namespace yli
 
                             if (is_debug_mode)
                             {
-                                std::printf("unicode: %s\n", char_unicode);
+                                std::printf("Unicode: %s\n", char_unicode);
                             }
 
                             SVG_data_pointer = ++closing_double_quote_pointer;
@@ -391,7 +391,7 @@ namespace yli
                         // TODO: Create default vertex vector (no vertices), if needed.
                         if (is_debug_mode)
                         {
-                            std::printf("number of vertices: %lu\n", current_glyph_vertices.size());
+                            std::printf("Number of vertices: %lu\n", current_glyph_vertices.size());
                         }
 
                         // Store the vertices of the current vector to the glyph vertex vector
