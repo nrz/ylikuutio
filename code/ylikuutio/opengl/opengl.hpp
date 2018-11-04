@@ -20,6 +20,7 @@ namespace yli
         void set_depth_func_to_less();
         void cull_triangles();
         void set_background_color(const float red, const float green, const float blue, const float alpha);
+        void set_filtering_parameters();
         void set_wireframe(const bool wireframe);
         bool has_ext_framebuffer_object();
         bool has_arb_shader_objects();
