@@ -63,8 +63,7 @@ namespace yli
 
                 // Signal to caller that we have entered the console.
                 uint32_t enter_console_magic_number = ENTER_CONSOLE_MAGIC_NUMBER;
-                std::shared_ptr<yli::datatypes::AnyValue> any_value_magic_number = std::make_shared<yli::datatypes::AnyValue>(enter_console_magic_number);
-                return any_value_magic_number;
+                return std::make_shared<yli::datatypes::AnyValue>(enter_console_magic_number);
             }
 
             // We did not enter the console.
@@ -293,8 +292,7 @@ namespace yli
             {
                 // Signal to caller that we have exited the console.
                 uint32_t exit_console_magic_number = EXIT_CONSOLE_MAGIC_NUMBER;
-                std::shared_ptr<yli::datatypes::AnyValue> any_value_magic_number = std::make_shared<yli::datatypes::AnyValue>(exit_console_magic_number);
-                return any_value_magic_number;
+                return std::make_shared<yli::datatypes::AnyValue>(exit_console_magic_number);
             }
 
             // We did not exit the console.
