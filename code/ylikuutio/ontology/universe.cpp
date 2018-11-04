@@ -677,6 +677,7 @@ namespace yli
                 // attach texture.
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0);
 
+                // create and bind render buffer with depth and stencil attachments.
                 GLuint render_buffer;
                 glGenRenderbuffers(1, &render_buffer);
                 glBindRenderbuffer(GL_RENDERBUFFER, render_buffer);
@@ -688,16 +689,20 @@ namespace yli
                     std::cerr << "ERROR: `Universe::screenshot`: framebuffer is not complete!\n";
                 }
 
+                // bind offscreen buffer.
                 glBindFramebuffer(GL_FRAMEBUFFER, fb);
 
+                // set background color for framebuffer.
                 yli::opengl::set_background_color(
                         universe->background_red,
                         universe->background_green,
                         universe->background_blue,
                         universe->background_alpha);
 
+                // clear framebuffer.
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+                // adjust viewport for framebuffer.
                 glViewport(0, 0, texture_width, texture_height);
                 universe->render_without_changing_depth_test(); // render to framebuffer.
 
@@ -719,16 +724,20 @@ namespace yli
                 delete[] result_array;
                 glDeleteFramebuffers(1, &fb);
 
-                // bind onscreen buffer.
+                // bind the default framebuffer for on-screen rendering.
                 glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
+                // set background color for the default framebuffer.
                 yli::opengl::set_background_color(
                         universe->background_red,
                         universe->background_green,
                         universe->background_blue,
                         universe->background_alpha);
 
+                // clear the default framebuffer.
                 glClear(GL_COLOR_BUFFER_BIT);
+
+                // adjust viewport for the default framebuffer.
                 glViewport(0, 0, universe->window_width, universe->window_height);
             }
 
