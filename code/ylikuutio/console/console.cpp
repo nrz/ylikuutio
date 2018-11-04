@@ -3,6 +3,7 @@
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
+#include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
@@ -487,7 +488,8 @@ namespace yli
                 console->current_input.clear();
             }
 
-            return nullptr;
+            uint32_t clear_console_magic_number = CLEAR_CONSOLE_MAGIC_NUMBER;
+            return std::make_shared<yli::datatypes::AnyValue>(clear_console_magic_number);
         }
 
         // Public callbacks end here.
