@@ -166,16 +166,6 @@ int main(const int argc, const char* const argv[])
     // Cull triangles which normal is not towards the camera.
     yli::opengl::cull_triangles();
 
-    std::cout << "Setting up background colors ...\n";
-    ajokki::set_background_colors(my_universe->get_setting_master());
-    std::cout << "Setting up wireframe state ...\n";
-    ajokki::set_wireframe(my_universe->get_setting_master());
-    std::cout << "Setting up movement ...\n";
-    ajokki::set_movement(my_universe->get_setting_master());
-    std::cout << "Setting up location and orientation ...\n";
-    ajokki::set_location_and_orientation(my_universe->get_setting_master());
-    std::cout << "Setting up debug variables ...\n";
-    ajokki::set_debug_variables(my_universe->get_setting_master());
     std::cout << "Setting up console ...\n";
     ajokki::set_console(my_universe->get_setting_master());
 
@@ -856,6 +846,17 @@ int main(const int argc, const char* const argv[])
     frame_rate_text_struct.horizontal_alignment = "right";
     frame_rate_text_struct.vertical_alignment = "top";
     yli::ontology::Text2D* frame_rate_text2D = new yli::ontology::Text2D(my_universe, frame_rate_text_struct);
+
+    std::cout << "Setting up background colors ...\n";
+    ajokki::set_background_colors(my_universe->get_setting_master());
+    std::cout << "Setting up wireframe state ...\n";
+    ajokki::set_wireframe(my_universe->get_setting_master());
+    std::cout << "Setting up movement ...\n";
+    ajokki::set_movement(my_universe->get_setting_master());
+    std::cout << "Setting up location and orientation ...\n";
+    ajokki::set_location_and_orientation(my_universe->get_setting_master());
+    std::cout << "Setting up debug variables ...\n";
+    ajokki::set_debug_variables(my_universe->get_setting_master());
 
     while (!is_exit_requested)
     {
