@@ -312,7 +312,7 @@ namespace ajokki
         ObjectStruct cat_object_struct1;
         cat_object_struct1.species_parent = cat_species;
         cat_object_struct1.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
-        cat_object_struct1.cartesian_coordinates = glm::vec3(500.00f, 140.00f, 500.00f);
+        cat_object_struct1.cartesian_coordinates = glm::vec3(500.00f, 100.00f, 1000.00f);
         cat_object_struct1.rotate_angle = 0.00f;
         cat_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         cat_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -330,7 +330,7 @@ namespace ajokki
         ObjectStruct cat_object_struct2;
         cat_object_struct2.species_parent = cat_species;
         cat_object_struct2.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
-        cat_object_struct2.cartesian_coordinates = glm::vec3(700.00f, 140.00f, 700.00f);
+        cat_object_struct2.cartesian_coordinates = glm::vec3(700.00f, 100.00f, 1200.00f);
         cat_object_struct2.rotate_angle = 0.00f;
         cat_object_struct2.rotate_vector = glm::vec3(1.5f, 1.0f, 0.9f);
         cat_object_struct2.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
