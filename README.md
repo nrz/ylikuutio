@@ -179,7 +179,7 @@ A: In Finnish, "yli" means ["over"](https://en.wiktionary.org/wiki/yli-), and "k
    So, "Ylikuutio" is a reference to a [hypercube](https://en.wikipedia.org/wiki/Hypercube).
 
 Q: How is Ylikuutio software developed?
-A: In [Debian GNU/Linux](https://www.debian.org/) ([Debian Stretch](https://wiki.debian.org/DebianStretch) at the moment), using [Vim](http://www.vim.org/).
+A: In [Debian GNU/Linux](https://www.debian.org/) ([Debian Stretch](https://wiki.debian.org/DebianStretch) at the moment), using [Vim](https://www.vim.org/).
    Other tools in use include [Valgrind](http://valgrind.org/), [KCachegrind](https://kcachegrind.github.io/html/Home.html), [GDB](https://www.gnu.org/software/gdb/), [Travis CI](https://travis-ci.org/), and [Coverity Scan](https://scan.coverity.com/).
 
 Q: For what kinds of software Ylikuutio can be used?
@@ -212,7 +212,7 @@ A: Yes, Ylikuutio uses VBOs (vertex buffer objects) and VBO indexing.
 
 Q: Is Ylikuutio based on some other 3D engine?
 A: Some parts of Ylikuutio (shaders, some file loaders, etc.) are based
-on [http://www.opengl-tutorial.org/](http://www.opengl-tutorial.org/), which I really recommend for anyone
+on [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/), which I really recommend for anyone
 interested in learning OpenGL programming. Ylikuutio also uses external
 libraries such as (in alphabetical order) Asio, Assimp, GLM, GLEW, OpenFBX,
 s7, SDL, SFML, and pugixml. The rest is written from scratch.
@@ -282,10 +282,10 @@ A: Ylikuutio uses right-handed world coordinates, so X grows eastward, Z grows s
 * Internet gaming with ASIO
 
 ### Libraries currently in use
-* The source code from [http://www.opengl-tutorial.org/](http://www.opengl-tutorial.org/) is licensed under [WTFPL Public Licence version 2](http://www.opengl-tutorial.org/download/).
+* The source code from [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/) is licensed under [WTFPL Public Licence version 2](https://www.opengl-tutorial.org/download/).
 * [Asio](https://think-async.com/) is licensed under [Boost software license](https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt).
 * [Open Asset Import Library (assimp)](http://www.assimp.org/) is licensed under [a 3-clause BSD license](http://www.assimp.org/main_license.html).
-* [OpenGL Mathematics (GLM)](https://glm.g-truc.net/) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](http://glm.g-truc.net/copying.txt).
+* [OpenGL Mathematics (GLM)](https://glm.g-truc.net/) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](https://glm.g-truc.net/copying.txt).
 * [The OpenGL Extension Wrangler Library (GLEW)](http://glew.sourceforge.net/) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
 * [OpenFBX](https://github.com/nem0/OpenFBX) is licensed under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
 * [s7](https://ccrma.stanford.edu/software/snd/snd/s7.html) is licensed under a BSD license.
@@ -299,7 +299,7 @@ A: Ylikuutio uses right-handed world coordinates, so X grows eastward, Z grows s
 * [TinySpline](https://github.com/msteinbeck/tinyspline) is licensed under [the MIT license](https://github.com/msteinbeck/tinyspline/blob/master/LICENSE).
 
 ### 3D models
-* [3D model of Helsinki.](http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli) The administrator of 3D model of Helsinki is Helsingin kaupunginkanslia and the original creator is Helsingin kaupungin kaupunginkanslia, tietotekniikka- ja viestintäosasto. The data has been downloaded from the [Helsinki Region Infoshare](http://www.hri.fi/) service 19.11.2017 using the license [Creative Commons Nimeä 4.0 Kansainvälinen (CC BY 4.0)](http://creativecommons.org/licenses/by/4.0/deed.fi).
+* [3D model of Helsinki.](https://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli) The administrator of 3D model of Helsinki is Helsingin kaupunginkanslia and the original creator is Helsingin kaupungin kaupunginkanslia, tietotekniikka- ja viestintäosasto. The data has been downloaded from the [Helsinki Region Infoshare](https://www.hri.fi/) service 19.11.2017 using the license [Creative Commons Nimeä 4.0 Kansainvälinen (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.fi).
 * [Horse](https://www.blendswap.com/blends/view/76528) is made by b2przemo and it is licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/). The `horse.fbx` file shipped with Ylikuutio is made from the original `horse.blend` by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
 * [Turbo polizei](https://www.blendswap.com/blends/view/74227) is made by corvusd and it is licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/). The `turbo_polizei.fbx` file shipped with Ylikuutio is made from the original `porche_997_turbo_polizei_blendswap.blend` (sic) by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
 * [Fantasy house with balcony](https://www.blendswap.com/blends/view/55007) is made by Daniel74 and it is licensed under [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication ](https://creativecommons.org/publicdomain/zero/1.0/). The `fantasy_house_with_balcony.fbx` file shipped with Ylikuutio is made from the original `FantasyHouseNo6.blend` by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
@@ -308,17 +308,17 @@ A: Ylikuutio uses right-handed world coordinates, so X grows eastward, Z grows s
 * Suzanne the monkey is a standard [Blender](https://www.blender.org/) object. According to Blender license information: "All your artwork – images or movie files – including the .blend files and other data files Blender can write, is free for you to use as you like." Ylikuutio does not contain any code from Blender, however. [Blender itself is released under the GNU General Public License (GPL) 2 or later](https://www.blender.org/about/license/).
 
 ### Textures
-* Grass texture is from [Free Seamless Green Grass Textures](http://www.brusheezy.com/textures/20185-seamless-green-grass-textures), licensed under [Creative Commons Attribution (BY) License](https://support.brusheezy.com/hc/en-us/articles/360002159712-Creative-Commons-Attribution-BY-License-Definition-Usage).
+* Grass texture is from [Free Seamless Green Grass Textures](https://www.brusheezy.com/textures/20185-seamless-green-grass-textures), licensed under [Creative Commons Attribution (BY) License](https://support.brusheezy.com/hc/en-us/articles/360002159712-Creative-Commons-Attribution-BY-License-Definition-Usage).
 * A Cool Seamless Orange Fur Texture is from [My Free Textures](http://www.myfreetextures.com/a-cool-seamless-orange-fur-texture/). `orange_fur_texture.bmp` is scaled down and converted into BMP from the original `ornage-fur-texture.jpg` (sic). License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
 * Pink Marble Pavers Or Tiles Background Texture is from [My Free Textures](http://www.myfreetextures.com/marbles-pavers-tiles-background-texture/). `pavers1b2.bmp` is scaled down and converted into BMP from the original `pavers1b2.jpg`. License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
 
 ### Fonts
-* kongtext font is made by [codeman38](http://zone38.net/), see res/fonts/kongtext/license.txt for the license.
+* kongtext font is made by [codeman38](https://zone38.net/), see res/fonts/kongtext/license.txt for the license.
 
 ### Map data
 * [OpenStreetMap®](https://www.openstreetmap.org/) data of Helsinki, Joensuu, and other Finnish cities is open data, licensed under [the Open Data Commons Open Database License (ODbL) by the OpenStreetMap Foundation (OSMF)](https://www.openstreetmap.org/copyright). OpenStreetMap data is © OpenStreetMap contributors.
-* Elevation model (2 m) of Helsinki, Joensuu, and other Finnish cities is licensed under a Creative Commons Attribution 4.0 International License (CC-BY). Contains data from [the National Land Survey of Finland Topographic Database 08/2016](http://www.maanmittauslaitos.fi/en/opendata-licence-cc40). Reference system is ETRS-TM35FIN. File format is ASCII Grid. Height system is N2000.
-* [Shuttle Radar Topography Mission (SRTM)](https://www2.jpl.nasa.gov/srtm/) data around Bolivian altiplano, Tallinn and elsewhere in the world between 56° S and 60° N is in the public domain. SRTM is a [NASA (National Aeronautics and Space Administration)](https://www.nasa.gov/) mission. SRTM data shipped with Ylikuutio belongs to SRTMGL3 dataset. Information about different SRTM datasets is available in [OpenStreetMap Wiki](http://wiki.openstreetmap.org/wiki/SRTM).
+* Elevation model (2 m) of Helsinki, Joensuu, and other Finnish cities is licensed under a Creative Commons Attribution 4.0 International License (CC-BY). Contains data from [the National Land Survey of Finland Topographic Database 08/2016](https://www.maanmittauslaitos.fi/en/opendata-licence-cc40). Reference system is ETRS-TM35FIN. File format is ASCII Grid. Height system is N2000.
+* [Shuttle Radar Topography Mission (SRTM)](https://www2.jpl.nasa.gov/srtm/) data around Bolivian altiplano, Tallinn and elsewhere in the world between 56° S and 60° N is in the public domain. SRTM is a [NASA (National Aeronautics and Space Administration)](https://www.nasa.gov/) mission. SRTM data shipped with Ylikuutio belongs to SRTMGL3 dataset. Information about different SRTM datasets is available in [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/SRTM).
 
 ### Audio
 * [Arp Bass Loop 128 bpm.mp3](https://freesound.org/people/JPMusic82/sounds/414269/) is made by JPMusic82 and it is licensed under the [Creative Commons 0 (CC0 1.0) license](https://creativecommons.org/publicdomain/zero/1.0/).
