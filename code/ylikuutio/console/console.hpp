@@ -318,6 +318,8 @@ namespace yli
                 template <class T1>
                     friend void yli::map::print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::console::Console* const console);
 
+                bool should_be_rendered;
+
             private:
                 static void charmods_callback(SDL_Window* window, unsigned int codepoint, int mods);
 

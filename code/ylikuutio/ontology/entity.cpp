@@ -1,6 +1,9 @@
 #include "entity.hpp"
 #include "universe.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
+#include "code/ylikuutio/config/setting.hpp"
+#include "code/ylikuutio/config/setting_struct.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
 
 // Include standard headers
 #include <iostream>      // std::cout, std::cin, std::cerr
@@ -29,6 +32,16 @@ namespace yli
             this->postrender_callback = nullptr;
             this->setting_master = std::make_shared<yli::config::SettingMaster>(this);
             this->can_be_erased = false;
+            this->should_be_rendered = true;
+
+            SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::datatypes::AnyValue>(this->should_be_rendered));
+            should_be_rendered_setting_struct.name = "should_be_rendered";
+            should_be_rendered_setting_struct.setting_master = this->get_setting_master();
+            should_be_rendered_setting_struct.activate_callback = &yli::config::SettingMaster::activate_should_be_rendered;
+            should_be_rendered_setting_struct.read_callback = &yli::config::SettingMaster::read_should_be_rendered;
+            should_be_rendered_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+            std::cout << "Executing `new yli::config::Setting(should_be_rendered_setting_struct);` ...\n";
+            new yli::config::Setting(should_be_rendered_setting_struct);
         }
 
         Entity::~Entity()

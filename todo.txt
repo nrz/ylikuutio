@@ -5,7 +5,6 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the development of Ylikuutio:
-[ ] Write code to export rendered image to a BMP file.
 [ ] Write code to convert ASCII grid files (height maps) to binary FBX files, storing also interpolated vertices, UVs, and normals.
 [ ] Test code used to convert ASCII grid files (height maps) to binary FBX files by loading the FBX files created with it.
 [ ] Convert ASCII grid files into binary FBX files.
@@ -119,3 +118,4 @@ Ready:
 [x] Rewrite `obj_loader.cpp` without `fscanf`, using instead `stringstream` for parsing.
 [x] Evaluate CHICKEN Scheme. https://www.call-cc.org/
 [x] Evaluate s7 Scheme. https://ccrma.stanford.edu/software/snd/snd/s7.html
+[x] Write code to save screenshots into a raw data file which can be opened eg. with GIMP.

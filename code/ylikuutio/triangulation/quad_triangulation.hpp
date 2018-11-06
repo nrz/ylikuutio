@@ -106,7 +106,7 @@ namespace yli
                 bool is_southeast_northwest_edges_in_use = false;
                 std::size_t n_faces_for_each_vertex = 2; // split each quad into 2 triangles.
 
-                std::cout << "triangulation type in use: " << triangulation_type << "\n";
+                std::cout << "Triangulation type in use: " << triangulation_type << "\n";
 
                 if (std::strcmp(char_triangulation_type, "bilinear_interpolation") == 0)
                 {
@@ -180,15 +180,15 @@ namespace yli
                     return false;
                 }
 
-                std::cout << "image width: " << image_width << " pixels.\n";
-                std::cout << "image height: " << image_height << " pixels.\n";
+                std::cout << "Image width: " << image_width << " pixels.\n";
+                std::cout << "Image height: " << image_height << " pixels.\n";
 
-                std::cout << "actual image width: " << actual_image_width << " pixels.\n";
-                std::cout << "actual image height: " << actual_image_height << " pixels.\n";
+                std::cout << "Actual image width: " << actual_image_width << " pixels.\n";
+                std::cout << "Actual image height: " << actual_image_height << " pixels.\n";
 
                 const std::size_t n_faces = n_faces_for_each_vertex * (actual_image_width - 1) * (actual_image_height - 1);
 
-                std::cout << "number of faces: " << n_faces << ".\n";
+                std::cout << "Number of faces: " << n_faces << ".\n";
 
                 if (is_bilinear_interpolation_in_use)
                 {
@@ -230,7 +230,7 @@ namespace yli
                 }
                 else
                 {
-                    std::cout << "no coordinate transformation is needed.\n";
+                    std::cout << "No coordinate transformation is needed.\n";
                 }
 
                 // 4. Compute the face normals, `push_back` to `face_normals`.
@@ -240,7 +240,7 @@ namespace yli
                 // Second triangle: center, southwest, northwest.
                 // Third triangle: center, northwest, northeast.
                 // Fourth triangle: center, northeast, southeast.
-                std::cout << "computing face normals.\n";
+                std::cout << "Computing face normals.\n";
 
                 std::vector<glm::vec3> face_normal_vector_vec3;
 
@@ -291,9 +291,9 @@ namespace yli
                     return false;
                 }
 
-                std::cout << "number of vertices: " << out_vertices.size() << ".\n";
-                std::cout << "number of UVs: " << out_UVs.size() << ".\n";
-                std::cout << "number of normals: " << out_normals.size() << ".\n";
+                std::cout << "Number of vertices: " << out_vertices.size() << ".\n";
+                std::cout << "Number of UVs: " << out_UVs.size() << ".\n";
+                std::cout << "Number of normals: " << out_normals.size() << ".\n";
 
                 return true;
             }

@@ -146,12 +146,15 @@ namespace yli
 
         void Font2D::render()
         {
-            this->prepare_to_print();
+            if (this->should_be_rendered)
+            {
+                this->prepare_to_print();
 
-            // render this `Font2D` by calling `render()` function of each `Text2D`.
-            yli::ontology::render_children<yli::ontology::Text2D*>(this->text2D_pointer_vector);
+                // render this `Font2D` by calling `render()` function of each `Text2D`.
+                yli::ontology::render_children<yli::ontology::Text2D*>(this->text2D_pointer_vector);
 
-            glDisable(GL_BLEND);
+                glDisable(GL_BLEND);
+            }
         }
 
         void Font2D::print_text2D(
@@ -164,6 +167,11 @@ namespace yli
                 const std::string horizontal_alignment,
                 const std::string vertical_alignment) const
         {
+            if (!this->should_be_rendered)
+            {
+                return;
+            }
+
             this->prepare_to_print();
 
             // If horizontal alignment is `"left"`, each line begins from the same x coordinate.
@@ -375,6 +383,11 @@ namespace yli
 
         void Font2D::print_text2D(const TextStruct& text_struct) const
         {
+            if (!this->should_be_rendered)
+            {
+                return;
+            }
+
             if (text_struct.text.empty())
             {
                 this->print_text2D(
@@ -409,6 +422,11 @@ namespace yli
                 const std::string text,
                 const std::string font_texture_file_format) const
         {
+            if (!this->should_be_rendered)
+            {
+                return;
+            }
+
             this->print_text2D(x, y, text_size, font_size, text, font_texture_file_format, "left", "bottom");
         }
     }

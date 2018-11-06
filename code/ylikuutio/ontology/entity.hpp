@@ -45,6 +45,8 @@ namespace yli
 
                 void set_name(const std::string& name);
 
+                bool should_be_rendered;
+
             protected:
                 void prerender() const;
                 void postrender() const;

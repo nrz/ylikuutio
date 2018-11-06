@@ -13,8 +13,8 @@ typedef struct UniverseStruct
         : window_title("Ylikuutio 0.0.3"),
         window_width(1600),
         window_height(900),
-        framebuffer_width(6400),
-        framebuffer_height(3600),
+        framebuffer_width(8000),
+        framebuffer_height(4500),
         text_size(40),
         font_size(16),
         max_FPS(50000),        // default value max 50000 frames per second.

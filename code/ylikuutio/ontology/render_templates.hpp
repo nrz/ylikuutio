@@ -16,7 +16,7 @@ namespace yli
                 {
                     T1 child_pointer = static_cast<T1>(child_pointer_vector[child_i]);
 
-                    if (child_pointer != nullptr)
+                    if (child_pointer != nullptr && child_pointer->should_be_rendered)
                     {
                         child_pointer->render();
                     }

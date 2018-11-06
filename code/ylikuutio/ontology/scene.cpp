@@ -125,12 +125,15 @@ namespace yli
 
         void Scene::render()
         {
-            this->prerender();
+            if (this->should_be_rendered)
+            {
+                this->prerender();
 
-            // render this `Scene` by calling `render()` function of each `Shader`.
-            yli::ontology::render_children<yli::ontology::Shader*>(this->shader_pointer_vector);
+                // render this `Scene` by calling `render()` function of each `Shader`.
+                yli::ontology::render_children<yli::ontology::Shader*>(this->shader_pointer_vector);
 
-            this->postrender();
+                this->postrender();
+            }
         }
 
         yli::ontology::Camera* Scene::get_active_camera() const
