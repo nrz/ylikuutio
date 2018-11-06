@@ -52,7 +52,11 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 
 ## Release notes
 
-### [GLM 0.9.9.3](https://github.com/g-truc/glm/commits/master) - 2018-XX-XX
+### [GLM 0.9.9.4](https://github.com/g-truc/glm/tree/master) - 2018-1X-XX
+#### Fixes:
+- Fixed in mat4x3 conversion #829
+
+### [GLM 0.9.9.3](https://github.com/g-truc/glm/releases/tag/0.9.9.3) - 2018-10-31
 #### Features:
 - Added equal and notEqual overload with max ULPs parameters for scalar numbers #121
 - Added GLM_FORCE_SILENT_WARNINGS to silent GLM warnings when using language extensions but using W4 or Wpedantic warnings #814 #775
@@ -61,9 +65,12 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 
 #### Improvements:
 - Added constant time ULP distance between float #121
+- Added GLM_FORCE_SILENT_WARNINGS to suppress GLM warnings #822
 
 #### Fixes:
 - Fixed simplex noise build with double #734
+- Fixed bitfieldInsert according to GLSL spec #818
+- Fixed refract for negative 'k' #808
 
 ### [GLM 0.9.9.2](https://github.com/g-truc/glm/releases/tag/0.9.9.2) - 2018-09-14
 #### Fixes:
@@ -140,7 +147,7 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 - Reduced warnings when using very strict compilation flags #646
 - length() member functions are constexpr #657
 - Added support of -Weverything with Clang #646
-- Improved exponential funtion test coverage
+- Improved exponential function test coverage
 - Enabled warnings as error with Clang unit tests
 - Conan package is an external repository: https://github.com/bincrafters/conan-glm
 - Clarify quat_cast documentation, applying on pure rotation matrices #759
