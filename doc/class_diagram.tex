@@ -32,32 +32,20 @@
     \umlsimpleclass[below right=1cm and 1cm of Universe, anchor=north]{Console}
     \umlsimpleclass[below left=1cm and 0.0cm of Universe, anchor=north]{Font2D}
     \umlsimpleclass[below=0.5cm of Font2D, anchor=north]{Text2D}
-    \coordinate (entitynorth1) at ([xshift=+6mm] Entity.north); 
-    \coordinate (entitynorth2) at ([xshift=+4mm] Entity.north); 
-    \coordinate (entitynorth3) at ([xshift=+2mm] Entity.north); 
-    \coordinate (entitynorth4) at ([] Entity.north); 
-    \coordinate (entitynorth5) at ([xshift=-2mm] Entity.north); 
-    \coordinate (entitynorth6) at ([xshift=-4mm] Entity.north); 
-    \coordinate (entitynorth7) at ([xshift=-6mm] Entity.north); 
-    \coordinate (entitysouth1) at ([xshift=+6mm] Entity.south); 
-    \coordinate (entitysouth2) at ([xshift=+4mm] Entity.south); 
-    \coordinate (entitysouth3) at ([xshift=+2mm] Entity.south); 
-    \coordinate (entitysouth4) at ([] Entity.south); 
-    \coordinate (entitysouth5) at ([xshift=-2mm] Entity.south); 
-    \coordinate (entitysouth6) at ([xshift=-4mm] Entity.south); 
-    \coordinate (entitysouth7) at ([xshift=-6mm] Entity.south); 
-    \coordinate (entitywest1) at ([yshift=+6mm] Entity.west); 
-    \coordinate (entitywest2) at ([yshift=+4mm] Entity.west); 
-    \coordinate (entitywest3) at ([yshift=+2mm] Entity.west); 
-    \coordinate (entitywest4) at ([] Entity.west); 
-    \coordinate (entitywest5) at ([yshift=-2mm] Entity.west); 
-    \coordinate (entitywest6) at ([yshift=-4mm] Entity.west); 
-    \coordinate (entitywest7) at ([yshift=-6mm] Entity.west); 
-    \coordinate (materialsouth1) at ([xshift=-4mm] Material.south); 
-    \coordinate (holobiontsouth1) at ([xshift=+10mm] Holobiont.south); 
-    \coordinate (biontsouth) at ([] Biont.south); 
-    \coordinate (movablesouth1) at ([] Movable.south); 
-    \coordinate (movablesouth2) at ([xshift=2mm] Movable.south); 
+    \coordinate (entitynorth1) at ([xshift=+6mm] Entity.north);
+    \coordinate (entitynorth2) at ([xshift=+4mm] Entity.north);
+    \coordinate (entitynorth3) at ([xshift=+2mm] Entity.north);
+    \coordinate (entitynorth4) at ([] Entity.north);
+    \coordinate (entitysouth1) at ([xshift=+6mm] Entity.south);
+    \coordinate (entitysouth2) at ([xshift=+4mm] Entity.south);
+    \coordinate (entitysouth3) at ([xshift=+2mm] Entity.south);
+    \coordinate (entitysouth4) at ([] Entity.south);
+    \coordinate (entitysouth5) at ([xshift=-2mm] Entity.south);
+    \coordinate (materialsouth1) at ([xshift=-4mm] Material.south);
+    \coordinate (holobiontsouth1) at ([xshift=+10mm] Holobiont.south);
+    \coordinate (biontsouth1) at ([] Biont.south);
+    \coordinate (movablesouth1) at ([] Movable.south);
+    \coordinate (movablesouth2) at ([xshift=2mm] Movable.south);
     \umlcompo[]{Universe}{World}
     \umlcompo[]{World}{Scene}
     \umlcompo[]{Scene}{Shader}
@@ -91,7 +79,7 @@
     \umlinherit[]{SymbiontMaterial}{Material}
     \umlinherit[]{SymbiontSpecies}{Species}
     \umlinherit[geometry=|-|, anchor1=south, anchor2=south, arm2=-1.0cm]{holobiontsouth1}{movablesouth1}
-    \umlinherit[geometry=|-|, anchor1=south, anchor2=south, arm2=-0.5cm]{biontsouth}{movablesouth2}
+    \umlinherit[geometry=|-|, anchor1=south, anchor2=south, arm2=-0.5cm]{biontsouth1}{movablesouth2}
 \end{tikzpicture}
 
 \end{document}

@@ -288,6 +288,7 @@ A: Ylikuutio uses right-handed world coordinates, so X grows eastward, Z grows s
 * [OpenGL Mathematics (GLM)](https://glm.g-truc.net/) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](https://glm.g-truc.net/copying.txt).
 * [The OpenGL Extension Wrangler Library (GLEW)](http://glew.sourceforge.net/) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
 * [OpenFBX](https://github.com/nem0/OpenFBX) is licensed under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
+* [Ryan's CMake Modules](https://github.com/rpavlik/cmake-modules) is licensed under [Boost Software License Version 1.0](https://github.com/rpavlik/cmake-modules/blob/master/LICENSE_1_0.txt).
 * [s7](https://ccrma.stanford.edu/software/snd/snd/s7.html) is licensed under a BSD license.
 * [SDL2](https://www.libsdl.org/) is licensed under [the zlib license](https://www.libsdl.org/).
 * [SFML](https://www.sfml-dev.org/) is licensed under [the zlib/png license](https://www.sfml-dev.org/license.php).
