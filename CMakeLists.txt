@@ -621,7 +621,7 @@ add_library(ylikuutio STATIC
 # yli_convert
 add_executable(yli_convert
     # yli_convert, in alphabetical order
-    code/tools/yli_convert.cpp
+    code/convert/yli_convert.cpp
     )
 target_link_libraries(yli_convert ylikuutio ${ALL_LIBS} assimp)
 set_target_properties(yli_convert PROPERTIES COMPILE_DEFINITIONS "USE_ASSIMP")
