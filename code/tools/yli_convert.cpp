@@ -69,8 +69,8 @@ int main(const int argc, const char* argv[])
         exit(EXIT_FAILURE);
     }
 
-    const std::string in_file = command_line_master.get_value("in");
-    const std::string out_file = command_line_master.get_value("out");
+    const std::string& in_file = command_line_master.get_value("in");
+    const std::string& out_file = command_line_master.get_value("out");
 
     std::string in_file_format = ""; // dummy value.
 
