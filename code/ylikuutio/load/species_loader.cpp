@@ -103,7 +103,9 @@ namespace yli
                         species_loader_struct.triangulation_type,
                         species_loader_struct.should_ylikuutio_use_real_texture_coordinates);
             }
-            else if (species_loader_struct.model_file_format == "ascii_grid" || species_loader_struct.model_file_format == "ASCII_grid")
+            else if (species_loader_struct.model_file_format == "asc" ||
+                    species_loader_struct.model_file_format == "ascii_grid" ||
+                    species_loader_struct.model_file_format == "ASCII_grid")
             {
                 model_loading_result = yli::load::load_ASCII_grid(
                         species_loader_struct.model_filename,
