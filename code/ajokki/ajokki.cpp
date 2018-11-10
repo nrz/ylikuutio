@@ -277,7 +277,7 @@ int main(const int argc, const char* const argv[])
     }
 
     std::cout << "Font2D created successfully.\n";
-    my_font2D->set_name("my_font2d");
+    my_font2D->set_name("my_font2D");
 
     my_universe->set_active_font2D(my_font2D);
     yli::console::Console* const my_console = my_universe->get_console();
