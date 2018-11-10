@@ -363,14 +363,27 @@ namespace yli
             {
                 this->in_history = false;
 
-                // FIXME: this is a temporary workaround to enable entering underscores in console.
-                if (static_cast<char>(keyboard_event.keysym.sym) == '-' && ((modifiers & shift_bitmask) != 0))
+                char keyboard_char = static_cast<char>(keyboard_event.keysym.sym);
+
+                if ((modifiers & shift_bitmask) != 0)
                 {
-                    this->cursor_it = this->current_input.insert(this->cursor_it, '_');
+                    if (keyboard_char == '-')
+                    {
+                        this->cursor_it = this->current_input.insert(this->cursor_it, '_');
+                    }
+                    else if (keyboard_char >= 'a' && keyboard_char <= 'z')
+                    {
+                        this->cursor_it = this->current_input.insert(this->cursor_it, keyboard_char - ('a' - 'A'));
+                    }
+                    else
+                    {
+                        // No support for other Shift key combinations yet.
+                        return;
+                    }
                 }
                 else
                 {
-                    this->cursor_it = this->current_input.insert(this->cursor_it, static_cast<char>(keyboard_event.keysym.sym));
+                    this->cursor_it = this->current_input.insert(this->cursor_it, keyboard_char);
                 }
 
                 this->cursor_it++;
