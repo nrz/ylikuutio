@@ -11,18 +11,16 @@
 #define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
-#include "ajokki_background_colors.hpp"
-#include "ajokki_console_callbacks.hpp"
-#include "ajokki_altiplano_scene.hpp"
-#include "ajokki_helsinki_east_downtown_scene.hpp"
-#include "ajokki_joensuu_center_west_scene.hpp"
-#include "ajokki_tallinn_scene.hpp"
-#include "ajokki_keyboard_callbacks.hpp"
-#include "ajokki_debug.hpp"
-#include "ajokki_console.hpp"
-#include "ajokki_movement.hpp"
-#include "ajokki_location_and_orientation.hpp"
-#include "ajokki_wireframe.hpp"
+#include "code/ajokki/ajokki_background_colors.hpp"
+#include "code/ajokki/ajokki_console_callbacks.hpp"
+#include "code/ajokki/ajokki_helsinki_east_downtown_scene.hpp"
+#include "code/ajokki/ajokki_joensuu_center_west_scene.hpp"
+#include "code/ajokki/ajokki_keyboard_callbacks.hpp"
+#include "code/ajokki/ajokki_debug.hpp"
+#include "code/ajokki/ajokki_console.hpp"
+#include "code/ajokki/ajokki_movement.hpp"
+#include "code/ajokki/ajokki_location_and_orientation.hpp"
+#include "code/ajokki/ajokki_wireframe.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
 #include "code/ylikuutio/callback_system/callback_parameter.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
@@ -115,7 +113,7 @@ int main(const int argc, const char* const argv[])
     // Create the world, store it in `my_universe`.
     std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
     UniverseStruct universe_struct;
-    universe_struct.window_title = "Ajokki 0.0.3, powered by Ylikuutio 0.0.3";
+    universe_struct.window_title = "Hirvi 0.0.3, powered by Ylikuutio 0.0.3";
     universe_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
     universe_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &current_keyrelease_callback_engine_vector_pointer;
     yli::ontology::Universe* const my_universe = new yli::ontology::Universe(universe_struct);
@@ -189,8 +187,6 @@ int main(const int argc, const char* const argv[])
     // The `Scene`s will be created in the following order:
     // 1. Helsinki
     // 2. Joensuu
-    // 3. altiplano
-    // 4. Tallinn
 
     // Helsinki `Scene` begins here.
 
@@ -230,28 +226,6 @@ int main(const int argc, const char* const argv[])
     }
 
     // Joensuu `Scene` ends here.
-
-    // altiplano `Scene` begins here.
-
-    std::cout << "Creating yli::ontology::Scene* altiplano_scene and its contents ...\n";
-    if (ajokki::create_altiplano_scene(entity_factory, earth_world) == nullptr)
-    {
-        cleanup_callback_engine.execute();
-        return -1;
-    }
-
-    // altiplano `Scene` ends here.
-
-    // Tallinn `Scene` begins here.
-
-    std::cout << "Creating yli::ontology::Scene* tallinn_scene and its contents ...\n";
-    if (ajokki::create_tallinn_scene(entity_factory, earth_world) == nullptr)
-    {
-        cleanup_callback_engine.execute();
-        return -1;
-    }
-
-    // Tallinn `Scene` ends here.
 
     my_universe->turbo_factor = 100.0f;
     my_universe->twin_turbo_factor = 500.0f;
@@ -770,11 +744,11 @@ int main(const int argc, const char* const argv[])
     bool is_exit_requested = false;
     bool has_mouse_focus = true;
 
-    audio_master.add_to_playlist("Ajokki_playlist", "414270__greek555__sample-97-bpm.wav");
-    audio_master.add_to_playlist("Ajokki_playlist", "419588__greek555__dreaming-of-me.ogg");
-    audio_master.add_to_playlist("Ajokki_playlist", "416882__greek555__blue-play.ogg");
-    audio_master.add_to_playlist("Ajokki_playlist", "395487__frankum__tecno-pop-base-and-guitar-2.ogg");
-    audio_master.play_playlist("Ajokki_playlist");
+    audio_master.add_to_playlist("Hirvi_playlist", "414270__greek555__sample-97-bpm.wav");
+    audio_master.add_to_playlist("Hirvi_playlist", "419588__greek555__dreaming-of-me.ogg");
+    audio_master.add_to_playlist("Hirvi_playlist", "416882__greek555__blue-play.ogg");
+    audio_master.add_to_playlist("Hirvi_playlist", "395487__frankum__tecno-pop-base-and-guitar-2.ogg");
+    audio_master.play_playlist("Hirvi_playlist");
 
     SDL_Event sdl_event;
     std::string ms_frame_text;
@@ -1132,7 +1106,7 @@ int main(const int argc, const char* const argv[])
             {
                 std::stringstream help_text_stringstream;
                 help_text_stringstream <<
-                    "Ajokki 0.0.3\\n"
+                    "Hirvi 0.0.3\\n"
                     "\\n"
                     "arrow keys\\n"
                     "space jump\\n"

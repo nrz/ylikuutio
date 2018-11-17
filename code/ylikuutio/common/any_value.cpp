@@ -18,7 +18,6 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
-#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <inttypes.h> // PRId32, PRId64, PRIu32, PRIu64, PRIx32, PRIx64
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
@@ -281,12 +280,12 @@ namespace yli
                     return false;
                 case (BOOL):
                     {
-                        if (strcmp(value_string.c_str(), "true") == 0) // Ylikuutio is case sensitive!
+                        if (value_string == "true") // Ylikuutio is case sensitive!
                         {
                             this->bool_value = true;
                             return true;
                         }
-                        else if (strcmp(value_string.c_str(), "false") == 0) // Ylikuutio is case sensitive!
+                        else if (value_string == "false") // Ylikuutio is case sensitive!
                         {
                             this->bool_value = false;
                             return true;
@@ -728,117 +727,117 @@ namespace yli
         {
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "bool") == 0)
+            if (type == "bool")
             {
                 this->type = yli::datatypes::BOOL;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "char") == 0)
+            else if (type == "char")
             {
                 this->type = yli::datatypes::CHAR;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "float") == 0)
+            else if (type == "float")
             {
                 this->type = yli::datatypes::FLOAT;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "double") == 0)
+            else if (type == "double")
             {
                 this->type = yli::datatypes::DOUBLE;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "int32_t") == 0)
+            else if (type == "int32_t")
             {
                 this->type = yli::datatypes::INT32_T;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "uint32_t") == 0)
+            else if (type == "uint32_t")
             {
                 this->type = yli::datatypes::UINT32_T;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "bool*") == 0)
+            else if (type == "bool*")
             {
                 this->type = yli::datatypes::BOOL_POINTER;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "float*") == 0)
+            else if (type == "float*")
             {
                 this->type = yli::datatypes::FLOAT_POINTER;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "double*") == 0)
+            else if (type == "double*")
             {
                 this->type = yli::datatypes::FLOAT_POINTER;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "int32_t*") == 0)
+            else if (type == "int32_t*")
             {
                 this->type = yli::datatypes::INT32_T_POINTER;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "uint32_t*") == 0)
+            else if (type == "uint32_t*")
             {
                 this->type = yli::datatypes::UINT32_T_POINTER;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "yli::ontology::Universe*") == 0)
+            else if (type == "yli::ontology::Universe*")
             {
                 this->type = yli::datatypes::UNIVERSE_POINTER;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "yli::ontology::Scene*") == 0)
+            else if (type == "yli::ontology::Scene*")
             {
                 this->type = yli::datatypes::SCENE_POINTER;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "yli::ontology::Shader*") == 0)
+            else if (type == "yli::ontology::Shader*")
             {
                 this->type = yli::datatypes::SHADER_POINTER;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "yli::ontology::Material*") == 0)
+            else if (type == "yli::ontology::Material*")
             {
                 this->type = yli::datatypes::MATERIAL_POINTER;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "yli::ontology::Species*") == 0)
+            else if (type == "yli::ontology::Species*")
             {
                 this->type = yli::datatypes::SPECIES_POINTER;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "yli::ontology::Object*") == 0)
+            else if (type == "yli::ontology::Object*")
             {
                 this->type = yli::datatypes::OBJECT_POINTER;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "yli::ontology::VectorFont*") == 0)
+            else if (type == "yli::ontology::VectorFont*")
             {
                 this->type = yli::datatypes::VECTORFONT_POINTER;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "yli::ontology::Glyph*") == 0)
+            else if (type == "yli::ontology::Glyph*")
             {
                 this->type = yli::datatypes::GLYPH_POINTER;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "yli::ontology::Text3D*") == 0)
+            else if (type == "yli::ontology::Text3D*")
             {
                 this->type = yli::datatypes::TEXT3D_POINTER;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "yli::ontology::Symbiosis*") == 0)
+            else if (type == "yli::ontology::Symbiosis*")
             {
                 this->type = yli::datatypes::SYMBIOSIS_POINTER;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "yli::ontology::Text2D*") == 0)
+            else if (type == "yli::ontology::Text2D*")
             {
                 this->type = yli::datatypes::TEXT2D_POINTER;
                 this->set_value(value_string);
             }
-            else if (std::strcmp(type.c_str(), "yli::console::Console*") == 0)
+            else if (type == "yli::console::Console*")
             {
                 this->type = yli::datatypes::CONSOLE_POINTER;
                 this->set_value(value_string);
@@ -868,7 +867,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "bool") == 0)
+            if (type == "bool")
             {
                 this->type = yli::datatypes::BOOL;
                 this->bool_value = bool_value;
@@ -888,7 +887,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "char") == 0)
+            if (type == "char")
             {
                 this->type = yli::datatypes::CHAR;
                 this->char_value = char_value;
@@ -908,7 +907,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "float") == 0)
+            if (type == "float")
             {
                 this->type = yli::datatypes::FLOAT;
                 this->float_value = float_value;
@@ -928,7 +927,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "double") == 0)
+            if (type == "double")
             {
                 this->type = yli::datatypes::DOUBLE;
                 this->double_value = double_value;
@@ -948,7 +947,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "int32_t") == 0)
+            if (type == "int32_t")
             {
                 this->type = yli::datatypes::INT32_T;
                 this->int32_t_value = int32_t_value;
@@ -968,7 +967,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "uint32_t") == 0)
+            if (type == "uint32_t")
             {
                 this->type = yli::datatypes::UINT32_T;
                 this->uint32_t_value = uint32_t_value;
@@ -988,7 +987,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "bool*") == 0)
+            if (type == "bool*")
             {
                 this->type = yli::datatypes::BOOL_POINTER;
                 this->bool_pointer = bool_pointer;
@@ -1008,7 +1007,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "float*") == 0)
+            if (type == "float*")
             {
                 this->type = yli::datatypes::FLOAT_POINTER;
                 this->float_pointer = float_pointer;
@@ -1028,7 +1027,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "double*") == 0)
+            if (type == "double*")
             {
                 this->type = yli::datatypes::DOUBLE_POINTER;
                 this->double_pointer = double_pointer;
@@ -1048,7 +1047,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "int32_t*") == 0)
+            if (type == "int32_t*")
             {
                 this->type = yli::datatypes::INT32_T_POINTER;
                 this->int32_t_pointer = int32_t_pointer;
@@ -1068,7 +1067,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "uint32_t*") == 0)
+            if (type == "uint32_t*")
             {
                 this->type = yli::datatypes::UINT32_T_POINTER;
                 this->uint32_t_pointer = uint32_t_pointer;
@@ -1088,7 +1087,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "yli::ontology::Universe*") == 0)
+            if (type == "yli::ontology::Universe*")
             {
                 this->type = yli::datatypes::UNIVERSE_POINTER;
                 this->universe = universe;
@@ -1108,7 +1107,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "yli::ontology::Scene*") == 0)
+            if (type == "yli::ontology::Scene*")
             {
                 this->type = yli::datatypes::SCENE_POINTER;
                 this->scene_pointer = scene_pointer;
@@ -1128,7 +1127,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "yli::ontology::Shader*") == 0)
+            if (type == "yli::ontology::Shader*")
             {
                 this->type = yli::datatypes::SHADER_POINTER;
                 this->shader_pointer = shader_pointer;
@@ -1148,7 +1147,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "yli::ontology::Material*") == 0)
+            if (type == "yli::ontology::Material*")
             {
                 this->type = yli::datatypes::MATERIAL_POINTER;
                 this->material_pointer = material_pointer;
@@ -1168,7 +1167,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "yli::ontology::Species*") == 0)
+            if (type == "yli::ontology::Species*")
             {
                 this->type = yli::datatypes::SPECIES_POINTER;
                 this->species_pointer = species_pointer;
@@ -1188,7 +1187,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "yli::ontology::Object*") == 0)
+            if (type == "yli::ontology::Object*")
             {
                 this->type = yli::datatypes::OBJECT_POINTER;
                 this->object_pointer = object_pointer;
@@ -1208,7 +1207,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "yli::ontology::Vectorfont*") == 0)
+            if (type == "yli::ontology::Vectorfont*")
             {
                 this->type = yli::datatypes::VECTORFONT_POINTER;
                 this->vector_font_pointer = vector_font_pointer;
@@ -1228,7 +1227,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "yli::ontology::Glyph*") == 0)
+            if (type == "yli::ontology::Glyph*")
             {
                 this->type = yli::datatypes::GLYPH_POINTER;
                 this->glyph_pointer = glyph_pointer;
@@ -1248,7 +1247,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "yli::ontology::Text3D*") == 0)
+            if (type == "yli::ontology::Text3D*")
             {
                 this->type = yli::datatypes::TEXT3D_POINTER;
                 this->text3D_pointer = text3D_pointer;
@@ -1268,7 +1267,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "yli::ontology::Font2D*") == 0)
+            if (type == "yli::ontology::Font2D*")
             {
                 this->type = yli::datatypes::TEXT2D_POINTER;
                 this->font2D_pointer = font2D_pointer;
@@ -1288,7 +1287,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "yli::console::Console*") == 0)
+            if (type == "yli::console::Console*")
             {
                 this->type = yli::datatypes::CONSOLE_POINTER;
                 this->console_pointer = console_pointer;
@@ -1308,7 +1307,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "SphericalCoordinatesStruct*") == 0)
+            if (type == "SphericalCoordinatesStruct*")
             {
                 this->type = yli::datatypes::SPHERICAL_COORDINATES_STRUCT_POINTER;
                 this->spherical_coordinates_struct_pointer = spherical_coordinates_struct_pointer;
@@ -1328,7 +1327,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "std::string*") == 0)
+            if (type == "std::string*")
             {
                 this->type = yli::datatypes::STD_STRING_POINTER;
                 this->std_string_pointer = std_string_pointer;
@@ -1348,7 +1347,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "glm::vec3*") == 0)
+            if (type == "glm::vec3*")
             {
                 this->type = yli::datatypes::GLM_VEC3_POINTER;
                 this->glm_vec3_pointer = glm_vec3_pointer;
@@ -1368,7 +1367,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (std::strcmp(type.c_str(), "glm::vec4*") == 0)
+            if (type == "glm::vec4*")
             {
                 this->type = yli::datatypes::GLM_VEC4_POINTER;
                 this->glm_vec4_pointer = glm_vec4_pointer;

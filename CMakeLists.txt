@@ -621,7 +621,7 @@ add_library(ylikuutio STATIC
 # yli_convert
 add_executable(yli_convert
     # yli_convert, in alphabetical order
-    code/tools/yli_convert.cpp
+    code/convert/yli_convert.cpp
     )
 target_link_libraries(yli_convert ylikuutio ${ALL_LIBS} assimp)
 set_target_properties(yli_convert PROPERTIES COMPILE_DEFINITIONS "USE_ASSIMP")
@@ -656,6 +656,33 @@ add_executable(ajokki
     code/ajokki/ajokki_wireframe.hpp
     )
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS})
+
+# Hirvi
+add_executable(hirvi
+    # hirvi, in alphabetical order
+    code/hirvi/hirvi.cpp
+    code/ajokki/ajokki_background_colors.cpp
+    code/ajokki/ajokki_background_colors.hpp
+    code/ajokki/ajokki_console.cpp
+    code/ajokki/ajokki_console.hpp
+    code/ajokki/ajokki_console_callbacks.cpp
+    code/ajokki/ajokki_console_callbacks.hpp
+    code/ajokki/ajokki_debug.cpp
+    code/ajokki/ajokki_debug.hpp
+    code/ajokki/ajokki_helsinki_east_downtown_scene.cpp
+    code/ajokki/ajokki_helsinki_east_downtown_scene.hpp
+    code/ajokki/ajokki_joensuu_center_west_scene.cpp
+    code/ajokki/ajokki_joensuu_center_west_scene.hpp
+    code/ajokki/ajokki_keyboard_callbacks.cpp
+    code/ajokki/ajokki_keyboard_callbacks.hpp
+    code/ajokki/ajokki_location_and_orientation.cpp
+    code/ajokki/ajokki_location_and_orientation.hpp
+    code/ajokki/ajokki_movement.cpp
+    code/ajokki/ajokki_movement.hpp
+    code/ajokki/ajokki_wireframe.cpp
+    code/ajokki/ajokki_wireframe.hpp
+    )
+target_link_libraries(hirvi ylikuutio ${ALL_LIBS})
 
 if (ENABLE_SCRIPTING_WITH_S7_SCHEME)
     # S7 Scheme test
