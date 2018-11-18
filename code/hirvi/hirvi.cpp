@@ -1016,13 +1016,7 @@ int main(const int argc, const char* const argv[])
                     "I  invert mouse (" << (my_universe->is_invert_mouse_in_use ? on_string : off_string) << ")\\n"
                     "F  flight mode (" << (my_universe->is_flight_mode_in_use ? on_string : off_string) << ")\\n"
                     "Ctrl      turbo\\n" <<
-                    "Ctrl+Ctrl extra turbo\\n" <<
-                    "for debugging:\\n" <<
-                    "G  grass texture\\n" <<
-                    "O  orange fur texture\\n" <<
-                    "P  pink geometric tiles texture\\n" <<
-                    "T  terrain species\\n" <<
-                    "A  suzanne species\\n";
+                    "Ctrl+Ctrl extra turbo\\n";
                 const std::string help_text_string = help_text_stringstream.str();
                 help_text2D->change_string(help_text_string);
             }
