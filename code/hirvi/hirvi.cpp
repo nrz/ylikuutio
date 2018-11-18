@@ -390,100 +390,6 @@ int main(const int argc, const char* const argv[])
             toggle_help_mode_callback_engine);
     new yli::callback_system::CallbackParameter("", std::make_shared<yli::datatypes::AnyValue>(my_universe), false, toggle_help_mode_callback_object);
 
-    // Callback code for D: delete Suzanne species.
-    const std::string suzanne_species_string = "suzanne_species";
-    yli::callback_system::CallbackEngine* const delete_suzanne_species_callback_engine = new yli::callback_system::CallbackEngine();
-    yli::callback_system::CallbackObject* const delete_suzanne_species_callback_object = new yli::callback_system::CallbackObject(
-            &ajokki::delete_entity,
-            delete_suzanne_species_callback_engine);
-    new yli::callback_system::CallbackParameter("", std::make_shared<yli::datatypes::AnyValue>(my_universe), false, delete_suzanne_species_callback_object);
-    new yli::callback_system::CallbackParameter("", std::make_shared<yli::datatypes::AnyValue>(&suzanne_species_string), false, delete_suzanne_species_callback_object);
-
-    // Callback code for G: switch to grass material.
-    const std::string grass_material_string = "helsinki_east_downtown_grass_material";
-    yli::callback_system::CallbackEngine* const switch_to_grass_material_callback_engine = new yli::callback_system::CallbackEngine();
-    yli::callback_system::CallbackObject* const switch_to_grass_material_callback_object = new yli::callback_system::CallbackObject(
-            &ajokki::switch_to_new_material,
-            switch_to_grass_material_callback_engine);
-    new yli::callback_system::CallbackParameter(
-            "",
-            std::make_shared<yli::datatypes::AnyValue>(my_universe),
-            false,
-            switch_to_grass_material_callback_object);
-    new yli::callback_system::CallbackParameter(
-            "",
-            std::make_shared<yli::datatypes::AnyValue>(&suzanne_species_string),
-            false,
-            switch_to_grass_material_callback_object);
-    new yli::callback_system::CallbackParameter(
-            "",
-            std::make_shared<yli::datatypes::AnyValue>(&grass_material_string),
-            false,
-            switch_to_grass_material_callback_object);
-
-    // Callback code for O: switch to orange fur material.
-    const std::string orange_fur_material_string = "helsinki_east_downtown_orange_fur_material";
-    yli::callback_system::CallbackEngine* const switch_to_orange_fur_material_callback_engine = new yli::callback_system::CallbackEngine();
-    yli::callback_system::CallbackObject* const switch_to_orange_fur_material_callback_object = new yli::callback_system::CallbackObject(
-            &ajokki::switch_to_new_material,
-            switch_to_orange_fur_material_callback_engine);
-    new yli::callback_system::CallbackParameter(
-            "",
-            std::make_shared<yli::datatypes::AnyValue>(my_universe),
-            false,
-            switch_to_orange_fur_material_callback_object);
-    new yli::callback_system::CallbackParameter(
-            "",
-            std::make_shared<yli::datatypes::AnyValue>(&suzanne_species_string),
-            false,
-            switch_to_orange_fur_material_callback_object);
-    new yli::callback_system::CallbackParameter(
-            "",
-            std::make_shared<yli::datatypes::AnyValue>(&orange_fur_material_string),
-            false,
-            switch_to_orange_fur_material_callback_object);
-
-    // Callback code for P: switch to pink_geometric_tiles_material.
-    const std::string pink_geometric_tiles_material_string = "helsinki_east_downtown_pink_geometric_tiles_material";
-    yli::callback_system::CallbackEngine* const switch_to_pink_geometric_tiles_material_callback_engine = new yli::callback_system::CallbackEngine();
-    yli::callback_system::CallbackObject* const switch_to_pink_geometric_tiles_material_callback_object = new yli::callback_system::CallbackObject(
-            &ajokki::switch_to_new_material,
-            switch_to_pink_geometric_tiles_material_callback_engine);
-    new yli::callback_system::CallbackParameter(
-            "",
-            std::make_shared<yli::datatypes::AnyValue>(my_universe),
-            false,
-            switch_to_pink_geometric_tiles_material_callback_object);
-    new yli::callback_system::CallbackParameter(
-            "",
-            std::make_shared<yli::datatypes::AnyValue>(&suzanne_species_string),
-            false,
-            switch_to_pink_geometric_tiles_material_callback_object);
-    new yli::callback_system::CallbackParameter(
-            "",
-            std::make_shared<yli::datatypes::AnyValue>(&pink_geometric_tiles_material_string),
-            false,
-            switch_to_pink_geometric_tiles_material_callback_object);
-
-    // Callback code for T: transform `suzanne2` into terrain.
-    const std::string helsinki_species_string = "helsinki_east_downtown_terrain_species";
-    const std::string suzanne2_string = "suzanne2";
-    yli::callback_system::CallbackEngine* const transform_into_terrain_callback_engine = new yli::callback_system::CallbackEngine();
-    yli::callback_system::CallbackObject* const transform_into_terrain_callback_object = new yli::callback_system::CallbackObject(
-            &ajokki::transform_into_new_species,
-            transform_into_terrain_callback_engine);
-    new yli::callback_system::CallbackParameter("", std::make_shared<yli::datatypes::AnyValue>(my_universe), false, transform_into_terrain_callback_object);
-    new yli::callback_system::CallbackParameter("", std::make_shared<yli::datatypes::AnyValue>(&suzanne2_string), false, transform_into_terrain_callback_object);
-    new yli::callback_system::CallbackParameter("", std::make_shared<yli::datatypes::AnyValue>(&helsinki_species_string), false, transform_into_terrain_callback_object);
-
-    // Callback code for A: transform `suzanne2` back into monkey.
-    yli::callback_system::CallbackEngine* const transform_into_monkey_callback_engine = new yli::callback_system::CallbackEngine();
-    yli::callback_system::CallbackObject* const transform_into_monkey_callback_object = new yli::callback_system::CallbackObject(
-            &ajokki::transform_into_new_species, transform_into_monkey_callback_engine);
-    new yli::callback_system::CallbackParameter("", std::make_shared<yli::datatypes::AnyValue>(my_universe), false, transform_into_monkey_callback_object);
-    new yli::callback_system::CallbackParameter("", std::make_shared<yli::datatypes::AnyValue>(&suzanne2_string), false, transform_into_monkey_callback_object);
-    new yli::callback_system::CallbackParameter("", std::make_shared<yli::datatypes::AnyValue>(&suzanne_species_string), false, transform_into_monkey_callback_object);
-
     /*********************************************************************\
      *  Callback engines for console keyreleases begin here.             *
     \*********************************************************************/
@@ -645,12 +551,6 @@ int main(const int argc, const char* const argv[])
     action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_I, toggle_invert_mouse_callback_engine });
     action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_F, toggle_flight_mode_callback_engine });
     action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_F1, toggle_help_mode_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_D, delete_suzanne_species_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_G, switch_to_grass_material_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_O, switch_to_orange_fur_material_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_P, switch_to_pink_geometric_tiles_material_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_T, transform_into_terrain_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_A, transform_into_monkey_callback_engine });
 
     // Continuous keypress callbacks for action mode.
     // Keypresses are checked in the order of this struct.
@@ -1116,13 +1016,7 @@ int main(const int argc, const char* const argv[])
                     "I  invert mouse (" << (my_universe->is_invert_mouse_in_use ? on_string : off_string) << ")\\n"
                     "F  flight mode (" << (my_universe->is_flight_mode_in_use ? on_string : off_string) << ")\\n"
                     "Ctrl      turbo\\n" <<
-                    "Ctrl+Ctrl extra turbo\\n" <<
-                    "for debugging:\\n" <<
-                    "G  grass texture\\n" <<
-                    "O  orange fur texture\\n" <<
-                    "P  pink geometric tiles texture\\n" <<
-                    "T  terrain species\\n" <<
-                    "A  suzanne species\\n";
+                    "Ctrl+Ctrl extra turbo\\n";
                 const std::string help_text_string = help_text_stringstream.str();
                 help_text2D->change_string(help_text_string);
             }
