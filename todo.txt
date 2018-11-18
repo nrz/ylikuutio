@@ -16,7 +16,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement `pause` console command for pausing `Sound`s and `Playlist`s.
 [ ] Implement `next` console command for changing to the next `Sound` in a `Playlist`.
 [ ] Implement `prev` console command for changing to the previous `Sound` in a `Playlist`.
-[ ] Add variable `text_size` (affects size of console text and other texts printed on screen).
 [ ] Implement support for automatic detection of optimal window size.
 [ ] Implement support for changing window size.
 [ ] Implement support for changing font size.
@@ -119,3 +118,4 @@ Ready:
 [x] Evaluate CHICKEN Scheme. https://www.call-cc.org/
 [x] Evaluate s7 Scheme. https://ccrma.stanford.edu/software/snd/snd/s7.html
 [x] Write code to save screenshots into a raw data file which can be opened eg. with GIMP.
+[x] Add variable `text_size` (affects size of console text and other texts printed on screen).
