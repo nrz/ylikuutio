@@ -522,6 +522,8 @@ namespace yli
             std::string command;
             std::string token;
 
+            // The reader begins here.
+
             while (std::getline(input_stringstream, token, ' '))
             {
                 if (token.empty())
@@ -541,6 +543,8 @@ namespace yli
                     parameter_vector.push_back(token);
                 }
             }
+
+            // The reader ends here.
 
             console->current_input.clear();
 
