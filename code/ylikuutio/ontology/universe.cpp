@@ -27,6 +27,7 @@
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/console/console.hpp"
+#include "code/ylikuutio/scheme/scheme_master.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/file/file_writer.hpp"
@@ -746,6 +747,16 @@ namespace yli
         }
 
         // Public callbacks end here.
+
+        std::string Universe::eval_string(const std::string& my_string)
+        {
+            if (this->scheme_master == nullptr)
+            {
+                return "";
+            }
+
+            return this->scheme_master->eval_string(my_string);
+        }
 
         yli::ontology::Font2D* Universe::get_active_font2D() const
         {

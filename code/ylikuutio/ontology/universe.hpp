@@ -7,6 +7,7 @@
 #include "camera_struct.hpp"
 #include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
+#include "code/ylikuutio/scheme/scheme_master.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -293,6 +294,7 @@ namespace yli
                     this->active_world     = nullptr;
                     this->active_font2D    = nullptr;
                     this->console          = nullptr;
+                    this->scheme_master    = nullptr;
 
                     this->background_red   = NAN;
                     this->background_green = NAN;
@@ -391,6 +393,8 @@ namespace yli
                             universe_struct.current_keypress_callback_engine_vector_pointer_pointer,
                             universe_struct.current_keyrelease_callback_engine_vector_pointer_pointer);
 
+                    this->scheme_master = std::make_shared<yli::scheme::SchemeMaster>();
+
                     // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
                     this->type_string = "yli::ontology::Universe*";
@@ -413,6 +417,8 @@ namespace yli
 
                 // this method stes the active `Scene`.
                 void set_active_scene(yli::ontology::Scene* const world);
+
+                std::string eval_string(const std::string& my_string);
 
                 yli::ontology::Font2D* get_active_font2D() const;
                 void set_active_font2D(yli::ontology::Font2D* const font2D);
@@ -590,6 +596,8 @@ namespace yli
                 yli::ontology::Font2D* active_font2D;
 
                 yli::console::Console* console;       // pointer to `Console`.
+
+                std::shared_ptr<yli::scheme::SchemeMaster> scheme_master; // pointer to `SchemeMaster`.
 
                 // Named entities are stored here so that they can be recalled, if needed.
                 std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
