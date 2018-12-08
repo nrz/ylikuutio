@@ -125,7 +125,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         # Download and install GoogleTest
         ExternalProject_Add(
             googletest
-            GIT_REPOSITORY https://github.com/google/googletest
+            GIT_REPOSITORY https://github.com/abseil/googletest
             PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
             # Disable install step
             INSTALL_COMMAND ""
@@ -140,7 +140,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         # Download and install GoogleTest
         ExternalProject_Add(
             googletest
-            GIT_REPOSITORY https://github.com/google/googletest
+            GIT_REPOSITORY https://github.com/abseil/googletest
             PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
             # Disable install step
             INSTALL_COMMAND ""
@@ -183,7 +183,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         # Download and install GoogleMock
         ExternalProject_Add(
             googlemock
-            GIT_REPOSITORY https://github.com/google/googletest
+            GIT_REPOSITORY https://github.com/abseil/googletest
             PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
             # Disable install step
             INSTALL_COMMAND ""
@@ -198,7 +198,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         # Download and install GoogleMock
         ExternalProject_Add(
             googlemock
-            GIT_REPOSITORY https://github.com/google/googletest
+            GIT_REPOSITORY https://github.com/abseil/googletest
             PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
             # Disable install step
             INSTALL_COMMAND ""
