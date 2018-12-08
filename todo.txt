@@ -5,6 +5,9 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the development of Ylikuutio:
+[ ] Implement `AnyStruct`.
+[ ] Implement `AnyValueEntity : public AnyValue, public Entity`.
+[ ] Implement `AnyStructEntity : public AnyStruct, public Entity`.
 [ ] Write code to convert ASCII grid files (height maps) to binary FBX files, storing also interpolated vertices, UVs, and normals.
 [ ] Test code used to convert ASCII grid files (height maps) to binary FBX files by loading the FBX files created with it.
 [ ] Convert ASCII grid files into binary FBX files.
