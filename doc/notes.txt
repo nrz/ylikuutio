@@ -22,6 +22,7 @@ Marching cubes algorithm
 Marching tetrahedra algorithm
 
 Elevation data of the Earth:
+https://www2.jpl.nasa.gov/srtm/
 http://wiki.openstreetmap.org/wiki/SRTM
 http://e4ftl01.cr.usgs.gov/SRTM/SRTMGL3.003/
 
@@ -119,7 +120,7 @@ https://github.com/Oulu-UCC/3D_City_fbx
 
 3D model of the campus and science park area of Turku / Turun kampus- ja tiedepuistoalueen 3D-kaupunkimalli (CC-BY 4.0):
 file formats: .dae files, .jpg files, .json files, .sff files, .aimgrd.vrt files, .dds files, .ecw (for orthophoto), .tfw (for orthophoto)
-http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
+https://data.lounaistieto.fi/data/dataset/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli
 
 3D model of Tampere (custom license):
 file formats: .dwg

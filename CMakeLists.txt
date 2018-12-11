@@ -7,9 +7,6 @@ project(ylikuutio)
 # SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 
-# comment the following line to disable scripting with S7 Scheme.
-set(ENABLE_SCRIPTING_WITH_S7_SCHEME true)
-
 # comment the following line to use `libsdl2-dev` shipped with Linux.
 set(COMPILE_SDL_FROM_SOURCE true)
 
@@ -112,14 +109,9 @@ include_directories(
     external/glm/
     external/OpenFBX/src/
     external/pugixml/src/
+    external/s7/
     .
     )
-
-if(ENABLE_SCRIPTING_WITH_S7_SCHEME)
-    include_directories(
-        external/s7/
-        )
-endif()
 
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     include_directories(
@@ -133,7 +125,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         # Download and install GoogleTest
         ExternalProject_Add(
             googletest
-            GIT_REPOSITORY https://github.com/google/googletest
+            GIT_REPOSITORY https://github.com/abseil/googletest
             PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
             # Disable install step
             INSTALL_COMMAND ""
@@ -148,7 +140,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         # Download and install GoogleTest
         ExternalProject_Add(
             googletest
-            GIT_REPOSITORY https://github.com/google/googletest
+            GIT_REPOSITORY https://github.com/abseil/googletest
             PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
             # Disable install step
             INSTALL_COMMAND ""
@@ -191,7 +183,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         # Download and install GoogleMock
         ExternalProject_Add(
             googlemock
-            GIT_REPOSITORY https://github.com/google/googletest
+            GIT_REPOSITORY https://github.com/abseil/googletest
             PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
             # Disable install step
             INSTALL_COMMAND ""
@@ -206,7 +198,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         # Download and install GoogleMock
         ExternalProject_Add(
             googlemock
-            GIT_REPOSITORY https://github.com/google/googletest
+            GIT_REPOSITORY https://github.com/abseil/googletest
             PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
             # Disable install step
             INSTALL_COMMAND ""
@@ -240,6 +232,7 @@ set(ALL_LIBS
     pugixml
     miniz
     OpenFBX
+    s7
     )
 
 if (COMPILE_SFML_FROM_SOURCE)
@@ -587,6 +580,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/opengl/vboindexer.cpp
     code/ylikuutio/opengl/vboindexer.hpp
 
+    # scheme, in alphabetical order.
+    code/ylikuutio/scheme/scheme_master.cpp
+    code/ylikuutio/scheme/scheme_master.hpp
+
     # shaders, in alphabetical order
     code/ylikuutio/shaders/StandardShading.fragmentshader
     code/ylikuutio/shaders/StandardShading.vertexshader
@@ -682,14 +679,12 @@ add_executable(hirvi
     code/ajokki/ajokki_wireframe.cpp
     code/ajokki/ajokki_wireframe.hpp
     )
-target_link_libraries(hirvi ylikuutio ${ALL_LIBS})
+target_link_libraries(hirvi ylikuutio ${ALL_LIBS} pthread)
 
-if (ENABLE_SCRIPTING_WITH_S7_SCHEME)
-    # S7 Scheme test
-    add_executable(s7_test code/s7/s7_test.cpp
-        )
-    target_link_libraries(s7_test s7 pthread)
-endif()
+# S7 Scheme test
+add_executable(s7_test
+    code/s7/s7_test.cpp)
+target_link_libraries(s7_test s7 pthread)
 
 # Asio-test
 if(FALSE)

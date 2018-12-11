@@ -8,6 +8,7 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h> // uint32_t etc.
+#include <string>   // std::string, std::getline
 #include <vector>   // std::vector
 
 namespace yli
@@ -475,87 +476,93 @@ namespace yli
                 std::vector<yli::callback_system::CallbackParameter*>&,
                 yli::console::Console* console)
         {
+            if (!console->in_console || !console->can_enter_key)
+            {
+                return nullptr;
+            }
+
             std::shared_ptr<yli::datatypes::AnyValue> any_value = nullptr;
 
-            if (console->in_console &&
-                    console->can_enter_key)
+            // Copy current input into a `std::string`.
+            std::string input_string(console->current_input.begin(), console->current_input.end());
+
+            // Copy current input into the command history.
+            console->command_history.push_back(console->current_input);
+
+            // Prefix current input with the prompt, for saving into `console_history`.
+            std::list<char>::iterator it = console->current_input.begin();
+
+            for (const char& my_char : console->prompt)
             {
-                // Copy current input into a `std::string`.
-                std::string input_string(console->current_input.begin(), console->current_input.end());
+                console->current_input.insert(it, my_char);
+            }
 
-                // Copy current input into the command history.
-                console->command_history.push_back(console->current_input);
+            std::list<char> current_input_char_list;
 
-                // Prefix current input with the prompt, for saving into `console_history`.
-                std::list<char>::iterator it = console->current_input.begin();
+            // Split into lines, push_back each line into `console_history` separately.
+            for (const char& my_char : console->current_input)
+            {
+                current_input_char_list.push_back(my_char);
 
-                for (const char& my_char : console->prompt)
-                {
-                    console->current_input.insert(it, my_char);
-                }
-
-                std::list<char> current_input_char_list;
-
-                // Split into lines, push_back each line into `console_history` separately.
-                for (const char& my_char : console->current_input)
-                {
-                    current_input_char_list.push_back(my_char);
-
-                    if (current_input_char_list.size () >= console->n_columns)
-                    {
-                        console->console_history.push_back(current_input_char_list);
-                        current_input_char_list.clear();
-                    }
-                }
-
-                if (current_input_char_list.size() > 0)
+                if (current_input_char_list.size () >= console->n_columns)
                 {
                     console->console_history.push_back(current_input_char_list);
+                    current_input_char_list.clear();
                 }
-
-                bool is_command = false;
-                std::istringstream input_stringstream(input_string);
-                std::vector<std::string> parameter_vector;
-                std::string command;
-                std::string token;
-
-                while (std::getline(input_stringstream, token, ' '))
-                {
-                    if (token.empty())
-                    {
-                        continue;
-                    }
-
-                    if (!is_command)
-                    {
-                        // First non-empty token is the command.
-                        command = token;
-                        is_command = true;
-                    }
-                    else
-                    {
-                        // The rest non-empty tokens are the parameters.
-                        parameter_vector.push_back(token);
-                    }
-                }
-
-                console->current_input.clear();
-
-                if (is_command)
-                {
-                    // Call the corresponding console command callback, if there is one.
-                    if (console->command_callback_map.count(command) == 1)
-                    {
-                        ConsoleCommandCallback callback = console->command_callback_map[command];
-                        any_value = callback(console, console->universe, parameter_vector);
-                    }
-                }
-
-                console->in_historical_input = false;
-                console->cursor_it = console->current_input.begin();
-                console->cursor_index = 0;
-                console->can_enter_key = false;
             }
+
+            if (current_input_char_list.size() > 0)
+            {
+                console->console_history.push_back(current_input_char_list);
+            }
+
+            bool is_command = false;
+            std::istringstream input_stringstream(input_string);
+            std::vector<std::string> parameter_vector;
+            std::string command;
+            std::string token;
+
+            // The reader begins here.
+
+            while (std::getline(input_stringstream, token, ' '))
+            {
+                if (token.empty())
+                {
+                    continue;
+                }
+
+                if (!is_command)
+                {
+                    // First non-empty token is the command.
+                    command = token;
+                    is_command = true;
+                }
+                else
+                {
+                    // The rest non-empty tokens are the parameters.
+                    parameter_vector.push_back(token);
+                }
+            }
+
+            // The reader ends here.
+
+            console->current_input.clear();
+
+            if (is_command)
+            {
+                // Call the corresponding console command callback, if there is one.
+                if (console->command_callback_map.count(command) == 1)
+                {
+                    ConsoleCommandCallback callback = console->command_callback_map[command];
+                    any_value = callback(console, console->universe, parameter_vector);
+                }
+            }
+
+            console->in_historical_input = false;
+            console->cursor_it = console->current_input.begin();
+            console->cursor_index = 0;
+            console->can_enter_key = false;
+
             return any_value;
         }
 

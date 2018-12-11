@@ -85,7 +85,7 @@ To cross compile from Linux to Windows:
 
 Crosscompiling from Linux to Windows fails to compile tests.
 This is a known bug in Google Test. Just run `make` *again* if
-compiling ends before you get `ajokki.exe` and `s7_test.exe`.
+compiling ends before you get `hirvi.exe`, `ajokki.exe` and `s7_test.exe`.
 By default compiling tests is disabled when crosscompiling from Linux
 to Windows, due to this issue.
 https://github.com/google/googletest/issues/606
@@ -102,19 +102,30 @@ However, cross compiling from Linux to Android does not work yet!
 Compiling in Visual Studio is more difficult. The recommended way to
 get a binary for Windows is to cross compile from Linux to Windows.
 
-To run Ajokki (working title based on Finnish bus body manufacturer),
-a demo program to check out some properties of Ylikuutio 3D engine:
+Ylikuutio repository contains the following games/demos:
+
+Hirvi is a first person action-adventure of the adventures of
+a moose/elk called Hirvi. Cities are dangerous places for moose,
+even through moose are well-known pasifists.
+"hirvi" is a moose/elk in Finnish.
+
+Ajokki is sandbox demo program to check out some properties of
+Ylikuutio 3D engine. "Ajokki" is a working title based on a
+Finnish bus body manufacturer.
 
 In Linux:
 
+    $ ./hirvi
     $ ./ajokki
 
 In Windows:
 
+    > hirvi.exe
     > ajokki.exe
 
-`ajokki.exe` binary can also be executed in Linux, using Wine:
+`hirvi.exe` and `ajokki.exe` can also be executed in Linux, using Wine:
 
+    $ wine ./hirvi.exe
     $ wine ./ajokki.exe
 
 Press `` to get console. Press F to toggle flying on off.
@@ -130,12 +141,13 @@ This part reflects the current usage of Ylikuutio and will change as new
 functionality is implemented.
 
 At the moment, you need a `main` function (for an example, please see
-`code/ajokki/ajokki.cpp`) which starts your game/simulation (initialization),
-runs the game/simulation (the main loop) and ends the program (cleaning-up).
-In all these phases mentioned above Ylikuutio library functions may be used.
-Ylikuutio library code is located in `code/ylikuutio/` tree. Ylikuutio code
-may change a lot and so far no API has been defined. Ajokki and Ylikuutio
-code itself are the best references on how to use Ylikuutio in practice.
+`code/hirvi/hirvi.cpp` and `code/ajokki/ajokki.cpp`) which starts your
+game/simulation (initialization), runs the game/simulation (the main loop)
+and ends the program (cleaning-up). In all these phases mentioned above
+Ylikuutio library functions may be used. Ylikuutio library code is located
+in `code/ylikuutio/` tree. Ylikuutio code may change a lot and so far no
+stable API has been defined. Hirvi, Ajokki and Ylikuutio code itself are
+the best references on how to use Ylikuutio in practice.
 
 Some available console commands to try in Ajokki:
 * `activate joensuu_center_and_west_scene`
@@ -237,7 +249,7 @@ A: Ylikuutio uses right-handed world coordinates, so X grows eastward, Z grows s
 
 ## Future developments underway
 * full support for different keyboard layouts in console
-* custom keyboard mappings in Ajokki
+* custom keyboard mappings
 * command to read console command input from file
 * command to record gameplay
 * command to play recorded gameplay
