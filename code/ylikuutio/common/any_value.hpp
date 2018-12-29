@@ -72,7 +72,7 @@ namespace yli
             GLM_VEC4_POINTER
         };
 
-        typedef class AnyValue
+        class AnyValue
         {
             public:
                 std::string get_datatype() const;
@@ -176,7 +176,7 @@ namespace yli
 
             private:
                 void set_default_values();
-        } AnyValue;
+        };
     }
 }
 
