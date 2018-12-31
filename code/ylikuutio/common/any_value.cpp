@@ -687,6 +687,7 @@ namespace yli
 
         void AnyValue::set_default_values()
         {
+            this->any_struct_shared_ptr = nullptr;
             this->type = yli::datatypes::UNKNOWN;
         }
 
@@ -694,6 +695,7 @@ namespace yli
         {
             // copy constructor.
             this->type = original.type;
+            this->any_struct_shared_ptr = original.any_struct_shared_ptr;
             this->bool_value = original.bool_value;
             this->char_value = original.char_value;
             this->float_value = original.float_value;
@@ -727,7 +729,12 @@ namespace yli
         {
             this->set_default_values();
 
-            if (type == "bool")
+            if (type == "std::shared_ptr<AnyStruct>")
+            {
+                this->type = yli::datatypes::ANY_STRUCT_SHARED_PTR;
+                this->set_value(value_string);
+            }
+            else if (type == "bool")
             {
                 this->type = yli::datatypes::BOOL;
                 this->set_value(value_string);
@@ -852,6 +859,26 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
+        }
+
+        AnyValue::AnyValue(std::shared_ptr<yli::datatypes::AnyStruct> any_struct_shared_ptr)
+        {
+            // constructor.
+            this->set_default_values();
+            this->type = yli::datatypes::ANY_STRUCT_SHARED_PTR;
+            this->any_struct_shared_ptr = any_struct_shared_ptr;
+        }
+
+        AnyValue::AnyValue(const std::string& type, std::shared_ptr<yli::datatypes::AnyStruct> any_struct_shared_ptr)
+        {
+            // constructor.
+            this->set_default_values();
+
+            if (type == "std::shared_ptr<AnyStruct>")
+            {
+                this->type = yli::datatypes::ANY_STRUCT_SHARED_PTR;
+                this->any_struct_shared_ptr = any_struct_shared_ptr;
+            }
         }
 
         AnyValue::AnyValue(const bool bool_value)
