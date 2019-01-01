@@ -5,6 +5,16 @@
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 
+// `yli::datatypes::AnyStruct` is a `class` which functions as a generic replacement for `struct`s.
+// Further, it provides direct access to `AnyStruct`s which are children of current `AnyStruct`.
+// This is implemented using recursion.
+//
+// `yli::datatypes::AnyStruct` uses a notation also used by MATLAB and GNU Octave:
+// `"foo.bar"` refers to `AnyStruct` named `"bar"`, which is a child of `AnyStruct` named `"foo"`.
+// `"foo.bar.baz"` refers to `AnyStruct` named `"baz"`, which is a child of `"baz"`, which is a child of `"foo"`.
+//
+// All links are created using `std::shared_ptr`.
+
 namespace yli
 {
     namespace datatypes
