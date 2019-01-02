@@ -729,7 +729,7 @@ namespace yli
         {
             this->set_default_values();
 
-            if (type == "std::shared_ptr<AnyStruct>")
+            if (type == "std::shared_ptr<yli::datatypes::AnyStruct>")
             {
                 this->type = yli::datatypes::ANY_STRUCT_SHARED_PTR;
                 this->set_value(value_string);
@@ -874,7 +874,7 @@ namespace yli
             // constructor.
             this->set_default_values();
 
-            if (type == "std::shared_ptr<AnyStruct>")
+            if (type == "std::shared_ptr<yli::datatypes::AnyStruct>")
             {
                 this->type = yli::datatypes::ANY_STRUCT_SHARED_PTR;
                 this->any_struct_shared_ptr = any_struct_shared_ptr;
