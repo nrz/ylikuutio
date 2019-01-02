@@ -166,6 +166,11 @@ namespace yli
                 const char* const char_end_string)
         {
             // This function copies characters from `src_data_pointer` until a character matches.
+            if (data_index >= data_string.size())
+            {
+                return;
+            }
+
             std::size_t original_data_index = data_index;
 
             while (data_index < data_string.size())
