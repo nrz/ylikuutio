@@ -1,9 +1,11 @@
 #include "any_struct.hpp"
+#include "code/ylikuutio/map/ylikuutio_map.hpp"
 
 // Include standard headers
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
+#include <vector>        // std::vector
 
 // `yli::datatypes::AnyStruct` is a `class` which functions as a generic replacement for `struct`s.
 // Further, it provides direct access to `AnyStruct`s which are children of current `AnyStruct`.
@@ -35,6 +37,11 @@ namespace yli
         void AnyStruct::erase_data(const std::string& target)
         {
             // TODO: implement this function!
+        }
+
+        std::vector<std::string> AnyStruct::get_fieldnames() const
+        {
+            return yli::map::get_keys(&this->values);
         }
     }
 }
