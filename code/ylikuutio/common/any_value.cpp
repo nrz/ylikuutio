@@ -123,6 +123,9 @@ namespace yli
             {
                 case (UNKNOWN):
                     return "unknown";
+                case (ANY_STRUCT_SHARED_PTR):
+                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->any_struct_shared_ptr.get());
+                    return std::string(buffer);
                 case (BOOL):
                     return (this->bool_value ? "true" : "false");
                 case (CHAR):
