@@ -7,6 +7,17 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
+// The hierachical 'struct' tree of Ylikuutio are based on classes
+// `yli::datatypes::AnyStruct` and `yli::datatypes::AnyValue`.
+//
+// The root of this tree is always `yli::datatypes::AnyStruct`.
+// Each `yli::datatypes::AnyStruct` has 0 or more `yli::datatypes::AnyValue`s as its named child nodes,
+// stored in `std::unordered_map` called `values`.  The name of the child node is stored as a key.
+//
+// Each child can therefore have any `datatype` supported by `yli::datatypes::AnyValue`.
+// If the `datatype` of a child is `ANY_STRUCT_SHARED_PTR`,
+// then the child itself contains `yli::datatypes::AnyStruct`.
+
 namespace yli
 {
     namespace datatypes
