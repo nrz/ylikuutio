@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/common/any_struct.hpp"
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
@@ -11,6 +12,17 @@ TEST(any_value_must_be_initialized_appropriately, no_value)
 {
     yli::datatypes::AnyValue no_value = yli::datatypes::AnyValue();
     ASSERT_EQ(no_value.type, yli::datatypes::UNKNOWN);
+}
+
+TEST(any_value_must_be_initialized_appropriately, any_struct_shader_ptr)
+{
+    std::shared_ptr<yli::datatypes::AnyStruct> any_struct_shared_ptr =
+        std::make_shared<yli::datatypes::AnyStruct>();
+    yli::datatypes::AnyValue any_struct_shared_ptr_any_value = yli::datatypes::AnyValue(any_struct_shared_ptr);
+    ASSERT_EQ(any_struct_shared_ptr_any_value.type, yli::datatypes::ANY_STRUCT_SHARED_PTR);
+    ASSERT_EQ(any_struct_shared_ptr_any_value.any_struct_shared_ptr, any_struct_shared_ptr);
+    ASSERT_EQ(std::strlen(any_struct_shared_ptr_any_value.get_datatype().c_str()), std::strlen("std::shared_ptr<yli::datatypes::AnyStruct>"));
+    ASSERT_EQ(std::strcmp(any_struct_shared_ptr_any_value.get_datatype().c_str(), "std::shared_ptr<yli::datatypes::AnyStruct>"), 0);
 }
 
 TEST(any_value_must_be_initialized_appropriately, bool_true)
