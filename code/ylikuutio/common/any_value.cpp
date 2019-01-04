@@ -4,6 +4,7 @@
 #endif
 
 #include "any_value.hpp"
+#include "any_struct.hpp"
 #include "spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
@@ -283,6 +284,20 @@ namespace yli
             {
                 case (UNKNOWN):
                     return false;
+                case (ANY_STRUCT_SHARED_PTR):
+                    {
+                        if (!yli::string::check_if_unsigned_integer_string(value_string))
+                        {
+                            return false;
+                        }
+
+                        // 0 means that the base is determined by the format given in string.
+                        // The size of the pointer is assumed to be 64 bits.
+                        std::shared_ptr<yli::datatypes::AnyStruct> any_struct_shared_ptr =
+                            std::make_shared<yli::datatypes::AnyStruct>();
+                        this->any_struct_shared_ptr = any_struct_shared_ptr;
+                        return true;
+                    }
                 case (BOOL):
                     {
                         if (value_string == "true") // Ylikuutio is case sensitive!
