@@ -16,6 +16,12 @@ namespace yli
         class AnyStruct
         {
             public:
+                // constructor.
+                AnyStruct();
+
+                // destructor.
+                ~AnyStruct();
+
                 void enter_data(const std::string& target, std::shared_ptr<yli::datatypes::AnyValue> any_value);
                 std::shared_ptr<yli::datatypes::AnyValue> read_data(const std::string& target);
                 void erase_data(const std::string& target);

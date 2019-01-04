@@ -23,6 +23,16 @@ namespace yli
     {
         class AnyValue;
 
+        AnyStruct::AnyStruct()
+        {
+            // constructor.
+        }
+
+        AnyStruct::~AnyStruct()
+        {
+            // destructor.
+        }
+
         void AnyStruct::enter_data(const std::string& target, std::shared_ptr<yli::datatypes::AnyValue> any_value)
         {
             // TODO: implement this function!
