@@ -55,6 +55,8 @@ namespace yli
             {
                 case (UNKNOWN):
                     return "unknown";
+                case (ANY_STRUCT_SHARED_PTR):
+                    return "std::shared_ptr<yli::datatypes::AnyStruct>";
                 case (BOOL):
                     return "bool";
                 case (CHAR):
