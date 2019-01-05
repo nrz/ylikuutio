@@ -370,6 +370,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/command_line/command_line_master.hpp
 
     # common, in alphabetical order
+    code/ylikuutio/common/any_struct.cpp
+    code/ylikuutio/common/any_struct.hpp
     code/ylikuutio/common/any_value.cpp
     code/ylikuutio/common/any_value.hpp
     code/ylikuutio/common/globals.hpp
@@ -719,6 +721,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/callback_system/callback_parameter.hpp
         code/ylikuutio/command_line/command_line_master.cpp
         code/ylikuutio/command_line/command_line_master.hpp
+        code/ylikuutio/common/any_struct.cpp
+        code/ylikuutio/common/any_struct.hpp
         code/ylikuutio/common/any_value.cpp
         code/ylikuutio/common/any_value.hpp
         code/ylikuutio/common/globals.hpp
@@ -777,6 +781,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/triangulation/vertices.hpp
         )
     set(UNIT_TESTS
+        code/ylikuutio/tests/googletest/test_any_struct.cpp
         code/ylikuutio/tests/googletest/test_any_value.cpp
         code/ylikuutio/tests/googletest/test_ascii_grid_loader.cpp
         # code/ylikuutio/tests/googletest/test_asio.cpp

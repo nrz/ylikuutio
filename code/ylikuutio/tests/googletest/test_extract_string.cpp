@@ -6,6 +6,102 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
+TEST(extract_string_from_memory, nothing_must_be_extracted_when_data_string_is_empty_string)
+{
+    const std::string data_string = "";
+    std::size_t data_index = 0;
+    std::string dest_string;
+    const char separator = 'a';
+    yli::string::extract_string(data_string, data_index, dest_string, separator);
+    ASSERT_EQ(dest_string.size(), 0);
+}
+
+TEST(extract_string_from_memory, nothing_must_be_extracted_when_separator_matches_1st_char_of_data_string)
+{
+    const std::string data_string = "a";
+    std::size_t data_index = 0;
+    std::string dest_string;
+    const char separator = 'a';
+    yli::string::extract_string(data_string, data_index, dest_string, separator);
+    ASSERT_EQ(dest_string.size(), 0);
+}
+
+TEST(extract_string_from_memory, 1_char_must_be_extracted_when_separator_does_not_match_and_data_string_size_is_1)
+{
+    const std::string data_string = "a";
+    std::size_t data_index = 0;
+    std::string dest_string;
+    const char separator = 'b';
+    yli::string::extract_string(data_string, data_index, dest_string, separator);
+    ASSERT_EQ(dest_string.size(), 1);
+    ASSERT_EQ(dest_string[0], 'a');
+}
+
+TEST(extract_string_from_memory, 2_chars_must_be_extracted_when_separator_does_not_match_and_data_string_size_is_2)
+{
+    const std::string data_string = "ab";
+    std::size_t data_index = 0;
+    std::string dest_string;
+    const char separator = 'c';
+    yli::string::extract_string(data_string, data_index, dest_string, separator);
+    ASSERT_EQ(dest_string.size(), 2);
+    ASSERT_EQ(dest_string[0], 'a');
+    ASSERT_EQ(dest_string[1], 'b');
+}
+
+TEST(extract_string_from_memory, 1_char_must_be_extracted_when_separator_matches_2nd_char_of_data_string)
+{
+    const std::string data_string = "ab";
+    std::size_t data_index = 0;
+    std::string dest_string;
+    const char separator = 'b';
+    yli::string::extract_string(data_string, data_index, dest_string, separator);
+    ASSERT_EQ(dest_string.size(), 1);
+    ASSERT_EQ(dest_string[0], 'a');
+}
+
+TEST(extract_string_from_memory, 2_char_must_be_extracted_when_separator_matches_3rd_char_of_data_string)
+{
+    const std::string data_string = "abc";
+    std::size_t data_index = 0;
+    std::string dest_string;
+    const char separator = 'c';
+    yli::string::extract_string(data_string, data_index, dest_string, separator);
+    ASSERT_EQ(dest_string.size(), 2);
+    ASSERT_EQ(dest_string[0], 'a');
+    ASSERT_EQ(dest_string[1], 'b');
+}
+
+TEST(extract_string_from_memory, nothing_must_be_extracted_when_data_string_is_empty_and_data_index_is_out_of_bounds)
+{
+    const std::string data_string = "";
+    std::size_t data_index = 1;
+    std::string dest_string;
+    const char separator = 'a';
+    yli::string::extract_string(data_string, data_index, dest_string, separator);
+    ASSERT_EQ(dest_string.size(), 0);
+}
+
+TEST(extract_string_from_memory, nothing_must_be_extracted_when_data_string_is_1_char_and_data_index_is_out_of_bounds)
+{
+    const std::string data_string = "a";
+    std::size_t data_index = 2;
+    std::string dest_string;
+    const char separator = 'b';
+    yli::string::extract_string(data_string, data_index, dest_string, separator);
+    ASSERT_EQ(dest_string.size(), 0);
+}
+
+TEST(extract_string_from_memory, nothing_must_be_extracted_when_data_string_is_2_chars_and_data_index_is_out_of_bounds)
+{
+    const std::string data_string = "ab";
+    std::size_t data_index = 2;
+    std::string dest_string;
+    const char separator = 'c';
+    yli::string::extract_string(data_string, data_index, dest_string, separator);
+    ASSERT_EQ(dest_string.size(), 0);
+}
+
 TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_empty_string)
 {
     char text[] = "";

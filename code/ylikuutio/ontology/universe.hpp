@@ -37,6 +37,16 @@
 #include <string>        // std::string
 #include <vector>        // std::vector
 
+// The ontological hierachy of Ylikuutio is based on composition.
+//
+// Each ontological class inherits `yli::ontology::Entity` either directly or indirectly.
+// See `doc/class_diagram.tex` for a partial class diagram.
+// Inheriting `yli::ontology::Entity` enables the use of virtual functions common for all ontological entities.
+//
+// The recommended way to create entities in a game or simulation is to first create `yli::ontology::Universe`
+// and then get a `yli::ontology::EntityFactory*` pointer using `Universe::get_entity_factory` and then
+// create all the rest entities using the member functions of that `EntityFactory`.
+//
 // `Universe`, `Scene`, `Shader`, `Material`, `Species`, `Object`.
 // `Universe`, `Scene`, `Shader`, `Material`, `VectorFont`, `Glyph`, `Object`.
 // `Universe` must be created before any `Scene`. `parent` must be given to each `Scene`.
