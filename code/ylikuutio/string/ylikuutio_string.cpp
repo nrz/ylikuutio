@@ -65,6 +65,20 @@ namespace yli
         }
 
         void extract_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                std::string& dest_string,
+                const char separator)
+        {
+            const char char_end_string[2] = { separator, '\0' };
+            yli::string::extract_string_with_several_endings(
+                    data_string,
+                    data_index,
+                    dest_string,
+                    char_end_string);
+        }
+
+        void extract_string(
                 const char* const src_base_pointer,
                 char*& src_data_pointer,
                 const std::size_t src_data_size,
@@ -166,6 +180,11 @@ namespace yli
                 const char* const char_end_string)
         {
             // This function copies characters from `src_data_pointer` until a character matches.
+            if (data_index >= data_string.size())
+            {
+                return;
+            }
+
             std::size_t original_data_index = data_index;
 
             while (data_index < data_string.size())

@@ -12,6 +12,7 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 
@@ -43,6 +44,7 @@ namespace yli
         enum datatype
         {
             UNKNOWN,
+            ANY_STRUCT_SHARED_PTR,
             BOOL,
             CHAR,
             FLOAT,
@@ -72,7 +74,9 @@ namespace yli
             GLM_VEC4_POINTER
         };
 
-        typedef class AnyValue
+        class AnyStruct;
+
+        class AnyValue
         {
             public:
                 std::string get_datatype() const;
@@ -85,6 +89,7 @@ namespace yli
 
                 AnyValue(const std::string& type, const std::string& value_string);
                 AnyValue();
+                AnyValue(std::shared_ptr<yli::datatypes::AnyStruct> any_struct_shared_ptr);
                 AnyValue(const bool bool_value);
                 AnyValue(const char char_value);
                 AnyValue(const float float_value);
@@ -113,6 +118,7 @@ namespace yli
                 AnyValue(glm::vec3* const glm_vec3_pointer);
                 AnyValue(glm::vec4* const glm_vec4_pointer);
 
+                AnyValue(const std::string& type, std::shared_ptr<yli::datatypes::AnyStruct> any_struct_shared_ptr);
                 AnyValue(const std::string& type, const bool bool_value);
                 AnyValue(const std::string& type, const char char_value);
                 AnyValue(const std::string& type, const float float_value);
@@ -142,6 +148,7 @@ namespace yli
                 AnyValue(const std::string& type, glm::vec4* const glm_vec3_pointer);
 
                 int type;
+                std::shared_ptr<yli::datatypes::AnyStruct> any_struct_shared_ptr;
 
                 union
                 {
@@ -176,7 +183,7 @@ namespace yli
 
             private:
                 void set_default_values();
-        } AnyValue;
+        };
     }
 }
 

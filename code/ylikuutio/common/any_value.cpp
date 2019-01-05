@@ -4,6 +4,7 @@
 #endif
 
 #include "any_value.hpp"
+#include "any_struct.hpp"
 #include "spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
@@ -55,6 +56,8 @@ namespace yli
             {
                 case (UNKNOWN):
                     return "unknown";
+                case (ANY_STRUCT_SHARED_PTR):
+                    return "std::shared_ptr<yli::datatypes::AnyStruct>";
                 case (BOOL):
                     return "bool";
                 case (CHAR):
@@ -121,6 +124,9 @@ namespace yli
             {
                 case (UNKNOWN):
                     return "unknown";
+                case (ANY_STRUCT_SHARED_PTR):
+                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->any_struct_shared_ptr.get());
+                    return std::string(buffer);
                 case (BOOL):
                     return (this->bool_value ? "true" : "false");
                 case (CHAR):
@@ -278,6 +284,20 @@ namespace yli
             {
                 case (UNKNOWN):
                     return false;
+                case (ANY_STRUCT_SHARED_PTR):
+                    {
+                        if (!yli::string::check_if_unsigned_integer_string(value_string))
+                        {
+                            return false;
+                        }
+
+                        // 0 means that the base is determined by the format given in string.
+                        // The size of the pointer is assumed to be 64 bits.
+                        std::shared_ptr<yli::datatypes::AnyStruct> any_struct_shared_ptr =
+                            std::make_shared<yli::datatypes::AnyStruct>();
+                        this->any_struct_shared_ptr = any_struct_shared_ptr;
+                        return true;
+                    }
                 case (BOOL):
                     {
                         if (value_string == "true") // Ylikuutio is case sensitive!
@@ -687,6 +707,7 @@ namespace yli
 
         void AnyValue::set_default_values()
         {
+            this->any_struct_shared_ptr = nullptr;
             this->type = yli::datatypes::UNKNOWN;
         }
 
@@ -694,6 +715,7 @@ namespace yli
         {
             // copy constructor.
             this->type = original.type;
+            this->any_struct_shared_ptr = original.any_struct_shared_ptr;
             this->bool_value = original.bool_value;
             this->char_value = original.char_value;
             this->float_value = original.float_value;
@@ -727,7 +749,12 @@ namespace yli
         {
             this->set_default_values();
 
-            if (type == "bool")
+            if (type == "std::shared_ptr<yli::datatypes::AnyStruct>")
+            {
+                this->type = yli::datatypes::ANY_STRUCT_SHARED_PTR;
+                this->set_value(value_string);
+            }
+            else if (type == "bool")
             {
                 this->type = yli::datatypes::BOOL;
                 this->set_value(value_string);
@@ -852,6 +879,26 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
+        }
+
+        AnyValue::AnyValue(std::shared_ptr<yli::datatypes::AnyStruct> any_struct_shared_ptr)
+        {
+            // constructor.
+            this->set_default_values();
+            this->type = yli::datatypes::ANY_STRUCT_SHARED_PTR;
+            this->any_struct_shared_ptr = any_struct_shared_ptr;
+        }
+
+        AnyValue::AnyValue(const std::string& type, std::shared_ptr<yli::datatypes::AnyStruct> any_struct_shared_ptr)
+        {
+            // constructor.
+            this->set_default_values();
+
+            if (type == "std::shared_ptr<yli::datatypes::AnyStruct>")
+            {
+                this->type = yli::datatypes::ANY_STRUCT_SHARED_PTR;
+                this->any_struct_shared_ptr = any_struct_shared_ptr;
+            }
         }
 
         AnyValue::AnyValue(const bool bool_value)
