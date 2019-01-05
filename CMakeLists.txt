@@ -781,6 +781,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/triangulation/vertices.hpp
         )
     set(UNIT_TESTS
+        code/ylikuutio/tests/googletest/test_any_struct.cpp
         code/ylikuutio/tests/googletest/test_any_value.cpp
         code/ylikuutio/tests/googletest/test_ascii_grid_loader.cpp
         # code/ylikuutio/tests/googletest/test_asio.cpp
