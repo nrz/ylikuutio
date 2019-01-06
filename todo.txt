@@ -5,7 +5,6 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the development of Ylikuutio:
-[ ] Implement `AnyStruct`.
 [ ] Implement `AnyValueEntity : public AnyValue, public Entity`.
 [ ] Implement `AnyStructEntity : public AnyStruct, public Entity`.
 [ ] Write code to convert ASCII grid files (height maps) to binary FBX files, storing also interpolated vertices, UVs, and normals.
@@ -122,3 +121,4 @@ Ready:
 [x] Evaluate s7 Scheme. https://ccrma.stanford.edu/software/snd/snd/s7.html
 [x] Write code to save screenshots into a raw data file which can be opened eg. with GIMP.
 [x] Add variable `text_size` (affects size of console text and other texts printed on screen).
+[x] Implement `AnyStruct`.
