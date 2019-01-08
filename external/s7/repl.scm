@@ -1,3 +1,5 @@
+;;; This file has been modified by Antti Nuortimo.
+;;;
 ;;; a repl
 ;;;
 ;;; (load "repl.scm") ((*repl* 'run))
@@ -1470,7 +1472,7 @@
 ;;; debug-help can be set running via: (((*repl* 'repl-let) 'debug-help))
 
 (define-expansion (repl-debug)
-  `(with-let (inlet :orig (curlet) :line ,(port-line-number) :func __func__)
+  `(with-let (inlet :orig (curlet) :line ,(port-line-number) :func __s7_func__)
      (format () "line ~D: ~A~{~^ ~A~}~%" 
 	     line (if (pair? func) (car func) func)
 	     (reverse

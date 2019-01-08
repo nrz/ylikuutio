@@ -1,3 +1,5 @@
+/* This file has been modified by Antti Nuortimo. */
+
 #ifndef S7_H
 #define S7_H
 
@@ -1094,7 +1096,7 @@ typedef s7_double s7_Double;
  * 31-Jul:    *error-hook*.
  * 30-Jul:    changed backtrace handling: removed backtrace stuff, added stacktrace.
  *            removed gc-verbose and load-verbose replaced by *load-hook*.
- * 23-Jul:    __func__.
+ * 23-Jul:    __s7_func__.
  * 20-Jul:    trace and untrace.
  * 14-Jul:    replaced s7_make_closure_star with s7_define_function_star.
  * 29-Jun:    s7_format declaration.

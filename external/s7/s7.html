@@ -1037,7 +1037,7 @@ The calling environment itself is (outlet (curlet)) from within a bacro, so
 <pre class="indented">
 (define-bacro (holler)
   `(format *stderr* "(~S~{ ~S ~S~^~})~%" 
-	   (let ((f __func__))
+	   (let ((f __s7_func__))
 	     (if (pair? f) (car f) f))
 	   (map (lambda (slot)
 		  (values (symbol-&gt;keyword (car slot)) (cdr slot)))		  
@@ -5111,7 +5111,7 @@ The reader does know about global variables, so:
 (define-expansion (assert assertion)
   (if *debugging*          ; or maybe better, (eq? (symbol-&gt;value '*debugging*) #t)
       `(unless ,assertion
-	 (format *stderr* "~A: ~A failed~%" __func__ ',assertion))
+	 (format *stderr* "~A: ~A failed~%" __s7_func__ ',assertion))
       (values)))
 </pre>
 
@@ -5602,11 +5602,11 @@ Better ideas are always welcome!
 <li>*unbound-variable-hook* *missing-close-paren-hook* *load-hook* *error-hook* *read-error-hook* *rootlet-redefinition-hook*
 </ul>
 
-<p>__func__ is the name (or name and location) of the function currently being called, as in C.
-<code>(symbol_value __func__)</code> is the current function, so this innocuous looking code:
+<p>__s7_func__ is the name (or name and location) of the function currently being called, as in C.
+<code>(symbol_value __s7_func__)</code> is the current function, so this innocuous looking code:
 </p>
 <pre>
-(define (func p) (call-with-output-string (symbol-&gt;value __func__)))
+(define (func p) (call-with-output-string (symbol-&gt;value __s7_func__)))
 </pre>
 <p>can produce an infinite recursion!
 </p>
