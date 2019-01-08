@@ -6,19 +6,31 @@ add_definitions(
     -DTW_STATIC
     -DTW_NO_LIB_PRAGMA
     -DTW_NO_DIRECT3D
-    -DGLEW_STATIC
     -D_CRT_SECURE_NO_WARNINGS
     )
+
+if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
+    # do not try co compile GLEW when targeting Android.
+    add_definitions(
+        -DGLEW_STATIC
+        )
+endif()
 
 include_directories(
     # asio/asio/include/
     assimp/include/
     FastNoiseSIMD/
-    glew-2.0.0/include/
     glm/
     OpenFBX/src/
     pugixml/src/
     )
+
+if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
+    # do not try co compile GLEW when targeting Android.
+    include_directories(
+        glew-2.0.0/include/
+        )
+endif()
 
 # Compile external dependencies
 
@@ -207,22 +219,24 @@ endif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
 ### GLEW ###
 
-set(GLEW_SOURCE
-    glew-2.0.0/src/glew.c
-    )
+if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
+    set(GLEW_SOURCE
+        glew-2.0.0/src/glew.c
+        )
 
-set(GLEW_HEADERS
-    )
+    set(GLEW_HEADERS
+        )
 
-add_library(GLEW_200 STATIC
-    ${GLEW_SOURCE}
-    ${GLEW_INCLUDE}
-    )
+    add_library(GLEW_200 STATIC
+        ${GLEW_SOURCE}
+        ${GLEW_INCLUDE}
+        )
 
-target_link_libraries(GLEW_200
-    ${OPENGL_LIBRARY}
-    ${EXTRA_LIBS}
-    )
+    target_link_libraries(GLEW_200
+        ${OPENGL_LIBRARY}
+        ${EXTRA_LIBS}
+        )
+endif()
 
 add_library(s7 STATIC
     s7/mus-config.h

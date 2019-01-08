@@ -1,3 +1,5 @@
+/* This file has been modified by Antti Nuortimo. */
+
 /* libgtk_s7.c */
 
 #include <stdlib.h>
@@ -8,7 +10,7 @@
 #include "s7.h"
 
 #if ((!__NetBSD__) && ((_MSC_VER) || (!defined(__STC__)) || (defined(__STDC_VERSION__) && (__STDC_VERSION__ < 199901L))))
-  #define __func__ __FUNCTION__
+  #define __s7_func__ __FUNCTION__
 #endif
 
 #include <string.h>

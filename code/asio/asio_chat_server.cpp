@@ -9,6 +9,16 @@
 #include <vector>   // std::vector
 
 // based on http://think-async.com/Asio/asio-1.10.6/doc/asio/tutorial/tutdaytime2.html
+//
+// server.cpp
+// ~~~~~~~~~~
+//
+// Copyright (c) 2003-2015 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+// This file has been modified by Antti Nuortimo.
 
 std::string make_string(asio::streambuf& streambuf)
 {

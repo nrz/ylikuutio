@@ -1,3 +1,5 @@
+;; This file has been modified by Antti Nuortimo.
+;;
 ;; some useful (or at least amusing) functions and macros
 
 (provide 'stuff.scm)
@@ -1733,7 +1735,7 @@ Unlike full-find-if, safe-find-if can handle any circularity in the sequences.")
 			     (format (Display-port) "(~A" ',',func)                ; show args, ruthlessly abbreviated
 			     (((funclet Display) 'display-let) (outlet (outlet (curlet))) ,',e)
 			     (format (Display-port) ")")
-			     (let ((caller (eval '__func__ ,',e)))                 ; show caller 
+			     (let ((caller (eval '__s7_func__ ,',e)))                 ; show caller 
 			       (if (not (eq? caller #<undefined>))
 				   (format (Display-port) " ;called from ~A" caller)))
 			     (newline (Display-port))

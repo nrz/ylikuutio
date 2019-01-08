@@ -105,13 +105,19 @@ include_directories(
     # external/asio/asio/include/
     external/assimp/include/
     external/FastNoiseSIMD/
-    external/glew-2.0.0/include/
     external/glm/
     external/OpenFBX/src/
     external/pugixml/src/
     external/s7/
     .
     )
+
+if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
+    # do not try co compile GLEW when targeting Android.
+    include_directories(
+        external/glew-2.0.0/include/
+        )
+endif()
 
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     include_directories(
@@ -228,12 +234,19 @@ endif()
 
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
-    GLEW_200
     pugixml
     miniz
     OpenFBX
     s7
     )
+
+if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
+    # do not try co compile GLEW when targeting Android.
+    set(ALL_LIBS
+        ${ALL_LIBS}
+        GLEW_200
+        )
+endif()
 
 if (COMPILE_SFML_FROM_SOURCE)
     set(ALL_LIBS
@@ -265,9 +278,15 @@ add_definitions(
     -DTW_STATIC
     -DTW_NO_LIB_PRAGMA
     -DTW_NO_DIRECT3D
-    -DGLEW_STATIC
     -D_CRT_SECURE_NO_WARNINGS
     )
+
+if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
+    # do not try co compile GLEW when targeting Android.
+    add_definitions(
+        -DGLEW_STATIC
+        )
+endif()
 
 # Shaders.
 configure_file(code/ylikuutio/shaders/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)

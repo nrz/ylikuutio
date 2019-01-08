@@ -1,3 +1,5 @@
+;;; This file has been modified by Antti Nuortimo.
+;;;
 ;;; lint for s7 scheme
 ;;;
 ;;; (lint "file.scm") checks file.scm for infelicities
@@ -25,7 +27,7 @@
 ;;;   else is evaluated in cond
 ;;;   => is evaluated in both cond and case, so both are better left alone (see s7test.scm for examples)
 ;;;     at the top-level, r7rs deems it an error to change their value
-;;;   also '__func__, '+signature+ and '+documentation+ as local vars could cause confusion
+;;;   also '__s7_func__, '+signature+ and '+documentation+ as local vars could cause confusion
 
 (define *report-built-in-functions-used-as-variables* #f) ; string and length are the most common cases
 (define *report-forward-functions* #f)                    ; functions used before being defined
