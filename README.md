@@ -10,7 +10,10 @@ A hobby project of mine. Work in progress.
 ## License
 Ylikuutio is under The GNU Affero General Public License 3,
 or (at your option) any later version. See COPYING file.
-All my code copyright (C) 2015-2018 Antti Nuortimo.
+All my code copyright (C) 2015-2019 Antti Nuortimo.
+An exception in licensing of Ylikuutio code are
+Asio example source code files modified by me, which have
+their original Boost Software License - Version 1.0.
 
 ## Overview
 Ylikuutio is a 3D game engine designed for 3D games and simulations.
