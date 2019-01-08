@@ -18,7 +18,6 @@
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
-#include <stdlib.h> // free, malloc
 #include <string>   // std::string
 
 namespace yli
@@ -207,12 +206,12 @@ namespace yli
 
             /* how big is it going to be including all mipmaps? */
             const std::size_t bufsize = mipMapCount > 1 ? 2 * static_cast<std::size_t>(linearSize) : linearSize;
-            uint8_t* const buffer = (uint8_t*) malloc(bufsize * sizeof(uint8_t));
+            uint8_t* const buffer = new uint8_t[bufsize];
 
             if (std::fread(buffer, 1, bufsize, fp) != bufsize)
             {
                 std::cerr << "Error while reading " << filename << "\n";
-                free(buffer);
+                delete buffer;
                 std::fclose(fp);
                 return false;
             }
@@ -233,7 +232,7 @@ namespace yli
                     format = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
                     break;
                 default:
-                    free(buffer);
+                    delete buffer;
                     return false;
             }
 
@@ -278,7 +277,8 @@ namespace yli
                     temp_height = 1;
                 }
             }
-            free(buffer);
+
+            delete buffer;
 
             return true;
         }
