@@ -600,6 +600,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/opengl/opengl.hpp
     code/ylikuutio/opengl/vboindexer.cpp
     code/ylikuutio/opengl/vboindexer.hpp
+    code/ylikuutio/opengl/ylikuutio_glew.hpp
 
     # scheme, in alphabetical order.
     code/ylikuutio/scheme/scheme_master.cpp
