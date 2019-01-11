@@ -450,7 +450,7 @@ namespace yli
                 return nullptr;
             }
 
-            GLclampf red = static_cast<GLclampf>(red_any_value->float_value);
+            float red = red_any_value->float_value;
 
             // green.
             std::shared_ptr<yli::datatypes::AnyValue> green_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["green"]->setting_value);
@@ -460,7 +460,7 @@ namespace yli
                 return nullptr;
             }
 
-            GLclampf green = static_cast<GLclampf>(green_any_value->float_value);
+            float green = green_any_value->float_value;
 
             // blue.
             std::shared_ptr<yli::datatypes::AnyValue> blue_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["blue"]->setting_value);
@@ -470,7 +470,7 @@ namespace yli
                 return nullptr;
             }
 
-            GLclampf blue = static_cast<GLclampf>(blue_any_value->float_value);
+            float blue = blue_any_value->float_value;
 
             // alpha.
             std::shared_ptr<yli::datatypes::AnyValue> alpha_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["alpha"]->setting_value);
@@ -480,7 +480,7 @@ namespace yli
                 return nullptr;
             }
 
-            GLclampf alpha = static_cast<GLclampf>(alpha_any_value->float_value);
+            float alpha = alpha_any_value->float_value;
 
             yli::opengl::set_background_color(red, green, blue, alpha);
 

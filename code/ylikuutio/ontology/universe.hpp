@@ -577,10 +577,10 @@ namespace yli
                 bool can_toggle_help_mode;
                 bool can_display_help_screen;
 
-                GLclampf background_red;
-                GLclampf background_green;
-                GLclampf background_blue;
-                GLclampf background_alpha;
+                float background_red;
+                float background_green;
+                float background_blue;
+                float background_alpha;
 
             private:
                 bool compute_and_update_matrices_from_inputs();

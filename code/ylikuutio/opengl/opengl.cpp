@@ -76,11 +76,7 @@ namespace yli
 
         void set_background_color(const float red, const float green, const float blue, const float alpha)
         {
-            glClearColor(
-                    static_cast<GLclampf>(red),
-                    static_cast<GLclampf>(green),
-                    static_cast<GLclampf>(blue),
-                    static_cast<GLclampf>(alpha));
+            glClearColor(red, green, blue, alpha);
         }
 
         void set_filtering_parameters()
