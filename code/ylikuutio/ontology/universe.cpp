@@ -820,7 +820,7 @@ namespace yli
             return this->aspect_ratio;
         }
 
-        GLfloat Universe::get_initialFoV() const
+        float Universe::get_initialFoV() const
         {
             return this->initialFoV;
         }

@@ -119,14 +119,14 @@ namespace yli
                 this->cartesian_coordinates.y -= this->universe->fall_speed;
             }
 
-            GLfloat FoV = this->universe->get_initialFoV();
+            float FoV = this->universe->get_initialFoV();
 
             // adjust position according to the ground.
             if (!this->universe->is_flight_mode_in_use)
             {
                 if (this->universe->get_terrain_species() != nullptr)
                 {
-                    GLfloat ground_y = yli::ontology::get_floor_level(
+                    float ground_y = yli::ontology::get_floor_level(
                             static_cast<yli::ontology::Species*>(this->universe->get_terrain_species()),
                             this->cartesian_coordinates);
 
@@ -165,7 +165,7 @@ namespace yli
                     DEGREES_TO_RADIANS(FoV),
                     this->universe->get_aspect_ratio(),
                     0.001f,
-                    5000.0f + 2.0f * static_cast<GLfloat>(this->universe->get_planet_radius()));
+                    5000.0f + 2.0f * this->universe->get_planet_radius());
             // Camera matrix
             this->view_matrix = glm::lookAt(
                     camera_cartesian_coordinates,                   // Camera is here

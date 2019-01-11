@@ -96,7 +96,7 @@ namespace yli
                     friend void yli::ontology::render_species_or_glyph(T1 species_or_glyph_pointer);
 
             protected:
-                GLfloat initial_rotate_angle;            // initial rotate angle.
+                float initial_rotate_angle;              // initial rotate angle.
                 glm::vec3 initial_rotate_vector;         // initial rotate vector.
 
                 std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.

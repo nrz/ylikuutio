@@ -501,7 +501,7 @@ namespace yli
                 void set_view_matrix(glm::mat4& view_matrix);
 
                 float get_aspect_ratio() const;
-                GLfloat get_initialFoV() const;
+                float get_initialFoV() const;
 
                 // Public callbacks.
 
@@ -623,7 +623,7 @@ namespace yli
                 glm::mat4 current_camera_projection_matrix;
                 glm::mat4 current_camera_view_matrix;
                 float aspect_ratio;   // at the moment all cameras use the same aspect ratio.
-                GLfloat initialFoV;   // at the moment all cameras use the same FoV.
+                float initialFoV;     // at the moment all cameras use the same FoV.
 
                 // Variables related to the fonts and texts used.
                 std::size_t text_size;
