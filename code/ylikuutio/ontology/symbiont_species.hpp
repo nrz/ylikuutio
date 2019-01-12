@@ -12,10 +12,7 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -27,6 +24,7 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <queue>    // std::queue
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -48,7 +46,7 @@ namespace yli
                 virtual ~SymbiontSpecies();
 
                 std::size_t get_indices_size() const;
-                GLuint get_lightID() const;
+                uint32_t get_lightID() const;
 
                 // constructor.
                 SymbiontSpecies(yli::ontology::Universe* const universe, const SpeciesStruct& species_struct)
@@ -85,7 +83,7 @@ namespace yli
                     this->lightID = glGetUniformLocation(this->shader->get_programID(), "LightPosition_worldspace");
 
                     // water level.
-                    GLuint water_level_uniform_location = glGetUniformLocation(this->shader->get_programID(), "water_level");
+                    uint32_t water_level_uniform_location = glGetUniformLocation(this->shader->get_programID(), "water_level");
 
                     const yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(this->shader->get_parent());
                     glUniform1f(water_level_uniform_location, scene->get_water_level());
@@ -115,7 +113,7 @@ namespace yli
 
                     glGenBuffers(1, &this->elementbuffer);
                     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->elementbuffer);
-                    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0] , GL_STATIC_DRAW);
+                    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(uint32_t), &this->indices[0] , GL_STATIC_DRAW);
 
                     // TODO: Compute the vertex graph of this `SymbiontSpecies` to enable object vertex modification!
 

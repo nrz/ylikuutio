@@ -6,16 +6,11 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <map>      // std::map
+#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
 // Returns true iif v1 can be considered equal to v2
@@ -34,7 +29,7 @@ bool getSimilarVertexIndex(
         std::vector<glm::vec3>& out_vertices,
         std::vector<glm::vec2>& out_UVs,
         std::vector<glm::vec3>& out_normals,
-        GLuint &result)
+        uint32_t &result)
 {
     // Lame linear search
     for (std::size_t i = 0; i < out_vertices.size(); i++)
@@ -75,10 +70,10 @@ namespace yli
 
         bool getSimilarVertexIndex_fast(
                 const PackedVertex& packed,
-                const std::map<PackedVertex, GLuint>& VertexToOutIndex,
-                GLuint& result)
+                const std::map<PackedVertex, uint32_t>& VertexToOutIndex,
+                uint32_t& result)
         {
-            const std::map<PackedVertex, GLuint>::const_iterator it = VertexToOutIndex.find(packed);
+            const std::map<PackedVertex, uint32_t>::const_iterator it = VertexToOutIndex.find(packed);
             if (it == VertexToOutIndex.end())
             {
                 return false;
@@ -94,12 +89,12 @@ namespace yli
                 const std::vector<glm::vec3>& in_vertices,
                 const std::vector<glm::vec2>& in_UVs,
                 const std::vector<glm::vec3>& in_normals,
-                std::vector<GLuint>& out_indices,
+                std::vector<uint32_t>& out_indices,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals)
         {
-            std::map<PackedVertex, GLuint> VertexToOutIndex;
+            std::map<PackedVertex, uint32_t> VertexToOutIndex;
 
             // For each input vertex
             for (std::size_t i = 0; i < in_vertices.size() && i < in_UVs.size() && i < in_normals.size(); i++)
@@ -107,7 +102,7 @@ namespace yli
                 PackedVertex packed = { in_vertices[i], in_UVs[i], in_normals[i] };
 
                 // Try to find a similar vertex in out_XXXX
-                GLuint index;
+                uint32_t index;
                 bool found = getSimilarVertexIndex_fast(packed, VertexToOutIndex, index);
 
                 if (found)
@@ -121,7 +116,7 @@ namespace yli
                     out_vertices.push_back(in_vertices[i]);
                     out_UVs.push_back(in_UVs[i]);
                     out_normals.push_back(in_normals[i]);
-                    GLuint newindex = (GLuint) out_vertices.size() - 1;
+                    uint32_t newindex = (uint32_t) out_vertices.size() - 1;
                     out_indices.push_back(newindex);
                     VertexToOutIndex[packed] = newindex;
                 }

@@ -1,8 +1,5 @@
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
+#ifndef __INPUT_HPP_INCLUDED
+#define __INPUT_HPP_INCLUDED
 
 #include "SDL.h"
 
@@ -25,3 +22,5 @@ namespace yli
         void enable_relative_mouse_mode();
     }
 }
+
+#endif

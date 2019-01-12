@@ -1,8 +1,5 @@
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
+#ifndef __OPENGL_HPP_INCLUDED
+#define __OPENGL_HPP_INCLUDED
 
 #include "SDL.h"
 
@@ -28,3 +25,5 @@ namespace yli
         bool has_arb_fragment_shader();
     }
 }
+
+#endif

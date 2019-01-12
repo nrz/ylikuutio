@@ -8,15 +8,13 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
 #include <cstddef>   // std::size_t
-#include <string>    // std::string
 #include <queue>     // std::queue
+#include <stdint.h>  // uint32_t etc.
+#include <string>    // std::string
 #include <vector>    // std::vector
 
 namespace yli
@@ -128,7 +126,7 @@ namespace yli
                 std::size_t get_text_size() const;
                 std::size_t get_font_size() const;
                 const std::string& get_font_texture_file_format() const;
-                GLuint get_programID() const;
+                uint32_t get_programID() const;
 
                 void prepare_to_print() const;
 
@@ -166,15 +164,15 @@ namespace yli
                 std::queue<std::size_t> free_text2D_ID_queue;
                 std::size_t number_of_text2Ds;
 
-                GLuint texture;      // Texture containing the glyphs, reterned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
-                GLuint vertexbuffer; // Buffer containing the vertices
-                GLuint uvbuffer;     // Buffer containing the UVs
-                GLuint programID;    // The `programID` of the shader used to display the text, returned by `load_shaders`.
-                GLuint vertex_position_in_screenspaceID; // Location of the program's `vertexPosition_screenspace` attribute.
-                GLuint vertexUVID;                       // Location of the program's `vertexUV` attribute.
-                GLuint Text2DUniformID;                  // Location of the program's texture attribute.
-                GLuint screen_width_uniform_ID;          // Location of the program's window width uniform.
-                GLuint screen_height_uniform_ID;         // Location of the program's window height uniform.
+                uint32_t texture;      // Texture containing the glyphs, reterned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
+                uint32_t vertexbuffer; // Buffer containing the vertices
+                uint32_t uvbuffer;     // Buffer containing the UVs
+                uint32_t programID;    // The `programID` of the shader used to display the text, returned by `load_shaders`.
+                uint32_t vertex_position_in_screenspaceID; // Location of the program's `vertexPosition_screenspace` attribute.
+                uint32_t vertexUVID;                       // Location of the program's `vertexUV` attribute.
+                uint32_t Text2DUniformID;                  // Location of the program's texture attribute.
+                uint32_t screen_width_uniform_ID;          // Location of the program's window width uniform.
+                uint32_t screen_height_uniform_ID;         // Location of the program's window height uniform.
 
                 std::string font_texture_file_format;
 

@@ -1,10 +1,7 @@
 #include "opengl.hpp"
 
 // Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 #include "SDL.h"
 
@@ -79,11 +76,7 @@ namespace yli
 
         void set_background_color(const float red, const float green, const float blue, const float alpha)
         {
-            glClearColor(
-                    static_cast<GLclampf>(red),
-                    static_cast<GLclampf>(green),
-                    static_cast<GLclampf>(blue),
-                    static_cast<GLclampf>(alpha));
+            glClearColor(red, green, blue, alpha);
         }
 
         void set_filtering_parameters()

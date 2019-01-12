@@ -7,6 +7,9 @@
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
+// Include GLEW
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -16,6 +19,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli
@@ -274,14 +278,14 @@ namespace yli
             yli::ontology::Model* glyph_model = this->glyph;
             yli::ontology::Model* species_parent_model = this->species_parent;
             yli::ontology::Model* parent_model = (this->is_character ? glyph_model : species_parent_model);
-            GLuint vertexbuffer = parent_model->get_vertexbuffer();
-            GLuint vertex_position_modelspaceID = parent_model->get_vertex_position_modelspaceID();
-            GLuint uvbuffer = parent_model->get_uvbuffer();
-            GLuint vertexUVID = parent_model->get_vertexUVID();
-            GLuint normalbuffer = parent_model->get_normalbuffer();
-            GLuint vertex_normal_modelspaceID = parent_model->get_vertex_normal_modelspaceID();
-            GLuint elementbuffer = parent_model->get_elementbuffer();
-            GLuint indices_size = parent_model->get_indices().size();
+            uint32_t vertexbuffer = parent_model->get_vertexbuffer();
+            uint32_t vertex_position_modelspaceID = parent_model->get_vertex_position_modelspaceID();
+            uint32_t uvbuffer = parent_model->get_uvbuffer();
+            uint32_t vertexUVID = parent_model->get_vertexUVID();
+            uint32_t normalbuffer = parent_model->get_normalbuffer();
+            uint32_t vertex_normal_modelspaceID = parent_model->get_vertex_normal_modelspaceID();
+            uint32_t elementbuffer = parent_model->get_elementbuffer();
+            uint32_t indices_size = parent_model->get_indices().size();
 
             // 1st attribute buffer : vertices.
             glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);

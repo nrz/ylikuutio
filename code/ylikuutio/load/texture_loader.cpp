@@ -8,10 +8,7 @@
 #include <ofbx.h>
 
 // Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -30,7 +27,7 @@ namespace yli
                 const std::size_t image_width,
                 const std::size_t image_height,
                 const bool should_image_data_be_deleted,
-                GLuint& textureID)
+                uint32_t& textureID)
         {
             if (image_data == nullptr)
             {
@@ -65,7 +62,7 @@ namespace yli
                 std::size_t& image_width,
                 std::size_t& image_height,
                 std::size_t& image_size,
-                GLuint& textureID)
+                uint32_t& textureID)
         {
             // requirements:
             // `ofbx_texture` must not be `nullptr`.
@@ -134,7 +131,7 @@ namespace yli
                 std::size_t& image_width,
                 std::size_t& image_height,
                 std::size_t& image_size,
-                GLuint& textureID)
+                uint32_t& textureID)
         {
             const uint8_t* const image_data = load_BMP_file(filename, image_width, image_height, image_size);
 
@@ -156,7 +153,7 @@ namespace yli
                 std::size_t& image_width,
                 std::size_t& image_height,
                 std::size_t& image_size,
-                GLuint& textureID)
+                uint32_t& textureID)
         {
             const char* const imagepath = filename.c_str();
 

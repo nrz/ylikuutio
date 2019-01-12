@@ -20,14 +20,12 @@
 #include "code/ylikuutio/common/pi.hpp"
 
 // Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <queue>    // std::queue
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -95,9 +93,9 @@ namespace yli
                 // currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
                 void set_terrain_species(yli::ontology::Species* terrain_species);
 
-                GLuint get_programID() const;
-                GLuint get_matrixID() const;
-                GLuint get_model_matrixID() const;
+                uint32_t get_programID() const;
+                uint32_t get_matrixID() const;
+                uint32_t get_model_matrixID() const;
 
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
@@ -119,11 +117,11 @@ namespace yli
 
                 yli::ontology::Scene* parent;      // pointer to `Scene`.
 
-                GLuint programID;                     // this `Shader`'s `programID`, returned by `load_shaders`.
+                uint32_t programID;                   // this `Shader`'s `programID`, returned by `load_shaders`.
 
-                GLuint MatrixID;
-                GLuint view_matrixID;
-                GLuint model_matrixID;
+                uint32_t MatrixID;
+                uint32_t view_matrixID;
+                uint32_t model_matrixID;
 
                 std::string vertex_shader;            // filename of vertex shader.
                 std::string fragment_shader;          // filename of fragment shader.

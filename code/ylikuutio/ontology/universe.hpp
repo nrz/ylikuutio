@@ -11,12 +11,6 @@
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 #include "SDL.h"
 
 // Include GLM
@@ -504,7 +498,7 @@ namespace yli
                 void set_view_matrix(glm::mat4& view_matrix);
 
                 float get_aspect_ratio() const;
-                GLfloat get_initialFoV() const;
+                float get_initialFoV() const;
 
                 // Public callbacks.
 
@@ -580,10 +574,10 @@ namespace yli
                 bool can_toggle_help_mode;
                 bool can_display_help_screen;
 
-                GLclampf background_red;
-                GLclampf background_green;
-                GLclampf background_blue;
-                GLclampf background_alpha;
+                float background_red;
+                float background_green;
+                float background_blue;
+                float background_alpha;
 
             private:
                 bool compute_and_update_matrices_from_inputs();
@@ -626,7 +620,7 @@ namespace yli
                 glm::mat4 current_camera_projection_matrix;
                 glm::mat4 current_camera_view_matrix;
                 float aspect_ratio;   // at the moment all cameras use the same aspect ratio.
-                GLfloat initialFoV;   // at the moment all cameras use the same FoV.
+                float initialFoV;     // at the moment all cameras use the same FoV.
 
                 // Variables related to the fonts and texts used.
                 std::size_t text_size;

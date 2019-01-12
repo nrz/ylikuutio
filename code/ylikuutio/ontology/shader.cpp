@@ -11,14 +11,12 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli
@@ -175,17 +173,17 @@ namespace yli
                 yli::ontology::get_number_of_descendants(this->symbiosis_pointer_vector);
         }
 
-        GLuint Shader::get_programID() const
+        uint32_t Shader::get_programID() const
         {
             return this->programID;
         }
 
-        GLuint Shader::get_matrixID() const
+        uint32_t Shader::get_matrixID() const
         {
             return this->MatrixID;
         }
 
-        GLuint Shader::get_model_matrixID() const
+        uint32_t Shader::get_model_matrixID() const
         {
             return this->model_matrixID;
         }

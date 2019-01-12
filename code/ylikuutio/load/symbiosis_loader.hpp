@@ -4,12 +4,6 @@
 #include "symbiosis_loader_struct.hpp"
 #include <ofbx.h>
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -31,7 +25,7 @@ namespace yli
                 std::vector<std::vector<glm::vec3>>& out_vertices,
                 std::vector<std::vector<glm::vec2>>& out_UVs,
                 std::vector<std::vector<glm::vec3>>& out_normals,
-                std::vector<std::vector<GLuint>>& indices,
+                std::vector<std::vector<uint32_t>>& indices,
                 std::vector<std::vector<glm::vec3>>& indexed_vertices,
                 std::vector<std::vector<glm::vec2>>& indexed_UVs,
                 std::vector<std::vector<glm::vec3>>& indexed_normals,

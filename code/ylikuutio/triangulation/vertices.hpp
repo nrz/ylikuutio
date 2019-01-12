@@ -3,12 +3,6 @@
 
 #include "triangulate_quads_struct.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -17,6 +11,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
 namespace yli
@@ -27,9 +22,9 @@ namespace yli
                 const std::vector<glm::vec3>& temp_vertices,
                 const std::vector<glm::vec2>& temp_UVs,
                 const std::vector<glm::vec3>& temp_normals,
-                const GLuint vertex_index[3],
-                const GLuint uv_index[3],
-                const GLuint normal_index[3],
+                const uint32_t vertex_index[3],
+                const uint32_t uv_index[3],
+                const uint32_t normal_index[3],
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals);

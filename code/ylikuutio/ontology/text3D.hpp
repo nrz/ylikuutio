@@ -10,12 +10,6 @@
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -101,7 +95,7 @@ namespace yli
                 yli::ontology::VectorFont* parent; // pointer to `VectorFont`.
 
                 glm::vec3 original_scale_vector;      // original scale vector.
-                GLfloat rotate_angle;                 // rotate angle.
+                float rotate_angle;                   // rotate angle.
                 glm::vec3 rotate_vector;              // rotate vector.
                 glm::vec3 translate_vector;           // translate vector.
 

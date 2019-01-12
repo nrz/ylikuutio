@@ -3,12 +3,6 @@
 
 #include "code/ylikuutio/common/globals.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -181,9 +175,9 @@ namespace yli
 
                         // This corresponds to "v": specify one vertex.
                         glm::vec3 vertex;
-                        vertex.x = static_cast<GLfloat>(x);
-                        vertex.y = static_cast<GLfloat>(y);
-                        vertex.z = static_cast<GLfloat>(z);
+                        vertex.x = static_cast<float>(x);
+                        vertex.y = static_cast<float>(y);
+                        vertex.z = static_cast<float>(z);
                         temp_vertices.push_back(vertex);
 
                         // This corresponds to "vt": specify texture coordinates of one vertex.
@@ -191,12 +185,12 @@ namespace yli
 
                         if (should_ylikuutio_use_real_texture_coordinates)
                         {
-                            uv.x = round(static_cast<GLfloat>(texture_x));
-                            uv.y = round(static_cast<GLfloat>(texture_y));
+                            uv.x = round(static_cast<float>(texture_x));
+                            uv.y = round(static_cast<float>(texture_y));
                         }
                         else
                         {
-                            uv.x = static_cast<GLfloat>(y - min_y_value) / divisor;
+                            uv.x = static_cast<float>(y - min_y_value) / divisor;
                             uv.y = 0.0f;
                         }
 
@@ -279,9 +273,9 @@ namespace yli
                         // Create a new vertex using bilinear interpolation.
                         // This corresponds to "v": specify one vertex.
                         glm::vec3 vertex;
-                        vertex.x = static_cast<GLfloat>(x) - 0.5f * x_step;
-                        vertex.y = static_cast<GLfloat>(y);
-                        vertex.z = static_cast<GLfloat>(z) - 0.5f * z_step;
+                        vertex.x = static_cast<float>(x) - 0.5f * x_step;
+                        vertex.y = static_cast<float>(y);
+                        vertex.z = static_cast<float>(z) - 0.5f * z_step;
                         temp_vertices.push_back(vertex);
 
                         // This corresponds to "vt": specify texture coordinates of one vertex.
@@ -294,7 +288,7 @@ namespace yli
                         }
                         else
                         {
-                            uv.x = static_cast<GLfloat>(y - min_y_value) / divisor;
+                            uv.x = static_cast<float>(y - min_y_value) / divisor;
                             uv.y = 0.0f;
                         }
 

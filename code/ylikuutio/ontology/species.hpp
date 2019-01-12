@@ -15,10 +15,7 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -29,6 +26,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <queue>    // std::queue
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -105,7 +103,7 @@ namespace yli
                         }
 
                         // water level.
-                        GLuint water_level_uniform_location = glGetUniformLocation(species_struct.shader->get_programID(), "water_level");
+                        uint32_t water_level_uniform_location = glGetUniformLocation(species_struct.shader->get_programID(), "water_level");
                         glUniform1f(water_level_uniform_location, species_struct.scene->get_water_level());
 
                         SpeciesLoaderStruct species_loader_struct;

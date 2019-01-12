@@ -5,12 +5,6 @@
 #include "species_or_glyph.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -78,20 +72,20 @@ namespace yli
                 const std::vector<glm::vec3>& get_vertices() const;
                 const std::vector<glm::vec2>& get_uvs() const;
                 const std::vector<glm::vec3>& get_normals() const;
-                const std::vector<GLuint>& get_indices() const;
+                const std::vector<uint32_t>& get_indices() const;
 
-                GLuint get_vertex_position_modelspaceID() const;
-                GLuint get_vertexUVID() const;
-                GLuint get_vertex_normal_modelspaceID() const;
+                uint32_t get_vertex_position_modelspaceID() const;
+                uint32_t get_vertexUVID() const;
+                uint32_t get_vertex_normal_modelspaceID() const;
 
-                GLuint get_vertexbuffer() const;
-                GLuint get_uvbuffer() const;
-                GLuint get_normalbuffer() const;
-                GLuint get_elementbuffer() const;
+                uint32_t get_vertexbuffer() const;
+                uint32_t get_uvbuffer() const;
+                uint32_t get_normalbuffer() const;
+                uint32_t get_elementbuffer() const;
 
-                void store_vertex_position_modelspaceID(const GLuint vertex_position_modelspaceID);
-                void store_vertexUVID(const GLuint vertexUVID);
-                void store_vertex_normal_modelspaceID(const GLuint vertex_normal_modelspaceID);
+                void store_vertex_position_modelspaceID(const uint32_t vertex_position_modelspaceID);
+                void store_vertexUVID(const uint32_t vertexUVID);
+                void store_vertex_normal_modelspaceID(const uint32_t vertex_normal_modelspaceID);
 
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
@@ -99,13 +93,13 @@ namespace yli
                     friend void yli::ontology::render_species_or_glyph(T1 species_or_glyph_pointer);
 
             protected:
-                GLfloat initial_rotate_angle;            // initial rotate angle.
+                float initial_rotate_angle;              // initial rotate angle.
                 glm::vec3 initial_rotate_vector;         // initial rotate vector.
 
                 std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
                 glm::vec3 light_position;                // light position.
 
-                GLuint lightID;                          // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
+                uint32_t lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
 
                 std::vector<yli::ontology::Object*> object_pointer_vector;
                 std::queue<std::size_t> free_objectID_queue;
@@ -113,23 +107,23 @@ namespace yli
 
                 std::string triangulation_type;
 
-                GLuint vertex_position_modelspaceID;
-                GLuint vertexUVID;
-                GLuint vertex_normal_modelspaceID;
+                uint32_t vertex_position_modelspaceID;
+                uint32_t vertexUVID;
+                uint32_t vertex_normal_modelspaceID;
 
                 std::vector<glm::vec3> vertices;         // vertices of the `Model`.
                 std::vector<glm::vec2> uvs;              // UVs of the `Model`.
                 std::vector<glm::vec3> normals;          // normals of the `Model`.
 
-                std::vector<GLuint> indices;             // the deleted vertices will be reused (though it is not required, if there's enough memory).
+                std::vector<uint32_t> indices;           // the deleted vertices will be reused (though it is not required, if there's enough memory).
                 std::vector<glm::vec3> indexed_vertices;
                 std::vector<glm::vec2> indexed_uvs;
                 std::vector<glm::vec3> indexed_normals;
 
-                GLuint vertexbuffer;
-                GLuint uvbuffer;
-                GLuint normalbuffer;
-                GLuint elementbuffer;
+                uint32_t vertexbuffer;
+                uint32_t uvbuffer;
+                uint32_t normalbuffer;
+                uint32_t elementbuffer;
 
                 bool vram_buffer_in_use;
         };

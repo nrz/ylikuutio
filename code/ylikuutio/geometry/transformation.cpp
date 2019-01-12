@@ -12,12 +12,6 @@
 #include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/common/pi.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -44,9 +38,9 @@ namespace yli
             spherical_vertex.phi = DEGREES_TO_RADIANS(-planar_world_vertex.z);  // phi is latitude, the polar angle.
 
             glm::vec3 cartesian_vertex;
-            cartesian_vertex.x = (GLfloat) (spherical_vertex.rho * sin(spherical_vertex.theta) * cos(spherical_vertex.phi));
-            cartesian_vertex.y = (GLfloat) (spherical_vertex.rho * sin(spherical_vertex.theta) * sin(spherical_vertex.phi));
-            cartesian_vertex.z = (GLfloat) (spherical_vertex.rho * cos(spherical_vertex.theta));
+            cartesian_vertex.x = spherical_vertex.rho * sin(spherical_vertex.theta) * cos(spherical_vertex.phi);
+            cartesian_vertex.y = spherical_vertex.rho * sin(spherical_vertex.theta) * sin(spherical_vertex.phi);
+            cartesian_vertex.z = spherical_vertex.rho * cos(spherical_vertex.theta);
 
             return cartesian_vertex;
         }
@@ -95,8 +89,8 @@ namespace yli
                 for (uint32_t x = 0; x < image_width; x++)
                 {
                     glm::vec3 spherical_terrain_vertex = temp_vertices[temp_vertices_i];
-                    spherical_terrain_vertex.x = (GLfloat) current_longitude_in_degrees;
-                    spherical_terrain_vertex.z = (GLfloat) current_latitude_in_degrees;
+                    spherical_terrain_vertex.x = static_cast<float>(current_longitude_in_degrees);
+                    spherical_terrain_vertex.z = static_cast<float>(current_latitude_in_degrees);
                     temp_vertices[temp_vertices_i++] = yli::geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_terrain_vertex, sphere_radius);
 
                     current_longitude_in_degrees += longitude_step_in_degrees;
@@ -129,8 +123,8 @@ namespace yli
                     for (std::size_t x = 1; x < image_width; x++)
                     {
                         glm::vec3 spherical_terrain_vertex = temp_vertices[temp_vertices_i];
-                        spherical_terrain_vertex.x = (GLfloat) current_longitude_in_degrees;
-                        spherical_terrain_vertex.z = (GLfloat) current_latitude_in_degrees;
+                        spherical_terrain_vertex.x = static_cast<float>(current_longitude_in_degrees);
+                        spherical_terrain_vertex.z = static_cast<float>(current_latitude_in_degrees);
                         temp_vertices[temp_vertices_i++] = yli::geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_terrain_vertex, sphere_radius);
 
                         current_longitude_in_degrees += longitude_step_in_degrees;

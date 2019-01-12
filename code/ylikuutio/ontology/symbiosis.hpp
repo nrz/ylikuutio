@@ -16,12 +16,6 @@
 #include "code/ylikuutio/file/file_loader.hpp"
 #include <ofbx.h>
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -107,23 +101,23 @@ namespace yli
 
                 yli::ontology::SymbiontMaterial* get_symbiont_material(const std::size_t symbiont_material_i) const;
                 yli::ontology::SymbiontSpecies* get_symbiont_species(const std::size_t biontID) const;
-                GLuint get_vertex_position_modelspaceID(const std::size_t biontID) const;
-                GLuint get_vertexUVID(const std::size_t biontID) const;
-                GLuint get_vertex_normal_modelspaceID(const std::size_t biontID) const;
+                uint32_t get_vertex_position_modelspaceID(const std::size_t biontID) const;
+                uint32_t get_vertexUVID(const std::size_t biontID) const;
+                uint32_t get_vertex_normal_modelspaceID(const std::size_t biontID) const;
 
-                GLuint get_vertexbuffer(const std::size_t biontID) const;
-                GLuint get_uvbuffer(const std::size_t biontID) const;
-                GLuint get_normalbuffer(const std::size_t biontID) const;
-                GLuint get_elementbuffer(const std::size_t biontID) const;
+                uint32_t get_vertexbuffer(const std::size_t biontID) const;
+                uint32_t get_uvbuffer(const std::size_t biontID) const;
+                uint32_t get_normalbuffer(const std::size_t biontID) const;
+                uint32_t get_elementbuffer(const std::size_t biontID) const;
 
                 std::vector<uint32_t> get_indices(const std::size_t biontID) const;
                 std::size_t get_indices_size(const std::size_t biontID) const;
                 std::size_t get_number_of_ofbx_meshes() const;
                 bool has_texture(const std::size_t biontID) const;
-                GLuint get_texture(const std::size_t biontID) const;
-                GLuint get_openGL_textureID(const std::size_t biontID) const;
+                uint32_t get_texture(const std::size_t biontID) const;
+                uint32_t get_openGL_textureID(const std::size_t biontID) const;
 
-                GLuint get_lightID(const std::size_t biontID) const;
+                uint32_t get_lightID(const std::size_t biontID) const;
                 const glm::vec3& get_light_position(const std::size_t biontID) const;
 
                 template<class T1>
@@ -155,7 +149,7 @@ namespace yli
                 std::vector<std::vector<glm::vec2>> uvs;              // UVs of the object.
                 std::vector<std::vector<glm::vec3>> normals;          // normals of the object.
 
-                std::vector<std::vector<GLuint>> indices;             // the deleted vertices will be reused (though it is not required, if there's enough memory).
+                std::vector<std::vector<uint32_t>> indices;           // the deleted vertices will be reused (though it is not required, if there's enough memory).
                 std::vector<std::vector<glm::vec3>> indexed_vertices;
                 std::vector<std::vector<glm::vec2>> indexed_uvs;
                 std::vector<std::vector<glm::vec3>> indexed_normals;

@@ -2,12 +2,6 @@
 #include "object.hpp"
 #include "family_templates.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -60,57 +54,57 @@ namespace yli
             return this->normals;
         }
 
-        const std::vector<GLuint>& Model::get_indices() const
+        const std::vector<uint32_t>& Model::get_indices() const
         {
             return this->indices;
         }
 
-        GLuint Model::get_vertex_position_modelspaceID() const
+        uint32_t Model::get_vertex_position_modelspaceID() const
         {
             return this->vertex_position_modelspaceID;
         }
 
-        GLuint Model::get_vertexUVID() const
+        uint32_t Model::get_vertexUVID() const
         {
             return this->vertexUVID;
         }
 
-        GLuint Model::get_vertex_normal_modelspaceID() const
+        uint32_t Model::get_vertex_normal_modelspaceID() const
         {
             return this->vertex_normal_modelspaceID;
         }
 
-        GLuint Model::get_vertexbuffer() const
+        uint32_t Model::get_vertexbuffer() const
         {
             return this->vertexbuffer;
         }
 
-        GLuint Model::get_uvbuffer() const
+        uint32_t Model::get_uvbuffer() const
         {
             return this->uvbuffer;
         }
 
-        GLuint Model::get_normalbuffer() const
+        uint32_t Model::get_normalbuffer() const
         {
             return this->normalbuffer;
         }
 
-        GLuint Model::get_elementbuffer() const
+        uint32_t Model::get_elementbuffer() const
         {
             return this->elementbuffer;
         }
 
-        void Model::store_vertex_position_modelspaceID(const GLuint vertex_position_modelspaceID)
+        void Model::store_vertex_position_modelspaceID(const uint32_t vertex_position_modelspaceID)
         {
             this->vertex_position_modelspaceID = vertex_position_modelspaceID;
         }
 
-        void Model::store_vertexUVID(const GLuint vertexUVID)
+        void Model::store_vertexUVID(const uint32_t vertexUVID)
         {
             this->vertexUVID = vertexUVID;
         }
 
-        void Model::store_vertex_normal_modelspaceID(const GLuint vertex_normal_modelspaceID)
+        void Model::store_vertex_normal_modelspaceID(const uint32_t vertex_normal_modelspaceID)
         {
             this->vertex_normal_modelspaceID = vertex_normal_modelspaceID;
         }
