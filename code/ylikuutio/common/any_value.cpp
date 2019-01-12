@@ -22,7 +22,6 @@
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
-#include <stdlib.h> // std::strtol, std::strtoll, std::strtoul
 
 namespace yli
 {
@@ -287,7 +286,8 @@ namespace yli
 
         bool AnyValue::set_value(const std::string& value_string)
         {
-            char* end;
+            std::stringstream value_stringstream;
+            void* void_pointer = nullptr;
 
             switch (this->type)
             {
@@ -337,12 +337,8 @@ namespace yli
                             return false;
                         }
 
-                        float float_value = std::strtof(value_string.c_str(), &end);
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->float_value = float_value;
+                        value_stringstream << value_string;
+                        value_stringstream >> this->float_value;
                         return true;
                     }
                 case (DOUBLE):
@@ -352,12 +348,8 @@ namespace yli
                             return false;
                         }
 
-                        double double_value = std::strtod(value_string.c_str(), &end);
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->double_value = double_value;
+                        value_stringstream << value_string;
+                        value_stringstream >> this->double_value;
                         return true;
                     }
                 case (INT32_T):
@@ -367,13 +359,8 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
-                        int32_t int32_t_value = std::strtol(value_string.c_str(), &end, 0);
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->int32_t_value = int32_t_value;
+                        value_stringstream << value_string;
+                        value_stringstream >> this->int32_t_value;
                         return true;
                     }
                 case (UINT32_T):
@@ -383,13 +370,8 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
-                        uint32_t uint32_t_value = std::strtoul(value_string.c_str(), &end, 0);
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->uint32_t_value = uint32_t_value;
+                        value_stringstream << value_string;
+                        value_stringstream >> this->uint32_t_value;
                         return true;
                     }
                 case (BOOL_POINTER):
@@ -399,14 +381,10 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
                         // The size of the pointer is assumed to be 64 bits.
-                        bool* bool_pointer = (bool*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->bool_pointer = bool_pointer;
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->bool_pointer = static_cast<bool*>(void_pointer);
                         return true;
                     }
                 case (FLOAT_POINTER):
@@ -416,14 +394,10 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
                         // The size of the pointer is assumed to be 64 bits.
-                        float* float_pointer = (float*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->float_pointer = float_pointer;
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->float_pointer = static_cast<float*>(void_pointer);
                         return true;
                     }
                 case (DOUBLE_POINTER):
@@ -433,14 +407,10 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
                         // The size of the pointer is assumed to be 64 bits.
-                        double* double_pointer = (double*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->double_pointer = double_pointer;
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->double_pointer = static_cast<double*>(void_pointer);
                         return true;
                     }
                 case (INT32_T_POINTER):
@@ -450,14 +420,10 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
                         // The size of the pointer is assumed to be 64 bits.
-                        int32_t* int32_t_pointer = (int32_t*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->int32_t_pointer = int32_t_pointer;
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->int32_t_pointer = static_cast<int32_t*>(void_pointer);
                         return true;
                     }
                 case (UINT32_T_POINTER):
@@ -467,14 +433,10 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
                         // The size of the pointer is assumed to be 64 bits.
-                        uint32_t* uint32_t_pointer = (uint32_t*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->uint32_t_pointer = uint32_t_pointer;
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->uint32_t_pointer = static_cast<uint32_t*>(void_pointer);
                         return true;
                     }
                 case (UNIVERSE_POINTER):
@@ -484,14 +446,10 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
                         // The size of the pointer is assumed to be 64 bits.
-                        yli::ontology::Universe* universe = (yli::ontology::Universe*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->universe = universe;
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->universe = static_cast<yli::ontology::Universe*>(void_pointer);
                         return true;
                     }
                 case (SCENE_POINTER):
@@ -501,14 +459,10 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
                         // The size of the pointer is assumed to be 64 bits.
-                        yli::ontology::Scene* scene_pointer = (yli::ontology::Scene*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->scene_pointer = scene_pointer;
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->scene_pointer = static_cast<yli::ontology::Scene*>(void_pointer);
                         return true;
                     }
                 case (SHADER_POINTER):
@@ -518,14 +472,10 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
                         // The size of the pointer is assumed to be 64 bits.
-                        yli::ontology::Shader* shader_pointer = (yli::ontology::Shader*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->shader_pointer = shader_pointer;
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->shader_pointer = static_cast<yli::ontology::Shader*>(void_pointer);
                         return true;
                     }
                 case (MATERIAL_POINTER):
@@ -535,14 +485,10 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
                         // The size of the pointer is assumed to be 64 bits.
-                        yli::ontology::Material* material_pointer = (yli::ontology::Material*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->material_pointer = material_pointer;
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->material_pointer = static_cast<yli::ontology::Material*>(void_pointer);
                         return true;
                     }
                 case (SPECIES_POINTER):
@@ -552,14 +498,10 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
                         // The size of the pointer is assumed to be 64 bits.
-                        yli::ontology::Species* species_pointer = (yli::ontology::Species*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->species_pointer = species_pointer;
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->species_pointer = static_cast<yli::ontology::Species*>(void_pointer);
                         return true;
                     }
                 case (OBJECT_POINTER):
@@ -569,14 +511,10 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
                         // The size of the pointer is assumed to be 64 bits.
-                        yli::ontology::Object* object_pointer = (yli::ontology::Object*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->object_pointer = object_pointer;
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->object_pointer = static_cast<yli::ontology::Object*>(void_pointer);
                         return true;
                     }
                 case (VECTORFONT_POINTER):
@@ -586,14 +524,10 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
                         // The size of the pointer is assumed to be 64 bits.
-                        yli::ontology::VectorFont* vector_font_pointer = (yli::ontology::VectorFont*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->vector_font_pointer = vector_font_pointer;
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->vector_font_pointer = static_cast<yli::ontology::VectorFont*>(void_pointer);
                         return true;
                     }
                 case (GLYPH_POINTER):
@@ -603,14 +537,10 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
                         // The size of the pointer is assumed to be 64 bits.
-                        yli::ontology::Glyph* glyph_pointer = (yli::ontology::Glyph*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->glyph_pointer = glyph_pointer;
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->glyph_pointer = static_cast<yli::ontology::Glyph*>(void_pointer);
                         return true;
                     }
                 case (TEXT3D_POINTER):
@@ -620,14 +550,10 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
                         // The size of the pointer is assumed to be 64 bits.
-                        yli::ontology::Text3D* text3D_pointer = (yli::ontology::Text3D*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->text3D_pointer = text3D_pointer;
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->text3D_pointer = static_cast<yli::ontology::Text3D*>(void_pointer);
                         return true;
                     }
                 case (TEXT2D_POINTER):
@@ -637,14 +563,10 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
                         // The size of the pointer is assumed to be 64 bits.
-                        yli::ontology::Font2D* font2D_pointer = (yli::ontology::Font2D*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->font2D_pointer = font2D_pointer;
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->font2D_pointer = static_cast<yli::ontology::Font2D*>(void_pointer);
                         return true;
                     }
                 case (CONSOLE_POINTER):
@@ -654,14 +576,10 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
                         // The size of the pointer is assumed to be 64 bits.
-                        yli::console::Console* console_pointer = (yli::console::Console*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->console_pointer = console_pointer;
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->console_pointer = static_cast<yli::console::Console*>(void_pointer);
                         return true;
                     }
                 case (SPHERICAL_COORDINATES_STRUCT_POINTER):
@@ -671,12 +589,10 @@ namespace yli
                             return false;
                         }
 
-                        SphericalCoordinatesStruct* spherical_coordinates_struct_pointer = (SphericalCoordinatesStruct*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->spherical_coordinates_struct_pointer = spherical_coordinates_struct_pointer;
+                        // The size of the pointer is assumed to be 64 bits.
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->spherical_coordinates_struct_pointer = static_cast<SphericalCoordinatesStruct*>(void_pointer);
                         return true;
                     }
                 case (GLM_VEC3_POINTER):
@@ -686,12 +602,10 @@ namespace yli
                             return false;
                         }
 
-                        glm::vec3* glm_vec3_pointer = (glm::vec3*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->glm_vec3_pointer = glm_vec3_pointer;
+                        // The size of the pointer is assumed to be 64 bits.
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->glm_vec3_pointer = static_cast<glm::vec3*>(void_pointer);
                         return true;
                     }
                 case (GLM_VEC4_POINTER):
@@ -701,12 +615,10 @@ namespace yli
                             return false;
                         }
 
-                        glm::vec4* glm_vec4_pointer = (glm::vec4*) (std::strtoll(value_string.c_str(), &end, 0));
-                        if (errno == ERANGE)
-                        {
-                            return false;
-                        }
-                        this->glm_vec4_pointer = glm_vec4_pointer;
+                        // The size of the pointer is assumed to be 64 bits.
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->glm_vec4_pointer = static_cast<glm::vec4*>(void_pointer);
                         return true;
                     }
                 default:
