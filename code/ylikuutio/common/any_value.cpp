@@ -153,19 +153,19 @@ namespace yli
                     any_value_stringstream << this->uint32_t_value;
                     break;
                 case (BOOL_POINTER):
-                    any_value_stringstream << std::hex << this->bool_pointer << std::dec;
+                    any_value_stringstream << std::hex << (uint64_t) this->bool_pointer << std::dec;
                     break;
                 case (FLOAT_POINTER):
-                    any_value_stringstream << std::hex << this->float_pointer << std::dec;
+                    any_value_stringstream << std::hex << (uint64_t) this->float_pointer << std::dec;
                     break;
                 case (DOUBLE_POINTER):
-                    any_value_stringstream << std::hex << this->double_pointer << std::dec;
+                    any_value_stringstream << std::hex << (uint64_t) this->double_pointer << std::dec;
                     break;
                 case (INT32_T_POINTER):
-                    any_value_stringstream << std::hex << this->int32_t_pointer << std::dec;
+                    any_value_stringstream << std::hex << (uint64_t) this->int32_t_pointer << std::dec;
                     break;
                 case (UINT32_T_POINTER):
-                    any_value_stringstream << std::hex << this->uint32_t_pointer << std::dec;
+                    any_value_stringstream << std::hex << (uint64_t) this->uint32_t_pointer << std::dec;
                     break;
                 case (UNIVERSE_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->universe << std::dec;
