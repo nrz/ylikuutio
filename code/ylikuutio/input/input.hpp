@@ -1,3 +1,6 @@
+#ifndef __INPUT_HPP_INCLUDED
+#define __INPUT_HPP_INCLUDED
+
 #include "SDL.h"
 
 namespace yli
@@ -19,3 +22,5 @@ namespace yli
         void enable_relative_mouse_mode();
     }
 }
+
+#endif

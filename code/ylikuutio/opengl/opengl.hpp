@@ -1,3 +1,6 @@
+#ifndef __OPENGL_HPP_INCLUDED
+#define __OPENGL_HPP_INCLUDED
+
 #include "SDL.h"
 
 namespace yli
@@ -22,3 +25,5 @@ namespace yli
         bool has_arb_fragment_shader();
     }
 }
+
+#endif
