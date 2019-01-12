@@ -9,6 +9,11 @@
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
+// Include standard headers
+#include <cstddef>  // std::size_t
+#include <queue>    // std::queue
+#include <vector>   // std::vector
+
 namespace yli
 {
     namespace ontology
