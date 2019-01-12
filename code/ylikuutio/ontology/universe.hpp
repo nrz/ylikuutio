@@ -11,9 +11,6 @@
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
-// Include GLEW
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-
 #include "SDL.h"
 
 // Include GLM

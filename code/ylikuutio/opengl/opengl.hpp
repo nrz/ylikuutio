@@ -1,6 +1,3 @@
-// Include GLEW
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-
 #include "SDL.h"
 
 namespace yli

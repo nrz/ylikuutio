@@ -23,9 +23,6 @@
 #include "text3D_struct.hpp"
 #include "camera_struct.hpp"
 
-// Include GLEW
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-
 // Include standard headers
 #include <memory>    // std::make_shared, std::shared_ptr
 #include <string>    // std::string

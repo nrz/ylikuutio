@@ -6,9 +6,6 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-// Include GLEW
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp

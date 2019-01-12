@@ -6,9 +6,6 @@
 #include "camera_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
-// Include GLEW
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED

@@ -3,9 +3,6 @@
 
 #include <ofbx.h>
 
-// Include GLEW
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <stdint.h> // uint32_t etc.
