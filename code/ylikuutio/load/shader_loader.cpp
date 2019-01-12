@@ -11,6 +11,7 @@
 #include <cstdio>    // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <fstream>   // std::ifstream
 #include <ios>       // std::ios
+#include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 #include <vector>    // std::vector
 
@@ -18,11 +19,11 @@ namespace yli
 {
     namespace load
     {
-        GLuint load_shaders(const char* const vertex_file_path, const char* const fragment_file_path)
+        uint32_t load_shaders(const char* const vertex_file_path, const char* const fragment_file_path)
         {
             // Create the shaders
-            GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
-            GLuint FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+            uint32_t VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
+            uint32_t FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 
             // Read the Vertex Shader code from the file
             std::string VertexShaderCode;
@@ -92,7 +93,7 @@ namespace yli
 
             // Link the program
             std::printf("Linking program\n");
-            GLuint ProgramID = glCreateProgram();
+            uint32_t ProgramID = glCreateProgram();
             glAttachShader(ProgramID, VertexShaderID);
             glAttachShader(ProgramID, FragmentShaderID);
             glLinkProgram(ProgramID);

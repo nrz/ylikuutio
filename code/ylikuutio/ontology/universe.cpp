@@ -657,14 +657,14 @@ namespace yli
                 const std::size_t texture_height = universe->framebuffer_height;
 
                 // create FBO (off-screen framebuffer object):
-                GLuint fb = 0;
+                uint32_t fb = 0;
                 glGenFramebuffers(1, &fb);
 
                 // bind offscreen buffer.
                 glBindFramebuffer(GL_FRAMEBUFFER, fb);
 
                 // create texture.
-                GLuint tex;
+                uint32_t tex;
                 glGenTextures(1, &tex);
                 glBindTexture(GL_TEXTURE_2D, tex);
 
@@ -677,7 +677,7 @@ namespace yli
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0);
 
                 // create and bind render buffer with depth and stencil attachments.
-                GLuint render_buffer;
+                uint32_t render_buffer;
                 glGenRenderbuffers(1, &render_buffer);
                 glBindRenderbuffer(GL_RENDERBUFFER, render_buffer);
                 glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, texture_width, texture_height);

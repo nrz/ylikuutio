@@ -322,37 +322,37 @@ namespace yli
             return this->biontID_symbiont_species_vector[biontID];
         }
 
-        GLuint Symbiosis::get_vertex_position_modelspaceID(const std::size_t biontID) const
+        uint32_t Symbiosis::get_vertex_position_modelspaceID(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector[biontID]->get_vertex_position_modelspaceID();
         }
 
-        GLuint Symbiosis::get_vertexUVID(const std::size_t biontID) const
+        uint32_t Symbiosis::get_vertexUVID(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector[biontID]->get_vertexUVID();
         }
 
-        GLuint Symbiosis::get_vertex_normal_modelspaceID(const std::size_t biontID) const
+        uint32_t Symbiosis::get_vertex_normal_modelspaceID(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector[biontID]->get_vertex_normal_modelspaceID();
         }
 
-        GLuint Symbiosis::get_vertexbuffer(const std::size_t biontID) const
+        uint32_t Symbiosis::get_vertexbuffer(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector[biontID]->get_vertexbuffer();
         }
 
-        GLuint Symbiosis::get_uvbuffer(const std::size_t biontID) const
+        uint32_t Symbiosis::get_uvbuffer(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector[biontID]->get_uvbuffer();
         }
 
-        GLuint Symbiosis::get_normalbuffer(const std::size_t biontID) const
+        uint32_t Symbiosis::get_normalbuffer(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector[biontID]->get_normalbuffer();
         }
 
-        GLuint Symbiosis::get_elementbuffer(const std::size_t biontID) const
+        uint32_t Symbiosis::get_elementbuffer(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector[biontID]->get_elementbuffer();
         }
@@ -390,17 +390,17 @@ namespace yli
             return true;
         }
 
-        GLuint Symbiosis::get_texture(const std::size_t biontID) const
+        uint32_t Symbiosis::get_texture(const std::size_t biontID) const
         {
             return this->biontID_symbiont_material_vector.at(biontID)->get_texture();
         }
 
-        GLuint Symbiosis::get_openGL_textureID(const std::size_t biontID) const
+        uint32_t Symbiosis::get_openGL_textureID(const std::size_t biontID) const
         {
             return this->biontID_symbiont_material_vector.at(biontID)->get_openGL_textureID();
         }
 
-        GLuint Symbiosis::get_lightID(const std::size_t biontID) const
+        uint32_t Symbiosis::get_lightID(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector.at(biontID)->get_lightID();
         }

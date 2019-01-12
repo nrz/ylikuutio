@@ -4,11 +4,14 @@
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+
 namespace yli
 {
     namespace load
     {
-        GLuint load_shaders(const char* const vertex_file_path, const char* const fragment_file_path);
+        uint32_t load_shaders(const char* const vertex_file_path, const char* const fragment_file_path);
     }
 }
 

@@ -19,6 +19,7 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -31,14 +32,14 @@ namespace yli
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals,
-                std::vector<GLuint>& indices,
+                std::vector<uint32_t>& indices,
                 std::vector<glm::vec3>& indexed_vertices,
                 std::vector<glm::vec2>& indexed_UVs,
                 std::vector<glm::vec3>& indexed_normals,
-                GLuint* vertexbuffer,
-                GLuint* uvbuffer,
-                GLuint* normalbuffer,
-                GLuint* elementbuffer,
+                uint32_t* vertexbuffer,
+                uint32_t* uvbuffer,
+                uint32_t* normalbuffer,
+                uint32_t* elementbuffer,
                 bool& vram_buffer_in_use,
                 const bool is_debug_mode)
         {
@@ -156,7 +157,7 @@ namespace yli
 
                 glGenBuffers(1, elementbuffer);
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *elementbuffer);
-                glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), &indices[0] , GL_STATIC_DRAW);
+                glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), &indices[0] , GL_STATIC_DRAW);
             }
 
             // TODO: Compute the graph of this object type to enable object vertex modification!

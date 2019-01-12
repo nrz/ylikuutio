@@ -16,6 +16,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
 
 namespace yli
 {
@@ -119,7 +120,7 @@ namespace yli
             return this->indices.size();
         }
 
-        GLuint SymbiontSpecies::get_lightID() const
+        uint32_t SymbiontSpecies::get_lightID() const
         {
             return this->lightID;
         }

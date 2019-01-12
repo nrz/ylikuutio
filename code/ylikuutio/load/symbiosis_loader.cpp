@@ -28,7 +28,7 @@ namespace yli
                 std::vector<std::vector<glm::vec3>>& out_vertices,
                 std::vector<std::vector<glm::vec2>>& out_UVs,
                 std::vector<std::vector<glm::vec3>>& out_normals,
-                std::vector<std::vector<GLuint>>& indices,
+                std::vector<std::vector<uint32_t>>& indices,
                 std::vector<std::vector<glm::vec3>>& indexed_vertices,
                 std::vector<std::vector<glm::vec2>>& indexed_UVs,
                 std::vector<std::vector<glm::vec3>>& indexed_normals,

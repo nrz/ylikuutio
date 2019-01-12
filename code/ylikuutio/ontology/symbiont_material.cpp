@@ -13,6 +13,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
 
 namespace yli
 {
@@ -152,12 +153,12 @@ namespace yli
             this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "myTextureSampler");
         }
 
-        GLuint SymbiontMaterial::get_texture() const
+        uint32_t SymbiontMaterial::get_texture() const
         {
             return this->texture;
         }
 
-        GLuint SymbiontMaterial::get_openGL_textureID() const
+        uint32_t SymbiontMaterial::get_openGL_textureID() const
         {
             return this->openGL_textureID;
         }

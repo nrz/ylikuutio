@@ -18,6 +18,7 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <queue>    // std::queue
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -60,8 +61,8 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
-                GLuint get_texture() const;
-                GLuint get_openGL_textureID() const;
+                uint32_t get_texture() const;
+                uint32_t get_openGL_textureID() const;
 
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
@@ -82,8 +83,8 @@ namespace yli
 
                 const ofbx::Texture* ofbx_texture;
 
-                GLuint texture;                        // Texture of this `SymbiontMaterial`.
-                GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
+                uint32_t texture;                        // Texture of this `SymbiontMaterial`.
+                uint32_t openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
 
                 std::vector<yli::ontology::SymbiontSpecies*> symbiont_species_pointer_vector;
                 std::queue<std::size_t> free_symbiont_speciesID_queue;
