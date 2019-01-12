@@ -18,8 +18,8 @@
 #include <cerrno>   // errno
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
-#include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
-#include <inttypes.h> // PRId32, PRId64, PRIu32, PRIu64, PRIx32, PRIx64
+#include <ios>      // std::defaultfloat, std::fixed, std::ios
+#include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 #include <stdlib.h> // std::strtol, std::strtoll, std::strtoul
@@ -117,136 +117,145 @@ namespace yli
 
         std::string AnyValue::get_string() const
         {
-            const std::size_t buffer_size = 128;
-            char buffer[buffer_size];
+            std::string any_value_string;
+            std::stringstream any_value_stringstream;
+            any_value_stringstream.precision(6); // 6 decimals in floating point output.
 
             switch (this->type)
             {
                 case (UNKNOWN):
-                    return "unknown";
+                    any_value_stringstream << "unknown";
+                    break;
                 case (ANY_STRUCT_SHARED_PTR):
-                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->any_struct_shared_ptr.get());
-                    return std::string(buffer);
+                    any_value_stringstream << std::hex << this->any_struct_shared_ptr.get() << std::dec;
+                    break;
                 case (BOOL):
-                    return (this->bool_value ? "true" : "false");
+                    any_value_stringstream << (this->bool_value ? "true" : "false");
+                    break;
                 case (CHAR):
-                    std::snprintf(buffer, sizeof(buffer), "%c", this->char_value);
-                    return std::string(buffer);
+                    any_value_stringstream << this->char_value;
+                    break;
                 case (FLOAT):
-                    std::snprintf(buffer, sizeof(buffer), "%f", this->float_value);
-                    return std::string(buffer);
+                    any_value_stringstream << std::fixed << this->float_value << std::defaultfloat;
+                    break;
                 case (DOUBLE):
-                    std::snprintf(buffer, sizeof(buffer), "%f", this->double_value);
-                    return std::string(buffer);
+                    any_value_stringstream << std::fixed << this->double_value << std::defaultfloat;
+                    break;
                 case (INT32_T):
                     // in Linux `int` is 32 bits, `long` is 64 bits, `long long` is also 64 bits.
                     // in Windows `int` is 32 bits, `long` is also 32 bits, `long long` is 64 bits.
-                    std::snprintf(buffer, sizeof(buffer), "%" PRId32, this->int32_t_value);
-                    return std::string(buffer);
+                    any_value_stringstream << this->int32_t_value;
+                    break;
                 case (UINT32_T):
 
                     // in Linux `int` is 32 bits, `long` is 64 bits, `long long` is also 64 bits.
                     // in Windows `int` is 32 bits, `long` is also 32 bits, `long long` is 64 bits.
-                    std::snprintf(buffer, sizeof(buffer), "%" PRIu32, this->uint32_t_value);
-                    return std::string(buffer);
+                    any_value_stringstream << this->uint32_t_value;
+                    break;
                 case (BOOL_POINTER):
-                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->bool_pointer);
-                    return std::string(buffer);
+                    any_value_stringstream << std::hex << this->bool_pointer << std::dec;
+                    break;
                 case (FLOAT_POINTER):
-                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->float_pointer);
-                    return std::string(buffer);
+                    any_value_stringstream << std::hex << this->float_pointer << std::dec;
+                    break;
                 case (DOUBLE_POINTER):
-                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->double_pointer);
-                    return std::string(buffer);
+                    any_value_stringstream << std::hex << this->double_pointer << std::dec;
+                    break;
                 case (INT32_T_POINTER):
-                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->int32_t_pointer);
-                    return std::string(buffer);
+                    any_value_stringstream << std::hex << this->int32_t_pointer << std::dec;
+                    break;
                 case (UINT32_T_POINTER):
-                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->uint32_t_pointer);
-                    return std::string(buffer);
+                    any_value_stringstream << std::hex << this->uint32_t_pointer << std::dec;
+                    break;
                 case (UNIVERSE_POINTER):
-                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->universe);
-                    return std::string(buffer);
+                    any_value_stringstream << std::hex << (uint64_t) this->universe << std::dec;
+                    break;
                 case (SCENE_POINTER):
-                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->scene_pointer);
-                    return std::string(buffer);
+                    any_value_stringstream << std::hex << (uint64_t) this->scene_pointer << std::dec;
+                    break;
                 case (SHADER_POINTER):
-                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->shader_pointer);
-                    return std::string(buffer);
+                    any_value_stringstream << std::hex << (uint64_t) this->shader_pointer << std::dec;
+                    break;
                 case (MATERIAL_POINTER):
-                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->material_pointer);
-                    return std::string(buffer);
+                    any_value_stringstream << std::hex << (uint64_t) this->material_pointer << std::dec;
+                    break;
                 case (SPECIES_POINTER):
-                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->species_pointer);
-                    return std::string(buffer);
+                    any_value_stringstream << std::hex << (uint64_t) this->species_pointer << std::dec;
+                    break;
                 case (OBJECT_POINTER):
-                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->object_pointer);
-                    return std::string(buffer);
+                    any_value_stringstream << std::hex << (uint64_t) this->object_pointer << std::dec;
+                    break;
                 case (VECTORFONT_POINTER):
-                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->vector_font_pointer);
-                    return std::string(buffer);
+                    any_value_stringstream << std::hex << (uint64_t) this->vector_font_pointer << std::dec;
+                    break;
                 case (GLYPH_POINTER):
-                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->glyph_pointer);
-                    return std::string(buffer);
+                    any_value_stringstream << std::hex << (uint64_t) this->glyph_pointer << std::dec;
+                    break;
                 case (TEXT3D_POINTER):
-                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->text3D_pointer);
-                    return std::string(buffer);
+                    any_value_stringstream << std::hex << (uint64_t) this->text3D_pointer << std::dec;
+                    break;
                 case (TEXT2D_POINTER):
-                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->font2D_pointer);
-                    return std::string(buffer);
+                    any_value_stringstream << std::hex << (uint64_t) this->font2D_pointer << std::dec;
+                    break;
                 case (CONSOLE_POINTER):
-                    std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->console_pointer);
-                    return std::string(buffer);
+                    any_value_stringstream << std::hex << (uint64_t) this->console_pointer << std::dec;
+                    break;
                 case (SPHERICAL_COORDINATES_STRUCT_POINTER):
                     if (this->spherical_coordinates_struct_pointer == nullptr)
                     {
-                        std::snprintf(buffer, sizeof(buffer), "nullptr");
+                        any_value_stringstream << "nullptr";
                     }
                     else
                     {
-                        std::snprintf(buffer, sizeof(buffer), "{ %f, %f, %f }",
-                                this->spherical_coordinates_struct_pointer->rho,
-                                this->spherical_coordinates_struct_pointer->theta,
-                                this->spherical_coordinates_struct_pointer->phi);
+                        any_value_stringstream << "{ " << this->spherical_coordinates_struct_pointer->rho
+                            << ", " << this->spherical_coordinates_struct_pointer->theta
+                            << ", " << this->spherical_coordinates_struct_pointer->phi
+                            << " }";
                     }
-                    return std::string(buffer);
+                    break;
                 case (STD_STRING_POINTER):
                     if (this->std_string_pointer == nullptr)
                     {
-                        std::snprintf(buffer, sizeof(buffer), "nullptr");
-                        return std::string(buffer);
+                        any_value_stringstream << "nullptr";
                     }
-                    return std::string(*this->std_string_pointer);
+                    else
+                    {
+                        any_value_stringstream << *this->std_string_pointer;
+                    }
+                    break;
                 case (GLM_VEC3_POINTER):
                     if (this->glm_vec3_pointer == nullptr)
                     {
-                        std::snprintf(buffer, sizeof(buffer), "nullptr");
+                        any_value_stringstream << "nullptr";
                     }
                     else
                     {
-                        std::snprintf(buffer, sizeof(buffer), "{ %f, %f, %f }",
-                                this->glm_vec3_pointer->x,
-                                this->glm_vec3_pointer->y,
-                                this->glm_vec3_pointer->z);
+                        any_value_stringstream << "{ " << this->glm_vec3_pointer->x
+                            << ", " << this->glm_vec3_pointer->y
+                            << ", " << this->glm_vec3_pointer->z
+                            << " }";
                     }
-                    return std::string(buffer);
+                    break;
                 case (GLM_VEC4_POINTER):
                     if (this->glm_vec4_pointer == nullptr)
                     {
-                        std::snprintf(buffer, sizeof(buffer), "nullptr");
+                        any_value_stringstream << "nullptr";
                     }
                     else
                     {
-                        std::snprintf(buffer, sizeof(buffer), "{ %f, %f, %f, %f }",
-                                this->glm_vec4_pointer->x,
-                                this->glm_vec4_pointer->y,
-                                this->glm_vec4_pointer->z,
-                                this->glm_vec4_pointer->w);
+                        any_value_stringstream << "{ " << this->glm_vec4_pointer->x
+                            << ", " << this->glm_vec4_pointer->y
+                            << ", " << this->glm_vec4_pointer->z
+                            << ", " << this->glm_vec4_pointer->w
+                            << " }";
                     }
-                    return std::string(buffer);
+                    break;
                 default:
                     return "TODO: define string for this datatype!";
             }
+
+            any_value_stringstream >> any_value_string;
+            return any_value_string;
         }
 
         yli::ontology::Entity* AnyValue::get_entity_pointer() const
