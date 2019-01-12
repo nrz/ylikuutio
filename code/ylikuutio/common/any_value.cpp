@@ -136,10 +136,10 @@ namespace yli
                     any_value_stringstream << this->char_value;
                     break;
                 case (FLOAT):
-                    any_value_stringstream << std::fixed << this->float_value << std::defaultfloat;
+                    any_value_stringstream << std::fixed << this->float_value;
                     break;
                 case (DOUBLE):
-                    any_value_stringstream << std::fixed << this->double_value << std::defaultfloat;
+                    any_value_stringstream << std::fixed << this->double_value;
                     break;
                 case (INT32_T):
                     // in Linux `int` is 32 bits, `long` is 64 bits, `long long` is also 64 bits.
