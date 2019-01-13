@@ -208,7 +208,7 @@ namespace yli
             if (std::fread(buffer, 1, bufsize, fp) != bufsize)
             {
                 std::cerr << "Error while reading " << filename << "\n";
-                delete buffer;
+                delete[] buffer;
                 std::fclose(fp);
                 return false;
             }
@@ -229,7 +229,7 @@ namespace yli
                     format = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
                     break;
                 default:
-                    delete buffer;
+                    delete[] buffer;
                     return false;
             }
 
@@ -275,7 +275,7 @@ namespace yli
                 }
             }
 
-            delete buffer;
+            delete[] buffer;
 
             return true;
         }
