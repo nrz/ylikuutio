@@ -32,7 +32,7 @@ external libraries such as `glm` require CMake 3.2 or a newer version.
 CMake uses git for downloading Google Test testing framework.
 
 Ylikuutio repository in GitHub has 2 branches: `master` & `coverity_scan`.
-master is the branch that should be up to date and it's the one to build.
+`master` is the branch that should be up to date and it's the one to build.
 `coverity_scan` is for Synopsys© Coverity Scan© analysis tool which is run through
 Travis CI.
 
