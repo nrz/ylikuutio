@@ -15,8 +15,6 @@
 #endif
 
 // Include standard headers
-#include <cerrno>   // errno
-#include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <ios>      // std::defaultfloat, std::fixed, std::ios
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
