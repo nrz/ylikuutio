@@ -7,6 +7,9 @@
 #define __GL_GLEW_H_INCLUDED
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
+#else
+#include "SDL.h"
+#include "SDL_opengles2.h"
 #endif
 
 #endif

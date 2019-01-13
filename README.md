@@ -32,7 +32,7 @@ external libraries such as `glm` require CMake 3.2 or a newer version.
 CMake uses git for downloading Google Test testing framework.
 
 Ylikuutio repository in GitHub has 2 branches: `master` & `coverity_scan`.
-master is the branch that should be up to date and it's the one to build.
+`master` is the branch that should be up to date and it's the one to build.
 `coverity_scan` is for Synopsys© Coverity Scan© analysis tool which is run through
 Travis CI.
 
@@ -51,7 +51,7 @@ If you are doing a cross compile from Linux to Windows, you need also:
 
 If you are doing a cross compile from Linux to Android™, you need also:
 
-    $ sudo apt install google-android-ndk-installer
+    $ sudo apt install android-sdk-platform-tools-common ant google-android-ndk-installer openjdk-8-jdk
 
 However, cross compiling from Linux to Android does not work yet!
 

@@ -16,11 +16,9 @@
 #include "vertices.hpp"
 #include "triangulation_enums.hpp"
 #include "triangulation_templates.hpp"
-#include "triangulation_templates.hpp"
 #include "indexing.hpp"
 #include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/geometry/transformation_struct.hpp"
-#include "code/ylikuutio/geometry/transformation.hpp"
 #include "code/ylikuutio/geometry/transformation.hpp"
 #include "code/ylikuutio/common/pi.hpp"
 
