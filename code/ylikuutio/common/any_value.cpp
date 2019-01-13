@@ -300,8 +300,6 @@ namespace yli
                             return false;
                         }
 
-                        // 0 means that the base is determined by the format given in string.
-                        // The size of the pointer is assumed to be 64 bits.
                         std::shared_ptr<yli::datatypes::AnyStruct> any_struct_shared_ptr =
                             std::make_shared<yli::datatypes::AnyStruct>();
                         this->any_struct_shared_ptr = any_struct_shared_ptr;
@@ -381,7 +379,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->bool_pointer = static_cast<bool*>(void_pointer);
@@ -394,7 +391,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->float_pointer = static_cast<float*>(void_pointer);
@@ -407,7 +403,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->double_pointer = static_cast<double*>(void_pointer);
@@ -420,7 +415,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->int32_t_pointer = static_cast<int32_t*>(void_pointer);
@@ -433,7 +427,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->uint32_t_pointer = static_cast<uint32_t*>(void_pointer);
@@ -446,7 +439,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->universe = static_cast<yli::ontology::Universe*>(void_pointer);
@@ -459,7 +451,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->scene_pointer = static_cast<yli::ontology::Scene*>(void_pointer);
@@ -472,7 +463,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->shader_pointer = static_cast<yli::ontology::Shader*>(void_pointer);
@@ -485,7 +475,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->material_pointer = static_cast<yli::ontology::Material*>(void_pointer);
@@ -498,7 +487,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->species_pointer = static_cast<yli::ontology::Species*>(void_pointer);
@@ -511,7 +499,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->object_pointer = static_cast<yli::ontology::Object*>(void_pointer);
@@ -524,7 +511,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->vector_font_pointer = static_cast<yli::ontology::VectorFont*>(void_pointer);
@@ -537,7 +523,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->glyph_pointer = static_cast<yli::ontology::Glyph*>(void_pointer);
@@ -550,7 +535,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->text3D_pointer = static_cast<yli::ontology::Text3D*>(void_pointer);
@@ -563,7 +547,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->font2D_pointer = static_cast<yli::ontology::Font2D*>(void_pointer);
@@ -576,7 +559,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->console_pointer = static_cast<yli::console::Console*>(void_pointer);
@@ -589,7 +571,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->spherical_coordinates_struct_pointer = static_cast<SphericalCoordinatesStruct*>(void_pointer);
@@ -602,7 +583,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->glm_vec3_pointer = static_cast<glm::vec3*>(void_pointer);
@@ -615,7 +595,6 @@ namespace yli
                             return false;
                         }
 
-                        // The size of the pointer is assumed to be 64 bits.
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->glm_vec4_pointer = static_cast<glm::vec4*>(void_pointer);
