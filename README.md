@@ -51,7 +51,7 @@ If you are doing a cross compile from Linux to Windows, you need also:
 
 If you are doing a cross compile from Linux to Android™, you need also:
 
-    $ sudo apt install google-android-ndk-installer
+    $ sudo apt install android-sdk-platform-tools-common ant google-android-ndk-installer openjdk-8-jdk
 
 However, cross compiling from Linux to Android does not work yet!
 
