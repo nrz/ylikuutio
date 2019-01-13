@@ -38,7 +38,9 @@ endif()
 add_subdirectory(pugixml)
 
 # assimp
-add_subdirectory(assimp)
+if(NOT(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
+    add_subdirectory(assimp)
+endif()
 
 if (COMPILE_SDL_FROM_SOURCE)
     include_directories(
