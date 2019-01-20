@@ -24,7 +24,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Evaluate mingw-std-threads: https://github.com/meganz/mingw-std-threads
 [ ] Evaluate winpthreads: https://sourceforge.net/p/mingw-w64/mingw-w64/ci/master/tree/mingw-w64-libraries/winpthreads/ https://en.wikipedia.org/wiki/MinGW#MinGW-w64
 [ ] Evaluate Pthreads-win32, in particular MinGW-w64 support: https://sourceware.org/pthreads-win32/ https://sourceforge.net/p/mingw-w64/wiki2/Compile%20pthreads/
-[ ] Write test code using C++11 threads.
+[ ] Write test code using C++14 threads.
 [ ] Write test code using pthreads.
 [ ] Implement scene loading which works in the background.
 [ ] Implement command line parameter `--headless` to Ajokki (do not open any windows, do not render anything).
@@ -32,6 +32,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement command line parameter `--window-size` to Ajokki (eg. `--window-size 1920x1080` or `--window-size=1920x1080`).
 [ ] Implement command line parameter `--debug` to Ajokki (log all kinds of debug information).
 [ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
+[ ] Evaluate SDL_net: https://www.libsdl.org/projects/SDL_net/
 [ ] Evaluate Asio (nework and low-level I/O library): https://think-async.com/
 [ ] Evaluate cpp-netlib (network library): http://cpp-netlib.org/
 [ ] Evaluate kNet (network library): https://github.com/juj/kNet/ (used by Urho3D: https://urho3d.github.io/ )
