@@ -22,6 +22,10 @@ Currently Ylikuutio works on 64-bit Linux and Windows systems.
 Android support is a work in progress.
 OpenGL 3.0 or newer is required.
 
+## Article
+In [Skrolli 2018.4](https://skrolli.fi/numerot/2018-4/) there is an article "Pelimoottori harrastusprojektina"
+(in Finnish, translation: "Game engine as a hobby project").
+
 ## Compiling
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 In Visual Studio compiling may break due to compiler-specific bugs.
