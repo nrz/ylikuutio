@@ -88,6 +88,8 @@ namespace yli
                 bool get_in_console() const;
                 void process_key_event(const SDL_KeyboardEvent& keyboard_event);
 
+                yli::ontology::Universe* get_universe() const;
+
                 // Public callbacks.
 
                 // Action mode keypress callbacks begin here.
@@ -318,8 +320,6 @@ namespace yli
                 static void charmods_callback(SDL_Window* window, unsigned int codepoint, int mods);
 
                 // Callbacks end here.
-
-                yli::ontology::Universe* get_universe() const;
 
                 void copy_historical_input_into_current_input();
                 bool exit_console();
