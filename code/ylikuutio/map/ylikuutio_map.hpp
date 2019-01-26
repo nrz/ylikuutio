@@ -34,6 +34,23 @@ namespace yli
             }
 
         template <class T1>
+            std::vector<std::string> get_keys(const std::unordered_map<std::string, T1>& unordered_map)
+            {
+                std::vector<std::string> key_vector;
+                key_vector.reserve(unordered_map.size());
+
+                for (auto key_and_value : unordered_map)
+                {
+                    key_vector.push_back(key_and_value.first); // key.
+                }
+
+                // sort key vector alphabetically.
+                std::sort(key_vector.begin(), key_vector.end());
+
+                return key_vector;
+            }
+
+        template <class T1>
             void print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::console::Console* const console)
             {
                 std::vector<std::string> key_vector = yli::map::get_keys(unordered_map_pointer);
