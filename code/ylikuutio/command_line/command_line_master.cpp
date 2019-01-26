@@ -183,7 +183,7 @@ namespace yli
 
         void CommandLineMaster::print_keys_and_values()
         {
-            yli::map::print_keys_and_values<std::string>(&this->arg_map);
+            yli::map::print_keys_and_values<std::string>(this->arg_map);
         }
     }
 }
