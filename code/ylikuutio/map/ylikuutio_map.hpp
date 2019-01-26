@@ -147,6 +147,30 @@ namespace yli
                     }
                 }
             }
+
+        template <class T1>
+            void print_keys_and_values(const std::unordered_map<std::string, T1>& unordered_map)
+            {
+                if (unordered_map.size() == 0)
+                {
+                    std::cout << "no keys.\n";
+                    return;
+                }
+
+                std::vector<std::string> key_vector = yli::map::get_keys(unordered_map);
+
+                for (std::string key : key_vector)
+                {
+                    if (unordered_map.at(key).empty())
+                    {
+                        std::cout << key << " (no value)\n";
+                    }
+                    else
+                    {
+                        std::cout << key << " = " << unordered_map.at(key) << "\n";
+                    }
+                }
+            }
     }
 }
 
