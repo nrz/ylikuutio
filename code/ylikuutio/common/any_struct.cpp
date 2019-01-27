@@ -65,7 +65,7 @@ namespace yli
 
         std::vector<std::string> AnyStruct::get_fieldnames() const
         {
-            return yli::map::get_keys(&this->values);
+            return yli::map::get_keys(this->values);
         }
 
         // The `private` functions begin here.

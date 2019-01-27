@@ -93,7 +93,7 @@ endif()
 
 if(COMPILE_SDL_FROM_SOURCE)
     include_directories(
-        external/SDL2-2.0.8/include/
+        external/SDL2-2.0.9/include/
         )
 else()
     include_directories(

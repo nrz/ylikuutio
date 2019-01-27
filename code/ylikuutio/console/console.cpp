@@ -229,7 +229,7 @@ namespace yli
         void Console::print_help()
         {
             this->print_text("Available commands:");
-            yli::map::print_keys_to_console(&this->command_callback_map, this);
+            yli::map::print_keys_to_console(this->command_callback_map, this);
         }
 
         void Console::render() const

@@ -88,6 +88,8 @@ namespace yli
                 bool get_in_console() const;
                 void process_key_event(const SDL_KeyboardEvent& keyboard_event);
 
+                yli::ontology::Universe* get_universe() const;
+
                 // Public callbacks.
 
                 // Action mode keypress callbacks begin here.
@@ -309,17 +311,12 @@ namespace yli
 
                 // Public callbacks end here.
 
-                template <class T1>
-                    friend void yli::map::print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::console::Console* const console);
-
                 bool should_be_rendered;
 
             private:
                 static void charmods_callback(SDL_Window* window, unsigned int codepoint, int mods);
 
                 // Callbacks end here.
-
-                yli::ontology::Universe* get_universe() const;
 
                 void copy_historical_input_into_current_input();
                 bool exit_console();
