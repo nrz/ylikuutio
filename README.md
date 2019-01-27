@@ -20,6 +20,7 @@ Ylikuutio is a 3D game engine designed for 3D games and simulations.
 Ylikuutio aims to run fast and support also older hardware.
 Currently Ylikuutio works on 64-bit Linux and Windows systems.
 Android support is a work in progress.
+macOS and iOS will be supported in the future.
 OpenGL 3.0 or newer is required.
 
 ## Article
@@ -115,6 +116,7 @@ Hirvi is a first person action-adventure of the adventures of
 a moose/elk called Hirvi. Cities are dangerous places for moose,
 even through moose are well-known pasifists.
 "hirvi" is a moose/elk in Finnish.
+Hirvi is a work in progress.
 
 Ajokki is sandbox demo program to check out some properties of
 Ylikuutio 3D engine. "Ajokki" is a working title based on a
