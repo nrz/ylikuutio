@@ -42,6 +42,8 @@
 // and then get a `yli::ontology::EntityFactory*` pointer using `Universe::get_entity_factory` and then
 // create all the rest entities using the member functions of that `EntityFactory`.
 //
+// There is no support for multiple simultaneous `Universe` entities. Do not create more than 1 `Universe`.
+//
 // `Universe`, `Scene`, `Shader`, `Material`, `Species`, `Object`.
 // `Universe`, `Scene`, `Shader`, `Material`, `VectorFont`, `Glyph`, `Object`.
 // `Universe` must be created before any `Scene`. `parent` must be given to each `Scene`.
