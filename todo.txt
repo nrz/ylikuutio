@@ -6,6 +6,7 @@ Fixes needed:
 
 Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement audio using SDL (SFML does not support Android and iOS yet).
+[ ] Implement audio mixing using SDL_mixer (SFML does not support Android and iOS yet).
 [ ] Create `audio::Sound` class, whose parent is `Entity`.
 [ ] Create `audio::PlayList` class, whose parent is `Entity`.
 [ ] Add support for crosscompiling to Android.
