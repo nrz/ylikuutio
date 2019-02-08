@@ -606,6 +606,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/scheme/scheme_master.cpp
     code/ylikuutio/scheme/scheme_master.hpp
 
+    # sdl, in alphabetical order
+    code/ylikuutio/sdl/sdl.cpp
+    code/ylikuutio/sdl/sdl.hpp
+
     # shaders, in alphabetical order
     code/ylikuutio/shaders/StandardShading.fragmentshader
     code/ylikuutio/shaders/StandardShading.vertexshader

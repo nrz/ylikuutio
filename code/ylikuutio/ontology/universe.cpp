@@ -35,6 +35,7 @@
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 #include "code/ylikuutio/common/pi.hpp"
+#include "code/ylikuutio/sdl/sdl.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -228,7 +229,7 @@ namespace yli
         {
             if (this->context != nullptr)
             {
-                yli::opengl::make_context_current(this->window, *this->context);
+                yli::sdl::make_context_current(this->window, *this->context);
             }
         }
 
