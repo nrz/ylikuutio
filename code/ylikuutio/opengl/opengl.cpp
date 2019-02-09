@@ -12,34 +12,6 @@ namespace yli
 {
     namespace opengl
     {
-        bool init_window()
-        {
-            if (SDL_Init(SDL_INIT_VIDEO) < 0)
-            {
-                std::cerr << "Failed to initialize SDL.\n";
-                return false;
-            }
-
-            SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-            SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-            return true;
-        }
-
-        SDL_Window* create_window(const int window_width, const int window_height, const char* const title)
-        {
-            return SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, SDL_WINDOW_OPENGL);
-        }
-
-        int set_window_windowed(SDL_Window* window)
-        {
-            return SDL_SetWindowFullscreen(window, 0);
-        }
-
-        void make_context_current(SDL_Window* window, SDL_GLContext context)
-        {
-            SDL_GL_MakeCurrent(window, context);
-        }
-
         bool init_glew()
         {
             if (glewInit() != GLEW_OK)

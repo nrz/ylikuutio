@@ -6,6 +6,7 @@
 #include "universe_struct.hpp"
 #include "camera_struct.hpp"
 #include "code/ylikuutio/console/console.hpp"
+#include "code/ylikuutio/sdl/sdl.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/scheme/scheme_master.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
@@ -40,6 +41,8 @@
 // The recommended way to create entities in a game or simulation is to first create `yli::ontology::Universe`
 // and then get a `yli::ontology::EntityFactory*` pointer using `Universe::get_entity_factory` and then
 // create all the rest entities using the member functions of that `EntityFactory`.
+//
+// There is no support for multiple simultaneous `Universe` entities. Do not create more than 1 `Universe`.
 //
 // `Universe`, `Scene`, `Shader`, `Material`, `Species`, `Object`.
 // `Universe`, `Scene`, `Shader`, `Material`, `VectorFont`, `Glyph`, `Object`.
@@ -367,7 +370,7 @@ namespace yli
                     this->window  = nullptr;
 
                     // Initialise SDL
-                    if (!yli::opengl::init_window())
+                    if (!yli::sdl::init_SDL())
                     {
                         std::cerr << "Failed to initialize SDL.\n";
                         return;
@@ -375,7 +378,7 @@ namespace yli
 
                     // Open a window and create its OpenGL context.
                     std::cout << "Opening a window and creating its OpenGL context...\n";
-                    this->window = yli::opengl::create_window(
+                    this->window = yli::sdl::create_window(
                             static_cast<int>(this->window_width),
                             static_cast<int>(this->window_height),
                             this->window_title.c_str());

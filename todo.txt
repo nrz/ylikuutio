@@ -5,6 +5,18 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the development of Ylikuutio:
+[ ] Implement audio using SDL (SFML does not support Android and iOS yet).
+[ ] Implement audio mixing using SDL_mixer (SFML does not support Android and iOS yet).
+[ ] Create `audio::Sound` class, whose parent is `Entity`.
+[ ] Create `audio::PlayList` class, whose parent is `Entity`.
+[ ] Add support for crosscompiling to Android.
+[ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
+[ ] Evaluate SDL_net: https://www.libsdl.org/projects/SDL_net/
+[ ] Evaluate Asio (nework and low-level I/O library): https://think-async.com/
+[ ] Evaluate cpp-netlib (network library): http://cpp-netlib.org/
+[ ] Evaluate kNet (network library): https://github.com/juj/kNet/ (used by Urho3D: https://urho3d.github.io/ )
+[ ] Implement chat server using the chosen network library.
+[ ] Implement chat client using the chosen network library.
 [ ] Implement `AnyValueEntity : public AnyValue, public Entity`.
 [ ] Implement `AnyStructEntity : public AnyStruct, public Entity`.
 [ ] Write code to convert ASCII grid files (height maps) to binary FBX files, storing also interpolated vertices, UVs, and normals.
@@ -12,8 +24,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Convert ASCII grid files into binary FBX files.
 [ ] Implement `Camera` entities.
 [ ] Implement vertex selection and modification (with a mouse cursor), using Bullet Physics SDK. https://pybullet.org/
-[ ] Create `audio::Sound` class, whose parent is `Entity`.
-[ ] Create `audio::PlayList` class, whose parent is `Entity`.
 [ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
 [ ] Implement `pause` console command for pausing `Sound`s and `Playlist`s.
 [ ] Implement `next` console command for changing to the next `Sound` in a `Playlist`.
@@ -31,13 +41,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement command line parameter `--input-file` to Ajokki (load keypresses and keyreleases from a file, eg. `--input-file foo` or `--input-file=foo`).
 [ ] Implement command line parameter `--window-size` to Ajokki (eg. `--window-size 1920x1080` or `--window-size=1920x1080`).
 [ ] Implement command line parameter `--debug` to Ajokki (log all kinds of debug information).
-[ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
-[ ] Evaluate SDL_net: https://www.libsdl.org/projects/SDL_net/
-[ ] Evaluate Asio (nework and low-level I/O library): https://think-async.com/
-[ ] Evaluate cpp-netlib (network library): http://cpp-netlib.org/
-[ ] Evaluate kNet (network library): https://github.com/juj/kNet/ (used by Urho3D: https://urho3d.github.io/ )
-[ ] Implement chat server using the chosen network library.
-[ ] Implement chat client using the chosen network library.
 [ ] Evaluate AppVeyor: https://github.com/marketplace/appveyor
 [ ] Implement support for `man` command in console (a container class with the command callback together with the `man` text for the command).
 [ ] Optimize `Symbiosis` entities' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.

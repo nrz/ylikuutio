@@ -255,9 +255,9 @@ int main(const int argc, const char* const argv[])
     my_console->print_text("Welcome! Please write \"help\" for more");
     my_console->print_text("information.");
 
-    /*********************************************************************\
+    /*********************************************************************
      *  Callback engines for action mode keyreleases begin here.         *
-    \*********************************************************************/
+     *********************************************************************/
 
     std::cout << "Defining action mode keyrelease callback engines.\n";
 
@@ -296,9 +296,9 @@ int main(const int argc, const char* const argv[])
             enable_toggle_help_mode_callback_engine);
     new yli::callback_system::CallbackParameter("", std::make_shared<yli::datatypes::AnyValue>(my_universe), false, enable_toggle_help_mode_callback_object);
 
-    /*********************************************************************\
+    /*********************************************************************
      *  Callback engines for action mode keypresses begin here.          *
-    \*********************************************************************/
+     *********************************************************************/
 
     std::cout << "Defining action mode keypress callback engines.\n";
 
@@ -387,9 +387,9 @@ int main(const int argc, const char* const argv[])
             toggle_help_mode_callback_engine);
     new yli::callback_system::CallbackParameter("", std::make_shared<yli::datatypes::AnyValue>(my_universe), false, toggle_help_mode_callback_object);
 
-    /*********************************************************************\
+    /*********************************************************************
      *  Callback engines for console keyreleases begin here.             *
-    \*********************************************************************/
+     *********************************************************************/
 
     std::cout << "Defining console keyrelease callback engines.\n";
 
@@ -457,9 +457,9 @@ int main(const int argc, const char* const argv[])
     yli::callback_system::CallbackEngine* const enable_end_callback_engine = new yli::callback_system::CallbackEngine();
     new yli::console::ConsoleCallbackObject(&yli::console::Console::enable_end, enable_end_callback_engine, my_console);
 
-    /*********************************************************************\
+    /*********************************************************************
      *  Callback engines for console keypresses begin here.              *
-    \*********************************************************************/
+     *********************************************************************/
 
     std::cout << "Defining console keypress callback engines.\n";
 
@@ -601,11 +601,11 @@ int main(const int argc, const char* const argv[])
     console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_END, end_callback_engine });
     my_console->set_my_keypress_callback_engine_vector_pointer(&console_keypress_callback_engines);
 
-    /*********************************************************************\
+    /*********************************************************************
      * Callback engines for console commands begin here.                 *
      * These define what commands there are available in the console     *
      * and what each command does.                                       *
-     \********************************************************************/
+     *********************************************************************/
 
     std::cout << "Defining console command callback engines.\n";
 
@@ -641,10 +641,11 @@ int main(const int argc, const char* const argv[])
     bool is_exit_requested = false;
     bool has_mouse_focus = true;
 
+    audio_master.add_to_playlist("Hirvi_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
     audio_master.add_to_playlist("Hirvi_playlist", "414270__greek555__sample-97-bpm.wav");
-    audio_master.add_to_playlist("Hirvi_playlist", "419588__greek555__dreaming-of-me.ogg");
-    audio_master.add_to_playlist("Hirvi_playlist", "416882__greek555__blue-play.ogg");
-    audio_master.add_to_playlist("Hirvi_playlist", "395487__frankum__tecno-pop-base-and-guitar-2.ogg");
+    // audio_master.add_to_playlist("Hirvi_playlist", "419588__greek555__dreaming-of-me.ogg");
+    // audio_master.add_to_playlist("Hirvi_playlist", "416882__greek555__blue-play.ogg");
+    // audio_master.add_to_playlist("Hirvi_playlist", "395487__frankum__tecno-pop-base-and-guitar-2.ogg");
     audio_master.play_playlist("Hirvi_playlist");
 
     SDL_Event sdl_event;

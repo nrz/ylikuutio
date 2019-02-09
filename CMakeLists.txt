@@ -10,9 +10,6 @@ project(ylikuutio)
 # comment the following line to use `libsdl2-dev` shipped with Linux.
 set(COMPILE_SDL_FROM_SOURCE true)
 
-# comment the following line to use `libsfml-dev` shipped with Linux.
-set(COMPILE_SFML_FROM_SOURCE true)
-
 # comment the following line to disable unit tests with Google Test.
 # set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 
@@ -27,11 +24,6 @@ endif()
 
 find_package(Threads REQUIRED)
 
-if (NOT(COMPILE_SFML_FROM_SOURCE))
-    set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
-    find_package(SFML 2 REQUIRED system audio)
-endif()
-
 if (NOT(COMPILE_SDL_FROM_SOURCE))
     set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
     set(CMAKE_EXE_LINKER_FLAGS "-static -static-libgcc -static-libstdc++")
@@ -45,7 +37,7 @@ endif()
 # Compile external dependencies
 add_subdirectory (external)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSFML_STATIC -std=c++14 -O3 -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -O3 -Wall")
 
 # set(CMAKE_COLOR_MAKEFILE ON)
 # set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -77,19 +69,6 @@ enable_testing()
 
 # Set default ExternalProject root directory
 set_directory_properties(PROPERTIES EP_PREFIX ${CMAKE_BINARY_DIR}/external)
-
-if (COMPILE_SFML_FROM_SOURCE)
-    include_directories(
-        external/SFML-2.4.2/include/
-        external/SFML-2.4.2/src
-        external/SFML-2.4.2/extlibs/headers/
-        external/SFML-2.4.2/extlibs/headers/AL/
-        )
-else()
-    include_directories(
-        ${SFML_INCLUDE_DIR}
-        )
-endif()
 
 if(COMPILE_SDL_FROM_SOURCE)
     include_directories(
@@ -247,20 +226,6 @@ if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
         GLEW_200
         )
 endif()
-
-if (COMPILE_SFML_FROM_SOURCE)
-    set(ALL_LIBS
-        ${ALL_LIBS}
-        sfml-system
-        sfml-audio
-        )
-else()
-    set(ALL_LIBS
-        ${ALL_LIBS}
-        ${SFML_LIBRARIES}
-        )
-endif()
-
 
 if (COMPILE_SDL_FROM_SOURCE)
     set(ALL_LIBS
@@ -605,6 +570,10 @@ add_library(ylikuutio STATIC
     # scheme, in alphabetical order.
     code/ylikuutio/scheme/scheme_master.cpp
     code/ylikuutio/scheme/scheme_master.hpp
+
+    # sdl, in alphabetical order
+    code/ylikuutio/sdl/sdl.cpp
+    code/ylikuutio/sdl/sdl.hpp
 
     # shaders, in alphabetical order
     code/ylikuutio/shaders/StandardShading.fragmentshader
