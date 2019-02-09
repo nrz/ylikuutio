@@ -45,10 +45,10 @@ In Linux it's simple.
 
 First, install all the necessary compilers, tools and libs. You may use
 your favorite package manager such as apt, aptitude, apt-get, yum etc.
-You all need these packages: cmake make g++ gcc libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsdl2-dev libsfml-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
+You all need these packages: cmake make g++ gcc libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
 Eg. with apt:
 
-    $ sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsdl2-dev libsfml-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
+    $ sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
 
 If you are doing a cross compile from Linux to Windows, you need also:
 
@@ -236,7 +236,7 @@ A: Some parts of Ylikuutio (shaders, some file loaders, etc.) are based
 on [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/), which I really recommend for anyone
 interested in learning OpenGL programming. Ylikuutio also uses external
 libraries such as (in alphabetical order) Asio, Assimp, GLM, GLEW, OpenFBX,
-s7, SDL, SFML, and pugixml. The rest is written from scratch.
+s7, SDL, and pugixml. The rest is written from scratch.
 
 Q: Why s7 is chosen as the scripting language of Ylikuutio?
 A: I like Lisp-family languages and s7 fulfils my
@@ -253,7 +253,7 @@ A: Ylikuutio uses right-handed world coordinates, so X grows eastward, Z grows s
 * callbacks
 * fully functioning in-game console
 * multiple scenes in the same `Universe` (`activate` console command)
-* audio with Simple and Fast Multimedia Library (SFML)
+* audio with Simple DirectMedia Layer (SDL)
 * option for wireframe models (`set wireframe true`, `set wireframe false`)
 
 ## Future developments underway
@@ -312,7 +312,6 @@ A: Ylikuutio uses right-handed world coordinates, so X grows eastward, Z grows s
 * [Ryan's CMake Modules](https://github.com/rpavlik/cmake-modules) is licensed under [Boost Software License Version 1.0](https://github.com/rpavlik/cmake-modules/blob/master/LICENSE_1_0.txt).
 * [s7](https://ccrma.stanford.edu/software/snd/snd/s7.html) is licensed under a BSD license.
 * [SDL2](https://www.libsdl.org/) is licensed under [the zlib license](https://www.libsdl.org/).
-* [SFML](https://www.sfml-dev.org/) is licensed under [the zlib/png license](https://www.sfml-dev.org/license.php).
 * [pugixml](https://pugixml.org/) is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 
 ### Libraries not yet in use
