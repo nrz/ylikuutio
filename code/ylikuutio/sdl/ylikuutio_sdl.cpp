@@ -1,4 +1,4 @@
-#include "sdl.hpp"
+#include "ylikuutio_sdl.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.

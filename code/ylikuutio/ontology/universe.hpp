@@ -6,7 +6,7 @@
 #include "universe_struct.hpp"
 #include "camera_struct.hpp"
 #include "code/ylikuutio/console/console.hpp"
-#include "code/ylikuutio/sdl/sdl.hpp"
+#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/scheme/scheme_master.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
