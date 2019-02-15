@@ -35,7 +35,7 @@
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 #include "code/ylikuutio/common/pi.hpp"
-#include "code/ylikuutio/sdl/sdl.hpp"
+#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.

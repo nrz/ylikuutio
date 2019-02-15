@@ -5,7 +5,6 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the development of Ylikuutio:
-[ ] Implement audio using SDL (SFML does not support Android and iOS yet).
 [ ] Implement audio mixing using SDL_mixer (SFML does not support Android and iOS yet).
 [ ] Create `audio::Sound` class, whose parent is `Entity`.
 [ ] Create `audio::PlayList` class, whose parent is `Entity`.
@@ -126,3 +125,4 @@ Ready:
 [x] Write code to save screenshots into a raw data file which can be opened eg. with GIMP.
 [x] Add variable `text_size` (affects size of console text and other texts printed on screen).
 [x] Implement `AnyStruct`.
+[x] Implement audio using SDL (SFML does not support Android and iOS yet).
