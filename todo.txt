@@ -5,6 +5,7 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the development of Ylikuutio:
+[ ] Write a simple triangle drawing software (android-kolmio) for Android, using Android NDK and CMake.
 [ ] Implement audio mixing using SDL_mixer.
 [ ] Create `audio::Sound` class, whose parent is `Entity`.
 [ ] Create `audio::PlayList` class, whose parent is `Entity`.
