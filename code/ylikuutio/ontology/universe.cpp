@@ -658,11 +658,11 @@ namespace yli
                 const std::size_t texture_height = universe->framebuffer_height;
 
                 // create FBO (off-screen framebuffer object):
-                uint32_t fb = 0;
-                glGenFramebuffers(1, &fb);
+                uint32_t framebuffer = 0;
+                glGenFramebuffers(1, &framebuffer);
 
                 // bind offscreen buffer.
-                glBindFramebuffer(GL_FRAMEBUFFER, fb);
+                glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 
                 // create texture.
                 uint32_t texture;
@@ -690,7 +690,7 @@ namespace yli
                 }
 
                 // bind offscreen buffer.
-                glBindFramebuffer(GL_FRAMEBUFFER, fb);
+                glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 
                 // set background color for framebuffer.
                 yli::opengl::set_background_color(
@@ -722,7 +722,7 @@ namespace yli
                 yli::file::binary_write(result_vector, filename);
 
                 delete[] result_array;
-                glDeleteFramebuffers(1, &fb);
+                glDeleteFramebuffers(1, &framebuffer);
 
                 // bind the default framebuffer for on-screen rendering.
                 glBindFramebuffer(GL_FRAMEBUFFER, 0);
