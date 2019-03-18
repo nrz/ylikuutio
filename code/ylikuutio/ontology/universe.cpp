@@ -665,9 +665,9 @@ namespace yli
                 glBindFramebuffer(GL_FRAMEBUFFER, fb);
 
                 // create texture.
-                uint32_t tex;
-                glGenTextures(1, &tex);
-                glBindTexture(GL_TEXTURE_2D, tex);
+                uint32_t texture;
+                glGenTextures(1, &texture);
+                glBindTexture(GL_TEXTURE_2D, texture);
 
                 // define texture.
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture_width, texture_height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
@@ -675,7 +675,7 @@ namespace yli
                 yli::opengl::set_filtering_parameters();
 
                 // attach texture.
-                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0);
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
 
                 // create and bind render buffer with depth and stencil attachments.
                 uint32_t render_buffer;
