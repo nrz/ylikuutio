@@ -57,8 +57,8 @@ namespace ajokki
         // Create the shader, store it in `joensuu_center_west_shader`.
         ShaderStruct joensuu_center_west_shader_struct;
         joensuu_center_west_shader_struct.parent = joensuu_center_west_scene;
-        joensuu_center_west_shader_struct.vertex_shader = "StandardShading.vertexshader";
-        joensuu_center_west_shader_struct.fragment_shader = "StandardShading.fragmentshader";
+        joensuu_center_west_shader_struct.vertex_shader = "standard_shading.vert";
+        joensuu_center_west_shader_struct.fragment_shader = "standard_shading.frag";
 
         std::cout << "Creating yli::ontology::Entity* joensuu_center_west_shader_entity ...\n";
         yli::ontology::Entity* const joensuu_center_west_shader_entity = entity_factory->create_Shader(joensuu_center_west_shader_struct);

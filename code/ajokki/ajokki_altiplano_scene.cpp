@@ -57,8 +57,8 @@ namespace ajokki
         // Create the shader, store it in `altiplano_shader`.
         ShaderStruct altiplano_shader_struct;
         altiplano_shader_struct.parent = altiplano_scene;
-        altiplano_shader_struct.vertex_shader = "StandardShading.vertexshader";
-        altiplano_shader_struct.fragment_shader = "StandardShading.fragmentshader";
+        altiplano_shader_struct.vertex_shader = "standard_shading.vert";
+        altiplano_shader_struct.fragment_shader = "standard_shading.frag";
 
         std::cout << "Creating yli::ontology::Entity* altiplano_shader_entity ...\n";
         yli::ontology::Entity* const altiplano_shader_entity = entity_factory->create_Shader(altiplano_shader_struct);

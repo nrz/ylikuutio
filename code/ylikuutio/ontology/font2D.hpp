@@ -95,7 +95,7 @@ namespace yli
                     glGenBuffers(1, &this->uvbuffer);
 
                     // Initialize Shader
-                    this->programID = yli::load::load_shaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
+                    this->programID = yli::load::load_shaders("text_vertex_shader.vert", "text_vertex_shader.frag");
 
                     // Get a handle for our buffers
                     this->vertex_position_in_screenspaceID = glGetAttribLocation(this->programID, "vertexPosition_screenspace");
