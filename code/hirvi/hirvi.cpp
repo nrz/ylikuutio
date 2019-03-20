@@ -107,7 +107,7 @@ int main(const int argc, const char* const argv[])
     // This vector points to current keyrelease callback engines vector.
     std::vector<KeyAndCallbackStruct>* current_keyrelease_callback_engine_vector_pointer = &action_mode_keyrelease_callback_engines;
 
-    // Create the world, store it in `my_universe`.
+    // Create the `Universe`, store it in `my_universe`.
     std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
     UniverseStruct universe_struct;
     universe_struct.window_title = "Hirvi 0.0.3, powered by Ylikuutio 0.0.3";
