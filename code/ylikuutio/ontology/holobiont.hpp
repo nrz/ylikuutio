@@ -109,20 +109,20 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
-                yli::ontology::Symbiosis* symbiosis_parent; // pointer to `Symbiosis`.
+                yli::ontology::Symbiosis* symbiosis_parent; // pointer to the `Symbiosis`.
 
                 std::vector<yli::ontology::Biont*> biont_pointer_vector;
                 std::queue<std::size_t> free_biontID_queue;
 
-                glm::vec3 original_scale_vector;       // original scale vector.
-                glm::vec3 rotate_vector;               // rotate vector.
-                glm::vec3 translate_vector;            // translate vector.
-                glm::vec3 initial_rotate_vector;       // initial rotate vector.
+                glm::vec3 original_scale_vector;            // original scale vector.
+                glm::vec3 rotate_vector;                    // rotate vector.
+                glm::vec3 translate_vector;                 // translate vector.
+                glm::vec3 initial_rotate_vector;            // initial rotate vector.
 
                 std::size_t number_of_bionts;
 
-                float rotate_angle;                    // rotate angle.
-                float initial_rotate_angle;            // initial rotate angle.
+                float rotate_angle;                         // rotate angle.
+                float initial_rotate_angle;                 // initial rotate angle.
 
                 bool should_ylikuutio_render_this_holobiont;
                 bool has_entered;

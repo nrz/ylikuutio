@@ -17,12 +17,12 @@ typedef struct UniverseStruct
         framebuffer_height(4500),
         text_size(40),
         font_size(16),
-        max_FPS(50000),        // default value max 50000 frames per second.
-        speed(5.0f),           // default value 5.0 units / second
+        max_FPS(50000),         // default value max 50000 frames per second.
+        speed(5.0f),            // default value 5.0 units / second.
         mouse_speed(0.005f),
-        gravity(9.81f / 60.0f),
+        gravity(9.81f / 60.0f), // default Earth gravity (9.81 m/s^2).
         znear(1.0f),
-        zfar(5000.0f), // visibility: 5000 units.
+        zfar(5000.0f),          // visibility: from 1 to 5000 units.
         is_headless(false),
         current_keypress_callback_engine_vector_pointer_pointer(nullptr),
         current_keyrelease_callback_engine_vector_pointer_pointer(nullptr)
@@ -45,7 +45,7 @@ typedef struct UniverseStruct
     float zfar;
     bool is_headless;
 
-    // these are for `yli::console::Console`.
+    // These are for `yli::console::Console`.
     std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer;
     std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
 } UniverseStruct;

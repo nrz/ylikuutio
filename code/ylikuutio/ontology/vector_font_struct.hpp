@@ -23,10 +23,10 @@ typedef struct VectorFontStruct
     }
 
     // used for all files (for all `VectorFont`s).
-    yli::ontology::Material* parent;        // pointer to the material object.
+    yli::ontology::Material* parent; // pointer to the `Material`.
     float vertex_scaling_factor;
-    std::string font_file_format;           // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
-    std::string font_filename;              // filename of the font file.
+    std::string font_file_format;    // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
+    std::string font_filename;       // filename of the font file.
 } VectorFontStruct;
 
 #endif

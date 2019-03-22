@@ -44,7 +44,7 @@ namespace yli
         {
             public:
                 // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
-                // and requests a new `childID` from the new `Species` or from the new `Glyph`.
+                // and requests a new `childID` from the new `Species` or from the new `Text3D`.
                 void bind_to_new_parent(yli::ontology::Species* const new_parent);
                 void bind_to_new_parent(yli::ontology::Text3D* const new_parent);
                 void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
@@ -64,7 +64,7 @@ namespace yli
 
                     this->has_entered           = false;
 
-                    // enable rendering of a recently entered Object.
+                    // enable rendering of a recently entered `Object`.
                     // TODO: enable entering without enabling rendering.
                     this->should_ylikuutio_render_this_object = true;
 
@@ -84,7 +84,7 @@ namespace yli
                         this->glyph          = nullptr;
                     }
 
-                    // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.
+                    // get `childID` from `Species` or `Text3D` and set pointer to this `Object`.
                     this->bind_to_parent();
 
                     // `yli::ontology::Entity` member variables begin here.
@@ -112,22 +112,22 @@ namespace yli
                 void render();
                 void render_this_object(yli::ontology::Shader* const shader_pointer);
 
-                yli::ontology::Species* species_parent; // pointer to `Species` parent.
-                yli::ontology::Text3D* text3D_parent;   // pointer to `Text3D` parent.
-                yli::ontology::Glyph* glyph;            // pointer to `Glyph` (not a parent!).
+                yli::ontology::Species* species_parent; // pointer to the `Species` parent.
+                yli::ontology::Text3D* text3D_parent;   // pointer to the `Text3D` parent.
+                yli::ontology::Glyph* glyph;            // pointer to the `Glyph` (not a parent!).
 
                 bool is_character;
                 bool quaternions_in_use;
                 bool has_entered;
                 bool should_ylikuutio_render_this_object;
 
-                glm::vec3 original_scale_vector;       // original scale vector.
-                glm::vec3 rotate_vector;               // rotate vector.
-                glm::vec3 translate_vector;            // translate vector.
-                glm::vec3 initial_rotate_vector;       // initial rotate vector.
+                glm::vec3 original_scale_vector;        // original scale vector.
+                glm::vec3 rotate_vector;                // rotate vector.
+                glm::vec3 translate_vector;             // translate vector.
+                glm::vec3 initial_rotate_vector;        // initial rotate vector.
 
-                float initial_rotate_angle;          // initial rotate angle.
-                float rotate_angle;                  // rotate angle.
+                float initial_rotate_angle;             // initial rotate angle.
+                float rotate_angle;                     // rotate angle.
         };
     }
 }

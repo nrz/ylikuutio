@@ -18,7 +18,7 @@ namespace yli
     {
         void Entity::bind_to_new_parent(yli::ontology::Entity* new_entity_parent)
         {
-            // do nothing.
+            // Do nothing.
             // `yli::ontology` classes which support binding must `override`
             // this `yli::ontology::Entity` base class implementation.
         }
@@ -98,7 +98,7 @@ namespace yli
 
         void Entity::prerender() const
         {
-            // requirements:
+            // Requirements:
             // `this->prerender_callback` must not be `nullptr`.
             // `this->universe` must not be `nullptr`.
             // `this->universe->setting_master` must not be `nullptr`.
@@ -113,7 +113,7 @@ namespace yli
 
         void Entity::postrender() const
         {
-            // requirements:
+            // Requirements:
             // `this->postrender_callback` must not be `nullptr`.
             // `this->universe` must not be `nullptr`.
             // `this->universe->setting_master` must not be `nullptr`.
@@ -128,7 +128,7 @@ namespace yli
 
         void Entity::set_name(const std::string& name)
         {
-            // requirements:
+            // Requirements:
             // `this->universe` must not be `nullptr`.
             // `name` must not be already in use.
 

@@ -33,7 +33,7 @@ namespace yli
         {
             public:
                 // destructor.
-                // glyphs should be destroyed only by destroying the entire `VectorFont`.
+                // `Glyph`s should be destroyed only by destroying the entire `VectorFont`.
                 virtual ~Glyph();
 
                 yli::ontology::Entity* get_parent() const override;
@@ -49,7 +49,6 @@ namespace yli
                     friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
             private:
-                // constructor.
                 Glyph(const GlyphStruct& glyph_struct)
                     : Model(glyph_struct.universe, glyph_struct.vram_buffer_in_use)
                 {
@@ -94,11 +93,11 @@ namespace yli
                 // this method renders all `Object`s of this `Glyph`.
                 void render();
 
-                yli::ontology::VectorFont* parent;  // pointer to `VectorFont`.
+                yli::ontology::VectorFont* parent; // pointer to the `VectorFont`.
 
                 std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
-                const char* glyph_name_pointer;        // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
-                const char* unicode_char_pointer;      // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
+                const char* glyph_name_pointer;    // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
+                const char* unicode_char_pointer;  // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
         };
     }
 }

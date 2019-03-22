@@ -26,7 +26,7 @@ namespace yli
             public:
                 void bind_to_parent();
 
-                // this method sets pointer to this `Text2D` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Font2D`.
+                // This method sets pointer to this `Text2D` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Font2D`.
                 void bind_to_new_parent(yli::ontology::Font2D* const new_parent);
 
                 // constructor.
@@ -44,7 +44,7 @@ namespace yli
                     this->text_size = text_struct.text_size;
                     this->font_size = text_struct.font_size;
 
-                    // get `childID` from `Font2D` and set pointer to this `Text2D`.
+                    // Get `childID` from `Font2D` and set pointer to this `Text2D`.
                     this->bind_to_parent();
 
                     // Initialize class members with some dummy values.
@@ -54,11 +54,11 @@ namespace yli
                     this->vertex_position_in_screenspaceID = 0;
                     this->vertexUVID                       = 0;
 
-                    // Initialize VBO
+                    // Initialize VBO.
                     glGenBuffers(1, &this->vertexbuffer);
                     glGenBuffers(1, &this->uvbuffer);
 
-                    // Get a handle for our buffers
+                    // Get a handle for our buffers.
                     this->vertex_position_in_screenspaceID = glGetAttribLocation(this->parent->get_programID(), "vertexPosition_screenspace");
                     this->vertexUVID = glGetAttribLocation(this->parent->get_programID(), "vertexUV");
 
@@ -83,9 +83,9 @@ namespace yli
             private:
                 yli::ontology::Font2D* parent;
 
-                uint32_t vertexbuffer; // Buffer containing the vertices
-                uint32_t uvbuffer;     // Buffer containing the UVs
-                uint32_t programID;    // The `programID` of the shader used to display the text, returned by `load_shaders`.
+                uint32_t vertexbuffer;                     // Buffer containing the vertices
+                uint32_t uvbuffer;                         // Buffer containing the UVs
+                uint32_t programID;                        // The `programID` of the shader used to display the text, returned by `load_shaders`.
                 uint32_t vertex_position_in_screenspaceID; // Location of the program's `vertexPosition_screenspace` attribute.
                 uint32_t vertexUVID;                       // Location of the program's `vertexUV` attribute.
 

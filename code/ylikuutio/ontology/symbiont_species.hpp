@@ -124,7 +124,7 @@ namespace yli
                 yli::ontology::Entity* get_parent() const override;
 
             private:
-                glm::vec3 light_position;                // light position.
+                glm::vec3 light_position; // light position.
 
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
@@ -142,11 +142,11 @@ namespace yli
                 std::queue<std::size_t> free_biontID_queue;
                 std::size_t number_of_bionts;
 
-                yli::ontology::SymbiontMaterial* symbiont_material_parent; // pointer to `SymbiontMaterial`.
-                yli::ontology::Shader* shader;           // pointer to `Shader`.
+                yli::ontology::SymbiontMaterial* symbiont_material_parent; // pointer to the `SymbiontMaterial` (parent).
+                yli::ontology::Shader* shader;                             // pointer to `Shader` (not a parent!).
 
-                std::string model_file_format;        // type of the model file, eg. `"bmp"`.
-                std::string model_filename;           // filename of the model file.
+                std::string model_file_format;                             // type of the model file, eg. `"bmp"`.
+                std::string model_filename;                                // filename of the model file.
         };
     }
 }

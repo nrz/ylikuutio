@@ -22,7 +22,7 @@ typedef struct ShaderStruct
 
     std::string vertex_shader;    // filename of vertex shader.
     std::string fragment_shader;  // filename of fragment shader.
-    yli::ontology::Scene* parent; // pointer to the scene (draw list).
+    yli::ontology::Scene* parent; // pointer to the `Scene`.
 } ShaderStruct;
 
 #endif

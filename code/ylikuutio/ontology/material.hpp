@@ -150,12 +150,12 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
-                yli::ontology::Shader* parent;      // pointer to `Shader`.
+                yli::ontology::Shader* parent;       // pointer to the `Shader`.
 
                 bool is_symbiont_material;
 
-                uint32_t texture;                        // Texture of this `Material`, returned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
-                uint32_t openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
+                uint32_t texture;                    // texture of this `Material`, returned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
+                uint32_t openGL_textureID;           // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler")`.
 
                 std::vector<yli::ontology::Species*> species_pointer_vector;
                 std::vector<yli::ontology::VectorFont*> vector_font_pointer_vector;
@@ -167,8 +167,8 @@ namespace yli
                 std::size_t number_of_vector_fonts;
                 std::size_t number_of_chunk_masters;
 
-                std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
-                std::string texture_filename;          // filename of the model file.
+                std::string texture_file_format;     // type of the model file, eg. `"bmp"`.
+                std::string texture_filename;        // filename of the model file.
         };
     }
 }

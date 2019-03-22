@@ -29,21 +29,20 @@ namespace yli
         class Camera: public yli::ontology::Movable
         {
             public:
-                // constructor.
                 Camera(yli::ontology::Universe* const universe, const CameraStruct& camera_struct)
                     : Movable(universe, camera_struct.cartesian_coordinates)
                 {
+                    // constructor.
+
                     this->horizontal_angle  = NAN;
                     this->vertical_angle    = NAN;
 
-                    // Variables related to the camera.
+                    // variables related to the projection.
                     this->projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
                     this->view_matrix       = glm::mat4(1.0f); // identity matrix (dummy value).
-
-                    // constructor.
                     this->parent            = camera_struct.parent;
 
-                    // get `childID` from `Scene` and set pointer to this `Camera`.
+                    // Get `childID` from the `Scene` and set pointer to this `Camera`.
                     this->bind_to_parent();
 
                     // `yli::ontology::Entity` member variables begin here.
@@ -78,11 +77,11 @@ namespace yli
 
                 bool compute_and_update_matrices_from_inputs();
 
-                // Variables related to location and orientation.
+                // variables related to location and orientation.
 
                 yli::ontology::Scene* parent;
 
-                // Variables related to the camera.
+                // variables related to the projection.
                 glm::mat4 projection_matrix;
                 glm::mat4 view_matrix;
                 double horizontal_angle;

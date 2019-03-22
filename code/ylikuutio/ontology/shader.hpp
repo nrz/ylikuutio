@@ -115,7 +115,7 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
-                yli::ontology::Scene* parent;      // pointer to `Scene`.
+                yli::ontology::Scene* parent;         // pointer to the `Scene`.
 
                 uint32_t programID;                   // this `Shader`'s `programID`, returned by `load_shaders`.
 

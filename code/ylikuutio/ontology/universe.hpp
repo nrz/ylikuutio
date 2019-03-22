@@ -318,7 +318,7 @@ namespace yli
                     this->is_headless   = universe_struct.is_headless;
 
                     this->current_camera_projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
-                    this->current_camera_view_matrix       = glm::mat4(1.0f);       // identity matrix (dummy value).
+                    this->current_camera_view_matrix       = glm::mat4(1.0f); // identity matrix (dummy value).
                     this->current_camera_horizontal_angle  = NAN;
                     this->current_camera_vertical_angle    = NAN;
 
@@ -419,10 +419,10 @@ namespace yli
                 // this method renders the active `Scene` of this `Universe`.
                 void render_without_changing_depth_test();
 
-                // this method stes the active `World`.
+                // this method sets the active `World`.
                 void set_active_world(yli::ontology::World* const world);
 
-                // this method stes the active `Scene`.
+                // this method sets the active `Scene`.
                 void set_active_scene(yli::ontology::Scene* const world);
 
                 std::string eval_string(const std::string& my_string);
@@ -609,7 +609,7 @@ namespace yli
                 // Named entities are stored here so that they can be recalled, if needed.
                 std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
 
-                // Variables related to the window.
+                // variables related to the window.
                 std::shared_ptr<SDL_GLContext> context;
                 SDL_Window* window;
                 std::size_t window_width;
@@ -619,17 +619,17 @@ namespace yli
                 std::string window_title;
                 bool is_headless;
 
-                // Variables related to the camera.
+                // variables related to `Camera` (projection).
                 glm::mat4 current_camera_projection_matrix;
                 glm::mat4 current_camera_view_matrix;
-                float aspect_ratio;   // at the moment all cameras use the same aspect ratio.
-                float initialFoV;     // at the moment all cameras use the same FoV.
+                float aspect_ratio;    // At the moment all `Camera`s use the same aspect ratio.
+                float initialFoV;      // At the moment all `Camera`s use the same FoV.
 
-                // Variables related to the fonts and texts used.
+                // variables related to the fonts and texts used.
                 std::size_t text_size;
                 std::size_t font_size;
 
-                // Variables related to timing of events.
+                // variables related to timing of events.
                 std::size_t max_FPS;
                 double delta_time;
 

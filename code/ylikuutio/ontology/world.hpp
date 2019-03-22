@@ -25,16 +25,17 @@ namespace yli
                 void bind_scene(yli::ontology::Scene* const scene);
                 void unbind_scene(const std::size_t childID);
 
-                // constructor.
                 World(yli::ontology::Universe* const universe)
                     : Entity(universe)
                 {
+                    // constructor.
+
                     this->parent       = universe;
                     this->active_scene = nullptr;
 
                     this->number_of_scenes = 0;
 
-                    // get `childID` from `Universe` and set pointer to this `World`.
+                    // Get `childID` from `Universe` and set pointer to this `World`.
                     this->bind_to_parent();
 
                     // `yli::ontology::Entity` member variables begin here.
@@ -46,10 +47,10 @@ namespace yli
                 // destructor.
                 virtual ~World();
 
-                // this method renders the active `Scene` of this `World`.
+                // This method renders the active `Scene` of this `World`.
                 void render();
 
-                // this method stes the active `Scene`.
+                // This method sets the active `Scene`.
                 void set_active_scene(yli::ontology::Scene* const scene);
 
                 yli::ontology::Scene* get_active_scene() const;

@@ -182,18 +182,18 @@ namespace yli
                 // this method renders all `Object`s of this `Species`.
                 void render();
 
-                yli::ontology::Material* material_parent;  // pointer to `Material`.
+                yli::ontology::Material* material_parent; // pointer to `Material`.
 
                 bool is_symbiont_species;
 
-                std::string model_file_format;        // type of the model file, eg. `"bmp"`.
-                std::string model_filename;           // filename of the model file.
+                std::string model_file_format;            // type of the model file, eg. `"bmp"`.
+                std::string model_filename;               // filename of the model file.
 
                 const char* char_model_file_format;
                 const char* char_model_filename;
 
-                double latitude;  // for SRTM.
-                double longitude; // for SRTM.
+                double latitude;                          // for SRTM.
+                double longitude;                         // for SRTM.
 
                 std::size_t mesh_i;
 
