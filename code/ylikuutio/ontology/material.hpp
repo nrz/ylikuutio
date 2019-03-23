@@ -42,7 +42,6 @@ namespace yli
                 void unbind_vector_font(const std::size_t childID);
                 void unbind_chunk_master(const std::size_t childID);
 
-                // constructor.
                 Material(yli::ontology::Universe* const universe, const MaterialStruct& material_struct)
                     : Entity(universe)
                 {
