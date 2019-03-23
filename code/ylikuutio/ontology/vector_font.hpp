@@ -15,7 +15,6 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
-#include <cstring>       // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
@@ -52,9 +51,6 @@ namespace yli
                     this->vertex_scaling_factor = vector_font_struct.vertex_scaling_factor;
                     this->parent                = vector_font_struct.parent;
 
-                    this->char_font_file_format = this->font_file_format.c_str();
-                    this->char_font_filename    = this->font_filename.c_str();
-
                     this->number_of_glyphs      = 0;
                     this->number_of_text3Ds     = 0;
 
@@ -64,7 +60,7 @@ namespace yli
                     this->can_be_erased      = true;
                     bool font_loading_result = false;
 
-                    if ((std::strcmp(this->char_font_file_format, "svg") == 0) || (std::strcmp(this->char_font_file_format, "SVG") == 0))
+                    if (this->font_file_format == "svg" || this->font_file_format == "SVG")
                     {
                         const bool is_debug_mode = true;
 
@@ -168,8 +164,6 @@ namespace yli
                 std::string font_file_format;         // Type of the model file, eg. `"bmp"`.
                 std::string font_filename;            // Filename of the model file.
                 float vertex_scaling_factor;
-                const char* char_font_file_format;
-                const char* char_font_filename;
 
                 std::vector<std::vector<std::vector<glm::vec2>>> glyph_vertex_data;
                 std::vector<std::vector<glm::vec2>> glyph_UV_data;
