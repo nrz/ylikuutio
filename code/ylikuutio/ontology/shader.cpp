@@ -27,7 +27,7 @@ namespace yli
 
         void Shader::bind_material(yli::ontology::Material* const material)
         {
-            // get `childID` from `Shader` and set pointer to `material`.
+            // Get `childID` from `Shader` and set pointer to `material`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Material*>(
                     material,
                     this->material_pointer_vector,
@@ -37,7 +37,7 @@ namespace yli
 
         void Shader::bind_symbiosis(yli::ontology::Symbiosis* const symbiosis)
         {
-            // get `childID` from `Shader` and set pointer to `symbiosis`.
+            // Get `childID` from `Shader` and set pointer to `symbiosis`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Symbiosis*>(
                     symbiosis,
                     this->symbiosis_pointer_vector,
@@ -65,7 +65,7 @@ namespace yli
 
         void Shader::bind_to_parent()
         {
-            // requirements:
+            // Requirements:
             // `this->parent` must not be `nullptr`.
             yli::ontology::Scene* const scene = this->parent;
 
@@ -75,13 +75,13 @@ namespace yli
                 return;
             }
 
-            // get `childID` from the `Scene` and set pointer to this `Shader`.
+            // Get `childID` from the `Scene` and set pointer to this `Shader`.
             scene->bind_shader(this);
         }
 
         void Shader::bind_to_new_parent(yli::ontology::Scene* const new_parent)
         {
-            // this method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input,
+            // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input,
             // and requests a new `childID` from the new `Scene`.
             //
             // requirements:
@@ -102,10 +102,10 @@ namespace yli
                 return;
             }
 
-            // unbind from the old parent `Scene`.
+            // Unbind from the old parent `Scene`.
             this->parent->unbind_shader(this->childID);
 
-            // get `childID` from `Scene` and set pointer to this `Shader`.
+            // Get `childID` from `Scene` and set pointer to this `Shader`.
             this->parent = new_parent;
             this->parent->bind_shader(this);
         }
@@ -115,15 +115,15 @@ namespace yli
             // destructor.
             std::cout << "Shader with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-            // destroy all materials of this shader.
+            // Destroy all materials of this shader.
             std::cout << "All materials of this shader will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Material*>(this->material_pointer_vector, this->number_of_materials);
 
-            // destroy all symbioses of this shader.
+            // Destroy all symbioses of this shader.
             std::cout << "All symbioses of this shader will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Symbiosis*>(this->symbiosis_pointer_vector, this->number_of_symbioses);
 
-            // requirements for further actions (except `glDeleteProgram`):
+            // Requirements for further actions (except `glDeleteProgram`):
             // `this->parent` must not be `nullptr`.
 
             yli::ontology::Scene* const scene = this->parent;
@@ -134,7 +134,7 @@ namespace yli
             }
             else
             {
-                // set pointer to this `Shader` to `nullptr`.
+                // Set pointer to this `Shader` to `nullptr`.
                 scene->unbind_shader(this->childID);
             }
 
@@ -145,12 +145,14 @@ namespace yli
         {
             this->prerender();
 
-            // [re]bind `programID` shader.
+            // [Re]bind `programID` shader.
             glUseProgram(this->programID);
 
-            glUniformMatrix4fv(this->view_matrixID, 1, GL_FALSE, &this->universe->get_view_matrix()[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
+            // `glUniformMatrix4fv` doesn't change between objects,
+            // so this can be done once for all objects that use the same `programID`.
+            glUniformMatrix4fv(this->view_matrixID, 1, GL_FALSE, &this->universe->get_view_matrix()[0][0]);
 
-            // render this `Shader` by calling `render()` function of each `Material` and of each `Symbiosis`.
+            // Render this `Shader` by calling `render()` function of each `Material` and of each `Symbiosis`.
             yli::ontology::render_children<yli::ontology::Material*>(this->material_pointer_vector);
             yli::ontology::render_children<yli::ontology::Symbiosis*>(this->symbiosis_pointer_vector);
 

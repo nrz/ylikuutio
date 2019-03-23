@@ -47,10 +47,9 @@ namespace yli
                 void unbind_material(const std::size_t childID);
                 void unbind_symbiosis(const std::size_t childID);
 
-                // this method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
+                // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
                 void bind_to_new_parent(yli::ontology::Scene* const new_parent);
 
-                // constructor.
                 Shader(yli::ontology::Universe* const universe, const ShaderStruct& shader_struct)
                     : Entity(universe)
                 {
@@ -66,7 +65,7 @@ namespace yli
                     this->number_of_materials  = 0;
                     this->number_of_symbioses  = 0;
 
-                    // get `childID` from `Scene` and set pointer to this `Shader`.
+                    // Get `childID` from `Scene` and set pointer to this `Shader`.
                     this->bind_to_parent();
 
                     // Create and compile our GLSL program from the shaders.
@@ -89,8 +88,8 @@ namespace yli
 
                 yli::ontology::Entity* get_parent() const override;
 
-                // set terrain `Species` pointers in `Scene` and `Universe` so that they point to the chosen terrain `Species`.
-                // currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
+                // Set terrain `Species` pointers in `Scene` and `Universe` so that they point to the chosen terrain `Species`.
+                // Currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
                 void set_terrain_species(yli::ontology::Species* terrain_species);
 
                 uint32_t get_programID() const;
@@ -109,22 +108,22 @@ namespace yli
             private:
                 void bind_to_parent();
 
-                // this method renders all materials using this `Shader`.
+                // This method renders all materials using this `Shader`.
                 void render();
 
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
-                yli::ontology::Scene* parent;         // pointer to the `Scene`.
+                yli::ontology::Scene* parent;         // Pointer to the `Scene`.
 
-                uint32_t programID;                   // this `Shader`'s `programID`, returned by `load_shaders`.
+                uint32_t programID;                   // This `Shader`'s `programID`, returned by `load_shaders`.
 
                 uint32_t MatrixID;
                 uint32_t view_matrixID;
                 uint32_t model_matrixID;
 
-                std::string vertex_shader;            // filename of vertex shader.
-                std::string fragment_shader;          // filename of fragment shader.
+                std::string vertex_shader;            // Filename of vertex shader.
+                std::string fragment_shader;          // Filename of fragment shader.
 
                 std::vector<yli::ontology::Material*> material_pointer_vector;
                 std::vector<yli::ontology::Symbiosis*> symbiosis_pointer_vector;
