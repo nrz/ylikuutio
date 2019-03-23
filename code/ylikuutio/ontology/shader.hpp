@@ -62,6 +62,13 @@ namespace yli
                     this->char_fragment_shader = this->fragment_shader.c_str();
                     this->parent               = shader_struct.parent;
 
+                    // TODO:
+                    // Each GPGPU `Shader` owns 0 or more output textures.
+                    // Each `Material` rendered after a given GPGPU `Shader`
+                    // may also use the output textures offered by
+                    // a given GPGPU `Shader` as its texture.
+                    this->is_gpgpu_shader      = shader_struct.is_gpgpu_shader;
+
                     this->number_of_materials  = 0;
                     this->number_of_symbioses  = 0;
 
@@ -134,6 +141,8 @@ namespace yli
 
                 const char* char_vertex_shader;
                 const char* char_fragment_shader;
+
+                bool is_gpgpu_shader;                 // TODO: GPGPU `Shader`s are not rendered on screen but their result textures can be used by `Material`s.
         };
     }
 }
