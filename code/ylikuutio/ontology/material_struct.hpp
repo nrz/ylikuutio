@@ -32,7 +32,6 @@ typedef struct MaterialStruct
 
     std::string texture_file_format;     // Type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
     std::string texture_filename;        // Filename of the model file.
-    std::string image_path;
     yli::ontology::Shader* shader;       // Pointer to `Shader`.
     yli::ontology::Symbiosis* symbiosis; // Pointer to `Symbiosis`.
     const ofbx::Texture* ofbx_texture;   // For `SymbiontMaterial`s.
