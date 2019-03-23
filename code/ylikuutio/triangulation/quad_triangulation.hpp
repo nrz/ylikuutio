@@ -31,7 +31,6 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
-#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
@@ -98,8 +97,6 @@ namespace yli
                 const double sphere_radius = triangulate_quads_struct.sphere_radius;
                 const yli::geometry::SphericalTerrainStruct spherical_terrain_struct = triangulate_quads_struct.spherical_terrain_struct;
 
-                const char* char_triangulation_type = triangulation_type.c_str();
-
                 bool is_bilinear_interpolation_in_use = false;
                 bool is_southwest_northeast_edges_in_use = false;
                 bool is_southeast_northwest_edges_in_use = false;
@@ -107,7 +104,7 @@ namespace yli
 
                 std::cout << "Triangulation type in use: " << triangulation_type << "\n";
 
-                if (std::strcmp(char_triangulation_type, "bilinear_interpolation") == 0)
+                if (triangulation_type == "bilinear_interpolation")
                 {
                     // *---*
                     // |\ /|
@@ -117,7 +114,7 @@ namespace yli
                     is_bilinear_interpolation_in_use = true;
                     n_faces_for_each_vertex = 4;
                 }
-                else if ((std::strcmp(char_triangulation_type, "southwest_northeast_edges") == 0) || (std::strcmp(char_triangulation_type, "northeast_southwest_edges") == 0))
+                else if (triangulation_type == "southwest_northeast_edges" || triangulation_type == "northeast_southwest_edges")
                 {
                     // *---*
                     // |  /|
@@ -126,7 +123,7 @@ namespace yli
                     // *---*
                     is_southwest_northeast_edges_in_use = true;
                 }
-                else if ((std::strcmp(char_triangulation_type, "southeast_northwest_edges") == 0) || (std::strcmp(char_triangulation_type, "northwest_southeast_edges") == 0))
+                else if (triangulation_type == "southeast_northwest_edges" || triangulation_type == "northwest_southeast_edges")
                 {
                     // *---*
                     // |\  |
