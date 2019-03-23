@@ -13,7 +13,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 
 namespace yli
