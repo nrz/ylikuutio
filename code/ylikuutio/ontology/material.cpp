@@ -99,15 +99,15 @@ namespace yli
                 // destructor.
                 std::cout << "Material with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-                // Destroy all species of this material.
+                // Destroy all `Species` of this `Material`.
                 std::cout << "All species of this material will be destroyed.\n";
                 yli::hierarchy::delete_children<yli::ontology::Species*>(this->species_pointer_vector, this->number_of_species);
 
-                // Destroy all fonts of this material.
+                // Destroy all `VectorFont`s of this `Material`.
                 std::cout << "All fonts of this material will be destroyed.\n";
                 yli::hierarchy::delete_children<yli::ontology::VectorFont*>(this->vector_font_pointer_vector, this->number_of_vector_fonts);
 
-                // Destroy all chunk masters of this material.
+                // Destroy all `ChunkMaster`s of this `Material`.
                 std::cout << "All chunk masters of this material will be destroyed.\n";
                 yli::hierarchy::delete_children<ontology::ChunkMaster*>(this->chunk_master_pointer_vector, this->number_of_chunk_masters);
 

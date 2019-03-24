@@ -35,24 +35,23 @@ namespace yli
                 return false;
             }
 
-            // Create one OpenGL texture
+            // Create one OpenGL texture.
             glGenTextures(1, &textureID);
 
-            // "Bind" the newly created texture : all future texture functions will modify this texture
+            // Bind the newly created texture: all future texture functions will modify this texture.
             glBindTexture(GL_TEXTURE_2D, textureID);
 
-            // Give the image to OpenGL
+            // Give the image to OpenGL.
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image_width, image_height, 0, GL_BGR, GL_UNSIGNED_BYTE, image_data);
 
             if (should_image_data_be_deleted)
             {
-                // OpenGL has now copied the data. Free our own version
+                // OpenGL has now copied the data. Free our own version.
                 delete[] image_data;
             }
 
             yli::opengl::set_filtering_parameters();
 
-            // success.
             return true;
         }
 
@@ -64,7 +63,7 @@ namespace yli
                 std::size_t& image_size,
                 uint32_t& textureID)
         {
-            // requirements:
+            // Requirements:
             // `ofbx_texture` must not be `nullptr`.
 
             if (ofbx_texture == nullptr)
@@ -159,7 +158,7 @@ namespace yli
 
             uint8_t header[124];
 
-            /* try to open the file */
+            // Try to open the file.
             std::FILE* const fp = std::fopen(imagepath, "rb");
             if (fp == nullptr)
             {
@@ -167,10 +166,10 @@ namespace yli
                 return false;
             }
 
-            /* verify the type of file */
-            const std::size_t dds_magic_number_size_in_bytes = 4; // "DDS "
+            // Verify the type of the file.
+            const std::size_t dds_magic_number_size_in_bytes = 4;   // "DDS "
             char filecode_char[dds_magic_number_size_in_bytes + 1];
-            filecode_char[dds_magic_number_size_in_bytes] = 0; // terminate with 0.
+            filecode_char[dds_magic_number_size_in_bytes] = 0;      // Terminate with 0.
 
             if (std::fread(filecode_char, 1, dds_magic_number_size_in_bytes, fp) != dds_magic_number_size_in_bytes)
             {
@@ -213,7 +212,7 @@ namespace yli
                 return false;
             }
 
-            /* close the file pointer */
+            // Close the file.
             std::fclose(fp);
 
             uint32_t format;
@@ -233,10 +232,10 @@ namespace yli
                     return false;
             }
 
-            // Create one OpenGL texture
+            // Create one OpenGL texture.
             glGenTextures(1, &textureID);
 
-            // "Bind" the newly created texture : all future texture functions will modify this texture
+            // Bind the newly created texture: all future texture functions will modify this texture.
             glBindTexture(GL_TEXTURE_2D, textureID);
             glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
@@ -246,7 +245,7 @@ namespace yli
             std::size_t temp_width = image_width;
             std::size_t temp_height = image_height;
 
-            /* load the mipmaps */
+            // Load the mipmaps.
             for (std::size_t level = 0; level < mipMapCount && (temp_width || temp_height); ++level)
             {
                 std::size_t size = ((temp_width + 3) / 4) * ((temp_height + 3) / 4) * blockSize;
@@ -264,7 +263,7 @@ namespace yli
                 temp_width /= 2;
                 temp_height /= 2;
 
-                // Deal with Non-Power-Of-Two textures. This code is not included in the webpage to reduce clutter.
+                // Deal with non-power-of-two textures.
                 if (temp_width < 1)
                 {
                     temp_width = 1;
