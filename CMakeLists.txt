@@ -544,6 +544,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/text3D.hpp
     code/ylikuutio/ontology/text3D.cpp
     code/ylikuutio/ontology/text3D_struct.hpp
+    code/ylikuutio/ontology/texture.cpp
+    code/ylikuutio/ontology/texture.hpp
+    code/ylikuutio/ontology/texture_struct.hpp
     code/ylikuutio/ontology/text_struct.hpp
     code/ylikuutio/ontology/universe.cpp
     code/ylikuutio/ontology/universe.hpp

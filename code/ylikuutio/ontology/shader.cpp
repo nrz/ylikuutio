@@ -3,6 +3,7 @@
 #include "world.hpp"
 #include "universe.hpp"
 #include "material.hpp"
+#include "texture.hpp"
 #include "glyph.hpp"
 #include "symbiosis.hpp"
 #include "render_templates.hpp"
@@ -45,6 +46,16 @@ namespace yli
                     this->number_of_symbioses);
         }
 
+        void Shader::bind_texture(yli::ontology::Texture* const texture)
+        {
+            // Get `childID` from `Shader` and set pointer to `texture`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::Texture*>(
+                    texture,
+                    this->texture_pointer_vector,
+                    this->free_textureID_queue,
+                    this->number_of_textures);
+        }
+
         void Shader::unbind_material(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
@@ -61,6 +72,15 @@ namespace yli
                     this->symbiosis_pointer_vector,
                     this->free_symbiosisID_queue,
                     this->number_of_symbioses);
+        }
+
+        void Shader::unbind_texture(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->texture_pointer_vector,
+                    this->free_textureID_queue,
+                    this->number_of_textures);
         }
 
         void Shader::bind_to_parent()
@@ -166,13 +186,14 @@ namespace yli
 
         std::size_t Shader::get_number_of_children() const
         {
-            return this->number_of_materials + this->number_of_symbioses;
+            return this->number_of_materials + this->number_of_symbioses + this->number_of_textures;
         }
 
         std::size_t Shader::get_number_of_descendants() const
         {
             return yli::ontology::get_number_of_descendants(this->material_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->symbiosis_pointer_vector);
+                yli::ontology::get_number_of_descendants(this->symbiosis_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->texture_pointer_vector);
         }
 
         uint32_t Shader::get_programID() const

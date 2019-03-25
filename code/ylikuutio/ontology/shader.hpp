@@ -37,15 +37,18 @@ namespace yli
         class Material;
         class Species;
         class Symbiosis;
+        class Texture;
 
         class Shader: public yli::ontology::Entity
         {
             public:
                 void bind_material(yli::ontology::Material* const material);
                 void bind_symbiosis(yli::ontology::Symbiosis* const symbiosis);
+                void bind_texture(yli::ontology::Texture* const texture);
 
                 void unbind_material(const std::size_t childID);
                 void unbind_symbiosis(const std::size_t childID);
+                void unbind_texture(const std::size_t childID);
 
                 // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
                 void bind_to_new_parent(yli::ontology::Scene* const new_parent);
@@ -71,6 +74,7 @@ namespace yli
 
                     this->number_of_materials  = 0;
                     this->number_of_symbioses  = 0;
+                    this->number_of_textures   = 0;
 
                     // Get `childID` from `Scene` and set pointer to this `Shader`.
                     this->bind_to_parent();
@@ -86,6 +90,7 @@ namespace yli
                     // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->material_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->symbiosis_pointer_vector);
+                    this->child_vector_pointers_vector.push_back(&this->texture_pointer_vector);
                     this->type_string = "yli::ontology::Shader*";
                     this->can_be_erased = true;
                 }
@@ -134,10 +139,13 @@ namespace yli
 
                 std::vector<yli::ontology::Material*> material_pointer_vector;
                 std::vector<yli::ontology::Symbiosis*> symbiosis_pointer_vector;
+                std::vector<yli::ontology::Texture*> texture_pointer_vector;
                 std::queue<std::size_t> free_materialID_queue;
                 std::queue<std::size_t> free_symbiosisID_queue;
+                std::queue<std::size_t> free_textureID_queue;
                 std::size_t number_of_materials;
                 std::size_t number_of_symbioses;
+                std::size_t number_of_textures;
 
                 const char* char_vertex_shader;
                 const char* char_fragment_shader;
