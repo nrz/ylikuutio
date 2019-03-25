@@ -22,7 +22,7 @@ namespace yli
     {
         void Text2D::bind_to_parent()
         {
-            // requirements:
+            // Requirements:
             // `this->parent` must not be `nullptr`.
             yli::ontology::Font2D* const font2D = this->parent;
 
@@ -32,16 +32,16 @@ namespace yli
                 return;
             }
 
-            // get `childID` from the `Font2D` and set pointer to this `Text2D`.
+            // Get `childID` from the `Font2D` and set pointer to this `Text2D`.
             font2D->bind_text2D(this);
         }
 
         void Text2D::bind_to_new_parent(yli::ontology::Font2D* const new_parent)
         {
-            // this method sets pointer to this `Text2D` to `nullptr`, sets `parent` according to the input,
+            // This method sets pointer to this `Text2D` to `nullptr`, sets `parent` according to the input,
             // and requests a new `childID` from the new `Font2D`.
             //
-            // requirements:
+            // Requirements:
             // `this->parent` must not be `nullptr`.
             // `new_parent` must not be `nullptr`.
 
@@ -59,10 +59,10 @@ namespace yli
                 return;
             }
 
-            // unbind from the old parent `Font2D`.
+            // Unbind from the old parent `Font2D`.
             this->parent->unbind_text2D(this->childID);
 
-            // get `childID` from `Font2D` and set pointer to this `Text2D`.
+            // Get `childID` from `Font2D` and set pointer to this `Text2D`.
             this->parent = new_parent;
             this->parent->bind_text2D(this);
         }
@@ -72,11 +72,11 @@ namespace yli
             // destructor.
             std::cout << "This text will be destroyed.\n";
 
-            // Delete buffers
+            // Delete buffers.
             glDeleteBuffers(1, &this->vertexbuffer);
             glDeleteBuffers(1, &this->uvbuffer);
 
-            // Delete shader
+            // Delete shader.
             glDeleteProgram(this->programID);
         }
 
@@ -272,27 +272,27 @@ namespace yli
             glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
             glBufferData(GL_ARRAY_BUFFER, UVs.size() * sizeof(glm::vec2), &UVs[0], GL_STATIC_DRAW);
 
-            // 1st attribute buffer : vertices
+            // 1st attribute buffer: vertices.
             glEnableVertexAttribArray(this->vertex_position_in_screenspaceID);
             glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
             glVertexAttribPointer(this->vertex_position_in_screenspaceID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
-            // 2nd attribute buffer : UVs
+            // 2nd attribute buffer: UVs.
             glEnableVertexAttribArray(this->vertexUVID);
             glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
             glVertexAttribPointer(this->vertexUVID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
-            // 1st attribute buffer: vertices
+            // 1st attribute buffer: vertices.
             glEnableVertexAttribArray(this->vertex_position_in_screenspaceID);
             glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
             glVertexAttribPointer(this->vertex_position_in_screenspaceID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
-            // 2nd attribute buffer: UVs
+            // 2nd attribute buffer: UVs.
             glEnableVertexAttribArray(this->vertexUVID);
             glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
             glVertexAttribPointer(this->vertexUVID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
-            // Draw call
+            // Draw call.
             glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
             glDisableVertexAttribArray(this->vertex_position_in_screenspaceID);
@@ -318,6 +318,5 @@ namespace yli
         {
             this->text = text;
         }
-
     }
 }

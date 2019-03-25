@@ -5,7 +5,10 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the development of Ylikuutio:
-[ ] Implement audio mixing using SDL_mixer (SFML does not support Android and iOS yet).
+[ ] Add support for GPGPU using OpenGL 3.0/GLSL 1.30.10 shaders.
+[ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
+[ ] Write a simple triangle drawing software (android-kolmio) for Android, using Android NDK and CMake.
+[ ] Implement audio mixing using SDL_mixer.
 [ ] Create `audio::Sound` class, whose parent is `Entity`.
 [ ] Create `audio::PlayList` class, whose parent is `Entity`.
 [ ] Add support for crosscompiling to Android.
@@ -70,7 +73,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement generation of terrain meshes in different levels of detail (LOD) using different `x_step`s and `z_step`s (eg. 1, 2, 4, 8, 16, 32, 64, 128).
 [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain.
 [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain and the available video memory.
-[ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
 [ ] Implement Theta* route finding. http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/
 [ ] Implement support for vector fonts.
 [ ] Implement rendering into a texture.

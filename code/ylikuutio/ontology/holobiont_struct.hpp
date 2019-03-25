@@ -38,14 +38,14 @@ typedef struct HolobiontStruct
         // constructor.
     }
 
-    glm::vec3 original_scale_vector; // original scale vector.
-    glm::vec3 cartesian_coordinates; // coordinate vector.
-    glm::vec3 rotate_vector;         // rotate vector.
-    glm::vec3 initial_rotate_vector; // initial rotate vector.
-    glm::vec3 translate_vector;      // translate vector.
-    yli::ontology::Symbiosis* symbiosis_parent; // pointer to the parent `Symbiosis`.
-    float rotate_angle;              // rotate angle.
-    float initial_rotate_angle;      // initial rotate angle.
+    glm::vec3 original_scale_vector;            // original scale vector.
+    glm::vec3 cartesian_coordinates;            // coordinate vector.
+    glm::vec3 rotate_vector;                    // rotate vector.
+    glm::vec3 initial_rotate_vector;            // initial rotate vector.
+    glm::vec3 translate_vector;                 // translate vector.
+    yli::ontology::Symbiosis* symbiosis_parent; // pointer to the `Symbiosis`.
+    float rotate_angle;                         // rotate angle.
+    float initial_rotate_angle;                 // initial rotate angle.
     bool quaternions_in_use;
 } HolobiontStruct;
 

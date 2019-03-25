@@ -36,10 +36,10 @@ typedef struct CameraStruct
     // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
     glm::vec3 direction;             // direction vector.
 
-    yli::ontology::Scene* parent;    // pointer to the parent `Scene`.
+    yli::ontology::Scene* parent;    // pointer to the `Scene`.
 
-    double horizontal_angle;
-    double vertical_angle;
+    double horizontal_angle;         // horizontal angle in radians.
+    double vertical_angle;           // vertical angle in radians.
 } CameraStruct;
 
 #endif

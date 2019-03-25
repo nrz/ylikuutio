@@ -37,7 +37,7 @@ typedef struct Text3DStruct
     glm::vec3 translate_vector;        // translate vector.
     std::string text_string;
     const char* text_string_char;
-    yli::ontology::VectorFont* parent; // pointer to the parent `VectorFont`.
+    yli::ontology::VectorFont* parent; // pointer to the `VectorFont` (parent).
     float rotate_angle;                // rotate angle.
 } Text3DStruct;
 

@@ -117,7 +117,7 @@ namespace yli
 
             if (this->active_world != nullptr)
             {
-                // render this `Universe` by calling `render()` function of the active `World`.
+                // Render this `Universe` by calling `render()` function of the active `World`.
                 this->active_world->render();
             }
 
@@ -126,7 +126,7 @@ namespace yli
             // Render the `Console` (including current input).
             this->console->render();
 
-            // render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
+            // Render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
             yli::ontology::render_children<yli::ontology::Font2D*>(this->font2D_pointer_vector);
 
             yli::opengl::enable_depth_test();
@@ -148,14 +148,14 @@ namespace yli
 
             if (this->active_world != nullptr)
             {
-                // render this `Universe` by calling `render()` function of the active `World`.
+                // Render this `Universe` by calling `render()` function of the active `World`.
                 this->active_world->render();
             }
 
             // Render the `Console` (including current input).
             this->console->render();
 
-            // render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
+            // Render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
             yli::ontology::render_children<yli::ontology::Font2D*>(this->font2D_pointer_vector);
 
             // Swap buffers.
@@ -263,7 +263,7 @@ namespace yli
             // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
             if (this->last_time_before_reading_keyboard == std::numeric_limits<uint32_t>::max())
             {
-                // `glfwGetTime()` is called here only once, the first time this function is called.
+                // `SDL_GetTicks()` is called here only once, the first time this function is called.
                 this->last_time_before_reading_keyboard = SDL_GetTicks();
             }
 
@@ -370,7 +370,7 @@ namespace yli
         {
             // This function can be used to activate a `World` or a `Scene`.
             // A `World` can be activated always, assuming that the `universe_entity` is a `Universe`.
-            // A `Scene` can be activated only if there is an active `Scene`.
+            // A `Scene` can be activated only if the `Scene` has a `World` parent that can be activated.
 
             if (console == nullptr || universe_entity == nullptr)
             {
@@ -657,27 +657,27 @@ namespace yli
                 const std::size_t texture_width = universe->framebuffer_width;
                 const std::size_t texture_height = universe->framebuffer_height;
 
-                // create FBO (off-screen framebuffer object):
-                uint32_t fb = 0;
-                glGenFramebuffers(1, &fb);
+                // Create FBO (off-screen framebuffer object).
+                uint32_t framebuffer = 0;
+                glGenFramebuffers(1, &framebuffer);
 
-                // bind offscreen buffer.
-                glBindFramebuffer(GL_FRAMEBUFFER, fb);
+                // Bind offscreen buffer.
+                glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 
-                // create texture.
-                uint32_t tex;
-                glGenTextures(1, &tex);
-                glBindTexture(GL_TEXTURE_2D, tex);
+                // Create texture.
+                uint32_t texture;
+                glGenTextures(1, &texture);
+                glBindTexture(GL_TEXTURE_2D, texture);
 
-                // define texture.
+                // Define texture.
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture_width, texture_height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
 
                 yli::opengl::set_filtering_parameters();
 
-                // attach texture.
-                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0);
+                // Attach texture.
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
 
-                // create and bind render buffer with depth and stencil attachments.
+                // Create and bind render buffer with depth and stencil attachments.
                 uint32_t render_buffer;
                 glGenRenderbuffers(1, &render_buffer);
                 glBindRenderbuffer(GL_RENDERBUFFER, render_buffer);
@@ -689,24 +689,24 @@ namespace yli
                     std::cerr << "ERROR: `Universe::screenshot`: framebuffer is not complete!\n";
                 }
 
-                // bind offscreen buffer.
-                glBindFramebuffer(GL_FRAMEBUFFER, fb);
+                // Bind offscreen buffer.
+                glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 
-                // set background color for framebuffer.
+                // Set background color for framebuffer.
                 yli::opengl::set_background_color(
                         universe->background_red,
                         universe->background_green,
                         universe->background_blue,
                         universe->background_alpha);
 
-                // clear framebuffer.
+                // Clear framebuffer.
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-                // adjust viewport for framebuffer.
+                // Adjust viewport for framebuffer.
                 glViewport(0, 0, texture_width, texture_height);
-                universe->render_without_changing_depth_test(); // render to framebuffer.
+                universe->render_without_changing_depth_test(); // Render to framebuffer.
 
-                // transfer data from GPU texture to CPU array.
+                // Transfer data from GPU texture to CPU array.
                 const std::size_t number_color_channels = 3;
                 const std::size_t number_of_texels = texture_width * texture_height;
                 const std::size_t number_of_elements = number_color_channels * number_of_texels;
@@ -722,22 +722,22 @@ namespace yli
                 yli::file::binary_write(result_vector, filename);
 
                 delete[] result_array;
-                glDeleteFramebuffers(1, &fb);
+                glDeleteFramebuffers(1, &framebuffer);
 
-                // bind the default framebuffer for on-screen rendering.
+                // Bind the default framebuffer for on-screen rendering.
                 glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-                // set background color for the default framebuffer.
+                // Set background color for the default framebuffer.
                 yli::opengl::set_background_color(
                         universe->background_red,
                         universe->background_green,
                         universe->background_blue,
                         universe->background_alpha);
 
-                // clear the default framebuffer.
+                // Clear the default framebuffer.
                 glClear(GL_COLOR_BUFFER_BIT);
 
-                // adjust viewport for the default framebuffer.
+                // Adjust viewport for the default framebuffer.
                 glViewport(0, 0, universe->window_width, universe->window_height);
             }
 
@@ -830,12 +830,12 @@ namespace yli
         {
             if (!this->is_flight_mode_in_use)
             {
-                // accelerate and fall.
+                // Accelerate and fall.
 
                 this->fall_speed += this->gravity;
                 this->current_camera_cartesian_coordinates.y -= this->fall_speed;
 
-                // adjust position according to the ground.
+                // Adjust position according to the ground.
 
                 if (this->terrain_species != nullptr)
                 {
@@ -853,7 +853,7 @@ namespace yli
 
             if (this->testing_spherical_terrain_in_use)
             {
-                // compute spherical coordinates.
+                // Compute spherical coordinates.
                 this->current_camera_spherical_coordinates.rho = sqrt(
                         (this->current_camera_cartesian_coordinates.x * this->current_camera_cartesian_coordinates.x) +
                         (this->current_camera_cartesian_coordinates.y * this->current_camera_cartesian_coordinates.y) +
@@ -873,18 +873,18 @@ namespace yli
             camera_cartesian_coordinates.z = this->current_camera_cartesian_coordinates.z;
             camera_cartesian_coordinates.y += 2.0f;
 
-            // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
+            // Projection matrix: field of view, aspect ratio, display range : 0.1 unit <-> 100 units.
             this->current_camera_projection_matrix = glm::perspective(
                     DEGREES_TO_RADIANS(this->initialFoV),
                     this->aspect_ratio,
                     this->znear,
                     this->zfar);
 
-            // Camera matrix
+            // Camera matrix.
             this->current_camera_view_matrix = glm::lookAt(
-                    camera_cartesian_coordinates,                                  // Camera is here
-                    camera_cartesian_coordinates + this->current_camera_direction, // and looks here : at the same position, plus "current_camera_direction"
-                    this->current_camera_up                                        // Head is up (set to 0,-1,0 to look upside-down)
+                    camera_cartesian_coordinates,                                  // Camera coordinates.
+                    camera_cartesian_coordinates + this->current_camera_direction, // Camera looks here: at the same position, plus "current_camera_direction".
+                    this->current_camera_up                                        // Head is up (set to 0,-1,0 to look upside-down).
                     );
 
             return true;

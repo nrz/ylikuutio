@@ -33,7 +33,7 @@ namespace yli
     {
         void Font2D::bind_text2D(yli::ontology::Text2D* const text2D)
         {
-            // get `childID` from `Font2D` and set pointer to `text2D`.
+            // Get `childID` from `Font2D` and set pointer to `text2D`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Text2D*>(
                     text2D,
                     this->text2D_pointer_vector,
@@ -52,7 +52,7 @@ namespace yli
 
         void Font2D::bind_to_parent()
         {
-            // requirements:
+            // Requirements:
             // `this->parent` must not be `nullptr`.
             yli::ontology::Universe* const universe = this->parent;
 
@@ -62,7 +62,7 @@ namespace yli
                 return;
             }
 
-            // get `childID` from the `Universe` and set pointer to this `Font2D`.
+            // Get `childID` from the `Universe` and set pointer to this `Font2D`.
             universe->bind_font2D(this);
         }
 
@@ -71,17 +71,17 @@ namespace yli
             // destructor.
             std::cout << "This font will be destroyed.\n";
 
-            // Delete buffers
+            // Delete buffers.
             glDeleteBuffers(1, &this->vertexbuffer);
             glDeleteBuffers(1, &this->uvbuffer);
 
-            // Delete texture
+            // Delete texture.
             glDeleteTextures(1, &this->texture);
 
-            // Delete shader
+            // Delete shader.
             glDeleteProgram(this->programID);
 
-            // destroy all texts of this font.
+            // Destroy all texts of this `Font2D`.
             std::cout << "All texts of this font will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Text2D*>(this->text2D_pointer_vector, this->number_of_text2Ds);
         }
@@ -123,12 +123,13 @@ namespace yli
 
         void Font2D::prepare_to_print() const
         {
-            // Bind shader
+            // Bind shader.
             glUseProgram(this->programID);
 
-            // Bind texture
+            // Bind texture.
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, this->texture);
+
             // Set our "myTextureSampler" sampler to user Material Unit 0
             glUniform1i(this->Text2DUniformID, 0);
 
@@ -148,7 +149,7 @@ namespace yli
             {
                 this->prepare_to_print();
 
-                // render this `Font2D` by calling `render()` function of each `Text2D`.
+                // Render this `Font2D` by calling `render()` function of each `Text2D`.
                 yli::ontology::render_children<yli::ontology::Text2D*>(this->text2D_pointer_vector);
 
                 glDisable(GL_BLEND);
@@ -248,7 +249,7 @@ namespace yli
                 return;
             }
 
-            // Fill buffers
+            // Fill buffers.
             std::vector<glm::vec2> vertices;
             std::vector<glm::vec2> UVs;
 
@@ -283,7 +284,7 @@ namespace yli
 
                     if (character == 'n')
                     {
-                        // jump to the beginning of the next line.
+                        // Jump to the beginning of the next line.
                         // `"left"` horizontal alignment and `"top"` vertical alignment are assumed.
                         // TODO: implement newline for other horizontal and vertical alignments too!
                         current_left_x = x;
@@ -360,17 +361,17 @@ namespace yli
             glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
             glBufferData(GL_ARRAY_BUFFER, UVs.size() * sizeof(glm::vec2), &UVs[0], GL_STATIC_DRAW);
 
-            // 1st attribute buffer : vertices
+            // 1st attribute buffer: vertices.
             glEnableVertexAttribArray(this->vertex_position_in_screenspaceID);
             glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
             glVertexAttribPointer(this->vertex_position_in_screenspaceID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
-            // 2nd attribute buffer : UVs
+            // 2nd attribute buffer: UVs.
             glEnableVertexAttribArray(this->vertexUVID);
             glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
             glVertexAttribPointer(this->vertexUVID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
-            // Draw call
+            // Draw call.
             glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
             glDisableVertexAttribArray(this->vertex_position_in_screenspaceID);

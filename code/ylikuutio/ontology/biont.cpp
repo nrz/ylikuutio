@@ -30,7 +30,7 @@ namespace yli
 
         void Biont::bind_to_parent()
         {
-            // requirements:
+            // Requirements:
             // `this->holobiont_parent` must not be `nullptr`.
 
             yli::ontology::Holobiont* const holobiont = this->holobiont_parent;
@@ -41,13 +41,13 @@ namespace yli
                 return;
             }
 
-            // get `childID` from `Holobiont` and set pointer to this `Biont`.
+            // Get `childID` from `Holobiont` and set pointer to this `Biont`.
             holobiont->bind_biont(this);
         }
 
         void Biont::bind_to_symbiont_species()
         {
-            // requirements:
+            // Requirements:
             // `this->holobiont_parent` must not be `nullptr`.
             // `this->holobiont_parent->get_parent()` must not be `nullptr`.
             // `this->symbiont_species` must not be `nullptr`.
@@ -81,14 +81,14 @@ namespace yli
 
         void Biont::bind_to_new_parent(yli::ontology::Holobiont* const new_holobiont_parent)
         {
-            // this method sets pointer to this `Biont` to `nullptr`, sets `parent` according to the input,
+            // This method sets pointer to this `Biont` to `nullptr`, sets `parent` according to the input,
             // and requests a new `childID` from the new `Holobiont`.
             //
-            // requirements:
+            // Requirements:
             // `this->holobiont_parent` must not be `nullptr`.
             // `new_holobiont_parent` must not be `nullptr`.
 
-            // unbind from the old parent `Holobiont`.
+            // Unbind from the old parent `Holobiont`.
             if (this->holobiont_parent == nullptr)
             {
                 std::cerr << "ERROR: `Biont::bind_to_new_parent`: `this->holobiont_parent` is `nullptr`!\n";
@@ -103,7 +103,7 @@ namespace yli
 
             this->holobiont_parent->unbind_biont(this->childID);
 
-            // get `childID` from `Holobiont` and set pointer to this `Biont`.
+            // Get `childID` from `Holobiont` and set pointer to this `Biont`.
             this->holobiont_parent = new_holobiont_parent;
             this->holobiont_parent->bind_biont(this);
         }
@@ -112,7 +112,7 @@ namespace yli
         {
             // destructor.
             //
-            // requirements:
+            // Requirements:
             // `this->holobiont_parent` must not be `nullptr`.
             // `this->symbiont_species` must not be `nullptr`.
 
@@ -134,16 +134,16 @@ namespace yli
                 return;
             }
 
-            // set pointer to this `Biont` to `nullptr`.
+            // Set pointer to this `Biont` to `nullptr`.
             symbiont_species->unbind_biont(this->childID);
             holobiont->unbind_biont(this->childID);
         }
 
         void Biont::render()
         {
-            // render this `Biont`.
+            // Render this `Biont`.
             //
-            // requirements:
+            // Requirements:
             // `this->holobiont_parent` must not be `nullptr`.
             // `this->holobiont_parent->get_parent()` must not be `nullptr`.
 
@@ -173,7 +173,7 @@ namespace yli
 
         void Biont::render_this_biont(const yli::ontology::Shader* const shader)
         {
-            // requirements:
+            // Requirements:
             // `this->universe` must not be `nullptr`.
             // `shader` must not be `nullptr`.
             // `this->holobiont_parent` must not be `nullptr`.
@@ -231,18 +231,18 @@ namespace yli
 
                 this->model_matrix = glm::scale(this->model_matrix, this->original_scale_vector);
 
-                // store the new coordinates to be used in the next update.
+                // Store the new coordinates to be used in the next update.
                 this->cartesian_coordinates = glm::vec3(this->model_matrix[3][0], this->model_matrix[3][1], this->model_matrix[3][2]);
                 this->has_entered = true;
             }
             else
             {
-                // rotate.
+                // Rotate.
                 if (this->rotate_vector != glm::vec3(0.0f, 0.0f, 0.0f))
                 {
                     if (this->quaternions_in_use)
                     {
-                        // create `rotation_matrix` using quaternions.
+                        // Create `rotation_matrix` using quaternions.
                         glm::quat my_quaternion = glm::quat(DEGREES_TO_RADIANS(this->rotate_vector));
                         glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
                         this->model_matrix = rotation_matrix * this->model_matrix;
@@ -306,33 +306,33 @@ namespace yli
             glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
             glVertexAttribPointer(
                     vertex_position_modelspaceID, // The attribute we want to configure
-                    3,                           // size
-                    GL_FLOAT,                    // type
-                    GL_FALSE,                    // normalized?
-                    0,                           // stride
-                    (void*) 0                    // array buffer offset
+                    3,                            // size
+                    GL_FLOAT,                     // type
+                    GL_FALSE,                     // normalized?
+                    0,                            // stride
+                    (void*) 0                     // array buffer offset
                     );
 
             // 2nd attribute buffer : UVs.
             glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
             glVertexAttribPointer(
-                    vertexUVID, // The attribute we want to configure
-                    2,          // size : U+V => 2
-                    GL_FLOAT,   // type
-                    GL_FALSE,   // normalized?
-                    0,          // stride
-                    (void*) 0   // array buffer offset
+                    vertexUVID,                   // The attribute we want to configure
+                    2,                            // size : U+V => 2
+                    GL_FLOAT,                     // type
+                    GL_FALSE,                     // normalized?
+                    0,                            // stride
+                    (void*) 0                     // array buffer offset
                     );
 
             // 3rd attribute buffer : normals.
             glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
             glVertexAttribPointer(
-                    vertex_normal_modelspaceID, // The attribute we want to configure
-                    3,                         // size
-                    GL_FLOAT,                  // type
-                    GL_FALSE,                  // normalized?
-                    0,                         // stride
-                    (void*) 0                  // array buffer offset
+                    vertex_normal_modelspaceID,   // The attribute we want to configure
+                    3,                            // size
+                    GL_FLOAT,                     // type
+                    GL_FALSE,                     // normalized?
+                    0,                            // stride
+                    (void*) 0                     // array buffer offset
                     );
 
             // Index buffer.
@@ -340,10 +340,10 @@ namespace yli
 
             // Draw the triangles!
             glDrawElements(
-                    GL_TRIANGLES,    // mode
-                    indices_size,    // count
-                    GL_UNSIGNED_INT, // type
-                    (void*) 0        // element array buffer offset
+                    GL_TRIANGLES,                 // mode
+                    indices_size,                 // count
+                    GL_UNSIGNED_INT,              // type
+                    (void*) 0                     // element array buffer offset
                     );
         }
 

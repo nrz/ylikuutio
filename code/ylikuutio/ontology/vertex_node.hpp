@@ -1,8 +1,8 @@
 #ifndef __VERTEX_NODE_HPP_INCLUDED
 #define __VERTEX_NODE_HPP_INCLUDED
 
-#include "code/ylikuutio/graph/node_struct.hpp"
 #include "code/ylikuutio/graph/node.hpp"
+#include "code/ylikuutio/graph/node_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

@@ -18,9 +18,9 @@
 #include "code/ylikuutio/common/pi.hpp"
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
-#include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
+#include <cmath>         // NAN, std::isnan, std::pow
+#include <cstddef>       // std::size_t
+#include <iostream>      // std::cout, std::cin, std::cerr
 #include <unordered_map> // std::unordered_map
 
 namespace yli

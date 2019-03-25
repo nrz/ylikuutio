@@ -162,10 +162,10 @@ namespace yli
                 // Public callbacks end here.
 
                 // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
-                glm::vec3 cartesian_coordinates;                  // cartesian coordinates.
+                glm::vec3 cartesian_coordinates;                       // cartesian coordinates.
 
                 // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
-                SphericalCoordinatesStruct spherical_coordinates; // spherical coordinates.
+                SphericalCoordinatesStruct spherical_coordinates;      // spherical coordinates.
 
                 glm::vec3 dest_cartesian_coordinates;                  // cartesian destination coordinates.
                 SphericalCoordinatesStruct dest_spherical_coordinates; // spherical destination coordinates.
@@ -173,15 +173,15 @@ namespace yli
                 // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
                 glm::vec3 direction;
 
-                glm::vec3 right; // note: `right` can not be set directly using console.
-                glm::vec3 up;    // note: `up` can not be set directly using console.
+                glm::vec3 right;                                       // note: can not be set directly using console.
+                glm::vec3 up;                                          // note: can not be set directly using console.
 
                 double horizontal_angle;
                 double vertical_angle;
 
                 // The rest fields are created in the constructor.
-                glm::mat4 model_matrix;                // model matrix.
-                glm::mat4 MVP_matrix;                  // model view projection matrix.
+                glm::mat4 model_matrix;                                // model matrix.
+                glm::mat4 MVP_matrix;                                  // model view projection matrix.
         };
     }
 }

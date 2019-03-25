@@ -15,7 +15,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
@@ -43,7 +42,6 @@ namespace yli
                 void unbind_vector_font(const std::size_t childID);
                 void unbind_chunk_master(const std::size_t childID);
 
-                // constructor.
                 Material(yli::ontology::Universe* const universe, const MaterialStruct& material_struct)
                     : Entity(universe)
                 {
@@ -63,7 +61,7 @@ namespace yli
 
                     if (!this->is_symbiont_material)
                     {
-                        // get `childID` from the `Shader` and set pointer to this `Material`.
+                        // Get `childID` from the `Shader` and set pointer to this `Material`.
                         this->bind_to_parent();
 
                         // Load the texture.
@@ -87,7 +85,7 @@ namespace yli
                             std::cerr << "texture file format: " << this->texture_file_format << "\n";
                         }
 
-                        // requirements for further actions:
+                        // Requirements for further actions:
                         // `this->parent` must not be `nullptr`.
                         yli::ontology::Shader* const shader = this->parent;
 
@@ -112,13 +110,13 @@ namespace yli
                 // destructor.
                 virtual ~Material();
 
-                // this method sets pointer to this `Material` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
+                // This method sets pointer to this `Material` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
                 void bind_to_new_parent(yli::ontology::Shader* const new_parent);
 
                 yli::ontology::Entity* get_parent() const override;
 
-                // set terrain `Species` pointers in `Scene` and `Universe` so that they point to the chosen terrain `Species`.
-                // currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
+                // Set terrain `Species` pointers in `Scene` and `Universe` so that they point to the chosen terrain `Species`.
+                // Currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
                 void set_terrain_species(yli::ontology::Species* const terrain_species);
 
                 const std::string& get_texture_file_format() const;
@@ -144,18 +142,18 @@ namespace yli
             private:
                 void bind_to_parent();
 
-                // this method renders all `Species` using this `Material`.
+                // This method renders all `Species` using this `Material`.
                 void render();
 
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
-                yli::ontology::Shader* parent;      // pointer to `Shader`.
+                yli::ontology::Shader* parent;       // Pointer to the `Shader`.
 
                 bool is_symbiont_material;
 
-                uint32_t texture;                        // Texture of this `Material`, returned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
-                uint32_t openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
+                uint32_t texture;                    // Texture of this `Material`, returned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
+                uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler")`.
 
                 std::vector<yli::ontology::Species*> species_pointer_vector;
                 std::vector<yli::ontology::VectorFont*> vector_font_pointer_vector;
@@ -167,8 +165,8 @@ namespace yli
                 std::size_t number_of_vector_fonts;
                 std::size_t number_of_chunk_masters;
 
-                std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
-                std::string texture_filename;          // filename of the model file.
+                std::string texture_file_format;     // Type of the model file, eg. `"bmp"`.
+                std::string texture_filename;        // Filename of the model file.
         };
     }
 }

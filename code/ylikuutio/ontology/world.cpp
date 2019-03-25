@@ -35,7 +35,7 @@ namespace yli
 
         void World::bind_to_parent()
         {
-            // requirements:
+            // Requirements:
             // `this->parent` must not be `nullptr`.
             yli::ontology::Universe* const universe = this->parent;
 
@@ -45,7 +45,7 @@ namespace yli
                 return;
             }
 
-            // get `childID` from the `Universe` and set pointer to this `World`.
+            // Get `childID` from the `Universe` and set pointer to this `World`.
             universe->bind_world(this);
         }
 
@@ -54,7 +54,7 @@ namespace yli
             // destructor.
             std::cout << "This world will be destroyed.\n";
 
-            // destroy all scenes of this world.
+            // Destroy all `Scene`s of this `World`.
             std::cout << "All scenes of this world will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Scene*>(this->scene_pointer_vector, this->number_of_scenes);
         }
@@ -65,7 +65,7 @@ namespace yli
             {
                 this->prerender();
 
-                // render this `World` by calling `render()` function of the active `Scene`.
+                // Render this `World` by calling `render()` function of the active `Scene`.
                 this->active_scene->render();
 
                 this->postrender();
@@ -74,7 +74,7 @@ namespace yli
 
         void World::set_active_scene(yli::ontology::Scene* const scene)
         {
-            // requirements:
+            // Requirements:
             // `this->parent` must not be `nullptr`.
             // `scene` must not be `nullptr`.
 

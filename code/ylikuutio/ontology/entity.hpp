@@ -51,14 +51,14 @@ namespace yli
                 void prerender() const;
                 void postrender() const;
 
-                yli::ontology::Universe* universe;          // pointer to `Universe`.
-                std::shared_ptr<yli::config::SettingMaster> setting_master; // pointer to `SettingMaster`.
+                yli::ontology::Universe* universe;                          // pointer to the `Universe`.
+                std::shared_ptr<yli::config::SettingMaster> setting_master; // pointer to the `SettingMaster`.
                 std::vector<void*> child_vector_pointers_vector;
                 std::size_t childID; // TODO: add checks for `std::numeric_limits<std::size_t>::max();` (invalid value).
 
                 std::string type_string;
 
-                std::string name; // name of this entity.
+                std::string name;    // name of this `Entity`.
 
                 bool can_be_erased;
 

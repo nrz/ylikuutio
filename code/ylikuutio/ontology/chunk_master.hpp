@@ -67,7 +67,7 @@ namespace yli
                 // Callback used to get the content based on x, y, z.
                 GetContentCallback get_content_callback;
 
-                yli::ontology::Material* parent;  // pointer to `Material`.
+                yli::ontology::Material* parent;  // pointer to the `Material`.
 
                 std::vector<ontology::Chunk*> chunk_pointer_vector;
                 std::queue<std::size_t> free_chunkID_queue;

@@ -35,7 +35,7 @@ namespace yli
     {
         void Camera::bind_to_parent()
         {
-            // requirements:
+            // Requirements:
             // `this->parent` must not be `nullptr`.
             yli::ontology::Scene* const scene = this->parent;
 
@@ -45,7 +45,7 @@ namespace yli
                 return;
             }
 
-            // get `childID` from `Scene` and set pointer to this `Camera`.
+            // Get `childID` from `Scene` and set pointer to this `Camera`.
             scene->bind_camera(this);
         }
 
@@ -53,7 +53,7 @@ namespace yli
         {
             // destructor.
             //
-            // requirements:
+            // Requirements:
             // `this->parent` must not be `nullptr`.
             yli::ontology::Scene* const scene = this->parent;
 
@@ -69,7 +69,7 @@ namespace yli
                 scene->set_active_camera(nullptr);
             }
 
-            // set pointer to this `Camera` to `nullptr`.
+            // Set pointer to this `Camera` to `nullptr`.
             scene->unbind_camera(this->childID);
         }
 
@@ -118,7 +118,7 @@ namespace yli
 
             float FoV = this->universe->get_initialFoV();
 
-            // adjust position according to the ground.
+            // Adjust position according to the ground.
             if (!this->universe->is_flight_mode_in_use)
             {
                 if (this->universe->get_terrain_species() != nullptr)
@@ -137,7 +137,7 @@ namespace yli
 
             if (this->universe->testing_spherical_terrain_in_use)
             {
-                // compute spherical coordinates.
+                // Compute spherical coordinates.
                 this->spherical_coordinates.rho = sqrt(
                         (this->cartesian_coordinates.x * this->cartesian_coordinates.x) +
                         (this->cartesian_coordinates.y * this->cartesian_coordinates.y) +
@@ -157,17 +157,17 @@ namespace yli
             camera_cartesian_coordinates.z = this->cartesian_coordinates.z;
             camera_cartesian_coordinates.y += 2.0f;
 
-            // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
+            // Projection matrix: field of view, aspect ratio, display range: 0.1 unit <-> 100 units.
             this->projection_matrix = glm::perspective(
                     DEGREES_TO_RADIANS(FoV),
                     this->universe->get_aspect_ratio(),
                     0.001f,
                     5000.0f + 2.0f * this->universe->get_planet_radius());
-            // Camera matrix
+            // Camera matrix.
             this->view_matrix = glm::lookAt(
-                    camera_cartesian_coordinates,                   // Camera is here
-                    camera_cartesian_coordinates + this->direction, // and looks here : at the same position, plus "direction"
-                    this->up);                                      // Head is up (set to 0,-1,0 to look upside-down)
+                    camera_cartesian_coordinates,                   // Camera coordinates.
+                    camera_cartesian_coordinates + this->direction, // Camera looks here: at the same position, plus "direction".
+                    this->up);                                      // Head is up (set to 0,-1,0 to look upside-down).
 
             return true;
         }

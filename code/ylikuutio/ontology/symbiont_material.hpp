@@ -76,12 +76,12 @@ namespace yli
                 // this method renders all `SymbiontSpecies` using this `SymbiontMaterial`.
                 void render();
 
-                yli::ontology::Symbiosis* parent;           // pointer to `Symbiosis`.
+                yli::ontology::Symbiosis* parent;  // pointer to the `Symbiosis`.
 
                 const ofbx::Texture* ofbx_texture;
 
-                uint32_t texture;                        // Texture of this `SymbiontMaterial`.
-                uint32_t openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
+                uint32_t texture;                  // texture of this `SymbiontMaterial`.
+                uint32_t openGL_textureID;         // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler")`.
 
                 std::vector<yli::ontology::SymbiontSpecies*> symbiont_species_pointer_vector;
                 std::queue<std::size_t> free_symbiont_speciesID_queue;

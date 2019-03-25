@@ -159,9 +159,9 @@ namespace yli
                 std::vector<yli::ontology::SymbiontSpecies*> biontID_symbiont_species_vector;
                 std::vector<const ofbx::Mesh*> ofbx_meshes;
                 std::vector<const ofbx::Texture*> ofbx_diffuse_texture_vector;
-                std::vector<const ofbx::Texture*> ofbx_normal_texture_vector; // currently not in use.
-                std::vector<const ofbx::Texture*> ofbx_count_texture_vector;  // currently not in use.
-                std::size_t ofbx_mesh_count;                                  // the value of `ofbx_mesh_count` comes from OpenFBX.
+                std::vector<const ofbx::Texture*> ofbx_normal_texture_vector;  // currently not in use.
+                std::vector<const ofbx::Texture*> ofbx_count_texture_vector;   // currently not in use.
+                std::size_t ofbx_mesh_count;                                   // the value of `ofbx_mesh_count` comes from OpenFBX.
 
                 bool vram_buffer_in_use;
         };

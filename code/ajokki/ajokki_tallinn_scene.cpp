@@ -57,8 +57,8 @@ namespace ajokki
         // Create the shader, store it in `tallinn_shader`.
         ShaderStruct tallinn_shader_struct;
         tallinn_shader_struct.parent = tallinn_scene;
-        tallinn_shader_struct.vertex_shader = "StandardShading.vertexshader";
-        tallinn_shader_struct.fragment_shader = "StandardShading.fragmentshader";
+        tallinn_shader_struct.vertex_shader = "standard_shading.vert";
+        tallinn_shader_struct.fragment_shader = "standard_shading.frag";
 
         std::cout << "Creating yli::ontology::Entity* tallinn_shader_entity ...\n";
         yli::ontology::Entity* const tallinn_shader_entity = entity_factory->create_Shader(tallinn_shader_struct);

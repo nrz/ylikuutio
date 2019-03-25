@@ -33,13 +33,13 @@ namespace yli
                 // destructor.
                 virtual ~Creature();
 
-                // act according to this game/simulation object's programming.
+                // Act according to this `Creature`'s programming.
                 void act();
 
                 // Public callbacks (to be called from AI scripts written in
-                // TinyScheme). These are the functions that are available
+                // s7 Scheme). These are the functions that are available
                 // for AI scripts. Ylikuutio will support scripting of game
-                // agents using TinyScheme. Ylikuutio does not predefine what
+                // agents using s7 Scheme. Ylikuutio does not predefine what
                 // kind of games can be done with it. However, the callbacks
                 // Ylikuutio provides mean these is more support for features
                 // needing such callbacks. In particular, Ylikuutio supports
@@ -50,53 +50,53 @@ namespace yli
 
                 // Allied-object-centric path and map information callbacks.
 
-                // this method returns `true` if destination is visible, `false` otherwise.
+                // This method returns `true` if destination is visible, `false` otherwise.
                 // destination may be visible directly (line of sight) or eg. by radar (without line of sight).
                 static bool is_visible(const float x, const float y, const float z);
 
-                // this method returns `true` if destination is visible with a line of sight for any own `Object`, `false` otherwise.
+                // This method returns `true` if destination is visible with a line of sight for any own `Object`, `false` otherwise.
                 static bool is_line_of_sight_for_any(const float x, const float y, const float z);
 
-                // this method returns `true` if destination is visible with a line of sight for any own `Object`, `false` otherwise.
+                // This method returns `true` if destination is visible with a line of sight for any own `Object`, `false` otherwise.
                 static bool is_line_of_sight(const yli::ontology::Object* const object, const float x, const float y, const float z);
 
-                // this method returns `true` if there is any known ground path between `Object` and (x, y, z),  `false` otherwise.
+                // This method returns `true` if there is any known ground path between `Object` and (x, y, z),  `false` otherwise.
                 static bool is_ground_path_known(const yli::ontology::Object* const object, const float x, const float y, const float z);
 
-                // this method returns `true` if there is any known rail path between `Object` and (x, y, z),  `false` otherwise.
+                // This method returns `true` if there is any known rail path between `Object` and (x, y, z),  `false` otherwise.
                 static bool is_rail_path_known(const yli::ontology::Object* const object, const float x, const float y, const float z);
 
-                // this method returns `true` if there is known air path between objects, `false` otherwise.
+                // This method returns `true` if there is known air path between objects, `false` otherwise.
                 static bool is_air_path_known(const yli::ontology::Object* const object, const float x, const float y, const float z);
 
-                // this method returns `true` if there is known ballistic path between `Object` and (x, y, z), `false` otherwise.
+                // This method returns `true` if there is known ballistic path between `Object` and (x, y, z), `false` otherwise.
                 static bool is_ballistic_path_known(const yli::ontology::Object* const object, const float x, const float y, const float z);
 
-                // this method returns `true` if there may be ballistic path between objects, `false` otherwise.
+                // This method returns `true` if there may be ballistic path between objects, `false` otherwise.
                 static bool may_have_ballistic_path(const yli::ontology::Object* const object, const float x, const float y, const float z);
 
-                // these functions return the coordinates of the farthest point
+                // These functions return the coordinates of the farthest point.
                 static float get_closest_visible_ground_dest_x_towards(const yli::ontology::Object* const object, const float x, const float y, const float z);
                 static float get_closest_visible_ground_dest_y_towards(const yli::ontology::Object* const object, const float x, const float y, const float z);
                 static float get_closest_visible_ground_dest_z_towards(const yli::ontology::Object* const object, const float x, const float y, const float z);
 
-                // this method returns `true` if complete path is visible, `false` otherwise.
+                // This method returns `true` if complete path is visible, `false` otherwise.
                 static bool is_complete_ground_path_visible(const yli::ontology::Object* const object, const float x, const float y, const float z);
                 static bool is_complete_rail_path_visible(const yli::ontology::Object* const object, const float x, const float y, const float z);
                 static bool is_complete_air_path_visible(const yli::ontology::Object* const object, const float x, const float y, const float z);
                 static bool is_complete_ballistic_path_visible(const yli::ontology::Object* const object, const float x, const float y, const float z);
 
-                // these methods return the coordinates of the point closest to `object` from which there is known ballistic path to (x, y, z).
+                // These methods return the coordinates of the point closest to `object` from which there is known ballistic path to (x, y, z).
                 static float get_nearest_known_ballistic_launch_site_x(const yli::ontology::Object* const object, const float x, const float y, const float z);
                 static float get_nearest_known_ballistic_launch_site_y(const yli::ontology::Object* const object, const float x, const float y, const float z);
                 static float get_nearest_known_ballistic_launch_site_z(const yli::ontology::Object* const object, const float x, const float y, const float z);
 
-                // these methods return the coordinates of the point closest to `object` from which there may be a ballistic path to (x, y, z).
+                // These methods return the coordinates of the point closest to `object` from which there may be a ballistic path to (x, y, z).
                 static float get_nearest_possible_ballistic_launch_site_x(const yli::ontology::Object* const object, const float x, const float y, const float z);
                 static float get_nearest_possible_ballistic_launch_site_y(const yli::ontology::Object* const object, const float x, const float y, const float z);
                 static float get_nearest_possible_ballistic_launch_site_z(const yli::ontology::Object* const object, const float x, const float y, const float z);
 
-                // this method returns `true` if there is known line of sight between (x1, y1, z1) and (x2, y2, z2).
+                // This method returns `true` if there is known line of sight between (x1, y1, z1) and (x2, y2, z2).
 
                 // Coordinate-centric path and map information callbacks.
                 // The conditions for returning `true` match the conditions of the corresponding allied-object-centric callbacks.

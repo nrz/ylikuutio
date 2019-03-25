@@ -15,7 +15,6 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
-#include <cstring>       // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
@@ -37,34 +36,31 @@ namespace yli
                 void bind_text3D(yli::ontology::Text3D* const text3D);
                 void unbind_text3D(const std::size_t childID);
 
-                // this method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input,
+                // This method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input,
                 // and requests a new `childID` from the new `Material`.
                 void bind_to_new_parent(yli::ontology::Material* const new_parent);
 
-                // constructor.
                 // TODO: `VectorFont` constructor also creates each `Glyph` and binds them to the `VectorFont`.
                 VectorFont(yli::ontology::Universe* const universe, const VectorFontStruct& vector_font_struct)
                     : Entity(universe)
                 {
                     // constructor.
+
                     this->font_file_format      = vector_font_struct.font_file_format;
                     this->font_filename         = vector_font_struct.font_filename;
                     this->vertex_scaling_factor = vector_font_struct.vertex_scaling_factor;
                     this->parent                = vector_font_struct.parent;
 
-                    this->char_font_file_format = this->font_file_format.c_str();
-                    this->char_font_filename    = this->font_filename.c_str();
-
                     this->number_of_glyphs      = 0;
                     this->number_of_text3Ds     = 0;
 
-                    // get `childID` from `Material` and set pointer to this `VectorFont`.
+                    // Get `childID` from the `Material` and set pointer to this `VectorFont`.
                     this->bind_to_parent();
 
                     this->can_be_erased      = true;
                     bool font_loading_result = false;
 
-                    if ((std::strcmp(this->char_font_file_format, "svg") == 0) || (std::strcmp(this->char_font_file_format, "SVG") == 0))
+                    if (this->font_file_format == "svg" || this->font_file_format == "SVG")
                     {
                         const bool is_debug_mode = true;
 
@@ -76,7 +72,7 @@ namespace yli
                                 is_debug_mode);
                     }
 
-                    // requirements for further actions:
+                    // Requirements for further actions:
                     // `this->parent` must not be `nullptr`.
 
                     yli::ontology::Material* const material = this->parent;
@@ -102,7 +98,7 @@ namespace yli
                             int32_t unicode_value = yli::string::extract_unicode_value_from_string(temp_unicode_char_pointer);
                             if (unicode_value >= 0xd800 && unicode_value <= 0xdfff)
                             {
-                                // invalid Unicode, skip to next `Glyph`.
+                                // Invalid Unicode, skip to next `Glyph`.
                                 std::cerr << std::dec << "Error: invalid Unicode: " << unicode_value << "\n";
                                 continue;
                             }
@@ -120,7 +116,7 @@ namespace yli
                             std::cout << "Creating Glyph \"" << glyph_name_string << "\", Unicode: \"" << unicode_string << "\"\n";
                             yli::ontology::Glyph* glyph = new yli::ontology::Glyph(glyph_struct);
 
-                            // so that each `Glyph` can be referred to,
+                            // So that each `Glyph` can be referred to,
                             // we need a hash map that points from Unicode string to `Glyph`.
                             this->unicode_glyph_map[unicode_value] = glyph;
                         }
@@ -137,16 +133,16 @@ namespace yli
                 // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
                 virtual ~VectorFont();
 
-                // this method sets `Glyph` pointer.
+                // This method sets `Glyph` pointer.
                 void set_glyph_pointer(const std::size_t childID, yli::ontology::Glyph* const child_pointer);
 
-                // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
+                // This method returns a pointer to `Glyph` that matches the given `unicode_value`,
                 // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
                 yli::ontology::Glyph* get_glyph_pointer(const int32_t unicode_value) const;
 
                 // The rest fields are created in the constructor.
 
-                yli::ontology::Material* parent; // pointer to `Material`.
+                yli::ontology::Material* parent; // Pointer to `Material`.
 
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
@@ -158,18 +154,16 @@ namespace yli
             private:
                 void bind_to_parent();
 
-                // this method renders all `Glyph`s of this `VectorFont`.
+                // This method renders all `Glyph`s of this `VectorFont`.
                 void render();
 
                 yli::ontology::Entity* get_parent() const override;
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
-                std::string font_file_format;         // type of the model file, eg. `"bmp"`.
-                std::string font_filename;            // filename of the model file.
+                std::string font_file_format;         // Type of the model file, eg. `"bmp"`.
+                std::string font_filename;            // Filename of the model file.
                 float vertex_scaling_factor;
-                const char* char_font_file_format;
-                const char* char_font_filename;
 
                 std::vector<std::vector<std::vector<glm::vec2>>> glyph_vertex_data;
                 std::vector<std::vector<glm::vec2>> glyph_UV_data;

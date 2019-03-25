@@ -68,9 +68,6 @@ namespace yli
                     this->z_step              = species_struct.z_step;
                     this->triangulation_type  = species_struct.triangulation_type;
 
-                    this->char_model_file_format = this->model_file_format.c_str();
-                    this->char_model_filename    = this->model_filename.c_str();
-
                     this->image_width            = -1;
                     this->image_height           = -1;
 
@@ -182,18 +179,15 @@ namespace yli
                 // this method renders all `Object`s of this `Species`.
                 void render();
 
-                yli::ontology::Material* material_parent;  // pointer to `Material`.
+                yli::ontology::Material* material_parent; // pointer to `Material`.
 
                 bool is_symbiont_species;
 
-                std::string model_file_format;        // type of the model file, eg. `"bmp"`.
-                std::string model_filename;           // filename of the model file.
+                std::string model_file_format;            // type of the model file, eg. `"bmp"`.
+                std::string model_filename;               // filename of the model file.
 
-                const char* char_model_file_format;
-                const char* char_model_filename;
-
-                double latitude;  // for SRTM.
-                double longitude; // for SRTM.
+                double latitude;                          // for SRTM.
+                double longitude;                         // for SRTM.
 
                 std::size_t mesh_i;
 

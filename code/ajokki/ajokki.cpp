@@ -36,22 +36,14 @@
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/text2D.hpp"
-#include "code/ylikuutio/ontology/object.hpp"
-#include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/species_struct.hpp"
-#include "code/ylikuutio/ontology/glyph.hpp"
-#include "code/ylikuutio/ontology/text3D.hpp"
-#include "code/ylikuutio/ontology/text3D_struct.hpp"
-#include "code/ylikuutio/ontology/vector_font.hpp"
-#include "code/ylikuutio/ontology/vector_font_struct.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
-#include "code/ylikuutio/ontology/shader.hpp"
-#include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
 #include "code/ylikuutio/config/setting.hpp"
@@ -109,7 +101,7 @@ int main(const int argc, const char* const argv[])
     // This vector points to current keyrelease callback engines vector.
     std::vector<KeyAndCallbackStruct>* current_keyrelease_callback_engine_vector_pointer = &action_mode_keyrelease_callback_engines;
 
-    // Create the world, store it in `my_universe`.
+    // Create the `Universe`, store it in `my_universe`.
     std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
     UniverseStruct universe_struct;
     universe_struct.window_title = "Ajokki 0.0.3, powered by Ylikuutio 0.0.3";

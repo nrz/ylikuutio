@@ -71,9 +71,9 @@ namespace yli
 
                 void render();
 
-                yli::ontology::ChunkMaster* parent;  // pointer to `ChunkMaster`.
+                yli::ontology::ChunkMaster* parent;  // pointer to the `ChunkMaster`.
 
-                bool is_original; // If `Chunk` is original, if can be reconstructed using `get_content_callback`.
+                bool is_original;                    // If `Chunk` is original, if can be reconstructed using `get_content_callback`.
         };
     }
 }

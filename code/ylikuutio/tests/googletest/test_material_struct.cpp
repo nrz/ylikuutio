@@ -8,6 +8,5 @@ TEST(MaterialStruct_must_be_initialized_appropriately, MaterialStruct)
     ASSERT_EQ(test_material_struct.symbiosis, nullptr);
     ASSERT_TRUE(test_material_struct.texture_file_format.empty());
     ASSERT_TRUE(test_material_struct.texture_filename.empty());
-    ASSERT_TRUE(test_material_struct.image_path.empty());
     ASSERT_FALSE(test_material_struct.is_symbiont_material);
 }

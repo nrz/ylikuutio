@@ -51,29 +51,28 @@ typedef struct SpeciesStruct
         // constructor.
     }
 
-    // used for all files (for all species).
     std::string model_filename;                         // filename of the model file.
     std::string model_file_format;                      // type of the model file. supported file formats so far: `"bmp"`/`"BMP"`, `"obj"`/`"OBJ"`.
     std::string color_channel;                          // color channel to use for altitude data, for BMP model files.
     std::string triangulation_type;                     // `"bilinear_interpolation"`, `"southwest_northeast_edges"`, `"southeast_northwest_edges"`.
-    std::vector<glm::vec3> vertices;                    // For `SymbiontSpecies`.
-    std::vector<glm::vec2> uvs;                         // For `SymbiontSpecies`.
-    std::vector<glm::vec3> normals;                     // For `SymbiontSpecies`.
+    std::vector<glm::vec3> vertices;                    // for `SymbiontSpecies`.
+    std::vector<glm::vec2> uvs;                         // for `SymbiontSpecies`.
+    std::vector<glm::vec3> normals;                     // for `SymbiontSpecies`.
     glm::vec3 light_position;                           // light position.
     yli::ontology::Scene* scene;                        // pointer to `Scene` object.
     yli::ontology::Shader* shader;                      // pointer to `Shader` object.
     yli::ontology::Material* material;                  // pointer to `Material` object.
     yli::ontology::SymbiontMaterial* symbiont_material; // pointer to `SymbiontMaterial` object.
-    std::size_t vertex_count;                           // For `SymbiontSpecies`.
+    std::size_t vertex_count;                           // for `SymbiontSpecies`.
     std::size_t mesh_i;                                 // for FBX.
-    std::size_t x_step;                                 // Step in x-dimension for input data (set to 1 to load all data points/measurements).
-    std::size_t z_step;                                 // Step in z-dimension for input data (set to 1 to load all data points/measurements).
+    std::size_t x_step;                                 // step in x-dimension for input data (set to 1 to load all data points/measurements).
+    std::size_t z_step;                                 // step in z-dimension for input data (set to 1 to load all data points/measurements).
     double latitude;                                    // in degrees, for SRTM model files.
     double longitude;                                   // in degrees, for SRTM model files.
-    float planet_radius;                                // radius of sea level in kilometers. used only for worlds.
+    float planet_radius;                                // radius of sea level in kilometers. used only for terrains (planets and moons).
     float divisor;                                      // value by which SRTM values are divided to convert them to kilometers.
-    float water_level;                                  // water level in meters.
-    bool is_terrain;                                    // worlds currently neither rotate nor translate.
+    float water_level;                                  // water level in meters. used only for terrains (planets and moons).
+    bool is_terrain;                                    // Terrains (planets and moons) currently neither rotate nor translate.
     bool is_symbiont_species;
     bool vram_buffer_in_use;
     bool should_ylikuutio_use_real_texture_coordinates;

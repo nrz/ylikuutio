@@ -92,12 +92,12 @@ namespace yli
 
                 std::string text_string;
 
-                yli::ontology::VectorFont* parent; // pointer to `VectorFont`.
+                yli::ontology::VectorFont* parent; // pointer to the `VectorFont`.
 
-                glm::vec3 original_scale_vector;      // original scale vector.
-                float rotate_angle;                   // rotate angle.
-                glm::vec3 rotate_vector;              // rotate vector.
-                glm::vec3 translate_vector;           // translate vector.
+                glm::vec3 original_scale_vector;   // original scale vector.
+                float rotate_angle;                // rotate angle.
+                glm::vec3 rotate_vector;           // rotate vector.
+                glm::vec3 translate_vector;        // translate vector.
 
                 std::vector<yli::ontology::Object*> object_pointer_vector;
                 std::queue<std::size_t> free_objectID_queue;

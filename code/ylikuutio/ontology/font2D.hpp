@@ -51,7 +51,7 @@ namespace yli
 
                     this->number_of_text2Ds = 0;
 
-                    // get `childID` from `Universe` and set pointer to this `Font2D`.
+                    // Get `childID` from `Universe` and set pointer to this `Font2D`.
                     this->bind_to_parent();
 
                     // Initialize class members with some dummy values.
@@ -67,7 +67,7 @@ namespace yli
                     this->image_height                     = 0;
                     this->image_size                       = 0;
 
-                    // Initialize texture
+                    // Initialize texture.
                     if (this->font_texture_file_format == "bmp" || this->font_texture_file_format == "BMP")
                     {
                         if (!yli::load::load_BMP_texture(texture_filename, this->image_width, this->image_height, this->image_size, this->texture))
@@ -90,18 +90,18 @@ namespace yli
                         return;
                     }
 
-                    // Initialize VBO
+                    // Initialize VBO.
                     glGenBuffers(1, &this->vertexbuffer);
                     glGenBuffers(1, &this->uvbuffer);
 
-                    // Initialize Shader
-                    this->programID = yli::load::load_shaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
+                    // Initialize `Shader`.
+                    this->programID = yli::load::load_shaders("text_vertex_shader.vert", "text_vertex_shader.frag");
 
-                    // Get a handle for our buffers
+                    // Get a handle for our buffers.
                     this->vertex_position_in_screenspaceID = glGetAttribLocation(this->programID, "vertexPosition_screenspace");
                     this->vertexUVID = glGetAttribLocation(this->programID, "vertexUV");
 
-                    // Initialize uniforms' IDs
+                    // Initialize uniforms' IDs.
                     this->Text2DUniformID = glGetUniformLocation(this->programID, "myTextureSampler");
 
                     // Initialize uniform window width.
@@ -158,16 +158,18 @@ namespace yli
             private:
                 void bind_to_parent();
 
-                yli::ontology::Universe* parent; // pointer to the `Universe`.
+                yli::ontology::Universe* parent;           // Pointer to the `Universe`.
 
                 std::vector<yli::ontology::Text2D*> text2D_pointer_vector;
                 std::queue<std::size_t> free_text2D_ID_queue;
                 std::size_t number_of_text2Ds;
 
-                uint32_t texture;      // Texture containing the glyphs, reterned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
-                uint32_t vertexbuffer; // Buffer containing the vertices
-                uint32_t uvbuffer;     // Buffer containing the UVs
-                uint32_t programID;    // The `programID` of the shader used to display the text, returned by `load_shaders`.
+                uint32_t texture;                          // Texture containing the glyphs, returned by `load_BMP_texture` or `load_DDS_texture`,
+                                                           // (used for `glGenTextures` etc.).
+
+                uint32_t vertexbuffer;                     // Buffer containing the vertices.
+                uint32_t uvbuffer;                         // Buffer containing the UVs.
+                uint32_t programID;                        // The `programID` of the shader used to display the text, returned by `load_shaders`.
                 uint32_t vertex_position_in_screenspaceID; // Location of the program's `vertexPosition_screenspace` attribute.
                 uint32_t vertexUVID;                       // Location of the program's `vertexUV` attribute.
                 uint32_t Text2DUniformID;                  // Location of the program's texture attribute.

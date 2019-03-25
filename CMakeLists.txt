@@ -254,10 +254,10 @@ if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
 endif()
 
 # Shaders.
-configure_file(code/ylikuutio/shaders/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
-configure_file(code/ylikuutio/shaders/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
-configure_file(code/ylikuutio/shaders/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
-configure_file(code/ylikuutio/shaders/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
+configure_file(code/ylikuutio/shaders/standard_shading.vert standard_shading.vert COPYONLY)
+configure_file(code/ylikuutio/shaders/standard_shading.frag standard_shading.frag COPYONLY)
+configure_file(code/ylikuutio/shaders/text_vertex_shader.vert text_vertex_shader.vert COPYONLY)
+configure_file(code/ylikuutio/shaders/text_vertex_shader.frag text_vertex_shader.frag COPYONLY)
 
 # S7 Scheme code.
 configure_file(code/s7/hello_world.scm hello_world.scm COPYONLY)
@@ -544,6 +544,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/text3D.hpp
     code/ylikuutio/ontology/text3D.cpp
     code/ylikuutio/ontology/text3D_struct.hpp
+    code/ylikuutio/ontology/texture.cpp
+    code/ylikuutio/ontology/texture.hpp
+    code/ylikuutio/ontology/texture_struct.hpp
     code/ylikuutio/ontology/text_struct.hpp
     code/ylikuutio/ontology/universe.cpp
     code/ylikuutio/ontology/universe.hpp
@@ -576,10 +579,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/sdl/ylikuutio_sdl.hpp
 
     # shaders, in alphabetical order
-    code/ylikuutio/shaders/StandardShading.fragmentshader
-    code/ylikuutio/shaders/StandardShading.vertexshader
-    code/ylikuutio/shaders/TextVertexShader.fragmentshader
-    code/ylikuutio/shaders/TextVertexShader.vertexshader
+    code/ylikuutio/shaders/standard_shading.frag
+    code/ylikuutio/shaders/standard_shading.vert
+    code/ylikuutio/shaders/text_vertex_shader.frag
+    code/ylikuutio/shaders/text_vertex_shader.vert
 
     # string, in alphabetical order
     code/ylikuutio/string/ylikuutio_string.cpp
@@ -818,6 +821,3 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set_target_properties(unit_tests_with_googletest PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")
     create_target_launcher(unit_tests_with_googletest WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")
 endif()
-
-source_group(common REGULAR_EXPRESSION ".*/code/common/.*" )
-source_group(shaders REGULAR_EXPRESSION ".*/.*shader$" )

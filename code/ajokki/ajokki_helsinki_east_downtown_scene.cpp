@@ -63,8 +63,8 @@ namespace ajokki
         // Create the shader, store it in `helsinki_east_downtown_shader`.
         ShaderStruct helsinki_east_downtown_shader_struct;
         helsinki_east_downtown_shader_struct.parent = helsinki_east_downtown_scene;
-        helsinki_east_downtown_shader_struct.vertex_shader = "StandardShading.vertexshader";
-        helsinki_east_downtown_shader_struct.fragment_shader = "StandardShading.fragmentshader";
+        helsinki_east_downtown_shader_struct.vertex_shader = "standard_shading.vert";
+        helsinki_east_downtown_shader_struct.fragment_shader = "standard_shading.frag";
 
         std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_shader_entity ...\n";
         yli::ontology::Entity* const helsinki_east_downtown_shader_entity = entity_factory->create_Shader(helsinki_east_downtown_shader_struct);

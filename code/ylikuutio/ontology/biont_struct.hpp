@@ -42,16 +42,16 @@ typedef struct BiontStruct
     {
         // constructor.
     }
-    glm::vec3 original_scale_vector; // original scale vector.
-    glm::vec3 cartesian_coordinates; // coordinate vector.
-    glm::vec3 rotate_vector;         // rotate vector.
-    glm::vec3 initial_rotate_vector; // initial rotate vector.
-    glm::vec3 translate_vector;      // translate vector.
-    yli::ontology::Holobiont* holobiont_parent; // pointer to the parent `Holobiont`.
-    yli::ontology::SymbiontSpecies* symbiont_species; // pointer to the `SymbiontSpecies`.
+    glm::vec3 original_scale_vector;                  // original scale vector.
+    glm::vec3 cartesian_coordinates;                  // coordinate vector.
+    glm::vec3 rotate_vector;                          // rotate vector.
+    glm::vec3 initial_rotate_vector;                  // initial rotate vector.
+    glm::vec3 translate_vector;                       // translate vector.
+    yli::ontology::Holobiont* holobiont_parent;       // pointer to the `Holobiont`.
+    yli::ontology::SymbiontSpecies* symbiont_species; // pointer to the `SymbiontSpecies` (not a parent!).
     std::size_t biontID;
-    float rotate_angle;              // rotate angle.
-    float initial_rotate_angle;      // initial rotate angle.
+    float rotate_angle;                               // rotate angle.
+    float initial_rotate_angle;                       // initial rotate angle.
     bool quaternions_in_use;
 } BiontStruct;
 
