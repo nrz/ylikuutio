@@ -37,6 +37,9 @@ namespace yli
                     this->shader_pointer_vector,
                     this->free_shaderID_queue,
                     this->number_of_shaders);
+
+            // `shader` needs to be added to the priority queue as well.
+            this->shader_priority_queue.push(shader);
         }
 
         void Scene::bind_camera(yli::ontology::Camera* const camera)
@@ -51,6 +54,9 @@ namespace yli
 
         void Scene::unbind_shader(const std::size_t childID)
         {
+            // `shader` needs to be removed from the priority queue as well.
+            this->shader_priority_queue.remove(childID);
+
             yli::hierarchy::unbind_child_from_parent(
                     childID,
                     this->shader_pointer_vector,

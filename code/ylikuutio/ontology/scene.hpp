@@ -3,6 +3,8 @@
 
 #include "entity.hpp"
 #include "universe.hpp"
+#include "shader_compare.hpp"
+#include "shader_priority_queue.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -60,7 +62,7 @@ namespace yli
                     this->bind_to_parent();
 
                     // `yli::ontology::Entity` member variables begin here.
-                    this->child_vector_pointers_vector.push_back(&this->shader_pointer_vector);
+                    this->child_vector_pointers_vector.push_back(&this->shader_priority_queue);
                     this->type_string = "yli::ontology::Scene*";
                     this->can_be_erased = true;
                 }
@@ -108,6 +110,9 @@ namespace yli
 
                 yli::ontology::World* parent;   // pointer to the `World`.
 
+                // A priority queue is needed for `Shader`s because output to `Texture`s
+                // needs to be rendered before those `Texture`s can be used as input in other `Shader`s.
+                yli::ontology::ShaderPriorityQueue shader_priority_queue;
                 std::vector<yli::ontology::Shader*> shader_pointer_vector;
                 std::queue<std::size_t> free_shaderID_queue;
                 std::size_t number_of_shaders;
