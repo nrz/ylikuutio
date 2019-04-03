@@ -9,7 +9,6 @@ typedef struct TextureStruct
     TextureStruct()
     {
         // constructor.
-        //
     }
 
     std::size_t texture_width;
