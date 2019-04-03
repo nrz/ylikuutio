@@ -18,6 +18,8 @@ namespace yli
 {
     namespace ontology
     {
+        class Shader;
+
         class Texture: public yli::ontology::Entity
         {
             public:
