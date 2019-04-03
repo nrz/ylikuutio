@@ -110,8 +110,18 @@ namespace yli
 
                 yli::ontology::World* parent;   // pointer to the `World`.
 
-                // A priority queue is needed for `Shader`s because output to `Texture`s
-                // needs to be rendered before those `Texture`s can be used as input in other `Shader`s.
+                // `yli::ontology::ShaderPriorityQueue` is a priority queue for `Shader`s.
+                // `yli::ontology::ShaderPriorityQueue` also has
+                // a function `remove(const std::size_t childID)`.
+                //
+                // A priority queue is needed for `Shader`s in the future so that GPGPU
+                // `Shader`s are rendered first so that their output textures can then be
+                // used as input textures in other `Shader`s.
+                //
+                // Note: the output textures of GPGPU `Shader`s may be used as input textures
+                // in later GPGPU `Shader`s. The rendering order within GPGPU `Shader`s is
+                // according to the `childID` values, the GPGPU `Shader` with the smallest
+                // `childID` first.
                 yli::ontology::ShaderPriorityQueue shader_priority_queue;
                 std::vector<yli::ontology::Shader*> shader_pointer_vector;
                 std::queue<std::size_t> free_shaderID_queue;
