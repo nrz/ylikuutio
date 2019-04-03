@@ -179,6 +179,18 @@ namespace yli
             this->postrender();
         }
 
+        void Shader::create_textures()
+        {
+            for (std::size_t textureID = 0; textureID < this->number_of_textures; textureID++)
+            {
+                TextureStruct texture_struct;
+                texture_struct.parent = this;
+                texture_struct.textureID = textureID;
+
+                new yli::ontology::Texture(this->universe, texture_struct);
+            }
+        }
+
         yli::ontology::Entity* Shader::get_parent() const
         {
             return this->parent;

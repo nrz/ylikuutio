@@ -3,6 +3,8 @@
 
 #include "entity.hpp"
 #include "universe.hpp"
+#include "shader_compare.hpp"
+#include "shader_priority_queue.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -10,7 +12,7 @@
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstddef>       // std::size_t
 #include <memory>        // std::make_shared, std::shared_ptr
-#include <queue>         // std::queue
+#include <queue>         // std::priority_queue, std::queue
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -60,7 +62,7 @@ namespace yli
                     this->bind_to_parent();
 
                     // `yli::ontology::Entity` member variables begin here.
-                    this->child_vector_pointers_vector.push_back(&this->shader_pointer_vector);
+                    this->child_vector_pointers_vector.push_back(&this->shader_priority_queue);
                     this->type_string = "yli::ontology::Scene*";
                     this->can_be_erased = true;
                 }
@@ -108,6 +110,19 @@ namespace yli
 
                 yli::ontology::World* parent;   // pointer to the `World`.
 
+                // `yli::ontology::ShaderPriorityQueue` is a priority queue for `Shader`s.
+                // `yli::ontology::ShaderPriorityQueue` also has
+                // a function `remove(const std::size_t childID)`.
+                //
+                // A priority queue is needed for `Shader`s in the future so that GPGPU
+                // `Shader`s are rendered first so that their output textures can then be
+                // used as input textures in other `Shader`s.
+                //
+                // Note: the output textures of GPGPU `Shader`s may be used as input textures
+                // in later GPGPU `Shader`s. The rendering order within GPGPU `Shader`s is
+                // according to the `childID` values, the GPGPU `Shader` with the smallest
+                // `childID` first.
+                yli::ontology::ShaderPriorityQueue shader_priority_queue;
                 std::vector<yli::ontology::Shader*> shader_pointer_vector;
                 std::queue<std::size_t> free_shaderID_queue;
                 std::size_t number_of_shaders;

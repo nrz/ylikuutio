@@ -38,6 +38,7 @@ namespace yli
         class Species;
         class Symbiosis;
         class Texture;
+        class ShaderCompare;
 
         class Shader: public yli::ontology::Entity
         {
@@ -65,16 +66,15 @@ namespace yli
                     this->char_fragment_shader = this->fragment_shader.c_str();
                     this->parent               = shader_struct.parent;
 
-                    // TODO:
                     // Each GPGPU `Shader` owns 0 or more output textures.
                     // Each `Material` rendered after a given GPGPU `Shader`
                     // may also use the output textures offered by
                     // a given GPGPU `Shader` as its texture.
+                    this->number_of_textures   = shader_struct.number_of_textures;
                     this->is_gpgpu_shader      = shader_struct.is_gpgpu_shader;
 
                     this->number_of_materials  = 0;
                     this->number_of_symbioses  = 0;
-                    this->number_of_textures   = 0;
 
                     // Get `childID` from `Scene` and set pointer to this `Shader`.
                     this->bind_to_parent();
@@ -86,6 +86,8 @@ namespace yli
                     this->MatrixID = glGetUniformLocation(this->programID, "MVP");
                     this->view_matrixID = glGetUniformLocation(this->programID, "V");
                     this->model_matrixID = glGetUniformLocation(this->programID, "M");
+
+                    this->create_textures();
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->material_pointer_vector);
@@ -108,6 +110,7 @@ namespace yli
                 uint32_t get_matrixID() const;
                 uint32_t get_model_matrixID() const;
 
+                friend yli::ontology::ShaderCompare;
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template <class T1>
@@ -122,6 +125,8 @@ namespace yli
 
                 // This method renders all materials using this `Shader`.
                 void render();
+
+                void create_textures();
 
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;

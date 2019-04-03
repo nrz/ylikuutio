@@ -525,6 +525,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/scene.hpp
     code/ylikuutio/ontology/shader.cpp
     code/ylikuutio/ontology/shader.hpp
+    code/ylikuutio/ontology/shader_compare.cpp
+    code/ylikuutio/ontology/shader_compare.hpp
+    code/ylikuutio/ontology/shader_priority_queue.cpp
+    code/ylikuutio/ontology/shader_priority_queue.hpp
     code/ylikuutio/ontology/shader_struct.hpp
     code/ylikuutio/ontology/species.cpp
     code/ylikuutio/ontology/species.hpp
