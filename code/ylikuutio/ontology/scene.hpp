@@ -10,7 +10,7 @@
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstddef>       // std::size_t
 #include <memory>        // std::make_shared, std::shared_ptr
-#include <queue>         // std::queue
+#include <queue>         // std::priority_queue, std::queue
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
