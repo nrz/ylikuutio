@@ -28,6 +28,7 @@ namespace yli
                 {
                     // constructor.
                     this->parent = texture_struct.parent;
+                    this->textureID = texture_struct.textureID;
                     this->framebuffer = 0;
                     this->texture = 0;
                     this->render_buffer = 0;
@@ -81,6 +82,8 @@ namespace yli
                 void bind_to_parent();
 
                 yli::ontology::Shader* parent; // pointer to the `Shader`.
+
+                std::size_t textureID;
 
                 uint32_t framebuffer;
                 uint32_t texture;

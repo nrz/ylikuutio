@@ -20,6 +20,7 @@ typedef struct TextureStruct
     }
 
     yli::ontology::Shader* parent; // pointer to the `Shader`.
+    std::size_t textureID;
     std::size_t texture_width;
     std::size_t texture_height;
 } TextureStruct;
