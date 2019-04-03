@@ -3,6 +3,7 @@
 
 #include "entity.hpp"
 #include "texture_struct.hpp"
+#include "family_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -75,11 +76,18 @@ namespace yli
                 // destructor.
                 ~Texture();
 
+                yli::ontology::Entity* get_parent() const override;
+
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
+                template<class T1>
+                    friend std::size_t yli::ontology::get_number_of_descendants(const std::vector<T1>& child_pointer_vector);
 
             private:
                 void bind_to_parent();
+
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 yli::ontology::Shader* parent; // pointer to the `Shader`.
 

@@ -28,6 +28,21 @@ namespace yli
             shader->bind_texture(this);
         }
 
+        yli::ontology::Entity* Texture::get_parent() const
+        {
+            return this->parent;
+        }
+
+        std::size_t Texture::get_number_of_children() const
+        {
+            return 0;
+        }
+
+        std::size_t Texture::get_number_of_descendants() const
+        {
+            return 0;
+        }
+
         Texture::~Texture()
         {
             // destructor.

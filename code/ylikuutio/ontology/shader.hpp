@@ -87,6 +87,8 @@ namespace yli
                     this->view_matrixID = glGetUniformLocation(this->programID, "V");
                     this->model_matrixID = glGetUniformLocation(this->programID, "M");
 
+                    this->create_textures();
+
                     // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->material_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->symbiosis_pointer_vector);
@@ -123,6 +125,8 @@ namespace yli
 
                 // This method renders all materials using this `Shader`.
                 void render();
+
+                void create_textures();
 
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
