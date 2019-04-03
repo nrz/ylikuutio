@@ -25,6 +25,7 @@ namespace yli
                     : Entity(universe)
                 {
                     // constructor.
+                    this->parent = texture_struct.parent;
                     this->framebuffer = 0;
                     this->texture = 0;
                     this->render_buffer = 0;

@@ -4,6 +4,14 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 
+namespace yli
+{
+    namespace ontology
+    {
+        class Shader;
+    }
+}
+
 typedef struct TextureStruct
 {
     TextureStruct()
@@ -11,6 +19,7 @@ typedef struct TextureStruct
         // constructor.
     }
 
+    yli::ontology::Shader* parent; // pointer to the `Shader`.
     std::size_t texture_width;
     std::size_t texture_height;
 } TextureStruct;
