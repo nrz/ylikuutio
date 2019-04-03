@@ -1,6 +1,9 @@
 #ifndef __TEXTURE_STRUCT_HPP_INCLUDED
 #define __TEXTURE_STRUCT_HPP_INCLUDED
 
+// Include standard headers
+#include <cstddef>  // std::size_t
+
 typedef struct TextureStruct
 {
     TextureStruct()
