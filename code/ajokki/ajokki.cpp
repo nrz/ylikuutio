@@ -158,7 +158,7 @@ int main(const int argc, const char* const argv[])
     std::cout << "Setting up console ...\n";
     ajokki::set_console(my_universe->get_setting_master());
 
-    // Create the `World`s.
+    // Create the `World`.
 
     std::cout << "Creating yli::ontology::Entity* earth_world_entity ...\n";
     yli::ontology::Entity* const earth_world_entity = entity_factory->create_World();

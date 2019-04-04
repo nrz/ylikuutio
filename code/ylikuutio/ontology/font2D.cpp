@@ -130,7 +130,7 @@ namespace yli
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, this->texture);
 
-            // Set our "myTextureSampler" sampler to user Material Unit 0
+            // Set our "my_texture_sampler" sampler to user Material Unit 0
             glUniform1i(this->Text2DUniformID, 0);
 
             // Set screen width.

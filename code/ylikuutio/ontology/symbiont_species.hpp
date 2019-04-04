@@ -74,13 +74,13 @@ namespace yli
                     }
 
                     // Get a handle for our buffers.
-                    this->vertex_position_modelspaceID = glGetAttribLocation(this->shader->get_programID(), "vertexPosition_modelspace");
+                    this->vertex_position_modelspaceID = glGetAttribLocation(this->shader->get_programID(), "vertex_position_modelspace");
                     this->vertexUVID                   = glGetAttribLocation(this->shader->get_programID(), "vertexUV");
-                    this->vertex_normal_modelspaceID   = glGetAttribLocation(this->shader->get_programID(), "vertexNormal_modelspace");
+                    this->vertex_normal_modelspaceID   = glGetAttribLocation(this->shader->get_programID(), "vertex_normal_modelspace");
 
                     // Get a handle for our "LightPosition" uniform.
                     glUseProgram(this->shader->get_programID());
-                    this->lightID = glGetUniformLocation(this->shader->get_programID(), "LightPosition_worldspace");
+                    this->lightID = glGetUniformLocation(this->shader->get_programID(), "light_position_worldspace");
 
                     // water level.
                     uint32_t water_level_uniform_location = glGetUniformLocation(this->shader->get_programID(), "water_level");

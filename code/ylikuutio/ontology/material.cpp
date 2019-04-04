@@ -136,7 +136,7 @@ namespace yli
             // Bind our texture in Texture Unit 0.
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, this->texture);
-            // Set our "myTextureSampler" sampler to user Texture Unit 0.
+            // Set our "my_texture_sampler" sampler to user Texture Unit 0.
             glUniform1i(this->openGL_textureID, 0);
 
             // Render this `Material` by calling `render()` function of each `Species`, each `VectorFont`, and each `ChunkMaster`.

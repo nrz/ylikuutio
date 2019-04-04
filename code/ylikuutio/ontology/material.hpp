@@ -95,8 +95,8 @@ namespace yli
                             return;
                         }
 
-                        // Get a handle for our "myTextureSampler" uniform.
-                        this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "myTextureSampler");
+                        // Get a handle for our "my_texture_sampler" uniform.
+                        this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "my_texture_sampler");
 
                         // `yli::ontology::Entity` member variables begin here.
                         this->child_vector_pointers_vector.push_back(&this->species_pointer_vector);
@@ -153,7 +153,7 @@ namespace yli
                 bool is_symbiont_material;
 
                 uint32_t texture;                    // Texture of this `Material`, returned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
-                uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler")`.
+                uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(programID, "my_texture_sampler")`.
 
                 std::vector<yli::ontology::Species*> species_pointer_vector;
                 std::vector<yli::ontology::VectorFont*> vector_font_pointer_vector;

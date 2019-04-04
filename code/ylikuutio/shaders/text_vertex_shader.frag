@@ -4,9 +4,9 @@
 varying vec2 UV;
 
 // Values that stay constant for the whole mesh.
-uniform sampler2D myTextureSampler;
+uniform sampler2D my_texture_sampler;
 
 void main()
 {
-	gl_FragColor = texture2D( myTextureSampler, UV );
+    gl_FragColor = texture2D(my_texture_sampler, UV);
 }

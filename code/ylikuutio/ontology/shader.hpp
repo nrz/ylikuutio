@@ -83,7 +83,7 @@ namespace yli
                     this->programID = yli::load::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
 
                     // Get a handle for our "MVP" uniform.
-                    this->MatrixID = glGetUniformLocation(this->programID, "MVP");
+                    this->matrixID = glGetUniformLocation(this->programID, "MVP");
                     this->view_matrixID = glGetUniformLocation(this->programID, "V");
                     this->model_matrixID = glGetUniformLocation(this->programID, "M");
 
@@ -135,7 +135,7 @@ namespace yli
 
                 uint32_t programID;                   // This `Shader`'s `programID`, returned by `load_shaders`.
 
-                uint32_t MatrixID;
+                uint32_t matrixID;
                 uint32_t view_matrixID;
                 uint32_t model_matrixID;
 

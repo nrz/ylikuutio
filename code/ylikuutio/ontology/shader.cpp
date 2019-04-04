@@ -215,7 +215,7 @@ namespace yli
 
         uint32_t Shader::get_matrixID() const
         {
-            return this->MatrixID;
+            return this->matrixID;
         }
 
         uint32_t Shader::get_model_matrixID() const
