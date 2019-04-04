@@ -3,7 +3,7 @@
 // Interpolated values from the vertex shaders
 varying vec2 UV;
 varying vec3 position_worldspace;
-varying vec3 Normal_cameraspace;
+varying vec3 normal_cameraspace;
 varying vec3 EyeDirection_cameraspace;
 varying vec3 LightDirection_cameraspace;
 
@@ -35,7 +35,7 @@ void main()
     float distance = 100.0f;
 
     // Normal of the computed fragment, in camera space
-    vec3 n = normalize(Normal_cameraspace);
+    vec3 n = normalize(normal_cameraspace);
     // Direction of the light (from the fragment to the light)
     vec3 l = normalize(LightDirection_cameraspace);
     // Cosine of the angle between the normal and the light direction,
