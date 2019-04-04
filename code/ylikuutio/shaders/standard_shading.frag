@@ -5,7 +5,7 @@ varying vec2 UV;
 varying vec3 position_worldspace;
 varying vec3 normal_cameraspace;
 varying vec3 eye_direction_cameraspace;
-varying vec3 LightDirection_cameraspace;
+varying vec3 light_direction_cameraspace;
 
 // Values that stay constant for the whole mesh.
 uniform sampler2D myTextureSampler;
@@ -37,7 +37,7 @@ void main()
     // Normal of the computed fragment, in camera space
     vec3 n = normalize(normal_cameraspace);
     // Direction of the light (from the fragment to the light)
-    vec3 l = normalize(LightDirection_cameraspace);
+    vec3 l = normalize(light_direction_cameraspace);
     // Cosine of the angle between the normal and the light direction,
     // clamped above 0
     //  - light is at the vertical of the triangle -> 1
