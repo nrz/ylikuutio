@@ -32,8 +32,8 @@ void main()
     eye_direction_cameraspace = vec3(0, 0, 0) - vertexPosition_cameraspace;
 
     // Vector that goes from the vertex to the light, in camera space. M is ommited because it's identity.
-    vec3 LightPosition_cameraspace = (V * vec4(light_position_worldspace, 1)).xyz;
-    light_direction_cameraspace = LightPosition_cameraspace + eye_direction_cameraspace;
+    vec3 light_position_cameraspace = (V * vec4(light_position_worldspace, 1)).xyz;
+    light_direction_cameraspace = light_position_cameraspace + eye_direction_cameraspace;
 
     // Normal of the the vertex, in camera space
     normal_cameraspace = (V * M * vec4(vertex_normal_modelspace, 0)).xyz; // Only correct if ModelMatrix does not scale the model ! Use its inverse transpose if not.
