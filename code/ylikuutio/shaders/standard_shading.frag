@@ -10,7 +10,7 @@ varying vec3 light_direction_cameraspace;
 // Values that stay constant for the whole mesh.
 uniform sampler2D my_texture_sampler;
 uniform mat4 MV;
-uniform vec3 LightPosition_worldspace;
+uniform vec3 light_position_worldspace;
 uniform float water_level;
 
 void main()
@@ -31,7 +31,7 @@ void main()
     vec3 MaterialSpecularColor = vec3(0.3, 0.3, 0.3);
 
     // Distance to the light
-    // float distance = length(LightPosition_worldspace - position_worldspace);
+    // float distance = length(light_position_worldspace - position_worldspace);
     float distance = 100.0f;
 
     // Normal of the computed fragment, in camera space

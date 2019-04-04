@@ -99,7 +99,7 @@ namespace yli
                 std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
                 glm::vec3 light_position;                // light position.
 
-                uint32_t lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
+                uint32_t lightID;                        // light ID, returned by `glGetUniformLocation(programID, "light_position_worldspace");`.
 
                 std::vector<yli::ontology::Object*> object_pointer_vector;
                 std::queue<std::size_t> free_objectID_queue;

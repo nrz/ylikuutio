@@ -80,7 +80,7 @@ namespace yli
 
                     // Get a handle for our "LightPosition" uniform.
                     glUseProgram(this->shader->get_programID());
-                    this->lightID = glGetUniformLocation(this->shader->get_programID(), "LightPosition_worldspace");
+                    this->lightID = glGetUniformLocation(this->shader->get_programID(), "light_position_worldspace");
 
                     // water level.
                     uint32_t water_level_uniform_location = glGetUniformLocation(this->shader->get_programID(), "water_level");
