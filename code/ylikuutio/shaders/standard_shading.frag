@@ -27,7 +27,7 @@ void main()
 
     // Material properties
     vec3 material_diffuse_color = texture2D(my_texture_sampler, UV).rgb;
-    vec3 MaterialAmbientColor = vec3(0.1, 0.1, 0.1) * material_diffuse_color;
+    vec3 material_ambient_color = vec3(0.1, 0.1, 0.1) * material_diffuse_color;
     vec3 MaterialSpecularColor = vec3(0.3, 0.3, 0.3);
 
     // Distance to the light
@@ -57,7 +57,7 @@ void main()
 
     gl_FragColor.rgb =
         // Ambient : simulates indirect lighting
-        MaterialAmbientColor +
+        material_ambient_color +
         // Diffuse : "color" of the object
         material_diffuse_color * light_color * light_power * cosTheta / (distance * distance) +
         // Specular : reflective highlight, like a mirror
