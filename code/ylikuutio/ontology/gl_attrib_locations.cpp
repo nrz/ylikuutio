@@ -13,7 +13,7 @@ namespace yli
         {
             glyph->store_vertex_position_modelspaceID(glGetAttribLocation(shader->get_programID(), "vertex_position_modelspace"));
             glyph->store_vertexUVID(glGetAttribLocation(shader->get_programID(), "vertexUV"));
-            glyph->store_vertex_normal_modelspaceID(glGetAttribLocation(shader->get_programID(), "vertexNormal_modelspace"));
+            glyph->store_vertex_normal_modelspaceID(glGetAttribLocation(shader->get_programID(), "vertex_normal_modelspace"));
         }
     }
 }
