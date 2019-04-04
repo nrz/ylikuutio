@@ -53,7 +53,7 @@ void main()
     // clamped to 0
     //  - Looking into the reflection -> 1
     //  - Looking elsewhere -> < 1
-    float cosAlpha = clamp(dot(E, R), 0, 1);
+    float cos_alpha = clamp(dot(E, R), 0, 1);
 
     gl_FragColor.rgb =
         // Ambient : simulates indirect lighting
@@ -61,5 +61,5 @@ void main()
         // Diffuse : "color" of the object
         material_diffuse_color * light_color * light_power * cosTheta / (distance * distance) +
         // Specular : reflective highlight, like a mirror
-        material_specular_color * light_color * light_power * pow(cosAlpha, 5) / (distance * distance);
+        material_specular_color * light_color * light_power * pow(cos_alpha, 5) / (distance * distance);
 }
