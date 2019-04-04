@@ -18,7 +18,7 @@ void main()
     // Light emission properties
     // You probably want to put them as uniforms
     vec3 light_color = vec3(1, 1, 1);
-    float LightPower = 20000.0f;
+    float light_power = 20000.0f;
 
     if (position_worldspace.y < water_level)
     {
@@ -59,7 +59,7 @@ void main()
         // Ambient : simulates indirect lighting
         MaterialAmbientColor +
         // Diffuse : "color" of the object
-        MaterialDiffuseColor * light_color * LightPower * cosTheta / (distance * distance) +
+        MaterialDiffuseColor * light_color * light_power * cosTheta / (distance * distance) +
         // Specular : reflective highlight, like a mirror
-        MaterialSpecularColor * light_color * LightPower * pow(cosAlpha, 5) / (distance * distance);
+        MaterialSpecularColor * light_color * light_power * pow(cosAlpha, 5) / (distance * distance);
 }
