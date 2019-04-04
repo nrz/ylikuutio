@@ -4,7 +4,7 @@
 varying vec2 UV;
 varying vec3 position_worldspace;
 varying vec3 normal_cameraspace;
-varying vec3 EyeDirection_cameraspace;
+varying vec3 eye_direction_cameraspace;
 varying vec3 LightDirection_cameraspace;
 
 // Values that stay constant for the whole mesh.
@@ -46,7 +46,7 @@ void main()
     float cosTheta = clamp(dot(n, l), 0, 1);
 
     // Eye vector (towards the camera)
-    vec3 E = normalize(EyeDirection_cameraspace);
+    vec3 E = normalize(eye_direction_cameraspace);
     // Direction in which the triangle reflects the light
     vec3 R = reflect(-l, n);
     // Cosine of the angle between the Eye vector and the Reflect vector,
