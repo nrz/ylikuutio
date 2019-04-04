@@ -59,7 +59,7 @@ namespace yli
                     glGenBuffers(1, &this->uvbuffer);
 
                     // Get a handle for our buffers.
-                    this->vertex_position_in_screenspaceID = glGetAttribLocation(this->parent->get_programID(), "vertexPosition_screenspace");
+                    this->vertex_position_in_screenspaceID = glGetAttribLocation(this->parent->get_programID(), "vertex_position_screenspace");
                     this->vertexUVID = glGetAttribLocation(this->parent->get_programID(), "vertexUV");
 
                     // `yli::ontology::Entity` member variables begin here.
@@ -86,7 +86,7 @@ namespace yli
                 uint32_t vertexbuffer;                     // Buffer containing the vertices
                 uint32_t uvbuffer;                         // Buffer containing the UVs
                 uint32_t programID;                        // The `programID` of the shader used to display the text, returned by `load_shaders`.
-                uint32_t vertex_position_in_screenspaceID; // Location of the program's `vertexPosition_screenspace` attribute.
+                uint32_t vertex_position_in_screenspaceID; // Location of the program's `vertex_position_screenspace` attribute.
                 uint32_t vertexUVID;                       // Location of the program's `vertexUV` attribute.
 
                 std::string text;

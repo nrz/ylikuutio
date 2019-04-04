@@ -98,7 +98,7 @@ namespace yli
                     this->programID = yli::load::load_shaders("text_vertex_shader.vert", "text_vertex_shader.frag");
 
                     // Get a handle for our buffers.
-                    this->vertex_position_in_screenspaceID = glGetAttribLocation(this->programID, "vertexPosition_screenspace");
+                    this->vertex_position_in_screenspaceID = glGetAttribLocation(this->programID, "vertex_position_screenspace");
                     this->vertexUVID = glGetAttribLocation(this->programID, "vertexUV");
 
                     // Initialize uniforms' IDs.
@@ -170,7 +170,7 @@ namespace yli
                 uint32_t vertexbuffer;                     // Buffer containing the vertices.
                 uint32_t uvbuffer;                         // Buffer containing the UVs.
                 uint32_t programID;                        // The `programID` of the shader used to display the text, returned by `load_shaders`.
-                uint32_t vertex_position_in_screenspaceID; // Location of the program's `vertexPosition_screenspace` attribute.
+                uint32_t vertex_position_in_screenspaceID; // Location of the program's `vertex_position_screenspace` attribute.
                 uint32_t vertexUVID;                       // Location of the program's `vertexUV` attribute.
                 uint32_t Text2DUniformID;                  // Location of the program's texture attribute.
                 uint32_t screen_width_uniform_ID;          // Location of the program's window width uniform.
