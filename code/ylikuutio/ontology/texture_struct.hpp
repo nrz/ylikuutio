@@ -3,6 +3,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <limits>   // std::numeric_limits
 
 namespace yli
 {
@@ -15,6 +16,10 @@ namespace yli
 typedef struct TextureStruct
 {
     TextureStruct()
+        : parent(nullptr),
+        textureID(std::numeric_limits<std::size_t>::max()), // `std::numeric_limits<std::size_t>::max()` means that `textureID` is not defined.
+        texture_width(0),
+        texture_height(0)
     {
         // constructor.
     }
