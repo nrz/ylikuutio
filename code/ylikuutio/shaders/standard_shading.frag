@@ -28,7 +28,7 @@ void main()
     // Material properties
     vec3 material_diffuse_color = texture2D(my_texture_sampler, UV).rgb;
     vec3 material_ambient_color = vec3(0.1, 0.1, 0.1) * material_diffuse_color;
-    vec3 MaterialSpecularColor = vec3(0.3, 0.3, 0.3);
+    vec3 material_specular_color = vec3(0.3, 0.3, 0.3);
 
     // Distance to the light
     // float distance = length(light_position_worldspace - position_worldspace);
@@ -61,5 +61,5 @@ void main()
         // Diffuse : "color" of the object
         material_diffuse_color * light_color * light_power * cosTheta / (distance * distance) +
         // Specular : reflective highlight, like a mirror
-        MaterialSpecularColor * light_color * light_power * pow(cosAlpha, 5) / (distance * distance);
+        material_specular_color * light_color * light_power * pow(cosAlpha, 5) / (distance * distance);
 }
