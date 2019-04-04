@@ -79,7 +79,7 @@ namespace yli
                         this->bind_to_parent();
 
                         // Get a handle for our buffers.
-                        this->vertex_position_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertexPosition_modelspace");
+                        this->vertex_position_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertex_position_modelspace");
                         this->vertexUVID = glGetAttribLocation(species_struct.shader->get_programID(), "vertexUV");
                         this->vertex_normal_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertexNormal_modelspace");
 
