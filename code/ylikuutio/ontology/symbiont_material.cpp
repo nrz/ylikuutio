@@ -89,7 +89,7 @@ namespace yli
             // Bind our texture in Texture Unit 0.
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, this->texture);
-            // Set our "myTextureSampler" sampler to user Texture Unit 0.
+            // Set our "my_texture_sampler" sampler to user Texture Unit 0.
             glUniform1i(this->openGL_textureID, 0);
 
             // render this `SymbiontMaterial` by calling `render()` function of each `SymbiontSpecies`.
@@ -149,8 +149,8 @@ namespace yli
                 std::cerr << "ERROR: loading FBX texture failed!\n";
             }
 
-            // Get a handle for our "myTextureSampler" uniform.
-            this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "myTextureSampler");
+            // Get a handle for our "my_texture_sampler" uniform.
+            this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "my_texture_sampler");
         }
 
         uint32_t SymbiontMaterial::get_texture() const
