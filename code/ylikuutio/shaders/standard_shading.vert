@@ -7,7 +7,7 @@ attribute vec3 vertex_normal_modelspace;
 
 // Output data ; will be interpolated for each fragment.
 varying vec2 UV;
-varying vec3 Position_worldspace;
+varying vec3 position_worldspace;
 varying vec3 Normal_cameraspace;
 varying vec3 EyeDirection_cameraspace;
 varying vec3 LightDirection_cameraspace;
@@ -24,7 +24,7 @@ void main()
     gl_Position = MVP * vec4(vertex_position_modelspace, 1);
 
     // Position of the vertex, in worldspace : M * position
-    Position_worldspace = (M * vec4(vertex_position_modelspace, 1)).xyz;
+    position_worldspace = (M * vec4(vertex_position_modelspace, 1)).xyz;
 
     // Vector that goes from the vertex to the camera, in camera space.
     // In camera space, the camera is at the origin (0, 0, 0).

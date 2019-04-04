@@ -2,7 +2,7 @@
 
 // Interpolated values from the vertex shaders
 varying vec2 UV;
-varying vec3 Position_worldspace;
+varying vec3 position_worldspace;
 varying vec3 Normal_cameraspace;
 varying vec3 EyeDirection_cameraspace;
 varying vec3 LightDirection_cameraspace;
@@ -20,7 +20,7 @@ void main()
     vec3 LightColor = vec3(1, 1, 1);
     float LightPower = 20000.0f;
 
-    if (Position_worldspace.y < water_level)
+    if (position_worldspace.y < water_level)
     {
         LightColor = vec3(0, 0, 1);
     }
@@ -31,7 +31,7 @@ void main()
     vec3 MaterialSpecularColor = vec3(0.3, 0.3, 0.3);
 
     // Distance to the light
-    // float distance = length(LightPosition_worldspace - Position_worldspace);
+    // float distance = length(LightPosition_worldspace - position_worldspace);
     float distance = 100.0f;
 
     // Normal of the computed fragment, in camera space
