@@ -242,6 +242,11 @@ namespace yli
                     this->background_alpha);
         }
 
+        void Universe::adjust_opengl_viewport() const
+        {
+            glViewport(0, 0, this->window_width, this->window_height);
+        }
+
         SDL_Window* Universe::get_window() const
         {
             return this->window;
@@ -739,7 +744,7 @@ namespace yli
                 glClear(GL_COLOR_BUFFER_BIT);
 
                 // Adjust viewport for the default framebuffer.
-                glViewport(0, 0, universe->window_width, universe->window_height);
+                universe->universe->adjust_opengl_viewport();
             }
 
             return nullptr;

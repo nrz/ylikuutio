@@ -453,6 +453,7 @@ namespace yli
                 void create_context();
                 void make_context_current();
                 void set_opengl_background_color() const;
+                void adjust_opengl_viewport() const;
 
                 // this method returns current `window`.
                 SDL_Window* get_window() const;
