@@ -37,12 +37,12 @@ namespace yli
 
         std::size_t Texture::get_number_of_children() const
         {
-            return 0;
+            return 0; // `Texture` has no children.
         }
 
         std::size_t Texture::get_number_of_descendants() const
         {
-            return 0;
+            return 0; // `Texture` has no children.
         }
 
         Texture::~Texture()
