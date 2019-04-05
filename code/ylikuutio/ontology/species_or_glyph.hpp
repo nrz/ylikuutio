@@ -1,6 +1,7 @@
 #ifndef __SPECIES_OR_GLYPH_HPP_INCLUDED
 #define __SPECIES_OR_GLYPH_HPP_INCLUDED
 
+#include "object.hpp"
 #include "render_templates.hpp"
 
 // Include GLEW
@@ -10,8 +11,6 @@ namespace yli
 {
     namespace ontology
     {
-        class Object;
-
         template<class T1>
             void render_species_or_glyph(T1 const species_or_glyph_pointer)
             {
