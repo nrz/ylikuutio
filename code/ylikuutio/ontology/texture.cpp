@@ -11,6 +11,8 @@ namespace yli
 {
     namespace ontology
     {
+        class Entity;
+
         void Texture::bind_to_parent()
         {
             // Requirements:
