@@ -39,7 +39,6 @@ namespace yli
     namespace config
     {
         class SettingMaster;
-        class Setting;
     }
 
     namespace console
@@ -55,7 +54,6 @@ namespace yli
     namespace ontology
     {
         class Entity;
-        class Font2D;
     }
 }
 
