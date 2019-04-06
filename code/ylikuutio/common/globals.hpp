@@ -47,13 +47,6 @@ namespace yli
     }
 }
 
-typedef struct
-{
-    uint32_t image_width;
-    uint32_t image_height;
-    bool should_ylikuutio_use_real_texture_coordinates;
-} BilinearInterpolationStruct;
-
 typedef std::shared_ptr<yli::datatypes::AnyValue> (*InputParametersToAnyValueCallback) (
         yli::callback_system::CallbackEngine*,
         yli::callback_system::CallbackObject*,
