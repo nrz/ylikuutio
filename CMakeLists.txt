@@ -516,6 +516,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/object.cpp
     code/ylikuutio/ontology/object.hpp
     code/ylikuutio/ontology/object_struct.hpp
+    code/ylikuutio/ontology/post_render_callback.hpp
+    code/ylikuutio/ontology/pre_render_callback.hpp
     code/ylikuutio/ontology/render_templates.hpp
     code/ylikuutio/ontology/rail_vehicle.cpp
     code/ylikuutio/ontology/rail_vehicle.hpp

@@ -1,7 +1,8 @@
 #ifndef __ENTITY_HPP_INCLUDED
 #define __ENTITY_HPP_INCLUDED
 
-#include "code/ylikuutio/common/globals.hpp"
+#include "pre_render_callback.hpp"
+#include "post_render_callback.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
