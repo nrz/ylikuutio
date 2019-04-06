@@ -1,5 +1,5 @@
-#ifndef __TEXTURE_STRUCT_HPP_INCLUDED
-#define __TEXTURE_STRUCT_HPP_INCLUDED
+#ifndef __COMPUTE_TASK_STRUCT_HPP_INCLUDED
+#define __COMPUTE_TASK_STRUCT_HPP_INCLUDED
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -13,11 +13,11 @@ namespace yli
     }
 }
 
-typedef struct TextureStruct
+typedef struct ComputeTaskStruct
 {
-    TextureStruct()
+    ComputeTaskStruct()
         : parent(nullptr),
-        textureID(std::numeric_limits<std::size_t>::max()), // `std::numeric_limits<std::size_t>::max()` means that `textureID` is not defined.
+        compute_taskID(std::numeric_limits<std::size_t>::max()), // `std::numeric_limits<std::size_t>::max()` means that `compute_taskID` is not defined.
         texture_width(0),
         texture_height(0)
     {
@@ -25,7 +25,7 @@ typedef struct TextureStruct
     }
 
     yli::ontology::Shader* parent; // pointer to the `Shader`.
-    std::size_t textureID;
+    std::size_t compute_taskID;
     std::size_t texture_width;
     std::size_t texture_height;
 } TextureStruct;

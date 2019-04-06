@@ -1,4 +1,4 @@
-#include "texture.hpp"
+#include "compute_task.hpp"
 #include "shader.hpp"
 
 // Include GLEW
@@ -13,7 +13,7 @@ namespace yli
     {
         class Entity;
 
-        void Texture::bind_to_parent()
+        void ComputeTask::bind_to_parent()
         {
             // Requirements:
             // `this->parent` must not be `nullptr`.
@@ -22,15 +22,15 @@ namespace yli
 
             if (shader == nullptr)
             {
-                std::cerr << "ERROR: `Texture::bind_to_parent`: `shader` is `nullptr`!\n";
+                std::cerr << "ERROR: `ComputeTask::bind_to_parent`: `shader` is `nullptr`!\n";
                 return;
             }
 
-            // Get `childID` from `Shader` and set pointer to this `Texture`.
-            shader->bind_texture(this);
+            // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
+            shader->bind_compute_task(this);
         }
 
-        Texture::~Texture()
+        ComputeTask::~ComputeTask()
         {
             // destructor.
             //
@@ -44,22 +44,22 @@ namespace yli
                 return;
             }
 
-            this->parent->unbind_texture(this->childID);
+            this->parent->unbind_compute_task(this->childID);
         }
 
-        yli::ontology::Entity* Texture::get_parent() const
+        yli::ontology::Entity* ComputeTask::get_parent() const
         {
             return this->parent;
         }
 
-        std::size_t Texture::get_number_of_children() const
+        std::size_t ComputeTask::get_number_of_children() const
         {
-            return 0; // `Texture` has no children.
+            return 0; // `ComputeTask` has no children.
         }
 
-        std::size_t Texture::get_number_of_descendants() const
+        std::size_t ComputeTask::get_number_of_descendants() const
         {
-            return 0; // `Texture` has no children.
+            return 0; // `ComputeTask` has no children.
         }
     }
 }

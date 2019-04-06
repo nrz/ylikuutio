@@ -37,7 +37,7 @@ namespace yli
         class Material;
         class Species;
         class Symbiosis;
-        class Texture;
+        class ComputeTask;
         class ShaderCompare;
 
         class Shader: public yli::ontology::Entity
@@ -45,11 +45,11 @@ namespace yli
             public:
                 void bind_material(yli::ontology::Material* const material);
                 void bind_symbiosis(yli::ontology::Symbiosis* const symbiosis);
-                void bind_texture(yli::ontology::Texture* const texture);
+                void bind_compute_task(yli::ontology::ComputeTask* const compute_task);
 
                 void unbind_material(const std::size_t childID);
                 void unbind_symbiosis(const std::size_t childID);
-                void unbind_texture(const std::size_t childID);
+                void unbind_compute_task(const std::size_t childID);
 
                 // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
                 void bind_to_new_parent(yli::ontology::Scene* const new_parent);
@@ -66,15 +66,15 @@ namespace yli
                     this->char_fragment_shader = this->fragment_shader.c_str();
                     this->parent               = shader_struct.parent;
 
-                    // Each GPGPU `Shader` owns 0 or more output textures.
+                    // Each GPGPU `Shader` owns 0 or more output `ComputeTask`s.
                     // Each `Material` rendered after a given GPGPU `Shader`
-                    // may also use the output textures offered by
+                    // may also use the output `ComputeTask`s offered by
                     // a given GPGPU `Shader` as its texture.
-                    this->number_of_textures   = shader_struct.number_of_textures;
                     this->is_gpgpu_shader      = shader_struct.is_gpgpu_shader;
 
                     this->number_of_materials  = 0;
                     this->number_of_symbioses  = 0;
+                    this->number_of_compute_tasks = 0;
 
                     // Get `childID` from `Scene` and set pointer to this `Shader`.
                     this->bind_to_parent();
@@ -87,12 +87,10 @@ namespace yli
                     this->view_matrixID = glGetUniformLocation(this->programID, "V");
                     this->model_matrixID = glGetUniformLocation(this->programID, "M");
 
-                    this->create_textures();
-
                     // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->material_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->symbiosis_pointer_vector);
-                    this->child_vector_pointers_vector.push_back(&this->texture_pointer_vector);
+                    this->child_vector_pointers_vector.push_back(&this->compute_task_pointer_vector);
                     this->type_string = "yli::ontology::Shader*";
                     this->can_be_erased = true;
                 }
@@ -126,8 +124,6 @@ namespace yli
                 // This method renders all materials using this `Shader`.
                 void render();
 
-                void create_textures();
-
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
@@ -144,18 +140,18 @@ namespace yli
 
                 std::vector<yli::ontology::Material*> material_pointer_vector;
                 std::vector<yli::ontology::Symbiosis*> symbiosis_pointer_vector;
-                std::vector<yli::ontology::Texture*> texture_pointer_vector;
+                std::vector<yli::ontology::ComputeTask*> compute_task_pointer_vector;
                 std::queue<std::size_t> free_materialID_queue;
                 std::queue<std::size_t> free_symbiosisID_queue;
-                std::queue<std::size_t> free_textureID_queue;
+                std::queue<std::size_t> free_compute_taskID_queue;
                 std::size_t number_of_materials;
                 std::size_t number_of_symbioses;
-                std::size_t number_of_textures;
+                std::size_t number_of_compute_tasks;
 
                 const char* char_vertex_shader;
                 const char* char_fragment_shader;
 
-                bool is_gpgpu_shader;                 // TODO: GPGPU `Shader`s are not rendered on screen but their result `Texture`s can be used by `Material`s.
+                bool is_gpgpu_shader;                 // TODO: GPGPU `Shader`s are not rendered on screen but their result `ComputeTask`s can be used by `Material`s.
         };
     }
 }

@@ -3,7 +3,7 @@
 #include "world.hpp"
 #include "universe.hpp"
 #include "material.hpp"
-#include "texture.hpp"
+#include "compute_task.hpp"
 #include "glyph.hpp"
 #include "symbiosis.hpp"
 #include "render_templates.hpp"
@@ -46,14 +46,14 @@ namespace yli
                     this->number_of_symbioses);
         }
 
-        void Shader::bind_texture(yli::ontology::Texture* const texture)
+        void Shader::bind_compute_task(yli::ontology::ComputeTask* const compute_task)
         {
-            // Get `childID` from `Shader` and set pointer to `texture`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Texture*>(
-                    texture,
-                    this->texture_pointer_vector,
-                    this->free_textureID_queue,
-                    this->number_of_textures);
+            // Get `childID` from `Shader` and set pointer to `compute_task`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::ComputeTask*>(
+                    compute_task,
+                    this->compute_task_pointer_vector,
+                    this->free_compute_taskID_queue,
+                    this->number_of_compute_tasks);
         }
 
         void Shader::unbind_material(const std::size_t childID)
@@ -74,13 +74,13 @@ namespace yli
                     this->number_of_symbioses);
         }
 
-        void Shader::unbind_texture(const std::size_t childID)
+        void Shader::unbind_compute_task(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
                     childID,
-                    this->texture_pointer_vector,
-                    this->free_textureID_queue,
-                    this->number_of_textures);
+                    this->compute_task_pointer_vector,
+                    this->free_compute_taskID_queue,
+                    this->number_of_compute_tasks);
         }
 
         void Shader::bind_to_parent()
@@ -179,18 +179,6 @@ namespace yli
             this->postrender();
         }
 
-        void Shader::create_textures()
-        {
-            for (std::size_t textureID = 0; textureID < this->number_of_textures; textureID++)
-            {
-                TextureStruct texture_struct;
-                texture_struct.parent = this;
-                texture_struct.textureID = textureID;
-
-                new yli::ontology::Texture(this->universe, texture_struct);
-            }
-        }
-
         yli::ontology::Entity* Shader::get_parent() const
         {
             return this->parent;
@@ -198,14 +186,14 @@ namespace yli
 
         std::size_t Shader::get_number_of_children() const
         {
-            return this->number_of_materials + this->number_of_symbioses + this->number_of_textures;
+            return this->number_of_materials + this->number_of_symbioses + this->number_of_compute_tasks;
         }
 
         std::size_t Shader::get_number_of_descendants() const
         {
             return yli::ontology::get_number_of_descendants(this->material_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->symbiosis_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->texture_pointer_vector);
+                yli::ontology::get_number_of_descendants(this->compute_task_pointer_vector);
         }
 
         uint32_t Shader::get_programID() const

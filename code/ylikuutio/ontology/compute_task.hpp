@@ -1,8 +1,8 @@
-#ifndef __TEXTURE_HPP_INCLUDED
-#define __TEXTURE_HPP_INCLUDED
+#ifndef __COMPUTE_TASK_HPP_INCLUDED
+#define __COMPUTE_TASK_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "texture_struct.hpp"
+#include "compute_task_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -21,21 +21,21 @@ namespace yli
     {
         class Shader;
 
-        class Texture: public yli::ontology::Entity
+        class ComputeTask: public yli::ontology::Entity
         {
             public:
-                Texture(yli::ontology::Universe* const universe, const TextureStruct& texture_struct)
+                ComputeTask(yli::ontology::Universe* const universe, const ComputeTaskStruct& compute_task_struct)
                     : Entity(universe)
                 {
                     // constructor.
-                    this->parent = texture_struct.parent;
-                    this->textureID = texture_struct.textureID;
+                    this->parent = compute_task_struct.parent;
+                    this->compute_taskID = compute_task_struct.compute_taskID;
                     this->framebuffer = 0;
                     this->texture = 0;
                     this->render_buffer = 0;
 
-                    this->texture_width = texture_struct.texture_width;
-                    this->texture_height = texture_struct.texture_height;
+                    this->texture_width = compute_task_struct.texture_width;
+                    this->texture_height = compute_task_struct.texture_height;
 
                     // Create FBO (off-screen framebuffer object).
                     glGenFramebuffers(1, &this->framebuffer);
@@ -63,18 +63,18 @@ namespace yli
 
                     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
                     {
-                        std::cerr << "ERROR: `Texture::Texture`: framebuffer is not complete!\n";
+                        std::cerr << "ERROR: `ComputeTask::ComputeTask`: framebuffer is not complete!\n";
                     }
 
-                    // Get `childID` from `Shader` and set pointer to this `Texture`.
+                    // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
                     this->bind_to_parent();
 
                     // `yli::ontology::Entity` member variables begin here.
-                    this->type_string = "yli::ontology::Texture*";
+                    this->type_string = "yli::ontology::ComputeTask*";
                 }
 
                 // destructor.
-                ~Texture();
+                ~ComputeTask();
 
                 yli::ontology::Entity* get_parent() const override;
 
@@ -91,7 +91,7 @@ namespace yli
 
                 yli::ontology::Shader* parent; // pointer to the `Shader`.
 
-                std::size_t textureID;
+                std::size_t compute_taskID;
 
                 uint32_t framebuffer;
                 uint32_t texture;
