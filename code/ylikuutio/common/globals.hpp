@@ -40,11 +40,6 @@ namespace yli
     {
         class Console;
     }
-
-    namespace graph
-    {
-        class Graph;
-    }
 }
 
 typedef std::shared_ptr<yli::datatypes::AnyValue> (*InputParametersToAnyValueCallback) (
