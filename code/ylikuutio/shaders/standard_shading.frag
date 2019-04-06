@@ -1,6 +1,6 @@
 #version 120
 
-// Interpolated values from the vertex shaders
+// Interpolated values from the vertex shaders.
 varying vec2 UV;
 varying vec3 position_worldspace;
 varying vec3 normal_cameraspace;

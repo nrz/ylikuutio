@@ -516,6 +516,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/object.cpp
     code/ylikuutio/ontology/object.hpp
     code/ylikuutio/ontology/object_struct.hpp
+    code/ylikuutio/ontology/post_render_callback.hpp
+    code/ylikuutio/ontology/pre_render_callback.hpp
     code/ylikuutio/ontology/render_templates.hpp
     code/ylikuutio/ontology/rail_vehicle.cpp
     code/ylikuutio/ontology/rail_vehicle.hpp
@@ -548,9 +550,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/text3D.hpp
     code/ylikuutio/ontology/text3D.cpp
     code/ylikuutio/ontology/text3D_struct.hpp
-    code/ylikuutio/ontology/texture.cpp
-    code/ylikuutio/ontology/texture.hpp
-    code/ylikuutio/ontology/texture_struct.hpp
+    code/ylikuutio/ontology/compute_task.cpp
+    code/ylikuutio/ontology/compute_task.hpp
+    code/ylikuutio/ontology/compute_task_struct.hpp
     code/ylikuutio/ontology/text_struct.hpp
     code/ylikuutio/ontology/universe.cpp
     code/ylikuutio/ontology/universe.hpp

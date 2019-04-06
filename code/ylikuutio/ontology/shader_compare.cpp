@@ -1,5 +1,4 @@
 #include "shader_compare.hpp"
-#include "entity.hpp"
 #include "shader.hpp"
 
 namespace yli

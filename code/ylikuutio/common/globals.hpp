@@ -36,38 +36,11 @@ namespace yli
         class CallbackParameter;
     }
 
-    namespace config
-    {
-        class SettingMaster;
-        class Setting;
-    }
-
     namespace console
     {
         class Console;
     }
-
-    namespace graph
-    {
-        class Graph;
-    }
-
-    namespace ontology
-    {
-        class Entity;
-        class Font2D;
-    }
 }
-
-typedef std::shared_ptr<yli::datatypes::AnyValue> (*PreRenderCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
-typedef std::shared_ptr<yli::datatypes::AnyValue> (*PostRenderCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
-
-typedef struct
-{
-    uint32_t image_width;
-    uint32_t image_height;
-    bool should_ylikuutio_use_real_texture_coordinates;
-} BilinearInterpolationStruct;
 
 typedef std::shared_ptr<yli::datatypes::AnyValue> (*InputParametersToAnyValueCallback) (
         yli::callback_system::CallbackEngine*,

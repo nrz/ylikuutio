@@ -21,7 +21,7 @@ void main()
     // vertex_position_homogenousspace /= vec2(400,300);
     vertex_position_homogenousspace /= vec2(screen_width / 2, screen_height / 2);
 
-    gl_Position =  vec4(vertex_position_homogenousspace, 0, 1);
+    gl_Position = vec4(vertex_position_homogenousspace, 0, 1);
 
     // UV of the vertex. No special space for this one.
     UV = vertexUV;

@@ -1,11 +1,11 @@
 #version 120
 
-// Input vertex data, different for all executions of this shader.
+// Input vertex data. These are different for all executions of this shader.
 attribute vec3 vertex_position_modelspace;
 attribute vec2 vertexUV;
 attribute vec3 vertex_normal_modelspace;
 
-// Output data ; will be interpolated for each fragment.
+// Output data. These will be interpolated for each fragment.
 varying vec2 UV;
 varying vec3 position_worldspace;
 varying vec3 normal_cameraspace;
