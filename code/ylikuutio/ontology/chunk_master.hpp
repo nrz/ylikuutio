@@ -3,8 +3,8 @@
 
 #include "entity.hpp"
 #include "material.hpp"
+#include "get_content_callback.hpp"
 #include "render_templates.hpp"
-#include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
