@@ -13,10 +13,16 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 
 namespace yli
 {
+    namespace callback_system
+    {
+        class CallbackEngine;
+    }
+
     namespace ontology
     {
         class Shader;
@@ -29,6 +35,8 @@ namespace yli
                 {
                     // constructor.
                     this->parent = compute_task_struct.parent;
+                    this->end_condition_callback_engine = compute_task_struct.end_condition_callback_engine;
+                    this->n_max_iterations = compute_task_struct.n_max_iterations;
                     this->compute_taskID = compute_task_struct.compute_taskID;
                     this->framebuffer = 0;
                     this->texture = 0;
@@ -90,6 +98,14 @@ namespace yli
                 std::size_t get_number_of_descendants() const override;
 
                 yli::ontology::Shader* parent; // pointer to the `Shader`.
+
+                // End iterating when `end_condition_callback_engine` returns `true`.
+                std::shared_ptr<yli::callback_system::CallbackEngine> end_condition_callback_engine;
+
+                // This is the maximum number of iterations.
+                // If `end_condition_callback_engine` is `nullptr`, then this is the number of iterations.
+                // If `end_condition_callback_engine` is not `nullptr`, then this is the maximum number of iterations.
+                std::size_t n_max_iterations;
 
                 std::size_t compute_taskID;
 
