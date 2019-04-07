@@ -2,7 +2,6 @@
 #define __INDEXING_HPP_INCLUDED
 
 #include "triangulation_enums.hpp"
-#include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t

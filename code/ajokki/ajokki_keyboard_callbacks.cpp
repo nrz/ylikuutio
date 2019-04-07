@@ -10,7 +10,6 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr

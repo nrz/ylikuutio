@@ -359,7 +359,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/common/any_struct.hpp
     code/ylikuutio/common/any_value.cpp
     code/ylikuutio/common/any_value.hpp
-    code/ylikuutio/common/globals.hpp
     code/ylikuutio/common/pi.hpp
     code/ylikuutio/common/spherical_coordinates_struct.hpp
 
@@ -729,7 +728,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/common/any_struct.hpp
         code/ylikuutio/common/any_value.cpp
         code/ylikuutio/common/any_value.hpp
-        code/ylikuutio/common/globals.hpp
         code/ylikuutio/file/file_loader.cpp
         code/ylikuutio/file/file_loader.hpp
         code/ylikuutio/file/file_writer.cpp

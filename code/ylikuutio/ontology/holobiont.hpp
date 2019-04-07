@@ -7,7 +7,6 @@
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-#include "code/ylikuutio/common/globals.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
