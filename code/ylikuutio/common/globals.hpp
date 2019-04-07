@@ -42,11 +42,6 @@ namespace yli
     }
 }
 
-typedef std::shared_ptr<yli::datatypes::AnyValue> (*InputParametersToAnyValueCallback) (
-        yli::callback_system::CallbackEngine*,
-        yli::callback_system::CallbackObject*,
-        std::vector<yli::callback_system::CallbackParameter*>&);
-
 typedef std::shared_ptr<yli::datatypes::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
         yli::callback_system::CallbackEngine*,
         yli::callback_system::CallbackObject*,

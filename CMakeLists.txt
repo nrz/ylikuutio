@@ -347,6 +347,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/callback_system/callback_object.hpp
     code/ylikuutio/callback_system/callback_parameter.cpp
     code/ylikuutio/callback_system/callback_parameter.hpp
+    code/ylikuutio/callback_system/input_parameters_to_any_value_callback.hpp
     code/ylikuutio/callback_system/key_and_callback_struct.hpp
 
     # command_line, in alphabetical order
