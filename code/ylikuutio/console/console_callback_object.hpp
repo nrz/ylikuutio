@@ -16,6 +16,11 @@ namespace yli
         class CallbackParameter;
     }
 
+    namespace datatypes
+    {
+        class AnyValue;
+    }
+
     namespace console
     {
         class ConsoleCallbackObject : public yli::callback_system::CallbackObject
