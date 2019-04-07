@@ -10,7 +10,6 @@
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/scheme/scheme_master.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/common/globals.hpp"
 
 #include "SDL.h"
 

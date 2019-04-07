@@ -347,6 +347,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/callback_system/callback_object.hpp
     code/ylikuutio/callback_system/callback_parameter.cpp
     code/ylikuutio/callback_system/callback_parameter.hpp
+    code/ylikuutio/callback_system/input_parameters_to_any_value_callback.hpp
     code/ylikuutio/callback_system/key_and_callback_struct.hpp
 
     # command_line, in alphabetical order
@@ -358,7 +359,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/common/any_struct.hpp
     code/ylikuutio/common/any_value.cpp
     code/ylikuutio/common/any_value.hpp
-    code/ylikuutio/common/globals.hpp
     code/ylikuutio/common/pi.hpp
     code/ylikuutio/common/spherical_coordinates_struct.hpp
 
@@ -378,6 +378,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/console/console_command_callback.hpp
     code/ylikuutio/console/console_callback_object.cpp
     code/ylikuutio/console/console_callback_object.hpp
+    code/ylikuutio/console/input_parameters_to_any_value_callback_with_console.hpp
 
     # file, in alphabetical order.
     code/ylikuutio/file/file_loader.cpp
@@ -487,6 +488,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/chunk_struct.hpp
     code/ylikuutio/ontology/creature.cpp
     code/ylikuutio/ontology/creature.hpp
+    code/ylikuutio/ontology/get_content_callback.hpp
     code/ylikuutio/ontology/gl_attrib_locations.cpp
     code/ylikuutio/ontology/gl_attrib_locations.hpp
     code/ylikuutio/ontology/glyph_object_creation.cpp
@@ -726,7 +728,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/common/any_struct.hpp
         code/ylikuutio/common/any_value.cpp
         code/ylikuutio/common/any_value.hpp
-        code/ylikuutio/common/globals.hpp
         code/ylikuutio/file/file_loader.cpp
         code/ylikuutio/file/file_loader.hpp
         code/ylikuutio/file/file_writer.cpp

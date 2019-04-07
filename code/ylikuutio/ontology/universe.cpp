@@ -33,7 +33,6 @@
 #include "code/ylikuutio/file/file_writer.hpp"
 #include "code/ylikuutio/memory/memory_templates.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/common/globals.hpp"
 #include "code/ylikuutio/common/pi.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 

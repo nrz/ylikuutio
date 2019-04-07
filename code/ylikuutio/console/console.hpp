@@ -3,7 +3,6 @@
 
 #include "console_command_callback.hpp"
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
-#include "code/ylikuutio/common/globals.hpp"
 
 #include "SDL.h"
 

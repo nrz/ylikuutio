@@ -1,8 +1,6 @@
 #ifndef __TRIANGULATION_TEMPLATES_HPP_INCLUDED
 #define __TRIANGULATION_TEMPLATES_HPP_INCLUDED
 
-#include "code/ylikuutio/common/globals.hpp"
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED

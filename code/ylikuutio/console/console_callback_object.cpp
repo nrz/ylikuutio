@@ -8,6 +8,11 @@
 
 namespace yli
 {
+    namespace datatypes
+    {
+        class AnyValue;
+    }
+
     namespace console
     {
         ConsoleCallbackObject::~ConsoleCallbackObject()

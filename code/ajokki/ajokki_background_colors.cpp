@@ -2,7 +2,6 @@
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr

@@ -2,8 +2,8 @@
 #define __CONSOLE_CALLBACK_OBJECT_HPP_INCLUDED
 
 #include "console.hpp"
+#include "input_parameters_to_any_value_callback_with_console.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
-#include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
@@ -14,6 +14,11 @@ namespace yli
     {
         class CallbackEngine;
         class CallbackParameter;
+    }
+
+    namespace datatypes
+    {
+        class AnyValue;
     }
 
     namespace console

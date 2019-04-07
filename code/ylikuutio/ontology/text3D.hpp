@@ -8,7 +8,6 @@
 #include "object_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
-#include "code/ylikuutio/common/globals.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

@@ -4,7 +4,6 @@
 #include "material.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-#include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t

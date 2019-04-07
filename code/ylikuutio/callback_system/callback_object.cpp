@@ -1,7 +1,7 @@
 #include "callback_object.hpp"
 #include "callback_parameter.hpp"
+#include "input_parameters_to_any_value_callback.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/common/globals.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
