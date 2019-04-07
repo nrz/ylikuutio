@@ -379,6 +379,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/console/console_command_callback.hpp
     code/ylikuutio/console/console_callback_object.cpp
     code/ylikuutio/console/console_callback_object.hpp
+    code/ylikuutio/console/input_parameters_to_any_value_callback_with_console.hpp
 
     # file, in alphabetical order.
     code/ylikuutio/file/file_loader.cpp

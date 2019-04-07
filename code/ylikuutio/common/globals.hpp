@@ -35,18 +35,7 @@ namespace yli
         class CallbackObject;
         class CallbackParameter;
     }
-
-    namespace console
-    {
-        class Console;
-    }
 }
-
-typedef std::shared_ptr<yli::datatypes::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
-        yli::callback_system::CallbackEngine*,
-        yli::callback_system::CallbackObject*,
-        std::vector<yli::callback_system::CallbackParameter*>&,
-        yli::console::Console*);
 
 typedef std::shared_ptr<yli::datatypes::AnyValue> (*GetContentCallback) (
         yli::callback_system::CallbackEngine*,
