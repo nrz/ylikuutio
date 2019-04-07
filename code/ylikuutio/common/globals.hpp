@@ -1,8 +1,6 @@
 #ifndef __GLOBALS_HPP_INCLUDED
 #define __GLOBALS_HPP_INCLUDED
 
-#include "any_value.hpp"
-
 // GCC (at least g++ 4.7.2) and Visual Studio 2015 do support
 // setting default values of a struct using C++11 syntax.
 // Clang 3.7.0 and Visual Studio 2013 do not support
@@ -34,6 +32,11 @@ namespace yli
         class CallbackEngine;
         class CallbackObject;
         class CallbackParameter;
+    }
+
+    namespace datatypes
+    {
+        class AnyValue;
     }
 }
 
