@@ -1,6 +1,9 @@
 #ifndef __COMPUTE_TASK_STRUCT_HPP_INCLUDED
 #define __COMPUTE_TASK_STRUCT_HPP_INCLUDED
 
+#include "pre_iterate_callback.hpp"
+#include "post_iterate_callback.hpp"
+
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
@@ -27,7 +30,9 @@ typedef struct ComputeTaskStruct
         n_max_iterations(1),                                     // By default execute GLSL shader exactly once (do not iterate further).
         compute_taskID(std::numeric_limits<std::size_t>::max()), // `std::numeric_limits<std::size_t>::max()` means that `compute_taskID` is not defined.
         texture_width(0),
-        texture_height(0)
+        texture_height(0),
+        preiterate_callback(nullptr),
+        postiterate_callback(nullptr)
     {
         // constructor.
     }
@@ -38,6 +43,8 @@ typedef struct ComputeTaskStruct
     std::size_t compute_taskID;
     std::size_t texture_width;
     std::size_t texture_height;
+    PreIterateCallback preiterate_callback;
+    PostIterateCallback postiterate_callback;
 } TextureStruct;
 
 #endif

@@ -3,6 +3,8 @@
 
 #include "entity.hpp"
 #include "compute_task_struct.hpp"
+#include "pre_iterate_callback.hpp"
+#include "post_iterate_callback.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -72,6 +74,8 @@ namespace yli
 
                     this->texture_width = compute_task_struct.texture_width;
                     this->texture_height = compute_task_struct.texture_height;
+                    this->preiterate_callback = compute_task_struct.preiterate_callback;
+                    this->postiterate_callback = compute_task_struct.postiterate_callback;
 
                     // Create FBO (off-screen framebuffer object).
                     glGenFramebuffers(1, &this->framebuffer);
@@ -122,6 +126,12 @@ namespace yli
             private:
                 void bind_to_parent();
 
+                // This method renders this `ComputeTask`, that is, computes this task.
+                void render();
+
+                void preiterate() const;
+                void postiterate() const;
+
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
@@ -143,6 +153,9 @@ namespace yli
 
                 std::size_t texture_width;
                 std::size_t texture_height;
+
+                PreIterateCallback preiterate_callback;
+                PostIterateCallback postiterate_callback;
         };
     }
 }
