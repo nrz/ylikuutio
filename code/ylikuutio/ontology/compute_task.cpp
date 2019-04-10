@@ -5,6 +5,7 @@
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
+#include <cstddef>       // std::size_t
 #include <iostream>      // std::cout, std::cin, std::cerr
 
 namespace yli
