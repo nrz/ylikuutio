@@ -3,6 +3,8 @@
 
 #include "entity.hpp"
 #include "compute_task_struct.hpp"
+#include "pre_iterate_callback.hpp"
+#include "post_iterate_callback.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -15,6 +17,34 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
+
+// `yli::ontology::ComputeTask` is a class which contains the data for a single
+// computing task. `ComputeTask` does not have the OpenGL shaders used to process
+// the data. Instead, the shaders are contained by the parent `Entity` which is
+// an `yli::ontology::ComputeTask` instance.
+//
+// For example, `yli::ontology::Shader` can have vertex and fragment shaders for
+// computing the distances between nodes of a graph. Then, each `ComputeTask`
+// would contain the graph data, eg. as a distance matrix. Then, rendering a
+// `ComputeTask` means computing that task.
+//
+// Rendering a `ComputeTask` is done by iterating the task until either
+// `end_condition_callback_engine->execute()` returns `true`, or until
+// `n_max_iterations` is reached. If `end_condition_callback_engine` is `nullptr`
+// or `end_condition_callback_engine->execute()` does not not return an `AnyValue`
+// which contains `datatypes::BOOL`, then `end_condition_callback_engine` is ignored
+// and `n_max_iterations` is the exact number of iterations to be done. However,
+// even if `end_condition_callback_engine->execute()` would return an invalid return
+// value, that is, not an `AnyValue` which contains `datatypes::BOOL`,
+// `end_condition_callback_engine->execute()` is still called and taken into account
+// in every iteration.
+//
+// When iterating, there is a `PreIterateCallback` which is executed before each iteration,
+// and also a `PostIterateCallback` which is executed correspondingly after each iteration.
+// Of course `PreRenderCallback` and `PostRenderCallback` can be used as well.
+// `PreRenderCallback` gets executed before the first `PreIterateCallback` call, and
+// `PostRenderCallback` gets executed after the last `PostRenderCallback` call.
+// All these callbacks are optional and can be left to `nullptr` if they are not needed.
 
 namespace yli
 {
@@ -44,6 +74,8 @@ namespace yli
 
                     this->texture_width = compute_task_struct.texture_width;
                     this->texture_height = compute_task_struct.texture_height;
+                    this->preiterate_callback = compute_task_struct.preiterate_callback;
+                    this->postiterate_callback = compute_task_struct.postiterate_callback;
 
                     // Create FBO (off-screen framebuffer object).
                     glGenFramebuffers(1, &this->framebuffer);
@@ -94,6 +126,12 @@ namespace yli
             private:
                 void bind_to_parent();
 
+                // This method renders this `ComputeTask`, that is, computes this task.
+                void render();
+
+                void preiterate() const;
+                void postiterate() const;
+
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
@@ -115,6 +153,9 @@ namespace yli
 
                 std::size_t texture_width;
                 std::size_t texture_height;
+
+                PreIterateCallback preiterate_callback;
+                PostIterateCallback postiterate_callback;
         };
     }
 }
