@@ -118,7 +118,7 @@ namespace yli
                 std::cout << "All objects of this species will be destroyed.\n";
                 yli::hierarchy::delete_children<yli::ontology::Object*>(this->object_pointer_vector, this->number_of_objects);
 
-                // Cleanup VBO, shader and texture.
+                // Cleanup buffers.
                 glDeleteBuffers(1, &this->vertexbuffer);
                 glDeleteBuffers(1, &this->uvbuffer);
                 glDeleteBuffers(1, &this->normalbuffer);
