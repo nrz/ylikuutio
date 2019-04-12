@@ -287,7 +287,7 @@ namespace yli
             uint32_t elementbuffer = parent_model->get_elementbuffer();
             uint32_t indices_size = parent_model->get_indices().size();
 
-            // 1st attribute buffer : vertices.
+            // 1st attribute buffer: vertices.
             glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
             glVertexAttribPointer(
                     vertex_position_modelspaceID, // The attribute we want to configure
@@ -298,7 +298,7 @@ namespace yli
                     (void*) 0                    // array buffer offset
                     );
 
-            // 2nd attribute buffer : UVs.
+            // 2nd attribute buffer: UVs.
             glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
             glVertexAttribPointer(
                     vertexUVID, // The attribute we want to configure
@@ -309,7 +309,7 @@ namespace yli
                     (void*) 0   // array buffer offset
                     );
 
-            // 3rd attribute buffer : normals.
+            // 3rd attribute buffer: normals.
             glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
             glVertexAttribPointer(
                     vertex_normal_modelspaceID, // The attribute we want to configure
