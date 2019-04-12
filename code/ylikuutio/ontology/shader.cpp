@@ -172,7 +172,8 @@ namespace yli
             // so this can be done once for all objects that use the same `programID`.
             glUniformMatrix4fv(this->view_matrixID, 1, GL_FALSE, &this->universe->get_view_matrix()[0][0]);
 
-            // Render this `Shader` by calling `render()` function of each `Material` and of each `Symbiosis`.
+            // Render this `Shader` by calling `render()` function of each `ComputeTask`, each `Material`, and each `Symbiosis`.
+            yli::ontology::render_children<yli::ontology::ComputeTask*>(this->compute_task_pointer_vector);
             yli::ontology::render_children<yli::ontology::Material*>(this->material_pointer_vector);
             yli::ontology::render_children<yli::ontology::Symbiosis*>(this->symbiosis_pointer_vector);
 

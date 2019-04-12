@@ -42,6 +42,9 @@ namespace yli
             // Requirements:
             // `this->parent` must not be `nullptr`.
 
+            // Cleanup buffers and texture.
+            glDeleteBuffers(1, &this->vertexbuffer);
+            glDeleteBuffers(1, &this->uvbuffer);
             glDeleteTextures(1, &this->texture);
 
             if (this->parent == nullptr)
@@ -70,7 +73,42 @@ namespace yli
 
                 this->preiterate();
 
+                // 1st attribute buffer: vertices.
+                glEnableVertexAttribArray(this->vertex_position_modelspaceID);
+
+                // 2nd attribute buffer: UVs.
+                glEnableVertexAttribArray(this->vertexUVID);
+
                 // TODO: do the computation.
+
+                // 1st attribute buffer: vertices.
+                glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
+                glVertexAttribPointer(
+                        this->vertex_position_modelspaceID, // The attribute we want to configure
+                        3,                                  // size
+                        GL_FLOAT,                           // type
+                        GL_FALSE,                           // normalized?
+                        0,                                  // stride
+                        (void*) 0                           // array buffer offset
+                        );
+
+                // 2nd attribute buffer: UVs.
+                glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
+                glVertexAttribPointer(
+                        this->vertexUVID, // The attribute we want to configure
+                        2,                // size : U+V => 2
+                        GL_FLOAT,         // type
+                        GL_FALSE,         // normalized?
+                        0,                // stride
+                        (void*) 0         // array buffer offset
+                        );
+
+                const std::size_t n_triangles = 2;
+                const std::size_t n_vertices_in_triangle = 3;
+                glDrawArrays(GL_TRIANGLES, 0, n_triangles * n_vertices_in_triangle); // draw 2 triangles (6 vertices, no VBO indexing).
+
+                glDisableVertexAttribArray(this->vertex_position_modelspaceID);
+                glDisableVertexAttribArray(this->vertexUVID);
 
                 this->postiterate();
             }

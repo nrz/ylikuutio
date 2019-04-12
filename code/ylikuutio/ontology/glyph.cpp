@@ -39,7 +39,7 @@ namespace yli
             std::string unicode_string = this->unicode_char_pointer;
             std::cout << "This glyph (\"" << glyph_name_string << "\", Unicode: \"" << std::dec << unicode_string << "\") will be destroyed.\n";
 
-            // Cleanup VBO, shader and texture.
+            // Cleanup buffers.
             glDeleteBuffers(1, &this->vertexbuffer);
             glDeleteBuffers(1, &this->uvbuffer);
             glDeleteBuffers(1, &this->normalbuffer);

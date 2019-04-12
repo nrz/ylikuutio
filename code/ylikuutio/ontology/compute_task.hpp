@@ -12,11 +12,19 @@
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
+#include <vector>   // std::vector
 
 // `yli::ontology::ComputeTask` is a class which contains the data for a single
 // computing task. `ComputeTask` does not have the OpenGL shaders used to process
@@ -68,14 +76,30 @@ namespace yli
                     this->end_condition_callback_engine = compute_task_struct.end_condition_callback_engine;
                     this->n_max_iterations = compute_task_struct.n_max_iterations;
                     this->compute_taskID = compute_task_struct.compute_taskID;
-                    this->framebuffer = 0;
-                    this->texture = 0;
-                    this->render_buffer = 0;
-
                     this->texture_width = compute_task_struct.texture_width;
                     this->texture_height = compute_task_struct.texture_height;
+
+                    this->framebuffer                  = 0;
+                    this->texture                      = 0;
+                    this->render_buffer                = 0;
+                    this->vertex_position_modelspaceID = 0;
+                    this->vertexUVID                   = 0;
+                    this->vertexbuffer                 = 0;
+                    this->uvbuffer                     = 0;
+
                     this->preiterate_callback = compute_task_struct.preiterate_callback;
                     this->postiterate_callback = compute_task_struct.postiterate_callback;
+
+                    // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
+                    this->bind_to_parent();
+
+                    // Create model (square which consists of 2 triangles).
+                    const std::vector<glm::vec3> vertices
+                    { { 1.0f, 1.0f, 0.0f }, { 1.0f, -1.0f, 0.0f }, { -1.0f, -1.0f, 0.0f }, { -1.0f, -1.0f, 0.0f }, { -1.0f, 1.0f, 0.0f }, { 1.0f, 1.0f, 0.0f } };
+
+                    glGenBuffers(1, &this->vertexbuffer);
+                    glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
+                    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
 
                     // Create FBO (off-screen framebuffer object).
                     glGenFramebuffers(1, &this->framebuffer);
@@ -106,11 +130,9 @@ namespace yli
                         std::cerr << "ERROR: `ComputeTask::ComputeTask`: framebuffer is not complete!\n";
                     }
 
-                    // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
-                    this->bind_to_parent();
-
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::ComputeTask*";
+                    this->can_be_erased = true;
                 }
 
                 // destructor.
@@ -122,6 +144,8 @@ namespace yli
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template<class T1>
                     friend std::size_t yli::ontology::get_number_of_descendants(const std::vector<T1>& child_pointer_vector);
+                template<class T1>
+                    friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
             private:
                 void bind_to_parent();
@@ -147,12 +171,18 @@ namespace yli
 
                 std::size_t compute_taskID;
 
+                std::size_t texture_width;
+                std::size_t texture_height;
+
                 uint32_t framebuffer;
                 uint32_t texture;
                 uint32_t render_buffer;
 
-                std::size_t texture_width;
-                std::size_t texture_height;
+                uint32_t vertex_position_modelspaceID;
+                uint32_t vertexUVID;
+
+                uint32_t vertexbuffer;
+                uint32_t uvbuffer;
 
                 PreIterateCallback preiterate_callback;
                 PostIterateCallback postiterate_callback;
