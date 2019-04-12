@@ -73,6 +73,10 @@ namespace yli
                     this->framebuffer = 0;
                     this->texture = 0;
                     this->render_buffer = 0;
+                    this->vertex_position_modelspaceID = 0;
+                    this->vertexUVID                   = 0;
+                    this->vertexbuffer                 = 0;
+                    this->uvbuffer                     = 0;
 
                     this->texture_width = compute_task_struct.texture_width;
                     this->texture_height = compute_task_struct.texture_height;
@@ -158,6 +162,12 @@ namespace yli
 
                 std::size_t texture_width;
                 std::size_t texture_height;
+
+                uint32_t vertex_position_modelspaceID;
+                uint32_t vertexUVID;
+
+                uint32_t vertexbuffer;
+                uint32_t uvbuffer;
 
                 PreIterateCallback preiterate_callback;
                 PostIterateCallback postiterate_callback;
