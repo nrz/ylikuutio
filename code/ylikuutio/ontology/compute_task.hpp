@@ -12,6 +12,12 @@
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -86,6 +92,14 @@ namespace yli
 
                     // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
                     this->bind_to_parent();
+
+                    // Create model (square which consists of 2 triangles).
+                    const std::vector<glm::vec3> vertices
+                    { { 1.0f, 1.0f, 0.0f }, { 1.0f, -1.0f, 0.0f }, { -1.0f, -1.0f, 0.0f }, { -1.0f, -1.0f, 0.0f }, { -1.0f, 1.0f, 0.0f }, { 1.0f, 1.0f, 0.0f } };
+
+                    glGenBuffers(1, &this->vertexbuffer);
+                    glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
+                    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
 
                     // Create FBO (off-screen framebuffer object).
                     glGenFramebuffers(1, &this->framebuffer);
