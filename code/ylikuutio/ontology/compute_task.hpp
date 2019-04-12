@@ -79,6 +79,9 @@ namespace yli
                     this->preiterate_callback = compute_task_struct.preiterate_callback;
                     this->postiterate_callback = compute_task_struct.postiterate_callback;
 
+                    // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
+                    this->bind_to_parent();
+
                     // Create FBO (off-screen framebuffer object).
                     glGenFramebuffers(1, &this->framebuffer);
 
@@ -107,9 +110,6 @@ namespace yli
                     {
                         std::cerr << "ERROR: `ComputeTask::ComputeTask`: framebuffer is not complete!\n";
                     }
-
-                    // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
-                    this->bind_to_parent();
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::ComputeTask*";
