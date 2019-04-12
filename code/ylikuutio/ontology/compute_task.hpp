@@ -70,6 +70,9 @@ namespace yli
                     this->end_condition_callback_engine = compute_task_struct.end_condition_callback_engine;
                     this->n_max_iterations = compute_task_struct.n_max_iterations;
                     this->compute_taskID = compute_task_struct.compute_taskID;
+                    this->texture_width = compute_task_struct.texture_width;
+                    this->texture_height = compute_task_struct.texture_height;
+
                     this->framebuffer = 0;
                     this->texture = 0;
                     this->render_buffer = 0;
@@ -78,8 +81,6 @@ namespace yli
                     this->vertexbuffer                 = 0;
                     this->uvbuffer                     = 0;
 
-                    this->texture_width = compute_task_struct.texture_width;
-                    this->texture_height = compute_task_struct.texture_height;
                     this->preiterate_callback = compute_task_struct.preiterate_callback;
                     this->postiterate_callback = compute_task_struct.postiterate_callback;
 
@@ -156,12 +157,12 @@ namespace yli
 
                 std::size_t compute_taskID;
 
+                std::size_t texture_width;
+                std::size_t texture_height;
+
                 uint32_t framebuffer;
                 uint32_t texture;
                 uint32_t render_buffer;
-
-                std::size_t texture_width;
-                std::size_t texture_height;
 
                 uint32_t vertex_position_modelspaceID;
                 uint32_t vertexUVID;
