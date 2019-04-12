@@ -73,9 +73,9 @@ namespace yli
                     this->texture_width = compute_task_struct.texture_width;
                     this->texture_height = compute_task_struct.texture_height;
 
-                    this->framebuffer = 0;
-                    this->texture = 0;
-                    this->render_buffer = 0;
+                    this->framebuffer                  = 0;
+                    this->texture                      = 0;
+                    this->render_buffer                = 0;
                     this->vertex_position_modelspaceID = 0;
                     this->vertexUVID                   = 0;
                     this->vertexbuffer                 = 0;
