@@ -75,6 +75,7 @@ namespace yli
 
                     // Get `childID` from `Holobiont` and set pointer to this `Biont`.
                     this->bind_to_parent();
+
                     // Get `childID` from `SymbiontSpecies` (not a parent!) and set pointer to this `Biont`.
                     this->bind_to_symbiont_species();
 
