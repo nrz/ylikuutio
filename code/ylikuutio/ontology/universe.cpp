@@ -717,9 +717,6 @@ namespace yli
                     std::cerr << "ERROR: `Universe::screenshot`: framebuffer is not complete!\n";
                 }
 
-                // Bind offscreen buffer.
-                glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-
                 // Set background color for framebuffer.
                 universe->set_opengl_background_color();
 
