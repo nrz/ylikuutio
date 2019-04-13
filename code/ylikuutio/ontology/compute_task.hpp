@@ -97,7 +97,12 @@ namespace yli
                     // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
                     this->bind_to_parent();
 
-                    // Create model (square which consists of 2 triangles).
+                    // Create model (a square which consists of 2 triangles).
+                    // *---*
+                    // |  /|
+                    // | / |
+                    // |/  |
+                    // *---*
                     const std::vector<glm::vec3> vertices
                     { { 1.0f, 1.0f, 0.0f }, { 1.0f, -1.0f, 0.0f }, { -1.0f, -1.0f, 0.0f }, { -1.0f, -1.0f, 0.0f }, { -1.0f, 1.0f, 0.0f }, { 1.0f, 1.0f, 0.0f } };
 
