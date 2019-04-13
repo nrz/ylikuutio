@@ -451,6 +451,7 @@ namespace yli
 
                 void create_context();
                 void make_context_current();
+                void restore_onscreen_rendering() const;
                 void set_opengl_background_color() const;
                 void adjust_opengl_viewport() const;
 
