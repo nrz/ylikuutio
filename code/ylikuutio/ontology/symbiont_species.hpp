@@ -42,9 +42,6 @@ namespace yli
                 void bind_biont(yli::ontology::Biont* const biont);
                 void unbind_biont(const std::size_t childID);
 
-                // destructor.
-                virtual ~SymbiontSpecies();
-
                 std::size_t get_indices_size() const;
                 uint32_t get_lightID() const;
 
@@ -120,6 +117,12 @@ namespace yli
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::SymbiontSpecies*";
                 }
+
+                SymbiontSpecies(const SymbiontSpecies&) = delete;            // Delete copy constructor.
+                SymbiontSpecies &operator=(const SymbiontSpecies&) = delete; // Delete copy assignment.
+
+                // destructor.
+                virtual ~SymbiontSpecies();
 
                 yli::ontology::Entity* get_parent() const override;
 

@@ -5,6 +5,7 @@
 #include "compute_task_struct.hpp"
 #include "pre_iterate_callback.hpp"
 #include "post_iterate_callback.hpp"
+#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -87,19 +88,38 @@ namespace yli
                     this->vertexbuffer                 = 0;
                     this->uvbuffer                     = 0;
 
+                    this->format                       = compute_task_struct.format;
+                    this->type                         = compute_task_struct.type;
+
                     this->preiterate_callback = compute_task_struct.preiterate_callback;
                     this->postiterate_callback = compute_task_struct.postiterate_callback;
 
                     // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
                     this->bind_to_parent();
 
-                    // Create model (square which consists of 2 triangles).
+                    // Create model (a square which consists of 2 triangles).
+                    // *---*
+                    // |  /|
+                    // | / |
+                    // |/  |
+                    // *---*
                     const std::vector<glm::vec3> vertices
                     { { 1.0f, 1.0f, 0.0f }, { 1.0f, -1.0f, 0.0f }, { -1.0f, -1.0f, 0.0f }, { -1.0f, -1.0f, 0.0f }, { -1.0f, 1.0f, 0.0f }, { 1.0f, 1.0f, 0.0f } };
 
+                    const std::vector<glm::vec2> uvs
+                    { { 1.0f, 1.0f }, { 1.0f, -1.0f }, { -1.0f, -1.0f }, { -1.0f, -1.0f }, { -1.0f, 1.0f }, { 1.0f, 1.0f } };
+
+                    // Load model into a VBO.
+
+                    // Vertices.
                     glGenBuffers(1, &this->vertexbuffer);
                     glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
                     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
+
+                    // UVs.
+                    glGenBuffers(1, &this->uvbuffer);
+                    glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
+                    glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
 
                     // Create FBO (off-screen framebuffer object).
                     glGenFramebuffers(1, &this->framebuffer);
@@ -112,7 +132,7 @@ namespace yli
                     glBindTexture(GL_TEXTURE_2D, this->texture);
 
                     // Define texture.
-                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->texture_width, this->texture_height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+                    glTexImage2D(GL_TEXTURE_2D, 0, this->format, this->texture_width, this->texture_height, 0, this->format, this->type, NULL);
 
                     yli::opengl::set_filtering_parameters();
 
@@ -134,6 +154,9 @@ namespace yli
                     this->type_string = "yli::ontology::ComputeTask*";
                     this->can_be_erased = true;
                 }
+
+                ComputeTask(const ComputeTask&) = delete;            // Delete copy constructor.
+                ComputeTask &operator=(const ComputeTask&) = delete; // Delete copy assignment.
 
                 // destructor.
                 ~ComputeTask();
@@ -183,6 +206,9 @@ namespace yli
 
                 uint32_t vertexbuffer;
                 uint32_t uvbuffer;
+
+                GLenum format;
+                GLenum type;
 
                 PreIterateCallback preiterate_callback;
                 PostIterateCallback postiterate_callback;

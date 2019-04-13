@@ -70,6 +70,9 @@ namespace yli
                         std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
                         std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer);
 
+                Console(const Console&) = delete;            // Delete copy constructor.
+                Console &operator=(const Console&) = delete; // Delete copy assignment.
+
                 // destructor.
                 ~Console();
 

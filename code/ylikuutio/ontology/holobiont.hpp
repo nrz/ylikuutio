@@ -81,6 +81,9 @@ namespace yli
                     this->can_be_erased = true;
                 }
 
+                Holobiont(const Holobiont&) = delete;            // Delete copy constructor.
+                Holobiont &operator=(const Holobiont&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~Holobiont();
 

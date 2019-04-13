@@ -106,6 +106,9 @@ namespace yli
                     }
                 }
 
+                Material(const Material&) = delete;            // Delete copy constructor.
+                Material &operator=(const Material&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~Material();
 

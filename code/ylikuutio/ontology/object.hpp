@@ -91,6 +91,9 @@ namespace yli
                     this->can_be_erased = true;
                 }
 
+                Object(const Object&) = delete;            // Delete copy constructor.
+                Object &operator=(const Object&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~Object();
 

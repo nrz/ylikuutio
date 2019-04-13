@@ -28,6 +28,9 @@ namespace yli
                     // constructor.
                 }
 
+                VertexGraph(const VertexGraph&) = delete;            // Delete copy constructor.
+                VertexGraph &operator=(const VertexGraph&) = delete; // Delete copy assignment.
+
                 // destructor.
                 ~VertexGraph();
         };

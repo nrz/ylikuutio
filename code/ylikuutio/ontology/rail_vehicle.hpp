@@ -33,6 +33,9 @@ namespace yli
                     this->can_be_erased = true;
                 }
 
+                RailVehicle(const RailVehicle&) = delete;            // Delete copy constructor.
+                RailVehicle &operator=(const RailVehicle&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~RailVehicle();
         };

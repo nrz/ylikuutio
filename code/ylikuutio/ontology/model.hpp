@@ -62,6 +62,9 @@ namespace yli
                     this->type_string = "yli::ontology::Model*";
                 }
 
+                Model(const Model&) = delete;            // Delete copy constructor.
+                Model &operator=(const Model&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~Model();
 

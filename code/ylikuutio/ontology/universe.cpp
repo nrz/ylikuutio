@@ -232,6 +232,21 @@ namespace yli
             }
         }
 
+        void Universe::restore_onscreen_rendering() const
+        {
+            // Bind the default framebuffer for on-screen rendering.
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+            // Set background color for the default framebuffer.
+            universe->set_opengl_background_color();
+
+            // Clear the default framebuffer.
+            glClear(GL_COLOR_BUFFER_BIT);
+
+            // Adjust viewport for the default framebuffer.
+            universe->universe->adjust_opengl_viewport();
+        }
+
         void Universe::set_opengl_background_color() const
         {
             yli::opengl::set_background_color(
@@ -702,9 +717,6 @@ namespace yli
                     std::cerr << "ERROR: `Universe::screenshot`: framebuffer is not complete!\n";
                 }
 
-                // Bind offscreen buffer.
-                glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-
                 // Set background color for framebuffer.
                 universe->set_opengl_background_color();
 
@@ -731,19 +743,10 @@ namespace yli
                 yli::file::binary_write(result_vector, filename);
 
                 delete[] result_array;
+                glDeleteRenderbuffers(1, &render_buffer);
                 glDeleteFramebuffers(1, &framebuffer);
 
-                // Bind the default framebuffer for on-screen rendering.
-                glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-                // Set background color for the default framebuffer.
-                universe->set_opengl_background_color();
-
-                // Clear the default framebuffer.
-                glClear(GL_COLOR_BUFFER_BIT);
-
-                // Adjust viewport for the default framebuffer.
-                universe->universe->adjust_opengl_viewport();
+                universe->restore_onscreen_rendering();
             }
 
             return nullptr;

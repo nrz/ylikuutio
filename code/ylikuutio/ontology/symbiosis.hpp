@@ -82,6 +82,9 @@ namespace yli
                     this->can_be_erased = true;
                 }
 
+                Symbiosis(const Symbiosis&) = delete;            // Delete copy constructor.
+                Symbiosis &operator=(const Symbiosis&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~Symbiosis();
 

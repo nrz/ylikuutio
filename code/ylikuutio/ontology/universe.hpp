@@ -406,6 +406,9 @@ namespace yli
                     this->type_string = "yli::ontology::Universe*";
                 }
 
+                Universe(const Universe&) = delete;            // Delete copy constructor.
+                Universe &operator=(const Universe&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~Universe();
 
@@ -451,6 +454,7 @@ namespace yli
 
                 void create_context();
                 void make_context_current();
+                void restore_onscreen_rendering() const;
                 void set_opengl_background_color() const;
                 void adjust_opengl_viewport() const;
 

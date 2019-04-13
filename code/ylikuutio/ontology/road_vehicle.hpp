@@ -33,6 +33,9 @@ namespace yli
                     this->can_be_erased = true;
                 }
 
+                RoadVehicle(const RoadVehicle&) = delete;            // Delete copy constructor.
+                RoadVehicle &operator=(const RoadVehicle&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~RoadVehicle();
         };

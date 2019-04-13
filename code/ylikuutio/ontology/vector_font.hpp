@@ -128,6 +128,9 @@ namespace yli
                     this->can_be_erased = true;
                 }
 
+                VectorFont(const VectorFont&) = delete;            // Delete copy constructor.
+                VectorFont &operator=(const VectorFont&) = delete; // Delete copy assignment.
+
                 // destructor.
                 // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
                 virtual ~VectorFont();

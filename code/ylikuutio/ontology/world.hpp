@@ -44,6 +44,9 @@ namespace yli
                     this->can_be_erased = true;
                 }
 
+                World(const World&) = delete;            // Delete copy constructor.
+                World &operator=(const World&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~World();
 

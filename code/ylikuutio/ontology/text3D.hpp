@@ -74,6 +74,9 @@ namespace yli
                     this->can_be_erased = true;
                 }
 
+                Text3D(const Text3D&) = delete;            // Delete copy constructor.
+                Text3D &operator=(const Text3D&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~Text3D();
 

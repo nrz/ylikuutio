@@ -4,6 +4,9 @@
 #include "pre_iterate_callback.hpp"
 #include "post_iterate_callback.hpp"
 
+// Include GLEW
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
@@ -31,6 +34,8 @@ typedef struct ComputeTaskStruct
         compute_taskID(std::numeric_limits<std::size_t>::max()), // `std::numeric_limits<std::size_t>::max()` means that `compute_taskID` is not defined.
         texture_width(0),
         texture_height(0),
+        format(GL_RGB),
+        type(GL_UNSIGNED_BYTE),
         preiterate_callback(nullptr),
         postiterate_callback(nullptr)
     {
@@ -43,6 +48,8 @@ typedef struct ComputeTaskStruct
     std::size_t compute_taskID;
     std::size_t texture_width;
     std::size_t texture_height;
+    GLenum format;
+    GLenum type;
     PreIterateCallback preiterate_callback;
     PostIterateCallback postiterate_callback;
 } TextureStruct;

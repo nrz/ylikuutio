@@ -22,6 +22,9 @@ namespace yli
                     this->type_string = "yli::ontology::Vehicle*";
                 }
 
+                Vehicle(const Vehicle&) = delete;            // Delete copy constructor.
+                Vehicle &operator=(const Vehicle&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~Vehicle();
         };

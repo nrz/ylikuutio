@@ -88,6 +88,9 @@ namespace yli
                     this->type_string = "yli::ontology::Glyph*";
                 }
 
+                Glyph(const Glyph&) = delete;            // Delete copy constructor.
+                Glyph &operator=(const Glyph&) = delete; // Delete copy assignment.
+
                 void bind_to_parent();
 
                 // this method renders all `Object`s of this `Glyph`.

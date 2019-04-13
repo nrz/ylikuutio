@@ -30,6 +30,9 @@ namespace yli
                     this->type_string = "yli::ontology::Creature*";
                 }
 
+                Creature(const Creature&) = delete;            // Delete copy constructor.
+                Creature &operator=(const Creature&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~Creature();
 

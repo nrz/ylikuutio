@@ -83,6 +83,9 @@ namespace yli
                     this->type_string = "yli::ontology::Biont*";
                 }
 
+                Biont(const Biont&) = delete;            // Delete copy constructor.
+                Biont &operator=(const Biont&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~Biont();
 

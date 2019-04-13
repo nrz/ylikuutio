@@ -100,6 +100,9 @@ namespace yli
                     this->spherical_coordinates = spherical_coordinates;
                 }
 
+                Movable(const Movable&) = delete;            // Delete copy constructor.
+                Movable &operator=(const Movable&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~Movable();
 
