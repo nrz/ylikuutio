@@ -743,6 +743,7 @@ namespace yli
                 yli::file::binary_write(result_vector, filename);
 
                 delete[] result_array;
+                glDeleteRenderbuffers(1, &render_buffer);
                 glDeleteFramebuffers(1, &framebuffer);
 
                 universe->restore_onscreen_rendering();
