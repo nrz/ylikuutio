@@ -106,9 +106,20 @@ namespace yli
                     const std::vector<glm::vec3> vertices
                     { { 1.0f, 1.0f, 0.0f }, { 1.0f, -1.0f, 0.0f }, { -1.0f, -1.0f, 0.0f }, { -1.0f, -1.0f, 0.0f }, { -1.0f, 1.0f, 0.0f }, { 1.0f, 1.0f, 0.0f } };
 
+                    const std::vector<glm::vec2> uvs
+                    { { 1.0f, 1.0f }, { 1.0f, -1.0f }, { -1.0f, -1.0f }, { -1.0f, -1.0f }, { -1.0f, 1.0f }, { 1.0f, 1.0f } };
+
+                    // Load model into a VBO.
+
+                    // Vertices.
                     glGenBuffers(1, &this->vertexbuffer);
                     glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
                     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
+
+                    // UVs.
+                    glGenBuffers(1, &this->uvbuffer);
+                    glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
+                    glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
 
                     // Create FBO (off-screen framebuffer object).
                     glGenFramebuffers(1, &this->framebuffer);
