@@ -88,6 +88,9 @@ namespace yli
                     this->vertexbuffer                 = 0;
                     this->uvbuffer                     = 0;
 
+                    this->format                       = compute_task_struct.format;
+                    this->type                         = compute_task_struct.type;
+
                     this->preiterate_callback = compute_task_struct.preiterate_callback;
                     this->postiterate_callback = compute_task_struct.postiterate_callback;
 
@@ -113,7 +116,7 @@ namespace yli
                     glBindTexture(GL_TEXTURE_2D, this->texture);
 
                     // Define texture.
-                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->texture_width, this->texture_height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+                    glTexImage2D(GL_TEXTURE_2D, 0, this->format, this->texture_width, this->texture_height, 0, this->format, this->type, NULL);
 
                     yli::opengl::set_filtering_parameters();
 
@@ -184,6 +187,9 @@ namespace yli
 
                 uint32_t vertexbuffer;
                 uint32_t uvbuffer;
+
+                GLenum format;
+                GLenum type;
 
                 PreIterateCallback preiterate_callback;
                 PostIterateCallback postiterate_callback;
