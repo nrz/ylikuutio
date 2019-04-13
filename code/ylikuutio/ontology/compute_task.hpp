@@ -5,6 +5,7 @@
 #include "compute_task_struct.hpp"
 #include "pre_iterate_callback.hpp"
 #include "post_iterate_callback.hpp"
+#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
