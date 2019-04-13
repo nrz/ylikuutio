@@ -28,9 +28,6 @@ namespace yli
         class SymbiontMaterial: public yli::ontology::Material
         {
             public:
-                // destructor.
-                virtual ~SymbiontMaterial();
-
                 void bind_symbiont_species(yli::ontology::SymbiontSpecies* const symbiont_species);
                 void unbind_symbiont_species(const std::size_t childID);
 
@@ -55,6 +52,9 @@ namespace yli
 
                 SymbiontMaterial(const SymbiontMaterial&) = delete;            // Delete copy constructor.
                 SymbiontMaterial &operator=(const SymbiontMaterial&) = delete; // Delete copy assignment.
+
+                // destructor.
+                virtual ~SymbiontMaterial();
 
                 yli::ontology::Entity* get_parent() const override;
                 std::size_t get_number_of_children() const override;
