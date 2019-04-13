@@ -155,6 +155,9 @@ namespace yli
                     this->can_be_erased = true;
                 }
 
+                ComputeTask(const ComputeTask&) = delete;            // Delete copy constructor.
+                ComputeTask &operator=(const ComputeTask&) = delete; // Delete copy assignment.
+
                 // destructor.
                 ~ComputeTask();
 

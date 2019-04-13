@@ -56,6 +56,9 @@ namespace yli
                     this->type_string = "ontology::Chunk*";
                 }
 
+                Chunk(const Chunk&) = delete;            // Delete copy constructor.
+                Chunk &operator=(const Chunk&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~Chunk();
 

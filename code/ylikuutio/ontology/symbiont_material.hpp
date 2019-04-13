@@ -53,6 +53,9 @@ namespace yli
                     this->type_string = "yli::ontology::SymbiontMaterial*";
                 }
 
+                SymbiontMaterial(const SymbiontMaterial&) = delete;            // Delete copy constructor.
+                SymbiontMaterial &operator=(const SymbiontMaterial&) = delete; // Delete copy assignment.
+
                 yli::ontology::Entity* get_parent() const override;
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;

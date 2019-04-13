@@ -25,6 +25,9 @@ namespace yli
                     this->coordinate_vector = coordinate_vector;
                 }
 
+                VertexNode(const VertexNode&) = delete;            // Delete copy constructor.
+                VertexNode &operator=(const VertexNode&) = delete; // Delete copy assignment.
+
                 // destructor.
                 ~VertexNode();
 

@@ -28,6 +28,9 @@ namespace yli
                 // constructor.
                 Entity(yli::ontology::Universe* const universe);
 
+                Entity(const Entity&) = delete;            // Delete copy constructor.
+                Entity &operator=(const Entity&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~Entity();
 

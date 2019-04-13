@@ -117,6 +117,9 @@ namespace yli
                     this->type_string = "yli::ontology::Font2D*";
                 }
 
+                Font2D(const Font2D&) = delete;            // Delete copy constructor.
+                Font2D &operator=(const Font2D&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~Font2D();
 

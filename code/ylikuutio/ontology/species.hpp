@@ -147,6 +147,9 @@ namespace yli
                     }
                 }
 
+                Species(const Species&) = delete;            // Delete copy constructor.
+                Species &operator=(const Species&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~Species();
 

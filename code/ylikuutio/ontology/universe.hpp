@@ -406,6 +406,9 @@ namespace yli
                     this->type_string = "yli::ontology::Universe*";
                 }
 
+                Universe(const Universe&) = delete;            // Delete copy constructor.
+                Universe &operator=(const Universe&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~Universe();
 

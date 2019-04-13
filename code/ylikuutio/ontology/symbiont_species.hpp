@@ -121,6 +121,9 @@ namespace yli
                     this->type_string = "yli::ontology::SymbiontSpecies*";
                 }
 
+                SymbiontSpecies(const SymbiontSpecies&) = delete;            // Delete copy constructor.
+                SymbiontSpecies &operator=(const SymbiontSpecies&) = delete; // Delete copy assignment.
+
                 yli::ontology::Entity* get_parent() const override;
 
             private:

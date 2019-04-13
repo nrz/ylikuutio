@@ -95,6 +95,9 @@ namespace yli
                     this->can_be_erased = true;
                 }
 
+                Shader(const Shader&) = delete;            // Delete copy constructor.
+                Shader &operator=(const Shader&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~Shader();
 

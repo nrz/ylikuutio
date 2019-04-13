@@ -67,6 +67,9 @@ namespace yli
                     this->can_be_erased = true;
                 }
 
+                Scene(const Scene&) = delete;            // Delete copy constructor.
+                Scene &operator=(const Scene&) = delete; // Delete copy assignment.
+
                 // destructor.
                 virtual ~Scene();
 
