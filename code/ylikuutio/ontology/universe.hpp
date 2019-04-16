@@ -319,7 +319,7 @@ namespace yli
                     // variables related to the framebuffer.
                     this->framebuffer = 0;
                     this->texture = 0;
-                    this->render_buffer = 0;
+                    this->renderbuffer = 0;
                     this->is_framebuffer_initialized = false;
 
                     this->current_camera_projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
@@ -633,7 +633,7 @@ namespace yli
                 // variables related to the framebuffer.
                 uint32_t framebuffer;
                 uint32_t texture;
-                uint32_t render_buffer;
+                uint32_t renderbuffer;
                 bool is_framebuffer_initialized;
 
                 // variables related to `Camera` (projection).

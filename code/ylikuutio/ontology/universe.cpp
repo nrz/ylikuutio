@@ -97,7 +97,7 @@ namespace yli
 
             if (this->is_framebuffer_initialized)
             {
-                glDeleteRenderbuffers(1, &this->render_buffer);
+                glDeleteRenderbuffers(1, &this->renderbuffer);
                 glDeleteFramebuffers(1, &this->framebuffer);
             }
 
@@ -715,10 +715,10 @@ namespace yli
                     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, universe->texture, 0);
 
                     // Create and bind a render buffer with depth and stencil attachments.
-                    glGenRenderbuffers(1, &universe->render_buffer);
-                    glBindRenderbuffer(GL_RENDERBUFFER, universe->render_buffer);
+                    glGenRenderbuffers(1, &universe->renderbuffer);
+                    glBindRenderbuffer(GL_RENDERBUFFER, universe->renderbuffer);
                     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, texture_width, texture_height);
-                    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, universe->render_buffer);
+                    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, universe->renderbuffer);
 
                     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
                     {
