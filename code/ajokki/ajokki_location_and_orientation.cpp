@@ -111,7 +111,7 @@ namespace ajokki
         std::cout << "Executing `new yli::config::Setting(z_setting_struct);` ...\n";
         new yli::config::Setting(z_setting_struct);
 
-        const double horizontal_angle = 42.42f;
+        const double horizontal_angle = 0.31f;
         SettingStruct horizontal_angle_setting_struct(std::make_shared<yli::datatypes::AnyValue>(horizontal_angle));
         horizontal_angle_setting_struct.name = "horizontal_angle";
         horizontal_angle_setting_struct.setting_master = setting_master;
@@ -121,7 +121,7 @@ namespace ajokki
         std::cout << "Executing `new yli::config::Setting(horizontal_angle_setting_struct);` ...\n";
         new yli::config::Setting(horizontal_angle_setting_struct);
 
-        const double vertical_angle = 7.44f;
+        const double vertical_angle = -0.38f;
         SettingStruct vertical_angle_setting_struct(std::make_shared<yli::datatypes::AnyValue>(vertical_angle));
         vertical_angle_setting_struct.name = "vertical_angle";
         vertical_angle_setting_struct.setting_master = setting_master;

@@ -316,6 +316,12 @@ namespace yli
                     this->window_title  = universe_struct.window_title;
                     this->is_headless   = universe_struct.is_headless;
 
+                    // variables related to the framebuffer.
+                    this->framebuffer = 0;
+                    this->texture = 0;
+                    this->renderbuffer = 0;
+                    this->is_framebuffer_initialized = false;
+
                     this->current_camera_projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
                     this->current_camera_view_matrix       = glm::mat4(1.0f); // identity matrix (dummy value).
                     this->current_camera_horizontal_angle  = NAN;
@@ -623,6 +629,12 @@ namespace yli
                 std::size_t framebuffer_height;
                 std::string window_title;
                 bool is_headless;
+
+                // variables related to the framebuffer.
+                uint32_t framebuffer;
+                uint32_t texture;
+                uint32_t renderbuffer;
+                bool is_framebuffer_initialized;
 
                 // variables related to `Camera` (projection).
                 glm::mat4 current_camera_projection_matrix;

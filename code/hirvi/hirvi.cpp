@@ -129,7 +129,6 @@ int main(const int argc, const char* const argv[])
     }
 
     my_universe->create_context();
-    my_universe->make_context_current();
 
     // Initialize GLEW.
     if (!yli::opengl::init_glew())

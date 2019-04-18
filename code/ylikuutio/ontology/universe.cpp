@@ -95,6 +95,12 @@ namespace yli
             // destructor.
             std::cout << "This universe will be destroyed.\n";
 
+            if (this->is_framebuffer_initialized)
+            {
+                glDeleteRenderbuffers(1, &this->renderbuffer);
+                glDeleteFramebuffers(1, &this->framebuffer);
+            }
+
             // destroy all worlds of this universe.
             std::cout << "All worlds of this universe will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, this->number_of_worlds);
@@ -685,49 +691,54 @@ namespace yli
                 const std::size_t texture_width = universe->framebuffer_width;
                 const std::size_t texture_height = universe->framebuffer_height;
 
-                // Create FBO (off-screen framebuffer object).
-                uint32_t framebuffer = 0;
-                glGenFramebuffers(1, &framebuffer);
-
-                // Bind offscreen buffer.
-                glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-
-                // Create texture.
-                uint32_t texture;
-                glGenTextures(1, &texture);
-                glBindTexture(GL_TEXTURE_2D, texture);
-
-                // Define texture.
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture_width, texture_height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-
-                yli::opengl::set_filtering_parameters();
-
-                // Attach texture.
-                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
-
-                // Create and bind render buffer with depth and stencil attachments.
-                uint32_t render_buffer;
-                glGenRenderbuffers(1, &render_buffer);
-                glBindRenderbuffer(GL_RENDERBUFFER, render_buffer);
-                glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, texture_width, texture_height);
-                glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, render_buffer);
-
-                if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+                if (!universe->is_framebuffer_initialized)
                 {
-                    std::cerr << "ERROR: `Universe::screenshot`: framebuffer is not complete!\n";
+                    // Create an FBO (off-screen framebuffer object).
+                    glGenFramebuffers(1, &universe->framebuffer);
                 }
 
-                // Set background color for framebuffer.
-                universe->set_opengl_background_color();
+                // Bind the offscreen buffer.
+                glBindFramebuffer(GL_FRAMEBUFFER, universe->framebuffer);
 
-                // Clear framebuffer.
+                if (!universe->is_framebuffer_initialized)
+                {
+                    // Create a texture.
+                    glGenTextures(1, &universe->texture);
+                    glBindTexture(GL_TEXTURE_2D, universe->texture);
+
+                    // Define the texture.
+                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture_width, texture_height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+
+                    yli::opengl::set_filtering_parameters();
+
+                    // Attach the texture.
+                    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, universe->texture, 0);
+
+                    // Create and bind a render buffer with depth and stencil attachments.
+                    glGenRenderbuffers(1, &universe->renderbuffer);
+                    glBindRenderbuffer(GL_RENDERBUFFER, universe->renderbuffer);
+                    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, texture_width, texture_height);
+                    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, universe->renderbuffer);
+
+                    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+                    {
+                        std::cerr << "ERROR: `Universe::screenshot`: framebuffer is not complete!\n";
+                    }
+
+                    // Set background color for the framebuffer.
+                    universe->set_opengl_background_color();
+
+                    universe->is_framebuffer_initialized = true;
+                }
+
+                // Clear the framebuffer.
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-                // Adjust viewport for framebuffer.
+                // Adjust viewport for the framebuffer.
                 glViewport(0, 0, texture_width, texture_height);
                 universe->render_without_changing_depth_test(); // Render to framebuffer.
 
-                // Transfer data from GPU texture to CPU array.
+                // Transfer data from the GPU texture to a CPU array.
                 const std::size_t number_color_channels = 3;
                 const std::size_t number_of_texels = texture_width * texture_height;
                 const std::size_t number_of_elements = number_color_channels * number_of_texels;
@@ -743,8 +754,6 @@ namespace yli
                 yli::file::binary_write(result_vector, filename);
 
                 delete[] result_array;
-                glDeleteRenderbuffers(1, &render_buffer);
-                glDeleteFramebuffers(1, &framebuffer);
 
                 universe->restore_onscreen_rendering();
             }

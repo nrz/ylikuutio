@@ -2,11 +2,13 @@
 #define __COMPUTE_TASK_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "shader.hpp"
 #include "compute_task_struct.hpp"
 #include "pre_iterate_callback.hpp"
 #include "post_iterate_callback.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/load/texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -73,6 +75,8 @@ namespace yli
                     : Entity(universe)
                 {
                     // constructor.
+                    this->texture_file_format = compute_task_struct.texture_file_format;
+                    this->texture_filename = compute_task_struct.texture_filename;
                     this->parent = compute_task_struct.parent;
                     this->end_condition_callback_engine = compute_task_struct.end_condition_callback_engine;
                     this->n_max_iterations = compute_task_struct.n_max_iterations;
@@ -80,13 +84,17 @@ namespace yli
                     this->texture_width = compute_task_struct.texture_width;
                     this->texture_height = compute_task_struct.texture_height;
 
-                    this->framebuffer                  = 0;
-                    this->texture                      = 0;
-                    this->render_buffer                = 0;
-                    this->vertex_position_modelspaceID = 0;
-                    this->vertexUVID                   = 0;
-                    this->vertexbuffer                 = 0;
-                    this->uvbuffer                     = 0;
+                    // variables related to the framebuffer.
+                    this->framebuffer                  = 0; // some dummy value.
+                    this->source_texture               = 0; // some dummy value.
+                    this->target_texture               = 0; // some dummy value.
+                    this->openGL_textureID             = 0; // some dummy value.
+                    this->is_framebuffer_initialized   = false;
+
+                    this->vertex_position_modelspaceID = 0; // some dummy value.
+                    this->vertexUVID                   = 0; // some dummy value.
+                    this->vertexbuffer                 = 0; // some dummy value.
+                    this->uvbuffer                     = 0; // some dummy value.
 
                     this->format                       = compute_task_struct.format;
                     this->type                         = compute_task_struct.type;
@@ -96,6 +104,27 @@ namespace yli
 
                     // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
                     this->bind_to_parent();
+
+                    // Load the source texture, just like in `yli::ontology::Material` constructor.
+                    if (this->texture_file_format == "bmp" || this->texture_file_format == "BMP")
+                    {
+                        if (!yli::load::load_BMP_texture(this->texture_filename, this->texture_width, this->texture_height, this->texture_size, this->source_texture))
+                        {
+                            std::cerr << "ERROR: loading BMP texture failed!\n";
+                        }
+                    }
+                    else if (this->texture_file_format == "dds" || this->texture_file_format == "DDS")
+                    {
+                        if (!yli::load::load_DDS_texture(this->texture_filename, this->texture_width, this->texture_height, this->texture_size, this->source_texture))
+                        {
+                            std::cerr << "ERROR: loading DDS texture failed!\n";
+                        }
+                    }
+                    else
+                    {
+                        std::cerr << "no texture was loaded!\n";
+                        std::cerr << "texture file format: " << this->texture_file_format << "\n";
+                    }
 
                     // Create model (a square which consists of 2 triangles).
                     // *---*
@@ -121,34 +150,8 @@ namespace yli
                     glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
                     glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
 
-                    // Create FBO (off-screen framebuffer object).
-                    glGenFramebuffers(1, &this->framebuffer);
-
-                    // Bind offscreen buffer.
-                    glBindFramebuffer(GL_FRAMEBUFFER, this->framebuffer);
-
-                    // Create texture.
-                    glGenTextures(1, &this->texture);
-                    glBindTexture(GL_TEXTURE_2D, this->texture);
-
-                    // Define texture.
-                    glTexImage2D(GL_TEXTURE_2D, 0, this->format, this->texture_width, this->texture_height, 0, this->format, this->type, NULL);
-
-                    yli::opengl::set_filtering_parameters();
-
-                    // Attach texture.
-                    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->texture, 0);
-
-                    // Create and bind render buffer with depth and stencil attachments.
-                    glGenRenderbuffers(1, &this->render_buffer);
-                    glBindRenderbuffer(GL_RENDERBUFFER, this->render_buffer);
-                    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, this->texture_width, this->texture_height);
-                    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, this->render_buffer);
-
-                    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-                    {
-                        std::cerr << "ERROR: `ComputeTask::ComputeTask`: framebuffer is not complete!\n";
-                    }
+                    // Get a handle for our "my_texture_sampler" uniform.
+                    this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "my_texture_sampler");
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::ComputeTask*";
@@ -182,6 +185,9 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
+                std::string texture_file_format; // Type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
+                std::string texture_filename;    // Filename of the model file.
+
                 yli::ontology::Shader* parent; // pointer to the `Shader`.
 
                 // End iterating when `end_condition_callback_engine` returns `true`.
@@ -196,10 +202,14 @@ namespace yli
 
                 std::size_t texture_width;
                 std::size_t texture_height;
+                std::size_t texture_size;
 
+                // variables related to the framebuffer.
                 uint32_t framebuffer;
-                uint32_t texture;
-                uint32_t render_buffer;
+                uint32_t source_texture;
+                uint32_t target_texture;
+                uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(programID, "my_texture_sampler")`.
+                bool is_framebuffer_initialized;
 
                 uint32_t vertex_position_modelspaceID;
                 uint32_t vertexUVID;

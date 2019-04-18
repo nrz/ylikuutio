@@ -45,7 +45,12 @@ namespace yli
             // Cleanup buffers and texture.
             glDeleteBuffers(1, &this->vertexbuffer);
             glDeleteBuffers(1, &this->uvbuffer);
-            glDeleteTextures(1, &this->texture);
+            glDeleteTextures(1, &this->source_texture);
+
+            if (this->is_framebuffer_initialized)
+            {
+                glDeleteFramebuffers(1, &this->framebuffer);
+            }
 
             if (this->parent == nullptr)
             {
@@ -58,6 +63,35 @@ namespace yli
         void ComputeTask::render()
         {
             this->prerender();
+
+            if (!this->is_framebuffer_initialized)
+            {
+                // Create an FBO (off-screen framebuffer object).
+                glGenFramebuffers(1, &this->framebuffer);
+            }
+
+            // Bind the offscreen buffer.
+            glBindFramebuffer(GL_FRAMEBUFFER, this->framebuffer);
+
+            if (!this->is_framebuffer_initialized)
+            {
+                // Create a target texture.
+                glGenTextures(1, &this->target_texture);
+                glBindTexture(GL_TEXTURE_2D, this->target_texture);
+
+                // Define the texture.
+                glTexImage2D(GL_TEXTURE_2D, 0, this->format, this->texture_width, this->texture_height, 0, this->format, this->type, NULL);
+
+                yli::opengl::set_filtering_parameters();
+
+                // Attach the texture.
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->target_texture, 0);
+
+                // Set background color for the framebuffer.
+                this->universe->set_opengl_background_color();
+
+                this->is_framebuffer_initialized = true;
+            }
 
             for (std::size_t iteration_i = 0; iteration_i < n_max_iterations; iteration_i++)
             {
@@ -73,13 +107,17 @@ namespace yli
 
                 this->preiterate();
 
+                // Bind our texture in Texture Unit 0.
+                glActiveTexture(GL_TEXTURE0);
+                glBindTexture(GL_TEXTURE_2D, this->source_texture);
+                // Set our "my_texture_sampler" sampler to user Texture Unit 0.
+                glUniform1i(this->openGL_textureID, 0);
+
                 // 1st attribute buffer: vertices.
                 glEnableVertexAttribArray(this->vertex_position_modelspaceID);
 
                 // 2nd attribute buffer: UVs.
                 glEnableVertexAttribArray(this->vertexUVID);
-
-                // TODO: do the computation.
 
                 // 1st attribute buffer: vertices.
                 glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
@@ -103,6 +141,7 @@ namespace yli
                         (void*) 0         // array buffer offset
                         );
 
+                // Draw the triangles!
                 const std::size_t n_triangles = 2;
                 const std::size_t n_vertices_in_triangle = 3;
                 glDrawArrays(GL_TRIANGLES, 0, n_triangles * n_vertices_in_triangle); // draw 2 triangles (6 vertices, no VBO indexing).
