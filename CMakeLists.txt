@@ -254,6 +254,8 @@ if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
 endif()
 
 # Shaders.
+configure_file(code/ylikuutio/shaders/identity.vert identity.vert COPYONLY)
+configure_file(code/ylikuutio/shaders/identity.frag identity.frag COPYONLY)
 configure_file(code/ylikuutio/shaders/standard_shading.vert standard_shading.vert COPYONLY)
 configure_file(code/ylikuutio/shaders/standard_shading.frag standard_shading.frag COPYONLY)
 configure_file(code/ylikuutio/shaders/text_vertex_shader.vert text_vertex_shader.vert COPYONLY)
