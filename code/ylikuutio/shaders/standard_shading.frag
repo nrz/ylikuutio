@@ -9,7 +9,6 @@ varying vec3 light_direction_cameraspace;
 
 // Values that stay constant for the whole mesh.
 uniform sampler2D my_texture_sampler;
-uniform mat4 MV;
 uniform vec3 light_position_worldspace;
 uniform float water_level;
 
