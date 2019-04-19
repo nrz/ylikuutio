@@ -3,6 +3,7 @@
 
 0.0.2
 * `Symbiosis` entities
+* Support for FBX file format
 
 0.0.3
 * `Entity`-specific variables
