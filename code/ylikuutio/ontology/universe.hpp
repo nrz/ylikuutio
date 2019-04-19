@@ -508,7 +508,7 @@ namespace yli
                 const glm::mat4& get_projection_matrix() const;
                 void set_projection_matrix(glm::mat4& projection_matrix);
 
-                glm::mat4& get_view_matrix();
+                const glm::mat4& get_view_matrix() const;
                 void set_view_matrix(glm::mat4& view_matrix);
 
                 float get_aspect_ratio() const;

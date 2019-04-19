@@ -823,7 +823,7 @@ namespace yli
             this->current_camera_projection_matrix = projection_matrix;
         }
 
-        glm::mat4& Universe::get_view_matrix()
+        const glm::mat4& Universe::get_view_matrix() const
         {
             return this->current_camera_view_matrix;
         }
