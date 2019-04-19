@@ -243,7 +243,7 @@ A: I like Lisp-family languages and s7 fulfils my
    requirements related to a small size and a suitable license.
 
 Q: Does Ylikuutio use right-handed or left-handed world coordinates?
-A: Ylikuutio uses right-handed world coordinates, so X grows eastward, Z grows southward, and Y grow upwards.
+A: Ylikuutio uses right-handed world coordinates, so X grows eastward, Z grows southward, and Y grows upwards.
 
 ## Implemented functionality
 * 3D rendering
