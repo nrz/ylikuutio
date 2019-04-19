@@ -46,21 +46,21 @@ namespace yli
                 yli::ontology::Universe* get_universe() const;
 
                 yli::ontology::Entity* create_World() const;
-                yli::ontology::Entity* create_Scene(yli::ontology::World* const world, const float water_level);
-                yli::ontology::Entity* create_Shader(const ShaderStruct& shader_struct);
-                yli::ontology::Entity* create_Material(const MaterialStruct& material_struct);
-                yli::ontology::Entity* create_Species(const SpeciesStruct& species_struct);
-                yli::ontology::Entity* create_Object(ObjectStruct& object_struct);
-                yli::ontology::Entity* create_Symbiosis(const SymbiosisStruct& symbiosis_struct);
-                yli::ontology::Entity* create_Holobiont(HolobiontStruct& object_struct);
-                yli::ontology::Entity* create_VectorFont(const VectorFontStruct& vector_font_struct);
-                yli::ontology::Entity* create_Text3D(Text3DStruct& text3D_struct);
+                yli::ontology::Entity* create_Scene(yli::ontology::World* const world, const float water_level) const;
+                yli::ontology::Entity* create_Shader(const ShaderStruct& shader_struct) const;
+                yli::ontology::Entity* create_Material(const MaterialStruct& material_struct) const;
+                yli::ontology::Entity* create_Species(const SpeciesStruct& species_struct) const;
+                yli::ontology::Entity* create_Object(const ObjectStruct& object_struct) const;
+                yli::ontology::Entity* create_Symbiosis(const SymbiosisStruct& symbiosis_struct) const;
+                yli::ontology::Entity* create_Holobiont(const HolobiontStruct& object_struct) const;
+                yli::ontology::Entity* create_VectorFont(const VectorFontStruct& vector_font_struct) const;
+                yli::ontology::Entity* create_Text3D(const Text3DStruct& text3D_struct) const;
                 yli::ontology::Entity* create_Font2D(
-                        std::size_t screen_width,
-                        std::size_t screen_height,
+                        const std::size_t screen_width,
+                        const std::size_t screen_height,
                         const std::string& texture_filename,
-                        const std::string& font_texture_file_format);
-                yli::ontology::Entity* create_Camera(CameraStruct& camera_struct);
+                        const std::string& font_texture_file_format) const;
+                yli::ontology::Entity* create_Camera(const CameraStruct& camera_struct) const;
 
                 friend class Universe;
 
