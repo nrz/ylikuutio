@@ -97,6 +97,7 @@ namespace yli
 
             if (this->is_framebuffer_initialized)
             {
+                glDeleteTextures(1, &this->texture);
                 glDeleteRenderbuffers(1, &this->renderbuffer);
                 glDeleteFramebuffers(1, &this->framebuffer);
             }
