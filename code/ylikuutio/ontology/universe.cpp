@@ -813,7 +813,7 @@ namespace yli
             this->terrain_species = terrain_species;
         }
 
-        glm::mat4& Universe::get_projection_matrix()
+        const glm::mat4& Universe::get_projection_matrix() const
         {
             return this->current_camera_projection_matrix;
         }
