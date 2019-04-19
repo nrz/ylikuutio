@@ -13,6 +13,7 @@
 #include "text3D.hpp"
 #include "font2D.hpp"
 #include "camera.hpp"
+#include "compute_task.hpp"
 #include "shader_struct.hpp"
 #include "material_struct.hpp"
 #include "species_struct.hpp"
@@ -22,6 +23,7 @@
 #include "vector_font_struct.hpp"
 #include "text3D_struct.hpp"
 #include "camera_struct.hpp"
+#include "compute_task_struct.hpp"
 
 // Include standard headers
 #include <memory>    // std::make_shared, std::shared_ptr
@@ -116,6 +118,11 @@ namespace yli
         yli::ontology::Entity* EntityFactory::create_Camera(const CameraStruct& camera_struct) const
         {
             return new yli::ontology::Camera(this->universe, camera_struct);
+        }
+
+        yli::ontology::Entity* EntityFactory::create_ComputeTask(const ComputeTaskStruct& compute_task_struct) const
+        {
+            return new yli::ontology::ComputeTask(this->universe, compute_task_struct);
         }
     }
 }

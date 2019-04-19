@@ -10,6 +10,7 @@
 #include "vector_font_struct.hpp"
 #include "text3D_struct.hpp"
 #include "camera_struct.hpp"
+#include "compute_task_struct.hpp"
 
 // Include standard headers
 #include <memory>    // std::make_shared, std::shared_ptr
@@ -30,6 +31,7 @@ namespace yli
         class VectorFont;
         class Text3D;
         class Font2D;
+        class ComputeTask;
 
         class EntityFactory
         {
@@ -61,6 +63,7 @@ namespace yli
                         const std::string& texture_filename,
                         const std::string& font_texture_file_format) const;
                 yli::ontology::Entity* create_Camera(const CameraStruct& camera_struct) const;
+                yli::ontology::Entity* create_ComputeTask(const ComputeTaskStruct& compute_task_struct) const;
 
                 friend class Universe;
 
