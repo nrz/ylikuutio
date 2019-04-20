@@ -93,6 +93,12 @@ namespace yli
                 this->is_framebuffer_initialized = true;
             }
 
+            // Clear the framebuffer.
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            // Adjust viewport for the framebuffer.
+            glViewport(0, 0, this->texture_width, this->texture_height);
+
             for (std::size_t iteration_i = 0; iteration_i < n_max_iterations; iteration_i++)
             {
                 if (this->end_condition_callback_engine != nullptr)
