@@ -138,9 +138,11 @@ namespace yli
                     // *---*
                     const std::vector<glm::vec3> vertices
                     { { 1.0f, 1.0f, 0.0f }, { 1.0f, -1.0f, 0.0f }, { -1.0f, -1.0f, 0.0f }, { -1.0f, -1.0f, 0.0f }, { -1.0f, 1.0f, 0.0f }, { 1.0f, 1.0f, 0.0f } };
+                    this->vertices_size = vertices.size();
 
                     const std::vector<glm::vec2> uvs
                     { { 1.0f, 1.0f }, { 1.0f, -1.0f }, { -1.0f, -1.0f }, { -1.0f, -1.0f }, { -1.0f, 1.0f }, { 1.0f, 1.0f } };
+                    this->uvs_size = uvs.size();
 
                     // Load model into a VBO.
 
@@ -207,6 +209,9 @@ namespace yli
                 std::size_t texture_width;
                 std::size_t texture_height;
                 std::size_t texture_size;
+
+                std::size_t vertices_size;
+                std::size_t uvs_size;
 
                 // variables related to the framebuffer.
                 uint32_t framebuffer;
