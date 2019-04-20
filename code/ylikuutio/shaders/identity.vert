@@ -10,8 +10,7 @@ varying vec2 UV;
 void main()
 {
     // Output position of the vertex.
-    gl_Position.xyz = vertex_position_modelspace;
-    gl_Position.w = 1.0;
+    gl_Position = vec4(vertex_position_modelspace.xy, 0, 1);
 
     // UV of the vertex. No special space for this one.
     UV = vertexUV;
