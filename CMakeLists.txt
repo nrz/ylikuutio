@@ -661,6 +661,17 @@ add_executable(ajokki
     )
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS})
 
+# GPGPU test
+add_executable(gpgpu_test
+    # ajokki, in alphabetical order
+    code/gpgpu_test/gpgpu_test.cpp
+    code/gpgpu_test/gpgpu_test_scene.cpp
+    code/gpgpu_test/gpgpu_test_scene.hpp
+    code/ajokki/ajokki_keyboard_callbacks.cpp
+    code/ajokki/ajokki_keyboard_callbacks.hpp
+    )
+target_link_libraries(gpgpu_test ylikuutio ${ALL_LIBS} pthread)
+
 # Hirvi
 add_executable(hirvi
     # hirvi, in alphabetical order
