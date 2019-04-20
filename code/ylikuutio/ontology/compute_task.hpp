@@ -80,6 +80,9 @@ namespace yli
                     this->output_filename = compute_task_struct.output_filename;
                     this->parent = compute_task_struct.parent;
                     this->end_condition_callback_engine = compute_task_struct.end_condition_callback_engine;
+
+                    this->result_vector = nullptr;
+
                     this->n_max_iterations = compute_task_struct.n_max_iterations;
                     this->compute_taskID = compute_task_struct.compute_taskID;
                     this->texture_width = compute_task_struct.texture_width;
@@ -203,6 +206,8 @@ namespace yli
 
                 // End iterating when `end_condition_callback_engine` returns `true`.
                 std::shared_ptr<yli::callback_system::CallbackEngine> end_condition_callback_engine;
+
+                std::shared_ptr<std::vector<uint8_t>> result_vector;
 
                 // This is the maximum number of iterations.
                 // If `end_condition_callback_engine` is `nullptr`, then this is the number of iterations.

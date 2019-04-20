@@ -2,6 +2,8 @@
 #include "universe.hpp"
 #include "shader.hpp"
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
+#include "code/ylikuutio/file/file_writer.hpp"
+#include "code/ylikuutio/memory/memory_templates.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 
 // Include GLEW
@@ -162,6 +164,28 @@ namespace yli
 
                 this->postiterate();
             }
+
+            // Transfer data from the GPU texture to a CPU array.
+            const std::size_t number_color_channels = 3;
+            const std::size_t number_of_texels = this->texture_width * this->texture_height;
+            const std::size_t number_of_elements = number_color_channels * number_of_texels;
+            uint8_t* const result_array = new uint8_t[number_of_elements];
+
+            glReadBuffer(GL_COLOR_ATTACHMENT0);
+            glReadPixels(0, 0, this->texture_width, this->texture_height, GL_RGB, GL_UNSIGNED_BYTE, result_array);
+
+            yli::memory::flip_vertically(result_array, 3 * this->texture_width, this->texture_height); // For `GL_RGB`. TODO: add support for other formats!
+
+            this->result_vector = std::make_shared<std::vector<uint8_t>>(result_array, result_array + number_of_elements);
+
+            if (!this->output_filename.empty())
+            {
+                yli::file::binary_write(*this->result_vector, this->output_filename);
+            }
+
+            delete[] result_array;
+
+            universe->restore_onscreen_rendering();
 
             this->is_ready = true;
 
