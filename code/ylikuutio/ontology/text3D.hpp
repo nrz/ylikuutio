@@ -49,7 +49,7 @@ namespace yli
                 // TODO: `Text3D` constructor also creates each `Object`,
                 // and binds each to its corresponding `Glyph` for rendering hierarchy,
                 // and also binds each to this `Text3D` for ontological hierarchy.
-                Text3D(yli::ontology::Universe* const universe, Text3DStruct& text3D_struct)
+                Text3D(yli::ontology::Universe* const universe, const Text3DStruct& text3D_struct)
                     : yli::ontology::Movable(universe, text3D_struct.cartesian_coordinates)
                 {
                     // constructor.

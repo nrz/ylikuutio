@@ -13,6 +13,8 @@ namespace yli
     {
         bool binary_write(const std::vector<uint8_t>& data, const std::string& file_path)
         {
+            std::cout << "Writing binary file " << file_path << "\n";
+
             std::ofstream file_stream(file_path, std::ios::out | std::ios::binary);
             file_stream.write((char*) &data[0], data.size() * sizeof(uint8_t));
             file_stream.close();

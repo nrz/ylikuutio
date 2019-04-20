@@ -254,8 +254,13 @@ if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
 endif()
 
 # Shaders.
+configure_file(code/ylikuutio/shaders/identity.vert identity.vert COPYONLY)
+configure_file(code/ylikuutio/shaders/identity.frag identity.frag COPYONLY)
 configure_file(code/ylikuutio/shaders/standard_shading.vert standard_shading.vert COPYONLY)
 configure_file(code/ylikuutio/shaders/standard_shading.frag standard_shading.frag COPYONLY)
+configure_file(code/ylikuutio/shaders/sobel_x.frag sobel_x.frag COPYONLY)
+configure_file(code/ylikuutio/shaders/sobel_y.frag sobel_y.frag COPYONLY)
+configure_file(code/ylikuutio/shaders/sobel_gradient_magnitude.frag sobel_gradient_magnitude.frag COPYONLY)
 configure_file(code/ylikuutio/shaders/text_vertex_shader.vert text_vertex_shader.vert COPYONLY)
 configure_file(code/ylikuutio/shaders/text_vertex_shader.frag text_vertex_shader.frag COPYONLY)
 
@@ -658,6 +663,17 @@ add_executable(ajokki
     code/ajokki/ajokki_wireframe.hpp
     )
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS})
+
+# GPGPU test
+add_executable(gpgpu_test
+    # ajokki, in alphabetical order
+    code/gpgpu_test/gpgpu_test.cpp
+    code/gpgpu_test/gpgpu_test_scene.cpp
+    code/gpgpu_test/gpgpu_test_scene.hpp
+    code/ajokki/ajokki_keyboard_callbacks.cpp
+    code/ajokki/ajokki_keyboard_callbacks.hpp
+    )
+target_link_libraries(gpgpu_test ylikuutio ${ALL_LIBS} pthread)
 
 # Hirvi
 add_executable(hirvi

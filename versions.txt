@@ -1,0 +1,12 @@
+0.0.1
+* initial version
+
+0.0.2
+* `Symbiosis` entities
+* Support for FBX file format
+
+0.0.3
+* `Entity`-specific variables
+* screenshots with `Universe::screenshot`.
+* console size can be adjusted by setting `console_top_y`,
+  `console_bottom_y`, `console_left_x`, `console_right_x`.

@@ -77,8 +77,12 @@ namespace yli
                     // constructor.
                     this->texture_file_format = compute_task_struct.texture_file_format;
                     this->texture_filename = compute_task_struct.texture_filename;
+                    this->output_filename = compute_task_struct.output_filename;
                     this->parent = compute_task_struct.parent;
                     this->end_condition_callback_engine = compute_task_struct.end_condition_callback_engine;
+
+                    this->result_vector = nullptr;
+
                     this->n_max_iterations = compute_task_struct.n_max_iterations;
                     this->compute_taskID = compute_task_struct.compute_taskID;
                     this->texture_width = compute_task_struct.texture_width;
@@ -90,9 +94,12 @@ namespace yli
                     this->target_texture               = 0; // some dummy value.
                     this->openGL_textureID             = 0; // some dummy value.
                     this->is_framebuffer_initialized   = false;
+                    this->is_ready                     = false;
 
                     this->vertex_position_modelspaceID = 0; // some dummy value.
                     this->vertexUVID                   = 0; // some dummy value.
+                    this->screen_width_uniform_ID      = 0; // some dummy value.
+                    this->screen_height_uniform_ID     = 0; // some dummy value.
                     this->vertexbuffer                 = 0; // some dummy value.
                     this->uvbuffer                     = 0; // some dummy value.
 
@@ -104,6 +111,12 @@ namespace yli
 
                     // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
                     this->bind_to_parent();
+
+                    // Get a handle for our buffers.
+                    this->vertex_position_modelspaceID = glGetAttribLocation(this->parent->get_programID(), "vertex_position_modelspace");
+                    this->vertexUVID = glGetAttribLocation(this->parent->get_programID(), "vertexUV");
+
+                    glUseProgram(this->parent->get_programID());
 
                     // Load the source texture, just like in `yli::ontology::Material` constructor.
                     if (this->texture_file_format == "bmp" || this->texture_file_format == "BMP")
@@ -126,32 +139,44 @@ namespace yli
                         std::cerr << "texture file format: " << this->texture_file_format << "\n";
                     }
 
+                    // Get a handle for our "my_texture_sampler" uniform.
+                    this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "my_texture_sampler");
+
+                    // Initialize uniform window width.
+                    // This is named `screen_width` instead of `texture_width` for compatibility with other shaders.
+                    this->screen_width_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_width");
+                    glUniform1i(this->screen_width_uniform_ID, this->texture_width);
+
+                    // Initialize uniform window height.
+                    // This is named `screen_height` instead of `texture_height` for compatibility with other shaders.
+                    this->screen_height_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_height");
+                    glUniform1i(this->screen_height_uniform_ID, this->texture_height);
+
                     // Create model (a square which consists of 2 triangles).
                     // *---*
                     // |  /|
                     // | / |
                     // |/  |
                     // *---*
-                    const std::vector<glm::vec3> vertices
-                    { { 1.0f, 1.0f, 0.0f }, { 1.0f, -1.0f, 0.0f }, { -1.0f, -1.0f, 0.0f }, { -1.0f, -1.0f, 0.0f }, { -1.0f, 1.0f, 0.0f }, { 1.0f, 1.0f, 0.0f } };
+                    const std::vector<glm::vec2> vertices
+                    { { -1.0f, 1.0f }, { -1.0f, -1.0f }, { 1.0f, 1.0f }, { 1.0f, -1.0f }, { 1.0f, 1.0f }, { -1.0f, -1.0f } };
+                    this->vertices_size = vertices.size();
 
                     const std::vector<glm::vec2> uvs
-                    { { 1.0f, 1.0f }, { 1.0f, -1.0f }, { -1.0f, -1.0f }, { -1.0f, -1.0f }, { -1.0f, 1.0f }, { 1.0f, 1.0f } };
+                    { { 0.0f, 1.0f }, { 0.0f, 0.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 0.0f } };
+                    this->uvs_size = uvs.size();
 
                     // Load model into a VBO.
 
                     // Vertices.
                     glGenBuffers(1, &this->vertexbuffer);
                     glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
-                    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
+                    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
 
                     // UVs.
                     glGenBuffers(1, &this->uvbuffer);
                     glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
                     glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
-
-                    // Get a handle for our "my_texture_sampler" uniform.
-                    this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "my_texture_sampler");
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::ComputeTask*";
@@ -187,11 +212,14 @@ namespace yli
 
                 std::string texture_file_format; // Type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
                 std::string texture_filename;    // Filename of the model file.
+                std::string output_filename;     // Filename of the output file.
 
                 yli::ontology::Shader* parent; // pointer to the `Shader`.
 
                 // End iterating when `end_condition_callback_engine` returns `true`.
                 std::shared_ptr<yli::callback_system::CallbackEngine> end_condition_callback_engine;
+
+                std::shared_ptr<std::vector<uint8_t>> result_vector;
 
                 // This is the maximum number of iterations.
                 // If `end_condition_callback_engine` is `nullptr`, then this is the number of iterations.
@@ -204,15 +232,21 @@ namespace yli
                 std::size_t texture_height;
                 std::size_t texture_size;
 
+                std::size_t vertices_size;
+                std::size_t uvs_size;
+
                 // variables related to the framebuffer.
                 uint32_t framebuffer;
                 uint32_t source_texture;
                 uint32_t target_texture;
-                uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(programID, "my_texture_sampler")`.
+                uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(this->parent->get_programID(), "my_texture_sampler")`.
                 bool is_framebuffer_initialized;
+                bool is_ready;
 
                 uint32_t vertex_position_modelspaceID;
                 uint32_t vertexUVID;
+                uint32_t screen_width_uniform_ID;          // Location of the program's window width uniform.
+                uint32_t screen_height_uniform_ID;         // Location of the program's window height uniform.
 
                 uint32_t vertexbuffer;
                 uint32_t uvbuffer;

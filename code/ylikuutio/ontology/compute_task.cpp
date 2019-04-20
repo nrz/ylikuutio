@@ -2,6 +2,8 @@
 #include "universe.hpp"
 #include "shader.hpp"
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
+#include "code/ylikuutio/file/file_writer.hpp"
+#include "code/ylikuutio/memory/memory_templates.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 
 // Include GLEW
@@ -64,6 +66,13 @@ namespace yli
         {
             this->prerender();
 
+            if (this->is_ready)
+            {
+                // If `ComputeTask` is ready, it does not need to be rendered.
+                this->postrender();
+                return;
+            }
+
             if (!this->is_framebuffer_initialized)
             {
                 // Create an FBO (off-screen framebuffer object).
@@ -93,6 +102,12 @@ namespace yli
                 this->is_framebuffer_initialized = true;
             }
 
+            // Clear the framebuffer.
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            // Adjust viewport for the framebuffer.
+            glViewport(0, 0, this->texture_width, this->texture_height);
+
             for (std::size_t iteration_i = 0; iteration_i < n_max_iterations; iteration_i++)
             {
                 if (this->end_condition_callback_engine != nullptr)
@@ -110,7 +125,7 @@ namespace yli
                 // Bind our texture in Texture Unit 0.
                 glActiveTexture(GL_TEXTURE0);
                 glBindTexture(GL_TEXTURE_2D, this->source_texture);
-                // Set our "my_texture_sampler" sampler to user Texture Unit 0.
+                // Set our "my_texture_sampler" sampler to use Texture Unit 0.
                 glUniform1i(this->openGL_textureID, 0);
 
                 // 1st attribute buffer: vertices.
@@ -123,7 +138,7 @@ namespace yli
                 glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
                 glVertexAttribPointer(
                         this->vertex_position_modelspaceID, // The attribute we want to configure
-                        3,                                  // size
+                        2,                                  // size
                         GL_FLOAT,                           // type
                         GL_FALSE,                           // normalized?
                         0,                                  // stride
@@ -142,15 +157,37 @@ namespace yli
                         );
 
                 // Draw the triangles!
-                const std::size_t n_triangles = 2;
-                const std::size_t n_vertices_in_triangle = 3;
-                glDrawArrays(GL_TRIANGLES, 0, n_triangles * n_vertices_in_triangle); // draw 2 triangles (6 vertices, no VBO indexing).
+                glDrawArrays(GL_TRIANGLES, 0, this->vertices_size); // draw 2 triangles (6 vertices, no VBO indexing).
 
                 glDisableVertexAttribArray(this->vertex_position_modelspaceID);
                 glDisableVertexAttribArray(this->vertexUVID);
 
                 this->postiterate();
             }
+
+            // Transfer data from the GPU texture to a CPU array.
+            const std::size_t number_color_channels = 3;
+            const std::size_t number_of_texels = this->texture_width * this->texture_height;
+            const std::size_t number_of_elements = number_color_channels * number_of_texels;
+            uint8_t* const result_array = new uint8_t[number_of_elements];
+
+            glReadBuffer(GL_COLOR_ATTACHMENT0);
+            glReadPixels(0, 0, this->texture_width, this->texture_height, GL_RGB, GL_UNSIGNED_BYTE, result_array);
+
+            yli::memory::flip_vertically(result_array, 3 * this->texture_width, this->texture_height); // For `GL_RGB`. TODO: add support for other formats!
+
+            this->result_vector = std::make_shared<std::vector<uint8_t>>(result_array, result_array + number_of_elements);
+
+            if (!this->output_filename.empty())
+            {
+                yli::file::binary_write(*this->result_vector, this->output_filename);
+            }
+
+            delete[] result_array;
+
+            universe->restore_onscreen_rendering();
+
+            this->is_ready = true;
 
             this->postrender();
         }

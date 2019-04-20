@@ -97,6 +97,7 @@ namespace yli
 
             if (this->is_framebuffer_initialized)
             {
+                glDeleteTextures(1, &this->texture);
                 glDeleteRenderbuffers(1, &this->renderbuffer);
                 glDeleteFramebuffers(1, &this->framebuffer);
             }
@@ -813,7 +814,7 @@ namespace yli
             this->terrain_species = terrain_species;
         }
 
-        glm::mat4& Universe::get_projection_matrix()
+        const glm::mat4& Universe::get_projection_matrix() const
         {
             return this->current_camera_projection_matrix;
         }
@@ -823,7 +824,7 @@ namespace yli
             this->current_camera_projection_matrix = projection_matrix;
         }
 
-        glm::mat4& Universe::get_view_matrix()
+        const glm::mat4& Universe::get_view_matrix() const
         {
             return this->current_camera_view_matrix;
         }

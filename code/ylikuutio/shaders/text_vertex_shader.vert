@@ -15,10 +15,8 @@ void main()
     // Output position of the vertex, in clip space
     // map [0..800][0..600] to [-1..1][-1..1]
 
-    // vec2 vertex_position_homogenousspace = vertex_position_screenspace - vec2(400,300); // [0..800][0..600] -> [-400..400][-300..300]
     vec2 vertex_position_homogenousspace = vertex_position_screenspace - vec2(screen_width / 2, screen_height / 2); // [0..800][0..600] -> [-400..400][-300..300]
 
-    // vertex_position_homogenousspace /= vec2(400,300);
     vertex_position_homogenousspace /= vec2(screen_width / 2, screen_height / 2);
 
     gl_Position = vec4(vertex_position_homogenousspace, 0, 1);

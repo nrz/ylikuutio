@@ -4,8 +4,8 @@
 #include "SDL.h"
 
 // Include standard headers
-#include <stdint.h>      // uint32_t etc.
 #include <list>          // std::list
+#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 

@@ -27,6 +27,8 @@ namespace yli
 
         std::vector<uint8_t> binary_slurp(const std::string& file_path)
         {
+            std::cout << "Loading binary file " << file_path << " into memory.\n";
+
             std::ifstream file(file_path.c_str(), std::fstream::binary);
             file.unsetf(std::ios::skipws);           // do not skip whitespace.
             file.seekg(0, std::ios::end);

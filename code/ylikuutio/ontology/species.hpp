@@ -68,8 +68,8 @@ namespace yli
                     this->z_step              = species_struct.z_step;
                     this->triangulation_type  = species_struct.triangulation_type;
 
-                    this->image_width            = -1;
-                    this->image_height           = -1;
+                    this->image_width         = 0;
+                    this->image_height        = 0;
 
                     this->should_ylikuutio_use_real_texture_coordinates = species_struct.should_ylikuutio_use_real_texture_coordinates;
 
