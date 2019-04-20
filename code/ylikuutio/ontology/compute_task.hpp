@@ -98,6 +98,8 @@ namespace yli
 
                     this->vertex_position_modelspaceID = 0; // some dummy value.
                     this->vertexUVID                   = 0; // some dummy value.
+                    this->screen_width_uniform_ID      = 0; // some dummy value.
+                    this->screen_height_uniform_ID     = 0; // some dummy value.
                     this->vertexbuffer                 = 0; // some dummy value.
                     this->uvbuffer                     = 0; // some dummy value.
 
@@ -139,6 +141,16 @@ namespace yli
 
                     // Get a handle for our "my_texture_sampler" uniform.
                     this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "my_texture_sampler");
+
+                    // Initialize uniform window width.
+                    // This is named `screen_width` instead of `texture_width` for compatibility with other shaders.
+                    this->screen_width_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_width");
+                    glUniform1i(this->screen_width_uniform_ID, this->texture_width);
+
+                    // Initialize uniform window height.
+                    // This is named `screen_height` instead of `texture_height` for compatibility with other shaders.
+                    this->screen_height_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_height");
+                    glUniform1i(this->screen_height_uniform_ID, this->texture_height);
 
                     // Create model (a square which consists of 2 triangles).
                     // *---*
@@ -233,6 +245,8 @@ namespace yli
 
                 uint32_t vertex_position_modelspaceID;
                 uint32_t vertexUVID;
+                uint32_t screen_width_uniform_ID;          // Location of the program's window width uniform.
+                uint32_t screen_height_uniform_ID;         // Location of the program's window height uniform.
 
                 uint32_t vertexbuffer;
                 uint32_t uvbuffer;
