@@ -130,6 +130,9 @@ namespace yli
                         std::cerr << "texture file format: " << this->texture_file_format << "\n";
                     }
 
+                    // Get a handle for our "my_texture_sampler" uniform.
+                    this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "my_texture_sampler");
+
                     // Create model (a square which consists of 2 triangles).
                     // *---*
                     // |  /|
@@ -155,9 +158,6 @@ namespace yli
                     glGenBuffers(1, &this->uvbuffer);
                     glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
                     glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
-
-                    // Get a handle for our "my_texture_sampler" uniform.
-                    this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "my_texture_sampler");
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::ComputeTask*";
