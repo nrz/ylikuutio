@@ -77,6 +77,7 @@ namespace yli
                     // constructor.
                     this->texture_file_format = compute_task_struct.texture_file_format;
                     this->texture_filename = compute_task_struct.texture_filename;
+                    this->output_filename = compute_task_struct.output_filename;
                     this->parent = compute_task_struct.parent;
                     this->end_condition_callback_engine = compute_task_struct.end_condition_callback_engine;
                     this->n_max_iterations = compute_task_struct.n_max_iterations;
@@ -195,6 +196,7 @@ namespace yli
 
                 std::string texture_file_format; // Type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
                 std::string texture_filename;    // Filename of the model file.
+                std::string output_filename;     // Filename of the output file.
 
                 yli::ontology::Shader* parent; // pointer to the `Shader`.
 

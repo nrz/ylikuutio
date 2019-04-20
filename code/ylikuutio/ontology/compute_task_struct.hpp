@@ -44,6 +44,7 @@ typedef struct ComputeTaskStruct
 
     std::string texture_file_format; // Type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
     std::string texture_filename;    // Filename of the model file.
+    std::string output_filename;     // Filename of the output file.
     yli::ontology::Shader* parent; // pointer to the `Shader`.
     std::shared_ptr<yli::callback_system::CallbackEngine> end_condition_callback_engine;
     std::size_t n_max_iterations;
