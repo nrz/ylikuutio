@@ -91,6 +91,7 @@ namespace yli
                     this->target_texture               = 0; // some dummy value.
                     this->openGL_textureID             = 0; // some dummy value.
                     this->is_framebuffer_initialized   = false;
+                    this->is_ready                     = false;
 
                     this->vertex_position_modelspaceID = 0; // some dummy value.
                     this->vertexUVID                   = 0; // some dummy value.
@@ -223,6 +224,7 @@ namespace yli
                 uint32_t target_texture;
                 uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(this->parent->get_programID(), "my_texture_sampler")`.
                 bool is_framebuffer_initialized;
+                bool is_ready;
 
                 uint32_t vertex_position_modelspaceID;
                 uint32_t vertexUVID;

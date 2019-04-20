@@ -64,6 +64,13 @@ namespace yli
         {
             this->prerender();
 
+            if (this->is_ready)
+            {
+                // If `ComputeTask` is ready, it does not need to be rendered.
+                this->postrender();
+                return;
+            }
+
             if (!this->is_framebuffer_initialized)
             {
                 // Create an FBO (off-screen framebuffer object).
@@ -155,6 +162,8 @@ namespace yli
 
                 this->postiterate();
             }
+
+            this->is_ready = true;
 
             this->postrender();
         }
