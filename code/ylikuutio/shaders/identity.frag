@@ -8,6 +8,6 @@ uniform sampler2D my_texture_sampler;
 
 void main()
 {
-    // Material properties
+    // Texel color as is.
     gl_FragColor = texture2D(my_texture_sampler, UV);
 }
