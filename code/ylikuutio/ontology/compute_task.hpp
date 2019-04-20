@@ -109,6 +109,8 @@ namespace yli
                     this->vertex_position_modelspaceID = glGetAttribLocation(this->parent->get_programID(), "vertex_position_modelspace");
                     this->vertexUVID = glGetAttribLocation(this->parent->get_programID(), "vertexUV");
 
+                    glUseProgram(this->parent->get_programID());
+
                     // Load the source texture, just like in `yli::ontology::Material` constructor.
                     if (this->texture_file_format == "bmp" || this->texture_file_format == "BMP")
                     {
