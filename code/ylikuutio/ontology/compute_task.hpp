@@ -105,6 +105,10 @@ namespace yli
                     // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
                     this->bind_to_parent();
 
+                    // Get a handle for our buffers.
+                    this->vertex_position_modelspaceID = glGetAttribLocation(this->parent->get_programID(), "vertex_position_modelspace");
+                    this->vertexUVID = glGetAttribLocation(this->parent->get_programID(), "vertexUV");
+
                     // Load the source texture, just like in `yli::ontology::Material` constructor.
                     if (this->texture_file_format == "bmp" || this->texture_file_format == "BMP")
                     {
