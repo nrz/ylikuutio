@@ -208,7 +208,7 @@ namespace yli
                 uint32_t framebuffer;
                 uint32_t source_texture;
                 uint32_t target_texture;
-                uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(programID, "my_texture_sampler")`.
+                uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(this->parent->get_programID(), "my_texture_sampler")`.
                 bool is_framebuffer_initialized;
 
                 uint32_t vertex_position_modelspaceID;
