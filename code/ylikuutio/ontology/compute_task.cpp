@@ -138,7 +138,7 @@ namespace yli
                 glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
                 glVertexAttribPointer(
                         this->vertex_position_modelspaceID, // The attribute we want to configure
-                        3,                                  // size
+                        2,                                  // size
                         GL_FLOAT,                           // type
                         GL_FALSE,                           // normalized?
                         0,                                  // stride
