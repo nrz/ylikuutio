@@ -50,39 +50,77 @@ namespace gpgpu_test
         gpgpu_test_scene->set_turbo_factor(5.0f);
         gpgpu_test_scene->set_twin_turbo_factor(100.0f);
 
-        // Create the shader, store it in `gpgpu_test_shader`.
-        ShaderStruct gpgpu_test_shader_struct;
-        gpgpu_test_shader_struct.parent = gpgpu_test_scene;
-        gpgpu_test_shader_struct.vertex_shader = "identity.vert";
-        gpgpu_test_shader_struct.fragment_shader = "identity.frag";
+        // Create the shader, store it in `identity_shader`.
+        ShaderStruct identity_shader_struct;
+        identity_shader_struct.parent = gpgpu_test_scene;
+        identity_shader_struct.vertex_shader = "identity.vert";
+        identity_shader_struct.fragment_shader = "identity.frag";
 
-        std::cout << "Creating yli::ontology::Entity* gpgpu_test_shader_entity ...\n";
-        yli::ontology::Entity* const gpgpu_test_shader_entity = entity_factory->create_Shader(gpgpu_test_shader_struct);
-        std::cout << "Creating yli::ontology::Shader* gpgpu_test_shader ...\n";
-        yli::ontology::Shader* const gpgpu_test_shader = dynamic_cast<yli::ontology::Shader*>(gpgpu_test_shader_entity);
+        std::cout << "Creating yli::ontology::Entity* identity_shader_entity ...\n";
+        yli::ontology::Entity* const identity_shader_entity = entity_factory->create_Shader(identity_shader_struct);
+        std::cout << "Creating yli::ontology::Shader* identity_shader ...\n";
+        yli::ontology::Shader* const identity_shader = dynamic_cast<yli::ontology::Shader*>(identity_shader_entity);
 
-        if (gpgpu_test_shader == nullptr)
+        if (identity_shader == nullptr)
         {
             std::cerr << "Failed to create Shader.\n";
             return nullptr;
         }
 
-        gpgpu_test_shader->set_name("gpgpu_test_shader");
+        identity_shader->set_name("identity_shader");
 
-        ComputeTaskStruct compute_task_struct;
-        compute_task_struct.texture_file_format = "bmp";
-        compute_task_struct.texture_filename = "numbers_123456_black_and_white.bmp";
-        compute_task_struct.output_filename = "gpgpu_output.data";
-        compute_task_struct.parent = gpgpu_test_shader;
-        compute_task_struct.texture_width = 512;
-        compute_task_struct.texture_height = 512;
+        ComputeTaskStruct identity_shader_compute_task_struct;
+        identity_shader_compute_task_struct.texture_file_format = "bmp";
+        identity_shader_compute_task_struct.texture_filename = "numbers_123456_black_and_white.bmp";
+        identity_shader_compute_task_struct.output_filename = "gpgpu_identity_output.data";
+        identity_shader_compute_task_struct.parent = identity_shader;
+        identity_shader_compute_task_struct.texture_width = 512;
+        identity_shader_compute_task_struct.texture_height = 512;
 
-        std::cout << "Creating yli::ontology::Entity* compute_task_entity ...\n";
-        yli::ontology::Entity* const compute_task_entity = entity_factory->create_ComputeTask(compute_task_struct);
-        std::cout << "Creating yli::ontology::ComputeTask* gpgpu_test_shader ...\n";
-        yli::ontology::ComputeTask* const compute_task = dynamic_cast<yli::ontology::ComputeTask*>(compute_task_entity);
+        std::cout << "Creating yli::ontology::Entity* identity_shader_compute_task_entity ...\n";
+        yli::ontology::Entity* const identity_shader_compute_task_entity = entity_factory->create_ComputeTask(identity_shader_compute_task_struct);
+        std::cout << "Creating yli::ontology::ComputeTask* identity_shader ...\n";
+        yli::ontology::ComputeTask* const identity_shader_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(identity_shader_compute_task_entity);
 
-        if (compute_task == nullptr)
+        if (identity_shader_compute_task == nullptr)
+        {
+            std::cerr << "Failed to create ComputeTask.\n";
+            return nullptr;
+        }
+
+        // Create the shader, store it in `sobel_shader`.
+        ShaderStruct sobel_shader_struct;
+        sobel_shader_struct.parent = gpgpu_test_scene;
+        sobel_shader_struct.vertex_shader = "identity.vert";
+        sobel_shader_struct.fragment_shader = "sobel_gradient_magnitude.frag";
+
+        std::cout << "Creating yli::ontology::Entity* sobel_shader_entity ...\n";
+        yli::ontology::Entity* const sobel_shader_entity = entity_factory->create_Shader(sobel_shader_struct);
+        std::cout << "Creating yli::ontology::Shader* sobel_shader ...\n";
+        yli::ontology::Shader* const sobel_shader = dynamic_cast<yli::ontology::Shader*>(sobel_shader_entity);
+
+        if (sobel_shader == nullptr)
+        {
+            std::cerr << "Failed to create Shader.\n";
+            return nullptr;
+        }
+
+        sobel_shader->set_name("sobel_shader");
+
+        ComputeTaskStruct sobel_shader_compute_task_struct;
+        sobel_shader_compute_task_struct.texture_file_format = "bmp";
+        sobel_shader_compute_task_struct.texture_filename = "numbers_123456_black_and_white.bmp";
+        sobel_shader_compute_task_struct.output_filename = "gpgpu_sobel_output.data";
+        sobel_shader_compute_task_struct.parent = sobel_shader;
+        sobel_shader_compute_task_struct.texture_width = 512;
+        sobel_shader_compute_task_struct.texture_height = 512;
+
+        std::cout << "Creating yli::ontology::Entity* sobel_shader_compute_task_entity ...\n";
+        yli::ontology::Entity* const sobel_shader_compute_task_entity = entity_factory->create_ComputeTask(sobel_shader_compute_task_struct);
+        std::cout << "Creating yli::ontology::ComputeTask* sobel_shader ...\n";
+        yli::ontology::ComputeTask* const sobel_shader_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(sobel_shader_compute_task_entity);
+
+        if (sobel_shader_compute_task == nullptr)
         {
             std::cerr << "Failed to create ComputeTask.\n";
             return nullptr;
