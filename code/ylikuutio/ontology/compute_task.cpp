@@ -167,7 +167,7 @@ namespace yli
             }
 
             // Transfer data from the GPU texture to a CPU array.
-            const std::size_t n_color_channels = 3;
+            const std::size_t n_color_channels = yli::opengl::get_n_color_channels(this->format);
             const std::size_t n_texels = this->texture_width * this->texture_height;
             const std::size_t n_elements = n_color_channels * n_texels;
             uint8_t* const result_array = new uint8_t[n_elements];

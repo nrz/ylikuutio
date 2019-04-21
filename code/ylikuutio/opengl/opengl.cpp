@@ -6,6 +6,7 @@
 #include "SDL.h"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 
 namespace yli
@@ -69,6 +70,42 @@ namespace yli
             else
             {
                 glPolygonMode(GL_FRONT, GL_FILL);
+            }
+        }
+
+        std::size_t get_n_color_channels(const GLenum format)
+        {
+            switch (format)
+            {
+                case GL_COLOR_INDEX:
+                    return 1;
+                case GL_STENCIL_INDEX:
+                    return 1;
+                case GL_DEPTH_COMPONENT:
+                    return 1;
+                case GL_RED:
+                    return 1;
+                case GL_GREEN:
+                    return 1;
+                case GL_BLUE:
+                    return 1;
+                case GL_ALPHA:
+                    return 1;
+                case GL_RGB:
+                    return 3;
+                case GL_BGR:
+                    return 3;
+                case GL_RGBA:
+                    return 3;
+                case GL_BGRA:
+                    return 3;
+                case GL_LUMINANCE:
+                    return 1;
+                case GL_LUMINANCE_ALPHA:
+                    return 2;
+                default:
+                    // Unknown or unsupported format.
+                    return 0;
             }
         }
     }
