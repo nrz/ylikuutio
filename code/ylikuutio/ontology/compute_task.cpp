@@ -172,9 +172,9 @@ namespace yli
             uint8_t* const result_array = new uint8_t[number_of_elements];
 
             glReadBuffer(GL_COLOR_ATTACHMENT0);
-            glReadPixels(0, 0, this->texture_width, this->texture_height, GL_RGB, GL_UNSIGNED_BYTE, result_array);
+            glReadPixels(0, 0, this->texture_width, this->texture_height, this->format, this->type, result_array);
 
-            yli::memory::flip_vertically(result_array, 3 * this->texture_width, this->texture_height); // For `GL_RGB`. TODO: add support for other formats!
+            yli::memory::flip_vertically(result_array, number_color_channels * this->texture_width, this->texture_height);
 
             this->result_vector = std::make_shared<std::vector<uint8_t>>(result_array, result_array + number_of_elements);
 
