@@ -108,5 +108,37 @@ namespace yli
                     return 0;
             }
         }
+
+        std::size_t get_size_of_component(const GLenum type)
+        {
+            // https://www.khronos.org/opengl/wiki/OpenGL_Type
+
+            switch (type)
+            {
+                case GL_BYTE:
+                    return 1;
+                case GL_UNSIGNED_BYTE:
+                    return 1;
+                case GL_SHORT:
+                    return 2;
+                case GL_UNSIGNED_SHORT:
+                    return 2;
+                case GL_INT:
+                    return 4;
+                case GL_UNSIGNED_INT:
+                    return 4;
+                case GL_FIXED:
+                    return 4;
+                case GL_HALF_FLOAT:
+                    return 2;
+                case GL_FLOAT:
+                    return 4;
+                case GL_DOUBLE:
+                    return 8;
+                default:
+                    // Unknown or unsupported type.
+                    return 0;
+            }
+        }
     }
 }

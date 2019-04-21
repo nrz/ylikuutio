@@ -22,6 +22,7 @@ namespace yli
         void set_filtering_parameters();
         void set_wireframe(const bool wireframe);
         std::size_t get_n_color_channels(const GLenum format);
+        std::size_t get_size_of_component(const GLenum type);
     }
 }
 
