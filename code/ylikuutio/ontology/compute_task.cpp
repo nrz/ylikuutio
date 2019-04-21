@@ -2,9 +2,10 @@
 #include "universe.hpp"
 #include "shader.hpp"
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/file/file_writer.hpp"
 #include "code/ylikuutio/memory/memory_templates.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/opengl/opengl.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -125,6 +126,7 @@ namespace yli
                 // Bind our texture in Texture Unit 0.
                 glActiveTexture(GL_TEXTURE0);
                 glBindTexture(GL_TEXTURE_2D, this->source_texture);
+
                 // Set our "my_texture_sampler" sampler to use Texture Unit 0.
                 glUniform1i(this->openGL_textureID, 0);
 
@@ -166,17 +168,18 @@ namespace yli
             }
 
             // Transfer data from the GPU texture to a CPU array.
-            const std::size_t number_color_channels = 3;
-            const std::size_t number_of_texels = this->texture_width * this->texture_height;
-            const std::size_t number_of_elements = number_color_channels * number_of_texels;
-            uint8_t* const result_array = new uint8_t[number_of_elements];
+            const std::size_t n_color_channels = yli::opengl::get_n_color_channels(this->format);
+            const std::size_t size_of_texel_in_bytes = n_color_channels * yli::opengl::get_size_of_component(this->type);
+            const std::size_t n_texels = this->texture_width * this->texture_height;
+            const std::size_t size_of_texture_in_bytes = size_of_texel_in_bytes * n_texels;
+            uint8_t* const result_array = new uint8_t[size_of_texture_in_bytes];
 
             glReadBuffer(GL_COLOR_ATTACHMENT0);
-            glReadPixels(0, 0, this->texture_width, this->texture_height, GL_RGB, GL_UNSIGNED_BYTE, result_array);
+            glReadPixels(0, 0, this->texture_width, this->texture_height, this->format, this->type, result_array);
 
-            yli::memory::flip_vertically(result_array, 3 * this->texture_width, this->texture_height); // For `GL_RGB`. TODO: add support for other formats!
+            yli::memory::flip_vertically(result_array, size_of_texel_in_bytes * this->texture_width, this->texture_height);
 
-            this->result_vector = std::make_shared<std::vector<uint8_t>>(result_array, result_array + number_of_elements);
+            this->result_vector = std::make_shared<std::vector<uint8_t>>(result_array, result_array + size_of_texture_in_bytes);
 
             if (!this->output_filename.empty())
             {

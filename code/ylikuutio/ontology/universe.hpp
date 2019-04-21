@@ -308,17 +308,17 @@ namespace yli
                     this->background_alpha = NAN;
 
                     // Variables related to the window.
-                    this->window        = nullptr;
-                    this->window_width  = universe_struct.window_width;
-                    this->window_height = universe_struct.window_height;
+                    this->window             = nullptr;
+                    this->window_width       = universe_struct.window_width;
+                    this->window_height      = universe_struct.window_height;
                     this->framebuffer_width  = universe_struct.framebuffer_width;
                     this->framebuffer_height = universe_struct.framebuffer_height;
-                    this->window_title  = universe_struct.window_title;
-                    this->is_headless   = universe_struct.is_headless;
+                    this->window_title       = universe_struct.window_title;
+                    this->is_headless        = universe_struct.is_headless;
 
                     // variables related to the framebuffer.
-                    this->framebuffer = 0;
-                    this->texture = 0;
+                    this->framebuffer  = 0;
+                    this->texture      = 0;
                     this->renderbuffer = 0;
                     this->is_framebuffer_initialized = false;
 
@@ -334,8 +334,8 @@ namespace yli
                     this->text_size = universe_struct.text_size;
                     this->font_size = universe_struct.font_size;
 
-                    this->max_FPS                              = universe_struct.max_FPS;
-                    this->delta_time                           = NAN;
+                    this->max_FPS    = universe_struct.max_FPS;
+                    this->delta_time = NAN;
 
                     // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
                     this->last_time_before_reading_keyboard    = std::numeric_limits<uint32_t>::max();
@@ -357,18 +357,18 @@ namespace yli
                     this->speed       = universe_struct.speed;
                     this->mouse_speed = universe_struct.mouse_speed;
 
-                    this->gravity    = universe_struct.gravity;
-                    this->fall_speed = this->gravity;
+                    this->gravity     = universe_struct.gravity;
+                    this->fall_speed  = this->gravity;
 
-                    this->znear      = universe_struct.znear;
-                    this->zfar       = universe_struct.zfar;
+                    this->znear       = universe_struct.znear;
+                    this->zfar        = universe_struct.zfar;
 
                     this->testing_spherical_terrain_in_use = false;
                     this->in_help_mode                     = true;
                     this->can_toggle_help_mode             = false;
                     this->can_display_help_screen          = true;
 
-                    this->number_of_worlds = 0;
+                    this->number_of_worlds  = 0;
                     this->number_of_font2Ds = 0;
 
                     this->context = nullptr;
@@ -506,10 +506,10 @@ namespace yli
                 yli::ontology::EntityFactory* get_entity_factory() const;
 
                 const glm::mat4& get_projection_matrix() const;
-                void set_projection_matrix(glm::mat4& projection_matrix);
+                void set_projection_matrix(const glm::mat4& projection_matrix);
 
                 const glm::mat4& get_view_matrix() const;
-                void set_view_matrix(glm::mat4& view_matrix);
+                void set_view_matrix(const glm::mat4& view_matrix);
 
                 float get_aspect_ratio() const;
                 float get_initialFoV() const;

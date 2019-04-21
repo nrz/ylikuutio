@@ -136,6 +136,7 @@ namespace yli
             // Bind our texture in Texture Unit 0.
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, this->texture);
+
             // Set our "my_texture_sampler" sampler to use Texture Unit 0.
             glUniform1i(this->openGL_textureID, 0);
 

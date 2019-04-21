@@ -24,16 +24,17 @@
 #include "ground_level.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/common/pi.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/console/console.hpp"
-#include "code/ylikuutio/scheme/scheme_master.hpp"
+#include "code/ylikuutio/file/file_writer.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
-#include "code/ylikuutio/file/file_writer.hpp"
 #include "code/ylikuutio/memory/memory_templates.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/common/pi.hpp"
+#include "code/ylikuutio/opengl/opengl.hpp"
+#include "code/ylikuutio/scheme/scheme_master.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include GLEW
@@ -740,17 +741,17 @@ namespace yli
                 universe->render_without_changing_depth_test(); // Render to framebuffer.
 
                 // Transfer data from the GPU texture to a CPU array.
-                const std::size_t number_color_channels = 3;
-                const std::size_t number_of_texels = texture_width * texture_height;
-                const std::size_t number_of_elements = number_color_channels * number_of_texels;
-                uint8_t* const result_array = new uint8_t[number_of_elements];
+                const std::size_t n_color_channels = 3;
+                const std::size_t n_texels = texture_width * texture_height;
+                const std::size_t n_elements = n_color_channels * n_texels;
+                uint8_t* const result_array = new uint8_t[n_elements];
 
                 glReadBuffer(GL_COLOR_ATTACHMENT0);
                 glReadPixels(0, 0, texture_width, texture_height, GL_RGB, GL_UNSIGNED_BYTE, result_array);
 
                 yli::memory::flip_vertically(result_array, 3 * texture_width, texture_height);
 
-                const std::vector<uint8_t> result_vector(result_array, result_array + number_of_elements);
+                const std::vector<uint8_t> result_vector(result_array, result_array + n_elements);
 
                 yli::file::binary_write(result_vector, filename);
 
@@ -819,7 +820,7 @@ namespace yli
             return this->current_camera_projection_matrix;
         }
 
-        void Universe::set_projection_matrix(glm::mat4& projection_matrix)
+        void Universe::set_projection_matrix(const glm::mat4& projection_matrix)
         {
             this->current_camera_projection_matrix = projection_matrix;
         }
@@ -829,7 +830,7 @@ namespace yli
             return this->current_camera_view_matrix;
         }
 
-        void Universe::set_view_matrix(glm::mat4& view_matrix)
+        void Universe::set_view_matrix(const glm::mat4& view_matrix)
         {
             this->current_camera_view_matrix = view_matrix;
         }

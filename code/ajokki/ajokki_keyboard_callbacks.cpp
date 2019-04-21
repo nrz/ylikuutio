@@ -38,6 +38,16 @@ namespace ajokki
 
     bool move_to_direction(const yli::callback_system::CallbackObject* const callback_object, const glm::vec3& moving_direction)
     {
+        // Movement changes location and orientation variables stored in `yli::ontology::Universe`.
+        // This way there is no need to dereference pointer to the current `yli::ontology::Camera`.
+        // When the current `Camera` is changed, then the location and orientation data is copied
+        // from `Universe` to the previous `Camera`.
+        //
+        // Also, location and orientation variables' read callbacks need to check if the referred
+        // `Scene` is the current `Scene`. If true, then get and return the location or orientation
+        // variable in question from the `Universe`, otherwise return the location or orientation
+        // variable from the `Scene`'s own member variable.
+
         const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
