@@ -740,9 +740,9 @@ namespace yli
                 universe->render_without_changing_depth_test(); // Render to framebuffer.
 
                 // Transfer data from the GPU texture to a CPU array.
-                const std::size_t number_color_channels = 3;
+                const std::size_t number_of_color_channels = 3;
                 const std::size_t number_of_texels = texture_width * texture_height;
-                const std::size_t number_of_elements = number_color_channels * number_of_texels;
+                const std::size_t number_of_elements = number_of_color_channels * number_of_texels;
                 uint8_t* const result_array = new uint8_t[number_of_elements];
 
                 glReadBuffer(GL_COLOR_ATTACHMENT0);
