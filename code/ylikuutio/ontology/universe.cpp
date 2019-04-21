@@ -830,7 +830,7 @@ namespace yli
             return this->current_camera_view_matrix;
         }
 
-        void Universe::set_view_matrix(glm::mat4& view_matrix)
+        void Universe::set_view_matrix(const glm::mat4& view_matrix)
         {
             this->current_camera_view_matrix = view_matrix;
         }
