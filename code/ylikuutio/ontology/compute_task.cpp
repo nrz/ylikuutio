@@ -166,15 +166,15 @@ namespace yli
             }
 
             // Transfer data from the GPU texture to a CPU array.
-            const std::size_t number_color_channels = 3;
+            const std::size_t number_of_color_channels = 3;
             const std::size_t number_of_texels = this->texture_width * this->texture_height;
-            const std::size_t number_of_elements = number_color_channels * number_of_texels;
+            const std::size_t number_of_elements = number_of_color_channels * number_of_texels;
             uint8_t* const result_array = new uint8_t[number_of_elements];
 
             glReadBuffer(GL_COLOR_ATTACHMENT0);
             glReadPixels(0, 0, this->texture_width, this->texture_height, this->format, this->type, result_array);
 
-            yli::memory::flip_vertically(result_array, number_color_channels * this->texture_width, this->texture_height);
+            yli::memory::flip_vertically(result_array, number_of_color_channels * this->texture_width, this->texture_height);
 
             this->result_vector = std::make_shared<std::vector<uint8_t>>(result_array, result_array + number_of_elements);
 
