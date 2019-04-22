@@ -4,10 +4,12 @@
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
+#include "code/ylikuutio/ontology/camera.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/species_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
+#include "code/ylikuutio/ontology/camera_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 
 // Include GLM
@@ -182,6 +184,25 @@ namespace ajokki
         }
 
         horse1->set_name("horse1");
+
+        CameraStruct horse_camera_struct;
+        horse_camera_struct.cartesian_coordinates = glm::vec3(2303.00f, 201.00f, 1822.00f);
+        horse_camera_struct.parent = joensuu_center_west_scene;
+        horse_camera_struct.horizontal_angle = -0.97f;
+        horse_camera_struct.vertical_angle = -0.18f;
+
+        std::cout << "Creating yli::ontology::Entity* horse_camera_entity ...\n";
+        yli::ontology::Entity* const horse_camera_entity = entity_factory->create_Camera(horse_camera_struct);
+        std::cout << "Creating yli::ontology::Camera* horse_camera ...\n";
+        yli::ontology::Camera* const horse_camera = dynamic_cast<yli::ontology::Camera*>(horse_camera_entity);
+
+        if (horse_camera == nullptr)
+        {
+            std::cerr << "Failed to create horse_camera Camera.\n";
+            return nullptr;
+        }
+
+        horse_camera->set_name("horse_camera");
 
         return joensuu_center_west_scene_entity;
         // Joensuu `Scene` ends here.

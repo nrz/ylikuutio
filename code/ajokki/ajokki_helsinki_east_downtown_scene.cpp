@@ -11,12 +11,14 @@
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/vector_font.hpp"
+#include "code/ylikuutio/ontology/camera.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/species_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/symbiosis_struct.hpp"
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
+#include "code/ylikuutio/ontology/camera_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 
 // Include GLM
@@ -529,6 +531,44 @@ namespace ajokki
         text3D_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         text3D_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_Text3D(text3D_struct);
+
+        CameraStruct cat_camera_struct;
+        cat_camera_struct.cartesian_coordinates = glm::vec3(800.00f, 400.00f, 950.00f);
+        cat_camera_struct.parent = helsinki_east_downtown_scene;
+        cat_camera_struct.horizontal_angle = -0.90f;
+        cat_camera_struct.vertical_angle = -1.00f;
+
+        std::cout << "Creating yli::ontology::Entity* cat_camera_entity ...\n";
+        yli::ontology::Entity* const cat_camera_entity = entity_factory->create_Camera(cat_camera_struct);
+        std::cout << "Creating yli::ontology::Camera* cat_camera ...\n";
+        yli::ontology::Camera* const cat_camera = dynamic_cast<yli::ontology::Camera*>(cat_camera_entity);
+
+        if (cat_camera == nullptr)
+        {
+            std::cerr << "Failed to create cat_camera Camera.\n";
+            return nullptr;
+        }
+
+        cat_camera->set_name("cat_camera");
+
+        CameraStruct turbo_polizei_camera_struct;
+        turbo_polizei_camera_struct.cartesian_coordinates = glm::vec3(87.00f, 28.00f, 169.00f);
+        turbo_polizei_camera_struct.parent = helsinki_east_downtown_scene;
+        turbo_polizei_camera_struct.horizontal_angle = -0.45f;
+        turbo_polizei_camera_struct.vertical_angle = -0.05f;
+
+        std::cout << "Creating yli::ontology::Entity* turbo_polizei_camera_entity ...\n";
+        yli::ontology::Entity* const turbo_polizei_camera_entity = entity_factory->create_Camera(turbo_polizei_camera_struct);
+        std::cout << "Creating yli::ontology::Camera* turbo_polizei_camera ...\n";
+        yli::ontology::Camera* const turbo_polizei_camera = dynamic_cast<yli::ontology::Camera*>(turbo_polizei_camera_entity);
+
+        if (turbo_polizei_camera == nullptr)
+        {
+            std::cerr << "Failed to create turbo_polizei_camera Camera.\n";
+            return nullptr;
+        }
+
+        turbo_polizei_camera->set_name("turbo_polizei_camera");
 
         return helsinki_east_downtown_scene_entity;
         // Helsinki `Scene` ends here.
