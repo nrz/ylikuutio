@@ -39,5 +39,11 @@ namespace yli
         {
             SDL_GL_MakeCurrent(window, context);
         }
+
+        void flush_sdl_event_queue()
+        {
+            SDL_Event sdl_event;
+            while (SDL_PollEvent(&sdl_event));
+        }
     }
 }
