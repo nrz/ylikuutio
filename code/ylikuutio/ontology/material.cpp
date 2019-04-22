@@ -131,6 +131,11 @@ namespace yli
 
         void Material::render()
         {
+            if (!this->should_be_rendered)
+            {
+                return;
+            }
+
             this->prerender();
 
             // Bind our texture in Texture Unit 0.

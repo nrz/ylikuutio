@@ -1,8 +1,11 @@
 #include "shader_priority_queue.hpp"
+#include "shader.hpp"
+#include "shader_compare.hpp"
 
 // Include standard headers
-#include <cstddef> // std::size_t
-#include <queue>   // std::priority_queue, std::queue
+#include <algorithm> // std::make_heap etc.
+#include <cstddef>   // std::size_t
+#include <queue>     // std::priority_queue, std::queue
 
 namespace yli
 {

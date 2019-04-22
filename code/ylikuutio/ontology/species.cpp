@@ -141,7 +141,7 @@ namespace yli
 
         void Species::render()
         {
-            if (this->vram_buffer_in_use)
+            if (this->should_be_rendered && this->vram_buffer_in_use)
             {
                 this->prerender();
 

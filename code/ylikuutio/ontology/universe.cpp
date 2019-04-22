@@ -20,6 +20,7 @@
 #include "entity.hpp"
 #include "world.hpp"
 #include "scene.hpp"
+#include "camera.hpp"
 #include "font2D.hpp"
 #include "ground_level.hpp"
 #include "render_templates.hpp"
@@ -120,6 +121,11 @@ namespace yli
 
         void Universe::render()
         {
+            if (!this->should_be_rendered)
+            {
+                return;
+            }
+
             this->prerender();
 
             if (this->active_world != nullptr)
@@ -199,6 +205,20 @@ namespace yli
                 this->twin_turbo_factor = this->active_world->get_active_scene()->get_twin_turbo_factor();
                 this->terrain_species = this->active_world->get_active_scene()->get_terrain_species();
             }
+        }
+
+        void Universe::set_active_camera(yli::ontology::Camera* const camera) const
+        {
+            // Setting the active `Camera` does not change the active `Scene`!
+
+            yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(camera->get_parent());
+
+            if (scene == nullptr)
+            {
+                return; // `camera` has no parent.
+            }
+
+            scene->set_active_camera(camera);
         }
 
         std::size_t Universe::get_number_of_worlds() const
@@ -445,19 +465,20 @@ namespace yli
                 yli::ontology::Entity* entity = universe->entity_map[name];
                 yli::ontology::World* const world = dynamic_cast<yli::ontology::World*>(entity);
                 yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(entity);
+                yli::ontology::Camera* const camera = dynamic_cast<yli::ontology::Camera*>(entity);
 
-                if (world == nullptr && scene == nullptr)
+                if (world == nullptr && scene == nullptr && camera == nullptr)
                 {
-                    // The named `Entity` is neither a `World` nor a `Scene`.
+                    // The named `Entity` is neither a `World`, a `Scene`, nor a `Camera`.
                     return nullptr;
                 }
 
-                if (world != nullptr && scene == nullptr)
+                if (world != nullptr && scene == nullptr && camera == nullptr)
                 {
                     // The named `Entity` is a `World`.
                     universe->set_active_world(world);
                 }
-                else if (scene != nullptr && world == nullptr)
+                else if (scene != nullptr && world == nullptr && camera == nullptr)
                 {
                     // The named `Entity` is a `Scene`.
                     yli::ontology::World* const world_parent_of_scene = scene->get_world_parent();
@@ -467,6 +488,11 @@ namespace yli
                         universe->set_active_world(world_parent_of_scene);
                         universe->set_active_scene(scene);
                     }
+                }
+                else if (camera != nullptr && world == nullptr && scene == nullptr)
+                {
+                    // The named `Entity` is a `Camera`.
+                    universe->set_active_camera(camera);
                 }
             }
             return nullptr;

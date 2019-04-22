@@ -143,15 +143,50 @@ namespace yli
 
         void Scene::set_active_camera(yli::ontology::Camera* camera)
         {
+            // It is OK to disactivate the active camera by setting `active_camera` to `nullptr`.
             this->active_camera = camera;
 
-            if (this->active_camera != nullptr)
+            // requirements for further actions:
+            // `this->universe` must not be `nullptr`.
+            // `this->parent` must not be `nullptr`.
+
+            if (this->universe == nullptr || this->parent == nullptr)
             {
-                this->universe->current_camera_cartesian_coordinates = camera->get_cartesian_coordinates();
-                this->universe->set_projection_matrix(camera->get_projection_matrix());
-                this->universe->set_view_matrix(camera->get_view_matrix());
-                this->universe->current_camera_horizontal_angle = camera->get_horizontal_angle();
-                this->universe->current_camera_vertical_angle = camera->get_vertical_angle();
+                return;
+            }
+
+            yli::ontology::World* const active_world = this->universe->get_active_world();
+
+            if (active_world == nullptr)
+            {
+                return;
+            }
+
+            yli::ontology::Scene* const active_scene = active_world->get_active_scene();
+
+            if (active_scene == nullptr)
+            {
+                return;
+            }
+
+            if (active_scene == this)
+            {
+                if (this->active_camera != nullptr)
+                {
+                    this->universe->current_camera_cartesian_coordinates = camera->get_cartesian_coordinates();
+                    this->universe->set_projection_matrix(camera->get_projection_matrix());
+                    this->universe->set_view_matrix(camera->get_view_matrix());
+                    this->universe->current_camera_horizontal_angle = camera->get_horizontal_angle();
+                    this->universe->current_camera_vertical_angle = camera->get_vertical_angle();
+                }
+                else
+                {
+                    this->universe->current_camera_cartesian_coordinates = glm::vec3(NAN, NAN, NAN);
+                    this->universe->set_projection_matrix(glm::mat4(NAN));
+                    this->universe->set_view_matrix(glm::mat4(NAN));
+                    this->universe->current_camera_horizontal_angle = NAN;
+                    this->universe->current_camera_vertical_angle = NAN;
+                }
             }
         }
 

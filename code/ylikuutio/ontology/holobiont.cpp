@@ -117,7 +117,7 @@ namespace yli
         {
             // render this `Holobiont`.
 
-            if (this->should_ylikuutio_render_this_holobiont)
+            if (this->should_be_rendered)
             {
                 this->prerender();
 

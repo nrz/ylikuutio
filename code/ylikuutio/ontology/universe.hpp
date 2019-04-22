@@ -275,6 +275,7 @@ namespace yli
         class World;
         class Scene;
         class Species;
+        class Camera;
         class Font2D;
 
         class Universe: public yli::ontology::Entity
@@ -432,6 +433,10 @@ namespace yli
 
                 // this method sets the active `Scene`.
                 void set_active_scene(yli::ontology::Scene* const world);
+
+                // this method sets the active `Camera`.
+                // Setting the active `Camera` does not change the active `Scene`!
+                void set_active_camera(yli::ontology::Camera* const camera) const;
 
                 std::string eval_string(const std::string& my_string);
 

@@ -207,7 +207,7 @@ namespace yli
         {
             // render this `Object`.
 
-            if (this->should_ylikuutio_render_this_object)
+            if (this->should_be_rendered)
             {
                 this->prerender();
 

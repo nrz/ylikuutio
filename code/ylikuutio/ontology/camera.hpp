@@ -13,7 +13,6 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <queue>    // std::queue
@@ -34,8 +33,8 @@ namespace yli
                 {
                     // constructor.
 
-                    this->horizontal_angle  = NAN;
-                    this->vertical_angle    = NAN;
+                    this->horizontal_angle  = camera_struct.horizontal_angle;
+                    this->vertical_angle    = camera_struct.vertical_angle;
 
                     // variables related to the projection.
                     this->projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).

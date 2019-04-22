@@ -77,8 +77,11 @@ namespace yli
 
         void ChunkMaster::render()
         {
-            // render `ChunkMaster` by calling `render()` function of each `Chunk`.
-            yli::ontology::render_children<ontology::Chunk*>(this->chunk_pointer_vector);
+            if (this->should_be_rendered)
+            {
+                // render `ChunkMaster` by calling `render()` function of each `Chunk`.
+                yli::ontology::render_children<ontology::Chunk*>(this->chunk_pointer_vector);
+            }
         }
     }
 }

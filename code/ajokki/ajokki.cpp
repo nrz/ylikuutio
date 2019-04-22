@@ -847,6 +847,8 @@ int main(const int argc, const char* const argv[])
     std::cout << "Setting up debug variables ...\n";
     ajokki::set_debug_variables(my_universe->get_setting_master());
 
+    yli::sdl::flush_sdl_event_queue();
+
     while (!is_exit_requested)
     {
         const double current_time_in_main_loop = yli::time::get_time();
