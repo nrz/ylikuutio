@@ -138,12 +138,15 @@ namespace yli
 
         void VectorFont::render()
         {
-            this->prerender();
+            if (this->should_be_rendered)
+            {
+                this->prerender();
 
-            // Render this `VectorFont` by calling `render()` function of each `Glyph`.
-            yli::ontology::render_children<yli::ontology::Glyph*>(this->glyph_pointer_vector);
+                // Render this `VectorFont` by calling `render()` function of each `Glyph`.
+                yli::ontology::render_children<yli::ontology::Glyph*>(this->glyph_pointer_vector);
 
-            this->postrender();
+                this->postrender();
+            }
         }
 
         yli::ontology::Entity* VectorFont::get_parent() const
