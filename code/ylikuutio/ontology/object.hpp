@@ -63,10 +63,6 @@ namespace yli
 
                     this->has_entered           = false;
 
-                    // enable rendering of a recently entered `Object`.
-                    // TODO: enable entering without enabling rendering.
-                    this->should_ylikuutio_render_this_object = true;
-
                     this->is_character          = object_struct.is_character;
                     this->quaternions_in_use    = object_struct.quaternions_in_use;
 
@@ -121,7 +117,6 @@ namespace yli
                 bool is_character;
                 bool quaternions_in_use;
                 bool has_entered;
-                bool should_ylikuutio_render_this_object;
 
                 glm::vec3 original_scale_vector;        // original scale vector.
                 glm::vec3 rotate_vector;                // rotate vector.
