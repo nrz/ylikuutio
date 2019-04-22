@@ -163,6 +163,11 @@ namespace yli
 
         void Shader::render()
         {
+            if (!this->should_be_rendered)
+            {
+                return;
+            }
+
             this->prerender();
 
             // [Re]bind `programID` shader.
