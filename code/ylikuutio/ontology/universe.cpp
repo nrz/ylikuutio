@@ -121,6 +121,11 @@ namespace yli
 
         void Universe::render()
         {
+            if (!this->should_be_rendered)
+            {
+                return;
+            }
+
             this->prerender();
 
             if (this->active_world != nullptr)
