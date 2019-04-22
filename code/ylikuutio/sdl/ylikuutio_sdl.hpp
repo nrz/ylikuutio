@@ -1,5 +1,5 @@
-#ifndef __SDL_HPP_INCLUDED
-#define __SDL_HPP_INCLUDED
+#ifndef __YLIKUUTIO_SDL_HPP_INCLUDED
+#define __YLIKUUTIO_SDL_HPP_INCLUDED
 
 #include "SDL.h"
 
