@@ -2,6 +2,7 @@
 #include "shader_compare.hpp"
 
 // Include standard headers
+#include <algorithm> // std::make_heap etc.
 #include <cstddef> // std::size_t
 #include <queue>   // std::priority_queue, std::queue
 

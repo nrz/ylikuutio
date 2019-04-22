@@ -7,6 +7,7 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <queue>   // std::priority_queue, std::queue
+#include <vector>  // std::vector
 
 namespace yli
 {
