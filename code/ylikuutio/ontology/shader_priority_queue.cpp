@@ -1,4 +1,5 @@
 #include "shader_priority_queue.hpp"
+#include "shader.hpp"
 #include "shader_compare.hpp"
 
 // Include standard headers
