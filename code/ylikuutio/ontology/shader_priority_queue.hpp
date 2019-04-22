@@ -2,7 +2,6 @@
 #define __SHADER_PRIORITY_QUEUE_HPP_INCLUDED
 
 #include "code/ylikuutio/ontology/shader.hpp"
-#include "code/ylikuutio/ontology/shader_compare.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
