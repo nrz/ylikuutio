@@ -13,7 +13,6 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <queue>    // std::queue
