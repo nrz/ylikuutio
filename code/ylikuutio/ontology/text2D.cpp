@@ -82,6 +82,11 @@ namespace yli
 
         void Text2D::render()
         {
+            if (!this->should_be_rendered)
+            {
+                return;
+            }
+
             // If horizontal alignment is `"left"`, each line begins from the same x coordinate.
             // If horizontal alignment is `"left"` and vertical alignment is `"top"`,
             // then there is no need to check the text beforehand for newlines.
