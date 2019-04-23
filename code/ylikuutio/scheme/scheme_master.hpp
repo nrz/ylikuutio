@@ -19,7 +19,7 @@ namespace yli
                 // destructor.
                 ~SchemeMaster();
 
-                std::string eval_string(const std::string& my_string);
+                std::string eval_string(const std::string& my_string) const;
 
             private:
                 s7_scheme* s7;
