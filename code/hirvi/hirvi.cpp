@@ -614,6 +614,7 @@ int main(const int argc, const char* const argv[])
     my_console->add_command_callback("sayonara", &ajokki::quit);
 
     // Other callbacks.
+    my_console->add_command_callback("eval", &yli::ontology::Universe::eval);
     my_console->add_command_callback("help", &ajokki::help);
     my_console->add_command_callback("version", &ajokki::version);
     my_console->add_command_callback("clear", &yli::console::Console::clear);
