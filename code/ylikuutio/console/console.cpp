@@ -367,18 +367,79 @@ namespace yli
 
                 if ((modifiers & shift_bitmask) != 0)
                 {
-                    if (keyboard_char == '-')
+                    // Before a support for different keyboard layouts in implemented,
+                    // use US QWERTY layout as reference.
+                    switch (keyboard_char)
                     {
-                        this->cursor_it = this->current_input.insert(this->cursor_it, '_');
-                    }
-                    else if (keyboard_char >= 'a' && keyboard_char <= 'z')
-                    {
-                        this->cursor_it = this->current_input.insert(this->cursor_it, keyboard_char - ('a' - 'A'));
-                    }
-                    else
-                    {
-                        // No support for other Shift key combinations yet.
-                        return;
+                        case '`':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '~');
+                            break;
+                        case '1':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '!');
+                            break;
+                        case '2':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '@');
+                            break;
+                        case '3':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '#');
+                            break;
+                        case '4':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '$');
+                            break;
+                        case '5':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '%');
+                            break;
+                        case '6':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '^');
+                            break;
+                        case '7':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '&');
+                            break;
+                        case '8':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '*');
+                            break;
+                        case '9':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '(');
+                            break;
+                        case '0':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, ')');
+                            break;
+                        case '-':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '_');
+                            break;
+                        case '=':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '+');
+                            break;
+                        case '[':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '{');
+                            break;
+                        case ']':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '}');
+                            break;
+                        case '\\':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '|');
+                            break;
+                        case ';':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, ':');
+                            break;
+                        case '\'':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '"');
+                            break;
+                        case ',':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '<');
+                            break;
+                        case '.':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '>');
+                            break;
+                        case '/':
+                            this->cursor_it = this->current_input.insert(this->cursor_it, '?');
+                            break;
+                        default:
+                            if (keyboard_char >= 'a' && keyboard_char <= 'z')
+                            {
+                                this->cursor_it = this->current_input.insert(this->cursor_it, keyboard_char - ('a' - 'A'));
+                            }
+                            break;
                     }
                 }
                 else
