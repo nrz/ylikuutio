@@ -21,10 +21,10 @@ namespace yli
             free(this->s7);
         }
 
-        std::string SchemeMaster::eval_string(const std::string& my_string)
+        std::string SchemeMaster::eval_string(const std::string& my_string) const
         {
             s7_pointer my_s7_pointer = s7_eval_c_string(this->s7, my_string.c_str());
-            const char* const output = s7_get_output_string(this->s7, my_s7_pointer);
+            const char* const output = s7_object_to_c_string(this->s7, my_s7_pointer);
             return std::string(output);
         }
     }

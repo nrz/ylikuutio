@@ -789,6 +789,43 @@ namespace yli
             return nullptr;
         }
 
+        std::shared_ptr<yli::datatypes::AnyValue> Universe::eval(
+                yli::console::Console* const console,
+                yli::ontology::Entity* const universe_entity,
+                const std::vector<std::string>& command_parameters)
+        {
+            if (console == nullptr || universe_entity == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            // Command parameters must form a valid Scheme expression.
+
+            std::string expression;
+
+            for (std::vector<std::string>::const_iterator it = command_parameters.begin(); it != command_parameters.end(); )
+            {
+                expression += *it;
+
+                if (++it != command_parameters.end())
+                {
+                    expression += " ";
+                }
+            }
+
+            const std::string result = universe->eval_string(expression);
+            console->print_text(result);
+
+            return nullptr;
+        }
+
         // Public callbacks end here.
 
         std::string Universe::eval_string(const std::string& my_string)
