@@ -546,6 +546,11 @@ namespace yli
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
+                static std::shared_ptr<yli::datatypes::AnyValue> eval(
+                        yli::console::Console* const console,
+                        yli::ontology::Entity* const universe_entity,
+                        const std::vector<std::string>& command_parameters);
+
                 // Public callbacks end here.
 
                 // Variables related to location and orientation.
