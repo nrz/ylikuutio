@@ -109,7 +109,10 @@ namespace yli
             yli::hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, this->number_of_worlds);
 
             delete this->console;
-            delete this->active_font2D;
+
+            // destroy all `Font2D`s of this `Universe`.
+            std::cout << "All 2D fonts of this universe will be destroyed.\n";
+            yli::hierarchy::delete_children<yli::ontology::Font2D*>(this->font2D_pointer_vector, this->number_of_font2Ds);
 
             SDL_Quit();
         }
