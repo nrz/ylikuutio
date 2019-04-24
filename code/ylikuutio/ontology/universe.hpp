@@ -284,6 +284,8 @@ namespace yli
                 void bind_world(yli::ontology::World* const world);
                 void bind_font2D(yli::ontology::Font2D* const font2D);
 
+                void unbind_world(const std::size_t childID);
+
                 // constructor.
                 Universe(const UniverseStruct& universe_struct)
                     : Entity(this) // `Universe` has no parent.

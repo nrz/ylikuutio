@@ -92,6 +92,15 @@ namespace yli
                     this->number_of_font2Ds);
         }
 
+        void Universe::unbind_world(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->world_pointer_vector,
+                    this->free_worldID_queue,
+                    this->number_of_worlds);
+        }
+
         Universe::~Universe()
         {
             // destructor.
