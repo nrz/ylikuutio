@@ -16,6 +16,9 @@ namespace yli
                 // constructor.
                 SchemeMaster();
 
+                SchemeMaster(const SchemeMaster&) = delete;            // Delete copy constructor.
+                SchemeMaster &operator=(const SchemeMaster&) = delete; // Delete copy assignment.
+
                 // destructor.
                 ~SchemeMaster();
 

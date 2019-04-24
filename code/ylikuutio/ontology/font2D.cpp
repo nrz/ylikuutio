@@ -84,6 +84,20 @@ namespace yli
             // Destroy all texts of this `Font2D`.
             std::cout << "All texts of this font will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Text2D*>(this->text2D_pointer_vector, this->number_of_text2Ds);
+
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+
+            yli::ontology::Universe* const universe = this->parent;
+
+            if (universe == nullptr)
+            {
+                std::cerr << "ERROR: `Font2D::~Font2D`: `universe` is `nullptr`!\n";
+                return;
+            }
+
+            // set pointer to this `Font2D` to `nullptr`.
+            universe->unbind_font2D(this->childID);
         }
 
         yli::ontology::Entity* Font2D::get_parent() const

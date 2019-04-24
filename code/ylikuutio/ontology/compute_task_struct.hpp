@@ -34,8 +34,10 @@ typedef struct ComputeTaskStruct
         compute_taskID(std::numeric_limits<std::size_t>::max()), // `std::numeric_limits<std::size_t>::max()` means that `compute_taskID` is not defined.
         texture_width(0),
         texture_height(0),
+        n_index_characters(4),
         format(GL_RGB),
         type(GL_UNSIGNED_BYTE),
+        should_ylikuutio_save_intermediate_results(false),
         preiterate_callback(nullptr),
         postiterate_callback(nullptr)
     {
@@ -51,8 +53,10 @@ typedef struct ComputeTaskStruct
     std::size_t compute_taskID;
     std::size_t texture_width;
     std::size_t texture_height;
+    std::size_t n_index_characters;  // For intermediate results' filenames.
     GLenum format;
     GLenum type;
+    bool should_ylikuutio_save_intermediate_results;
     PreIterateCallback preiterate_callback;
     PostIterateCallback postiterate_callback;
 } TextureStruct;

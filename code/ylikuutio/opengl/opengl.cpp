@@ -1,4 +1,5 @@
 #include "opengl.hpp"
+#include "code/ylikuutio/memory/memory_templates.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -8,6 +9,9 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <memory>   // std::make_shared, std::shared_ptr
+#include <stdint.h> // uint32_t etc.
+#include <vector>   // std::vector
 
 namespace yli
 {
@@ -139,6 +143,31 @@ namespace yli
                     // Unknown or unsupported type.
                     return 0;
             }
+        }
+
+        std::shared_ptr<std::vector<uint8_t>> copy_data_from_gpu_texture_to_cpu_array(
+                GLenum format,
+                GLenum type,
+                std::size_t texture_width,
+                std::size_t texture_height)
+        {
+            // Transfer data from the GPU texture to a CPU array.
+            const std::size_t n_color_channels = yli::opengl::get_n_color_channels(format);
+            const std::size_t size_of_texel_in_bytes = n_color_channels * yli::opengl::get_size_of_component(type);
+            const std::size_t n_texels = texture_width * texture_height;
+            const std::size_t size_of_texture_in_bytes = size_of_texel_in_bytes * n_texels;
+            uint8_t* const result_array = new uint8_t[size_of_texture_in_bytes];
+
+            glReadBuffer(GL_COLOR_ATTACHMENT0);
+            glReadPixels(0, 0, texture_width, texture_height, format, type, result_array);
+
+            yli::memory::flip_vertically(result_array, size_of_texel_in_bytes * texture_width, texture_height);
+
+            std::shared_ptr<std::vector<uint8_t>> result_vector = std::make_shared<std::vector<uint8_t>>(result_array, result_array + size_of_texture_in_bytes);
+
+            delete[] result_array;
+
+            return result_vector;
         }
     }
 }

@@ -51,6 +51,8 @@ namespace yli
 
                 bool should_be_rendered;
 
+                friend yli::ontology::Universe;
+
             protected:
                 void prerender() const;
                 void postrender() const;
@@ -58,6 +60,7 @@ namespace yli
                 yli::ontology::Universe* universe;                          // pointer to the `Universe`.
                 std::shared_ptr<yli::config::SettingMaster> setting_master; // pointer to the `SettingMaster`.
                 std::vector<void*> child_vector_pointers_vector;
+                std::size_t entityID;
                 std::size_t childID; // TODO: add checks for `std::numeric_limits<std::size_t>::max();` (invalid value).
 
                 std::string type_string;
@@ -68,6 +71,9 @@ namespace yli
 
                 PreRenderCallback prerender_callback;
                 PostRenderCallback postrender_callback;
+
+            private:
+                void bind_to_universe();
         };
     }
 }

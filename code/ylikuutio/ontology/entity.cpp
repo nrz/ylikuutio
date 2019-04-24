@@ -16,6 +16,22 @@ namespace yli
 {
     namespace ontology
     {
+        void Entity::bind_to_universe()
+        {
+            // Requirements:
+            // `this->universe` must not be `nullptr`.
+            yli::ontology::Universe* const universe = this->universe;
+
+            if (universe == nullptr)
+            {
+                std::cerr << "ERROR: `Entity::bind_to_universe`: `universe` is `nullptr`!\n";
+                return;
+            }
+
+            // Get `entityID` from the `Universe` and set pointer to this `Entity`.
+            universe->bind_entity(this);
+        }
+
         void Entity::bind_to_new_parent(yli::ontology::Entity* new_entity_parent)
         {
             // Do nothing.
@@ -26,8 +42,12 @@ namespace yli
         Entity::Entity(yli::ontology::Universe* const universe)
         {
             // constructor.
-            this->childID = std::numeric_limits<std::size_t>::max(); // `std::numeric_limits<std::size_t>::max()` means that `childID` is not defined.
             this->universe = universe;
+
+            // Get `entityID` from `Universe` and set pointer to this `Entity`.
+            this->bind_to_universe();
+
+            this->childID = std::numeric_limits<std::size_t>::max(); // `std::numeric_limits<std::size_t>::max()` means that `childID` is not defined.
             this->prerender_callback = nullptr;
             this->postrender_callback = nullptr;
             this->setting_master = std::make_shared<yli::config::SettingMaster>(this);
@@ -49,15 +69,17 @@ namespace yli
             // destructor.
             std::cout << "Entity destructor called.\n";
 
-            if (this->name.empty())
-            {
-                std::cerr << "ERROR: `Entity::~Entity`: `this->name` is empty.\n";
-                return;
-            }
-
             if (this->universe == nullptr)
             {
                 std::cerr << "ERROR: `Entity::~Entity`: `this->universe` is `nullptr`.\n";
+                return;
+            }
+
+            this->universe->unbind_entity(this->entityID);
+
+            if (this->name.empty())
+            {
+                std::cerr << "ERROR: `Entity::~Entity`: `this->name` is empty.\n";
                 return;
             }
 

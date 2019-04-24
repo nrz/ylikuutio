@@ -72,6 +72,16 @@ namespace yli
     {
         class Species;
 
+        void Universe::bind_entity(yli::ontology::Entity* const entity)
+        {
+            // get `entityID` from `Universe` and set pointer to `entity`.
+
+            // `entity` must not be `nullptr` (use `this` as the first argument).
+            entity->entityID = yli::hierarchy::request_childID(this->entity_pointer_vector, this->free_entityID_queue);
+            // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
+            yli::hierarchy::set_child_pointer(entity->entityID, entity, this->entity_pointer_vector, this->free_entityID_queue, this->number_of_entities);
+        }
+
         void Universe::bind_world(yli::ontology::World* const world)
         {
             // get `childID` from `Universe` and set pointer to `world`.
@@ -92,6 +102,33 @@ namespace yli
                     this->number_of_font2Ds);
         }
 
+        void Universe::unbind_entity(const std::size_t entityID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    entityID,
+                    this->entity_pointer_vector,
+                    this->free_entityID_queue,
+                    this->number_of_entities);
+        }
+
+        void Universe::unbind_world(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->world_pointer_vector,
+                    this->free_worldID_queue,
+                    this->number_of_worlds);
+        }
+
+        void Universe::unbind_font2D(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->font2D_pointer_vector,
+                    this->free_font2D_ID_queue,
+                    this->number_of_font2Ds);
+        }
+
         Universe::~Universe()
         {
             // destructor.
@@ -104,12 +141,15 @@ namespace yli
                 glDeleteFramebuffers(1, &this->framebuffer);
             }
 
-            // destroy all worlds of this universe.
+            // destroy all `World`s of this `Universe`.
             std::cout << "All worlds of this universe will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, this->number_of_worlds);
 
             delete this->console;
-            delete this->active_font2D;
+
+            // destroy all `Font2D`s of this `Universe`.
+            std::cout << "All 2D fonts of this universe will be destroyed.\n";
+            yli::hierarchy::delete_children<yli::ontology::Font2D*>(this->font2D_pointer_vector, this->number_of_font2Ds);
 
             SDL_Quit();
         }
@@ -767,21 +807,10 @@ namespace yli
                 universe->render_without_changing_depth_test(); // Render to framebuffer.
 
                 // Transfer data from the GPU texture to a CPU array.
-                const std::size_t n_color_channels = 3;
-                const std::size_t n_texels = texture_width * texture_height;
-                const std::size_t n_elements = n_color_channels * n_texels;
-                uint8_t* const result_array = new uint8_t[n_elements];
+                const std::shared_ptr<std::vector<uint8_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array(
+                        GL_RGB, GL_UNSIGNED_BYTE, texture_width, texture_height);
 
-                glReadBuffer(GL_COLOR_ATTACHMENT0);
-                glReadPixels(0, 0, texture_width, texture_height, GL_RGB, GL_UNSIGNED_BYTE, result_array);
-
-                yli::memory::flip_vertically(result_array, 3 * texture_width, texture_height);
-
-                const std::vector<uint8_t> result_vector(result_array, result_array + n_elements);
-
-                yli::file::binary_write(result_vector, filename);
-
-                delete[] result_array;
+                yli::file::binary_write(*data_vector_shared_ptr, filename);
 
                 universe->restore_onscreen_rendering();
             }

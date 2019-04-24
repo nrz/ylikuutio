@@ -281,8 +281,13 @@ namespace yli
         class Universe: public yli::ontology::Entity
         {
             public:
+                void bind_entity(yli::ontology::Entity* const entity);
                 void bind_world(yli::ontology::World* const world);
                 void bind_font2D(yli::ontology::Font2D* const font2D);
+
+                void unbind_entity(const std::size_t entityID);
+                void unbind_world(const std::size_t childID);
+                void unbind_font2D(const std::size_t childID);
 
                 // constructor.
                 Universe(const UniverseStruct& universe_struct)
@@ -611,6 +616,10 @@ namespace yli
                 float planet_radius;
 
                 std::shared_ptr<yli::ontology::EntityFactory> entity_factory;
+
+                std::vector<yli::ontology::Entity*> entity_pointer_vector;
+                std::queue<std::size_t> free_entityID_queue;
+                std::size_t number_of_entities;
 
                 std::vector<yli::ontology::World*> world_pointer_vector;
                 std::queue<std::size_t> free_worldID_queue;

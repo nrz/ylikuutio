@@ -57,6 +57,20 @@ namespace yli
             // Destroy all `Scene`s of this `World`.
             std::cout << "All scenes of this world will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Scene*>(this->scene_pointer_vector, this->number_of_scenes);
+
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+
+            yli::ontology::Universe* const universe = this->parent;
+
+            if (universe == nullptr)
+            {
+                std::cerr << "ERROR: `World::~World`: `universe` is `nullptr`!\n";
+                return;
+            }
+
+            // set pointer to this `World` to `nullptr`.
+            universe->unbind_world(this->childID);
         }
 
         void World::render()

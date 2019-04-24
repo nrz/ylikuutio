@@ -8,6 +8,9 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <memory>   // std::make_shared, std::shared_ptr
+#include <stdint.h> // uint32_t etc.
+#include <vector>   // std::vector
 
 namespace yli
 {
@@ -23,6 +26,12 @@ namespace yli
         void set_wireframe(const bool wireframe);
         std::size_t get_n_color_channels(const GLenum format);
         std::size_t get_size_of_component(const GLenum type);
+
+        std::shared_ptr<std::vector<uint8_t>> copy_data_from_gpu_texture_to_cpu_array(
+                GLenum format,
+                GLenum type,
+                std::size_t texture_width,
+                std::size_t texture_height);
     }
 }
 

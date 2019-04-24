@@ -5,7 +5,6 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the development of Ylikuutio:
-[ ] Add support for GPGPU using OpenGL 3.0/GLSL 1.30.10 shaders.
 [ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
 [ ] Write a simple triangle drawing software (android-kolmio) for Android, using Android NDK and CMake.
 [ ] Implement audio mixing using SDL_mixer.
@@ -82,7 +81,6 @@ Tasks which are necessary for the development of Ylikuutio:
 Less urgent:
 [ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
 [ ] Implement flowing water (computed on a server, based on players' actions) using GridFluidSim3D. https://github.com/rlguy/GridFluidSim3D
-[ ] Implement s7 support in console.
 [ ] Implement support for 3D text.
 [ ] Implement support for partially transparent text.
 [ ] Implement support for over 3D objects (`class HighDimensionalSpecies`, `class HighDimensionalObject`). projected into 3D space in `HighDimensionalObject::render()`).
@@ -128,3 +126,5 @@ Ready:
 [x] Add variable `text_size` (affects size of console text and other texts printed on screen).
 [x] Implement `AnyStruct`.
 [x] Implement audio using SDL (SFML does not support Android and iOS yet).
+[x] Implement s7 support in console.
+[x] Add support for GPGPU using OpenGL 3.0/GLSL 1.30.10 shaders.
