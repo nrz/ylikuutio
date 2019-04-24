@@ -104,7 +104,7 @@ namespace yli
                 glDeleteFramebuffers(1, &this->framebuffer);
             }
 
-            // destroy all worlds of this universe.
+            // destroy all `World`s of this `Universe`.
             std::cout << "All worlds of this universe will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, this->number_of_worlds);
 
