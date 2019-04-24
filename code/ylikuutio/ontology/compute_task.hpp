@@ -87,6 +87,7 @@ namespace yli
                     this->compute_taskID = compute_task_struct.compute_taskID;
                     this->texture_width = compute_task_struct.texture_width;
                     this->texture_height = compute_task_struct.texture_height;
+                    this->n_index_characters = compute_task_struct.n_index_characters;
 
                     // variables related to the framebuffer.
                     this->framebuffer                  = 0; // some dummy value.
@@ -105,6 +106,7 @@ namespace yli
 
                     this->format                       = compute_task_struct.format;
                     this->type                         = compute_task_struct.type;
+                    this->should_ylikuutio_save_intermediate_results = compute_task_struct.should_ylikuutio_save_intermediate_results;
 
                     this->preiterate_callback = compute_task_struct.preiterate_callback;
                     this->postiterate_callback = compute_task_struct.postiterate_callback;
@@ -232,6 +234,8 @@ namespace yli
                 std::size_t texture_height;
                 std::size_t texture_size;
 
+                std::size_t n_index_characters; // For intermediate results' filenames.
+
                 std::size_t vertices_size;
                 std::size_t uvs_size;
 
@@ -253,6 +257,8 @@ namespace yli
 
                 GLenum format;
                 GLenum type;
+
+                bool should_ylikuutio_save_intermediate_results;
 
                 PreIterateCallback preiterate_callback;
                 PostIterateCallback postiterate_callback;
