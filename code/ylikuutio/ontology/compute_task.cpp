@@ -169,25 +169,13 @@ namespace yli
             }
 
             // Transfer data from the GPU texture to a CPU array.
-            const std::size_t n_color_channels = yli::opengl::get_n_color_channels(this->format);
-            const std::size_t size_of_texel_in_bytes = n_color_channels * yli::opengl::get_size_of_component(this->type);
-            const std::size_t n_texels = this->texture_width * this->texture_height;
-            const std::size_t size_of_texture_in_bytes = size_of_texel_in_bytes * n_texels;
-            uint8_t* const result_array = new uint8_t[size_of_texture_in_bytes];
-
-            glReadBuffer(GL_COLOR_ATTACHMENT0);
-            glReadPixels(0, 0, this->texture_width, this->texture_height, this->format, this->type, result_array);
-
-            yli::memory::flip_vertically(result_array, size_of_texel_in_bytes * this->texture_width, this->texture_height);
-
-            this->result_vector = std::make_shared<std::vector<uint8_t>>(result_array, result_array + size_of_texture_in_bytes);
+            const std::shared_ptr<std::vector<uint8_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array(
+                    this->format, this->type, this->texture_width, this->texture_height);
 
             if (!this->output_filename.empty())
             {
-                yli::file::binary_write(*this->result_vector, this->output_filename);
+                yli::file::binary_write(*data_vector_shared_ptr, this->output_filename);
             }
-
-            delete[] result_array;
 
             universe->restore_onscreen_rendering();
 

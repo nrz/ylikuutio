@@ -807,21 +807,10 @@ namespace yli
                 universe->render_without_changing_depth_test(); // Render to framebuffer.
 
                 // Transfer data from the GPU texture to a CPU array.
-                const std::size_t n_color_channels = 3;
-                const std::size_t n_texels = texture_width * texture_height;
-                const std::size_t n_elements = n_color_channels * n_texels;
-                uint8_t* const result_array = new uint8_t[n_elements];
+                const std::shared_ptr<std::vector<uint8_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array(
+                        GL_RGB, GL_UNSIGNED_BYTE, texture_width, texture_height);
 
-                glReadBuffer(GL_COLOR_ATTACHMENT0);
-                glReadPixels(0, 0, texture_width, texture_height, GL_RGB, GL_UNSIGNED_BYTE, result_array);
-
-                yli::memory::flip_vertically(result_array, 3 * texture_width, texture_height);
-
-                const std::vector<uint8_t> result_vector(result_array, result_array + n_elements);
-
-                yli::file::binary_write(result_vector, filename);
-
-                delete[] result_array;
+                yli::file::binary_write(*data_vector_shared_ptr, filename);
 
                 universe->restore_onscreen_rendering();
             }
