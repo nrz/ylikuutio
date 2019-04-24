@@ -112,8 +112,10 @@ namespace gpgpu_test
         sobel_shader_compute_task_struct.texture_filename = "numbers_123456_black_and_white.bmp";
         sobel_shader_compute_task_struct.output_filename = "gpgpu_sobel_output.data";
         sobel_shader_compute_task_struct.parent = sobel_shader;
+        sobel_shader_compute_task_struct.n_max_iterations = 5;
         sobel_shader_compute_task_struct.texture_width = 512;
         sobel_shader_compute_task_struct.texture_height = 512;
+        sobel_shader_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
 
         std::cout << "Creating yli::ontology::Entity* sobel_shader_compute_task_entity ...\n";
         yli::ontology::Entity* const sobel_shader_compute_task_entity = entity_factory->create_ComputeTask(sobel_shader_compute_task_struct);
