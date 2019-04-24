@@ -5,7 +5,6 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the development of Ylikuutio:
-[ ] Add support for GPGPU using OpenGL 3.0/GLSL 1.30.10 shaders.
 [ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
 [ ] Write a simple triangle drawing software (android-kolmio) for Android, using Android NDK and CMake.
 [ ] Implement audio mixing using SDL_mixer.
@@ -128,3 +127,4 @@ Ready:
 [x] Implement `AnyStruct`.
 [x] Implement audio using SDL (SFML does not support Android and iOS yet).
 [x] Implement s7 support in console.
+[x] Add support for GPGPU using OpenGL 3.0/GLSL 1.30.10 shaders.
