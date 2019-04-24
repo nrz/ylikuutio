@@ -285,6 +285,7 @@ namespace yli
                 void bind_font2D(yli::ontology::Font2D* const font2D);
 
                 void unbind_world(const std::size_t childID);
+                void unbind_font2D(const std::size_t childID);
 
                 // constructor.
                 Universe(const UniverseStruct& universe_struct)
