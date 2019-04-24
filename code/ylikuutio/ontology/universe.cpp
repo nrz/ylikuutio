@@ -72,6 +72,16 @@ namespace yli
     {
         class Species;
 
+        void Universe::bind_entity(yli::ontology::Entity* const entity)
+        {
+            // get `entityID` from `Universe` and set pointer to `entity`.
+
+            // `entity` must not be `nullptr` (use `this` as the first argument).
+            entity->entityID = yli::hierarchy::request_childID(this->entity_pointer_vector, this->free_entityID_queue);
+            // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
+            yli::hierarchy::set_child_pointer(entity->entityID, entity, this->entity_pointer_vector, this->free_entityID_queue, this->number_of_entities);
+        }
+
         void Universe::bind_world(yli::ontology::World* const world)
         {
             // get `childID` from `Universe` and set pointer to `world`.
@@ -90,6 +100,15 @@ namespace yli
                     this->font2D_pointer_vector,
                     this->free_font2D_ID_queue,
                     this->number_of_font2Ds);
+        }
+
+        void Universe::unbind_entity(const std::size_t entityID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    entityID,
+                    this->entity_pointer_vector,
+                    this->free_entityID_queue,
+                    this->number_of_entities);
         }
 
         void Universe::unbind_world(const std::size_t childID)
