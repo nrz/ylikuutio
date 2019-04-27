@@ -45,8 +45,6 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        gpgpu_test_scene->set_name("gpgpu_test_scene");
-
         gpgpu_test_scene->set_turbo_factor(5.0f);
         gpgpu_test_scene->set_twin_turbo_factor(100.0f);
 
@@ -66,8 +64,6 @@ namespace gpgpu_test
             std::cerr << "Failed to create Shader.\n";
             return nullptr;
         }
-
-        identity_shader->set_name("identity_shader");
 
         ComputeTaskStruct identity_shader_compute_task_struct;
         identity_shader_compute_task_struct.texture_file_format = "bmp";
@@ -104,8 +100,6 @@ namespace gpgpu_test
             std::cerr << "Failed to create Shader.\n";
             return nullptr;
         }
-
-        sobel_shader->set_name("sobel_shader");
 
         ComputeTaskStruct sobel_shader_compute_task_struct;
         sobel_shader_compute_task_struct.texture_file_format = "bmp";
