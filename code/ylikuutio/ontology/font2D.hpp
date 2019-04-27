@@ -103,7 +103,7 @@ namespace yli
                     this->vertexUVID = glGetAttribLocation(this->programID, "vertexUV");
 
                     // Initialize uniforms' IDs.
-                    this->Text2DUniformID = glGetUniformLocation(this->programID, "my_texture_sampler");
+                    this->Text2DUniformID = glGetUniformLocation(this->programID, "texture_sampler");
 
                     // Initialize uniform window width.
                     this->screen_width_uniform_ID = glGetUniformLocation(this->programID, "screen_width");

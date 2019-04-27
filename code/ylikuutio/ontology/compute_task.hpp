@@ -141,8 +141,8 @@ namespace yli
                         std::cerr << "texture file format: " << this->texture_file_format << "\n";
                     }
 
-                    // Get a handle for our "my_texture_sampler" uniform.
-                    this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "my_texture_sampler");
+                    // Get a handle for our "texture_sampler" uniform.
+                    this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "texture_sampler");
 
                     // Initialize uniform window width.
                     // This is named `screen_width` instead of `texture_width` for compatibility with other shaders.
@@ -243,7 +243,7 @@ namespace yli
                 uint32_t framebuffer;
                 uint32_t source_texture;
                 uint32_t target_texture;
-                uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(this->parent->get_programID(), "my_texture_sampler")`.
+                uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(this->parent->get_programID(), "texture_sampler")`.
                 bool is_framebuffer_initialized;
                 bool is_ready;
 

@@ -83,7 +83,7 @@ namespace yli
                 const ofbx::Texture* ofbx_texture;
 
                 uint32_t texture;                  // texture of this `SymbiontMaterial`.
-                uint32_t openGL_textureID;         // texture ID, returned by `glGetUniformLocation(programID, "my_texture_sampler")`.
+                uint32_t openGL_textureID;         // texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
 
                 std::vector<yli::ontology::SymbiontSpecies*> symbiont_species_pointer_vector;
                 std::queue<std::size_t> free_symbiont_speciesID_queue;

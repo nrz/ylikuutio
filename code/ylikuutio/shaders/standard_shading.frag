@@ -8,7 +8,7 @@ varying vec3 eye_direction_cameraspace;
 varying vec3 light_direction_cameraspace;
 
 // Values that stay constant for the whole mesh.
-uniform sampler2D my_texture_sampler;
+uniform sampler2D texture_sampler;
 uniform vec3 light_position_worldspace;
 uniform float water_level;
 
@@ -25,7 +25,7 @@ void main()
     }
 
     // Material properties
-    vec3 material_diffuse_color = texture2D(my_texture_sampler, UV).rgb;
+    vec3 material_diffuse_color = texture2D(texture_sampler, UV).rgb;
     vec3 material_ambient_color = vec3(0.1, 0.1, 0.1) * material_diffuse_color;
     vec3 material_specular_color = vec3(0.3, 0.3, 0.3);
 
