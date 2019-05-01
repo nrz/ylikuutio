@@ -17,7 +17,7 @@ void main()
     // Light emission properties
     // You probably want to put them as uniforms
     vec3 light_color = vec3(1, 1, 1);
-    float light_power = 20000.0f;
+    float light_power = 40000000000.0f;
 
     if (position_worldspace.y < water_level)
     {
@@ -30,8 +30,7 @@ void main()
     vec3 material_specular_color = vec3(0.3, 0.3, 0.3);
 
     // Distance to the light
-    // float distance = length(light_position_worldspace - position_worldspace);
-    float distance = 100.0f;
+    float distance = length(light_position_worldspace - position_worldspace);
 
     // Normal of the computed fragment, in camera space
     vec3 n = normalize(normal_cameraspace);
