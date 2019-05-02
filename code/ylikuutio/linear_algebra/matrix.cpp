@@ -77,6 +77,21 @@ namespace yli
             }
         }
 
+        bool Matrix::get_is_square() const
+        {
+            return this->is_square;
+        }
+
+        std::size_t Matrix::get_width() const
+        {
+            return this->width;
+        }
+
+        std::size_t Matrix::get_height() const
+        {
+            return this->height;
+        }
+
         std::shared_ptr<yli::linear_algebra::Matrix> Matrix::transpose()
         {
             std::shared_ptr<yli::linear_algebra::Matrix> new_matrix = std::make_shared<yli::linear_algebra::Matrix>(this->width, this->height); // Flip width and height.

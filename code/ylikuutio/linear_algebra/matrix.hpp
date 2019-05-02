@@ -57,6 +57,10 @@ namespace yli
                     return Proxy(array_of_arrays[index]);
                 }
 
+                bool get_is_square() const;
+                std::size_t get_width() const;
+                std::size_t get_height() const;
+
                 std::shared_ptr<yli::linear_algebra::Matrix> transpose();
                 float det();
 
