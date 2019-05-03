@@ -8,12 +8,12 @@
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
-#include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
-#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <cstdio>     // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
+#include <cstring>    // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <inttypes.h> // PRId32, PRId64, PRIu32, PRIu64, PRIx32, PRIx64
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <string>   // std::string
-#include <vector>   // std::vector
+#include <iostream>   // std::cout, std::cin, std::cerr
+#include <string>     // std::string
+#include <vector>     // std::vector
 
 namespace yli
 {
