@@ -19,7 +19,7 @@ namespace yli
 {
     namespace load
     {
-        bool check_if_we_are_inside_block(const char* SVG_base_pointer, char*& SVG_data_pointer, uint64_t data_size)
+        bool check_if_we_are_inside_block(const char* SVG_base_pointer, char*& SVG_data_pointer, const uint64_t data_size)
         {
             // This function returns `true` if we are inside block, `false` otherwise.
 
