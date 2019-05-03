@@ -23,10 +23,10 @@ namespace yli
         {
             // This function returns `true` if we are inside block, `false` otherwise.
 
-            std::vector<std::string> identifier_strings_vector;
-
             // All possible block identifier strings.
-            identifier_strings_vector = { "<?xml ", "<!DOCTYPE ", "<svg>", "<metadata>", "</metadata>", "<defs>", "<font ", "<font-face", "<missing-glyph" };
+            const std::vector<std::string> identifier_strings_vector
+            { "<?xml ", "<!DOCTYPE ", "<svg>", "<metadata>", "</metadata>", "<defs>", "<font ", "<font-face", "<missing-glyph" };
+
             return yli::string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, identifier_strings_vector);
         }
 
@@ -472,8 +472,7 @@ namespace yli
                 } // End of glyph.
                 else
                 {
-                    std::vector<std::string> string_vector;
-                    string_vector = { "</font>", "</defs>", "</svg>" };
+                    const std::vector<std::string> string_vector { "</font>", "</defs>", "</svg>" };
 
                     if (yli::string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, file_size, string_vector))
                     {
