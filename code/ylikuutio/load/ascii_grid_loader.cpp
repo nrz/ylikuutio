@@ -21,7 +21,7 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
+#include <cmath>    // NAN, std::isnan, std::pow, floor, ceil
 #include <cstddef>  // std::size_t
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream> // std::cout, std::cin, std::cerr
