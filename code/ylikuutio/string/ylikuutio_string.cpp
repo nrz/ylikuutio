@@ -503,7 +503,7 @@ namespace yli
 
         bool check_if_float_string(const std::string& my_string)
         {
-            std::size_t maximum_safe_length_for_float_string = 38;
+            const std::size_t maximum_safe_length_for_float_string = 38;
             return check_if_floating_point_string(my_string, maximum_safe_length_for_float_string);
         }
 
