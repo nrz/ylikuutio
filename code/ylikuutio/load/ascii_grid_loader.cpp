@@ -159,7 +159,7 @@ namespace yli
             for (std::size_t z = 0; z < image_height; z++)
             {
                 // show progress in percents.
-                current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (image_height - 1))));
+                current_percent = static_cast<int32_t>(floor(100.0f * (static_cast<double>(z) / static_cast<double>(image_height - 1))));
 
                 if (current_percent > last_percent)
                 {
