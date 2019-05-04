@@ -28,7 +28,7 @@ namespace yli
                 std::size_t& image_size,
                 uint32_t& textureID);
 
-        // Load a .BMP file using our custom loader
+        // Load a .BMP file using our custom loader.
         bool load_BMP_texture(
                 const std::string& filename,
                 std::size_t& image_width,
@@ -36,12 +36,7 @@ namespace yli
                 std::size_t& image_size,
                 uint32_t& textureID);
 
-        //// Since GLFW 3, glfwLoadTexture2D() has been removed. You have to use another texture loading library,
-        //// or do it yourself (just like load_BMP_texture and load_DDS_texture)
-        //// Load a .TGA file using GLFW's own loader
-        //uint32_t loadTGA_glfw(const char*  imagepath);
-
-        // Load a .DDS file using GLFW's own loader
+        // Load a .DDS file using our custom loader.
         bool load_DDS_texture(
                 const std::string& filename,
                 std::size_t& image_width,
