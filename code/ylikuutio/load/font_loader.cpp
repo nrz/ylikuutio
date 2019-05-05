@@ -51,6 +51,11 @@ namespace yli
             // Returns true if a glyph was found.
             // Returns false if no glyph was found.
 
+            if (SVG_base_pointer == nullptr || SVG_data_pointer == nullptr)
+            {
+                return false;
+            }
+
             bool is_inside_block = false;
 
             // Read bytes of SVG data until `"<glyph "` is encountered!
