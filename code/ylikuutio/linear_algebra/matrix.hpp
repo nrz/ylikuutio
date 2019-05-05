@@ -40,8 +40,8 @@ namespace yli
 
                 void operator<<(const float rhs);
                 void operator<<(const std::vector<float>& rhs);
-                bool operator==(const yli::linear_algebra::Matrix& rhs);
-                bool operator!=(const yli::linear_algebra::Matrix& rhs);
+                bool operator==(const yli::linear_algebra::Matrix& rhs) const;
+                bool operator!=(const yli::linear_algebra::Matrix& rhs) const;
                 yli::linear_algebra::Matrix& operator++();
                 yli::linear_algebra::Matrix operator++(const int);
                 yli::linear_algebra::Matrix& operator--();
