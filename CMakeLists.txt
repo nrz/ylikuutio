@@ -326,6 +326,9 @@ configure_file(res/laser_scanning_data/L4133D1.laz L4133D1.laz COPYONLY)
 configure_file(res/maps/Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm COPYONLY)
 configure_file(res/maps/Exactum_Physicum_Helsinki_Finland.osm Exactum_Physicum_Helsinki_Finland.osm COPYONLY)
 
+# Graphs.
+configure_file(res/graphs/some_finnish_railway_stations.csv some_finnish_railway_stations.csv COPYONLY)
+
 # Audio.
 configure_file(res/audio/freesound.org/395487__frankum__tecno-pop-base-and-guitar-2.ogg 395487__frankum__tecno-pop-base-and-guitar-2.ogg COPYONLY)
 configure_file(res/audio/freesound.org/414257__sss-samples__chipland-loop-120-bpm-a-major.wav 414257__sss-samples__chipland-loop-120-bpm-a-major.wav COPYONLY)
@@ -777,6 +780,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/linear_algebra/tensor3.hpp
         code/ylikuutio/load/ascii_grid_loader.cpp
         code/ylikuutio/load/ascii_grid_loader.hpp
+        code/ylikuutio/load/csv_loader.cpp
+        code/ylikuutio/load/csv_loader.hpp
         code/ylikuutio/load/fbx_species_loader.cpp
         code/ylikuutio/load/fbx_species_loader.hpp
         code/ylikuutio/load/font_loader.cpp
@@ -813,6 +818,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_callback_system.cpp
         code/ylikuutio/tests/googletest/test_check_and_report_if_some_string_matches.cpp
         code/ylikuutio/tests/googletest/test_command_line_master.cpp
+        code/ylikuutio/tests/googletest/test_csv_loader.cpp
         code/ylikuutio/tests/googletest/test_extract_last_part_of_string.cpp
         code/ylikuutio/tests/googletest/test_extract_string.cpp
         code/ylikuutio/tests/googletest/test_extract_string_with_several_endings.cpp
