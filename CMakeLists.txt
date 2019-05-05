@@ -329,6 +329,7 @@ configure_file(res/maps/Exactum_Physicum_Helsinki_Finland.osm Exactum_Physicum_H
 # Graphs.
 configure_file(res/graphs/some_finnish_railway_stations_float.csv some_finnish_railway_stations_float.csv COPYONLY)
 configure_file(res/graphs/some_finnish_railway_stations_integer.csv some_finnish_railway_stations_integer.csv COPYONLY)
+configure_file(res/graphs/some_finnish_railway_stations_unsigned_integer.csv some_finnish_railway_stations_unsigned_integer.csv COPYONLY)
 
 # Audio.
 configure_file(res/audio/freesound.org/395487__frankum__tecno-pop-base-and-guitar-2.ogg 395487__frankum__tecno-pop-base-and-guitar-2.ogg COPYONLY)
