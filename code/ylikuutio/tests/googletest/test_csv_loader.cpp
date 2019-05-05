@@ -9,7 +9,7 @@
 #include <string>  // std::string
 #include <vector>  // std::vector
 
-TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations)
+TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_float)
 {
     const std::string some_finnish_railway_stations_csv_filename = "some_finnish_railway_stations_float.csv";
     std::size_t data_width;
