@@ -23,6 +23,12 @@ namespace yli
                 const std::size_t data_index,
                 const std::vector<std::string> identifier_strings_vector);
 
+        // All string extraction functions of `yli::string` advance either
+        // `data_index` or `src_data_pointer` to the first character that
+        // does not belong in the extracted string.
+        // If no string is extracted, then `data_index` or `src_data_pointer`
+        // (according to the function) is not modified.
+
         void extract_string(
                 const std::string& data_string,
                 std::size_t& data_index,
