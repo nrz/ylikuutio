@@ -12,7 +12,7 @@
 
 TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations)
 {
-    const std::string some_finnish_railway_stations_csv_filename = "some_finnish_railway_stations.csv";
+    const std::string some_finnish_railway_stations_csv_filename = "some_finnish_railway_stations_float.csv";
     std::size_t data_width;
     std::size_t data_height;
     std::size_t data_size;
