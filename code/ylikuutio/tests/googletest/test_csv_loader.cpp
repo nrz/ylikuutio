@@ -56,3 +56,39 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_float)
 
     ASSERT_EQ(railway_neighbors_from_csv_file, railway_neighbors);
 }
+
+TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_int32_t)
+{
+    const std::string some_finnish_railway_stations_csv_filename = "some_finnish_railway_stations_integer.csv";
+    std::size_t data_width;
+    std::size_t data_height;
+    std::size_t data_size;
+    std::shared_ptr<std::vector<int32_t>> data_vector = yli::load::load_CSV_file<int32_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
+    ASSERT_NE(data_vector, nullptr);
+
+    ASSERT_EQ(data_width, 17);
+    ASSERT_EQ(data_height, 17);
+    ASSERT_EQ(data_size, 17 * 17);
+
+    std::vector<int32_t> railway_neighbors  {
+//   Hpk, Ilm, Jns,  Jy,  Ke,  Kv,  Lh,  Ov,  Ol,  Ri, Psl,  Pm,  Sk, Tpe,  Tl, Tku,  Yv
+       0,  -1,  -1,  78,  -1,  -1,  -1,  72,  -1,  -1,  -1,  -1, 118,  -1,  -1,  -1,  -1,   // Hpk
+      -1,   0,  -1,  -1,  -1,  -1,  -1,  -1, 275,  -1,  -1, 174,  -1,  -1,  -1,  -1, 154,   // Ilm
+      -1,  -1,   0,  -1,  -1, 316,  -1,  -1,  -1,  -1,  -1, 183,  -1,  -1,  -1,  -1,  -1,   // Jns
+      78,  -1,  -1,   0,  -1,  -1,  -1, 113,  -1,  -1,  -1,  80,  -1,  -1,  -1,  -1,  -1,   // Jy
+      -1,  -1,  -1,  -1,   0,  -1,  75,  -1,  -1,  42,  26,  -1,  -1,  -1,  -1,  -1,  -1,   // Ke
+      -1,  -1, 316,  -1,  -1,   0,  62,  -1,  -1,  -1,  -1, 184,  -1,  -1,  -1,  -1,  -1,   // Kv
+      -1,  -1,  -1,  -1,  75,  62,   0,  -1,  -1,  59,  -1,  -1,  -1,  -1,  -1,  -1,  -1,   // Lh
+      72,  -1,  -1, 113,  -1,  -1,  -1,   0,  -1,  -1,  -1,  -1,  -1,  42,  -1,  -1,  -1,   // Ov
+      -1, 275,  -1,  -1,  -1,  -1,  -1,  -1,   0,  -1,  -1,  -1,  -1,  -1,  -1,  -1, 122,   // Ol
+      -1,  -1,  -1,  -1,  42,  -1,  59,  -1,  -1,   0,  -1,  -1,  -1,  -1,  76,  -1,  -1,   // Ri
+      -1,  -1,  -1,  -1,  26,  -1,  -1,  -1,  -1,  -1,   0,  -1,  -1,  -1,  -1, 191,  -1,   // Psl
+      -1, 174, 183,  80,  -1, 184,  -1,  -1,  -1,  -1,  -1,   0,  -1,  -1,  -1,  -1,  -1,   // Pm
+     118,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,   0, 160,  -1,  -1, 211,   // Sk
+      -1,  -1,  -1,  -1,  -1,  -1,  -1,  42,  -1,  -1,  -1,  -1, 160,   0,  40,  -1,  -1,   // Tpe
+      -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  76,  -1,  -1,  -1,  40,   0, 128,  -1,   // Tl
+      -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1, 191,  -1,  -1,  -1, 128,   0,  -1,   // Tku
+      -1, 154,  -1,  -1,  -1,  -1,  -1,  -1, 122,  -1,  -1,  -1, 211,  -1,  -1,  -1,   0 }; // Yv
+
+    ASSERT_EQ(*data_vector, railway_neighbors);
+}
