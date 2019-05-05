@@ -100,9 +100,9 @@ namespace yli
                 case GL_BGR:
                     return 3;
                 case GL_RGBA:
-                    return 3;
+                    return 4;
                 case GL_BGRA:
-                    return 3;
+                    return 4;
                 case GL_LUMINANCE:
                     return 1;
                 case GL_LUMINANCE_ALPHA:
