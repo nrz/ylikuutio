@@ -291,7 +291,7 @@ namespace yli
             char char_number_buffer[1024];
             yli::string::extract_string_with_several_endings(
                     src_base_pointer,
-                    ++src_data_pointer,
+                    src_data_pointer,
                     src_data_size,
                     char_number_buffer,
                     char_number_buffer,
@@ -316,7 +316,7 @@ namespace yli
             char char_number_buffer[1024];
             yli::string::extract_string_with_several_endings(
                     data_string,
-                    ++data_index,
+                    data_index,
                     char_number_buffer,
                     char_number_buffer,
                     sizeof(char_number_buffer),
@@ -341,7 +341,7 @@ namespace yli
             char char_number_buffer[1024];
             yli::string::extract_string_with_several_endings(
                     src_base_pointer,
-                    ++src_data_pointer,
+                    src_data_pointer,
                     src_data_size,
                     char_number_buffer,
                     char_number_buffer,
@@ -366,7 +366,7 @@ namespace yli
             char char_number_buffer[1024];
             yli::string::extract_string_with_several_endings(
                     data_string,
-                    ++data_index,
+                    data_index,
                     char_number_buffer,
                     char_number_buffer,
                     sizeof(char_number_buffer),

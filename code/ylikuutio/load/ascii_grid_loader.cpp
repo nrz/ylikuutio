@@ -90,7 +90,7 @@ namespace yli
 
             const int32_t image_width_int32_t = yli::string::extract_int32_t_value_from_string(
                     file_content,
-                    --file_content_i,
+                    file_content_i,
                     (const char* const) " \n",
                     (const char* const) "ncols");
 
@@ -101,7 +101,7 @@ namespace yli
 
             const int32_t image_height_int32_t = yli::string::extract_int32_t_value_from_string(
                     file_content,
-                    --file_content_i,
+                    file_content_i,
                     (const char* const) " \n",
                     (const char* const) "nrows");
 
@@ -112,7 +112,7 @@ namespace yli
 
             yli::string::extract_float_value_from_string(
                     file_content,
-                    --file_content_i,
+                    file_content_i,
                     (const char* const) " \n",
                     (const char* const) "xllcorner");
 
@@ -123,7 +123,7 @@ namespace yli
 
             yli::string::extract_float_value_from_string(
                     file_content,
-                    --file_content_i,
+                    file_content_i,
                     (const char* const) " \n",
                     (const char* const) "yllcorner");
 
@@ -134,7 +134,7 @@ namespace yli
 
             yli::string::extract_float_value_from_string(
                     file_content,
-                    --file_content_i,
+                    file_content_i,
                     (const char* const) " \n",
                     (const char* const) "cellsize");
 
@@ -145,7 +145,7 @@ namespace yli
 
             yli::string::extract_float_value_from_string(
                     file_content,
-                    --file_content_i,
+                    file_content_i,
                     (const char* const) " \n",
                     (const char* const) "nodata_value");
 
@@ -200,7 +200,7 @@ namespace yli
 
                     *vertex_pointer++ = yli::string::extract_float_value_from_string(
                             file_content,
-                            --file_content_i,
+                            file_content_i,
                             (const char* const) " \n",
                             (const char* const) nullptr);
                 }

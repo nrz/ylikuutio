@@ -136,7 +136,7 @@ namespace yli
                 {
                     current_vertex.x = yli::load::extract_value_from_string_with_standard_endings(
                             char_path,
-                            vertex_data_pointer,
+                            ++vertex_data_pointer,
                             sizeof(char_path),
                             (const char* const) "M (moveto)",
                             is_debug_mode);
@@ -145,7 +145,7 @@ namespace yli
 
                     current_vertex.y = yli::load::extract_value_from_string_with_standard_endings(
                             char_path,
-                            --vertex_data_pointer,
+                            vertex_data_pointer,
                             sizeof(char_path),
                             (const char* const) "space (moveto y coordinate)",
                             is_debug_mode);
@@ -158,7 +158,7 @@ namespace yli
                     // OK, this is horizontal relative lineto.
                     int32_t horizontal_lineto_value = yli::load::extract_value_from_string_with_standard_endings(
                             char_path,
-                            vertex_data_pointer,
+                            ++vertex_data_pointer,
                             sizeof(char_path),
                             (const char* const) "h (horizontal relative lineto)",
                             is_debug_mode);
@@ -171,7 +171,7 @@ namespace yli
                     // OK, this is vertical relative lineto.
                     int32_t vertical_lineto_value = yli::load::extract_value_from_string_with_standard_endings(
                             char_path,
-                            vertex_data_pointer,
+                            ++vertex_data_pointer,
                             sizeof(char_path),
                             (const char* const) "v (vertical relative lineto)",
                             is_debug_mode);
