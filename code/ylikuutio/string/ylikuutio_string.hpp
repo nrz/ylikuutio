@@ -79,6 +79,36 @@ namespace yli
                 std::string& dest_string,
                 const char separator);
 
+        void extract_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description,
+                int32_t& value);
+
+        void extract_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description,
+                int32_t& value);
+
+        void extract_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description,
+                float& value);
+
+        void extract_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description,
+                float& value);
+
         int32_t extract_int32_t_value_from_string(
                 const char* const src_base_pointer,
                 char*& src_data_pointer,

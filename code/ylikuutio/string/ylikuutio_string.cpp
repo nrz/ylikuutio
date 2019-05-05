@@ -281,6 +281,66 @@ namespace yli
             return filename_length;
         }
 
+        void extract_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description,
+                int32_t& value)
+        {
+            value = yli::string::extract_int32_t_value_from_string(
+                    src_base_pointer,
+                    src_data_pointer,
+                    src_data_size,
+                    char_end_string,
+                    description);
+        }
+
+        void extract_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description,
+                int32_t& value)
+        {
+            value = yli::string::extract_int32_t_value_from_string(
+                    data_string,
+                    data_index,
+                    char_end_string,
+                    description);
+        }
+
+        void extract_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description,
+                float& value)
+        {
+            value = yli::string::extract_float_value_from_string(
+                    src_base_pointer,
+                    src_data_pointer,
+                    src_data_size,
+                    char_end_string,
+                    description);
+        }
+
+        void extract_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description,
+                float& value)
+        {
+            value = yli::string::extract_float_value_from_string(
+                    data_string,
+                    data_index,
+                    char_end_string,
+                    description);
+        }
+
         int32_t extract_int32_t_value_from_string(
                 const char* const src_base_pointer,
                 char*& src_data_pointer,

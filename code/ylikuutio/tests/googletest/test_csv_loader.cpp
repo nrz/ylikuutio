@@ -1,6 +1,5 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/load/csv_loader.hpp"
-#include "code/ylikuutio/load/csv_loader.cpp"
 #include "code/ylikuutio/linear_algebra/matrix.hpp"
 
 // Include standard headers
@@ -16,7 +15,7 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations)
     std::size_t data_width;
     std::size_t data_height;
     std::size_t data_size;
-    std::shared_ptr<std::vector<float>> data_vector = yli::load::load_CSV_file(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
+    std::shared_ptr<std::vector<float>> data_vector = yli::load::load_CSV_file<float>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
     ASSERT_NE(data_vector, nullptr);
 
     ASSERT_EQ(data_width, 17);
