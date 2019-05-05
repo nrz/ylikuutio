@@ -19,6 +19,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     yli::string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_empty_string)
@@ -34,6 +35,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     yli::string::extract_string_with_several_endings(text_string, data_index, dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 0);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_empty_string)
@@ -62,6 +64,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     yli::string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_1_char)
@@ -77,6 +80,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     yli::string::extract_string_with_several_endings(text_string, data_index, dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 0);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_1_char)
@@ -105,6 +109,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     yli::string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_2_same_chars)
@@ -120,6 +125,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     yli::string::extract_string_with_several_endings(text_string, data_index, dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 0);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_2_same_chars)
@@ -148,6 +154,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     yli::string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_2_different_chars)
@@ -163,6 +170,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     yli::string::extract_string_with_several_endings(text_string, data_index, dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 0);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_2_different_chars)
@@ -191,6 +199,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     yli::string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be_extracted_when_source_string_is_1_char_and_end_string_is_matching_1_char)
@@ -206,6 +215,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     yli::string::extract_string_with_several_endings(text_string, data_index, dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 0);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_must_be_extracted_when_source_string_is_1_char_and_end_string_is_matching_1_char)
@@ -234,6 +244,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     yli::string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be_extracted_when_source_string_is_1_char_and_first_char_of_end_string_matches_1st_char)
@@ -249,6 +260,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     yli::string::extract_string_with_several_endings(text_string, data_index, dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 0);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_must_be_extracted_when_source_string_is_1_char_and_first_char_of_end_string_matches_1st_char)
@@ -277,6 +289,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     yli::string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be_extracted_when_source_string_is_1_char_and_second_char_of_end_string_matches_1st_char)
@@ -292,6 +305,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     yli::string::extract_string_with_several_endings(text_string, data_index, dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 0);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_must_be_extracted_when_source_string_is_1_char_and_second_char_of_end_string_matches_1st_char)
@@ -320,6 +334,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     yli::string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be_extracted_when_source_string_is_1_char_and_both_chars_of_end_string_match_1st_char)
@@ -335,6 +350,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     yli::string::extract_string_with_several_endings(text_string, data_index, dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 0);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_must_be_extracted_when_source_string_is_1_char_and_both_chars_of_end_string_match_1st_char)
@@ -364,6 +380,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_extracted_when_source_string_is_1_char_and_end_string_is_different_1_char)
@@ -380,6 +397,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_must_be_extracted_when_source_string_is_1_char_and_end_string_is_different_1_char)
@@ -409,6 +427,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     yli::string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be_extracted_when_source_string_is_2_chars_and_end_string_is_same_as_1st_char)
@@ -424,6 +443,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     yli::string::extract_string_with_several_endings(text_string, data_index, dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 0);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_must_be_extracted_when_source_string_is_2_chars_and_end_string_is_same_as_1st_char)
@@ -452,6 +472,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     yli::string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be_extracted_when_source_string_is_2_chars_and_end_string_is_same_as_1st_and_2nd_char)
@@ -467,6 +488,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     yli::string::extract_string_with_several_endings(text_string, data_index, dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 0);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_must_be_extracted_when_source_string_is_2_chars_and_end_string_is_same_as_1st_and_2nd_char)
@@ -496,6 +518,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_extracted_when_source_string_is_2_chars_and_end_string_is_same_as_2nd_char)
@@ -512,6 +535,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_must_be_extracted_when_source_string_is_2_chars_and_end_string_is_same_as_2nd_char)
@@ -542,6 +566,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_extracted_when_source_string_is_2_chars_and_first_char_of_end_string_is_same_as_2nd_char)
@@ -558,6 +583,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_must_be_extracted_when_source_string_is_2_chars_and_first_char_of_end_string_is_same_as_2nd_char)
@@ -588,6 +614,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_extracted_when_source_string_is_2_chars_and_second_char_of_end_string_is_same_as_2nd_char)
@@ -604,6 +631,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_must_be_extracted_when_source_string_is_2_chars_and_second_char_of_end_string_is_same_as_2nd_char)
@@ -634,6 +662,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_extracted_when_source_string_is_2_chars_and_both_chars_of_end_string_are_same_as_2nd_char)
@@ -650,6 +679,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_must_be_extracted_when_source_string_is_2_chars_and_both_chars_of_end_string_are_same_as_2nd_char)
@@ -681,6 +711,7 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 2);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be_extracted_when_source_string_is_2_chars_and_end_string_is_different_1_char)
@@ -698,6 +729,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 2);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_must_be_extracted_when_source_string_is_2_chars_and_end_string_is_different_1_char)
@@ -728,6 +760,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     yli::string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be_extracted_when_source_string_is_3_chars_and_end_string_is_same_as_1st_char)
@@ -743,6 +776,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     yli::string::extract_string_with_several_endings(text_string, data_index, dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 0);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_must_be_extracted_when_source_string_is_3_chars_and_end_string_is_same_as_1st_char)
@@ -772,6 +806,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_extracted_when_source_string_is_3_chars_and_end_string_is_same_as_2nd_char)
@@ -788,6 +823,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_must_be_extracted_when_source_string_is_3_chars_and_end_string_is_same_as_2nd_char)
@@ -819,6 +855,7 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 2);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be_extracted_when_source_string_is_3_chars_and_end_string_is_same_as_3rd_char)
@@ -836,6 +873,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 2);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_must_be_extracted_when_source_string_is_3_chars_and_end_string_is_same_as_3rd_char)
@@ -869,6 +907,7 @@ TEST(extract_string_with_several_endings_from_memory, 3_chars_must_be_extracted_
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array++, 'c');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 3);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 3_chars_must_be_extracted_when_source_string_is_3_chars_and_end_string_is_a_different_char)
@@ -887,6 +926,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 3_chars_must_be
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array++, 'c');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 3);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 3_chars_must_be_extracted_when_source_string_is_3_chars_and_end_string_is_a_different_char)
@@ -918,6 +958,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     yli::string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be_extracted_when_source_string_is_3_chars_and_1st_char_of_end_string_is_same_as_1st_char)
@@ -933,6 +974,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     yli::string::extract_string_with_several_endings(text_string, data_index, dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 0);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_must_be_extracted_when_source_string_is_3_chars_and_1st_char_of_end_string_is_same_as_1st_char)
@@ -961,6 +1003,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     yli::string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be_extracted_when_source_string_is_3_chars_and_2nd_char_of_end_string_is_same_as_1st_char)
@@ -976,6 +1019,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     yli::string::extract_string_with_several_endings(text_string, data_index, dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 0);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_must_be_extracted_when_source_string_is_3_chars_and_2nd_char_of_end_string_is_same_as_1st_char)
@@ -1004,6 +1048,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     yli::string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be_extracted_when_source_string_is_3_chars_and_3rd_char_of_end_string_is_same_as_1st_char)
@@ -1019,6 +1064,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     yli::string::extract_string_with_several_endings(text_string, data_index, dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 0);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_must_be_extracted_when_source_string_is_3_chars_and_3rd_char_of_end_string_is_same_as_1st_char)
@@ -1047,6 +1093,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     yli::string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be_extracted_when_source_string_is_3_chars_and_4th_char_of_end_string_is_same_as_1st_char)
@@ -1062,6 +1109,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     yli::string::extract_string_with_several_endings(text_string, data_index, dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 0);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_must_be_extracted_when_source_string_is_3_chars_and_4th_char_of_end_string_is_same_as_1st_char)
@@ -1090,6 +1138,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     yli::string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be_extracted_when_source_string_is_3_chars_and_5th_char_of_end_string_is_same_as_1st_char)
@@ -1105,6 +1154,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     yli::string::extract_string_with_several_endings(text_string, data_index, dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 0);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_must_be_extracted_when_source_string_is_3_chars_and_5th_char_of_end_string_is_same_as_1st_char)
@@ -1134,6 +1184,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_extracted_when_source_string_is_3_chars_and_1st_char_of_end_string_is_same_as_2nd_char)
@@ -1150,6 +1201,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_must_be_extracted_when_source_string_is_3_chars_and_1st_char_of_end_string_is_same_as_2nd_char)
@@ -1180,6 +1232,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_extracted_when_source_string_is_3_chars_and_2nd_char_of_end_string_is_same_as_2nd_char)
@@ -1196,6 +1249,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_must_be_extracted_when_source_string_is_3_chars_and_2nd_char_of_end_string_is_same_as_2nd_char)
@@ -1226,6 +1280,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_extracted_when_source_string_is_3_chars_and_3rd_char_of_end_string_is_same_as_2nd_char)
@@ -1242,6 +1297,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_must_be_extracted_when_source_string_is_3_chars_and_3rd_char_of_end_string_is_same_as_2nd_char)
@@ -1272,6 +1328,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_extracted_when_source_string_is_3_chars_and_4th_char_of_end_string_is_same_as_2nd_char)
@@ -1288,6 +1345,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_must_be_extracted_when_source_string_is_3_chars_and_4th_char_of_end_string_is_same_as_2nd_char)
@@ -1318,6 +1376,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_extracted_when_source_string_is_3_chars_and_5th_char_of_end_string_is_same_as_2nd_char)
@@ -1334,6 +1393,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 1);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_must_be_extracted_when_source_string_is_3_chars_and_5th_char_of_end_string_is_same_as_2nd_char)
@@ -1365,6 +1425,7 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 2);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be_extracted_when_source_string_is_3_chars_and_1st_char_of_end_string_is_same_as_3rd_char)
@@ -1382,6 +1443,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 2);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_must_be_extracted_when_source_string_is_3_chars_and_1st_char_of_end_string_is_same_as_3rd_char)
@@ -1414,6 +1476,7 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 2);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be_extracted_when_source_string_is_3_chars_and_2nd_char_of_end_string_is_same_as_3rd_char)
@@ -1431,6 +1494,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 2);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_must_be_extracted_when_source_string_is_3_chars_and_2nd_char_of_end_string_is_same_as_3rd_char)
@@ -1463,6 +1527,7 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 2);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be_extracted_when_source_string_is_3_chars_and_3rd_char_of_end_string_is_same_as_3rd_char)
@@ -1480,6 +1545,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 2);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_must_be_extracted_when_source_string_is_3_chars_and_3rd_char_of_end_string_is_same_as_3rd_char)
@@ -1512,6 +1578,7 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 2);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be_extracted_when_source_string_is_3_chars_and_4th_char_of_end_string_is_same_as_3rd_char)
@@ -1529,6 +1596,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 2);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_must_be_extracted_when_source_string_is_3_chars_and_4th_char_of_end_string_is_same_as_3rd_char)
@@ -1561,6 +1629,7 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 2);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be_extracted_when_source_string_is_3_chars_and_5th_char_of_end_string_is_same_as_3rd_char)
@@ -1578,6 +1647,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 2);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_must_be_extracted_when_source_string_is_3_chars_and_5th_char_of_end_string_is_same_as_3rd_char)
@@ -1611,6 +1681,7 @@ TEST(extract_string_with_several_endings_from_memory, 3_chars_must_be_extracted_
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array++, 'c');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 3);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string, 3_chars_must_be_extracted_when_source_string_is_3_chars_and_end_string_is_an_empty_string)
@@ -1629,6 +1700,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 3_chars_must_be
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array++, 'c');
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(data_index, 3);
 }
 
 TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 3_chars_must_be_extracted_when_source_string_is_3_chars_and_end_string_is_an_empty_string)
