@@ -173,6 +173,7 @@ namespace yli
                     {
                         file_content_i++;
                     }
+
                     *vertex_pointer++ = yli::string::extract_float_value_from_string(
                             file_content,
                             --file_content_i,
