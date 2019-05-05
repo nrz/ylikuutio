@@ -447,6 +447,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/bmp_heightmap_loader.hpp
     code/ylikuutio/load/bmp_loader.cpp
     code/ylikuutio/load/bmp_loader.hpp
+    code/ylikuutio/load/csv_loader.cpp
+    code/ylikuutio/load/csv_loader.hpp
     code/ylikuutio/load/fbx_species_loader.cpp
     code/ylikuutio/load/fbx_species_loader.hpp
     code/ylikuutio/load/fbx_symbiosis_loader.cpp
