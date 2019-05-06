@@ -2,17 +2,17 @@
 
 // Include standard headers
 #include <algorithm> // std::copy
-#include <cstddef>  // std::size_t
-#include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
-#include <cstdlib>  // std::strtod, std::strtof, std::strtol, std::strtold, std::strtoll, std::strtoul, std::strtoull
-#include <cstring>  // std::memcmp, std::memcpy, std::strcmp, std::strlen, std::strncmp
-#include <iomanip>  // std::setfill, std::setw
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <list>     // std::list
-#include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
-#include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
-#include <vector>   // std::vector
+#include <cstddef>   // std::size_t
+#include <cstdio>    // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
+#include <cstdlib>   // std::strtod, std::strtof, std::strtol, std::strtold, std::strtoll, std::strtoul, std::strtoull
+#include <cstring>   // std::memcmp, std::memcpy, std::strcmp, std::strlen, std::strncmp
+#include <iomanip>   // std::setfill, std::setw
+#include <iostream>  // std::cout, std::cin, std::cerr
+#include <list>      // std::list
+#include <sstream>   // std::istringstream, std::ostringstream, std::stringstream
+#include <stdint.h>  // uint32_t etc.
+#include <string>    // std::string
+#include <vector>    // std::vector
 
 namespace yli
 {
