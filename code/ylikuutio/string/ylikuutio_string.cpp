@@ -371,6 +371,318 @@ namespace yli
                     description);
         }
 
+        int8_t extract_int8_t_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description)
+        {
+            char char_number_buffer[1024];
+            yli::string::extract_string_with_several_endings(
+                    src_base_pointer,
+                    src_data_pointer,
+                    src_data_size,
+                    char_number_buffer,
+                    char_number_buffer,
+                    sizeof(char_number_buffer),
+                    char_end_string);
+
+            int32_t value = std::strtol(char_number_buffer, nullptr, 10); // base 10.
+            int8_t int8_t_value = 0;
+
+            if (value < std::numeric_limits<int8_t>::min())
+            {
+                std::cerr << "ERROR: `value` " << value << " is too small for `int8_t`! 0 returned.\n";
+            }
+            else if (value > std::numeric_limits<int8_t>::max())
+            {
+                std::cerr << "ERROR: `value` " << value << " is too big for `int8_t`! 0 returned.\n";
+            }
+            else
+            {
+                int8_t_value = static_cast<int8_t>(value);
+            }
+
+            if (description != nullptr)
+            {
+                std::printf("%s: %d\n", description, value);
+            }
+            return int8_t_value;
+        }
+
+        int8_t extract_int8_t_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description)
+        {
+            char char_number_buffer[1024];
+            yli::string::extract_string_with_several_endings(
+                    data_string,
+                    data_index,
+                    char_number_buffer,
+                    char_number_buffer,
+                    sizeof(char_number_buffer),
+                    char_end_string);
+
+            int32_t value = std::strtol(char_number_buffer, nullptr, 10); // base 10.
+            int8_t int8_t_value = 0;
+
+            if (value < std::numeric_limits<int8_t>::min())
+            {
+                std::cerr << "ERROR: `value` " << value << " is too small for `int8_t`! 0 returned.\n";
+            }
+            else if (value > std::numeric_limits<int8_t>::max())
+            {
+                std::cerr << "ERROR: `value` " << value << " is too big for `int8_t`! 0 returned.\n";
+            }
+            else
+            {
+                int8_t_value = static_cast<int8_t>(value);
+            }
+
+            if (description != nullptr)
+            {
+                std::printf("%s: %d\n", description, value);
+            }
+            return int8_t_value;
+        }
+
+        uint8_t extract_uint8_t_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description)
+        {
+            char char_number_buffer[1024];
+            yli::string::extract_string_with_several_endings(
+                    src_base_pointer,
+                    src_data_pointer,
+                    src_data_size,
+                    char_number_buffer,
+                    char_number_buffer,
+                    sizeof(char_number_buffer),
+                    char_end_string);
+
+            uint32_t value = std::strtoul(char_number_buffer, nullptr, 10); // base 10.
+            uint8_t uint8_t_value = 0;
+
+            if (value < std::numeric_limits<uint8_t>::min())
+            {
+                std::cerr << "ERROR: `value` " << value << " is too small for `uint8_t`! 0 returned.\n";
+            }
+            else if (value > std::numeric_limits<uint8_t>::max())
+            {
+                std::cerr << "ERROR: `value` " << value << " is too big for `uint8_t`! 0 returned.\n";
+            }
+            else
+            {
+                uint8_t_value = static_cast<uint8_t>(value);
+            }
+
+            if (description != nullptr)
+            {
+                std::printf("%s: %d\n", description, value);
+            }
+            return uint8_t_value;
+        }
+
+        uint8_t extract_uint8_t_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description)
+        {
+            char char_number_buffer[1024];
+            yli::string::extract_string_with_several_endings(
+                    data_string,
+                    data_index,
+                    char_number_buffer,
+                    char_number_buffer,
+                    sizeof(char_number_buffer),
+                    char_end_string);
+
+            uint32_t value = std::strtoul(char_number_buffer, nullptr, 10); // base 10.
+            uint8_t uint8_t_value = 0;
+
+            if (value < std::numeric_limits<uint8_t>::min())
+            {
+                std::cerr << "ERROR: `value` " << value << " is too small for `uint8_t`! 0 returned.\n";
+            }
+            else if (value > std::numeric_limits<uint8_t>::max())
+            {
+                std::cerr << "ERROR: `value` " << value << " is too big for `uint8_t`! 0 returned.\n";
+            }
+            else
+            {
+                uint8_t_value = static_cast<uint8_t>(value);
+            }
+
+            if (description != nullptr)
+            {
+                std::printf("%s: %d\n", description, value);
+            }
+            return uint8_t_value;
+        }
+
+        int16_t extract_int16_t_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description)
+        {
+            char char_number_buffer[1024];
+            yli::string::extract_string_with_several_endings(
+                    src_base_pointer,
+                    src_data_pointer,
+                    src_data_size,
+                    char_number_buffer,
+                    char_number_buffer,
+                    sizeof(char_number_buffer),
+                    char_end_string);
+
+            int32_t value = std::strtol(char_number_buffer, nullptr, 10); // base 10.
+            int16_t int16_t_value = 0;
+
+            if (value < std::numeric_limits<int16_t>::min())
+            {
+                std::cerr << "ERROR: `value` " << value << " is too small for `int16_t`! 0 returned.\n";
+            }
+            else if (value > std::numeric_limits<int16_t>::max())
+            {
+                std::cerr << "ERROR: `value` " << value << " is too big for `int16_t`! 0 returned.\n";
+            }
+            else
+            {
+                int16_t_value = static_cast<int16_t>(value);
+            }
+
+            if (description != nullptr)
+            {
+                std::printf("%s: %d\n", description, value);
+            }
+            return int16_t_value;
+        }
+
+        int16_t extract_int16_t_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description)
+        {
+            char char_number_buffer[1024];
+            yli::string::extract_string_with_several_endings(
+                    data_string,
+                    data_index,
+                    char_number_buffer,
+                    char_number_buffer,
+                    sizeof(char_number_buffer),
+                    char_end_string);
+
+            int32_t value = std::strtol(char_number_buffer, nullptr, 10); // base 10.
+            int16_t int16_t_value = 0;
+
+            if (value < std::numeric_limits<int16_t>::min())
+            {
+                std::cerr << "ERROR: `value` " << value << " is too small for `int16_t`! 0 returned.\n";
+            }
+            else if (value > std::numeric_limits<int16_t>::max())
+            {
+                std::cerr << "ERROR: `value` " << value << " is too big for `int16_t`! 0 returned.\n";
+            }
+            else
+            {
+                int16_t_value = static_cast<int16_t>(value);
+            }
+
+            if (description != nullptr)
+            {
+                std::printf("%s: %d\n", description, value);
+            }
+            return int16_t_value;
+        }
+
+        uint16_t extract_uint16_t_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description)
+        {
+            char char_number_buffer[1024];
+            yli::string::extract_string_with_several_endings(
+                    src_base_pointer,
+                    src_data_pointer,
+                    src_data_size,
+                    char_number_buffer,
+                    char_number_buffer,
+                    sizeof(char_number_buffer),
+                    char_end_string);
+
+            uint32_t value = std::strtoul(char_number_buffer, nullptr, 10); // base 10.
+            uint16_t uint16_t_value = 0;
+
+            if (value < std::numeric_limits<uint16_t>::min())
+            {
+                std::cerr << "ERROR: `value` " << value << " is too small for `uint16_t`! 0 returned.\n";
+            }
+            else if (value > std::numeric_limits<uint16_t>::max())
+            {
+                std::cerr << "ERROR: `value` " << value << " is too big for `uint16_t`! 0 returned.\n";
+            }
+            else
+            {
+                uint16_t_value = static_cast<uint16_t>(value);
+            }
+
+            if (description != nullptr)
+            {
+                std::printf("%s: %d\n", description, value);
+            }
+            return uint16_t_value;
+        }
+
+        uint16_t extract_uint16_t_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description)
+        {
+            char char_number_buffer[1024];
+            yli::string::extract_string_with_several_endings(
+                    data_string,
+                    data_index,
+                    char_number_buffer,
+                    char_number_buffer,
+                    sizeof(char_number_buffer),
+                    char_end_string);
+
+            uint32_t value = std::strtoul(char_number_buffer, nullptr, 10); // base 10.
+            uint16_t uint16_t_value = 0;
+
+            if (value < std::numeric_limits<uint16_t>::min())
+            {
+                std::cerr << "ERROR: `value` " << value << " is too small for `uint16_t`! 0 returned.\n";
+            }
+            else if (value > std::numeric_limits<uint16_t>::max())
+            {
+                std::cerr << "ERROR: `value` " << value << " is too big for `uint16_t`! 0 returned.\n";
+            }
+            else
+            {
+                uint16_t_value = static_cast<uint16_t>(value);
+            }
+
+            if (description != nullptr)
+            {
+                std::printf("%s: %d\n", description, value);
+            }
+            return uint16_t_value;
+        }
+
         int32_t extract_int32_t_value_from_string(
                 const char* const src_base_pointer,
                 char*& src_data_pointer,
