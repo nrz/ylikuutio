@@ -10,6 +10,9 @@
 #include "code/ylikuutio/ontology/compute_task_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 
+// Include GLEW
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -17,6 +20,7 @@
 #endif
 
 // Include standard headers
+#include <iomanip>    // std::setfill, std::setw
 #include <iostream>   // std::cout, std::cin, std::cerr
 #include <string>     // std::string
 
@@ -120,6 +124,20 @@ namespace gpgpu_test
         {
             std::cerr << "Failed to create ComputeTask.\n";
             return nullptr;
+        }
+
+        GLenum error;
+
+        while (true)
+        {
+            error = glGetError();
+
+            if (error == GL_NO_ERROR)
+            {
+                break;
+            }
+
+            std::cout << "OpenGL error: 0x" << std::setfill('0') << std::setw(2) << std::hex  << error << std::dec << "\n";
         }
 
         return gpgpu_test_scene_entity;
