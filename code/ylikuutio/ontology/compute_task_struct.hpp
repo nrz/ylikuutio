@@ -36,6 +36,7 @@ typedef struct ComputeTaskStruct
         texture_height(0),
         n_index_characters(4),
         format(GL_RGB),
+        internal_format(GL_INVALID_ENUM),
         type(GL_UNSIGNED_BYTE),
         should_ylikuutio_save_intermediate_results(false),
         preiterate_callback(nullptr),
@@ -55,6 +56,7 @@ typedef struct ComputeTaskStruct
     std::size_t texture_height;
     std::size_t n_index_characters;  // For intermediate results' filenames.
     GLenum format;
+    GLenum internal_format;
     GLenum type;
     bool should_ylikuutio_save_intermediate_results;
     PreIterateCallback preiterate_callback;
