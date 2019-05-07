@@ -24,7 +24,7 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_float)
 
     yli::linear_algebra::Matrix railway_neighbors_from_csv_file(17, 17);
     ASSERT_TRUE(railway_neighbors_from_csv_file.get_is_square());
-    ASSERT_EQ(railway_neighbors_from_csv_file.get_height(), 17);
+    ASSERT_EQ(railway_neighbors_from_csv_file.get_width(), 17);
     ASSERT_EQ(railway_neighbors_from_csv_file.get_height(), 17);
 
     railway_neighbors_from_csv_file << *data_vector;
