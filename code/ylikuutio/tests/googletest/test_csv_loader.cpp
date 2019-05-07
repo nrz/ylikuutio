@@ -57,6 +57,20 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_float)
     ASSERT_EQ(railway_neighbors_from_csv_file, railway_neighbors);
 }
 
+TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_float_with_fill)
+{
+    const std::string some_finnish_railway_stations_csv_filename = "some_finnish_railway_stations_float_with_fill.csv";
+    std::size_t data_width;
+    std::size_t data_height;
+    std::size_t data_size;
+    std::shared_ptr<std::vector<float>> data_vector = yli::load::load_CSV_file<float>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
+    ASSERT_NE(data_vector, nullptr);
+
+    ASSERT_EQ(data_width, 32);
+    ASSERT_EQ(data_height, 32);
+    ASSERT_EQ(data_size, 32 * 32);
+}
+
 TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_int16_t)
 {
     const std::string some_finnish_railway_stations_csv_filename = "some_finnish_railway_stations_integer.csv";
@@ -129,6 +143,20 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_uint16
     ASSERT_EQ(*data_vector, railway_neighbors);
 }
 
+TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_uint16_t_with_fill)
+{
+    const std::string some_finnish_railway_stations_csv_filename = "some_finnish_railway_stations_unsigned_integer_with_fill.csv";
+    std::size_t data_width;
+    std::size_t data_height;
+    std::size_t data_size;
+    std::shared_ptr<std::vector<uint16_t>> data_vector = yli::load::load_CSV_file<uint16_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
+    ASSERT_NE(data_vector, nullptr);
+
+    ASSERT_EQ(data_width, 32);
+    ASSERT_EQ(data_height, 32);
+    ASSERT_EQ(data_size, 32 * 32);
+}
+
 TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_int32_t)
 {
     const std::string some_finnish_railway_stations_csv_filename = "some_finnish_railway_stations_integer.csv";
@@ -199,4 +227,18 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_uint32
     9999,  154, 9999, 9999, 9999, 9999, 9999, 9999,  122, 9999, 9999, 9999,  211, 9999, 9999, 9999,    0 };  // Yv
 
     ASSERT_EQ(*data_vector, railway_neighbors);
+}
+
+TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_uint32_t_with_fill)
+{
+    const std::string some_finnish_railway_stations_csv_filename = "some_finnish_railway_stations_unsigned_integer_with_fill.csv";
+    std::size_t data_width;
+    std::size_t data_height;
+    std::size_t data_size;
+    std::shared_ptr<std::vector<uint32_t>> data_vector = yli::load::load_CSV_file<uint32_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
+    ASSERT_NE(data_vector, nullptr);
+
+    ASSERT_EQ(data_width, 32);
+    ASSERT_EQ(data_height, 32);
+    ASSERT_EQ(data_size, 32 * 32);
 }
