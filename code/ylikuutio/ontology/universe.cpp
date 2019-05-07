@@ -807,7 +807,7 @@ namespace yli
                 universe->render_without_changing_depth_test(); // Render to framebuffer.
 
                 // Transfer data from the GPU texture to a CPU array.
-                const std::shared_ptr<std::vector<uint8_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array(
+                const std::shared_ptr<std::vector<uint8_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<uint8_t>(
                         GL_RGB, GL_UNSIGNED_BYTE, texture_width, texture_height);
 
                 yli::file::binary_write(*data_vector_shared_ptr, filename);

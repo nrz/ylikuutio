@@ -184,7 +184,7 @@ namespace yli
                     filename_stringstream << this->output_filename << "_" << std::setfill('0') << std::setw(this->n_index_characters) << iteration_i;
 
                     // Transfer data from the GPU texture to a CPU array.
-                    const std::shared_ptr<std::vector<uint8_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array(
+                    const std::shared_ptr<std::vector<uint8_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<uint8_t>(
                             this->format, this->type, this->texture_width, this->texture_height);
 
                     yli::file::binary_write(*data_vector_shared_ptr, filename_stringstream.str());
@@ -212,7 +212,7 @@ namespace yli
             }
 
             // Transfer data from the GPU texture to a CPU array.
-            const std::shared_ptr<std::vector<uint8_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array(
+            const std::shared_ptr<std::vector<uint8_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<uint8_t>(
                     this->format, this->type, this->texture_width, this->texture_height);
 
             if (!this->output_filename.empty())
