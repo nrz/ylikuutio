@@ -8,6 +8,7 @@
 #include <cstring>   // std::memcmp, std::memcpy, std::strcmp, std::strlen, std::strncmp
 #include <iomanip>   // std::setfill, std::setw
 #include <iostream>  // std::cout, std::cin, std::cerr
+#include <limits>    // std::numeric_limits
 #include <list>      // std::list
 #include <sstream>   // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>  // uint32_t etc.
@@ -279,6 +280,126 @@ namespace yli
             separator_it++;
             dest_string = std::string(separator_it, data_string.end());
             return filename_length;
+        }
+
+        void extract_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description,
+                int8_t& value)
+        {
+            value = yli::string::extract_int8_t_value_from_string(
+                    src_base_pointer,
+                    src_data_pointer,
+                    src_data_size,
+                    char_end_string,
+                    description);
+        }
+
+        void extract_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description,
+                int8_t& value)
+        {
+            value = yli::string::extract_int8_t_value_from_string(
+                    data_string,
+                    data_index,
+                    char_end_string,
+                    description);
+        }
+
+        void extract_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description,
+                uint8_t& value)
+        {
+            value = yli::string::extract_uint8_t_value_from_string(
+                    src_base_pointer,
+                    src_data_pointer,
+                    src_data_size,
+                    char_end_string,
+                    description);
+        }
+
+        void extract_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description,
+                uint8_t& value)
+        {
+            value = yli::string::extract_uint8_t_value_from_string(
+                    data_string,
+                    data_index,
+                    char_end_string,
+                    description);
+        }
+
+        void extract_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description,
+                int16_t& value)
+        {
+            value = yli::string::extract_int16_t_value_from_string(
+                    src_base_pointer,
+                    src_data_pointer,
+                    src_data_size,
+                    char_end_string,
+                    description);
+        }
+
+        void extract_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description,
+                int16_t& value)
+        {
+            value = yli::string::extract_int16_t_value_from_string(
+                    data_string,
+                    data_index,
+                    char_end_string,
+                    description);
+        }
+
+        void extract_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description,
+                uint16_t& value)
+        {
+            value = yli::string::extract_uint16_t_value_from_string(
+                    src_base_pointer,
+                    src_data_pointer,
+                    src_data_size,
+                    char_end_string,
+                    description);
+        }
+
+        void extract_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description,
+                uint16_t& value)
+        {
+            value = yli::string::extract_uint16_t_value_from_string(
+                    data_string,
+                    data_index,
+                    char_end_string,
+                    description);
         }
 
         void extract_value_from_string(
