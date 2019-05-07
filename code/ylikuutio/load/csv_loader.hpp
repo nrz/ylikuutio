@@ -104,7 +104,7 @@ namespace yli
 
                 if (n_elements_in_current_line > 0)
                 {
-                    // This last line was not empty line.
+                    // This last line was not an empty line.
                     n_lines++;
 
                     if (n_elements_in_current_line != n_elements_in_first_line)
