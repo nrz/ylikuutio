@@ -70,13 +70,13 @@ namespace yli
                                     // This was the first non-empty line.
                                     n_elements_in_first_line = n_elements_in_current_line;
                                 }
-                            }
-                            else if (n_elements_in_current_line != n_elements_in_first_line)
-                            {
-                                // This line has a different number of elements than the first line.
-                                // All non-empty lines are expected to have the same number of elements,
-                                // so that the data can be entered in a matrix.
-                                return nullptr;
+                                else if (n_elements_in_current_line != n_elements_in_first_line)
+                                {
+                                    // This line has a different number of elements than the first line.
+                                    // All non-empty lines are expected to have the same number of elements,
+                                    // so that the data can be entered in a matrix.
+                                    return nullptr;
+                                }
                             }
 
                             // Next line begins now.
