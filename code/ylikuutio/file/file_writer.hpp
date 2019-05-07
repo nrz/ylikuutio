@@ -10,7 +10,7 @@ namespace yli
 {
     namespace file
     {
-        bool binary_write(const std::vector<uint8_t>& data, const std::string& file_path);
+        void binary_write(const std::vector<uint8_t>& data, const std::string& file_path);
     }
 }
 
