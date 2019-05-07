@@ -49,10 +49,13 @@ namespace yli
             // Requirements:
             // `this->parent` must not be `nullptr`.
 
-            // Cleanup buffers and texture.
-            glDeleteBuffers(1, &this->vertexbuffer);
-            glDeleteBuffers(1, &this->uvbuffer);
-            glDeleteTextures(1, &this->source_texture);
+            if (this->is_texture_loaded)
+            {
+                // Cleanup buffers and texture.
+                glDeleteBuffers(1, &this->vertexbuffer);
+                glDeleteBuffers(1, &this->uvbuffer);
+                glDeleteTextures(1, &this->source_texture);
+            }
 
             if (this->is_framebuffer_initialized)
             {
@@ -70,6 +73,12 @@ namespace yli
 
         void ComputeTask::render()
         {
+            if (!this->is_texture_loaded)
+            {
+                // Do not render anything if texture is not loaded.
+                return;
+            }
+
             this->prerender();
 
             if (this->is_ready)
