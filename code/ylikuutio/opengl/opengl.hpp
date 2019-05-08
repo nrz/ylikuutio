@@ -40,8 +40,8 @@ namespace yli
                 const std::size_t n_color_channels = yli::opengl::get_n_color_channels(format);
                 const std::size_t size_of_texel_in_bytes = n_color_channels * yli::opengl::get_size_of_component(type);
                 const std::size_t n_texels = texture_width * texture_height;
-                const std::size_t size_of_texture_in_bytes = size_of_texel_in_bytes * n_texels;
-                T1* const result_array = new T1[size_of_texture_in_bytes];
+                const std::size_t size_of_texture = size_of_texel_in_bytes * n_texels;
+                T1* const result_array = new T1[size_of_texture];
 
                 glReadBuffer(GL_COLOR_ATTACHMENT0);
                 glReadPixels(0, 0, texture_width, texture_height, format, type, result_array);
@@ -51,7 +51,7 @@ namespace yli
                     yli::memory::flip_vertically(result_array, size_of_texel_in_bytes * texture_width, texture_height);
                 }
 
-                std::shared_ptr<std::vector<T1>> result_vector = std::make_shared<std::vector<T1>>(result_array, result_array + size_of_texture_in_bytes);
+                std::shared_ptr<std::vector<T1>> result_vector = std::make_shared<std::vector<T1>>(result_array, result_array + size_of_texture);
 
                 delete[] result_array;
 
