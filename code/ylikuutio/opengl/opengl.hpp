@@ -11,6 +11,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli
@@ -57,6 +58,14 @@ namespace yli
 
                 return result_vector;
             }
+
+            void save_data_from_gpu_texture_into_file(
+                    const GLenum format,
+                    const GLenum type,
+                    const std::size_t texture_width,
+                    const std::size_t texture_height,
+                    const std::string filename,
+                    const bool should_ylikuutio_flip_texture);
     }
 }
 
