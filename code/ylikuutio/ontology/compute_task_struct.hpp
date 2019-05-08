@@ -39,6 +39,7 @@ typedef struct ComputeTaskStruct
         internal_format(GL_INVALID_ENUM),
         type(GL_UNSIGNED_BYTE),
         should_ylikuutio_save_intermediate_results(false),
+        should_ylikuutio_flip_texture(true),
         preiterate_callback(nullptr),
         postiterate_callback(nullptr)
     {
@@ -59,6 +60,7 @@ typedef struct ComputeTaskStruct
     GLenum internal_format;
     GLenum type;
     bool should_ylikuutio_save_intermediate_results;
+    bool should_ylikuutio_flip_texture;
     PreIterateCallback preiterate_callback;
     PostIterateCallback postiterate_callback;
 } TextureStruct;
