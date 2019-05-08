@@ -39,9 +39,8 @@ namespace yli
             {
                 // Transfer data from the GPU texture to a CPU array.
                 const std::size_t n_color_channels = yli::opengl::get_n_color_channels(format);
-                const std::size_t size_of_texel_in_bytes = n_color_channels * yli::opengl::get_size_of_component(type);
                 const std::size_t n_texels = texture_width * texture_height;
-                const std::size_t size_of_texture = size_of_texel_in_bytes * n_texels;
+                const std::size_t size_of_texture = n_color_channels * n_texels;
                 T1* const result_array = new T1[size_of_texture];
 
                 glReadBuffer(GL_COLOR_ATTACHMENT0);
@@ -49,7 +48,7 @@ namespace yli
 
                 if (should_ylikuutio_flip_texture)
                 {
-                    yli::memory::flip_vertically(result_array, size_of_texel_in_bytes * texture_width, texture_height);
+                    yli::memory::flip_vertically(result_array, n_color_channels * texture_width, texture_height);
                 }
 
                 std::shared_ptr<std::vector<T1>> result_vector = std::make_shared<std::vector<T1>>(result_array, result_array + size_of_texture);
