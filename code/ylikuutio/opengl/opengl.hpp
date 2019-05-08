@@ -30,10 +30,10 @@ namespace yli
 
         template<class T1>
             std::shared_ptr<std::vector<T1>> copy_data_from_gpu_texture_to_cpu_array(
-                    GLenum format,
-                    GLenum type,
-                    std::size_t texture_width,
-                    std::size_t texture_height)
+                    const GLenum format,
+                    const GLenum type,
+                    const std::size_t texture_width,
+                    const std::size_t texture_height)
             {
                 // Transfer data from the GPU texture to a CPU array.
                 const std::size_t n_color_channels = yli::opengl::get_n_color_channels(format);
