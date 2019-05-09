@@ -79,7 +79,7 @@ namespace gpgpu_test
 
         std::cout << "Creating yli::ontology::Entity* identity_shader_BMP_compute_task_entity ...\n";
         yli::ontology::Entity* const identity_shader_BMP_compute_task_entity = entity_factory->create_ComputeTask(identity_shader_BMP_compute_task_struct);
-        std::cout << "Creating yli::ontology::ComputeTask* identity_shader ...\n";
+        std::cout << "Creating yli::ontology::ComputeTask* identity_shader_BMP_compute_task ...\n";
         yli::ontology::ComputeTask* const identity_shader_BMP_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(identity_shader_BMP_compute_task_entity);
 
         if (identity_shader_BMP_compute_task == nullptr)
@@ -100,7 +100,7 @@ namespace gpgpu_test
 
         std::cout << "Creating yli::ontology::Entity* identity_shader_CSV_compute_task_entity ...\n";
         yli::ontology::Entity* const identity_shader_CSV_compute_task_entity = entity_factory->create_ComputeTask(identity_shader_CSV_compute_task_struct);
-        std::cout << "Creating yli::ontology::ComputeTask* identity_shader ...\n";
+        std::cout << "Creating yli::ontology::ComputeTask* identity_shader_CSV_compute_task ...\n";
         yli::ontology::ComputeTask* const identity_shader_CSV_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(identity_shader_CSV_compute_task_entity);
 
         if (identity_shader_CSV_compute_task == nullptr)
@@ -138,7 +138,7 @@ namespace gpgpu_test
 
         std::cout << "Creating yli::ontology::Entity* sobel_shader_compute_task_entity ...\n";
         yli::ontology::Entity* const sobel_shader_compute_task_entity = entity_factory->create_ComputeTask(sobel_shader_compute_task_struct);
-        std::cout << "Creating yli::ontology::ComputeTask* sobel_shader ...\n";
+        std::cout << "Creating yli::ontology::ComputeTask* sobel_shader_compute_task ...\n";
         yli::ontology::ComputeTask* const sobel_shader_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(sobel_shader_compute_task_entity);
 
         if (sobel_shader_compute_task == nullptr)
@@ -178,7 +178,7 @@ namespace gpgpu_test
 
         std::cout << "Creating yli::ontology::Entity* floyd_warshall_shader_CSV_compute_task_entity ...\n";
         yli::ontology::Entity* const floyd_warshall_shader_CSV_compute_task_entity = entity_factory->create_ComputeTask(floyd_warshall_shader_CSV_compute_task_struct);
-        std::cout << "Creating yli::ontology::ComputeTask* floyd_warshall_shader ...\n";
+        std::cout << "Creating yli::ontology::ComputeTask* floyd_warshall_shader_CSV_compute_task ...\n";
         yli::ontology::ComputeTask* const floyd_warshall_shader_CSV_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(floyd_warshall_shader_CSV_compute_task_entity);
 
         if (floyd_warshall_shader_CSV_compute_task == nullptr)
