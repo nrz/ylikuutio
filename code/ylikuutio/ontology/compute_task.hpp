@@ -94,6 +94,7 @@ namespace yli
                     this->source_texture               = 0; // some dummy value.
                     this->target_texture               = 0; // some dummy value.
                     this->openGL_textureID             = 0; // some dummy value.
+                    this->is_texture_loaded            = false;
                     this->is_framebuffer_initialized   = false;
                     this->is_ready                     = false;
 
@@ -101,12 +102,15 @@ namespace yli
                     this->vertexUVID                   = 0; // some dummy value.
                     this->screen_width_uniform_ID      = 0; // some dummy value.
                     this->screen_height_uniform_ID     = 0; // some dummy value.
+                    this->iteration_i_uniform_ID       = 0; // some dummy value.
                     this->vertexbuffer                 = 0; // some dummy value.
                     this->uvbuffer                     = 0; // some dummy value.
 
                     this->format                       = compute_task_struct.format;
+                    this->internal_format              = compute_task_struct.internal_format;
                     this->type                         = compute_task_struct.type;
                     this->should_ylikuutio_save_intermediate_results = compute_task_struct.should_ylikuutio_save_intermediate_results;
+                    this->should_ylikuutio_flip_texture              = compute_task_struct.should_ylikuutio_flip_texture;
 
                     this->preiterate_callback = compute_task_struct.preiterate_callback;
                     this->postiterate_callback = compute_task_struct.postiterate_callback;
@@ -127,12 +131,39 @@ namespace yli
                         {
                             std::cerr << "ERROR: loading BMP texture failed!\n";
                         }
+                        else
+                        {
+                            this->is_texture_loaded = true;
+                        }
                     }
                     else if (this->texture_file_format == "dds" || this->texture_file_format == "DDS")
                     {
                         if (!yli::load::load_DDS_texture(this->texture_filename, this->texture_width, this->texture_height, this->texture_size, this->source_texture))
                         {
                             std::cerr << "ERROR: loading DDS texture failed!\n";
+                        }
+                        else
+                        {
+                            this->is_texture_loaded = true;
+                        }
+                    }
+                    else if (this->texture_file_format == "csv" || this->texture_file_format == "CSV")
+                    {
+                        if (!yli::load::load_CSV_texture(
+                                    this->texture_filename,
+                                    this->format,
+                                    this->internal_format,
+                                    this->type,
+                                    this->texture_width,
+                                    this->texture_height,
+                                    this->texture_size,
+                                    this->source_texture))
+                        {
+                            std::cerr << "ERROR: loading CSV texture failed!\n";
+                        }
+                        else
+                        {
+                            this->is_texture_loaded = true;
                         }
                     }
                     else
@@ -141,44 +172,51 @@ namespace yli
                         std::cerr << "texture file format: " << this->texture_file_format << "\n";
                     }
 
-                    // Get a handle for our "my_texture_sampler" uniform.
-                    this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "my_texture_sampler");
+                    if (this->is_texture_loaded)
+                    {
+                        // Get a handle for our "texture_sampler" uniform.
+                        this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "texture_sampler");
 
-                    // Initialize uniform window width.
-                    // This is named `screen_width` instead of `texture_width` for compatibility with other shaders.
-                    this->screen_width_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_width");
-                    glUniform1i(this->screen_width_uniform_ID, this->texture_width);
+                        // Initialize uniform window width.
+                        // This is named `screen_width` instead of `texture_width` for compatibility with other shaders.
+                        this->screen_width_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_width");
+                        glUniform1i(this->screen_width_uniform_ID, this->texture_width);
 
-                    // Initialize uniform window height.
-                    // This is named `screen_height` instead of `texture_height` for compatibility with other shaders.
-                    this->screen_height_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_height");
-                    glUniform1i(this->screen_height_uniform_ID, this->texture_height);
+                        // Initialize uniform window height.
+                        // This is named `screen_height` instead of `texture_height` for compatibility with other shaders.
+                        this->screen_height_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_height");
+                        glUniform1i(this->screen_height_uniform_ID, this->texture_height);
 
-                    // Create model (a square which consists of 2 triangles).
-                    // *---*
-                    // |  /|
-                    // | / |
-                    // |/  |
-                    // *---*
-                    const std::vector<glm::vec2> vertices
-                    { { -1.0f, 1.0f }, { -1.0f, -1.0f }, { 1.0f, 1.0f }, { 1.0f, -1.0f }, { 1.0f, 1.0f }, { -1.0f, -1.0f } };
-                    this->vertices_size = vertices.size();
+                        // Initialize uniform iteration index.
+                        this->iteration_i_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "iteration_i");
+                        glUniform1i(this->iteration_i_uniform_ID, 0);
 
-                    const std::vector<glm::vec2> uvs
-                    { { 0.0f, 1.0f }, { 0.0f, 0.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 0.0f } };
-                    this->uvs_size = uvs.size();
+                        // Create model (a square which consists of 2 triangles).
+                        // *---*
+                        // |  /|
+                        // | / |
+                        // |/  |
+                        // *---*
+                        const std::vector<glm::vec2> vertices
+                        { { -1.0f, 1.0f }, { -1.0f, -1.0f }, { 1.0f, 1.0f }, { 1.0f, -1.0f }, { 1.0f, 1.0f }, { -1.0f, -1.0f } };
+                        this->vertices_size = vertices.size();
 
-                    // Load model into a VBO.
+                        const std::vector<glm::vec2> uvs
+                        { { 0.0f, 1.0f }, { 0.0f, 0.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 0.0f } };
+                        this->uvs_size = uvs.size();
 
-                    // Vertices.
-                    glGenBuffers(1, &this->vertexbuffer);
-                    glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
-                    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
+                        // Load model into a VBO.
 
-                    // UVs.
-                    glGenBuffers(1, &this->uvbuffer);
-                    glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
-                    glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
+                        // Vertices.
+                        glGenBuffers(1, &this->vertexbuffer);
+                        glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
+                        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
+
+                        // UVs.
+                        glGenBuffers(1, &this->uvbuffer);
+                        glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
+                        glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
+                    }
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::ComputeTask*";
@@ -243,7 +281,8 @@ namespace yli
                 uint32_t framebuffer;
                 uint32_t source_texture;
                 uint32_t target_texture;
-                uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(this->parent->get_programID(), "my_texture_sampler")`.
+                uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(this->parent->get_programID(), "texture_sampler")`.
+                bool is_texture_loaded;
                 bool is_framebuffer_initialized;
                 bool is_ready;
 
@@ -251,14 +290,17 @@ namespace yli
                 uint32_t vertexUVID;
                 uint32_t screen_width_uniform_ID;          // Location of the program's window width uniform.
                 uint32_t screen_height_uniform_ID;         // Location of the program's window height uniform.
+                uint32_t iteration_i_uniform_ID;           // Location of the program's iteration index uniform.
 
                 uint32_t vertexbuffer;
                 uint32_t uvbuffer;
 
                 GLenum format;
+                GLenum internal_format;
                 GLenum type;
 
                 bool should_ylikuutio_save_intermediate_results;
+                bool should_ylikuutio_flip_texture;
 
                 PreIterateCallback preiterate_callback;
                 PostIterateCallback postiterate_callback;

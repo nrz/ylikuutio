@@ -3,7 +3,6 @@
 #include "shader.hpp"
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/file/file_writer.hpp"
 #include "code/ylikuutio/memory/memory_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 
@@ -49,10 +48,13 @@ namespace yli
             // Requirements:
             // `this->parent` must not be `nullptr`.
 
-            // Cleanup buffers and texture.
-            glDeleteBuffers(1, &this->vertexbuffer);
-            glDeleteBuffers(1, &this->uvbuffer);
-            glDeleteTextures(1, &this->source_texture);
+            if (this->is_texture_loaded)
+            {
+                // Cleanup buffers and texture.
+                glDeleteBuffers(1, &this->vertexbuffer);
+                glDeleteBuffers(1, &this->uvbuffer);
+                glDeleteTextures(1, &this->source_texture);
+            }
 
             if (this->is_framebuffer_initialized)
             {
@@ -70,6 +72,12 @@ namespace yli
 
         void ComputeTask::render()
         {
+            if (!this->is_texture_loaded)
+            {
+                // Do not render anything if texture is not loaded.
+                return;
+            }
+
             this->prerender();
 
             if (this->is_ready)
@@ -126,13 +134,16 @@ namespace yli
                     }
                 }
 
+                // Update the value of `uniform` variable `iteration_i`.
+                glUniform1i(this->iteration_i_uniform_ID, iteration_i);
+
                 this->preiterate();
 
                 // Bind our texture in Texture Unit 0.
                 glActiveTexture(GL_TEXTURE0);
                 glBindTexture(GL_TEXTURE_2D, this->source_texture);
 
-                // Set our "my_texture_sampler" sampler to use Texture Unit 0.
+                // Set our "texture_sampler" sampler to use Texture Unit 0.
                 glUniform1i(this->openGL_textureID, 0);
 
                 // 1st attribute buffer: vertices.
@@ -174,28 +185,35 @@ namespace yli
                     std::stringstream filename_stringstream;
                     filename_stringstream << this->output_filename << "_" << std::setfill('0') << std::setw(this->n_index_characters) << iteration_i;
 
-                    // Transfer data from the GPU texture to a CPU array.
-                    const std::shared_ptr<std::vector<uint8_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array(
-                            this->format, this->type, this->texture_width, this->texture_height);
-
-                    yli::file::binary_write(*data_vector_shared_ptr, filename_stringstream.str());
+                    // Transfer data from the GPU texture to a CPU array and save into a file.
+                    yli::opengl::save_data_from_gpu_texture_into_file(
+                            this->format, this->type, this->texture_width, this->texture_height, filename_stringstream.str(), this->should_ylikuutio_flip_texture);
                 }
 
                 // Ping pong.
                 std::swap(this->source_texture, this->target_texture);
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->target_texture, 0);
 
+                GLenum error;
+
+                while (true)
+                {
+                    error = glGetError();
+
+                    if (error == GL_NO_ERROR)
+                    {
+                        break;
+                    }
+
+                    std::cout << "OpenGL error: 0x" << std::setfill('0') << std::setw(4) << std::hex << error << std::dec << "\n";
+                }
+
                 this->postiterate();
             }
 
-            // Transfer data from the GPU texture to a CPU array.
-            const std::shared_ptr<std::vector<uint8_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array(
-                    this->format, this->type, this->texture_width, this->texture_height);
-
-            if (!this->output_filename.empty())
-            {
-                yli::file::binary_write(*data_vector_shared_ptr, this->output_filename);
-            }
+            // Transfer data from the GPU texture to a CPU array and save into a file.
+            yli::opengl::save_data_from_gpu_texture_into_file(
+                    this->format, this->type, this->texture_width, this->texture_height, this->output_filename, this->should_ylikuutio_flip_texture);
 
             universe->restore_onscreen_rendering();
 

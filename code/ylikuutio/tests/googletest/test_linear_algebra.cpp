@@ -11,6 +11,9 @@ TEST(matrices_must_function_as_expected, matrices)
     // populate matrices and matrix equality.
 
     yli::linear_algebra::Matrix identity3x3(3, 3);
+    ASSERT_TRUE(identity3x3.get_is_square());
+    ASSERT_EQ(identity3x3.get_height(), 3);
+    ASSERT_EQ(identity3x3.get_height(), 3);
     identity3x3 << 1; identity3x3 << 0; identity3x3 << 0;
     identity3x3 << 0; identity3x3 << 1; identity3x3 << 0;
     identity3x3 << 0; identity3x3 << 0; identity3x3 << 1;

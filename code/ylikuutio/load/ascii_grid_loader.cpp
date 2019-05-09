@@ -21,7 +21,7 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
+#include <cmath>    // NAN, std::isnan, std::pow, floor, ceil
 #include <cstddef>  // std::size_t
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -83,45 +83,69 @@ namespace yli
             // All possible block identifier strings.
             const std::vector<std::string> number_strings_vector = { "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-            while (!yli::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+            while (!yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
+            {
+                file_content_i++;
+            }
+
             const int32_t image_width_int32_t = yli::string::extract_int32_t_value_from_string(
                     file_content,
-                    --file_content_i,
+                    file_content_i,
                     (const char* const) " \n",
                     (const char* const) "ncols");
 
-            while (!yli::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+            while (!yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
+            {
+                file_content_i++;
+            }
+
             const int32_t image_height_int32_t = yli::string::extract_int32_t_value_from_string(
                     file_content,
-                    --file_content_i,
+                    file_content_i,
                     (const char* const) " \n",
                     (const char* const) "nrows");
 
-            while (!yli::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+            while (!yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
+            {
+                file_content_i++;
+            }
+
             yli::string::extract_float_value_from_string(
                     file_content,
-                    --file_content_i,
+                    file_content_i,
                     (const char* const) " \n",
                     (const char* const) "xllcorner");
 
-            while (!yli::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+            while (!yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
+            {
+                file_content_i++;
+            }
+
             yli::string::extract_float_value_from_string(
                     file_content,
-                    --file_content_i,
+                    file_content_i,
                     (const char* const) " \n",
                     (const char* const) "yllcorner");
 
-            while (!yli::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+            while (!yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
+            {
+                file_content_i++;
+            }
+
             yli::string::extract_float_value_from_string(
                     file_content,
-                    --file_content_i,
+                    file_content_i,
                     (const char* const) " \n",
                     (const char* const) "cellsize");
 
-            while (!yli::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+            while (!yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
+            {
+                file_content_i++;
+            }
+
             yli::string::extract_float_value_from_string(
                     file_content,
-                    --file_content_i,
+                    file_content_i,
                     (const char* const) " \n",
                     (const char* const) "nodata_value");
 
@@ -159,7 +183,7 @@ namespace yli
             for (std::size_t z = 0; z < image_height; z++)
             {
                 // show progress in percents.
-                current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (image_height - 1))));
+                current_percent = static_cast<int32_t>(floor(100.0f * (static_cast<double>(z) / static_cast<double>(image_height - 1))));
 
                 if (current_percent > last_percent)
                 {
@@ -173,9 +197,10 @@ namespace yli
                     {
                         file_content_i++;
                     }
+
                     *vertex_pointer++ = yli::string::extract_float_value_from_string(
                             file_content,
-                            --file_content_i,
+                            file_content_i,
                             (const char* const) " \n",
                             (const char* const) nullptr);
                 }

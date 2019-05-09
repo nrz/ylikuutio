@@ -40,8 +40,8 @@ namespace yli
 
                 void operator<<(const float rhs);
                 void operator<<(const std::vector<float>& rhs);
-                bool operator==(const yli::linear_algebra::Matrix& rhs);
-                bool operator!=(const yli::linear_algebra::Matrix& rhs);
+                bool operator==(const yli::linear_algebra::Matrix& rhs) const;
+                bool operator!=(const yli::linear_algebra::Matrix& rhs) const;
                 yli::linear_algebra::Matrix& operator++();
                 yli::linear_algebra::Matrix operator++(const int);
                 yli::linear_algebra::Matrix& operator--();
@@ -56,6 +56,10 @@ namespace yli
                 {
                     return Proxy(array_of_arrays[index]);
                 }
+
+                bool get_is_square() const;
+                std::size_t get_width() const;
+                std::size_t get_height() const;
 
                 std::shared_ptr<yli::linear_algebra::Matrix> transpose();
                 float det();

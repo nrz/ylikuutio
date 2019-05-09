@@ -30,7 +30,6 @@
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/console/console.hpp"
-#include "code/ylikuutio/file/file_writer.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/memory/memory_templates.hpp"
@@ -806,11 +805,10 @@ namespace yli
                 glViewport(0, 0, texture_width, texture_height);
                 universe->render_without_changing_depth_test(); // Render to framebuffer.
 
-                // Transfer data from the GPU texture to a CPU array.
-                const std::shared_ptr<std::vector<uint8_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array(
-                        GL_RGB, GL_UNSIGNED_BYTE, texture_width, texture_height);
-
-                yli::file::binary_write(*data_vector_shared_ptr, filename);
+                // Transfer data from the GPU texture to a CPU array and save into a file.
+                const bool should_ylikuutio_flip_texture = true;
+                yli::opengl::save_data_from_gpu_texture_into_file(
+                        GL_RGB, GL_UNSIGNED_BYTE, texture_width, texture_height, filename, should_ylikuutio_flip_texture);
 
                 universe->restore_onscreen_rendering();
             }

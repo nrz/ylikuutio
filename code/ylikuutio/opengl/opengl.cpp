@@ -1,5 +1,5 @@
 #include "opengl.hpp"
-#include "code/ylikuutio/memory/memory_templates.hpp"
+#include "code/ylikuutio/file/file_writer.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -11,6 +11,7 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli
@@ -100,9 +101,9 @@ namespace yli
                 case GL_BGR:
                     return 3;
                 case GL_RGBA:
-                    return 3;
+                    return 4;
                 case GL_BGRA:
-                    return 3;
+                    return 4;
                 case GL_LUMINANCE:
                     return 1;
                 case GL_LUMINANCE_ALPHA:
@@ -145,29 +146,116 @@ namespace yli
             }
         }
 
-        std::shared_ptr<std::vector<uint8_t>> copy_data_from_gpu_texture_to_cpu_array(
-                GLenum format,
-                GLenum type,
-                std::size_t texture_width,
-                std::size_t texture_height)
+        void save_data_from_gpu_texture_into_file(
+                const GLenum format,
+                const GLenum type,
+                const std::size_t texture_width,
+                const std::size_t texture_height,
+                const std::string filename,
+                const bool should_ylikuutio_flip_texture)
         {
-            // Transfer data from the GPU texture to a CPU array.
-            const std::size_t n_color_channels = yli::opengl::get_n_color_channels(format);
-            const std::size_t size_of_texel_in_bytes = n_color_channels * yli::opengl::get_size_of_component(type);
-            const std::size_t n_texels = texture_width * texture_height;
-            const std::size_t size_of_texture_in_bytes = size_of_texel_in_bytes * n_texels;
-            uint8_t* const result_array = new uint8_t[size_of_texture_in_bytes];
+            if (filename.empty())
+            {
+                return;
+            }
 
-            glReadBuffer(GL_COLOR_ATTACHMENT0);
-            glReadPixels(0, 0, texture_width, texture_height, format, type, result_array);
+            if (type == GL_BYTE)
+            {
+                std::shared_ptr<std::vector<int8_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<int8_t>(
+                        format,
+                        type,
+                        texture_width,
+                        texture_height,
+                        should_ylikuutio_flip_texture);
+                yli::file::binary_write(*data_vector_shared_ptr, filename);
+            }
+            else if (type == GL_UNSIGNED_BYTE)
+            {
+                std::shared_ptr<std::vector<uint8_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<uint8_t>(
+                        format,
+                        type,
+                        texture_width,
+                        texture_height,
+                        should_ylikuutio_flip_texture);
+                yli::file::binary_write(*data_vector_shared_ptr, filename);
+            }
+            else if (type == GL_SHORT)
+            {
+                std::shared_ptr<std::vector<int16_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<int16_t>(
+                        format,
+                        type,
+                        texture_width,
+                        texture_height,
+                        should_ylikuutio_flip_texture);
+                yli::file::binary_write(*data_vector_shared_ptr, filename);
+            }
+            else if (type == GL_UNSIGNED_SHORT)
+            {
+                std::shared_ptr<std::vector<uint16_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<uint16_t>(
+                        format,
+                        type,
+                        texture_width,
+                        texture_height,
+                        should_ylikuutio_flip_texture);
+                yli::file::binary_write(*data_vector_shared_ptr, filename);
+            }
+            else if (type == GL_INT)
+            {
+                std::shared_ptr<std::vector<int32_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<int32_t>(
+                        format,
+                        type,
+                        texture_width,
+                        texture_height,
+                        should_ylikuutio_flip_texture);
+                yli::file::binary_write(*data_vector_shared_ptr, filename);
+            }
+            else if (type == GL_UNSIGNED_INT)
+            {
+                std::shared_ptr<std::vector<uint32_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<uint32_t>(
+                        format,
+                        type,
+                        texture_width,
+                        texture_height,
+                        should_ylikuutio_flip_texture);
+                yli::file::binary_write(*data_vector_shared_ptr, filename);
+            }
+            else if (type == GL_FIXED)
+            {
+                // TODO: add support for `GL_FIXED`!
+                std::cerr << "ERROR: `yli::opengl::save_data_from_gpu_texture_into_file`: type `GL_FIXED` is not supported yet!\n";
+            }
+            else if (type == GL_HALF_FLOAT)
+            {
+                // TODO: add support for `GL_HALF_FLOAT`!
+                std::cerr << "ERROR: `yli::opengl::save_data_from_gpu_texture_into_file`: type `GL_HALF_FLOAT` is not supported yet!\n";
+            }
+            else if (type == GL_FLOAT)
+            {
+                std::shared_ptr<std::vector<float>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<float>(
+                        format,
+                        type,
+                        texture_width,
+                        texture_height,
+                        should_ylikuutio_flip_texture);
+                yli::file::binary_write(*data_vector_shared_ptr, filename);
+            }
+            else if (type == GL_DOUBLE)
+            {
+                std::shared_ptr<std::vector<double>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<double>(
+                        format,
+                        type,
+                        texture_width,
+                        texture_height,
+                        should_ylikuutio_flip_texture);
+                yli::file::binary_write(*data_vector_shared_ptr, filename);
+            }
+            else
+            {
+                std::cerr << "ERROR: `yli::opengl::save_data_from_gpu_texture_into_file`: unknown or unsupported type: " << type << "\n";
+            }
 
-            yli::memory::flip_vertically(result_array, size_of_texel_in_bytes * texture_width, texture_height);
-
-            std::shared_ptr<std::vector<uint8_t>> result_vector = std::make_shared<std::vector<uint8_t>>(result_array, result_array + size_of_texture_in_bytes);
-
-            delete[] result_array;
-
-            return result_vector;
+            // Unknown or unsupported type.
+            return;
         }
     }
 }

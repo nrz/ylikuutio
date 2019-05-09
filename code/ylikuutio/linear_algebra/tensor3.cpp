@@ -190,7 +190,7 @@ namespace yli
             }
         }
 
-        bool Tensor3::operator==(const yli::linear_algebra::Tensor3& rhs)
+        bool Tensor3::operator==(const yli::linear_algebra::Tensor3& rhs) const
         {
             // compare if tensors are equal.
             if (this->width != rhs.width ||
@@ -227,7 +227,7 @@ namespace yli
             return true;
         }
 
-        bool Tensor3::operator!=(const yli::linear_algebra::Tensor3& rhs)
+        bool Tensor3::operator!=(const yli::linear_algebra::Tensor3& rhs) const
         {
             // compare if tensors are equal.
             if (this->width != rhs.width ||

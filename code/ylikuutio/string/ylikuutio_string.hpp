@@ -23,6 +23,12 @@ namespace yli
                 const std::size_t data_index,
                 const std::vector<std::string> identifier_strings_vector);
 
+        // All string extraction functions of `yli::string` advance either
+        // `data_index` or `src_data_pointer` to the first character that
+        // does not belong in the extracted string.
+        // If no string is extracted, then `data_index` or `src_data_pointer`
+        // (according to the function) is not modified.
+
         void extract_string(
                 const std::string& data_string,
                 std::size_t& data_index,
@@ -73,6 +79,163 @@ namespace yli
                 std::string& dest_string,
                 const char separator);
 
+        void extract_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description,
+                int8_t& value);
+
+        void extract_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description,
+                int8_t& value);
+
+        void extract_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description,
+                uint8_t& value);
+
+        void extract_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description,
+                uint8_t& value);
+
+        void extract_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description,
+                int16_t& value);
+
+        void extract_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description,
+                int16_t& value);
+
+        void extract_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description,
+                uint16_t& value);
+
+        void extract_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description,
+                uint16_t& value);
+
+        void extract_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description,
+                int32_t& value);
+
+        void extract_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description,
+                int32_t& value);
+
+        void extract_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description,
+                uint32_t& value);
+
+        void extract_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description,
+                uint32_t& value);
+
+        void extract_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description,
+                float& value);
+
+        void extract_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description,
+                float& value);
+
+        int8_t extract_int8_t_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description);
+
+        int8_t extract_int8_t_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description);
+
+        uint8_t extract_uint8_t_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description);
+
+        uint8_t extract_uint8_t_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description);
+
+        int16_t extract_int16_t_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description);
+
+        int16_t extract_int16_t_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description);
+
+        uint16_t extract_uint16_t_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description);
+
+        uint16_t extract_uint16_t_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description);
+
         int32_t extract_int32_t_value_from_string(
                 const char* const src_base_pointer,
                 char*& src_data_pointer,
@@ -81,6 +244,19 @@ namespace yli
                 const char* const description);
 
         int32_t extract_int32_t_value_from_string(
+                const std::string& data_string,
+                std::size_t& data_index,
+                const char* const char_end_string,
+                const char* const description);
+
+        uint32_t extract_uint32_t_value_from_string(
+                const char* const src_base_pointer,
+                char*& src_data_pointer,
+                const std::size_t src_data_size,
+                const char* const char_end_string,
+                const char* const description);
+
+        uint32_t extract_uint32_t_value_from_string(
                 const std::string& data_string,
                 std::size_t& data_index,
                 const char* const char_end_string,

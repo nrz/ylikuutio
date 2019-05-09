@@ -1,5 +1,6 @@
 #include "texture_loader.hpp"
 #include "bmp_loader.hpp"
+#include "csv_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/memory/memory_templates.hpp"
@@ -275,6 +276,133 @@ namespace yli
             }
 
             delete[] buffer;
+
+            return true;
+        }
+
+        bool load_CSV_texture(
+                const std::string& filename,
+                const GLenum format,
+                const GLenum internal_format,
+                const GLenum type,
+                std::size_t& image_width,
+                std::size_t& image_height,
+                std::size_t& image_size,
+                uint32_t& textureID)
+        {
+            GLvoid* image_data = nullptr;
+
+            // Shared pointers are created here so that they stay in scope
+            // until `glTexImage2D` call.
+            std::shared_ptr<std::vector<int8_t>> image_data_int8_t = nullptr;
+            std::shared_ptr<std::vector<uint8_t>> image_data_uint8_t = nullptr;
+            std::shared_ptr<std::vector<int16_t>> image_data_int16_t = nullptr;
+            std::shared_ptr<std::vector<uint16_t>> image_data_uint16_t = nullptr;
+            std::shared_ptr<std::vector<int32_t>> image_data_int32_t = nullptr;
+            std::shared_ptr<std::vector<uint32_t>> image_data_uint32_t = nullptr;
+            std::shared_ptr<std::vector<float>> image_data_float = nullptr;
+
+            switch (type)
+            {
+                case GL_BYTE:
+                    image_data_int8_t = load_CSV_file<int8_t>(filename, image_width, image_height, image_size);
+                    if (image_data_int8_t == nullptr)
+                    {
+                        std::cerr << "ERROR: `image_data_int8_t` is `nullptr`!\n";
+                        return false;
+                    }
+                    image_data = &(*image_data_int8_t)[0];
+                    break;
+                case GL_UNSIGNED_BYTE:
+                    image_data_uint8_t = load_CSV_file<uint8_t>(filename, image_width, image_height, image_size);
+                    if (image_data_uint8_t == nullptr)
+                    {
+                        std::cerr << "ERROR: `image_data_uint8_t` is `nullptr`!\n";
+                        return false;
+                    }
+                    image_data = &(*image_data_uint8_t)[0];
+                    break;
+                case GL_SHORT:
+                    image_data_int16_t = load_CSV_file<int16_t>(filename, image_width, image_height, image_size);
+                    if (image_data_int16_t == nullptr)
+                    {
+                        std::cerr << "ERROR: `image_data_int16_t` is `nullptr`!\n";
+                        return false;
+                    }
+                    image_data = &(*image_data_int16_t)[0];
+                    break;
+                case GL_UNSIGNED_SHORT:
+                    image_data_uint16_t = load_CSV_file<uint16_t>(filename, image_width, image_height, image_size);
+                    if (image_data_uint16_t == nullptr)
+                    {
+                        std::cerr << "ERROR: `image_data_uint16_t` is `nullptr`!\n";
+                        return false;
+                    }
+                    image_data = &(*image_data_uint16_t)[0];
+                    break;
+                case GL_INT:
+                    image_data_int32_t = load_CSV_file<int32_t>(filename, image_width, image_height, image_size);
+                    if (image_data_int32_t == nullptr)
+                    {
+                        std::cerr << "ERROR: `image_data_int32_t` is `nullptr`!\n";
+                        return false;
+                    }
+                    image_data = &(*image_data_int32_t)[0];
+                    break;
+                case GL_UNSIGNED_INT:
+                    image_data_uint32_t = load_CSV_file<uint32_t>(filename, image_width, image_height, image_size);
+                    if (image_data_uint32_t == nullptr)
+                    {
+                        std::cerr << "ERROR: `image_data_uint32_t` is `nullptr`!\n";
+                        return false;
+                    }
+                    image_data = &(*image_data_uint32_t)[0];
+                    break;
+                case GL_FIXED:
+                    return false; // TODO: add support for `GL_FIXED`!
+                case GL_HALF_FLOAT:
+                    return false; // TODO: add support for `GL_HALF_FLOAT`!
+                case GL_FLOAT:
+                    image_data_float = load_CSV_file<float>(filename, image_width, image_height, image_size);
+                    if (image_data_float == nullptr)
+                    {
+                        std::cerr << "ERROR: `image_data_float` is `nullptr`!\n";
+                        return false;
+                    }
+                    image_data = &(*image_data_float)[0];
+                    break;
+                case GL_DOUBLE:
+                    return false; // TODO: add support for `GL_DOUBLE`!
+                default:
+                    // Unknown or unsupported type.
+                    return false;
+            }
+
+            if (image_data == nullptr)
+            {
+                std::cerr << "ERROR: `image_data` is `nullptr`!\n";
+                return false;
+            }
+
+            // Create one OpenGL texture.
+            glGenTextures(1, &textureID);
+
+            // Bind the newly created texture: all future texture functions will modify this texture.
+            glBindTexture(GL_TEXTURE_2D, textureID);
+
+            // Give the image to OpenGL.
+            if (internal_format == GL_INVALID_ENUM)
+            {
+                // Internal format not defined, use format as internal format.
+                glTexImage2D(GL_TEXTURE_2D, 0, format, image_width, image_height, 0, format, type, image_data);
+            }
+            else
+            {
+                // Internal format is defined.
+                glTexImage2D(GL_TEXTURE_2D, 0, internal_format, image_width, image_height, 0, format, type, image_data);
+            }
+
+            yli::opengl::set_filtering_parameters();
 
             return true;
         }

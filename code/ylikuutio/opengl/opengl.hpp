@@ -1,6 +1,8 @@
 #ifndef __OPENGL_HPP_INCLUDED
 #define __OPENGL_HPP_INCLUDED
 
+#include "code/ylikuutio/memory/memory_templates.hpp"
+
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -9,7 +11,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
-#include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli
@@ -27,11 +29,42 @@ namespace yli
         std::size_t get_n_color_channels(const GLenum format);
         std::size_t get_size_of_component(const GLenum type);
 
-        std::shared_ptr<std::vector<uint8_t>> copy_data_from_gpu_texture_to_cpu_array(
-                GLenum format,
-                GLenum type,
-                std::size_t texture_width,
-                std::size_t texture_height);
+        template<class T1>
+            std::shared_ptr<std::vector<T1>> copy_data_from_gpu_texture_to_cpu_array(
+                    const GLenum format,
+                    const GLenum type,
+                    const std::size_t texture_width,
+                    const std::size_t texture_height,
+                    const bool should_ylikuutio_flip_texture)
+            {
+                // Transfer data from the GPU texture to a CPU array.
+                const std::size_t n_color_channels = yli::opengl::get_n_color_channels(format);
+                const std::size_t n_texels = texture_width * texture_height;
+                const std::size_t size_of_texture = n_color_channels * n_texels;
+                T1* const result_array = new T1[size_of_texture];
+
+                glReadBuffer(GL_COLOR_ATTACHMENT0);
+                glReadPixels(0, 0, texture_width, texture_height, format, type, result_array);
+
+                if (should_ylikuutio_flip_texture)
+                {
+                    yli::memory::flip_vertically(result_array, n_color_channels * texture_width, texture_height);
+                }
+
+                std::shared_ptr<std::vector<T1>> result_vector = std::make_shared<std::vector<T1>>(result_array, result_array + size_of_texture);
+
+                delete[] result_array;
+
+                return result_vector;
+            }
+
+            void save_data_from_gpu_texture_into_file(
+                    const GLenum format,
+                    const GLenum type,
+                    const std::size_t texture_width,
+                    const std::size_t texture_height,
+                    const std::string filename,
+                    const bool should_ylikuutio_flip_texture);
     }
 }
 

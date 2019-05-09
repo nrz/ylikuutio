@@ -254,6 +254,7 @@ if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
 endif()
 
 # Shaders.
+configure_file(code/ylikuutio/shaders/floyd_warshall.frag floyd_warshall.frag COPYONLY)
 configure_file(code/ylikuutio/shaders/identity.vert identity.vert COPYONLY)
 configure_file(code/ylikuutio/shaders/identity.frag identity.frag COPYONLY)
 configure_file(code/ylikuutio/shaders/standard_shading.vert standard_shading.vert COPYONLY)
@@ -326,6 +327,16 @@ configure_file(res/laser_scanning_data/L4133D1.laz L4133D1.laz COPYONLY)
 configure_file(res/maps/Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm COPYONLY)
 configure_file(res/maps/Exactum_Physicum_Helsinki_Finland.osm Exactum_Physicum_Helsinki_Finland.osm COPYONLY)
 
+# Graphs.
+configure_file(res/graphs/some_finnish_railway_stations_float.csv some_finnish_railway_stations_float.csv COPYONLY)
+configure_file(res/graphs/some_finnish_railway_stations_integer.csv some_finnish_railway_stations_integer.csv COPYONLY)
+configure_file(res/graphs/some_finnish_railway_stations_unsigned_integer.csv some_finnish_railway_stations_unsigned_integer.csv COPYONLY)
+configure_file(res/graphs/some_finnish_railway_stations_unsigned_integer_mini.csv some_finnish_railway_stations_unsigned_integer_mini.csv COPYONLY)
+configure_file(res/graphs/some_finnish_railway_stations_float_with_fill.csv some_finnish_railway_stations_float_with_fill.csv COPYONLY)
+configure_file(res/graphs/some_finnish_railway_stations_float_megameters_with_fill.csv some_finnish_railway_stations_float_megameters_with_fill.csv COPYONLY)
+configure_file(res/graphs/some_finnish_railway_stations_unsigned_integer_with_fill.csv some_finnish_railway_stations_unsigned_integer_with_fill.csv COPYONLY)
+configure_file(res/graphs/some_finnish_railway_stations_unsigned_integer_mini_with_fill.csv some_finnish_railway_stations_unsigned_integer_mini_with_fill.csv COPYONLY)
+
 # Audio.
 configure_file(res/audio/freesound.org/395487__frankum__tecno-pop-base-and-guitar-2.ogg 395487__frankum__tecno-pop-base-and-guitar-2.ogg COPYONLY)
 configure_file(res/audio/freesound.org/414257__sss-samples__chipland-loop-120-bpm-a-major.wav 414257__sss-samples__chipland-loop-120-bpm-a-major.wav COPYONLY)
@@ -388,7 +399,6 @@ add_library(ylikuutio STATIC
     # file, in alphabetical order.
     code/ylikuutio/file/file_loader.cpp
     code/ylikuutio/file/file_loader.hpp
-    code/ylikuutio/file/file_writer.cpp
     code/ylikuutio/file/file_writer.hpp
 
     # geometry, in alphabetical order.
@@ -419,6 +429,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/graph/node.cpp
     code/ylikuutio/graph/node.hpp
     code/ylikuutio/graph/node_struct.hpp
+    code/ylikuutio/graph/shortest_paths.cpp
+    code/ylikuutio/graph/shortest_paths.hpp
 
     # hierarchy, in alphabetical order.
     code/ylikuutio/hierarchy/hierarchy_templates.hpp
@@ -445,6 +457,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/bmp_heightmap_loader.hpp
     code/ylikuutio/load/bmp_loader.cpp
     code/ylikuutio/load/bmp_loader.hpp
+    code/ylikuutio/load/csv_loader.hpp
     code/ylikuutio/load/fbx_species_loader.cpp
     code/ylikuutio/load/fbx_species_loader.hpp
     code/ylikuutio/load/fbx_symbiosis_loader.cpp
@@ -746,7 +759,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/common/any_value.hpp
         code/ylikuutio/file/file_loader.cpp
         code/ylikuutio/file/file_loader.hpp
-        code/ylikuutio/file/file_writer.cpp
         code/ylikuutio/file/file_writer.hpp
         code/ylikuutio/geometry/line.cpp
         code/ylikuutio/geometry/line.hpp
@@ -761,6 +773,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/geometry/transformation.cpp
         code/ylikuutio/geometry/transformation.hpp
         code/ylikuutio/graph/node_struct.hpp
+        code/ylikuutio/graph/shortest_paths.cpp
+        code/ylikuutio/graph/shortest_paths.hpp
         code/ylikuutio/hierarchy/hierarchy_templates.hpp
         code/ylikuutio/interpolation/bilinear_interpolation2D.hpp
         code/ylikuutio/linear_algebra/matrix.cpp
@@ -771,6 +785,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/linear_algebra/tensor3.hpp
         code/ylikuutio/load/ascii_grid_loader.cpp
         code/ylikuutio/load/ascii_grid_loader.hpp
+        code/ylikuutio/load/csv_loader.hpp
         code/ylikuutio/load/fbx_species_loader.cpp
         code/ylikuutio/load/fbx_species_loader.hpp
         code/ylikuutio/load/font_loader.cpp
@@ -807,6 +822,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_callback_system.cpp
         code/ylikuutio/tests/googletest/test_check_and_report_if_some_string_matches.cpp
         code/ylikuutio/tests/googletest/test_command_line_master.cpp
+        code/ylikuutio/tests/googletest/test_csv_loader.cpp
         code/ylikuutio/tests/googletest/test_extract_last_part_of_string.cpp
         code/ylikuutio/tests/googletest/test_extract_string.cpp
         code/ylikuutio/tests/googletest/test_extract_string_with_several_endings.cpp
@@ -815,6 +831,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_file_loader.cpp
         code/ylikuutio/tests/googletest/test_font_loader.cpp
         code/ylikuutio/tests/googletest/test_glyph_struct.cpp
+        code/ylikuutio/tests/googletest/test_graph.cpp
         code/ylikuutio/tests/googletest/test_heightmap_loader.cpp
         code/ylikuutio/tests/googletest/test_line2D.cpp
         code/ylikuutio/tests/googletest/test_line_line_intersection.cpp

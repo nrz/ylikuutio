@@ -77,6 +77,21 @@ namespace yli
             }
         }
 
+        bool Matrix::get_is_square() const
+        {
+            return this->is_square;
+        }
+
+        std::size_t Matrix::get_width() const
+        {
+            return this->width;
+        }
+
+        std::size_t Matrix::get_height() const
+        {
+            return this->height;
+        }
+
         std::shared_ptr<yli::linear_algebra::Matrix> Matrix::transpose()
         {
             std::shared_ptr<yli::linear_algebra::Matrix> new_matrix = std::make_shared<yli::linear_algebra::Matrix>(this->width, this->height); // Flip width and height.
@@ -175,7 +190,7 @@ namespace yli
             }
         }
 
-        bool Matrix::operator==(const yli::linear_algebra::Matrix& rhs)
+        bool Matrix::operator==(const yli::linear_algebra::Matrix& rhs) const
         {
             // compare if matrices are equal.
             if (this->width != rhs.width ||
@@ -205,7 +220,7 @@ namespace yli
             return true;
         }
 
-        bool Matrix::operator!=(const yli::linear_algebra::Matrix& rhs)
+        bool Matrix::operator!=(const yli::linear_algebra::Matrix& rhs) const
         {
             // compare if matrices are equal.
             if (this->width != rhs.width ||

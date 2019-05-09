@@ -8,25 +8,25 @@
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
-#include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
-#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <cstdio>     // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
+#include <cstring>    // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <inttypes.h> // PRId32, PRId64, PRIu32, PRIu64, PRIx32, PRIx64
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <string>   // std::string
-#include <vector>   // std::vector
+#include <iostream>   // std::cout, std::cin, std::cerr
+#include <string>     // std::string
+#include <vector>     // std::vector
 
 namespace yli
 {
     namespace load
     {
-        bool check_if_we_are_inside_block(const char* SVG_base_pointer, char*& SVG_data_pointer, uint64_t data_size)
+        bool check_if_we_are_inside_block(const char* SVG_base_pointer, char*& SVG_data_pointer, const uint64_t data_size)
         {
             // This function returns `true` if we are inside block, `false` otherwise.
 
-            std::vector<std::string> identifier_strings_vector;
-
             // All possible block identifier strings.
-            identifier_strings_vector = { "<?xml ", "<!DOCTYPE ", "<svg>", "<metadata>", "</metadata>", "<defs>", "<font ", "<font-face", "<missing-glyph" };
+            const std::vector<std::string> identifier_strings_vector
+            { "<?xml ", "<!DOCTYPE ", "<svg>", "<metadata>", "</metadata>", "<defs>", "<font ", "<font-face", "<missing-glyph" };
+
             return yli::string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, identifier_strings_vector);
         }
 
@@ -50,6 +50,11 @@ namespace yli
             // This function advances `SVG_data_pointer` to the start of the first glyph.
             // Returns true if a glyph was found.
             // Returns false if no glyph was found.
+
+            if (SVG_base_pointer == nullptr || SVG_data_pointer == nullptr)
+            {
+                return false;
+            }
 
             bool is_inside_block = false;
 
@@ -136,7 +141,7 @@ namespace yli
                 {
                     current_vertex.x = yli::load::extract_value_from_string_with_standard_endings(
                             char_path,
-                            vertex_data_pointer,
+                            ++vertex_data_pointer,
                             sizeof(char_path),
                             (const char* const) "M (moveto)",
                             is_debug_mode);
@@ -145,7 +150,7 @@ namespace yli
 
                     current_vertex.y = yli::load::extract_value_from_string_with_standard_endings(
                             char_path,
-                            --vertex_data_pointer,
+                            vertex_data_pointer,
                             sizeof(char_path),
                             (const char* const) "space (moveto y coordinate)",
                             is_debug_mode);
@@ -158,7 +163,7 @@ namespace yli
                     // OK, this is horizontal relative lineto.
                     int32_t horizontal_lineto_value = yli::load::extract_value_from_string_with_standard_endings(
                             char_path,
-                            vertex_data_pointer,
+                            ++vertex_data_pointer,
                             sizeof(char_path),
                             (const char* const) "h (horizontal relative lineto)",
                             is_debug_mode);
@@ -171,7 +176,7 @@ namespace yli
                     // OK, this is vertical relative lineto.
                     int32_t vertical_lineto_value = yli::load::extract_value_from_string_with_standard_endings(
                             char_path,
-                            vertex_data_pointer,
+                            ++vertex_data_pointer,
                             sizeof(char_path),
                             (const char* const) "v (vertical relative lineto)",
                             is_debug_mode);
@@ -472,8 +477,7 @@ namespace yli
                 } // End of glyph.
                 else
                 {
-                    std::vector<std::string> string_vector;
-                    string_vector = { "</font>", "</defs>", "</svg>" };
+                    const std::vector<std::string> string_vector { "</font>", "</defs>", "</svg>" };
 
                     if (yli::string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, file_size, string_vector))
                     {
