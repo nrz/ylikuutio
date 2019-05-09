@@ -168,7 +168,6 @@ namespace yli
                         texture_height,
                         should_ylikuutio_flip_texture);
                 yli::file::binary_write(*data_vector_shared_ptr, filename);
-                return;
             }
             else if (type == GL_UNSIGNED_BYTE)
             {
@@ -179,7 +178,6 @@ namespace yli
                         texture_height,
                         should_ylikuutio_flip_texture);
                 yli::file::binary_write(*data_vector_shared_ptr, filename);
-                return;
             }
             else if (type == GL_SHORT)
             {
@@ -190,7 +188,6 @@ namespace yli
                         texture_height,
                         should_ylikuutio_flip_texture);
                 yli::file::binary_write(*data_vector_shared_ptr, filename);
-                return;
             }
             else if (type == GL_UNSIGNED_SHORT)
             {
@@ -201,7 +198,6 @@ namespace yli
                         texture_height,
                         should_ylikuutio_flip_texture);
                 yli::file::binary_write(*data_vector_shared_ptr, filename);
-                return;
             }
             else if (type == GL_INT)
             {
@@ -212,7 +208,6 @@ namespace yli
                         texture_height,
                         should_ylikuutio_flip_texture);
                 yli::file::binary_write(*data_vector_shared_ptr, filename);
-                return;
             }
             else if (type == GL_UNSIGNED_INT)
             {
@@ -223,7 +218,6 @@ namespace yli
                         texture_height,
                         should_ylikuutio_flip_texture);
                 yli::file::binary_write(*data_vector_shared_ptr, filename);
-                return;
             }
             else if (type == GL_FIXED)
             {
