@@ -293,6 +293,9 @@ namespace yli
                 Universe(const UniverseStruct& universe_struct)
                     : Entity(this) // `Universe` has no parent.
                 {
+                    // call bind_entity here since it couldn't be performed from Entity constructor
+                    this->bind_entity(this);
+
                     this->entity_factory = std::make_shared<yli::ontology::EntityFactory>(this);
 
                     this->current_camera_cartesian_coordinates = glm::vec3(NAN, NAN, NAN); // dummy coordinates.
