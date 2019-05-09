@@ -146,6 +146,25 @@ namespace yli
                             this->is_texture_loaded = true;
                         }
                     }
+                    else if (this->texture_file_format == "csv" || this->texture_file_format == "CSV")
+                    {
+                        if (!yli::load::load_CSV_texture(
+                                    this->texture_filename,
+                                    this->format,
+                                    this->internal_format,
+                                    this->type,
+                                    this->texture_width,
+                                    this->texture_height,
+                                    this->texture_size,
+                                    this->source_texture))
+                        {
+                            std::cerr << "ERROR: loading CSV texture failed!\n";
+                        }
+                        else
+                        {
+                            this->is_texture_loaded = true;
+                        }
+                    }
                     else
                     {
                         std::cerr << "no texture was loaded!\n";

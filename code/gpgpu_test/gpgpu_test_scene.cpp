@@ -88,6 +88,27 @@ namespace gpgpu_test
             return nullptr;
         }
 
+        ComputeTaskStruct identity_shader_CSV_compute_task_struct;
+        identity_shader_CSV_compute_task_struct.texture_file_format = "csv";
+        identity_shader_CSV_compute_task_struct.texture_filename = "some_finnish_railway_stations_unsigned_integer_mini_with_fill.csv";
+        identity_shader_CSV_compute_task_struct.output_filename = "gpgpu_identity_output_unsigned_byte_mini_with_fill.data";
+        identity_shader_CSV_compute_task_struct.parent = identity_shader;
+        identity_shader_CSV_compute_task_struct.format = GL_RED;
+        identity_shader_CSV_compute_task_struct.type = GL_UNSIGNED_BYTE;
+        identity_shader_CSV_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
+        identity_shader_CSV_compute_task_struct.should_ylikuutio_flip_texture = false;
+
+        std::cout << "Creating yli::ontology::Entity* identity_shader_CSV_compute_task_entity ...\n";
+        yli::ontology::Entity* const identity_shader_CSV_compute_task_entity = entity_factory->create_ComputeTask(identity_shader_CSV_compute_task_struct);
+        std::cout << "Creating yli::ontology::ComputeTask* identity_shader ...\n";
+        yli::ontology::ComputeTask* const identity_shader_CSV_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(identity_shader_CSV_compute_task_entity);
+
+        if (identity_shader_CSV_compute_task == nullptr)
+        {
+            std::cerr << "Failed to create CSV `ComputeTask`.\n";
+            return nullptr;
+        }
+
         // Create the shader, store it in `sobel_shader`.
         ShaderStruct sobel_shader_struct;
         sobel_shader_struct.parent = gpgpu_test_scene;
