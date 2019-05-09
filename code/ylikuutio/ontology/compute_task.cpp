@@ -134,6 +134,9 @@ namespace yli
                     }
                 }
 
+                // Update the value of `uniform` variable `iteration_i`.
+                glUniform1i(this->iteration_i_uniform_ID, iteration_i);
+
                 this->preiterate();
 
                 // Bind our texture in Texture Unit 0.

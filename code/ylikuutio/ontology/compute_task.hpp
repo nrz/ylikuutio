@@ -102,6 +102,7 @@ namespace yli
                     this->vertexUVID                   = 0; // some dummy value.
                     this->screen_width_uniform_ID      = 0; // some dummy value.
                     this->screen_height_uniform_ID     = 0; // some dummy value.
+                    this->iteration_i_uniform_ID       = 0; // some dummy value.
                     this->vertexbuffer                 = 0; // some dummy value.
                     this->uvbuffer                     = 0; // some dummy value.
 
@@ -185,6 +186,10 @@ namespace yli
                         // This is named `screen_height` instead of `texture_height` for compatibility with other shaders.
                         this->screen_height_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_height");
                         glUniform1i(this->screen_height_uniform_ID, this->texture_height);
+
+                        // Initialize uniform iteration index.
+                        this->iteration_i_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "iteration_i");
+                        glUniform1i(this->iteration_i_uniform_ID, 0);
 
                         // Create model (a square which consists of 2 triangles).
                         // *---*
@@ -285,6 +290,7 @@ namespace yli
                 uint32_t vertexUVID;
                 uint32_t screen_width_uniform_ID;          // Location of the program's window width uniform.
                 uint32_t screen_height_uniform_ID;         // Location of the program's window height uniform.
+                uint32_t iteration_i_uniform_ID;           // Location of the program's iteration index uniform.
 
                 uint32_t vertexbuffer;
                 uint32_t uvbuffer;
