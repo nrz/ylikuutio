@@ -69,20 +69,20 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        ComputeTaskStruct identity_shader_compute_task_struct;
-        identity_shader_compute_task_struct.texture_file_format = "bmp";
-        identity_shader_compute_task_struct.texture_filename = "numbers_123456_black_and_white.bmp";
-        identity_shader_compute_task_struct.output_filename = "gpgpu_identity_output.data";
-        identity_shader_compute_task_struct.parent = identity_shader;
-        identity_shader_compute_task_struct.texture_width = 512;
-        identity_shader_compute_task_struct.texture_height = 512;
+        ComputeTaskStruct identity_shader_BMP_compute_task_struct;
+        identity_shader_BMP_compute_task_struct.texture_file_format = "bmp";
+        identity_shader_BMP_compute_task_struct.texture_filename = "numbers_123456_black_and_white.bmp";
+        identity_shader_BMP_compute_task_struct.output_filename = "gpgpu_identity_output.data";
+        identity_shader_BMP_compute_task_struct.parent = identity_shader;
+        identity_shader_BMP_compute_task_struct.texture_width = 512;
+        identity_shader_BMP_compute_task_struct.texture_height = 512;
 
-        std::cout << "Creating yli::ontology::Entity* identity_shader_compute_task_entity ...\n";
-        yli::ontology::Entity* const identity_shader_compute_task_entity = entity_factory->create_ComputeTask(identity_shader_compute_task_struct);
+        std::cout << "Creating yli::ontology::Entity* identity_shader_BMP_compute_task_entity ...\n";
+        yli::ontology::Entity* const identity_shader_BMP_compute_task_entity = entity_factory->create_ComputeTask(identity_shader_BMP_compute_task_struct);
         std::cout << "Creating yli::ontology::ComputeTask* identity_shader ...\n";
-        yli::ontology::ComputeTask* const identity_shader_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(identity_shader_compute_task_entity);
+        yli::ontology::ComputeTask* const identity_shader_BMP_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(identity_shader_BMP_compute_task_entity);
 
-        if (identity_shader_compute_task == nullptr)
+        if (identity_shader_BMP_compute_task == nullptr)
         {
             std::cerr << "Failed to create ComputeTask.\n";
             return nullptr;
