@@ -45,7 +45,7 @@ namespace gpgpu_test
 
         if (gpgpu_test_scene == nullptr)
         {
-            std::cerr << "Failed to create Scene.\n";
+            std::cerr << "Failed to create `Scene`.\n";
             return nullptr;
         }
 
@@ -65,7 +65,7 @@ namespace gpgpu_test
 
         if (identity_shader == nullptr)
         {
-            std::cerr << "Failed to create Shader.\n";
+            std::cerr << "Failed to create `Shader`.\n";
             return nullptr;
         }
 
@@ -84,7 +84,7 @@ namespace gpgpu_test
 
         if (identity_shader_BMP_compute_task == nullptr)
         {
-            std::cerr << "Failed to create ComputeTask.\n";
+            std::cerr << "Failed to create BMP `ComputeTask`.\n";
             return nullptr;
         }
 
@@ -101,7 +101,7 @@ namespace gpgpu_test
 
         if (sobel_shader == nullptr)
         {
-            std::cerr << "Failed to create Shader.\n";
+            std::cerr << "Failed to create Sobel `Shader`.\n";
             return nullptr;
         }
 
@@ -122,7 +122,7 @@ namespace gpgpu_test
 
         if (sobel_shader_compute_task == nullptr)
         {
-            std::cerr << "Failed to create ComputeTask.\n";
+            std::cerr << "Failed to create Sobel `ComputeTask`.\n";
             return nullptr;
         }
 
