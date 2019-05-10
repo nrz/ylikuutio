@@ -73,6 +73,10 @@ namespace yli
 
         void Universe::bind_entity(yli::ontology::Entity* const entity)
         {
+            // no-op when called during initialization of the Entity base class of Universe itself
+            if (entity == this)
+                return;
+
             // get `entityID` from `Universe` and set pointer to `entity`.
 
             // `entity` must not be `nullptr` (use `this` as the first argument).
