@@ -355,6 +355,10 @@ A: Ylikuutio uses right-handed world coordinates, so X grows eastward, Z grows s
 * Synopsys® is a registered trademark of Synopsys, Inc. in the US and/or other countries. See [https://www.synopsys.com/company/legal/trademarks-brands.html](https://www.synopsys.com/company/legal/trademarks-brands.html).
 * Windows is a trademark of Microsoft. See [https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx).
 
+## Contributions and bugfixes
+* Antti Nuortimo (most of Ylikuutio code)
+* Mikko Rasa (bugfixes)
+
 ## Contact info
 (found bugs and suggestions are very welcome!)
 
