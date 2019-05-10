@@ -348,7 +348,6 @@ A: Ylikuutio uses right-handed world coordinates, so X grows eastward, Z grows s
 * [Sample 97 Bpm](https://freesound.org/people/Greek555/sounds/414270/) is made by Greek555 and it is licensed under the [Creative Commons 0 (CC0 1.0) license](https://creativecommons.org/publicdomain/zero/1.0/).
 * [Tecno pop base and guitar 2](https://freesound.org/people/frankum/sounds/395487/) is made by frankum and it is licensed under the [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/). Original track by Frankum & Frankumjay. Converted into OGG from the original `395487__frankum__tecno-pop-base-and-guitar-2.mp3`.
 
-
 ## Trademarks
 * Android is a trademark of Google Inc. See [https://developer.android.com/legal.html](https://developer.android.com/legal.html).
 * Coverity® and Coverity Scan® are registered trademarks of Synopsys, Inc. in the US and/or other countries. See [https://www.synopsys.com/company/legal/trademarks-brands.html](https://www.synopsys.com/company/legal/trademarks-brands.html).
