@@ -221,22 +221,21 @@ A: Ylikuutio targets Linux, Windows and Android, in this order.
    Currently only 64-bit environments are supported.
 
 Q: What graphics APIs Ylikuutio uses?
-A: Ylikuutio targets OpenGL version 3.1, but so far 3.0 works too,
-   ie. all currently used functionality is available in OpenGL 3.0.
+A: Ylikuutio targets OpenGL version 3.0.
 
 Q: Are there plans to support other graphics APIs?
 A: Newer OpenGL versions may be supported in the future, but so far
-   OpenGL 3.1 fulfils my requirements. Vulkan needs to be considered.
+   OpenGL 3.0 fulfils my requirements. Vulkan needs to be considered.
 
 Q: Does Ylikuutio use modern OpenGL (VBOs)?
 A: Yes, Ylikuutio uses VBOs (vertex buffer objects) and VBO indexing.
 
 Q: Is Ylikuutio based on some other 3D engine?
-A: Some parts of Ylikuutio (shaders, some file loaders, etc.) are based
-on [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/), which I really recommend for anyone
-interested in learning OpenGL programming. Ylikuutio also uses external
-libraries such as (in alphabetical order) Asio, Assimp, GLM, GLEW, OpenFBX,
-s7, SDL, and pugixml. The rest is written from scratch.
+A: Some parts of Ylikuutio (some shaders, some file loaders, etc.) are
+based on [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/), which I really recommend for anyone interested in learning
+OpenGL programming. Ylikuutio also uses external libraries such as
+(in alphabetical order) Asio, Assimp, GLM, GLEW, OpenFBX, s7, SDL, and
+pugixml. The rest is written from scratch.
 
 Q: Why s7 is chosen as the scripting language of Ylikuutio?
 A: I like Lisp-family languages and s7 fulfils my
