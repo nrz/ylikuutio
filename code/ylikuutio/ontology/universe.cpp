@@ -75,7 +75,9 @@ namespace yli
         {
             // no-op when called during initialization of the Entity base class of Universe itself
             if (entity == this)
+            {
                 return;
+            }
 
             // get `entityID` from `Universe` and set pointer to `entity`.
 
