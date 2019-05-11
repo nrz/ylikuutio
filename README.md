@@ -24,8 +24,9 @@ macOS and iOS will be supported in the future.
 OpenGL 3.0 or newer is required.
 
 ## Article
-In [Skrolli 2018.4](https://skrolli.fi/numerot/2018-4/) there is an article "Pelimoottori harrastusprojektina"
-(in Finnish, translation: "Game engine as a hobby project").
+In [Skrolli 2018.4](https://skrolli.fi/numerot/2018-4/) there is an article
+"Pelimoottori harrastusprojektina" (in Finnish, translation: "Game engine
+as a hobby project").
 
 ## Compiling
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
@@ -38,14 +39,16 @@ CMake uses git for downloading Google Test testing framework.
 
 Ylikuutio repository in GitHub has 2 branches: `master` & `coverity_scan`.
 `master` is the branch that should be up to date and it's the one to build.
-`coverity_scan` is for Synopsys© Coverity Scan© analysis tool which is run through
-Travis CI.
+`coverity_scan` is for Synopsys© Coverity Scan© analysis tool which is run
+through Travis CI.
 
 In Linux it's simple.
 
 First, install all the necessary compilers, tools and libs. You may use
 your favorite package manager such as apt, aptitude, apt-get, yum etc.
-You all need these packages: cmake make g++ gcc libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
+You all need these packages:
+cmake make g++ gcc libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
+
 Eg. with apt:
 
     $ sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
@@ -115,7 +118,7 @@ Ylikuutio repository contains the following games/demos:
 Hirvi is a first person action-adventure of the adventures of
 a moose/elk called Hirvi. Cities are dangerous places for moose,
 even through moose are well-known pasifists.
-"hirvi" is a moose/elk in Finnish.
+"hirvi" means a moose/elk in Finnish.
 Hirvi is a work in progress.
 
 Ajokki is sandbox demo program to check out some properties of
@@ -196,12 +199,17 @@ Some available console commands to try in Ajokki:
 
 ## FAQ
 Q: What is "Ylikuutio"?
-A: In Finnish, "yli" means ["over"](https://en.wiktionary.org/wiki/yli-), and "kuutio" means ["cube"](https://en.wiktionary.org/wiki/kuutio).
+A: In Finnish, "yli" means ["over"](https://en.wiktionary.org/wiki/yli-),
+   and "kuutio" means ["cube"](https://en.wiktionary.org/wiki/kuutio).
    So, "Ylikuutio" is a reference to a [hypercube](https://en.wikipedia.org/wiki/Hypercube).
 
 Q: How is Ylikuutio software developed?
-A: In [Debian GNU/Linux](https://www.debian.org/) ([Debian Stretch](https://wiki.debian.org/DebianStretch) at the moment), using [Vim](https://www.vim.org/).
-   Other tools in use include [Valgrind](http://valgrind.org/), [KCachegrind](https://kcachegrind.github.io/html/Home.html), [GDB](https://www.gnu.org/software/gdb/), [Travis CI](https://travis-ci.org/), and [Coverity Scan](https://scan.coverity.com/).
+A: In [Debian GNU/Linux](https://www.debian.org/)
+   ([Debian Stretch](https://wiki.debian.org/DebianStretch) at the moment),
+   using [Vim](https://www.vim.org/). Other tools in use include
+   [Valgrind](http://valgrind.org/), [KCachegrind](https://kcachegrind.github.io/html/Home.html),
+   [GDB](https://www.gnu.org/software/gdb/), [Travis CI](https://travis-ci.org/),
+   and [Coverity Scan](https://scan.coverity.com/).
 
 Q: For what kinds of software Ylikuutio can be used?
 A: Ylikuutio can be used for all kinds of 3D games and simulations.
@@ -232,17 +240,19 @@ A: Yes, Ylikuutio uses VBOs (vertex buffer objects) and VBO indexing.
 
 Q: Is Ylikuutio based on some other 3D engine?
 A: Some parts of Ylikuutio (some shaders, some file loaders, etc.) are
-based on [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/), which I really recommend for anyone interested in learning
-OpenGL programming. Ylikuutio also uses external libraries such as
-(in alphabetical order) Asio, Assimp, GLM, GLEW, OpenFBX, s7, SDL, and
-pugixml. The rest is written from scratch.
+   based on [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/),
+   which I really recommend for anyone interested in learning
+   OpenGL programming. Ylikuutio also uses external libraries such as
+   (in alphabetical order) Asio, Assimp, GLM, GLEW, OpenFBX, s7, SDL, and
+   pugixml. The rest is written from scratch.
 
 Q: Why s7 is chosen as the scripting language of Ylikuutio?
 A: I like Lisp-family languages and s7 fulfils my
    requirements related to a small size and a suitable license.
 
 Q: Does Ylikuutio use right-handed or left-handed world coordinates?
-A: Ylikuutio uses right-handed world coordinates, so X grows eastward, Z grows southward, and Y grows upwards.
+A: Ylikuutio uses right-handed world coordinates,
+   so X grows eastward, Z grows southward, and Y grows upwards.
 
 ## Implemented functionality
 * 3D rendering
@@ -269,7 +279,6 @@ A: Ylikuutio uses right-handed world coordinates, so X grows eastward, Z grows s
 * partially transparent 2D text
 * 3D text
 * partially transparent 3D text
-* multiple scenes in the same `Universe` (`activate` console command)
 * coordinates relative to other objects, not only to `Universe` object
 * practically infinite voxel worlds (limited by `float` precision)
 * collision detection between objects
@@ -299,7 +308,7 @@ A: Ylikuutio uses right-handed world coordinates, so X grows eastward, Z grows s
 * s7 as scripting language
 * visual pattern recognition for AI: V1 (primary visual cortex) and V2 simulation
 * GUI for scripting, asset creation etc.
-* Internet gaming with ASIO
+* Network gaming
 
 ### Libraries currently in use
 * The source code from [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/) is licensed under [WTFPL Public Licence version 2](https://www.opengl-tutorial.org/download/).
