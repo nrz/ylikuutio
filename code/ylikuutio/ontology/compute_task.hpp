@@ -250,7 +250,7 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
-                std::string texture_file_format; // Type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
+                std::string texture_file_format; // Type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"csv"`/`"CSV"`, `"dds"`/`"DDS"`.
                 std::string texture_filename;    // Filename of the model file.
                 std::string output_filename;     // Filename of the output file.
 
