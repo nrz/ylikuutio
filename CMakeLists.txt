@@ -449,6 +449,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/linear_algebra/matrix_functions.hpp
     code/ylikuutio/linear_algebra/tensor3.cpp
     code/ylikuutio/linear_algebra/tensor3.hpp
+    code/ylikuutio/linear_algebra/vector_functions.hpp
 
     # load, in alphabetical order.
     code/ylikuutio/load/ascii_grid_loader.cpp
