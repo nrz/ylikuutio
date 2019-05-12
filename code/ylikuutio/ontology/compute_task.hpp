@@ -8,6 +8,7 @@
 #include "post_iterate_callback.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/load/texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -79,6 +80,8 @@ namespace yli
                     this->texture_filename = compute_task_struct.texture_filename;
                     this->output_filename = compute_task_struct.output_filename;
                     this->parent = compute_task_struct.parent;
+                    this->left_filler_vector_any_value = compute_task_struct.left_filler_vector_any_value;
+                    this->right_filler_vector_any_value = compute_task_struct.right_filler_vector_any_value;
                     this->end_condition_callback_engine = compute_task_struct.end_condition_callback_engine;
 
                     this->result_vector = nullptr;
@@ -255,6 +258,9 @@ namespace yli
                 std::string output_filename;     // Filename of the output file.
 
                 yli::ontology::Shader* parent; // pointer to the `Shader`.
+
+                std::shared_ptr<yli::datatypes::AnyValue> left_filler_vector_any_value;
+                std::shared_ptr<yli::datatypes::AnyValue> right_filler_vector_any_value;
 
                 // End iterating when `end_condition_callback_engine` returns `true`.
                 std::shared_ptr<yli::callback_system::CallbackEngine> end_condition_callback_engine;

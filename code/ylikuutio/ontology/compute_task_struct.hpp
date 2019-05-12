@@ -3,6 +3,7 @@
 
 #include "pre_iterate_callback.hpp"
 #include "post_iterate_callback.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -29,6 +30,8 @@ typedef struct ComputeTaskStruct
 {
     ComputeTaskStruct()
         : parent(nullptr),
+        left_filler_vector_any_value(nullptr),
+        right_filler_vector_any_value(nullptr),
         end_condition_callback_engine(nullptr),
         n_max_iterations(1),                                     // By default execute GLSL shader exactly once (do not iterate further).
         compute_taskID(std::numeric_limits<std::size_t>::max()), // `std::numeric_limits<std::size_t>::max()` means that `compute_taskID` is not defined.
@@ -50,6 +53,8 @@ typedef struct ComputeTaskStruct
     std::string texture_filename;    // Filename of the model file.
     std::string output_filename;     // Filename of the output file.
     yli::ontology::Shader* parent; // pointer to the `Shader`.
+    std::shared_ptr<yli::datatypes::AnyValue> left_filler_vector_any_value;
+    std::shared_ptr<yli::datatypes::AnyValue> right_filler_vector_any_value;
     std::shared_ptr<yli::callback_system::CallbackEngine> end_condition_callback_engine;
     std::size_t n_max_iterations;
     std::size_t compute_taskID;
