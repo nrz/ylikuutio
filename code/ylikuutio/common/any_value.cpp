@@ -125,7 +125,14 @@ namespace yli
                     any_value_stringstream << "unknown";
                     break;
                 case (ANY_STRUCT_SHARED_PTR):
-                    any_value_stringstream << std::hex << this->any_struct_shared_ptr.get() << std::dec;
+                    if (this->any_struct_shared_ptr == nullptr)
+                    {
+                        any_value_stringstream << "nullptr";
+                    }
+                    else
+                    {
+                        any_value_stringstream << std::hex << this->any_struct_shared_ptr.get() << std::dec;
+                    }
                     break;
                 case (BOOL):
                     any_value_stringstream << (this->bool_value ? "true" : "false");
