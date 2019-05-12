@@ -17,16 +17,16 @@ namespace yli
             {
                 std::shared_ptr<std::vector<T1>> output_vector = std::make_shared<std::vector<T1>>();
 
-                for (auto data : data_vector)
+                for (const T1& data : data_vector)
                 {
-                    for (auto left_value : left_filler_vector)
+                    for (const T1& left_value : left_filler_vector)
                     {
                         output_vector->push_back(left_value);
                     }
 
                     output_vector->push_back(data);
 
-                    for (auto right_value : right_filler_vector)
+                    for (const T1& right_value : right_filler_vector)
                     {
                         output_vector->push_back(right_value);
                     }
