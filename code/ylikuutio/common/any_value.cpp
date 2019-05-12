@@ -17,6 +17,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <ios>      // std::defaultfloat, std::fixed, std::ios
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
