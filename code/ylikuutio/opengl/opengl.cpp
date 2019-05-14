@@ -88,6 +88,8 @@ namespace yli
                     return 1;
                 case GL_DEPTH_COMPONENT:
                     return 1;
+                case GL_DEPTH_STENCIL:
+                    return 2;
                 case GL_RED:
                     return 1;
                 case GL_GREEN:
