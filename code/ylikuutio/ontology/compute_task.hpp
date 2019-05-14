@@ -158,6 +158,8 @@ namespace yli
                                     this->format,
                                     this->internal_format,
                                     this->type,
+                                    this->left_filler_vector_any_value,
+                                    this->right_filler_vector_any_value,
                                     this->texture_width,
                                     this->texture_height,
                                     this->texture_size,
