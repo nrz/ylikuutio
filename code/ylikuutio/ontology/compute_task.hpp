@@ -111,6 +111,7 @@ namespace yli
 
                     this->format                       = compute_task_struct.format;
                     this->internal_format              = compute_task_struct.internal_format;
+                    this->output_format                = compute_task_struct.output_format;
                     this->type                         = compute_task_struct.type;
                     this->should_ylikuutio_save_intermediate_results = compute_task_struct.should_ylikuutio_save_intermediate_results;
                     this->should_ylikuutio_flip_texture              = compute_task_struct.should_ylikuutio_flip_texture;
@@ -303,6 +304,7 @@ namespace yli
 
                 GLenum format;
                 GLenum internal_format;
+                GLenum output_format;
                 GLenum type;
 
                 bool should_ylikuutio_save_intermediate_results;
