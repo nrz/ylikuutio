@@ -66,7 +66,7 @@ namespace gpgpu_test
 
         if (identity_shader == nullptr)
         {
-            std::cerr << "Failed to create `Shader`.\n";
+            std::cerr << "Failed to create identity `Shader`.\n";
             return nullptr;
         }
 
@@ -85,7 +85,7 @@ namespace gpgpu_test
 
         if (identity_shader_BMP_compute_task == nullptr)
         {
-            std::cerr << "Failed to create BMP `ComputeTask`.\n";
+            std::cerr << "Failed to create identity BMP `ComputeTask`.\n";
             return nullptr;
         }
 
@@ -106,7 +106,7 @@ namespace gpgpu_test
 
         if (identity_shader_CSV_unsigned_byte_compute_task == nullptr)
         {
-            std::cerr << "Failed to create CSV `ComputeTask`.\n";
+            std::cerr << "Failed to create identity CSV `ComputeTask`.\n";
             return nullptr;
         }
 
