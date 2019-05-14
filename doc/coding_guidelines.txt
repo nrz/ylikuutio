@@ -1,0 +1,76 @@
+Ylikuutio source code guidelines
+
+Ylikuutio attempts to follow these code guidelines.
+
+Source code style
+* In this document backticks refer to code.
+* Use Allman style for all code.
+* Use 4 spaces for indentation. Do not use tabs.
+* C++ header files `*.hpp`, C++ implementation files `*.cpp`.
+* If needed: C header files `*.c`, C implementation files `*.h`.
+
+if (true)
+{
+    std::cout << "Hello!\n";
+}
+else
+{
+    std::cout << "What happened?\n";
+}
+
+General
+* Do not use `using`. Always use the full name like `std::cout`.
+* Use CamelCase for class names: `class MyClass;`.
+* Use underscores in variable names: `std::string my_string`.
+* Prefer `uint8_t` to `unsigned char`.
+* Prefer `int32_t` to `int`.
+* Prefer `int64_t` to `long long`.
+* Use `std::size_t` variables for file size variables.
+  Do not expect that any file is smaller than 4 GiB.
+* Do not expect any size for any C++ standard variable type.
+  Always cast when converting eg. `int` to `int32_t`.
+* Always set sane default values for member variables of `struct`s
+  passed as function parameters in non-real-time code.
+* Prefer `typedef struct MyStruct` to repeating `struct MyStruct`.
+* Always directly `#include` everything what is needed in the compilation
+  unit. Do not expect any `#include`d file to `#include` anything.
+* Try to keep source code headers clear of code. Unfortunately,
+  function templates and delegating constructors need to be in headers.
+* Avoid polluting the global namespace. Use your own `namespace`.
+* Prefer C++-style functions over C-style functions.
+* Prefer virtual functions to function templates.
+  Use function templates where needed eg. for speed.
+* Prefer `std::shared_ptr` and `std::make_shared` to raw pointers.
+* Prefer references to pointers.
+* Use `const` for variables and member functions wherever it's appropriate.
+* For function parameters always use `const std::string&` instead of `std::string`, if possible.
+* For function parameters always use `const FooStruct&` instead of `FooStruct`, if possible.
+* For function parameters prefer `const FooStruct&` instead of more than 5 parameters.
+* Maintaining compatibility with 32-bit systems is not a priority.
+
+Security-related
+* Do not make any assumptions that input is valid or sensible.
+* Do not make any assumptions about the size of the input.
+* Do not make any assumptions about undefined behavior.
+* Always `return` a value from non-`void` functions.
+  Failing to `return` a value from a non-`void` function may cause crash
+  (at least in Windows).
+  See commit b0bd1607bace941bb42088e1d56aaa38b166c97e for an example.
+* Avoid void pointers (`void*`).
+* Aim for stability. Code defensively.
+
+Real-time-code specific issues
+* In real-time code, prefer 32-bit variables (due to speed on amd64).
+* In real-time code, use 64-bit variables if needed.
+* In real-time code, avoid 8-bit and 16-bit variables when possible.
+* Think about Big O notation before writing any real-time code.
+* Think about CPU caches before writing any real-time code.
+* Think about OpenGL state changes before writing any real-time code.
+* Avoid void pointers (`void*`) where possible, but not at the cost of speed of real-time code.
+
+Compiling
+* Avoid large libraries. Try to keep the compiling time reasonable.
+* All code should compile with both GCC and Clang in amd64 Debian Stretch.
+* All code should crosscompile with MinGW-GCC from amd64 Debian Stretch
+  to a 64-bit Windows (Google Test unfortunately does not).
+* All code should compile in one `cmake .. && make` run.
