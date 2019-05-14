@@ -161,7 +161,7 @@ namespace gpgpu_test
 
         if (floyd_warshall_shader == nullptr)
         {
-            std::cerr << "Failed to create Shader.\n";
+            std::cerr << "Failed to create Floyd-Warshall `Shader`.\n";
             return nullptr;
         }
 
@@ -184,7 +184,7 @@ namespace gpgpu_test
 
         if (floyd_warshall_shader_CSV_unsigned_byte_compute_task == nullptr)
         {
-            std::cerr << "Failed to create ComputeTask.\n";
+            std::cerr << "Failed to create Floyd-Warshall CSV unsigned byte `ComputeTask`.\n";
             return nullptr;
         }
 
@@ -225,7 +225,7 @@ namespace gpgpu_test
 
         if (floyd_warshall_shader_CSV_float_compute_task == nullptr)
         {
-            std::cerr << "Failed to create ComputeTask.\n";
+            std::cerr << "Failed to create Floyd-Warshall CSV float `ComputeTask`.\n";
             return nullptr;
         }
 
