@@ -39,8 +39,8 @@ typedef struct ComputeTaskStruct
         texture_height(0),
         n_index_characters(4),
         format(GL_RGB),
-        internal_format(GL_INVALID_ENUM),
-        output_format(GL_INVALID_ENUM),
+        internal_format(GL_INVALID_ENUM), // If `internal_format` is left to `GL_INVALID_ENUM`, `format` is used as the internal format.
+        output_format(GL_INVALID_ENUM),   // If `output_format` is left to `GL_INVALID_ENUM`, `format` is used as the output format.
         type(GL_UNSIGNED_BYTE),
         should_ylikuutio_save_intermediate_results(false),
         should_ylikuutio_flip_texture(true),
