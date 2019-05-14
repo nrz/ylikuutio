@@ -148,6 +148,44 @@ namespace gpgpu_test
             return nullptr;
         }
 
+        // Create the shader, store it in `go_west_shader`.
+        ShaderStruct go_west_shader_struct;
+        go_west_shader_struct.parent = gpgpu_test_scene;
+        go_west_shader_struct.vertex_shader = "identity.vert";
+        go_west_shader_struct.fragment_shader = "go_west.frag";
+
+        std::cout << "Creating yli::ontology::Entity* go_west_shader_entity ...\n";
+        yli::ontology::Entity* const go_west_shader_entity = entity_factory->create_Shader(go_west_shader_struct);
+        std::cout << "Creating yli::ontology::Shader* go_west_shader ...\n";
+        yli::ontology::Shader* const go_west_shader = dynamic_cast<yli::ontology::Shader*>(go_west_shader_entity);
+
+        if (go_west_shader == nullptr)
+        {
+            std::cerr << "Failed to create Go West `Shader`.\n";
+            return nullptr;
+        }
+
+        ComputeTaskStruct go_west_shader_compute_task_struct;
+        go_west_shader_compute_task_struct.texture_file_format = "bmp";
+        go_west_shader_compute_task_struct.texture_filename = "numbers_123456_black_and_white.bmp";
+        go_west_shader_compute_task_struct.output_filename = "gpgpu_go_west_output.data";
+        go_west_shader_compute_task_struct.parent = go_west_shader;
+        go_west_shader_compute_task_struct.n_max_iterations = 256;
+        go_west_shader_compute_task_struct.texture_width = 512;
+        go_west_shader_compute_task_struct.texture_height = 512;
+        go_west_shader_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
+
+        std::cout << "Creating yli::ontology::Entity* go_west_shader_compute_task_entity ...\n";
+        yli::ontology::Entity* const go_west_shader_compute_task_entity = entity_factory->create_ComputeTask(go_west_shader_compute_task_struct);
+        std::cout << "Creating yli::ontology::ComputeTask* go_west_shader_compute_task ...\n";
+        yli::ontology::ComputeTask* const go_west_shader_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(go_west_shader_compute_task_entity);
+
+        if (go_west_shader_compute_task == nullptr)
+        {
+            std::cerr << "Failed to create Go West `ComputeTask`.\n";
+            return nullptr;
+        }
+
         // Create the shader, store it in `floyd_warshall_shader`.
         ShaderStruct floyd_warshall_shader_struct;
         floyd_warshall_shader_struct.parent = gpgpu_test_scene;
