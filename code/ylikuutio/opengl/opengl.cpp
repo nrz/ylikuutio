@@ -94,6 +94,8 @@ namespace yli
                     return 1;
                 case GL_BLUE:
                     return 1;
+                case GL_RG:
+                    return 2;
                 case GL_ALPHA:
                     return 1;
                 case GL_RGB:
