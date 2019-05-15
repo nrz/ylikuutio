@@ -186,6 +186,44 @@ namespace gpgpu_test
             return nullptr;
         }
 
+        // Create the shader, store it in `vanish_west_shader`.
+        ShaderStruct vanish_west_shader_struct;
+        vanish_west_shader_struct.parent = gpgpu_test_scene;
+        vanish_west_shader_struct.vertex_shader = "identity.vert";
+        vanish_west_shader_struct.fragment_shader = "vanish_west.frag";
+
+        std::cout << "Creating yli::ontology::Entity* vanish_west_shader_entity ...\n";
+        yli::ontology::Entity* const vanish_west_shader_entity = entity_factory->create_Shader(vanish_west_shader_struct);
+        std::cout << "Creating yli::ontology::Shader* vanish_west_shader ...\n";
+        yli::ontology::Shader* const vanish_west_shader = dynamic_cast<yli::ontology::Shader*>(vanish_west_shader_entity);
+
+        if (vanish_west_shader == nullptr)
+        {
+            std::cerr << "Failed to create Vanish West `Shader`.\n";
+            return nullptr;
+        }
+
+        ComputeTaskStruct vanish_west_shader_compute_task_struct;
+        vanish_west_shader_compute_task_struct.texture_file_format = "bmp";
+        vanish_west_shader_compute_task_struct.texture_filename = "numbers_123456_black_and_white.bmp";
+        vanish_west_shader_compute_task_struct.output_filename = "gpgpu_vanish_west_output.data";
+        vanish_west_shader_compute_task_struct.parent = vanish_west_shader;
+        vanish_west_shader_compute_task_struct.n_max_iterations = 256;
+        vanish_west_shader_compute_task_struct.texture_width = 512;
+        vanish_west_shader_compute_task_struct.texture_height = 512;
+        vanish_west_shader_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
+
+        std::cout << "Creating yli::ontology::Entity* vanish_west_shader_compute_task_entity ...\n";
+        yli::ontology::Entity* const vanish_west_shader_compute_task_entity = entity_factory->create_ComputeTask(vanish_west_shader_compute_task_struct);
+        std::cout << "Creating yli::ontology::ComputeTask* vanish_west_shader_compute_task ...\n";
+        yli::ontology::ComputeTask* const vanish_west_shader_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(vanish_west_shader_compute_task_entity);
+
+        if (vanish_west_shader_compute_task == nullptr)
+        {
+            std::cerr << "Failed to create Vanish West `ComputeTask`.\n";
+            return nullptr;
+        }
+
         // Create the shader, store it in `floyd_warshall_shader`.
         ShaderStruct floyd_warshall_shader_struct;
         floyd_warshall_shader_struct.parent = gpgpu_test_scene;
