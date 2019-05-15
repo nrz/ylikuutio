@@ -36,11 +36,12 @@ namespace yli
                     const GLenum type,
                     const std::size_t texture_width,
                     const std::size_t texture_height,
+                    const std::size_t texture_depth,
                     const bool should_ylikuutio_flip_texture)
             {
                 // Transfer data from the GPU texture to a CPU array.
                 const std::size_t n_color_channels = yli::opengl::get_n_color_channels(format);
-                const std::size_t n_texels = texture_width * texture_height;
+                const std::size_t n_texels = texture_width * texture_height * texture_depth;
                 const std::size_t size_of_texture = n_color_channels * n_texels;
                 T1* const result_array = new T1[size_of_texture];
 
@@ -58,6 +59,15 @@ namespace yli
 
                 return result_vector;
             }
+
+            void save_data_from_gpu_texture_into_file(
+                    const GLenum format,
+                    const GLenum type,
+                    const std::size_t texture_width,
+                    const std::size_t texture_height,
+                    const std::size_t texture_depth,
+                    const std::string filename,
+                    const bool should_ylikuutio_flip_texture);
 
             void save_data_from_gpu_texture_into_file(
                     const GLenum format,
