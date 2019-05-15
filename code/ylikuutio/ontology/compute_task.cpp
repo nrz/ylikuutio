@@ -114,7 +114,7 @@ namespace yli
                     glTexImage2D(GL_TEXTURE_2D, 0, this->internal_format, this->texture_width, this->texture_height, 0, this->format, this->type, NULL);
                 }
 
-                yli::opengl::set_filtering_parameters();
+                yli::opengl::set_nearest_filtering_parameters();
 
                 // Attach the texture.
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->target_texture, 0);
