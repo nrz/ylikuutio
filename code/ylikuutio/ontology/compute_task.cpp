@@ -199,13 +199,23 @@ namespace yli
                     {
                         // Output format not defined, use format as output format.
                         yli::opengl::save_data_from_gpu_texture_into_file(
-                                this->format, this->type, this->texture_width, this->texture_height, filename_stringstream.str(), this->should_ylikuutio_flip_texture);
+                                this->format,
+                                this->type,
+                                this->texture_width,
+                                this->texture_height,
+                                filename_stringstream.str(),
+                                this->should_ylikuutio_flip_texture);
                     }
                     else
                     {
                         // Output format is defined.
                         yli::opengl::save_data_from_gpu_texture_into_file(
-                                this->output_format, this->type, this->texture_width, this->texture_height, filename_stringstream.str(), this->should_ylikuutio_flip_texture);
+                                this->output_format,
+                                this->type,
+                                this->texture_width,
+                                this->texture_height,
+                                filename_stringstream.str(),
+                                this->should_ylikuutio_flip_texture);
                     }
                 }
 
@@ -235,13 +245,23 @@ namespace yli
             {
                 // Output format not defined, use format as output format.
                 yli::opengl::save_data_from_gpu_texture_into_file(
-                        this->format, this->type, this->texture_width, this->texture_height, this->output_filename, this->should_ylikuutio_flip_texture);
+                        this->format,
+                        this->type,
+                        this->texture_width,
+                        this->texture_height,
+                        this->output_filename,
+                        this->should_ylikuutio_flip_texture);
             }
             else
             {
                 // Output format is defined.
                 yli::opengl::save_data_from_gpu_texture_into_file(
-                        this->output_format, this->type, this->texture_width, this->texture_height, this->output_filename, this->should_ylikuutio_flip_texture);
+                        this->output_format,
+                        this->type,
+                        this->texture_width,
+                        this->texture_height,
+                        this->output_filename,
+                        this->should_ylikuutio_flip_texture);
             }
 
             universe->restore_onscreen_rendering();
