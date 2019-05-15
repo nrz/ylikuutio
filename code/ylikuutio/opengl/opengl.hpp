@@ -25,6 +25,7 @@ namespace yli
         void cull_triangles();
         void set_background_color(const float red, const float green, const float blue, const float alpha);
         void set_filtering_parameters();
+        void set_nearest_filtering_parameters();
         void set_wireframe(const bool wireframe);
         std::size_t get_n_color_channels(const GLenum format);
         std::size_t get_size_of_component(const GLenum type);
