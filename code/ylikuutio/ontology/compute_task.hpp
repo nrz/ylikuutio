@@ -90,6 +90,7 @@ namespace yli
                     this->compute_taskID = compute_task_struct.compute_taskID;
                     this->texture_width = compute_task_struct.texture_width;
                     this->texture_height = compute_task_struct.texture_height;
+                    this->texture_depth = compute_task_struct.texture_depth;
                     this->n_index_characters = compute_task_struct.n_index_characters;
 
                     // variables related to the framebuffer.
@@ -138,6 +139,7 @@ namespace yli
                         else
                         {
                             this->is_texture_loaded = true;
+                            this->texture_depth = 1;
                         }
                     }
                     else if (this->texture_file_format == "dds" || this->texture_file_format == "DDS")
@@ -149,6 +151,7 @@ namespace yli
                         else
                         {
                             this->is_texture_loaded = true;
+                            this->texture_depth = 1;
                         }
                     }
                     else if (this->texture_file_format == "csv" || this->texture_file_format == "CSV")
@@ -170,6 +173,7 @@ namespace yli
                         else
                         {
                             this->is_texture_loaded = true;
+                            this->texture_depth = 1;
                         }
                     }
                     else
@@ -192,6 +196,11 @@ namespace yli
                         // This is named `screen_height` instead of `texture_height` for compatibility with other shaders.
                         this->screen_height_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_height");
                         glUniform1i(this->screen_height_uniform_ID, this->texture_height);
+
+                        // Initialize uniform window depth.
+                        // This is named `screen_depth` instead of `texture_depth`, for consistency with other uniforms.
+                        this->screen_depth_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_depth");
+                        glUniform1i(this->screen_depth_uniform_ID, this->texture_depth);
 
                         // Initialize uniform iteration index.
                         this->iteration_i_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "iteration_i");
@@ -279,6 +288,7 @@ namespace yli
 
                 std::size_t texture_width;
                 std::size_t texture_height;
+                std::size_t texture_depth;
                 std::size_t texture_size;
 
                 std::size_t n_index_characters; // For intermediate results' filenames.
@@ -299,6 +309,7 @@ namespace yli
                 uint32_t vertexUVID;
                 uint32_t screen_width_uniform_ID;          // Location of the program's window width uniform.
                 uint32_t screen_height_uniform_ID;         // Location of the program's window height uniform.
+                uint32_t screen_depth_uniform_ID;          // Location of the program's window depth uniform.
                 uint32_t iteration_i_uniform_ID;           // Location of the program's iteration index uniform.
 
                 uint32_t vertexbuffer;

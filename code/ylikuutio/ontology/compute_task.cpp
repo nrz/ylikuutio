@@ -203,6 +203,7 @@ namespace yli
                                 this->type,
                                 this->texture_width,
                                 this->texture_height,
+                                this->texture_depth,
                                 filename_stringstream.str(),
                                 this->should_ylikuutio_flip_texture);
                     }
@@ -214,6 +215,7 @@ namespace yli
                                 this->type,
                                 this->texture_width,
                                 this->texture_height,
+                                this->texture_depth,
                                 filename_stringstream.str(),
                                 this->should_ylikuutio_flip_texture);
                     }
@@ -249,6 +251,7 @@ namespace yli
                         this->type,
                         this->texture_width,
                         this->texture_height,
+                        this->texture_depth,
                         this->output_filename,
                         this->should_ylikuutio_flip_texture);
             }
@@ -260,6 +263,7 @@ namespace yli
                         this->type,
                         this->texture_width,
                         this->texture_height,
+                        this->texture_depth,
                         this->output_filename,
                         this->should_ylikuutio_flip_texture);
             }

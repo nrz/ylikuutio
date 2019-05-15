@@ -37,6 +37,7 @@ typedef struct ComputeTaskStruct
         compute_taskID(std::numeric_limits<std::size_t>::max()), // `std::numeric_limits<std::size_t>::max()` means that `compute_taskID` is not defined.
         texture_width(0),
         texture_height(0),
+        texture_depth(0),
         n_index_characters(4),
         format(GL_RGB),
         internal_format(GL_INVALID_ENUM), // If `internal_format` is left to `GL_INVALID_ENUM`, `format` is used as the internal format.
@@ -61,6 +62,7 @@ typedef struct ComputeTaskStruct
     std::size_t compute_taskID;
     std::size_t texture_width;
     std::size_t texture_height;
+    std::size_t texture_depth;
     std::size_t n_index_characters;  // For intermediate results' filenames.
     GLenum format;
     GLenum internal_format;
