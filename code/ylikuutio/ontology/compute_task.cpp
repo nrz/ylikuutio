@@ -106,12 +106,30 @@ namespace yli
                 if (internal_format == GL_INVALID_ENUM)
                 {
                     // Internal format not defined, use format as internal format.
-                    glTexImage2D(GL_TEXTURE_2D, 0, this->format, this->texture_width, this->texture_height, 0, this->format, this->type, NULL);
+                    glTexImage2D(
+                            GL_TEXTURE_2D,
+                            0,
+                            this->format,
+                            this->texture_width,
+                            this->texture_height,
+                            0,
+                            this->format,
+                            this->type,
+                            NULL);
                 }
                 else
                 {
                     // Internal format is defined.
-                    glTexImage2D(GL_TEXTURE_2D, 0, this->internal_format, this->texture_width, this->texture_height, 0, this->format, this->type, NULL);
+                    glTexImage2D(
+                            GL_TEXTURE_2D,
+                            0,
+                            this->internal_format,
+                            this->texture_width,
+                            this->texture_height,
+                            0,
+                            this->format,
+                            this->type,
+                            NULL);
                 }
 
                 yli::opengl::set_nearest_filtering_parameters();
