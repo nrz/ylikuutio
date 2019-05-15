@@ -17,7 +17,7 @@ void main()
     // Therefore, the type of all texture coordinates must be `float`.
     // `UV.x` is `i`.
     // `UV.y` is `j`.
-    // `iteration_i` divided by 
+    // `iteration_i` divided by
     float i = UV.x;
     float j = UV.y;
     float k = float(iteration_i) / float(screen_width);
