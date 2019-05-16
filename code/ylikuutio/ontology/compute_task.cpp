@@ -260,6 +260,10 @@ namespace yli
                 this->postiterate();
             }
 
+            // Ping pong once more, so that last output target texture gets saved to file.
+            std::swap(this->source_texture, this->target_texture);
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->target_texture, 0);
+
             // Transfer data from the GPU texture to a CPU array and save into a file.
             if (this->output_format == GL_INVALID_ENUM)
             {
