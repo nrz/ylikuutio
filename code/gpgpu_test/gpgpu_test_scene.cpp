@@ -247,7 +247,7 @@ namespace gpgpu_test
         floyd_warshall_shader_CSV_unsigned_byte_compute_task_struct.texture_filename = "some_finnish_railway_stations_unsigned_integer_mini_with_fill.csv";
         floyd_warshall_shader_CSV_unsigned_byte_compute_task_struct.output_filename = "gpgpu_floyd_warshall_output_unsigned_byte_mini_with_fill.data";
         floyd_warshall_shader_CSV_unsigned_byte_compute_task_struct.parent = floyd_warshall_shader;
-        floyd_warshall_shader_CSV_unsigned_byte_compute_task_struct.n_max_iterations = 5;
+        floyd_warshall_shader_CSV_unsigned_byte_compute_task_struct.n_max_iterations = 8;
         floyd_warshall_shader_CSV_unsigned_byte_compute_task_struct.format = GL_RED;
         floyd_warshall_shader_CSV_unsigned_byte_compute_task_struct.internal_format = GL_R8;
         floyd_warshall_shader_CSV_unsigned_byte_compute_task_struct.type = GL_UNSIGNED_BYTE;
