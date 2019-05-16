@@ -14,6 +14,7 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
+#include <vector>   // std::vector
 
 namespace yli
 {
@@ -69,6 +70,13 @@ namespace yli
             CONSOLE_POINTER,
             SPHERICAL_COORDINATES_STRUCT_POINTER,
             STD_STRING_POINTER,
+            STD_VECTOR_INT8_T_SHARED_PTR,
+            STD_VECTOR_UINT8_T_SHARED_PTR,
+            STD_VECTOR_INT16_T_SHARED_PTR,
+            STD_VECTOR_UINT16_T_SHARED_PTR,
+            STD_VECTOR_INT32_T_SHARED_PTR,
+            STD_VECTOR_UINT32_T_SHARED_PTR,
+            STD_VECTOR_FLOAT_SHARED_PTR,
             GLM_VEC3_POINTER,
             GLM_VEC4_POINTER
         };
@@ -114,6 +122,13 @@ namespace yli
                 AnyValue(yli::console::Console* const console_pointer);
                 AnyValue(SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
                 AnyValue(std::string* const std_string_pointer);
+                AnyValue(std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr);
+                AnyValue(std::shared_ptr<std::vector<uint8_t>> std_vector_uint8_t_shared_ptr);
+                AnyValue(std::shared_ptr<std::vector<int16_t>> std_vector_int16_t_shared_ptr);
+                AnyValue(std::shared_ptr<std::vector<uint16_t>> std_vector_uint16_t_shared_ptr);
+                AnyValue(std::shared_ptr<std::vector<int32_t>> std_vector_int32_t_shared_ptr);
+                AnyValue(std::shared_ptr<std::vector<uint32_t>> std_vector_uint32_t_shared_ptr);
+                AnyValue(std::shared_ptr<std::vector<float>> std_vector_float_shared_ptr);
                 AnyValue(glm::vec3* const glm_vec3_pointer);
                 AnyValue(glm::vec4* const glm_vec4_pointer);
 
@@ -143,11 +158,25 @@ namespace yli
                 AnyValue(const std::string& type, yli::console::Console* const console_pointer);
                 AnyValue(const std::string& type, SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
                 AnyValue(const std::string& type, std::string* const std_string_pointer);
+                AnyValue(const std::string& type, std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr);
+                AnyValue(const std::string& type, std::shared_ptr<std::vector<uint8_t>> std_vector_uint8_t_shared_ptr);
+                AnyValue(const std::string& type, std::shared_ptr<std::vector<int16_t>> std_vector_int16_t_shared_ptr);
+                AnyValue(const std::string& type, std::shared_ptr<std::vector<uint16_t>> std_vector_uint16_t_shared_ptr);
+                AnyValue(const std::string& type, std::shared_ptr<std::vector<int32_t>> std_vector_int32_t_shared_ptr);
+                AnyValue(const std::string& type, std::shared_ptr<std::vector<uint32_t>> std_vector_uint32_t_shared_ptr);
+                AnyValue(const std::string& type, std::shared_ptr<std::vector<float>> std_vector_float_shared_ptr);
                 AnyValue(const std::string& type, glm::vec3* const glm_vec3_pointer);
                 AnyValue(const std::string& type, glm::vec4* const glm_vec3_pointer);
 
                 int type;
                 std::shared_ptr<yli::datatypes::AnyStruct> any_struct_shared_ptr;
+                std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr;
+                std::shared_ptr<std::vector<uint8_t>> std_vector_uint8_t_shared_ptr;
+                std::shared_ptr<std::vector<int16_t>> std_vector_int16_t_shared_ptr;
+                std::shared_ptr<std::vector<uint16_t>> std_vector_uint16_t_shared_ptr;
+                std::shared_ptr<std::vector<int32_t>> std_vector_int32_t_shared_ptr;
+                std::shared_ptr<std::vector<uint32_t>> std_vector_uint32_t_shared_ptr;
+                std::shared_ptr<std::vector<float>> std_vector_float_shared_ptr;
 
                 union
                 {

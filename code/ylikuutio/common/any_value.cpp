@@ -17,9 +17,11 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <ios>      // std::defaultfloat, std::fixed, std::ios
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
+#include <vector>   // std::vector
 
 namespace yli
 {
@@ -103,6 +105,20 @@ namespace yli
                     return "SphericalCoordinatesStruct*";
                 case (STD_STRING_POINTER):
                     return "std::string*";
+                case (STD_VECTOR_INT8_T_SHARED_PTR):
+                    return "std::shared_ptr<std::vector<int8_t>>";
+                case (STD_VECTOR_UINT8_T_SHARED_PTR):
+                    return "std::shared_ptr<std::vector<uint8_t>>";
+                case (STD_VECTOR_INT16_T_SHARED_PTR):
+                    return "std::shared_ptr<std::vector<int16_t>>";
+                case (STD_VECTOR_UINT16_T_SHARED_PTR):
+                    return "std::shared_ptr<std::vector<uint16_t>>";
+                case (STD_VECTOR_INT32_T_SHARED_PTR):
+                    return "std::shared_ptr<std::vector<int32_t>>";
+                case (STD_VECTOR_UINT32_T_SHARED_PTR):
+                    return "std::shared_ptr<std::vector<uint32_t>>";
+                case (STD_VECTOR_FLOAT_SHARED_PTR):
+                    return "std::shared_ptr<std::vector<float>>";
                 case (GLM_VEC3_POINTER):
                     return "glm::vec3*";
                 case (GLM_VEC4_POINTER):
@@ -124,7 +140,14 @@ namespace yli
                     any_value_stringstream << "unknown";
                     break;
                 case (ANY_STRUCT_SHARED_PTR):
-                    any_value_stringstream << std::hex << this->any_struct_shared_ptr.get() << std::dec;
+                    if (this->any_struct_shared_ptr == nullptr)
+                    {
+                        any_value_stringstream << "nullptr";
+                    }
+                    else
+                    {
+                        any_value_stringstream << std::hex << this->any_struct_shared_ptr.get() << std::dec;
+                    }
                     break;
                 case (BOOL):
                     any_value_stringstream << (this->bool_value ? "true" : "false");
@@ -218,6 +241,76 @@ namespace yli
                     else
                     {
                         any_value_stringstream << *this->std_string_pointer;
+                    }
+                    break;
+                case (STD_VECTOR_INT8_T_SHARED_PTR):
+                    if (this->std_vector_int8_t_shared_ptr == nullptr)
+                    {
+                        any_value_stringstream << "nullptr";
+                    }
+                    else
+                    {
+                        any_value_stringstream << "std::shared_ptr<std::vector<int8_t>>";
+                    }
+                    break;
+                case (STD_VECTOR_UINT8_T_SHARED_PTR):
+                    if (this->std_vector_uint8_t_shared_ptr == nullptr)
+                    {
+                        any_value_stringstream << "nullptr";
+                    }
+                    else
+                    {
+                        any_value_stringstream << "std::shared_ptr<std::vector<uint8_t>>";
+                    }
+                    break;
+                case (STD_VECTOR_INT16_T_SHARED_PTR):
+                    if (this->std_vector_int16_t_shared_ptr == nullptr)
+                    {
+                        any_value_stringstream << "nullptr";
+                    }
+                    else
+                    {
+                        any_value_stringstream << "std::shared_ptr<std::vector<int16_t>>";
+                    }
+                    break;
+                case (STD_VECTOR_UINT16_T_SHARED_PTR):
+                    if (this->std_vector_uint16_t_shared_ptr == nullptr)
+                    {
+                        any_value_stringstream << "nullptr";
+                    }
+                    else
+                    {
+                        any_value_stringstream << "std::shared_ptr<std::vector<uint16_t>>";
+                    }
+                    break;
+                case (STD_VECTOR_INT32_T_SHARED_PTR):
+                    if (this->std_vector_int32_t_shared_ptr == nullptr)
+                    {
+                        any_value_stringstream << "nullptr";
+                    }
+                    else
+                    {
+                        any_value_stringstream << "std::shared_ptr<std::vector<int32_t>>";
+                    }
+                    break;
+                case (STD_VECTOR_UINT32_T_SHARED_PTR):
+                    if (this->std_vector_uint32_t_shared_ptr == nullptr)
+                    {
+                        any_value_stringstream << "nullptr";
+                    }
+                    else
+                    {
+                        any_value_stringstream << "std::shared_ptr<std::vector<uint32_t>>";
+                    }
+                    break;
+                case (STD_VECTOR_FLOAT_SHARED_PTR):
+                    if (this->std_vector_float_shared_ptr == nullptr)
+                    {
+                        any_value_stringstream << "nullptr";
+                    }
+                    else
+                    {
+                        any_value_stringstream << "std::shared_ptr<std::vector<float>>";
                     }
                     break;
                 case (GLM_VEC3_POINTER):
@@ -606,6 +699,13 @@ namespace yli
         void AnyValue::set_default_values()
         {
             this->any_struct_shared_ptr = nullptr;
+            this->std_vector_int8_t_shared_ptr = nullptr;
+            this->std_vector_uint8_t_shared_ptr = nullptr;
+            this->std_vector_int16_t_shared_ptr = nullptr;
+            this->std_vector_uint16_t_shared_ptr = nullptr;
+            this->std_vector_int32_t_shared_ptr = nullptr;
+            this->std_vector_uint32_t_shared_ptr = nullptr;
+            this->std_vector_float_shared_ptr = nullptr;
             this->type = yli::datatypes::UNKNOWN;
         }
 
@@ -639,6 +739,13 @@ namespace yli
             this->console_pointer = original.console_pointer;
             this->spherical_coordinates_struct_pointer = original.spherical_coordinates_struct_pointer;
             this->std_string_pointer = original.std_string_pointer;
+            this->std_vector_int8_t_shared_ptr = original.std_vector_int8_t_shared_ptr;
+            this->std_vector_uint8_t_shared_ptr = original.std_vector_uint8_t_shared_ptr;
+            this->std_vector_int16_t_shared_ptr = original.std_vector_int16_t_shared_ptr;
+            this->std_vector_uint16_t_shared_ptr = original.std_vector_uint16_t_shared_ptr;
+            this->std_vector_int32_t_shared_ptr = original.std_vector_int32_t_shared_ptr;
+            this->std_vector_uint32_t_shared_ptr = original.std_vector_uint32_t_shared_ptr;
+            this->std_vector_float_shared_ptr = original.std_vector_float_shared_ptr;
             this->glm_vec3_pointer = original.glm_vec3_pointer;
             this->glm_vec4_pointer = original.glm_vec4_pointer;
         }
@@ -1276,6 +1383,146 @@ namespace yli
             {
                 this->type = yli::datatypes::STD_STRING_POINTER;
                 this->std_string_pointer = std_string_pointer;
+            }
+        }
+
+        AnyValue::AnyValue(std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr)
+        {
+            // constructor.
+            this->set_default_values();
+            this->type = yli::datatypes::STD_VECTOR_INT8_T_SHARED_PTR;
+            this->std_vector_int8_t_shared_ptr = std_vector_int8_t_shared_ptr;
+        }
+
+        AnyValue::AnyValue(const std::string& type, std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr)
+        {
+            // constructor.
+            this->set_default_values();
+
+            if (type == "std::shared_ptr<std::vector<int8_t>>")
+            {
+                this->type = yli::datatypes::STD_VECTOR_INT8_T_SHARED_PTR;
+                this->std_vector_int8_t_shared_ptr = std_vector_int8_t_shared_ptr;
+            }
+        }
+
+        AnyValue::AnyValue(std::shared_ptr<std::vector<uint8_t>> std_vector_uint8_t_shared_ptr)
+        {
+            // constructor.
+            this->set_default_values();
+            this->type = yli::datatypes::STD_VECTOR_UINT8_T_SHARED_PTR;
+            this->std_vector_uint8_t_shared_ptr = std_vector_uint8_t_shared_ptr;
+        }
+
+        AnyValue::AnyValue(const std::string& type, std::shared_ptr<std::vector<uint8_t>> std_vector_uint8_t_shared_ptr)
+        {
+            // constructor.
+            this->set_default_values();
+
+            if (type == "std::shared_ptr<std::vector<uint8_t>>")
+            {
+                this->type = yli::datatypes::STD_VECTOR_UINT8_T_SHARED_PTR;
+                this->std_vector_uint8_t_shared_ptr = std_vector_uint8_t_shared_ptr;
+            }
+        }
+
+        AnyValue::AnyValue(std::shared_ptr<std::vector<int16_t>> std_vector_int16_t_shared_ptr)
+        {
+            // constructor.
+            this->set_default_values();
+            this->type = yli::datatypes::STD_VECTOR_INT16_T_SHARED_PTR;
+            this->std_vector_int16_t_shared_ptr = std_vector_int16_t_shared_ptr;
+        }
+
+        AnyValue::AnyValue(const std::string& type, std::shared_ptr<std::vector<int16_t>> std_vector_int16_t_shared_ptr)
+        {
+            // constructor.
+            this->set_default_values();
+
+            if (type == "std::shared_ptr<std::vector<int16_t>>")
+            {
+                this->type = yli::datatypes::STD_VECTOR_INT16_T_SHARED_PTR;
+                this->std_vector_int16_t_shared_ptr = std_vector_int16_t_shared_ptr;
+            }
+        }
+
+        AnyValue::AnyValue(std::shared_ptr<std::vector<uint16_t>> std_vector_uint16_t_shared_ptr)
+        {
+            // constructor.
+            this->set_default_values();
+            this->type = yli::datatypes::STD_VECTOR_UINT16_T_SHARED_PTR;
+            this->std_vector_uint16_t_shared_ptr = std_vector_uint16_t_shared_ptr;
+        }
+
+        AnyValue::AnyValue(const std::string& type, std::shared_ptr<std::vector<uint16_t>> std_vector_uint16_t_shared_ptr)
+        {
+            // constructor.
+            this->set_default_values();
+
+            if (type == "std::shared_ptr<std::vector<uint16_t>>")
+            {
+                this->type = yli::datatypes::STD_VECTOR_UINT16_T_SHARED_PTR;
+                this->std_vector_uint16_t_shared_ptr = std_vector_uint16_t_shared_ptr;
+            }
+        }
+
+        AnyValue::AnyValue(std::shared_ptr<std::vector<int32_t>> std_vector_int32_t_shared_ptr)
+        {
+            // constructor.
+            this->set_default_values();
+            this->type = yli::datatypes::STD_VECTOR_INT32_T_SHARED_PTR;
+            this->std_vector_int32_t_shared_ptr = std_vector_int32_t_shared_ptr;
+        }
+
+        AnyValue::AnyValue(const std::string& type, std::shared_ptr<std::vector<int32_t>> std_vector_int32_t_shared_ptr)
+        {
+            // constructor.
+            this->set_default_values();
+
+            if (type == "std::shared_ptr<std::vector<int32_t>>")
+            {
+                this->type = yli::datatypes::STD_VECTOR_INT32_T_SHARED_PTR;
+                this->std_vector_int32_t_shared_ptr = std_vector_int32_t_shared_ptr;
+            }
+        }
+
+        AnyValue::AnyValue(std::shared_ptr<std::vector<uint32_t>> std_vector_uint32_t_shared_ptr)
+        {
+            // constructor.
+            this->set_default_values();
+            this->type = yli::datatypes::STD_VECTOR_UINT32_T_SHARED_PTR;
+            this->std_vector_uint32_t_shared_ptr = std_vector_uint32_t_shared_ptr;
+        }
+
+        AnyValue::AnyValue(const std::string& type, std::shared_ptr<std::vector<uint32_t>> std_vector_uint32_t_shared_ptr)
+        {
+            // constructor.
+            this->set_default_values();
+
+            if (type == "std::shared_ptr<std::vector<uint32_t>>")
+            {
+                this->type = yli::datatypes::STD_VECTOR_UINT32_T_SHARED_PTR;
+                this->std_vector_uint32_t_shared_ptr = std_vector_uint32_t_shared_ptr;
+            }
+        }
+
+        AnyValue::AnyValue(std::shared_ptr<std::vector<float>> std_vector_float_shared_ptr)
+        {
+            // constructor.
+            this->set_default_values();
+            this->type = yli::datatypes::STD_VECTOR_FLOAT_SHARED_PTR;
+            this->std_vector_float_shared_ptr = std_vector_float_shared_ptr;
+        }
+
+        AnyValue::AnyValue(const std::string& type, std::shared_ptr<std::vector<float>> std_vector_float_shared_ptr)
+        {
+            // constructor.
+            this->set_default_values();
+
+            if (type == "std::shared_ptr<std::vector<float>>")
+            {
+                this->type = yli::datatypes::STD_VECTOR_FLOAT_SHARED_PTR;
+                this->std_vector_float_shared_ptr = std_vector_float_shared_ptr;
             }
         }
 

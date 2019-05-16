@@ -2,6 +2,7 @@
 #include "code/ylikuutio/linear_algebra/matrix.hpp"
 #include "code/ylikuutio/linear_algebra/matrix_functions.hpp"
 #include "code/ylikuutio/linear_algebra/tensor3.hpp"
+#include "code/ylikuutio/linear_algebra/vector_functions.hpp"
 
 // Include standard headers
 #include <vector>   // std::vector
@@ -622,4 +623,400 @@ TEST(tensors_must_function_as_expected, tensors)
     ASSERT_EQ(some_tensor3x3x3[2][0][2], 21);
     ASSERT_EQ(some_tensor3x3x3[2][1][2], 24);
     ASSERT_EQ(some_tensor3x3x3[2][2][2], 27);
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_empty_char_left_filler_vector_is_empty_char_right_filler_vector_is_empty)
+{
+    std::vector<char> data_vector;
+    std::vector<char> left_filler_vector;
+    std::vector<char> right_filler_vector;
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_TRUE(result_vector->empty());
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_empty_char_left_filler_vector_is_1_char_char_right_filler_vector_is_empty)
+{
+    std::vector<char> data_vector;
+    std::vector<char> left_filler_vector { 'a' };
+    std::vector<char> right_filler_vector;
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_TRUE(result_vector->empty());
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_empty_char_left_filler_vector_is_empty_char_right_filler_vector_is_1_char)
+{
+    std::vector<char> data_vector;
+    std::vector<char> left_filler_vector;
+    std::vector<char> right_filler_vector { 'a' };
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_TRUE(result_vector->empty());
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_empty_char_left_filler_vector_is_1_char_char_right_filler_vector_is_1_char)
+{
+    std::vector<char> data_vector;
+    std::vector<char> left_filler_vector { 'a' };
+    std::vector<char> right_filler_vector { 'b' };
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_TRUE(result_vector->empty());
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_empty_char_left_filler_vector_is_2_chars_char_right_filler_vector_is_empty)
+{
+    std::vector<char> data_vector;
+    std::vector<char> left_filler_vector { 'a', 'b' };
+    std::vector<char> right_filler_vector;
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_TRUE(result_vector->empty());
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_empty_char_left_filler_vector_is_empty_char_right_filler_vector_is_2_chars)
+{
+    std::vector<char> data_vector;
+    std::vector<char> left_filler_vector;
+    std::vector<char> right_filler_vector { 'a', 'b' };
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_TRUE(result_vector->empty());
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_empty_char_left_filler_vector_is_1_char_char_right_filler_vector_is_2_chars)
+{
+    std::vector<char> data_vector;
+    std::vector<char> left_filler_vector { 'a' };
+    std::vector<char> right_filler_vector { 'b', 'c' };
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_TRUE(result_vector->empty());
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_empty_char_left_filler_vector_is_2_chars_char_right_filler_vector_is_1_char)
+{
+    std::vector<char> data_vector;
+    std::vector<char> left_filler_vector { 'a', 'b' };
+    std::vector<char> right_filler_vector { 'c' };
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_TRUE(result_vector->empty());
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_empty_char_left_filler_vector_is_2_chars_char_right_filler_vector_is_2_chars)
+{
+    std::vector<char> data_vector;
+    std::vector<char> left_filler_vector { 'a', 'b' };
+    std::vector<char> right_filler_vector { 'c', 'd' };
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_TRUE(result_vector->empty());
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_1_char_char_left_filler_vector_is_empty_char_right_filler_vector_is_empty)
+{
+    std::vector<char> data_vector { 'a' };
+    std::vector<char> left_filler_vector;
+    std::vector<char> right_filler_vector;
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_FALSE(result_vector->empty());
+    ASSERT_EQ(result_vector->size(), 1);
+    ASSERT_EQ((*result_vector)[0], 'a');
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_1_char_char_left_filler_vector_is_1_char_char_right_filler_vector_is_empty)
+{
+    std::vector<char> data_vector { 'a' };
+    std::vector<char> left_filler_vector { 'b' };
+    std::vector<char> right_filler_vector;
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_FALSE(result_vector->empty());
+    ASSERT_EQ(result_vector->size(), 2);
+    ASSERT_EQ((*result_vector)[0], 'b');
+    ASSERT_EQ((*result_vector)[1], 'a');
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_1_char_char_left_filler_vector_is_empty_char_right_filler_vector_is_1_char)
+{
+    std::vector<char> data_vector { 'a' };
+    std::vector<char> left_filler_vector;
+    std::vector<char> right_filler_vector { 'b' };
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_FALSE(result_vector->empty());
+    ASSERT_EQ(result_vector->size(), 2);
+    ASSERT_EQ((*result_vector)[0], 'a');
+    ASSERT_EQ((*result_vector)[1], 'b');
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_1_char_char_left_filler_vector_is_1_char_char_right_filler_vector_is_1_char)
+{
+    std::vector<char> data_vector { 'a' };
+    std::vector<char> left_filler_vector { 'b' };
+    std::vector<char> right_filler_vector { 'c' };
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_FALSE(result_vector->empty());
+    ASSERT_EQ(result_vector->size(), 3);
+    ASSERT_EQ((*result_vector)[0], 'b');
+    ASSERT_EQ((*result_vector)[1], 'a');
+    ASSERT_EQ((*result_vector)[2], 'c');
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_1_char_char_left_filler_vector_is_2_chars_char_right_filler_vector_is_empty)
+{
+    std::vector<char> data_vector { 'a' };
+    std::vector<char> left_filler_vector { 'b', 'c' };
+    std::vector<char> right_filler_vector;
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_FALSE(result_vector->empty());
+    ASSERT_EQ(result_vector->size(), 3);
+    ASSERT_EQ((*result_vector)[0], 'b');
+    ASSERT_EQ((*result_vector)[1], 'c');
+    ASSERT_EQ((*result_vector)[2], 'a');
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_1_char_char_left_filler_vector_is_empty_char_right_filler_vector_is_2_chars)
+{
+    std::vector<char> data_vector { 'a' };
+    std::vector<char> left_filler_vector;
+    std::vector<char> right_filler_vector { 'b', 'c' };
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_FALSE(result_vector->empty());
+    ASSERT_EQ(result_vector->size(), 3);
+    ASSERT_EQ((*result_vector)[0], 'a');
+    ASSERT_EQ((*result_vector)[1], 'b');
+    ASSERT_EQ((*result_vector)[2], 'c');
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_1_char_char_left_filler_vector_is_1_char_char_right_filler_vector_is_2_chars)
+{
+    std::vector<char> data_vector { 'a' };
+    std::vector<char> left_filler_vector { 'b' };
+    std::vector<char> right_filler_vector { 'c', 'd' };
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_FALSE(result_vector->empty());
+    ASSERT_EQ(result_vector->size(), 4);
+    ASSERT_EQ((*result_vector)[0], 'b');
+    ASSERT_EQ((*result_vector)[1], 'a');
+    ASSERT_EQ((*result_vector)[2], 'c');
+    ASSERT_EQ((*result_vector)[3], 'd');
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_1_char_char_left_filler_vector_is_2_chars_char_right_filler_vector_is_1_char)
+{
+    std::vector<char> data_vector { 'a' };
+    std::vector<char> left_filler_vector { 'b', 'c' };
+    std::vector<char> right_filler_vector { 'd' };
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_FALSE(result_vector->empty());
+    ASSERT_EQ(result_vector->size(), 4);
+    ASSERT_EQ((*result_vector)[0], 'b');
+    ASSERT_EQ((*result_vector)[1], 'c');
+    ASSERT_EQ((*result_vector)[2], 'a');
+    ASSERT_EQ((*result_vector)[3], 'd');
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_1_char_char_left_filler_vector_is_2_chars_char_right_filler_vector_is_2_chars)
+{
+    std::vector<char> data_vector { 'a' };
+    std::vector<char> left_filler_vector { 'b', 'c' };
+    std::vector<char> right_filler_vector { 'd', 'e' };
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_FALSE(result_vector->empty());
+    ASSERT_EQ(result_vector->size(), 5);
+    ASSERT_EQ((*result_vector)[0], 'b');
+    ASSERT_EQ((*result_vector)[1], 'c');
+    ASSERT_EQ((*result_vector)[2], 'a');
+    ASSERT_EQ((*result_vector)[3], 'd');
+    ASSERT_EQ((*result_vector)[4], 'e');
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_2_chars_char_left_filler_vector_is_empty_char_right_filler_vector_is_empty)
+{
+    std::vector<char> data_vector { 'a', 'b' };
+    std::vector<char> left_filler_vector;
+    std::vector<char> right_filler_vector;
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_FALSE(result_vector->empty());
+    ASSERT_EQ(result_vector->size(), 2);
+    ASSERT_EQ((*result_vector)[0], 'a');
+    ASSERT_EQ((*result_vector)[1], 'b');
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_2_chars_char_left_filler_vector_is_1_char_char_right_filler_vector_is_empty)
+{
+    std::vector<char> data_vector { 'a', 'b' };
+    std::vector<char> left_filler_vector { 'c' };
+    std::vector<char> right_filler_vector;
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_FALSE(result_vector->empty());
+    ASSERT_EQ(result_vector->size(), 4);
+    ASSERT_EQ((*result_vector)[0], 'c');
+    ASSERT_EQ((*result_vector)[1], 'a');
+    ASSERT_EQ((*result_vector)[2], 'c');
+    ASSERT_EQ((*result_vector)[3], 'b');
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_2_chars_char_left_filler_vector_is_empty_char_right_filler_vector_is_1_char)
+{
+    std::vector<char> data_vector { 'a', 'b' };
+    std::vector<char> left_filler_vector;
+    std::vector<char> right_filler_vector { 'c' };
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_FALSE(result_vector->empty());
+    ASSERT_EQ(result_vector->size(), 4);
+    ASSERT_EQ((*result_vector)[0], 'a');
+    ASSERT_EQ((*result_vector)[1], 'c');
+    ASSERT_EQ((*result_vector)[2], 'b');
+    ASSERT_EQ((*result_vector)[3], 'c');
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_2_chars_char_left_filler_vector_is_1_char_char_right_filler_vector_is_1_char)
+{
+    std::vector<char> data_vector { 'a', 'b' };
+    std::vector<char> left_filler_vector { 'c' };
+    std::vector<char> right_filler_vector { 'd' };
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_FALSE(result_vector->empty());
+    ASSERT_EQ(result_vector->size(), 6);
+    ASSERT_EQ((*result_vector)[0], 'c');
+    ASSERT_EQ((*result_vector)[1], 'a');
+    ASSERT_EQ((*result_vector)[2], 'd');
+    ASSERT_EQ((*result_vector)[3], 'c');
+    ASSERT_EQ((*result_vector)[4], 'b');
+    ASSERT_EQ((*result_vector)[5], 'd');
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_2_chars_char_left_filler_vector_is_2_chars_char_right_filler_vector_is_empty)
+{
+    std::vector<char> data_vector { 'a', 'b' };
+    std::vector<char> left_filler_vector { 'c', 'd' };
+    std::vector<char> right_filler_vector;
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_FALSE(result_vector->empty());
+    ASSERT_EQ(result_vector->size(), 6);
+    ASSERT_EQ((*result_vector)[0], 'c');
+    ASSERT_EQ((*result_vector)[1], 'd');
+    ASSERT_EQ((*result_vector)[2], 'a');
+    ASSERT_EQ((*result_vector)[3], 'c');
+    ASSERT_EQ((*result_vector)[4], 'd');
+    ASSERT_EQ((*result_vector)[5], 'b');
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_2_chars_char_left_filler_vector_is_empty_char_right_filler_vector_is_2_chars)
+{
+    std::vector<char> data_vector { 'a', 'b' };
+    std::vector<char> left_filler_vector;
+    std::vector<char> right_filler_vector { 'c', 'd' };
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_FALSE(result_vector->empty());
+    ASSERT_EQ(result_vector->size(), 6);
+    ASSERT_EQ((*result_vector)[0], 'a');
+    ASSERT_EQ((*result_vector)[1], 'c');
+    ASSERT_EQ((*result_vector)[2], 'd');
+    ASSERT_EQ((*result_vector)[3], 'b');
+    ASSERT_EQ((*result_vector)[4], 'c');
+    ASSERT_EQ((*result_vector)[5], 'd');
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_2_chars_char_left_filler_vector_is_1_char_char_right_filler_vector_is_2_chars)
+{
+    std::vector<char> data_vector { 'a', 'b' };
+    std::vector<char> left_filler_vector { 'c' };
+    std::vector<char> right_filler_vector { 'd', 'e' };
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_FALSE(result_vector->empty());
+    ASSERT_EQ(result_vector->size(), 8);
+    ASSERT_EQ((*result_vector)[0], 'c');
+    ASSERT_EQ((*result_vector)[1], 'a');
+    ASSERT_EQ((*result_vector)[2], 'd');
+    ASSERT_EQ((*result_vector)[3], 'e');
+    ASSERT_EQ((*result_vector)[4], 'c');
+    ASSERT_EQ((*result_vector)[5], 'b');
+    ASSERT_EQ((*result_vector)[6], 'd');
+    ASSERT_EQ((*result_vector)[7], 'e');
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_2_chars_char_left_filler_vector_is_2_chars_char_right_filler_vector_is_1_char)
+{
+    std::vector<char> data_vector { 'a', 'b' };
+    std::vector<char> left_filler_vector { 'c', 'd' };
+    std::vector<char> right_filler_vector { 'e' };
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_FALSE(result_vector->empty());
+    ASSERT_EQ(result_vector->size(), 8);
+    ASSERT_EQ((*result_vector)[0], 'c');
+    ASSERT_EQ((*result_vector)[1], 'd');
+    ASSERT_EQ((*result_vector)[2], 'a');
+    ASSERT_EQ((*result_vector)[3], 'e');
+    ASSERT_EQ((*result_vector)[4], 'c');
+    ASSERT_EQ((*result_vector)[5], 'd');
+    ASSERT_EQ((*result_vector)[6], 'b');
+    ASSERT_EQ((*result_vector)[7], 'e');
+}
+
+TEST(insert_elements_must_function_as_expected, char_data_vector_is_2_chars_char_left_filler_vector_is_2_chars_char_right_filler_vector_is_2_chars)
+{
+    std::vector<char> data_vector { 'a', 'b' };
+    std::vector<char> left_filler_vector { 'c', 'd' };
+    std::vector<char> right_filler_vector { 'e', 'f' };
+
+    std::shared_ptr<std::vector<char>> result_vector = yli::linear_algebra::insert_elements(data_vector, left_filler_vector, right_filler_vector);
+    ASSERT_NE(result_vector, nullptr);
+    ASSERT_FALSE(result_vector->empty());
+    ASSERT_EQ(result_vector->size(), 10);
+    ASSERT_EQ((*result_vector)[0], 'c');
+    ASSERT_EQ((*result_vector)[1], 'd');
+    ASSERT_EQ((*result_vector)[2], 'a');
+    ASSERT_EQ((*result_vector)[3], 'e');
+    ASSERT_EQ((*result_vector)[4], 'f');
+    ASSERT_EQ((*result_vector)[5], 'c');
+    ASSERT_EQ((*result_vector)[6], 'd');
+    ASSERT_EQ((*result_vector)[7], 'b');
+    ASSERT_EQ((*result_vector)[8], 'e');
+    ASSERT_EQ((*result_vector)[9], 'f');
 }

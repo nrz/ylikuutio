@@ -8,6 +8,7 @@
 #include "post_iterate_callback.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/load/texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -79,6 +80,8 @@ namespace yli
                     this->texture_filename = compute_task_struct.texture_filename;
                     this->output_filename = compute_task_struct.output_filename;
                     this->parent = compute_task_struct.parent;
+                    this->left_filler_vector_any_value = compute_task_struct.left_filler_vector_any_value;
+                    this->right_filler_vector_any_value = compute_task_struct.right_filler_vector_any_value;
                     this->end_condition_callback_engine = compute_task_struct.end_condition_callback_engine;
 
                     this->result_vector = nullptr;
@@ -87,6 +90,7 @@ namespace yli
                     this->compute_taskID = compute_task_struct.compute_taskID;
                     this->texture_width = compute_task_struct.texture_width;
                     this->texture_height = compute_task_struct.texture_height;
+                    this->texture_depth = compute_task_struct.texture_depth;
                     this->n_index_characters = compute_task_struct.n_index_characters;
 
                     // variables related to the framebuffer.
@@ -108,6 +112,7 @@ namespace yli
 
                     this->format                       = compute_task_struct.format;
                     this->internal_format              = compute_task_struct.internal_format;
+                    this->output_format                = compute_task_struct.output_format;
                     this->type                         = compute_task_struct.type;
                     this->should_ylikuutio_save_intermediate_results = compute_task_struct.should_ylikuutio_save_intermediate_results;
                     this->should_ylikuutio_flip_texture              = compute_task_struct.should_ylikuutio_flip_texture;
@@ -134,6 +139,7 @@ namespace yli
                         else
                         {
                             this->is_texture_loaded = true;
+                            this->texture_depth = 1;
                         }
                     }
                     else if (this->texture_file_format == "dds" || this->texture_file_format == "DDS")
@@ -145,6 +151,7 @@ namespace yli
                         else
                         {
                             this->is_texture_loaded = true;
+                            this->texture_depth = 1;
                         }
                     }
                     else if (this->texture_file_format == "csv" || this->texture_file_format == "CSV")
@@ -154,6 +161,8 @@ namespace yli
                                     this->format,
                                     this->internal_format,
                                     this->type,
+                                    this->left_filler_vector_any_value,
+                                    this->right_filler_vector_any_value,
                                     this->texture_width,
                                     this->texture_height,
                                     this->texture_size,
@@ -164,6 +173,7 @@ namespace yli
                         else
                         {
                             this->is_texture_loaded = true;
+                            this->texture_depth = 1;
                         }
                     }
                     else
@@ -186,6 +196,11 @@ namespace yli
                         // This is named `screen_height` instead of `texture_height` for compatibility with other shaders.
                         this->screen_height_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_height");
                         glUniform1i(this->screen_height_uniform_ID, this->texture_height);
+
+                        // Initialize uniform window depth.
+                        // This is named `screen_depth` instead of `texture_depth`, for consistency with other uniforms.
+                        this->screen_depth_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_depth");
+                        glUniform1i(this->screen_depth_uniform_ID, this->texture_depth);
 
                         // Initialize uniform iteration index.
                         this->iteration_i_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "iteration_i");
@@ -250,11 +265,14 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
-                std::string texture_file_format; // Type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
+                std::string texture_file_format; // Type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"csv"`/`"CSV"`, `"dds"`/`"DDS"`.
                 std::string texture_filename;    // Filename of the model file.
                 std::string output_filename;     // Filename of the output file.
 
                 yli::ontology::Shader* parent; // pointer to the `Shader`.
+
+                std::shared_ptr<yli::datatypes::AnyValue> left_filler_vector_any_value;
+                std::shared_ptr<yli::datatypes::AnyValue> right_filler_vector_any_value;
 
                 // End iterating when `end_condition_callback_engine` returns `true`.
                 std::shared_ptr<yli::callback_system::CallbackEngine> end_condition_callback_engine;
@@ -270,6 +288,7 @@ namespace yli
 
                 std::size_t texture_width;
                 std::size_t texture_height;
+                std::size_t texture_depth;
                 std::size_t texture_size;
 
                 std::size_t n_index_characters; // For intermediate results' filenames.
@@ -290,6 +309,7 @@ namespace yli
                 uint32_t vertexUVID;
                 uint32_t screen_width_uniform_ID;          // Location of the program's window width uniform.
                 uint32_t screen_height_uniform_ID;         // Location of the program's window height uniform.
+                uint32_t screen_depth_uniform_ID;          // Location of the program's window depth uniform.
                 uint32_t iteration_i_uniform_ID;           // Location of the program's iteration index uniform.
 
                 uint32_t vertexbuffer;
@@ -297,6 +317,7 @@ namespace yli
 
                 GLenum format;
                 GLenum internal_format;
+                GLenum output_format;
                 GLenum type;
 
                 bool should_ylikuutio_save_intermediate_results;

@@ -255,6 +255,8 @@ endif()
 
 # Shaders.
 configure_file(code/ylikuutio/shaders/floyd_warshall.frag floyd_warshall.frag COPYONLY)
+configure_file(code/ylikuutio/shaders/go_west.frag go_west.frag COPYONLY)
+configure_file(code/ylikuutio/shaders/vanish_west.frag vanish_west.frag COPYONLY)
 configure_file(code/ylikuutio/shaders/identity.vert identity.vert COPYONLY)
 configure_file(code/ylikuutio/shaders/identity.frag identity.frag COPYONLY)
 configure_file(code/ylikuutio/shaders/standard_shading.vert standard_shading.vert COPYONLY)
@@ -449,6 +451,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/linear_algebra/matrix_functions.hpp
     code/ylikuutio/linear_algebra/tensor3.cpp
     code/ylikuutio/linear_algebra/tensor3.hpp
+    code/ylikuutio/linear_algebra/vector_functions.hpp
 
     # load, in alphabetical order.
     code/ylikuutio/load/ascii_grid_loader.cpp
@@ -783,6 +786,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/linear_algebra/matrix_functions.hpp
         code/ylikuutio/linear_algebra/tensor3.cpp
         code/ylikuutio/linear_algebra/tensor3.hpp
+        code/ylikuutio/linear_algebra/vector_functions.hpp
         code/ylikuutio/load/ascii_grid_loader.cpp
         code/ylikuutio/load/ascii_grid_loader.hpp
         code/ylikuutio/load/csv_loader.hpp

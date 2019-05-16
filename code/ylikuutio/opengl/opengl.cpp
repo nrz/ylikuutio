@@ -66,6 +66,15 @@ namespace yli
             glGenerateMipmap(GL_TEXTURE_2D);
         }
 
+        void set_nearest_filtering_parameters()
+        {
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+            glGenerateMipmap(GL_TEXTURE_2D);
+        }
+
         void set_wireframe(const bool wireframe)
         {
             if (wireframe)
@@ -88,12 +97,16 @@ namespace yli
                     return 1;
                 case GL_DEPTH_COMPONENT:
                     return 1;
+                case GL_DEPTH_STENCIL:
+                    return 2;
                 case GL_RED:
                     return 1;
                 case GL_GREEN:
                     return 1;
                 case GL_BLUE:
                     return 1;
+                case GL_RG:
+                    return 2;
                 case GL_ALPHA:
                     return 1;
                 case GL_RGB:
@@ -151,6 +164,7 @@ namespace yli
                 const GLenum type,
                 const std::size_t texture_width,
                 const std::size_t texture_height,
+                const std::size_t texture_depth,
                 const std::string filename,
                 const bool should_ylikuutio_flip_texture)
         {
@@ -166,6 +180,7 @@ namespace yli
                         type,
                         texture_width,
                         texture_height,
+                        texture_depth,
                         should_ylikuutio_flip_texture);
                 yli::file::binary_write(*data_vector_shared_ptr, filename);
             }
@@ -176,6 +191,7 @@ namespace yli
                         type,
                         texture_width,
                         texture_height,
+                        texture_depth,
                         should_ylikuutio_flip_texture);
                 yli::file::binary_write(*data_vector_shared_ptr, filename);
             }
@@ -186,6 +202,7 @@ namespace yli
                         type,
                         texture_width,
                         texture_height,
+                        texture_depth,
                         should_ylikuutio_flip_texture);
                 yli::file::binary_write(*data_vector_shared_ptr, filename);
             }
@@ -196,6 +213,7 @@ namespace yli
                         type,
                         texture_width,
                         texture_height,
+                        texture_depth,
                         should_ylikuutio_flip_texture);
                 yli::file::binary_write(*data_vector_shared_ptr, filename);
             }
@@ -206,6 +224,7 @@ namespace yli
                         type,
                         texture_width,
                         texture_height,
+                        texture_depth,
                         should_ylikuutio_flip_texture);
                 yli::file::binary_write(*data_vector_shared_ptr, filename);
             }
@@ -216,6 +235,7 @@ namespace yli
                         type,
                         texture_width,
                         texture_height,
+                        texture_depth,
                         should_ylikuutio_flip_texture);
                 yli::file::binary_write(*data_vector_shared_ptr, filename);
             }
@@ -236,6 +256,7 @@ namespace yli
                         type,
                         texture_width,
                         texture_height,
+                        texture_depth,
                         should_ylikuutio_flip_texture);
                 yli::file::binary_write(*data_vector_shared_ptr, filename);
             }
@@ -246,6 +267,7 @@ namespace yli
                         type,
                         texture_width,
                         texture_height,
+                        texture_depth,
                         should_ylikuutio_flip_texture);
                 yli::file::binary_write(*data_vector_shared_ptr, filename);
             }
@@ -256,6 +278,25 @@ namespace yli
 
             // Unknown or unsupported type.
             return;
+        }
+
+        void save_data_from_gpu_texture_into_file(
+                const GLenum format,
+                const GLenum type,
+                const std::size_t texture_width,
+                const std::size_t texture_height,
+                const std::string filename,
+                const bool should_ylikuutio_flip_texture)
+        {
+            const std::size_t texture_depth = 1;
+            yli::opengl::save_data_from_gpu_texture_into_file(
+                format,
+                type,
+                texture_width,
+                texture_height,
+                texture_depth,
+                filename,
+                should_ylikuutio_flip_texture);
         }
     }
 }
