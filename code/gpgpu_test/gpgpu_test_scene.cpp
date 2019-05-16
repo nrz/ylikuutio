@@ -265,47 +265,6 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        // To pass an iteration index (`k`) into the shader, store it on the green (`g`) color channel in each texel.
-        // Use RG format:
-        // R for each distance value.
-        // G for iteration index (`k`).
-
-        std::shared_ptr<yli::datatypes::AnyValue> float_left_filler_vector_any_value = std::make_shared<yli::datatypes::AnyValue>();
-        std::shared_ptr<std::vector<float>> float_left_filler_vector = std::make_shared<std::vector<float>>();
-        float_left_filler_vector_any_value->type = yli::datatypes::STD_VECTOR_FLOAT_SHARED_PTR;
-        float_left_filler_vector_any_value->std_vector_float_shared_ptr = float_left_filler_vector;
-
-        std::shared_ptr<yli::datatypes::AnyValue> float_right_filler_vector_any_value = std::make_shared<yli::datatypes::AnyValue>();
-        std::shared_ptr<std::vector<float>> float_right_filler_vector = std::make_shared<std::vector<float>>();
-        float_right_filler_vector->push_back(0.0f);
-        float_right_filler_vector_any_value->type = yli::datatypes::STD_VECTOR_FLOAT_SHARED_PTR;
-        float_right_filler_vector_any_value->std_vector_float_shared_ptr = float_right_filler_vector;
-
-        ComputeTaskStruct floyd_warshall_shader_CSV_float_compute_task_struct;
-        floyd_warshall_shader_CSV_float_compute_task_struct.texture_file_format = "csv";
-        floyd_warshall_shader_CSV_float_compute_task_struct.texture_filename = "some_finnish_railway_stations_float_megameters_with_fill.csv";
-        floyd_warshall_shader_CSV_float_compute_task_struct.output_filename = "gpgpu_floyd_warshall_output_float_megameters_with_fill.data";
-        floyd_warshall_shader_CSV_float_compute_task_struct.parent = floyd_warshall_shader;
-        floyd_warshall_shader_CSV_float_compute_task_struct.left_filler_vector_any_value = float_left_filler_vector_any_value;
-        floyd_warshall_shader_CSV_float_compute_task_struct.right_filler_vector_any_value = float_right_filler_vector_any_value;
-        floyd_warshall_shader_CSV_float_compute_task_struct.n_max_iterations = 17;
-        floyd_warshall_shader_CSV_float_compute_task_struct.format = GL_RG;
-        floyd_warshall_shader_CSV_float_compute_task_struct.internal_format = GL_RG32F;
-        floyd_warshall_shader_CSV_float_compute_task_struct.type = GL_FLOAT;
-        floyd_warshall_shader_CSV_float_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
-        floyd_warshall_shader_CSV_float_compute_task_struct.should_ylikuutio_flip_texture = false;
-
-        std::cout << "Creating yli::ontology::Entity* floyd_warshall_shader_CSV_float_compute_task_entity ...\n";
-        yli::ontology::Entity* const floyd_warshall_shader_CSV_float_compute_task_entity = entity_factory->create_ComputeTask(floyd_warshall_shader_CSV_float_compute_task_struct);
-        std::cout << "Creating yli::ontology::ComputeTask* floyd_warshall_shader_CSV_float_compute_task ...\n";
-        yli::ontology::ComputeTask* const floyd_warshall_shader_CSV_float_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(floyd_warshall_shader_CSV_float_compute_task_entity);
-
-        if (floyd_warshall_shader_CSV_float_compute_task == nullptr)
-        {
-            std::cerr << "Failed to create Floyd-Warshall CSV float `ComputeTask`.\n";
-            return nullptr;
-        }
-
         GLenum error;
 
         while (true)
