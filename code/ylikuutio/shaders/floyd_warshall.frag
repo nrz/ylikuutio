@@ -11,6 +11,8 @@ uniform int screen_height;
 
 uniform int iteration_i; // k is an index, needs to be adjusted for distance matrix size in this shader.
 
+out float distance;
+
 void main()
 {
     // All texture coordinates are in the range [0, 1].
@@ -35,6 +37,6 @@ void main()
         dist_i_j = dist_i_k + dist_k_j;
     }
 
-    // gl_FragColor.r is distance value computed by this shader.
-    gl_FragColor.r = dist_i_j;
+    // distance is the distance value computed by this shader.
+    distance = dist_i_j;
 }
