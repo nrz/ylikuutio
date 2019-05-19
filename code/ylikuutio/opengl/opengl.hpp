@@ -76,6 +76,8 @@ namespace yli
                     const std::size_t texture_height,
                     const std::string filename,
                     const bool should_ylikuutio_flip_texture);
+
+            GLenum get_base_format(const GLenum format);
     }
 }
 

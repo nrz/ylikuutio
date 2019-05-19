@@ -310,5 +310,26 @@ namespace yli
                 filename,
                 should_ylikuutio_flip_texture);
         }
+
+        GLenum get_base_format(const GLenum format)
+        {
+            switch (format)
+            {
+                case GL_RED_INTEGER:
+                    return GL_RED;
+                case GL_RG_INTEGER:
+                    return GL_RG;
+                case GL_RGB_INTEGER:
+                    return GL_RGB;
+                case GL_BGR_INTEGER:
+                    return GL_BGR;
+                case GL_RGBA_INTEGER:
+                    return GL_RGBA;
+                case GL_BGRA_INTEGER:
+                    return GL_BGRA;
+                default:
+                    return format;
+            }
+        }
     }
 }
