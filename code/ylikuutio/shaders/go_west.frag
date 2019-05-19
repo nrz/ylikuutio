@@ -8,9 +8,11 @@ uniform sampler2D texture_sampler;
 
 uniform int screen_width;
 
+out vec4 color;
+
 void main()
 {
     // Go west.
     vec2 UV_east = UV + vec2(1.0f / screen_width, 0.0f);
-    gl_FragColor = texture2D(texture_sampler, UV_east);
+    color = texture(texture_sampler, UV_east);
 }
