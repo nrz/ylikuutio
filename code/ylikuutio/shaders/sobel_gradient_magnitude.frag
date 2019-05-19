@@ -9,6 +9,8 @@ uniform sampler2D texture_sampler;
 uniform int screen_width;
 uniform int screen_height;
 
+out vec4 color;
+
 void main()
 {
     vec2 UV_northwest = UV + vec2(-1.0f / screen_width, 1.0f / screen_height);
@@ -42,5 +44,5 @@ void main()
 
     float gradient_magnitude = sqrt(x_gray_value * x_gray_value + y_gray_value * y_gray_value);
 
-    gl_FragColor = vec4(gradient_magnitude, gradient_magnitude, gradient_magnitude, 0.0f);
+    color = vec4(gradient_magnitude, gradient_magnitude, gradient_magnitude, 0.0f);
 }
