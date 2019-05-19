@@ -32,7 +32,7 @@ void main()
     float dist_i_k = texture2D(texture_sampler, UV_i_k).r;
     float dist_k_j = texture2D(texture_sampler, UV_k_j).r;
 
-    if (dist_i_j > dist_i_k + dist_k_j && dist_i_k + dist_k_j <= 1.0)
+    if (dist_i_j > dist_i_k + dist_k_j)
     {
         dist_i_j = dist_i_k + dist_k_j;
     }
