@@ -273,7 +273,7 @@ namespace gpgpu_test
         floyd_warshall_shader_CSV_float_compute_task_struct.n_max_iterations = 32;
         floyd_warshall_shader_CSV_float_compute_task_struct.format = GL_RED;
         floyd_warshall_shader_CSV_float_compute_task_struct.internal_format = GL_R32F;
-        floyd_warshall_shader_CSV_float_compute_task_struct.type = GL_UNSIGNED_SHORT;
+        floyd_warshall_shader_CSV_float_compute_task_struct.type = GL_FLOAT;
         floyd_warshall_shader_CSV_float_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
         floyd_warshall_shader_CSV_float_compute_task_struct.should_ylikuutio_flip_texture = false;
 
