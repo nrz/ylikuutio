@@ -1,4 +1,4 @@
-#version 120
+#version 130
 
 // Interpolated values from the vertex shaders.
 varying vec2 UV;
@@ -8,6 +8,8 @@ uniform sampler2D texture_sampler;
 
 uniform int screen_width;
 uniform int screen_height;
+
+out vec4 color;
 
 void main()
 {
@@ -42,5 +44,5 @@ void main()
 
     float gradient_magnitude = sqrt(x_gray_value * x_gray_value + y_gray_value * y_gray_value);
 
-    gl_FragColor = vec4(gradient_magnitude, gradient_magnitude, gradient_magnitude, 0.0f);
+    color = vec4(gradient_magnitude, gradient_magnitude, gradient_magnitude, 0.0f);
 }

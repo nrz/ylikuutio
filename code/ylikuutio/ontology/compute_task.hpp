@@ -213,11 +213,11 @@ namespace yli
                         // |/  |
                         // *---*
                         const std::vector<glm::vec2> vertices
-                        { { -1.0f, 1.0f }, { -1.0f, -1.0f }, { 1.0f, 1.0f }, { 1.0f, -1.0f }, { 1.0f, 1.0f }, { -1.0f, -1.0f } };
+                        { { -1.0f, 1.0f }, { -1.0f, -1.0f }, { 1.0f, 1.0f }, { 1.0f, -1.0f } };
                         this->vertices_size = vertices.size();
 
                         const std::vector<glm::vec2> uvs
-                        { { 0.0f, 1.0f }, { 0.0f, 0.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 0.0f } };
+                        { { 0.0f, 1.0f }, { 0.0f, 0.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f } };
                         this->uvs_size = uvs.size();
 
                         // Load model into a VBO.

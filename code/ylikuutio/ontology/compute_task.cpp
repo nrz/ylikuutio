@@ -202,7 +202,7 @@ namespace yli
                         );
 
                 // Draw the triangles!
-                glDrawArrays(GL_TRIANGLES, 0, this->vertices_size); // draw 2 triangles (6 vertices, no VBO indexing).
+                glDrawArrays(GL_TRIANGLE_STRIP, 0, this->vertices_size); // draw 2 triangles (6 vertices, no VBO indexing).
 
                 glDisableVertexAttribArray(this->vertex_position_modelspaceID);
                 glDisableVertexAttribArray(this->vertexUVID);

@@ -1,4 +1,4 @@
-#version 120
+#version 130
 
 // Interpolated values from the vertex shaders.
 varying vec2 UV;
@@ -11,6 +11,8 @@ varying vec3 light_direction_cameraspace;
 uniform sampler2D texture_sampler;
 uniform vec3 light_position_worldspace;
 uniform float water_level;
+
+out vec3 color;
 
 void main()
 {
@@ -25,7 +27,7 @@ void main()
     }
 
     // Material properties
-    vec3 material_diffuse_color = texture2D(texture_sampler, UV).rgb;
+    vec3 material_diffuse_color = texture(texture_sampler, UV).rgb;
     vec3 material_ambient_color = vec3(0.1, 0.1, 0.1) * material_diffuse_color;
     vec3 material_specular_color = vec3(0.3, 0.3, 0.3);
 
@@ -53,7 +55,7 @@ void main()
     //  - Looking elsewhere -> < 1
     float cos_alpha = clamp(dot(E, R), 0, 1);
 
-    gl_FragColor.rgb =
+    color =
         // Ambient: simulates indirect lighting.
         material_ambient_color +
         // Diffuse: "color" of the object.
