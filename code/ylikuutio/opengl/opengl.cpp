@@ -188,7 +188,7 @@ namespace yli
             if (type == GL_BYTE)
             {
                 std::shared_ptr<std::vector<int8_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<int8_t>(
-                        format,
+                        yli::opengl::get_base_format(format),
                         type,
                         texture_width,
                         texture_height,
@@ -199,7 +199,7 @@ namespace yli
             else if (type == GL_UNSIGNED_BYTE)
             {
                 std::shared_ptr<std::vector<uint8_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<uint8_t>(
-                        format,
+                        yli::opengl::get_base_format(format),
                         type,
                         texture_width,
                         texture_height,
@@ -210,7 +210,7 @@ namespace yli
             else if (type == GL_SHORT)
             {
                 std::shared_ptr<std::vector<int16_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<int16_t>(
-                        format,
+                        yli::opengl::get_base_format(format),
                         type,
                         texture_width,
                         texture_height,
@@ -221,7 +221,7 @@ namespace yli
             else if (type == GL_UNSIGNED_SHORT)
             {
                 std::shared_ptr<std::vector<uint16_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<uint16_t>(
-                        format,
+                        yli::opengl::get_base_format(format),
                         type,
                         texture_width,
                         texture_height,
@@ -232,7 +232,7 @@ namespace yli
             else if (type == GL_INT)
             {
                 std::shared_ptr<std::vector<int32_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<int32_t>(
-                        format,
+                        yli::opengl::get_base_format(format),
                         type,
                         texture_width,
                         texture_height,
@@ -243,7 +243,7 @@ namespace yli
             else if (type == GL_UNSIGNED_INT)
             {
                 std::shared_ptr<std::vector<uint32_t>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<uint32_t>(
-                        format,
+                        yli::opengl::get_base_format(format),
                         type,
                         texture_width,
                         texture_height,
@@ -264,7 +264,7 @@ namespace yli
             else if (type == GL_FLOAT)
             {
                 std::shared_ptr<std::vector<float>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<float>(
-                        format,
+                        yli::opengl::get_base_format(format),
                         type,
                         texture_width,
                         texture_height,
@@ -275,7 +275,7 @@ namespace yli
             else if (type == GL_DOUBLE)
             {
                 std::shared_ptr<std::vector<double>> data_vector_shared_ptr = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<double>(
-                        format,
+                        yli::opengl::get_base_format(format),
                         type,
                         texture_width,
                         texture_height,
