@@ -28,9 +28,9 @@ void main()
     vec2 UV_i_k = vec2(i, k);
     vec2 UV_k_j = vec2(k, j);
 
-    float dist_i_j = texture2D(texture_sampler, UV_i_j).r;
-    float dist_i_k = texture2D(texture_sampler, UV_i_k).r;
-    float dist_k_j = texture2D(texture_sampler, UV_k_j).r;
+    float dist_i_j = texture(texture_sampler, UV_i_j).r;
+    float dist_i_k = texture(texture_sampler, UV_i_k).r;
+    float dist_k_j = texture(texture_sampler, UV_k_j).r;
 
     if (dist_i_j > dist_i_k + dist_k_j)
     {
