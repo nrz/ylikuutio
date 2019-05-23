@@ -14,23 +14,23 @@ out vec4 color;
 void main()
 {
     vec2 UV_northwest = UV + vec2(-1.0f / screen_width, 1.0f / screen_height);
-    vec3 northwest = texture2D(texture_sampler, UV_northwest).rgb;
+    vec3 northwest = texture(texture_sampler, UV_northwest).rgb;
     vec2 UV_north = UV + vec2(0.0f, 1.0f / screen_height);
-    vec3 north = texture2D(texture_sampler, UV_north).rgb;
+    vec3 north = texture(texture_sampler, UV_north).rgb;
     vec2 UV_northeast = UV + vec2(1.0f / screen_width, 1.0f / screen_height);
-    vec3 northeast = texture2D(texture_sampler, UV_northeast).rgb;
+    vec3 northeast = texture(texture_sampler, UV_northeast).rgb;
 
     vec2 UV_west = UV + vec2(-1.0f / screen_width, 0.0f);
-    vec3 west = texture2D(texture_sampler, UV_west).rgb;
+    vec3 west = texture(texture_sampler, UV_west).rgb;
     vec2 UV_east = UV + vec2(1.0f / screen_width, 0.0f);
-    vec3 east = texture2D(texture_sampler, UV_east).rgb;
+    vec3 east = texture(texture_sampler, UV_east).rgb;
 
     vec2 UV_southwest = UV + vec2(-1.0f / screen_width, -1.0f / screen_height);
-    vec3 southwest = texture2D(texture_sampler, UV_southwest).rgb;
+    vec3 southwest = texture(texture_sampler, UV_southwest).rgb;
     vec2 UV_south = UV + vec2(0.0f, -1.0f / screen_height);
-    vec3 south = texture2D(texture_sampler, UV_south).rgb;
+    vec3 south = texture(texture_sampler, UV_south).rgb;
     vec2 UV_southeast = UV + vec2(1.0f / screen_width, -1.0f / screen_height);
-    vec3 southeast = texture2D(texture_sampler, UV_southeast).rgb;
+    vec3 southeast = texture(texture_sampler, UV_southeast).rgb;
 
     float x_red_value = -1.0f * northwest.r - 2.0f * west.r - 1.0f * southwest.r + 1.0f * northeast.r + 2.0f * east.r + 1.0f * southeast.r;
     float x_green_value = -1.0f * northwest.g - 2.0f * west.g - 1.0f * southwest.g + 1.0f * northeast.g + 2.0f * east.g + 1.0f * southeast.g;
