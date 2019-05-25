@@ -89,8 +89,8 @@ namespace yli
                 uint32_t vertexbuffer;                     // Buffer containing the vertices
                 uint32_t uvbuffer;                         // Buffer containing the UVs
                 uint32_t programID;                        // The `programID` of the shader used to display the text, returned by `load_shaders`.
-                uint32_t vertex_position_in_screenspaceID; // Location of the program's `vertex_position_screenspace` attribute.
-                uint32_t vertexUVID;                       // Location of the program's `vertexUV` attribute.
+                GLint vertex_position_in_screenspaceID;    // Location of the program's `vertex_position_screenspace` attribute.
+                GLint vertexUVID;                          // Location of the program's `vertexUV` attribute.
 
                 std::string text;
                 std::string horizontal_alignment;

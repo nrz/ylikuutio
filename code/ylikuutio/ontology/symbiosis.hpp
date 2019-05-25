@@ -16,6 +16,9 @@
 #include "code/ylikuutio/file/file_loader.hpp"
 #include <ofbx.h>
 
+// Include GLEW
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -104,9 +107,9 @@ namespace yli
 
                 yli::ontology::SymbiontMaterial* get_symbiont_material(const std::size_t symbiont_material_i) const;
                 yli::ontology::SymbiontSpecies* get_symbiont_species(const std::size_t biontID) const;
-                uint32_t get_vertex_position_modelspaceID(const std::size_t biontID) const;
-                uint32_t get_vertexUVID(const std::size_t biontID) const;
-                uint32_t get_vertex_normal_modelspaceID(const std::size_t biontID) const;
+                GLint get_vertex_position_modelspaceID(const std::size_t biontID) const;
+                GLint get_vertexUVID(const std::size_t biontID) const;
+                GLint get_vertex_normal_modelspaceID(const std::size_t biontID) const;
 
                 uint32_t get_vertexbuffer(const std::size_t biontID) const;
                 uint32_t get_uvbuffer(const std::size_t biontID) const;
@@ -118,9 +121,9 @@ namespace yli
                 std::size_t get_number_of_ofbx_meshes() const;
                 bool has_texture(const std::size_t biontID) const;
                 uint32_t get_texture(const std::size_t biontID) const;
-                uint32_t get_openGL_textureID(const std::size_t biontID) const;
+                GLint get_openGL_textureID(const std::size_t biontID) const;
 
-                uint32_t get_lightID(const std::size_t biontID) const;
+                GLint get_lightID(const std::size_t biontID) const;
                 const glm::vec3& get_light_position(const std::size_t biontID) const;
 
                 template<class T1>

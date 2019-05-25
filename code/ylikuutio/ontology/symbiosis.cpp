@@ -12,6 +12,9 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include <ofbx.h>
 
+// Include GLEW
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -319,17 +322,17 @@ namespace yli
             return this->biontID_symbiont_species_vector[biontID];
         }
 
-        uint32_t Symbiosis::get_vertex_position_modelspaceID(const std::size_t biontID) const
+        GLint Symbiosis::get_vertex_position_modelspaceID(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector[biontID]->get_vertex_position_modelspaceID();
         }
 
-        uint32_t Symbiosis::get_vertexUVID(const std::size_t biontID) const
+        GLint Symbiosis::get_vertexUVID(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector[biontID]->get_vertexUVID();
         }
 
-        uint32_t Symbiosis::get_vertex_normal_modelspaceID(const std::size_t biontID) const
+        GLint Symbiosis::get_vertex_normal_modelspaceID(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector[biontID]->get_vertex_normal_modelspaceID();
         }
@@ -392,12 +395,12 @@ namespace yli
             return this->biontID_symbiont_material_vector.at(biontID)->get_texture();
         }
 
-        uint32_t Symbiosis::get_openGL_textureID(const std::size_t biontID) const
+        GLint Symbiosis::get_openGL_textureID(const std::size_t biontID) const
         {
             return this->biontID_symbiont_material_vector.at(biontID)->get_openGL_textureID();
         }
 
-        uint32_t Symbiosis::get_lightID(const std::size_t biontID) const
+        GLint Symbiosis::get_lightID(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector.at(biontID)->get_lightID();
         }

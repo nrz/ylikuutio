@@ -174,11 +174,11 @@ namespace yli
                 uint32_t vertexbuffer;                     // Buffer containing the vertices.
                 uint32_t uvbuffer;                         // Buffer containing the UVs.
                 uint32_t programID;                        // The `programID` of the shader used to display the text, returned by `load_shaders`.
-                uint32_t vertex_position_in_screenspaceID; // Location of the program's `vertex_position_screenspace` attribute.
-                uint32_t vertexUVID;                       // Location of the program's `vertexUV` attribute.
-                uint32_t Text2DUniformID;                  // Location of the program's texture attribute.
-                uint32_t screen_width_uniform_ID;          // Location of the program's window width uniform.
-                uint32_t screen_height_uniform_ID;         // Location of the program's window height uniform.
+                GLint vertex_position_in_screenspaceID;    // Location of the program's `vertex_position_screenspace` attribute.
+                GLint vertexUVID;                          // Location of the program's `vertexUV` attribute.
+                GLint Text2DUniformID;                     // Location of the program's texture attribute.
+                GLint screen_width_uniform_ID;             // Location of the program's window width uniform.
+                GLint screen_height_uniform_ID;            // Location of the program's window height uniform.
 
                 std::string font_texture_file_format;
 

@@ -300,17 +300,17 @@ namespace yli
                 uint32_t framebuffer;
                 uint32_t source_texture;
                 uint32_t target_texture;
-                uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(this->parent->get_programID(), "texture_sampler")`.
+                GLint openGL_textureID;              // Texture ID, returned by `glGetUniformLocation(this->parent->get_programID(), "texture_sampler")`.
                 bool is_texture_loaded;
                 bool is_framebuffer_initialized;
                 bool is_ready;
 
-                uint32_t vertex_position_modelspaceID;
-                uint32_t vertexUVID;
-                uint32_t screen_width_uniform_ID;          // Location of the program's window width uniform.
-                uint32_t screen_height_uniform_ID;         // Location of the program's window height uniform.
-                uint32_t screen_depth_uniform_ID;          // Location of the program's window depth uniform.
-                uint32_t iteration_i_uniform_ID;           // Location of the program's iteration index uniform.
+                GLint vertex_position_modelspaceID;
+                GLint vertexUVID;
+                GLint screen_width_uniform_ID;             // Location of the program's window width uniform.
+                GLint screen_height_uniform_ID;            // Location of the program's window height uniform.
+                GLint screen_depth_uniform_ID;             // Location of the program's window depth uniform.
+                GLint iteration_i_uniform_ID;              // Location of the program's iteration index uniform.
 
                 uint32_t vertexbuffer;
                 uint32_t uvbuffer;

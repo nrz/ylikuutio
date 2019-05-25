@@ -10,6 +10,9 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include <ofbx.h>
 
+// Include GLEW
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -61,7 +64,7 @@ namespace yli
                 std::size_t get_number_of_descendants() const override;
 
                 uint32_t get_texture() const;
-                uint32_t get_openGL_textureID() const;
+                GLint get_openGL_textureID() const;
 
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
@@ -83,7 +86,7 @@ namespace yli
                 const ofbx::Texture* ofbx_texture;
 
                 uint32_t texture;                  // texture of this `SymbiontMaterial`.
-                uint32_t openGL_textureID;         // texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
+                GLint openGL_textureID;            // texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
 
                 std::vector<yli::ontology::SymbiontSpecies*> symbiont_species_pointer_vector;
                 std::queue<std::size_t> free_symbiont_speciesID_queue;

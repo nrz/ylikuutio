@@ -158,7 +158,7 @@ namespace yli
             return this->texture;
         }
 
-        uint32_t SymbiontMaterial::get_openGL_textureID() const
+        GLint SymbiontMaterial::get_openGL_textureID() const
         {
             return this->openGL_textureID;
         }

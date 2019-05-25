@@ -120,7 +120,7 @@ namespace yli
             return this->indices.size();
         }
 
-        uint32_t SymbiontSpecies::get_lightID() const
+        GLint SymbiontSpecies::get_lightID() const
         {
             return this->lightID;
         }

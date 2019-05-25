@@ -2,6 +2,9 @@
 #include "object.hpp"
 #include "family_templates.hpp"
 
+// Include GLEW
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -59,17 +62,17 @@ namespace yli
             return this->indices;
         }
 
-        uint32_t Model::get_vertex_position_modelspaceID() const
+        GLint Model::get_vertex_position_modelspaceID() const
         {
             return this->vertex_position_modelspaceID;
         }
 
-        uint32_t Model::get_vertexUVID() const
+        GLint Model::get_vertexUVID() const
         {
             return this->vertexUVID;
         }
 
-        uint32_t Model::get_vertex_normal_modelspaceID() const
+        GLint Model::get_vertex_normal_modelspaceID() const
         {
             return this->vertex_normal_modelspaceID;
         }
@@ -94,17 +97,17 @@ namespace yli
             return this->elementbuffer;
         }
 
-        void Model::store_vertex_position_modelspaceID(const uint32_t vertex_position_modelspaceID)
+        void Model::store_vertex_position_modelspaceID(const GLint vertex_position_modelspaceID)
         {
             this->vertex_position_modelspaceID = vertex_position_modelspaceID;
         }
 
-        void Model::store_vertexUVID(const uint32_t vertexUVID)
+        void Model::store_vertexUVID(const GLint vertexUVID)
         {
             this->vertexUVID = vertexUVID;
         }
 
-        void Model::store_vertex_normal_modelspaceID(const uint32_t vertex_normal_modelspaceID)
+        void Model::store_vertex_normal_modelspaceID(const GLint vertex_normal_modelspaceID)
         {
             this->vertex_normal_modelspaceID = vertex_normal_modelspaceID;
         }

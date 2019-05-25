@@ -100,7 +100,7 @@ namespace yli
                         }
 
                         // water level.
-                        uint32_t water_level_uniform_location = glGetUniformLocation(species_struct.shader->get_programID(), "water_level");
+                        GLint water_level_uniform_location = glGetUniformLocation(species_struct.shader->get_programID(), "water_level");
                         glUniform1f(water_level_uniform_location, species_struct.scene->get_water_level());
 
                         SpeciesLoaderStruct species_loader_struct;
