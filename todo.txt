@@ -76,6 +76,13 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement support for vector fonts.
 [ ] Implement rendering into a texture.
 [ ] Implement s7 support for programming of AI objects (robots).
+[ ] Disable executing system commands from s7.
+[ ] Disable listing directories from s7.
+[ ] Disable deleting files from s7.
+[ ] Disable writing to files from s7.
+[ ] Disable reading from files from s7, with the exception of filenames matching the whitelisting regex.
+[ ] Disable writing to ports from s7.
+[ ] Disable reading from ports from s7.
 [ ] Implement dynamic not flowing water, using OpenGL shaders.
 
 Less urgent:
