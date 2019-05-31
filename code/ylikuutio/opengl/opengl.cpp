@@ -87,6 +87,30 @@ namespace yli
             }
         }
 
+        bool enable_vertex_attrib_array(const GLint attribute)
+        {
+            if (attribute == -1)
+            {
+                return false;
+            }
+
+            glEnableVertexAttribArray(attribute);
+
+            return true;
+        }
+
+        bool disable_vertex_attrib_array(const GLint attribute)
+        {
+            if (attribute == -1)
+            {
+                return false;
+            }
+
+            glDisableVertexAttribArray(attribute);
+
+            return true;
+        }
+
         std::size_t get_n_color_channels(const GLenum format)
         {
             switch (format)

@@ -27,6 +27,8 @@ namespace yli
         void set_filtering_parameters();
         void set_nearest_filtering_parameters();
         void set_wireframe(const bool wireframe);
+        bool enable_vertex_attrib_array(const GLint attribute);
+        bool disable_vertex_attrib_array(const GLint attribute);
         std::size_t get_n_color_channels(const GLenum format);
         std::size_t get_size_of_component(const GLenum type);
 
