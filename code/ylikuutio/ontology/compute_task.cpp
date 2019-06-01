@@ -174,10 +174,10 @@ namespace yli
                 glUniform1i(this->openGL_textureID, 0);
 
                 // 1st attribute buffer: vertices.
-                glEnableVertexAttribArray(this->vertex_position_modelspaceID);
+                yli::opengl::enable_vertex_attrib_array(this->vertex_position_modelspaceID);
 
                 // 2nd attribute buffer: UVs.
-                glEnableVertexAttribArray(this->vertexUVID);
+                yli::opengl::enable_vertex_attrib_array(this->vertexUVID);
 
                 // 1st attribute buffer: vertices.
                 glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
@@ -204,8 +204,8 @@ namespace yli
                 // Draw the triangles!
                 glDrawArrays(GL_TRIANGLE_STRIP, 0, this->vertices_size); // draw 2 triangles (6 vertices, no VBO indexing).
 
-                glDisableVertexAttribArray(this->vertex_position_modelspaceID);
-                glDisableVertexAttribArray(this->vertexUVID);
+                yli::opengl::disable_vertex_attrib_array(this->vertex_position_modelspaceID);
+                yli::opengl::disable_vertex_attrib_array(this->vertexUVID);
 
                 if (this->should_ylikuutio_save_intermediate_results && !this->output_filename.empty())
                 {
