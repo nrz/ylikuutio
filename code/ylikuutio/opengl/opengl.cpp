@@ -87,6 +87,18 @@ namespace yli
             }
         }
 
+        bool uniform_1i(const GLint location, const GLint v0)
+        {
+            if (location == -1)
+            {
+                return false;
+            }
+
+            glUniform1i(location, v0);
+
+            return true;
+        }
+
         bool enable_vertex_attrib_array(const GLint attribute)
         {
             if (attribute == -1)
