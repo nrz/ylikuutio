@@ -6,6 +6,7 @@
 #include "biont_struct.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/opengl/opengl.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -278,13 +279,13 @@ namespace yli
                     light_position.z);
 
             // 1st attribute buffer : vertices.
-            glEnableVertexAttribArray(symbiont_species->get_vertex_position_modelspaceID());
+            yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertex_position_modelspaceID());
 
             // 2nd attribute buffer : UVs.
-            glEnableVertexAttribArray(symbiont_species->get_vertexUVID());
+            yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertexUVID());
 
             // 3rd attribute buffer : normals.
-            glEnableVertexAttribArray(symbiont_species->get_vertex_normal_modelspaceID());
+            yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertex_normal_modelspaceID());
 
             // '`Species`' part ends here.
 

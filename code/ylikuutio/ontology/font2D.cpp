@@ -5,6 +5,7 @@
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/opengl/opengl.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -376,20 +377,20 @@ namespace yli
             glBufferData(GL_ARRAY_BUFFER, UVs.size() * sizeof(glm::vec2), &UVs[0], GL_STATIC_DRAW);
 
             // 1st attribute buffer: vertices.
-            glEnableVertexAttribArray(this->vertex_position_in_screenspaceID);
+            yli::opengl::enable_vertex_attrib_array(this->vertex_position_in_screenspaceID);
             glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
             glVertexAttribPointer(this->vertex_position_in_screenspaceID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
             // 2nd attribute buffer: UVs.
-            glEnableVertexAttribArray(this->vertexUVID);
+            yli::opengl::enable_vertex_attrib_array(this->vertexUVID);
             glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
             glVertexAttribPointer(this->vertexUVID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
             // Draw call.
             glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
-            glDisableVertexAttribArray(this->vertex_position_in_screenspaceID);
-            glDisableVertexAttribArray(this->vertexUVID);
+            yli::opengl::disable_vertex_attrib_array(this->vertex_position_in_screenspaceID);
+            yli::opengl::disable_vertex_attrib_array(this->vertexUVID);
 
             glDisable(GL_BLEND);
         }
