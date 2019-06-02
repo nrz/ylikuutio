@@ -160,6 +160,19 @@ namespace yli
 
         void Scene::set_active_camera(yli::ontology::Camera* camera)
         {
+            yli::ontology::Camera* const old_active_camera = this->active_camera;
+
+            if (this->universe != nullptr &&
+                    old_active_camera != nullptr &&
+                    !old_active_camera->get_is_static_view())
+            {
+                // OK, there is an old active `Camera`, and it is not a static view `Camera`.
+                // Copy the coordinates and angles from the `Universe` to the old active `Camera`.
+                old_active_camera->set_cartesian_coordinates(this->universe->current_camera_cartesian_coordinates);
+                old_active_camera->set_horizontal_angle(this->universe->current_camera_horizontal_angle);
+                old_active_camera->set_vertical_angle(this->universe->current_camera_vertical_angle);
+            }
+
             // It is OK to disactivate the active camera by setting `active_camera` to `nullptr`.
             this->active_camera = camera;
 
