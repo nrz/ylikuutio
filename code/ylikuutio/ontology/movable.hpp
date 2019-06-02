@@ -123,7 +123,7 @@ namespace yli
                 // destructor.
                 virtual ~Movable();
 
-                const glm::vec3& get_cartesian_coordinates();
+                const glm::vec3& get_cartesian_coordinates() const;
 
                 // Public callbacks (to be called from AI scripts written in
                 // TinyScheme). These are the functions that are available
