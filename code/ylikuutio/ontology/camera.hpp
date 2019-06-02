@@ -52,6 +52,7 @@ namespace yli
 
                     this->horizontal_angle  = camera_struct.horizontal_angle;
                     this->vertical_angle    = camera_struct.vertical_angle;
+                    this->is_static_view    = camera_struct.is_static_view;
 
                     // variables related to the projection.
                     this->projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
@@ -105,6 +106,8 @@ namespace yli
                 glm::mat4 view_matrix;
                 double horizontal_angle;
                 double vertical_angle;
+
+                bool is_static_view;
         };
     }
 }
