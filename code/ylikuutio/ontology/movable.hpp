@@ -124,6 +124,11 @@ namespace yli
                 virtual ~Movable();
 
                 const glm::vec3& get_cartesian_coordinates() const;
+                void set_cartesian_coordinates(const glm::vec3& cartesian_coordinates);
+                const float get_horizontal_angle() const;
+                void set_horizontal_angle(const float horizontal_angle);
+                const float get_vertical_angle() const;
+                void set_vertical_angle(const float vertical_angle);
 
                 // Public callbacks (to be called from AI scripts written in s7).
                 // These are the functions that are available for AI scripts.

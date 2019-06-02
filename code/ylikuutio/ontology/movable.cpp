@@ -39,6 +39,31 @@ namespace yli
             return this->cartesian_coordinates;
         }
 
+        void Movable::set_cartesian_coordinates(const glm::vec3& cartesian_coordinates)
+        {
+            this->cartesian_coordinates = cartesian_coordinates;
+        }
+
+        const float Movable::get_horizontal_angle() const
+        {
+            return this->horizontal_angle;
+        }
+
+        void Movable::set_horizontal_angle(const float horizontal_angle)
+        {
+            this->horizontal_angle = horizontal_angle;
+        }
+
+        const float Movable::get_vertical_angle() const
+        {
+            return this->vertical_angle;
+        }
+
+        void Movable::set_vertical_angle(const float vertical_angle)
+        {
+            this->vertical_angle = vertical_angle;
+        }
+
         // Public callbacks (to be called from AI scripts written in Chibi-Scheme).
 
         void Movable::set_dest(yli::ontology::Movable* const movable, const float x, const float y, const float z)
