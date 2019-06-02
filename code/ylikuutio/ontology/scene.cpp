@@ -1,3 +1,20 @@
+// Ylikuutio - A 3D game and simulation engine.
+//
+// Copyright (C) 2015-2019 Antti Nuortimo.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #ifndef PI
 #define PI 3.14159265359f
 #endif
@@ -143,6 +160,26 @@ namespace yli
 
         void Scene::set_active_camera(yli::ontology::Camera* camera)
         {
+            if (camera != nullptr && camera->get_parent() != this)
+            {
+                // `Camera`s of other `Scene`s can not be set
+                // as the active `Camera` for this `Scene`.
+                return;
+            }
+
+            yli::ontology::Camera* const old_active_camera = this->active_camera;
+
+            if (this->universe != nullptr &&
+                    old_active_camera != nullptr &&
+                    !old_active_camera->get_is_static_view())
+            {
+                // OK, there is an old active `Camera`, and it is not a static view `Camera`.
+                // Copy the coordinates and angles from the `Universe` to the old active `Camera`.
+                old_active_camera->set_cartesian_coordinates(this->universe->current_camera_cartesian_coordinates);
+                old_active_camera->set_horizontal_angle(this->universe->current_camera_horizontal_angle);
+                old_active_camera->set_vertical_angle(this->universe->current_camera_vertical_angle);
+            }
+
             // It is OK to disactivate the active camera by setting `active_camera` to `nullptr`.
             this->active_camera = camera;
 
@@ -169,24 +206,14 @@ namespace yli
                 return;
             }
 
-            if (active_scene == this)
+            if (active_scene == this && camera != nullptr)
             {
-                if (this->active_camera != nullptr)
-                {
-                    this->universe->current_camera_cartesian_coordinates = camera->get_cartesian_coordinates();
-                    this->universe->set_projection_matrix(camera->get_projection_matrix());
-                    this->universe->set_view_matrix(camera->get_view_matrix());
-                    this->universe->current_camera_horizontal_angle = camera->get_horizontal_angle();
-                    this->universe->current_camera_vertical_angle = camera->get_vertical_angle();
-                }
-                else
-                {
-                    this->universe->current_camera_cartesian_coordinates = glm::vec3(NAN, NAN, NAN);
-                    this->universe->set_projection_matrix(glm::mat4(NAN));
-                    this->universe->set_view_matrix(glm::mat4(NAN));
-                    this->universe->current_camera_horizontal_angle = NAN;
-                    this->universe->current_camera_vertical_angle = NAN;
-                }
+                // OK, the newly activated `Camera` is not `nullptr`,
+                // and this is the active `Scene` in the active `World`.
+                // Copy `Camera`'s coordinates and angles to the `Universe`.
+                this->universe->current_camera_cartesian_coordinates = camera->get_cartesian_coordinates();
+                this->universe->current_camera_horizontal_angle = camera->get_horizontal_angle();
+                this->universe->current_camera_vertical_angle = camera->get_vertical_angle();
             }
         }
 

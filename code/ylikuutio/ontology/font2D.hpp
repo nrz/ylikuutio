@@ -1,3 +1,20 @@
+// Ylikuutio - A 3D game and simulation engine.
+//
+// Copyright (C) 2015-2019 Antti Nuortimo.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #ifndef __FONT2D_HPP_INCLUDED
 #define __FONT2D_HPP_INCLUDED
 
@@ -174,11 +191,11 @@ namespace yli
                 uint32_t vertexbuffer;                     // Buffer containing the vertices.
                 uint32_t uvbuffer;                         // Buffer containing the UVs.
                 uint32_t programID;                        // The `programID` of the shader used to display the text, returned by `load_shaders`.
-                uint32_t vertex_position_in_screenspaceID; // Location of the program's `vertex_position_screenspace` attribute.
-                uint32_t vertexUVID;                       // Location of the program's `vertexUV` attribute.
-                uint32_t Text2DUniformID;                  // Location of the program's texture attribute.
-                uint32_t screen_width_uniform_ID;          // Location of the program's window width uniform.
-                uint32_t screen_height_uniform_ID;         // Location of the program's window height uniform.
+                GLint vertex_position_in_screenspaceID;    // Location of the program's `vertex_position_screenspace` attribute.
+                GLint vertexUVID;                          // Location of the program's `vertexUV` attribute.
+                GLint Text2DUniformID;                     // Location of the program's texture attribute.
+                GLint screen_width_uniform_ID;             // Location of the program's window width uniform.
+                GLint screen_height_uniform_ID;            // Location of the program's window height uniform.
 
                 std::string font_texture_file_format;
 

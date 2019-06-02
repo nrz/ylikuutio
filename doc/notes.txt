@@ -19,6 +19,8 @@ Saving file as BMP (it needs to be a 24-bit BMP):
 -> Export
 
 Marching cubes algorithm
+https://transvoxel.org/Lengyel-VoxelTerrain.pdf
+
 Marching tetrahedra algorithm
 
 Elevation data of the Earth:

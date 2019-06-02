@@ -1,9 +1,29 @@
+// Ylikuutio - A 3D game and simulation engine.
+//
+// Copyright (C) 2015-2019 Antti Nuortimo.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #ifndef __MODEL_HPP_INCLUDED
 #define __MODEL_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "species_or_glyph.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+
+// Include GLEW
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -77,18 +97,18 @@ namespace yli
                 const std::vector<glm::vec3>& get_normals() const;
                 const std::vector<uint32_t>& get_indices() const;
 
-                uint32_t get_vertex_position_modelspaceID() const;
-                uint32_t get_vertexUVID() const;
-                uint32_t get_vertex_normal_modelspaceID() const;
+                GLint get_vertex_position_modelspaceID() const;
+                GLint get_vertexUVID() const;
+                GLint get_vertex_normal_modelspaceID() const;
 
                 uint32_t get_vertexbuffer() const;
                 uint32_t get_uvbuffer() const;
                 uint32_t get_normalbuffer() const;
                 uint32_t get_elementbuffer() const;
 
-                void store_vertex_position_modelspaceID(const uint32_t vertex_position_modelspaceID);
-                void store_vertexUVID(const uint32_t vertexUVID);
-                void store_vertex_normal_modelspaceID(const uint32_t vertex_normal_modelspaceID);
+                void store_vertex_position_modelspaceID(const GLint vertex_position_modelspaceID);
+                void store_vertexUVID(const GLint vertexUVID);
+                void store_vertex_normal_modelspaceID(const GLint vertex_normal_modelspaceID);
 
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
@@ -102,7 +122,7 @@ namespace yli
                 std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
                 glm::vec3 light_position;                // light position.
 
-                uint32_t lightID;                        // light ID, returned by `glGetUniformLocation(programID, "light_position_worldspace");`.
+                GLint lightID;                           // light ID, returned by `glGetUniformLocation(programID, "light_position_worldspace");`.
 
                 std::vector<yli::ontology::Object*> object_pointer_vector;
                 std::queue<std::size_t> free_objectID_queue;
@@ -110,9 +130,9 @@ namespace yli
 
                 std::string triangulation_type;
 
-                uint32_t vertex_position_modelspaceID;
-                uint32_t vertexUVID;
-                uint32_t vertex_normal_modelspaceID;
+                GLint vertex_position_modelspaceID;
+                GLint vertexUVID;
+                GLint vertex_normal_modelspaceID;
 
                 std::vector<glm::vec3> vertices;         // vertices of the `Model`.
                 std::vector<glm::vec2> uvs;              // UVs of the `Model`.

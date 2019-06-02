@@ -1,3 +1,20 @@
+// Ylikuutio - A 3D game and simulation engine.
+//
+// Copyright (C) 2015-2019 Antti Nuortimo.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #ifndef __SYMBIONT_MATERIAL_HPP_INCLUDED
 #define __SYMBIONT_MATERIAL_HPP_INCLUDED
 
@@ -9,6 +26,9 @@
 #include "code/ylikuutio/load/texture_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include <ofbx.h>
+
+// Include GLEW
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -61,7 +81,7 @@ namespace yli
                 std::size_t get_number_of_descendants() const override;
 
                 uint32_t get_texture() const;
-                uint32_t get_openGL_textureID() const;
+                GLint get_openGL_textureID() const;
 
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
@@ -83,7 +103,7 @@ namespace yli
                 const ofbx::Texture* ofbx_texture;
 
                 uint32_t texture;                  // texture of this `SymbiontMaterial`.
-                uint32_t openGL_textureID;         // texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
+                GLint openGL_textureID;            // texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
 
                 std::vector<yli::ontology::SymbiontSpecies*> symbiont_species_pointer_vector;
                 std::queue<std::size_t> free_symbiont_speciesID_queue;

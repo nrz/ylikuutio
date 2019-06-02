@@ -1,3 +1,20 @@
+// Ylikuutio - A 3D game and simulation engine.
+//
+// Copyright (C) 2015-2019 Antti Nuortimo.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #ifndef __SYMBIONT_SPECIES_HPP_INCLUDED
 #define __SYMBIONT_SPECIES_HPP_INCLUDED
 
@@ -43,7 +60,7 @@ namespace yli
                 void unbind_biont(const std::size_t childID);
 
                 std::size_t get_indices_size() const;
-                uint32_t get_lightID() const;
+                GLint get_lightID() const;
 
                 // constructor.
                 SymbiontSpecies(yli::ontology::Universe* const universe, const SpeciesStruct& species_struct)
@@ -80,7 +97,7 @@ namespace yli
                     this->lightID = glGetUniformLocation(this->shader->get_programID(), "light_position_worldspace");
 
                     // water level.
-                    uint32_t water_level_uniform_location = glGetUniformLocation(this->shader->get_programID(), "water_level");
+                    GLint water_level_uniform_location = glGetUniformLocation(this->shader->get_programID(), "water_level");
 
                     const yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(this->shader->get_parent());
                     glUniform1f(water_level_uniform_location, scene->get_water_level());

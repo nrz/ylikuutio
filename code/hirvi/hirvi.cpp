@@ -1,3 +1,20 @@
+// Ylikuutio - A 3D game and simulation engine.
+//
+// Copyright (C) 2015-2019 Antti Nuortimo.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #ifndef PI
 #define PI 3.14159265359f
 #endif
@@ -97,7 +114,7 @@ int main(const int argc, const char* const argv[])
     // Create the `Universe`, store it in `my_universe`.
     std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
     UniverseStruct universe_struct;
-    universe_struct.window_title = "Hirvi 0.0.3, powered by Ylikuutio 0.0.3";
+    universe_struct.window_title = "Hirvi 0.0.4, powered by Ylikuutio 0.0.4";
     universe_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
     universe_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &current_keyrelease_callback_engine_vector_pointer;
     yli::ontology::Universe* const my_universe = new yli::ontology::Universe(universe_struct);
@@ -993,7 +1010,7 @@ int main(const int argc, const char* const argv[])
             {
                 std::stringstream help_text_stringstream;
                 help_text_stringstream <<
-                    "Hirvi 0.0.3\\n"
+                    "Hirvi 0.0.4\\n"
                     "\\n"
                     "arrow keys\\n"
                     "space jump\\n"

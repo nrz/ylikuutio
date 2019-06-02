@@ -1,6 +1,24 @@
+// Ylikuutio - A 3D game and simulation engine.
+//
+// Copyright (C) 2015-2019 Antti Nuortimo.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #include "world.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
+#include "camera.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 
@@ -90,26 +108,45 @@ namespace yli
         {
             // Requirements:
             // `this->parent` must not be `nullptr`.
-            // `scene` must not be `nullptr`.
 
-            yli::ontology::Universe* const universe = this->parent;
+            yli::ontology::Scene* const old_active_scene = this->active_scene;
 
-            if (universe == nullptr)
+            if (this->universe != nullptr && old_active_scene != nullptr)
             {
-                std::cerr << "ERROR: `World::set_active_scene`: `universe` is `nullptr`!\n";
-                return;
-            }
+                yli::ontology::Camera* const old_active_camera = old_active_scene->get_active_camera();
 
-            if (scene == nullptr)
-            {
-                std::cerr << "ERROR: `World::set_active_scene`: `scene` is `nullptr`!\n";
-                return;
+                if (old_active_camera != nullptr && !old_active_camera->get_is_static_view())
+                {
+                    // OK, there is an old active `Camera`, and it is not a static view `Camera`.
+                    // Copy the coordinates and angles from the `Universe` to the old active `Camera`.
+                    old_active_camera->set_cartesian_coordinates(this->universe->current_camera_cartesian_coordinates);
+                    old_active_camera->set_horizontal_angle(this->universe->current_camera_horizontal_angle);
+                    old_active_camera->set_vertical_angle(this->universe->current_camera_vertical_angle);
+                }
             }
 
             this->active_scene = scene;
-            universe->turbo_factor = this->active_scene->get_turbo_factor();
-            universe->twin_turbo_factor = this->active_scene->get_twin_turbo_factor();
-            universe->set_terrain_species(this->active_scene->get_terrain_species());
+
+            if (scene == nullptr)
+            {
+                // No active `Scene` at the moment.
+                return;
+            }
+
+            this->universe->turbo_factor = scene->get_turbo_factor();
+            this->universe->twin_turbo_factor = scene->get_twin_turbo_factor();
+            this->universe->set_terrain_species(scene->get_terrain_species());
+
+            yli::ontology::Camera* const camera = scene->get_active_camera();
+
+            if (camera != nullptr)
+            {
+                // OK, the newly activated `Scene` has an active `Camera`.
+                // Copy `Camera`'s coordinates and angles to the `Universe`.
+                this->universe->current_camera_cartesian_coordinates = camera->get_cartesian_coordinates();
+                this->universe->current_camera_horizontal_angle = camera->get_horizontal_angle();
+                this->universe->current_camera_vertical_angle = camera->get_vertical_angle();
+            }
         }
 
         yli::ontology::Scene* World::get_active_scene() const

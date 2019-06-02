@@ -10,3 +10,7 @@
 * screenshots with `Universe::screenshot`.
 * console size can be adjusted by setting `console_top_y`,
   `console_bottom_y`, `console_left_x`, `console_right_x`.
+
+0.0.4
+* `ComputeTask` entities (GPGPU)
+* functioning `Camera` entities

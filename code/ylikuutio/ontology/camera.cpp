@@ -1,3 +1,20 @@
+// Ylikuutio - A 3D game and simulation engine.
+//
+// Copyright (C) 2015-2019 Antti Nuortimo.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
@@ -88,24 +105,19 @@ namespace yli
             return 0; // `Camera` has no children.
         }
 
-        glm::mat4& Camera::get_projection_matrix()
+        const glm::mat4& Camera::get_projection_matrix() const
         {
             return this->projection_matrix;
         }
 
-        glm::mat4& Camera::get_view_matrix()
+        const glm::mat4& Camera::get_view_matrix() const
         {
             return this->view_matrix;
         }
 
-        float Camera::get_horizontal_angle() const
+        bool Camera::get_is_static_view() const
         {
-            return this->horizontal_angle;
-        }
-
-        float Camera::get_vertical_angle() const
-        {
-            return this->vertical_angle;
+            return this->is_static_view;
         }
 
         bool Camera::compute_and_update_matrices_from_inputs()
@@ -170,21 +182,6 @@ namespace yli
                     this->up);                                      // Head is up (set to 0,-1,0 to look upside-down).
 
             return true;
-        }
-
-        const glm::vec3& Camera::get_direction() const
-        {
-            return this->direction;
-        }
-
-        const glm::vec3& Camera::get_right() const
-        {
-            return this->right;
-        }
-
-        const glm::vec3& Camera::get_up() const
-        {
-            return this->up;
         }
     }
 }

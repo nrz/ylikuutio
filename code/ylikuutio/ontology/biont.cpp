@@ -1,3 +1,20 @@
+// Ylikuutio - A 3D game and simulation engine.
+//
+// Copyright (C) 2015-2019 Antti Nuortimo.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #include "biont.hpp"
 #include "shader.hpp"
 #include "holobiont.hpp"
@@ -6,6 +23,7 @@
 #include "biont_struct.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/opengl/opengl.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -278,13 +296,13 @@ namespace yli
                     light_position.z);
 
             // 1st attribute buffer : vertices.
-            glEnableVertexAttribArray(symbiont_species->get_vertex_position_modelspaceID());
+            yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertex_position_modelspaceID());
 
             // 2nd attribute buffer : UVs.
-            glEnableVertexAttribArray(symbiont_species->get_vertexUVID());
+            yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertexUVID());
 
             // 3rd attribute buffer : normals.
-            glEnableVertexAttribArray(symbiont_species->get_vertex_normal_modelspaceID());
+            yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertex_normal_modelspaceID());
 
             // '`Species`' part ends here.
 

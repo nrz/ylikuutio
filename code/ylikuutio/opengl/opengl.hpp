@@ -1,3 +1,20 @@
+// Ylikuutio - A 3D game and simulation engine.
+//
+// Copyright (C) 2015-2019 Antti Nuortimo.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #ifndef __OPENGL_HPP_INCLUDED
 #define __OPENGL_HPP_INCLUDED
 
@@ -27,6 +44,9 @@ namespace yli
         void set_filtering_parameters();
         void set_nearest_filtering_parameters();
         void set_wireframe(const bool wireframe);
+        bool uniform_1i(const GLint location, const GLint v0);
+        bool enable_vertex_attrib_array(const GLint attribute);
+        bool disable_vertex_attrib_array(const GLint attribute);
         std::size_t get_n_color_channels(const GLenum format);
         std::size_t get_size_of_component(const GLenum type);
 

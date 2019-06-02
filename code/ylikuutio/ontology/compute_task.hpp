@@ -1,3 +1,20 @@
+// Ylikuutio - A 3D game and simulation engine.
+//
+// Copyright (C) 2015-2019 Antti Nuortimo.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #ifndef __COMPUTE_TASK_HPP_INCLUDED
 #define __COMPUTE_TASK_HPP_INCLUDED
 
@@ -300,17 +317,17 @@ namespace yli
                 uint32_t framebuffer;
                 uint32_t source_texture;
                 uint32_t target_texture;
-                uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(this->parent->get_programID(), "texture_sampler")`.
+                GLint openGL_textureID;              // Texture ID, returned by `glGetUniformLocation(this->parent->get_programID(), "texture_sampler")`.
                 bool is_texture_loaded;
                 bool is_framebuffer_initialized;
                 bool is_ready;
 
-                uint32_t vertex_position_modelspaceID;
-                uint32_t vertexUVID;
-                uint32_t screen_width_uniform_ID;          // Location of the program's window width uniform.
-                uint32_t screen_height_uniform_ID;         // Location of the program's window height uniform.
-                uint32_t screen_depth_uniform_ID;          // Location of the program's window depth uniform.
-                uint32_t iteration_i_uniform_ID;           // Location of the program's iteration index uniform.
+                GLint vertex_position_modelspaceID;
+                GLint vertexUVID;
+                GLint screen_width_uniform_ID;             // Location of the program's window width uniform.
+                GLint screen_height_uniform_ID;            // Location of the program's window height uniform.
+                GLint screen_depth_uniform_ID;             // Location of the program's window depth uniform.
+                GLint iteration_i_uniform_ID;              // Location of the program's iteration index uniform.
 
                 uint32_t vertexbuffer;
                 uint32_t uvbuffer;

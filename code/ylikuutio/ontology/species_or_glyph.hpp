@@ -1,8 +1,26 @@
+// Ylikuutio - A 3D game and simulation engine.
+//
+// Copyright (C) 2015-2019 Antti Nuortimo.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #ifndef __SPECIES_OR_GLYPH_HPP_INCLUDED
 #define __SPECIES_OR_GLYPH_HPP_INCLUDED
 
 #include "object.hpp"
 #include "render_templates.hpp"
+#include "code/ylikuutio/opengl/opengl.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -22,20 +40,20 @@ namespace yli
                         species_or_glyph_pointer->light_position.z);
 
                 // 1st attribute buffer: vertices.
-                glEnableVertexAttribArray(species_or_glyph_pointer->vertex_position_modelspaceID);
+                yli::opengl::enable_vertex_attrib_array(species_or_glyph_pointer->vertex_position_modelspaceID);
 
                 // 2nd attribute buffer: UVs.
-                glEnableVertexAttribArray(species_or_glyph_pointer->vertexUVID);
+                yli::opengl::enable_vertex_attrib_array(species_or_glyph_pointer->vertexUVID);
 
                 // 3rd attribute buffer: normals.
-                glEnableVertexAttribArray(species_or_glyph_pointer->vertex_normal_modelspaceID);
+                yli::opengl::enable_vertex_attrib_array(species_or_glyph_pointer->vertex_normal_modelspaceID);
 
                 // Render this `Species` or `Glyph` by calling `render()` function of each `Object`.
                 yli::ontology::render_children<yli::ontology::Object*>(species_or_glyph_pointer->object_pointer_vector);
 
-                glDisableVertexAttribArray(species_or_glyph_pointer->vertex_position_modelspaceID);
-                glDisableVertexAttribArray(species_or_glyph_pointer->vertexUVID);
-                glDisableVertexAttribArray(species_or_glyph_pointer->vertex_normal_modelspaceID);
+                yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertex_position_modelspaceID);
+                yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertexUVID);
+                yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertex_normal_modelspaceID);
             }
     }
 }

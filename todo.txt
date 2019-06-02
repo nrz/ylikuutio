@@ -5,6 +5,8 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the development of Ylikuutio:
+[ ] Implement voxel world.
+[ ] Implement marching cubes algorithm for voxel terrain.
 [ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
 [ ] Write a simple triangle drawing software (android-kolmio) for Android, using Android NDK and CMake.
 [ ] Implement audio mixing using SDL_mixer.
@@ -23,7 +25,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Write code to convert ASCII grid files (height maps) to binary FBX files, storing also interpolated vertices, UVs, and normals.
 [ ] Test code used to convert ASCII grid files (height maps) to binary FBX files by loading the FBX files created with it.
 [ ] Convert ASCII grid files into binary FBX files.
-[ ] Implement `Camera` entities.
 [ ] Implement vertex selection and modification (with a mouse cursor), using Bullet Physics SDK. https://pybullet.org/
 [ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
 [ ] Implement `pause` console command for pausing `Sound`s and `Playlist`s.
@@ -53,7 +54,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Add support for Collada .dae file format.
 [ ] Implement support for 3D model of Turku campus and science park area: http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
 [ ] Implement support for 3D model of Tampere: http://kartat.tampere.fi/splashscreen/
-[ ] Implement voxel world.
 [ ] Implement AI objects (robots).
 [ ] Add scene loading command `load` into console.
 [ ] Move main loop out of `main` function and away from Ajokki into `ontology::Universe` class of Ylikuutio.
@@ -76,6 +76,13 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement support for vector fonts.
 [ ] Implement rendering into a texture.
 [ ] Implement s7 support for programming of AI objects (robots).
+[ ] Disable executing system commands from s7.
+[ ] Disable listing directories from s7.
+[ ] Disable deleting files from s7.
+[ ] Disable writing to files from s7.
+[ ] Disable reading from files from s7, with the exception of filenames matching the whitelisting regex.
+[ ] Disable writing to ports from s7.
+[ ] Disable reading from ports from s7.
 [ ] Implement dynamic not flowing water, using OpenGL shaders.
 
 Less urgent:
@@ -128,3 +135,4 @@ Ready:
 [x] Implement audio using SDL (SFML does not support Android and iOS yet).
 [x] Implement s7 support in console.
 [x] Add support for GPGPU using OpenGL 3.0/GLSL 1.30.10 shaders.
+[x] Implement `Camera` entities.

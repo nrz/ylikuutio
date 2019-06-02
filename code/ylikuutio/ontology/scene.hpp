@@ -1,3 +1,20 @@
+// Ylikuutio - A 3D game and simulation engine.
+//
+// Copyright (C) 2015-2019 Antti Nuortimo.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #ifndef __SCENE_HPP_INCLUDED
 #define __SCENE_HPP_INCLUDED
 
@@ -16,6 +33,29 @@
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
+
+// How `yli::ontology::Scene` class works:
+//
+// By default no `Scene` is activated.
+// Each `World` knows its active `Scene`.
+//
+// TODO: in the future, each `Scene` knows the coordinates and the angles.
+//
+// When the description below does not specifically say otherwise:
+// * "active `Scene`" refers to the active `Scene` of the active `World`.
+// * "active `Camera`" refers to the active `Camera` of the active `Scene`.
+//
+// When a `Scene` is activated:
+// 1. If there is an active `Camera` in the current `Scene` and the `Camera`
+//    is not static view `Camera`, then the coordinates and angles are
+//    copied from the `Universe` to the `Camera`.
+// 2. The `Scene` is marked as the active `Scene` of its parent `World`.
+// 3. The parent `World` is marked as the active `World` of the `Universe`.
+// 4. If the newly activated `Scene` has an activated `Camera`, then
+//    the coordinates and angles of that `Camera` are copied to the `Universe`.
+//
+// When a `Scene` is deleted:
+// 1. Every child of `Scene` gets deleted as usual, including the `Camera`s.
 
 namespace yli
 {

@@ -1,3 +1,20 @@
+// Ylikuutio - A 3D game and simulation engine.
+//
+// Copyright (C) 2015-2019 Antti Nuortimo.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #ifndef __MOVABLE_HPP_INCLUDED
 #define __MOVABLE_HPP_INCLUDED
 
@@ -106,16 +123,19 @@ namespace yli
                 // destructor.
                 virtual ~Movable();
 
-                const glm::vec3& get_cartesian_coordinates();
+                const glm::vec3& get_cartesian_coordinates() const;
+                void set_cartesian_coordinates(const glm::vec3& cartesian_coordinates);
+                const float get_horizontal_angle() const;
+                void set_horizontal_angle(const float horizontal_angle);
+                const float get_vertical_angle() const;
+                void set_vertical_angle(const float vertical_angle);
 
-                // Public callbacks (to be called from AI scripts written in
-                // TinyScheme). These are the functions that are available
-                // for AI scripts. Ylikuutio will support scripting of game
-                // agents using TinyScheme. Ylikuutio does not predefine what
-                // kind of games can be done with it. However, the callbacks
-                // Ylikuutio provides mean these is more support for features
-                // needing such callbacks. In particular, Ylikuutio supports
-                // simulations of real-life phenomena.
+                // Public callbacks (to be called from AI scripts written in s7).
+                // These are the functions that are available for AI scripts.
+                // Ylikuutio will support scripting of game agents using s7.
+                // Ylikuutio can be used for all kinds of games. However, there is
+                // more support for some kinds of games needing such callbacks.
+                // In particular, Ylikuutio supports simulations of real-life phenomena.
                 // TODO: implement public AI callbacks!
 
                 // Command callbacks.

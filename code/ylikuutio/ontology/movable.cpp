@@ -1,3 +1,20 @@
+// Ylikuutio - A 3D game and simulation engine.
+//
+// Copyright (C) 2015-2019 Antti Nuortimo.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #include "movable.hpp"
 
 // Include GLM
@@ -17,9 +34,34 @@ namespace yli
             // destructor.
         }
 
-        const glm::vec3& Movable::get_cartesian_coordinates()
+        const glm::vec3& Movable::get_cartesian_coordinates() const
         {
             return this->cartesian_coordinates;
+        }
+
+        void Movable::set_cartesian_coordinates(const glm::vec3& cartesian_coordinates)
+        {
+            this->cartesian_coordinates = cartesian_coordinates;
+        }
+
+        const float Movable::get_horizontal_angle() const
+        {
+            return this->horizontal_angle;
+        }
+
+        void Movable::set_horizontal_angle(const float horizontal_angle)
+        {
+            this->horizontal_angle = horizontal_angle;
+        }
+
+        const float Movable::get_vertical_angle() const
+        {
+            return this->vertical_angle;
+        }
+
+        void Movable::set_vertical_angle(const float vertical_angle)
+        {
+            this->vertical_angle = vertical_angle;
         }
 
         // Public callbacks (to be called from AI scripts written in Chibi-Scheme).

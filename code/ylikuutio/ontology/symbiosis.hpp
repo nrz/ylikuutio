@@ -1,3 +1,20 @@
+// Ylikuutio - A 3D game and simulation engine.
+//
+// Copyright (C) 2015-2019 Antti Nuortimo.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #ifndef __SYMBIOSIS_HPP_INCLUDED
 #define __SYMBIOSIS_HPP_INCLUDED
 // `Symbiosis` consists usually of 2 or more different `SymbiontMaterial`s and 2 or more `SymbiontSpecies` bound to these `SymbiontMaterial`s.
@@ -15,6 +32,9 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/file/file_loader.hpp"
 #include <ofbx.h>
+
+// Include GLEW
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -104,9 +124,9 @@ namespace yli
 
                 yli::ontology::SymbiontMaterial* get_symbiont_material(const std::size_t symbiont_material_i) const;
                 yli::ontology::SymbiontSpecies* get_symbiont_species(const std::size_t biontID) const;
-                uint32_t get_vertex_position_modelspaceID(const std::size_t biontID) const;
-                uint32_t get_vertexUVID(const std::size_t biontID) const;
-                uint32_t get_vertex_normal_modelspaceID(const std::size_t biontID) const;
+                GLint get_vertex_position_modelspaceID(const std::size_t biontID) const;
+                GLint get_vertexUVID(const std::size_t biontID) const;
+                GLint get_vertex_normal_modelspaceID(const std::size_t biontID) const;
 
                 uint32_t get_vertexbuffer(const std::size_t biontID) const;
                 uint32_t get_uvbuffer(const std::size_t biontID) const;
@@ -118,9 +138,9 @@ namespace yli
                 std::size_t get_number_of_ofbx_meshes() const;
                 bool has_texture(const std::size_t biontID) const;
                 uint32_t get_texture(const std::size_t biontID) const;
-                uint32_t get_openGL_textureID(const std::size_t biontID) const;
+                GLint get_openGL_textureID(const std::size_t biontID) const;
 
-                uint32_t get_lightID(const std::size_t biontID) const;
+                GLint get_lightID(const std::size_t biontID) const;
                 const glm::vec3& get_light_position(const std::size_t biontID) const;
 
                 template<class T1>

@@ -1,3 +1,20 @@
+// Ylikuutio - A 3D game and simulation engine.
+//
+// Copyright (C) 2015-2019 Antti Nuortimo.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #include "opengl.hpp"
 #include "code/ylikuutio/file/file_writer.hpp"
 
@@ -85,6 +102,42 @@ namespace yli
             {
                 glPolygonMode(GL_FRONT, GL_FILL);
             }
+        }
+
+        bool uniform_1i(const GLint location, const GLint v0)
+        {
+            if (location == -1)
+            {
+                return false;
+            }
+
+            glUniform1i(location, v0);
+
+            return true;
+        }
+
+        bool enable_vertex_attrib_array(const GLint attribute)
+        {
+            if (attribute == -1)
+            {
+                return false;
+            }
+
+            glEnableVertexAttribArray(attribute);
+
+            return true;
+        }
+
+        bool disable_vertex_attrib_array(const GLint attribute)
+        {
+            if (attribute == -1)
+            {
+                return false;
+            }
+
+            glDisableVertexAttribArray(attribute);
+
+            return true;
         }
 
         std::size_t get_n_color_channels(const GLenum format)
