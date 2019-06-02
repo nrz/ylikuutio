@@ -207,12 +207,6 @@ namespace yli
                     this->universe->current_camera_horizontal_angle = camera->get_horizontal_angle();
                     this->universe->current_camera_vertical_angle = camera->get_vertical_angle();
                 }
-                else
-                {
-                    this->universe->current_camera_cartesian_coordinates = glm::vec3(NAN, NAN, NAN);
-                    this->universe->current_camera_horizontal_angle = NAN;
-                    this->universe->current_camera_vertical_angle = NAN;
-                }
             }
         }
 
