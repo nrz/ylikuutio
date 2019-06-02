@@ -125,14 +125,12 @@ namespace yli
 
                 const glm::vec3& get_cartesian_coordinates() const;
 
-                // Public callbacks (to be called from AI scripts written in
-                // TinyScheme). These are the functions that are available
-                // for AI scripts. Ylikuutio will support scripting of game
-                // agents using TinyScheme. Ylikuutio does not predefine what
-                // kind of games can be done with it. However, the callbacks
-                // Ylikuutio provides mean these is more support for features
-                // needing such callbacks. In particular, Ylikuutio supports
-                // simulations of real-life phenomena.
+                // Public callbacks (to be called from AI scripts written in s7).
+                // These are the functions that are available for AI scripts.
+                // Ylikuutio will support scripting of game agents using s7.
+                // Ylikuutio can be used for all kinds of games. However, there is
+                // more support for some kinds of games needing such callbacks.
+                // In particular, Ylikuutio supports simulations of real-life phenomena.
                 // TODO: implement public AI callbacks!
 
                 // Command callbacks.
