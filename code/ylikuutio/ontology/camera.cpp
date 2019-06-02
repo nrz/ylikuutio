@@ -125,6 +125,11 @@ namespace yli
             return this->vertical_angle;
         }
 
+        bool Camera::get_is_static_view() const
+        {
+            return this->is_static_view;
+        }
+
         bool Camera::compute_and_update_matrices_from_inputs()
         {
             if (!this->universe->is_flight_mode_in_use)

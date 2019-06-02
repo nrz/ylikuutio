@@ -83,6 +83,7 @@ namespace yli
                 const glm::mat4& get_view_matrix() const;
                 float get_horizontal_angle() const;
                 float get_vertical_angle() const;
+                bool get_is_static_view() const;
 
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
