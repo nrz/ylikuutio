@@ -105,12 +105,12 @@ namespace yli
             return 0; // `Camera` has no children.
         }
 
-        glm::mat4& Camera::get_projection_matrix()
+        const glm::mat4& Camera::get_projection_matrix() const
         {
             return this->projection_matrix;
         }
 
-        glm::mat4& Camera::get_view_matrix()
+        const glm::mat4& Camera::get_view_matrix() const
         {
             return this->view_matrix;
         }

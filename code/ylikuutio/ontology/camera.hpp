@@ -78,8 +78,8 @@ namespace yli
                 const glm::vec3& get_right() const;
                 void adjust_horizontal_angle(float adjustment);
 
-                glm::mat4& get_projection_matrix();
-                glm::mat4& get_view_matrix();
+                const glm::mat4& get_projection_matrix() const;
+                const glm::mat4& get_view_matrix() const;
                 float get_horizontal_angle() const;
                 float get_vertical_angle() const;
 
