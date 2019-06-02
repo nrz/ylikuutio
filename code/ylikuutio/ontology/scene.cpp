@@ -160,6 +160,13 @@ namespace yli
 
         void Scene::set_active_camera(yli::ontology::Camera* camera)
         {
+            if (camera != nullptr && camera->get_parent() != this)
+            {
+                // `Camera`s of other `Scene`s can not be set
+                // as the active `Camera` for this `Scene`.
+                return;
+            }
+
             yli::ontology::Camera* const old_active_camera = this->active_camera;
 
             if (this->universe != nullptr &&
