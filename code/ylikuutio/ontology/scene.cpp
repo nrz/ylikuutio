@@ -204,16 +204,12 @@ namespace yli
                 if (this->active_camera != nullptr)
                 {
                     this->universe->current_camera_cartesian_coordinates = camera->get_cartesian_coordinates();
-                    this->universe->set_projection_matrix(camera->get_projection_matrix());
-                    this->universe->set_view_matrix(camera->get_view_matrix());
                     this->universe->current_camera_horizontal_angle = camera->get_horizontal_angle();
                     this->universe->current_camera_vertical_angle = camera->get_vertical_angle();
                 }
                 else
                 {
                     this->universe->current_camera_cartesian_coordinates = glm::vec3(NAN, NAN, NAN);
-                    this->universe->set_projection_matrix(glm::mat4(NAN));
-                    this->universe->set_view_matrix(glm::mat4(NAN));
                     this->universe->current_camera_horizontal_angle = NAN;
                     this->universe->current_camera_vertical_angle = NAN;
                 }
