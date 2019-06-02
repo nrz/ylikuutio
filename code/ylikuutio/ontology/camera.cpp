@@ -115,16 +115,6 @@ namespace yli
             return this->view_matrix;
         }
 
-        float Camera::get_horizontal_angle() const
-        {
-            return this->horizontal_angle;
-        }
-
-        float Camera::get_vertical_angle() const
-        {
-            return this->vertical_angle;
-        }
-
         bool Camera::get_is_static_view() const
         {
             return this->is_static_view;
@@ -192,21 +182,6 @@ namespace yli
                     this->up);                                      // Head is up (set to 0,-1,0 to look upside-down).
 
             return true;
-        }
-
-        const glm::vec3& Camera::get_direction() const
-        {
-            return this->direction;
-        }
-
-        const glm::vec3& Camera::get_right() const
-        {
-            return this->right;
-        }
-
-        const glm::vec3& Camera::get_up() const
-        {
-            return this->up;
         }
     }
 }

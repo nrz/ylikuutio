@@ -74,15 +74,10 @@ namespace yli
 
                 yli::ontology::Entity* get_parent() const override;
 
-                const glm::vec3& get_direction() const;
-                const glm::vec3& get_up() const;
-                const glm::vec3& get_right() const;
                 void adjust_horizontal_angle(float adjustment);
 
                 const glm::mat4& get_projection_matrix() const;
                 const glm::mat4& get_view_matrix() const;
-                float get_horizontal_angle() const;
-                float get_vertical_angle() const;
                 bool get_is_static_view() const;
 
                 std::size_t get_number_of_children() const override;
@@ -105,8 +100,6 @@ namespace yli
                 // variables related to the projection.
                 glm::mat4 projection_matrix;
                 glm::mat4 view_matrix;
-                double horizontal_angle;
-                double vertical_angle;
 
                 bool is_static_view;
         };
