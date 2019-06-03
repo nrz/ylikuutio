@@ -127,9 +127,10 @@ namespace yli
 
             this->active_scene = scene;
 
-            if (scene == nullptr)
+            if (scene == nullptr || this->universe == nullptr)
             {
-                // No active `Scene` at the moment.
+                // No active `Scene` at the moment,
+                // or `this->universe` is `nullptr`.
                 return;
             }
 
