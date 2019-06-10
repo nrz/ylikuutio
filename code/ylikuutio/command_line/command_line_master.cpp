@@ -31,7 +31,7 @@ namespace yli
         CommandLineMaster::CommandLineMaster(const int argc, const char* const argv[])
         {
             this->argc = argc;
-            this->arg_vector.assign(argv + 1, argv + argc);
+            this->arg_vector.assign(argv + 1, argv + argc); // Copy all arguments except the executable name.
             bool is_previous_argument_available = false;
             std::string previous_argument = ""; // dummy value.
 
