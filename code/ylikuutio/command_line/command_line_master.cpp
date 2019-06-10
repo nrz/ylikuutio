@@ -33,6 +33,7 @@ namespace yli
         {
             this->argc = argc;
             this->arg_vector.assign(argv + 1, argv + argc); // Copy all arguments except the executable name.
+            this->are_arguments_valid = true;
             bool is_previous_argument_available = false;
             std::string previous_argument = ""; // dummy value.
 
@@ -77,6 +78,8 @@ namespace yli
                 else if (n_leading_dashes == 0)
                 {
                     // there is no previous argument available for this value.
+                    // therefore arguments are invalid.
+                    this->are_arguments_valid = false;
                     continue;
                 }
 
@@ -92,6 +95,7 @@ namespace yli
                 if (n_leading_dashes > 2)
                 {
                     // an argument beginning with `---` is invalid, therefore it is discarded.
+                    this->are_arguments_valid = false;
                     continue;
                 }
 
@@ -165,6 +169,11 @@ namespace yli
             {
                 this->arg_map[previous_argument] = "";
             }
+        }
+
+        bool CommandLineMaster::get_are_arguments_valid() const
+        {
+            return this->are_arguments_valid;
         }
 
         bool CommandLineMaster::is_key(const std::string& key) const
