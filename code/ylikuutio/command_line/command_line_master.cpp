@@ -19,6 +19,7 @@
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 
 // Include standard headers
+#include <cstddef>       // std::size_t
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
 #include <string>        // std::string
