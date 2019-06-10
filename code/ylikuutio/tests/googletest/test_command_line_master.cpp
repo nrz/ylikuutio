@@ -24,6 +24,7 @@ TEST(is_key_must_function_properly, no_keys)
     char first_arg[] = "foo_executable";
     const char* argv[] = { first_arg };
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
     ASSERT_FALSE(command_line_master.is_key("foo_executable"));
     ASSERT_FALSE(command_line_master.is_key("foo"));
     ASSERT_FALSE(command_line_master.is_key("bar"));
@@ -36,6 +37,7 @@ TEST(is_key_must_function_properly, one_key_without_value)
     char second_arg[] = "bar";
     const char* argv[] = { first_arg, second_arg };
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_FALSE(command_line_master.get_are_arguments_valid());
     ASSERT_FALSE(command_line_master.is_key("foo_executable"));
     ASSERT_FALSE(command_line_master.is_key("foo"));
     ASSERT_FALSE(command_line_master.is_key("bar"));
@@ -49,9 +51,29 @@ TEST(is_key_must_function_properly, one_key_without_value_double_dash)
     char second_arg[] = "--bar";
     const char* argv[] = { first_arg, second_arg };
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
     ASSERT_FALSE(command_line_master.is_key("foo_executable"));
     ASSERT_FALSE(command_line_master.is_key("foo"));
     ASSERT_TRUE(command_line_master.is_key("bar"));
+    ASSERT_FALSE(command_line_master.is_key("-bar"));
+    ASSERT_FALSE(command_line_master.is_key("--bar"));
+    ASSERT_FALSE(command_line_master.is_key("baz"));
+}
+
+TEST(is_key_must_function_properly, one_key_without_value_triple_dash)
+{
+    const int argc = 2; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "---bar";
+    const char* argv[] = { first_arg, second_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_FALSE(command_line_master.get_are_arguments_valid());
+    ASSERT_FALSE(command_line_master.is_key("foo_executable"));
+    ASSERT_FALSE(command_line_master.is_key("foo"));
+    ASSERT_FALSE(command_line_master.is_key("bar"));
+    ASSERT_FALSE(command_line_master.is_key("-bar"));
+    ASSERT_FALSE(command_line_master.is_key("--bar"));
+    ASSERT_FALSE(command_line_master.is_key("---bar"));
     ASSERT_FALSE(command_line_master.is_key("baz"));
 }
 
@@ -62,6 +84,7 @@ TEST(is_key_must_function_properly, one_key_with_value)
     char second_arg[] = "bar=baz";
     const char* argv[] = { first_arg, second_arg };
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_FALSE(command_line_master.get_are_arguments_valid());
     ASSERT_FALSE(command_line_master.is_key("foo_executable"));
     ASSERT_FALSE(command_line_master.is_key("foo"));
     ASSERT_FALSE(command_line_master.is_key("bar"));
@@ -82,6 +105,7 @@ TEST(is_key_must_function_properly, one_key_with_value_double_dash)
     char second_arg[] = "--bar=baz";
     const char* argv[] = { first_arg, second_arg };
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
     ASSERT_FALSE(command_line_master.is_key("foo_executable"));
     ASSERT_FALSE(command_line_master.is_key("foo"));
     ASSERT_TRUE(command_line_master.is_key("bar"));
@@ -103,6 +127,7 @@ TEST(is_key_must_function_properly, two_keys_without_value)
     char third_arg[] = "baz";
     const char* argv[] = { first_arg, second_arg, third_arg };
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_FALSE(command_line_master.get_are_arguments_valid());
     ASSERT_FALSE(command_line_master.is_key("foo_executable"));
     ASSERT_FALSE(command_line_master.is_key("foo"));
     ASSERT_FALSE(command_line_master.is_key("bar"));
@@ -118,6 +143,7 @@ TEST(is_key_must_function_properly, two_keys_without_value_first_with_double_das
     char third_arg[] = "baz";
     const char* argv[] = { first_arg, second_arg, third_arg };
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
     ASSERT_FALSE(command_line_master.is_key("foo_executable"));
     ASSERT_FALSE(command_line_master.is_key("foo"));
     ASSERT_TRUE(command_line_master.is_key("bar"));
@@ -133,6 +159,7 @@ TEST(is_key_must_function_properly, two_keys_without_value_second_with_double_da
     char third_arg[] = "--baz";
     const char* argv[] = { first_arg, second_arg, third_arg };
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_FALSE(command_line_master.get_are_arguments_valid());
     ASSERT_FALSE(command_line_master.is_key("foo_executable"));
     ASSERT_FALSE(command_line_master.is_key("foo"));
     ASSERT_FALSE(command_line_master.is_key("bar"));
@@ -148,6 +175,7 @@ TEST(is_key_must_function_properly, two_keys_without_value_both_with_double_dash
     char third_arg[] = "--baz";
     const char* argv[] = { first_arg, second_arg, third_arg };
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
     ASSERT_FALSE(command_line_master.is_key("foo_executable"));
     ASSERT_FALSE(command_line_master.is_key("foo"));
     ASSERT_TRUE(command_line_master.is_key("bar"));
@@ -163,6 +191,7 @@ TEST(is_key_must_function_properly, two_keys_with_value)
     char third_arg[] = "qux=quux";
     const char* argv[] = { first_arg, second_arg, third_arg };
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_FALSE(command_line_master.get_are_arguments_valid());
     ASSERT_FALSE(command_line_master.is_key("foo_executable"));
     ASSERT_FALSE(command_line_master.is_key("foo"));
     ASSERT_FALSE(command_line_master.is_key("bar"));
@@ -189,6 +218,7 @@ TEST(is_key_must_function_properly, two_keys_with_value_first_with_double_dash)
     char third_arg[] = "qux=quux";
     const char* argv[] = { first_arg, second_arg, third_arg };
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_FALSE(command_line_master.get_are_arguments_valid());
     ASSERT_FALSE(command_line_master.is_key("foo_executable"));
     ASSERT_FALSE(command_line_master.is_key("foo"));
     ASSERT_TRUE(command_line_master.is_key("bar"));
@@ -215,6 +245,7 @@ TEST(is_key_must_function_properly, two_keys_with_value_second_with_double_dash)
     char third_arg[] = "--qux=quux";
     const char* argv[] = { first_arg, second_arg, third_arg };
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_FALSE(command_line_master.get_are_arguments_valid());
     ASSERT_FALSE(command_line_master.is_key("foo_executable"));
     ASSERT_FALSE(command_line_master.is_key("foo"));
     ASSERT_FALSE(command_line_master.is_key("bar"));
@@ -241,6 +272,7 @@ TEST(is_key_must_function_properly, two_keys_with_value_both_with_double_dash)
     char third_arg[] = "--qux=quux";
     const char* argv[] = { first_arg, second_arg, third_arg };
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
     ASSERT_FALSE(command_line_master.is_key("foo_executable"));
     ASSERT_FALSE(command_line_master.is_key("foo"));
     ASSERT_TRUE(command_line_master.is_key("bar"));
@@ -268,6 +300,7 @@ TEST(is_key_must_function_properly, three_keys_without_value_first_and_third_wit
     char fourth_arg[] = "--qux";
     const char* argv[] = { first_arg, second_arg, third_arg, fourth_arg };
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
     ASSERT_FALSE(command_line_master.is_key("foo_executable"));
     ASSERT_FALSE(command_line_master.is_key("foo"));
     ASSERT_TRUE(command_line_master.is_key("bar"));
@@ -315,6 +348,19 @@ TEST(get_value_must_function_properly, one_key_without_value_double_dash)
     const int argc = 2; // the executable itself is also in `argv`.
     char first_arg[] = "foo_executable";
     char second_arg[] = "--bar";
+    const char* argv[] = { first_arg, second_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_EQ(command_line_master.get_value("foo_executable"), "");
+    ASSERT_EQ(command_line_master.get_value("foo"), "");
+    ASSERT_EQ(command_line_master.get_value("bar"), "");
+    ASSERT_EQ(command_line_master.get_value("baz"), "");
+}
+
+TEST(get_value_must_function_properly, one_key_without_value_triple_dash)
+{
+    const int argc = 2; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "---bar";
     const char* argv[] = { first_arg, second_arg };
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
     ASSERT_EQ(command_line_master.get_value("foo_executable"), "");
