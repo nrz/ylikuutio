@@ -166,22 +166,22 @@ namespace yli
             }
         }
 
-        bool CommandLineMaster::is_key(const std::string& key)
+        bool CommandLineMaster::is_key(const std::string& key) const
         {
             return this->arg_map.count(key) == 1;
         }
 
-        std::string CommandLineMaster::get_value(const std::string& key)
+        std::string CommandLineMaster::get_value(const std::string& key) const
         {
             if (this->arg_map.count(key) == 1)
             {
-                return this->arg_map[key];
+                return this->arg_map.at(key);
             }
 
             return "";
         }
 
-        void CommandLineMaster::print_keys()
+        void CommandLineMaster::print_keys() const
         {
             if (this->argc > 1)
             {
@@ -198,7 +198,7 @@ namespace yli
             }
         }
 
-        void CommandLineMaster::print_keys_and_values()
+        void CommandLineMaster::print_keys_and_values() const
         {
             yli::map::print_keys_and_values<std::string>(this->arg_map);
         }

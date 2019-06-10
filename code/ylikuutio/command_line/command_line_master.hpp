@@ -28,10 +28,10 @@ namespace yli
         {
             public:
                 CommandLineMaster(const int argc, const char* const argv[]);
-                bool is_key(const std::string& key);
-                std::string get_value(const std::string& key);
-                void print_keys();
-                void print_keys_and_values();
+                bool is_key(const std::string& key) const;
+                std::string get_value(const std::string& key) const;
+                void print_keys() const;
+                void print_keys_and_values() const;
 
             private:
                 int argc;
