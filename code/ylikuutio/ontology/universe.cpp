@@ -878,7 +878,7 @@ namespace yli
 
         // Public callbacks end here.
 
-        std::string Universe::eval_string(const std::string& my_string)
+        std::string Universe::eval_string(const std::string& my_string) const
         {
             if (this->scheme_master == nullptr)
             {
