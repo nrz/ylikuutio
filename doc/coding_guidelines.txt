@@ -43,6 +43,7 @@ General
 * Prefer `std::shared_ptr` and `std::make_shared` to raw pointers.
 * Prefer references to pointers.
 * Use `const` for variables and member functions wherever it's appropriate.
+* Avoid `const_cast`, unless it is absolutely necessary and you know what you are doing.
 * For function parameters always use `const std::string&` instead of `std::string`, if possible.
 * For function parameters always use `const FooStruct&` instead of `FooStruct`, if possible.
 * For function parameters prefer `const FooStruct&` instead of more than 5 parameters.
@@ -50,6 +51,7 @@ General
 
 Security-related
 * Do not make any assumptions that input is valid or sensible.
+* Consider shaders as input. Do not assume that shaders are valid.
 * Do not make any assumptions about the size of the input.
 * Do not make any assumptions about undefined behavior.
 * Always `return` a value from non-`void` functions.
