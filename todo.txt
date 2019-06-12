@@ -5,8 +5,9 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the development of Ylikuutio:
-[ ] Implement command line parameter `--headless` to Hirvi and Ajokki (do not open any windows, do not render anything).
+[ ] Implement saving commands into a file that can later be loaded using command line parameter `--input-file` in Hirvi and Ajokki.
 [ ] Implement command line parameter `--input-file` to Hirvi and Ajokki (load keypresses and keyreleases from a file, eg. `--input-file foo` or `--input-file=foo`).
+[ ] Implement command line parameter `--headless` to Hirvi and Ajokki (do not open any windows, do not render anything).
 [ ] Implement command line parameter `--window-size` to Hirvi and Ajokki (eg. `--window-size 1920x1080` or `--window-size=1920x1080`).
 [ ] Implement command line parameter `--debug` to Hirvi and Ajokki (log all kinds of debug information).
 [ ] Implement `AnyValueEntity : public AnyValue, public Entity`.
@@ -14,6 +15,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Add scene loading command `load` into console.
 [ ] Implement support for changing window size.
 [ ] Implement support for changing font size.
+[ ] Implement `LogMaster` class.
 [ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
 [ ] Implement s7 support for programming of AI objects (robots).
 [ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
