@@ -156,7 +156,7 @@ namespace yli
             // destructor.
             std::cout << "This universe will be destroyed.\n";
 
-            if (this->is_framebuffer_initialized)
+            if (!this->is_headless && this->is_framebuffer_initialized)
             {
                 glDeleteTextures(1, &this->texture);
                 glDeleteRenderbuffers(1, &this->renderbuffer);
@@ -183,7 +183,7 @@ namespace yli
 
         void Universe::render()
         {
-            if (!this->should_be_rendered)
+            if (this->is_headless || !this->should_be_rendered)
             {
                 return;
             }
