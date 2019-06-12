@@ -406,12 +406,12 @@ namespace yli
             return this->max_FPS;
         }
 
-        void Universe::set(std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_any_value)
+        void Universe::set(const std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_any_value)
         {
             this->setting_master->set(setting_name, setting_any_value);
         }
 
-        yli::config::Setting* Universe::get(std::string key) const
+        yli::config::Setting* Universe::get(const std::string& key) const
         {
             return this->setting_master->get(key);
         }

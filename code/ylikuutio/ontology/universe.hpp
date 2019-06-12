@@ -524,10 +524,10 @@ namespace yli
                 // this method returns current `max_FPS`.
                 std::size_t get_max_FPS() const;
 
-                void set(std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_any_value);
+                void set(const std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_any_value);
 
                 // this method returns a pointer to `yli::config::Setting` corresponding to the given `key`.
-                yli::config::Setting* get(std::string key) const;
+                yli::config::Setting* get(const std::string& key) const;
 
                 bool is_entity(const std::string& name) const;
                 yli::ontology::Entity* get_entity(const std::string& name) const;

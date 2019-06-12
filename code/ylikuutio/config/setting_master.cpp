@@ -81,7 +81,7 @@ namespace yli
             return this->help();
         }
 
-        bool SettingMaster::set(std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_new_any_value)
+        bool SettingMaster::set(const std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_new_any_value)
         {
             if (!this->is_setting(setting_name))
             {
@@ -101,7 +101,7 @@ namespace yli
             return true;
         }
 
-        yli::config::Setting* SettingMaster::get(std::string& setting_name)
+        yli::config::Setting* SettingMaster::get(const std::string& setting_name)
         {
             return this->setting_pointer_map[setting_name];
         }

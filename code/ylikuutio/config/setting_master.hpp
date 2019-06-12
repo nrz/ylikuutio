@@ -65,9 +65,9 @@ namespace yli
                 // this function returns help string for setting `setting`.
                 std::string help(const std::string& setting_name);
 
-                bool set(std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_new_any_value);
+                bool set(const std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_new_any_value);
 
-                yli::config::Setting* get(std::string& setting_name);
+                yli::config::Setting* get(const std::string& setting_name);
 
                 // Public callbacks.
 
