@@ -103,6 +103,11 @@ namespace yli
 
         yli::config::Setting* SettingMaster::get(const std::string& setting_name)
         {
+            if (this->setting_pointer_map.count(setting_name) != 1)
+            {
+                return nullptr;
+            }
+
             return this->setting_pointer_map[setting_name];
         }
 
