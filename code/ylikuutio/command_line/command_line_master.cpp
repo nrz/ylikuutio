@@ -19,6 +19,7 @@
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 
 // Include standard headers
+#include <cstddef>       // std::size_t
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
 #include <string>        // std::string
@@ -31,7 +32,8 @@ namespace yli
         CommandLineMaster::CommandLineMaster(const int argc, const char* const argv[])
         {
             this->argc = argc;
-            this->arg_vector.assign(argv + 1, argv + argc);
+            this->arg_vector.assign(argv + 1, argv + argc); // Copy all arguments except the executable name.
+            this->are_arguments_valid = true;
             bool is_previous_argument_available = false;
             std::string previous_argument = ""; // dummy value.
 
@@ -40,13 +42,15 @@ namespace yli
             {
                 const std::string argument = *it;
 
-                // If the argument begins with `---`, the the argument is invalid.
-                // If the argument begins with `--`, then leave those out of the argument key.
-                // If the argument begins with `-`, then each char after `-` is an argument key.
-                // If the argument begins with something else and it the 1st argument, discard the argument.
-                // If the argument begins with something else and the previous argument contained `=`, discard the current argument.
-                // If the argument begins with something else, use it as a value for the previous argument.
-                // If the argument contains `=`, then use the value `=` as the value, and the argument key is the char or chars before `=`.
+                // The following rules apply to the arguments (excluding the executable name which is in `argv[0]`):
+                //
+                // If the argument begins with 3 or more dashes (`---`), then ignore that argument, and mark arguments as invalid.
+                // If the argument begins with exactly 2 dashes (`--`), then leave those dashes out of the argument key.
+                // If the argument begins with exactly 1 dash (`-`), then each char after `-` is an argument key.
+                // If the argument does not begin with a dash and is the 1st argument, then ignore that argument and mark arguments as invalid.
+                // If the argument does not begin with a dash and the previous argument contained `=`, then ignore that argument and mark arguments as invalid.
+                // If the argument does not begin with a dash and there is previous argument available, use current argument as the value for the previous argument.
+                // If the argument contains `=`, then use the chars before `=` as the argument key, and chars after `=` as the value.
 
                 std::size_t n_leading_dashes = 0;
                 std::size_t index_of_equal_sign = std::numeric_limits<std::size_t>::max(); // maximum value here means "not found yet".
@@ -76,8 +80,12 @@ namespace yli
                 else if (n_leading_dashes == 0)
                 {
                     // there is no previous argument available for this value.
+                    // therefore arguments are invalid.
+                    this->are_arguments_valid = false;
                     continue;
                 }
+
+                // arguments without dashes are processed already.
 
                 if (is_previous_argument_available)
                 {
@@ -85,12 +93,12 @@ namespace yli
                     this->arg_map[previous_argument] = "";
                 }
 
-                // arguments without dashes are processed already.
                 is_previous_argument_available = false;
 
                 if (n_leading_dashes > 2)
                 {
                     // an argument beginning with `---` is invalid, therefore it is discarded.
+                    this->are_arguments_valid = false;
                     continue;
                 }
 
@@ -166,22 +174,27 @@ namespace yli
             }
         }
 
-        bool CommandLineMaster::is_key(const std::string& key)
+        bool CommandLineMaster::get_are_arguments_valid() const
+        {
+            return this->are_arguments_valid;
+        }
+
+        bool CommandLineMaster::is_key(const std::string& key) const
         {
             return this->arg_map.count(key) == 1;
         }
 
-        std::string CommandLineMaster::get_value(const std::string& key)
+        std::string CommandLineMaster::get_value(const std::string& key) const
         {
             if (this->arg_map.count(key) == 1)
             {
-                return this->arg_map[key];
+                return this->arg_map.at(key);
             }
 
             return "";
         }
 
-        void CommandLineMaster::print_keys()
+        void CommandLineMaster::print_keys() const
         {
             if (this->argc > 1)
             {
@@ -198,7 +211,7 @@ namespace yli
             }
         }
 
-        void CommandLineMaster::print_keys_and_values()
+        void CommandLineMaster::print_keys_and_values() const
         {
             yli::map::print_keys_and_values<std::string>(this->arg_map);
         }

@@ -407,24 +407,27 @@ namespace yli
                         return;
                     }
 
-                    // Open a window and create its OpenGL context.
-                    std::cout << "Opening a window and creating its OpenGL context...\n";
-                    this->window = yli::sdl::create_window(
-                            static_cast<int>(this->window_width),
-                            static_cast<int>(this->window_height),
-                            this->window_title.c_str());
-
-                    if (this->window == nullptr)
+                    if (!this->is_headless)
                     {
-                        std::cerr << "SDL Window could not be created!\n";
+                        // Open a window and create its OpenGL context.
+                        std::cout << "Opening a window and creating its OpenGL context...\n";
+                        this->window = yli::sdl::create_window(
+                                static_cast<int>(this->window_width),
+                                static_cast<int>(this->window_height),
+                                this->window_title.c_str());
+
+                        if (this->window == nullptr)
+                        {
+                            std::cerr << "SDL Window could not be created!\n";
+                        }
+
+                        this->create_context();
+                        this->make_context_current();
+
+                        // Disable vertical sync.
+                        // TODO: add option to enable/disable vsync in the console.
+                        SDL_GL_SetSwapInterval(0);
                     }
-
-                    this->create_context();
-                    this->make_context_current();
-
-                    // Disable vertical sync.
-                    // TODO: add option to enable/disable vsync in the console.
-                    SDL_GL_SetSwapInterval(0);
 
                     this->console = new yli::console::Console(
                             this,
@@ -521,10 +524,10 @@ namespace yli
                 // this method returns current `max_FPS`.
                 std::size_t get_max_FPS() const;
 
-                void set(std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_any_value);
+                void set(const std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_any_value);
 
                 // this method returns a pointer to `yli::config::Setting` corresponding to the given `key`.
-                yli::config::Setting* get(std::string key) const;
+                yli::config::Setting* get(const std::string& key) const;
 
                 bool is_entity(const std::string& name) const;
                 yli::ontology::Entity* get_entity(const std::string& name) const;

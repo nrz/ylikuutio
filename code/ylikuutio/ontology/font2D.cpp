@@ -163,13 +163,13 @@ namespace yli
             glBindTexture(GL_TEXTURE_2D, this->texture);
 
             // Set our "texture_sampler" sampler to user Material Unit 0
-            glUniform1i(this->Text2DUniformID, 0);
+            yli::opengl::uniform_1i(this->Text2DUniformID, 0);
 
             // Set screen width.
-            glUniform1i(this->screen_width_uniform_ID, this->screen_width);
+            yli::opengl::uniform_1i(this->screen_width_uniform_ID, this->screen_width);
 
             // Set screen height.
-            glUniform1i(this->screen_height_uniform_ID, this->screen_height);
+            yli::opengl::uniform_1i(this->screen_height_uniform_ID, this->screen_height);
 
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

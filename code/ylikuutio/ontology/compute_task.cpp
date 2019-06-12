@@ -179,7 +179,7 @@ namespace yli
                 }
 
                 // Update the value of `uniform` variable `iteration_i`.
-                glUniform1i(this->iteration_i_uniform_ID, iteration_i);
+                yli::opengl::uniform_1i(this->iteration_i_uniform_ID, iteration_i);
 
                 this->preiterate();
 
@@ -188,7 +188,7 @@ namespace yli
                 glBindTexture(GL_TEXTURE_2D, this->source_texture);
 
                 // Set our "texture_sampler" sampler to use Texture Unit 0.
-                glUniform1i(this->openGL_textureID, 0);
+                yli::opengl::uniform_1i(this->openGL_textureID, 0);
 
                 // 1st attribute buffer: vertices.
                 yli::opengl::enable_vertex_attrib_array(this->vertex_position_modelspaceID);

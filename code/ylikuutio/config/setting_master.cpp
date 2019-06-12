@@ -53,7 +53,7 @@ namespace yli
             // destructor.
         }
 
-        bool SettingMaster::is_setting(const std::string& setting_name)
+        bool SettingMaster::is_setting(const std::string& setting_name) const
         {
             std::cout << "Checking if " << setting_name << " is a Setting.\n";
             bool is_setting = (this->setting_pointer_map.count(setting_name) == 1);
@@ -61,17 +61,17 @@ namespace yli
             return is_setting;
         }
 
-        std::string SettingMaster::help()
+        std::string SettingMaster::help() const
         {
             std::string help_string = "TODO: create general helptext";
             return help_string;
         }
 
-        std::string SettingMaster::help(const std::string& setting_name)
+        std::string SettingMaster::help(const std::string& setting_name) const
         {
             if (this->is_setting(setting_name))
             {
-                yli::config::Setting* setting = this->setting_pointer_map[setting_name];
+                yli::config::Setting* setting = this->setting_pointer_map.at(setting_name);
 
                 if (setting != nullptr)
                 {
@@ -81,7 +81,7 @@ namespace yli
             return this->help();
         }
 
-        bool SettingMaster::set(std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_new_any_value)
+        bool SettingMaster::set(const std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_new_any_value)
         {
             if (!this->is_setting(setting_name))
             {
@@ -101,9 +101,14 @@ namespace yli
             return true;
         }
 
-        yli::config::Setting* SettingMaster::get(std::string& setting_name)
+        yli::config::Setting* SettingMaster::get(const std::string& setting_name) const
         {
-            return this->setting_pointer_map[setting_name];
+            if (this->setting_pointer_map.count(setting_name) != 1)
+            {
+                return nullptr;
+            }
+
+            return this->setting_pointer_map.at(setting_name);
         }
 
         // public callbacks.

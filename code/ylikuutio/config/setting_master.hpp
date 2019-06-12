@@ -57,17 +57,17 @@ namespace yli
                 ~SettingMaster();
 
                 // does setting `setting` exist?
-                bool is_setting(const std::string& setting_name);
+                bool is_setting(const std::string& setting_name) const;
 
                 // this function returns general help.
-                std::string help();
+                std::string help() const;
 
                 // this function returns help string for setting `setting`.
-                std::string help(const std::string& setting_name);
+                std::string help(const std::string& setting_name) const;
 
-                bool set(std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_new_any_value);
+                bool set(const std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_new_any_value);
 
-                yli::config::Setting* get(std::string& setting_name);
+                yli::config::Setting* get(const std::string& setting_name) const;
 
                 // Public callbacks.
 

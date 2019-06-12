@@ -24,6 +24,7 @@
 #include "material_struct.hpp"
 #include "code/ylikuutio/ontology/chunk_master.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/opengl/opengl.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -160,7 +161,7 @@ namespace yli
             glBindTexture(GL_TEXTURE_2D, this->texture);
 
             // Set our "texture_sampler" sampler to use Texture Unit 0.
-            glUniform1i(this->openGL_textureID, 0);
+            yli::opengl::uniform_1i(this->openGL_textureID, 0);
 
             // Render this `Material` by calling `render()` function of each `Species`, each `VectorFont`, and each `ChunkMaster`.
             yli::ontology::render_children<yli::ontology::Species*>(this->species_pointer_vector);

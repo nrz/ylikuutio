@@ -35,6 +35,7 @@
 #include <list>          // std::list
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <stdint.h>      // uint32_t etc.
+#include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 

@@ -5,9 +5,32 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the development of Ylikuutio:
-[ ] Implement voxel world.
-[ ] Implement marching cubes algorithm for voxel terrain.
+[ ] Implement saving commands into a file that can later be loaded using command line parameter `--input-file` in Hirvi and Ajokki.
+[ ] Implement command line parameter `--input-file` to Hirvi and Ajokki (load keypresses and keyreleases from a file, eg. `--input-file foo` or `--input-file=foo`).
+[ ] Implement command line parameter `--headless` to Hirvi and Ajokki (do not open any windows, do not render anything).
+[ ] Implement command line parameter `--window-size` to Hirvi and Ajokki (eg. `--window-size 1920x1080` or `--window-size=1920x1080`).
+[ ] Implement command line parameter `--debug` to Hirvi and Ajokki (log all kinds of debug information).
+[ ] Implement `AnyValueEntity : public AnyValue, public Entity`.
+[ ] Implement `AnyStructEntity : public AnyStruct, public Entity`.
+[ ] Add scene loading command `load` into console.
+[ ] Implement support for changing window size.
+[ ] Implement support for changing font size.
+[ ] Implement `LogMaster` class.
 [ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
+[ ] Implement s7 support for programming of AI objects (robots).
+[ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
+[ ] Implement `pause` console command for pausing `Sound`s and `Playlist`s.
+[ ] Implement `next` console command for changing to the next `Sound` in a `Playlist`.
+[ ] Implement `prev` console command for changing to the previous `Sound` in a `Playlist`.
+[ ] Implement support for automatic detection of optimal window size.
+[ ] Implement modifying of vertices.
+[ ] Implement frustrum culling.
+[ ] Implement generation of terrain meshes in different levels of detail (LOD) using different `x_step`s and `z_step`s (eg. 1, 2, 4, 8, 16, 32, 64, 128).
+[ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain.
+[ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain and the available video memory.
+[ ] Implement octree segmentation.
+[ ] Implement voxel world.
+[ ] Implement marching cubes algorithm for voxel terrain as described in https://transvoxel.org/Lengyel-VoxelTerrain.pdf .
 [ ] Write a simple triangle drawing software (android-kolmio) for Android, using Android NDK and CMake.
 [ ] Implement audio mixing using SDL_mixer.
 [ ] Create `audio::Sound` class, whose parent is `Entity`.
@@ -20,29 +43,16 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Evaluate kNet (network library): https://github.com/juj/kNet/ (used by Urho3D: https://urho3d.github.io/ )
 [ ] Implement chat server using the chosen network library.
 [ ] Implement chat client using the chosen network library.
-[ ] Implement `AnyValueEntity : public AnyValue, public Entity`.
-[ ] Implement `AnyStructEntity : public AnyStruct, public Entity`.
 [ ] Write code to convert ASCII grid files (height maps) to binary FBX files, storing also interpolated vertices, UVs, and normals.
 [ ] Test code used to convert ASCII grid files (height maps) to binary FBX files by loading the FBX files created with it.
 [ ] Convert ASCII grid files into binary FBX files.
 [ ] Implement vertex selection and modification (with a mouse cursor), using Bullet Physics SDK. https://pybullet.org/
-[ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
-[ ] Implement `pause` console command for pausing `Sound`s and `Playlist`s.
-[ ] Implement `next` console command for changing to the next `Sound` in a `Playlist`.
-[ ] Implement `prev` console command for changing to the previous `Sound` in a `Playlist`.
-[ ] Implement support for automatic detection of optimal window size.
-[ ] Implement support for changing window size.
-[ ] Implement support for changing font size.
 [ ] Evaluate mingw-std-threads: https://github.com/meganz/mingw-std-threads
 [ ] Evaluate winpthreads: https://sourceforge.net/p/mingw-w64/mingw-w64/ci/master/tree/mingw-w64-libraries/winpthreads/ https://en.wikipedia.org/wiki/MinGW#MinGW-w64
 [ ] Evaluate Pthreads-win32, in particular MinGW-w64 support: https://sourceware.org/pthreads-win32/ https://sourceforge.net/p/mingw-w64/wiki2/Compile%20pthreads/
 [ ] Write test code using C++14 threads.
 [ ] Write test code using pthreads.
 [ ] Implement scene loading which works in the background.
-[ ] Implement command line parameter `--headless` to Ajokki (do not open any windows, do not render anything).
-[ ] Implement command line parameter `--input-file` to Ajokki (load keypresses and keyreleases from a file, eg. `--input-file foo` or `--input-file=foo`).
-[ ] Implement command line parameter `--window-size` to Ajokki (eg. `--window-size 1920x1080` or `--window-size=1920x1080`).
-[ ] Implement command line parameter `--debug` to Ajokki (log all kinds of debug information).
 [ ] Evaluate AppVeyor: https://github.com/marketplace/appveyor
 [ ] Implement support for `man` command in console (a container class with the command callback together with the `man` text for the command).
 [ ] Optimize `Symbiosis` entities' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.
@@ -55,7 +65,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement support for 3D model of Turku campus and science park area: http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
 [ ] Implement support for 3D model of Tampere: http://kartat.tampere.fi/splashscreen/
 [ ] Implement AI objects (robots).
-[ ] Add scene loading command `load` into console.
 [ ] Move main loop out of `main` function and away from Ajokki into `ontology::Universe` class of Ylikuutio.
 [ ] Implement support for custom keyboard settings.
 [ ] Add variable `direction`.
@@ -66,16 +75,8 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Write integration tests for Ajokki.
 [ ] Learn how to write unit tests for multithreaded C++ code.
 [ ] Create a vertex graph of the vertices and edges of a scene.
-[ ] Implement modifying of vertices.
-[ ] Implement octree segmentation.
-[ ] Implement frustrum culling.
-[ ] Implement generation of terrain meshes in different levels of detail (LOD) using different `x_step`s and `z_step`s (eg. 1, 2, 4, 8, 16, 32, 64, 128).
-[ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain.
-[ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain and the available video memory.
 [ ] Implement Theta* route finding. http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/
 [ ] Implement support for vector fonts.
-[ ] Implement rendering into a texture.
-[ ] Implement s7 support for programming of AI objects (robots).
 [ ] Disable executing system commands from s7.
 [ ] Disable listing directories from s7.
 [ ] Disable deleting files from s7.
@@ -136,3 +137,4 @@ Ready:
 [x] Implement s7 support in console.
 [x] Add support for GPGPU using OpenGL 3.0/GLSL 1.30.10 shaders.
 [x] Implement `Camera` entities.
+[x] Implement rendering into a texture (`ComputeTask`).

@@ -281,7 +281,7 @@ namespace yli
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, symbiosis->get_texture(this->biontID));
             // Set our "texture_sampler" sampler to user Texture Unit 0.
-            glUniform1i(symbiosis->get_openGL_textureID(this->biontID), 0);
+            yli::opengl::uniform_1i(symbiosis->get_openGL_textureID(this->biontID), 0);
 
             // '`Material`' part ends here.
 

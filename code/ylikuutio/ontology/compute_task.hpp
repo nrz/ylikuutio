@@ -44,6 +44,7 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <queue>    // std::queue
+#include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -207,21 +208,21 @@ namespace yli
                         // Initialize uniform window width.
                         // This is named `screen_width` instead of `texture_width` for compatibility with other shaders.
                         this->screen_width_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_width");
-                        glUniform1i(this->screen_width_uniform_ID, this->texture_width);
+                        yli::opengl::uniform_1i(this->screen_width_uniform_ID, this->texture_width);
 
                         // Initialize uniform window height.
                         // This is named `screen_height` instead of `texture_height` for compatibility with other shaders.
                         this->screen_height_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_height");
-                        glUniform1i(this->screen_height_uniform_ID, this->texture_height);
+                        yli::opengl::uniform_1i(this->screen_height_uniform_ID, this->texture_height);
 
                         // Initialize uniform window depth.
                         // This is named `screen_depth` instead of `texture_depth`, for consistency with other uniforms.
                         this->screen_depth_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_depth");
-                        glUniform1i(this->screen_depth_uniform_ID, this->texture_depth);
+                        yli::opengl::uniform_1i(this->screen_depth_uniform_ID, this->texture_depth);
 
                         // Initialize uniform iteration index.
                         this->iteration_i_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "iteration_i");
-                        glUniform1i(this->iteration_i_uniform_ID, 0);
+                        yli::opengl::uniform_1i(this->iteration_i_uniform_ID, 0);
 
                         // Create model (a square which consists of 2 triangles).
                         // *---*
