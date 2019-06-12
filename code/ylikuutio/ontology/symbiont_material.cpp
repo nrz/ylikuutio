@@ -22,6 +22,7 @@
 #include "family_templates.hpp"
 #include "material_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/opengl/opengl.hpp"
 #include <ofbx.h>
 
 // Include GLEW
@@ -107,7 +108,7 @@ namespace yli
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, this->texture);
             // Set our "texture_sampler" sampler to user Texture Unit 0.
-            glUniform1i(this->openGL_textureID, 0);
+            yli::opengl::uniform_1i(this->openGL_textureID, 0);
 
             // render this `SymbiontMaterial` by calling `render()` function of each `SymbiontSpecies`.
             yli::ontology::render_children<yli::ontology::SymbiontSpecies*>(this->symbiont_species_pointer_vector);

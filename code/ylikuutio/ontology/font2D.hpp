@@ -23,6 +23,7 @@
 #include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/load/texture_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/opengl/opengl.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -124,11 +125,11 @@ namespace yli
 
                     // Initialize uniform window width.
                     this->screen_width_uniform_ID = glGetUniformLocation(this->programID, "screen_width");
-                    glUniform1i(this->screen_width_uniform_ID, this->screen_width);
+                    yli::opengl::uniform_1i(this->screen_width_uniform_ID, this->screen_width);
 
                     // Initialize uniform window height.
                     this->screen_height_uniform_ID = glGetUniformLocation(this->programID, "screen_height");
-                    glUniform1i(this->screen_height_uniform_ID, this->screen_height);
+                    yli::opengl::uniform_1i(this->screen_height_uniform_ID, this->screen_height);
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Font2D*";
