@@ -29,6 +29,7 @@
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <string>   // std::string
 
 namespace yli
 {
