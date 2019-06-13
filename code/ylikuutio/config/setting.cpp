@@ -65,7 +65,7 @@ namespace yli
             // destructor.
         }
 
-        std::string Setting::help()
+        std::string Setting::help() const
         {
             // this function returns the help string for this setting.
             std::string help_string = this->name + " TODO: create helptext for " + this->name;

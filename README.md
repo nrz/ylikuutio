@@ -23,10 +23,13 @@ Android support is a work in progress.
 macOS and iOS will be supported in the future.
 OpenGL 3.0 or newer is required.
 
-## Article
+## Articles
 In [Skrolli 2018.4](https://skrolli.fi/numerot/2018-4/) there is an article
 "Pelimoottori harrastusprojektina" (in Finnish, translation: "Game engine
 as a hobby project").
+
+In [Skrolli 2019.2](https://skrolli.fi/numerot/2019-2/) there is an article
+"GPGPU-laskenta" (in Finnish, translation: "GPGPU computation").
 
 ## Compiling
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
@@ -96,9 +99,11 @@ To cross compile from Linux to Windows:
 
 Crosscompiling from Linux to Windows fails to compile tests.
 This is a known bug in Google Test. Just run `make` *again* if
-compiling ends before you get `hirvi.exe`, `ajokki.exe` and `s7_test.exe`.
+compiling ends before you get `hirvi.exe`, `ajokki.exe`, `gpgpu_test.exe`,
+and `s7_test.exe`.
+
 By default compiling tests is disabled when crosscompiling from Linux
-to Windows, due to this issue.
+to Windows, due to this issue:
 https://github.com/google/googletest/issues/606
 
 To cross compile from Linux to Android (using Android NDK):
@@ -125,20 +130,25 @@ Ajokki is sandbox demo program to check out some properties of
 Ylikuutio 3D engine. "Ajokki" is a working title based on a
 Finnish bus body manufacturer.
 
+`gpgpu_test` is a simple GPGPU example. Press Esc to exit.
+
 In Linux:
 
     $ ./hirvi
     $ ./ajokki
+    $ ./gpgpu_test
 
 In Windows:
 
     > hirvi.exe
     > ajokki.exe
+    > gpgpu_test.exe
 
-`hirvi.exe` and `ajokki.exe` can also be executed in Linux, using Wine:
+`hirvi.exe`, `ajokki.exe`, and `gpgpu_test.exe` can also be executed in Linux, using Wine:
 
     $ wine ./hirvi.exe
     $ wine ./ajokki.exe
+    $ wine ./gpgpu_test.exe
 
 Press `` to get console. Press F to toggle flying on off.
 Arrow keys work too. Ctrl is turbo. F1 toggles help display

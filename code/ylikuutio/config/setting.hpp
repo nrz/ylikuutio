@@ -50,7 +50,7 @@ namespace yli
                 // destructor.
                 ~Setting();
 
-                std::string help();
+                std::string help() const;
 
                 friend SettingMaster;
                 friend yli::console::Console;

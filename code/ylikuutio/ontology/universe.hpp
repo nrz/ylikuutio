@@ -466,7 +466,7 @@ namespace yli
                 // Setting the active `Camera` does not change the active `Scene`!
                 void set_active_camera(yli::ontology::Camera* const camera) const;
 
-                std::string eval_string(const std::string& my_string);
+                std::string eval_string(const std::string& my_string) const;
 
                 yli::ontology::Font2D* get_active_font2D() const;
                 void set_active_font2D(yli::ontology::Font2D* const font2D);
