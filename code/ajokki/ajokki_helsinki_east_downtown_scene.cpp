@@ -364,7 +364,7 @@ namespace ajokki
 
         cat2->set_name("cat2");
 
-        SymbiosisStruct freight_train_symbiosis_struct;
+        yli::ontology::SymbiosisStruct freight_train_symbiosis_struct;
         freight_train_symbiosis_struct.parent = helsinki_east_downtown_shader;
         freight_train_symbiosis_struct.model_file_format = "fbx";
         freight_train_symbiosis_struct.model_filename = "freight_train.fbx";
@@ -408,7 +408,7 @@ namespace ajokki
 
         freight_train1->set_name("freight_train1");
 
-        SymbiosisStruct turbo_polizei_symbiosis_struct;
+        yli::ontology::SymbiosisStruct turbo_polizei_symbiosis_struct;
         turbo_polizei_symbiosis_struct.parent = helsinki_east_downtown_shader;
         turbo_polizei_symbiosis_struct.model_file_format = "fbx";
         turbo_polizei_symbiosis_struct.model_filename = "turbo_polizei.fbx";
@@ -452,7 +452,7 @@ namespace ajokki
 
         turbo_polizei1->set_name("turbo_polizei1");
 
-        SymbiosisStruct fantasy_house_with_balcony_symbiosis_struct;
+        yli::ontology::SymbiosisStruct fantasy_house_with_balcony_symbiosis_struct;
         fantasy_house_with_balcony_symbiosis_struct.parent = helsinki_east_downtown_shader;
         fantasy_house_with_balcony_symbiosis_struct.model_file_format = "fbx";
         fantasy_house_with_balcony_symbiosis_struct.model_filename = "fantasy_house_with_balcony.fbx";

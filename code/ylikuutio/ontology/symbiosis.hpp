@@ -75,7 +75,7 @@ namespace yli
                 void bind_to_new_parent(yli::ontology::Shader* const new_parent);
 
                 // constructor.
-                Symbiosis(yli::ontology::Universe* universe, const SymbiosisStruct& symbiosis_struct)
+                Symbiosis(yli::ontology::Universe* universe, const yli::ontology::SymbiosisStruct& symbiosis_struct)
                     : Entity(universe)
                 {
                     // constructor.

@@ -71,7 +71,7 @@ namespace yli
                 yli::ontology::Entity* create_Material(const yli::ontology::MaterialStruct& material_struct) const;
                 yli::ontology::Entity* create_Species(const yli::ontology::SpeciesStruct& species_struct) const;
                 yli::ontology::Entity* create_Object(const yli::ontology::ObjectStruct& object_struct) const;
-                yli::ontology::Entity* create_Symbiosis(const SymbiosisStruct& symbiosis_struct) const;
+                yli::ontology::Entity* create_Symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const;
                 yli::ontology::Entity* create_Holobiont(const HolobiontStruct& object_struct) const;
                 yli::ontology::Entity* create_VectorFont(const VectorFontStruct& vector_font_struct) const;
                 yli::ontology::Entity* create_Text3D(const Text3DStruct& text3D_struct) const;

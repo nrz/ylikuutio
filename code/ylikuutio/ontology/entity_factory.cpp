@@ -97,7 +97,7 @@ namespace yli
             return new yli::ontology::Object(this->universe, object_struct);
         }
 
-        yli::ontology::Entity* EntityFactory::create_Symbiosis(const SymbiosisStruct& symbiosis_struct) const
+        yli::ontology::Entity* EntityFactory::create_Symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const
         {
             return new yli::ontology::Symbiosis(this->universe, symbiosis_struct);
         }
