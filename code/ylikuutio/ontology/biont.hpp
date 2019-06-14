@@ -62,7 +62,7 @@ namespace yli
                 // and requests a new `childID` from the new `Species` or from the new `Glyph`.
                 void bind_to_new_parent(yli::ontology::Holobiont* const new_holobiont_parent);
 
-                Biont(yli::ontology::Universe* const universe, BiontStruct& biont_struct)
+                Biont(yli::ontology::Universe* const universe, yli::ontology::BiontStruct& biont_struct)
                     : Movable(universe, biont_struct.cartesian_coordinates)
                 {
                     // constructor.
