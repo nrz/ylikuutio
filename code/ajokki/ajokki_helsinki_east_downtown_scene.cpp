@@ -99,7 +99,7 @@ namespace ajokki
         helsinki_east_downtown_shader->set_name("helsinki_east_downtown_shader");
 
         // Create the material, store it in `helsinki_east_downtown_grass_material`.
-        MaterialStruct helsinki_east_downtown_grass_material_struct;
+        yli::ontology::MaterialStruct helsinki_east_downtown_grass_material_struct;
         helsinki_east_downtown_grass_material_struct.shader = helsinki_east_downtown_shader;
         helsinki_east_downtown_grass_material_struct.texture_file_format = "bmp";
         helsinki_east_downtown_grass_material_struct.texture_filename = "GrassGreenTexture0002.bmp";
@@ -118,7 +118,7 @@ namespace ajokki
         helsinki_east_downtown_grass_material->set_name("helsinki_east_downtown_grass_material");
 
         // Create the material, store it in `pink_geometric_tiles_material`.
-        MaterialStruct pink_geometric_tiles_material_struct;
+        yli::ontology::MaterialStruct pink_geometric_tiles_material_struct;
         pink_geometric_tiles_material_struct.shader = helsinki_east_downtown_shader;
         pink_geometric_tiles_material_struct.texture_file_format = "bmp";
         pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.bmp";
@@ -137,7 +137,7 @@ namespace ajokki
         pink_geometric_tiles_material->set_name("helsinki_east_downtown_pink_geometric_tiles_material");
 
         // Create the material, store it in `orange_fur_material`.
-        MaterialStruct orange_fur_material_struct;
+        yli::ontology::MaterialStruct orange_fur_material_struct;
         orange_fur_material_struct.shader = helsinki_east_downtown_shader;
         orange_fur_material_struct.texture_file_format = "bmp";
         orange_fur_material_struct.texture_filename = "orange_fur_texture.bmp";

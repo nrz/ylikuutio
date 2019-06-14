@@ -89,7 +89,7 @@ namespace ajokki
         }
 
         // Create the material, store it in `altiplano_grass_material`.
-        MaterialStruct altiplano_grass_material_struct;
+        yli::ontology::MaterialStruct altiplano_grass_material_struct;
         altiplano_grass_material_struct.shader = altiplano_shader;
         altiplano_grass_material_struct.texture_file_format = "bmp";
         altiplano_grass_material_struct.texture_filename = "GrassGreenTexture0002.bmp";

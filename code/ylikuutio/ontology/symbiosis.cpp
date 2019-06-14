@@ -265,7 +265,7 @@ namespace yli
                     }
 
                     std::cout << "Creating yli::ontology::SymbiontMaterial* based on ofbx::Texture* at 0x" << std::hex << (uint64_t) ofbx_texture << std::dec << " ...\n";
-                    MaterialStruct material_struct;
+                    yli::ontology::MaterialStruct material_struct;
                     material_struct.shader = this->parent;
                     material_struct.symbiosis = this;
                     material_struct.is_symbiont_material = true;

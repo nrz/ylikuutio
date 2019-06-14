@@ -82,7 +82,7 @@ namespace yli
             return new yli::ontology::Shader(this->universe, shader_struct);
         }
 
-        yli::ontology::Entity* EntityFactory::create_Material(const MaterialStruct& material_struct) const
+        yli::ontology::Entity* EntityFactory::create_Material(const yli::ontology::MaterialStruct& material_struct) const
         {
             return new yli::ontology::Material(this->universe, material_struct);
         }

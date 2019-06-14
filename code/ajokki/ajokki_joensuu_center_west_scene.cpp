@@ -93,7 +93,7 @@ namespace ajokki
         joensuu_center_west_shader->set_name("joensuu_center_west_shader");
 
         // Create the material, store it in `joensuu_center_west_grass_material_struct`.
-        MaterialStruct joensuu_center_west_grass_material_struct;
+        yli::ontology::MaterialStruct joensuu_center_west_grass_material_struct;
         joensuu_center_west_grass_material_struct.shader = joensuu_center_west_shader;
         joensuu_center_west_grass_material_struct.texture_file_format = "bmp";
         joensuu_center_west_grass_material_struct.texture_filename = "GrassGreenTexture0002.bmp";
@@ -144,7 +144,7 @@ namespace ajokki
         entity_factory->create_Object(joensuu_center_west_struct);
 
         // Create the material, store it in `orange_fur_material_joensuu`.
-        MaterialStruct orange_fur_material_joensuu_struct;
+        yli::ontology::MaterialStruct orange_fur_material_joensuu_struct;
         orange_fur_material_joensuu_struct.shader = joensuu_center_west_shader;
         orange_fur_material_joensuu_struct.texture_file_format = "bmp";
         orange_fur_material_joensuu_struct.texture_filename = "orange_fur_texture.bmp";
