@@ -155,7 +155,7 @@ namespace ajokki
 
         orange_fur_material->set_name("helsinki_east_downtown_orange_fur_material");
 
-        SpeciesStruct helsinki_east_downtown_terrain_species_struct;
+        yli::ontology::SpeciesStruct helsinki_east_downtown_terrain_species_struct;
         helsinki_east_downtown_terrain_species_struct.scene = helsinki_east_downtown_scene;
         helsinki_east_downtown_terrain_species_struct.shader = helsinki_east_downtown_shader;
         helsinki_east_downtown_terrain_species_struct.material = helsinki_east_downtown_grass_material;
@@ -187,7 +187,7 @@ namespace ajokki
         helsinki_east_downtown_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_Object(helsinki_east_downtown_struct);
 
-        SpeciesStruct suzanne_species_struct;
+        yli::ontology::SpeciesStruct suzanne_species_struct;
         suzanne_species_struct.scene = helsinki_east_downtown_scene;
         suzanne_species_struct.shader = helsinki_east_downtown_shader;
         suzanne_species_struct.material = orange_fur_material;
@@ -306,7 +306,7 @@ namespace ajokki
 
         suzanne5->set_name("suzanne5");
 
-        SpeciesStruct cat_species_struct;
+        yli::ontology::SpeciesStruct cat_species_struct;
         cat_species_struct.scene = helsinki_east_downtown_scene;
         cat_species_struct.shader = helsinki_east_downtown_shader;
         cat_species_struct.material = orange_fur_material;

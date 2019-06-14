@@ -278,7 +278,7 @@ namespace yli
                     // Care only about `ofbx::Texture*`s which are DIFFUSE textures.
                     for (std::size_t mesh_i : this->ofbx_diffuse_texture_mesh_map.at(ofbx_texture))
                     {
-                        SpeciesStruct species_struct;
+                        yli::ontology::SpeciesStruct species_struct;
                         species_struct.is_symbiont_species = true;
 
                         if (this->parent != nullptr)

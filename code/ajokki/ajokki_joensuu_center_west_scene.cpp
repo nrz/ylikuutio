@@ -111,7 +111,7 @@ namespace ajokki
 
         joensuu_center_west_grass_material->set_name("joensuu_center_west_grass_material");
 
-        SpeciesStruct joensuu_center_west_terrain_species_struct;
+        yli::ontology::SpeciesStruct joensuu_center_west_terrain_species_struct;
         joensuu_center_west_terrain_species_struct.scene = joensuu_center_west_scene;
         joensuu_center_west_terrain_species_struct.shader = joensuu_center_west_shader;
         joensuu_center_west_terrain_species_struct.material = joensuu_center_west_grass_material;
@@ -162,7 +162,7 @@ namespace ajokki
 
         orange_fur_material_joensuu->set_name("joensuu_center_west_orange_fur_material");
 
-        SpeciesStruct horse_species_struct;
+        yli::ontology::SpeciesStruct horse_species_struct;
         horse_species_struct.scene = joensuu_center_west_scene;
         horse_species_struct.shader = joensuu_center_west_shader;
         horse_species_struct.material = orange_fur_material_joensuu;
