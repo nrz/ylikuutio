@@ -138,7 +138,7 @@ namespace yli
             return new yli::ontology::Camera(this->universe, camera_struct);
         }
 
-        yli::ontology::Entity* EntityFactory::create_ComputeTask(const ComputeTaskStruct& compute_task_struct) const
+        yli::ontology::Entity* EntityFactory::create_ComputeTask(const yli::ontology::ComputeTaskStruct& compute_task_struct) const
         {
             return new yli::ontology::ComputeTask(this->universe, compute_task_struct);
         }
