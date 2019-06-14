@@ -307,7 +307,7 @@ namespace yli
                 void unbind_font2D(const std::size_t childID);
 
                 // constructor.
-                Universe(const UniverseStruct& universe_struct)
+                Universe(const yli::ontology::UniverseStruct& universe_struct)
                     : Entity(this) // `Universe` has no parent.
                 {
                     // call bind_entity here since it couldn't be performed from Entity constructor

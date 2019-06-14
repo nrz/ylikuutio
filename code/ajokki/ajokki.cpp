@@ -119,7 +119,7 @@ int main(const int argc, const char* const argv[])
 
     // Create the `Universe`, store it in `my_universe`.
     std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
-    UniverseStruct universe_struct;
+    yli::ontology::UniverseStruct universe_struct;
     universe_struct.window_title = "Ajokki 0.0.4, powered by Ylikuutio 0.0.4";
     universe_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
     universe_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &current_keyrelease_callback_engine_vector_pointer;
