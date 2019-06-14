@@ -384,7 +384,7 @@ namespace ajokki
 
         freight_train_symbiosis->set_name("freight_train_symbiosis");
 
-        HolobiontStruct freight_train_object_struct1;
+        yli::ontology::HolobiontStruct freight_train_object_struct1;
         freight_train_object_struct1.symbiosis_parent = freight_train_symbiosis;
         freight_train_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         freight_train_object_struct1.cartesian_coordinates = glm::vec3(125.00f, 40.00f, 80.00f);
@@ -428,7 +428,7 @@ namespace ajokki
 
         turbo_polizei_symbiosis->set_name("turbo_polizei_symbiosis");
 
-        HolobiontStruct turbo_polizei_object_struct1;
+        yli::ontology::HolobiontStruct turbo_polizei_object_struct1;
         turbo_polizei_object_struct1.symbiosis_parent = turbo_polizei_symbiosis;
         turbo_polizei_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         turbo_polizei_object_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 175.00f);
@@ -472,7 +472,7 @@ namespace ajokki
 
         fantasy_house_with_balcony_symbiosis->set_name("fantasy_house_with_balcony_symbiosis");
 
-        HolobiontStruct fantasy_house_with_balcony_object_struct1;
+        yli::ontology::HolobiontStruct fantasy_house_with_balcony_object_struct1;
         fantasy_house_with_balcony_object_struct1.symbiosis_parent = fantasy_house_with_balcony_symbiosis;
         fantasy_house_with_balcony_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         fantasy_house_with_balcony_object_struct1.cartesian_coordinates = glm::vec3(268.00f, 59.00f, 174.00f);
@@ -497,7 +497,7 @@ namespace ajokki
 
         fantasy_house_with_balcony1->set_name("fantasy_house_with_balcony1");
 
-        HolobiontStruct fantasy_house_with_balcony_object_struct2;
+        yli::ontology::HolobiontStruct fantasy_house_with_balcony_object_struct2;
         fantasy_house_with_balcony_object_struct2.symbiosis_parent = fantasy_house_with_balcony_symbiosis;
         fantasy_house_with_balcony_object_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         fantasy_house_with_balcony_object_struct2.cartesian_coordinates = glm::vec3(252.00f, 23.50f, 2614.00f);

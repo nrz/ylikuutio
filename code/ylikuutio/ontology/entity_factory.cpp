@@ -102,7 +102,7 @@ namespace yli
             return new yli::ontology::Symbiosis(this->universe, symbiosis_struct);
         }
 
-        yli::ontology::Entity* EntityFactory::create_Holobiont(const HolobiontStruct& holobiont_struct) const
+        yli::ontology::Entity* EntityFactory::create_Holobiont(const yli::ontology::HolobiontStruct& holobiont_struct) const
         {
             return new yli::ontology::Holobiont(this->universe, holobiont_struct);
         }
