@@ -112,7 +112,7 @@ namespace yli
             return new yli::ontology::VectorFont(this->universe, vector_font_struct);
         }
 
-        yli::ontology::Entity* EntityFactory::create_Text3D(const Text3DStruct& text3D_struct) const
+        yli::ontology::Entity* EntityFactory::create_Text3D(const yli::ontology::Text3DStruct& text3D_struct) const
         {
             return new yli::ontology::Text3D(this->universe, text3D_struct);
         }

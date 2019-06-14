@@ -74,7 +74,7 @@ namespace yli
                 yli::ontology::Entity* create_Symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const;
                 yli::ontology::Entity* create_Holobiont(const yli::ontology::HolobiontStruct& object_struct) const;
                 yli::ontology::Entity* create_VectorFont(const yli::ontology::VectorFontStruct& vector_font_struct) const;
-                yli::ontology::Entity* create_Text3D(const Text3DStruct& text3D_struct) const;
+                yli::ontology::Entity* create_Text3D(const yli::ontology::Text3DStruct& text3D_struct) const;
                 yli::ontology::Entity* create_Font2D(
                         const std::size_t screen_width,
                         const std::size_t screen_height,

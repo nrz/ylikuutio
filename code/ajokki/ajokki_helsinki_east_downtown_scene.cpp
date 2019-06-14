@@ -539,7 +539,7 @@ namespace ajokki
             return nullptr;
         }
 
-        Text3DStruct text3D_struct;
+        yli::ontology::Text3DStruct text3D_struct;
         text3D_struct.parent = kongtext_font;
         text3D_struct.text_string = "Hello world &#x26; its habitants!";
         text3D_struct.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
