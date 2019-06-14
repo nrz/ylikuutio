@@ -133,7 +133,7 @@ namespace yli
                     font_texture_file_format.c_str());
         }
 
-        yli::ontology::Entity* EntityFactory::create_Camera(const CameraStruct& camera_struct) const
+        yli::ontology::Entity* EntityFactory::create_Camera(const yli::ontology::CameraStruct& camera_struct) const
         {
             return new yli::ontology::Camera(this->universe, camera_struct);
         }

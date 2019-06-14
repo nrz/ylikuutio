@@ -549,7 +549,7 @@ namespace ajokki
         text3D_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_Text3D(text3D_struct);
 
-        CameraStruct cat_camera_struct;
+        yli::ontology::CameraStruct cat_camera_struct;
         cat_camera_struct.cartesian_coordinates = glm::vec3(800.00f, 400.00f, 950.00f);
         cat_camera_struct.parent = helsinki_east_downtown_scene;
         cat_camera_struct.horizontal_angle = -0.90f;
@@ -568,7 +568,7 @@ namespace ajokki
 
         cat_camera->set_name("cat_camera");
 
-        CameraStruct turbo_polizei_camera_struct;
+        yli::ontology::CameraStruct turbo_polizei_camera_struct;
         turbo_polizei_camera_struct.cartesian_coordinates = glm::vec3(87.00f, 28.00f, 169.00f);
         turbo_polizei_camera_struct.parent = helsinki_east_downtown_scene;
         turbo_polizei_camera_struct.horizontal_angle = -0.45f;
