@@ -107,7 +107,7 @@ namespace yli
             return new yli::ontology::Holobiont(this->universe, holobiont_struct);
         }
 
-        yli::ontology::Entity* EntityFactory::create_VectorFont(const VectorFontStruct& vector_font_struct) const
+        yli::ontology::Entity* EntityFactory::create_VectorFont(const yli::ontology::VectorFontStruct& vector_font_struct) const
         {
             return new yli::ontology::VectorFont(this->universe, vector_font_struct);
         }

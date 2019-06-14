@@ -57,7 +57,7 @@ namespace yli
                 void bind_to_new_parent(yli::ontology::Material* const new_parent);
 
                 // TODO: `VectorFont` constructor also creates each `Glyph` and binds them to the `VectorFont`.
-                VectorFont(yli::ontology::Universe* const universe, const VectorFontStruct& vector_font_struct)
+                VectorFont(yli::ontology::Universe* const universe, const yli::ontology::VectorFontStruct& vector_font_struct)
                     : Entity(universe)
                 {
                     // constructor.

@@ -523,7 +523,7 @@ namespace ajokki
 
         fantasy_house_with_balcony2->set_name("fantasy_house_with_balcony2");
 
-        VectorFontStruct kongtext_vector_font_struct;
+        yli::ontology::VectorFontStruct kongtext_vector_font_struct;
         kongtext_vector_font_struct.parent = helsinki_east_downtown_grass_material;
         kongtext_vector_font_struct.font_file_format = "svg";
         kongtext_vector_font_struct.font_filename = "kongtext.svg";
