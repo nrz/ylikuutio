@@ -38,7 +38,7 @@ namespace yli
         {
             public:
                 // constructor.
-                Creature(yli::ontology::Universe* const universe, ObjectStruct& object_struct)
+                Creature(yli::ontology::Universe* const universe, yli::ontology::ObjectStruct& object_struct)
                     : Object(universe, object_struct)
                 {
                     // constructor.

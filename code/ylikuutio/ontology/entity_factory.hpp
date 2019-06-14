@@ -70,7 +70,7 @@ namespace yli
                 yli::ontology::Entity* create_Shader(const ShaderStruct& shader_struct) const;
                 yli::ontology::Entity* create_Material(const MaterialStruct& material_struct) const;
                 yli::ontology::Entity* create_Species(const SpeciesStruct& species_struct) const;
-                yli::ontology::Entity* create_Object(const ObjectStruct& object_struct) const;
+                yli::ontology::Entity* create_Object(const yli::ontology::ObjectStruct& object_struct) const;
                 yli::ontology::Entity* create_Symbiosis(const SymbiosisStruct& symbiosis_struct) const;
                 yli::ontology::Entity* create_Holobiont(const HolobiontStruct& object_struct) const;
                 yli::ontology::Entity* create_VectorFont(const VectorFontStruct& vector_font_struct) const;

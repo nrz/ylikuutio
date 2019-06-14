@@ -92,7 +92,7 @@ namespace yli
             return new yli::ontology::Species(this->universe, species_struct);
         }
 
-        yli::ontology::Entity* EntityFactory::create_Object(const ObjectStruct& object_struct) const
+        yli::ontology::Entity* EntityFactory::create_Object(const yli::ontology::ObjectStruct& object_struct) const
         {
             return new yli::ontology::Object(this->universe, object_struct);
         }

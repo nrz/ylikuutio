@@ -134,7 +134,7 @@ namespace ajokki
         tallinn_terrain_species->set_name("tallinn_terrain_species");
 
         // Create tallinn terrain.
-        ObjectStruct tallinn_struct;
+        yli::ontology::ObjectStruct tallinn_struct;
         tallinn_struct.species_parent = tallinn_terrain_species;
         tallinn_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         tallinn_struct.rotate_angle = 0.0f;

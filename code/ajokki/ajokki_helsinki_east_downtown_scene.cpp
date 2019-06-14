@@ -179,7 +179,7 @@ namespace ajokki
         helsinki_east_downtown_terrain_species->set_name("helsinki_east_downtown_terrain_species");
 
         // Create Helsinki eastern downtown terrain.
-        ObjectStruct helsinki_east_downtown_struct;
+        yli::ontology::ObjectStruct helsinki_east_downtown_struct;
         helsinki_east_downtown_struct.species_parent = helsinki_east_downtown_terrain_species;
         helsinki_east_downtown_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         helsinki_east_downtown_struct.rotate_angle = 0.0f;
@@ -209,7 +209,7 @@ namespace ajokki
         suzanne_species->set_name("suzanne_species");
 
         // Create suzanne1, store it in `suzanne1`.
-        ObjectStruct suzanne_object_struct1;
+        yli::ontology::ObjectStruct suzanne_object_struct1;
         suzanne_object_struct1.species_parent = suzanne_species;
         suzanne_object_struct1.cartesian_coordinates = glm::vec3(82.50f, 119.00f, 95.50f);
         suzanne_object_struct1.rotate_angle = 0.10f;
@@ -229,7 +229,7 @@ namespace ajokki
         suzanne1->set_name("suzanne1");
 
         suzanne_species->set_name("suzanne_species");
-        ObjectStruct suzanne_object_struct2;
+        yli::ontology::ObjectStruct suzanne_object_struct2;
         suzanne_object_struct2.species_parent = suzanne_species;
         suzanne_object_struct2.cartesian_coordinates = glm::vec3(112.90f, 113.90f, 75.50f);
         suzanne_object_struct2.rotate_angle = 0.20f;
@@ -248,7 +248,7 @@ namespace ajokki
 
         suzanne2->set_name("suzanne2");
 
-        ObjectStruct suzanne_object_struct3;
+        yli::ontology::ObjectStruct suzanne_object_struct3;
         suzanne_object_struct3.species_parent = suzanne_species;
         suzanne_object_struct3.cartesian_coordinates = glm::vec3(126.90f, 162.90f, 103.00f);
         suzanne_object_struct3.rotate_angle = 0.05f;
@@ -267,7 +267,7 @@ namespace ajokki
 
         suzanne3->set_name("suzanne3");
 
-        ObjectStruct suzanne_object_struct4;
+        yli::ontology::ObjectStruct suzanne_object_struct4;
         suzanne_object_struct4.species_parent = suzanne_species;
         suzanne_object_struct4.cartesian_coordinates = glm::vec3(96.00f, 130.00f, 109.00f);
         suzanne_object_struct4.rotate_angle = 0.15f;
@@ -286,7 +286,7 @@ namespace ajokki
 
         suzanne4->set_name("suzanne4");
 
-        ObjectStruct suzanne_object_struct5;
+        yli::ontology::ObjectStruct suzanne_object_struct5;
         suzanne_object_struct5.species_parent = suzanne_species;
         suzanne_object_struct5.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
         suzanne_object_struct5.cartesian_coordinates = glm::vec3(103.00f, 140.00f, 109.00f);
@@ -328,7 +328,7 @@ namespace ajokki
 
         cat_species->set_name("cat_species");
 
-        ObjectStruct cat_object_struct1;
+        yli::ontology::ObjectStruct cat_object_struct1;
         cat_object_struct1.species_parent = cat_species;
         cat_object_struct1.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
         cat_object_struct1.cartesian_coordinates = glm::vec3(500.00f, 100.00f, 1000.00f);
@@ -346,7 +346,7 @@ namespace ajokki
 
         cat1->set_name("cat1");
 
-        ObjectStruct cat_object_struct2;
+        yli::ontology::ObjectStruct cat_object_struct2;
         cat_object_struct2.species_parent = cat_species;
         cat_object_struct2.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
         cat_object_struct2.cartesian_coordinates = glm::vec3(700.00f, 100.00f, 1200.00f);
