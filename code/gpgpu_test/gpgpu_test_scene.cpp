@@ -71,7 +71,7 @@ namespace gpgpu_test
         gpgpu_test_scene->set_twin_turbo_factor(100.0f);
 
         // Create the shader, store it in `identity_shader`.
-        ShaderStruct identity_shader_struct;
+        yli::ontology::ShaderStruct identity_shader_struct;
         identity_shader_struct.parent = gpgpu_test_scene;
         identity_shader_struct.vertex_shader = "identity.vert";
         identity_shader_struct.fragment_shader = "identity.frag";
@@ -129,7 +129,7 @@ namespace gpgpu_test
         }
 
         // Create the shader, store it in `sobel_shader`.
-        ShaderStruct sobel_shader_struct;
+        yli::ontology::ShaderStruct sobel_shader_struct;
         sobel_shader_struct.parent = gpgpu_test_scene;
         sobel_shader_struct.vertex_shader = "identity.vert";
         sobel_shader_struct.fragment_shader = "sobel_gradient_magnitude.frag";
@@ -167,7 +167,7 @@ namespace gpgpu_test
         }
 
         // Create the shader, store it in `go_west_shader`.
-        ShaderStruct go_west_shader_struct;
+        yli::ontology::ShaderStruct go_west_shader_struct;
         go_west_shader_struct.parent = gpgpu_test_scene;
         go_west_shader_struct.vertex_shader = "identity.vert";
         go_west_shader_struct.fragment_shader = "go_west.frag";
@@ -205,7 +205,7 @@ namespace gpgpu_test
         }
 
         // Create the shader, store it in `vanish_west_shader`.
-        ShaderStruct vanish_west_shader_struct;
+        yli::ontology::ShaderStruct vanish_west_shader_struct;
         vanish_west_shader_struct.parent = gpgpu_test_scene;
         vanish_west_shader_struct.vertex_shader = "identity.vert";
         vanish_west_shader_struct.fragment_shader = "vanish_west.frag";
@@ -243,7 +243,7 @@ namespace gpgpu_test
         }
 
         // Create the shader, store it in `floyd_warshall_shader`.
-        ShaderStruct floyd_warshall_shader_struct;
+        yli::ontology::ShaderStruct floyd_warshall_shader_struct;
         floyd_warshall_shader_struct.parent = gpgpu_test_scene;
         floyd_warshall_shader_struct.vertex_shader = "identity.vert";
         floyd_warshall_shader_struct.fragment_shader = "floyd_warshall.frag";

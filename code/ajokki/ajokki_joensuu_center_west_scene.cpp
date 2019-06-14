@@ -74,7 +74,7 @@ namespace ajokki
         joensuu_center_west_scene->set_twin_turbo_factor(100.0f);
 
         // Create the shader, store it in `joensuu_center_west_shader`.
-        ShaderStruct joensuu_center_west_shader_struct;
+        yli::ontology::ShaderStruct joensuu_center_west_shader_struct;
         joensuu_center_west_shader_struct.parent = joensuu_center_west_scene;
         joensuu_center_west_shader_struct.vertex_shader = "standard_shading.vert";
         joensuu_center_west_shader_struct.fragment_shader = "standard_shading.frag";

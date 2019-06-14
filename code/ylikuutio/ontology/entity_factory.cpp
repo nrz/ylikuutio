@@ -77,7 +77,7 @@ namespace yli
             return new yli::ontology::Scene(this->universe, world, water_level);
         }
 
-        yli::ontology::Entity* EntityFactory::create_Shader(const ShaderStruct& shader_struct) const
+        yli::ontology::Entity* EntityFactory::create_Shader(const yli::ontology::ShaderStruct& shader_struct) const
         {
             return new yli::ontology::Shader(this->universe, shader_struct);
         }

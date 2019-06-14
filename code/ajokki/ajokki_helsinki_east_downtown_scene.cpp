@@ -80,7 +80,7 @@ namespace ajokki
         helsinki_east_downtown_scene->set_twin_turbo_factor(100.0f);
 
         // Create the shader, store it in `helsinki_east_downtown_shader`.
-        ShaderStruct helsinki_east_downtown_shader_struct;
+        yli::ontology::ShaderStruct helsinki_east_downtown_shader_struct;
         helsinki_east_downtown_shader_struct.parent = helsinki_east_downtown_scene;
         helsinki_east_downtown_shader_struct.vertex_shader = "standard_shading.vert";
         helsinki_east_downtown_shader_struct.fragment_shader = "standard_shading.frag";

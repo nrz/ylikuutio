@@ -72,7 +72,7 @@ namespace ajokki
         tallinn_scene->set_twin_turbo_factor(100.0f);
 
         // Create the shader, store it in `tallinn_shader`.
-        ShaderStruct tallinn_shader_struct;
+        yli::ontology::ShaderStruct tallinn_shader_struct;
         tallinn_shader_struct.parent = tallinn_scene;
         tallinn_shader_struct.vertex_shader = "standard_shading.vert";
         tallinn_shader_struct.fragment_shader = "standard_shading.frag";

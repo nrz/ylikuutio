@@ -72,7 +72,7 @@ namespace ajokki
         altiplano_scene->set_twin_turbo_factor(100.0f);
 
         // Create the shader, store it in `altiplano_shader`.
-        ShaderStruct altiplano_shader_struct;
+        yli::ontology::ShaderStruct altiplano_shader_struct;
         altiplano_shader_struct.parent = altiplano_scene;
         altiplano_shader_struct.vertex_shader = "standard_shading.vert";
         altiplano_shader_struct.fragment_shader = "standard_shading.frag";
