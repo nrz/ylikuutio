@@ -27,7 +27,7 @@ namespace yli
     {
         class CallbackEngine;
 
-        typedef struct
+        typedef struct KeyAndCallbackStruct
         {
             uint32_t keycode;
             yli::callback_system::CallbackEngine* callback_engine;
