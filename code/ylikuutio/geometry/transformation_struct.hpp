@@ -27,7 +27,7 @@ namespace yli
 {
     namespace geometry
     {
-        typedef struct
+        typedef struct TransformationStruct
         {
             std::size_t image_width;
             std::size_t image_height;
