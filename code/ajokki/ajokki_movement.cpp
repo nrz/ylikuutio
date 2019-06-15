@@ -39,7 +39,7 @@ namespace ajokki
         // Variables related to voluntary movement.
         float speed = 0.5f; // 0.5 units/second
         std::shared_ptr<yli::datatypes::AnyValue> any_value_speed = std::make_shared<yli::datatypes::AnyValue>(speed);
-        SettingStruct speed_setting_struct(any_value_speed);
+        yli::config::SettingStruct speed_setting_struct(any_value_speed);
         speed_setting_struct.name = "speed";
         speed_setting_struct.setting_master = setting_master;
         speed_setting_struct.activate_callback = &yli::config::SettingMaster::activate_speed;
@@ -49,7 +49,7 @@ namespace ajokki
         float turbo_factor = 5.0f;
         // float turbo_factor = 100.0f;
         std::shared_ptr<yli::datatypes::AnyValue> any_value_turbo_factor = std::make_shared<yli::datatypes::AnyValue>(turbo_factor);
-        SettingStruct turbo_factor_setting_struct(any_value_turbo_factor);
+        yli::config::SettingStruct turbo_factor_setting_struct(any_value_turbo_factor);
         turbo_factor_setting_struct.name = "turbo_factor";
         turbo_factor_setting_struct.setting_master = setting_master;
         turbo_factor_setting_struct.activate_callback = &yli::config::SettingMaster::activate_turbo_factor;
@@ -59,7 +59,7 @@ namespace ajokki
         float twin_turbo_factor = 100.0f;
         // float twin_turbo_factor = 50000.0f;
         std::shared_ptr<yli::datatypes::AnyValue> any_value_twin_turbo_factor = std::make_shared<yli::datatypes::AnyValue>(twin_turbo_factor);
-        SettingStruct twin_turbo_factor_setting_struct(any_value_twin_turbo_factor);
+        yli::config::SettingStruct twin_turbo_factor_setting_struct(any_value_twin_turbo_factor);
         twin_turbo_factor_setting_struct.name = "twin_turbo_factor";
         twin_turbo_factor_setting_struct.setting_master = setting_master;
         twin_turbo_factor_setting_struct.activate_callback = &yli::config::SettingMaster::activate_twin_turbo_factor;
@@ -68,7 +68,7 @@ namespace ajokki
 
         float mouse_speed = 0.005f;
         std::shared_ptr<yli::datatypes::AnyValue> any_value_mouse_speed = std::make_shared<yli::datatypes::AnyValue>(mouse_speed);
-        SettingStruct mouse_speed_setting_struct(any_value_mouse_speed);
+        yli::config::SettingStruct mouse_speed_setting_struct(any_value_mouse_speed);
         mouse_speed_setting_struct.name = "mouse_speed";
         mouse_speed_setting_struct.setting_master = setting_master;
         mouse_speed_setting_struct.activate_callback = &yli::config::SettingMaster::activate_mouse_speed;

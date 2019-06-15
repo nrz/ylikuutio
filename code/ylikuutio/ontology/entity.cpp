@@ -71,7 +71,7 @@ namespace yli
             this->can_be_erased = false;
             this->should_be_rendered = true;
 
-            SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::datatypes::AnyValue>(this->should_be_rendered));
+            yli::config::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::datatypes::AnyValue>(this->should_be_rendered));
             should_be_rendered_setting_struct.name = "should_be_rendered";
             should_be_rendered_setting_struct.setting_master = this->get_setting_master();
             should_be_rendered_setting_struct.activate_callback = &yli::config::SettingMaster::activate_should_be_rendered;

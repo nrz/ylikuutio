@@ -45,7 +45,7 @@ namespace yli
         {
             public:
                 // constructor.
-                Setting(const SettingStruct& setting_struct);
+                Setting(const yli::config::SettingStruct& setting_struct);
 
                 // destructor.
                 ~Setting();

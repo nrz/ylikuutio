@@ -126,7 +126,7 @@ int main(const int argc, const char* const argv[])
 
     const float earth_radius = 6371.0f; // in kilometres
 
-    SettingStruct planet_radius_setting_struct(std::make_shared<yli::datatypes::AnyValue>(earth_radius));
+    yli::config::SettingStruct planet_radius_setting_struct(std::make_shared<yli::datatypes::AnyValue>(earth_radius));
     planet_radius_setting_struct.name = "planet_radius";
     planet_radius_setting_struct.setting_master = my_universe->get_setting_master();
     planet_radius_setting_struct.activate_callback = &yli::config::SettingMaster::activate_planet_radius; // world may be a planet or a moon.
