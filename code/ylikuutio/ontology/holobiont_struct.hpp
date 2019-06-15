@@ -37,7 +37,7 @@ namespace yli
     {
         class Symbiosis;
 
-        typedef struct HolobiontStruct
+        struct HolobiontStruct
         {
             HolobiontStruct()
                 : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
@@ -62,7 +62,7 @@ namespace yli
             float rotate_angle;                         // rotate angle.
             float initial_rotate_angle;                 // initial rotate angle.
             bool quaternions_in_use;
-        } HolobiontStruct;
+        };
     }
 }
 

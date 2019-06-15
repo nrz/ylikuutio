@@ -27,7 +27,7 @@ namespace yli
 {
     namespace load
     {
-        typedef struct SpeciesLoaderStruct
+        struct SpeciesLoaderStruct
         {
             SpeciesLoaderStruct()
                 : triangulation_type("bilinear_interpolation"),
@@ -60,7 +60,7 @@ namespace yli
             float divisor;                  // for SRTM.
             bool vram_buffer_in_use;
             bool should_ylikuutio_use_real_texture_coordinates;
-        } SpeciesLoaderStruct;
+        };
     }
 }
 

@@ -37,7 +37,7 @@ namespace yli
     }
 }
 
-typedef struct GlyphStruct
+struct GlyphStruct
 {
     GlyphStruct()
         : light_position(glm::vec3(0.0f, 0.0f, 0.0f)),
@@ -60,6 +60,6 @@ typedef struct GlyphStruct
     yli::ontology::Shader* shader_pointer; // pointer to the `Shader` (not a parent!).
     yli::ontology::VectorFont* parent;     // pointer to the `VectorFont`.
     bool vram_buffer_in_use;
-} GlyphStruct;
+};
 
 #endif

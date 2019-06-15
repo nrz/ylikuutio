@@ -36,7 +36,7 @@ namespace yli
     {
         class SettingMaster;
 
-        typedef struct SettingStruct
+        struct SettingStruct
         {
             SettingStruct(std::shared_ptr<yli::datatypes::AnyValue> initial_value)
                 : initial_value(initial_value),
@@ -53,7 +53,7 @@ namespace yli
             ActivateCallback activate_callback;
             ReadCallback read_callback;
             bool should_ylikuutio_call_activate_callback_now;
-        } SettingStruct;
+        };
     }
 }
 

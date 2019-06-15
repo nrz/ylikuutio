@@ -25,7 +25,7 @@ namespace yli
 {
     namespace load
     {
-        typedef struct SymbiosisLoaderStruct
+        struct SymbiosisLoaderStruct
         {
             SymbiosisLoaderStruct()
                 : triangulation_type("bilinear_interpolation")
@@ -35,7 +35,7 @@ namespace yli
             std::string model_filename;
             std::string model_file_format;
             std::string triangulation_type; // for all.
-        } SymbiosisLoaderStruct;
+        };
     }
 }
 

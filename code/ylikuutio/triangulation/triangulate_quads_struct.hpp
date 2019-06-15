@@ -29,7 +29,7 @@ namespace yli
 {
     namespace geometry
     {
-        typedef struct TriangulateQuadsStruct
+        struct TriangulateQuadsStruct
         {
             TriangulateQuadsStruct()
                 : image_width(0),
@@ -50,7 +50,7 @@ namespace yli
             bool should_ylikuutio_use_real_texture_coordinates;
             double sphere_radius;
             yli::geometry::SphericalTerrainStruct spherical_terrain_struct;
-        } TriangulateQuadsStruct;
+        };
     }
 }
 

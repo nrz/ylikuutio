@@ -39,7 +39,7 @@ namespace yli
         class Glyph;
         class Text3D;
 
-        typedef struct ObjectStruct
+        struct ObjectStruct
         {
             ObjectStruct()
                 : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
@@ -72,7 +72,7 @@ namespace yli
             bool is_character;                      // The parent of a character object is a `Glyph`. The parent of a regular object is a `Species`.
             bool is_symbiosis_object;               // The parent of a `SymbiosisObject` is a `Symbiosis`.
             bool quaternions_in_use;
-        } ObjectStruct;
+        };
     }
 }
 

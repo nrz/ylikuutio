@@ -28,7 +28,7 @@ namespace yli
     {
         class Scene;
 
-        typedef struct ShaderStruct
+        struct ShaderStruct
         {
             ShaderStruct()
                 : parent(nullptr),
@@ -41,7 +41,7 @@ namespace yli
             std::string fragment_shader;  // filename of fragment shader.
             yli::ontology::Scene* parent; // pointer to the `Scene`.
             bool is_gpgpu_shader;         // TODO: GPGPU `Shader`s are not rendered on screen but their result textures can be used by `Material`s.
-        } ShaderStruct;
+        };
     }
 }
 

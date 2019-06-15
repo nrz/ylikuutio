@@ -29,7 +29,7 @@ namespace yli
     {
         class Graph;
 
-        typedef struct NodeStruct
+        struct NodeStruct
         {
             NodeStruct()
                 : nodeID(std::numeric_limits<std::size_t>::max()), parent(nullptr)
@@ -39,7 +39,7 @@ namespace yli
             std::size_t nodeID;
             yli::graph::Graph* parent;
             std::vector<std::size_t> neighbor_nodeIDs;
-        } NodeStruct;
+        };
     }
 }
 

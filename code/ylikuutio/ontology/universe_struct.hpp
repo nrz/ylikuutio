@@ -28,7 +28,7 @@ namespace yli
 {
     namespace ontology
     {
-        typedef struct UniverseStruct
+        struct UniverseStruct
         {
             UniverseStruct()
                 : window_title("Ylikuutio 0.0.4"),
@@ -69,7 +69,7 @@ namespace yli
             // These are for `yli::console::Console`.
             std::vector<yli::callback_system::KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer;
             std::vector<yli::callback_system::KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
-        } UniverseStruct;
+        };
     }
 }
 

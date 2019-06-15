@@ -34,7 +34,7 @@ namespace yli
         class Shader;
         class Symbiosis;
 
-        typedef struct MaterialStruct
+        struct MaterialStruct
         {
             MaterialStruct()
                 : shader(nullptr),
@@ -51,7 +51,7 @@ namespace yli
             yli::ontology::Symbiosis* symbiosis; // Pointer to `Symbiosis`.
             const ofbx::Texture* ofbx_texture;   // For `SymbiontMaterial`s.
             bool is_symbiont_material;
-        } MaterialStruct;
+        };
     }
 }
 

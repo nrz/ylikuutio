@@ -25,7 +25,7 @@ namespace yli
 {
     namespace common
     {
-        typedef struct SphericalCoordinatesStruct
+        struct SphericalCoordinatesStruct
         {
             SphericalCoordinatesStruct()
                 : rho(NAN), theta(NAN), phi(NAN)
@@ -41,7 +41,7 @@ namespace yli
             double rho;
             double theta;
             double phi;
-        } SphericalCoordinatesStruct;
+        };
     }
 }
 

@@ -25,7 +25,7 @@ namespace yli
 {
     namespace geometry
     {
-        typedef struct SphericalTerrainStruct
+        struct SphericalTerrainStruct
         {
             SphericalTerrainStruct()
                 : southern_latitude(NAN),
@@ -43,7 +43,7 @@ namespace yli
             double eastern_longitude;
             double SRTM_latitude_step_in_degrees;
             double SRTM_longitude_step_in_degrees;
-        } SphericalTerrainStruct;
+        };
     }
 }
 

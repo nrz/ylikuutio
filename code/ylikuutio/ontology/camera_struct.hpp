@@ -33,7 +33,7 @@ namespace yli
     {
         class Scene;
 
-        typedef struct CameraStruct
+        struct CameraStruct
         {
             CameraStruct()
                 : cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
@@ -60,7 +60,7 @@ namespace yli
             // Static view `Camera`'s coordinates do not change by moving in a `Scene`. However,
             // they can be modified by adjusting the `Entity`-specific variables of the `Camera` directly.
             bool is_static_view;
-        } CameraStruct;
+        };
     }
 }
 

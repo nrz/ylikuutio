@@ -26,7 +26,7 @@ namespace yli
 {
     namespace load
     {
-        typedef struct HeightmapLoaderStruct
+        struct HeightmapLoaderStruct
         {
             HeightmapLoaderStruct()
                 : latitude(NAN),
@@ -41,7 +41,7 @@ namespace yli
             float longitude;
             float planet_radius;
             float divisor;
-        } HeightmapLoaderStruct;
+        };
     }
 }
 

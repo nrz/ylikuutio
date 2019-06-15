@@ -31,7 +31,7 @@ namespace yli
 {
     namespace geometry
     {
-        typedef struct TriangulatePolygonsStruct
+        struct TriangulatePolygonsStruct
         {
             TriangulatePolygonsStruct()
                 : input_vertices(nullptr), should_ylikuutio_use_real_texture_coordinates(true)
@@ -40,7 +40,7 @@ namespace yli
             }
             std::vector<std::vector<glm::vec2>>* input_vertices;
             bool should_ylikuutio_use_real_texture_coordinates;
-        } TriangulatePolygonsStruct;
+        };
     }
 }
 

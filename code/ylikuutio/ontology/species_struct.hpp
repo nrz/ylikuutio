@@ -40,7 +40,7 @@ namespace yli
         class Material;
         class SymbiontMaterial;
 
-        typedef struct SpeciesStruct
+        struct SpeciesStruct
         {
             SpeciesStruct()
                 : triangulation_type("bilinear_interpolation"),
@@ -91,7 +91,7 @@ namespace yli
             bool is_symbiont_species;
             bool vram_buffer_in_use;
             bool should_ylikuutio_use_real_texture_coordinates;
-        } SpeciesStruct;
+        };
     }
 }
 

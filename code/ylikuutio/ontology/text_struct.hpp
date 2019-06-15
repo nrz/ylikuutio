@@ -30,7 +30,7 @@ namespace yli
     }
 }
 
-typedef struct TextStruct
+struct TextStruct
 {
     TextStruct()
         : font2D_parent(nullptr),
@@ -55,6 +55,6 @@ typedef struct TextStruct
     std::string font_texture_file_format;
     std::string horizontal_alignment;
     std::string vertical_alignment;
-} TextStruct;
+};
 
 #endif

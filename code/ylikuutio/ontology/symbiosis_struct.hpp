@@ -33,7 +33,7 @@ namespace yli
     {
         class Shader;
 
-        typedef struct SymbiosisStruct
+        struct SymbiosisStruct
         {
             SymbiosisStruct()
                 : triangulation_type("bilinear_interpolation"),
@@ -50,7 +50,7 @@ namespace yli
             glm::vec3 light_position;       // light position.
             yli::ontology::Shader* parent;  // pointer to the `Shader`.
             bool vram_buffer_in_use;
-        } SymbiosisStruct;
+        };
     }
 }
 

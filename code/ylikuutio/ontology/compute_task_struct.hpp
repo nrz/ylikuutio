@@ -42,7 +42,7 @@ namespace yli
     {
         class Shader;
 
-        typedef struct ComputeTaskStruct
+        struct ComputeTaskStruct
         {
             ComputeTaskStruct()
                 : parent(nullptr),
@@ -88,7 +88,7 @@ namespace yli
             bool should_ylikuutio_flip_texture;
             PreIterateCallback preiterate_callback;
             PostIterateCallback postiterate_callback;
-        } TextureStruct;
+        };
     }
 }
 

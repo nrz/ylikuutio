@@ -34,7 +34,7 @@ namespace yli
     {
         class VectorFont;
 
-        typedef struct Text3DStruct
+        struct Text3DStruct
         {
             Text3DStruct()
                 : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
@@ -54,7 +54,7 @@ namespace yli
             const char* text_string_char;
             yli::ontology::VectorFont* parent; // pointer to the `VectorFont` (parent).
             float rotate_angle;                // rotate angle.
-        } Text3DStruct;
+        };
     }
 }
 

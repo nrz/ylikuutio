@@ -29,7 +29,7 @@ namespace yli
     {
         class Material;
 
-        typedef struct VectorFontStruct
+        struct VectorFontStruct
         {
             VectorFontStruct()
                 : parent(nullptr), vertex_scaling_factor(DEFAULT_VERTEX_SCALING_FACTOR)
@@ -42,7 +42,7 @@ namespace yli
             float vertex_scaling_factor;
             std::string font_file_format;    // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
             std::string font_filename;       // filename of the font file.
-        } VectorFontStruct;
+        };
     }
 }
 
