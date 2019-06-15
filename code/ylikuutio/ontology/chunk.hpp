@@ -58,7 +58,7 @@ namespace yli
         {
             public:
                 // constructor.
-                Chunk(const ChunkStruct& chunk_struct)
+                Chunk(const yli::ontology::ChunkStruct& chunk_struct)
                     : Model(chunk_struct.universe, chunk_struct.vram_buffer_in_use)
                 {
                     // constructor.
