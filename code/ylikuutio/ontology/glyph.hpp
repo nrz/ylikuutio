@@ -66,7 +66,7 @@ namespace yli
                     friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
             private:
-                Glyph(const GlyphStruct& glyph_struct)
+                Glyph(const yli::ontology::GlyphStruct& glyph_struct)
                     : Model(glyph_struct.universe, glyph_struct.vram_buffer_in_use)
                 {
                     // constructor.
