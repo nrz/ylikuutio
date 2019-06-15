@@ -120,7 +120,7 @@ namespace yli
                         GLint water_level_uniform_location = glGetUniformLocation(species_struct.shader->get_programID(), "water_level");
                         glUniform1f(water_level_uniform_location, species_struct.scene->get_water_level());
 
-                        SpeciesLoaderStruct species_loader_struct;
+                        yli::load::SpeciesLoaderStruct species_loader_struct;
                         species_loader_struct.model_filename = this->model_filename;
                         species_loader_struct.model_file_format = this->model_file_format;
                         species_loader_struct.latitude = this->latitude;
