@@ -84,8 +84,8 @@ namespace yli
                 // constructor.
                 Console(
                         yli::ontology::Universe* const universe,
-                        std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
-                        std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer);
+                        std::vector<yli::callback_system::KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
+                        std::vector<yli::callback_system::KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer);
 
                 Console(const Console&) = delete;            // Delete copy constructor.
                 Console &operator=(const Console&) = delete; // Delete copy assignment.
@@ -93,8 +93,8 @@ namespace yli
                 // destructor.
                 ~Console();
 
-                void set_my_keypress_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer);
-                void set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer);
+                void set_my_keypress_callback_engine_vector_pointer(std::vector<yli::callback_system::KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer);
+                void set_my_keyrelease_callback_engine_vector_pointer(std::vector<yli::callback_system::KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer);
                 void add_command_callback(const std::string& command, ConsoleCommandCallback callback);
                 void set_console_top_y(const uint32_t console_top_y);
                 void set_console_bottom_y(const uint32_t console_bottom_y);
@@ -376,14 +376,14 @@ namespace yli
                 std::list<char> temp_input;    // This is used for temporary storage of new input while modifying historical inputs.
 
                 // These are related to keypress callbacks.
-                std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer;
-                std::vector<KeyAndCallbackStruct>* previous_keypress_callback_engine_vector_pointer;
-                std::vector<KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer;
+                std::vector<yli::callback_system::KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer;
+                std::vector<yli::callback_system::KeyAndCallbackStruct>* previous_keypress_callback_engine_vector_pointer;
+                std::vector<yli::callback_system::KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer;
 
                 // These are related to keyrelease callbacks.
-                std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
-                std::vector<KeyAndCallbackStruct>* previous_keyrelease_callback_engine_vector_pointer;
-                std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer;
+                std::vector<yli::callback_system::KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
+                std::vector<yli::callback_system::KeyAndCallbackStruct>* previous_keyrelease_callback_engine_vector_pointer;
+                std::vector<yli::callback_system::KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer;
 
                 // `std::unordered_map` contains console command callbacks.
                 std::unordered_map<std::string, ConsoleCommandCallback> command_callback_map;

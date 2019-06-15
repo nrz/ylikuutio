@@ -67,8 +67,8 @@ namespace yli
             bool is_headless;
 
             // These are for `yli::console::Console`.
-            std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer;
-            std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
+            std::vector<yli::callback_system::KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer;
+            std::vector<yli::callback_system::KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
         } UniverseStruct;
     }
 }
