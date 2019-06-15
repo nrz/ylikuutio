@@ -656,7 +656,7 @@ int main(const int argc, const char* const argv[])
     std::string ms_frame_text;
 
     // Print angles and cartesian coordinates on bottom left corner.
-    TextStruct angles_and_coordinates_text_struct;
+    yli::ontology::TextStruct angles_and_coordinates_text_struct;
     angles_and_coordinates_text_struct.font2D_parent = my_font2D;
     angles_and_coordinates_text_struct.screen_width = my_universe->get_window_width();
     angles_and_coordinates_text_struct.screen_height = my_universe->get_window_height();
@@ -670,7 +670,7 @@ int main(const int argc, const char* const argv[])
     yli::ontology::Text2D* angles_and_coordinates_text2D = new yli::ontology::Text2D(my_universe, angles_and_coordinates_text_struct);
 
     // Print spherical coordinates on second line from the bottom left.
-    TextStruct spherical_coordinates_text_struct;
+    yli::ontology::TextStruct spherical_coordinates_text_struct;
     spherical_coordinates_text_struct.font2D_parent = my_font2D;
     spherical_coordinates_text_struct.screen_width = my_universe->get_window_width();
     spherical_coordinates_text_struct.screen_height = my_universe->get_window_height();
@@ -683,7 +683,7 @@ int main(const int argc, const char* const argv[])
     yli::ontology::Text2D* spherical_coordinates_text2D = new yli::ontology::Text2D(my_universe, spherical_coordinates_text_struct);
 
     // Print time data on top left corner.
-    TextStruct time_text_struct;
+    yli::ontology::TextStruct time_text_struct;
     time_text_struct.font2D_parent = my_font2D;
     time_text_struct.screen_width = my_universe->get_window_width();
     time_text_struct.screen_height = my_universe->get_window_height();
@@ -697,7 +697,7 @@ int main(const int argc, const char* const argv[])
     yli::ontology::Text2D* time_text2D = new yli::ontology::Text2D(my_universe, time_text_struct);
 
     // Print help text.
-    TextStruct help_text_struct;
+    yli::ontology::TextStruct help_text_struct;
     help_text_struct.font2D_parent = my_font2D;
     help_text_struct.screen_width = my_universe->get_window_width();
     help_text_struct.screen_height = my_universe->get_window_height();
@@ -711,7 +711,7 @@ int main(const int argc, const char* const argv[])
     yli::ontology::Text2D* help_text2D = new yli::ontology::Text2D(my_universe, help_text_struct);
 
     // Print frame rate data on top right corner.
-    TextStruct frame_rate_text_struct;
+    yli::ontology::TextStruct frame_rate_text_struct;
     frame_rate_text_struct.font2D_parent = my_font2D;
     frame_rate_text_struct.screen_width = my_universe->get_window_width();
     frame_rate_text_struct.screen_height = my_universe->get_window_height();

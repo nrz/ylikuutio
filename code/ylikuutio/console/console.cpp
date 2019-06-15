@@ -273,7 +273,7 @@ namespace yli
             std::size_t characters_for_line = this->universe->get_window_width() / this->universe->get_text_size();
 
             // Draw the console to screen using `font2D::print_text2D`.
-            TextStruct text_struct;
+            yli::ontology::TextStruct text_struct;
             text_struct.screen_width = this->universe->get_window_width();
             text_struct.screen_height = this->universe->get_window_height();
             text_struct.text_size = this->universe->get_text_size();

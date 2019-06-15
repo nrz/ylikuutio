@@ -47,7 +47,7 @@ namespace yli
                 void bind_to_new_parent(yli::ontology::Font2D* const new_parent);
 
                 // constructor.
-                Text2D(yli::ontology::Universe* const universe, const TextStruct& text_struct)
+                Text2D(yli::ontology::Universe* const universe, const yli::ontology::TextStruct& text_struct)
                     : Entity(universe)
                 {
                     this->parent = text_struct.font2D_parent;
