@@ -84,7 +84,7 @@ namespace yli
             }
             else if (species_loader_struct.model_file_format == "srtm" || species_loader_struct.model_file_format == "SRTM")
             {
-                HeightmapLoaderStruct heightmap_loader_struct;
+                yli::load::HeightmapLoaderStruct heightmap_loader_struct;
                 heightmap_loader_struct.latitude = species_loader_struct.latitude;
                 heightmap_loader_struct.longitude = species_loader_struct.longitude;
                 heightmap_loader_struct.planet_radius = species_loader_struct.planet_radius;
