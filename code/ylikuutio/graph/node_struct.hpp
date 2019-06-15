@@ -28,19 +28,19 @@ namespace yli
     namespace graph
     {
         class Graph;
+
+        typedef struct NodeStruct
+        {
+            NodeStruct()
+                : nodeID(std::numeric_limits<std::size_t>::max()), parent(nullptr)
+            {
+                // constructor.
+            }
+            std::size_t nodeID;
+            yli::graph::Graph* parent;
+            std::vector<std::size_t> neighbor_nodeIDs;
+        } NodeStruct;
     }
 }
-
-typedef struct NodeStruct
-{
-    NodeStruct()
-        : nodeID(std::numeric_limits<std::size_t>::max()), parent(nullptr)
-    {
-        // constructor.
-    }
-    std::size_t nodeID;
-    yli::graph::Graph* parent;
-    std::vector<std::size_t> neighbor_nodeIDs;
-} NodeStruct;
 
 #endif
