@@ -587,7 +587,7 @@ namespace yli
                 glm::vec3 current_camera_cartesian_coordinates;
 
                 // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
-                SphericalCoordinatesStruct current_camera_spherical_coordinates;
+                yli::common::SphericalCoordinatesStruct current_camera_spherical_coordinates;
 
                 // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
                 glm::vec3 current_camera_direction;

@@ -109,7 +109,7 @@ namespace yli
                 }
 
                 // constructor.
-                Movable(yli::ontology::Universe* const universe, const SphericalCoordinatesStruct& spherical_coordinates)
+                Movable(yli::ontology::Universe* const universe, const yli::common::SphericalCoordinatesStruct& spherical_coordinates)
                     : Entity(universe)
                 {
                     // constructor.
@@ -188,10 +188,10 @@ namespace yli
                 glm::vec3 cartesian_coordinates;                       // cartesian coordinates.
 
                 // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
-                SphericalCoordinatesStruct spherical_coordinates;      // spherical coordinates.
+                yli::common::SphericalCoordinatesStruct spherical_coordinates;      // spherical coordinates.
 
                 glm::vec3 dest_cartesian_coordinates;                  // cartesian destination coordinates.
-                SphericalCoordinatesStruct dest_spherical_coordinates; // spherical destination coordinates.
+                yli::common::SphericalCoordinatesStruct dest_spherical_coordinates; // spherical destination coordinates.
 
                 // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
                 glm::vec3 direction;

@@ -193,7 +193,7 @@ namespace yli
                 glm::vec3 up;    // note: `up` can not be set directly using console.
 
                 // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
-                SphericalCoordinatesStruct* spherical_coordinates;
+                yli::common::SphericalCoordinatesStruct* spherical_coordinates;
 
                 double horizontal_angle;
                 double vertical_angle;

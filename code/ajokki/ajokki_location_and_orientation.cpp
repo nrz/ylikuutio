@@ -49,7 +49,7 @@ namespace ajokki
         const float float_rho = -5682.32f;
         const float float_theta = -1641.20f;
         const float float_phi = 2376.45f;
-        SphericalCoordinatesStruct spherical_coordinates_struct;
+        yli::common::SphericalCoordinatesStruct spherical_coordinates_struct;
         spherical_coordinates_struct.rho = float_rho;
         spherical_coordinates_struct.theta = float_theta;
         spherical_coordinates_struct.phi = float_phi;

@@ -119,7 +119,7 @@ namespace yli
                 case (CONSOLE_POINTER):
                     return "yli::console::Console*";
                 case (SPHERICAL_COORDINATES_STRUCT_POINTER):
-                    return "SphericalCoordinatesStruct*";
+                    return "yli::common::SphericalCoordinatesStruct*";
                 case (STD_STRING_POINTER):
                     return "std::string*";
                 case (STD_VECTOR_INT8_T_SHARED_PTR):
@@ -681,7 +681,7 @@ namespace yli
 
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
-                        this->spherical_coordinates_struct_pointer = static_cast<SphericalCoordinatesStruct*>(void_pointer);
+                        this->spherical_coordinates_struct_pointer = static_cast<yli::common::SphericalCoordinatesStruct*>(void_pointer);
                         return true;
                     }
                 case (GLM_VEC3_POINTER):
@@ -1363,7 +1363,7 @@ namespace yli
             }
         }
 
-        AnyValue::AnyValue(SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer)
+        AnyValue::AnyValue(yli::common::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer)
         {
             // constructor.
             this->set_default_values();
@@ -1371,12 +1371,12 @@ namespace yli
             this->spherical_coordinates_struct_pointer = spherical_coordinates_struct_pointer;
         }
 
-        AnyValue::AnyValue(const std::string& type, SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer)
+        AnyValue::AnyValue(const std::string& type, yli::common::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer)
         {
             // constructor.
             this->set_default_values();
 
-            if (type == "SphericalCoordinatesStruct*")
+            if (type == "yli::common::SphericalCoordinatesStruct*")
             {
                 this->type = yli::datatypes::SPHERICAL_COORDINATES_STRUCT_POINTER;
                 this->spherical_coordinates_struct_pointer = spherical_coordinates_struct_pointer;

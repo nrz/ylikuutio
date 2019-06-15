@@ -49,7 +49,7 @@ namespace yli
                 const glm::vec3& planar_world_vertex,
                 const double sphere_radius)
         {
-            SphericalCoordinatesStruct spherical_vertex;
+            yli::common::SphericalCoordinatesStruct spherical_vertex;
             spherical_vertex.rho = planar_world_vertex.y + sphere_radius;       // rho is altitude.
             spherical_vertex.theta = DEGREES_TO_RADIANS(planar_world_vertex.x); // theta is longitude, the azimuthal angle.
             spherical_vertex.phi = DEGREES_TO_RADIANS(-planar_world_vertex.z);  // phi is latitude, the polar angle.
