@@ -218,7 +218,7 @@ namespace yli
 
         void Symbiosis::create_symbionts()
         {
-            SymbiosisLoaderStruct symbiosis_loader_struct;
+            yli::load::SymbiosisLoaderStruct symbiosis_loader_struct;
             symbiosis_loader_struct.model_filename = this->model_filename;
             symbiosis_loader_struct.model_file_format = this->model_file_format;
             symbiosis_loader_struct.triangulation_type = this->triangulation_type;
