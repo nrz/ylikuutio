@@ -82,6 +82,8 @@ namespace yli
                         const std::string& font_texture_file_format) const;
                 yli::ontology::Entity* create_Camera(const yli::ontology::CameraStruct& camera_struct) const;
                 yli::ontology::Entity* create_ComputeTask(const yli::ontology::ComputeTaskStruct& compute_task_struct) const;
+                yli::ontology::Entity* create_AnyValueEntity(const std::shared_ptr<yli::datatypes::AnyValue> any_value_shared_ptr) const;
+                yli::ontology::Entity* create_AnyValueEntity(const yli::datatypes::AnyValue& any_value) const;
 
                 friend class Universe;
 
