@@ -52,7 +52,7 @@ namespace yli
                 void unbind_symbiont_species(const std::size_t childID);
 
                 // constructor.
-                SymbiontMaterial(yli::ontology::Universe* const universe, const MaterialStruct& material_struct)
+                SymbiontMaterial(yli::ontology::Universe* const universe, const yli::ontology::MaterialStruct& material_struct)
                     : Material(universe, material_struct)
                 {
                     // constructor.

@@ -66,7 +66,7 @@ namespace yli
                     friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
             private:
-                Glyph(const GlyphStruct& glyph_struct)
+                Glyph(const yli::ontology::GlyphStruct& glyph_struct)
                     : Model(glyph_struct.universe, glyph_struct.vram_buffer_in_use)
                 {
                     // constructor.
@@ -98,7 +98,7 @@ namespace yli
 
                     // TODO: triangulate the vertex data!
 
-                    // TODO: load the vertex data the same way as in `yli::ontology::Species::Species(SpeciesStruct species_struct)`!
+                    // TODO: load the vertex data the same way as in `yli::ontology::Species::Species(yli::ontology::SpeciesStruct species_struct)`!
 
                     // `yli::ontology::Entity` member variables begin here.
                     // `yli::ontology::Model` constructor takes care of `child_vector_pointers_vector`.

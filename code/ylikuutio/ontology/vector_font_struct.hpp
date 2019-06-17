@@ -28,22 +28,22 @@ namespace yli
     namespace ontology
     {
         class Material;
+
+        struct VectorFontStruct
+        {
+            VectorFontStruct()
+                : parent(nullptr), vertex_scaling_factor(DEFAULT_VERTEX_SCALING_FACTOR)
+            {
+                // constructor.
+            }
+
+            // used for all files (for all `VectorFont`s).
+            yli::ontology::Material* parent; // pointer to the `Material`.
+            float vertex_scaling_factor;
+            std::string font_file_format;    // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
+            std::string font_filename;       // filename of the font file.
+        };
     }
 }
-
-typedef struct VectorFontStruct
-{
-    VectorFontStruct()
-        : parent(nullptr), vertex_scaling_factor(DEFAULT_VERTEX_SCALING_FACTOR)
-    {
-        // constructor.
-    }
-
-    // used for all files (for all `VectorFont`s).
-    yli::ontology::Material* parent; // pointer to the `Material`.
-    float vertex_scaling_factor;
-    std::string font_file_format;    // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
-    std::string font_filename;       // filename of the font file.
-} VectorFontStruct;
 
 #endif

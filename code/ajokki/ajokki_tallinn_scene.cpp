@@ -72,7 +72,7 @@ namespace ajokki
         tallinn_scene->set_twin_turbo_factor(100.0f);
 
         // Create the shader, store it in `tallinn_shader`.
-        ShaderStruct tallinn_shader_struct;
+        yli::ontology::ShaderStruct tallinn_shader_struct;
         tallinn_shader_struct.parent = tallinn_scene;
         tallinn_shader_struct.vertex_shader = "standard_shading.vert";
         tallinn_shader_struct.fragment_shader = "standard_shading.frag";
@@ -89,7 +89,7 @@ namespace ajokki
         }
 
         // Create the material, store it in `tallinn_grass_material`.
-        MaterialStruct tallinn_grass_material_struct;
+        yli::ontology::MaterialStruct tallinn_grass_material_struct;
         tallinn_grass_material_struct.shader = tallinn_shader;
         tallinn_grass_material_struct.texture_file_format = "bmp";
         tallinn_grass_material_struct.texture_filename = "GrassGreenTexture0002.bmp";
@@ -108,7 +108,7 @@ namespace ajokki
         tallinn_grass_material->set_name("tallinn_grass_material");
 
         // Create the species, store it in `terrain_species`.
-        SpeciesStruct(tallinn_terrain_species_struct);
+        yli::ontology::SpeciesStruct(tallinn_terrain_species_struct);
         tallinn_terrain_species_struct.scene = tallinn_scene;
         tallinn_terrain_species_struct.shader = tallinn_shader;
         tallinn_terrain_species_struct.material = tallinn_grass_material;
@@ -134,7 +134,7 @@ namespace ajokki
         tallinn_terrain_species->set_name("tallinn_terrain_species");
 
         // Create tallinn terrain.
-        ObjectStruct tallinn_struct;
+        yli::ontology::ObjectStruct tallinn_struct;
         tallinn_struct.species_parent = tallinn_terrain_species;
         tallinn_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         tallinn_struct.rotate_angle = 0.0f;

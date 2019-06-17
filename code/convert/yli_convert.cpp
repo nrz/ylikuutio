@@ -142,7 +142,7 @@ int main(const int argc, const char* argv[])
     }
 
     // Always load the 3D object into a `yli::ontology::Symbiosis`.
-    SymbiosisStruct symbiosis_struct;
+    yli::ontology::SymbiosisStruct symbiosis_struct;
     symbiosis_struct.model_filename = in_file;
     symbiosis_struct.model_file_format = in_file_format;
     symbiosis_struct.triangulation_type = "bilinear_interpolation";

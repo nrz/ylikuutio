@@ -80,7 +80,7 @@ namespace ajokki
         helsinki_east_downtown_scene->set_twin_turbo_factor(100.0f);
 
         // Create the shader, store it in `helsinki_east_downtown_shader`.
-        ShaderStruct helsinki_east_downtown_shader_struct;
+        yli::ontology::ShaderStruct helsinki_east_downtown_shader_struct;
         helsinki_east_downtown_shader_struct.parent = helsinki_east_downtown_scene;
         helsinki_east_downtown_shader_struct.vertex_shader = "standard_shading.vert";
         helsinki_east_downtown_shader_struct.fragment_shader = "standard_shading.frag";
@@ -99,7 +99,7 @@ namespace ajokki
         helsinki_east_downtown_shader->set_name("helsinki_east_downtown_shader");
 
         // Create the material, store it in `helsinki_east_downtown_grass_material`.
-        MaterialStruct helsinki_east_downtown_grass_material_struct;
+        yli::ontology::MaterialStruct helsinki_east_downtown_grass_material_struct;
         helsinki_east_downtown_grass_material_struct.shader = helsinki_east_downtown_shader;
         helsinki_east_downtown_grass_material_struct.texture_file_format = "bmp";
         helsinki_east_downtown_grass_material_struct.texture_filename = "GrassGreenTexture0002.bmp";
@@ -118,7 +118,7 @@ namespace ajokki
         helsinki_east_downtown_grass_material->set_name("helsinki_east_downtown_grass_material");
 
         // Create the material, store it in `pink_geometric_tiles_material`.
-        MaterialStruct pink_geometric_tiles_material_struct;
+        yli::ontology::MaterialStruct pink_geometric_tiles_material_struct;
         pink_geometric_tiles_material_struct.shader = helsinki_east_downtown_shader;
         pink_geometric_tiles_material_struct.texture_file_format = "bmp";
         pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.bmp";
@@ -137,7 +137,7 @@ namespace ajokki
         pink_geometric_tiles_material->set_name("helsinki_east_downtown_pink_geometric_tiles_material");
 
         // Create the material, store it in `orange_fur_material`.
-        MaterialStruct orange_fur_material_struct;
+        yli::ontology::MaterialStruct orange_fur_material_struct;
         orange_fur_material_struct.shader = helsinki_east_downtown_shader;
         orange_fur_material_struct.texture_file_format = "bmp";
         orange_fur_material_struct.texture_filename = "orange_fur_texture.bmp";
@@ -155,7 +155,7 @@ namespace ajokki
 
         orange_fur_material->set_name("helsinki_east_downtown_orange_fur_material");
 
-        SpeciesStruct helsinki_east_downtown_terrain_species_struct;
+        yli::ontology::SpeciesStruct helsinki_east_downtown_terrain_species_struct;
         helsinki_east_downtown_terrain_species_struct.scene = helsinki_east_downtown_scene;
         helsinki_east_downtown_terrain_species_struct.shader = helsinki_east_downtown_shader;
         helsinki_east_downtown_terrain_species_struct.material = helsinki_east_downtown_grass_material;
@@ -179,7 +179,7 @@ namespace ajokki
         helsinki_east_downtown_terrain_species->set_name("helsinki_east_downtown_terrain_species");
 
         // Create Helsinki eastern downtown terrain.
-        ObjectStruct helsinki_east_downtown_struct;
+        yli::ontology::ObjectStruct helsinki_east_downtown_struct;
         helsinki_east_downtown_struct.species_parent = helsinki_east_downtown_terrain_species;
         helsinki_east_downtown_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         helsinki_east_downtown_struct.rotate_angle = 0.0f;
@@ -187,7 +187,7 @@ namespace ajokki
         helsinki_east_downtown_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_Object(helsinki_east_downtown_struct);
 
-        SpeciesStruct suzanne_species_struct;
+        yli::ontology::SpeciesStruct suzanne_species_struct;
         suzanne_species_struct.scene = helsinki_east_downtown_scene;
         suzanne_species_struct.shader = helsinki_east_downtown_shader;
         suzanne_species_struct.material = orange_fur_material;
@@ -209,7 +209,7 @@ namespace ajokki
         suzanne_species->set_name("suzanne_species");
 
         // Create suzanne1, store it in `suzanne1`.
-        ObjectStruct suzanne_object_struct1;
+        yli::ontology::ObjectStruct suzanne_object_struct1;
         suzanne_object_struct1.species_parent = suzanne_species;
         suzanne_object_struct1.cartesian_coordinates = glm::vec3(82.50f, 119.00f, 95.50f);
         suzanne_object_struct1.rotate_angle = 0.10f;
@@ -229,7 +229,7 @@ namespace ajokki
         suzanne1->set_name("suzanne1");
 
         suzanne_species->set_name("suzanne_species");
-        ObjectStruct suzanne_object_struct2;
+        yli::ontology::ObjectStruct suzanne_object_struct2;
         suzanne_object_struct2.species_parent = suzanne_species;
         suzanne_object_struct2.cartesian_coordinates = glm::vec3(112.90f, 113.90f, 75.50f);
         suzanne_object_struct2.rotate_angle = 0.20f;
@@ -248,7 +248,7 @@ namespace ajokki
 
         suzanne2->set_name("suzanne2");
 
-        ObjectStruct suzanne_object_struct3;
+        yli::ontology::ObjectStruct suzanne_object_struct3;
         suzanne_object_struct3.species_parent = suzanne_species;
         suzanne_object_struct3.cartesian_coordinates = glm::vec3(126.90f, 162.90f, 103.00f);
         suzanne_object_struct3.rotate_angle = 0.05f;
@@ -267,7 +267,7 @@ namespace ajokki
 
         suzanne3->set_name("suzanne3");
 
-        ObjectStruct suzanne_object_struct4;
+        yli::ontology::ObjectStruct suzanne_object_struct4;
         suzanne_object_struct4.species_parent = suzanne_species;
         suzanne_object_struct4.cartesian_coordinates = glm::vec3(96.00f, 130.00f, 109.00f);
         suzanne_object_struct4.rotate_angle = 0.15f;
@@ -286,7 +286,7 @@ namespace ajokki
 
         suzanne4->set_name("suzanne4");
 
-        ObjectStruct suzanne_object_struct5;
+        yli::ontology::ObjectStruct suzanne_object_struct5;
         suzanne_object_struct5.species_parent = suzanne_species;
         suzanne_object_struct5.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
         suzanne_object_struct5.cartesian_coordinates = glm::vec3(103.00f, 140.00f, 109.00f);
@@ -306,7 +306,7 @@ namespace ajokki
 
         suzanne5->set_name("suzanne5");
 
-        SpeciesStruct cat_species_struct;
+        yli::ontology::SpeciesStruct cat_species_struct;
         cat_species_struct.scene = helsinki_east_downtown_scene;
         cat_species_struct.shader = helsinki_east_downtown_shader;
         cat_species_struct.material = orange_fur_material;
@@ -328,7 +328,7 @@ namespace ajokki
 
         cat_species->set_name("cat_species");
 
-        ObjectStruct cat_object_struct1;
+        yli::ontology::ObjectStruct cat_object_struct1;
         cat_object_struct1.species_parent = cat_species;
         cat_object_struct1.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
         cat_object_struct1.cartesian_coordinates = glm::vec3(500.00f, 100.00f, 1000.00f);
@@ -346,7 +346,7 @@ namespace ajokki
 
         cat1->set_name("cat1");
 
-        ObjectStruct cat_object_struct2;
+        yli::ontology::ObjectStruct cat_object_struct2;
         cat_object_struct2.species_parent = cat_species;
         cat_object_struct2.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
         cat_object_struct2.cartesian_coordinates = glm::vec3(700.00f, 100.00f, 1200.00f);
@@ -364,7 +364,7 @@ namespace ajokki
 
         cat2->set_name("cat2");
 
-        SymbiosisStruct freight_train_symbiosis_struct;
+        yli::ontology::SymbiosisStruct freight_train_symbiosis_struct;
         freight_train_symbiosis_struct.parent = helsinki_east_downtown_shader;
         freight_train_symbiosis_struct.model_file_format = "fbx";
         freight_train_symbiosis_struct.model_filename = "freight_train.fbx";
@@ -384,7 +384,7 @@ namespace ajokki
 
         freight_train_symbiosis->set_name("freight_train_symbiosis");
 
-        HolobiontStruct freight_train_object_struct1;
+        yli::ontology::HolobiontStruct freight_train_object_struct1;
         freight_train_object_struct1.symbiosis_parent = freight_train_symbiosis;
         freight_train_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         freight_train_object_struct1.cartesian_coordinates = glm::vec3(125.00f, 40.00f, 80.00f);
@@ -408,7 +408,7 @@ namespace ajokki
 
         freight_train1->set_name("freight_train1");
 
-        SymbiosisStruct turbo_polizei_symbiosis_struct;
+        yli::ontology::SymbiosisStruct turbo_polizei_symbiosis_struct;
         turbo_polizei_symbiosis_struct.parent = helsinki_east_downtown_shader;
         turbo_polizei_symbiosis_struct.model_file_format = "fbx";
         turbo_polizei_symbiosis_struct.model_filename = "turbo_polizei.fbx";
@@ -428,7 +428,7 @@ namespace ajokki
 
         turbo_polizei_symbiosis->set_name("turbo_polizei_symbiosis");
 
-        HolobiontStruct turbo_polizei_object_struct1;
+        yli::ontology::HolobiontStruct turbo_polizei_object_struct1;
         turbo_polizei_object_struct1.symbiosis_parent = turbo_polizei_symbiosis;
         turbo_polizei_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         turbo_polizei_object_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 175.00f);
@@ -452,7 +452,7 @@ namespace ajokki
 
         turbo_polizei1->set_name("turbo_polizei1");
 
-        SymbiosisStruct fantasy_house_with_balcony_symbiosis_struct;
+        yli::ontology::SymbiosisStruct fantasy_house_with_balcony_symbiosis_struct;
         fantasy_house_with_balcony_symbiosis_struct.parent = helsinki_east_downtown_shader;
         fantasy_house_with_balcony_symbiosis_struct.model_file_format = "fbx";
         fantasy_house_with_balcony_symbiosis_struct.model_filename = "fantasy_house_with_balcony.fbx";
@@ -472,7 +472,7 @@ namespace ajokki
 
         fantasy_house_with_balcony_symbiosis->set_name("fantasy_house_with_balcony_symbiosis");
 
-        HolobiontStruct fantasy_house_with_balcony_object_struct1;
+        yli::ontology::HolobiontStruct fantasy_house_with_balcony_object_struct1;
         fantasy_house_with_balcony_object_struct1.symbiosis_parent = fantasy_house_with_balcony_symbiosis;
         fantasy_house_with_balcony_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         fantasy_house_with_balcony_object_struct1.cartesian_coordinates = glm::vec3(268.00f, 59.00f, 174.00f);
@@ -497,7 +497,7 @@ namespace ajokki
 
         fantasy_house_with_balcony1->set_name("fantasy_house_with_balcony1");
 
-        HolobiontStruct fantasy_house_with_balcony_object_struct2;
+        yli::ontology::HolobiontStruct fantasy_house_with_balcony_object_struct2;
         fantasy_house_with_balcony_object_struct2.symbiosis_parent = fantasy_house_with_balcony_symbiosis;
         fantasy_house_with_balcony_object_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         fantasy_house_with_balcony_object_struct2.cartesian_coordinates = glm::vec3(252.00f, 23.50f, 2614.00f);
@@ -523,7 +523,7 @@ namespace ajokki
 
         fantasy_house_with_balcony2->set_name("fantasy_house_with_balcony2");
 
-        VectorFontStruct kongtext_vector_font_struct;
+        yli::ontology::VectorFontStruct kongtext_vector_font_struct;
         kongtext_vector_font_struct.parent = helsinki_east_downtown_grass_material;
         kongtext_vector_font_struct.font_file_format = "svg";
         kongtext_vector_font_struct.font_filename = "kongtext.svg";
@@ -539,7 +539,7 @@ namespace ajokki
             return nullptr;
         }
 
-        Text3DStruct text3D_struct;
+        yli::ontology::Text3DStruct text3D_struct;
         text3D_struct.parent = kongtext_font;
         text3D_struct.text_string = "Hello world &#x26; its habitants!";
         text3D_struct.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -549,7 +549,7 @@ namespace ajokki
         text3D_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_Text3D(text3D_struct);
 
-        CameraStruct cat_camera_struct;
+        yli::ontology::CameraStruct cat_camera_struct;
         cat_camera_struct.cartesian_coordinates = glm::vec3(800.00f, 400.00f, 950.00f);
         cat_camera_struct.parent = helsinki_east_downtown_scene;
         cat_camera_struct.horizontal_angle = -0.90f;
@@ -568,7 +568,7 @@ namespace ajokki
 
         cat_camera->set_name("cat_camera");
 
-        CameraStruct turbo_polizei_camera_struct;
+        yli::ontology::CameraStruct turbo_polizei_camera_struct;
         turbo_polizei_camera_struct.cartesian_coordinates = glm::vec3(87.00f, 28.00f, 169.00f);
         turbo_polizei_camera_struct.parent = helsinki_east_downtown_scene;
         turbo_polizei_camera_struct.horizontal_angle = -0.45f;

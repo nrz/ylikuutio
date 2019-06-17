@@ -498,6 +498,8 @@ add_library(ylikuutio STATIC
     # code/ylikuutio/network/tcp_server.hpp
 
     # ontology, in alphabetical order
+    code/ylikuutio/ontology/any_struct_entity.hpp
+    code/ylikuutio/ontology/any_value_entity.hpp
     code/ylikuutio/ontology/biont.cpp
     code/ylikuutio/ontology/biont.hpp
     code/ylikuutio/ontology/biont_struct.hpp

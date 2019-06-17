@@ -53,7 +53,7 @@ namespace yli
     namespace load
     {
         bool load_SRTM_terrain(
-                const HeightmapLoaderStruct& heightmap_loader_struct,
+                const yli::load::HeightmapLoaderStruct& heightmap_loader_struct,
                 const std::string& image_path,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,

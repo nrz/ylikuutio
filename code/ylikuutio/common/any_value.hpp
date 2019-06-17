@@ -137,7 +137,7 @@ namespace yli
                 AnyValue(yli::ontology::Symbiosis* const symbiosis_pointer);
                 AnyValue(yli::ontology::Font2D* const font2D_pointer);
                 AnyValue(yli::console::Console* const console_pointer);
-                AnyValue(SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
+                AnyValue(yli::common::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
                 AnyValue(std::string* const std_string_pointer);
                 AnyValue(std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr);
                 AnyValue(std::shared_ptr<std::vector<uint8_t>> std_vector_uint8_t_shared_ptr);
@@ -173,7 +173,7 @@ namespace yli
                 AnyValue(const std::string& type, yli::ontology::Symbiosis* const symbiosis_pointer);
                 AnyValue(const std::string& type, yli::ontology::Font2D* const font2D_pointer);
                 AnyValue(const std::string& type, yli::console::Console* const console_pointer);
-                AnyValue(const std::string& type, SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
+                AnyValue(const std::string& type, yli::common::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
                 AnyValue(const std::string& type, std::string* const std_string_pointer);
                 AnyValue(const std::string& type, std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr);
                 AnyValue(const std::string& type, std::shared_ptr<std::vector<uint8_t>> std_vector_uint8_t_shared_ptr);
@@ -220,7 +220,7 @@ namespace yli
                     yli::ontology::Symbiosis* symbiosis_pointer;
                     yli::ontology::Font2D* font2D_pointer;
                     yli::console::Console* console_pointer;
-                    SphericalCoordinatesStruct* spherical_coordinates_struct_pointer;
+                    yli::common::SphericalCoordinatesStruct* spherical_coordinates_struct_pointer;
                     std::string* std_string_pointer;
                     glm::vec3* glm_vec3_pointer;
                     glm::vec4* glm_vec4_pointer;

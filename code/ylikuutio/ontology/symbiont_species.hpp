@@ -63,7 +63,7 @@ namespace yli
                 GLint get_lightID() const;
 
                 // constructor.
-                SymbiontSpecies(yli::ontology::Universe* const universe, const SpeciesStruct& species_struct)
+                SymbiontSpecies(yli::ontology::Universe* const universe, const yli::ontology::SpeciesStruct& species_struct)
                     : Species(universe, species_struct)
                 {
                     // constructor.

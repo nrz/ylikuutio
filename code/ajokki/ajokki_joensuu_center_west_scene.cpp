@@ -74,7 +74,7 @@ namespace ajokki
         joensuu_center_west_scene->set_twin_turbo_factor(100.0f);
 
         // Create the shader, store it in `joensuu_center_west_shader`.
-        ShaderStruct joensuu_center_west_shader_struct;
+        yli::ontology::ShaderStruct joensuu_center_west_shader_struct;
         joensuu_center_west_shader_struct.parent = joensuu_center_west_scene;
         joensuu_center_west_shader_struct.vertex_shader = "standard_shading.vert";
         joensuu_center_west_shader_struct.fragment_shader = "standard_shading.frag";
@@ -93,7 +93,7 @@ namespace ajokki
         joensuu_center_west_shader->set_name("joensuu_center_west_shader");
 
         // Create the material, store it in `joensuu_center_west_grass_material_struct`.
-        MaterialStruct joensuu_center_west_grass_material_struct;
+        yli::ontology::MaterialStruct joensuu_center_west_grass_material_struct;
         joensuu_center_west_grass_material_struct.shader = joensuu_center_west_shader;
         joensuu_center_west_grass_material_struct.texture_file_format = "bmp";
         joensuu_center_west_grass_material_struct.texture_filename = "GrassGreenTexture0002.bmp";
@@ -111,7 +111,7 @@ namespace ajokki
 
         joensuu_center_west_grass_material->set_name("joensuu_center_west_grass_material");
 
-        SpeciesStruct joensuu_center_west_terrain_species_struct;
+        yli::ontology::SpeciesStruct joensuu_center_west_terrain_species_struct;
         joensuu_center_west_terrain_species_struct.scene = joensuu_center_west_scene;
         joensuu_center_west_terrain_species_struct.shader = joensuu_center_west_shader;
         joensuu_center_west_terrain_species_struct.material = joensuu_center_west_grass_material;
@@ -135,7 +135,7 @@ namespace ajokki
         joensuu_center_west_terrain_species->set_name("joensuu_center_west_terrain_species");
 
         // Create Joensuu center west terrain.
-        ObjectStruct joensuu_center_west_struct;
+        yli::ontology::ObjectStruct joensuu_center_west_struct;
         joensuu_center_west_struct.species_parent = joensuu_center_west_terrain_species;
         joensuu_center_west_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         joensuu_center_west_struct.rotate_angle = 0.0f;
@@ -144,7 +144,7 @@ namespace ajokki
         entity_factory->create_Object(joensuu_center_west_struct);
 
         // Create the material, store it in `orange_fur_material_joensuu`.
-        MaterialStruct orange_fur_material_joensuu_struct;
+        yli::ontology::MaterialStruct orange_fur_material_joensuu_struct;
         orange_fur_material_joensuu_struct.shader = joensuu_center_west_shader;
         orange_fur_material_joensuu_struct.texture_file_format = "bmp";
         orange_fur_material_joensuu_struct.texture_filename = "orange_fur_texture.bmp";
@@ -162,7 +162,7 @@ namespace ajokki
 
         orange_fur_material_joensuu->set_name("joensuu_center_west_orange_fur_material");
 
-        SpeciesStruct horse_species_struct;
+        yli::ontology::SpeciesStruct horse_species_struct;
         horse_species_struct.scene = joensuu_center_west_scene;
         horse_species_struct.shader = joensuu_center_west_shader;
         horse_species_struct.material = orange_fur_material_joensuu;
@@ -184,7 +184,7 @@ namespace ajokki
 
         horse_species->set_name("horse_species");
 
-        ObjectStruct horse_object_struct1;
+        yli::ontology::ObjectStruct horse_object_struct1;
         horse_object_struct1.species_parent = horse_species;
         horse_object_struct1.original_scale_vector = glm::vec3(5.0f, 5.0f, 5.0f);
         horse_object_struct1.cartesian_coordinates = glm::vec3(2150.00f, 200.00f, 1990.00f);
@@ -202,7 +202,7 @@ namespace ajokki
 
         horse1->set_name("horse1");
 
-        CameraStruct horse_camera_struct;
+        yli::ontology::CameraStruct horse_camera_struct;
         horse_camera_struct.cartesian_coordinates = glm::vec3(2303.00f, 201.00f, 1822.00f);
         horse_camera_struct.parent = joensuu_center_west_scene;
         horse_camera_struct.horizontal_angle = -0.97f;

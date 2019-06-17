@@ -22,21 +22,27 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 
-typedef struct HeightmapLoaderStruct
+namespace yli
 {
-    HeightmapLoaderStruct()
-        : latitude(NAN),
-        longitude(NAN),
-        planet_radius(NAN),
-        divisor(NAN)
+    namespace load
     {
-        // constructor.
-    }
+        struct HeightmapLoaderStruct
+        {
+            HeightmapLoaderStruct()
+                : latitude(NAN),
+                longitude(NAN),
+                planet_radius(NAN),
+                divisor(NAN)
+            {
+                // constructor.
+            }
 
-    float latitude;
-    float longitude;
-    float planet_radius;
-    float divisor;
-} HeightmapLoaderStruct;
+            float latitude;
+            float longitude;
+            float planet_radius;
+            float divisor;
+        };
+    }
+}
 
 #endif

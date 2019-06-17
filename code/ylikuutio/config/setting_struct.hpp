@@ -27,34 +27,34 @@
 
 namespace yli
 {
-    namespace config
-    {
-        class SettingMaster;
-    }
-
     namespace datatypes
     {
         class AnyValue;
     }
-}
 
-typedef struct SettingStruct
-{
-    SettingStruct(std::shared_ptr<yli::datatypes::AnyValue> initial_value)
-        : initial_value(initial_value),
-        setting_master(nullptr),
-        activate_callback(nullptr),
-        read_callback(nullptr),
-        should_ylikuutio_call_activate_callback_now(true)
+    namespace config
     {
-        // constructor.
+        class SettingMaster;
+
+        struct SettingStruct
+        {
+            SettingStruct(std::shared_ptr<yli::datatypes::AnyValue> initial_value)
+                : initial_value(initial_value),
+                setting_master(nullptr),
+                activate_callback(nullptr),
+                read_callback(nullptr),
+                should_ylikuutio_call_activate_callback_now(true)
+            {
+                // constructor.
+            }
+            std::string name;
+            std::shared_ptr<yli::datatypes::AnyValue> initial_value;
+            yli::config::SettingMaster* setting_master;
+            ActivateCallback activate_callback;
+            ReadCallback read_callback;
+            bool should_ylikuutio_call_activate_callback_now;
+        };
     }
-    std::string name;
-    std::shared_ptr<yli::datatypes::AnyValue> initial_value;
-    yli::config::SettingMaster* setting_master;
-    ActivateCallback activate_callback;
-    ReadCallback read_callback;
-    bool should_ylikuutio_call_activate_callback_now;
-} SettingStruct;
+}
 
 #endif

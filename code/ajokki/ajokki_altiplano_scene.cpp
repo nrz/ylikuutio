@@ -72,7 +72,7 @@ namespace ajokki
         altiplano_scene->set_twin_turbo_factor(100.0f);
 
         // Create the shader, store it in `altiplano_shader`.
-        ShaderStruct altiplano_shader_struct;
+        yli::ontology::ShaderStruct altiplano_shader_struct;
         altiplano_shader_struct.parent = altiplano_scene;
         altiplano_shader_struct.vertex_shader = "standard_shading.vert";
         altiplano_shader_struct.fragment_shader = "standard_shading.frag";
@@ -89,7 +89,7 @@ namespace ajokki
         }
 
         // Create the material, store it in `altiplano_grass_material`.
-        MaterialStruct altiplano_grass_material_struct;
+        yli::ontology::MaterialStruct altiplano_grass_material_struct;
         altiplano_grass_material_struct.shader = altiplano_shader;
         altiplano_grass_material_struct.texture_file_format = "bmp";
         altiplano_grass_material_struct.texture_filename = "GrassGreenTexture0002.bmp";
@@ -108,7 +108,7 @@ namespace ajokki
         altiplano_grass_material->set_name("altiplano_grass_material");
 
         // Create the species, store it in `terrain_species`.
-        SpeciesStruct(altiplano_terrain_species_struct);
+        yli::ontology::SpeciesStruct(altiplano_terrain_species_struct);
         altiplano_terrain_species_struct.scene = altiplano_scene;
         altiplano_terrain_species_struct.shader = altiplano_shader;
         altiplano_terrain_species_struct.material = altiplano_grass_material;
@@ -134,7 +134,7 @@ namespace ajokki
         altiplano_terrain_species->set_name("altiplano_terrain_species");
 
         // Create altiplano terrain.
-        ObjectStruct altiplano_struct;
+        yli::ontology::ObjectStruct altiplano_struct;
         altiplano_struct.species_parent = altiplano_terrain_species;
         altiplano_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         altiplano_struct.rotate_angle = 0.0f;

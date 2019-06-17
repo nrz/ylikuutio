@@ -21,16 +21,22 @@
 // Include standard headers
 #include <string>   // std::string
 
-typedef struct SymbiosisLoaderStruct
+namespace yli
 {
-    SymbiosisLoaderStruct()
-        : triangulation_type("bilinear_interpolation")
+    namespace load
     {
-        // constructor.
+        struct SymbiosisLoaderStruct
+        {
+            SymbiosisLoaderStruct()
+                : triangulation_type("bilinear_interpolation")
+            {
+                // constructor.
+            }
+            std::string model_filename;
+            std::string model_file_format;
+            std::string triangulation_type; // for all.
+        };
     }
-    std::string model_filename;
-    std::string model_file_format;
-    std::string triangulation_type; // for all.
-} SymbiosisLoaderStruct;
+}
 
 #endif

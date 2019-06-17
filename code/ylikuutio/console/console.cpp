@@ -45,8 +45,8 @@ namespace yli
     {
         Console::Console(
                 yli::ontology::Universe* const universe,
-                std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
-                std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer)
+                std::vector<yli::callback_system::KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
+                std::vector<yli::callback_system::KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer)
         {
             // constructor.
             this->should_be_rendered = true;
@@ -80,11 +80,11 @@ namespace yli
 
             std::cout << "Defining pointers in Console::Console\n";
 
-            // This is a pointer to `std::vector<KeyAndCallbackStruct>*` that controls keypress callbacks.
+            // This is a pointer to `std::vector<yli::callback_system::KeyAndCallbackStruct>*` that controls keypress callbacks.
             this->current_keypress_callback_engine_vector_pointer_pointer = current_keypress_callback_engine_vector_pointer_pointer;
             std::cout << "1st pointer defined in Console::Console\n";
 
-            // This is a pointer to `std::vector<KeyAndCallbackStruct>*` that controls keyrelease callbacks.
+            // This is a pointer to `std::vector<yli::callback_system::KeyAndCallbackStruct>*` that controls keyrelease callbacks.
             this->current_keyrelease_callback_engine_vector_pointer_pointer = current_keyrelease_callback_engine_vector_pointer_pointer;
             std::cout << "2nd pointer defined in Console::Console\n";
 
@@ -144,7 +144,7 @@ namespace yli
             this->exit_console();
         }
 
-        void Console::set_my_keypress_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer)
+        void Console::set_my_keypress_callback_engine_vector_pointer(std::vector<yli::callback_system::KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer)
         {
             this->my_keypress_callback_engine_vector_pointer = my_keypress_callback_engine_vector_pointer;
         }
@@ -202,7 +202,7 @@ namespace yli
             }
         }
 
-        void Console::set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer)
+        void Console::set_my_keyrelease_callback_engine_vector_pointer(std::vector<yli::callback_system::KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer)
         {
             this->my_keyrelease_callback_engine_vector_pointer = my_keyrelease_callback_engine_vector_pointer;
         }
@@ -273,7 +273,7 @@ namespace yli
             std::size_t characters_for_line = this->universe->get_window_width() / this->universe->get_text_size();
 
             // Draw the console to screen using `font2D::print_text2D`.
-            TextStruct text_struct;
+            yli::ontology::TextStruct text_struct;
             text_struct.screen_width = this->universe->get_window_width();
             text_struct.screen_height = this->universe->get_window_height();
             text_struct.text_size = this->universe->get_text_size();

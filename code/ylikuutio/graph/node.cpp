@@ -44,7 +44,7 @@ namespace yli
             graph->bind_node(this);
         }
 
-        Node::Node(const NodeStruct& node_struct)
+        Node::Node(const yli::graph::NodeStruct& node_struct)
         {
             // constructor.
             this->childID = node_struct.nodeID;

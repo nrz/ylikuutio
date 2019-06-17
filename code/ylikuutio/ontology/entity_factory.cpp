@@ -31,6 +31,8 @@
 #include "font2D.hpp"
 #include "camera.hpp"
 #include "compute_task.hpp"
+#include "any_value_entity.hpp"
+#include "any_struct_entity.hpp"
 #include "shader_struct.hpp"
 #include "material_struct.hpp"
 #include "species_struct.hpp"
@@ -41,6 +43,8 @@
 #include "text3D_struct.hpp"
 #include "camera_struct.hpp"
 #include "compute_task_struct.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/common/any_struct.hpp"
 
 // Include standard headers
 #include <cstddef>   // std::size_t
@@ -77,42 +81,42 @@ namespace yli
             return new yli::ontology::Scene(this->universe, world, water_level);
         }
 
-        yli::ontology::Entity* EntityFactory::create_Shader(const ShaderStruct& shader_struct) const
+        yli::ontology::Entity* EntityFactory::create_Shader(const yli::ontology::ShaderStruct& shader_struct) const
         {
             return new yli::ontology::Shader(this->universe, shader_struct);
         }
 
-        yli::ontology::Entity* EntityFactory::create_Material(const MaterialStruct& material_struct) const
+        yli::ontology::Entity* EntityFactory::create_Material(const yli::ontology::MaterialStruct& material_struct) const
         {
             return new yli::ontology::Material(this->universe, material_struct);
         }
 
-        yli::ontology::Entity* EntityFactory::create_Species(const SpeciesStruct& species_struct) const
+        yli::ontology::Entity* EntityFactory::create_Species(const yli::ontology::SpeciesStruct& species_struct) const
         {
             return new yli::ontology::Species(this->universe, species_struct);
         }
 
-        yli::ontology::Entity* EntityFactory::create_Object(const ObjectStruct& object_struct) const
+        yli::ontology::Entity* EntityFactory::create_Object(const yli::ontology::ObjectStruct& object_struct) const
         {
             return new yli::ontology::Object(this->universe, object_struct);
         }
 
-        yli::ontology::Entity* EntityFactory::create_Symbiosis(const SymbiosisStruct& symbiosis_struct) const
+        yli::ontology::Entity* EntityFactory::create_Symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const
         {
             return new yli::ontology::Symbiosis(this->universe, symbiosis_struct);
         }
 
-        yli::ontology::Entity* EntityFactory::create_Holobiont(const HolobiontStruct& holobiont_struct) const
+        yli::ontology::Entity* EntityFactory::create_Holobiont(const yli::ontology::HolobiontStruct& holobiont_struct) const
         {
             return new yli::ontology::Holobiont(this->universe, holobiont_struct);
         }
 
-        yli::ontology::Entity* EntityFactory::create_VectorFont(const VectorFontStruct& vector_font_struct) const
+        yli::ontology::Entity* EntityFactory::create_VectorFont(const yli::ontology::VectorFontStruct& vector_font_struct) const
         {
             return new yli::ontology::VectorFont(this->universe, vector_font_struct);
         }
 
-        yli::ontology::Entity* EntityFactory::create_Text3D(const Text3DStruct& text3D_struct) const
+        yli::ontology::Entity* EntityFactory::create_Text3D(const yli::ontology::Text3DStruct& text3D_struct) const
         {
             return new yli::ontology::Text3D(this->universe, text3D_struct);
         }
@@ -133,14 +137,34 @@ namespace yli
                     font_texture_file_format.c_str());
         }
 
-        yli::ontology::Entity* EntityFactory::create_Camera(const CameraStruct& camera_struct) const
+        yli::ontology::Entity* EntityFactory::create_Camera(const yli::ontology::CameraStruct& camera_struct) const
         {
             return new yli::ontology::Camera(this->universe, camera_struct);
         }
 
-        yli::ontology::Entity* EntityFactory::create_ComputeTask(const ComputeTaskStruct& compute_task_struct) const
+        yli::ontology::Entity* EntityFactory::create_ComputeTask(const yli::ontology::ComputeTaskStruct& compute_task_struct) const
         {
             return new yli::ontology::ComputeTask(this->universe, compute_task_struct);
+        }
+
+        yli::ontology::Entity* EntityFactory::create_AnyValueEntity(const std::shared_ptr<yli::datatypes::AnyValue> any_value_shared_ptr) const
+        {
+            return new yli::ontology::AnyValueEntity(this->universe, any_value_shared_ptr);
+        }
+
+        yli::ontology::Entity* EntityFactory::create_AnyValueEntity(const yli::datatypes::AnyValue& any_value) const
+        {
+            return new yli::ontology::AnyValueEntity(this->universe, any_value);
+        }
+
+        yli::ontology::Entity* EntityFactory::create_AnyStructEntity() const
+        {
+            return new yli::ontology::AnyStructEntity(this->universe);
+        }
+
+        yli::ontology::Entity* EntityFactory::create_AnyStructEntity(const yli::datatypes::AnyStruct& any_struct) const
+        {
+            return new yli::ontology::AnyStructEntity(this->universe, any_struct);
         }
     }
 }

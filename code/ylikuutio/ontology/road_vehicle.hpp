@@ -40,7 +40,7 @@ namespace yli
         {
             public:
                 // constructor.
-                RoadVehicle(yli::ontology::Universe* const universe, const ObjectStruct& object_struct)
+                RoadVehicle(yli::ontology::Universe* const universe, const yli::ontology::ObjectStruct& object_struct)
                     : Vehicle(universe, object_struct)
                 {
                     // constructor.

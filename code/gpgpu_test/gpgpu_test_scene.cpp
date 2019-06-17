@@ -71,7 +71,7 @@ namespace gpgpu_test
         gpgpu_test_scene->set_twin_turbo_factor(100.0f);
 
         // Create the shader, store it in `identity_shader`.
-        ShaderStruct identity_shader_struct;
+        yli::ontology::ShaderStruct identity_shader_struct;
         identity_shader_struct.parent = gpgpu_test_scene;
         identity_shader_struct.vertex_shader = "identity.vert";
         identity_shader_struct.fragment_shader = "identity.frag";
@@ -87,7 +87,7 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        ComputeTaskStruct identity_shader_BMP_compute_task_struct;
+        yli::ontology::ComputeTaskStruct identity_shader_BMP_compute_task_struct;
         identity_shader_BMP_compute_task_struct.texture_file_format = "bmp";
         identity_shader_BMP_compute_task_struct.texture_filename = "numbers_123456_black_and_white.bmp";
         identity_shader_BMP_compute_task_struct.output_filename = "gpgpu_identity_output.data";
@@ -106,7 +106,7 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        ComputeTaskStruct identity_shader_CSV_unsigned_short_compute_task_struct;
+        yli::ontology::ComputeTaskStruct identity_shader_CSV_unsigned_short_compute_task_struct;
         identity_shader_CSV_unsigned_short_compute_task_struct.texture_file_format = "csv";
         identity_shader_CSV_unsigned_short_compute_task_struct.texture_filename = "some_finnish_railway_stations_unsigned_integer_with_fill.csv";
         identity_shader_CSV_unsigned_short_compute_task_struct.output_filename = "gpgpu_identity_output_unsigned_short_with_fill.data";
@@ -129,7 +129,7 @@ namespace gpgpu_test
         }
 
         // Create the shader, store it in `sobel_shader`.
-        ShaderStruct sobel_shader_struct;
+        yli::ontology::ShaderStruct sobel_shader_struct;
         sobel_shader_struct.parent = gpgpu_test_scene;
         sobel_shader_struct.vertex_shader = "identity.vert";
         sobel_shader_struct.fragment_shader = "sobel_gradient_magnitude.frag";
@@ -145,7 +145,7 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        ComputeTaskStruct sobel_shader_compute_task_struct;
+        yli::ontology::ComputeTaskStruct sobel_shader_compute_task_struct;
         sobel_shader_compute_task_struct.texture_file_format = "bmp";
         sobel_shader_compute_task_struct.texture_filename = "numbers_123456_black_and_white.bmp";
         sobel_shader_compute_task_struct.output_filename = "gpgpu_sobel_output.data";
@@ -167,7 +167,7 @@ namespace gpgpu_test
         }
 
         // Create the shader, store it in `go_west_shader`.
-        ShaderStruct go_west_shader_struct;
+        yli::ontology::ShaderStruct go_west_shader_struct;
         go_west_shader_struct.parent = gpgpu_test_scene;
         go_west_shader_struct.vertex_shader = "identity.vert";
         go_west_shader_struct.fragment_shader = "go_west.frag";
@@ -183,7 +183,7 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        ComputeTaskStruct go_west_shader_compute_task_struct;
+        yli::ontology::ComputeTaskStruct go_west_shader_compute_task_struct;
         go_west_shader_compute_task_struct.texture_file_format = "bmp";
         go_west_shader_compute_task_struct.texture_filename = "numbers_123456_black_and_white.bmp";
         go_west_shader_compute_task_struct.output_filename = "gpgpu_go_west_output.data";
@@ -205,7 +205,7 @@ namespace gpgpu_test
         }
 
         // Create the shader, store it in `vanish_west_shader`.
-        ShaderStruct vanish_west_shader_struct;
+        yli::ontology::ShaderStruct vanish_west_shader_struct;
         vanish_west_shader_struct.parent = gpgpu_test_scene;
         vanish_west_shader_struct.vertex_shader = "identity.vert";
         vanish_west_shader_struct.fragment_shader = "vanish_west.frag";
@@ -221,7 +221,7 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        ComputeTaskStruct vanish_west_shader_compute_task_struct;
+        yli::ontology::ComputeTaskStruct vanish_west_shader_compute_task_struct;
         vanish_west_shader_compute_task_struct.texture_file_format = "bmp";
         vanish_west_shader_compute_task_struct.texture_filename = "numbers_123456_black_and_white.bmp";
         vanish_west_shader_compute_task_struct.output_filename = "gpgpu_vanish_west_output.data";
@@ -243,7 +243,7 @@ namespace gpgpu_test
         }
 
         // Create the shader, store it in `floyd_warshall_shader`.
-        ShaderStruct floyd_warshall_shader_struct;
+        yli::ontology::ShaderStruct floyd_warshall_shader_struct;
         floyd_warshall_shader_struct.parent = gpgpu_test_scene;
         floyd_warshall_shader_struct.vertex_shader = "identity.vert";
         floyd_warshall_shader_struct.fragment_shader = "floyd_warshall.frag";
@@ -259,7 +259,7 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        ComputeTaskStruct floyd_warshall_shader_CSV_unsigned_short_compute_task_struct;
+        yli::ontology::ComputeTaskStruct floyd_warshall_shader_CSV_unsigned_short_compute_task_struct;
         floyd_warshall_shader_CSV_unsigned_short_compute_task_struct.texture_file_format = "csv";
         floyd_warshall_shader_CSV_unsigned_short_compute_task_struct.texture_filename = "more_finnish_railway_stations_unsigned_integer.csv";
         floyd_warshall_shader_CSV_unsigned_short_compute_task_struct.output_filename = "gpgpu_floyd_warshall_output_unsigned_short.data";
@@ -282,7 +282,7 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        ComputeTaskStruct floyd_warshall_shader_CSV_float_compute_task_struct;
+        yli::ontology::ComputeTaskStruct floyd_warshall_shader_CSV_float_compute_task_struct;
         floyd_warshall_shader_CSV_float_compute_task_struct.texture_file_format = "csv";
         floyd_warshall_shader_CSV_float_compute_task_struct.texture_filename = "more_finnish_railway_stations_unsigned_integer.csv";
         floyd_warshall_shader_CSV_float_compute_task_struct.output_filename = "gpgpu_floyd_warshall_output_float.data";

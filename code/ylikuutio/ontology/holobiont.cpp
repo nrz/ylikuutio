@@ -172,7 +172,7 @@ namespace yli
                     continue;
                 }
 
-                BiontStruct biont_struct;
+                yli::ontology::BiontStruct biont_struct;
                 biont_struct.biontID               = biontID;
                 biont_struct.holobiont_parent      = this;
                 biont_struct.symbiont_species      = symbiosis->get_symbiont_species(biontID);

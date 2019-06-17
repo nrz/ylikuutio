@@ -81,7 +81,7 @@ namespace yli
         class Camera: public yli::ontology::Movable
         {
             public:
-                Camera(yli::ontology::Universe* const universe, const CameraStruct& camera_struct)
+                Camera(yli::ontology::Universe* const universe, const yli::ontology::CameraStruct& camera_struct)
                     : Movable(universe, camera_struct.cartesian_coordinates)
                 {
                     // constructor.

@@ -90,7 +90,7 @@ namespace yli
         class ComputeTask: public yli::ontology::Entity
         {
             public:
-                ComputeTask(yli::ontology::Universe* const universe, const ComputeTaskStruct& compute_task_struct)
+                ComputeTask(yli::ontology::Universe* const universe, const yli::ontology::ComputeTaskStruct& compute_task_struct)
                     : Entity(universe)
                 {
                     // constructor.

@@ -412,7 +412,7 @@ namespace yli
             glDisable(GL_BLEND);
         }
 
-        void Font2D::print_text2D(const TextStruct& text_struct) const
+        void Font2D::print_text2D(const yli::ontology::TextStruct& text_struct) const
         {
             if (!this->should_be_rendered)
             {

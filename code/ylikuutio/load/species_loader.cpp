@@ -45,7 +45,7 @@ namespace yli
     namespace load
     {
         bool load_species(
-                const SpeciesLoaderStruct& species_loader_struct,
+                const yli::load::SpeciesLoaderStruct& species_loader_struct,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals,
@@ -84,7 +84,7 @@ namespace yli
             }
             else if (species_loader_struct.model_file_format == "srtm" || species_loader_struct.model_file_format == "SRTM")
             {
-                HeightmapLoaderStruct heightmap_loader_struct;
+                yli::load::HeightmapLoaderStruct heightmap_loader_struct;
                 heightmap_loader_struct.latitude = species_loader_struct.latitude;
                 heightmap_loader_struct.longitude = species_loader_struct.longitude;
                 heightmap_loader_struct.planet_radius = species_loader_struct.planet_radius;

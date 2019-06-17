@@ -164,7 +164,7 @@ namespace yli
                         const std::string horizontal_alignment,
                         const std::string vertical_alignment) const;
 
-                void print_text2D(const TextStruct& text_struct) const;
+                void print_text2D(const yli::ontology::TextStruct& text_struct) const;
 
                 void print_text2D(
                         std::size_t x,

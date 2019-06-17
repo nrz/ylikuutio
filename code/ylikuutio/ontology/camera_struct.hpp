@@ -32,36 +32,36 @@ namespace yli
     namespace ontology
     {
         class Scene;
+
+        struct CameraStruct
+        {
+            CameraStruct()
+                : cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
+                direction(glm::vec3(NAN, NAN, NAN)),
+                parent(nullptr),
+                horizontal_angle(NAN),
+                vertical_angle(NAN),
+                is_static_view(false)
+            {
+                // constructor.
+            }
+
+            // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
+            glm::vec3 cartesian_coordinates; // coordinate vector.
+
+            // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
+            glm::vec3 direction;             // direction vector.
+
+            yli::ontology::Scene* parent;    // pointer to the `Scene`.
+
+            double horizontal_angle;         // horizontal angle in radians.
+            double vertical_angle;           // vertical angle in radians.
+
+            // Static view `Camera`'s coordinates do not change by moving in a `Scene`. However,
+            // they can be modified by adjusting the `Entity`-specific variables of the `Camera` directly.
+            bool is_static_view;
+        };
     }
 }
-
-typedef struct CameraStruct
-{
-    CameraStruct()
-        : cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
-        direction(glm::vec3(NAN, NAN, NAN)),
-        parent(nullptr),
-        horizontal_angle(NAN),
-        vertical_angle(NAN),
-        is_static_view(false)
-    {
-        // constructor.
-    }
-
-    // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
-    glm::vec3 cartesian_coordinates; // coordinate vector.
-
-    // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
-    glm::vec3 direction;             // direction vector.
-
-    yli::ontology::Scene* parent;    // pointer to the `Scene`.
-
-    double horizontal_angle;         // horizontal angle in radians.
-    double vertical_angle;           // vertical angle in radians.
-
-    // Static view `Camera`'s coordinates do not change by moving in a `Scene`. However,
-    // they can be modified by adjusting the `Entity`-specific variables of the `Camera` directly.
-    bool is_static_view;
-} CameraStruct;
 
 #endif

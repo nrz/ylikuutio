@@ -218,7 +218,7 @@ namespace yli
 
         void Symbiosis::create_symbionts()
         {
-            SymbiosisLoaderStruct symbiosis_loader_struct;
+            yli::load::SymbiosisLoaderStruct symbiosis_loader_struct;
             symbiosis_loader_struct.model_filename = this->model_filename;
             symbiosis_loader_struct.model_file_format = this->model_file_format;
             symbiosis_loader_struct.triangulation_type = this->triangulation_type;
@@ -265,7 +265,7 @@ namespace yli
                     }
 
                     std::cout << "Creating yli::ontology::SymbiontMaterial* based on ofbx::Texture* at 0x" << std::hex << (uint64_t) ofbx_texture << std::dec << " ...\n";
-                    MaterialStruct material_struct;
+                    yli::ontology::MaterialStruct material_struct;
                     material_struct.shader = this->parent;
                     material_struct.symbiosis = this;
                     material_struct.is_symbiont_material = true;
@@ -278,7 +278,7 @@ namespace yli
                     // Care only about `ofbx::Texture*`s which are DIFFUSE textures.
                     for (std::size_t mesh_i : this->ofbx_diffuse_texture_mesh_map.at(ofbx_texture))
                     {
-                        SpeciesStruct species_struct;
+                        yli::ontology::SpeciesStruct species_struct;
                         species_struct.is_symbiont_species = true;
 
                         if (this->parent != nullptr)

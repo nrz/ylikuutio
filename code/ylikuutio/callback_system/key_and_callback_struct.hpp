@@ -26,13 +26,13 @@ namespace yli
     namespace callback_system
     {
         class CallbackEngine;
+
+        struct KeyAndCallbackStruct
+        {
+            uint32_t keycode;
+            yli::callback_system::CallbackEngine* callback_engine;
+        };
     }
 }
-
-typedef struct
-{
-    uint32_t keycode;
-    yli::callback_system::CallbackEngine* callback_engine;
-} KeyAndCallbackStruct;
 
 #endif

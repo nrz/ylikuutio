@@ -105,21 +105,21 @@ int main(const int argc, const char* const argv[])
     int input_method_in_use = yli::input::KEYBOARD;
 
     // keypress callbacks.
-    std::vector<KeyAndCallbackStruct> action_mode_keypress_callback_engines = std::vector<KeyAndCallbackStruct>();
-    std::vector<KeyAndCallbackStruct> action_mode_continuous_keypress_callback_engines = std::vector<KeyAndCallbackStruct>();
+    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keypress_callback_engines = std::vector<yli::callback_system::KeyAndCallbackStruct>();
+    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_continuous_keypress_callback_engines = std::vector<yli::callback_system::KeyAndCallbackStruct>();
 
     // This vector points to current keypress callback engines vector.
-    std::vector<KeyAndCallbackStruct>* current_keypress_callback_engine_vector_pointer = &action_mode_keypress_callback_engines;
+    std::vector<yli::callback_system::KeyAndCallbackStruct>* current_keypress_callback_engine_vector_pointer = &action_mode_keypress_callback_engines;
 
     // keyrelease callbacks.
-    std::vector<KeyAndCallbackStruct> action_mode_keyrelease_callback_engines = std::vector<KeyAndCallbackStruct>();
+    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keyrelease_callback_engines = std::vector<yli::callback_system::KeyAndCallbackStruct>();
 
     // This vector points to current keyrelease callback engines vector.
-    std::vector<KeyAndCallbackStruct>* current_keyrelease_callback_engine_vector_pointer = &action_mode_keyrelease_callback_engines;
+    std::vector<yli::callback_system::KeyAndCallbackStruct>* current_keyrelease_callback_engine_vector_pointer = &action_mode_keyrelease_callback_engines;
 
     // Create the `Universe`, store it in `my_universe`.
     std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
-    UniverseStruct universe_struct;
+    yli::ontology::UniverseStruct universe_struct;
     universe_struct.window_title = "Ajokki 0.0.4, powered by Ylikuutio 0.0.4";
     universe_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
     universe_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &current_keyrelease_callback_engine_vector_pointer;
@@ -132,7 +132,7 @@ int main(const int argc, const char* const argv[])
 
     const float earth_radius = 6371.0f; // in kilometres
 
-    SettingStruct planet_radius_setting_struct(std::make_shared<yli::datatypes::AnyValue>(earth_radius));
+    yli::config::SettingStruct planet_radius_setting_struct(std::make_shared<yli::datatypes::AnyValue>(earth_radius));
     planet_radius_setting_struct.name = "planet_radius";
     planet_radius_setting_struct.setting_master = my_universe->get_setting_master();
     planet_radius_setting_struct.activate_callback = &yli::config::SettingMaster::activate_planet_radius; // world may be a planet or a moon.
@@ -660,78 +660,78 @@ int main(const int argc, const char* const argv[])
 
     // Keyrelease callbacks for action mode.
     // Key releases are checked in the order of this struct.
-    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, release_first_turbo_callback_engine });
-    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, release_second_turbo_callback_engine });
-    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_I, enable_toggle_invert_mouse_callback_engine });
-    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_F, enable_toggle_flight_mode_callback_engine });
-    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_F1, enable_toggle_help_mode_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, release_first_turbo_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, release_second_turbo_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_I, enable_toggle_invert_mouse_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_F, enable_toggle_flight_mode_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_F1, enable_toggle_help_mode_callback_engine });
 
     // Keypress callbacks for action mode.
     // Keypresses are checked in the order of this struct.
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_GRAVE, enter_console_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_ESCAPE, exit_program_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, first_turbo_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, second_turbo_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_I, toggle_invert_mouse_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_F, toggle_flight_mode_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_F1, toggle_help_mode_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_D, delete_suzanne_species_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_G, switch_to_grass_material_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_O, switch_to_orange_fur_material_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_P, switch_to_pink_geometric_tiles_material_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_T, transform_into_terrain_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_A, transform_into_monkey_callback_engine });
+    action_mode_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_GRAVE, enter_console_callback_engine });
+    action_mode_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_ESCAPE, exit_program_callback_engine });
+    action_mode_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, first_turbo_callback_engine });
+    action_mode_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, second_turbo_callback_engine });
+    action_mode_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_I, toggle_invert_mouse_callback_engine });
+    action_mode_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_F, toggle_flight_mode_callback_engine });
+    action_mode_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_F1, toggle_help_mode_callback_engine });
+    action_mode_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_D, delete_suzanne_species_callback_engine });
+    action_mode_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_G, switch_to_grass_material_callback_engine });
+    action_mode_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_O, switch_to_orange_fur_material_callback_engine });
+    action_mode_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_P, switch_to_pink_geometric_tiles_material_callback_engine });
+    action_mode_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_T, transform_into_terrain_callback_engine });
+    action_mode_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_A, transform_into_monkey_callback_engine });
 
     // Continuous keypress callbacks for action mode.
     // Keypresses are checked in the order of this struct.
-    action_mode_continuous_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_UP, move_forward_callback_engine });
-    action_mode_continuous_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_DOWN, move_backward_callback_engine });
-    action_mode_continuous_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_LEFT, strafe_left_callback_engine });
-    action_mode_continuous_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RIGHT, strafe_right_callback_engine });
-    action_mode_continuous_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_SPACE, ascent_callback_engine });
-    action_mode_continuous_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RETURN, descent_callback_engine });
+    action_mode_continuous_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_UP, move_forward_callback_engine });
+    action_mode_continuous_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_DOWN, move_backward_callback_engine });
+    action_mode_continuous_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_LEFT, strafe_left_callback_engine });
+    action_mode_continuous_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_RIGHT, strafe_right_callback_engine });
+    action_mode_continuous_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_SPACE, ascent_callback_engine });
+    action_mode_continuous_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_RETURN, descent_callback_engine });
 
     // Keyrelease callbacks for console.
     // Key releases are checked in the order of this struct.
-    std::vector<KeyAndCallbackStruct> console_keyrelease_callback_engines = std::vector<KeyAndCallbackStruct>();
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, release_left_control_in_console_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, release_right_control_in_console_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_LALT, release_left_alt_in_console_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RALT, release_right_alt_in_console_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_LSHIFT, release_left_shift_in_console_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RSHIFT, release_right_shift_in_console_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_UP, enable_move_to_previous_input_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_DOWN, enable_move_to_next_input_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_BACKSPACE, enable_backspace_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RETURN, enable_enter_key_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_C, enable_ctrl_c_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_W, enable_ctrl_w_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_PAGEUP, enable_page_up_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_PAGEDOWN, enable_page_down_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_HOME, enable_home_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_END, enable_end_callback_engine });
+    std::vector<yli::callback_system::KeyAndCallbackStruct> console_keyrelease_callback_engines = std::vector<yli::callback_system::KeyAndCallbackStruct>();
+    console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, release_left_control_in_console_callback_engine });
+    console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, release_right_control_in_console_callback_engine });
+    console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_LALT, release_left_alt_in_console_callback_engine });
+    console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_RALT, release_right_alt_in_console_callback_engine });
+    console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_LSHIFT, release_left_shift_in_console_callback_engine });
+    console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_RSHIFT, release_right_shift_in_console_callback_engine });
+    console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_UP, enable_move_to_previous_input_callback_engine });
+    console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_DOWN, enable_move_to_next_input_callback_engine });
+    console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_BACKSPACE, enable_backspace_callback_engine });
+    console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_RETURN, enable_enter_key_callback_engine });
+    console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_C, enable_ctrl_c_callback_engine });
+    console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_W, enable_ctrl_w_callback_engine });
+    console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_PAGEUP, enable_page_up_callback_engine });
+    console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_PAGEDOWN, enable_page_down_callback_engine });
+    console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_HOME, enable_home_callback_engine });
+    console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_END, enable_end_callback_engine });
     my_console->set_my_keyrelease_callback_engine_vector_pointer(&console_keyrelease_callback_engines);
 
     // Keypress callbacks for console.
     // Keypresses are checked in the order of this struct.
-    std::vector<KeyAndCallbackStruct> console_keypress_callback_engines = std::vector<KeyAndCallbackStruct>();
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_GRAVE, exit_console_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, press_left_control_in_console_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, press_right_control_in_console_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_LALT, press_left_alt_in_console_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RALT, press_right_alt_in_console_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_LSHIFT, press_left_shift_in_console_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RSHIFT, press_right_shift_in_console_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_UP, move_to_previous_input_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_DOWN, move_to_next_input_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_BACKSPACE, backspace_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RETURN, enter_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_C, ctrl_c_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_W, ctrl_w_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_PAGEUP, page_up_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_PAGEDOWN, page_down_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_HOME, home_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_END, end_callback_engine });
+    std::vector<yli::callback_system::KeyAndCallbackStruct> console_keypress_callback_engines = std::vector<yli::callback_system::KeyAndCallbackStruct>();
+    console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_GRAVE, exit_console_callback_engine });
+    console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, press_left_control_in_console_callback_engine });
+    console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, press_right_control_in_console_callback_engine });
+    console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_LALT, press_left_alt_in_console_callback_engine });
+    console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_RALT, press_right_alt_in_console_callback_engine });
+    console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_LSHIFT, press_left_shift_in_console_callback_engine });
+    console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_RSHIFT, press_right_shift_in_console_callback_engine });
+    console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_UP, move_to_previous_input_callback_engine });
+    console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_DOWN, move_to_next_input_callback_engine });
+    console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_BACKSPACE, backspace_callback_engine });
+    console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_RETURN, enter_callback_engine });
+    console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_C, ctrl_c_callback_engine });
+    console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_W, ctrl_w_callback_engine });
+    console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_PAGEUP, page_up_callback_engine });
+    console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_PAGEDOWN, page_down_callback_engine });
+    console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_HOME, home_callback_engine });
+    console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_END, end_callback_engine });
     my_console->set_my_keypress_callback_engine_vector_pointer(&console_keypress_callback_engines);
 
     /*********************************************************************
@@ -786,7 +786,7 @@ int main(const int argc, const char* const argv[])
     std::string ms_frame_text;
 
     // Print angles and cartesian coordinates on bottom left corner.
-    TextStruct angles_and_coordinates_text_struct;
+    yli::ontology::TextStruct angles_and_coordinates_text_struct;
     angles_and_coordinates_text_struct.font2D_parent = my_font2D;
     angles_and_coordinates_text_struct.screen_width = my_universe->get_window_width();
     angles_and_coordinates_text_struct.screen_height = my_universe->get_window_height();
@@ -800,7 +800,7 @@ int main(const int argc, const char* const argv[])
     yli::ontology::Text2D* angles_and_coordinates_text2D = new yli::ontology::Text2D(my_universe, angles_and_coordinates_text_struct);
 
     // Print spherical coordinates on second line from the bottom left.
-    TextStruct spherical_coordinates_text_struct;
+    yli::ontology::TextStruct spherical_coordinates_text_struct;
     spherical_coordinates_text_struct.font2D_parent = my_font2D;
     spherical_coordinates_text_struct.screen_width = my_universe->get_window_width();
     spherical_coordinates_text_struct.screen_height = my_universe->get_window_height();
@@ -813,7 +813,7 @@ int main(const int argc, const char* const argv[])
     yli::ontology::Text2D* spherical_coordinates_text2D = new yli::ontology::Text2D(my_universe, spherical_coordinates_text_struct);
 
     // Print time data on top left corner.
-    TextStruct time_text_struct;
+    yli::ontology::TextStruct time_text_struct;
     time_text_struct.font2D_parent = my_font2D;
     time_text_struct.screen_width = my_universe->get_window_width();
     time_text_struct.screen_height = my_universe->get_window_height();
@@ -827,7 +827,7 @@ int main(const int argc, const char* const argv[])
     yli::ontology::Text2D* time_text2D = new yli::ontology::Text2D(my_universe, time_text_struct);
 
     // Print help text.
-    TextStruct help_text_struct;
+    yli::ontology::TextStruct help_text_struct;
     help_text_struct.font2D_parent = my_font2D;
     help_text_struct.screen_width = my_universe->get_window_width();
     help_text_struct.screen_height = my_universe->get_window_height();
@@ -841,7 +841,7 @@ int main(const int argc, const char* const argv[])
     yli::ontology::Text2D* help_text2D = new yli::ontology::Text2D(my_universe, help_text_struct);
 
     // Print frame rate data on top right corner.
-    TextStruct frame_rate_text_struct;
+    yli::ontology::TextStruct frame_rate_text_struct;
     frame_rate_text_struct.font2D_parent = my_font2D;
     frame_rate_text_struct.screen_width = my_universe->get_window_width();
     frame_rate_text_struct.screen_height = my_universe->get_window_height();
