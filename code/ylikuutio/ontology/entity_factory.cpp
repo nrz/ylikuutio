@@ -32,6 +32,7 @@
 #include "camera.hpp"
 #include "compute_task.hpp"
 #include "any_value_entity.hpp"
+#include "any_struct_entity.hpp"
 #include "shader_struct.hpp"
 #include "material_struct.hpp"
 #include "species_struct.hpp"
@@ -43,6 +44,7 @@
 #include "camera_struct.hpp"
 #include "compute_task_struct.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/common/any_struct.hpp"
 
 // Include standard headers
 #include <cstddef>   // std::size_t
@@ -153,6 +155,16 @@ namespace yli
         yli::ontology::Entity* EntityFactory::create_AnyValueEntity(const yli::datatypes::AnyValue& any_value) const
         {
             return new yli::ontology::AnyValueEntity(this->universe, any_value);
+        }
+
+        yli::ontology::Entity* EntityFactory::create_AnyStructEntity() const
+        {
+            return new yli::ontology::AnyStructEntity(this->universe);
+        }
+
+        yli::ontology::Entity* EntityFactory::create_AnyStructEntity(const yli::datatypes::AnyStruct& any_struct) const
+        {
+            return new yli::ontology::AnyStructEntity(this->universe, any_struct);
         }
     }
 }
