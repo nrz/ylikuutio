@@ -39,6 +39,8 @@
 #include "scene.hpp"
 #include "camera.hpp"
 #include "font2D.hpp"
+#include "any_value_entity.hpp"
+#include "any_struct_entity.hpp"
 #include "ground_level.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
@@ -752,6 +754,123 @@ namespace yli
                 child_entity->bind_to_new_parent(parent_entity);
             }
 
+            return nullptr;
+        }
+
+        std::shared_ptr<yli::datatypes::AnyValue> Universe::create_AnyValue(
+                yli::console::Console* const console,
+                yli::ontology::Entity* const universe_entity,
+                const std::vector<std::string>& command_parameters)
+        {
+            // usage:
+            // `AnyValue <variable_name> <variable_type> <variable_value>`
+            //
+            // eg.
+            // `AnyValue my_pi float 3.1415927`.
+
+            if (console == nullptr || universe_entity == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (command_parameters.size() != 3)
+            {
+                // TODO: print help text.
+                return nullptr;
+            }
+
+            const std::string& variable_name = command_parameters[0];
+
+            if (variable_name.empty())
+            {
+                // TODO: error: somehow variable name is empty!
+                return nullptr;
+            }
+
+            if (universe->is_entity(variable_name))
+            {
+                // TODO: error: variable name is in use already!
+                return nullptr;
+            }
+
+            // OK, variable name is not empty and it is not in use yet either.
+
+            const std::string& variable_type = command_parameters[1];
+
+            if (variable_type.empty())
+            {
+                // TODO: error: somehow variable type is empty!
+                return nullptr;
+            }
+
+            const std::string& value_string = command_parameters[2];
+
+            if (value_string.empty())
+            {
+                // TODO: error: somehow value string is empty!
+                return nullptr;
+            }
+
+            std::shared_ptr<yli::datatypes::AnyValue> any_value = std::make_shared<yli::datatypes::AnyValue>(variable_type, value_string);
+            yli::ontology::AnyValueEntity* const any_value_entity = new yli::ontology::AnyValueEntity(universe, any_value);
+            any_value_entity->set_name(variable_name);
+            return nullptr;
+        }
+
+        std::shared_ptr<yli::datatypes::AnyValue> Universe::create_AnyStruct(
+                yli::console::Console* const console,
+                yli::ontology::Entity* const universe_entity,
+                const std::vector<std::string>& command_parameters)
+        {
+            // usage:
+            // `AnyStruct <variable_name>`
+            //
+            // eg.
+            // `AnyValue my_struct`.
+
+            if (console == nullptr || universe_entity == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (command_parameters.size() != 1)
+            {
+                // TODO: print help text.
+                return nullptr;
+            }
+
+            const std::string& variable_name = command_parameters[0];
+
+            if (variable_name.empty())
+            {
+                // TODO: error: somehow variable name is empty!
+                return nullptr;
+            }
+
+            if (universe->is_entity(variable_name))
+            {
+                // TODO: error: variable name is in use already!
+                return nullptr;
+            }
+
+            // OK, variable name is not empty and it is not in use yet either.
+
+            yli::ontology::AnyStructEntity* const any_struct_entity = new yli::ontology::AnyStructEntity(universe);
+            any_struct_entity->set_name(variable_name);
             return nullptr;
         }
 

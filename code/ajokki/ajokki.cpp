@@ -746,11 +746,13 @@ int main(const int argc, const char* const argv[])
     my_console->add_command_callback("set", &yli::config::SettingMaster::set_and_print);
     my_console->add_command_callback("get", &yli::config::SettingMaster::get_and_print);
 
-    // Object handling callbacks.
+    // `Entity` handling callbacks.
     my_console->add_command_callback("activate", &yli::ontology::Universe::activate);
     my_console->add_command_callback("delete", &yli::ontology::Universe::delete_entity);
     my_console->add_command_callback("info", &yli::ontology::Universe::info);
     my_console->add_command_callback("bind", &yli::ontology::Universe::bind);
+    my_console->add_command_callback("AnyValueEntity", &yli::ontology::Universe::create_AnyValue);
+    my_console->add_command_callback("AnyStructEntity", &yli::ontology::Universe::create_AnyStruct);
 
     // Exit program callbacks.
     my_console->add_command_callback("bye", &ajokki::quit);
