@@ -657,7 +657,7 @@ namespace yli
                     return nullptr;
                 }
 
-                // OK, let's find out information about the entity.
+                // OK, let's find out information about this `Entity`.
 
                 console->print_text(entity->get_type());
 
