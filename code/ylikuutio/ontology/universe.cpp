@@ -75,6 +75,7 @@
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstddef>       // std::size_t
+#include <cstdio>        // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf, std::snprintf etc.
 #include <inttypes.h>    // PRId32, PRId64, PRIu32, PRIu64, PRIx32, PRIx64
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
