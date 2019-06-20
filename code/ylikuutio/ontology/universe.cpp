@@ -663,7 +663,7 @@ namespace yli
 
                 uint64_t memory_address = reinterpret_cast<uint64_t>((void*) entity);
                 char memory_address_char_array[256];
-                snprintf(memory_address_char_array, sizeof(memory_address_char_array), "0x%" PRIx64, static_cast<uint64_t>(memory_address));
+                std::snprintf(memory_address_char_array, sizeof(memory_address_char_array), "0x%" PRIx64, static_cast<uint64_t>(memory_address));
 
                 std::string entity_info = "memory address: ";
                 entity_info += std::string(memory_address_char_array);
@@ -677,7 +677,7 @@ namespace yli
                 {
                     uint64_t parents_memory_address = reinterpret_cast<uint64_t>((void*) entity->get_parent());
                     char parents_memory_address_char_array[256];
-                    snprintf(parents_memory_address_char_array, sizeof(parents_memory_address_char_array), "0x%" PRIx64, static_cast<uint64_t>(parents_memory_address));
+                    std::snprintf(parents_memory_address_char_array, sizeof(parents_memory_address_char_array), "0x%" PRIx64, static_cast<uint64_t>(parents_memory_address));
 
                     std::string parent_info = "parent's address: ";
                     parent_info += std::string(parents_memory_address_char_array);
@@ -686,7 +686,7 @@ namespace yli
 
                 std::size_t number_of_children = entity->get_number_of_children();
                 char number_of_children_char_array[256];
-                snprintf(number_of_children_char_array, sizeof(number_of_children_char_array), "%lu", number_of_children);
+                std::snprintf(number_of_children_char_array, sizeof(number_of_children_char_array), "%lu", number_of_children);
 
                 std::string children_info = "number of children: ";
                 children_info += std::string(number_of_children_char_array);
@@ -694,7 +694,7 @@ namespace yli
 
                 std::size_t number_of_descendants = entity->get_number_of_descendants();
                 char number_of_descendants_char_array[256];
-                snprintf(number_of_descendants_char_array, sizeof(number_of_descendants_char_array), "%lu", number_of_descendants);
+                std::snprintf(number_of_descendants_char_array, sizeof(number_of_descendants_char_array), "%lu", number_of_descendants);
 
                 std::string descendants_info = "number of descendants: ";
                 descendants_info += std::string(number_of_descendants_char_array);
