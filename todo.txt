@@ -28,6 +28,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain and the available video memory.
 [ ] Implement octree segmentation.
 [ ] Implement voxel world.
+[ ] Find out how systemd-nspawn could be used for testing Ylikuutio.
 [ ] Implement marching cubes algorithm for voxel terrain as described in https://transvoxel.org/Lengyel-VoxelTerrain.pdf .
 [ ] Write a simple triangle drawing software (android-kolmio) for Android, using Android NDK and CMake.
 [ ] Implement audio mixing using SDL_mixer.
