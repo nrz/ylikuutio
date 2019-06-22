@@ -1,4 +1,4 @@
-Ajokki 0.0.3 / Ylikuutio 0.0.3 manual.
+Hirvi 0.0.4 / Ajokki 0.0.4 / Ylikuutio 0.0.4 manual.
 
 Ylikuutio is a 3D game and simulation engine.
 It is designed with two different game types in mind:
@@ -19,9 +19,9 @@ external libraries such as `glm` require CMake 3.2 or a newer version.
 CMake uses git for downloading Google Test testing framework.
 
 The present document explains some design choices of Ylikuutio. To
-understand how to use Ylikuutio in practice, Ajokki and Ylikuutio code
-itself are the best references on that. The information in the present
-manual reflects the current state of development of Ylikuutio.
+understand how to use Ylikuutio in practice, Hirvi, Ajokki and Ylikuutio
+code itself are the best references on that. The information in the
+present manual reflects the current state of development of Ylikuutio.
 
 Ylikuutio has an ontological hierarchy (class hierarchy), consisting of
 classes most of which belong to namespace `yli::ontology`. The top
@@ -29,7 +29,10 @@ class of this ontological hierarchy is `yli::ontology::Universe`. Each
 class is responsible of the lifetime of its children. The hierarchy is
 implemented using function templates belonging to `yli::hierarchy`.
 This means that the destructor of each `yli::ontology` class must
-`delete` all its children.
+`delete` all its children. `yli::ontology::EntityFactory` is available
+by calling `Universe::get_entity_factory` member function. This is the
+recommended way to create entities, because it takes care of providing
+`yli::ontology::Universe` pointer to the constructor of new `Entity`.
 
 To initialize the ontological hierarchy, `yli::ontology::Universe` needs
 to created. After that an `EntityFactory` should be requested from
@@ -41,12 +44,17 @@ ontological hierarchy. For example, `yli::ontology::Symbiosis` and the
 classes related to it. Please see the ontological class diagram.
 
 Keyboard and mouse handling is based on callbacks.
+TODO: implement mouse handling using callbacks.
 Console command processing is based on callbacks.
 Game event processing will be based on callbacks.
 
-Ajokki
+Hirvi
 
-Ajokki is a demo program for testing Ylikuutio.
+Hirvi is a first person action-adventure of the adventures of
+a moose/elk called Hirvi. Cities are dangerous places for moose,
+even through moose are well-known pasifists.
+"hirvi" means a moose/elk in Finnish.
+Hirvi is a work in progress.
 
 F1 to get help.
 ` to enter/exit console.
@@ -68,15 +76,25 @@ To get the value of a variable:
 To delete an entity (and all its descendants):
 `delete`
 
-To exit Ajokki:
+To exit Hirvi:
 `bye`
 `chau`
 `ciao`
 `heippa`
 `sayonara`
 
+Ajokki
+
+Ajokki is a demo program for testing Ylikuutio.
+
+In Ajokki all console commands of Hirvi work, but in addition there
+are some console commands for debugging use as well. Therefore, Hirvi
+reflects actual game development, whereas Ajokki showcases different
+functionalities of Ylikuutio.
+
 External libraries
 
 Assimp is to be used only in `yli_convert` file conversion tool.
 The actual asset loading is done using OpenFBX for `.fbx` files and
 custom file loaders for other supported file formats.
+In the future Assimp will probably be replaced by a custom FBX writer.
