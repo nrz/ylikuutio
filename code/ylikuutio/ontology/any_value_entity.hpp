@@ -25,6 +25,8 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 
+// `AnyValueEntity` is a child of the `Universe`.
+
 namespace yli
 {
     namespace ontology

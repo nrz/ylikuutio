@@ -25,6 +25,8 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 
+// `AnyStructEntity` is a child of the `Universe`.
+
 namespace yli
 {
     namespace ontology
@@ -33,6 +35,7 @@ namespace yli
         {
             public:
                 // constructor.
+                // use the default copy constructor of `yli::datatypes::AnyStruct`.
                 AnyStructEntity(yli::ontology::Universe* const universe)
                     : yli::datatypes::AnyStruct(), yli::ontology::Entity(universe)
                 {
