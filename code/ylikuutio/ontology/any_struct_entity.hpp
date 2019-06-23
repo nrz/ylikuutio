@@ -28,6 +28,14 @@
 #include <vector>  // std::vector
 
 // `AnyStructEntity` is a child of the `Universe`.
+//
+// `AnyStructEntity` inherits both `yli::datatypes::AnyStruct` and `yli::ontology::Entity`.
+// Therefore, `AnyStructEntity` is an `Entity` but it functions also as an `AnyStruct`.
+// Each `AnyStructEntity` may have 0 or more `AnyValueEntity` objects as its children.
+// Each `AnyValueEntity` child of a `AnyStructEntity` needs to have a name from its
+// parent's namespace. The name controls how the `AnyValueEntity` child is used when
+// creating a particular `struct` from this `AnyStructEntity`.
+// TODO: implement the described functionality!
 
 namespace yli
 {

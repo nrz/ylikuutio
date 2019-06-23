@@ -28,6 +28,13 @@
 #include <vector>  // std::vector
 
 // `AnyValueEntity` is a child of the `Universe`.
+//
+// `AnyValueEntity` inherits both `yli::datatypes::AnyValue` and `yli::ontology::Entity`.
+// Therefore, `AnyValueEntity` is an `Entity` but it functions also as an `AnyValue`.
+// Each `AnyValueEntity` may refer to an other `Entity`. If that `Entity` is deleted, it
+// will delete all `AnyValueEntity` objects referring to it as well: the destructors of
+// these `AnyValueEntity` objects will be called from that `Entity` object's destructor.
+// TODO: implement the described functionality!
 
 namespace yli
 {
