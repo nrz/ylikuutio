@@ -355,7 +355,10 @@ namespace yli
 
         std::size_t Universe::get_number_of_descendants() const
         {
-            return yli::ontology::get_number_of_descendants(this->world_pointer_vector);
+            return yli::ontology::get_number_of_descendants(this->world_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->font2D_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->any_value_entity_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->any_struct_entity_pointer_vector);
         }
 
         void Universe::create_context()
