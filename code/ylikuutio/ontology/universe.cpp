@@ -183,6 +183,15 @@ namespace yli
                     this->number_of_any_value_entities);
         }
 
+        void Universe::unbind_any_struct_entity(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->any_struct_entity_pointer_vector,
+                    this->free_any_struct_entityID_queue,
+                    this->number_of_any_struct_entities);
+        }
+
         Universe::~Universe()
         {
             // destructor.
