@@ -137,6 +137,16 @@ namespace yli
                     this->number_of_any_value_entities);
         }
 
+        void Universe::bind_any_struct_entity(yli::ontology::AnyStructEntity* const any_struct_entity)
+        {
+            // get `childID` from `Universe` and set pointer to `any_struct_entity`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::AnyStructEntity*>(
+                    any_struct_entity,
+                    this->any_struct_entity_pointer_vector,
+                    this->free_any_struct_entityID_queue,
+                    this->number_of_any_struct_entities);
+        }
+
         void Universe::unbind_entity(const std::size_t entityID)
         {
             yli::hierarchy::unbind_child_from_parent(

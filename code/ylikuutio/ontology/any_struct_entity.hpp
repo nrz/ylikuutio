@@ -20,9 +20,12 @@
 
 #include "entity.hpp"
 #include "code/ylikuutio/common/any_struct.hpp"
+#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <queue>   // std::queue
+#include <vector>  // std::vector
 
 // `AnyStructEntity` is a child of the `Universe`.
 
@@ -40,6 +43,11 @@ namespace yli
                 AnyStructEntity(yli::ontology::Universe* const universe)
                     : yli::datatypes::AnyStruct(), yli::ontology::Entity(universe)
                 {
+                    this->parent = universe;
+
+                    // Get `childID` from `Universe` and set pointer to this `AnyStructEntity`.
+                    this->bind_to_parent();
+
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::AnyStructEntity*";
                     this->can_be_erased = true;
@@ -50,6 +58,11 @@ namespace yli
                 AnyStructEntity(yli::ontology::Universe* const universe, const yli::datatypes::AnyStruct& any_struct)
                     : yli::datatypes::AnyStruct(any_struct), yli::ontology::Entity(universe)
                 {
+                    this->parent = universe;
+
+                    // Get `childID` from `Universe` and set pointer to this `AnyStructEntity`.
+                    this->bind_to_parent();
+
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::AnyStructEntity*";
                     this->can_be_erased = true;
@@ -64,21 +77,17 @@ namespace yli
                     // destructor.
                 }
 
-                yli::ontology::Entity* get_parent() const override
-                {
-                    // Every `AnyStructEntity` is a child of the `Universe`.
-                    return this->yli::ontology::Entity::universe;
-                }
+                yli::ontology::Entity* get_parent() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
-                std::size_t get_number_of_children() const override
-                {
-                    return 0; // `AnyStructEntity` has no children.
-                }
+                template<class T1>
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
-                std::size_t get_number_of_descendants() const override
-                {
-                    return 0; // `AnyStructEntity` has no children.
-                }
+            private:
+                void bind_to_parent();
+
+                yli::ontology::Universe* parent; // pointer to the `Universe`.
         };
     }
 }
