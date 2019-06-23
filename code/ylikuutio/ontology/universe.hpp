@@ -294,6 +294,7 @@ namespace yli
         class Species;
         class Camera;
         class Font2D;
+        class AnyValueEntity;
 
         class Universe: public yli::ontology::Entity
         {
@@ -301,6 +302,7 @@ namespace yli
                 void bind_entity(yli::ontology::Entity* const entity);
                 void bind_world(yli::ontology::World* const world);
                 void bind_font2D(yli::ontology::Font2D* const font2D);
+                void bind_any_value_entity(yli::ontology::AnyValueEntity* const any_value_entity);
 
                 void unbind_entity(const std::size_t entityID);
                 void unbind_world(const std::size_t childID);
@@ -661,6 +663,10 @@ namespace yli
                 std::vector<yli::ontology::Font2D*> font2D_pointer_vector;
                 std::queue<std::size_t> free_font2D_ID_queue;
                 std::size_t number_of_font2Ds;
+
+                std::vector<yli::ontology::AnyValueEntity*> any_value_entity_pointer_vector;
+                std::queue<std::size_t> free_any_value_entityID_queue;
+                std::size_t number_of_any_value_entities;
 
                 yli::ontology::World* active_world;
                 yli::ontology::Font2D* active_font2D;

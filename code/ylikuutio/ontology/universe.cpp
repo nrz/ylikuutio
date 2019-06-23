@@ -127,6 +127,16 @@ namespace yli
                     this->number_of_font2Ds);
         }
 
+        void Universe::bind_any_value_entity(yli::ontology::AnyValueEntity* const any_value_entity)
+        {
+            // get `childID` from `Universe` and set pointer to `any_value_entity`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::AnyValueEntity*>(
+                    any_value_entity,
+                    this->any_value_entity_pointer_vector,
+                    this->free_any_value_entityID_queue,
+                    this->number_of_any_value_entities);
+        }
+
         void Universe::unbind_entity(const std::size_t entityID)
         {
             yli::hierarchy::unbind_child_from_parent(
