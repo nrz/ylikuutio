@@ -19,7 +19,6 @@
 #define __ANY_STRUCT_ENTITY_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "universe.hpp"
 #include "code/ylikuutio/common/any_struct.hpp"
 
 // Include standard headers
@@ -31,6 +30,8 @@ namespace yli
 {
     namespace ontology
     {
+        class Universe;
+
         class AnyStructEntity: public yli::datatypes::AnyStruct, public yli::ontology::Entity
         {
             public:
