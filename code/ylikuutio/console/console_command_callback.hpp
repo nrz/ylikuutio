@@ -30,7 +30,7 @@ namespace yli
         class Console;
     }
 
-    namespace datatypes
+    namespace common
     {
         class AnyValue;
     }
@@ -41,7 +41,7 @@ namespace yli
     }
 }
 
-typedef std::shared_ptr<yli::datatypes::AnyValue> (*ConsoleCommandCallback) (
+typedef std::shared_ptr<yli::common::AnyValue> (*ConsoleCommandCallback) (
         yli::console::Console* const,
         yli::ontology::Entity* const,
         const std::vector<std::string>& command_parameters);

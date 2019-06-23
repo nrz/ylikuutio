@@ -56,7 +56,7 @@ namespace yli
         class Font2D;
     }
 
-    namespace datatypes
+    namespace common
     {
         enum datatype
         {
@@ -109,11 +109,11 @@ namespace yli
                 bool set_value(const std::string& value_string);
 
                 // copy constructor.
-                AnyValue(const yli::datatypes::AnyValue& original);
+                AnyValue(const yli::common::AnyValue& original);
 
                 AnyValue(const std::string& type, const std::string& value_string);
                 AnyValue();
-                AnyValue(std::shared_ptr<yli::datatypes::AnyStruct> any_struct_shared_ptr);
+                AnyValue(std::shared_ptr<yli::common::AnyStruct> any_struct_shared_ptr);
                 AnyValue(const bool bool_value);
                 AnyValue(const char char_value);
                 AnyValue(const float float_value);
@@ -149,7 +149,7 @@ namespace yli
                 AnyValue(glm::vec3* const glm_vec3_pointer);
                 AnyValue(glm::vec4* const glm_vec4_pointer);
 
-                AnyValue(const std::string& type, std::shared_ptr<yli::datatypes::AnyStruct> any_struct_shared_ptr);
+                AnyValue(const std::string& type, std::shared_ptr<yli::common::AnyStruct> any_struct_shared_ptr);
                 AnyValue(const std::string& type, const bool bool_value);
                 AnyValue(const std::string& type, const char char_value);
                 AnyValue(const std::string& type, const float float_value);
@@ -186,7 +186,7 @@ namespace yli
                 AnyValue(const std::string& type, glm::vec4* const glm_vec3_pointer);
 
                 int type;
-                std::shared_ptr<yli::datatypes::AnyStruct> any_struct_shared_ptr;
+                std::shared_ptr<yli::common::AnyStruct> any_struct_shared_ptr;
                 std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr;
                 std::shared_ptr<std::vector<uint8_t>> std_vector_uint8_t_shared_ptr;
                 std::shared_ptr<std::vector<int16_t>> std_vector_int16_t_shared_ptr;

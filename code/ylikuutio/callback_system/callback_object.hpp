@@ -58,11 +58,11 @@ namespace yli
                 void set_new_callback(const InputParametersToAnyValueCallback callback);
 
                 // getter functions for callbacks and callback objects.
-                std::shared_ptr<yli::datatypes::AnyValue> get_any_value(const std::string& name) const;
-                std::shared_ptr<yli::datatypes::AnyValue> get_arg(const std::size_t arg_i) const;
+                std::shared_ptr<yli::common::AnyValue> get_any_value(const std::string& name) const;
+                std::shared_ptr<yli::common::AnyValue> get_arg(const std::size_t arg_i) const;
 
                 // setter function for callbacks and callback objects.
-                void set_any_value(const std::string& name, std::shared_ptr<yli::datatypes::AnyValue> any_value);
+                void set_any_value(const std::string& name, std::shared_ptr<yli::common::AnyValue> any_value);
 
                 friend class CallbackEngine;
                 friend class CallbackParameter;
@@ -78,7 +78,7 @@ namespace yli
                 void bind_child_to_parent(yli::callback_system::CallbackParameter* child_pointer);
 
                 // execute this callback.
-                virtual std::shared_ptr<yli::datatypes::AnyValue> execute();
+                virtual std::shared_ptr<yli::common::AnyValue> execute();
 
                 yli::callback_system::CallbackEngine* parent; // pointer to the callback engine.
 
@@ -91,7 +91,7 @@ namespace yli
                 InputParametersToAnyValueCallback callback;
 
                 // A hash map used to store variables.
-                std::unordered_map<std::string, yli::datatypes::AnyValue> anyvalue_hashmap;
+                std::unordered_map<std::string, yli::common::AnyValue> anyvalue_hashmap;
         };
     }
 }

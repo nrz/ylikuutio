@@ -306,8 +306,8 @@ namespace yli
                 const GLenum format,
                 const GLenum internal_format,
                 const GLenum type,
-                const std::shared_ptr<yli::datatypes::AnyValue> left_filler_vector_any_value,
-                const std::shared_ptr<yli::datatypes::AnyValue> right_filler_vector_any_value,
+                const std::shared_ptr<yli::common::AnyValue> left_filler_vector_any_value,
+                const std::shared_ptr<yli::common::AnyValue> right_filler_vector_any_value,
                 std::size_t& image_width,
                 std::size_t& image_height,
                 std::size_t& image_size,
@@ -336,8 +336,8 @@ namespace yli
                     }
                     if (left_filler_vector_any_value != nullptr &&
                             right_filler_vector_any_value != nullptr &&
-                            left_filler_vector_any_value->type == yli::datatypes::STD_VECTOR_INT8_T_SHARED_PTR &&
-                            right_filler_vector_any_value->type == yli::datatypes::STD_VECTOR_INT8_T_SHARED_PTR &&
+                            left_filler_vector_any_value->type == yli::common::STD_VECTOR_INT8_T_SHARED_PTR &&
+                            right_filler_vector_any_value->type == yli::common::STD_VECTOR_INT8_T_SHARED_PTR &&
                             left_filler_vector_any_value->std_vector_int8_t_shared_ptr != nullptr &&
                             right_filler_vector_any_value->std_vector_int8_t_shared_ptr != nullptr)
                     {
@@ -361,8 +361,8 @@ namespace yli
                     }
                     if (left_filler_vector_any_value != nullptr &&
                             right_filler_vector_any_value != nullptr &&
-                            left_filler_vector_any_value->type == yli::datatypes::STD_VECTOR_UINT8_T_SHARED_PTR &&
-                            right_filler_vector_any_value->type == yli::datatypes::STD_VECTOR_UINT8_T_SHARED_PTR &&
+                            left_filler_vector_any_value->type == yli::common::STD_VECTOR_UINT8_T_SHARED_PTR &&
+                            right_filler_vector_any_value->type == yli::common::STD_VECTOR_UINT8_T_SHARED_PTR &&
                             left_filler_vector_any_value->std_vector_uint8_t_shared_ptr != nullptr &&
                             right_filler_vector_any_value->std_vector_uint8_t_shared_ptr != nullptr)
                     {
@@ -386,8 +386,8 @@ namespace yli
                     }
                     if (left_filler_vector_any_value != nullptr &&
                             right_filler_vector_any_value != nullptr &&
-                            left_filler_vector_any_value->type == yli::datatypes::STD_VECTOR_INT16_T_SHARED_PTR &&
-                            right_filler_vector_any_value->type == yli::datatypes::STD_VECTOR_INT16_T_SHARED_PTR &&
+                            left_filler_vector_any_value->type == yli::common::STD_VECTOR_INT16_T_SHARED_PTR &&
+                            right_filler_vector_any_value->type == yli::common::STD_VECTOR_INT16_T_SHARED_PTR &&
                             left_filler_vector_any_value->std_vector_int16_t_shared_ptr != nullptr &&
                             right_filler_vector_any_value->std_vector_int16_t_shared_ptr != nullptr)
                     {
@@ -411,8 +411,8 @@ namespace yli
                     }
                     if (left_filler_vector_any_value != nullptr &&
                             right_filler_vector_any_value != nullptr &&
-                            left_filler_vector_any_value->type == yli::datatypes::STD_VECTOR_UINT16_T_SHARED_PTR &&
-                            right_filler_vector_any_value->type == yli::datatypes::STD_VECTOR_UINT16_T_SHARED_PTR &&
+                            left_filler_vector_any_value->type == yli::common::STD_VECTOR_UINT16_T_SHARED_PTR &&
+                            right_filler_vector_any_value->type == yli::common::STD_VECTOR_UINT16_T_SHARED_PTR &&
                             left_filler_vector_any_value->std_vector_uint16_t_shared_ptr != nullptr &&
                             right_filler_vector_any_value->std_vector_uint16_t_shared_ptr != nullptr)
                     {
@@ -436,8 +436,8 @@ namespace yli
                     }
                     if (left_filler_vector_any_value != nullptr &&
                             right_filler_vector_any_value != nullptr &&
-                            left_filler_vector_any_value->type == yli::datatypes::STD_VECTOR_INT32_T_SHARED_PTR &&
-                            right_filler_vector_any_value->type == yli::datatypes::STD_VECTOR_INT32_T_SHARED_PTR &&
+                            left_filler_vector_any_value->type == yli::common::STD_VECTOR_INT32_T_SHARED_PTR &&
+                            right_filler_vector_any_value->type == yli::common::STD_VECTOR_INT32_T_SHARED_PTR &&
                             left_filler_vector_any_value->std_vector_int32_t_shared_ptr != nullptr &&
                             right_filler_vector_any_value->std_vector_int32_t_shared_ptr != nullptr)
                     {
@@ -461,8 +461,8 @@ namespace yli
                     }
                     if (left_filler_vector_any_value != nullptr &&
                             right_filler_vector_any_value != nullptr &&
-                            left_filler_vector_any_value->type == yli::datatypes::STD_VECTOR_UINT32_T_SHARED_PTR &&
-                            right_filler_vector_any_value->type == yli::datatypes::STD_VECTOR_UINT32_T_SHARED_PTR &&
+                            left_filler_vector_any_value->type == yli::common::STD_VECTOR_UINT32_T_SHARED_PTR &&
+                            right_filler_vector_any_value->type == yli::common::STD_VECTOR_UINT32_T_SHARED_PTR &&
                             left_filler_vector_any_value->std_vector_uint32_t_shared_ptr != nullptr &&
                             right_filler_vector_any_value->std_vector_uint32_t_shared_ptr != nullptr)
                     {
@@ -490,8 +490,8 @@ namespace yli
                     }
                     if (left_filler_vector_any_value != nullptr &&
                             right_filler_vector_any_value != nullptr &&
-                            left_filler_vector_any_value->type == yli::datatypes::STD_VECTOR_FLOAT_SHARED_PTR &&
-                            right_filler_vector_any_value->type == yli::datatypes::STD_VECTOR_FLOAT_SHARED_PTR &&
+                            left_filler_vector_any_value->type == yli::common::STD_VECTOR_FLOAT_SHARED_PTR &&
+                            right_filler_vector_any_value->type == yli::common::STD_VECTOR_FLOAT_SHARED_PTR &&
                             left_filler_vector_any_value->std_vector_float_shared_ptr != nullptr &&
                             right_filler_vector_any_value->std_vector_float_shared_ptr != nullptr)
                     {

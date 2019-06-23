@@ -62,10 +62,10 @@
 // `end_condition_callback_engine->execute()` returns `true`, or until
 // `n_max_iterations` is reached. If `end_condition_callback_engine` is `nullptr`
 // or `end_condition_callback_engine->execute()` does not not return an `AnyValue`
-// which contains `datatypes::BOOL`, then `end_condition_callback_engine` is ignored
+// which contains `common::BOOL`, then `end_condition_callback_engine` is ignored
 // and `n_max_iterations` is the exact number of iterations to be done. However,
 // even if `end_condition_callback_engine->execute()` would return an invalid return
-// value, that is, not an `AnyValue` which contains `datatypes::BOOL`,
+// value, that is, not an `AnyValue` which contains `common::BOOL`,
 // `end_condition_callback_engine->execute()` is still called and taken into account
 // in every iteration.
 //
@@ -289,8 +289,8 @@ namespace yli
 
                 yli::ontology::Shader* parent; // pointer to the `Shader`.
 
-                std::shared_ptr<yli::datatypes::AnyValue> left_filler_vector_any_value;
-                std::shared_ptr<yli::datatypes::AnyValue> right_filler_vector_any_value;
+                std::shared_ptr<yli::common::AnyValue> left_filler_vector_any_value;
+                std::shared_ptr<yli::common::AnyValue> right_filler_vector_any_value;
 
                 // End iterating when `end_condition_callback_engine` returns `true`.
                 std::shared_ptr<yli::callback_system::CallbackEngine> end_condition_callback_engine;

@@ -29,7 +29,7 @@
 
 // `AnyValueEntity` is a child of the `Universe`.
 //
-// `AnyValueEntity` inherits both `yli::datatypes::AnyValue` and `yli::ontology::Entity`.
+// `AnyValueEntity` inherits both `yli::common::AnyValue` and `yli::ontology::Entity`.
 // Therefore, `AnyValueEntity` is an `Entity` but it functions also as an `AnyValue`.
 // Each `AnyValueEntity` may refer to an other `Entity`. If that `Entity` is deleted, it
 // will delete all `AnyValueEntity` objects referring to it as well: the destructors of
@@ -42,13 +42,13 @@ namespace yli
     {
         class Universe;
 
-        class AnyValueEntity: public yli::datatypes::AnyValue, public yli::ontology::Entity
+        class AnyValueEntity: public yli::common::AnyValue, public yli::ontology::Entity
         {
             public:
                 // constructor.
-                // use the default copy constructor of `yli::datatypes::AnyValue`.
-                AnyValueEntity(yli::ontology::Universe* const universe, const std::shared_ptr<yli::datatypes::AnyValue> any_value_shared_ptr)
-                    : yli::datatypes::AnyValue(*any_value_shared_ptr), yli::ontology::Entity(universe)
+                // use the default copy constructor of `yli::common::AnyValue`.
+                AnyValueEntity(yli::ontology::Universe* const universe, const std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr)
+                    : yli::common::AnyValue(*any_value_shared_ptr), yli::ontology::Entity(universe)
                 {
                     this->parent = universe;
 
@@ -61,9 +61,9 @@ namespace yli
                 }
 
                 // constructor.
-                // use the default copy constructor of `yli::datatypes::AnyValue`.
-                AnyValueEntity(yli::ontology::Universe* const universe, const yli::datatypes::AnyValue& any_value)
-                    : yli::datatypes::AnyValue(any_value), yli::ontology::Entity(universe)
+                // use the default copy constructor of `yli::common::AnyValue`.
+                AnyValueEntity(yli::ontology::Universe* const universe, const yli::common::AnyValue& any_value)
+                    : yli::common::AnyValue(any_value), yli::ontology::Entity(universe)
                 {
                     this->parent = universe;
 

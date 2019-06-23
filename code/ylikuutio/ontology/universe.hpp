@@ -530,7 +530,7 @@ namespace yli
                 // this method returns current `max_FPS`.
                 std::size_t get_max_FPS() const;
 
-                void set(const std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_any_value);
+                void set(const std::string& setting_name, std::shared_ptr<yli::common::AnyValue> setting_any_value);
 
                 // this method returns a pointer to `yli::config::Setting` corresponding to the given `key`.
                 yli::config::Setting* get(const std::string& key) const;
@@ -555,42 +555,42 @@ namespace yli
 
                 // Public callbacks.
 
-                static std::shared_ptr<yli::datatypes::AnyValue> activate(
+                static std::shared_ptr<yli::common::AnyValue> activate(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::datatypes::AnyValue> delete_entity(
+                static std::shared_ptr<yli::common::AnyValue> delete_entity(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::datatypes::AnyValue> info(
+                static std::shared_ptr<yli::common::AnyValue> info(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::datatypes::AnyValue> bind(
+                static std::shared_ptr<yli::common::AnyValue> bind(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::datatypes::AnyValue> create_AnyValue(
+                static std::shared_ptr<yli::common::AnyValue> create_AnyValue(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::datatypes::AnyValue> create_AnyStruct(
+                static std::shared_ptr<yli::common::AnyValue> create_AnyStruct(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::datatypes::AnyValue> screenshot(
+                static std::shared_ptr<yli::common::AnyValue> screenshot(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::datatypes::AnyValue> eval(
+                static std::shared_ptr<yli::common::AnyValue> eval(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);

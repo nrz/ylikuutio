@@ -81,7 +81,7 @@ namespace yli
             return this->help();
         }
 
-        bool SettingMaster::set(const std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_new_any_value)
+        bool SettingMaster::set(const std::string& setting_name, std::shared_ptr<yli::common::AnyValue> setting_new_any_value)
         {
             if (!this->is_setting(setting_name))
             {
@@ -113,7 +113,7 @@ namespace yli
 
         // public callbacks.
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::set_and_print(
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::set_and_print(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const entity,
                 const std::vector<std::string>& command_parameters)
@@ -150,7 +150,7 @@ namespace yli
                     }
                     else if (setting != nullptr && setting->setting_value != nullptr)
                     {
-                        std::shared_ptr<yli::datatypes::AnyValue> any_value_shared_ptr = setting->read_callback(entity, setting_master);
+                        std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr = setting->read_callback(entity, setting_master);
 
                         if (any_value_shared_ptr != nullptr)
                         {
@@ -188,7 +188,7 @@ namespace yli
                     yli::config::Setting* setting = setting_master->setting_pointer_map[setting_name];
 
                     // create empty `AnyValue` (there is no suitable constructor yet).
-                    std::shared_ptr<yli::datatypes::AnyValue> setting_any_value = std::make_shared<yli::datatypes::AnyValue>();
+                    std::shared_ptr<yli::common::AnyValue> setting_any_value = std::make_shared<yli::common::AnyValue>();
                     setting_any_value->type = setting->setting_value->type;
 
                     // set a new value.
@@ -255,7 +255,7 @@ namespace yli
                     yli::config::Setting* setting = setting_master->setting_pointer_map[setting_name];
 
                     // create empty `AnyValue` (there is no suitable constructor yet).
-                    std::shared_ptr<yli::datatypes::AnyValue> setting_any_value = std::make_shared<yli::datatypes::AnyValue>();
+                    std::shared_ptr<yli::common::AnyValue> setting_any_value = std::make_shared<yli::common::AnyValue>();
                     setting_any_value->type = setting->setting_value->type;
 
                     // set a new value.
@@ -280,7 +280,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::get_and_print(
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::get_and_print(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const entity,
                 const std::vector<std::string>& command_parameters)
@@ -314,7 +314,7 @@ namespace yli
                     }
                     else if (setting != nullptr && setting->setting_value != nullptr)
                     {
-                        std::shared_ptr<yli::datatypes::AnyValue> any_value_shared_ptr = setting->read_callback(entity, setting_master);
+                        std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr = setting->read_callback(entity, setting_master);
 
                         if (any_value_shared_ptr != nullptr)
                         {
@@ -386,7 +386,7 @@ namespace yli
                     }
                     else if (setting != nullptr && setting->setting_value != nullptr)
                     {
-                        std::shared_ptr<yli::datatypes::AnyValue> any_value_shared_ptr = setting->read_callback(named_entity, setting_master);
+                        std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr = setting->read_callback(named_entity, setting_master);
 
                         if (any_value_shared_ptr != nullptr)
                         {
@@ -419,7 +419,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_planet_radius(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_planet_radius(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -431,9 +431,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> planet_radius_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["planet_radius"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> planet_radius_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["planet_radius"]->setting_value);
 
-            if (planet_radius_any_value == nullptr || planet_radius_any_value->type != yli::datatypes::FLOAT)
+            if (planet_radius_any_value == nullptr || planet_radius_any_value->type != yli::common::FLOAT)
             {
                 return nullptr;
             }
@@ -449,7 +449,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_background_color(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_background_color(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -465,9 +465,9 @@ namespace yli
             }
 
             // red.
-            std::shared_ptr<yli::datatypes::AnyValue> red_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["red"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> red_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["red"]->setting_value);
 
-            if (red_any_value == nullptr || red_any_value->type != yli::datatypes::FLOAT)
+            if (red_any_value == nullptr || red_any_value->type != yli::common::FLOAT)
             {
                 return nullptr;
             }
@@ -475,9 +475,9 @@ namespace yli
             float red = red_any_value->float_value;
 
             // green.
-            std::shared_ptr<yli::datatypes::AnyValue> green_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["green"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> green_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["green"]->setting_value);
 
-            if (green_any_value == nullptr || green_any_value->type != yli::datatypes::FLOAT)
+            if (green_any_value == nullptr || green_any_value->type != yli::common::FLOAT)
             {
                 return nullptr;
             }
@@ -485,9 +485,9 @@ namespace yli
             float green = green_any_value->float_value;
 
             // blue.
-            std::shared_ptr<yli::datatypes::AnyValue> blue_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["blue"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> blue_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["blue"]->setting_value);
 
-            if (blue_any_value == nullptr || blue_any_value->type != yli::datatypes::FLOAT)
+            if (blue_any_value == nullptr || blue_any_value->type != yli::common::FLOAT)
             {
                 return nullptr;
             }
@@ -495,9 +495,9 @@ namespace yli
             float blue = blue_any_value->float_value;
 
             // alpha.
-            std::shared_ptr<yli::datatypes::AnyValue> alpha_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["alpha"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> alpha_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["alpha"]->setting_value);
 
-            if (alpha_any_value == nullptr || alpha_any_value->type != yli::datatypes::FLOAT)
+            if (alpha_any_value == nullptr || alpha_any_value->type != yli::common::FLOAT)
             {
                 return nullptr;
             }
@@ -521,7 +521,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_wireframe(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_wireframe(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -533,9 +533,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> wireframe_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["wireframe"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> wireframe_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["wireframe"]->setting_value);
 
-            if (wireframe_any_value == nullptr || wireframe_any_value->type != yli::datatypes::BOOL)
+            if (wireframe_any_value == nullptr || wireframe_any_value->type != yli::common::BOOL)
             {
                 return nullptr;
             }
@@ -544,7 +544,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_should_be_rendered(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_should_be_rendered(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -556,9 +556,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> should_be_rendered_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["should_be_rendered"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> should_be_rendered_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["should_be_rendered"]->setting_value);
 
-            if (should_be_rendered_any_value == nullptr || should_be_rendered_any_value->type != yli::datatypes::BOOL)
+            if (should_be_rendered_any_value == nullptr || should_be_rendered_any_value->type != yli::common::BOOL)
             {
                 return nullptr;
             }
@@ -567,7 +567,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_spherical_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_spherical_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -583,9 +583,9 @@ namespace yli
                     return nullptr;
                 }
 
-                std::shared_ptr<yli::datatypes::AnyValue> spherical_coordinates_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["spherical_coordinates"]->setting_value);
+                std::shared_ptr<yli::common::AnyValue> spherical_coordinates_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["spherical_coordinates"]->setting_value);
 
-                if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != yli::datatypes::SPHERICAL_COORDINATES_STRUCT_POINTER)
+                if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != yli::common::SPHERICAL_COORDINATES_STRUCT_POINTER)
                 {
                     return nullptr;
                 }
@@ -601,9 +601,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> spherical_coordinates_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["spherical_coordinates"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> spherical_coordinates_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["spherical_coordinates"]->setting_value);
 
-            if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != yli::datatypes::SPHERICAL_COORDINATES_STRUCT_POINTER)
+            if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != yli::common::SPHERICAL_COORDINATES_STRUCT_POINTER)
             {
                 return nullptr;
             }
@@ -612,7 +612,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_rho(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_rho(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -628,9 +628,9 @@ namespace yli
                     return nullptr;
                 }
 
-                std::shared_ptr<yli::datatypes::AnyValue> rho_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["rho"]->setting_value);
+                std::shared_ptr<yli::common::AnyValue> rho_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["rho"]->setting_value);
 
-                if (rho_any_value == nullptr || rho_any_value->type != yli::datatypes::FLOAT)
+                if (rho_any_value == nullptr || rho_any_value->type != yli::common::FLOAT)
                 {
                     return nullptr;
                 }
@@ -651,9 +651,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> rho_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["rho"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> rho_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["rho"]->setting_value);
 
-            if (rho_any_value == nullptr || rho_any_value->type != yli::datatypes::FLOAT)
+            if (rho_any_value == nullptr || rho_any_value->type != yli::common::FLOAT)
             {
                 return nullptr;
             }
@@ -662,7 +662,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_theta(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_theta(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -678,9 +678,9 @@ namespace yli
                     return nullptr;
                 }
 
-                std::shared_ptr<yli::datatypes::AnyValue> theta_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["theta"]->setting_value);
+                std::shared_ptr<yli::common::AnyValue> theta_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["theta"]->setting_value);
 
-                if (theta_any_value == nullptr || theta_any_value->type != yli::datatypes::FLOAT)
+                if (theta_any_value == nullptr || theta_any_value->type != yli::common::FLOAT)
                 {
                     return nullptr;
                 }
@@ -701,9 +701,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> theta_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["theta"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> theta_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["theta"]->setting_value);
 
-            if (theta_any_value == nullptr || theta_any_value->type != yli::datatypes::FLOAT)
+            if (theta_any_value == nullptr || theta_any_value->type != yli::common::FLOAT)
             {
                 return nullptr;
             }
@@ -712,7 +712,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_phi(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_phi(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -728,9 +728,9 @@ namespace yli
                     return nullptr;
                 }
 
-                std::shared_ptr<yli::datatypes::AnyValue> phi_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["phi"]->setting_value);
+                std::shared_ptr<yli::common::AnyValue> phi_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["phi"]->setting_value);
 
-                if (phi_any_value == nullptr || phi_any_value->type != yli::datatypes::FLOAT)
+                if (phi_any_value == nullptr || phi_any_value->type != yli::common::FLOAT)
                 {
                     return nullptr;
                 }
@@ -751,9 +751,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> phi_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["phi"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> phi_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["phi"]->setting_value);
 
-            if (phi_any_value == nullptr || phi_any_value->type != yli::datatypes::FLOAT)
+            if (phi_any_value == nullptr || phi_any_value->type != yli::common::FLOAT)
             {
                 return nullptr;
             }
@@ -762,7 +762,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_cartesian_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_cartesian_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -778,9 +778,9 @@ namespace yli
                     return nullptr;
                 }
 
-                std::shared_ptr<yli::datatypes::AnyValue> cartesian_coordinates_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["cartesian_coordinates"]->setting_value);
+                std::shared_ptr<yli::common::AnyValue> cartesian_coordinates_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["cartesian_coordinates"]->setting_value);
 
-                if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != yli::datatypes::GLM_VEC3_POINTER)
+                if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != yli::common::GLM_VEC3_POINTER)
                 {
                     return nullptr;
                 }
@@ -796,9 +796,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> cartesian_coordinates_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["cartesian_coordinates"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> cartesian_coordinates_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["cartesian_coordinates"]->setting_value);
 
-            if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != yli::datatypes::GLM_VEC3_POINTER)
+            if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != yli::common::GLM_VEC3_POINTER)
             {
                 return nullptr;
             }
@@ -807,7 +807,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -823,9 +823,9 @@ namespace yli
                     return nullptr;
                 }
 
-                std::shared_ptr<yli::datatypes::AnyValue> x_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["x"]->setting_value);
+                std::shared_ptr<yli::common::AnyValue> x_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["x"]->setting_value);
 
-                if (x_any_value == nullptr || x_any_value->type != yli::datatypes::FLOAT)
+                if (x_any_value == nullptr || x_any_value->type != yli::common::FLOAT)
                 {
                     return nullptr;
                 }
@@ -855,9 +855,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> x_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["x"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> x_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["x"]->setting_value);
 
-            if (x_any_value == nullptr || x_any_value->type != yli::datatypes::FLOAT)
+            if (x_any_value == nullptr || x_any_value->type != yli::common::FLOAT)
             {
                 return nullptr;
             }
@@ -866,7 +866,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -882,9 +882,9 @@ namespace yli
                     return nullptr;
                 }
 
-                std::shared_ptr<yli::datatypes::AnyValue> y_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["y"]->setting_value);
+                std::shared_ptr<yli::common::AnyValue> y_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["y"]->setting_value);
 
-                if (y_any_value == nullptr || y_any_value->type != yli::datatypes::FLOAT)
+                if (y_any_value == nullptr || y_any_value->type != yli::common::FLOAT)
                 {
                     return nullptr;
                 }
@@ -914,9 +914,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> y_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["y"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> y_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["y"]->setting_value);
 
-            if (y_any_value == nullptr || y_any_value->type != yli::datatypes::FLOAT)
+            if (y_any_value == nullptr || y_any_value->type != yli::common::FLOAT)
             {
                 return nullptr;
             }
@@ -925,7 +925,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_z(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_z(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -941,9 +941,9 @@ namespace yli
                     return nullptr;
                 }
 
-                std::shared_ptr<yli::datatypes::AnyValue> z_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["z"]->setting_value);
+                std::shared_ptr<yli::common::AnyValue> z_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["z"]->setting_value);
 
-                if (z_any_value == nullptr || z_any_value->type != yli::datatypes::FLOAT)
+                if (z_any_value == nullptr || z_any_value->type != yli::common::FLOAT)
                 {
                     return nullptr;
                 }
@@ -973,9 +973,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> z_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["z"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> z_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["z"]->setting_value);
 
-            if (z_any_value == nullptr || z_any_value->type != yli::datatypes::FLOAT)
+            if (z_any_value == nullptr || z_any_value->type != yli::common::FLOAT)
             {
                 return nullptr;
             }
@@ -984,7 +984,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_horizontal_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_horizontal_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -1003,9 +1003,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> horizontal_angle_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["horizontal_angle"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> horizontal_angle_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["horizontal_angle"]->setting_value);
 
-            if (horizontal_angle_any_value == nullptr || horizontal_angle_any_value->type != yli::datatypes::DOUBLE)
+            if (horizontal_angle_any_value == nullptr || horizontal_angle_any_value->type != yli::common::DOUBLE)
             {
                 return nullptr;
             }
@@ -1014,7 +1014,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_vertical_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_vertical_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -1033,9 +1033,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> vertical_angle_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["vertical_angle"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> vertical_angle_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["vertical_angle"]->setting_value);
 
-            if (vertical_angle_any_value == nullptr || vertical_angle_any_value->type != yli::datatypes::DOUBLE)
+            if (vertical_angle_any_value == nullptr || vertical_angle_any_value->type != yli::common::DOUBLE)
             {
                 return nullptr;
             }
@@ -1044,7 +1044,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_speed(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_speed(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -1063,9 +1063,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> speed_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["speed"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> speed_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["speed"]->setting_value);
 
-            if (speed_any_value == nullptr || speed_any_value->type != yli::datatypes::FLOAT)
+            if (speed_any_value == nullptr || speed_any_value->type != yli::common::FLOAT)
             {
                 return nullptr;
             }
@@ -1074,7 +1074,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_turbo_factor(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_turbo_factor(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -1093,9 +1093,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> turbo_factor_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["turbo_factor"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> turbo_factor_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["turbo_factor"]->setting_value);
 
-            if (turbo_factor_any_value == nullptr || turbo_factor_any_value->type != yli::datatypes::FLOAT)
+            if (turbo_factor_any_value == nullptr || turbo_factor_any_value->type != yli::common::FLOAT)
             {
                 return nullptr;
             }
@@ -1104,7 +1104,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_twin_turbo_factor(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_twin_turbo_factor(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -1123,9 +1123,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> twin_turbo_factor_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["twin_turbo_factor"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> twin_turbo_factor_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["twin_turbo_factor"]->setting_value);
 
-            if (twin_turbo_factor_any_value == nullptr || twin_turbo_factor_any_value->type != yli::datatypes::FLOAT)
+            if (twin_turbo_factor_any_value == nullptr || twin_turbo_factor_any_value->type != yli::common::FLOAT)
             {
                 return nullptr;
             }
@@ -1134,7 +1134,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_mouse_speed(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_mouse_speed(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -1153,9 +1153,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> mouse_speed_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["mouse_speed"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> mouse_speed_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["mouse_speed"]->setting_value);
 
-            if (mouse_speed_any_value == nullptr || mouse_speed_any_value->type != yli::datatypes::FLOAT)
+            if (mouse_speed_any_value == nullptr || mouse_speed_any_value->type != yli::common::FLOAT)
             {
                 return nullptr;
             }
@@ -1164,7 +1164,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_is_flight_mode_in_use(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_is_flight_mode_in_use(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -1183,9 +1183,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> is_flight_mode_in_use_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["is_flight_mode_in_use"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> is_flight_mode_in_use_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["is_flight_mode_in_use"]->setting_value);
 
-            if (is_flight_mode_in_use_any_value == nullptr || is_flight_mode_in_use_any_value->type != yli::datatypes::BOOL)
+            if (is_flight_mode_in_use_any_value == nullptr || is_flight_mode_in_use_any_value->type != yli::common::BOOL)
             {
                 return nullptr;
             }
@@ -1194,7 +1194,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_console_top_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_console_top_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -1206,9 +1206,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> console_top_y_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["console_top_y"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> console_top_y_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["console_top_y"]->setting_value);
 
-            if (console_top_y_any_value == nullptr || console_top_y_any_value->type != yli::datatypes::UINT32_T)
+            if (console_top_y_any_value == nullptr || console_top_y_any_value->type != yli::common::UINT32_T)
             {
                 return nullptr;
             }
@@ -1231,7 +1231,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_console_bottom_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_console_bottom_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -1243,9 +1243,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> console_bottom_y_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["console_bottom_y"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> console_bottom_y_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["console_bottom_y"]->setting_value);
 
-            if (console_bottom_y_any_value == nullptr || console_bottom_y_any_value->type != yli::datatypes::UINT32_T)
+            if (console_bottom_y_any_value == nullptr || console_bottom_y_any_value->type != yli::common::UINT32_T)
             {
                 return nullptr;
             }
@@ -1268,7 +1268,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_console_left_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_console_left_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -1280,9 +1280,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> console_left_x_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["console_left_x"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> console_left_x_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["console_left_x"]->setting_value);
 
-            if (console_left_x_any_value == nullptr || console_left_x_any_value->type != yli::datatypes::UINT32_T)
+            if (console_left_x_any_value == nullptr || console_left_x_any_value->type != yli::common::UINT32_T)
             {
                 return nullptr;
             }
@@ -1305,7 +1305,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_console_right_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_console_right_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -1317,9 +1317,9 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> console_right_x_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["console_right_x"]->setting_value);
+            std::shared_ptr<yli::common::AnyValue> console_right_x_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["console_right_x"]->setting_value);
 
-            if (console_right_x_any_value == nullptr || console_right_x_any_value->type != yli::datatypes::UINT32_T)
+            if (console_right_x_any_value == nullptr || console_right_x_any_value->type != yli::common::UINT32_T)
             {
                 return nullptr;
             }
@@ -1342,17 +1342,17 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_should_be_rendered(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::read_should_be_rendered(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
                 return nullptr;
             }
 
-            return std::make_shared<yli::datatypes::AnyValue>(entity->should_be_rendered);
+            return std::make_shared<yli::common::AnyValue>(entity->should_be_rendered);
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_cartesian_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::read_cartesian_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
@@ -1363,7 +1363,7 @@ namespace yli
 
             if (movable != nullptr)
             {
-                return std::make_shared<yli::datatypes::AnyValue>(&movable->cartesian_coordinates);
+                return std::make_shared<yli::common::AnyValue>(&movable->cartesian_coordinates);
             }
 
             yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
@@ -1373,10 +1373,10 @@ namespace yli
                 return nullptr;
             }
 
-            return std::make_shared<yli::datatypes::AnyValue>(&universe->current_camera_cartesian_coordinates);
+            return std::make_shared<yli::common::AnyValue>(&universe->current_camera_cartesian_coordinates);
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::read_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
@@ -1387,7 +1387,7 @@ namespace yli
 
             if (movable != nullptr)
             {
-                return std::make_shared<yli::datatypes::AnyValue>(movable->cartesian_coordinates.x);
+                return std::make_shared<yli::common::AnyValue>(movable->cartesian_coordinates.x);
             }
 
             yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
@@ -1397,10 +1397,10 @@ namespace yli
                 return nullptr;
             }
 
-            return std::make_shared<yli::datatypes::AnyValue>(universe->current_camera_cartesian_coordinates.x);
+            return std::make_shared<yli::common::AnyValue>(universe->current_camera_cartesian_coordinates.x);
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::read_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
@@ -1411,7 +1411,7 @@ namespace yli
 
             if (movable != nullptr)
             {
-                return std::make_shared<yli::datatypes::AnyValue>(movable->cartesian_coordinates.y);
+                return std::make_shared<yli::common::AnyValue>(movable->cartesian_coordinates.y);
             }
 
             yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
@@ -1421,10 +1421,10 @@ namespace yli
                 return nullptr;
             }
 
-            return std::make_shared<yli::datatypes::AnyValue>(universe->current_camera_cartesian_coordinates.y);
+            return std::make_shared<yli::common::AnyValue>(universe->current_camera_cartesian_coordinates.y);
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_z(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::read_z(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
@@ -1435,7 +1435,7 @@ namespace yli
 
             if (movable != nullptr)
             {
-                return std::make_shared<yli::datatypes::AnyValue>(movable->cartesian_coordinates.z);
+                return std::make_shared<yli::common::AnyValue>(movable->cartesian_coordinates.z);
             }
 
             yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
@@ -1445,10 +1445,10 @@ namespace yli
                 return nullptr;
             }
 
-            return std::make_shared<yli::datatypes::AnyValue>(universe->current_camera_cartesian_coordinates.z);
+            return std::make_shared<yli::common::AnyValue>(universe->current_camera_cartesian_coordinates.z);
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_rho(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::read_rho(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
@@ -1459,7 +1459,7 @@ namespace yli
 
             if (movable != nullptr)
             {
-                return std::make_shared<yli::datatypes::AnyValue>(movable->spherical_coordinates.rho);
+                return std::make_shared<yli::common::AnyValue>(movable->spherical_coordinates.rho);
             }
 
             yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
@@ -1469,10 +1469,10 @@ namespace yli
                 return nullptr;
             }
 
-            return std::make_shared<yli::datatypes::AnyValue>(universe->current_camera_spherical_coordinates.rho);
+            return std::make_shared<yli::common::AnyValue>(universe->current_camera_spherical_coordinates.rho);
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_theta(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::read_theta(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
@@ -1483,7 +1483,7 @@ namespace yli
 
             if (movable != nullptr)
             {
-                return std::make_shared<yli::datatypes::AnyValue>(movable->spherical_coordinates.theta);
+                return std::make_shared<yli::common::AnyValue>(movable->spherical_coordinates.theta);
             }
 
             yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
@@ -1493,10 +1493,10 @@ namespace yli
                 return nullptr;
             }
 
-            return std::make_shared<yli::datatypes::AnyValue>(universe->current_camera_spherical_coordinates.theta);
+            return std::make_shared<yli::common::AnyValue>(universe->current_camera_spherical_coordinates.theta);
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_phi(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::read_phi(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
@@ -1507,7 +1507,7 @@ namespace yli
 
             if (movable != nullptr)
             {
-                return std::make_shared<yli::datatypes::AnyValue>(movable->spherical_coordinates.phi);
+                return std::make_shared<yli::common::AnyValue>(movable->spherical_coordinates.phi);
             }
 
             yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
@@ -1517,10 +1517,10 @@ namespace yli
                 return nullptr;
             }
 
-            return std::make_shared<yli::datatypes::AnyValue>(universe->current_camera_spherical_coordinates.phi);
+            return std::make_shared<yli::common::AnyValue>(universe->current_camera_spherical_coordinates.phi);
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_up(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::read_up(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
@@ -1534,10 +1534,10 @@ namespace yli
                 return nullptr;
             }
 
-            return std::make_shared<yli::datatypes::AnyValue>(&universe->current_camera_up);
+            return std::make_shared<yli::common::AnyValue>(&universe->current_camera_up);
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_right(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::read_right(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
@@ -1551,10 +1551,10 @@ namespace yli
                 return nullptr;
             }
 
-            return std::make_shared<yli::datatypes::AnyValue>(&universe->current_camera_right);
+            return std::make_shared<yli::common::AnyValue>(&universe->current_camera_right);
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_horizontal_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::read_horizontal_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
@@ -1568,10 +1568,10 @@ namespace yli
                 return nullptr;
             }
 
-            return std::make_shared<yli::datatypes::AnyValue>(universe->current_camera_horizontal_angle);
+            return std::make_shared<yli::common::AnyValue>(universe->current_camera_horizontal_angle);
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_vertical_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::read_vertical_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
@@ -1585,10 +1585,10 @@ namespace yli
                 return nullptr;
             }
 
-            return std::make_shared<yli::datatypes::AnyValue>(universe->current_camera_vertical_angle);
+            return std::make_shared<yli::common::AnyValue>(universe->current_camera_vertical_angle);
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_is_flight_mode_in_use(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::read_is_flight_mode_in_use(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
@@ -1602,7 +1602,7 @@ namespace yli
                 return nullptr;
             }
 
-            return std::make_shared<yli::datatypes::AnyValue>(universe->is_flight_mode_in_use);
+            return std::make_shared<yli::common::AnyValue>(universe->is_flight_mode_in_use);
         }
     }
 }

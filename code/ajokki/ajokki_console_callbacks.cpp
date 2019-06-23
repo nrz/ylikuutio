@@ -41,7 +41,7 @@ namespace yli
 
 namespace ajokki
 {
-    std::shared_ptr<yli::datatypes::AnyValue> version(
+    std::shared_ptr<yli::common::AnyValue> version(
             yli::console::Console* const console,
             yli::ontology::Entity* const,
             const std::vector<std::string>& command_parameters)
@@ -50,16 +50,16 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> quit(
+    std::shared_ptr<yli::common::AnyValue> quit(
             yli::console::Console* const,
             yli::ontology::Entity* const,
             const std::vector<std::string>& command_parameters)
     {
         uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
-        return std::make_shared<yli::datatypes::AnyValue>(exit_program_magic_number);
+        return std::make_shared<yli::common::AnyValue>(exit_program_magic_number);
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> help(
+    std::shared_ptr<yli::common::AnyValue> help(
             yli::console::Console* const console,
             yli::ontology::Entity* const,
             const std::vector<std::string>& command_parameters)

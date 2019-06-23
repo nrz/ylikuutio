@@ -29,7 +29,7 @@
 
 // `AnyStructEntity` is a child of the `Universe`.
 //
-// `AnyStructEntity` inherits both `yli::datatypes::AnyStruct` and `yli::ontology::Entity`.
+// `AnyStructEntity` inherits both `yli::common::AnyStruct` and `yli::ontology::Entity`.
 // Therefore, `AnyStructEntity` is an `Entity` but it functions also as an `AnyStruct`.
 // Each `AnyStructEntity` may have 0 or more `AnyValueEntity` objects as its children.
 // Each `AnyValueEntity` child of a `AnyStructEntity` needs to have a name from its
@@ -43,13 +43,13 @@ namespace yli
     {
         class Universe;
 
-        class AnyStructEntity: public yli::datatypes::AnyStruct, public yli::ontology::Entity
+        class AnyStructEntity: public yli::common::AnyStruct, public yli::ontology::Entity
         {
             public:
                 // constructor.
-                // use the default copy constructor of `yli::datatypes::AnyStruct`.
+                // use the default copy constructor of `yli::common::AnyStruct`.
                 AnyStructEntity(yli::ontology::Universe* const universe)
-                    : yli::datatypes::AnyStruct(), yli::ontology::Entity(universe)
+                    : yli::common::AnyStruct(), yli::ontology::Entity(universe)
                 {
                     this->parent = universe;
 
@@ -62,9 +62,9 @@ namespace yli
                 }
 
                 // constructor.
-                // use the default copy constructor of `yli::datatypes::AnyStruct`.
-                AnyStructEntity(yli::ontology::Universe* const universe, const yli::datatypes::AnyStruct& any_struct)
-                    : yli::datatypes::AnyStruct(any_struct), yli::ontology::Entity(universe)
+                // use the default copy constructor of `yli::common::AnyStruct`.
+                AnyStructEntity(yli::ontology::Universe* const universe, const yli::common::AnyStruct& any_struct)
+                    : yli::common::AnyStruct(any_struct), yli::ontology::Entity(universe)
                 {
                     this->parent = universe;
 

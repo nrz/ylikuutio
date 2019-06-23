@@ -458,7 +458,7 @@ namespace yli
             return this->max_FPS;
         }
 
-        void Universe::set(const std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_any_value)
+        void Universe::set(const std::string& setting_name, std::shared_ptr<yli::common::AnyValue> setting_any_value)
         {
             this->setting_master->set(setting_name, setting_any_value);
         }
@@ -533,7 +533,7 @@ namespace yli
 
         // Public callbacks.
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::activate(
+        std::shared_ptr<yli::common::AnyValue> Universe::activate(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
@@ -612,7 +612,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::delete_entity(
+        std::shared_ptr<yli::common::AnyValue> Universe::delete_entity(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
@@ -668,7 +668,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::info(
+        std::shared_ptr<yli::common::AnyValue> Universe::info(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
@@ -754,7 +754,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::bind(
+        std::shared_ptr<yli::common::AnyValue> Universe::bind(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
@@ -807,7 +807,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::create_AnyValue(
+        std::shared_ptr<yli::common::AnyValue> Universe::create_AnyValue(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
@@ -868,13 +868,13 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> any_value = std::make_shared<yli::datatypes::AnyValue>(variable_type, value_string);
+            std::shared_ptr<yli::common::AnyValue> any_value = std::make_shared<yli::common::AnyValue>(variable_type, value_string);
             yli::ontology::AnyValueEntity* const any_value_entity = new yli::ontology::AnyValueEntity(universe, any_value);
             any_value_entity->set_name(variable_name);
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::create_AnyStruct(
+        std::shared_ptr<yli::common::AnyValue> Universe::create_AnyStruct(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
@@ -924,7 +924,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::screenshot(
+        std::shared_ptr<yli::common::AnyValue> Universe::screenshot(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
@@ -1008,7 +1008,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::eval(
+        std::shared_ptr<yli::common::AnyValue> Universe::eval(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)

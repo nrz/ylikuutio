@@ -71,8 +71,8 @@ namespace yli
             std::string texture_filename;    // Filename of the model file.
             std::string output_filename;     // Filename of the output file.
             yli::ontology::Shader* parent;   // Pointer to the `Shader`.
-            std::shared_ptr<yli::datatypes::AnyValue> left_filler_vector_any_value;
-            std::shared_ptr<yli::datatypes::AnyValue> right_filler_vector_any_value;
+            std::shared_ptr<yli::common::AnyValue> left_filler_vector_any_value;
+            std::shared_ptr<yli::common::AnyValue> right_filler_vector_any_value;
             std::shared_ptr<yli::callback_system::CallbackEngine> end_condition_callback_engine;
             std::size_t n_max_iterations;
             std::size_t compute_taskID;

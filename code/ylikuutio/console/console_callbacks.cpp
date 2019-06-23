@@ -47,7 +47,7 @@ namespace yli
 
         // Action mode keypress callbacks begin here.
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::enter_console(
+        std::shared_ptr<yli::common::AnyValue> Console::enter_console(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -81,7 +81,7 @@ namespace yli
 
                 // Signal to caller that we have entered the console.
                 uint32_t enter_console_magic_number = ENTER_CONSOLE_MAGIC_NUMBER;
-                return std::make_shared<yli::datatypes::AnyValue>(enter_console_magic_number);
+                return std::make_shared<yli::common::AnyValue>(enter_console_magic_number);
             }
 
             // We did not enter the console.
@@ -90,7 +90,7 @@ namespace yli
 
         // Console mode keyrelease callbacks begin here.
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::release_left_control_in_console(
+        std::shared_ptr<yli::common::AnyValue> Console::release_left_control_in_console(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -103,7 +103,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::release_right_control_in_console(
+        std::shared_ptr<yli::common::AnyValue> Console::release_right_control_in_console(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -116,7 +116,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::release_left_alt_in_console(
+        std::shared_ptr<yli::common::AnyValue> Console::release_left_alt_in_console(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -129,7 +129,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::release_right_alt_in_console(
+        std::shared_ptr<yli::common::AnyValue> Console::release_right_alt_in_console(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -142,7 +142,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::release_left_shift_in_console(
+        std::shared_ptr<yli::common::AnyValue> Console::release_left_shift_in_console(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -155,7 +155,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::release_right_shift_in_console(
+        std::shared_ptr<yli::common::AnyValue> Console::release_right_shift_in_console(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -168,7 +168,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::enable_move_to_previous_input(
+        std::shared_ptr<yli::common::AnyValue> Console::enable_move_to_previous_input(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -181,7 +181,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::enable_move_to_next_input(
+        std::shared_ptr<yli::common::AnyValue> Console::enable_move_to_next_input(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -194,7 +194,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::enable_backspace(
+        std::shared_ptr<yli::common::AnyValue> Console::enable_backspace(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -207,7 +207,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::enable_enter_key(
+        std::shared_ptr<yli::common::AnyValue> Console::enable_enter_key(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -220,7 +220,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::enable_ctrl_c(
+        std::shared_ptr<yli::common::AnyValue> Console::enable_ctrl_c(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -233,7 +233,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::enable_ctrl_w(
+        std::shared_ptr<yli::common::AnyValue> Console::enable_ctrl_w(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -246,7 +246,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::enable_page_up(
+        std::shared_ptr<yli::common::AnyValue> Console::enable_page_up(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -259,7 +259,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::enable_page_down(
+        std::shared_ptr<yli::common::AnyValue> Console::enable_page_down(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -272,7 +272,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::enable_home(
+        std::shared_ptr<yli::common::AnyValue> Console::enable_home(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -285,7 +285,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::enable_end(
+        std::shared_ptr<yli::common::AnyValue> Console::enable_end(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -300,7 +300,7 @@ namespace yli
 
         // Console mode keypress callbacks begin here.
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::exit_console(
+        std::shared_ptr<yli::common::AnyValue> Console::exit_console(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -310,14 +310,14 @@ namespace yli
             {
                 // Signal to caller that we have exited the console.
                 uint32_t exit_console_magic_number = EXIT_CONSOLE_MAGIC_NUMBER;
-                return std::make_shared<yli::datatypes::AnyValue>(exit_console_magic_number);
+                return std::make_shared<yli::common::AnyValue>(exit_console_magic_number);
             }
 
             // We did not exit the console.
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::press_left_control_in_console(
+        std::shared_ptr<yli::common::AnyValue> Console::press_left_control_in_console(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -330,7 +330,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::press_right_control_in_console(
+        std::shared_ptr<yli::common::AnyValue> Console::press_right_control_in_console(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -343,7 +343,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::press_left_alt_in_console(
+        std::shared_ptr<yli::common::AnyValue> Console::press_left_alt_in_console(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -356,7 +356,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::press_right_alt_in_console(
+        std::shared_ptr<yli::common::AnyValue> Console::press_right_alt_in_console(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -369,7 +369,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::press_left_shift_in_console(
+        std::shared_ptr<yli::common::AnyValue> Console::press_left_shift_in_console(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -382,7 +382,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::press_right_shift_in_console(
+        std::shared_ptr<yli::common::AnyValue> Console::press_right_shift_in_console(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -395,7 +395,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::move_to_previous_input(
+        std::shared_ptr<yli::common::AnyValue> Console::move_to_previous_input(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -435,7 +435,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::move_to_next_input(
+        std::shared_ptr<yli::common::AnyValue> Console::move_to_next_input(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -470,7 +470,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::backspace(
+        std::shared_ptr<yli::common::AnyValue> Console::backspace(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -487,7 +487,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::enter_key(
+        std::shared_ptr<yli::common::AnyValue> Console::enter_key(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -498,7 +498,7 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> any_value = nullptr;
+            std::shared_ptr<yli::common::AnyValue> any_value = nullptr;
 
             // Copy current input into a `std::string`.
             std::string input_string(console->current_input.begin(), console->current_input.end());
@@ -583,7 +583,7 @@ namespace yli
             return any_value;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::ctrl_c(
+        std::shared_ptr<yli::common::AnyValue> Console::ctrl_c(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -604,7 +604,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::ctrl_w(
+        std::shared_ptr<yli::common::AnyValue> Console::ctrl_w(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -649,7 +649,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::page_up(
+        std::shared_ptr<yli::common::AnyValue> Console::page_up(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -678,7 +678,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::page_down(
+        std::shared_ptr<yli::common::AnyValue> Console::page_down(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -701,7 +701,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::home(
+        std::shared_ptr<yli::common::AnyValue> Console::home(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
@@ -725,7 +725,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::end(
+        std::shared_ptr<yli::common::AnyValue> Console::end(
                 yli::callback_system::CallbackEngine*,
                 yli::callback_system::CallbackObject*,
                 std::vector<yli::callback_system::CallbackParameter*>&,
