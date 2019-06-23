@@ -214,6 +214,14 @@ namespace yli
             std::cout << "All 2D fonts of this universe will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Font2D*>(this->font2D_pointer_vector, this->number_of_font2Ds);
 
+            // destroy all AnyStructEntities of this `Universe`.
+            std::cout << "All AnyStructEntities of this universe will be destroyed.\n";
+            yli::hierarchy::delete_children<yli::ontology::AnyStructEntity*>(this->any_struct_entity_pointer_vector, this->number_of_any_struct_entities);
+
+            // destroy all AnyValueEntities of this `Universe`.
+            std::cout << "All AnyValueEntities of this universe will be destroyed.\n";
+            yli::hierarchy::delete_children<yli::ontology::AnyValueEntity*>(this->any_value_entity_pointer_vector, this->number_of_any_value_entities);
+
             SDL_Quit();
         }
 
