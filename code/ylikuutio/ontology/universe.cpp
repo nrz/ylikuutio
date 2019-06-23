@@ -174,6 +174,15 @@ namespace yli
                     this->number_of_font2Ds);
         }
 
+        void Universe::unbind_any_value_entity(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->any_value_entity_pointer_vector,
+                    this->free_any_value_entityID_queue,
+                    this->number_of_any_value_entities);
+        }
+
         Universe::~Universe()
         {
             // destructor.

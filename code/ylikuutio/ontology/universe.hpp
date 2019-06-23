@@ -309,6 +309,7 @@ namespace yli
                 void unbind_entity(const std::size_t entityID);
                 void unbind_world(const std::size_t childID);
                 void unbind_font2D(const std::size_t childID);
+                void unbind_any_value_entity(const std::size_t childID);
 
                 // constructor.
                 Universe(const yli::ontology::UniverseStruct& universe_struct)

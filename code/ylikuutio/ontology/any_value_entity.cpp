@@ -38,6 +38,26 @@ namespace yli
             universe->bind_any_value_entity(this);
         }
 
+        AnyValueEntity::~AnyValueEntity()
+        {
+            // destructor.
+            std::cout << "This `AnyValueEntity` will be destroyed.\n";
+
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+
+            yli::ontology::Universe* const universe = this->parent;
+
+            if (universe == nullptr)
+            {
+                std::cerr << "ERROR: `AnyValueEntity::~AnyValueEntity`: `universe` is `nullptr`!\n";
+                return;
+            }
+
+            // set pointer to this `AnyValueEntity` to `nullptr`.
+            universe->unbind_any_value_entity(this->childID);
+        }
+
         yli::ontology::Entity* AnyValueEntity::get_parent() const
         {
             // Every `AnyValueEntity` is a child of the `Universe`.
