@@ -36,12 +36,14 @@ TEST(any_struct_must_function_appropriately, enter_data_simple)
 {
     yli::common::AnyStruct any_struct = yli::common::AnyStruct();
 
+    // pseudocode: any_struct.foo = 0xdeadbeef
     uint32_t deadbeef_uint32_t = 0xdeadbeef;
     std::shared_ptr<yli::common::AnyValue> deadbeef_any_value_shared_ptr =
         std::make_shared<yli::common::AnyValue>(deadbeef_uint32_t);
     const std::string foo_target = "foo";
     ASSERT_TRUE(any_struct.enter_data(foo_target, deadbeef_any_value_shared_ptr));
 
+    // pseudocode: any_struct.bar = 0xca7f00d
     uint32_t catfood_uint32_t = 0xca7f00d;
     std::shared_ptr<yli::common::AnyValue> catfood_any_value_shared_ptr =
         std::make_shared<yli::common::AnyValue>(catfood_uint32_t);
@@ -105,8 +107,10 @@ TEST(any_struct_must_function_appropriately, get_fieldnames_simple)
 TEST(any_struct_must_function_appropriately, read_data_simple)
 {
     yli::common::AnyStruct any_struct = yli::common::AnyStruct();
+    // pseudocode: foo_nonexistent_any_value_shared_ptr1 = any_struct.foo
     std::shared_ptr<yli::common::AnyValue> foo_nonexistent_any_value_shared_ptr1 = any_struct.read_data("foo");
     ASSERT_EQ(foo_nonexistent_any_value_shared_ptr1, nullptr);
+    // pseudocode: bar_nonexistent_any_value_shared_ptr1 = any_struct.bar
     std::shared_ptr<yli::common::AnyValue> bar_nonexistent_any_value_shared_ptr1 = any_struct.read_data("bar");
     ASSERT_EQ(bar_nonexistent_any_value_shared_ptr1, nullptr);
 
@@ -116,11 +120,13 @@ TEST(any_struct_must_function_appropriately, read_data_simple)
     const std::string foo_target = "foo";
     ASSERT_TRUE(any_struct.enter_data(foo_target, deadbeef_any_value_shared_ptr));
 
+    // pseudocode: foo_any_value_shared_ptr1 = any_struct.foo
     std::shared_ptr<yli::common::AnyValue> foo_any_value_shared_ptr1 = any_struct.read_data("foo");
     ASSERT_NE(foo_any_value_shared_ptr1, nullptr);
     ASSERT_EQ(foo_any_value_shared_ptr1->get_datatype(), "uint32_t");
     ASSERT_EQ(foo_any_value_shared_ptr1->uint32_t_value, 0xdeadbeef);
 
+    // pseudocode: bar_nonexistent_any_value_shared_ptr2 = any_struct.bar
     std::shared_ptr<yli::common::AnyValue> bar_nonexistent_any_value_shared_ptr2 = any_struct.read_data("bar");
     ASSERT_EQ(bar_nonexistent_any_value_shared_ptr2, nullptr);
 
@@ -130,11 +136,13 @@ TEST(any_struct_must_function_appropriately, read_data_simple)
     const std::string bar_target = "bar";
     ASSERT_TRUE(any_struct.enter_data(bar_target, catfood_any_value_shared_ptr));
 
+    // pseudocode: foo_any_value_shared_ptr2 = any_struct.foo
     std::shared_ptr<yli::common::AnyValue> foo_any_value_shared_ptr2 = any_struct.read_data("foo");
     ASSERT_NE(foo_any_value_shared_ptr2, nullptr);
     ASSERT_EQ(foo_any_value_shared_ptr2->get_datatype(), "uint32_t");
     ASSERT_EQ(foo_any_value_shared_ptr2->uint32_t_value, 0xdeadbeef);
 
+    // pseudocode: bar_any_value_shared_ptr1 = any_struct.bar
     std::shared_ptr<yli::common::AnyValue> bar_any_value_shared_ptr1 = any_struct.read_data("bar");
     ASSERT_NE(bar_any_value_shared_ptr1, nullptr);
     ASSERT_EQ(bar_any_value_shared_ptr1->get_datatype(), "uint32_t");
@@ -275,12 +283,14 @@ TEST(any_struct_must_function_appropriately, enter_data_complex_2nd_level)
 {
     yli::common::AnyStruct any_struct = yli::common::AnyStruct();
 
+    // pseudocode: any_struct.foo.bar = 0xdeadbeef
     uint32_t deadbeef_uint32_t = 0xdeadbeef;
     std::shared_ptr<yli::common::AnyValue> deadbeef_any_value_shared_ptr =
         std::make_shared<yli::common::AnyValue>(deadbeef_uint32_t);
     const std::string foo_target = "foo.bar";
     ASSERT_TRUE(any_struct.enter_data(foo_target, deadbeef_any_value_shared_ptr));
 
+    // pseudocode: any_struct.baz.qux = 0xca7f00d
     uint32_t catfood_uint32_t = 0xca7f00d;
     std::shared_ptr<yli::common::AnyValue> catfood_any_value_shared_ptr =
         std::make_shared<yli::common::AnyValue>(catfood_uint32_t);
