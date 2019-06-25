@@ -19,33 +19,58 @@
 #define __ANY_STRUCT_ENTITY_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "universe.hpp"
 #include "code/ylikuutio/common/any_struct.hpp"
+#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <queue>   // std::queue
+#include <vector>  // std::vector
+
+// `AnyStructEntity` is a child of the `Universe`.
+//
+// `AnyStructEntity` inherits both `yli::common::AnyStruct` and `yli::ontology::Entity`.
+// Therefore, `AnyStructEntity` is an `Entity` but it functions also as an `AnyStruct`.
+// Each `AnyStructEntity` may have 0 or more `AnyValueEntity` objects as its children.
+// Each `AnyValueEntity` child of a `AnyStructEntity` needs to have a name from its
+// parent's namespace. The name controls how the `AnyValueEntity` child is used when
+// creating a particular `struct` from this `AnyStructEntity`.
+// TODO: implement the described functionality!
 
 namespace yli
 {
     namespace ontology
     {
-        class AnyStructEntity: public yli::datatypes::AnyStruct, public yli::ontology::Entity
+        class Universe;
+
+        class AnyStructEntity: public yli::common::AnyStruct, public yli::ontology::Entity
         {
             public:
                 // constructor.
+                // use the default copy constructor of `yli::common::AnyStruct`.
                 AnyStructEntity(yli::ontology::Universe* const universe)
-                    : yli::datatypes::AnyStruct(), yli::ontology::Entity(universe)
+                    : yli::common::AnyStruct(), yli::ontology::Entity(universe)
                 {
+                    this->parent = universe;
+
+                    // Get `childID` from `Universe` and set pointer to this `AnyStructEntity`.
+                    this->bind_to_parent();
+
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::AnyStructEntity*";
                     this->can_be_erased = true;
                 }
 
                 // constructor.
-                // use the default copy constructor of `yli::datatypes::AnyStruct`.
-                AnyStructEntity(yli::ontology::Universe* const universe, const yli::datatypes::AnyStruct& any_struct)
-                    : yli::datatypes::AnyStruct(any_struct), yli::ontology::Entity(universe)
+                // use the default copy constructor of `yli::common::AnyStruct`.
+                AnyStructEntity(yli::ontology::Universe* const universe, const yli::common::AnyStruct& any_struct)
+                    : yli::common::AnyStruct(any_struct), yli::ontology::Entity(universe)
                 {
+                    this->parent = universe;
+
+                    // Get `childID` from `Universe` and set pointer to this `AnyStructEntity`.
+                    this->bind_to_parent();
+
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::AnyStructEntity*";
                     this->can_be_erased = true;
@@ -55,26 +80,19 @@ namespace yli
                 AnyStructEntity &operator=(const AnyStructEntity&) = delete; // Delete copy assignment.
 
                 // destructor.
-                virtual ~AnyStructEntity()
-                {
-                    // destructor.
-                }
+                virtual ~AnyStructEntity();
 
-                yli::ontology::Entity* get_parent() const override
-                {
-                    // Every `AnyStructEntity` is a child of the `Universe`.
-                    return this->yli::ontology::Entity::universe;
-                }
+                yli::ontology::Entity* get_parent() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
-                std::size_t get_number_of_children() const override
-                {
-                    return 0; // `AnyStructEntity` has no children.
-                }
+                template<class T1>
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
-                std::size_t get_number_of_descendants() const override
-                {
-                    return 0; // `AnyStructEntity` has no children.
-                }
+            private:
+                void bind_to_parent();
+
+                yli::ontology::Universe* parent; // pointer to the `Universe`.
         };
     }
 }

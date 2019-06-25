@@ -23,7 +23,7 @@
 
 namespace yli
 {
-    namespace datatypes
+    namespace common
     {
         class AnyValue;
     }
@@ -39,6 +39,6 @@ namespace yli
     }
 }
 
-typedef std::shared_ptr<yli::datatypes::AnyValue> (*PostIterateCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
+typedef std::shared_ptr<yli::common::AnyValue> (*PostIterateCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
 
 #endif

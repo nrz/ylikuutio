@@ -147,12 +147,12 @@ namespace yli
             return new yli::ontology::ComputeTask(this->universe, compute_task_struct);
         }
 
-        yli::ontology::Entity* EntityFactory::create_AnyValueEntity(const std::shared_ptr<yli::datatypes::AnyValue> any_value_shared_ptr) const
+        yli::ontology::Entity* EntityFactory::create_AnyValueEntity(const std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr) const
         {
             return new yli::ontology::AnyValueEntity(this->universe, any_value_shared_ptr);
         }
 
-        yli::ontology::Entity* EntityFactory::create_AnyValueEntity(const yli::datatypes::AnyValue& any_value) const
+        yli::ontology::Entity* EntityFactory::create_AnyValueEntity(const yli::common::AnyValue& any_value) const
         {
             return new yli::ontology::AnyValueEntity(this->universe, any_value);
         }
@@ -162,7 +162,7 @@ namespace yli
             return new yli::ontology::AnyStructEntity(this->universe);
         }
 
-        yli::ontology::Entity* EntityFactory::create_AnyStructEntity(const yli::datatypes::AnyStruct& any_struct) const
+        yli::ontology::Entity* EntityFactory::create_AnyStructEntity(const yli::common::AnyStruct& any_struct) const
         {
             return new yli::ontology::AnyStructEntity(this->universe, any_struct);
         }

@@ -222,10 +222,10 @@ int main(void)
                         if (current_keypress_callback_engine_vector_pointer->at(i).keycode == scancode)
                         {
                             yli::callback_system::CallbackEngine* const callback_engine = current_keypress_callback_engine_vector_pointer->at(i).callback_engine;
-                            const std::shared_ptr<yli::datatypes::AnyValue> any_value = callback_engine->execute();
+                            const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute();
 
                             if (any_value != nullptr &&
-                                    any_value->type == yli::datatypes::UINT32_T)
+                                    any_value->type == yli::common::UINT32_T)
                             {
                                 if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
                                 {

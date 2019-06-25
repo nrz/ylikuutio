@@ -19,34 +19,57 @@
 #define __ANY_VALUE_ENTITY_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "universe.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <queue>   // std::queue
+#include <vector>  // std::vector
+
+// `AnyValueEntity` is a child of the `Universe`.
+//
+// `AnyValueEntity` inherits both `yli::common::AnyValue` and `yli::ontology::Entity`.
+// Therefore, `AnyValueEntity` is an `Entity` but it functions also as an `AnyValue`.
+// Each `AnyValueEntity` may refer to an other `Entity`. If that `Entity` is deleted, it
+// will delete all `AnyValueEntity` objects referring to it as well: the destructors of
+// these `AnyValueEntity` objects will be called from that `Entity` object's destructor.
+// TODO: implement the described functionality!
 
 namespace yli
 {
     namespace ontology
     {
-        class AnyValueEntity: public yli::datatypes::AnyValue, public yli::ontology::Entity
+        class Universe;
+
+        class AnyValueEntity: public yli::common::AnyValue, public yli::ontology::Entity
         {
             public:
                 // constructor.
-                // use the default copy constructor of `yli::datatypes::AnyValue`.
-                AnyValueEntity(yli::ontology::Universe* const universe, const std::shared_ptr<yli::datatypes::AnyValue> any_value_shared_ptr)
-                    : yli::datatypes::AnyValue(*any_value_shared_ptr), yli::ontology::Entity(universe)
+                // use the default copy constructor of `yli::common::AnyValue`.
+                AnyValueEntity(yli::ontology::Universe* const universe, const std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr)
+                    : yli::common::AnyValue(*any_value_shared_ptr), yli::ontology::Entity(universe)
                 {
+                    this->parent = universe;
+
+                    // Get `childID` from `Universe` and set pointer to this `AnyValueEntity`.
+                    this->bind_to_parent();
+
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::AnyValueEntity*";
                     this->can_be_erased = true;
                 }
 
                 // constructor.
-                // use the default copy constructor of `yli::datatypes::AnyValue`.
-                AnyValueEntity(yli::ontology::Universe* const universe, const yli::datatypes::AnyValue& any_value)
-                    : yli::datatypes::AnyValue(any_value), yli::ontology::Entity(universe)
+                // use the default copy constructor of `yli::common::AnyValue`.
+                AnyValueEntity(yli::ontology::Universe* const universe, const yli::common::AnyValue& any_value)
+                    : yli::common::AnyValue(any_value), yli::ontology::Entity(universe)
                 {
+                    this->parent = universe;
+
+                    // Get `childID` from `Universe` and set pointer to this `AnyValueEntity`.
+                    this->bind_to_parent();
+
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::AnyValueEntity*";
                     this->can_be_erased = true;
@@ -56,27 +79,19 @@ namespace yli
                 AnyValueEntity &operator=(const AnyValueEntity&) = delete; // Delete copy assignment.
 
                 // destructor.
-                virtual ~AnyValueEntity()
-                {
-                    // destructor.
-                }
+                virtual ~AnyValueEntity();
 
-                yli::ontology::Entity* get_parent() const override
-                {
-                    // Every `AnyValueEntity` is a child of the `Universe`.
-                    // The base class needs to be specified due to ambiguity caused by diamond inheritance.
-                    return this->yli::ontology::Entity::universe;
-                }
+                yli::ontology::Entity* get_parent() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
-                std::size_t get_number_of_children() const override
-                {
-                    return 0; // `AnyValueEntity` has no children.
-                }
+                template<class T1>
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
-                std::size_t get_number_of_descendants() const override
-                {
-                    return 0; // `AnyValueEntity` has no children.
-                }
+            private:
+                void bind_to_parent();
+
+                yli::ontology::Universe* parent; // pointer to the `Universe`.
         };
     }
 }

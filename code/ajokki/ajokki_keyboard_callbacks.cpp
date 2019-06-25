@@ -39,11 +39,11 @@
 // `std::vector<yli::callback_system::CallbackParameter*>& input parameters`.
 //
 // To access named input variables:
-// `yli::datatypes::AnyValue* some_any_value = callback_object->get_any_value("foo");`
+// `yli::common::AnyValue* some_any_value = callback_object->get_any_value("foo");`
 // where `"foo"` is the variable name.
 //
 // To access input variables without name (this works for named input variables too):
-// `yli::datatypes::AnyValue* some_any_value = input_parameters.at(foo)->get_any_value();`
+// `yli::common::AnyValue* some_any_value = input_parameters.at(foo)->get_any_value();`
 // where `foo` is the zero-based index of the variable. First `CallbackParameter` of
 // a `CallbackObject` gets index 0, second `CallbackParameter` gets index 1, etc.
 
@@ -65,7 +65,7 @@ namespace ajokki
         // variable in question from the `Universe`, otherwise return the location or orientation
         // variable from the `Scene`'s own member variable.
 
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -73,9 +73,9 @@ namespace ajokki
             return false;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return false;
         }
 
@@ -126,12 +126,12 @@ namespace ajokki
      *  Callback engines for action mode keyreleases begin here.         *
     \*********************************************************************/
 
-    std::shared_ptr<yli::datatypes::AnyValue> release_first_turbo(
+    std::shared_ptr<yli::common::AnyValue> release_first_turbo(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -139,9 +139,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -157,12 +157,12 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> release_second_turbo(
+    std::shared_ptr<yli::common::AnyValue> release_second_turbo(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -170,9 +170,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -188,12 +188,12 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> enable_toggle_invert_mouse(
+    std::shared_ptr<yli::common::AnyValue> enable_toggle_invert_mouse(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -201,9 +201,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -219,12 +219,12 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> enable_toggle_flight_mode(
+    std::shared_ptr<yli::common::AnyValue> enable_toggle_flight_mode(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -232,9 +232,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -250,12 +250,12 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> enable_toggle_help_mode(
+    std::shared_ptr<yli::common::AnyValue> enable_toggle_help_mode(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -263,9 +263,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -285,21 +285,21 @@ namespace ajokki
      *  Callback engines for action mode keypresses begin here.          *
     \*********************************************************************/
 
-    std::shared_ptr<yli::datatypes::AnyValue> exit_program(
+    std::shared_ptr<yli::common::AnyValue> exit_program(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject*,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
         const uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
-        return std::make_shared<yli::datatypes::AnyValue>(exit_program_magic_number);
+        return std::make_shared<yli::common::AnyValue>(exit_program_magic_number);
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> first_turbo(
+    std::shared_ptr<yli::common::AnyValue> first_turbo(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -307,9 +307,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -325,12 +325,12 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> second_turbo(
+    std::shared_ptr<yli::common::AnyValue> second_turbo(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -338,9 +338,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -356,12 +356,12 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> move_forward(
+    std::shared_ptr<yli::common::AnyValue> move_forward(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -369,9 +369,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -387,12 +387,12 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> move_backward(
+    std::shared_ptr<yli::common::AnyValue> move_backward(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -400,9 +400,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -418,12 +418,12 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> strafe_left(
+    std::shared_ptr<yli::common::AnyValue> strafe_left(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -431,9 +431,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -449,12 +449,12 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> strafe_right(
+    std::shared_ptr<yli::common::AnyValue> strafe_right(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -462,9 +462,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -480,12 +480,12 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> ascent(
+    std::shared_ptr<yli::common::AnyValue> ascent(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -493,9 +493,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -511,12 +511,12 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> descent(
+    std::shared_ptr<yli::common::AnyValue> descent(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -524,9 +524,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -542,12 +542,12 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> toggle_invert_mouse(
+    std::shared_ptr<yli::common::AnyValue> toggle_invert_mouse(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -555,9 +555,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -577,12 +577,12 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> toggle_flight_mode(
+    std::shared_ptr<yli::common::AnyValue> toggle_flight_mode(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -590,9 +590,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -613,12 +613,12 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> toggle_help_mode(
+    std::shared_ptr<yli::common::AnyValue> toggle_help_mode(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -626,9 +626,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -648,12 +648,12 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> delete_entity(
+    std::shared_ptr<yli::common::AnyValue> delete_entity(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -661,9 +661,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -675,7 +675,7 @@ namespace ajokki
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_entity_string = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(1));
+        std::shared_ptr<yli::common::AnyValue> any_value_entity_string = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(1));
 
         if (any_value_entity_string == nullptr)
         {
@@ -683,9 +683,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_entity_string->type != yli::datatypes::STD_STRING_POINTER)
+        if (any_value_entity_string->type != yli::common::STD_STRING_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_entity_string->type << ", should be " << yli::datatypes::STD_STRING_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_entity_string->type << ", should be " << yli::common::STD_STRING_POINTER << "\n";
             return nullptr;
         }
 
@@ -710,12 +710,12 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> switch_to_new_material(
+    std::shared_ptr<yli::common::AnyValue> switch_to_new_material(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -723,9 +723,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -737,7 +737,7 @@ namespace ajokki
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_entity_string = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(1));
+        std::shared_ptr<yli::common::AnyValue> any_value_entity_string = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(1));
 
         if (any_value_entity_string == nullptr)
         {
@@ -745,9 +745,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_entity_string->type != yli::datatypes::STD_STRING_POINTER)
+        if (any_value_entity_string->type != yli::common::STD_STRING_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_entity_string->type << ", should be " << yli::datatypes::STD_STRING_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_entity_string->type << ", should be " << yli::common::STD_STRING_POINTER << "\n";
             return nullptr;
         }
 
@@ -783,7 +783,7 @@ namespace ajokki
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_material_string = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(2));
+        std::shared_ptr<yli::common::AnyValue> any_value_material_string = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(2));
 
         if (any_value_material_string == nullptr)
         {
@@ -791,9 +791,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_material_string->type != yli::datatypes::STD_STRING_POINTER)
+        if (any_value_material_string->type != yli::common::STD_STRING_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_material_string->type << ", should be " << yli::datatypes::STD_STRING_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_material_string->type << ", should be " << yli::common::STD_STRING_POINTER << "\n";
             return nullptr;
         }
 
@@ -830,12 +830,12 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<yli::datatypes::AnyValue> transform_into_new_species(
+    std::shared_ptr<yli::common::AnyValue> transform_into_new_species(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -843,9 +843,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
             return nullptr;
         }
 
@@ -857,7 +857,7 @@ namespace ajokki
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_entity_string = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(1));
+        std::shared_ptr<yli::common::AnyValue> any_value_entity_string = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(1));
 
         if (any_value_entity_string == nullptr)
         {
@@ -865,9 +865,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_entity_string->type != yli::datatypes::STD_STRING_POINTER)
+        if (any_value_entity_string->type != yli::common::STD_STRING_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_entity_string->type << ", should be " << yli::datatypes::STD_STRING_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_entity_string->type << ", should be " << yli::common::STD_STRING_POINTER << "\n";
             return nullptr;
         }
 
@@ -903,7 +903,7 @@ namespace ajokki
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_species_string = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(2));
+        std::shared_ptr<yli::common::AnyValue> any_value_species_string = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(2));
 
         if (any_value_species_string == nullptr)
         {
@@ -911,9 +911,9 @@ namespace ajokki
             return nullptr;
         }
 
-        if (any_value_species_string->type != yli::datatypes::STD_STRING_POINTER)
+        if (any_value_species_string->type != yli::common::STD_STRING_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_species_string->type << ", should be " << yli::datatypes::STD_STRING_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_species_string->type << ", should be " << yli::common::STD_STRING_POINTER << "\n";
             return nullptr;
         }
 

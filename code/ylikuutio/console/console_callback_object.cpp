@@ -25,7 +25,7 @@
 
 namespace yli
 {
-    namespace datatypes
+    namespace common
     {
         class AnyValue;
     }
@@ -44,11 +44,11 @@ namespace yli
             }
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> ConsoleCallbackObject::execute()
+        std::shared_ptr<yli::common::AnyValue> ConsoleCallbackObject::execute()
         {
             if (this->console_callback != nullptr)
             {
-                return std::shared_ptr<yli::datatypes::AnyValue>(this->console_callback(this->parent, this, this->callback_parameter_pointer_vector, this->console_pointer));
+                return std::shared_ptr<yli::common::AnyValue>(this->console_callback(this->parent, this, this->callback_parameter_pointer_vector, this->console_pointer));
             }
             return nullptr;
         }

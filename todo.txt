@@ -10,7 +10,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement command line parameter `--headless` to Hirvi and Ajokki (do not open any windows, do not render anything).
 [ ] Implement command line parameter `--window-size` to Hirvi and Ajokki (eg. `--window-size 1920x1080` or `--window-size=1920x1080`).
 [ ] Implement command line parameter `--debug` to Hirvi and Ajokki (log all kinds of debug information).
-[ ] Add scene loading command `load` into console.
+[ ] Add `Scene` loading command `load` into console.
 [ ] Implement support for changing window size.
 [ ] Implement support for changing font size.
 [ ] Implement `LogMaster` class.
@@ -27,7 +27,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain.
 [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain and the available video memory.
 [ ] Implement octree segmentation.
-[ ] Implement voxel world.
+[ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
 [ ] Find out how systemd-nspawn could be used for testing Ylikuutio.
 [ ] Implement marching cubes algorithm for voxel terrain as described in https://transvoxel.org/Lengyel-VoxelTerrain.pdf .
 [ ] Write a simple triangle drawing software (android-kolmio) for Android, using Android NDK and CMake.

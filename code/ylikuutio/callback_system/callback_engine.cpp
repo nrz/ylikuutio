@@ -62,9 +62,9 @@ namespace yli
             yli::hierarchy::set_child_pointer(childID, child_pointer, this->callback_object_pointer_vector, this->free_callback_objectID_queue, this->number_of_callback_objects);
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> CallbackEngine::execute()
+        std::shared_ptr<yli::common::AnyValue> CallbackEngine::execute()
         {
-            std::shared_ptr<yli::datatypes::AnyValue> any_value = nullptr;
+            std::shared_ptr<yli::common::AnyValue> any_value = nullptr;
 
             // execute all callbacks.
             for (std::size_t child_i = 0; child_i < this->callback_object_pointer_vector.size(); child_i++)
@@ -83,7 +83,7 @@ namespace yli
             }
 
             this->return_values.clear();
-            return std::shared_ptr<yli::datatypes::AnyValue>(any_value);
+            return std::shared_ptr<yli::common::AnyValue>(any_value);
         }
 
         std::size_t CallbackEngine::get_n_of_return_values() const
@@ -91,7 +91,7 @@ namespace yli
             return this->return_values.size();
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> CallbackEngine::get_nth_return_value(std::size_t n) const
+        std::shared_ptr<yli::common::AnyValue> CallbackEngine::get_nth_return_value(std::size_t n) const
         {
             // note: indexing of `n` begins from 0.
 
@@ -105,7 +105,7 @@ namespace yli
             return this->return_values.at(n_of_return_values - 1);
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> CallbackEngine::get_previous_return_value() const
+        std::shared_ptr<yli::common::AnyValue> CallbackEngine::get_previous_return_value() const
         {
             std::size_t n_of_return_values = this->get_n_of_return_values();
 

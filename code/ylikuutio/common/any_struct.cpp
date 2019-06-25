@@ -26,11 +26,11 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-// `yli::datatypes::AnyStruct` is a `class` which functions as a generic replacement for `struct`s.
+// `yli::common::AnyStruct` is a `class` which functions as a generic replacement for `struct`s.
 // Further, it provides direct access to `AnyStruct`s which are children of current `AnyStruct`.
 // This is implemented using recursion.
 //
-// `yli::datatypes::AnyStruct` uses a notation also used by MATLAB and GNU Octave:
+// `yli::common::AnyStruct` uses a notation also used by MATLAB and GNU Octave:
 // `"foo.bar"` refers to `AnyStruct` named `"bar"`, which is a child of `AnyStruct` named `"foo"`.
 // `"foo.bar.baz"` refers to `AnyStruct` named `"baz"`, which is a child of `"baz"`, which is a child of `"foo"`.
 //
@@ -38,7 +38,7 @@
 
 namespace yli
 {
-    namespace datatypes
+    namespace common
     {
         class AnyValue;
 
@@ -52,7 +52,7 @@ namespace yli
             // destructor.
         }
 
-        bool AnyStruct::enter_data(const std::string& target, std::shared_ptr<yli::datatypes::AnyValue> any_value)
+        bool AnyStruct::enter_data(const std::string& target, std::shared_ptr<yli::common::AnyValue> any_value)
         {
             std::string first_part;
             std::size_t data_index = 0;
@@ -73,7 +73,7 @@ namespace yli
             return this->check_if_exist(target, data_index, first_part);
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> AnyStruct::read_data(const std::string& target) const
+        std::shared_ptr<yli::common::AnyValue> AnyStruct::read_data(const std::string& target) const
         {
             std::string first_part;
             std::size_t data_index = 0;
@@ -90,7 +90,7 @@ namespace yli
         bool AnyStruct::enter_data(
                 const std::string& target,
                 std::size_t& data_index,
-                std::shared_ptr<yli::datatypes::AnyValue> any_value,
+                std::shared_ptr<yli::common::AnyValue> any_value,
                 std::string& first_part)
         {
             // Possible cases:
@@ -159,16 +159,16 @@ namespace yli
                 // 4. `target` is a complex string, and `first_part` does not exist.
                 //    -> create a new `first_part` child.
                 //    -> call `enter_data` recursively.
-                std::shared_ptr<yli::datatypes::AnyStruct> child_any_struct_shared_ptr =
-                    std::make_shared<yli::datatypes::AnyStruct>();
+                std::shared_ptr<yli::common::AnyStruct> child_any_struct_shared_ptr =
+                    std::make_shared<yli::common::AnyStruct>();
                 this->values[first_part] =
-                    std::make_shared<yli::datatypes::AnyValue>(child_any_struct_shared_ptr);
+                    std::make_shared<yli::common::AnyValue>(child_any_struct_shared_ptr);
                 return child_any_struct_shared_ptr->enter_data(target, data_index, any_value, last_part);
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> any_value_shared_ptr = this->values[first_part];
+            std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr = this->values[first_part];
 
-            if (any_value_shared_ptr->get_datatype() != "std::shared_ptr<yli::datatypes::AnyStruct>")
+            if (any_value_shared_ptr->get_datatype() != "std::shared_ptr<yli::common::AnyStruct>")
             {
                 // 5. `target` is a complex string, and
                 //     child with the name of `first_part` exists, and
@@ -176,10 +176,10 @@ namespace yli
                 //    -> replace existing child with a `first_part` child.
                 //    -> insert into the newly created child.
                 //    -> call `enter_data` recursively.
-                std::shared_ptr<yli::datatypes::AnyStruct> child_any_struct_shared_ptr =
-                    std::make_shared<yli::datatypes::AnyStruct>();
+                std::shared_ptr<yli::common::AnyStruct> child_any_struct_shared_ptr =
+                    std::make_shared<yli::common::AnyStruct>();
                 this->values[first_part] =
-                    std::make_shared<yli::datatypes::AnyValue>(child_any_struct_shared_ptr);
+                    std::make_shared<yli::common::AnyValue>(child_any_struct_shared_ptr);
                 return child_any_struct_shared_ptr->enter_data(target, data_index, any_value, last_part);
             }
 
@@ -188,7 +188,7 @@ namespace yli
             //     and it is `ANY_STRUCT_SHARED_PTR`.
             //    -> insert into existing `first_part` child.
             //    -> call `enter_data` recursively.
-            std::shared_ptr<yli::datatypes::AnyStruct> child_any_struct_shared_ptr =
+            std::shared_ptr<yli::common::AnyStruct> child_any_struct_shared_ptr =
                 any_value_shared_ptr->any_struct_shared_ptr;
             return child_any_struct_shared_ptr->enter_data(target, data_index, any_value, last_part);
         }
@@ -234,7 +234,7 @@ namespace yli
             }
 
             // OK, there is a matching 'field'.
-            std::shared_ptr<yli::datatypes::AnyValue> any_value_shared_ptr = this->values.at(first_part);
+            std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr = this->values.at(first_part);
 
             if (current_data_index + first_part.size() == target.size())
             {
@@ -249,9 +249,9 @@ namespace yli
             // Advance data index by 1 past the comma `'.'` 'field' separator.
             data_index++;
 
-            std::shared_ptr<yli::datatypes::AnyValue> any_value = this->values.at(first_part);
+            std::shared_ptr<yli::common::AnyValue> any_value = this->values.at(first_part);
 
-            if (any_value->get_datatype() != "std::shared_ptr<yli::datatypes::AnyStruct>")
+            if (any_value->get_datatype() != "std::shared_ptr<yli::common::AnyStruct>")
             {
                 // 4. `target` is a complex string, and
                 //    child with the name of `first_part` exists, but
@@ -264,7 +264,7 @@ namespace yli
             //    child with the name of `first_part` exists, and
             //    and it is `ANY_STRUCT_SHARED_PTR`.
             //    -> call `erase_data` recursively.
-            std::shared_ptr<yli::datatypes::AnyStruct> child_any_struct = any_value->any_struct_shared_ptr;
+            std::shared_ptr<yli::common::AnyStruct> child_any_struct = any_value->any_struct_shared_ptr;
             return child_any_struct->erase_data(target, data_index, first_part); // tail recursion.
         }
 
@@ -307,7 +307,7 @@ namespace yli
             }
 
             // OK, there is a matching 'field'.
-            std::shared_ptr<yli::datatypes::AnyValue> any_value_shared_ptr = this->values.at(first_part);
+            std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr = this->values.at(first_part);
 
             if (current_data_index + first_part.size() == target.size())
             {
@@ -320,9 +320,9 @@ namespace yli
             // Advance data index by 1 past the comma `'.'` 'field' separator.
             data_index++;
 
-            std::shared_ptr<yli::datatypes::AnyValue> any_value = this->values.at(first_part);
+            std::shared_ptr<yli::common::AnyValue> any_value = this->values.at(first_part);
 
-            if (any_value->get_datatype() != "std::shared_ptr<yli::datatypes::AnyStruct>")
+            if (any_value->get_datatype() != "std::shared_ptr<yli::common::AnyStruct>")
             {
                 // 4. `target` is a complex string, and
                 // child with the name of `first_part` exists, and
@@ -335,11 +335,11 @@ namespace yli
             //    child with the name of `first_part` exists, and
             //    and it is `ANY_STRUCT_SHARED_PTR`.
             //    -> call `check_if_exist` recursively.
-            std::shared_ptr<yli::datatypes::AnyStruct> child_any_struct = any_value->any_struct_shared_ptr;
+            std::shared_ptr<yli::common::AnyStruct> child_any_struct = any_value->any_struct_shared_ptr;
             return child_any_struct->check_if_exist(target, data_index, first_part); // tail recursion.
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> AnyStruct::read_data(
+        std::shared_ptr<yli::common::AnyValue> AnyStruct::read_data(
                 const std::string& target,
                 std::size_t& data_index,
                 std::string& first_part) const
@@ -378,7 +378,7 @@ namespace yli
             }
 
             // OK, there is a matching 'field'.
-            std::shared_ptr<yli::datatypes::AnyValue> any_value_shared_ptr = this->values.at(first_part);
+            std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr = this->values.at(first_part);
 
             if (current_data_index + first_part.size() == target.size())
             {
@@ -391,9 +391,9 @@ namespace yli
             // Advance data index by 1 past the comma `'.'` 'field' separator.
             data_index++;
 
-            std::shared_ptr<yli::datatypes::AnyValue> any_value = this->values.at(first_part);
+            std::shared_ptr<yli::common::AnyValue> any_value = this->values.at(first_part);
 
-            if (any_value->get_datatype() != "std::shared_ptr<yli::datatypes::AnyStruct>")
+            if (any_value->get_datatype() != "std::shared_ptr<yli::common::AnyStruct>")
             {
                 // 4. `target` is a complex string, and
                 //    child with the name of `first_part` exists, and
@@ -406,7 +406,7 @@ namespace yli
             //    child with the name of `first_part` exists, and
             //    and it is `ANY_STRUCT_SHARED_PTR`.
             //    -> call `read_data` recursively.
-            std::shared_ptr<yli::datatypes::AnyStruct> child_any_struct = any_value->any_struct_shared_ptr;
+            std::shared_ptr<yli::common::AnyStruct> child_any_struct = any_value->any_struct_shared_ptr;
             return child_any_struct->read_data(target, data_index, first_part); // tail recursion.
         }
     }

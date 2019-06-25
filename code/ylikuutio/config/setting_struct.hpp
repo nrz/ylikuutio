@@ -27,7 +27,7 @@
 
 namespace yli
 {
-    namespace datatypes
+    namespace common
     {
         class AnyValue;
     }
@@ -38,7 +38,7 @@ namespace yli
 
         struct SettingStruct
         {
-            SettingStruct(std::shared_ptr<yli::datatypes::AnyValue> initial_value)
+            SettingStruct(std::shared_ptr<yli::common::AnyValue> initial_value)
                 : initial_value(initial_value),
                 setting_master(nullptr),
                 activate_callback(nullptr),
@@ -48,7 +48,7 @@ namespace yli
                 // constructor.
             }
             std::string name;
-            std::shared_ptr<yli::datatypes::AnyValue> initial_value;
+            std::shared_ptr<yli::common::AnyValue> initial_value;
             yli::config::SettingMaster* setting_master;
             ActivateCallback activate_callback;
             ReadCallback read_callback;

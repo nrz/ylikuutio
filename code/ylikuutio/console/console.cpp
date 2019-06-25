@@ -565,7 +565,7 @@ namespace yli
 
         // Console command callbacks begin here.
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::clear(
+        std::shared_ptr<yli::common::AnyValue> Console::clear(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
@@ -582,7 +582,7 @@ namespace yli
             }
 
             uint32_t clear_console_magic_number = CLEAR_CONSOLE_MAGIC_NUMBER;
-            return std::make_shared<yli::datatypes::AnyValue>(clear_console_magic_number);
+            return std::make_shared<yli::common::AnyValue>(clear_console_magic_number);
         }
 
         // Public callbacks end here.

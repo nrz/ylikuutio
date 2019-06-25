@@ -31,7 +31,7 @@
 
 namespace yli
 {
-    namespace datatypes
+    namespace common
     {
         class AnyValue;
     }
@@ -78,8 +78,8 @@ namespace yli
                 const GLenum format,
                 const GLenum internal_format,
                 const GLenum type,
-                const std::shared_ptr<yli::datatypes::AnyValue> left_filler_vector_any_value,
-                const std::shared_ptr<yli::datatypes::AnyValue> right_filler_vector_any_value,
+                const std::shared_ptr<yli::common::AnyValue> left_filler_vector_any_value,
+                const std::shared_ptr<yli::common::AnyValue> right_filler_vector_any_value,
                 std::size_t& image_width,
                 std::size_t& image_height,
                 std::size_t& image_size,

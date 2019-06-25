@@ -36,13 +36,13 @@ namespace yli
         class Console;
     }
 
-    namespace datatypes
+    namespace common
     {
         class AnyValue;
     }
 }
 
-typedef std::shared_ptr<yli::datatypes::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
+typedef std::shared_ptr<yli::common::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
         yli::callback_system::CallbackEngine*,
         yli::callback_system::CallbackObject*,
         std::vector<yli::callback_system::CallbackParameter*>&,

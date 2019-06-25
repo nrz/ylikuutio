@@ -64,7 +64,7 @@ namespace yli
                 std::string name;
 
                 // The setting value (may be a pointer a some datatype).
-                std::shared_ptr<yli::datatypes::AnyValue> setting_value;
+                std::shared_ptr<yli::common::AnyValue> setting_value;
 
                 // pointer to `ActivateCallback` used to activate the new value after setting it.
                 ActivateCallback activate_callback;

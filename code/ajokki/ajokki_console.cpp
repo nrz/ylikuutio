@@ -39,7 +39,7 @@ namespace ajokki
     {
         // Variables related to console.
         const uint32_t console_top_y = 15;
-        yli::config::SettingStruct console_top_y_setting_struct(std::make_shared<yli::datatypes::AnyValue>(console_top_y));
+        yli::config::SettingStruct console_top_y_setting_struct(std::make_shared<yli::common::AnyValue>(console_top_y));
         console_top_y_setting_struct.name = "console_top_y";
         console_top_y_setting_struct.setting_master = setting_master;
         console_top_y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_console_top_y;
@@ -47,7 +47,7 @@ namespace ajokki
         new yli::config::Setting(console_top_y_setting_struct);
 
         const uint32_t console_bottom_y = 0;
-        yli::config::SettingStruct console_bottom_y_setting_struct(std::make_shared<yli::datatypes::AnyValue>(console_bottom_y));
+        yli::config::SettingStruct console_bottom_y_setting_struct(std::make_shared<yli::common::AnyValue>(console_bottom_y));
         console_bottom_y_setting_struct.name = "console_bottom_y";
         console_bottom_y_setting_struct.setting_master = setting_master;
         console_bottom_y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_console_bottom_y;
@@ -55,7 +55,7 @@ namespace ajokki
         new yli::config::Setting(console_bottom_y_setting_struct);
 
         const uint32_t console_right_x = 39;
-        yli::config::SettingStruct console_right_x_setting_struct(std::make_shared<yli::datatypes::AnyValue>(console_right_x));
+        yli::config::SettingStruct console_right_x_setting_struct(std::make_shared<yli::common::AnyValue>(console_right_x));
         console_right_x_setting_struct.name = "console_right_x";
         console_right_x_setting_struct.setting_master = setting_master;
         console_right_x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_console_right_x;
@@ -63,7 +63,7 @@ namespace ajokki
         new yli::config::Setting(console_right_x_setting_struct);
 
         const uint32_t console_left_x = 0;
-        yli::config::SettingStruct console_left_x_setting_struct(std::make_shared<yli::datatypes::AnyValue>(console_left_x));
+        yli::config::SettingStruct console_left_x_setting_struct(std::make_shared<yli::common::AnyValue>(console_left_x));
         console_left_x_setting_struct.name = "console_left_x";
         console_left_x_setting_struct.setting_master = setting_master;
         console_left_x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_console_left_x;

@@ -294,6 +294,8 @@ namespace yli
         class Species;
         class Camera;
         class Font2D;
+        class AnyValueEntity;
+        class AnyStructEntity;
 
         class Universe: public yli::ontology::Entity
         {
@@ -301,10 +303,14 @@ namespace yli
                 void bind_entity(yli::ontology::Entity* const entity);
                 void bind_world(yli::ontology::World* const world);
                 void bind_font2D(yli::ontology::Font2D* const font2D);
+                void bind_any_value_entity(yli::ontology::AnyValueEntity* const any_value_entity);
+                void bind_any_struct_entity(yli::ontology::AnyStructEntity* const any_struct_entity);
 
                 void unbind_entity(const std::size_t entityID);
                 void unbind_world(const std::size_t childID);
                 void unbind_font2D(const std::size_t childID);
+                void unbind_any_value_entity(const std::size_t childID);
+                void unbind_any_struct_entity(const std::size_t childID);
 
                 // constructor.
                 Universe(const yli::ontology::UniverseStruct& universe_struct)
@@ -524,7 +530,7 @@ namespace yli
                 // this method returns current `max_FPS`.
                 std::size_t get_max_FPS() const;
 
-                void set(const std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_any_value);
+                void set(const std::string& setting_name, std::shared_ptr<yli::common::AnyValue> setting_any_value);
 
                 // this method returns a pointer to `yli::config::Setting` corresponding to the given `key`.
                 yli::config::Setting* get(const std::string& key) const;
@@ -549,42 +555,42 @@ namespace yli
 
                 // Public callbacks.
 
-                static std::shared_ptr<yli::datatypes::AnyValue> activate(
+                static std::shared_ptr<yli::common::AnyValue> activate(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::datatypes::AnyValue> delete_entity(
+                static std::shared_ptr<yli::common::AnyValue> delete_entity(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::datatypes::AnyValue> info(
+                static std::shared_ptr<yli::common::AnyValue> info(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::datatypes::AnyValue> bind(
+                static std::shared_ptr<yli::common::AnyValue> bind(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::datatypes::AnyValue> create_AnyValue(
+                static std::shared_ptr<yli::common::AnyValue> create_AnyValue(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::datatypes::AnyValue> create_AnyStruct(
+                static std::shared_ptr<yli::common::AnyValue> create_AnyStruct(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::datatypes::AnyValue> screenshot(
+                static std::shared_ptr<yli::common::AnyValue> screenshot(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::datatypes::AnyValue> eval(
+                static std::shared_ptr<yli::common::AnyValue> eval(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
@@ -661,6 +667,14 @@ namespace yli
                 std::vector<yli::ontology::Font2D*> font2D_pointer_vector;
                 std::queue<std::size_t> free_font2D_ID_queue;
                 std::size_t number_of_font2Ds;
+
+                std::vector<yli::ontology::AnyValueEntity*> any_value_entity_pointer_vector;
+                std::queue<std::size_t> free_any_value_entityID_queue;
+                std::size_t number_of_any_value_entities;
+
+                std::vector<yli::ontology::AnyStructEntity*> any_struct_entity_pointer_vector;
+                std::queue<std::size_t> free_any_struct_entityID_queue;
+                std::size_t number_of_any_struct_entities;
 
                 yli::ontology::World* active_world;
                 yli::ontology::Font2D* active_font2D;

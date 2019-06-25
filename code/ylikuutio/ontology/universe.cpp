@@ -127,6 +127,26 @@ namespace yli
                     this->number_of_font2Ds);
         }
 
+        void Universe::bind_any_value_entity(yli::ontology::AnyValueEntity* const any_value_entity)
+        {
+            // get `childID` from `Universe` and set pointer to `any_value_entity`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::AnyValueEntity*>(
+                    any_value_entity,
+                    this->any_value_entity_pointer_vector,
+                    this->free_any_value_entityID_queue,
+                    this->number_of_any_value_entities);
+        }
+
+        void Universe::bind_any_struct_entity(yli::ontology::AnyStructEntity* const any_struct_entity)
+        {
+            // get `childID` from `Universe` and set pointer to `any_struct_entity`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::AnyStructEntity*>(
+                    any_struct_entity,
+                    this->any_struct_entity_pointer_vector,
+                    this->free_any_struct_entityID_queue,
+                    this->number_of_any_struct_entities);
+        }
+
         void Universe::unbind_entity(const std::size_t entityID)
         {
             yli::hierarchy::unbind_child_from_parent(
@@ -154,6 +174,24 @@ namespace yli
                     this->number_of_font2Ds);
         }
 
+        void Universe::unbind_any_value_entity(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->any_value_entity_pointer_vector,
+                    this->free_any_value_entityID_queue,
+                    this->number_of_any_value_entities);
+        }
+
+        void Universe::unbind_any_struct_entity(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->any_struct_entity_pointer_vector,
+                    this->free_any_struct_entityID_queue,
+                    this->number_of_any_struct_entities);
+        }
+
         Universe::~Universe()
         {
             // destructor.
@@ -175,6 +213,14 @@ namespace yli
             // destroy all `Font2D`s of this `Universe`.
             std::cout << "All 2D fonts of this universe will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Font2D*>(this->font2D_pointer_vector, this->number_of_font2Ds);
+
+            // destroy all AnyStructEntities of this `Universe`.
+            std::cout << "All AnyStructEntities of this universe will be destroyed.\n";
+            yli::hierarchy::delete_children<yli::ontology::AnyStructEntity*>(this->any_struct_entity_pointer_vector, this->number_of_any_struct_entities);
+
+            // destroy all AnyValueEntities of this `Universe`.
+            std::cout << "All AnyValueEntities of this universe will be destroyed.\n";
+            yli::hierarchy::delete_children<yli::ontology::AnyValueEntity*>(this->any_value_entity_pointer_vector, this->number_of_any_value_entities);
 
             SDL_Quit();
         }
@@ -304,12 +350,15 @@ namespace yli
 
         std::size_t Universe::get_number_of_children() const
         {
-            return this->number_of_worlds;
+            return this->number_of_worlds + this->number_of_font2Ds + this->number_of_any_value_entities + this->number_of_any_struct_entities;
         }
 
         std::size_t Universe::get_number_of_descendants() const
         {
-            return yli::ontology::get_number_of_descendants(this->world_pointer_vector);
+            return yli::ontology::get_number_of_descendants(this->world_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->font2D_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->any_value_entity_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->any_struct_entity_pointer_vector);
         }
 
         void Universe::create_context()
@@ -409,7 +458,7 @@ namespace yli
             return this->max_FPS;
         }
 
-        void Universe::set(const std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_any_value)
+        void Universe::set(const std::string& setting_name, std::shared_ptr<yli::common::AnyValue> setting_any_value)
         {
             this->setting_master->set(setting_name, setting_any_value);
         }
@@ -484,7 +533,7 @@ namespace yli
 
         // Public callbacks.
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::activate(
+        std::shared_ptr<yli::common::AnyValue> Universe::activate(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
@@ -563,7 +612,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::delete_entity(
+        std::shared_ptr<yli::common::AnyValue> Universe::delete_entity(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
@@ -619,7 +668,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::info(
+        std::shared_ptr<yli::common::AnyValue> Universe::info(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
@@ -705,7 +754,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::bind(
+        std::shared_ptr<yli::common::AnyValue> Universe::bind(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
@@ -758,7 +807,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::create_AnyValue(
+        std::shared_ptr<yli::common::AnyValue> Universe::create_AnyValue(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
@@ -819,13 +868,13 @@ namespace yli
                 return nullptr;
             }
 
-            std::shared_ptr<yli::datatypes::AnyValue> any_value = std::make_shared<yli::datatypes::AnyValue>(variable_type, value_string);
+            std::shared_ptr<yli::common::AnyValue> any_value = std::make_shared<yli::common::AnyValue>(variable_type, value_string);
             yli::ontology::AnyValueEntity* const any_value_entity = new yli::ontology::AnyValueEntity(universe, any_value);
             any_value_entity->set_name(variable_name);
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::create_AnyStruct(
+        std::shared_ptr<yli::common::AnyValue> Universe::create_AnyStruct(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
@@ -875,7 +924,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::screenshot(
+        std::shared_ptr<yli::common::AnyValue> Universe::screenshot(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
@@ -959,7 +1008,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::eval(
+        std::shared_ptr<yli::common::AnyValue> Universe::eval(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)

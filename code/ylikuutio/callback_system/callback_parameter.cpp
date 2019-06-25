@@ -45,7 +45,7 @@ namespace yli
             callback_object->bind_callback_parameter(this);
         }
 
-        CallbackParameter::CallbackParameter(const std::string& name, std::shared_ptr<yli::datatypes::AnyValue> any_value, const bool is_reference, yli::callback_system::CallbackObject* const parent)
+        CallbackParameter::CallbackParameter(const std::string& name, std::shared_ptr<yli::common::AnyValue> any_value, const bool is_reference, yli::callback_system::CallbackObject* const parent)
         {
             // constructor.
             this->name = name;
@@ -78,9 +78,9 @@ namespace yli
             callback_object->set_callback_parameter_pointer(this->childID, nullptr);
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> CallbackParameter::get_any_value() const
+        std::shared_ptr<yli::common::AnyValue> CallbackParameter::get_any_value() const
         {
-            return std::make_shared<yli::datatypes::AnyValue>(*this->any_value);
+            return std::make_shared<yli::common::AnyValue>(*this->any_value);
         }
     }
 }
