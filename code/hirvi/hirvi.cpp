@@ -129,7 +129,7 @@ int main(const int argc, const char* const argv[])
     yli::config::SettingStruct planet_radius_setting_struct(std::make_shared<yli::common::AnyValue>(earth_radius));
     planet_radius_setting_struct.name = "planet_radius";
     planet_radius_setting_struct.setting_master = my_universe->get_setting_master();
-    planet_radius_setting_struct.activate_callback = &yli::config::SettingMaster::activate_planet_radius; // world may be a planet or a moon.
+    planet_radius_setting_struct.activate_callback = &yli::config::SettingMaster::activate_planet_radius; // planet radius may be for a planet or a moon.
     planet_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     new yli::config::Setting(planet_radius_setting_struct);
 
