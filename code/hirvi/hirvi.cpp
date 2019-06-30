@@ -644,7 +644,6 @@ int main(const int argc, const char* const argv[])
     double last_time_for_display_sync = yli::time::get_time();
     int32_t number_of_frames = 0;
 
-    bool is_exit_requested = false;
     bool has_mouse_focus = true;
 
     audio_master.add_to_playlist("Hirvi_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
@@ -739,7 +738,7 @@ int main(const int argc, const char* const argv[])
 
     yli::sdl::flush_sdl_event_queue();
 
-    while (!is_exit_requested)
+    while (!my_universe->get_is_exit_requested())
     {
         const double current_time_in_main_loop = yli::time::get_time();
 
@@ -812,7 +811,7 @@ int main(const int argc, const char* const argv[])
                                 }
                                 else if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
                                 {
-                                    is_exit_requested = true;
+                                    my_universe->request_exit();
                                 }
 
                                 // process no more than 1 callback for each keypress.
@@ -849,7 +848,7 @@ int main(const int argc, const char* const argv[])
                                 }
                                 else if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
                                 {
-                                    is_exit_requested = true;
+                                    my_universe->request_exit();
                                 }
 
                                 // process no more than 1 callback for each keyrelease.
@@ -871,7 +870,7 @@ int main(const int argc, const char* const argv[])
                 }
                 else if (sdl_event.type == SDL_QUIT)
                 {
-                    is_exit_requested = true;
+                    my_universe->request_exit();
                 }
             }
 
@@ -976,7 +975,7 @@ int main(const int argc, const char* const argv[])
                             }
                             else if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
                             {
-                                is_exit_requested = true;
+                                my_universe->request_exit();
                                 break;
                             }
                         }

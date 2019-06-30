@@ -382,6 +382,7 @@ namespace yli
                     this->is_flight_mode_in_use   = false;
                     this->is_first_turbo_pressed  = false;
                     this->is_second_turbo_pressed = false;
+                    this->is_exit_requested       = false;
 
                     this->turbo_factor      = NAN;
                     this->twin_turbo_factor = NAN;
@@ -453,6 +454,9 @@ namespace yli
                 // destructor.
                 virtual ~Universe();
 
+                // this method requests exit.
+                void request_exit();
+
                 // this method processes the physics.
                 void do_physics();
 
@@ -502,6 +506,8 @@ namespace yli
                 void restore_onscreen_rendering() const;
                 void set_opengl_background_color() const;
                 void adjust_opengl_viewport() const;
+
+                bool get_is_exit_requested() const;
 
                 // this method returns current `window`.
                 SDL_Window* get_window() const;
@@ -625,6 +631,7 @@ namespace yli
                 bool is_flight_mode_in_use;
                 bool is_first_turbo_pressed;
                 bool is_second_turbo_pressed;
+                bool is_exit_requested;
 
                 // Variables related to physics.
                 float gravity;

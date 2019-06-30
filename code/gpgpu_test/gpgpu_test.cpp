@@ -173,12 +173,10 @@ int main(void)
     double last_time_for_display_sync = yli::time::get_time();
     int32_t number_of_frames = 0;
 
-    bool is_exit_requested = false;
-
     SDL_Event sdl_event;
     std::string ms_frame_text;
 
-    while (!is_exit_requested)
+    while (!my_universe->get_is_exit_requested())
     {
         const double current_time_in_main_loop = yli::time::get_time();
 
@@ -229,7 +227,7 @@ int main(void)
                             {
                                 if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
                                 {
-                                    is_exit_requested = true;
+                                    my_universe->request_exit();
                                 }
 
                                 // process no more than 1 callback for each keypress.
@@ -240,7 +238,7 @@ int main(void)
                 }
                 else if (sdl_event.type == SDL_QUIT)
                 {
-                    is_exit_requested = true;
+                    my_universe->request_exit();
                 }
             }
 
