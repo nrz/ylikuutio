@@ -270,7 +270,7 @@ namespace yli
             }
 
             // Convert current input into std::string.
-            std::size_t characters_for_line = this->universe->get_window_width() / this->universe->get_text_size();
+            const std::size_t characters_for_line = this->universe->get_window_width() / this->universe->get_text_size();
 
             // Draw the console to screen using `font2D::print_text2D`.
             yli::ontology::TextStruct text_struct;
@@ -287,7 +287,7 @@ namespace yli
 
             if (this->in_history)
             {
-                std::size_t history_end_i = history_line_i + this->n_rows;
+                const std::size_t history_end_i = history_line_i + this->n_rows;
 
                 for (std::size_t history_i = history_line_i; history_i < history_end_i && history_i < this->console_history.size(); history_i++)
                 {
@@ -297,7 +297,7 @@ namespace yli
             }
             else
             {
-                std::size_t n_lines_of_current_input = (this->prompt.size() + this->current_input.size() - 1) / this->n_columns + 1;
+                const std::size_t n_lines_of_current_input = (this->prompt.size() + this->current_input.size() - 1) / this->n_columns + 1;
 
                 std::size_t history_start_i;
 
@@ -317,7 +317,7 @@ namespace yli
                     }
 
                     // Convert into a vector of lines.
-                    std::vector<std::string> current_input_vector = yli::string::convert_std_list_char_to_std_vector_std_string(
+                    const std::vector<std::string> current_input_vector = yli::string::convert_std_list_char_to_std_vector_std_string(
                             current_input_with_prompt,
                             this->n_columns);
 
@@ -345,7 +345,7 @@ namespace yli
                     // We are not in history so print everything to the end of the history.
                     for (std::size_t history_i = history_start_i; history_i < this->console_history.size(); history_i++)
                     {
-                        std::list<char> historical_text = this->console_history.at(history_i);
+                        const std::list<char> historical_text = this->console_history.at(history_i);
                         text_struct.text += yli::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
                     }
                     text_struct.text += this->prompt + yli::string::convert_std_list_char_to_std_string(
@@ -381,7 +381,7 @@ namespace yli
             {
                 this->in_history = false;
 
-                char keyboard_char = static_cast<char>(keyboard_event.keysym.sym);
+                const char keyboard_char = static_cast<char>(keyboard_event.keysym.sym);
 
                 if ((modifiers & shift_bitmask) != 0)
                 {
@@ -581,7 +581,7 @@ namespace yli
                 console->current_input.clear();
             }
 
-            uint32_t clear_console_magic_number = CLEAR_CONSOLE_MAGIC_NUMBER;
+            const uint32_t clear_console_magic_number = CLEAR_CONSOLE_MAGIC_NUMBER;
             return std::make_shared<yli::common::AnyValue>(clear_console_magic_number);
         }
 

@@ -135,7 +135,7 @@ int main(const int argc, const char* const argv[])
     yli::config::SettingStruct planet_radius_setting_struct(std::make_shared<yli::common::AnyValue>(earth_radius));
     planet_radius_setting_struct.name = "planet_radius";
     planet_radius_setting_struct.setting_master = my_universe->get_setting_master();
-    planet_radius_setting_struct.activate_callback = &yli::config::SettingMaster::activate_planet_radius; // world may be a planet or a moon.
+    planet_radius_setting_struct.activate_callback = &yli::config::SettingMaster::activate_planet_radius; // planet radius may be for a planet or a moon.
     planet_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     new yli::config::Setting(planet_radius_setting_struct);
 
@@ -774,7 +774,6 @@ int main(const int argc, const char* const argv[])
     double last_time_for_display_sync = yli::time::get_time();
     int32_t number_of_frames = 0;
 
-    bool is_exit_requested = false;
     bool has_mouse_focus = true;
 
     audio_master.add_to_playlist("Hirvi_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
@@ -869,7 +868,7 @@ int main(const int argc, const char* const argv[])
 
     yli::sdl::flush_sdl_event_queue();
 
-    while (!is_exit_requested)
+    while (!my_universe->get_is_exit_requested())
     {
         const double current_time_in_main_loop = yli::time::get_time();
 
@@ -918,7 +917,7 @@ int main(const int argc, const char* const argv[])
                 }
                 else if (sdl_event.type == SDL_KEYDOWN)
                 {
-                    uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
+                    const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
 
                     for (std::size_t i = 0; i < current_keypress_callback_engine_vector_pointer->size(); i++)
                     {
@@ -942,7 +941,7 @@ int main(const int argc, const char* const argv[])
                                 }
                                 else if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
                                 {
-                                    is_exit_requested = true;
+                                    my_universe->request_exit();
                                 }
 
                                 // process no more than 1 callback for each keypress.
@@ -979,7 +978,7 @@ int main(const int argc, const char* const argv[])
                                 }
                                 else if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
                                 {
-                                    is_exit_requested = true;
+                                    my_universe->request_exit();
                                 }
 
                                 // process no more than 1 callback for each keyrelease.
@@ -1001,7 +1000,7 @@ int main(const int argc, const char* const argv[])
                 }
                 else if (sdl_event.type == SDL_QUIT)
                 {
-                    is_exit_requested = true;
+                    my_universe->request_exit();
                 }
             }
 
@@ -1106,7 +1105,7 @@ int main(const int argc, const char* const argv[])
                             }
                             else if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
                             {
-                                is_exit_requested = true;
+                                my_universe->request_exit();
                                 break;
                             }
                         }

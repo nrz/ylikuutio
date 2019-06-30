@@ -35,9 +35,9 @@ recommended way to create entities, because it takes care of providing
 `yli::ontology::Universe` pointer to the constructor of new `Entity`.
 
 To initialize the ontological hierarchy, `yli::ontology::Universe` needs
-to created. After that an `EntityFactory` should be requested from
-the newly created `yli::ontology::Universe` and the rest of the objects
-should be created using this `EntityFactory`.
+to be created. After that an `EntityFactory` should be requested from
+`yli::ontology::Universe` using `Universe::get_entity_factory` and the
+rest of the entities should be created using this `EntityFactory`.
 
 Some of the `yli::ontology` classes have a more complex position in the
 ontological hierarchy. For example, `yli::ontology::Symbiosis` and the
@@ -61,7 +61,7 @@ F1 to get help.
 
 Console commands:
 
-To activate a scene or a world:
+To activate a scene or a camera:
 `activate`
 
 To get info about the entities:
@@ -82,6 +82,9 @@ To exit Hirvi:
 `ciao`
 `heippa`
 `sayonara`
+
+To evaluate s7 Scheme code:
+`eval`
 
 Ajokki
 

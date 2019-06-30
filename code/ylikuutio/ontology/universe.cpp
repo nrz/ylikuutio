@@ -230,6 +230,11 @@ namespace yli
             this->compute_and_update_matrices_from_inputs();
         }
 
+        void Universe::request_exit()
+        {
+            this->is_exit_requested = true;
+        }
+
         void Universe::render()
         {
             if (this->is_headless || !this->should_be_rendered)
@@ -401,6 +406,11 @@ namespace yli
         void Universe::adjust_opengl_viewport() const
         {
             glViewport(0, 0, this->window_width, this->window_height);
+        }
+
+        bool Universe::get_is_exit_requested() const
+        {
+            return this->is_exit_requested;
         }
 
         SDL_Window* Universe::get_window() const
