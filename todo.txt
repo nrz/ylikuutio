@@ -2,13 +2,14 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Fixes needed:
+[ ] Fix bug that only 2D text gets rendered when window width is less than window height.
+[ ] Fix bug that current console line is not visible after a lot of output produced eg. by `info` in a small window size.
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement saving commands into a file that can later be loaded using command line parameter `--input-file` in Hirvi and Ajokki.
 [ ] Implement command line parameter `--input-file` to Hirvi and Ajokki (load keypresses and keyreleases from a file, eg. `--input-file foo` or `--input-file=foo`).
 [ ] Implement command line parameter `--headless` to Hirvi and Ajokki (do not open any windows, do not render anything).
-[ ] Implement command line parameter `--window-size` to Hirvi and Ajokki (eg. `--window-size 1920x1080` or `--window-size=1920x1080`).
 [ ] Implement command line parameter `--debug` to Hirvi and Ajokki (log all kinds of debug information).
 [ ] Add `Scene` loading command `load` into console.
 [ ] Implement support for changing window size.
@@ -139,3 +140,5 @@ Ready:
 [x] Implement rendering into a texture (`ComputeTask`).
 [x] Implement `AnyValueEntity : public AnyValue, public Entity`.
 [x] Implement `AnyStructEntity : public AnyStruct, public Entity`.
+[x] Implement command line parameter `--window_width` to Hirvi and Ajokki (eg. `--window_width 1600`).
+[x] Implement command line parameter `--window_height` to Hirvi and Ajokki (eg. --window_height 900`).
