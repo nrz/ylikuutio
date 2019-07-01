@@ -135,7 +135,7 @@ namespace yli
                 end_char_pointer = char_end_string;
 
                 // Check if current character is any of the ending characters.
-                while (*end_char_pointer != '\0')
+                while (end_char_pointer != nullptr && *end_char_pointer != '\0')
                 {
                     if (std::strncmp(src_data_pointer, end_char_pointer, 1) == 0)
                     {
@@ -172,7 +172,7 @@ namespace yli
                 const std::string current_char_string = data_string.substr(data_index, 1);
 
                 // Check if current character is any of the ending characters.
-                while (*end_char_pointer != '\0')
+                while (end_char_pointer != nullptr && *end_char_pointer != '\0')
                 {
                     if (std::strncmp(current_char_string.c_str(), end_char_pointer, 1) == 0)
                     {
@@ -213,7 +213,7 @@ namespace yli
                 const std::string current_char_string = data_string.substr(data_index, 1);
 
                 // Check if current character is any of the ending characters.
-                while (*end_char_pointer != '\0')
+                while (end_char_pointer != nullptr && *end_char_pointer != '\0')
                 {
                     if (std::strncmp(current_char_string.c_str(), end_char_pointer, 1) == 0)
                     {
