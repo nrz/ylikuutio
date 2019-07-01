@@ -62,6 +62,7 @@
 #include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
+#include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/time/time.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/pi.hpp"
@@ -115,6 +116,23 @@ int main(const int argc, const char* const argv[])
     std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.window_title = "Hirvi 0.0.4, powered by Ylikuutio 0.0.4";
+
+    if (command_line_master.is_key("window_width") &&
+            yli::string::check_if_unsigned_integer_string(command_line_master.get_value("window_width")))
+    {
+        const std::string window_width = command_line_master.get_value("window_width");
+        std::size_t index = 0;
+        universe_struct.window_width = yli::string::extract_uint32_t_value_from_string(window_width, index, nullptr, nullptr);
+    }
+
+    if (command_line_master.is_key("window_height") &&
+            yli::string::check_if_unsigned_integer_string(command_line_master.get_value("window_height")))
+    {
+        const std::string window_height = command_line_master.get_value("window_height");
+        std::size_t index = 0;
+        universe_struct.window_height = yli::string::extract_uint32_t_value_from_string(window_height, index, nullptr, nullptr);
+    }
+
     universe_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
     universe_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &current_keyrelease_callback_engine_vector_pointer;
     yli::ontology::Universe* const my_universe = new yli::ontology::Universe(universe_struct);
