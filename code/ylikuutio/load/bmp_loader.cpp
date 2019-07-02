@@ -22,7 +22,6 @@
 // Include standard headers
 #include <algorithm> // std::copy
 #include <cstddef>   // std::size_t
-#include <cstdio>    // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream>  // std::cout, std::cin, std::cerr
 #include <limits>    // std::numeric_limits
 #include <stdint.h>  // uint32_t etc.
