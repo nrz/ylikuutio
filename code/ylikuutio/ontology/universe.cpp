@@ -75,12 +75,12 @@
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstddef>       // std::size_t
-#include <cstdio>        // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf, std::snprintf etc.
 #include <inttypes.h>    // PRId32, PRId64, PRIu32, PRIu64, PRIx32, PRIx64
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <stdint.h>      // uint32_t etc.
+#include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -722,11 +722,11 @@ namespace yli
                 console->print_text(entity->get_type());
 
                 uint64_t memory_address = reinterpret_cast<uint64_t>((void*) entity);
-                char memory_address_char_array[256];
-                std::snprintf(memory_address_char_array, sizeof(memory_address_char_array), "0x%" PRIx64, static_cast<uint64_t>(memory_address));
+                std::stringstream memory_address_stringstream;
+                memory_address_stringstream << "0x" << std::hex << memory_address;
 
                 std::string entity_info = "memory address: ";
-                entity_info += std::string(memory_address_char_array);
+                entity_info += memory_address_stringstream.str();
                 console->print_text(entity_info);
 
                 if (entity->get_parent() == nullptr)
@@ -736,28 +736,28 @@ namespace yli
                 else
                 {
                     uint64_t parents_memory_address = reinterpret_cast<uint64_t>((void*) entity->get_parent());
-                    char parents_memory_address_char_array[256];
-                    std::snprintf(parents_memory_address_char_array, sizeof(parents_memory_address_char_array), "0x%" PRIx64, static_cast<uint64_t>(parents_memory_address));
+                    std::stringstream parents_memory_address_stringstream;
+                    parents_memory_address_stringstream << "0x" << std::hex << parents_memory_address;
 
                     std::string parent_info = "parent's address: ";
-                    parent_info += std::string(parents_memory_address_char_array);
+                    parent_info += parents_memory_address_stringstream.str();
                     console->print_text(parent_info);
                 }
 
                 std::size_t number_of_children = entity->get_number_of_children();
-                char number_of_children_char_array[256];
-                std::snprintf(number_of_children_char_array, sizeof(number_of_children_char_array), "%lu", number_of_children);
+                std::stringstream number_of_children_stringstream;
+                number_of_children_stringstream << number_of_children;
 
                 std::string children_info = "number of children: ";
-                children_info += std::string(number_of_children_char_array);
+                children_info += number_of_children_stringstream.str();
                 console->print_text(children_info);
 
                 std::size_t number_of_descendants = entity->get_number_of_descendants();
-                char number_of_descendants_char_array[256];
-                std::snprintf(number_of_descendants_char_array, sizeof(number_of_descendants_char_array), "%lu", number_of_descendants);
+                std::stringstream number_of_descendants_stringstream;
+                number_of_descendants_stringstream << number_of_descendants;
 
                 std::string descendants_info = "number of descendants: ";
-                descendants_info += std::string(number_of_descendants_char_array);
+                descendants_info += number_of_descendants_stringstream.str();
                 console->print_text(descendants_info);
             }
 
