@@ -20,7 +20,6 @@
 // Include standard headers
 #include <algorithm> // std::copy
 #include <cstddef>   // std::size_t
-#include <cstdio>    // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstdlib>   // std::strtod, std::strtof, std::strtol, std::strtold, std::strtoll, std::strtoul, std::strtoull
 #include <cstring>   // std::memcmp, std::memcpy, std::strcmp, std::strlen, std::strncmp
 #include <iomanip>   // std::setfill, std::setw
@@ -544,7 +543,7 @@ namespace yli
 
             if (description != nullptr)
             {
-                std::printf("%s: %d\n", description, value);
+                std::cout << description << ": " << value << "\n";
             }
             return int8_t_value;
         }
@@ -582,7 +581,7 @@ namespace yli
 
             if (description != nullptr)
             {
-                std::printf("%s: %d\n", description, value);
+                std::cout << description << ": " << value << "\n";
             }
             return int8_t_value;
         }
@@ -622,7 +621,7 @@ namespace yli
 
             if (description != nullptr)
             {
-                std::printf("%s: %d\n", description, value);
+                std::cout << description << ": " << value << "\n";
             }
             return uint8_t_value;
         }
@@ -660,7 +659,7 @@ namespace yli
 
             if (description != nullptr)
             {
-                std::printf("%s: %d\n", description, value);
+                std::cout << description << ": " << value << "\n";
             }
             return uint8_t_value;
         }
@@ -700,7 +699,7 @@ namespace yli
 
             if (description != nullptr)
             {
-                std::printf("%s: %d\n", description, value);
+                std::cout << description << ": " << value << "\n";
             }
             return int16_t_value;
         }
@@ -738,7 +737,7 @@ namespace yli
 
             if (description != nullptr)
             {
-                std::printf("%s: %d\n", description, value);
+                std::cout << description << ": " << value << "\n";
             }
             return int16_t_value;
         }
@@ -778,7 +777,7 @@ namespace yli
 
             if (description != nullptr)
             {
-                std::printf("%s: %d\n", description, value);
+                std::cout << description << ": " << value << "\n";
             }
             return uint16_t_value;
         }
@@ -816,7 +815,7 @@ namespace yli
 
             if (description != nullptr)
             {
-                std::printf("%s: %d\n", description, value);
+                std::cout << description << ": " << value << "\n";
             }
             return uint16_t_value;
         }
@@ -842,7 +841,7 @@ namespace yli
 
             if (description != nullptr)
             {
-                std::printf("%s: %d\n", description, value);
+                std::cout << description << ": " << value << "\n";
             }
             return value;
         }
@@ -866,7 +865,7 @@ namespace yli
 
             if (description != nullptr)
             {
-                std::printf("%s: %d\n", description, value);
+                std::cout << description << ": " << value << "\n";
             }
             return value;
         }
@@ -892,7 +891,7 @@ namespace yli
 
             if (description != nullptr)
             {
-                std::printf("%s: %d\n", description, value);
+                std::cout << description << ": " << value << "\n";
             }
             return value;
         }
@@ -916,7 +915,7 @@ namespace yli
 
             if (description != nullptr)
             {
-                std::printf("%s: %d\n", description, value);
+                std::cout << description << ": " << value << "\n";
             }
             return value;
         }
@@ -942,7 +941,7 @@ namespace yli
 
             if (description != nullptr)
             {
-                std::printf("%s: %f\n", description, value);
+                std::cout << description << ": " << value << "\n";
             }
             return value;
         }
@@ -966,7 +965,7 @@ namespace yli
 
             if (description != nullptr)
             {
-                std::printf("%s: %f\n", description, value);
+                std::cout << description << ": " << value << "\n";
             }
             return value;
         }
