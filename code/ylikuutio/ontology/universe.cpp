@@ -1067,6 +1067,16 @@ namespace yli
             return this->scheme_master->eval_string(my_string);
         }
 
+        yli::audio::AudioMaster* Universe::get_audio_master() const
+        {
+            if (this->audio_master == nullptr)
+            {
+                return nullptr;
+            }
+
+            return this->audio_master.get();
+        }
+
         yli::ontology::Font2D* Universe::get_active_font2D() const
         {
             return this->active_font2D;
