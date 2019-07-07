@@ -28,6 +28,7 @@
 #include <cstdio>    // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <fstream>   // std::ifstream
 #include <ios>       // std::ios
+#include <iostream>  // std::cout, std::cin, std::cerr
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 #include <vector>    // std::vector
@@ -105,7 +106,8 @@ namespace yli
             {
                 std::vector<char> FragmentShaderErrorMessage(InfoLogLength+1);
                 glGetShaderInfoLog(FragmentShaderID, InfoLogLength, nullptr, &FragmentShaderErrorMessage[0]);
-                std::printf("%s\n", &FragmentShaderErrorMessage[0]);
+                std::string error_string(FragmentShaderErrorMessage.begin(), FragmentShaderErrorMessage.end());
+                std::cerr << error_string << "\n";
             }
 
             // Link the program
