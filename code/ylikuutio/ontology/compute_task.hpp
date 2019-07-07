@@ -109,6 +109,7 @@ namespace yli
                     this->texture_width = compute_task_struct.texture_width;
                     this->texture_height = compute_task_struct.texture_height;
                     this->texture_depth = compute_task_struct.texture_depth;
+                    this->texture_size = 0; // dummy value.
                     this->n_index_characters = compute_task_struct.n_index_characters;
 
                     // variables related to the framebuffer.

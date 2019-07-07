@@ -146,7 +146,7 @@ int main(const int argc, const char* const argv[])
 
     yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
 
-    yli::audio::AudioMaster audio_master;
+    yli::audio::AudioMaster* audio_master = my_universe->get_audio_master();
 
     const float earth_radius = 6371.0f; // in kilometres
 
@@ -794,12 +794,12 @@ int main(const int argc, const char* const argv[])
 
     bool has_mouse_focus = true;
 
-    audio_master.add_to_playlist("Hirvi_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
-    audio_master.add_to_playlist("Ajokki_playlist", "414270__greek555__sample-97-bpm.wav");
-    // audio_master.add_to_playlist("Ajokki_playlist", "419588__greek555__dreaming-of-me.ogg");
-    // audio_master.add_to_playlist("Ajokki_playlist", "416882__greek555__blue-play.ogg");
-    // audio_master.add_to_playlist("Ajokki_playlist", "395487__frankum__tecno-pop-base-and-guitar-2.ogg");
-    audio_master.play_playlist("Ajokki_playlist");
+    audio_master->add_to_playlist("Hirvi_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
+    audio_master->add_to_playlist("Ajokki_playlist", "414270__greek555__sample-97-bpm.wav");
+    // audio_master->add_to_playlist("Ajokki_playlist", "419588__greek555__dreaming-of-me.ogg");
+    // audio_master->add_to_playlist("Ajokki_playlist", "416882__greek555__blue-play.ogg");
+    // audio_master->add_to_playlist("Ajokki_playlist", "395487__frankum__tecno-pop-base-and-guitar-2.ogg");
+    audio_master->play_playlist("Ajokki_playlist");
 
     SDL_Event sdl_event;
     std::string ms_frame_text;
@@ -914,7 +914,7 @@ int main(const int argc, const char* const argv[])
                 last_time_to_display_FPS += 1.0f;
 
                 // Update audio also (in case the sound has reached the end).
-                audio_master.update();
+                audio_master->update();
             }
 
             // Clear the screen.

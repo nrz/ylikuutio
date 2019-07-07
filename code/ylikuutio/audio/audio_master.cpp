@@ -41,6 +41,12 @@ namespace yli
             this->current_playlist = ""; // no current playlist.
             this->loop = true;           // loop playlist.
 
+            this->audio_spec.freq = 44100; // 44100 Hz.
+            this->audio_spec.format = AUDIO_F32;
+            this->audio_spec.channels = 2;
+            this->audio_spec.samples = 4096;
+            this->audio_spec.callback = yli::audio::AudioMaster::play_audio_callback;
+
             this->audio_master = this;   // `this` is the `AudioMaster`. Do not create more than 1 `AudioMaster`!
         }
 
@@ -126,12 +132,14 @@ namespace yli
         {
             if (this->playlist_map.count(playlist) == 1)
             {
-                for (auto it = this->playlist_map[playlist].begin(); it != this->playlist_map[playlist].end(); it++)
+                for (auto it = this->playlist_map[playlist].begin(); it != this->playlist_map[playlist].end(); )
                 {
                     if (it->compare(audio_file) == 0)
                     {
-                        this->playlist_map[playlist].erase(it);
+                        this->playlist_map[playlist].erase(it--);
                     }
+
+                    it++;
                 }
             }
         }

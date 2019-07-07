@@ -18,6 +18,7 @@
 #include "scheme_master.hpp"
 
 // Include standard headers
+#include <memory> // std::make_shared, std::shared_ptr
 #include <string> // std::string
 
 #include "s7.h"
@@ -41,8 +42,8 @@ namespace yli
         std::string SchemeMaster::eval_string(const std::string& my_string) const
         {
             s7_pointer my_s7_pointer = s7_eval_c_string(this->s7, my_string.c_str());
-            const char* const output = s7_object_to_c_string(this->s7, my_s7_pointer);
-            return std::string(output);
+            std::shared_ptr<char> output(s7_object_to_c_string(this->s7, my_s7_pointer), std::default_delete<char[]>());
+            return std::string(output.get());
         }
     }
 }

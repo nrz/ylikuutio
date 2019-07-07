@@ -22,6 +22,7 @@
 #include "entity_factory.hpp"
 #include "universe_struct.hpp"
 #include "camera_struct.hpp"
+#include "code/ylikuutio/audio/audio_master.hpp"
 #include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -443,8 +444,13 @@ namespace yli
 
                     this->scheme_master = std::make_shared<yli::scheme::SchemeMaster>();
 
+                    this->audio_master = std::make_shared<yli::audio::AudioMaster>();
+
                     // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
+                    this->child_vector_pointers_vector.push_back(&this->font2D_pointer_vector);
+                    this->child_vector_pointers_vector.push_back(&this->any_value_entity_pointer_vector);
+                    this->child_vector_pointers_vector.push_back(&this->any_struct_entity_pointer_vector);
                     this->type_string = "yli::ontology::Universe*";
                 }
 
@@ -477,6 +483,8 @@ namespace yli
                 void set_active_camera(yli::ontology::Camera* const camera) const;
 
                 std::string eval_string(const std::string& my_string) const;
+
+                yli::audio::AudioMaster* get_audio_master() const;
 
                 yli::ontology::Font2D* get_active_font2D() const;
                 void set_active_font2D(yli::ontology::Font2D* const font2D);
@@ -689,6 +697,8 @@ namespace yli
                 yli::console::Console* console;       // pointer to `Console`.
 
                 std::shared_ptr<yli::scheme::SchemeMaster> scheme_master; // pointer to `SchemeMaster`.
+
+                std::shared_ptr<yli::audio::AudioMaster> audio_master;    // pointer to `AudioMaster`.
 
                 // Named entities are stored here so that they can be recalled, if needed.
                 std::unordered_map<std::string, yli::ontology::Entity*> entity_map;

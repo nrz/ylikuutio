@@ -40,6 +40,7 @@
 // Include standard headers
 #include <iomanip>    // std::setfill, std::setw
 #include <iostream>   // std::cout, std::cin, std::cerr
+#include <sstream>    // std::istringstream, std::ostringstream, std::stringstream
 #include <string>     // std::string
 
 namespace yli
@@ -316,7 +317,9 @@ namespace gpgpu_test
                 break;
             }
 
-            std::cout << "OpenGL error: 0x" << std::setfill('0') << std::setw(2) << std::hex  << error << std::dec << "\n";
+            std::stringstream opengl_error_stringstream;
+            opengl_error_stringstream << "OpenGL error: 0x" << std::setfill('0') << std::setw(4) << std::hex << error << "\n";
+            std::cout << opengl_error_stringstream.str();
         }
 
         return gpgpu_test_scene_entity;

@@ -271,7 +271,9 @@ namespace yli
                         break;
                     }
 
-                    std::cout << "OpenGL error: 0x" << std::setfill('0') << std::setw(4) << std::hex << error << std::dec << "\n";
+                    std::stringstream opengl_error_stringstream;
+                    opengl_error_stringstream << "OpenGL error: 0x" << std::setfill('0') << std::setw(4) << std::hex << error << "\n";
+                    std::cout << opengl_error_stringstream.str();
                 }
 
                 this->postiterate();

@@ -606,11 +606,7 @@ namespace yli
             uint32_t value = std::strtoul(char_number_buffer, nullptr, 10); // base 10.
             uint8_t uint8_t_value = 0;
 
-            if (value < std::numeric_limits<uint8_t>::min())
-            {
-                std::cerr << "ERROR: `value` " << value << " is too small for `uint8_t`! 0 returned.\n";
-            }
-            else if (value > std::numeric_limits<uint8_t>::max())
+            if (value > std::numeric_limits<uint8_t>::max())
             {
                 std::cerr << "ERROR: `value` " << value << " is too big for `uint8_t`! 0 returned.\n";
             }
@@ -644,11 +640,7 @@ namespace yli
             uint32_t value = std::strtoul(char_number_buffer, nullptr, 10); // base 10.
             uint8_t uint8_t_value = 0;
 
-            if (value < std::numeric_limits<uint8_t>::min())
-            {
-                std::cerr << "ERROR: `value` " << value << " is too small for `uint8_t`! 0 returned.\n";
-            }
-            else if (value > std::numeric_limits<uint8_t>::max())
+            if (value > std::numeric_limits<uint8_t>::max())
             {
                 std::cerr << "ERROR: `value` " << value << " is too big for `uint8_t`! 0 returned.\n";
             }
@@ -762,11 +754,7 @@ namespace yli
             uint32_t value = std::strtoul(char_number_buffer, nullptr, 10); // base 10.
             uint16_t uint16_t_value = 0;
 
-            if (value < std::numeric_limits<uint16_t>::min())
-            {
-                std::cerr << "ERROR: `value` " << value << " is too small for `uint16_t`! 0 returned.\n";
-            }
-            else if (value > std::numeric_limits<uint16_t>::max())
+            if (value > std::numeric_limits<uint16_t>::max())
             {
                 std::cerr << "ERROR: `value` " << value << " is too big for `uint16_t`! 0 returned.\n";
             }
@@ -800,11 +788,7 @@ namespace yli
             uint32_t value = std::strtoul(char_number_buffer, nullptr, 10); // base 10.
             uint16_t uint16_t_value = 0;
 
-            if (value < std::numeric_limits<uint16_t>::min())
-            {
-                std::cerr << "ERROR: `value` " << value << " is too small for `uint16_t`! 0 returned.\n";
-            }
-            else if (value > std::numeric_limits<uint16_t>::max())
+            if (value > std::numeric_limits<uint16_t>::max())
             {
                 std::cerr << "ERROR: `value` " << value << " is too big for `uint16_t`! 0 returned.\n";
             }

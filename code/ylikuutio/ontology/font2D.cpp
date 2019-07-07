@@ -419,30 +419,15 @@ namespace yli
                 return;
             }
 
-            if (text_struct.text.empty())
-            {
-                this->print_text2D(
-                        text_struct.x,
-                        text_struct.y,
-                        text_struct.text_size,
-                        text_struct.font_size,
-                        text_struct.text,
-                        text_struct.font_texture_file_format,
-                        text_struct.horizontal_alignment,
-                        text_struct.vertical_alignment);
-            }
-            else
-            {
-                this->print_text2D(
-                        text_struct.x,
-                        text_struct.y,
-                        text_struct.text_size,
-                        text_struct.font_size,
-                        text_struct.text,
-                        text_struct.font_texture_file_format,
-                        text_struct.horizontal_alignment,
-                        text_struct.vertical_alignment);
-            }
+            this->print_text2D(
+                    text_struct.x,
+                    text_struct.y,
+                    text_struct.text_size,
+                    text_struct.font_size,
+                    text_struct.text,
+                    text_struct.font_texture_file_format,
+                    text_struct.horizontal_alignment,
+                    text_struct.vertical_alignment);
         }
 
         void Font2D::print_text2D(
