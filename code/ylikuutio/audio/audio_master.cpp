@@ -126,12 +126,14 @@ namespace yli
         {
             if (this->playlist_map.count(playlist) == 1)
             {
-                for (auto it = this->playlist_map[playlist].begin(); it != this->playlist_map[playlist].end(); it++)
+                for (auto it = this->playlist_map[playlist].begin(); it != this->playlist_map[playlist].end(); )
                 {
                     if (it->compare(audio_file) == 0)
                     {
-                        this->playlist_map[playlist].erase(it);
+                        this->playlist_map[playlist].erase(it--);
                     }
+
+                    it++;
                 }
             }
         }
