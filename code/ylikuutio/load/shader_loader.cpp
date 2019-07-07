@@ -25,7 +25,6 @@
 
 // Include standard headers
 #include <algorithm> // std::find
-#include <cstdio>    // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <fstream>   // std::ifstream
 #include <ios>       // std::ios
 #include <iostream>  // std::cout, std::cin, std::cerr
@@ -57,7 +56,7 @@ namespace yli
             }
             else
             {
-                std::printf("Impossible to open %s. Are you in the right directory ? Don't forget to read the FAQ !\n", vertex_file_path);
+                std::cerr << "ERROR: `yli::load::load_shaders`: opening file " << vertex_file_path << " failed.\n";
                 return 0;
             }
 
@@ -78,7 +77,7 @@ namespace yli
             int InfoLogLength;
 
             // Compile Vertex Shader
-            std::printf("Compiling shader: %s\n", vertex_file_path);
+            std::cout << "Compling vertex shader: " << vertex_file_path << "\n";
             const char* const VertexSourcePointer = VertexShaderCode.c_str();
             glShaderSource(VertexShaderID, 1, &VertexSourcePointer , nullptr);
             glCompileShader(VertexShaderID);
@@ -94,7 +93,7 @@ namespace yli
             }
 
             // Compile Fragment Shader
-            std::printf("Compiling shader: %s\n", fragment_file_path);
+            std::cout << "Compling fragment shader: " << fragment_file_path << "\n";
             const char* const FragmentSourcePointer = FragmentShaderCode.c_str();
             glShaderSource(FragmentShaderID, 1, &FragmentSourcePointer , nullptr);
             glCompileShader(FragmentShaderID);
@@ -111,7 +110,7 @@ namespace yli
             }
 
             // Link the program
-            std::printf("Linking program\n");
+            std::cout << "Linking program\n";
             const uint32_t ProgramID = glCreateProgram();
             glAttachShader(ProgramID, VertexShaderID);
             glAttachShader(ProgramID, FragmentShaderID);
@@ -124,7 +123,8 @@ namespace yli
             {
                 std::vector<char> ProgramErrorMessage(InfoLogLength+1);
                 glGetProgramInfoLog(ProgramID, InfoLogLength, nullptr, &ProgramErrorMessage[0]);
-                std::printf("%s\n", &ProgramErrorMessage[0]);
+                std::string error_string(ProgramErrorMessage.begin(), ProgramErrorMessage.end());
+                std::cerr << error_string << "\n";
             }
 
             glDeleteShader(VertexShaderID);
