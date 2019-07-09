@@ -334,6 +334,7 @@ namespace yli
                     this->active_font2D    = nullptr;
                     this->console          = nullptr;
                     this->scheme_master    = nullptr;
+                    this->audio_master     = nullptr;
 
                     this->background_red   = NAN;
                     this->background_green = NAN;
@@ -402,8 +403,11 @@ namespace yli
                     this->can_toggle_help_mode             = false;
                     this->can_display_help_screen          = true;
 
+                    this->number_of_entities = 0;
                     this->number_of_worlds  = 0;
                     this->number_of_font2Ds = 0;
+                    this->number_of_any_value_entities = 0;
+                    this->number_of_any_struct_entities = 0;
 
                     this->context = nullptr;
                     this->window  = nullptr;

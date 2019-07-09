@@ -24,6 +24,12 @@
 #include "code/ylikuutio/file/file_loader.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 // Include standard headers
 #include <cstdio>     // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>    // std::memcmp, std::strcmp, std::strlen, std::strncmp

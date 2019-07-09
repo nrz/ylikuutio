@@ -24,6 +24,9 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+// Include standard headers
+#include <cmath> // NAN, std::isnan, std::pow
+
 TEST(SpeciesStruct_must_be_initialized_appropriately, SpeciesStruct)
 {
     const yli::ontology::SpeciesStruct test_species_struct;

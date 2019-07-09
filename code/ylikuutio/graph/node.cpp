@@ -21,6 +21,7 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
+#include <algorithm> // std::find etc.
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 

@@ -121,14 +121,15 @@ struct IElement
 };
 
 
-enum class RotationOrder {
+enum class RotationOrder
+{
 	EULER_XYZ,
 	EULER_XZY,
 	EULER_YZX,
 	EULER_YXZ,
 	EULER_ZXY,
 	EULER_ZYX,
-    SPHERIC_XYZ // Currently unsupported. Treated as EULER_XYZ.
+	SPHERIC_XYZ // Currently unsupported. Treated as EULER_XYZ.
 };
 
 
@@ -162,14 +163,14 @@ struct Object
 
 	virtual ~Object() {}
 	virtual Type getType() const = 0;
-	
+
 	const IScene& getScene() const;
 	Object* resolveObjectLink(int idx) const;
 	Object* resolveObjectLink(Type type, const char* property, int idx) const;
 	Object* resolveObjectLinkReverse(Type type) const;
 	Object* getParent() const;
 
-    RotationOrder getRotationOrder() const;
+	RotationOrder getRotationOrder() const;
 	Vec3 getRotationOffset() const;
 	Vec3 getRotationPivot() const;
 	Vec3 getPostRotation() const;
@@ -208,6 +209,7 @@ struct Texture : Object
 	{
 		DIFFUSE,
 		NORMAL,
+		SPECULAR,
 
 		COUNT
 	};
@@ -227,6 +229,7 @@ struct Material : Object
 	Material(const Scene& _scene, const IElement& _element);
 
 	virtual Color getDiffuseColor() const = 0;
+	virtual Color getSpecularColor() const = 0;
 	virtual const Texture* getTexture(Texture::TextureType type) const = 0;
 };
 
@@ -271,12 +274,15 @@ struct NodeAttribute : Object
 struct Geometry : Object
 {
 	static const Type s_type = Type::GEOMETRY;
-    static const int s_uvs_max = 4;
+	static const int s_uvs_max = 4;
 
 	Geometry(const Scene& _scene, const IElement& _element);
 
 	virtual const Vec3* getVertices() const = 0;
 	virtual int getVertexCount() const = 0;
+
+	virtual const int* getFaceIndices() const = 0;
+	virtual int getIndexCount() const = 0;
 
 	virtual const Vec3* getNormals() const = 0;
 	virtual const Vec2* getUVs(int index = 0) const = 0;
@@ -431,7 +437,7 @@ struct IScene
 	virtual const Mesh* getMesh(int index) const = 0;
 	virtual int getAnimationStackCount() const = 0;
 	virtual const AnimationStack* getAnimationStack(int index) const = 0;
-	virtual const Object *const * getAllObjects() const = 0;
+	virtual const Object* const* getAllObjects() const = 0;
 	virtual int getAllObjectCount() const = 0;
 
 protected:
@@ -439,7 +445,7 @@ protected:
 };
 
 
-IScene* load(const u8* data, int size);
+IScene* load(const u8* data, int size, bool triangulate = true);
 const char* getError();
 
 

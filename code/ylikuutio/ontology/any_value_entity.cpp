@@ -18,6 +18,10 @@
 #include "any_value_entity.hpp"
 #include "universe.hpp"
 
+// Include standard headers
+#include <cstddef>  // std::size_t
+#include <iostream> // std::cout, std::cin, std::cerr
+
 namespace yli
 {
     namespace ontology

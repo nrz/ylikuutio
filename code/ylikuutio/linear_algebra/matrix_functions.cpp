@@ -21,6 +21,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <memory>   // std::make_shared, std::shared_ptr
 
 namespace yli
 {
