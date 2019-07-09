@@ -23,6 +23,7 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <limits>   // std::numeric_limits
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 
 TEST(any_value_must_be_initialized_appropriately, no_value)

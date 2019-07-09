@@ -19,6 +19,9 @@
 
 #include <asio.hpp>
 
+// Include standard headers
+#include <memory> // std::make_shared, std::shared_ptr
+
 // based on http://think-async.com/Asio/asio-1.10.6/doc/asio/tutorial/tutdaytime3.html
 //
 // server.cpp

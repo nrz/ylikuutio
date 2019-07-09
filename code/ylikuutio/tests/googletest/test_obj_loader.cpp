@@ -18,6 +18,12 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/load/obj_loader.cpp"
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 #include <string>  // std::string

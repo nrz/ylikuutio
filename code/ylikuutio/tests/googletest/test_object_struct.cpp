@@ -26,6 +26,9 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+// Include standard headers
+#include <cmath> // NAN, std::isnan, std::pow
+
 TEST(ObjectStruct_must_be_initialized_appropriately, ObjectStruct)
 {
     const yli::ontology::ObjectStruct test_object_struct;

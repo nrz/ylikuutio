@@ -26,6 +26,7 @@
 
 // Include standard headers
 #include <cmath>  // NAN, std::isnan, std::pow
+#include <cstddef> // std::size_t
 #include <math.h> // fmax
 #include <vector> // std::vector
 

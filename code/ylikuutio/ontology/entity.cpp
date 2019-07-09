@@ -23,6 +23,7 @@
 #include "code/ylikuutio/common/any_value.hpp"
 
 // Include standard headers
+#include <cstddef>       // std::size_t
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
