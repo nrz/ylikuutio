@@ -684,7 +684,7 @@ add_executable(ajokki
     code/ajokki/ajokki_wireframe.cpp
     code/ajokki/ajokki_wireframe.hpp
     )
-target_link_libraries(ajokki ylikuutio ${ALL_LIBS})
+target_link_libraries(ajokki ylikuutio ${ALL_LIBS} pthread)
 
 # GPGPU test
 add_executable(gpgpu_test
