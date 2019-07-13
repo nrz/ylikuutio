@@ -50,6 +50,10 @@
 // This is used for entering text into console (writing commands).
 // All other console-related functions are implemented through keypress
 // callbacks and keyrelease callbacks.
+//
+// `Console` is created by `yli::ontology::Universe` constructor and
+// deleted by `Universe` destructor, but `Console` is not an `Entity`.
+// Thus there is no way to refer to the `Console` from the console input.
 
 namespace yli
 {

@@ -87,7 +87,7 @@
 #endif
 
 // Include standard headers
-#include <cmath>         // NAN, std::isnan, std::pow
+#include <cmath>         // abs, cos, NAN, remainder, sin, std::isnan, std::pow
 #include <cstddef>       // std::size_t
 #include <iomanip>       // std::setfill, std::setprecision, std::setw
 #include <iostream>      // std::cout, std::cin, std::cerr
@@ -182,10 +182,10 @@ int main(const int argc, const char* const argv[])
 
     // Enable depth test.
     yli::opengl::enable_depth_test();
-    // Accept fragment if it closer to the camera than the former one.
+    // Accept fragment if it is closer to the camera than the former one.
     yli::opengl::set_depth_func_to_less();
 
-    // Cull triangles which normal is not towards the camera.
+    // Cull triangles whose normal is not towards the camera.
     yli::opengl::cull_triangles();
 
     std::cout << "Setting up console ...\n";
@@ -278,7 +278,7 @@ int main(const int argc, const char* const argv[])
     my_universe->turbo_factor = 100.0f;
     my_universe->twin_turbo_factor = 500.0f;
 
-    // Initialize our little text library with the Holstein font
+    // Initialize our little text library with the Holstein font.
     const char* const char_g_font_texture_filename = "Holstein.bmp";
     const char* const char_g_font_texture_file_format = "bmp";
 
@@ -787,7 +787,7 @@ int main(const int argc, const char* const argv[])
     my_console->add_command_callback("clear", &yli::console::Console::clear);
     my_console->add_command_callback("screenshot", &yli::ontology::Universe::screenshot);
 
-    // For speed computation
+    // For speed computation.
     double last_time_to_display_FPS = yli::time::get_time();
     double last_time_for_display_sync = yli::time::get_time();
     int32_t number_of_frames = 0;
@@ -922,16 +922,16 @@ int main(const int argc, const char* const argv[])
 
             my_universe->compute_delta_time();
 
-            int32_t mouse_x = my_universe->get_window_width() / 2;
-            int32_t mouse_y = my_universe->get_window_height() / 2;
+            my_universe->mouse_x = my_universe->get_window_width() / 2;
+            my_universe->mouse_y = my_universe->get_window_height() / 2;
 
-            // poll all SDL events.
+            // Poll all SDL events.
             while (SDL_PollEvent(&sdl_event))
             {
                 if (sdl_event.type == SDL_MOUSEMOTION)
                 {
-                    mouse_x += sdl_event.motion.xrel; // horizontal motion relative to screen center.
-                    mouse_y += sdl_event.motion.yrel; // vertical motion relative to screen center.
+                    my_universe->mouse_x += sdl_event.motion.xrel; // horizontal motion relative to screen center.
+                    my_universe->mouse_y += sdl_event.motion.yrel; // vertical motion relative to screen center.
                 }
                 else if (sdl_event.type == SDL_KEYDOWN)
                 {
@@ -962,7 +962,7 @@ int main(const int argc, const char* const argv[])
                                     my_universe->request_exit();
                                 }
 
-                                // process no more than 1 callback for each keypress.
+                                // Process no more than 1 callback for each keypress.
                                 break;
                             }
                         }
@@ -999,7 +999,7 @@ int main(const int argc, const char* const argv[])
                                     my_universe->request_exit();
                                 }
 
-                                // process no more than 1 callback for each keyrelease.
+                                // Process no more than 1 callback for each keyrelease.
                                 break;
                             }
                         }
@@ -1023,53 +1023,53 @@ int main(const int argc, const char* const argv[])
             }
 
             // mouse position.
-            const double xpos = static_cast<double>(mouse_x);
-            const double ypos = static_cast<double>(mouse_y);
+            const double xpos = static_cast<double>(my_universe->mouse_x);
+            const double ypos = static_cast<double>(my_universe->mouse_y);
 
-            // Reset mouse position for next frame
+            // Reset mouse position for next frame.
             if (has_mouse_focus)
             {
                 yli::input::set_cursor_position(
                         my_universe->get_window(),
                         static_cast<double>(my_universe->get_window_width()) / 2,
                         static_cast<double>(my_universe->get_window_height()) / 2);
+
+                if (my_universe->has_mouse_ever_moved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
+                {
+                    my_universe->has_mouse_ever_moved = true;
+
+                    // Compute new orientation.
+                    my_universe->current_camera_horizontal_angle += my_universe->mouse_speed * static_cast<float>(my_universe->get_window_width() / 2 - xpos);
+                    my_universe->current_camera_horizontal_angle = remainder(my_universe->current_camera_horizontal_angle, (2.0f * PI));
+
+                    if (my_universe->is_invert_mouse_in_use)
+                    {
+                        // Invert mouse.
+                        my_universe->current_camera_vertical_angle -= my_universe->mouse_speed * static_cast<float>(my_universe->get_window_height() / 2 - ypos);
+                    }
+                    else
+                    {
+                        // Don't invert mouse.
+                        my_universe->current_camera_vertical_angle += my_universe->mouse_speed * static_cast<float>(my_universe->get_window_height() / 2 - ypos);
+                    }
+
+                    my_universe->current_camera_vertical_angle = remainder(my_universe->current_camera_vertical_angle, (2.0f * PI));
+                }
             }
 
-            if (my_universe->has_mouse_ever_moved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
-            {
-                my_universe->has_mouse_ever_moved = true;
-
-                // Compute new orientation
-                my_universe->current_camera_horizontal_angle += my_universe->mouse_speed * static_cast<float>(my_universe->get_window_width() / 2 - xpos);
-                my_universe->current_camera_horizontal_angle = remainder(my_universe->current_camera_horizontal_angle, (2.0f * PI));
-
-                if (my_universe->is_invert_mouse_in_use)
-                {
-                    // invert mouse.
-                    my_universe->current_camera_vertical_angle -= my_universe->mouse_speed * static_cast<float>(my_universe->get_window_height() / 2 - ypos);
-                }
-                else
-                {
-                    // don't invert mouse.
-                    my_universe->current_camera_vertical_angle += my_universe->mouse_speed * static_cast<float>(my_universe->get_window_height() / 2 - ypos);
-                }
-
-                my_universe->current_camera_vertical_angle = remainder(my_universe->current_camera_vertical_angle, (2.0f * PI));
-            }
-
-            // Direction : Spherical coordinates to Cartesian coordinates conversion
+            // Direction: spherical coordinates to cartesian coordinates conversion.
             my_universe->current_camera_direction = glm::vec3(
                     cos(my_universe->current_camera_vertical_angle) * sin(my_universe->current_camera_horizontal_angle),
                     sin(my_universe->current_camera_vertical_angle),
                     cos(my_universe->current_camera_vertical_angle) * cos(my_universe->current_camera_horizontal_angle));
 
-            // Right vector
+            // Right vector.
             my_universe->current_camera_right = glm::vec3(
                     sin(my_universe->current_camera_horizontal_angle - PI/2.0f),
                     0,
                     cos(my_universe->current_camera_horizontal_angle - PI/2.0f));
 
-            // Up vector
+            // Up vector.
             my_universe->current_camera_up = glm::cross(my_universe->current_camera_right, my_universe->current_camera_direction);
 
             if (!my_console->get_in_console())
@@ -1139,7 +1139,7 @@ int main(const int argc, const char* const argv[])
                 my_universe->current_camera_horizontal_angle << "," <<
                 my_universe->current_camera_vertical_angle << " rad; " <<
                 RADIANS_TO_DEGREES(my_universe->current_camera_horizontal_angle) << "," <<
-                RADIANS_TO_DEGREES(my_universe->current_camera_vertical_angle) << " deg\\n" <<
+                RADIANS_TO_DEGREES(my_universe->current_camera_vertical_angle) << " deg\n" <<
                 "(" <<
                 my_universe->current_camera_cartesian_coordinates.x << "," <<
                 my_universe->current_camera_cartesian_coordinates.y << "," <<
@@ -1159,23 +1159,23 @@ int main(const int argc, const char* const argv[])
             {
                 std::stringstream help_text_stringstream;
                 help_text_stringstream <<
-                    "Ajokki 0.0.4\\n"
-                    "\\n"
-                    "arrow keys\\n"
-                    "space jump\\n"
-                    "enter duck\\n"
-                    "F1 help mode\\n"
-                    "`  enter console\\n"
-                    "I  invert mouse (" << (my_universe->is_invert_mouse_in_use ? on_string : off_string) << ")\\n"
-                    "F  flight mode (" << (my_universe->is_flight_mode_in_use ? on_string : off_string) << ")\\n"
-                    "Ctrl      turbo\\n" <<
-                    "Ctrl+Ctrl extra turbo\\n" <<
-                    "for debugging:\\n" <<
-                    "G  grass texture\\n" <<
-                    "O  orange fur texture\\n" <<
-                    "P  pink geometric tiles texture\\n" <<
-                    "T  terrain species\\n" <<
-                    "A  suzanne species\\n";
+                    "Ajokki 0.0.4\n"
+                    "\n"
+                    "arrow keys\n"
+                    "space jump\n"
+                    "enter duck\n"
+                    "F1 help mode\n"
+                    "`  enter console\n"
+                    "I  invert mouse (" << (my_universe->is_invert_mouse_in_use ? on_string : off_string) << ")\n"
+                    "F  flight mode (" << (my_universe->is_flight_mode_in_use ? on_string : off_string) << ")\n"
+                    "Ctrl      turbo\n" <<
+                    "Ctrl+Ctrl extra turbo\n" <<
+                    "for debugging:\n" <<
+                    "G  grass texture\n" <<
+                    "O  orange fur texture\n" <<
+                    "P  pink geometric tiles texture\n" <<
+                    "T  terrain species\n" <<
+                    "A  suzanne species\n";
                 const std::string help_text_string = help_text_stringstream.str();
                 help_text2D->change_string(help_text_string);
             }
@@ -1206,7 +1206,7 @@ int main(const int argc, const char* const argv[])
         }
     }
 
-    // do cleanup.
+    // Do cleanup.
     cleanup_callback_engine.execute();
 
     return 0;

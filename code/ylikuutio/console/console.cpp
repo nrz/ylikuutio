@@ -81,11 +81,11 @@ namespace yli
 
             std::cout << "Defining pointers in Console::Console\n";
 
-            // This is a pointer to `std::vector<yli::callback_system::KeyAndCallbackStruct>*` that controls keypress callbacks.
+            // This is a pointer to `std::vector<yli::callback_system::KeyAndCallbackStruct>*` that controls keypress callbacks outside console.
             this->current_keypress_callback_engine_vector_pointer_pointer = current_keypress_callback_engine_vector_pointer_pointer;
             std::cout << "1st pointer defined in Console::Console\n";
 
-            // This is a pointer to `std::vector<yli::callback_system::KeyAndCallbackStruct>*` that controls keyrelease callbacks.
+            // This is a pointer to `std::vector<yli::callback_system::KeyAndCallbackStruct>*` that controls keyrelease callbacks outside console.
             this->current_keyrelease_callback_engine_vector_pointer_pointer = current_keyrelease_callback_engine_vector_pointer_pointer;
             std::cout << "2nd pointer defined in Console::Console\n";
 
@@ -147,11 +147,13 @@ namespace yli
 
         void Console::set_my_keypress_callback_engine_vector_pointer(std::vector<yli::callback_system::KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer)
         {
+            // This function is used to define what different keypresses actually do in the console.
             this->my_keypress_callback_engine_vector_pointer = my_keypress_callback_engine_vector_pointer;
         }
 
         void Console::add_command_callback(const std::string& command, ConsoleCommandCallback callback)
         {
+            // This function is used to define what different console commands actually do.
             this->command_callback_map[command] = callback;
         }
 
@@ -205,6 +207,7 @@ namespace yli
 
         void Console::set_my_keyrelease_callback_engine_vector_pointer(std::vector<yli::callback_system::KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer)
         {
+            // This function is used to define what different keyreleases actually do in the console.
             this->my_keyrelease_callback_engine_vector_pointer = my_keyrelease_callback_engine_vector_pointer;
         }
 
@@ -495,10 +498,16 @@ namespace yli
                     this->previous_keyrelease_callback_engine_vector_pointer != nullptr)
             {
                 // Restore previous keypress callback engine vector pointer.
-                *this->current_keypress_callback_engine_vector_pointer_pointer = this->previous_keypress_callback_engine_vector_pointer;
+                if (this->current_keypress_callback_engine_vector_pointer_pointer != nullptr)
+                {
+                    *this->current_keypress_callback_engine_vector_pointer_pointer = this->previous_keypress_callback_engine_vector_pointer;
+                }
 
                 // Restore previous keyrelease callback engine vector pointer.
-                *this->current_keyrelease_callback_engine_vector_pointer_pointer = this->previous_keyrelease_callback_engine_vector_pointer;
+                if (this->current_keyrelease_callback_engine_vector_pointer_pointer != nullptr)
+                {
+                    *this->current_keyrelease_callback_engine_vector_pointer_pointer = this->previous_keyrelease_callback_engine_vector_pointer;
+                }
 
                 // Mark that we have exited the console.
                 this->in_console = false;

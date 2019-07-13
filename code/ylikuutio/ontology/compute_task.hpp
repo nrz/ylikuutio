@@ -112,6 +112,9 @@ namespace yli
                     this->texture_size = 0; // dummy value.
                     this->n_index_characters = compute_task_struct.n_index_characters;
 
+                    this->vertices_size                = 0;
+                    this->uvs_size                     = 0;
+
                     // variables related to the framebuffer.
                     this->framebuffer                  = 0; // some dummy value.
                     this->source_texture               = 0; // some dummy value.
@@ -125,6 +128,7 @@ namespace yli
                     this->vertexUVID                   = 0; // some dummy value.
                     this->screen_width_uniform_ID      = 0; // some dummy value.
                     this->screen_height_uniform_ID     = 0; // some dummy value.
+                    this->screen_depth_uniform_ID      = 0; // some dummy value.
                     this->iteration_i_uniform_ID       = 0; // some dummy value.
                     this->vertexbuffer                 = 0; // some dummy value.
                     this->uvbuffer                     = 0; // some dummy value.

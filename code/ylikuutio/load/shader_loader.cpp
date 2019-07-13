@@ -19,14 +19,12 @@
 #define __SHADER_LOADER_HPP_INCLUDED
 
 #include "shader_loader.hpp"
+#include "code/ylikuutio/file/file_loader.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
-#include <algorithm> // std::find
-#include <fstream>   // std::ifstream
-#include <ios>       // std::ios
 #include <iostream>  // std::cout, std::cin, std::cerr
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
@@ -38,99 +36,78 @@ namespace yli
     {
         uint32_t load_shaders(const char* const vertex_file_path, const char* const fragment_file_path)
         {
-            // Create the shaders
-            const uint32_t VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
-            const uint32_t FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+            // Create the shaders.
+            const uint32_t vertex_shaderID = glCreateShader(GL_VERTEX_SHADER);
+            const uint32_t fragment_shaderID = glCreateShader(GL_FRAGMENT_SHADER);
 
-            // Read the Vertex Shader code from the file
-            std::string VertexShaderCode;
-            std::ifstream VertexShaderStream(vertex_file_path, std::ios::in);
-            if (VertexShaderStream.is_open())
+            // Read the vertex shader code from the file.
+            const std::string vertex_shader_code = yli::file::slurp(vertex_file_path);
+
+            // Read the fragment shader code from the file.
+            const std::string fragment_shader_code = yli::file::slurp(fragment_file_path);
+
+            GLint result = GL_FALSE;
+            int info_log_length;
+
+            // Compile vertex shader.
+            std::cout << "Compiling vertex shader: " << vertex_file_path << "\n";
+            const char* const vertex_source_pointer = vertex_shader_code.c_str();
+            glShaderSource(vertex_shaderID, 1, &vertex_source_pointer, nullptr);
+            glCompileShader(vertex_shaderID);
+
+            // Check vertex shader.
+            glGetShaderiv(vertex_shaderID, GL_COMPILE_STATUS, &result);
+            glGetShaderiv(vertex_shaderID, GL_INFO_LOG_LENGTH, &info_log_length);
+
+            if (info_log_length > 0)
             {
-                std::string Line = "";
-                while (getline(VertexShaderStream, Line))
-                {
-                    VertexShaderCode += "\n" + Line;
-                }
-                VertexShaderStream.close();
-            }
-            else
-            {
-                std::cerr << "ERROR: `yli::load::load_shaders`: opening file " << vertex_file_path << " failed.\n";
-                return 0;
-            }
-
-            // Read the Fragment Shader code from the file
-            std::string FragmentShaderCode;
-            std::ifstream FragmentShaderStream(fragment_file_path, std::ios::in);
-            if (FragmentShaderStream.is_open())
-            {
-                std::string Line = "";
-                while(getline(FragmentShaderStream, Line))
-                {
-                    FragmentShaderCode += "\n" + Line;
-                }
-                FragmentShaderStream.close();
-            }
-
-            GLint Result = GL_FALSE;
-            int InfoLogLength;
-
-            // Compile Vertex Shader
-            std::cout << "Compling vertex shader: " << vertex_file_path << "\n";
-            const char* const VertexSourcePointer = VertexShaderCode.c_str();
-            glShaderSource(VertexShaderID, 1, &VertexSourcePointer , nullptr);
-            glCompileShader(VertexShaderID);
-
-            // Check Vertex Shader
-            glGetShaderiv(VertexShaderID, GL_COMPILE_STATUS, &Result);
-            glGetShaderiv(VertexShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-            if (InfoLogLength > 0)
-            {
-                std::vector<char> VertexShaderErrorMessage(InfoLogLength+1);
-                glGetShaderInfoLog(VertexShaderID, InfoLogLength, nullptr, &VertexShaderErrorMessage[0]);
-                std::printf("%s\n", &VertexShaderErrorMessage[0]);
-            }
-
-            // Compile Fragment Shader
-            std::cout << "Compling fragment shader: " << fragment_file_path << "\n";
-            const char* const FragmentSourcePointer = FragmentShaderCode.c_str();
-            glShaderSource(FragmentShaderID, 1, &FragmentSourcePointer , nullptr);
-            glCompileShader(FragmentShaderID);
-
-            // Check Fragment Shader
-            glGetShaderiv(FragmentShaderID, GL_COMPILE_STATUS, &Result);
-            glGetShaderiv(FragmentShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-            if (InfoLogLength > 0)
-            {
-                std::vector<char> FragmentShaderErrorMessage(InfoLogLength+1);
-                glGetShaderInfoLog(FragmentShaderID, InfoLogLength, nullptr, &FragmentShaderErrorMessage[0]);
-                std::string error_string(FragmentShaderErrorMessage.begin(), FragmentShaderErrorMessage.end());
+                std::vector<char> vertex_shader_error_message(info_log_length + 1);
+                glGetShaderInfoLog(vertex_shaderID, info_log_length, nullptr, &vertex_shader_error_message[0]);
+                const std::string error_string(vertex_shader_error_message.begin(), vertex_shader_error_message.end());
                 std::cerr << error_string << "\n";
             }
 
-            // Link the program
+            // Compile fragment shader.
+            std::cout << "Compiling fragment shader: " << fragment_file_path << "\n";
+            const char* const fragment_source_pointer = fragment_shader_code.c_str();
+            glShaderSource(fragment_shaderID, 1, &fragment_source_pointer, nullptr);
+            glCompileShader(fragment_shaderID);
+
+            // Check fragment shader.
+            glGetShaderiv(fragment_shaderID, GL_COMPILE_STATUS, &result);
+            glGetShaderiv(fragment_shaderID, GL_INFO_LOG_LENGTH, &info_log_length);
+
+            if (info_log_length > 0)
+            {
+                std::vector<char> fragment_shader_error_message(info_log_length + 1);
+                glGetShaderInfoLog(fragment_shaderID, info_log_length, nullptr, &fragment_shader_error_message[0]);
+                const std::string error_string(fragment_shader_error_message.begin(), fragment_shader_error_message.end());
+                std::cerr << error_string << "\n";
+            }
+
+            // Link the program.
             std::cout << "Linking program\n";
-            const uint32_t ProgramID = glCreateProgram();
-            glAttachShader(ProgramID, VertexShaderID);
-            glAttachShader(ProgramID, FragmentShaderID);
-            glLinkProgram(ProgramID);
+            const uint32_t programID = glCreateProgram();
+            glAttachShader(programID, vertex_shaderID);
+            glAttachShader(programID, fragment_shaderID);
+            glLinkProgram(programID);
 
-            // Check the program
-            glGetProgramiv(ProgramID, GL_LINK_STATUS, &Result);
-            glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-            if (InfoLogLength > 0)
+            // Check the program.
+            glGetProgramiv(programID, GL_LINK_STATUS, &result);
+            glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &info_log_length);
+
+            if (info_log_length > 0)
             {
-                std::vector<char> ProgramErrorMessage(InfoLogLength+1);
-                glGetProgramInfoLog(ProgramID, InfoLogLength, nullptr, &ProgramErrorMessage[0]);
-                std::string error_string(ProgramErrorMessage.begin(), ProgramErrorMessage.end());
+                std::vector<char> program_error_message(info_log_length + 1);
+                glGetProgramInfoLog(programID, info_log_length, nullptr, &program_error_message[0]);
+                const std::string error_string(program_error_message.begin(), program_error_message.end());
                 std::cerr << error_string << "\n";
             }
 
-            glDeleteShader(VertexShaderID);
-            glDeleteShader(FragmentShaderID);
+            glDeleteShader(vertex_shaderID);
+            glDeleteShader(fragment_shaderID);
 
-            return ProgramID;
+            return programID;
         }
     }
 }

@@ -224,6 +224,15 @@ namespace yli
                         continue;
                     }
                 }
+                else if (character == (char) '\n')
+                {
+                    // jump to the beginning of the next line.
+                    // `"left"` horizontal alignment and `"top"` vertical alignment are assumed.
+                    // TODO: implement newline for other horizontal and vertical alignments too!
+                    current_left_x = this->x;
+                    current_top_y -= this->text_size;
+                    continue;
+                }
 
                 vertex_up_left_x = vertex_down_left_x = current_left_x;
                 vertex_up_right_x = vertex_down_right_x = current_left_x + this->text_size;

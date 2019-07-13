@@ -190,8 +190,7 @@ namespace yli
 
             // Verify the type of the file.
             const std::size_t dds_magic_number_size_in_bytes = 4;   // "DDS "
-            char filecode_char[dds_magic_number_size_in_bytes + 1];
-            filecode_char[dds_magic_number_size_in_bytes] = 0;      // Terminate with 0.
+            char filecode_char[dds_magic_number_size_in_bytes + 1] { 0, 0, 0, 0, 0 };
 
             if (std::fread(filecode_char, 1, dds_magic_number_size_in_bytes, fp) != dds_magic_number_size_in_bytes)
             {
@@ -325,192 +324,204 @@ namespace yli
             std::shared_ptr<std::vector<uint32_t>> image_data_uint32_t = nullptr;
             std::shared_ptr<std::vector<float>> image_data_float = nullptr;
 
-            switch (type)
+            if (type == GL_BYTE)
             {
-                case GL_BYTE:
-                    image_data_int8_t = load_CSV_file<int8_t>(filename, image_width, image_height, image_size);
-                    if (image_data_int8_t == nullptr)
-                    {
-                        std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_int8_t` is `nullptr`!\n";
-                        return false;
-                    }
-                    if (left_filler_vector_any_value != nullptr &&
-                            right_filler_vector_any_value != nullptr &&
-                            left_filler_vector_any_value->type == yli::common::STD_VECTOR_INT8_T_SHARED_PTR &&
-                            right_filler_vector_any_value->type == yli::common::STD_VECTOR_INT8_T_SHARED_PTR &&
-                            left_filler_vector_any_value->std_vector_int8_t_shared_ptr != nullptr &&
-                            right_filler_vector_any_value->std_vector_int8_t_shared_ptr != nullptr)
-                    {
-                        image_data_int8_t = yli::linear_algebra::insert_elements(
-                                *image_data_int8_t,
-                                *left_filler_vector_any_value->std_vector_int8_t_shared_ptr,
-                                *right_filler_vector_any_value->std_vector_int8_t_shared_ptr);
-                        image_data = image_data_int8_t != nullptr ? &(*image_data_int8_t)[0] : nullptr;
-                    }
-                    else
-                    {
-                        image_data = &(*image_data_int8_t)[0];
-                    }
-                    break;
-                case GL_UNSIGNED_BYTE:
-                    image_data_uint8_t = load_CSV_file<uint8_t>(filename, image_width, image_height, image_size);
-                    if (image_data_uint8_t == nullptr)
-                    {
-                        std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_uint8_t` is `nullptr`!\n";
-                        return false;
-                    }
-                    if (left_filler_vector_any_value != nullptr &&
-                            right_filler_vector_any_value != nullptr &&
-                            left_filler_vector_any_value->type == yli::common::STD_VECTOR_UINT8_T_SHARED_PTR &&
-                            right_filler_vector_any_value->type == yli::common::STD_VECTOR_UINT8_T_SHARED_PTR &&
-                            left_filler_vector_any_value->std_vector_uint8_t_shared_ptr != nullptr &&
-                            right_filler_vector_any_value->std_vector_uint8_t_shared_ptr != nullptr)
-                    {
-                        image_data_uint8_t = yli::linear_algebra::insert_elements(
-                                *image_data_uint8_t,
-                                *left_filler_vector_any_value->std_vector_uint8_t_shared_ptr,
-                                *right_filler_vector_any_value->std_vector_uint8_t_shared_ptr);
-                        image_data = image_data_uint8_t != nullptr ? &(*image_data_uint8_t)[0] : nullptr;
-                    }
-                    else
-                    {
-                        image_data = &(*image_data_uint8_t)[0];
-                    }
-                    break;
-                case GL_SHORT:
-                    image_data_int16_t = load_CSV_file<int16_t>(filename, image_width, image_height, image_size);
-                    if (image_data_int16_t == nullptr)
-                    {
-                        std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_int16_t` is `nullptr`!\n";
-                        return false;
-                    }
-                    if (left_filler_vector_any_value != nullptr &&
-                            right_filler_vector_any_value != nullptr &&
-                            left_filler_vector_any_value->type == yli::common::STD_VECTOR_INT16_T_SHARED_PTR &&
-                            right_filler_vector_any_value->type == yli::common::STD_VECTOR_INT16_T_SHARED_PTR &&
-                            left_filler_vector_any_value->std_vector_int16_t_shared_ptr != nullptr &&
-                            right_filler_vector_any_value->std_vector_int16_t_shared_ptr != nullptr)
-                    {
-                        image_data_int16_t = yli::linear_algebra::insert_elements(
-                                *image_data_int16_t,
-                                *left_filler_vector_any_value->std_vector_int16_t_shared_ptr,
-                                *right_filler_vector_any_value->std_vector_int16_t_shared_ptr);
-                        image_data = image_data_int16_t != nullptr ? &(*image_data_int16_t)[0] : nullptr;
-                    }
-                    else
-                    {
-                        image_data = &(*image_data_int16_t)[0];
-                    }
-                    break;
-                case GL_UNSIGNED_SHORT:
-                    image_data_uint16_t = load_CSV_file<uint16_t>(filename, image_width, image_height, image_size);
-                    if (image_data_uint16_t == nullptr)
-                    {
-                        std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_uint16_t` is `nullptr`!\n";
-                        return false;
-                    }
-                    if (left_filler_vector_any_value != nullptr &&
-                            right_filler_vector_any_value != nullptr &&
-                            left_filler_vector_any_value->type == yli::common::STD_VECTOR_UINT16_T_SHARED_PTR &&
-                            right_filler_vector_any_value->type == yli::common::STD_VECTOR_UINT16_T_SHARED_PTR &&
-                            left_filler_vector_any_value->std_vector_uint16_t_shared_ptr != nullptr &&
-                            right_filler_vector_any_value->std_vector_uint16_t_shared_ptr != nullptr)
-                    {
-                        image_data_uint16_t = yli::linear_algebra::insert_elements(
-                                *image_data_uint16_t,
-                                *left_filler_vector_any_value->std_vector_uint16_t_shared_ptr,
-                                *right_filler_vector_any_value->std_vector_uint16_t_shared_ptr);
-                        image_data = image_data_uint16_t != nullptr ? &(*image_data_uint16_t)[0] : nullptr;
-                    }
-                    else
-                    {
-                        image_data = &(*image_data_uint16_t)[0];
-                    }
-                    break;
-                case GL_INT:
-                    image_data_int32_t = load_CSV_file<int32_t>(filename, image_width, image_height, image_size);
-                    if (image_data_int32_t == nullptr)
-                    {
-                        std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_int32_t` is `nullptr`!\n";
-                        return false;
-                    }
-                    if (left_filler_vector_any_value != nullptr &&
-                            right_filler_vector_any_value != nullptr &&
-                            left_filler_vector_any_value->type == yli::common::STD_VECTOR_INT32_T_SHARED_PTR &&
-                            right_filler_vector_any_value->type == yli::common::STD_VECTOR_INT32_T_SHARED_PTR &&
-                            left_filler_vector_any_value->std_vector_int32_t_shared_ptr != nullptr &&
-                            right_filler_vector_any_value->std_vector_int32_t_shared_ptr != nullptr)
-                    {
-                        image_data_int32_t = yli::linear_algebra::insert_elements(
-                                *image_data_int32_t,
-                                *left_filler_vector_any_value->std_vector_int32_t_shared_ptr,
-                                *right_filler_vector_any_value->std_vector_int32_t_shared_ptr);
-                        image_data = image_data_int32_t != nullptr ? &(*image_data_int32_t)[0] : nullptr;
-                    }
-                    else
-                    {
-                        image_data = &(*image_data_int32_t)[0];
-                    }
-                    break;
-                case GL_UNSIGNED_INT:
-                    image_data_uint32_t = load_CSV_file<uint32_t>(filename, image_width, image_height, image_size);
-                    if (image_data_uint32_t == nullptr)
-                    {
-                        std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_uint32_t` is `nullptr`!\n";
-                        return false;
-                    }
-                    if (left_filler_vector_any_value != nullptr &&
-                            right_filler_vector_any_value != nullptr &&
-                            left_filler_vector_any_value->type == yli::common::STD_VECTOR_UINT32_T_SHARED_PTR &&
-                            right_filler_vector_any_value->type == yli::common::STD_VECTOR_UINT32_T_SHARED_PTR &&
-                            left_filler_vector_any_value->std_vector_uint32_t_shared_ptr != nullptr &&
-                            right_filler_vector_any_value->std_vector_uint32_t_shared_ptr != nullptr)
-                    {
-                        image_data_uint32_t = yli::linear_algebra::insert_elements(
-                                *image_data_uint32_t,
-                                *left_filler_vector_any_value->std_vector_uint32_t_shared_ptr,
-                                *right_filler_vector_any_value->std_vector_uint32_t_shared_ptr);
-                        image_data = image_data_uint32_t != nullptr ? &(*image_data_uint32_t)[0] : nullptr;
-                    }
-                    else
-                    {
-                        image_data = &(*image_data_uint32_t)[0];
-                    }
-                    break;
-                case GL_FIXED:
-                    return false; // TODO: add support for `GL_FIXED`!
-                case GL_HALF_FLOAT:
-                    return false; // TODO: add support for `GL_HALF_FLOAT`!
-                case GL_FLOAT:
-                    image_data_float = load_CSV_file<float>(filename, image_width, image_height, image_size);
-                    if (image_data_float == nullptr)
-                    {
-                        std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_float` is `nullptr`!\n";
-                        return false;
-                    }
-                    if (left_filler_vector_any_value != nullptr &&
-                            right_filler_vector_any_value != nullptr &&
-                            left_filler_vector_any_value->type == yli::common::STD_VECTOR_FLOAT_SHARED_PTR &&
-                            right_filler_vector_any_value->type == yli::common::STD_VECTOR_FLOAT_SHARED_PTR &&
-                            left_filler_vector_any_value->std_vector_float_shared_ptr != nullptr &&
-                            right_filler_vector_any_value->std_vector_float_shared_ptr != nullptr)
-                    {
-                        image_data_float = yli::linear_algebra::insert_elements(
-                                *image_data_float,
-                                *left_filler_vector_any_value->std_vector_float_shared_ptr,
-                                *right_filler_vector_any_value->std_vector_float_shared_ptr);
-                        image_data = image_data_float != nullptr ? &(*image_data_float)[0] : nullptr;
-                    }
-                    else
-                    {
-                        image_data = &(*image_data_float)[0];
-                    }
-                    break;
-                case GL_DOUBLE:
-                    return false; // TODO: add support for `GL_DOUBLE`!
-                default:
-                    // Unknown or unsupported type.
+                image_data_int8_t = load_CSV_file<int8_t>(filename, image_width, image_height, image_size);
+                if (image_data_int8_t == nullptr)
+                {
+                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_int8_t` is `nullptr`!\n";
                     return false;
+                }
+                if (left_filler_vector_any_value != nullptr &&
+                        right_filler_vector_any_value != nullptr &&
+                        left_filler_vector_any_value->type == yli::common::STD_VECTOR_INT8_T_SHARED_PTR &&
+                        right_filler_vector_any_value->type == yli::common::STD_VECTOR_INT8_T_SHARED_PTR &&
+                        left_filler_vector_any_value->std_vector_int8_t_shared_ptr != nullptr &&
+                        right_filler_vector_any_value->std_vector_int8_t_shared_ptr != nullptr)
+                {
+                    image_data_int8_t = yli::linear_algebra::insert_elements(
+                            *image_data_int8_t,
+                            *left_filler_vector_any_value->std_vector_int8_t_shared_ptr,
+                            *right_filler_vector_any_value->std_vector_int8_t_shared_ptr);
+                    image_data = image_data_int8_t != nullptr ? &(*image_data_int8_t)[0] : nullptr;
+                }
+                else
+                {
+                    image_data = &(*image_data_int8_t)[0];
+                }
+            }
+            else if (type == GL_UNSIGNED_BYTE)
+            {
+                image_data_uint8_t = load_CSV_file<uint8_t>(filename, image_width, image_height, image_size);
+                if (image_data_uint8_t == nullptr)
+                {
+                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_uint8_t` is `nullptr`!\n";
+                    return false;
+                }
+                if (left_filler_vector_any_value != nullptr &&
+                        right_filler_vector_any_value != nullptr &&
+                        left_filler_vector_any_value->type == yli::common::STD_VECTOR_UINT8_T_SHARED_PTR &&
+                        right_filler_vector_any_value->type == yli::common::STD_VECTOR_UINT8_T_SHARED_PTR &&
+                        left_filler_vector_any_value->std_vector_uint8_t_shared_ptr != nullptr &&
+                        right_filler_vector_any_value->std_vector_uint8_t_shared_ptr != nullptr)
+                {
+                    image_data_uint8_t = yli::linear_algebra::insert_elements(
+                            *image_data_uint8_t,
+                            *left_filler_vector_any_value->std_vector_uint8_t_shared_ptr,
+                            *right_filler_vector_any_value->std_vector_uint8_t_shared_ptr);
+                    image_data = image_data_uint8_t != nullptr ? &(*image_data_uint8_t)[0] : nullptr;
+                }
+                else
+                {
+                    image_data = &(*image_data_uint8_t)[0];
+                }
+            }
+            else if (type == GL_SHORT)
+            {
+                image_data_int16_t = load_CSV_file<int16_t>(filename, image_width, image_height, image_size);
+                if (image_data_int16_t == nullptr)
+                {
+                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_int16_t` is `nullptr`!\n";
+                    return false;
+                }
+                if (left_filler_vector_any_value != nullptr &&
+                        right_filler_vector_any_value != nullptr &&
+                        left_filler_vector_any_value->type == yli::common::STD_VECTOR_INT16_T_SHARED_PTR &&
+                        right_filler_vector_any_value->type == yli::common::STD_VECTOR_INT16_T_SHARED_PTR &&
+                        left_filler_vector_any_value->std_vector_int16_t_shared_ptr != nullptr &&
+                        right_filler_vector_any_value->std_vector_int16_t_shared_ptr != nullptr)
+                {
+                    image_data_int16_t = yli::linear_algebra::insert_elements(
+                            *image_data_int16_t,
+                            *left_filler_vector_any_value->std_vector_int16_t_shared_ptr,
+                            *right_filler_vector_any_value->std_vector_int16_t_shared_ptr);
+                    image_data = image_data_int16_t != nullptr ? &(*image_data_int16_t)[0] : nullptr;
+                }
+                else
+                {
+                    image_data = &(*image_data_int16_t)[0];
+                }
+            }
+            else if (type == GL_UNSIGNED_SHORT)
+            {
+                image_data_uint16_t = load_CSV_file<uint16_t>(filename, image_width, image_height, image_size);
+                if (image_data_uint16_t == nullptr)
+                {
+                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_uint16_t` is `nullptr`!\n";
+                    return false;
+                }
+                if (left_filler_vector_any_value != nullptr &&
+                        right_filler_vector_any_value != nullptr &&
+                        left_filler_vector_any_value->type == yli::common::STD_VECTOR_UINT16_T_SHARED_PTR &&
+                        right_filler_vector_any_value->type == yli::common::STD_VECTOR_UINT16_T_SHARED_PTR &&
+                        left_filler_vector_any_value->std_vector_uint16_t_shared_ptr != nullptr &&
+                        right_filler_vector_any_value->std_vector_uint16_t_shared_ptr != nullptr)
+                {
+                    image_data_uint16_t = yli::linear_algebra::insert_elements(
+                            *image_data_uint16_t,
+                            *left_filler_vector_any_value->std_vector_uint16_t_shared_ptr,
+                            *right_filler_vector_any_value->std_vector_uint16_t_shared_ptr);
+                    image_data = image_data_uint16_t != nullptr ? &(*image_data_uint16_t)[0] : nullptr;
+                }
+                else
+                {
+                    image_data = &(*image_data_uint16_t)[0];
+                }
+            }
+            else if (type == GL_INT)
+            {
+                image_data_int32_t = load_CSV_file<int32_t>(filename, image_width, image_height, image_size);
+                if (image_data_int32_t == nullptr)
+                {
+                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_int32_t` is `nullptr`!\n";
+                    return false;
+                }
+                if (left_filler_vector_any_value != nullptr &&
+                        right_filler_vector_any_value != nullptr &&
+                        left_filler_vector_any_value->type == yli::common::STD_VECTOR_INT32_T_SHARED_PTR &&
+                        right_filler_vector_any_value->type == yli::common::STD_VECTOR_INT32_T_SHARED_PTR &&
+                        left_filler_vector_any_value->std_vector_int32_t_shared_ptr != nullptr &&
+                        right_filler_vector_any_value->std_vector_int32_t_shared_ptr != nullptr)
+                {
+                    image_data_int32_t = yli::linear_algebra::insert_elements(
+                            *image_data_int32_t,
+                            *left_filler_vector_any_value->std_vector_int32_t_shared_ptr,
+                            *right_filler_vector_any_value->std_vector_int32_t_shared_ptr);
+                    image_data = image_data_int32_t != nullptr ? &(*image_data_int32_t)[0] : nullptr;
+                }
+                else
+                {
+                    image_data = &(*image_data_int32_t)[0];
+                }
+            }
+            else if (type == GL_UNSIGNED_INT)
+            {
+                image_data_uint32_t = load_CSV_file<uint32_t>(filename, image_width, image_height, image_size);
+                if (image_data_uint32_t == nullptr)
+                {
+                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_uint32_t` is `nullptr`!\n";
+                    return false;
+                }
+                if (left_filler_vector_any_value != nullptr &&
+                        right_filler_vector_any_value != nullptr &&
+                        left_filler_vector_any_value->type == yli::common::STD_VECTOR_UINT32_T_SHARED_PTR &&
+                        right_filler_vector_any_value->type == yli::common::STD_VECTOR_UINT32_T_SHARED_PTR &&
+                        left_filler_vector_any_value->std_vector_uint32_t_shared_ptr != nullptr &&
+                        right_filler_vector_any_value->std_vector_uint32_t_shared_ptr != nullptr)
+                {
+                    image_data_uint32_t = yli::linear_algebra::insert_elements(
+                            *image_data_uint32_t,
+                            *left_filler_vector_any_value->std_vector_uint32_t_shared_ptr,
+                            *right_filler_vector_any_value->std_vector_uint32_t_shared_ptr);
+                    image_data = image_data_uint32_t != nullptr ? &(*image_data_uint32_t)[0] : nullptr;
+                }
+                else
+                {
+                    image_data = &(*image_data_uint32_t)[0];
+                }
+            }
+            else if (type == GL_FIXED)
+            {
+                return false; // TODO: add support for `GL_FIXED`!
+            }
+            else if (type == GL_HALF_FLOAT)
+            {
+                return false; // TODO: add support for `GL_HALF_FLOAT`!
+            }
+            else if (type == GL_FLOAT)
+            {
+                image_data_float = load_CSV_file<float>(filename, image_width, image_height, image_size);
+                if (image_data_float == nullptr)
+                {
+                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_float` is `nullptr`!\n";
+                    return false;
+                }
+                if (left_filler_vector_any_value != nullptr &&
+                        right_filler_vector_any_value != nullptr &&
+                        left_filler_vector_any_value->type == yli::common::STD_VECTOR_FLOAT_SHARED_PTR &&
+                        right_filler_vector_any_value->type == yli::common::STD_VECTOR_FLOAT_SHARED_PTR &&
+                        left_filler_vector_any_value->std_vector_float_shared_ptr != nullptr &&
+                        right_filler_vector_any_value->std_vector_float_shared_ptr != nullptr)
+                {
+                    image_data_float = yli::linear_algebra::insert_elements(
+                            *image_data_float,
+                            *left_filler_vector_any_value->std_vector_float_shared_ptr,
+                            *right_filler_vector_any_value->std_vector_float_shared_ptr);
+                    image_data = image_data_float != nullptr ? &(*image_data_float)[0] : nullptr;
+                }
+                else
+                {
+                    image_data = &(*image_data_float)[0];
+                }
+            }
+            else if (type == GL_DOUBLE)
+            {
+                return false; // TODO: add support for `GL_DOUBLE`!
+            }
+            else
+            {
+                // Unknown or unsupported type.
+                return false;
             }
 
             if (image_data == nullptr)
