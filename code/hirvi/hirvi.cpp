@@ -903,28 +903,28 @@ int main(const int argc, const char* const argv[])
                         my_universe->get_window(),
                         static_cast<double>(my_universe->get_window_width()) / 2,
                         static_cast<double>(my_universe->get_window_height()) / 2);
-            }
 
-            if (my_universe->has_mouse_ever_moved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
-            {
-                my_universe->has_mouse_ever_moved = true;
-
-                // Compute new orientation
-                my_universe->current_camera_horizontal_angle += my_universe->mouse_speed * static_cast<float>(my_universe->get_window_width() / 2 - xpos);
-                my_universe->current_camera_horizontal_angle = remainder(my_universe->current_camera_horizontal_angle, (2.0f * PI));
-
-                if (my_universe->is_invert_mouse_in_use)
+                if (my_universe->has_mouse_ever_moved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
                 {
-                    // invert mouse.
-                    my_universe->current_camera_vertical_angle -= my_universe->mouse_speed * static_cast<float>(my_universe->get_window_height() / 2 - ypos);
-                }
-                else
-                {
-                    // don't invert mouse.
-                    my_universe->current_camera_vertical_angle += my_universe->mouse_speed * static_cast<float>(my_universe->get_window_height() / 2 - ypos);
-                }
+                    my_universe->has_mouse_ever_moved = true;
 
-                my_universe->current_camera_vertical_angle = remainder(my_universe->current_camera_vertical_angle, (2.0f * PI));
+                    // Compute new orientation
+                    my_universe->current_camera_horizontal_angle += my_universe->mouse_speed * static_cast<float>(my_universe->get_window_width() / 2 - xpos);
+                    my_universe->current_camera_horizontal_angle = remainder(my_universe->current_camera_horizontal_angle, (2.0f * PI));
+
+                    if (my_universe->is_invert_mouse_in_use)
+                    {
+                        // invert mouse.
+                        my_universe->current_camera_vertical_angle -= my_universe->mouse_speed * static_cast<float>(my_universe->get_window_height() / 2 - ypos);
+                    }
+                    else
+                    {
+                        // don't invert mouse.
+                        my_universe->current_camera_vertical_angle += my_universe->mouse_speed * static_cast<float>(my_universe->get_window_height() / 2 - ypos);
+                    }
+
+                    my_universe->current_camera_vertical_angle = remainder(my_universe->current_camera_vertical_angle, (2.0f * PI));
+                }
             }
 
             // Direction : Spherical coordinates to Cartesian coordinates conversion
