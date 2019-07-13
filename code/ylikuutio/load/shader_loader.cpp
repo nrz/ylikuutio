@@ -63,7 +63,8 @@ namespace yli
             {
                 std::vector<char> vertex_shader_error_message(info_log_length + 1);
                 glGetShaderInfoLog(vertex_shaderID, info_log_length, nullptr, &vertex_shader_error_message[0]);
-                std::printf("%s\n", &vertex_shader_error_message[0]);
+                const std::string error_string(vertex_shader_error_message.begin(), vertex_shader_error_message.end());
+                std::cerr << error_string << "\n";
             }
 
             // Compile fragment shader.
