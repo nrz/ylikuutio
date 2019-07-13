@@ -77,7 +77,7 @@ namespace yli
             int InfoLogLength;
 
             // Compile Vertex Shader
-            std::cout << "Compling vertex shader: " << vertex_file_path << "\n";
+            std::cout << "Compiling vertex shader: " << vertex_file_path << "\n";
             const char* const VertexSourcePointer = VertexShaderCode.c_str();
             glShaderSource(VertexShaderID, 1, &VertexSourcePointer , nullptr);
             glCompileShader(VertexShaderID);
@@ -93,7 +93,7 @@ namespace yli
             }
 
             // Compile Fragment Shader
-            std::cout << "Compling fragment shader: " << fragment_file_path << "\n";
+            std::cout << "Compiling fragment shader: " << fragment_file_path << "\n";
             const char* const FragmentSourcePointer = FragmentShaderCode.c_str();
             glShaderSource(FragmentShaderID, 1, &FragmentSourcePointer , nullptr);
             glCompileShader(FragmentShaderID);
