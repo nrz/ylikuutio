@@ -182,10 +182,10 @@ int main(const int argc, const char* const argv[])
 
     // Enable depth test.
     yli::opengl::enable_depth_test();
-    // Accept fragment if it closer to the camera than the former one.
+    // Accept fragment if it is closer to the camera than the former one.
     yli::opengl::set_depth_func_to_less();
 
-    // Cull triangles which normal is not towards the camera.
+    // Cull triangles whose normal is not towards the camera.
     yli::opengl::cull_triangles();
 
     std::cout << "Setting up console ...\n";
@@ -278,7 +278,7 @@ int main(const int argc, const char* const argv[])
     my_universe->turbo_factor = 100.0f;
     my_universe->twin_turbo_factor = 500.0f;
 
-    // Initialize our little text library with the Holstein font
+    // Initialize our little text library with the Holstein font.
     const char* const char_g_font_texture_filename = "Holstein.bmp";
     const char* const char_g_font_texture_file_format = "bmp";
 
@@ -787,7 +787,7 @@ int main(const int argc, const char* const argv[])
     my_console->add_command_callback("clear", &yli::console::Console::clear);
     my_console->add_command_callback("screenshot", &yli::ontology::Universe::screenshot);
 
-    // For speed computation
+    // For speed computation.
     double last_time_to_display_FPS = yli::time::get_time();
     double last_time_for_display_sync = yli::time::get_time();
     int32_t number_of_frames = 0;
@@ -925,7 +925,7 @@ int main(const int argc, const char* const argv[])
             my_universe->mouse_x = my_universe->get_window_width() / 2;
             my_universe->mouse_y = my_universe->get_window_height() / 2;
 
-            // poll all SDL events.
+            // Poll all SDL events.
             while (SDL_PollEvent(&sdl_event))
             {
                 if (sdl_event.type == SDL_MOUSEMOTION)
@@ -962,7 +962,7 @@ int main(const int argc, const char* const argv[])
                                     my_universe->request_exit();
                                 }
 
-                                // process no more than 1 callback for each keypress.
+                                // Process no more than 1 callback for each keypress.
                                 break;
                             }
                         }
@@ -999,7 +999,7 @@ int main(const int argc, const char* const argv[])
                                     my_universe->request_exit();
                                 }
 
-                                // process no more than 1 callback for each keyrelease.
+                                // Process no more than 1 callback for each keyrelease.
                                 break;
                             }
                         }
@@ -1026,7 +1026,7 @@ int main(const int argc, const char* const argv[])
             const double xpos = static_cast<double>(my_universe->mouse_x);
             const double ypos = static_cast<double>(my_universe->mouse_y);
 
-            // Reset mouse position for next frame
+            // Reset mouse position for next frame.
             if (has_mouse_focus)
             {
                 yli::input::set_cursor_position(
@@ -1038,18 +1038,18 @@ int main(const int argc, const char* const argv[])
                 {
                     my_universe->has_mouse_ever_moved = true;
 
-                    // Compute new orientation
+                    // Compute new orientation.
                     my_universe->current_camera_horizontal_angle += my_universe->mouse_speed * static_cast<float>(my_universe->get_window_width() / 2 - xpos);
                     my_universe->current_camera_horizontal_angle = remainder(my_universe->current_camera_horizontal_angle, (2.0f * PI));
 
                     if (my_universe->is_invert_mouse_in_use)
                     {
-                        // invert mouse.
+                        // Invert mouse.
                         my_universe->current_camera_vertical_angle -= my_universe->mouse_speed * static_cast<float>(my_universe->get_window_height() / 2 - ypos);
                     }
                     else
                     {
-                        // don't invert mouse.
+                        // Don't invert mouse.
                         my_universe->current_camera_vertical_angle += my_universe->mouse_speed * static_cast<float>(my_universe->get_window_height() / 2 - ypos);
                     }
 
@@ -1057,19 +1057,19 @@ int main(const int argc, const char* const argv[])
                 }
             }
 
-            // Direction : Spherical coordinates to Cartesian coordinates conversion
+            // Direction: spherical coordinates to cartesian coordinates conversion.
             my_universe->current_camera_direction = glm::vec3(
                     cos(my_universe->current_camera_vertical_angle) * sin(my_universe->current_camera_horizontal_angle),
                     sin(my_universe->current_camera_vertical_angle),
                     cos(my_universe->current_camera_vertical_angle) * cos(my_universe->current_camera_horizontal_angle));
 
-            // Right vector
+            // Right vector.
             my_universe->current_camera_right = glm::vec3(
                     sin(my_universe->current_camera_horizontal_angle - PI/2.0f),
                     0,
                     cos(my_universe->current_camera_horizontal_angle - PI/2.0f));
 
-            // Up vector
+            // Up vector.
             my_universe->current_camera_up = glm::cross(my_universe->current_camera_right, my_universe->current_camera_direction);
 
             if (!my_console->get_in_console())
@@ -1206,7 +1206,7 @@ int main(const int argc, const char* const argv[])
         }
     }
 
-    // do cleanup.
+    // Do cleanup.
     cleanup_callback_engine.execute();
 
     return 0;
