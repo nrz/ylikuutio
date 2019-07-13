@@ -922,16 +922,16 @@ int main(const int argc, const char* const argv[])
 
             my_universe->compute_delta_time();
 
-            int32_t mouse_x = my_universe->get_window_width() / 2;
-            int32_t mouse_y = my_universe->get_window_height() / 2;
+            my_universe->mouse_x = my_universe->get_window_width() / 2;
+            my_universe->mouse_y = my_universe->get_window_height() / 2;
 
             // poll all SDL events.
             while (SDL_PollEvent(&sdl_event))
             {
                 if (sdl_event.type == SDL_MOUSEMOTION)
                 {
-                    mouse_x += sdl_event.motion.xrel; // horizontal motion relative to screen center.
-                    mouse_y += sdl_event.motion.yrel; // vertical motion relative to screen center.
+                    my_universe->mouse_x += sdl_event.motion.xrel; // horizontal motion relative to screen center.
+                    my_universe->mouse_y += sdl_event.motion.yrel; // vertical motion relative to screen center.
                 }
                 else if (sdl_event.type == SDL_KEYDOWN)
                 {
@@ -1023,8 +1023,8 @@ int main(const int argc, const char* const argv[])
             }
 
             // mouse position.
-            const double xpos = static_cast<double>(mouse_x);
-            const double ypos = static_cast<double>(mouse_y);
+            const double xpos = static_cast<double>(my_universe->mouse_x);
+            const double ypos = static_cast<double>(my_universe->mouse_y);
 
             // Reset mouse position for next frame
             if (has_mouse_focus)

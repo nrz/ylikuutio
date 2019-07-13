@@ -350,6 +350,10 @@ namespace yli
                     this->window_title       = universe_struct.window_title;
                     this->is_headless        = universe_struct.is_headless;
 
+                    // mouse coordinates.
+                    this->mouse_x      = this->window_width / 2;
+                    this->mouse_y      = this->window_height / 2;
+
                     // variables related to the framebuffer.
                     this->framebuffer  = 0;
                     this->texture      = 0;
@@ -631,6 +635,9 @@ namespace yli
 
                 double current_camera_horizontal_angle;
                 double current_camera_vertical_angle;
+
+                int32_t mouse_x;
+                int32_t mouse_y;
 
                 float speed;
                 float turbo_factor;
