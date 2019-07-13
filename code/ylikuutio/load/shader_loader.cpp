@@ -19,13 +19,12 @@
 #define __SHADER_LOADER_HPP_INCLUDED
 
 #include "shader_loader.hpp"
+#include "code/ylikuutio/file/file_loader.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
-#include <fstream>   // std::ifstream
-#include <ios>       // std::ios
 #include <iostream>  // std::cout, std::cin, std::cerr
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
@@ -42,41 +41,10 @@ namespace yli
             const uint32_t fragment_shaderID = glCreateShader(GL_FRAGMENT_SHADER);
 
             // Read the vertex shader code from the file.
-            std::string vertex_shader_code;
-            std::ifstream vertex_shader_stream(vertex_file_path, std::ios::in);
-
-            if (vertex_shader_stream.is_open())
-            {
-                std::string line = "";
-
-                while (getline(vertex_shader_stream, line))
-                {
-                    vertex_shader_code += "\n" + line;
-                }
-
-                vertex_shader_stream.close();
-            }
-            else
-            {
-                std::cerr << "ERROR: `yli::load::load_shaders`: opening file " << vertex_file_path << " failed.\n";
-                return 0;
-            }
+            const std::string vertex_shader_code = yli::file::slurp(vertex_file_path);
 
             // Read the fragment shader code from the file.
-            std::string fragment_shader_code;
-            std::ifstream fragment_shader_stream(fragment_file_path, std::ios::in);
-
-            if (fragment_shader_stream.is_open())
-            {
-                std::string line = "";
-
-                while (getline(fragment_shader_stream, line))
-                {
-                    fragment_shader_code += "\n" + line;
-                }
-
-                fragment_shader_stream.close();
-            }
+            const std::string fragment_shader_code = yli::file::slurp(fragment_file_path);
 
             GLint result = GL_FALSE;
             int info_log_length;
