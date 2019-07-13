@@ -87,7 +87,7 @@
 #endif
 
 // Include standard headers
-#include <cmath>         // NAN, std::isnan, std::pow
+#include <cmath>         // abs, cos, NAN, remainder, sin, std::isnan, std::pow
 #include <cstddef>       // std::size_t
 #include <iomanip>       // std::setfill, std::setprecision, std::setw
 #include <iostream>      // std::cout, std::cin, std::cerr
