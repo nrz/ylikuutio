@@ -38,11 +38,11 @@ namespace yli
     {
         uint32_t load_shaders(const char* const vertex_file_path, const char* const fragment_file_path)
         {
-            // Create the shaders
+            // Create the shaders.
             const uint32_t VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
             const uint32_t FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 
-            // Read the Vertex Shader code from the file
+            // Read the vertex shader code from the file.
             std::string VertexShaderCode;
             std::ifstream VertexShaderStream(vertex_file_path, std::ios::in);
             if (VertexShaderStream.is_open())
@@ -60,7 +60,7 @@ namespace yli
                 return 0;
             }
 
-            // Read the Fragment Shader code from the file
+            // Read the fragment shader code from the file.
             std::string FragmentShaderCode;
             std::ifstream FragmentShaderStream(fragment_file_path, std::ios::in);
             if (FragmentShaderStream.is_open())
@@ -76,13 +76,13 @@ namespace yli
             GLint Result = GL_FALSE;
             int InfoLogLength;
 
-            // Compile Vertex Shader
+            // Compile vertex shader.
             std::cout << "Compiling vertex shader: " << vertex_file_path << "\n";
             const char* const VertexSourcePointer = VertexShaderCode.c_str();
             glShaderSource(VertexShaderID, 1, &VertexSourcePointer , nullptr);
             glCompileShader(VertexShaderID);
 
-            // Check Vertex Shader
+            // Check vertex shader.
             glGetShaderiv(VertexShaderID, GL_COMPILE_STATUS, &Result);
             glGetShaderiv(VertexShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
             if (InfoLogLength > 0)
@@ -92,13 +92,13 @@ namespace yli
                 std::printf("%s\n", &VertexShaderErrorMessage[0]);
             }
 
-            // Compile Fragment Shader
+            // Compile fragment shader.
             std::cout << "Compiling fragment shader: " << fragment_file_path << "\n";
             const char* const FragmentSourcePointer = FragmentShaderCode.c_str();
             glShaderSource(FragmentShaderID, 1, &FragmentSourcePointer , nullptr);
             glCompileShader(FragmentShaderID);
 
-            // Check Fragment Shader
+            // Check fragment shader.
             glGetShaderiv(FragmentShaderID, GL_COMPILE_STATUS, &Result);
             glGetShaderiv(FragmentShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
             if (InfoLogLength > 0)
@@ -109,14 +109,14 @@ namespace yli
                 std::cerr << error_string << "\n";
             }
 
-            // Link the program
+            // Link the program.
             std::cout << "Linking program\n";
             const uint32_t ProgramID = glCreateProgram();
             glAttachShader(ProgramID, VertexShaderID);
             glAttachShader(ProgramID, FragmentShaderID);
             glLinkProgram(ProgramID);
 
-            // Check the program
+            // Check the program.
             glGetProgramiv(ProgramID, GL_LINK_STATUS, &Result);
             glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &InfoLogLength);
             if (InfoLogLength > 0)
