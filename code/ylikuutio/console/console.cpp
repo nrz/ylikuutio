@@ -495,10 +495,16 @@ namespace yli
                     this->previous_keyrelease_callback_engine_vector_pointer != nullptr)
             {
                 // Restore previous keypress callback engine vector pointer.
-                *this->current_keypress_callback_engine_vector_pointer_pointer = this->previous_keypress_callback_engine_vector_pointer;
+                if (this->current_keypress_callback_engine_vector_pointer_pointer != nullptr)
+                {
+                    *this->current_keypress_callback_engine_vector_pointer_pointer = this->previous_keypress_callback_engine_vector_pointer;
+                }
 
                 // Restore previous keyrelease callback engine vector pointer.
-                *this->current_keyrelease_callback_engine_vector_pointer_pointer = this->previous_keyrelease_callback_engine_vector_pointer;
+                if (this->current_keyrelease_callback_engine_vector_pointer_pointer != nullptr)
+                {
+                    *this->current_keyrelease_callback_engine_vector_pointer_pointer = this->previous_keyrelease_callback_engine_vector_pointer;
+                }
 
                 // Mark that we have exited the console.
                 this->in_console = false;
