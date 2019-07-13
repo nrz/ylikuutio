@@ -80,7 +80,7 @@ namespace yli
             {
                 std::vector<char> fragment_shader_error_message(info_log_length + 1);
                 glGetShaderInfoLog(fragment_shaderID, info_log_length, nullptr, &fragment_shader_error_message[0]);
-                std::string error_string(fragment_shader_error_message.begin(), fragment_shader_error_message.end());
+                const std::string error_string(fragment_shader_error_message.begin(), fragment_shader_error_message.end());
                 std::cerr << error_string << "\n";
             }
 
@@ -99,7 +99,7 @@ namespace yli
             {
                 std::vector<char> program_error_message(info_log_length + 1);
                 glGetProgramInfoLog(programID, info_log_length, nullptr, &program_error_message[0]);
-                std::string error_string(program_error_message.begin(), program_error_message.end());
+                const std::string error_string(program_error_message.begin(), program_error_message.end());
                 std::cerr << error_string << "\n";
             }
 
