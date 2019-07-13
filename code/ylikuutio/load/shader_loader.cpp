@@ -24,7 +24,6 @@
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
-#include <algorithm> // std::find
 #include <fstream>   // std::ifstream
 #include <ios>       // std::ios
 #include <iostream>  // std::cout, std::cin, std::cerr
