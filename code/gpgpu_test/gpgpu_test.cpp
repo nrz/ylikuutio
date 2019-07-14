@@ -72,7 +72,9 @@ int main(void)
     // Create the `Universe`, store it in `my_universe`.
     std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
     yli::ontology::UniverseStruct universe_struct;
-    universe_struct.window_title = "GPGPU test 0.0.1, powered by Ylikuutio 0.0.4";
+    std::stringstream window_title_stringstream;
+    window_title_stringstream << "GPGPU test " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
+    universe_struct.window_title = window_title_stringstream.str();
     universe_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
     universe_struct.window_width = 512;
     universe_struct.window_height = 512;

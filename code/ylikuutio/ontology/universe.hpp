@@ -46,6 +46,7 @@
 #include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
+#include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <string>        // std::string
 #include <vector>        // std::vector
 
@@ -348,6 +349,14 @@ namespace yli
                     this->framebuffer_width  = universe_struct.framebuffer_width;
                     this->framebuffer_height = universe_struct.framebuffer_height;
                     this->window_title       = universe_struct.window_title;
+
+                    if (this->window_title.empty())
+                    {
+                        std::stringstream window_title_stringstream;
+                        window_title_stringstream << "Ylikuutio " << yli::ontology::Universe::version;
+                        this->window_title = window_title_stringstream.str();
+                    }
+
                     this->is_headless        = universe_struct.is_headless;
 
                     // mouse coordinates.
@@ -618,6 +627,9 @@ namespace yli
                         const std::vector<std::string>& command_parameters);
 
                 // Public callbacks end here.
+
+                // Ylikuutio version.
+                static const std::string version;
 
                 // Variables related to location and orientation.
 

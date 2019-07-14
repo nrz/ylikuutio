@@ -115,7 +115,9 @@ int main(const int argc, const char* const argv[])
     // Create the `Universe`, store it in `my_universe`.
     std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
     yli::ontology::UniverseStruct universe_struct;
-    universe_struct.window_title = "Hirvi 0.0.4, powered by Ylikuutio 0.0.4";
+    std::stringstream window_title_stringstream;
+    window_title_stringstream << "Hirvi " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
+    universe_struct.window_title = window_title_stringstream.str();
 
     if (command_line_master.is_key("window_width") &&
             yli::string::check_if_unsigned_integer_string(command_line_master.get_value("window_width")))
@@ -1029,7 +1031,7 @@ int main(const int argc, const char* const argv[])
             {
                 std::stringstream help_text_stringstream;
                 help_text_stringstream <<
-                    "Hirvi 0.0.4\n"
+                    "Hirvi " << yli::ontology::Universe::version << "\n"
                     "\n"
                     "arrow keys\n"
                     "space jump\n"
