@@ -96,6 +96,13 @@
 int main(const int argc, const char* const argv[])
 {
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
+
+    if (command_line_master.is_key("version"))
+    {
+        std::cout << "Hirvi " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version << "\n";
+        return 0;
+    }
+
     command_line_master.print_keys_and_values();
 
     int input_method_in_use = yli::input::KEYBOARD;
