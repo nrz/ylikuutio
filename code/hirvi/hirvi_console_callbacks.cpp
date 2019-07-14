@@ -19,9 +19,11 @@
 #include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
 
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -43,10 +45,24 @@ namespace hirvi
 {
     std::shared_ptr<yli::common::AnyValue> version(
             yli::console::Console* const console,
-            yli::ontology::Entity* const,
+            yli::ontology::Entity* const universe_entity,
             const std::vector<std::string>& command_parameters)
     {
-        console->print_text("Hirvi 0.0.4 / Ylikuutio 0.0.4");
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
+
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        std::stringstream version_stringstream;
+        version_stringstream << "Hirvi " << universe->version << " / Ylikuutio " << universe->version;
+        console->print_text(version_stringstream.str());
         return nullptr;
     }
 }

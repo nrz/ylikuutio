@@ -45,7 +45,7 @@ namespace hirvi
 {
     std::shared_ptr<yli::common::AnyValue> version(
             yli::console::Console* const console,
-            yli::ontology::Entity* const,
+            yli::ontology::Entity* const universe_entity,
             const std::vector<std::string>& command_parameters);
 }
 
