@@ -119,7 +119,7 @@
 #		define GLM_LANG (GLM_LANG_CXX2A | GLM_LANG_EXT)
 #	elif __cplusplus == 201703L || GLM_LANG_PLATFORM == 201703L
 #		define GLM_LANG (GLM_LANG_CXX17 | GLM_LANG_EXT)
-#	elif __cplusplus == 201402L || GLM_LANG_PLATFORM == 201402L
+#	elif __cplusplus == 201402L || __cplusplus == 201500L || GLM_LANG_PLATFORM == 201402L
 #		define GLM_LANG (GLM_LANG_CXX14 | GLM_LANG_EXT)
 #	elif __cplusplus == 201103L || GLM_LANG_PLATFORM == 201103L
 #		define GLM_LANG (GLM_LANG_CXX11 | GLM_LANG_EXT)
@@ -298,7 +298,7 @@
 # if (GLM_COMPILER & GLM_COMPILER_CLANG)
 #	define GLM_HAS_IF_CONSTEXPR __has_feature(cxx_if_constexpr)
 # elif (GLM_COMPILER & GLM_COMPILER_GCC) 
-#	define GLM_HAS_IF_CONSTEXPR GLM_COMPILER >= GLM_COMPILER_GCC7
+#	define GLM_HAS_IF_CONSTEXPR (__cplusplus >= 201703L)
 # elif (GLM_LANG & GLM_LANG_CXX17_FLAG)
 # 	define GLM_HAS_IF_CONSTEXPR 1
 # else
