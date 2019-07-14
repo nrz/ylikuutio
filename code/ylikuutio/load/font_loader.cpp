@@ -15,11 +15,6 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __STDC_FORMAT_MACROS
-// For MinGW.
-#define __STDC_FORMAT_MACROS
-#endif
-
 #include "font_loader.hpp"
 #include "code/ylikuutio/file/file_loader.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
@@ -31,10 +26,10 @@
 #endif
 
 // Include standard headers
-#include <cstdio>     // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>    // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <inttypes.h> // PRId32, PRId64, PRIu32, PRIu64, PRIx32, PRIx64
 #include <iostream>   // std::cout, std::cin, std::cerr
+#include <sstream>    // std::istringstream, std::ostringstream, std::stringstream
 #include <string>     // std::string
 #include <vector>     // std::vector
 
@@ -151,7 +146,7 @@ namespace yli
 
             if (is_debug_mode)
             {
-                std::printf("d: %s\n", char_path);
+                std::cout << "d: " << char_path << "\n";
             }
 
             // Loop through vertices and push them to `current_glyph_vertices`.
@@ -211,7 +206,7 @@ namespace yli
                 {
                     if (is_debug_mode)
                     {
-                        std::printf("z (closepath)\n");
+                        std::cout << "z (closepath)\n";
                     }
 
                     current_glyph_vertices.push_back(vertices_of_current_edge_section); // store the vertices of the current edge section.
@@ -222,7 +217,7 @@ namespace yli
                 {
                     if (is_debug_mode)
                     {
-                        std::printf("\" (end of vertex data)\n");
+                        std::cout << "\" (end of vertex data)\n";
                     }
 
                     SVG_data_pointer = ++closing_double_quote_pointer;
@@ -254,7 +249,9 @@ namespace yli
             // A glyph was found!
             if (is_debug_mode)
             {
-                std::printf("<glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+                std::stringstream data_pointer_stringstream;
+                data_pointer_stringstream << std::hex << (uint64_t) SVG_data_pointer;
+                std::cout << "<glyph found at 0x" << data_pointer_stringstream.str() << ".\n";
             }
 
             char char_glyph_name[1024];
@@ -272,7 +269,9 @@ namespace yli
                     // TODO: If the glyph does not have a glyph name, an empty string will be stored as glyph-name.
                     if (is_debug_mode)
                     {
-                        std::printf("glyph-name= found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+                        std::stringstream data_pointer_stringstream;
+                        data_pointer_stringstream << std::hex << (uint64_t) SVG_data_pointer;
+                        std::cout << "glyph-name= found at 0x" << data_pointer_stringstream.str() << ".\n";
                     }
 
                     // Find the memory address of the opening double quote.
@@ -281,7 +280,9 @@ namespace yli
                     {
                         if (is_debug_mode)
                         {
-                            std::printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
+                            std::stringstream opening_double_quote_pointer_stringstream;
+                            opening_double_quote_pointer_stringstream << std::hex << (uint64_t) opening_double_quote_pointer;
+                            std::cout << "Opening \" found at 0x" << opening_double_quote_pointer_stringstream.str() << ".\n";
                         }
 
                         opening_double_quote_pointer++;
@@ -292,7 +293,9 @@ namespace yli
                         {
                             if (is_debug_mode)
                             {
-                                std::printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+                                std::stringstream closing_double_quote_pointer_stringstream;
+                                closing_double_quote_pointer_stringstream << std::hex << (uint64_t) closing_double_quote_pointer;
+                                std::cout << "Closing \" found at 0x" << closing_double_quote_pointer_stringstream.str() << ".\n";
                             }
 
                             has_glyph_name = true;
@@ -310,7 +313,7 @@ namespace yli
 
                             if (is_debug_mode)
                             {
-                                std::printf("Glyph name: %s\n", char_glyph_name);
+                                std::cout << "Glyph name: " << char_glyph_name << "\n";
                             }
 
                             SVG_data_pointer = ++closing_double_quote_pointer;
@@ -333,7 +336,9 @@ namespace yli
                     // TODO: If the glyph does not have unicode, the glyph will be discarded (as there is no way to refer to it).
                     if (is_debug_mode)
                     {
-                        std::printf("unicode= found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+                        std::stringstream data_pointer_stringstream;
+                        data_pointer_stringstream << std::hex << (uint64_t) SVG_data_pointer;
+                        std::cout << "unicode= found at 0x" << data_pointer_stringstream.str() << ".\n";
                     }
 
                     // Find the memory address of the opening double quote.
@@ -342,7 +347,9 @@ namespace yli
                     {
                         if (is_debug_mode)
                         {
-                            std::printf("Opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
+                            std::stringstream opening_double_quote_pointer_stringstream;
+                            opening_double_quote_pointer_stringstream << std::hex << (uint64_t) opening_double_quote_pointer;
+                            std::cout << "Opening \" found at 0x" << opening_double_quote_pointer_stringstream.str() << ".\n";
                         }
 
                         opening_double_quote_pointer++;
@@ -353,7 +360,9 @@ namespace yli
                         {
                             if (is_debug_mode)
                             {
-                                std::printf("Closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+                                std::stringstream closing_double_quote_pointer_stringstream;
+                                closing_double_quote_pointer_stringstream << std::hex << (uint64_t) closing_double_quote_pointer;
+                                std::cout << "Closing \" found at 0x" << closing_double_quote_pointer_stringstream.str() << ".\n";
                             }
 
                             has_glyph_unicode = true;
@@ -369,7 +378,7 @@ namespace yli
 
                             if (is_debug_mode)
                             {
-                                std::printf("Unicode: %s\n", char_unicode);
+                                std::cout << "Unicode: " << char_unicode << "\n";
                             }
 
                             SVG_data_pointer = ++closing_double_quote_pointer;
@@ -419,7 +428,7 @@ namespace yli
                         // TODO: Create default vertex vector (no vertices), if needed.
                         if (is_debug_mode)
                         {
-                            std::printf("Number of vertices: %lu\n", current_glyph_vertices.size());
+                            std::cout << "Number of vertices: " << current_glyph_vertices.size() << ".\n";
                         }
 
                         // Store the vertices of the current vector to the glyph vertex vector
@@ -475,7 +484,10 @@ namespace yli
             uint64_t offset = (uint64_t) SVG_data_pointer - (uint64_t) SVG_base_pointer;
             if (is_debug_mode)
             {
-                std::printf("First glyph found at file offset 0x%" PRIx64 " (memory address 0x%" PRIx64 ").\n", offset, (uint64_t) SVG_data_pointer);
+                std::stringstream first_glyph_found_stringstream;
+                first_glyph_found_stringstream << "First glyph found at file offset 0x" << std::hex << offset;
+                first_glyph_found_stringstream << " (memory address 0x" << (uint64_t) SVG_data_pointer << ").\n";
+                std::cout << first_glyph_found_stringstream.str();
             }
 
             // Create the vertex data for each glyph in a loop.
