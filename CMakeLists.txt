@@ -705,12 +705,12 @@ target_link_libraries(gpgpu_test ylikuutio ${ALL_LIBS} pthread)
 add_executable(hirvi
     # hirvi, in alphabetical order
     code/hirvi/hirvi.cpp
+    code/hirvi/hirvi_console_callbacks.cpp
+    code/hirvi/hirvi_console_callbacks.hpp
     code/ajokki/ajokki_background_colors.cpp
     code/ajokki/ajokki_background_colors.hpp
     code/ajokki/ajokki_console.cpp
     code/ajokki/ajokki_console.hpp
-    code/ajokki/ajokki_console_callbacks.cpp
-    code/ajokki/ajokki_console_callbacks.hpp
     code/ajokki/ajokki_debug.cpp
     code/ajokki/ajokki_debug.hpp
     code/ajokki/ajokki_helsinki_east_downtown_scene.cpp
