@@ -49,22 +49,4 @@ namespace ajokki
         console->print_text("Ajokki 0.0.4 / Ylikuutio 0.0.4");
         return nullptr;
     }
-
-    std::shared_ptr<yli::common::AnyValue> quit(
-            yli::console::Console* const,
-            yli::ontology::Entity* const,
-            const std::vector<std::string>& command_parameters)
-    {
-        uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
-        return std::make_shared<yli::common::AnyValue>(exit_program_magic_number);
-    }
-
-    std::shared_ptr<yli::common::AnyValue> help(
-            yli::console::Console* const console,
-            yli::ontology::Entity* const,
-            const std::vector<std::string>& command_parameters)
-    {
-        console->print_help();
-        return nullptr;
-    }
 }

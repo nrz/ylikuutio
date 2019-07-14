@@ -40,6 +40,7 @@
 #include "ajokki_movement.hpp"
 #include "ajokki_location_and_orientation.hpp"
 #include "ajokki_wireframe.hpp"
+#include "code/app/app_console_callbacks.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
 #include "code/ylikuutio/callback_system/callback_parameter.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
@@ -775,16 +776,16 @@ int main(const int argc, const char* const argv[])
     my_console->add_command_callback("AnyStructEntity", &yli::ontology::Universe::create_AnyStruct);
 
     // Exit program callbacks.
-    my_console->add_command_callback("bye", &ajokki::quit);
-    my_console->add_command_callback("chau", &ajokki::quit);
-    my_console->add_command_callback("ciao", &ajokki::quit);
-    my_console->add_command_callback("heippa", &ajokki::quit);
-    my_console->add_command_callback("quit", &ajokki::quit);
-    my_console->add_command_callback("sayonara", &ajokki::quit);
+    my_console->add_command_callback("bye", &app::quit);
+    my_console->add_command_callback("chau", &app::quit);
+    my_console->add_command_callback("ciao", &app::quit);
+    my_console->add_command_callback("heippa", &app::quit);
+    my_console->add_command_callback("quit", &app::quit);
+    my_console->add_command_callback("sayonara", &app::quit);
 
     // Other callbacks.
     my_console->add_command_callback("eval", &yli::ontology::Universe::eval);
-    my_console->add_command_callback("help", &ajokki::help);
+    my_console->add_command_callback("help", &app::help);
     my_console->add_command_callback("version", &ajokki::version);
     my_console->add_command_callback("clear", &yli::console::Console::clear);
     my_console->add_command_callback("screenshot", &yli::ontology::Universe::screenshot);
