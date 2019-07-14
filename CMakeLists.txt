@@ -683,6 +683,10 @@ add_executable(ajokki
     code/ajokki/ajokki_tallinn_scene.hpp
     code/ajokki/ajokki_wireframe.cpp
     code/ajokki/ajokki_wireframe.hpp
+
+    # app, in alphabetical order
+    code/app/app_console_callbacks.cpp
+    code/app/app_console_callbacks.hpp
     )
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS} pthread)
 
@@ -701,12 +705,12 @@ target_link_libraries(gpgpu_test ylikuutio ${ALL_LIBS} pthread)
 add_executable(hirvi
     # hirvi, in alphabetical order
     code/hirvi/hirvi.cpp
+    code/hirvi/hirvi_console_callbacks.cpp
+    code/hirvi/hirvi_console_callbacks.hpp
     code/ajokki/ajokki_background_colors.cpp
     code/ajokki/ajokki_background_colors.hpp
     code/ajokki/ajokki_console.cpp
     code/ajokki/ajokki_console.hpp
-    code/ajokki/ajokki_console_callbacks.cpp
-    code/ajokki/ajokki_console_callbacks.hpp
     code/ajokki/ajokki_debug.cpp
     code/ajokki/ajokki_debug.hpp
     code/ajokki/ajokki_helsinki_east_downtown_scene.cpp
@@ -721,6 +725,10 @@ add_executable(hirvi
     code/ajokki/ajokki_movement.hpp
     code/ajokki/ajokki_wireframe.cpp
     code/ajokki/ajokki_wireframe.hpp
+
+    # app, in alphabetical order
+    code/app/app_console_callbacks.cpp
+    code/app/app_console_callbacks.hpp
     )
 target_link_libraries(hirvi ylikuutio ${ALL_LIBS} pthread)
 

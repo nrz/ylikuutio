@@ -15,11 +15,16 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __AJOKKI_CONSOLE_CALLBACKS_HPP_INCLUDED
-#define __AJOKKI_CONSOLE_CALLBACKS_HPP_INCLUDED
+#include "hirvi_console_callbacks.hpp"
+#include "code/ylikuutio/console/console.hpp"
+#include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
 
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -30,23 +35,34 @@ namespace yli
         class Console;
     }
 
-    namespace common
-    {
-        class AnyValue;
-    }
-
     namespace ontology
     {
         class Entity;
     }
 }
 
-namespace ajokki
+namespace hirvi
 {
     std::shared_ptr<yli::common::AnyValue> version(
             yli::console::Console* const console,
             yli::ontology::Entity* const universe_entity,
-            const std::vector<std::string>& command_parameters);
-}
+            const std::vector<std::string>& command_parameters)
+    {
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
 
-#endif
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        std::stringstream version_stringstream;
+        version_stringstream << "Hirvi " << universe->version << " / Ylikuutio " << universe->version;
+        console->print_text(version_stringstream.str());
+        return nullptr;
+    }
+}

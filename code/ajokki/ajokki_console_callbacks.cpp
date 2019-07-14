@@ -19,9 +19,11 @@
 #include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
 
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -43,28 +45,24 @@ namespace ajokki
 {
     std::shared_ptr<yli::common::AnyValue> version(
             yli::console::Console* const console,
-            yli::ontology::Entity* const,
+            yli::ontology::Entity* const universe_entity,
             const std::vector<std::string>& command_parameters)
     {
-        console->print_text("Ajokki 0.0.4 / Ylikuutio 0.0.4");
-        return nullptr;
-    }
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
 
-    std::shared_ptr<yli::common::AnyValue> quit(
-            yli::console::Console* const,
-            yli::ontology::Entity* const,
-            const std::vector<std::string>& command_parameters)
-    {
-        uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
-        return std::make_shared<yli::common::AnyValue>(exit_program_magic_number);
-    }
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
 
-    std::shared_ptr<yli::common::AnyValue> help(
-            yli::console::Console* const console,
-            yli::ontology::Entity* const,
-            const std::vector<std::string>& command_parameters)
-    {
-        console->print_help();
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        std::stringstream version_stringstream;
+        version_stringstream << "Ajokki " << universe->version << " / Ylikuutio " << universe->version;
+        console->print_text(version_stringstream.str());
         return nullptr;
     }
 }

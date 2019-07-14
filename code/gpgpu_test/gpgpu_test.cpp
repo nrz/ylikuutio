@@ -34,6 +34,7 @@
 #include "code/ylikuutio/callback_system/callback_object.hpp"
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
+#include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
@@ -61,8 +62,18 @@
 #include <string>        // std::string
 #include <vector>        // std::vector
 
-int main(void)
+int main(const int argc, const char* const argv[])
 {
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+
+    if (command_line_master.is_key("version"))
+    {
+        std::cout << "GPGPU test " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version << "\n";
+        return 0;
+    }
+
+    command_line_master.print_keys_and_values();
+
     // keypress callbacks.
     std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keypress_callback_engines = std::vector<yli::callback_system::KeyAndCallbackStruct>();
 
@@ -72,7 +83,9 @@ int main(void)
     // Create the `Universe`, store it in `my_universe`.
     std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
     yli::ontology::UniverseStruct universe_struct;
-    universe_struct.window_title = "GPGPU test 0.0.1, powered by Ylikuutio 0.0.4";
+    std::stringstream window_title_stringstream;
+    window_title_stringstream << "GPGPU test " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
+    universe_struct.window_title = window_title_stringstream.str();
     universe_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
     universe_struct.window_width = 512;
     universe_struct.window_height = 512;

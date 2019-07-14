@@ -32,7 +32,7 @@ namespace yli
         struct UniverseStruct
         {
             UniverseStruct()
-                : window_title("Ylikuutio 0.0.4"),
+                : window_title(""),
                 window_width(1600),
                 window_height(900),
                 framebuffer_width(8000),

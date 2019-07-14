@@ -28,8 +28,8 @@
 #define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
+#include "hirvi_console_callbacks.hpp"
 #include "code/ajokki/ajokki_background_colors.hpp"
-#include "code/ajokki/ajokki_console_callbacks.hpp"
 #include "code/ajokki/ajokki_helsinki_east_downtown_scene.hpp"
 #include "code/ajokki/ajokki_joensuu_center_west_scene.hpp"
 #include "code/ajokki/ajokki_keyboard_callbacks.hpp"
@@ -38,6 +38,7 @@
 #include "code/ajokki/ajokki_movement.hpp"
 #include "code/ajokki/ajokki_location_and_orientation.hpp"
 #include "code/ajokki/ajokki_wireframe.hpp"
+#include "code/app/app_console_callbacks.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
 #include "code/ylikuutio/callback_system/callback_parameter.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
@@ -95,6 +96,13 @@
 int main(const int argc, const char* const argv[])
 {
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
+
+    if (command_line_master.is_key("version"))
+    {
+        std::cout << "Hirvi " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version << "\n";
+        return 0;
+    }
+
     command_line_master.print_keys_and_values();
 
     int input_method_in_use = yli::input::KEYBOARD;
@@ -115,7 +123,9 @@ int main(const int argc, const char* const argv[])
     // Create the `Universe`, store it in `my_universe`.
     std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
     yli::ontology::UniverseStruct universe_struct;
-    universe_struct.window_title = "Hirvi 0.0.4, powered by Ylikuutio 0.0.4";
+    std::stringstream window_title_stringstream;
+    window_title_stringstream << "Hirvi " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
+    universe_struct.window_title = window_title_stringstream.str();
 
     if (command_line_master.is_key("window_width") &&
             yli::string::check_if_unsigned_integer_string(command_line_master.get_value("window_width")))
@@ -643,17 +653,17 @@ int main(const int argc, const char* const argv[])
     my_console->add_command_callback("AnyStructEntity", &yli::ontology::Universe::create_AnyStruct);
 
     // Exit program callbacks.
-    my_console->add_command_callback("bye", &ajokki::quit);
-    my_console->add_command_callback("chau", &ajokki::quit);
-    my_console->add_command_callback("ciao", &ajokki::quit);
-    my_console->add_command_callback("heippa", &ajokki::quit);
-    my_console->add_command_callback("quit", &ajokki::quit);
-    my_console->add_command_callback("sayonara", &ajokki::quit);
+    my_console->add_command_callback("bye", &app::quit);
+    my_console->add_command_callback("chau", &app::quit);
+    my_console->add_command_callback("ciao", &app::quit);
+    my_console->add_command_callback("heippa", &app::quit);
+    my_console->add_command_callback("quit", &app::quit);
+    my_console->add_command_callback("sayonara", &app::quit);
 
     // Other callbacks.
     my_console->add_command_callback("eval", &yli::ontology::Universe::eval);
-    my_console->add_command_callback("help", &ajokki::help);
-    my_console->add_command_callback("version", &ajokki::version);
+    my_console->add_command_callback("help", &app::help);
+    my_console->add_command_callback("version", &hirvi::version);
     my_console->add_command_callback("clear", &yli::console::Console::clear);
     my_console->add_command_callback("screenshot", &yli::ontology::Universe::screenshot);
 
@@ -1029,7 +1039,7 @@ int main(const int argc, const char* const argv[])
             {
                 std::stringstream help_text_stringstream;
                 help_text_stringstream <<
-                    "Hirvi 0.0.4\n"
+                    "Hirvi " << yli::ontology::Universe::version << "\n"
                     "\n"
                     "arrow keys\n"
                     "space jump\n"

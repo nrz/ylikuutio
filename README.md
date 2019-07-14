@@ -130,7 +130,14 @@ Ajokki is sandbox demo program to check out some properties of
 Ylikuutio 3D engine. "Ajokki" is a working title based on a
 Finnish bus body manufacturer.
 
-`gpgpu_test` is a simple GPGPU example. Press Esc to exit.
+GPGPU test is a simple GPGPU example. It computes e.g. the distances
+between some railway stations on the current passenger railway network
+of Finland using both floating point and unsigned short values, using
+Floyd-Warshall algorithm. GPGPU test includes also some simpler examples
+on how to copy data and how to shift textures. Press Esc to exit. After
+computing, e.g. Bash scripts `print_float_results_of_width_32` &
+`print_integer_results_of_width_32` can be used to display the
+Floyd-Warshall results in Bash.
 
 In Linux:
 
