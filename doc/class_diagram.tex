@@ -1,6 +1,6 @@
 \documentclass[tikz,border=10pt]{standalone}
 
-\usepackage[american,finnish]{babel}
+\usepackage[american]{babel}
 \usepackage[utf8]{inputenc}
 
 \usepackage{tikz}
@@ -16,39 +16,46 @@
 \begin{tikzpicture}
     \umlsimpleclass{Entity}
     \umlsimpleclass[right=1cm of Entity, anchor=west]{Universe}
-    \umlsimpleclass[right=1cm of Universe, anchor=west]{World}
-    \umlsimpleclass[right=1cm of World, anchor=west]{Scene}
-    \umlsimpleclass[right=1cm of Scene, anchor=west]{Shader}
-    \umlsimpleclass[below=1cm of Shader, anchor=north, anchor=north]{SymbiontMaterial}
-    \umlsimpleclass[right=1cm of SymbiontMaterial, anchor=west]{Symbiosis}
-    \umlsimpleclass[left=1cm and 1cm of SymbiontMaterial, anchor=east]{Material}
-    \umlsimpleclass[below=2cm of Material, anchor=north]{Species}
-    \umlsimpleclass[below=1cm of Species, anchor=north]{Object}
-    \umlsimpleclass[left=1cm of Species, anchor=east]{Model}
-    \umlsimpleclass[left=1cm of Object, anchor=east]{Movable}
-    \umlsimpleclass[below=2cm of SymbiontMaterial, anchor=north]{SymbiontSpecies}
-    \umlsimpleclass[right=1cm of SymbiontSpecies, anchor=west]{Holobiont}
-    \umlsimpleclass[below=1cm of Holobiont, anchor=north]{Biont}
+    \umlsimpleclass[above=1cm of Universe, anchor=south]{World}
     \umlsimpleclass[below right=1cm and 1cm of Universe, anchor=north]{Console}
     \umlsimpleclass[below left=1cm and 0.0cm of Universe, anchor=north]{Font2D}
     \umlsimpleclass[below=0.5cm of Font2D, anchor=north]{Text2D}
+    \umlsimpleclass[right=1cm of World, anchor=west]{Scene}
+    \umlsimpleclass[right=1cm of Scene, anchor=west]{Shader}
+    \umlsimpleclass[below=1cm of Scene, anchor=north]{Camera}
+    \umlsimpleclass[below=1cm of Shader, anchor=north]{Material}
+    \umlsimpleclass[right=1cm of Material, anchor=west]{SymbiontMaterial}
+    \umlsimpleclass[above=1cm of SymbiontMaterial, anchor=south]{Symbiosis}
+    \umlsimpleclass[below=1cm of SymbiontMaterial, anchor=north]{SymbiontSpecies}
+    \umlsimpleclass[right=1cm of SymbiontMaterial, anchor=west]{Holobiont}
+    \umlsimpleclass[below=1cm of Holobiont, anchor=north]{Biont}
+    \umlsimpleclass[below=4.0cm of Material, anchor=north]{Species}
+    \umlsimpleclass[below=1cm of Species, anchor=north]{Object}
+    \umlsimpleclass[left=1cm of Species, anchor=east]{Model}
+    \umlsimpleclass[left=1cm of Object, anchor=east]{Movable}
     \coordinate (entitynorth1) at ([xshift=+6mm] Entity.north);
     \coordinate (entitynorth2) at ([xshift=+4mm] Entity.north);
     \coordinate (entitynorth3) at ([xshift=+2mm] Entity.north);
     \coordinate (entitynorth4) at ([] Entity.north);
+    \coordinate (entitynorth5) at ([xshift=-2mm] Entity.north);
     \coordinate (entitysouth1) at ([xshift=+6mm] Entity.south);
     \coordinate (entitysouth2) at ([xshift=+4mm] Entity.south);
     \coordinate (entitysouth3) at ([xshift=+2mm] Entity.south);
     \coordinate (entitysouth4) at ([] Entity.south);
     \coordinate (entitysouth5) at ([xshift=-2mm] Entity.south);
+    \coordinate (entitysouth6) at ([xshift=-4mm] Entity.south);
+    \coordinate (scenenorth1) at ([xshift=-2mm] Scene.north);
+    \coordinate (camerasouth1) at ([xshift=+6mm] Camera.south);
     \coordinate (materialsouth1) at ([xshift=-4mm] Material.south);
     \coordinate (holobiontsouth1) at ([xshift=+10mm] Holobiont.south);
     \coordinate (biontsouth1) at ([] Biont.south);
+    \coordinate (movableeast1) at ([yshift=+2mm] Movable.east);
     \coordinate (movablesouth1) at ([] Movable.south);
     \coordinate (movablesouth2) at ([xshift=2mm] Movable.south);
     \umlcompo[]{Universe}{World}
     \umlcompo[]{World}{Scene}
     \umlcompo[]{Scene}{Shader}
+    \umlcompo[]{Scene}{Camera}
     \umlcompo[]{Shader}{Material}
     \umlcompo[]{Material}{Species}
     \umlcompo[]{Species}{Object}
@@ -65,15 +72,16 @@
     \umldep[]{Biont}{SymbiontSpecies}
     \umldep[]{Console}{Font2D}
     \umlinherit[]{Universe}{Entity}
-    \umlinherit[geometry=|-|, anchor1=north, anchor2=north, arm2=+0.5cm]{World}{entitynorth1}
-    \umlinherit[geometry=|-|, anchor1=north, anchor2=north, arm2=+1.0cm]{Scene}{entitynorth2}
-    \umlinherit[geometry=|-|, anchor1=north, anchor2=north, arm2=+1.5cm]{Shader}{entitynorth3}
-    \umlinherit[geometry=|-|, anchor1=north, anchor2=north, arm2=+2.0cm]{Symbiosis}{entitynorth4}
+    \umlinherit[geometry=|-|, anchor1=north, anchor2=north, arm2=+1.5cm]{World}{entitynorth1}
+    \umlinherit[geometry=|-|, anchor1=north, anchor2=north, arm2=+2.0cm]{scenenorth1}{entitynorth2}
+    \umlinherit[geometry=|-|, anchor1=north, anchor2=north, arm2=+2.5cm]{Shader}{entitynorth3}
+    \umlinherit[geometry=|-|, anchor1=north, anchor2=north, arm2=+3.0cm]{Symbiosis}{entitynorth4}
     \umlinherit[]{Species}{Model}
+    \umlinherit[geometry=-|-, anchor1=east, anchor2=east, arm1=+0.5cm]{Camera}{movableeast1}
     \umlinherit[]{Object}{Movable}
     \umlinherit[geometry=-|, anchor1=west, anchor2=south]{Font2D}{entitysouth1}
     \umlinherit[geometry=-|, anchor1=west, anchor2=south]{Text2D}{entitysouth2}
-    \umlinherit[geometry=|-|, anchor1=west, anchor2=south, arm1=-1.5cm]{materialsouth1}{entitysouth3}
+    \umlinherit[geometry=|-|, anchor1=west, anchor2=south, arm1=-3.5cm]{materialsouth1}{entitysouth3}
     \umlinherit[geometry=-|, anchor1=west, anchor2=south]{Model}{entitysouth4}
     \umlinherit[geometry=-|, anchor1=west, anchor2=south]{Movable}{entitysouth5}
     \umlinherit[]{SymbiontMaterial}{Material}
