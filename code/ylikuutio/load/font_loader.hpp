@@ -32,12 +32,6 @@ namespace yli
 {
     namespace load
     {
-        bool load_SVG_font(std::string font_file_path,
-                std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
-                std::vector<std::string>& glyph_names,
-                std::vector<std::string>& unicode_strings,
-                const bool is_debug_mode);
-
         int32_t extract_value_from_string_with_standard_endings(
                 const char* const vertex_base_pointer,
                 char*& vertex_data_pointer,
@@ -64,7 +58,7 @@ namespace yli
                 const bool is_debug_mode);
 
         bool load_SVG_font(
-                const std::string font_file_path,
+                const std::string& font_file_path,
                 std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
                 std::vector<std::string>& glyph_names,
                 std::vector<std::string>& unicode_strings,
