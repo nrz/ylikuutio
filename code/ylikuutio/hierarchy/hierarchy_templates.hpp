@@ -128,7 +128,7 @@ namespace yli
 
         template<class T1>
             void bind_child_to_parent(
-                    const std::string child_name,
+                    const std::string& child_name,
                     std::unordered_map<std::string, T1>& child_hash_map,
                     const T1 child_pointer,
                     std::vector<T1>& child_pointer_vector,
