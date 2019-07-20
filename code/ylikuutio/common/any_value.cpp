@@ -244,7 +244,7 @@ namespace yli
                     }
                     else
                     {
-                        any_value_stringstream << "{ " << this->spherical_coordinates_struct_pointer->rho
+                        any_value_stringstream << std::fixed << "{ " << this->spherical_coordinates_struct_pointer->rho
                             << ", " << this->spherical_coordinates_struct_pointer->theta
                             << ", " << this->spherical_coordinates_struct_pointer->phi
                             << " }";
@@ -337,7 +337,7 @@ namespace yli
                     }
                     else
                     {
-                        any_value_stringstream << "{ " << this->glm_vec3_pointer->x
+                        any_value_stringstream << std::fixed << "{ " << this->glm_vec3_pointer->x
                             << ", " << this->glm_vec3_pointer->y
                             << ", " << this->glm_vec3_pointer->z
                             << " }";
@@ -350,7 +350,7 @@ namespace yli
                     }
                     else
                     {
-                        any_value_stringstream << "{ " << this->glm_vec4_pointer->x
+                        any_value_stringstream << std::fixed << "{ " << this->glm_vec4_pointer->x
                             << ", " << this->glm_vec4_pointer->y
                             << ", " << this->glm_vec4_pointer->z
                             << ", " << this->glm_vec4_pointer->w
