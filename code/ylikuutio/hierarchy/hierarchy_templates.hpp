@@ -121,6 +121,12 @@ namespace yli
                 //
                 // requirements:
                 // `child_pointer` must not be `nullptr` (use `this` as the first argument).
+
+                if (child_pointer == nullptr)
+                {
+                    return;
+                }
+
                 child_pointer->childID = request_childID(child_pointer_vector, free_childID_queue);
                 // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
                 set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, free_childID_queue, number_of_children);
@@ -128,7 +134,7 @@ namespace yli
 
         template<class T1>
             void bind_child_to_parent(
-                    const std::string child_name,
+                    const std::string& child_name,
                     std::unordered_map<std::string, T1>& child_hash_map,
                     const T1 child_pointer,
                     std::vector<T1>& child_pointer_vector,
@@ -140,6 +146,14 @@ namespace yli
                 // in each constructor, usually after setting
                 // `this->parent`. So, get `childID` from the parent,
                 // because every child deserves a unique ID!
+                //
+                // requirements:
+                // `child_pointer` must not be `nullptr` (use `this` as the first argument).
+
+                if (child_pointer == nullptr)
+                {
+                    return;
+                }
 
                 if (!child_name.empty())
                 {

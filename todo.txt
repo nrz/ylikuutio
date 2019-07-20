@@ -7,6 +7,9 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the development of Ylikuutio:
+[ ] Define a custom .yli binary 3D file format based on COLLADA .dae format.
+[ ] Add support for .yli loading.
+[ ] Add support for exporting as .yli in `yli_convert`.
 [ ] Implement saving commands into a file that can later be loaded using command line parameter `--input-file` in Hirvi and Ajokki.
 [ ] Implement command line parameter `--input-file` to Hirvi and Ajokki (load keypresses and keyreleases from a file, eg. `--input-file foo` or `--input-file=foo`).
 [ ] Implement command line parameter `--headless` to Hirvi and Ajokki (do not open any windows, do not render anything).

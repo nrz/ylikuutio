@@ -155,24 +155,24 @@ namespace yli
                 void render();
 
                 void print_text2D(
-                        std::size_t x,
-                        std::size_t y,
-                        std::size_t text_size,
-                        std::size_t font_size,
-                        const std::string text,
-                        const std::string font_texture_file_format,
-                        const std::string horizontal_alignment,
-                        const std::string vertical_alignment) const;
+                        const std::size_t x,
+                        const std::size_t y,
+                        const std::size_t text_size,
+                        const std::size_t font_size,
+                        const std::string& text,
+                        const std::string& font_texture_file_format,
+                        const std::string& horizontal_alignment,
+                        const std::string& vertical_alignment) const;
 
                 void print_text2D(const yli::ontology::TextStruct& text_struct) const;
 
                 void print_text2D(
-                        std::size_t x,
-                        std::size_t y,
-                        std::size_t text_size,
-                        std::size_t font_size,
-                        const std::string text,
-                        const std::string font_texture_file_format) const;
+                        const std::size_t x,
+                        const std::size_t y,
+                        const std::size_t text_size,
+                        const std::size_t font_size,
+                        const std::string& text,
+                        const std::string& font_texture_file_format) const;
 
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);

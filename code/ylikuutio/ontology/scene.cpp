@@ -235,7 +235,7 @@ namespace yli
         }
 
         // this method returns a pointer to an `Entity` using the name as key.
-        yli::ontology::Entity* Scene::get_entity(const std::string name) const
+        yli::ontology::Entity* Scene::get_entity(const std::string& name) const
         {
             if (this->name_map.count(name) != 1)
             {

@@ -126,7 +126,7 @@ namespace yli
                 void set_active_camera(yli::ontology::Camera* camera);
 
                 // this method returns a pointer to an `Entity` using the name as key.
-                yli::ontology::Entity* get_entity(const std::string) const;
+                yli::ontology::Entity* get_entity(const std::string& name) const;
 
                 // this method returns a pointer to `yli::common::AnyValue` corresponding to the given `key`.
                 std::shared_ptr<yli::common::AnyValue> get_variable(const std::string& key) const;

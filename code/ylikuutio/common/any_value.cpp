@@ -147,7 +147,6 @@ namespace yli
 
         std::string AnyValue::get_string() const
         {
-            std::string any_value_string;
             std::stringstream any_value_stringstream;
             any_value_stringstream.precision(6); // 6 decimals in floating point output.
 
@@ -244,7 +243,7 @@ namespace yli
                     }
                     else
                     {
-                        any_value_stringstream << "{ " << this->spherical_coordinates_struct_pointer->rho
+                        any_value_stringstream << std::fixed << "{ " << this->spherical_coordinates_struct_pointer->rho
                             << ", " << this->spherical_coordinates_struct_pointer->theta
                             << ", " << this->spherical_coordinates_struct_pointer->phi
                             << " }";
@@ -337,7 +336,7 @@ namespace yli
                     }
                     else
                     {
-                        any_value_stringstream << "{ " << this->glm_vec3_pointer->x
+                        any_value_stringstream << std::fixed << "{ " << this->glm_vec3_pointer->x
                             << ", " << this->glm_vec3_pointer->y
                             << ", " << this->glm_vec3_pointer->z
                             << " }";
@@ -350,7 +349,7 @@ namespace yli
                     }
                     else
                     {
-                        any_value_stringstream << "{ " << this->glm_vec4_pointer->x
+                        any_value_stringstream << std::fixed << "{ " << this->glm_vec4_pointer->x
                             << ", " << this->glm_vec4_pointer->y
                             << ", " << this->glm_vec4_pointer->z
                             << ", " << this->glm_vec4_pointer->w
@@ -361,8 +360,7 @@ namespace yli
                     return "TODO: define string for this datatype!";
             }
 
-            any_value_stringstream >> any_value_string;
-            return any_value_string;
+            return any_value_stringstream.str();
         }
 
         yli::ontology::Entity* AnyValue::get_entity_pointer() const
