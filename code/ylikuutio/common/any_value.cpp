@@ -147,7 +147,6 @@ namespace yli
 
         std::string AnyValue::get_string() const
         {
-            std::string any_value_string;
             std::stringstream any_value_stringstream;
             any_value_stringstream.precision(6); // 6 decimals in floating point output.
 
@@ -361,8 +360,7 @@ namespace yli
                     return "TODO: define string for this datatype!";
             }
 
-            any_value_string = any_value_stringstream.str();
-            return any_value_string;
+            return any_value_stringstream.str();
         }
 
         yli::ontology::Entity* AnyValue::get_entity_pointer() const
