@@ -155,10 +155,10 @@ namespace yli
                 void render();
 
                 void print_text2D(
-                        std::size_t x,
-                        std::size_t y,
-                        std::size_t text_size,
-                        std::size_t font_size,
+                        const std::size_t x,
+                        const std::size_t y,
+                        const std::size_t text_size,
+                        const std::size_t font_size,
                         const std::string& text,
                         const std::string& font_texture_file_format,
                         const std::string& horizontal_alignment,
@@ -167,10 +167,10 @@ namespace yli
                 void print_text2D(const yli::ontology::TextStruct& text_struct) const;
 
                 void print_text2D(
-                        std::size_t x,
-                        std::size_t y,
-                        std::size_t text_size,
-                        std::size_t font_size,
+                        const std::size_t x,
+                        const std::size_t y,
+                        const std::size_t text_size,
+                        const std::size_t font_size,
                         const std::string& text,
                         const std::string& font_texture_file_format) const;
 
