@@ -361,7 +361,7 @@ namespace yli
                     return "TODO: define string for this datatype!";
             }
 
-            any_value_stringstream >> any_value_string;
+            any_value_string = any_value_stringstream.str();
             return any_value_string;
         }
 
