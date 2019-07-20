@@ -121,6 +121,12 @@ namespace yli
                 //
                 // requirements:
                 // `child_pointer` must not be `nullptr` (use `this` as the first argument).
+
+                if (child_pointer == nullptr)
+                {
+                    return;
+                }
+
                 child_pointer->childID = request_childID(child_pointer_vector, free_childID_queue);
                 // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
                 set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, free_childID_queue, number_of_children);
@@ -143,6 +149,11 @@ namespace yli
                 //
                 // requirements:
                 // `child_pointer` must not be `nullptr` (use `this` as the first argument).
+
+                if (child_pointer == nullptr)
+                {
+                    return;
+                }
 
                 if (!child_name.empty())
                 {
