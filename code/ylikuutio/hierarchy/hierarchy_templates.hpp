@@ -140,6 +140,9 @@ namespace yli
                 // in each constructor, usually after setting
                 // `this->parent`. So, get `childID` from the parent,
                 // because every child deserves a unique ID!
+                //
+                // requirements:
+                // `child_pointer` must not be `nullptr` (use `this` as the first argument).
 
                 if (!child_name.empty())
                 {
