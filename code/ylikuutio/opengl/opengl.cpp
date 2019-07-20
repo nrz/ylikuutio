@@ -230,7 +230,7 @@ namespace yli
                 const std::size_t texture_width,
                 const std::size_t texture_height,
                 const std::size_t texture_depth,
-                const std::string filename,
+                const std::string& filename,
                 const bool should_ylikuutio_flip_texture)
         {
             if (filename.empty())
@@ -350,7 +350,7 @@ namespace yli
                 const GLenum type,
                 const std::size_t texture_width,
                 const std::size_t texture_height,
-                const std::string filename,
+                const std::string& filename,
                 const bool should_ylikuutio_flip_texture)
         {
             const std::size_t texture_depth = 1;

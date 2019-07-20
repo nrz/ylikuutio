@@ -86,7 +86,7 @@ namespace yli
                     const std::size_t texture_width,
                     const std::size_t texture_height,
                     const std::size_t texture_depth,
-                    const std::string filename,
+                    const std::string& filename,
                     const bool should_ylikuutio_flip_texture);
 
             void save_data_from_gpu_texture_into_file(
@@ -94,7 +94,7 @@ namespace yli
                     const GLenum type,
                     const std::size_t texture_width,
                     const std::size_t texture_height,
-                    const std::string filename,
+                    const std::string& filename,
                     const bool should_ylikuutio_flip_texture);
 
             GLenum get_base_format(const GLenum format);
