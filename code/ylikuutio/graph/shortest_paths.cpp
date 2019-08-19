@@ -42,7 +42,7 @@ namespace yli
                 return nullptr;
             }
 
-            std::size_t n_nodes = adjacency_matrix.get_width();
+            const std::size_t n_nodes = adjacency_matrix.get_width();
 
             std::shared_ptr<yli::linear_algebra::Matrix> distance_matrix = std::make_shared<yli::linear_algebra::Matrix>(n_nodes, n_nodes);
 
@@ -71,9 +71,9 @@ namespace yli
                 {
                     for (std::size_t j = 0; j < n_nodes; j++)
                     {
-                        float distance_i_j = (*distance_matrix)[i][j];
-                        float distance_i_k = (*distance_matrix)[i][k];
-                        float distance_j_k = (*distance_matrix)[j][k];
+                        const float distance_i_j = (*distance_matrix)[i][j];
+                        const float distance_i_k = (*distance_matrix)[i][k];
+                        const float distance_j_k = (*distance_matrix)[j][k];
 
                         if (distance_i_k == std::numeric_limits<float>::infinity() || 
                                 distance_j_k == std::numeric_limits<float>::infinity())
