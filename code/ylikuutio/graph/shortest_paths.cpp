@@ -82,16 +82,22 @@ namespace yli
                             continue;
                         }
 
-                        if (distance_i_j == std::numeric_limits<float>::infinity())
+                        if (distance_i_j == std::numeric_limits<float>::max())
                         {
-                            // Update is to be without checking `distance_i_j` further. 
-                            // FIXME: floats can be added without a check for overflow, but integers can not.
-                            (*distance_matrix)[i][j] = distance_i_k + distance_j_k;
+                            // Check for overflow (needed for integers).
+                            if (std::numeric_limits<float>::max() - distance_i_k >= distance_j_k)
+                            {
+                                (*distance_matrix)[i][j] = distance_i_k + distance_j_k;
+                            }
+
                             continue;
                         }
 
-                        // FIXME: floats can be added without a check for overflow, but integers can not.
-                        (*distance_matrix)[i][j] = std::min(distance_i_j, distance_i_k + distance_j_k);
+                        // Check for overflow (needed for integers).
+                        if (std::numeric_limits<float>::max() - distance_i_k >= distance_j_k)
+                        {
+                            (*distance_matrix)[i][j] = std::min(distance_i_j, distance_i_k + distance_j_k);
+                        }
                     }
                 }
             }
