@@ -28,7 +28,7 @@ namespace yli
 {
     namespace graph
     {
-        std::shared_ptr<yli::linear_algebra::Matrix> floyd_warshall(yli::linear_algebra::Matrix& adjacency_matrix)
+        std::shared_ptr<yli::linear_algebra::Matrix> floyd_warshall(const yli::linear_algebra::Matrix& adjacency_matrix)
         {
             // This function computes the distance matrix using Floyd-Warshall.
             //
@@ -59,7 +59,7 @@ namespace yli
                     }
                     else
                     {
-                        *distance_matrix << adjacency_matrix[j][i];
+                        *distance_matrix << adjacency_matrix.get_value(i, j);
                     }
                 }
             }

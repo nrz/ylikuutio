@@ -109,6 +109,11 @@ namespace yli
             return this->height;
         }
 
+        float Matrix::get_value(const std::size_t y, const std::size_t x) const
+        {
+            return this->array_of_arrays[y][x];
+        }
+
         std::shared_ptr<yli::linear_algebra::Matrix> Matrix::transpose()
         {
             std::shared_ptr<yli::linear_algebra::Matrix> new_matrix = std::make_shared<yli::linear_algebra::Matrix>(this->width, this->height); // Flip width and height.

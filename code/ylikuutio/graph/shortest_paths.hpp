@@ -33,7 +33,7 @@ namespace yli
         // TODO: convert `yli::linear_algebra::Matrix` into a class template.
         // TODO: convert this function into a function template.
         // Then, the maximum value of `T` is considered as infinite distance (no link).
-        std::shared_ptr<yli::linear_algebra::Matrix> floyd_warshall(yli::linear_algebra::Matrix& adjacency_matrix);
+        std::shared_ptr<yli::linear_algebra::Matrix> floyd_warshall(const yli::linear_algebra::Matrix& adjacency_matrix);
     }
 }
 

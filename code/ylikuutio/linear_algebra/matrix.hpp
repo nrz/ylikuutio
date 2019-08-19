@@ -77,6 +77,7 @@ namespace yli
                 bool get_is_square() const;
                 std::size_t get_width() const;
                 std::size_t get_height() const;
+                float get_value(const std::size_t y, const std::size_t x) const;
 
                 std::shared_ptr<yli::linear_algebra::Matrix> transpose();
                 float det();
