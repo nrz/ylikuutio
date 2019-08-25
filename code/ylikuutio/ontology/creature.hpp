@@ -27,6 +27,8 @@
 // Available input methods may be different for player-controlled and AI-controlled characters.
 // AI-controlled creatures may have limitations in their options, if so desired.
 // For example, it may be useful to disable exit game and enter console functions from AI characters.
+//
+// The artificial intelligence itself will be in a `yli::ontology::AI` entity, of which `Creature` depends on.
 
 namespace yli
 {

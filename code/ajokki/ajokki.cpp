@@ -1141,7 +1141,7 @@ int main(const int argc, const char* const argv[])
                 }
             }
 
-            // Gravity etc.
+            // Gravity etc. physical phenomena.
             my_universe->do_physics();
 
             std::stringstream angles_and_coordinates_stringstream;
