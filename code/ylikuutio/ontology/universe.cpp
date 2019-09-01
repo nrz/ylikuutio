@@ -1194,7 +1194,6 @@ namespace yli
             camera_cartesian_coordinates.x = this->current_camera_cartesian_coordinates.x;
             camera_cartesian_coordinates.y = this->current_camera_cartesian_coordinates.y;
             camera_cartesian_coordinates.z = this->current_camera_cartesian_coordinates.z;
-            camera_cartesian_coordinates.y += 2.0f;
 
             // Projection matrix: field of view, aspect ratio, display range : 0.1 unit <-> 100 units.
             this->current_camera_projection_matrix = glm::perspective(
