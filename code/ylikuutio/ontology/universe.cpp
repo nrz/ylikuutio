@@ -1206,8 +1206,7 @@ namespace yli
             this->current_camera_view_matrix = glm::lookAt(
                     camera_cartesian_coordinates,                                  // Camera coordinates.
                     camera_cartesian_coordinates + this->current_camera_direction, // Camera looks here: at the same position, plus "current_camera_direction".
-                    this->current_camera_up                                        // Head is up (set to 0,-1,0 to look upside-down).
-                    );
+                    this->current_camera_up);                                      // Head is up (set to 0,-1,0 to look upside-down).
 
             return true;
         }
