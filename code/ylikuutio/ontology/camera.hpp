@@ -127,8 +127,6 @@ namespace yli
             private:
                 void bind_to_parent();
 
-                bool compute_and_update_matrices_from_inputs();
-
                 // variables related to location and orientation.
 
                 yli::ontology::Scene* parent;
