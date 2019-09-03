@@ -28,7 +28,7 @@ namespace yli
 {
     namespace graph
     {
-        std::shared_ptr<yli::linear_algebra::Matrix> floyd_warshall(yli::linear_algebra::Matrix& adjacency_matrix)
+        std::shared_ptr<yli::linear_algebra::Matrix> floyd_warshall(const yli::linear_algebra::Matrix& adjacency_matrix)
         {
             // This function computes the distance matrix using Floyd-Warshall.
             //
@@ -42,7 +42,7 @@ namespace yli
                 return nullptr;
             }
 
-            std::size_t n_nodes = adjacency_matrix.get_width();
+            const std::size_t n_nodes = adjacency_matrix.get_width();
 
             std::shared_ptr<yli::linear_algebra::Matrix> distance_matrix = std::make_shared<yli::linear_algebra::Matrix>(n_nodes, n_nodes);
 
@@ -59,7 +59,7 @@ namespace yli
                     }
                     else
                     {
-                        *distance_matrix << adjacency_matrix[j][i];
+                        *distance_matrix << adjacency_matrix.get_value(i, j);
                     }
                 }
             }
@@ -71,9 +71,9 @@ namespace yli
                 {
                     for (std::size_t j = 0; j < n_nodes; j++)
                     {
-                        float distance_i_j = (*distance_matrix)[i][j];
-                        float distance_i_k = (*distance_matrix)[i][k];
-                        float distance_j_k = (*distance_matrix)[j][k];
+                        const float distance_i_j = (*distance_matrix)[i][j];
+                        const float distance_i_k = (*distance_matrix)[i][k];
+                        const float distance_j_k = (*distance_matrix)[j][k];
 
                         if (distance_i_k == std::numeric_limits<float>::infinity() || 
                                 distance_j_k == std::numeric_limits<float>::infinity())
@@ -82,16 +82,22 @@ namespace yli
                             continue;
                         }
 
-                        if (distance_i_j == std::numeric_limits<float>::infinity())
+                        if (distance_i_j == std::numeric_limits<float>::max())
                         {
-                            // Update is to be without checking `distance_i_j` further. 
-                            // FIXME: floats can be added without a check for overflow, but integers can not.
-                            (*distance_matrix)[i][j] = distance_i_k + distance_j_k;
+                            // Check for overflow (needed for integers).
+                            if (std::numeric_limits<float>::max() - distance_i_k >= distance_j_k)
+                            {
+                                (*distance_matrix)[i][j] = distance_i_k + distance_j_k;
+                            }
+
                             continue;
                         }
 
-                        // FIXME: floats can be added without a check for overflow, but integers can not.
-                        (*distance_matrix)[i][j] = std::min(distance_i_j, distance_i_k + distance_j_k);
+                        // Check for overflow (needed for integers).
+                        if (std::numeric_limits<float>::max() - distance_i_k >= distance_j_k)
+                        {
+                            (*distance_matrix)[i][j] = std::min(distance_i_j, distance_i_k + distance_j_k);
+                        }
                     }
                 }
             }

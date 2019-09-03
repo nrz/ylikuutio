@@ -51,7 +51,7 @@
 // `yli::ontology::ComputeTask` is a class which contains the data for a single
 // computing task. `ComputeTask` does not have the OpenGL shaders used to process
 // the data. Instead, the shaders are contained by the parent `Entity` which is
-// an `yli::ontology::ComputeTask` instance.
+// an `yli::ontology::Shader` instance.
 //
 // For example, `yli::ontology::Shader` can have vertex and fragment shaders for
 // computing the distances between nodes of a graph. Then, each `ComputeTask`
@@ -62,7 +62,7 @@
 // `end_condition_callback_engine->execute()` returns `true`, or until
 // `n_max_iterations` is reached. If `end_condition_callback_engine` is `nullptr`
 // or `end_condition_callback_engine->execute()` does not not return an `AnyValue`
-// which contains `common::BOOL`, then `end_condition_callback_engine` is ignored
+// which contains `yli::common::BOOL`, then `end_condition_callback_engine` is ignored
 // and `n_max_iterations` is the exact number of iterations to be done. However,
 // even if `end_condition_callback_engine->execute()` would return an invalid return
 // value, that is, not an `AnyValue` which contains `common::BOOL`,

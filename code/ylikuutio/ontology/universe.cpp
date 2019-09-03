@@ -1194,21 +1194,19 @@ namespace yli
             camera_cartesian_coordinates.x = this->current_camera_cartesian_coordinates.x;
             camera_cartesian_coordinates.y = this->current_camera_cartesian_coordinates.y;
             camera_cartesian_coordinates.z = this->current_camera_cartesian_coordinates.z;
-            camera_cartesian_coordinates.y += 2.0f;
 
-            // Projection matrix: field of view, aspect ratio, display range : 0.1 unit <-> 100 units.
+            // Compute the projection matrix.
             this->current_camera_projection_matrix = glm::perspective(
                     DEGREES_TO_RADIANS(this->initialFoV),
                     this->aspect_ratio,
                     this->znear,
                     this->zfar);
 
-            // Camera matrix.
+            // Compute the view matrix.
             this->current_camera_view_matrix = glm::lookAt(
                     camera_cartesian_coordinates,                                  // Camera coordinates.
                     camera_cartesian_coordinates + this->current_camera_direction, // Camera looks here: at the same position, plus "current_camera_direction".
-                    this->current_camera_up                                        // Head is up (set to 0,-1,0 to look upside-down).
-                    );
+                    this->current_camera_up);                                      // Head is up (set to 0,-1,0 to look upside-down).
 
             return true;
         }

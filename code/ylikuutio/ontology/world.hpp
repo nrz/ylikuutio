@@ -26,8 +26,51 @@
 #include <queue>    // std::queue
 #include <vector>   // std::vector
 
-// `World` is just a collection of `Scene`s which share some common resources,
-// like `VectorFont`s.
+// `World` is a collection of `Scene`s which share some common resources,
+// like `VectorFont`s. In addition to `Scene`s, each `World` may contain
+// `World`-bound Entities. World-bound Entities are Entities, which simply
+// bind to a `World` instead of some ontological descendant of a `World`.
+//
+// Most child classes of `Scene` and below classes can be converted
+// into corresponding world-bound classes:
+// * `Shader` -> `WorldShader`.
+// * `Material` -> `WorldMaterial`.
+// * `Species` -> `WorldSpecies`.
+// * `Symbiosis` -> `WorldSymbiosis`.
+// * etc.
+//
+// Each `World`-bound `Entity` class inherits its base class.
+//
+// This conversion does not affect already existing children.
+// They function just like before their parent's or parent's parent's etc.
+// conversion into a `World`-bound `Entity`.
+//
+// So, e.g. `WorldShader` may have the following kinds of children:
+// 1. `Material`,
+// 2. `Symbiosis`,
+// 3. `ComputeTask`,
+// 4. `WorldMaterial`,
+// 5. `WorldSymbiosis`,
+// 6. `WorldComputeTask`.
+//
+// The storage of `Material`, `Symbiosis`, and `ComputeTask` entities is
+// inherited from the `Shader` base class.
+//
+// Rendering of `WorldShader`s works as follows:
+// 1. `Scene::render` calls the following function:
+//    `World::render_WorldShaders(const std::size_t entityID)`.
+// 2. `World::render_WorldShaders then calls `WorldShader::render` for
+//    its every `WorldShader` child.
+// 3. `WorldShader::render` then renders only those `Material`, `Symbiosis`,
+//    and `ComputeTask` entities which belong to the `Scene` with that
+//    specific `entityID`.
+// 4. `WorldShader::render` also renders all `WorldMaterial`, `WorldSymbiosis`,
+//    and `WorldComputeTask` entities. Each of these renders only those regular
+//    children entities, i.e. not `World`-bound entities, that belong to
+//    the `Scene` with the specific `entityID`, and also all `World`-bound
+//    entities, in a similar fashion compared to `WorldShader`.
+//
+// TODO: implement `World`-bound entities!
 
 namespace yli
 {
