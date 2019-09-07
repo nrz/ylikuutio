@@ -29,7 +29,7 @@
 
 namespace yli
 {
-    namespace geometry
+    namespace triangulation
     {
         struct TriangulatePolygonsStruct
         {

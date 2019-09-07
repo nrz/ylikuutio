@@ -26,7 +26,7 @@
 
 namespace yli
 {
-    namespace geometry
+    namespace triangulation
     {
         // For bilinear interpolation, southeast-northwest edges, and southwest-northeast edges.
         // These functions return indices.

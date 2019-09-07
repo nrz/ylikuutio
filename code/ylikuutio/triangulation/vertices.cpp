@@ -32,7 +32,7 @@
 
 namespace yli
 {
-    namespace geometry
+    namespace triangulation
     {
         void output_triangle_vertices(
                 const std::vector<glm::vec3>& temp_vertices,
@@ -59,7 +59,7 @@ namespace yli
         }
 
         bool define_vertices_UVs_and_normals(
-                const yli::geometry::TriangulateQuadsStruct& triangulate_quads_struct,
+                const yli::triangulation::TriangulateQuadsStruct& triangulate_quads_struct,
                 const std::vector<glm::vec3>& temp_vertices,
                 const std::vector<glm::vec2>& temp_UVs,
                 const std::vector<glm::vec3>& temp_normals,
@@ -72,7 +72,7 @@ namespace yli
                 const bool is_southwest_northeast_edges_in_use,
                 const bool is_southeast_northwest_edges_in_use)
         {
-            // 6. Loop through all vertices and `yli::geometry::output_triangle_vertices`.
+            // 6. Loop through all vertices and `yli::triangulation::output_triangle_vertices`.
 
             if (actual_image_width < 2 || actual_image_height < 2)
             {
@@ -160,7 +160,7 @@ namespace yli
                         uv_index[1] = southeast(current_vertex_i, actual_image_width);
                         uv_index[2] = southwest(current_vertex_i, actual_image_width);
 
-                        yli::geometry::output_triangle_vertices(
+                        yli::triangulation::output_triangle_vertices(
                                 temp_vertices,
                                 temp_UVs,
                                 temp_normals,
@@ -184,7 +184,7 @@ namespace yli
                         uv_index[1] = southwest(current_vertex_i, actual_image_width);
                         uv_index[2] = northwest(current_vertex_i, actual_image_width);
 
-                        yli::geometry::output_triangle_vertices(
+                        yli::triangulation::output_triangle_vertices(
                                 temp_vertices,
                                 temp_UVs,
                                 temp_normals,
@@ -208,7 +208,7 @@ namespace yli
                         uv_index[1] = northwest(current_vertex_i, actual_image_width);
                         uv_index[2] = northeast(current_vertex_i, actual_image_width);
 
-                        yli::geometry::output_triangle_vertices(
+                        yli::triangulation::output_triangle_vertices(
                                 temp_vertices,
                                 temp_UVs,
                                 temp_normals,
@@ -232,7 +232,7 @@ namespace yli
                         uv_index[1] = northeast(current_vertex_i, actual_image_width);
                         uv_index[2] = southeast(current_vertex_i, actual_image_width);
 
-                        yli::geometry::output_triangle_vertices(
+                        yli::triangulation::output_triangle_vertices(
                                 temp_vertices,
                                 temp_UVs,
                                 temp_normals,
@@ -303,7 +303,7 @@ namespace yli
                         uv_index[1] = southwest(current_vertex_i, actual_image_width);
                         uv_index[2] = northeast(current_vertex_i, actual_image_width);
 
-                        yli::geometry::output_triangle_vertices(
+                        yli::triangulation::output_triangle_vertices(
                                 temp_vertices,
                                 temp_UVs,
                                 temp_normals,
@@ -327,7 +327,7 @@ namespace yli
                         uv_index[1] = northeast(current_vertex_i, actual_image_width);
                         uv_index[2] = southwest(current_vertex_i, actual_image_width);
 
-                        yli::geometry::output_triangle_vertices(
+                        yli::triangulation::output_triangle_vertices(
                                 temp_vertices,
                                 temp_UVs,
                                 temp_normals,
@@ -396,7 +396,7 @@ namespace yli
                         uv_index[1] = northwest(current_vertex_i, actual_image_width);
                         uv_index[2] = southeast(current_vertex_i, actual_image_width);
 
-                        yli::geometry::output_triangle_vertices(
+                        yli::triangulation::output_triangle_vertices(
                                 temp_vertices,
                                 temp_UVs,
                                 temp_normals,
@@ -420,7 +420,7 @@ namespace yli
                         uv_index[1] = southeast(current_vertex_i, actual_image_width);
                         uv_index[2] = northwest(current_vertex_i, actual_image_width);
 
-                        yli::geometry::output_triangle_vertices(
+                        yli::triangulation::output_triangle_vertices(
                                 temp_vertices,
                                 temp_UVs,
                                 temp_normals,

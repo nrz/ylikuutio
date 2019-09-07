@@ -81,9 +81,9 @@ namespace yli
                     this->bind_to_parent();
 
                     // TODO: implement triangulation of `Glyph` objects!
-                    yli::geometry::TriangulatePolygonsStruct triangulate_polygons_struct;
+                    yli::triangulation::TriangulatePolygonsStruct triangulate_polygons_struct;
                     triangulate_polygons_struct.input_vertices = this->glyph_vertex_data;
-                    bool triangulating_result = yli::geometry::triangulate_polygons(
+                    bool triangulating_result = yli::triangulation::triangulate_polygons(
                             triangulate_polygons_struct,
                             this->vertices,
                             this->uvs,

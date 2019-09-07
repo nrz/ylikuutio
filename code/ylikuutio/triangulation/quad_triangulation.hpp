@@ -55,12 +55,12 @@
 
 namespace yli
 {
-    namespace geometry
+    namespace triangulation
     {
         template<class T1>
             bool triangulate_quads(
                     const T1* input_vertex_pointer,
-                    const yli::geometry::TriangulateQuadsStruct& triangulate_quads_struct,
+                    const yli::triangulation::TriangulateQuadsStruct& triangulate_quads_struct,
                     std::vector<glm::vec3>& out_vertices,
                     std::vector<glm::vec2>& out_UVs,
                     std::vector<glm::vec3>& out_normals)
@@ -181,7 +181,7 @@ namespace yli
 
                 // 1. Define the vertices for vertices loaded from file, `push_back` to `temp_vertices`.
 
-                if (!yli::geometry::define_vertices(
+                if (!yli::triangulation::define_vertices(
                             input_vertex_pointer,
                             image_width,
                             image_height,
@@ -207,7 +207,7 @@ namespace yli
                 if (is_bilinear_interpolation_in_use)
                 {
                     // 2. Interpolate the vertices between, using bilinear interpolation, `push_back` to `temp_vertices`.
-                    if (!yli::geometry::interpolate_and_define_vertices_using_bilinear_interpolation(
+                    if (!yli::triangulation::interpolate_and_define_vertices_using_bilinear_interpolation(
                                 input_vertex_pointer,
                                 image_width,
                                 image_height,
@@ -258,7 +258,7 @@ namespace yli
 
                 std::vector<glm::vec3> face_normal_vector_vec3;
 
-                if (!yli::geometry::compute_face_normals(
+                if (!yli::triangulation::compute_face_normals(
                             temp_vertices,
                             face_normal_vector_vec3,
                             actual_image_width,
@@ -272,7 +272,7 @@ namespace yli
                 }
 
                 // 5. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
-                if (!yli::geometry::compute_vertex_normals(
+                if (!yli::triangulation::compute_vertex_normals(
                             temp_normals,
                             face_normal_vector_vec3,
                             actual_image_width,
@@ -287,7 +287,7 @@ namespace yli
 
                 // 6. Loop through all vertices and `yli::geometry::output_triangle_vertices`.
 
-                if (!yli::geometry::define_vertices_UVs_and_normals(
+                if (!yli::triangulation::define_vertices_UVs_and_normals(
                             triangulate_quads_struct,
                             temp_vertices,
                             temp_UVs,

@@ -226,7 +226,7 @@ namespace yli
 
             std::cout << "Triangulating ASCII grid data.\n";
 
-            yli::geometry::TriangulateQuadsStruct triangulate_quads_struct;
+            yli::triangulation::TriangulateQuadsStruct triangulate_quads_struct;
             triangulate_quads_struct.image_width = image_width;
             triangulate_quads_struct.image_height = image_height;
             triangulate_quads_struct.x_step = x_step;
@@ -234,7 +234,7 @@ namespace yli
             triangulate_quads_struct.triangulation_type = triangulation_type;
             triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates = should_ylikuutio_use_real_texture_coordinates;
 
-            const bool result = yli::geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
+            const bool result = yli::triangulation::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
             delete[] vertex_data;
             return result;
         }

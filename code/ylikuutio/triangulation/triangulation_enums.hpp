@@ -20,7 +20,7 @@
 
 namespace yli
 {
-    namespace geometry
+    namespace triangulation
     {
         // for bilinear interpolation.
         enum BilinearDirections { SSW, WSW, WNW, NNW, NNE, ENE, ESE, SSE };
