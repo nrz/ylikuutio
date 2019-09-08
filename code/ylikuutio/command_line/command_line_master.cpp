@@ -180,6 +180,43 @@ namespace yli
             return this->are_arguments_valid;
         }
 
+        bool CommandLineMaster::check_keys(const std::vector<std::string>& valid_keys) const
+        {
+            return this->get_invalid_keys(valid_keys).empty(); // Keys are valid if all keys belong to valid keys.
+        }
+
+        std::vector<std::string> CommandLineMaster::get_invalid_keys(const std::vector<std::string>& valid_keys) const
+        {
+            // This function returns the keys that are invalid.
+            // Keys are valid if all keys belong to valid keys.
+            // Note that arguments entered with invalid syntax are not keys.
+
+            std::vector<std::string> invalid_keys;
+
+            const std::vector<std::string> args = yli::map::get_keys(this->arg_map);
+
+            for (auto arg_it = args.begin(); arg_it != args.end(); arg_it++)
+            {
+                bool is_valid_key = false;
+
+                for (auto valid_keys_it = valid_keys.begin(); valid_keys_it != valid_keys.end(); valid_keys_it++)
+                {
+                    if (*arg_it == *valid_keys_it)
+                    {
+                        is_valid_key = true;
+                        break;
+                    }
+                }
+
+                if (!is_valid_key)
+                {
+                    invalid_keys.push_back(*arg_it);
+                }
+            }
+
+            return invalid_keys;
+        }
+
         bool CommandLineMaster::is_key(const std::string& key) const
         {
             return this->arg_map.count(key) == 1;

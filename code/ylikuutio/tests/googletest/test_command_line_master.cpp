@@ -491,3 +491,378 @@ TEST(get_value_must_function_properly, three_keys_without_value_first_and_third_
     ASSERT_EQ(command_line_master.get_value("qux"), "");
     ASSERT_EQ(command_line_master.get_value("quux"), "");
 }
+
+TEST(get_invalid_keys_must_function_properly, no_keys_no_valid_keys)
+{
+    const int argc = 1; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    const char* argv[] = { first_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys;
+    ASSERT_TRUE(command_line_master.get_invalid_keys(valid_keys).empty());
+}
+
+TEST(get_invalid_keys_must_function_properly, no_keys_one_valid_key)
+{
+    const int argc = 1; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    const char* argv[] = { first_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "foo" };
+    ASSERT_TRUE(command_line_master.get_invalid_keys(valid_keys).empty());
+}
+
+TEST(get_invalid_keys_must_function_properly, no_keys_two_valid_keys)
+{
+    const int argc = 1; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    const char* argv[] = { first_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "foo", "bar" };
+    ASSERT_TRUE(command_line_master.get_invalid_keys(valid_keys).empty());
+}
+
+TEST(get_invalid_keys_must_function_properly, one_key_with_double_dash_no_valid_keys)
+{
+    const int argc = 2; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "--bar";
+    const char* argv[] = { first_arg, second_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys;
+    std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+    ASSERT_FALSE(invalid_keys.empty());
+
+    ASSERT_EQ(invalid_keys.size(), 1);
+    ASSERT_EQ(invalid_keys[0], "bar");
+}
+
+TEST(get_invalid_keys_must_function_properly, two_keys_with_double_dash_no_valid_keys)
+{
+    const int argc = 3; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "--bar";
+    char third_arg[] = "--baz";
+    const char* argv[] = { first_arg, second_arg, third_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys;
+    std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+    ASSERT_FALSE(invalid_keys.empty());
+
+    ASSERT_EQ(invalid_keys.size(), 2);
+    ASSERT_EQ(invalid_keys[0], "bar");
+    ASSERT_EQ(invalid_keys[1], "baz");
+}
+
+TEST(get_invalid_keys_must_function_properly, one_key_with_double_dash_one_matching_valid_key)
+{
+    const int argc = 2; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "--bar";
+    const char* argv[] = { first_arg, second_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "bar" };
+    std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+    ASSERT_TRUE(invalid_keys.empty());
+}
+
+TEST(get_invalid_keys_must_function_properly, one_key_with_double_dash_one_nonmatching_valid_key)
+{
+    const int argc = 2; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "--bar";
+    const char* argv[] = { first_arg, second_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "baz" };
+    std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+    ASSERT_FALSE(invalid_keys.empty());
+
+    ASSERT_EQ(invalid_keys.size(), 1);
+    ASSERT_EQ(invalid_keys[0], "bar");
+}
+
+TEST(get_invalid_keys_must_function_properly, one_key_with_double_dash_one_matching_valid_key_and_one_nonmatching_valid_key)
+{
+    const int argc = 2; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "--bar";
+    const char* argv[] = { first_arg, second_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "bar", "baz" };
+    std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+    ASSERT_TRUE(invalid_keys.empty());
+}
+
+TEST(get_invalid_keys_must_function_properly, one_key_with_double_dash_one_nonmatching_valid_key_and_one_matching_valid_key)
+{
+    const int argc = 2; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "--bar";
+    const char* argv[] = { first_arg, second_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "baz", "bar" };
+    std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+    ASSERT_TRUE(invalid_keys.empty());
+}
+
+TEST(get_invalid_keys_must_function_properly, two_keys_with_double_dash_one_valid_key_matching_first_key)
+{
+    const int argc = 3; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "--bar";
+    char third_arg[] = "--baz";
+    const char* argv[] = { first_arg, second_arg, third_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "bar" };
+    std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+    ASSERT_FALSE(invalid_keys.empty());
+
+    ASSERT_EQ(invalid_keys.size(), 1);
+    ASSERT_EQ(invalid_keys[0], "baz");
+}
+
+TEST(get_invalid_keys_must_function_properly, two_keys_with_double_dash_one_valid_key_matching_second_key)
+{
+    const int argc = 3; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "--bar";
+    char third_arg[] = "--baz";
+    const char* argv[] = { first_arg, second_arg, third_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "baz" };
+    std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+    ASSERT_FALSE(invalid_keys.empty());
+
+    ASSERT_EQ(invalid_keys.size(), 1);
+    ASSERT_EQ(invalid_keys[0], "bar");
+}
+
+TEST(get_invalid_keys_must_function_properly, two_keys_with_double_dash_one_valid_key_matching_first_key_and_one_nonmatching_valid_key)
+{
+    const int argc = 3; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "--bar";
+    char third_arg[] = "--baz";
+    const char* argv[] = { first_arg, second_arg, third_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "bar", "qux" };
+    std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+    ASSERT_FALSE(invalid_keys.empty());
+
+    ASSERT_EQ(invalid_keys.size(), 1);
+    ASSERT_EQ(invalid_keys[0], "baz");
+}
+
+TEST(get_invalid_keys_must_function_properly, two_keys_with_double_dash_one_valid_key_matching_second_key_and_one_nonmatching_valid_key)
+{
+    const int argc = 3; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "--bar";
+    char third_arg[] = "--baz";
+    const char* argv[] = { first_arg, second_arg, third_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "baz", "qux" };
+    std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+    ASSERT_FALSE(invalid_keys.empty());
+
+    ASSERT_EQ(invalid_keys.size(), 1);
+    ASSERT_EQ(invalid_keys[0], "bar");
+}
+
+TEST(get_invalid_keys_must_function_properly, two_keys_with_double_dash_one_nonmatching_valid_key_and_one_valid_key_matching_first_key)
+{
+    const int argc = 3; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "--bar";
+    char third_arg[] = "--baz";
+    const char* argv[] = { first_arg, second_arg, third_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "qux", "bar" };
+    std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+    ASSERT_FALSE(invalid_keys.empty());
+
+    ASSERT_EQ(invalid_keys.size(), 1);
+    ASSERT_EQ(invalid_keys[0], "baz");
+}
+
+TEST(get_invalid_keys_must_function_properly, two_keys_with_double_dash_one_nonmatching_valid_key_and_one_valid_key_matching_second_key)
+{
+    const int argc = 3; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "--bar";
+    char third_arg[] = "--baz";
+    const char* argv[] = { first_arg, second_arg, third_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "qux", "baz" };
+    std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+    ASSERT_FALSE(invalid_keys.empty());
+
+    ASSERT_EQ(invalid_keys.size(), 1);
+    ASSERT_EQ(invalid_keys[0], "bar");
+}
+
+TEST(get_invalid_keys_must_function_properly, two_keys_with_double_dash_one_valid_key_matching_first_key_and_two_nonmatching_valid_keys)
+{
+    const int argc = 3; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "--bar";
+    char third_arg[] = "--baz";
+    const char* argv[] = { first_arg, second_arg, third_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "bar", "qux", "quux" };
+    std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+    ASSERT_FALSE(invalid_keys.empty());
+
+    ASSERT_EQ(invalid_keys.size(), 1);
+    ASSERT_EQ(invalid_keys[0], "baz");
+}
+
+TEST(get_invalid_keys_must_function_properly, two_keys_with_double_dash_one_valid_key_matching_second_key_and_two_nonmatching_valid_keys)
+{
+    const int argc = 3; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "--bar";
+    char third_arg[] = "--baz";
+    const char* argv[] = { first_arg, second_arg, third_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "baz", "qux", "quux" };
+    std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+    ASSERT_FALSE(invalid_keys.empty());
+
+    ASSERT_EQ(invalid_keys.size(), 1);
+    ASSERT_EQ(invalid_keys[0], "bar");
+}
+
+TEST(get_invalid_keys_must_function_properly, two_keys_with_double_dash_two_valid_keys_matching_first_key)
+{
+    const int argc = 3; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "--bar";
+    char third_arg[] = "--baz";
+    const char* argv[] = { first_arg, second_arg, third_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "bar", "bar" };
+    std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+    ASSERT_FALSE(invalid_keys.empty());
+
+    ASSERT_EQ(invalid_keys.size(), 1);
+    ASSERT_EQ(invalid_keys[0], "baz");
+}
+
+TEST(get_invalid_keys_must_function_properly, two_keys_with_double_dash_two_valid_keys_matching_second_key)
+{
+    const int argc = 3; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "--bar";
+    char third_arg[] = "--baz";
+    const char* argv[] = { first_arg, second_arg, third_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "baz", "baz" };
+    std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+    ASSERT_FALSE(invalid_keys.empty());
+
+    ASSERT_EQ(invalid_keys.size(), 1);
+    ASSERT_EQ(invalid_keys[0], "bar");
+}
+
+TEST(get_invalid_keys_must_function_properly, two_keys_with_double_dash_two_valid_keys_matching_first_and_second_key)
+{
+    const int argc = 3; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "--bar";
+    char third_arg[] = "--baz";
+    const char* argv[] = { first_arg, second_arg, third_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "bar", "baz" };
+    std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+    ASSERT_TRUE(invalid_keys.empty());
+}
+
+TEST(check_keys_must_function_properly, no_keys_no_valid_keys)
+{
+    const int argc = 1; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    const char* argv[] = { first_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys;
+    ASSERT_TRUE(command_line_master.check_keys(valid_keys));
+}
+
+TEST(check_keys_must_function_properly, no_keys_one_valid_key)
+{
+    const int argc = 1; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    const char* argv[] = { first_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "foo" };
+    ASSERT_TRUE(command_line_master.check_keys(valid_keys));
+}
+
+TEST(check_keys_must_function_properly, no_keys_two_valid_keys)
+{
+    const int argc = 1; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    const char* argv[] = { first_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys { "foo", "bar" };
+    ASSERT_TRUE(command_line_master.check_keys(valid_keys));
+}
+
+TEST(check_keys_must_function_properly, one_key_with_double_dash_no_valid_keys)
+{
+    const int argc = 2; // the executable itself is also in `argv`.
+    char first_arg[] = "foo_executable";
+    char second_arg[] = "--bar";
+    const char* argv[] = { first_arg, second_arg };
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    ASSERT_TRUE(command_line_master.get_are_arguments_valid());
+
+    std::vector<std::string> valid_keys;
+    ASSERT_FALSE(command_line_master.check_keys(valid_keys));
+}
