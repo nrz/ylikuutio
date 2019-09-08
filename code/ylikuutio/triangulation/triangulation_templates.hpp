@@ -32,7 +32,7 @@
 
 namespace yli
 {
-    namespace geometry
+    namespace triangulation
     {
         template<class T1>
             T1 get_y(
@@ -51,22 +51,22 @@ namespace yli
         template<class T1>
             float southwest_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t z_step)
             {
-                return static_cast<float>(yli::geometry::get_y(input_vertex_pointer, x - x_step, z - z_step, image_width));
+                return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x - x_step, z - z_step, image_width));
             }
         template<class T1>
             float southeast_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t z_step)
             {
-                return static_cast<float>(yli::geometry::get_y(input_vertex_pointer, x, z - z_step, image_width));
+                return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x, z - z_step, image_width));
             }
         template<class T1>
             float northwest_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t z_step)
             {
-                return static_cast<float>(yli::geometry::get_y(input_vertex_pointer, x - x_step, z, image_width));
+                return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x - x_step, z, image_width));
             }
         template<class T1>
             float northeast_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t z_step)
             {
-                return static_cast<float>(yli::geometry::get_y(input_vertex_pointer, x, z, image_width));
+                return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x, z, image_width));
             }
         template<class T1>
             float center_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t z_step)
@@ -154,7 +154,7 @@ namespace yli
 
                 if (!should_ylikuutio_use_real_texture_coordinates)
                 {
-                    bool result = yli::geometry::compute_range(
+                    bool result = yli::triangulation::compute_range(
                             input_vertex_pointer,
                             image_width,
                             image_height,
@@ -186,7 +186,7 @@ namespace yli
                     for (std::size_t x = 0; x < image_width; x += x_step)
                     {
                         // current x,z coordinates).
-                        float y = static_cast<float>(yli::geometry::get_y(input_vertex_pointer, x, z, image_width));
+                        float y = static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x, z, image_width));
 
                         // This corresponds to "v": specify one vertex.
                         glm::vec3 vertex;
@@ -257,7 +257,7 @@ namespace yli
 
                 if (!should_ylikuutio_use_real_texture_coordinates)
                 {
-                    bool result = yli::geometry::compute_range(
+                    bool result = yli::triangulation::compute_range(
                             input_vertex_pointer,
                             image_width,
                             image_height,

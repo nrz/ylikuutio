@@ -830,6 +830,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/triangulation/vertex_normals.hpp
         code/ylikuutio/triangulation/vertices.cpp
         code/ylikuutio/triangulation/vertices.hpp
+        code/ylikuutio/map/ylikuutio_map.hpp
         )
     set(UNIT_TESTS
         code/ylikuutio/tests/googletest/test_any_struct.cpp
@@ -862,7 +863,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_pugixml.cpp
         code/ylikuutio/tests/googletest/test_shader_struct.cpp
         code/ylikuutio/tests/googletest/test_species_struct.cpp
-        code/ylikuutio/tests/googletest/test_vector_font_struct.cpp)
+        code/ylikuutio/tests/googletest/test_vector_font_struct.cpp
+        code/ylikuutio/tests/googletest/test_ylikuutio_map.cpp)
     set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)
 
     add_library(code_to_test ${FILES_TO_TEST})

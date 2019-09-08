@@ -223,7 +223,7 @@ namespace yli
 
             delete[] image_data;
 
-            yli::geometry::TriangulateQuadsStruct triangulate_quads_struct;
+            yli::triangulation::TriangulateQuadsStruct triangulate_quads_struct;
             triangulate_quads_struct.image_width = image_width;
             triangulate_quads_struct.image_height = image_height;
             triangulate_quads_struct.x_step = x_step;
@@ -243,7 +243,7 @@ namespace yli
                 triangulate_quads_struct.spherical_terrain_struct = spherical_terrain_struct;
             }
 
-            const bool result = yli::geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
+            const bool result = yli::triangulation::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
             delete[] vertex_data;
             return result;
         }

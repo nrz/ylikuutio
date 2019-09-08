@@ -29,6 +29,8 @@ namespace yli
             public:
                 CommandLineMaster(const int argc, const char* const argv[]);
                 bool get_are_arguments_valid() const;
+                bool check_keys(const std::vector<std::string>& valid_keys) const;
+                std::vector<std::string> get_invalid_keys(const std::vector<std::string>& valid_keys) const;
                 bool is_key(const std::string& key) const;
                 std::string get_value(const std::string& key) const;
                 void print_keys() const;

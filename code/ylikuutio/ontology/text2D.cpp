@@ -140,6 +140,10 @@ namespace yli
                         number_of_lines++;
                     }
                 }
+                else if (character == (char) '\n')
+                {
+                    number_of_lines++;
+                }
             }
 
             std::size_t current_left_x;

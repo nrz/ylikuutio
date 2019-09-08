@@ -42,7 +42,7 @@
 
 namespace yli
 {
-    namespace geometry
+    namespace triangulation
     {
         bool compute_face_normals(
                 std::vector<glm::vec3>& temp_vertices,

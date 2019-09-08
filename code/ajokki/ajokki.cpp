@@ -111,6 +111,31 @@ int main(const int argc, const char* const argv[])
 
     command_line_master.print_keys_and_values();
 
+    if (!command_line_master.get_are_arguments_valid())
+    {
+        // Some of the arguments do not comply with the Ylikuutio argument syntax.
+        std::cerr << "ERROR: Invalid syntax used in command line parameters.\n";
+        return 1;
+    }
+
+    const std::vector<std::string> valid_keys { "help", "version", "window_width", "window_height" };
+
+    const std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+
+    if (!command_line_master.check_keys(valid_keys))
+    {
+        std::cerr << "ERROR: 1 or more invalid command line parameters given.\n";
+
+        const std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
+
+        for (std::vector<std::string>::const_iterator it = invalid_keys.begin(); it != invalid_keys.end(); it++)
+        {
+            std::cerr << "Invalid key: " << *it << "\n";
+        }
+
+        return 1;
+    }
+
     int input_method_in_use = yli::input::KEYBOARD;
 
     // keypress callbacks.
