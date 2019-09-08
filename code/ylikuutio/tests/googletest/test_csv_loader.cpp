@@ -101,7 +101,7 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_uint8_
     ASSERT_EQ(data_height, 5);
     ASSERT_EQ(data_size, 5 * 5);
 
-    std::vector<uint8_t> railway_neighbors  {
+    std::vector<uint8_t> railway_neighbors {
 //   Hpk,  Jy,  Ov, Tpe,  Tl
        0,  78,  72, 255, 255,   // Hpk
       78,   0, 113, 255, 255,   // Jy
@@ -125,7 +125,7 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_uint8_
     ASSERT_EQ(data_height, 8);
     ASSERT_EQ(data_size, 8 * 8);
 
-    std::vector<uint8_t> railway_neighbors  {
+    std::vector<uint8_t> railway_neighbors {
 //   Hpk,  Jy,  Ov, Tpe,  Tl
        0,  78,  72, 255, 255, 255, 255, 255,   // Hpk
       78,   0, 113, 255, 255, 255, 255, 255,   // Jy
@@ -152,7 +152,7 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_int16_
     ASSERT_EQ(data_height, 17);
     ASSERT_EQ(data_size, 17 * 17);
 
-    std::vector<int16_t> railway_neighbors  {
+    std::vector<int16_t> railway_neighbors {
 //   Hpk, Ilm, Jns,  Jy,  Ke,  Kv,  Lh,  Ov,  Ol,  Ri, Psl,  Pm,  Sk, Tpe,  Tl, Tku,  Yv
        0,  -1,  -1,  78,  -1,  -1,  -1,  72,  -1,  -1,  -1,  -1, 118,  -1,  -1,  -1,  -1,   // Hpk
       -1,   0,  -1,  -1,  -1,  -1,  -1,  -1, 275,  -1,  -1, 174,  -1,  -1,  -1,  -1, 154,   // Ilm
@@ -188,7 +188,7 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_uint16
     ASSERT_EQ(data_height, 17);
     ASSERT_EQ(data_size, 17 * 17);
 
-    std::vector<uint16_t> railway_neighbors  {
+    std::vector<uint16_t> railway_neighbors {
 //   Hpk,  Ilm,  Jns,   Jy,   Ke,   Kv,   Lh,   Ov,   Ol,   Ri,  Psl,   Pm,   Sk,  Tpe,   Tl,  Tku,   Yv
        0, 9999, 9999,   78, 9999, 9999, 9999,   72, 9999, 9999, 9999, 9999,  118, 9999, 9999, 9999, 9999,    // Hpk
     9999,    0, 9999, 9999, 9999, 9999, 9999, 9999,  275, 9999, 9999,  174, 9999, 9999, 9999, 9999,  154,    // Ilm
@@ -238,7 +238,7 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_int32_
     ASSERT_EQ(data_height, 17);
     ASSERT_EQ(data_size, 17 * 17);
 
-    std::vector<int32_t> railway_neighbors  {
+    std::vector<int32_t> railway_neighbors {
 //   Hpk, Ilm, Jns,  Jy,  Ke,  Kv,  Lh,  Ov,  Ol,  Ri, Psl,  Pm,  Sk, Tpe,  Tl, Tku,  Yv
        0,  -1,  -1,  78,  -1,  -1,  -1,  72,  -1,  -1,  -1,  -1, 118,  -1,  -1,  -1,  -1,   // Hpk
       -1,   0,  -1,  -1,  -1,  -1,  -1,  -1, 275,  -1,  -1, 174,  -1,  -1,  -1,  -1, 154,   // Ilm
@@ -274,7 +274,7 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_uint32
     ASSERT_EQ(data_height, 17);
     ASSERT_EQ(data_size, 17 * 17);
 
-    std::vector<uint32_t> railway_neighbors  {
+    std::vector<uint32_t> railway_neighbors {
 //   Hpk,  Ilm,  Jns,   Jy,   Ke,   Kv,   Lh,   Ov,   Ol,   Ri,  Psl,   Pm,   Sk,  Tpe,   Tl,  Tku,   Yv
        0, 9999, 9999,   78, 9999, 9999, 9999,   72, 9999, 9999, 9999, 9999,  118, 9999, 9999, 9999, 9999,    // Hpk
     9999,    0, 9999, 9999, 9999, 9999, 9999, 9999,  275, 9999, 9999,  174, 9999, 9999, 9999, 9999,  154,    // Ilm
@@ -324,7 +324,7 @@ TEST(csv_file_must_be_loaded_appropriately, more_finnish_railway_stations_uint16
     ASSERT_EQ(data_height, 32);
     ASSERT_EQ(data_size, 32 * 32);
 
-    std::vector<uint16_t> railway_neighbors  {
+    std::vector<uint16_t> railway_neighbors {
 // Hpk, Ilm, Jns,  Jy, Kem, Kjä,  Ke, Kki, Kli, Kon, Kts,  Kv, Kuo,  Lh,  Lr,  Mi, Nrm,  Ov,  Ol,  Ri, Roi, Par, Psl,  Pm,  Pr,  Sl,  Sk, Tpe,  Tl, Tku,  Vs,  Yv
      0,9999,9999,  78,9999,9999,9999,9999,9999,9999,9999,9999,9999,9999,9999,9999,9999,  72,9999,9999,9999,9999,9999,9999,9999,9999, 118,9999,9999,9999,9999,9999,  //Hpk
   9999,   0,9999,9999,9999,9999,9999,9999,9999, 109,9999,9999,  85,9999,9999,9999,9999,9999,9999,9999,9999,9999,9999,9999,9999,9999,9999,9999,9999,9999,9999, 154,  //Ilm
