@@ -34,7 +34,7 @@ namespace yli
         {
             this->argc = argc;
             this->arg_vector.assign(argv + 1, argv + argc); // Copy all arguments except the executable name.
-            this->are_arguments_valid = true;
+            this->are_arguments_valid = true;               // Arguments are valid if their syntax is valid.
             bool is_previous_argument_available = false;
             std::string previous_argument = ""; // dummy value.
 
