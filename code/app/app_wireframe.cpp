@@ -26,13 +26,9 @@
 
 namespace app
 {
-    void set_wireframe(yli::config::SettingMaster* setting_master)
+    void set_wireframe(yli::config::SettingMaster* setting_master, const bool use_wireframe)
     {
-        // Do not use wireframe by default.
-
-        bool bool_false = false;
-
-        yli::config::SettingStruct wireframe_setting_struct(std::make_shared<yli::common::AnyValue>(bool_false));
+        yli::config::SettingStruct wireframe_setting_struct(std::make_shared<yli::common::AnyValue>(use_wireframe));
         wireframe_setting_struct.name = "wireframe";
         wireframe_setting_struct.setting_master = setting_master;
         wireframe_setting_struct.activate_callback = &yli::config::SettingMaster::activate_wireframe;

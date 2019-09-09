@@ -28,7 +28,7 @@ namespace yli
 
 namespace app
 {
-    void set_wireframe(yli::config::SettingMaster* setting_master);
+    void set_wireframe(yli::config::SettingMaster* setting_master, const bool use_wireframe);
 }
 
 #endif
