@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __AJOKKI_MOVEMENT_HPP_INCLUDED
-#define __AJOKKI_MOVEMENT_HPP_INCLUDED
+#ifndef __APP_LOCATION_AND_ORIENTATION_HPP_INCLUDED
+#define __APP_LOCATION_AND_ORIENTATION_HPP_INCLUDED
 
 namespace yli
 {
@@ -26,9 +26,9 @@ namespace yli
     }
 }
 
-namespace ajokki
+namespace app
 {
-    void set_movement(yli::config::SettingMaster* const setting_master);
+    void set_location_and_orientation(yli::config::SettingMaster* const setting_master);
 }
 
 #endif

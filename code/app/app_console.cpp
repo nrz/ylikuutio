@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "ajokki_console.hpp"
+#include "app_console.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
@@ -33,7 +33,7 @@ namespace yli
     }
 }
 
-namespace ajokki
+namespace app
 {
     void set_console(yli::config::SettingMaster* const setting_master)
     {

@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "ajokki_debug.hpp"
+#include "app_wireframe.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
@@ -24,18 +24,19 @@
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
 
-namespace ajokki
+namespace app
 {
-    void set_debug_variables(yli::config::SettingMaster* setting_master)
+    void set_wireframe(yli::config::SettingMaster* setting_master)
     {
-        bool is_flight_mode_in_use = true;
-        std::shared_ptr<yli::common::AnyValue> any_value_is_flight_mode_in_use = std::make_shared<yli::common::AnyValue>(is_flight_mode_in_use);
-        yli::config::SettingStruct is_flight_mode_in_use_setting_struct(any_value_is_flight_mode_in_use);
-        is_flight_mode_in_use_setting_struct.name = "is_flight_mode_in_use";
-        is_flight_mode_in_use_setting_struct.setting_master = setting_master;
-        is_flight_mode_in_use_setting_struct.activate_callback = &yli::config::SettingMaster::activate_is_flight_mode_in_use;
-        is_flight_mode_in_use_setting_struct.read_callback = &yli::config::SettingMaster::read_is_flight_mode_in_use;
-        is_flight_mode_in_use_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        new yli::config::Setting(is_flight_mode_in_use_setting_struct);
+        // Do not use wireframe by default.
+
+        bool bool_false = false;
+
+        yli::config::SettingStruct wireframe_setting_struct(std::make_shared<yli::common::AnyValue>(bool_false));
+        wireframe_setting_struct.name = "wireframe";
+        wireframe_setting_struct.setting_master = setting_master;
+        wireframe_setting_struct.activate_callback = &yli::config::SettingMaster::activate_wireframe;
+        wireframe_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+        new yli::config::Setting(wireframe_setting_struct);
     }
 }

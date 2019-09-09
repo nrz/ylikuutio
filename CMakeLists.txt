@@ -661,32 +661,32 @@ add_executable(ajokki
     code/ajokki/ajokki.cpp
     code/ajokki/ajokki_altiplano_scene.cpp
     code/ajokki/ajokki_altiplano_scene.hpp
-    code/ajokki/ajokki_background_colors.cpp
-    code/ajokki/ajokki_background_colors.hpp
-    code/ajokki/ajokki_console.cpp
-    code/ajokki/ajokki_console.hpp
     code/ajokki/ajokki_console_callbacks.cpp
     code/ajokki/ajokki_console_callbacks.hpp
-    code/ajokki/ajokki_debug.cpp
-    code/ajokki/ajokki_debug.hpp
     code/ajokki/ajokki_helsinki_east_downtown_scene.cpp
     code/ajokki/ajokki_helsinki_east_downtown_scene.hpp
     code/ajokki/ajokki_joensuu_center_west_scene.cpp
     code/ajokki/ajokki_joensuu_center_west_scene.hpp
-    code/ajokki/ajokki_keyboard_callbacks.cpp
-    code/ajokki/ajokki_keyboard_callbacks.hpp
-    code/ajokki/ajokki_location_and_orientation.cpp
-    code/ajokki/ajokki_location_and_orientation.hpp
-    code/ajokki/ajokki_movement.cpp
-    code/ajokki/ajokki_movement.hpp
     code/ajokki/ajokki_tallinn_scene.cpp
     code/ajokki/ajokki_tallinn_scene.hpp
-    code/ajokki/ajokki_wireframe.cpp
-    code/ajokki/ajokki_wireframe.hpp
 
     # app, in alphabetical order
+    code/app/app_background_colors.cpp
+    code/app/app_background_colors.hpp
+    code/app/app_console.cpp
+    code/app/app_console.hpp
     code/app/app_console_callbacks.cpp
     code/app/app_console_callbacks.hpp
+    code/app/app_debug.cpp
+    code/app/app_debug.hpp
+    code/app/app_keyboard_callbacks.cpp
+    code/app/app_keyboard_callbacks.hpp
+    code/app/app_location_and_orientation.cpp
+    code/app/app_location_and_orientation.hpp
+    code/app/app_movement.cpp
+    code/app/app_movement.hpp
+    code/app/app_wireframe.cpp
+    code/app/app_wireframe.hpp
     )
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS} pthread)
 
@@ -696,8 +696,10 @@ add_executable(gpgpu_test
     code/gpgpu_test/gpgpu_test.cpp
     code/gpgpu_test/gpgpu_test_scene.cpp
     code/gpgpu_test/gpgpu_test_scene.hpp
-    code/ajokki/ajokki_keyboard_callbacks.cpp
-    code/ajokki/ajokki_keyboard_callbacks.hpp
+
+    # app, in alphabetical order
+    code/app/app_keyboard_callbacks.cpp
+    code/app/app_keyboard_callbacks.hpp
     )
 target_link_libraries(gpgpu_test ylikuutio ${ALL_LIBS} pthread)
 
@@ -707,28 +709,30 @@ add_executable(hirvi
     code/hirvi/hirvi.cpp
     code/hirvi/hirvi_console_callbacks.cpp
     code/hirvi/hirvi_console_callbacks.hpp
-    code/ajokki/ajokki_background_colors.cpp
-    code/ajokki/ajokki_background_colors.hpp
-    code/ajokki/ajokki_console.cpp
-    code/ajokki/ajokki_console.hpp
-    code/ajokki/ajokki_debug.cpp
-    code/ajokki/ajokki_debug.hpp
+
+    # ajokki, in alphabetical order.
     code/ajokki/ajokki_helsinki_east_downtown_scene.cpp
     code/ajokki/ajokki_helsinki_east_downtown_scene.hpp
     code/ajokki/ajokki_joensuu_center_west_scene.cpp
     code/ajokki/ajokki_joensuu_center_west_scene.hpp
-    code/ajokki/ajokki_keyboard_callbacks.cpp
-    code/ajokki/ajokki_keyboard_callbacks.hpp
-    code/ajokki/ajokki_location_and_orientation.cpp
-    code/ajokki/ajokki_location_and_orientation.hpp
-    code/ajokki/ajokki_movement.cpp
-    code/ajokki/ajokki_movement.hpp
-    code/ajokki/ajokki_wireframe.cpp
-    code/ajokki/ajokki_wireframe.hpp
 
     # app, in alphabetical order
+    code/app/app_background_colors.cpp
+    code/app/app_background_colors.hpp
+    code/app/app_console.cpp
+    code/app/app_console.hpp
     code/app/app_console_callbacks.cpp
     code/app/app_console_callbacks.hpp
+    code/app/app_debug.cpp
+    code/app/app_debug.hpp
+    code/app/app_keyboard_callbacks.cpp
+    code/app/app_keyboard_callbacks.hpp
+    code/app/app_location_and_orientation.cpp
+    code/app/app_location_and_orientation.hpp
+    code/app/app_movement.cpp
+    code/app/app_movement.hpp
+    code/app/app_wireframe.cpp
+    code/app/app_wireframe.hpp
     )
 target_link_libraries(hirvi ylikuutio ${ALL_LIBS} pthread)
 

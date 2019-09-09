@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "ajokki_keyboard_callbacks.hpp"
+#include "app_keyboard_callbacks.hpp"
 #include "code/ylikuutio/callback_system/callback_parameter.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
@@ -54,7 +54,7 @@
 // where `foo` is the zero-based index of the variable. First `CallbackParameter` of
 // a `CallbackObject` gets index 0, second `CallbackParameter` gets index 1, etc.
 
-namespace ajokki
+namespace app
 {
     /*********************************************************************\
      * Helper functions for callbacks begin here.                        *
@@ -390,7 +390,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ajokki::move_to_direction(callback_object, universe->current_camera_direction);
+        app::move_to_direction(callback_object, universe->current_camera_direction);
         return nullptr;
     }
 
@@ -421,7 +421,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ajokki::move_to_direction(callback_object, -universe->current_camera_direction);
+        app::move_to_direction(callback_object, -universe->current_camera_direction);
         return nullptr;
     }
 
@@ -452,7 +452,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ajokki::move_to_direction(callback_object, -universe->current_camera_right);
+        app::move_to_direction(callback_object, -universe->current_camera_right);
         return nullptr;
     }
 
@@ -483,7 +483,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ajokki::move_to_direction(callback_object, universe->current_camera_right);
+        app::move_to_direction(callback_object, universe->current_camera_right);
         return nullptr;
     }
 
@@ -514,7 +514,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ajokki::move_to_direction(callback_object, universe->current_camera_up);
+        app::move_to_direction(callback_object, universe->current_camera_up);
         return nullptr;
     }
 
@@ -545,7 +545,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ajokki::move_to_direction(callback_object, -universe->current_camera_up);
+        app::move_to_direction(callback_object, -universe->current_camera_up);
         return nullptr;
     }
 
