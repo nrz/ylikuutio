@@ -375,7 +375,8 @@ namespace yli
                     this->current_camera_vertical_angle    = NAN;
 
                     // Variables related to the camera.
-                    this->aspect_ratio = static_cast<float>(this->window_width / this->window_height);
+                    this->aspect_ratio = static_cast<float>(this->window_width) / static_cast<float>(this->window_height);
+
                     this->initialFoV   = 60.0f;
 
                     this->text_size = universe_struct.text_size;
