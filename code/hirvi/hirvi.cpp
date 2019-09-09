@@ -779,7 +779,7 @@ int main(const int argc, const char* const argv[])
     yli::ontology::Text2D* frame_rate_text2D = new yli::ontology::Text2D(my_universe, frame_rate_text_struct);
 
     std::cout << "Setting up background colors ...\n";
-    app::set_background_colors(my_universe->get_setting_master());
+    app::set_background_colors(my_universe->get_setting_master(), 0.0f, 0.0f, 1.0f, 0.0f);
     std::cout << "Setting up wireframe state ...\n";
     app::set_wireframe(my_universe->get_setting_master());
     std::cout << "Setting up movement ...\n";

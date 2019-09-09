@@ -28,7 +28,7 @@ namespace yli
 
 namespace app
 {
-    void set_background_colors(yli::config::SettingMaster* setting_master);
+    void set_background_colors(yli::config::SettingMaster* setting_master, const float red, const float green, const float blue, const float alpha);
 }
 
 #endif
