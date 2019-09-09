@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "ajokki_debug.hpp"
+#include "app_debug.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
@@ -24,7 +24,7 @@
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
 
-namespace ajokki
+namespace app
 {
     void set_debug_variables(yli::config::SettingMaster* setting_master)
     {

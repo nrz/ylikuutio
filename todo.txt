@@ -2,7 +2,6 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Fixes needed:
-[ ] Fix bug that only 2D text gets rendered when window width is less than window height.
 [ ] Fix bug that current console line is not visible after a lot of output produced eg. by `info` in a small window size.
 [ ] Fix compiling on Visual Studio.
 
@@ -145,3 +144,4 @@ Ready:
 [x] Implement `AnyStructEntity : public AnyStruct, public Entity`.
 [x] Implement command line parameter `--window_width` to Hirvi and Ajokki (eg. `--window_width 1600`).
 [x] Implement command line parameter `--window_height` to Hirvi and Ajokki (eg. --window_height 900`).
+[x] Fix bug that only 2D text gets rendered when window width is less than window height.

@@ -29,7 +29,7 @@
 #endif
 
 #include "gpgpu_test_scene.hpp"
-#include "code/ajokki/ajokki_keyboard_callbacks.hpp"
+#include "code/app/app_keyboard_callbacks.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
@@ -176,7 +176,7 @@ int main(const int argc, const char* const argv[])
 
     // Callback code for esc: exit program.
     yli::callback_system::CallbackEngine* const exit_program_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::callback_system::CallbackObject(&ajokki::exit_program, exit_program_callback_engine);
+    new yli::callback_system::CallbackObject(&app::exit_program, exit_program_callback_engine);
 
     // Keypress callbacks for action mode.
     // Keypresses are checked in the order of this struct.

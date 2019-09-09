@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __AJOKKI_WIREFRAME_HPP_INCLUDED
-#define __AJOKKI_WIREFRAME_HPP_INCLUDED
+#ifndef __APP_WIREFRAME_HPP_INCLUDED
+#define __APP_WIREFRAME_HPP_INCLUDED
 
 namespace yli
 {
@@ -26,9 +26,9 @@ namespace yli
     }
 }
 
-namespace ajokki
+namespace app
 {
-    void set_wireframe(yli::config::SettingMaster* setting_master);
+    void set_wireframe(yli::config::SettingMaster* setting_master, const bool use_wireframe);
 }
 
 #endif

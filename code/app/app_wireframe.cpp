@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "ajokki_wireframe.hpp"
+#include "app_wireframe.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
@@ -24,15 +24,11 @@
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
 
-namespace ajokki
+namespace app
 {
-    void set_wireframe(yli::config::SettingMaster* setting_master)
+    void set_wireframe(yli::config::SettingMaster* setting_master, const bool use_wireframe)
     {
-        // Do not use wireframe by default.
-
-        bool bool_false = false;
-
-        yli::config::SettingStruct wireframe_setting_struct(std::make_shared<yli::common::AnyValue>(bool_false));
+        yli::config::SettingStruct wireframe_setting_struct(std::make_shared<yli::common::AnyValue>(use_wireframe));
         wireframe_setting_struct.name = "wireframe";
         wireframe_setting_struct.setting_master = setting_master;
         wireframe_setting_struct.activate_callback = &yli::config::SettingMaster::activate_wireframe;

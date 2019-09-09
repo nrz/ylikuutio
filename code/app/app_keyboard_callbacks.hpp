@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __AJOKKI_KEYBOARD_CALLBACKS_HPP_INCLUDED
-#define __AJOKKI_KEYBOARD_CALLBACKS_HPP_INCLUDED
+#ifndef __APP_KEYBOARD_CALLBACKS_HPP_INCLUDED
+#define __APP_KEYBOARD_CALLBACKS_HPP_INCLUDED
 
 #include "code/ylikuutio/common/any_value.hpp"
 
@@ -34,7 +34,7 @@ namespace yli
     }
 }
 
-namespace ajokki
+namespace app
 {
     /*********************************************************************\
      *  Callback engines for action mode keyreleases begin here.         *

@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "ajokki_background_colors.hpp"
+#include "app_background_colors.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
@@ -23,37 +23,32 @@
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
 
-namespace ajokki
+namespace app
 {
-    void set_background_colors(yli::config::SettingMaster* setting_master)
+    void set_background_colors(yli::config::SettingMaster* setting_master, const float red, const float green, const float blue, const float alpha)
     {
-        // Blue background.
-
-        float float_zero = 0.0f;
-        float float_one = 1.0f;
-
-        yli::config::SettingStruct red_setting_struct(std::make_shared<yli::common::AnyValue>(float_zero));
+        yli::config::SettingStruct red_setting_struct(std::make_shared<yli::common::AnyValue>(red));
         red_setting_struct.name = "red";
         red_setting_struct.setting_master = setting_master;
         red_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
         red_setting_struct.should_ylikuutio_call_activate_callback_now = false;
         new yli::config::Setting(red_setting_struct);
 
-        yli::config::SettingStruct green_setting_struct(std::make_shared<yli::common::AnyValue>(float_zero));
+        yli::config::SettingStruct green_setting_struct(std::make_shared<yli::common::AnyValue>(green));
         green_setting_struct.name = "green";
         green_setting_struct.setting_master = setting_master;
         green_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
         green_setting_struct.should_ylikuutio_call_activate_callback_now = false;
         new yli::config::Setting(green_setting_struct);
 
-        yli::config::SettingStruct blue_setting_struct(std::make_shared<yli::common::AnyValue>(float_one));
+        yli::config::SettingStruct blue_setting_struct(std::make_shared<yli::common::AnyValue>(blue));
         blue_setting_struct.name = "blue";
         blue_setting_struct.setting_master = setting_master;
         blue_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
         blue_setting_struct.should_ylikuutio_call_activate_callback_now = false;
         new yli::config::Setting(blue_setting_struct);
 
-        yli::config::SettingStruct alpha_setting_struct(std::make_shared<yli::common::AnyValue>(float_zero));
+        yli::config::SettingStruct alpha_setting_struct(std::make_shared<yli::common::AnyValue>(alpha));
         alpha_setting_struct.name = "alpha";
         alpha_setting_struct.setting_master = setting_master;
         alpha_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
