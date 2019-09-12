@@ -28,7 +28,7 @@ namespace yli
 
 namespace app
 {
-    void set_debug_variables(yli::config::SettingMaster* setting_master);
+    void set_flight_mode(yli::config::SettingMaster* setting_master);
 }
 
 #endif
