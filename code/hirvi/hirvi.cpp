@@ -218,7 +218,7 @@ int main(const int argc, const char* const argv[])
     yli::opengl::cull_triangles();
 
     std::cout << "Setting up console ...\n";
-    app::set_console(my_universe->get_setting_master());
+    app::set_console(my_universe->get_setting_master(), 15, 0, 0, 39);
 
     // Create the `World`.
 
