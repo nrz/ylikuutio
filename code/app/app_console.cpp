@@ -57,18 +57,18 @@ namespace app
         console_bottom_y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
         new yli::config::Setting(console_bottom_y_setting_struct);
 
-        yli::config::SettingStruct console_right_x_setting_struct(std::make_shared<yli::common::AnyValue>(console_right_x));
-        console_right_x_setting_struct.name = "console_right_x";
-        console_right_x_setting_struct.setting_master = setting_master;
-        console_right_x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_console_right_x;
-        console_right_x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        new yli::config::Setting(console_right_x_setting_struct);
-
         yli::config::SettingStruct console_left_x_setting_struct(std::make_shared<yli::common::AnyValue>(console_left_x));
         console_left_x_setting_struct.name = "console_left_x";
         console_left_x_setting_struct.setting_master = setting_master;
         console_left_x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_console_left_x;
         console_left_x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
         new yli::config::Setting(console_left_x_setting_struct);
+
+        yli::config::SettingStruct console_right_x_setting_struct(std::make_shared<yli::common::AnyValue>(console_right_x));
+        console_right_x_setting_struct.name = "console_right_x";
+        console_right_x_setting_struct.setting_master = setting_master;
+        console_right_x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_console_right_x;
+        console_right_x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+        new yli::config::Setting(console_right_x_setting_struct);
     }
 }
