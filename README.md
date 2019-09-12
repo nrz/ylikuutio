@@ -175,8 +175,9 @@ game/simulation (initialization), runs the game/simulation (the main loop)
 and ends the program (cleaning-up). In all these phases mentioned above
 Ylikuutio library functions may be used. Ylikuutio library code is located
 in `code/ylikuutio/` tree. Ylikuutio code may change a lot and so far no
-stable API has been defined. Hirvi, Ajokki and Ylikuutio code itself are
-the best references on how to use Ylikuutio in practice.
+stable API has been defined. There are also some application code snippets
+in `code/app/` directory. Hirvi, Ajokki and Ylikuutio code itself are the
+best references on how to use Ylikuutio in practice.
 
 Some available console commands to try in Ajokki:
 * `activate joensuu_center_and_west_scene`
