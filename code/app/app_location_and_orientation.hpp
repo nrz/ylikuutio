@@ -28,7 +28,14 @@ namespace yli
 
 namespace app
 {
-    void set_location_and_orientation(yli::config::SettingMaster* const setting_master);
+    void set_location_and_orientation(
+            yli::config::SettingMaster* const setting_master,
+            const float rho,
+            const float theta,
+            const float phi,
+            const float x,
+            const float y,
+            const float z);
 }
 
 #endif

@@ -43,12 +43,16 @@ namespace yli
 
 namespace app
 {
-    void set_location_and_orientation(yli::config::SettingMaster* const setting_master)
+    void set_location_and_orientation(
+            yli::config::SettingMaster* const setting_master,
+            const float rho,
+            const float theta,
+            const float phi,
+            const float x,
+            const float y,
+            const float z)
     {
         // Variables related to location and orientation.
-        const float rho = -5682.32f;
-        const float theta = -1641.20f;
-        const float phi = 2376.45f;
         yli::common::SphericalCoordinatesStruct spherical_coordinates_struct;
         spherical_coordinates_struct.rho = rho;
         spherical_coordinates_struct.theta = theta;
@@ -87,10 +91,6 @@ namespace app
         phi_setting_struct.should_ylikuutio_call_activate_callback_now = true;
         std::cout << "Executing `new yli::config::Setting(phi_setting_struct);` ...\n";
         new yli::config::Setting(phi_setting_struct);
-
-        const float x = 100.0f;
-        const float y = 100.0f;
-        const float z = 100.0f;
 
         yli::config::SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::common::AnyValue>(new glm::vec3(x, y, z)));
         cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
