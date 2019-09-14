@@ -47,7 +47,6 @@ namespace app
         new yli::config::Setting(speed_setting_struct);
 
         float turbo_factor = 5.0f;
-        // float turbo_factor = 100.0f;
         std::shared_ptr<yli::common::AnyValue> any_value_turbo_factor = std::make_shared<yli::common::AnyValue>(turbo_factor);
         yli::config::SettingStruct turbo_factor_setting_struct(any_value_turbo_factor);
         turbo_factor_setting_struct.name = "turbo_factor";
@@ -57,7 +56,6 @@ namespace app
         new yli::config::Setting(turbo_factor_setting_struct);
 
         float twin_turbo_factor = 100.0f;
-        // float twin_turbo_factor = 50000.0f;
         std::shared_ptr<yli::common::AnyValue> any_value_twin_turbo_factor = std::make_shared<yli::common::AnyValue>(twin_turbo_factor);
         yli::config::SettingStruct twin_turbo_factor_setting_struct(any_value_twin_turbo_factor);
         twin_turbo_factor_setting_struct.name = "twin_turbo_factor";
