@@ -407,7 +407,11 @@ namespace yli
 
         void Universe::adjust_opengl_viewport() const
         {
-            glViewport(0, 0, this->window_width, this->window_height);
+            if (this->window_width <= std::numeric_limits<GLsizei>::max() &&
+                    this->window_height <= std::numeric_limits<GLsizei>::max())
+            {
+                glViewport(0, 0, this->window_width, this->window_height);
+            }
         }
 
         bool Universe::get_is_exit_requested() const
