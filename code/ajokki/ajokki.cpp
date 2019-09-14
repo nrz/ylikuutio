@@ -914,7 +914,7 @@ int main(const int argc, const char* const argv[])
     std::cout << "Setting up wireframe state ...\n";
     app::set_wireframe(my_universe->get_setting_master(), false);
     std::cout << "Setting up movement ...\n";
-    app::set_movement(my_universe->get_setting_master());
+    app::set_movement(my_universe->get_setting_master(), 0.5f, 5.0f, 100.0f, 0.005f);
     std::cout << "Setting up location and orientation ...\n";
     app::set_location_and_orientation(my_universe->get_setting_master(), -5682.32f, -1641.20f, 2376.45f, 100.0f, 100.0f, 100.0f);
     std::cout << "Setting up debug variables ...\n";
