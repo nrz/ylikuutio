@@ -424,12 +424,12 @@ namespace yli
             return this->window;
         }
 
-        std::size_t Universe::get_window_width() const
+        uint32_t Universe::get_window_width() const
         {
             return this->window_width;
         }
 
-        std::size_t Universe::get_window_height() const
+        uint32_t Universe::get_window_height() const
         {
             return this->window_height;
         }
