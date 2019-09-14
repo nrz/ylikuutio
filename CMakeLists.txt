@@ -684,6 +684,8 @@ add_executable(ajokki
     code/app/app_location_and_orientation.cpp
     code/app/app_location_and_orientation.hpp
     code/app/app_movement.cpp
+    code/app/app_window.cpp
+    code/app/app_window.hpp
     code/app/app_movement.hpp
     code/app/app_wireframe.cpp
     code/app/app_wireframe.hpp
@@ -731,6 +733,8 @@ add_executable(hirvi
     code/app/app_location_and_orientation.hpp
     code/app/app_movement.cpp
     code/app/app_movement.hpp
+    code/app/app_window.cpp
+    code/app/app_window.hpp
     code/app/app_wireframe.cpp
     code/app/app_wireframe.hpp
     )

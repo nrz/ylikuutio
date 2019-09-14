@@ -541,8 +541,14 @@ namespace yli
                 // this method returns current `window_width`.
                 uint32_t get_window_width() const;
 
+                // this method sets `window_width`.
+                void set_window_width(const uint32_t window_width);
+
                 // this method returns current `window_height`.
                 uint32_t get_window_height() const;
+
+                // this method sets `window_height`.
+                void set_window_height(const uint32_t window_height);
 
                 // this method returns current `text_size`.
                 std::size_t get_text_size() const;

@@ -31,6 +31,7 @@
 #include "hirvi_console_callbacks.hpp"
 #include "code/ajokki/ajokki_helsinki_east_downtown_scene.hpp"
 #include "code/ajokki/ajokki_joensuu_center_west_scene.hpp"
+#include "code/app/app_window.hpp"
 #include "code/app/app_background_colors.hpp"
 #include "code/app/app_keyboard_callbacks.hpp"
 #include "code/app/app_debug.hpp"
@@ -778,6 +779,8 @@ int main(const int argc, const char* const argv[])
     frame_rate_text_struct.vertical_alignment = "top";
     yli::ontology::Text2D* frame_rate_text2D = new yli::ontology::Text2D(my_universe, frame_rate_text_struct);
 
+    std::cout << "Setting up window size ...\n";
+    app::set_window_size(my_universe->get_setting_master(), my_universe->get_window_width(), my_universe->get_window_height());
     std::cout << "Setting up background colors ...\n";
     app::set_background_colors(my_universe->get_setting_master(), 0.0f, 0.0f, 1.0f, 0.0f);
     std::cout << "Setting up wireframe state ...\n";

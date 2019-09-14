@@ -97,6 +97,9 @@ namespace yli
                 // destructor.
                 ~Console();
 
+                void adjust_n_columns();
+                void adjust_n_rows();
+
                 void set_my_keypress_callback_engine_vector_pointer(std::vector<yli::callback_system::KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer);
                 void set_my_keyrelease_callback_engine_vector_pointer(std::vector<yli::callback_system::KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer);
                 void add_command_callback(const std::string& command, ConsoleCommandCallback callback);
