@@ -14,7 +14,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement command line parameter `--headless` to Hirvi and Ajokki (do not open any windows, do not render anything).
 [ ] Implement command line parameter `--debug` to Hirvi and Ajokki (log all kinds of debug information).
 [ ] Add `Scene` loading command `load` into console.
-[ ] Implement support for changing window size.
 [ ] Implement support for changing font size.
 [ ] Implement `LogMaster` class.
 [ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
@@ -145,3 +144,4 @@ Ready:
 [x] Implement command line parameter `--window_width` to Hirvi and Ajokki (eg. `--window_width 1600`).
 [x] Implement command line parameter `--window_height` to Hirvi and Ajokki (eg. --window_height 900`).
 [x] Fix bug that only 2D text gets rendered when window width is less than window height.
+[x] Implement support for changing window size.
