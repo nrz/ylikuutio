@@ -18,6 +18,9 @@
 #ifndef __APP_CONSOLE_HPP_INCLUDED
 #define __APP_CONSOLE_HPP_INCLUDED
 
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+
 namespace yli
 {
     namespace config
@@ -28,7 +31,12 @@ namespace yli
 
 namespace app
 {
-    void set_console(yli::config::SettingMaster* const setting_master);
+    void set_console(
+            yli::config::SettingMaster* const setting_master,
+            const uint32_t console_top_y,
+            const uint32_t console_bottom_y,
+            const uint32_t console_left_x,
+            const uint32_t console_right_x);
 }
 
 #endif

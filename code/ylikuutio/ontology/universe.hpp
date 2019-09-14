@@ -539,10 +539,16 @@ namespace yli
                 SDL_Window* get_window() const;
 
                 // this method returns current `window_width`.
-                std::size_t get_window_width() const;
+                uint32_t get_window_width() const;
+
+                // this method sets `window_width`.
+                void set_window_width(const uint32_t window_width);
 
                 // this method returns current `window_height`.
-                std::size_t get_window_height() const;
+                uint32_t get_window_height() const;
+
+                // this method sets `window_height`.
+                void set_window_height(const uint32_t window_height);
 
                 // this method returns current `text_size`.
                 std::size_t get_text_size() const;
@@ -730,8 +736,8 @@ namespace yli
                 // variables related to the window.
                 std::shared_ptr<SDL_GLContext> context;
                 SDL_Window* window;
-                std::size_t window_width;
-                std::size_t window_height;
+                uint32_t window_width;
+                uint32_t window_height;
                 std::size_t framebuffer_width;
                 std::size_t framebuffer_height;
                 std::string window_title;

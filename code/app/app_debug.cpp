@@ -26,9 +26,8 @@
 
 namespace app
 {
-    void set_debug_variables(yli::config::SettingMaster* setting_master)
+    void set_flight_mode(yli::config::SettingMaster* setting_master, const bool is_flight_mode_in_use)
     {
-        bool is_flight_mode_in_use = true;
         std::shared_ptr<yli::common::AnyValue> any_value_is_flight_mode_in_use = std::make_shared<yli::common::AnyValue>(is_flight_mode_in_use);
         yli::config::SettingStruct is_flight_mode_in_use_setting_struct(any_value_is_flight_mode_in_use);
         is_flight_mode_in_use_setting_struct.name = "is_flight_mode_in_use";

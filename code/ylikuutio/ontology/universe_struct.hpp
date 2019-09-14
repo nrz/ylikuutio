@@ -22,6 +22,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -53,8 +54,8 @@ namespace yli
             }
 
             std::string window_title;
-            std::size_t window_width;
-            std::size_t window_height;
+            uint32_t window_width;
+            uint32_t window_height;
             std::size_t framebuffer_width;
             std::size_t framebuffer_height;
             std::size_t text_size;

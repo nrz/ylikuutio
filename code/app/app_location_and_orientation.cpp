@@ -43,16 +43,20 @@ namespace yli
 
 namespace app
 {
-    void set_location_and_orientation(yli::config::SettingMaster* const setting_master)
+    void set_location_and_orientation(
+            yli::config::SettingMaster* const setting_master,
+            const float rho,
+            const float theta,
+            const float phi,
+            const float x,
+            const float y,
+            const float z)
     {
         // Variables related to location and orientation.
-        const float float_rho = -5682.32f;
-        const float float_theta = -1641.20f;
-        const float float_phi = 2376.45f;
         yli::common::SphericalCoordinatesStruct spherical_coordinates_struct;
-        spherical_coordinates_struct.rho = float_rho;
-        spherical_coordinates_struct.theta = float_theta;
-        spherical_coordinates_struct.phi = float_phi;
+        spherical_coordinates_struct.rho = rho;
+        spherical_coordinates_struct.theta = theta;
+        spherical_coordinates_struct.phi = phi;
         yli::config::SettingStruct spherical_coordinates_setting_struct(std::make_shared<yli::common::AnyValue>(&spherical_coordinates_struct));
         spherical_coordinates_setting_struct.name = "spherical_coordinates";
         spherical_coordinates_setting_struct.setting_master = setting_master;
@@ -61,7 +65,7 @@ namespace app
         std::cout << "Executing `new yli::config::Setting(spherical_coordinates_setting_struct);` ...\n";
         new yli::config::Setting(spherical_coordinates_setting_struct);
 
-        yli::config::SettingStruct rho_setting_struct(std::make_shared<yli::common::AnyValue>(float_rho));
+        yli::config::SettingStruct rho_setting_struct(std::make_shared<yli::common::AnyValue>(rho));
         rho_setting_struct.name = "rho";
         rho_setting_struct.setting_master = setting_master;
         rho_setting_struct.activate_callback = &yli::config::SettingMaster::activate_rho;
@@ -70,7 +74,7 @@ namespace app
         std::cout << "Executing `new yli::config::Setting(rho_setting_struct);` ...\n";
         new yli::config::Setting(rho_setting_struct);
 
-        yli::config::SettingStruct theta_setting_struct(std::make_shared<yli::common::AnyValue>(float_theta));
+        yli::config::SettingStruct theta_setting_struct(std::make_shared<yli::common::AnyValue>(theta));
         theta_setting_struct.name = "theta";
         theta_setting_struct.setting_master = setting_master;
         theta_setting_struct.activate_callback = &yli::config::SettingMaster::activate_theta;
@@ -79,7 +83,7 @@ namespace app
         std::cout << "Executing `new yli::config::Setting(theta_setting_struct);` ...\n";
         new yli::config::Setting(theta_setting_struct);
 
-        yli::config::SettingStruct phi_setting_struct(std::make_shared<yli::common::AnyValue>(float_phi));
+        yli::config::SettingStruct phi_setting_struct(std::make_shared<yli::common::AnyValue>(phi));
         phi_setting_struct.name = "phi";
         phi_setting_struct.setting_master = setting_master;
         phi_setting_struct.activate_callback = &yli::config::SettingMaster::activate_phi;
@@ -88,11 +92,7 @@ namespace app
         std::cout << "Executing `new yli::config::Setting(phi_setting_struct);` ...\n";
         new yli::config::Setting(phi_setting_struct);
 
-        const float float_x = 100.0f;
-        const float float_y = 100.0f;
-        const float float_z = 100.0f;
-
-        yli::config::SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::common::AnyValue>(new glm::vec3(float_x, float_y, float_z)));
+        yli::config::SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::common::AnyValue>(new glm::vec3(x, y, z)));
         cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
         cartesian_coordinates_setting_struct.setting_master = setting_master;
         cartesian_coordinates_setting_struct.activate_callback = &yli::config::SettingMaster::activate_cartesian_coordinates;
@@ -101,7 +101,7 @@ namespace app
         std::cout << "Executing `new yli::config::Setting(cartesian_coordinates_setting_struct);` ...\n";
         new yli::config::Setting(cartesian_coordinates_setting_struct);
 
-        yli::config::SettingStruct x_setting_struct(std::make_shared<yli::common::AnyValue>(float_x));
+        yli::config::SettingStruct x_setting_struct(std::make_shared<yli::common::AnyValue>(x));
         x_setting_struct.name = "x";
         x_setting_struct.setting_master = setting_master;
         x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_x;
@@ -110,7 +110,7 @@ namespace app
         std::cout << "Executing `new yli::config::Setting(x_setting_struct);` ...\n";
         new yli::config::Setting(x_setting_struct);
 
-        yli::config::SettingStruct y_setting_struct(std::make_shared<yli::common::AnyValue>(float_y));
+        yli::config::SettingStruct y_setting_struct(std::make_shared<yli::common::AnyValue>(y));
         y_setting_struct.name = "y";
         y_setting_struct.setting_master = setting_master;
         y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_y;
@@ -119,7 +119,7 @@ namespace app
         std::cout << "Executing `new yli::config::Setting(y_setting_struct);` ...\n";
         new yli::config::Setting(y_setting_struct);
 
-        yli::config::SettingStruct z_setting_struct(std::make_shared<yli::common::AnyValue>(float_z));
+        yli::config::SettingStruct z_setting_struct(std::make_shared<yli::common::AnyValue>(z));
         z_setting_struct.name = "z";
         z_setting_struct.setting_master = setting_master;
         z_setting_struct.activate_callback = &yli::config::SettingMaster::activate_z;

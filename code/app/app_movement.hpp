@@ -28,7 +28,12 @@ namespace yli
 
 namespace app
 {
-    void set_movement(yli::config::SettingMaster* const setting_master);
+    void set_movement(
+            yli::config::SettingMaster* const setting_master,
+            const float speed,
+            const float turbo_factor,
+            const float twin_turbo_factor,
+            const float mouse_speed);
 }
 
 #endif

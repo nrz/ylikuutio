@@ -33,7 +33,9 @@
 
 // Include standard headers
 #include <iostream>      // std::cout, std::cin, std::cerr
+#include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
+#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -452,6 +454,58 @@ namespace yli
             }
 
             universe->set_planet_radius(planet_radius_any_value->float_value);
+            return nullptr;
+        }
+
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_window_size(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        {
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (setting_master->setting_pointer_map.count("window_width") != 1 ||
+                    setting_master->setting_pointer_map.count("window_height") != 1)
+            {
+                return nullptr;
+            }
+
+            // window width.
+            std::shared_ptr<yli::common::AnyValue> window_width_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["window_width"]->setting_value);
+
+            if (window_width_any_value == nullptr || window_width_any_value->type != yli::common::UINT32_T)
+            {
+                return nullptr;
+            }
+
+            uint32_t window_width = window_width_any_value->uint32_t_value;
+
+            // window height.
+            std::shared_ptr<yli::common::AnyValue> window_height_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["window_height"]->setting_value);
+
+            if (window_height_any_value == nullptr || window_height_any_value->type != yli::common::UINT32_T)
+            {
+                return nullptr;
+            }
+
+            uint32_t window_height = window_height_any_value->uint32_t_value;
+
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (window_width <= std::numeric_limits<int>::max() &&
+                    window_height <= std::numeric_limits<int>::max())
+            {
+                yli::sdl::set_window_size(universe->get_window(), static_cast<int>(window_width), static_cast<int>(window_height));
+            }
+
+            universe->set_window_width(window_width);
+            universe->set_window_height(window_height);
+
             return nullptr;
         }
 

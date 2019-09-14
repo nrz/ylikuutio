@@ -19,7 +19,6 @@
 #define __SETTING_MASTER_HPP_INCLUDED
 
 // Include standard headers
-#include <cstddef>       // std::size_t
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <queue>         // std::queue
 #include <string>        // std::string
@@ -83,6 +82,7 @@ namespace yli
 
                 static std::shared_ptr<yli::common::AnyValue> activate_planet_radius(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
+                static std::shared_ptr<yli::common::AnyValue> activate_window_size(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
                 static std::shared_ptr<yli::common::AnyValue> activate_background_color(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
                 static std::shared_ptr<yli::common::AnyValue> activate_wireframe(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);

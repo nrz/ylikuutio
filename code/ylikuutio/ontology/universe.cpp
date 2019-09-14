@@ -407,7 +407,11 @@ namespace yli
 
         void Universe::adjust_opengl_viewport() const
         {
-            glViewport(0, 0, this->window_width, this->window_height);
+            if (this->window_width <= std::numeric_limits<GLsizei>::max() &&
+                    this->window_height <= std::numeric_limits<GLsizei>::max())
+            {
+                glViewport(0, 0, this->window_width, this->window_height);
+            }
         }
 
         bool Universe::get_is_exit_requested() const
@@ -420,14 +424,36 @@ namespace yli
             return this->window;
         }
 
-        std::size_t Universe::get_window_width() const
+        uint32_t Universe::get_window_width() const
         {
             return this->window_width;
         }
 
-        std::size_t Universe::get_window_height() const
+        void Universe::set_window_width(const uint32_t window_width)
+        {
+            this->window_width = window_width;
+            this->adjust_opengl_viewport();
+
+            if (this->console != nullptr)
+            {
+                this->console->adjust_n_columns();
+            }
+        }
+
+        uint32_t Universe::get_window_height() const
         {
             return this->window_height;
+        }
+
+        void Universe::set_window_height(const uint32_t window_height)
+        {
+            this->window_height = window_height;
+            this->adjust_opengl_viewport();
+
+            if (this->console != nullptr)
+            {
+                this->console->adjust_n_rows();
+            }
         }
 
         std::size_t Universe::get_text_size() const

@@ -126,10 +126,21 @@ namespace yli
             std::cout << "Initializing n_columns\n";
             this->n_columns = this->console_right_x - this->console_left_x + 1;
 
-            if (this->n_rows > this->universe->get_window_height() / this->universe->get_text_size())
+            this->adjust_n_columns();
+            this->adjust_n_rows();
+        }
+
+        Console::~Console()
+        {
+            // destructor.
+            this->exit_console();
+        }
+
+        void Console::adjust_n_columns()
+        {
+            if (this->universe == nullptr)
             {
-                // Upper limit for the the number of rows is window height divided by text size.
-                this->n_rows = this->universe->get_window_height() / this->universe->get_text_size();
+                return;
             }
 
             if (this->n_columns > this->universe->get_window_width() / this->universe->get_text_size())
@@ -139,10 +150,18 @@ namespace yli
             }
         }
 
-        Console::~Console()
+        void Console::adjust_n_rows()
         {
-            // destructor.
-            this->exit_console();
+            if (this->universe == nullptr)
+            {
+                return;
+            }
+
+            if (this->n_rows > this->universe->get_window_height() / this->universe->get_text_size())
+            {
+                // Upper limit for the the number of rows is window height divided by text size.
+                this->n_rows = this->universe->get_window_height() / this->universe->get_text_size();
+            }
         }
 
         void Console::set_my_keypress_callback_engine_vector_pointer(std::vector<yli::callback_system::KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer)

@@ -33,6 +33,7 @@
 #include "ajokki_helsinki_east_downtown_scene.hpp"
 #include "ajokki_joensuu_center_west_scene.hpp"
 #include "ajokki_tallinn_scene.hpp"
+#include "code/app/app_window.hpp"
 #include "code/app/app_background_colors.hpp"
 #include "code/app/app_console_callbacks.hpp"
 #include "code/app/app_keyboard_callbacks.hpp"
@@ -225,7 +226,7 @@ int main(const int argc, const char* const argv[])
     yli::opengl::cull_triangles();
 
     std::cout << "Setting up console ...\n";
-    app::set_console(my_universe->get_setting_master());
+    app::set_console(my_universe->get_setting_master(), 15, 0, 0, 39);
 
     // Create the `World`.
 
@@ -909,16 +910,18 @@ int main(const int argc, const char* const argv[])
     frame_rate_text_struct.vertical_alignment = "top";
     yli::ontology::Text2D* frame_rate_text2D = new yli::ontology::Text2D(my_universe, frame_rate_text_struct);
 
+    std::cout << "Setting up window size ...\n";
+    app::set_window_size(my_universe->get_setting_master(), my_universe->get_window_width(), my_universe->get_window_height());
     std::cout << "Setting up background colors ...\n";
     app::set_background_colors(my_universe->get_setting_master(), 0.0f, 0.0f, 1.0f, 0.0f);
     std::cout << "Setting up wireframe state ...\n";
     app::set_wireframe(my_universe->get_setting_master(), false);
     std::cout << "Setting up movement ...\n";
-    app::set_movement(my_universe->get_setting_master());
+    app::set_movement(my_universe->get_setting_master(), 0.5f, 5.0f, 100.0f, 0.005f);
     std::cout << "Setting up location and orientation ...\n";
-    app::set_location_and_orientation(my_universe->get_setting_master());
+    app::set_location_and_orientation(my_universe->get_setting_master(), -5682.32f, -1641.20f, 2376.45f, 100.0f, 100.0f, 100.0f);
     std::cout << "Setting up debug variables ...\n";
-    app::set_debug_variables(my_universe->get_setting_master());
+    app::set_flight_mode(my_universe->get_setting_master(), true);
 
     yli::sdl::flush_sdl_event_queue();
 
