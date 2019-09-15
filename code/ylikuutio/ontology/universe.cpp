@@ -270,7 +270,7 @@ namespace yli
 
         void Universe::render_without_changing_depth_test()
         {
-            if (!this->should_be_rendered)
+            if (this->is_headless || !this->should_be_rendered)
             {
                 return;
             }
