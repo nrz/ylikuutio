@@ -2,9 +2,8 @@
 /// @file glm/ext/scalar_integer.hpp
 ///
 /// @see core (dependence)
-/// @see ext_vector_integer (dependence)
 ///
-/// @defgroup gtc_round GLM_EXT_scalar_integer
+/// @defgroup ext_scalar_integer GLM_EXT_scalar_integer
 /// @ingroup ext
 ///
 /// Include <glm/ext/scalar_integer.hpp> to use the features of this extension.
@@ -57,7 +56,7 @@ namespace glm
 
 	/// Higher multiple number of Source.
 	///
-	/// @tparam genType Floating-point or integer scalar or vector types.
+	/// @tparam genIUType Integer scalar or vector types.
 	///
 	/// @param v Source value to which is applied the function
 	/// @param Multiple Must be a null or positive value
@@ -68,7 +67,7 @@ namespace glm
 
 	/// Lower multiple number of Source.
 	///
-	/// @tparam genType Floating-point or integer scalar or vector types.
+	/// @tparam genIUType Integer scalar or vector types.
 	///
 	/// @param v Source value to which is applied the function
 	/// @param Multiple Must be a null or positive value

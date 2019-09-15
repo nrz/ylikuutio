@@ -3,7 +3,7 @@ language: cpp
 matrix:
   include:
     - os: osx
-      osx_image: xcode6.4
+      osx_image: xcode7.3
       script:
         - cmake --version
         - mkdir ./build_unknown_release
@@ -15,7 +15,7 @@ matrix:
         - MATRIX_EVAL="INFO=C++unknown-release"
 
     - os: osx
-      osx_image: xcode6.4
+      osx_image: xcode7.3
       script:
         - cmake --version
         - mkdir ./build_pure_98_release
@@ -27,7 +27,7 @@ matrix:
         - MATRIX_EVAL="INFO=C++98-pure-release"
 
     - os: osx
-      osx_image: xcode6.4
+      osx_image: xcode7.3
       script:
         - cmake --version
         - mkdir ./build_pure_ms_release
@@ -39,7 +39,7 @@ matrix:
         - MATRIX_EVAL="INFO=C++98-pure-ms-release"
 
     - os: osx
-      osx_image: xcode6.4
+      osx_image: xcode7.3
       script:
         - cmake --version
         - mkdir ./build_pure_11_release
@@ -51,7 +51,7 @@ matrix:
         - MATRIX_EVAL="INFO=C++11-pure-release"
 
     - os: osx
-      osx_image: xcode6.4
+      osx_image: xcode7.3
       script:
         - cmake --version
         - mkdir ./build_sse2_11_release
@@ -111,7 +111,7 @@ matrix:
         - MATRIX_EVAL="INFO=C++14-avx-debug"
 
     - os: osx
-      osx_image: xcode10
+      osx_image: xcode11
       script:
         - cmake --version
         - mkdir ./build_pure_17_release
@@ -123,7 +123,7 @@ matrix:
         - MATRIX_EVAL="INFO=C++17-pure-release"
 
     - os: osx
-      osx_image: xcode10
+      osx_image: xcode11
       script:
         - cmake --version
         - mkdir ./build_pure_17_debug
@@ -135,7 +135,7 @@ matrix:
         - MATRIX_EVAL="INFO=C++17-pure-debug"
 
     - os: osx
-      osx_image: xcode10
+      osx_image: xcode11
       script:
         - cmake --version
         - mkdir ./build_avx_17_release
@@ -147,7 +147,7 @@ matrix:
         - MATRIX_EVAL="INFO=C++17-avx-release"
 
     - os: osx
-      osx_image: xcode10
+      osx_image: xcode11
       script:
         - cmake --version
         - mkdir ./build_avx_17_debug
@@ -485,14 +485,9 @@ matrix:
         - ctest
 
     - os: linux
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-trusty-5.0
-          packages:
-            - clang-5.0
+      dist: bionic
       env:
-        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0 && INFO=C++17-pure-release"
+        - MATRIX_EVAL="CC=clang-7.0 && INFO=C++17-pure-release"
       script:
         - cmake --version
         - mkdir ./build_pure_17_release
@@ -502,14 +497,9 @@ matrix:
         - ctest
 
     - os: linux
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-trusty-5.0
-          packages:
-            - clang-5.0
+      dist: bionic
       env:
-        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0 && INFO=C++17-pure-debug"
+        - MATRIX_EVAL="CC=clang-7.0 && INFO=C++17-pure-debug"
       script:
         - cmake --version
         - mkdir ./build_pure_17_debug
@@ -519,14 +509,9 @@ matrix:
         - ctest
 
     - os: linux
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-trusty-5.0
-          packages:
-            - clang-5.0
+      dist: bionic
       env:
-        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0 && INFO=C++17-sse3-release"
+        - MATRIX_EVAL="CC=clang-7.0 && INFO=C++17-sse3-release"
       script:
         - cmake --version
         - mkdir ./build_sse3_17_release
@@ -536,14 +521,9 @@ matrix:
         - ctest
 
     - os: linux
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-trusty-5.0
-          packages:
-            - clang-5.0
+      dist: bionic
       env:
-        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0 && INFO=C++17-sse3-debug"
+        - MATRIX_EVAL="CC=clang-7.0 && INFO=C++17-sse3-debug"
       script:
         - cmake --version
         - mkdir ./build_sse3_17_debug
@@ -553,14 +533,9 @@ matrix:
         - ctest
 
     - os: linux
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-trusty-5.0
-          packages:
-            - clang-5.0
+      dist: bionic
       env:
-        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0 && INFO=C++17-ssse3-release"
+        - MATRIX_EVAL="CC=clang-7.0 && INFO=C++17-ssse3-release"
       script:
         - cmake --version
         - mkdir ./build_ssse3_17_release
