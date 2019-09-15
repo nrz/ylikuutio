@@ -294,6 +294,7 @@ namespace yli
                     uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(this->font_size)), (uv_y - 1.0f / static_cast<float>(this->font_size)));
                     uv_down_left = glm::vec2(uv_x, (uv_y - 1.0f / static_cast<float>(this->font_size)));
                 }
+
                 UVs.push_back(uv_up_left);
                 UVs.push_back(uv_down_left);
                 UVs.push_back(uv_up_right);
