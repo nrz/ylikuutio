@@ -24,6 +24,7 @@
 #include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
