@@ -184,6 +184,7 @@ Some available console commands to try in Ajokki:
 * `activate helsinki_east_downtown_scene`
 * `activate altiplano_scene`
 * `activate tallinn_scene`
+* `activate helsinki_east_downtown_scene`
 * `set red 1.0`
 * `set green 0.15`
 * `set blue 0.77`
@@ -201,6 +202,7 @@ Some available console commands to try in Ajokki:
 * `info cat2`
 * `set wireframe true`
 * `set wireframe false`
+* `activate turbo_polizei_camera`
 * `get turbo_polizei1 cartesian_coordinates`
 * `get turbo_polizei1 x`
 * `get turbo_polizei1 y`
@@ -208,12 +210,23 @@ Some available console commands to try in Ajokki:
 * `set turbo_polizei1 y 50`
 * `set turbo_polizei1 x 100`
 * `set turbo_polizei1 z 200`
+* `activate cat_camera`
 * `get cat1 cartesian_coordinates`
 * `get cat1 x`
 * `get cat1 y`
 * `get cat1 z`
 * `set cat1 x 123.45`
 * `set cat1 z 210`
+* `get framebuffer_width`
+* `get framebuffer_height`
+* `screenshot screenshot1.data`
+* `set framebuffer_width 2000`
+* `set framebuffer_height 1000`
+* `screenshot screenshot2.data`
+* `get window_width`
+* `get window_height`
+* `set window_width 1000`
+* `set window_height 500`
 
 ## FAQ
 Q: What is "Ylikuutio"?
