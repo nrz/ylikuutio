@@ -113,7 +113,7 @@ int main(const int argc, const char* const argv[])
         return 1;
     }
 
-    const std::vector<std::string> valid_keys { "help", "version", "window_width", "window_height" };
+    const std::vector<std::string> valid_keys { "help", "version", "window_width", "window_height", "framebuffer_width", "framebuffer_height" };
 
     const std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
 
@@ -167,6 +167,22 @@ int main(const int argc, const char* const argv[])
         const std::string window_height = command_line_master.get_value("window_height");
         std::size_t index = 0;
         universe_struct.window_height = yli::string::extract_uint32_t_value_from_string(window_height, index, nullptr, nullptr);
+    }
+
+    if (command_line_master.is_key("framebuffer_width") &&
+            yli::string::check_if_unsigned_integer_string(command_line_master.get_value("framebuffer_width")))
+    {
+        const std::string framebuffer_width = command_line_master.get_value("framebuffer_width");
+        std::size_t index = 0;
+        universe_struct.framebuffer_width = yli::string::extract_uint32_t_value_from_string(framebuffer_width, index, nullptr, nullptr);
+    }
+
+    if (command_line_master.is_key("framebuffer_height") &&
+            yli::string::check_if_unsigned_integer_string(command_line_master.get_value("framebuffer_height")))
+    {
+        const std::string framebuffer_height = command_line_master.get_value("framebuffer_height");
+        std::size_t index = 0;
+        universe_struct.framebuffer_height = yli::string::extract_uint32_t_value_from_string(framebuffer_height, index, nullptr, nullptr);
     }
 
     universe_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
