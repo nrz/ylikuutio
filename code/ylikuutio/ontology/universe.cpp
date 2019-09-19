@@ -456,6 +456,26 @@ namespace yli
             }
         }
 
+        uint32_t Universe::get_framebuffer_width() const
+        {
+            return this->framebuffer_width;
+        }
+
+        void Universe::set_framebuffer_width(const uint32_t framebuffer_width)
+        {
+            this->framebuffer_width = framebuffer_width;
+        }
+
+        uint32_t Universe::get_framebuffer_height() const
+        {
+            return this->framebuffer_height;
+        }
+
+        void Universe::set_framebuffer_height(const uint32_t framebuffer_height)
+        {
+            this->framebuffer_height = framebuffer_height;
+        }
+
         std::size_t Universe::get_text_size() const
         {
             return this->text_size;

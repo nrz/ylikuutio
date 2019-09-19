@@ -56,8 +56,8 @@ namespace yli
             std::string window_title;
             uint32_t window_width;
             uint32_t window_height;
-            std::size_t framebuffer_width;
-            std::size_t framebuffer_height;
+            uint32_t framebuffer_width;
+            uint32_t framebuffer_height;
             std::size_t text_size;
             std::size_t font_size;
             std::size_t max_FPS;

@@ -83,6 +83,7 @@ namespace yli
                 static std::shared_ptr<yli::common::AnyValue> activate_planet_radius(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
                 static std::shared_ptr<yli::common::AnyValue> activate_window_size(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+                static std::shared_ptr<yli::common::AnyValue> activate_framebuffer_size(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
                 static std::shared_ptr<yli::common::AnyValue> activate_background_color(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
                 static std::shared_ptr<yli::common::AnyValue> activate_wireframe(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);

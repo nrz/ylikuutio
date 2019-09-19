@@ -510,6 +510,52 @@ namespace yli
             return nullptr;
         }
 
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_framebuffer_size(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        {
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (setting_master->setting_pointer_map.count("framebuffer_width") != 1 ||
+                    setting_master->setting_pointer_map.count("framebuffer_height") != 1)
+            {
+                return nullptr;
+            }
+
+            // framebuffer width.
+            std::shared_ptr<yli::common::AnyValue> framebuffer_width_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["framebuffer_width"]->setting_value);
+
+            if (framebuffer_width_any_value == nullptr || framebuffer_width_any_value->type != yli::common::UINT32_T)
+            {
+                return nullptr;
+            }
+
+            uint32_t framebuffer_width = framebuffer_width_any_value->uint32_t_value;
+
+            // framebuffer height.
+            std::shared_ptr<yli::common::AnyValue> framebuffer_height_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["framebuffer_height"]->setting_value);
+
+            if (framebuffer_height_any_value == nullptr || framebuffer_height_any_value->type != yli::common::UINT32_T)
+            {
+                return nullptr;
+            }
+
+            uint32_t framebuffer_height = framebuffer_height_any_value->uint32_t_value;
+
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            universe->set_framebuffer_width(framebuffer_width);
+            universe->set_framebuffer_height(framebuffer_height);
+
+            return nullptr;
+        }
+
         std::shared_ptr<yli::common::AnyValue> SettingMaster::activate_background_color(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)

@@ -34,6 +34,7 @@
 #include "ajokki_joensuu_center_west_scene.hpp"
 #include "ajokki_tallinn_scene.hpp"
 #include "code/app/app_window.hpp"
+#include "code/app/app_framebuffer.hpp"
 #include "code/app/app_background_colors.hpp"
 #include "code/app/app_console_callbacks.hpp"
 #include "code/app/app_keyboard_callbacks.hpp"
@@ -912,6 +913,8 @@ int main(const int argc, const char* const argv[])
 
     std::cout << "Setting up window size ...\n";
     app::set_window_size(my_universe->get_setting_master(), my_universe->get_window_width(), my_universe->get_window_height());
+    std::cout << "Setting up framebuffer size ...\n";
+    app::set_framebuffer_size(my_universe->get_setting_master(), my_universe->get_framebuffer_width(), my_universe->get_framebuffer_height());
     std::cout << "Setting up background colors ...\n";
     app::set_background_colors(my_universe->get_setting_master(), 0.0f, 0.0f, 1.0f, 0.0f);
     std::cout << "Setting up wireframe state ...\n";
