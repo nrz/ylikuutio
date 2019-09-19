@@ -18,6 +18,7 @@
 #include "app_window.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
+#include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 
 // Include standard headers
