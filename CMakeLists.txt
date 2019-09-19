@@ -679,6 +679,8 @@ add_executable(ajokki
     code/app/app_console_callbacks.hpp
     code/app/app_debug.cpp
     code/app/app_debug.hpp
+    code/app/app_framebuffer.cpp
+    code/app/app_framebuffer.hpp
     code/app/app_keyboard_callbacks.cpp
     code/app/app_keyboard_callbacks.hpp
     code/app/app_location_and_orientation.cpp
@@ -727,6 +729,8 @@ add_executable(hirvi
     code/app/app_console_callbacks.hpp
     code/app/app_debug.cpp
     code/app/app_debug.hpp
+    code/app/app_framebuffer.cpp
+    code/app/app_framebuffer.hpp
     code/app/app_keyboard_callbacks.cpp
     code/app/app_keyboard_callbacks.hpp
     code/app/app_location_and_orientation.cpp

@@ -46,7 +46,6 @@
 #include "family_templates.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/pi.hpp"
-#include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -87,6 +86,11 @@
 
 namespace yli
 {
+    namespace config
+    {
+        class Setting;
+    }
+
     namespace ontology
     {
         class Species;
@@ -270,7 +274,7 @@ namespace yli
 
         void Universe::render_without_changing_depth_test()
         {
-            if (!this->should_be_rendered)
+            if (this->is_headless || !this->should_be_rendered)
             {
                 return;
             }
@@ -454,6 +458,26 @@ namespace yli
             {
                 this->console->adjust_n_rows();
             }
+        }
+
+        uint32_t Universe::get_framebuffer_width() const
+        {
+            return this->framebuffer_width;
+        }
+
+        void Universe::set_framebuffer_width(const uint32_t framebuffer_width)
+        {
+            this->framebuffer_width = framebuffer_width;
+        }
+
+        uint32_t Universe::get_framebuffer_height() const
+        {
+            return this->framebuffer_height;
+        }
+
+        void Universe::set_framebuffer_height(const uint32_t framebuffer_height)
+        {
+            this->framebuffer_height = framebuffer_height;
         }
 
         std::size_t Universe::get_text_size() const

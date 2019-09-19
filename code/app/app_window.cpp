@@ -16,8 +16,8 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "app_window.hpp"
-#include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
+#include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 
 // Include standard headers
@@ -29,16 +29,14 @@ namespace app
     {
         yli::config::SettingStruct window_width_setting_struct(std::make_shared<yli::common::AnyValue>(window_width));
         window_width_setting_struct.name = "window_width";
-        window_width_setting_struct.setting_master = setting_master;
         window_width_setting_struct.activate_callback = &yli::config::SettingMaster::activate_window_size;
         window_width_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        new yli::config::Setting(window_width_setting_struct);
+        setting_master->create_setting(window_width_setting_struct);
 
         yli::config::SettingStruct window_height_setting_struct(std::make_shared<yli::common::AnyValue>(window_height));
         window_height_setting_struct.name = "window_height";
-        window_height_setting_struct.setting_master = setting_master;
         window_height_setting_struct.activate_callback = &yli::config::SettingMaster::activate_window_size;
         window_height_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        new yli::config::Setting(window_height_setting_struct);
+        setting_master->create_setting(window_height_setting_struct);
     }
 }

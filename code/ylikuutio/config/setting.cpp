@@ -34,12 +34,12 @@ namespace yli
             yli::hierarchy::bind_child_to_parent<yli::config::Setting*>(this, this->parent->setting_pointer_vector, this->parent->free_settingID_queue, this->parent->number_of_settings);
         }
 
-        Setting::Setting(const yli::config::SettingStruct& setting_struct)
+        Setting::Setting(yli::config::SettingMaster* const setting_master, const yli::config::SettingStruct& setting_struct)
         {
             // constructor.
             this->name = setting_struct.name;
             this->setting_value = setting_struct.initial_value;
-            this->parent = setting_struct.setting_master;
+            this->parent = setting_master;
             this->activate_callback = setting_struct.activate_callback;
             this->read_callback = setting_struct.read_callback;
             this->childID = std::numeric_limits<std::size_t>::max();

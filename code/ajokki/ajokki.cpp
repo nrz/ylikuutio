@@ -34,6 +34,7 @@
 #include "ajokki_joensuu_center_west_scene.hpp"
 #include "ajokki_tallinn_scene.hpp"
 #include "code/app/app_window.hpp"
+#include "code/app/app_framebuffer.hpp"
 #include "code/app/app_background_colors.hpp"
 #include "code/app/app_console_callbacks.hpp"
 #include "code/app/app_keyboard_callbacks.hpp"
@@ -66,7 +67,6 @@
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
-#include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -120,7 +120,7 @@ int main(const int argc, const char* const argv[])
         return 1;
     }
 
-    const std::vector<std::string> valid_keys { "help", "version", "window_width", "window_height" };
+    const std::vector<std::string> valid_keys { "help", "version", "window_width", "window_height", "framebuffer_width", "framebuffer_height" };
 
     const std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
 
@@ -176,6 +176,22 @@ int main(const int argc, const char* const argv[])
         universe_struct.window_height = yli::string::extract_uint32_t_value_from_string(window_height, index, nullptr, nullptr);
     }
 
+    if (command_line_master.is_key("framebuffer_width") &&
+            yli::string::check_if_unsigned_integer_string(command_line_master.get_value("framebuffer_width")))
+    {
+        const std::string framebuffer_width = command_line_master.get_value("framebuffer_width");
+        std::size_t index = 0;
+        universe_struct.framebuffer_width = yli::string::extract_uint32_t_value_from_string(framebuffer_width, index, nullptr, nullptr);
+    }
+
+    if (command_line_master.is_key("framebuffer_height") &&
+            yli::string::check_if_unsigned_integer_string(command_line_master.get_value("framebuffer_height")))
+    {
+        const std::string framebuffer_height = command_line_master.get_value("framebuffer_height");
+        std::size_t index = 0;
+        universe_struct.framebuffer_height = yli::string::extract_uint32_t_value_from_string(framebuffer_height, index, nullptr, nullptr);
+    }
+
     universe_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
     universe_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &current_keyrelease_callback_engine_vector_pointer;
     yli::ontology::Universe* const my_universe = new yli::ontology::Universe(universe_struct);
@@ -183,16 +199,17 @@ int main(const int argc, const char* const argv[])
 
     yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
 
-    yli::audio::AudioMaster* audio_master = my_universe->get_audio_master();
+    yli::config::SettingMaster* const setting_master = my_universe->get_setting_master();
+
+    yli::audio::AudioMaster* const audio_master = my_universe->get_audio_master();
 
     const float earth_radius = 6371.0f; // in kilometres
 
     yli::config::SettingStruct planet_radius_setting_struct(std::make_shared<yli::common::AnyValue>(earth_radius));
     planet_radius_setting_struct.name = "planet_radius";
-    planet_radius_setting_struct.setting_master = my_universe->get_setting_master();
     planet_radius_setting_struct.activate_callback = &yli::config::SettingMaster::activate_planet_radius; // planet radius may be for a planet or a moon.
     planet_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-    new yli::config::Setting(planet_radius_setting_struct);
+    setting_master->create_setting(planet_radius_setting_struct);
 
     std::cout << "Creating yli::callback_system::CallbackEngine* cleanup_callback_engine ...\n";
     yli::callback_system::CallbackEngine cleanup_callback_engine = yli::callback_system::CallbackEngine();
@@ -912,6 +929,8 @@ int main(const int argc, const char* const argv[])
 
     std::cout << "Setting up window size ...\n";
     app::set_window_size(my_universe->get_setting_master(), my_universe->get_window_width(), my_universe->get_window_height());
+    std::cout << "Setting up framebuffer size ...\n";
+    app::set_framebuffer_size(my_universe->get_setting_master(), my_universe->get_framebuffer_width(), my_universe->get_framebuffer_height());
     std::cout << "Setting up background colors ...\n";
     app::set_background_colors(my_universe->get_setting_master(), 0.0f, 0.0f, 1.0f, 0.0f);
     std::cout << "Setting up wireframe state ...\n";

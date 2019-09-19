@@ -14,7 +14,7 @@ This library works perfectly with *[OpenGL](https://www.opengl.org)* but it also
 - [Intel C++ Composer](https://software.intel.com/en-us/intel-compilers) XE 2013 and higher
 - [LLVM](http://llvm.org/) 3.4 and higher
 - [Visual C++](http://www.visualstudio.com/) 2013 and higher
-- [CUDA](https://developer.nvidia.com/about-cuda) 7.0 and higher (experimental)
+- [CUDA](https://developer.nvidia.com/about-cuda) 9.0 and higher (experimental)
 - [SYCL](https://www.khronos.org/sycl/) (experimental: only [ComputeCpp](https://codeplay.com/products/computesuite/computecpp) implementation has been tested).
 - Any C++11 compiler
 
@@ -53,15 +53,17 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 
 ## Release notes
 
-### [GLM 0.9.9.6](https://github.com/g-truc/glm/tree/master)
+### [GLM 0.9.9.6](https://github.com/g-truc/glm/releases/tag/0.9.9.6) - 2019-09-08
 #### Features:
+- Added Neon support to glm #945
+- Added SYCL support #914
 - Added EXT_scalar_integer extension with power of two and multiple scalar functions
 - Added EXT_vector_integer extension with power of two and multiple vector functions
 
 #### Improvements:
-- Added SYCL support #914
 - Added Visual C++ 2019 detection
 - Added Visual C++ 2017 15.8 and 15.9 detection
+- Added missing genType check for bitCount and bitfieldReverse #893
 
 #### Fixes:
 - Fixed for g++6 where -std=c++1z sets __cplusplus to 201500 instead of 201402 #921
@@ -71,6 +73,12 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 - Fixed missing const to quaternion conversion operators #890
 - Fixed EXT_scalar_ulp and EXT_vector_ulp API coding style
 - Fixed quaternion componant order: w, {x, y, z} #916
+- Fixed GLM_HAS_CXX11_STL broken on Clang with Linux #926
+- Fixed Clang or GCC build due to wrong GLM_HAS_IF_CONSTEXPR definition #907
+- Fixed CUDA 9 build #910
+
+#### Deprecation:
+ - Removed CMake install and uninstall scripts
 
 ### [GLM 0.9.9.5](https://github.com/g-truc/glm/releases/tag/0.9.9.5) - 2019-04-01
 #### Fixes:

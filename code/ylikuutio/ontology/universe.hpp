@@ -550,6 +550,18 @@ namespace yli
                 // this method sets `window_height`.
                 void set_window_height(const uint32_t window_height);
 
+                // this method returns current `framebuffer_width`.
+                uint32_t get_framebuffer_width() const;
+
+                // this method sets `framebuffer_width`.
+                void set_framebuffer_width(const uint32_t framebuffer_width);
+
+                // this method returns current `framebuffer_height`.
+                uint32_t get_framebuffer_height() const;
+
+                // this method sets `framebuffer_height`.
+                void set_framebuffer_height(const uint32_t framebuffer_height);
+
                 // this method returns current `text_size`.
                 std::size_t get_text_size() const;
 
