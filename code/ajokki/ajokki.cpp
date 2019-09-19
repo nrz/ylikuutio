@@ -185,7 +185,7 @@ int main(const int argc, const char* const argv[])
 
     yli::config::SettingMaster* const setting_master = my_universe->get_setting_master();
 
-    yli::audio::AudioMaster* audio_master = my_universe->get_audio_master();
+    yli::audio::AudioMaster* const audio_master = my_universe->get_audio_master();
 
     const float earth_radius = 6371.0f; // in kilometres
 
