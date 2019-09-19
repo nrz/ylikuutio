@@ -17,6 +17,7 @@
 
 #include "setting_master.hpp"
 #include "setting.hpp"
+#include "setting_struct.hpp"
 #include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
@@ -60,6 +61,11 @@ namespace yli
         SettingMaster::~SettingMaster()
         {
             // destructor.
+        }
+
+        void SettingMaster::create_setting(const yli::config::SettingStruct& setting_struct)
+        {
+            new yli::config::Setting(this, setting_struct);
         }
 
         bool SettingMaster::is_setting(const std::string& setting_name) const

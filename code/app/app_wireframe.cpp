@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "app_wireframe.hpp"
-#include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
@@ -30,9 +29,8 @@ namespace app
     {
         yli::config::SettingStruct wireframe_setting_struct(std::make_shared<yli::common::AnyValue>(use_wireframe));
         wireframe_setting_struct.name = "wireframe";
-        wireframe_setting_struct.setting_master = setting_master;
         wireframe_setting_struct.activate_callback = &yli::config::SettingMaster::activate_wireframe;
         wireframe_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        new yli::config::Setting(wireframe_setting_struct);
+        setting_master->create_setting(wireframe_setting_struct);
     }
 }

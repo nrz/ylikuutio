@@ -18,6 +18,8 @@
 #ifndef __SETTING_MASTER_HPP_INCLUDED
 #define __SETTING_MASTER_HPP_INCLUDED
 
+#include "setting_struct.hpp"
+
 // Include standard headers
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <queue>         // std::queue
@@ -54,6 +56,8 @@ namespace yli
 
                 // destructor.
                 ~SettingMaster();
+
+                void create_setting(const yli::config::SettingStruct& setting_struct);
 
                 // does setting `setting` exist?
                 bool is_setting(const std::string& setting_name) const;

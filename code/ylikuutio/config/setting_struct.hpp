@@ -34,13 +34,10 @@ namespace yli
 
     namespace config
     {
-        class SettingMaster;
-
         struct SettingStruct
         {
             SettingStruct(std::shared_ptr<yli::common::AnyValue> initial_value)
                 : initial_value(initial_value),
-                setting_master(nullptr),
                 activate_callback(nullptr),
                 read_callback(nullptr),
                 should_ylikuutio_call_activate_callback_now(true)
@@ -49,7 +46,6 @@ namespace yli
             }
             std::string name;
             std::shared_ptr<yli::common::AnyValue> initial_value;
-            yli::config::SettingMaster* setting_master;
             ActivateCallback activate_callback;
             ReadCallback read_callback;
             bool should_ylikuutio_call_activate_callback_now;

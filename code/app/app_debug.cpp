@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "app_debug.hpp"
-#include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
@@ -31,10 +30,9 @@ namespace app
         std::shared_ptr<yli::common::AnyValue> any_value_is_flight_mode_in_use = std::make_shared<yli::common::AnyValue>(is_flight_mode_in_use);
         yli::config::SettingStruct is_flight_mode_in_use_setting_struct(any_value_is_flight_mode_in_use);
         is_flight_mode_in_use_setting_struct.name = "is_flight_mode_in_use";
-        is_flight_mode_in_use_setting_struct.setting_master = setting_master;
         is_flight_mode_in_use_setting_struct.activate_callback = &yli::config::SettingMaster::activate_is_flight_mode_in_use;
         is_flight_mode_in_use_setting_struct.read_callback = &yli::config::SettingMaster::read_is_flight_mode_in_use;
         is_flight_mode_in_use_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        new yli::config::Setting(is_flight_mode_in_use_setting_struct);
+        setting_master->create_setting(is_flight_mode_in_use_setting_struct);
     }
 }

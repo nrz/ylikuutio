@@ -67,7 +67,6 @@
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
-#include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -184,16 +183,17 @@ int main(const int argc, const char* const argv[])
 
     yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
 
+    yli::config::SettingMaster* const setting_master = my_universe->get_setting_master();
+
     yli::audio::AudioMaster* audio_master = my_universe->get_audio_master();
 
     const float earth_radius = 6371.0f; // in kilometres
 
     yli::config::SettingStruct planet_radius_setting_struct(std::make_shared<yli::common::AnyValue>(earth_radius));
     planet_radius_setting_struct.name = "planet_radius";
-    planet_radius_setting_struct.setting_master = my_universe->get_setting_master();
     planet_radius_setting_struct.activate_callback = &yli::config::SettingMaster::activate_planet_radius; // planet radius may be for a planet or a moon.
     planet_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-    new yli::config::Setting(planet_radius_setting_struct);
+    setting_master->create_setting(planet_radius_setting_struct);
 
     std::cout << "Creating yli::callback_system::CallbackEngine* cleanup_callback_engine ...\n";
     yli::callback_system::CallbackEngine cleanup_callback_engine = yli::callback_system::CallbackEngine();
