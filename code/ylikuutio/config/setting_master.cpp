@@ -17,7 +17,6 @@
 
 #include "setting_master.hpp"
 #include "setting.hpp"
-#include "setting_struct.hpp"
 #include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
@@ -51,6 +50,8 @@ namespace yli
 
     namespace config
     {
+        struct SettingStruct;
+
         SettingMaster::SettingMaster(yli::ontology::Entity* const entity)
         {
             // costructor.

@@ -18,7 +18,6 @@
 #ifndef __SETTING_HPP_INCLUDED
 #define __SETTING_HPP_INCLUDED
 
-#include "setting_struct.hpp"
 #include "activate_callback.hpp"
 #include "read_callback.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -40,6 +39,7 @@ namespace yli
     namespace config
     {
         class SettingMaster;
+        struct SettingStruct;
 
         class Setting
         {
