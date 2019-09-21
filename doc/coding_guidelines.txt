@@ -25,21 +25,24 @@ General
 * Prefer `uint8_t` to `unsigned char`.
 * Prefer `int32_t` to `int`.
 * Prefer `int64_t` to `long long`.
+* Prefer `uint32_t` to `unsigned int`.
+* Prefer `uint64_t` to `unsigned long long`.
 * Use `std::size_t` variables for file size variables.
   Do not expect that any file is smaller than 4 GiB.
 * Do not expect any size for any C++ standard variable type.
-  Always cast when converting eg. `int` to `int32_t`.
+  Always cast when converting e.g. `int` to `int32_t`.
 * Always set sane default values for member variables of `struct`s
-  passed as function parameters in non-real-time code.
+  passed as function parameters.
 * Prefer `typedef struct MyStruct` to repeating `struct MyStruct`.
 * Always directly `#include` everything what is needed in the compilation
   unit. Do not expect any `#include`d file to `#include` anything.
+* Always use forward reference instead of `#include`, if possible.
 * Try to keep source code headers clear of code. Unfortunately,
   function templates and delegating constructors need to be in headers.
 * Avoid polluting the global namespace. Use your own `namespace`.
 * Prefer C++-style functions over C-style functions.
 * Prefer virtual functions to function templates.
-  Use function templates where needed eg. for speed.
+  Use function templates where needed e.g. for speed.
 * Prefer `std::shared_ptr` and `std::make_shared` to raw pointers.
 * Prefer references to pointers.
 * Use `const` for variables and member functions wherever it's appropriate.
@@ -48,6 +51,9 @@ General
 * For function parameters always use `const FooStruct&` instead of `FooStruct`, if possible.
 * For function parameters prefer `const FooStruct&` instead of more than 5 parameters.
 * Maintaining compatibility with 32-bit systems is not a priority.
+* Minimize the use of `new` and `delete`.
+* Write creator functions (e.g. `SettingMaster::create_setting`) for the necessary `new`.
+* Do not use `malloc` or `free`, unless absolutely necessary.
 
 Security-related
 * Do not make any assumptions that input is valid or sensible.
@@ -60,6 +66,7 @@ Security-related
   See commit b0bd1607bace941bb42088e1d56aaa38b166c97e for an example.
 * Avoid void pointers (`void*`).
 * Aim for stability. Code defensively.
+* Avoid libraries with known vulnerabilities.
 
 Real-time-code specific issues
 * In real-time code, prefer 32-bit variables (due to speed on amd64).
