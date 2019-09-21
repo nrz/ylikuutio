@@ -99,7 +99,7 @@ namespace yli
 
         void Universe::bind_entity(yli::ontology::Entity* const entity)
         {
-            // no-op when called during initialization of the Entity base class of Universe itself
+            // no-op when called during initialization of the `Entity` base class of `Universe` itself.
             if (entity == this)
             {
                 return;
