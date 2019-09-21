@@ -33,6 +33,20 @@ TEST(any_struct_must_be_initialized_appropriately, no_fields)
     ASSERT_TRUE(fieldnames.empty());
 }
 
+TEST(any_struct_must_be_initialized_appropriately, field_must_not_exist)
+{
+    yli::common::AnyStruct empty_any_struct = yli::common::AnyStruct();
+    const std::string foo_target = "foo";
+    ASSERT_FALSE(empty_any_struct.check_if_exist(foo_target));
+}
+
+TEST(any_struct_must_be_initialized_appropriately, erase_data_must_fail_for_nonexisting_field)
+{
+    yli::common::AnyStruct empty_any_struct = yli::common::AnyStruct();
+    const std::string foo_target = "foo";
+    ASSERT_FALSE(empty_any_struct.erase_data(foo_target));
+}
+
 TEST(any_struct_must_function_appropriately, enter_data_simple)
 {
     yli::common::AnyStruct any_struct = yli::common::AnyStruct();
