@@ -27,7 +27,6 @@
 
 // Include standard headers
 #include <cstring>    // std::memcmp, std::strcmp, std::strlen, std::strncmp
-#include <inttypes.h> // PRId32, PRId64, PRIu32, PRIu64, PRIx32, PRIx64
 #include <iostream>   // std::cout, std::cin, std::cerr
 #include <memory>     // std::make_shared, std::shared_ptr
 #include <sstream>    // std::istringstream, std::ostringstream, std::stringstream
