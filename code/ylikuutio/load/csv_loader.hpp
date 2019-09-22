@@ -40,9 +40,9 @@ namespace yli
                     std::size_t& data_size)
             {
                 // Open the file
-                const std::string file_content = yli::file::slurp(csv_filename);
+                std::shared_ptr<std::string> file_content = yli::file::slurp(csv_filename);
 
-                if (file_content.empty())
+                if (file_content == nullptr || file_content->empty())
                 {
                     std::cerr << csv_filename << " could not be opened, or the file is empty.\n";
                     return nullptr;
@@ -67,14 +67,14 @@ namespace yli
 
                 std::shared_ptr<std::vector<T1>> data_vector = std::make_shared<std::vector<T1>>();
 
-                while (file_content_i < file_content.size())
+                while (file_content_i < file_content->size())
                 {
                     // All possible block identifier strings.
                     const std::vector<std::string> whitespace_strings = { ",", " ", "\n" };
 
-                    while (yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, whitespace_strings))
+                    while (yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, whitespace_strings))
                     {
-                        if (file_content_i < file_content.size() && file_content[file_content_i] == '\n')
+                        if (file_content_i < file_content->size() && (*file_content)[file_content_i] == '\n')
                         {
                             // Newline was found.
                             if (n_elements_in_current_line > 0)
@@ -103,17 +103,17 @@ namespace yli
                         file_content_i++;
                     }
 
-                    if (file_content_i >= file_content.size())
+                    if (file_content_i >= file_content->size())
                     {
                         break;
                     }
 
                     T1 value = 0;
-                    yli::string::extract_value_from_string(file_content, file_content_i, char_end_string, nullptr, value);
+                    yli::string::extract_value_from_string(*file_content, file_content_i, char_end_string, nullptr, value);
                     data_vector->push_back(value);
                     n_elements_in_current_line++;
 
-                    while (file_content_i < file_content.size() && !yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, whitespace_strings))
+                    while (file_content_i < file_content->size() && !yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, whitespace_strings))
                     {
                         file_content_i++;
                     }

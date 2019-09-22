@@ -31,6 +31,7 @@ typedef unsigned char u8;
 // Include standard headers
 #include <cstddef>       // std::size_t
 #include <iostream>      // std::cout, std::cin, std::cerr
+#include <memory>        // std::make_shared, std::shared_ptr
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
@@ -65,11 +66,17 @@ namespace yli
             // };
             //
             // IScene* load(const u8* data, int size)
-            const std::vector<uint8_t> data_vector = yli::file::binary_slurp(filename);
+            std::shared_ptr<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
+
+            if (data_vector == nullptr || data_vector->empty())
+            {
+                std::cerr << filename << " could not be opened, or the file is empty.\n";
+                return false;
+            }
 
             // OpenFBX wants `u8` == `unsigned char`.
-            const u8* data = reinterpret_cast<const u8*>(data_vector.data());
-            const int64_t size = data_vector.size();
+            const u8* data = reinterpret_cast<const u8*>(data_vector->data());
+            const int64_t size = data_vector->size();
 
             if (is_debug_mode)
             {

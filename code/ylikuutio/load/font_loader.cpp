@@ -27,8 +27,8 @@
 
 // Include standard headers
 #include <cstring>    // std::memcmp, std::strcmp, std::strlen, std::strncmp
-#include <inttypes.h> // PRId32, PRId64, PRIu32, PRIu64, PRIx32, PRIx64
 #include <iostream>   // std::cout, std::cin, std::cerr
+#include <memory>     // std::make_shared, std::shared_ptr
 #include <sstream>    // std::istringstream, std::ostringstream, std::stringstream
 #include <string>     // std::string
 #include <vector>     // std::vector
@@ -452,8 +452,8 @@ namespace yli
                 std::vector<std::string>& unicode_strings,
                 const bool is_debug_mode)
         {
-            std::string file_content = yli::file::slurp(font_file_path);
-            const uint64_t file_size = file_content.size();
+            std::shared_ptr<std::string> file_content = yli::file::slurp(font_file_path);
+            const uint64_t file_size = file_content->size();
             char* SVG_data = new char[file_size];
 
             if (SVG_data == nullptr)
@@ -462,7 +462,7 @@ namespace yli
                 return false;
             }
 
-            std::strncpy(SVG_data, file_content.c_str(), file_size);
+            std::strncpy(SVG_data, file_content->c_str(), file_size);
 
             bool is_first_glyph_found;
 

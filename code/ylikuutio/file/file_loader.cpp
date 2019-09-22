@@ -21,6 +21,7 @@
 #include <fstream>  // std::ifstream
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <iterator> // std::istream_iterator
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -30,31 +31,43 @@ namespace yli
 {
     namespace file
     {
-        std::string slurp(const std::string& file_path)
+        std::shared_ptr<std::string> slurp(const std::string& file_path)
         {
             // inspired by http://stackoverflow.com/questions/116038/what-is-the-best-way-to-slurp-a-file-into-a-stdstring-in-c/116220#116220
             std::cout << "Loading file " << file_path << " into memory.\n";
 
             std::ifstream input_stream(file_path.c_str());
+
+            if (input_stream.fail())
+            {
+                return nullptr;
+            }
+
             std::stringstream file_buffer;
             file_buffer << input_stream.rdbuf();
-            std::string file_contents_string = file_buffer.str();
-            return file_contents_string;
+            std::shared_ptr<std::string> file_contents = std::make_shared<std::string>(file_buffer.str());
+            return file_contents;
         }
 
-        std::vector<uint8_t> binary_slurp(const std::string& file_path)
+        std::shared_ptr<std::vector<uint8_t>> binary_slurp(const std::string& file_path)
         {
             std::cout << "Loading binary file " << file_path << " into memory.\n";
 
             std::ifstream file(file_path.c_str(), std::fstream::binary);
+
+            if (file.fail())
+            {
+                return nullptr;
+            }
+
             file.unsetf(std::ios::skipws);           // do not skip whitespace.
             file.seekg(0, std::ios::end);
             std::streampos file_size = file.tellg();
             file.seekg(0, std::ios::beg);
-            std::vector<uint8_t> data_vector;
-            data_vector.reserve(file_size);
-            data_vector.insert(
-                    data_vector.begin(),
+            std::shared_ptr<std::vector<uint8_t>> data_vector = std::make_shared<std::vector<uint8_t>>();
+            data_vector->reserve(file_size);
+            data_vector->insert(
+                    data_vector->begin(),
                     std::istream_iterator<uint8_t>(file),
                     std::istream_iterator<uint8_t>());
             return data_vector;

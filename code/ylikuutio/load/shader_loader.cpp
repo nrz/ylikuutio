@@ -26,6 +26,7 @@
 
 // Include standard headers
 #include <iostream>  // std::cout, std::cin, std::cerr
+#include <memory>    // std::make_shared, std::shared_ptr
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 #include <vector>    // std::vector
@@ -41,17 +42,17 @@ namespace yli
             const uint32_t fragment_shaderID = glCreateShader(GL_FRAGMENT_SHADER);
 
             // Read the vertex shader code from the file.
-            const std::string vertex_shader_code = yli::file::slurp(vertex_file_path);
+            std::shared_ptr<std::string> vertex_shader_code = yli::file::slurp(vertex_file_path);
 
             // Read the fragment shader code from the file.
-            const std::string fragment_shader_code = yli::file::slurp(fragment_file_path);
+            std::shared_ptr<std::string> fragment_shader_code = yli::file::slurp(fragment_file_path);
 
             GLint result = GL_FALSE;
             int info_log_length;
 
             // Compile vertex shader.
             std::cout << "Compiling vertex shader: " << vertex_file_path << "\n";
-            const char* const vertex_source_pointer = vertex_shader_code.c_str();
+            const char* const vertex_source_pointer = vertex_shader_code->c_str();
             glShaderSource(vertex_shaderID, 1, &vertex_source_pointer, nullptr);
             glCompileShader(vertex_shaderID);
 
@@ -69,7 +70,7 @@ namespace yli
 
             // Compile fragment shader.
             std::cout << "Compiling fragment shader: " << fragment_file_path << "\n";
-            const char* const fragment_source_pointer = fragment_shader_code.c_str();
+            const char* const fragment_source_pointer = fragment_shader_code->c_str();
             glShaderSource(fragment_shaderID, 1, &fragment_source_pointer, nullptr);
             glCompileShader(fragment_shaderID);
 

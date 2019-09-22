@@ -30,6 +30,7 @@
 #include <cstddef>   // std::size_t
 #include <cstring>   // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream>  // std::cout, std::cin, std::cerr
+#include <memory>    // std::make_shared, std::shared_ptr
 #include <sstream>   // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
@@ -48,9 +49,9 @@ namespace yli
             std::cout << "Loading OBJ file " << obj_file_name << " ...\n";
 
             // Open the file
-            const std::string file_content = yli::file::slurp(obj_file_name);
+            std::shared_ptr<std::string> file_content = yli::file::slurp(obj_file_name);
 
-            if (file_content.empty())
+            if (file_content->empty())
             {
                 std::cerr << obj_file_name << " could not be opened, or the file is empty.\n";
                 return false;
@@ -71,7 +72,7 @@ namespace yli
                 // Read until any non-whitespace character.
                 while (true)
                 {
-                    if (!yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, whitespace_vector))
+                    if (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, whitespace_vector))
                     {
                         // Not whitespace.
                         break;
@@ -80,7 +81,7 @@ namespace yli
                     file_content_i++;
                 }
 
-                if (file_content_i >= file_content.size())
+                if (file_content_i >= file_content->size())
                 {
                     std::cout << obj_file_name << " ends in a line consisting only of whitespace.\n";
                     break;
@@ -89,7 +90,7 @@ namespace yli
                 // OK, non-whitespace found.
                 std::string current_line_string;
                 const char* newline_char_end_string = "\n";
-                yli::string::extract_string_with_several_endings(file_content, file_content_i, current_line_string, newline_char_end_string);
+                yli::string::extract_string_with_several_endings(*file_content, file_content_i, current_line_string, newline_char_end_string);
 
                 // Replace slashes `'/'` with space `' '`, to make string processing easier.
                 std::replace(current_line_string.begin(), current_line_string.end(), '/', ' ');
@@ -191,7 +192,7 @@ namespace yli
                 const std::vector<std::string> endline_vector = { "\n", "\r" };
 
                 // Read until any non-whitespace character.
-                while (yli::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, endline_vector));
+                while (yli::string::check_and_report_if_some_string_matches(*file_content, ++file_content_i, endline_vector));
             }
 
             // For each vertex of each triangle

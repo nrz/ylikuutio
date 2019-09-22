@@ -41,6 +41,7 @@
 #include <cmath>    // NAN, std::isnan, std::pow, floor, ceil
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string, std::stoi
 #include <vector>   // std::vector
@@ -86,9 +87,9 @@ namespace yli
             }
 
             // Open the file
-            const std::string file_content = yli::file::slurp(ascii_grid_filename);
+            std::shared_ptr<std::string> file_content = yli::file::slurp(ascii_grid_filename);
 
-            if (file_content.empty())
+            if (file_content == nullptr || file_content->empty())
             {
                 std::cerr << "ERROR: " << ascii_grid_filename << " could not be opened, or the file is empty.\n";
                 return false;
@@ -99,68 +100,68 @@ namespace yli
             // All possible block identifier strings.
             const std::vector<std::string> number_strings_vector = { "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-            while (!yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
+            while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
             {
                 file_content_i++;
             }
 
             const int32_t image_width_int32_t = yli::string::extract_int32_t_value_from_string(
-                    file_content,
+                    *file_content,
                     file_content_i,
                     (const char* const) " \n",
                     (const char* const) "ncols");
 
-            while (!yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
+            while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
             {
                 file_content_i++;
             }
 
             const int32_t image_height_int32_t = yli::string::extract_int32_t_value_from_string(
-                    file_content,
+                    *file_content,
                     file_content_i,
                     (const char* const) " \n",
                     (const char* const) "nrows");
 
-            while (!yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
+            while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
             {
                 file_content_i++;
             }
 
             yli::string::extract_float_value_from_string(
-                    file_content,
+                    *file_content,
                     file_content_i,
                     (const char* const) " \n",
                     (const char* const) "xllcorner");
 
-            while (!yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
+            while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
             {
                 file_content_i++;
             }
 
             yli::string::extract_float_value_from_string(
-                    file_content,
+                    *file_content,
                     file_content_i,
                     (const char* const) " \n",
                     (const char* const) "yllcorner");
 
-            while (!yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
+            while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
             {
                 file_content_i++;
             }
 
             yli::string::extract_float_value_from_string(
-                    file_content,
+                    *file_content,
                     file_content_i,
                     (const char* const) " \n",
                     (const char* const) "cellsize");
 
-            while (!yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
+            while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
             {
                 file_content_i++;
             }
 
             yli::string::extract_float_value_from_string(
-                    file_content,
+                    *file_content,
                     file_content_i,
                     (const char* const) " \n",
                     (const char* const) "nodata_value");
@@ -209,13 +210,13 @@ namespace yli
 
                 for (std::size_t x = 0; x < image_width; x++)
                 {
-                    while (!yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
+                    while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
                     {
                         file_content_i++;
                     }
 
                     *vertex_pointer++ = yli::string::extract_float_value_from_string(
-                            file_content,
+                            *file_content,
                             file_content_i,
                             (const char* const) " \n",
                             (const char* const) nullptr);
