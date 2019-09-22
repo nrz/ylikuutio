@@ -28,7 +28,7 @@ namespace yli
 {
     namespace file
     {
-        std::string slurp(const std::string& file_path);
+        std::shared_ptr<std::string> slurp(const std::string& file_path);
         std::shared_ptr<std::vector<uint8_t>> binary_slurp(const std::string& file_path);
     }
 }

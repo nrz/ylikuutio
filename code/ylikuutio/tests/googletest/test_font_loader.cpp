@@ -28,6 +28,7 @@
 // Include standard headers
 #include <cstring> // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <stdint.h> // uint32_t etc.
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <string>  // std::string
 #include <vector>  // std::vector
 
@@ -35,11 +36,11 @@ TEST(glyphs_must_be_found_appropriately, kongtext_svg)
 {
     const std::string font_filename = "kongtext.svg";
 
-    const std::string file_content = yli::file::slurp(font_filename);
-    const uint64_t file_size = file_content.size();
+    std::shared_ptr<std::string> file_content = yli::file::slurp(font_filename);
+    const uint64_t file_size = file_content->size();
     char* const SVG_data = new char[file_size];
     ASSERT_NE(SVG_data, nullptr);
-    std::strncpy(SVG_data, file_content.c_str(), file_size);
+    std::strncpy(SVG_data, file_content->c_str(), file_size);
 
     const char* const SVG_base_pointer = SVG_data;
     char* SVG_data_pointer = SVG_data; 
