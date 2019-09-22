@@ -48,6 +48,12 @@ namespace yli
             std::cout << "Loading binary file " << file_path << " into memory.\n";
 
             std::ifstream file(file_path.c_str(), std::fstream::binary);
+
+            if (file.fail())
+            {
+                return nullptr;
+            }
+
             file.unsetf(std::ios::skipws);           // do not skip whitespace.
             file.seekg(0, std::ios::end);
             std::streampos file_size = file.tellg();
