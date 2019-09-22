@@ -25,6 +25,18 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
+TEST(file_must_be_slurped_appropriately, this_file_does_not_exist_at_all)
+{
+    const std::string file_content = yli::file::slurp("this_file_does_not_exist_at_all");
+    ASSERT_EQ(file_content.size(), 0);
+}
+
+TEST(binary_file_must_be_slurped_appropriately, this_file_does_not_exist_at_all)
+{
+    std::shared_ptr<std::vector<uint8_t>> file_content = yli::file::binary_slurp("this_file_does_not_exist_at_all");
+    ASSERT_EQ(file_content, nullptr);
+}
+
 TEST(file_must_be_slurped_appropriately, kongtext_svg)
 {
     const std::string file_content = yli::file::slurp("kongtext.svg");
