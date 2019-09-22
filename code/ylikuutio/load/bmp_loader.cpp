@@ -24,6 +24,7 @@
 #include <cstddef>   // std::size_t
 #include <iostream>  // std::cout, std::cin, std::cerr
 #include <limits>    // std::numeric_limits
+#include <memory>    // std::make_shared, std::shared_ptr
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 #include <vector>    // std::vector
@@ -41,9 +42,9 @@ namespace yli
             std::cout << "Loading BMP file " << bmp_filename << " ...\n";
 
             // Open the file
-            const std::vector<uint8_t> file_content = yli::file::binary_slurp(bmp_filename);
+            std::shared_ptr<std::vector<uint8_t>> file_content = yli::file::binary_slurp(bmp_filename);
 
-            if (file_content.empty())
+            if (file_content == nullptr || file_content->empty())
             {
                 std::cerr << bmp_filename << " could not be opened, or the file is empty.\n";
                 return nullptr;
@@ -51,26 +52,26 @@ namespace yli
 
             const std::size_t header_size = 54;
 
-            if (file_content.size() < header_size)
+            if (file_content->size() < header_size)
             {
                 // BMP header size is 54 bytes.
                 std::cerr << bmp_filename << " is not a correct BMP file.\n";
                 return nullptr;
             }
 
-            if (file_content[0] != 'B' || file_content[1] != 'M')
+            if ((*file_content)[0] != 'B' || (*file_content)[1] != 'M')
             {
                 // BMP begins always with "BM".
                 std::cerr << bmp_filename << " is not a correct BMP file.\n";
                 return nullptr;
             }
 
-            uint8_t* file_content_uint8_t = (uint8_t*) file_content.data();
+            uint8_t* file_content_uint8_t = (uint8_t*) file_content->data();
 
             // The start offset of pixel array in file.
             uint32_t pixel_array_start_offset = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content_uint8_t, 0x0a);
 
-            if (pixel_array_start_offset >= file_content.size())
+            if (pixel_array_start_offset >= file_content->size())
             {
                 std::cerr << "is not a correct BMP file.\n";
                 return nullptr;
@@ -152,7 +153,7 @@ namespace yli
             }
 
             std::cout << "Copying image data ...\n";
-            std::copy(file_content.begin() + pixel_array_start_offset, file_content.end(), image_data);
+            std::copy(file_content->begin() + pixel_array_start_offset, file_content->end(), image_data);
             std::cout << "Image data copied.\n";
 
             return image_data;

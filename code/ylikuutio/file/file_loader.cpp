@@ -21,6 +21,7 @@
 #include <fstream>  // std::ifstream
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <iterator> // std::istream_iterator
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -42,7 +43,7 @@ namespace yli
             return file_contents_string;
         }
 
-        std::vector<uint8_t> binary_slurp(const std::string& file_path)
+        std::shared_ptr<std::vector<uint8_t>> binary_slurp(const std::string& file_path)
         {
             std::cout << "Loading binary file " << file_path << " into memory.\n";
 
@@ -51,10 +52,10 @@ namespace yli
             file.seekg(0, std::ios::end);
             std::streampos file_size = file.tellg();
             file.seekg(0, std::ios::beg);
-            std::vector<uint8_t> data_vector;
-            data_vector.reserve(file_size);
-            data_vector.insert(
-                    data_vector.begin(),
+            std::shared_ptr<std::vector<uint8_t>> data_vector = std::make_shared<std::vector<uint8_t>>();
+            data_vector->reserve(file_size);
+            data_vector->insert(
+                    data_vector->begin(),
                     std::istream_iterator<uint8_t>(file),
                     std::istream_iterator<uint8_t>());
             return data_vector;

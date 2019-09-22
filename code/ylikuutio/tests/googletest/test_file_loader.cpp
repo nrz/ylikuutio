@@ -20,6 +20,7 @@
 #include "code/ylikuutio/memory/memory_templates.hpp"
 
 // Include standard headers
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -40,27 +41,28 @@ TEST(file_must_be_slurped_appropriately, kongtext_svg)
 TEST(file_must_be_slurped_appropriately, test3x3_bmp)
 {
     const std::string bmp_filename = "test3x3.bmp";
-    std::vector<uint8_t> file_content = yli::file::binary_slurp(bmp_filename);
-    const uint16_t* file_content_uint16_t = (uint16_t*) file_content.data();
+    std::shared_ptr<std::vector<uint8_t>> file_content = yli::file::binary_slurp(bmp_filename);
+    ASSERT_NE(file_content, nullptr);
+    const uint16_t* file_content_uint16_t = (uint16_t*) file_content->data();
 
     // a BMP file always begins with "BM".
-    ASSERT_EQ(file_content[0], 'B');
-    ASSERT_EQ(file_content[1], 'M');
+    ASSERT_EQ((*file_content)[0], 'B');
+    ASSERT_EQ((*file_content)[1], 'M');
 
     // size of file (0x9e == 158 bytes)
     ASSERT_EQ(file_content_uint16_t[2 / sizeof(uint16_t)], 0x9e);
     ASSERT_EQ(file_content_uint16_t[4 / sizeof(uint16_t)], 0);
     ASSERT_EQ(file_content_uint16_t[0x1a / sizeof(uint16_t)], 1); // number of color planes (must be 1)
 
-    const uint32_t magic_number_and_file_size = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content.data(), 0);
+    const uint32_t magic_number_and_file_size = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content->data(), 0);
     ASSERT_EQ(magic_number_and_file_size, 0x9e4d42);
 
-    const int32_t image_width = yli::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content.data(), 0x12); // bitmap width in pixels (`int32_t`).
+    const int32_t image_width = yli::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content->data(), 0x12); // bitmap width in pixels (`int32_t`).
     ASSERT_EQ(image_width, 3);
 
-    const int32_t image_height = yli::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content.data(), 0x16); // bitmap height in pixels (`int32_t`).
+    const int32_t image_height = yli::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content->data(), 0x16); // bitmap height in pixels (`int32_t`).
     ASSERT_EQ(image_height, 3);
 
-    const uint32_t image_size = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content.data(), 0x22); // image size.
+    const uint32_t image_size = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content->data(), 0x22); // image size.
     ASSERT_EQ(image_size, 36);
 }

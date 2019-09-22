@@ -34,6 +34,7 @@
 #endif
 
 // Include standard headers
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -43,13 +44,14 @@ typedef unsigned char u8;
 TEST(OpenFBX_must_function_appropriately, rigged_and_animated_cat)
 {
     const std::string filename = "cat.fbx";
-    std::vector<uint8_t> data_vector = yli::file::binary_slurp(filename);
-    ASSERT_EQ(data_vector.size(), 7550684);                                // size of `cat.fbx` in bytes.
+    std::shared_ptr<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
+    ASSERT_NE(data_vector, nullptr);
+    ASSERT_EQ(data_vector->size(), 7550684);                                // size of `cat.fbx` in bytes.
 
-    const u8* const data = reinterpret_cast<unsigned char*>(data_vector.data());
+    const u8* const data = reinterpret_cast<unsigned char*>(data_vector->data());
     ASSERT_NE(data, nullptr);
 
-    const int size = data_vector.size();
+    const int size = data_vector->size();
     ASSERT_EQ(size, 7550684);                                             // size of `cat.fbx` in bytes.
 
     const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size);
@@ -162,13 +164,14 @@ TEST(OpenFBX_must_function_appropriately, rigged_and_animated_cat)
 TEST(OpenFBX_must_function_appropriately, turbo_polizei)
 {
     const std::string filename = "turbo_polizei.fbx";
-    std::vector<uint8_t> data_vector = yli::file::binary_slurp(filename);
-    ASSERT_EQ(data_vector.size(), 364972);                                // size of `turbo_polizei.fbx` in bytes.
+    std::shared_ptr<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
+    ASSERT_NE(data_vector, nullptr);
+    ASSERT_EQ(data_vector->size(), 364972);                                // size of `turbo_polizei.fbx` in bytes.
 
-    const u8* const data = reinterpret_cast<unsigned char*>(data_vector.data());
+    const u8* const data = reinterpret_cast<unsigned char*>(data_vector->data());
     ASSERT_NE(data, nullptr);
 
-    const int size = data_vector.size();
+    const int size = data_vector->size();
     ASSERT_EQ(size, 364972);                                             // size of `turbo_polizei.fbx` in bytes.
 
     const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size);
@@ -291,13 +294,14 @@ TEST(fbx_file_must_be_loaded_appropriately, rigged_and_animated_cat)
 TEST(OpenFBX_must_function_appropriately, freight_train)
 {
     const std::string filename = "freight_train.fbx";
-    std::vector<uint8_t> data_vector = yli::file::binary_slurp(filename);
-    ASSERT_EQ(data_vector.size(), 426124);                                // size of `freight_train.fbx` in bytes.
+    std::shared_ptr<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
+    ASSERT_NE(data_vector, nullptr);
+    ASSERT_EQ(data_vector->size(), 426124);                                // size of `freight_train.fbx` in bytes.
 
-    const u8* const data = reinterpret_cast<unsigned char*>(data_vector.data());
+    const u8* const data = reinterpret_cast<unsigned char*>(data_vector->data());
     ASSERT_NE(data, nullptr);
 
-    const int size = data_vector.size();
+    const int size = data_vector->size();
     ASSERT_EQ(size, 426124);                                             // size of `freight_train.fbx` in bytes.
 
     const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size);
@@ -404,13 +408,14 @@ TEST(OpenFBX_must_function_appropriately, freight_train)
 TEST(OpenFBX_must_function_appropriately, fantasy_house_with_balcony)
 {
     const std::string filename = "fantasy_house_with_balcony.fbx";
-    std::vector<uint8_t> data_vector = yli::file::binary_slurp(filename);
-    ASSERT_EQ(data_vector.size(), 849020);                                // size of `fantasy_house_with_balcony.fbx` in bytes.
+    std::shared_ptr<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
+    ASSERT_NE(data_vector, nullptr);
+    ASSERT_EQ(data_vector->size(), 849020);                                // size of `fantasy_house_with_balcony.fbx` in bytes.
 
-    const u8* const data = reinterpret_cast<unsigned char*>(data_vector.data());
+    const u8* const data = reinterpret_cast<unsigned char*>(data_vector->data());
     ASSERT_NE(data, nullptr);
 
-    const int size = data_vector.size();
+    const int size = data_vector->size();
     ASSERT_EQ(size, 849020);                                             // size of `fantasy_house_with_balcony.fbx` in bytes.
 
     const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size);
