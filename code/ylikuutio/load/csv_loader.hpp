@@ -42,7 +42,7 @@ namespace yli
                 // Open the file
                 std::shared_ptr<std::string> file_content = yli::file::slurp(csv_filename);
 
-                if (file_content->empty())
+                if (file_content == nullptr || file_content->empty())
                 {
                     std::cerr << csv_filename << " could not be opened, or the file is empty.\n";
                     return nullptr;
