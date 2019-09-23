@@ -32,7 +32,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
 [ ] Find out how systemd-nspawn could be used for testing Ylikuutio.
 [ ] Implement marching cubes algorithm for voxel terrain as described in https://transvoxel.org/Lengyel-VoxelTerrain.pdf .
-[ ] Write a simple triangle drawing software (android-kolmio) for Android, using Android NDK and CMake.
+[ ] Write a simple triangle drawing application (android-kolmio) for Android, using Android NDK and CMake.
 [ ] Implement audio mixing using SDL_mixer.
 [ ] Create `audio::Sound` class, whose parent is `Entity`.
 [ ] Create `audio::PlayList` class, whose parent is `Entity`.
