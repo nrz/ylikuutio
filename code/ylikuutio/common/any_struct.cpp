@@ -119,7 +119,7 @@ namespace yli
             //    -> insert into existing `first_part` child.
             //    -> call `enter_data` recursively.
             const char separator = '.';
-            std::size_t current_data_index = data_index;
+            const std::size_t current_data_index = data_index;
             yli::string::extract_string(target, data_index, first_part, separator);
 
             if (first_part.size() == 0)
