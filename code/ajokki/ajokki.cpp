@@ -329,9 +329,6 @@ int main(const int argc, const char* const argv[])
 
     // Tallinn `Scene` ends here.
 
-    my_universe->turbo_factor = 100.0f;
-    my_universe->twin_turbo_factor = 500.0f;
-
     // Initialize our little text library with the Holstein font.
     const char* const char_g_font_texture_filename = "Holstein.bmp";
     const char* const char_g_font_texture_file_format = "bmp";
