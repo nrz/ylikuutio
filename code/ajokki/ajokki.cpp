@@ -121,7 +121,7 @@ int main(const int argc, const char* const argv[])
     }
 
     const std::vector<std::string> valid_keys {
-        "help", "version", "window_width", "window_height", "framebuffer_width", "framebuffer_height", "turbo_factor", "twin_turbo_factor" };
+        "help", "version", "window_width", "window_height", "framebuffer_width", "framebuffer_height", "speed", "turbo_factor", "twin_turbo_factor", "mouse_speed" };
 
     const std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
 
@@ -193,6 +193,14 @@ int main(const int argc, const char* const argv[])
         universe_struct.framebuffer_height = yli::string::extract_uint32_t_value_from_string(framebuffer_height, index, nullptr, nullptr);
     }
 
+    if (command_line_master.is_key("speed") &&
+            yli::string::check_if_float_string(command_line_master.get_value("speed")))
+    {
+        const std::string speed = command_line_master.get_value("speed");
+        std::size_t index = 0;
+        universe_struct.speed = yli::string::extract_float_value_from_string(speed, index, nullptr, nullptr);
+    }
+
     if (command_line_master.is_key("turbo_factor") &&
             yli::string::check_if_float_string(command_line_master.get_value("turbo_factor")))
     {
@@ -207,6 +215,14 @@ int main(const int argc, const char* const argv[])
         const std::string twin_turbo_factor = command_line_master.get_value("twin_turbo_factor");
         std::size_t index = 0;
         universe_struct.twin_turbo_factor = yli::string::extract_float_value_from_string(twin_turbo_factor, index, nullptr, nullptr);
+    }
+
+    if (command_line_master.is_key("mouse_speed") &&
+            yli::string::check_if_float_string(command_line_master.get_value("mouse_speed")))
+    {
+        const std::string mouse_speed = command_line_master.get_value("mouse_speed");
+        std::size_t index = 0;
+        universe_struct.mouse_speed = yli::string::extract_float_value_from_string(mouse_speed, index, nullptr, nullptr);
     }
 
     universe_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
@@ -950,7 +966,7 @@ int main(const int argc, const char* const argv[])
     std::cout << "Setting up wireframe state ...\n";
     app::set_wireframe(my_universe->get_setting_master(), false);
     std::cout << "Setting up movement ...\n";
-    app::set_movement(my_universe->get_setting_master(), 0.5f, my_universe->turbo_factor, my_universe->twin_turbo_factor, 0.005f);
+    app::set_movement(my_universe->get_setting_master(), my_universe->speed, my_universe->turbo_factor, my_universe->twin_turbo_factor, my_universe->mouse_speed);
     std::cout << "Setting up location and orientation ...\n";
     app::set_location_and_orientation(my_universe->get_setting_master(), -5682.32f, -1641.20f, 2376.45f, 100.0f, 100.0f, 100.0f);
     std::cout << "Setting up debug variables ...\n";
