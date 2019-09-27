@@ -2,7 +2,7 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Fixes needed:
-[ ] Fix bug that current console line is not visible after a lot of output produced eg. by `info` in a small window size.
+[ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size.
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the development of Ylikuutio:
@@ -10,7 +10,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Add support for .yli loading.
 [ ] Add support for exporting as .yli in `yli_convert`.
 [ ] Implement saving commands into a file that can later be loaded using command line parameter `--input-file` in Hirvi and Ajokki.
-[ ] Implement command line parameter `--input-file` to Hirvi and Ajokki (load keypresses and keyreleases from a file, eg. `--input-file foo` or `--input-file=foo`).
+[ ] Implement command line parameter `--input-file` to Hirvi and Ajokki (load keypresses and keyreleases from a file, e.g. `--input-file foo` or `--input-file=foo`).
 [ ] Implement command line parameter `--headless` to Hirvi and Ajokki (do not open any windows, do not render anything).
 [ ] Implement command line parameter `--debug` to Hirvi and Ajokki (log all kinds of debug information).
 [ ] Add `Scene` loading command `load` into console.
@@ -25,14 +25,14 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement support for automatic detection of optimal window size.
 [ ] Implement modifying of vertices.
 [ ] Implement frustrum culling.
-[ ] Implement generation of terrain meshes in different levels of detail (LOD) using different `x_step`s and `z_step`s (eg. 1, 2, 4, 8, 16, 32, 64, 128).
+[ ] Implement generation of terrain meshes in different levels of detail (LOD) using different `x_step`s and `z_step`s (e.g. 1, 2, 4, 8, 16, 32, 64, 128).
 [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain.
 [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain and the available video memory.
 [ ] Implement octree segmentation.
 [ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
 [ ] Find out how systemd-nspawn could be used for testing Ylikuutio.
 [ ] Implement marching cubes algorithm for voxel terrain as described in https://transvoxel.org/Lengyel-VoxelTerrain.pdf .
-[ ] Write a simple triangle drawing software (android-kolmio) for Android, using Android NDK and CMake.
+[ ] Write a simple triangle drawing application (android-kolmio) for Android, using Android NDK and CMake.
 [ ] Implement audio mixing using SDL_mixer.
 [ ] Create `audio::Sound` class, whose parent is `Entity`.
 [ ] Create `audio::PlayList` class, whose parent is `Entity`.
@@ -98,7 +98,7 @@ Less urgent:
 [ ] Implement simulation of contour detection processing in V2 (visual cortex area).
 
 Ready:
-[x] Add test VBO, eg. some kind of particle object.
+[x] Add test VBO, e.g. some kind of particle object.
 [x] Define an object class.
 [x] Add support for several vertex buffer objects (VBO).
 [x] `string.h` -> `cstring`.
@@ -109,7 +109,7 @@ Ready:
 [x] Add console (it opens with key `).
 [x] Enable naming of entities of any level in entity hierarchy.
 [x] Add scrolling into console when the 'window' gets full.
-[x] Add command `info` into console (tells about entities, eg. number of vertices of an objects etc. information).
+[x] Add command `info` into console (tells about entities, e.g. number of vertices of an objects etc. information).
 [x] Add variable `horizontal_angle`.
 [x] Add variable `vertical_angle`.
 [x] Add variable `right`.
@@ -131,7 +131,7 @@ Ready:
 [x] Rewrite `obj_loader.cpp` without `fscanf`, using instead `stringstream` for parsing.
 [x] Evaluate CHICKEN Scheme. https://www.call-cc.org/
 [x] Evaluate s7 Scheme. https://ccrma.stanford.edu/software/snd/snd/s7.html
-[x] Write code to save screenshots into a raw data file which can be opened eg. with GIMP.
+[x] Write code to save screenshots into a raw data file which can be opened e.g. with GIMP.
 [x] Add variable `text_size` (affects size of console text and other texts printed on screen).
 [x] Implement `AnyStruct`.
 [x] Implement audio using SDL (SFML does not support Android and iOS yet).
@@ -141,7 +141,7 @@ Ready:
 [x] Implement rendering into a texture (`ComputeTask`).
 [x] Implement `AnyValueEntity : public AnyValue, public Entity`.
 [x] Implement `AnyStructEntity : public AnyStruct, public Entity`.
-[x] Implement command line parameter `--window_width` to Hirvi and Ajokki (eg. `--window_width 1600`).
-[x] Implement command line parameter `--window_height` to Hirvi and Ajokki (eg. --window_height 900`).
+[x] Implement command line parameter `--window_width` to Hirvi and Ajokki (e.g. `--window_width 1600`).
+[x] Implement command line parameter `--window_height` to Hirvi and Ajokki (e.g. --window_height 900`).
 [x] Fix bug that only 2D text gets rendered when window width is less than window height.
 [x] Implement support for changing window size.

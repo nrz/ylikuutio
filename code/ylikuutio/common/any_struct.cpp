@@ -90,7 +90,7 @@ namespace yli
         bool AnyStruct::enter_data(
                 const std::string& target,
                 std::size_t& data_index,
-                std::shared_ptr<yli::common::AnyValue> any_value,
+                const std::shared_ptr<yli::common::AnyValue> any_value,
                 std::string& first_part)
         {
             // Possible cases:
@@ -119,7 +119,7 @@ namespace yli
             //    -> insert into existing `first_part` child.
             //    -> call `enter_data` recursively.
             const char separator = '.';
-            std::size_t current_data_index = data_index;
+            const std::size_t current_data_index = data_index;
             yli::string::extract_string(target, data_index, first_part, separator);
 
             if (first_part.size() == 0)

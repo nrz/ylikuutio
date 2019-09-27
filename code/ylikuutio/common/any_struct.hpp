@@ -61,7 +61,7 @@ namespace yli
                 bool enter_data(
                         const std::string& target,
                         std::size_t& data_index,
-                        std::shared_ptr<yli::common::AnyValue> any_value,
+                        const std::shared_ptr<yli::common::AnyValue> any_value,
                         std::string& first_part);
 
                 bool erase_data(

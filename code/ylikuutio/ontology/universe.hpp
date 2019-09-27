@@ -400,11 +400,10 @@ namespace yli
                     this->is_second_turbo_pressed = false;
                     this->is_exit_requested       = false;
 
-                    this->turbo_factor      = NAN;
-                    this->twin_turbo_factor = NAN;
-
-                    this->speed       = universe_struct.speed;
-                    this->mouse_speed = universe_struct.mouse_speed;
+                    this->speed             = universe_struct.speed;
+                    this->turbo_factor      = universe_struct.turbo_factor;
+                    this->twin_turbo_factor = universe_struct.twin_turbo_factor;
+                    this->mouse_speed       = universe_struct.mouse_speed;
 
                     this->gravity     = universe_struct.gravity;
                     this->fall_speed  = this->gravity;

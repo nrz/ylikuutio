@@ -42,6 +42,8 @@ namespace yli
                 font_size(16),
                 max_FPS(50000),         // default value max 50000 frames per second.
                 speed(5.0f),            // default value 5.0 units / second.
+                turbo_factor(5.0f),        // default value 5.0 x speed.
+                twin_turbo_factor(100.0f), // default value 100.0 x speed.
                 mouse_speed(0.005f),
                 gravity(9.81f / 60.0f), // default Earth gravity (9.81 m/s^2).
                 znear(1.0f),
@@ -62,6 +64,8 @@ namespace yli
             std::size_t font_size;
             std::size_t max_FPS;
             float speed;
+            float turbo_factor;
+            float twin_turbo_factor;
             float mouse_speed;
             float gravity;
             float znear;
