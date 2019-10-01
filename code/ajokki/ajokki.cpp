@@ -94,7 +94,6 @@
 #include <cstddef>       // std::size_t
 #include <iomanip>       // std::setfill, std::setprecision, std::setw
 #include <iostream>      // std::cout, std::cin, std::cerr
-#include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>      // uint32_t etc.
