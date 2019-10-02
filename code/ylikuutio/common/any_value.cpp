@@ -42,11 +42,6 @@
 
 namespace yli
 {
-    namespace console
-    {
-        class Console;
-    }
-
     namespace ontology
     {
         class Entity;
@@ -60,6 +55,7 @@ namespace yli
         class Glyph;
         class Text3D;
         class Symbiosis;
+        class Console;
     }
 
     namespace common
@@ -117,7 +113,7 @@ namespace yli
                 case (TEXT2D_POINTER):
                     return "yli::ontology::Text2D*";
                 case (CONSOLE_POINTER):
-                    return "yli::console::Console*";
+                    return "yli::ontology::Console*";
                 case (SPHERICAL_COORDINATES_STRUCT_POINTER):
                     return "yli::common::SphericalCoordinatesStruct*";
                 case (STD_STRING_POINTER):
@@ -667,7 +663,7 @@ namespace yli
 
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
-                        this->console_pointer = static_cast<yli::console::Console*>(void_pointer);
+                        this->console_pointer = static_cast<yli::ontology::Console*>(void_pointer);
                         return true;
                     }
                 case (SPHERICAL_COORDINATES_STRUCT_POINTER):
@@ -884,7 +880,7 @@ namespace yli
                 this->type = yli::common::TEXT2D_POINTER;
                 this->set_value(value_string);
             }
-            else if (type == "yli::console::Console*")
+            else if (type == "yli::ontology::Console*")
             {
                 this->type = yli::common::CONSOLE_POINTER;
                 this->set_value(value_string);
@@ -1341,7 +1337,7 @@ namespace yli
             }
         }
 
-        AnyValue::AnyValue(yli::console::Console* const console_pointer)
+        AnyValue::AnyValue(yli::ontology::Console* const console_pointer)
         {
             // constructor.
             this->set_default_values();
@@ -1349,12 +1345,12 @@ namespace yli
             this->console_pointer = console_pointer;
         }
 
-        AnyValue::AnyValue(const std::string& type, yli::console::Console* const console_pointer)
+        AnyValue::AnyValue(const std::string& type, yli::ontology::Console* const console_pointer)
         {
             // constructor.
             this->set_default_values();
 
-            if (type == "yli::console::Console*")
+            if (type == "yli::ontology::Console*")
             {
                 this->type = yli::common::CONSOLE_POINTER;
                 this->console_pointer = console_pointer;

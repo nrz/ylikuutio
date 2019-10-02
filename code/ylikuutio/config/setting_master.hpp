@@ -27,11 +27,6 @@
 
 namespace yli
 {
-    namespace console
-    {
-        class Console;
-    }
-
     namespace common
     {
         class AnyValue;
@@ -40,6 +35,7 @@ namespace yli
     namespace ontology
     {
         class Entity;
+        class Console;
     }
 
     namespace config
@@ -74,12 +70,12 @@ namespace yli
                 // Public callbacks.
 
                 static std::shared_ptr<yli::common::AnyValue> set_and_print(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const entity,
                         const std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::common::AnyValue> get_and_print(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const entity,
                         const std::vector<std::string>& command_parameters);
 
@@ -142,7 +138,7 @@ namespace yli
 
                 friend class Setting;
                 friend class yli::ontology::Entity;
-                friend class yli::console::Console;
+                friend class yli::ontology::Console;
 
             private:
                 yli::ontology::Entity* parent;

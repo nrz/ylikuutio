@@ -18,7 +18,7 @@
 #ifndef __YLIKUUTIO_MAP_HPP_INCLUDED
 #define __YLIKUUTIO_MAP_HPP_INCLUDED
 
-#include "code/ylikuutio/console/console.hpp"
+#include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 
 // Include standard headers
@@ -51,7 +51,7 @@ namespace yli
             }
 
         template <class T1>
-            void print_keys_to_console(const std::unordered_map<std::string, T1>& unordered_map, yli::console::Console* const console)
+            void print_keys_to_console(const std::unordered_map<std::string, T1>& unordered_map, yli::ontology::Console* const console)
             {
                 std::vector<std::string> key_vector = yli::map::get_keys(unordered_map);
 

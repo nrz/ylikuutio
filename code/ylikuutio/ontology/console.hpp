@@ -18,7 +18,7 @@
 #ifndef __CONSOLE_HPP_INCLUDED
 #define __CONSOLE_HPP_INCLUDED
 
-#include "console_command_callback.hpp"
+#include "code/ylikuutio/console/console_command_callback.hpp"
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 
 #include "SDL.h"
@@ -72,16 +72,13 @@ namespace yli
     namespace map
     {
         template <class T1>
-            void print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::console::Console* const console);
+            void print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::ontology::Console* const console);
     }
 
     namespace ontology
     {
         class Universe;
-    }
 
-    namespace console
-    {
         class Console
         {
             public:
@@ -124,7 +121,7 @@ namespace yli
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 // Console mode keyrelease callbacks begin here.
 
@@ -132,97 +129,97 @@ namespace yli
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> release_right_control_in_console(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> release_left_alt_in_console(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> release_right_alt_in_console(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> release_left_shift_in_console(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> release_right_shift_in_console(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> enable_move_to_previous_input(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> enable_move_to_next_input(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> enable_backspace(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> enable_enter_key(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> enable_ctrl_c(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> enable_ctrl_w(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> enable_page_up(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> enable_page_down(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> enable_home(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> enable_end(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 // Console mode keypress callbacks begin here.
 
@@ -230,108 +227,108 @@ namespace yli
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> press_left_control_in_console(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> press_right_control_in_console(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> press_left_alt_in_console(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> press_right_alt_in_console(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> press_left_shift_in_console(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> press_right_shift_in_console(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> move_to_previous_input(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> move_to_next_input(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> backspace(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> enter_key(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> ctrl_c(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> ctrl_w(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> page_up(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> page_down(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> home(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 static std::shared_ptr<yli::common::AnyValue> end(
                         yli::callback_system::CallbackEngine*,
                         yli::callback_system::CallbackObject*,
                         std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
+                        yli::ontology::Console* console);
 
                 // Console command callbacks begin here.
 
                 static std::shared_ptr<yli::common::AnyValue> clear(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 

@@ -31,14 +31,14 @@ namespace yli
         class CallbackParameter;
     }
 
-    namespace console
-    {
-        class Console;
-    }
-
     namespace common
     {
         class AnyValue;
+    }
+
+    namespace ontology
+    {
+        class Console;
     }
 }
 
@@ -46,6 +46,6 @@ typedef std::shared_ptr<yli::common::AnyValue> (*InputParametersToAnyValueCallba
         yli::callback_system::CallbackEngine*,
         yli::callback_system::CallbackObject*,
         std::vector<yli::callback_system::CallbackParameter*>&,
-        yli::console::Console*);
+        yli::ontology::Console*);
 
 #endif

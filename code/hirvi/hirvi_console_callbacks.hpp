@@ -25,11 +25,6 @@
 
 namespace yli
 {
-    namespace console
-    {
-        class Console;
-    }
-
     namespace common
     {
         class AnyValue;
@@ -38,13 +33,14 @@ namespace yli
     namespace ontology
     {
         class Entity;
+        class Console;
     }
 }
 
 namespace hirvi
 {
     std::shared_ptr<yli::common::AnyValue> version(
-            yli::console::Console* const console,
+            yli::ontology::Console* const console,
             yli::ontology::Entity* const universe_entity,
             const std::vector<std::string>& command_parameters);
 }

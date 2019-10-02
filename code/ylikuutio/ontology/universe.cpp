@@ -47,7 +47,7 @@
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/pi.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
-#include "code/ylikuutio/console/console.hpp"
+#include "console.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/memory/memory_templates.hpp"
@@ -595,7 +595,7 @@ namespace yli
         // Public callbacks.
 
         std::shared_ptr<yli::common::AnyValue> Universe::activate(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
@@ -674,7 +674,7 @@ namespace yli
         }
 
         std::shared_ptr<yli::common::AnyValue> Universe::delete_entity(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
@@ -730,7 +730,7 @@ namespace yli
         }
 
         std::shared_ptr<yli::common::AnyValue> Universe::info(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
@@ -816,7 +816,7 @@ namespace yli
         }
 
         std::shared_ptr<yli::common::AnyValue> Universe::bind(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
@@ -869,7 +869,7 @@ namespace yli
         }
 
         std::shared_ptr<yli::common::AnyValue> Universe::create_AnyValue(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
@@ -936,7 +936,7 @@ namespace yli
         }
 
         std::shared_ptr<yli::common::AnyValue> Universe::create_AnyStruct(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
@@ -986,7 +986,7 @@ namespace yli
         }
 
         std::shared_ptr<yli::common::AnyValue> Universe::screenshot(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
@@ -1070,7 +1070,7 @@ namespace yli
         }
 
         std::shared_ptr<yli::common::AnyValue> Universe::eval(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
@@ -1138,12 +1138,12 @@ namespace yli
             this->active_font2D = font2D;
         }
 
-        yli::console::Console* Universe::get_console() const
+        yli::ontology::Console* Universe::get_console() const
         {
             return this->console;
         }
 
-        void Universe::set_console(yli::console::Console* console)
+        void Universe::set_console(yli::ontology::Console* console)
         {
             this->console = console;
         }

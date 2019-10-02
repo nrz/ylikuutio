@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "ajokki_console_callbacks.hpp"
-#include "code/ylikuutio/console/console.hpp"
+#include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
@@ -30,21 +30,17 @@
 
 namespace yli
 {
-    namespace console
-    {
-        class Console;
-    }
-
     namespace ontology
     {
         class Entity;
+        class Console;
     }
 }
 
 namespace ajokki
 {
     std::shared_ptr<yli::common::AnyValue> version(
-            yli::console::Console* const console,
+            yli::ontology::Console* const console,
             yli::ontology::Entity* const universe_entity,
             const std::vector<std::string>& command_parameters)
     {

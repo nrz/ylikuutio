@@ -23,7 +23,7 @@
 #include "universe_struct.hpp"
 #include "camera_struct.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
-#include "code/ylikuutio/console/console.hpp"
+#include "console.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/scheme/scheme_master.hpp"
@@ -454,7 +454,7 @@ namespace yli
                         SDL_GL_SetSwapInterval(0);
                     }
 
-                    this->console = new yli::console::Console(
+                    this->console = new yli::ontology::Console(
                             this,
                             universe_struct.current_keypress_callback_engine_vector_pointer_pointer,
                             universe_struct.current_keyrelease_callback_engine_vector_pointer_pointer);
@@ -506,8 +506,8 @@ namespace yli
                 yli::ontology::Font2D* get_active_font2D() const;
                 void set_active_font2D(yli::ontology::Font2D* const font2D);
 
-                yli::console::Console* get_console() const;
-                void set_console(yli::console::Console* console);
+                yli::ontology::Console* get_console() const;
+                void set_console(yli::ontology::Console* console);
 
                 float get_planet_radius() const;
                 void set_planet_radius(float planet_radius);
@@ -605,42 +605,42 @@ namespace yli
                 // Public callbacks.
 
                 static std::shared_ptr<yli::common::AnyValue> activate(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::common::AnyValue> delete_entity(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::common::AnyValue> info(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::common::AnyValue> bind(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::common::AnyValue> create_AnyValue(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::common::AnyValue> create_AnyStruct(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::common::AnyValue> screenshot(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::common::AnyValue> eval(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
@@ -735,7 +735,7 @@ namespace yli
                 yli::ontology::World* active_world;
                 yli::ontology::Font2D* active_font2D;
 
-                yli::console::Console* console;       // pointer to `Console`.
+                yli::ontology::Console* console;       // pointer to `Console`.
 
                 std::shared_ptr<yli::scheme::SchemeMaster> scheme_master; // pointer to `SchemeMaster`.
 

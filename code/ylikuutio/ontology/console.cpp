@@ -16,10 +16,10 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "console.hpp"
-#include "console_command_callback.hpp"
-#include "code/ylikuutio/ontology/font2D.hpp"
-#include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/text_struct.hpp"
+#include "code/ylikuutio/console/console_command_callback.hpp"
+#include "font2D.hpp"
+#include "universe.hpp"
+#include "text_struct.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
@@ -42,7 +42,7 @@
 
 namespace yli
 {
-    namespace console
+    namespace ontology
     {
         Console::Console(
                 yli::ontology::Universe* const universe,
@@ -595,7 +595,7 @@ namespace yli
         // Console command callbacks begin here.
 
         std::shared_ptr<yli::common::AnyValue> Console::clear(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
