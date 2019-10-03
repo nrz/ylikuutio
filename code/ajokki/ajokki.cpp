@@ -51,10 +51,10 @@
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
-#include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
 #include "code/ylikuutio/console/console_callback_object.hpp"
 #include "code/ylikuutio/input/input.hpp"
+#include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/text2D.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
@@ -65,6 +65,7 @@
 #include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
+#include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
@@ -94,7 +95,6 @@
 #include <cstddef>       // std::size_t
 #include <iomanip>       // std::setfill, std::setprecision, std::setw
 #include <iostream>      // std::cout, std::cin, std::cerr
-#include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>      // uint32_t etc.
@@ -225,8 +225,6 @@ int main(const int argc, const char* const argv[])
         universe_struct.mouse_speed = yli::string::extract_float_value_from_string(mouse_speed, index, nullptr, nullptr);
     }
 
-    universe_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
-    universe_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &current_keyrelease_callback_engine_vector_pointer;
     yli::ontology::Universe* const my_universe = new yli::ontology::Universe(universe_struct);
     my_universe->set_name("universe");
 
@@ -274,6 +272,23 @@ int main(const int argc, const char* const argv[])
 
     // Cull triangles whose normal is not towards the camera.
     yli::opengl::cull_triangles();
+
+    // Create the `Console`.
+    yli::ontology::ConsoleStruct console_struct;
+    console_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
+    console_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &current_keyrelease_callback_engine_vector_pointer;
+    std::cout << "Creating yli::ontology::Entity* my_console_entity ...\n";
+    yli::ontology::Entity* const my_console_entity = entity_factory->create_Console(console_struct);
+    std::cout << "Creating yli::ontology::Console* my_console ...\n";
+    yli::ontology::Console* const my_console = dynamic_cast<yli::ontology::Console*>(my_console_entity);
+
+    if (my_console == nullptr)
+    {
+        cleanup_callback_engine.execute();
+        return -1;
+    }
+
+    my_universe->set_active_console(my_console);
 
     std::cout << "Setting up console ...\n";
     app::set_console(my_universe->get_setting_master(), 15, 0, 0, 39);
@@ -386,7 +401,6 @@ int main(const int argc, const char* const argv[])
     my_font2D->set_name("my_font2D");
 
     my_universe->set_active_font2D(my_font2D);
-    yli::console::Console* const my_console = my_universe->get_console();
     my_console->print_text("Welcome! Please write \"help\" for more");
     my_console->print_text("information.");
 
@@ -439,7 +453,7 @@ int main(const int argc, const char* const argv[])
 
     // Callback code for `SDL_SCANCODE_GRAVE` (tilde key above Tab, usually used for console).
     yli::callback_system::CallbackEngine* const enter_console_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::enter_console, enter_console_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enter_console, enter_console_callback_engine, my_console);
 
     // Callback code for esc: exit program.
     yli::callback_system::CallbackEngine* const exit_program_callback_engine = new yli::callback_system::CallbackEngine();
@@ -624,67 +638,67 @@ int main(const int argc, const char* const argv[])
 
     // Callback code for left Control release.
     yli::callback_system::CallbackEngine* const release_left_control_in_console_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::release_left_control_in_console, release_left_control_in_console_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::release_left_control_in_console, release_left_control_in_console_callback_engine, my_console);
 
     // Callback code for right Control release.
     yli::callback_system::CallbackEngine* const release_right_control_in_console_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::release_right_control_in_console, release_right_control_in_console_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::release_right_control_in_console, release_right_control_in_console_callback_engine, my_console);
 
     // Callback code for left Alt release.
     yli::callback_system::CallbackEngine* const release_left_alt_in_console_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::release_left_alt_in_console, release_left_alt_in_console_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::release_left_alt_in_console, release_left_alt_in_console_callback_engine, my_console);
 
     // Callback code for right Alt release.
     yli::callback_system::CallbackEngine* const release_right_alt_in_console_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::release_right_alt_in_console, release_right_alt_in_console_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::release_right_alt_in_console, release_right_alt_in_console_callback_engine, my_console);
 
     // Callback code for left Shift release.
     yli::callback_system::CallbackEngine* const release_left_shift_in_console_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::release_left_shift_in_console, release_left_shift_in_console_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::release_left_shift_in_console, release_left_shift_in_console_callback_engine, my_console);
 
     // Callback code for right Shift release.
     yli::callback_system::CallbackEngine* const release_right_shift_in_console_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::release_right_shift_in_console, release_right_shift_in_console_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::release_right_shift_in_console, release_right_shift_in_console_callback_engine, my_console);
 
     // Callback code for key up release: enable move to previous input.
     yli::callback_system::CallbackEngine* const enable_move_to_previous_input_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::enable_move_to_previous_input, enable_move_to_previous_input_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_move_to_previous_input, enable_move_to_previous_input_callback_engine, my_console);
 
     // Callback code for key down release: enable move to next input.
     yli::callback_system::CallbackEngine* const enable_move_to_next_input_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::enable_move_to_next_input, enable_move_to_next_input_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_move_to_next_input, enable_move_to_next_input_callback_engine, my_console);
 
     // Callback code for backspace release: enable backspace.
     yli::callback_system::CallbackEngine* const enable_backspace_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::enable_backspace, enable_backspace_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_backspace, enable_backspace_callback_engine, my_console);
 
     // Callback code for enter release: enable Enter key.
     yli::callback_system::CallbackEngine* const enable_enter_key_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::enable_enter_key, enable_enter_key_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_enter_key, enable_enter_key_callback_engine, my_console);
 
     // Callback code for C release: enable Control-C.
     yli::callback_system::CallbackEngine* const enable_ctrl_c_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::enable_ctrl_c, enable_ctrl_c_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_ctrl_c, enable_ctrl_c_callback_engine, my_console);
 
     // Callback code for W release: enable Control-W.
     yli::callback_system::CallbackEngine* const enable_ctrl_w_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::enable_ctrl_w, enable_ctrl_w_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_ctrl_w, enable_ctrl_w_callback_engine, my_console);
 
     // Callback code for PgUp release: enable PgUp.
     yli::callback_system::CallbackEngine* const enable_page_up_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::enable_page_up, enable_page_up_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_page_up, enable_page_up_callback_engine, my_console);
 
     // Callback code for PgDn release: enable PgDn.
     yli::callback_system::CallbackEngine* const enable_page_down_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::enable_page_down, enable_page_down_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_page_down, enable_page_down_callback_engine, my_console);
 
     // Callback code for Home release: enable Home.
     yli::callback_system::CallbackEngine* const enable_home_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::enable_home, enable_home_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_home, enable_home_callback_engine, my_console);
 
     // Callback code for End release: enable End.
     yli::callback_system::CallbackEngine* const enable_end_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::enable_end, enable_end_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_end, enable_end_callback_engine, my_console);
 
     /*********************************************************************
      *  Callback engines for console keypresses begin here.              *
@@ -694,71 +708,71 @@ int main(const int argc, const char* const argv[])
 
     // Callback code for `SDL_SCANCODE_GRAVE` (tilde key above Tab, usually used for console).
     yli::callback_system::CallbackEngine* const exit_console_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::exit_console, exit_console_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::exit_console, exit_console_callback_engine, my_console);
 
     // Callback code for left Control press.
     yli::callback_system::CallbackEngine* const press_left_control_in_console_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::press_left_control_in_console, press_left_control_in_console_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::press_left_control_in_console, press_left_control_in_console_callback_engine, my_console);
 
     // Callback code for right Control press.
     yli::callback_system::CallbackEngine* const press_right_control_in_console_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::press_right_control_in_console, press_right_control_in_console_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::press_right_control_in_console, press_right_control_in_console_callback_engine, my_console);
 
     // Callback code for left Alt press.
     yli::callback_system::CallbackEngine* const press_left_alt_in_console_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::press_left_alt_in_console, press_left_alt_in_console_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::press_left_alt_in_console, press_left_alt_in_console_callback_engine, my_console);
 
     // Callback code for right Alt press.
     yli::callback_system::CallbackEngine* const press_right_alt_in_console_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::press_right_alt_in_console, press_right_alt_in_console_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::press_right_alt_in_console, press_right_alt_in_console_callback_engine, my_console);
 
     // Callback code for left Shift press.
     yli::callback_system::CallbackEngine* const press_left_shift_in_console_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::press_left_shift_in_console, press_left_shift_in_console_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::press_left_shift_in_console, press_left_shift_in_console_callback_engine, my_console);
 
     // Callback code for right Shift press.
     yli::callback_system::CallbackEngine* const press_right_shift_in_console_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::press_right_shift_in_console, press_right_shift_in_console_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::press_right_shift_in_console, press_right_shift_in_console_callback_engine, my_console);
 
     // Callback code for key up: move to previous input.
     yli::callback_system::CallbackEngine* const move_to_previous_input_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::move_to_previous_input, move_to_previous_input_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::move_to_previous_input, move_to_previous_input_callback_engine, my_console);
 
     // Callback code for key down: move to next input.
     yli::callback_system::CallbackEngine* const move_to_next_input_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::move_to_next_input, move_to_next_input_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::move_to_next_input, move_to_next_input_callback_engine, my_console);
 
     // Callback code for backspace: delete character left of cursor from current input in console.
     yli::callback_system::CallbackEngine* const backspace_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::backspace, backspace_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::backspace, backspace_callback_engine, my_console);
 
     // Callback code for Enter key.
     yli::callback_system::CallbackEngine* const enter_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::enter_key, enter_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enter_key, enter_callback_engine, my_console);
 
     // Callback code for C: Control-C.
     yli::callback_system::CallbackEngine* const ctrl_c_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::ctrl_c, ctrl_c_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::ctrl_c, ctrl_c_callback_engine, my_console);
 
     // Callback code for W: Control-W.
     yli::callback_system::CallbackEngine* const ctrl_w_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::ctrl_w, ctrl_w_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::ctrl_w, ctrl_w_callback_engine, my_console);
 
     // Callback code for PgUp.
     yli::callback_system::CallbackEngine* const page_up_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::page_up, page_up_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::page_up, page_up_callback_engine, my_console);
 
     // Callback code for PgDn.
     yli::callback_system::CallbackEngine* const page_down_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::page_down, page_down_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::page_down, page_down_callback_engine, my_console);
 
     // Callback code for Home.
     yli::callback_system::CallbackEngine* const home_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::home, home_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::home, home_callback_engine, my_console);
 
     // Callback code for End.
     yli::callback_system::CallbackEngine* const end_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::console::ConsoleCallbackObject(&yli::console::Console::end, end_callback_engine, my_console);
+    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::end, end_callback_engine, my_console);
 
     // Keyrelease callbacks for action mode.
     // Key releases are checked in the order of this struct.
@@ -868,7 +882,7 @@ int main(const int argc, const char* const argv[])
     my_console->add_command_callback("eval", &yli::ontology::Universe::eval);
     my_console->add_command_callback("help", &app::help);
     my_console->add_command_callback("version", &ajokki::version);
-    my_console->add_command_callback("clear", &yli::console::Console::clear);
+    my_console->add_command_callback("clear", &yli::ontology::Console::clear);
     my_console->add_command_callback("screenshot", &yli::ontology::Universe::screenshot);
 
     // For speed computation.

@@ -86,7 +86,6 @@ int main(const int argc, const char* const argv[])
     std::stringstream window_title_stringstream;
     window_title_stringstream << "GPGPU test " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
     universe_struct.window_title = window_title_stringstream.str();
-    universe_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
     universe_struct.window_width = 512;
     universe_struct.window_height = 512;
     yli::ontology::Universe* const my_universe = new yli::ontology::Universe(universe_struct);

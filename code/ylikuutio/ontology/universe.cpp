@@ -47,7 +47,7 @@
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/pi.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
-#include "code/ylikuutio/console/console.hpp"
+#include "console.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/memory/memory_templates.hpp"
@@ -132,6 +132,16 @@ namespace yli
                     this->number_of_font2Ds);
         }
 
+        void Universe::bind_console(yli::ontology::Console* const console)
+        {
+            // get `childID` from `Universe` and set pointer to `console`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::Console*>(
+                    console,
+                    this->console_pointer_vector,
+                    this->free_console_ID_queue,
+                    this->number_of_consoles);
+        }
+
         void Universe::bind_any_value_entity(yli::ontology::AnyValueEntity* const any_value_entity)
         {
             // get `childID` from `Universe` and set pointer to `any_value_entity`.
@@ -213,7 +223,9 @@ namespace yli
             std::cout << "All worlds of this universe will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, this->number_of_worlds);
 
-            delete this->console;
+            // destroy all `Console`s of this `Universe`.
+            std::cout << "All consoles of this universe will be destroyed.\n";
+            yli::hierarchy::delete_children<yli::ontology::Console*>(this->console_pointer_vector, this->number_of_consoles);
 
             // destroy all `Font2D`s of this `Universe`.
             std::cout << "All 2D fonts of this universe will be destroyed.\n";
@@ -257,8 +269,11 @@ namespace yli
 
             yli::opengl::disable_depth_test();
 
-            // Render the `Console` (including current input).
-            this->console->render();
+            if (this->active_console != nullptr)
+            {
+                // Render the active `Console` (including current input).
+                this->active_console->render();
+            }
 
             // Render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
             yli::ontology::render_children<yli::ontology::Font2D*>(this->font2D_pointer_vector);
@@ -286,8 +301,11 @@ namespace yli
                 this->active_world->render();
             }
 
-            // Render the `Console` (including current input).
-            this->console->render();
+            if (this->active_console != nullptr)
+            {
+                // Render the active `Console` (including current input).
+                this->active_console->render();
+            }
 
             // Render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
             yli::ontology::render_children<yli::ontology::Font2D*>(this->font2D_pointer_vector);
@@ -340,6 +358,16 @@ namespace yli
             }
 
             scene->set_active_camera(camera);
+        }
+
+        void Universe::set_active_console(yli::ontology::Console* const console)
+        {
+            this->active_console = console;
+        }
+
+        yli::ontology::Console* Universe::get_active_console() const
+        {
+            return this->active_console;
         }
 
         std::size_t Universe::get_number_of_worlds() const
@@ -437,9 +465,9 @@ namespace yli
             this->window_width = window_width;
             this->adjust_opengl_viewport();
 
-            if (this->console != nullptr)
+            if (this->active_console != nullptr)
             {
-                this->console->adjust_n_columns();
+                this->active_console->adjust_n_columns();
             }
         }
 
@@ -453,9 +481,9 @@ namespace yli
             this->window_height = window_height;
             this->adjust_opengl_viewport();
 
-            if (this->console != nullptr)
+            if (this->active_console != nullptr)
             {
-                this->console->adjust_n_rows();
+                this->active_console->adjust_n_rows();
             }
         }
 
@@ -595,7 +623,7 @@ namespace yli
         // Public callbacks.
 
         std::shared_ptr<yli::common::AnyValue> Universe::activate(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
@@ -674,7 +702,7 @@ namespace yli
         }
 
         std::shared_ptr<yli::common::AnyValue> Universe::delete_entity(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
@@ -730,7 +758,7 @@ namespace yli
         }
 
         std::shared_ptr<yli::common::AnyValue> Universe::info(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
@@ -816,7 +844,7 @@ namespace yli
         }
 
         std::shared_ptr<yli::common::AnyValue> Universe::bind(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
@@ -869,7 +897,7 @@ namespace yli
         }
 
         std::shared_ptr<yli::common::AnyValue> Universe::create_AnyValue(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
@@ -936,7 +964,7 @@ namespace yli
         }
 
         std::shared_ptr<yli::common::AnyValue> Universe::create_AnyStruct(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
@@ -986,7 +1014,7 @@ namespace yli
         }
 
         std::shared_ptr<yli::common::AnyValue> Universe::screenshot(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
@@ -1070,7 +1098,7 @@ namespace yli
         }
 
         std::shared_ptr<yli::common::AnyValue> Universe::eval(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
@@ -1136,16 +1164,6 @@ namespace yli
         void Universe::set_active_font2D(yli::ontology::Font2D* const font2D)
         {
             this->active_font2D = font2D;
-        }
-
-        yli::console::Console* Universe::get_console() const
-        {
-            return this->console;
-        }
-
-        void Universe::set_console(yli::console::Console* console)
-        {
-            this->console = console;
         }
 
         float Universe::get_planet_radius() const

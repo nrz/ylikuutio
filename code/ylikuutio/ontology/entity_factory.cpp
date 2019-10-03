@@ -29,6 +29,7 @@
 #include "vector_font.hpp"
 #include "text3D.hpp"
 #include "font2D.hpp"
+#include "console.hpp"
 #include "camera.hpp"
 #include "compute_task.hpp"
 #include "any_value_entity.hpp"
@@ -41,6 +42,7 @@
 #include "holobiont_struct.hpp"
 #include "vector_font_struct.hpp"
 #include "text3D_struct.hpp"
+#include "console_struct.hpp"
 #include "camera_struct.hpp"
 #include "compute_task_struct.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
@@ -135,6 +137,11 @@ namespace yli
                     universe->get_font_size(),
                     texture_filename.c_str(),
                     font_texture_file_format.c_str());
+        }
+
+        yli::ontology::Entity* EntityFactory::create_Console(const yli::ontology::ConsoleStruct& console_struct) const
+        {
+            return new yli::ontology::Console(this->universe, console_struct);
         }
 
         yli::ontology::Entity* EntityFactory::create_Camera(const yli::ontology::CameraStruct& camera_struct) const

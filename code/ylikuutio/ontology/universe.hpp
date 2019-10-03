@@ -23,7 +23,7 @@
 #include "universe_struct.hpp"
 #include "camera_struct.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
-#include "code/ylikuutio/console/console.hpp"
+#include "console.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/scheme/scheme_master.hpp"
@@ -305,6 +305,7 @@ namespace yli
                 void bind_entity(yli::ontology::Entity* const entity);
                 void bind_world(yli::ontology::World* const world);
                 void bind_font2D(yli::ontology::Font2D* const font2D);
+                void bind_console(yli::ontology::Console* const console);
                 void bind_any_value_entity(yli::ontology::AnyValueEntity* const any_value_entity);
                 void bind_any_struct_entity(yli::ontology::AnyStructEntity* const any_struct_entity);
 
@@ -333,7 +334,7 @@ namespace yli
                     this->terrain_species  = nullptr;
                     this->active_world     = nullptr;
                     this->active_font2D    = nullptr;
-                    this->console          = nullptr;
+                    this->active_console   = nullptr;
                     this->scheme_master    = nullptr;
                     this->audio_master     = nullptr;
 
@@ -454,11 +455,6 @@ namespace yli
                         SDL_GL_SetSwapInterval(0);
                     }
 
-                    this->console = new yli::console::Console(
-                            this,
-                            universe_struct.current_keypress_callback_engine_vector_pointer_pointer,
-                            universe_struct.current_keyrelease_callback_engine_vector_pointer_pointer);
-
                     this->scheme_master = std::make_shared<yli::scheme::SchemeMaster>();
 
                     this->audio_master = std::make_shared<yli::audio::AudioMaster>();
@@ -499,15 +495,17 @@ namespace yli
                 // Setting the active `Camera` does not change the active `Scene`!
                 void set_active_camera(yli::ontology::Camera* const camera) const;
 
+                // this method sets the active `Console`.
+                void set_active_console(yli::ontology::Console* const console);
+
+                yli::ontology::Console* get_active_console() const;
+
                 std::string eval_string(const std::string& my_string) const;
 
                 yli::audio::AudioMaster* get_audio_master() const;
 
                 yli::ontology::Font2D* get_active_font2D() const;
                 void set_active_font2D(yli::ontology::Font2D* const font2D);
-
-                yli::console::Console* get_console() const;
-                void set_console(yli::console::Console* console);
 
                 float get_planet_radius() const;
                 void set_planet_radius(float planet_radius);
@@ -605,42 +603,42 @@ namespace yli
                 // Public callbacks.
 
                 static std::shared_ptr<yli::common::AnyValue> activate(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::common::AnyValue> delete_entity(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::common::AnyValue> info(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::common::AnyValue> bind(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::common::AnyValue> create_AnyValue(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::common::AnyValue> create_AnyStruct(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::common::AnyValue> screenshot(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::common::AnyValue> eval(
-                        yli::console::Console* const console,
+                        yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
@@ -724,6 +722,10 @@ namespace yli
                 std::queue<std::size_t> free_font2D_ID_queue;
                 std::size_t number_of_font2Ds;
 
+                std::vector<yli::ontology::Console*> console_pointer_vector;
+                std::queue<std::size_t> free_console_ID_queue;
+                std::size_t number_of_consoles;
+
                 std::vector<yli::ontology::AnyValueEntity*> any_value_entity_pointer_vector;
                 std::queue<std::size_t> free_any_value_entityID_queue;
                 std::size_t number_of_any_value_entities;
@@ -734,8 +736,7 @@ namespace yli
 
                 yli::ontology::World* active_world;
                 yli::ontology::Font2D* active_font2D;
-
-                yli::console::Console* console;       // pointer to `Console`.
+                yli::ontology::Console* active_console;
 
                 std::shared_ptr<yli::scheme::SchemeMaster> scheme_master; // pointer to `SchemeMaster`.
 

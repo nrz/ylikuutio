@@ -48,9 +48,7 @@ namespace yli
                 gravity(9.81f / 60.0f), // default Earth gravity (9.81 m/s^2).
                 znear(1.0f),
                 zfar(5000.0f),          // visibility: from 1 to 5000 units.
-                is_headless(false),
-                current_keypress_callback_engine_vector_pointer_pointer(nullptr),
-                current_keyrelease_callback_engine_vector_pointer_pointer(nullptr)
+                is_headless(false)
             {
                 // constructor.
             }
@@ -71,10 +69,6 @@ namespace yli
             float znear;
             float zfar;
             bool is_headless;
-
-            // These are for `yli::console::Console`.
-            std::vector<yli::callback_system::KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer;
-            std::vector<yli::callback_system::KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
         };
     }
 }

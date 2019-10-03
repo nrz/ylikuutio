@@ -15,34 +15,31 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __AJOKKI_CONSOLE_CALLBACKS_HPP_INCLUDED
-#define __AJOKKI_CONSOLE_CALLBACKS_HPP_INCLUDED
+#ifndef __CONSOLE_STRUCT_HPP_INCLUDED
+#define __CONSOLE_STRUCT_HPP_INCLUDED
+
+#include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 
 // Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
-#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli
 {
-    namespace common
-    {
-        class AnyValue;
-    }
-
     namespace ontology
     {
-        class Entity;
-        class Console;
-    }
-}
+        struct ConsoleStruct
+        {
+            ConsoleStruct()
+                : current_keypress_callback_engine_vector_pointer_pointer(nullptr),
+                current_keyrelease_callback_engine_vector_pointer_pointer(nullptr)
+            {
+                // constructor.
+            }
 
-namespace ajokki
-{
-    std::shared_ptr<yli::common::AnyValue> version(
-            yli::ontology::Console* const console,
-            yli::ontology::Entity* const universe_entity,
-            const std::vector<std::string>& command_parameters);
+            std::vector<yli::callback_system::KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer;
+            std::vector<yli::callback_system::KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
+        };
+    }
 }
 
 #endif

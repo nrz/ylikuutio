@@ -392,9 +392,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/config/setting_struct.hpp
 
     # console, in alphabetical order.
-    code/ylikuutio/console/console.cpp
-    code/ylikuutio/console/console.hpp
-    code/ylikuutio/console/console_callbacks.cpp
     code/ylikuutio/console/console_command_callback.hpp
     code/ylikuutio/console/console_callback_object.cpp
     code/ylikuutio/console/console_callback_object.hpp
@@ -513,6 +510,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/chunk_master.cpp
     code/ylikuutio/ontology/chunk_master.hpp
     code/ylikuutio/ontology/chunk_struct.hpp
+    code/ylikuutio/ontology/console.cpp
+    code/ylikuutio/ontology/console.hpp
+    code/ylikuutio/ontology/console_callbacks.cpp
+    code/ylikuutio/ontology/console_struct.hpp
     code/ylikuutio/ontology/creature.cpp
     code/ylikuutio/ontology/creature.hpp
     code/ylikuutio/ontology/get_content_callback.hpp

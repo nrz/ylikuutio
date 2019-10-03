@@ -17,7 +17,7 @@
 
 #include "setting_master.hpp"
 #include "setting.hpp"
-#include "code/ylikuutio/console/console.hpp"
+#include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
@@ -130,7 +130,7 @@ namespace yli
         // public callbacks.
 
         std::shared_ptr<yli::common::AnyValue> SettingMaster::set_and_print(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const entity,
                 const std::vector<std::string>& command_parameters)
         {
@@ -297,7 +297,7 @@ namespace yli
         }
 
         std::shared_ptr<yli::common::AnyValue> SettingMaster::get_and_print(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const entity,
                 const std::vector<std::string>& command_parameters)
         {
@@ -1334,7 +1334,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::console::Console* const console = universe->get_console();
+            yli::ontology::Console* const console = universe->get_active_console();
 
             if (console == nullptr)
             {
@@ -1371,7 +1371,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::console::Console* const console = universe->get_console();
+            yli::ontology::Console* const console = universe->get_active_console();
 
             if (console == nullptr)
             {
@@ -1408,7 +1408,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::console::Console* const console = universe->get_console();
+            yli::ontology::Console* const console = universe->get_active_console();
 
             if (console == nullptr)
             {
@@ -1445,7 +1445,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::console::Console* const console = universe->get_console();
+            yli::ontology::Console* const console = universe->get_active_console();
 
             if (console == nullptr)
             {

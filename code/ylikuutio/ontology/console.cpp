@@ -16,10 +16,11 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "console.hpp"
-#include "console_command_callback.hpp"
-#include "code/ylikuutio/ontology/font2D.hpp"
-#include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/text_struct.hpp"
+#include "console_struct.hpp"
+#include "code/ylikuutio/console/console_command_callback.hpp"
+#include "font2D.hpp"
+#include "universe.hpp"
+#include "text_struct.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
@@ -30,106 +31,17 @@
 // Include standard headers
 #include <algorithm>     // std::copy etc.
 #include <cstddef>       // std::size_t
-#include <iostream>      // std::cout, std::cin, std::cerr
 #include <iterator>      // std::back_inserter
-#include <limits>        // std::numeric_limits
 #include <list>          // std::list
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
-#include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
 namespace yli
 {
-    namespace console
+    namespace ontology
     {
-        Console::Console(
-                yli::ontology::Universe* const universe,
-                std::vector<yli::callback_system::KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
-                std::vector<yli::callback_system::KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer)
-        {
-            // constructor.
-            this->should_be_rendered = true;
-            this->cursor_it = this->current_input.begin();
-            this->cursor_index = 0;
-            this->in_history = false;
-            this->in_historical_input = false;
-            this->history_line_i = std::numeric_limits<std::size_t>::max();     // some dummy value.
-            this->historical_input_i = std::numeric_limits<std::size_t>::max(); // some dummy value.
-            this->in_console = false;
-            this->can_move_to_previous_input = false;
-            this->can_move_to_next_input = false;
-            this->can_backspace = false;
-            this->can_enter_key = false;
-            this->can_ctrl_c = false;
-            this->can_ctrl_w = false;
-            this->can_page_up = false;
-            this->can_page_down = false;
-            this->can_home = false;
-            this->can_end = false;
-            this->is_left_control_pressed = false;
-            this->is_right_control_pressed = false;
-            this->is_left_alt_pressed = false;
-            this->is_right_alt_pressed = false;
-            this->is_left_shift_pressed = false;
-            this->is_right_shift_pressed = false;
-            this->previous_keypress_callback_engine_vector_pointer = nullptr;
-            this->my_keypress_callback_engine_vector_pointer = nullptr;
-            this->previous_keyrelease_callback_engine_vector_pointer = nullptr;
-            this->my_keyrelease_callback_engine_vector_pointer = nullptr;
-
-            std::cout << "Defining pointers in Console::Console\n";
-
-            // This is a pointer to `std::vector<yli::callback_system::KeyAndCallbackStruct>*` that controls keypress callbacks outside console.
-            this->current_keypress_callback_engine_vector_pointer_pointer = current_keypress_callback_engine_vector_pointer_pointer;
-            std::cout << "1st pointer defined in Console::Console\n";
-
-            // This is a pointer to `std::vector<yli::callback_system::KeyAndCallbackStruct>*` that controls keyrelease callbacks outside console.
-            this->current_keyrelease_callback_engine_vector_pointer_pointer = current_keyrelease_callback_engine_vector_pointer_pointer;
-            std::cout << "2nd pointer defined in Console::Console\n";
-
-            // This is a pointer to `yli::ontology::Universe`.
-            this->universe = universe;
-            std::cout << "4th pointer defined in Console::Console\n";
-
-            this->universe->set_console(this);
-            std::cout << "5th pointer defined in Console::Console\n";
-
-            // Initialize `console_top_y` to 9.
-            // `console_top_y` should be set by `activate_console_top_y` anyway.
-            std::cout << "Initializing console_top_y\n";
-            this->console_top_y = 9;
-
-            // Initialize `console_bottom_y` to 0.
-            // `console_bottom_y` should be set by `activate_console_bottom_y` anyway.
-            std::cout << "Initializing console_bottom_y\n";
-            this->console_bottom_y = 0;
-
-            // Initialize `console_left_x` to 0.
-            // `console_left_x` should be set by `activate_console_left_x` anyway.
-            std::cout << "Initializing console_left_x\n";
-            this->console_left_x = 0;
-
-            // Initialize `console_right_x` to 9.
-            // `console_right_x` should be set by `activate_console_right_x` anyway.
-            std::cout << "Initializing console_right_x\n";
-            this->console_right_x = 9;
-
-            // Initialize `n_rows`.
-            // `n_rows` should be set by `activate_console_top_y` and `activate_console_bottom_y` anyway.
-            std::cout << "Initializing n_rows\n";
-            this->n_rows = this->console_top_y - this->console_bottom_y + 1;
-
-            // Initialize `n_columns`.
-            // `n_columns` should be set by `activate_console_left_x` and `activate_console_right_x` anyway.
-            std::cout << "Initializing n_columns\n";
-            this->n_columns = this->console_right_x - this->console_left_x + 1;
-
-            this->adjust_n_columns();
-            this->adjust_n_rows();
-        }
-
         Console::~Console()
         {
             // destructor.
@@ -381,6 +293,21 @@ namespace yli
             font2D->print_text2D(text_struct);
         }
 
+        yli::ontology::Entity* Console::get_parent() const
+        {
+            return this->parent;
+        }
+
+        std::size_t Console::get_number_of_children() const
+        {
+            return 0; // `Console` has no children.
+        }
+
+        std::size_t Console::get_number_of_descendants() const
+        {
+            return 0; // `Console` has no children.
+        }
+
         bool Console::get_in_console() const
         {
             return this->in_console;
@@ -595,7 +522,7 @@ namespace yli
         // Console command callbacks begin here.
 
         std::shared_ptr<yli::common::AnyValue> Console::clear(
-                yli::console::Console* const console,
+                yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {

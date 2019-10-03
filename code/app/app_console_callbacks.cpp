@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "app_console_callbacks.hpp"
-#include "code/ylikuutio/console/console.hpp"
+#include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 
@@ -28,21 +28,17 @@
 
 namespace yli
 {
-    namespace console
-    {
-        class Console;
-    }
-
     namespace ontology
     {
         class Entity;
+        class Console;
     }
 }
 
 namespace app
 {
     std::shared_ptr<yli::common::AnyValue> quit(
-            yli::console::Console* const,
+            yli::ontology::Console* const,
             yli::ontology::Entity* const,
             const std::vector<std::string>& command_parameters)
     {
@@ -51,7 +47,7 @@ namespace app
     }
 
     std::shared_ptr<yli::common::AnyValue> help(
-            yli::console::Console* const console,
+            yli::ontology::Console* const console,
             yli::ontology::Entity* const,
             const std::vector<std::string>& command_parameters)
     {

@@ -3,9 +3,12 @@ Tasks in priority order in descending priority, the most urgent ones first. Chec
 
 Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size.
+[ ] Fix bug that some `Object`s (e.g. `cat.fbx`) do not appear on screen on some environments.
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the development of Ylikuutio:
+[ ] Implement a custom FBX loader.
+[ ] Replace OpenFBX with the custom FBX loader.
 [ ] Define a custom .yli binary 3D file format based on COLLADA .dae format.
 [ ] Add support for .yli loading.
 [ ] Add support for exporting as .yli in `yli_convert`.
@@ -24,6 +27,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement `prev` console command for changing to the previous `Sound` in a `Playlist`.
 [ ] Implement support for automatic detection of optimal window size.
 [ ] Implement modifying of vertices.
+[ ] Implement `ViewMaster` class and the functionality for splitting the window or fullscreen view into different `View`s (using horizontal or vertical split, or grid).
 [ ] Implement frustrum culling.
 [ ] Implement generation of terrain meshes in different levels of detail (LOD) using different `x_step`s and `z_step`s (e.g. 1, 2, 4, 8, 16, 32, 64, 128).
 [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain.
@@ -69,13 +73,15 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Move main loop out of `main` function and away from Ajokki into `ontology::Universe` class of Ylikuutio.
 [ ] Implement support for custom keyboard settings.
 [ ] Add variable `direction`.
+[ ] Implement A* for train routing.
 [ ] Use TinySpline.
 [ ] Add bicubic interpolation.
 [ ] Add spline interpolation.
 [ ] Variable `triangulation`: `set triangulation bilinear`/`set triangulation bicubic`/`set triangulation southwest_northeast`/`set triangulation southeast_northwest`.
 [ ] Write integration tests for Ajokki.
 [ ] Learn how to write unit tests for multithreaded C++ code.
-[ ] Create a vertex graph of the vertices and edges of a scene.
+[ ] Implement `Species` morphing using marching cubes algorithm.
+[ ] Implement creation of vertex graphs of the vertices and edges of a `Species`, to be used in `Species` morphing code.
 [ ] Implement Theta* route finding. http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/
 [ ] Implement support for vector fonts.
 [ ] Disable executing system commands from s7.
