@@ -1334,7 +1334,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Console* const console = universe->get_console();
+            yli::ontology::Console* const console = universe->get_active_console();
 
             if (console == nullptr)
             {
@@ -1371,7 +1371,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Console* const console = universe->get_console();
+            yli::ontology::Console* const console = universe->get_active_console();
 
             if (console == nullptr)
             {
@@ -1408,7 +1408,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Console* const console = universe->get_console();
+            yli::ontology::Console* const console = universe->get_active_console();
 
             if (console == nullptr)
             {
@@ -1445,7 +1445,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Console* const console = universe->get_console();
+            yli::ontology::Console* const console = universe->get_active_console();
 
             if (console == nullptr)
             {

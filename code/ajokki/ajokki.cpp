@@ -51,10 +51,10 @@
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
-#include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
 #include "code/ylikuutio/console/console_callback_object.hpp"
 #include "code/ylikuutio/input/input.hpp"
+#include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/text2D.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
@@ -65,6 +65,7 @@
 #include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
+#include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
@@ -224,8 +225,6 @@ int main(const int argc, const char* const argv[])
         universe_struct.mouse_speed = yli::string::extract_float_value_from_string(mouse_speed, index, nullptr, nullptr);
     }
 
-    universe_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
-    universe_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &current_keyrelease_callback_engine_vector_pointer;
     yli::ontology::Universe* const my_universe = new yli::ontology::Universe(universe_struct);
     my_universe->set_name("universe");
 
@@ -273,6 +272,23 @@ int main(const int argc, const char* const argv[])
 
     // Cull triangles whose normal is not towards the camera.
     yli::opengl::cull_triangles();
+
+    // Create the `Console`.
+    yli::ontology::ConsoleStruct console_struct;
+    console_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
+    console_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &current_keyrelease_callback_engine_vector_pointer;
+    std::cout << "Creating yli::ontology::Entity* my_console_entity ...\n";
+    yli::ontology::Entity* const my_console_entity = entity_factory->create_Console(console_struct);
+    std::cout << "Creating yli::ontology::Console* my_console ...\n";
+    yli::ontology::Console* const my_console = dynamic_cast<yli::ontology::Console*>(my_console_entity);
+
+    if (my_console == nullptr)
+    {
+        cleanup_callback_engine.execute();
+        return -1;
+    }
+
+    my_universe->set_active_console(my_console);
 
     std::cout << "Setting up console ...\n";
     app::set_console(my_universe->get_setting_master(), 15, 0, 0, 39);
@@ -385,7 +401,6 @@ int main(const int argc, const char* const argv[])
     my_font2D->set_name("my_font2D");
 
     my_universe->set_active_font2D(my_font2D);
-    yli::ontology::Console* const my_console = my_universe->get_console();
     my_console->print_text("Welcome! Please write \"help\" for more");
     my_console->print_text("information.");
 
