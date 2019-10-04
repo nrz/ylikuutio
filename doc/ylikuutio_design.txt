@@ -1,0 +1,97 @@
+code/ajokki/                    - Ajokki sandbox code.
+code/app/                       - app code snippets that can be used in different applications which use Ylikuutio.
+code/awk/                       - scripts written in AWK.
+code/bash/                      - scripts written in Bash.
+code/convert/                   - code related to `yli_convert` asset file conversion tool.
+code/gpgpu_test/                - GPGPU test code.
+code/hirvi/                     - Hirvi game code.
+code/perl/                      - scripts written in Perl.
+code/s7/                        - s7 Scheme test code.
+code/ylikuutio                  - Ylikuutio code.
+code/ylikuutio/audio/           - audio code.
+code/ylikuutio/callback_system/ - callback functionality.
+code/ylikuutio/command_line/    - command line argument processing.
+code/ylikuutio/common/          - `AnyValue` & `AnyStruct` data structures.
+code/ylikuutio/config/          - `SettingMaster` & `Setting` classes used both for global and `Entity`-specific settings.
+code/ylikuutio/console/         - code related to Ylikuutio console, except `Console` itself, which is `Entity` and located in `ontology` with other Entities.
+code/ylikuutio/file/            - file loading and writing code.
+code/ylikuutio/geometry/        - geometry-related code.
+code/ylikuutio/graph/           - graph-related code.
+code/ylikuutio/hierarchy/       - class hierachy related code.
+code/ylikuutio/input/           - input device related code.
+code/ylikuutio/interpolation/   - interpolation code.
+code/ylikuutio/linear_algebra/  - code related to `Matrix` & `Tensor3` classes used for linear algebra.
+code/ylikuutio/load/            - asset loading code.
+code/ylikuutio/log/             - logging related code.
+code/ylikuutio/map/             - code related to `std::map` & `std::unordered_map`.
+code/ylikuutio/memory/          - memory related code.
+code/ylikuutio/network/         - network related code.
+code/ylikuutio/ontology/        - ontology related code. See below for more detailed description about Ylikuutio ontology.
+code/ylikuutio/opengl/          - OpenGL related code.
+code/ylikuutio/scheme/          - s7 Scheme related code.
+code/ylikuutio/sdl/             - SDL related code.
+code/ylikuutio/shaders/         - GLSL shaders.
+code/ylikuutio/string/          - string processing code.
+code/ylikuutio/tests/           - unit tests.
+code/ylikuutio/time/            - time related code.
+code/ylikuutio/triangulation/   - triangulation related code. See below for more detailed description about triangulation.
+
+code/ylikuutio/ontology/
+
+In Ylikuutio, ontology is a broad collection of classes all of which inherit `Entity` either directly or indirectly.
+Below are listed the ontology classes of Ylikuutio.
+
+There are different hierarchical paths of ontology:
+
+'simple' path:
+
+`Universe` is the top-level class in `ontology` hierarchy. The instances of all other `ontology` classes are normally descendants of `Universe` instance.
+`World` is a class between `Universe` and 1 or more `Scene`s and can be used for sharing hierarchically lower-level classes between different `Scene`s.
+`Scene` is a location in the game or simulation world.
+`Shader` is a the owner of GLSL shaders (vertex shaders and fragment shaders).
+`Material` is the owner a texture.
+`Species` is the owner of a mesh.
+`Object` is a single object instance in a `Scene`.
+
+'symbiont' path:
+
+`Universe` (see above).
+`World` (see above).
+`Scene` (see above).
+`Shader` (see above).
+`Symbiosis` is a class that owns `SymbiontMaterial`s and `SymbiontSpecies`.
+`SymbiontMaterial` is a `Material` owned by a `Symbiosis`.
+`SymbiontSpecies` is a `Species` owned by a `Symbiosis`.
+
+'holobiont' path:
+
+`Universe` (see above).
+`World` (see above).
+`Scene` (see above).
+`Shader` (see above).
+`Symbiosis` (see above).
+`Holobiont` is a single instance of a `Symbiosis`. Each `Holobiont` is a symbiotic organism and consists of 1 or more `Biont`s.
+`Biont` is a symbiont belonging to a specific `Holobiont`.
+
+'text 2D' path:
+`Universe` (see above).
+`Font2D` is a class that owns a single 2D font.
+`Text2D` is a class that owns a single 2D text written in the 2D font.
+
+'text 3D' path:
+`Universe` (see above).
+`World` (see above).
+`Scene` (see above).
+`Shader` (see above).
+`Material` (see above).
+`VectorFont` is class that owns a the `Glyph`s of a single vector font, and also `Text3D` entities.
+`Glyph` is a single glyph belonging to the vector font.
+`Text3D` is a class that owns a single vector graphics text written using the vector font.
+
+'console' path:
+`Universe` (see above).
+`Console` is a class that provides in-app console that can be either in the main view or in the future also inside a `Scene`.
+
+Triangulation
+
+Height maps are usually provided as a 2D grid. As Ylikuutio uses only triangles, the 2D grid needs to be triangulated.
