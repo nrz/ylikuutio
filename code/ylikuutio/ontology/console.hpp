@@ -165,6 +165,9 @@ namespace yli
                     std::cout << "Initializing n_columns\n";
                     this->n_columns = this->console_right_x - this->console_left_x + 1;
 
+                    // Get `childID` from `Universe` and set pointer to this `Console`.
+                    this->bind_to_parent();
+
                     this->adjust_n_columns();
                     this->adjust_n_rows();
 
@@ -428,6 +431,8 @@ namespace yli
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
             private:
+                void bind_to_parent();
+
                 yli::ontology::Entity* get_parent() const override;
 
                 static void charmods_callback(SDL_Window* window, unsigned int codepoint, int mods);
