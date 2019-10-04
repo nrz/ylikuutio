@@ -179,6 +179,9 @@ namespace yli
                 // destructor.
                 ~Console();
 
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
+
                 void adjust_n_columns();
                 void adjust_n_rows();
 
@@ -426,8 +429,6 @@ namespace yli
 
             private:
                 yli::ontology::Entity* get_parent() const override;
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
 
                 static void charmods_callback(SDL_Window* window, unsigned int codepoint, int mods);
 
