@@ -137,8 +137,6 @@ namespace yli
                 // Public callbacks end here.
 
                 friend class Setting;
-                friend class yli::ontology::Entity;
-                friend class yli::ontology::Console;
 
             private:
                 yli::ontology::Entity* parent;
