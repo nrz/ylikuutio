@@ -158,6 +158,10 @@ namespace yli
                 // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
                 virtual ~VectorFont();
 
+                yli::ontology::Entity* get_parent() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
+
                 // This method sets `Glyph` pointer.
                 void set_glyph_pointer(const std::size_t childID, yli::ontology::Glyph* const child_pointer);
 
@@ -172,8 +176,6 @@ namespace yli
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template<class T1>
-                    friend std::size_t yli::ontology::get_number_of_descendants(const std::vector<T1>& child_pointer_vector);
-                template<class T1>
                     friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
             private:
@@ -181,10 +183,6 @@ namespace yli
 
                 // This method renders all `Glyph`s of this `VectorFont`.
                 void render();
-
-                yli::ontology::Entity* get_parent() const override;
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
 
                 std::string font_file_format;         // Type of the model file, eg. `"bmp"`.
                 std::string font_filename;            // Filename of the model file.

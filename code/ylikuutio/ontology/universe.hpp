@@ -420,6 +420,7 @@ namespace yli
                     this->number_of_entities = 0;
                     this->number_of_worlds  = 0;
                     this->number_of_font2Ds = 0;
+                    this->number_of_consoles = 0;
                     this->number_of_any_value_entities = 0;
                     this->number_of_any_struct_entities = 0;
 
@@ -462,6 +463,7 @@ namespace yli
                     // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->font2D_pointer_vector);
+                    this->child_vector_pointers_vector.push_back(&this->console_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->any_value_entity_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->any_struct_entity_pointer_vector);
                     this->type_string = "yli::ontology::Universe*";

@@ -19,6 +19,7 @@
 #define __SETTING_MASTER_HPP_INCLUDED
 
 // Include standard headers
+#include <cstddef>       // std::size_t
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <queue>         // std::queue
 #include <string>        // std::string
@@ -137,8 +138,6 @@ namespace yli
                 // Public callbacks end here.
 
                 friend class Setting;
-                friend class yli::ontology::Entity;
-                friend class yli::ontology::Console;
 
             private:
                 yli::ontology::Entity* parent;

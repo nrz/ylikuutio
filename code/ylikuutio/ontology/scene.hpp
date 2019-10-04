@@ -118,6 +118,10 @@ namespace yli
                 // destructor.
                 virtual ~Scene();
 
+                yli::ontology::Entity* get_parent() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
+
                 // this method renders all `Shader`s of this `Scene`.
                 void render();
 
@@ -146,15 +150,9 @@ namespace yli
 
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
-                template<class T1>
-                    friend std::size_t yli::ontology::get_number_of_descendants(const std::vector<T1>& child_pointer_vector);
 
             private:
                 void bind_to_parent();
-
-                yli::ontology::Entity* get_parent() const override;
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
 
                 yli::ontology::World* parent;   // pointer to the `World`.
 

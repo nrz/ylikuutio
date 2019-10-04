@@ -42,6 +42,22 @@ namespace yli
 {
     namespace ontology
     {
+        void Console::bind_to_parent()
+        {
+            // Requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Universe* const universe = this->parent;
+
+            if (universe == nullptr)
+            {
+                std::cerr << "ERROR: `Console::bind_to_parent`: `universe` is `nullptr`!\n";
+                return;
+            }
+
+            // Get `childID` from the `Universe` and set pointer to this `Console`.
+            universe->bind_console(this);
+        }
+
         Console::~Console()
         {
             // destructor.

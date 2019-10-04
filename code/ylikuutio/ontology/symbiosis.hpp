@@ -108,17 +108,15 @@ namespace yli
                 // destructor.
                 virtual ~Symbiosis();
 
+                yli::ontology::Entity* get_parent() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
+
                 std::size_t get_number_of_symbiont_materials() const;
                 std::size_t get_number_of_symbiont_species() const;
 
                 // this method renders all `SymbiontMaterial`s belonging to this `Symbiosis`.
                 void render();
-
-                yli::ontology::Entity* get_parent() const override;
-
-                std::size_t get_number_of_children() const override;
-
-                std::size_t get_number_of_descendants() const override;
 
                 const std::string& get_model_file_format();
 
@@ -145,8 +143,6 @@ namespace yli
 
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
-                template<class T1>
-                    friend std::size_t yli::ontology::get_number_of_descendants(const std::vector<T1>& child_pointer_vector);
 
             private:
                 void bind_to_parent();

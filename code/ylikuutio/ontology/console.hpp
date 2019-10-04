@@ -91,6 +91,8 @@ namespace yli
                 Console(yli::ontology::Universe* const universe, const yli::ontology::ConsoleStruct& console_struct)
                     : Entity(universe)
                 {
+                    this->parent = universe;
+
                     // constructor.
                     this->should_be_rendered = true;
                     this->cursor_it = this->current_input.begin();
@@ -121,6 +123,9 @@ namespace yli
                     this->previous_keyrelease_callback_engine_vector_pointer = nullptr;
                     this->my_keyrelease_callback_engine_vector_pointer = nullptr;
 
+                    // Get `childID` from `Universe` and set pointer to this `Console`.
+                    this->bind_to_parent();
+
                     std::cout << "Defining pointers in Console::Console\n";
 
                     // This is a pointer to `std::vector<yli::callback_system::KeyAndCallbackStruct>*` that controls keypress callbacks outside console.
@@ -130,10 +135,6 @@ namespace yli
                     // This is a pointer to `std::vector<yli::callback_system::KeyAndCallbackStruct>*` that controls keyrelease callbacks outside console.
                     this->current_keyrelease_callback_engine_vector_pointer_pointer = console_struct.current_keyrelease_callback_engine_vector_pointer_pointer;
                     std::cout << "2nd pointer defined in Console::Console\n";
-
-                    // This is a pointer to `yli::ontology::Universe`.
-                    this->parent = universe;
-                    std::cout << "4th pointer defined in Console::Console\n";
 
                     // Initialize `console_top_y` to 9.
                     // `console_top_y` should be set by `activate_console_top_y` anyway.
@@ -178,6 +179,9 @@ namespace yli
 
                 // destructor.
                 ~Console();
+
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 void adjust_n_columns();
                 void adjust_n_rows();
@@ -425,9 +429,9 @@ namespace yli
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
             private:
+                void bind_to_parent();
+
                 yli::ontology::Entity* get_parent() const override;
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
 
                 static void charmods_callback(SDL_Window* window, unsigned int codepoint, int mods);
 
