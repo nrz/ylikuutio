@@ -420,6 +420,7 @@ namespace yli
                     this->number_of_entities = 0;
                     this->number_of_worlds  = 0;
                     this->number_of_font2Ds = 0;
+                    this->number_of_consoles = 0;
                     this->number_of_any_value_entities = 0;
                     this->number_of_any_struct_entities = 0;
 
