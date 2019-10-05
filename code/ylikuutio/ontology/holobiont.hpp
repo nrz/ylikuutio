@@ -89,7 +89,7 @@ namespace yli
                     // get `childID` from `Symbiosis` and set pointer to this `Holobiont`.
                     this->bind_to_parent();
 
-                    this->create_bionts();
+                    this->create_Bionts();
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->biont_pointer_vector);
@@ -122,7 +122,7 @@ namespace yli
                 // this method renders this `Holobiont`.
                 void render();
 
-                void create_bionts();
+                void create_Bionts();
 
                 yli::ontology::Symbiosis* symbiosis_parent; // pointer to the `Symbiosis`.
 

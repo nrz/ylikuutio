@@ -145,7 +145,7 @@ namespace yli
             }
         }
 
-        void Holobiont::create_bionts()
+        void Holobiont::create_Bionts()
         {
             // requirements:
             // `this->symbiosis_parent` must not be `nullptr`.
@@ -154,7 +154,7 @@ namespace yli
 
             if (symbiosis == nullptr)
             {
-                std::cerr << "ERROR: `Holobiont::create_bionts`: `symbiosis` is `nullptr`!\n";
+                std::cerr << "ERROR: `Holobiont::create_Bionts`: `symbiosis` is `nullptr`!\n";
                 return;
             }
 
@@ -168,7 +168,7 @@ namespace yli
             {
                 if (!symbiosis->has_texture(biontID))
                 {
-                    std::cerr << "ERROR: `Holobiont::create_bionts`: There is no texture for biont with biontID " << biontID << "\n";
+                    std::cerr << "ERROR: `Holobiont::create_Bionts`: There is no texture for biont with biontID " << biontID << "\n";
                     continue;
                 }
 
