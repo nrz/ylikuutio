@@ -25,7 +25,9 @@
 // Include standard headers
 #include <cstddef>       // std::size_t
 #include <memory>        // std::make_shared, std::shared_ptr
+#include <queue>         // std::queue
 #include <string>        // std::string
+#include <vector>        // std::vector
 
 namespace yli
 {
@@ -50,13 +52,15 @@ namespace yli
                 std::shared_ptr<yli::common::AnyValue> get_any_value() const;
 
                 friend class CallbackObject;
-
-                std::size_t childID;            // callback parameter ID, returned by `yli::callback_system::CallbackObject->get_callback_parameterID()`.
+                template<class T1>
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
             private:
                 void bind_to_parent();
 
                 yli::callback_system::CallbackObject* parent; // pointer to the callback object.
+
+                std::size_t childID;            // callback parameter ID, returned by `yli::callback_system::CallbackObject->get_callback_parameterID()`.
 
                 std::string name;
                 std::shared_ptr<yli::common::AnyValue> any_value; // this is `private` to make sure that someone does not overwrite it.
