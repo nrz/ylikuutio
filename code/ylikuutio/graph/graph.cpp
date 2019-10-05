@@ -64,11 +64,6 @@ namespace yli
             return this->node_pointer_vector[childID];
         }
 
-        std::size_t Graph::get_nodeID()
-        {
-            return yli::hierarchy::request_childID(this->node_pointer_vector, this->free_nodeID_queue);
-        }
-
         Graph::~Graph()
         {
             // destructor.
