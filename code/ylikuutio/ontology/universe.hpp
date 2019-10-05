@@ -502,6 +502,8 @@ namespace yli
 
                 yli::ontology::Console* get_active_console() const;
 
+                bool get_is_headless() const;
+
                 std::string eval_string(const std::string& my_string) const;
 
                 yli::audio::AudioMaster* get_audio_master() const;

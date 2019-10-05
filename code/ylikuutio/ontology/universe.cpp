@@ -370,6 +370,11 @@ namespace yli
             return this->active_console;
         }
 
+        bool Universe::get_is_headless() const
+        {
+            return this->is_headless;
+        }
+
         std::size_t Universe::get_number_of_worlds() const
         {
             return this->number_of_worlds;
