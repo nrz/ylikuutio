@@ -75,7 +75,7 @@ int main(const int argc, const char* const argv[])
     command_line_master.print_keys_and_values();
 
     // keypress callbacks.
-    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keypress_callback_engines = std::vector<yli::callback_system::KeyAndCallbackStruct>();
+    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keypress_callback_engines;
 
     // This vector points to current keypress callback engines vector.
     std::vector<yli::callback_system::KeyAndCallbackStruct>* current_keypress_callback_engine_vector_pointer = &action_mode_keypress_callback_engines;

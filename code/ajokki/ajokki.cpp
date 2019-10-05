@@ -142,14 +142,14 @@ int main(const int argc, const char* const argv[])
     int input_method_in_use = yli::input::KEYBOARD;
 
     // keypress callbacks.
-    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keypress_callback_engines = std::vector<yli::callback_system::KeyAndCallbackStruct>();
-    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_continuous_keypress_callback_engines = std::vector<yli::callback_system::KeyAndCallbackStruct>();
+    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keypress_callback_engines;
+    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_continuous_keypress_callback_engines;
 
     // This vector points to current keypress callback engines vector.
     std::vector<yli::callback_system::KeyAndCallbackStruct>* current_keypress_callback_engine_vector_pointer = &action_mode_keypress_callback_engines;
 
     // keyrelease callbacks.
-    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keyrelease_callback_engines = std::vector<yli::callback_system::KeyAndCallbackStruct>();
+    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keyrelease_callback_engines;
 
     // This vector points to current keyrelease callback engines vector.
     std::vector<yli::callback_system::KeyAndCallbackStruct>* current_keyrelease_callback_engine_vector_pointer = &action_mode_keyrelease_callback_engines;
@@ -809,7 +809,7 @@ int main(const int argc, const char* const argv[])
 
     // Keyrelease callbacks for console.
     // Key releases are checked in the order of this struct.
-    std::vector<yli::callback_system::KeyAndCallbackStruct> console_keyrelease_callback_engines = std::vector<yli::callback_system::KeyAndCallbackStruct>();
+    std::vector<yli::callback_system::KeyAndCallbackStruct> console_keyrelease_callback_engines;
     console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, release_left_control_in_console_callback_engine });
     console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, release_right_control_in_console_callback_engine });
     console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_LALT, release_left_alt_in_console_callback_engine });
@@ -830,7 +830,7 @@ int main(const int argc, const char* const argv[])
 
     // Keypress callbacks for console.
     // Keypresses are checked in the order of this struct.
-    std::vector<yli::callback_system::KeyAndCallbackStruct> console_keypress_callback_engines = std::vector<yli::callback_system::KeyAndCallbackStruct>();
+    std::vector<yli::callback_system::KeyAndCallbackStruct> console_keypress_callback_engines;
     console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_GRAVE, exit_console_callback_engine });
     console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, press_left_control_in_console_callback_engine });
     console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, press_right_control_in_console_callback_engine });
