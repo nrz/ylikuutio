@@ -358,7 +358,7 @@ namespace yli
                         this->window_title = window_title_stringstream.str();
                     }
 
-                    this->is_headless        = universe_struct.is_headless;
+                    this->is_headless  = universe_struct.is_headless;
 
                     // mouse coordinates.
                     this->mouse_x      = this->window_width / 2;
