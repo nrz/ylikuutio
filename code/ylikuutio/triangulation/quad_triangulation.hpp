@@ -72,6 +72,13 @@ namespace yli
 
                 // Input vertices (`T1* input_vertex_pointer`)
                 // can be `float`, `int32_t` or `uint32_t`.
+
+                if (input_vertex_pointer == nullptr)
+                {
+                    std::cerr << "ERROR: `yli::triangulation::triangulate_quads`: `input_vertex_pointer` is `nullptr`.\n";
+                    return false;
+                }
+
                 if (image_width < 2)
                 {
                     std::cerr << "ERROR: `yli::triangulation::triangulate_quads`: `image_width` is less than 2.\n";
