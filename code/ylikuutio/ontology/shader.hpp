@@ -60,13 +60,13 @@ namespace yli
         class Shader: public yli::ontology::Entity
         {
             public:
-                void bind_material(yli::ontology::Material* const material);
-                void bind_symbiosis(yli::ontology::Symbiosis* const symbiosis);
-                void bind_compute_task(yli::ontology::ComputeTask* const compute_task);
+                void bind_Material(yli::ontology::Material* const material);
+                void bind_Symbiosis(yli::ontology::Symbiosis* const symbiosis);
+                void bind_ComputeTask(yli::ontology::ComputeTask* const compute_task);
 
-                void unbind_material(const std::size_t childID);
-                void unbind_symbiosis(const std::size_t childID);
-                void unbind_compute_task(const std::size_t childID);
+                void unbind_Material(const std::size_t childID);
+                void unbind_Symbiosis(const std::size_t childID);
+                void unbind_ComputeTask(const std::size_t childID);
 
                 // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
                 void bind_to_new_parent(yli::ontology::Scene* const new_parent);

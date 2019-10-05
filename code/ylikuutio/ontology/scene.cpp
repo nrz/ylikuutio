@@ -47,7 +47,7 @@ namespace yli
     {
         class Species;
 
-        void Scene::bind_shader(yli::ontology::Shader* const shader)
+        void Scene::bind_Shader(yli::ontology::Shader* const shader)
         {
             // get `childID` from `Scene` and set pointer to `shader`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Shader*>(
@@ -60,7 +60,7 @@ namespace yli
             this->shader_priority_queue.push(shader);
         }
 
-        void Scene::bind_camera(yli::ontology::Camera* const camera)
+        void Scene::bind_Camera(yli::ontology::Camera* const camera)
         {
             // get `childID` from `Scene` and set pointer to `camera`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Camera*>(
@@ -70,7 +70,7 @@ namespace yli
                     this->number_of_cameras);
         }
 
-        void Scene::unbind_shader(const std::size_t childID)
+        void Scene::unbind_Shader(const std::size_t childID)
         {
             // `shader` needs to be removed from the priority queue as well.
             this->shader_priority_queue.remove(childID);
@@ -82,7 +82,7 @@ namespace yli
                     this->number_of_shaders);
         }
 
-        void Scene::unbind_camera(const std::size_t childID)
+        void Scene::unbind_Camera(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
                     childID,
@@ -104,7 +104,7 @@ namespace yli
             }
 
             // get `childID` from the `World` and set pointer to this `Scene`.
-            world->bind_scene(this);
+            world->bind_Scene(this);
         }
 
         Scene::~Scene()
@@ -138,7 +138,7 @@ namespace yli
             }
 
             // set pointer to this `Scene` to `nullptr`.
-            world->unbind_scene(this->childID);
+            world->unbind_Scene(this->childID);
         }
 
         void Scene::render()

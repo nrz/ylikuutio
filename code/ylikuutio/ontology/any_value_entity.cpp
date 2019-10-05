@@ -39,7 +39,7 @@ namespace yli
             }
 
             // Get `childID` from the `Universe` and set pointer to this `AnyValueEntity`.
-            universe->bind_any_value_entity(this);
+            universe->bind_AnyValueEntity(this);
         }
 
         AnyValueEntity::~AnyValueEntity()
@@ -59,7 +59,7 @@ namespace yli
             }
 
             // set pointer to this `AnyValueEntity` to `nullptr`.
-            universe->unbind_any_value_entity(this->childID);
+            universe->unbind_AnyValueEntity(this->childID);
         }
 
         yli::ontology::Entity* AnyValueEntity::get_parent() const

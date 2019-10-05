@@ -42,7 +42,7 @@ namespace yli
                 return;
             }
 
-            graph->bind_node(this);
+            graph->bind_Node(this);
         }
 
         Node::Node(const yli::graph::NodeStruct& node_struct)
@@ -63,7 +63,7 @@ namespace yli
             }
 
             // set pointer to this `Node`.
-            graph->bind_node(this);
+            graph->bind_Node(this);
 
             // create all bidirectional links between this node and neighbor nodes.
             for (std::size_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
@@ -95,7 +95,7 @@ namespace yli
             }
 
             // set pointer to this `Node` to `nullptr`.
-            graph->unbind_node(this->childID);
+            graph->unbind_Node(this->childID);
         }
 
         void Node::create_unidirectional_link(std::size_t nodeID)
@@ -193,11 +193,11 @@ namespace yli
             }
 
             // unbind from the old parent `Graph`.
-            graph->unbind_node(this->childID);
+            graph->unbind_Node(this->childID);
 
             // get `childID` from `Graph` and set pointer to this `Node`.
             this->parent = new_parent;
-            this->parent->bind_node(this);
+            this->parent->bind_Node(this);
         }
     }
 }

@@ -55,7 +55,7 @@ namespace yli
             }
 
             // Get `childID` from the `Universe` and set pointer to this `Console`.
-            universe->bind_console(this);
+            universe->bind_Console(this);
         }
 
         Console::~Console()
@@ -455,9 +455,7 @@ namespace yli
 
         bool Console::exit_console()
         {
-            if (this->in_console &&
-                    this->previous_keypress_callback_engine_vector_pointer != nullptr &&
-                    this->previous_keyrelease_callback_engine_vector_pointer != nullptr)
+            if (this->in_console)
             {
                 // Restore previous keypress callback engine vector pointer.
                 if (this->current_keypress_callback_engine_vector_pointer_pointer != nullptr)

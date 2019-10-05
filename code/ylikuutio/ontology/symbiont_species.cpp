@@ -41,7 +41,7 @@ namespace yli
     {
         class Entity;
 
-        void SymbiontSpecies::bind_biont(yli::ontology::Biont* const biont)
+        void SymbiontSpecies::bind_Biont(yli::ontology::Biont* const biont)
         {
             // `SymbiontSpecies` is not the ontological parent of `Biont`,
             // as `Holobiont` is the ontological parent of `Biont`.
@@ -63,7 +63,7 @@ namespace yli
                     this->number_of_bionts);
         }
 
-        void SymbiontSpecies::unbind_biont(const std::size_t childID)
+        void SymbiontSpecies::unbind_Biont(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
                     childID,
@@ -85,7 +85,7 @@ namespace yli
             }
 
             // get `childID` from `SymbiontMaterial` and set pointer to this `SymbiontSpecies`.
-            symbiont_material->bind_symbiont_species(this);
+            symbiont_material->bind_SymbiontSpecies(this);
         }
 
         SymbiontSpecies::~SymbiontSpecies()
@@ -111,7 +111,7 @@ namespace yli
                 return;
             }
 
-            symbiont_material->unbind_symbiont_species(this->childID);
+            symbiont_material->unbind_SymbiontSpecies(this->childID);
         }
 
         void SymbiontSpecies::render()

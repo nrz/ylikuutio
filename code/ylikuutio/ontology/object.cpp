@@ -61,7 +61,7 @@ namespace yli
                 }
 
                 // get `childID` from `Text3D` and set pointer to this `Object`.
-                text3D->bind_object(this);
+                text3D->bind_Object(this);
             }
             else
             {
@@ -77,7 +77,7 @@ namespace yli
                 }
 
                 // get `childID` from `Species` and set pointer to this `Object`.
-                species->bind_object(this);
+                species->bind_Object(this);
             }
         }
 
@@ -107,11 +107,11 @@ namespace yli
                 }
 
                 // unbind from the old parent `Text3D`.
-                text3D->unbind_object(this->childID);
+                text3D->unbind_Object(this->childID);
 
                 // get `childID` from `Text3D` and set pointer to this `Object`.
                 this->text3D_parent = static_cast<yli::ontology::Text3D*>(new_parent);
-                this->text3D_parent->bind_object(this);
+                this->text3D_parent->bind_Object(this);
             }
         }
 
@@ -141,11 +141,11 @@ namespace yli
                 }
 
                 // unbind from the old parent `Species`.
-                species->unbind_object(this->childID);
+                species->unbind_Object(this->childID);
 
                 // get `childID` from `Species` and set pointer to this `Object`.
                 this->species_parent = static_cast<yli::ontology::Species*>(new_parent);
-                this->species_parent->bind_object(this);
+                this->species_parent->bind_Object(this);
             }
         }
 
@@ -201,7 +201,7 @@ namespace yli
                     return;
                 }
 
-                text3D->unbind_object(this->childID);
+                text3D->unbind_Object(this->childID);
             }
             else
             {
@@ -216,7 +216,7 @@ namespace yli
                     return;
                 }
 
-                species->unbind_object(this->childID);
+                species->unbind_Object(this->childID);
             }
         }
 

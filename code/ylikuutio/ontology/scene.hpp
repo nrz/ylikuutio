@@ -76,11 +76,11 @@ namespace yli
         class Scene: public yli::ontology::Entity
         {
             public:
-                void bind_shader(yli::ontology::Shader* const shader);
-                void bind_camera(yli::ontology::Camera* const camera);
+                void bind_Shader(yli::ontology::Shader* const shader);
+                void bind_Camera(yli::ontology::Camera* const camera);
 
-                void unbind_shader(const std::size_t childID);
-                void unbind_camera(const std::size_t childID);
+                void unbind_Shader(const std::size_t childID);
+                void unbind_Camera(const std::size_t childID);
 
                 // constructor.
                 Scene(yli::ontology::Universe* const universe, yli::ontology::World* const world, const float water_level)

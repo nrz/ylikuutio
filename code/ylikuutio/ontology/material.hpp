@@ -50,13 +50,13 @@ namespace yli
         class Material: public yli::ontology::Entity
         {
             public:
-                void bind_species(yli::ontology::Species* const species);
-                void bind_vector_font(yli::ontology::VectorFont* const vector_font);
-                void bind_chunk_master(ontology::ChunkMaster* const chunk_master);
+                void bind_Species(yli::ontology::Species* const species);
+                void bind_VectorFont(yli::ontology::VectorFont* const vector_font);
+                void bind_ChunkMaster(ontology::ChunkMaster* const chunk_master);
 
-                void unbind_species(const std::size_t childID);
-                void unbind_vector_font(const std::size_t childID);
-                void unbind_chunk_master(const std::size_t childID);
+                void unbind_Species(const std::size_t childID);
+                void unbind_VectorFont(const std::size_t childID);
+                void unbind_ChunkMaster(const std::size_t childID);
 
                 Material(yli::ontology::Universe* const universe, const yli::ontology::MaterialStruct& material_struct)
                     : Entity(universe)

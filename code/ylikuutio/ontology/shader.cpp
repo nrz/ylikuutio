@@ -43,7 +43,7 @@ namespace yli
     {
         class Species;
 
-        void Shader::bind_material(yli::ontology::Material* const material)
+        void Shader::bind_Material(yli::ontology::Material* const material)
         {
             // Get `childID` from `Shader` and set pointer to `material`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Material*>(
@@ -53,7 +53,7 @@ namespace yli
                     this->number_of_materials);
         }
 
-        void Shader::bind_symbiosis(yli::ontology::Symbiosis* const symbiosis)
+        void Shader::bind_Symbiosis(yli::ontology::Symbiosis* const symbiosis)
         {
             // Get `childID` from `Shader` and set pointer to `symbiosis`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Symbiosis*>(
@@ -63,7 +63,7 @@ namespace yli
                     this->number_of_symbioses);
         }
 
-        void Shader::bind_compute_task(yli::ontology::ComputeTask* const compute_task)
+        void Shader::bind_ComputeTask(yli::ontology::ComputeTask* const compute_task)
         {
             // Get `childID` from `Shader` and set pointer to `compute_task`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::ComputeTask*>(
@@ -73,7 +73,7 @@ namespace yli
                     this->number_of_compute_tasks);
         }
 
-        void Shader::unbind_material(const std::size_t childID)
+        void Shader::unbind_Material(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
                     childID,
@@ -82,7 +82,7 @@ namespace yli
                     this->number_of_materials);
         }
 
-        void Shader::unbind_symbiosis(const std::size_t childID)
+        void Shader::unbind_Symbiosis(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
                     childID,
@@ -91,7 +91,7 @@ namespace yli
                     this->number_of_symbioses);
         }
 
-        void Shader::unbind_compute_task(const std::size_t childID)
+        void Shader::unbind_ComputeTask(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
                     childID,
@@ -113,7 +113,7 @@ namespace yli
             }
 
             // Get `childID` from the `Scene` and set pointer to this `Shader`.
-            scene->bind_shader(this);
+            scene->bind_Shader(this);
         }
 
         void Shader::bind_to_new_parent(yli::ontology::Scene* const new_parent)
@@ -140,11 +140,11 @@ namespace yli
             }
 
             // Unbind from the old parent `Scene`.
-            this->parent->unbind_shader(this->childID);
+            this->parent->unbind_Shader(this->childID);
 
             // Get `childID` from `Scene` and set pointer to this `Shader`.
             this->parent = new_parent;
-            this->parent->bind_shader(this);
+            this->parent->bind_Shader(this);
         }
 
         Shader::~Shader()
@@ -172,7 +172,7 @@ namespace yli
             else
             {
                 // Set pointer to this `Shader` to `nullptr`.
-                scene->unbind_shader(this->childID);
+                scene->unbind_Shader(this->childID);
             }
 
             glDeleteProgram(this->programID);

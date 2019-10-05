@@ -32,7 +32,7 @@ namespace yli
 {
     namespace callback_system
     {
-        void CallbackEngine::bind_callback_object(yli::callback_system::CallbackObject* const callback_object)
+        void CallbackEngine::bind_CallbackObject(yli::callback_system::CallbackObject* const callback_object)
         {
             yli::hierarchy::bind_child_to_parent<yli::callback_system::CallbackObject*>(
                     callback_object,

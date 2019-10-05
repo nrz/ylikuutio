@@ -302,25 +302,25 @@ namespace yli
         class Universe: public yli::ontology::Entity
         {
             public:
-                void bind_entity(yli::ontology::Entity* const entity);
-                void bind_world(yli::ontology::World* const world);
-                void bind_font2D(yli::ontology::Font2D* const font2D);
-                void bind_console(yli::ontology::Console* const console);
-                void bind_any_value_entity(yli::ontology::AnyValueEntity* const any_value_entity);
-                void bind_any_struct_entity(yli::ontology::AnyStructEntity* const any_struct_entity);
+                void bind_Entity(yli::ontology::Entity* const entity);
+                void bind_World(yli::ontology::World* const world);
+                void bind_Font2D(yli::ontology::Font2D* const font2D);
+                void bind_Console(yli::ontology::Console* const console);
+                void bind_AnyValueEntity(yli::ontology::AnyValueEntity* const any_value_entity);
+                void bind_AnyStructEntity(yli::ontology::AnyStructEntity* const any_struct_entity);
 
-                void unbind_entity(const std::size_t entityID);
-                void unbind_world(const std::size_t childID);
-                void unbind_font2D(const std::size_t childID);
-                void unbind_any_value_entity(const std::size_t childID);
-                void unbind_any_struct_entity(const std::size_t childID);
+                void unbind_Entity(const std::size_t entityID);
+                void unbind_World(const std::size_t childID);
+                void unbind_Font2D(const std::size_t childID);
+                void unbind_AnyValueEntity(const std::size_t childID);
+                void unbind_AnyStructEntity(const std::size_t childID);
 
                 // constructor.
                 Universe(const yli::ontology::UniverseStruct& universe_struct)
                     : Entity(this) // `Universe` has no parent.
                 {
-                    // call `bind_entity` here since it couldn't be performed from `Entity` constructor.
-                    this->bind_entity(this);
+                    // call `bind_Entity` here since it couldn't be performed from `Entity` constructor.
+                    this->bind_Entity(this);
 
                     this->entity_factory = std::make_shared<yli::ontology::EntityFactory>(this);
 
@@ -358,7 +358,7 @@ namespace yli
                         this->window_title = window_title_stringstream.str();
                     }
 
-                    this->is_headless        = universe_struct.is_headless;
+                    this->is_headless  = universe_struct.is_headless;
 
                     // mouse coordinates.
                     this->mouse_x      = this->window_width / 2;
@@ -458,7 +458,7 @@ namespace yli
 
                     this->scheme_master = std::make_shared<yli::scheme::SchemeMaster>();
 
-                    this->audio_master = std::make_shared<yli::audio::AudioMaster>();
+                    this->audio_master = std::make_shared<yli::audio::AudioMaster>(this);
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
@@ -501,6 +501,8 @@ namespace yli
                 void set_active_console(yli::ontology::Console* const console);
 
                 yli::ontology::Console* get_active_console() const;
+
+                bool get_is_headless() const;
 
                 std::string eval_string(const std::string& my_string) const;
 

@@ -28,13 +28,18 @@
 
 namespace yli
 {
+    namespace ontology
+    {
+        class Universe;
+    }
+
     namespace audio
     {
         class AudioMaster
         {
             public:
                 // constructor.
-                AudioMaster();
+                AudioMaster(yli::ontology::Universe* const universe);
 
                 // destructor.
                 ~AudioMaster();
@@ -50,12 +55,14 @@ namespace yli
                 void clear_playlist(const std::string& playlist);
                 void erase_playlist(const std::string& playlist);
 
-                int get_remaining_length();
+                int get_remaining_length(); // This function is not `const` due to use of `SDL_AtomicGet`.
 
             private:
                 void play_audio(void* userdata, uint8_t* stream, int length);
                 static void play_audio_callback(void* userdata, uint8_t* stream, int length);
                 static yli::audio::AudioMaster* audio_master;
+
+                yli::ontology::Universe* universe;
 
                 SDL_AudioSpec audio_spec;
                 SDL_AudioDeviceID device;

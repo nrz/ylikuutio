@@ -46,7 +46,7 @@ namespace yli
             }
 
             // get `childID` from `VectorFont` and set pointer to this `Glyph`.
-            vector_font->bind_glyph(this);
+            vector_font->bind_Glyph(this);
         }
 
         Glyph::~Glyph()
@@ -95,7 +95,7 @@ namespace yli
             }
         }
 
-        const char* Glyph::get_unicode_char_pointer()
+        const char* Glyph::get_unicode_char_pointer() const
         {
             return this->unicode_char_pointer;
         }

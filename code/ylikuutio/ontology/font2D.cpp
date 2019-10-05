@@ -49,7 +49,7 @@ namespace yli
 {
     namespace ontology
     {
-        void Font2D::bind_text2D(yli::ontology::Text2D* const text2D)
+        void Font2D::bind_Text2D(yli::ontology::Text2D* const text2D)
         {
             // Get `childID` from `Font2D` and set pointer to `text2D`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Text2D*>(
@@ -59,7 +59,7 @@ namespace yli
                     this->number_of_text2Ds);
         }
 
-        void Font2D::unbind_text2D(const std::size_t childID)
+        void Font2D::unbind_Text2D(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
                     childID,
@@ -81,7 +81,7 @@ namespace yli
             }
 
             // Get `childID` from the `Universe` and set pointer to this `Font2D`.
-            universe->bind_font2D(this);
+            universe->bind_Font2D(this);
         }
 
         Font2D::~Font2D()
@@ -115,7 +115,7 @@ namespace yli
             }
 
             // set pointer to this `Font2D` to `nullptr`.
-            universe->unbind_font2D(this->childID);
+            universe->unbind_Font2D(this->childID);
         }
 
         yli::ontology::Entity* Font2D::get_parent() const

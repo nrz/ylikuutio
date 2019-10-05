@@ -56,7 +56,7 @@ namespace yli
 
                 yli::ontology::Entity* get_parent() const override;
 
-                const char* get_unicode_char_pointer();
+                const char* get_unicode_char_pointer() const;
 
                 friend class VectorFont;
                 template<class T1>

@@ -55,7 +55,7 @@ namespace yli
             }
 
             // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
-            shader->bind_compute_task(this);
+            shader->bind_ComputeTask(this);
         }
 
         ComputeTask::~ComputeTask()
@@ -84,7 +84,7 @@ namespace yli
                 return;
             }
 
-            this->parent->unbind_compute_task(this->childID);
+            this->parent->unbind_ComputeTask(this->childID);
         }
 
         void ComputeTask::render()
@@ -172,7 +172,7 @@ namespace yli
                 {
                     const std::shared_ptr<yli::common::AnyValue> end_condition_any_value = this->end_condition_callback_engine->execute();
 
-                    if (end_condition_any_value->type == yli::common::BOOL && end_condition_any_value->bool_value)
+                    if (end_condition_any_value->type == yli::common::Datatype::BOOL && end_condition_any_value->bool_value)
                     {
                         break; // End condition was satisfied. Therefore, no more iterations.
                     }

@@ -91,7 +91,7 @@ namespace yli
                 PostRenderCallback postrender_callback;
 
             private:
-                void bind_to_universe();
+                void bind_to_Universe();
         };
     }
 }

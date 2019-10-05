@@ -30,7 +30,7 @@ namespace yli
 {
     namespace ontology
     {
-        void ChunkMaster::bind_chunk(yli::ontology::Chunk* const chunk)
+        void ChunkMaster::bind_Chunk(yli::ontology::Chunk* const chunk)
         {
             // get `childID` from `ChunkMaster` and set pointer to `chunk`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Chunk*>(
@@ -40,7 +40,7 @@ namespace yli
                     this->number_of_chunks);
         }
 
-        void ChunkMaster::unbind_chunk(const std::size_t childID)
+        void ChunkMaster::unbind_Chunk(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
                     childID,
@@ -62,7 +62,7 @@ namespace yli
             }
 
             // get `childID` from `Material` and set pointer to this `ChunkMaster`.
-            material->bind_chunk_master(this);
+            material->bind_ChunkMaster(this);
         }
 
         ChunkMaster::~ChunkMaster()
@@ -84,7 +84,7 @@ namespace yli
             }
 
             // set pointer to this `ChunkMaster` to `nullptr`.
-            material->unbind_chunk_master(this->childID);
+            material->unbind_ChunkMaster(this->childID);
         }
 
         void ChunkMaster::set_chunk_pointer(std::size_t childID, yli::ontology::Chunk* child_pointer)

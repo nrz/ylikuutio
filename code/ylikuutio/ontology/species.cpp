@@ -39,7 +39,7 @@ namespace yli
 {
     namespace ontology
     {
-        void Species::bind_object(yli::ontology::Object* const object)
+        void Species::bind_Object(yli::ontology::Object* const object)
         {
             // get `childID` from `Species` and set pointer to `object`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Object*>(
@@ -49,7 +49,7 @@ namespace yli
                     this->number_of_objects);
         }
 
-        void Species::unbind_object(const std::size_t childID)
+        void Species::unbind_Object(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
                     childID,
@@ -71,7 +71,7 @@ namespace yli
             }
 
             // get `childID` from `Material` and set pointer to this `Species`.
-            this->material_parent->bind_species(this);
+            this->material_parent->bind_Species(this);
         }
 
         void Species::bind_to_new_parent(yli::ontology::Material* const new_parent)
@@ -98,11 +98,11 @@ namespace yli
             }
 
             // unbind from the old parent `Material`.
-            material->unbind_species(this->childID);
+            material->unbind_Species(this->childID);
 
             // get `childID` from `Material` and set pointer to this `Species`.
             this->material_parent = new_parent;
-            this->material_parent->bind_species(this);
+            this->material_parent->bind_Species(this);
         }
 
         void Species::bind_to_new_parent(yli::ontology::Entity* const new_parent)
@@ -153,7 +153,7 @@ namespace yli
                     return;
                 }
 
-                this->material_parent->unbind_species(this->childID);
+                this->material_parent->unbind_Species(this->childID);
             }
         }
 

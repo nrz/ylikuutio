@@ -24,7 +24,7 @@ namespace yli
 {
     namespace input
     {
-        enum input_method
+        enum class InputMethod
         {
             KEYBOARD,                 // regular keyboard input.
             INPUT_FILE,               // input from file (TODO: implement).

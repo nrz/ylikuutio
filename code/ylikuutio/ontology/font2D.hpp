@@ -46,8 +46,8 @@ namespace yli
         class Font2D: public yli::ontology::Entity
         {
             public:
-                void bind_text2D(yli::ontology::Text2D* const text2D);
-                void unbind_text2D(const std::size_t childID);
+                void bind_Text2D(yli::ontology::Text2D* const text2D);
+                void unbind_Text2D(const std::size_t childID);
 
                 // constructor.
                 Font2D(

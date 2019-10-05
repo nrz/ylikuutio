@@ -132,17 +132,17 @@ int main(const int argc, const char* const argv[])
         return 1;
     }
 
-    int input_method_in_use = yli::input::KEYBOARD;
+    yli::input::InputMethod input_method_in_use = yli::input::InputMethod::KEYBOARD;
 
     // keypress callbacks.
-    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keypress_callback_engines = std::vector<yli::callback_system::KeyAndCallbackStruct>();
-    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_continuous_keypress_callback_engines = std::vector<yli::callback_system::KeyAndCallbackStruct>();
+    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keypress_callback_engines;
+    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_continuous_keypress_callback_engines;
 
     // This vector points to current keypress callback engines vector.
     std::vector<yli::callback_system::KeyAndCallbackStruct>* current_keypress_callback_engine_vector_pointer = &action_mode_keypress_callback_engines;
 
     // keyrelease callbacks.
-    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keyrelease_callback_engines = std::vector<yli::callback_system::KeyAndCallbackStruct>();
+    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keyrelease_callback_engines;
 
     // This vector points to current keyrelease callback engines vector.
     std::vector<yli::callback_system::KeyAndCallbackStruct>* current_keyrelease_callback_engine_vector_pointer = &action_mode_keyrelease_callback_engines;
@@ -233,7 +233,7 @@ int main(const int argc, const char* const argv[])
     planet_radius_setting_struct.name = "planet_radius";
     planet_radius_setting_struct.activate_callback = &yli::config::SettingMaster::activate_planet_radius; // planet radius may be for a planet or a moon.
     planet_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-    setting_master->create_setting(planet_radius_setting_struct);
+    setting_master->create_Setting(planet_radius_setting_struct);
 
     std::cout << "Creating yli::callback_system::CallbackEngine* cleanup_callback_engine ...\n";
     yli::callback_system::CallbackEngine cleanup_callback_engine = yli::callback_system::CallbackEngine();
@@ -678,7 +678,7 @@ int main(const int argc, const char* const argv[])
 
     // Keyrelease callbacks for console.
     // Key releases are checked in the order of this struct.
-    std::vector<yli::callback_system::KeyAndCallbackStruct> console_keyrelease_callback_engines = std::vector<yli::callback_system::KeyAndCallbackStruct>();
+    std::vector<yli::callback_system::KeyAndCallbackStruct> console_keyrelease_callback_engines;
     console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, release_left_control_in_console_callback_engine });
     console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, release_right_control_in_console_callback_engine });
     console_keyrelease_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_LALT, release_left_alt_in_console_callback_engine });
@@ -699,7 +699,7 @@ int main(const int argc, const char* const argv[])
 
     // Keypress callbacks for console.
     // Keypresses are checked in the order of this struct.
-    std::vector<yli::callback_system::KeyAndCallbackStruct> console_keypress_callback_engines = std::vector<yli::callback_system::KeyAndCallbackStruct>();
+    std::vector<yli::callback_system::KeyAndCallbackStruct> console_keypress_callback_engines;
     console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_GRAVE, exit_console_callback_engine });
     console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, press_left_control_in_console_callback_engine });
     console_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, press_right_control_in_console_callback_engine });
@@ -904,7 +904,7 @@ int main(const int argc, const char* const argv[])
                     my_universe->mouse_x += sdl_event.motion.xrel; // horizontal motion relative to screen center.
                     my_universe->mouse_y += sdl_event.motion.yrel; // vertical motion relative to screen center.
                 }
-                else if (sdl_event.type == SDL_KEYDOWN)
+                else if (sdl_event.type == SDL_KEYDOWN && current_keypress_callback_engine_vector_pointer != nullptr)
                 {
                     const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
 
@@ -916,7 +916,7 @@ int main(const int argc, const char* const argv[])
                             const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute();
 
                             if (any_value != nullptr &&
-                                    any_value->type == yli::common::UINT32_T)
+                                    any_value->type == yli::common::Datatype::UINT32_T)
                             {
                                 if (any_value->uint32_t_value == ENTER_CONSOLE_MAGIC_NUMBER)
                                 {
@@ -941,7 +941,7 @@ int main(const int argc, const char* const argv[])
 
                     my_console->process_key_event(sdl_event.key);
                 }
-                else if (sdl_event.type == SDL_KEYUP)
+                else if (sdl_event.type == SDL_KEYUP && current_keyrelease_callback_engine_vector_pointer != nullptr)
                 {
                     const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
 
@@ -953,7 +953,7 @@ int main(const int argc, const char* const argv[])
                             const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute();
 
                             if (any_value != nullptr &&
-                                    any_value->type == yli::common::UINT32_T)
+                                    any_value->type == yli::common::Datatype::UINT32_T)
                             {
                                 if (any_value->uint32_t_value == ENTER_CONSOLE_MAGIC_NUMBER)
                                 {
@@ -1052,14 +1052,14 @@ int main(const int argc, const char* const argv[])
                 {
                     bool is_pressed = false;
 
-                    if (input_method_in_use == yli::input::KEYBOARD)
+                    if (input_method_in_use == yli::input::InputMethod::KEYBOARD)
                     {
                         if (current_key_states[action_mode_continuous_keypress_callback_engines.at(i).keycode] == 1) // 1 = pressed, 0 = not pressed.
                         {
                             is_pressed = true;
                         }
                     }
-                    else if (input_method_in_use == yli::input::INPUT_FILE)
+                    else if (input_method_in_use == yli::input::InputMethod::INPUT_FILE)
                     {
                         // TODO: implement optionally loading keyreleases from a file (do not execute `SDL_GetKeyboardState` in that case).
                         if (false)
@@ -1069,7 +1069,7 @@ int main(const int argc, const char* const argv[])
                     }
                     else
                     {
-                        std::cerr << "Unsupported input method: " << input_method_in_use << "\n";
+                        std::cerr << "ERROR: unsupported input method.\n";
                     }
 
                     if (is_pressed)
@@ -1078,7 +1078,7 @@ int main(const int argc, const char* const argv[])
                         const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute();
 
                         if (any_value != nullptr &&
-                                any_value->type == yli::common::UINT32_T)
+                                any_value->type == yli::common::Datatype::UINT32_T)
                         {
                             if (any_value->uint32_t_value == ENTER_CONSOLE_MAGIC_NUMBER)
                             {

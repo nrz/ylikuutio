@@ -54,7 +54,7 @@ namespace yli
 
     namespace common
     {
-        enum datatype
+        enum class Datatype
         {
             UNKNOWN,
             ANY_STRUCT_SHARED_PTR,
@@ -181,7 +181,7 @@ namespace yli
                 AnyValue(const std::string& type, glm::vec3* const glm_vec3_pointer);
                 AnyValue(const std::string& type, glm::vec4* const glm_vec3_pointer);
 
-                int type;
+                yli::common::Datatype type;
                 std::shared_ptr<yli::common::AnyStruct> any_struct_shared_ptr;
                 std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr;
                 std::shared_ptr<std::vector<uint8_t>> std_vector_uint8_t_shared_ptr;

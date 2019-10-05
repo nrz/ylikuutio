@@ -38,7 +38,7 @@ namespace yli
 {
     namespace ontology
     {
-        void Material::bind_species(yli::ontology::Species* const species)
+        void Material::bind_Species(yli::ontology::Species* const species)
         {
             // Get `childID` from `Material` and set pointer to `species`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Species*>(
@@ -48,7 +48,7 @@ namespace yli
                     this->number_of_species);
         }
 
-        void Material::bind_vector_font(yli::ontology::VectorFont* const vector_font)
+        void Material::bind_VectorFont(yli::ontology::VectorFont* const vector_font)
         {
             // Get `childID` from `Material` and set pointer to `vector_font`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::VectorFont*>(
@@ -58,7 +58,7 @@ namespace yli
                     this->number_of_vector_fonts);
         }
 
-        void Material::bind_chunk_master(ontology::ChunkMaster* const chunk_master)
+        void Material::bind_ChunkMaster(ontology::ChunkMaster* const chunk_master)
         {
             // Get `childID` from `Material` and set pointer to `chunk_master`.
             yli::hierarchy::bind_child_to_parent<ontology::ChunkMaster*>(
@@ -68,7 +68,7 @@ namespace yli
                     this->number_of_chunk_masters);
         }
 
-        void Material::unbind_species(const std::size_t childID)
+        void Material::unbind_Species(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent<yli::ontology::Species*>(
                     childID,
@@ -77,7 +77,7 @@ namespace yli
                     this->number_of_species);
         }
 
-        void Material::unbind_vector_font(const std::size_t childID)
+        void Material::unbind_VectorFont(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent<yli::ontology::VectorFont*>(
                     childID,
@@ -86,7 +86,7 @@ namespace yli
                     this->number_of_vector_fonts);
         }
 
-        void Material::unbind_chunk_master(const std::size_t childID)
+        void Material::unbind_ChunkMaster(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent<yli::ontology::ChunkMaster*>(
                     childID,
@@ -108,7 +108,7 @@ namespace yli
             }
 
             // Get `childID` from the `Shader` and set pointer to this `Material`.
-            shader->bind_material(this);
+            shader->bind_Material(this);
         }
 
         Material::~Material()
@@ -144,7 +144,7 @@ namespace yli
                     return;
                 }
 
-                shader->unbind_material(this->childID);
+                shader->unbind_Material(this->childID);
             }
         }
 
@@ -209,11 +209,11 @@ namespace yli
             }
 
             // Unbind from the old parent `Shader`.
-            shader->unbind_material(this->childID);
+            shader->unbind_Material(this->childID);
 
             // Get `childID` from `Shader` and set pointer to this `Material`.
             this->parent = new_parent;
-            this->parent->bind_material(this);
+            this->parent->bind_Material(this);
         }
 
         void Material::set_terrain_species(yli::ontology::Species* const terrain_species)

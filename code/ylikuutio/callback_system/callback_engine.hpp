@@ -65,7 +65,7 @@ namespace yli
             //    as input parameter for the `CallbackParameter` constructor.
 
             public:
-                void bind_callback_object(yli::callback_system::CallbackObject* const callback_object);
+                void bind_CallbackObject(yli::callback_system::CallbackObject* const callback_object);
 
                 // constructor.
                 CallbackEngine();

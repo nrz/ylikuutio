@@ -51,7 +51,7 @@ namespace yli
         constexpr std::size_t get_face_normal_i(
                 const std::size_t x,
                 const std::size_t z,
-                const BilinearDirections compass_point_code,
+                const yli::triangulation::BilinearDirections compass_point_code,
                 const std::size_t actual_image_width)
         {
             // Face indices example for a 4x4 image file using bilinear interpolation.
@@ -84,21 +84,21 @@ namespace yli
 
             switch (compass_point_code)
             {
-                case SSW:
+                case yli::triangulation::BilinearDirections::SSW:
                     return 4 * (z - 1) * (actual_image_width - 1) + (4 * x) - 1;
-                case WSW:
+                case yli::triangulation::BilinearDirections::WSW:
                     return 4 * (z - 1) * (actual_image_width - 1) + (4 * x) - 2;
-                case WNW:
+                case yli::triangulation::BilinearDirections::WNW:
                     return 4 * z * (actual_image_width - 1) + (4 * x) - 4;
-                case NNW:
+                case yli::triangulation::BilinearDirections::NNW:
                     return 4 * z * (actual_image_width - 1) + (4 * x) - 1;
-                case NNE:
+                case yli::triangulation::BilinearDirections::NNE:
                     return 4 * z * (actual_image_width - 1) + (4 * x) + 1;
-                case ENE:
+                case yli::triangulation::BilinearDirections::ENE:
                     return 4 * z * (actual_image_width - 1) + (4 * x);
-                case ESE:
+                case yli::triangulation::BilinearDirections::ESE:
                     return 4 * (z - 1) * (actual_image_width - 1) + (4 * x) + 2;
-                case SSE:
+                case yli::triangulation::BilinearDirections::SSE:
                     return 4 * (z - 1) * (actual_image_width - 1) + (4 * x) + 1;
                 default:
                     return 0; // this line should never be reached.

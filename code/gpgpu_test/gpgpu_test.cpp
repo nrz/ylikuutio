@@ -75,7 +75,7 @@ int main(const int argc, const char* const argv[])
     command_line_master.print_keys_and_values();
 
     // keypress callbacks.
-    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keypress_callback_engines = std::vector<yli::callback_system::KeyAndCallbackStruct>();
+    std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keypress_callback_engines;
 
     // This vector points to current keypress callback engines vector.
     std::vector<yli::callback_system::KeyAndCallbackStruct>* current_keypress_callback_engine_vector_pointer = &action_mode_keypress_callback_engines;
@@ -224,7 +224,7 @@ int main(const int argc, const char* const argv[])
             // poll all SDL events.
             while (SDL_PollEvent(&sdl_event))
             {
-                if (sdl_event.type == SDL_KEYDOWN)
+                if (sdl_event.type == SDL_KEYDOWN && current_keypress_callback_engine_vector_pointer != nullptr)
                 {
                     const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
 
@@ -236,7 +236,7 @@ int main(const int argc, const char* const argv[])
                             const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute();
 
                             if (any_value != nullptr &&
-                                    any_value->type == yli::common::UINT32_T)
+                                    any_value->type == yli::common::Datatype::UINT32_T)
                             {
                                 if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
                                 {

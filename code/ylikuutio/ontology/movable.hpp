@@ -74,32 +74,32 @@ namespace yli
                     cartesian_coordinates_setting_struct.activate_callback = &yli::config::SettingMaster::activate_cartesian_coordinates;
                     cartesian_coordinates_setting_struct.read_callback = &yli::config::SettingMaster::read_cartesian_coordinates;
                     cartesian_coordinates_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                    std::cout << "Executing `setting_master->create_setting(cartesian_coordinates_setting_struct);` ...\n";
-                    setting_master->create_setting(cartesian_coordinates_setting_struct);
+                    std::cout << "Executing `setting_master->create_Setting(cartesian_coordinates_setting_struct);` ...\n";
+                    setting_master->create_Setting(cartesian_coordinates_setting_struct);
 
                     yli::config::SettingStruct x_setting_struct(std::make_shared<yli::common::AnyValue>(float_x));
                     x_setting_struct.name = "x";
                     x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_x;
                     x_setting_struct.read_callback = &yli::config::SettingMaster::read_x;
                     x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                    std::cout << "Executing `setting_master->create_setting(x_setting_struct);` ...\n";
-                    setting_master->create_setting(x_setting_struct);
+                    std::cout << "Executing `setting_master->create_Setting(x_setting_struct);` ...\n";
+                    setting_master->create_Setting(x_setting_struct);
 
                     yli::config::SettingStruct y_setting_struct(std::make_shared<yli::common::AnyValue>(float_y));
                     y_setting_struct.name = "y";
                     y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_y;
                     y_setting_struct.read_callback = &yli::config::SettingMaster::read_y;
                     y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                    std::cout << "Executing `setting_master->create_setting(y_setting_struct);` ...\n";
-                    setting_master->create_setting(y_setting_struct);
+                    std::cout << "Executing `setting_master->create_Setting(y_setting_struct);` ...\n";
+                    setting_master->create_Setting(y_setting_struct);
 
                     yli::config::SettingStruct z_setting_struct(std::make_shared<yli::common::AnyValue>(float_z));
                     z_setting_struct.name = "z";
                     z_setting_struct.activate_callback = &yli::config::SettingMaster::activate_z;
                     z_setting_struct.read_callback = &yli::config::SettingMaster::read_z;
                     z_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                    std::cout << "Executing `setting_master->create_setting(z_setting_struct);` ...\n";
-                    setting_master->create_setting(z_setting_struct);
+                    std::cout << "Executing `setting_master->create_Setting(z_setting_struct);` ...\n";
+                    setting_master->create_Setting(z_setting_struct);
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Movable*";

@@ -40,7 +40,7 @@ namespace yli
     {
         class Entity;
 
-        void Holobiont::bind_biont(yli::ontology::Biont* const biont)
+        void Holobiont::bind_Biont(yli::ontology::Biont* const biont)
         {
             // get `childID` from `Holobiont` and set pointer to `object`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Biont*>(
@@ -50,7 +50,7 @@ namespace yli
                     this->number_of_bionts);
         }
 
-        void Holobiont::unbind_biont(const std::size_t childID)
+        void Holobiont::unbind_Biont(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent<yli::ontology::Biont*>(
                     childID,
@@ -72,7 +72,7 @@ namespace yli
             }
 
             // get `childID` from `Symbiosis` and set pointer to this `Holobiont`.
-            symbiosis->bind_holobiont(this);
+            symbiosis->bind_Holobiont(this);
         }
 
         void Holobiont::bind_to_new_parent(yli::ontology::Symbiosis* const new_parent)
@@ -99,11 +99,11 @@ namespace yli
             }
 
             // unbind from the old parent `Symbiosis`.
-            symbiosis->unbind_holobiont(this->childID);
+            symbiosis->unbind_Holobiont(this->childID);
 
             // get `childID` from `Symbiosis` and set pointer to this `Holobiont`.
             this->symbiosis_parent = new_parent;
-            this->symbiosis_parent->bind_holobiont(this);
+            this->symbiosis_parent->bind_Holobiont(this);
         }
 
         Holobiont::~Holobiont()
@@ -127,7 +127,7 @@ namespace yli
             }
 
             // set pointer to this `Holobiont` to `nullptr`.
-            symbiosis->unbind_holobiont(this->childID);
+            symbiosis->unbind_Holobiont(this->childID);
         }
 
         void Holobiont::render()
@@ -145,7 +145,7 @@ namespace yli
             }
         }
 
-        void Holobiont::create_bionts()
+        void Holobiont::create_Bionts()
         {
             // requirements:
             // `this->symbiosis_parent` must not be `nullptr`.
@@ -154,7 +154,7 @@ namespace yli
 
             if (symbiosis == nullptr)
             {
-                std::cerr << "ERROR: `Holobiont::create_bionts`: `symbiosis` is `nullptr`!\n";
+                std::cerr << "ERROR: `Holobiont::create_Bionts`: `symbiosis` is `nullptr`!\n";
                 return;
             }
 
@@ -168,7 +168,7 @@ namespace yli
             {
                 if (!symbiosis->has_texture(biontID))
                 {
-                    std::cerr << "ERROR: `Holobiont::create_bionts`: There is no texture for biont with biontID " << biontID << "\n";
+                    std::cerr << "ERROR: `Holobiont::create_Bionts`: There is no texture for biont with biontID " << biontID << "\n";
                     continue;
                 }
 

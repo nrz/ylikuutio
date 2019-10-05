@@ -52,7 +52,7 @@ namespace yli
         class Entity;
         class Holobiont;
 
-        void Symbiosis::bind_symbiont_material(yli::ontology::SymbiontMaterial* const symbiont_material)
+        void Symbiosis::bind_SymbiontMaterial(yli::ontology::SymbiontMaterial* const symbiont_material)
         {
             // get `childID` from `Symbiosis` and set pointer to `symbiont_material`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::SymbiontMaterial*>(
@@ -62,7 +62,7 @@ namespace yli
                     this->number_of_symbiont_materials);
         }
 
-        void Symbiosis::unbind_symbiont_material(const std::size_t childID)
+        void Symbiosis::unbind_SymbiontMaterial(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
                     childID,
@@ -71,7 +71,7 @@ namespace yli
                     this->number_of_symbiont_materials);
         }
 
-        void Symbiosis::bind_holobiont(yli::ontology::Holobiont* const holobiont)
+        void Symbiosis::bind_Holobiont(yli::ontology::Holobiont* const holobiont)
         {
             // get `childID` from `Symbiosis` and set pointer to `holobiont`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Holobiont*>(
@@ -81,7 +81,7 @@ namespace yli
                     this->number_of_holobionts);
         }
 
-        void Symbiosis::unbind_holobiont(const std::size_t childID)
+        void Symbiosis::unbind_Holobiont(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
                     childID,
@@ -103,7 +103,7 @@ namespace yli
             }
 
             // get `childID` from `Shader` and set pointer to this `Symbiosis`.
-            shader->bind_symbiosis(this);
+            shader->bind_Symbiosis(this);
         }
 
         void Symbiosis::bind_to_new_parent(yli::ontology::Shader* const new_parent)
@@ -130,11 +130,11 @@ namespace yli
             }
 
             // unbind from the old parent `Shader`.
-            shader->unbind_symbiosis(this->childID);
+            shader->unbind_Symbiosis(this->childID);
 
             // get `childID` from `Shader` and set pointer to this `Symbiosis`.
             this->parent = new_parent;
-            this->parent->bind_symbiosis(this);
+            this->parent->bind_Symbiosis(this);
         }
 
         Symbiosis::~Symbiosis()
@@ -162,7 +162,7 @@ namespace yli
             }
 
             // set pointer to this `Symbiosis` to `nullptr`.
-            shader->unbind_symbiosis(this->childID);
+            shader->unbind_Symbiosis(this->childID);
         }
 
         void Symbiosis::render()
@@ -211,7 +211,7 @@ namespace yli
                 yli::ontology::get_number_of_descendants(this->holobiont_pointer_vector);
         }
 
-        const std::string& Symbiosis::get_model_file_format()
+        const std::string& Symbiosis::get_model_file_format() const
         {
             return this->model_file_format;
         }

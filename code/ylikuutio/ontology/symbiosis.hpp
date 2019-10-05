@@ -65,11 +65,11 @@ namespace yli
         class Symbiosis: public yli::ontology::Entity
         {
             public:
-                void bind_symbiont_material(yli::ontology::SymbiontMaterial* const symbiont_material);
-                void bind_holobiont(yli::ontology::Holobiont* const holobiont);
+                void bind_SymbiontMaterial(yli::ontology::SymbiontMaterial* const symbiont_material);
+                void bind_Holobiont(yli::ontology::Holobiont* const holobiont);
 
-                void unbind_symbiont_material(const std::size_t childID);
-                void unbind_holobiont(const std::size_t childID);
+                void unbind_SymbiontMaterial(const std::size_t childID);
+                void unbind_Holobiont(const std::size_t childID);
 
                 // this method sets pointer to this `Symbiosis` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
                 void bind_to_new_parent(yli::ontology::Shader* const new_parent);
@@ -118,7 +118,7 @@ namespace yli
                 // this method renders all `SymbiontMaterial`s belonging to this `Symbiosis`.
                 void render();
 
-                const std::string& get_model_file_format();
+                const std::string& get_model_file_format() const;
 
                 yli::ontology::SymbiontMaterial* get_symbiont_material(const std::size_t symbiont_material_i) const;
                 yli::ontology::SymbiontSpecies* get_symbiont_species(const std::size_t biontID) const;

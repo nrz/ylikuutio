@@ -57,8 +57,8 @@ namespace yli
         class Holobiont: public yli::ontology::Movable
         {
             public:
-                void bind_biont(yli::ontology::Biont* const biont);
-                void unbind_biont(const std::size_t childID);
+                void bind_Biont(yli::ontology::Biont* const biont);
+                void unbind_Biont(const std::size_t childID);
 
                 // this method sets pointer to this `Holobiont` to `nullptr`, sets `parent` according to the input,
                 // and requests a new `childID` from the new `Symbiosis`.
@@ -89,7 +89,7 @@ namespace yli
                     // get `childID` from `Symbiosis` and set pointer to this `Holobiont`.
                     this->bind_to_parent();
 
-                    this->create_bionts();
+                    this->create_Bionts();
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->biont_pointer_vector);
@@ -122,7 +122,7 @@ namespace yli
                 // this method renders this `Holobiont`.
                 void render();
 
-                void create_bionts();
+                void create_Bionts();
 
                 yli::ontology::Symbiosis* symbiosis_parent; // pointer to the `Symbiosis`.
 

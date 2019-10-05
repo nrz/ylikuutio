@@ -92,6 +92,13 @@ There are different hierarchical paths of ontology:
 `Universe` (see above).
 `Console` is a class that provides in-app console that can be either in the main view or in the future also inside a `Scene`.
 
+'compute' path:
+`Universe` (see above).
+`World` (see above).
+`Scene` (see above).
+`Shader` (see above).
+`ComputeTask` is a class that owns the data used for GPGPU computation using the GLSL vertex shader and GLSL fragment shader owned by the `Shader`.
+
 Triangulation
 
 Height maps are usually provided as a 2D grid. As Ylikuutio uses only triangles, the 2D grid needs to be triangulated.
