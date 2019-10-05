@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "audio_master.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
 
 #include "SDL.h"
 
@@ -28,11 +29,6 @@
 
 namespace yli
 {
-    namespace ontology
-    {
-        class Universe;
-    }
-
     namespace audio
     {
         yli::audio::AudioMaster* AudioMaster::audio_master;
@@ -64,7 +60,11 @@ namespace yli
         AudioMaster::~AudioMaster()
         {
             // destructor.
-            SDL_CloseAudioDevice(this->device);
+
+            if (this->universe != nullptr && !this->universe->get_is_headless())
+            {
+                SDL_CloseAudioDevice(this->device);
+            }
         }
 
         bool AudioMaster::load_and_play(const std::string& audio_file)
@@ -76,55 +76,62 @@ namespace yli
             }
 
             // There's no sound with that filename loaded yet, so load it now.
-            SDL_AudioSpec wav_spec = SDL_AudioSpec();
-            uint32_t wav_length;
-            uint8_t* wav_buffer;
-
-            if (SDL_LoadWAV(audio_file.c_str(), &wav_spec, &wav_buffer, &wav_length) == NULL)
+            if (this->universe != nullptr && !this->universe->get_is_headless())
             {
-                // Loading the sound failed.
-                std::cerr << "Loading WAV file " << audio_file << " failed.\n";
-                return false;
-            }
+                SDL_AudioSpec wav_spec = SDL_AudioSpec();
+                uint32_t wav_length;
+                uint8_t* wav_buffer;
 
-            // https://wiki.libsdl.org/SDL_OpenAudioDevice
-            wav_spec.channels = 2;
-            wav_spec.samples = 4096;
-            wav_spec.callback = yli::audio::AudioMaster::play_audio_callback;
-
-            this->device = SDL_OpenAudioDevice(NULL, 0, &wav_spec, &this->audio_spec, SDL_AUDIO_ALLOW_FORMAT_CHANGE);
-
-            if (this->device == 0)
-            {
-                SDL_Log("Failed to open audio: %s", SDL_GetError());
-            }
-            else
-            {
-                if (this->audio_spec.format != wav_spec.format)
+                if (SDL_LoadWAV(audio_file.c_str(), &wav_spec, &wav_buffer, &wav_length) == NULL)
                 {
-                    SDL_Log("Float32 audio format was not available.");
+                    // Loading the sound failed.
+                    std::cerr << "Loading WAV file " << audio_file << " failed.\n";
+                    return false;
                 }
+
+                // https://wiki.libsdl.org/SDL_OpenAudioDevice
+                wav_spec.channels = 2;
+                wav_spec.samples = 4096;
+                wav_spec.callback = yli::audio::AudioMaster::play_audio_callback;
+
+                this->device = SDL_OpenAudioDevice(NULL, 0, &wav_spec, &this->audio_spec, SDL_AUDIO_ALLOW_FORMAT_CHANGE);
+
+                if (this->device == 0)
+                {
+                    SDL_Log("Failed to open audio: %s", SDL_GetError());
+                }
+                else
+                {
+                    if (this->audio_spec.format != wav_spec.format)
+                    {
+                        SDL_Log("Float32 audio format was not available.");
+                    }
+                }
+
+                this->wav_pointer = wav_buffer;
+                SDL_AtomicSet(&this->remaining_length, wav_length);
+                this->wav_buffer_pointer_map[audio_file] = wav_buffer;
+                SDL_PauseAudioDevice(this->device, 0); // start playing.
             }
 
-            this->wav_pointer = wav_buffer;
-            SDL_AtomicSet(&this->remaining_length, wav_length);
-            this->wav_buffer_pointer_map[audio_file] = wav_buffer;
-            SDL_PauseAudioDevice(this->device, 0); // start playing.
             return true;
         }
 
         void AudioMaster::unload(const std::string& audio_file)
         {
-            if (this->wav_buffer_pointer_map.count(audio_file) == 1)
+            if (this->universe != nullptr && !this->universe->get_is_headless())
             {
-                if (*current_playlist_sound_iterator == audio_file)
+                if (this->wav_buffer_pointer_map.count(audio_file) == 1)
                 {
-                    // Stop the sound before unloading it.
-                    SDL_PauseAudioDevice(this->device, 1); // stop playing.
-                }
+                    if (*current_playlist_sound_iterator == audio_file)
+                    {
+                        // Stop the sound before unloading it.
+                        SDL_PauseAudioDevice(this->device, 1); // stop playing.
+                    }
 
-                SDL_FreeWAV(this->wav_buffer_pointer_map[audio_file]);
-                this->wav_buffer_pointer_map.erase(audio_file);
+                    SDL_FreeWAV(this->wav_buffer_pointer_map[audio_file]);
+                    this->wav_buffer_pointer_map.erase(audio_file);
+                }
             }
         }
 
@@ -169,40 +176,43 @@ namespace yli
 
         void AudioMaster::update()
         {
-            // This function checks if a playlist is running.
-            // if yes, then if the the previous sound has ended,
-            // its memory gets freed and a new sound gets started.
-            if (this->current_playlist.size() > 0)
+            if (this->universe != nullptr && !this->universe->get_is_headless())
             {
-                if (this->wav_buffer_pointer_map.count(*this->current_playlist_sound_iterator) == 1)
+                // This function checks if a playlist is running.
+                // if yes, then if the the previous sound has ended,
+                // its memory gets freed and a new sound gets started.
+                if (this->current_playlist.size() > 0)
                 {
-                    // OK, there is a sound which might be playing, so let's check its status.
-                    const int remaining_length = this->get_remaining_length();
-
-                    if (remaining_length == 0)
+                    if (this->wav_buffer_pointer_map.count(*this->current_playlist_sound_iterator) == 1)
                     {
-                        SDL_PauseAudioDevice(this->device, 1); // stop playing.
-                        this->unload(*this->current_playlist_sound_iterator);
+                        // OK, there is a sound which might be playing, so let's check its status.
+                        const int remaining_length = this->get_remaining_length();
 
-                        // play the next sound.
+                        if (remaining_length == 0)
+                        {
+                            SDL_PauseAudioDevice(this->device, 1); // stop playing.
+                            this->unload(*this->current_playlist_sound_iterator);
 
-                        if (++this->current_playlist_sound_iterator != this->playlist_map[this->current_playlist].end())
-                        {
-                            // Next sound.
-                            this->load_and_play(*this->current_playlist_sound_iterator);
-                        }
-                        else
-                        {
-                            // The previous sound was the last sound.
-                            if (this->loop)
+                            // play the next sound.
+
+                            if (++this->current_playlist_sound_iterator != this->playlist_map[this->current_playlist].end())
                             {
-                                // Start from the first.
-                                this->current_playlist_sound_iterator = this->playlist_map[this->current_playlist].begin();
+                                // Next sound.
                                 this->load_and_play(*this->current_playlist_sound_iterator);
                             }
                             else
                             {
-                                this->current_playlist = ""; // no current playlist.
+                                // The previous sound was the last sound.
+                                if (this->loop)
+                                {
+                                    // Start from the first.
+                                    this->current_playlist_sound_iterator = this->playlist_map[this->current_playlist].begin();
+                                    this->load_and_play(*this->current_playlist_sound_iterator);
+                                }
+                                else
+                                {
+                                    this->current_playlist = ""; // no current playlist.
+                                }
                             }
                         }
                     }
@@ -238,27 +248,30 @@ namespace yli
 
         void AudioMaster::play_audio(void* userdata, uint8_t* stream, int length)
         {
-            // TODO: mix audio with `SDL_MixAudioFormat`!
-            // https://wiki.libsdl.org/SDL_MixAudioFormat
-            int remaining_length = this->get_remaining_length();
-
-            if (remaining_length == 0)
+            if (this->universe != nullptr && !this->universe->get_is_headless())
             {
-                // there's nothing to play.
-                return;
+                // TODO: mix audio with `SDL_MixAudioFormat`!
+                // https://wiki.libsdl.org/SDL_MixAudioFormat
+                int remaining_length = this->get_remaining_length();
+
+                if (remaining_length == 0)
+                {
+                    // there's nothing to play.
+                    return;
+                }
+
+                if (length > remaining_length)
+                {
+                    length = remaining_length;
+                }
+
+                SDL_memset(stream, 0, length);
+                SDL_MixAudioFormat(stream, this->wav_pointer, AUDIO_F32, length, SDL_MIX_MAXVOLUME);
+                this->wav_pointer += length;
+
+                remaining_length -= length;
+                SDL_AtomicSet(&this->remaining_length, remaining_length);
             }
-
-            if (length > remaining_length)
-            {
-                length = remaining_length;
-            }
-
-            SDL_memset(stream, 0, length);
-            SDL_MixAudioFormat(stream, this->wav_pointer, AUDIO_F32, length, SDL_MIX_MAXVOLUME);
-            this->wav_pointer += length;
-
-            remaining_length -= length;
-            SDL_AtomicSet(&this->remaining_length, remaining_length);
         }
 
         void AudioMaster::play_audio_callback(void* userdata, uint8_t* stream, int length)
