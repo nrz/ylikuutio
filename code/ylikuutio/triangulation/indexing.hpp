@@ -84,21 +84,21 @@ namespace yli
 
             switch (compass_point_code)
             {
-                case SSW:
+                case yli::triangulation::BilinearDirections::SSW:
                     return 4 * (z - 1) * (actual_image_width - 1) + (4 * x) - 1;
-                case WSW:
+                case yli::triangulation::BilinearDirections::WSW:
                     return 4 * (z - 1) * (actual_image_width - 1) + (4 * x) - 2;
-                case WNW:
+                case yli::triangulation::BilinearDirections::WNW:
                     return 4 * z * (actual_image_width - 1) + (4 * x) - 4;
-                case NNW:
+                case yli::triangulation::BilinearDirections::NNW:
                     return 4 * z * (actual_image_width - 1) + (4 * x) - 1;
-                case NNE:
+                case yli::triangulation::BilinearDirections::NNE:
                     return 4 * z * (actual_image_width - 1) + (4 * x) + 1;
-                case ENE:
+                case yli::triangulation::BilinearDirections::ENE:
                     return 4 * z * (actual_image_width - 1) + (4 * x);
-                case ESE:
+                case yli::triangulation::BilinearDirections::ESE:
                     return 4 * (z - 1) * (actual_image_width - 1) + (4 * x) + 2;
-                case SSE:
+                case yli::triangulation::BilinearDirections::SSE:
                     return 4 * (z - 1) * (actual_image_width - 1) + (4 * x) + 1;
                 default:
                     return 0; // this line should never be reached.

@@ -185,7 +185,7 @@ namespace yli
                 const std::size_t z,
                 const std::size_t image_width)
         {
-            return yli::triangulation::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, ENE, image_width);
+            return yli::triangulation::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, yli::triangulation::BilinearDirections::ENE, image_width);
         }
         const glm::vec3& w_face_normal(
                 const std::vector<glm::vec3>& face_normal_vector_vec3,
@@ -193,7 +193,7 @@ namespace yli
                 const std::size_t z,
                 const std::size_t image_width)
         {
-            return yli::triangulation::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, NNE, image_width);
+            return yli::triangulation::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, yli::triangulation::BilinearDirections::NNE, image_width);
         }
         const glm::vec3& n_face_normal(
                 const std::vector<glm::vec3>& face_normal_vector_vec3,
@@ -201,7 +201,7 @@ namespace yli
                 const std::size_t z,
                 const std::size_t image_width)
         {
-            return yli::triangulation::get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width);
+            return yli::triangulation::get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::WSW, image_width);
         }
         const glm::vec3& e_face_normal(
                 const std::vector<glm::vec3>& face_normal_vector_vec3,
@@ -209,7 +209,7 @@ namespace yli
                 const std::size_t z,
                 const std::size_t image_width)
         {
-            return yli::triangulation::get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width);
+            return yli::triangulation::get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::SSW, image_width);
         }
 
         // for southeast-northwest edges.
@@ -224,22 +224,22 @@ namespace yli
 
             switch (compass_point_code)
             {
-                case SSE_CODE_FOR_SE_NW:
+                case yli::triangulation::SoutheastNorthwestEdgesDirections::SSE_CODE_FOR_SE_NW:
                     face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * x;
                     break;
-                case WNW_CODE_FOR_SE_NW:
+                case yli::triangulation::SoutheastNorthwestEdgesDirections::WNW_CODE_FOR_SE_NW:
                     face_normal_i = 2 * z * (image_width - 1) + 2 * x - 2;
                     break;
-                case ESE_CODE_FOR_SE_NW:
+                case yli::triangulation::SoutheastNorthwestEdgesDirections::ESE_CODE_FOR_SE_NW:
                     face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * x + 1;
                     break;
-                case NNW_CODE_FOR_SE_NW:
+                case yli::triangulation::SoutheastNorthwestEdgesDirections::NNW_CODE_FOR_SE_NW:
                     face_normal_i = 2 * z * (image_width - 1) + 2 * x - 1;
                     break;
-                case SW_CODE_FOR_SE_NW:
+                case yli::triangulation::SoutheastNorthwestEdgesDirections::SW_CODE_FOR_SE_NW:
                     face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * x - 1;
                     break;
-                case NE_CODE_FOR_SE_NW:
+                case yli::triangulation::SoutheastNorthwestEdgesDirections::NE_CODE_FOR_SE_NW:
                     face_normal_i = 2 * z * (image_width - 1) + 2 * x;
                     break;
                 default:
@@ -262,22 +262,22 @@ namespace yli
 
             switch (compass_point_code)
             {
-                case SSW_CODE_FOR_SW_NE:
+                case yli::triangulation::SouthwestNortheastEdgesDirections::SSW_CODE_FOR_SW_NE:
                     face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * x - 2;
                     break;
-                case ENE_CODE_FOR_SW_NE:
+                case yli::triangulation::SouthwestNortheastEdgesDirections::ENE_CODE_FOR_SW_NE:
                     face_normal_i = 2 * z * (image_width - 1) + 2 * x;
                     break;
-                case WSW_CODE_FOR_SW_NE:
+                case yli::triangulation::SouthwestNortheastEdgesDirections::WSW_CODE_FOR_SW_NE:
                     face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * x - 1;
                     break;
-                case NNE_CODE_FOR_SW_NE:
+                case yli::triangulation::SouthwestNortheastEdgesDirections::NNE_CODE_FOR_SW_NE:
                     face_normal_i = 2 * z * (image_width - 1) + 2 * x + 1;
                     break;
-                case SE_CODE_FOR_SW_NE:
+                case yli::triangulation::SouthwestNortheastEdgesDirections::SE_CODE_FOR_SW_NE:
                     face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * x + 1;
                     break;
-                case NW_CODE_FOR_SW_NE:
+                case yli::triangulation::SouthwestNortheastEdgesDirections::NW_CODE_FOR_SW_NE:
                     face_normal_i = 2 * z * (image_width - 1) + 2 * x - 1;
                     break;
                 default:
