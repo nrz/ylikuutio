@@ -904,7 +904,7 @@ int main(const int argc, const char* const argv[])
                     my_universe->mouse_x += sdl_event.motion.xrel; // horizontal motion relative to screen center.
                     my_universe->mouse_y += sdl_event.motion.yrel; // vertical motion relative to screen center.
                 }
-                else if (sdl_event.type == SDL_KEYDOWN)
+                else if (sdl_event.type == SDL_KEYDOWN && current_keypress_callback_engine_vector_pointer != nullptr)
                 {
                     const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
 
@@ -941,7 +941,7 @@ int main(const int argc, const char* const argv[])
 
                     my_console->process_key_event(sdl_event.key);
                 }
-                else if (sdl_event.type == SDL_KEYUP)
+                else if (sdl_event.type == SDL_KEYUP && current_keyrelease_callback_engine_vector_pointer != nullptr)
                 {
                     const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
 

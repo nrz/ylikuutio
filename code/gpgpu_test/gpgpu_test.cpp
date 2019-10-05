@@ -224,7 +224,7 @@ int main(const int argc, const char* const argv[])
             // poll all SDL events.
             while (SDL_PollEvent(&sdl_event))
             {
-                if (sdl_event.type == SDL_KEYDOWN)
+                if (sdl_event.type == SDL_KEYDOWN && current_keypress_callback_engine_vector_pointer != nullptr)
                 {
                     const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
 
