@@ -225,6 +225,7 @@ namespace yli
 
         int AudioMaster::get_remaining_length()
         {
+            // This function is not `const` due to use of `SDL_AtomicGet`.
             return SDL_AtomicGet(&this->remaining_length);
         }
 

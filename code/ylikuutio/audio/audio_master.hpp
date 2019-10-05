@@ -50,7 +50,7 @@ namespace yli
                 void clear_playlist(const std::string& playlist);
                 void erase_playlist(const std::string& playlist);
 
-                int get_remaining_length();
+                int get_remaining_length(); // This function is not `const` due to use of `SDL_AtomicGet`.
 
             private:
                 void play_audio(void* userdata, uint8_t* stream, int length);
