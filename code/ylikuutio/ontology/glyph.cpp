@@ -95,7 +95,7 @@ namespace yli
             }
         }
 
-        const char* Glyph::get_unicode_char_pointer()
+        const char* Glyph::get_unicode_char_pointer() const
         {
             return this->unicode_char_pointer;
         }
