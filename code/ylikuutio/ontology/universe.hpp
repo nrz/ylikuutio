@@ -458,7 +458,7 @@ namespace yli
 
                     this->scheme_master = std::make_shared<yli::scheme::SchemeMaster>();
 
-                    this->audio_master = std::make_shared<yli::audio::AudioMaster>();
+                    this->audio_master = std::make_shared<yli::audio::AudioMaster>(this);
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
