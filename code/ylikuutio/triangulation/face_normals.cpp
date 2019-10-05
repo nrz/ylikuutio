@@ -224,22 +224,22 @@ namespace yli
 
             switch (compass_point_code)
             {
-                case yli::triangulation::SoutheastNorthwestEdgesDirections::SSE_CODE_FOR_SE_NW:
+                case yli::triangulation::SoutheastNorthwestEdgesDirections::SSE:
                     face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * x;
                     break;
-                case yli::triangulation::SoutheastNorthwestEdgesDirections::WNW_CODE_FOR_SE_NW:
+                case yli::triangulation::SoutheastNorthwestEdgesDirections::WNW:
                     face_normal_i = 2 * z * (image_width - 1) + 2 * x - 2;
                     break;
-                case yli::triangulation::SoutheastNorthwestEdgesDirections::ESE_CODE_FOR_SE_NW:
+                case yli::triangulation::SoutheastNorthwestEdgesDirections::ESE:
                     face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * x + 1;
                     break;
-                case yli::triangulation::SoutheastNorthwestEdgesDirections::NNW_CODE_FOR_SE_NW:
+                case yli::triangulation::SoutheastNorthwestEdgesDirections::NNW:
                     face_normal_i = 2 * z * (image_width - 1) + 2 * x - 1;
                     break;
-                case yli::triangulation::SoutheastNorthwestEdgesDirections::SW_CODE_FOR_SE_NW:
+                case yli::triangulation::SoutheastNorthwestEdgesDirections::SW:
                     face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * x - 1;
                     break;
-                case yli::triangulation::SoutheastNorthwestEdgesDirections::NE_CODE_FOR_SE_NW:
+                case yli::triangulation::SoutheastNorthwestEdgesDirections::NE:
                     face_normal_i = 2 * z * (image_width - 1) + 2 * x;
                     break;
                 default:
@@ -262,22 +262,22 @@ namespace yli
 
             switch (compass_point_code)
             {
-                case yli::triangulation::SouthwestNortheastEdgesDirections::SSW_CODE_FOR_SW_NE:
+                case yli::triangulation::SouthwestNortheastEdgesDirections::SSW:
                     face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * x - 2;
                     break;
-                case yli::triangulation::SouthwestNortheastEdgesDirections::ENE_CODE_FOR_SW_NE:
+                case yli::triangulation::SouthwestNortheastEdgesDirections::ENE:
                     face_normal_i = 2 * z * (image_width - 1) + 2 * x;
                     break;
-                case yli::triangulation::SouthwestNortheastEdgesDirections::WSW_CODE_FOR_SW_NE:
+                case yli::triangulation::SouthwestNortheastEdgesDirections::WSW:
                     face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * x - 1;
                     break;
-                case yli::triangulation::SouthwestNortheastEdgesDirections::NNE_CODE_FOR_SW_NE:
+                case yli::triangulation::SouthwestNortheastEdgesDirections::NNE:
                     face_normal_i = 2 * z * (image_width - 1) + 2 * x + 1;
                     break;
-                case yli::triangulation::SouthwestNortheastEdgesDirections::SE_CODE_FOR_SW_NE:
+                case yli::triangulation::SouthwestNortheastEdgesDirections::SE:
                     face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * x + 1;
                     break;
-                case yli::triangulation::SouthwestNortheastEdgesDirections::NW_CODE_FOR_SW_NE:
+                case yli::triangulation::SouthwestNortheastEdgesDirections::NW:
                     face_normal_i = 2 * z * (image_width - 1) + 2 * x - 1;
                     break;
                 default:
