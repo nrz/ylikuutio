@@ -34,7 +34,7 @@ namespace yli
 {
     namespace graph
     {
-        void Graph::bind_node(yli::graph::Node* const node)
+        void Graph::bind_Node(yli::graph::Node* const node)
         {
             // get `childID` from `Symbiosis` and set pointer to `symbiont_material`.
             yli::hierarchy::bind_child_to_parent<yli::graph::Node*>(
@@ -44,7 +44,7 @@ namespace yli
                     this->number_of_nodes);
         }
 
-        void Graph::unbind_node(const std::size_t childID)
+        void Graph::unbind_Node(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
                     childID,

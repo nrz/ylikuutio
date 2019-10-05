@@ -82,8 +82,8 @@ namespace yli
         class World: public yli::ontology::Entity
         {
             public:
-                void bind_scene(yli::ontology::Scene* const scene);
-                void unbind_scene(const std::size_t childID);
+                void bind_Scene(yli::ontology::Scene* const scene);
+                void unbind_Scene(const std::size_t childID);
 
                 World(yli::ontology::Universe* const universe)
                     : Entity(universe)

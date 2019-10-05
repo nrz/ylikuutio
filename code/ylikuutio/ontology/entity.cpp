@@ -33,7 +33,7 @@ namespace yli
 {
     namespace ontology
     {
-        void Entity::bind_to_universe()
+        void Entity::bind_to_Universe()
         {
             // Requirements:
             // `this->universe` must not be `nullptr`.
@@ -41,12 +41,12 @@ namespace yli
 
             if (universe == nullptr)
             {
-                std::cerr << "ERROR: `Entity::bind_to_universe`: `universe` is `nullptr`!\n";
+                std::cerr << "ERROR: `Entity::bind_to_Universe`: `universe` is `nullptr`!\n";
                 return;
             }
 
             // Get `entityID` from the `Universe` and set pointer to this `Entity`.
-            universe->bind_entity(this);
+            universe->bind_Entity(this);
         }
 
         void Entity::bind_to_new_parent(yli::ontology::Entity* new_entity_parent)
@@ -62,7 +62,7 @@ namespace yli
             this->universe = universe;
 
             // Get `entityID` from `Universe` and set pointer to this `Entity`.
-            this->bind_to_universe();
+            this->bind_to_Universe();
 
             this->childID = std::numeric_limits<std::size_t>::max(); // `std::numeric_limits<std::size_t>::max()` means that `childID` is not defined.
             this->prerender_callback = nullptr;
@@ -93,7 +93,7 @@ namespace yli
                 return;
             }
 
-            this->universe->unbind_entity(this->entityID);
+            this->universe->unbind_Entity(this->entityID);
 
             if (this->name.empty())
             {

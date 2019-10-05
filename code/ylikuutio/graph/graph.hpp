@@ -39,8 +39,8 @@ namespace yli
         class Graph
         {
             public:
-                void bind_node(yli::graph::Node* const node);
-                void unbind_node(const std::size_t childID);
+                void bind_Node(yli::graph::Node* const node);
+                void unbind_Node(const std::size_t childID);
 
                 // constructor.
                 Graph();

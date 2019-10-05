@@ -42,8 +42,8 @@ namespace yli
         class ChunkMaster: public yli::ontology::Entity
         {
             public:
-                void bind_chunk(yli::ontology::Chunk* const chunk);
-                void unbind_chunk(const std::size_t childID);
+                void bind_Chunk(yli::ontology::Chunk* const chunk);
+                void unbind_Chunk(const std::size_t childID);
 
                 // constructor.
                 ChunkMaster(yli::ontology::Universe* universe, yli::ontology::Material* const parent, GetContentCallback get_content_callback)

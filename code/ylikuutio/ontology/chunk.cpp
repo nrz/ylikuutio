@@ -39,7 +39,7 @@ namespace yli
             }
 
             // get `childID` from the `ChunkMaster` and set pointer to this `Chunk`.
-            chunk_master->bind_chunk(this);
+            chunk_master->bind_Chunk(this);
         }
 
         Chunk::~Chunk()
@@ -56,7 +56,7 @@ namespace yli
                 return;
             }
 
-            chunk_master->unbind_chunk(this->childID);
+            chunk_master->unbind_Chunk(this->childID);
         }
 
         void Chunk::render()

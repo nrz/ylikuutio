@@ -57,8 +57,8 @@ namespace yli
         class Species: public yli::ontology::Model
         {
             public:
-                void bind_object(yli::ontology::Object* const object);
-                void unbind_object(const std::size_t childID);
+                void bind_Object(yli::ontology::Object* const object);
+                void unbind_Object(const std::size_t childID);
 
                 // this method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
                 void bind_to_new_parent(yli::ontology::Material* const new_parent);

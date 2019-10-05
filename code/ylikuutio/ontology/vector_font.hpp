@@ -54,9 +54,9 @@ namespace yli
         class VectorFont: public yli::ontology::Entity
         {
             public:
-                void bind_glyph(yli::ontology::Glyph* const glyph);
-                void bind_text3D(yli::ontology::Text3D* const text3D);
-                void unbind_text3D(const std::size_t childID);
+                void bind_Glyph(yli::ontology::Glyph* const glyph);
+                void bind_Text3D(yli::ontology::Text3D* const text3D);
+                void unbind_Text3D(const std::size_t childID);
 
                 // This method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input,
                 // and requests a new `childID` from the new `Material`.

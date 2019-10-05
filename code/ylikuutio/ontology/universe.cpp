@@ -96,7 +96,7 @@ namespace yli
 
         const std::string Universe::version = "0.0.4";
 
-        void Universe::bind_entity(yli::ontology::Entity* const entity)
+        void Universe::bind_Entity(yli::ontology::Entity* const entity)
         {
             // no-op when called during initialization of the `Entity` base class of `Universe` itself.
             if (entity == this)
@@ -112,7 +112,7 @@ namespace yli
             yli::hierarchy::set_child_pointer(entity->entityID, entity, this->entity_pointer_vector, this->free_entityID_queue, this->number_of_entities);
         }
 
-        void Universe::bind_world(yli::ontology::World* const world)
+        void Universe::bind_World(yli::ontology::World* const world)
         {
             // get `childID` from `Universe` and set pointer to `world`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::World*>(
@@ -122,7 +122,7 @@ namespace yli
                     this->number_of_worlds);
         }
 
-        void Universe::bind_font2D(yli::ontology::Font2D* const font2D)
+        void Universe::bind_Font2D(yli::ontology::Font2D* const font2D)
         {
             // get `childID` from `Universe` and set pointer to `font2D`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Font2D*>(
@@ -132,7 +132,7 @@ namespace yli
                     this->number_of_font2Ds);
         }
 
-        void Universe::bind_console(yli::ontology::Console* const console)
+        void Universe::bind_Console(yli::ontology::Console* const console)
         {
             // get `childID` from `Universe` and set pointer to `console`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Console*>(
@@ -142,7 +142,7 @@ namespace yli
                     this->number_of_consoles);
         }
 
-        void Universe::bind_any_value_entity(yli::ontology::AnyValueEntity* const any_value_entity)
+        void Universe::bind_AnyValueEntity(yli::ontology::AnyValueEntity* const any_value_entity)
         {
             // get `childID` from `Universe` and set pointer to `any_value_entity`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::AnyValueEntity*>(
@@ -152,7 +152,7 @@ namespace yli
                     this->number_of_any_value_entities);
         }
 
-        void Universe::bind_any_struct_entity(yli::ontology::AnyStructEntity* const any_struct_entity)
+        void Universe::bind_AnyStructEntity(yli::ontology::AnyStructEntity* const any_struct_entity)
         {
             // get `childID` from `Universe` and set pointer to `any_struct_entity`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::AnyStructEntity*>(
@@ -162,7 +162,7 @@ namespace yli
                     this->number_of_any_struct_entities);
         }
 
-        void Universe::unbind_entity(const std::size_t entityID)
+        void Universe::unbind_Entity(const std::size_t entityID)
         {
             yli::hierarchy::unbind_child_from_parent(
                     entityID,
@@ -171,7 +171,7 @@ namespace yli
                     this->number_of_entities);
         }
 
-        void Universe::unbind_world(const std::size_t childID)
+        void Universe::unbind_World(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
                     childID,
@@ -180,7 +180,7 @@ namespace yli
                     this->number_of_worlds);
         }
 
-        void Universe::unbind_font2D(const std::size_t childID)
+        void Universe::unbind_Font2D(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
                     childID,
@@ -189,7 +189,7 @@ namespace yli
                     this->number_of_font2Ds);
         }
 
-        void Universe::unbind_any_value_entity(const std::size_t childID)
+        void Universe::unbind_AnyValueEntity(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
                     childID,
@@ -198,7 +198,7 @@ namespace yli
                     this->number_of_any_value_entities);
         }
 
-        void Universe::unbind_any_struct_entity(const std::size_t childID)
+        void Universe::unbind_AnyStructEntity(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
                     childID,

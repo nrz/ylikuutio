@@ -34,7 +34,7 @@ namespace yli
         class Text3D;
         class Glyph;
 
-        void VectorFont::bind_glyph(yli::ontology::Glyph* const glyph)
+        void VectorFont::bind_Glyph(yli::ontology::Glyph* const glyph)
         {
             // Get `childID` from `VectorFont` and set pointer to `glyph`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Glyph*>(
@@ -44,7 +44,7 @@ namespace yli
                     this->number_of_glyphs);
         }
 
-        void VectorFont::bind_text3D(yli::ontology::Text3D* const text3D)
+        void VectorFont::bind_Text3D(yli::ontology::Text3D* const text3D)
         {
             // Get `childID` from `VectorFont` and set pointer to `text3D`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Text3D*>(
@@ -54,7 +54,7 @@ namespace yli
                     this->number_of_text3Ds);
         }
 
-        void VectorFont::unbind_text3D(const std::size_t childID)
+        void VectorFont::unbind_Text3D(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent<yli::ontology::Text3D*>(
                     childID,
@@ -76,7 +76,7 @@ namespace yli
             }
 
             // Get `childID` from the `Material` and set pointer to this `VectorFont`.
-            material->bind_vector_font(this);
+            material->bind_VectorFont(this);
         }
 
         void VectorFont::bind_to_new_parent(yli::ontology::Material* const new_parent)
@@ -103,11 +103,11 @@ namespace yli
             }
 
             // Unbind from the old parent `Material`.
-            material->unbind_vector_font(this->childID);
+            material->unbind_VectorFont(this->childID);
 
             // Get `childID` from `Material` and set pointer to this `VectorFont`.
             this->parent = new_parent;
-            this->parent->bind_vector_font(this);
+            this->parent->bind_VectorFont(this);
         }
 
         // This method returns a pointer to `Glyph` that matches the given `unicode_value`,
@@ -150,7 +150,7 @@ namespace yli
             }
 
             // Set pointer to this `VectorFont` to `nullptr`.
-            material->unbind_vector_font(this->childID);
+            material->unbind_VectorFont(this->childID);
         }
 
         void VectorFont::render()

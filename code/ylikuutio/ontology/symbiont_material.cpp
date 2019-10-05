@@ -39,7 +39,7 @@ namespace yli
     {
         class Entity;
 
-        void SymbiontMaterial::bind_symbiont_species(yli::ontology::SymbiontSpecies* const symbiont_species)
+        void SymbiontMaterial::bind_SymbiontSpecies(yli::ontology::SymbiontSpecies* const symbiont_species)
         {
             // get `childID` from `SymbiontMaterial` and set pointer to `symbiont_species`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::SymbiontSpecies*>(
@@ -49,7 +49,7 @@ namespace yli
                     this->number_of_symbiont_species);
         }
 
-        void SymbiontMaterial::unbind_symbiont_species(const std::size_t childID)
+        void SymbiontMaterial::unbind_SymbiontSpecies(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent<yli::ontology::SymbiontSpecies*>(
                     childID,
@@ -71,7 +71,7 @@ namespace yli
             }
 
             // get `childID` from `Symbiosis` and set pointer to this `SymbiontMaterial`.
-            symbiosis->bind_symbiont_material(this);
+            symbiosis->bind_SymbiontMaterial(this);
         }
 
         SymbiontMaterial::~SymbiontMaterial()
@@ -97,7 +97,7 @@ namespace yli
             }
 
             // set pointer to this symbiont_material to `nullptr`.
-            symbiosis->unbind_symbiont_material(this->childID);
+            symbiosis->unbind_SymbiontMaterial(this->childID);
         }
 
         void SymbiontMaterial::render()

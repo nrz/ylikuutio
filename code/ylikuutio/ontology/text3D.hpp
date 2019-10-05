@@ -51,8 +51,8 @@ namespace yli
         class Text3D: public yli::ontology::Movable
         {
             public:
-                void bind_object(yli::ontology::Object* const object);
-                void unbind_object(const std::size_t childID);
+                void bind_Object(yli::ontology::Object* const object);
+                void unbind_Object(const std::size_t childID);
 
                 // this method deletes all glyph Objects of this `Text3D`,
                 // sets pointer to this `Text3D` to `nullptr`,

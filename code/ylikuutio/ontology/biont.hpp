@@ -94,7 +94,7 @@ namespace yli
                     this->bind_to_parent();
 
                     // Get `childID` from `SymbiontSpecies` (not a parent!) and set pointer to this `Biont`.
-                    this->bind_to_symbiont_species();
+                    this->bind_to_SymbiontSpecies();
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Biont*";
@@ -117,7 +117,7 @@ namespace yli
 
             protected:
                 void bind_to_parent();
-                void bind_to_symbiont_species();
+                void bind_to_SymbiontSpecies();
 
                 // This method renders this `Biont`.
                 void render();

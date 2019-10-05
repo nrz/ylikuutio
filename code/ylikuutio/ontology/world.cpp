@@ -32,7 +32,7 @@ namespace yli
     {
         class SettingMaster;
 
-        void World::bind_scene(yli::ontology::Scene* const scene)
+        void World::bind_Scene(yli::ontology::Scene* const scene)
         {
             // get `childID` from `World` and set pointer to `scene`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Scene*>(
@@ -42,7 +42,7 @@ namespace yli
                     this->number_of_scenes);
         }
 
-        void World::unbind_scene(const std::size_t childID)
+        void World::unbind_Scene(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
                     childID,
@@ -64,7 +64,7 @@ namespace yli
             }
 
             // Get `childID` from the `Universe` and set pointer to this `World`.
-            universe->bind_world(this);
+            universe->bind_World(this);
         }
 
         World::~World()
@@ -88,7 +88,7 @@ namespace yli
             }
 
             // set pointer to this `World` to `nullptr`.
-            universe->unbind_world(this->childID);
+            universe->unbind_World(this->childID);
         }
 
         void World::render()
