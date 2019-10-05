@@ -169,7 +169,7 @@ namespace yli
                 const std::vector<glm::vec3>& face_normal_data,
                 const std::size_t x,
                 const std::size_t z,
-                const BilinearDirections compass_point_code,
+                const yli::triangulation::BilinearDirections compass_point_code,
                 const std::size_t actual_image_width)
         {
             const std::size_t face_normal_i = get_face_normal_i(x, z, compass_point_code, actual_image_width);

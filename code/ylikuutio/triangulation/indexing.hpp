@@ -51,7 +51,7 @@ namespace yli
         constexpr std::size_t get_face_normal_i(
                 const std::size_t x,
                 const std::size_t z,
-                const BilinearDirections compass_point_code,
+                const yli::triangulation::BilinearDirections compass_point_code,
                 const std::size_t actual_image_width)
         {
             // Face indices example for a 4x4 image file using bilinear interpolation.
