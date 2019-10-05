@@ -118,7 +118,7 @@ namespace yli
                 // this method renders all `SymbiontMaterial`s belonging to this `Symbiosis`.
                 void render();
 
-                const std::string& get_model_file_format();
+                const std::string& get_model_file_format() const;
 
                 yli::ontology::SymbiontMaterial* get_symbiont_material(const std::size_t symbiont_material_i) const;
                 yli::ontology::SymbiontSpecies* get_symbiont_species(const std::size_t biontID) const;

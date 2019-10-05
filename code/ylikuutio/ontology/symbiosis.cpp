@@ -211,7 +211,7 @@ namespace yli
                 yli::ontology::get_number_of_descendants(this->holobiont_pointer_vector);
         }
 
-        const std::string& Symbiosis::get_model_file_format()
+        const std::string& Symbiosis::get_model_file_format() const
         {
             return this->model_file_format;
         }
