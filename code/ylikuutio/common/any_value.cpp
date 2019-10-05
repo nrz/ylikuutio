@@ -66,75 +66,75 @@ namespace yli
 
             switch (this->type)
             {
-                case (UNKNOWN):
+                case (yli::common::Datatype::UNKNOWN):
                     return "unknown";
-                case (ANY_STRUCT_SHARED_PTR):
+                case (yli::common::Datatype::ANY_STRUCT_SHARED_PTR):
                     return "std::shared_ptr<yli::common::AnyStruct>";
-                case (BOOL):
+                case (yli::common::Datatype::BOOL):
                     return "bool";
-                case (CHAR):
+                case (yli::common::Datatype::CHAR):
                     return "char";
-                case (FLOAT):
+                case (yli::common::Datatype::FLOAT):
                     return "float";
-                case (DOUBLE):
+                case (yli::common::Datatype::DOUBLE):
                     return "double";
-                case (INT32_T):
+                case (yli::common::Datatype::INT32_T):
                     return "int32_t";
-                case (UINT32_T):
+                case (yli::common::Datatype::UINT32_T):
                     return "uint32_t";
-                case (BOOL_POINTER):
+                case (yli::common::Datatype::BOOL_POINTER):
                     return "bool*";
-                case (FLOAT_POINTER):
+                case (yli::common::Datatype::FLOAT_POINTER):
                     return "float*";
-                case (DOUBLE_POINTER):
+                case (yli::common::Datatype::DOUBLE_POINTER):
                     return "double*";
-                case (INT32_T_POINTER):
+                case (yli::common::Datatype::INT32_T_POINTER):
                     return "int32_t*";
-                case (UINT32_T_POINTER):
+                case (yli::common::Datatype::UINT32_T_POINTER):
                     return "uint32_t*";
-                case (UNIVERSE_POINTER):
+                case (yli::common::Datatype::UNIVERSE_POINTER):
                     return "yli::ontology::Universe*";
-                case (SCENE_POINTER):
+                case (yli::common::Datatype::SCENE_POINTER):
                     return "yli::ontology::Scene*";
-                case (SHADER_POINTER):
+                case (yli::common::Datatype::SHADER_POINTER):
                     return "yli::ontology::Shader*";
-                case (MATERIAL_POINTER):
+                case (yli::common::Datatype::MATERIAL_POINTER):
                     return "yli::ontology::Material*";
-                case (SPECIES_POINTER):
+                case (yli::common::Datatype::SPECIES_POINTER):
                     return "yli::ontology::Species*";
-                case (OBJECT_POINTER):
+                case (yli::common::Datatype::OBJECT_POINTER):
                     return "yli::ontology::Object*";
-                case (VECTORFONT_POINTER):
+                case (yli::common::Datatype::VECTORFONT_POINTER):
                     return "yli::ontology::VectorFont*";
-                case (GLYPH_POINTER):
+                case (yli::common::Datatype::GLYPH_POINTER):
                     return "yli::ontology::Glyph*";
-                case (TEXT3D_POINTER):
+                case (yli::common::Datatype::TEXT3D_POINTER):
                     return "yli::ontology::Text3D*";
-                case (TEXT2D_POINTER):
+                case (yli::common::Datatype::TEXT2D_POINTER):
                     return "yli::ontology::Text2D*";
-                case (CONSOLE_POINTER):
+                case (yli::common::Datatype::CONSOLE_POINTER):
                     return "yli::ontology::Console*";
-                case (SPHERICAL_COORDINATES_STRUCT_POINTER):
+                case (yli::common::Datatype::SPHERICAL_COORDINATES_STRUCT_POINTER):
                     return "yli::common::SphericalCoordinatesStruct*";
-                case (STD_STRING_POINTER):
+                case (yli::common::Datatype::STD_STRING_POINTER):
                     return "std::string*";
-                case (STD_VECTOR_INT8_T_SHARED_PTR):
+                case (yli::common::Datatype::STD_VECTOR_INT8_T_SHARED_PTR):
                     return "std::shared_ptr<std::vector<int8_t>>";
-                case (STD_VECTOR_UINT8_T_SHARED_PTR):
+                case (yli::common::Datatype::STD_VECTOR_UINT8_T_SHARED_PTR):
                     return "std::shared_ptr<std::vector<uint8_t>>";
-                case (STD_VECTOR_INT16_T_SHARED_PTR):
+                case (yli::common::Datatype::STD_VECTOR_INT16_T_SHARED_PTR):
                     return "std::shared_ptr<std::vector<int16_t>>";
-                case (STD_VECTOR_UINT16_T_SHARED_PTR):
+                case (yli::common::Datatype::STD_VECTOR_UINT16_T_SHARED_PTR):
                     return "std::shared_ptr<std::vector<uint16_t>>";
-                case (STD_VECTOR_INT32_T_SHARED_PTR):
+                case (yli::common::Datatype::STD_VECTOR_INT32_T_SHARED_PTR):
                     return "std::shared_ptr<std::vector<int32_t>>";
-                case (STD_VECTOR_UINT32_T_SHARED_PTR):
+                case (yli::common::Datatype::STD_VECTOR_UINT32_T_SHARED_PTR):
                     return "std::shared_ptr<std::vector<uint32_t>>";
-                case (STD_VECTOR_FLOAT_SHARED_PTR):
+                case (yli::common::Datatype::STD_VECTOR_FLOAT_SHARED_PTR):
                     return "std::shared_ptr<std::vector<float>>";
-                case (GLM_VEC3_POINTER):
+                case (yli::common::Datatype::GLM_VEC3_POINTER):
                     return "glm::vec3*";
-                case (GLM_VEC4_POINTER):
+                case (yli::common::Datatype::GLM_VEC4_POINTER):
                     return "glm::vec4*";
                 default:
                     return "TODO: define string for this datatype!";
@@ -148,10 +148,10 @@ namespace yli
 
             switch (this->type)
             {
-                case (UNKNOWN):
+                case (yli::common::Datatype::UNKNOWN):
                     any_value_stringstream << "unknown";
                     break;
-                case (ANY_STRUCT_SHARED_PTR):
+                case (yli::common::Datatype::ANY_STRUCT_SHARED_PTR):
                     if (this->any_struct_shared_ptr == nullptr)
                     {
                         any_value_stringstream << "nullptr";
@@ -161,78 +161,78 @@ namespace yli
                         any_value_stringstream << std::hex << this->any_struct_shared_ptr.get() << std::dec;
                     }
                     break;
-                case (BOOL):
+                case (yli::common::Datatype::BOOL):
                     any_value_stringstream << (this->bool_value ? "true" : "false");
                     break;
-                case (CHAR):
+                case (yli::common::Datatype::CHAR):
                     any_value_stringstream << this->char_value;
                     break;
-                case (FLOAT):
+                case (yli::common::Datatype::FLOAT):
                     any_value_stringstream << std::fixed << this->float_value;
                     break;
-                case (DOUBLE):
+                case (yli::common::Datatype::DOUBLE):
                     any_value_stringstream << std::fixed << this->double_value;
                     break;
-                case (INT32_T):
+                case (yli::common::Datatype::INT32_T):
                     // in Linux `int` is 32 bits, `long` is 64 bits, `long long` is also 64 bits.
                     // in Windows `int` is 32 bits, `long` is also 32 bits, `long long` is 64 bits.
                     any_value_stringstream << this->int32_t_value;
                     break;
-                case (UINT32_T):
+                case (yli::common::Datatype::UINT32_T):
 
                     // in Linux `int` is 32 bits, `long` is 64 bits, `long long` is also 64 bits.
                     // in Windows `int` is 32 bits, `long` is also 32 bits, `long long` is 64 bits.
                     any_value_stringstream << this->uint32_t_value;
                     break;
-                case (BOOL_POINTER):
+                case (yli::common::Datatype::BOOL_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->bool_pointer << std::dec;
                     break;
-                case (FLOAT_POINTER):
+                case (yli::common::Datatype::FLOAT_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->float_pointer << std::dec;
                     break;
-                case (DOUBLE_POINTER):
+                case (yli::common::Datatype::DOUBLE_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->double_pointer << std::dec;
                     break;
-                case (INT32_T_POINTER):
+                case (yli::common::Datatype::INT32_T_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->int32_t_pointer << std::dec;
                     break;
-                case (UINT32_T_POINTER):
+                case (yli::common::Datatype::UINT32_T_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->uint32_t_pointer << std::dec;
                     break;
-                case (UNIVERSE_POINTER):
+                case (yli::common::Datatype::UNIVERSE_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->universe << std::dec;
                     break;
-                case (SCENE_POINTER):
+                case (yli::common::Datatype::SCENE_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->scene_pointer << std::dec;
                     break;
-                case (SHADER_POINTER):
+                case (yli::common::Datatype::SHADER_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->shader_pointer << std::dec;
                     break;
-                case (MATERIAL_POINTER):
+                case (yli::common::Datatype::MATERIAL_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->material_pointer << std::dec;
                     break;
-                case (SPECIES_POINTER):
+                case (yli::common::Datatype::SPECIES_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->species_pointer << std::dec;
                     break;
-                case (OBJECT_POINTER):
+                case (yli::common::Datatype::OBJECT_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->object_pointer << std::dec;
                     break;
-                case (VECTORFONT_POINTER):
+                case (yli::common::Datatype::VECTORFONT_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->vector_font_pointer << std::dec;
                     break;
-                case (GLYPH_POINTER):
+                case (yli::common::Datatype::GLYPH_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->glyph_pointer << std::dec;
                     break;
-                case (TEXT3D_POINTER):
+                case (yli::common::Datatype::TEXT3D_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->text3D_pointer << std::dec;
                     break;
-                case (TEXT2D_POINTER):
+                case (yli::common::Datatype::TEXT2D_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->font2D_pointer << std::dec;
                     break;
-                case (CONSOLE_POINTER):
+                case (yli::common::Datatype::CONSOLE_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->console_pointer << std::dec;
                     break;
-                case (SPHERICAL_COORDINATES_STRUCT_POINTER):
+                case (yli::common::Datatype::SPHERICAL_COORDINATES_STRUCT_POINTER):
                     if (this->spherical_coordinates_struct_pointer == nullptr)
                     {
                         any_value_stringstream << "nullptr";
@@ -245,7 +245,7 @@ namespace yli
                             << " }";
                     }
                     break;
-                case (STD_STRING_POINTER):
+                case (yli::common::Datatype::STD_STRING_POINTER):
                     if (this->std_string_pointer == nullptr)
                     {
                         any_value_stringstream << "nullptr";
@@ -255,7 +255,7 @@ namespace yli
                         any_value_stringstream << *this->std_string_pointer;
                     }
                     break;
-                case (STD_VECTOR_INT8_T_SHARED_PTR):
+                case (yli::common::Datatype::STD_VECTOR_INT8_T_SHARED_PTR):
                     if (this->std_vector_int8_t_shared_ptr == nullptr)
                     {
                         any_value_stringstream << "nullptr";
@@ -265,7 +265,7 @@ namespace yli
                         any_value_stringstream << "std::shared_ptr<std::vector<int8_t>>";
                     }
                     break;
-                case (STD_VECTOR_UINT8_T_SHARED_PTR):
+                case (yli::common::Datatype::STD_VECTOR_UINT8_T_SHARED_PTR):
                     if (this->std_vector_uint8_t_shared_ptr == nullptr)
                     {
                         any_value_stringstream << "nullptr";
@@ -275,7 +275,7 @@ namespace yli
                         any_value_stringstream << "std::shared_ptr<std::vector<uint8_t>>";
                     }
                     break;
-                case (STD_VECTOR_INT16_T_SHARED_PTR):
+                case (yli::common::Datatype::STD_VECTOR_INT16_T_SHARED_PTR):
                     if (this->std_vector_int16_t_shared_ptr == nullptr)
                     {
                         any_value_stringstream << "nullptr";
@@ -285,7 +285,7 @@ namespace yli
                         any_value_stringstream << "std::shared_ptr<std::vector<int16_t>>";
                     }
                     break;
-                case (STD_VECTOR_UINT16_T_SHARED_PTR):
+                case (yli::common::Datatype::STD_VECTOR_UINT16_T_SHARED_PTR):
                     if (this->std_vector_uint16_t_shared_ptr == nullptr)
                     {
                         any_value_stringstream << "nullptr";
@@ -295,7 +295,7 @@ namespace yli
                         any_value_stringstream << "std::shared_ptr<std::vector<uint16_t>>";
                     }
                     break;
-                case (STD_VECTOR_INT32_T_SHARED_PTR):
+                case (yli::common::Datatype::STD_VECTOR_INT32_T_SHARED_PTR):
                     if (this->std_vector_int32_t_shared_ptr == nullptr)
                     {
                         any_value_stringstream << "nullptr";
@@ -305,7 +305,7 @@ namespace yli
                         any_value_stringstream << "std::shared_ptr<std::vector<int32_t>>";
                     }
                     break;
-                case (STD_VECTOR_UINT32_T_SHARED_PTR):
+                case (yli::common::Datatype::STD_VECTOR_UINT32_T_SHARED_PTR):
                     if (this->std_vector_uint32_t_shared_ptr == nullptr)
                     {
                         any_value_stringstream << "nullptr";
@@ -315,7 +315,7 @@ namespace yli
                         any_value_stringstream << "std::shared_ptr<std::vector<uint32_t>>";
                     }
                     break;
-                case (STD_VECTOR_FLOAT_SHARED_PTR):
+                case (yli::common::Datatype::STD_VECTOR_FLOAT_SHARED_PTR):
                     if (this->std_vector_float_shared_ptr == nullptr)
                     {
                         any_value_stringstream << "nullptr";
@@ -325,7 +325,7 @@ namespace yli
                         any_value_stringstream << "std::shared_ptr<std::vector<float>>";
                     }
                     break;
-                case (GLM_VEC3_POINTER):
+                case (yli::common::Datatype::GLM_VEC3_POINTER):
                     if (this->glm_vec3_pointer == nullptr)
                     {
                         any_value_stringstream << "nullptr";
@@ -338,7 +338,7 @@ namespace yli
                             << " }";
                     }
                     break;
-                case (GLM_VEC4_POINTER):
+                case (yli::common::Datatype::GLM_VEC4_POINTER):
                     if (this->glm_vec4_pointer == nullptr)
                     {
                         any_value_stringstream << "nullptr";
@@ -363,23 +363,23 @@ namespace yli
         {
             switch (this->type)
             {
-                case (UNIVERSE_POINTER):
+                case (yli::common::Datatype::UNIVERSE_POINTER):
                     return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->universe));
-                case (SCENE_POINTER):
+                case (yli::common::Datatype::SCENE_POINTER):
                     return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->scene_pointer));
-                case (SHADER_POINTER):
+                case (yli::common::Datatype::SHADER_POINTER):
                     return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->shader_pointer));
-                case (MATERIAL_POINTER):
+                case (yli::common::Datatype::MATERIAL_POINTER):
                     return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->material_pointer));
-                case (SPECIES_POINTER):
+                case (yli::common::Datatype::SPECIES_POINTER):
                     return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->species_pointer));
-                case (OBJECT_POINTER):
+                case (yli::common::Datatype::OBJECT_POINTER):
                     return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->object_pointer));
-                case (VECTORFONT_POINTER):
+                case (yli::common::Datatype::VECTORFONT_POINTER):
                     return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->vector_font_pointer));
-                case (GLYPH_POINTER):
+                case (yli::common::Datatype::GLYPH_POINTER):
                     return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->glyph_pointer));
-                case (TEXT3D_POINTER):
+                case (yli::common::Datatype::TEXT3D_POINTER):
                     return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->text3D_pointer));
                 default:
                     return nullptr;
@@ -393,9 +393,9 @@ namespace yli
 
             switch (this->type)
             {
-                case (UNKNOWN):
+                case (yli::common::Datatype::UNKNOWN):
                     return false;
-                case (ANY_STRUCT_SHARED_PTR):
+                case (yli::common::Datatype::ANY_STRUCT_SHARED_PTR):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -407,7 +407,7 @@ namespace yli
                         this->any_struct_shared_ptr = any_struct_shared_ptr;
                         return true;
                     }
-                case (BOOL):
+                case (yli::common::Datatype::BOOL):
                     {
                         if (value_string == "true") // Ylikuutio is case sensitive!
                         {
@@ -421,7 +421,7 @@ namespace yli
                         }
                         return false;
                     }
-                case (CHAR):
+                case (yli::common::Datatype::CHAR):
                     {
                         if (value_string.size() == 1)
                         {
@@ -430,7 +430,7 @@ namespace yli
                         }
                         return false;
                     }
-                case (FLOAT):
+                case (yli::common::Datatype::FLOAT):
                     {
                         if (!yli::string::check_if_float_string(value_string))
                         {
@@ -441,7 +441,7 @@ namespace yli
                         value_stringstream >> this->float_value;
                         return true;
                     }
-                case (DOUBLE):
+                case (yli::common::Datatype::DOUBLE):
                     {
                         if (!yli::string::check_if_double_string(value_string))
                         {
@@ -452,7 +452,7 @@ namespace yli
                         value_stringstream >> this->double_value;
                         return true;
                     }
-                case (INT32_T):
+                case (yli::common::Datatype::INT32_T):
                     {
                         if (!yli::string::check_if_signed_integer_string(value_string))
                         {
@@ -463,7 +463,7 @@ namespace yli
                         value_stringstream >> this->int32_t_value;
                         return true;
                     }
-                case (UINT32_T):
+                case (yli::common::Datatype::UINT32_T):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -474,7 +474,7 @@ namespace yli
                         value_stringstream >> this->uint32_t_value;
                         return true;
                     }
-                case (BOOL_POINTER):
+                case (yli::common::Datatype::BOOL_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -486,7 +486,7 @@ namespace yli
                         this->bool_pointer = static_cast<bool*>(void_pointer);
                         return true;
                     }
-                case (FLOAT_POINTER):
+                case (yli::common::Datatype::FLOAT_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -498,7 +498,7 @@ namespace yli
                         this->float_pointer = static_cast<float*>(void_pointer);
                         return true;
                     }
-                case (DOUBLE_POINTER):
+                case (yli::common::Datatype::DOUBLE_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -510,7 +510,7 @@ namespace yli
                         this->double_pointer = static_cast<double*>(void_pointer);
                         return true;
                     }
-                case (INT32_T_POINTER):
+                case (yli::common::Datatype::INT32_T_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -522,7 +522,7 @@ namespace yli
                         this->int32_t_pointer = static_cast<int32_t*>(void_pointer);
                         return true;
                     }
-                case (UINT32_T_POINTER):
+                case (yli::common::Datatype::UINT32_T_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -534,7 +534,7 @@ namespace yli
                         this->uint32_t_pointer = static_cast<uint32_t*>(void_pointer);
                         return true;
                     }
-                case (UNIVERSE_POINTER):
+                case (yli::common::Datatype::UNIVERSE_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -546,7 +546,7 @@ namespace yli
                         this->universe = static_cast<yli::ontology::Universe*>(void_pointer);
                         return true;
                     }
-                case (SCENE_POINTER):
+                case (yli::common::Datatype::SCENE_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -558,7 +558,7 @@ namespace yli
                         this->scene_pointer = static_cast<yli::ontology::Scene*>(void_pointer);
                         return true;
                     }
-                case (SHADER_POINTER):
+                case (yli::common::Datatype::SHADER_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -570,7 +570,7 @@ namespace yli
                         this->shader_pointer = static_cast<yli::ontology::Shader*>(void_pointer);
                         return true;
                     }
-                case (MATERIAL_POINTER):
+                case (yli::common::Datatype::MATERIAL_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -582,7 +582,7 @@ namespace yli
                         this->material_pointer = static_cast<yli::ontology::Material*>(void_pointer);
                         return true;
                     }
-                case (SPECIES_POINTER):
+                case (yli::common::Datatype::SPECIES_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -594,7 +594,7 @@ namespace yli
                         this->species_pointer = static_cast<yli::ontology::Species*>(void_pointer);
                         return true;
                     }
-                case (OBJECT_POINTER):
+                case (yli::common::Datatype::OBJECT_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -606,7 +606,7 @@ namespace yli
                         this->object_pointer = static_cast<yli::ontology::Object*>(void_pointer);
                         return true;
                     }
-                case (VECTORFONT_POINTER):
+                case (yli::common::Datatype::VECTORFONT_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -618,7 +618,7 @@ namespace yli
                         this->vector_font_pointer = static_cast<yli::ontology::VectorFont*>(void_pointer);
                         return true;
                     }
-                case (GLYPH_POINTER):
+                case (yli::common::Datatype::GLYPH_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -630,7 +630,7 @@ namespace yli
                         this->glyph_pointer = static_cast<yli::ontology::Glyph*>(void_pointer);
                         return true;
                     }
-                case (TEXT3D_POINTER):
+                case (yli::common::Datatype::TEXT3D_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -642,7 +642,7 @@ namespace yli
                         this->text3D_pointer = static_cast<yli::ontology::Text3D*>(void_pointer);
                         return true;
                     }
-                case (TEXT2D_POINTER):
+                case (yli::common::Datatype::TEXT2D_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -654,7 +654,7 @@ namespace yli
                         this->font2D_pointer = static_cast<yli::ontology::Font2D*>(void_pointer);
                         return true;
                     }
-                case (CONSOLE_POINTER):
+                case (yli::common::Datatype::CONSOLE_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -666,7 +666,7 @@ namespace yli
                         this->console_pointer = static_cast<yli::ontology::Console*>(void_pointer);
                         return true;
                     }
-                case (SPHERICAL_COORDINATES_STRUCT_POINTER):
+                case (yli::common::Datatype::SPHERICAL_COORDINATES_STRUCT_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -678,7 +678,7 @@ namespace yli
                         this->spherical_coordinates_struct_pointer = static_cast<yli::common::SphericalCoordinatesStruct*>(void_pointer);
                         return true;
                     }
-                case (GLM_VEC3_POINTER):
+                case (yli::common::Datatype::GLM_VEC3_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -690,7 +690,7 @@ namespace yli
                         this->glm_vec3_pointer = static_cast<glm::vec3*>(void_pointer);
                         return true;
                     }
-                case (GLM_VEC4_POINTER):
+                case (yli::common::Datatype::GLM_VEC4_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
@@ -717,7 +717,7 @@ namespace yli
             this->std_vector_int32_t_shared_ptr = nullptr;
             this->std_vector_uint32_t_shared_ptr = nullptr;
             this->std_vector_float_shared_ptr = nullptr;
-            this->type = yli::common::UNKNOWN;
+            this->type = yli::common::Datatype::UNKNOWN;
         }
 
         AnyValue::AnyValue(const yli::common::AnyValue& original)
@@ -767,127 +767,127 @@ namespace yli
 
             if (type == "std::shared_ptr<yli::common::AnyStruct>")
             {
-                this->type = yli::common::ANY_STRUCT_SHARED_PTR;
+                this->type = yli::common::Datatype::ANY_STRUCT_SHARED_PTR;
                 this->set_value(value_string);
             }
             else if (type == "bool")
             {
-                this->type = yli::common::BOOL;
+                this->type = yli::common::Datatype::BOOL;
                 this->set_value(value_string);
             }
             else if (type == "char")
             {
-                this->type = yli::common::CHAR;
+                this->type = yli::common::Datatype::CHAR;
                 this->set_value(value_string);
             }
             else if (type == "float")
             {
-                this->type = yli::common::FLOAT;
+                this->type = yli::common::Datatype::FLOAT;
                 this->set_value(value_string);
             }
             else if (type == "double")
             {
-                this->type = yli::common::DOUBLE;
+                this->type = yli::common::Datatype::DOUBLE;
                 this->set_value(value_string);
             }
             else if (type == "int32_t")
             {
-                this->type = yli::common::INT32_T;
+                this->type = yli::common::Datatype::INT32_T;
                 this->set_value(value_string);
             }
             else if (type == "uint32_t")
             {
-                this->type = yli::common::UINT32_T;
+                this->type = yli::common::Datatype::UINT32_T;
                 this->set_value(value_string);
             }
             else if (type == "bool*")
             {
-                this->type = yli::common::BOOL_POINTER;
+                this->type = yli::common::Datatype::BOOL_POINTER;
                 this->set_value(value_string);
             }
             else if (type == "float*")
             {
-                this->type = yli::common::FLOAT_POINTER;
+                this->type = yli::common::Datatype::FLOAT_POINTER;
                 this->set_value(value_string);
             }
             else if (type == "double*")
             {
-                this->type = yli::common::FLOAT_POINTER;
+                this->type = yli::common::Datatype::FLOAT_POINTER;
                 this->set_value(value_string);
             }
             else if (type == "int32_t*")
             {
-                this->type = yli::common::INT32_T_POINTER;
+                this->type = yli::common::Datatype::INT32_T_POINTER;
                 this->set_value(value_string);
             }
             else if (type == "uint32_t*")
             {
-                this->type = yli::common::UINT32_T_POINTER;
+                this->type = yli::common::Datatype::UINT32_T_POINTER;
                 this->set_value(value_string);
             }
             else if (type == "yli::ontology::Universe*")
             {
-                this->type = yli::common::UNIVERSE_POINTER;
+                this->type = yli::common::Datatype::UNIVERSE_POINTER;
                 this->set_value(value_string);
             }
             else if (type == "yli::ontology::Scene*")
             {
-                this->type = yli::common::SCENE_POINTER;
+                this->type = yli::common::Datatype::SCENE_POINTER;
                 this->set_value(value_string);
             }
             else if (type == "yli::ontology::Shader*")
             {
-                this->type = yli::common::SHADER_POINTER;
+                this->type = yli::common::Datatype::SHADER_POINTER;
                 this->set_value(value_string);
             }
             else if (type == "yli::ontology::Material*")
             {
-                this->type = yli::common::MATERIAL_POINTER;
+                this->type = yli::common::Datatype::MATERIAL_POINTER;
                 this->set_value(value_string);
             }
             else if (type == "yli::ontology::Species*")
             {
-                this->type = yli::common::SPECIES_POINTER;
+                this->type = yli::common::Datatype::SPECIES_POINTER;
                 this->set_value(value_string);
             }
             else if (type == "yli::ontology::Object*")
             {
-                this->type = yli::common::OBJECT_POINTER;
+                this->type = yli::common::Datatype::OBJECT_POINTER;
                 this->set_value(value_string);
             }
             else if (type == "yli::ontology::VectorFont*")
             {
-                this->type = yli::common::VECTORFONT_POINTER;
+                this->type = yli::common::Datatype::VECTORFONT_POINTER;
                 this->set_value(value_string);
             }
             else if (type == "yli::ontology::Glyph*")
             {
-                this->type = yli::common::GLYPH_POINTER;
+                this->type = yli::common::Datatype::GLYPH_POINTER;
                 this->set_value(value_string);
             }
             else if (type == "yli::ontology::Text3D*")
             {
-                this->type = yli::common::TEXT3D_POINTER;
+                this->type = yli::common::Datatype::TEXT3D_POINTER;
                 this->set_value(value_string);
             }
             else if (type == "yli::ontology::Symbiosis*")
             {
-                this->type = yli::common::SYMBIOSIS_POINTER;
+                this->type = yli::common::Datatype::SYMBIOSIS_POINTER;
                 this->set_value(value_string);
             }
             else if (type == "yli::ontology::Text2D*")
             {
-                this->type = yli::common::TEXT2D_POINTER;
+                this->type = yli::common::Datatype::TEXT2D_POINTER;
                 this->set_value(value_string);
             }
             else if (type == "yli::ontology::Console*")
             {
-                this->type = yli::common::CONSOLE_POINTER;
+                this->type = yli::common::Datatype::CONSOLE_POINTER;
                 this->set_value(value_string);
             }
             else
             {
-                this->type = yli::common::UNKNOWN;
+                this->type = yli::common::Datatype::UNKNOWN;
             }
         }
 
@@ -901,7 +901,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::ANY_STRUCT_SHARED_PTR;
+            this->type = yli::common::Datatype::ANY_STRUCT_SHARED_PTR;
             this->any_struct_shared_ptr = any_struct_shared_ptr;
         }
 
@@ -912,7 +912,7 @@ namespace yli
 
             if (type == "std::shared_ptr<yli::common::AnyStruct>")
             {
-                this->type = yli::common::ANY_STRUCT_SHARED_PTR;
+                this->type = yli::common::Datatype::ANY_STRUCT_SHARED_PTR;
                 this->any_struct_shared_ptr = any_struct_shared_ptr;
             }
         }
@@ -921,7 +921,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::BOOL;
+            this->type = yli::common::Datatype::BOOL;
             this->bool_value = bool_value;
         }
 
@@ -932,7 +932,7 @@ namespace yli
 
             if (type == "bool")
             {
-                this->type = yli::common::BOOL;
+                this->type = yli::common::Datatype::BOOL;
                 this->bool_value = bool_value;
             }
         }
@@ -941,7 +941,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::CHAR;
+            this->type = yli::common::Datatype::CHAR;
             this->char_value = char_value;
         }
 
@@ -952,7 +952,7 @@ namespace yli
 
             if (type == "char")
             {
-                this->type = yli::common::CHAR;
+                this->type = yli::common::Datatype::CHAR;
                 this->char_value = char_value;
             }
         }
@@ -961,7 +961,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::FLOAT;
+            this->type = yli::common::Datatype::FLOAT;
             this->float_value = float_value;
         }
 
@@ -972,7 +972,7 @@ namespace yli
 
             if (type == "float")
             {
-                this->type = yli::common::FLOAT;
+                this->type = yli::common::Datatype::FLOAT;
                 this->float_value = float_value;
             }
         }
@@ -981,7 +981,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::DOUBLE;
+            this->type = yli::common::Datatype::DOUBLE;
             this->double_value = double_value;
         }
 
@@ -992,7 +992,7 @@ namespace yli
 
             if (type == "double")
             {
-                this->type = yli::common::DOUBLE;
+                this->type = yli::common::Datatype::DOUBLE;
                 this->double_value = double_value;
             }
         }
@@ -1001,7 +1001,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::INT32_T;
+            this->type = yli::common::Datatype::INT32_T;
             this->int32_t_value = int32_t_value;
         }
 
@@ -1012,7 +1012,7 @@ namespace yli
 
             if (type == "int32_t")
             {
-                this->type = yli::common::INT32_T;
+                this->type = yli::common::Datatype::INT32_T;
                 this->int32_t_value = int32_t_value;
             }
         }
@@ -1021,7 +1021,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::UINT32_T;
+            this->type = yli::common::Datatype::UINT32_T;
             this->uint32_t_value = uint32_t_value;
         }
 
@@ -1032,7 +1032,7 @@ namespace yli
 
             if (type == "uint32_t")
             {
-                this->type = yli::common::UINT32_T;
+                this->type = yli::common::Datatype::UINT32_T;
                 this->uint32_t_value = uint32_t_value;
             }
         }
@@ -1041,7 +1041,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::BOOL_POINTER;
+            this->type = yli::common::Datatype::BOOL_POINTER;
             this->bool_pointer = bool_pointer;
         }
 
@@ -1052,7 +1052,7 @@ namespace yli
 
             if (type == "bool*")
             {
-                this->type = yli::common::BOOL_POINTER;
+                this->type = yli::common::Datatype::BOOL_POINTER;
                 this->bool_pointer = bool_pointer;
             }
         }
@@ -1061,7 +1061,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::FLOAT_POINTER;
+            this->type = yli::common::Datatype::FLOAT_POINTER;
             this->float_pointer = float_pointer;
         }
 
@@ -1072,7 +1072,7 @@ namespace yli
 
             if (type == "float*")
             {
-                this->type = yli::common::FLOAT_POINTER;
+                this->type = yli::common::Datatype::FLOAT_POINTER;
                 this->float_pointer = float_pointer;
             }
         }
@@ -1081,7 +1081,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::DOUBLE_POINTER;
+            this->type = yli::common::Datatype::DOUBLE_POINTER;
             this->double_pointer = double_pointer;
         }
 
@@ -1092,7 +1092,7 @@ namespace yli
 
             if (type == "double*")
             {
-                this->type = yli::common::DOUBLE_POINTER;
+                this->type = yli::common::Datatype::DOUBLE_POINTER;
                 this->double_pointer = double_pointer;
             }
         }
@@ -1101,7 +1101,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::INT32_T_POINTER;
+            this->type = yli::common::Datatype::INT32_T_POINTER;
             this->int32_t_pointer = int32_t_pointer;
         }
 
@@ -1112,7 +1112,7 @@ namespace yli
 
             if (type == "int32_t*")
             {
-                this->type = yli::common::INT32_T_POINTER;
+                this->type = yli::common::Datatype::INT32_T_POINTER;
                 this->int32_t_pointer = int32_t_pointer;
             }
         }
@@ -1121,7 +1121,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::UINT32_T_POINTER;
+            this->type = yli::common::Datatype::UINT32_T_POINTER;
             this->uint32_t_pointer = uint32_t_pointer;
         }
 
@@ -1132,7 +1132,7 @@ namespace yli
 
             if (type == "uint32_t*")
             {
-                this->type = yli::common::UINT32_T_POINTER;
+                this->type = yli::common::Datatype::UINT32_T_POINTER;
                 this->uint32_t_pointer = uint32_t_pointer;
             }
         }
@@ -1141,7 +1141,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::UNIVERSE_POINTER;
+            this->type = yli::common::Datatype::UNIVERSE_POINTER;
             this->universe = universe;
         }
 
@@ -1152,7 +1152,7 @@ namespace yli
 
             if (type == "yli::ontology::Universe*")
             {
-                this->type = yli::common::UNIVERSE_POINTER;
+                this->type = yli::common::Datatype::UNIVERSE_POINTER;
                 this->universe = universe;
             }
         }
@@ -1161,7 +1161,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::SCENE_POINTER;
+            this->type = yli::common::Datatype::SCENE_POINTER;
             this->scene_pointer = scene_pointer;
         }
 
@@ -1172,7 +1172,7 @@ namespace yli
 
             if (type == "yli::ontology::Scene*")
             {
-                this->type = yli::common::SCENE_POINTER;
+                this->type = yli::common::Datatype::SCENE_POINTER;
                 this->scene_pointer = scene_pointer;
             }
         }
@@ -1181,7 +1181,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::SHADER_POINTER;
+            this->type = yli::common::Datatype::SHADER_POINTER;
             this->shader_pointer = shader_pointer;
         }
 
@@ -1192,7 +1192,7 @@ namespace yli
 
             if (type == "yli::ontology::Shader*")
             {
-                this->type = yli::common::SHADER_POINTER;
+                this->type = yli::common::Datatype::SHADER_POINTER;
                 this->shader_pointer = shader_pointer;
             }
         }
@@ -1201,7 +1201,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::MATERIAL_POINTER;
+            this->type = yli::common::Datatype::MATERIAL_POINTER;
             this->material_pointer = material_pointer;
         }
 
@@ -1212,7 +1212,7 @@ namespace yli
 
             if (type == "yli::ontology::Material*")
             {
-                this->type = yli::common::MATERIAL_POINTER;
+                this->type = yli::common::Datatype::MATERIAL_POINTER;
                 this->material_pointer = material_pointer;
             }
         }
@@ -1221,7 +1221,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::SPECIES_POINTER;
+            this->type = yli::common::Datatype::SPECIES_POINTER;
             this->species_pointer = species_pointer;
         }
 
@@ -1232,7 +1232,7 @@ namespace yli
 
             if (type == "yli::ontology::Species*")
             {
-                this->type = yli::common::SPECIES_POINTER;
+                this->type = yli::common::Datatype::SPECIES_POINTER;
                 this->species_pointer = species_pointer;
             }
         }
@@ -1241,7 +1241,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::OBJECT_POINTER;
+            this->type = yli::common::Datatype::OBJECT_POINTER;
             this->object_pointer = object_pointer;
         }
 
@@ -1252,7 +1252,7 @@ namespace yli
 
             if (type == "yli::ontology::Object*")
             {
-                this->type = yli::common::OBJECT_POINTER;
+                this->type = yli::common::Datatype::OBJECT_POINTER;
                 this->object_pointer = object_pointer;
             }
         }
@@ -1261,7 +1261,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::VECTORFONT_POINTER;
+            this->type = yli::common::Datatype::VECTORFONT_POINTER;
             this->vector_font_pointer = vector_font_pointer;
         }
 
@@ -1272,7 +1272,7 @@ namespace yli
 
             if (type == "yli::ontology::Vectorfont*")
             {
-                this->type = yli::common::VECTORFONT_POINTER;
+                this->type = yli::common::Datatype::VECTORFONT_POINTER;
                 this->vector_font_pointer = vector_font_pointer;
             }
         }
@@ -1281,7 +1281,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::GLYPH_POINTER;
+            this->type = yli::common::Datatype::GLYPH_POINTER;
             this->glyph_pointer = glyph_pointer;
         }
 
@@ -1292,7 +1292,7 @@ namespace yli
 
             if (type == "yli::ontology::Glyph*")
             {
-                this->type = yli::common::GLYPH_POINTER;
+                this->type = yli::common::Datatype::GLYPH_POINTER;
                 this->glyph_pointer = glyph_pointer;
             }
         }
@@ -1301,7 +1301,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::TEXT3D_POINTER;
+            this->type = yli::common::Datatype::TEXT3D_POINTER;
             this->text3D_pointer = text3D_pointer;
         }
 
@@ -1312,7 +1312,7 @@ namespace yli
 
             if (type == "yli::ontology::Text3D*")
             {
-                this->type = yli::common::TEXT3D_POINTER;
+                this->type = yli::common::Datatype::TEXT3D_POINTER;
                 this->text3D_pointer = text3D_pointer;
             }
         }
@@ -1321,7 +1321,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::TEXT2D_POINTER;
+            this->type = yli::common::Datatype::TEXT2D_POINTER;
             this->font2D_pointer = font2D_pointer;
         }
 
@@ -1332,7 +1332,7 @@ namespace yli
 
             if (type == "yli::ontology::Font2D*")
             {
-                this->type = yli::common::TEXT2D_POINTER;
+                this->type = yli::common::Datatype::TEXT2D_POINTER;
                 this->font2D_pointer = font2D_pointer;
             }
         }
@@ -1341,7 +1341,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::CONSOLE_POINTER;
+            this->type = yli::common::Datatype::CONSOLE_POINTER;
             this->console_pointer = console_pointer;
         }
 
@@ -1352,7 +1352,7 @@ namespace yli
 
             if (type == "yli::ontology::Console*")
             {
-                this->type = yli::common::CONSOLE_POINTER;
+                this->type = yli::common::Datatype::CONSOLE_POINTER;
                 this->console_pointer = console_pointer;
             }
         }
@@ -1361,7 +1361,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::SPHERICAL_COORDINATES_STRUCT_POINTER;
+            this->type = yli::common::Datatype::SPHERICAL_COORDINATES_STRUCT_POINTER;
             this->spherical_coordinates_struct_pointer = spherical_coordinates_struct_pointer;
         }
 
@@ -1372,7 +1372,7 @@ namespace yli
 
             if (type == "yli::common::SphericalCoordinatesStruct*")
             {
-                this->type = yli::common::SPHERICAL_COORDINATES_STRUCT_POINTER;
+                this->type = yli::common::Datatype::SPHERICAL_COORDINATES_STRUCT_POINTER;
                 this->spherical_coordinates_struct_pointer = spherical_coordinates_struct_pointer;
             }
         }
@@ -1381,7 +1381,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::STD_STRING_POINTER;
+            this->type = yli::common::Datatype::STD_STRING_POINTER;
             this->std_string_pointer = std_string_pointer;
         }
 
@@ -1392,7 +1392,7 @@ namespace yli
 
             if (type == "std::string*")
             {
-                this->type = yli::common::STD_STRING_POINTER;
+                this->type = yli::common::Datatype::STD_STRING_POINTER;
                 this->std_string_pointer = std_string_pointer;
             }
         }
@@ -1401,7 +1401,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::STD_VECTOR_INT8_T_SHARED_PTR;
+            this->type = yli::common::Datatype::STD_VECTOR_INT8_T_SHARED_PTR;
             this->std_vector_int8_t_shared_ptr = std_vector_int8_t_shared_ptr;
         }
 
@@ -1412,7 +1412,7 @@ namespace yli
 
             if (type == "std::shared_ptr<std::vector<int8_t>>")
             {
-                this->type = yli::common::STD_VECTOR_INT8_T_SHARED_PTR;
+                this->type = yli::common::Datatype::STD_VECTOR_INT8_T_SHARED_PTR;
                 this->std_vector_int8_t_shared_ptr = std_vector_int8_t_shared_ptr;
             }
         }
@@ -1421,7 +1421,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::STD_VECTOR_UINT8_T_SHARED_PTR;
+            this->type = yli::common::Datatype::STD_VECTOR_UINT8_T_SHARED_PTR;
             this->std_vector_uint8_t_shared_ptr = std_vector_uint8_t_shared_ptr;
         }
 
@@ -1432,7 +1432,7 @@ namespace yli
 
             if (type == "std::shared_ptr<std::vector<uint8_t>>")
             {
-                this->type = yli::common::STD_VECTOR_UINT8_T_SHARED_PTR;
+                this->type = yli::common::Datatype::STD_VECTOR_UINT8_T_SHARED_PTR;
                 this->std_vector_uint8_t_shared_ptr = std_vector_uint8_t_shared_ptr;
             }
         }
@@ -1441,7 +1441,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::STD_VECTOR_INT16_T_SHARED_PTR;
+            this->type = yli::common::Datatype::STD_VECTOR_INT16_T_SHARED_PTR;
             this->std_vector_int16_t_shared_ptr = std_vector_int16_t_shared_ptr;
         }
 
@@ -1452,7 +1452,7 @@ namespace yli
 
             if (type == "std::shared_ptr<std::vector<int16_t>>")
             {
-                this->type = yli::common::STD_VECTOR_INT16_T_SHARED_PTR;
+                this->type = yli::common::Datatype::STD_VECTOR_INT16_T_SHARED_PTR;
                 this->std_vector_int16_t_shared_ptr = std_vector_int16_t_shared_ptr;
             }
         }
@@ -1461,7 +1461,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::STD_VECTOR_UINT16_T_SHARED_PTR;
+            this->type = yli::common::Datatype::STD_VECTOR_UINT16_T_SHARED_PTR;
             this->std_vector_uint16_t_shared_ptr = std_vector_uint16_t_shared_ptr;
         }
 
@@ -1472,7 +1472,7 @@ namespace yli
 
             if (type == "std::shared_ptr<std::vector<uint16_t>>")
             {
-                this->type = yli::common::STD_VECTOR_UINT16_T_SHARED_PTR;
+                this->type = yli::common::Datatype::STD_VECTOR_UINT16_T_SHARED_PTR;
                 this->std_vector_uint16_t_shared_ptr = std_vector_uint16_t_shared_ptr;
             }
         }
@@ -1481,7 +1481,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::STD_VECTOR_INT32_T_SHARED_PTR;
+            this->type = yli::common::Datatype::STD_VECTOR_INT32_T_SHARED_PTR;
             this->std_vector_int32_t_shared_ptr = std_vector_int32_t_shared_ptr;
         }
 
@@ -1492,7 +1492,7 @@ namespace yli
 
             if (type == "std::shared_ptr<std::vector<int32_t>>")
             {
-                this->type = yli::common::STD_VECTOR_INT32_T_SHARED_PTR;
+                this->type = yli::common::Datatype::STD_VECTOR_INT32_T_SHARED_PTR;
                 this->std_vector_int32_t_shared_ptr = std_vector_int32_t_shared_ptr;
             }
         }
@@ -1501,7 +1501,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::STD_VECTOR_UINT32_T_SHARED_PTR;
+            this->type = yli::common::Datatype::STD_VECTOR_UINT32_T_SHARED_PTR;
             this->std_vector_uint32_t_shared_ptr = std_vector_uint32_t_shared_ptr;
         }
 
@@ -1512,7 +1512,7 @@ namespace yli
 
             if (type == "std::shared_ptr<std::vector<uint32_t>>")
             {
-                this->type = yli::common::STD_VECTOR_UINT32_T_SHARED_PTR;
+                this->type = yli::common::Datatype::STD_VECTOR_UINT32_T_SHARED_PTR;
                 this->std_vector_uint32_t_shared_ptr = std_vector_uint32_t_shared_ptr;
             }
         }
@@ -1521,7 +1521,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::STD_VECTOR_FLOAT_SHARED_PTR;
+            this->type = yli::common::Datatype::STD_VECTOR_FLOAT_SHARED_PTR;
             this->std_vector_float_shared_ptr = std_vector_float_shared_ptr;
         }
 
@@ -1532,7 +1532,7 @@ namespace yli
 
             if (type == "std::shared_ptr<std::vector<float>>")
             {
-                this->type = yli::common::STD_VECTOR_FLOAT_SHARED_PTR;
+                this->type = yli::common::Datatype::STD_VECTOR_FLOAT_SHARED_PTR;
                 this->std_vector_float_shared_ptr = std_vector_float_shared_ptr;
             }
         }
@@ -1541,7 +1541,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::GLM_VEC3_POINTER;
+            this->type = yli::common::Datatype::GLM_VEC3_POINTER;
             this->glm_vec3_pointer = glm_vec3_pointer;
         }
 
@@ -1552,7 +1552,7 @@ namespace yli
 
             if (type == "glm::vec3*")
             {
-                this->type = yli::common::GLM_VEC3_POINTER;
+                this->type = yli::common::Datatype::GLM_VEC3_POINTER;
                 this->glm_vec3_pointer = glm_vec3_pointer;
             }
         }
@@ -1561,7 +1561,7 @@ namespace yli
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::GLM_VEC4_POINTER;
+            this->type = yli::common::Datatype::GLM_VEC4_POINTER;
             this->glm_vec4_pointer = glm_vec4_pointer;
         }
 
@@ -1572,7 +1572,7 @@ namespace yli
 
             if (type == "glm::vec4*")
             {
-                this->type = yli::common::GLM_VEC4_POINTER;
+                this->type = yli::common::Datatype::GLM_VEC4_POINTER;
                 this->glm_vec4_pointer = glm_vec4_pointer;
             }
         }

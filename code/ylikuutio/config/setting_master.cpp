@@ -449,7 +449,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> planet_radius_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["planet_radius"]->setting_value);
 
-            if (planet_radius_any_value == nullptr || planet_radius_any_value->type != yli::common::FLOAT)
+            if (planet_radius_any_value == nullptr || planet_radius_any_value->type != yli::common::Datatype::FLOAT)
             {
                 return nullptr;
             }
@@ -481,7 +481,7 @@ namespace yli
             // window width.
             std::shared_ptr<yli::common::AnyValue> window_width_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["window_width"]->setting_value);
 
-            if (window_width_any_value == nullptr || window_width_any_value->type != yli::common::UINT32_T)
+            if (window_width_any_value == nullptr || window_width_any_value->type != yli::common::Datatype::UINT32_T)
             {
                 return nullptr;
             }
@@ -491,7 +491,7 @@ namespace yli
             // window height.
             std::shared_ptr<yli::common::AnyValue> window_height_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["window_height"]->setting_value);
 
-            if (window_height_any_value == nullptr || window_height_any_value->type != yli::common::UINT32_T)
+            if (window_height_any_value == nullptr || window_height_any_value->type != yli::common::Datatype::UINT32_T)
             {
                 return nullptr;
             }
@@ -533,7 +533,7 @@ namespace yli
             // framebuffer width.
             std::shared_ptr<yli::common::AnyValue> framebuffer_width_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["framebuffer_width"]->setting_value);
 
-            if (framebuffer_width_any_value == nullptr || framebuffer_width_any_value->type != yli::common::UINT32_T)
+            if (framebuffer_width_any_value == nullptr || framebuffer_width_any_value->type != yli::common::Datatype::UINT32_T)
             {
                 return nullptr;
             }
@@ -543,7 +543,7 @@ namespace yli
             // framebuffer height.
             std::shared_ptr<yli::common::AnyValue> framebuffer_height_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["framebuffer_height"]->setting_value);
 
-            if (framebuffer_height_any_value == nullptr || framebuffer_height_any_value->type != yli::common::UINT32_T)
+            if (framebuffer_height_any_value == nullptr || framebuffer_height_any_value->type != yli::common::Datatype::UINT32_T)
             {
                 return nullptr;
             }
@@ -581,7 +581,7 @@ namespace yli
             // red.
             std::shared_ptr<yli::common::AnyValue> red_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["red"]->setting_value);
 
-            if (red_any_value == nullptr || red_any_value->type != yli::common::FLOAT)
+            if (red_any_value == nullptr || red_any_value->type != yli::common::Datatype::FLOAT)
             {
                 return nullptr;
             }
@@ -591,7 +591,7 @@ namespace yli
             // green.
             std::shared_ptr<yli::common::AnyValue> green_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["green"]->setting_value);
 
-            if (green_any_value == nullptr || green_any_value->type != yli::common::FLOAT)
+            if (green_any_value == nullptr || green_any_value->type != yli::common::Datatype::FLOAT)
             {
                 return nullptr;
             }
@@ -601,7 +601,7 @@ namespace yli
             // blue.
             std::shared_ptr<yli::common::AnyValue> blue_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["blue"]->setting_value);
 
-            if (blue_any_value == nullptr || blue_any_value->type != yli::common::FLOAT)
+            if (blue_any_value == nullptr || blue_any_value->type != yli::common::Datatype::FLOAT)
             {
                 return nullptr;
             }
@@ -611,7 +611,7 @@ namespace yli
             // alpha.
             std::shared_ptr<yli::common::AnyValue> alpha_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["alpha"]->setting_value);
 
-            if (alpha_any_value == nullptr || alpha_any_value->type != yli::common::FLOAT)
+            if (alpha_any_value == nullptr || alpha_any_value->type != yli::common::Datatype::FLOAT)
             {
                 return nullptr;
             }
@@ -649,7 +649,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> wireframe_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["wireframe"]->setting_value);
 
-            if (wireframe_any_value == nullptr || wireframe_any_value->type != yli::common::BOOL)
+            if (wireframe_any_value == nullptr || wireframe_any_value->type != yli::common::Datatype::BOOL)
             {
                 return nullptr;
             }
@@ -672,7 +672,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> should_be_rendered_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["should_be_rendered"]->setting_value);
 
-            if (should_be_rendered_any_value == nullptr || should_be_rendered_any_value->type != yli::common::BOOL)
+            if (should_be_rendered_any_value == nullptr || should_be_rendered_any_value->type != yli::common::Datatype::BOOL)
             {
                 return nullptr;
             }
@@ -699,7 +699,7 @@ namespace yli
 
                 std::shared_ptr<yli::common::AnyValue> spherical_coordinates_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["spherical_coordinates"]->setting_value);
 
-                if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != yli::common::SPHERICAL_COORDINATES_STRUCT_POINTER)
+                if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != yli::common::Datatype::SPHERICAL_COORDINATES_STRUCT_POINTER)
                 {
                     return nullptr;
                 }
@@ -717,7 +717,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> spherical_coordinates_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["spherical_coordinates"]->setting_value);
 
-            if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != yli::common::SPHERICAL_COORDINATES_STRUCT_POINTER)
+            if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != yli::common::Datatype::SPHERICAL_COORDINATES_STRUCT_POINTER)
             {
                 return nullptr;
             }
@@ -744,7 +744,7 @@ namespace yli
 
                 std::shared_ptr<yli::common::AnyValue> rho_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["rho"]->setting_value);
 
-                if (rho_any_value == nullptr || rho_any_value->type != yli::common::FLOAT)
+                if (rho_any_value == nullptr || rho_any_value->type != yli::common::Datatype::FLOAT)
                 {
                     return nullptr;
                 }
@@ -767,7 +767,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> rho_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["rho"]->setting_value);
 
-            if (rho_any_value == nullptr || rho_any_value->type != yli::common::FLOAT)
+            if (rho_any_value == nullptr || rho_any_value->type != yli::common::Datatype::FLOAT)
             {
                 return nullptr;
             }
@@ -794,7 +794,7 @@ namespace yli
 
                 std::shared_ptr<yli::common::AnyValue> theta_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["theta"]->setting_value);
 
-                if (theta_any_value == nullptr || theta_any_value->type != yli::common::FLOAT)
+                if (theta_any_value == nullptr || theta_any_value->type != yli::common::Datatype::FLOAT)
                 {
                     return nullptr;
                 }
@@ -817,7 +817,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> theta_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["theta"]->setting_value);
 
-            if (theta_any_value == nullptr || theta_any_value->type != yli::common::FLOAT)
+            if (theta_any_value == nullptr || theta_any_value->type != yli::common::Datatype::FLOAT)
             {
                 return nullptr;
             }
@@ -844,7 +844,7 @@ namespace yli
 
                 std::shared_ptr<yli::common::AnyValue> phi_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["phi"]->setting_value);
 
-                if (phi_any_value == nullptr || phi_any_value->type != yli::common::FLOAT)
+                if (phi_any_value == nullptr || phi_any_value->type != yli::common::Datatype::FLOAT)
                 {
                     return nullptr;
                 }
@@ -867,7 +867,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> phi_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["phi"]->setting_value);
 
-            if (phi_any_value == nullptr || phi_any_value->type != yli::common::FLOAT)
+            if (phi_any_value == nullptr || phi_any_value->type != yli::common::Datatype::FLOAT)
             {
                 return nullptr;
             }
@@ -894,7 +894,7 @@ namespace yli
 
                 std::shared_ptr<yli::common::AnyValue> cartesian_coordinates_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["cartesian_coordinates"]->setting_value);
 
-                if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != yli::common::GLM_VEC3_POINTER)
+                if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != yli::common::Datatype::GLM_VEC3_POINTER)
                 {
                     return nullptr;
                 }
@@ -912,7 +912,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> cartesian_coordinates_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["cartesian_coordinates"]->setting_value);
 
-            if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != yli::common::GLM_VEC3_POINTER)
+            if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != yli::common::Datatype::GLM_VEC3_POINTER)
             {
                 return nullptr;
             }
@@ -939,7 +939,7 @@ namespace yli
 
                 std::shared_ptr<yli::common::AnyValue> x_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["x"]->setting_value);
 
-                if (x_any_value == nullptr || x_any_value->type != yli::common::FLOAT)
+                if (x_any_value == nullptr || x_any_value->type != yli::common::Datatype::FLOAT)
                 {
                     return nullptr;
                 }
@@ -971,7 +971,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> x_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["x"]->setting_value);
 
-            if (x_any_value == nullptr || x_any_value->type != yli::common::FLOAT)
+            if (x_any_value == nullptr || x_any_value->type != yli::common::Datatype::FLOAT)
             {
                 return nullptr;
             }
@@ -998,7 +998,7 @@ namespace yli
 
                 std::shared_ptr<yli::common::AnyValue> y_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["y"]->setting_value);
 
-                if (y_any_value == nullptr || y_any_value->type != yli::common::FLOAT)
+                if (y_any_value == nullptr || y_any_value->type != yli::common::Datatype::FLOAT)
                 {
                     return nullptr;
                 }
@@ -1030,7 +1030,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> y_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["y"]->setting_value);
 
-            if (y_any_value == nullptr || y_any_value->type != yli::common::FLOAT)
+            if (y_any_value == nullptr || y_any_value->type != yli::common::Datatype::FLOAT)
             {
                 return nullptr;
             }
@@ -1057,7 +1057,7 @@ namespace yli
 
                 std::shared_ptr<yli::common::AnyValue> z_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["z"]->setting_value);
 
-                if (z_any_value == nullptr || z_any_value->type != yli::common::FLOAT)
+                if (z_any_value == nullptr || z_any_value->type != yli::common::Datatype::FLOAT)
                 {
                     return nullptr;
                 }
@@ -1089,7 +1089,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> z_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["z"]->setting_value);
 
-            if (z_any_value == nullptr || z_any_value->type != yli::common::FLOAT)
+            if (z_any_value == nullptr || z_any_value->type != yli::common::Datatype::FLOAT)
             {
                 return nullptr;
             }
@@ -1119,7 +1119,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> horizontal_angle_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["horizontal_angle"]->setting_value);
 
-            if (horizontal_angle_any_value == nullptr || horizontal_angle_any_value->type != yli::common::DOUBLE)
+            if (horizontal_angle_any_value == nullptr || horizontal_angle_any_value->type != yli::common::Datatype::DOUBLE)
             {
                 return nullptr;
             }
@@ -1149,7 +1149,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> vertical_angle_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["vertical_angle"]->setting_value);
 
-            if (vertical_angle_any_value == nullptr || vertical_angle_any_value->type != yli::common::DOUBLE)
+            if (vertical_angle_any_value == nullptr || vertical_angle_any_value->type != yli::common::Datatype::DOUBLE)
             {
                 return nullptr;
             }
@@ -1179,7 +1179,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> speed_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["speed"]->setting_value);
 
-            if (speed_any_value == nullptr || speed_any_value->type != yli::common::FLOAT)
+            if (speed_any_value == nullptr || speed_any_value->type != yli::common::Datatype::FLOAT)
             {
                 return nullptr;
             }
@@ -1209,7 +1209,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> turbo_factor_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["turbo_factor"]->setting_value);
 
-            if (turbo_factor_any_value == nullptr || turbo_factor_any_value->type != yli::common::FLOAT)
+            if (turbo_factor_any_value == nullptr || turbo_factor_any_value->type != yli::common::Datatype::FLOAT)
             {
                 return nullptr;
             }
@@ -1239,7 +1239,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> twin_turbo_factor_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["twin_turbo_factor"]->setting_value);
 
-            if (twin_turbo_factor_any_value == nullptr || twin_turbo_factor_any_value->type != yli::common::FLOAT)
+            if (twin_turbo_factor_any_value == nullptr || twin_turbo_factor_any_value->type != yli::common::Datatype::FLOAT)
             {
                 return nullptr;
             }
@@ -1269,7 +1269,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> mouse_speed_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["mouse_speed"]->setting_value);
 
-            if (mouse_speed_any_value == nullptr || mouse_speed_any_value->type != yli::common::FLOAT)
+            if (mouse_speed_any_value == nullptr || mouse_speed_any_value->type != yli::common::Datatype::FLOAT)
             {
                 return nullptr;
             }
@@ -1299,7 +1299,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> is_flight_mode_in_use_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["is_flight_mode_in_use"]->setting_value);
 
-            if (is_flight_mode_in_use_any_value == nullptr || is_flight_mode_in_use_any_value->type != yli::common::BOOL)
+            if (is_flight_mode_in_use_any_value == nullptr || is_flight_mode_in_use_any_value->type != yli::common::Datatype::BOOL)
             {
                 return nullptr;
             }
@@ -1322,7 +1322,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> console_top_y_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["console_top_y"]->setting_value);
 
-            if (console_top_y_any_value == nullptr || console_top_y_any_value->type != yli::common::UINT32_T)
+            if (console_top_y_any_value == nullptr || console_top_y_any_value->type != yli::common::Datatype::UINT32_T)
             {
                 return nullptr;
             }
@@ -1359,7 +1359,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> console_bottom_y_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["console_bottom_y"]->setting_value);
 
-            if (console_bottom_y_any_value == nullptr || console_bottom_y_any_value->type != yli::common::UINT32_T)
+            if (console_bottom_y_any_value == nullptr || console_bottom_y_any_value->type != yli::common::Datatype::UINT32_T)
             {
                 return nullptr;
             }
@@ -1396,7 +1396,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> console_left_x_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["console_left_x"]->setting_value);
 
-            if (console_left_x_any_value == nullptr || console_left_x_any_value->type != yli::common::UINT32_T)
+            if (console_left_x_any_value == nullptr || console_left_x_any_value->type != yli::common::Datatype::UINT32_T)
             {
                 return nullptr;
             }
@@ -1433,7 +1433,7 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> console_right_x_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["console_right_x"]->setting_value);
 
-            if (console_right_x_any_value == nullptr || console_right_x_any_value->type != yli::common::UINT32_T)
+            if (console_right_x_any_value == nullptr || console_right_x_any_value->type != yli::common::Datatype::UINT32_T)
             {
                 return nullptr;
             }

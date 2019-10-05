@@ -236,7 +236,7 @@ int main(const int argc, const char* const argv[])
                             const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute();
 
                             if (any_value != nullptr &&
-                                    any_value->type == yli::common::UINT32_T)
+                                    any_value->type == yli::common::Datatype::UINT32_T)
                             {
                                 if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
                                 {

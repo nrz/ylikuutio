@@ -80,9 +80,9 @@ namespace app
             return false;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return false;
         }
 
@@ -146,9 +146,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -177,9 +177,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -208,9 +208,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -239,9 +239,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -270,9 +270,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -314,9 +314,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -345,9 +345,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -376,9 +376,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -407,9 +407,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -438,9 +438,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -469,9 +469,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -500,9 +500,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -531,9 +531,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -562,9 +562,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -597,9 +597,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -633,9 +633,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -668,9 +668,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -690,9 +690,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_entity_string->type != yli::common::STD_STRING_POINTER)
+        if (any_value_entity_string->type != yli::common::Datatype::STD_STRING_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_entity_string->type << ", should be " << yli::common::STD_STRING_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::STD_STRING_POINTER\n";
             return nullptr;
         }
 
@@ -730,9 +730,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -752,9 +752,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_entity_string->type != yli::common::STD_STRING_POINTER)
+        if (any_value_entity_string->type != yli::common::Datatype::STD_STRING_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_entity_string->type << ", should be " << yli::common::STD_STRING_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::STD_STRING_POINTER\n";
             return nullptr;
         }
 
@@ -798,9 +798,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_material_string->type != yli::common::STD_STRING_POINTER)
+        if (any_value_material_string->type != yli::common::Datatype::STD_STRING_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_material_string->type << ", should be " << yli::common::STD_STRING_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::STD_STRING_POINTER\n";
             return nullptr;
         }
 
@@ -850,9 +850,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_universe->type != yli::common::UNIVERSE_POINTER)
+        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << yli::common::UNIVERSE_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
             return nullptr;
         }
 
@@ -872,9 +872,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_entity_string->type != yli::common::STD_STRING_POINTER)
+        if (any_value_entity_string->type != yli::common::Datatype::STD_STRING_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_entity_string->type << ", should be " << yli::common::STD_STRING_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::STD_STRING_POINTER\n";
             return nullptr;
         }
 
@@ -918,9 +918,9 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_species_string->type != yli::common::STD_STRING_POINTER)
+        if (any_value_species_string->type != yli::common::Datatype::STD_STRING_POINTER)
         {
-            std::cerr << "Invalid datatype: " << any_value_species_string->type << ", should be " << yli::common::STD_STRING_POINTER << "\n";
+            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::STD_STRING_POINTER\n";
             return nullptr;
         }
 
