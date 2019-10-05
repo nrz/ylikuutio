@@ -90,6 +90,7 @@ namespace yli
 
                 InputParametersToAnyValueCallback callback;
 
+            private:
                 // A hash map used to store variables.
                 std::unordered_map<std::string, yli::common::AnyValue> anyvalue_hashmap;
         };
