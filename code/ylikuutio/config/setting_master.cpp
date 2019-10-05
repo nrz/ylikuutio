@@ -64,7 +64,7 @@ namespace yli
             // destructor.
         }
 
-        void SettingMaster::create_setting(const yli::config::SettingStruct& setting_struct)
+        void SettingMaster::create_Setting(const yli::config::SettingStruct& setting_struct)
         {
             new yli::config::Setting(this, setting_struct);
         }

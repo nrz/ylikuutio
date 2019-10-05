@@ -240,7 +240,7 @@ int main(const int argc, const char* const argv[])
     planet_radius_setting_struct.name = "planet_radius";
     planet_radius_setting_struct.activate_callback = &yli::config::SettingMaster::activate_planet_radius; // planet radius may be for a planet or a moon.
     planet_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-    setting_master->create_setting(planet_radius_setting_struct);
+    setting_master->create_Setting(planet_radius_setting_struct);
 
     std::cout << "Creating yli::callback_system::CallbackEngine* cleanup_callback_engine ...\n";
     yli::callback_system::CallbackEngine cleanup_callback_engine = yli::callback_system::CallbackEngine();
