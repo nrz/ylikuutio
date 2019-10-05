@@ -17,7 +17,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement command line parameter `--headless` to Hirvi and Ajokki (do not open any windows, do not render anything).
 [ ] Implement command line parameter `--debug` to Hirvi and Ajokki (log all kinds of debug information).
 [ ] Add `Scene` loading command `load` into console.
-[ ] Implement support for changing font size.
+[ ] Add support for changing font size.
 [ ] Implement `LogMaster` class.
 [ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
 [ ] Implement s7 support for programming of AI objects (robots).
@@ -25,7 +25,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement `pause` console command for pausing `Sound`s and `Playlist`s.
 [ ] Implement `next` console command for changing to the next `Sound` in a `Playlist`.
 [ ] Implement `prev` console command for changing to the previous `Sound` in a `Playlist`.
-[ ] Implement support for automatic detection of optimal window size.
+[ ] Add support for automatic detection of optimal window size.
 [ ] Implement modifying of vertices.
 [ ] Implement `ViewMaster` class and the functionality for splitting the window or fullscreen view into different `View`s (using horizontal or vertical split, or grid).
 [ ] Implement frustrum culling.
@@ -59,19 +59,23 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Write test code using pthreads.
 [ ] Implement scene loading which works in the background.
 [ ] Evaluate AppVeyor: https://github.com/marketplace/appveyor
-[ ] Implement support for `man` command in console (a container class with the command callback together with the `man` text for the command).
+[ ] Implement `ConsoleCommand` class.
+[ ] Store console commands in `Console` instance not only in an `unordered_map` but also in a trie.
+[ ] Implement Tab autocomplete in `Console`.
+[ ] Add support for `man` command in console (a container class with the command callback together with the `man` text for the command).
 [ ] Optimize `Symbiosis` entities' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.
+[ ] Add support for packed files.
 [ ] Add support for CityGML file format.
-[ ] Implement support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
-[ ] Implement support for 3D model of Vantaa: https://hri.fi/data/en_GB/dataset/vantaan-3d-rakennukset https://hri.fi/data/fi/dataset/vantaan-3d-rakennukset
-[ ] Implement support for OpenStreetMap data: https://www.openstreetmap.org/
-[ ] Implement support for 3D model of Oulu: http://ubicomp.oulu.fi/infrastructure-virtualoulu/ https://github.com/Oulu-UCC/3D_City_fbx
+[ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
+[ ] Add support for 3D model of Vantaa: https://hri.fi/data/en_GB/dataset/vantaan-3d-rakennukset https://hri.fi/data/fi/dataset/vantaan-3d-rakennukset
+[ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
+[ ] Add support for 3D model of Oulu: http://ubicomp.oulu.fi/infrastructure-virtualoulu/ https://github.com/Oulu-UCC/3D_City_fbx
 [ ] Add support for Collada .dae file format.
-[ ] Implement support for 3D model of Turku campus and science park area: http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
-[ ] Implement support for 3D model of Tampere: http://kartat.tampere.fi/splashscreen/
+[ ] Add support for 3D model of Turku campus and science park area: http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
+[ ] Add support for 3D model of Tampere: http://kartat.tampere.fi/splashscreen/
 [ ] Implement AI objects (robots).
 [ ] Move main loop out of `main` function and away from Ajokki into `ontology::Universe` class of Ylikuutio.
-[ ] Implement support for custom keyboard settings.
+[ ] Add support for custom keyboard settings.
 [ ] Add variable `direction`.
 [ ] Implement A* for train routing.
 [ ] Use TinySpline.
@@ -83,7 +87,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement `Species` morphing using marching cubes algorithm.
 [ ] Implement creation of vertex graphs of the vertices and edges of a `Species`, to be used in `Species` morphing code.
 [ ] Implement Theta* route finding. http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/
-[ ] Implement support for vector fonts.
+[ ] Add support for vector fonts.
 [ ] Disable executing system commands from s7.
 [ ] Disable listing directories from s7.
 [ ] Disable deleting files from s7.
@@ -96,9 +100,9 @@ Tasks which are necessary for the development of Ylikuutio:
 Less urgent:
 [ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
 [ ] Implement flowing water (computed on a server, based on players' actions) using GridFluidSim3D. https://github.com/rlguy/GridFluidSim3D
-[ ] Implement support for 3D text.
-[ ] Implement support for partially transparent text.
-[ ] Implement support for over 3D objects (`class HighDimensionalSpecies`, `class HighDimensionalObject`). projected into 3D space in `HighDimensionalObject::render()`).
+[ ] Add support for 3D text.
+[ ] Add support for partially transparent text.
+[ ] Add support for over 3D objects (`class HighDimensionalSpecies`, `class HighDimensionalObject`). projected into 3D space in `HighDimensionalObject::render()`).
 [ ] Store each robot's current view into an array from which the robot may access it programmatically using C++ and/or GLSL.
 [ ] Implement simulation of contour detection processing in the primary visual cortex (V1).
 [ ] Implement simulation of contour detection processing in V2 (visual cortex area).
@@ -150,4 +154,4 @@ Ready:
 [x] Implement command line parameter `--window_width` to Hirvi and Ajokki (e.g. `--window_width 1600`).
 [x] Implement command line parameter `--window_height` to Hirvi and Ajokki (e.g. --window_height 900`).
 [x] Fix bug that only 2D text gets rendered when window width is less than window height.
-[x] Implement support for changing window size.
+[x] Add support for changing window size.
