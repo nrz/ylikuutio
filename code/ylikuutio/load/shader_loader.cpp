@@ -35,7 +35,7 @@ namespace yli
 {
     namespace load
     {
-        uint32_t load_shaders(const char* const vertex_shader_filename, const char* const fragment_file_path)
+        uint32_t load_shaders(const char* const vertex_shader_filename, const char* const fragment_shader_filename)
         {
             // Create the shaders.
             const uint32_t vertex_shaderID = glCreateShader(GL_VERTEX_SHADER);
@@ -45,7 +45,7 @@ namespace yli
             std::shared_ptr<std::string> vertex_shader_code = yli::file::slurp(vertex_shader_filename);
 
             // Read the fragment shader code from the file.
-            std::shared_ptr<std::string> fragment_shader_code = yli::file::slurp(fragment_file_path);
+            std::shared_ptr<std::string> fragment_shader_code = yli::file::slurp(fragment_shader_filename);
 
             GLint result = GL_FALSE;
             int info_log_length;
@@ -69,7 +69,7 @@ namespace yli
             }
 
             // Compile fragment shader.
-            std::cout << "Compiling fragment shader: " << fragment_file_path << "\n";
+            std::cout << "Compiling fragment shader: " << fragment_shader_filename << "\n";
             const char* const fragment_source_pointer = fragment_shader_code->c_str();
             glShaderSource(fragment_shaderID, 1, &fragment_source_pointer, nullptr);
             glCompileShader(fragment_shaderID);
