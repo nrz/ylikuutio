@@ -65,7 +65,7 @@ namespace yli
             if (species_loader_struct.model_file_format == "obj" || species_loader_struct.model_file_format == "OBJ")
             {
                 model_loading_result = yli::load::load_OBJ(
-                        species_loader_struct.model_filename.c_str(),
+                        species_loader_struct.model_filename,
                         out_vertices,
                         out_UVs,
                         out_normals);
