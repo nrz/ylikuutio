@@ -217,12 +217,12 @@ namespace yli
 
             image_height               = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 8);
             image_width                = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 12);
-            const uint32_t linearSize  = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 16);
+            const uint32_t linear_size = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 16);
             const uint32_t mipMapCount = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 24);
             const uint32_t fourCC      = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 80);
 
             /* how big is it going to be including all mipmaps? */
-            const std::size_t bufsize = mipMapCount > 1 ? 2 * static_cast<std::size_t>(linearSize) : linearSize;
+            const std::size_t bufsize = mipMapCount > 1 ? 2 * static_cast<std::size_t>(linear_size) : linear_size;
             uint8_t* const buffer = new uint8_t[bufsize];
 
             if (std::fread(buffer, 1, bufsize, fp) != bufsize)
