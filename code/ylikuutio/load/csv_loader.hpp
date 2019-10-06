@@ -34,17 +34,17 @@ namespace yli
     {
         template<class T1>
             std::shared_ptr<std::vector<T1>> load_CSV_file(
-                    const std::string& csv_filename,
+                    const std::string& filename,
                     std::size_t& data_width,
                     std::size_t& data_height,
                     std::size_t& data_size)
             {
                 // Open the file
-                std::shared_ptr<std::string> file_content = yli::file::slurp(csv_filename);
+                std::shared_ptr<std::string> file_content = yli::file::slurp(filename);
 
                 if (file_content == nullptr || file_content->empty())
                 {
-                    std::cerr << csv_filename << " could not be opened, or the file is empty.\n";
+                    std::cerr << filename << " could not be opened, or the file is empty.\n";
                     return nullptr;
                 }
 
