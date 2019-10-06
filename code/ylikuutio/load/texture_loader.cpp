@@ -219,7 +219,7 @@ namespace yli
             image_width                = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 12);
             const uint32_t linear_size = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 16);
             const uint32_t mipmap_count = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 24);
-            const uint32_t fourCC      = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 80);
+            const uint32_t dwFourCC     = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 80);
 
             /* how big is it going to be including all mipmaps? */
             const std::size_t bufsize = mipmap_count > 1 ? 2 * static_cast<std::size_t>(linear_size) : linear_size;
@@ -237,7 +237,7 @@ namespace yli
             std::fclose(fp);
 
             uint32_t format;
-            switch(fourCC)
+            switch(dwFourCC)
             {
                 case FOURCC_DXT1:
                     format = GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
