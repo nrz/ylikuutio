@@ -42,6 +42,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Create `audio::PlayList` class, whose parent is `Entity`.
 [ ] Add support for crosscompiling to Android.
 [ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
+[ ] Evaluate ZeroMQ: https://zeromq.org/
 [ ] Evaluate SDL_net: https://www.libsdl.org/projects/SDL_net/
 [ ] Evaluate Asio (nework and low-level I/O library): https://think-async.com/
 [ ] Evaluate cpp-netlib (network library): http://cpp-netlib.org/
