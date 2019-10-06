@@ -45,10 +45,9 @@ namespace yli
     {
         // Load texture from memory.
         bool load_texture(
-                const uint8_t* const image_data,
+                const std::shared_ptr<std::vector<uint8_t>> image_data,
                 const std::size_t image_width,
                 const std::size_t image_height,
-                const bool should_image_data_be_deleted,
                 uint32_t& textureID)
         {
             if (image_data == nullptr)
@@ -64,13 +63,7 @@ namespace yli
             glBindTexture(GL_TEXTURE_2D, textureID);
 
             // Give the image to OpenGL.
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image_width, image_height, 0, GL_BGR, GL_UNSIGNED_BYTE, image_data);
-
-            if (should_image_data_be_deleted)
-            {
-                // OpenGL has now copied the data. Free our own version.
-                delete[] image_data;
-            }
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image_width, image_height, 0, GL_BGR, GL_UNSIGNED_BYTE, &(*image_data)[0]);
 
             yli::opengl::set_filtering_parameters();
 
@@ -154,7 +147,7 @@ namespace yli
                 std::size_t& image_size,
                 uint32_t& textureID)
         {
-            const uint8_t* const image_data = load_BMP_file(filename, image_width, image_height, image_size);
+            const std::shared_ptr<std::vector<uint8_t>> image_data = load_BMP_file(filename, image_width, image_height, image_size);
 
             if (image_data == nullptr)
             {
@@ -162,7 +155,7 @@ namespace yli
                 return false;
             }
 
-            return yli::load::load_texture(image_data, image_width, image_height, true, textureID);
+            return yli::load::load_texture(image_data, image_width, image_height, textureID);
         }
 
 #define FOURCC_DXT1 0x31545844 // Equivalent to "DXT1" in ASCII
@@ -217,12 +210,12 @@ namespace yli
 
             image_height               = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 8);
             image_width                = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 12);
-            const uint32_t linearSize  = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 16);
-            const uint32_t mipMapCount = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 24);
-            const uint32_t fourCC      = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 80);
+            const uint32_t linear_size = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 16);
+            const uint32_t mipmap_count = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 24);
+            const uint32_t dwFourCC     = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 80);
 
             /* how big is it going to be including all mipmaps? */
-            const std::size_t bufsize = mipMapCount > 1 ? 2 * static_cast<std::size_t>(linearSize) : linearSize;
+            const std::size_t bufsize = mipmap_count > 1 ? 2 * static_cast<std::size_t>(linear_size) : linear_size;
             uint8_t* const buffer = new uint8_t[bufsize];
 
             if (std::fread(buffer, 1, bufsize, fp) != bufsize)
@@ -237,7 +230,7 @@ namespace yli
             std::fclose(fp);
 
             uint32_t format;
-            switch(fourCC)
+            switch (dwFourCC)
             {
                 case FOURCC_DXT1:
                     format = GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
@@ -267,7 +260,7 @@ namespace yli
             std::size_t temp_height = image_height;
 
             // Load the mipmaps.
-            for (std::size_t level = 0; level < mipMapCount && (temp_width || temp_height); ++level)
+            for (std::size_t level = 0; level < mipmap_count && (temp_width || temp_height); ++level)
             {
                 std::size_t size = ((temp_width + 3) / 4) * ((temp_height + 3) / 4) * blockSize;
                 glCompressedTexImage2D(

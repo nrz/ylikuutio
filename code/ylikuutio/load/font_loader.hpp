@@ -58,7 +58,7 @@ namespace yli
                 const bool is_debug_mode);
 
         bool load_SVG_font(
-                const std::string& font_file_path,
+                const std::string& filename,
                 std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
                 std::vector<std::string>& glyph_names,
                 std::vector<std::string>& unicode_strings,

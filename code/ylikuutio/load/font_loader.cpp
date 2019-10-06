@@ -446,13 +446,13 @@ namespace yli
         }
 
         bool load_SVG_font(
-                const std::string& font_file_path,
+                const std::string& filename,
                 std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
                 std::vector<std::string>& glyph_names,
                 std::vector<std::string>& unicode_strings,
                 const bool is_debug_mode)
         {
-            std::shared_ptr<std::string> file_content = yli::file::slurp(font_file_path);
+            const std::shared_ptr<std::string> file_content = yli::file::slurp(filename);
             const uint64_t file_size = file_content->size();
             char* SVG_data = new char[file_size];
 

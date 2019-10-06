@@ -25,7 +25,7 @@ namespace yli
 {
     namespace load
     {
-        uint32_t load_shaders(const char* const vertex_file_path, const char* const fragment_file_path);
+        uint32_t load_shaders(const char* const vertex_shader_filename, const char* const fragment_shader_filename);
     }
 }
 

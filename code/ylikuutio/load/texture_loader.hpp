@@ -28,6 +28,7 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
+#include <vector>   // std::vector
 
 namespace yli
 {
@@ -40,10 +41,9 @@ namespace yli
     {
         // Load texture from memory.
         bool load_texture(
-                const uint8_t* const image_data,
+                const std::shared_ptr<std::vector<uint8_t>> image_data,
                 const std::size_t image_width,
                 const std::size_t image_height,
-                const bool should_image_data_be_deleted,
                 uint32_t& textureID);
 
         // Load texture from memory.

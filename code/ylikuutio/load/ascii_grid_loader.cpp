@@ -51,7 +51,7 @@ namespace yli
     namespace load
     {
         bool load_ASCII_grid(
-                const std::string& ascii_grid_filename,
+                const std::string& filename,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals,
@@ -72,7 +72,7 @@ namespace yli
             // NODATA_value  -9999.000
             // 34.315 34.467 34.441 34.260 33.972 33.564 33.229 33.130 33.102 33.024 32.902 32.669 32.305 32.013 31.937 31.893 31.831 31.832
 
-            std::cout << "Loading ASCII grid file " << ascii_grid_filename << " ...\n";
+            std::cout << "Loading ASCII grid file " << filename << " ...\n";
 
             if (x_step < 1)
             {
@@ -87,11 +87,11 @@ namespace yli
             }
 
             // Open the file
-            std::shared_ptr<std::string> file_content = yli::file::slurp(ascii_grid_filename);
+            const std::shared_ptr<std::string> file_content = yli::file::slurp(filename);
 
             if (file_content == nullptr || file_content->empty())
             {
-                std::cerr << "ERROR: " << ascii_grid_filename << " could not be opened, or the file is empty.\n";
+                std::cerr << "ERROR: " << filename << " could not be opened, or the file is empty.\n";
                 return false;
             }
 

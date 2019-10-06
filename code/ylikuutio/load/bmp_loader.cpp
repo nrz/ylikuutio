@@ -33,20 +33,20 @@ namespace yli
 {
     namespace load
     {
-        uint8_t* load_BMP_file(
-                const std::string& bmp_filename,
+        std::shared_ptr<std::vector<uint8_t>> load_BMP_file(
+                const std::string& filename,
                 std::size_t& image_width,
                 std::size_t& image_height,
                 std::size_t& image_size)
         {
-            std::cout << "Loading BMP file " << bmp_filename << " ...\n";
+            std::cout << "Loading BMP file " << filename << " ...\n";
 
             // Open the file
-            std::shared_ptr<std::vector<uint8_t>> file_content = yli::file::binary_slurp(bmp_filename);
+            const std::shared_ptr<std::vector<uint8_t>> file_content = yli::file::binary_slurp(filename);
 
             if (file_content == nullptr || file_content->empty())
             {
-                std::cerr << bmp_filename << " could not be opened, or the file is empty.\n";
+                std::cerr << filename << " could not be opened, or the file is empty.\n";
                 return nullptr;
             }
 
@@ -55,14 +55,14 @@ namespace yli
             if (file_content->size() < header_size)
             {
                 // BMP header size is 54 bytes.
-                std::cerr << bmp_filename << " is not a correct BMP file.\n";
+                std::cerr << filename << " is not a correct BMP file.\n";
                 return nullptr;
             }
 
             if ((*file_content)[0] != 'B' || (*file_content)[1] != 'M')
             {
                 // BMP begins always with "BM".
-                std::cerr << bmp_filename << " is not a correct BMP file.\n";
+                std::cerr << filename << " is not a correct BMP file.\n";
                 return nullptr;
             }
 
@@ -144,16 +144,11 @@ namespace yli
             }
 
             // Create a buffer.
-            uint8_t* image_data = new uint8_t[image_size];
-
-            if (image_data == nullptr)
-            {
-                std::cerr << "Reserving memory for image data failed.\n";
-                return nullptr;
-            }
+            std::shared_ptr<std::vector<uint8_t>> image_data = std::make_shared<std::vector<uint8_t>>();
+            image_data->reserve(image_size);
 
             std::cout << "Copying image data ...\n";
-            std::copy(file_content->begin() + pixel_array_start_offset, file_content->end(), image_data);
+            std::copy(file_content->begin() + pixel_array_start_offset, file_content->end(), image_data->begin());
             std::cout << "Image data copied.\n";
 
             return image_data;
