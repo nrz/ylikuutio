@@ -147,12 +147,6 @@ namespace yli
             std::shared_ptr<std::vector<uint8_t>> image_data = std::make_shared<std::vector<uint8_t>>();
             image_data->reserve(image_size);
 
-            if (image_data == nullptr)
-            {
-                std::cerr << "Reserving memory for image data failed.\n";
-                return nullptr;
-            }
-
             std::cout << "Copying image data ...\n";
             std::copy(file_content->begin() + pixel_array_start_offset, file_content->end(), image_data->begin());
             std::cout << "Image data copied.\n";
