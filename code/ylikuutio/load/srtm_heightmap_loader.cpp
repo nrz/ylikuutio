@@ -134,16 +134,16 @@ namespace yli
 
             const std::string hgt_suffix = ".hgt";
 
-            const std::string abs_image_path = heightmap_directory + south_north_char + latitude_string + west_east_char + longitude_string + hgt_suffix;
+            const std::string abs_filename = heightmap_directory + south_north_char + latitude_string + west_east_char + longitude_string + hgt_suffix;
 
-            std::cout << "Loading SRTM file " << abs_image_path << " ...\n";
+            std::cout << "Loading SRTM file " << abs_filename << " ...\n";
 
             // Open the file
-            const char* const char_image_path = abs_image_path.c_str();
+            const char* const char_image_path = abs_filename.c_str();
             std::FILE* const file = std::fopen(char_image_path, "rb");
             if (!file)
             {
-                std::cerr << "ERROR: " << abs_image_path << " could not be opened.\n";
+                std::cerr << "ERROR: " << abs_filename << " could not be opened.\n";
                 return false;
             }
 
