@@ -41,19 +41,19 @@ namespace yli
     namespace load
     {
         bool load_OBJ(
-                const std::string& obj_file_name,
+                const std::string& filename,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals)
         {
-            std::cout << "Loading OBJ file " << obj_file_name << " ...\n";
+            std::cout << "Loading OBJ file " << filename << " ...\n";
 
             // Open the file
-            std::shared_ptr<std::string> file_content = yli::file::slurp(obj_file_name);
+            std::shared_ptr<std::string> file_content = yli::file::slurp(filename);
 
             if (file_content->empty())
             {
-                std::cerr << obj_file_name << " could not be opened, or the file is empty.\n";
+                std::cerr << filename << " could not be opened, or the file is empty.\n";
                 return false;
             }
 
@@ -83,7 +83,7 @@ namespace yli
 
                 if (file_content_i >= file_content->size())
                 {
-                    std::cout << obj_file_name << " ends in a line consisting only of whitespace.\n";
+                    std::cout << filename << " ends in a line consisting only of whitespace.\n";
                     break;
                 }
 
