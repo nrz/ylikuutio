@@ -42,7 +42,7 @@ namespace yli
             std::cout << "Loading BMP file " << filename << " ...\n";
 
             // Open the file
-            std::shared_ptr<std::vector<uint8_t>> file_content = yli::file::binary_slurp(filename);
+            const std::shared_ptr<std::vector<uint8_t>> file_content = yli::file::binary_slurp(filename);
 
             if (file_content == nullptr || file_content->empty())
             {

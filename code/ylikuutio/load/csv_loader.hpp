@@ -40,7 +40,7 @@ namespace yli
                     std::size_t& data_size)
             {
                 // Open the file
-                std::shared_ptr<std::string> file_content = yli::file::slurp(filename);
+                const std::shared_ptr<std::string> file_content = yli::file::slurp(filename);
 
                 if (file_content == nullptr || file_content->empty())
                 {

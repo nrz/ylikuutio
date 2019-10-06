@@ -49,7 +49,7 @@ namespace yli
             std::cout << "Loading OBJ file " << filename << " ...\n";
 
             // Open the file
-            std::shared_ptr<std::string> file_content = yli::file::slurp(filename);
+            const std::shared_ptr<std::string> file_content = yli::file::slurp(filename);
 
             if (file_content->empty())
             {

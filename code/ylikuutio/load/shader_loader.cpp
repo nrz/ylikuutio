@@ -42,10 +42,10 @@ namespace yli
             const uint32_t fragment_shaderID = glCreateShader(GL_FRAGMENT_SHADER);
 
             // Read the vertex shader code from the file.
-            std::shared_ptr<std::string> vertex_shader_code = yli::file::slurp(vertex_shader_filename);
+            const std::shared_ptr<std::string> vertex_shader_code = yli::file::slurp(vertex_shader_filename);
 
             // Read the fragment shader code from the file.
-            std::shared_ptr<std::string> fragment_shader_code = yli::file::slurp(fragment_shader_filename);
+            const std::shared_ptr<std::string> fragment_shader_code = yli::file::slurp(fragment_shader_filename);
 
             GLint result = GL_FALSE;
             int info_log_length;

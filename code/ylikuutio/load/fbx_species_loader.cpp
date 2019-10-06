@@ -59,7 +59,7 @@ namespace yli
             // };
             //
             // IScene* load(const u8* data, int size)
-            std::shared_ptr<std::vector<unsigned char>> data_vector = yli::file::binary_slurp(filename);
+            const std::shared_ptr<std::vector<unsigned char>> data_vector = yli::file::binary_slurp(filename);
 
             if (data_vector == nullptr || data_vector->empty())
             {

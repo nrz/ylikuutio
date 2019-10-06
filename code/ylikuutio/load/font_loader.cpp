@@ -452,7 +452,7 @@ namespace yli
                 std::vector<std::string>& unicode_strings,
                 const bool is_debug_mode)
         {
-            std::shared_ptr<std::string> file_content = yli::file::slurp(filename);
+            const std::shared_ptr<std::string> file_content = yli::file::slurp(filename);
             const uint64_t file_size = file_content->size();
             char* SVG_data = new char[file_size];
 
