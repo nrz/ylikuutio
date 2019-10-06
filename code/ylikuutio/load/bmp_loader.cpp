@@ -33,7 +33,7 @@ namespace yli
 {
     namespace load
     {
-        uint8_t* load_BMP_file(
+        std::shared_ptr<std::vector<uint8_t>> load_BMP_file(
                 const std::string& filename,
                 std::size_t& image_width,
                 std::size_t& image_height,
@@ -144,7 +144,8 @@ namespace yli
             }
 
             // Create a buffer.
-            uint8_t* image_data = new uint8_t[image_size];
+            std::shared_ptr<std::vector<uint8_t>> image_data = std::make_shared<std::vector<uint8_t>>();
+            image_data->reserve(image_size);
 
             if (image_data == nullptr)
             {
@@ -153,7 +154,7 @@ namespace yli
             }
 
             std::cout << "Copying image data ...\n";
-            std::copy(file_content->begin() + pixel_array_start_offset, file_content->end(), image_data);
+            std::copy(file_content->begin() + pixel_array_start_offset, file_content->end(), image_data->begin());
             std::cout << "Image data copied.\n";
 
             return image_data;

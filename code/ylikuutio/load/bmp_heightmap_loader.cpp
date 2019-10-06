@@ -42,6 +42,7 @@
 #include <cstddef>  // std::size_t
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -76,11 +77,10 @@ namespace yli
 
             std::size_t image_size;
 
-            uint8_t* image_data = load_BMP_file(filename, image_width, image_height, image_size);
+            std::shared_ptr<std::vector<uint8_t>> image_data = load_BMP_file(filename, image_width, image_height, image_size);
 
             if (image_width < 2 || image_height < 2)
             {
-                delete[] image_data;
                 return false;
             }
 
@@ -89,14 +89,11 @@ namespace yli
 
             const std::size_t line_size_in_bytes = image_size / image_height;
 
-            uint8_t const* image_pointer = image_data;
-
             float* const vertex_data = new float[terrain_size];
 
             if (vertex_data == nullptr)
             {
                 std::cerr << "ERROR: reserving memory for vertex data failed.\n";
-                delete[] image_data;
                 return false;
             }
 
@@ -107,7 +104,7 @@ namespace yli
             // start processing image_data.
             for (std::size_t z = 0; z < image_height; z++)
             {
-                image_pointer = image_data + z * line_size_in_bytes;
+                const uint8_t* image_pointer = &(*image_data)[0] + z * line_size_in_bytes;
 
                 for (std::size_t x = 0; x < image_width; x++)
                 {
@@ -134,7 +131,6 @@ namespace yli
                     else
                     {
                         std::cerr << "ERROR: invalid color channel.\n";
-                        delete[] image_data;
                         delete[] vertex_data;
                         return false;
                     }
@@ -143,8 +139,6 @@ namespace yli
                     image_pointer += 3; // R, G, & B.
                 }
             }
-
-            delete[] image_data;
 
             std::cout << "color channel in use: " << color_channel << "\n";
 

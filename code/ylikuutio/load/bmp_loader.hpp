@@ -20,13 +20,15 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
+#include <vector>   // std::vector
 
 namespace yli
 {
     namespace load
     {
-        uint8_t* load_BMP_file(
+        std::shared_ptr<std::vector<uint8_t>> load_BMP_file(
                 const std::string& filename,
                 std::size_t& image_width,
                 std::size_t& image_height,

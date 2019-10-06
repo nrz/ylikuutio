@@ -45,10 +45,9 @@ namespace yli
     {
         // Load texture from memory.
         bool load_texture(
-                const uint8_t* const image_data,
+                const std::shared_ptr<std::vector<uint8_t>> image_data,
                 const std::size_t image_width,
                 const std::size_t image_height,
-                const bool should_image_data_be_deleted,
                 uint32_t& textureID)
         {
             if (image_data == nullptr)
@@ -64,13 +63,7 @@ namespace yli
             glBindTexture(GL_TEXTURE_2D, textureID);
 
             // Give the image to OpenGL.
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image_width, image_height, 0, GL_BGR, GL_UNSIGNED_BYTE, image_data);
-
-            if (should_image_data_be_deleted)
-            {
-                // OpenGL has now copied the data. Free our own version.
-                delete[] image_data;
-            }
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image_width, image_height, 0, GL_BGR, GL_UNSIGNED_BYTE, &(*image_data)[0]);
 
             yli::opengl::set_filtering_parameters();
 
@@ -154,7 +147,7 @@ namespace yli
                 std::size_t& image_size,
                 uint32_t& textureID)
         {
-            const uint8_t* const image_data = load_BMP_file(filename, image_width, image_height, image_size);
+            const std::shared_ptr<std::vector<uint8_t>> image_data = load_BMP_file(filename, image_width, image_height, image_size);
 
             if (image_data == nullptr)
             {
@@ -162,7 +155,7 @@ namespace yli
                 return false;
             }
 
-            return yli::load::load_texture(image_data, image_width, image_height, true, textureID);
+            return yli::load::load_texture(image_data, image_width, image_height, textureID);
         }
 
 #define FOURCC_DXT1 0x31545844 // Equivalent to "DXT1" in ASCII
