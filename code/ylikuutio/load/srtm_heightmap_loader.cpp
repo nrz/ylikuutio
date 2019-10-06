@@ -139,8 +139,8 @@ namespace yli
             std::cout << "Loading SRTM file " << abs_filename << " ...\n";
 
             // Open the file
-            const char* const char_image_path = abs_filename.c_str();
-            std::FILE* const file = std::fopen(char_image_path, "rb");
+            const char* const char_filename = abs_filename.c_str();
+            std::FILE* const file = std::fopen(char_filename, "rb");
             if (!file)
             {
                 std::cerr << "ERROR: " << abs_filename << " could not be opened.\n";
