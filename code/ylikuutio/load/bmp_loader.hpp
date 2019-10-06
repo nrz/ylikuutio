@@ -27,7 +27,7 @@ namespace yli
     namespace load
     {
         uint8_t* load_BMP_file(
-                const std::string& bmp_filename,
+                const std::string& filename,
                 std::size_t& image_width,
                 std::size_t& image_height,
                 std::size_t& image_size);
