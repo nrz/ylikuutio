@@ -218,11 +218,11 @@ namespace yli
             image_height               = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 8);
             image_width                = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 12);
             const uint32_t linear_size = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 16);
-            const uint32_t mipMapCount = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 24);
+            const uint32_t mipmap_count = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 24);
             const uint32_t fourCC      = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 80);
 
             /* how big is it going to be including all mipmaps? */
-            const std::size_t bufsize = mipMapCount > 1 ? 2 * static_cast<std::size_t>(linear_size) : linear_size;
+            const std::size_t bufsize = mipmap_count > 1 ? 2 * static_cast<std::size_t>(linear_size) : linear_size;
             uint8_t* const buffer = new uint8_t[bufsize];
 
             if (std::fread(buffer, 1, bufsize, fp) != bufsize)
@@ -267,7 +267,7 @@ namespace yli
             std::size_t temp_height = image_height;
 
             // Load the mipmaps.
-            for (std::size_t level = 0; level < mipMapCount && (temp_width || temp_height); ++level)
+            for (std::size_t level = 0; level < mipmap_count && (temp_width || temp_height); ++level)
             {
                 std::size_t size = ((temp_width + 3) / 4) * ((temp_height + 3) / 4) * blockSize;
                 glCompressedTexImage2D(
