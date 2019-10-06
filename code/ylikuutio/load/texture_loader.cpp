@@ -237,7 +237,7 @@ namespace yli
             std::fclose(fp);
 
             uint32_t format;
-            switch(dwFourCC)
+            switch (dwFourCC)
             {
                 case FOURCC_DXT1:
                     format = GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
