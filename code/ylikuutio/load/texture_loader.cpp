@@ -208,9 +208,9 @@ namespace yli
                 return false;
             }
 
-            image_height               = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 8);
-            image_width                = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 12);
-            const uint32_t linear_size = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 16);
+            image_height                = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 8);
+            image_width                 = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 12);
+            const uint32_t linear_size  = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 16);
             const uint32_t mipmap_count = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 24);
             const uint32_t dwFourCC     = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 80);
 
