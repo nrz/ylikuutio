@@ -34,7 +34,7 @@ namespace yli
 {
     namespace load
     {
-        bool load_species(
+        bool load_Species(
                 const yli::load::SpeciesLoaderStruct& species_loader_struct,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
