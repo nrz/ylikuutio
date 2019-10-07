@@ -21,7 +21,7 @@ code/ylikuutio/hierarchy/       - class hierachy related code.
 code/ylikuutio/input/           - input device related code.
 code/ylikuutio/interpolation/   - interpolation code.
 code/ylikuutio/linear_algebra/  - code related to `Matrix` & `Tensor3` classes used for linear algebra.
-code/ylikuutio/load/            - asset loading code.
+code/ylikuutio/load/            - asset loading code. See below for more detailed description about asset loading.
 code/ylikuutio/log/             - logging related code.
 code/ylikuutio/map/             - code related to `std::map` & `std::unordered_map`.
 code/ylikuutio/memory/          - memory related code.
@@ -35,6 +35,30 @@ code/ylikuutio/string/          - string processing code.
 code/ylikuutio/tests/           - unit tests.
 code/ylikuutio/time/            - time related code.
 code/ylikuutio/triangulation/   - triangulation related code. See below for more detailed description about triangulation.
+
+code/ylikuutio/load/
+
+In Ylikuutio asset loading is implemented using 3 kinds of functions:
+1. file format specific functions.
+2. file format and asset type specific functions.
+3. asset type specific functions.
+
+1. File format specific functions read the data from the file and store some relevant values into reference variables
+and return the data as is as a `std::shared_ptr<std::vector<T>>`, where `T` is usually `uint8_t`, but e.g. if
+all the data are e.g. `int32_t`, then `std::shared_ptr<std::vector<int32_t>>` shall be used instead as return type.
+Example: `yli::load::load_BMP_file`.
+
+2. File format and asset type specific functions receive the data from the file format specific functions and
+convert the data into data structures that are generic to the asset type and are not specific to the file format.
+Example: `yli::load::load_BMP_terrain`.
+
+3. Asset type specific functions get the data from the file format and asset type specific functions (converted into
+data structures that are generic to the asset type and not specific to the file format) and process the data and
+create the actual assets, which are usually some `yli::ontology::Entity` objects (specific descendant class depends on
+the asset type).
+Example: `yli::load::load_Species`.
+
+Some asset loading functions do not yet follow the model-view-adapter software architectural pattern described above.
 
 code/ylikuutio/ontology/
 
