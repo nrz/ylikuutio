@@ -26,6 +26,7 @@
 
 #include "srtm_heightmap_loader.hpp"
 #include "heightmap_loader_struct.hpp"
+#include "code/ylikuutio/file/file_loader.hpp"
 #include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
@@ -43,6 +44,7 @@
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iomanip>  // std::setfill, std::setw
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -138,61 +140,27 @@ namespace yli
 
             std::cout << "Loading SRTM file " << abs_filename << " ...\n";
 
-            // Open the file
-            const char* const char_filename = abs_filename.c_str();
-            std::FILE* const file = std::fopen(char_filename, "rb");
-            if (!file)
+            const std::shared_ptr<std::vector<uint8_t>> file_content = yli::file::binary_slurp(abs_filename);
+
+            if (file_content == nullptr || file_content->empty())
             {
-                std::cerr << "ERROR: " << abs_filename << " could not be opened.\n";
+                std::cerr << abs_filename << " could not be opened, or the file is empty.\n";
                 return false;
             }
 
-            const std::size_t true_image_width = 1201;
-            const std::size_t true_image_height = 1201;
+            const std::size_t true_image_width = 1201; // true image height is 1201 as well.
             image_width = 1200;  // rightmost column is not used (it is duplicated in the next SRTM file to the east).
             image_height = 1200; // bottom row is not used (it us duplicated in the next SRTM file to the south).
-            const std::size_t image_size = sizeof(int16_t) * true_image_width * true_image_height;
 
-            // Create a buffer.
-            // Actual 16-bit big-endian signed integer heightmap data.
-            uint8_t* const image_data = new uint8_t[image_size];
+            std::vector<float> vertex_data;
+            vertex_data.reserve(image_width * image_height);
 
-            if (image_data == nullptr)
-            {
-                std::cerr << "ERROR: reserving memory for image data failed.\n";
-                std::fclose(file);
-                return false;
-            }
+            const uint8_t* image_pointer = &(*file_content)[0]; // start from northwestern corner.
+            float* vertex_pointer = &vertex_data[0];
 
-            // Read the actual image data from the file into the buffer.
-            if (std::fread(image_data, 1, image_size, file) != image_size)
-            {
-                std::cerr << "ERROR: error while reading " << heightmap_directory << "\n";
-                std::fclose(file);
-                delete[] image_data;
-                return false;
-            }
-
-            // Everything is in memory now, the file can be closed
-            std::fclose(file);
-
-            float* const vertex_data = new float[image_width * image_height];
-
-            if (vertex_data == nullptr)
-            {
-                std::cerr << "ERROR: reserving memory for vertex data failed.\n";
-                delete[] image_data;
-                std::fclose(file);
-                return false;
-            }
-
-            const uint8_t* image_pointer = image_data; // start from northwestern corner.
-            float* vertex_pointer = vertex_data;
-
-            // start processing image_data.
+            // start processing heightmap data.
             // 90 meters is for equator.
 
-            // start processing image_data.
             std::cout << "Processing SRTM heightmap data.\n";
 
             int32_t last_percent = -1;
@@ -221,8 +189,6 @@ namespace yli
 
             std::cout << "\n";
 
-            delete[] image_data;
-
             yli::triangulation::TriangulateQuadsStruct triangulate_quads_struct;
             triangulate_quads_struct.image_width = image_width;
             triangulate_quads_struct.image_height = image_height;
@@ -243,9 +209,7 @@ namespace yli
                 triangulate_quads_struct.spherical_terrain_struct = spherical_terrain_struct;
             }
 
-            const bool result = yli::triangulation::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
-            delete[] vertex_data;
-            return result;
+            return yli::triangulation::triangulate_quads(&vertex_data[0], triangulate_quads_struct, out_vertices, out_UVs, out_normals);
         }
     }
 }
