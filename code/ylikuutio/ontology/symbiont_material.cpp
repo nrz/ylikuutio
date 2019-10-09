@@ -22,6 +22,7 @@
 #include "family_templates.hpp"
 #include "material_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/load/texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include <ofbx.h>
 
