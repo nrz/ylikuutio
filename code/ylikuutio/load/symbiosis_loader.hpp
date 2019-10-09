@@ -37,7 +37,7 @@ namespace yli
 {
     namespace load
     {
-        bool load_symbiosis(
+        bool load_Symbiosis(
                 yli::load::SymbiosisLoaderStruct& symbiosis_loader_struct,
                 std::vector<std::vector<glm::vec3>>& out_vertices,
                 std::vector<std::vector<glm::vec2>>& out_UVs,

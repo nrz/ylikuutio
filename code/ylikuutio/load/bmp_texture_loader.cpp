@@ -15,48 +15,38 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#include "bmp_texture_loader.hpp"
+#include "bmp_loader.hpp"
 #include "texture_loader.hpp"
-#include "code/ylikuutio/opengl/opengl.hpp"
-
-// Include GLEW
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli
 {
     namespace load
     {
-        // Load texture from memory.
-        bool load_texture(
-                const std::shared_ptr<std::vector<uint8_t>> image_data,
-                const std::size_t image_width,
-                const std::size_t image_height,
+        bool load_BMP_texture(
+                const std::string& filename,
+                std::size_t& image_width,
+                std::size_t& image_height,
+                std::size_t& image_size,
                 uint32_t& textureID)
         {
+            const std::shared_ptr<std::vector<uint8_t>> image_data = load_BMP_file(filename, image_width, image_height, image_size);
+
             if (image_data == nullptr)
             {
                 std::cerr << "ERROR: `image_data` is `nullptr`!\n";
                 return false;
             }
 
-            // Create one OpenGL texture.
-            glGenTextures(1, &textureID);
-
-            // Bind the newly created texture: all future texture functions will modify this texture.
-            glBindTexture(GL_TEXTURE_2D, textureID);
-
-            // Give the image to OpenGL.
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image_width, image_height, 0, GL_BGR, GL_UNSIGNED_BYTE, &(*image_data)[0]);
-
-            yli::opengl::set_filtering_parameters();
-
-            return true;
+            return yli::load::load_texture(image_data, image_width, image_height, textureID);
         }
     }
 }

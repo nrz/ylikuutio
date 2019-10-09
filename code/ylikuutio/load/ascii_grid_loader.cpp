@@ -181,15 +181,10 @@ namespace yli
             image_width = static_cast<std::size_t>(image_width_int32_t);
             image_height = static_cast<std::size_t>(image_height_int32_t);
 
-            float* const vertex_data = new float[image_width * image_height];
+            std::vector<float> vertex_data;
+            vertex_data.reserve(image_width * image_height);
 
-            if (vertex_data == nullptr)
-            {
-                std::cerr << "ERROR: reserving memory for vertex data failed.\n";
-                return false;
-            }
-
-            float* vertex_pointer = vertex_data;
+            float* vertex_pointer = &vertex_data[0];
 
             // start processing image_data.
             std::cout << "Processing image data.\n";
@@ -235,9 +230,7 @@ namespace yli
             triangulate_quads_struct.triangulation_type = triangulation_type;
             triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates = should_ylikuutio_use_real_texture_coordinates;
 
-            const bool result = yli::triangulation::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
-            delete[] vertex_data;
-            return result;
+            return yli::triangulation::triangulate_quads(&vertex_data[0], triangulate_quads_struct, out_vertices, out_UVs, out_normals);
         }
     }
 }

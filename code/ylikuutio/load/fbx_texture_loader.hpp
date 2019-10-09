@@ -15,29 +15,25 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __TEXTURE_LOADER_HPP_INCLUDED
-#define __TEXTURE_LOADER_HPP_INCLUDED
+#ifndef __FBX_TEXTURE_LOADER_HPP_INCLUDED
+#define __FBX_TEXTURE_LOADER_HPP_INCLUDED
+
+#include <ofbx.h>
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
-#include <vector>   // std::vector
 
 namespace yli
 {
-    namespace common
-    {
-        class AnyValue;
-    }
-
     namespace load
     {
         // Load texture from memory.
-        bool load_texture(
-                const std::shared_ptr<std::vector<uint8_t>> image_data,
-                const std::size_t image_width,
-                const std::size_t image_height,
+        bool load_FBX_texture(
+                const ofbx::Texture* const ofbx_texture,
+                std::size_t& image_width,
+                std::size_t& image_height,
+                std::size_t& image_size,
                 uint32_t& textureID);
     }
 }

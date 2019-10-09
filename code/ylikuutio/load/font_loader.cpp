@@ -454,22 +454,17 @@ namespace yli
         {
             const std::shared_ptr<std::string> file_content = yli::file::slurp(filename);
             const uint64_t file_size = file_content->size();
-            char* SVG_data = new char[file_size];
+            std::shared_ptr<std::vector<char>> SVG_data = std::make_shared<std::vector<char>>();
+            SVG_data->reserve(file_size);
 
-            if (SVG_data == nullptr)
-            {
-                std::cerr << "Reserving memory for SVG font data failed.\n";
-                return false;
-            }
-
-            std::strncpy(SVG_data, file_content->c_str(), file_size);
+            std::strncpy(&(*SVG_data)[0], file_content->c_str(), file_size);
 
             bool is_first_glyph_found;
 
             const char* SVG_base_pointer;
             char* SVG_data_pointer;
-            SVG_base_pointer = SVG_data;
-            SVG_data_pointer = SVG_data;
+            SVG_base_pointer = &(*SVG_data)[0];
+            SVG_data_pointer = &(*SVG_data)[0];
 
             // SVG files are XML files, so we just need to read until we find the data we need.
             is_first_glyph_found = yli::load::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
@@ -477,7 +472,6 @@ namespace yli
             if (!is_first_glyph_found || SVG_data_pointer == nullptr)
             {
                 std::cerr << "no glyphs were found!\n";
-                delete[] SVG_data;
                 return false;
             }
 
@@ -506,7 +500,6 @@ namespace yli
 
                     if (!result)
                     {
-                        delete[] SVG_data;
                         return false;
                     }
                 } // End of glyph.
@@ -516,7 +509,6 @@ namespace yli
 
                     if (yli::string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, file_size, string_vector))
                     {
-                        delete[] SVG_data;
                         return true;
                     }
                     SVG_data_pointer++;

@@ -21,7 +21,8 @@
 #include "entity.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
-#include "code/ylikuutio/load/texture_loader.hpp"
+#include "code/ylikuutio/load/bmp_texture_loader.hpp"
+#include "code/ylikuutio/load/dds_texture_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 
