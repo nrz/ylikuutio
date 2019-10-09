@@ -89,10 +89,10 @@ namespace yli
 
             const std::size_t line_size_in_bytes = image_size / image_height;
 
-            std::shared_ptr<std::vector<float>> vertex_data = std::make_shared<std::vector<float>>();
-            vertex_data->reserve(terrain_size);
+            std::vector<float> vertex_data;
+            vertex_data.reserve(terrain_size);
 
-            float* vertex_pointer = &(*vertex_data)[0];
+            float* vertex_pointer = &vertex_data[0];
 
             const char* char_color_channel = color_channel.c_str();
 
@@ -144,7 +144,7 @@ namespace yli
             triangulate_quads_struct.triangulation_type = triangulation_type;
             triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates = should_ylikuutio_use_real_texture_coordinates;
 
-            const bool result = yli::triangulation::triangulate_quads(&(*vertex_data)[0], triangulate_quads_struct, out_vertices, out_UVs, out_normals);
+            const bool result = yli::triangulation::triangulate_quads(&vertex_data[0], triangulate_quads_struct, out_vertices, out_UVs, out_normals);
             return result;
         }
     }
