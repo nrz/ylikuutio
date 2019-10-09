@@ -15,29 +15,24 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __TEXTURE_LOADER_HPP_INCLUDED
-#define __TEXTURE_LOADER_HPP_INCLUDED
+#ifndef __BMP_TEXTURE_LOADER_HPP_INCLUDED
+#define __BMP_TEXTURE_LOADER_HPP_INCLUDED
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
-#include <vector>   // std::vector
+#include <string>   // std::string
 
 namespace yli
 {
-    namespace common
-    {
-        class AnyValue;
-    }
-
     namespace load
     {
-        // Load texture from memory.
-        bool load_texture(
-                const std::shared_ptr<std::vector<uint8_t>> image_data,
-                const std::size_t image_width,
-                const std::size_t image_height,
+        // Load a .BMP file using our custom loader.
+        bool load_BMP_texture(
+                const std::string& filename,
+                std::size_t& image_width,
+                std::size_t& image_height,
+                std::size_t& image_size,
                 uint32_t& textureID);
     }
 }
