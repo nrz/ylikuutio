@@ -64,7 +64,7 @@ namespace yli
                 const std::size_t x_step,
                 const std::size_t z_step,
                 const std::string& triangulation_type,
-                const bool should_ylikuutio_use_real_texture_coordinates)
+                const bool use_real_texture_coordinates)
         {
             // For SRTM worlds, the right heightmap filename must be resolved first.
             // The SRTM filenames contain always the southwest coordinate of the block.
@@ -194,7 +194,7 @@ namespace yli
             triangulate_quads_struct.x_step = x_step;
             triangulate_quads_struct.z_step = z_step;
             triangulate_quads_struct.triangulation_type = triangulation_type;
-            triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates = should_ylikuutio_use_real_texture_coordinates;
+            triangulate_quads_struct.use_real_texture_coordinates = use_real_texture_coordinates;
 
             if (!std::isnan(heightmap_loader_struct.planet_radius))
             {

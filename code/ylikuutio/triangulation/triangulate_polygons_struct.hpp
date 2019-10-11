@@ -34,12 +34,12 @@ namespace yli
         struct TriangulatePolygonsStruct
         {
             TriangulatePolygonsStruct()
-                : input_vertices(nullptr), should_ylikuutio_use_real_texture_coordinates(true)
+                : input_vertices(nullptr), use_real_texture_coordinates(true)
             {
                 // constructor.
             }
             std::vector<std::vector<glm::vec2>>* input_vertices;
-            bool should_ylikuutio_use_real_texture_coordinates;
+            bool use_real_texture_coordinates;
         };
     }
 }

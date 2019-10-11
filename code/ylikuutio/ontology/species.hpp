@@ -88,7 +88,7 @@ namespace yli
                     this->image_width         = 0;
                     this->image_height        = 0;
 
-                    this->should_ylikuutio_use_real_texture_coordinates = species_struct.should_ylikuutio_use_real_texture_coordinates;
+                    this->use_real_texture_coordinates = species_struct.use_real_texture_coordinates;
 
                     if (!this->is_symbiont_species)
                     {
@@ -135,7 +135,7 @@ namespace yli
                         species_loader_struct.image_height_pointer = &this->image_height;
                         species_loader_struct.triangulation_type = this->triangulation_type;
                         species_loader_struct.vram_buffer_in_use = this->vram_buffer_in_use;
-                        species_loader_struct.should_ylikuutio_use_real_texture_coordinates = this->should_ylikuutio_use_real_texture_coordinates;
+                        species_loader_struct.use_real_texture_coordinates = this->use_real_texture_coordinates;
 
                         const bool is_debug_mode = true;
 
@@ -219,7 +219,7 @@ namespace yli
                 std::size_t image_width;
                 std::size_t image_height;
 
-                bool should_ylikuutio_use_real_texture_coordinates;
+                bool use_real_texture_coordinates;
         };
     }
 }

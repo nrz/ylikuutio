@@ -194,7 +194,7 @@ namespace yli
                             image_height,
                             x_step,
                             z_step,
-                            triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates,
+                            triangulate_quads_struct.use_real_texture_coordinates,
                             temp_vertices,
                             temp_UVs))
                 {
@@ -220,7 +220,7 @@ namespace yli
                                 image_height,
                                 x_step,
                                 z_step,
-                                triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates,
+                                triangulate_quads_struct.use_real_texture_coordinates,
                                 temp_vertices,
                                 temp_UVs))
                     {

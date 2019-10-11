@@ -101,7 +101,7 @@ namespace yli
                         species_loader_struct.x_step,
                         species_loader_struct.z_step,
                         species_loader_struct.triangulation_type,
-                        species_loader_struct.should_ylikuutio_use_real_texture_coordinates);
+                        species_loader_struct.use_real_texture_coordinates);
             }
             else if (species_loader_struct.model_file_format == "bmp" || species_loader_struct.model_file_format == "BMP")
             {
@@ -116,7 +116,7 @@ namespace yli
                         species_loader_struct.x_step,
                         species_loader_struct.z_step,
                         species_loader_struct.triangulation_type,
-                        species_loader_struct.should_ylikuutio_use_real_texture_coordinates);
+                        species_loader_struct.use_real_texture_coordinates);
             }
             else if (species_loader_struct.model_file_format == "asc" ||
                     species_loader_struct.model_file_format == "ascii_grid" ||
@@ -132,7 +132,7 @@ namespace yli
                         species_loader_struct.x_step,
                         species_loader_struct.z_step,
                         species_loader_struct.triangulation_type,
-                        species_loader_struct.should_ylikuutio_use_real_texture_coordinates);
+                        species_loader_struct.use_real_texture_coordinates);
             }
             else
             {

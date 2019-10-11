@@ -60,7 +60,7 @@ namespace yli
                 const std::size_t x_step,
                 const std::size_t z_step,
                 const std::string& triangulation_type,
-                const bool should_ylikuutio_use_real_texture_coordinates)
+                const bool use_real_texture_coordinates)
         {
             // Beginning of `L4133D.asc`.
             //
@@ -228,7 +228,7 @@ namespace yli
             triangulate_quads_struct.x_step = x_step;
             triangulate_quads_struct.z_step = z_step;
             triangulate_quads_struct.triangulation_type = triangulation_type;
-            triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates = should_ylikuutio_use_real_texture_coordinates;
+            triangulate_quads_struct.use_real_texture_coordinates = use_real_texture_coordinates;
 
             return yli::triangulation::triangulate_quads(&vertex_data[0], triangulate_quads_struct, out_vertices, out_UVs, out_normals);
         }

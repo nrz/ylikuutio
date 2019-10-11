@@ -130,7 +130,7 @@ namespace yli
                     const std::size_t image_height,
                     const std::size_t x_step,
                     const std::size_t z_step,
-                    const bool should_ylikuutio_use_real_texture_coordinates,
+                    const bool use_real_texture_coordinates,
                     std::vector<glm::vec3>& temp_vertices,
                     std::vector<glm::vec2>& temp_UVs)
             {
@@ -152,7 +152,7 @@ namespace yli
                 float max_y_value = NAN;
                 float divisor = NAN;
 
-                if (!should_ylikuutio_use_real_texture_coordinates)
+                if (!use_real_texture_coordinates)
                 {
                     bool result = yli::triangulation::compute_range(
                             input_vertex_pointer,
@@ -198,7 +198,7 @@ namespace yli
                         // This corresponds to "vt": specify texture coordinates of one vertex.
                         glm::vec2 uv;
 
-                        if (should_ylikuutio_use_real_texture_coordinates)
+                        if (use_real_texture_coordinates)
                         {
                             uv.x = round(static_cast<float>(texture_x));
                             uv.y = round(static_cast<float>(texture_y));
@@ -231,7 +231,7 @@ namespace yli
                     const std::size_t image_height,
                     const std::size_t x_step,
                     const std::size_t z_step,
-                    const bool should_ylikuutio_use_real_texture_coordinates,
+                    const bool use_real_texture_coordinates,
                     std::vector<glm::vec3>& temp_vertices,
                     std::vector<glm::vec2>& temp_UVs)
             {
@@ -255,7 +255,7 @@ namespace yli
                 float max_y_value = NAN;
                 float divisor = NAN;
 
-                if (!should_ylikuutio_use_real_texture_coordinates)
+                if (!use_real_texture_coordinates)
                 {
                     bool result = yli::triangulation::compute_range(
                             input_vertex_pointer,
@@ -296,7 +296,7 @@ namespace yli
                         // This corresponds to "vt": specify texture coordinates of one vertex.
                         glm::vec2 uv;
 
-                        if (should_ylikuutio_use_real_texture_coordinates)
+                        if (use_real_texture_coordinates)
                         {
                             uv.x = 0.5f;
                             uv.y = 0.5f;

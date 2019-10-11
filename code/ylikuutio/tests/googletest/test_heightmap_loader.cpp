@@ -87,7 +87,7 @@ TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_terrain)
 {
     const std::size_t image_width = 3;
     const std::size_t image_height = 3;
-    const bool should_ylikuutio_use_real_texture_coordinates = true;
+    const bool use_real_texture_coordinates = true;
 
     float* const input_vertex_data = new float[image_width * image_height];
     ASSERT_NE(input_vertex_data, nullptr);
@@ -120,7 +120,7 @@ TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_terrain)
             image_height,
             x_step,
             z_step,
-            should_ylikuutio_use_real_texture_coordinates,
+            use_real_texture_coordinates,
             temp_vertices,
             temp_UVs);
 
@@ -130,7 +130,7 @@ TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_terrain)
                 image_height,
                 x_step,
                 z_step,
-                should_ylikuutio_use_real_texture_coordinates,
+                use_real_texture_coordinates,
                 temp_vertices,
                 temp_UVs));
 
@@ -420,7 +420,7 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_3x3_BMP_terrain)
     const std::size_t x_step = 1;
     const std::size_t z_step = 1;
     const std::string triangulation_type = "bilinear_interpolation";
-    const bool should_ylikuutio_use_real_texture_coordinates = true;
+    const bool use_real_texture_coordinates = true;
 
     bool model_loading_result = yli::load::load_BMP_terrain(
             image_path,
@@ -433,7 +433,7 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_3x3_BMP_terrain)
             x_step,
             z_step,
             triangulation_type,
-            should_ylikuutio_use_real_texture_coordinates);
+            use_real_texture_coordinates);
 
     ASSERT_TRUE(model_loading_result);
 
@@ -758,7 +758,7 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_256x256_BMP_terrain)
     const std::size_t x_step = 1;
     const std::size_t z_step = 1;
     const std::string triangulation_type = "bilinear_interpolation";
-    const bool should_ylikuutio_use_real_texture_coordinates = true;
+    const bool use_real_texture_coordinates = true;
 
     const bool model_loading_result = yli::load::load_BMP_terrain(
             image_path,
@@ -771,7 +771,7 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_256x256_BMP_terrain)
             x_step,
             z_step,
             triangulation_type,
-            should_ylikuutio_use_real_texture_coordinates);
+            use_real_texture_coordinates);
 
     ASSERT_TRUE(model_loading_result);
 

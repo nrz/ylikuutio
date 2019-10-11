@@ -43,7 +43,7 @@ namespace yli
                 const std::size_t x_step,
                 const std::size_t z_step,
                 const std::string& triangulation_type,
-                const bool should_ylikuutio_use_real_texture_coordinates);
+                const bool use_real_texture_coordinates);
     }
 }
 
