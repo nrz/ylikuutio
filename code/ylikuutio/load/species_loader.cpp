@@ -19,7 +19,7 @@
 #include "species_loader_struct.hpp"
 #include "obj_loader.hpp"
 #include "fbx_species_loader.hpp"
-#include "ascii_grid_loader.hpp"
+#include "ascii_grid_heightmap_loader.hpp"
 #include "bmp_heightmap_loader.hpp"
 #include "srtm_heightmap_loader.hpp"
 #include "heightmap_loader_struct.hpp"

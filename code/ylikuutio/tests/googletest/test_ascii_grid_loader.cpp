@@ -16,8 +16,8 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/load/ascii_grid_loader.hpp"
-#include "code/ylikuutio/load/ascii_grid_loader.cpp"
+#include "code/ylikuutio/load/ascii_grid_heightmap_loader.hpp"
+#include "code/ylikuutio/load/ascii_grid_heightmap_loader.cpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

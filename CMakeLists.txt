@@ -453,8 +453,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/linear_algebra/vector_functions.hpp
 
     # load, in alphabetical order.
-    code/ylikuutio/load/ascii_grid_loader.cpp
-    code/ylikuutio/load/ascii_grid_loader.hpp
+    code/ylikuutio/load/ascii_grid_heightmap_loader.cpp
+    code/ylikuutio/load/ascii_grid_heightmap_loader.hpp
     code/ylikuutio/load/bmp_heightmap_loader.cpp
     code/ylikuutio/load/bmp_heightmap_loader.hpp
     code/ylikuutio/load/bmp_loader.cpp
@@ -822,8 +822,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/linear_algebra/tensor3.cpp
         code/ylikuutio/linear_algebra/tensor3.hpp
         code/ylikuutio/linear_algebra/vector_functions.hpp
-        code/ylikuutio/load/ascii_grid_loader.cpp
-        code/ylikuutio/load/ascii_grid_loader.hpp
+        code/ylikuutio/load/ascii_grid_heightmap_loader.cpp
+        code/ylikuutio/load/ascii_grid_heightmap_loader.hpp
         code/ylikuutio/load/csv_loader.hpp
         code/ylikuutio/load/fbx_species_loader.cpp
         code/ylikuutio/load/fbx_species_loader.hpp

@@ -24,7 +24,7 @@
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
-#include "ascii_grid_loader.hpp"
+#include "ascii_grid_heightmap_loader.hpp"
 #include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
