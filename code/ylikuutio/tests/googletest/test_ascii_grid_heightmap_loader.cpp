@@ -45,7 +45,7 @@ TEST(an_ASCII_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_
     std::size_t image_width;
     std::size_t image_height;
 
-    bool model_loading_result = yli::load::load_ASCII_grid(
+    bool model_loading_result = yli::load::load_ASCII_grid_terrain(
             ASCII_grid_model_filename,
             vertices,
             UVs,

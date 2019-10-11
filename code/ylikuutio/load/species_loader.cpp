@@ -122,7 +122,7 @@ namespace yli
                     species_loader_struct.model_file_format == "ascii_grid" ||
                     species_loader_struct.model_file_format == "ASCII_grid")
             {
-                model_loading_result = yli::load::load_ASCII_grid(
+                model_loading_result = yli::load::load_ASCII_grid_terrain(
                         species_loader_struct.model_filename,
                         out_vertices,
                         out_UVs,

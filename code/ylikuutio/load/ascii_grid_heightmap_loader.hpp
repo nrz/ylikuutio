@@ -33,7 +33,7 @@ namespace yli
 {
     namespace load
     {
-        bool load_ASCII_grid(
+        bool load_ASCII_grid_terrain(
                 const std::string& filename,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
