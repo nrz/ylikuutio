@@ -40,7 +40,6 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
-#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
@@ -94,8 +93,6 @@ namespace yli
 
             float* vertex_pointer = &vertex_data[0];
 
-            const char* char_color_channel = color_channel.c_str();
-
             // start processing image_data.
             for (std::size_t z = 0; z < image_height; z++)
             {
@@ -105,21 +102,21 @@ namespace yli
                 {
                     std::size_t y;
 
-                    if (std::strcmp(char_color_channel, "blue") == 0)
+                    if (color_channel == "blue")
                     {
                         y = static_cast<float>(*image_pointer);       // y-coordinate is the blue (B) value.
                     }
-                    else if (std::strcmp(char_color_channel, "green") == 0)
+                    else if (color_channel == "green")
                     {
                         y = static_cast<float>(*(image_pointer + 1)); // y-coordinate is the green (G) value.
                     }
-                    else if (std::strcmp(char_color_channel, "red") == 0)
+                    else if (color_channel == "red")
                     {
                         y = static_cast<float>(*(image_pointer + 2)); // y-coordinate is the red (R) value.
                     }
 
                     // y-coordinate is the mean of R, G, & B.
-                    else if ((std::strcmp(char_color_channel, "mean") == 0) || (std::strcmp(char_color_channel, "all") == 0))
+                    else if (color_channel == "mean" || color_channel == "all")
                     {
                         y = (static_cast<float>(*image_pointer) + static_cast<float>(*(image_pointer + 1)) + static_cast<float>(*(image_pointer + 2))) / 3.0f;
                     }
