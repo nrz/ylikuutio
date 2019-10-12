@@ -88,6 +88,20 @@ namespace yli
                     species_loader_struct.model_file_format == "ascii_grid" ||
                     species_loader_struct.model_file_format == "ASCII_grid")
             {
+                if (species_loader_struct.image_width_pointer == nullptr)
+                {
+                    std::cerr << "ERROR: `yli::load::load_Species`: !\n";
+                    std::cerr << "`species_loader_struct.image_width_pointer` is `nullptr`!\n";
+                    return false;
+                }
+
+                if (species_loader_struct.image_height_pointer == nullptr)
+                {
+                    std::cerr << "ERROR: `yli::load::load_Species`: !\n";
+                    std::cerr << "`species_loader_struct.image_height_pointer` is `nullptr`!\n";
+                    return false;
+                }
+
                 yli::load::HeightmapLoaderStruct heightmap_loader_struct;
                 heightmap_loader_struct.filename                     = species_loader_struct.model_filename;
                 heightmap_loader_struct.file_format                  = species_loader_struct.model_file_format;
