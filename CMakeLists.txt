@@ -829,6 +829,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/load/fbx_species_loader.hpp
         code/ylikuutio/load/font_loader.cpp
         code/ylikuutio/load/font_loader.hpp
+        code/ylikuutio/load/heightmap_loader_struct.hpp
         code/ylikuutio/memory/memory_templates.hpp
         code/ylikuutio/ontology/glyph_struct.hpp
         code/ylikuutio/ontology/material_struct.hpp

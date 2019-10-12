@@ -18,6 +18,8 @@
 #ifndef __BMP_HEIGHTMAP_LOADER_HPP_INCLUDED
 #define __BMP_HEIGHTMAP_LOADER_HPP_INCLUDED
 
+#include "heightmap_loader_struct.hpp"
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -34,17 +36,13 @@ namespace yli
     namespace load
     {
         bool load_BMP_terrain(
-                const std::string& filename,
+                const yli::load::HeightmapLoaderStruct& heightmap_loader_struct,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals,
                 std::size_t& image_width,
                 std::size_t& image_height,
-                const std::string& color_channel,
-                const std::size_t x_step,
-                const std::size_t z_step,
-                const std::string& triangulation_type,
-                const bool use_real_texture_coordinates);
+                const std::string& color_channel);
     }
 }
 

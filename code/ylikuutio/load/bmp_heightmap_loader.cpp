@@ -25,6 +25,7 @@
 #endif
 
 #include "bmp_heightmap_loader.hpp"
+#include "heightmap_loader_struct.hpp"
 #include "bmp_loader.hpp"
 #include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
@@ -50,33 +51,29 @@ namespace yli
     namespace load
     {
         bool load_BMP_terrain(
-                const std::string& filename,
+                const yli::load::HeightmapLoaderStruct& heightmap_loader_struct,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals,
                 std::size_t& image_width,
                 std::size_t& image_height,
-                const std::string& color_channel,
-                const std::size_t x_step,
-                const std::size_t z_step,
-                const std::string& triangulation_type,
-                const bool use_real_texture_coordinates)
+                const std::string& color_channel)
         {
-            if (x_step < 1)
+            if (heightmap_loader_struct.x_step < 1)
             {
-                std::cerr << "ERROR: x_step is less than 1.\n";
+                std::cerr << "ERROR: `yli::load::load_BMP_terrain`: `heightmap_loader_struct.x_step` is less than 1.\n";
                 return false;
             }
 
-            if (z_step < 1)
+            if (heightmap_loader_struct.z_step < 1)
             {
-                std::cerr << "ERROR: z_step is less than 1.\n";
+                std::cerr << "ERROR: `yli::load::load_BMP_terrain`: `heightmap_loader_struct.z_step` is less than 1.\n";
                 return false;
             }
 
             std::size_t image_size;
 
-            std::shared_ptr<std::vector<uint8_t>> image_data = load_BMP_file(filename, image_width, image_height, image_size);
+            std::shared_ptr<std::vector<uint8_t>> image_data = load_BMP_file(heightmap_loader_struct.filename, image_width, image_height, image_size);
 
             if (image_width < 2 || image_height < 2)
             {
@@ -136,10 +133,10 @@ namespace yli
             yli::triangulation::TriangulateQuadsStruct triangulate_quads_struct;
             triangulate_quads_struct.image_width = image_width;
             triangulate_quads_struct.image_height = image_height;
-            triangulate_quads_struct.x_step = x_step;
-            triangulate_quads_struct.z_step = z_step;
-            triangulate_quads_struct.triangulation_type = triangulation_type;
-            triangulate_quads_struct.use_real_texture_coordinates = use_real_texture_coordinates;
+            triangulate_quads_struct.x_step = heightmap_loader_struct.x_step;
+            triangulate_quads_struct.z_step = heightmap_loader_struct.z_step;
+            triangulate_quads_struct.triangulation_type = heightmap_loader_struct.triangulation_type;
+            triangulate_quads_struct.use_real_texture_coordinates = heightmap_loader_struct.use_real_texture_coordinates;
 
             return yli::triangulation::triangulate_quads(&vertex_data[0], triangulate_quads_struct, out_vertices, out_UVs, out_normals);
         }
