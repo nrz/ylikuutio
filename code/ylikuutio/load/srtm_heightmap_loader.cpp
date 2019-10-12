@@ -60,11 +60,7 @@ namespace yli
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals,
                 std::size_t& image_width,
-                std::size_t& image_height,
-                const std::size_t x_step,
-                const std::size_t z_step,
-                const std::string& triangulation_type,
-                const bool should_ylikuutio_use_real_texture_coordinates)
+                std::size_t& image_height)
         {
             // For SRTM worlds, the right heightmap filename must be resolved first.
             // The SRTM filenames contain always the southwest coordinate of the block.
@@ -75,15 +71,15 @@ namespace yli
             // and positive value mean north for latitude and east for longitude.
             // Therefore the SRTM heightmap filename can be resolved by rounding both latitude and longitude down (towards negative infinity).
 
-            if (x_step < 1)
+            if (heightmap_loader_struct.x_step < 1)
             {
-                std::cerr << "ERROR: x_step is less than 1.\n";
+                std::cerr << "ERROR: `yli::load::load_SRTM_terrain`: `heightmap_loader_struct.x_step` is less than 1.\n";
                 return false;
             }
 
-            if (z_step < 1)
+            if (heightmap_loader_struct.z_step < 1)
             {
-                std::cerr << "ERROR: z_step is less than 1.\n";
+                std::cerr << "ERROR: `yli::load::load_SRTM_terrain`: `heightmap_loader_struct.z_step` is less than 1.\n";
                 return false;
             }
 
@@ -191,10 +187,10 @@ namespace yli
             yli::triangulation::TriangulateQuadsStruct triangulate_quads_struct;
             triangulate_quads_struct.image_width = image_width;
             triangulate_quads_struct.image_height = image_height;
-            triangulate_quads_struct.x_step = x_step;
-            triangulate_quads_struct.z_step = z_step;
-            triangulate_quads_struct.triangulation_type = triangulation_type;
-            triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates = should_ylikuutio_use_real_texture_coordinates;
+            triangulate_quads_struct.x_step = heightmap_loader_struct.x_step;
+            triangulate_quads_struct.z_step = heightmap_loader_struct.z_step;
+            triangulate_quads_struct.triangulation_type = heightmap_loader_struct.triangulation_type;
+            triangulate_quads_struct.use_real_texture_coordinates = heightmap_loader_struct.use_real_texture_coordinates;
 
             if (!std::isnan(heightmap_loader_struct.planet_radius))
             {

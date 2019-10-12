@@ -36,7 +36,7 @@ namespace yli
                 image_height(0),
                 x_step(1),
                 z_step(1),
-                should_ylikuutio_use_real_texture_coordinates(true),
+                use_real_texture_coordinates(true),
                 sphere_radius(NAN),
                 spherical_terrain_struct(yli::geometry::SphericalTerrainStruct())
             {
@@ -47,7 +47,7 @@ namespace yli
             std::size_t x_step;
             std::size_t z_step;
             std::string triangulation_type;
-            bool should_ylikuutio_use_real_texture_coordinates;
+            bool use_real_texture_coordinates;
             double sphere_radius;
             yli::geometry::SphericalTerrainStruct spherical_terrain_struct;
         };

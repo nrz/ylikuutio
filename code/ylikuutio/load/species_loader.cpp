@@ -19,7 +19,7 @@
 #include "species_loader_struct.hpp"
 #include "obj_loader.hpp"
 #include "fbx_species_loader.hpp"
-#include "ascii_grid_loader.hpp"
+#include "ascii_grid_heightmap_loader.hpp"
 #include "bmp_heightmap_loader.hpp"
 #include "srtm_heightmap_loader.hpp"
 #include "heightmap_loader_struct.hpp"
@@ -82,57 +82,59 @@ namespace yli
 
                 std::cout << species_loader_struct.model_filename << " loaded successfully.\n";
             }
-            else if (species_loader_struct.model_file_format == "srtm" || species_loader_struct.model_file_format == "SRTM")
-            {
-                yli::load::HeightmapLoaderStruct heightmap_loader_struct;
-                heightmap_loader_struct.latitude = species_loader_struct.latitude;
-                heightmap_loader_struct.longitude = species_loader_struct.longitude;
-                heightmap_loader_struct.planet_radius = species_loader_struct.planet_radius;
-                heightmap_loader_struct.divisor = species_loader_struct.divisor;
-
-                model_loading_result = yli::load::load_SRTM_terrain(
-                        heightmap_loader_struct,
-                        species_loader_struct.model_filename,
-                        out_vertices,
-                        out_UVs,
-                        out_normals,
-                        *species_loader_struct.image_width_pointer,
-                        *species_loader_struct.image_height_pointer,
-                        species_loader_struct.x_step,
-                        species_loader_struct.z_step,
-                        species_loader_struct.triangulation_type,
-                        species_loader_struct.should_ylikuutio_use_real_texture_coordinates);
-            }
-            else if (species_loader_struct.model_file_format == "bmp" || species_loader_struct.model_file_format == "BMP")
-            {
-                model_loading_result = yli::load::load_BMP_terrain(
-                        species_loader_struct.model_filename,
-                        out_vertices,
-                        out_UVs,
-                        out_normals,
-                        *species_loader_struct.image_width_pointer,
-                        *species_loader_struct.image_height_pointer,
-                        species_loader_struct.color_channel,
-                        species_loader_struct.x_step,
-                        species_loader_struct.z_step,
-                        species_loader_struct.triangulation_type,
-                        species_loader_struct.should_ylikuutio_use_real_texture_coordinates);
-            }
-            else if (species_loader_struct.model_file_format == "asc" ||
+            else if (species_loader_struct.model_file_format == "srtm" || species_loader_struct.model_file_format == "SRTM" ||
+                    species_loader_struct.model_file_format == "bmp" || species_loader_struct.model_file_format == "BMP" ||
+                    species_loader_struct.model_file_format == "asc" ||
                     species_loader_struct.model_file_format == "ascii_grid" ||
                     species_loader_struct.model_file_format == "ASCII_grid")
             {
-                model_loading_result = yli::load::load_ASCII_grid(
-                        species_loader_struct.model_filename,
-                        out_vertices,
-                        out_UVs,
-                        out_normals,
-                        *species_loader_struct.image_width_pointer,
-                        *species_loader_struct.image_height_pointer,
-                        species_loader_struct.x_step,
-                        species_loader_struct.z_step,
-                        species_loader_struct.triangulation_type,
-                        species_loader_struct.should_ylikuutio_use_real_texture_coordinates);
+                yli::load::HeightmapLoaderStruct heightmap_loader_struct;
+                heightmap_loader_struct.filename                     = species_loader_struct.model_filename;
+                heightmap_loader_struct.file_format                  = species_loader_struct.model_file_format;
+                heightmap_loader_struct.latitude                     = species_loader_struct.latitude;
+                heightmap_loader_struct.longitude                    = species_loader_struct.longitude;
+                heightmap_loader_struct.planet_radius                = species_loader_struct.planet_radius;
+                heightmap_loader_struct.divisor                      = species_loader_struct.divisor;
+                heightmap_loader_struct.x_step                       = species_loader_struct.x_step;
+                heightmap_loader_struct.z_step                       = species_loader_struct.z_step;
+                heightmap_loader_struct.triangulation_type           = species_loader_struct.triangulation_type;
+                heightmap_loader_struct.use_real_texture_coordinates = species_loader_struct.use_real_texture_coordinates;
+
+                if (species_loader_struct.model_file_format == "srtm" || species_loader_struct.model_file_format == "SRTM")
+                {
+                    model_loading_result = yli::load::load_SRTM_terrain(
+                            heightmap_loader_struct,
+                            species_loader_struct.model_filename,
+                            out_vertices,
+                            out_UVs,
+                            out_normals,
+                            *species_loader_struct.image_width_pointer,
+                            *species_loader_struct.image_height_pointer);
+                }
+                else if (species_loader_struct.model_file_format == "bmp" || species_loader_struct.model_file_format == "BMP")
+                {
+                    model_loading_result = yli::load::load_BMP_terrain(
+                            heightmap_loader_struct,
+                            out_vertices,
+                            out_UVs,
+                            out_normals,
+                            *species_loader_struct.image_width_pointer,
+                            *species_loader_struct.image_height_pointer,
+                            species_loader_struct.color_channel);
+                }
+                else if (species_loader_struct.model_file_format == "asc" ||
+                        species_loader_struct.model_file_format == "ascii_grid" ||
+                        species_loader_struct.model_file_format == "ASCII_grid")
+                {
+                    model_loading_result = yli::load::load_ASCII_grid_terrain(
+                            heightmap_loader_struct,
+                            out_vertices,
+                            out_UVs,
+                            out_normals,
+                            *species_loader_struct.image_width_pointer,
+                            *species_loader_struct.image_height_pointer);
+                }
+
             }
             else
             {

@@ -16,8 +16,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/load/ascii_grid_loader.hpp"
-#include "code/ylikuutio/load/ascii_grid_loader.cpp"
+#include "code/ylikuutio/load/ascii_grid_heightmap_loader.hpp"
+#include "code/ylikuutio/load/ascii_grid_heightmap_loader.cpp"
+#include "code/ylikuutio/load/heightmap_loader_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -33,11 +34,12 @@
 
 TEST(an_ASCII_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_2_4_8_16_32_64_128_256_x_step_1_z_step_1)
 {
-    const std::string ASCII_grid_model_filename = "test_3x3_0_1_2_4_8_16_32_64_128.asc"; // Helsinki eastern downtown.
-    const int32_t x_step = 1;
-    const int32_t z_step = 1;
-    const std::string triangulation_type = "bilinear_interpolation";
-    const bool should_ylikuutio_use_real_texture_coordinates = true;
+    yli::load::HeightmapLoaderStruct heightmap_loader_struct;
+    heightmap_loader_struct.filename = "test_3x3_0_1_2_4_8_16_32_64_128.asc"; // Helsinki eastern downtown.
+    heightmap_loader_struct.x_step = 1;
+    heightmap_loader_struct.z_step = 1;
+    heightmap_loader_struct.triangulation_type = "bilinear_interpolation";
+    heightmap_loader_struct.use_real_texture_coordinates = true;
 
     std::vector<glm::vec3> vertices;         // vertices of the object.
     std::vector<glm::vec2> UVs;              // UVs of the object.
@@ -45,17 +47,13 @@ TEST(an_ASCII_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_
     std::size_t image_width;
     std::size_t image_height;
 
-    bool model_loading_result = yli::load::load_ASCII_grid(
-            ASCII_grid_model_filename,
+    bool model_loading_result = yli::load::load_ASCII_grid_terrain(
+            heightmap_loader_struct,
             vertices,
             UVs,
             normals,
             image_width,
-            image_height,
-            x_step,
-            z_step,
-            triangulation_type,
-            should_ylikuutio_use_real_texture_coordinates);
+            image_height);
 
     ASSERT_TRUE(model_loading_result);
 

@@ -27,6 +27,7 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
+#include <vector>   // std::vector
 
 #ifndef FOURCC_DXT1
 #define FOURCC_DXT1 0x31545844 // Equivalent to "DXT1" in ASCII
@@ -98,12 +99,12 @@ namespace yli
 
             /* how big is it going to be including all mipmaps? */
             const std::size_t bufsize = mipmap_count > 1 ? 2 * static_cast<std::size_t>(linear_size) : linear_size;
-            uint8_t* const buffer = new uint8_t[bufsize];
+            std::vector<uint8_t> buffer;
+            buffer.reserve(bufsize);
 
-            if (std::fread(buffer, 1, bufsize, fp) != bufsize)
+            if (std::fread(&buffer[0], 1, bufsize, fp) != bufsize)
             {
                 std::cerr << "Error while reading " << filename << "\n";
-                delete[] buffer;
                 std::fclose(fp);
                 return false;
             }
@@ -124,7 +125,6 @@ namespace yli
                     format = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
                     break;
                 default:
-                    delete[] buffer;
                     return false;
             }
 
@@ -153,7 +153,7 @@ namespace yli
                         temp_height,
                         0,
                         size,
-                        buffer + offset);
+                        &buffer[0] + offset);
 
                 offset += size;
                 temp_width /= 2;
@@ -169,8 +169,6 @@ namespace yli
                     temp_height = 1;
                 }
             }
-
-            delete[] buffer;
 
             return true;
         }

@@ -61,7 +61,7 @@ namespace yli
                 is_terrain(false),
                 is_symbiont_species(false),
                 vram_buffer_in_use(true),
-                should_ylikuutio_use_real_texture_coordinates(true)
+                use_real_texture_coordinates(true)
             {
                 // constructor.
             }
@@ -90,7 +90,7 @@ namespace yli
             bool is_terrain;                                    // Terrains (planets and moons) currently neither rotate nor translate.
             bool is_symbiont_species;
             bool vram_buffer_in_use;
-            bool should_ylikuutio_use_real_texture_coordinates;
+            bool use_real_texture_coordinates;
         };
     }
 }

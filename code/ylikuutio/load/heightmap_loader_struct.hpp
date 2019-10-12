@@ -21,6 +21,7 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
+#include <string>   // std::string
 
 namespace yli
 {
@@ -32,15 +33,24 @@ namespace yli
                 : latitude(NAN),
                 longitude(NAN),
                 planet_radius(NAN),
-                divisor(NAN)
+                divisor(NAN),
+                x_step(1),
+                z_step(1),
+                use_real_texture_coordinates(true)
             {
                 // constructor.
             }
 
+            std::string filename;
+            std::string file_format;
             float latitude;
             float longitude;
             float planet_radius;
             float divisor;
+            std::size_t x_step;
+            std::size_t z_step;
+            std::string triangulation_type;
+            bool use_real_texture_coordinates;
         };
     }
 }

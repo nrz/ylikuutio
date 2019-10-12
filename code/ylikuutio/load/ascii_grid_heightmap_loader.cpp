@@ -24,7 +24,8 @@
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
-#include "ascii_grid_loader.hpp"
+#include "ascii_grid_heightmap_loader.hpp"
+#include "heightmap_loader_struct.hpp"
 #include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
@@ -50,17 +51,13 @@ namespace yli
 {
     namespace load
     {
-        bool load_ASCII_grid(
-                const std::string& filename,
+        bool load_ASCII_grid_terrain(
+                const yli::load::HeightmapLoaderStruct& heightmap_loader_struct,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals,
                 std::size_t& image_width,
-                std::size_t& image_height,
-                const std::size_t x_step,
-                const std::size_t z_step,
-                const std::string& triangulation_type,
-                const bool should_ylikuutio_use_real_texture_coordinates)
+                std::size_t& image_height)
         {
             // Beginning of `L4133D.asc`.
             //
@@ -72,26 +69,26 @@ namespace yli
             // NODATA_value  -9999.000
             // 34.315 34.467 34.441 34.260 33.972 33.564 33.229 33.130 33.102 33.024 32.902 32.669 32.305 32.013 31.937 31.893 31.831 31.832
 
-            std::cout << "Loading ASCII grid file " << filename << " ...\n";
+            std::cout << "Loading ASCII grid file " << heightmap_loader_struct.filename << " ...\n";
 
-            if (x_step < 1)
+            if (heightmap_loader_struct.x_step < 1)
             {
-                std::cerr << "ERROR: x_step is less than 1.\n";
+                std::cerr << "ERROR: `yli::load::load_ASCII_grid_terrain`: `heightmap_loader_struct.x_step` is less than 1.\n";
                 return false;
             }
 
-            if (z_step < 1)
+            if (heightmap_loader_struct.z_step < 1)
             {
-                std::cerr << "ERROR: z_step is less than 1.\n";
+                std::cerr << "ERROR: `yli::load::load_ASCII_grid_terrain`: `heightmap_loader_struct.z_step` is less than 1.\n";
                 return false;
             }
 
             // Open the file
-            const std::shared_ptr<std::string> file_content = yli::file::slurp(filename);
+            const std::shared_ptr<std::string> file_content = yli::file::slurp(heightmap_loader_struct.filename);
 
             if (file_content == nullptr || file_content->empty())
             {
-                std::cerr << "ERROR: " << filename << " could not be opened, or the file is empty.\n";
+                std::cerr << "ERROR: " << heightmap_loader_struct.filename << " could not be opened, or the file is empty.\n";
                 return false;
             }
 
@@ -225,10 +222,10 @@ namespace yli
             yli::triangulation::TriangulateQuadsStruct triangulate_quads_struct;
             triangulate_quads_struct.image_width = image_width;
             triangulate_quads_struct.image_height = image_height;
-            triangulate_quads_struct.x_step = x_step;
-            triangulate_quads_struct.z_step = z_step;
-            triangulate_quads_struct.triangulation_type = triangulation_type;
-            triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates = should_ylikuutio_use_real_texture_coordinates;
+            triangulate_quads_struct.x_step = heightmap_loader_struct.x_step;
+            triangulate_quads_struct.z_step = heightmap_loader_struct.z_step;
+            triangulate_quads_struct.triangulation_type = heightmap_loader_struct.triangulation_type;
+            triangulate_quads_struct.use_real_texture_coordinates = heightmap_loader_struct.use_real_texture_coordinates;
 
             return yli::triangulation::triangulate_quads(&vertex_data[0], triangulate_quads_struct, out_vertices, out_UVs, out_normals);
         }

@@ -23,6 +23,7 @@
 #include "code/ylikuutio/load/bmp_heightmap_loader.cpp"
 #include "code/ylikuutio/load/bmp_loader.hpp"
 #include "code/ylikuutio/load/bmp_loader.cpp"
+#include "code/ylikuutio/load/heightmap_loader_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -87,7 +88,7 @@ TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_terrain)
 {
     const std::size_t image_width = 3;
     const std::size_t image_height = 3;
-    const bool should_ylikuutio_use_real_texture_coordinates = true;
+    const bool use_real_texture_coordinates = true;
 
     float* const input_vertex_data = new float[image_width * image_height];
     ASSERT_NE(input_vertex_data, nullptr);
@@ -120,7 +121,7 @@ TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_terrain)
             image_height,
             x_step,
             z_step,
-            should_ylikuutio_use_real_texture_coordinates,
+            use_real_texture_coordinates,
             temp_vertices,
             temp_UVs);
 
@@ -130,7 +131,7 @@ TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_terrain)
                 image_height,
                 x_step,
                 z_step,
-                should_ylikuutio_use_real_texture_coordinates,
+                use_real_texture_coordinates,
                 temp_vertices,
                 temp_UVs));
 
@@ -410,30 +411,28 @@ TEST(face_indices_must_be_computed_appropriately, a_4x4_terrain)
 
 TEST(a_BMP_terrain_must_be_loaded_appropriately, load_3x3_BMP_terrain)
 {
-    const std::string image_path = "test3x3.bmp";
+    yli::load::HeightmapLoaderStruct heightmap_loader_struct;
+    heightmap_loader_struct.filename = "test3x3.bmp";
+    heightmap_loader_struct.x_step = 1;
+    heightmap_loader_struct.z_step = 1;
+    heightmap_loader_struct.triangulation_type = "bilinear_interpolation";
+    heightmap_loader_struct.use_real_texture_coordinates = true;
+
     std::vector<glm::vec3> out_vertices;
     std::vector<glm::vec2> out_UVs;
     std::vector<glm::vec3> out_normals;
     std::size_t image_width = 0;
     std::size_t image_height = 0;
     const std::string color_channel = "mean";
-    const std::size_t x_step = 1;
-    const std::size_t z_step = 1;
-    const std::string triangulation_type = "bilinear_interpolation";
-    const bool should_ylikuutio_use_real_texture_coordinates = true;
 
     bool model_loading_result = yli::load::load_BMP_terrain(
-            image_path,
-            *&out_vertices,
-            *&out_UVs,
-            *&out_normals,
+            heightmap_loader_struct,
+            out_vertices,
+            out_UVs,
+            out_normals,
             image_width,
             image_height,
-            color_channel,
-            x_step,
-            z_step,
-            triangulation_type,
-            should_ylikuutio_use_real_texture_coordinates);
+            color_channel);
 
     ASSERT_TRUE(model_loading_result);
 
@@ -748,30 +747,28 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_3x3_BMP_terrain)
 
 TEST(a_BMP_terrain_must_be_loaded_appropriately, load_256x256_BMP_terrain)
 {
-    const std::string image_path = "noise256x256.bmp";
+    yli::load::HeightmapLoaderStruct heightmap_loader_struct;
+    heightmap_loader_struct.filename = "noise256x256.bmp";
+    heightmap_loader_struct.x_step = 1;
+    heightmap_loader_struct.z_step = 1;
+    heightmap_loader_struct.triangulation_type = "bilinear_interpolation";
+    heightmap_loader_struct.use_real_texture_coordinates = true;
+
     std::vector<glm::vec3> out_vertices;
     std::vector<glm::vec2> out_UVs;
     std::vector<glm::vec3> out_normals;
     std::size_t image_width = 0;
     std::size_t image_height = 0;
     const std::string color_channel = "mean";
-    const std::size_t x_step = 1;
-    const std::size_t z_step = 1;
-    const std::string triangulation_type = "bilinear_interpolation";
-    const bool should_ylikuutio_use_real_texture_coordinates = true;
 
     const bool model_loading_result = yli::load::load_BMP_terrain(
-            image_path,
-            *&out_vertices,
-            *&out_UVs,
-            *&out_normals,
+            heightmap_loader_struct,
+            out_vertices,
+            out_UVs,
+            out_normals,
             image_width,
             image_height,
-            color_channel,
-            x_step,
-            z_step,
-            triangulation_type,
-            should_ylikuutio_use_real_texture_coordinates);
+            color_channel);
 
     ASSERT_TRUE(model_loading_result);
 
