@@ -79,7 +79,7 @@ namespace yli
                 return false;
             }
 
-            // TODO: Compute the graph of this object type to enable object vertex modification!
+            // TODO: Compute the graphs of the meshes of this `Symbiosis` to enable object vertex modification!
             return model_loading_result;
         }
     }
