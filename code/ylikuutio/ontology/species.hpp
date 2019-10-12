@@ -121,20 +121,20 @@ namespace yli
                         glUniform1f(water_level_uniform_location, species_struct.scene->get_water_level());
 
                         yli::load::SpeciesLoaderStruct species_loader_struct;
-                        species_loader_struct.model_filename = this->model_filename;
-                        species_loader_struct.model_file_format = this->model_file_format;
-                        species_loader_struct.latitude = this->latitude;
-                        species_loader_struct.longitude = this->longitude;
-                        species_loader_struct.planet_radius = this->planet_radius;
-                        species_loader_struct.divisor = this->divisor;
-                        species_loader_struct.color_channel = this->color_channel;
-                        species_loader_struct.mesh_i = this->mesh_i;
-                        species_loader_struct.x_step = this->x_step;
-                        species_loader_struct.z_step = this->z_step;
-                        species_loader_struct.image_width_pointer = &this->image_width;
-                        species_loader_struct.image_height_pointer = &this->image_height;
-                        species_loader_struct.triangulation_type = this->triangulation_type;
-                        species_loader_struct.vram_buffer_in_use = this->vram_buffer_in_use;
+                        species_loader_struct.model_filename               = this->model_filename;
+                        species_loader_struct.model_file_format            = this->model_file_format;
+                        species_loader_struct.latitude                     = this->latitude;
+                        species_loader_struct.longitude                    = this->longitude;
+                        species_loader_struct.planet_radius                = this->planet_radius;
+                        species_loader_struct.divisor                      = this->divisor;
+                        species_loader_struct.color_channel                = this->color_channel;
+                        species_loader_struct.mesh_i                       = this->mesh_i;
+                        species_loader_struct.x_step                       = this->x_step;
+                        species_loader_struct.z_step                       = this->z_step;
+                        species_loader_struct.image_width_pointer          = &this->image_width;
+                        species_loader_struct.image_height_pointer         = &this->image_height;
+                        species_loader_struct.triangulation_type           = this->triangulation_type;
+                        species_loader_struct.vram_buffer_in_use           = this->vram_buffer_in_use;
                         species_loader_struct.use_real_texture_coordinates = this->use_real_texture_coordinates;
 
                         const bool is_debug_mode = true;
