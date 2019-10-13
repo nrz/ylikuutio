@@ -877,6 +877,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_glyph_struct.cpp
         code/ylikuutio/tests/googletest/test_graph.cpp
         code/ylikuutio/tests/googletest/test_heightmap_loader.cpp
+        code/ylikuutio/tests/googletest/test_indexing.cpp
         code/ylikuutio/tests/googletest/test_line2D.cpp
         code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
         code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
