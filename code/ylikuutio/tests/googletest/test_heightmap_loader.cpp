@@ -17,7 +17,9 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
+#include "code/ylikuutio/triangulation/face_normals.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
+#include "code/ylikuutio/triangulation/triangulation_templates.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 
 // Include GLM
