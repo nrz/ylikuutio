@@ -52,6 +52,11 @@ General
 * Minimize the use of `new` and `delete`.
 * Write creator functions (e.g. `SettingMaster::create_Setting`) for the necessary `new`.
 * Do not use `malloc` or `free`, unless absolutely necessary.
+* Use include guards in all header files, immediately after the license text.
+* The name of the include guard macro shall be e.g. `__FILE_HPP_INCLUDED` for `file.hpp`.
+* Besides includes guards, minimize the use of proprocessor code.
+* When testing of `private` members (e.g. vertices or normals) is needed,
+  provide them using a function which returns a `const` reference to those.
 
 Naming
 * Use CamelCase for class names: `class MyClass;`.
@@ -59,6 +64,11 @@ Naming
 * Use underscores and lowercase in function names, except write
   class names as they are (`create_Holobiont`, `create_Setting`),
   and write file formats using uppercase (`load_BMP_file`).
+* Test source code files shall be named `test_foo.cpp`, where `foo.cpp`
+  (or `foo.hpp` for templates) is the filename of the source code file to be tested.
+* When the test or tests are not specific to any particular source code file,
+  then the test source code file shall be named `test_foo.cpp`, where
+  `foo` is the topic (e.g. namespace as in `test_triangulation.cpp`).
 
 Security-related
 * Do not make any assumptions that input is valid or sensible.

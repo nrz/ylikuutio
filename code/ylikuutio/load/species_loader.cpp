@@ -57,7 +57,7 @@ namespace yli
                 uint32_t* uvbuffer,
                 uint32_t* normalbuffer,
                 uint32_t* elementbuffer,
-                bool& vram_buffer_in_use,
+                bool& opengl_in_use,
                 const bool is_debug_mode)
         {
             bool model_loading_result = false;
@@ -88,6 +88,20 @@ namespace yli
                     species_loader_struct.model_file_format == "ascii_grid" ||
                     species_loader_struct.model_file_format == "ASCII_grid")
             {
+                if (species_loader_struct.image_width_pointer == nullptr)
+                {
+                    std::cerr << "ERROR: `yli::load::load_Species`: !\n";
+                    std::cerr << "`species_loader_struct.image_width_pointer` is `nullptr`!\n";
+                    return false;
+                }
+
+                if (species_loader_struct.image_height_pointer == nullptr)
+                {
+                    std::cerr << "ERROR: `yli::load::load_Species`: !\n";
+                    std::cerr << "`species_loader_struct.image_height_pointer` is `nullptr`!\n";
+                    return false;
+                }
+
                 yli::load::HeightmapLoaderStruct heightmap_loader_struct;
                 heightmap_loader_struct.filename                     = species_loader_struct.model_filename;
                 heightmap_loader_struct.file_format                  = species_loader_struct.model_file_format;
@@ -157,9 +171,9 @@ namespace yli
 
             std::cout << "Indexing completed successfully.\n";
 
-            vram_buffer_in_use = species_loader_struct.vram_buffer_in_use;
+            opengl_in_use = species_loader_struct.opengl_in_use;
 
-            if (vram_buffer_in_use)
+            if (opengl_in_use)
             {
                 // Load it into a VBO.
                 glGenBuffers(1, vertexbuffer);
@@ -179,7 +193,7 @@ namespace yli
                 glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), &indices[0] , GL_STATIC_DRAW);
             }
 
-            // TODO: Compute the graph of this object type to enable object vertex modification!
+            // TODO: Compute the graph of the mesh of this `Species` to enable object vertex modification!
             return model_loading_result;
         }
     }

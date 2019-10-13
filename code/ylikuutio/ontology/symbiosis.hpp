@@ -88,7 +88,7 @@ namespace yli
                     this->number_of_symbiont_materials = 0;
                     this->number_of_holobionts         = 0;
                     this->ofbx_mesh_count              = 0;
-                    this->vram_buffer_in_use           = symbiosis_struct.vram_buffer_in_use;
+                    this->opengl_in_use                = symbiosis_struct.opengl_in_use;
 
                     // get `childID` from `Shader` and set pointer to this `Symbiosis`.
                     this->bind_to_parent();
@@ -182,7 +182,7 @@ namespace yli
                 std::vector<const ofbx::Texture*> ofbx_count_texture_vector;   // currently not in use.
                 std::size_t ofbx_mesh_count;                                   // the value of `ofbx_mesh_count` comes from OpenFBX.
 
-                bool vram_buffer_in_use;
+                bool opengl_in_use;
         };
     }
 }

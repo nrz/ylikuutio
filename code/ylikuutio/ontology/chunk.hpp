@@ -59,7 +59,7 @@ namespace yli
             public:
                 // constructor.
                 Chunk(const yli::ontology::ChunkStruct& chunk_struct)
-                    : Model(chunk_struct.universe, chunk_struct.vram_buffer_in_use)
+                    : Model(chunk_struct.universe, chunk_struct.opengl_in_use)
                 {
                     // constructor.
                     this->is_original = true;

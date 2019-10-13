@@ -66,7 +66,7 @@ namespace yli
 
                 // constructor.
                 Species(yli::ontology::Universe* const universe, const yli::ontology::SpeciesStruct& species_struct)
-                    : Model(universe, species_struct.vram_buffer_in_use)
+                    : Model(universe, species_struct.opengl_in_use)
                 {
                     // constructor.
                     this->is_terrain          = species_struct.is_terrain;
@@ -95,14 +95,17 @@ namespace yli
                         // get `childID` from `Material` and set pointer to this `Species`.
                         this->bind_to_parent();
 
-                        // Get a handle for our buffers.
-                        this->vertex_position_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertex_position_modelspace");
-                        this->vertexUVID = glGetAttribLocation(species_struct.shader->get_programID(), "vertexUV");
-                        this->vertex_normal_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertex_normal_modelspace");
+                        if (this->opengl_in_use)
+                        {
+                            // Get a handle for our buffers.
+                            this->vertex_position_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertex_position_modelspace");
+                            this->vertexUVID = glGetAttribLocation(species_struct.shader->get_programID(), "vertexUV");
+                            this->vertex_normal_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertex_normal_modelspace");
 
-                        // Get a handle for our "LightPosition" uniform.
-                        glUseProgram(species_struct.shader->get_programID());
-                        this->lightID = glGetUniformLocation(species_struct.shader->get_programID(), "light_position_worldspace");
+                            // Get a handle for our "LightPosition" uniform.
+                            glUseProgram(species_struct.shader->get_programID());
+                            this->lightID = glGetUniformLocation(species_struct.shader->get_programID(), "light_position_worldspace");
+                        }
 
                         if (this->is_terrain)
                         {
@@ -116,25 +119,28 @@ namespace yli
                             }
                         }
 
-                        // water level.
-                        GLint water_level_uniform_location = glGetUniformLocation(species_struct.shader->get_programID(), "water_level");
-                        glUniform1f(water_level_uniform_location, species_struct.scene->get_water_level());
+                        if (this->opengl_in_use)
+                        {
+                            // water level.
+                            GLint water_level_uniform_location = glGetUniformLocation(species_struct.shader->get_programID(), "water_level");
+                            glUniform1f(water_level_uniform_location, species_struct.scene->get_water_level());
+                        }
 
                         yli::load::SpeciesLoaderStruct species_loader_struct;
-                        species_loader_struct.model_filename = this->model_filename;
-                        species_loader_struct.model_file_format = this->model_file_format;
-                        species_loader_struct.latitude = this->latitude;
-                        species_loader_struct.longitude = this->longitude;
-                        species_loader_struct.planet_radius = this->planet_radius;
-                        species_loader_struct.divisor = this->divisor;
-                        species_loader_struct.color_channel = this->color_channel;
-                        species_loader_struct.mesh_i = this->mesh_i;
-                        species_loader_struct.x_step = this->x_step;
-                        species_loader_struct.z_step = this->z_step;
-                        species_loader_struct.image_width_pointer = &this->image_width;
-                        species_loader_struct.image_height_pointer = &this->image_height;
-                        species_loader_struct.triangulation_type = this->triangulation_type;
-                        species_loader_struct.vram_buffer_in_use = this->vram_buffer_in_use;
+                        species_loader_struct.model_filename               = this->model_filename;
+                        species_loader_struct.model_file_format            = this->model_file_format;
+                        species_loader_struct.latitude                     = this->latitude;
+                        species_loader_struct.longitude                    = this->longitude;
+                        species_loader_struct.planet_radius                = this->planet_radius;
+                        species_loader_struct.divisor                      = this->divisor;
+                        species_loader_struct.color_channel                = this->color_channel;
+                        species_loader_struct.mesh_i                       = this->mesh_i;
+                        species_loader_struct.x_step                       = this->x_step;
+                        species_loader_struct.z_step                       = this->z_step;
+                        species_loader_struct.image_width_pointer          = &this->image_width;
+                        species_loader_struct.image_height_pointer         = &this->image_height;
+                        species_loader_struct.triangulation_type           = this->triangulation_type;
+                        species_loader_struct.opengl_in_use                = this->opengl_in_use;
                         species_loader_struct.use_real_texture_coordinates = this->use_real_texture_coordinates;
 
                         const bool is_debug_mode = true;
@@ -152,7 +158,7 @@ namespace yli
                                 &this->uvbuffer,
                                 &this->normalbuffer,
                                 &this->elementbuffer,
-                                this->vram_buffer_in_use,
+                                this->opengl_in_use,
                                 is_debug_mode);
 
                         // TODO: Compute the graph of this object type to enable object vertex modification!

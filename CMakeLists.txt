@@ -824,6 +824,10 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/linear_algebra/vector_functions.hpp
         code/ylikuutio/load/ascii_grid_heightmap_loader.cpp
         code/ylikuutio/load/ascii_grid_heightmap_loader.hpp
+        code/ylikuutio/load/bmp_heightmap_loader.cpp
+        code/ylikuutio/load/bmp_heightmap_loader.hpp
+        code/ylikuutio/load/bmp_loader.cpp
+        code/ylikuutio/load/bmp_loader.hpp
         code/ylikuutio/load/csv_loader.hpp
         code/ylikuutio/load/fbx_species_loader.cpp
         code/ylikuutio/load/fbx_species_loader.hpp
@@ -848,6 +852,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/triangulation/quad_triangulation.hpp
         code/ylikuutio/triangulation/triangulate_quads_struct.hpp
         code/ylikuutio/triangulation/triangulation_enums.hpp
+        code/ylikuutio/triangulation/triangulation_templates.hpp
         code/ylikuutio/triangulation/vertex_normals.cpp
         code/ylikuutio/triangulation/vertex_normals.hpp
         code/ylikuutio/triangulation/vertices.cpp
@@ -860,6 +865,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_ascii_grid_heightmap_loader.cpp
         # code/ylikuutio/tests/googletest/test_asio.cpp
         code/ylikuutio/tests/googletest/test_bilinear_interpolation2D.cpp
+        code/ylikuutio/tests/googletest/test_bmp_heightmap_loader.cpp
+        code/ylikuutio/tests/googletest/test_bmp_loader.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
         code/ylikuutio/tests/googletest/test_check_and_report_if_some_string_matches.cpp
         code/ylikuutio/tests/googletest/test_command_line_master.cpp
@@ -873,7 +880,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_font_loader.cpp
         code/ylikuutio/tests/googletest/test_glyph_struct.cpp
         code/ylikuutio/tests/googletest/test_graph.cpp
-        code/ylikuutio/tests/googletest/test_heightmap_loader.cpp
+        code/ylikuutio/tests/googletest/test_indexing.cpp
         code/ylikuutio/tests/googletest/test_line2D.cpp
         code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
         code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
@@ -883,8 +890,10 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_obj_loader.cpp
         code/ylikuutio/tests/googletest/test_object_struct.cpp
         code/ylikuutio/tests/googletest/test_pugixml.cpp
+        code/ylikuutio/tests/googletest/test_quad_triangulation.cpp
         code/ylikuutio/tests/googletest/test_shader_struct.cpp
         code/ylikuutio/tests/googletest/test_species_struct.cpp
+        code/ylikuutio/tests/googletest/test_triangulation.cpp
         code/ylikuutio/tests/googletest/test_vector_font_struct.cpp
         code/ylikuutio/tests/googletest/test_ylikuutio_map.cpp)
     set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)

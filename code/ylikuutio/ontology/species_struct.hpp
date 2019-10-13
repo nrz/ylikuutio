@@ -60,7 +60,7 @@ namespace yli
                 water_level(-1.0f * std::numeric_limits<float>::infinity()),
                 is_terrain(false),
                 is_symbiont_species(false),
-                vram_buffer_in_use(true),
+                opengl_in_use(true),
                 use_real_texture_coordinates(true)
             {
                 // constructor.
@@ -89,7 +89,7 @@ namespace yli
             float water_level;                                  // water level in meters. used only for terrains (planets and moons).
             bool is_terrain;                                    // Terrains (planets and moons) currently neither rotate nor translate.
             bool is_symbiont_species;
-            bool vram_buffer_in_use;
+            bool opengl_in_use;                                 // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
             bool use_real_texture_coordinates;
         };
     }

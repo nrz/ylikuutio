@@ -84,7 +84,7 @@ namespace yli
 
         void Glyph::render()
         {
-            if (this->vram_buffer_in_use)
+            if (this->opengl_in_use)
             {
                 this->prerender();
 
