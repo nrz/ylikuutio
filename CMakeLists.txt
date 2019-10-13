@@ -824,6 +824,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/linear_algebra/vector_functions.hpp
         code/ylikuutio/load/ascii_grid_heightmap_loader.cpp
         code/ylikuutio/load/ascii_grid_heightmap_loader.hpp
+        code/ylikuutio/load/bmp_loader.cpp
+        code/ylikuutio/load/bmp_loader.hpp
         code/ylikuutio/load/csv_loader.hpp
         code/ylikuutio/load/fbx_species_loader.cpp
         code/ylikuutio/load/fbx_species_loader.hpp
@@ -860,6 +862,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_ascii_grid_heightmap_loader.cpp
         # code/ylikuutio/tests/googletest/test_asio.cpp
         code/ylikuutio/tests/googletest/test_bilinear_interpolation2D.cpp
+        code/ylikuutio/tests/googletest/test_bmp_loader.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
         code/ylikuutio/tests/googletest/test_check_and_report_if_some_string_matches.cpp
         code/ylikuutio/tests/googletest/test_command_line_master.cpp
