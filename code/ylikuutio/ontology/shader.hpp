@@ -87,10 +87,10 @@ namespace yli
                     // Each `Material` rendered after a given GPGPU `Shader`
                     // may also use the output `ComputeTask`s offered by
                     // a given GPGPU `Shader` as its texture.
-                    this->is_gpgpu_shader      = shader_struct.is_gpgpu_shader;
+                    this->is_gpgpu_shader         = shader_struct.is_gpgpu_shader;
 
-                    this->number_of_materials  = 0;
-                    this->number_of_symbioses  = 0;
+                    this->number_of_materials     = 0;
+                    this->number_of_symbioses     = 0;
                     this->number_of_compute_tasks = 0;
 
                     // Get `childID` from `Scene` and set pointer to this `Shader`.
