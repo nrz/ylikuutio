@@ -49,7 +49,7 @@ namespace yli
             std::string triangulation_type; // `"bilinear_interpolation"`, `"southwest_northeast_edges"`, `"southeast_northwest_edges"`.
             glm::vec3 light_position;       // light position.
             yli::ontology::Shader* parent;  // pointer to the `Shader`.
-            bool opengl_in_use;
+            bool opengl_in_use;             // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
         };
     }
 }

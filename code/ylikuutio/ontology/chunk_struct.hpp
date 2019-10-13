@@ -37,7 +37,7 @@ namespace yli
 
             yli::ontology::Universe* universe;  // pointer to the `Universe`.
             yli::ontology::ChunkMaster* parent; // pointer to the `ChunkMaster`.
-            bool opengl_in_use;
+            bool opengl_in_use;                 // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
         };
     }
 }

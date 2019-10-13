@@ -89,7 +89,7 @@ namespace yli
             float water_level;                                  // water level in meters. used only for terrains (planets and moons).
             bool is_terrain;                                    // Terrains (planets and moons) currently neither rotate nor translate.
             bool is_symbiont_species;
-            bool opengl_in_use;
+            bool opengl_in_use;                                 // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
             bool use_real_texture_coordinates;
         };
     }
