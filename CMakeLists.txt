@@ -891,6 +891,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_obj_loader.cpp
         code/ylikuutio/tests/googletest/test_object_struct.cpp
         code/ylikuutio/tests/googletest/test_pugixml.cpp
+        code/ylikuutio/tests/googletest/test_quad_triangulation.cpp
         code/ylikuutio/tests/googletest/test_shader_struct.cpp
         code/ylikuutio/tests/googletest/test_species_struct.cpp
         code/ylikuutio/tests/googletest/test_vector_font_struct.cpp
