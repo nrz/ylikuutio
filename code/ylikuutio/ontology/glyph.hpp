@@ -68,7 +68,7 @@ namespace yli
 
             private:
                 Glyph(const yli::ontology::GlyphStruct& glyph_struct)
-                    : Model(glyph_struct.universe, glyph_struct.vram_buffer_in_use)
+                    : Model(glyph_struct.universe, glyph_struct.opengl_in_use)
                 {
                     // constructor.
                     this->parent               = glyph_struct.parent;

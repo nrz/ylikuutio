@@ -147,7 +147,7 @@ int main(const int argc, const char* argv[])
     symbiosis_struct.model_file_format = in_file_format;
     symbiosis_struct.triangulation_type = "bilinear_interpolation";
     symbiosis_struct.parent = nullptr;           // no parent.
-    symbiosis_struct.vram_buffer_in_use = false; // do not use VRAM buffer.
+    symbiosis_struct.opengl_in_use = false; // do not use VRAM buffer.
     yli::ontology::Universe* const universe = nullptr;
     const yli::ontology::Symbiosis symbiosis(universe, symbiosis_struct);
 

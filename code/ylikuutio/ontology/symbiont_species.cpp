@@ -93,7 +93,7 @@ namespace yli
             // destructor.
             std::cout << "SymbiontSpecies with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-            if (this->vram_buffer_in_use)
+            if (this->opengl_in_use)
             {
                 glDeleteBuffers(1, &this->normalbuffer);
                 glDeleteBuffers(1, &this->elementbuffer);
@@ -116,7 +116,7 @@ namespace yli
 
         void SymbiontSpecies::render()
         {
-            if (this->vram_buffer_in_use)
+            if (this->opengl_in_use)
             {
                 this->prerender();
 

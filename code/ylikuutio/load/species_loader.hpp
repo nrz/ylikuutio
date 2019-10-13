@@ -47,7 +47,7 @@ namespace yli
                 uint32_t* uvbuffer,
                 uint32_t* normalbuffer,
                 uint32_t* elementbuffer,
-                bool& vram_buffer_in_use,
+                bool& opengl_in_use,
                 const bool is_debug_mode);
     }
 }

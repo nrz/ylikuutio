@@ -61,7 +61,7 @@ namespace yli
 
         void Chunk::render()
         {
-            if (this->vram_buffer_in_use)
+            if (this->opengl_in_use)
             {
                 // Render this `Chunk`.
                 // If any vertex of the `Chunk` has changed, the vertex data

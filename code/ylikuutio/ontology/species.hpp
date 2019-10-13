@@ -66,7 +66,7 @@ namespace yli
 
                 // constructor.
                 Species(yli::ontology::Universe* const universe, const yli::ontology::SpeciesStruct& species_struct)
-                    : Model(universe, species_struct.vram_buffer_in_use)
+                    : Model(universe, species_struct.opengl_in_use)
                 {
                     // constructor.
                     this->is_terrain          = species_struct.is_terrain;
@@ -134,7 +134,7 @@ namespace yli
                         species_loader_struct.image_width_pointer          = &this->image_width;
                         species_loader_struct.image_height_pointer         = &this->image_height;
                         species_loader_struct.triangulation_type           = this->triangulation_type;
-                        species_loader_struct.vram_buffer_in_use           = this->vram_buffer_in_use;
+                        species_loader_struct.opengl_in_use                = this->opengl_in_use;
                         species_loader_struct.use_real_texture_coordinates = this->use_real_texture_coordinates;
 
                         const bool is_debug_mode = true;
@@ -152,7 +152,7 @@ namespace yli
                                 &this->uvbuffer,
                                 &this->normalbuffer,
                                 &this->elementbuffer,
-                                this->vram_buffer_in_use,
+                                this->opengl_in_use,
                                 is_debug_mode);
 
                         // TODO: Compute the graph of this object type to enable object vertex modification!

@@ -57,7 +57,7 @@ namespace yli
                 uint32_t* uvbuffer,
                 uint32_t* normalbuffer,
                 uint32_t* elementbuffer,
-                bool& vram_buffer_in_use,
+                bool& opengl_in_use,
                 const bool is_debug_mode)
         {
             bool model_loading_result = false;
@@ -171,9 +171,9 @@ namespace yli
 
             std::cout << "Indexing completed successfully.\n";
 
-            vram_buffer_in_use = species_loader_struct.vram_buffer_in_use;
+            opengl_in_use = species_loader_struct.opengl_in_use;
 
-            if (vram_buffer_in_use)
+            if (opengl_in_use)
             {
                 // Load it into a VBO.
                 glGenBuffers(1, vertexbuffer);

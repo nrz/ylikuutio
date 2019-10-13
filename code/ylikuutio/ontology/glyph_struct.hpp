@@ -45,7 +45,7 @@ namespace yli
                 universe(nullptr),
                 shader_pointer(nullptr),
                 parent(nullptr),
-                vram_buffer_in_use(true)
+                opengl_in_use(true)
             {
                 // constructor.
             }
@@ -57,7 +57,7 @@ namespace yli
             yli::ontology::Universe* universe;     // pointer to the `Universe` (not a parent!).
             yli::ontology::Shader* shader_pointer; // pointer to the `Shader` (not a parent!).
             yli::ontology::VectorFont* parent;     // pointer to the `VectorFont`.
-            bool vram_buffer_in_use;
+            bool opengl_in_use;
         };
     }
 }

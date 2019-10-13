@@ -51,7 +51,7 @@ namespace yli
         {
             public:
                 // constructor.
-                Model(yli::ontology::Universe* const universe, const bool vram_buffer_in_use)
+                Model(yli::ontology::Universe* const universe, const bool opengl_in_use)
                     : Entity(universe)
                 {
                     // constructor.
@@ -72,7 +72,7 @@ namespace yli
 
                     this->number_of_objects = 0;
 
-                    this->vram_buffer_in_use = vram_buffer_in_use;
+                    this->opengl_in_use = opengl_in_use;
 
                     // `yli::ontology::Entity` member variables begin here.
                     // `yli::ontology::Model` constructor takes care of `child_vector_pointers_vector`.
@@ -148,7 +148,7 @@ namespace yli
                 uint32_t normalbuffer;
                 uint32_t elementbuffer;
 
-                bool vram_buffer_in_use;
+                bool opengl_in_use;
         };
     }
 }
