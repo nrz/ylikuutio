@@ -17,7 +17,9 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
+#include "code/ylikuutio/triangulation/indexing.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
+#include "code/ylikuutio/triangulation/triangulation_enums.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 #include "code/ylikuutio/load/bmp_heightmap_loader.hpp"
 #include "code/ylikuutio/load/bmp_heightmap_loader.cpp"
