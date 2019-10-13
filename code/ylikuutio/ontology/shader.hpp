@@ -89,6 +89,8 @@ namespace yli
                     // a given GPGPU `Shader` as its texture.
                     this->is_gpgpu_shader         = shader_struct.is_gpgpu_shader;
 
+                    this->opengl_in_use           = shader_struct.opengl_in_use;
+
                     this->number_of_materials     = 0;
                     this->number_of_symbioses     = 0;
                     this->number_of_compute_tasks = 0;
@@ -96,13 +98,16 @@ namespace yli
                     // Get `childID` from `Scene` and set pointer to this `Shader`.
                     this->bind_to_parent();
 
-                    // Create and compile our GLSL program from the shaders.
-                    this->programID = yli::load::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
+                    if (this->opengl_in_use)
+                    {
+                        // Create and compile our GLSL program from the shaders.
+                        this->programID = yli::load::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
 
-                    // Get a handle for our "MVP" uniform.
-                    this->matrixID = glGetUniformLocation(this->programID, "MVP");
-                    this->view_matrixID = glGetUniformLocation(this->programID, "V");
-                    this->model_matrixID = glGetUniformLocation(this->programID, "M");
+                        // Get a handle for our "MVP" uniform.
+                        this->matrixID = glGetUniformLocation(this->programID, "MVP");
+                        this->view_matrixID = glGetUniformLocation(this->programID, "V");
+                        this->model_matrixID = glGetUniformLocation(this->programID, "M");
+                    }
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->material_pointer_vector);
@@ -167,6 +172,7 @@ namespace yli
                 const char* char_fragment_shader;
 
                 bool is_gpgpu_shader;                 // TODO: GPGPU `Shader`s are not rendered on screen but their result `ComputeTask`s can be used by `Material`s.
+                bool opengl_in_use;                   // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
         };
     }
 }
