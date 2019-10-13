@@ -95,14 +95,17 @@ namespace yli
                         // get `childID` from `Material` and set pointer to this `Species`.
                         this->bind_to_parent();
 
-                        // Get a handle for our buffers.
-                        this->vertex_position_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertex_position_modelspace");
-                        this->vertexUVID = glGetAttribLocation(species_struct.shader->get_programID(), "vertexUV");
-                        this->vertex_normal_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertex_normal_modelspace");
+                        if (this->opengl_in_use)
+                        {
+                            // Get a handle for our buffers.
+                            this->vertex_position_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertex_position_modelspace");
+                            this->vertexUVID = glGetAttribLocation(species_struct.shader->get_programID(), "vertexUV");
+                            this->vertex_normal_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertex_normal_modelspace");
 
-                        // Get a handle for our "LightPosition" uniform.
-                        glUseProgram(species_struct.shader->get_programID());
-                        this->lightID = glGetUniformLocation(species_struct.shader->get_programID(), "light_position_worldspace");
+                            // Get a handle for our "LightPosition" uniform.
+                            glUseProgram(species_struct.shader->get_programID());
+                            this->lightID = glGetUniformLocation(species_struct.shader->get_programID(), "light_position_worldspace");
+                        }
 
                         if (this->is_terrain)
                         {
@@ -116,9 +119,12 @@ namespace yli
                             }
                         }
 
-                        // water level.
-                        GLint water_level_uniform_location = glGetUniformLocation(species_struct.shader->get_programID(), "water_level");
-                        glUniform1f(water_level_uniform_location, species_struct.scene->get_water_level());
+                        if (this->opengl_in_use)
+                        {
+                            // water level.
+                            GLint water_level_uniform_location = glGetUniformLocation(species_struct.shader->get_programID(), "water_level");
+                            glUniform1f(water_level_uniform_location, species_struct.scene->get_water_level());
+                        }
 
                         yli::load::SpeciesLoaderStruct species_loader_struct;
                         species_loader_struct.model_filename               = this->model_filename;
