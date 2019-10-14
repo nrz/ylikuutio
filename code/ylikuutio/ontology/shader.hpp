@@ -83,6 +83,11 @@ namespace yli
                     this->char_fragment_shader = this->fragment_shader.c_str();
                     this->parent               = shader_struct.parent;
 
+                    this->programID            = 0; // dummy value.
+                    this->matrixID             = 0; // dummy value.
+                    this->view_matrixID        = 0; // dummy value.
+                    this->model_matrixID       = 0; // dummy value.
+
                     // Each GPGPU `Shader` owns 0 or more output `ComputeTask`s.
                     // Each `Material` rendered after a given GPGPU `Shader`
                     // may also use the output `ComputeTask`s offered by
