@@ -33,6 +33,16 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+#ifndef __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
+#define __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
+#include <glm/gtc/matrix_transform.hpp>
+#endif
+
+#ifndef __GLM_GTC_QUATERNION_HPP_INCLUDED
+#define __GLM_GTC_QUATERNION_HPP_INCLUDED
+#include <glm/gtc/quaternion.hpp> // glm::quat
+#endif
+
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
