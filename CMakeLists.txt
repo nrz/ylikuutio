@@ -464,8 +464,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/csv_loader.hpp
     code/ylikuutio/load/csv_texture_loader.cpp
     code/ylikuutio/load/csv_texture_loader.hpp
-    code/ylikuutio/load/dds_texture_loader.cpp
-    code/ylikuutio/load/dds_texture_loader.hpp
     code/ylikuutio/load/fbx_species_loader.cpp
     code/ylikuutio/load/fbx_species_loader.hpp
     code/ylikuutio/load/fbx_symbiosis_loader.cpp
