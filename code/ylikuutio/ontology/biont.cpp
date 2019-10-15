@@ -259,9 +259,6 @@ namespace yli
             glm::vec3 euler_angles { 0.0f, holobiont->horizontal_angle, holobiont->vertical_angle };
             glm::quat my_quaternion = glm::quat(euler_angles);
             glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
-            this->model_matrix[3][0] = 0.0f;
-            this->model_matrix[3][1] = 0.0f;
-            this->model_matrix[3][2] = 0.0f;
             this->model_matrix = rotation_matrix * this->model_matrix;
             this->model_matrix[3][0] = holobiont->cartesian_coordinates.x;
             this->model_matrix[3][1] = holobiont->cartesian_coordinates.y;
