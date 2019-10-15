@@ -52,8 +52,7 @@ namespace yli
                 symbiont_species(nullptr),
                 biontID(std::numeric_limits<std::size_t>::max()), // `std::numeric_limits<std::size_t>::max()` means that `biontID` is not defined.
                 rotate_angle(0.0f),
-                initial_rotate_angle(PI),
-                quaternions_in_use(false)
+                initial_rotate_angle(PI)
             {
                 // constructor.
             }
@@ -67,7 +66,6 @@ namespace yli
             std::size_t biontID;
             float rotate_angle;                               // rotate angle.
             float initial_rotate_angle;                       // initial rotate angle.
-            bool quaternions_in_use;
         };
     }
 }

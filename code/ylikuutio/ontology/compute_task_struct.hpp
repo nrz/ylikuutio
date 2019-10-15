@@ -67,7 +67,7 @@ namespace yli
                 // constructor.
             }
 
-            std::string texture_file_format; // Type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"csv"`/`"CSV"`, `"dds"`/`"DDS"`.
+            std::string texture_file_format; // Type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"csv"`/`"CSV"`.
             std::string texture_filename;    // Filename of the model file.
             std::string output_filename;     // Filename of the output file.
             yli::ontology::Shader* parent;   // Pointer to the `Shader`.

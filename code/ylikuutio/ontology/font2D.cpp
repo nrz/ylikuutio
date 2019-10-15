@@ -348,11 +348,7 @@ namespace yli
                 float uv_x = (character % font_size) / static_cast<float>(font_size);
                 float uv_y;
 
-                if (font_texture_file_format == "dds" || font_texture_file_format == "DDS")
-                {
-                    uv_y = (character / font_size) / static_cast<float>(font_size);
-                }
-                else if (font_texture_file_format == "bmp" || font_texture_file_format == "BMP")
+                if (font_texture_file_format == "bmp" || font_texture_file_format == "BMP")
                 {
                     // BMP is stored in the file beginning from the bottom line.
                     uv_y = 1 - (character / font_size) / static_cast<float>(font_size);
@@ -368,12 +364,7 @@ namespace yli
                 glm::vec2 uv_down_right;
                 glm::vec2 uv_down_left;
 
-                if (font_texture_file_format == "dds" || font_texture_file_format == "DDS")
-                {
-                    uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(font_size)), (uv_y + 1.0f / static_cast<float>(font_size)));
-                    uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(font_size)));
-                }
-                else if (font_texture_file_format == "bmp" || font_texture_file_format == "BMP")
+                if (font_texture_file_format == "bmp" || font_texture_file_format == "BMP")
                 {
                     // BMP is stored in the file beginning from the bottom line.
                     uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(font_size)), (uv_y - 1.0f / static_cast<float>(font_size)));

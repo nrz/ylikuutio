@@ -22,7 +22,6 @@
 #include "text_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/load/bmp_texture_loader.hpp"
-#include "code/ylikuutio/load/dds_texture_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 
@@ -75,6 +74,7 @@ namespace yli
                     this->bind_to_parent();
 
                     // Initialize class members with some dummy values.
+                    this->texture                          = 0;
                     this->vertexbuffer                     = 0;
                     this->uvbuffer                         = 0;
                     this->programID                        = 0;
@@ -95,18 +95,10 @@ namespace yli
                             std::cerr << "ERROR: loading BMP texture failed!\n";
                         }
                     }
-                    else if (this->font_texture_file_format == "dds" || this->font_texture_file_format == "DDS")
-                    {
-                        if (!yli::load::load_DDS_texture(texture_filename, this->image_width, this->image_height, this->image_size, this->texture))
-                        {
-                            std::cerr << "ERROR: loading DDS texture failed!\n";
-                        }
-                    }
                     else
                     {
                         std::cerr << "ERROR: invalid font texture file format: " << this->font_texture_file_format << "\n";
-                        std::cerr << "supported font texture file formats: bmp, BMP, dds, DDS.\n";
-                        this->texture = 0;
+                        std::cerr << "supported font texture file formats: bmp, BMP.\n";
                         return;
                     }
 
@@ -187,7 +179,7 @@ namespace yli
                 std::queue<std::size_t> free_text2D_ID_queue;
                 std::size_t number_of_text2Ds;
 
-                uint32_t texture;                          // Texture containing the glyphs, returned by `load_BMP_texture` or `load_DDS_texture`,
+                uint32_t texture;                          // Texture containing the glyphs, returned by `load_BMP_texture`,
                                                            // (used for `glGenTextures` etc.).
 
                 uint32_t vertexbuffer;                     // Buffer containing the vertices.

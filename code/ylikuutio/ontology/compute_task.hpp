@@ -28,7 +28,6 @@
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/load/bmp_texture_loader.hpp"
 #include "code/ylikuutio/load/csv_texture_loader.hpp"
-#include "code/ylikuutio/load/dds_texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -167,18 +166,6 @@ namespace yli
                             this->texture_depth = 1;
                         }
                     }
-                    else if (this->texture_file_format == "dds" || this->texture_file_format == "DDS")
-                    {
-                        if (!yli::load::load_DDS_texture(this->texture_filename, this->texture_width, this->texture_height, this->texture_size, this->source_texture))
-                        {
-                            std::cerr << "ERROR: loading DDS texture failed!\n";
-                        }
-                        else
-                        {
-                            this->is_texture_loaded = true;
-                            this->texture_depth = 1;
-                        }
-                    }
                     else if (this->texture_file_format == "csv" || this->texture_file_format == "CSV")
                     {
                         if (!yli::load::load_CSV_texture(
@@ -287,7 +274,7 @@ namespace yli
                 void preiterate() const;
                 void postiterate() const;
 
-                std::string texture_file_format; // Type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"csv"`/`"CSV"`, `"dds"`/`"DDS"`.
+                std::string texture_file_format; // Type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"csv"`/`"CSV"`.
                 std::string texture_filename;    // Filename of the model file.
                 std::string output_filename;     // Filename of the output file.
 

@@ -1105,6 +1105,26 @@ namespace yli
                 return nullptr;
             }
 
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+
+            if (movable != nullptr)
+            {
+                if (setting_master->setting_pointer_map.count("horizontal_angle") != 1)
+                {
+                    return nullptr;
+                }
+
+                std::shared_ptr<yli::common::AnyValue> horizontal_angle_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["horizontal_angle"]->setting_value);
+
+                if (horizontal_angle_any_value == nullptr || horizontal_angle_any_value->type != yli::common::Datatype::DOUBLE)
+                {
+                    return nullptr;
+                }
+
+                movable->horizontal_angle = horizontal_angle_any_value->double_value;
+                return nullptr;
+            }
+
             yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
@@ -1132,6 +1152,26 @@ namespace yli
         {
             if (entity == nullptr || setting_master == nullptr)
             {
+                return nullptr;
+            }
+
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+
+            if (movable != nullptr)
+            {
+                if (setting_master->setting_pointer_map.count("vertical_angle") != 1)
+                {
+                    return nullptr;
+                }
+
+                std::shared_ptr<yli::common::AnyValue> vertical_angle_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["vertical_angle"]->setting_value);
+
+                if (vertical_angle_any_value == nullptr || vertical_angle_any_value->type != yli::common::Datatype::DOUBLE)
+                {
+                    return nullptr;
+                }
+
+                movable->vertical_angle = vertical_angle_any_value->double_value;
                 return nullptr;
             }
 
@@ -1675,6 +1715,13 @@ namespace yli
                 return nullptr;
             }
 
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+
+            if (movable != nullptr)
+            {
+                return std::make_shared<yli::common::AnyValue>(movable->horizontal_angle);
+            }
+
             yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
@@ -1690,6 +1737,13 @@ namespace yli
             if (entity == nullptr)
             {
                 return nullptr;
+            }
+
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+
+            if (movable != nullptr)
+            {
+                return std::make_shared<yli::common::AnyValue>(movable->vertical_angle);
             }
 
             yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);

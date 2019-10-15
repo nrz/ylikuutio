@@ -101,6 +101,22 @@ namespace yli
                     std::cout << "Executing `setting_master->create_Setting(z_setting_struct);` ...\n";
                     setting_master->create_Setting(z_setting_struct);
 
+                    yli::config::SettingStruct horizontal_angle_setting_struct(std::make_shared<yli::common::AnyValue>(this->horizontal_angle));
+                    horizontal_angle_setting_struct.name = "horizontal_angle";
+                    horizontal_angle_setting_struct.activate_callback = &yli::config::SettingMaster::activate_horizontal_angle;
+                    horizontal_angle_setting_struct.read_callback = &yli::config::SettingMaster::read_horizontal_angle;
+                    horizontal_angle_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+                    std::cout << "Executing `setting_master->create_Setting(horizontal_angle_setting_struct);` ...\n";
+                    setting_master->create_Setting(horizontal_angle_setting_struct);
+
+                    yli::config::SettingStruct vertical_angle_setting_struct(std::make_shared<yli::common::AnyValue>(this->vertical_angle));
+                    vertical_angle_setting_struct.name = "vertical_angle";
+                    vertical_angle_setting_struct.activate_callback = &yli::config::SettingMaster::activate_vertical_angle;
+                    vertical_angle_setting_struct.read_callback = &yli::config::SettingMaster::read_vertical_angle;
+                    vertical_angle_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+                    std::cout << "Executing `setting_master->create_Setting(vertical_angle_setting_struct);` ...\n";
+                    setting_master->create_Setting(vertical_angle_setting_struct);
+
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Movable*";
                     this->can_be_erased = true;

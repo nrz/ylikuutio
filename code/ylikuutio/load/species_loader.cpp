@@ -173,7 +173,11 @@ namespace yli
 
             opengl_in_use = species_loader_struct.opengl_in_use;
 
-            if (opengl_in_use)
+            if (opengl_in_use &&
+                    vertexbuffer != nullptr &&
+                    uvbuffer != nullptr &&
+                    normalbuffer != nullptr &&
+                    elementbuffer != nullptr)
             {
                 // Load it into a VBO.
                 glGenBuffers(1, vertexbuffer);

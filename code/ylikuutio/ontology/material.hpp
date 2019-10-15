@@ -24,7 +24,6 @@
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/load/bmp_texture_loader.hpp"
-#include "code/ylikuutio/load/dds_texture_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
@@ -87,13 +86,6 @@ namespace yli
                             if (!yli::load::load_BMP_texture(this->texture_filename, this->image_width, this->image_height, this->image_size, this->texture))
                             {
                                 std::cerr << "ERROR: loading BMP texture failed!\n";
-                            }
-                        }
-                        else if (this->texture_file_format == "dds" || this->texture_file_format == "DDS")
-                        {
-                            if (!yli::load::load_DDS_texture(this->texture_filename, this->image_width, this->image_height, this->image_size, this->texture))
-                            {
-                                std::cerr << "ERROR: loading DDS texture failed!\n";
                             }
                         }
                         else
@@ -167,7 +159,7 @@ namespace yli
 
                 bool is_symbiont_material;
 
-                uint32_t texture;                    // Texture of this `Material`, returned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
+                uint32_t texture;                    // Texture of this `Material`, returned by `load_BMP_texture` (used for `glGenTextures` etc.).
                 uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
 
                 std::vector<yli::ontology::Species*> species_pointer_vector;

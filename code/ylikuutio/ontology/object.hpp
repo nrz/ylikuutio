@@ -78,10 +78,7 @@ namespace yli
                     this->initial_rotate_angle  = object_struct.initial_rotate_angle;
                     this->rotate_angle          = object_struct.rotate_angle;
 
-                    this->has_entered           = false;
-
                     this->is_character          = object_struct.is_character;
-                    this->quaternions_in_use    = object_struct.quaternions_in_use;
 
                     if (this->is_character)
                     {
@@ -132,8 +129,6 @@ namespace yli
                 yli::ontology::Glyph* glyph;            // pointer to the `Glyph` (not a parent!).
 
                 bool is_character;
-                bool quaternions_in_use;
-                bool has_entered;
 
                 glm::vec3 original_scale_vector;        // original scale vector.
                 glm::vec3 rotate_vector;                // rotate vector.
