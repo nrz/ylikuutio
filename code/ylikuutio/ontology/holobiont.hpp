@@ -81,7 +81,6 @@ namespace yli
                     this->rotate_angle          = holobiont_struct.rotate_angle;
                     this->initial_rotate_angle  = holobiont_struct.initial_rotate_angle;
 
-                    this->has_entered           = false;
                     this->quaternions_in_use    = holobiont_struct.quaternions_in_use;
 
                     this->cartesian_coordinates = holobiont_struct.cartesian_coordinates;
@@ -139,7 +138,6 @@ namespace yli
                 float rotate_angle;                         // rotate angle.
                 float initial_rotate_angle;                 // initial rotate angle.
 
-                bool has_entered;
                 bool quaternions_in_use;
         };
     }
