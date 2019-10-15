@@ -253,47 +253,27 @@ namespace yli
 
         void Object::render_this_object(yli::ontology::Shader* const shader_pointer)
         {
-            if (!this->has_entered)
+            this->model_matrix = glm::mat4(1.0f);
+
+            if (!this->is_character)
             {
-                this->model_matrix = glm::translate(glm::mat4(1.0f), this->cartesian_coordinates);
+                const std::string model_file_format = this->species_parent->get_model_file_format();
 
-                if (!this->is_character)
+                if (model_file_format == "fbx" || model_file_format == "FBX")
                 {
-                    const std::string model_file_format = this->species_parent->get_model_file_format();
-
-                    if (model_file_format == "fbx" || model_file_format == "FBX")
-                    {
-                        // Only FBX objects need initial rotation.
-                        this->model_matrix = glm::rotate(this->model_matrix, this->initial_rotate_angle, this->initial_rotate_vector);
-                    }
+                    // Only FBX objects need initial rotation.
+                    this->model_matrix = glm::rotate(this->model_matrix, this->initial_rotate_angle, this->initial_rotate_vector);
                 }
-                this->model_matrix = glm::scale(this->model_matrix, this->original_scale_vector);
-
-                // store the new coordinates to be used in the next update.
-                this->cartesian_coordinates = glm::vec3(this->model_matrix[3][0], this->model_matrix[3][1], this->model_matrix[3][2]);
-                this->has_entered = true;
             }
-            else
-            {
-                // rotate.
-                if (this->rotate_vector != glm::vec3(0.0f, 0.0f, 0.0f))
-                {
-                    if (this->quaternions_in_use)
-                    {
-                        // create `rotation_matrix` using quaternions.
-                        glm::quat my_quaternion = glm::quat(DEGREES_TO_RADIANS(this->rotate_vector));
-                        glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
-                        this->model_matrix = rotation_matrix * this->model_matrix;
-                    }
-                    else
-                    {
-                        this->model_matrix = glm::rotate(this->model_matrix, this->rotate_angle, this->rotate_vector);
-                    }
-                }
 
-                this->model_matrix = glm::translate(this->model_matrix, this->translate_vector);
-                this->cartesian_coordinates = glm::vec3(this->model_matrix[3][0], this->model_matrix[3][1], this->model_matrix[3][2]);
-            }
+            this->model_matrix = glm::scale(this->model_matrix, this->original_scale_vector);
+            glm::vec3 euler_angles { this->vertical_angle, this->horizontal_angle, 0.0f };
+            glm::quat my_quaternion = glm::quat(euler_angles);
+            glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
+            this->model_matrix = rotation_matrix * this->model_matrix;
+            this->model_matrix[3][0] = this->cartesian_coordinates.x;
+            this->model_matrix[3][1] = this->cartesian_coordinates.y;
+            this->model_matrix[3][2] = this->cartesian_coordinates.z;
 
             this->MVP_matrix = this->universe->get_projection_matrix() * this->universe->get_view_matrix() * this->model_matrix;
 
