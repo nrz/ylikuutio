@@ -181,7 +181,6 @@ namespace yli
                 biont_struct.rotate_vector         = this->rotate_vector;
                 biont_struct.initial_rotate_angle  = this->initial_rotate_angle;
                 biont_struct.initial_rotate_vector = this->initial_rotate_vector;
-                biont_struct.quaternions_in_use    = this->quaternions_in_use;
                 biont_struct.cartesian_coordinates = this->cartesian_coordinates;
                 biont_struct.translate_vector      = this->translate_vector;
 

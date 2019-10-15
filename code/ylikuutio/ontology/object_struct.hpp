@@ -53,8 +53,7 @@ namespace yli
                 rotate_angle(0.0f),
                 initial_rotate_angle(PI),
                 is_character(false),
-                is_symbiosis_object(false),
-                quaternions_in_use(false)
+                is_symbiosis_object(false)
             {
                 // constructor.
             }
@@ -71,7 +70,6 @@ namespace yli
             float initial_rotate_angle;             // initial rotate angle.
             bool is_character;                      // The parent of a character object is a `Glyph`. The parent of a regular object is a `Species`.
             bool is_symbiosis_object;               // The parent of a `SymbiosisObject` is a `Symbiosis`.
-            bool quaternions_in_use;
         };
     }
 }

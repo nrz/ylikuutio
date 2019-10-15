@@ -47,8 +47,7 @@ namespace yli
                 translate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
                 symbiosis_parent(nullptr),
                 rotate_angle(0.0f),
-                initial_rotate_angle(PI),
-                quaternions_in_use(false)
+                initial_rotate_angle(PI)
             {
                 // constructor.
             }
@@ -61,7 +60,6 @@ namespace yli
             yli::ontology::Symbiosis* symbiosis_parent; // pointer to the `Symbiosis`.
             float rotate_angle;                         // rotate angle.
             float initial_rotate_angle;                 // initial rotate angle.
-            bool quaternions_in_use;
         };
     }
 }

@@ -82,7 +82,6 @@ namespace yli
                     // Enable rendering of a recently entered `Biont`.
                     // TODO: enable entering without enabling rendering.
                     this->should_ylikuutio_render_this_biont = true;
-                    this->quaternions_in_use    = biont_struct.quaternions_in_use;
 
                     // `yli::ontology::Movable` member variables begin here.
                     this->cartesian_coordinates = biont_struct.cartesian_coordinates;
@@ -136,7 +135,6 @@ namespace yli
                 float rotate_angle;                    // rotate angle.
 
                 bool should_ylikuutio_render_this_biont;
-                bool quaternions_in_use;
         };
     }
 }
