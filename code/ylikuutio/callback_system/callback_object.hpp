@@ -48,6 +48,11 @@ namespace yli
                 // destructor.
                 virtual ~CallbackObject();
 
+                yli::callback_system::CallbackParameter* create_CallbackParameter(
+                        const std::string& name,
+                        std::shared_ptr<yli::common::AnyValue> any_value,
+                        const bool is_reference);
+
                 // this method changes the callback without changing the parameters of CallbackObject.
                 void set_new_callback(const InputParametersToAnyValueCallback callback);
 

@@ -41,10 +41,6 @@ namespace yli
         class CallbackParameter
         {
             public:
-
-                // constructor.
-                CallbackParameter(const std::string& name, std::shared_ptr<yli::common::AnyValue> any_value, const bool is_reference, yli::callback_system::CallbackObject* const parent);
-
                 // destructor.
                 ~CallbackParameter();
 
@@ -57,6 +53,9 @@ namespace yli
 
             private:
                 void bind_to_parent();
+
+                // constructor.
+                CallbackParameter(const std::string& name, std::shared_ptr<yli::common::AnyValue> any_value, const bool is_reference, yli::callback_system::CallbackObject* const parent);
 
                 yli::callback_system::CallbackObject* parent; // pointer to the callback object.
 
