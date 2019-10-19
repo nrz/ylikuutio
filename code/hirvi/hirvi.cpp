@@ -763,9 +763,6 @@ int main(const int argc, const char* const argv[])
 
     audio_master->add_to_playlist("Hirvi_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
     audio_master->add_to_playlist("Hirvi_playlist", "414270__greek555__sample-97-bpm.wav");
-    // audio_master->add_to_playlist("Hirvi_playlist", "419588__greek555__dreaming-of-me.ogg");
-    // audio_master->add_to_playlist("Hirvi_playlist", "416882__greek555__blue-play.ogg");
-    // audio_master->add_to_playlist("Hirvi_playlist", "395487__frankum__tecno-pop-base-and-guitar-2.ogg");
     audio_master->play_playlist("Hirvi_playlist");
 
     SDL_Event sdl_event;
