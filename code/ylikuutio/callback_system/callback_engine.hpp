@@ -19,6 +19,7 @@
 #define __CALLBACK_ENGINE_HPP_INCLUDED
 
 #include "code/ylikuutio/common/any_value.hpp"
+#include "input_parameters_to_any_value_callback.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -72,6 +73,9 @@ namespace yli
 
                 // destructor.
                 ~CallbackEngine();
+
+                yli::callback_system::CallbackObject* create_CallbackObject();
+                yli::callback_system::CallbackObject* create_CallbackObject(const InputParametersToAnyValueCallback callback);
 
                 // execute all callbacks.
                 std::shared_ptr<yli::common::AnyValue> execute();

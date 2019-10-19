@@ -17,6 +17,7 @@
 
 #include "callback_engine.hpp"
 #include "callback_object.hpp"
+#include "input_parameters_to_any_value_callback.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -55,6 +56,16 @@ namespace yli
             // destroy all callback objects of this callback engine.
             std::cout << "All callback objects of this callback engine will be destroyed.\n";
             yli::hierarchy::delete_children<yli::callback_system::CallbackObject*>(this->callback_object_pointer_vector, this->number_of_callback_objects);
+        }
+
+        yli::callback_system::CallbackObject* CallbackEngine::create_CallbackObject()
+        {
+            return new yli::callback_system::CallbackObject(this);
+        }
+
+        yli::callback_system::CallbackObject* CallbackEngine::create_CallbackObject(const InputParametersToAnyValueCallback callback)
+        {
+            return new yli::callback_system::CallbackObject(callback, this);
         }
 
         void CallbackEngine::set_callback_object_pointer(const std::size_t childID, yli::callback_system::CallbackObject* const child_pointer)
