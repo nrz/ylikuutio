@@ -198,6 +198,7 @@ namespace yli
                 void print_help();
                 void render() const;
 
+                bool enter_console();
                 bool exit_console();
                 bool get_in_console() const;
                 void process_key_event(const SDL_KeyboardEvent& keyboard_event);

@@ -63,32 +63,8 @@ namespace yli
                 return nullptr;
             }
 
-            if (!console->in_console &&
-                    console->my_keypress_callback_engine_vector_pointer != nullptr &&
-                    console->my_keyrelease_callback_engine_vector_pointer != nullptr &&
-                    console->current_keypress_callback_engine_vector_pointer_pointer != nullptr &&
-                    console->current_keyrelease_callback_engine_vector_pointer_pointer != nullptr)
+            if (console->enter_console())
             {
-                // Store previous keypress callback engine vector pointer.
-                console->previous_keypress_callback_engine_vector_pointer =
-                    *console->current_keypress_callback_engine_vector_pointer_pointer;
-
-                // Set new keypress callback engine vector pointer.
-                *console->current_keypress_callback_engine_vector_pointer_pointer =
-                    console->my_keypress_callback_engine_vector_pointer;
-
-                // Store previous keyrelease callback engine vector pointer.
-                console->previous_keyrelease_callback_engine_vector_pointer =
-                    *console->current_keyrelease_callback_engine_vector_pointer_pointer;
-
-                // Set new keyrelease callback engine vector pointer.
-                *console->current_keyrelease_callback_engine_vector_pointer_pointer =
-                    console->my_keyrelease_callback_engine_vector_pointer;
-
-                // Mark that we're in console.
-                console->in_console = true;
-                console->in_historical_input = false;
-
                 // Signal to caller that we have entered the console.
                 uint32_t enter_console_magic_number = ENTER_CONSOLE_MAGIC_NUMBER;
                 return std::make_shared<yli::common::AnyValue>(enter_console_magic_number);
