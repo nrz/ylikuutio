@@ -310,6 +310,12 @@ namespace yli
                 std::vector<yli::callback_system::CallbackParameter*>&,
                 yli::ontology::Console* console)
         {
+            if (console == nullptr)
+            {
+                // We did not exit the console.
+                return nullptr;
+            }
+
             if (console->in_console && console->exit_console())
             {
                 // Signal to caller that we have exited the console.
