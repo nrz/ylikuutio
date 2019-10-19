@@ -45,14 +45,13 @@ namespace yli
                 void bind_CallbackParameter(yli::callback_system::CallbackParameter* const callback_parameter);
                 void unbind_CallbackParameter(const std::size_t childID);
 
-                // constructor.
-                CallbackObject(yli::callback_system::CallbackEngine* parent);
-
-                // constructor.
-                CallbackObject(const InputParametersToAnyValueCallback callback, yli::callback_system::CallbackEngine* parent);
-
                 // destructor.
                 virtual ~CallbackObject();
+
+                yli::callback_system::CallbackParameter* create_CallbackParameter(
+                        const std::string& name,
+                        std::shared_ptr<yli::common::AnyValue> any_value,
+                        const bool is_reference);
 
                 // this method changes the callback without changing the parameters of CallbackObject.
                 void set_new_callback(const InputParametersToAnyValueCallback callback);
@@ -89,6 +88,12 @@ namespace yli
                 std::size_t number_of_callback_parameters;
 
                 InputParametersToAnyValueCallback callback;
+
+                // constructor.
+                CallbackObject(yli::callback_system::CallbackEngine* parent);
+
+                // constructor.
+                CallbackObject(const InputParametersToAnyValueCallback callback, yli::callback_system::CallbackEngine* parent);
 
             private:
                 // A hash map used to store variables.

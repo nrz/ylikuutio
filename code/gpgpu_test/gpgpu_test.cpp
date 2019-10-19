@@ -77,7 +77,7 @@ int main(const int argc, const char* const argv[])
     // keypress callbacks.
     std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keypress_callback_engines;
 
-    // This vector points to current keypress callback engines vector.
+    // This vector points to the current keypress callback engines vector.
     std::vector<yli::callback_system::KeyAndCallbackStruct>* current_keypress_callback_engine_vector_pointer = &action_mode_keypress_callback_engines;
 
     // Create the `Universe`, store it in `my_universe`.
@@ -93,9 +93,9 @@ int main(const int argc, const char* const argv[])
 
     yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
 
-    std::cout << "Creating yli::callback_system::CallbackEngine* cleanup_callback_engine ...\n";
+    std::cout << "Creating yli::callback_system::CallbackEngine cleanup_callback_engine ...\n";
     yli::callback_system::CallbackEngine cleanup_callback_engine = yli::callback_system::CallbackEngine();
-    new yli::callback_system::CallbackObject(nullptr, &cleanup_callback_engine);
+    cleanup_callback_engine.create_CallbackObject(nullptr);
 
     if (my_universe->get_window() == nullptr)
     {
@@ -174,12 +174,12 @@ int main(const int argc, const char* const argv[])
     std::cout << "Defining action mode keypress callback engines.\n";
 
     // Callback code for esc: exit program.
-    yli::callback_system::CallbackEngine* const exit_program_callback_engine = new yli::callback_system::CallbackEngine();
-    new yli::callback_system::CallbackObject(&app::exit_program, exit_program_callback_engine);
+    yli::callback_system::CallbackEngine exit_program_callback_engine;
+    exit_program_callback_engine.create_CallbackObject(&app::exit_program);
 
     // Keypress callbacks for action mode.
     // Keypresses are checked in the order of this struct.
-    action_mode_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_ESCAPE, exit_program_callback_engine });
+    action_mode_keypress_callback_engines.push_back(yli::callback_system::KeyAndCallbackStruct { SDL_SCANCODE_ESCAPE, &exit_program_callback_engine });
 
     // For speed computation
     double last_time_to_display_FPS = yli::time::get_time();

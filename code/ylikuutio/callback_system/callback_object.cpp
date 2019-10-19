@@ -58,6 +58,14 @@ namespace yli
                     this->number_of_callback_parameters);
         }
 
+        yli::callback_system::CallbackParameter* CallbackObject::create_CallbackParameter(
+                const std::string& name,
+                std::shared_ptr<yli::common::AnyValue> any_value,
+                const bool is_reference)
+        {
+            return new yli::callback_system::CallbackParameter(name, any_value, is_reference, this);
+        }
+
         // getter function for callbacks and callback objects.
         std::shared_ptr<yli::common::AnyValue> CallbackObject::get_any_value(const std::string& name) const
         {

@@ -324,6 +324,64 @@ namespace yli
             return 0; // `Console` has no children.
         }
 
+        bool Console::enter_console()
+        {
+            if (!this->in_console &&
+                    this->my_keypress_callback_engine_vector_pointer != nullptr &&
+                    this->my_keyrelease_callback_engine_vector_pointer != nullptr &&
+                    this->current_keypress_callback_engine_vector_pointer_pointer != nullptr &&
+                    this->current_keyrelease_callback_engine_vector_pointer_pointer != nullptr)
+            {
+                // Store previous keypress callback engine vector pointer.
+                this->previous_keypress_callback_engine_vector_pointer =
+                    *this->current_keypress_callback_engine_vector_pointer_pointer;
+
+                // Set new keypress callback engine vector pointer.
+                *this->current_keypress_callback_engine_vector_pointer_pointer =
+                    this->my_keypress_callback_engine_vector_pointer;
+
+                // Store previous keyrelease callback engine vector pointer.
+                this->previous_keyrelease_callback_engine_vector_pointer =
+                    *this->current_keyrelease_callback_engine_vector_pointer_pointer;
+
+                // Set new keyrelease callback engine vector pointer.
+                *this->current_keyrelease_callback_engine_vector_pointer_pointer =
+                    this->my_keyrelease_callback_engine_vector_pointer;
+
+                // Mark that we're in console.
+                this->in_console = true;
+                this->in_historical_input = false;
+                return true;
+            }
+
+            // We did not enter the console.
+            return false;
+        }
+
+        bool Console::exit_console()
+        {
+            if (this->in_console)
+            {
+                // Restore previous keypress callback engine vector pointer.
+                if (this->current_keypress_callback_engine_vector_pointer_pointer != nullptr)
+                {
+                    *this->current_keypress_callback_engine_vector_pointer_pointer = this->previous_keypress_callback_engine_vector_pointer;
+                }
+
+                // Restore previous keyrelease callback engine vector pointer.
+                if (this->current_keyrelease_callback_engine_vector_pointer_pointer != nullptr)
+                {
+                    *this->current_keyrelease_callback_engine_vector_pointer_pointer = this->previous_keyrelease_callback_engine_vector_pointer;
+                }
+
+                // Mark that we have exited the console.
+                this->in_console = false;
+
+                return true;
+            }
+            return false;
+        }
+
         bool Console::get_in_console() const
         {
             return this->in_console;
@@ -451,30 +509,6 @@ namespace yli
                         this->command_history.at(this->historical_input_i).end(),
                         std::back_inserter(this->current_input));
             }
-        }
-
-        bool Console::exit_console()
-        {
-            if (this->in_console)
-            {
-                // Restore previous keypress callback engine vector pointer.
-                if (this->current_keypress_callback_engine_vector_pointer_pointer != nullptr)
-                {
-                    *this->current_keypress_callback_engine_vector_pointer_pointer = this->previous_keypress_callback_engine_vector_pointer;
-                }
-
-                // Restore previous keyrelease callback engine vector pointer.
-                if (this->current_keyrelease_callback_engine_vector_pointer_pointer != nullptr)
-                {
-                    *this->current_keyrelease_callback_engine_vector_pointer_pointer = this->previous_keyrelease_callback_engine_vector_pointer;
-                }
-
-                // Mark that we have exited the console.
-                this->in_console = false;
-
-                return true;
-            }
-            return false;
         }
 
         void Console::delete_character()
