@@ -77,7 +77,7 @@ int main(const int argc, const char* const argv[])
     // keypress callbacks.
     std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keypress_callback_engines;
 
-    // This vector points to current keypress callback engines vector.
+    // This vector points to the current keypress callback engines vector.
     std::vector<yli::callback_system::KeyAndCallbackStruct>* current_keypress_callback_engine_vector_pointer = &action_mode_keypress_callback_engines;
 
     // Create the `Universe`, store it in `my_universe`.
