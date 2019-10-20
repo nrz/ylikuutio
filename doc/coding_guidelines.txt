@@ -51,6 +51,8 @@ General
 * Maintaining compatibility with 32-bit systems is not a priority.
 * Minimize the use of `new` and `delete`.
 * Write creator functions (e.g. `SettingMaster::create_Setting`) for the necessary `new`.
+* If a constructor is to be called only from a creator function belonging
+  to a `friend` class, then the constructor should be made `private`.
 * Do not use `malloc` or `free`, unless absolutely necessary.
 * Use include guards in all header files, immediately after the license text.
 * The name of the include guard macro shall be e.g. `__FILE_HPP_INCLUDED` for `file.hpp`.
