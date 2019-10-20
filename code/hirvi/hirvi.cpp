@@ -765,7 +765,7 @@ int main(const int argc, const char* const argv[])
     angles_and_coordinates_text_struct.font_texture_file_format = "bmp";
     angles_and_coordinates_text_struct.horizontal_alignment = "left";
     angles_and_coordinates_text_struct.vertical_alignment = "bottom";
-    yli::ontology::Text2D* angles_and_coordinates_text2D = new yli::ontology::Text2D(my_universe, angles_and_coordinates_text_struct);
+    yli::ontology::Text2D* angles_and_coordinates_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_Text2D(angles_and_coordinates_text_struct));
 
     // Print spherical coordinates on second line from the bottom left.
     yli::ontology::TextStruct spherical_coordinates_text_struct;
@@ -778,7 +778,7 @@ int main(const int argc, const char* const argv[])
     spherical_coordinates_text_struct.font_size = my_universe->get_font_size();
     spherical_coordinates_text_struct.horizontal_alignment = "left";
     spherical_coordinates_text_struct.vertical_alignment = "bottom";
-    yli::ontology::Text2D* spherical_coordinates_text2D = new yli::ontology::Text2D(my_universe, spherical_coordinates_text_struct);
+    yli::ontology::Text2D* spherical_coordinates_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_Text2D(spherical_coordinates_text_struct));
 
     // Print time data on top left corner.
     yli::ontology::TextStruct time_text_struct;
@@ -792,7 +792,7 @@ int main(const int argc, const char* const argv[])
     time_text_struct.font_texture_file_format = "bmp";
     time_text_struct.horizontal_alignment = "left";
     time_text_struct.vertical_alignment = "top";
-    yli::ontology::Text2D* time_text2D = new yli::ontology::Text2D(my_universe, time_text_struct);
+    yli::ontology::Text2D* time_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_Text2D(time_text_struct));
 
     // Print help text.
     yli::ontology::TextStruct help_text_struct;
@@ -806,7 +806,7 @@ int main(const int argc, const char* const argv[])
     help_text_struct.font_texture_file_format = "bmp";
     help_text_struct.horizontal_alignment = "left";
     help_text_struct.vertical_alignment = "top";
-    yli::ontology::Text2D* help_text2D = new yli::ontology::Text2D(my_universe, help_text_struct);
+    yli::ontology::Text2D* help_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_Text2D(help_text_struct));
 
     // Print frame rate data on top right corner.
     yli::ontology::TextStruct frame_rate_text_struct;
@@ -820,7 +820,7 @@ int main(const int argc, const char* const argv[])
     frame_rate_text_struct.font_texture_file_format = "bmp";
     frame_rate_text_struct.horizontal_alignment = "right";
     frame_rate_text_struct.vertical_alignment = "top";
-    yli::ontology::Text2D* frame_rate_text2D = new yli::ontology::Text2D(my_universe, frame_rate_text_struct);
+    yli::ontology::Text2D* frame_rate_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_Text2D(frame_rate_text_struct));
 
     std::cout << "Setting up window size ...\n";
     app::set_window_size(my_universe->get_setting_master(), my_universe->get_window_width(), my_universe->get_window_height());
