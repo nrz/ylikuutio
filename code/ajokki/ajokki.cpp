@@ -1204,69 +1204,81 @@ int main(const int argc, const char* const argv[])
             // Gravity etc. physical phenomena.
             my_universe->do_physics();
 
-            std::stringstream angles_and_coordinates_stringstream;
-            angles_and_coordinates_stringstream << std::fixed << std::setprecision(2) <<
-                my_universe->current_camera_horizontal_angle << "," <<
-                my_universe->current_camera_vertical_angle << " rad; " <<
-                RADIANS_TO_DEGREES(my_universe->current_camera_horizontal_angle) << "," <<
-                RADIANS_TO_DEGREES(my_universe->current_camera_vertical_angle) << " deg\n" <<
-                "(" <<
-                my_universe->current_camera_cartesian_coordinates.x << "," <<
-                my_universe->current_camera_cartesian_coordinates.y << "," <<
-                my_universe->current_camera_cartesian_coordinates.z << ")";
-            const std::string angles_and_coordinates_string = angles_and_coordinates_stringstream.str();
-            angles_and_coordinates_text2D->change_string(angles_and_coordinates_string);
+            if (angles_and_coordinates_text2D != nullptr)
+            {
+                std::stringstream angles_and_coordinates_stringstream;
+                angles_and_coordinates_stringstream << std::fixed << std::setprecision(2) <<
+                    my_universe->current_camera_horizontal_angle << "," <<
+                    my_universe->current_camera_vertical_angle << " rad; " <<
+                    RADIANS_TO_DEGREES(my_universe->current_camera_horizontal_angle) << "," <<
+                    RADIANS_TO_DEGREES(my_universe->current_camera_vertical_angle) << " deg\n" <<
+                    "(" <<
+                    my_universe->current_camera_cartesian_coordinates.x << "," <<
+                    my_universe->current_camera_cartesian_coordinates.y << "," <<
+                    my_universe->current_camera_cartesian_coordinates.z << ")";
+                const std::string angles_and_coordinates_string = angles_and_coordinates_stringstream.str();
+                angles_and_coordinates_text2D->change_string(angles_and_coordinates_string);
+            }
 
-            std::stringstream time_stringstream;
-            time_stringstream << std::fixed << std::setprecision(2) << yli::time::get_time() << " sec";
-            const std::string time_string = time_stringstream.str();
-            time_text2D->change_string(time_string);
+            if (time_text2D != nullptr)
+            {
+                std::stringstream time_stringstream;
+                time_stringstream << std::fixed << std::setprecision(2) << yli::time::get_time() << " sec";
+                const std::string time_string = time_stringstream.str();
+                time_text2D->change_string(time_string);
+            }
 
             const std::string on_string = "on";
             const std::string off_string = "off";
 
-            if (my_universe->in_help_mode && my_universe->can_display_help_screen)
+            if (help_text2D != nullptr)
             {
-                std::stringstream help_text_stringstream;
-                help_text_stringstream <<
-                    "Ajokki " << yli::ontology::Universe::version << "\n"
-                    "\n"
-                    "arrow keys\n"
-                    "space jump\n"
-                    "enter duck\n"
-                    "F1 help mode\n"
-                    "`  enter console\n"
-                    "I  invert mouse (" << (my_universe->is_invert_mouse_in_use ? on_string : off_string) << ")\n"
-                    "F  flight mode (" << (my_universe->is_flight_mode_in_use ? on_string : off_string) << ")\n"
-                    "Ctrl      turbo\n" <<
-                    "Ctrl+Ctrl extra turbo\n" <<
-                    "for debugging:\n" <<
-                    "G  grass texture\n" <<
-                    "O  orange fur texture\n" <<
-                    "P  pink geometric tiles texture\n" <<
-                    "T  terrain species\n" <<
-                    "A  suzanne species\n";
-                const std::string help_text_string = help_text_stringstream.str();
-                help_text2D->change_string(help_text_string);
-            }
-            else
-            {
-                help_text2D->change_string("");
+                if (my_universe->in_help_mode && my_universe->can_display_help_screen)
+                {
+                    std::stringstream help_text_stringstream;
+                    help_text_stringstream <<
+                        "Ajokki " << yli::ontology::Universe::version << "\n"
+                        "\n"
+                        "arrow keys\n"
+                        "space jump\n"
+                        "enter duck\n"
+                        "F1 help mode\n"
+                        "`  enter console\n"
+                        "I  invert mouse (" << (my_universe->is_invert_mouse_in_use ? on_string : off_string) << ")\n"
+                        "F  flight mode (" << (my_universe->is_flight_mode_in_use ? on_string : off_string) << ")\n"
+                        "Ctrl      turbo\n" <<
+                        "Ctrl+Ctrl extra turbo\n" <<
+                        "for debugging:\n" <<
+                        "G  grass texture\n" <<
+                        "O  orange fur texture\n" <<
+                        "P  pink geometric tiles texture\n" <<
+                        "T  terrain species\n" <<
+                        "A  suzanne species\n";
+                    const std::string help_text_string = help_text_stringstream.str();
+                    help_text2D->change_string(help_text_string);
+                }
+                else
+                {
+                    help_text2D->change_string("");
+                }
             }
 
-            if (my_universe->testing_spherical_terrain_in_use)
+            if (spherical_coordinates_text2D != nullptr)
             {
-                std::stringstream spherical_coordinates_stringstream;
-                spherical_coordinates_stringstream << std::fixed << std::setprecision(2) <<
-                    "rho:" << my_universe->current_camera_spherical_coordinates.rho <<
-                    "theta:" << my_universe->current_camera_spherical_coordinates.theta <<
-                    "phi:" << my_universe->current_camera_spherical_coordinates.phi;
-                std::string spherical_coordinates_string = spherical_coordinates_stringstream.str();
-                spherical_coordinates_text2D->change_string(spherical_coordinates_string);
-            }
-            else
-            {
-                spherical_coordinates_text2D->change_string("");
+                if (my_universe->testing_spherical_terrain_in_use)
+                {
+                    std::stringstream spherical_coordinates_stringstream;
+                    spherical_coordinates_stringstream << std::fixed << std::setprecision(2) <<
+                        "rho:" << my_universe->current_camera_spherical_coordinates.rho <<
+                        "theta:" << my_universe->current_camera_spherical_coordinates.theta <<
+                        "phi:" << my_universe->current_camera_spherical_coordinates.phi;
+                    std::string spherical_coordinates_string = spherical_coordinates_stringstream.str();
+                    spherical_coordinates_text2D->change_string(spherical_coordinates_string);
+                }
+                else
+                {
+                    spherical_coordinates_text2D->change_string("");
+                }
             }
 
             // Render the `Universe`.
