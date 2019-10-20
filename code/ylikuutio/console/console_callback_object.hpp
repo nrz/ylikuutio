@@ -40,9 +40,17 @@ namespace yli
 
     namespace console
     {
+        class ConsoleCallbackEngine;
+
         class ConsoleCallbackObject : public yli::callback_system::CallbackObject
         {
             public:
+                // destructor.
+                ~ConsoleCallbackObject();
+
+                friend ConsoleCallbackEngine;
+
+            private:
                 // constructor.
                 ConsoleCallbackObject(InputParametersToAnyValueCallbackWithConsole console_callback,
                         yli::callback_system::CallbackEngine* parent, yli::ontology::Console* console_pointer)
@@ -54,10 +62,6 @@ namespace yli
                     this->console_pointer = console_pointer;
                 }
 
-                // destructor.
-                ~ConsoleCallbackObject();
-
-            private:
                 // execute this callback.
                 std::shared_ptr<yli::common::AnyValue> execute();
 
