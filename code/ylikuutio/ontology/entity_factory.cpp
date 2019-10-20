@@ -27,6 +27,7 @@
 #include "symbiosis.hpp"
 #include "holobiont.hpp"
 #include "vector_font.hpp"
+#include "text2D.hpp"
 #include "text3D.hpp"
 #include "font2D.hpp"
 #include "console.hpp"
@@ -116,6 +117,11 @@ namespace yli
         yli::ontology::Entity* EntityFactory::create_VectorFont(const yli::ontology::VectorFontStruct& vector_font_struct) const
         {
             return new yli::ontology::VectorFont(this->universe, vector_font_struct);
+        }
+
+        yli::ontology::Entity* EntityFactory::create_Text2D(const yli::ontology::TextStruct& text_struct) const
+        {
+            return new yli::ontology::Text2D(this->universe, text_struct);
         }
 
         yli::ontology::Entity* EntityFactory::create_Text3D(const yli::ontology::Text3DStruct& text3D_struct) const

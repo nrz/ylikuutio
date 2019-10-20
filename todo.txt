@@ -21,6 +21,9 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement `LogMaster` class.
 [ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
 [ ] Implement s7 support for programming of AI objects (robots).
+[ ] Implement skeletal animation.
+[ ] Implement transparent rendering of 3D objects.
+[ ] Implement transparent rendering of 4D objects.
 [ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
 [ ] Implement `pause` console command for pausing `Sound`s and `Playlist`s.
 [ ] Implement `next` console command for changing to the next `Sound` in a `Playlist`.

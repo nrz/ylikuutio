@@ -42,8 +42,6 @@ namespace yli
         class Text2D: public yli::ontology::Entity
         {
             public:
-                void bind_to_parent();
-
                 // This method sets pointer to this `Text2D` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Font2D`.
                 void bind_to_new_parent(yli::ontology::Font2D* const new_parent);
 
@@ -102,6 +100,8 @@ namespace yli
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
             private:
+                void bind_to_parent();
+
                 yli::ontology::Font2D* parent;
 
                 uint32_t vertexbuffer;                     // Buffer containing the vertices

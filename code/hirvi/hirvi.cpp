@@ -49,6 +49,7 @@
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
+#include "code/ylikuutio/console/console_callback_engine.hpp"
 #include "code/ylikuutio/console/console_callback_object.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
@@ -416,8 +417,8 @@ int main(const int argc, const char* const argv[])
     std::cout << "Defining action mode keypress callback engines.\n";
 
     // Callback code for `SDL_SCANCODE_GRAVE` (tilde key above Tab, usually used for console).
-    yli::callback_system::CallbackEngine enter_console_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enter_console, &enter_console_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine enter_console_callback_engine;
+    enter_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::enter_console, my_console);
 
     // Callback code for esc: exit program.
     yli::callback_system::CallbackEngine exit_program_callback_engine;
@@ -496,68 +497,68 @@ int main(const int argc, const char* const argv[])
     std::cout << "Defining console keyrelease callback engines.\n";
 
     // Callback code for left Control release.
-    yli::callback_system::CallbackEngine release_left_control_in_console_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::release_left_control_in_console, &release_left_control_in_console_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine release_left_control_in_console_callback_engine;
+    release_left_control_in_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::release_left_control_in_console, my_console);
 
     // Callback code for right Control release.
-    yli::callback_system::CallbackEngine release_right_control_in_console_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::release_right_control_in_console, &release_right_control_in_console_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine release_right_control_in_console_callback_engine;
+    release_right_control_in_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::release_right_control_in_console, my_console);
 
     // Callback code for left Alt release.
-    yli::callback_system::CallbackEngine release_left_alt_in_console_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::release_left_alt_in_console, &release_left_alt_in_console_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine release_left_alt_in_console_callback_engine;
+    release_left_alt_in_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::release_left_alt_in_console, my_console);
 
     // Callback code for right Alt release.
-    yli::callback_system::CallbackEngine release_right_alt_in_console_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::release_right_alt_in_console, &release_right_alt_in_console_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine release_right_alt_in_console_callback_engine;
+    release_right_alt_in_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::release_right_alt_in_console, my_console);
 
     // Callback code for left Shift release.
-    yli::callback_system::CallbackEngine release_left_shift_in_console_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::release_left_shift_in_console, &release_left_shift_in_console_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine release_left_shift_in_console_callback_engine;
+    release_left_shift_in_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::release_left_shift_in_console, my_console);
 
     // Callback code for right Shift release.
-    yli::callback_system::CallbackEngine release_right_shift_in_console_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::release_right_shift_in_console, &release_right_shift_in_console_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine release_right_shift_in_console_callback_engine;
+    release_right_shift_in_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::release_right_shift_in_console, my_console);
 
     // Callback code for key up release: enable move to previous input.
-    yli::callback_system::CallbackEngine enable_move_to_previous_input_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_move_to_previous_input, &enable_move_to_previous_input_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine enable_move_to_previous_input_callback_engine;
+    enable_move_to_previous_input_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::enable_move_to_previous_input, my_console);
 
     // Callback code for key down release: enable move to next input.
-    yli::callback_system::CallbackEngine enable_move_to_next_input_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_move_to_next_input, &enable_move_to_next_input_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine enable_move_to_next_input_callback_engine;
+    enable_move_to_next_input_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::enable_move_to_next_input, my_console);
 
     // Callback code for backspace release: enable backspace.
-    yli::callback_system::CallbackEngine enable_backspace_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_backspace, &enable_backspace_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine enable_backspace_callback_engine;
+    enable_backspace_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::enable_backspace, my_console);
 
     // Callback code for enter release: enable Enter key.
-    yli::callback_system::CallbackEngine enable_enter_key_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_enter_key, &enable_enter_key_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine enable_enter_key_callback_engine;
+    enable_enter_key_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::enable_enter_key, my_console);
 
     // Callback code for C release: enable Control-C.
-    yli::callback_system::CallbackEngine enable_ctrl_c_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_ctrl_c, &enable_ctrl_c_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine enable_ctrl_c_callback_engine;
+    enable_ctrl_c_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::enable_ctrl_c, my_console);
 
     // Callback code for W release: enable Control-W.
-    yli::callback_system::CallbackEngine enable_ctrl_w_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_ctrl_w, &enable_ctrl_w_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine enable_ctrl_w_callback_engine;
+    enable_ctrl_w_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::enable_ctrl_w, my_console);
 
     // Callback code for PgUp release: enable PgUp.
-    yli::callback_system::CallbackEngine enable_page_up_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_page_up, &enable_page_up_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine enable_page_up_callback_engine;
+    enable_page_up_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::enable_page_up, my_console);
 
     // Callback code for PgDn release: enable PgDn.
-    yli::callback_system::CallbackEngine enable_page_down_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_page_down, &enable_page_down_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine enable_page_down_callback_engine;
+    enable_page_down_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::enable_page_down, my_console);
 
     // Callback code for Home release: enable Home.
-    yli::callback_system::CallbackEngine enable_home_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_home, &enable_home_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine enable_home_callback_engine;
+    enable_home_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::enable_home, my_console);
 
     // Callback code for End release: enable End.
-    yli::callback_system::CallbackEngine enable_end_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enable_end, &enable_end_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine enable_end_callback_engine;
+    enable_end_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::enable_end, my_console);
 
     /*********************************************************************
      *  Callback engines for console keypresses begin here.              *
@@ -566,72 +567,72 @@ int main(const int argc, const char* const argv[])
     std::cout << "Defining console keypress callback engines.\n";
 
     // Callback code for `SDL_SCANCODE_GRAVE` (tilde key above Tab, usually used for console).
-    yli::callback_system::CallbackEngine exit_console_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::exit_console, &exit_console_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine exit_console_callback_engine;
+    exit_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::exit_console, my_console);
 
     // Callback code for left Control press.
-    yli::callback_system::CallbackEngine press_left_control_in_console_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::press_left_control_in_console, &press_left_control_in_console_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine press_left_control_in_console_callback_engine;
+    press_left_control_in_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::press_left_control_in_console, my_console);
 
     // Callback code for right Control press.
-    yli::callback_system::CallbackEngine press_right_control_in_console_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::press_right_control_in_console, &press_right_control_in_console_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine press_right_control_in_console_callback_engine;
+    press_right_control_in_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::press_right_control_in_console, my_console);
 
     // Callback code for left Alt press.
-    yli::callback_system::CallbackEngine press_left_alt_in_console_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::press_left_alt_in_console, &press_left_alt_in_console_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine press_left_alt_in_console_callback_engine;
+    press_left_alt_in_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::press_left_alt_in_console, my_console);
 
     // Callback code for right Alt press.
-    yli::callback_system::CallbackEngine press_right_alt_in_console_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::press_right_alt_in_console, &press_right_alt_in_console_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine press_right_alt_in_console_callback_engine;
+    press_right_alt_in_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::press_right_alt_in_console, my_console);
 
     // Callback code for left Shift press.
-    yli::callback_system::CallbackEngine press_left_shift_in_console_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::press_left_shift_in_console, &press_left_shift_in_console_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine press_left_shift_in_console_callback_engine;
+    press_left_shift_in_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::press_left_shift_in_console, my_console);
 
     // Callback code for right Shift press.
-    yli::callback_system::CallbackEngine press_right_shift_in_console_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::press_right_shift_in_console, &press_right_shift_in_console_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine press_right_shift_in_console_callback_engine;
+    press_right_shift_in_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::press_right_shift_in_console, my_console);
 
     // Callback code for key up: move to previous input.
-    yli::callback_system::CallbackEngine move_to_previous_input_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::move_to_previous_input, &move_to_previous_input_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine move_to_previous_input_callback_engine;
+    move_to_previous_input_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::move_to_previous_input, my_console);
 
     // Callback code for key down: move to next input.
-    yli::callback_system::CallbackEngine move_to_next_input_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::move_to_next_input, &move_to_next_input_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine move_to_next_input_callback_engine;
+    move_to_next_input_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::move_to_next_input, my_console);
 
     // Callback code for backspace: delete character left of cursor from current input in console.
-    yli::callback_system::CallbackEngine backspace_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::backspace, &backspace_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine backspace_callback_engine;
+    backspace_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::backspace, my_console);
 
     // Callback code for Enter key.
-    yli::callback_system::CallbackEngine enter_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::enter_key, &enter_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine enter_callback_engine;
+    enter_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::enter_key, my_console);
 
     // Callback code for C: Control-C.
-    yli::callback_system::CallbackEngine ctrl_c_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::ctrl_c, &ctrl_c_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine ctrl_c_callback_engine;
+    ctrl_c_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::ctrl_c, my_console);
 
     // Callback code for W: Control-W.
-    yli::callback_system::CallbackEngine ctrl_w_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::ctrl_w, &ctrl_w_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine ctrl_w_callback_engine;
+    ctrl_w_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::ctrl_w, my_console);
 
     // Callback code for PgUp.
-    yli::callback_system::CallbackEngine page_up_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::page_up, &page_up_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine page_up_callback_engine;
+    page_up_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::page_up, my_console);
 
     // Callback code for PgDn.
-    yli::callback_system::CallbackEngine page_down_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::page_down, &page_down_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine page_down_callback_engine;
+    page_down_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::page_down, my_console);
 
     // Callback code for Home.
-    yli::callback_system::CallbackEngine home_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::home, &home_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine home_callback_engine;
+    home_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::home, my_console);
 
     // Callback code for End.
-    yli::callback_system::CallbackEngine end_callback_engine;
-    new yli::console::ConsoleCallbackObject(&yli::ontology::Console::end, &end_callback_engine, my_console);
+    yli::console::ConsoleCallbackEngine end_callback_engine;
+    end_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::end, my_console);
 
     // Keyrelease callbacks for action mode.
     // Key releases are checked in the order of this struct.
@@ -764,7 +765,7 @@ int main(const int argc, const char* const argv[])
     angles_and_coordinates_text_struct.font_texture_file_format = "bmp";
     angles_and_coordinates_text_struct.horizontal_alignment = "left";
     angles_and_coordinates_text_struct.vertical_alignment = "bottom";
-    yli::ontology::Text2D* angles_and_coordinates_text2D = new yli::ontology::Text2D(my_universe, angles_and_coordinates_text_struct);
+    yli::ontology::Text2D* angles_and_coordinates_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_Text2D(angles_and_coordinates_text_struct));
 
     // Print spherical coordinates on second line from the bottom left.
     yli::ontology::TextStruct spherical_coordinates_text_struct;
@@ -777,7 +778,7 @@ int main(const int argc, const char* const argv[])
     spherical_coordinates_text_struct.font_size = my_universe->get_font_size();
     spherical_coordinates_text_struct.horizontal_alignment = "left";
     spherical_coordinates_text_struct.vertical_alignment = "bottom";
-    yli::ontology::Text2D* spherical_coordinates_text2D = new yli::ontology::Text2D(my_universe, spherical_coordinates_text_struct);
+    yli::ontology::Text2D* spherical_coordinates_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_Text2D(spherical_coordinates_text_struct));
 
     // Print time data on top left corner.
     yli::ontology::TextStruct time_text_struct;
@@ -791,7 +792,7 @@ int main(const int argc, const char* const argv[])
     time_text_struct.font_texture_file_format = "bmp";
     time_text_struct.horizontal_alignment = "left";
     time_text_struct.vertical_alignment = "top";
-    yli::ontology::Text2D* time_text2D = new yli::ontology::Text2D(my_universe, time_text_struct);
+    yli::ontology::Text2D* time_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_Text2D(time_text_struct));
 
     // Print help text.
     yli::ontology::TextStruct help_text_struct;
@@ -805,7 +806,7 @@ int main(const int argc, const char* const argv[])
     help_text_struct.font_texture_file_format = "bmp";
     help_text_struct.horizontal_alignment = "left";
     help_text_struct.vertical_alignment = "top";
-    yli::ontology::Text2D* help_text2D = new yli::ontology::Text2D(my_universe, help_text_struct);
+    yli::ontology::Text2D* help_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_Text2D(help_text_struct));
 
     // Print frame rate data on top right corner.
     yli::ontology::TextStruct frame_rate_text_struct;
@@ -819,7 +820,7 @@ int main(const int argc, const char* const argv[])
     frame_rate_text_struct.font_texture_file_format = "bmp";
     frame_rate_text_struct.horizontal_alignment = "right";
     frame_rate_text_struct.vertical_alignment = "top";
-    yli::ontology::Text2D* frame_rate_text2D = new yli::ontology::Text2D(my_universe, frame_rate_text_struct);
+    yli::ontology::Text2D* frame_rate_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_Text2D(frame_rate_text_struct));
 
     std::cout << "Setting up window size ...\n";
     app::set_window_size(my_universe->get_setting_master(), my_universe->get_window_width(), my_universe->get_window_height());
@@ -1086,63 +1087,75 @@ int main(const int argc, const char* const argv[])
             // Gravity etc. physical phenomena.
             my_universe->do_physics();
 
-            std::stringstream angles_and_coordinates_stringstream;
-            angles_and_coordinates_stringstream << std::fixed << std::setprecision(2) <<
-                my_universe->current_camera_horizontal_angle << "," <<
-                my_universe->current_camera_vertical_angle << " rad; " <<
-                RADIANS_TO_DEGREES(my_universe->current_camera_horizontal_angle) << "," <<
-                RADIANS_TO_DEGREES(my_universe->current_camera_vertical_angle) << " deg\n" <<
-                "(" <<
-                my_universe->current_camera_cartesian_coordinates.x << "," <<
-                my_universe->current_camera_cartesian_coordinates.y << "," <<
-                my_universe->current_camera_cartesian_coordinates.z << ")";
-            const std::string angles_and_coordinates_string = angles_and_coordinates_stringstream.str();
-            angles_and_coordinates_text2D->change_string(angles_and_coordinates_string);
+            if (angles_and_coordinates_text2D != nullptr)
+            {
+                std::stringstream angles_and_coordinates_stringstream;
+                angles_and_coordinates_stringstream << std::fixed << std::setprecision(2) <<
+                    my_universe->current_camera_horizontal_angle << "," <<
+                    my_universe->current_camera_vertical_angle << " rad; " <<
+                    RADIANS_TO_DEGREES(my_universe->current_camera_horizontal_angle) << "," <<
+                    RADIANS_TO_DEGREES(my_universe->current_camera_vertical_angle) << " deg\n" <<
+                    "(" <<
+                    my_universe->current_camera_cartesian_coordinates.x << "," <<
+                    my_universe->current_camera_cartesian_coordinates.y << "," <<
+                    my_universe->current_camera_cartesian_coordinates.z << ")";
+                const std::string angles_and_coordinates_string = angles_and_coordinates_stringstream.str();
+                angles_and_coordinates_text2D->change_string(angles_and_coordinates_string);
+            }
 
-            std::stringstream time_stringstream;
-            time_stringstream << std::fixed << std::setprecision(2) << yli::time::get_time() << " sec";
-            const std::string time_string = time_stringstream.str();
-            time_text2D->change_string(time_string);
+            if (time_text2D != nullptr)
+            {
+                std::stringstream time_stringstream;
+                time_stringstream << std::fixed << std::setprecision(2) << yli::time::get_time() << " sec";
+                const std::string time_string = time_stringstream.str();
+                time_text2D->change_string(time_string);
+            }
 
             const std::string on_string = "on";
             const std::string off_string = "off";
 
-            if (my_universe->in_help_mode && my_universe->can_display_help_screen)
+            if (help_text2D != nullptr)
             {
-                std::stringstream help_text_stringstream;
-                help_text_stringstream <<
-                    "Hirvi " << yli::ontology::Universe::version << "\n"
-                    "\n"
-                    "arrow keys\n"
-                    "space jump\n"
-                    "enter duck\n"
-                    "F1 help mode\n"
-                    "`  enter console\n"
-                    "I  invert mouse (" << (my_universe->is_invert_mouse_in_use ? on_string : off_string) << ")\n"
-                    "F  flight mode (" << (my_universe->is_flight_mode_in_use ? on_string : off_string) << ")\n"
-                    "Ctrl      turbo\n" <<
-                    "Ctrl+Ctrl extra turbo\n";
-                const std::string help_text_string = help_text_stringstream.str();
-                help_text2D->change_string(help_text_string);
-            }
-            else
-            {
-                help_text2D->change_string("");
+                if (my_universe->in_help_mode && my_universe->can_display_help_screen)
+                {
+                    std::stringstream help_text_stringstream;
+                    help_text_stringstream <<
+                        "Hirvi " << yli::ontology::Universe::version << "\n"
+                        "\n"
+                        "arrow keys\n"
+                        "space jump\n"
+                        "enter duck\n"
+                        "F1 help mode\n"
+                        "`  enter console\n"
+                        "I  invert mouse (" << (my_universe->is_invert_mouse_in_use ? on_string : off_string) << ")\n"
+                        "F  flight mode (" << (my_universe->is_flight_mode_in_use ? on_string : off_string) << ")\n"
+                        "Ctrl      turbo\n" <<
+                        "Ctrl+Ctrl extra turbo\n";
+                    const std::string help_text_string = help_text_stringstream.str();
+                    help_text2D->change_string(help_text_string);
+                }
+                else
+                {
+                    help_text2D->change_string("");
+                }
             }
 
-            if (my_universe->testing_spherical_terrain_in_use)
+            if (spherical_coordinates_text2D != nullptr)
             {
-                std::stringstream spherical_coordinates_stringstream;
-                spherical_coordinates_stringstream << std::fixed << std::setprecision(2) <<
-                    "rho:" << my_universe->current_camera_spherical_coordinates.rho <<
-                    "theta:" << my_universe->current_camera_spherical_coordinates.theta <<
-                    "phi:" << my_universe->current_camera_spherical_coordinates.phi;
-                std::string spherical_coordinates_string = spherical_coordinates_stringstream.str();
-                spherical_coordinates_text2D->change_string(spherical_coordinates_string);
-            }
-            else
-            {
-                spherical_coordinates_text2D->change_string("");
+                if (my_universe->testing_spherical_terrain_in_use)
+                {
+                    std::stringstream spherical_coordinates_stringstream;
+                    spherical_coordinates_stringstream << std::fixed << std::setprecision(2) <<
+                        "rho:" << my_universe->current_camera_spherical_coordinates.rho <<
+                        "theta:" << my_universe->current_camera_spherical_coordinates.theta <<
+                        "phi:" << my_universe->current_camera_spherical_coordinates.phi;
+                    std::string spherical_coordinates_string = spherical_coordinates_stringstream.str();
+                    spherical_coordinates_text2D->change_string(spherical_coordinates_string);
+                }
+                else
+                {
+                    spherical_coordinates_text2D->change_string("");
+                }
             }
 
             // Render the `Universe`.
