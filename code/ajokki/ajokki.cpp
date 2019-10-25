@@ -970,7 +970,7 @@ int main(const int argc, const char* const argv[])
             {
                 // If last `std::stringstream` here was more than 1 sec ago,
                 // std::stringstream` and reset number of frames.
-                if (number_of_frames > 0)
+                if (frame_rate_text2D != nullptr && number_of_frames > 0)
                 {
                     std::stringstream ms_frame_text_stringstream;
                     ms_frame_text_stringstream << std::fixed << std::setprecision(2) << 1000.0f / static_cast<double>(number_of_frames) << " ms/frame; " <<
