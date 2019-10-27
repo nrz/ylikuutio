@@ -681,18 +681,24 @@ namespace yli
                 yli::ontology::Camera* const camera = dynamic_cast<yli::ontology::Camera*>(entity);
                 yli::ontology::Console* const console = dynamic_cast<yli::ontology::Console*>(entity);
 
-                if (world == nullptr && scene == nullptr && camera == nullptr && console == nullptr)
+                uint32_t number_of_entity_types = 0;
+                number_of_entity_types += world != nullptr ? 1 : 0;
+                number_of_entity_types += scene != nullptr ? 1 : 0;
+                number_of_entity_types += camera != nullptr ? 1 : 0;
+                number_of_entity_types += console != nullptr ? 1 : 0;
+
+                if (number_of_entity_types != 1)
                 {
                     // The named `Entity` is neither a `World`, a `Scene`, a `Camera`, nor a `Console`.
                     return nullptr;
                 }
 
-                if (world != nullptr && scene == nullptr && camera == nullptr && console == nullptr)
+                if (world != nullptr)
                 {
                     // The named `Entity` is a `World`.
                     universe->set_active_world(world);
                 }
-                else if (scene != nullptr && world == nullptr && camera == nullptr && console == nullptr)
+                else if (scene != nullptr)
                 {
                     // The named `Entity` is a `Scene`.
                     yli::ontology::World* const world_parent_of_scene = scene->get_world_parent();
@@ -703,12 +709,12 @@ namespace yli
                         universe->set_active_scene(scene);
                     }
                 }
-                else if (camera != nullptr && world == nullptr && scene == nullptr && console == nullptr)
+                else if (camera != nullptr)
                 {
                     // The named `Entity` is a `Camera`.
                     universe->set_active_camera(camera);
                 }
-                else if (console != nullptr && world == nullptr && scene == nullptr && camera == nullptr)
+                else if (console != nullptr)
                 {
                     // The named `Entity` is a `Console`.
                     if (universe->get_active_console() != nullptr)
