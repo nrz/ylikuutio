@@ -23,7 +23,6 @@
 #include "universe_struct.hpp"
 #include "camera_struct.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
-#include "console.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/scheme/scheme_master.hpp"
@@ -296,6 +295,7 @@ namespace yli
         class Species;
         class Camera;
         class Font2D;
+        class Console;
         class AnyValueEntity;
         class AnyStructEntity;
 
