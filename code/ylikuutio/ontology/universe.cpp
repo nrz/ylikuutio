@@ -637,7 +637,7 @@ namespace yli
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
-            // This function can be used to activate a `World` or a `Scene`.
+            // This function can be used to activate a `World`, a `Scene`, a `Camera`, or a `Console`.
             // A `World` can be activated always, assuming that the `universe_entity` is a `Universe`.
             // A `Scene` can be activated only if the `Scene` has a `World` parent that can be activated.
 
@@ -679,19 +679,20 @@ namespace yli
                 yli::ontology::World* const world = dynamic_cast<yli::ontology::World*>(entity);
                 yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(entity);
                 yli::ontology::Camera* const camera = dynamic_cast<yli::ontology::Camera*>(entity);
+                yli::ontology::Console* const console = dynamic_cast<yli::ontology::Console*>(entity);
 
-                if (world == nullptr && scene == nullptr && camera == nullptr)
+                if (world == nullptr && scene == nullptr && camera == nullptr && console == nullptr)
                 {
-                    // The named `Entity` is neither a `World`, a `Scene`, nor a `Camera`.
+                    // The named `Entity` is neither a `World`, a `Scene`, a `Camera`, nor a `Console`.
                     return nullptr;
                 }
 
-                if (world != nullptr && scene == nullptr && camera == nullptr)
+                if (world != nullptr && scene == nullptr && camera == nullptr && console == nullptr)
                 {
                     // The named `Entity` is a `World`.
                     universe->set_active_world(world);
                 }
-                else if (scene != nullptr && world == nullptr && camera == nullptr)
+                else if (scene != nullptr && world == nullptr && camera == nullptr && console == nullptr)
                 {
                     // The named `Entity` is a `Scene`.
                     yli::ontology::World* const world_parent_of_scene = scene->get_world_parent();
@@ -702,10 +703,21 @@ namespace yli
                         universe->set_active_scene(scene);
                     }
                 }
-                else if (camera != nullptr && world == nullptr && scene == nullptr)
+                else if (camera != nullptr && world == nullptr && scene == nullptr && console == nullptr)
                 {
                     // The named `Entity` is a `Camera`.
                     universe->set_active_camera(camera);
+                }
+                else if (console != nullptr && world == nullptr && scene == nullptr && camera == nullptr)
+                {
+                    // The named `Entity` is a `Console`.
+                    if (universe->get_active_console() != nullptr)
+                    {
+                        universe->get_active_console()->exit_console();
+                    }
+
+                    universe->set_active_console(console);
+                    console->enter_console();
                 }
             }
             return nullptr;
