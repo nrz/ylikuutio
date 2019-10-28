@@ -18,8 +18,6 @@
 #ifndef __UNIVERSE_STRUCT_HPP_INCLUDED
 #define __UNIVERSE_STRUCT_HPP_INCLUDED
 
-#include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
-
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <stdint.h> // uint32_t etc.
