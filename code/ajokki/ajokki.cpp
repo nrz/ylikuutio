@@ -140,8 +140,6 @@ int main(const int argc, const char* const argv[])
         return 1;
     }
 
-    yli::input::InputMethod input_method_in_use = yli::input::InputMethod::KEYBOARD;
-
     // keypress callbacks.
     std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keypress_callback_engines;
     std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_continuous_keypress_callback_engines;
@@ -274,7 +272,7 @@ int main(const int argc, const char* const argv[])
     // Cull triangles whose normal is not towards the camera.
     yli::opengl::cull_triangles();
 
-    // Create the `Console`.
+    // Create the main `Console`.
     yli::ontology::ConsoleStruct console_struct;
     console_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
     console_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &current_keyrelease_callback_engine_vector_pointer;
@@ -289,10 +287,34 @@ int main(const int argc, const char* const argv[])
         return -1;
     }
 
+    my_console->set_name("my_console");
     my_universe->set_active_console(my_console);
 
     std::cout << "Setting up console ...\n";
     app::set_console(my_universe->get_setting_master(), 15, 0, 0, 39);
+
+    // Create the 'mini' `Console`.
+    yli::ontology::ConsoleStruct mini_console_struct;
+    console_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
+    console_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &current_keyrelease_callback_engine_vector_pointer;
+    std::cout << "Creating yli::ontology::Entity* mini_console_entity ...\n";
+    yli::ontology::Entity* const mini_console_entity = entity_factory->create_Console(console_struct);
+    std::cout << "Creating yli::ontology::Console* mini_console ...\n";
+    yli::ontology::Console* const mini_console = dynamic_cast<yli::ontology::Console*>(mini_console_entity);
+
+    if (mini_console == nullptr)
+    {
+        cleanup_callback_engine.execute();
+        return -1;
+    }
+
+    mini_console->set_name("mini_console");
+    my_universe->set_active_console(mini_console);
+
+    std::cout << "Setting up console ...\n";
+    app::set_console(my_universe->get_setting_master(), 15, 0, 0, 39);
+
+    my_universe->set_active_console(my_console);
 
     // Create the `World`.
 
@@ -856,6 +878,10 @@ int main(const int argc, const char* const argv[])
     my_console->add_command_callback("clear", &yli::ontology::Console::clear);
     my_console->add_command_callback("screenshot", &yli::ontology::Universe::screenshot);
 
+    // mini-console callbacks.
+    mini_console->add_command_callback("activate", &yli::ontology::Universe::activate);
+    mini_console->add_command_callback("info", &yli::ontology::Universe::info);
+
     // For speed computation.
     double last_time_to_display_FPS = yli::time::get_time();
     double last_time_for_display_sync = yli::time::get_time();
@@ -970,7 +996,7 @@ int main(const int argc, const char* const argv[])
             {
                 // If last `std::stringstream` here was more than 1 sec ago,
                 // std::stringstream` and reset number of frames.
-                if (number_of_frames > 0)
+                if (frame_rate_text2D != nullptr && number_of_frames > 0)
                 {
                     std::stringstream ms_frame_text_stringstream;
                     ms_frame_text_stringstream << std::fixed << std::setprecision(2) << 1000.0f / static_cast<double>(number_of_frames) << " ms/frame; " <<
@@ -1151,14 +1177,14 @@ int main(const int argc, const char* const argv[])
                 {
                     bool is_pressed = false;
 
-                    if (input_method_in_use == yli::input::InputMethod::KEYBOARD)
+                    if (my_universe->get_input_method() == yli::input::InputMethod::KEYBOARD)
                     {
                         if (current_key_states[action_mode_continuous_keypress_callback_engines.at(i).keycode] == 1) // 1 = pressed, 0 = not pressed.
                         {
                             is_pressed = true;
                         }
                     }
-                    else if (input_method_in_use == yli::input::InputMethod::INPUT_FILE)
+                    else if (my_universe->get_input_method() == yli::input::InputMethod::INPUT_FILE)
                     {
                         // TODO: implement optionally loading keyreleases from a file (do not execute `SDL_GetKeyboardState` in that case).
                         if (false)

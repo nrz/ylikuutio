@@ -18,7 +18,7 @@
 #ifndef __UNIVERSE_STRUCT_HPP_INCLUDED
 #define __UNIVERSE_STRUCT_HPP_INCLUDED
 
-#include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
+#include "code/ylikuutio/input/input.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -48,7 +48,8 @@ namespace yli
                 gravity(9.81f / 60.0f), // default Earth gravity (9.81 m/s^2).
                 znear(1.0f),
                 zfar(5000.0f),          // visibility: from 1 to 5000 units.
-                is_headless(false)
+                is_headless(false),
+                input_method(yli::input::InputMethod::KEYBOARD)
             {
                 // constructor.
             }
@@ -69,6 +70,7 @@ namespace yli
             float znear;
             float zfar;
             bool is_headless;
+            yli::input::InputMethod input_method;
         };
     }
 }

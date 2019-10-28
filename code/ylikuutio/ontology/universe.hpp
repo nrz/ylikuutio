@@ -23,7 +23,6 @@
 #include "universe_struct.hpp"
 #include "camera_struct.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
-#include "console.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/scheme/scheme_master.hpp"
@@ -296,6 +295,7 @@ namespace yli
         class Species;
         class Camera;
         class Font2D;
+        class Console;
         class AnyValueEntity;
         class AnyStructEntity;
 
@@ -359,6 +359,7 @@ namespace yli
                     }
 
                     this->is_headless  = universe_struct.is_headless;
+                    this->input_method = universe_struct.input_method;
 
                     // mouse coordinates.
                     this->mouse_x      = this->window_width / 2;
@@ -501,6 +502,8 @@ namespace yli
                 void set_active_console(yli::ontology::Console* const console);
 
                 yli::ontology::Console* get_active_console() const;
+
+                yli::input::InputMethod get_input_method() const;
 
                 bool get_is_headless() const;
 
@@ -741,6 +744,8 @@ namespace yli
                 yli::ontology::World* active_world;
                 yli::ontology::Font2D* active_font2D;
                 yli::ontology::Console* active_console;
+
+                yli::input::InputMethod input_method;
 
                 std::shared_ptr<yli::scheme::SchemeMaster> scheme_master; // pointer to `SchemeMaster`.
 

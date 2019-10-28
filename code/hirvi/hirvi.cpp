@@ -133,8 +133,6 @@ int main(const int argc, const char* const argv[])
         return 1;
     }
 
-    yli::input::InputMethod input_method_in_use = yli::input::InputMethod::KEYBOARD;
-
     // keypress callbacks.
     std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_keypress_callback_engines;
     std::vector<yli::callback_system::KeyAndCallbackStruct> action_mode_continuous_keypress_callback_engines;
@@ -853,7 +851,7 @@ int main(const int argc, const char* const argv[])
             {
                 // If last `std::stringstream` here was more than 1 sec ago,
                 // std::stringstream` and reset number of frames.
-                if (number_of_frames > 0)
+                if (frame_rate_text2D != nullptr && number_of_frames > 0)
                 {
                     std::stringstream ms_frame_text_stringstream;
                     ms_frame_text_stringstream << std::fixed << std::setprecision(2) << 1000.0f / static_cast<double>(number_of_frames) << " ms/frame; " <<
@@ -1034,14 +1032,14 @@ int main(const int argc, const char* const argv[])
                 {
                     bool is_pressed = false;
 
-                    if (input_method_in_use == yli::input::InputMethod::KEYBOARD)
+                    if (my_universe->get_input_method() == yli::input::InputMethod::KEYBOARD)
                     {
                         if (current_key_states[action_mode_continuous_keypress_callback_engines.at(i).keycode] == 1) // 1 = pressed, 0 = not pressed.
                         {
                             is_pressed = true;
                         }
                     }
-                    else if (input_method_in_use == yli::input::InputMethod::INPUT_FILE)
+                    else if (my_universe->get_input_method() == yli::input::InputMethod::INPUT_FILE)
                     {
                         // TODO: implement optionally loading keyreleases from a file (do not execute `SDL_GetKeyboardState` in that case).
                         if (false)
