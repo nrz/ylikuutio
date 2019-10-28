@@ -370,6 +370,11 @@ namespace yli
             return this->active_console;
         }
 
+        yli::input::InputMethod Universe::get_input_method() const
+        {
+            return this->input_method;
+        }
+
         bool Universe::get_is_headless() const
         {
             return this->is_headless;
