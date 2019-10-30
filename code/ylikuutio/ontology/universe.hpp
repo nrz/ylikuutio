@@ -23,6 +23,8 @@
 #include "universe_struct.hpp"
 #include "camera_struct.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
+#include "code/ylikuutio/input/input.hpp"
+#include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/scheme/scheme_master.hpp"
@@ -414,6 +416,7 @@ namespace yli
                     this->zfar        = universe_struct.zfar;
 
                     this->testing_spherical_terrain_in_use = false;
+                    this->in_console                       = false;
                     this->in_help_mode                     = true;
                     this->can_toggle_help_mode             = false;
                     this->can_display_help_screen          = true;
@@ -460,6 +463,8 @@ namespace yli
                     this->scheme_master = std::make_shared<yli::scheme::SchemeMaster>();
 
                     this->audio_master = std::make_shared<yli::audio::AudioMaster>(this);
+
+                    this->input_master = std::make_shared<yli::input::InputMaster>(this);
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
@@ -510,6 +515,7 @@ namespace yli
                 std::string eval_string(const std::string& my_string) const;
 
                 yli::audio::AudioMaster* get_audio_master() const;
+                yli::input::InputMaster* get_input_master() const;
 
                 yli::ontology::Font2D* get_active_font2D() const;
                 void set_active_font2D(yli::ontology::Font2D* const font2D);
@@ -698,6 +704,9 @@ namespace yli
                 // Variables related to the current `Scene`.
                 bool testing_spherical_terrain_in_use;
 
+                // Variables related to `Console`s.
+                bool in_console;
+
                 // Variables related to help mode.
                 bool in_help_mode;
                 bool can_toggle_help_mode;
@@ -750,6 +759,8 @@ namespace yli
                 std::shared_ptr<yli::scheme::SchemeMaster> scheme_master; // pointer to `SchemeMaster`.
 
                 std::shared_ptr<yli::audio::AudioMaster> audio_master;    // pointer to `AudioMaster`.
+
+                std::shared_ptr<yli::input::InputMaster> input_master;    // pointer to `InputMaster`.
 
                 // Named entities are stored here so that they can be recalled, if needed.
                 std::unordered_map<std::string, yli::ontology::Entity*> entity_map;

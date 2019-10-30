@@ -16,13 +16,12 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "console.hpp"
-#include "console_struct.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
 #include "font2D.hpp"
 #include "universe.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
-#include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
+#include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 
@@ -92,10 +91,9 @@ namespace yli
             }
         }
 
-        void Console::set_my_keypress_callback_engine_vector_pointer(std::vector<yli::callback_system::KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer)
+        void Console::set_input_mode(yli::input::InputMode* const input_mode)
         {
-            // This function is used to define what different keypresses actually do in the console.
-            this->my_keypress_callback_engine_vector_pointer = my_keypress_callback_engine_vector_pointer;
+            this->input_mode = input_mode;
         }
 
         void Console::add_command_callback(const std::string& command, ConsoleCommandCallback callback)
@@ -150,12 +148,6 @@ namespace yli
                 // Upper limit for the the number of columns is window width divided by text size.
                 this->n_columns = this->universe->get_window_width() / this->universe->get_text_size();
             }
-        }
-
-        void Console::set_my_keyrelease_callback_engine_vector_pointer(std::vector<yli::callback_system::KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer)
-        {
-            // This function is used to define what different keyreleases actually do in the console.
-            this->my_keyrelease_callback_engine_vector_pointer = my_keyrelease_callback_engine_vector_pointer;
         }
 
         void Console::print_text(const std::string& text)
@@ -326,29 +318,15 @@ namespace yli
 
         bool Console::enter_console()
         {
-            if (!this->in_console &&
-                    this->my_keypress_callback_engine_vector_pointer != nullptr &&
-                    this->my_keyrelease_callback_engine_vector_pointer != nullptr &&
-                    this->current_keypress_callback_engine_vector_pointer_pointer != nullptr &&
-                    this->current_keyrelease_callback_engine_vector_pointer_pointer != nullptr)
+            if (this->parent != nullptr &&
+                    this->parent->get_active_console() == this &&
+                    !this->in_console &&
+                    this->input_mode != nullptr)
             {
-                // Store previous keypress callback engine vector pointer.
-                this->previous_keypress_callback_engine_vector_pointer =
-                    *this->current_keypress_callback_engine_vector_pointer_pointer;
-
-                // Set new keypress callback engine vector pointer.
-                *this->current_keypress_callback_engine_vector_pointer_pointer =
-                    this->my_keypress_callback_engine_vector_pointer;
-
-                // Store previous keyrelease callback engine vector pointer.
-                this->previous_keyrelease_callback_engine_vector_pointer =
-                    *this->current_keyrelease_callback_engine_vector_pointer_pointer;
-
-                // Set new keyrelease callback engine vector pointer.
-                *this->current_keyrelease_callback_engine_vector_pointer_pointer =
-                    this->my_keyrelease_callback_engine_vector_pointer;
+                this->input_mode->activate();
 
                 // Mark that we're in console.
+                this->parent->in_console = true;
                 this->in_console = true;
                 this->in_historical_input = false;
                 return true;
@@ -362,19 +340,14 @@ namespace yli
         {
             if (this->in_console)
             {
-                // Restore previous keypress callback engine vector pointer.
-                if (this->current_keypress_callback_engine_vector_pointer_pointer != nullptr)
+                // Restore previous input mode.
+                if (this->input_mode != nullptr)
                 {
-                    *this->current_keypress_callback_engine_vector_pointer_pointer = this->previous_keypress_callback_engine_vector_pointer;
-                }
-
-                // Restore previous keyrelease callback engine vector pointer.
-                if (this->current_keyrelease_callback_engine_vector_pointer_pointer != nullptr)
-                {
-                    *this->current_keyrelease_callback_engine_vector_pointer_pointer = this->previous_keyrelease_callback_engine_vector_pointer;
+                    this->input_mode->deactivate();
                 }
 
                 // Mark that we have exited the console.
+                this->parent->in_console = false;
                 this->in_console = false;
 
                 return true;

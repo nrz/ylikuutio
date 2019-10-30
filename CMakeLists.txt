@@ -368,7 +368,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/callback_system/callback_parameter.cpp
     code/ylikuutio/callback_system/callback_parameter.hpp
     code/ylikuutio/callback_system/input_parameters_to_any_value_callback.hpp
-    code/ylikuutio/callback_system/key_and_callback_struct.hpp
 
     # command_line, in alphabetical order
     code/ylikuutio/command_line/command_line_master.cpp
@@ -441,6 +440,10 @@ add_library(ylikuutio STATIC
     # input, in alphabetical order
     code/ylikuutio/input/input.cpp
     code/ylikuutio/input/input.hpp
+    code/ylikuutio/input/input_master.cpp
+    code/ylikuutio/input/input_master.hpp
+    code/ylikuutio/input/input_mode.cpp
+    code/ylikuutio/input/input_mode.hpp
 
     # interpolation, in alphabetical order
     code/ylikuutio/interpolation/bilinear_interpolation2D.hpp
@@ -521,7 +524,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/console.cpp
     code/ylikuutio/ontology/console.hpp
     code/ylikuutio/ontology/console_callbacks.cpp
-    code/ylikuutio/ontology/console_struct.hpp
     code/ylikuutio/ontology/creature.cpp
     code/ylikuutio/ontology/creature.hpp
     code/ylikuutio/ontology/get_content_callback.hpp
