@@ -453,8 +453,12 @@ int main(const int argc, const char* const argv[])
     std::cout << "Defining action mode keypress callback engines.\n";
 
     // Callback code for `SDL_SCANCODE_GRAVE` (tilde key above Tab, usually used for console).
-    yli::console::ConsoleCallbackEngine enter_console_callback_engine;
-    enter_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::enter_console, my_console);
+    yli::console::ConsoleCallbackEngine enter_my_console_callback_engine;
+    enter_my_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::enter_console, my_console);
+
+    // Callback code for `SDL_SCANCODE_1` (right of `SDL_SCANCODE_GRAVE`).
+    yli::console::ConsoleCallbackEngine enter_mini_console_callback_engine;
+    enter_mini_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::enter_console, mini_console);
 
     // Callback code for esc: exit program.
     yli::callback_system::CallbackEngine exit_program_callback_engine;
@@ -897,7 +901,8 @@ int main(const int argc, const char* const argv[])
 
     // Keypress callbacks for action mode.
     // Keypresses are checked in the order of this struct.
-    action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_GRAVE, &enter_console_callback_engine);
+    action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_GRAVE, &enter_my_console_callback_engine);
+    action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_1, &enter_mini_console_callback_engine);
     action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_ESCAPE, &exit_program_callback_engine);
     action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_LCTRL, &first_turbo_callback_engine);
     action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_RCTRL, &second_turbo_callback_engine);
