@@ -50,7 +50,6 @@
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
-#include "code/ylikuutio/console/console_command_callback.hpp"
 #include "code/ylikuutio/console/console_callback_engine.hpp"
 #include "code/ylikuutio/console/console_callback_object.hpp"
 #include "code/ylikuutio/input/input.hpp"
