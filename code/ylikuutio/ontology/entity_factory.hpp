@@ -27,7 +27,6 @@
 #include "vector_font_struct.hpp"
 #include "text_struct.hpp"
 #include "text3D_struct.hpp"
-#include "console_struct.hpp"
 #include "camera_struct.hpp"
 #include "compute_task_struct.hpp"
 
@@ -84,7 +83,7 @@ namespace yli
                         const std::size_t screen_height,
                         const std::string& texture_filename,
                         const std::string& font_texture_file_format) const;
-                yli::ontology::Entity* create_Console(const yli::ontology::ConsoleStruct& console_struct) const;
+                yli::ontology::Entity* create_Console() const;
                 yli::ontology::Entity* create_Camera(const yli::ontology::CameraStruct& camera_struct) const;
                 yli::ontology::Entity* create_ComputeTask(const yli::ontology::ComputeTaskStruct& compute_task_struct) const;
                 yli::ontology::Entity* create_AnyValueEntity(const std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr) const;

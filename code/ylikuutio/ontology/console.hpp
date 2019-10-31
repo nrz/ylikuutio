@@ -19,9 +19,7 @@
 #define __CONSOLE_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "console_struct.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
-#include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 #include "SDL.h"
@@ -75,6 +73,11 @@ namespace yli
         class AnyValue;
     }
 
+    namespace input
+    {
+        class InputMode;
+    }
+
     namespace map
     {
         template <class T1>
@@ -89,7 +92,7 @@ namespace yli
         {
             public:
                 // constructor.
-                Console(yli::ontology::Universe* const universe, const yli::ontology::ConsoleStruct& console_struct)
+                Console(yli::ontology::Universe* const universe)
                     : Entity(universe)
                 {
                     this->parent = universe;
@@ -119,23 +122,11 @@ namespace yli
                     this->is_right_alt_pressed = false;
                     this->is_left_shift_pressed = false;
                     this->is_right_shift_pressed = false;
-                    this->previous_keypress_callback_engine_vector_pointer = nullptr;
-                    this->my_keypress_callback_engine_vector_pointer = nullptr;
-                    this->previous_keyrelease_callback_engine_vector_pointer = nullptr;
-                    this->my_keyrelease_callback_engine_vector_pointer = nullptr;
 
                     // Get `childID` from `Universe` and set pointer to this `Console`.
                     this->bind_to_parent();
 
-                    std::cout << "Defining pointers in Console::Console\n";
-
-                    // This is a pointer to `std::vector<yli::callback_system::KeyAndCallbackStruct>*` that controls keypress callbacks outside console.
-                    this->current_keypress_callback_engine_vector_pointer_pointer = console_struct.current_keypress_callback_engine_vector_pointer_pointer;
-                    std::cout << "1st pointer defined in Console::Console\n";
-
-                    // This is a pointer to `std::vector<yli::callback_system::KeyAndCallbackStruct>*` that controls keyrelease callbacks outside console.
-                    this->current_keyrelease_callback_engine_vector_pointer_pointer = console_struct.current_keyrelease_callback_engine_vector_pointer_pointer;
-                    std::cout << "2nd pointer defined in Console::Console\n";
+                    this->input_mode = nullptr;
 
                     // Initialize `console_top_y` to 9.
                     // `console_top_y` should be set by `activate_console_top_y` anyway.
@@ -187,8 +178,7 @@ namespace yli
                 void adjust_n_columns();
                 void adjust_n_rows();
 
-                void set_my_keypress_callback_engine_vector_pointer(std::vector<yli::callback_system::KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer);
-                void set_my_keyrelease_callback_engine_vector_pointer(std::vector<yli::callback_system::KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer);
+                void set_input_mode(yli::input::InputMode* const input_mode);
                 void add_command_callback(const std::string& command, ConsoleCommandCallback callback);
                 void set_console_top_y(const uint32_t console_top_y);
                 void set_console_bottom_y(const uint32_t console_bottom_y);
@@ -477,15 +467,7 @@ namespace yli
                 std::size_t historical_input_i;
                 std::list<char> temp_input;    // This is used for temporary storage of new input while modifying historical inputs.
 
-                // These are related to keypress callbacks.
-                std::vector<yli::callback_system::KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer;
-                std::vector<yli::callback_system::KeyAndCallbackStruct>* previous_keypress_callback_engine_vector_pointer;
-                std::vector<yli::callback_system::KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer;
-
-                // These are related to keyrelease callbacks.
-                std::vector<yli::callback_system::KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
-                std::vector<yli::callback_system::KeyAndCallbackStruct>* previous_keyrelease_callback_engine_vector_pointer;
-                std::vector<yli::callback_system::KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer;
+                yli::input::InputMode* input_mode;
 
                 // `std::unordered_map` contains console command callbacks.
                 std::unordered_map<std::string, ConsoleCommandCallback> command_callback_map;

@@ -90,6 +90,11 @@ namespace yli
         class Setting;
     }
 
+    namespace input
+    {
+        class InputMaster;
+    }
+
     namespace ontology
     {
         class Species;
@@ -1187,6 +1192,16 @@ namespace yli
             }
 
             return this->audio_master.get();
+        }
+
+        yli::input::InputMaster* Universe::get_input_master() const
+        {
+            if (this->input_master == nullptr)
+            {
+                return nullptr;
+            }
+
+            return this->input_master.get();
         }
 
         yli::ontology::Font2D* Universe::get_active_font2D() const
