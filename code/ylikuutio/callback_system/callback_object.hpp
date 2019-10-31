@@ -90,10 +90,10 @@ namespace yli
                 InputParametersToAnyValueCallback callback;
 
                 // constructor.
-                CallbackObject(yli::callback_system::CallbackEngine* parent);
+                CallbackObject(yli::callback_system::CallbackEngine* const parent);
 
                 // constructor.
-                CallbackObject(const InputParametersToAnyValueCallback callback, yli::callback_system::CallbackEngine* parent);
+                CallbackObject(const InputParametersToAnyValueCallback callback, yli::callback_system::CallbackEngine* const parent);
 
             private:
                 // A hash map used to store variables.

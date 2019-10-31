@@ -123,7 +123,7 @@ namespace yli
             this->callback = callback;
         }
 
-        CallbackObject::CallbackObject(yli::callback_system::CallbackEngine* parent)
+        CallbackObject::CallbackObject(yli::callback_system::CallbackEngine* const parent)
         {
             // constructor.
             this->childID = -1;
@@ -136,7 +136,7 @@ namespace yli
             this->bind_to_parent();
         }
 
-        CallbackObject::CallbackObject(const InputParametersToAnyValueCallback callback, yli::callback_system::CallbackEngine* parent)
+        CallbackObject::CallbackObject(const InputParametersToAnyValueCallback callback, yli::callback_system::CallbackEngine* const parent)
         {
             // constructor.
             this->childID = -1;
