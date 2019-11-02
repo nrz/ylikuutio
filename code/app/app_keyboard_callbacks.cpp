@@ -72,7 +72,7 @@ namespace app
         // variable in question from the `Universe`, otherwise return the location or orientation
         // variable from the `Scene`'s own member variable.
 
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -138,7 +138,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -169,7 +169,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -200,7 +200,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -231,7 +231,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -262,7 +262,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -306,7 +306,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -337,7 +337,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -368,7 +368,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -399,7 +399,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -430,7 +430,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -461,7 +461,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -492,7 +492,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -523,7 +523,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -554,7 +554,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -589,7 +589,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -625,7 +625,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -660,7 +660,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -682,7 +682,7 @@ namespace app
             return nullptr;
         }
 
-        const std::shared_ptr<yli::common::AnyValue> any_value_entity_string = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(1));
+        const std::shared_ptr<yli::common::AnyValue> any_value_entity_string = callback_object->get_arg(1);
 
         if (any_value_entity_string == nullptr)
         {
@@ -722,7 +722,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -744,7 +744,7 @@ namespace app
             return nullptr;
         }
 
-        std::shared_ptr<yli::common::AnyValue> any_value_entity_string = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(1));
+        std::shared_ptr<yli::common::AnyValue> any_value_entity_string = callback_object->get_arg(1);
 
         if (any_value_entity_string == nullptr)
         {
@@ -790,7 +790,7 @@ namespace app
             return nullptr;
         }
 
-        std::shared_ptr<yli::common::AnyValue> any_value_material_string = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(2));
+        std::shared_ptr<yli::common::AnyValue> any_value_material_string = callback_object->get_arg(2);
 
         if (any_value_material_string == nullptr)
         {
@@ -842,7 +842,7 @@ namespace app
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
 
         if (any_value_universe == nullptr)
         {
@@ -864,7 +864,7 @@ namespace app
             return nullptr;
         }
 
-        std::shared_ptr<yli::common::AnyValue> any_value_entity_string = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(1));
+        std::shared_ptr<yli::common::AnyValue> any_value_entity_string = callback_object->get_arg(1);
 
         if (any_value_entity_string == nullptr)
         {
@@ -910,7 +910,7 @@ namespace app
             return nullptr;
         }
 
-        std::shared_ptr<yli::common::AnyValue> any_value_species_string = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(2));
+        std::shared_ptr<yli::common::AnyValue> any_value_species_string = callback_object->get_arg(2);
 
         if (any_value_species_string == nullptr)
         {
