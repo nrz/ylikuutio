@@ -45,14 +45,20 @@
 // `yli::callback_system::CallbackObject* callback_object`or
 // `std::vector<yli::callback_system::CallbackParameter*>& input parameters`.
 //
-// To access named input variables:
-// `yli::common::AnyValue* some_any_value = callback_object->get_any_value("foo");`
+// To access a name input variable:
+// `std::shared_ptr<yli::common::AnyValue> some_any_value = callback_object->get_any_value("foo");`
 // where `"foo"` is the variable name.
 //
-// To access input variables without name (this works for named input variables too):
-// `yli::common::AnyValue* some_any_value = input_parameters.at(foo)->get_any_value();`
-// where `foo` is the zero-based index of the variable. First `CallbackParameter` of
-// a `CallbackObject` gets index 0, second `CallbackParameter` gets index 1, etc.
+// Using a numeric index is more efficient and should be used
+// in cases where the input variable order is known beforehand.
+// However, the difference may be small.
+//
+// To access an input variable using a numeric index (this works for named input variables too):
+// `std::shared_ptr<yli::common::AnyValue> some_any_value = callback_object->get_arg(0);`
+//
+// `get_arg` takes the zero-based index of the variable as function parameter.
+// First `CallbackParameter` of a `CallbackObject` gets index 0,
+// second `CallbackParameter` gets index 1, etc.
 
 namespace app
 {
