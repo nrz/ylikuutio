@@ -682,7 +682,7 @@ namespace app
             return nullptr;
         }
 
-        std::shared_ptr<yli::common::AnyValue> any_value_entity_string = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(1));
+        const std::shared_ptr<yli::common::AnyValue> any_value_entity_string = std::make_shared<yli::common::AnyValue>(*callback_object->get_arg(1));
 
         if (any_value_entity_string == nullptr)
         {
