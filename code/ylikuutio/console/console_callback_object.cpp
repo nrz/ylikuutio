@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "console_callback_object.hpp"
-#include "code/ylikuutio/callback_system/callback_parameter.hpp"
+#include "code/ylikuutio/callback/callback_parameter.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t

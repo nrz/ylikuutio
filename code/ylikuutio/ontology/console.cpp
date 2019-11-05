@@ -20,7 +20,7 @@
 #include "font2D.hpp"
 #include "universe.hpp"
 #include "text_struct.hpp"
-#include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
+#include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"

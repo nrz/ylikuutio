@@ -17,9 +17,9 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/callback_system/callback_engine.hpp"
-#include "code/ylikuutio/callback_system/callback_object.hpp"
-#include "code/ylikuutio/callback_system/callback_parameter.hpp"
+#include "code/ylikuutio/callback/callback_engine.hpp"
+#include "code/ylikuutio/callback/callback_object.hpp"
+#include "code/ylikuutio/callback/callback_parameter.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -30,7 +30,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-std::shared_ptr<yli::common::AnyValue> square(yli::callback_system::CallbackEngine*, yli::callback_system::CallbackObject*, std::vector<yli::callback_system::CallbackParameter*>& input_parameters)
+std::shared_ptr<yli::common::AnyValue> square(yli::callback::CallbackEngine*, yli::callback::CallbackObject*, std::vector<yli::callback::CallbackParameter*>& input_parameters)
 {
     if (input_parameters.size() != 1)
     {
@@ -71,9 +71,9 @@ std::shared_ptr<yli::common::AnyValue> square(yli::callback_system::CallbackEngi
     return std::make_shared<yli::common::AnyValue>();
 }
 
-std::shared_ptr<yli::common::AnyValue> square_last(yli::callback_system::CallbackEngine* callback_engine,
-        yli::callback_system::CallbackObject*,
-        std::vector<yli::callback_system::CallbackParameter*>& input_parameters)
+std::shared_ptr<yli::common::AnyValue> square_last(yli::callback::CallbackEngine* callback_engine,
+        yli::callback::CallbackObject*,
+        std::vector<yli::callback::CallbackParameter*>& input_parameters)
 {
     if (input_parameters.size() != 0)
     {
@@ -120,7 +120,7 @@ std::shared_ptr<yli::common::AnyValue> square_last(yli::callback_system::Callbac
     return std::make_shared<yli::common::AnyValue>();
 }
 
-std::shared_ptr<yli::common::AnyValue> expt(yli::callback_system::CallbackEngine*, yli::callback_system::CallbackObject*, std::vector<yli::callback_system::CallbackParameter*>& input_parameters)
+std::shared_ptr<yli::common::AnyValue> expt(yli::callback::CallbackEngine*, yli::callback::CallbackObject*, std::vector<yli::callback::CallbackParameter*>& input_parameters)
 {
     if (input_parameters.size() != 2)
     {
@@ -159,9 +159,9 @@ std::shared_ptr<yli::common::AnyValue> expt(yli::callback_system::CallbackEngine
 }
 
 std::shared_ptr<yli::common::AnyValue> expt_with_named_inputs(
-        yli::callback_system::CallbackEngine*,
-        yli::callback_system::CallbackObject* callback_object,
-        std::vector<yli::callback_system::CallbackParameter*>&)
+        yli::callback::CallbackEngine*,
+        yli::callback::CallbackObject* callback_object,
+        std::vector<yli::callback::CallbackParameter*>&)
 {
     std::shared_ptr<yli::common::AnyValue> base = std::make_shared<yli::common::AnyValue>(*callback_object->get_any_value("base"));
     std::shared_ptr<yli::common::AnyValue> exponent = std::make_shared<yli::common::AnyValue>(*callback_object->get_any_value("exponent"));
@@ -193,7 +193,7 @@ std::shared_ptr<yli::common::AnyValue> expt_with_named_inputs(
     return std::make_shared<yli::common::AnyValue>();
 }
 
-std::shared_ptr<yli::common::AnyValue> neg(yli::callback_system::CallbackEngine*, yli::callback_system::CallbackObject*, std::vector<yli::callback_system::CallbackParameter*>& input_parameters)
+std::shared_ptr<yli::common::AnyValue> neg(yli::callback::CallbackEngine*, yli::callback::CallbackObject*, std::vector<yli::callback::CallbackParameter*>& input_parameters)
 {
     if (input_parameters.size() != 1)
     {
@@ -226,8 +226,8 @@ std::shared_ptr<yli::common::AnyValue> neg(yli::callback_system::CallbackEngine*
 
 TEST(callback_engine_must_function_properly, int32_t_zero_negated_equals_zero)
 {
-    yli::callback_system::CallbackEngine callback_engine;
-    yli::callback_system::CallbackObject* callback_object = callback_engine.create_CallbackObject(nullptr);
+    yli::callback::CallbackEngine callback_engine;
+    yli::callback::CallbackObject* callback_object = callback_engine.create_CallbackObject(nullptr);
     callback_object->set_new_callback(&neg);
 
     const int32_t zero = 0;
@@ -243,8 +243,8 @@ TEST(callback_engine_must_function_properly, int32_t_zero_negated_equals_zero)
 
 TEST(callback_engine_must_function_properly, int32_t_one_negated_equals_minus_one)
 {
-    yli::callback_system::CallbackEngine callback_engine;
-    yli::callback_system::CallbackObject* callback_object = callback_engine.create_CallbackObject(nullptr);
+    yli::callback::CallbackEngine callback_engine;
+    yli::callback::CallbackObject* callback_object = callback_engine.create_CallbackObject(nullptr);
     callback_object->set_new_callback(&neg);
 
     const int32_t one = 1;
@@ -260,8 +260,8 @@ TEST(callback_engine_must_function_properly, int32_t_one_negated_equals_minus_on
 
 TEST(callback_engine_must_function_properly, int32_t_two_negated_equals_minus_two)
 {
-    yli::callback_system::CallbackEngine callback_engine;
-    yli::callback_system::CallbackObject* callback_object = callback_engine.create_CallbackObject(nullptr);
+    yli::callback::CallbackEngine callback_engine;
+    yli::callback::CallbackObject* callback_object = callback_engine.create_CallbackObject(nullptr);
     callback_object->set_new_callback(&neg);
 
     const int32_t two = 2;
@@ -277,8 +277,8 @@ TEST(callback_engine_must_function_properly, int32_t_two_negated_equals_minus_tw
 
 TEST(callback_engine_must_function_properly, int32_t_minus_one_negated_equals_one)
 {
-    yli::callback_system::CallbackEngine callback_engine;
-    yli::callback_system::CallbackObject* callback_object = callback_engine.create_CallbackObject(nullptr);
+    yli::callback::CallbackEngine callback_engine;
+    yli::callback::CallbackObject* callback_object = callback_engine.create_CallbackObject(nullptr);
     callback_object->set_new_callback(&neg);
 
     const int32_t minus_one = -1;
@@ -294,8 +294,8 @@ TEST(callback_engine_must_function_properly, int32_t_minus_one_negated_equals_on
 
 TEST(callback_engine_must_function_properly, int32_t_minus_two_negated_equals_two)
 {
-    yli::callback_system::CallbackEngine callback_engine;
-    yli::callback_system::CallbackObject* callback_object = callback_engine.create_CallbackObject(nullptr);
+    yli::callback::CallbackEngine callback_engine;
+    yli::callback::CallbackObject* callback_object = callback_engine.create_CallbackObject(nullptr);
     callback_object->set_new_callback(&neg);
 
     const int32_t minus_two = -2;
@@ -311,8 +311,8 @@ TEST(callback_engine_must_function_properly, int32_t_minus_two_negated_equals_tw
 
 TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
 {
-    yli::callback_system::CallbackEngine callback_engine;
-    yli::callback_system::CallbackObject* callback_object = callback_engine.create_CallbackObject(nullptr);
+    yli::callback::CallbackEngine callback_engine;
+    yli::callback::CallbackObject* callback_object = callback_engine.create_CallbackObject(nullptr);
     callback_object->set_new_callback(&square);
 
     const int32_t three = 3;
@@ -328,8 +328,8 @@ TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
 
 TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
 {
-    yli::callback_system::CallbackEngine callback_engine;
-    yli::callback_system::CallbackObject* callback_object = callback_engine.create_CallbackObject(nullptr);
+    yli::callback::CallbackEngine callback_engine;
+    yli::callback::CallbackObject* callback_object = callback_engine.create_CallbackObject(nullptr);
     callback_object->set_new_callback(&square);
 
     const uint32_t three = 3;
@@ -345,8 +345,8 @@ TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
 
 TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
 {
-    yli::callback_system::CallbackEngine callback_engine;
-    yli::callback_system::CallbackObject* callback_object = callback_engine.create_CallbackObject(nullptr);
+    yli::callback::CallbackEngine callback_engine;
+    yli::callback::CallbackObject* callback_object = callback_engine.create_CallbackObject(nullptr);
     callback_object->set_new_callback(&expt);
 
     const uint32_t five = 5;
@@ -367,8 +367,8 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
 
 TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125_with_named_inputs)
 {
-    yli::callback_system::CallbackEngine callback_engine;
-    yli::callback_system::CallbackObject* callback_object = callback_engine.create_CallbackObject(nullptr);
+    yli::callback::CallbackEngine callback_engine;
+    yli::callback::CallbackObject* callback_object = callback_engine.create_CallbackObject(nullptr);
     callback_object->set_new_callback(&expt_with_named_inputs);
 
     const uint32_t five = 5;
@@ -391,10 +391,10 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125_with
 
 TEST(callback_engine_must_function_properly, uint32_t_7_expt_5_then_squared_equals_282475249)
 {
-    yli::callback_system::CallbackEngine callback_engine;
-    yli::callback_system::CallbackObject* callback_object_expt = callback_engine.create_CallbackObject(nullptr);
+    yli::callback::CallbackEngine callback_engine;
+    yli::callback::CallbackObject* callback_object_expt = callback_engine.create_CallbackObject(nullptr);
     callback_object_expt->set_new_callback(&expt);
-    yli::callback_system::CallbackObject* callback_object_square_last = callback_engine.create_CallbackObject(nullptr);
+    yli::callback::CallbackObject* callback_object_square_last = callback_engine.create_CallbackObject(nullptr);
     callback_object_square_last->set_new_callback(&square_last);
 
     const uint32_t seven = 7;
@@ -415,8 +415,8 @@ TEST(callback_engine_must_function_properly, uint32_t_7_expt_5_then_squared_equa
 
 TEST(callback_engine_must_function_properly, two_squared_four_times_equals_65536)
 {
-    yli::callback_system::CallbackEngine callback_engine;
-    yli::callback_system::CallbackObject* callback_object_1st_square = callback_engine.create_CallbackObject(nullptr);
+    yli::callback::CallbackEngine callback_engine;
+    yli::callback::CallbackObject* callback_object_1st_square = callback_engine.create_CallbackObject(nullptr);
     callback_object_1st_square->set_new_callback(&square);
 
     const uint32_t two = 2;
@@ -424,11 +424,11 @@ TEST(callback_engine_must_function_properly, two_squared_four_times_equals_65536
     std::shared_ptr<yli::common::AnyValue> two_value = std::make_shared<yli::common::AnyValue>(two);
     callback_object_1st_square->create_CallbackParameter("", two_value, is_reference_2);
 
-    yli::callback_system::CallbackObject* callback_object_2nd_square = callback_engine.create_CallbackObject(nullptr);
+    yli::callback::CallbackObject* callback_object_2nd_square = callback_engine.create_CallbackObject(nullptr);
     callback_object_2nd_square->set_new_callback(&square_last);
-    yli::callback_system::CallbackObject* callback_object_3rd_square = callback_engine.create_CallbackObject(nullptr);
+    yli::callback::CallbackObject* callback_object_3rd_square = callback_engine.create_CallbackObject(nullptr);
     callback_object_3rd_square->set_new_callback(&square_last);
-    yli::callback_system::CallbackObject* callback_object_4th_square = callback_engine.create_CallbackObject(nullptr);
+    yli::callback::CallbackObject* callback_object_4th_square = callback_engine.create_CallbackObject(nullptr);
     callback_object_4th_square->set_new_callback(&square_last);
 
     std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute();

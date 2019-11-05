@@ -45,10 +45,10 @@
 #include "code/app/app_wireframe.hpp"
 #include "code/app/app_console_callbacks.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
-#include "code/ylikuutio/callback_system/callback_parameter.hpp"
-#include "code/ylikuutio/callback_system/callback_object.hpp"
-#include "code/ylikuutio/callback_system/callback_engine.hpp"
-#include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
+#include "code/ylikuutio/callback/callback_parameter.hpp"
+#include "code/ylikuutio/callback/callback_object.hpp"
+#include "code/ylikuutio/callback/callback_engine.hpp"
+#include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/console/console_callback_engine.hpp"
 #include "code/ylikuutio/console/console_callback_object.hpp"
@@ -229,8 +229,8 @@ int main(const int argc, const char* const argv[])
     planet_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     setting_master->create_Setting(planet_radius_setting_struct);
 
-    std::cout << "Creating yli::callback_system::CallbackEngine cleanup_callback_engine ...\n";
-    yli::callback_system::CallbackEngine cleanup_callback_engine = yli::callback_system::CallbackEngine();
+    std::cout << "Creating yli::callback::CallbackEngine cleanup_callback_engine ...\n";
+    yli::callback::CallbackEngine cleanup_callback_engine = yli::callback::CallbackEngine();
     cleanup_callback_engine.create_CallbackObject(nullptr);
 
     if (my_universe->get_window() == nullptr)
@@ -416,32 +416,32 @@ int main(const int argc, const char* const argv[])
     std::cout << "Defining action mode keyrelease callback engines.\n";
 
     // Callback code for left Control release: release first turbo.
-    yli::callback_system::CallbackEngine release_first_turbo_callback_engine;
-    yli::callback_system::CallbackObject* const release_first_turbo_callback_object = release_first_turbo_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine release_first_turbo_callback_engine;
+    yli::callback::CallbackObject* const release_first_turbo_callback_object = release_first_turbo_callback_engine.create_CallbackObject(
             &app::release_first_turbo);
     release_first_turbo_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
 
     // Callback code for right Control release: release second turbo.
-    yli::callback_system::CallbackEngine release_second_turbo_callback_engine;
-    yli::callback_system::CallbackObject* const release_second_turbo_callback_object = release_second_turbo_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine release_second_turbo_callback_engine;
+    yli::callback::CallbackObject* const release_second_turbo_callback_object = release_second_turbo_callback_engine.create_CallbackObject(
             &app::release_second_turbo);
     release_second_turbo_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
 
     // Callback code for I release: enable_toggle invert mouse.
-    yli::callback_system::CallbackEngine enable_toggle_invert_mouse_callback_engine;
-    yli::callback_system::CallbackObject* const enable_toggle_invert_mouse_callback_object = enable_toggle_invert_mouse_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine enable_toggle_invert_mouse_callback_engine;
+    yli::callback::CallbackObject* const enable_toggle_invert_mouse_callback_object = enable_toggle_invert_mouse_callback_engine.create_CallbackObject(
             &app::enable_toggle_invert_mouse);
     enable_toggle_invert_mouse_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
 
     // Callback code for F release: enable_toggle flight mode.
-    yli::callback_system::CallbackEngine enable_toggle_flight_mode_callback_engine;
-    yli::callback_system::CallbackObject* const enable_toggle_flight_mode_callback_object = enable_toggle_flight_mode_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine enable_toggle_flight_mode_callback_engine;
+    yli::callback::CallbackObject* const enable_toggle_flight_mode_callback_object = enable_toggle_flight_mode_callback_engine.create_CallbackObject(
             &app::enable_toggle_flight_mode);
     enable_toggle_flight_mode_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
 
     // Callback code for F1 release: enable toggle help mode.
-    yli::callback_system::CallbackEngine enable_toggle_help_mode_callback_engine;
-    yli::callback_system::CallbackObject* const enable_toggle_help_mode_callback_object = enable_toggle_help_mode_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine enable_toggle_help_mode_callback_engine;
+    yli::callback::CallbackObject* const enable_toggle_help_mode_callback_object = enable_toggle_help_mode_callback_engine.create_CallbackObject(
             &app::enable_toggle_help_mode);
     enable_toggle_help_mode_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
 
@@ -460,87 +460,87 @@ int main(const int argc, const char* const argv[])
     enter_mini_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::enter_console, mini_console);
 
     // Callback code for esc: exit program.
-    yli::callback_system::CallbackEngine exit_program_callback_engine;
+    yli::callback::CallbackEngine exit_program_callback_engine;
     exit_program_callback_engine.create_CallbackObject(&app::exit_program);
 
     // Callback code for left Control: first turbo.
-    yli::callback_system::CallbackEngine first_turbo_callback_engine;
-    yli::callback_system::CallbackObject* const first_turbo_callback_object = first_turbo_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine first_turbo_callback_engine;
+    yli::callback::CallbackObject* const first_turbo_callback_object = first_turbo_callback_engine.create_CallbackObject(
             &app::first_turbo);
     first_turbo_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
 
     // Callback code for right Control: second turbo.
-    yli::callback_system::CallbackEngine second_turbo_callback_engine;
-    yli::callback_system::CallbackObject* const second_turbo_callback_object = second_turbo_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine second_turbo_callback_engine;
+    yli::callback::CallbackObject* const second_turbo_callback_object = second_turbo_callback_engine.create_CallbackObject(
             &app::second_turbo);
     second_turbo_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
 
     // Callback code for key up: move forward.
-    yli::callback_system::CallbackEngine move_forward_callback_engine;
-    yli::callback_system::CallbackObject* const move_forward_callback_object = move_forward_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine move_forward_callback_engine;
+    yli::callback::CallbackObject* const move_forward_callback_object = move_forward_callback_engine.create_CallbackObject(
             &app::move_forward);
     move_forward_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
 
     // Callback code for key down: move backward.
-    yli::callback_system::CallbackEngine move_backward_callback_engine;
-    yli::callback_system::CallbackObject* const move_backward_callback_object = move_backward_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine move_backward_callback_engine;
+    yli::callback::CallbackObject* const move_backward_callback_object = move_backward_callback_engine.create_CallbackObject(
             &app::move_backward);
     move_backward_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
 
     // Callback code for key left: strafe left.
-    yli::callback_system::CallbackEngine strafe_left_callback_engine;
-    yli::callback_system::CallbackObject* const strafe_left_callback_object = strafe_left_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine strafe_left_callback_engine;
+    yli::callback::CallbackObject* const strafe_left_callback_object = strafe_left_callback_engine.create_CallbackObject(
             &app::strafe_left);
     strafe_left_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
 
     // Callback code for key right: strafe right.
-    yli::callback_system::CallbackEngine strafe_right_callback_engine;
-    yli::callback_system::CallbackObject* const strafe_right_callback_object = strafe_right_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine strafe_right_callback_engine;
+    yli::callback::CallbackObject* const strafe_right_callback_object = strafe_right_callback_engine.create_CallbackObject(
             &app::strafe_right);
     strafe_right_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
 
     // Callback code for space: ascent.
-    yli::callback_system::CallbackEngine ascent_callback_engine;
-    yli::callback_system::CallbackObject* const ascent_callback_object = ascent_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine ascent_callback_engine;
+    yli::callback::CallbackObject* const ascent_callback_object = ascent_callback_engine.create_CallbackObject(
             &app::ascent);
     ascent_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
 
     // Callback code for enter: descent.
-    yli::callback_system::CallbackEngine descent_callback_engine;
-    yli::callback_system::CallbackObject* const descent_callback_object = descent_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine descent_callback_engine;
+    yli::callback::CallbackObject* const descent_callback_object = descent_callback_engine.create_CallbackObject(
             &app::descent);
     descent_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
 
     // Callback code for I: toggle invert mouse.
-    yli::callback_system::CallbackEngine toggle_invert_mouse_callback_engine;
-    yli::callback_system::CallbackObject* const toggle_invert_mouse_callback_object = toggle_invert_mouse_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine toggle_invert_mouse_callback_engine;
+    yli::callback::CallbackObject* const toggle_invert_mouse_callback_object = toggle_invert_mouse_callback_engine.create_CallbackObject(
             &app::toggle_invert_mouse);
     toggle_invert_mouse_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
 
     // Callback code for F: toggle flight mode.
-    yli::callback_system::CallbackEngine toggle_flight_mode_callback_engine;
-    yli::callback_system::CallbackObject* const toggle_flight_mode_callback_object = toggle_flight_mode_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine toggle_flight_mode_callback_engine;
+    yli::callback::CallbackObject* const toggle_flight_mode_callback_object = toggle_flight_mode_callback_engine.create_CallbackObject(
             &app::toggle_flight_mode);
     toggle_flight_mode_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
 
     // Callback code for F1: toggle help mode.
-    yli::callback_system::CallbackEngine toggle_help_mode_callback_engine;
-    yli::callback_system::CallbackObject* const toggle_help_mode_callback_object = toggle_help_mode_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine toggle_help_mode_callback_engine;
+    yli::callback::CallbackObject* const toggle_help_mode_callback_object = toggle_help_mode_callback_engine.create_CallbackObject(
             &app::toggle_help_mode);
     toggle_help_mode_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
 
     // Callback code for D: delete Suzanne species.
     const std::string suzanne_species_string = "suzanne_species";
-    yli::callback_system::CallbackEngine delete_suzanne_species_callback_engine;
-    yli::callback_system::CallbackObject* const delete_suzanne_species_callback_object = delete_suzanne_species_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine delete_suzanne_species_callback_engine;
+    yli::callback::CallbackObject* const delete_suzanne_species_callback_object = delete_suzanne_species_callback_engine.create_CallbackObject(
             &app::delete_entity);
     delete_suzanne_species_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
     delete_suzanne_species_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(&suzanne_species_string), false);
 
     // Callback code for G: switch to grass material.
     const std::string grass_material_string = "helsinki_east_downtown_grass_material";
-    yli::callback_system::CallbackEngine switch_to_grass_material_callback_engine;
-    yli::callback_system::CallbackObject* const switch_to_grass_material_callback_object = switch_to_grass_material_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine switch_to_grass_material_callback_engine;
+    yli::callback::CallbackObject* const switch_to_grass_material_callback_object = switch_to_grass_material_callback_engine.create_CallbackObject(
             &app::switch_to_new_material);
     switch_to_grass_material_callback_object->create_CallbackParameter(
             "",
@@ -557,8 +557,8 @@ int main(const int argc, const char* const argv[])
 
     // Callback code for O: switch to orange fur material.
     const std::string orange_fur_material_string = "helsinki_east_downtown_orange_fur_material";
-    yli::callback_system::CallbackEngine switch_to_orange_fur_material_callback_engine;
-    yli::callback_system::CallbackObject* const switch_to_orange_fur_material_callback_object = switch_to_orange_fur_material_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine switch_to_orange_fur_material_callback_engine;
+    yli::callback::CallbackObject* const switch_to_orange_fur_material_callback_object = switch_to_orange_fur_material_callback_engine.create_CallbackObject(
             &app::switch_to_new_material);
     switch_to_orange_fur_material_callback_object->create_CallbackParameter(
             "",
@@ -575,8 +575,8 @@ int main(const int argc, const char* const argv[])
 
     // Callback code for P: switch to pink_geometric_tiles_material.
     const std::string pink_geometric_tiles_material_string = "helsinki_east_downtown_pink_geometric_tiles_material";
-    yli::callback_system::CallbackEngine switch_to_pink_geometric_tiles_material_callback_engine;
-    yli::callback_system::CallbackObject* const switch_to_pink_geometric_tiles_material_callback_object = switch_to_pink_geometric_tiles_material_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine switch_to_pink_geometric_tiles_material_callback_engine;
+    yli::callback::CallbackObject* const switch_to_pink_geometric_tiles_material_callback_object = switch_to_pink_geometric_tiles_material_callback_engine.create_CallbackObject(
             &app::switch_to_new_material);
     switch_to_pink_geometric_tiles_material_callback_object->create_CallbackParameter(
             "",
@@ -594,16 +594,16 @@ int main(const int argc, const char* const argv[])
     // Callback code for T: transform `suzanne2` into terrain.
     const std::string helsinki_species_string = "helsinki_east_downtown_terrain_species";
     const std::string suzanne2_string = "suzanne2";
-    yli::callback_system::CallbackEngine transform_into_terrain_callback_engine;
-    yli::callback_system::CallbackObject* const transform_into_terrain_callback_object = transform_into_terrain_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine transform_into_terrain_callback_engine;
+    yli::callback::CallbackObject* const transform_into_terrain_callback_object = transform_into_terrain_callback_engine.create_CallbackObject(
             &app::transform_into_new_species);
     transform_into_terrain_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
     transform_into_terrain_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(&suzanne2_string), false);
     transform_into_terrain_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(&helsinki_species_string), false);
 
     // Callback code for A: transform `suzanne2` back into monkey.
-    yli::callback_system::CallbackEngine transform_into_monkey_callback_engine;
-    yli::callback_system::CallbackObject* const transform_into_monkey_callback_object = transform_into_monkey_callback_engine.create_CallbackObject(
+    yli::callback::CallbackEngine transform_into_monkey_callback_engine;
+    yli::callback::CallbackObject* const transform_into_monkey_callback_object = transform_into_monkey_callback_engine.create_CallbackObject(
             &app::transform_into_new_species);
     transform_into_monkey_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(my_universe), false);
     transform_into_monkey_callback_object->create_CallbackParameter("", std::make_shared<yli::common::AnyValue>(&suzanne2_string), false);
@@ -1199,7 +1199,7 @@ int main(const int argc, const char* const argv[])
                 {
                     const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
 
-                    yli::callback_system::CallbackEngine* const callback_engine = input_mode->get_keypress_callback_engine(scancode);
+                    yli::callback::CallbackEngine* const callback_engine = input_mode->get_keypress_callback_engine(scancode);
 
                     if (callback_engine != nullptr)
                     {
@@ -1236,7 +1236,7 @@ int main(const int argc, const char* const argv[])
                 {
                     const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
 
-                    yli::callback_system::CallbackEngine* const callback_engine = input_mode->get_keyrelease_callback_engine(scancode);
+                    yli::callback::CallbackEngine* const callback_engine = input_mode->get_keyrelease_callback_engine(scancode);
 
                     if (callback_engine == nullptr)
                     {
@@ -1334,7 +1334,7 @@ int main(const int argc, const char* const argv[])
             if (!my_universe->in_console && input_mode != nullptr)
             {
                 const uint8_t* const current_key_states = SDL_GetKeyboardState(nullptr);
-                const std::vector<yli::callback_system::CallbackEngine*>* const continuous_keypress_callback_engines = input_mode->get_continuous_keypress_callback_engines();
+                const std::vector<yli::callback::CallbackEngine*>* const continuous_keypress_callback_engines = input_mode->get_continuous_keypress_callback_engines();
                 if (continuous_keypress_callback_engines == nullptr)
                 {
                     continue;
@@ -1367,7 +1367,7 @@ int main(const int argc, const char* const argv[])
 
                     if (is_pressed)
                     {
-                        yli::callback_system::CallbackEngine* callback_engine = continuous_keypress_callback_engines->at(i);
+                        yli::callback::CallbackEngine* callback_engine = continuous_keypress_callback_engines->at(i);
 
                         if (callback_engine == nullptr)
                         {

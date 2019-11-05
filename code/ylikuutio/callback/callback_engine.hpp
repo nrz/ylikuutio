@@ -37,7 +37,7 @@ typedef yli::common::AnyValue (*AnyValueToAnyValueCallback)(yli::common::AnyValu
 
 namespace yli
 {
-    namespace callback_system
+    namespace callback
     {
         class CallbackObject;
 
@@ -66,7 +66,7 @@ namespace yli
             //    as input parameter for the `CallbackParameter` constructor.
 
             public:
-                void bind_CallbackObject(yli::callback_system::CallbackObject* const callback_object);
+                void bind_CallbackObject(yli::callback::CallbackObject* const callback_object);
 
                 // constructor.
                 CallbackEngine();
@@ -74,8 +74,8 @@ namespace yli
                 // destructor.
                 ~CallbackEngine();
 
-                yli::callback_system::CallbackObject* create_CallbackObject();
-                yli::callback_system::CallbackObject* create_CallbackObject(const InputParametersToAnyValueCallback callback);
+                yli::callback::CallbackObject* create_CallbackObject();
+                yli::callback::CallbackObject* create_CallbackObject(const InputParametersToAnyValueCallback callback);
 
                 // execute all callbacks.
                 std::shared_ptr<yli::common::AnyValue> execute();
@@ -88,9 +88,9 @@ namespace yli
 
             private:
                 // this method sets a callback object pointer.
-                void set_callback_object_pointer(const std::size_t childID, yli::callback_system::CallbackObject* const child_pointer);
+                void set_callback_object_pointer(const std::size_t childID, yli::callback::CallbackObject* const child_pointer);
 
-                std::vector<yli::callback_system::CallbackObject*> callback_object_pointer_vector;
+                std::vector<yli::callback::CallbackObject*> callback_object_pointer_vector;
                 std::queue<std::size_t> free_callback_objectID_queue;
                 std::size_t number_of_callback_objects;
 

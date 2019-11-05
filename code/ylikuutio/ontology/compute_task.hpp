@@ -79,7 +79,7 @@
 
 namespace yli
 {
-    namespace callback_system
+    namespace callback
     {
         class CallbackEngine;
     }
@@ -284,7 +284,7 @@ namespace yli
                 std::shared_ptr<yli::common::AnyValue> right_filler_vector_any_value;
 
                 // End iterating when `end_condition_callback_engine` returns `true`.
-                std::shared_ptr<yli::callback_system::CallbackEngine> end_condition_callback_engine;
+                std::shared_ptr<yli::callback::CallbackEngine> end_condition_callback_engine;
 
                 std::shared_ptr<std::vector<uint8_t>> result_vector;
 

@@ -17,7 +17,7 @@
 
 #include "ajokki_console_callbacks.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
-#include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
+#include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 

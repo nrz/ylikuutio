@@ -27,13 +27,13 @@
 
 namespace yli
 {
-    namespace callback_system
+    namespace callback
     {
         void CallbackParameter::bind_to_parent()
         {
             // requirements:
             // `this->parent` must not be `nullptr`.
-            yli::callback_system::CallbackObject* const callback_object = this->parent;
+            yli::callback::CallbackObject* const callback_object = this->parent;
 
             if (callback_object == nullptr)
             {
@@ -45,7 +45,7 @@ namespace yli
             callback_object->bind_CallbackParameter(this);
         }
 
-        CallbackParameter::CallbackParameter(const std::string& name, std::shared_ptr<yli::common::AnyValue> any_value, const bool is_reference, yli::callback_system::CallbackObject* const parent)
+        CallbackParameter::CallbackParameter(const std::string& name, std::shared_ptr<yli::common::AnyValue> any_value, const bool is_reference, yli::callback::CallbackObject* const parent)
         {
             // constructor.
             this->name = name;
@@ -66,7 +66,7 @@ namespace yli
 
             std::cout << "Callback parameter with childID " << this->childID << " will be destroyed.\n";
 
-            yli::callback_system::CallbackObject* const callback_object = this->parent;
+            yli::callback::CallbackObject* const callback_object = this->parent;
 
             if (callback_object == nullptr)
             {

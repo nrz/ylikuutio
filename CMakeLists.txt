@@ -359,15 +359,15 @@ add_library(ylikuutio STATIC
     code/ylikuutio/audio/audio_master.cpp
     code/ylikuutio/audio/audio_master.hpp
 
-    # callback_system, in alphabetical order
-    code/ylikuutio/callback_system/callback_engine.cpp
-    code/ylikuutio/callback_system/callback_engine.hpp
-    code/ylikuutio/callback_system/callback_magic_numbers.hpp
-    code/ylikuutio/callback_system/callback_object.cpp
-    code/ylikuutio/callback_system/callback_object.hpp
-    code/ylikuutio/callback_system/callback_parameter.cpp
-    code/ylikuutio/callback_system/callback_parameter.hpp
-    code/ylikuutio/callback_system/input_parameters_to_any_value_callback.hpp
+    # callback, in alphabetical order
+    code/ylikuutio/callback/callback_engine.cpp
+    code/ylikuutio/callback/callback_engine.hpp
+    code/ylikuutio/callback/callback_magic_numbers.hpp
+    code/ylikuutio/callback/callback_object.cpp
+    code/ylikuutio/callback/callback_object.hpp
+    code/ylikuutio/callback/callback_parameter.cpp
+    code/ylikuutio/callback/callback_parameter.hpp
+    code/ylikuutio/callback/input_parameters_to_any_value_callback.hpp
 
     # command_line, in alphabetical order
     code/ylikuutio/command_line/command_line_master.cpp
@@ -785,12 +785,12 @@ create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cod
 # Tests
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set(FILES_TO_TEST
-        code/ylikuutio/callback_system/callback_engine.cpp
-        code/ylikuutio/callback_system/callback_engine.hpp
-        code/ylikuutio/callback_system/callback_object.cpp
-        code/ylikuutio/callback_system/callback_object.hpp
-        code/ylikuutio/callback_system/callback_parameter.cpp
-        code/ylikuutio/callback_system/callback_parameter.hpp
+        code/ylikuutio/callback/callback_engine.cpp
+        code/ylikuutio/callback/callback_engine.hpp
+        code/ylikuutio/callback/callback_object.cpp
+        code/ylikuutio/callback/callback_object.hpp
+        code/ylikuutio/callback/callback_parameter.cpp
+        code/ylikuutio/callback/callback_parameter.hpp
         code/ylikuutio/command_line/command_line_master.cpp
         code/ylikuutio/command_line/command_line_master.hpp
         code/ylikuutio/common/any_struct.cpp
