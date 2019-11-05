@@ -81,8 +81,6 @@ namespace yli
 
                 yli::callback::CallbackEngine* parent; // pointer to the callback engine.
 
-                std::size_t childID;                          // callback object ID, returned by `yli::callback::CallbackEngine->get_callback_objectID()`.
-
                 std::vector<yli::callback::CallbackParameter*> callback_parameter_pointer_vector;
                 std::queue<std::size_t> free_callback_parameterID_queue;
                 std::size_t number_of_callback_parameters;
@@ -96,6 +94,8 @@ namespace yli
                 CallbackObject(const InputParametersToAnyValueCallback callback, yli::callback::CallbackEngine* const parent);
 
             private:
+                std::size_t childID;                          // callback object ID, returned by `yli::callback::CallbackEngine->get_callback_objectID()`.
+
                 // A hash map used to store variables.
                 std::unordered_map<std::string, yli::common::AnyValue> anyvalue_hashmap;
         };
