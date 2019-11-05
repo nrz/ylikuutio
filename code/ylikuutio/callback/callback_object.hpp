@@ -69,16 +69,6 @@ namespace yli
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
             protected:
-                void bind_to_parent();
-
-                // this method sets a callback parameter pointer.
-                void set_callback_parameter_pointer(const std::size_t childID, yli::callback::CallbackParameter* const child_pointer);
-
-                void bind_child_to_parent(yli::callback::CallbackParameter* child_pointer);
-
-                // execute this callback.
-                virtual std::shared_ptr<yli::common::AnyValue> execute();
-
                 yli::callback::CallbackEngine* parent; // pointer to the callback engine.
 
                 std::vector<yli::callback::CallbackParameter*> callback_parameter_pointer_vector;
@@ -94,6 +84,16 @@ namespace yli
                 CallbackObject(const InputParametersToAnyValueCallback callback, yli::callback::CallbackEngine* const parent);
 
             private:
+                void bind_to_parent();
+
+                // this method sets a callback parameter pointer.
+                void set_callback_parameter_pointer(const std::size_t childID, yli::callback::CallbackParameter* const child_pointer);
+
+                void bind_child_to_parent(yli::callback::CallbackParameter* child_pointer);
+
+                // execute this callback.
+                virtual std::shared_ptr<yli::common::AnyValue> execute();
+
                 std::size_t childID;                          // callback object ID, returned by `yli::callback::CallbackEngine->get_callback_objectID()`.
 
                 // A hash map used to store variables.
