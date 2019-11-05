@@ -53,7 +53,7 @@ namespace yli
             this->is_reference = is_reference;
             this->parent = parent;
 
-            // get childID from the CallbackObject and set pointer to this CallbackParameter.
+            // get `childID` from the `CallbackObject` and set pointer to this `CallbackParameter`.
             this->bind_to_parent();
         }
 

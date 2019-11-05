@@ -132,7 +132,7 @@ namespace yli
 
             this->number_of_callback_parameters = 0;
 
-            // get childID from the CallbackEngine and set pointer to this CallbackObject.
+            // get `childID` from the `CallbackEngine` and set pointer to this `CallbackObject`.
             this->bind_to_parent();
         }
 
@@ -145,7 +145,7 @@ namespace yli
 
             this->number_of_callback_parameters = 0;
 
-            // get childID from the CallbackEngine and set pointer to this CallbackObject.
+            // get `childID` from the `CallbackEngine` and set pointer to this `CallbackObject`.
             this->bind_to_parent();
         }
 
