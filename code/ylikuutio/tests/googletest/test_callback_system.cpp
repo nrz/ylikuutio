@@ -30,7 +30,19 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-std::shared_ptr<yli::common::AnyValue> square(yli::callback::CallbackEngine*, yli::callback::CallbackObject*, std::vector<yli::callback::CallbackParameter*>& input_parameters)
+namespace yli
+{
+    namespace ontology
+    {
+        class Universe;
+    }
+}
+
+std::shared_ptr<yli::common::AnyValue> square(
+        yli::ontology::Universe*,
+        yli::callback::CallbackEngine*,
+        yli::callback::CallbackObject*,
+        std::vector<yli::callback::CallbackParameter*>& input_parameters)
 {
     if (input_parameters.size() != 1)
     {
@@ -71,7 +83,9 @@ std::shared_ptr<yli::common::AnyValue> square(yli::callback::CallbackEngine*, yl
     return std::make_shared<yli::common::AnyValue>();
 }
 
-std::shared_ptr<yli::common::AnyValue> square_last(yli::callback::CallbackEngine* callback_engine,
+std::shared_ptr<yli::common::AnyValue> square_last(
+        yli::ontology::Universe*,
+        yli::callback::CallbackEngine* callback_engine,
         yli::callback::CallbackObject*,
         std::vector<yli::callback::CallbackParameter*>& input_parameters)
 {
@@ -120,7 +134,11 @@ std::shared_ptr<yli::common::AnyValue> square_last(yli::callback::CallbackEngine
     return std::make_shared<yli::common::AnyValue>();
 }
 
-std::shared_ptr<yli::common::AnyValue> expt(yli::callback::CallbackEngine*, yli::callback::CallbackObject*, std::vector<yli::callback::CallbackParameter*>& input_parameters)
+std::shared_ptr<yli::common::AnyValue> expt(
+        yli::ontology::Universe*,
+        yli::callback::CallbackEngine*,
+        yli::callback::CallbackObject*,
+        std::vector<yli::callback::CallbackParameter*>& input_parameters)
 {
     if (input_parameters.size() != 2)
     {
@@ -159,6 +177,7 @@ std::shared_ptr<yli::common::AnyValue> expt(yli::callback::CallbackEngine*, yli:
 }
 
 std::shared_ptr<yli::common::AnyValue> expt_with_named_inputs(
+        yli::ontology::Universe*,
         yli::callback::CallbackEngine*,
         yli::callback::CallbackObject* callback_object,
         std::vector<yli::callback::CallbackParameter*>&)
@@ -193,7 +212,11 @@ std::shared_ptr<yli::common::AnyValue> expt_with_named_inputs(
     return std::make_shared<yli::common::AnyValue>();
 }
 
-std::shared_ptr<yli::common::AnyValue> neg(yli::callback::CallbackEngine*, yli::callback::CallbackObject*, std::vector<yli::callback::CallbackParameter*>& input_parameters)
+std::shared_ptr<yli::common::AnyValue> neg(
+        yli::ontology::Universe*,
+        yli::callback::CallbackEngine*,
+        yli::callback::CallbackObject*,
+        std::vector<yli::callback::CallbackParameter*>& input_parameters)
 {
     if (input_parameters.size() != 1)
     {

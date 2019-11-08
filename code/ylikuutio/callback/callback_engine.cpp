@@ -17,7 +17,7 @@
 
 #include "callback_engine.hpp"
 #include "callback_object.hpp"
-#include "input_parameters_to_any_value_callback.hpp"
+#include "input_parameters_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -31,6 +31,11 @@
 
 namespace yli
 {
+    namespace ontology
+    {
+        class Universe;
+    }
+
     namespace callback
     {
         void CallbackEngine::bind_CallbackObject(yli::callback::CallbackObject* const callback_object)
@@ -45,6 +50,14 @@ namespace yli
         CallbackEngine::CallbackEngine()
         {
             // constructor.
+            this->universe = nullptr;
+            this->number_of_callback_objects = 0;
+        }
+
+        CallbackEngine::CallbackEngine(yli::ontology::Universe* const universe)
+        {
+            // constructor.
+            this->universe = universe;
             this->number_of_callback_objects = 0;
         }
 
@@ -63,7 +76,7 @@ namespace yli
             return new yli::callback::CallbackObject(this);
         }
 
-        yli::callback::CallbackObject* CallbackEngine::create_CallbackObject(const InputParametersToAnyValueCallback callback)
+        yli::callback::CallbackObject* CallbackEngine::create_CallbackObject(const InputParametersToAnyValueCallbackWithUniverse callback)
         {
             return new yli::callback::CallbackObject(callback, this);
         }
