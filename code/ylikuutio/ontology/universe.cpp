@@ -99,7 +99,7 @@ namespace yli
     {
         class Species;
 
-        const std::string Universe::version = "0.0.4";
+        const std::string Universe::version = "0.0.5";
 
         void Universe::bind_Entity(yli::ontology::Entity* const entity)
         {

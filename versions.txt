@@ -1,16 +1,40 @@
+Ylikuutio uses a variant of Semantic Versioning 2.0.0:
+https://semver.org/spec/v2.0.0.html
+
 0.0.1
-* initial version
+* Initial version.
 
 0.0.2
-* `Symbiosis` entities
-* Support for FBX file format
+* `Symbiosis` entities.
+* Support for FBX file format.
 
 0.0.3
-* `Entity`-specific variables
-* screenshots with `Universe::screenshot`.
-* console size can be adjusted by setting `console_top_y`,
+* `Entity`-specific variables.
+* Screenshots with `Universe::screenshot`.
+* Console size can be adjusted by setting `console_top_y`,
   `console_bottom_y`, `console_left_x`, `console_right_x`.
 
 0.0.4
-* `ComputeTask` entities (GPGPU)
-* functioning `Camera` entities
+* `ComputeTask` entities (GPGPU).
+* Functioning `Camera` entities.
+
+0.0.5
+* `Objects` and `Holobiont`s can be rotated by setting
+  `horizontal_angle` & `vertical_angle`.
+* `speed`, `mouse_speed`, `turbo_factor` & `twin_turbo_factor`
+  can be set either as command line parameters or in console.
+* `Console` is an `Entity` and there can be multiple `Console`s.
+
+Future versions:
+
+0.0.x
+* No stable API defined yet
+
+0.1.0
+* API defined
+
+0.2.0, 0.3.0 ... etc.
+* API modified
+
+1.0.0
+* All features defined in the public API implemented and functional
