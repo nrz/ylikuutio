@@ -66,7 +66,7 @@ namespace app
      * Helper functions for callbacks begin here.                        *
     \*********************************************************************/
 
-    bool move_to_direction(const yli::callback::CallbackObject* const callback_object, const glm::vec3& moving_direction)
+    bool move_to_direction(yli::ontology::Universe* const universe, const yli::callback::CallbackObject* const callback_object, const glm::vec3& moving_direction)
     {
         // Movement changes location and orientation variables stored in `yli::ontology::Universe`.
         // This way there is no need to dereference pointer to the current `yli::ontology::Camera`.
@@ -77,22 +77,6 @@ namespace app
         // `Scene` is the current `Scene`. If true, then get and return the location or orientation
         // variable in question from the `Universe`, otherwise return the location or orientation
         // variable from the `Scene`'s own member variable.
-
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return false;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return false;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -140,27 +124,11 @@ namespace app
     \*********************************************************************/
 
     std::shared_ptr<yli::common::AnyValue> release_first_turbo(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
@@ -172,27 +140,11 @@ namespace app
     }
 
     std::shared_ptr<yli::common::AnyValue> release_second_turbo(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
@@ -204,27 +156,11 @@ namespace app
     }
 
     std::shared_ptr<yli::common::AnyValue> enable_toggle_invert_mouse(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
@@ -236,27 +172,11 @@ namespace app
     }
 
     std::shared_ptr<yli::common::AnyValue> enable_toggle_flight_mode(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
@@ -268,27 +188,11 @@ namespace app
     }
 
     std::shared_ptr<yli::common::AnyValue> enable_toggle_help_mode(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
@@ -314,27 +218,11 @@ namespace app
     }
 
     std::shared_ptr<yli::common::AnyValue> first_turbo(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
@@ -346,27 +234,11 @@ namespace app
     }
 
     std::shared_ptr<yli::common::AnyValue> second_turbo(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
@@ -378,219 +250,107 @@ namespace app
     }
 
     std::shared_ptr<yli::common::AnyValue> move_forward(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
             return nullptr;
         }
 
-        app::move_to_direction(callback_object, universe->current_camera_direction);
+        app::move_to_direction(universe, callback_object, universe->current_camera_direction);
         return nullptr;
     }
 
     std::shared_ptr<yli::common::AnyValue> move_backward(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
             return nullptr;
         }
 
-        app::move_to_direction(callback_object, -universe->current_camera_direction);
+        app::move_to_direction(universe, callback_object, -universe->current_camera_direction);
         return nullptr;
     }
 
     std::shared_ptr<yli::common::AnyValue> strafe_left(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
             return nullptr;
         }
 
-        app::move_to_direction(callback_object, -universe->current_camera_right);
+        app::move_to_direction(universe, callback_object, -universe->current_camera_right);
         return nullptr;
     }
 
     std::shared_ptr<yli::common::AnyValue> strafe_right(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
             return nullptr;
         }
 
-        app::move_to_direction(callback_object, universe->current_camera_right);
+        app::move_to_direction(universe, callback_object, universe->current_camera_right);
         return nullptr;
     }
 
     std::shared_ptr<yli::common::AnyValue> ascent(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
             return nullptr;
         }
 
-        app::move_to_direction(callback_object, universe->current_camera_up);
+        app::move_to_direction(universe, callback_object, universe->current_camera_up);
         return nullptr;
     }
 
     std::shared_ptr<yli::common::AnyValue> descent(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
             return nullptr;
         }
 
-        app::move_to_direction(callback_object, -universe->current_camera_up);
+        app::move_to_direction(universe, callback_object, -universe->current_camera_up);
         return nullptr;
     }
 
     std::shared_ptr<yli::common::AnyValue> toggle_invert_mouse(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
@@ -606,27 +366,11 @@ namespace app
     }
 
     std::shared_ptr<yli::common::AnyValue> toggle_flight_mode(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
@@ -643,27 +387,11 @@ namespace app
     }
 
     std::shared_ptr<yli::common::AnyValue> toggle_help_mode(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
@@ -679,34 +407,18 @@ namespace app
     }
 
     std::shared_ptr<yli::common::AnyValue> delete_entity(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
             return nullptr;
         }
 
-        const std::shared_ptr<yli::common::AnyValue> any_value_entity_string = callback_object->get_arg(1);
+        const std::shared_ptr<yli::common::AnyValue> any_value_entity_string = callback_object->get_arg(0);
 
         if (any_value_entity_string == nullptr)
         {
@@ -747,34 +459,18 @@ namespace app
     }
 
     std::shared_ptr<yli::common::AnyValue> switch_to_new_material(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
             return nullptr;
         }
 
-        std::shared_ptr<yli::common::AnyValue> any_value_entity_string = callback_object->get_arg(1);
+        std::shared_ptr<yli::common::AnyValue> any_value_entity_string = callback_object->get_arg(0);
 
         if (any_value_entity_string == nullptr)
         {
@@ -825,7 +521,7 @@ namespace app
             return nullptr;
         }
 
-        std::shared_ptr<yli::common::AnyValue> any_value_material_string = callback_object->get_arg(2);
+        std::shared_ptr<yli::common::AnyValue> any_value_material_string = callback_object->get_arg(1);
 
         if (any_value_material_string == nullptr)
         {
@@ -878,34 +574,18 @@ namespace app
     }
 
     std::shared_ptr<yli::common::AnyValue> transform_into_new_species(
-            yli::ontology::Universe*,
+            yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&)
     {
-        const std::shared_ptr<yli::common::AnyValue> any_value_universe = callback_object->get_arg(0);
-
-        if (any_value_universe == nullptr)
-        {
-            std::cerr << "Error: universe not found!\n";
-            return nullptr;
-        }
-
-        if (any_value_universe->type != yli::common::Datatype::UNIVERSE_POINTER)
-        {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::UNIVERSE_POINTER\n";
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = any_value_universe->universe;
-
         if (universe == nullptr)
         {
             std::cerr << "Error: universe is nullptr!\n";
             return nullptr;
         }
 
-        std::shared_ptr<yli::common::AnyValue> any_value_entity_string = callback_object->get_arg(1);
+        std::shared_ptr<yli::common::AnyValue> any_value_entity_string = callback_object->get_arg(0);
 
         if (any_value_entity_string == nullptr)
         {
@@ -956,7 +636,7 @@ namespace app
             return nullptr;
         }
 
-        std::shared_ptr<yli::common::AnyValue> any_value_species_string = callback_object->get_arg(2);
+        std::shared_ptr<yli::common::AnyValue> any_value_species_string = callback_object->get_arg(1);
 
         if (any_value_species_string == nullptr)
         {
