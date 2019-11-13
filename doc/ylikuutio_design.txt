@@ -8,7 +8,7 @@ code/hirvi/                     - Hirvi game code.
 code/perl/                      - scripts written in Perl.
 code/s7/                        - s7 Scheme test code.
 code/ylikuutio                  - Ylikuutio code.
-code/ylikuutio/audio/           - audio code.
+code/ylikuutio/audio/           - audio code. See below for more detailed description about audio.
 code/ylikuutio/callback_system/ - callback functionality.
 code/ylikuutio/command_line/    - command line argument processing.
 code/ylikuutio/common/          - `AnyValue` & `AnyStruct` data structures.
@@ -28,13 +28,17 @@ code/ylikuutio/memory/          - memory related code.
 code/ylikuutio/network/         - network related code.
 code/ylikuutio/ontology/        - ontology related code. See below for more detailed description about Ylikuutio ontology.
 code/ylikuutio/opengl/          - OpenGL related code.
-code/ylikuutio/scheme/          - s7 Scheme related code.
+code/ylikuutio/scheme/          - s7 Scheme related code. See below for more detailed description about Scheme-related code.
 code/ylikuutio/sdl/             - SDL related code.
 code/ylikuutio/shaders/         - GLSL shaders.
 code/ylikuutio/string/          - string processing code.
 code/ylikuutio/tests/           - unit tests.
 code/ylikuutio/time/            - time related code.
 code/ylikuutio/triangulation/   - triangulation related code. See below for more detailed description about triangulation.
+
+code/ylikuutio/audio/
+
+`AudioMaster` is the master class of Ylikuutio audio. It is created by the `Universe` and it's lifetime ends when `Universe` is destroyed.
 
 code/ylikuutio/load/
 
@@ -122,6 +126,10 @@ There are different hierarchical paths of ontology:
 `Scene` (see above).
 `Shader` (see above).
 `ComputeTask` is a class that owns the data used for GPGPU computation using the GLSL vertex shader and GLSL fragment shader owned by the `Shader`.
+
+code/ylikuutio/scheme/
+
+`SchemeMaster` is the master class of Ylikuutio Scheme functionality.
 
 Triangulation
 
