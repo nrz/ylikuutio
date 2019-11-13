@@ -28,7 +28,7 @@
 
 namespace yli
 {
-    namespace callback_system
+    namespace callback
     {
         class CallbackEngine;
     }
@@ -45,17 +45,17 @@ namespace yli
                 void activate();
                 void deactivate();
 
-                yli::callback_system::CallbackEngine* get_keypress_callback_engine(uint32_t keycode) const;
-                yli::callback_system::CallbackEngine* get_keyrelease_callback_engine(uint32_t keycode) const;
-                yli::callback_system::CallbackEngine* get_continuous_keypress_callback_engine(uint32_t keycode) const;
+                yli::callback::CallbackEngine* get_keypress_callback_engine(uint32_t keycode) const;
+                yli::callback::CallbackEngine* get_keyrelease_callback_engine(uint32_t keycode) const;
+                yli::callback::CallbackEngine* get_continuous_keypress_callback_engine(uint32_t keycode) const;
 
-                void set_keypress_callback_engine(uint32_t keycode, yli::callback_system::CallbackEngine* callback_engine);
-                void set_keyrelease_callback_engine(uint32_t keycode, yli::callback_system::CallbackEngine* callback_engine);
-                void set_continuous_keypress_callback_engine(uint32_t keycode, yli::callback_system::CallbackEngine* callback_engine);
+                void set_keypress_callback_engine(uint32_t keycode, yli::callback::CallbackEngine* callback_engine);
+                void set_keyrelease_callback_engine(uint32_t keycode, yli::callback::CallbackEngine* callback_engine);
+                void set_continuous_keypress_callback_engine(uint32_t keycode, yli::callback::CallbackEngine* callback_engine);
 
-                const std::vector<yli::callback_system::CallbackEngine*>* get_keypress_callback_engines() const;
-                const std::vector<yli::callback_system::CallbackEngine*>* get_keyrelease_callback_engines() const;
-                const std::vector<yli::callback_system::CallbackEngine*>* get_continuous_keypress_callback_engines() const;
+                const std::vector<yli::callback::CallbackEngine*>* get_keypress_callback_engines() const;
+                const std::vector<yli::callback::CallbackEngine*>* get_keyrelease_callback_engines() const;
+                const std::vector<yli::callback::CallbackEngine*>* get_continuous_keypress_callback_engines() const;
 
                 friend class InputMaster;
                 template<class T1>
@@ -73,9 +73,9 @@ namespace yli
                 yli::input::InputMaster* parent;
                 std::size_t childID;
 
-                std::vector<yli::callback_system::CallbackEngine*> keypress_callback_engines;
-                std::vector<yli::callback_system::CallbackEngine*> keyrelease_callback_engines;
-                std::vector<yli::callback_system::CallbackEngine*> continuous_keypress_callback_engines;
+                std::vector<yli::callback::CallbackEngine*> keypress_callback_engines;
+                std::vector<yli::callback::CallbackEngine*> keyrelease_callback_engines;
+                std::vector<yli::callback::CallbackEngine*> continuous_keypress_callback_engines;
         };
     }
 }

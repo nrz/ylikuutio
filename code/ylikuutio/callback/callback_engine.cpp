@@ -17,7 +17,7 @@
 
 #include "callback_engine.hpp"
 #include "callback_object.hpp"
-#include "input_parameters_to_any_value_callback.hpp"
+#include "input_parameters_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -31,11 +31,16 @@
 
 namespace yli
 {
-    namespace callback_system
+    namespace ontology
     {
-        void CallbackEngine::bind_CallbackObject(yli::callback_system::CallbackObject* const callback_object)
+        class Universe;
+    }
+
+    namespace callback
+    {
+        void CallbackEngine::bind_CallbackObject(yli::callback::CallbackObject* const callback_object)
         {
-            yli::hierarchy::bind_child_to_parent<yli::callback_system::CallbackObject*>(
+            yli::hierarchy::bind_child_to_parent<yli::callback::CallbackObject*>(
                     callback_object,
                     this->callback_object_pointer_vector,
                     this->free_callback_objectID_queue,
@@ -45,6 +50,14 @@ namespace yli
         CallbackEngine::CallbackEngine()
         {
             // constructor.
+            this->universe = nullptr;
+            this->number_of_callback_objects = 0;
+        }
+
+        CallbackEngine::CallbackEngine(yli::ontology::Universe* const universe)
+        {
+            // constructor.
+            this->universe = universe;
             this->number_of_callback_objects = 0;
         }
 
@@ -55,20 +68,20 @@ namespace yli
 
             // destroy all callback objects of this callback engine.
             std::cout << "All callback objects of this callback engine will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::callback_system::CallbackObject*>(this->callback_object_pointer_vector, this->number_of_callback_objects);
+            yli::hierarchy::delete_children<yli::callback::CallbackObject*>(this->callback_object_pointer_vector, this->number_of_callback_objects);
         }
 
-        yli::callback_system::CallbackObject* CallbackEngine::create_CallbackObject()
+        yli::callback::CallbackObject* CallbackEngine::create_CallbackObject()
         {
-            return new yli::callback_system::CallbackObject(this);
+            return new yli::callback::CallbackObject(this);
         }
 
-        yli::callback_system::CallbackObject* CallbackEngine::create_CallbackObject(const InputParametersToAnyValueCallback callback)
+        yli::callback::CallbackObject* CallbackEngine::create_CallbackObject(const InputParametersToAnyValueCallbackWithUniverse callback)
         {
-            return new yli::callback_system::CallbackObject(callback, this);
+            return new yli::callback::CallbackObject(callback, this);
         }
 
-        void CallbackEngine::set_callback_object_pointer(const std::size_t childID, yli::callback_system::CallbackObject* const child_pointer)
+        void CallbackEngine::set_callback_object_pointer(const std::size_t childID, yli::callback::CallbackObject* const child_pointer)
         {
             yli::hierarchy::set_child_pointer(childID, child_pointer, this->callback_object_pointer_vector, this->free_callback_objectID_queue, this->number_of_callback_objects);
         }
@@ -80,7 +93,7 @@ namespace yli
             // execute all callbacks.
             for (std::size_t child_i = 0; child_i < this->callback_object_pointer_vector.size(); child_i++)
             {
-                yli::callback_system::CallbackObject* callback_object_pointer = static_cast<yli::callback_system::CallbackObject*>(this->callback_object_pointer_vector[child_i]);
+                yli::callback::CallbackObject* callback_object_pointer = static_cast<yli::callback::CallbackObject*>(this->callback_object_pointer_vector[child_i]);
 
                 if (callback_object_pointer != nullptr)
                 {

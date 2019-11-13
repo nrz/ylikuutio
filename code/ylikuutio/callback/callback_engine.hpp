@@ -18,8 +18,8 @@
 #ifndef __CALLBACK_ENGINE_HPP_INCLUDED
 #define __CALLBACK_ENGINE_HPP_INCLUDED
 
+#include "input_parameters_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
-#include "input_parameters_to_any_value_callback.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -37,7 +37,12 @@ typedef yli::common::AnyValue (*AnyValueToAnyValueCallback)(yli::common::AnyValu
 
 namespace yli
 {
-    namespace callback_system
+    namespace ontology
+    {
+        class Universe;
+    }
+
+    namespace callback
     {
         class CallbackObject;
 
@@ -66,16 +71,19 @@ namespace yli
             //    as input parameter for the `CallbackParameter` constructor.
 
             public:
-                void bind_CallbackObject(yli::callback_system::CallbackObject* const callback_object);
+                void bind_CallbackObject(yli::callback::CallbackObject* const callback_object);
 
                 // constructor.
                 CallbackEngine();
 
+                // constructor.
+                CallbackEngine(yli::ontology::Universe* const universe);
+
                 // destructor.
                 ~CallbackEngine();
 
-                yli::callback_system::CallbackObject* create_CallbackObject();
-                yli::callback_system::CallbackObject* create_CallbackObject(const InputParametersToAnyValueCallback callback);
+                yli::callback::CallbackObject* create_CallbackObject();
+                yli::callback::CallbackObject* create_CallbackObject(const InputParametersToAnyValueCallbackWithUniverse callback);
 
                 // execute all callbacks.
                 std::shared_ptr<yli::common::AnyValue> execute();
@@ -87,10 +95,15 @@ namespace yli
                 friend class CallbackObject;
 
             private:
-                // this method sets a callback object pointer.
-                void set_callback_object_pointer(const std::size_t childID, yli::callback_system::CallbackObject* const child_pointer);
+                // `CallbackEngine` is not an `Entity`.
+                // Therefore they are not descendants of the `Universe`.
+                // Some `CallbackEngine`s just have a pointer to the `Universe`.
+                yli::ontology::Universe* universe;
 
-                std::vector<yli::callback_system::CallbackObject*> callback_object_pointer_vector;
+                // this method sets a callback object pointer.
+                void set_callback_object_pointer(const std::size_t childID, yli::callback::CallbackObject* const child_pointer);
+
+                std::vector<yli::callback::CallbackObject*> callback_object_pointer_vector;
                 std::queue<std::size_t> free_callback_objectID_queue;
                 std::size_t number_of_callback_objects;
 

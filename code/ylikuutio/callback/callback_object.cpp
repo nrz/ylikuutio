@@ -17,7 +17,7 @@
 
 #include "callback_object.hpp"
 #include "callback_parameter.hpp"
-#include "input_parameters_to_any_value_callback.hpp"
+#include "input_parameters_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -31,12 +31,12 @@
 
 namespace yli
 {
-    namespace callback_system
+    namespace callback
     {
-        void CallbackObject::bind_CallbackParameter(yli::callback_system::CallbackParameter* const callback_parameter)
+        void CallbackObject::bind_CallbackParameter(yli::callback::CallbackParameter* const callback_parameter)
         {
             // get `childID` from `CallbackObject` and set pointer to `callback_parameter`.
-            yli::hierarchy::bind_child_to_parent<yli::callback_system::CallbackParameter*>(
+            yli::hierarchy::bind_child_to_parent<yli::callback::CallbackParameter*>(
                     callback_parameter,
                     this->callback_parameter_pointer_vector,
                     this->free_callback_parameterID_queue,
@@ -58,12 +58,12 @@ namespace yli
                     this->number_of_callback_parameters);
         }
 
-        yli::callback_system::CallbackParameter* CallbackObject::create_CallbackParameter(
+        yli::callback::CallbackParameter* CallbackObject::create_CallbackParameter(
                 const std::string& name,
                 std::shared_ptr<yli::common::AnyValue> any_value,
                 const bool is_reference)
         {
-            return new yli::callback_system::CallbackParameter(name, any_value, is_reference, this);
+            return new yli::callback::CallbackParameter(name, any_value, is_reference, this);
         }
 
         // getter function for callbacks and callback objects.
@@ -85,7 +85,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::callback_system::CallbackParameter* callback_parameter = this->callback_parameter_pointer_vector.at(arg_i);
+            yli::callback::CallbackParameter* callback_parameter = this->callback_parameter_pointer_vector.at(arg_i);
 
             if (callback_parameter == nullptr)
             {
@@ -107,7 +107,7 @@ namespace yli
             // requirements:
             // `this->parent` must not be `nullptr`.
 
-            yli::callback_system::CallbackEngine* const callback_engine = this->parent;
+            yli::callback::CallbackEngine* const callback_engine = this->parent;
 
             if (callback_engine == nullptr)
             {
@@ -118,12 +118,12 @@ namespace yli
             callback_engine->bind_CallbackObject(this);
         }
 
-        void CallbackObject::set_new_callback(const InputParametersToAnyValueCallback callback)
+        void CallbackObject::set_new_callback(const InputParametersToAnyValueCallbackWithUniverse callback)
         {
             this->callback = callback;
         }
 
-        CallbackObject::CallbackObject(yli::callback_system::CallbackEngine* parent)
+        CallbackObject::CallbackObject(yli::callback::CallbackEngine* const parent)
         {
             // constructor.
             this->childID = -1;
@@ -132,11 +132,11 @@ namespace yli
 
             this->number_of_callback_parameters = 0;
 
-            // get childID from the CallbackEngine and set pointer to this CallbackObject.
+            // get `childID` from the `CallbackEngine` and set pointer to this `CallbackObject`.
             this->bind_to_parent();
         }
 
-        CallbackObject::CallbackObject(const InputParametersToAnyValueCallback callback, yli::callback_system::CallbackEngine* parent)
+        CallbackObject::CallbackObject(const InputParametersToAnyValueCallbackWithUniverse callback, yli::callback::CallbackEngine* const parent)
         {
             // constructor.
             this->childID = -1;
@@ -145,7 +145,7 @@ namespace yli
 
             this->number_of_callback_parameters = 0;
 
-            // get childID from the CallbackEngine and set pointer to this CallbackObject.
+            // get `childID` from the `CallbackEngine` and set pointer to this `CallbackObject`.
             this->bind_to_parent();
         }
 
@@ -161,7 +161,7 @@ namespace yli
             }
         }
 
-        void CallbackObject::set_callback_parameter_pointer(const std::size_t childID, yli::callback_system::CallbackParameter* const child_pointer)
+        void CallbackObject::set_callback_parameter_pointer(const std::size_t childID, yli::callback::CallbackParameter* const child_pointer)
         {
             this->callback_parameter_pointer_vector[childID] = child_pointer;
 
@@ -184,7 +184,7 @@ namespace yli
         {
             if (this->callback != nullptr)
             {
-                return this->callback(this->parent, this, this->callback_parameter_pointer_vector);
+                return this->callback(this->parent->universe, this->parent, this, this->callback_parameter_pointer_vector);
             }
             return nullptr;
         }

@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "console_callback_object.hpp"
-#include "code/ylikuutio/callback_system/callback_parameter.hpp"
+#include "code/ylikuutio/callback/callback_parameter.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -34,8 +34,6 @@ namespace yli
     {
         ConsoleCallbackObject::~ConsoleCallbackObject()
         {
-            std::cout << "Console callback object with childID " << this->childID << " will be destroyed.\n";
-
             // destroy all callback parameters of this callback object.
             std::cout << "All callback parameters of this console callback object will be destroyed.\n";
             for (std::size_t child_i = 0; child_i < this->callback_parameter_pointer_vector.size(); child_i++)

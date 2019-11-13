@@ -25,7 +25,7 @@
 
 namespace yli
 {
-    namespace callback_system
+    namespace callback
     {
         class CallbackEngine;
     }
@@ -82,7 +82,7 @@ namespace yli
             }
         }
 
-        yli::callback_system::CallbackEngine* InputMode::get_keypress_callback_engine(uint32_t keycode) const
+        yli::callback::CallbackEngine* InputMode::get_keypress_callback_engine(uint32_t keycode) const
         {
             if (keycode < this->keypress_callback_engines.size())
             {
@@ -92,7 +92,7 @@ namespace yli
             return nullptr;
         }
 
-        yli::callback_system::CallbackEngine* InputMode::get_keyrelease_callback_engine(uint32_t keycode) const
+        yli::callback::CallbackEngine* InputMode::get_keyrelease_callback_engine(uint32_t keycode) const
         {
             if (keycode < this->keyrelease_callback_engines.size())
             {
@@ -102,7 +102,7 @@ namespace yli
             return nullptr;
         }
 
-        yli::callback_system::CallbackEngine* InputMode::get_continuous_keypress_callback_engine(uint32_t keycode) const
+        yli::callback::CallbackEngine* InputMode::get_continuous_keypress_callback_engine(uint32_t keycode) const
         {
             if (keycode < this->continuous_keypress_callback_engines.size())
             {
@@ -112,7 +112,7 @@ namespace yli
             return nullptr;
         }
 
-        void InputMode::set_keypress_callback_engine(uint32_t keycode, yli::callback_system::CallbackEngine* callback_engine)
+        void InputMode::set_keypress_callback_engine(uint32_t keycode, yli::callback::CallbackEngine* callback_engine)
         {
             if (keycode >= this->keypress_callback_engines.size())
             {
@@ -122,7 +122,7 @@ namespace yli
             this->keypress_callback_engines[keycode] = callback_engine;
         }
 
-        void InputMode::set_keyrelease_callback_engine(uint32_t keycode, yli::callback_system::CallbackEngine* callback_engine)
+        void InputMode::set_keyrelease_callback_engine(uint32_t keycode, yli::callback::CallbackEngine* callback_engine)
         {
             if (keycode >= this->keyrelease_callback_engines.size())
             {
@@ -132,7 +132,7 @@ namespace yli
             this->keyrelease_callback_engines[keycode] = callback_engine;
         }
 
-        void InputMode::set_continuous_keypress_callback_engine(uint32_t keycode, yli::callback_system::CallbackEngine* callback_engine)
+        void InputMode::set_continuous_keypress_callback_engine(uint32_t keycode, yli::callback::CallbackEngine* callback_engine)
         {
             if (keycode >= this->continuous_keypress_callback_engines.size())
             {
@@ -142,17 +142,17 @@ namespace yli
             this->continuous_keypress_callback_engines[keycode] = callback_engine;
         }
 
-        const std::vector<yli::callback_system::CallbackEngine*>* InputMode::get_keypress_callback_engines() const
+        const std::vector<yli::callback::CallbackEngine*>* InputMode::get_keypress_callback_engines() const
         {
             return &this->keypress_callback_engines;
         }
 
-        const std::vector<yli::callback_system::CallbackEngine*>* InputMode::get_keyrelease_callback_engines() const
+        const std::vector<yli::callback::CallbackEngine*>* InputMode::get_keyrelease_callback_engines() const
         {
             return &this->keyrelease_callback_engines;
         }
 
-        const std::vector<yli::callback_system::CallbackEngine*>* InputMode::get_continuous_keypress_callback_engines() const
+        const std::vector<yli::callback::CallbackEngine*>* InputMode::get_continuous_keypress_callback_engines() const
         {
             return &this->continuous_keypress_callback_engines;
         }

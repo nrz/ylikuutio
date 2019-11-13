@@ -20,14 +20,14 @@
 
 #include "code/ylikuutio/ontology/console.hpp"
 #include "input_parameters_to_any_value_callback_with_console.hpp"
-#include "code/ylikuutio/callback_system/callback_object.hpp"
+#include "code/ylikuutio/callback/callback_object.hpp"
 
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
 
 namespace yli
 {
-    namespace callback_system
+    namespace callback
     {
         class CallbackEngine;
         class CallbackParameter;
@@ -42,7 +42,7 @@ namespace yli
     {
         class ConsoleCallbackEngine;
 
-        class ConsoleCallbackObject : public yli::callback_system::CallbackObject
+        class ConsoleCallbackObject : public yli::callback::CallbackObject
         {
             public:
                 // destructor.
@@ -53,8 +53,8 @@ namespace yli
             private:
                 // constructor.
                 ConsoleCallbackObject(InputParametersToAnyValueCallbackWithConsole console_callback,
-                        yli::callback_system::CallbackEngine* parent, yli::ontology::Console* console_pointer)
-                    : yli::callback_system::CallbackObject(nullptr, parent)
+                        yli::callback::CallbackEngine* parent, yli::ontology::Console* console_pointer)
+                    : yli::callback::CallbackObject(nullptr, parent)
                 {
                     // constructor.
                     this->callback = nullptr;

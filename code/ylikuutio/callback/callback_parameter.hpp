@@ -36,7 +36,7 @@ namespace yli
         class Universe;
     }
 
-    namespace callback_system
+    namespace callback
     {
         class CallbackParameter
         {
@@ -55,11 +55,11 @@ namespace yli
                 void bind_to_parent();
 
                 // constructor.
-                CallbackParameter(const std::string& name, std::shared_ptr<yli::common::AnyValue> any_value, const bool is_reference, yli::callback_system::CallbackObject* const parent);
+                CallbackParameter(const std::string& name, std::shared_ptr<yli::common::AnyValue> any_value, const bool is_reference, yli::callback::CallbackObject* const parent);
 
-                yli::callback_system::CallbackObject* parent; // pointer to the callback object.
+                yli::callback::CallbackObject* parent; // pointer to the callback object.
 
-                std::size_t childID;            // callback parameter ID, returned by `yli::callback_system::CallbackObject->get_callback_parameterID()`.
+                std::size_t childID;            // callback parameter ID, returned by `yli::callback::CallbackObject->get_callback_parameterID()`.
 
                 std::string name;
                 std::shared_ptr<yli::common::AnyValue> any_value; // this is `private` to make sure that someone does not overwrite it.

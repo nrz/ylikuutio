@@ -33,9 +33,9 @@
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
-#include "code/ylikuutio/callback_system/callback_object.hpp"
-#include "code/ylikuutio/callback_system/callback_engine.hpp"
-#include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
+#include "code/ylikuutio/callback/callback_object.hpp"
+#include "code/ylikuutio/callback/callback_engine.hpp"
+#include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
@@ -91,8 +91,8 @@ int main(const int argc, const char* const argv[])
 
     yli::input::InputMaster* const input_master = my_universe->get_input_master();
 
-    std::cout << "Creating yli::callback_system::CallbackEngine cleanup_callback_engine ...\n";
-    yli::callback_system::CallbackEngine cleanup_callback_engine = yli::callback_system::CallbackEngine();
+    std::cout << "Creating yli::callback::CallbackEngine cleanup_callback_engine ...\n";
+    yli::callback::CallbackEngine cleanup_callback_engine = yli::callback::CallbackEngine();
     cleanup_callback_engine.create_CallbackObject(nullptr);
 
     if (my_universe->get_window() == nullptr)
@@ -172,7 +172,7 @@ int main(const int argc, const char* const argv[])
     std::cout << "Defining action mode keypress callback engines.\n";
 
     // Callback code for esc: exit program.
-    yli::callback_system::CallbackEngine exit_program_callback_engine;
+    yli::callback::CallbackEngine exit_program_callback_engine;
     exit_program_callback_engine.create_CallbackObject(&app::exit_program);
 
     // Keypress callbacks for action mode.
@@ -229,7 +229,7 @@ int main(const int argc, const char* const argv[])
                 {
                     const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
 
-                    yli::callback_system::CallbackEngine* const callback_engine = input_mode->get_keypress_callback_engine(scancode);
+                    yli::callback::CallbackEngine* const callback_engine = input_mode->get_keypress_callback_engine(scancode);
 
                     if (callback_engine == nullptr)
                     {
