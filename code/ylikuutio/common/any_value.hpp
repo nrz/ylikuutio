@@ -83,6 +83,7 @@ namespace yli
             CONSOLE_POINTER,
             SPHERICAL_COORDINATES_STRUCT_POINTER,
             STD_STRING_POINTER,
+            CONST_STD_STRING_POINTER,
             STD_VECTOR_INT8_T_SHARED_PTR,
             STD_VECTOR_UINT8_T_SHARED_PTR,
             STD_VECTOR_INT16_T_SHARED_PTR,
@@ -135,6 +136,7 @@ namespace yli
                 AnyValue(yli::ontology::Console* const console_pointer);
                 AnyValue(yli::common::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
                 AnyValue(std::string* const std_string_pointer);
+                AnyValue(const std::string* const const_std_string_pointer);
                 AnyValue(std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr);
                 AnyValue(std::shared_ptr<std::vector<uint8_t>> std_vector_uint8_t_shared_ptr);
                 AnyValue(std::shared_ptr<std::vector<int16_t>> std_vector_int16_t_shared_ptr);
@@ -171,6 +173,7 @@ namespace yli
                 AnyValue(const std::string& type, yli::ontology::Console* const console_pointer);
                 AnyValue(const std::string& type, yli::common::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
                 AnyValue(const std::string& type, std::string* const std_string_pointer);
+                AnyValue(const std::string& type, const std::string* const const_std_string_pointer);
                 AnyValue(const std::string& type, std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr);
                 AnyValue(const std::string& type, std::shared_ptr<std::vector<uint8_t>> std_vector_uint8_t_shared_ptr);
                 AnyValue(const std::string& type, std::shared_ptr<std::vector<int16_t>> std_vector_int16_t_shared_ptr);
@@ -218,6 +221,7 @@ namespace yli
                     yli::ontology::Console* console_pointer;
                     yli::common::SphericalCoordinatesStruct* spherical_coordinates_struct_pointer;
                     std::string* std_string_pointer;
+                    const std::string* const_std_string_pointer;
                     glm::vec3* glm_vec3_pointer;
                     glm::vec4* glm_vec4_pointer;
                 };

@@ -118,6 +118,8 @@ namespace yli
                     return "yli::common::SphericalCoordinatesStruct*";
                 case (yli::common::Datatype::STD_STRING_POINTER):
                     return "std::string*";
+                case (yli::common::Datatype::CONST_STD_STRING_POINTER):
+                    return "const std::string*";
                 case (yli::common::Datatype::STD_VECTOR_INT8_T_SHARED_PTR):
                     return "std::shared_ptr<std::vector<int8_t>>";
                 case (yli::common::Datatype::STD_VECTOR_UINT8_T_SHARED_PTR):
@@ -253,6 +255,16 @@ namespace yli
                     else
                     {
                         any_value_stringstream << *this->std_string_pointer;
+                    }
+                    break;
+                case (yli::common::Datatype::CONST_STD_STRING_POINTER):
+                    if (this->const_std_string_pointer == nullptr)
+                    {
+                        any_value_stringstream << "nullptr";
+                    }
+                    else
+                    {
+                        any_value_stringstream << *this->const_std_string_pointer;
                     }
                     break;
                 case (yli::common::Datatype::STD_VECTOR_INT8_T_SHARED_PTR):
@@ -1394,6 +1406,26 @@ namespace yli
             {
                 this->type = yli::common::Datatype::STD_STRING_POINTER;
                 this->std_string_pointer = std_string_pointer;
+            }
+        }
+
+        AnyValue::AnyValue(const std::string* const const_std_string_pointer)
+        {
+            // constructor.
+            this->set_default_values();
+            this->type = yli::common::Datatype::CONST_STD_STRING_POINTER;
+            this->const_std_string_pointer = const_std_string_pointer;
+        }
+
+        AnyValue::AnyValue(const std::string& type, const std::string* const const_std_string_pointer)
+        {
+            // constructor.
+            this->set_default_values();
+
+            if (type == "const std::string*")
+            {
+                this->type = yli::common::Datatype::CONST_STD_STRING_POINTER;
+                this->const_std_string_pointer = const_std_string_pointer;
             }
         }
 
