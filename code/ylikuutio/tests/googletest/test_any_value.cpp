@@ -383,7 +383,7 @@ TEST(any_value_must_be_initialized_appropriately, object)
 TEST(any_value_must_be_initialized_appropriately, std_string)
 {
     std::string foo_string = "foo";
-    std::string* foo_string_pointer = &foo_string;
+    std::string* const foo_string_pointer = &foo_string;
     yli::common::AnyValue object_pointer_any_value = yli::common::AnyValue(foo_string_pointer);
     ASSERT_EQ(object_pointer_any_value.type, yli::common::Datatype::STD_STRING_POINTER);
     ASSERT_EQ(object_pointer_any_value.std_string_pointer, foo_string_pointer);
