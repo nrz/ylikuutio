@@ -390,8 +390,8 @@ int main(const int argc, const char* const argv[])
     std::cout << "Defining action mode keypress callback engines.\n";
 
     // Callback code for `SDL_SCANCODE_GRAVE` (tilde key above Tab, usually used for console).
-    yli::console::ConsoleCallbackEngine enter_console_callback_engine;
-    enter_console_callback_engine.create_ConsoleCallbackObject(&yli::ontology::Console::enter_console, my_console);
+    yli::callback::CallbackEngine enter_console_callback_engine(my_universe);
+    enter_console_callback_engine.create_CallbackObject(&yli::ontology::Console::enter_console);
 
     // Callback code for esc: exit program.
     yli::callback::CallbackEngine exit_program_callback_engine;

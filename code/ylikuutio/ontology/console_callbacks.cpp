@@ -52,11 +52,18 @@ namespace yli
         // Action mode keypress callbacks begin here.
 
         std::shared_ptr<yli::common::AnyValue> Console::enter_console(
+                yli::ontology::Universe* universe,
                 yli::callback::CallbackEngine*,
                 yli::callback::CallbackObject*,
-                std::vector<yli::callback::CallbackParameter*>&,
-                yli::ontology::Console* console)
+                std::vector<yli::callback::CallbackParameter*>&)
         {
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Console* const console = universe->get_active_console();
+
             if (console == nullptr)
             {
                 // We did not enter the console.

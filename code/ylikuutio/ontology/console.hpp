@@ -200,10 +200,10 @@ namespace yli
                 // Action mode keypress callbacks begin here.
 
                 static std::shared_ptr<yli::common::AnyValue> enter_console(
+                        yli::ontology::Universe* universe,
                         yli::callback::CallbackEngine*,
                         yli::callback::CallbackObject*,
-                        std::vector<yli::callback::CallbackParameter*>&,
-                        yli::ontology::Console* console);
+                        std::vector<yli::callback::CallbackParameter*>&);
 
                 // Console mode keyrelease callbacks begin here.
 
