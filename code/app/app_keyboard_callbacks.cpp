@@ -777,13 +777,18 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_entity_string->type != yli::common::Datatype::STD_STRING_POINTER)
+        if (any_value_entity_string->type != yli::common::Datatype::STD_STRING_POINTER &&
+                any_value_entity_string->type != yli::common::Datatype::CONST_STD_STRING_POINTER)
         {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::STD_STRING_POINTER\n";
+            std::cerr << "ERROR: invalid datatype.\n";
+            std::cerr << "Datatype should be either yli::common::Datatype::STD_STRING_POINTER or yli::common::Datatype::CONST_STD_STRING_POINTER\n";
             return nullptr;
         }
 
-        const std::string* const entity_string_pointer = any_value_entity_string->std_string_pointer;
+        const std::string* const entity_string_pointer =
+            (any_value_entity_string->type == yli::common::Datatype::STD_STRING_POINTER ?
+             any_value_entity_string->std_string_pointer :
+             any_value_entity_string->const_std_string_pointer);
 
         if (entity_string_pointer == nullptr)
         {
@@ -823,13 +828,18 @@ namespace app
             return nullptr;
         }
 
-        if (any_value_material_string->type != yli::common::Datatype::STD_STRING_POINTER)
+        if (any_value_material_string->type != yli::common::Datatype::STD_STRING_POINTER &&
+                any_value_material_string->type != yli::common::Datatype::CONST_STD_STRING_POINTER)
         {
-            std::cerr << "ERROR: invalid datatype. Datatype should be yli::common::Datatype::STD_STRING_POINTER\n";
+            std::cerr << "ERROR: invalid datatype.\n";
+            std::cerr << "Datatype should be either yli::common::Datatype::STD_STRING_POINTER or yli::common::Datatype::CONST_STD_STRING_POINTER\n";
             return nullptr;
         }
 
-        std::string* new_material_string_pointer = any_value_material_string->std_string_pointer;
+        const std::string* const new_material_string_pointer =
+            (any_value_material_string->type != yli::common::Datatype::STD_STRING_POINTER ?
+             any_value_material_string->std_string_pointer :
+             any_value_material_string->const_std_string_pointer);
 
         if (new_material_string_pointer == nullptr)
         {
