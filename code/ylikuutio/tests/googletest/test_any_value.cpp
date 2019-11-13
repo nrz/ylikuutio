@@ -392,3 +392,16 @@ TEST(any_value_must_be_initialized_appropriately, std_string)
     ASSERT_EQ(std::strlen(object_pointer_any_value.get_string().c_str()), std::strlen("foo"));
     ASSERT_EQ(std::strcmp(object_pointer_any_value.get_string().c_str(), "foo"), 0);
 }
+
+TEST(any_value_must_be_initialized_appropriately, const_std_string)
+{
+    const std::string foo_string = "foo";
+    const std::string* const foo_string_pointer = &foo_string;
+    yli::common::AnyValue object_pointer_any_value = yli::common::AnyValue(foo_string_pointer);
+    ASSERT_EQ(object_pointer_any_value.type, yli::common::Datatype::CONST_STD_STRING_POINTER);
+    ASSERT_EQ(object_pointer_any_value.const_std_string_pointer, foo_string_pointer);
+    ASSERT_EQ(std::strlen(object_pointer_any_value.get_datatype().c_str()), std::strlen("const std::string*"));
+    ASSERT_EQ(std::strcmp(object_pointer_any_value.get_datatype().c_str(), "const std::string*"), 0);
+    ASSERT_EQ(std::strlen(object_pointer_any_value.get_string().c_str()), std::strlen("foo"));
+    ASSERT_EQ(std::strcmp(object_pointer_any_value.get_string().c_str(), "foo"), 0);
+}
