@@ -23,6 +23,7 @@ https://semver.org/spec/v2.0.0.html
   `horizontal_angle` & `vertical_angle`.
 * `speed`, `mouse_speed`, `turbo_factor` & `twin_turbo_factor`
   can be set either as command line parameters or in console.
+* Support for `InputMode`s.
 * `Console` is an `Entity` and there can be multiple `Console`s.
 
 Future versions:
