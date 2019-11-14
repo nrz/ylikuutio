@@ -39,6 +39,7 @@ namespace yli
 
             this->universe = universe;
             this->active_input_mode = nullptr;
+            this->number_of_input_modes = 0;
         }
 
         InputMaster::~InputMaster()
