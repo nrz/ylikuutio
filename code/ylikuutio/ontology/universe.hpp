@@ -23,7 +23,6 @@
 #include "universe_struct.hpp"
 #include "camera_struct.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
-#include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -288,6 +287,11 @@ namespace yli
     namespace config
     {
         class Setting;
+    }
+
+    namespace input
+    {
+        enum class InputMethod;
     }
 
     namespace ontology
