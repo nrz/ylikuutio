@@ -84,7 +84,7 @@ namespace yli
             std::size_t z_step;                                 // step in z-dimension for input data (set to 1 to load all data points/measurements).
             double latitude;                                    // in degrees, for SRTM model files.
             double longitude;                                   // in degrees, for SRTM model files.
-            float planet_radius;                                // radius of sea level in kilometers. used only for terrains (planets and moons).
+            float planet_radius;                                // radius of sea level in kilometers. used only for terrains (planets and moons). `6371.0f` for Earth.
             float divisor;                                      // value by which SRTM values are divided to convert them to kilometers.
             float water_level;                                  // water level in meters. used only for terrains (planets and moons).
             bool is_terrain;                                    // Terrains (planets and moons) currently neither rotate nor translate.
