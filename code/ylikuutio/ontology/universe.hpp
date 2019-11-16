@@ -336,7 +336,6 @@ namespace yli
                     this->current_camera_spherical_coordinates.theta = NAN; // dummy coordinates.
                     this->current_camera_spherical_coordinates.phi   = NAN; // dummy coordinates.
 
-                    this->planet_radius    = NAN;     // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
                     this->terrain_species  = nullptr;
                     this->active_world     = nullptr;
                     this->active_font2D    = nullptr;
@@ -522,9 +521,6 @@ namespace yli
 
                 yli::ontology::Font2D* get_active_font2D() const;
                 void set_active_font2D(yli::ontology::Font2D* const font2D);
-
-                float get_planet_radius() const;
-                void set_planet_radius(float planet_radius);
 
                 // this method returns a terrain `Species` pointer.
                 yli::ontology::Species* get_terrain_species() const;
@@ -724,8 +720,6 @@ namespace yli
                 bool compute_and_update_matrices_from_inputs();
 
                 yli::ontology::Species* terrain_species; // pointer to terrain `Species` (used in collision detection).
-
-                float planet_radius;
 
                 std::shared_ptr<yli::ontology::EntityFactory> entity_factory;
 

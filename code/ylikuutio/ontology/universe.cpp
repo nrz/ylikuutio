@@ -1216,16 +1216,6 @@ namespace yli
             this->active_font2D = font2D;
         }
 
-        float Universe::get_planet_radius() const
-        {
-            return this->planet_radius;
-        }
-
-        void Universe::set_planet_radius(float planet_radius)
-        {
-            this->planet_radius = planet_radius;
-        }
-
         yli::ontology::Species* Universe::get_terrain_species() const
         {
             return this->terrain_species;
