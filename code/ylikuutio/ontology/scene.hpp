@@ -19,7 +19,6 @@
 #define __SCENE_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "universe.hpp"
 #include "shader_priority_queue.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
