@@ -64,6 +64,11 @@
 
 namespace yli
 {
+    namespace common
+    {
+        struct SphericalCoordinatesStruct;
+    }
+
     namespace ontology
     {
         class Universe;
