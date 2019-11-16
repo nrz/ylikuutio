@@ -50,6 +50,7 @@
 #include "console.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/input/input.hpp"
+#include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/memory/memory_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -89,11 +90,6 @@ namespace yli
     namespace config
     {
         class Setting;
-    }
-
-    namespace input
-    {
-        class InputMaster;
     }
 
     namespace ontology
@@ -378,7 +374,12 @@ namespace yli
 
         yli::input::InputMethod Universe::get_input_method() const
         {
-            return this->input_method;
+            if (this->input_master == nullptr)
+            {
+                return yli::input::InputMethod::KEYBOARD;
+            }
+
+            return this->input_master->get_input_method();
         }
 
         bool Universe::get_is_headless() const
