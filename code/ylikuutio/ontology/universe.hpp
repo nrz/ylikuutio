@@ -398,9 +398,12 @@ namespace yli
                     this->current_time_before_reading_keyboard = std::numeric_limits<uint32_t>::max();
 
                     this->has_mouse_ever_moved    = false;
+
                     this->can_toggle_invert_mouse = false;
-                    this->is_invert_mouse_in_use  = false;
                     this->can_toggle_flight_mode  = false;
+                    this->can_toggle_help_mode    = false;
+
+                    this->is_invert_mouse_in_use  = false;
                     this->is_flight_mode_in_use   = false;
                     this->is_first_turbo_pressed  = false;
                     this->is_second_turbo_pressed = false;
@@ -420,7 +423,6 @@ namespace yli
                     this->testing_spherical_terrain_in_use = false;
                     this->in_console                       = false;
                     this->in_help_mode                     = true;
-                    this->can_toggle_help_mode             = false;
                     this->can_display_help_screen          = true;
 
                     this->number_of_entities = 0;
@@ -688,8 +690,10 @@ namespace yli
                 // 'can toggle'-type of boolean keypress control variables
                 // should all be stored in the `Universe` to avoid locking.
                 bool can_toggle_invert_mouse;
-                bool is_invert_mouse_in_use;
                 bool can_toggle_flight_mode;
+                bool can_toggle_help_mode;
+
+                bool is_invert_mouse_in_use;
                 bool is_flight_mode_in_use;
                 bool is_first_turbo_pressed;
                 bool is_second_turbo_pressed;
@@ -711,7 +715,6 @@ namespace yli
 
                 // Variables related to help mode.
                 bool in_help_mode;
-                bool can_toggle_help_mode;
                 bool can_display_help_screen;
 
                 float background_red;
