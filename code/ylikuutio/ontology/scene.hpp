@@ -138,9 +138,9 @@ namespace yli
                 // this method returns a pointer to `yli::common::AnyValue` corresponding to the given `key`.
                 std::shared_ptr<yli::common::AnyValue> get_variable(const std::string& key) const;
                 float get_turbo_factor() const;
-                void set_turbo_factor(float turbo_factor);
+                void set_turbo_factor(const float turbo_factor);
                 float get_twin_turbo_factor() const;
-                void set_twin_turbo_factor(float turbo_factor);
+                void set_twin_turbo_factor(const float turbo_factor);
 
                 yli::ontology::Species* get_terrain_species() const;
 

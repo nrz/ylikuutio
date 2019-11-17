@@ -258,7 +258,7 @@ namespace yli
             return NAN;
         }
 
-        void Scene::set_turbo_factor(float turbo_factor)
+        void Scene::set_turbo_factor(const float turbo_factor)
         {
             this->turbo_factor = turbo_factor;
 
@@ -284,7 +284,7 @@ namespace yli
             return NAN;
         }
 
-        void Scene::set_twin_turbo_factor(float twin_turbo_factor)
+        void Scene::set_twin_turbo_factor(const float twin_turbo_factor)
         {
             this->twin_turbo_factor = twin_turbo_factor;
 
