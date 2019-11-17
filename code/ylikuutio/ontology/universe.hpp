@@ -684,6 +684,9 @@ namespace yli
                 float twin_turbo_factor;
                 float mouse_speed;
                 bool has_mouse_ever_moved;
+
+                // 'can toggle'-type of boolean keypress control variables
+                // should all be stored in the `Universe` to avoid locking.
                 bool can_toggle_invert_mouse;
                 bool is_invert_mouse_in_use;
                 bool can_toggle_flight_mode;
