@@ -183,7 +183,7 @@ namespace yli
 
                 yli::ontology::Camera* active_camera;
 
-                yli::ontology::Species* terrain_species;
+                yli::ontology::Species* terrain_species; // pointer to terrain `Species` (used in collision detection).
 
                 // For finding any `Entity`s of this `Scene` by using its name.
                 std::unordered_map<std::string, yli::ontology::Entity*> name_map;
