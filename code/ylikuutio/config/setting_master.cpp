@@ -20,6 +20,7 @@
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"
@@ -1327,9 +1328,9 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(entity);
 
-            if (universe == nullptr)
+            if (scene == nullptr)
             {
                 return nullptr;
             }
@@ -1346,7 +1347,7 @@ namespace yli
                 return nullptr;
             }
 
-            universe->is_flight_mode_in_use = is_flight_mode_in_use_any_value->bool_value;
+            scene->set_is_flight_mode_in_use(is_flight_mode_in_use_any_value->bool_value);
             return nullptr;
         }
 
@@ -1765,14 +1766,14 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(entity);
 
-            if (universe == nullptr)
+            if (scene == nullptr)
             {
                 return nullptr;
             }
 
-            return std::make_shared<yli::common::AnyValue>(universe->is_flight_mode_in_use);
+            return std::make_shared<yli::common::AnyValue>(scene->get_is_flight_mode_in_use());
         }
     }
 }

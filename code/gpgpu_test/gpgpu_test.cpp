@@ -151,8 +151,6 @@ int main(const int argc, const char* const argv[])
     std::cout << "Creating yli::ontology::Scene* gpgpu_test_scene ...\n";
     yli::ontology::Scene* const gpgpu_test_scene = dynamic_cast<yli::ontology::Scene*>(gpgpu_test_scene_entity);
 
-    my_universe->is_flight_mode_in_use = true;
-
     if (gpgpu_test_scene == nullptr)
     {
         cleanup_callback_engine.execute();

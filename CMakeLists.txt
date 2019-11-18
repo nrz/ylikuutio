@@ -565,6 +565,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/road_vehicle.hpp
     code/ylikuutio/ontology/scene.cpp
     code/ylikuutio/ontology/scene.hpp
+    code/ylikuutio/ontology/scene_struct.hpp
     code/ylikuutio/ontology/shader.cpp
     code/ylikuutio/ontology/shader.hpp
     code/ylikuutio/ontology/shader_compare.cpp

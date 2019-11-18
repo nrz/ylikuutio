@@ -20,6 +20,7 @@
 
 #include "entity.hpp"
 #include "shader_priority_queue.hpp"
+#include "scene_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -87,14 +88,14 @@ namespace yli
                 void unbind_Camera(const std::size_t childID);
 
                 // constructor.
-                Scene(yli::ontology::Universe* const universe, yli::ontology::World* const world, const float water_level)
+                Scene(yli::ontology::Universe* const universe, const yli::ontology::SceneStruct& scene_struct)
                     : Entity(universe)
                 {
                     // constructor.
-                    this->gravity               = 9.81f / 60.0f;
-                    this->fall_speed            = this->gravity;
-                    this->water_level           = water_level;
-                    this->parent                = world;
+                    this->parent                = scene_struct.world;
+                    this->gravity               = scene_struct.gravity;
+                    this->fall_speed            = scene_struct.gravity;
+                    this->water_level           = scene_struct.water_level;
                     this->cartesian_coordinates = nullptr;
                     this->spherical_coordinates = nullptr;
                     this->horizontal_angle      = NAN;
@@ -106,6 +107,8 @@ namespace yli
                     this->number_of_cameras     = 0;
                     this->active_camera         = nullptr;
                     this->terrain_species       = nullptr;
+
+                    this->is_flight_mode_in_use = scene_struct.is_flight_mode_in_use;
 
                     // get `childID` from `World` and set pointer to this `Scene`.
                     this->bind_to_parent();
@@ -126,6 +129,9 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
+                // this method processes the physics.
+                void do_physics();
+
                 // this method renders all `Shader`s of this `Scene`.
                 void render();
 
@@ -142,6 +148,11 @@ namespace yli
                 float get_twin_turbo_factor() const;
                 void set_twin_turbo_factor(const float turbo_factor);
 
+                float get_gravity() const;
+                void set_gravity(const float gravity);
+                float get_fall_speed() const;
+                void set_fall_speed(const float fall_speed);
+
                 yli::ontology::Species* get_terrain_species() const;
 
                 // set terrain `Species` pointers in `Scene` and `Universe` so that they point to the chosen terrain `Species`.
@@ -151,6 +162,9 @@ namespace yli
                 yli::ontology::World* get_world_parent() const;
 
                 float get_water_level() const;
+
+                bool get_is_flight_mode_in_use() const;
+                void set_is_flight_mode_in_use(const bool is_flight_mode_in_use);
 
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
@@ -213,6 +227,8 @@ namespace yli
                 float fall_speed;
 
                 float water_level;
+
+                bool is_flight_mode_in_use;
         };
     }
 }

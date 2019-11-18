@@ -298,7 +298,6 @@ namespace yli
     {
         class World;
         class Scene;
-        class Species;
         class Camera;
         class Font2D;
         class Console;
@@ -336,7 +335,6 @@ namespace yli
                     this->current_camera_spherical_coordinates.theta = NAN; // dummy coordinates.
                     this->current_camera_spherical_coordinates.phi   = NAN; // dummy coordinates.
 
-                    this->terrain_species  = nullptr;
                     this->active_world     = nullptr;
                     this->active_font2D    = nullptr;
                     this->active_console   = nullptr;
@@ -404,7 +402,6 @@ namespace yli
                     this->can_toggle_help_mode    = false;
 
                     this->is_invert_mouse_in_use  = false;
-                    this->is_flight_mode_in_use   = false;
                     this->is_first_turbo_pressed  = false;
                     this->is_second_turbo_pressed = false;
                     this->is_exit_requested       = false;
@@ -413,9 +410,6 @@ namespace yli
                     this->turbo_factor      = universe_struct.turbo_factor;
                     this->twin_turbo_factor = universe_struct.twin_turbo_factor;
                     this->mouse_speed       = universe_struct.mouse_speed;
-
-                    this->gravity     = universe_struct.gravity;
-                    this->fall_speed  = this->gravity;
 
                     this->znear       = universe_struct.znear;
                     this->zfar        = universe_struct.zfar;
@@ -523,12 +517,6 @@ namespace yli
 
                 yli::ontology::Font2D* get_active_font2D() const;
                 void set_active_font2D(yli::ontology::Font2D* const font2D);
-
-                // this method returns a terrain `Species` pointer.
-                yli::ontology::Species* get_terrain_species() const;
-
-                // this method sets a terrain `Species` pointer.
-                void set_terrain_species(yli::ontology::Species* const terrain_species);
 
                 std::size_t get_number_of_worlds() const;
 
@@ -694,14 +682,9 @@ namespace yli
                 bool can_toggle_help_mode;
 
                 bool is_invert_mouse_in_use;
-                bool is_flight_mode_in_use;
                 bool is_first_turbo_pressed;
                 bool is_second_turbo_pressed;
                 bool is_exit_requested;
-
-                // Variables related to physics.
-                float gravity;
-                float fall_speed;
 
                 // Variables related to graphics.
                 float znear;
@@ -724,8 +707,6 @@ namespace yli
 
             private:
                 bool compute_and_update_matrices_from_inputs();
-
-                yli::ontology::Species* terrain_species; // pointer to terrain `Species` (used in collision detection).
 
                 std::shared_ptr<yli::ontology::EntityFactory> entity_factory;
 

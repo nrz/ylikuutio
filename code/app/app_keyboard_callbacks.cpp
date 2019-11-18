@@ -26,6 +26,7 @@
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
+#include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 
 // Include GLM
@@ -379,8 +380,22 @@ namespace app
 
         if (universe->can_toggle_flight_mode)
         {
-            universe->is_flight_mode_in_use = !universe->is_flight_mode_in_use;
-            universe->fall_speed = 0.0f;
+            yli::ontology::World* const world = universe->get_active_world();
+
+            if (world == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Scene* const scene = world->get_active_scene();
+
+            if (scene == nullptr)
+            {
+                return nullptr;
+            }
+
+            scene->set_is_flight_mode_in_use(!scene->get_is_flight_mode_in_use());
+            scene->set_fall_speed(0.0f);
             universe->can_toggle_flight_mode = false;
         }
         return nullptr;

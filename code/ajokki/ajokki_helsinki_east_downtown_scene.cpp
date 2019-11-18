@@ -29,6 +29,7 @@
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/vector_font.hpp"
 #include "code/ylikuutio/ontology/camera.hpp"
+#include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/species_struct.hpp"
@@ -64,7 +65,10 @@ namespace ajokki
         // Helsinki `Scene` begins here.
 
         std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_scene_entity ...\n";
-        yli::ontology::Entity* const helsinki_east_downtown_scene_entity = entity_factory->create_Scene(world, 0.9f);
+        yli::ontology::SceneStruct scene_struct;
+        scene_struct.world = world;
+        scene_struct.water_level = 0.9f;
+        yli::ontology::Entity* const helsinki_east_downtown_scene_entity = entity_factory->create_Scene(scene_struct);
         std::cout << "Creating yli::ontology::Scene* helsinki_east_downtown_scene ...\n";
         yli::ontology::Scene* const helsinki_east_downtown_scene = dynamic_cast<yli::ontology::Scene*>(helsinki_east_downtown_scene_entity);
 

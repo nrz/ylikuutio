@@ -18,6 +18,7 @@
 #ifndef __ENTITY_FACTORY_HPP_INCLUDED
 #define __ENTITY_FACTORY_HPP_INCLUDED
 
+#include "scene_struct.hpp"
 #include "shader_struct.hpp"
 #include "material_struct.hpp"
 #include "species_struct.hpp"
@@ -68,7 +69,7 @@ namespace yli
                 yli::ontology::Universe* get_universe() const;
 
                 yli::ontology::Entity* create_World() const;
-                yli::ontology::Entity* create_Scene(yli::ontology::World* const world, const float water_level) const;
+                yli::ontology::Entity* create_Scene(const yli::ontology::SceneStruct& scene_struct) const;
                 yli::ontology::Entity* create_Shader(const yli::ontology::ShaderStruct& shader_struct) const;
                 yli::ontology::Entity* create_Material(const yli::ontology::MaterialStruct& material_struct) const;
                 yli::ontology::Entity* create_Species(const yli::ontology::SpeciesStruct& species_struct) const;
