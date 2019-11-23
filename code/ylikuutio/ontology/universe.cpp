@@ -41,7 +41,6 @@
 #include "font2D.hpp"
 #include "any_value_entity.hpp"
 #include "any_struct_entity.hpp"
-#include "ground_level.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
@@ -49,6 +48,8 @@
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "console.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/input/input.hpp"
+#include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/memory/memory_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -72,7 +73,6 @@
 #endif
 
 // Include standard headers
-#include <cmath>         // NAN, std::isnan, std::pow
 #include <cstddef>       // std::size_t
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
@@ -90,15 +90,8 @@ namespace yli
         class Setting;
     }
 
-    namespace input
-    {
-        class InputMaster;
-    }
-
     namespace ontology
     {
-        class Species;
-
         const std::string Universe::version = "0.0.5";
 
         void Universe::bind_Entity(yli::ontology::Entity* const entity)
@@ -249,6 +242,11 @@ namespace yli
 
         void Universe::do_physics()
         {
+            if (this->active_world != nullptr)
+            {
+                this->active_world->do_physics();
+            }
+
             this->compute_and_update_matrices_from_inputs();
         }
 
@@ -329,7 +327,6 @@ namespace yli
             {
                 this->turbo_factor = this->active_world->get_active_scene()->get_turbo_factor();
                 this->twin_turbo_factor = this->active_world->get_active_scene()->get_twin_turbo_factor();
-                this->terrain_species = this->active_world->get_active_scene()->get_terrain_species();
             }
         }
 
@@ -347,7 +344,6 @@ namespace yli
             {
                 this->turbo_factor = this->active_world->get_active_scene()->get_turbo_factor();
                 this->twin_turbo_factor = this->active_world->get_active_scene()->get_twin_turbo_factor();
-                this->terrain_species = this->active_world->get_active_scene()->get_terrain_species();
             }
         }
 
@@ -377,7 +373,12 @@ namespace yli
 
         yli::input::InputMethod Universe::get_input_method() const
         {
-            return this->input_method;
+            if (this->input_master == nullptr)
+            {
+                return yli::input::InputMethod::KEYBOARD;
+            }
+
+            return this->input_master->get_input_method();
         }
 
         bool Universe::get_is_headless() const
@@ -1214,26 +1215,6 @@ namespace yli
             this->active_font2D = font2D;
         }
 
-        float Universe::get_planet_radius() const
-        {
-            return this->planet_radius;
-        }
-
-        void Universe::set_planet_radius(float planet_radius)
-        {
-            this->planet_radius = planet_radius;
-        }
-
-        yli::ontology::Species* Universe::get_terrain_species() const
-        {
-            return this->terrain_species;
-        }
-
-        void Universe::set_terrain_species(yli::ontology::Species* const terrain_species)
-        {
-            this->terrain_species = terrain_species;
-        }
-
         const glm::mat4& Universe::get_projection_matrix() const
         {
             return this->current_camera_projection_matrix;
@@ -1266,29 +1247,6 @@ namespace yli
 
         bool Universe::compute_and_update_matrices_from_inputs()
         {
-            if (!this->is_flight_mode_in_use)
-            {
-                // Accelerate and fall.
-
-                this->fall_speed += this->gravity;
-                this->current_camera_cartesian_coordinates.y -= this->fall_speed;
-
-                // Adjust position according to the ground.
-
-                if (this->terrain_species != nullptr)
-                {
-                    float ground_y = yli::ontology::get_floor_level(
-                            this->terrain_species,
-                            this->current_camera_cartesian_coordinates);
-
-                    if (!std::isnan(ground_y) && this->current_camera_cartesian_coordinates.y < ground_y)
-                    {
-                        this->current_camera_cartesian_coordinates.y = ground_y;
-                        this->fall_speed = 0.0f;
-                    }
-                }
-            }
-
             if (this->testing_spherical_terrain_in_use)
             {
                 // Compute spherical coordinates.

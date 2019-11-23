@@ -1,0 +1,4 @@
+Digital Elevation Data (by Jonathan de Ferranti,
+whole world data available at 3 and 15 arc second resolutions):
+http://www.viewfinderpanoramas.org/dem3.html
+

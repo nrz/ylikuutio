@@ -25,10 +25,13 @@
 #endif
 
 #include "scene.hpp"
+#include "universe.hpp"
 #include "world.hpp"
-#include "ground_level.hpp"
 #include "shader.hpp"
+#include "material.hpp"
+#include "species.hpp"
 #include "camera.hpp"
+#include "ground_level.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -139,6 +142,42 @@ namespace yli
 
             // set pointer to this `Scene` to `nullptr`.
             world->unbind_Scene(this->childID);
+        }
+
+        void Scene::do_physics()
+        {
+            // Coordinates are stored in `Universe`,
+            // but gravity and fall speed are stored in `Scene`.
+            // Therefore, coordinates exist even in a void without any `Scene`.
+
+            if (this->universe == nullptr)
+            {
+                return;
+            }
+
+            if (!this->is_flight_mode_in_use)
+            {
+                // Accelerate and fall.
+
+                this->fall_speed += this->gravity;
+                this->universe->current_camera_cartesian_coordinates.y -= this->fall_speed;
+
+                // Adjust position according to the ground.
+
+                if (this->terrain_species != nullptr)
+                {
+                    float ground_y = yli::ontology::get_floor_level(
+                            this->terrain_species,
+                            this->universe->current_camera_cartesian_coordinates);
+
+                    if (!std::isnan(ground_y) && this->universe->current_camera_cartesian_coordinates.y < ground_y)
+                    {
+                        this->universe->current_camera_cartesian_coordinates.y = ground_y;
+                        this->fall_speed = 0.0f;
+                    }
+                }
+            }
+
         }
 
         void Scene::render()
@@ -258,7 +297,7 @@ namespace yli
             return NAN;
         }
 
-        void Scene::set_turbo_factor(float turbo_factor)
+        void Scene::set_turbo_factor(const float turbo_factor)
         {
             this->turbo_factor = turbo_factor;
 
@@ -284,7 +323,7 @@ namespace yli
             return NAN;
         }
 
-        void Scene::set_twin_turbo_factor(float twin_turbo_factor)
+        void Scene::set_twin_turbo_factor(const float twin_turbo_factor)
         {
             this->twin_turbo_factor = twin_turbo_factor;
 
@@ -295,6 +334,26 @@ namespace yli
             {
                 this->universe->twin_turbo_factor = this->twin_turbo_factor;
             }
+        }
+
+        float Scene::get_gravity() const
+        {
+            return this->gravity;
+        }
+
+        void Scene::set_gravity(const float gravity)
+        {
+            this->gravity = gravity;
+        }
+
+        float Scene::get_fall_speed() const
+        {
+            return this->fall_speed;
+        }
+
+        void Scene::set_fall_speed(const float fall_speed)
+        {
+            this->fall_speed = fall_speed;
         }
 
         yli::ontology::Species* Scene::get_terrain_species() const
@@ -312,14 +371,23 @@ namespace yli
 
         void Scene::set_terrain_species(yli::ontology::Species* const terrain_species)
         {
-            this->terrain_species = terrain_species;
+            yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(terrain_species->get_parent());
 
-            if (this->parent != nullptr &&
-                    this->universe != nullptr &&
-                    this->parent == this->universe->get_active_world() &&
-                    this == this->parent->get_active_scene())
+            if (material == nullptr)
             {
-                this->universe->set_terrain_species(this->terrain_species);
+                return;
+            }
+
+            yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(material->get_parent());
+
+            if (shader == nullptr)
+            {
+                return;
+            }
+
+            if (shader->get_parent() == this)
+            {
+                this->terrain_species = terrain_species;
             }
         }
 
@@ -331,6 +399,16 @@ namespace yli
         float Scene::get_water_level() const
         {
             return this->water_level;
+        }
+
+        bool Scene::get_is_flight_mode_in_use() const
+        {
+            return this->is_flight_mode_in_use;
+        }
+
+        void Scene::set_is_flight_mode_in_use(const bool is_flight_mode_in_use)
+        {
+            this->is_flight_mode_in_use = is_flight_mode_in_use;
         }
     }
 }

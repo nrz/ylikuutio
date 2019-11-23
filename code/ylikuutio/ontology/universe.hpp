@@ -23,7 +23,6 @@
 #include "universe_struct.hpp"
 #include "camera_struct.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
-#include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -290,11 +289,15 @@ namespace yli
         class Setting;
     }
 
+    namespace input
+    {
+        enum class InputMethod;
+    }
+
     namespace ontology
     {
         class World;
         class Scene;
-        class Species;
         class Camera;
         class Font2D;
         class Console;
@@ -332,8 +335,6 @@ namespace yli
                     this->current_camera_spherical_coordinates.theta = NAN; // dummy coordinates.
                     this->current_camera_spherical_coordinates.phi   = NAN; // dummy coordinates.
 
-                    this->planet_radius    = NAN;     // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
-                    this->terrain_species  = nullptr;
                     this->active_world     = nullptr;
                     this->active_font2D    = nullptr;
                     this->active_console   = nullptr;
@@ -360,8 +361,8 @@ namespace yli
                         this->window_title = window_title_stringstream.str();
                     }
 
+                    this->is_physical  = universe_struct.is_physical;
                     this->is_headless  = universe_struct.is_headless;
-                    this->input_method = universe_struct.input_method;
 
                     // mouse coordinates.
                     this->mouse_x      = this->window_width / 2;
@@ -396,10 +397,12 @@ namespace yli
                     this->current_time_before_reading_keyboard = std::numeric_limits<uint32_t>::max();
 
                     this->has_mouse_ever_moved    = false;
+
                     this->can_toggle_invert_mouse = false;
-                    this->is_invert_mouse_in_use  = false;
                     this->can_toggle_flight_mode  = false;
-                    this->is_flight_mode_in_use   = false;
+                    this->can_toggle_help_mode    = false;
+
+                    this->is_invert_mouse_in_use  = false;
                     this->is_first_turbo_pressed  = false;
                     this->is_second_turbo_pressed = false;
                     this->is_exit_requested       = false;
@@ -409,16 +412,12 @@ namespace yli
                     this->twin_turbo_factor = universe_struct.twin_turbo_factor;
                     this->mouse_speed       = universe_struct.mouse_speed;
 
-                    this->gravity     = universe_struct.gravity;
-                    this->fall_speed  = this->gravity;
-
                     this->znear       = universe_struct.znear;
                     this->zfar        = universe_struct.zfar;
 
                     this->testing_spherical_terrain_in_use = false;
                     this->in_console                       = false;
                     this->in_help_mode                     = true;
-                    this->can_toggle_help_mode             = false;
                     this->can_display_help_screen          = true;
 
                     this->number_of_entities = 0;
@@ -519,15 +518,6 @@ namespace yli
 
                 yli::ontology::Font2D* get_active_font2D() const;
                 void set_active_font2D(yli::ontology::Font2D* const font2D);
-
-                float get_planet_radius() const;
-                void set_planet_radius(float planet_radius);
-
-                // this method returns a terrain `Species` pointer.
-                yli::ontology::Species* get_terrain_species() const;
-
-                // this method sets a terrain `Species` pointer.
-                void set_terrain_species(yli::ontology::Species* const terrain_species);
 
                 std::size_t get_number_of_worlds() const;
 
@@ -685,17 +675,17 @@ namespace yli
                 float twin_turbo_factor;
                 float mouse_speed;
                 bool has_mouse_ever_moved;
+
+                // 'can toggle'-type of boolean keypress control variables
+                // should all be stored in the `Universe` to avoid locking.
                 bool can_toggle_invert_mouse;
-                bool is_invert_mouse_in_use;
                 bool can_toggle_flight_mode;
-                bool is_flight_mode_in_use;
+                bool can_toggle_help_mode;
+
+                bool is_invert_mouse_in_use;
                 bool is_first_turbo_pressed;
                 bool is_second_turbo_pressed;
                 bool is_exit_requested;
-
-                // Variables related to physics.
-                float gravity;
-                float fall_speed;
 
                 // Variables related to graphics.
                 float znear;
@@ -709,7 +699,6 @@ namespace yli
 
                 // Variables related to help mode.
                 bool in_help_mode;
-                bool can_toggle_help_mode;
                 bool can_display_help_screen;
 
                 float background_red;
@@ -719,10 +708,6 @@ namespace yli
 
             private:
                 bool compute_and_update_matrices_from_inputs();
-
-                yli::ontology::Species* terrain_species; // pointer to terrain `Species` (used in collision detection).
-
-                float planet_radius;
 
                 std::shared_ptr<yli::ontology::EntityFactory> entity_factory;
 
@@ -754,8 +739,6 @@ namespace yli
                 yli::ontology::Font2D* active_font2D;
                 yli::ontology::Console* active_console;
 
-                yli::input::InputMethod input_method;
-
                 std::shared_ptr<yli::scheme::SchemeMaster> scheme_master; // pointer to `SchemeMaster`.
 
                 std::shared_ptr<yli::audio::AudioMaster> audio_master;    // pointer to `AudioMaster`.
@@ -773,6 +756,7 @@ namespace yli
                 std::size_t framebuffer_width;
                 std::size_t framebuffer_height;
                 std::string window_title;
+                bool is_physical;
                 bool is_headless;
 
                 // variables related to the framebuffer.

@@ -91,6 +91,14 @@ namespace yli
             universe->unbind_World(this->childID);
         }
 
+        void World::do_physics()
+        {
+            if (this->active_scene != nullptr)
+            {
+                this->active_scene->do_physics();
+            }
+        }
+
         void World::render()
         {
             if (this->should_be_rendered && this->active_scene != nullptr)
@@ -136,7 +144,6 @@ namespace yli
 
             this->universe->turbo_factor = scene->get_turbo_factor();
             this->universe->twin_turbo_factor = scene->get_twin_turbo_factor();
-            this->universe->set_terrain_species(scene->get_terrain_species());
 
             yli::ontology::Camera* const camera = scene->get_active_camera();
 

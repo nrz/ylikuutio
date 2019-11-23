@@ -26,6 +26,7 @@
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
+#include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 
 // Include GLM
@@ -80,7 +81,7 @@ namespace app
 
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::move_to_direction`: `universe` is `nullptr`!\n";
             return false;
         }
 
@@ -131,7 +132,7 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::release_first_turbo`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -147,7 +148,7 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::release_second_turbo`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -163,7 +164,7 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::enable_toggle_invert_mouse`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -179,7 +180,7 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::enable_toggle_flight_mode`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -195,7 +196,7 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::enable_toggle_help_mode`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -225,7 +226,7 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::first_turbo`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -241,7 +242,7 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::second_turbo`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -257,7 +258,7 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::move_forward`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -273,7 +274,7 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::move_backward`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -289,7 +290,7 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::strafe_left`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -305,7 +306,7 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::strafe_right`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -321,7 +322,7 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::ascent`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -337,7 +338,7 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::descent`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -353,7 +354,7 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::toggle_invert_mouse`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -373,14 +374,28 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::toggle_flight_mode`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
         if (universe->can_toggle_flight_mode)
         {
-            universe->is_flight_mode_in_use = !universe->is_flight_mode_in_use;
-            universe->fall_speed = 0.0f;
+            yli::ontology::World* const world = universe->get_active_world();
+
+            if (world == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Scene* const scene = world->get_active_scene();
+
+            if (scene == nullptr)
+            {
+                return nullptr;
+            }
+
+            scene->set_is_flight_mode_in_use(!scene->get_is_flight_mode_in_use());
+            scene->set_fall_speed(0.0f);
             universe->can_toggle_flight_mode = false;
         }
         return nullptr;
@@ -394,7 +409,7 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::toggle_help_mode`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -414,7 +429,7 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::delete_entity`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -422,14 +437,14 @@ namespace app
 
         if (any_value_entity_string == nullptr)
         {
-            std::cerr << "Error: entity_string not found!\n";
+            std::cerr << "ERROR: `app::delete_entity`: `entity_string` not found!\n";
             return nullptr;
         }
 
         if (any_value_entity_string->type != yli::common::Datatype::STD_STRING_POINTER &&
                 any_value_entity_string->type != yli::common::Datatype::CONST_STD_STRING_POINTER)
         {
-            std::cerr << "ERROR: invalid datatype.\n";
+            std::cerr << "ERROR: `app::delete_entity`: invalid datatype.\n";
             std::cerr << "Datatype should be either yli::common::Datatype::STD_STRING_POINTER or yli::common::Datatype::CONST_STD_STRING_POINTER\n";
             return nullptr;
         }
@@ -466,7 +481,7 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::switch_to_new_material`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -474,14 +489,14 @@ namespace app
 
         if (any_value_entity_string == nullptr)
         {
-            std::cerr << "Error: entity_string not found!\n";
+            std::cerr << "ERROR: `app::switch_to_new_material`: `entity_string` not found!\n";
             return nullptr;
         }
 
         if (any_value_entity_string->type != yli::common::Datatype::STD_STRING_POINTER &&
                 any_value_entity_string->type != yli::common::Datatype::CONST_STD_STRING_POINTER)
         {
-            std::cerr << "ERROR: invalid datatype.\n";
+            std::cerr << "ERROR: `app::switch_to_new_material`: invalid datatype.\n";
             std::cerr << "Datatype should be either yli::common::Datatype::STD_STRING_POINTER or yli::common::Datatype::CONST_STD_STRING_POINTER\n";
             return nullptr;
         }
@@ -525,14 +540,14 @@ namespace app
 
         if (any_value_material_string == nullptr)
         {
-            std::cerr << "Error: material_string not found!\n";
+            std::cerr << "ERROR: `app::switch_to_new_material`: `material_string` not found!\n";
             return nullptr;
         }
 
         if (any_value_material_string->type != yli::common::Datatype::STD_STRING_POINTER &&
                 any_value_material_string->type != yli::common::Datatype::CONST_STD_STRING_POINTER)
         {
-            std::cerr << "ERROR: invalid datatype.\n";
+            std::cerr << "ERROR: `app::switch_to_new_material`: invalid datatype.\n";
             std::cerr << "Datatype should be either yli::common::Datatype::STD_STRING_POINTER or yli::common::Datatype::CONST_STD_STRING_POINTER\n";
             return nullptr;
         }
@@ -581,7 +596,7 @@ namespace app
     {
         if (universe == nullptr)
         {
-            std::cerr << "Error: universe is nullptr!\n";
+            std::cerr << "ERROR: `app::transform_into_new_species`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -589,14 +604,14 @@ namespace app
 
         if (any_value_entity_string == nullptr)
         {
-            std::cerr << "Error: entity_string not found!\n";
+            std::cerr << "ERROR: `app::transform_into_new_species`: `entity_string` not found!\n";
             return nullptr;
         }
 
         if (any_value_entity_string->type != yli::common::Datatype::STD_STRING_POINTER &&
                 any_value_entity_string->type != yli::common::Datatype::CONST_STD_STRING_POINTER)
         {
-            std::cerr << "ERROR: invalid datatype.\n";
+            std::cerr << "ERROR: `app::transform_into_new_species`: invalid datatype.\n";
             std::cerr << "Datatype should be either yli::common::Datatype::STD_STRING_POINTER or yli::common::Datatype::CONST_STD_STRING_POINTER\n";
             return nullptr;
         }
@@ -640,14 +655,14 @@ namespace app
 
         if (any_value_species_string == nullptr)
         {
-            std::cerr << "Error: species_string not found!\n";
+            std::cerr << "ERROR: `app::transform_into_new_species`: `species_string` not found!\n";
             return nullptr;
         }
 
         if (any_value_species_string->type != yli::common::Datatype::STD_STRING_POINTER &&
                 any_value_species_string->type != yli::common::Datatype::CONST_STD_STRING_POINTER)
         {
-            std::cerr << "ERROR: invalid datatype.\n";
+            std::cerr << "ERROR: `app::transform_into_new_species`: invalid datatype.\n";
             std::cerr << "Datatype should be either yli::common::Datatype::STD_STRING_POINTER or yli::common::Datatype::CONST_STD_STRING_POINTER\n";
             return nullptr;
         }

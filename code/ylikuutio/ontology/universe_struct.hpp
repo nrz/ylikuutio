@@ -45,9 +45,9 @@ namespace yli
                 turbo_factor(5.0f),        // default value 5.0 x speed.
                 twin_turbo_factor(100.0f), // default value 100.0 x speed.
                 mouse_speed(0.005f),
-                gravity(9.81f / 60.0f), // default Earth gravity (9.81 m/s^2).
                 znear(1.0f),
                 zfar(5000.0f),          // visibility: from 1 to 5000 units.
+                is_physical(true),      // physics simulation in use.
                 is_headless(false),
                 input_method(yli::input::InputMethod::KEYBOARD)
             {
@@ -66,9 +66,9 @@ namespace yli
             float turbo_factor;
             float twin_turbo_factor;
             float mouse_speed;
-            float gravity;
             float znear;
             float zfar;
+            bool is_physical;
             bool is_headless;
             yli::input::InputMethod input_method;
         };

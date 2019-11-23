@@ -215,19 +215,9 @@ int main(const int argc, const char* const argv[])
 
     yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
 
-    yli::config::SettingMaster* const setting_master = my_universe->get_setting_master();
-
     yli::audio::AudioMaster* const audio_master = my_universe->get_audio_master();
 
     yli::input::InputMaster* const input_master = my_universe->get_input_master();
-
-    const float earth_radius = 6371.0f; // in kilometres
-
-    yli::config::SettingStruct planet_radius_setting_struct(std::make_shared<yli::common::AnyValue>(earth_radius));
-    planet_radius_setting_struct.name = "planet_radius";
-    planet_radius_setting_struct.activate_callback = &yli::config::SettingMaster::activate_planet_radius; // planet radius may be for a planet or a moon.
-    planet_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-    setting_master->create_Setting(planet_radius_setting_struct);
 
     std::cout << "Creating yli::callback::CallbackEngine cleanup_callback_engine ...\n";
     yli::callback::CallbackEngine cleanup_callback_engine = yli::callback::CallbackEngine();
@@ -334,8 +324,6 @@ int main(const int argc, const char* const argv[])
 
     std::cout << "Creating yli::ontology::Scene* helsinki_east_downtown_scene ...\n";
     yli::ontology::Scene* const helsinki_east_downtown_scene = dynamic_cast<yli::ontology::Scene*>(helsinki_east_downtown_scene_entity);
-
-    my_universe->is_flight_mode_in_use = true;
 
     if (helsinki_east_downtown_scene == nullptr)
     {
@@ -1384,6 +1372,8 @@ int main(const int argc, const char* const argv[])
                 if (my_universe->in_help_mode && my_universe->can_display_help_screen)
                 {
                     std::stringstream help_text_stringstream;
+                    yli::ontology::World* const world = my_universe->get_active_world();
+                    yli::ontology::Scene* const scene = (world == nullptr ? nullptr : world->get_active_scene());
                     help_text_stringstream <<
                         "Ajokki " << yli::ontology::Universe::version << "\n"
                         "\n"
@@ -1393,7 +1383,7 @@ int main(const int argc, const char* const argv[])
                         "F1 help mode\n"
                         "`  enter console\n"
                         "I  invert mouse (" << (my_universe->is_invert_mouse_in_use ? on_string : off_string) << ")\n"
-                        "F  flight mode (" << (my_universe->is_flight_mode_in_use ? on_string : off_string) << ")\n"
+                        "F  flight mode (" << (scene == nullptr || scene->get_is_flight_mode_in_use() ? on_string : off_string) << ")\n"
                         "Ctrl      turbo\n" <<
                         "Ctrl+Ctrl extra turbo\n" <<
                         "for debugging:\n" <<

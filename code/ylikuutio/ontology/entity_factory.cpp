@@ -35,6 +35,7 @@
 #include "compute_task.hpp"
 #include "any_value_entity.hpp"
 #include "any_struct_entity.hpp"
+#include "scene_struct.hpp"
 #include "shader_struct.hpp"
 #include "material_struct.hpp"
 #include "species_struct.hpp"
@@ -78,9 +79,9 @@ namespace yli
             return new yli::ontology::World(this->universe);
         }
 
-        yli::ontology::Entity* EntityFactory::create_Scene(yli::ontology::World* const world, const float water_level) const
+        yli::ontology::Entity* EntityFactory::create_Scene(const yli::ontology::SceneStruct& scene_struct) const
         {
-            return new yli::ontology::Scene(this->universe, world, water_level);
+            return new yli::ontology::Scene(this->universe, scene_struct);
         }
 
         yli::ontology::Entity* EntityFactory::create_Shader(const yli::ontology::ShaderStruct& shader_struct) const

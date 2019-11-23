@@ -21,6 +21,7 @@
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
+#include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/species_struct.hpp"
@@ -53,7 +54,10 @@ namespace ajokki
         // Tallinn `Scene` begins here.
 
         std::cout << "Creating yli::ontology::Entity* tallinn_scene_entity ...\n";
-        yli::ontology::Entity* const tallinn_scene_entity = entity_factory->create_Scene(world, 0.9f);
+        yli::ontology::SceneStruct scene_struct;
+        scene_struct.world = world;
+        scene_struct.water_level = 0.9f;
+        yli::ontology::Entity* const tallinn_scene_entity = entity_factory->create_Scene(scene_struct);
         std::cout << "Creating yli::ontology::Scene* tallinn_scene ...\n";
         yli::ontology::Scene* const tallinn_scene = dynamic_cast<yli::ontology::Scene*>(tallinn_scene_entity);
 

@@ -79,5 +79,10 @@ namespace yli
                 this->input_mode_stack.pop();
             }
         }
+
+        yli::input::InputMethod InputMaster::get_input_method() const
+        {
+            return this->input_method;
+        }
     }
 }

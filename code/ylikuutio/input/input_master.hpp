@@ -58,6 +58,8 @@ namespace yli
 
                 void pop_input_mode();
 
+                yli::input::InputMethod get_input_method() const;
+
             private:
                 yli::ontology::Universe* universe;
 

@@ -24,6 +24,7 @@
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/shader.hpp"
 #include "code/ylikuutio/ontology/compute_task.hpp"
+#include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/compute_task_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
@@ -58,7 +59,9 @@ namespace gpgpu_test
     {
         // GPGPU test `Scene` begins here.
         std::cout << "Creating yli::ontology::Entity* gpgpu_test_scene_entity ...\n";
-        yli::ontology::Entity* const gpgpu_test_scene_entity = entity_factory->create_Scene(world, 0.9f);
+        yli::ontology::SceneStruct scene_struct;
+        scene_struct.world = world;
+        yli::ontology::Entity* const gpgpu_test_scene_entity = entity_factory->create_Scene(scene_struct);
         std::cout << "Creating yli::ontology::Scene* gpgpu_test_scene ...\n";
         yli::ontology::Scene* const gpgpu_test_scene = dynamic_cast<yli::ontology::Scene*>(gpgpu_test_scene_entity);
 
