@@ -47,6 +47,7 @@ namespace yli
                 mouse_speed(0.005f),
                 znear(1.0f),
                 zfar(5000.0f),          // visibility: from 1 to 5000 units.
+                is_physical(true),      // physics simulation in use.
                 is_headless(false),
                 input_method(yli::input::InputMethod::KEYBOARD)
             {
@@ -67,6 +68,7 @@ namespace yli
             float mouse_speed;
             float znear;
             float zfar;
+            bool is_physical;
             bool is_headless;
             yli::input::InputMethod input_method;
         };

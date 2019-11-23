@@ -361,6 +361,7 @@ namespace yli
                         this->window_title = window_title_stringstream.str();
                     }
 
+                    this->is_physical  = universe_struct.is_physical;
                     this->is_headless  = universe_struct.is_headless;
 
                     // mouse coordinates.
@@ -755,6 +756,7 @@ namespace yli
                 std::size_t framebuffer_width;
                 std::size_t framebuffer_height;
                 std::string window_title;
+                bool is_physical;
                 bool is_headless;
 
                 // variables related to the framebuffer.
