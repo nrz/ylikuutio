@@ -15,29 +15,18 @@ compiler: gcc
 sudo: required
 
 before_install:
-    # C++14
-    # https://github.com/richelbilderbeek/travis_cmake_gcc_cpp14/blob/master/.travis.yml
-    - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-    - sudo apt-get update -qq
-    - echo "Hello from before_install of gcc build"
+    - echo "Hello from before_install stage"
       # following Coverity instructions
       # https://scan.coverity.com/travis_ci
     - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 
 install:
-    # C++14
-    # https://github.com/richelbilderbeek/travis_cmake_gcc_cpp14/blob/master/.travis.yml
-    - sudo apt-get install -qq gcc-5 g++-5
-    - sudo apt-get update -qq
-    - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 90
-    - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
+    - echo "Hello from install stage"
 
 addons:
     # following Coverity instructions
     # https://scan.coverity.com/travis_ci
     apt:
-        sources:
-            - ubuntu-toolchain-r-test
         packages:
             - cmake
             - git
