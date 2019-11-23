@@ -104,52 +104,6 @@ http://far-cry.ubi.com/en-GB/media/index.aspx
 The Elder Scrolls V - Skyrim:
 http://www.elderscrolls.com/skyrim/media/
 
-3D model of Helsinki / Helsingin 3D-kaupunkimalli (CC-BY 4.0):
-file formats: .gml files, .obj files
-http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
-http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli
-http://3d.hel.ninja/data/citygml/
-http://3d.hel.ninja/data/mesh/
-
-3D model of Vantaa (CC-BY 4.0):
-file formats: .gml, .kml, .skp
-https://hri.fi/data/en_GB/dataset/vantaan-3d-rakennukset
-https://hri.fi/data/fi/dataset/vantaan-3d-rakennukset
-
-3D model of Oulu center (CC-BY 4.0):
-file formats: .fbx, Unreal Engine project, Unity3D project, Blender, 3DMax
-http://ubicomp.oulu.fi/infrastructure-virtualoulu/
-https://github.com/Oulu-UCC/3D_City_fbx
-
-3D model of the campus and science park area of Turku / Turun kampus- ja tiedepuistoalueen 3D-kaupunkimalli (CC-BY 4.0):
-file formats: .dae files, .jpg files, .json files, .sff files, .aimgrd.vrt files, .dds files, .ecw (for orthophoto), .tfw (for orthophoto)
-https://data.lounaistieto.fi/data/dataset/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli
-
-3D model of Tampere (custom license):
-file formats: .dwg
-http://kartat.tampere.fi/splashscreen/
-https://www.tampere.fi/tampereen-kaupunki/tietoa-tampereesta/avoin-data/avoin-data-lisenssi.html
-
-3D model of Montreal (CC-BY 4.0):
-file formats: .dgn, .dwg, .dxf, .gml (LOD2 with textures), .3dm (LOD2 with textures)
-http://donnees.ville.montreal.qc.ca/dataset/maquette-numerique-batiments-citygml-lod2-avec-textures
-
-3D model of Adelaide (CC-BY 4.0):
-file format: .3DS + .jpg files
-https://data.sa.gov.au/data/dataset/3d-model
-
-3D model of Hamburg
-file format: .xml
-http://suche.transparenz.hamburg.de/dataset/3d-stadtmodell-lod2-de-hamburg2
-https://www.govdata.de/dl-de/by-2-0
-
-https://www.citygml.org/3dcities/
-http://www.opengeospatial.org/resources/data
-
-Digital Elevation Data (by Jonathan de Ferranti,
-whole world data available at 3 and 15 arc second resolutions):
-http://www.viewfinderpanoramas.org/dem3.html
-
 RockThe3D Free 3D Collections:
 http://www.rockthe3d.com/category/models/
 
