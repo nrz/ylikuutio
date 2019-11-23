@@ -33,7 +33,7 @@ addons:
             - libx11-dev
             - libgl1-mesa-dev
             - libglu1-mesa-dev
-            - libsfml-dev
+            - libsdl2-dev
             - libxcursor-dev
             - libxrandr-dev
             - libxext-dev
