@@ -9,6 +9,8 @@ Fixes needed:
 Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement a custom FBX loader.
 [ ] Replace OpenFBX with the custom FBX loader.
+[ ] Implement a custom FBX writer.
+[ ] Replace Assimp with the custom FBX writer.
 [ ] Define a custom .yli binary 3D file format based on COLLADA .dae format.
 [ ] Add support for .yli loading.
 [ ] Add support for exporting as .yli in `yli_convert`.
