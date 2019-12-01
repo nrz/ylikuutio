@@ -338,7 +338,7 @@ namespace yli
 
         bool Console::exit_console()
         {
-            if (this->in_console)
+            if (this->in_console && this->parent != nullptr)
             {
                 // Restore previous input mode.
                 if (this->input_mode != nullptr)
