@@ -840,22 +840,10 @@ int main(const int argc, const char* const argv[])
                         const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute();
 
                         if (any_value != nullptr &&
-                                any_value->type == yli::common::Datatype::UINT32_T)
+                                any_value->type == yli::common::Datatype::UINT32_T &&
+                                any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
                         {
-                            if (any_value->uint32_t_value == ENTER_CONSOLE_MAGIC_NUMBER)
-                            {
-                                // Do not display help screen when in console.
-                                my_universe->can_display_help_screen = false;
-                            }
-                            else if (any_value->uint32_t_value == EXIT_CONSOLE_MAGIC_NUMBER)
-                            {
-                                // Enable display help screen when not in console.
-                                my_universe->can_display_help_screen = true;
-                            }
-                            else if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
-                            {
-                                my_universe->request_exit();
-                            }
+                            my_universe->request_exit();
                         }
                     }
 
@@ -880,22 +868,10 @@ int main(const int argc, const char* const argv[])
                     const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute();
 
                     if (any_value != nullptr &&
-                            any_value->type == yli::common::Datatype::UINT32_T)
+                            any_value->type == yli::common::Datatype::UINT32_T &&
+                            any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
                     {
-                        if (any_value->uint32_t_value == ENTER_CONSOLE_MAGIC_NUMBER)
-                        {
-                            // Do not display help screen when in console.
-                            my_universe->can_display_help_screen = false;
-                        }
-                        else if (any_value->uint32_t_value == EXIT_CONSOLE_MAGIC_NUMBER)
-                        {
-                            // Enable display help screen when not in console.
-                            my_universe->can_display_help_screen = true;
-                        }
-                        else if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
-                        {
-                            my_universe->request_exit();
-                        }
+                        my_universe->request_exit();
                     }
                 }
                 else if (sdl_event.type == SDL_WINDOWEVENT)
@@ -1011,25 +987,10 @@ int main(const int argc, const char* const argv[])
                         const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute();
 
                         if (any_value != nullptr &&
-                                any_value->type == yli::common::Datatype::UINT32_T)
+                                any_value->type == yli::common::Datatype::UINT32_T &&
+                                any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
                         {
-                            if (any_value->uint32_t_value == ENTER_CONSOLE_MAGIC_NUMBER)
-                            {
-                                // Do not display help screen when in console.
-                                my_universe->can_display_help_screen = false;
-                                break;
-                            }
-                            else if (any_value->uint32_t_value == EXIT_CONSOLE_MAGIC_NUMBER)
-                            {
-                                // Enable display help screen when not in console.
-                                my_universe->can_display_help_screen = true;
-                                break;
-                            }
-                            else if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
-                            {
-                                my_universe->request_exit();
-                                break;
-                            }
+                            my_universe->request_exit();
                         }
                     }
                 }

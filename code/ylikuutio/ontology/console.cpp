@@ -325,6 +325,9 @@ namespace yli
             {
                 this->input_mode->activate();
 
+                // Do not display help screen when in console.
+                this->parent->can_display_help_screen = false;
+
                 // Mark that we're in console.
                 this->parent->in_console = true;
                 this->in_console = true;
@@ -345,6 +348,9 @@ namespace yli
                 {
                     this->input_mode->deactivate();
                 }
+
+                // Enable display help screen when not in console.
+                this->parent->can_display_help_screen = true;
 
                 // Mark that we have exited the console.
                 this->parent->in_console = false;
