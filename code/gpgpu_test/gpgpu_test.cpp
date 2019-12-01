@@ -55,14 +55,8 @@
 #include "SDL.h"
 
 // Include standard headers
-#include <cstddef>       // std::size_t
-#include <iomanip>       // std::setfill, std::setprecision, std::setw
 #include <iostream>      // std::cout, std::cin, std::cerr
-#include <memory>        // std::make_shared, std::shared_ptr
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
-#include <stdint.h>      // uint32_t etc.
-#include <string>        // std::string
-#include <vector>        // std::vector
 
 int main(const int argc, const char* const argv[])
 {
@@ -169,104 +163,11 @@ int main(const int argc, const char* const argv[])
 
     std::cout << "Defining action mode keypress callback engines.\n";
 
-    // Callback code for esc: exit program.
-    yli::callback::CallbackEngine exit_program_callback_engine;
-    exit_program_callback_engine.create_CallbackObject(&app::exit_program);
+    // Clear the screen.
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // Keypress callbacks for action mode.
-    // Keypresses are checked in the order of this struct.
-    yli::input::InputMode* const action_mode_input_mode = input_master->create_InputMode();
-    action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_ESCAPE, &exit_program_callback_engine);
-
-    // For speed computation
-    double last_time_to_display_FPS = yli::time::get_time();
-    double last_time_for_display_sync = yli::time::get_time();
-    int32_t number_of_frames = 0;
-
-    SDL_Event sdl_event;
-    std::string ms_frame_text;
-
-    while (!my_universe->get_is_exit_requested())
-    {
-        const double current_time_in_main_loop = yli::time::get_time();
-
-        if (current_time_in_main_loop - last_time_for_display_sync >= (1.0f / my_universe->get_max_FPS()))
-        {
-            last_time_for_display_sync = yli::time::get_time();
-
-            number_of_frames++;
-
-            while (current_time_in_main_loop - last_time_to_display_FPS >= 1.0f)
-            {
-                // If last `std::stringstream` here was more than 1 sec ago,
-                // std::stringstream` and reset number of frames.
-                if (number_of_frames > 0)
-                {
-                    std::stringstream ms_frame_text_stringstream;
-                    ms_frame_text_stringstream << std::fixed << std::setprecision(2) << 1000.0f / static_cast<double>(number_of_frames) << " ms/frame; " <<
-                        number_of_frames << " Hz";
-                    ms_frame_text = ms_frame_text_stringstream.str();
-                    number_of_frames = 0;
-                }
-
-                // `last_time_to_display_FPS` needs to be incremented to avoid infinite loop.
-                last_time_to_display_FPS += 1.0f;
-            }
-
-            // Clear the screen.
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-            my_universe->compute_delta_time();
-
-            const yli::input::InputMode* const input_mode = input_master->get_active_input_mode();
-
-            // poll all SDL events.
-            while (SDL_PollEvent(&sdl_event))
-            {
-                if (sdl_event.type == SDL_KEYDOWN && input_mode != nullptr)
-                {
-                    const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
-
-                    yli::callback::CallbackEngine* const callback_engine = input_mode->get_keypress_callback_engine(scancode);
-
-                    if (callback_engine == nullptr)
-                    {
-                        continue;
-                    }
-
-                    const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute();
-
-                    if (any_value != nullptr &&
-                            any_value->type == yli::common::Datatype::UINT32_T)
-                    {
-                        if (any_value->uint32_t_value == ENTER_CONSOLE_MAGIC_NUMBER)
-                        {
-                            // Do not display help screen when in console.
-                            my_universe->can_display_help_screen = false;
-                        }
-                        else if (any_value->uint32_t_value == EXIT_CONSOLE_MAGIC_NUMBER)
-                        {
-                            // Enable display help screen when not in console.
-                            my_universe->can_display_help_screen = true;
-                        }
-                        else if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
-                        {
-                            my_universe->request_exit();
-                        }
-                    }
-                }
-                else if (sdl_event.type == SDL_QUIT)
-                {
-                    my_universe->request_exit();
-                }
-            }
-
-            // Render the `Universe`.
-            my_universe->render();
-
-            my_universe->finalize_delta_time_loop();
-        }
-    }
+    // Render the `Universe`.
+    my_universe->render();
 
     // do cleanup.
     cleanup_callback_engine.execute();
