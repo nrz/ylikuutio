@@ -977,7 +977,7 @@ int main(const int argc, const char* const argv[])
 
                     if (is_pressed)
                     {
-                        yli::callback::CallbackEngine* callback_engine = continuous_keypress_callback_engines->at(i);
+                        yli::callback::CallbackEngine* const callback_engine = continuous_keypress_callback_engines->at(i);
 
                         if (callback_engine == nullptr)
                         {
