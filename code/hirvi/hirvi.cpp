@@ -680,11 +680,6 @@ int main(const int argc, const char* const argv[])
     my_console->add_command_callback("clear", &yli::ontology::Console::clear);
     my_console->add_command_callback("screenshot", &yli::ontology::Universe::screenshot);
 
-    // For speed computation.
-    double last_time_to_display_FPS = yli::time::get_time();
-    double last_time_for_display_sync = yli::time::get_time();
-    int32_t number_of_frames = 0;
-
     bool has_mouse_focus = true;
 
     audio_master->add_to_playlist("Hirvi_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
@@ -784,28 +779,28 @@ int main(const int argc, const char* const argv[])
     {
         const double current_time_in_main_loop = yli::time::get_time();
 
-        if (current_time_in_main_loop - last_time_for_display_sync >= (1.0f / my_universe->get_max_FPS()))
+        if (current_time_in_main_loop - my_universe->get_last_time_for_display_sync() >= (1.0f / my_universe->get_max_FPS()))
         {
-            last_time_for_display_sync = yli::time::get_time();
+            my_universe->update_last_time_for_display_sync();
 
-            number_of_frames++;
+            my_universe->increment_number_of_frames();
 
-            while (current_time_in_main_loop - last_time_to_display_FPS >= 1.0f)
+            while (current_time_in_main_loop - my_universe->get_last_time_to_display_FPS() >= 1.0f)
             {
                 // If last `std::stringstream` here was more than 1 sec ago,
                 // std::stringstream` and reset number of frames.
-                if (frame_rate_text2D != nullptr && number_of_frames > 0)
+                if (frame_rate_text2D != nullptr && my_universe->get_number_of_frames() > 0)
                 {
                     std::stringstream ms_frame_text_stringstream;
-                    ms_frame_text_stringstream << std::fixed << std::setprecision(2) << 1000.0f / static_cast<double>(number_of_frames) << " ms/frame; " <<
-                        number_of_frames << " Hz";
+                    ms_frame_text_stringstream << std::fixed << std::setprecision(2) << 1000.0f / static_cast<double>(my_universe->get_number_of_frames()) << " ms/frame; " <<
+                        my_universe->get_number_of_frames() << " Hz";
                     ms_frame_text = ms_frame_text_stringstream.str();
                     frame_rate_text2D->change_string(ms_frame_text);
-                    number_of_frames = 0;
+                    my_universe->reset_number_of_frames();
                 }
 
                 // `last_time_to_display_FPS` needs to be incremented to avoid infinite loop.
-                last_time_to_display_FPS += 1.0f;
+                my_universe->increment_last_time_to_display_FPS();
 
                 // Update audio also (in case the sound has reached the end).
                 audio_master->update();

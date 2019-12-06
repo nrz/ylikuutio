@@ -27,6 +27,7 @@
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/scheme/scheme_master.hpp"
+#include "code/ylikuutio/time/time.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 
 #include "SDL.h"
@@ -388,7 +389,10 @@ namespace yli
                     this->font_size = universe_struct.font_size;
 
                     this->max_FPS    = universe_struct.max_FPS;
+                    this->last_time_to_display_FPS = yli::time::get_time();
+                    this->last_time_for_display_sync = yli::time::get_time();
                     this->delta_time = NAN;
+                    this->number_of_frames = 0;
 
                     // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
                     this->last_time_before_reading_keyboard    = std::numeric_limits<uint32_t>::max();
@@ -579,6 +583,14 @@ namespace yli
 
                 // this method returns current `max_FPS`.
                 std::size_t get_max_FPS() const;
+                double get_last_time_to_display_FPS() const;
+                double get_last_time_for_display_sync() const;
+                int32_t get_number_of_frames() const;
+
+                void increment_last_time_to_display_FPS();
+                void update_last_time_for_display_sync();
+                void increment_number_of_frames();
+                void reset_number_of_frames();
 
                 void set(const std::string& setting_name, std::shared_ptr<yli::common::AnyValue> setting_any_value);
 
@@ -777,7 +789,10 @@ namespace yli
 
                 // variables related to timing of events.
                 std::size_t max_FPS;
+                double last_time_to_display_FPS;
+                double last_time_for_display_sync;
                 double delta_time;
+                int32_t number_of_frames;
 
                 uint32_t last_time_before_reading_keyboard;
                 uint32_t current_time_before_reading_keyboard;

@@ -55,6 +55,7 @@
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/scheme/scheme_master.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
+#include "code/ylikuutio/time/time.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -566,6 +567,41 @@ namespace yli
         std::size_t Universe::get_max_FPS() const
         {
             return this->max_FPS;
+        }
+
+        double Universe::get_last_time_to_display_FPS() const
+        {
+            return this->last_time_to_display_FPS;
+        }
+
+        double Universe::get_last_time_for_display_sync() const
+        {
+            return this->last_time_for_display_sync;
+        }
+
+        int32_t Universe::get_number_of_frames() const
+        {
+            return this->number_of_frames;
+        }
+
+        void Universe::increment_last_time_to_display_FPS()
+        {
+            this->last_time_to_display_FPS += 1.0f;
+        }
+
+        void Universe::update_last_time_for_display_sync()
+        {
+            this->last_time_for_display_sync = yli::time::get_time();
+        }
+
+        void Universe::increment_number_of_frames()
+        {
+            this->number_of_frames++;
+        }
+
+        void Universe::reset_number_of_frames()
+        {
+            this->number_of_frames = 0;
         }
 
         void Universe::set(const std::string& setting_name, std::shared_ptr<yli::common::AnyValue> setting_any_value)
