@@ -31,8 +31,6 @@
 #include "gpgpu_test_scene.hpp"
 #include "code/app/app_keyboard_callbacks.hpp"
 #include "code/ylikuutio/input/input.hpp"
-#include "code/ylikuutio/input/input_master.hpp"
-#include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/callback/callback_object.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
@@ -82,8 +80,6 @@ int main(const int argc, const char* const argv[])
     my_universe->set_name("universe");
 
     yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
-
-    yli::input::InputMaster* const input_master = my_universe->get_input_master();
 
     std::cout << "Creating yli::callback::CallbackEngine cleanup_callback_engine ...\n";
     yli::callback::CallbackEngine cleanup_callback_engine = yli::callback::CallbackEngine();
@@ -156,12 +152,6 @@ int main(const int argc, const char* const argv[])
     gpgpu_test_world->set_active_scene(gpgpu_test_scene);
 
     // GPGPU test `Scene` ends here.
-
-    /*********************************************************************
-     *  Callback engines for action mode keypresses begin here.          *
-     *********************************************************************/
-
-    std::cout << "Defining action mode keypress callback engines.\n";
 
     // Clear the screen.
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
