@@ -226,7 +226,7 @@ int main(const int argc, const char* const argv[])
     if (my_universe->get_window() == nullptr)
     {
         std::cerr << "Failed to open SDL window.\n";
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -235,7 +235,7 @@ int main(const int argc, const char* const argv[])
     // Initialize GLEW.
     if (!yli::opengl::init_glew())
     {
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -258,7 +258,7 @@ int main(const int argc, const char* const argv[])
 
     if (my_console == nullptr)
     {
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -276,7 +276,7 @@ int main(const int argc, const char* const argv[])
 
     if (mini_console == nullptr)
     {
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -297,7 +297,7 @@ int main(const int argc, const char* const argv[])
 
     if (earth_world == nullptr)
     {
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -318,7 +318,7 @@ int main(const int argc, const char* const argv[])
 
     if (helsinki_east_downtown_scene_entity == nullptr)
     {
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -327,7 +327,7 @@ int main(const int argc, const char* const argv[])
 
     if (helsinki_east_downtown_scene == nullptr)
     {
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -342,7 +342,7 @@ int main(const int argc, const char* const argv[])
     std::cout << "Creating yli::ontology::Scene* joensuu_center_west_scene and its contents ...\n";
     if (ajokki::create_joensuu_center_west_scene(entity_factory, earth_world) == nullptr)
     {
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -353,7 +353,7 @@ int main(const int argc, const char* const argv[])
     std::cout << "Creating yli::ontology::Scene* altiplano_scene and its contents ...\n";
     if (ajokki::create_altiplano_scene(entity_factory, earth_world) == nullptr)
     {
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -364,7 +364,7 @@ int main(const int argc, const char* const argv[])
     std::cout << "Creating yli::ontology::Scene* tallinn_scene and its contents ...\n";
     if (ajokki::create_tallinn_scene(entity_factory, earth_world) == nullptr)
     {
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -386,7 +386,7 @@ int main(const int argc, const char* const argv[])
     if (my_font2D == nullptr)
     {
         std::cerr << "Failed to create Font2D.\n";
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -1134,7 +1134,7 @@ int main(const int argc, const char* const argv[])
 
                     if (callback_engine != nullptr)
                     {
-                        const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute();
+                        const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute(nullptr);
 
                         if (any_value != nullptr &&
                                 any_value->type == yli::common::Datatype::UINT32_T &&
@@ -1162,7 +1162,7 @@ int main(const int argc, const char* const argv[])
                         continue;
                     }
 
-                    const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute();
+                    const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute(nullptr);
 
                     if (any_value != nullptr &&
                             any_value->type == yli::common::Datatype::UINT32_T &&
@@ -1281,7 +1281,7 @@ int main(const int argc, const char* const argv[])
                             continue;
                         }
 
-                        const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute();
+                        const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute(nullptr);
 
                         if (any_value != nullptr &&
                                 any_value->type == yli::common::Datatype::UINT32_T &&
@@ -1383,7 +1383,7 @@ int main(const int argc, const char* const argv[])
     }
 
     // Do cleanup.
-    cleanup_callback_engine.execute();
+    cleanup_callback_engine.execute(nullptr);
 
     return 0;
 }

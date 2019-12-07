@@ -42,7 +42,8 @@ std::shared_ptr<yli::common::AnyValue> square(
         yli::ontology::Universe*,
         yli::callback::CallbackEngine*,
         yli::callback::CallbackObject*,
-        std::vector<yli::callback::CallbackParameter*>& input_parameters)
+        std::vector<yli::callback::CallbackParameter*>& input_parameters,
+        std::shared_ptr<yli::common::AnyValue>)
 {
     if (input_parameters.size() != 1)
     {
@@ -87,7 +88,8 @@ std::shared_ptr<yli::common::AnyValue> square_last(
         yli::ontology::Universe*,
         yli::callback::CallbackEngine* callback_engine,
         yli::callback::CallbackObject*,
-        std::vector<yli::callback::CallbackParameter*>& input_parameters)
+        std::vector<yli::callback::CallbackParameter*>& input_parameters,
+        std::shared_ptr<yli::common::AnyValue>)
 {
     if (input_parameters.size() != 0)
     {
@@ -138,7 +140,8 @@ std::shared_ptr<yli::common::AnyValue> expt(
         yli::ontology::Universe*,
         yli::callback::CallbackEngine*,
         yli::callback::CallbackObject*,
-        std::vector<yli::callback::CallbackParameter*>& input_parameters)
+        std::vector<yli::callback::CallbackParameter*>& input_parameters,
+        std::shared_ptr<yli::common::AnyValue>)
 {
     if (input_parameters.size() != 2)
     {
@@ -180,7 +183,8 @@ std::shared_ptr<yli::common::AnyValue> expt_with_named_inputs(
         yli::ontology::Universe*,
         yli::callback::CallbackEngine*,
         yli::callback::CallbackObject* callback_object,
-        std::vector<yli::callback::CallbackParameter*>&)
+        std::vector<yli::callback::CallbackParameter*>&,
+        std::shared_ptr<yli::common::AnyValue>)
 {
     std::shared_ptr<yli::common::AnyValue> base = std::make_shared<yli::common::AnyValue>(*callback_object->get_any_value("base"));
     std::shared_ptr<yli::common::AnyValue> exponent = std::make_shared<yli::common::AnyValue>(*callback_object->get_any_value("exponent"));
@@ -216,7 +220,8 @@ std::shared_ptr<yli::common::AnyValue> neg(
         yli::ontology::Universe*,
         yli::callback::CallbackEngine*,
         yli::callback::CallbackObject*,
-        std::vector<yli::callback::CallbackParameter*>& input_parameters)
+        std::vector<yli::callback::CallbackParameter*>& input_parameters,
+        std::shared_ptr<yli::common::AnyValue>)
 {
     if (input_parameters.size() != 1)
     {
@@ -258,7 +263,7 @@ TEST(callback_engine_must_function_properly, int32_t_zero_negated_equals_zero)
     std::shared_ptr<yli::common::AnyValue> zero_value = std::make_shared<yli::common::AnyValue>(zero);
     callback_object->create_CallbackParameter("", zero_value, is_reference_0);
 
-    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute();
+    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, yli::common::Datatype::INT32_T);
     ASSERT_EQ(result->int32_t_value, 0);
@@ -275,7 +280,7 @@ TEST(callback_engine_must_function_properly, int32_t_one_negated_equals_minus_on
     std::shared_ptr<yli::common::AnyValue> one_value = std::make_shared<yli::common::AnyValue>(one);
     callback_object->create_CallbackParameter("", one_value, is_reference_1);
 
-    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute();
+    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, yli::common::Datatype::INT32_T);
     ASSERT_EQ(result->int32_t_value, -1);
@@ -292,7 +297,7 @@ TEST(callback_engine_must_function_properly, int32_t_two_negated_equals_minus_tw
     std::shared_ptr<yli::common::AnyValue> two_value = std::make_shared<yli::common::AnyValue>(two);
     callback_object->create_CallbackParameter("", two_value, is_reference_2);
 
-    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute();
+    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, yli::common::Datatype::INT32_T);
     ASSERT_EQ(result->int32_t_value, -2);
@@ -309,7 +314,7 @@ TEST(callback_engine_must_function_properly, int32_t_minus_one_negated_equals_on
     std::shared_ptr<yli::common::AnyValue> minus_one_value = std::make_shared<yli::common::AnyValue>(minus_one);
     callback_object->create_CallbackParameter("", minus_one_value, is_reference_minus_1);
 
-    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute();
+    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, yli::common::Datatype::INT32_T);
     ASSERT_EQ(result->int32_t_value, 1);
@@ -326,7 +331,7 @@ TEST(callback_engine_must_function_properly, int32_t_minus_two_negated_equals_tw
     std::shared_ptr<yli::common::AnyValue> minus_two_value = std::make_shared<yli::common::AnyValue>(minus_two);
     callback_object->create_CallbackParameter("", minus_two_value, is_reference_minus_2);
 
-    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute();
+    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, yli::common::Datatype::INT32_T);
     ASSERT_EQ(result->int32_t_value, 2);
@@ -343,7 +348,7 @@ TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
     std::shared_ptr<yli::common::AnyValue> three_value = std::make_shared<yli::common::AnyValue>(three);
     callback_object->create_CallbackParameter("foo", three_value, is_reference_3);
 
-    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute();
+    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, yli::common::Datatype::INT32_T);
     ASSERT_EQ(result->int32_t_value, 9);
@@ -360,7 +365,7 @@ TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
     std::shared_ptr<yli::common::AnyValue> three_value = std::make_shared<yli::common::AnyValue>(three);
     callback_object->create_CallbackParameter("foo", three_value, is_reference_3);
 
-    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute();
+    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, yli::common::Datatype::UINT32_T);
     ASSERT_EQ(result->uint32_t_value, 9);
@@ -382,7 +387,7 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
     std::shared_ptr<yli::common::AnyValue> seven_value = std::make_shared<yli::common::AnyValue>(seven);
     callback_object->create_CallbackParameter("foo", seven_value, is_reference_7);
 
-    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute();
+    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, yli::common::Datatype::UINT32_T);
     ASSERT_EQ(result->uint32_t_value, 78125);
@@ -406,7 +411,7 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125_with
     std::shared_ptr<yli::common::AnyValue> seven_value = std::make_shared<yli::common::AnyValue>(seven);
     callback_object->create_CallbackParameter("exponent", seven_value, is_reference_7);
 
-    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute();
+    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, yli::common::Datatype::UINT32_T);
     ASSERT_EQ(result->uint32_t_value, 78125);
@@ -430,7 +435,7 @@ TEST(callback_engine_must_function_properly, uint32_t_7_expt_5_then_squared_equa
     std::shared_ptr<yli::common::AnyValue> five_value = std::make_shared<yli::common::AnyValue>(five);
     callback_object_expt->create_CallbackParameter("", five_value, is_reference_5);
 
-    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute();
+    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, yli::common::Datatype::UINT32_T);
     ASSERT_EQ(result->uint32_t_value, 282475249);
@@ -454,7 +459,7 @@ TEST(callback_engine_must_function_properly, two_squared_four_times_equals_65536
     yli::callback::CallbackObject* callback_object_4th_square = callback_engine.create_CallbackObject(nullptr);
     callback_object_4th_square->set_new_callback(&square_last);
 
-    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute();
+    std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, yli::common::Datatype::UINT32_T);
     ASSERT_EQ(result->uint32_t_value, 65536);

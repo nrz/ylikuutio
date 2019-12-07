@@ -170,7 +170,7 @@ namespace yli
             {
                 if (this->end_condition_callback_engine != nullptr)
                 {
-                    const std::shared_ptr<yli::common::AnyValue> end_condition_any_value = this->end_condition_callback_engine->execute();
+                    const std::shared_ptr<yli::common::AnyValue> end_condition_any_value = this->end_condition_callback_engine->execute(nullptr);
 
                     if (end_condition_any_value->type == yli::common::Datatype::BOOL && end_condition_any_value->bool_value)
                     {

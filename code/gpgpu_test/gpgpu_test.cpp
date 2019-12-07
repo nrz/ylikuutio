@@ -96,7 +96,7 @@ int main(const int argc, const char* const argv[])
     // Initialize GLEW.
     if (!yli::opengl::init_glew())
     {
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -143,7 +143,7 @@ int main(const int argc, const char* const argv[])
 
     if (gpgpu_test_scene == nullptr)
     {
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -160,7 +160,7 @@ int main(const int argc, const char* const argv[])
     my_universe->render();
 
     // do cleanup.
-    cleanup_callback_engine.execute();
+    cleanup_callback_engine.execute(nullptr);
 
     return 0;
 }

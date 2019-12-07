@@ -60,14 +60,14 @@
 // `ComputeTask` means computing that task.
 //
 // Rendering a `ComputeTask` is done by iterating the task until either
-// `end_condition_callback_engine->execute()` returns `true`, or until
+// `end_condition_callback_engine->execute(nullptr)` returns `true`, or until
 // `n_max_iterations` is reached. If `end_condition_callback_engine` is `nullptr`
-// or `end_condition_callback_engine->execute()` does not not return an `AnyValue`
+// or `end_condition_callback_engine->execute(nullptr)` does not not return an `AnyValue`
 // which contains `yli::common::BOOL`, then `end_condition_callback_engine` is ignored
 // and `n_max_iterations` is the exact number of iterations to be done. However,
-// even if `end_condition_callback_engine->execute()` would return an invalid return
+// even if `end_condition_callback_engine->execute(nullptr)` would return an invalid return
 // value, that is, not an `AnyValue` which contains `common::BOOL`,
-// `end_condition_callback_engine->execute()` is still called and taken into account
+// `end_condition_callback_engine->execute(nullptr)` is still called and taken into account
 // in every iteration.
 //
 // When iterating, there is a `PreIterateCallback` which is executed before each iteration,

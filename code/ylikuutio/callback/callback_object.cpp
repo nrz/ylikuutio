@@ -17,7 +17,7 @@
 
 #include "callback_object.hpp"
 #include "callback_parameter.hpp"
-#include "input_parameters_to_any_value_callback_with_universe.hpp"
+#include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -118,7 +118,7 @@ namespace yli
             callback_engine->bind_CallbackObject(this);
         }
 
-        void CallbackObject::set_new_callback(const InputParametersToAnyValueCallbackWithUniverse callback)
+        void CallbackObject::set_new_callback(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
         {
             this->callback = callback;
         }
@@ -136,7 +136,7 @@ namespace yli
             this->bind_to_parent();
         }
 
-        CallbackObject::CallbackObject(const InputParametersToAnyValueCallbackWithUniverse callback, yli::callback::CallbackEngine* const parent)
+        CallbackObject::CallbackObject(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback, yli::callback::CallbackEngine* const parent)
         {
             // constructor.
             this->childID = -1;
@@ -180,11 +180,11 @@ namespace yli
             }
         }
 
-        std::shared_ptr<yli::common::AnyValue> CallbackObject::execute()
+        std::shared_ptr<yli::common::AnyValue> CallbackObject::execute(std::shared_ptr<yli::common::AnyValue> any_value)
         {
             if (this->callback != nullptr)
             {
-                return this->callback(this->parent->universe, this->parent, this, this->callback_parameter_pointer_vector);
+                return this->callback(this->parent->universe, this->parent, this, this->callback_parameter_pointer_vector, any_value);
             }
             return nullptr;
         }

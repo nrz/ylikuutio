@@ -128,7 +128,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {
@@ -144,7 +145,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {
@@ -160,7 +162,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {
@@ -176,7 +179,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {
@@ -192,7 +196,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {
@@ -212,7 +217,8 @@ namespace app
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         const uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
         return std::make_shared<yli::common::AnyValue>(exit_program_magic_number);
@@ -222,7 +228,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {
@@ -238,7 +245,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {
@@ -254,7 +262,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {
@@ -270,7 +279,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {
@@ -286,7 +296,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {
@@ -302,7 +313,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {
@@ -318,7 +330,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {
@@ -334,7 +347,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {
@@ -350,7 +364,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {
@@ -370,7 +385,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {
@@ -405,7 +421,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {
@@ -425,7 +442,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {
@@ -477,7 +495,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {
@@ -592,7 +611,8 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&)
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>)
     {
         if (universe == nullptr)
         {

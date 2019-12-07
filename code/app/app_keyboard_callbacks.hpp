@@ -33,6 +33,11 @@ namespace yli
         class CallbackParameter;
     }
 
+    namespace common
+    {
+        class AnyValue;
+    }
+
     namespace ontology
     {
         class Universe;
@@ -49,31 +54,36 @@ namespace app
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     std::shared_ptr<yli::common::AnyValue> release_second_turbo(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     std::shared_ptr<yli::common::AnyValue> enable_toggle_invert_mouse(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     std::shared_ptr<yli::common::AnyValue> enable_toggle_flight_mode(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     std::shared_ptr<yli::common::AnyValue> enable_toggle_help_mode(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     /*********************************************************************\
      *  Callback engines for action mode keypresses begin here.          *
@@ -83,91 +93,106 @@ namespace app
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     std::shared_ptr<yli::common::AnyValue> first_turbo(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     std::shared_ptr<yli::common::AnyValue> second_turbo(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     std::shared_ptr<yli::common::AnyValue> move_forward(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     std::shared_ptr<yli::common::AnyValue> move_backward(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     std::shared_ptr<yli::common::AnyValue> strafe_left(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     std::shared_ptr<yli::common::AnyValue> strafe_right(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     std::shared_ptr<yli::common::AnyValue> ascent(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     std::shared_ptr<yli::common::AnyValue> descent(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     std::shared_ptr<yli::common::AnyValue> toggle_invert_mouse(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     std::shared_ptr<yli::common::AnyValue> toggle_flight_mode(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     std::shared_ptr<yli::common::AnyValue> toggle_help_mode(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     std::shared_ptr<yli::common::AnyValue> delete_entity(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     std::shared_ptr<yli::common::AnyValue> switch_to_new_material(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 
     std::shared_ptr<yli::common::AnyValue> transform_into_new_species(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&);
+            std::vector<yli::callback::CallbackParameter*>&,
+            std::shared_ptr<yli::common::AnyValue>);
 }
 
 #endif

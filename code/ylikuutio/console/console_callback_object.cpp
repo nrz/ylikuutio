@@ -42,7 +42,7 @@ namespace yli
             }
         }
 
-        std::shared_ptr<yli::common::AnyValue> ConsoleCallbackObject::execute()
+        std::shared_ptr<yli::common::AnyValue> ConsoleCallbackObject::execute(std::shared_ptr<yli::common::AnyValue>)
         {
             if (this->console_callback != nullptr)
             {
