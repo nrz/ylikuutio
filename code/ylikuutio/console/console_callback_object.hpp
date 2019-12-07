@@ -63,7 +63,7 @@ namespace yli
                 }
 
                 // execute this callback.
-                std::shared_ptr<yli::common::AnyValue> execute();
+                std::shared_ptr<yli::common::AnyValue> execute() override;
 
                 InputParametersToAnyValueCallbackWithConsole console_callback;
                 yli::ontology::Console* console_pointer;
