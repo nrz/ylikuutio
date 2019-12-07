@@ -18,6 +18,7 @@
 #include "console.hpp"
 #include "universe.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
 
 // Include standard headers
 #include <algorithm> // std::copy etc.
