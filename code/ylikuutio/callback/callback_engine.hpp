@@ -29,12 +29,6 @@
 #include <string>        // std::string
 #include <vector>        // std::vector
 
-// callback typedefs in alphabetical order.
-typedef void (*VoidToVoidCallback)(void);
-typedef void (*AnyValueToVoidCallback)(yli::common::AnyValue);
-typedef yli::common::AnyValue (*VoidToAnyValueCallback)(void);
-typedef yli::common::AnyValue (*AnyValueToAnyValueCallback)(yli::common::AnyValue);
-
 namespace yli
 {
     namespace ontology
