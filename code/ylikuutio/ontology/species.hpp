@@ -51,6 +51,7 @@ namespace yli
 {
     namespace ontology
     {
+        class Entity;
         class Material;
         class Object;
 
