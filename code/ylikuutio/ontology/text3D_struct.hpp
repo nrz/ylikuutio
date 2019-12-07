@@ -39,6 +39,8 @@ namespace yli
             Text3DStruct()
                 : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
                 cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
+                rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
+                translate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
                 text_string_char(nullptr),
                 parent(nullptr),
                 rotate_angle(NAN)
