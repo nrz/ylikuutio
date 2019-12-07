@@ -36,6 +36,14 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 
 // `Movable` is a mixin class, not intended to be instantiated.
+//
+// So far there are 4 kinds of `Movable`s implemented:
+// `Object`    - child of `Species`.
+// `Holobiont` - child of `Symbiosis`.
+// `Biont`     - child of `Holobiont`.
+// `Camera`    - non-material `Movable`, child of `Scene`.
+//
+// `Text3D`, child of `VectorFont`, is not implemented yet.
 
 namespace yli
 {
