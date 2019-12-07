@@ -63,6 +63,7 @@ General
 Naming
 * Use CamelCase for class names: `class MyClass;`.
 * Use underscores in variable names: `std::string my_string`.
+* Write acronyms properly with either upper or lowercase: `class AI;`, `yli::ontology::AI* ai`.
 * Use underscores and lowercase in function names, except write
   class names as they are (`create_Holobiont`, `create_Setting`),
   and write file formats using uppercase (`load_BMP_file`).
