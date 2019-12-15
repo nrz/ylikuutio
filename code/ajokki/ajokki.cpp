@@ -1200,7 +1200,7 @@ int main(const int argc, const char* const argv[])
                         static_cast<double>(my_universe->get_window_width()) / 2,
                         static_cast<double>(my_universe->get_window_height()) / 2);
 
-                if (my_universe->has_mouse_ever_moved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
+                if (my_universe->has_mouse_ever_moved || (std::abs(xpos) > 0.0001) || (std::abs(ypos) > 0.0001))
                 {
                     my_universe->has_mouse_ever_moved = true;
 
