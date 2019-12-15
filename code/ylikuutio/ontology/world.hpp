@@ -37,6 +37,7 @@
 // * `Material` -> `WorldMaterial`.
 // * `Species` -> `WorldSpecies`.
 // * `Symbiosis` -> `WorldSymbiosis`.
+// * `Brain` -> `WorldBrain`.
 // * etc.
 //
 // Each `World`-bound `Entity` class inherits its base class.
