@@ -18,8 +18,6 @@
 #ifndef __APP_KEYBOARD_CALLBACKS_HPP_INCLUDED
 #define __APP_KEYBOARD_CALLBACKS_HPP_INCLUDED
 
-#include "code/ylikuutio/common/any_value.hpp"
-
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
 #include <vector> // std::vector
