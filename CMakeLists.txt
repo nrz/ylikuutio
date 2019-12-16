@@ -513,6 +513,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/biont.cpp
     code/ylikuutio/ontology/biont.hpp
     code/ylikuutio/ontology/biont_struct.hpp
+    code/ylikuutio/ontology/brain.cpp
+    code/ylikuutio/ontology/brain.hpp
+    code/ylikuutio/ontology/brain_struct.hpp
     code/ylikuutio/ontology/camera.cpp
     code/ylikuutio/ontology/camera.hpp
     code/ylikuutio/ontology/camera_struct.hpp

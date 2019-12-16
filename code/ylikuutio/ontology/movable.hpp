@@ -23,6 +23,7 @@
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -32,8 +33,11 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <queue>    // std::queue
+#include <vector>   // std::vector
 
 // `Movable` is a mixin class, not intended to be instantiated.
 //
@@ -47,13 +51,22 @@
 
 namespace yli
 {
+    namespace input
+    {
+        enum class InputMethod;
+    }
+
     namespace ontology
     {
         class Universe;
+        class Brain;
 
         class Movable: public yli::ontology::Entity
         {
             public:
+                void bind_to_Brain();
+                void unbind_from_Brain();
+
                 // constructor.
                 Movable(yli::ontology::Universe* const universe, const glm::vec3& cartesian_coordinates)
                     : Entity(universe)
@@ -227,6 +240,15 @@ namespace yli
                 // The rest fields are created in the constructor.
                 glm::mat4 model_matrix;                                // model matrix.
                 glm::mat4 MVP_matrix;                                  // model view projection matrix.
+
+                template<class T1>
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
+
+            private:
+                yli::input::InputMethod input_method;                  // If `input_method` is `KEYBOARD`, then keypresses control this `Movable`.
+                                                                       // If `input_method` is `AI`, then the chosen `Brain` controls this `Movable`.
+                yli::ontology::Brain* brain;                           // Different kind of controls can be implemented as `Brain`s, e.g. train control systems.
+                std::size_t movableID;
         };
     }
 }

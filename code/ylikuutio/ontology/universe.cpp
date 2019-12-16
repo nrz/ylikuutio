@@ -251,6 +251,14 @@ namespace yli
             this->compute_and_update_matrices_from_inputs();
         }
 
+        void Universe::act()
+        {
+            if (this->active_world != nullptr)
+            {
+                this->active_world->act();
+            }
+        }
+
         void Universe::request_exit()
         {
             this->is_exit_requested = true;

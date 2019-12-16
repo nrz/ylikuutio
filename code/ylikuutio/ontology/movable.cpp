@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "movable.hpp"
+#include "brain.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -29,6 +30,30 @@ namespace yli
 {
     namespace ontology
     {
+        void Movable::bind_to_Brain()
+        {
+            // requirements:
+            // `this->brain` must not be `nullptr`.
+            yli::ontology::Brain* const brain = this->brain;
+
+            if (brain == nullptr)
+            {
+                std::cerr << "ERROR: `Movable::bind_to_Brain`: `brain` is `nullptr`!\n";
+                return;
+            }
+
+            // get `movableID` from `Brain` and set pointer to this `Movable`.
+            this->brain->bind_Movable(this);
+        }
+
+        void Movable::unbind_from_Brain()
+        {
+            if (this->brain != nullptr)
+            {
+                this->brain->unbind_Movable(this->movableID);
+            }
+        }
+
         Movable::~Movable()
         {
             // destructor.

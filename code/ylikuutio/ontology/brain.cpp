@@ -1,0 +1,115 @@
+// Ylikuutio - A 3D game and simulation engine.
+//
+// Copyright (C) 2015-2019 Antti Nuortimo.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+#include "brain.hpp"
+#include "scene.hpp"
+#include "movable.hpp"
+#include "code/ylikuutio/callback/callback_engine.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+
+// Include standard headers
+#include <cstddef>  // std::size_t
+#include <memory>   // std::make_shared, std::shared_ptr
+
+namespace yli
+{
+    namespace ontology
+    {
+        class Movable;
+
+        void Brain::bind_Movable(yli::ontology::Movable* const movable)
+        {
+            // get `childID` from `Brain` and set pointer to `movable`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::Movable*>(
+                    movable,
+                    this->movable_pointer_vector,
+                    this->free_movableID_queue,
+                    this->number_of_movables);
+        }
+
+        void Brain::unbind_Movable(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->movable_pointer_vector,
+                    this->free_movableID_queue,
+                    this->number_of_movables);
+        }
+
+        void Brain::bind_to_parent()
+        {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Scene* const scene = this->parent;
+
+            if (scene == nullptr)
+            {
+                std::cerr << "ERROR: `Brain::bind_to_parent`: `scene` is `nullptr`!\n";
+                return;
+            }
+
+            // get `childID` from the `Scene` and set pointer to this `Brain`.
+            scene->bind_Brain(this);
+        }
+
+        Brain::~Brain()
+        {
+            // destructor.
+
+            for (std::size_t child_i = 0; child_i < this->movable_pointer_vector.size(); child_i++)
+            {
+                yli::ontology::Movable* const movable = this->movable_pointer_vector[child_i];
+
+                if (movable != nullptr)
+                {
+                    movable->unbind_from_Brain();
+                }
+            }
+        }
+
+        yli::ontology::Entity* Brain::get_parent() const
+        {
+            return this->parent;
+        }
+
+        std::size_t Brain::get_number_of_children() const
+        {
+            return 0; // `Brain` has no children. `Movable`s controlled by `Brain` are not its children.
+        }
+
+        std::size_t Brain::get_number_of_descendants() const
+        {
+            return 0; // `Brain` has no children. `Movable`s controlled by `Brain` are not its children.
+        }
+
+        void Brain::act()
+        {
+            if (this->callback_engine == nullptr)
+            {
+                return;
+            }
+
+            for (std::size_t movable_i = 0; movable_i < this->movable_pointer_vector.size(); movable_i++)
+            {
+                // Apply this `Brain` to the current `Movable`.
+                yli::ontology::Movable* const movable = this->movable_pointer_vector[movable_i];
+                this->callback_engine->execute(std::make_shared<yli::common::AnyValue>(movable));
+            }
+        }
+    }
+}

@@ -99,6 +99,14 @@ namespace yli
             }
         }
 
+        void World::act()
+        {
+            if (this->active_scene != nullptr)
+            {
+                this->active_scene->act();
+            }
+        }
+
         void World::render()
         {
             if (this->should_be_rendered && this->active_scene != nullptr)

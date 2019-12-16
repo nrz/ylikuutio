@@ -1296,6 +1296,9 @@ int main(const int argc, const char* const argv[])
             // Gravity etc. physical phenomena.
             my_universe->do_physics();
 
+            // Intentional actors (AIs and keyboard controlled ones).
+            my_universe->act();
+
             if (angles_and_coordinates_text2D != nullptr)
             {
                 std::stringstream angles_and_coordinates_stringstream;

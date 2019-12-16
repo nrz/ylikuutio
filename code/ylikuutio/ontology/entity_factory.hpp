@@ -30,6 +30,7 @@
 #include "text3D_struct.hpp"
 #include "camera_struct.hpp"
 #include "compute_task_struct.hpp"
+#include "brain_struct.hpp"
 
 // Include standard headers
 #include <cstddef>   // std::size_t
@@ -53,6 +54,7 @@ namespace yli
         class Font2D;
         class Console;
         class ComputeTask;
+        class Brain;
 
         class EntityFactory
         {
@@ -87,6 +89,7 @@ namespace yli
                 yli::ontology::Entity* create_Console() const;
                 yli::ontology::Entity* create_Camera(const yli::ontology::CameraStruct& camera_struct) const;
                 yli::ontology::Entity* create_ComputeTask(const yli::ontology::ComputeTaskStruct& compute_task_struct) const;
+                yli::ontology::Entity* create_Brain(const yli::ontology::BrainStruct& brain_struct) const;
                 yli::ontology::Entity* create_AnyValueEntity(const std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr) const;
                 yli::ontology::Entity* create_AnyValueEntity(const yli::common::AnyValue& any_value) const;
                 yli::ontology::Entity* create_AnyStructEntity() const;

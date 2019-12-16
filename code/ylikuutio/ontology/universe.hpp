@@ -490,6 +490,9 @@ namespace yli
                 // this method processes the physics.
                 void do_physics();
 
+                // Intentional actors (AIs and keyboard controlled ones).
+                void act();
+
                 // this method renders the active `Scene` of this `Universe`.
                 void render();
 

@@ -33,6 +33,7 @@
 #include "console.hpp"
 #include "camera.hpp"
 #include "compute_task.hpp"
+#include "brain.hpp"
 #include "any_value_entity.hpp"
 #include "any_struct_entity.hpp"
 #include "scene_struct.hpp"
@@ -46,6 +47,7 @@
 #include "text3D_struct.hpp"
 #include "camera_struct.hpp"
 #include "compute_task_struct.hpp"
+#include "brain_struct.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/any_struct.hpp"
 
@@ -158,6 +160,11 @@ namespace yli
         yli::ontology::Entity* EntityFactory::create_ComputeTask(const yli::ontology::ComputeTaskStruct& compute_task_struct) const
         {
             return new yli::ontology::ComputeTask(this->universe, compute_task_struct);
+        }
+
+        yli::ontology::Entity* EntityFactory::create_Brain(const yli::ontology::BrainStruct& brain_struct) const
+        {
+            return new yli::ontology::Brain(this->universe, brain_struct);
         }
 
         yli::ontology::Entity* EntityFactory::create_AnyValueEntity(const std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr) const
