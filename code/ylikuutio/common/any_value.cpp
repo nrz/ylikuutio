@@ -117,6 +117,8 @@ namespace yli
                     return "yli::ontology::Console*";
                 case (yli::common::Datatype::MOVABLE_POINTER):
                     return "yli::ontology::Movable*";
+                case (yli::common::Datatype::CONST_MOVABLE_POINTER):
+                    return "const yli::ontology::Movable*";
                 case (yli::common::Datatype::SPHERICAL_COORDINATES_STRUCT_POINTER):
                     return "yli::common::SphericalCoordinatesStruct*";
                 case (yli::common::Datatype::STD_STRING_POINTER):
@@ -693,6 +695,18 @@ namespace yli
                         this->movable_pointer = static_cast<yli::ontology::Movable*>(void_pointer);
                         return true;
                     }
+                case (yli::common::Datatype::CONST_MOVABLE_POINTER):
+                    {
+                        if (!yli::string::check_if_unsigned_integer_string(value_string))
+                        {
+                            return false;
+                        }
+
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->const_movable_pointer = static_cast<yli::ontology::Movable*>(void_pointer);
+                        return true;
+                    }
                 case (yli::common::Datatype::SPHERICAL_COORDINATES_STRUCT_POINTER):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
@@ -915,6 +929,11 @@ namespace yli
             else if (type == "yli::ontology::Movable*")
             {
                 this->type = yli::common::Datatype::MOVABLE_POINTER;
+                this->set_value(value_string);
+            }
+            else if (type == "const yli::ontology::Movable*")
+            {
+                this->type = yli::common::Datatype::CONST_MOVABLE_POINTER;
                 this->set_value(value_string);
             }
             else
@@ -1406,6 +1425,26 @@ namespace yli
             {
                 this->type = yli::common::Datatype::MOVABLE_POINTER;
                 this->movable_pointer = movable_pointer;
+            }
+        }
+
+        AnyValue::AnyValue(const yli::ontology::Movable* const const_movable_pointer)
+        {
+            // constructor.
+            this->set_default_values();
+            this->type = yli::common::Datatype::CONST_MOVABLE_POINTER;
+            this->const_movable_pointer = const_movable_pointer;
+        }
+
+        AnyValue::AnyValue(const std::string& type, const yli::ontology::Movable* const const_movable_pointer)
+        {
+            // constructor.
+            this->set_default_values();
+
+            if (type == "yli::ontology::Movable*")
+            {
+                this->type = yli::common::Datatype::CONST_MOVABLE_POINTER;
+                this->const_movable_pointer = const_movable_pointer;
             }
         }
 
