@@ -118,6 +118,12 @@ namespace yli
                 // in each constructor, usually after setting
                 // `this->parent`. So, get `childID` from the parent,
                 // because every child deserves a unique ID!
+                // Note: this function modifies child's `childID` and thus
+                // the child must define this function template as a `friend`.
+                // Note: this function must be used only for child-parent
+                // relationships. Other binding relationships, that is
+                // master-apprentice relationships, must be implemented
+                // using `bind_apprentice_to_master`, not this function.
                 //
                 // requirements:
                 // `child_pointer` must not be `nullptr` (use `this` as the first argument).
