@@ -54,9 +54,22 @@ namespace yli
             }
         }
 
+        void Movable::bind_to_new_Brain(yli::ontology::Brain* const new_brain)
+        {
+            // This method sets pointer to this `Movable` to `nullptr`, sets `brain` according to the input,
+            // and requests a new `movableID` from the new `Brain`.
+
+            this->unbind_from_Brain(); // unbind from the current `Brain` if there is such.
+
+            this->brain = new_brain;
+            this->bind_to_Brain();
+        }
+
         Movable::~Movable()
         {
             // destructor.
+
+            this->unbind_from_Brain();
         }
 
         const glm::vec3& Movable::get_cartesian_coordinates() const

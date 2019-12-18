@@ -556,6 +556,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/model.hpp
     code/ylikuutio/ontology/movable.cpp
     code/ylikuutio/ontology/movable.hpp
+    code/ylikuutio/ontology/movable_struct.hpp
     code/ylikuutio/ontology/object.cpp
     code/ylikuutio/ontology/object.hpp
     code/ylikuutio/ontology/object_struct.hpp
@@ -688,6 +689,8 @@ add_executable(ajokki
     # app, in alphabetical order
     code/app/app_background_colors.cpp
     code/app/app_background_colors.hpp
+    code/app/app_brain.cpp
+    code/app/app_brain.hpp
     code/app/app_console.cpp
     code/app/app_console.hpp
     code/app/app_console_callbacks.cpp
@@ -738,6 +741,8 @@ add_executable(hirvi
     # app, in alphabetical order
     code/app/app_background_colors.cpp
     code/app/app_background_colors.hpp
+    code/app/app_brain.cpp
+    code/app/app_brain.hpp
     code/app/app_console.cpp
     code/app/app_console.hpp
     code/app/app_console_callbacks.cpp

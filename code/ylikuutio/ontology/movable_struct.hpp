@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __TEXT3D_STRUCT_HPP_INCLUDED
-#define __TEXT3D_STRUCT_HPP_INCLUDED
+#ifndef __MOVABLE_STRUCT_HPP_INCLUDED
+#define __MOVABLE_STRUCT_HPP_INCLUDED
 
 #include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
 
@@ -27,45 +27,45 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
-#include <string>   // std::string
+#include <cmath> // NAN, std::isnan, std::pow
 
 namespace yli
 {
     namespace ontology
     {
-        class VectorFont;
         class Brain;
 
-        struct Text3DStruct
+        struct MovableStruct
         {
-            Text3DStruct()
-                : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
+            MovableStruct()
+                : brain(nullptr),
                 cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
-                rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
-                translate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
-                text_string_char(nullptr),
-                parent(nullptr),
-                brain(nullptr),
-                rotate_angle(NAN),
+                spherical_coordinates(NAN, NAN, NAN),
                 horizontal_angle(0.0),
                 vertical_angle(0.0)
             {
                 // constructor.
             }
 
-            glm::vec3 original_scale_vector;   // original scale vector.
-            glm::vec3 cartesian_coordinates;   // coordinate vector.
-            glm::vec3 rotate_vector;           // rotate vector.
-            glm::vec3 translate_vector;        // translate vector.
+            MovableStruct(
+                    yli::ontology::Brain* const brain,
+                    const glm::vec3& cartesian_coordinates,
+                    yli::common::SphericalCoordinatesStruct spherical_coordinates,
+                    const double horizontal_angle,
+                    const double vertical_angle)
+                : brain(brain),
+                cartesian_coordinates(cartesian_coordinates),
+                spherical_coordinates(spherical_coordinates),
+                horizontal_angle(horizontal_angle),
+                vertical_angle(vertical_angle)
+            {
+            }
+
+            yli::ontology::Brain* brain;     // brain.
+            glm::vec3 cartesian_coordinates; // coordinate vector.
             yli::common::SphericalCoordinatesStruct spherical_coordinates;
-            std::string text_string;
-            const char* text_string_char;
-            yli::ontology::VectorFont* parent; // pointer to the `VectorFont` (parent).
-            yli::ontology::Brain* brain;       // pointer to the `Brain` (not a parent!).
-            float rotate_angle;                // rotate angle.
-            double horizontal_angle;           // horizontal angle in radians.
-            double vertical_angle;             // vertical angle in radians.
+            double horizontal_angle;
+            double vertical_angle;
         };
     }
 }

@@ -133,6 +133,31 @@ namespace yli
             }
 
         template<class T1>
+            void bind_apprentice_to_master(
+                    const T1 apprentice_pointer,
+                    std::size_t& apprenticeID,
+                    std::vector<T1>& apprentice_pointer_vector,
+                    std::queue<std::size_t>& free_apprenticeID_queue,
+                    std::size_t& number_of_apprentices)
+            {
+                // Note: this function must be used only for master-apprentice
+                // Child-parent relationships must be implemented
+                // in some other way, not using this function.
+                //
+                // requirements:
+                // `child_pointer` must not be `nullptr` (use `this` as the first argument).
+
+                if (apprentice_pointer == nullptr)
+                {
+                    return;
+                }
+
+                apprenticeID = request_childID(apprentice_pointer_vector, free_apprenticeID_queue);
+                // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
+                set_child_pointer(apprenticeID, apprentice_pointer, apprentice_pointer_vector, free_apprenticeID_queue, number_of_apprentices);
+            }
+
+        template<class T1>
             void bind_child_to_parent(
                     const std::string& child_name,
                     std::unordered_map<std::string, T1>& child_hash_map,

@@ -20,6 +20,9 @@
 #endif
 
 #include "ajokki_helsinki_east_downtown_scene.hpp"
+#include "code/app/app_brain.hpp"
+#include "code/app/app_keyboard_callbacks.hpp"
+#include "code/ylikuutio/callback/callback_engine.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/shader.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
@@ -29,6 +32,7 @@
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/vector_font.hpp"
 #include "code/ylikuutio/ontology/camera.hpp"
+#include "code/ylikuutio/ontology/brain.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
@@ -37,6 +41,7 @@
 #include "code/ylikuutio/ontology/symbiosis_struct.hpp"
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
 #include "code/ylikuutio/ontology/camera_struct.hpp"
+#include "code/ylikuutio/ontology/brain_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 
 // Include GLM
@@ -82,6 +87,229 @@ namespace ajokki
 
         helsinki_east_downtown_scene->set_turbo_factor(5.0f);
         helsinki_east_downtown_scene->set_twin_turbo_factor(100.0f);
+
+        // Create the `CallbackEngine`s for the `Brain`s.
+        std::shared_ptr<yli::callback::CallbackEngine> rest_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
+        rest_callback_engine->create_CallbackObject(&app::rest);
+
+        std::shared_ptr<yli::callback::CallbackEngine> go_east_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
+        go_east_callback_engine->create_CallbackObject(&app::go_east);
+
+        std::shared_ptr<yli::callback::CallbackEngine> go_west_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
+        go_west_callback_engine->create_CallbackObject(&app::go_west);
+
+        std::shared_ptr<yli::callback::CallbackEngine> go_north_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
+        go_north_callback_engine->create_CallbackObject(&app::go_north);
+
+        std::shared_ptr<yli::callback::CallbackEngine> go_south_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
+        go_south_callback_engine->create_CallbackObject(&app::go_south);
+
+        std::shared_ptr<yli::callback::CallbackEngine> orient_to_east_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
+        orient_to_east_callback_engine->create_CallbackObject(&app::orient_to_east);
+
+        std::shared_ptr<yli::callback::CallbackEngine> orient_to_west_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
+        orient_to_west_callback_engine->create_CallbackObject(&app::orient_to_west);
+
+        std::shared_ptr<yli::callback::CallbackEngine> orient_to_north_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
+        orient_to_north_callback_engine->create_CallbackObject(&app::orient_to_north);
+
+        std::shared_ptr<yli::callback::CallbackEngine> orient_to_south_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
+        orient_to_south_callback_engine->create_CallbackObject(&app::orient_to_south);
+
+        std::shared_ptr<yli::callback::CallbackEngine> rotate_clockwise_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
+        rotate_clockwise_callback_engine->create_CallbackObject(&app::rotate_clockwise);
+
+        std::shared_ptr<yli::callback::CallbackEngine> rotate_counterclockwise_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
+        rotate_counterclockwise_callback_engine->create_CallbackObject(&app::rotate_counterclockwise);
+
+        // Create the `Brain`s.
+
+        // `rest_brain`.
+        yli::ontology::BrainStruct rest_brain_struct;
+        rest_brain_struct.parent = helsinki_east_downtown_scene;
+        rest_brain_struct.callback_engine = rest_callback_engine;
+        std::cout << "Creating yli::ontology::Entity* rest_brain_entity ...\n";
+        yli::ontology::Entity* const rest_brain_entity = entity_factory->create_Brain(rest_brain_struct);
+        std::cout << "Creating yli::ontology::Brain* rest_brain ...\n";
+        yli::ontology::Brain* const rest_brain = dynamic_cast<yli::ontology::Brain*>(rest_brain_entity);
+
+        if (rest_brain == nullptr)
+        {
+            std::cerr << "Failed to create Brain.\n";
+            return nullptr;
+        }
+
+        rest_brain->set_name("rest_brain");
+
+        // `go_east_brain`.
+        yli::ontology::BrainStruct go_east_brain_struct;
+        go_east_brain_struct.parent = helsinki_east_downtown_scene;
+        go_east_brain_struct.callback_engine = go_east_callback_engine;
+        std::cout << "Creating yli::ontology::Entity* go_east_brain_entity ...\n";
+        yli::ontology::Entity* const go_east_brain_entity = entity_factory->create_Brain(go_east_brain_struct);
+        std::cout << "Creating yli::ontology::Brain* go_east_brain ...\n";
+        yli::ontology::Brain* const go_east_brain = dynamic_cast<yli::ontology::Brain*>(go_east_brain_entity);
+
+        if (go_east_brain == nullptr)
+        {
+            std::cerr << "Failed to create Brain.\n";
+            return nullptr;
+        }
+
+        go_east_brain->set_name("go_east_brain");
+
+        // `go_west_brain`.
+        yli::ontology::BrainStruct go_west_brain_struct;
+        go_west_brain_struct.parent = helsinki_east_downtown_scene;
+        go_west_brain_struct.callback_engine = go_west_callback_engine;
+        std::cout << "Creating yli::ontology::Entity* go_west_brain_entity ...\n";
+        yli::ontology::Entity* const go_west_brain_entity = entity_factory->create_Brain(go_west_brain_struct);
+        std::cout << "Creating yli::ontology::Brain* go_west_brain ...\n";
+        yli::ontology::Brain* const go_west_brain = dynamic_cast<yli::ontology::Brain*>(go_west_brain_entity);
+
+        if (go_west_brain == nullptr)
+        {
+            std::cerr << "Failed to create Brain.\n";
+            return nullptr;
+        }
+
+        go_west_brain->set_name("go_west_brain");
+
+        // `go_north_brain`.
+        yli::ontology::BrainStruct go_north_brain_struct;
+        go_north_brain_struct.parent = helsinki_east_downtown_scene;
+        go_north_brain_struct.callback_engine = go_north_callback_engine;
+        std::cout << "Creating yli::ontology::Entity* go_north_brain_entity ...\n";
+        yli::ontology::Entity* const go_north_brain_entity = entity_factory->create_Brain(go_north_brain_struct);
+        std::cout << "Creating yli::ontology::Brain* go_north_brain ...\n";
+        yli::ontology::Brain* const go_north_brain = dynamic_cast<yli::ontology::Brain*>(go_north_brain_entity);
+
+        if (go_north_brain == nullptr)
+        {
+            std::cerr << "Failed to create Brain.\n";
+            return nullptr;
+        }
+
+        go_north_brain->set_name("go_north_brain");
+
+        // `go_south_brain`.
+        yli::ontology::BrainStruct go_south_brain_struct;
+        go_south_brain_struct.parent = helsinki_east_downtown_scene;
+        go_south_brain_struct.callback_engine = go_south_callback_engine;
+        std::cout << "Creating yli::ontology::Entity* go_south_brain_entity ...\n";
+        yli::ontology::Entity* const go_south_brain_entity = entity_factory->create_Brain(go_south_brain_struct);
+        std::cout << "Creating yli::ontology::Brain* go_south_brain ...\n";
+        yli::ontology::Brain* const go_south_brain = dynamic_cast<yli::ontology::Brain*>(go_south_brain_entity);
+
+        if (go_south_brain == nullptr)
+        {
+            std::cerr << "Failed to create Brain.\n";
+            return nullptr;
+        }
+
+        go_south_brain->set_name("go_south_brain");
+
+        // `orient_to_east_brain`.
+        yli::ontology::BrainStruct orient_to_east_brain_struct;
+        orient_to_east_brain_struct.parent = helsinki_east_downtown_scene;
+        orient_to_east_brain_struct.callback_engine = orient_to_east_callback_engine;
+        std::cout << "Creating yli::ontology::Entity* orient_to_east_brain_entity ...\n";
+        yli::ontology::Entity* const orient_to_east_brain_entity = entity_factory->create_Brain(orient_to_east_brain_struct);
+        std::cout << "Creating yli::ontology::Brain* orient_to_east_brain ...\n";
+        yli::ontology::Brain* const orient_to_east_brain = dynamic_cast<yli::ontology::Brain*>(orient_to_east_brain_entity);
+
+        if (orient_to_east_brain == nullptr)
+        {
+            std::cerr << "Failed to create Brain.\n";
+            return nullptr;
+        }
+
+        orient_to_east_brain->set_name("orient_to_east_brain");
+
+        // `orient_to_west_brain`.
+        yli::ontology::BrainStruct orient_to_west_brain_struct;
+        orient_to_west_brain_struct.parent = helsinki_east_downtown_scene;
+        orient_to_west_brain_struct.callback_engine = orient_to_west_callback_engine;
+        std::cout << "Creating yli::ontology::Entity* orient_to_west_brain_entity ...\n";
+        yli::ontology::Entity* const orient_to_west_brain_entity = entity_factory->create_Brain(orient_to_west_brain_struct);
+        std::cout << "Creating yli::ontology::Brain* orient_to_west_brain ...\n";
+        yli::ontology::Brain* const orient_to_west_brain = dynamic_cast<yli::ontology::Brain*>(orient_to_west_brain_entity);
+
+        if (orient_to_west_brain == nullptr)
+        {
+            std::cerr << "Failed to create Brain.\n";
+            return nullptr;
+        }
+
+        orient_to_west_brain->set_name("orient_to_west_brain");
+
+        // `orient_to_north_brain`.
+        yli::ontology::BrainStruct orient_to_north_brain_struct;
+        orient_to_north_brain_struct.parent = helsinki_east_downtown_scene;
+        orient_to_north_brain_struct.callback_engine = orient_to_north_callback_engine;
+        std::cout << "Creating yli::ontology::Entity* orient_to_north_brain_entity ...\n";
+        yli::ontology::Entity* const orient_to_north_brain_entity = entity_factory->create_Brain(orient_to_north_brain_struct);
+        std::cout << "Creating yli::ontology::Brain* orient_to_north_brain ...\n";
+        yli::ontology::Brain* const orient_to_north_brain = dynamic_cast<yli::ontology::Brain*>(orient_to_north_brain_entity);
+
+        if (orient_to_north_brain == nullptr)
+        {
+            std::cerr << "Failed to create Brain.\n";
+            return nullptr;
+        }
+
+        orient_to_north_brain->set_name("orient_to_north_brain");
+
+        // `orient_to_south_brain`.
+        yli::ontology::BrainStruct orient_to_south_brain_struct;
+        orient_to_south_brain_struct.parent = helsinki_east_downtown_scene;
+        orient_to_south_brain_struct.callback_engine = orient_to_south_callback_engine;
+        std::cout << "Creating yli::ontology::Entity* orient_to_south_brain_entity ...\n";
+        yli::ontology::Entity* const orient_to_south_brain_entity = entity_factory->create_Brain(orient_to_south_brain_struct);
+        std::cout << "Creating yli::ontology::Brain* orient_to_south_brain ...\n";
+        yli::ontology::Brain* const orient_to_south_brain = dynamic_cast<yli::ontology::Brain*>(orient_to_south_brain_entity);
+
+        if (orient_to_south_brain == nullptr)
+        {
+            std::cerr << "Failed to create Brain.\n";
+            return nullptr;
+        }
+
+        orient_to_south_brain->set_name("orient_to_south_brain");
+
+        // `rotate_clockwise_brain`.
+        yli::ontology::BrainStruct rotate_clockwise_brain_struct;
+        rotate_clockwise_brain_struct.parent = helsinki_east_downtown_scene;
+        rotate_clockwise_brain_struct.callback_engine = rotate_clockwise_callback_engine;
+        std::cout << "Creating yli::ontology::Entity* rotate_clockwise_brain_entity ...\n";
+        yli::ontology::Entity* const rotate_clockwise_brain_entity = entity_factory->create_Brain(rotate_clockwise_brain_struct);
+        std::cout << "Creating yli::ontology::Brain* rotate_clockwise_brain ...\n";
+        yli::ontology::Brain* const rotate_clockwise_brain = dynamic_cast<yli::ontology::Brain*>(rotate_clockwise_brain_entity);
+
+        if (rotate_clockwise_brain == nullptr)
+        {
+            std::cerr << "Failed to create Brain.\n";
+            return nullptr;
+        }
+
+        rotate_clockwise_brain->set_name("rotate_clockwise_brain");
+
+        // `rotate_counterclockwise_brain`.
+        yli::ontology::BrainStruct rotate_counterclockwise_brain_struct;
+        rotate_counterclockwise_brain_struct.parent = helsinki_east_downtown_scene;
+        rotate_counterclockwise_brain_struct.callback_engine = rotate_counterclockwise_callback_engine;
+        std::cout << "Creating yli::ontology::Entity* rotate_counterclockwise_brain_entity ...\n";
+        yli::ontology::Entity* const rotate_counterclockwise_brain_entity = entity_factory->create_Brain(rotate_counterclockwise_brain_struct);
+        std::cout << "Creating yli::ontology::Brain* rotate_counterclockwise_brain ...\n";
+        yli::ontology::Brain* const rotate_counterclockwise_brain = dynamic_cast<yli::ontology::Brain*>(rotate_counterclockwise_brain_entity);
+
+        if (rotate_counterclockwise_brain == nullptr)
+        {
+            std::cerr << "Failed to create Brain.\n";
+            return nullptr;
+        }
+
+        rotate_counterclockwise_brain->set_name("rotate_counterclockwise_brain");
 
         // Create the shader, store it in `helsinki_east_downtown_shader`.
         yli::ontology::ShaderStruct helsinki_east_downtown_shader_struct;
@@ -334,6 +562,7 @@ namespace ajokki
 
         yli::ontology::ObjectStruct cat_object_struct1;
         cat_object_struct1.species_parent = cat_species;
+        cat_object_struct1.brain = rest_brain;
         cat_object_struct1.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
         cat_object_struct1.cartesian_coordinates = glm::vec3(500.00f, 100.00f, 1000.00f);
         cat_object_struct1.rotate_angle = 0.00f;
@@ -352,6 +581,7 @@ namespace ajokki
 
         yli::ontology::ObjectStruct cat_object_struct2;
         cat_object_struct2.species_parent = cat_species;
+        cat_object_struct2.brain = rest_brain;
         cat_object_struct2.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
         cat_object_struct2.cartesian_coordinates = glm::vec3(700.00f, 100.00f, 1200.00f);
         cat_object_struct2.rotate_angle = 0.00f;
@@ -434,6 +664,7 @@ namespace ajokki
 
         yli::ontology::HolobiontStruct turbo_polizei_object_struct1;
         turbo_polizei_object_struct1.symbiosis_parent = turbo_polizei_symbiosis;
+        turbo_polizei_object_struct1.brain = rest_brain;
         turbo_polizei_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         turbo_polizei_object_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 175.00f);
         turbo_polizei_object_struct1.rotate_angle = 0.00f;

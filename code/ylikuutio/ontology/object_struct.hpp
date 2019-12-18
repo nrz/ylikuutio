@@ -22,6 +22,8 @@
 #define PI 3.14159265359f
 #endif
 
+#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -38,6 +40,7 @@ namespace yli
         class Species;
         class Glyph;
         class Text3D;
+        class Brain;
 
         struct ObjectStruct
         {
@@ -47,11 +50,15 @@ namespace yli
                 rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
                 initial_rotate_vector(glm::vec3(0.0f, 1.0f, 1.0f)),
                 translate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
+                spherical_coordinates(NAN, NAN, NAN),
                 species_parent(nullptr),
                 text3D_parent(nullptr),
                 glyph(nullptr),
+                brain(nullptr),
                 rotate_angle(0.0f),
                 initial_rotate_angle(PI),
+                horizontal_angle(0.0),
+                vertical_angle(0.0),
                 is_character(false),
                 is_symbiosis_object(false)
             {
@@ -63,11 +70,15 @@ namespace yli
             glm::vec3 rotate_vector;                // rotate vector.
             glm::vec3 initial_rotate_vector;        // initial rotate vector.
             glm::vec3 translate_vector;             // translate vector.
+            yli::common::SphericalCoordinatesStruct spherical_coordinates;
             yli::ontology::Species* species_parent; // pointer to the parent `Species`.
             yli::ontology::Text3D* text3D_parent;   // pointer to the parent `Text3D`.
             yli::ontology::Glyph* glyph;            // pointer to the `Glyph` (not a parent!).
+            yli::ontology::Brain* brain;            // pointer to the `Brain` (not a parent!).
             float rotate_angle;                     // rotate angle.
             float initial_rotate_angle;             // initial rotate angle.
+            double horizontal_angle;                // horizontal angle in radians.
+            double vertical_angle;                  // vertical angle in radians.
             bool is_character;                      // The parent of a character object is a `Glyph`. The parent of a regular object is a `Species`.
             bool is_symbiosis_object;               // The parent of a `SymbiosisObject` is a `Symbiosis`.
         };

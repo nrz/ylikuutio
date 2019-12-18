@@ -24,6 +24,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 
 namespace yli
@@ -35,17 +36,18 @@ namespace yli
         void Brain::bind_Movable(yli::ontology::Movable* const movable)
         {
             // get `childID` from `Brain` and set pointer to `movable`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Movable*>(
+            yli::hierarchy::bind_apprentice_to_master<yli::ontology::Movable*>(
                     movable,
+                    movable->movableID,
                     this->movable_pointer_vector,
                     this->free_movableID_queue,
                     this->number_of_movables);
         }
 
-        void Brain::unbind_Movable(const std::size_t childID)
+        void Brain::unbind_Movable(const std::size_t movableID)
         {
             yli::hierarchy::unbind_child_from_parent(
-                    childID,
+                    movableID,
                     this->movable_pointer_vector,
                     this->free_movableID_queue,
                     this->number_of_movables);
@@ -101,13 +103,21 @@ namespace yli
         {
             if (this->callback_engine == nullptr)
             {
+                std::cerr << "ERROR: `Brain::act`: `this->callback_engine` is `nullptr`!\n";
                 return;
             }
 
             for (std::size_t movable_i = 0; movable_i < this->movable_pointer_vector.size(); movable_i++)
             {
                 // Apply this `Brain` to the current `Movable`.
-                yli::ontology::Movable* const movable = this->movable_pointer_vector[movable_i];
+                yli::ontology::Movable* movable = this->movable_pointer_vector[movable_i];
+
+                if (movable == nullptr)
+                {
+                    // Do not waste time in calling the callback function for `nullptr` targets.
+                    continue;
+                }
+
                 this->callback_engine->execute(std::make_shared<yli::common::AnyValue>(movable));
             }
         }

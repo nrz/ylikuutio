@@ -21,6 +21,7 @@
 #include "entity.hpp"
 #include "movable.hpp"
 #include "object_struct.hpp"
+#include "movable_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -67,7 +68,12 @@ namespace yli
 
                 // constructor.
                 Object(yli::ontology::Universe* const universe, const yli::ontology::ObjectStruct& object_struct)
-                    : Movable(universe, object_struct.cartesian_coordinates)
+                    : Movable(universe, yli::ontology::MovableStruct(
+                                object_struct.brain,
+                                object_struct.cartesian_coordinates,
+                                object_struct.spherical_coordinates,
+                                object_struct.horizontal_angle,
+                                object_struct.vertical_angle))
                 {
                     // constructor.
                     this->original_scale_vector = object_struct.original_scale_vector;

@@ -24,6 +24,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <queue>    // std::queue
 #include <vector>   // std::vector
 
@@ -43,19 +44,23 @@ namespace yli
         {
             public:
                 void bind_Movable(yli::ontology::Movable* const movable);
-                void unbind_Movable(const std::size_t childID);
+                void unbind_Movable(const std::size_t movableID);
 
                 Brain(yli::ontology::Universe* const universe, const yli::ontology::BrainStruct& brain_struct)
                     : Entity(universe)
                 {
                     // constructor.
-                    this->parent = brain_struct.parent;
+                    this->parent             = brain_struct.parent;
+                    this->callback_engine    = brain_struct.callback_engine;
+                    this->number_of_movables = 0;
 
-                    // Get `childID` from the `Scene` and set pointer to this `Camera`.
+                    // Get `childID` from the `Scene` and set pointer to this `Brain`.
                     this->bind_to_parent();
 
                     // `yli::ontology::Entity` member variables begin here.
+                    this->child_vector_pointers_vector.push_back(&this->movable_pointer_vector);
                     this->type_string = "yli::ontology::Brain*";
+                    this->can_be_erased = true;
                 }
 
                 // destructor.
@@ -75,7 +80,7 @@ namespace yli
 
                 yli::ontology::Scene* parent;
 
-                yli::callback::CallbackEngine* callback_engine;
+                std::shared_ptr<yli::callback::CallbackEngine> callback_engine;
 
                 // Currently only `Movable`s can be intentional Entities.
                 std::vector<yli::ontology::Movable*> movable_pointer_vector;

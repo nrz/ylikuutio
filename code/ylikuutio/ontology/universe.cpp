@@ -39,6 +39,8 @@
 #include "scene.hpp"
 #include "camera.hpp"
 #include "font2D.hpp"
+#include "brain.hpp"
+#include "movable.hpp"
 #include "any_value_entity.hpp"
 #include "any_struct_entity.hpp"
 #include "render_templates.hpp"
@@ -973,7 +975,17 @@ namespace yli
                     return nullptr;
                 }
 
-                child_entity->bind_to_new_parent(parent_entity);
+                yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(child_entity);
+                yli::ontology::Brain* brain = dynamic_cast<yli::ontology::Brain*>(parent_entity);
+
+                if (movable != nullptr && brain != nullptr)
+                {
+                    movable->bind_to_new_Brain(brain);
+                }
+                else
+                {
+                    child_entity->bind_to_new_parent(parent_entity);
+                }
             }
 
             return nullptr;
