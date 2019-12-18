@@ -274,7 +274,7 @@ namespace app
             return nullptr;
         }
 
-        movable->horizontal_angle = movable->horizontal_angle - 0.1 * PI;
+        movable->horizontal_angle -= 0.1 * PI;
         return nullptr;
     }
 
@@ -298,7 +298,7 @@ namespace app
             return nullptr;
         }
 
-        movable->horizontal_angle = movable->horizontal_angle + 0.1 * PI;
+        movable->horizontal_angle += 0.1 * PI;
         return nullptr;
     }
 }
