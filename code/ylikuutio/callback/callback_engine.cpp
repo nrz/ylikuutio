@@ -17,7 +17,7 @@
 
 #include "callback_engine.hpp"
 #include "callback_object.hpp"
-#include "input_parameters_to_any_value_callback_with_universe.hpp"
+#include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -76,7 +76,7 @@ namespace yli
             return new yli::callback::CallbackObject(this);
         }
 
-        yli::callback::CallbackObject* CallbackEngine::create_CallbackObject(const InputParametersToAnyValueCallbackWithUniverse callback)
+        yli::callback::CallbackObject* CallbackEngine::create_CallbackObject(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
         {
             return new yli::callback::CallbackObject(callback, this);
         }
@@ -86,9 +86,9 @@ namespace yli
             yli::hierarchy::set_child_pointer(childID, child_pointer, this->callback_object_pointer_vector, this->free_callback_objectID_queue, this->number_of_callback_objects);
         }
 
-        std::shared_ptr<yli::common::AnyValue> CallbackEngine::execute()
+        std::shared_ptr<yli::common::AnyValue> CallbackEngine::execute(std::shared_ptr<yli::common::AnyValue> any_value)
         {
-            std::shared_ptr<yli::common::AnyValue> any_value = nullptr;
+            std::shared_ptr<yli::common::AnyValue> return_any_value = nullptr;
 
             // execute all callbacks.
             for (std::size_t child_i = 0; child_i < this->callback_object_pointer_vector.size(); child_i++)
@@ -97,8 +97,8 @@ namespace yli
 
                 if (callback_object_pointer != nullptr)
                 {
-                    any_value = callback_object_pointer->execute();
-                    this->return_values.push_back(any_value);
+                    return_any_value = callback_object_pointer->execute(any_value);
+                    this->return_values.push_back(return_any_value);
                 }
                 else
                 {
@@ -107,7 +107,7 @@ namespace yli
             }
 
             this->return_values.clear();
-            return std::shared_ptr<yli::common::AnyValue>(any_value);
+            return std::shared_ptr<yli::common::AnyValue>(return_any_value);
         }
 
         std::size_t CallbackEngine::get_n_of_return_values() const

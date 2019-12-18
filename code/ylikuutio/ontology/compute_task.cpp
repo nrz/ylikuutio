@@ -31,8 +31,8 @@
 #include <iomanip>       // std::setfill, std::setw
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <memory>        // std::make_shared, std::shared_ptr
-#include <stdint.h>      // uint32_t etc.
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
+#include <stdint.h>      // uint32_t etc.
 #include <utility>       // std::swap etc.
 
 namespace yli
@@ -170,7 +170,7 @@ namespace yli
             {
                 if (this->end_condition_callback_engine != nullptr)
                 {
-                    const std::shared_ptr<yli::common::AnyValue> end_condition_any_value = this->end_condition_callback_engine->execute();
+                    const std::shared_ptr<yli::common::AnyValue> end_condition_any_value = this->end_condition_callback_engine->execute(nullptr);
 
                     if (end_condition_any_value->type == yli::common::Datatype::BOOL && end_condition_any_value->bool_value)
                     {

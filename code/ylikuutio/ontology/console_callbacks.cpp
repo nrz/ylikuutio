@@ -18,6 +18,7 @@
 #include "console.hpp"
 #include "universe.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
 
 // Include standard headers
 #include <algorithm> // std::copy etc.
@@ -55,7 +56,8 @@ namespace yli
                 yli::ontology::Universe* universe,
                 yli::callback::CallbackEngine*,
                 yli::callback::CallbackObject*,
-                std::vector<yli::callback::CallbackParameter*>&)
+                std::vector<yli::callback::CallbackParameter*>&,
+                std::shared_ptr<yli::common::AnyValue>)
         {
             if (universe == nullptr)
             {

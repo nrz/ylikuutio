@@ -37,6 +37,7 @@
 // * `Material` -> `WorldMaterial`.
 // * `Species` -> `WorldSpecies`.
 // * `Symbiosis` -> `WorldSymbiosis`.
+// * `Brain` -> `WorldBrain`.
 // * etc.
 //
 // Each `World`-bound `Entity` class inherits its base class.
@@ -112,6 +113,9 @@ namespace yli
 
                 // this method processes the physics.
                 void do_physics();
+
+                // Intentional actors (AIs and keyboard controlled ones).
+                void act();
 
                 // This method renders the active `Scene` of this `World`.
                 void render();

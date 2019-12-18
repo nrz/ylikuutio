@@ -31,6 +31,7 @@
 #include "material.hpp"
 #include "species.hpp"
 #include "camera.hpp"
+#include "brain.hpp"
 #include "ground_level.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
@@ -73,6 +74,16 @@ namespace yli
                     this->number_of_cameras);
         }
 
+        void Scene::bind_Brain(yli::ontology::Brain* const brain)
+        {
+            // get `childID` from `Scene` and set pointer to `ai`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::Brain*>(
+                    brain,
+                    this->brain_pointer_vector,
+                    this->free_brainID_queue,
+                    this->number_of_brains);
+        }
+
         void Scene::unbind_Shader(const std::size_t childID)
         {
             // `shader` needs to be removed from the priority queue as well.
@@ -92,6 +103,15 @@ namespace yli
                     this->camera_pointer_vector,
                     this->free_cameraID_queue,
                     this->number_of_cameras);
+        }
+
+        void Scene::unbind_Brain(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->brain_pointer_vector,
+                    this->free_brainID_queue,
+                    this->number_of_brains);
         }
 
         void Scene::bind_to_parent()
@@ -122,6 +142,10 @@ namespace yli
             // destroy all `Camera`s of this `Scene`.
             std::cout << "All cameras of this scene will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Camera*>(this->camera_pointer_vector, this->number_of_cameras);
+
+            // destroy all `Brain`s of this `Scene`.
+            std::cout << "All brains of this scene will be destroyed.\n";
+            yli::hierarchy::delete_children<yli::ontology::Brain*>(this->brain_pointer_vector, this->number_of_brains);
 
             // requirements for further actions:
             // `this->parent` must not be `nullptr`.
@@ -177,7 +201,21 @@ namespace yli
                     }
                 }
             }
+        }
 
+        void Scene::act()
+        {
+            // Intentional actors (AIs and keyboard controlled ones).
+
+            for (std::size_t brain_i = 0; brain_i < this->brain_pointer_vector.size(); brain_i++)
+            {
+                yli::ontology::Brain* const brain = this->brain_pointer_vector[brain_i];
+
+                if (brain != nullptr)
+                {
+                    brain->act();
+                }
+            }
         }
 
         void Scene::render()

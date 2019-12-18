@@ -18,7 +18,7 @@
 #ifndef __CALLBACK_ENGINE_HPP_INCLUDED
 #define __CALLBACK_ENGINE_HPP_INCLUDED
 
-#include "input_parameters_to_any_value_callback_with_universe.hpp"
+#include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -28,12 +28,6 @@
 #include <queue>         // std::queue
 #include <string>        // std::string
 #include <vector>        // std::vector
-
-// callback typedefs in alphabetical order.
-typedef void (*VoidToVoidCallback)(void);
-typedef void (*AnyValueToVoidCallback)(yli::common::AnyValue);
-typedef yli::common::AnyValue (*VoidToAnyValueCallback)(void);
-typedef yli::common::AnyValue (*AnyValueToAnyValueCallback)(yli::common::AnyValue);
 
 namespace yli
 {
@@ -61,7 +55,7 @@ namespace yli
             //
             // How to use.
             // 1. Create a new `CallbackEngine`. No callbacks have been
-            //    defined yet. Calling `CallbackEngine.execute()` at this
+            //    defined yet. Calling `CallbackEngine.execute(nullptr)` at this
             //    point will simply go through an empty vector and
             //    practically won't do anything interesting.
             // 2. Create a new `CallbackObject`, give pointer to the
@@ -83,10 +77,10 @@ namespace yli
                 ~CallbackEngine();
 
                 yli::callback::CallbackObject* create_CallbackObject();
-                yli::callback::CallbackObject* create_CallbackObject(const InputParametersToAnyValueCallbackWithUniverse callback);
+                yli::callback::CallbackObject* create_CallbackObject(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
-                // execute all callbacks.
-                std::shared_ptr<yli::common::AnyValue> execute();
+                // execute all callbacks with a parameter.
+                std::shared_ptr<yli::common::AnyValue> execute(std::shared_ptr<yli::common::AnyValue> any_value);
 
                 std::size_t get_n_of_return_values() const;
                 std::shared_ptr<yli::common::AnyValue> get_nth_return_value(std::size_t n) const;

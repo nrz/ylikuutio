@@ -19,7 +19,7 @@
 #define __CALLBACK_OBJECT_HPP_INCLUDED
 
 #include "callback_engine.hpp"
-#include "input_parameters_to_any_value_callback_with_universe.hpp"
+#include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -54,7 +54,7 @@ namespace yli
                         const bool is_reference);
 
                 // this method changes the callback without changing the parameters of CallbackObject.
-                void set_new_callback(const InputParametersToAnyValueCallbackWithUniverse callback);
+                void set_new_callback(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
                 // getter functions for callbacks and callback objects.
                 std::shared_ptr<yli::common::AnyValue> get_any_value(const std::string& name) const;
@@ -75,13 +75,13 @@ namespace yli
                 std::queue<std::size_t> free_callback_parameterID_queue;
                 std::size_t number_of_callback_parameters;
 
-                InputParametersToAnyValueCallbackWithUniverse callback;
+                InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback;
 
                 // constructor.
                 CallbackObject(yli::callback::CallbackEngine* const parent);
 
                 // constructor.
-                CallbackObject(const InputParametersToAnyValueCallbackWithUniverse callback, yli::callback::CallbackEngine* const parent);
+                CallbackObject(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback, yli::callback::CallbackEngine* const parent);
 
             private:
                 void bind_to_parent();
@@ -91,8 +91,8 @@ namespace yli
 
                 void bind_child_to_parent(yli::callback::CallbackParameter* child_pointer);
 
-                // execute this callback.
-                virtual std::shared_ptr<yli::common::AnyValue> execute();
+                // execute this callback with a parameter.
+                virtual std::shared_ptr<yli::common::AnyValue> execute(std::shared_ptr<yli::common::AnyValue> any_value);
 
                 std::size_t childID;                          // callback object ID, returned by `yli::callback::CallbackEngine->get_callback_objectID()`.
 

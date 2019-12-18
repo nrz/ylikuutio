@@ -21,6 +21,7 @@
 #include "movable.hpp"
 #include "universe.hpp"
 #include "camera_struct.hpp"
+#include "movable_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM
@@ -82,7 +83,12 @@ namespace yli
         {
             public:
                 Camera(yli::ontology::Universe* const universe, const yli::ontology::CameraStruct& camera_struct)
-                    : Movable(universe, camera_struct.cartesian_coordinates)
+                    : Movable(universe, yli::ontology::MovableStruct(
+                                camera_struct.brain,
+                                camera_struct.cartesian_coordinates,
+                                camera_struct.spherical_coordinates,
+                                camera_struct.horizontal_angle,
+                                camera_struct.vertical_angle))
                 {
                     // constructor.
 

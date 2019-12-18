@@ -77,15 +77,18 @@ namespace yli
         class Species;
         class Symbiosis;
         class Camera;
+        class Brain;
 
         class Scene: public yli::ontology::Entity
         {
             public:
                 void bind_Shader(yli::ontology::Shader* const shader);
                 void bind_Camera(yli::ontology::Camera* const camera);
+                void bind_Brain(yli::ontology::Brain* const brain);
 
                 void unbind_Shader(const std::size_t childID);
                 void unbind_Camera(const std::size_t childID);
+                void unbind_Brain(const std::size_t childID);
 
                 // constructor.
                 Scene(yli::ontology::Universe* const universe, const yli::ontology::SceneStruct& scene_struct)
@@ -131,6 +134,9 @@ namespace yli
 
                 // this method processes the physics.
                 void do_physics();
+
+                // Intentional actors (AIs and keyboard controlled ones).
+                void act();
 
                 // this method renders all `Shader`s of this `Scene`.
                 void render();
@@ -194,6 +200,10 @@ namespace yli
                 std::vector<yli::ontology::Camera*> camera_pointer_vector;
                 std::queue<std::size_t> free_cameraID_queue;
                 std::size_t number_of_cameras;
+
+                std::vector<yli::ontology::Brain*> brain_pointer_vector;
+                std::queue<std::size_t> free_brainID_queue;
+                std::size_t number_of_brains;
 
                 yli::ontology::Camera* active_camera;
 

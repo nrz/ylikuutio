@@ -219,7 +219,7 @@ int main(const int argc, const char* const argv[])
     if (my_universe->get_window() == nullptr)
     {
         std::cerr << "Failed to open SDL window.\n";
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -228,7 +228,7 @@ int main(const int argc, const char* const argv[])
     // Initialize GLEW.
     if (!yli::opengl::init_glew())
     {
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -251,7 +251,7 @@ int main(const int argc, const char* const argv[])
 
     if (my_console == nullptr)
     {
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -269,7 +269,7 @@ int main(const int argc, const char* const argv[])
 
     if (earth_world == nullptr)
     {
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -288,7 +288,7 @@ int main(const int argc, const char* const argv[])
 
     if (helsinki_east_downtown_scene_entity == nullptr)
     {
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -297,7 +297,7 @@ int main(const int argc, const char* const argv[])
 
     if (helsinki_east_downtown_scene == nullptr)
     {
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -312,7 +312,7 @@ int main(const int argc, const char* const argv[])
     std::cout << "Creating yli::ontology::Scene* joensuu_center_west_scene and its contents ...\n";
     if (ajokki::create_joensuu_center_west_scene(entity_factory, earth_world) == nullptr)
     {
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -334,7 +334,7 @@ int main(const int argc, const char* const argv[])
     if (my_font2D == nullptr)
     {
         std::cerr << "Failed to create Font2D.\n";
-        cleanup_callback_engine.execute();
+        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -680,11 +680,6 @@ int main(const int argc, const char* const argv[])
     my_console->add_command_callback("clear", &yli::ontology::Console::clear);
     my_console->add_command_callback("screenshot", &yli::ontology::Universe::screenshot);
 
-    // For speed computation.
-    double last_time_to_display_FPS = yli::time::get_time();
-    double last_time_for_display_sync = yli::time::get_time();
-    int32_t number_of_frames = 0;
-
     bool has_mouse_focus = true;
 
     audio_master->add_to_playlist("Hirvi_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
@@ -784,28 +779,28 @@ int main(const int argc, const char* const argv[])
     {
         const double current_time_in_main_loop = yli::time::get_time();
 
-        if (current_time_in_main_loop - last_time_for_display_sync >= (1.0f / my_universe->get_max_FPS()))
+        if (current_time_in_main_loop - my_universe->get_last_time_for_display_sync() >= (1.0f / my_universe->get_max_FPS()))
         {
-            last_time_for_display_sync = yli::time::get_time();
+            my_universe->update_last_time_for_display_sync();
 
-            number_of_frames++;
+            my_universe->increment_number_of_frames();
 
-            while (current_time_in_main_loop - last_time_to_display_FPS >= 1.0f)
+            while (current_time_in_main_loop - my_universe->get_last_time_to_display_FPS() >= 1.0f)
             {
                 // If last `std::stringstream` here was more than 1 sec ago,
                 // std::stringstream` and reset number of frames.
-                if (frame_rate_text2D != nullptr && number_of_frames > 0)
+                if (frame_rate_text2D != nullptr && my_universe->get_number_of_frames() > 0)
                 {
                     std::stringstream ms_frame_text_stringstream;
-                    ms_frame_text_stringstream << std::fixed << std::setprecision(2) << 1000.0f / static_cast<double>(number_of_frames) << " ms/frame; " <<
-                        number_of_frames << " Hz";
+                    ms_frame_text_stringstream << std::fixed << std::setprecision(2) << 1000.0f / static_cast<double>(my_universe->get_number_of_frames()) << " ms/frame; " <<
+                        my_universe->get_number_of_frames() << " Hz";
                     ms_frame_text = ms_frame_text_stringstream.str();
                     frame_rate_text2D->change_string(ms_frame_text);
-                    number_of_frames = 0;
+                    my_universe->reset_number_of_frames();
                 }
 
                 // `last_time_to_display_FPS` needs to be incremented to avoid infinite loop.
-                last_time_to_display_FPS += 1.0f;
+                my_universe->increment_last_time_to_display_FPS();
 
                 // Update audio also (in case the sound has reached the end).
                 audio_master->update();
@@ -837,25 +832,13 @@ int main(const int argc, const char* const argv[])
 
                     if (callback_engine != nullptr)
                     {
-                        const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute();
+                        const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute(nullptr);
 
                         if (any_value != nullptr &&
-                                any_value->type == yli::common::Datatype::UINT32_T)
+                                any_value->type == yli::common::Datatype::UINT32_T &&
+                                any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
                         {
-                            if (any_value->uint32_t_value == ENTER_CONSOLE_MAGIC_NUMBER)
-                            {
-                                // Do not display help screen when in console.
-                                my_universe->can_display_help_screen = false;
-                            }
-                            else if (any_value->uint32_t_value == EXIT_CONSOLE_MAGIC_NUMBER)
-                            {
-                                // Enable display help screen when not in console.
-                                my_universe->can_display_help_screen = true;
-                            }
-                            else if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
-                            {
-                                my_universe->request_exit();
-                            }
+                            my_universe->request_exit();
                         }
                     }
 
@@ -877,25 +860,13 @@ int main(const int argc, const char* const argv[])
                         continue;
                     }
 
-                    const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute();
+                    const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute(nullptr);
 
                     if (any_value != nullptr &&
-                            any_value->type == yli::common::Datatype::UINT32_T)
+                            any_value->type == yli::common::Datatype::UINT32_T &&
+                            any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
                     {
-                        if (any_value->uint32_t_value == ENTER_CONSOLE_MAGIC_NUMBER)
-                        {
-                            // Do not display help screen when in console.
-                            my_universe->can_display_help_screen = false;
-                        }
-                        else if (any_value->uint32_t_value == EXIT_CONSOLE_MAGIC_NUMBER)
-                        {
-                            // Enable display help screen when not in console.
-                            my_universe->can_display_help_screen = true;
-                        }
-                        else if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
-                        {
-                            my_universe->request_exit();
-                        }
+                        my_universe->request_exit();
                     }
                 }
                 else if (sdl_event.type == SDL_WINDOWEVENT)
@@ -927,7 +898,7 @@ int main(const int argc, const char* const argv[])
                         static_cast<double>(my_universe->get_window_width()) / 2,
                         static_cast<double>(my_universe->get_window_height()) / 2);
 
-                if (my_universe->has_mouse_ever_moved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
+                if (my_universe->has_mouse_ever_moved || (std::abs(xpos) > 0.0001) || (std::abs(ypos) > 0.0001))
                 {
                     my_universe->has_mouse_ever_moved = true;
 
@@ -1001,35 +972,20 @@ int main(const int argc, const char* const argv[])
 
                     if (is_pressed)
                     {
-                        yli::callback::CallbackEngine* callback_engine = continuous_keypress_callback_engines->at(i);
+                        yli::callback::CallbackEngine* const callback_engine = continuous_keypress_callback_engines->at(i);
 
                         if (callback_engine == nullptr)
                         {
                             continue;
                         }
 
-                        const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute();
+                        const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute(nullptr);
 
                         if (any_value != nullptr &&
-                                any_value->type == yli::common::Datatype::UINT32_T)
+                                any_value->type == yli::common::Datatype::UINT32_T &&
+                                any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
                         {
-                            if (any_value->uint32_t_value == ENTER_CONSOLE_MAGIC_NUMBER)
-                            {
-                                // Do not display help screen when in console.
-                                my_universe->can_display_help_screen = false;
-                                break;
-                            }
-                            else if (any_value->uint32_t_value == EXIT_CONSOLE_MAGIC_NUMBER)
-                            {
-                                // Enable display help screen when not in console.
-                                my_universe->can_display_help_screen = true;
-                                break;
-                            }
-                            else if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
-                            {
-                                my_universe->request_exit();
-                                break;
-                            }
+                            my_universe->request_exit();
                         }
                     }
                 }
@@ -1037,6 +993,9 @@ int main(const int argc, const char* const argv[])
 
             // Gravity etc. physical phenomena.
             my_universe->do_physics();
+
+            // Intentional actors (AIs and keyboard controlled ones).
+            my_universe->act();
 
             if (angles_and_coordinates_text2D != nullptr)
             {
@@ -1119,7 +1078,7 @@ int main(const int argc, const char* const argv[])
     }
 
     // Do cleanup.
-    cleanup_callback_engine.execute();
+    cleanup_callback_engine.execute(nullptr);
 
     return 0;
 }

@@ -23,6 +23,7 @@
 #include "vector_font.hpp"
 #include "text3D_struct.hpp"
 #include "object_struct.hpp"
+#include "movable_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
@@ -67,7 +68,12 @@ namespace yli
                 // and binds each to its corresponding `Glyph` for rendering hierarchy,
                 // and also binds each to this `Text3D` for ontological hierarchy.
                 Text3D(yli::ontology::Universe* const universe, const yli::ontology::Text3DStruct& text3D_struct)
-                    : yli::ontology::Movable(universe, text3D_struct.cartesian_coordinates)
+                    : Movable(universe, yli::ontology::MovableStruct(
+                                text3D_struct.brain,
+                                text3D_struct.cartesian_coordinates,
+                                text3D_struct.spherical_coordinates,
+                                text3D_struct.horizontal_angle,
+                                text3D_struct.vertical_angle))
                 {
                     // constructor.
                     this->rotate_angle = NAN;

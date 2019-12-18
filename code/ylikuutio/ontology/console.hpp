@@ -203,7 +203,8 @@ namespace yli
                         yli::ontology::Universe* universe,
                         yli::callback::CallbackEngine*,
                         yli::callback::CallbackObject*,
-                        std::vector<yli::callback::CallbackParameter*>&);
+                        std::vector<yli::callback::CallbackParameter*>&,
+                        std::shared_ptr<yli::common::AnyValue>);
 
                 // Console mode keyrelease callbacks begin here.
 

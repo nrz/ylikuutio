@@ -50,6 +50,7 @@ namespace yli
         class Symbiosis;
         class Font2D;
         class Console;
+        class Movable;
     }
 
     namespace common
@@ -81,6 +82,8 @@ namespace yli
             SYMBIOSIS_POINTER,
             TEXT2D_POINTER,
             CONSOLE_POINTER,
+            MOVABLE_POINTER,
+            CONST_MOVABLE_POINTER,
             SPHERICAL_COORDINATES_STRUCT_POINTER,
             STD_STRING_POINTER,
             CONST_STD_STRING_POINTER,
@@ -134,6 +137,8 @@ namespace yli
                 AnyValue(yli::ontology::Symbiosis* const symbiosis_pointer);
                 AnyValue(yli::ontology::Font2D* const font2D_pointer);
                 AnyValue(yli::ontology::Console* const console_pointer);
+                AnyValue(yli::ontology::Movable* const movable_pointer);
+                AnyValue(const yli::ontology::Movable* const const_movable_pointer);
                 AnyValue(yli::common::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
                 AnyValue(std::string* const std_string_pointer);
                 AnyValue(const std::string* const const_std_string_pointer);
@@ -171,6 +176,8 @@ namespace yli
                 AnyValue(const std::string& type, yli::ontology::Symbiosis* const symbiosis_pointer);
                 AnyValue(const std::string& type, yli::ontology::Font2D* const font2D_pointer);
                 AnyValue(const std::string& type, yli::ontology::Console* const console_pointer);
+                AnyValue(const std::string& type, yli::ontology::Movable* const movable_pointer);
+                AnyValue(const std::string& type, const yli::ontology::Movable* const const_movable_pointer);
                 AnyValue(const std::string& type, yli::common::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
                 AnyValue(const std::string& type, std::string* const std_string_pointer);
                 AnyValue(const std::string& type, const std::string* const const_std_string_pointer);
@@ -219,6 +226,8 @@ namespace yli
                     yli::ontology::Symbiosis* symbiosis_pointer;
                     yli::ontology::Font2D* font2D_pointer;
                     yli::ontology::Console* console_pointer;
+                    yli::ontology::Movable* movable_pointer;
+                    const yli::ontology::Movable* const_movable_pointer;
                     yli::common::SphericalCoordinatesStruct* spherical_coordinates_struct_pointer;
                     std::string* std_string_pointer;
                     const std::string* const_std_string_pointer;

@@ -18,6 +18,8 @@
 #ifndef __CAMERA_STRUCT_HPP_INCLUDED
 #define __CAMERA_STRUCT_HPP_INCLUDED
 
+#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -32,15 +34,17 @@ namespace yli
     namespace ontology
     {
         class Scene;
+        class Brain;
 
         struct CameraStruct
         {
             CameraStruct()
                 : cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
-                direction(glm::vec3(NAN, NAN, NAN)),
+                spherical_coordinates(NAN, NAN, NAN),
                 parent(nullptr),
-                horizontal_angle(NAN),
-                vertical_angle(NAN),
+                brain(nullptr),
+                horizontal_angle(0.0),
+                vertical_angle(0.0),
                 is_static_view(false)
             {
                 // constructor.
@@ -49,10 +53,10 @@ namespace yli
             // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
             glm::vec3 cartesian_coordinates; // coordinate vector.
 
-            // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
-            glm::vec3 direction;             // direction vector.
+            yli::common::SphericalCoordinatesStruct spherical_coordinates;
 
             yli::ontology::Scene* parent;    // pointer to the `Scene`.
+            yli::ontology::Brain* brain;     // pointer to the `Brain` (not a parent!).
 
             double horizontal_angle;         // horizontal angle in radians.
             double vertical_angle;           // vertical angle in radians.

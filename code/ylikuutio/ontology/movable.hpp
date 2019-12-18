@@ -19,6 +19,7 @@
 #define __MOVABLE_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "movable_struct.hpp"
 #include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
@@ -32,40 +33,66 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <limits>   // std::numeric_limits
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <queue>    // std::queue
+#include <vector>   // std::vector
 
 // `Movable` is a mixin class, not intended to be instantiated.
+//
+// So far there are 4 kinds of `Movable`s implemented:
+// `Object`    - child of `Species`.
+// `Holobiont` - child of `Symbiosis`.
+// `Biont`     - child of `Holobiont`.
+// `Camera`    - non-material `Movable`, child of `Scene`.
+//
+// `Text3D`, child of `VectorFont`, is not implemented yet.
 
 namespace yli
 {
+    namespace input
+    {
+        enum class InputMethod;
+    }
+
     namespace ontology
     {
         class Universe;
+        class Brain;
 
         class Movable: public yli::ontology::Entity
         {
             public:
+                void bind_to_Brain();
+                void unbind_from_Brain();
+
+                // This method sets pointer to this `Movable` to `nullptr`, sets `brain` according to the input, and requests a new `movableID` from the new `Brain`.
+                void bind_to_new_Brain(yli::ontology::Brain* const new_brain);
+
                 // constructor.
-                Movable(yli::ontology::Universe* const universe, const glm::vec3& cartesian_coordinates)
+                Movable(yli::ontology::Universe* const universe, const yli::ontology::MovableStruct& movable_struct)
                     : Entity(universe)
                 {
                     // constructor.
-                    this->cartesian_coordinates.x     = cartesian_coordinates.x;
-                    this->cartesian_coordinates.y     = cartesian_coordinates.y;
-                    this->cartesian_coordinates.z     = cartesian_coordinates.z;
-                    this->spherical_coordinates.rho   = NAN;
-                    this->spherical_coordinates.theta = NAN;
-                    this->spherical_coordinates.phi   = NAN;
-                    this->horizontal_angle            = 0.0f;
-                    this->vertical_angle              = 0.0f;
+                    this->brain                       = movable_struct.brain;
+                    this->movableID                   = std::numeric_limits<std::size_t>::max(); // uninitialized.
+                    this->cartesian_coordinates.x     = movable_struct.cartesian_coordinates.x;
+                    this->cartesian_coordinates.y     = movable_struct.cartesian_coordinates.y;
+                    this->cartesian_coordinates.z     = movable_struct.cartesian_coordinates.z;
+                    this->spherical_coordinates.rho   = movable_struct.spherical_coordinates.rho;
+                    this->spherical_coordinates.theta = movable_struct.spherical_coordinates.theta;
+                    this->spherical_coordinates.phi   = movable_struct.spherical_coordinates.phi;
+                    this->horizontal_angle            = movable_struct.horizontal_angle;
+                    this->vertical_angle              = movable_struct.vertical_angle;
 
                     this->model_matrix                = glm::mat4(1.0f); // identity matrix (dummy value).
                     this->MVP_matrix                  = glm::mat4(1.0f); // identity matrix (dummy value).
 
-                    float float_x                     = cartesian_coordinates.x;
-                    float float_y                     = cartesian_coordinates.y;
-                    float float_z                     = cartesian_coordinates.z;
+                    float float_x                     = this->cartesian_coordinates.x;
+                    float float_y                     = this->cartesian_coordinates.y;
+                    float float_z                     = this->cartesian_coordinates.z;
 
                     yli::config::SettingMaster* const setting_master = this->get_setting_master();
 
@@ -117,18 +144,11 @@ namespace yli
                     std::cout << "Executing `setting_master->create_Setting(vertical_angle_setting_struct);` ...\n";
                     setting_master->create_Setting(vertical_angle_setting_struct);
 
+                    this->bind_to_Brain();
+
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Movable*";
                     this->can_be_erased = true;
-                }
-
-                // constructor.
-                Movable(yli::ontology::Universe* const universe, const yli::common::SphericalCoordinatesStruct& spherical_coordinates)
-                    : Entity(universe)
-                {
-                    // constructor.
-                    this->cartesian_coordinates = glm::vec3(NAN, NAN, NAN);
-                    this->spherical_coordinates = spherical_coordinates;
                 }
 
                 Movable(const Movable&) = delete;            // Delete copy constructor.
@@ -219,6 +239,14 @@ namespace yli
                 // The rest fields are created in the constructor.
                 glm::mat4 model_matrix;                                // model matrix.
                 glm::mat4 MVP_matrix;                                  // model view projection matrix.
+
+                friend class Brain;
+
+            private:
+                yli::input::InputMethod input_method;                  // If `input_method` is `KEYBOARD`, then keypresses control this `Movable`.
+                                                                       // If `input_method` is `AI`, then the chosen `Brain` controls this `Movable`.
+                yli::ontology::Brain* brain;                           // Different kind of controls can be implemented as `Brain`s, e.g. train control systems.
+                std::size_t movableID;
         };
     }
 }

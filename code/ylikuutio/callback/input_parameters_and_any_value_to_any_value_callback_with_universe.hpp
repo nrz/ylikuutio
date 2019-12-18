@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __INPUT_PARAMETERS_TO_ANY_VALUE_CALLBACK_WITH_UNIVERSE_HPP_INCLUDED
-#define __INPUT_PARAMETERS_TO_ANY_VALUE_CALLBACK_WITH_UNIVERSE_HPP_INCLUDED
+#ifndef __INPUT_PARAMETERS_AND_ANY_VALUE_TO_ANY_VALUE_CALLBACK_WITH_UNIVERSE_HPP_INCLUDED
+#define __INPUT_PARAMETERS_AND_ANY_VALUE_TO_ANY_VALUE_CALLBACK_WITH_UNIVERSE_HPP_INCLUDED
 
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
@@ -42,10 +42,11 @@ namespace yli
     }
 }
 
-typedef std::shared_ptr<yli::common::AnyValue> (*InputParametersToAnyValueCallbackWithUniverse) (
+typedef std::shared_ptr<yli::common::AnyValue> (*InputParametersAndAnyValueToAnyValueCallbackWithUniverse) (
         yli::ontology::Universe*,
         yli::callback::CallbackEngine*,
         yli::callback::CallbackObject*,
-        std::vector<yli::callback::CallbackParameter*>&);
+        std::vector<yli::callback::CallbackParameter*>&,
+        std::shared_ptr<yli::common::AnyValue>);
 
 #endif

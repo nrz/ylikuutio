@@ -22,8 +22,10 @@
 #include "shader.hpp"
 #include "symbiont_species.hpp"
 #include "biont_struct.hpp"
+#include "movable_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM
@@ -63,7 +65,12 @@ namespace yli
                 void bind_to_new_parent(yli::ontology::Holobiont* const new_holobiont_parent);
 
                 Biont(yli::ontology::Universe* const universe, yli::ontology::BiontStruct& biont_struct)
-                    : Movable(universe, biont_struct.cartesian_coordinates)
+                    : Movable(universe, yli::ontology::MovableStruct(
+                                biont_struct.brain,
+                                biont_struct.cartesian_coordinates,
+                                biont_struct.spherical_coordinates,
+                                biont_struct.horizontal_angle,
+                                biont_struct.vertical_angle))
                 {
                     // constructor.
                     this->holobiont_parent      = biont_struct.holobiont_parent;

@@ -54,6 +54,11 @@ namespace yli
             this->audio_spec.callback = yli::audio::AudioMaster::play_audio_callback;
             this->audio_spec.userdata = nullptr; // this is a pointer that is passed to the callback.
 
+            // initialize `device` member variable.
+            SDL_AudioSpec wav_spec = SDL_AudioSpec();
+            this->device = SDL_OpenAudioDevice(NULL, 0, &wav_spec, &this->audio_spec, SDL_AUDIO_ALLOW_FORMAT_CHANGE);
+            SDL_PauseAudioDevice(this->device, 1); // stop playing.
+
             this->audio_master = this;   // `this` is the `AudioMaster`. Do not create more than 1 `AudioMaster`!
         }
 

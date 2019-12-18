@@ -21,8 +21,10 @@
 #include "movable.hpp"
 #include "symbiosis.hpp"
 #include "holobiont_struct.hpp"
+#include "movable_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM
@@ -66,7 +68,12 @@ namespace yli
 
                 // constructor.
                 Holobiont(yli::ontology::Universe* const universe, const yli::ontology::HolobiontStruct& holobiont_struct)
-                    : Movable(universe, holobiont_struct.cartesian_coordinates)
+                    : Movable(universe, yli::ontology::MovableStruct(
+                                holobiont_struct.brain,
+                                holobiont_struct.cartesian_coordinates,
+                                holobiont_struct.spherical_coordinates,
+                                holobiont_struct.horizontal_angle,
+                                holobiont_struct.vertical_angle))
                 {
                     // constructor.
                     this->symbiosis_parent      = holobiont_struct.symbiosis_parent;
@@ -82,6 +89,7 @@ namespace yli
                     this->initial_rotate_angle  = holobiont_struct.initial_rotate_angle;
 
                     this->cartesian_coordinates = holobiont_struct.cartesian_coordinates;
+                    this->spherical_coordinates = holobiont_struct.spherical_coordinates;
 
                     // get `childID` from `Symbiosis` and set pointer to this `Holobiont`.
                     this->bind_to_parent();
@@ -130,6 +138,8 @@ namespace yli
                 glm::vec3 rotate_vector;                    // rotate vector.
                 glm::vec3 translate_vector;                 // translate vector.
                 glm::vec3 initial_rotate_vector;            // initial rotate vector.
+
+                yli::common::SphericalCoordinatesStruct spherical_coordinates;
 
                 std::size_t number_of_bionts;
 

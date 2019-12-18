@@ -367,7 +367,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/callback/callback_object.hpp
     code/ylikuutio/callback/callback_parameter.cpp
     code/ylikuutio/callback/callback_parameter.hpp
-    code/ylikuutio/callback/input_parameters_to_any_value_callback_with_universe.hpp
+    code/ylikuutio/callback/input_parameters_and_any_value_to_any_value_callback_with_universe.hpp
 
     # command_line, in alphabetical order
     code/ylikuutio/command_line/command_line_master.cpp
@@ -513,6 +513,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/biont.cpp
     code/ylikuutio/ontology/biont.hpp
     code/ylikuutio/ontology/biont_struct.hpp
+    code/ylikuutio/ontology/brain.cpp
+    code/ylikuutio/ontology/brain.hpp
+    code/ylikuutio/ontology/brain_struct.hpp
     code/ylikuutio/ontology/camera.cpp
     code/ylikuutio/ontology/camera.hpp
     code/ylikuutio/ontology/camera_struct.hpp
@@ -553,6 +556,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/model.hpp
     code/ylikuutio/ontology/movable.cpp
     code/ylikuutio/ontology/movable.hpp
+    code/ylikuutio/ontology/movable_struct.hpp
     code/ylikuutio/ontology/object.cpp
     code/ylikuutio/ontology/object.hpp
     code/ylikuutio/ontology/object_struct.hpp
@@ -685,6 +689,8 @@ add_executable(ajokki
     # app, in alphabetical order
     code/app/app_background_colors.cpp
     code/app/app_background_colors.hpp
+    code/app/app_brain.cpp
+    code/app/app_brain.hpp
     code/app/app_console.cpp
     code/app/app_console.hpp
     code/app/app_console_callbacks.cpp
@@ -735,6 +741,8 @@ add_executable(hirvi
     # app, in alphabetical order
     code/app/app_background_colors.cpp
     code/app/app_background_colors.hpp
+    code/app/app_brain.cpp
+    code/app/app_brain.hpp
     code/app/app_console.cpp
     code/app/app_console.hpp
     code/app/app_console_callbacks.cpp
