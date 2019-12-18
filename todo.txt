@@ -79,7 +79,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Add support for Collada .dae file format.
 [ ] Add support for 3D model of Turku campus and science park area: http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
 [ ] Add support for 3D model of Tampere: http://kartat.tampere.fi/splashscreen/
-[ ] Implement AI objects (robots).
 [ ] Move main loop out of `main` function and away from Ajokki into `ontology::Universe` class of Ylikuutio.
 [ ] Add support for custom keyboard settings.
 [ ] Add variable `direction`.
@@ -161,3 +160,4 @@ Ready:
 [x] Implement command line parameter `--window_height` to Hirvi and Ajokki (e.g. --window_height 900`).
 [x] Fix bug that only 2D text gets rendered when window width is less than window height.
 [x] Add support for changing window size.
+[x] Implement `yli::ontology::Brain` AI class.
