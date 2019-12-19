@@ -116,6 +116,18 @@ namespace ajokki
         std::shared_ptr<yli::callback::CallbackEngine> orient_to_south_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
         orient_to_south_callback_engine->create_CallbackObject(&app::orient_to_south);
 
+        std::shared_ptr<yli::callback::CallbackEngine> orient_and_go_east_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
+        orient_and_go_east_callback_engine->create_CallbackObject(&app::orient_and_go_east);
+
+        std::shared_ptr<yli::callback::CallbackEngine> orient_and_go_west_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
+        orient_and_go_west_callback_engine->create_CallbackObject(&app::orient_and_go_west);
+
+        std::shared_ptr<yli::callback::CallbackEngine> orient_and_go_north_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
+        orient_and_go_north_callback_engine->create_CallbackObject(&app::orient_and_go_north);
+
+        std::shared_ptr<yli::callback::CallbackEngine> orient_and_go_south_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
+        orient_and_go_south_callback_engine->create_CallbackObject(&app::orient_and_go_south);
+
         std::shared_ptr<yli::callback::CallbackEngine> rotate_clockwise_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
         rotate_clockwise_callback_engine->create_CallbackObject(&app::rotate_clockwise);
 
@@ -293,6 +305,74 @@ namespace ajokki
         }
 
         rotate_clockwise_brain->set_name("rotate_clockwise_brain");
+
+        // `orient_and_go_east_brain`.
+        yli::ontology::BrainStruct orient_and_go_east_brain_struct;
+        orient_and_go_east_brain_struct.parent = helsinki_east_downtown_scene;
+        orient_and_go_east_brain_struct.callback_engine = orient_and_go_east_callback_engine;
+        std::cout << "Creating yli::ontology::Entity* orient_and_go_east_brain_entity ...\n";
+        yli::ontology::Entity* const orient_and_go_east_brain_entity = entity_factory->create_Brain(orient_and_go_east_brain_struct);
+        std::cout << "Creating yli::ontology::Brain* orient_and_go_east_brain ...\n";
+        yli::ontology::Brain* const orient_and_go_east_brain = dynamic_cast<yli::ontology::Brain*>(orient_and_go_east_brain_entity);
+
+        if (orient_and_go_east_brain == nullptr)
+        {
+            std::cerr << "Failed to create Brain.\n";
+            return nullptr;
+        }
+
+        orient_and_go_east_brain->set_name("orient_and_go_east_brain");
+
+        // `orient_and_go_west_brain`.
+        yli::ontology::BrainStruct orient_and_go_west_brain_struct;
+        orient_and_go_west_brain_struct.parent = helsinki_east_downtown_scene;
+        orient_and_go_west_brain_struct.callback_engine = orient_and_go_west_callback_engine;
+        std::cout << "Creating yli::ontology::Entity* orient_and_go_west_brain_entity ...\n";
+        yli::ontology::Entity* const orient_and_go_west_brain_entity = entity_factory->create_Brain(orient_and_go_west_brain_struct);
+        std::cout << "Creating yli::ontology::Brain* orient_and_go_west_brain ...\n";
+        yli::ontology::Brain* const orient_and_go_west_brain = dynamic_cast<yli::ontology::Brain*>(orient_and_go_west_brain_entity);
+
+        if (orient_and_go_west_brain == nullptr)
+        {
+            std::cerr << "Failed to create Brain.\n";
+            return nullptr;
+        }
+
+        orient_and_go_west_brain->set_name("orient_and_go_west_brain");
+
+        // `orient_and_go_north_brain`.
+        yli::ontology::BrainStruct orient_and_go_north_brain_struct;
+        orient_and_go_north_brain_struct.parent = helsinki_east_downtown_scene;
+        orient_and_go_north_brain_struct.callback_engine = orient_and_go_north_callback_engine;
+        std::cout << "Creating yli::ontology::Entity* orient_and_go_north_brain_entity ...\n";
+        yli::ontology::Entity* const orient_and_go_north_brain_entity = entity_factory->create_Brain(orient_and_go_north_brain_struct);
+        std::cout << "Creating yli::ontology::Brain* orient_and_go_north_brain ...\n";
+        yli::ontology::Brain* const orient_and_go_north_brain = dynamic_cast<yli::ontology::Brain*>(orient_and_go_north_brain_entity);
+
+        if (orient_and_go_north_brain == nullptr)
+        {
+            std::cerr << "Failed to create Brain.\n";
+            return nullptr;
+        }
+
+        orient_and_go_north_brain->set_name("orient_and_go_north_brain");
+
+        // `orient_and_go_south_brain`.
+        yli::ontology::BrainStruct orient_and_go_south_brain_struct;
+        orient_and_go_south_brain_struct.parent = helsinki_east_downtown_scene;
+        orient_and_go_south_brain_struct.callback_engine = orient_and_go_south_callback_engine;
+        std::cout << "Creating yli::ontology::Entity* orient_and_go_south_brain_entity ...\n";
+        yli::ontology::Entity* const orient_and_go_south_brain_entity = entity_factory->create_Brain(orient_and_go_south_brain_struct);
+        std::cout << "Creating yli::ontology::Brain* orient_and_go_south_brain ...\n";
+        yli::ontology::Brain* const orient_and_go_south_brain = dynamic_cast<yli::ontology::Brain*>(orient_and_go_south_brain_entity);
+
+        if (orient_and_go_south_brain == nullptr)
+        {
+            std::cerr << "Failed to create Brain.\n";
+            return nullptr;
+        }
+
+        orient_and_go_south_brain->set_name("orient_and_go_south_brain");
 
         // `rotate_counterclockwise_brain`.
         yli::ontology::BrainStruct rotate_counterclockwise_brain_struct;
