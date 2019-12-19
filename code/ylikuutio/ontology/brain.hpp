@@ -28,6 +28,27 @@
 #include <queue>    // std::queue
 #include <vector>   // std::vector
 
+// `yli::ontology::Brain` is a general purpose AI and controller class for `Movable`s.
+// Each `Brain` instance may do some actions for the `Movable`s bound to the `Brain`.
+// The actions the defined in the callback, referenced using `this->callback_engine`.
+// Currently there are some example callbacks for `Brain` in `app/app_brain.hpp`.
+// In the future, some of the callbacks will process s7 Scheme, with an API offered
+// to the s7 Scheme scripts. The API still needs to be defined.
+//
+// `Brain` does not own the `Movable`s it controls.
+// Therefore, `Brain`-`Movable` relationship is not a parent-child relationship.
+// Instead, `Brain`-`Movable` relationship is a master-apprentice relationship.
+// Therefore, binding is done using `yli::hierarchy::bind_apprentice_to_master`.
+//
+// Each `Brain` acts upon its `Movable`s immediately after the physics simulation,
+// still before rendering, on each frame.
+//
+// `Brain` actions should not be considered limited to the actions of living or
+// conscious beings. For example, a planet `Movable` in a solar system may have a `Brain`
+// that makes it orbit its host star, and likewise a moon `Movable` may have a `Brain` that
+// makes it orbit its host planet. An electrical module `Movable` (e.g. a synthetizer module)
+// may have a `Brain` that defines how it processes its inputs and what kind of output it sends.
+
 namespace yli
 {
     namespace callback
