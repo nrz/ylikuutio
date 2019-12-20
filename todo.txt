@@ -6,6 +6,23 @@ Fixes needed:
 [ ] Fix bug that some `Object`s (e.g. `cat.fbx`) do not appear on screen on some environments.
 [ ] Fix compiling on Visual Studio.
 
+Tasks which are necessary for the first stage:
+[ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
+[ ] Implement octree segmentation.
+[ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
+[ ] Implement frustrum culling.
+[ ] Implement skeletal animation.
+[ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
+[ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
+[ ] Add support for vector fonts.
+[ ] Add support for changing font size.
+[ ] Implement transparent rendering of 3D objects.
+[ ] Implement transparent rendering of 4D objects.
+[ ] Implement audio mixing using SDL_mixer.
+[ ] Implement dynamic not flowing water, using OpenGL shaders.
+[ ] Create `audio::Sound` class, whose parent is `Entity`.
+[ ] Create `audio::PlayList` class, whose parent is `Entity`.
+
 Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement a custom FBX loader.
 [ ] Replace OpenFBX with the custom FBX loader.
@@ -19,13 +36,8 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement command line parameter `--headless` to Hirvi and Ajokki (do not open any windows, do not render anything).
 [ ] Implement command line parameter `--debug` to Hirvi and Ajokki (log all kinds of debug information).
 [ ] Add `Scene` loading command `load` into console.
-[ ] Add support for changing font size.
 [ ] Implement `LogMaster` class.
-[ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
 [ ] Implement s7 support for programming of AI objects (robots).
-[ ] Implement skeletal animation.
-[ ] Implement transparent rendering of 3D objects.
-[ ] Implement transparent rendering of 4D objects.
 [ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
 [ ] Implement `pause` console command for pausing `Sound`s and `Playlist`s.
 [ ] Implement `next` console command for changing to the next `Sound` in a `Playlist`.
@@ -33,18 +45,12 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Add support for automatic detection of optimal window size.
 [ ] Implement modifying of vertices.
 [ ] Implement `ViewMaster` class and the functionality for splitting the window or fullscreen view into different `View`s (using horizontal or vertical split, or grid).
-[ ] Implement frustrum culling.
 [ ] Implement generation of terrain meshes in different levels of detail (LOD) using different `x_step`s and `z_step`s (e.g. 1, 2, 4, 8, 16, 32, 64, 128).
 [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain.
 [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain and the available video memory.
-[ ] Implement octree segmentation.
-[ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
 [ ] Find out how systemd-nspawn could be used for testing Ylikuutio.
 [ ] Implement marching cubes algorithm for voxel terrain as described in https://transvoxel.org/Lengyel-VoxelTerrain.pdf .
 [ ] Write a simple triangle drawing application (android-kolmio) for Android, using Android NDK and CMake.
-[ ] Implement audio mixing using SDL_mixer.
-[ ] Create `audio::Sound` class, whose parent is `Entity`.
-[ ] Create `audio::PlayList` class, whose parent is `Entity`.
 [ ] Add support for crosscompiling to Android.
 [ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
 [ ] Evaluate ZeroMQ: https://zeromq.org/
@@ -72,7 +78,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Optimize `Symbiosis` entities' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.
 [ ] Add support for packed files.
 [ ] Add support for CityGML file format.
-[ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
 [ ] Add support for 3D model of Vantaa: https://hri.fi/data/en_GB/dataset/vantaan-3d-rakennukset https://hri.fi/data/fi/dataset/vantaan-3d-rakennukset
 [ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
 [ ] Add support for 3D model of Oulu: http://ubicomp.oulu.fi/infrastructure-virtualoulu/ https://github.com/Oulu-UCC/3D_City_fbx
@@ -92,7 +97,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement `Species` morphing using marching cubes algorithm.
 [ ] Implement creation of vertex graphs of the vertices and edges of a `Species`, to be used in `Species` morphing code.
 [ ] Implement Theta* route finding. http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/
-[ ] Add support for vector fonts.
 [ ] Disable executing system commands from s7.
 [ ] Disable listing directories from s7.
 [ ] Disable deleting files from s7.
@@ -100,10 +104,8 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Disable reading from files from s7, with the exception of filenames matching the whitelisting regex.
 [ ] Disable writing to ports from s7.
 [ ] Disable reading from ports from s7.
-[ ] Implement dynamic not flowing water, using OpenGL shaders.
 
 Less urgent:
-[ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
 [ ] Implement flowing water (computed on a server, based on players' actions) using GridFluidSim3D. https://github.com/rlguy/GridFluidSim3D
 [ ] Add support for 3D text.
 [ ] Add support for partially transparent text.
