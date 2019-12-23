@@ -112,7 +112,7 @@ namespace ajokki
         altiplano_grass_material->set_name("altiplano_grass_material");
 
         // Create the species, store it in `terrain_species`.
-        yli::ontology::SpeciesStruct(altiplano_terrain_species_struct);
+        yli::ontology::SpeciesStruct altiplano_terrain_species_struct;
         altiplano_terrain_species_struct.scene = altiplano_scene;
         altiplano_terrain_species_struct.shader = altiplano_shader;
         altiplano_terrain_species_struct.material = altiplano_grass_material;
