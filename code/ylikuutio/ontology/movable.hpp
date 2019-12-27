@@ -95,14 +95,18 @@ namespace yli
                     this->max_land_speed              = 0.0f;
                     this->max_land_angular_speed      = 0.0f;
                     this->land_acceleration           = 0.0f;
+                    this->land_deceleration           = 0.0f;
                     this->max_rail_speed              = 0.0f;
                     this->rail_acceleration           = 0.0f;
+                    this->rail_deceleration           = 0.0f;
                     this->max_water_speed             = 0.0f;
                     this->max_water_angular_speed     = 0.0f;
                     this->water_acceleration          = 0.0f;
+                    this->water_deceleration          = 0.0f;
                     this->max_air_speed               = 0.0f;
                     this->max_air_angular_speed       = 0.0f;
                     this->air_acceleration            = 0.0f;
+                    this->air_deceleration            = 0.0f;
 
                     this->model_matrix                = glm::mat4(1.0f); // identity matrix (dummy value).
                     this->MVP_matrix                  = glm::mat4(1.0f); // identity matrix (dummy value).
@@ -258,14 +262,18 @@ namespace yli
                 float max_land_speed;                                  // m/s
                 float max_land_angular_speed;                          // 1/s
                 float land_acceleration;                               // m/s^2
+                float land_deceleration;                               // m/s^2
                 float max_rail_speed;                                  // m/s. By the way, there is no angular speed for railways.
                 float rail_acceleration;                               // m/s^2
+                float rail_deceleration;                               // m/s^2
                 float max_water_speed;                                 // m/s
                 float max_water_angular_speed;                         // 1/s
                 float water_acceleration;                              // m/s^2
+                float water_deceleration;                              // m/s^2
                 float max_air_speed;                                   // m/s
                 float max_air_angular_speed;                           // 1/s
                 float air_acceleration;                                // m/s^2
+                float air_deceleration;                                // m/s^2
                 std::vector<yli::ontology::Waypoint*> waypoints;       // Used for actual waypoints. `Brain` can use these freely.
                 std::vector<yli::ontology::Waypoint*> control_points;  // Used as B-spline/Bézier/etc. control points. `Brain` can use these freely.
 
