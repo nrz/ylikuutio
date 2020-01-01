@@ -12,7 +12,6 @@ Tasks which are necessary for the first stage:
 [ ] Implement creating new named Entities using `Console`, with a named `AnyStruct` of correct type as input.
 [ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
 [ ] Implement octree segmentation.
-[ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
 [ ] Implement frustrum culling.
 [ ] Implement skeletal animation.
 [ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
@@ -25,6 +24,9 @@ Tasks which are necessary for the first stage:
 [ ] Implement dynamic not flowing water, using OpenGL shaders.
 [ ] Create `audio::Sound` class, whose parent is `Entity`.
 [ ] Create `audio::PlayList` class, whose parent is `Entity`.
+
+Tasks which are necessary for the second stage:
+[ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
 
 Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement a custom FBX loader.
