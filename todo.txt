@@ -7,6 +7,7 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
+[ ] Implement fullscreen mode.
 [ ] Implement creating new named variables in `SettingMaster` using `Console`.
 [ ] Implement creating new named `AnyStruct`s of a given type using `Console`.
 [ ] Implement creating new named Entities using `Console`, with a named `AnyStruct` of correct type as input.
@@ -27,6 +28,14 @@ Tasks which are necessary for the first stage:
 
 Tasks which are necessary for the second stage:
 [ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
+[ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
+[ ] Evaluate ZeroMQ: https://zeromq.org/
+[ ] Evaluate SDL_net: https://www.libsdl.org/projects/SDL_net/
+[ ] Evaluate Asio (nework and low-level I/O library): https://think-async.com/
+[ ] Evaluate cpp-netlib (network library): http://cpp-netlib.org/
+[ ] Evaluate kNet (network library): https://github.com/juj/kNet/ (used by Urho3D: https://urho3d.github.io/ )
+[ ] Implement chat server using the chosen network library.
+[ ] Implement chat client using the chosen network library.
 
 Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement a custom FBX loader.
@@ -57,14 +66,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement marching cubes algorithm for voxel terrain as described in https://transvoxel.org/Lengyel-VoxelTerrain.pdf .
 [ ] Write a simple triangle drawing application (android-kolmio) for Android, using Android NDK and CMake.
 [ ] Add support for crosscompiling to Android.
-[ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
-[ ] Evaluate ZeroMQ: https://zeromq.org/
-[ ] Evaluate SDL_net: https://www.libsdl.org/projects/SDL_net/
-[ ] Evaluate Asio (nework and low-level I/O library): https://think-async.com/
-[ ] Evaluate cpp-netlib (network library): http://cpp-netlib.org/
-[ ] Evaluate kNet (network library): https://github.com/juj/kNet/ (used by Urho3D: https://urho3d.github.io/ )
-[ ] Implement chat server using the chosen network library.
-[ ] Implement chat client using the chosen network library.
 [ ] Write code to convert ASCII grid files (height maps) to binary FBX files, storing also interpolated vertices, UVs, and normals.
 [ ] Test code used to convert ASCII grid files (height maps) to binary FBX files by loading the FBX files created with it.
 [ ] Convert ASCII grid files into binary FBX files.
