@@ -36,6 +36,7 @@
 #include "brain.hpp"
 #include "any_value_entity.hpp"
 #include "any_struct_entity.hpp"
+#include "callback_engine_entity.hpp"
 #include "scene_struct.hpp"
 #include "shader_struct.hpp"
 #include "material_struct.hpp"
@@ -50,6 +51,7 @@
 #include "brain_struct.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/any_struct.hpp"
+#include "code/ylikuutio/callback/input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 
 // Include standard headers
 #include <cstddef>   // std::size_t
@@ -185,6 +187,11 @@ namespace yli
         yli::ontology::Entity* EntityFactory::create_AnyStructEntity(const yli::common::AnyStruct& any_struct) const
         {
             return new yli::ontology::AnyStructEntity(this->universe, any_struct);
+        }
+
+        yli::ontology::Entity* EntityFactory::create_CallbackEngineEntity(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback) const
+        {
+            return new yli::ontology::CallbackEngineEntity(this->universe, callback);
         }
     }
 }
