@@ -77,6 +77,7 @@ namespace yli
                     : Entity(universe)
                 {
                     // constructor.
+                    this->input_method                = movable_struct.input_method;
                     this->brain                       = movable_struct.brain;
                     this->movableID                   = std::numeric_limits<std::size_t>::max(); // uninitialized.
                     this->cartesian_coordinates.x     = movable_struct.cartesian_coordinates.x;
