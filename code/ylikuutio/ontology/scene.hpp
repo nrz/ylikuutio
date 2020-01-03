@@ -108,6 +108,7 @@ namespace yli
 
                     this->number_of_shaders     = 0;
                     this->number_of_cameras     = 0;
+                    this->number_of_brains      = 0;
                     this->active_camera         = nullptr;
                     this->terrain_species       = nullptr;
 
