@@ -82,6 +82,20 @@ namespace yli
                     movable->unbind_from_Brain();
                 }
             }
+
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+
+            yli::ontology::Scene* const scene = this->parent;
+
+            if (scene == nullptr)
+            {
+                std::cerr << "ERROR: `Brain::~Brain`: `scene` is `nullptr`!\n";
+                return;
+            }
+
+            // set pointer to this `Brain` to `nullptr`.
+            scene->unbind_Brain(this->childID);
         }
 
         yli::ontology::Entity* Brain::get_parent() const
