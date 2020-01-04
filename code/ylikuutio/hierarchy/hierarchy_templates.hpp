@@ -146,12 +146,14 @@ namespace yli
                     std::queue<std::size_t>& free_apprenticeID_queue,
                     std::size_t& number_of_apprentices)
             {
-                // Note: this function must be used only for master-apprentice
+                // Note: this function must be used only for
+                // master-apprentice relationships.
+                //
                 // Child-parent relationships must be implemented
-                // in some other way, not using this function.
+                // using `yli::hierarchy::bind_child_to_parent`.
                 //
                 // requirements:
-                // `child_pointer` must not be `nullptr` (use `this` as the first argument).
+                // `apprentice_pointer` must not be `nullptr` (use `this` as the first argument).
 
                 if (apprentice_pointer == nullptr)
                 {
@@ -159,7 +161,7 @@ namespace yli
                 }
 
                 apprenticeID = request_childID(apprentice_pointer_vector, free_apprenticeID_queue);
-                // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
+                // set pointer to the apprentice in master's apprentice pointer vector so that master knows about apprentices' whereabouts!
                 set_child_pointer(apprenticeID, apprentice_pointer, apprentice_pointer_vector, free_apprenticeID_queue, number_of_apprentices);
             }
 
