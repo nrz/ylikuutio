@@ -41,6 +41,7 @@ namespace yli
         class Entity
         {
             public:
+                // Each class that supports binding to a new parent needs to `override` this function.
                 virtual void bind_to_new_parent(yli::ontology::Entity* const new_entity_parent);
 
                 // constructor.
