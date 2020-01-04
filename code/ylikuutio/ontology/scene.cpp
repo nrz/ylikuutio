@@ -308,7 +308,8 @@ namespace yli
         std::size_t Scene::get_number_of_descendants() const
         {
             return yli::ontology::get_number_of_descendants(this->shader_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->camera_pointer_vector);
+                yli::ontology::get_number_of_descendants(this->camera_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->brain_pointer_vector);
         }
 
         // this method returns a pointer to an `Entity` using the name as key.
