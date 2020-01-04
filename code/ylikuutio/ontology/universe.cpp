@@ -971,44 +971,44 @@ namespace yli
 
             if (command_parameters.size() == 2)
             {
-                std::string child_entity_name = command_parameters[0];
+                std::string child_or_apprentice_entity_name = command_parameters[0];
 
-                if (universe->entity_map.count(child_entity_name) != 1)
+                if (universe->entity_map.count(child_or_apprentice_entity_name) != 1)
                 {
                     return nullptr;
                 }
 
-                yli::ontology::Entity* child_entity = universe->entity_map[child_entity_name];
+                yli::ontology::Entity* child_or_apprentice_entity = universe->entity_map[child_or_apprentice_entity_name];
 
-                if (child_entity == nullptr)
+                if (child_or_apprentice_entity == nullptr)
                 {
                     return nullptr;
                 }
 
-                std::string parent_entity_name = command_parameters[1];
+                std::string parent_or_master_entity_name = command_parameters[1];
 
-                if (universe->entity_map.count(parent_entity_name) != 1)
+                if (universe->entity_map.count(parent_or_master_entity_name) != 1)
                 {
                     return nullptr;
                 }
 
-                yli::ontology::Entity* parent_entity = universe->entity_map[parent_entity_name];
+                yli::ontology::Entity* parent_or_master_entity = universe->entity_map[parent_or_master_entity_name];
 
-                if (parent_entity == nullptr)
+                if (parent_or_master_entity == nullptr)
                 {
                     return nullptr;
                 }
 
-                yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(child_entity);
-                yli::ontology::Brain* brain = dynamic_cast<yli::ontology::Brain*>(parent_entity);
+                yli::ontology::Movable* child_or_apprentice_movable = dynamic_cast<yli::ontology::Movable*>(child_or_apprentice_entity);
+                yli::ontology::Brain* parent_or_master_brain = dynamic_cast<yli::ontology::Brain*>(parent_or_master_entity);
 
-                if (movable != nullptr && brain != nullptr)
+                if (child_or_apprentice_movable != nullptr && parent_or_master_brain != nullptr)
                 {
-                    movable->bind_to_new_Brain(brain);
+                    child_or_apprentice_movable->bind_to_new_Brain(parent_or_master_brain);
                 }
                 else
                 {
-                    child_entity->bind_to_new_parent(parent_entity);
+                    child_or_apprentice_entity->bind_to_new_parent(parent_or_master_entity);
                 }
             }
 
