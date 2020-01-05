@@ -301,6 +301,8 @@ int main(const int argc, const char* const argv[])
         return -1;
     }
 
+    earth_world->set_name("earth_world");
+
     std::cout << "Setting earth_world as the active world ...\n";
     my_universe->set_active_world(earth_world);
 
