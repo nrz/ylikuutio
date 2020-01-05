@@ -137,6 +137,26 @@ namespace yli
             this->parent->bind_Symbiosis(this);
         }
 
+        void Symbiosis::bind_to_new_parent(yli::ontology::Entity* const new_parent)
+        {
+            // this method sets pointer to this `Symbiosis` to `nullptr`, sets `parent` according to the input,
+            // and requests a new `childID` from the new `Shader`.
+            //
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            // `new_parent` must not be `nullptr`.
+
+            yli::ontology::Shader* const shader = dynamic_cast<yli::ontology::Shader*>(new_parent);
+
+            if (shader == nullptr)
+            {
+                std::cerr << "ERROR: `Symbiosis::bind_to_new_parent`: `new_parent` is not `yli::ontology::Shader*`!\n";
+                return;
+            }
+
+            this->bind_to_new_parent(shader);
+        }
+
         Symbiosis::~Symbiosis()
         {
             // destructor.
