@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2019 Antti Nuortimo.
+// Copyright (C) 2015-2020 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -82,6 +82,20 @@ namespace yli
                     movable->unbind_from_Brain();
                 }
             }
+
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+
+            yli::ontology::Scene* const scene = this->parent;
+
+            if (scene == nullptr)
+            {
+                std::cerr << "ERROR: `Brain::~Brain`: `scene` is `nullptr`!\n";
+                return;
+            }
+
+            // set pointer to this `Brain` to `nullptr`.
+            scene->unbind_Brain(this->childID);
         }
 
         yli::ontology::Entity* Brain::get_parent() const

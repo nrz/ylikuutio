@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2019 Antti Nuortimo.
+// Copyright (C) 2015-2020 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -133,9 +133,9 @@ namespace yli
                     return;
                 }
 
-                child_pointer->childID = request_childID(child_pointer_vector, free_childID_queue);
+                child_pointer->childID = yli::hierarchy::request_childID(child_pointer_vector, free_childID_queue);
                 // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-                set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, free_childID_queue, number_of_children);
+                yli::hierarchy::set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, free_childID_queue, number_of_children);
             }
 
         template<class T1>
@@ -146,21 +146,23 @@ namespace yli
                     std::queue<std::size_t>& free_apprenticeID_queue,
                     std::size_t& number_of_apprentices)
             {
-                // Note: this function must be used only for master-apprentice
+                // Note: this function must be used only for
+                // master-apprentice relationships.
+                //
                 // Child-parent relationships must be implemented
-                // in some other way, not using this function.
+                // using `yli::hierarchy::bind_child_to_parent`.
                 //
                 // requirements:
-                // `child_pointer` must not be `nullptr` (use `this` as the first argument).
+                // `apprentice_pointer` must not be `nullptr` (use `this` as the first argument).
 
                 if (apprentice_pointer == nullptr)
                 {
                     return;
                 }
 
-                apprenticeID = request_childID(apprentice_pointer_vector, free_apprenticeID_queue);
-                // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-                set_child_pointer(apprenticeID, apprentice_pointer, apprentice_pointer_vector, free_apprenticeID_queue, number_of_apprentices);
+                apprenticeID = yli::hierarchy::request_childID(apprentice_pointer_vector, free_apprenticeID_queue);
+                // set pointer to the apprentice in master's apprentice pointer vector so that master knows about apprentices' whereabouts!
+                yli::hierarchy::set_child_pointer(apprenticeID, apprentice_pointer, apprentice_pointer_vector, free_apprenticeID_queue, number_of_apprentices);
             }
 
         template<class T1>
@@ -192,9 +194,9 @@ namespace yli
                     child_hash_map[child_name] = child_pointer;
                 }
 
-                child_pointer->childID = request_childID(child_pointer_vector, free_childID_queue);
+                child_pointer->childID = yli::hierarchy::request_childID(child_pointer_vector, free_childID_queue);
                 // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-                set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, free_childID_queue, number_of_children);
+                yli::hierarchy::set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, free_childID_queue, number_of_children);
             }
 
         template <class T1>
@@ -214,7 +216,7 @@ namespace yli
                 }
 
                 // Set pointer to this child to `nullptr` in the old parent.
-                set_child_pointer(childID, static_cast<T1>(nullptr), child_pointer_vector, free_childID_queue, number_of_children);
+                yli::hierarchy::set_child_pointer(childID, static_cast<T1>(nullptr), child_pointer_vector, free_childID_queue, number_of_children);
             }
 
         template<class T1>

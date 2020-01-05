@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2019 Antti Nuortimo.
+// Copyright (C) 2015-2020 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -43,6 +43,7 @@
 #include "movable.hpp"
 #include "any_value_entity.hpp"
 #include "any_struct_entity.hpp"
+#include "callback_engine_entity.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
@@ -163,6 +164,16 @@ namespace yli
                     this->number_of_any_struct_entities);
         }
 
+        void Universe::bind_CallbackEngineEntity(yli::ontology::CallbackEngineEntity* const callback_engine_entity)
+        {
+            // get `childID` from `Universe` and set pointer to `callback_engine_entity`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::CallbackEngineEntity*>(
+                    callback_engine_entity,
+                    this->callback_engine_entity_pointer_vector,
+                    this->free_callback_engine_entityID_queue,
+                    this->number_of_callback_engine_entities);
+        }
+
         void Universe::unbind_Entity(const std::size_t entityID)
         {
             yli::hierarchy::unbind_child_from_parent(
@@ -208,6 +219,15 @@ namespace yli
                     this->number_of_any_struct_entities);
         }
 
+        void Universe::unbind_CallbackEngineEntity(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->callback_engine_entity_pointer_vector,
+                    this->free_callback_engine_entityID_queue,
+                    this->number_of_callback_engine_entities);
+        }
+
         Universe::~Universe()
         {
             // destructor.
@@ -239,6 +259,10 @@ namespace yli
             // destroy all AnyValueEntities of this `Universe`.
             std::cout << "All AnyValueEntities of this universe will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::AnyValueEntity*>(this->any_value_entity_pointer_vector, this->number_of_any_value_entities);
+
+            // destroy all CallbackEngineEntities of this `Universe`.
+            std::cout << "All CallbackEngineEntities of this universe will be destroyed.\n";
+            yli::hierarchy::delete_children<yli::ontology::CallbackEngineEntity*>(this->callback_engine_entity_pointer_vector, this->number_of_callback_engine_entities);
 
             SDL_Quit();
         }
@@ -938,7 +962,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+            const yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
 
             if (universe == nullptr)
             {
@@ -947,44 +971,44 @@ namespace yli
 
             if (command_parameters.size() == 2)
             {
-                std::string child_entity_name = command_parameters[0];
+                const std::string child_or_apprentice_entity_name = command_parameters[0];
 
-                if (universe->entity_map.count(child_entity_name) != 1)
+                if (universe->entity_map.count(child_or_apprentice_entity_name) != 1)
                 {
                     return nullptr;
                 }
 
-                yli::ontology::Entity* child_entity = universe->entity_map[child_entity_name];
+                yli::ontology::Entity* const child_or_apprentice_entity = universe->entity_map.at(child_or_apprentice_entity_name);
 
-                if (child_entity == nullptr)
+                if (child_or_apprentice_entity == nullptr)
                 {
                     return nullptr;
                 }
 
-                std::string parent_entity_name = command_parameters[1];
+                const std::string parent_or_master_entity_name = command_parameters[1];
 
-                if (universe->entity_map.count(parent_entity_name) != 1)
+                if (universe->entity_map.count(parent_or_master_entity_name) != 1)
                 {
                     return nullptr;
                 }
 
-                yli::ontology::Entity* parent_entity = universe->entity_map[parent_entity_name];
+                yli::ontology::Entity* const parent_or_master_entity = universe->entity_map.at(parent_or_master_entity_name);
 
-                if (parent_entity == nullptr)
+                if (parent_or_master_entity == nullptr)
                 {
                     return nullptr;
                 }
 
-                yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(child_entity);
-                yli::ontology::Brain* brain = dynamic_cast<yli::ontology::Brain*>(parent_entity);
+                yli::ontology::Movable* const child_or_apprentice_movable = dynamic_cast<yli::ontology::Movable*>(child_or_apprentice_entity);
+                yli::ontology::Brain* const parent_or_master_brain = dynamic_cast<yli::ontology::Brain*>(parent_or_master_entity);
 
-                if (movable != nullptr && brain != nullptr)
+                if (child_or_apprentice_movable != nullptr && parent_or_master_brain != nullptr)
                 {
-                    movable->bind_to_new_Brain(brain);
+                    child_or_apprentice_movable->bind_to_new_Brain(parent_or_master_brain);
                 }
                 else
                 {
-                    child_entity->bind_to_new_parent(parent_entity);
+                    child_or_apprentice_entity->bind_to_new_parent(parent_or_master_entity);
                 }
             }
 

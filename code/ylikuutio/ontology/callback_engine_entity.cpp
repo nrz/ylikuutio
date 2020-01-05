@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "any_value_entity.hpp"
+#include "callback_engine_entity.hpp"
 #include "universe.hpp"
 
 // Include standard headers
@@ -26,7 +26,9 @@ namespace yli
 {
     namespace ontology
     {
-        void AnyValueEntity::bind_to_parent()
+        class Entity;
+
+        void CallbackEngineEntity::bind_to_parent()
         {
             // Requirements:
             // `this->parent` must not be `nullptr`.
@@ -34,18 +36,19 @@ namespace yli
 
             if (universe == nullptr)
             {
-                std::cerr << "ERROR: `AnyValueEntity::bind_to_parent`: `universe` is `nullptr`!\n";
+                std::cerr << "ERROR: `CallbackEngineEntity::bind_to_parent`: `universe` is `nullptr`!\n";
                 return;
             }
 
-            // Get `childID` from the `Universe` and set pointer to this `AnyValueEntity`.
-            universe->bind_AnyValueEntity(this);
+            // Get `childID` from the `Universe` and set pointer to this `CallbackEngineEntity`.
+            universe->bind_CallbackEngineEntity(this);
         }
 
-        AnyValueEntity::~AnyValueEntity()
+        // destructor.
+        CallbackEngineEntity::~CallbackEngineEntity()
         {
             // destructor.
-            std::cout << "This `AnyValueEntity` will be destroyed.\n";
+            std::cout << "This `CallbackEngineEntity` will be destroyed.\n";
 
             // requirements for further actions:
             // `this->parent` must not be `nullptr`.
@@ -54,29 +57,29 @@ namespace yli
 
             if (universe == nullptr)
             {
-                std::cerr << "ERROR: `AnyValueEntity::~AnyValueEntity`: `universe` is `nullptr`!\n";
+                std::cerr << "ERROR: `CallbackEngineEntity::~CallbackEngineEntity`: `universe` is `nullptr`!\n";
                 return;
             }
 
             // set pointer to this `AnyValueEntity` to `nullptr`.
-            universe->unbind_AnyValueEntity(this->childID);
+            universe->unbind_CallbackEngineEntity(this->childID);
         }
 
-        yli::ontology::Entity* AnyValueEntity::get_parent() const
+        yli::ontology::Entity* CallbackEngineEntity::get_parent() const
         {
-            // Every `AnyValueEntity` is a child of the `Universe`.
+            // Every `CallbackEngineEntity` is a child of the `Universe`.
             // The base class needs to be specified due to ambiguity caused by diamond inheritance.
             return this->yli::ontology::Entity::universe;
         }
 
-        std::size_t AnyValueEntity::get_number_of_children() const
+        std::size_t CallbackEngineEntity::get_number_of_children() const
         {
-            return 0; // `AnyValueEntity` has no children.
+            return 0; // `CallbackEngineEntity` has no children.
         }
 
-        std::size_t AnyValueEntity::get_number_of_descendants() const
+        std::size_t CallbackEngineEntity::get_number_of_descendants() const
         {
-            return 0; // `AnyValueEntity` has no children.
+            return 0; // `CallbackEngineEntity` has no children.
         }
     }
 }

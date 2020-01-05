@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2019 Antti Nuortimo.
+// Copyright (C) 2015-2020 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -304,6 +304,7 @@ namespace yli
         class Console;
         class AnyValueEntity;
         class AnyStructEntity;
+        class CallbackEngineEntity;
 
         class Universe: public yli::ontology::Entity
         {
@@ -314,12 +315,14 @@ namespace yli
                 void bind_Console(yli::ontology::Console* const console);
                 void bind_AnyValueEntity(yli::ontology::AnyValueEntity* const any_value_entity);
                 void bind_AnyStructEntity(yli::ontology::AnyStructEntity* const any_struct_entity);
+                void bind_CallbackEngineEntity(yli::ontology::CallbackEngineEntity* const callback_engine_entity);
 
                 void unbind_Entity(const std::size_t entityID);
                 void unbind_World(const std::size_t childID);
                 void unbind_Font2D(const std::size_t childID);
                 void unbind_AnyValueEntity(const std::size_t childID);
                 void unbind_AnyStructEntity(const std::size_t childID);
+                void unbind_CallbackEngineEntity(const std::size_t childID);
 
                 // constructor.
                 Universe(const yli::ontology::UniverseStruct& universe_struct)
@@ -749,6 +752,10 @@ namespace yli
                 std::vector<yli::ontology::AnyStructEntity*> any_struct_entity_pointer_vector;
                 std::queue<std::size_t> free_any_struct_entityID_queue;
                 std::size_t number_of_any_struct_entities;
+
+                std::vector<yli::ontology::CallbackEngineEntity*> callback_engine_entity_pointer_vector;
+                std::queue<std::size_t> free_callback_engine_entityID_queue;
+                std::size_t number_of_callback_engine_entities;
 
                 yli::ontology::World* active_world;
                 yli::ontology::Font2D* active_font2D;

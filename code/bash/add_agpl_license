@@ -3,7 +3,7 @@ sed -i \
 '1 i'\
 '// Ylikuutio - A 3D game and simulation engine.\n'\
 '//\n'\
-'// Copyright (C) 2015-2019 Antti Nuortimo.\n'\
+'// Copyright (C) 2015-2020 Antti Nuortimo.\n'\
 '//\n'\
 '// This program is free software: you can redistribute it and/or modify\n'\
 '// it under the terms of the GNU Affero General Public License as\n'\

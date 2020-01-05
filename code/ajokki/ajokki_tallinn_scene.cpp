@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2019 Antti Nuortimo.
+// Copyright (C) 2015-2020 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -112,7 +112,7 @@ namespace ajokki
         tallinn_grass_material->set_name("tallinn_grass_material");
 
         // Create the species, store it in `terrain_species`.
-        yli::ontology::SpeciesStruct(tallinn_terrain_species_struct);
+        yli::ontology::SpeciesStruct tallinn_terrain_species_struct;
         tallinn_terrain_species_struct.scene = tallinn_scene;
         tallinn_terrain_species_struct.shader = tallinn_shader;
         tallinn_terrain_species_struct.material = tallinn_grass_material;

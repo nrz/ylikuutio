@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2019 Antti Nuortimo.
+// Copyright (C) 2015-2020 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -145,6 +145,26 @@ namespace yli
             // Get `childID` from `Scene` and set pointer to this `Shader`.
             this->parent = new_parent;
             this->parent->bind_Shader(this);
+        }
+
+        void Shader::bind_to_new_parent(yli::ontology::Entity* const new_parent)
+        {
+            // this method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input,
+            // and requests a new `childID` from the new `Scene`.
+            //
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            // `new_parent` must not be `nullptr`.
+
+            yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(new_parent);
+
+            if (scene == nullptr)
+            {
+                std::cerr << "ERROR: `Shader::bind_to_new_parent`: `new_parent` is not `yli::ontology::Scene*`!\n";
+                return;
+            }
+
+            this->bind_to_new_parent(scene);
         }
 
         Shader::~Shader()

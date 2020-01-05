@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2019 Antti Nuortimo.
+// Copyright (C) 2015-2020 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -97,7 +97,6 @@ namespace yli
 
             if (this->name.empty())
             {
-                std::cerr << "ERROR: `Entity::~Entity`: `this->name` is empty.\n";
                 return;
             }
 

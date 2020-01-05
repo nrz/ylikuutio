@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2019 Antti Nuortimo.
+// Copyright (C) 2015-2020 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -19,6 +19,7 @@
 #define __MOVABLE_STRUCT_HPP_INCLUDED
 
 #include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/input/input.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -38,7 +39,8 @@ namespace yli
         struct MovableStruct
         {
             MovableStruct()
-                : brain(nullptr),
+                : input_method(yli::input::InputMethod::AI),
+                brain(nullptr),
                 cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
                 spherical_coordinates(NAN, NAN, NAN),
                 horizontal_angle(0.0),
@@ -61,6 +63,7 @@ namespace yli
             {
             }
 
+            yli::input::InputMethod input_method;
             yli::ontology::Brain* brain;     // brain.
             glm::vec3 cartesian_coordinates; // coordinate vector.
             yli::common::SphericalCoordinatesStruct spherical_coordinates;

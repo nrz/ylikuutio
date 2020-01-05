@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2019 Antti Nuortimo.
+// Copyright (C) 2015-2020 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -73,6 +73,7 @@ namespace yli
 
                 // this method sets pointer to this `Symbiosis` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
                 void bind_to_new_parent(yli::ontology::Shader* const new_parent);
+                void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
                 // constructor.
                 Symbiosis(yli::ontology::Universe* universe, const yli::ontology::SymbiosisStruct& symbiosis_struct)

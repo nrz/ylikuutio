@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2019 Antti Nuortimo.
+// Copyright (C) 2015-2020 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -301,8 +301,23 @@ int main(const int argc, const char* const argv[])
         return -1;
     }
 
+    earth_world->set_name("earth_world");
+
     std::cout << "Setting earth_world as the active world ...\n";
     my_universe->set_active_world(earth_world);
+
+    std::cout << "Creating yli::ontology::Entity* mars_world_entity ...\n";
+    yli::ontology::Entity* const mars_world_entity = entity_factory->create_World();
+    std::cout << "Creating yli::ontology::World* mars_world ...\n";
+    yli::ontology::World* const mars_world = dynamic_cast<yli::ontology::World*>(mars_world_entity);
+
+    if (mars_world == nullptr)
+    {
+        cleanup_callback_engine.execute(nullptr);
+        return -1;
+    }
+
+    mars_world->set_name("mars_world");
 
     // Create the `Scene`s.
     // The `Scene`s will be created in the following order:

@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2019 Antti Nuortimo.
+// Copyright (C) 2015-2020 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -108,6 +108,7 @@ namespace yli
 
                     this->number_of_shaders     = 0;
                     this->number_of_cameras     = 0;
+                    this->number_of_brains      = 0;
                     this->active_camera         = nullptr;
                     this->terrain_species       = nullptr;
 

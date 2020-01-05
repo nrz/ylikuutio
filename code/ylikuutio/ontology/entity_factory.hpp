@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2019 Antti Nuortimo.
+// Copyright (C) 2015-2020 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -31,6 +31,7 @@
 #include "camera_struct.hpp"
 #include "compute_task_struct.hpp"
 #include "brain_struct.hpp"
+#include "code/ylikuutio/callback/input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 
 // Include standard headers
 #include <cstddef>   // std::size_t
@@ -94,6 +95,7 @@ namespace yli
                 yli::ontology::Entity* create_AnyValueEntity(const yli::common::AnyValue& any_value) const;
                 yli::ontology::Entity* create_AnyStructEntity() const;
                 yli::ontology::Entity* create_AnyStructEntity(const yli::common::AnyStruct& any_struct) const;
+                yli::ontology::Entity* create_CallbackEngineEntity(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback) const;
 
                 friend class Universe;
 
