@@ -97,7 +97,6 @@ namespace yli
 
             if (this->name.empty())
             {
-                std::cerr << "ERROR: `Entity::~Entity`: `this->name` is empty.\n";
                 return;
             }
 
