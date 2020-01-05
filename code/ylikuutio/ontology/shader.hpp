@@ -70,6 +70,7 @@ namespace yli
 
                 // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
                 void bind_to_new_parent(yli::ontology::Scene* const new_parent);
+                void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
                 Shader(yli::ontology::Universe* const universe, const yli::ontology::ShaderStruct& shader_struct)
                     : Entity(universe)
