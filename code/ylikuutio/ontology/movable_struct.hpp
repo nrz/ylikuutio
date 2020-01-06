@@ -55,7 +55,8 @@ namespace yli
                     yli::common::SphericalCoordinatesStruct spherical_coordinates,
                     const double horizontal_angle,
                     const double vertical_angle)
-                : brain(brain),
+                : input_method(yli::input::InputMethod::AI),
+                brain(brain),
                 cartesian_coordinates(cartesian_coordinates),
                 spherical_coordinates(spherical_coordinates),
                 horizontal_angle(horizontal_angle),
