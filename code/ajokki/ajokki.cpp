@@ -121,7 +121,17 @@ int main(const int argc, const char* const argv[])
     }
 
     const std::vector<std::string> valid_keys {
-        "help", "version", "window_width", "window_height", "framebuffer_width", "framebuffer_height", "speed", "turbo_factor", "twin_turbo_factor", "mouse_speed" };
+        "help",
+        "version",
+        "window_width",
+        "window_height",
+        "framebuffer_width",
+        "framebuffer_height",
+        "speed",
+        "turbo_factor",
+        "twin_turbo_factor",
+        "mouse_speed"
+    };
 
     const std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
 
