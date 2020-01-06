@@ -419,19 +419,19 @@ namespace yli
                     this->twin_turbo_factor = universe_struct.twin_turbo_factor;
                     this->mouse_speed       = universe_struct.mouse_speed;
 
-                    this->znear       = universe_struct.znear;
-                    this->zfar        = universe_struct.zfar;
+                    this->znear             = universe_struct.znear;
+                    this->zfar              = universe_struct.zfar;
 
                     this->testing_spherical_terrain_in_use = false;
                     this->in_console                       = false;
                     this->in_help_mode                     = true;
                     this->can_display_help_screen          = true;
 
-                    this->number_of_entities = 0;
-                    this->number_of_worlds  = 0;
-                    this->number_of_font2Ds = 0;
-                    this->number_of_consoles = 0;
-                    this->number_of_any_value_entities = 0;
+                    this->number_of_entities            = 0;
+                    this->number_of_worlds              = 0;
+                    this->number_of_font2Ds             = 0;
+                    this->number_of_consoles            = 0;
+                    this->number_of_any_value_entities  = 0;
                     this->number_of_any_struct_entities = 0;
 
                     this->context = nullptr;
