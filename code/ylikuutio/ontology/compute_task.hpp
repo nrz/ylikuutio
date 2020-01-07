@@ -86,6 +86,7 @@ namespace yli
 
     namespace ontology
     {
+        class Universe;
         class Shader;
 
         class ComputeTask: public yli::ontology::Entity
