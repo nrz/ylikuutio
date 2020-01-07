@@ -83,7 +83,12 @@ namespace yli
                         // Load the texture.
                         if (this->texture_file_format == "bmp" || this->texture_file_format == "BMP")
                         {
-                            if (!yli::load::load_BMP_texture(this->texture_filename, this->image_width, this->image_height, this->image_size, this->texture))
+                            if (!yli::load::load_BMP_texture(
+                                        this->texture_filename,
+                                        this->image_width,
+                                        this->image_height,
+                                        this->image_size,
+                                        this->texture))
                             {
                                 std::cerr << "ERROR: loading BMP texture failed!\n";
                             }
