@@ -50,6 +50,7 @@ namespace yli
 {
     namespace ontology
     {
+        class Universe;
         class Scene;
         class Material;
         class Species;
