@@ -117,6 +117,7 @@ int main(const int argc, const char* const argv[])
         "help",
         "version",
         "silent",
+        "headless",
         "window_width",
         "window_height",
         "framebuffer_width",
@@ -153,6 +154,11 @@ int main(const int argc, const char* const argv[])
     if (command_line_master.is_key("silent"))
     {
         universe_struct.is_silent = true;
+    }
+
+    if (command_line_master.is_key("headless"))
+    {
+        universe_struct.is_headless = true;
     }
 
     if (command_line_master.is_key("window_width") &&
@@ -232,32 +238,35 @@ int main(const int argc, const char* const argv[])
     yli::callback::CallbackEngine cleanup_callback_engine = yli::callback::CallbackEngine();
     cleanup_callback_engine.create_CallbackObject(nullptr);
 
-    if (my_universe->get_window() == nullptr)
+    if (!my_universe->get_is_headless() && my_universe->get_window() == nullptr)
     {
         std::cerr << "Failed to open SDL window.\n";
         cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
-    my_universe->create_context();
-
-    // Initialize GLEW.
-    if (!yli::opengl::init_glew())
+    if (!my_universe->get_is_headless())
     {
-        cleanup_callback_engine.execute(nullptr);
-        return -1;
+        my_universe->create_context();
+
+        // Initialize GLEW.
+        if (!yli::opengl::init_glew())
+        {
+            cleanup_callback_engine.execute(nullptr);
+            return -1;
+        }
+
+        yli::input::disable_cursor();
+        yli::input::enable_relative_mouse_mode();
+
+        // Enable depth test.
+        yli::opengl::enable_depth_test();
+        // Accept fragment if it is closer to the camera than the former one.
+        yli::opengl::set_depth_func_to_less();
+
+        // Cull triangles whose normal is not towards the camera.
+        yli::opengl::cull_triangles();
     }
-
-    yli::input::disable_cursor();
-    yli::input::enable_relative_mouse_mode();
-
-    // Enable depth test.
-    yli::opengl::enable_depth_test();
-    // Accept fragment if it is closer to the camera than the former one.
-    yli::opengl::set_depth_func_to_less();
-
-    // Cull triangles whose normal is not towards the camera.
-    yli::opengl::cull_triangles();
 
     // Create the `Console`.
     std::cout << "Creating yli::ontology::Entity* my_console_entity ...\n";
@@ -829,7 +838,10 @@ int main(const int argc, const char* const argv[])
             }
 
             // Clear the screen.
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            if (!my_universe->get_is_headless())
+            {
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            }
 
             my_universe->compute_delta_time();
 
@@ -1093,7 +1105,10 @@ int main(const int argc, const char* const argv[])
             }
 
             // Render the `Universe`.
-            my_universe->render();
+            if (!my_universe->get_is_headless())
+            {
+                my_universe->render();
+            }
 
             my_universe->finalize_delta_time_loop();
         }

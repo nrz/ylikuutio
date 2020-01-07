@@ -38,7 +38,8 @@ namespace yli
                 std::size_t& image_width,
                 std::size_t& image_height,
                 std::size_t& image_size,
-                uint32_t& textureID)
+                uint32_t& textureID,
+                const bool is_headless)
         {
             // Requirements:
             // `ofbx_texture` must not be `nullptr`.
@@ -91,7 +92,7 @@ namespace yli
             if (texture_file_suffix == "bmp")
             {
                 const std::string filename_string = std::string((char*) &filename_buffer);
-                return yli::load::load_BMP_texture(filename_string, image_width, image_height, image_size, textureID);
+                return yli::load::load_BMP_texture(filename_string, image_width, image_height, image_size, textureID, is_headless);
             }
             else if (texture_file_suffix == "png")
             {

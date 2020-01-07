@@ -19,6 +19,7 @@
 #define __FONT2D_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "universe.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/load/bmp_texture_loader.hpp"
@@ -40,7 +41,6 @@ namespace yli
 {
     namespace ontology
     {
-        class Universe;
         class Text2D;
 
         class Font2D: public yli::ontology::Entity
@@ -87,10 +87,12 @@ namespace yli
                     this->image_height                     = 0;
                     this->image_size                       = 0;
 
+                    const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
+
                     // Initialize texture.
                     if (this->font_texture_file_format == "bmp" || this->font_texture_file_format == "BMP")
                     {
-                        if (!yli::load::load_BMP_texture(texture_filename, this->image_width, this->image_height, this->image_size, this->texture))
+                        if (!yli::load::load_BMP_texture(texture_filename, this->image_width, this->image_height, this->image_size, this->texture, is_headless))
                         {
                             std::cerr << "ERROR: loading BMP texture failed!\n";
                         }
@@ -102,27 +104,30 @@ namespace yli
                         return;
                     }
 
-                    // Initialize VBO.
-                    glGenBuffers(1, &this->vertexbuffer);
-                    glGenBuffers(1, &this->uvbuffer);
+                    if (!is_headless)
+                    {
+                        // Initialize VBO.
+                        glGenBuffers(1, &this->vertexbuffer);
+                        glGenBuffers(1, &this->uvbuffer);
 
-                    // Initialize `Shader`.
-                    this->programID = yli::load::load_shaders("text_vertex_shader.vert", "text_vertex_shader.frag");
+                        // Initialize `Shader`.
+                        this->programID = yli::load::load_shaders("text_vertex_shader.vert", "text_vertex_shader.frag");
 
-                    // Get a handle for our buffers.
-                    this->vertex_position_in_screenspaceID = glGetAttribLocation(this->programID, "vertex_position_screenspace");
-                    this->vertexUVID = glGetAttribLocation(this->programID, "vertexUV");
+                        // Get a handle for our buffers.
+                        this->vertex_position_in_screenspaceID = glGetAttribLocation(this->programID, "vertex_position_screenspace");
+                        this->vertexUVID = glGetAttribLocation(this->programID, "vertexUV");
 
-                    // Initialize uniforms' IDs.
-                    this->Text2DUniformID = glGetUniformLocation(this->programID, "texture_sampler");
+                        // Initialize uniforms' IDs.
+                        this->Text2DUniformID = glGetUniformLocation(this->programID, "texture_sampler");
 
-                    // Initialize uniform window width.
-                    this->screen_width_uniform_ID = glGetUniformLocation(this->programID, "screen_width");
-                    yli::opengl::uniform_1i(this->screen_width_uniform_ID, this->screen_width);
+                        // Initialize uniform window width.
+                        this->screen_width_uniform_ID = glGetUniformLocation(this->programID, "screen_width");
+                        yli::opengl::uniform_1i(this->screen_width_uniform_ID, this->screen_width);
 
-                    // Initialize uniform window height.
-                    this->screen_height_uniform_ID = glGetUniformLocation(this->programID, "screen_height");
-                    yli::opengl::uniform_1i(this->screen_height_uniform_ID, this->screen_height);
+                        // Initialize uniform window height.
+                        this->screen_height_uniform_ID = glGetUniformLocation(this->programID, "screen_height");
+                        yli::opengl::uniform_1i(this->screen_height_uniform_ID, this->screen_height);
+                    }
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Font2D*";

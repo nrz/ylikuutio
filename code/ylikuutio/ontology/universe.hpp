@@ -478,7 +478,15 @@ namespace yli
                         this->audio_master = std::make_shared<yli::audio::AudioMaster>(this);
                     }
 
-                    this->input_master = std::make_shared<yli::input::InputMaster>(this);
+                    if (this->is_headless)
+                    {
+                        this->input_master = nullptr;
+                        this->is_exit_requested = true;
+                    }
+                    else
+                    {
+                        this->input_master = std::make_shared<yli::input::InputMaster>(this);
+                    }
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);

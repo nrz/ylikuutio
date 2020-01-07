@@ -36,7 +36,8 @@ namespace yli
                 std::size_t& image_width,
                 std::size_t& image_height,
                 std::size_t& image_size,
-                uint32_t& textureID)
+                uint32_t& textureID,
+                const bool is_headless)
         {
             const std::shared_ptr<std::vector<uint8_t>> image_data = load_BMP_file(filename, image_width, image_height, image_size);
 
@@ -46,7 +47,14 @@ namespace yli
                 return false;
             }
 
-            return yli::load::load_texture(image_data, image_width, image_height, textureID);
+            if (is_headless)
+            {
+                return true;
+            }
+            else
+            {
+                return yli::load::load_texture(image_data, image_width, image_height, textureID);
+            }
         }
     }
 }

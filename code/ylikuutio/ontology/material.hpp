@@ -19,6 +19,7 @@
 #define __MATERIAL_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "universe.hpp"
 #include "shader.hpp"
 #include "material_struct.hpp"
 #include "render_templates.hpp"
@@ -41,7 +42,6 @@ namespace yli
 {
     namespace ontology
     {
-        class Universe;
         class Species;
         class Object;
         class VectorFont;
@@ -75,6 +75,8 @@ namespace yli
                     this->image_height             = 0;
                     this->image_size               = 0;
 
+                    const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
+
                     if (!this->is_symbiont_material)
                     {
                         // Get `childID` from the `Shader` and set pointer to this `Material`.
@@ -88,7 +90,8 @@ namespace yli
                                         this->image_width,
                                         this->image_height,
                                         this->image_size,
-                                        this->texture))
+                                        this->texture,
+                                        is_headless))
                             {
                                 std::cerr << "ERROR: loading BMP texture failed!\n";
                             }
@@ -110,7 +113,10 @@ namespace yli
                         }
 
                         // Get a handle for our "texture_sampler" uniform.
-                        this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "texture_sampler");
+                        if (this->universe != nullptr && !this->universe->get_is_headless())
+                        {
+                            this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "texture_sampler");
+                        }
 
                         // `yli::ontology::Entity` member variables begin here.
                         this->child_vector_pointers_vector.push_back(&this->species_pointer_vector);

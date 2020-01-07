@@ -28,6 +28,7 @@
 #endif
 
 #include "entity.hpp"
+#include "universe.hpp"
 #include "glyph.hpp"
 #include "shader_struct.hpp"
 #include "render_templates.hpp"
@@ -50,7 +51,6 @@ namespace yli
 {
     namespace ontology
     {
-        class Universe;
         class Scene;
         class Material;
         class Species;
@@ -105,7 +105,7 @@ namespace yli
                     // Get `childID` from `Scene` and set pointer to this `Shader`.
                     this->bind_to_parent();
 
-                    if (this->opengl_in_use)
+                    if (this->universe != nullptr && !this->universe->get_is_headless() && this->opengl_in_use)
                     {
                         // Create and compile our GLSL program from the shaders.
                         this->programID = yli::load::load_shaders(this->char_vertex_shader, this->char_fragment_shader);

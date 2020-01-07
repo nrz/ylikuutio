@@ -96,7 +96,9 @@ namespace yli
                         // get `childID` from `Material` and set pointer to this `Species`.
                         this->bind_to_parent();
 
-                        if (this->opengl_in_use)
+                        const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
+
+                        if (!is_headless && this->opengl_in_use)
                         {
                             // Get a handle for our buffers.
                             this->vertex_position_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertex_position_modelspace");
@@ -120,7 +122,7 @@ namespace yli
                             }
                         }
 
-                        if (this->opengl_in_use)
+                        if (!is_headless && this->opengl_in_use)
                         {
                             // water level.
                             GLint water_level_uniform_location = glGetUniformLocation(species_struct.shader->get_programID(), "water_level");
@@ -141,6 +143,7 @@ namespace yli
                         species_loader_struct.image_width_pointer          = &this->image_width;
                         species_loader_struct.image_height_pointer         = &this->image_height;
                         species_loader_struct.triangulation_type           = this->triangulation_type;
+                        species_loader_struct.is_headless                  = is_headless;
                         species_loader_struct.opengl_in_use                = this->opengl_in_use;
                         species_loader_struct.use_real_texture_coordinates = this->use_real_texture_coordinates;
 

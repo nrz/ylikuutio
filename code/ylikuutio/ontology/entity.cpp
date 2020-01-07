@@ -69,7 +69,7 @@ namespace yli
             this->postrender_callback = nullptr;
             this->setting_master = std::make_shared<yli::config::SettingMaster>(this);
             this->can_be_erased = false;
-            this->should_be_rendered = true;
+            this->should_be_rendered = (this->universe == nullptr ? false : !this->universe->get_is_headless());
 
             yli::config::SettingMaster* const setting_master = this->get_setting_master();
 

@@ -61,6 +61,9 @@ namespace yli
                     this->ofbx_texture               = material_struct.ofbx_texture;
                     this->number_of_symbiont_species = 0;
 
+                    this->texture                    = 0; // dummy value.
+                    this->openGL_textureID           = 0; // dummy value.
+
                     // get `childID` from the `Symbiosis` and set pointer to this `SymbiontMaterial`.
                     this->bind_to_parent();
 

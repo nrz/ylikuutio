@@ -19,6 +19,7 @@
 #define __COMPUTE_TASK_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "universe.hpp"
 #include "shader.hpp"
 #include "compute_task_struct.hpp"
 #include "pre_iterate_callback.hpp"
@@ -86,7 +87,6 @@ namespace yli
 
     namespace ontology
     {
-        class Universe;
         class Shader;
 
         class ComputeTask: public yli::ontology::Entity
@@ -148,16 +148,21 @@ namespace yli
                     // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
                     this->bind_to_parent();
 
-                    // Get a handle for our buffers.
-                    this->vertex_position_modelspaceID = glGetAttribLocation(this->parent->get_programID(), "vertex_position_modelspace");
-                    this->vertexUVID = glGetAttribLocation(this->parent->get_programID(), "vertexUV");
+                    const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
 
-                    glUseProgram(this->parent->get_programID());
+                    if (!is_headless)
+                    {
+                        // Get a handle for our buffers.
+                        this->vertex_position_modelspaceID = glGetAttribLocation(this->parent->get_programID(), "vertex_position_modelspace");
+                        this->vertexUVID = glGetAttribLocation(this->parent->get_programID(), "vertexUV");
+
+                        glUseProgram(this->parent->get_programID());
+                    }
 
                     // Load the source texture, just like in `yli::ontology::Material` constructor.
                     if (this->texture_file_format == "bmp" || this->texture_file_format == "BMP")
                     {
-                        if (!yli::load::load_BMP_texture(this->texture_filename, this->texture_width, this->texture_height, this->texture_size, this->source_texture))
+                        if (!yli::load::load_BMP_texture(this->texture_filename, this->texture_width, this->texture_height, this->texture_size, this->source_texture, is_headless))
                         {
                             std::cerr << "ERROR: loading BMP texture failed!\n";
                         }
@@ -195,7 +200,7 @@ namespace yli
                         std::cerr << "texture file format: " << this->texture_file_format << "\n";
                     }
 
-                    if (this->is_texture_loaded)
+                    if (!is_headless && this->is_texture_loaded)
                     {
                         // Get a handle for our "texture_sampler" uniform.
                         this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "texture_sampler");
