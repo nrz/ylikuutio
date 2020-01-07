@@ -123,6 +123,7 @@ int main(const int argc, const char* const argv[])
     const std::vector<std::string> valid_keys {
         "help",
         "version",
+        "silent",
         "window_width",
         "window_height",
         "framebuffer_width",
@@ -155,6 +156,11 @@ int main(const int argc, const char* const argv[])
     std::stringstream window_title_stringstream;
     window_title_stringstream << "Ajokki " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
     universe_struct.window_title = window_title_stringstream.str();
+
+    if (command_line_master.is_key("silent"))
+    {
+        universe_struct.is_silent = true;
+    }
 
     if (command_line_master.is_key("window_width") &&
             yli::string::check_if_unsigned_integer_string(command_line_master.get_value("window_width")))
@@ -1009,9 +1015,12 @@ int main(const int argc, const char* const argv[])
 
     bool has_mouse_focus = true;
 
-    audio_master->add_to_playlist("Ajokki_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
-    audio_master->add_to_playlist("Ajokki_playlist", "414270__greek555__sample-97-bpm.wav");
-    audio_master->play_playlist("Ajokki_playlist");
+    if (audio_master != nullptr)
+    {
+        audio_master->add_to_playlist("Ajokki_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
+        audio_master->add_to_playlist("Ajokki_playlist", "414270__greek555__sample-97-bpm.wav");
+        audio_master->play_playlist("Ajokki_playlist");
+    }
 
     SDL_Event sdl_event;
     std::string ms_frame_text;
@@ -1130,7 +1139,10 @@ int main(const int argc, const char* const argv[])
                 my_universe->increment_last_time_to_display_FPS();
 
                 // Update audio also (in case the sound has reached the end).
-                audio_master->update();
+                if (audio_master != nullptr)
+                {
+                    audio_master->update();
+                }
             }
 
             // Clear the screen.

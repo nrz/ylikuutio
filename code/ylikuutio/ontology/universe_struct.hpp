@@ -49,6 +49,7 @@ namespace yli
                 zfar(5000.0f),          // visibility: from 1 to 5000 units.
                 is_physical(true),      // physics simulation in use.
                 is_headless(false),
+                is_silent(false),
                 input_method(yli::input::InputMethod::KEYBOARD)
             {
                 // constructor.
@@ -70,6 +71,7 @@ namespace yli
             float zfar;
             bool is_physical;
             bool is_headless;
+            bool is_silent;
             yli::input::InputMethod input_method;
         };
     }

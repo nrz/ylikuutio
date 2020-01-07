@@ -367,6 +367,7 @@ namespace yli
 
                     this->is_physical  = universe_struct.is_physical;
                     this->is_headless  = universe_struct.is_headless;
+                    this->is_silent    = universe_struct.is_silent;
 
                     // mouse coordinates.
                     this->mouse_x      = this->window_width / 2;
@@ -468,7 +469,14 @@ namespace yli
 
                     this->scheme_master = std::make_shared<yli::scheme::SchemeMaster>();
 
-                    this->audio_master = std::make_shared<yli::audio::AudioMaster>(this);
+                    if (this->is_silent)
+                    {
+                        this->audio_master = nullptr;
+                    }
+                    else
+                    {
+                        this->audio_master = std::make_shared<yli::audio::AudioMaster>(this);
+                    }
 
                     this->input_master = std::make_shared<yli::input::InputMaster>(this);
 
@@ -780,6 +788,7 @@ namespace yli
                 std::string window_title;
                 bool is_physical;
                 bool is_headless;
+                bool is_silent;
 
                 // variables related to the framebuffer.
                 uint32_t framebuffer;
