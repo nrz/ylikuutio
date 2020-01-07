@@ -19,6 +19,7 @@
 #define __TEXT2D_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "universe.hpp"
 #include "font2D.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -37,8 +38,6 @@ namespace yli
 {
     namespace ontology
     {
-        class Universe;
-
         class Text2D: public yli::ontology::Entity
         {
             public:
@@ -70,13 +69,18 @@ namespace yli
                     this->vertex_position_in_screenspaceID = 0;
                     this->vertexUVID                       = 0;
 
-                    // Initialize VBO.
-                    glGenBuffers(1, &this->vertexbuffer);
-                    glGenBuffers(1, &this->uvbuffer);
+                    const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
 
-                    // Get a handle for our buffers.
-                    this->vertex_position_in_screenspaceID = glGetAttribLocation(this->parent->get_programID(), "vertex_position_screenspace");
-                    this->vertexUVID = glGetAttribLocation(this->parent->get_programID(), "vertexUV");
+                    if (!is_headless)
+                    {
+                        // Initialize VBO.
+                        glGenBuffers(1, &this->vertexbuffer);
+                        glGenBuffers(1, &this->uvbuffer);
+
+                        // Get a handle for our buffers.
+                        this->vertex_position_in_screenspaceID = glGetAttribLocation(this->parent->get_programID(), "vertex_position_screenspace");
+                        this->vertexUVID = glGetAttribLocation(this->parent->get_programID(), "vertexUV");
+                    }
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Text2D*";

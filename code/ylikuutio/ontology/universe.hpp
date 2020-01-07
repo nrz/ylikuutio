@@ -367,6 +367,7 @@ namespace yli
 
                     this->is_physical  = universe_struct.is_physical;
                     this->is_headless  = universe_struct.is_headless;
+                    this->is_silent    = universe_struct.is_silent;
 
                     // mouse coordinates.
                     this->mouse_x      = this->window_width / 2;
@@ -419,19 +420,19 @@ namespace yli
                     this->twin_turbo_factor = universe_struct.twin_turbo_factor;
                     this->mouse_speed       = universe_struct.mouse_speed;
 
-                    this->znear       = universe_struct.znear;
-                    this->zfar        = universe_struct.zfar;
+                    this->znear             = universe_struct.znear;
+                    this->zfar              = universe_struct.zfar;
 
                     this->testing_spherical_terrain_in_use = false;
                     this->in_console                       = false;
                     this->in_help_mode                     = true;
                     this->can_display_help_screen          = true;
 
-                    this->number_of_entities = 0;
-                    this->number_of_worlds  = 0;
-                    this->number_of_font2Ds = 0;
-                    this->number_of_consoles = 0;
-                    this->number_of_any_value_entities = 0;
+                    this->number_of_entities            = 0;
+                    this->number_of_worlds              = 0;
+                    this->number_of_font2Ds             = 0;
+                    this->number_of_consoles            = 0;
+                    this->number_of_any_value_entities  = 0;
                     this->number_of_any_struct_entities = 0;
 
                     this->context = nullptr;
@@ -468,9 +469,24 @@ namespace yli
 
                     this->scheme_master = std::make_shared<yli::scheme::SchemeMaster>();
 
-                    this->audio_master = std::make_shared<yli::audio::AudioMaster>(this);
+                    if (this->is_silent)
+                    {
+                        this->audio_master = nullptr;
+                    }
+                    else
+                    {
+                        this->audio_master = std::make_shared<yli::audio::AudioMaster>(this);
+                    }
 
-                    this->input_master = std::make_shared<yli::input::InputMaster>(this);
+                    if (this->is_headless)
+                    {
+                        this->input_master = nullptr;
+                        this->is_exit_requested = true;
+                    }
+                    else
+                    {
+                        this->input_master = std::make_shared<yli::input::InputMaster>(this);
+                    }
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
@@ -780,6 +796,7 @@ namespace yli
                 std::string window_title;
                 bool is_physical;
                 bool is_headless;
+                bool is_silent;
 
                 // variables related to the framebuffer.
                 uint32_t framebuffer;

@@ -34,7 +34,8 @@ namespace yli
                 std::size_t& image_width,
                 std::size_t& image_height,
                 std::size_t& image_size,
-                uint32_t& textureID);
+                uint32_t& textureID,
+                const bool is_headless);
     }
 }
 

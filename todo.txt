@@ -47,7 +47,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Add support for exporting as .yli in `yli_convert`.
 [ ] Implement saving commands into a file that can later be loaded using command line parameter `--input-file` in Hirvi and Ajokki.
 [ ] Implement command line parameter `--input-file` to Hirvi and Ajokki (load keypresses and keyreleases from a file, e.g. `--input-file foo` or `--input-file=foo`).
-[ ] Implement command line parameter `--headless` to Hirvi and Ajokki (do not open any windows, do not render anything).
 [ ] Implement command line parameter `--debug` to Hirvi and Ajokki (log all kinds of debug information).
 [ ] Add `Scene` loading command `load` into console.
 [ ] Implement `LogMaster` class.
@@ -169,3 +168,4 @@ Ready:
 [x] Fix bug that only 2D text gets rendered when window width is less than window height.
 [x] Add support for changing window size.
 [x] Implement `yli::ontology::Brain` AI class.
+[x] Implement command line parameter `--headless` to Hirvi and Ajokki (do not open any windows, do not render anything).

@@ -121,7 +121,19 @@ int main(const int argc, const char* const argv[])
     }
 
     const std::vector<std::string> valid_keys {
-        "help", "version", "window_width", "window_height", "framebuffer_width", "framebuffer_height", "speed", "turbo_factor", "twin_turbo_factor", "mouse_speed" };
+        "help",
+        "version",
+        "silent",
+        "headless",
+        "window_width",
+        "window_height",
+        "framebuffer_width",
+        "framebuffer_height",
+        "speed",
+        "turbo_factor",
+        "twin_turbo_factor",
+        "mouse_speed"
+    };
 
     const std::vector<std::string> invalid_keys = command_line_master.get_invalid_keys(valid_keys);
 
@@ -145,6 +157,16 @@ int main(const int argc, const char* const argv[])
     std::stringstream window_title_stringstream;
     window_title_stringstream << "Ajokki " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
     universe_struct.window_title = window_title_stringstream.str();
+
+    if (command_line_master.is_key("silent"))
+    {
+        universe_struct.is_silent = true;
+    }
+
+    if (command_line_master.is_key("headless"))
+    {
+        universe_struct.is_headless = true;
+    }
 
     if (command_line_master.is_key("window_width") &&
             yli::string::check_if_unsigned_integer_string(command_line_master.get_value("window_width")))
@@ -223,32 +245,35 @@ int main(const int argc, const char* const argv[])
     yli::callback::CallbackEngine cleanup_callback_engine = yli::callback::CallbackEngine();
     cleanup_callback_engine.create_CallbackObject(nullptr);
 
-    if (my_universe->get_window() == nullptr)
+    if (!my_universe->get_is_headless() && my_universe->get_window() == nullptr)
     {
         std::cerr << "Failed to open SDL window.\n";
         cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
-    my_universe->create_context();
-
-    // Initialize GLEW.
-    if (!yli::opengl::init_glew())
+    if (!my_universe->get_is_headless())
     {
-        cleanup_callback_engine.execute(nullptr);
-        return -1;
+        my_universe->create_context();
+
+        // Initialize GLEW.
+        if (!yli::opengl::init_glew())
+        {
+            cleanup_callback_engine.execute(nullptr);
+            return -1;
+        }
+
+        yli::input::disable_cursor();
+        yli::input::enable_relative_mouse_mode();
+
+        // Enable depth test.
+        yli::opengl::enable_depth_test();
+        // Accept fragment if it is closer to the camera than the former one.
+        yli::opengl::set_depth_func_to_less();
+
+        // Cull triangles whose normal is not towards the camera.
+        yli::opengl::cull_triangles();
     }
-
-    yli::input::disable_cursor();
-    yli::input::enable_relative_mouse_mode();
-
-    // Enable depth test.
-    yli::opengl::enable_depth_test();
-    // Accept fragment if it is closer to the camera than the former one.
-    yli::opengl::set_depth_func_to_less();
-
-    // Cull triangles whose normal is not towards the camera.
-    yli::opengl::cull_triangles();
 
     // Create the main `Console`.
     std::cout << "Creating yli::ontology::Entity* my_console_entity ...\n";
@@ -999,9 +1024,12 @@ int main(const int argc, const char* const argv[])
 
     bool has_mouse_focus = true;
 
-    audio_master->add_to_playlist("Ajokki_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
-    audio_master->add_to_playlist("Ajokki_playlist", "414270__greek555__sample-97-bpm.wav");
-    audio_master->play_playlist("Ajokki_playlist");
+    if (audio_master != nullptr)
+    {
+        audio_master->add_to_playlist("Ajokki_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
+        audio_master->add_to_playlist("Ajokki_playlist", "414270__greek555__sample-97-bpm.wav");
+        audio_master->play_playlist("Ajokki_playlist");
+    }
 
     SDL_Event sdl_event;
     std::string ms_frame_text;
@@ -1120,11 +1148,17 @@ int main(const int argc, const char* const argv[])
                 my_universe->increment_last_time_to_display_FPS();
 
                 // Update audio also (in case the sound has reached the end).
-                audio_master->update();
+                if (audio_master != nullptr)
+                {
+                    audio_master->update();
+                }
             }
 
             // Clear the screen.
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            if (!my_universe->get_is_headless())
+            {
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            }
 
             my_universe->compute_delta_time();
 
@@ -1394,7 +1428,10 @@ int main(const int argc, const char* const argv[])
             }
 
             // Render the `Universe`.
-            my_universe->render();
+            if (!my_universe->get_is_headless())
+            {
+                my_universe->render();
+            }
 
             my_universe->finalize_delta_time_loop();
         }

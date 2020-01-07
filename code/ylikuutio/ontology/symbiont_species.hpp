@@ -18,6 +18,7 @@
 #ifndef __SYMBIONT_SPECIES_HPP_INCLUDED
 #define __SYMBIONT_SPECIES_HPP_INCLUDED
 
+#include "universe.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
 #include "species.hpp"
@@ -50,7 +51,6 @@ namespace yli
     namespace ontology
     {
         class Entity;
-        class Universe;
         class Biont;
 
         class SymbiontSpecies: public yli::ontology::Species
@@ -87,20 +87,25 @@ namespace yli
                         return;
                     }
 
-                    // Get a handle for our buffers.
-                    this->vertex_position_modelspaceID = glGetAttribLocation(this->shader->get_programID(), "vertex_position_modelspace");
-                    this->vertexUVID                   = glGetAttribLocation(this->shader->get_programID(), "vertexUV");
-                    this->vertex_normal_modelspaceID   = glGetAttribLocation(this->shader->get_programID(), "vertex_normal_modelspace");
+                    const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
 
-                    // Get a handle for our "LightPosition" uniform.
-                    glUseProgram(this->shader->get_programID());
-                    this->lightID = glGetUniformLocation(this->shader->get_programID(), "light_position_worldspace");
+                    if (!is_headless)
+                    {
+                        // Get a handle for our buffers.
+                        this->vertex_position_modelspaceID = glGetAttribLocation(this->shader->get_programID(), "vertex_position_modelspace");
+                        this->vertexUVID                   = glGetAttribLocation(this->shader->get_programID(), "vertexUV");
+                        this->vertex_normal_modelspaceID   = glGetAttribLocation(this->shader->get_programID(), "vertex_normal_modelspace");
 
-                    // water level.
-                    GLint water_level_uniform_location = glGetUniformLocation(this->shader->get_programID(), "water_level");
+                        // Get a handle for our "LightPosition" uniform.
+                        glUseProgram(this->shader->get_programID());
+                        this->lightID = glGetUniformLocation(this->shader->get_programID(), "light_position_worldspace");
 
-                    const yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(this->shader->get_parent());
-                    glUniform1f(water_level_uniform_location, scene->get_water_level());
+                        // water level.
+                        GLint water_level_uniform_location = glGetUniformLocation(this->shader->get_programID(), "water_level");
+
+                        const yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(this->shader->get_parent());
+                        glUniform1f(water_level_uniform_location, scene->get_water_level());
+                    }
 
                     // Fill the index buffer.
                     yli::opengl::indexVBO(
@@ -112,22 +117,25 @@ namespace yli
                             this->indexed_uvs,
                             this->indexed_normals);
 
-                    // Load it into a VBO.
-                    glGenBuffers(1, &this->vertexbuffer);
-                    glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
-                    glBufferData(GL_ARRAY_BUFFER, this->indexed_vertices.size() * sizeof(glm::vec3), &this->indexed_vertices[0], GL_STATIC_DRAW);
+                    if (!is_headless)
+                    {
+                        // Load it into a VBO.
+                        glGenBuffers(1, &this->vertexbuffer);
+                        glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
+                        glBufferData(GL_ARRAY_BUFFER, this->indexed_vertices.size() * sizeof(glm::vec3), &this->indexed_vertices[0], GL_STATIC_DRAW);
 
-                    glGenBuffers(1, &this->uvbuffer);
-                    glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
-                    glBufferData(GL_ARRAY_BUFFER, this->indexed_uvs.size() * sizeof(glm::vec2), &this->indexed_uvs[0], GL_STATIC_DRAW);
+                        glGenBuffers(1, &this->uvbuffer);
+                        glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
+                        glBufferData(GL_ARRAY_BUFFER, this->indexed_uvs.size() * sizeof(glm::vec2), &this->indexed_uvs[0], GL_STATIC_DRAW);
 
-                    glGenBuffers(1, &this->normalbuffer);
-                    glBindBuffer(GL_ARRAY_BUFFER, this->normalbuffer);
-                    glBufferData(GL_ARRAY_BUFFER, this->indexed_normals.size() * sizeof(glm::vec3), &this->indexed_normals[0], GL_STATIC_DRAW);
+                        glGenBuffers(1, &this->normalbuffer);
+                        glBindBuffer(GL_ARRAY_BUFFER, this->normalbuffer);
+                        glBufferData(GL_ARRAY_BUFFER, this->indexed_normals.size() * sizeof(glm::vec3), &this->indexed_normals[0], GL_STATIC_DRAW);
 
-                    glGenBuffers(1, &this->elementbuffer);
-                    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->elementbuffer);
-                    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(uint32_t), &this->indices[0] , GL_STATIC_DRAW);
+                        glGenBuffers(1, &this->elementbuffer);
+                        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->elementbuffer);
+                        glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(uint32_t), &this->indices[0] , GL_STATIC_DRAW);
+                    }
 
                     // TODO: Compute the vertex graph of this `SymbiontSpecies` to enable object vertex modification!
 

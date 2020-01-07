@@ -47,6 +47,7 @@ namespace yli
             // get `childID` from the `InputMaster` and set pointer to this `InputMode`.
             input_master->bind_InputMode(this);
         }
+
         InputMode::InputMode(yli::input::InputMaster* const input_master)
         {
             // constructor.

@@ -18,6 +18,7 @@
 #ifndef __GLYPH_HPP_INCLUDED
 #define __GLYPH_HPP_INCLUDED
 
+#include "universe.hpp"
 #include "species_or_glyph.hpp"
 #include "model.hpp"
 #include "glyph_struct.hpp"
@@ -94,8 +95,13 @@ namespace yli
                         std::cerr << "triangulation failed!\n";
                     }
 
-                    // Get a handle for our buffers.
-                    yli::ontology::store_gl_attrib_locations(glyph_struct.shader_pointer, this);
+                    const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
+
+                    if (!is_headless)
+                    {
+                        // Get a handle for our buffers.
+                        yli::ontology::store_gl_attrib_locations(glyph_struct.shader_pointer, this);
+                    }
 
                     // TODO: triangulate the vertex data!
 

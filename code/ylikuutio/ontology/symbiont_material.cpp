@@ -17,6 +17,7 @@
 
 #include "symbiont_material.hpp"
 #include "symbiont_species.hpp"
+#include "universe.hpp"
 #include "symbiosis.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
@@ -163,13 +164,18 @@ namespace yli
                 return;
             }
 
-            if (!yli::load::load_FBX_texture(texture, this->image_width, this->image_height, this->image_size, this->texture))
+            const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
+
+            if (!yli::load::load_FBX_texture(texture, this->image_width, this->image_height, this->image_size, this->texture, is_headless))
             {
                 std::cerr << "ERROR: loading FBX texture failed!\n";
             }
 
-            // Get a handle for our "texture_sampler" uniform.
-            this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "texture_sampler");
+            if (!is_headless)
+            {
+                // Get a handle for our "texture_sampler" uniform.
+                this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "texture_sampler");
+            }
         }
 
         uint32_t SymbiontMaterial::get_texture() const

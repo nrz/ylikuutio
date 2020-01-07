@@ -43,6 +43,7 @@ namespace yli
     namespace ontology
     {
         class Entity;
+        class Universe;
         class SymbiontSpecies;
 
         class SymbiontMaterial: public yli::ontology::Material
@@ -59,6 +60,9 @@ namespace yli
                     this->parent                     = material_struct.symbiosis;
                     this->ofbx_texture               = material_struct.ofbx_texture;
                     this->number_of_symbiont_species = 0;
+
+                    this->texture                    = 0; // dummy value.
+                    this->openGL_textureID           = 0; // dummy value.
 
                     // get `childID` from the `Symbiosis` and set pointer to this `SymbiontMaterial`.
                     this->bind_to_parent();

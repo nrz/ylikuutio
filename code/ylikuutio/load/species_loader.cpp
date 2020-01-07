@@ -173,7 +173,8 @@ namespace yli
 
             opengl_in_use = species_loader_struct.opengl_in_use;
 
-            if (opengl_in_use &&
+            if (!species_loader_struct.is_headless &&
+                    opengl_in_use &&
                     vertexbuffer != nullptr &&
                     uvbuffer != nullptr &&
                     normalbuffer != nullptr &&
