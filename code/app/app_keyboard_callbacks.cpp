@@ -25,7 +25,6 @@
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 
@@ -85,15 +84,7 @@ namespace app
             return false;
         }
 
-        yli::ontology::World* const world = universe->get_active_world();
-
-        if (world == nullptr)
-        {
-            // No active `World`.
-            return false;
-        }
-
-        const yli::ontology::Scene* const scene = universe->get_active_world()->get_active_scene();
+        const yli::ontology::Scene* const scene = universe->get_active_scene();
 
         if (scene == nullptr)
         {
@@ -396,14 +387,7 @@ namespace app
 
         if (universe->can_toggle_flight_mode)
         {
-            yli::ontology::World* const world = universe->get_active_world();
-
-            if (world == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::ontology::Scene* const scene = world->get_active_scene();
+            yli::ontology::Scene* const scene = universe->get_active_scene();
 
             if (scene == nullptr)
             {

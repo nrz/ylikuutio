@@ -48,6 +48,7 @@ namespace yli
                 znear(1.0f),
                 zfar(5000.0f),          // visibility: from 1 to 5000 units.
                 is_physical(true),      // physics simulation in use.
+                is_fullscreen(false),   // windowed mode in use.
                 is_headless(false),
                 is_silent(false),
                 input_method(yli::input::InputMethod::KEYBOARD)
@@ -70,6 +71,7 @@ namespace yli
             float znear;
             float zfar;
             bool is_physical;
+            bool is_fullscreen;
             bool is_headless;
             bool is_silent;
             yli::input::InputMethod input_method;

@@ -269,9 +269,9 @@ namespace yli
 
         void Universe::do_physics()
         {
-            if (this->active_world != nullptr)
+            if (this->active_scene != nullptr)
             {
-                this->active_world->do_physics();
+                this->active_scene->do_physics();
             }
 
             this->compute_and_update_matrices_from_inputs();
@@ -279,9 +279,9 @@ namespace yli
 
         void Universe::act()
         {
-            if (this->active_world != nullptr)
+            if (this->active_scene != nullptr)
             {
-                this->active_world->act();
+                this->active_scene->act();
             }
         }
 
@@ -299,10 +299,10 @@ namespace yli
 
             this->prerender();
 
-            if (this->active_world != nullptr)
+            if (this->active_scene != nullptr)
             {
                 // Render this `Universe` by calling `render()` function of the active `World`.
-                this->active_world->render();
+                this->active_scene->render();
             }
 
             yli::opengl::disable_depth_test();
@@ -333,10 +333,10 @@ namespace yli
 
             this->prerender();
 
-            if (this->active_world != nullptr)
+            if (this->active_scene != nullptr)
             {
                 // Render this `Universe` by calling `render()` function of the active `World`.
-                this->active_world->render();
+                this->active_scene->render();
             }
 
             if (this->active_console != nullptr)
@@ -354,31 +354,14 @@ namespace yli
             this->postrender();
         }
 
-        void Universe::set_active_world(yli::ontology::World* const world)
-        {
-            this->active_world = world;
-
-            if (this->active_world != nullptr && this->active_world->get_active_scene() != nullptr)
-            {
-                this->turbo_factor = this->active_world->get_active_scene()->get_turbo_factor();
-                this->twin_turbo_factor = this->active_world->get_active_scene()->get_twin_turbo_factor();
-            }
-        }
-
         void Universe::set_active_scene(yli::ontology::Scene* const scene)
         {
-            if (this->active_world == nullptr)
-            {
-                // No active `World`.
-                return;
-            }
+            this->active_scene = scene;
 
-            this->active_world->set_active_scene(scene);
-
-            if (this->active_world->get_active_scene() != nullptr)
+            if (this->active_scene != nullptr)
             {
-                this->turbo_factor = this->active_world->get_active_scene()->get_turbo_factor();
-                this->twin_turbo_factor = this->active_world->get_active_scene()->get_twin_turbo_factor();
+                this->turbo_factor = this->active_scene->get_turbo_factor();
+                this->twin_turbo_factor = this->active_scene->get_twin_turbo_factor();
             }
         }
 
@@ -426,9 +409,9 @@ namespace yli
             return this->number_of_worlds;
         }
 
-        yli::ontology::World* Universe::get_active_world() const
+        yli::ontology::Scene* Universe::get_active_scene() const
         {
-            return this->active_world;
+            return this->active_scene;
         }
 
         yli::ontology::Entity* Universe::get_parent() const
@@ -757,38 +740,25 @@ namespace yli
                 }
 
                 yli::ontology::Entity* entity = universe->entity_map[name];
-                yli::ontology::World* const world = dynamic_cast<yli::ontology::World*>(entity);
                 yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(entity);
                 yli::ontology::Camera* const camera = dynamic_cast<yli::ontology::Camera*>(entity);
                 yli::ontology::Console* const console = dynamic_cast<yli::ontology::Console*>(entity);
 
                 uint32_t number_of_entity_types = 0;
-                number_of_entity_types += world != nullptr ? 1 : 0;
                 number_of_entity_types += scene != nullptr ? 1 : 0;
                 number_of_entity_types += camera != nullptr ? 1 : 0;
                 number_of_entity_types += console != nullptr ? 1 : 0;
 
                 if (number_of_entity_types != 1)
                 {
-                    // The named `Entity` is neither a `World`, a `Scene`, a `Camera`, nor a `Console`.
+                    // The named `Entity` is neither a `Scene`, a `Camera`, nor a `Console`.
                     return nullptr;
                 }
 
-                if (world != nullptr)
-                {
-                    // The named `Entity` is a `World`.
-                    universe->set_active_world(world);
-                }
-                else if (scene != nullptr)
+                if (scene != nullptr)
                 {
                     // The named `Entity` is a `Scene`.
-                    yli::ontology::World* const world_parent_of_scene = scene->get_world_parent();
-
-                    if (world_parent_of_scene != nullptr)
-                    {
-                        universe->set_active_world(world_parent_of_scene);
-                        universe->set_active_scene(scene);
-                    }
+                    universe->set_active_scene(scene);
                 }
                 else if (camera != nullptr)
                 {

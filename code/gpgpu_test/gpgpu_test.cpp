@@ -123,9 +123,6 @@ int main(const int argc, const char* const argv[])
         return -1;
     }
 
-    std::cout << "Setting gpgpu_test_world as the active world ...\n";
-    my_universe->set_active_world(gpgpu_test_world);
-
     // Create the `Scene`s.
 
     // GPGPU test `Scene` begins here.
@@ -147,9 +144,9 @@ int main(const int argc, const char* const argv[])
         return -1;
     }
 
-    // Set `gpgpu_test_scene` to be the currently active `Scene` in `gpgpu_test_world`.
+    // Set `gpgpu_test_scene` to be the currently active `Scene`.
     std::cout << "Setting gpgpu_test_scene as the active scene ...\n";
-    gpgpu_test_world->set_active_scene(gpgpu_test_scene);
+    my_universe->set_active_scene(gpgpu_test_scene);
 
     // GPGPU test `Scene` ends here.
 

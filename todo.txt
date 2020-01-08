@@ -7,7 +7,6 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
-[ ] Implement fullscreen mode.
 [ ] Implement creating new named variables in `SettingMaster` using `Console`.
 [ ] Implement creating new named `AnyStruct`s of a given type using `Console`.
 [ ] Implement creating new named Entities using `Console`, with a named `AnyStruct` of correct type as input.
@@ -169,3 +168,4 @@ Ready:
 [x] Add support for changing window size.
 [x] Implement `yli::ontology::Brain` AI class.
 [x] Implement command line parameter `--headless` to Hirvi and Ajokki (do not open any windows, do not render anything).
+[x] Implement fullscreen mode.

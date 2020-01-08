@@ -25,7 +25,7 @@ namespace yli
     namespace sdl
     {
         bool init_SDL();
-        SDL_Window* create_window(const int window_width, const int window_height, const char* const title);
+        SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen);
         void set_window_size(SDL_Window* window, const int window_width, const int window_height);
         int set_window_windowed(SDL_Window* window);
         void make_context_current(SDL_Window* window, SDL_GLContext context);

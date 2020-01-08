@@ -92,7 +92,6 @@ namespace yli
                     // constructor.
 
                     this->parent       = universe;
-                    this->active_scene = nullptr;
 
                     this->number_of_scenes = 0;
 
@@ -111,20 +110,6 @@ namespace yli
                 // destructor.
                 virtual ~World();
 
-                // this method processes the physics.
-                void do_physics();
-
-                // Intentional actors (AIs and keyboard controlled ones).
-                void act();
-
-                // This method renders the active `Scene` of this `World`.
-                void render();
-
-                // This method sets the active `Scene`.
-                void set_active_scene(yli::ontology::Scene* const scene);
-
-                yli::ontology::Scene* get_active_scene() const;
-
                 yli::ontology::Entity* get_parent() const override;
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
@@ -140,8 +125,6 @@ namespace yli
                 std::vector<yli::ontology::Scene*> scene_pointer_vector;
                 std::queue<std::size_t> free_sceneID_queue;
                 std::size_t number_of_scenes;
-
-                yli::ontology::Scene* active_scene;
         };
     }
 }
