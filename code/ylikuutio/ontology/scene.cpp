@@ -158,12 +158,6 @@ namespace yli
                 return;
             }
 
-            if (world->get_active_scene() == this)
-            {
-                // Make this `Scene` no more the active `Scene`.
-                this->parent->set_active_scene(nullptr);
-            }
-
             // set pointer to this `Scene` to `nullptr`.
             world->unbind_Scene(this->childID);
         }
@@ -270,14 +264,7 @@ namespace yli
                 return;
             }
 
-            yli::ontology::World* const active_world = this->universe->get_active_world();
-
-            if (active_world == nullptr)
-            {
-                return;
-            }
-
-            yli::ontology::Scene* const active_scene = active_world->get_active_scene();
+            yli::ontology::Scene* const active_scene = this->universe->get_active_scene();
 
             if (active_scene == nullptr)
             {
@@ -325,10 +312,8 @@ namespace yli
 
         float Scene::get_turbo_factor() const
         {
-            if (this->parent != nullptr &&
-                    this->universe != nullptr &&
-                    this->parent == this->universe->get_active_world() &&
-                    this == this->parent->get_active_scene())
+            if (this->universe != nullptr &&
+                    this == this->universe->get_active_scene())
             {
                 return this->universe->turbo_factor;
             }
@@ -340,10 +325,8 @@ namespace yli
         {
             this->turbo_factor = turbo_factor;
 
-            if (this->parent != nullptr &&
-                    this->universe != nullptr &&
-                    this->parent == this->universe->get_active_world() &&
-                    this == this->parent->get_active_scene())
+            if (this->universe != nullptr &&
+                    this == this->universe->get_active_scene())
             {
                 this->universe->turbo_factor = this->turbo_factor;
             }
@@ -351,10 +334,8 @@ namespace yli
 
         float Scene::get_twin_turbo_factor() const
         {
-            if (this->parent != nullptr &&
-                    this->universe != nullptr &&
-                    this->parent == this->universe->get_active_world() &&
-                    this == this->parent->get_active_scene())
+            if (this->universe != nullptr &&
+                    this == this->universe->get_active_scene())
             {
                 return this->universe->twin_turbo_factor;
             }
@@ -366,10 +347,8 @@ namespace yli
         {
             this->twin_turbo_factor = twin_turbo_factor;
 
-            if (this->parent != nullptr &&
-                    this->universe != nullptr &&
-                    this->parent == this->universe->get_active_world() &&
-                    this == this->parent->get_active_scene())
+            if (this->universe != nullptr &&
+                    this == this->universe->get_active_scene())
             {
                 this->universe->twin_turbo_factor = this->twin_turbo_factor;
             }
@@ -397,10 +376,8 @@ namespace yli
 
         yli::ontology::Species* Scene::get_terrain_species() const
         {
-            if (this->parent != nullptr &&
-                    this->universe != nullptr &&
-                    this->parent == this->universe->get_active_world() &&
-                    this == this->parent->get_active_scene())
+            if (this->universe != nullptr &&
+                    this == this->universe->get_active_scene())
             {
                 return this->terrain_species;
             }

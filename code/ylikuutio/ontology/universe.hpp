@@ -339,7 +339,7 @@ namespace yli
                     this->current_camera_spherical_coordinates.theta = NAN; // dummy coordinates.
                     this->current_camera_spherical_coordinates.phi   = NAN; // dummy coordinates.
 
-                    this->active_world     = nullptr;
+                    this->active_scene     = nullptr;
                     this->active_font2D    = nullptr;
                     this->active_console   = nullptr;
                     this->scheme_master    = nullptr;
@@ -520,9 +520,6 @@ namespace yli
                 // this method renders the active `Scene` of this `Universe`.
                 void render_without_changing_depth_test();
 
-                // this method sets the active `World`.
-                void set_active_world(yli::ontology::World* const world);
-
                 // this method sets the active `Scene`.
                 void set_active_scene(yli::ontology::Scene* const world);
 
@@ -549,7 +546,7 @@ namespace yli
 
                 std::size_t get_number_of_worlds() const;
 
-                yli::ontology::World* get_active_world() const;
+                yli::ontology::Scene* get_active_scene() const;
 
                 yli::ontology::Entity* get_parent() const override;
                 std::size_t get_number_of_children() const override;
@@ -775,7 +772,7 @@ namespace yli
                 std::queue<std::size_t> free_callback_engine_entityID_queue;
                 std::size_t number_of_callback_engine_entities;
 
-                yli::ontology::World* active_world;
+                yli::ontology::Scene* active_scene;
                 yli::ontology::Font2D* active_font2D;
                 yli::ontology::Console* active_console;
 

@@ -304,9 +304,6 @@ int main(const int argc, const char* const argv[])
         return -1;
     }
 
-    std::cout << "Setting earth_world as the active world ...\n";
-    my_universe->set_active_world(earth_world);
-
     // Create the `Scene`s.
     // The `Scene`s will be created in the following order:
     // 1. Helsinki
@@ -332,9 +329,9 @@ int main(const int argc, const char* const argv[])
         return -1;
     }
 
-    // Set `helsinki_east_downtown_scene` to be the currently active `Scene` in `earth_world`.
+    // Set `helsinki_east_downtown_scene` to be the currently active `Scene`.
     std::cout << "Setting helsinki_east_downtown_scene as the active scene ...\n";
-    earth_world->set_active_scene(helsinki_east_downtown_scene);
+    my_universe->set_active_scene(helsinki_east_downtown_scene);
 
     // Helsinki `Scene` ends here.
 
@@ -1069,8 +1066,7 @@ int main(const int argc, const char* const argv[])
                 if (my_universe->in_help_mode && my_universe->can_display_help_screen)
                 {
                     std::stringstream help_text_stringstream;
-                    yli::ontology::World* const world = my_universe->get_active_world();
-                    yli::ontology::Scene* const scene = (world == nullptr ? nullptr : world->get_active_scene());
+                    yli::ontology::Scene* const scene = (my_universe == nullptr ? nullptr : my_universe->get_active_scene());
                     help_text_stringstream <<
                         "Hirvi " << yli::ontology::Universe::version << "\n"
                         "\n"
