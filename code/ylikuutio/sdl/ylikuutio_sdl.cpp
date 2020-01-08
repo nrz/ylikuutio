@@ -42,9 +42,22 @@ namespace yli
             return true;
         }
 
-        SDL_Window* create_window(const int window_width, const int window_height, const char* const title)
+        SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen)
         {
-            return SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, SDL_WINDOW_OPENGL);
+            Uint32 flags = SDL_WINDOW_OPENGL; // `Uint32` is a SDL datatype.
+
+            if (is_fullscreen)
+            {
+                flags |= SDL_WINDOW_FULLSCREEN;
+            }
+
+            return SDL_CreateWindow(
+                    title,
+                    SDL_WINDOWPOS_CENTERED,
+                    SDL_WINDOWPOS_CENTERED,
+                    window_width,
+                    window_height,
+                    flags);
         }
 
         void set_window_size(SDL_Window* window, const int window_width, const int window_height)

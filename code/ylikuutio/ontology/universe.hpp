@@ -366,6 +366,7 @@ namespace yli
                     }
 
                     this->is_physical  = universe_struct.is_physical;
+                    this->is_fullscreen = universe_struct.is_fullscreen;
                     this->is_headless  = universe_struct.is_headless;
                     this->is_silent    = universe_struct.is_silent;
 
@@ -452,7 +453,8 @@ namespace yli
                         this->window = yli::sdl::create_window(
                                 static_cast<int>(this->window_width),
                                 static_cast<int>(this->window_height),
-                                this->window_title.c_str());
+                                this->window_title.c_str(),
+                                this->is_fullscreen);
 
                         if (this->window == nullptr)
                         {
@@ -795,6 +797,7 @@ namespace yli
                 std::size_t framebuffer_height;
                 std::string window_title;
                 bool is_physical;
+                bool is_fullscreen;
                 bool is_headless;
                 bool is_silent;
 

@@ -117,6 +117,7 @@ int main(const int argc, const char* const argv[])
         "help",
         "version",
         "silent",
+        "fullscreen",
         "headless",
         "window_width",
         "window_height",
@@ -154,6 +155,11 @@ int main(const int argc, const char* const argv[])
     if (command_line_master.is_key("silent"))
     {
         universe_struct.is_silent = true;
+    }
+
+    if (command_line_master.is_key("fullscreen"))
+    {
+        universe_struct.is_fullscreen = true;
     }
 
     if (command_line_master.is_key("headless"))
