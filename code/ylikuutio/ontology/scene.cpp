@@ -147,6 +147,12 @@ namespace yli
             std::cout << "All brains of this scene will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Brain*>(this->brain_pointer_vector, this->number_of_brains);
 
+            if (this->universe != nullptr && this->universe->get_active_scene() == this)
+            {
+                // Set active `Scene` to `nullptr`.
+                this->universe->set_active_scene(nullptr);
+            }
+
             // requirements for further actions:
             // `this->parent` must not be `nullptr`.
 
