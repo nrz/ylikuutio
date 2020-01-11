@@ -392,3 +392,60 @@ TEST(scene_must_be_activated_appropriately, scene)
     universe->set_active_scene(scene);
     ASSERT_EQ(universe->get_active_scene(), scene);
 }
+
+TEST(scene_must_be_bound_to_worlds_appropriately, scene)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world1 = new yli::ontology::World(universe);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world1;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct);
+    ASSERT_EQ(scene->get_parent(), world1);
+    ASSERT_EQ(world1->get_number_of_children(), 1);
+
+    yli::ontology::World* const world2 = new yli::ontology::World(universe);
+    ASSERT_EQ(world2->get_number_of_children(), 0);
+
+    scene->bind_to_new_parent(world2);
+    ASSERT_EQ(scene->get_parent(), world2);
+    ASSERT_EQ(world1->get_number_of_children(), 0);
+    ASSERT_EQ(world2->get_number_of_children(), 1);
+}
+
+TEST(active_scene_must_remain_active_scene_after_binding_to_a_new_parent, scene)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world1 = new yli::ontology::World(universe);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world1;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct);
+    universe->set_active_scene(scene);
+    ASSERT_EQ(universe->get_active_scene(), scene);
+
+    yli::ontology::World* const world2 = new yli::ontology::World(universe);
+    scene->bind_to_new_parent(world2);
+    ASSERT_EQ(universe->get_active_scene(), scene);
+}
+
+TEST(inactive_scene_must_remain_inactive_scene_after_binding_to_a_new_parent, scene)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world1 = new yli::ontology::World(universe);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world1;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct);
+    ASSERT_EQ(universe->get_active_scene(), nullptr);
+
+    yli::ontology::World* const world2 = new yli::ontology::World(universe);
+    scene->bind_to_new_parent(world2);
+    ASSERT_EQ(universe->get_active_scene(), nullptr);
+}
