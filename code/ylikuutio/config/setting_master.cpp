@@ -27,6 +27,7 @@
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
+#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -64,6 +65,10 @@ namespace yli
         SettingMaster::~SettingMaster()
         {
             // destructor.
+
+            // destroy all `Setting`s of this `SettingMaster`.
+            std::cout << "All `Setting`s of this `SettingMaster` will be destroyed.\n";
+            yli::hierarchy::delete_children<yli::config::Setting*>(this->setting_pointer_vector, this->number_of_settings);
         }
 
         void SettingMaster::create_Setting(const yli::config::SettingStruct& setting_struct)
