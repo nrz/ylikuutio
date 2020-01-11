@@ -26,7 +26,7 @@ OpenGL 3.0 or newer is required.
 ## Articles
 In [Skrolli 2018.4](https://skrolli.fi/numerot/2018-4/) there is an article
 "Pelimoottori harrastusprojektina" (in Finnish, translation: "Game engine
-as a hobby project").
+as a hobby project"). Skrolli 2018.4 can be freely downloaded as PDF.
 
 In [Skrolli 2019.2](https://skrolli.fi/numerot/2019-2/) there is an article
 "GPGPU-laskenta" (in Finnish, translation: "GPGPU computation").
