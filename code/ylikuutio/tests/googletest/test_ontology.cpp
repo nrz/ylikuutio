@@ -365,6 +365,7 @@ TEST(brain_must_be_initialized_appropriately, brain)
     ASSERT_EQ(scene->get_number_of_descendants(), 1);
 
     // `Brain` member functions.
+    ASSERT_EQ(brain->get_number_of_apprentices(), 0);
 
     // `Entity` member functions.
     ASSERT_EQ(brain->get_childID(), 0);
