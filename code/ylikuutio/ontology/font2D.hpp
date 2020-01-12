@@ -88,11 +88,20 @@ namespace yli
                     this->image_size                       = 0;
 
                     const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
+                    bool is_texture_loading_successful = false;
 
                     // Initialize texture.
                     if (this->font_texture_file_format == "bmp" || this->font_texture_file_format == "BMP")
                     {
-                        if (!yli::load::load_BMP_texture(texture_filename, this->image_width, this->image_height, this->image_size, this->texture, is_headless))
+                        is_texture_loading_successful = yli::load::load_BMP_texture(
+                                texture_filename,
+                                this->image_width,
+                                this->image_height,
+                                this->image_size,
+                                this->texture,
+                                is_headless);
+
+                        if (!is_texture_loading_successful)
                         {
                             std::cerr << "ERROR: loading BMP texture failed!\n";
                         }
@@ -101,10 +110,9 @@ namespace yli
                     {
                         std::cerr << "ERROR: invalid font texture file format: " << this->font_texture_file_format << "\n";
                         std::cerr << "supported font texture file formats: bmp, BMP.\n";
-                        return;
                     }
 
-                    if (!is_headless)
+                    if (!is_headless && is_texture_loading_successful)
                     {
                         // Initialize VBO.
                         glGenBuffers(1, &this->vertexbuffer);
