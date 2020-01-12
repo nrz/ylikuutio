@@ -407,6 +407,7 @@ TEST(scene_must_bind_to_worlds_appropriately, scene)
     ASSERT_EQ(world1->get_number_of_children(), 1);
 
     yli::ontology::World* const world2 = new yli::ontology::World(universe);
+    ASSERT_EQ(scene->get_parent(), world1);
     ASSERT_EQ(world2->get_number_of_children(), 0);
 
     scene->bind_to_new_parent(world2);
@@ -431,6 +432,9 @@ TEST(active_scene_must_remain_active_scene_after_binding_to_a_new_parent, scene)
     yli::ontology::World* const world2 = new yli::ontology::World(universe);
     scene->bind_to_new_parent(world2);
     ASSERT_EQ(universe->get_active_scene(), scene);
+    ASSERT_EQ(scene->get_parent(), world2);
+    ASSERT_EQ(world1->get_number_of_children(), 0);
+    ASSERT_EQ(world2->get_number_of_children(), 1);
 }
 
 TEST(inactive_scene_must_remain_inactive_scene_after_binding_to_a_new_parent, scene)
@@ -448,4 +452,7 @@ TEST(inactive_scene_must_remain_inactive_scene_after_binding_to_a_new_parent, sc
     yli::ontology::World* const world2 = new yli::ontology::World(universe);
     scene->bind_to_new_parent(world2);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
+    ASSERT_EQ(scene->get_parent(), world2);
+    ASSERT_EQ(world1->get_number_of_children(), 0);
+    ASSERT_EQ(world2->get_number_of_children(), 1);
 }
