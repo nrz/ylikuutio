@@ -90,6 +90,8 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
+                std::size_t get_number_of_apprentices() const;
+
                 void act();
 
                 template<class T1>

@@ -113,6 +113,11 @@ namespace yli
             return 0; // `Brain` has no children. `Movable`s controlled by `Brain` are not its children.
         }
 
+        std::size_t Brain::get_number_of_apprentices() const
+        {
+            return this->number_of_movables; // `Movable`s controlled by `Brain` are its apprentices.
+        }
+
         void Brain::act()
         {
             if (this->callback_engine == nullptr)
