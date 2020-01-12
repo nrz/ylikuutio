@@ -439,34 +439,36 @@ namespace yli
                     this->context = nullptr;
                     this->window  = nullptr;
 
-                    // Initialise SDL
-                    if (!yli::sdl::init_SDL())
-                    {
-                        std::cerr << "Failed to initialize SDL.\n";
-                        return;
-                    }
-
                     if (!this->is_headless)
                     {
-                        // Open a window and create its OpenGL context.
-                        std::cout << "Opening a window and creating its OpenGL context...\n";
-                        this->window = yli::sdl::create_window(
-                                static_cast<int>(this->window_width),
-                                static_cast<int>(this->window_height),
-                                this->window_title.c_str(),
-                                this->is_fullscreen);
-
-                        if (this->window == nullptr)
+                        // Initialise SDL
+                        if (!yli::sdl::init_SDL())
                         {
-                            std::cerr << "SDL Window could not be created!\n";
+                            std::cerr << "Failed to initialize SDL.\n";
+                            this->is_headless = true;
                         }
+                        else
+                        {
+                            // Open a window and create its OpenGL context.
+                            std::cout << "Opening a window and creating its OpenGL context...\n";
+                            this->window = yli::sdl::create_window(
+                                    static_cast<int>(this->window_width),
+                                    static_cast<int>(this->window_height),
+                                    this->window_title.c_str(),
+                                    this->is_fullscreen);
 
-                        this->create_context();
-                        this->make_context_current();
+                            if (this->window == nullptr)
+                            {
+                                std::cerr << "SDL Window could not be created!\n";
+                            }
 
-                        // Disable vertical sync.
-                        // TODO: add option to enable/disable vsync in the console.
-                        SDL_GL_SetSwapInterval(0);
+                            this->create_context();
+                            this->make_context_current();
+
+                            // Disable vertical sync.
+                            // TODO: add option to enable/disable vsync in the console.
+                            SDL_GL_SetSwapInterval(0);
+                        }
                     }
 
                     this->scheme_master = std::make_shared<yli::scheme::SchemeMaster>();
