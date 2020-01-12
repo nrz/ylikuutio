@@ -26,6 +26,12 @@ https://semver.org/spec/v2.0.0.html
 * Support for `InputMode`s.
 * `Console` is an `Entity` and there can be multiple `Console`s.
 
+0.0.6
+* `Brain` entities provide AI functionality.
+* Silent mode.
+* Headless mode.
+* Fullscreen mode.
+
 Future versions:
 
 0.0.x

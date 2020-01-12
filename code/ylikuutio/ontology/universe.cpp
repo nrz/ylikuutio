@@ -96,7 +96,7 @@ namespace yli
 
     namespace ontology
     {
-        const std::string Universe::version = "0.0.5";
+        const std::string Universe::version = "0.0.6";
 
         void Universe::bind_Entity(yli::ontology::Entity* const entity)
         {
