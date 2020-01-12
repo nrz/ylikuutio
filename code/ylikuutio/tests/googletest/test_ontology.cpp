@@ -393,7 +393,7 @@ TEST(scene_must_be_activated_appropriately, scene)
     ASSERT_EQ(universe->get_active_scene(), scene);
 }
 
-TEST(scene_must_be_bound_to_worlds_appropriately, scene)
+TEST(scene_must_bind_to_worlds_appropriately, scene)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
