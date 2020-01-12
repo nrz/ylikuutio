@@ -456,3 +456,72 @@ TEST(inactive_scene_must_remain_inactive_scene_after_binding_to_a_new_parent, sc
     ASSERT_EQ(world1->get_number_of_children(), 0);
     ASSERT_EQ(world2->get_number_of_children(), 1);
 }
+
+TEST(shader_must_bind_to_scene_appropriately, scenes_of_the_same_world)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene1;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    ASSERT_EQ(shader->get_parent(), scene1);
+    ASSERT_EQ(scene1->get_number_of_children(), 1);
+
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct);
+    ASSERT_EQ(shader->get_parent(), scene1);
+    ASSERT_EQ(scene2->get_number_of_children(), 0);
+
+    shader->bind_to_new_parent(scene2);
+    ASSERT_EQ(shader->get_parent(), scene2);
+    ASSERT_EQ(world->get_number_of_children(), 2);
+    ASSERT_EQ(world->get_number_of_descendants(), 3);
+    ASSERT_EQ(scene1->get_number_of_children(), 0);
+    ASSERT_EQ(scene2->get_number_of_children(), 1);
+}
+
+TEST(shader_must_bind_to_scene_appropriately, scenes_of_the_different_worlds)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world1 = new yli::ontology::World(universe);
+
+    yli::ontology::SceneStruct scene_struct1;
+    scene_struct1.world = world1;
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct1);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene1;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    ASSERT_EQ(shader->get_parent(), scene1);
+    ASSERT_EQ(scene1->get_number_of_children(), 1);
+
+    yli::ontology::World* const world2 = new yli::ontology::World(universe);
+
+    yli::ontology::SceneStruct scene_struct2;
+    scene_struct2.world = world2;
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct2);
+    ASSERT_EQ(shader->get_parent(), scene1);
+    ASSERT_EQ(world2->get_number_of_children(), 1);
+    ASSERT_EQ(world2->get_number_of_descendants(), 1);
+    ASSERT_EQ(scene2->get_number_of_children(), 0);
+    ASSERT_EQ(scene2->get_number_of_descendants(), 0);
+
+    shader->bind_to_new_parent(scene2);
+    ASSERT_EQ(shader->get_parent(), scene2);
+    ASSERT_EQ(world1->get_number_of_children(), 1);
+    ASSERT_EQ(world1->get_number_of_descendants(), 1);
+    ASSERT_EQ(world2->get_number_of_children(), 1);
+    ASSERT_EQ(world2->get_number_of_descendants(), 2);
+    ASSERT_EQ(scene1->get_number_of_children(), 0);
+    ASSERT_EQ(scene1->get_number_of_descendants(), 0);
+    ASSERT_EQ(scene2->get_number_of_children(), 1);
+    ASSERT_EQ(scene2->get_number_of_descendants(), 1);
+}
