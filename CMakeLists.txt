@@ -852,6 +852,9 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/brain.hpp
         code/ylikuutio/ontology/brain_struct.hpp
         code/ylikuutio/ontology/glyph_struct.hpp
+        code/ylikuutio/ontology/holobiont.cpp
+        code/ylikuutio/ontology/holobiont.hpp
+        code/ylikuutio/ontology/holobiont_struct.hpp
         code/ylikuutio/ontology/material.cpp
         code/ylikuutio/ontology/material.hpp
         code/ylikuutio/ontology/material_struct.hpp
@@ -867,6 +870,9 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/species.cpp
         code/ylikuutio/ontology/species.hpp
         code/ylikuutio/ontology/species_struct.hpp
+        code/ylikuutio/ontology/symbiosis.cpp
+        code/ylikuutio/ontology/symbiosis.hpp
+        code/ylikuutio/ontology/symbiosis_struct.hpp
         code/ylikuutio/ontology/text3D_struct.hpp
         code/ylikuutio/ontology/vector_font_struct.hpp
         code/ylikuutio/ontology/universe.cpp

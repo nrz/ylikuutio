@@ -24,6 +24,8 @@
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
+#include "code/ylikuutio/ontology/symbiosis.hpp"
+#include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
@@ -31,6 +33,8 @@
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/species_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
+#include "code/ylikuutio/ontology/symbiosis_struct.hpp"
+#include "code/ylikuutio/ontology/holobiont_struct.hpp"
 #include "code/ylikuutio/ontology/brain_struct.hpp"
 #include "code/ylikuutio/scheme/scheme_master.cpp"
 #include "code/ylikuutio/scheme/scheme_master.hpp"
@@ -72,7 +76,7 @@ TEST(universe_must_be_initialized_appropriately, headless)
     ASSERT_EQ(universe->get_number_of_descendants(), 0);
 }
 
-TEST(world_must_be_initialized_appropriately, world)
+TEST(world_must_be_initialized_appropriately, headless)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
@@ -99,7 +103,22 @@ TEST(world_must_be_initialized_appropriately, world)
     ASSERT_EQ(world->get_number_of_descendants(), 0);
 }
 
-TEST(scene_must_be_initialized_appropriately, scene)
+TEST(world_must_be_initialized_appropriately, no_universe)
+{
+    yli::ontology::World* const world = new yli::ontology::World(nullptr);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(world->get_type(), "yli::ontology::World*");
+    ASSERT_TRUE(world->get_can_be_erased());
+    ASSERT_EQ(world->get_universe(), nullptr);
+    ASSERT_NE(world->get_setting_master(), nullptr);
+    ASSERT_EQ(world->get_parent(), nullptr);
+    ASSERT_EQ(world->get_number_of_children(), 0);
+    ASSERT_EQ(world->get_number_of_descendants(), 0);
+}
+
+TEST(scene_must_be_initialized_appropriately, headless)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
@@ -133,7 +152,47 @@ TEST(scene_must_be_initialized_appropriately, scene)
     ASSERT_EQ(scene->get_number_of_descendants(), 0);
 }
 
-TEST(shader_must_be_initialized_appropriately, shader)
+TEST(scene_must_be_initialized_appropriately, no_universe)
+{
+    yli::ontology::World* const world = new yli::ontology::World(nullptr);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(nullptr, scene_struct);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 1);
+
+    // `Entity` member functions.
+    ASSERT_EQ(scene->get_childID(), 0);
+    ASSERT_EQ(scene->get_type(), "yli::ontology::Scene*");
+    ASSERT_TRUE(scene->get_can_be_erased());
+    ASSERT_EQ(scene->get_universe(), nullptr);
+    ASSERT_NE(scene->get_setting_master(), nullptr);
+    ASSERT_EQ(scene->get_parent(), world);
+    ASSERT_EQ(scene->get_number_of_children(), 0);
+    ASSERT_EQ(scene->get_number_of_descendants(), 0);
+}
+
+TEST(scene_must_be_initialized_appropriately, no_universe_no_world)
+{
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = nullptr;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(nullptr, scene_struct);
+
+    // `Entity` member functions.
+    ASSERT_EQ(scene->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(scene->get_type(), "yli::ontology::Scene*");
+    ASSERT_TRUE(scene->get_can_be_erased());
+    ASSERT_EQ(scene->get_universe(), nullptr);
+    ASSERT_NE(scene->get_setting_master(), nullptr);
+    ASSERT_EQ(scene->get_parent(), nullptr);
+    ASSERT_EQ(scene->get_number_of_children(), 0);
+    ASSERT_EQ(scene->get_number_of_descendants(), 0);
+}
+
+TEST(shader_must_be_initialized_appropriately, headless)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
@@ -171,7 +230,80 @@ TEST(shader_must_be_initialized_appropriately, shader)
     ASSERT_EQ(shader->get_number_of_descendants(), 0);
 }
 
-TEST(material_must_be_initialized_appropriately, material)
+TEST(shader_must_be_initialized_appropriately, no_universe)
+{
+    yli::ontology::World* const world = new yli::ontology::World(nullptr);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(nullptr, scene_struct);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 2);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_number_of_children(), 1);
+    ASSERT_EQ(scene->get_number_of_descendants(), 1);
+
+    // `Entity` member functions.
+    ASSERT_EQ(shader->get_childID(), 0);
+    ASSERT_EQ(shader->get_type(), "yli::ontology::Shader*");
+    ASSERT_TRUE(shader->get_can_be_erased());
+    ASSERT_EQ(shader->get_universe(), nullptr);
+    ASSERT_NE(shader->get_setting_master(), nullptr);
+    ASSERT_EQ(shader->get_parent(), scene);
+    ASSERT_EQ(shader->get_number_of_children(), 0);
+    ASSERT_EQ(shader->get_number_of_descendants(), 0);
+}
+
+TEST(shader_must_be_initialized_appropriately, no_universe_no_world)
+{
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = nullptr;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(nullptr, scene_struct);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_number_of_children(), 1);
+    ASSERT_EQ(scene->get_number_of_descendants(), 1);
+
+    // `Entity` member functions.
+    ASSERT_EQ(shader->get_childID(), 0);
+    ASSERT_EQ(shader->get_type(), "yli::ontology::Shader*");
+    ASSERT_TRUE(shader->get_can_be_erased());
+    ASSERT_EQ(shader->get_universe(), nullptr);
+    ASSERT_NE(shader->get_setting_master(), nullptr);
+    ASSERT_EQ(shader->get_parent(), scene);
+    ASSERT_EQ(shader->get_number_of_children(), 0);
+    ASSERT_EQ(shader->get_number_of_descendants(), 0);
+}
+
+TEST(shader_must_be_initialized_appropriately, no_universe_no_world_no_scene)
+{
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = nullptr;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct);
+
+    // `Entity` member functions.
+    ASSERT_EQ(shader->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(shader->get_type(), "yli::ontology::Shader*");
+    ASSERT_TRUE(shader->get_can_be_erased());
+    ASSERT_EQ(shader->get_universe(), nullptr);
+    ASSERT_NE(shader->get_setting_master(), nullptr);
+    ASSERT_EQ(shader->get_parent(), nullptr);
+    ASSERT_EQ(shader->get_number_of_children(), 0);
+    ASSERT_EQ(shader->get_number_of_descendants(), 0);
+}
+
+TEST(material_must_be_initialized_appropriately, headless)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
@@ -217,7 +349,121 @@ TEST(material_must_be_initialized_appropriately, material)
     ASSERT_EQ(material->get_number_of_descendants(), 0);
 }
 
-TEST(species_must_be_initialized_appropriately, species)
+TEST(material_must_be_initialized_appropriately, no_universe)
+{
+    yli::ontology::World* const world = new yli::ontology::World(nullptr);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(nullptr, scene_struct);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.shader = shader;
+    yli::ontology::Material* const material = new yli::ontology::Material(nullptr, material_struct);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 3);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_number_of_children(), 1);
+    ASSERT_EQ(scene->get_number_of_descendants(), 2);
+
+    // `Entity` member functions of `Shader`.
+    ASSERT_EQ(shader->get_number_of_children(), 1);
+    ASSERT_EQ(shader->get_number_of_descendants(), 1);
+
+    // `Entity` member functions.
+    ASSERT_EQ(material->get_childID(), 0);
+    ASSERT_EQ(material->get_type(), "yli::ontology::Material*");
+    ASSERT_TRUE(material->get_can_be_erased());
+    ASSERT_EQ(material->get_universe(), nullptr);
+    ASSERT_NE(material->get_setting_master(), nullptr);
+    ASSERT_EQ(material->get_parent(), shader);
+    ASSERT_EQ(material->get_number_of_children(), 0);
+    ASSERT_EQ(material->get_number_of_descendants(), 0);
+}
+
+TEST(material_must_be_initialized_appropriately, no_universe_no_world)
+{
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = nullptr;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(nullptr, scene_struct);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.shader = shader;
+    yli::ontology::Material* const material = new yli::ontology::Material(nullptr, material_struct);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_number_of_children(), 1);
+    ASSERT_EQ(scene->get_number_of_descendants(), 2);
+
+    // `Entity` member functions of `Shader`.
+    ASSERT_EQ(shader->get_number_of_children(), 1);
+    ASSERT_EQ(shader->get_number_of_descendants(), 1);
+
+    // `Entity` member functions.
+    ASSERT_EQ(material->get_childID(), 0);
+    ASSERT_EQ(material->get_type(), "yli::ontology::Material*");
+    ASSERT_TRUE(material->get_can_be_erased());
+    ASSERT_EQ(material->get_universe(), nullptr);
+    ASSERT_NE(material->get_setting_master(), nullptr);
+    ASSERT_EQ(material->get_parent(), shader);
+    ASSERT_EQ(material->get_number_of_children(), 0);
+    ASSERT_EQ(material->get_number_of_descendants(), 0);
+}
+
+TEST(material_must_be_initialized_appropriately, no_universe_no_world_no_scene)
+{
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = nullptr;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.shader = shader;
+    yli::ontology::Material* const material = new yli::ontology::Material(nullptr, material_struct);
+
+    // `Entity` member functions of `Shader`.
+    ASSERT_EQ(shader->get_number_of_children(), 1);
+    ASSERT_EQ(shader->get_number_of_descendants(), 1);
+
+    // `Entity` member functions.
+    ASSERT_EQ(material->get_childID(), 0);
+    ASSERT_EQ(material->get_type(), "yli::ontology::Material*");
+    ASSERT_TRUE(material->get_can_be_erased());
+    ASSERT_EQ(material->get_universe(), nullptr);
+    ASSERT_NE(material->get_setting_master(), nullptr);
+    ASSERT_EQ(material->get_parent(), shader);
+    ASSERT_EQ(material->get_number_of_children(), 0);
+    ASSERT_EQ(material->get_number_of_descendants(), 0);
+}
+
+TEST(material_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader)
+{
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.shader = nullptr;
+    yli::ontology::Material* const material = new yli::ontology::Material(nullptr, material_struct);
+
+    // `Entity` member functions.
+    ASSERT_EQ(material->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(material->get_type(), "yli::ontology::Material*");
+    ASSERT_TRUE(material->get_can_be_erased());
+    ASSERT_EQ(material->get_universe(), nullptr);
+    ASSERT_NE(material->get_setting_master(), nullptr);
+    ASSERT_EQ(material->get_parent(), nullptr);
+    ASSERT_EQ(material->get_number_of_children(), 0);
+    ASSERT_EQ(material->get_number_of_descendants(), 0);
+}
+
+TEST(species_must_be_initialized_appropriately, headless)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
@@ -273,7 +519,26 @@ TEST(species_must_be_initialized_appropriately, species)
     ASSERT_EQ(species->get_number_of_descendants(), 0);
 }
 
-TEST(object_must_be_initialized_appropriately, object)
+TEST(species_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material)
+{
+    yli::ontology::SpeciesStruct species_struct;
+    species_struct.scene = nullptr;
+    species_struct.shader = nullptr;
+    species_struct.material = nullptr;
+    yli::ontology::Species* const species = new yli::ontology::Species(nullptr, species_struct);
+
+    // `Entity` member functions.
+    ASSERT_EQ(species->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(species->get_type(), "yli::ontology::Species*");
+    ASSERT_TRUE(species->get_can_be_erased());
+    ASSERT_EQ(species->get_universe(), nullptr);
+    ASSERT_NE(species->get_setting_master(), nullptr);
+    ASSERT_EQ(species->get_parent(), nullptr);
+    ASSERT_EQ(species->get_number_of_children(), 0);
+    ASSERT_EQ(species->get_number_of_descendants(), 0);
+}
+
+TEST(object_must_be_initialized_appropriately, headless)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
@@ -337,7 +602,308 @@ TEST(object_must_be_initialized_appropriately, object)
     ASSERT_EQ(object->get_number_of_descendants(), 0);
 }
 
-TEST(brain_must_be_initialized_appropriately, brain)
+TEST(object_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material_no_species)
+{
+    yli::ontology::ObjectStruct object_struct;
+    object_struct.species_parent = nullptr;
+    yli::ontology::Object* const object = new yli::ontology::Object(nullptr, object_struct);
+
+    // `Entity` member functions.
+    ASSERT_EQ(object->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(object->get_type(), "yli::ontology::Object*");
+    ASSERT_TRUE(object->get_can_be_erased());
+    ASSERT_EQ(object->get_universe(), nullptr);
+    ASSERT_NE(object->get_setting_master(), nullptr);
+    ASSERT_EQ(object->get_parent(), nullptr);
+    ASSERT_EQ(object->get_number_of_children(), 0);
+    ASSERT_EQ(object->get_number_of_descendants(), 0);
+}
+
+TEST(symbiosis_must_be_initialized_appropriately, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::SymbiosisStruct symbiosis_struct;
+    symbiosis_struct.parent = shader;
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 4);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 3);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_number_of_children(), 1);
+    ASSERT_EQ(scene->get_number_of_descendants(), 2);
+
+    // `Entity` member functions of `Shader`.
+    ASSERT_EQ(shader->get_number_of_children(), 1);
+    ASSERT_EQ(shader->get_number_of_descendants(), 1);
+
+    // `Entity` member functions.
+    ASSERT_EQ(symbiosis->get_childID(), 0);
+    ASSERT_EQ(symbiosis->get_type(), "yli::ontology::Symbiosis*");
+    ASSERT_TRUE(symbiosis->get_can_be_erased());
+    ASSERT_EQ(symbiosis->get_universe(), universe);
+    ASSERT_NE(symbiosis->get_setting_master(), nullptr);
+    ASSERT_EQ(symbiosis->get_parent(), shader);
+    ASSERT_EQ(symbiosis->get_number_of_children(), 0);
+    ASSERT_EQ(symbiosis->get_number_of_descendants(), 0);
+}
+
+TEST(symbiosis_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_material_no_shader)
+{
+    yli::ontology::SymbiosisStruct symbiosis_struct;
+    symbiosis_struct.parent = nullptr;
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct);
+
+    // `Entity` member functions.
+    ASSERT_EQ(symbiosis->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(symbiosis->get_type(), "yli::ontology::Symbiosis*");
+    ASSERT_TRUE(symbiosis->get_can_be_erased());
+    ASSERT_EQ(symbiosis->get_universe(), nullptr);
+    ASSERT_NE(symbiosis->get_setting_master(), nullptr);
+    ASSERT_EQ(symbiosis->get_parent(), nullptr);
+    ASSERT_EQ(symbiosis->get_number_of_children(), 0);
+    ASSERT_EQ(symbiosis->get_number_of_descendants(), 0);
+}
+
+TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::SymbiosisStruct symbiosis_struct;
+    symbiosis_struct.parent = shader;
+    symbiosis_struct.model_filename = "turbo_polizei.fbx";
+    symbiosis_struct.model_file_format = "FBX";
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 11);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 10);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_number_of_children(), 1);
+    ASSERT_EQ(scene->get_number_of_descendants(), 9);
+
+    // `Entity` member functions of `Shader`.
+    ASSERT_EQ(shader->get_number_of_children(), 1);
+    ASSERT_EQ(shader->get_number_of_descendants(), 8);
+
+    // `Entity` member functions.
+    ASSERT_EQ(symbiosis->get_childID(), 0);
+    ASSERT_EQ(symbiosis->get_type(), "yli::ontology::Symbiosis*");
+    ASSERT_TRUE(symbiosis->get_can_be_erased());
+    ASSERT_EQ(symbiosis->get_universe(), universe);
+    ASSERT_NE(symbiosis->get_setting_master(), nullptr);
+    ASSERT_EQ(symbiosis->get_parent(), shader);
+    ASSERT_EQ(symbiosis->get_number_of_children(), 2);    // 2 `SymbiontMaterial`s.
+    ASSERT_EQ(symbiosis->get_number_of_descendants(), 7); // 2 `SymbiontMaterial`s and 5 `SymbiontSpecies`.
+}
+
+TEST(symbiosis_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_material_no_shader_turbo_polizei)
+{
+    yli::ontology::SymbiosisStruct symbiosis_struct;
+    symbiosis_struct.parent = nullptr;
+    symbiosis_struct.model_filename = "turbo_polizei.fbx";
+    symbiosis_struct.model_file_format = "FBX";
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct);
+
+    // `Entity` member functions.
+    ASSERT_EQ(symbiosis->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(symbiosis->get_type(), "yli::ontology::Symbiosis*");
+    ASSERT_TRUE(symbiosis->get_can_be_erased());
+    ASSERT_EQ(symbiosis->get_universe(), nullptr);
+    ASSERT_NE(symbiosis->get_setting_master(), nullptr);
+    ASSERT_EQ(symbiosis->get_parent(), nullptr);
+    ASSERT_EQ(symbiosis->get_number_of_children(), 2);    // 2 `SymbiontMaterial`s.
+    ASSERT_EQ(symbiosis->get_number_of_descendants(), 7); // 2 `SymbiontMaterial`s and 5 `SymbiontSpecies`.
+}
+
+TEST(holobiont_must_be_initialized_appropriately, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::SymbiosisStruct symbiosis_struct;
+    symbiosis_struct.parent = shader;
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct);
+
+    yli::ontology::HolobiontStruct holobiont_struct;
+    holobiont_struct.symbiosis_parent = symbiosis;
+    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(universe, holobiont_struct);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 5);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 4);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_number_of_children(), 1);
+    ASSERT_EQ(scene->get_number_of_descendants(), 3);
+
+    // `Entity` member functions of `Shader`.
+    ASSERT_EQ(shader->get_number_of_children(), 1);
+    ASSERT_EQ(shader->get_number_of_descendants(), 2);
+
+    // `Entity` member functions of `Symbiosis`.
+    ASSERT_EQ(symbiosis->get_number_of_children(), 1);
+    ASSERT_EQ(symbiosis->get_number_of_descendants(), 1);
+
+    // `Entity` member functions.
+    ASSERT_EQ(holobiont->get_childID(), 0);
+    ASSERT_EQ(holobiont->get_type(), "yli::ontology::Holobiont*");
+    ASSERT_TRUE(holobiont->get_can_be_erased());
+    ASSERT_EQ(holobiont->get_universe(), universe);
+    ASSERT_NE(holobiont->get_setting_master(), nullptr);
+    ASSERT_EQ(holobiont->get_parent(), symbiosis);
+    ASSERT_EQ(holobiont->get_number_of_children(), 0);
+    ASSERT_EQ(holobiont->get_number_of_descendants(), 0);
+}
+
+TEST(holobiont_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_symbiosis)
+{
+    yli::ontology::HolobiontStruct holobiont_struct;
+    holobiont_struct.symbiosis_parent = nullptr;
+    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(nullptr, holobiont_struct);
+
+    // `Entity` member functions.
+    ASSERT_EQ(holobiont->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(holobiont->get_type(), "yli::ontology::Holobiont*");
+    ASSERT_TRUE(holobiont->get_can_be_erased());
+    ASSERT_EQ(holobiont->get_universe(), nullptr);
+    ASSERT_NE(holobiont->get_setting_master(), nullptr);
+    ASSERT_EQ(holobiont->get_parent(), nullptr);
+    ASSERT_EQ(holobiont->get_number_of_children(), 0);
+    ASSERT_EQ(holobiont->get_number_of_descendants(), 0);
+}
+
+TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::SymbiosisStruct symbiosis_struct;
+    symbiosis_struct.parent = shader;
+    symbiosis_struct.model_filename = "turbo_polizei.fbx";
+    symbiosis_struct.model_file_format = "FBX";
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct);
+
+    yli::ontology::HolobiontStruct holobiont_struct;
+    holobiont_struct.symbiosis_parent = symbiosis;
+    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(universe, holobiont_struct);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 17);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 16);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_number_of_children(), 1);
+    ASSERT_EQ(scene->get_number_of_descendants(), 15);
+
+    // `Entity` member functions of `Shader`.
+    ASSERT_EQ(shader->get_number_of_children(), 1);
+    ASSERT_EQ(shader->get_number_of_descendants(), 14);
+
+    // `Entity` member functions of `Symbiosis`.
+    ASSERT_EQ(symbiosis->get_number_of_children(), 3);     // 2 `SymbiontMaterial`s and 1 `Holobiont`.
+    ASSERT_EQ(symbiosis->get_number_of_descendants(), 13); // 2 `SymbiontMaterial`s, 5 `SymbiontSpecies`, 1 `Holobiont`, and 5 `Biont`s.
+
+    // `Entity` member functions.
+    ASSERT_EQ(holobiont->get_childID(), 0);
+    ASSERT_EQ(holobiont->get_type(), "yli::ontology::Holobiont*");
+    ASSERT_TRUE(holobiont->get_can_be_erased());
+    ASSERT_EQ(holobiont->get_universe(), universe);
+    ASSERT_NE(holobiont->get_setting_master(), nullptr);
+    ASSERT_EQ(holobiont->get_parent(), symbiosis);
+    ASSERT_EQ(holobiont->get_number_of_children(), 5);     // 5 `Biont`s.
+    ASSERT_EQ(holobiont->get_number_of_descendants(), 5);  // 5 `Biont`s.
+}
+
+TEST(holobiont_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_turbo_polizei)
+{
+    yli::ontology::SymbiosisStruct symbiosis_struct;
+    symbiosis_struct.parent = nullptr;
+    symbiosis_struct.model_filename = "turbo_polizei.fbx";
+    symbiosis_struct.model_file_format = "FBX";
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct);
+
+    yli::ontology::HolobiontStruct holobiont_struct;
+    holobiont_struct.symbiosis_parent = symbiosis;
+    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(nullptr, holobiont_struct);
+
+    // `Entity` member functions of `Symbiosis`.
+    ASSERT_EQ(symbiosis->get_number_of_children(), 3);     // 2 `SymbiontMaterial`s and 1 `Holobiont`.
+    ASSERT_EQ(symbiosis->get_number_of_descendants(), 13); // 2 `SymbiontMaterial`s, 5 `SymbiontSpecies`, 1 `Holobiont`, and 5 `Biont`s.
+
+    // `Entity` member functions.
+    ASSERT_EQ(holobiont->get_childID(), 0);
+    ASSERT_EQ(holobiont->get_type(), "yli::ontology::Holobiont*");
+    ASSERT_TRUE(holobiont->get_can_be_erased());
+    ASSERT_EQ(holobiont->get_universe(), nullptr);
+    ASSERT_NE(holobiont->get_setting_master(), nullptr);
+    ASSERT_EQ(holobiont->get_parent(), symbiosis);
+    ASSERT_EQ(holobiont->get_number_of_children(), 5);     // 5 `Biont`s.
+    ASSERT_EQ(holobiont->get_number_of_descendants(), 5);  // 5 `Biont`s.
+}
+
+TEST(brain_must_be_initialized_appropriately, headless)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
@@ -374,6 +940,26 @@ TEST(brain_must_be_initialized_appropriately, brain)
     ASSERT_EQ(brain->get_universe(), universe);
     ASSERT_NE(brain->get_setting_master(), nullptr);
     ASSERT_EQ(brain->get_parent(), scene);
+    ASSERT_EQ(brain->get_number_of_children(), 0);
+    ASSERT_EQ(brain->get_number_of_descendants(), 0);
+}
+
+TEST(brain_must_be_initialized_appropriately, no_universe_no_world_no_scene)
+{
+    yli::ontology::BrainStruct brain_struct;
+    brain_struct.parent = nullptr;
+    yli::ontology::Brain* const brain = new yli::ontology::Brain(nullptr, brain_struct);
+
+    // `Brain` member functions.
+    ASSERT_EQ(brain->get_number_of_apprentices(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(brain->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(brain->get_type(), "yli::ontology::Brain*");
+    ASSERT_TRUE(brain->get_can_be_erased());
+    ASSERT_EQ(brain->get_universe(), nullptr);
+    ASSERT_NE(brain->get_setting_master(), nullptr);
+    ASSERT_EQ(brain->get_parent(), nullptr);
     ASSERT_EQ(brain->get_number_of_children(), 0);
     ASSERT_EQ(brain->get_number_of_descendants(), 0);
 }
