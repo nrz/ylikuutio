@@ -61,6 +61,11 @@ namespace yli
         {
             // destructor.
             this->exit_console();
+
+            if (this->universe != nullptr && this->universe->get_active_console() == this)
+            {
+                this->universe->set_active_console(nullptr);
+            }
         }
 
         void Console::adjust_n_columns()
