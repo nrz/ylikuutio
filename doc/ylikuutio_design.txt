@@ -1,3 +1,11 @@
+Ylikuutio design
+
+Ylikuutio supports different kinds of 3D games and simulations.
+
+The main supported genres are 3D action adventures
+and turn-based 3D strategy games, specifically
+simultaneously executed and clock-based turns.
+
 code/ajokki/                    - Ajokki sandbox code.
 code/app/                       - app code snippets that can be used in different applications which use Ylikuutio.
 code/awk/                       - scripts written in AWK.

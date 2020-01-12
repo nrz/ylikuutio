@@ -1383,7 +1383,7 @@ int main(const int argc, const char* const argv[])
                 if (my_universe->in_help_mode && my_universe->can_display_help_screen)
                 {
                     std::stringstream help_text_stringstream;
-                    yli::ontology::Scene* const scene = (my_universe == nullptr ? nullptr : my_universe->get_active_scene());
+                    yli::ontology::Scene* const scene = my_universe->get_active_scene();
                     help_text_stringstream <<
                         "Ajokki " << yli::ontology::Universe::version << "\n"
                         "\n"

@@ -102,20 +102,10 @@ namespace yli
                             std::cerr << "texture file format: " << this->texture_file_format << "\n";
                         }
 
-                        // Requirements for further actions:
-                        // `this->parent` must not be `nullptr`.
-                        yli::ontology::Shader* const shader = this->parent;
-
-                        if (shader == nullptr)
-                        {
-                            std::cerr << "ERROR: `Material::Material`: `shader` is `nullptr`!\n";
-                            return;
-                        }
-
                         // Get a handle for our "texture_sampler" uniform.
-                        if (this->universe != nullptr && !this->universe->get_is_headless())
+                        if (this->universe != nullptr && !this->universe->get_is_headless() && this->parent != nullptr)
                         {
-                            this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "texture_sampler");
+                            this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "texture_sampler");
                         }
 
                         // `yli::ontology::Entity` member variables begin here.

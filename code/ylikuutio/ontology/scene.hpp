@@ -90,6 +90,10 @@ namespace yli
                 void unbind_Camera(const std::size_t childID);
                 void unbind_Brain(const std::size_t childID);
 
+                // This method sets pointer to this `Scene` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `World`.
+                void bind_to_new_parent(yli::ontology::World* const new_parent);
+                void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
+
                 // constructor.
                 Scene(yli::ontology::Universe* const universe, const yli::ontology::SceneStruct& scene_struct)
                     : Entity(universe)

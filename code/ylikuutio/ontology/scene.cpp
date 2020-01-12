@@ -130,6 +130,57 @@ namespace yli
             world->bind_Scene(this);
         }
 
+        void Scene::bind_to_new_parent(yli::ontology::World* const new_parent)
+        {
+            // This method sets pointer to this `Scene` to `nullptr`, sets `parent` according to the input,
+            // and requests a new `childID` from the new `World`.
+            //
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            // `new_parent` must not be `nullptr`.
+
+            yli::ontology::World* const world = this->parent;
+
+            if (world == nullptr)
+            {
+                std::cerr << "ERROR: `Scene::bind_to_new_parent`: `world` is `nullptr`!\n";
+                return;
+            }
+
+            if (new_parent == nullptr)
+            {
+                std::cerr << "ERROR: `Scene::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+                return;
+            }
+
+            // Unbind from the old parent `World`.
+            this->parent->unbind_Scene(this->childID);
+
+            // Get `childID` from `World` and set pointer to this `Scene`.
+            this->parent = new_parent;
+            this->parent->bind_Scene(this);
+        }
+
+        void Scene::bind_to_new_parent(yli::ontology::Entity* const new_parent)
+        {
+            // this method sets pointer to this `Scene` to `nullptr`, sets `parent` according to the input,
+            // and requests a new `childID` from the new `World`.
+            //
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            // `new_parent` must not be `nullptr`.
+
+            yli::ontology::World* const world = dynamic_cast<yli::ontology::World*>(new_parent);
+
+            if (world == nullptr)
+            {
+                std::cerr << "ERROR: `Scene::bind_to_new_parent`: `new_parent` is not `yli::ontology::World*`!\n";
+                return;
+            }
+
+            this->bind_to_new_parent(world);
+        }
+
         Scene::~Scene()
         {
             // destructor.
@@ -146,6 +197,12 @@ namespace yli
             // destroy all `Brain`s of this `Scene`.
             std::cout << "All brains of this scene will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Brain*>(this->brain_pointer_vector, this->number_of_brains);
+
+            if (this->universe != nullptr && this->universe->get_active_scene() == this)
+            {
+                // Set active `Scene` to `nullptr`.
+                this->universe->set_active_scene(nullptr);
+            }
 
             // requirements for further actions:
             // `this->parent` must not be `nullptr`.

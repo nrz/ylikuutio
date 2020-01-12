@@ -848,15 +848,40 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/load/font_loader.hpp
         code/ylikuutio/load/heightmap_loader_struct.hpp
         code/ylikuutio/memory/memory_templates.hpp
+        code/ylikuutio/ontology/brain.cpp
+        code/ylikuutio/ontology/brain.hpp
+        code/ylikuutio/ontology/brain_struct.hpp
+        code/ylikuutio/ontology/font2D.cpp
+        code/ylikuutio/ontology/font2D.hpp
         code/ylikuutio/ontology/glyph_struct.hpp
+        code/ylikuutio/ontology/holobiont.cpp
+        code/ylikuutio/ontology/holobiont.hpp
+        code/ylikuutio/ontology/holobiont_struct.hpp
+        code/ylikuutio/ontology/material.cpp
+        code/ylikuutio/ontology/material.hpp
         code/ylikuutio/ontology/material_struct.hpp
+        code/ylikuutio/ontology/object.cpp
+        code/ylikuutio/ontology/object.hpp
         code/ylikuutio/ontology/object_struct.hpp
+        code/ylikuutio/ontology/scene.cpp
+        code/ylikuutio/ontology/scene.hpp
+        code/ylikuutio/ontology/scene_struct.hpp
+        code/ylikuutio/ontology/shader.cpp
+        code/ylikuutio/ontology/shader.hpp
         code/ylikuutio/ontology/shader_struct.hpp
+        code/ylikuutio/ontology/species.cpp
+        code/ylikuutio/ontology/species.hpp
         code/ylikuutio/ontology/species_struct.hpp
+        code/ylikuutio/ontology/symbiosis.cpp
+        code/ylikuutio/ontology/symbiosis.hpp
+        code/ylikuutio/ontology/symbiosis_struct.hpp
         code/ylikuutio/ontology/text3D_struct.hpp
         code/ylikuutio/ontology/vector_font_struct.hpp
         code/ylikuutio/ontology/universe.cpp
         code/ylikuutio/ontology/universe.hpp
+        code/ylikuutio/ontology/universe_struct.hpp
+        code/ylikuutio/ontology/world.cpp
+        code/ylikuutio/ontology/world.hpp
         code/ylikuutio/string/ylikuutio_string.cpp
         code/ylikuutio/string/ylikuutio_string.hpp
         code/ylikuutio/triangulation/face_normals.cpp
@@ -902,6 +927,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_node_struct.cpp
         code/ylikuutio/tests/googletest/test_obj_loader.cpp
         code/ylikuutio/tests/googletest/test_object_struct.cpp
+        code/ylikuutio/tests/googletest/test_ontology.cpp
         code/ylikuutio/tests/googletest/test_pugixml.cpp
         code/ylikuutio/tests/googletest/test_quad_triangulation.cpp
         code/ylikuutio/tests/googletest/test_shader_struct.cpp
@@ -912,14 +938,14 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)
 
     add_library(code_to_test ${FILES_TO_TEST})
-    add_dependencies(code_to_test OpenFBX)
+    add_dependencies(code_to_test ylikuutio ${ALL_LIBS} pthread)
 
     add_executable(do_tests_googletest ${MAIN_FILE})
-    add_dependencies(do_tests_googletest OpenFBX)
+    add_dependencies(do_tests_googletest ylikuutio ${ALL_LIBS} pthread)
     target_link_libraries(do_tests_googletest code_to_test)
 
     add_executable(unit_tests_with_googletest code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
-    target_link_libraries(unit_tests_with_googletest gtest libgtest rt pthread code_to_test)
+    target_link_libraries(unit_tests_with_googletest gtest libgtest rt SDL2 GLEW_200 s7 ylikuutio pthread code_to_test)
 
     # Xcode and Visual working directories
     set_target_properties(unit_tests_with_googletest PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")
