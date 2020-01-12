@@ -26,6 +26,7 @@
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
+#include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
@@ -942,6 +943,116 @@ TEST(brain_must_be_initialized_appropriately, headless)
     ASSERT_EQ(brain->get_parent(), scene);
     ASSERT_EQ(brain->get_number_of_children(), 0);
     ASSERT_EQ(brain->get_number_of_descendants(), 0);
+}
+
+TEST(font2D_must_be_initialized_appropriately, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Font2D* const font2D = new yli::ontology::Font2D(
+            universe,
+            universe->get_window_width(),
+            universe->get_window_height(),
+            universe->get_text_size(),
+            universe->get_font_size(),
+            "",
+            "");
+
+    // `Universe` member functions.
+    ASSERT_EQ(universe->get_number_of_worlds(), 0);
+    ASSERT_EQ(universe->get_active_scene(), nullptr);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 1);
+
+    // `Entity` member functions of `Font2D`.
+    ASSERT_EQ(font2D->get_childID(), 0);
+    ASSERT_EQ(font2D->get_type(), "yli::ontology::Font2D*");
+    ASSERT_FALSE(font2D->get_can_be_erased());               // Currently `Font2D`s can not be erased.
+    ASSERT_EQ(font2D->get_universe(), universe);
+    ASSERT_NE(font2D->get_setting_master(), nullptr);
+    ASSERT_EQ(font2D->get_parent(), universe);
+    ASSERT_EQ(font2D->get_number_of_children(), 0);
+    ASSERT_EQ(font2D->get_number_of_descendants(), 0);
+}
+
+TEST(font2D_must_be_initialized_appropriately, no_universe)
+{
+    yli::ontology::Font2D* const font2D = new yli::ontology::Font2D(
+            nullptr,
+            0,
+            0,
+            0,
+            0,
+            "",
+            "");
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(font2D->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(font2D->get_type(), "yli::ontology::Font2D*");
+    ASSERT_FALSE(font2D->get_can_be_erased());               // Currently `Font2D`s can not be erased.
+    ASSERT_EQ(font2D->get_universe(), nullptr);
+    ASSERT_NE(font2D->get_setting_master(), nullptr);
+    ASSERT_EQ(font2D->get_parent(), nullptr);
+    ASSERT_EQ(font2D->get_number_of_children(), 0);
+    ASSERT_EQ(font2D->get_number_of_descendants(), 0);
+}
+
+TEST(font2D_must_be_initialized_appropriately, headless_holstein)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Font2D* const font2D = new yli::ontology::Font2D(
+            universe,
+            universe->get_window_width(),
+            universe->get_window_height(),
+            universe->get_text_size(),
+            universe->get_font_size(),
+            "Holstein.bmp",
+            "BMP");
+
+    // `Universe` member functions.
+    ASSERT_EQ(universe->get_number_of_worlds(), 0);
+    ASSERT_EQ(universe->get_active_scene(), nullptr);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 1);
+
+    // `Entity` member functions of `Font2D`.
+    ASSERT_EQ(font2D->get_childID(), 0);
+    ASSERT_EQ(font2D->get_type(), "yli::ontology::Font2D*");
+    ASSERT_FALSE(font2D->get_can_be_erased());               // Currently `Font2D`s can not be erased.
+    ASSERT_EQ(font2D->get_universe(), universe);
+    ASSERT_NE(font2D->get_setting_master(), nullptr);
+    ASSERT_EQ(font2D->get_parent(), universe);
+    ASSERT_EQ(font2D->get_number_of_children(), 0);
+    ASSERT_EQ(font2D->get_number_of_descendants(), 0);
+}
+
+TEST(font2D_must_be_initialized_appropriately, no_universe_holstein)
+{
+    yli::ontology::Font2D* const font2D = new yli::ontology::Font2D(
+            nullptr,
+            0,
+            0,
+            0,
+            0,
+            "Holstein.bmp",
+            "BMP");
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(font2D->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(font2D->get_type(), "yli::ontology::Font2D*");
+    ASSERT_FALSE(font2D->get_can_be_erased());               // Currently `Font2D`s can not be erased.
+    ASSERT_EQ(font2D->get_universe(), nullptr);
+    ASSERT_NE(font2D->get_setting_master(), nullptr);
+    ASSERT_EQ(font2D->get_parent(), nullptr);
+    ASSERT_EQ(font2D->get_number_of_children(), 0);
+    ASSERT_EQ(font2D->get_number_of_descendants(), 0);
 }
 
 TEST(brain_must_be_initialized_appropriately, no_universe_no_world_no_scene)
