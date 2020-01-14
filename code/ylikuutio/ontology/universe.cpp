@@ -365,6 +365,16 @@ namespace yli
             }
         }
 
+        yli::ontology::Font2D* Universe::get_active_font2D() const
+        {
+            return this->active_font2D;
+        }
+
+        void Universe::set_active_font2D(yli::ontology::Font2D* const font2D)
+        {
+            this->active_font2D = font2D;
+        }
+
         void Universe::set_active_camera(yli::ontology::Camera* const camera) const
         {
             // Setting the active `Camera` does not change the active `Scene`!
@@ -379,14 +389,14 @@ namespace yli
             scene->set_active_camera(camera);
         }
 
-        void Universe::set_active_console(yli::ontology::Console* const console)
-        {
-            this->active_console = console;
-        }
-
         yli::ontology::Console* Universe::get_active_console() const
         {
             return this->active_console;
+        }
+
+        void Universe::set_active_console(yli::ontology::Console* const console)
+        {
+            this->active_console = console;
         }
 
         yli::input::InputMethod Universe::get_input_method() const
@@ -1253,16 +1263,6 @@ namespace yli
             }
 
             return this->input_master.get();
-        }
-
-        yli::ontology::Font2D* Universe::get_active_font2D() const
-        {
-            return this->active_font2D;
-        }
-
-        void Universe::set_active_font2D(yli::ontology::Font2D* const font2D)
-        {
-            this->active_font2D = font2D;
         }
 
         const glm::mat4& Universe::get_projection_matrix() const
