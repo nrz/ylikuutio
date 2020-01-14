@@ -50,6 +50,11 @@ General
 * For function parameters prefer `const FooStruct&` instead of more than 5 parameters.
 * Maintaining compatibility with 32-bit systems is not a priority.
 * Minimize the use of `new` and `delete`.
+* Keep member variables in variable size order, biggest first, smallest last, to minimize
+  the need for filler bytes for alignment, in particular for variable sizes less than 64 bits.
+* Write getters and setters where appropriate.
+* Keep both getters and setters in the same order as member variables.
+* Keep each getter immediately before the corresponding setter.
 * Write creator functions (e.g. `SettingMaster::create_Setting`) for the necessary `new`.
 * If a constructor is to be called only from a creator function belonging
   to a `friend` class, then the constructor should be made `private`.
