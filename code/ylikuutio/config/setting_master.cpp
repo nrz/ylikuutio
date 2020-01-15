@@ -907,7 +907,7 @@ namespace yli
                     return nullptr;
                 }
 
-                movable->cartesian_coordinates = glm::vec3(*cartesian_coordinates_any_value->glm_vec3_pointer);
+                movable->cartesian_coordinates = *cartesian_coordinates_any_value->glm_vec3_pointer;
                 return nullptr;
             }
 
