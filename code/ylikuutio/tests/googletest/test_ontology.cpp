@@ -26,8 +26,13 @@
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
+#include "code/ylikuutio/ontology/shapeshifter_transformation.hpp"
+#include "code/ylikuutio/ontology/shapeshifter_form.hpp"
+#include "code/ylikuutio/ontology/shapeshifter_sequence.hpp"
+#include "code/ylikuutio/ontology/shapeshifter_sequence_struct.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
+#include "code/ylikuutio/ontology/object_type.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
@@ -902,6 +907,574 @@ TEST(holobiont_must_be_initialized_appropriately, no_universe_no_world_no_scene_
     ASSERT_EQ(holobiont->get_parent(), symbiosis);
     ASSERT_EQ(holobiont->get_number_of_children(), 5);     // 5 `Biont`s.
     ASSERT_EQ(holobiont->get_number_of_descendants(), 5);  // 5 `Biont`s.
+}
+
+TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.shader = shader;
+    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct);
+
+    yli::ontology::SpeciesStruct shapeshifter_transformation_struct;
+    shapeshifter_transformation_struct.scene = scene;
+    shapeshifter_transformation_struct.shader = shader;
+    shapeshifter_transformation_struct.material = material;
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(universe, shapeshifter_transformation_struct);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 5);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 4);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_number_of_children(), 1);
+    ASSERT_EQ(scene->get_number_of_descendants(), 3);
+
+    // `Entity` member functions of `Shader`.
+    ASSERT_EQ(shader->get_number_of_children(), 1);
+    ASSERT_EQ(shader->get_number_of_descendants(), 2);
+
+    // `Entity` member functions of `Material`.
+    ASSERT_EQ(material->get_number_of_children(), 1);
+    ASSERT_EQ(material->get_number_of_descendants(), 1);
+
+    // `Entity` member functions.
+    ASSERT_EQ(shapeshifter_transformation->get_childID(), 0);
+    ASSERT_EQ(shapeshifter_transformation->get_type(), "yli::ontology::ShapeshifterTransformation*");
+    ASSERT_TRUE(shapeshifter_transformation->get_can_be_erased());
+    ASSERT_EQ(shapeshifter_transformation->get_universe(), universe);
+    ASSERT_NE(shapeshifter_transformation->get_setting_master(), nullptr);
+    ASSERT_EQ(shapeshifter_transformation->get_parent(), material);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_children(), 0);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_descendants(), 0);
+}
+
+TEST(shapeshifter_transformation_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material)
+{
+    yli::ontology::SpeciesStruct shapeshifter_transformation_struct;
+    shapeshifter_transformation_struct.scene = nullptr;
+    shapeshifter_transformation_struct.shader = nullptr;
+    shapeshifter_transformation_struct.material = nullptr;
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(nullptr, shapeshifter_transformation_struct);
+
+    // `Entity` member functions.
+    ASSERT_EQ(shapeshifter_transformation->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(shapeshifter_transformation->get_type(), "yli::ontology::ShapeshifterTransformation*");
+    ASSERT_TRUE(shapeshifter_transformation->get_can_be_erased());
+    ASSERT_EQ(shapeshifter_transformation->get_universe(), nullptr);
+    ASSERT_NE(shapeshifter_transformation->get_setting_master(), nullptr);
+    ASSERT_EQ(shapeshifter_transformation->get_parent(), nullptr);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_children(), 0);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_descendants(), 0);
+}
+
+TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.shader = shader;
+    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct);
+
+    yli::ontology::SpeciesStruct shapeshifter_transformation_struct;
+    shapeshifter_transformation_struct.scene = scene;
+    shapeshifter_transformation_struct.shader = shader;
+    shapeshifter_transformation_struct.material = material;
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(universe, shapeshifter_transformation_struct);
+
+    yli::ontology::SpeciesStruct shapeshifter_form_struct;
+    shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
+    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(universe, shapeshifter_form_struct);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 6);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 5);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_number_of_children(), 1);
+    ASSERT_EQ(scene->get_number_of_descendants(), 4);
+
+    // `Entity` member functions of `Shader`.
+    ASSERT_EQ(shader->get_number_of_children(), 1);
+    ASSERT_EQ(shader->get_number_of_descendants(), 3);
+
+    // `Entity` member functions of `Material`.
+    ASSERT_EQ(material->get_number_of_children(), 1);
+    ASSERT_EQ(material->get_number_of_descendants(), 2);
+
+    // `Entity` member functions of `ShapeshifterTransformation`.
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_children(), 1);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_descendants(), 1);
+
+    // `Entity` member functions.
+    ASSERT_EQ(shapeshifter_form->get_childID(), 0);
+    ASSERT_EQ(shapeshifter_form->get_type(), "yli::ontology::ShapeshifterForm*");
+    ASSERT_FALSE(shapeshifter_form->get_can_be_erased());
+    ASSERT_EQ(shapeshifter_form->get_universe(), universe);
+    ASSERT_NE(shapeshifter_form->get_setting_master(), nullptr);
+    ASSERT_EQ(shapeshifter_form->get_parent(), shapeshifter_transformation);
+    ASSERT_EQ(shapeshifter_form->get_number_of_children(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_descendants(), 0);
+}
+
+TEST(shapeshifter_form_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material)
+{
+    yli::ontology::SpeciesStruct shapeshifter_transformation_struct;
+    shapeshifter_transformation_struct.scene = nullptr;
+    shapeshifter_transformation_struct.shader = nullptr;
+    shapeshifter_transformation_struct.material = nullptr;
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(nullptr, shapeshifter_transformation_struct);
+
+    yli::ontology::SpeciesStruct shapeshifter_form_struct;
+    shapeshifter_form_struct.scene = nullptr;
+    shapeshifter_form_struct.shader = nullptr;
+    shapeshifter_form_struct.material = nullptr;
+    shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
+    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(nullptr, shapeshifter_form_struct);
+
+    // `Entity` member functions.
+    ASSERT_EQ(shapeshifter_form->get_childID(), 0);
+    ASSERT_EQ(shapeshifter_form->get_type(), "yli::ontology::ShapeshifterForm*");
+    ASSERT_FALSE(shapeshifter_form->get_can_be_erased());
+    ASSERT_EQ(shapeshifter_form->get_universe(), nullptr);
+    ASSERT_NE(shapeshifter_form->get_setting_master(), nullptr);
+    ASSERT_EQ(shapeshifter_form->get_parent(), shapeshifter_transformation);
+    ASSERT_EQ(shapeshifter_form->get_number_of_children(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_descendants(), 0);
+}
+
+TEST(shapeshifter_form_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material_no_shapeshifter_transformation)
+{
+    yli::ontology::SpeciesStruct shapeshifter_form_struct;
+    shapeshifter_form_struct.scene = nullptr;
+    shapeshifter_form_struct.shader = nullptr;
+    shapeshifter_form_struct.material = nullptr;
+    shapeshifter_form_struct.shapeshifter_transformation = nullptr;
+    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(nullptr, shapeshifter_form_struct);
+
+    // `Entity` member functions.
+    ASSERT_EQ(shapeshifter_form->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(shapeshifter_form->get_type(), "yli::ontology::ShapeshifterForm*");
+    ASSERT_FALSE(shapeshifter_form->get_can_be_erased());
+    ASSERT_EQ(shapeshifter_form->get_universe(), nullptr);
+    ASSERT_NE(shapeshifter_form->get_setting_master(), nullptr);
+    ASSERT_EQ(shapeshifter_form->get_parent(), nullptr);
+    ASSERT_EQ(shapeshifter_form->get_number_of_children(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_descendants(), 0);
+}
+
+TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.shader = shader;
+    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct);
+
+    yli::ontology::SpeciesStruct shapeshifter_transformation_struct;
+    shapeshifter_transformation_struct.scene = scene;
+    shapeshifter_transformation_struct.shader = shader;
+    shapeshifter_transformation_struct.material = material;
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(universe, shapeshifter_transformation_struct);
+
+    yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
+    shapeshifter_sequence_struct.parent = shapeshifter_transformation;
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(universe, shapeshifter_sequence_struct);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 6);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 5);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_number_of_children(), 1);
+    ASSERT_EQ(scene->get_number_of_descendants(), 4);
+
+    // `Entity` member functions of `Shader`.
+    ASSERT_EQ(shader->get_number_of_children(), 1);
+    ASSERT_EQ(shader->get_number_of_descendants(), 3);
+
+    // `Entity` member functions of `Material`.
+    ASSERT_EQ(material->get_number_of_children(), 1);
+    ASSERT_EQ(material->get_number_of_descendants(), 2);
+
+    // `Entity` member functions of `ShapeshifterTransformation`.
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_children(), 1);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_descendants(), 1);
+
+    // `Entity` member functions.
+    ASSERT_EQ(shapeshifter_sequence->get_childID(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_type(), "yli::ontology::ShapeshifterSequence*");
+    ASSERT_TRUE(shapeshifter_sequence->get_can_be_erased());
+    ASSERT_EQ(shapeshifter_sequence->get_universe(), universe);
+    ASSERT_NE(shapeshifter_sequence->get_setting_master(), nullptr);
+    ASSERT_EQ(shapeshifter_sequence->get_parent(), shapeshifter_transformation);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_children(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_descendants(), 0);
+}
+
+TEST(shapeshifter_sequence_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material)
+{
+    yli::ontology::SpeciesStruct shapeshifter_transformation_struct;
+    shapeshifter_transformation_struct.scene = nullptr;
+    shapeshifter_transformation_struct.shader = nullptr;
+    shapeshifter_transformation_struct.material = nullptr;
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(nullptr, shapeshifter_transformation_struct);
+
+    yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
+    shapeshifter_sequence_struct.parent = shapeshifter_transformation;
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct);
+
+    // `Entity` member functions.
+    ASSERT_EQ(shapeshifter_sequence->get_childID(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_type(), "yli::ontology::ShapeshifterSequence*");
+    ASSERT_TRUE(shapeshifter_sequence->get_can_be_erased());
+    ASSERT_EQ(shapeshifter_sequence->get_universe(), nullptr);
+    ASSERT_NE(shapeshifter_sequence->get_setting_master(), nullptr);
+    ASSERT_EQ(shapeshifter_sequence->get_parent(), shapeshifter_transformation);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_children(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_descendants(), 0);
+}
+
+TEST(shapeshifter_sequence_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material_no_shapeshifter_transformation)
+{
+    yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
+    shapeshifter_sequence_struct.parent = nullptr;
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct);
+
+    // `Entity` member functions.
+    ASSERT_EQ(shapeshifter_sequence->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(shapeshifter_sequence->get_type(), "yli::ontology::ShapeshifterSequence*");
+    ASSERT_TRUE(shapeshifter_sequence->get_can_be_erased());
+    ASSERT_EQ(shapeshifter_sequence->get_universe(), nullptr);
+    ASSERT_NE(shapeshifter_sequence->get_setting_master(), nullptr);
+    ASSERT_EQ(shapeshifter_sequence->get_parent(), nullptr);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_children(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_descendants(), 0);
+}
+
+TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.shader = shader;
+    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct);
+
+    yli::ontology::SpeciesStruct shapeshifter_transformation_struct;
+    shapeshifter_transformation_struct.scene = scene;
+    shapeshifter_transformation_struct.shader = shader;
+    shapeshifter_transformation_struct.material = material;
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(universe, shapeshifter_transformation_struct);
+
+    yli::ontology::SpeciesStruct shapeshifter_form_struct;
+    shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
+    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(universe, shapeshifter_form_struct);
+
+    yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
+    shapeshifter_sequence_struct.parent = shapeshifter_transformation;
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(universe, shapeshifter_sequence_struct);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 7);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 6);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_number_of_children(), 1);
+    ASSERT_EQ(scene->get_number_of_descendants(), 5);
+
+    // `Entity` member functions of `Shader`.
+    ASSERT_EQ(shader->get_number_of_children(), 1);
+    ASSERT_EQ(shader->get_number_of_descendants(), 4);
+
+    // `Entity` member functions of `Material`.
+    ASSERT_EQ(material->get_number_of_children(), 1);
+    ASSERT_EQ(material->get_number_of_descendants(), 3);
+
+    // `Entity` member functions of `ShapeshifterTransformation`.
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_children(), 2);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_descendants(), 2);
+
+    // `Entity` member functions.
+    ASSERT_EQ(shapeshifter_form->get_childID(), 0);
+    ASSERT_EQ(shapeshifter_form->get_type(), "yli::ontology::ShapeshifterForm*");
+    ASSERT_FALSE(shapeshifter_form->get_can_be_erased());
+    ASSERT_EQ(shapeshifter_form->get_universe(), universe);
+    ASSERT_NE(shapeshifter_form->get_setting_master(), nullptr);
+    ASSERT_EQ(shapeshifter_form->get_parent(), shapeshifter_transformation);
+    ASSERT_EQ(shapeshifter_form->get_number_of_children(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_descendants(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(shapeshifter_sequence->get_childID(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_type(), "yli::ontology::ShapeshifterSequence*");
+    ASSERT_TRUE(shapeshifter_sequence->get_can_be_erased());
+    ASSERT_EQ(shapeshifter_sequence->get_universe(), universe);
+    ASSERT_NE(shapeshifter_sequence->get_setting_master(), nullptr);
+    ASSERT_EQ(shapeshifter_sequence->get_parent(), shapeshifter_transformation);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_children(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_descendants(), 0);
+}
+
+TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material)
+{
+    yli::ontology::SpeciesStruct shapeshifter_transformation_struct;
+    shapeshifter_transformation_struct.scene = nullptr;
+    shapeshifter_transformation_struct.shader = nullptr;
+    shapeshifter_transformation_struct.material = nullptr;
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(nullptr, shapeshifter_transformation_struct);
+
+    yli::ontology::SpeciesStruct shapeshifter_form_struct;
+    shapeshifter_form_struct.scene = nullptr;
+    shapeshifter_form_struct.shader = nullptr;
+    shapeshifter_form_struct.material = nullptr;
+    shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
+    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(nullptr, shapeshifter_form_struct);
+
+    yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
+    shapeshifter_sequence_struct.parent = shapeshifter_transformation;
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct);
+
+    // `Entity` member functions of `ShapeshifterTransformation`.
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_children(), 2);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_descendants(), 2);
+
+    // `Entity` member functions.
+    ASSERT_EQ(shapeshifter_form->get_childID(), 0);
+    ASSERT_EQ(shapeshifter_form->get_type(), "yli::ontology::ShapeshifterForm*");
+    ASSERT_FALSE(shapeshifter_form->get_can_be_erased());
+    ASSERT_EQ(shapeshifter_form->get_universe(), nullptr);
+    ASSERT_NE(shapeshifter_form->get_setting_master(), nullptr);
+    ASSERT_EQ(shapeshifter_form->get_parent(), shapeshifter_transformation);
+    ASSERT_EQ(shapeshifter_form->get_number_of_children(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_descendants(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(shapeshifter_sequence->get_childID(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_type(), "yli::ontology::ShapeshifterSequence*");
+    ASSERT_TRUE(shapeshifter_sequence->get_can_be_erased());
+    ASSERT_EQ(shapeshifter_sequence->get_universe(), nullptr);
+    ASSERT_NE(shapeshifter_sequence->get_setting_master(), nullptr);
+    ASSERT_EQ(shapeshifter_sequence->get_parent(), shapeshifter_transformation);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_children(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_descendants(), 0);
+}
+
+TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.shader = shader;
+    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct);
+
+    yli::ontology::SpeciesStruct shapeshifter_transformation_struct;
+    shapeshifter_transformation_struct.scene = scene;
+    shapeshifter_transformation_struct.shader = shader;
+    shapeshifter_transformation_struct.material = material;
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(universe, shapeshifter_transformation_struct);
+
+    yli::ontology::SpeciesStruct shapeshifter_form_struct;
+    shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
+    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(universe, shapeshifter_form_struct);
+
+    yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
+    shapeshifter_sequence_struct.parent = shapeshifter_transformation;
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(universe, shapeshifter_sequence_struct);
+
+    yli::ontology::ObjectStruct object_struct;
+    object_struct.shapeshifter_sequence_parent = shapeshifter_sequence;
+    object_struct.object_type = yli::ontology::ObjectType::SHAPESHIFTER;
+    yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 8);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 7);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_number_of_children(), 1);
+    ASSERT_EQ(scene->get_number_of_descendants(), 6);
+
+    // `Entity` member functions of `Shader`.
+    ASSERT_EQ(shader->get_number_of_children(), 1);
+    ASSERT_EQ(shader->get_number_of_descendants(), 5);
+
+    // `Entity` member functions of `Material`.
+    ASSERT_EQ(material->get_number_of_children(), 1);
+    ASSERT_EQ(material->get_number_of_descendants(), 4);
+
+    // `Entity` member functions of `ShapeshifterTransformation`.
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_children(), 2);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_descendants(), 3);
+
+    // `Entity` member functions of `ShapeshifterForm`.
+    ASSERT_EQ(shapeshifter_form->get_number_of_children(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_descendants(), 0);
+
+    // `Entity` member functions of `ShapeshifterSequence`.
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_children(), 1);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_descendants(), 1);
+
+    // `Entity` member functions.
+    ASSERT_EQ(object->get_childID(), 0);
+    ASSERT_EQ(object->get_type(), "yli::ontology::Object*");
+    ASSERT_TRUE(object->get_can_be_erased());
+    ASSERT_EQ(object->get_universe(), universe);
+    ASSERT_NE(object->get_setting_master(), nullptr);
+    ASSERT_EQ(object->get_parent(), shapeshifter_sequence);
+    ASSERT_EQ(object->get_number_of_children(), 0);
+    ASSERT_EQ(object->get_number_of_descendants(), 0);
+}
+
+TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material)
+{
+    yli::ontology::SpeciesStruct shapeshifter_transformation_struct;
+    shapeshifter_transformation_struct.scene = nullptr;
+    shapeshifter_transformation_struct.shader = nullptr;
+    shapeshifter_transformation_struct.material = nullptr;
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(nullptr, shapeshifter_transformation_struct);
+
+    yli::ontology::SpeciesStruct shapeshifter_form_struct;
+    shapeshifter_form_struct.scene = nullptr;
+    shapeshifter_form_struct.shader = nullptr;
+    shapeshifter_form_struct.material = nullptr;
+    shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
+    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(nullptr, shapeshifter_form_struct);
+
+    yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
+    shapeshifter_sequence_struct.parent = shapeshifter_transformation;
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct);
+
+    yli::ontology::ObjectStruct object_struct;
+    object_struct.shapeshifter_sequence_parent = shapeshifter_sequence;
+    object_struct.object_type = yli::ontology::ObjectType::SHAPESHIFTER;
+    yli::ontology::Object* const object = new yli::ontology::Object(nullptr, object_struct);
+
+    // `Entity` member functions of `ShapeshifterTransformation`.
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_children(), 2);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_descendants(), 3);
+
+    // `Entity` member functions of `ShapeshifterForm`.
+    ASSERT_EQ(shapeshifter_form->get_number_of_children(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_descendants(), 0);
+
+    // `Entity` member functions of `ShapeshifterSequence`.
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_children(), 1);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_descendants(), 1);
+
+    // `Entity` member functions.
+    ASSERT_EQ(object->get_childID(), 0);
+    ASSERT_EQ(object->get_type(), "yli::ontology::Object*");
+    ASSERT_TRUE(object->get_can_be_erased());
+    ASSERT_EQ(object->get_universe(), nullptr);
+    ASSERT_NE(object->get_setting_master(), nullptr);
+    ASSERT_EQ(object->get_parent(), shapeshifter_sequence);
+    ASSERT_EQ(object->get_number_of_children(), 0);
+    ASSERT_EQ(object->get_number_of_descendants(), 0);
+}
+
+TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material_no_shapeshifter_transformation)
+{
+    yli::ontology::SpeciesStruct shapeshifter_form_struct;
+    shapeshifter_form_struct.scene = nullptr;
+    shapeshifter_form_struct.shader = nullptr;
+    shapeshifter_form_struct.material = nullptr;
+    shapeshifter_form_struct.shapeshifter_transformation = nullptr;
+    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(nullptr, shapeshifter_form_struct);
+
+    yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
+    shapeshifter_sequence_struct.parent = nullptr;
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct);
+
+    yli::ontology::ObjectStruct object_struct;
+    object_struct.shapeshifter_sequence_parent = shapeshifter_sequence;
+    object_struct.object_type = yli::ontology::ObjectType::SHAPESHIFTER;
+    yli::ontology::Object* const object = new yli::ontology::Object(nullptr, object_struct);
+
+    // `Entity` member functions.
+    ASSERT_EQ(object->get_childID(), 0);
+    ASSERT_EQ(object->get_type(), "yli::ontology::Object*");
+    ASSERT_TRUE(object->get_can_be_erased());
+    ASSERT_EQ(object->get_universe(), nullptr);
+    ASSERT_NE(object->get_setting_master(), nullptr);
+    ASSERT_EQ(object->get_parent(), shapeshifter_sequence);
+    ASSERT_EQ(object->get_number_of_children(), 0);
+    ASSERT_EQ(object->get_number_of_descendants(), 0);
 }
 
 TEST(brain_must_be_initialized_appropriately, headless)

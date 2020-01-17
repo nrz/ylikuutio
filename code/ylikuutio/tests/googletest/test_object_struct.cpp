@@ -18,6 +18,7 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/glyph.hpp"
+#include "code/ylikuutio/ontology/object_type.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 
 // Include GLM
@@ -37,7 +38,7 @@ TEST(ObjectStruct_must_be_initialized_appropriately, ObjectStruct)
     ASSERT_EQ(test_object_struct.glyph, nullptr);
     ASSERT_EQ(test_object_struct.original_scale_vector, glm::vec3(1.0f, 1.0f, 1.0f));
     ASSERT_EQ(test_object_struct.rotate_angle, 0.0f);
-    ASSERT_FALSE(test_object_struct.is_character);
+    ASSERT_EQ(test_object_struct.object_type, yli::ontology::ObjectType::REGULAR);
     ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.x));
     ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.y));
     ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.z));

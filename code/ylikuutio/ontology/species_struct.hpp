@@ -39,6 +39,7 @@ namespace yli
         class Shader;
         class Material;
         class SymbiontMaterial;
+        class ShapeshifterTransformation;
 
         struct SpeciesStruct
         {
@@ -49,6 +50,7 @@ namespace yli
                 shader(nullptr),
                 material(nullptr),
                 symbiont_material(nullptr),
+                shapeshifter_transformation(nullptr),
                 vertex_count(std::numeric_limits<std::size_t>::max()), // `std::numeric_limits<std::size_t>::max()` means that `vertex_count` is not defined.
                 mesh_i(0),
                 x_step(1),
@@ -78,6 +80,7 @@ namespace yli
             yli::ontology::Shader* shader;                      // pointer to `Shader` object.
             yli::ontology::Material* material;                  // pointer to `Material` object.
             yli::ontology::SymbiontMaterial* symbiont_material; // pointer to `SymbiontMaterial` object.
+            yli::ontology::ShapeshifterTransformation* shapeshifter_transformation; // pointer to `ShapeshifterTransformation` object.
             std::size_t vertex_count;                           // for `SymbiontSpecies`.
             std::size_t mesh_i;                                 // for FBX.
             std::size_t x_step;                                 // step in x-dimension for input data (set to 1 to load all data points/measurements).

@@ -22,6 +22,7 @@
 #define PI 3.14159265359f
 #endif
 
+#include "object_type.hpp"
 #include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
 
 // Include GLM
@@ -38,6 +39,7 @@ namespace yli
     namespace ontology
     {
         class Species;
+        class ShapeshifterSequence;
         class Glyph;
         class Text3D;
         class Brain;
@@ -52,6 +54,7 @@ namespace yli
                 translate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
                 spherical_coordinates(NAN, NAN, NAN),
                 species_parent(nullptr),
+                shapeshifter_sequence_parent(nullptr),
                 text3D_parent(nullptr),
                 glyph(nullptr),
                 brain(nullptr),
@@ -59,7 +62,7 @@ namespace yli
                 initial_rotate_angle(PI),
                 horizontal_angle(0.0),
                 vertical_angle(0.0),
-                is_character(false),
+                object_type(yli::ontology::ObjectType::REGULAR),
                 is_symbiosis_object(false)
             {
                 // constructor.
@@ -72,6 +75,7 @@ namespace yli
             glm::vec3 translate_vector;             // translate vector.
             yli::common::SphericalCoordinatesStruct spherical_coordinates;
             yli::ontology::Species* species_parent; // pointer to the parent `Species`.
+            yli::ontology::ShapeshifterSequence* shapeshifter_sequence_parent; // pointer to the `ShapeshifterSequence` parent.
             yli::ontology::Text3D* text3D_parent;   // pointer to the parent `Text3D`.
             yli::ontology::Glyph* glyph;            // pointer to the `Glyph` (not a parent!).
             yli::ontology::Brain* brain;            // pointer to the `Brain` (not a parent!).
@@ -79,7 +83,7 @@ namespace yli
             float initial_rotate_angle;             // initial rotate angle.
             double horizontal_angle;                // horizontal angle in radians.
             double vertical_angle;                  // vertical angle in radians.
-            bool is_character;                      // The parent of a character object is a `Glyph`. The parent of a regular object is a `Species`.
+            yli::ontology::ObjectType object_type;  // The parent of a character object is a `Glyph`. The parent of a regular object is a `Species`.
             bool is_symbiosis_object;               // The parent of a `SymbiosisObject` is a `Symbiosis`.
         };
     }

@@ -19,6 +19,7 @@
 #include "shader.hpp"
 #include "vector_font.hpp"
 #include "species.hpp"
+#include "shapeshifter_transformation.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "material_struct.hpp"
@@ -48,6 +49,16 @@ namespace yli
                     this->number_of_species);
         }
 
+        void Material::bind_ShapeshifterTransformation(yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation)
+        {
+            // Get `childID` from `Material` and set pointer to `shapeshifter_transformation`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::ShapeshifterTransformation*>(
+                    shapeshifter_transformation,
+                    this->shapeshifter_transformation_pointer_vector,
+                    this->free_shapeshifter_transformationID_queue,
+                    this->number_of_shapeshifter_transformations);
+        }
+
         void Material::bind_VectorFont(yli::ontology::VectorFont* const vector_font)
         {
             // Get `childID` from `Material` and set pointer to `vector_font`.
@@ -75,6 +86,15 @@ namespace yli
                     this->species_pointer_vector,
                     this->free_speciesID_queue,
                     this->number_of_species);
+        }
+
+        void Material::unbind_ShapeshifterTransformation(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent<yli::ontology::ShapeshifterTransformation*>(
+                    childID,
+                    this->shapeshifter_transformation_pointer_vector,
+                    this->free_shapeshifter_transformationID_queue,
+                    this->number_of_shapeshifter_transformations);
         }
 
         void Material::unbind_VectorFont(const std::size_t childID)
@@ -121,6 +141,10 @@ namespace yli
                 // Destroy all `Species` of this `Material`.
                 std::cout << "All species of this material will be destroyed.\n";
                 yli::hierarchy::delete_children<yli::ontology::Species*>(this->species_pointer_vector, this->number_of_species);
+
+                // Destroy all `ShapeshifterTransformation`s of this `Material`.
+                std::cout << "All shapeshifter_transformation of this material will be destroyed.\n";
+                yli::hierarchy::delete_children<yli::ontology::ShapeshifterTransformation*>(this->shapeshifter_transformation_pointer_vector, this->number_of_shapeshifter_transformations);
 
                 // Destroy all `VectorFont`s of this `Material`.
                 std::cout << "All fonts of this material will be destroyed.\n";
@@ -179,12 +203,13 @@ namespace yli
 
         std::size_t Material::get_number_of_children() const
         {
-            return this->number_of_species + this->number_of_vector_fonts + this->number_of_chunk_masters;
+            return this->number_of_species + this->number_of_shapeshifter_transformations + this->number_of_vector_fonts + this->number_of_chunk_masters;
         }
 
         std::size_t Material::get_number_of_descendants() const
         {
             return yli::ontology::get_number_of_descendants(this->species_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->shapeshifter_transformation_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->vector_font_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->chunk_master_pointer_vector);
         }
