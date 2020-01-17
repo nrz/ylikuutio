@@ -69,10 +69,10 @@ namespace yli
         Text3D::~Text3D()
         {
             // destructor.
-            std::cout << "This 3D text (\"" << this->text_string << "\", childID " << std::dec << this->childID << ") will be destroyed.\n";
+            std::cout << "This `Text3D` (\"" << this->text_string << "\", childID " << std::dec << this->childID << ") will be destroyed.\n";
 
             // destroy all objects of this `Text3D`.
-            std::cout << "All objects (" << this->object_pointer_vector.size() << " pieces) of this 3D text will be destroyed.\n";
+            std::cout << "All `Object`s (" << this->object_pointer_vector.size() << " pieces) of this `Text3D` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Object*>(this->object_pointer_vector, this->number_of_objects);
 
             // requirements for further actions:

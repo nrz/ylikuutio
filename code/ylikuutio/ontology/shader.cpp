@@ -170,14 +170,14 @@ namespace yli
         Shader::~Shader()
         {
             // destructor.
-            std::cout << "Shader with childID " << std::dec << this->childID << " will be destroyed.\n";
+            std::cout << "`Shader` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
             // Destroy all materials of this shader.
-            std::cout << "All materials of this shader will be destroyed.\n";
+            std::cout << "All `Material`s of this `Shader` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Material*>(this->material_pointer_vector, this->number_of_materials);
 
             // Destroy all symbioses of this shader.
-            std::cout << "All symbioses of this shader will be destroyed.\n";
+            std::cout << "All `Symbiosis` entities of this `Shader` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Symbiosis*>(this->symbiosis_pointer_vector, this->number_of_symbioses);
 
             // Requirements for further actions (except `glDeleteProgram`):

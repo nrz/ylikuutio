@@ -109,10 +109,10 @@ namespace yli
         Holobiont::~Holobiont()
         {
             // destructor.
-            std::cout << "Holobiont with childID " << std::dec << this->childID << " will be destroyed.\n";
+            std::cout << "`Holobiont` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
             // always delete all `Biont`s of this `Holobiont`.
-            std::cout << "All bionts of this holobiont will be destroyed.\n";
+            std::cout << "All `Biont`s of this `Holobiont` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Biont*>(this->biont_pointer_vector, this->number_of_bionts);
 
             // requirements for further actions:

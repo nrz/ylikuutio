@@ -241,7 +241,7 @@ namespace yli
         Object::~Object()
         {
             // destructor.
-            std::cout << "Object with childID " << std::dec << this->childID << " will be destroyed.\n";
+            std::cout << "`Object` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
             // set pointer to this object to `nullptr`.
             if (this->object_type == yli::ontology::ObjectType::REGULAR)
@@ -279,7 +279,7 @@ namespace yli
                 if (this->glyph != nullptr)
                 {
                     std::string unicode_string = this->glyph->get_unicode_char_pointer();
-                    std::cout << "Object with childID " << std::dec << this->childID << " (Unicode: \"" << unicode_string << "\") will be destroyed.\n";
+                    std::cout << "`Object` with childID " << std::dec << this->childID << " (Unicode: \"" << unicode_string << "\") will be destroyed.\n";
                 }
 
                 // requirements for further actions in this block:

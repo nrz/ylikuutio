@@ -91,7 +91,7 @@ namespace yli
         SymbiontSpecies::~SymbiontSpecies()
         {
             // destructor.
-            std::cout << "SymbiontSpecies with childID " << std::dec << this->childID << " will be destroyed.\n";
+            std::cout << "`SymbiontSpecies` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
             if (this->opengl_in_use)
             {

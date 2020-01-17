@@ -184,18 +184,18 @@ namespace yli
         Scene::~Scene()
         {
             // destructor.
-            std::cout << "Scene with childID " << std::dec << this->childID << " will be destroyed.\n";
+            std::cout << "`Scene` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
             // destroy all `Shader`s of this `Scene`.
-            std::cout << "All shaders of this scene will be destroyed.\n";
+            std::cout << "All `Shader`s of this `Scene` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Shader*>(this->shader_pointer_vector, this->number_of_shaders);
 
             // destroy all `Camera`s of this `Scene`.
-            std::cout << "All cameras of this scene will be destroyed.\n";
+            std::cout << "All `Camera`s of this `Scene` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Camera*>(this->camera_pointer_vector, this->number_of_cameras);
 
             // destroy all `Brain`s of this `Scene`.
-            std::cout << "All brains of this scene will be destroyed.\n";
+            std::cout << "All `Brain`s of this `Scene` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Brain*>(this->brain_pointer_vector, this->number_of_brains);
 
             if (this->universe != nullptr && this->universe->get_active_scene() == this)

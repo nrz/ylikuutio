@@ -136,22 +136,22 @@ namespace yli
             if (!this->is_symbiont_material)
             {
                 // destructor.
-                std::cout << "Material with childID " << std::dec << this->childID << " will be destroyed.\n";
+                std::cout << "`Material` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
                 // Destroy all `Species` of this `Material`.
-                std::cout << "All species of this material will be destroyed.\n";
+                std::cout << "All `Species` of this `Material` will be destroyed.\n";
                 yli::hierarchy::delete_children<yli::ontology::Species*>(this->species_pointer_vector, this->number_of_species);
 
                 // Destroy all `ShapeshifterTransformation`s of this `Material`.
-                std::cout << "All shapeshifter_transformation of this material will be destroyed.\n";
+                std::cout << "All `ShapeshifterTransformation`s of this `Material` will be destroyed.\n";
                 yli::hierarchy::delete_children<yli::ontology::ShapeshifterTransformation*>(this->shapeshifter_transformation_pointer_vector, this->number_of_shapeshifter_transformations);
 
                 // Destroy all `VectorFont`s of this `Material`.
-                std::cout << "All fonts of this material will be destroyed.\n";
+                std::cout << "All `VectorFont`s of this `Material` will be destroyed.\n";
                 yli::hierarchy::delete_children<yli::ontology::VectorFont*>(this->vector_font_pointer_vector, this->number_of_vector_fonts);
 
                 // Destroy all `ChunkMaster`s of this `Material`.
-                std::cout << "All chunk masters of this material will be destroyed.\n";
+                std::cout << "All `ChunkMaster`s of this `Material` will be destroyed.\n";
                 yli::hierarchy::delete_children<ontology::ChunkMaster*>(this->chunk_master_pointer_vector, this->number_of_chunk_masters);
 
                 glDeleteTextures(1, &this->texture);
