@@ -70,10 +70,10 @@ namespace yli
         World::~World()
         {
             // destructor.
-            std::cout << "This world will be destroyed.\n";
+            std::cout << "This `World` will be destroyed.\n";
 
             // Destroy all `Scene`s of this `World`.
-            std::cout << "All scenes of this world will be destroyed.\n";
+            std::cout << "All `Scene`s of this `World` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Scene*>(this->scene_pointer_vector, this->number_of_scenes);
 
             // requirements for further actions:

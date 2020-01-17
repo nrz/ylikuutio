@@ -128,14 +128,14 @@ namespace yli
             // destructor.
 
             // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
-            std::cout << "Font with childID " << std::dec << this->childID << " will be destroyed.\n";
+            std::cout << "`VectorFont` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
             // Destroy all 3D texts (`Text3D`) of this font.
-            std::cout << "All 3D texts of this font will be destroyed.\n";
+            std::cout << "All `Text3D`s of this `VectorFont` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Text3D*>(this->text3D_pointer_vector, this->number_of_text3Ds);
 
             // Destroy all `Glyph`s of this font.
-            std::cout << "All glyphs of this font will be destroyed.\n";
+            std::cout << "All `Glyph`s of this `VectorFont` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Glyph*>(this->glyph_pointer_vector, this->number_of_glyphs);
 
             // Requirements for further actions:

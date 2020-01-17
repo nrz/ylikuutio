@@ -525,14 +525,15 @@ namespace yli
                 // this method sets the active `Scene`.
                 void set_active_scene(yli::ontology::Scene* const world);
 
+                yli::ontology::Font2D* get_active_font2D() const;
+                void set_active_font2D(yli::ontology::Font2D* const font2D);
+
                 // this method sets the active `Camera`.
                 // Setting the active `Camera` does not change the active `Scene`!
                 void set_active_camera(yli::ontology::Camera* const camera) const;
 
-                // this method sets the active `Console`.
-                void set_active_console(yli::ontology::Console* const console);
-
                 yli::ontology::Console* get_active_console() const;
+                void set_active_console(yli::ontology::Console* const console);
 
                 yli::input::InputMethod get_input_method() const;
 
@@ -542,9 +543,6 @@ namespace yli
 
                 yli::audio::AudioMaster* get_audio_master() const;
                 yli::input::InputMaster* get_input_master() const;
-
-                yli::ontology::Font2D* get_active_font2D() const;
-                void set_active_font2D(yli::ontology::Font2D* const font2D);
 
                 std::size_t get_number_of_worlds() const;
 

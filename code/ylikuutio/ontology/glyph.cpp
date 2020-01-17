@@ -54,7 +54,7 @@ namespace yli
             // destructor.
             std::string glyph_name_string = this->glyph_name_pointer;
             std::string unicode_string = this->unicode_char_pointer;
-            std::cout << "This glyph (\"" << glyph_name_string << "\", Unicode: \"" << std::dec << unicode_string << "\") will be destroyed.\n";
+            std::cout << "This `Glyph` (\"" << glyph_name_string << "\", Unicode: \"" << std::dec << unicode_string << "\") will be destroyed.\n";
 
             // Cleanup buffers.
             glDeleteBuffers(1, &this->vertexbuffer);

@@ -79,10 +79,10 @@ namespace yli
         SymbiontMaterial::~SymbiontMaterial()
         {
             // destructor.
-            std::cout << "SymbiontMaterial with childID " << std::dec << this->childID << " will be destroyed.\n";
+            std::cout << "`SymbiontMaterial` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
             // destroy all symbiont species of this symbiont material.
-            std::cout << "All symbiont species of this symbiont material will be destroyed.\n";
+            std::cout << "All `SymbiontSpecies` of this `SymbiontMaterial` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::SymbiontSpecies*>(this->symbiont_species_pointer_vector, this->number_of_symbiont_species);
 
             glDeleteTextures(1, &this->texture);

@@ -85,7 +85,7 @@ namespace yli
         Entity::~Entity()
         {
             // destructor.
-            std::cout << "Entity destructor called.\n";
+            std::cout << "`Entity` destructor called.\n";
 
             if (this->universe == nullptr)
             {

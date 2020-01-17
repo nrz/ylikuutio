@@ -45,16 +45,19 @@ namespace yli
         class Species;
         class Object;
         class VectorFont;
+        class ShapeshifterTransformation;
         class ChunkMaster;
 
         class Material: public yli::ontology::Entity
         {
             public:
                 void bind_Species(yli::ontology::Species* const species);
+                void bind_ShapeshifterTransformation(yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation);
                 void bind_VectorFont(yli::ontology::VectorFont* const vector_font);
                 void bind_ChunkMaster(ontology::ChunkMaster* const chunk_master);
 
                 void unbind_Species(const std::size_t childID);
+                void unbind_ShapeshifterTransformation(const std::size_t childID);
                 void unbind_VectorFont(const std::size_t childID);
                 void unbind_ChunkMaster(const std::size_t childID);
 
@@ -67,6 +70,7 @@ namespace yli
                     this->texture_file_format      = material_struct.texture_file_format;
                     this->texture_filename         = material_struct.texture_filename;
                     this->number_of_species        = 0;
+                    this->number_of_shapeshifter_transformations = 0;
                     this->number_of_vector_fonts   = 0;
                     this->number_of_chunk_masters  = 0;
                     this->texture                  = 0; // some dummy value.
@@ -110,6 +114,7 @@ namespace yli
 
                         // `yli::ontology::Entity` member variables begin here.
                         this->child_vector_pointers_vector.push_back(&this->species_pointer_vector);
+                        this->child_vector_pointers_vector.push_back(&this->shapeshifter_transformation_pointer_vector);
                         this->child_vector_pointers_vector.push_back(&this->vector_font_pointer_vector);
                         this->child_vector_pointers_vector.push_back(&this->chunk_master_pointer_vector);
                         this->type_string = "yli::ontology::Material*";
@@ -164,12 +169,15 @@ namespace yli
                 uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
 
                 std::vector<yli::ontology::Species*> species_pointer_vector;
+                std::vector<yli::ontology::ShapeshifterTransformation*> shapeshifter_transformation_pointer_vector;
                 std::vector<yli::ontology::VectorFont*> vector_font_pointer_vector;
                 std::vector<ontology::ChunkMaster*> chunk_master_pointer_vector;
                 std::queue<std::size_t> free_speciesID_queue;
+                std::queue<std::size_t> free_shapeshifter_transformationID_queue;
                 std::queue<std::size_t> free_vector_fontID_queue;
                 std::queue<std::size_t> free_chunk_masterID_queue;
                 std::size_t number_of_species;
+                std::size_t number_of_shapeshifter_transformations;
                 std::size_t number_of_vector_fonts;
                 std::size_t number_of_chunk_masters;
 

@@ -21,6 +21,7 @@
 #include "vector_font.hpp"
 #include "text3D.hpp"
 #include "object.hpp"
+#include "object_type.hpp"
 #include "object_struct.hpp"
 
 // Include standard headers
@@ -57,7 +58,7 @@ namespace yli
                 object_struct.text3D_parent = text3D;
                 object_struct.original_scale_vector = text3D->original_scale_vector;
                 object_struct.rotate_angle = text3D->rotate_angle;
-                object_struct.is_character = true;
+                object_struct.object_type = yli::ontology::ObjectType::CHARACTER;
                 object_struct.cartesian_coordinates = text3D->cartesian_coordinates; // TODO: adjust this as needed.
                 object_struct.rotate_vector = text3D->rotate_vector;
 

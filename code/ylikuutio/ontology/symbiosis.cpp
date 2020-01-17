@@ -160,14 +160,14 @@ namespace yli
         Symbiosis::~Symbiosis()
         {
             // destructor.
-            std::cout << "Symbiosis with childID " << std::dec << this->childID << " will be destroyed.\n";
+            std::cout << "`Symbiosis` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
             // destroy all `Holobiont`s of this `Symbiosis`.
-            std::cout << "All holobionts of this symbiosis will be destroyed.\n";
+            std::cout << "All `Holobiont`s of this `Symbiosis` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Holobiont*>(this->holobiont_pointer_vector, this->number_of_holobionts);
 
             // destroy all `SymbiontMaterial`s of this `Symbiosis`.
-            std::cout << "All symbiont materials of this symbiosis will be destroyed.\n";
+            std::cout << "All `SymbiontMaterial`s of this `Symbiosis` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::SymbiontMaterial*>(this->symbiont_material_pointer_vector, this->number_of_symbiont_materials);
 
             // requirements for further actions:

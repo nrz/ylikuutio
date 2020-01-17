@@ -70,7 +70,7 @@ namespace yli
             // destructor.
 
             // destroy all chunks of this material.
-            std::cout << "All chunks of this material will be destroyed.\n";
+            std::cout << "All `Chunk`s of this `ChunkMaster` will be destroyed.\n";
             yli::hierarchy::delete_children<ontology::Chunk*>(this->chunk_pointer_vector, this->number_of_chunks);
 
             // requirements for further actions:

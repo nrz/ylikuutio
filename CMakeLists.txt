@@ -562,6 +562,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/object.cpp
     code/ylikuutio/ontology/object.hpp
     code/ylikuutio/ontology/object_struct.hpp
+    code/ylikuutio/ontology/object_type.hpp
     code/ylikuutio/ontology/post_render_callback.hpp
     code/ylikuutio/ontology/pre_render_callback.hpp
     code/ylikuutio/ontology/render_templates.hpp
@@ -579,6 +580,13 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/shader_priority_queue.cpp
     code/ylikuutio/ontology/shader_priority_queue.hpp
     code/ylikuutio/ontology/shader_struct.hpp
+    code/ylikuutio/ontology/shapeshifter_form.cpp
+    code/ylikuutio/ontology/shapeshifter_form.hpp
+    code/ylikuutio/ontology/shapeshifter_sequence.cpp
+    code/ylikuutio/ontology/shapeshifter_sequence.hpp
+    code/ylikuutio/ontology/shapeshifter_sequence_struct.hpp
+    code/ylikuutio/ontology/shapeshifter_transformation.cpp
+    code/ylikuutio/ontology/shapeshifter_transformation.hpp
     code/ylikuutio/ontology/species.cpp
     code/ylikuutio/ontology/species.hpp
     code/ylikuutio/ontology/species_or_glyph.hpp
@@ -863,12 +871,20 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/object.cpp
         code/ylikuutio/ontology/object.hpp
         code/ylikuutio/ontology/object_struct.hpp
+        code/ylikuutio/ontology/object_type.hpp
         code/ylikuutio/ontology/scene.cpp
         code/ylikuutio/ontology/scene.hpp
         code/ylikuutio/ontology/scene_struct.hpp
         code/ylikuutio/ontology/shader.cpp
         code/ylikuutio/ontology/shader.hpp
         code/ylikuutio/ontology/shader_struct.hpp
+        code/ylikuutio/ontology/shapeshifter_form.cpp
+        code/ylikuutio/ontology/shapeshifter_form.hpp
+        code/ylikuutio/ontology/shapeshifter_sequence.cpp
+        code/ylikuutio/ontology/shapeshifter_sequence.hpp
+        code/ylikuutio/ontology/shapeshifter_sequence_struct.hpp
+        code/ylikuutio/ontology/shapeshifter_transformation.cpp
+        code/ylikuutio/ontology/shapeshifter_transformation.hpp
         code/ylikuutio/ontology/species.cpp
         code/ylikuutio/ontology/species.hpp
         code/ylikuutio/ontology/species_struct.hpp

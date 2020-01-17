@@ -20,6 +20,7 @@
 
 #include "entity.hpp"
 #include "movable.hpp"
+#include "object_type.hpp"
 #include "object_struct.hpp"
 #include "movable_struct.hpp"
 #include "render_templates.hpp"
@@ -54,6 +55,7 @@ namespace yli
     {
         class Shader;
         class Species;
+        class ShapeshifterSequence;
         class Text3D;
         class Glyph;
 
@@ -63,6 +65,7 @@ namespace yli
                 // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
                 // and requests a new `childID` from the new `Species` or from the new `Text3D`.
                 void bind_to_new_parent(yli::ontology::Species* const new_parent);
+                void bind_to_new_parent(yli::ontology::ShapeshifterSequence* const new_parent);
                 void bind_to_new_parent(yli::ontology::Text3D* const new_parent);
                 void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
@@ -84,19 +87,25 @@ namespace yli
                     this->initial_rotate_angle  = object_struct.initial_rotate_angle;
                     this->rotate_angle          = object_struct.rotate_angle;
 
-                    this->is_character          = object_struct.is_character;
+                    this->object_type           = object_struct.object_type;
 
-                    if (this->is_character)
-                    {
-                        this->text3D_parent  = object_struct.text3D_parent;
-                        this->species_parent = nullptr;
-                        this->glyph          = object_struct.glyph;
-                    }
-                    else
+                    this->species_parent               = nullptr;
+                    this->shapeshifter_sequence_parent = nullptr;
+                    this->text3D_parent                = nullptr;
+                    this->glyph                        = nullptr;
+
+                    if (this->object_type == yli::ontology::ObjectType::REGULAR)
                     {
                         this->species_parent = object_struct.species_parent;
-                        this->text3D_parent  = nullptr;
-                        this->glyph          = nullptr;
+                    }
+                    else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
+                    {
+                        this->shapeshifter_sequence_parent = object_struct.shapeshifter_sequence_parent;
+                    }
+                    else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
+                    {
+                        this->text3D_parent  = object_struct.text3D_parent;
+                        this->glyph          = object_struct.glyph;
                     }
 
                     // get `childID` from `Species` or `Text3D` and set pointer to this `Object`.
@@ -131,10 +140,11 @@ namespace yli
                 void render_this_object(yli::ontology::Shader* const shader_pointer);
 
                 yli::ontology::Species* species_parent; // pointer to the `Species` parent.
+                yli::ontology::ShapeshifterSequence* shapeshifter_sequence_parent; // pointer to the `ShapeshifterSequence` parent.
                 yli::ontology::Text3D* text3D_parent;   // pointer to the `Text3D` parent.
                 yli::ontology::Glyph* glyph;            // pointer to the `Glyph` (not a parent!).
 
-                bool is_character;
+                yli::ontology::ObjectType object_type;
 
                 glm::vec3 original_scale_vector;        // original scale vector.
                 glm::vec3 rotate_vector;                // rotate vector.

@@ -13,6 +13,9 @@ Tasks which are necessary for the first stage:
 [ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
 [ ] Implement octree segmentation.
 [ ] Implement frustrum culling.
+[ ] Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
+[ ] Implement `yli::ontology::ShapeshifterForm : public Model`.
+[ ] Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.
 [ ] Implement skeletal animation.
 [ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
 [ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
@@ -37,6 +40,7 @@ Tasks which are necessary for the second stage:
 [ ] Implement chat client using the chosen network library.
 
 Tasks which are necessary for the development of Ylikuutio:
+[ ] Implement `yli::ontology::ShaderSymbiosis`.
 [ ] Implement a custom FBX loader.
 [ ] Replace OpenFBX with the custom FBX loader.
 [ ] Implement a custom FBX writer.

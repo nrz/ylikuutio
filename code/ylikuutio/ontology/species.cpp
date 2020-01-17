@@ -130,10 +130,10 @@ namespace yli
             if (!this->is_symbiont_species)
             {
                 // destructor.
-                std::cout << "Species with childID " << std::dec << this->childID << " will be destroyed.\n";
+                std::cout << "`Species` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
                 // destroy all objects of this species.
-                std::cout << "All objects of this species will be destroyed.\n";
+                std::cout << "All `Object`s of this `Species` will be destroyed.\n";
                 yli::hierarchy::delete_children<yli::ontology::Object*>(this->object_pointer_vector, this->number_of_objects);
 
                 // Cleanup buffers.

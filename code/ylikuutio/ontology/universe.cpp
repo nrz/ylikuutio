@@ -231,7 +231,7 @@ namespace yli
         Universe::~Universe()
         {
             // destructor.
-            std::cout << "This universe will be destroyed.\n";
+            std::cout << "This `Universe` will be destroyed.\n";
 
             if (!this->is_headless && this->is_framebuffer_initialized)
             {
@@ -241,27 +241,27 @@ namespace yli
             }
 
             // destroy all `World`s of this `Universe`.
-            std::cout << "All worlds of this universe will be destroyed.\n";
+            std::cout << "All `World`s of this `Universe` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, this->number_of_worlds);
 
             // destroy all `Console`s of this `Universe`.
-            std::cout << "All consoles of this universe will be destroyed.\n";
+            std::cout << "All `Console`s of this `Universe` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Console*>(this->console_pointer_vector, this->number_of_consoles);
 
             // destroy all `Font2D`s of this `Universe`.
-            std::cout << "All 2D fonts of this universe will be destroyed.\n";
+            std::cout << "All `Font2D`s of this `Universe` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Font2D*>(this->font2D_pointer_vector, this->number_of_font2Ds);
 
             // destroy all AnyStructEntities of this `Universe`.
-            std::cout << "All AnyStructEntities of this universe will be destroyed.\n";
+            std::cout << "All AnyStructEntities of this `Universe` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::AnyStructEntity*>(this->any_struct_entity_pointer_vector, this->number_of_any_struct_entities);
 
             // destroy all AnyValueEntities of this `Universe`.
-            std::cout << "All AnyValueEntities of this universe will be destroyed.\n";
+            std::cout << "All AnyValueEntities of this `Universe` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::AnyValueEntity*>(this->any_value_entity_pointer_vector, this->number_of_any_value_entities);
 
             // destroy all CallbackEngineEntities of this `Universe`.
-            std::cout << "All CallbackEngineEntities of this universe will be destroyed.\n";
+            std::cout << "All CallbackEngineEntities of this `Universe` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::CallbackEngineEntity*>(this->callback_engine_entity_pointer_vector, this->number_of_callback_engine_entities);
 
             SDL_Quit();
@@ -365,6 +365,16 @@ namespace yli
             }
         }
 
+        yli::ontology::Font2D* Universe::get_active_font2D() const
+        {
+            return this->active_font2D;
+        }
+
+        void Universe::set_active_font2D(yli::ontology::Font2D* const font2D)
+        {
+            this->active_font2D = font2D;
+        }
+
         void Universe::set_active_camera(yli::ontology::Camera* const camera) const
         {
             // Setting the active `Camera` does not change the active `Scene`!
@@ -379,14 +389,14 @@ namespace yli
             scene->set_active_camera(camera);
         }
 
-        void Universe::set_active_console(yli::ontology::Console* const console)
-        {
-            this->active_console = console;
-        }
-
         yli::ontology::Console* Universe::get_active_console() const
         {
             return this->active_console;
+        }
+
+        void Universe::set_active_console(yli::ontology::Console* const console)
+        {
+            this->active_console = console;
         }
 
         yli::input::InputMethod Universe::get_input_method() const
@@ -1253,16 +1263,6 @@ namespace yli
             }
 
             return this->input_master.get();
-        }
-
-        yli::ontology::Font2D* Universe::get_active_font2D() const
-        {
-            return this->active_font2D;
-        }
-
-        void Universe::set_active_font2D(yli::ontology::Font2D* const font2D)
-        {
-            this->active_font2D = font2D;
         }
 
         const glm::mat4& Universe::get_projection_matrix() const

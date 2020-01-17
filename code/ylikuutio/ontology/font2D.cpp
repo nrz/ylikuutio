@@ -87,7 +87,7 @@ namespace yli
         Font2D::~Font2D()
         {
             // destructor.
-            std::cout << "This font will be destroyed.\n";
+            std::cout << "This `Font2D` will be destroyed.\n";
 
             // Delete buffers.
             glDeleteBuffers(1, &this->vertexbuffer);
@@ -100,7 +100,7 @@ namespace yli
             glDeleteProgram(this->programID);
 
             // Destroy all texts of this `Font2D`.
-            std::cout << "All texts of this font will be destroyed.\n";
+            std::cout << "All `Text2D`s of this `Font2D` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Text2D*>(this->text2D_pointer_vector, this->number_of_text2Ds);
 
             // requirements for further actions:
