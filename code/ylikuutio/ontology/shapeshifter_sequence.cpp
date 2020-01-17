@@ -104,6 +104,8 @@ namespace yli
         void ShapeshifterSequence::render()
         {
             // Render this `ShapeshifterSequence`.
+
+            // TODO.
         }
     }
 }
