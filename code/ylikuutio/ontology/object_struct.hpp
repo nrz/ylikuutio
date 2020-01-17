@@ -62,8 +62,7 @@ namespace yli
                 initial_rotate_angle(PI),
                 horizontal_angle(0.0),
                 vertical_angle(0.0),
-                object_type(yli::ontology::ObjectType::REGULAR),
-                is_symbiosis_object(false)
+                object_type(yli::ontology::ObjectType::REGULAR)
             {
                 // constructor.
             }
@@ -84,7 +83,6 @@ namespace yli
             double horizontal_angle;                // horizontal angle in radians.
             double vertical_angle;                  // vertical angle in radians.
             yli::ontology::ObjectType object_type;  // The parent of a character object is a `Glyph`. The parent of a regular object is a `Species`.
-            bool is_symbiosis_object;               // The parent of a `SymbiosisObject` is a `Symbiosis`.
         };
     }
 }
