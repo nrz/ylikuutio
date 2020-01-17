@@ -109,40 +109,6 @@ namespace yli
             }
         }
 
-        void Object::bind_to_new_parent(yli::ontology::Text3D* const new_parent)
-        {
-            // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
-            // and requests a new `childID` from the new `Text3D`.
-
-            if (this->object_type == yli::ontology::ObjectType::CHARACTER)
-            {
-                // requirements for further actions in this block:
-                // `this->text3D_parent` must not be `nullptr`.
-                // `new_parent` must not be `nullptr`.
-
-                yli::ontology::Text3D* const text3D = this->text3D_parent;
-
-                if (text3D == nullptr)
-                {
-                    std::cerr << "ERROR: `Object::bind_to_new_parent`: `text3D` is `nullptr`!\n";
-                    return;
-                }
-
-                if (new_parent == nullptr)
-                {
-                    std::cerr << "ERROR: `Object::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
-                    return;
-                }
-
-                // unbind from the old parent `Text3D`.
-                text3D->unbind_Object(this->childID);
-
-                // get `childID` from `Text3D` and set pointer to this `Object`.
-                this->text3D_parent = static_cast<yli::ontology::Text3D*>(new_parent);
-                this->text3D_parent->bind_Object(this);
-            }
-        }
-
         void Object::bind_to_new_parent(yli::ontology::Species* const new_parent)
         {
             // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
@@ -208,6 +174,40 @@ namespace yli
                 // get `childID` from `ShapeshifterSequence` and set pointer to this `Object`.
                 this->shapeshifter_sequence_parent = static_cast<yli::ontology::ShapeshifterSequence*>(new_parent);
                 this->shapeshifter_sequence_parent->bind_Object(this);
+            }
+        }
+
+        void Object::bind_to_new_parent(yli::ontology::Text3D* const new_parent)
+        {
+            // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
+            // and requests a new `childID` from the new `Text3D`.
+
+            if (this->object_type == yli::ontology::ObjectType::CHARACTER)
+            {
+                // requirements for further actions in this block:
+                // `this->text3D_parent` must not be `nullptr`.
+                // `new_parent` must not be `nullptr`.
+
+                yli::ontology::Text3D* const text3D = this->text3D_parent;
+
+                if (text3D == nullptr)
+                {
+                    std::cerr << "ERROR: `Object::bind_to_new_parent`: `text3D` is `nullptr`!\n";
+                    return;
+                }
+
+                if (new_parent == nullptr)
+                {
+                    std::cerr << "ERROR: `Object::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+                    return;
+                }
+
+                // unbind from the old parent `Text3D`.
+                text3D->unbind_Object(this->childID);
+
+                // get `childID` from `Text3D` and set pointer to this `Object`.
+                this->text3D_parent = static_cast<yli::ontology::Text3D*>(new_parent);
+                this->text3D_parent->bind_Object(this);
             }
         }
 
