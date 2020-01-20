@@ -145,8 +145,6 @@ namespace yli
                     }
 
                     // `yli::ontology::Entity` member variables begin here.
-                    this->child_vector_pointers_vector.push_back(&this->glyph_pointer_vector);
-                    this->child_vector_pointers_vector.push_back(&this->text3D_pointer_vector);
                     this->type_string = "yli::ontology::VectorFont*";
                     this->can_be_erased = true;
                 }

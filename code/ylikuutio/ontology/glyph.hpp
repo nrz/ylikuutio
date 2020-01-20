@@ -108,7 +108,6 @@ namespace yli
                     // TODO: load the vertex data the same way as in `yli::ontology::Species::Species(yli::ontology::SpeciesStruct species_struct)`!
 
                     // `yli::ontology::Entity` member variables begin here.
-                    // `yli::ontology::Model` constructor takes care of `child_vector_pointers_vector`.
                     this->type_string = "yli::ontology::Glyph*";
                 }
 

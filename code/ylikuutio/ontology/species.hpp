@@ -168,7 +168,6 @@ namespace yli
                         // TODO: Compute the graph of this object type to enable object vertex modification!
 
                         // `yli::ontology::Entity` member variables begin here.
-                        // `yli::ontology::Model` constructor takes care of `child_vector_pointers_vector`.
                         this->type_string = "yli::ontology::Species*";
                         this->can_be_erased = true;
                     }

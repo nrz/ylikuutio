@@ -41,7 +41,7 @@ namespace yli
             }
 
             // Get `childID` from the `Universe` and set pointer to this `CallbackEngineEntity`.
-            universe->bind_CallbackEngineEntity(this);
+            universe->parent_of_callback_engine_entities.bind_child(this);
         }
 
         // destructor.
@@ -62,7 +62,7 @@ namespace yli
             }
 
             // set pointer to this `AnyValueEntity` to `nullptr`.
-            universe->unbind_CallbackEngineEntity(this->childID);
+            universe->parent_of_callback_engine_entities.unbind_child(this->childID);
         }
 
         yli::ontology::Entity* CallbackEngineEntity::get_parent() const

@@ -81,7 +81,7 @@ namespace yli
             }
 
             // Get `childID` from the `Universe` and set pointer to this `Font2D`.
-            universe->bind_Font2D(this);
+            universe->parent_of_font2Ds.bind_child(this);
         }
 
         Font2D::~Font2D()
@@ -115,7 +115,7 @@ namespace yli
             }
 
             // set pointer to this `Font2D` to `nullptr`.
-            universe->unbind_Font2D(this->childID);
+            universe->parent_of_font2Ds.unbind_child(this->childID);
         }
 
         yli::ontology::Entity* Font2D::get_parent() const

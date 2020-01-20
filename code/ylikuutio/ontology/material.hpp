@@ -113,10 +113,6 @@ namespace yli
                         }
 
                         // `yli::ontology::Entity` member variables begin here.
-                        this->child_vector_pointers_vector.push_back(&this->species_pointer_vector);
-                        this->child_vector_pointers_vector.push_back(&this->shapeshifter_transformation_pointer_vector);
-                        this->child_vector_pointers_vector.push_back(&this->vector_font_pointer_vector);
-                        this->child_vector_pointers_vector.push_back(&this->chunk_master_pointer_vector);
                         this->type_string = "yli::ontology::Material*";
                         this->can_be_erased = true;
                     }

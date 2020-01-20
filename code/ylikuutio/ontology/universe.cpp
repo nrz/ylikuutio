@@ -35,15 +35,12 @@
 
 #include "universe.hpp"
 #include "entity.hpp"
-#include "world.hpp"
 #include "scene.hpp"
 #include "camera.hpp"
-#include "font2D.hpp"
 #include "brain.hpp"
 #include "movable.hpp"
 #include "any_value_entity.hpp"
 #include "any_struct_entity.hpp"
-#include "callback_engine_entity.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
@@ -96,6 +93,8 @@ namespace yli
 
     namespace ontology
     {
+        class Font2D;
+
         const std::string Universe::version = "0.0.6";
 
         void Universe::bind_Entity(yli::ontology::Entity* const entity)
@@ -114,66 +113,6 @@ namespace yli
             yli::hierarchy::set_child_pointer(entity->entityID, entity, this->entity_pointer_vector, this->free_entityID_queue, this->number_of_entities);
         }
 
-        void Universe::bind_World(yli::ontology::World* const world)
-        {
-            // get `childID` from `Universe` and set pointer to `world`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::World*>(
-                    world,
-                    this->world_pointer_vector,
-                    this->free_worldID_queue,
-                    this->number_of_worlds);
-        }
-
-        void Universe::bind_Font2D(yli::ontology::Font2D* const font2D)
-        {
-            // get `childID` from `Universe` and set pointer to `font2D`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Font2D*>(
-                    font2D,
-                    this->font2D_pointer_vector,
-                    this->free_font2D_ID_queue,
-                    this->number_of_font2Ds);
-        }
-
-        void Universe::bind_Console(yli::ontology::Console* const console)
-        {
-            // get `childID` from `Universe` and set pointer to `console`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Console*>(
-                    console,
-                    this->console_pointer_vector,
-                    this->free_console_ID_queue,
-                    this->number_of_consoles);
-        }
-
-        void Universe::bind_AnyValueEntity(yli::ontology::AnyValueEntity* const any_value_entity)
-        {
-            // get `childID` from `Universe` and set pointer to `any_value_entity`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::AnyValueEntity*>(
-                    any_value_entity,
-                    this->any_value_entity_pointer_vector,
-                    this->free_any_value_entityID_queue,
-                    this->number_of_any_value_entities);
-        }
-
-        void Universe::bind_AnyStructEntity(yli::ontology::AnyStructEntity* const any_struct_entity)
-        {
-            // get `childID` from `Universe` and set pointer to `any_struct_entity`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::AnyStructEntity*>(
-                    any_struct_entity,
-                    this->any_struct_entity_pointer_vector,
-                    this->free_any_struct_entityID_queue,
-                    this->number_of_any_struct_entities);
-        }
-
-        void Universe::bind_CallbackEngineEntity(yli::ontology::CallbackEngineEntity* const callback_engine_entity)
-        {
-            // get `childID` from `Universe` and set pointer to `callback_engine_entity`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::CallbackEngineEntity*>(
-                    callback_engine_entity,
-                    this->callback_engine_entity_pointer_vector,
-                    this->free_callback_engine_entityID_queue,
-                    this->number_of_callback_engine_entities);
-        }
-
         void Universe::unbind_Entity(const std::size_t entityID)
         {
             yli::hierarchy::unbind_child_from_parent(
@@ -181,51 +120,6 @@ namespace yli
                     this->entity_pointer_vector,
                     this->free_entityID_queue,
                     this->number_of_entities);
-        }
-
-        void Universe::unbind_World(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->world_pointer_vector,
-                    this->free_worldID_queue,
-                    this->number_of_worlds);
-        }
-
-        void Universe::unbind_Font2D(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->font2D_pointer_vector,
-                    this->free_font2D_ID_queue,
-                    this->number_of_font2Ds);
-        }
-
-        void Universe::unbind_AnyValueEntity(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->any_value_entity_pointer_vector,
-                    this->free_any_value_entityID_queue,
-                    this->number_of_any_value_entities);
-        }
-
-        void Universe::unbind_AnyStructEntity(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->any_struct_entity_pointer_vector,
-                    this->free_any_struct_entityID_queue,
-                    this->number_of_any_struct_entities);
-        }
-
-        void Universe::unbind_CallbackEngineEntity(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->callback_engine_entity_pointer_vector,
-                    this->free_callback_engine_entityID_queue,
-                    this->number_of_callback_engine_entities);
         }
 
         Universe::~Universe()
@@ -239,30 +133,6 @@ namespace yli
                 glDeleteRenderbuffers(1, &this->renderbuffer);
                 glDeleteFramebuffers(1, &this->framebuffer);
             }
-
-            // destroy all `World`s of this `Universe`.
-            std::cout << "All `World`s of this `Universe` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, this->number_of_worlds);
-
-            // destroy all `Console`s of this `Universe`.
-            std::cout << "All `Console`s of this `Universe` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Console*>(this->console_pointer_vector, this->number_of_consoles);
-
-            // destroy all `Font2D`s of this `Universe`.
-            std::cout << "All `Font2D`s of this `Universe` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Font2D*>(this->font2D_pointer_vector, this->number_of_font2Ds);
-
-            // destroy all AnyStructEntities of this `Universe`.
-            std::cout << "All AnyStructEntities of this `Universe` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::AnyStructEntity*>(this->any_struct_entity_pointer_vector, this->number_of_any_struct_entities);
-
-            // destroy all AnyValueEntities of this `Universe`.
-            std::cout << "All AnyValueEntities of this `Universe` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::AnyValueEntity*>(this->any_value_entity_pointer_vector, this->number_of_any_value_entities);
-
-            // destroy all CallbackEngineEntities of this `Universe`.
-            std::cout << "All CallbackEngineEntities of this `Universe` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::CallbackEngineEntity*>(this->callback_engine_entity_pointer_vector, this->number_of_callback_engine_entities);
 
             SDL_Quit();
         }
@@ -314,7 +184,7 @@ namespace yli
             }
 
             // Render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
-            yli::ontology::render_children<yli::ontology::Font2D*>(this->font2D_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_font2Ds.child_pointer_vector);
 
             yli::opengl::enable_depth_test();
 
@@ -346,7 +216,7 @@ namespace yli
             }
 
             // Render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
-            yli::ontology::render_children<yli::ontology::Font2D*>(this->font2D_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_font2Ds.child_pointer_vector);
 
             // Swap buffers.
             SDL_GL_SwapWindow(this->get_window());
@@ -416,7 +286,7 @@ namespace yli
 
         std::size_t Universe::get_number_of_worlds() const
         {
-            return this->number_of_worlds;
+            return this->parent_of_worlds.number_of_children;
         }
 
         yli::ontology::Scene* Universe::get_active_scene() const
@@ -432,20 +302,22 @@ namespace yli
 
         std::size_t Universe::get_number_of_children() const
         {
-            return this->number_of_worlds +
-                this->number_of_font2Ds +
-                this->number_of_consoles +
-                this->number_of_any_value_entities +
-                this->number_of_any_struct_entities;
+            return this->parent_of_worlds.number_of_children +
+                this->parent_of_font2Ds.number_of_children +
+                this->parent_of_consoles.number_of_children +
+                this->parent_of_any_value_entities.number_of_children +
+                this->parent_of_any_struct_entities.number_of_children +
+                this->parent_of_callback_engine_entities.number_of_children;
         }
 
         std::size_t Universe::get_number_of_descendants() const
         {
-            return yli::ontology::get_number_of_descendants(this->world_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->font2D_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->console_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->any_value_entity_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->any_struct_entity_pointer_vector);
+            return yli::ontology::get_number_of_descendants(this->parent_of_worlds.child_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->parent_of_font2Ds.child_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->parent_of_any_value_entities.child_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->parent_of_any_struct_entities.child_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->parent_of_callback_engine_entities.child_pointer_vector);
         }
 
         void Universe::create_context()

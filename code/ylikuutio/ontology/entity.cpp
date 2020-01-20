@@ -104,6 +104,10 @@ namespace yli
             this->universe->erase_entity(this->name);
         }
 
+        void Entity::render()
+        {
+        }
+
         std::size_t Entity::get_childID() const
         {
             return this->childID;

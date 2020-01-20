@@ -25,7 +25,6 @@
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
-#include <vector>   // std::vector
 
 namespace yli
 {
@@ -53,6 +52,8 @@ namespace yli
                 // destructor.
                 virtual ~Entity();
 
+                virtual void render();
+
                 std::size_t get_childID() const;
                 std::string get_type() const;
 
@@ -72,15 +73,15 @@ namespace yli
 
                 friend yli::ontology::Universe;
 
+                std::size_t childID; // TODO: add checks for `std::numeric_limits<std::size_t>::max();` (invalid value).
+
             protected:
                 void prerender() const;
                 void postrender() const;
 
                 yli::ontology::Universe* universe;                          // pointer to the `Universe`.
                 std::shared_ptr<yli::config::SettingMaster> setting_master; // pointer to the `SettingMaster`.
-                std::vector<void*> child_vector_pointers_vector;
                 std::size_t entityID;
-                std::size_t childID; // TODO: add checks for `std::numeric_limits<std::size_t>::max();` (invalid value).
 
                 std::string type_string;
 

@@ -563,6 +563,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/object.hpp
     code/ylikuutio/ontology/object_struct.hpp
     code/ylikuutio/ontology/object_type.hpp
+    code/ylikuutio/ontology/parent_module.cpp
+    code/ylikuutio/ontology/parent_module.hpp
     code/ylikuutio/ontology/post_render_callback.hpp
     code/ylikuutio/ontology/pre_render_callback.hpp
     code/ylikuutio/ontology/render_templates.hpp
