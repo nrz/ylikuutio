@@ -127,7 +127,7 @@ namespace yli
             }
 
             // get `childID` from the `World` and set pointer to this `Scene`.
-            world->bind_Scene(this);
+            world->parent_of_scenes.bind_child(this);
         }
 
         void Scene::bind_to_new_parent(yli::ontology::World* const new_parent)
@@ -154,11 +154,11 @@ namespace yli
             }
 
             // Unbind from the old parent `World`.
-            this->parent->unbind_Scene(this->childID);
+            this->parent->parent_of_scenes.unbind_child(this->childID);
 
             // Get `childID` from `World` and set pointer to this `Scene`.
             this->parent = new_parent;
-            this->parent->bind_Scene(this);
+            this->parent->parent_of_scenes.bind_child(this);
         }
 
         void Scene::bind_to_new_parent(yli::ontology::Entity* const new_parent)
@@ -216,7 +216,7 @@ namespace yli
             }
 
             // set pointer to this `Scene` to `nullptr`.
-            world->unbind_Scene(this->childID);
+            world->parent_of_scenes.unbind_child(this->childID);
         }
 
         void Scene::do_physics()
