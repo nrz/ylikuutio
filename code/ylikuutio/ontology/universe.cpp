@@ -316,7 +316,8 @@ namespace yli
                 yli::ontology::get_number_of_descendants(this->parent_of_font2Ds.child_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->parent_of_any_value_entities.child_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->parent_of_any_struct_entities.child_pointer_vector);
+                yli::ontology::get_number_of_descendants(this->parent_of_any_struct_entities.child_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->parent_of_callback_engine_entities.child_pointer_vector);
         }
 
         void Universe::create_context()
