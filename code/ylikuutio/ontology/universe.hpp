@@ -305,18 +305,15 @@ namespace yli
         class Font2D;
         class Console;
         class AnyValueEntity;
-        class AnyStructEntity;
         class CallbackEngineEntity;
 
         class Universe: public yli::ontology::Entity
         {
             public:
                 void bind_Entity(yli::ontology::Entity* const entity);
-                void bind_AnyStructEntity(yli::ontology::AnyStructEntity* const any_struct_entity);
                 void bind_CallbackEngineEntity(yli::ontology::CallbackEngineEntity* const callback_engine_entity);
 
                 void unbind_Entity(const std::size_t entityID);
-                void unbind_AnyStructEntity(const std::size_t childID);
                 void unbind_CallbackEngineEntity(const std::size_t childID);
 
                 // constructor.
@@ -325,7 +322,8 @@ namespace yli
                     parent_of_worlds(yli::ontology::ParentModule()),
                     parent_of_font2Ds(yli::ontology::ParentModule()),
                     parent_of_consoles(yli::ontology::ParentModule()),
-                    parent_of_any_value_entities(yli::ontology::ParentModule())
+                    parent_of_any_value_entities(yli::ontology::ParentModule()),
+                    parent_of_any_struct_entities(yli::ontology::ParentModule())
                 {
                     // call `bind_Entity` here since it couldn't be performed from `Entity` constructor.
                     this->bind_Entity(this);
@@ -429,7 +427,6 @@ namespace yli
                     this->can_display_help_screen          = true;
 
                     this->number_of_entities            = 0;
-                    this->number_of_any_struct_entities = 0;
 
                     this->context = nullptr;
                     this->window  = nullptr;
@@ -492,7 +489,7 @@ namespace yli
                     this->child_vector_pointers_vector.push_back(&this->parent_of_font2Ds.child_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->parent_of_consoles.child_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->parent_of_any_value_entities.child_pointer_vector);
-                    this->child_vector_pointers_vector.push_back(&this->any_struct_entity_pointer_vector);
+                    this->child_vector_pointers_vector.push_back(&this->parent_of_any_struct_entities.child_pointer_vector);
                     this->type_string = "yli::ontology::Universe*";
                 }
 
@@ -738,6 +735,7 @@ namespace yli
                 yli::ontology::ParentModule parent_of_font2Ds;
                 yli::ontology::ParentModule parent_of_consoles;
                 yli::ontology::ParentModule parent_of_any_value_entities;
+                yli::ontology::ParentModule parent_of_any_struct_entities;
 
             private:
                 bool compute_and_update_matrices_from_inputs();
@@ -747,10 +745,6 @@ namespace yli
                 std::vector<yli::ontology::Entity*> entity_pointer_vector;
                 std::queue<std::size_t> free_entityID_queue;
                 std::size_t number_of_entities;
-
-                std::vector<yli::ontology::AnyStructEntity*> any_struct_entity_pointer_vector;
-                std::queue<std::size_t> free_any_struct_entityID_queue;
-                std::size_t number_of_any_struct_entities;
 
                 std::vector<yli::ontology::CallbackEngineEntity*> callback_engine_entity_pointer_vector;
                 std::queue<std::size_t> free_callback_engine_entityID_queue;

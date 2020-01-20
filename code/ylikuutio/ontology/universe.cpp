@@ -114,16 +114,6 @@ namespace yli
             yli::hierarchy::set_child_pointer(entity->entityID, entity, this->entity_pointer_vector, this->free_entityID_queue, this->number_of_entities);
         }
 
-        void Universe::bind_AnyStructEntity(yli::ontology::AnyStructEntity* const any_struct_entity)
-        {
-            // get `childID` from `Universe` and set pointer to `any_struct_entity`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::AnyStructEntity*>(
-                    any_struct_entity,
-                    this->any_struct_entity_pointer_vector,
-                    this->free_any_struct_entityID_queue,
-                    this->number_of_any_struct_entities);
-        }
-
         void Universe::bind_CallbackEngineEntity(yli::ontology::CallbackEngineEntity* const callback_engine_entity)
         {
             // get `childID` from `Universe` and set pointer to `callback_engine_entity`.
@@ -141,15 +131,6 @@ namespace yli
                     this->entity_pointer_vector,
                     this->free_entityID_queue,
                     this->number_of_entities);
-        }
-
-        void Universe::unbind_AnyStructEntity(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->any_struct_entity_pointer_vector,
-                    this->free_any_struct_entityID_queue,
-                    this->number_of_any_struct_entities);
         }
 
         void Universe::unbind_CallbackEngineEntity(const std::size_t childID)
@@ -172,10 +153,6 @@ namespace yli
                 glDeleteRenderbuffers(1, &this->renderbuffer);
                 glDeleteFramebuffers(1, &this->framebuffer);
             }
-
-            // destroy all AnyStructEntities of this `Universe`.
-            std::cout << "All AnyStructEntities of this `Universe` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::AnyStructEntity*>(this->any_struct_entity_pointer_vector, this->number_of_any_struct_entities);
 
             // destroy all CallbackEngineEntities of this `Universe`.
             std::cout << "All CallbackEngineEntities of this `Universe` will be destroyed.\n";
@@ -353,7 +330,7 @@ namespace yli
                 this->parent_of_font2Ds.number_of_children +
                 this->parent_of_consoles.number_of_children +
                 this->parent_of_any_value_entities.number_of_children +
-                this->number_of_any_struct_entities;
+                this->parent_of_any_struct_entities.number_of_children;
         }
 
         std::size_t Universe::get_number_of_descendants() const
@@ -362,7 +339,7 @@ namespace yli
                 yli::ontology::get_number_of_descendants(this->parent_of_font2Ds.child_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->parent_of_any_value_entities.child_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->any_struct_entity_pointer_vector);
+                yli::ontology::get_number_of_descendants(this->parent_of_any_struct_entities.child_pointer_vector);
         }
 
         void Universe::create_context()
