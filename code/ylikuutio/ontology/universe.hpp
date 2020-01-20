@@ -305,16 +305,13 @@ namespace yli
         class Font2D;
         class Console;
         class AnyValueEntity;
-        class CallbackEngineEntity;
 
         class Universe: public yli::ontology::Entity
         {
             public:
                 void bind_Entity(yli::ontology::Entity* const entity);
-                void bind_CallbackEngineEntity(yli::ontology::CallbackEngineEntity* const callback_engine_entity);
 
                 void unbind_Entity(const std::size_t entityID);
-                void unbind_CallbackEngineEntity(const std::size_t childID);
 
                 // constructor.
                 Universe(const yli::ontology::UniverseStruct& universe_struct)
@@ -323,7 +320,8 @@ namespace yli
                     parent_of_font2Ds(yli::ontology::ParentModule()),
                     parent_of_consoles(yli::ontology::ParentModule()),
                     parent_of_any_value_entities(yli::ontology::ParentModule()),
-                    parent_of_any_struct_entities(yli::ontology::ParentModule())
+                    parent_of_any_struct_entities(yli::ontology::ParentModule()),
+                    parent_of_callback_engine_entities(yli::ontology::ParentModule())
                 {
                     // call `bind_Entity` here since it couldn't be performed from `Entity` constructor.
                     this->bind_Entity(this);
@@ -736,6 +734,7 @@ namespace yli
                 yli::ontology::ParentModule parent_of_consoles;
                 yli::ontology::ParentModule parent_of_any_value_entities;
                 yli::ontology::ParentModule parent_of_any_struct_entities;
+                yli::ontology::ParentModule parent_of_callback_engine_entities;
 
             private:
                 bool compute_and_update_matrices_from_inputs();
@@ -745,10 +744,6 @@ namespace yli
                 std::vector<yli::ontology::Entity*> entity_pointer_vector;
                 std::queue<std::size_t> free_entityID_queue;
                 std::size_t number_of_entities;
-
-                std::vector<yli::ontology::CallbackEngineEntity*> callback_engine_entity_pointer_vector;
-                std::queue<std::size_t> free_callback_engine_entityID_queue;
-                std::size_t number_of_callback_engine_entities;
 
                 yli::ontology::Scene* active_scene;
                 yli::ontology::Font2D* active_font2D;

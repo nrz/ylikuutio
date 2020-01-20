@@ -41,7 +41,6 @@
 #include "movable.hpp"
 #include "any_value_entity.hpp"
 #include "any_struct_entity.hpp"
-#include "callback_engine_entity.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
@@ -114,16 +113,6 @@ namespace yli
             yli::hierarchy::set_child_pointer(entity->entityID, entity, this->entity_pointer_vector, this->free_entityID_queue, this->number_of_entities);
         }
 
-        void Universe::bind_CallbackEngineEntity(yli::ontology::CallbackEngineEntity* const callback_engine_entity)
-        {
-            // get `childID` from `Universe` and set pointer to `callback_engine_entity`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::CallbackEngineEntity*>(
-                    callback_engine_entity,
-                    this->callback_engine_entity_pointer_vector,
-                    this->free_callback_engine_entityID_queue,
-                    this->number_of_callback_engine_entities);
-        }
-
         void Universe::unbind_Entity(const std::size_t entityID)
         {
             yli::hierarchy::unbind_child_from_parent(
@@ -131,15 +120,6 @@ namespace yli
                     this->entity_pointer_vector,
                     this->free_entityID_queue,
                     this->number_of_entities);
-        }
-
-        void Universe::unbind_CallbackEngineEntity(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->callback_engine_entity_pointer_vector,
-                    this->free_callback_engine_entityID_queue,
-                    this->number_of_callback_engine_entities);
         }
 
         Universe::~Universe()
@@ -153,10 +133,6 @@ namespace yli
                 glDeleteRenderbuffers(1, &this->renderbuffer);
                 glDeleteFramebuffers(1, &this->framebuffer);
             }
-
-            // destroy all CallbackEngineEntities of this `Universe`.
-            std::cout << "All CallbackEngineEntities of this `Universe` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::CallbackEngineEntity*>(this->callback_engine_entity_pointer_vector, this->number_of_callback_engine_entities);
 
             SDL_Quit();
         }
