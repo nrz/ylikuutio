@@ -488,6 +488,7 @@ namespace yli
                     this->child_vector_pointers_vector.push_back(&this->parent_of_consoles.child_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->parent_of_any_value_entities.child_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->parent_of_any_struct_entities.child_pointer_vector);
+                    this->child_vector_pointers_vector.push_back(&this->parent_of_callback_engine_entities.child_pointer_vector);
                     this->type_string = "yli::ontology::Universe*";
                 }
 
