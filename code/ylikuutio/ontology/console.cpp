@@ -54,7 +54,7 @@ namespace yli
             }
 
             // Get `childID` from the `Universe` and set pointer to this `Console`.
-            universe->bind_Console(this);
+            universe->parent_of_consoles.bind_child(this);
         }
 
         Console::~Console()
