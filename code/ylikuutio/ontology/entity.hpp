@@ -25,7 +25,6 @@
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
-#include <vector>   // std::vector
 
 namespace yli
 {
@@ -82,7 +81,6 @@ namespace yli
 
                 yli::ontology::Universe* universe;                          // pointer to the `Universe`.
                 std::shared_ptr<yli::config::SettingMaster> setting_master; // pointer to the `SettingMaster`.
-                std::vector<void*> child_vector_pointers_vector;
                 std::size_t entityID;
 
                 std::string type_string;

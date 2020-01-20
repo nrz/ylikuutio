@@ -75,10 +75,8 @@ namespace yli
                     this->opengl_in_use = opengl_in_use;
 
                     // `yli::ontology::Entity` member variables begin here.
-                    // `yli::ontology::Model` constructor takes care of `child_vector_pointers_vector`.
                     // Descendant classes of `yli::ontology::Model` need to set the value of `type_string`!
                     // Descendant classes of `yli::ontology::Model` need to set the value of `can_be_erased`!
-                    this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
                     this->type_string = "yli::ontology::Model*";
                 }
 

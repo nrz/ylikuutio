@@ -117,9 +117,6 @@ namespace yli
                     }
 
                     // `yli::ontology::Entity` member variables begin here.
-                    this->child_vector_pointers_vector.push_back(&this->material_pointer_vector);
-                    this->child_vector_pointers_vector.push_back(&this->symbiosis_pointer_vector);
-                    this->child_vector_pointers_vector.push_back(&this->compute_task_pointer_vector);
                     this->type_string = "yli::ontology::Shader*";
                     this->can_be_erased = true;
                 }

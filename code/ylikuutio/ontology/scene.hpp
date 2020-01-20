@@ -122,7 +122,6 @@ namespace yli
                     this->bind_to_parent();
 
                     // `yli::ontology::Entity` member variables begin here.
-                    this->child_vector_pointers_vector.push_back(&this->shader_priority_queue);
                     this->type_string = "yli::ontology::Scene*";
                     this->can_be_erased = true;
                 }
