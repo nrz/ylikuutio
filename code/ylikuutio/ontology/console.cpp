@@ -198,7 +198,7 @@ namespace yli
             yli::map::print_keys_to_console(this->command_callback_map, this);
         }
 
-        void Console::render() const
+        void Console::render()
         {
             if (!this->in_console || !this->should_be_rendered)
             {

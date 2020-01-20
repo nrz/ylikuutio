@@ -186,7 +186,7 @@ namespace yli
                 void set_console_right_x(const uint32_t console_right_x);
                 void print_text(const std::string& text);
                 void print_help();
-                void render() const;
+                void render() override;
 
                 bool enter_console();
                 bool exit_console();
