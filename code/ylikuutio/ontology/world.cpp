@@ -64,7 +64,7 @@ namespace yli
             }
 
             // Get `childID` from the `Universe` and set pointer to this `World`.
-            universe->bind_World(this);
+            universe->parent_of_worlds.bind_child(this);
         }
 
         World::~World()
@@ -88,7 +88,7 @@ namespace yli
             }
 
             // set pointer to this `World` to `nullptr`.
-            universe->unbind_World(this->childID);
+            universe->parent_of_worlds.unbind_child(this->childID);
         }
 
         yli::ontology::Entity* World::get_parent() const

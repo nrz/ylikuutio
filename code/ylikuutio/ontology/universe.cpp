@@ -35,7 +35,6 @@
 
 #include "universe.hpp"
 #include "entity.hpp"
-#include "world.hpp"
 #include "scene.hpp"
 #include "camera.hpp"
 #include "font2D.hpp"
@@ -114,16 +113,6 @@ namespace yli
             yli::hierarchy::set_child_pointer(entity->entityID, entity, this->entity_pointer_vector, this->free_entityID_queue, this->number_of_entities);
         }
 
-        void Universe::bind_World(yli::ontology::World* const world)
-        {
-            // get `childID` from `Universe` and set pointer to `world`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::World*>(
-                    world,
-                    this->world_pointer_vector,
-                    this->free_worldID_queue,
-                    this->number_of_worlds);
-        }
-
         void Universe::bind_Font2D(yli::ontology::Font2D* const font2D)
         {
             // get `childID` from `Universe` and set pointer to `font2D`.
@@ -183,15 +172,6 @@ namespace yli
                     this->number_of_entities);
         }
 
-        void Universe::unbind_World(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->world_pointer_vector,
-                    this->free_worldID_queue,
-                    this->number_of_worlds);
-        }
-
         void Universe::unbind_Font2D(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
@@ -239,10 +219,6 @@ namespace yli
                 glDeleteRenderbuffers(1, &this->renderbuffer);
                 glDeleteFramebuffers(1, &this->framebuffer);
             }
-
-            // destroy all `World`s of this `Universe`.
-            std::cout << "All `World`s of this `Universe` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, this->number_of_worlds);
 
             // destroy all `Console`s of this `Universe`.
             std::cout << "All `Console`s of this `Universe` will be destroyed.\n";
@@ -416,7 +392,7 @@ namespace yli
 
         std::size_t Universe::get_number_of_worlds() const
         {
-            return this->number_of_worlds;
+            return this->parent_of_worlds.number_of_children;
         }
 
         yli::ontology::Scene* Universe::get_active_scene() const
@@ -432,7 +408,7 @@ namespace yli
 
         std::size_t Universe::get_number_of_children() const
         {
-            return this->number_of_worlds +
+            return this->parent_of_worlds.number_of_children +
                 this->number_of_font2Ds +
                 this->number_of_consoles +
                 this->number_of_any_value_entities +
@@ -441,7 +417,7 @@ namespace yli
 
         std::size_t Universe::get_number_of_descendants() const
         {
-            return yli::ontology::get_number_of_descendants(this->world_pointer_vector) +
+            return yli::ontology::get_number_of_descendants(this->parent_of_worlds.child_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->font2D_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->console_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->any_value_entity_pointer_vector) +

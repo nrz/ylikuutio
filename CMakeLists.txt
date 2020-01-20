@@ -510,6 +510,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/any_struct_entity.hpp
     code/ylikuutio/ontology/any_value_entity.cpp
     code/ylikuutio/ontology/any_value_entity.hpp
+    code/ylikuutio/ontology/ascendant.cpp
+    code/ylikuutio/ontology/ascendant.hpp
     code/ylikuutio/ontology/biont.cpp
     code/ylikuutio/ontology/biont.hpp
     code/ylikuutio/ontology/biont_struct.hpp
@@ -531,6 +533,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/console_callbacks.cpp
     code/ylikuutio/ontology/creature.cpp
     code/ylikuutio/ontology/creature.hpp
+    code/ylikuutio/ontology/descendant.cpp
+    code/ylikuutio/ontology/descendant.hpp
     code/ylikuutio/ontology/get_content_callback.hpp
     code/ylikuutio/ontology/gl_attrib_locations.cpp
     code/ylikuutio/ontology/gl_attrib_locations.hpp
@@ -563,6 +567,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/object.hpp
     code/ylikuutio/ontology/object_struct.hpp
     code/ylikuutio/ontology/object_type.hpp
+    code/ylikuutio/ontology/parent_module.cpp
+    code/ylikuutio/ontology/parent_module.hpp
     code/ylikuutio/ontology/post_render_callback.hpp
     code/ylikuutio/ontology/pre_render_callback.hpp
     code/ylikuutio/ontology/render_templates.hpp
