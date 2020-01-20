@@ -158,7 +158,7 @@ namespace yli
 
                 void prepare_to_print() const;
 
-                void render();
+                virtual void render() override;
 
                 void print_text2D(
                         const std::size_t x,

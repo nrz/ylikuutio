@@ -312,14 +312,12 @@ namespace yli
         {
             public:
                 void bind_Entity(yli::ontology::Entity* const entity);
-                void bind_Font2D(yli::ontology::Font2D* const font2D);
                 void bind_Console(yli::ontology::Console* const console);
                 void bind_AnyValueEntity(yli::ontology::AnyValueEntity* const any_value_entity);
                 void bind_AnyStructEntity(yli::ontology::AnyStructEntity* const any_struct_entity);
                 void bind_CallbackEngineEntity(yli::ontology::CallbackEngineEntity* const callback_engine_entity);
 
                 void unbind_Entity(const std::size_t entityID);
-                void unbind_Font2D(const std::size_t childID);
                 void unbind_AnyValueEntity(const std::size_t childID);
                 void unbind_AnyStructEntity(const std::size_t childID);
                 void unbind_CallbackEngineEntity(const std::size_t childID);
@@ -327,7 +325,8 @@ namespace yli
                 // constructor.
                 Universe(const yli::ontology::UniverseStruct& universe_struct)
                     : Entity(this), // `Universe` has no parent.
-                    parent_of_worlds(yli::ontology::ParentModule())
+                    parent_of_worlds(yli::ontology::ParentModule()),
+                    parent_of_font2Ds(yli::ontology::ParentModule())
                 {
                     // call `bind_Entity` here since it couldn't be performed from `Entity` constructor.
                     this->bind_Entity(this);
@@ -431,7 +430,6 @@ namespace yli
                     this->can_display_help_screen          = true;
 
                     this->number_of_entities            = 0;
-                    this->number_of_font2Ds             = 0;
                     this->number_of_consoles            = 0;
                     this->number_of_any_value_entities  = 0;
                     this->number_of_any_struct_entities = 0;
@@ -494,7 +492,7 @@ namespace yli
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->parent_of_worlds.child_pointer_vector);
-                    this->child_vector_pointers_vector.push_back(&this->font2D_pointer_vector);
+                    this->child_vector_pointers_vector.push_back(&this->parent_of_font2Ds.child_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->console_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->any_value_entity_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->any_struct_entity_pointer_vector);
@@ -740,6 +738,7 @@ namespace yli
                 float background_alpha;
 
                 yli::ontology::ParentModule parent_of_worlds;
+                yli::ontology::ParentModule parent_of_font2Ds;
 
             private:
                 bool compute_and_update_matrices_from_inputs();
@@ -749,10 +748,6 @@ namespace yli
                 std::vector<yli::ontology::Entity*> entity_pointer_vector;
                 std::queue<std::size_t> free_entityID_queue;
                 std::size_t number_of_entities;
-
-                std::vector<yli::ontology::Font2D*> font2D_pointer_vector;
-                std::queue<std::size_t> free_font2D_ID_queue;
-                std::size_t number_of_font2Ds;
 
                 std::vector<yli::ontology::Console*> console_pointer_vector;
                 std::queue<std::size_t> free_console_ID_queue;

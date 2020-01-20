@@ -37,7 +37,6 @@
 #include "entity.hpp"
 #include "scene.hpp"
 #include "camera.hpp"
-#include "font2D.hpp"
 #include "brain.hpp"
 #include "movable.hpp"
 #include "any_value_entity.hpp"
@@ -95,6 +94,8 @@ namespace yli
 
     namespace ontology
     {
+        class Font2D;
+
         const std::string Universe::version = "0.0.6";
 
         void Universe::bind_Entity(yli::ontology::Entity* const entity)
@@ -111,16 +112,6 @@ namespace yli
             entity->entityID = yli::hierarchy::request_childID(this->entity_pointer_vector, this->free_entityID_queue);
             // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
             yli::hierarchy::set_child_pointer(entity->entityID, entity, this->entity_pointer_vector, this->free_entityID_queue, this->number_of_entities);
-        }
-
-        void Universe::bind_Font2D(yli::ontology::Font2D* const font2D)
-        {
-            // get `childID` from `Universe` and set pointer to `font2D`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Font2D*>(
-                    font2D,
-                    this->font2D_pointer_vector,
-                    this->free_font2D_ID_queue,
-                    this->number_of_font2Ds);
         }
 
         void Universe::bind_Console(yli::ontology::Console* const console)
@@ -172,15 +163,6 @@ namespace yli
                     this->number_of_entities);
         }
 
-        void Universe::unbind_Font2D(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->font2D_pointer_vector,
-                    this->free_font2D_ID_queue,
-                    this->number_of_font2Ds);
-        }
-
         void Universe::unbind_AnyValueEntity(const std::size_t childID)
         {
             yli::hierarchy::unbind_child_from_parent(
@@ -223,10 +205,6 @@ namespace yli
             // destroy all `Console`s of this `Universe`.
             std::cout << "All `Console`s of this `Universe` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Console*>(this->console_pointer_vector, this->number_of_consoles);
-
-            // destroy all `Font2D`s of this `Universe`.
-            std::cout << "All `Font2D`s of this `Universe` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Font2D*>(this->font2D_pointer_vector, this->number_of_font2Ds);
 
             // destroy all AnyStructEntities of this `Universe`.
             std::cout << "All AnyStructEntities of this `Universe` will be destroyed.\n";
@@ -290,7 +268,7 @@ namespace yli
             }
 
             // Render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
-            yli::ontology::render_children<yli::ontology::Font2D*>(this->font2D_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_font2Ds.child_pointer_vector);
 
             yli::opengl::enable_depth_test();
 
@@ -322,7 +300,7 @@ namespace yli
             }
 
             // Render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
-            yli::ontology::render_children<yli::ontology::Font2D*>(this->font2D_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_font2Ds.child_pointer_vector);
 
             // Swap buffers.
             SDL_GL_SwapWindow(this->get_window());
@@ -409,7 +387,7 @@ namespace yli
         std::size_t Universe::get_number_of_children() const
         {
             return this->parent_of_worlds.number_of_children +
-                this->number_of_font2Ds +
+                this->parent_of_font2Ds.number_of_children +
                 this->number_of_consoles +
                 this->number_of_any_value_entities +
                 this->number_of_any_struct_entities;
@@ -418,7 +396,7 @@ namespace yli
         std::size_t Universe::get_number_of_descendants() const
         {
             return yli::ontology::get_number_of_descendants(this->parent_of_worlds.child_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->font2D_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->parent_of_font2Ds.child_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->console_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->any_value_entity_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->any_struct_entity_pointer_vector);

@@ -53,6 +53,8 @@ namespace yli
                 // destructor.
                 virtual ~Entity();
 
+                virtual void render();
+
                 std::size_t get_childID() const;
                 std::string get_type() const;
 
