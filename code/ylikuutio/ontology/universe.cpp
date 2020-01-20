@@ -114,16 +114,6 @@ namespace yli
             yli::hierarchy::set_child_pointer(entity->entityID, entity, this->entity_pointer_vector, this->free_entityID_queue, this->number_of_entities);
         }
 
-        void Universe::bind_AnyValueEntity(yli::ontology::AnyValueEntity* const any_value_entity)
-        {
-            // get `childID` from `Universe` and set pointer to `any_value_entity`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::AnyValueEntity*>(
-                    any_value_entity,
-                    this->any_value_entity_pointer_vector,
-                    this->free_any_value_entityID_queue,
-                    this->number_of_any_value_entities);
-        }
-
         void Universe::bind_AnyStructEntity(yli::ontology::AnyStructEntity* const any_struct_entity)
         {
             // get `childID` from `Universe` and set pointer to `any_struct_entity`.
@@ -151,15 +141,6 @@ namespace yli
                     this->entity_pointer_vector,
                     this->free_entityID_queue,
                     this->number_of_entities);
-        }
-
-        void Universe::unbind_AnyValueEntity(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->any_value_entity_pointer_vector,
-                    this->free_any_value_entityID_queue,
-                    this->number_of_any_value_entities);
         }
 
         void Universe::unbind_AnyStructEntity(const std::size_t childID)
@@ -195,10 +176,6 @@ namespace yli
             // destroy all AnyStructEntities of this `Universe`.
             std::cout << "All AnyStructEntities of this `Universe` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::AnyStructEntity*>(this->any_struct_entity_pointer_vector, this->number_of_any_struct_entities);
-
-            // destroy all AnyValueEntities of this `Universe`.
-            std::cout << "All AnyValueEntities of this `Universe` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::AnyValueEntity*>(this->any_value_entity_pointer_vector, this->number_of_any_value_entities);
 
             // destroy all CallbackEngineEntities of this `Universe`.
             std::cout << "All CallbackEngineEntities of this `Universe` will be destroyed.\n";
@@ -375,7 +352,7 @@ namespace yli
             return this->parent_of_worlds.number_of_children +
                 this->parent_of_font2Ds.number_of_children +
                 this->parent_of_consoles.number_of_children +
-                this->number_of_any_value_entities +
+                this->parent_of_any_value_entities.number_of_children +
                 this->number_of_any_struct_entities;
         }
 
@@ -384,7 +361,7 @@ namespace yli
             return yli::ontology::get_number_of_descendants(this->parent_of_worlds.child_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->parent_of_font2Ds.child_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->any_value_entity_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->parent_of_any_value_entities.child_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->any_struct_entity_pointer_vector);
         }
 
