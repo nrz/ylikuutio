@@ -24,6 +24,7 @@
 // `ShaderSymbiosis` is like `Symbiosis`, but it contains also `SymbiontShader`s in addition to `SymbiontMaterial`s and `SymbiontSpecies`.
 
 #include "entity.hpp"
+#include "parent_module.hpp"
 #include "family_templates.hpp"
 #include "symbiosis_struct.hpp"
 #include "material_struct.hpp"
@@ -65,10 +66,7 @@ namespace yli
         class Symbiosis: public yli::ontology::Entity
         {
             public:
-                void bind_SymbiontMaterial(yli::ontology::SymbiontMaterial* const symbiont_material);
                 void bind_Holobiont(yli::ontology::Holobiont* const holobiont);
-
-                void unbind_SymbiontMaterial(const std::size_t childID);
                 void unbind_Holobiont(const std::size_t childID);
 
                 // this method sets pointer to this `Symbiosis` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
@@ -77,7 +75,8 @@ namespace yli
 
                 // constructor.
                 Symbiosis(yli::ontology::Universe* universe, const yli::ontology::SymbiosisStruct& symbiosis_struct)
-                    : Entity(universe)
+                    : Entity(universe),
+                    parent_of_symbiont_materials(yli::ontology::ParentModule())
                 {
                     // constructor.
                     this->parent                       = symbiosis_struct.parent;
@@ -86,7 +85,6 @@ namespace yli
                     this->triangulation_type           = symbiosis_struct.triangulation_type;
                     this->light_position               = symbiosis_struct.light_position;
 
-                    this->number_of_symbiont_materials = 0;
                     this->number_of_holobionts         = 0;
                     this->ofbx_mesh_count              = 0;
                     this->opengl_in_use                = symbiosis_struct.opengl_in_use;
@@ -143,6 +141,8 @@ namespace yli
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
+                yli::ontology::ParentModule parent_of_symbiont_materials;
+
             private:
                 void bind_to_parent();
 
@@ -156,11 +156,8 @@ namespace yli
 
                 glm::vec3 light_position;       // light position.
 
-                std::vector<yli::ontology::SymbiontMaterial*> symbiont_material_pointer_vector;
                 std::vector<yli::ontology::Holobiont*> holobiont_pointer_vector;
-                std::queue<std::size_t> free_symbiont_materialID_queue;
                 std::queue<std::size_t> free_holobiontID_queue;
-                std::size_t number_of_symbiont_materials;
                 std::size_t number_of_holobionts;
 
                 std::vector<std::vector<glm::vec3>> vertices;         // vertices of the object.

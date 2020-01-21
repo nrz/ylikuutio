@@ -52,25 +52,6 @@ namespace yli
         class Entity;
         class Holobiont;
 
-        void Symbiosis::bind_SymbiontMaterial(yli::ontology::SymbiontMaterial* const symbiont_material)
-        {
-            // get `childID` from `Symbiosis` and set pointer to `symbiont_material`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::SymbiontMaterial*>(
-                    symbiont_material,
-                    this->symbiont_material_pointer_vector,
-                    this->free_symbiont_materialID_queue,
-                    this->number_of_symbiont_materials);
-        }
-
-        void Symbiosis::unbind_SymbiontMaterial(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->symbiont_material_pointer_vector,
-                    this->free_symbiont_materialID_queue,
-                    this->number_of_symbiont_materials);
-        }
-
         void Symbiosis::bind_Holobiont(yli::ontology::Holobiont* const holobiont)
         {
             // get `childID` from `Symbiosis` and set pointer to `holobiont`.
@@ -166,10 +147,6 @@ namespace yli
             std::cout << "All `Holobiont`s of this `Symbiosis` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Holobiont*>(this->holobiont_pointer_vector, this->number_of_holobionts);
 
-            // destroy all `SymbiontMaterial`s of this `Symbiosis`.
-            std::cout << "All `SymbiontMaterial`s of this `Symbiosis` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::SymbiontMaterial*>(this->symbiont_material_pointer_vector, this->number_of_symbiont_materials);
-
             // requirements for further actions:
             // `this->parent` must not be `nullptr`.
 
@@ -200,14 +177,14 @@ namespace yli
 
         std::size_t Symbiosis::get_number_of_symbiont_materials() const
         {
-            return this->number_of_symbiont_materials;
+            return this->parent_of_symbiont_materials.number_of_children;
         }
 
         std::size_t Symbiosis::get_number_of_symbiont_species() const
         {
             std::size_t number_of_symbiont_species = 0;
 
-            for (auto symbiont_material : this->symbiont_material_pointer_vector)
+            for (auto symbiont_material : this->parent_of_symbiont_materials.child_pointer_vector)
             {
                 number_of_symbiont_species += symbiont_material->get_number_of_children();
             }
@@ -222,12 +199,12 @@ namespace yli
 
         std::size_t Symbiosis::get_number_of_children() const
         {
-            return this->number_of_symbiont_materials + this->number_of_holobionts;
+            return this->parent_of_symbiont_materials.number_of_children + this->number_of_holobionts;
         }
 
         std::size_t Symbiosis::get_number_of_descendants() const
         {
-            return yli::ontology::get_number_of_descendants(this->symbiont_material_pointer_vector) +
+            return yli::ontology::get_number_of_descendants(this->parent_of_symbiont_materials.child_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->holobiont_pointer_vector);
         }
 
@@ -341,12 +318,12 @@ namespace yli
 
         yli::ontology::SymbiontMaterial* Symbiosis::get_symbiont_material(const std::size_t symbiont_material_i) const
         {
-            if (symbiont_material_i >= this->symbiont_material_pointer_vector.size())
+            if (symbiont_material_i >= this->parent_of_symbiont_materials.child_pointer_vector.size())
             {
                 return nullptr;
             }
 
-            return this->symbiont_material_pointer_vector[symbiont_material_i];
+            return static_cast<yli::ontology::SymbiontMaterial*>(this->parent_of_symbiont_materials.child_pointer_vector[symbiont_material_i]);
         }
 
         yli::ontology::SymbiontSpecies* Symbiosis::get_symbiont_species(const std::size_t biontID) const

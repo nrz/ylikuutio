@@ -73,7 +73,7 @@ namespace yli
             }
 
             // get `childID` from `Symbiosis` and set pointer to this `SymbiontMaterial`.
-            symbiosis->bind_SymbiontMaterial(this);
+            symbiosis->parent_of_symbiont_materials.bind_child(this);
         }
 
         SymbiontMaterial::~SymbiontMaterial()
@@ -99,7 +99,7 @@ namespace yli
             }
 
             // set pointer to this symbiont_material to `nullptr`.
-            symbiosis->unbind_SymbiontMaterial(this->childID);
+            symbiosis->parent_of_symbiont_materials.unbind_child(this->childID);
         }
 
         void SymbiontMaterial::render()
