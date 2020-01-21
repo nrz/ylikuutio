@@ -64,16 +64,6 @@ namespace yli
             this->shader_priority_queue.push(shader);
         }
 
-        void Scene::bind_Brain(yli::ontology::Brain* const brain)
-        {
-            // get `childID` from `Scene` and set pointer to `ai`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Brain*>(
-                    brain,
-                    this->brain_pointer_vector,
-                    this->free_brainID_queue,
-                    this->number_of_brains);
-        }
-
         void Scene::unbind_Shader(const std::size_t childID)
         {
             // `shader` needs to be removed from the priority queue as well.
@@ -84,15 +74,6 @@ namespace yli
                     this->shader_pointer_vector,
                     this->free_shaderID_queue,
                     this->number_of_shaders);
-        }
-
-        void Scene::unbind_Brain(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->brain_pointer_vector,
-                    this->free_brainID_queue,
-                    this->number_of_brains);
         }
 
         void Scene::bind_to_parent()
@@ -171,10 +152,6 @@ namespace yli
             std::cout << "All `Shader`s of this `Scene` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Shader*>(this->shader_pointer_vector, this->number_of_shaders);
 
-            // destroy all `Brain`s of this `Scene`.
-            std::cout << "All `Brain`s of this `Scene` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Brain*>(this->brain_pointer_vector, this->number_of_brains);
-
             if (this->universe != nullptr && this->universe->get_active_scene() == this)
             {
                 // Set active `Scene` to `nullptr`.
@@ -235,9 +212,9 @@ namespace yli
         {
             // Intentional actors (AIs and keyboard controlled ones).
 
-            for (std::size_t brain_i = 0; brain_i < this->brain_pointer_vector.size(); brain_i++)
+            for (std::size_t brain_i = 0; brain_i < this->parent_of_brains.child_pointer_vector.size(); brain_i++)
             {
-                yli::ontology::Brain* const brain = this->brain_pointer_vector[brain_i];
+                yli::ontology::Brain* const brain = static_cast<yli::ontology::Brain*>(this->parent_of_brains.child_pointer_vector[brain_i]);
 
                 if (brain != nullptr)
                 {
@@ -323,14 +300,14 @@ namespace yli
 
         std::size_t Scene::get_number_of_children() const
         {
-            return this->number_of_shaders + this->parent_of_cameras.number_of_children + this->number_of_brains;
+            return this->number_of_shaders + this->parent_of_cameras.number_of_children + this->parent_of_brains.number_of_children;
         }
 
         std::size_t Scene::get_number_of_descendants() const
         {
             return yli::ontology::get_number_of_descendants(this->shader_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->parent_of_cameras.child_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->brain_pointer_vector);
+                yli::ontology::get_number_of_descendants(this->parent_of_brains.child_pointer_vector);
         }
 
         // this method returns a pointer to an `Entity` using the name as key.

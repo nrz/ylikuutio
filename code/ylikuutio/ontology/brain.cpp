@@ -66,7 +66,7 @@ namespace yli
             }
 
             // get `childID` from the `Scene` and set pointer to this `Brain`.
-            scene->bind_Brain(this);
+            scene->parent_of_brains.bind_child(this);
         }
 
         Brain::~Brain()
@@ -95,7 +95,7 @@ namespace yli
             }
 
             // set pointer to this `Brain` to `nullptr`.
-            scene->unbind_Brain(this->childID);
+            scene->parent_of_brains.unbind_child(this->childID);
         }
 
         yli::ontology::Entity* Brain::get_parent() const

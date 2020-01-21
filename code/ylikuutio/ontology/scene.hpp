@@ -78,16 +78,13 @@ namespace yli
         class Species;
         class Symbiosis;
         class Camera;
-        class Brain;
 
         class Scene: public yli::ontology::Entity
         {
             public:
                 void bind_Shader(yli::ontology::Shader* const shader);
-                void bind_Brain(yli::ontology::Brain* const brain);
 
                 void unbind_Shader(const std::size_t childID);
-                void unbind_Brain(const std::size_t childID);
 
                 // This method sets pointer to this `Scene` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `World`.
                 void bind_to_new_parent(yli::ontology::World* const new_parent);
@@ -96,7 +93,8 @@ namespace yli
                 // constructor.
                 Scene(yli::ontology::Universe* const universe, const yli::ontology::SceneStruct& scene_struct)
                     : Entity(universe),
-                    parent_of_cameras(yli::ontology::ParentModule())
+                    parent_of_cameras(yli::ontology::ParentModule()),
+                    parent_of_brains(yli::ontology::ParentModule())
                 {
                     // constructor.
                     this->parent                = scene_struct.world;
@@ -111,7 +109,6 @@ namespace yli
                     this->twin_turbo_factor     = 1.0f;
 
                     this->number_of_shaders     = 0;
-                    this->number_of_brains      = 0;
                     this->active_camera         = nullptr;
                     this->terrain_species       = nullptr;
 
@@ -179,6 +176,7 @@ namespace yli
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
                 yli::ontology::ParentModule parent_of_cameras;
+                yli::ontology::ParentModule parent_of_brains;
 
             private:
                 void bind_to_parent();
@@ -201,10 +199,6 @@ namespace yli
                 std::vector<yli::ontology::Shader*> shader_pointer_vector;
                 std::queue<std::size_t> free_shaderID_queue;
                 std::size_t number_of_shaders;
-
-                std::vector<yli::ontology::Brain*> brain_pointer_vector;
-                std::queue<std::size_t> free_brainID_queue;
-                std::size_t number_of_brains;
 
                 yli::ontology::Camera* active_camera;
 
