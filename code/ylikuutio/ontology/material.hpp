@@ -50,21 +50,18 @@ namespace yli
         class Material: public yli::ontology::Entity
         {
             public:
-                void bind_ChunkMaster(ontology::ChunkMaster* const chunk_master);
-                void unbind_ChunkMaster(const std::size_t childID);
-
                 Material(yli::ontology::Universe* const universe, const yli::ontology::MaterialStruct& material_struct)
                     : Entity(universe),
                     parent_of_species(yli::ontology::ParentModule()),
                     parent_of_shapeshifter_transformations(yli::ontology::ParentModule()),
-                    parent_of_vector_fonts(yli::ontology::ParentModule())
+                    parent_of_vector_fonts(yli::ontology::ParentModule()),
+                    parent_of_chunk_masters(yli::ontology::ParentModule())
                 {
                     // constructor.
                     this->parent                   = material_struct.shader;
                     this->is_symbiont_material     = material_struct.is_symbiont_material;
                     this->texture_file_format      = material_struct.texture_file_format;
                     this->texture_filename         = material_struct.texture_filename;
-                    this->number_of_chunk_masters  = 0;
                     this->texture                  = 0; // some dummy value.
                     this->openGL_textureID         = 0; // some dummy value.
                     this->image_width              = 0;
@@ -141,6 +138,7 @@ namespace yli
                 yli::ontology::ParentModule parent_of_species;
                 yli::ontology::ParentModule parent_of_shapeshifter_transformations;
                 yli::ontology::ParentModule parent_of_vector_fonts;
+                yli::ontology::ParentModule parent_of_chunk_masters;
 
             protected:
                 std::size_t image_width;
@@ -159,10 +157,6 @@ namespace yli
 
                 uint32_t texture;                    // Texture of this `Material`, returned by `load_BMP_texture` (used for `glGenTextures` etc.).
                 uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
-
-                std::vector<ontology::ChunkMaster*> chunk_master_pointer_vector;
-                std::queue<std::size_t> free_chunk_masterID_queue;
-                std::size_t number_of_chunk_masters;
 
                 std::string texture_file_format;     // Type of the model file, eg. `"bmp"`.
                 std::string texture_filename;        // Filename of the model file.

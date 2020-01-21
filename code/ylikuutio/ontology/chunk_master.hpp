@@ -77,7 +77,7 @@ namespace yli
                 void bind_to_parent();
 
                 // this method renders all `Chunk`s bound to this `ChunkMaster`.
-                void render();
+                void render() override;
 
                 // this method sets `Chunk` pointer.
                 void set_chunk_pointer(std::size_t childID, yli::ontology::Chunk* child_pointer);

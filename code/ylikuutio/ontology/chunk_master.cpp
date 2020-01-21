@@ -62,7 +62,7 @@ namespace yli
             }
 
             // get `childID` from `Material` and set pointer to this `ChunkMaster`.
-            material->bind_ChunkMaster(this);
+            material->parent_of_chunk_masters.bind_child(this);
         }
 
         ChunkMaster::~ChunkMaster()
@@ -84,7 +84,7 @@ namespace yli
             }
 
             // set pointer to this `ChunkMaster` to `nullptr`.
-            material->unbind_ChunkMaster(this->childID);
+            material->parent_of_chunk_masters.unbind_child(this->childID);
         }
 
         void ChunkMaster::set_chunk_pointer(std::size_t childID, yli::ontology::Chunk* child_pointer)
