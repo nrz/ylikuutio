@@ -63,7 +63,7 @@ namespace yli
             }
 
             // get `childID` from `VectorFont` and set pointer to this `Text3D`.
-            vector_font->bind_Text3D(this);
+            vector_font->parent_of_text3Ds.bind_child(this);
         }
 
         Text3D::~Text3D()
@@ -86,7 +86,7 @@ namespace yli
                 return;
             }
 
-            vector_font->unbind_Text3D(this->childID);
+            vector_font->parent_of_text3Ds.unbind_child(this->childID);
         }
 
         yli::ontology::Entity* Text3D::get_parent() const

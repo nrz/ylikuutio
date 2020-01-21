@@ -34,25 +34,6 @@ namespace yli
         class Text3D;
         class Glyph;
 
-        void VectorFont::bind_Text3D(yli::ontology::Text3D* const text3D)
-        {
-            // Get `childID` from `VectorFont` and set pointer to `text3D`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Text3D*>(
-                    text3D,
-                    this->text3D_pointer_vector,
-                    this->free_text3D_ID_queue,
-                    this->number_of_text3Ds);
-        }
-
-        void VectorFont::unbind_Text3D(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent<yli::ontology::Text3D*>(
-                    childID,
-                    this->text3D_pointer_vector,
-                    this->free_text3D_ID_queue,
-                    this->number_of_text3Ds);
-        }
-
         void VectorFont::bind_to_parent()
         {
             // Requirements:
@@ -120,10 +101,6 @@ namespace yli
             // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
             std::cout << "`VectorFont` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-            // Destroy all 3D texts (`Text3D`) of this font.
-            std::cout << "All `Text3D`s of this `VectorFont` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Text3D*>(this->text3D_pointer_vector, this->number_of_text3Ds);
-
             // Requirements for further actions:
             // `this->parent` must not be `nullptr`.
 
@@ -159,13 +136,13 @@ namespace yli
 
         std::size_t VectorFont::get_number_of_children() const
         {
-            return this->parent_of_glyphs.number_of_children + this->number_of_text3Ds;
+            return this->parent_of_glyphs.number_of_children + this->parent_of_text3Ds.number_of_children;
         }
 
         std::size_t VectorFont::get_number_of_descendants() const
         {
             return yli::ontology::get_number_of_descendants(this->parent_of_glyphs.child_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->text3D_pointer_vector);
+                yli::ontology::get_number_of_descendants(this->parent_of_text3Ds.child_pointer_vector);
         }
     }
 }
