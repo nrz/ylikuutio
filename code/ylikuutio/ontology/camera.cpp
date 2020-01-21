@@ -24,8 +24,8 @@
 #define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
-#include "entity.hpp"
 #include "camera.hpp"
+#include "entity.hpp"
 #include "scene.hpp"
 #include "ground_level.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
