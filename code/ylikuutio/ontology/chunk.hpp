@@ -89,7 +89,7 @@ namespace yli
             private:
                 void bind_to_parent();
 
-                void render();
+                void render() override;
 
                 yli::ontology::ChunkMaster* parent;  // pointer to the `ChunkMaster`.
 

@@ -163,7 +163,7 @@ namespace yli
                 void bind_to_parent();
 
                 // this method renders all `Object`s of this `SymbiontSpecies`.
-                void render();
+                void render() override;
 
                 std::vector<yli::ontology::Biont*> biont_pointer_vector;
                 std::queue<std::size_t> free_biontID_queue;

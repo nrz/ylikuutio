@@ -24,8 +24,8 @@
 #define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
-#include "entity.hpp"
 #include "camera.hpp"
+#include "entity.hpp"
 #include "scene.hpp"
 #include "ground_level.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -63,7 +63,7 @@ namespace yli
             }
 
             // Get `childID` from `Scene` and set pointer to this `Camera`.
-            scene->bind_Camera(this);
+            scene->parent_of_cameras.bind_child(this);
         }
 
         Camera::~Camera()
@@ -87,7 +87,7 @@ namespace yli
             }
 
             // Set pointer to this `Camera` to `nullptr`.
-            scene->unbind_Camera(this->childID);
+            scene->parent_of_cameras.unbind_child(this->childID);
         }
 
         yli::ontology::Entity* Camera::get_parent() const

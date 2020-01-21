@@ -18,7 +18,7 @@
 #ifndef __SPECIES_OR_GLYPH_HPP_INCLUDED
 #define __SPECIES_OR_GLYPH_HPP_INCLUDED
 
-#include "object.hpp"
+#include "entity.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 
@@ -49,7 +49,7 @@ namespace yli
                 yli::opengl::enable_vertex_attrib_array(species_or_glyph_pointer->vertex_normal_modelspaceID);
 
                 // Render this `Species` or `Glyph` by calling `render()` function of each `Object`.
-                yli::ontology::render_children<yli::ontology::Object*>(species_or_glyph_pointer->object_pointer_vector);
+                yli::ontology::render_children<yli::ontology::Entity*>(species_or_glyph_pointer->parent_of_objects.child_pointer_vector);
 
                 yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertex_position_modelspaceID);
                 yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertexUVID);

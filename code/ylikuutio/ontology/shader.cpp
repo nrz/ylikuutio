@@ -19,10 +19,8 @@
 #include "scene.hpp"
 #include "world.hpp"
 #include "universe.hpp"
-#include "material.hpp"
 #include "compute_task.hpp"
 #include "glyph.hpp"
-#include "symbiosis.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "shader_struct.hpp"
@@ -42,63 +40,6 @@ namespace yli
     namespace ontology
     {
         class Species;
-
-        void Shader::bind_Material(yli::ontology::Material* const material)
-        {
-            // Get `childID` from `Shader` and set pointer to `material`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Material*>(
-                    material,
-                    this->material_pointer_vector,
-                    this->free_materialID_queue,
-                    this->number_of_materials);
-        }
-
-        void Shader::bind_Symbiosis(yli::ontology::Symbiosis* const symbiosis)
-        {
-            // Get `childID` from `Shader` and set pointer to `symbiosis`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Symbiosis*>(
-                    symbiosis,
-                    this->symbiosis_pointer_vector,
-                    this->free_symbiosisID_queue,
-                    this->number_of_symbioses);
-        }
-
-        void Shader::bind_ComputeTask(yli::ontology::ComputeTask* const compute_task)
-        {
-            // Get `childID` from `Shader` and set pointer to `compute_task`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::ComputeTask*>(
-                    compute_task,
-                    this->compute_task_pointer_vector,
-                    this->free_compute_taskID_queue,
-                    this->number_of_compute_tasks);
-        }
-
-        void Shader::unbind_Material(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->material_pointer_vector,
-                    this->free_materialID_queue,
-                    this->number_of_materials);
-        }
-
-        void Shader::unbind_Symbiosis(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->symbiosis_pointer_vector,
-                    this->free_symbiosisID_queue,
-                    this->number_of_symbioses);
-        }
-
-        void Shader::unbind_ComputeTask(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->compute_task_pointer_vector,
-                    this->free_compute_taskID_queue,
-                    this->number_of_compute_tasks);
-        }
 
         void Shader::bind_to_parent()
         {
@@ -172,14 +113,6 @@ namespace yli
             // destructor.
             std::cout << "`Shader` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-            // Destroy all materials of this shader.
-            std::cout << "All `Material`s of this `Shader` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Material*>(this->material_pointer_vector, this->number_of_materials);
-
-            // Destroy all symbioses of this shader.
-            std::cout << "All `Symbiosis` entities of this `Shader` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Symbiosis*>(this->symbiosis_pointer_vector, this->number_of_symbioses);
-
             // Requirements for further actions (except `glDeleteProgram`):
             // `this->parent` must not be `nullptr`.
 
@@ -215,9 +148,9 @@ namespace yli
             glUniformMatrix4fv(this->view_matrixID, 1, GL_FALSE, &this->universe->get_view_matrix()[0][0]);
 
             // Render this `Shader` by calling `render()` function of each `ComputeTask`, each `Material`, and each `Symbiosis`.
-            yli::ontology::render_children<yli::ontology::ComputeTask*>(this->compute_task_pointer_vector);
-            yli::ontology::render_children<yli::ontology::Material*>(this->material_pointer_vector);
-            yli::ontology::render_children<yli::ontology::Symbiosis*>(this->symbiosis_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_compute_tasks.child_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_materials.child_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_symbioses.child_pointer_vector);
 
             this->postrender();
         }
@@ -229,14 +162,14 @@ namespace yli
 
         std::size_t Shader::get_number_of_children() const
         {
-            return this->number_of_materials + this->number_of_symbioses + this->number_of_compute_tasks;
+            return this->parent_of_compute_tasks.number_of_children + this->parent_of_materials.number_of_children + this->parent_of_symbioses.number_of_children;
         }
 
         std::size_t Shader::get_number_of_descendants() const
         {
-            return yli::ontology::get_number_of_descendants(this->material_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->symbiosis_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->compute_task_pointer_vector);
+            return yli::ontology::get_number_of_descendants(this->parent_of_compute_tasks.child_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->parent_of_materials.child_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->parent_of_symbioses.child_pointer_vector);
         }
 
         uint32_t Shader::get_programID() const

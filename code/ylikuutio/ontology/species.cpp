@@ -20,7 +20,6 @@
 #include "scene.hpp"
 #include "shader.hpp"
 #include "material.hpp"
-#include "object.hpp"
 #include "species_or_glyph.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
@@ -39,25 +38,6 @@ namespace yli
 {
     namespace ontology
     {
-        void Species::bind_Object(yli::ontology::Object* const object)
-        {
-            // get `childID` from `Species` and set pointer to `object`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Object*>(
-                    object,
-                    this->object_pointer_vector,
-                    this->free_objectID_queue,
-                    this->number_of_objects);
-        }
-
-        void Species::unbind_Object(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->object_pointer_vector,
-                    this->free_objectID_queue,
-                    this->number_of_objects);
-        }
-
         void Species::bind_to_parent()
         {
             // requirements:
@@ -71,7 +51,7 @@ namespace yli
             }
 
             // get `childID` from `Material` and set pointer to this `Species`.
-            this->material_parent->bind_Species(this);
+            this->material_parent->parent_of_species.bind_child(this);
         }
 
         void Species::bind_to_new_parent(yli::ontology::Material* const new_parent)
@@ -98,11 +78,11 @@ namespace yli
             }
 
             // unbind from the old parent `Material`.
-            material->unbind_Species(this->childID);
+            material->parent_of_species.unbind_child(this->childID);
 
             // get `childID` from `Material` and set pointer to this `Species`.
             this->material_parent = new_parent;
-            this->material_parent->bind_Species(this);
+            this->material_parent->parent_of_species.bind_child(this);
         }
 
         void Species::bind_to_new_parent(yli::ontology::Entity* const new_parent)
@@ -132,10 +112,6 @@ namespace yli
                 // destructor.
                 std::cout << "`Species` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-                // destroy all objects of this species.
-                std::cout << "All `Object`s of this `Species` will be destroyed.\n";
-                yli::hierarchy::delete_children<yli::ontology::Object*>(this->object_pointer_vector, this->number_of_objects);
-
                 // Cleanup buffers.
                 glDeleteBuffers(1, &this->vertexbuffer);
                 glDeleteBuffers(1, &this->uvbuffer);
@@ -153,7 +129,7 @@ namespace yli
                     return;
                 }
 
-                this->material_parent->unbind_Species(this->childID);
+                this->material_parent->parent_of_species.unbind_child(this->childID);
             }
         }
 

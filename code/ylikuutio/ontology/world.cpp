@@ -17,7 +17,6 @@
 
 #include "world.hpp"
 #include "universe.hpp"
-#include "scene.hpp"
 #include "camera.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
@@ -31,25 +30,6 @@ namespace yli
     namespace ontology
     {
         class SettingMaster;
-
-        void World::bind_Scene(yli::ontology::Scene* const scene)
-        {
-            // get `childID` from `World` and set pointer to `scene`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Scene*>(
-                    scene,
-                    this->scene_pointer_vector,
-                    this->free_sceneID_queue,
-                    this->number_of_scenes);
-        }
-
-        void World::unbind_Scene(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->scene_pointer_vector,
-                    this->free_sceneID_queue,
-                    this->number_of_scenes);
-        }
 
         void World::bind_to_parent()
         {
@@ -71,10 +51,6 @@ namespace yli
         {
             // destructor.
             std::cout << "This `World` will be destroyed.\n";
-
-            // Destroy all `Scene`s of this `World`.
-            std::cout << "All `Scene`s of this `World` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Scene*>(this->scene_pointer_vector, this->number_of_scenes);
 
             // requirements for further actions:
             // `this->parent` must not be `nullptr`.
@@ -98,12 +74,12 @@ namespace yli
 
         std::size_t World::get_number_of_children() const
         {
-            return this->number_of_scenes;
+            return this->parent_of_scenes.number_of_children;
         }
 
         std::size_t World::get_number_of_descendants() const
         {
-            return yli::ontology::get_number_of_descendants(this->scene_pointer_vector);
+            return yli::ontology::get_number_of_descendants(this->parent_of_scenes.child_pointer_vector);
         }
     }
 }

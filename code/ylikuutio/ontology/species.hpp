@@ -53,14 +53,10 @@ namespace yli
     {
         class Entity;
         class Material;
-        class Object;
 
         class Species: public yli::ontology::Model
         {
             public:
-                void bind_Object(yli::ontology::Object* const object);
-                void unbind_Object(const std::size_t childID);
-
                 // this method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
                 void bind_to_new_parent(yli::ontology::Material* const new_parent);
                 void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
@@ -206,7 +202,7 @@ namespace yli
                 void bind_to_parent();
 
                 // this method renders all `Object`s of this `Species`.
-                void render();
+                void render() override;
 
                 yli::ontology::Material* material_parent; // pointer to `Material`.
 

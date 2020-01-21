@@ -19,6 +19,7 @@
 #define __FONT2D_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "parent_module.hpp"
 #include "universe.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
@@ -41,14 +42,9 @@ namespace yli
 {
     namespace ontology
     {
-        class Text2D;
-
         class Font2D: public yli::ontology::Entity
         {
             public:
-                void bind_Text2D(yli::ontology::Text2D* const text2D);
-                void unbind_Text2D(const std::size_t childID);
-
                 // constructor.
                 Font2D(
                         yli::ontology::Universe* const universe,
@@ -58,7 +54,8 @@ namespace yli
                         std::size_t font_size,
                         const std::string& texture_filename,
                         const std::string& font_texture_file_format)
-                    : Entity(universe)
+                    : Entity(universe),
+                    parent_of_text2Ds(yli::ontology::ParentModule())
                 {
                     // constructor.
                     this->parent = universe;
@@ -67,8 +64,6 @@ namespace yli
                     this->font_texture_file_format = font_texture_file_format;
                     this->text_size = text_size;
                     this->font_size = font_size;
-
-                    this->number_of_text2Ds = 0;
 
                     // Get `childID` from `Universe` and set pointer to this `Font2D`.
                     this->bind_to_parent();
@@ -183,14 +178,12 @@ namespace yli
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
+                yli::ontology::ParentModule parent_of_text2Ds;
+
             private:
                 void bind_to_parent();
 
                 yli::ontology::Universe* parent;           // Pointer to the `Universe`.
-
-                std::vector<yli::ontology::Text2D*> text2D_pointer_vector;
-                std::queue<std::size_t> free_text2D_ID_queue;
-                std::size_t number_of_text2Ds;
 
                 uint32_t texture;                          // Texture containing the glyphs, returned by `load_BMP_texture`,
                                                            // (used for `glGenTextures` etc.).

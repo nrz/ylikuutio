@@ -19,6 +19,7 @@
 #define __CHUNK_MASTER_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "parent_module.hpp"
 #include "material.hpp"
 #include "get_content_callback.hpp"
 #include "render_templates.hpp"
@@ -37,21 +38,16 @@ namespace yli
 {
     namespace ontology
     {
-        class Chunk;
-
         class ChunkMaster: public yli::ontology::Entity
         {
             public:
-                void bind_Chunk(yli::ontology::Chunk* const chunk);
-                void unbind_Chunk(const std::size_t childID);
-
                 // constructor.
                 ChunkMaster(yli::ontology::Universe* universe, yli::ontology::Material* const parent, GetContentCallback get_content_callback)
-                    : yli::ontology::Entity(universe)
+                    : yli::ontology::Entity(universe),
+                    parent_of_chunks(yli::ontology::ParentModule())
                 {
                     // constructor.
                     this->get_content_callback = get_content_callback;
-                    this->number_of_chunks     = 0;
                     this->parent               = parent;
 
                     // get `childID` from `Material` and set pointer to this `ChunkMaster`.
@@ -67,20 +63,18 @@ namespace yli
                 // destructor.
                 virtual ~ChunkMaster();
 
-                friend class Chunk;
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template<class T1>
                     friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
+                yli::ontology::ParentModule parent_of_chunks;
+
             private:
                 void bind_to_parent();
 
                 // this method renders all `Chunk`s bound to this `ChunkMaster`.
-                void render();
-
-                // this method sets `Chunk` pointer.
-                void set_chunk_pointer(std::size_t childID, yli::ontology::Chunk* child_pointer);
+                void render() override;
 
                 std::size_t childID;              // `ChunkMaster` ID, returned by `yli::ontology::Material->get_chunk_masterID()`.
 
@@ -88,10 +82,6 @@ namespace yli
                 GetContentCallback get_content_callback;
 
                 yli::ontology::Material* parent;  // pointer to the `Material`.
-
-                std::vector<ontology::Chunk*> chunk_pointer_vector;
-                std::queue<std::size_t> free_chunkID_queue;
-                std::size_t number_of_chunks;
         };
     };
 }

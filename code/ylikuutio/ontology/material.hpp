@@ -19,6 +19,7 @@
 #define __MATERIAL_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "parent_module.hpp"
 #include "universe.hpp"
 #include "shader.hpp"
 #include "material_struct.hpp"
@@ -44,35 +45,23 @@ namespace yli
     {
         class Species;
         class Object;
-        class VectorFont;
-        class ShapeshifterTransformation;
         class ChunkMaster;
 
         class Material: public yli::ontology::Entity
         {
             public:
-                void bind_Species(yli::ontology::Species* const species);
-                void bind_ShapeshifterTransformation(yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation);
-                void bind_VectorFont(yli::ontology::VectorFont* const vector_font);
-                void bind_ChunkMaster(ontology::ChunkMaster* const chunk_master);
-
-                void unbind_Species(const std::size_t childID);
-                void unbind_ShapeshifterTransformation(const std::size_t childID);
-                void unbind_VectorFont(const std::size_t childID);
-                void unbind_ChunkMaster(const std::size_t childID);
-
                 Material(yli::ontology::Universe* const universe, const yli::ontology::MaterialStruct& material_struct)
-                    : Entity(universe)
+                    : Entity(universe),
+                    parent_of_species(yli::ontology::ParentModule()),
+                    parent_of_shapeshifter_transformations(yli::ontology::ParentModule()),
+                    parent_of_vector_fonts(yli::ontology::ParentModule()),
+                    parent_of_chunk_masters(yli::ontology::ParentModule())
                 {
                     // constructor.
                     this->parent                   = material_struct.shader;
                     this->is_symbiont_material     = material_struct.is_symbiont_material;
                     this->texture_file_format      = material_struct.texture_file_format;
                     this->texture_filename         = material_struct.texture_filename;
-                    this->number_of_species        = 0;
-                    this->number_of_shapeshifter_transformations = 0;
-                    this->number_of_vector_fonts   = 0;
-                    this->number_of_chunk_masters  = 0;
                     this->texture                  = 0; // some dummy value.
                     this->openGL_textureID         = 0; // some dummy value.
                     this->image_width              = 0;
@@ -146,6 +135,11 @@ namespace yli
                 template<class T1>
                     friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
+                yli::ontology::ParentModule parent_of_species;
+                yli::ontology::ParentModule parent_of_shapeshifter_transformations;
+                yli::ontology::ParentModule parent_of_vector_fonts;
+                yli::ontology::ParentModule parent_of_chunk_masters;
+
             protected:
                 std::size_t image_width;
                 std::size_t image_height;
@@ -155,7 +149,7 @@ namespace yli
                 void bind_to_parent();
 
                 // This method renders all `Species` using this `Material`.
-                void render();
+                void render() override;
 
                 yli::ontology::Shader* parent;       // Pointer to the `Shader`.
 
@@ -163,19 +157,6 @@ namespace yli
 
                 uint32_t texture;                    // Texture of this `Material`, returned by `load_BMP_texture` (used for `glGenTextures` etc.).
                 uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
-
-                std::vector<yli::ontology::Species*> species_pointer_vector;
-                std::vector<yli::ontology::ShapeshifterTransformation*> shapeshifter_transformation_pointer_vector;
-                std::vector<yli::ontology::VectorFont*> vector_font_pointer_vector;
-                std::vector<ontology::ChunkMaster*> chunk_master_pointer_vector;
-                std::queue<std::size_t> free_speciesID_queue;
-                std::queue<std::size_t> free_shapeshifter_transformationID_queue;
-                std::queue<std::size_t> free_vector_fontID_queue;
-                std::queue<std::size_t> free_chunk_masterID_queue;
-                std::size_t number_of_species;
-                std::size_t number_of_shapeshifter_transformations;
-                std::size_t number_of_vector_fonts;
-                std::size_t number_of_chunk_masters;
 
                 std::string texture_file_format;     // Type of the model file, eg. `"bmp"`.
                 std::string texture_filename;        // Filename of the model file.

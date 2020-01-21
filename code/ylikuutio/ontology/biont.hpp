@@ -125,7 +125,7 @@ namespace yli
                 void bind_to_SymbiontSpecies();
 
                 // This method renders this `Biont`.
-                void render();
+                void render() override;
                 void render_this_biont(const yli::ontology::Shader* const shader);
 
                 yli::ontology::Holobiont* holobiont_parent;       // pointer to the `Holobiont`.

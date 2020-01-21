@@ -85,7 +85,7 @@ namespace yli
             }
 
             // get `childID` from `SymbiontMaterial` and set pointer to this `SymbiontSpecies`.
-            symbiont_material->bind_SymbiontSpecies(this);
+            symbiont_material->parent_of_symbiont_species.bind_child(this);
         }
 
         SymbiontSpecies::~SymbiontSpecies()
@@ -111,7 +111,7 @@ namespace yli
                 return;
             }
 
-            symbiont_material->unbind_SymbiontSpecies(this->childID);
+            symbiont_material->parent_of_symbiont_species.unbind_child(this->childID);
         }
 
         void SymbiontSpecies::render()

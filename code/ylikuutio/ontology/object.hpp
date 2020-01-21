@@ -136,7 +136,7 @@ namespace yli
                 void bind_to_parent();
 
                 // this method renders this `Object`.
-                void render();
+                void render() override;
                 void render_this_object(yli::ontology::Shader* const shader_pointer);
 
                 yli::ontology::Species* species_parent; // pointer to the `Species` parent.

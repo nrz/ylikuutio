@@ -19,6 +19,7 @@
 #define __SHAPESHIFTER_TRANSFORMATION_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "parent_module.hpp"
 #include "species_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -36,18 +37,10 @@ namespace yli
     namespace ontology
     {
         class Universe;
-        class ShapeshifterForm;
-        class ShapeshifterSequence;
 
         class ShapeshifterTransformation: public yli::ontology::Entity
         {
             public:
-                void bind_ShapeshifterForm(yli::ontology::ShapeshifterForm* const shapeshifter_form);
-                void bind_ShapeshifterSequence(yli::ontology::ShapeshifterSequence* const shapeshifter_sequence);
-
-                void unbind_ShapeshifterForm(const std::size_t childID);
-                void unbind_ShapeshifterSequence(const std::size_t childID);
-
                 // This method sets pointer to this `ShapeshifterTransformation` to `nullptr`,
                 // sets `parent` according to the input, and requests a new `childID` from the new `Material`.
                 void bind_to_new_parent(yli::ontology::Material* const new_parent);
@@ -55,13 +48,12 @@ namespace yli
 
                 // constructor.
                 ShapeshifterTransformation(yli::ontology::Universe* const universe, const yli::ontology::SpeciesStruct& species_struct)
-                    : Entity(universe)
+                    : Entity(universe),
+                    parent_of_shapeshifter_forms(yli::ontology::ParentModule()),
+                    parent_of_shapeshifter_sequences(yli::ontology::ParentModule())
                 {
                     // constructor.
                     this->parent = species_struct.material;
-
-                    this->number_of_shapeshifter_forms     = 0;
-                    this->number_of_shapeshifter_sequences = 0;
 
                     // get `childID` from `Material` and set pointer to this `Species`.
                     this->bind_to_parent();
@@ -81,20 +73,15 @@ namespace yli
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
+                yli::ontology::ParentModule parent_of_shapeshifter_forms;
+                yli::ontology::ParentModule parent_of_shapeshifter_sequences;
+
             private:
                 void bind_to_parent();
 
-                void render();
+                void render() override;
 
                 yli::ontology::Material* parent; // pointer to the `Material`.
-
-                std::vector<yli::ontology::ShapeshifterForm*> shapeshifter_form_pointer_vector;
-                std::queue<std::size_t> free_shapeshifter_formID_queue;
-                std::size_t number_of_shapeshifter_forms;
-
-                std::vector<yli::ontology::ShapeshifterSequence*> shapeshifter_sequence_pointer_vector;
-                std::queue<std::size_t> free_shapeshifter_sequenceID_queue;
-                std::size_t number_of_shapeshifter_sequences;
         };
     }
 }

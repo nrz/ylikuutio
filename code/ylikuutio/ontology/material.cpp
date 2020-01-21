@@ -16,14 +16,11 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "material.hpp"
+#include "entity.hpp"
 #include "shader.hpp"
-#include "vector_font.hpp"
-#include "species.hpp"
-#include "shapeshifter_transformation.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "material_struct.hpp"
-#include "code/ylikuutio/ontology/chunk_master.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 
@@ -39,81 +36,7 @@ namespace yli
 {
     namespace ontology
     {
-        void Material::bind_Species(yli::ontology::Species* const species)
-        {
-            // Get `childID` from `Material` and set pointer to `species`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Species*>(
-                    species,
-                    this->species_pointer_vector,
-                    this->free_speciesID_queue,
-                    this->number_of_species);
-        }
-
-        void Material::bind_ShapeshifterTransformation(yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation)
-        {
-            // Get `childID` from `Material` and set pointer to `shapeshifter_transformation`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::ShapeshifterTransformation*>(
-                    shapeshifter_transformation,
-                    this->shapeshifter_transformation_pointer_vector,
-                    this->free_shapeshifter_transformationID_queue,
-                    this->number_of_shapeshifter_transformations);
-        }
-
-        void Material::bind_VectorFont(yli::ontology::VectorFont* const vector_font)
-        {
-            // Get `childID` from `Material` and set pointer to `vector_font`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::VectorFont*>(
-                    vector_font,
-                    this->vector_font_pointer_vector,
-                    this->free_vector_fontID_queue,
-                    this->number_of_vector_fonts);
-        }
-
-        void Material::bind_ChunkMaster(ontology::ChunkMaster* const chunk_master)
-        {
-            // Get `childID` from `Material` and set pointer to `chunk_master`.
-            yli::hierarchy::bind_child_to_parent<ontology::ChunkMaster*>(
-                    chunk_master,
-                    this->chunk_master_pointer_vector,
-                    this->free_chunk_masterID_queue,
-                    this->number_of_chunk_masters);
-        }
-
-        void Material::unbind_Species(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent<yli::ontology::Species*>(
-                    childID,
-                    this->species_pointer_vector,
-                    this->free_speciesID_queue,
-                    this->number_of_species);
-        }
-
-        void Material::unbind_ShapeshifterTransformation(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent<yli::ontology::ShapeshifterTransformation*>(
-                    childID,
-                    this->shapeshifter_transformation_pointer_vector,
-                    this->free_shapeshifter_transformationID_queue,
-                    this->number_of_shapeshifter_transformations);
-        }
-
-        void Material::unbind_VectorFont(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent<yli::ontology::VectorFont*>(
-                    childID,
-                    this->vector_font_pointer_vector,
-                    this->free_vector_fontID_queue,
-                    this->number_of_vector_fonts);
-        }
-
-        void Material::unbind_ChunkMaster(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent<yli::ontology::ChunkMaster*>(
-                    childID,
-                    this->chunk_master_pointer_vector,
-                    this->free_chunk_masterID_queue,
-                    this->number_of_chunk_masters);
-        }
+        class Species;
 
         void Material::bind_to_parent()
         {
@@ -128,7 +51,7 @@ namespace yli
             }
 
             // Get `childID` from the `Shader` and set pointer to this `Material`.
-            shader->bind_Material(this);
+            shader->parent_of_materials.bind_child(this);
         }
 
         Material::~Material()
@@ -137,22 +60,6 @@ namespace yli
             {
                 // destructor.
                 std::cout << "`Material` with childID " << std::dec << this->childID << " will be destroyed.\n";
-
-                // Destroy all `Species` of this `Material`.
-                std::cout << "All `Species` of this `Material` will be destroyed.\n";
-                yli::hierarchy::delete_children<yli::ontology::Species*>(this->species_pointer_vector, this->number_of_species);
-
-                // Destroy all `ShapeshifterTransformation`s of this `Material`.
-                std::cout << "All `ShapeshifterTransformation`s of this `Material` will be destroyed.\n";
-                yli::hierarchy::delete_children<yli::ontology::ShapeshifterTransformation*>(this->shapeshifter_transformation_pointer_vector, this->number_of_shapeshifter_transformations);
-
-                // Destroy all `VectorFont`s of this `Material`.
-                std::cout << "All `VectorFont`s of this `Material` will be destroyed.\n";
-                yli::hierarchy::delete_children<yli::ontology::VectorFont*>(this->vector_font_pointer_vector, this->number_of_vector_fonts);
-
-                // Destroy all `ChunkMaster`s of this `Material`.
-                std::cout << "All `ChunkMaster`s of this `Material` will be destroyed.\n";
-                yli::hierarchy::delete_children<ontology::ChunkMaster*>(this->chunk_master_pointer_vector, this->number_of_chunk_masters);
 
                 glDeleteTextures(1, &this->texture);
 
@@ -168,7 +75,7 @@ namespace yli
                     return;
                 }
 
-                shader->unbind_Material(this->childID);
+                shader->parent_of_materials.unbind_child(this->childID);
             }
         }
 
@@ -189,9 +96,9 @@ namespace yli
             yli::opengl::uniform_1i(this->openGL_textureID, 0);
 
             // Render this `Material` by calling `render()` function of each `Species`, each `VectorFont`, and each `ChunkMaster`.
-            yli::ontology::render_children<yli::ontology::Species*>(this->species_pointer_vector);
-            yli::ontology::render_children<yli::ontology::VectorFont*>(this->vector_font_pointer_vector);
-            yli::ontology::render_children<ontology::ChunkMaster*>(this->chunk_master_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_species.child_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_vector_fonts.child_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_chunk_masters.child_pointer_vector);
 
             this->postrender();
         }
@@ -203,15 +110,15 @@ namespace yli
 
         std::size_t Material::get_number_of_children() const
         {
-            return this->number_of_species + this->number_of_shapeshifter_transformations + this->number_of_vector_fonts + this->number_of_chunk_masters;
+            return this->parent_of_species.number_of_children + this->parent_of_shapeshifter_transformations.number_of_children + this->parent_of_vector_fonts.number_of_children + this->parent_of_chunk_masters.number_of_children;
         }
 
         std::size_t Material::get_number_of_descendants() const
         {
-            return yli::ontology::get_number_of_descendants(this->species_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->shapeshifter_transformation_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->vector_font_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->chunk_master_pointer_vector);
+            return yli::ontology::get_number_of_descendants(this->parent_of_species.child_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->parent_of_shapeshifter_transformations.child_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->parent_of_vector_fonts.child_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->parent_of_chunk_masters.child_pointer_vector);
         }
 
         void Material::bind_to_new_parent(yli::ontology::Shader* const new_parent)
@@ -234,11 +141,11 @@ namespace yli
             }
 
             // Unbind from the old parent `Shader`.
-            shader->unbind_Material(this->childID);
+            shader->parent_of_materials.unbind_child(this->childID);
 
             // Get `childID` from `Shader` and set pointer to this `Material`.
             this->parent = new_parent;
-            this->parent->bind_Material(this);
+            this->parent->parent_of_materials.bind_child(this);
         }
 
         void Material::set_terrain_species(yli::ontology::Species* const terrain_species)

@@ -16,8 +16,8 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "font2D.hpp"
+#include "entity.hpp"
 #include "universe.hpp"
-#include "text2D.hpp"
 #include "text_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
@@ -49,25 +49,6 @@ namespace yli
 {
     namespace ontology
     {
-        void Font2D::bind_Text2D(yli::ontology::Text2D* const text2D)
-        {
-            // Get `childID` from `Font2D` and set pointer to `text2D`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Text2D*>(
-                    text2D,
-                    this->text2D_pointer_vector,
-                    this->free_text2D_ID_queue,
-                    this->number_of_text2Ds);
-        }
-
-        void Font2D::unbind_Text2D(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->text2D_pointer_vector,
-                    this->free_text2D_ID_queue,
-                    this->number_of_text2Ds);
-        }
-
         void Font2D::bind_to_parent()
         {
             // Requirements:
@@ -99,10 +80,6 @@ namespace yli
             // Delete shader.
             glDeleteProgram(this->programID);
 
-            // Destroy all texts of this `Font2D`.
-            std::cout << "All `Text2D`s of this `Font2D` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Text2D*>(this->text2D_pointer_vector, this->number_of_text2Ds);
-
             // requirements for further actions:
             // `this->parent` must not be `nullptr`.
 
@@ -125,12 +102,12 @@ namespace yli
 
         std::size_t Font2D::get_number_of_children() const
         {
-            return this->number_of_text2Ds;
+            return this->parent_of_text2Ds.number_of_children;
         }
 
         std::size_t Font2D::get_number_of_descendants() const
         {
-            return yli::ontology::get_number_of_descendants(this->text2D_pointer_vector);
+            return yli::ontology::get_number_of_descendants(this->parent_of_text2Ds.child_pointer_vector);
         }
 
         std::size_t Font2D::get_text_size() const
@@ -182,7 +159,7 @@ namespace yli
                 this->prepare_to_print();
 
                 // Render this `Font2D` by calling `render()` function of each `Text2D`.
-                yli::ontology::render_children<yli::ontology::Text2D*>(this->text2D_pointer_vector);
+                yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_text2Ds.child_pointer_vector);
 
                 glDisable(GL_BLEND);
             }

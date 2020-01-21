@@ -275,7 +275,7 @@ namespace yli
                 void bind_to_parent();
 
                 // This method renders this `ComputeTask`, that is, computes this task.
-                void render();
+                void render() override;
 
                 void preiterate() const;
                 void postiterate() const;

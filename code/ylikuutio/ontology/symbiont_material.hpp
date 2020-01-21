@@ -19,6 +19,7 @@
 #define __SYMBIONT_MATERIAL_HPP_INCLUDED
 
 #include "material.hpp"
+#include "parent_module.hpp"
 #include "symbiosis.hpp"
 #include "material_struct.hpp"
 #include "render_templates.hpp"
@@ -54,12 +55,12 @@ namespace yli
 
                 // constructor.
                 SymbiontMaterial(yli::ontology::Universe* const universe, const yli::ontology::MaterialStruct& material_struct)
-                    : Material(universe, material_struct)
+                    : Material(universe, material_struct),
+                    parent_of_symbiont_species(yli::ontology::ParentModule())
                 {
                     // constructor.
                     this->parent                     = material_struct.symbiosis;
                     this->ofbx_texture               = material_struct.ofbx_texture;
-                    this->number_of_symbiont_species = 0;
 
                     this->texture                    = 0; // dummy value.
                     this->openGL_textureID           = 0; // dummy value.
@@ -91,6 +92,8 @@ namespace yli
                 template<class T1>
                     friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
+                yli::ontology::ParentModule parent_of_symbiont_species;
+
             private:
                 void bind_to_parent();
 
@@ -105,10 +108,6 @@ namespace yli
 
                 uint32_t texture;                  // texture of this `SymbiontMaterial`.
                 GLint openGL_textureID;            // texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
-
-                std::vector<yli::ontology::SymbiontSpecies*> symbiont_species_pointer_vector;
-                std::queue<std::size_t> free_symbiont_speciesID_queue;
-                std::size_t number_of_symbiont_species;
         };
     }
 }
