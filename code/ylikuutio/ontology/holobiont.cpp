@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "holobiont.hpp"
+#include "entity.hpp"
 #include "symbiosis.hpp"
 #include "biont.hpp"
 #include "render_templates.hpp"
@@ -38,27 +39,6 @@ namespace yli
 {
     namespace ontology
     {
-        class Entity;
-
-        void Holobiont::bind_Biont(yli::ontology::Biont* const biont)
-        {
-            // get `childID` from `Holobiont` and set pointer to `object`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Biont*>(
-                    biont,
-                    this->biont_pointer_vector,
-                    this->free_biontID_queue,
-                    this->number_of_bionts);
-        }
-
-        void Holobiont::unbind_Biont(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent<yli::ontology::Biont*>(
-                    childID,
-                    this->biont_pointer_vector,
-                    this->free_biontID_queue,
-                    this->number_of_bionts);
-        }
-
         void Holobiont::bind_to_parent()
         {
             // requirements:
@@ -111,10 +91,6 @@ namespace yli
             // destructor.
             std::cout << "`Holobiont` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-            // always delete all `Biont`s of this `Holobiont`.
-            std::cout << "All `Biont`s of this `Holobiont` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Biont*>(this->biont_pointer_vector, this->number_of_bionts);
-
             // requirements for further actions:
             // `this->symbiosis_parent` must not be `nullptr`.
 
@@ -139,7 +115,7 @@ namespace yli
                 this->prerender();
 
                 // render this `Holobiont` by calling `render()` function of each `Biont`.
-                yli::ontology::render_children<yli::ontology::Biont*>(this->biont_pointer_vector);
+                yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_bionts.child_pointer_vector);
 
                 this->postrender();
             }
@@ -195,8 +171,10 @@ namespace yli
             this->cartesian_coordinates.x = x;
             this->model_matrix[3][0] = x;
 
-            for (yli::ontology::Biont* biont : this->biont_pointer_vector)
+            for (yli::ontology::Entity* biont_entity : this->parent_of_bionts.child_pointer_vector)
             {
+                yli::ontology::Biont* biont = static_cast<yli::ontology::Biont*>(biont_entity);
+
                 if (biont != nullptr)
                 {
                     biont->cartesian_coordinates.x = x;
@@ -210,8 +188,10 @@ namespace yli
             this->cartesian_coordinates.y = y;
             this->model_matrix[3][1] = y;
 
-            for (yli::ontology::Biont* biont : this->biont_pointer_vector)
+            for (yli::ontology::Entity* biont_entity : this->parent_of_bionts.child_pointer_vector)
             {
+                yli::ontology::Biont* biont = static_cast<yli::ontology::Biont*>(biont_entity);
+
                 if (biont != nullptr)
                 {
                     biont->cartesian_coordinates.y = y;
@@ -225,8 +205,10 @@ namespace yli
             this->cartesian_coordinates.z = z;
             this->model_matrix[3][2] = z;
 
-            for (yli::ontology::Biont* biont : this->biont_pointer_vector)
+            for (yli::ontology::Entity* biont_entity : this->parent_of_bionts.child_pointer_vector)
             {
+                yli::ontology::Biont* biont = static_cast<yli::ontology::Biont*>(biont_entity);
+
                 if (biont != nullptr)
                 {
                     biont->cartesian_coordinates.z = z;
@@ -242,12 +224,12 @@ namespace yli
 
         std::size_t Holobiont::get_number_of_children() const
         {
-            return this->number_of_bionts;
+            return this->parent_of_bionts.number_of_children;
         }
 
         std::size_t Holobiont::get_number_of_descendants() const
         {
-            return yli::ontology::get_number_of_descendants(this->biont_pointer_vector);
+            return yli::ontology::get_number_of_descendants(this->parent_of_bionts.child_pointer_vector);
         }
     }
 }

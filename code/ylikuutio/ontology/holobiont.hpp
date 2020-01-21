@@ -19,6 +19,7 @@
 #define __HOLOBIONT_HPP_INCLUDED
 
 #include "movable.hpp"
+#include "parent_module.hpp"
 #include "symbiosis.hpp"
 #include "holobiont_struct.hpp"
 #include "movable_struct.hpp"
@@ -54,14 +55,10 @@ namespace yli
     namespace ontology
     {
         class Entity;
-        class Biont;
 
         class Holobiont: public yli::ontology::Movable
         {
             public:
-                void bind_Biont(yli::ontology::Biont* const biont);
-                void unbind_Biont(const std::size_t childID);
-
                 // this method sets pointer to this `Holobiont` to `nullptr`, sets `parent` according to the input,
                 // and requests a new `childID` from the new `Symbiosis`.
                 void bind_to_new_parent(yli::ontology::Symbiosis* const new_parent);
@@ -73,7 +70,8 @@ namespace yli
                                 holobiont_struct.cartesian_coordinates,
                                 holobiont_struct.spherical_coordinates,
                                 holobiont_struct.horizontal_angle,
-                                holobiont_struct.vertical_angle))
+                                holobiont_struct.vertical_angle)),
+                    parent_of_bionts(yli::ontology::ParentModule())
                 {
                     // constructor.
                     this->symbiosis_parent      = holobiont_struct.symbiosis_parent;
@@ -82,8 +80,6 @@ namespace yli
                     this->rotate_vector         = holobiont_struct.rotate_vector;
                     this->translate_vector      = holobiont_struct.translate_vector;
                     this->initial_rotate_vector = holobiont_struct.initial_rotate_vector;
-
-                    this->number_of_bionts      = 0;
 
                     this->rotate_angle          = holobiont_struct.rotate_angle;
                     this->initial_rotate_angle  = holobiont_struct.initial_rotate_angle;
@@ -120,6 +116,8 @@ namespace yli
                 template<class T1>
                     friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
+                yli::ontology::ParentModule parent_of_bionts;
+
             private:
                 void bind_to_parent();
 
@@ -130,17 +128,12 @@ namespace yli
 
                 yli::ontology::Symbiosis* symbiosis_parent; // pointer to the `Symbiosis`.
 
-                std::vector<yli::ontology::Biont*> biont_pointer_vector;
-                std::queue<std::size_t> free_biontID_queue;
-
                 glm::vec3 original_scale_vector;            // original scale vector.
                 glm::vec3 rotate_vector;                    // rotate vector.
                 glm::vec3 translate_vector;                 // translate vector.
                 glm::vec3 initial_rotate_vector;            // initial rotate vector.
 
                 yli::common::SphericalCoordinatesStruct spherical_coordinates;
-
-                std::size_t number_of_bionts;
 
                 float rotate_angle;                         // rotate angle.
                 float initial_rotate_angle;                 // initial rotate angle.

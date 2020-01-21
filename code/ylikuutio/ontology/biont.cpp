@@ -70,7 +70,7 @@ namespace yli
             }
 
             // Get `childID` from `Holobiont` and set pointer to this `Biont`.
-            holobiont->bind_Biont(this);
+            holobiont->parent_of_bionts.bind_child(this);
         }
 
         void Biont::bind_to_SymbiontSpecies()
@@ -129,11 +129,11 @@ namespace yli
                 return;
             }
 
-            this->holobiont_parent->unbind_Biont(this->childID);
+            this->holobiont_parent->parent_of_bionts.unbind_child(this->childID);
 
             // Get `childID` from `Holobiont` and set pointer to this `Biont`.
             this->holobiont_parent = new_holobiont_parent;
-            this->holobiont_parent->bind_Biont(this);
+            this->holobiont_parent->parent_of_bionts.bind_child(this);
         }
 
         Biont::~Biont()
@@ -164,7 +164,7 @@ namespace yli
 
             // Set pointer to this `Biont` to `nullptr`.
             symbiont_species->unbind_Biont(this->childID);
-            holobiont->unbind_Biont(this->childID);
+            holobiont->parent_of_bionts.unbind_child(this->childID);
         }
 
         void Biont::render()
