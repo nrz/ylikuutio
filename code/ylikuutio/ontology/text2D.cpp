@@ -96,6 +96,9 @@ namespace yli
 
             // Delete shader.
             glDeleteProgram(this->programID);
+
+            // Unbind from the old parent `Font2D`.
+            this->parent->unbind_Text2D(this->childID);
         }
 
         void Text2D::render()
