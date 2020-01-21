@@ -19,6 +19,7 @@
 #define __TEXT3D_HPP_INCLUDED
 
 #include "movable.hpp"
+#include "parent_module.hpp"
 #include "glyph_object_creation.hpp"
 #include "vector_font.hpp"
 #include "text3D_struct.hpp"
@@ -52,9 +53,6 @@ namespace yli
         class Text3D: public yli::ontology::Movable
         {
             public:
-                void bind_Object(yli::ontology::Object* const object);
-                void unbind_Object(const std::size_t childID);
-
                 // this method deletes all glyph Objects of this `Text3D`,
                 // sets pointer to this `Text3D` to `nullptr`,
                 // sets `parent` according to the input (the new `VectorFont`),
@@ -73,14 +71,13 @@ namespace yli
                                 text3D_struct.cartesian_coordinates,
                                 text3D_struct.spherical_coordinates,
                                 text3D_struct.horizontal_angle,
-                                text3D_struct.vertical_angle))
+                                text3D_struct.vertical_angle)),
+                    parent_of_objects(yli::ontology::ParentModule())
                 {
                     // constructor.
                     this->rotate_angle = NAN;
                     this->text_string  = text3D_struct.text_string;
                     this->parent       = text3D_struct.parent;
-
-                    this->number_of_objects = 0;
 
                     // get childID from `VectorFont` and set pointer to this `Text3D`.
                     this->bind_to_parent();
@@ -111,6 +108,8 @@ namespace yli
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
+                yli::ontology::ParentModule parent_of_objects;
+
             private:
                 void bind_to_parent();
 
@@ -122,10 +121,6 @@ namespace yli
                 float rotate_angle;                // rotate angle.
                 glm::vec3 rotate_vector;           // rotate vector.
                 glm::vec3 translate_vector;        // translate vector.
-
-                std::vector<yli::ontology::Object*> object_pointer_vector;
-                std::queue<std::size_t> free_objectID_queue;
-                std::size_t number_of_objects;
         };
     }
 }

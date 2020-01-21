@@ -105,7 +105,7 @@ namespace yli
                 }
 
                 // get `childID` from `Text3D` and set pointer to this `Object`.
-                text3D->bind_Object(this);
+                text3D->parent_of_objects.bind_child(this);
             }
         }
 
@@ -203,11 +203,11 @@ namespace yli
                 }
 
                 // unbind from the old parent `Text3D`.
-                text3D->unbind_Object(this->childID);
+                text3D->parent_of_objects.unbind_child(this->childID);
 
                 // get `childID` from `Text3D` and set pointer to this `Object`.
                 this->text3D_parent = static_cast<yli::ontology::Text3D*>(new_parent);
-                this->text3D_parent->bind_Object(this);
+                this->text3D_parent->parent_of_objects.bind_child(this);
             }
         }
 
@@ -293,7 +293,7 @@ namespace yli
                     return;
                 }
 
-                text3D->unbind_Object(this->childID);
+                text3D->parent_of_objects.unbind_child(this->childID);
             }
         }
 
