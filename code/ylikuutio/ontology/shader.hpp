@@ -54,15 +54,11 @@ namespace yli
     {
         class Scene;
         class Species;
-        class Symbiosis;
         class ShaderCompare;
 
         class Shader: public yli::ontology::Entity
         {
             public:
-                void bind_Symbiosis(yli::ontology::Symbiosis* const symbiosis);
-                void unbind_Symbiosis(const std::size_t childID);
-
                 // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
                 void bind_to_new_parent(yli::ontology::Scene* const new_parent);
                 void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
@@ -70,7 +66,8 @@ namespace yli
                 Shader(yli::ontology::Universe* const universe, const yli::ontology::ShaderStruct& shader_struct)
                     : Entity(universe),
                     parent_of_compute_tasks(yli::ontology::ParentModule()),
-                    parent_of_materials(yli::ontology::ParentModule())
+                    parent_of_materials(yli::ontology::ParentModule()),
+                    parent_of_symbioses(yli::ontology::ParentModule())
                 {
                     // constructor.
 
@@ -93,8 +90,6 @@ namespace yli
                     this->is_gpgpu_shader         = shader_struct.is_gpgpu_shader;
 
                     this->opengl_in_use           = shader_struct.opengl_in_use;
-
-                    this->number_of_symbioses     = 0;
 
                     // Get `childID` from `Scene` and set pointer to this `Shader`.
                     this->bind_to_parent();
@@ -141,6 +136,7 @@ namespace yli
 
                 yli::ontology::ParentModule parent_of_compute_tasks;
                 yli::ontology::ParentModule parent_of_materials;
+                yli::ontology::ParentModule parent_of_symbioses;
 
             private:
                 void bind_to_parent();
@@ -158,10 +154,6 @@ namespace yli
 
                 std::string vertex_shader;            // Filename of vertex shader.
                 std::string fragment_shader;          // Filename of fragment shader.
-
-                std::vector<yli::ontology::Symbiosis*> symbiosis_pointer_vector;
-                std::queue<std::size_t> free_symbiosisID_queue;
-                std::size_t number_of_symbioses;
 
                 const char* char_vertex_shader;
                 const char* char_fragment_shader;

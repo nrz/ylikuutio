@@ -103,7 +103,7 @@ namespace yli
             }
 
             // get `childID` from `Shader` and set pointer to this `Symbiosis`.
-            shader->bind_Symbiosis(this);
+            shader->parent_of_symbioses.bind_child(this);
         }
 
         void Symbiosis::bind_to_new_parent(yli::ontology::Shader* const new_parent)
@@ -130,11 +130,11 @@ namespace yli
             }
 
             // unbind from the old parent `Shader`.
-            shader->unbind_Symbiosis(this->childID);
+            shader->parent_of_symbioses.unbind_child(this->childID);
 
             // get `childID` from `Shader` and set pointer to this `Symbiosis`.
             this->parent = new_parent;
-            this->parent->bind_Symbiosis(this);
+            this->parent->parent_of_symbioses.bind_child(this);
         }
 
         void Symbiosis::bind_to_new_parent(yli::ontology::Entity* const new_parent)
@@ -182,7 +182,7 @@ namespace yli
             }
 
             // set pointer to this `Symbiosis` to `nullptr`.
-            shader->unbind_Symbiosis(this->childID);
+            shader->parent_of_symbioses.unbind_child(this->childID);
         }
 
         void Symbiosis::render()
