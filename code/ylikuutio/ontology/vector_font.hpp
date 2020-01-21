@@ -180,7 +180,7 @@ namespace yli
                 void bind_to_parent();
 
                 // This method renders all `Glyph`s of this `VectorFont`.
-                void render();
+                void render() override;
 
                 std::string font_file_format;         // Type of the model file, eg. `"bmp"`.
                 std::string font_filename;            // Filename of the model file.

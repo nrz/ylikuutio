@@ -76,7 +76,7 @@ namespace yli
             }
 
             // Get `childID` from the `Material` and set pointer to this `VectorFont`.
-            material->bind_VectorFont(this);
+            material->parent_of_vector_fonts.bind_child(this);
         }
 
         void VectorFont::bind_to_new_parent(yli::ontology::Material* const new_parent)
@@ -103,11 +103,11 @@ namespace yli
             }
 
             // Unbind from the old parent `Material`.
-            material->unbind_VectorFont(this->childID);
+            material->parent_of_vector_fonts.unbind_child(this->childID);
 
             // Get `childID` from `Material` and set pointer to this `VectorFont`.
             this->parent = new_parent;
-            this->parent->bind_VectorFont(this);
+            this->parent->parent_of_vector_fonts.bind_child(this);
         }
 
         // This method returns a pointer to `Glyph` that matches the given `unicode_value`,
@@ -150,7 +150,7 @@ namespace yli
             }
 
             // Set pointer to this `VectorFont` to `nullptr`.
-            material->unbind_VectorFont(this->childID);
+            material->parent_of_vector_fonts.unbind_child(this->childID);
         }
 
         void VectorFont::render()

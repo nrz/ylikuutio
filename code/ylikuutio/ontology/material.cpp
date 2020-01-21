@@ -18,7 +18,6 @@
 #include "material.hpp"
 #include "entity.hpp"
 #include "shader.hpp"
-#include "vector_font.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "material_struct.hpp"
@@ -40,16 +39,6 @@ namespace yli
     {
         class Species;
 
-        void Material::bind_VectorFont(yli::ontology::VectorFont* const vector_font)
-        {
-            // Get `childID` from `Material` and set pointer to `vector_font`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::VectorFont*>(
-                    vector_font,
-                    this->vector_font_pointer_vector,
-                    this->free_vector_fontID_queue,
-                    this->number_of_vector_fonts);
-        }
-
         void Material::bind_ChunkMaster(ontology::ChunkMaster* const chunk_master)
         {
             // Get `childID` from `Material` and set pointer to `chunk_master`.
@@ -58,15 +47,6 @@ namespace yli
                     this->chunk_master_pointer_vector,
                     this->free_chunk_masterID_queue,
                     this->number_of_chunk_masters);
-        }
-
-        void Material::unbind_VectorFont(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent<yli::ontology::VectorFont*>(
-                    childID,
-                    this->vector_font_pointer_vector,
-                    this->free_vector_fontID_queue,
-                    this->number_of_vector_fonts);
         }
 
         void Material::unbind_ChunkMaster(const std::size_t childID)
@@ -100,10 +80,6 @@ namespace yli
             {
                 // destructor.
                 std::cout << "`Material` with childID " << std::dec << this->childID << " will be destroyed.\n";
-
-                // Destroy all `VectorFont`s of this `Material`.
-                std::cout << "All `VectorFont`s of this `Material` will be destroyed.\n";
-                yli::hierarchy::delete_children<yli::ontology::VectorFont*>(this->vector_font_pointer_vector, this->number_of_vector_fonts);
 
                 // Destroy all `ChunkMaster`s of this `Material`.
                 std::cout << "All `ChunkMaster`s of this `Material` will be destroyed.\n";
@@ -145,7 +121,7 @@ namespace yli
 
             // Render this `Material` by calling `render()` function of each `Species`, each `VectorFont`, and each `ChunkMaster`.
             yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_species.child_pointer_vector);
-            yli::ontology::render_children<yli::ontology::VectorFont*>(this->vector_font_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_vector_fonts.child_pointer_vector);
             yli::ontology::render_children<ontology::ChunkMaster*>(this->chunk_master_pointer_vector);
 
             this->postrender();
@@ -158,14 +134,14 @@ namespace yli
 
         std::size_t Material::get_number_of_children() const
         {
-            return this->parent_of_species.number_of_children + this->parent_of_shapeshifter_transformations.number_of_children + this->number_of_vector_fonts + this->number_of_chunk_masters;
+            return this->parent_of_species.number_of_children + this->parent_of_shapeshifter_transformations.number_of_children + this->parent_of_vector_fonts.number_of_children + this->number_of_chunk_masters;
         }
 
         std::size_t Material::get_number_of_descendants() const
         {
             return yli::ontology::get_number_of_descendants(this->parent_of_species.child_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->parent_of_shapeshifter_transformations.child_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->vector_font_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->parent_of_vector_fonts.child_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->chunk_master_pointer_vector);
         }
 
