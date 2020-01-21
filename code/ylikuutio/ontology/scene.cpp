@@ -64,16 +64,6 @@ namespace yli
             this->shader_priority_queue.push(shader);
         }
 
-        void Scene::bind_Camera(yli::ontology::Camera* const camera)
-        {
-            // get `childID` from `Scene` and set pointer to `camera`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Camera*>(
-                    camera,
-                    this->camera_pointer_vector,
-                    this->free_cameraID_queue,
-                    this->number_of_cameras);
-        }
-
         void Scene::bind_Brain(yli::ontology::Brain* const brain)
         {
             // get `childID` from `Scene` and set pointer to `ai`.
@@ -94,15 +84,6 @@ namespace yli
                     this->shader_pointer_vector,
                     this->free_shaderID_queue,
                     this->number_of_shaders);
-        }
-
-        void Scene::unbind_Camera(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->camera_pointer_vector,
-                    this->free_cameraID_queue,
-                    this->number_of_cameras);
         }
 
         void Scene::unbind_Brain(const std::size_t childID)
@@ -189,10 +170,6 @@ namespace yli
             // destroy all `Shader`s of this `Scene`.
             std::cout << "All `Shader`s of this `Scene` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Shader*>(this->shader_pointer_vector, this->number_of_shaders);
-
-            // destroy all `Camera`s of this `Scene`.
-            std::cout << "All `Camera`s of this `Scene` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Camera*>(this->camera_pointer_vector, this->number_of_cameras);
 
             // destroy all `Brain`s of this `Scene`.
             std::cout << "All `Brain`s of this `Scene` will be destroyed.\n";
@@ -346,13 +323,13 @@ namespace yli
 
         std::size_t Scene::get_number_of_children() const
         {
-            return this->number_of_shaders + this->number_of_cameras + this->number_of_brains;
+            return this->number_of_shaders + this->parent_of_cameras.number_of_children + this->number_of_brains;
         }
 
         std::size_t Scene::get_number_of_descendants() const
         {
             return yli::ontology::get_number_of_descendants(this->shader_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->camera_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->parent_of_cameras.child_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->brain_pointer_vector);
         }
 

@@ -63,7 +63,7 @@ namespace yli
             }
 
             // Get `childID` from `Scene` and set pointer to this `Camera`.
-            scene->bind_Camera(this);
+            scene->parent_of_cameras.bind_child(this);
         }
 
         Camera::~Camera()
@@ -87,7 +87,7 @@ namespace yli
             }
 
             // Set pointer to this `Camera` to `nullptr`.
-            scene->unbind_Camera(this->childID);
+            scene->parent_of_cameras.unbind_child(this->childID);
         }
 
         yli::ontology::Entity* Camera::get_parent() const
