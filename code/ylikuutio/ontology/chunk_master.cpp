@@ -30,25 +30,6 @@ namespace yli
 {
     namespace ontology
     {
-        void ChunkMaster::bind_Chunk(yli::ontology::Chunk* const chunk)
-        {
-            // get `childID` from `ChunkMaster` and set pointer to `chunk`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Chunk*>(
-                    chunk,
-                    this->chunk_pointer_vector,
-                    this->free_chunkID_queue,
-                    this->number_of_chunks);
-        }
-
-        void ChunkMaster::unbind_Chunk(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->chunk_pointer_vector,
-                    this->free_chunkID_queue,
-                    this->number_of_chunks);
-        }
-
         void ChunkMaster::bind_to_parent()
         {
             // requirements:
@@ -69,10 +50,6 @@ namespace yli
         {
             // destructor.
 
-            // destroy all chunks of this material.
-            std::cout << "All `Chunk`s of this `ChunkMaster` will be destroyed.\n";
-            yli::hierarchy::delete_children<ontology::Chunk*>(this->chunk_pointer_vector, this->number_of_chunks);
-
             // requirements for further actions:
             // `this->parent` must not be `nullptr`.
             yli::ontology::Material* const material = this->parent;
@@ -87,17 +64,12 @@ namespace yli
             material->parent_of_chunk_masters.unbind_child(this->childID);
         }
 
-        void ChunkMaster::set_chunk_pointer(std::size_t childID, yli::ontology::Chunk* child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->chunk_pointer_vector, this->free_chunkID_queue, this->number_of_chunks);
-        }
-
         void ChunkMaster::render()
         {
             if (this->should_be_rendered)
             {
                 // render `ChunkMaster` by calling `render()` function of each `Chunk`.
-                yli::ontology::render_children<ontology::Chunk*>(this->chunk_pointer_vector);
+                yli::ontology::render_children<ontology::Entity*>(this->parent_of_chunks.child_pointer_vector);
             }
         }
     }
