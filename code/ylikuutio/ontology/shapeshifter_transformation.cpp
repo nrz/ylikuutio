@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "shapeshifter_transformation.hpp"
-#include "shapeshifter_form.hpp"
 #include "shapeshifter_sequence.hpp"
 #include "material.hpp"
 #include "render_templates.hpp"
@@ -31,16 +30,6 @@ namespace yli
 {
     namespace ontology
     {
-        void ShapeshifterTransformation::bind_ShapeshifterForm(yli::ontology::ShapeshifterForm* const shapeshifter_form)
-        {
-            // get `childID` from `ShapeshifterTransformation` and set pointer to `shapeshifter_form`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::ShapeshifterForm*>(
-                    shapeshifter_form,
-                    this->shapeshifter_form_pointer_vector,
-                    this->free_shapeshifter_formID_queue,
-                    this->number_of_shapeshifter_forms);
-        }
-
         void ShapeshifterTransformation::bind_ShapeshifterSequence(yli::ontology::ShapeshifterSequence* const shapeshifter_sequence)
         {
             // get `childID` from `ShapeshifterTransformation` and set pointer to `shapeshifter_sequence`.
@@ -49,15 +38,6 @@ namespace yli
                     this->shapeshifter_sequence_pointer_vector,
                     this->free_shapeshifter_sequenceID_queue,
                     this->number_of_shapeshifter_sequences);
-        }
-
-        void ShapeshifterTransformation::unbind_ShapeshifterForm(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->shapeshifter_form_pointer_vector,
-                    this->free_shapeshifter_formID_queue,
-                    this->number_of_shapeshifter_forms);
         }
 
         void ShapeshifterTransformation::unbind_ShapeshifterSequence(const std::size_t childID)
@@ -145,10 +125,6 @@ namespace yli
             std::cout << "All `ShapeshifterSequence`s of this `ShapeshifterTransformation` will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::ShapeshifterSequence*>(this->shapeshifter_sequence_pointer_vector, this->number_of_shapeshifter_sequences);
 
-            // destroy all shapeshifter_forms of this species.
-            std::cout << "All `ShapeshifterForm`s of this `ShapeshifterTransformation` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::ShapeshifterForm*>(this->shapeshifter_form_pointer_vector, this->number_of_shapeshifter_forms);
-
             // requirements for further actions:
             // `this->parent` must not be `nullptr`.
 
@@ -176,12 +152,12 @@ namespace yli
 
         std::size_t ShapeshifterTransformation::get_number_of_children() const
         {
-            return this->number_of_shapeshifter_forms + this->number_of_shapeshifter_sequences;
+            return this->parent_of_shapeshifter_forms.number_of_children + this->number_of_shapeshifter_sequences;
         }
 
         std::size_t ShapeshifterTransformation::get_number_of_descendants() const
         {
-            return yli::ontology::get_number_of_descendants(this->shapeshifter_form_pointer_vector) +
+            return yli::ontology::get_number_of_descendants(this->parent_of_shapeshifter_forms.child_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->shapeshifter_sequence_pointer_vector);
         }
     }
