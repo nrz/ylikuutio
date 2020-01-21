@@ -51,7 +51,7 @@ namespace yli
             }
 
             // Get `childID` from the `Font2D` and set pointer to this `Text2D`.
-            font2D->bind_Text2D(this);
+            font2D->parent_of_text2Ds.bind_child(this);
         }
 
         void Text2D::bind_to_new_parent(yli::ontology::Font2D* const new_parent)
@@ -78,11 +78,11 @@ namespace yli
             }
 
             // Unbind from the old parent `Font2D`.
-            this->parent->unbind_Text2D(this->childID);
+            this->parent->parent_of_text2Ds.unbind_child(this->childID);
 
             // Get `childID` from `Font2D` and set pointer to this `Text2D`.
             this->parent = new_parent;
-            this->parent->bind_Text2D(this);
+            this->parent->parent_of_text2Ds.bind_child(this);
         }
 
         Text2D::~Text2D()
@@ -98,7 +98,7 @@ namespace yli
             glDeleteProgram(this->programID);
 
             // Unbind from the old parent `Font2D`.
-            this->parent->unbind_Text2D(this->childID);
+            this->parent->parent_of_text2Ds.unbind_child(this->childID);
         }
 
         void Text2D::render()
