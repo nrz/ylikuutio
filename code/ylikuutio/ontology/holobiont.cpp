@@ -72,7 +72,7 @@ namespace yli
             }
 
             // get `childID` from `Symbiosis` and set pointer to this `Holobiont`.
-            symbiosis->bind_Holobiont(this);
+            symbiosis->parent_of_holobionts.bind_child(this);
         }
 
         void Holobiont::bind_to_new_parent(yli::ontology::Symbiosis* const new_parent)
@@ -99,11 +99,11 @@ namespace yli
             }
 
             // unbind from the old parent `Symbiosis`.
-            symbiosis->unbind_Holobiont(this->childID);
+            symbiosis->parent_of_holobionts.unbind_child(this->childID);
 
             // get `childID` from `Symbiosis` and set pointer to this `Holobiont`.
             this->symbiosis_parent = new_parent;
-            this->symbiosis_parent->bind_Holobiont(this);
+            this->symbiosis_parent->parent_of_holobionts.bind_child(this);
         }
 
         Holobiont::~Holobiont()
@@ -127,7 +127,7 @@ namespace yli
             }
 
             // set pointer to this `Holobiont` to `nullptr`.
-            symbiosis->unbind_Holobiont(this->childID);
+            symbiosis->parent_of_holobionts.unbind_child(this->childID);
         }
 
         void Holobiont::render()

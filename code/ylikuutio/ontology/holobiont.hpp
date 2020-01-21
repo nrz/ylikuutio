@@ -124,7 +124,7 @@ namespace yli
                 void bind_to_parent();
 
                 // this method renders this `Holobiont`.
-                void render();
+                void render() override;
 
                 void create_Bionts();
 

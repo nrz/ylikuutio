@@ -61,14 +61,10 @@ namespace yli
         class Shader;
         class SymbiontMaterial;
         class SymbiontSpecies;
-        class Holobiont;
 
         class Symbiosis: public yli::ontology::Entity
         {
             public:
-                void bind_Holobiont(yli::ontology::Holobiont* const holobiont);
-                void unbind_Holobiont(const std::size_t childID);
-
                 // this method sets pointer to this `Symbiosis` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
                 void bind_to_new_parent(yli::ontology::Shader* const new_parent);
                 void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
@@ -76,7 +72,8 @@ namespace yli
                 // constructor.
                 Symbiosis(yli::ontology::Universe* universe, const yli::ontology::SymbiosisStruct& symbiosis_struct)
                     : Entity(universe),
-                    parent_of_symbiont_materials(yli::ontology::ParentModule())
+                    parent_of_symbiont_materials(yli::ontology::ParentModule()),
+                    parent_of_holobionts(yli::ontology::ParentModule())
                 {
                     // constructor.
                     this->parent                       = symbiosis_struct.parent;
@@ -85,7 +82,6 @@ namespace yli
                     this->triangulation_type           = symbiosis_struct.triangulation_type;
                     this->light_position               = symbiosis_struct.light_position;
 
-                    this->number_of_holobionts         = 0;
                     this->ofbx_mesh_count              = 0;
                     this->opengl_in_use                = symbiosis_struct.opengl_in_use;
 
@@ -142,6 +138,7 @@ namespace yli
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
                 yli::ontology::ParentModule parent_of_symbiont_materials;
+                yli::ontology::ParentModule parent_of_holobionts;
 
             private:
                 void bind_to_parent();
@@ -155,10 +152,6 @@ namespace yli
                 std::string triangulation_type;
 
                 glm::vec3 light_position;       // light position.
-
-                std::vector<yli::ontology::Holobiont*> holobiont_pointer_vector;
-                std::queue<std::size_t> free_holobiontID_queue;
-                std::size_t number_of_holobionts;
 
                 std::vector<std::vector<glm::vec3>> vertices;         // vertices of the object.
                 std::vector<std::vector<glm::vec2>> uvs;              // UVs of the object.
