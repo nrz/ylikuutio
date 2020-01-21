@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "shapeshifter_transformation.hpp"
-#include "shapeshifter_sequence.hpp"
+#include "entity.hpp"
 #include "material.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
@@ -30,25 +30,6 @@ namespace yli
 {
     namespace ontology
     {
-        void ShapeshifterTransformation::bind_ShapeshifterSequence(yli::ontology::ShapeshifterSequence* const shapeshifter_sequence)
-        {
-            // get `childID` from `ShapeshifterTransformation` and set pointer to `shapeshifter_sequence`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::ShapeshifterSequence*>(
-                    shapeshifter_sequence,
-                    this->shapeshifter_sequence_pointer_vector,
-                    this->free_shapeshifter_sequenceID_queue,
-                    this->number_of_shapeshifter_sequences);
-        }
-
-        void ShapeshifterTransformation::unbind_ShapeshifterSequence(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->shapeshifter_sequence_pointer_vector,
-                    this->free_shapeshifter_sequenceID_queue,
-                    this->number_of_shapeshifter_sequences);
-        }
-
         void ShapeshifterTransformation::bind_to_parent()
         {
             // requirements:
@@ -121,10 +102,6 @@ namespace yli
         {
             // destructor.
 
-            // destroy all shapeshifter_sequences of this species.
-            std::cout << "All `ShapeshifterSequence`s of this `ShapeshifterTransformation` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::ShapeshifterSequence*>(this->shapeshifter_sequence_pointer_vector, this->number_of_shapeshifter_sequences);
-
             // requirements for further actions:
             // `this->parent` must not be `nullptr`.
 
@@ -142,7 +119,7 @@ namespace yli
         void ShapeshifterTransformation::render()
         {
             // Render this `ShapeshifterTransformation` by calling `render` function of each `ShapeshifterSequence`.
-            yli::ontology::render_children<yli::ontology::ShapeshifterSequence*>(this->shapeshifter_sequence_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_shapeshifter_sequences.child_pointer_vector);
         }
 
         yli::ontology::Entity* ShapeshifterTransformation::get_parent() const
@@ -152,13 +129,13 @@ namespace yli
 
         std::size_t ShapeshifterTransformation::get_number_of_children() const
         {
-            return this->parent_of_shapeshifter_forms.number_of_children + this->number_of_shapeshifter_sequences;
+            return this->parent_of_shapeshifter_forms.number_of_children + this->parent_of_shapeshifter_sequences.number_of_children;
         }
 
         std::size_t ShapeshifterTransformation::get_number_of_descendants() const
         {
             return yli::ontology::get_number_of_descendants(this->parent_of_shapeshifter_forms.child_pointer_vector) +
-                yli::ontology::get_number_of_descendants(this->shapeshifter_sequence_pointer_vector);
+                yli::ontology::get_number_of_descendants(this->parent_of_shapeshifter_sequences.child_pointer_vector);
         }
     }
 }

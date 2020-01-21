@@ -61,7 +61,7 @@ namespace yli
             }
 
             // get `childID` from `ShapeshifterTransformation` and set pointer to this `ShapeshifterSequence`.
-            this->parent->bind_ShapeshifterSequence(this);
+            this->parent->parent_of_shapeshifter_sequences.bind_child(this);
         }
 
         ShapeshifterSequence::~ShapeshifterSequence()
@@ -83,7 +83,7 @@ namespace yli
                 return;
             }
 
-            shapeshifter_transformation->unbind_ShapeshifterSequence(this->childID);
+            shapeshifter_transformation->parent_of_shapeshifter_sequences.unbind_child(this->childID);
         }
 
         yli::ontology::Entity* ShapeshifterSequence::get_parent() const

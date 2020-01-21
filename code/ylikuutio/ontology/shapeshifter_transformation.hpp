@@ -37,14 +37,10 @@ namespace yli
     namespace ontology
     {
         class Universe;
-        class ShapeshifterSequence;
 
         class ShapeshifterTransformation: public yli::ontology::Entity
         {
             public:
-                void bind_ShapeshifterSequence(yli::ontology::ShapeshifterSequence* const shapeshifter_sequence);
-                void unbind_ShapeshifterSequence(const std::size_t childID);
-
                 // This method sets pointer to this `ShapeshifterTransformation` to `nullptr`,
                 // sets `parent` according to the input, and requests a new `childID` from the new `Material`.
                 void bind_to_new_parent(yli::ontology::Material* const new_parent);
@@ -53,12 +49,11 @@ namespace yli
                 // constructor.
                 ShapeshifterTransformation(yli::ontology::Universe* const universe, const yli::ontology::SpeciesStruct& species_struct)
                     : Entity(universe),
-                    parent_of_shapeshifter_forms(yli::ontology::ParentModule())
+                    parent_of_shapeshifter_forms(yli::ontology::ParentModule()),
+                    parent_of_shapeshifter_sequences(yli::ontology::ParentModule())
                 {
                     // constructor.
                     this->parent = species_struct.material;
-
-                    this->number_of_shapeshifter_sequences = 0;
 
                     // get `childID` from `Material` and set pointer to this `Species`.
                     this->bind_to_parent();
@@ -79,6 +74,7 @@ namespace yli
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
                 yli::ontology::ParentModule parent_of_shapeshifter_forms;
+                yli::ontology::ParentModule parent_of_shapeshifter_sequences;
 
             private:
                 void bind_to_parent();
@@ -86,10 +82,6 @@ namespace yli
                 void render() override;
 
                 yli::ontology::Material* parent; // pointer to the `Material`.
-
-                std::vector<yli::ontology::ShapeshifterSequence*> shapeshifter_sequence_pointer_vector;
-                std::queue<std::size_t> free_shapeshifter_sequenceID_queue;
-                std::size_t number_of_shapeshifter_sequences;
         };
     }
 }
