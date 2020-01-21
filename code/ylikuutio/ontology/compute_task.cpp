@@ -55,7 +55,7 @@ namespace yli
             }
 
             // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
-            shader->bind_ComputeTask(this);
+            shader->parent_of_compute_tasks.bind_child(this);
         }
 
         ComputeTask::~ComputeTask()
@@ -84,7 +84,7 @@ namespace yli
                 return;
             }
 
-            this->parent->unbind_ComputeTask(this->childID);
+            this->parent->parent_of_compute_tasks.unbind_child(this->childID);
         }
 
         void ComputeTask::render()

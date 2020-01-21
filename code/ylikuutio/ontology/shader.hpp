@@ -55,17 +55,13 @@ namespace yli
         class Scene;
         class Species;
         class Symbiosis;
-        class ComputeTask;
         class ShaderCompare;
 
         class Shader: public yli::ontology::Entity
         {
             public:
                 void bind_Symbiosis(yli::ontology::Symbiosis* const symbiosis);
-                void bind_ComputeTask(yli::ontology::ComputeTask* const compute_task);
-
                 void unbind_Symbiosis(const std::size_t childID);
-                void unbind_ComputeTask(const std::size_t childID);
 
                 // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
                 void bind_to_new_parent(yli::ontology::Scene* const new_parent);
@@ -73,6 +69,7 @@ namespace yli
 
                 Shader(yli::ontology::Universe* const universe, const yli::ontology::ShaderStruct& shader_struct)
                     : Entity(universe),
+                    parent_of_compute_tasks(yli::ontology::ParentModule()),
                     parent_of_materials(yli::ontology::ParentModule())
                 {
                     // constructor.
@@ -98,7 +95,6 @@ namespace yli
                     this->opengl_in_use           = shader_struct.opengl_in_use;
 
                     this->number_of_symbioses     = 0;
-                    this->number_of_compute_tasks = 0;
 
                     // Get `childID` from `Scene` and set pointer to this `Shader`.
                     this->bind_to_parent();
@@ -143,6 +139,7 @@ namespace yli
                 template<class T1>
                     friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
+                yli::ontology::ParentModule parent_of_compute_tasks;
                 yli::ontology::ParentModule parent_of_materials;
 
             private:
@@ -163,11 +160,8 @@ namespace yli
                 std::string fragment_shader;          // Filename of fragment shader.
 
                 std::vector<yli::ontology::Symbiosis*> symbiosis_pointer_vector;
-                std::vector<yli::ontology::ComputeTask*> compute_task_pointer_vector;
                 std::queue<std::size_t> free_symbiosisID_queue;
-                std::queue<std::size_t> free_compute_taskID_queue;
                 std::size_t number_of_symbioses;
-                std::size_t number_of_compute_tasks;
 
                 const char* char_vertex_shader;
                 const char* char_fragment_shader;
