@@ -19,6 +19,7 @@
 #define __SHAPESHIFTER_SEQUENCE_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "parent_module.hpp"
 #include "shapeshifter_sequence_struct.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -38,22 +39,17 @@ namespace yli
     namespace ontology
     {
         class Universe;
-        class Object;
 
         class ShapeshifterSequence: public yli::ontology::Entity
         {
             public:
-                void bind_Object(yli::ontology::Object* const object);
-                void unbind_Object(const std::size_t childID);
-
                 // constructor.
                 ShapeshifterSequence(yli::ontology::Universe* const universe, const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct)
-                    : Entity(universe)
+                    : Entity(universe),
+                    parent_of_objects(yli::ontology::ParentModule())
                 {
                     // constructor.
                     this->parent = shapeshifter_sequence_struct.parent;
-
-                    this->number_of_objects = 0;
 
                     this->transformation_speed        = shapeshifter_sequence_struct.transformation_speed;
                     this->initial_offset              = shapeshifter_sequence_struct.initial_offset;
@@ -81,16 +77,14 @@ namespace yli
                 template<class T1>
                     friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
+                yli::ontology::ParentModule parent_of_objects;
+
             private:
                 void bind_to_parent();
 
                 void render() override;
 
                 yli::ontology::ShapeshifterTransformation* parent; // Pointer to `ShapeshifterTransformation` object.
-
-                std::vector<yli::ontology::Object*> object_pointer_vector;
-                std::queue<std::size_t> free_objectID_queue;
-                std::size_t number_of_objects;
 
                 float transformation_speed;                        // Negative speed means inverse initial transition direction.
                 std::size_t initial_offset;                        // Index of the `ShapeshifterForm` from which to begin the transition.

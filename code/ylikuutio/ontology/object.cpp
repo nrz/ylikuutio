@@ -89,7 +89,7 @@ namespace yli
                 }
 
                 // get `childID` from `ShapeshifterSequence` and set pointer to this `Object`.
-                shapeshifter_sequence->bind_Object(this);
+                shapeshifter_sequence->parent_of_objects.bind_child(this);
             }
             else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
             {
@@ -169,11 +169,11 @@ namespace yli
                 }
 
                 // unbind from the old parent `ShapeshifterSequence`.
-                shapeshifter_sequence->unbind_Object(this->childID);
+                shapeshifter_sequence->parent_of_objects.unbind_child(this->childID);
 
                 // get `childID` from `ShapeshifterSequence` and set pointer to this `Object`.
                 this->shapeshifter_sequence_parent = static_cast<yli::ontology::ShapeshifterSequence*>(new_parent);
-                this->shapeshifter_sequence_parent->bind_Object(this);
+                this->shapeshifter_sequence_parent->parent_of_objects.bind_child(this);
             }
         }
 
@@ -272,7 +272,7 @@ namespace yli
                     return;
                 }
 
-                shapeshifter_sequence->unbind_Object(this->childID);
+                shapeshifter_sequence->parent_of_objects.unbind_child(this->childID);
             }
             else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
             {

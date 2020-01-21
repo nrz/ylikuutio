@@ -17,7 +17,6 @@
 
 #include "shapeshifter_sequence.hpp"
 #include "shapeshifter_transformation.hpp"
-#include "object.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -29,25 +28,6 @@ namespace yli
 {
     namespace ontology
     {
-        void ShapeshifterSequence::bind_Object(yli::ontology::Object* const object)
-        {
-            // get `childID` from `ShapeshifterSequence` and set pointer to `object`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Object*>(
-                    object,
-                    this->object_pointer_vector,
-                    this->free_objectID_queue,
-                    this->number_of_objects);
-        }
-
-        void ShapeshifterSequence::unbind_Object(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->object_pointer_vector,
-                    this->free_objectID_queue,
-                    this->number_of_objects);
-        }
-
         void ShapeshifterSequence::bind_to_parent()
         {
             // requirements:
@@ -67,10 +47,6 @@ namespace yli
         ShapeshifterSequence::~ShapeshifterSequence()
         {
             // destructor.
-
-            // destroy all objects of this `ShapeshifterSequence`.
-            std::cout << "All `Object`s of this `ShapeshifterSequence` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Object*>(this->object_pointer_vector, this->number_of_objects);
 
             // requirements for further actions:
             // `this->parent` must not be `nullptr`.
@@ -93,12 +69,12 @@ namespace yli
 
         std::size_t ShapeshifterSequence::get_number_of_children() const
         {
-            return this->number_of_objects;
+            return this->parent_of_objects.number_of_children;
         }
 
         std::size_t ShapeshifterSequence::get_number_of_descendants() const
         {
-            return yli::ontology::get_number_of_descendants(this->object_pointer_vector);
+            return yli::ontology::get_number_of_descendants(this->parent_of_objects.child_pointer_vector);
         }
 
         void ShapeshifterSequence::render()
