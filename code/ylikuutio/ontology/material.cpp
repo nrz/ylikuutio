@@ -128,7 +128,7 @@ namespace yli
             }
 
             // Get `childID` from the `Shader` and set pointer to this `Material`.
-            shader->bind_Material(this);
+            shader->parent_of_materials.bind_child(this);
         }
 
         Material::~Material()
@@ -168,7 +168,7 @@ namespace yli
                     return;
                 }
 
-                shader->unbind_Material(this->childID);
+                shader->parent_of_materials.unbind_child(this->childID);
             }
         }
 
@@ -234,11 +234,11 @@ namespace yli
             }
 
             // Unbind from the old parent `Shader`.
-            shader->unbind_Material(this->childID);
+            shader->parent_of_materials.unbind_child(this->childID);
 
             // Get `childID` from `Shader` and set pointer to this `Material`.
             this->parent = new_parent;
-            this->parent->bind_Material(this);
+            this->parent->parent_of_materials.bind_child(this);
         }
 
         void Material::set_terrain_species(yli::ontology::Species* const terrain_species)

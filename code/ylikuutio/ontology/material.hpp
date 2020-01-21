@@ -155,7 +155,7 @@ namespace yli
                 void bind_to_parent();
 
                 // This method renders all `Species` using this `Material`.
-                void render();
+                void render() override;
 
                 yli::ontology::Shader* parent;       // Pointer to the `Shader`.
 
