@@ -82,7 +82,7 @@ namespace yli
             }
 
             // get `childID` from `Material` and set pointer to this `ShapeshifterTransformation`.
-            this->parent->bind_ShapeshifterTransformation(this);
+            this->parent->parent_of_shapeshifter_transformations.bind_child(this);
         }
 
         void ShapeshifterTransformation::bind_to_new_parent(yli::ontology::Material* const new_parent)
@@ -110,11 +110,11 @@ namespace yli
             }
 
             // unbind from the old parent `Material`.
-            material->unbind_ShapeshifterTransformation(this->childID);
+            material->parent_of_shapeshifter_transformations.unbind_child(this->childID);
 
             // get `childID` from `Material` and set pointer to this `ShapeshifterTransformation`.
             this->parent = new_parent;
-            this->parent->bind_ShapeshifterTransformation(this);
+            this->parent->parent_of_shapeshifter_transformations.bind_child(this);
         }
 
         void ShapeshifterTransformation::bind_to_new_parent(yli::ontology::Entity* const new_parent)
@@ -160,7 +160,7 @@ namespace yli
                 return;
             }
 
-            material->unbind_ShapeshifterTransformation(this->childID);
+            material->parent_of_shapeshifter_transformations.unbind_child(this->childID);
         }
 
         void ShapeshifterTransformation::render()

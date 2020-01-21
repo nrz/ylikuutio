@@ -84,7 +84,7 @@ namespace yli
             private:
                 void bind_to_parent();
 
-                void render();
+                void render() override;
 
                 yli::ontology::Material* parent; // pointer to the `Material`.
 
