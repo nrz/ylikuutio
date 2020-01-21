@@ -19,6 +19,7 @@
 #define __MODEL_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "parent_module.hpp"
 #include "species_or_glyph.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -52,7 +53,8 @@ namespace yli
             public:
                 // constructor.
                 Model(yli::ontology::Universe* const universe, const bool opengl_in_use)
-                    : Entity(universe)
+                    : Entity(universe),
+                    parent_of_objects(yli::ontology::ParentModule())
                 {
                     // constructor.
 
@@ -69,8 +71,6 @@ namespace yli
                     this->elementbuffer                = 0;
                     this->initial_rotate_angle         = 0.0f;
                     this->initial_rotate_vector        = glm::vec3(0.0f, 1.0f, 1.0f);
-
-                    this->number_of_objects = 0;
 
                     this->opengl_in_use = opengl_in_use;
 
@@ -113,6 +113,8 @@ namespace yli
                 template<class T1>
                     friend void yli::ontology::render_species_or_glyph(T1 species_or_glyph_pointer);
 
+                yli::ontology::ParentModule parent_of_objects;
+
             protected:
                 float initial_rotate_angle;              // initial rotate angle.
                 glm::vec3 initial_rotate_vector;         // initial rotate vector.
@@ -121,10 +123,6 @@ namespace yli
                 glm::vec3 light_position;                // light position.
 
                 GLint lightID;                           // light ID, returned by `glGetUniformLocation(programID, "light_position_worldspace");`.
-
-                std::vector<yli::ontology::Object*> object_pointer_vector;
-                std::queue<std::size_t> free_objectID_queue;
-                std::size_t number_of_objects;
 
                 std::string triangulation_type;
 

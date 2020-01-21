@@ -73,7 +73,7 @@ namespace yli
                 }
 
                 // get `childID` from `Species` and set pointer to this `Object`.
-                species->bind_Object(this);
+                species->parent_of_objects.bind_child(this);
             }
             else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
             {
@@ -135,11 +135,11 @@ namespace yli
                 }
 
                 // unbind from the old parent `Species`.
-                species->unbind_Object(this->childID);
+                species->parent_of_objects.unbind_child(this->childID);
 
                 // get `childID` from `Species` and set pointer to this `Object`.
                 this->species_parent = static_cast<yli::ontology::Species*>(new_parent);
-                this->species_parent->bind_Object(this);
+                this->species_parent->parent_of_objects.bind_child(this);
             }
         }
 
@@ -257,7 +257,7 @@ namespace yli
                     return;
                 }
 
-                species->unbind_Object(this->childID);
+                species->parent_of_objects.unbind_child(this->childID);
             }
             else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
             {

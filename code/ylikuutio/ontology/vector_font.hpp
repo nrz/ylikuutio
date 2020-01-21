@@ -19,6 +19,7 @@
 #define __VECTOR_FONT_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "parent_module.hpp"
 #include "glyph.hpp"
 #include "material.hpp"
 #include "glyph_struct.hpp"
@@ -54,7 +55,6 @@ namespace yli
         class VectorFont: public yli::ontology::Entity
         {
             public:
-                void bind_Glyph(yli::ontology::Glyph* const glyph);
                 void bind_Text3D(yli::ontology::Text3D* const text3D);
                 void unbind_Text3D(const std::size_t childID);
 
@@ -64,7 +64,8 @@ namespace yli
 
                 // TODO: `VectorFont` constructor also creates each `Glyph` and binds them to the `VectorFont`.
                 VectorFont(yli::ontology::Universe* const universe, const yli::ontology::VectorFontStruct& vector_font_struct)
-                    : Entity(universe)
+                    : Entity(universe),
+                    parent_of_glyphs(yli::ontology::ParentModule())
                 {
                     // constructor.
 
@@ -73,7 +74,6 @@ namespace yli
                     this->vertex_scaling_factor = vector_font_struct.vertex_scaling_factor;
                     this->parent                = vector_font_struct.parent;
 
-                    this->number_of_glyphs      = 0;
                     this->number_of_text3Ds     = 0;
 
                     // Get `childID` from the `Material` and set pointer to this `VectorFont`.
@@ -160,9 +160,6 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
-                // This method sets `Glyph` pointer.
-                void set_glyph_pointer(const std::size_t childID, yli::ontology::Glyph* const child_pointer);
-
                 // This method returns a pointer to `Glyph` that matches the given `unicode_value`,
                 // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
                 yli::ontology::Glyph* get_glyph_pointer(const int32_t unicode_value) const;
@@ -175,6 +172,8 @@ namespace yli
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template<class T1>
                     friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+
+                yli::ontology::ParentModule parent_of_glyphs;
 
             private:
                 void bind_to_parent();
@@ -192,11 +191,8 @@ namespace yli
                 std::vector<std::string> glyph_names;
                 std::vector<std::string> unicode_strings;
 
-                std::vector<yli::ontology::Glyph*> glyph_pointer_vector;
                 std::vector<yli::ontology::Text3D*> text3D_pointer_vector;
-                std::queue<std::size_t> free_glyphID_queue;
                 std::queue<std::size_t> free_text3D_ID_queue;
-                std::size_t number_of_glyphs;
                 std::size_t number_of_text3Ds;
 
                 std::unordered_map<int32_t, yli::ontology::Glyph*> unicode_glyph_map;

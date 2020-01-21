@@ -46,12 +46,12 @@ namespace yli
 
         std::size_t Model::get_number_of_children() const
         {
-            return this->number_of_objects;
+            return this->parent_of_objects.number_of_children;
         }
 
         std::size_t Model::get_number_of_descendants() const
         {
-            return yli::ontology::get_number_of_descendants(this->object_pointer_vector);
+            return yli::ontology::get_number_of_descendants(this->parent_of_objects.child_pointer_vector);
         }
 
         std::size_t Model::get_number_of_vertices() const

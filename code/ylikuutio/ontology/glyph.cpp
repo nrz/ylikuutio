@@ -46,7 +46,7 @@ namespace yli
             }
 
             // get `childID` from `VectorFont` and set pointer to this `Glyph`.
-            vector_font->bind_Glyph(this);
+            vector_font->parent_of_glyphs.bind_child(this);
         }
 
         Glyph::~Glyph()
@@ -74,7 +74,7 @@ namespace yli
             }
 
             // set pointer to this `Glyph` to `nullptr`.
-            vector_font->set_glyph_pointer(this->childID, nullptr);
+            vector_font->parent_of_glyphs.unbind_child(this->childID);
         }
 
         yli::ontology::Entity* Glyph::get_parent() const

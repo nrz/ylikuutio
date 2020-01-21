@@ -117,7 +117,7 @@ namespace yli
                 void bind_to_parent();
 
                 // this method renders all `Object`s of this `Glyph`.
-                void render();
+                void render() override;
 
                 yli::ontology::VectorFont* parent; // pointer to the `VectorFont`.
 
