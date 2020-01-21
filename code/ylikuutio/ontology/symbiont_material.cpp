@@ -41,25 +41,6 @@ namespace yli
     {
         class Entity;
 
-        void SymbiontMaterial::bind_SymbiontSpecies(yli::ontology::SymbiontSpecies* const symbiont_species)
-        {
-            // get `childID` from `SymbiontMaterial` and set pointer to `symbiont_species`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::SymbiontSpecies*>(
-                    symbiont_species,
-                    this->symbiont_species_pointer_vector,
-                    this->free_symbiont_speciesID_queue,
-                    this->number_of_symbiont_species);
-        }
-
-        void SymbiontMaterial::unbind_SymbiontSpecies(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent<yli::ontology::SymbiontSpecies*>(
-                    childID,
-                    this->symbiont_species_pointer_vector,
-                    this->free_symbiont_speciesID_queue,
-                    this->number_of_symbiont_species);
-        }
-
         void SymbiontMaterial::bind_to_parent()
         {
             // requirements:
@@ -80,10 +61,6 @@ namespace yli
         {
             // destructor.
             std::cout << "`SymbiontMaterial` with childID " << std::dec << this->childID << " will be destroyed.\n";
-
-            // destroy all symbiont species of this symbiont material.
-            std::cout << "All `SymbiontSpecies` of this `SymbiontMaterial` will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::SymbiontSpecies*>(this->symbiont_species_pointer_vector, this->number_of_symbiont_species);
 
             glDeleteTextures(1, &this->texture);
 
@@ -113,7 +90,7 @@ namespace yli
             yli::opengl::uniform_1i(this->openGL_textureID, 0);
 
             // render this `SymbiontMaterial` by calling `render()` function of each `SymbiontSpecies`.
-            yli::ontology::render_children<yli::ontology::SymbiontSpecies*>(this->symbiont_species_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_symbiont_species.child_pointer_vector);
 
             this->postrender();
         }
@@ -125,12 +102,12 @@ namespace yli
 
         std::size_t SymbiontMaterial::get_number_of_children() const
         {
-            return this->number_of_symbiont_species;
+            return this->parent_of_symbiont_species.number_of_children;
         }
 
         std::size_t SymbiontMaterial::get_number_of_descendants() const
         {
-            return yli::ontology::get_number_of_descendants(this->symbiont_species_pointer_vector);
+            return yli::ontology::get_number_of_descendants(this->parent_of_symbiont_species.child_pointer_vector);
         }
 
         void SymbiontMaterial::load_texture()
