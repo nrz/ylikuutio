@@ -19,7 +19,6 @@
 #define __UNIVERSE_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "world.hpp"
 #include "parent_module.hpp"
 #include "entity_factory.hpp"
 #include "universe_struct.hpp"
@@ -299,7 +298,6 @@ namespace yli
 
     namespace ontology
     {
-        class World;
         class Scene;
         class Camera;
         class Font2D;
