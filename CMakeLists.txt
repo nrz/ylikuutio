@@ -521,6 +521,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/camera.cpp
     code/ylikuutio/ontology/camera.hpp
     code/ylikuutio/ontology/camera_struct.hpp
+    code/ylikuutio/ontology/child_module.cpp
+    code/ylikuutio/ontology/child_module.hpp
     code/ylikuutio/ontology/chunk.cpp
     code/ylikuutio/ontology/chunk.hpp
     code/ylikuutio/ontology/chunk_master.cpp

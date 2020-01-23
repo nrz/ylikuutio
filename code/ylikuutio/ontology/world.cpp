@@ -31,45 +31,15 @@ namespace yli
     {
         class SettingMaster;
 
-        void World::bind_to_parent()
-        {
-            // Requirements:
-            // `this->parent` must not be `nullptr`.
-            yli::ontology::Universe* const universe = this->parent;
-
-            if (universe == nullptr)
-            {
-                std::cerr << "ERROR: `World::bind_to_parent`: `universe` is `nullptr`!\n";
-                return;
-            }
-
-            // Get `childID` from the `Universe` and set pointer to this `World`.
-            universe->parent_of_worlds.bind_child(this);
-        }
-
         World::~World()
         {
             // destructor.
             std::cout << "This `World` will be destroyed.\n";
-
-            // requirements for further actions:
-            // `this->parent` must not be `nullptr`.
-
-            yli::ontology::Universe* const universe = this->parent;
-
-            if (universe == nullptr)
-            {
-                std::cerr << "ERROR: `World::~World`: `universe` is `nullptr`!\n";
-                return;
-            }
-
-            // set pointer to this `World` to `nullptr`.
-            universe->parent_of_worlds.unbind_child(this->childID);
         }
 
         yli::ontology::Entity* World::get_parent() const
         {
-            return this->parent;
+            return this->child_of_universe.parent;
         }
 
         std::size_t World::get_number_of_children() const

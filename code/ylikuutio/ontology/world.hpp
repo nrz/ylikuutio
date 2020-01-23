@@ -19,6 +19,8 @@
 #define __WORLD_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "universe.hpp"
+#include "child_module.hpp"
 #include "parent_module.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -85,14 +87,10 @@ namespace yli
             public:
                 World(yli::ontology::Universe* const universe)
                     : Entity(universe),
+                    child_of_universe(universe, (universe == nullptr ? nullptr : &universe->parent_of_worlds), this),
                     parent_of_scenes(yli::ontology::ParentModule())
                 {
                     // constructor.
-
-                    this->parent       = universe;
-
-                    // Get `childID` from `Universe` and set pointer to this `World`.
-                    this->bind_to_parent();
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::World*";
@@ -112,12 +110,11 @@ namespace yli
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
+                yli::ontology::ChildModule child_of_universe;
                 yli::ontology::ParentModule parent_of_scenes;
 
             private:
                 void bind_to_parent();
-
-                yli::ontology::Universe* parent; // pointer to the `Universe`.
         };
     }
 }
