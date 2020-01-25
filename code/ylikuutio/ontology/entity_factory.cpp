@@ -85,7 +85,7 @@ namespace yli
 
         yli::ontology::Entity* EntityFactory::create_Scene(const yli::ontology::SceneStruct& scene_struct) const
         {
-            return new yli::ontology::Scene(this->universe, scene_struct);
+            return new yli::ontology::Scene(this->universe, scene_struct, (scene_struct.world == nullptr ? nullptr : &scene_struct.world->parent_of_scenes));
         }
 
         yli::ontology::Entity* EntityFactory::create_Shader(const yli::ontology::ShaderStruct& shader_struct) const

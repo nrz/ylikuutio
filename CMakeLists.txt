@@ -863,6 +863,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/brain.cpp
         code/ylikuutio/ontology/brain.hpp
         code/ylikuutio/ontology/brain_struct.hpp
+        code/ylikuutio/ontology/child_module.cpp
+        code/ylikuutio/ontology/child_module.hpp
         code/ylikuutio/ontology/font2D.cpp
         code/ylikuutio/ontology/font2D.hpp
         code/ylikuutio/ontology/glyph_struct.hpp
@@ -876,6 +878,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/object.hpp
         code/ylikuutio/ontology/object_struct.hpp
         code/ylikuutio/ontology/object_type.hpp
+        code/ylikuutio/ontology/parent_module.cpp
+        code/ylikuutio/ontology/parent_module.hpp
         code/ylikuutio/ontology/scene.cpp
         code/ylikuutio/ontology/scene.hpp
         code/ylikuutio/ontology/scene_struct.hpp

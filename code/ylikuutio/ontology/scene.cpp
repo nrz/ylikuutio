@@ -76,22 +76,6 @@ namespace yli
                     this->number_of_shaders);
         }
 
-        void Scene::bind_to_parent()
-        {
-            // requirements:
-            // `this->parent` must not be `nullptr`.
-            yli::ontology::World* const world = this->parent;
-
-            if (world == nullptr)
-            {
-                std::cerr << "ERROR: `Scene::bind_to_parent`: `world` is `nullptr`!\n";
-                return;
-            }
-
-            // get `childID` from the `World` and set pointer to this `Scene`.
-            world->parent_of_scenes.bind_child(this);
-        }
-
         void Scene::bind_to_new_parent(yli::ontology::World* const new_parent)
         {
             // This method sets pointer to this `Scene` to `nullptr`, sets `parent` according to the input,
@@ -101,7 +85,7 @@ namespace yli
             // `this->parent` must not be `nullptr`.
             // `new_parent` must not be `nullptr`.
 
-            yli::ontology::World* const world = this->parent;
+            yli::ontology::Entity* const world = this->child_of_world.parent;
 
             if (world == nullptr)
             {
@@ -116,11 +100,11 @@ namespace yli
             }
 
             // Unbind from the old parent `World`.
-            this->parent->parent_of_scenes.unbind_child(this->childID);
+            this->child_of_world.parent_module->unbind_child(this->childID);
 
             // Get `childID` from `World` and set pointer to this `Scene`.
-            this->parent = new_parent;
-            this->parent->parent_of_scenes.bind_child(this);
+            this->child_of_world.parent = (yli::ontology::Entity*) new_parent;
+            new_parent->parent_of_scenes.bind_child(this);
         }
 
         void Scene::bind_to_new_parent(yli::ontology::Entity* const new_parent)
@@ -157,20 +141,6 @@ namespace yli
                 // Set active `Scene` to `nullptr`.
                 this->universe->set_active_scene(nullptr);
             }
-
-            // requirements for further actions:
-            // `this->parent` must not be `nullptr`.
-
-            yli::ontology::World* const world = this->parent;
-
-            if (world == nullptr)
-            {
-                std::cerr << "ERROR: `Scene::~Scene`: `world` is `nullptr`!\n";
-                return;
-            }
-
-            // set pointer to this `Scene` to `nullptr`.
-            world->parent_of_scenes.unbind_child(this->childID);
         }
 
         void Scene::do_physics()
@@ -270,7 +240,7 @@ namespace yli
             // `this->universe` must not be `nullptr`.
             // `this->parent` must not be `nullptr`.
 
-            if (this->universe == nullptr || this->parent == nullptr)
+            if (this->universe == nullptr)
             {
                 return;
             }
@@ -295,7 +265,7 @@ namespace yli
 
         yli::ontology::Entity* Scene::get_parent() const
         {
-            return this->parent;
+            return this->child_of_world.parent;
         }
 
         std::size_t Scene::get_number_of_children() const
@@ -416,11 +386,6 @@ namespace yli
             {
                 this->terrain_species = terrain_species;
             }
-        }
-
-        yli::ontology::World* Scene::get_world_parent() const
-        {
-            return this->parent;
         }
 
         float Scene::get_water_level() const
