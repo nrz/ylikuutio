@@ -80,7 +80,7 @@ namespace yli
 
         yli::ontology::Entity* EntityFactory::create_World() const
         {
-            return new yli::ontology::World(this->universe);
+            return new yli::ontology::World(this->universe, (this->universe == nullptr ? nullptr : &this->universe->parent_of_worlds));
         }
 
         yli::ontology::Entity* EntityFactory::create_Scene(const yli::ontology::SceneStruct& scene_struct) const
