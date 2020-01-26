@@ -16,12 +16,10 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "symbiont_material.hpp"
-#include "symbiont_species.hpp"
 #include "universe.hpp"
 #include "symbiosis.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
-#include "material_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/load/fbx_texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"

@@ -17,13 +17,9 @@
 
 #include "shader.hpp"
 #include "scene.hpp"
-#include "world.hpp"
 #include "universe.hpp"
-#include "compute_task.hpp"
-#include "glyph.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
-#include "shader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW

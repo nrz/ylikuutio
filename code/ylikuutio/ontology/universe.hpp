@@ -22,14 +22,11 @@
 #include "parent_module.hpp"
 #include "entity_factory.hpp"
 #include "universe_struct.hpp"
-#include "camera_struct.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
-#include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/scheme/scheme_master.hpp"
 #include "code/ylikuutio/time/time.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
 
 #include "SDL.h"
 
@@ -302,7 +299,6 @@ namespace yli
         class Camera;
         class Font2D;
         class Console;
-        class AnyValueEntity;
 
         class Universe: public yli::ontology::Entity
         {

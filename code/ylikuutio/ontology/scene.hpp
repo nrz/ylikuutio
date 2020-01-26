@@ -23,8 +23,6 @@
 #include "parent_module.hpp"
 #include "shader_priority_queue.hpp"
 #include "scene_struct.hpp"
-#include "family_templates.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -167,9 +165,6 @@ namespace yli
 
                 bool get_is_flight_mode_in_use() const;
                 void set_is_flight_mode_in_use(const bool is_flight_mode_in_use);
-
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
                 yli::ontology::ChildModule child_of_world;
                 yli::ontology::ParentModule parent_of_cameras;

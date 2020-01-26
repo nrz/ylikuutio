@@ -24,7 +24,6 @@
 #include "object_struct.hpp"
 #include "movable_struct.hpp"
 #include "render_templates.hpp"
-#include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM

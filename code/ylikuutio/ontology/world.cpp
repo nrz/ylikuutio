@@ -16,8 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "world.hpp"
-#include "universe.hpp"
-#include "camera.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 
