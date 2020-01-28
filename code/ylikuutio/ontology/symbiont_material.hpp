@@ -20,7 +20,6 @@
 
 #include "material.hpp"
 #include "parent_module.hpp"
-#include "symbiosis.hpp"
 #include "material_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
