@@ -19,13 +19,15 @@
 #include "bmp_texture_loader.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
+// Include GLEW
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+
 // Include OpenFBX
 #include <ofbx.h>
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli
@@ -38,7 +40,7 @@ namespace yli
                 std::size_t& image_width,
                 std::size_t& image_height,
                 std::size_t& image_size,
-                uint32_t& textureID,
+                GLuint& textureID,
                 const bool is_headless)
         {
             // Requirements:

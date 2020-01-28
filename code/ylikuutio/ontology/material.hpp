@@ -146,7 +146,7 @@ namespace yli
                 std::size_t image_size;
 
                 uint32_t texture;                    // Texture of this `Material`, returned by `load_BMP_texture` (used for `glGenTextures` etc.).
-                uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
+                GLuint openGL_textureID;             // Texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
 
             private:
                 void bind_to_parent();

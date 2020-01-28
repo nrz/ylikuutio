@@ -18,11 +18,13 @@
 #ifndef __FBX_TEXTURE_LOADER_HPP_INCLUDED
 #define __FBX_TEXTURE_LOADER_HPP_INCLUDED
 
+// Include GLEW
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+
 #include <ofbx.h>
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <stdint.h> // uint32_t etc.
 
 namespace yli
 {
@@ -34,7 +36,7 @@ namespace yli
                 std::size_t& image_width,
                 std::size_t& image_height,
                 std::size_t& image_size,
-                uint32_t& textureID,
+                GLuint& textureID,
                 const bool is_headless);
     }
 }
