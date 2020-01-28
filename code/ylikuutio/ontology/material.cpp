@@ -38,22 +38,6 @@ namespace yli
     {
         class Species;
 
-        void Material::bind_to_parent()
-        {
-            // Requirements:
-            // `this->parent` must not be `nullptr`.
-            yli::ontology::Shader* const shader = this->parent;
-
-            if (shader == nullptr)
-            {
-                std::cerr << "ERROR: `Material::bind_to_parent`: `shader` is `nullptr`!\n";
-                return;
-            }
-
-            // Get `childID` from the `Shader` and set pointer to this `Material`.
-            shader->parent_of_materials.bind_child(this);
-        }
-
         Material::~Material()
         {
             if (!this->is_symbiont_material)
@@ -62,20 +46,6 @@ namespace yli
                 std::cout << "`Material` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
                 glDeleteTextures(1, &this->texture);
-
-                // Requirements for further actions:
-                // `this->parent` must not be `nullptr`.
-
-                yli::ontology::Shader* const shader = this->parent;
-
-                // Set pointer to this `Material` to `nullptr`.
-                if (shader == nullptr)
-                {
-                    std::cerr << "ERROR: `Material::~Material`: `shader` is `nullptr`!\n";
-                    return;
-                }
-
-                shader->parent_of_materials.unbind_child(this->childID);
             }
         }
 
@@ -105,7 +75,7 @@ namespace yli
 
         yli::ontology::Entity* Material::get_parent() const
         {
-            return this->parent;
+            return this->child_of_shader_or_symbiosis.parent;
         }
 
         std::size_t Material::get_number_of_children() const
@@ -124,9 +94,16 @@ namespace yli
         void Material::bind_to_new_parent(yli::ontology::Shader* const new_parent)
         {
             // Requirements:
+            // `this->is_symbiont_material` must be `false`.
             // `this->parent` must not be `nullptr`.
             // `new_parent` must not be `nullptr`.
-            yli::ontology::Shader* const shader = this->parent;
+
+            if (this->is_symbiont_material)
+            {
+                return;
+            }
+
+            yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->child_of_shader_or_symbiosis.parent);
 
             if (shader == nullptr)
             {
@@ -144,13 +121,21 @@ namespace yli
             shader->parent_of_materials.unbind_child(this->childID);
 
             // Get `childID` from `Shader` and set pointer to this `Material`.
-            this->parent = new_parent;
-            this->parent->parent_of_materials.bind_child(this);
+            this->child_of_shader_or_symbiosis.parent = new_parent;
+            new_parent->parent_of_materials.bind_child(this);
         }
 
         void Material::set_terrain_species(yli::ontology::Species* const terrain_species)
         {
-            yli::ontology::Shader* const shader_parent = this->parent;
+            // Requirements:
+            // `this->is_symbiont_material` must be `false`.
+
+            if (this->is_symbiont_material)
+            {
+                return;
+            }
+
+            yli::ontology::Shader* const shader_parent = static_cast<yli::ontology::Shader*>(this->child_of_shader_or_symbiosis.parent);
 
             if (shader_parent != nullptr)
             {

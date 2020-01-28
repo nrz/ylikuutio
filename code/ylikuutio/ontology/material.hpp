@@ -19,6 +19,7 @@
 #define __MATERIAL_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "child_module.hpp"
 #include "parent_module.hpp"
 #include "universe.hpp"
 #include "shader.hpp"
@@ -50,15 +51,20 @@ namespace yli
         class Material: public yli::ontology::Entity
         {
             public:
-                Material(yli::ontology::Universe* const universe, const yli::ontology::MaterialStruct& material_struct)
+                Material(yli::ontology::Universe* const universe, const yli::ontology::MaterialStruct& material_struct, yli::ontology::ParentModule* const parent_module)
                     : Entity(universe),
+                    child_of_shader_or_symbiosis(yli::ontology::ChildModule(
+                                ((material_struct.shader != nullptr && material_struct.symbiosis == nullptr) ? (yli::ontology::Entity*) material_struct.shader :
+                                 (material_struct.shader != nullptr && material_struct.symbiosis != nullptr) ? (yli::ontology::Entity*) material_struct.symbiosis :
+                                 (yli::ontology::Entity*) nullptr),
+                                parent_module,
+                                this)),
                     parent_of_species(yli::ontology::ParentModule()),
                     parent_of_shapeshifter_transformations(yli::ontology::ParentModule()),
                     parent_of_vector_fonts(yli::ontology::ParentModule()),
                     parent_of_chunk_masters(yli::ontology::ParentModule())
                 {
                     // constructor.
-                    this->parent                   = material_struct.shader;
                     this->is_symbiont_material     = material_struct.is_symbiont_material;
                     this->texture_file_format      = material_struct.texture_file_format;
                     this->texture_filename         = material_struct.texture_filename;
@@ -72,9 +78,6 @@ namespace yli
 
                     if (!this->is_symbiont_material)
                     {
-                        // Get `childID` from the `Shader` and set pointer to this `Material`.
-                        this->bind_to_parent();
-
                         // Load the texture.
                         if (this->texture_file_format == "bmp" || this->texture_file_format == "BMP")
                         {
@@ -96,9 +99,10 @@ namespace yli
                         }
 
                         // Get a handle for our "texture_sampler" uniform.
-                        if (this->universe != nullptr && !this->universe->get_is_headless() && this->parent != nullptr)
+                        if (this->universe != nullptr && !this->universe->get_is_headless() && this->child_of_shader_or_symbiosis.parent != nullptr)
                         {
-                            this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "texture_sampler");
+                            yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->child_of_shader_or_symbiosis.parent);
+                            this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "texture_sampler");
                         }
 
                         // `yli::ontology::Entity` member variables begin here.
@@ -135,6 +139,7 @@ namespace yli
                 template<class T1>
                     friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
+                yli::ontology::ChildModule child_of_shader_or_symbiosis;
                 yli::ontology::ParentModule parent_of_species;
                 yli::ontology::ParentModule parent_of_shapeshifter_transformations;
                 yli::ontology::ParentModule parent_of_vector_fonts;
@@ -149,12 +154,8 @@ namespace yli
                 GLuint openGL_textureID;             // Texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
 
             private:
-                void bind_to_parent();
-
                 // This method renders all `Species` using this `Material`.
                 void render() override;
-
-                yli::ontology::Shader* parent;       // Pointer to the `Shader`.
 
                 bool is_symbiont_material;
 
