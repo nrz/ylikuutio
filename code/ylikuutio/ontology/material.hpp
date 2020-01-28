@@ -145,6 +145,9 @@ namespace yli
                 std::size_t image_height;
                 std::size_t image_size;
 
+                uint32_t texture;                    // Texture of this `Material`, returned by `load_BMP_texture` (used for `glGenTextures` etc.).
+                uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
+
             private:
                 void bind_to_parent();
 
@@ -154,9 +157,6 @@ namespace yli
                 yli::ontology::Shader* parent;       // Pointer to the `Shader`.
 
                 bool is_symbiont_material;
-
-                uint32_t texture;                    // Texture of this `Material`, returned by `load_BMP_texture` (used for `glGenTextures` etc.).
-                uint32_t openGL_textureID;           // Texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
 
                 std::string texture_file_format;     // Type of the model file, eg. `"bmp"`.
                 std::string texture_filename;        // Filename of the model file.

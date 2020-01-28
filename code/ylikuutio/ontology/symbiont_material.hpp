@@ -62,9 +62,6 @@ namespace yli
                     this->parent                     = material_struct.symbiosis;
                     this->ofbx_texture               = material_struct.ofbx_texture;
 
-                    this->texture                    = 0; // dummy value.
-                    this->openGL_textureID           = 0; // dummy value.
-
                     // get `childID` from the `Symbiosis` and set pointer to this `SymbiontMaterial`.
                     this->bind_to_parent();
 
@@ -105,9 +102,6 @@ namespace yli
                 yli::ontology::Symbiosis* parent;  // pointer to the `Symbiosis`.
 
                 const ofbx::Texture* ofbx_texture;
-
-                uint32_t texture;                  // texture of this `SymbiontMaterial`.
-                GLint openGL_textureID;            // texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
         };
     }
 }
