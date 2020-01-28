@@ -16,15 +16,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "symbiont_species.hpp"
-#include "universe.hpp"
-#include "scene.hpp"
-#include "shader.hpp"
 #include "symbiont_material.hpp"
 #include "biont.hpp"
-#include "object.hpp"
 #include "species_or_glyph.hpp"
-#include "render_templates.hpp"
-#include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW

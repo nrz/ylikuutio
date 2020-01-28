@@ -37,7 +37,7 @@ namespace yli
                 const std::shared_ptr<std::vector<uint8_t>> image_data,
                 const std::size_t image_width,
                 const std::size_t image_height,
-                uint32_t& textureID)
+                GLuint& textureID)
         {
             if (image_data == nullptr)
             {

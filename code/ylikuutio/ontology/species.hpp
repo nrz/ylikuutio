@@ -24,7 +24,6 @@
 #include "scene.hpp"
 #include "shader.hpp"
 #include "material.hpp"
-#include "ground_level.hpp"
 #include "species_struct.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/load/species_loader.hpp"

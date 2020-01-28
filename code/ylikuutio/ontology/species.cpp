@@ -16,14 +16,8 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "species.hpp"
-#include "universe.hpp"
-#include "scene.hpp"
-#include "shader.hpp"
 #include "material.hpp"
 #include "species_or_glyph.hpp"
-#include "render_templates.hpp"
-#include "family_templates.hpp"
-#include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW

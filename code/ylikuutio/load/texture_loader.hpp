@@ -18,6 +18,9 @@
 #ifndef __TEXTURE_LOADER_HPP_INCLUDED
 #define __TEXTURE_LOADER_HPP_INCLUDED
 
+// Include GLEW
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
@@ -38,7 +41,7 @@ namespace yli
                 const std::shared_ptr<std::vector<uint8_t>> image_data,
                 const std::size_t image_width,
                 const std::size_t image_height,
-                uint32_t& textureID);
+                GLuint& textureID);
     }
 }
 

@@ -22,9 +22,6 @@
 #include "shapeshifter_sequence.hpp"
 #include "model.hpp"
 #include "text3D.hpp"
-#include "object_struct.hpp"
-#include "render_templates.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.

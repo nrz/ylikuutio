@@ -16,12 +16,10 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "symbiont_material.hpp"
-#include "symbiont_species.hpp"
 #include "universe.hpp"
 #include "symbiosis.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
-#include "material_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/load/fbx_texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -41,42 +39,12 @@ namespace yli
     {
         class Entity;
 
-        void SymbiontMaterial::bind_to_parent()
-        {
-            // requirements:
-            // `this->symbiosis_parent` must not be `nullptr`.
-            yli::ontology::Symbiosis* const symbiosis = this->parent;
-
-            if (symbiosis == nullptr)
-            {
-                std::cerr << "ERROR: `SymbiontMaterial::bind_to_parent`: `symbiosis` is `nullptr`!\n";
-                return;
-            }
-
-            // get `childID` from `Symbiosis` and set pointer to this `SymbiontMaterial`.
-            symbiosis->parent_of_symbiont_materials.bind_child(this);
-        }
-
         SymbiontMaterial::~SymbiontMaterial()
         {
             // destructor.
             std::cout << "`SymbiontMaterial` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
             glDeleteTextures(1, &this->texture);
-
-            // requirements for further actions:
-            // `this->parent` must not be `nullptr`.
-
-            yli::ontology::Symbiosis* const symbiosis = this->parent;
-
-            if (symbiosis == nullptr)
-            {
-                std::cerr << "ERROR: `SymbiontMaterial::~SymbiontMaterial`: `symbiosis` is `nullptr`!\n";
-                return;
-            }
-
-            // set pointer to this symbiont_material to `nullptr`.
-            symbiosis->parent_of_symbiont_materials.unbind_child(this->childID);
         }
 
         void SymbiontMaterial::render()
@@ -97,7 +65,7 @@ namespace yli
 
         yli::ontology::Entity* SymbiontMaterial::get_parent() const
         {
-            return this->parent;
+            return this->child_of_shader_or_symbiosis.parent;
         }
 
         std::size_t SymbiontMaterial::get_number_of_children() const
@@ -125,7 +93,7 @@ namespace yli
                 return;
             }
 
-            const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->parent);
+            const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->child_of_shader_or_symbiosis.parent);
 
             if (symbiosis == nullptr)
             {

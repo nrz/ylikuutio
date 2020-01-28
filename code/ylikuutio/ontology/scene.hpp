@@ -19,11 +19,10 @@
 #define __SCENE_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "child_module.hpp"
 #include "parent_module.hpp"
 #include "shader_priority_queue.hpp"
 #include "scene_struct.hpp"
-#include "family_templates.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -91,13 +90,13 @@ namespace yli
                 void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
                 // constructor.
-                Scene(yli::ontology::Universe* const universe, const yli::ontology::SceneStruct& scene_struct)
+                Scene(yli::ontology::Universe* const universe, const yli::ontology::SceneStruct& scene_struct, yli::ontology::ParentModule* const parent_module)
                     : Entity(universe),
+                    child_of_world(yli::ontology::ChildModule((yli::ontology::Entity*) scene_struct.world, parent_module, this)),
                     parent_of_cameras(yli::ontology::ParentModule()),
                     parent_of_brains(yli::ontology::ParentModule())
                 {
                     // constructor.
-                    this->parent                = scene_struct.world;
                     this->gravity               = scene_struct.gravity;
                     this->fall_speed            = scene_struct.gravity;
                     this->water_level           = scene_struct.water_level;
@@ -113,9 +112,6 @@ namespace yli
                     this->terrain_species       = nullptr;
 
                     this->is_flight_mode_in_use = scene_struct.is_flight_mode_in_use;
-
-                    // get `childID` from `World` and set pointer to this `Scene`.
-                    this->bind_to_parent();
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Scene*";
@@ -165,24 +161,16 @@ namespace yli
                 // currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
                 void set_terrain_species(yli::ontology::Species* const terrain_species);
 
-                yli::ontology::World* get_world_parent() const;
-
                 float get_water_level() const;
 
                 bool get_is_flight_mode_in_use() const;
                 void set_is_flight_mode_in_use(const bool is_flight_mode_in_use);
 
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
-
+                yli::ontology::ChildModule child_of_world;
                 yli::ontology::ParentModule parent_of_cameras;
                 yli::ontology::ParentModule parent_of_brains;
 
             private:
-                void bind_to_parent();
-
-                yli::ontology::World* parent;   // pointer to the `World`.
-
                 // `yli::ontology::ShaderPriorityQueue` is a priority queue for `Shader`s.
                 // `yli::ontology::ShaderPriorityQueue` also has
                 // a function `remove(const std::size_t childID)`.

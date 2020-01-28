@@ -24,7 +24,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli
@@ -49,7 +48,7 @@ namespace yli
                 std::size_t& image_width,
                 std::size_t& image_height,
                 std::size_t& image_size,
-                uint32_t& textureID);
+                GLuint& textureID);
 
         // Load a .CSV file using our custom loader.
         bool load_CSV_texture(
@@ -60,7 +59,7 @@ namespace yli
                 std::size_t& image_width,
                 std::size_t& image_height,
                 std::size_t& image_size,
-                uint32_t& textureID);
+                GLuint& textureID);
     }
 }
 

@@ -54,20 +54,15 @@ namespace yli
                 void unbind_SymbiontSpecies(const std::size_t childID);
 
                 // constructor.
-                SymbiontMaterial(yli::ontology::Universe* const universe, const yli::ontology::MaterialStruct& material_struct)
-                    : Material(universe, material_struct),
+                SymbiontMaterial(
+                        yli::ontology::Universe* const universe,
+                        const yli::ontology::MaterialStruct& material_struct,
+                        yli::ontology::ParentModule* const parent_module)
+                    : Material(universe, material_struct, parent_module),
                     parent_of_symbiont_species(yli::ontology::ParentModule())
                 {
                     // constructor.
-                    this->parent                     = material_struct.symbiosis;
                     this->ofbx_texture               = material_struct.ofbx_texture;
-
-                    this->texture                    = 0; // dummy value.
-                    this->openGL_textureID           = 0; // dummy value.
-
-                    // get `childID` from the `Symbiosis` and set pointer to this `SymbiontMaterial`.
-                    this->bind_to_parent();
-
                     this->load_texture();
 
                     // `yli::ontology::Entity` member variables begin here.
@@ -95,19 +90,12 @@ namespace yli
                 yli::ontology::ParentModule parent_of_symbiont_species;
 
             private:
-                void bind_to_parent();
-
                 void load_texture();
 
                 // this method renders all `SymbiontSpecies` using this `SymbiontMaterial`.
                 void render();
 
-                yli::ontology::Symbiosis* parent;  // pointer to the `Symbiosis`.
-
                 const ofbx::Texture* ofbx_texture;
-
-                uint32_t texture;                  // texture of this `SymbiontMaterial`.
-                GLint openGL_textureID;            // texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
         };
     }
 }

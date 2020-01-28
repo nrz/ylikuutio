@@ -80,12 +80,12 @@ namespace yli
 
         yli::ontology::Entity* EntityFactory::create_World() const
         {
-            return new yli::ontology::World(this->universe);
+            return new yli::ontology::World(this->universe, (this->universe == nullptr ? nullptr : &this->universe->parent_of_worlds));
         }
 
         yli::ontology::Entity* EntityFactory::create_Scene(const yli::ontology::SceneStruct& scene_struct) const
         {
-            return new yli::ontology::Scene(this->universe, scene_struct);
+            return new yli::ontology::Scene(this->universe, scene_struct, (scene_struct.world == nullptr ? nullptr : &scene_struct.world->parent_of_scenes));
         }
 
         yli::ontology::Entity* EntityFactory::create_Shader(const yli::ontology::ShaderStruct& shader_struct) const
@@ -95,7 +95,10 @@ namespace yli
 
         yli::ontology::Entity* EntityFactory::create_Material(const yli::ontology::MaterialStruct& material_struct) const
         {
-            return new yli::ontology::Material(this->universe, material_struct);
+            return new yli::ontology::Material(
+                    this->universe,
+                    material_struct,
+                    (material_struct.shader == nullptr ? nullptr : &material_struct.shader->parent_of_materials));
         }
 
         yli::ontology::Entity* EntityFactory::create_Species(const yli::ontology::SpeciesStruct& species_struct) const
