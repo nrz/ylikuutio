@@ -74,7 +74,25 @@ Some asset loading functions do not yet follow the model-view-adapter software a
 
 code/ylikuutio/ontology/
 
-In Ylikuutio, ontology is a broad collection of classes all of which inherit `Entity` either directly or indirectly.
+In Ylikuutio, ontology is a broad collection of classes which inherit `Entity` either directly or indirectly.
+Ontology classes form an ontological hierarchy that is based on composition. The top-level class of the hierarchy
+is `Universe`.
+
+In `ontology` namespace and directory there are also classes `ParentModule` and `ChildModule`.
+`ParentModule` and `ChildModule` do not inherit `Entity`. They are anyway in `ontology` directory and namespace
+because they are modules to be used in different `ontology` classes. They are modules that can be used to
+provide standard functions needed for binding in composition relationships between ontology classes.
+For special binding needs, e.g. when the children need to be in a specific order, custom code should be used
+instead of `ParentModule`, `ChildModule`, or both.
+
+In `ontology` namespace and directory there are also classes used for passing parameters to constructors of
+`ontology` classes. These classes include `UniverseStruct`, `SceneStruct`, `ShaderStruct`, `MaterialStruct`,
+`SpeciesStruct`, `ObjectStruct`, `SymbiosisStruct`, `HolobiontStruct`, `BiontStruct`, `ComputeTaskStruct`,
+`ShapeshifterSequenceStruct`. The class name relates directly to the class where it is used. However, some
+of these classes used for passing parameters are used for more than 1 class. For example, `MaterialStruct` is
+used as input for the constructors of `Material` and `SymbiontMaterial`, and `SpeciesStruct` is used as input
+for the constructors of `Species`, `SymbiontSpecies`, `ShapeshifterTransformation`, and `ShapeshifterForm`.
+
 Below are listed the ontology classes of Ylikuutio.
 
 There are different hierarchical paths of ontology:
