@@ -4,4 +4,4 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 xfce4-terminal -x sh -c "${script_dir}/test_gcc_build; bash"
 xfce4-terminal -x sh -c "${script_dir}/test_clang_build; bash"
 xfce4-terminal -x sh -c "${script_dir}/test_gcc_crosscompile_build_from_linux_to_windows; bash"
-cd ${original_dir}
+cd "${original_dir}"
