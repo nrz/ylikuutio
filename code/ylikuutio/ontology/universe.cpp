@@ -110,7 +110,7 @@ namespace yli
             // `entity` must not be `nullptr` (use `this` as the first argument).
             entity->entityID = yli::hierarchy::request_childID(this->entity_pointer_vector, this->free_entityID_queue);
             // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-            yli::hierarchy::set_child_pointer(entity->entityID, entity, this->entity_pointer_vector, this->free_entityID_queue, this->number_of_entities);
+            yli::hierarchy::set_child_pointer(entity->entityID, entity, this->entity_pointer_vector, this->number_of_entities);
         }
 
         void Universe::unbind_Entity(const std::size_t entityID)
