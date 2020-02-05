@@ -82,7 +82,7 @@ namespace yli
             this->cartesian_coordinates = cartesian_coordinates;
         }
 
-        const float Movable::get_horizontal_angle() const
+        float Movable::get_horizontal_angle() const
         {
             return this->horizontal_angle;
         }
