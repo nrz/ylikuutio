@@ -29,6 +29,7 @@ Tasks which are necessary for the first stage:
 [ ] Create `audio::PlayList` class, whose parent is `Entity`.
 
 Tasks which are necessary for the second stage:
+[ ] Implement YliEdit editor.
 [ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
 [ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
 [ ] Evaluate ZeroMQ: https://zeromq.org/
