@@ -92,7 +92,7 @@ namespace yli
             this->horizontal_angle = horizontal_angle;
         }
 
-        const float Movable::get_vertical_angle() const
+        float Movable::get_vertical_angle() const
         {
             return this->vertical_angle;
         }
