@@ -225,7 +225,7 @@ namespace yli
             }
 
         template<class T1>
-            const bool interpolate_and_define_vertices_using_bilinear_interpolation(
+            bool interpolate_and_define_vertices_using_bilinear_interpolation(
                     const T1* const input_vertex_pointer,
                     const std::size_t image_width,
                     const std::size_t image_height,
