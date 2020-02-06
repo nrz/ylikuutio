@@ -46,13 +46,13 @@ TEST(OpenFBX_must_function_appropriately, rigged_and_animated_cat)
     const std::string filename = "cat.fbx";
     std::shared_ptr<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
     ASSERT_NE(data_vector, nullptr);
-    ASSERT_EQ(data_vector->size(), 7550684);                                // size of `cat.fbx` in bytes.
+    ASSERT_EQ(data_vector->size(), 1373356);                                // size of `cat.fbx` in bytes.
 
     const u8* const data = reinterpret_cast<unsigned char*>(data_vector->data());
     ASSERT_NE(data, nullptr);
 
     const int size = data_vector->size();
-    ASSERT_EQ(size, 7550684);                                             // size of `cat.fbx` in bytes.
+    ASSERT_EQ(size, 1373356);                                             // size of `cat.fbx` in bytes.
 
     const uint64_t flags = (uint64_t) ofbx::LoadFlags::TRIANGULATE;
     const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size, flags);
@@ -67,7 +67,7 @@ TEST(OpenFBX_must_function_appropriately, rigged_and_animated_cat)
     ASSERT_EQ(ofbx_object_type, ofbx::Object::Type::ROOT);
 
     const int ofbx_mesh_count = ofbx_iscene->getMeshCount();
-    ASSERT_EQ(ofbx_mesh_count, 5);
+    ASSERT_EQ(ofbx_mesh_count, 1);
 
     // FBX file may contain several meshes (`ofbx::Mesh`).
     // Each mesh may have several materials (`ofbx::Material`).
@@ -144,7 +144,7 @@ TEST(OpenFBX_must_function_appropriately, rigged_and_animated_cat)
     }
 
     const int ofbx_animation_stack_count = ofbx_iscene->getAnimationStackCount();
-    ASSERT_GT(ofbx_animation_stack_count, 0);
+    ASSERT_EQ(ofbx_animation_stack_count, 0);
 
     for (int i = 0; i < ofbx_animation_stack_count; i++)
     {
