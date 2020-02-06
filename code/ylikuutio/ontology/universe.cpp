@@ -765,7 +765,7 @@ namespace yli
                 std::stringstream memory_address_stringstream;
                 memory_address_stringstream << "0x" << std::hex << memory_address;
 
-                std::string entity_info = "memory address: ";
+                std::string entity_info = "memory address:   ";
                 entity_info += memory_address_stringstream.str();
                 console->print_text(entity_info);
 
