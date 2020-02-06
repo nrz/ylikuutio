@@ -1,7 +1,7 @@
 #include "ofbx.h"
 #include "miniz.h"
 #include <cassert>
-#include <cmath>
+#include <math.h>
 #include <ctype.h>
 #include <memory>
 #include <numeric>
@@ -176,24 +176,24 @@ static Matrix getRotationMatrix(const Vec3& euler, RotationOrder order)
 	switch (order)
 	{
 		default:
-		case RotationOrder::SPHERIC_XYZ: assert(false);
 		case RotationOrder::EULER_XYZ: return rz * ry * rx;
 		case RotationOrder::EULER_XZY: return ry * rz * rx;
 		case RotationOrder::EULER_YXZ: return rz * rx * ry;
 		case RotationOrder::EULER_YZX: return rx * rz * ry;
 		case RotationOrder::EULER_ZXY: return ry * rx * rz;
 		case RotationOrder::EULER_ZYX: return rx * ry * rz;
+		case RotationOrder::SPHERIC_XYZ: assert(false); Error::s_message = "Unsupported rotation order."; return rx * ry * rz;
 	}
 }
 
 
-static double fbxTimeToSeconds(i64 value)
+double fbxTimeToSeconds(i64 value)
 {
 	return double(value) / 46186158000L;
 }
 
 
-static i64 secondsToFbxTime(double value)
+i64 secondsToFbxTime(double value)
 {
 	return i64(value * 46186158000L);
 }
@@ -304,7 +304,7 @@ bool DataView::operator==(const char* rhs) const
 	const char* c2 = (const char*)begin;
 	while (*c && c2 != (const char*)end)
 	{
-		if (*c != *c2) return 0;
+		if (*c != *c2) return false;
 		++c;
 		++c2;
 	}
@@ -319,7 +319,6 @@ template <typename T> static bool parseBinaryArray(const Property& property, std
 
 struct Property : IElementProperty
 {
-	~Property() { delete next; }
 	Type getType() const override { return (Type)type; }
 	IElementProperty* getNext() const override { return next; }
 	DataView getValue() const override { return value; }
@@ -343,8 +342,8 @@ struct Property : IElementProperty
 
 	bool getValues(int* values, int max_size) const override { return parseArrayRaw(*this, values, max_size); }
 
-	int count;
-	u8 type;
+	int count = 0;
+	u8 type = INTEGER;
 	DataView value;
 	Property* next = nullptr;
 };
@@ -566,7 +565,12 @@ static void deleteElement(Element* el)
 	do
 	{
 		Element* next = iter->sibling;
-		delete iter->first_property;
+		Property* prop = iter->first_property;
+		while (prop) {
+			Property* tmp = prop->next;
+			delete prop;
+			prop = tmp;
+		}
 		deleteElement(iter->child);
 		delete iter;
 		iter = next;
@@ -599,8 +603,6 @@ static OptionalError<Element*> readElement(Cursor* cursor, u32 version)
 	OptionalError<u64> prop_length = readElementOffset(cursor, version);
 	if (prop_count.isError() || prop_length.isError()) return Error();
 
-	const char* sbeg = 0;
-	const char* send = 0;
 	OptionalError<DataView> id = readShortString(cursor);
 	if (id.isError()) return Error();
 
@@ -640,6 +642,7 @@ static OptionalError<Element*> readElement(Cursor* cursor, u32 version)
 		}
 
 		*link = child.getValue();
+        if (child.getValue() == 0) break;
 		link = &(*link)->sibling;
 	}
 
@@ -761,7 +764,7 @@ static OptionalError<Property*> readTextProperty(Cursor* cursor)
 		return prop.release();
 	}
 
-	if (*cursor->current == 'T' || *cursor->current == 'Y')
+	if (*cursor->current == 'T' || *cursor->current == 'Y' || *cursor->current == 'W')
 	{
 		// WTF is this
 		prop->type = *cursor->current;
@@ -812,10 +815,10 @@ static OptionalError<Element*> readTextElement(Cursor* cursor)
 {
 	DataView id = readTextToken(cursor);
 	if (cursor->current == cursor->end) return Error("Unexpected end of file");
-	if (*cursor->current != ':') return Error("Unexpected end of file");
+	if (*cursor->current != ':') return Error("Unexpected character");
 	++cursor->current;
 
-	skipWhitespaces(cursor);
+	skipInsignificantWhitespaces(cursor);
 	if (cursor->current == cursor->end) return Error("Unexpected end of file");
 
 	Element* element = new Element;
@@ -1008,11 +1011,13 @@ struct MeshImpl : Mesh
 	Type getType() const override { return Type::MESH; }
 
 
+	const Pose* getPose() const override { return pose; }
 	const Geometry* getGeometry() const override { return geometry; }
 	const Material* getMaterial(int index) const override { return materials[index]; }
 	int getMaterialCount() const override { return (int)materials.size(); }
 
 
+	const Pose* pose = nullptr;
 	const Geometry* geometry = nullptr;
 	const Scene& scene;
 	std::vector<const Material*> materials;
@@ -1308,6 +1313,33 @@ Texture::Texture(const Scene& _scene, const IElement& _element)
 }
 
 
+Pose::Pose(const Scene& _scene, const IElement& _element)
+	: Object(_scene, _element)
+{
+}
+
+
+struct PoseImpl : Pose
+{
+	PoseImpl(const Scene& _scene, const IElement& _element)
+		: Pose(_scene, _element)
+	{
+	}
+
+	bool postprocess(Scene* scene);
+
+
+	Matrix getMatrix() const override { return matrix; }
+	const Object* getNode() const override { return node; }
+
+	Type getType() const override { return Type::POSE; }
+
+	Matrix matrix;
+	Object* node = nullptr;
+	DataView node_id;
+};
+
+
 struct TextureImpl : Texture
 {
 	TextureImpl(const Scene& _scene, const IElement& _element)
@@ -1346,9 +1378,9 @@ struct Scene : IScene
 			OBJECT_PROPERTY
 		};
 
-		Type type;
-		u64 from;
-		u64 to;
+		Type type = OBJECT_OBJECT;
+		u64 from = 0;
+		u64 to = 0;
 		DataView property;
 	};
 
@@ -1403,7 +1435,7 @@ struct Scene : IScene
 	void destroy() override { delete this; }
 
 
-	~Scene()
+	~Scene() override
 	{
 		for (auto iter : m_object_map)
 		{
@@ -1428,11 +1460,38 @@ struct Scene : IScene
 };
 
 
+bool PoseImpl::postprocess(Scene* scene)
+{
+	node = scene->m_object_map[node_id.toU64()].object;
+	if (node && node->getType() == Object::Type::MESH) {
+		static_cast<MeshImpl*>(node)->pose = this;
+	}
+	return true;
+}
+
+
 struct AnimationCurveNodeImpl : AnimationCurveNode
 {
 	AnimationCurveNodeImpl(const Scene& _scene, const IElement& _element)
 		: AnimationCurveNode(_scene, _element)
 	{
+		default_values[0] = default_values[1] = default_values[2] =  0;
+		Element* dx = static_cast<Element*>(resolveProperty(*this, "d|X"));
+		Element* dy = static_cast<Element*>(resolveProperty(*this, "d|Y"));
+		Element* dz = static_cast<Element*>(resolveProperty(*this, "d|Z"));
+
+		if (dx) {
+			Property* x = (Property*)dx->getProperty(4);
+			if (x) default_values[0] = (float)x->value.toDouble();	
+		}
+		if (dy) {
+			Property* y = (Property*)dy->getProperty(4);
+			if (y) default_values[1] = (float)y->value.toDouble();	
+		}
+		if (dz) {
+			Property* z = (Property*)dz->getProperty(4);
+			if (z) default_values[2] = (float)z->value.toDouble();	
+		}
 	}
 
 
@@ -1442,12 +1501,18 @@ struct AnimationCurveNodeImpl : AnimationCurveNode
 	}
 
 
+	const AnimationCurve* getCurve(int idx) const override {
+		assert(idx >= 0 && idx < 3);
+		return curves[idx].curve;
+	}
+
+
 	Vec3 getNodeLocalTransform(double time) const override
 	{
 		i64 fbx_time = secondsToFbxTime(time);
 
-		auto getCoord = [](const Curve& curve, i64 fbx_time) {
-			if (!curve.curve) return 0.0f;
+		auto getCoord = [&](const Curve& curve, i64 fbx_time, int idx) {
+			if (!curve.curve) return default_values[idx];
 
 			const i64* times = curve.curve->getKeyTime();
 			const float* values = curve.curve->getKeyValue();
@@ -1466,7 +1531,7 @@ struct AnimationCurveNodeImpl : AnimationCurveNode
 			return values[0];
 		};
 
-		return {getCoord(curves[0], fbx_time), getCoord(curves[1], fbx_time), getCoord(curves[2], fbx_time)};
+		return {getCoord(curves[0], fbx_time, 0), getCoord(curves[1], fbx_time, 1), getCoord(curves[2], fbx_time, 2)};
 	}
 
 
@@ -1481,6 +1546,7 @@ struct AnimationCurveNodeImpl : AnimationCurveNode
 	Object* bone = nullptr;
 	DataView bone_link_property;
 	Type getType() const override { return Type::ANIMATION_CURVE_NODE; }
+	float default_values[3];
 	enum Mode
 	{
 		TRANSLATION,
@@ -1536,6 +1602,23 @@ struct OptionalError<Object*> parseTexture(const Scene& scene, const Element& el
 		texture->relative_filename = texture_relative_filename->first_property->value;
 	}
 	return texture;
+}
+
+
+struct OptionalError<Object*> parsePose(const Scene& scene, const Element& element)
+{
+	PoseImpl* pose = new PoseImpl(scene, element);
+	const Element* pose_node = findChild(element, "PoseNode");
+	if (pose_node) {
+		const Element* node = findChild(*pose_node, "Node");
+		const Element* matrix = findChild(*pose_node, "Matrix");
+
+		if (matrix->first_property) {
+			parseArrayRaw(*matrix->first_property, &pose->matrix, sizeof(pose->matrix));
+		}
+		pose->node_id = node->first_property->value;
+	}
+	return pose;
 }
 
 
@@ -2501,26 +2584,36 @@ static float getFramerateFromTimeMode(FrameRate time_mode, float custom_frame_ra
 
 static void parseGlobalSettings(const Element& root, Scene* scene)
 {
-	for (ofbx::Element* settings = root.child; settings; settings = settings->sibling)
+	for (Element* settings = root.child; settings; settings = settings->sibling)
 	{
 		if (settings->id == "GlobalSettings")
 		{
-			for (ofbx::Element* props70 = settings->child; props70; props70 = props70->sibling)
+			for (Element* props70 = settings->child; props70; props70 = props70->sibling)
 			{
 				if (props70->id == "Properties70")
 				{
-					for (ofbx::Element* node = props70->child; node; node = node->sibling)
+					for (Element* node = props70->child; node; node = node->sibling)
 					{
 						if (!node->first_property)
 							continue;
 
-#define get_property(name, field, type, getter) if(node->first_property->value == name) \
+						#define get_property(name, field, type, getter) if(node->first_property->value == name) \
 						{ \
-							ofbx::IElementProperty* prop = node->getProperty(4); \
+							IElementProperty* prop = node->getProperty(4); \
 							if (prop) \
 							{ \
-								ofbx::DataView value = prop->getValue(); \
+								DataView value = prop->getValue(); \
 								scene->m_settings.field = (type)value.getter(); \
+							} \
+						}
+
+						#define get_time_property(name, field, type, getter) if(node->first_property->value == name) \
+						{ \
+							IElementProperty* prop = node->getProperty(4); \
+							if (prop) \
+							{ \
+								DataView value = prop->getValue(); \
+								scene->m_settings.field = fbxTimeToSeconds((type)value.getter()); \
 							} \
 						}
 
@@ -2534,12 +2627,12 @@ static void parseGlobalSettings(const Element& root, Scene* scene)
 						get_property("OriginalUpAxisSign", OriginalUpAxisSign, int, toInt);
 						get_property("UnitScaleFactor", UnitScaleFactor, float, toDouble);
 						get_property("OriginalUnitScaleFactor", OriginalUnitScaleFactor, float, toDouble);
-						get_property("TimeSpanStart", TimeSpanStart, u64, toU64);
-						get_property("TimeSpanStop", TimeSpanStop, u64, toU64);
+						get_time_property("TimeSpanStart", TimeSpanStart, u64, toU64);
+						get_time_property("TimeSpanStop", TimeSpanStop, u64, toU64);
 						get_property("TimeMode", TimeMode, FrameRate, toInt);
 						get_property("CustomFrameRate", CustomFrameRate, float, toDouble);
 
-#undef get_property
+						#undef get_property
 
 						scene->m_scene_frame_rate = getFramerateFromTimeMode(scene->m_settings.TimeMode, scene->m_settings.CustomFrameRate);
 					}
@@ -2552,8 +2645,10 @@ static void parseGlobalSettings(const Element& root, Scene* scene)
 }
 
 
-static bool parseObjects(const Element& root, Scene* scene, bool triangulate)
+static bool parseObjects(const Element& root, Scene* scene, u64 flags)
 {
+	const bool triangulate = (flags & (u64)LoadFlags::TRIANGULATE) != 0;
+	const bool ignore_geometry = (flags & (u64)LoadFlags::IGNORE_GEOMETRY) != 0;
 	const Element* objs = findChild(root, "Objects");
 	if (!objs) return true;
 
@@ -2585,7 +2680,7 @@ static bool parseObjects(const Element& root, Scene* scene, bool triangulate)
 		{
 			Property* last_prop = iter.second.element->first_property;
 			while (last_prop->next) last_prop = last_prop->next;
-			if (last_prop && last_prop->value == "Mesh")
+			if (last_prop && last_prop->value == "Mesh" && !ignore_geometry)
 			{
 				obj = parseGeometry(*scene, *iter.second.element, triangulate);
 			}
@@ -2656,6 +2751,10 @@ static bool parseObjects(const Element& root, Scene* scene, bool triangulate)
 		else if (iter.second.element->id == "Texture")
 		{
 			obj = parseTexture(*scene, *iter.second.element);
+		}
+		else if (iter.second.element->id == "Pose")
+		{
+			obj = parsePose(*scene, *iter.second.element);
 		}
 
 		if (obj.isError()) return false;
@@ -2747,8 +2846,6 @@ static bool parseObjects(const Element& root, Scene* scene, bool triangulate)
 					if (mat->textures[type])
 					{
 						break; // This may happen for some models (eg. 2 normal maps in use)
-						Error::s_message = "Invalid material";
-						return false;
 					}
 
 					mat->textures[type] = (Texture*)child;
@@ -2789,25 +2886,22 @@ static bool parseObjects(const Element& root, Scene* scene, bool triangulate)
 				AnimationCurveNodeImpl* node = (AnimationCurveNodeImpl*)parent;
 				if (child->getType() == Object::Type::ANIMATION_CURVE)
 				{
-					if (!node->curves[0].curve)
+					char tmp[32];
+					con.property.toString(tmp);
+					if (strcmp(tmp, "d|X") == 0)
 					{
 						node->curves[0].connection = &con;
 						node->curves[0].curve = (AnimationCurve*)child;
 					}
-					else if (!node->curves[1].curve)
+					else if (strcmp(tmp, "d|Y") == 0)
 					{
 						node->curves[1].connection = &con;
 						node->curves[1].curve = (AnimationCurve*)child;
 					}
-					else if (!node->curves[2].curve)
+					else if (strcmp(tmp, "d|Z") == 0)
 					{
 						node->curves[2].connection = &con;
 						node->curves[2].curve = (AnimationCurve*)child;
-					}
-					else
-					{
-						Error::s_message = "Invalid animation node";
-						return false;
 					}
 				}
 				break;
@@ -2815,16 +2909,24 @@ static bool parseObjects(const Element& root, Scene* scene, bool triangulate)
 		}
 	}
 
-	for (auto iter : scene->m_object_map)
-	{
-		Object* obj = iter.second.object;
-		if (!obj) continue;
-		if (obj->getType() == Object::Type::CLUSTER)
+	if (!ignore_geometry) {
+		for (auto iter : scene->m_object_map)
 		{
-			if (!((ClusterImpl*)iter.second.object)->postprocess())
-			{
-				Error::s_message = "Failed to postprocess cluster";
-				return false;
+			Object* obj = iter.second.object;
+			if (!obj) continue;
+			switch (obj->getType()) {
+				case Object::Type::CLUSTER:
+					if (!((ClusterImpl*)iter.second.object)->postprocess()) {
+						Error::s_message = "Failed to postprocess cluster";
+						return false;
+					}
+					break;
+				case Object::Type::POSE:
+					if (!((PoseImpl*)iter.second.object)->postprocess(scene)) {
+						Error::s_message = "Failed to postprocess pose";
+						return false;
+					}
+					break;
 			}
 		}
 	}
@@ -2963,7 +3065,8 @@ Object* Object::resolveObjectLinkReverse(Object::Type type) const
 	{
 		if (connection.from == id && connection.to != 0)
 		{
-			Object* obj = scene.m_object_map.find(connection.to)->second.object;
+			const Scene::ObjectPair& pair = scene.m_object_map.find(connection.to)->second;
+			Object* obj = pair.object;
 			if (obj && obj->getType() == type) return obj;
 		}
 	}
@@ -3023,7 +3126,7 @@ Object* Object::getParent() const
 	Object* parent = nullptr;
 	for (auto& connection : scene.m_connections)
 	{
-		if (connection.from == id)
+		if (connection.from == id && connection.from != connection.to)
 		{
 			Object* obj = scene.m_object_map.find(connection.to)->second.object;
 			if (obj && obj->is_node)
@@ -3037,21 +3140,29 @@ Object* Object::getParent() const
 }
 
 
-IScene* load(const u8* data, int size, bool triangulate)
+IScene* load(const u8* data, int size, u64 flags)
 {
 	std::unique_ptr<Scene> scene(new Scene());
 	scene->m_data.resize(size);
 	memcpy(&scene->m_data[0], data, size);
 	u32 version;
-	OptionalError<Element*> root = tokenize(&scene->m_data[0], size, version);
-	if (version < 6200)
-	{
-		Error::s_message = "Unsupported FBX file format version. Minimum supported version is 6.2";
-		return nullptr;
+	
+	const bool is_binary = size >= 18 && strncmp((const char*)data, "Kaydara FBX Binary", 18) == 0;
+	OptionalError<Element*> root(nullptr);
+	if (is_binary) {
+		root = tokenize(&scene->m_data[0], size, version);
+		if (version < 6200)
+		{
+			Error::s_message = "Unsupported FBX file format version. Minimum supported version is 6.2";
+			return nullptr;
+		}
+		if (root.isError())
+		{
+			Error::s_message = "";
+			if (root.isError()) return nullptr;
+		}
 	}
-	if (root.isError())
-	{
-		Error::s_message = "";
+	else {
 		root = tokenizeText(&scene->m_data[0], size);
 		if (root.isError()) return nullptr;
 	}
@@ -3062,7 +3173,7 @@ IScene* load(const u8* data, int size, bool triangulate)
 	// if (parseTemplates(*root.getValue()).isError()) return nullptr;
 	if (!parseConnections(*root.getValue(), scene.get())) return nullptr;
 	if (!parseTakes(scene.get())) return nullptr;
-	if (!parseObjects(*root.getValue(), scene.get(), triangulate)) return nullptr;
+	if (!parseObjects(*root.getValue(), scene.get(), flags)) return nullptr;
 	parseGlobalSettings(*root.getValue(), scene.get());
 
 	return scene.release();

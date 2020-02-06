@@ -54,7 +54,8 @@ TEST(OpenFBX_must_function_appropriately, rigged_and_animated_cat)
     const int size = data_vector->size();
     ASSERT_EQ(size, 7550684);                                             // size of `cat.fbx` in bytes.
 
-    const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size);
+    const uint64_t flags = (uint64_t) ofbx::LoadFlags::TRIANGULATE;
+    const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size, flags);
     ASSERT_NE(ofbx_iscene, nullptr);
 
     const ofbx::IElement* const ofbx_ielement = ofbx_iscene->getRootElement();
@@ -174,7 +175,8 @@ TEST(OpenFBX_must_function_appropriately, turbo_polizei)
     const int size = data_vector->size();
     ASSERT_EQ(size, 364972);                                             // size of `turbo_polizei.fbx` in bytes.
 
-    const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size);
+    const uint64_t flags = (uint64_t) ofbx::LoadFlags::TRIANGULATE;
+    const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size, flags);
     ASSERT_NE(ofbx_iscene, nullptr);
 
     const ofbx::IElement* const ofbx_ielement = ofbx_iscene->getRootElement();
@@ -304,7 +306,8 @@ TEST(OpenFBX_must_function_appropriately, freight_train)
     const int size = data_vector->size();
     ASSERT_EQ(size, 426124);                                             // size of `freight_train.fbx` in bytes.
 
-    const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size);
+    const uint64_t flags = (uint64_t) ofbx::LoadFlags::TRIANGULATE;
+    const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size, flags);
     ASSERT_NE(ofbx_iscene, nullptr);
 
     const ofbx::IElement* const ofbx_ielement = ofbx_iscene->getRootElement();
@@ -418,7 +421,8 @@ TEST(OpenFBX_must_function_appropriately, fantasy_house_with_balcony)
     const int size = data_vector->size();
     ASSERT_EQ(size, 849020);                                             // size of `fantasy_house_with_balcony.fbx` in bytes.
 
-    const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size);
+    const uint64_t flags = (uint64_t) ofbx::LoadFlags::TRIANGULATE;
+    const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size, flags);
     ASSERT_NE(ofbx_iscene, nullptr);
 
     const ofbx::IElement* const ofbx_ielement = ofbx_iscene->getRootElement();
