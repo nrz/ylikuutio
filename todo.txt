@@ -3,7 +3,6 @@ Tasks in priority order in descending priority, the most urgent ones first. Chec
 
 Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size.
-[ ] Fix bug that some `Object`s (e.g. `cat.fbx`) do not appear on screen on some environments.
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
@@ -29,6 +28,7 @@ Tasks which are necessary for the first stage:
 [ ] Create `audio::PlayList` class, whose parent is `Entity`.
 
 Tasks which are necessary for the second stage:
+[ ] Implement YliEdit editor.
 [ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
 [ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
 [ ] Evaluate ZeroMQ: https://zeromq.org/
@@ -173,3 +173,4 @@ Ready:
 [x] Implement `yli::ontology::Brain` AI class.
 [x] Implement command line parameter `--headless` to Hirvi and Ajokki (do not open any windows, do not render anything).
 [x] Implement fullscreen mode.
+[x] Fix bug that some `Object`s (e.g. `cat.fbx`) do not appear on screen on some environments.

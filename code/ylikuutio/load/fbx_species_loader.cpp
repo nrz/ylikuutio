@@ -32,6 +32,7 @@ typedef unsigned char u8;
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -76,7 +77,8 @@ namespace yli
                 std::cout << "Loaded FBX data vector size: " << size << "\n";
             }
 
-            ofbx::IScene* ofbx_iscene = ofbx::load(data, size);
+            const uint64_t flags = (uint64_t) ofbx::LoadFlags::TRIANGULATE;
+            ofbx::IScene* ofbx_iscene = ofbx::load(data, size, flags);
 
             if (ofbx_iscene == nullptr)
             {

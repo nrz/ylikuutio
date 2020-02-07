@@ -138,6 +138,19 @@ void showGUI(ofbx::IElementProperty& prop)
 }
 
 
+static void showCurveGUI(const ofbx::Object& object) {
+    const ofbx::AnimationCurve& curve = static_cast<const ofbx::AnimationCurve&>(object);
+    
+    const int c = curve.getKeyCount();
+    for (int i = 0; i < c; ++i) {
+        const float t = ofbx::fbxTimeToSeconds(curve.getKeyTime()[i]);
+        const float v = curve.getKeyValue()[i];
+        ImGui::Text("%fs: %f ", t, v);
+        
+    }
+}
+
+
 void showObjectGUI(const ofbx::Object& object)
 {
 	const char* label;
@@ -172,6 +185,10 @@ void showObjectGUI(const ofbx::Object& object)
 			showObjectGUI(*child);
 			++i;
 		}
+        if(object.getType() == ofbx::Object::Type::ANIMATION_CURVE) {
+            showCurveGUI(object);
+        }
+
 		ImGui::TreePop();
 	}
 	else
@@ -569,7 +586,7 @@ bool init()
 	ShowWindow(g_hWnd, SW_SHOW);
 	initImGUI();
 
-	FILE* fp = fopen("c.fbx", "rb");
+	FILE* fp = fopen("d.fbx", "rb");
 	if (!fp) return false;
 
 	fseek(fp, 0, SEEK_END);
@@ -577,8 +594,13 @@ bool init()
 	fseek(fp, 0, SEEK_SET);
 	auto* content = new ofbx::u8[file_size];
 	fread(content, 1, file_size, fp);
-	g_scene = ofbx::load((ofbx::u8*)content, file_size);
-	saveAsOBJ(*g_scene, "out.obj");
+	g_scene = ofbx::load((ofbx::u8*)content, file_size, (ofbx::u64)ofbx::LoadFlags::TRIANGULATE);
+	if(!g_scene) {
+        OutputDebugString(ofbx::getError());
+    }
+    else {
+        saveAsOBJ(*g_scene, "out.obj");
+    }
 	delete[] content;
 	fclose(fp);
 

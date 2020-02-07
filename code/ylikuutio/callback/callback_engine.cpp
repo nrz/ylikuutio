@@ -83,7 +83,7 @@ namespace yli
 
         void CallbackEngine::set_callback_object_pointer(const std::size_t childID, yli::callback::CallbackObject* const child_pointer)
         {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->callback_object_pointer_vector, this->free_callback_objectID_queue, this->number_of_callback_objects);
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->callback_object_pointer_vector, this->number_of_callback_objects);
         }
 
         std::shared_ptr<yli::common::AnyValue> CallbackEngine::execute(std::shared_ptr<yli::common::AnyValue> any_value)

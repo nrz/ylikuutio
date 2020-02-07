@@ -83,7 +83,8 @@ namespace yli
                 std::cout << "Loaded FBX data vector size: " << size << "\n";
             }
 
-            const ofbx::IScene* ofbx_iscene = ofbx::load(data, size);
+            const uint64_t flags = (uint64_t) ofbx::LoadFlags::TRIANGULATE;
+            const ofbx::IScene* ofbx_iscene = ofbx::load(data, size, flags);
 
             if (ofbx_iscene == nullptr)
             {
