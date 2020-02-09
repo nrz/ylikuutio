@@ -117,6 +117,9 @@ namespace yli
                 // in each constructor, usually after setting
                 // `this->parent`. So, get `childID` from the parent,
                 // because every child deserves a unique ID!
+                // If `yli::ontology::ChildModule` is used, then it will
+                // take care of calling this function and in that case
+                // this function must not be called elsewhere.
                 // Note: this function modifies child's `childID` and thus
                 // the child must define this function template as a `friend`.
                 // Note: this function must be used only for child-parent
@@ -202,7 +205,6 @@ namespace yli
             void unbind_child_from_parent(
                     const std::size_t childID,
                     std::vector<T1>& child_pointer_vector,
-                    std::queue<std::size_t>& free_childID_queue,
                     std::size_t& number_of_children)
             {
                 // requirements:

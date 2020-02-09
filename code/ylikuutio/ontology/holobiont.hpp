@@ -19,6 +19,7 @@
 #define __HOLOBIONT_HPP_INCLUDED
 
 #include "movable.hpp"
+#include "child_module.hpp"
 #include "parent_module.hpp"
 #include "symbiosis.hpp"
 #include "holobiont_struct.hpp"
@@ -59,23 +60,17 @@ namespace yli
         class Holobiont: public yli::ontology::Movable
         {
             public:
-                // this method sets pointer to this `Holobiont` to `nullptr`, sets `parent` according to the input,
-                // and requests a new `childID` from the new `Symbiosis`.
-                void bind_to_new_parent(yli::ontology::Symbiosis* const new_parent);
-
                 // constructor.
-                Holobiont(yli::ontology::Universe* const universe, const yli::ontology::HolobiontStruct& holobiont_struct)
+                Holobiont(yli::ontology::Universe* const universe, const yli::ontology::HolobiontStruct& holobiont_struct, yli::ontology::ParentModule* const parent_module)
                     : Movable(universe, yli::ontology::MovableStruct(
                                 holobiont_struct.brain,
                                 holobiont_struct.cartesian_coordinates,
                                 holobiont_struct.spherical_coordinates,
                                 holobiont_struct.horizontal_angle,
                                 holobiont_struct.vertical_angle)),
+                    child_of_symbiosis(yli::ontology::ChildModule((yli::ontology::Entity*) holobiont_struct.symbiosis_parent, parent_module, this)),
                     parent_of_bionts(yli::ontology::ParentModule())
                 {
-                    // constructor.
-                    this->symbiosis_parent      = holobiont_struct.symbiosis_parent;
-
                     this->original_scale_vector = holobiont_struct.original_scale_vector;
                     this->rotate_vector         = holobiont_struct.rotate_vector;
                     this->translate_vector      = holobiont_struct.translate_vector;
@@ -86,9 +81,6 @@ namespace yli
 
                     this->cartesian_coordinates = holobiont_struct.cartesian_coordinates;
                     this->spherical_coordinates = holobiont_struct.spherical_coordinates;
-
-                    // get `childID` from `Symbiosis` and set pointer to this `Holobiont`.
-                    this->bind_to_parent();
 
                     this->create_Bionts();
 
@@ -116,17 +108,14 @@ namespace yli
                 template<class T1>
                     friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
+                yli::ontology::ChildModule child_of_symbiosis;
                 yli::ontology::ParentModule parent_of_bionts;
 
             private:
-                void bind_to_parent();
-
                 // this method renders this `Holobiont`.
                 void render() override;
 
                 void create_Bionts();
-
-                yli::ontology::Symbiosis* symbiosis_parent; // pointer to the `Symbiosis`.
 
                 glm::vec3 original_scale_vector;            // original scale vector.
                 glm::vec3 rotate_vector;                    // rotate vector.

@@ -642,7 +642,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
 
     yli::ontology::SymbiosisStruct symbiosis_struct;
     symbiosis_struct.parent = shader;
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct, &shader->parent_of_symbioses);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_children(), 1);
@@ -675,7 +675,7 @@ TEST(symbiosis_must_be_initialized_appropriately, no_universe_no_world_no_scene_
 {
     yli::ontology::SymbiosisStruct symbiosis_struct;
     symbiosis_struct.parent = nullptr;
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct, nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(symbiosis->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -707,7 +707,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
     symbiosis_struct.parent = shader;
     symbiosis_struct.model_filename = "turbo_polizei.fbx";
     symbiosis_struct.model_file_format = "FBX";
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct, &shader->parent_of_symbioses);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_children(), 1);
@@ -742,7 +742,7 @@ TEST(symbiosis_must_be_initialized_appropriately, no_universe_no_world_no_scene_
     symbiosis_struct.parent = nullptr;
     symbiosis_struct.model_filename = "turbo_polizei.fbx";
     symbiosis_struct.model_file_format = "FBX";
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct, nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(symbiosis->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -772,11 +772,11 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
 
     yli::ontology::SymbiosisStruct symbiosis_struct;
     symbiosis_struct.parent = shader;
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct, &shader->parent_of_symbioses);
 
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.symbiosis_parent = symbiosis;
-    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(universe, holobiont_struct);
+    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(universe, holobiont_struct, &symbiosis->parent_of_holobionts);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_children(), 1);
@@ -813,7 +813,7 @@ TEST(holobiont_must_be_initialized_appropriately, no_universe_no_world_no_scene_
 {
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.symbiosis_parent = nullptr;
-    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(nullptr, holobiont_struct);
+    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(nullptr, holobiont_struct, nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(holobiont->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -845,11 +845,11 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     symbiosis_struct.parent = shader;
     symbiosis_struct.model_filename = "turbo_polizei.fbx";
     symbiosis_struct.model_file_format = "FBX";
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct, &shader->parent_of_symbioses);
 
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.symbiosis_parent = symbiosis;
-    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(universe, holobiont_struct);
+    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(universe, holobiont_struct, &symbiosis->parent_of_holobionts);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_children(), 1);
@@ -888,11 +888,11 @@ TEST(holobiont_must_be_initialized_appropriately, no_universe_no_world_no_scene_
     symbiosis_struct.parent = nullptr;
     symbiosis_struct.model_filename = "turbo_polizei.fbx";
     symbiosis_struct.model_file_format = "FBX";
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct, nullptr);
 
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.symbiosis_parent = symbiosis;
-    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(nullptr, holobiont_struct);
+    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(nullptr, holobiont_struct, &symbiosis->parent_of_holobionts);
 
     // `Entity` member functions of `Symbiosis`.
     ASSERT_EQ(symbiosis->get_number_of_children(), 3);     // 2 `SymbiontMaterial`s and 1 `Holobiont`.
@@ -1490,7 +1490,7 @@ TEST(brain_must_be_initialized_appropriately, headless)
 
     yli::ontology::BrainStruct brain_struct;
     brain_struct.parent = scene;
-    yli::ontology::Brain* const brain = new yli::ontology::Brain(universe, brain_struct);
+    yli::ontology::Brain* const brain = new yli::ontology::Brain(universe, brain_struct, &scene->parent_of_brains);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_children(), 1);
@@ -1530,7 +1530,8 @@ TEST(font2D_must_be_initialized_appropriately, headless)
             universe->get_text_size(),
             universe->get_font_size(),
             "",
-            "");
+            "",
+            &universe->parent_of_font2Ds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 0);
@@ -1560,7 +1561,8 @@ TEST(font2D_must_be_initialized_appropriately, no_universe)
             0,
             0,
             "",
-            "");
+            "",
+            nullptr);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(font2D->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -1585,7 +1587,8 @@ TEST(font2D_must_be_initialized_appropriately, headless_holstein)
             universe->get_text_size(),
             universe->get_font_size(),
             "Holstein.bmp",
-            "BMP");
+            "BMP",
+            &universe->parent_of_font2Ds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 0);
@@ -1615,7 +1618,8 @@ TEST(font2D_must_be_initialized_appropriately, no_universe_holstein)
             0,
             0,
             "Holstein.bmp",
-            "BMP");
+            "BMP",
+            nullptr);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(font2D->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -1632,7 +1636,7 @@ TEST(brain_must_be_initialized_appropriately, no_universe_no_world_no_scene)
 {
     yli::ontology::BrainStruct brain_struct;
     brain_struct.parent = nullptr;
-    yli::ontology::Brain* const brain = new yli::ontology::Brain(nullptr, brain_struct);
+    yli::ontology::Brain* const brain = new yli::ontology::Brain(nullptr, brain_struct, nullptr);
 
     // `Brain` member functions.
     ASSERT_EQ(brain->get_number_of_apprentices(), 0);
@@ -1810,7 +1814,7 @@ TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
 
     yli::ontology::BrainStruct brain_struct;
     brain_struct.parent = scene;
-    yli::ontology::Brain* const brain = new yli::ontology::Brain(universe, brain_struct);
+    yli::ontology::Brain* const brain = new yli::ontology::Brain(universe, brain_struct, &scene->parent_of_brains);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;

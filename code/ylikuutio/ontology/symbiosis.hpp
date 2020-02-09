@@ -24,6 +24,7 @@
 // `ShaderSymbiosis` is like `Symbiosis`, but it contains also `SymbiontShader`s in addition to `SymbiontMaterial`s and `SymbiontSpecies`.
 
 #include "entity.hpp"
+#include "child_module.hpp"
 #include "parent_module.hpp"
 #include "symbiosis_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -65,13 +66,13 @@ namespace yli
                 void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
                 // constructor.
-                Symbiosis(yli::ontology::Universe* universe, const yli::ontology::SymbiosisStruct& symbiosis_struct)
+                Symbiosis(yli::ontology::Universe* universe, const yli::ontology::SymbiosisStruct& symbiosis_struct, yli::ontology::ParentModule* const parent_module)
                     : Entity(universe),
+                    child_of_shader(yli::ontology::ChildModule((yli::ontology::Entity*) symbiosis_struct.parent, parent_module, this)),
                     parent_of_symbiont_materials(yli::ontology::ParentModule()),
                     parent_of_holobionts(yli::ontology::ParentModule())
                 {
                     // constructor.
-                    this->parent                       = symbiosis_struct.parent;
                     this->model_filename               = symbiosis_struct.model_filename;
                     this->model_file_format            = symbiosis_struct.model_file_format;
                     this->triangulation_type           = symbiosis_struct.triangulation_type;
@@ -79,9 +80,6 @@ namespace yli
 
                     this->ofbx_mesh_count              = 0;
                     this->opengl_in_use                = symbiosis_struct.opengl_in_use;
-
-                    // get `childID` from `Shader` and set pointer to this `Symbiosis`.
-                    this->bind_to_parent();
 
                     this->create_symbionts();
 
@@ -132,15 +130,12 @@ namespace yli
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
+                yli::ontology::ChildModule child_of_shader;
                 yli::ontology::ParentModule parent_of_symbiont_materials;
                 yli::ontology::ParentModule parent_of_holobionts;
 
             private:
-                void bind_to_parent();
-
                 void create_symbionts();
-
-                yli::ontology::Shader* parent; // pointer to `Shader`.
 
                 std::string model_file_format;  // type of the model file, eg. `"fbx"`.
                 std::string model_filename;     // filename of the model file.

@@ -113,12 +113,12 @@ namespace yli
 
         yli::ontology::Entity* EntityFactory::create_Symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const
         {
-            return new yli::ontology::Symbiosis(this->universe, symbiosis_struct);
+            return new yli::ontology::Symbiosis(this->universe, symbiosis_struct, (symbiosis_struct.parent == nullptr ? nullptr : &symbiosis_struct.parent->parent_of_symbioses));
         }
 
         yli::ontology::Entity* EntityFactory::create_Holobiont(const yli::ontology::HolobiontStruct& holobiont_struct) const
         {
-            return new yli::ontology::Holobiont(this->universe, holobiont_struct);
+            return new yli::ontology::Holobiont(this->universe, holobiont_struct, (holobiont_struct.symbiosis_parent == nullptr ? nullptr : &holobiont_struct.symbiosis_parent->parent_of_holobionts));
         }
 
         yli::ontology::Entity* EntityFactory::create_VectorFont(const yli::ontology::VectorFontStruct& vector_font_struct) const
@@ -149,7 +149,8 @@ namespace yli
                     universe->get_text_size(),
                     universe->get_font_size(),
                     texture_filename.c_str(),
-                    font_texture_file_format.c_str());
+                    font_texture_file_format.c_str(),
+                    (this->universe == nullptr ? nullptr : &this->universe->parent_of_font2Ds));
         }
 
         yli::ontology::Entity* EntityFactory::create_Console() const
@@ -169,7 +170,7 @@ namespace yli
 
         yli::ontology::Entity* EntityFactory::create_Brain(const yli::ontology::BrainStruct& brain_struct) const
         {
-            return new yli::ontology::Brain(this->universe, brain_struct);
+            return new yli::ontology::Brain(this->universe, brain_struct, (brain_struct.parent == nullptr ? nullptr : &brain_struct.parent->parent_of_brains));
         }
 
         yli::ontology::Entity* EntityFactory::create_AnyValueEntity(const std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr) const

@@ -19,6 +19,7 @@
 #define __FONT2D_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "child_module.hpp"
 #include "parent_module.hpp"
 #include "universe.hpp"
 #include "text_struct.hpp"
@@ -53,20 +54,18 @@ namespace yli
                         std::size_t text_size,
                         std::size_t font_size,
                         const std::string& texture_filename,
-                        const std::string& font_texture_file_format)
+                        const std::string& font_texture_file_format,
+                        yli::ontology::ParentModule* const parent_module)
                     : Entity(universe),
+                    child_of_universe((yli::ontology::Entity*) universe, parent_module, this),
                     parent_of_text2Ds(yli::ontology::ParentModule())
                 {
                     // constructor.
-                    this->parent = universe;
                     this->screen_width = screen_width;
                     this->screen_height = screen_height;
                     this->font_texture_file_format = font_texture_file_format;
                     this->text_size = text_size;
                     this->font_size = font_size;
-
-                    // Get `childID` from `Universe` and set pointer to this `Font2D`.
-                    this->bind_to_parent();
 
                     // Initialize class members with some dummy values.
                     this->texture                          = 0;
@@ -178,13 +177,10 @@ namespace yli
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
+                yli::ontology::ChildModule child_of_universe;
                 yli::ontology::ParentModule parent_of_text2Ds;
 
             private:
-                void bind_to_parent();
-
-                yli::ontology::Universe* parent;           // Pointer to the `Universe`.
-
                 uint32_t texture;                          // Texture containing the glyphs, returned by `load_BMP_texture`,
                                                            // (used for `glGenTextures` etc.).
 

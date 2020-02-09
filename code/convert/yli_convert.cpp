@@ -149,7 +149,7 @@ int main(const int argc, const char* argv[])
     symbiosis_struct.parent = nullptr;           // no parent.
     symbiosis_struct.opengl_in_use = false; // do not use VRAM buffer.
     yli::ontology::Universe* const universe = nullptr;
-    const yli::ontology::Symbiosis symbiosis(universe, symbiosis_struct);
+    const yli::ontology::Symbiosis symbiosis(universe, symbiosis_struct, nullptr);
 
     // Assimp usage example:
     // https://github.com/assimp/assimp/issues/203

@@ -19,6 +19,7 @@
 #define __BRAIN_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "child_module.hpp"
 #include "brain_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -60,6 +61,7 @@ namespace yli
     {
         class Scene;
         class Movable;
+        class ParentModule;
 
         class Brain: public yli::ontology::Entity
         {
@@ -67,16 +69,13 @@ namespace yli
                 void bind_Movable(yli::ontology::Movable* const movable);
                 void unbind_Movable(const std::size_t movableID);
 
-                Brain(yli::ontology::Universe* const universe, const yli::ontology::BrainStruct& brain_struct)
-                    : Entity(universe)
+                Brain(yli::ontology::Universe* const universe, const yli::ontology::BrainStruct& brain_struct, yli::ontology::ParentModule* const parent_module)
+                    : Entity(universe),
+                    child_of_scene(yli::ontology::ChildModule((yli::ontology::Entity*) brain_struct.parent, parent_module, this))
                 {
                     // constructor.
-                    this->parent             = brain_struct.parent;
                     this->callback_engine    = brain_struct.callback_engine;
                     this->number_of_movables = 0;
-
-                    // Get `childID` from the `Scene` and set pointer to this `Brain`.
-                    this->bind_to_parent();
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Brain*";
@@ -97,11 +96,9 @@ namespace yli
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
+                yli::ontology::ChildModule child_of_scene;
+
             private:
-                void bind_to_parent();
-
-                yli::ontology::Scene* parent;
-
                 std::shared_ptr<yli::callback::CallbackEngine> callback_engine;
 
                 // Currently only `Movable`s can be intentional Entities.
