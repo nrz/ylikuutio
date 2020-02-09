@@ -71,7 +71,7 @@ namespace app
     {
         if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
         {
-            std::cerr << "ERROR: `app::go_west`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
+            std::cerr << "ERROR: `app::go_east`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
         }
 
@@ -167,7 +167,7 @@ namespace app
     {
         if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
         {
-            std::cerr << "ERROR: `app::orient_to_west`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
+            std::cerr << "ERROR: `app::orient_to_east`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
         }
 
@@ -263,7 +263,7 @@ namespace app
     {
         if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
         {
-            std::cerr << "ERROR: `app::orient_and_go_west`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
+            std::cerr << "ERROR: `app::orient_and_go_east`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
         }
 
