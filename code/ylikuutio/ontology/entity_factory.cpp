@@ -169,7 +169,7 @@ namespace yli
 
         yli::ontology::Entity* EntityFactory::create_Brain(const yli::ontology::BrainStruct& brain_struct) const
         {
-            return new yli::ontology::Brain(this->universe, brain_struct);
+            return new yli::ontology::Brain(this->universe, brain_struct, (brain_struct.parent == nullptr ? nullptr : &brain_struct.parent->parent_of_brains));
         }
 
         yli::ontology::Entity* EntityFactory::create_AnyValueEntity(const std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr) const

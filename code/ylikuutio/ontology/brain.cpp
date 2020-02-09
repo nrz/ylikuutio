@@ -53,22 +53,6 @@ namespace yli
                     this->number_of_movables);
         }
 
-        void Brain::bind_to_parent()
-        {
-            // requirements:
-            // `this->parent` must not be `nullptr`.
-            yli::ontology::Scene* const scene = this->parent;
-
-            if (scene == nullptr)
-            {
-                std::cerr << "ERROR: `Brain::bind_to_parent`: `scene` is `nullptr`!\n";
-                return;
-            }
-
-            // get `childID` from the `Scene` and set pointer to this `Brain`.
-            scene->parent_of_brains.bind_child(this);
-        }
-
         Brain::~Brain()
         {
             // destructor.
@@ -82,25 +66,11 @@ namespace yli
                     movable->unbind_from_Brain();
                 }
             }
-
-            // requirements for further actions:
-            // `this->parent` must not be `nullptr`.
-
-            yli::ontology::Scene* const scene = this->parent;
-
-            if (scene == nullptr)
-            {
-                std::cerr << "ERROR: `Brain::~Brain`: `scene` is `nullptr`!\n";
-                return;
-            }
-
-            // set pointer to this `Brain` to `nullptr`.
-            scene->parent_of_brains.unbind_child(this->childID);
         }
 
         yli::ontology::Entity* Brain::get_parent() const
         {
-            return this->parent;
+            return this->child_of_scene.parent;
         }
 
         std::size_t Brain::get_number_of_children() const

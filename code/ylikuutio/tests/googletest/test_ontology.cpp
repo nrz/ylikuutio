@@ -1490,7 +1490,7 @@ TEST(brain_must_be_initialized_appropriately, headless)
 
     yli::ontology::BrainStruct brain_struct;
     brain_struct.parent = scene;
-    yli::ontology::Brain* const brain = new yli::ontology::Brain(universe, brain_struct);
+    yli::ontology::Brain* const brain = new yli::ontology::Brain(universe, brain_struct, &scene->parent_of_brains);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_children(), 1);
@@ -1632,7 +1632,7 @@ TEST(brain_must_be_initialized_appropriately, no_universe_no_world_no_scene)
 {
     yli::ontology::BrainStruct brain_struct;
     brain_struct.parent = nullptr;
-    yli::ontology::Brain* const brain = new yli::ontology::Brain(nullptr, brain_struct);
+    yli::ontology::Brain* const brain = new yli::ontology::Brain(nullptr, brain_struct, nullptr);
 
     // `Brain` member functions.
     ASSERT_EQ(brain->get_number_of_apprentices(), 0);
@@ -1810,7 +1810,7 @@ TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
 
     yli::ontology::BrainStruct brain_struct;
     brain_struct.parent = scene;
-    yli::ontology::Brain* const brain = new yli::ontology::Brain(universe, brain_struct);
+    yli::ontology::Brain* const brain = new yli::ontology::Brain(universe, brain_struct, &scene->parent_of_brains);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
