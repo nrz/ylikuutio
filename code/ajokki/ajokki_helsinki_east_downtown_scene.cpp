@@ -698,17 +698,17 @@ namespace ajokki
 
         freight_train_symbiosis->set_name("freight_train_symbiosis");
 
-        yli::ontology::HolobiontStruct freight_train_object_struct1;
-        freight_train_object_struct1.symbiosis_parent = freight_train_symbiosis;
-        freight_train_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        freight_train_object_struct1.cartesian_coordinates = glm::vec3(125.00f, 40.00f, 80.00f);
-        freight_train_object_struct1.rotate_angle = 0.00f;
-        freight_train_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        freight_train_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+        yli::ontology::HolobiontStruct freight_train_holobiont_struct1;
+        freight_train_holobiont_struct1.symbiosis_parent = freight_train_symbiosis;
+        freight_train_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        freight_train_holobiont_struct1.cartesian_coordinates = glm::vec3(125.00f, 40.00f, 80.00f);
+        freight_train_holobiont_struct1.rotate_angle = 0.00f;
+        freight_train_holobiont_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        freight_train_holobiont_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
 
         std::cout << "Creating yli::ontology::Entity* freight_train1_entity ...\n";
 
-        yli::ontology::Entity* const freight_train1_entity = entity_factory->create_Holobiont(freight_train_object_struct1);
+        yli::ontology::Entity* const freight_train1_entity = entity_factory->create_Holobiont(freight_train_holobiont_struct1);
 
         std::cout << "Creating yli::ontology::Holobiont* freight_train1 ...\n";
 
@@ -742,18 +742,18 @@ namespace ajokki
 
         turbo_polizei_symbiosis->set_name("turbo_polizei_symbiosis");
 
-        yli::ontology::HolobiontStruct turbo_polizei_object_struct1;
-        turbo_polizei_object_struct1.symbiosis_parent = turbo_polizei_symbiosis;
-        turbo_polizei_object_struct1.brain = rest_brain;
-        turbo_polizei_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        turbo_polizei_object_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 175.00f);
-        turbo_polizei_object_struct1.rotate_angle = 0.00f;
-        turbo_polizei_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        turbo_polizei_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+        yli::ontology::HolobiontStruct turbo_polizei_holobiont_struct1;
+        turbo_polizei_holobiont_struct1.symbiosis_parent = turbo_polizei_symbiosis;
+        turbo_polizei_holobiont_struct1.brain = rest_brain;
+        turbo_polizei_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        turbo_polizei_holobiont_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 175.00f);
+        turbo_polizei_holobiont_struct1.rotate_angle = 0.00f;
+        turbo_polizei_holobiont_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        turbo_polizei_holobiont_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
 
         std::cout << "Creating yli::ontology::Entity* turbo_polizei1_entity ...\n";
 
-        yli::ontology::Entity* const turbo_polizei1_entity = entity_factory->create_Holobiont(turbo_polizei_object_struct1);
+        yli::ontology::Entity* const turbo_polizei1_entity = entity_factory->create_Holobiont(turbo_polizei_holobiont_struct1);
 
         std::cout << "Creating yli::ontology::Holobiont* turbo_polizei1 ...\n";
 
@@ -787,18 +787,18 @@ namespace ajokki
 
         fantasy_house_with_balcony_symbiosis->set_name("fantasy_house_with_balcony_symbiosis");
 
-        yli::ontology::HolobiontStruct fantasy_house_with_balcony_object_struct1;
-        fantasy_house_with_balcony_object_struct1.symbiosis_parent = fantasy_house_with_balcony_symbiosis;
-        fantasy_house_with_balcony_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        fantasy_house_with_balcony_object_struct1.cartesian_coordinates = glm::vec3(268.00f, 59.00f, 174.00f);
-        fantasy_house_with_balcony_object_struct1.rotate_angle = 0.00f;
-        fantasy_house_with_balcony_object_struct1.initial_rotate_angle = 0.0f;
-        fantasy_house_with_balcony_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        fantasy_house_with_balcony_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+        yli::ontology::HolobiontStruct fantasy_house_with_balcony_holobiont_struct1;
+        fantasy_house_with_balcony_holobiont_struct1.symbiosis_parent = fantasy_house_with_balcony_symbiosis;
+        fantasy_house_with_balcony_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        fantasy_house_with_balcony_holobiont_struct1.cartesian_coordinates = glm::vec3(268.00f, 59.00f, 174.00f);
+        fantasy_house_with_balcony_holobiont_struct1.rotate_angle = 0.00f;
+        fantasy_house_with_balcony_holobiont_struct1.initial_rotate_angle = 0.0f;
+        fantasy_house_with_balcony_holobiont_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        fantasy_house_with_balcony_holobiont_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
 
         std::cout << "Creating yli::ontology::Entity* fantasy_house_with_balcony1_entity ...\n";
 
-        yli::ontology::Entity* const fantasy_house_with_balcony1_entity = entity_factory->create_Holobiont(fantasy_house_with_balcony_object_struct1);
+        yli::ontology::Entity* const fantasy_house_with_balcony1_entity = entity_factory->create_Holobiont(fantasy_house_with_balcony_holobiont_struct1);
 
         std::cout << "Creating yli::ontology::Holobiont* fantasy_house_with_balcony1 ...\n";
 
@@ -812,19 +812,19 @@ namespace ajokki
 
         fantasy_house_with_balcony1->set_name("fantasy_house_with_balcony1");
 
-        yli::ontology::HolobiontStruct fantasy_house_with_balcony_object_struct2;
-        fantasy_house_with_balcony_object_struct2.symbiosis_parent = fantasy_house_with_balcony_symbiosis;
-        fantasy_house_with_balcony_object_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        fantasy_house_with_balcony_object_struct2.cartesian_coordinates = glm::vec3(252.00f, 23.50f, 2614.00f);
-        fantasy_house_with_balcony_object_struct2.rotate_angle = 0.00f;
-        fantasy_house_with_balcony_object_struct2.initial_rotate_angle = PI / 2;
-        fantasy_house_with_balcony_object_struct2.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        fantasy_house_with_balcony_object_struct2.initial_rotate_vector = glm::vec3(0.0f, 1.0f, 0.0f);
-        fantasy_house_with_balcony_object_struct2.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+        yli::ontology::HolobiontStruct fantasy_house_with_balcony_holobiont_struct2;
+        fantasy_house_with_balcony_holobiont_struct2.symbiosis_parent = fantasy_house_with_balcony_symbiosis;
+        fantasy_house_with_balcony_holobiont_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        fantasy_house_with_balcony_holobiont_struct2.cartesian_coordinates = glm::vec3(252.00f, 23.50f, 2614.00f);
+        fantasy_house_with_balcony_holobiont_struct2.rotate_angle = 0.00f;
+        fantasy_house_with_balcony_holobiont_struct2.initial_rotate_angle = PI / 2;
+        fantasy_house_with_balcony_holobiont_struct2.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        fantasy_house_with_balcony_holobiont_struct2.initial_rotate_vector = glm::vec3(0.0f, 1.0f, 0.0f);
+        fantasy_house_with_balcony_holobiont_struct2.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
 
         std::cout << "Creating yli::ontology::Entity* fantasy_house_with_balcony2_entity ...\n";
 
-        yli::ontology::Entity* const fantasy_house_with_balcony2_entity = entity_factory->create_Holobiont(fantasy_house_with_balcony_object_struct2);
+        yli::ontology::Entity* const fantasy_house_with_balcony2_entity = entity_factory->create_Holobiont(fantasy_house_with_balcony_holobiont_struct2);
 
         std::cout << "Creating yli::ontology::Holobiont* fantasy_house_with_balcony2 ...\n";
 
