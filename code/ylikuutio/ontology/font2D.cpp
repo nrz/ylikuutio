@@ -17,7 +17,6 @@
 
 #include "font2D.hpp"
 #include "entity.hpp"
-#include "universe.hpp"
 #include "text_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
@@ -49,22 +48,6 @@ namespace yli
 {
     namespace ontology
     {
-        void Font2D::bind_to_parent()
-        {
-            // Requirements:
-            // `this->parent` must not be `nullptr`.
-            yli::ontology::Universe* const universe = this->parent;
-
-            if (universe == nullptr)
-            {
-                std::cerr << "ERROR: `Font2D::bind_to_parent`: `universe` is `nullptr`!\n";
-                return;
-            }
-
-            // Get `childID` from the `Universe` and set pointer to this `Font2D`.
-            universe->parent_of_font2Ds.bind_child(this);
-        }
-
         Font2D::~Font2D()
         {
             // destructor.
@@ -79,25 +62,11 @@ namespace yli
 
             // Delete shader.
             glDeleteProgram(this->programID);
-
-            // requirements for further actions:
-            // `this->parent` must not be `nullptr`.
-
-            yli::ontology::Universe* const universe = this->parent;
-
-            if (universe == nullptr)
-            {
-                std::cerr << "ERROR: `Font2D::~Font2D`: `universe` is `nullptr`!\n";
-                return;
-            }
-
-            // set pointer to this `Font2D` to `nullptr`.
-            universe->parent_of_font2Ds.unbind_child(this->childID);
         }
 
         yli::ontology::Entity* Font2D::get_parent() const
         {
-            return this->parent;
+            return this->child_of_universe.parent;
         }
 
         std::size_t Font2D::get_number_of_children() const

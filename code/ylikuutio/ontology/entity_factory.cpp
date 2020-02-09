@@ -149,7 +149,8 @@ namespace yli
                     universe->get_text_size(),
                     universe->get_font_size(),
                     texture_filename.c_str(),
-                    font_texture_file_format.c_str());
+                    font_texture_file_format.c_str(),
+                    (this->universe == nullptr ? nullptr : &this->universe->parent_of_font2Ds));
         }
 
         yli::ontology::Entity* EntityFactory::create_Console() const

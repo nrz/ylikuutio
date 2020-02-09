@@ -1530,7 +1530,8 @@ TEST(font2D_must_be_initialized_appropriately, headless)
             universe->get_text_size(),
             universe->get_font_size(),
             "",
-            "");
+            "",
+            &universe->parent_of_font2Ds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 0);
@@ -1560,7 +1561,8 @@ TEST(font2D_must_be_initialized_appropriately, no_universe)
             0,
             0,
             "",
-            "");
+            "",
+            nullptr);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(font2D->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -1585,7 +1587,8 @@ TEST(font2D_must_be_initialized_appropriately, headless_holstein)
             universe->get_text_size(),
             universe->get_font_size(),
             "Holstein.bmp",
-            "BMP");
+            "BMP",
+            &universe->parent_of_font2Ds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 0);
@@ -1615,7 +1618,8 @@ TEST(font2D_must_be_initialized_appropriately, no_universe_holstein)
             0,
             0,
             "Holstein.bmp",
-            "BMP");
+            "BMP",
+            nullptr);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(font2D->get_childID(), std::numeric_limits<std::size_t>::max());
