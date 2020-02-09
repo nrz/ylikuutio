@@ -642,7 +642,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
 
     yli::ontology::SymbiosisStruct symbiosis_struct;
     symbiosis_struct.parent = shader;
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct, &shader->parent_of_symbioses);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_children(), 1);
@@ -675,7 +675,7 @@ TEST(symbiosis_must_be_initialized_appropriately, no_universe_no_world_no_scene_
 {
     yli::ontology::SymbiosisStruct symbiosis_struct;
     symbiosis_struct.parent = nullptr;
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct, nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(symbiosis->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -707,7 +707,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
     symbiosis_struct.parent = shader;
     symbiosis_struct.model_filename = "turbo_polizei.fbx";
     symbiosis_struct.model_file_format = "FBX";
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct, &shader->parent_of_symbioses);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_children(), 1);
@@ -742,7 +742,7 @@ TEST(symbiosis_must_be_initialized_appropriately, no_universe_no_world_no_scene_
     symbiosis_struct.parent = nullptr;
     symbiosis_struct.model_filename = "turbo_polizei.fbx";
     symbiosis_struct.model_file_format = "FBX";
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct, nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(symbiosis->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -772,7 +772,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
 
     yli::ontology::SymbiosisStruct symbiosis_struct;
     symbiosis_struct.parent = shader;
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct, &shader->parent_of_symbioses);
 
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.symbiosis_parent = symbiosis;
@@ -845,7 +845,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     symbiosis_struct.parent = shader;
     symbiosis_struct.model_filename = "turbo_polizei.fbx";
     symbiosis_struct.model_file_format = "FBX";
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct, &shader->parent_of_symbioses);
 
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.symbiosis_parent = symbiosis;
@@ -888,7 +888,7 @@ TEST(holobiont_must_be_initialized_appropriately, no_universe_no_world_no_scene_
     symbiosis_struct.parent = nullptr;
     symbiosis_struct.model_filename = "turbo_polizei.fbx";
     symbiosis_struct.model_file_format = "FBX";
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct, nullptr);
 
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.symbiosis_parent = symbiosis;
