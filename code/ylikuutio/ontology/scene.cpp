@@ -72,7 +72,6 @@ namespace yli
             yli::hierarchy::unbind_child_from_parent(
                     childID,
                     this->shader_pointer_vector,
-                    this->free_shaderID_queue,
                     this->number_of_shaders);
         }
 

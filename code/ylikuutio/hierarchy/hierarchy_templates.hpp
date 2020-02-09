@@ -202,7 +202,6 @@ namespace yli
             void unbind_child_from_parent(
                     const std::size_t childID,
                     std::vector<T1>& child_pointer_vector,
-                    std::queue<std::size_t>& free_childID_queue,
                     std::size_t& number_of_children)
             {
                 // requirements:

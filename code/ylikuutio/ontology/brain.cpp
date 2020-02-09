@@ -49,7 +49,6 @@ namespace yli
             yli::hierarchy::unbind_child_from_parent(
                     movableID,
                     this->movable_pointer_vector,
-                    this->free_movableID_queue,
                     this->number_of_movables);
         }
 
