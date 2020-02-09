@@ -776,7 +776,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
 
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.symbiosis_parent = symbiosis;
-    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(universe, holobiont_struct);
+    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(universe, holobiont_struct, &symbiosis->parent_of_holobionts);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_children(), 1);
@@ -813,7 +813,7 @@ TEST(holobiont_must_be_initialized_appropriately, no_universe_no_world_no_scene_
 {
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.symbiosis_parent = nullptr;
-    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(nullptr, holobiont_struct);
+    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(nullptr, holobiont_struct, nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(holobiont->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -849,7 +849,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
 
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.symbiosis_parent = symbiosis;
-    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(universe, holobiont_struct);
+    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(universe, holobiont_struct, &symbiosis->parent_of_holobionts);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_children(), 1);
@@ -892,7 +892,7 @@ TEST(holobiont_must_be_initialized_appropriately, no_universe_no_world_no_scene_
 
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.symbiosis_parent = symbiosis;
-    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(nullptr, holobiont_struct);
+    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(nullptr, holobiont_struct, &symbiosis->parent_of_holobionts);
 
     // `Entity` member functions of `Symbiosis`.
     ASSERT_EQ(symbiosis->get_number_of_children(), 3);     // 2 `SymbiontMaterial`s and 1 `Holobiont`.

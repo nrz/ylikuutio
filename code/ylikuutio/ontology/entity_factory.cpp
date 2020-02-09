@@ -118,7 +118,7 @@ namespace yli
 
         yli::ontology::Entity* EntityFactory::create_Holobiont(const yli::ontology::HolobiontStruct& holobiont_struct) const
         {
-            return new yli::ontology::Holobiont(this->universe, holobiont_struct);
+            return new yli::ontology::Holobiont(this->universe, holobiont_struct, (holobiont_struct.symbiosis_parent == nullptr ? nullptr : &holobiont_struct.symbiosis_parent->parent_of_holobionts));
         }
 
         yli::ontology::Entity* EntityFactory::create_VectorFont(const yli::ontology::VectorFontStruct& vector_font_struct) const
