@@ -27,7 +27,6 @@
 #include "child_module.hpp"
 #include "parent_module.hpp"
 #include "symbiosis_struct.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include <ofbx.h>
 
 // Include GLEW
@@ -44,7 +43,6 @@ typedef unsigned char u8;
 
 // Include standard headers
 #include <cstddef>       // std::size_t
-#include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
@@ -126,9 +124,6 @@ namespace yli
 
                 GLint get_lightID(const std::size_t biontID) const;
                 const glm::vec3& get_light_position(const std::size_t biontID) const;
-
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
                 yli::ontology::ChildModule child_of_shader;
                 yli::ontology::ParentModule parent_of_symbiont_materials;

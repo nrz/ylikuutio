@@ -24,10 +24,8 @@
 #include "universe.hpp"
 #include "shader.hpp"
 #include "material_struct.hpp"
-#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/load/bmp_texture_loader.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -133,11 +131,6 @@ namespace yli
                 std::size_t get_image_width() const;
                 std::size_t get_image_height() const;
                 std::size_t get_image_size() const;
-
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
-                template<class T1>
-                    friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
                 yli::ontology::ChildModule child_of_shader_or_symbiosis;
                 yli::ontology::ParentModule parent_of_species;

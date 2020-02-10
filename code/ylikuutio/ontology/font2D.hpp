@@ -26,7 +26,6 @@
 #include "text_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/load/bmp_texture_loader.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 
 // Include GLEW
@@ -167,9 +166,6 @@ namespace yli
                         const std::size_t font_size,
                         const std::string& text,
                         const std::string& font_texture_file_format) const;
-
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
                 yli::ontology::ChildModule child_of_universe;
                 yli::ontology::ParentModule parent_of_text2Ds;

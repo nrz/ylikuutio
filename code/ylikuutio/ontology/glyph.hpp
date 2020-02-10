@@ -19,11 +19,9 @@
 #define __GLYPH_HPP_INCLUDED
 
 #include "universe.hpp"
-#include "species_or_glyph.hpp"
 #include "model.hpp"
 #include "glyph_struct.hpp"
 #include "gl_attrib_locations.hpp"
-#include "render_templates.hpp"
 #include "code/ylikuutio/triangulation/triangulate_polygons_struct.hpp"
 #include "code/ylikuutio/triangulation/polygon_triangulation.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -62,10 +60,6 @@ namespace yli
                 friend class VectorFont;
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
-                template<class T1>
-                    friend void yli::ontology::render_species_or_glyph(T1 species_or_glyph_pointer);
-                template<class T1>
-                    friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
             private:
                 Glyph(const yli::ontology::GlyphStruct& glyph_struct)

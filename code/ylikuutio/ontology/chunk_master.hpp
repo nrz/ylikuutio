@@ -22,7 +22,6 @@
 #include "parent_module.hpp"
 #include "material.hpp"
 #include "get_content_callback.hpp"
-#include "render_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -65,8 +64,6 @@ namespace yli
 
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
-                template<class T1>
-                    friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
                 yli::ontology::ParentModule parent_of_chunks;
 
