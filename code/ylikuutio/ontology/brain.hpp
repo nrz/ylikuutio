@@ -71,7 +71,7 @@ namespace yli
 
                 Brain(yli::ontology::Universe* const universe, const yli::ontology::BrainStruct& brain_struct, yli::ontology::ParentModule* const parent_module)
                     : Entity(universe),
-                    child_of_scene(yli::ontology::ChildModule((yli::ontology::Entity*) brain_struct.parent, parent_module, this))
+                    child_of_scene((yli::ontology::Entity*) brain_struct.parent, parent_module, this)
                 {
                     // constructor.
                     this->callback_engine    = brain_struct.callback_engine;

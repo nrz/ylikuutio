@@ -53,12 +53,12 @@ namespace yli
             public:
                 Material(yli::ontology::Universe* const universe, const yli::ontology::MaterialStruct& material_struct, yli::ontology::ParentModule* const parent_module)
                     : Entity(universe),
-                    child_of_shader_or_symbiosis(yli::ontology::ChildModule(
+                    child_of_shader_or_symbiosis(
                                 ((material_struct.shader != nullptr && material_struct.symbiosis == nullptr) ? (yli::ontology::Entity*) material_struct.shader :
                                  (material_struct.shader != nullptr && material_struct.symbiosis != nullptr) ? (yli::ontology::Entity*) material_struct.symbiosis :
                                  (yli::ontology::Entity*) nullptr),
                                 parent_module,
-                                this)),
+                                this),
                     parent_of_species(yli::ontology::ParentModule()),
                     parent_of_shapeshifter_transformations(yli::ontology::ParentModule()),
                     parent_of_vector_fonts(yli::ontology::ParentModule()),

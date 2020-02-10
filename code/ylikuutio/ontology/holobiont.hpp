@@ -68,7 +68,7 @@ namespace yli
                                 holobiont_struct.spherical_coordinates,
                                 holobiont_struct.horizontal_angle,
                                 holobiont_struct.vertical_angle)),
-                    child_of_symbiosis(yli::ontology::ChildModule((yli::ontology::Entity*) holobiont_struct.symbiosis_parent, parent_module, this)),
+                    child_of_symbiosis((yli::ontology::Entity*) holobiont_struct.symbiosis_parent, parent_module, this),
                     parent_of_bionts(yli::ontology::ParentModule())
                 {
                     this->original_scale_vector = holobiont_struct.original_scale_vector;
