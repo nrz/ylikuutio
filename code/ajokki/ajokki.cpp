@@ -67,6 +67,7 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
+#include "code/ylikuutio/ontology/font_struct.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
@@ -413,16 +414,18 @@ int main(const int argc, const char* const argv[])
 
     // Tallinn `Scene` ends here.
 
-    // Initialize our little text library with the Holstein font.
-    const char* const char_g_font_texture_filename = "Holstein.bmp";
-    const char* const char_g_font_texture_file_format = "bmp";
-
     std::cout << "Creating yli::ontology::Entity* my_font2D_entity ...\n";
-    yli::ontology::Entity* const my_font2D_entity = entity_factory->create_Font2D(
-            my_universe->get_window_width(),
-            my_universe->get_window_height(),
-            char_g_font_texture_filename,
-            char_g_font_texture_file_format);
+
+    yli::ontology::FontStruct font_struct;
+    font_struct.texture_filename = "Holstein.bmp";
+    font_struct.font_texture_file_format = "bmp";
+    font_struct.screen_width = my_universe->get_window_width();
+    font_struct.screen_height = my_universe->get_window_height();
+    font_struct.text_size = my_universe->get_text_size();
+    font_struct.font_size = my_universe->get_font_size();
+
+    yli::ontology::Entity* const my_font2D_entity = entity_factory->create_Font2D(font_struct);
+
     std::cout << "Creating yli::ontology::Font2D* my_font2D ...\n";
     yli::ontology::Font2D* const my_font2D = dynamic_cast<yli::ontology::Font2D*>(my_font2D_entity);
 

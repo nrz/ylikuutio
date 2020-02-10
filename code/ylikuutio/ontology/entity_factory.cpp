@@ -46,6 +46,7 @@
 #include "holobiont_struct.hpp"
 #include "vector_font_struct.hpp"
 #include "text3D_struct.hpp"
+#include "font_struct.hpp"
 #include "camera_struct.hpp"
 #include "compute_task_struct.hpp"
 #include "brain_struct.hpp"
@@ -136,21 +137,9 @@ namespace yli
             return new yli::ontology::Text3D(this->universe, text3D_struct);
         }
 
-        yli::ontology::Entity* EntityFactory::create_Font2D(
-                const std::size_t screen_width,
-                const std::size_t screen_height,
-                const std::string& texture_filename,
-                const std::string& font_texture_file_format) const
+        yli::ontology::Entity* EntityFactory::create_Font2D(const yli::ontology::FontStruct& font_struct) const
         {
-            return new yli::ontology::Font2D(
-                    this->universe,
-                    universe->get_window_width(),
-                    universe->get_window_height(),
-                    universe->get_text_size(),
-                    universe->get_font_size(),
-                    texture_filename.c_str(),
-                    font_texture_file_format.c_str(),
-                    (this->universe == nullptr ? nullptr : &this->universe->parent_of_font2Ds));
+            return new yli::ontology::Font2D(this->universe, font_struct, (this->universe == nullptr ? nullptr : &this->universe->parent_of_font2Ds));
         }
 
         yli::ontology::Entity* EntityFactory::create_Console() const
