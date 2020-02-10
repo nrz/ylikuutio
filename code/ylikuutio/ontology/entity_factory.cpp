@@ -129,7 +129,7 @@ namespace yli
 
         yli::ontology::Entity* EntityFactory::create_Text2D(const yli::ontology::TextStruct& text_struct) const
         {
-            return new yli::ontology::Text2D(this->universe, text_struct);
+            return new yli::ontology::Text2D(this->universe, text_struct, (text_struct.font2D_parent == nullptr ? nullptr : &text_struct.font2D_parent->parent_of_text2Ds));
         }
 
         yli::ontology::Entity* EntityFactory::create_Text3D(const yli::ontology::Text3DStruct& text3D_struct) const
