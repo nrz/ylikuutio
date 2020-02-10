@@ -22,10 +22,10 @@
 #include "child_module.hpp"
 #include "parent_module.hpp"
 #include "universe.hpp"
+#include "font_struct.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/load/bmp_texture_loader.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 
 // Include GLEW
@@ -47,25 +47,18 @@ namespace yli
         {
             public:
                 // constructor.
-                Font2D(
-                        yli::ontology::Universe* const universe,
-                        std::size_t screen_width,
-                        std::size_t screen_height,
-                        std::size_t text_size,
-                        std::size_t font_size,
-                        const std::string& texture_filename,
-                        const std::string& font_texture_file_format,
-                        yli::ontology::ParentModule* const parent_module)
+                Font2D(yli::ontology::Universe* const universe, const yli::ontology::FontStruct& font_struct, yli::ontology::ParentModule* const parent_module)
                     : Entity(universe),
                     child_of_universe((yli::ontology::Entity*) universe, parent_module, this),
                     parent_of_text2Ds(yli::ontology::ParentModule())
-                {
+            {
                     // constructor.
-                    this->screen_width = screen_width;
-                    this->screen_height = screen_height;
-                    this->font_texture_file_format = font_texture_file_format;
-                    this->text_size = text_size;
-                    this->font_size = font_size;
+                    this->texture_filename = font_struct.texture_filename;
+                    this->font_texture_file_format = font_struct.font_texture_file_format;
+                    this->screen_width = font_struct.screen_width;
+                    this->screen_height = font_struct.screen_height;
+                    this->text_size = font_struct.text_size;
+                    this->font_size = font_struct.font_size;
 
                     // Initialize class members with some dummy values.
                     this->texture                          = 0;
@@ -88,7 +81,7 @@ namespace yli
                     if (this->font_texture_file_format == "bmp" || this->font_texture_file_format == "BMP")
                     {
                         is_texture_loading_successful = yli::load::load_BMP_texture(
-                                texture_filename,
+                                this->texture_filename,
                                 this->image_width,
                                 this->image_height,
                                 this->image_size,
@@ -174,13 +167,13 @@ namespace yli
                         const std::string& text,
                         const std::string& font_texture_file_format) const;
 
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
-
                 yli::ontology::ChildModule child_of_universe;
                 yli::ontology::ParentModule parent_of_text2Ds;
 
             private:
+                std::string texture_filename;
+                std::string font_texture_file_format;
+
                 uint32_t texture;                          // Texture containing the glyphs, returned by `load_BMP_texture`,
                                                            // (used for `glGenTextures` etc.).
 
@@ -192,8 +185,6 @@ namespace yli
                 GLint Text2DUniformID;                     // Location of the program's texture attribute.
                 GLint screen_width_uniform_ID;             // Location of the program's window width uniform.
                 GLint screen_height_uniform_ID;            // Location of the program's window height uniform.
-
-                std::string font_texture_file_format;
 
                 std::size_t screen_width;
                 std::size_t screen_height;

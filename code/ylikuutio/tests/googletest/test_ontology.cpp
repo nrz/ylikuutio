@@ -1523,15 +1523,13 @@ TEST(font2D_must_be_initialized_appropriately, headless)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::Font2D* const font2D = new yli::ontology::Font2D(
-            universe,
-            universe->get_window_width(),
-            universe->get_window_height(),
-            universe->get_text_size(),
-            universe->get_font_size(),
-            "",
-            "",
-            &universe->parent_of_font2Ds);
+
+    yli::ontology::FontStruct font_struct;
+    font_struct.screen_width = universe->get_window_width();
+    font_struct.screen_height = universe->get_window_height();
+    font_struct.text_size = universe->get_text_size();
+    font_struct.font_size = universe->get_font_size();
+    yli::ontology::Font2D* const font2D = new yli::ontology::Font2D(universe, font_struct, &universe->parent_of_font2Ds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 0);
@@ -1554,15 +1552,8 @@ TEST(font2D_must_be_initialized_appropriately, headless)
 
 TEST(font2D_must_be_initialized_appropriately, no_universe)
 {
-    yli::ontology::Font2D* const font2D = new yli::ontology::Font2D(
-            nullptr,
-            0,
-            0,
-            0,
-            0,
-            "",
-            "",
-            nullptr);
+    yli::ontology::FontStruct font_struct;
+    yli::ontology::Font2D* const font2D = new yli::ontology::Font2D(nullptr, font_struct, nullptr);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(font2D->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -1580,15 +1571,15 @@ TEST(font2D_must_be_initialized_appropriately, headless_holstein)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::Font2D* const font2D = new yli::ontology::Font2D(
-            universe,
-            universe->get_window_width(),
-            universe->get_window_height(),
-            universe->get_text_size(),
-            universe->get_font_size(),
-            "Holstein.bmp",
-            "BMP",
-            &universe->parent_of_font2Ds);
+
+    yli::ontology::FontStruct font_struct;
+    font_struct.texture_filename = "Holstein.bmp";
+    font_struct.font_texture_file_format = "BMP";
+    font_struct.screen_width = universe->get_window_width();
+    font_struct.screen_height = universe->get_window_height();
+    font_struct.text_size = universe->get_text_size();
+    font_struct.font_size = universe->get_font_size();
+    yli::ontology::Font2D* const font2D = new yli::ontology::Font2D(universe, font_struct, &universe->parent_of_font2Ds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 0);
@@ -1611,15 +1602,10 @@ TEST(font2D_must_be_initialized_appropriately, headless_holstein)
 
 TEST(font2D_must_be_initialized_appropriately, no_universe_holstein)
 {
-    yli::ontology::Font2D* const font2D = new yli::ontology::Font2D(
-            nullptr,
-            0,
-            0,
-            0,
-            0,
-            "Holstein.bmp",
-            "BMP",
-            nullptr);
+    yli::ontology::FontStruct font_struct;
+    font_struct.texture_filename = "Holstein.bmp";
+    font_struct.font_texture_file_format = "BMP";
+    yli::ontology::Font2D* const font2D = new yli::ontology::Font2D(nullptr, font_struct, nullptr);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(font2D->get_childID(), std::numeric_limits<std::size_t>::max());

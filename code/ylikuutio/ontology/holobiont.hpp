@@ -24,10 +24,7 @@
 #include "symbiosis.hpp"
 #include "holobiont_struct.hpp"
 #include "movable_struct.hpp"
-#include "render_templates.hpp"
-#include "family_templates.hpp"
 #include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -68,7 +65,7 @@ namespace yli
                                 holobiont_struct.spherical_coordinates,
                                 holobiont_struct.horizontal_angle,
                                 holobiont_struct.vertical_angle)),
-                    child_of_symbiosis(yli::ontology::ChildModule((yli::ontology::Entity*) holobiont_struct.symbiosis_parent, parent_module, this)),
+                    child_of_symbiosis((yli::ontology::Entity*) holobiont_struct.symbiosis_parent, parent_module, this),
                     parent_of_bionts(yli::ontology::ParentModule())
                 {
                     this->original_scale_vector = holobiont_struct.original_scale_vector;
@@ -102,11 +99,6 @@ namespace yli
                 void update_x(float x);
                 void update_y(float y);
                 void update_z(float z);
-
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
-                template<class T1>
-                    friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
                 yli::ontology::ChildModule child_of_symbiosis;
                 yli::ontology::ParentModule parent_of_bionts;

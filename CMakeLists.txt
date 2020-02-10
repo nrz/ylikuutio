@@ -545,6 +545,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/family_templates.hpp
     code/ylikuutio/ontology/font2D.cpp
     code/ylikuutio/ontology/font2D.hpp
+    code/ylikuutio/ontology/font_struct.hpp
     code/ylikuutio/ontology/glyph.cpp
     code/ylikuutio/ontology/glyph.hpp
     code/ylikuutio/ontology/glyph_struct.hpp

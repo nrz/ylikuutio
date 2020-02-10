@@ -19,10 +19,10 @@
 #define __TEXT2D_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "child_module.hpp"
 #include "universe.hpp"
 #include "font2D.hpp"
 #include "text_struct.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -38,6 +38,8 @@ namespace yli
 {
     namespace ontology
     {
+        class ParentModule;
+
         class Text2D: public yli::ontology::Entity
         {
             public:
@@ -45,10 +47,10 @@ namespace yli
                 void bind_to_new_parent(yli::ontology::Font2D* const new_parent);
 
                 // constructor.
-                Text2D(yli::ontology::Universe* const universe, const yli::ontology::TextStruct& text_struct)
-                    : Entity(universe)
+                Text2D(yli::ontology::Universe* const universe, const yli::ontology::TextStruct& text_struct, yli::ontology::ParentModule* const parent_module)
+                    : Entity(universe),
+                    child_of_font2D((yli::ontology::Entity*) text_struct.font2D_parent, parent_module, this)
                 {
-                    this->parent = text_struct.font2D_parent;
                     this->text = text_struct.text;
                     this->horizontal_alignment = text_struct.horizontal_alignment;
                     this->vertical_alignment = text_struct.vertical_alignment;
@@ -58,9 +60,6 @@ namespace yli
                     this->y = text_struct.y;
                     this->text_size = text_struct.text_size;
                     this->font_size = text_struct.font_size;
-
-                    // Get `childID` from `Font2D` and set pointer to this `Text2D`.
-                    this->bind_to_parent();
 
                     // Initialize class members with some dummy values.
                     this->vertexbuffer                     = 0;
@@ -78,8 +77,13 @@ namespace yli
                         glGenBuffers(1, &this->uvbuffer);
 
                         // Get a handle for our buffers.
-                        this->vertex_position_in_screenspaceID = glGetAttribLocation(this->parent->get_programID(), "vertex_position_screenspace");
-                        this->vertexUVID = glGetAttribLocation(this->parent->get_programID(), "vertexUV");
+                        yli::ontology::Font2D* const font2D = static_cast<yli::ontology::Font2D*>(this->child_of_font2D.parent);
+
+                        if (font2D != nullptr)
+                        {
+                            this->vertex_position_in_screenspaceID = glGetAttribLocation(font2D->get_programID(), "vertex_position_screenspace");
+                            this->vertexUVID = glGetAttribLocation(font2D->get_programID(), "vertexUV");
+                        }
                     }
 
                     // `yli::ontology::Entity` member variables begin here.
@@ -100,14 +104,9 @@ namespace yli
 
                 void change_string(const std::string& text);
 
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
+                yli::ontology::ChildModule child_of_font2D;
 
             private:
-                void bind_to_parent();
-
-                yli::ontology::Font2D* parent;
-
                 uint32_t vertexbuffer;                     // Buffer containing the vertices
                 uint32_t uvbuffer;                         // Buffer containing the UVs
                 uint32_t programID;                        // The `programID` of the shader used to display the text, returned by `load_shaders`.

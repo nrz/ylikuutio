@@ -28,6 +28,7 @@
 #include "vector_font_struct.hpp"
 #include "text_struct.hpp"
 #include "text3D_struct.hpp"
+#include "font_struct.hpp"
 #include "camera_struct.hpp"
 #include "compute_task_struct.hpp"
 #include "brain_struct.hpp"
@@ -82,11 +83,7 @@ namespace yli
                 yli::ontology::Entity* create_VectorFont(const yli::ontology::VectorFontStruct& vector_font_struct) const;
                 yli::ontology::Entity* create_Text2D(const yli::ontology::TextStruct& text_struct) const;
                 yli::ontology::Entity* create_Text3D(const yli::ontology::Text3DStruct& text3D_struct) const;
-                yli::ontology::Entity* create_Font2D(
-                        const std::size_t screen_width,
-                        const std::size_t screen_height,
-                        const std::string& texture_filename,
-                        const std::string& font_texture_file_format) const;
+                yli::ontology::Entity* create_Font2D(const yli::ontology::FontStruct& font_struct) const;
                 yli::ontology::Entity* create_Console() const;
                 yli::ontology::Entity* create_Camera(const yli::ontology::CameraStruct& camera_struct) const;
                 yli::ontology::Entity* create_ComputeTask(const yli::ontology::ComputeTaskStruct& compute_task_struct) const;

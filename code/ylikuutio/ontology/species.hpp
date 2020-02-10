@@ -18,14 +18,12 @@
 #ifndef __SPECIES_HPP_INCLUDED
 #define __SPECIES_HPP_INCLUDED
 
-#include "species_or_glyph.hpp"
 #include "model.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
 #include "material.hpp"
 #include "species_struct.hpp"
-#include "render_templates.hpp"
 #include "code/ylikuutio/load/species_loader.hpp"
 #include "code/ylikuutio/load/species_loader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -192,10 +190,6 @@ namespace yli
 
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
-                template<class T1>
-                    friend void yli::ontology::render_species_or_glyph(T1 species_or_glyph_pointer);
-                template<class T1>
-                    friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
             private:
                 void bind_to_parent();

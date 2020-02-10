@@ -38,22 +38,6 @@ namespace yli
 {
     namespace ontology
     {
-        void Text2D::bind_to_parent()
-        {
-            // Requirements:
-            // `this->parent` must not be `nullptr`.
-            yli::ontology::Font2D* const font2D = this->parent;
-
-            if (font2D == nullptr)
-            {
-                std::cerr << "ERROR: `Text2D::bind_to_parent`: `font2D` is `nullptr`!\n";
-                return;
-            }
-
-            // Get `childID` from the `Font2D` and set pointer to this `Text2D`.
-            font2D->parent_of_text2Ds.bind_child(this);
-        }
-
         void Text2D::bind_to_new_parent(yli::ontology::Font2D* const new_parent)
         {
             // This method sets pointer to this `Text2D` to `nullptr`, sets `parent` according to the input,
@@ -63,7 +47,7 @@ namespace yli
             // `this->parent` must not be `nullptr`.
             // `new_parent` must not be `nullptr`.
 
-            yli::ontology::Font2D* const font2D = this->parent;
+            yli::ontology::Entity* const font2D = this->child_of_font2D.parent;
 
             if (font2D == nullptr)
             {
@@ -78,11 +62,11 @@ namespace yli
             }
 
             // Unbind from the old parent `Font2D`.
-            this->parent->parent_of_text2Ds.unbind_child(this->childID);
+            this->child_of_font2D.parent_module->unbind_child(this->childID);
 
             // Get `childID` from `Font2D` and set pointer to this `Text2D`.
-            this->parent = new_parent;
-            this->parent->parent_of_text2Ds.bind_child(this);
+            this->child_of_font2D.parent = (yli::ontology::Entity*) new_parent;
+            new_parent->parent_of_text2Ds.bind_child(this);
         }
 
         Text2D::~Text2D()
@@ -96,14 +80,16 @@ namespace yli
 
             // Delete shader.
             glDeleteProgram(this->programID);
-
-            // Unbind from the old parent `Font2D`.
-            this->parent->parent_of_text2Ds.unbind_child(this->childID);
         }
 
         void Text2D::render()
         {
             if (!this->should_be_rendered)
+            {
+                return;
+            }
+
+            if (this->child_of_font2D.parent == nullptr)
             {
                 return;
             }
@@ -264,7 +250,9 @@ namespace yli
                 float uv_x = (character % this->font_size) / static_cast<float>(this->font_size);
                 float uv_y;
 
-                const std::string& font_texture_file_format = this->parent->get_font_texture_file_format();
+                yli::ontology::Font2D* const font2D = static_cast<yli::ontology::Font2D*>(this->child_of_font2D.parent);
+
+                const std::string& font_texture_file_format = font2D->get_font_texture_file_format();
 
                 if (font_texture_file_format == "bmp" || font_texture_file_format == "BMP")
                 {
@@ -332,7 +320,7 @@ namespace yli
 
         yli::ontology::Entity* Text2D::get_parent() const
         {
-            return this->parent;
+            return this->child_of_font2D.parent;
         }
 
         std::size_t Text2D::get_number_of_children() const
