@@ -70,7 +70,7 @@ namespace yli
 
         std::size_t SymbiontMaterial::get_number_of_children() const
         {
-            return this->parent_of_symbiont_species.number_of_children;
+            return this->parent_of_symbiont_species.get_number_of_children();
         }
 
         std::size_t SymbiontMaterial::get_number_of_descendants() const

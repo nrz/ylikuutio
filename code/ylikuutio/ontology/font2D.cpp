@@ -71,7 +71,7 @@ namespace yli
 
         std::size_t Font2D::get_number_of_children() const
         {
-            return this->parent_of_text2Ds.number_of_children;
+            return this->parent_of_text2Ds.get_number_of_children();
         }
 
         std::size_t Font2D::get_number_of_descendants() const

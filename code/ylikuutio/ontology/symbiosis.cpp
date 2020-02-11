@@ -123,7 +123,7 @@ namespace yli
 
         std::size_t Symbiosis::get_number_of_symbiont_materials() const
         {
-            return this->parent_of_symbiont_materials.number_of_children;
+            return this->parent_of_symbiont_materials.get_number_of_children();
         }
 
         std::size_t Symbiosis::get_number_of_symbiont_species() const
@@ -145,7 +145,8 @@ namespace yli
 
         std::size_t Symbiosis::get_number_of_children() const
         {
-            return this->parent_of_symbiont_materials.number_of_children + this->parent_of_holobionts.number_of_children;
+            return this->parent_of_symbiont_materials.get_number_of_children() +
+                this->parent_of_holobionts.get_number_of_children();
         }
 
         std::size_t Symbiosis::get_number_of_descendants() const

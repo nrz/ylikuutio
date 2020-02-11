@@ -80,7 +80,10 @@ namespace yli
 
         std::size_t Material::get_number_of_children() const
         {
-            return this->parent_of_species.number_of_children + this->parent_of_shapeshifter_transformations.number_of_children + this->parent_of_vector_fonts.number_of_children + this->parent_of_chunk_masters.number_of_children;
+            return this->parent_of_species.get_number_of_children() +
+                this->parent_of_shapeshifter_transformations.get_number_of_children() +
+                this->parent_of_vector_fonts.get_number_of_children() +
+                this->parent_of_chunk_masters.get_number_of_children();
         }
 
         std::size_t Material::get_number_of_descendants() const

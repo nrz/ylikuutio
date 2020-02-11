@@ -48,6 +48,7 @@ namespace yli
                 ~ParentModule();
 
                 std::vector<yli::ontology::Entity*> child_pointer_vector;
+            private:
                 std::queue<std::size_t> free_childID_queue;
                 std::size_t number_of_children;
         };

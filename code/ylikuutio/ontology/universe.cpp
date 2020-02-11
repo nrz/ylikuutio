@@ -285,7 +285,7 @@ namespace yli
 
         std::size_t Universe::get_number_of_worlds() const
         {
-            return this->parent_of_worlds.number_of_children;
+            return this->parent_of_worlds.get_number_of_children();
         }
 
         yli::ontology::Scene* Universe::get_active_scene() const
@@ -301,12 +301,12 @@ namespace yli
 
         std::size_t Universe::get_number_of_children() const
         {
-            return this->parent_of_worlds.number_of_children +
-                this->parent_of_font2Ds.number_of_children +
-                this->parent_of_consoles.number_of_children +
-                this->parent_of_any_value_entities.number_of_children +
-                this->parent_of_any_struct_entities.number_of_children +
-                this->parent_of_callback_engine_entities.number_of_children;
+            return this->parent_of_worlds.get_number_of_children() +
+                this->parent_of_font2Ds.get_number_of_children() +
+                this->parent_of_consoles.get_number_of_children() +
+                this->parent_of_any_value_entities.get_number_of_children() +
+                this->parent_of_any_struct_entities.get_number_of_children() +
+                this->parent_of_callback_engine_entities.get_number_of_children();
         }
 
         std::size_t Universe::get_number_of_descendants() const
