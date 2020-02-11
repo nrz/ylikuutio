@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "callback_engine_entity.hpp"
+#include "entity.hpp"
 #include "universe.hpp"
 
 // Include standard headers
