@@ -41,22 +41,6 @@ namespace yli
 {
     namespace ontology
     {
-        void Console::bind_to_parent()
-        {
-            // Requirements:
-            // `this->parent` must not be `nullptr`.
-            yli::ontology::Universe* const universe = this->parent;
-
-            if (universe == nullptr)
-            {
-                std::cerr << "ERROR: `Console::bind_to_parent`: `universe` is `nullptr`!\n";
-                return;
-            }
-
-            // Get `childID` from the `Universe` and set pointer to this `Console`.
-            universe->parent_of_consoles.bind_child(this);
-        }
-
         Console::~Console()
         {
             // destructor.
@@ -308,7 +292,7 @@ namespace yli
 
         yli::ontology::Entity* Console::get_parent() const
         {
-            return this->parent;
+            return this->child_of_universe.parent;
         }
 
         std::size_t Console::get_number_of_children() const
@@ -323,18 +307,20 @@ namespace yli
 
         bool Console::enter_console()
         {
-            if (this->parent != nullptr &&
-                    this->parent->get_active_console() == this &&
+            yli::ontology::Universe* const universe = static_cast<yli::ontology::Universe*>(this->child_of_universe.parent);
+
+            if (universe != nullptr &&
+                    universe->get_active_console() == this &&
                     !this->in_console &&
                     this->input_mode != nullptr)
             {
                 this->input_mode->activate();
 
                 // Do not display help screen when in console.
-                this->parent->can_display_help_screen = false;
+                universe->can_display_help_screen = false;
 
                 // Mark that we're in console.
-                this->parent->in_console = true;
+                universe->in_console = true;
                 this->in_console = true;
                 this->in_historical_input = false;
                 return true;
@@ -346,7 +332,9 @@ namespace yli
 
         bool Console::exit_console()
         {
-            if (this->in_console && this->parent != nullptr)
+            yli::ontology::Universe* const universe = static_cast<yli::ontology::Universe*>(this->child_of_universe.parent);
+
+            if (this->in_console && universe != nullptr)
             {
                 // Restore previous input mode.
                 if (this->input_mode != nullptr)
@@ -355,10 +343,10 @@ namespace yli
                 }
 
                 // Enable display help screen when not in console.
-                this->parent->can_display_help_screen = true;
+                universe->can_display_help_screen = true;
 
                 // Mark that we have exited the console.
-                this->parent->in_console = false;
+                universe->in_console = false;
                 this->in_console = false;
 
                 return true;

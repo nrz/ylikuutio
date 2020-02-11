@@ -144,7 +144,7 @@ namespace yli
 
         yli::ontology::Entity* EntityFactory::create_Console() const
         {
-            return new yli::ontology::Console(this->universe);
+            return new yli::ontology::Console(this->universe, (this->universe == nullptr ? nullptr : &this->universe->parent_of_consoles));
         }
 
         yli::ontology::Entity* EntityFactory::create_Camera(const yli::ontology::CameraStruct& camera_struct) const

@@ -19,8 +19,8 @@
 #define __CONSOLE_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "child_module.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 #include "SDL.h"
 
@@ -30,7 +30,6 @@
 #include <limits>        // std::numeric_limits
 #include <list>          // std::list
 #include <memory>        // std::make_shared, std::shared_ptr
-#include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
@@ -87,16 +86,16 @@ namespace yli
     namespace ontology
     {
         class Universe;
+        class ParentModule;
 
         class Console: public yli::ontology::Entity
         {
             public:
                 // constructor.
-                Console(yli::ontology::Universe* const universe)
-                    : Entity(universe)
+                Console(yli::ontology::Universe* const universe, yli::ontology::ParentModule* const parent_module)
+                    : Entity(universe),
+                    child_of_universe((yli::ontology::Entity*) universe, parent_module, this)
                 {
-                    this->parent = universe;
-
                     // constructor.
                     this->should_be_rendered = true;
                     this->cursor_it = this->current_input.begin();
@@ -122,9 +121,6 @@ namespace yli
                     this->is_right_alt_pressed = false;
                     this->is_left_shift_pressed = false;
                     this->is_right_shift_pressed = false;
-
-                    // Get `childID` from `Universe` and set pointer to this `Console`.
-                    this->bind_to_parent();
 
                     this->input_mode = nullptr;
 
@@ -419,12 +415,9 @@ namespace yli
 
                 bool should_be_rendered;
 
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
+                yli::ontology::ChildModule child_of_universe;
 
             private:
-                void bind_to_parent();
-
                 yli::ontology::Entity* get_parent() const override;
 
                 static void charmods_callback(SDL_Window* window, unsigned int codepoint, int mods);
@@ -472,9 +465,6 @@ namespace yli
 
                 // `std::unordered_map` contains console command callbacks.
                 std::unordered_map<std::string, ConsoleCommandCallback> command_callback_map;
-
-                // This is a pointer to `yli::ontology::Universe`.
-                yli::ontology::Universe* parent;
 
                 std::size_t console_top_y;
                 std::size_t console_bottom_y;
