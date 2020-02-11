@@ -184,7 +184,10 @@ namespace yli
 
         yli::ontology::Entity* EntityFactory::create_CallbackEngineEntity(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback) const
         {
-            return new yli::ontology::CallbackEngineEntity(this->universe, callback);
+            return new yli::ontology::CallbackEngineEntity(
+                    this->universe,
+                    callback,
+                    (this->universe == nullptr ? nullptr : &this->universe->parent_of_callback_engine_entities));
         }
     }
 }
