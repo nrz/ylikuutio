@@ -1753,12 +1753,12 @@ TEST(shader_must_bind_to_scene_appropriately, scenes_of_the_same_world)
 
     shader->bind_to_new_parent(scene2);
     ASSERT_EQ(shader->get_parent(), scene2);
-    ASSERT_EQ(world->get_number_of_children(), 2);
-    ASSERT_EQ(world->get_number_of_descendants(), 3);
     ASSERT_EQ(scene1->get_number_of_children(), 0);
     ASSERT_EQ(scene1->get_number_of_descendants(), 0);
     ASSERT_EQ(scene2->get_number_of_children(), 1);
     ASSERT_EQ(scene2->get_number_of_descendants(), 1);
+    ASSERT_EQ(world->get_number_of_children(), 2);
+    ASSERT_EQ(world->get_number_of_descendants(), 3);
     ASSERT_EQ(universe->get_number_of_children(), 1);
     ASSERT_EQ(universe->get_number_of_descendants(), 4);
 }
@@ -1794,14 +1794,14 @@ TEST(shader_must_bind_to_scene_appropriately, scenes_of_the_different_worlds)
 
     shader->bind_to_new_parent(scene2);
     ASSERT_EQ(shader->get_parent(), scene2);
-    ASSERT_EQ(world1->get_number_of_children(), 1);
-    ASSERT_EQ(world1->get_number_of_descendants(), 1);
-    ASSERT_EQ(world2->get_number_of_children(), 1);
-    ASSERT_EQ(world2->get_number_of_descendants(), 2);
     ASSERT_EQ(scene1->get_number_of_children(), 0);
     ASSERT_EQ(scene1->get_number_of_descendants(), 0);
     ASSERT_EQ(scene2->get_number_of_children(), 1);
     ASSERT_EQ(scene2->get_number_of_descendants(), 1);
+    ASSERT_EQ(world1->get_number_of_children(), 1);
+    ASSERT_EQ(world1->get_number_of_descendants(), 1);
+    ASSERT_EQ(world2->get_number_of_children(), 1);
+    ASSERT_EQ(world2->get_number_of_descendants(), 2);
     ASSERT_EQ(universe->get_number_of_children(), 2);
     ASSERT_EQ(universe->get_number_of_descendants(), 5);
 }
