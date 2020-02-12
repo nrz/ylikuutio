@@ -82,13 +82,13 @@ TEST(universe_must_be_initialized_appropriately, headless)
     ASSERT_EQ(universe->get_number_of_descendants(), 0);
 }
 
-TEST(world_must_be_initialized_appropriately, headless)
+TEST(worlds_must_be_initialized_appropriately, headless)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::World* const world1 = new yli::ontology::World(universe, &universe->parent_of_worlds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 1);
@@ -99,14 +99,252 @@ TEST(world_must_be_initialized_appropriately, headless)
     ASSERT_EQ(universe->get_number_of_descendants(), 1);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_childID(), 0);
-    ASSERT_EQ(world->get_type(), "yli::ontology::World*");
-    ASSERT_TRUE(world->get_can_be_erased());
-    ASSERT_EQ(world->get_universe(), universe);
-    ASSERT_NE(world->get_setting_master(), nullptr);
-    ASSERT_EQ(world->get_parent(), universe);
-    ASSERT_EQ(world->get_number_of_children(), 0);
-    ASSERT_EQ(world->get_number_of_descendants(), 0);
+    ASSERT_EQ(world1->get_childID(), 0);
+    ASSERT_EQ(world1->get_type(), "yli::ontology::World*");
+    ASSERT_TRUE(world1->get_can_be_erased());
+    ASSERT_EQ(world1->get_universe(), universe);
+    ASSERT_NE(world1->get_setting_master(), nullptr);
+    ASSERT_EQ(world1->get_parent(), universe);
+    ASSERT_EQ(world1->get_number_of_children(), 0);
+    ASSERT_EQ(world1->get_number_of_descendants(), 0);
+
+    yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    // `Universe` member functions.
+    ASSERT_EQ(universe->get_number_of_worlds(), 2);
+    ASSERT_EQ(universe->get_active_scene(), nullptr);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 2);
+    ASSERT_EQ(universe->get_number_of_descendants(), 2);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world2->get_childID(), 1);
+    ASSERT_EQ(world2->get_type(), "yli::ontology::World*");
+    ASSERT_TRUE(world2->get_can_be_erased());
+    ASSERT_EQ(world2->get_universe(), universe);
+    ASSERT_NE(world2->get_setting_master(), nullptr);
+    ASSERT_EQ(world2->get_parent(), universe);
+    ASSERT_EQ(world2->get_number_of_children(), 0);
+    ASSERT_EQ(world2->get_number_of_descendants(), 0);
+
+    yli::ontology::World* const world3 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    // `Universe` member functions.
+    ASSERT_EQ(universe->get_number_of_worlds(), 3);
+    ASSERT_EQ(universe->get_active_scene(), nullptr);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 3);
+    ASSERT_EQ(universe->get_number_of_descendants(), 3);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world3->get_childID(), 2);
+    ASSERT_EQ(world3->get_type(), "yli::ontology::World*");
+    ASSERT_TRUE(world3->get_can_be_erased());
+    ASSERT_EQ(world3->get_universe(), universe);
+    ASSERT_NE(world3->get_setting_master(), nullptr);
+    ASSERT_EQ(world3->get_parent(), universe);
+    ASSERT_EQ(world3->get_number_of_children(), 0);
+    ASSERT_EQ(world3->get_number_of_descendants(), 0);
+
+    yli::ontology::World* const world4 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    // `Universe` member functions.
+    ASSERT_EQ(universe->get_number_of_worlds(), 4);
+    ASSERT_EQ(universe->get_active_scene(), nullptr);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 4);
+    ASSERT_EQ(universe->get_number_of_descendants(), 4);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world4->get_childID(), 3);
+    ASSERT_EQ(world4->get_type(), "yli::ontology::World*");
+    ASSERT_TRUE(world4->get_can_be_erased());
+    ASSERT_EQ(world4->get_universe(), universe);
+    ASSERT_NE(world4->get_setting_master(), nullptr);
+    ASSERT_EQ(world4->get_parent(), universe);
+    ASSERT_EQ(world4->get_number_of_children(), 0);
+    ASSERT_EQ(world4->get_number_of_descendants(), 0);
+}
+
+TEST(worlds_must_be_initialized_appropriately_after_having_deleted_the_earlier_worlds, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world1 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    // `Universe` member functions.
+    ASSERT_EQ(universe->get_number_of_worlds(), 1);
+    ASSERT_EQ(universe->get_active_scene(), nullptr);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 1);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world1->get_childID(), 0);
+    ASSERT_EQ(world1->get_type(), "yli::ontology::World*");
+    ASSERT_TRUE(world1->get_can_be_erased());
+    ASSERT_EQ(world1->get_universe(), universe);
+    ASSERT_NE(world1->get_setting_master(), nullptr);
+    ASSERT_EQ(world1->get_parent(), universe);
+    ASSERT_EQ(world1->get_number_of_children(), 0);
+    ASSERT_EQ(world1->get_number_of_descendants(), 0);
+
+    delete world1;
+    yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    // `Universe` member functions.
+    ASSERT_EQ(universe->get_number_of_worlds(), 1);
+    ASSERT_EQ(universe->get_active_scene(), nullptr);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 1);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world2->get_childID(), 0);
+    ASSERT_EQ(world2->get_type(), "yli::ontology::World*");
+    ASSERT_TRUE(world2->get_can_be_erased());
+    ASSERT_EQ(world2->get_universe(), universe);
+    ASSERT_NE(world2->get_setting_master(), nullptr);
+    ASSERT_EQ(world2->get_parent(), universe);
+    ASSERT_EQ(world2->get_number_of_children(), 0);
+    ASSERT_EQ(world2->get_number_of_descendants(), 0);
+
+    delete world2;
+    yli::ontology::World* const world3 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    // `Universe` member functions.
+    ASSERT_EQ(universe->get_number_of_worlds(), 1);
+    ASSERT_EQ(universe->get_active_scene(), nullptr);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 1);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world3->get_childID(), 0);
+    ASSERT_EQ(world3->get_type(), "yli::ontology::World*");
+    ASSERT_TRUE(world3->get_can_be_erased());
+    ASSERT_EQ(world3->get_universe(), universe);
+    ASSERT_NE(world3->get_setting_master(), nullptr);
+    ASSERT_EQ(world3->get_parent(), universe);
+    ASSERT_EQ(world3->get_number_of_children(), 0);
+    ASSERT_EQ(world3->get_number_of_descendants(), 0);
+
+    delete world3;
+    yli::ontology::World* const world4 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    // `Universe` member functions.
+    ASSERT_EQ(universe->get_number_of_worlds(), 1);
+    ASSERT_EQ(universe->get_active_scene(), nullptr);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 1);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world4->get_childID(), 0);
+    ASSERT_EQ(world4->get_type(), "yli::ontology::World*");
+    ASSERT_TRUE(world4->get_can_be_erased());
+    ASSERT_EQ(world4->get_universe(), universe);
+    ASSERT_NE(world4->get_setting_master(), nullptr);
+    ASSERT_EQ(world4->get_parent(), universe);
+    ASSERT_EQ(world4->get_number_of_children(), 0);
+    ASSERT_EQ(world4->get_number_of_descendants(), 0);
+}
+
+TEST(worlds_must_be_initialized_appropriately_after_having_deleted_some_earlier_worlds, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world1 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    // `Universe` member functions.
+    ASSERT_EQ(universe->get_number_of_worlds(), 1);
+    ASSERT_EQ(universe->get_active_scene(), nullptr);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 1);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world1->get_childID(), 0);
+    ASSERT_EQ(world1->get_type(), "yli::ontology::World*");
+    ASSERT_TRUE(world1->get_can_be_erased());
+    ASSERT_EQ(world1->get_universe(), universe);
+    ASSERT_NE(world1->get_setting_master(), nullptr);
+    ASSERT_EQ(world1->get_parent(), universe);
+    ASSERT_EQ(world1->get_number_of_children(), 0);
+    ASSERT_EQ(world1->get_number_of_descendants(), 0);
+
+    yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    // `Universe` member functions.
+    ASSERT_EQ(universe->get_number_of_worlds(), 2);
+    ASSERT_EQ(universe->get_active_scene(), nullptr);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 2);
+    ASSERT_EQ(universe->get_number_of_descendants(), 2);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world2->get_childID(), 1);
+    ASSERT_EQ(world2->get_type(), "yli::ontology::World*");
+    ASSERT_TRUE(world2->get_can_be_erased());
+    ASSERT_EQ(world2->get_universe(), universe);
+    ASSERT_NE(world2->get_setting_master(), nullptr);
+    ASSERT_EQ(world2->get_parent(), universe);
+    ASSERT_EQ(world2->get_number_of_children(), 0);
+    ASSERT_EQ(world2->get_number_of_descendants(), 0);
+
+    delete world1;
+    yli::ontology::World* const world3 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    // `Universe` member functions.
+    ASSERT_EQ(universe->get_number_of_worlds(), 2);
+    ASSERT_EQ(universe->get_active_scene(), nullptr);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 2);
+    ASSERT_EQ(universe->get_number_of_descendants(), 2);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world3->get_childID(), 0);
+    ASSERT_EQ(world3->get_type(), "yli::ontology::World*");
+    ASSERT_TRUE(world3->get_can_be_erased());
+    ASSERT_EQ(world3->get_universe(), universe);
+    ASSERT_NE(world3->get_setting_master(), nullptr);
+    ASSERT_EQ(world3->get_parent(), universe);
+    ASSERT_EQ(world3->get_number_of_children(), 0);
+    ASSERT_EQ(world3->get_number_of_descendants(), 0);
+
+    yli::ontology::World* const world4 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    // `Universe` member functions.
+    ASSERT_EQ(universe->get_number_of_worlds(), 3);
+    ASSERT_EQ(universe->get_active_scene(), nullptr);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_children(), 3);
+    ASSERT_EQ(universe->get_number_of_descendants(), 3);
+
+    // `Entity` member functions of `World`.
+    ASSERT_EQ(world4->get_childID(), 2);
+    ASSERT_EQ(world4->get_type(), "yli::ontology::World*");
+    ASSERT_TRUE(world4->get_can_be_erased());
+    ASSERT_EQ(world4->get_universe(), universe);
+    ASSERT_NE(world4->get_setting_master(), nullptr);
+    ASSERT_EQ(world4->get_parent(), universe);
+    ASSERT_EQ(world4->get_number_of_children(), 0);
+    ASSERT_EQ(world4->get_number_of_descendants(), 0);
 }
 
 TEST(world_must_be_initialized_appropriately, no_universe)
