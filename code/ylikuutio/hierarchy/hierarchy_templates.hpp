@@ -35,6 +35,7 @@ namespace yli
                     const std::size_t childID,
                     const T1 child_pointer,
                     std::vector<T1>& child_pointer_vector,
+                    std::queue<std::size_t>& free_childID_queue,
                     std::size_t& number_of_children)
             {
                 // requirements:
@@ -59,6 +60,12 @@ namespace yli
                             // Reduce the size of child pointer vector by 1.
                             child_pointer_vector.pop_back();
                         }
+                    }
+                    else
+                    {
+                        // `childID` is not the highest allocated `childID`.
+                        // Therefore, store `childID` for the future use.
+                        free_childID_queue.push(childID);
                     }
 
                     // 1 child less.
@@ -88,9 +95,15 @@ namespace yli
                     free_childID_queue.pop();
 
                     // check that the child index does not exceed current child pointer vector.
-                    if (childID < child_pointer_vector.size())
+                    if (childID >= child_pointer_vector.size())
                     {
-                        // OK, it does not exceed current child pointer vector.
+                        // Child index exceeds current child pointer vector.
+                        continue;
+                    }
+
+                    if (child_pointer_vector[childID] == nullptr)
+                    {
+                        // OK, child index does not exceed current child pointer vector and the index is free.
                         return childID;
                     }
                 }
@@ -137,7 +150,7 @@ namespace yli
 
                 child_pointer->childID = yli::hierarchy::request_childID(child_pointer_vector, free_childID_queue);
                 // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-                yli::hierarchy::set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, number_of_children);
+                yli::hierarchy::set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, free_childID_queue, number_of_children);
             }
 
         template<class T1>
@@ -164,7 +177,7 @@ namespace yli
 
                 apprenticeID = yli::hierarchy::request_childID(apprentice_pointer_vector, free_apprenticeID_queue);
                 // set pointer to the apprentice in master's apprentice pointer vector so that master knows about apprentices' whereabouts!
-                yli::hierarchy::set_child_pointer(apprenticeID, apprentice_pointer, apprentice_pointer_vector, number_of_apprentices);
+                yli::hierarchy::set_child_pointer(apprenticeID, apprentice_pointer, apprentice_pointer_vector, free_apprenticeID_queue, number_of_apprentices);
             }
 
         template<class T1>
@@ -198,13 +211,14 @@ namespace yli
 
                 child_pointer->childID = yli::hierarchy::request_childID(child_pointer_vector, free_childID_queue);
                 // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-                yli::hierarchy::set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, number_of_children);
+                yli::hierarchy::set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, free_childID_queue, number_of_children);
             }
 
         template <class T1>
             void unbind_child_from_parent(
                     const std::size_t childID,
                     std::vector<T1>& child_pointer_vector,
+                    std::queue<std::size_t>& free_childID_queue,
                     std::size_t& number_of_children)
             {
                 // requirements:
@@ -217,7 +231,7 @@ namespace yli
                 }
 
                 // Set pointer to this child to `nullptr` in the old parent.
-                yli::hierarchy::set_child_pointer(childID, static_cast<T1>(nullptr), child_pointer_vector, number_of_children);
+                yli::hierarchy::set_child_pointer(childID, static_cast<T1>(nullptr), child_pointer_vector, free_childID_queue, number_of_children);
             }
 
         template<class T1>

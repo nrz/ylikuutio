@@ -41,6 +41,7 @@ namespace yli
             yli::hierarchy::unbind_child_from_parent<yli::ontology::Entity*>(
                     childID,
                     this->child_pointer_vector,
+                    this->free_childID_queue,
                     this->number_of_children);
         }
 

@@ -54,6 +54,7 @@ namespace yli
             yli::hierarchy::unbind_child_from_parent(
                     childID,
                     this->callback_parameter_pointer_vector,
+                    this->free_callback_parameterID_queue,
                     this->number_of_callback_parameters);
         }
 

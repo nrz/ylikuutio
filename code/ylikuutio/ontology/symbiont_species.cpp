@@ -62,6 +62,7 @@ namespace yli
             yli::hierarchy::unbind_child_from_parent(
                     childID,
                     this->biont_pointer_vector,
+                    this->free_biontID_queue,
                     this->number_of_bionts);
         }
 
