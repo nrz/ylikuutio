@@ -1806,7 +1806,7 @@ TEST(shader_must_bind_to_scene_appropriately, scenes_of_the_different_worlds)
     ASSERT_EQ(universe->get_number_of_descendants(), 5);
 }
 
-TEST(material_must_bind_to_shader_appropriately, materials_of_different_shaders)
+TEST(material_must_bind_to_shader_appropriately, shaders_of_the_same_scene)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
