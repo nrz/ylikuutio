@@ -1904,10 +1904,12 @@ TEST(scene_must_bind_to_worlds_appropriately, scene)
     yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world1->parent_of_scenes);
     ASSERT_EQ(scene->get_parent(), world1);
     ASSERT_EQ(world1->get_number_of_children(), 1);
+    ASSERT_EQ(world1->get_number_of_descendants(), 1);
 
     yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
     ASSERT_EQ(scene->get_parent(), world1);
     ASSERT_EQ(world2->get_number_of_children(), 0);
+    ASSERT_EQ(world2->get_number_of_descendants(), 0);
 
     scene->bind_to_new_parent(world2);
     ASSERT_EQ(scene->get_parent(), world2);
