@@ -30,8 +30,6 @@ namespace yli
 {
     namespace ontology
     {
-        class Movable;
-
         void Brain::bind_Movable(yli::ontology::Movable* const movable)
         {
             // get `childID` from `Brain` and set pointer to `movable`.
