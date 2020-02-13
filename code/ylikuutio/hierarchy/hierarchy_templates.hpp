@@ -180,40 +180,6 @@ namespace yli
                 yli::hierarchy::set_child_pointer(apprenticeID, apprentice_pointer, apprentice_pointer_vector, free_apprenticeID_queue, number_of_apprentices);
             }
 
-        template<class T1>
-            void bind_child_to_parent(
-                    const std::string& child_name,
-                    std::unordered_map<std::string, T1>& child_hash_map,
-                    const T1 child_pointer,
-                    std::vector<T1>& child_pointer_vector,
-                    std::queue<std::size_t>& free_childID_queue,
-                    std::size_t& number_of_children)
-            {
-                // If a class' instances have parents, this function must be
-                // called in the constructor. The call must be done only once
-                // in each constructor, usually after setting
-                // `this->parent`. So, get `childID` from the parent,
-                // because every child deserves a unique ID!
-                //
-                // requirements:
-                // `child_pointer` must not be `nullptr` (use `this` as the first argument).
-
-                if (child_pointer == nullptr)
-                {
-                    return;
-                }
-
-                if (!child_name.empty())
-                {
-                    // if the child has a name, let the parent know it!
-                    child_hash_map[child_name] = child_pointer;
-                }
-
-                child_pointer->childID = yli::hierarchy::request_childID(child_pointer_vector, free_childID_queue);
-                // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-                yli::hierarchy::set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, free_childID_queue, number_of_children);
-            }
-
         template <class T1>
             void unbind_child_from_parent(
                     const std::size_t childID,
