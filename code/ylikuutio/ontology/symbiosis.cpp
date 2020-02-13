@@ -200,6 +200,8 @@ namespace yli
                     ofbx_diffuse_texture_pointer_vector.push_back(key_and_value.first); // key.
                 }
 
+                yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->child_of_shader.parent);
+
                 // Create `SymbiontMaterial`s.
                 for (const ofbx::Texture* ofbx_texture : ofbx_diffuse_texture_pointer_vector)
                 {
@@ -210,7 +212,7 @@ namespace yli
 
                     std::cout << "Creating yli::ontology::SymbiontMaterial* based on ofbx::Texture* at 0x" << std::hex << (uint64_t) ofbx_texture << std::dec << " ...\n";
                     yli::ontology::MaterialStruct material_struct;
-                    material_struct.shader = static_cast<yli::ontology::Shader*>(this->child_of_shader.parent);
+                    material_struct.shader = shader;
                     material_struct.symbiosis = this;
                     material_struct.is_symbiont_material = true;
                     material_struct.ofbx_texture = ofbx_texture;
@@ -228,16 +230,16 @@ namespace yli
                         yli::ontology::SpeciesStruct species_struct;
                         species_struct.is_symbiont_species = true;
 
-                        if (this->child_of_shader.parent != nullptr)
+                        if (shader != nullptr)
                         {
-                            species_struct.scene = static_cast<yli::ontology::Scene*>(this->child_of_shader.parent->get_parent());
+                            species_struct.scene = static_cast<yli::ontology::Scene*>(shader->get_parent());
                         }
                         else
                         {
                             species_struct.scene = nullptr;
                         }
 
-                        species_struct.shader = static_cast<yli::ontology::Shader*>(this->child_of_shader.parent);
+                        species_struct.shader = shader;
                         species_struct.symbiont_material = symbiont_material;
                         species_struct.vertex_count = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i).size() : 0;
                         species_struct.vertices = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i) : std::vector<glm::vec3>();
