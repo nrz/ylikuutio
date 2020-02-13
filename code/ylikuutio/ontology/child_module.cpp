@@ -27,12 +27,19 @@ namespace yli
         {
             // requirements:
             // `this->parent` must not be `nullptr`.
+            // `this->self` must not be `nullptr`.
+
             if (this->parent_module == nullptr)
             {
                 return;
             }
 
-            // get `childID` from the `World` and set pointer to this `Scene`.
+            if (this->self == nullptr)
+            {
+                return;
+            }
+
+            // get `childID` from the `ParentModule` and set pointer to this `ChildModule`.
             this->parent_module->bind_child(this->self);
         }
 
