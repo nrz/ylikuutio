@@ -39,6 +39,9 @@ namespace yli
                     this->bind_to_parent_module();
                 }
 
+                ChildModule(const ChildModule&) = delete;            // Delete copy constructor.
+                ChildModule &operator=(const ChildModule&) = delete; // Delete copy assignment.
+
                 // destructor.
                 ~ChildModule();
 
