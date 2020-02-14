@@ -107,9 +107,6 @@ namespace yli
 
                 yli::ontology::ChildModule child_of_universe;
                 yli::ontology::ParentModule parent_of_scenes;
-
-            private:
-                void bind_to_parent();
         };
     }
 }
