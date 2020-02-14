@@ -1919,6 +1919,15 @@ TEST(scene_must_bind_to_worlds_appropriately, scene)
     ASSERT_EQ(world2->get_number_of_descendants(), 1);
     ASSERT_EQ(universe->get_number_of_children(), 2);
     ASSERT_EQ(universe->get_number_of_descendants(), 3);
+
+    scene->bind_to_new_parent(world1);
+    ASSERT_EQ(scene->get_parent(), world1);
+    ASSERT_EQ(world1->get_number_of_children(), 1);
+    ASSERT_EQ(world1->get_number_of_descendants(), 1);
+    ASSERT_EQ(world2->get_number_of_children(), 0);
+    ASSERT_EQ(world2->get_number_of_descendants(), 0);
+    ASSERT_EQ(universe->get_number_of_children(), 2);
+    ASSERT_EQ(universe->get_number_of_descendants(), 3);
 }
 
 TEST(active_scene_must_remain_active_scene_after_binding_to_a_new_parent, scene)
