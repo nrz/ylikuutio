@@ -65,7 +65,7 @@ namespace yli
             // requirements:
             // `this->symbiosis_parent` must not be `nullptr`.
 
-            yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->child_of_symbiosis.parent);
+            yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->child_of_symbiosis.get_parent());
 
             if (symbiosis == nullptr)
             {
@@ -158,7 +158,7 @@ namespace yli
 
         yli::ontology::Entity* Holobiont::get_parent() const
         {
-            return this->child_of_symbiosis.parent;
+            return this->child_of_symbiosis.get_parent();
         }
 
         std::size_t Holobiont::get_number_of_children() const

@@ -18,6 +18,9 @@
 #ifndef __CHILD_MODULE_HPP_INCLUDED
 #define __CHILD_MODULE_HPP_INCLUDED
 
+// Include standard headers
+#include <cstddef> // std::size_t
+
 namespace yli
 {
     namespace ontology
@@ -28,9 +31,8 @@ namespace yli
         class ChildModule
         {
             public:
-                ChildModule(yli::ontology::Entity* const parent, yli::ontology::ParentModule* const parent_module, yli::ontology::Entity* const entity)
-                    : parent(parent),
-                    parent_module(parent_module),
+                ChildModule(yli::ontology::ParentModule* const parent_module, yli::ontology::Entity* const entity)
+                    : parent_module(parent_module),
                     entity(entity)
                 {
                     // constructor.
@@ -40,12 +42,14 @@ namespace yli
                 // destructor.
                 ~ChildModule();
 
-                yli::ontology::Entity* parent;
-                yli::ontology::ParentModule* parent_module;
+                yli::ontology::Entity* get_parent() const;
+                void unbind_child(const std::size_t childID) const;
+                void set_parent_module_and_bind_to_new_parent(yli::ontology::ParentModule* const new_parent_module);
 
             private:
                 void bind_to_parent_module();
 
+                yli::ontology::ParentModule* parent_module;
                 yli::ontology::Entity* entity;
         };
     }

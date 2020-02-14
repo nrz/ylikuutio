@@ -52,6 +52,11 @@ namespace yli
             yli::hierarchy::delete_children<yli::ontology::Entity*>(this->child_pointer_vector, this->number_of_children);
         }
 
+        yli::ontology::Entity* ParentModule::get_entity() const
+        {
+            return this->entity;
+        }
+
         std::size_t ParentModule::get_number_of_children() const
         {
             return this->number_of_children;

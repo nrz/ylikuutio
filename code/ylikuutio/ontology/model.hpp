@@ -54,7 +54,7 @@ namespace yli
                 // constructor.
                 Model(yli::ontology::Universe* const universe, const bool opengl_in_use)
                     : Entity(universe),
-                    parent_of_objects(yli::ontology::ParentModule())
+                    parent_of_objects(this)
                 {
                     // constructor.
 

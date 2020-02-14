@@ -65,7 +65,7 @@ namespace yli
 
         yli::ontology::Entity* SymbiontMaterial::get_parent() const
         {
-            return this->child_of_shader_or_symbiosis.parent;
+            return this->child_of_shader_or_symbiosis.get_parent();
         }
 
         std::size_t SymbiontMaterial::get_number_of_children() const
@@ -93,7 +93,7 @@ namespace yli
                 return;
             }
 
-            const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->child_of_shader_or_symbiosis.parent);
+            const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->child_of_shader_or_symbiosis.get_parent());
 
             if (symbiosis == nullptr)
             {

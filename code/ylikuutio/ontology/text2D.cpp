@@ -47,7 +47,7 @@ namespace yli
             // `this->parent` must not be `nullptr`.
             // `new_parent` must not be `nullptr`.
 
-            yli::ontology::Entity* const font2D = this->child_of_font2D.parent;
+            yli::ontology::Entity* const font2D = this->child_of_font2D.get_parent();
 
             if (font2D == nullptr)
             {
@@ -62,11 +62,10 @@ namespace yli
             }
 
             // Unbind from the old parent `Font2D`.
-            this->child_of_font2D.parent_module->unbind_child(this->childID);
+            this->child_of_font2D.unbind_child(this->childID);
 
             // Get `childID` from `Font2D` and set pointer to this `Text2D`.
-            this->child_of_font2D.parent = (yli::ontology::Entity*) new_parent;
-            new_parent->parent_of_text2Ds.bind_child(this);
+            this->child_of_font2D.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_text2Ds);
         }
 
         Text2D::~Text2D()
@@ -89,7 +88,7 @@ namespace yli
                 return;
             }
 
-            if (this->child_of_font2D.parent == nullptr)
+            if (this->child_of_font2D.get_parent() == nullptr)
             {
                 return;
             }
@@ -250,7 +249,7 @@ namespace yli
                 float uv_x = (character % this->font_size) / static_cast<float>(this->font_size);
                 float uv_y;
 
-                yli::ontology::Font2D* const font2D = static_cast<yli::ontology::Font2D*>(this->child_of_font2D.parent);
+                yli::ontology::Font2D* const font2D = static_cast<yli::ontology::Font2D*>(this->child_of_font2D.get_parent());
 
                 const std::string& font_texture_file_format = font2D->get_font_texture_file_format();
 
@@ -320,7 +319,7 @@ namespace yli
 
         yli::ontology::Entity* Text2D::get_parent() const
         {
-            return this->child_of_font2D.parent;
+            return this->child_of_font2D.get_parent();
         }
 
         std::size_t Text2D::get_number_of_children() const

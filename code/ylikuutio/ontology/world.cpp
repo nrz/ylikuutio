@@ -37,7 +37,7 @@ namespace yli
 
         yli::ontology::Entity* World::get_parent() const
         {
-            return this->child_of_universe.parent;
+            return this->child_of_universe.get_parent();
         }
 
         std::size_t World::get_number_of_children() const

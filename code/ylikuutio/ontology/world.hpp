@@ -85,8 +85,8 @@ namespace yli
             public:
                 World(yli::ontology::Universe* const universe, yli::ontology::ParentModule* const parent_module)
                     : Entity(universe),
-                    child_of_universe((yli::ontology::Entity*) universe, parent_module, this),
-                    parent_of_scenes(yli::ontology::ParentModule())
+                    child_of_universe(parent_module, this),
+                    parent_of_scenes(this)
                 {
                     // constructor.
 

@@ -292,7 +292,7 @@ namespace yli
 
         yli::ontology::Entity* Console::get_parent() const
         {
-            return this->child_of_universe.parent;
+            return this->child_of_universe.get_parent();
         }
 
         std::size_t Console::get_number_of_children() const
@@ -307,7 +307,7 @@ namespace yli
 
         bool Console::enter_console()
         {
-            yli::ontology::Universe* const universe = static_cast<yli::ontology::Universe*>(this->child_of_universe.parent);
+            yli::ontology::Universe* const universe = static_cast<yli::ontology::Universe*>(this->child_of_universe.get_parent());
 
             if (universe != nullptr &&
                     universe->get_active_console() == this &&
@@ -332,7 +332,7 @@ namespace yli
 
         bool Console::exit_console()
         {
-            yli::ontology::Universe* const universe = static_cast<yli::ontology::Universe*>(this->child_of_universe.parent);
+            yli::ontology::Universe* const universe = static_cast<yli::ontology::Universe*>(this->child_of_universe.get_parent());
 
             if (this->in_console && universe != nullptr)
             {

@@ -57,7 +57,7 @@ namespace yli
                         const yli::ontology::MaterialStruct& material_struct,
                         yli::ontology::ParentModule* const parent_module)
                     : Material(universe, material_struct, parent_module),
-                    parent_of_symbiont_species(yli::ontology::ParentModule())
+                    parent_of_symbiont_species(this)
                 {
                     // constructor.
                     this->ofbx_texture               = material_struct.ofbx_texture;

@@ -94,7 +94,7 @@ namespace yli
                 // constructor.
                 Console(yli::ontology::Universe* const universe, yli::ontology::ParentModule* const parent_module)
                     : Entity(universe),
-                    child_of_universe((yli::ontology::Entity*) universe, parent_module, this)
+                    child_of_universe(parent_module, this)
                 {
                     // constructor.
                     this->should_be_rendered = true;

@@ -67,7 +67,7 @@ namespace yli
 
         yli::ontology::Entity* Brain::get_parent() const
         {
-            return this->child_of_scene.parent;
+            return this->child_of_scene.get_parent();
         }
 
         std::size_t Brain::get_number_of_children() const

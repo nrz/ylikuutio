@@ -72,7 +72,7 @@ namespace yli
                                 text3D_struct.spherical_coordinates,
                                 text3D_struct.horizontal_angle,
                                 text3D_struct.vertical_angle)),
-                    parent_of_objects(yli::ontology::ParentModule())
+                    parent_of_objects(this)
                 {
                     // constructor.
                     this->rotate_angle = NAN;

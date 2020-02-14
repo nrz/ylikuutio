@@ -44,7 +44,7 @@ namespace yli
                         const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
                         yli::ontology::ParentModule* const parent_module)
                     : Entity(universe),
-                    child_of_universe((yli::ontology::Entity*) universe, parent_module, this)
+                    child_of_universe(parent_module, this)
                 {
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::CallbackEngineEntity*";

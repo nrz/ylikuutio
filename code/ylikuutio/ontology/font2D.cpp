@@ -66,7 +66,7 @@ namespace yli
 
         yli::ontology::Entity* Font2D::get_parent() const
         {
-            return this->child_of_universe.parent;
+            return this->child_of_universe.get_parent();
         }
 
         std::size_t Font2D::get_number_of_children() const

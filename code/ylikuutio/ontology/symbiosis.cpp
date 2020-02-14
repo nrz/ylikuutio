@@ -60,7 +60,7 @@ namespace yli
             // `this->parent` must not be `nullptr`.
             // `new_parent` must not be `nullptr`.
 
-            yli::ontology::Entity* const shader = this->child_of_shader.parent;
+            yli::ontology::Entity* const shader = this->child_of_shader.get_parent();
 
             if (shader == nullptr)
             {
@@ -75,11 +75,10 @@ namespace yli
             }
 
             // unbind from the old parent `Shader`.
-            this->child_of_shader.parent_module->unbind_child(this->childID);
+            this->child_of_shader.unbind_child(this->childID);
 
             // get `childID` from `Shader` and set pointer to this `Symbiosis`.
-            this->child_of_shader.parent = (yli::ontology::Entity*) new_parent;
-            new_parent->parent_of_symbioses.bind_child(this);
+            this->child_of_shader.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_symbioses);
         }
 
         void Symbiosis::bind_to_new_parent(yli::ontology::Entity* const new_parent)
@@ -140,7 +139,7 @@ namespace yli
 
         yli::ontology::Entity* Symbiosis::get_parent() const
         {
-            return this->child_of_shader.parent;
+            return this->child_of_shader.get_parent();
         }
 
         std::size_t Symbiosis::get_number_of_children() const
@@ -200,7 +199,7 @@ namespace yli
                     ofbx_diffuse_texture_pointer_vector.push_back(key_and_value.first); // key.
                 }
 
-                yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->child_of_shader.parent);
+                yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->child_of_shader.get_parent());
 
                 // Create `SymbiontMaterial`s.
                 for (const ofbx::Texture* ofbx_texture : ofbx_diffuse_texture_pointer_vector)
