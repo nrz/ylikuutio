@@ -27,20 +27,20 @@ namespace yli
         {
             // requirements:
             // `this->parent` must not be `nullptr`.
-            // `this->self` must not be `nullptr`.
+            // `this->entity` must not be `nullptr`.
 
             if (this->parent_module == nullptr)
             {
                 return;
             }
 
-            if (this->self == nullptr)
+            if (this->entity == nullptr)
             {
                 return;
             }
 
             // get `childID` from the `ParentModule` and set pointer to this `ChildModule`.
-            this->parent_module->bind_child(this->self);
+            this->parent_module->bind_child(this->entity);
         }
 
         ChildModule::~ChildModule()
@@ -53,13 +53,13 @@ namespace yli
                 return;
             }
 
-            if (this->self == nullptr)
+            if (this->entity == nullptr)
             {
                 return;
             }
 
             // Set pointer to this `Entity` to `nullptr`.
-            this->parent_module->unbind_child(this->self->childID);
+            this->parent_module->unbind_child(this->entity->childID);
         }
     }
 }

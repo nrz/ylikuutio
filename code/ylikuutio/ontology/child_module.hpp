@@ -28,10 +28,10 @@ namespace yli
         class ChildModule
         {
             public:
-                ChildModule(yli::ontology::Entity* const parent, yli::ontology::ParentModule* const parent_module, yli::ontology::Entity* const self)
+                ChildModule(yli::ontology::Entity* const parent, yli::ontology::ParentModule* const parent_module, yli::ontology::Entity* const entity)
                     : parent(parent),
                     parent_module(parent_module),
-                    self(self)
+                    entity(entity)
                 {
                     // constructor.
                     this->bind_to_parent_module();
@@ -46,7 +46,7 @@ namespace yli
             private:
                 void bind_to_parent_module();
 
-                yli::ontology::Entity* self;
+                yli::ontology::Entity* entity;
         };
     }
 }
