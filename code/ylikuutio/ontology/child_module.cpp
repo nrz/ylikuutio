@@ -45,6 +45,8 @@ namespace yli
 
         ChildModule::~ChildModule()
         {
+            // destructor.
+
             // requirements:
             // `this->parent` must not be `nullptr`.
 
