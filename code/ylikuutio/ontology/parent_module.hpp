@@ -42,6 +42,9 @@ namespace yli
                     // constructor.
                 }
 
+                ParentModule(const ParentModule&) = delete;            // Delete copy constructor.
+                ParentModule &operator=(const ParentModule&) = delete; // Delete copy assignment.
+
                 yli::ontology::Entity* get_entity() const;
                 std::size_t get_number_of_children() const;
                 std::size_t get_number_of_descendants() const;
