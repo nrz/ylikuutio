@@ -2121,6 +2121,19 @@ TEST(material_must_bind_to_shader_appropriately, shaders_of_the_same_scene)
     ASSERT_EQ(world->get_number_of_descendants(), 4);
     ASSERT_EQ(universe->get_number_of_children(), 1);
     ASSERT_EQ(universe->get_number_of_descendants(), 5);
+
+    material->bind_to_new_parent(shader1);
+    ASSERT_EQ(material->get_parent(), shader1);
+    ASSERT_EQ(shader1->get_number_of_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader2->get_number_of_children(), 0);
+    ASSERT_EQ(shader2->get_number_of_descendants(), 0);
+    ASSERT_EQ(scene->get_number_of_children(), 2);
+    ASSERT_EQ(scene->get_number_of_descendants(), 3);
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 4);
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 5);
 }
 
 TEST(material_must_bind_to_shader_appropriately, shaders_of_different_scenes)
@@ -2167,6 +2180,21 @@ TEST(material_must_bind_to_shader_appropriately, shaders_of_different_scenes)
     ASSERT_EQ(scene1->get_number_of_descendants(), 1);
     ASSERT_EQ(scene2->get_number_of_children(), 1);
     ASSERT_EQ(scene2->get_number_of_descendants(), 2);
+    ASSERT_EQ(world->get_number_of_children(), 2);
+    ASSERT_EQ(world->get_number_of_descendants(), 5);
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 6);
+
+    material->bind_to_new_parent(shader1);
+    ASSERT_EQ(material->get_parent(), shader1);
+    ASSERT_EQ(shader1->get_number_of_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader2->get_number_of_children(), 0);
+    ASSERT_EQ(shader2->get_number_of_descendants(), 0);
+    ASSERT_EQ(scene1->get_number_of_children(), 1);
+    ASSERT_EQ(scene1->get_number_of_descendants(), 2);
+    ASSERT_EQ(scene2->get_number_of_children(), 1);
+    ASSERT_EQ(scene2->get_number_of_descendants(), 1);
     ASSERT_EQ(world->get_number_of_children(), 2);
     ASSERT_EQ(world->get_number_of_descendants(), 5);
     ASSERT_EQ(universe->get_number_of_children(), 1);
