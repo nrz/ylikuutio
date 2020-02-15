@@ -21,7 +21,6 @@
 #include "movable.hpp"
 #include "parent_module.hpp"
 #include "glyph_object_creation.hpp"
-#include "vector_font.hpp"
 #include "text3D_struct.hpp"
 #include "object_struct.hpp"
 #include "movable_struct.hpp"
@@ -50,6 +49,7 @@ namespace yli
         class Universe;
         class Object;
         class ParentModule;
+        class VectorFont;
 
         class Text3D: public yli::ontology::Movable
         {
@@ -75,7 +75,6 @@ namespace yli
                                 text3D_struct.spherical_coordinates,
                                 text3D_struct.horizontal_angle,
                                 text3D_struct.vertical_angle),
-                            text3D_struct.parent,
                             parent_module),
                     parent_of_objects(this)
                 {

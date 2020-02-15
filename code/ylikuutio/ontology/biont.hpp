@@ -21,7 +21,6 @@
 #include "movable.hpp"
 #include "shader.hpp"
 #include "symbiont_species.hpp"
-#include "holobiont.hpp"
 #include "biont_struct.hpp"
 #include "movable_struct.hpp"
 #include "family_templates.hpp"
@@ -74,7 +73,6 @@ namespace yli
                                 biont_struct.spherical_coordinates,
                                 biont_struct.horizontal_angle,
                                 biont_struct.vertical_angle),
-                            biont_struct.holobiont_parent,
                             parent_module)
                 {
                     // constructor.

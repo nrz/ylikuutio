@@ -20,7 +20,6 @@
 
 #include "movable.hpp"
 #include "universe.hpp"
-#include "scene.hpp"
 #include "camera_struct.hpp"
 #include "movable_struct.hpp"
 
@@ -92,7 +91,6 @@ namespace yli
                                 camera_struct.spherical_coordinates,
                                 camera_struct.horizontal_angle,
                                 camera_struct.vertical_angle),
-                            camera_struct.parent,
                             parent_module)
                 {
                     // constructor.

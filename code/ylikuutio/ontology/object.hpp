@@ -77,10 +77,6 @@ namespace yli
                                 object_struct.spherical_coordinates,
                                 object_struct.horizontal_angle,
                                 object_struct.vertical_angle),
-                            (object_struct.object_type == yli::ontology::ObjectType::REGULAR ? (yli::ontology::Entity*) object_struct.species_parent :
-                             object_struct.object_type == yli::ontology::ObjectType::SHAPESHIFTER ? (yli::ontology::Entity*) object_struct.shapeshifter_sequence_parent :
-                             object_struct.object_type == yli::ontology::ObjectType::CHARACTER ? (yli::ontology::Entity*) object_struct.text3D_parent :
-                             nullptr),
                             parent_module)
                 {
                     // constructor.

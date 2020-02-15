@@ -20,7 +20,6 @@
 
 #include "movable.hpp"
 #include "parent_module.hpp"
-#include "symbiosis.hpp"
 #include "holobiont_struct.hpp"
 #include "movable_struct.hpp"
 #include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
@@ -69,7 +68,6 @@ namespace yli
                                 holobiont_struct.spherical_coordinates,
                                 holobiont_struct.horizontal_angle,
                                 holobiont_struct.vertical_angle),
-                            holobiont_struct.symbiosis_parent,
                             parent_module),
                     parent_of_bionts(this)
                 {
