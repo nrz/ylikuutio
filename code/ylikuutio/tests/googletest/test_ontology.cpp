@@ -2493,6 +2493,144 @@ TEST(object_must_bind_to_species_appropriately, species_of_different_materials)
     ASSERT_EQ(universe->get_number_of_descendants(), 8);
 }
 
+TEST(shapeshifter_transformation_must_bind_to_material_appropriately, materials_of_the_same_shader)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct1;
+    scene_struct1.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct1, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::MaterialStruct material_struct1;
+    material_struct1.shader = shader;
+    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &shader->parent_of_materials);
+
+    yli::ontology::SpeciesStruct shapeshifter_transformation_struct;
+    shapeshifter_transformation_struct.scene = scene;
+    shapeshifter_transformation_struct.shader = shader;
+    shapeshifter_transformation_struct.material = material1;
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(universe, shapeshifter_transformation_struct);
+    ASSERT_EQ(shapeshifter_transformation->get_parent(), material1);
+    ASSERT_EQ(material1->get_number_of_children(), 1);
+    ASSERT_EQ(material1->get_number_of_descendants(), 1);
+
+    yli::ontology::MaterialStruct material_struct2;
+    material_struct2.shader = shader;
+    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &shader->parent_of_materials);
+    ASSERT_EQ(material2->get_number_of_children(), 0);
+    ASSERT_EQ(material2->get_number_of_descendants(), 0);
+
+    shapeshifter_transformation->bind_to_new_parent(material2);
+    ASSERT_EQ(shapeshifter_transformation->get_parent(), material2);
+    ASSERT_EQ(material1->get_number_of_children(), 0);
+    ASSERT_EQ(material1->get_number_of_descendants(), 0);
+    ASSERT_EQ(material2->get_number_of_children(), 1);
+    ASSERT_EQ(material2->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader->get_number_of_children(), 2);
+    ASSERT_EQ(shader->get_number_of_descendants(), 3);
+    ASSERT_EQ(scene->get_number_of_children(), 1);
+    ASSERT_EQ(scene->get_number_of_descendants(), 4);
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 5);
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 6);
+
+    shapeshifter_transformation->bind_to_new_parent(material1);
+    ASSERT_EQ(shapeshifter_transformation->get_parent(), material1);
+    ASSERT_EQ(material1->get_number_of_children(), 1);
+    ASSERT_EQ(material1->get_number_of_descendants(), 1);
+    ASSERT_EQ(material2->get_number_of_children(), 0);
+    ASSERT_EQ(material2->get_number_of_descendants(), 0);
+    ASSERT_EQ(shader->get_number_of_children(), 2);
+    ASSERT_EQ(shader->get_number_of_descendants(), 3);
+    ASSERT_EQ(scene->get_number_of_children(), 1);
+    ASSERT_EQ(scene->get_number_of_descendants(), 4);
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 5);
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 6);
+}
+
+TEST(shapeshifter_transformation_must_bind_to_material_appropriately, materials_of_different_shaders)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct1;
+    scene_struct1.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct1, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct1;
+    shader_struct1.parent = scene;
+    yli::ontology::Shader* const shader1 = new yli::ontology::Shader(universe, shader_struct1);
+
+    yli::ontology::MaterialStruct material_struct1;
+    material_struct1.shader = shader1;
+    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &shader1->parent_of_materials);
+
+    yli::ontology::SpeciesStruct shapeshifter_transformation_struct;
+    shapeshifter_transformation_struct.scene = scene;
+    shapeshifter_transformation_struct.shader = shader1;
+    shapeshifter_transformation_struct.material = material1;
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(universe, shapeshifter_transformation_struct);
+    ASSERT_EQ(shapeshifter_transformation->get_parent(), material1);
+    ASSERT_EQ(material1->get_number_of_children(), 1);
+    ASSERT_EQ(material1->get_number_of_descendants(), 1);
+
+    yli::ontology::ShaderStruct shader_struct2;
+    shader_struct2.parent = scene;
+    yli::ontology::Shader* const shader2 = new yli::ontology::Shader(universe, shader_struct2);
+
+    yli::ontology::MaterialStruct material_struct2;
+    material_struct2.shader = shader2;
+    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &shader2->parent_of_materials);
+    ASSERT_EQ(material2->get_number_of_children(), 0);
+    ASSERT_EQ(material2->get_number_of_descendants(), 0);
+
+    shapeshifter_transformation->bind_to_new_parent(material2);
+    ASSERT_EQ(shapeshifter_transformation->get_parent(), material2);
+    ASSERT_EQ(material1->get_number_of_children(), 0);
+    ASSERT_EQ(material1->get_number_of_descendants(), 0);
+    ASSERT_EQ(material2->get_number_of_children(), 1);
+    ASSERT_EQ(material2->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader1->get_number_of_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader2->get_number_of_children(), 1);
+    ASSERT_EQ(shader2->get_number_of_descendants(), 2);
+    ASSERT_EQ(scene->get_number_of_children(), 2);
+    ASSERT_EQ(scene->get_number_of_descendants(), 5);
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 6);
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 7);
+
+    shapeshifter_transformation->bind_to_new_parent(material1);
+    ASSERT_EQ(shapeshifter_transformation->get_parent(), material1);
+    ASSERT_EQ(material1->get_number_of_children(), 1);
+    ASSERT_EQ(material1->get_number_of_descendants(), 1);
+    ASSERT_EQ(material2->get_number_of_children(), 0);
+    ASSERT_EQ(material2->get_number_of_descendants(), 0);
+    ASSERT_EQ(shader1->get_number_of_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_descendants(), 2);
+    ASSERT_EQ(shader2->get_number_of_children(), 1);
+    ASSERT_EQ(shader2->get_number_of_descendants(), 1);
+    ASSERT_EQ(scene->get_number_of_children(), 2);
+    ASSERT_EQ(scene->get_number_of_descendants(), 5);
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 6);
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 7);
+}
+
 TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
 {
     yli::ontology::UniverseStruct universe_struct;
