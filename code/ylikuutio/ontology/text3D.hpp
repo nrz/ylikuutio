@@ -49,6 +49,7 @@ namespace yli
         class Entity;
         class Universe;
         class Object;
+        class ParentModule;
 
         class Text3D: public yli::ontology::Movable
         {
@@ -65,22 +66,22 @@ namespace yli
                 // TODO: `Text3D` constructor also creates each `Object`,
                 // and binds each to its corresponding `Glyph` for rendering hierarchy,
                 // and also binds each to this `Text3D` for ontological hierarchy.
-                Text3D(yli::ontology::Universe* const universe, const yli::ontology::Text3DStruct& text3D_struct)
-                    : Movable(universe, yli::ontology::MovableStruct(
+                Text3D(yli::ontology::Universe* const universe, const yli::ontology::Text3DStruct& text3D_struct, yli::ontology::ParentModule* const parent_module)
+                    : Movable(
+                            universe,
+                            yli::ontology::MovableStruct(
                                 text3D_struct.brain,
                                 text3D_struct.cartesian_coordinates,
                                 text3D_struct.spherical_coordinates,
                                 text3D_struct.horizontal_angle,
-                                text3D_struct.vertical_angle)),
+                                text3D_struct.vertical_angle),
+                            text3D_struct.parent,
+                            parent_module),
                     parent_of_objects(this)
                 {
                     // constructor.
                     this->rotate_angle = NAN;
                     this->text_string  = text3D_struct.text_string;
-                    this->parent       = text3D_struct.parent;
-
-                    // get childID from `VectorFont` and set pointer to this `Text3D`.
-                    this->bind_to_parent();
 
                     std::cout << "Creating the glyph Objects for the string \"" << this->text_string << "\"\n";
 
@@ -99,7 +100,6 @@ namespace yli
                 // destructor.
                 virtual ~Text3D();
 
-                yli::ontology::Entity* get_parent() const override;
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
@@ -111,11 +111,7 @@ namespace yli
                 yli::ontology::ParentModule parent_of_objects;
 
             private:
-                void bind_to_parent();
-
                 std::string text_string;
-
-                yli::ontology::VectorFont* parent; // pointer to the `VectorFont`.
 
                 glm::vec3 original_scale_vector;   // original scale vector.
                 float rotate_angle;                // rotate angle.

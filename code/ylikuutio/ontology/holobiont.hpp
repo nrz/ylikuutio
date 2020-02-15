@@ -19,7 +19,6 @@
 #define __HOLOBIONT_HPP_INCLUDED
 
 #include "movable.hpp"
-#include "child_module.hpp"
 #include "parent_module.hpp"
 #include "symbiosis.hpp"
 #include "holobiont_struct.hpp"
@@ -58,14 +57,20 @@ namespace yli
         {
             public:
                 // constructor.
-                Holobiont(yli::ontology::Universe* const universe, const yli::ontology::HolobiontStruct& holobiont_struct, yli::ontology::ParentModule* const parent_module)
-                    : Movable(universe, yli::ontology::MovableStruct(
+                Holobiont(
+                        yli::ontology::Universe* const universe,
+                        const yli::ontology::HolobiontStruct& holobiont_struct,
+                        yli::ontology::ParentModule* const parent_module)
+                    : Movable(
+                            universe,
+                            yli::ontology::MovableStruct(
                                 holobiont_struct.brain,
                                 holobiont_struct.cartesian_coordinates,
                                 holobiont_struct.spherical_coordinates,
                                 holobiont_struct.horizontal_angle,
-                                holobiont_struct.vertical_angle)),
-                    child_of_symbiosis(parent_module, this),
+                                holobiont_struct.vertical_angle),
+                            holobiont_struct.symbiosis_parent,
+                            parent_module),
                     parent_of_bionts(this)
                 {
                     this->original_scale_vector = holobiont_struct.original_scale_vector;
@@ -92,7 +97,6 @@ namespace yli
                 // destructor.
                 virtual ~Holobiont();
 
-                yli::ontology::Entity* get_parent() const override;
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
@@ -100,7 +104,6 @@ namespace yli
                 void update_y(float y);
                 void update_z(float z);
 
-                yli::ontology::ChildModule child_of_symbiosis;
                 yli::ontology::ParentModule parent_of_bionts;
 
             private:

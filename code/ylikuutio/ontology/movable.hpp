@@ -19,6 +19,7 @@
 #define __MOVABLE_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "child_module.hpp"
 #include "movable_struct.hpp"
 #include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
@@ -62,6 +63,7 @@ namespace yli
         class Universe;
         class Brain;
         class Waypoint;
+        class ParentModule;
 
         class Movable: public yli::ontology::Entity
         {
@@ -73,8 +75,12 @@ namespace yli
                 void bind_to_new_Brain(yli::ontology::Brain* const new_brain);
 
                 // constructor.
-                Movable(yli::ontology::Universe* const universe, const yli::ontology::MovableStruct& movable_struct)
-                    : Entity(universe)
+                Movable(yli::ontology::Universe* const universe,
+                        const yli::ontology::MovableStruct& movable_struct,
+                        yli::ontology::Entity* const parent,
+                        yli::ontology::ParentModule* const parent_module)
+                    : Entity(universe),
+                    child(parent_module, this)
                 {
                     // constructor.
                     this->input_method                = movable_struct.input_method;
@@ -178,6 +184,8 @@ namespace yli
 
                 // destructor.
                 virtual ~Movable();
+
+                yli::ontology::Entity* get_parent() const override;
 
                 const glm::vec3& get_cartesian_coordinates() const;
                 void set_cartesian_coordinates(const glm::vec3& cartesian_coordinates);
@@ -364,6 +372,9 @@ namespace yli
                 glm::mat4 MVP_matrix;                                  // model view projection matrix.
 
                 friend class Brain;
+
+            protected:
+                yli::ontology::ChildModule child;
 
             private:
                 yli::input::InputMethod input_method;                  // If `input_method` is `KEYBOARD`, then keypresses control this `Movable`.

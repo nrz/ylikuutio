@@ -21,6 +21,7 @@
 #include "movable.hpp"
 #include "shader.hpp"
 #include "symbiont_species.hpp"
+#include "holobiont.hpp"
 #include "biont_struct.hpp"
 #include "movable_struct.hpp"
 #include "family_templates.hpp"
@@ -55,24 +56,28 @@ namespace yli
     {
         class Entity;
         class Holobiont;
+        class ParentModule;
 
         class Biont: public yli::ontology::Movable
         {
             public:
                 // This method sets pointer to this `Biont` to `nullptr`, sets `parent` according to the input,
                 // and requests a new `childID` from the new `Species` or from the new `Glyph`.
-                void bind_to_new_parent(yli::ontology::Holobiont* const new_holobiont_parent);
+                void bind_to_new_parent(yli::ontology::Holobiont* const new_parent);
 
-                Biont(yli::ontology::Universe* const universe, yli::ontology::BiontStruct& biont_struct)
-                    : Movable(universe, yli::ontology::MovableStruct(
+                Biont(yli::ontology::Universe* const universe, yli::ontology::BiontStruct& biont_struct, yli::ontology::ParentModule* const parent_module)
+                    : Movable(
+                            universe,
+                            yli::ontology::MovableStruct(
                                 biont_struct.brain,
                                 biont_struct.cartesian_coordinates,
                                 biont_struct.spherical_coordinates,
                                 biont_struct.horizontal_angle,
-                                biont_struct.vertical_angle))
+                                biont_struct.vertical_angle),
+                            biont_struct.holobiont_parent,
+                            parent_module)
                 {
                     // constructor.
-                    this->holobiont_parent      = biont_struct.holobiont_parent;
                     this->symbiont_species      = biont_struct.symbiont_species;
 
                     this->original_scale_vector = biont_struct.original_scale_vector;
@@ -94,9 +99,6 @@ namespace yli
                     this->model_matrix          = glm::mat4(1.0f); // identity matrix (dummy value).
                     this->MVP_matrix            = glm::mat4(1.0f); // identity matrix (dummy value).
 
-                    // Get `childID` from `Holobiont` and set pointer to this `Biont`.
-                    this->bind_to_parent();
-
                     // Get `childID` from `SymbiontSpecies` (not a parent!) and set pointer to this `Biont`.
                     this->bind_to_SymbiontSpecies();
 
@@ -110,7 +112,6 @@ namespace yli
                 // destructor.
                 virtual ~Biont();
 
-                yli::ontology::Entity* get_parent() const override;
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
@@ -118,14 +119,12 @@ namespace yli
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
             protected:
-                void bind_to_parent();
                 void bind_to_SymbiontSpecies();
 
                 // This method renders this `Biont`.
                 void render() override;
                 void render_this_biont(const yli::ontology::Shader* const shader);
 
-                yli::ontology::Holobiont* holobiont_parent;       // pointer to the `Holobiont`.
                 yli::ontology::SymbiontSpecies* symbiont_species; // pointer to the `SymbiontSpecies` (not a parent!).
 
                 glm::vec3 original_scale_vector;       // original scale vector.

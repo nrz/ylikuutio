@@ -23,8 +23,6 @@
 #include "object_type.hpp"
 #include "object_struct.hpp"
 #include "movable_struct.hpp"
-#include "render_templates.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -57,6 +55,7 @@ namespace yli
         class ShapeshifterSequence;
         class Text3D;
         class Glyph;
+        class ParentModule;
 
         class Object: public yli::ontology::Movable
         {
@@ -69,13 +68,20 @@ namespace yli
                 void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
                 // constructor.
-                Object(yli::ontology::Universe* const universe, const yli::ontology::ObjectStruct& object_struct)
-                    : Movable(universe, yli::ontology::MovableStruct(
+                Object(yli::ontology::Universe* const universe, const yli::ontology::ObjectStruct& object_struct, yli::ontology::ParentModule* const parent_module)
+                    : Movable(
+                            universe,
+                            yli::ontology::MovableStruct(
                                 object_struct.brain,
                                 object_struct.cartesian_coordinates,
                                 object_struct.spherical_coordinates,
                                 object_struct.horizontal_angle,
-                                object_struct.vertical_angle))
+                                object_struct.vertical_angle),
+                            (object_struct.object_type == yli::ontology::ObjectType::REGULAR ? (yli::ontology::Entity*) object_struct.species_parent :
+                             object_struct.object_type == yli::ontology::ObjectType::SHAPESHIFTER ? (yli::ontology::Entity*) object_struct.shapeshifter_sequence_parent :
+                             object_struct.object_type == yli::ontology::ObjectType::CHARACTER ? (yli::ontology::Entity*) object_struct.text3D_parent :
+                             nullptr),
+                            parent_module)
                 {
                     // constructor.
                     this->original_scale_vector = object_struct.original_scale_vector;
@@ -88,27 +94,10 @@ namespace yli
 
                     this->object_type           = object_struct.object_type;
 
-                    this->species_parent               = nullptr;
-                    this->shapeshifter_sequence_parent = nullptr;
-                    this->text3D_parent                = nullptr;
-                    this->glyph                        = nullptr;
-
-                    if (this->object_type == yli::ontology::ObjectType::REGULAR)
+                    if (this->object_type == yli::ontology::ObjectType::CHARACTER)
                     {
-                        this->species_parent = object_struct.species_parent;
-                    }
-                    else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
-                    {
-                        this->shapeshifter_sequence_parent = object_struct.shapeshifter_sequence_parent;
-                    }
-                    else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
-                    {
-                        this->text3D_parent  = object_struct.text3D_parent;
                         this->glyph          = object_struct.glyph;
                     }
-
-                    // get `childID` from `Species` or `Text3D` and set pointer to this `Object`.
-                    this->bind_to_parent();
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Object*";
@@ -121,26 +110,14 @@ namespace yli
                 // destructor.
                 virtual ~Object();
 
-                yli::ontology::Entity* get_parent() const override;
-
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
-                template<class T1>
-                    friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
-
             private:
-                void bind_to_parent();
-
                 // this method renders this `Object`.
                 void render() override;
                 void render_this_object(yli::ontology::Shader* const shader_pointer);
 
-                yli::ontology::Species* species_parent; // pointer to the `Species` parent.
-                yli::ontology::ShapeshifterSequence* shapeshifter_sequence_parent; // pointer to the `ShapeshifterSequence` parent.
-                yli::ontology::Text3D* text3D_parent;   // pointer to the `Text3D` parent.
                 yli::ontology::Glyph* glyph;            // pointer to the `Glyph` (not a parent!).
 
                 yli::ontology::ObjectType object_type;

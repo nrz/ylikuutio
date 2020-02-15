@@ -20,9 +20,9 @@
 
 #include "movable.hpp"
 #include "universe.hpp"
+#include "scene.hpp"
 #include "camera_struct.hpp"
 #include "movable_struct.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -78,17 +78,22 @@ namespace yli
     namespace ontology
     {
         class Universe;
+        class ParentModule;
 
         class Camera: public yli::ontology::Movable
         {
             public:
-                Camera(yli::ontology::Universe* const universe, const yli::ontology::CameraStruct& camera_struct)
-                    : Movable(universe, yli::ontology::MovableStruct(
+                Camera(yli::ontology::Universe* const universe, const yli::ontology::CameraStruct& camera_struct, yli::ontology::ParentModule* const parent_module)
+                    : Movable(
+                            universe,
+                            yli::ontology::MovableStruct(
                                 camera_struct.brain,
                                 camera_struct.cartesian_coordinates,
                                 camera_struct.spherical_coordinates,
                                 camera_struct.horizontal_angle,
-                                camera_struct.vertical_angle))
+                                camera_struct.vertical_angle),
+                            camera_struct.parent,
+                            parent_module)
                 {
                     // constructor.
 
@@ -99,10 +104,6 @@ namespace yli
                     // variables related to the projection.
                     this->projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
                     this->view_matrix       = glm::mat4(1.0f); // identity matrix (dummy value).
-                    this->parent            = camera_struct.parent;
-
-                    // Get `childID` from the `Scene` and set pointer to this `Camera`.
-                    this->bind_to_parent();
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Camera*";
@@ -113,8 +114,6 @@ namespace yli
 
                 // destructor.
                 virtual ~Camera();
-
-                yli::ontology::Entity* get_parent() const override;
 
                 void adjust_horizontal_angle(float adjustment);
 
@@ -127,16 +126,7 @@ namespace yli
 
                 friend class Universe;
 
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
-
             private:
-                void bind_to_parent();
-
-                // variables related to location and orientation.
-
-                yli::ontology::Scene* parent;
-
                 // variables related to the projection.
                 glm::mat4 projection_matrix;
                 glm::mat4 view_matrix;
