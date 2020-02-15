@@ -57,7 +57,7 @@ namespace yli
 
         SettingMaster::SettingMaster(yli::ontology::Entity* const entity)
         {
-            // costructor.
+            // constructor.
             this->parent = entity;
             this->number_of_settings = 0;
         }

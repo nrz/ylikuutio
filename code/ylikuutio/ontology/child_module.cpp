@@ -27,17 +27,26 @@ namespace yli
         {
             // requirements:
             // `this->parent` must not be `nullptr`.
+            // `this->entity` must not be `nullptr`.
+
             if (this->parent_module == nullptr)
             {
                 return;
             }
 
-            // get `childID` from the `World` and set pointer to this `Scene`.
-            this->parent_module->bind_child(this->self);
+            if (this->entity == nullptr)
+            {
+                return;
+            }
+
+            // get `childID` from the `ParentModule` and set pointer to this `ChildModule`.
+            this->parent_module->bind_child(this->entity);
         }
 
         ChildModule::~ChildModule()
         {
+            // destructor.
+
             // requirements:
             // `this->parent` must not be `nullptr`.
 
@@ -46,13 +55,49 @@ namespace yli
                 return;
             }
 
-            if (this->self == nullptr)
+            if (this->entity == nullptr)
             {
                 return;
             }
 
             // Set pointer to this `Entity` to `nullptr`.
-            this->parent_module->unbind_child(this->self->childID);
+            this->parent_module->unbind_child(this->entity->childID);
+        }
+
+        yli::ontology::Entity* ChildModule::get_parent() const
+        {
+            if (this->parent_module == nullptr)
+            {
+                return nullptr;
+            }
+
+            return this->parent_module->get_entity();
+        }
+
+        void ChildModule::unbind_child(const std::size_t childID) const
+        {
+            if (this->parent_module == nullptr)
+            {
+                return;
+            }
+
+            this->parent_module->unbind_child(childID);
+        }
+
+        void ChildModule::set_parent_module_and_bind_to_new_parent(yli::ontology::ParentModule* const new_parent_module)
+        {
+            if (new_parent_module == nullptr)
+            {
+                return;
+            }
+
+            if (this->entity == nullptr)
+            {
+                return;
+            }
+
+            this->parent_module = new_parent_module;
+            this->parent_module->bind_child(this->entity);
         }
     }
 }

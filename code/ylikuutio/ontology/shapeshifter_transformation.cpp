@@ -129,7 +129,8 @@ namespace yli
 
         std::size_t ShapeshifterTransformation::get_number_of_children() const
         {
-            return this->parent_of_shapeshifter_forms.number_of_children + this->parent_of_shapeshifter_sequences.number_of_children;
+            return this->parent_of_shapeshifter_forms.get_number_of_children() +
+                this->parent_of_shapeshifter_sequences.get_number_of_children();
         }
 
         std::size_t ShapeshifterTransformation::get_number_of_descendants() const

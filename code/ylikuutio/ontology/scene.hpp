@@ -92,9 +92,9 @@ namespace yli
                 // constructor.
                 Scene(yli::ontology::Universe* const universe, const yli::ontology::SceneStruct& scene_struct, yli::ontology::ParentModule* const parent_module)
                     : Entity(universe),
-                    child_of_world((yli::ontology::Entity*) scene_struct.world, parent_module, this),
-                    parent_of_cameras(yli::ontology::ParentModule()),
-                    parent_of_brains(yli::ontology::ParentModule())
+                    child_of_world(parent_module, this),
+                    parent_of_cameras(this),
+                    parent_of_brains(this)
                 {
                     // constructor.
                     this->gravity               = scene_struct.gravity;

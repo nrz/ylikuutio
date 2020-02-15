@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "callback_engine_entity.hpp"
+#include "entity.hpp"
 #include "universe.hpp"
 
 // Include standard headers
@@ -28,48 +29,18 @@ namespace yli
     {
         class Entity;
 
-        void CallbackEngineEntity::bind_to_parent()
-        {
-            // Requirements:
-            // `this->parent` must not be `nullptr`.
-            yli::ontology::Universe* const universe = this->parent;
-
-            if (universe == nullptr)
-            {
-                std::cerr << "ERROR: `CallbackEngineEntity::bind_to_parent`: `universe` is `nullptr`!\n";
-                return;
-            }
-
-            // Get `childID` from the `Universe` and set pointer to this `CallbackEngineEntity`.
-            universe->parent_of_callback_engine_entities.bind_child(this);
-        }
-
         // destructor.
         CallbackEngineEntity::~CallbackEngineEntity()
         {
             // destructor.
             std::cout << "This `CallbackEngineEntity` will be destroyed.\n";
-
-            // requirements for further actions:
-            // `this->parent` must not be `nullptr`.
-
-            yli::ontology::Universe* const universe = this->parent;
-
-            if (universe == nullptr)
-            {
-                std::cerr << "ERROR: `CallbackEngineEntity::~CallbackEngineEntity`: `universe` is `nullptr`!\n";
-                return;
-            }
-
-            // set pointer to this `AnyValueEntity` to `nullptr`.
-            universe->parent_of_callback_engine_entities.unbind_child(this->childID);
         }
 
         yli::ontology::Entity* CallbackEngineEntity::get_parent() const
         {
             // Every `CallbackEngineEntity` is a child of the `Universe`.
             // The base class needs to be specified due to ambiguity caused by diamond inheritance.
-            return this->yli::ontology::Entity::universe;
+            return static_cast<yli::ontology::Entity*>(this->yli::ontology::Entity::universe);
         }
 
         std::size_t CallbackEngineEntity::get_number_of_children() const

@@ -51,16 +51,11 @@ namespace yli
             public:
                 Material(yli::ontology::Universe* const universe, const yli::ontology::MaterialStruct& material_struct, yli::ontology::ParentModule* const parent_module)
                     : Entity(universe),
-                    child_of_shader_or_symbiosis(
-                                ((material_struct.shader != nullptr && material_struct.symbiosis == nullptr) ? (yli::ontology::Entity*) material_struct.shader :
-                                 (material_struct.shader != nullptr && material_struct.symbiosis != nullptr) ? (yli::ontology::Entity*) material_struct.symbiosis :
-                                 (yli::ontology::Entity*) nullptr),
-                                parent_module,
-                                this),
-                    parent_of_species(yli::ontology::ParentModule()),
-                    parent_of_shapeshifter_transformations(yli::ontology::ParentModule()),
-                    parent_of_vector_fonts(yli::ontology::ParentModule()),
-                    parent_of_chunk_masters(yli::ontology::ParentModule())
+                    child_of_shader_or_symbiosis(parent_module, this),
+                    parent_of_species(this),
+                    parent_of_shapeshifter_transformations(this),
+                    parent_of_vector_fonts(this),
+                    parent_of_chunk_masters(this)
                 {
                     // constructor.
                     this->is_symbiont_material     = material_struct.is_symbiont_material;
@@ -97,9 +92,9 @@ namespace yli
                         }
 
                         // Get a handle for our "texture_sampler" uniform.
-                        if (this->universe != nullptr && !this->universe->get_is_headless() && this->child_of_shader_or_symbiosis.parent != nullptr)
+                        if (this->universe != nullptr && !this->universe->get_is_headless() && this->child_of_shader_or_symbiosis.get_parent() != nullptr)
                         {
-                            yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->child_of_shader_or_symbiosis.parent);
+                            yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->child_of_shader_or_symbiosis.get_parent());
                             this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "texture_sampler");
                         }
 

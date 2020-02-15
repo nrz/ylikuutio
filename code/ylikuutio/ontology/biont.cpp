@@ -56,23 +56,6 @@ namespace yli
     {
         class Entity;
 
-        void Biont::bind_to_parent()
-        {
-            // Requirements:
-            // `this->holobiont_parent` must not be `nullptr`.
-
-            yli::ontology::Holobiont* const holobiont = this->holobiont_parent;
-
-            if (holobiont == nullptr)
-            {
-                std::cerr << "ERROR: `Biont::bind_to_parent`: `holobiont` is `nullptr`!\n";
-                return;
-            }
-
-            // Get `childID` from `Holobiont` and set pointer to this `Biont`.
-            holobiont->parent_of_bionts.bind_child(this);
-        }
-
         void Biont::bind_to_SymbiontSpecies()
         {
             // Requirements:
@@ -80,7 +63,7 @@ namespace yli
             // `this->holobiont_parent->get_parent()` must not be `nullptr`.
             // `this->symbiont_species` must not be `nullptr`.
 
-            const yli::ontology::Holobiont* const holobiont = this->holobiont_parent;
+            const yli::ontology::Holobiont* const holobiont = static_cast<yli::ontology::Holobiont*>(this->child.get_parent());
 
             if (holobiont == nullptr)
             {
@@ -107,33 +90,34 @@ namespace yli
             symbiont_species->bind_Biont(this);
         }
 
-        void Biont::bind_to_new_parent(yli::ontology::Holobiont* const new_holobiont_parent)
+        void Biont::bind_to_new_parent(yli::ontology::Holobiont* const new_parent)
         {
             // This method sets pointer to this `Biont` to `nullptr`, sets `parent` according to the input,
             // and requests a new `childID` from the new `Holobiont`.
             //
             // Requirements:
             // `this->holobiont_parent` must not be `nullptr`.
-            // `new_holobiont_parent` must not be `nullptr`.
+            // `new_parent` must not be `nullptr`.
 
             // Unbind from the old parent `Holobiont`.
-            if (this->holobiont_parent == nullptr)
+            yli::ontology::Holobiont* const holobiont = static_cast<yli::ontology::Holobiont*>(this->child.get_parent());
+
+            if (holobiont == nullptr)
             {
-                std::cerr << "ERROR: `Biont::bind_to_new_parent`: `this->holobiont_parent` is `nullptr`!\n";
+                std::cerr << "ERROR: `Biont::bind_to_new_parent`: `holobiont` is `nullptr`!\n";
                 return;
             }
 
-            if (new_holobiont_parent == nullptr)
+            if (new_parent == nullptr)
             {
-                std::cerr << "ERROR: `Biont::bind_to_new_parent`: `new_holobiont_parent` is `nullptr`!\n";
+                std::cerr << "ERROR: `Biont::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
                 return;
             }
 
-            this->holobiont_parent->parent_of_bionts.unbind_child(this->childID);
+            holobiont->parent_of_bionts.unbind_child(this->childID);
 
             // Get `childID` from `Holobiont` and set pointer to this `Biont`.
-            this->holobiont_parent = new_holobiont_parent;
-            this->holobiont_parent->parent_of_bionts.bind_child(this);
+            this->child.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_bionts);
         }
 
         Biont::~Biont()
@@ -141,18 +125,9 @@ namespace yli
             // destructor.
             //
             // Requirements:
-            // `this->holobiont_parent` must not be `nullptr`.
             // `this->symbiont_species` must not be `nullptr`.
 
             std::cout << "Biont with childID " << std::dec << this->childID << " will be destroyed.\n";
-
-            yli::ontology::Holobiont* const holobiont = this->holobiont_parent;
-
-            if (holobiont == nullptr)
-            {
-                std::cerr << "ERROR: `Biont::~Biont`: `holobiont` is `nullptr`!\n";
-                return;
-            }
 
             yli::ontology::SymbiontSpecies* const symbiont_species = this->symbiont_species;
 
@@ -164,7 +139,6 @@ namespace yli
 
             // Set pointer to this `Biont` to `nullptr`.
             symbiont_species->unbind_Biont(this->childID);
-            holobiont->parent_of_bionts.unbind_child(this->childID);
         }
 
         void Biont::render()
@@ -175,7 +149,7 @@ namespace yli
             // `this->holobiont_parent` must not be `nullptr`.
             // `this->holobiont_parent->get_parent()` must not be `nullptr`.
 
-            const yli::ontology::Holobiont* const holobiont = this->holobiont_parent;
+            const yli::ontology::Holobiont* const holobiont = static_cast<yli::ontology::Holobiont*>(this->child.get_parent());
 
             if (holobiont == nullptr)
             {
@@ -221,7 +195,7 @@ namespace yli
                 return;
             }
 
-            const yli::ontology::Holobiont* const holobiont = this->holobiont_parent;
+            const yli::ontology::Holobiont* const holobiont = static_cast<yli::ontology::Holobiont*>(this->child.get_parent());
 
             if (holobiont == nullptr)
             {
@@ -352,11 +326,6 @@ namespace yli
                     GL_UNSIGNED_INT,              // type
                     (void*) 0                     // element array buffer offset
                     );
-        }
-
-        yli::ontology::Entity* Biont::get_parent() const
-        {
-            return this->holobiont_parent;
         }
 
         std::size_t Biont::get_number_of_children() const

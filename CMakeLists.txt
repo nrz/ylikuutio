@@ -531,8 +531,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/console.cpp
     code/ylikuutio/ontology/console.hpp
     code/ylikuutio/ontology/console_callbacks.cpp
-    code/ylikuutio/ontology/creature.cpp
-    code/ylikuutio/ontology/creature.hpp
     code/ylikuutio/ontology/get_content_callback.hpp
     code/ylikuutio/ontology/gl_attrib_locations.cpp
     code/ylikuutio/ontology/gl_attrib_locations.hpp
@@ -571,10 +569,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/post_render_callback.hpp
     code/ylikuutio/ontology/pre_render_callback.hpp
     code/ylikuutio/ontology/render_templates.hpp
-    code/ylikuutio/ontology/rail_vehicle.cpp
-    code/ylikuutio/ontology/rail_vehicle.hpp
-    code/ylikuutio/ontology/road_vehicle.cpp
-    code/ylikuutio/ontology/road_vehicle.hpp
     code/ylikuutio/ontology/scene.cpp
     code/ylikuutio/ontology/scene.hpp
     code/ylikuutio/ontology/scene_struct.hpp
@@ -620,8 +614,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/vector_font.cpp
     code/ylikuutio/ontology/vector_font.hpp
     code/ylikuutio/ontology/vector_font_struct.hpp
-    code/ylikuutio/ontology/vehicle.cpp
-    code/ylikuutio/ontology/vehicle.hpp
     code/ylikuutio/ontology/vertex_graph.cpp
     code/ylikuutio/ontology/vertex_graph.hpp
     code/ylikuutio/ontology/vertex_node.cpp

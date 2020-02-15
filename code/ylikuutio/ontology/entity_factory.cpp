@@ -31,6 +31,7 @@
 #include "text3D.hpp"
 #include "font2D.hpp"
 #include "console.hpp"
+#include "shapeshifter_sequence.hpp"
 #include "camera.hpp"
 #include "compute_task.hpp"
 #include "brain.hpp"
@@ -109,7 +110,13 @@ namespace yli
 
         yli::ontology::Entity* EntityFactory::create_Object(const yli::ontology::ObjectStruct& object_struct) const
         {
-            return new yli::ontology::Object(this->universe, object_struct);
+            return new yli::ontology::Object(
+                    this->universe,
+                    object_struct,
+                    (object_struct.object_type == yli::ontology::ObjectType::REGULAR ? &object_struct.species_parent->parent_of_objects :
+                     object_struct.object_type == yli::ontology::ObjectType::SHAPESHIFTER ? &object_struct.shapeshifter_sequence_parent->parent_of_objects :
+                     object_struct.object_type == yli::ontology::ObjectType::CHARACTER ? &object_struct.text3D_parent->parent_of_objects :
+                     nullptr));
         }
 
         yli::ontology::Entity* EntityFactory::create_Symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const
@@ -134,7 +141,7 @@ namespace yli
 
         yli::ontology::Entity* EntityFactory::create_Text3D(const yli::ontology::Text3DStruct& text3D_struct) const
         {
-            return new yli::ontology::Text3D(this->universe, text3D_struct);
+            return new yli::ontology::Text3D(this->universe, text3D_struct, (text3D_struct.parent == nullptr ? nullptr : &text3D_struct.parent->parent_of_text3Ds));
         }
 
         yli::ontology::Entity* EntityFactory::create_Font2D(const yli::ontology::FontStruct& font_struct) const
@@ -144,12 +151,12 @@ namespace yli
 
         yli::ontology::Entity* EntityFactory::create_Console() const
         {
-            return new yli::ontology::Console(this->universe);
+            return new yli::ontology::Console(this->universe, (this->universe == nullptr ? nullptr : &this->universe->parent_of_consoles));
         }
 
         yli::ontology::Entity* EntityFactory::create_Camera(const yli::ontology::CameraStruct& camera_struct) const
         {
-            return new yli::ontology::Camera(this->universe, camera_struct);
+            return new yli::ontology::Camera(this->universe, camera_struct, (camera_struct.parent == nullptr ? nullptr : &camera_struct.parent->parent_of_cameras));
         }
 
         yli::ontology::Entity* EntityFactory::create_ComputeTask(const yli::ontology::ComputeTaskStruct& compute_task_struct) const
@@ -184,7 +191,10 @@ namespace yli
 
         yli::ontology::Entity* EntityFactory::create_CallbackEngineEntity(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback) const
         {
-            return new yli::ontology::CallbackEngineEntity(this->universe, callback);
+            return new yli::ontology::CallbackEngineEntity(
+                    this->universe,
+                    callback,
+                    (this->universe == nullptr ? nullptr : &this->universe->parent_of_callback_engine_entities));
         }
     }
 }

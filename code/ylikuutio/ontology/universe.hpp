@@ -310,12 +310,12 @@ namespace yli
                 // constructor.
                 Universe(const yli::ontology::UniverseStruct& universe_struct)
                     : Entity(this), // `Universe` has no parent.
-                    parent_of_worlds(yli::ontology::ParentModule()),
-                    parent_of_font2Ds(yli::ontology::ParentModule()),
-                    parent_of_consoles(yli::ontology::ParentModule()),
-                    parent_of_any_value_entities(yli::ontology::ParentModule()),
-                    parent_of_any_struct_entities(yli::ontology::ParentModule()),
-                    parent_of_callback_engine_entities(yli::ontology::ParentModule())
+                    parent_of_worlds(this),
+                    parent_of_font2Ds(this),
+                    parent_of_consoles(this),
+                    parent_of_any_value_entities(this),
+                    parent_of_any_struct_entities(this),
+                    parent_of_callback_engine_entities(this)
                 {
                     // call `bind_Entity` here since it couldn't be performed from `Entity` constructor.
                     this->bind_Entity(this);

@@ -75,12 +75,15 @@ namespace yli
 
         yli::ontology::Entity* Material::get_parent() const
         {
-            return this->child_of_shader_or_symbiosis.parent;
+            return this->child_of_shader_or_symbiosis.get_parent();
         }
 
         std::size_t Material::get_number_of_children() const
         {
-            return this->parent_of_species.number_of_children + this->parent_of_shapeshifter_transformations.number_of_children + this->parent_of_vector_fonts.number_of_children + this->parent_of_chunk_masters.number_of_children;
+            return this->parent_of_species.get_number_of_children() +
+                this->parent_of_shapeshifter_transformations.get_number_of_children() +
+                this->parent_of_vector_fonts.get_number_of_children() +
+                this->parent_of_chunk_masters.get_number_of_children();
         }
 
         std::size_t Material::get_number_of_descendants() const
@@ -103,7 +106,7 @@ namespace yli
                 return;
             }
 
-            yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->child_of_shader_or_symbiosis.parent);
+            yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->child_of_shader_or_symbiosis.get_parent());
 
             if (shader == nullptr)
             {
@@ -121,8 +124,7 @@ namespace yli
             shader->parent_of_materials.unbind_child(this->childID);
 
             // Get `childID` from `Shader` and set pointer to this `Material`.
-            this->child_of_shader_or_symbiosis.parent = new_parent;
-            new_parent->parent_of_materials.bind_child(this);
+            this->child_of_shader_or_symbiosis.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_materials);
         }
 
         void Material::set_terrain_species(yli::ontology::Species* const terrain_species)
@@ -135,7 +137,7 @@ namespace yli
                 return;
             }
 
-            yli::ontology::Shader* const shader_parent = static_cast<yli::ontology::Shader*>(this->child_of_shader_or_symbiosis.parent);
+            yli::ontology::Shader* const shader_parent = static_cast<yli::ontology::Shader*>(this->child_of_shader_or_symbiosis.get_parent());
 
             if (shader_parent != nullptr)
             {

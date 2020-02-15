@@ -19,9 +19,9 @@
 #define __CALLBACK_ENGINE_ENTITY_HPP_INCLUDED
 
 #include "code/ylikuutio/callback/callback_engine.hpp"
+#include "child_module.hpp"
 #include "entity.hpp"
 #include "code/ylikuutio/callback/input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -33,19 +33,19 @@ namespace yli
     namespace ontology
     {
         class Universe;
+        class ParentModule;
 
         class CallbackEngineEntity: public yli::callback::CallbackEngine, public yli::ontology::Entity
         {
             public:
                 // constructor.
-                CallbackEngineEntity(yli::ontology::Universe* const universe, const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
-                    : Entity(universe)
+                CallbackEngineEntity(
+                        yli::ontology::Universe* const universe,
+                        const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
+                        yli::ontology::ParentModule* const parent_module)
+                    : Entity(universe),
+                    child_of_universe(parent_module, this)
                 {
-                    this->parent = universe;
-
-                    // Get `childID` from `Universe` and set pointer to this `CallbackEngineEntity`.
-                    this->bind_to_parent();
-
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::CallbackEngineEntity*";
                     this->can_be_erased = true;
@@ -61,13 +61,7 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
-
-            private:
-                void bind_to_parent();
-
-                yli::ontology::Universe* parent;
+                yli::ontology::ChildModule child_of_universe;
         };
     }
 }

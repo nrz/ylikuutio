@@ -65,7 +65,7 @@ namespace yli
             // requirements:
             // `this->symbiosis_parent` must not be `nullptr`.
 
-            yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->child_of_symbiosis.parent);
+            yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->child.get_parent());
 
             if (symbiosis == nullptr)
             {
@@ -101,7 +101,7 @@ namespace yli
 
                 std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
-                new yli::ontology::Biont(this->universe, biont_struct);
+                new yli::ontology::Biont(this->universe, biont_struct, &this->parent_of_bionts);
             }
         }
 
@@ -156,14 +156,9 @@ namespace yli
             }
         }
 
-        yli::ontology::Entity* Holobiont::get_parent() const
-        {
-            return this->child_of_symbiosis.parent;
-        }
-
         std::size_t Holobiont::get_number_of_children() const
         {
-            return this->parent_of_bionts.number_of_children;
+            return this->parent_of_bionts.get_number_of_children();
         }
 
         std::size_t Holobiont::get_number_of_descendants() const

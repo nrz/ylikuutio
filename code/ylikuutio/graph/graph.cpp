@@ -49,6 +49,7 @@ namespace yli
             yli::hierarchy::unbind_child_from_parent(
                     childID,
                     this->node_pointer_vector,
+                    this->free_nodeID_queue,
                     this->number_of_nodes);
         }
 

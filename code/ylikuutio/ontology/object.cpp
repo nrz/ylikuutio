@@ -18,6 +18,7 @@
 #include "object.hpp"
 #include "object_type.hpp"
 #include "glyph.hpp"
+#include "material.hpp"
 #include "species.hpp"
 #include "shapeshifter_sequence.hpp"
 #include "model.hpp"
@@ -53,58 +54,7 @@ namespace yli
     namespace ontology
     {
         class Entity;
-
-        void Object::bind_to_parent()
-        {
-            if (this->object_type == yli::ontology::ObjectType::REGULAR)
-            {
-                // requirements for further actions in this block:
-                // `this->species_parent` must not be `nullptr`.
-
-                yli::ontology::Species* const species = this->species_parent;
-
-                if (species == nullptr)
-                {
-                    std::cerr << "ERROR: `Object::bind_to_parent`: `species` is `nullptr`!\n";
-                    return;
-                }
-
-                // get `childID` from `Species` and set pointer to this `Object`.
-                species->parent_of_objects.bind_child(this);
-            }
-            else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
-            {
-                // requirements for further actions in this block:
-                // `this->shapeshifter_sequence_parent` must not be `nullptr`.
-
-                yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = this->shapeshifter_sequence_parent;
-
-                if (shapeshifter_sequence == nullptr)
-                {
-                    std::cerr << "ERROR: `Object::bind_to_parent`: `shapeshifter_sequence` is `nullptr`!\n";
-                    return;
-                }
-
-                // get `childID` from `ShapeshifterSequence` and set pointer to this `Object`.
-                shapeshifter_sequence->parent_of_objects.bind_child(this);
-            }
-            else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
-            {
-                // requirements for further actions in this block:
-                // `this->text3D_parent` must not be `nullptr`.
-
-                yli::ontology::Text3D* const text3D = this->text3D_parent;
-
-                if (text3D == nullptr)
-                {
-                    std::cerr << "ERROR: `Object::bind_to_parent`: `text3D` is `nullptr`!\n";
-                    return;
-                }
-
-                // get `childID` from `Text3D` and set pointer to this `Object`.
-                text3D->parent_of_objects.bind_child(this);
-            }
-        }
+        class Shader;
 
         void Object::bind_to_new_parent(yli::ontology::Species* const new_parent)
         {
@@ -117,7 +67,7 @@ namespace yli
                 // `this->species_parent` must not be `nullptr`.
                 // `new_parent` must not be `nullptr`.
 
-                yli::ontology::Species* const species = this->species_parent;
+                yli::ontology::Entity* const species = this->child.get_parent();
 
                 if (species == nullptr)
                 {
@@ -132,11 +82,10 @@ namespace yli
                 }
 
                 // unbind from the old parent `Species`.
-                species->parent_of_objects.unbind_child(this->childID);
+                this->child.unbind_child(this->childID);
 
                 // get `childID` from `Species` and set pointer to this `Object`.
-                this->species_parent = static_cast<yli::ontology::Species*>(new_parent);
-                this->species_parent->parent_of_objects.bind_child(this);
+                this->child.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_objects);
             }
         }
 
@@ -151,7 +100,7 @@ namespace yli
                 // `this->shapeshifter_sequence_parent` must not be `nullptr`.
                 // `new_parent` must not be `nullptr`.
 
-                yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = this->shapeshifter_sequence_parent;
+                yli::ontology::Entity* const shapeshifter_sequence = this->child.get_parent();
 
                 if (shapeshifter_sequence == nullptr)
                 {
@@ -166,11 +115,10 @@ namespace yli
                 }
 
                 // unbind from the old parent `ShapeshifterSequence`.
-                shapeshifter_sequence->parent_of_objects.unbind_child(this->childID);
+                this->child.unbind_child(this->childID);
 
                 // get `childID` from `ShapeshifterSequence` and set pointer to this `Object`.
-                this->shapeshifter_sequence_parent = static_cast<yli::ontology::ShapeshifterSequence*>(new_parent);
-                this->shapeshifter_sequence_parent->parent_of_objects.bind_child(this);
+                this->child.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_objects);
             }
         }
 
@@ -185,7 +133,7 @@ namespace yli
                 // `this->text3D_parent` must not be `nullptr`.
                 // `new_parent` must not be `nullptr`.
 
-                yli::ontology::Text3D* const text3D = this->text3D_parent;
+                yli::ontology::Entity* const text3D = this->child.get_parent();
 
                 if (text3D == nullptr)
                 {
@@ -200,11 +148,10 @@ namespace yli
                 }
 
                 // unbind from the old parent `Text3D`.
-                text3D->parent_of_objects.unbind_child(this->childID);
+                this->child.unbind_child(this->childID);
 
                 // get `childID` from `Text3D` and set pointer to this `Object`.
-                this->text3D_parent = static_cast<yli::ontology::Text3D*>(new_parent);
-                this->text3D_parent->parent_of_objects.bind_child(this);
+                this->child.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_objects);
             }
         }
 
@@ -239,59 +186,6 @@ namespace yli
         {
             // destructor.
             std::cout << "`Object` with childID " << std::dec << this->childID << " will be destroyed.\n";
-
-            // set pointer to this object to `nullptr`.
-            if (this->object_type == yli::ontology::ObjectType::REGULAR)
-            {
-                // requirements for further actions in this block:
-                // `this->species_parent` must not be `nullptr`.
-
-                yli::ontology::Species* species = this->species_parent;
-
-                if (species == nullptr)
-                {
-                    std::cerr << "ERROR: `Object::~Object`: `species` is `nullptr`!\n";
-                    return;
-                }
-
-                species->parent_of_objects.unbind_child(this->childID);
-            }
-            else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
-            {
-                // requirements for further actions in this block:
-                // `this->species_parent` must not be `nullptr`.
-
-                yli::ontology::ShapeshifterSequence* shapeshifter_sequence = this->shapeshifter_sequence_parent;
-
-                if (shapeshifter_sequence == nullptr)
-                {
-                    std::cerr << "ERROR: `Object::~Object`: `shapeshifter_sequence` is `nullptr`!\n";
-                    return;
-                }
-
-                shapeshifter_sequence->parent_of_objects.unbind_child(this->childID);
-            }
-            else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
-            {
-                if (this->glyph != nullptr)
-                {
-                    std::string unicode_string = this->glyph->get_unicode_char_pointer();
-                    std::cout << "`Object` with childID " << std::dec << this->childID << " (Unicode: \"" << unicode_string << "\") will be destroyed.\n";
-                }
-
-                // requirements for further actions in this block:
-                // `this->text3D_parent` must not be `nullptr`.
-
-                yli::ontology::Text3D* text3D = this->text3D_parent;
-
-                if (text3D == nullptr)
-                {
-                    std::cerr << "ERROR: `Object::~Object`: `text3D` is `nullptr`!\n";
-                    return;
-                }
-
-                text3D->parent_of_objects.unbind_child(this->childID);
-            }
         }
 
         void Object::render()
@@ -304,7 +198,22 @@ namespace yli
 
                 if (this->object_type == yli::ontology::ObjectType::REGULAR)
                 {
-                    this->render_this_object(static_cast<yli::ontology::Shader*>(this->species_parent->get_parent()->get_parent()));
+                    yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->child.get_parent());
+
+                    if (species == nullptr)
+                    {
+                        return;
+                    }
+
+                    yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(species->get_parent());
+
+                    if (material == nullptr)
+                    {
+                        return;
+                    }
+
+                    yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(material->get_parent());
+                    this->render_this_object(shader);
                 }
                 else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
                 {
@@ -332,7 +241,14 @@ namespace yli
 
             if (this->object_type == yli::ontology::ObjectType::REGULAR)
             {
-                const std::string model_file_format = this->species_parent->get_model_file_format();
+                yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->child.get_parent());
+
+                if (species == nullptr)
+                {
+                    return;
+                }
+
+                const std::string model_file_format = species->get_model_file_format();
 
                 if (model_file_format == "fbx" || model_file_format == "FBX")
                 {
@@ -361,7 +277,7 @@ namespace yli
 
             if (this->object_type == yli::ontology::ObjectType::REGULAR)
             {
-                parent_model = this->species_parent;
+                parent_model = static_cast<yli::ontology::Species*>(this->child.get_parent());
             }
             else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
             {
@@ -424,24 +340,6 @@ namespace yli
                     GL_UNSIGNED_INT, // type
                     (void*) 0        // element array buffer offset
                     );
-        }
-
-        yli::ontology::Entity* Object::get_parent() const
-        {
-            if (this->object_type == yli::ontology::ObjectType::REGULAR)
-            {
-                return this->species_parent;
-            }
-            else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
-            {
-                return this->shapeshifter_sequence_parent;
-            }
-            else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
-            {
-                return this->text3D_parent;
-            }
-
-            return nullptr;
         }
 
         std::size_t Object::get_number_of_children() const

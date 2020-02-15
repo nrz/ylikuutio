@@ -72,6 +72,11 @@ namespace yli
             this->unbind_from_Brain();
         }
 
+        yli::ontology::Entity* Movable::get_parent() const
+        {
+            return this->child.get_parent();
+        }
+
         const glm::vec3& Movable::get_cartesian_coordinates() const
         {
             return this->cartesian_coordinates;

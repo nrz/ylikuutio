@@ -30,8 +30,6 @@ namespace yli
 {
     namespace ontology
     {
-        class Movable;
-
         void Brain::bind_Movable(yli::ontology::Movable* const movable)
         {
             // get `childID` from `Brain` and set pointer to `movable`.
@@ -48,6 +46,7 @@ namespace yli
             yli::hierarchy::unbind_child_from_parent(
                     movableID,
                     this->movable_pointer_vector,
+                    this->free_movableID_queue,
                     this->number_of_movables);
         }
 
@@ -68,7 +67,7 @@ namespace yli
 
         yli::ontology::Entity* Brain::get_parent() const
         {
-            return this->child_of_scene.parent;
+            return this->child_of_scene.get_parent();
         }
 
         std::size_t Brain::get_number_of_children() const

@@ -71,15 +71,13 @@ namespace yli
             this->can_be_erased = false;
             this->should_be_rendered = (this->universe == nullptr ? false : !this->universe->get_is_headless());
 
-            yli::config::SettingMaster* const setting_master = this->get_setting_master();
-
             yli::config::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::common::AnyValue>(this->should_be_rendered));
             should_be_rendered_setting_struct.name = "should_be_rendered";
             should_be_rendered_setting_struct.activate_callback = &yli::config::SettingMaster::activate_should_be_rendered;
             should_be_rendered_setting_struct.read_callback = &yli::config::SettingMaster::read_should_be_rendered;
             should_be_rendered_setting_struct.should_ylikuutio_call_activate_callback_now = true;
             std::cout << "Executing `setting_master->create_Setting(should_be_rendered_setting_struct);` ...\n";
-            setting_master->create_Setting(should_be_rendered_setting_struct);
+            this->setting_master->create_Setting(should_be_rendered_setting_struct);
         }
 
         Entity::~Entity()

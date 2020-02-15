@@ -72,6 +72,7 @@ namespace yli
             yli::hierarchy::unbind_child_from_parent(
                     childID,
                     this->shader_pointer_vector,
+                    this->free_shaderID_queue,
                     this->number_of_shaders);
         }
 
@@ -84,7 +85,7 @@ namespace yli
             // `this->parent` must not be `nullptr`.
             // `new_parent` must not be `nullptr`.
 
-            yli::ontology::Entity* const world = this->child_of_world.parent;
+            yli::ontology::Entity* const world = this->child_of_world.get_parent();
 
             if (world == nullptr)
             {
@@ -99,11 +100,10 @@ namespace yli
             }
 
             // Unbind from the old parent `World`.
-            this->child_of_world.parent_module->unbind_child(this->childID);
+            this->child_of_world.unbind_child(this->childID);
 
             // Get `childID` from `World` and set pointer to this `Scene`.
-            this->child_of_world.parent = (yli::ontology::Entity*) new_parent;
-            new_parent->parent_of_scenes.bind_child(this);
+            this->child_of_world.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_scenes);
         }
 
         void Scene::bind_to_new_parent(yli::ontology::Entity* const new_parent)
@@ -264,12 +264,12 @@ namespace yli
 
         yli::ontology::Entity* Scene::get_parent() const
         {
-            return this->child_of_world.parent;
+            return this->child_of_world.get_parent();
         }
 
         std::size_t Scene::get_number_of_children() const
         {
-            return this->number_of_shaders + this->parent_of_cameras.number_of_children + this->parent_of_brains.number_of_children;
+            return this->number_of_shaders + this->parent_of_cameras.get_number_of_children() + this->parent_of_brains.get_number_of_children();
         }
 
         std::size_t Scene::get_number_of_descendants() const

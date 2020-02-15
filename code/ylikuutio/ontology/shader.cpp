@@ -158,7 +158,9 @@ namespace yli
 
         std::size_t Shader::get_number_of_children() const
         {
-            return this->parent_of_compute_tasks.number_of_children + this->parent_of_materials.number_of_children + this->parent_of_symbioses.number_of_children;
+            return this->parent_of_compute_tasks.get_number_of_children() +
+                this->parent_of_materials.get_number_of_children() +
+                this->parent_of_symbioses.get_number_of_children();
         }
 
         std::size_t Shader::get_number_of_descendants() const

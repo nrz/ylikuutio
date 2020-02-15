@@ -21,7 +21,6 @@
 #include "entity.hpp"
 #include "parent_module.hpp"
 #include "species_or_glyph.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -54,7 +53,7 @@ namespace yli
                 // constructor.
                 Model(yli::ontology::Universe* const universe, const bool opengl_in_use)
                     : Entity(universe),
-                    parent_of_objects(yli::ontology::ParentModule())
+                    parent_of_objects(this)
                 {
                     // constructor.
 
@@ -108,8 +107,6 @@ namespace yli
                 void store_vertexUVID(const GLint vertexUVID);
                 void store_vertex_normal_modelspaceID(const GLint vertex_normal_modelspaceID);
 
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template<class T1>
                     friend void yli::ontology::render_species_or_glyph(T1 species_or_glyph_pointer);
 

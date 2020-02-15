@@ -49,7 +49,7 @@ namespace yli
                 // constructor.
                 Text2D(yli::ontology::Universe* const universe, const yli::ontology::TextStruct& text_struct, yli::ontology::ParentModule* const parent_module)
                     : Entity(universe),
-                    child_of_font2D((yli::ontology::Entity*) text_struct.font2D_parent, parent_module, this)
+                    child_of_font2D(parent_module, this)
                 {
                     this->text = text_struct.text;
                     this->horizontal_alignment = text_struct.horizontal_alignment;
@@ -77,7 +77,7 @@ namespace yli
                         glGenBuffers(1, &this->uvbuffer);
 
                         // Get a handle for our buffers.
-                        yli::ontology::Font2D* const font2D = static_cast<yli::ontology::Font2D*>(this->child_of_font2D.parent);
+                        yli::ontology::Font2D* const font2D = static_cast<yli::ontology::Font2D*>(this->child_of_font2D.get_parent());
 
                         if (font2D != nullptr)
                         {

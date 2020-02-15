@@ -49,8 +49,8 @@ namespace yli
                 // constructor.
                 Font2D(yli::ontology::Universe* const universe, const yli::ontology::FontStruct& font_struct, yli::ontology::ParentModule* const parent_module)
                     : Entity(universe),
-                    child_of_universe((yli::ontology::Entity*) universe, parent_module, this),
-                    parent_of_text2Ds(yli::ontology::ParentModule())
+                    child_of_universe(parent_module, this),
+                    parent_of_text2Ds(this)
             {
                     // constructor.
                     this->texture_filename = font_struct.texture_filename;

@@ -136,7 +136,8 @@ namespace yli
 
         std::size_t VectorFont::get_number_of_children() const
         {
-            return this->parent_of_glyphs.number_of_children + this->parent_of_text3Ds.number_of_children;
+            return this->parent_of_glyphs.get_number_of_children() +
+                this->parent_of_text3Ds.get_number_of_children();
         }
 
         std::size_t VectorFont::get_number_of_descendants() const

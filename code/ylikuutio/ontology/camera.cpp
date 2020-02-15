@@ -50,49 +50,9 @@ namespace yli
 {
     namespace ontology
     {
-        void Camera::bind_to_parent()
-        {
-            // Requirements:
-            // `this->parent` must not be `nullptr`.
-            yli::ontology::Scene* const scene = this->parent;
-
-            if (scene == nullptr)
-            {
-                std::cerr << "ERROR: `Camera::bind_to_parent`: `scene` is `nullptr`!\n";
-                return;
-            }
-
-            // Get `childID` from `Scene` and set pointer to this `Camera`.
-            scene->parent_of_cameras.bind_child(this);
-        }
-
         Camera::~Camera()
         {
             // destructor.
-            //
-            // Requirements:
-            // `this->parent` must not be `nullptr`.
-            yli::ontology::Scene* const scene = this->parent;
-
-            if (scene == nullptr)
-            {
-                std::cerr << "ERROR: `Camera::~Camera`: `scene` is `nullptr`!\n";
-                return;
-            }
-
-            if (scene->get_active_camera() == this)
-            {
-                // Make this `Camera` no more the active `Camera`.
-                scene->set_active_camera(nullptr);
-            }
-
-            // Set pointer to this `Camera` to `nullptr`.
-            scene->parent_of_cameras.unbind_child(this->childID);
-        }
-
-        yli::ontology::Entity* Camera::get_parent() const
-        {
-            return this->parent;
         }
 
         std::size_t Camera::get_number_of_children() const

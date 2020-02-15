@@ -43,7 +43,7 @@ namespace yli
                 // constructor.
                 ChunkMaster(yli::ontology::Universe* universe, yli::ontology::Material* const parent, GetContentCallback get_content_callback)
                     : yli::ontology::Entity(universe),
-                    parent_of_chunks(yli::ontology::ParentModule())
+                    parent_of_chunks(this)
                 {
                     // constructor.
                     this->get_content_callback = get_content_callback;

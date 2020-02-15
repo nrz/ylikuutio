@@ -35,21 +35,29 @@ namespace yli
                 void bind_child(yli::ontology::Entity* const child);
                 void unbind_child(std::size_t childID);
 
-                ParentModule()
-                    : number_of_children(0)
+                ParentModule(yli::ontology::Entity* const entity)
+                    : number_of_children(0),
+                    entity(entity)
                 {
                     // constructor.
                 }
 
-                std::size_t get_number_of_children() const;
-                std::size_t get_number_of_descendants() const;
+                ParentModule(const ParentModule&) = delete;            // Delete copy constructor.
+                ParentModule &operator=(const ParentModule&) = delete; // Delete copy assignment.
 
                 // destructor.
                 ~ParentModule();
 
+                yli::ontology::Entity* get_entity() const;
+                std::size_t get_number_of_children() const;
+                std::size_t get_number_of_descendants() const;
+
                 std::vector<yli::ontology::Entity*> child_pointer_vector;
+            private:
                 std::queue<std::size_t> free_childID_queue;
                 std::size_t number_of_children;
+
+                yli::ontology::Entity* entity; // The `Entity` that owns this `ParentModule`.
         };
     }
 }

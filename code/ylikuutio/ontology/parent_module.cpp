@@ -41,6 +41,7 @@ namespace yli
             yli::hierarchy::unbind_child_from_parent<yli::ontology::Entity*>(
                     childID,
                     this->child_pointer_vector,
+                    this->free_childID_queue,
                     this->number_of_children);
         }
 
@@ -49,6 +50,11 @@ namespace yli
             // destructor.
 
             yli::hierarchy::delete_children<yli::ontology::Entity*>(this->child_pointer_vector, this->number_of_children);
+        }
+
+        yli::ontology::Entity* ParentModule::get_entity() const
+        {
+            return this->entity;
         }
 
         std::size_t ParentModule::get_number_of_children() const

@@ -37,12 +37,24 @@ namespace yli
 
         void create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* const text3D)
         {
+            if (text3D == nullptr)
+            {
+                return;
+            }
+
+            yli::ontology::VectorFont* const vector_font = static_cast<yli::ontology::VectorFont*>(text3D->get_parent());
+
+            if (vector_font == nullptr)
+            {
+                return;
+            }
+
             const char* text_pointer = text_string.c_str();
 
             while (*text_pointer != '\0')
             {
                 int32_t unicode_value = yli::string::extract_unicode_value_from_string(text_pointer);
-                yli::ontology::Glyph* glyph_pointer = text3D->parent->get_glyph_pointer(unicode_value);
+                yli::ontology::Glyph* glyph_pointer = vector_font->get_glyph_pointer(unicode_value);
 
                 if (glyph_pointer == nullptr)
                 {
