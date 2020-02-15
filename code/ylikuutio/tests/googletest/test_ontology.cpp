@@ -2393,6 +2393,23 @@ TEST(object_must_bind_to_species_appropriately, species_of_the_same_material)
     ASSERT_EQ(world->get_number_of_descendants(), 6);
     ASSERT_EQ(universe->get_number_of_children(), 1);
     ASSERT_EQ(universe->get_number_of_descendants(), 7);
+
+    object->bind_to_new_parent(species1);
+    ASSERT_EQ(object->get_parent(), species1);
+    ASSERT_EQ(species1->get_number_of_children(), 1);
+    ASSERT_EQ(species1->get_number_of_descendants(), 1);
+    ASSERT_EQ(species2->get_number_of_children(), 0);
+    ASSERT_EQ(species2->get_number_of_descendants(), 0);
+    ASSERT_EQ(material->get_number_of_children(), 2);
+    ASSERT_EQ(material->get_number_of_descendants(), 3);
+    ASSERT_EQ(shader->get_number_of_children(), 1);
+    ASSERT_EQ(shader->get_number_of_descendants(), 4);
+    ASSERT_EQ(scene->get_number_of_children(), 1);
+    ASSERT_EQ(scene->get_number_of_descendants(), 5);
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 6);
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 7);
 }
 
 TEST(object_must_bind_to_species_appropriately, species_of_different_materials)
@@ -2447,6 +2464,25 @@ TEST(object_must_bind_to_species_appropriately, species_of_different_materials)
     ASSERT_EQ(material1->get_number_of_descendants(), 1);
     ASSERT_EQ(material2->get_number_of_children(), 1);
     ASSERT_EQ(material2->get_number_of_descendants(), 2);
+    ASSERT_EQ(shader->get_number_of_children(), 2);
+    ASSERT_EQ(shader->get_number_of_descendants(), 5);
+    ASSERT_EQ(scene->get_number_of_children(), 1);
+    ASSERT_EQ(scene->get_number_of_descendants(), 6);
+    ASSERT_EQ(world->get_number_of_children(), 1);
+    ASSERT_EQ(world->get_number_of_descendants(), 7);
+    ASSERT_EQ(universe->get_number_of_children(), 1);
+    ASSERT_EQ(universe->get_number_of_descendants(), 8);
+
+    object->bind_to_new_parent(species1);
+    ASSERT_EQ(object->get_parent(), species1);
+    ASSERT_EQ(species1->get_number_of_children(), 1);
+    ASSERT_EQ(species1->get_number_of_descendants(), 1);
+    ASSERT_EQ(species2->get_number_of_children(), 0);
+    ASSERT_EQ(species2->get_number_of_descendants(), 0);
+    ASSERT_EQ(material1->get_number_of_children(), 1);
+    ASSERT_EQ(material1->get_number_of_descendants(), 2);
+    ASSERT_EQ(material2->get_number_of_children(), 1);
+    ASSERT_EQ(material2->get_number_of_descendants(), 1);
     ASSERT_EQ(shader->get_number_of_children(), 2);
     ASSERT_EQ(shader->get_number_of_descendants(), 5);
     ASSERT_EQ(scene->get_number_of_children(), 1);
