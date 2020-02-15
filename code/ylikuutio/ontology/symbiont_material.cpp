@@ -58,7 +58,7 @@ namespace yli
             yli::opengl::uniform_1i(this->openGL_textureID, 0);
 
             // render this `SymbiontMaterial` by calling `render()` function of each `SymbiontSpecies`.
-            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_symbiont_species.child_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_species.child_pointer_vector);
 
             this->postrender();
         }
@@ -70,12 +70,12 @@ namespace yli
 
         std::size_t SymbiontMaterial::get_number_of_children() const
         {
-            return this->parent_of_symbiont_species.get_number_of_children();
+            return this->parent_of_species.get_number_of_children();
         }
 
         std::size_t SymbiontMaterial::get_number_of_descendants() const
         {
-            return yli::ontology::get_number_of_descendants(this->parent_of_symbiont_species.child_pointer_vector);
+            return yli::ontology::get_number_of_descendants(this->parent_of_species.child_pointer_vector);
         }
 
         void SymbiontMaterial::load_texture()

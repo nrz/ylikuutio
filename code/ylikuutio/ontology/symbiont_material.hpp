@@ -19,7 +19,6 @@
 #define __SYMBIONT_MATERIAL_HPP_INCLUDED
 
 #include "material.hpp"
-#include "parent_module.hpp"
 #include "material_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/load/texture_loader.hpp"
@@ -44,6 +43,7 @@ namespace yli
         class Entity;
         class Universe;
         class SymbiontSpecies;
+        class ParentModule;
 
         class SymbiontMaterial: public yli::ontology::Material
         {
@@ -56,8 +56,7 @@ namespace yli
                         yli::ontology::Universe* const universe,
                         const yli::ontology::MaterialStruct& material_struct,
                         yli::ontology::ParentModule* const parent_module)
-                    : Material(universe, material_struct, parent_module),
-                    parent_of_symbiont_species(this)
+                    : Material(universe, material_struct, parent_module)
                 {
                     // constructor.
                     this->ofbx_texture               = material_struct.ofbx_texture;
@@ -82,8 +81,6 @@ namespace yli
 
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
-
-                yli::ontology::ParentModule parent_of_symbiont_species;
 
             private:
                 void load_texture();
