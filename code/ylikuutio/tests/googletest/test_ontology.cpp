@@ -730,7 +730,7 @@ TEST(species_must_be_initialized_appropriately, headless)
     species_struct.scene = scene;
     species_struct.shader = shader;
     species_struct.material = material;
-    yli::ontology::Species* const species = new yli::ontology::Species(universe, species_struct);
+    yli::ontology::Species* const species = new yli::ontology::Species(universe, species_struct, &material->parent_of_species);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_children(), 1);
@@ -769,7 +769,7 @@ TEST(species_must_be_initialized_appropriately, no_universe_no_world_no_scene_no
     species_struct.scene = nullptr;
     species_struct.shader = nullptr;
     species_struct.material = nullptr;
-    yli::ontology::Species* const species = new yli::ontology::Species(nullptr, species_struct);
+    yli::ontology::Species* const species = new yli::ontology::Species(nullptr, species_struct, nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(species->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -805,7 +805,7 @@ TEST(object_must_be_initialized_appropriately, headless)
     species_struct.scene = scene;
     species_struct.shader = shader;
     species_struct.material = material;
-    yli::ontology::Species* const species = new yli::ontology::Species(universe, species_struct);
+    yli::ontology::Species* const species = new yli::ontology::Species(universe, species_struct, &material->parent_of_species);
 
     yli::ontology::ObjectStruct object_struct;
     object_struct.species_parent = species;
@@ -1251,7 +1251,10 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
 
     yli::ontology::SpeciesStruct shapeshifter_form_struct;
     shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
-    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(universe, shapeshifter_form_struct);
+    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(
+            universe,
+            shapeshifter_form_struct,
+            &shapeshifter_transformation->parent_of_shapeshifter_forms);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_children(), 1);
@@ -1301,7 +1304,10 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, no_universe_no_world_n
     shapeshifter_form_struct.shader = nullptr;
     shapeshifter_form_struct.material = nullptr;
     shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
-    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(nullptr, shapeshifter_form_struct);
+    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(
+            nullptr,
+            shapeshifter_form_struct,
+            &shapeshifter_transformation->parent_of_shapeshifter_forms);
 
     // `Entity` member functions.
     ASSERT_EQ(shapeshifter_form->get_childID(), 0);
@@ -1321,7 +1327,7 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, no_universe_no_world_n
     shapeshifter_form_struct.shader = nullptr;
     shapeshifter_form_struct.material = nullptr;
     shapeshifter_form_struct.shapeshifter_transformation = nullptr;
-    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(nullptr, shapeshifter_form_struct);
+    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(nullptr, shapeshifter_form_struct, nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(shapeshifter_form->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -1461,11 +1467,16 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
     shapeshifter_transformation_struct.scene = scene;
     shapeshifter_transformation_struct.shader = shader;
     shapeshifter_transformation_struct.material = material;
-    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(universe, shapeshifter_transformation_struct);
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
+            universe,
+            shapeshifter_transformation_struct);
 
     yli::ontology::SpeciesStruct shapeshifter_form_struct;
     shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
-    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(universe, shapeshifter_form_struct);
+    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(
+            universe,
+            shapeshifter_form_struct,
+            &shapeshifter_transformation->parent_of_shapeshifter_forms);
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
@@ -1522,14 +1533,19 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, no_univer
     shapeshifter_transformation_struct.scene = nullptr;
     shapeshifter_transformation_struct.shader = nullptr;
     shapeshifter_transformation_struct.material = nullptr;
-    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(nullptr, shapeshifter_transformation_struct);
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
+            nullptr,
+            shapeshifter_transformation_struct);
 
     yli::ontology::SpeciesStruct shapeshifter_form_struct;
     shapeshifter_form_struct.scene = nullptr;
     shapeshifter_form_struct.shader = nullptr;
     shapeshifter_form_struct.material = nullptr;
     shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
-    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(nullptr, shapeshifter_form_struct);
+    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(
+            nullptr,
+            shapeshifter_form_struct,
+            &shapeshifter_transformation->parent_of_shapeshifter_forms);
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
@@ -1583,11 +1599,16 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     shapeshifter_transformation_struct.scene = scene;
     shapeshifter_transformation_struct.shader = shader;
     shapeshifter_transformation_struct.material = material;
-    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(universe, shapeshifter_transformation_struct);
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
+            universe,
+            shapeshifter_transformation_struct);
 
     yli::ontology::SpeciesStruct shapeshifter_form_struct;
     shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
-    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(universe, shapeshifter_form_struct);
+    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(
+            universe,
+            shapeshifter_form_struct,
+            &shapeshifter_transformation->parent_of_shapeshifter_forms);
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
@@ -1655,7 +1676,10 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_world
     shapeshifter_form_struct.shader = nullptr;
     shapeshifter_form_struct.material = nullptr;
     shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
-    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(nullptr, shapeshifter_form_struct);
+    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(
+            nullptr,
+            shapeshifter_form_struct,
+            &shapeshifter_transformation->parent_of_shapeshifter_forms);
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
@@ -1697,7 +1721,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_world
     shapeshifter_form_struct.shader = nullptr;
     shapeshifter_form_struct.material = nullptr;
     shapeshifter_form_struct.shapeshifter_transformation = nullptr;
-    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(nullptr, shapeshifter_form_struct);
+    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(nullptr, shapeshifter_form_struct, nullptr);
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = nullptr;
@@ -2229,7 +2253,7 @@ TEST(species_must_bind_to_material_appropriately, materials_of_the_same_shader)
     species_struct.scene = scene;
     species_struct.shader = shader;
     species_struct.material = material1;
-    yli::ontology::Species* const species = new yli::ontology::Species(universe, species_struct);
+    yli::ontology::Species* const species = new yli::ontology::Species(universe, species_struct, &material1->parent_of_species);
     ASSERT_EQ(species->get_parent(), material1);
     ASSERT_EQ(material1->get_number_of_children(), 1);
     ASSERT_EQ(material1->get_number_of_descendants(), 1);
@@ -2294,7 +2318,7 @@ TEST(species_must_bind_to_material_appropriately, materials_of_different_shaders
     species_struct.scene = scene;
     species_struct.shader = shader1;
     species_struct.material = material1;
-    yli::ontology::Species* const species = new yli::ontology::Species(universe, species_struct);
+    yli::ontology::Species* const species = new yli::ontology::Species(universe, species_struct, &material1->parent_of_species);
     ASSERT_EQ(species->get_parent(), material1);
     ASSERT_EQ(material1->get_number_of_children(), 1);
     ASSERT_EQ(material1->get_number_of_descendants(), 1);
@@ -2367,7 +2391,7 @@ TEST(object_must_bind_to_species_appropriately, species_of_the_same_material)
     species_struct1.scene = scene;
     species_struct1.shader = shader;
     species_struct1.material = material;
-    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, species_struct1);
+    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, species_struct1, &material->parent_of_species);
 
     yli::ontology::ObjectStruct object_struct;
     object_struct.species_parent = species1;
@@ -2380,7 +2404,7 @@ TEST(object_must_bind_to_species_appropriately, species_of_the_same_material)
     species_struct2.scene = scene;
     species_struct2.shader = shader;
     species_struct2.material = material;
-    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, species_struct2);
+    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, species_struct2, &material->parent_of_species);
 
     object->bind_to_new_parent(species2);
     ASSERT_EQ(object->get_parent(), species2);
@@ -2440,7 +2464,7 @@ TEST(object_must_bind_to_species_appropriately, species_of_different_materials)
     species_struct1.scene = scene;
     species_struct1.shader = shader;
     species_struct1.material = material1;
-    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, species_struct1);
+    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, species_struct1, &material1->parent_of_species);
 
     yli::ontology::ObjectStruct object_struct;
     object_struct.species_parent = species1;
@@ -2457,7 +2481,7 @@ TEST(object_must_bind_to_species_appropriately, species_of_different_materials)
     species_struct2.scene = scene;
     species_struct2.shader = shader;
     species_struct2.material = material2;
-    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, species_struct2);
+    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, species_struct2, &material2->parent_of_species);
 
     object->bind_to_new_parent(species2);
     ASSERT_EQ(object->get_parent(), species2);
@@ -2663,7 +2687,7 @@ TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
     species_struct.scene = scene;
     species_struct.shader = shader;
     species_struct.material = material;
-    yli::ontology::Species* const species = new yli::ontology::Species(universe, species_struct);
+    yli::ontology::Species* const species = new yli::ontology::Species(universe, species_struct, &material->parent_of_species);
 
     yli::ontology::ObjectStruct object_struct;
     object_struct.species_parent = species;

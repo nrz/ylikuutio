@@ -249,7 +249,10 @@ namespace yli
 
                         std::cout << "Creating yli::ontology::SymbiontSpecies*, mesh index " << mesh_i << "...\n";
 
-                        yli::ontology::SymbiontSpecies* symbiont_species = new yli::ontology::SymbiontSpecies(this->universe, species_struct);
+                        yli::ontology::SymbiontSpecies* symbiont_species = new yli::ontology::SymbiontSpecies(
+                                this->universe,
+                                species_struct,
+                                &symbiont_material->parent_of_species);
 
                         std::cout << "yli::ontology::SymbiontSpecies*, mesh index " << mesh_i << " successfully created.\n";
 

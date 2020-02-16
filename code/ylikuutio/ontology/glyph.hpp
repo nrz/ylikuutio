@@ -24,7 +24,6 @@
 #include "gl_attrib_locations.hpp"
 #include "code/ylikuutio/triangulation/triangulate_polygons_struct.hpp"
 #include "code/ylikuutio/triangulation/polygon_triangulation.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -45,6 +44,7 @@ namespace yli
     {
         class VectorFont;
         class Object;
+        class ParentModule;
 
         class Glyph: public yli::ontology::Model
         {
@@ -58,22 +58,16 @@ namespace yli
                 const char* get_unicode_char_pointer() const;
 
                 friend class VectorFont;
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
             private:
-                Glyph(const yli::ontology::GlyphStruct& glyph_struct)
-                    : Model(glyph_struct.universe, glyph_struct.opengl_in_use)
+                Glyph(const yli::ontology::GlyphStruct& glyph_struct, yli::ontology::ParentModule* const parent_module)
+                    : Model(glyph_struct.universe, glyph_struct.opengl_in_use, parent_module)
                 {
                     // constructor.
-                    this->parent               = glyph_struct.parent;
                     this->glyph_vertex_data    = glyph_struct.glyph_vertex_data;
                     this->glyph_name_pointer   = glyph_struct.glyph_name_pointer;
                     this->unicode_char_pointer = glyph_struct.unicode_char_pointer;
                     this->light_position       = glyph_struct.light_position;
-
-                    // get `childID` from `VectorFont` and set pointer to this `Glyph`.
-                    this->bind_to_parent();
 
                     // TODO: implement triangulation of `Glyph` objects!
                     yli::triangulation::TriangulatePolygonsStruct triangulate_polygons_struct;
@@ -108,12 +102,8 @@ namespace yli
                 Glyph(const Glyph&) = delete;            // Delete copy constructor.
                 Glyph &operator=(const Glyph&) = delete; // Delete copy assignment.
 
-                void bind_to_parent();
-
                 // this method renders all `Object`s of this `Glyph`.
                 void render() override;
-
-                yli::ontology::VectorFont* parent; // pointer to the `VectorFont`.
 
                 std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
                 const char* glyph_name_pointer;    // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.

@@ -66,22 +66,6 @@ namespace yli
                     this->number_of_bionts);
         }
 
-        void SymbiontSpecies::bind_to_parent()
-        {
-            // requirements:
-            // `this->symbiont_material_parent` must not be `nullptr`.
-            yli::ontology::SymbiontMaterial* const symbiont_material = this->symbiont_material_parent;
-
-            if (symbiont_material == nullptr)
-            {
-                std::cerr << "ERROR: `SymbiontSpecies::bind_to_parent`: `symbiont_material` is `nullptr`!\n";
-                return;
-            }
-
-            // get `childID` from `SymbiontMaterial` and set pointer to this `SymbiontSpecies`.
-            symbiont_material->parent_of_species.bind_child(this);
-        }
-
         SymbiontSpecies::~SymbiontSpecies()
         {
             // destructor.
@@ -92,20 +76,6 @@ namespace yli
                 glDeleteBuffers(1, &this->normalbuffer);
                 glDeleteBuffers(1, &this->elementbuffer);
             }
-
-            // requirements for further actions:
-            // `this->symbiont_material_parent` must not be `nullptr`.
-
-            yli::ontology::SymbiontMaterial* const symbiont_material = this->symbiont_material_parent;
-
-            // set pointer to this `SymbiontSpecies` to `nullptr`.
-            if (symbiont_material == nullptr)
-            {
-                std::cerr << "ERROR: `SymbiontSpecies::~SymbiontSpecies`: `symbiont_material` is `nullptr`!\n";
-                return;
-            }
-
-            symbiont_material->parent_of_species.unbind_child(this->childID);
         }
 
         void SymbiontSpecies::render()
@@ -123,7 +93,7 @@ namespace yli
 
         yli::ontology::Entity* SymbiontSpecies::get_parent() const
         {
-            return this->symbiont_material_parent;
+            return this->child.get_parent();
         }
 
         std::size_t SymbiontSpecies::get_indices_size() const

@@ -19,6 +19,7 @@
 #define __MODEL_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "child_module.hpp"
 #include "parent_module.hpp"
 #include "species_or_glyph.hpp"
 
@@ -33,7 +34,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <limits>   // std::numeric_limits
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -51,15 +51,17 @@ namespace yli
         {
             public:
                 // constructor.
-                Model(yli::ontology::Universe* const universe, const bool opengl_in_use)
+                Model(
+                        yli::ontology::Universe* const universe,
+                        const bool opengl_in_use,
+                        yli::ontology::ParentModule* const parent_module)
                     : Entity(universe),
+                    child(parent_module, this),
                     parent_of_objects(this)
                 {
                     // constructor.
 
                     // Initialize class members with some dummy values.
-                    // `std::numeric_limits<std::size_t>::max()` means that `childID` is not defined.
-                    this->childID                      = std::numeric_limits<std::size_t>::max();
                     this->lightID                      = 0;
                     this->vertex_position_modelspaceID = 0;
                     this->vertexUVID                   = 0;
@@ -110,6 +112,10 @@ namespace yli
                 template<class T1>
                     friend void yli::ontology::render_species_or_glyph(T1 species_or_glyph_pointer);
 
+            protected:
+                yli::ontology::ChildModule child;
+
+            public:
                 yli::ontology::ParentModule parent_of_objects;
 
             protected:

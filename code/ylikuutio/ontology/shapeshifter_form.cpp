@@ -28,43 +28,14 @@ namespace yli
     {
         class Entity;
 
-        void ShapeshifterForm::bind_to_parent()
-        {
-            // requirements:
-            // `this->parent` must not be `nullptr`.
-            yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = this->parent;
-
-            if (shapeshifter_transformation == nullptr)
-            {
-                std::cerr << "ERROR: `ShapeshifterForm::bind_to_parent`: `shapeshifter_transformation` is `nullptr`!\n";
-                return;
-            }
-
-            // get `childID` from `ShapeshifterTransformation` and set pointer to this `ShapeshifterForm`.
-            this->parent->parent_of_shapeshifter_forms.bind_child(this);
-        }
-
         ShapeshifterForm::~ShapeshifterForm()
         {
             // destructor.
-
-            // requirements for further actions:
-            // `this->parent` must not be `nullptr`.
-
-            yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = this->parent;
-
-            if (shapeshifter_transformation == nullptr)
-            {
-                std::cerr << "ERROR: `ShapeshifterForm::~ShapeshifterForm`: `shapeshifter_transformation` is `nullptr`!\n";
-                return;
-            }
-
-            shapeshifter_transformation->parent_of_shapeshifter_forms.unbind_child(this->childID);
         }
 
         yli::ontology::Entity* ShapeshifterForm::get_parent() const
         {
-            return this->parent;
+            return this->child.get_parent();
         }
 
         std::size_t ShapeshifterForm::get_number_of_children() const

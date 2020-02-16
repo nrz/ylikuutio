@@ -105,7 +105,10 @@ namespace yli
 
         yli::ontology::Entity* EntityFactory::create_Species(const yli::ontology::SpeciesStruct& species_struct) const
         {
-            return new yli::ontology::Species(this->universe, species_struct);
+            return new yli::ontology::Species(
+                    this->universe,
+                    species_struct,
+                    (species_struct.material == nullptr ? nullptr : &species_struct.material->parent_of_species));
         }
 
         yli::ontology::Entity* EntityFactory::create_Object(const yli::ontology::ObjectStruct& object_struct) const
