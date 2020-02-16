@@ -94,6 +94,10 @@ namespace yli
                     {
                         this->glyph          = object_struct.glyph;
                     }
+                    else
+                    {
+                        this->glyph = nullptr;
+                    }
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Object*";
