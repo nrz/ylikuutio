@@ -110,6 +110,8 @@ namespace yli
                 // destructor.
                 virtual ~Object();
 
+                yli::ontology::Glyph* get_glyph() const;
+
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
