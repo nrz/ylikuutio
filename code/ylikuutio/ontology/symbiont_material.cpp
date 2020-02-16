@@ -63,11 +63,6 @@ namespace yli
             this->postrender();
         }
 
-        yli::ontology::Entity* SymbiontMaterial::get_parent() const
-        {
-            return this->child_of_shader_or_symbiosis.get_parent();
-        }
-
         std::size_t SymbiontMaterial::get_number_of_children() const
         {
             return this->parent_of_species.get_number_of_children();
