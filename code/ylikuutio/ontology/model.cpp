@@ -44,6 +44,11 @@ namespace yli
             // destructor.
         }
 
+        yli::ontology::Entity* Model::get_parent() const
+        {
+            return this->child.get_parent();
+        }
+
         std::size_t Model::get_number_of_children() const
         {
             return this->parent_of_objects.get_number_of_children();

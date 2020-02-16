@@ -169,8 +169,6 @@ namespace yli
                 // destructor.
                 virtual ~Species();
 
-                yli::ontology::Entity* get_parent() const override;
-
                 std::size_t get_x_step() const;
                 std::size_t get_z_step() const;
                 std::size_t get_image_width() const;

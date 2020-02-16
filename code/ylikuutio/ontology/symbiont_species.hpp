@@ -148,8 +148,6 @@ namespace yli
                 // destructor.
                 virtual ~SymbiontSpecies();
 
-                yli::ontology::Entity* get_parent() const override;
-
             private:
                 glm::vec3 light_position; // light position.
 

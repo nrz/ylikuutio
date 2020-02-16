@@ -91,11 +91,6 @@ namespace yli
             }
         }
 
-        yli::ontology::Entity* SymbiontSpecies::get_parent() const
-        {
-            return this->child.get_parent();
-        }
-
         std::size_t SymbiontSpecies::get_indices_size() const
         {
             return this->indices.size();

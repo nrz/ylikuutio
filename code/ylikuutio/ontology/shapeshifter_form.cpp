@@ -33,11 +33,6 @@ namespace yli
             // destructor.
         }
 
-        yli::ontology::Entity* ShapeshifterForm::get_parent() const
-        {
-            return this->child.get_parent();
-        }
-
         std::size_t ShapeshifterForm::get_number_of_children() const
         {
             return 0; // `ShapeshifterForm` has no children.

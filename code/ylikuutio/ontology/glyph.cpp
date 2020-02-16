@@ -46,11 +46,6 @@ namespace yli
             glDeleteBuffers(1, &this->elementbuffer);
         }
 
-        yli::ontology::Entity* Glyph::get_parent() const
-        {
-            return this->child.get_parent();
-        }
-
         void Glyph::render()
         {
             if (this->opengl_in_use)

@@ -110,16 +110,6 @@ namespace yli
             }
         }
 
-        yli::ontology::Entity* Species::get_parent() const
-        {
-            if (this->is_symbiont_species)
-            {
-                return nullptr;
-            }
-
-            return this->child.get_parent();
-        }
-
         std::size_t Species::get_x_step() const
         {
             return this->x_step;

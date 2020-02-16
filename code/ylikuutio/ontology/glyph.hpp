@@ -53,8 +53,6 @@ namespace yli
                 // `Glyph`s should be destroyed only by destroying the entire `VectorFont`.
                 virtual ~Glyph();
 
-                yli::ontology::Entity* get_parent() const override;
-
                 const char* get_unicode_char_pointer() const;
 
                 friend class VectorFont;
