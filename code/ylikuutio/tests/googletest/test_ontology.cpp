@@ -841,6 +841,7 @@ TEST(object_must_be_initialized_appropriately, headless)
     ASSERT_TRUE(object->get_can_be_erased());
     ASSERT_EQ(object->get_universe(), universe);
     ASSERT_NE(object->get_setting_master(), nullptr);
+    ASSERT_EQ(object->get_glyph(), nullptr);
     ASSERT_EQ(object->get_parent(), species);
     ASSERT_EQ(object->get_number_of_children(), 0);
     ASSERT_EQ(object->get_number_of_descendants(), 0);
@@ -858,6 +859,7 @@ TEST(object_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_
     ASSERT_TRUE(object->get_can_be_erased());
     ASSERT_EQ(object->get_universe(), nullptr);
     ASSERT_NE(object->get_setting_master(), nullptr);
+    ASSERT_EQ(object->get_glyph(), nullptr);
     ASSERT_EQ(object->get_parent(), nullptr);
     ASSERT_EQ(object->get_number_of_children(), 0);
     ASSERT_EQ(object->get_number_of_descendants(), 0);
@@ -1634,6 +1636,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     ASSERT_TRUE(object->get_can_be_erased());
     ASSERT_EQ(object->get_universe(), universe);
     ASSERT_NE(object->get_setting_master(), nullptr);
+    ASSERT_EQ(object->get_glyph(), nullptr);
     ASSERT_EQ(object->get_parent(), shapeshifter_sequence);
     ASSERT_EQ(object->get_number_of_children(), 0);
     ASSERT_EQ(object->get_number_of_descendants(), 0);
@@ -1681,6 +1684,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_world
     ASSERT_TRUE(object->get_can_be_erased());
     ASSERT_EQ(object->get_universe(), nullptr);
     ASSERT_NE(object->get_setting_master(), nullptr);
+    ASSERT_EQ(object->get_glyph(), nullptr);
     ASSERT_EQ(object->get_parent(), shapeshifter_sequence);
     ASSERT_EQ(object->get_number_of_children(), 0);
     ASSERT_EQ(object->get_number_of_descendants(), 0);
@@ -1710,6 +1714,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_world
     ASSERT_TRUE(object->get_can_be_erased());
     ASSERT_EQ(object->get_universe(), nullptr);
     ASSERT_NE(object->get_setting_master(), nullptr);
+    ASSERT_EQ(object->get_glyph(), nullptr);
     ASSERT_EQ(object->get_parent(), shapeshifter_sequence);
     ASSERT_EQ(object->get_number_of_children(), 0);
     ASSERT_EQ(object->get_number_of_descendants(), 0);
