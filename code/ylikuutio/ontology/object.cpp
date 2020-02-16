@@ -188,6 +188,11 @@ namespace yli
             std::cout << "`Object` with childID " << std::dec << this->childID << " will be destroyed.\n";
         }
 
+        yli::ontology::Glyph* Object::get_glyph() const
+        {
+            return this->glyph;
+        }
+
         void Object::render()
         {
             // render this `Object`.

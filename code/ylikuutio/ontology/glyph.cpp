@@ -32,23 +32,6 @@ namespace yli
 {
     namespace ontology
     {
-        void Glyph::bind_to_parent()
-        {
-            // requirements:
-            // `this->parent` must not be `nullptr`.
-
-            yli::ontology::VectorFont* const vector_font = this->parent;
-
-            if (vector_font == nullptr)
-            {
-                std::cerr << "ERROR: `Glyph::bind_to_parent`: `vector_font` is `nullptr`!\n";
-                return;
-            }
-
-            // get `childID` from `VectorFont` and set pointer to this `Glyph`.
-            vector_font->parent_of_glyphs.bind_child(this);
-        }
-
         Glyph::~Glyph()
         {
             // destructor.
@@ -61,25 +44,6 @@ namespace yli
             glDeleteBuffers(1, &this->uvbuffer);
             glDeleteBuffers(1, &this->normalbuffer);
             glDeleteBuffers(1, &this->elementbuffer);
-
-            // requirements for further actions:
-            // `this->parent` must not be `nullptr`.
-
-            yli::ontology::VectorFont* const vector_font = this->parent;
-
-            if (vector_font == nullptr)
-            {
-                std::cerr << "ERROR: `Glyph::~Glyph`: `vector_font` is `nullptr`!\n";
-                return;
-            }
-
-            // set pointer to this `Glyph` to `nullptr`.
-            vector_font->parent_of_glyphs.unbind_child(this->childID);
-        }
-
-        yli::ontology::Entity* Glyph::get_parent() const
-        {
-            return this->parent;
         }
 
         void Glyph::render()

@@ -32,22 +32,6 @@ namespace yli
 {
     namespace ontology
     {
-        void Species::bind_to_parent()
-        {
-            // requirements:
-            // `this->material_parent` must not be `nullptr`.
-            yli::ontology::Material* const material = this->material_parent;
-
-            if (material == nullptr)
-            {
-                std::cerr << "ERROR: `Species::bind_to_parent`: `material` is `nullptr`!\n";
-                return;
-            }
-
-            // get `childID` from `Material` and set pointer to this `Species`.
-            this->material_parent->parent_of_species.bind_child(this);
-        }
-
         void Species::bind_to_new_parent(yli::ontology::Material* const new_parent)
         {
             // this method sets pointer to this `Species` to `nullptr`, sets `material_parent` according to the input,
@@ -57,7 +41,7 @@ namespace yli
             // `this->material_parent` must not be `nullptr`.
             // `new_parent` must not be `nullptr`.
 
-            yli::ontology::Material* const material = this->material_parent;
+            yli::ontology::Entity* const material = this->child.get_parent();
 
             if (material == nullptr)
             {
@@ -72,11 +56,10 @@ namespace yli
             }
 
             // unbind from the old parent `Material`.
-            material->parent_of_species.unbind_child(this->childID);
+            this->child.unbind_child(this->childID);
 
             // get `childID` from `Material` and set pointer to this `Species`.
-            this->material_parent = new_parent;
-            this->material_parent->parent_of_species.bind_child(this);
+            this->child.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_species);
         }
 
         void Species::bind_to_new_parent(yli::ontology::Entity* const new_parent)
@@ -111,19 +94,6 @@ namespace yli
                 glDeleteBuffers(1, &this->uvbuffer);
                 glDeleteBuffers(1, &this->normalbuffer);
                 glDeleteBuffers(1, &this->elementbuffer);
-
-                // requirements for further actions:
-                // `this->material_parent` must not be `nullptr`.
-
-                yli::ontology::Material* const material = this->material_parent;
-
-                if (material == nullptr)
-                {
-                    std::cerr << "ERROR: `Species::~Species`: `material` is `nullptr`!\n";
-                    return;
-                }
-
-                this->material_parent->parent_of_species.unbind_child(this->childID);
             }
         }
 
@@ -138,15 +108,6 @@ namespace yli
 
                 this->postrender();
             }
-        }
-
-        yli::ontology::Entity* Species::get_parent() const
-        {
-            if (this->is_symbiont_species)
-            {
-                return nullptr;
-            }
-            return this->material_parent;
         }
 
         std::size_t Species::get_x_step() const

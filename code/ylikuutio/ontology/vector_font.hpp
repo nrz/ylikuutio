@@ -130,7 +130,7 @@ namespace yli
                             std::string glyph_name_string = glyph_struct.glyph_name_pointer;
                             std::string unicode_string = glyph_struct.unicode_char_pointer;
                             std::cout << "Creating Glyph \"" << glyph_name_string << "\", Unicode: \"" << unicode_string << "\"\n";
-                            yli::ontology::Glyph* glyph = new yli::ontology::Glyph(glyph_struct);
+                            yli::ontology::Glyph* glyph = new yli::ontology::Glyph(glyph_struct, &this->parent_of_glyphs);
 
                             // So that each `Glyph` can be referred to,
                             // we need a hash map that points from Unicode string to `Glyph`.

@@ -50,6 +50,7 @@ namespace yli
     {
         class Entity;
         class Material;
+        class ParentModule;
 
         class Species: public yli::ontology::Model
         {
@@ -59,8 +60,8 @@ namespace yli
                 void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
                 // constructor.
-                Species(yli::ontology::Universe* const universe, const yli::ontology::SpeciesStruct& species_struct)
-                    : Model(universe, species_struct.opengl_in_use)
+                Species(yli::ontology::Universe* const universe, const yli::ontology::SpeciesStruct& species_struct, yli::ontology::ParentModule* const parent_module)
+                    : Model(universe, species_struct.opengl_in_use, parent_module)
                 {
                     // constructor.
                     this->is_terrain          = species_struct.is_terrain;
@@ -73,7 +74,6 @@ namespace yli
                     this->light_position      = species_struct.light_position;
                     this->latitude            = species_struct.latitude;
                     this->longitude           = species_struct.longitude;
-                    this->material_parent     = species_struct.material;
                     this->mesh_i              = species_struct.mesh_i;
                     this->x_step              = species_struct.x_step;
                     this->z_step              = species_struct.z_step;
@@ -86,9 +86,6 @@ namespace yli
 
                     if (!this->is_symbiont_species)
                     {
-                        // get `childID` from `Material` and set pointer to this `Species`.
-                        this->bind_to_parent();
-
                         const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
 
                         if (!is_headless && this->opengl_in_use)
@@ -107,7 +104,7 @@ namespace yli
                         {
                             // set terrain `Species` pointer so that it points to this `Species`.
                             // currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
-                            yli::ontology::Material* const material = this->material_parent;
+                            yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(this->child.get_parent());
 
                             if (material != nullptr)
                             {
@@ -172,8 +169,6 @@ namespace yli
                 // destructor.
                 virtual ~Species();
 
-                yli::ontology::Entity* get_parent() const override;
-
                 std::size_t get_x_step() const;
                 std::size_t get_z_step() const;
                 std::size_t get_image_width() const;
@@ -192,12 +187,8 @@ namespace yli
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
             private:
-                void bind_to_parent();
-
                 // this method renders all `Object`s of this `Species`.
                 void render() override;
-
-                yli::ontology::Material* material_parent; // pointer to `Material`.
 
                 bool is_symbiont_species;
 

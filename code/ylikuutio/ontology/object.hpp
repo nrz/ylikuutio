@@ -94,6 +94,10 @@ namespace yli
                     {
                         this->glyph          = object_struct.glyph;
                     }
+                    else
+                    {
+                        this->glyph = nullptr;
+                    }
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Object*";
@@ -105,6 +109,8 @@ namespace yli
 
                 // destructor.
                 virtual ~Object();
+
+                yli::ontology::Glyph* get_glyph() const;
 
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;

@@ -33,19 +33,19 @@ namespace yli
         class Entity;
         class Universe;
         class ShapeshifterTransformation;
+        class ParentModule;
 
         class ShapeshifterForm: public yli::ontology::Model
         {
             public:
                 // constructor.
-                ShapeshifterForm(yli::ontology::Universe* const universe, const yli::ontology::SpeciesStruct& species_struct)
-                    : Model(universe, species_struct.opengl_in_use)
+                ShapeshifterForm(
+                        yli::ontology::Universe* const universe,
+                        const yli::ontology::SpeciesStruct& species_struct,
+                        yli::ontology::ParentModule* const parent_module)
+                    : Model(universe, species_struct.opengl_in_use, parent_module)
                 {
                     // constructor.
-                    this->parent = species_struct.shapeshifter_transformation;
-
-                    // get `childID` from `ShapeshifterTransformation` and set pointer to this `ShapeshifterForm`.
-                    this->bind_to_parent();
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::ShapeshifterForm*";
@@ -54,16 +54,11 @@ namespace yli
                 // destructor.
                 virtual ~ShapeshifterForm();
 
-                yli::ontology::Entity* get_parent() const override;
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
             private:
-                void bind_to_parent();
-
                 void render();
-
-                yli::ontology::ShapeshifterTransformation* parent;
         };
     }
 }

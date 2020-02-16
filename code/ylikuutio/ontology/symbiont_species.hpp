@@ -52,6 +52,7 @@ namespace yli
     {
         class Entity;
         class Biont;
+        class ParentModule;
 
         class SymbiontSpecies: public yli::ontology::Species
         {
@@ -63,19 +64,18 @@ namespace yli
                 GLint get_lightID() const;
 
                 // constructor.
-                SymbiontSpecies(yli::ontology::Universe* const universe, const yli::ontology::SpeciesStruct& species_struct)
-                    : Species(universe, species_struct)
+                SymbiontSpecies(
+                        yli::ontology::Universe* const universe,
+                        const yli::ontology::SpeciesStruct& species_struct,
+                        yli::ontology::ParentModule* const parent_module)
+                    : Species(universe, species_struct, parent_module)
                 {
                     // constructor.
                     this->shader                   = species_struct.shader;
-                    this->symbiont_material_parent = species_struct.symbiont_material;
                     this->vertices                 = species_struct.vertices;
                     this->uvs                      = species_struct.uvs;
                     this->normals                  = species_struct.normals;
                     this->light_position           = species_struct.light_position;
-
-                    // get `childID` from `SymbiontMaterial` and set pointer to this `SymbiontSpecies`.
-                    this->bind_to_parent();
 
                     this->number_of_bionts = 0;
                     this->type_string = "yli::ontology::SymbiontSpecies*";
@@ -148,8 +148,6 @@ namespace yli
                 // destructor.
                 virtual ~SymbiontSpecies();
 
-                yli::ontology::Entity* get_parent() const override;
-
             private:
                 glm::vec3 light_position; // light position.
 
@@ -169,7 +167,6 @@ namespace yli
                 std::queue<std::size_t> free_biontID_queue;
                 std::size_t number_of_bionts;
 
-                yli::ontology::SymbiontMaterial* symbiont_material_parent; // pointer to the `SymbiontMaterial` (parent).
                 yli::ontology::Shader* shader;                             // pointer to `Shader` (not a parent!).
 
                 std::string model_file_format;                             // type of the model file, eg. `"bmp"`.
