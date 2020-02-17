@@ -19,10 +19,12 @@
 #define __SCENE_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "camera.hpp"
 #include "child_module.hpp"
 #include "parent_module.hpp"
 #include "shader_priority_queue.hpp"
 #include "scene_struct.hpp"
+#include "camera_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -93,6 +95,7 @@ namespace yli
                 Scene(yli::ontology::Universe* const universe, const yli::ontology::SceneStruct& scene_struct, yli::ontology::ParentModule* const parent_module)
                     : Entity(universe),
                     child_of_world(parent_module, this),
+                    parent_of_default_camera(this),
                     parent_of_cameras(this),
                     parent_of_brains(this)
                 {
@@ -112,6 +115,11 @@ namespace yli
                     this->terrain_species       = nullptr;
 
                     this->is_flight_mode_in_use = scene_struct.is_flight_mode_in_use;
+
+                    // create the default `Camera`.
+                    yli::ontology::CameraStruct camera_struct = scene_struct.default_camera_struct;
+                    camera_struct.parent = this;
+                    new yli::ontology::Camera(this->universe, camera_struct, &this->parent_of_default_camera); // create the default camera.
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Scene*";
@@ -167,6 +175,7 @@ namespace yli
                 void set_is_flight_mode_in_use(const bool is_flight_mode_in_use);
 
                 yli::ontology::ChildModule child_of_world;
+                yli::ontology::ParentModule parent_of_default_camera;
                 yli::ontology::ParentModule parent_of_cameras;
                 yli::ontology::ParentModule parent_of_brains;
 
