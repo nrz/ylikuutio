@@ -82,7 +82,7 @@ namespace app
             return nullptr;
         }
 
-        movable->cartesian_coordinates.x += 1.0;
+        movable->cartesian_coordinates.x += 1.0f;
         return nullptr;
     }
 
@@ -106,7 +106,7 @@ namespace app
             return nullptr;
         }
 
-        movable->cartesian_coordinates.x -= 1.0;
+        movable->cartesian_coordinates.x -= 1.0f;
         return nullptr;
     }
 
@@ -130,7 +130,7 @@ namespace app
             return nullptr;
         }
 
-        movable->cartesian_coordinates.z -= 1.0;
+        movable->cartesian_coordinates.z -= 1.0f;
         return nullptr;
     }
 
@@ -154,7 +154,7 @@ namespace app
             return nullptr;
         }
 
-        movable->cartesian_coordinates.z += 1.0;
+        movable->cartesian_coordinates.z += 1.0f;
         return nullptr;
     }
 
@@ -178,7 +178,7 @@ namespace app
             return nullptr;
         }
 
-        movable->horizontal_angle = 1.5 * PI;
+        movable->horizontal_angle = 1.5f * PI;
         return nullptr;
     }
 
@@ -202,7 +202,7 @@ namespace app
             return nullptr;
         }
 
-        movable->horizontal_angle = 0.5 * PI;
+        movable->horizontal_angle = 0.5f * PI;
         return nullptr;
     }
 
@@ -226,7 +226,7 @@ namespace app
             return nullptr;
         }
 
-        movable->horizontal_angle = 0.0;
+        movable->horizontal_angle = 0.0f;
         return nullptr;
     }
 
@@ -250,7 +250,7 @@ namespace app
             return nullptr;
         }
 
-        movable->horizontal_angle = 1.0 * PI;
+        movable->horizontal_angle = 1.0f * PI;
         return nullptr;
     }
 
@@ -274,8 +274,8 @@ namespace app
             return nullptr;
         }
 
-        movable->horizontal_angle = 1.5 * PI;
-        movable->cartesian_coordinates.x += 1.0;
+        movable->horizontal_angle = 1.5f * PI;
+        movable->cartesian_coordinates.x += 1.0f;
         return nullptr;
     }
 
@@ -299,8 +299,8 @@ namespace app
             return nullptr;
         }
 
-        movable->horizontal_angle = 0.5 * PI;
-        movable->cartesian_coordinates.x -= 1.0;
+        movable->horizontal_angle = 0.5f * PI;
+        movable->cartesian_coordinates.x -= 1.0f;
         return nullptr;
     }
 
@@ -324,8 +324,8 @@ namespace app
             return nullptr;
         }
 
-        movable->horizontal_angle = 0.0;
-        movable->cartesian_coordinates.z -= 1.0;
+        movable->horizontal_angle = 0.0f;
+        movable->cartesian_coordinates.z -= 1.0f;
         return nullptr;
     }
 
@@ -349,8 +349,8 @@ namespace app
             return nullptr;
         }
 
-        movable->horizontal_angle = 1.0 * PI;
-        movable->cartesian_coordinates.z += 1.0;
+        movable->horizontal_angle = 1.0f * PI;
+        movable->cartesian_coordinates.z += 1.0f;
         return nullptr;
     }
 
@@ -374,7 +374,7 @@ namespace app
             return nullptr;
         }
 
-        movable->horizontal_angle -= 0.1 * PI;
+        movable->horizontal_angle -= 0.1f * PI;
         return nullptr;
     }
 
@@ -398,7 +398,7 @@ namespace app
             return nullptr;
         }
 
-        movable->horizontal_angle += 0.1 * PI;
+        movable->horizontal_angle += 0.1f * PI;
         return nullptr;
     }
 }
