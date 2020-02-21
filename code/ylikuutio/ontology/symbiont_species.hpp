@@ -25,9 +25,7 @@
 #include "species_or_glyph.hpp"
 #include "symbiont_material.hpp"
 #include "species_struct.hpp"
-#include "render_templates.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -152,11 +150,7 @@ namespace yli
                 glm::vec3 light_position; // light position.
 
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
-                template<class T1>
                     friend void yli::ontology::render_species_or_glyph(T1 species_or_glyph_pointer);
-                template<class T1>
-                    friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
                 void bind_to_parent();
 

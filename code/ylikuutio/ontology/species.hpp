@@ -26,7 +26,6 @@
 #include "species_struct.hpp"
 #include "code/ylikuutio/load/species_loader.hpp"
 #include "code/ylikuutio/load/species_loader_struct.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -182,9 +181,6 @@ namespace yli
 
                 std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
                 glm::vec3 light_position;                // light position.
-
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
             private:
                 // this method renders all `Object`s of this `Species`.
