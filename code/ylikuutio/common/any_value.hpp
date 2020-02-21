@@ -18,6 +18,7 @@
 #ifndef __ANY_VALUE_HPP_INCLUDED
 #define __ANY_VALUE_HPP_INCLUDED
 
+#include "datatype.hpp"
 #include "spherical_coordinates_struct.hpp"
 
 // Include GLM
@@ -55,49 +56,6 @@ namespace yli
 
     namespace common
     {
-        enum class Datatype
-        {
-            UNKNOWN,
-            ANY_STRUCT_SHARED_PTR,
-            BOOL,
-            CHAR,
-            FLOAT,
-            DOUBLE,
-            INT32_T,
-            UINT32_T,
-            BOOL_POINTER,
-            FLOAT_POINTER,
-            DOUBLE_POINTER,
-            INT32_T_POINTER,
-            UINT32_T_POINTER,
-            UNIVERSE_POINTER,
-            SCENE_POINTER,
-            SHADER_POINTER,
-            MATERIAL_POINTER,
-            SPECIES_POINTER,
-            OBJECT_POINTER,
-            VECTORFONT_POINTER,
-            GLYPH_POINTER,
-            TEXT3D_POINTER,
-            SYMBIOSIS_POINTER,
-            TEXT2D_POINTER,
-            CONSOLE_POINTER,
-            MOVABLE_POINTER,
-            CONST_MOVABLE_POINTER,
-            SPHERICAL_COORDINATES_STRUCT_POINTER,
-            STD_STRING_POINTER,
-            CONST_STD_STRING_POINTER,
-            STD_VECTOR_INT8_T_SHARED_PTR,
-            STD_VECTOR_UINT8_T_SHARED_PTR,
-            STD_VECTOR_INT16_T_SHARED_PTR,
-            STD_VECTOR_UINT16_T_SHARED_PTR,
-            STD_VECTOR_INT32_T_SHARED_PTR,
-            STD_VECTOR_UINT32_T_SHARED_PTR,
-            STD_VECTOR_FLOAT_SHARED_PTR,
-            GLM_VEC3_POINTER,
-            GLM_VEC4_POINTER
-        };
-
         class AnyStruct;
 
         class AnyValue

@@ -19,6 +19,7 @@
 #include "universe.hpp"
 #include "shader.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
+#include "code/ylikuutio/common/datatype.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 

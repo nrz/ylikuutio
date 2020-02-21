@@ -20,6 +20,7 @@
 #endif
 
 #include "app_brain.hpp"
+#include "code/ylikuutio/common/datatype.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"

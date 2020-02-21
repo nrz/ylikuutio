@@ -17,6 +17,7 @@
 
 #include "csv_texture_loader.hpp"
 #include "csv_loader.hpp"
+#include "code/ylikuutio/common/datatype.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/linear_algebra/vector_functions.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"

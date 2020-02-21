@@ -22,6 +22,7 @@
 
 #include "any_value.hpp"
 #include "any_struct.hpp"
+#include "datatype.hpp"
 #include "spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
