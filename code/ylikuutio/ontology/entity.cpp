@@ -17,6 +17,7 @@
 
 #include "entity.hpp"
 #include "universe.hpp"
+#include "parent_module.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
@@ -57,6 +58,7 @@ namespace yli
         }
 
         Entity::Entity(yli::ontology::Universe* const universe)
+            : parent_of_any_struct_entities(this)
         {
             // constructor.
             this->universe = universe;
