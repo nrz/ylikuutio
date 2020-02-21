@@ -809,137 +809,114 @@ namespace yli
             if (type == "std::shared_ptr<yli::common::AnyStruct>")
             {
                 this->type = yli::common::Datatype::ANY_STRUCT_SHARED_PTR;
-                this->set_value(value_string);
             }
             else if (type == "bool")
             {
                 this->type = yli::common::Datatype::BOOL;
-                this->set_value(value_string);
             }
             else if (type == "char")
             {
                 this->type = yli::common::Datatype::CHAR;
-                this->set_value(value_string);
             }
             else if (type == "float")
             {
                 this->type = yli::common::Datatype::FLOAT;
-                this->set_value(value_string);
             }
             else if (type == "double")
             {
                 this->type = yli::common::Datatype::DOUBLE;
-                this->set_value(value_string);
             }
             else if (type == "int32_t")
             {
                 this->type = yli::common::Datatype::INT32_T;
-                this->set_value(value_string);
             }
             else if (type == "uint32_t")
             {
                 this->type = yli::common::Datatype::UINT32_T;
-                this->set_value(value_string);
             }
             else if (type == "bool*")
             {
                 this->type = yli::common::Datatype::BOOL_POINTER;
-                this->set_value(value_string);
             }
             else if (type == "float*")
             {
                 this->type = yli::common::Datatype::FLOAT_POINTER;
-                this->set_value(value_string);
             }
             else if (type == "double*")
             {
                 this->type = yli::common::Datatype::FLOAT_POINTER;
-                this->set_value(value_string);
             }
             else if (type == "int32_t*")
             {
                 this->type = yli::common::Datatype::INT32_T_POINTER;
-                this->set_value(value_string);
             }
             else if (type == "uint32_t*")
             {
                 this->type = yli::common::Datatype::UINT32_T_POINTER;
-                this->set_value(value_string);
             }
             else if (type == "yli::ontology::Universe*")
             {
                 this->type = yli::common::Datatype::UNIVERSE_POINTER;
-                this->set_value(value_string);
             }
             else if (type == "yli::ontology::Scene*")
             {
                 this->type = yli::common::Datatype::SCENE_POINTER;
-                this->set_value(value_string);
             }
             else if (type == "yli::ontology::Shader*")
             {
                 this->type = yli::common::Datatype::SHADER_POINTER;
-                this->set_value(value_string);
             }
             else if (type == "yli::ontology::Material*")
             {
                 this->type = yli::common::Datatype::MATERIAL_POINTER;
-                this->set_value(value_string);
             }
             else if (type == "yli::ontology::Species*")
             {
                 this->type = yli::common::Datatype::SPECIES_POINTER;
-                this->set_value(value_string);
             }
             else if (type == "yli::ontology::Object*")
             {
                 this->type = yli::common::Datatype::OBJECT_POINTER;
-                this->set_value(value_string);
             }
             else if (type == "yli::ontology::VectorFont*")
             {
                 this->type = yli::common::Datatype::VECTORFONT_POINTER;
-                this->set_value(value_string);
             }
             else if (type == "yli::ontology::Glyph*")
             {
                 this->type = yli::common::Datatype::GLYPH_POINTER;
-                this->set_value(value_string);
             }
             else if (type == "yli::ontology::Text3D*")
             {
                 this->type = yli::common::Datatype::TEXT3D_POINTER;
-                this->set_value(value_string);
             }
             else if (type == "yli::ontology::Symbiosis*")
             {
                 this->type = yli::common::Datatype::SYMBIOSIS_POINTER;
-                this->set_value(value_string);
             }
             else if (type == "yli::ontology::Text2D*")
             {
                 this->type = yli::common::Datatype::TEXT2D_POINTER;
-                this->set_value(value_string);
             }
             else if (type == "yli::ontology::Console*")
             {
                 this->type = yli::common::Datatype::CONSOLE_POINTER;
-                this->set_value(value_string);
             }
             else if (type == "yli::ontology::Movable*")
             {
                 this->type = yli::common::Datatype::MOVABLE_POINTER;
-                this->set_value(value_string);
             }
             else if (type == "const yli::ontology::Movable*")
             {
                 this->type = yli::common::Datatype::CONST_MOVABLE_POINTER;
-                this->set_value(value_string);
             }
             else
             {
                 this->type = yli::common::Datatype::UNKNOWN;
+                return;
             }
+
+            this->set_value(value_string);
         }
 
         AnyValue::AnyValue()
