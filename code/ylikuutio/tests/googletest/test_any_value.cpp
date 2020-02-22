@@ -501,6 +501,18 @@ TEST(any_value_must_be_initialized_appropriately, universe)
     ASSERT_EQ(std::strcmp(universe_any_value.get_string().c_str(), "deadbeef"), 0);
 }
 
+TEST(any_value_must_be_initialized_appropriately, world)
+{
+    yli::ontology::World* world = static_cast<yli::ontology::World*>((void*) 0xdeadbeef);
+    yli::common::AnyValue world_any_value = yli::common::AnyValue(world);
+    ASSERT_EQ(world_any_value.type, yli::common::Datatype::WORLD_POINTER);
+    ASSERT_EQ(world_any_value.world_pointer, world);
+    ASSERT_EQ(std::strlen(world_any_value.get_datatype().c_str()), std::strlen("yli::ontology::World*"));
+    ASSERT_EQ(std::strcmp(world_any_value.get_datatype().c_str(), "yli::ontology::World*"), 0);
+    ASSERT_EQ(std::strlen(world_any_value.get_string().c_str()), std::strlen("deadbeef"));
+    ASSERT_EQ(std::strcmp(world_any_value.get_string().c_str(), "deadbeef"), 0);
+}
+
 TEST(any_value_must_be_initialized_appropriately, scene)
 {
     yli::ontology::Scene* scene = static_cast<yli::ontology::Scene*>((void*) 0xbad5ce6e);
