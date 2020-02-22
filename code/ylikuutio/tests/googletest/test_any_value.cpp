@@ -494,7 +494,7 @@ TEST(any_value_must_be_initialized_appropriately, universe)
     yli::ontology::Universe* universe = static_cast<yli::ontology::Universe*>((void*) 0xdeadbeef);
     yli::common::AnyValue universe_any_value = yli::common::AnyValue(universe);
     ASSERT_EQ(universe_any_value.type, yli::common::Datatype::UNIVERSE_POINTER);
-    ASSERT_EQ(universe_any_value.universe, universe);
+    ASSERT_EQ(universe_any_value.universe_pointer, universe);
     ASSERT_EQ(std::strlen(universe_any_value.get_datatype().c_str()), std::strlen("yli::ontology::Universe*"));
     ASSERT_EQ(std::strcmp(universe_any_value.get_datatype().c_str(), "yli::ontology::Universe*"), 0);
     ASSERT_EQ(std::strlen(universe_any_value.get_string().c_str()), std::strlen("deadbeef"));

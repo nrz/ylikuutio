@@ -208,7 +208,7 @@ namespace yli
                     any_value_stringstream << std::hex << (uint64_t) this->uint32_t_pointer << std::dec;
                     break;
                 case (yli::common::Datatype::UNIVERSE_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) this->universe << std::dec;
+                    any_value_stringstream << std::hex << (uint64_t) this->universe_pointer << std::dec;
                     break;
                 case (yli::common::Datatype::SCENE_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->scene_pointer << std::dec;
@@ -382,7 +382,7 @@ namespace yli
             switch (this->type)
             {
                 case (yli::common::Datatype::UNIVERSE_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->universe));
+                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->universe_pointer));
                 case (yli::common::Datatype::SCENE_POINTER):
                     return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->scene_pointer));
                 case (yli::common::Datatype::SHADER_POINTER):
@@ -561,7 +561,7 @@ namespace yli
 
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
-                        this->universe = static_cast<yli::ontology::Universe*>(void_pointer);
+                        this->universe_pointer = static_cast<yli::ontology::Universe*>(void_pointer);
                         return true;
                     }
                 case (yli::common::Datatype::SCENE_POINTER):
@@ -778,7 +778,7 @@ namespace yli
             this->double_pointer = original.double_pointer;
             this->int32_t_pointer = original.int32_t_pointer;
             this->uint32_t_pointer = original.uint32_t_pointer;
-            this->universe = original.universe;
+            this->universe_pointer = original.universe_pointer;
             this->scene_pointer = original.scene_pointer;
             this->shader_pointer = original.shader_pointer;
             this->material_pointer = original.material_pointer;
@@ -1166,15 +1166,15 @@ namespace yli
             }
         }
 
-        AnyValue::AnyValue(yli::ontology::Universe* const universe)
+        AnyValue::AnyValue(yli::ontology::Universe* const universe_pointer)
         {
             // constructor.
             this->set_default_values();
             this->type = yli::common::Datatype::UNIVERSE_POINTER;
-            this->universe = universe;
+            this->universe_pointer = universe_pointer;
         }
 
-        AnyValue::AnyValue(const std::string& type, yli::ontology::Universe* const universe)
+        AnyValue::AnyValue(const std::string& type, yli::ontology::Universe* const universe_pointer)
         {
             // constructor.
             this->set_default_values();
@@ -1182,7 +1182,7 @@ namespace yli
             if (type == "yli::ontology::Universe*")
             {
                 this->type = yli::common::Datatype::UNIVERSE_POINTER;
-                this->universe = universe;
+                this->universe_pointer = universe_pointer;
             }
         }
 

@@ -83,7 +83,7 @@ namespace yli
                 AnyValue(double* const double_pointer);
                 AnyValue(int32_t* const int32_t_pointer);
                 AnyValue(uint32_t* const uint32_t_pointer);
-                AnyValue(yli::ontology::Universe* const universe);
+                AnyValue(yli::ontology::Universe* const universe_pointer);
                 AnyValue(yli::ontology::Scene* const scene_pointer);
                 AnyValue(yli::ontology::Shader* const shader_pointer);
                 AnyValue(yli::ontology::Material* const material_pointer);
@@ -122,7 +122,7 @@ namespace yli
                 AnyValue(const std::string& type, double* const double_pointer);
                 AnyValue(const std::string& type, int32_t* const int32_t_pointer);
                 AnyValue(const std::string& type, uint32_t* const uint32_t_pointer);
-                AnyValue(const std::string& type, yli::ontology::Universe* const universe);
+                AnyValue(const std::string& type, yli::ontology::Universe* const universe_pointer);
                 AnyValue(const std::string& type, yli::ontology::Scene* const scene_pointer);
                 AnyValue(const std::string& type, yli::ontology::Shader* const shader_pointer);
                 AnyValue(const std::string& type, yli::ontology::Material* const material_pointer);
@@ -172,7 +172,7 @@ namespace yli
                     double* double_pointer;
                     int32_t* int32_t_pointer;
                     uint32_t* uint32_t_pointer;
-                    yli::ontology::Universe* universe;
+                    yli::ontology::Universe* universe_pointer;
                     yli::ontology::Scene* scene_pointer;
                     yli::ontology::Shader* shader_pointer;
                     yli::ontology::Material* material_pointer;
