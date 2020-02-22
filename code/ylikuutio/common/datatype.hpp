@@ -38,6 +38,7 @@ namespace yli
             INT32_T_POINTER,
             UINT32_T_POINTER,
             UNIVERSE_POINTER,
+            WORLD_POINTER,
             SCENE_POINTER,
             SHADER_POINTER,
             MATERIAL_POINTER,

@@ -47,6 +47,7 @@ namespace yli
     {
         class Entity;
         class Universe;
+        class World;
         class Scene;
         class Shader;
         class Material;
@@ -96,6 +97,8 @@ namespace yli
                     return "uint32_t*";
                 case (yli::common::Datatype::UNIVERSE_POINTER):
                     return "yli::ontology::Universe*";
+                case (yli::common::Datatype::WORLD_POINTER):
+                    return "yli::ontology::World*";
                 case (yli::common::Datatype::SCENE_POINTER):
                     return "yli::ontology::Scene*";
                 case (yli::common::Datatype::SHADER_POINTER):
@@ -209,6 +212,9 @@ namespace yli
                     break;
                 case (yli::common::Datatype::UNIVERSE_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->universe_pointer << std::dec;
+                    break;
+                case (yli::common::Datatype::WORLD_POINTER):
+                    any_value_stringstream << std::hex << (uint64_t) this->world_pointer << std::dec;
                     break;
                 case (yli::common::Datatype::SCENE_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->scene_pointer << std::dec;
@@ -383,6 +389,8 @@ namespace yli
             {
                 case (yli::common::Datatype::UNIVERSE_POINTER):
                     return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->universe_pointer));
+                case (yli::common::Datatype::WORLD_POINTER):
+                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->world_pointer));
                 case (yli::common::Datatype::SCENE_POINTER):
                     return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->scene_pointer));
                 case (yli::common::Datatype::SHADER_POINTER):
@@ -562,6 +570,18 @@ namespace yli
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->universe_pointer = static_cast<yli::ontology::Universe*>(void_pointer);
+                        return true;
+                    }
+                case (yli::common::Datatype::WORLD_POINTER):
+                    {
+                        if (!yli::string::check_if_unsigned_integer_string(value_string))
+                        {
+                            return false;
+                        }
+
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->world_pointer = static_cast<yli::ontology::World*>(void_pointer);
                         return true;
                     }
                 case (yli::common::Datatype::SCENE_POINTER):
@@ -779,6 +799,7 @@ namespace yli
             this->int32_t_pointer = original.int32_t_pointer;
             this->uint32_t_pointer = original.uint32_t_pointer;
             this->universe_pointer = original.universe_pointer;
+            this->world_pointer = original.world_pointer;
             this->scene_pointer = original.scene_pointer;
             this->shader_pointer = original.shader_pointer;
             this->material_pointer = original.material_pointer;
@@ -858,6 +879,10 @@ namespace yli
             else if (type == "yli::ontology::Universe*")
             {
                 this->type = yli::common::Datatype::UNIVERSE_POINTER;
+            }
+            else if (type == "yli::ontology::World*")
+            {
+                this->type = yli::common::Datatype::WORLD_POINTER;
             }
             else if (type == "yli::ontology::Scene*")
             {
@@ -1183,6 +1208,26 @@ namespace yli
             {
                 this->type = yli::common::Datatype::UNIVERSE_POINTER;
                 this->universe_pointer = universe_pointer;
+            }
+        }
+
+        AnyValue::AnyValue(yli::ontology::World* const world_pointer)
+        {
+            // constructor.
+            this->set_default_values();
+            this->type = yli::common::Datatype::WORLD_POINTER;
+            this->world_pointer = world_pointer;
+        }
+
+        AnyValue::AnyValue(const std::string& type, yli::ontology::World* const world_pointer)
+        {
+            // constructor.
+            this->set_default_values();
+
+            if (type == "yli::ontology::World*")
+            {
+                this->type = yli::common::Datatype::WORLD_POINTER;
+                this->world_pointer = world_pointer;
             }
         }
 
