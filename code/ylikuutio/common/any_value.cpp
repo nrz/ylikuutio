@@ -113,10 +113,10 @@ namespace yli
                     return "yli::ontology::VectorFont*";
                 case (yli::common::Datatype::GLYPH_POINTER):
                     return "yli::ontology::Glyph*";
-                case (yli::common::Datatype::TEXT3D_POINTER):
-                    return "yli::ontology::Text3D*";
                 case (yli::common::Datatype::TEXT2D_POINTER):
                     return "yli::ontology::Text2D*";
+                case (yli::common::Datatype::TEXT3D_POINTER):
+                    return "yli::ontology::Text3D*";
                 case (yli::common::Datatype::CONSOLE_POINTER):
                     return "yli::ontology::Console*";
                 case (yli::common::Datatype::MOVABLE_POINTER):
@@ -912,6 +912,10 @@ namespace yli
             {
                 this->type = yli::common::Datatype::GLYPH_POINTER;
             }
+            else if (type == "yli::ontology::Text2D*")
+            {
+                this->type = yli::common::Datatype::TEXT2D_POINTER;
+            }
             else if (type == "yli::ontology::Text3D*")
             {
                 this->type = yli::common::Datatype::TEXT3D_POINTER;
@@ -919,10 +923,6 @@ namespace yli
             else if (type == "yli::ontology::Symbiosis*")
             {
                 this->type = yli::common::Datatype::SYMBIOSIS_POINTER;
-            }
-            else if (type == "yli::ontology::Text2D*")
-            {
-                this->type = yli::common::Datatype::TEXT2D_POINTER;
             }
             else if (type == "yli::ontology::Console*")
             {
