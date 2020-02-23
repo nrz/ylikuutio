@@ -71,6 +71,9 @@ General
 * Besides includes guards, minimize the use of proprocessor code.
 * When testing of `private` members (e.g. vertices or normals) is needed,
   provide them using a function which returns a `const` reference to those.
+* In code that processes Entities of more than 1 `yli::ontology` class, e.g. in `AnyValue`,
+  process the different Entity classes everywhere in the canonical order defined in
+  `yli::common::Datatype`, unless there is a reason to do otherwise, e.g. efficiency.
 
 Naming
 * Use CamelCase for class names: `class MyClass;`.
