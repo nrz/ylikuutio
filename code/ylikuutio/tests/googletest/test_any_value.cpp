@@ -33,17 +33,6 @@ TEST(any_value_must_be_initialized_appropriately, no_value)
     ASSERT_EQ(no_value.type, yli::common::Datatype::UNKNOWN);
 }
 
-TEST(any_value_must_be_initialized_appropriately, any_struct_shader_ptr)
-{
-    std::shared_ptr<yli::common::AnyStruct> any_struct_shared_ptr =
-        std::make_shared<yli::common::AnyStruct>();
-    yli::common::AnyValue any_struct_shared_ptr_any_value = yli::common::AnyValue(any_struct_shared_ptr);
-    ASSERT_EQ(any_struct_shared_ptr_any_value.type, yli::common::Datatype::ANY_STRUCT_SHARED_PTR);
-    ASSERT_EQ(any_struct_shared_ptr_any_value.any_struct_shared_ptr, any_struct_shared_ptr);
-    ASSERT_EQ(std::strlen(any_struct_shared_ptr_any_value.get_datatype().c_str()), std::strlen("std::shared_ptr<yli::common::AnyStruct>"));
-    ASSERT_EQ(std::strcmp(any_struct_shared_ptr_any_value.get_datatype().c_str(), "std::shared_ptr<yli::common::AnyStruct>"), 0);
-}
-
 TEST(any_value_must_be_initialized_appropriately, bool_true)
 {
     bool bool_true = true;
@@ -571,6 +560,17 @@ TEST(any_value_must_be_initialized_appropriately, object)
     ASSERT_EQ(std::strcmp(object_pointer_any_value.get_datatype().c_str(), "yli::ontology::Object*"), 0);
     ASSERT_EQ(std::strlen(object_pointer_any_value.get_string().c_str()), std::strlen("bad0b1ec7"));
     ASSERT_EQ(std::strcmp(object_pointer_any_value.get_string().c_str(), "bad0b1ec7"), 0);
+}
+
+TEST(any_value_must_be_initialized_appropriately, any_struct_shader_ptr)
+{
+    std::shared_ptr<yli::common::AnyStruct> any_struct_shared_ptr =
+        std::make_shared<yli::common::AnyStruct>();
+    yli::common::AnyValue any_struct_shared_ptr_any_value = yli::common::AnyValue(any_struct_shared_ptr);
+    ASSERT_EQ(any_struct_shared_ptr_any_value.type, yli::common::Datatype::ANY_STRUCT_SHARED_PTR);
+    ASSERT_EQ(any_struct_shared_ptr_any_value.any_struct_shared_ptr, any_struct_shared_ptr);
+    ASSERT_EQ(std::strlen(any_struct_shared_ptr_any_value.get_datatype().c_str()), std::strlen("std::shared_ptr<yli::common::AnyStruct>"));
+    ASSERT_EQ(std::strcmp(any_struct_shared_ptr_any_value.get_datatype().c_str(), "std::shared_ptr<yli::common::AnyStruct>"), 0);
 }
 
 TEST(any_value_must_be_initialized_appropriately, std_string)
