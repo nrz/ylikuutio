@@ -41,7 +41,7 @@ TEST(any_value_must_be_initialized_appropriately, bool_true)
     ASSERT_TRUE(true_value.bool_value);
     ASSERT_EQ(std::strlen(true_value.get_datatype().c_str()), std::strlen("bool"));
     ASSERT_EQ(std::strcmp(true_value.get_datatype().c_str(), "bool"), 0);
-    ASSERT_EQ(std::strlen(true_value.get_string().c_str()), std::strlen("bool"));
+    ASSERT_EQ(std::strlen(true_value.get_string().c_str()), std::strlen("true"));
     ASSERT_EQ(std::strcmp(true_value.get_string().c_str(), "true"), 0);
 }
 
