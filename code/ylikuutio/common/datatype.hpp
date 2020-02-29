@@ -43,6 +43,7 @@ namespace yli
             UINT32_T,
             // Raw pointers to primitive datatypes:
             BOOL_POINTER,
+            CHAR_POINTER,
             FLOAT_POINTER,
             DOUBLE_POINTER,
             INT32_T_POINTER,

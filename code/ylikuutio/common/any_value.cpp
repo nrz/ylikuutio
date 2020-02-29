@@ -85,6 +85,8 @@ namespace yli
                     return "uint32_t";
                 case (yli::common::Datatype::BOOL_POINTER):
                     return "bool*";
+                case (yli::common::Datatype::CHAR_POINTER):
+                    return "char*";
                 case (yli::common::Datatype::FLOAT_POINTER):
                     return "float*";
                 case (yli::common::Datatype::DOUBLE_POINTER):
@@ -204,6 +206,9 @@ namespace yli
                     break;
                 case (yli::common::Datatype::BOOL_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->bool_pointer << std::dec;
+                    break;
+                case (yli::common::Datatype::CHAR_POINTER):
+                    any_value_stringstream << std::hex << (uint64_t) this->char_pointer << std::dec;
                     break;
                 case (yli::common::Datatype::FLOAT_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->float_pointer << std::dec;
@@ -579,6 +584,18 @@ namespace yli
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
                         this->bool_pointer = static_cast<bool*>(void_pointer);
+                        return true;
+                    }
+                case (yli::common::Datatype::CHAR_POINTER):
+                    {
+                        if (!yli::string::check_if_unsigned_integer_string(value_string))
+                        {
+                            return false;
+                        }
+
+                        value_stringstream << value_string;
+                        value_stringstream >> void_pointer;
+                        this->char_pointer = static_cast<char*>(void_pointer);
                         return true;
                     }
                 case (yli::common::Datatype::FLOAT_POINTER):
@@ -1010,6 +1027,7 @@ namespace yli
             this->int32_t_value = original.int32_t_value;
             this->uint32_t_value = original.uint32_t_value;
             this->bool_pointer = original.bool_pointer;
+            this->char_pointer = original.char_pointer;
             this->float_pointer = original.float_pointer;
             this->double_pointer = original.double_pointer;
             this->int32_t_pointer = original.int32_t_pointer;
@@ -1090,6 +1108,10 @@ namespace yli
             else if (type == "bool*")
             {
                 this->type = yli::common::Datatype::BOOL_POINTER;
+            }
+            else if (type == "char*")
+            {
+                this->type = yli::common::Datatype::CHAR_POINTER;
             }
             else if (type == "float*")
             {
@@ -1397,6 +1419,26 @@ namespace yli
             {
                 this->type = yli::common::Datatype::BOOL_POINTER;
                 this->bool_pointer = bool_pointer;
+            }
+        }
+
+        AnyValue::AnyValue(char* const char_pointer)
+        {
+            // constructor.
+            this->set_default_values();
+            this->type = yli::common::Datatype::CHAR_POINTER;
+            this->char_pointer = char_pointer;
+        }
+
+        AnyValue::AnyValue(const std::string& type, char* const char_pointer)
+        {
+            // constructor.
+            this->set_default_values();
+
+            if (type == "char*")
+            {
+                this->type = yli::common::Datatype::CHAR_POINTER;
+                this->char_pointer = char_pointer;
             }
         }
 

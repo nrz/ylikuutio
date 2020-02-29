@@ -87,6 +87,7 @@ namespace yli
                 AnyValue(const int32_t int32_t_value);
                 AnyValue(const uint32_t uint32_t_value);
                 AnyValue(bool* const bool_pointer);
+                AnyValue(char* const char_pointer);
                 AnyValue(float* const float_pointer);
                 AnyValue(double* const double_pointer);
                 AnyValue(int32_t* const int32_t_pointer);
@@ -135,6 +136,7 @@ namespace yli
                 AnyValue(const std::string& type, const int32_t int32_t_value);
                 AnyValue(const std::string& type, const uint32_t uint32_t_value);
                 AnyValue(const std::string& type, bool* const bool_pointer);
+                AnyValue(const std::string& type, char* const char_pointer);
                 AnyValue(const std::string& type, float* const float_pointer);
                 AnyValue(const std::string& type, double* const double_pointer);
                 AnyValue(const std::string& type, int32_t* const int32_t_pointer);
@@ -196,6 +198,7 @@ namespace yli
                     int32_t int32_t_value;
                     uint32_t uint32_t_value;
                     bool* bool_pointer;
+                    char* char_pointer;
                     float* float_pointer;
                     double* double_pointer;
                     int32_t* int32_t_pointer;
