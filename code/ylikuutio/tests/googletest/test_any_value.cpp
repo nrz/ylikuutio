@@ -392,6 +392,50 @@ TEST(any_value_must_be_initialized_appropriately, bool_pointer_false)
     ASSERT_EQ(false_value.get_entity_pointer(), nullptr);
 }
 
+TEST(any_value_must_be_initialized_appropriately, char_pointer_lowercase_a)
+{
+    char char_lowercase_a = 'a';
+    yli::common::AnyValue lowercase_a_value = yli::common::AnyValue(&char_lowercase_a);
+    ASSERT_EQ(lowercase_a_value.type, yli::common::Datatype::CHAR_POINTER);
+    ASSERT_EQ(lowercase_a_value.char_pointer, &char_lowercase_a);
+    ASSERT_EQ(std::strlen(lowercase_a_value.get_datatype().c_str()), std::strlen("char*"));
+    ASSERT_EQ(std::strcmp(lowercase_a_value.get_datatype().c_str(), "char*"), 0);
+    ASSERT_EQ(lowercase_a_value.get_entity_pointer(), nullptr);
+}
+
+TEST(any_value_must_be_initialized_appropriately, char_pointer_lowercase_b)
+{
+    char char_lowercase_b = 'b';
+    yli::common::AnyValue lowercase_b_value = yli::common::AnyValue(&char_lowercase_b);
+    ASSERT_EQ(lowercase_b_value.type, yli::common::Datatype::CHAR_POINTER);
+    ASSERT_EQ(lowercase_b_value.char_pointer, &char_lowercase_b);
+    ASSERT_EQ(std::strlen(lowercase_b_value.get_datatype().c_str()), std::strlen("char*"));
+    ASSERT_EQ(std::strcmp(lowercase_b_value.get_datatype().c_str(), "char*"), 0);
+    ASSERT_EQ(lowercase_b_value.get_entity_pointer(), nullptr);
+}
+
+TEST(any_value_must_be_initialized_appropriately, char_pointer_space)
+{
+    char char_space = ' ';
+    yli::common::AnyValue space_value = yli::common::AnyValue(&char_space);
+    ASSERT_EQ(space_value.type, yli::common::Datatype::CHAR_POINTER);
+    ASSERT_EQ(space_value.char_pointer, &char_space);
+    ASSERT_EQ(std::strlen(space_value.get_datatype().c_str()), std::strlen("char*"));
+    ASSERT_EQ(std::strcmp(space_value.get_datatype().c_str(), "char*"), 0);
+    ASSERT_EQ(space_value.get_entity_pointer(), nullptr);
+}
+
+TEST(any_value_must_be_initialized_appropriately, char_pointer_newline)
+{
+    char char_newline = '\n';
+    yli::common::AnyValue newline_value = yli::common::AnyValue(&char_newline);
+    ASSERT_EQ(newline_value.type, yli::common::Datatype::CHAR_POINTER);
+    ASSERT_EQ(newline_value.char_pointer, &char_newline);
+    ASSERT_EQ(std::strlen(newline_value.get_datatype().c_str()), std::strlen("char*"));
+    ASSERT_EQ(std::strcmp(newline_value.get_datatype().c_str(), "char*"), 0);
+    ASSERT_EQ(newline_value.get_entity_pointer(), nullptr);
+}
+
 TEST(any_value_must_be_initialized_appropriately, float_pointer_0)
 {
     float float_zero = 0.0f;
