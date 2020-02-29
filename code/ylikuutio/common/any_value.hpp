@@ -19,7 +19,6 @@
 #define __ANY_VALUE_HPP_INCLUDED
 
 #include "datatype.hpp"
-#include "spherical_coordinates_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -58,6 +57,7 @@ namespace yli
     namespace common
     {
         class AnyStruct;
+        class SphericalCoordinatesStruct;
 
         class AnyValue
         {
