@@ -43,11 +43,18 @@ General
   Use function templates where needed e.g. for speed.
 * Prefer `std::shared_ptr` and `std::make_shared` to raw pointers.
 * Prefer references to pointers.
+* If the lifetime of a pointer may extend beyond the lifetime of the
+  referenced Entity, or if the user may be able to define the value of
+  the pointer, then the existence of the referenced Entity must be confirmed
+  by finding a matching memory address in some trusted data structure,
+  e.g. in a child pointer vector, or in the `entity_map` of the `Universe`.
 * Use `const` for variables and member functions wherever it's appropriate.
 * Avoid `const_cast`, unless it is absolutely necessary and you know what you are doing.
 * For function parameters always use `const std::string&` instead of `std::string`, if possible.
 * For function parameters always use `const FooStruct&` instead of `FooStruct`, if possible.
 * For function parameters prefer `const FooStruct&` instead of more than 5 parameters.
+* Consider 6 parameters as the upper bound of number of function parameters at least for
+  realtime functions. In System V ABI up to 6 first integer parameters are passed in registers.
 * Maintaining compatibility with 32-bit systems is not a priority.
 * Minimize the use of `new` and `delete`.
 * Keep member variables in variable size order, biggest first, smallest last, to minimize
@@ -64,6 +71,9 @@ General
 * Besides includes guards, minimize the use of proprocessor code.
 * When testing of `private` members (e.g. vertices or normals) is needed,
   provide them using a function which returns a `const` reference to those.
+* In code that processes Entities of more than 1 `yli::ontology` class, e.g. in `AnyValue`,
+  process the different Entity classes everywhere in the canonical order defined in
+  `yli::common::Datatype`, unless there is a reason to do otherwise, e.g. efficiency.
 
 Naming
 * Use CamelCase for class names: `class MyClass;`.

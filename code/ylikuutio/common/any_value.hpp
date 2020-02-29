@@ -18,7 +18,7 @@
 #ifndef __ANY_VALUE_HPP_INCLUDED
 #define __ANY_VALUE_HPP_INCLUDED
 
-#include "spherical_coordinates_struct.hpp"
+#include "datatype.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -38,67 +38,32 @@ namespace yli
     namespace ontology
     {
         class Entity;
+        class Movable;
         class Universe;
+        class World;
         class Scene;
         class Shader;
         class Material;
         class Species;
         class Object;
+        class Symbiosis;
+        class SymbiontMaterial;
+        class SymbiontSpecies;
+        class Holobiont;
+        class Biont;
+        class Font2D;
+        class Text2D;
         class VectorFont;
         class Glyph;
         class Text3D;
-        class Symbiosis;
-        class Font2D;
         class Console;
-        class Movable;
+        class ComputeTask;
     }
 
     namespace common
     {
-        enum class Datatype
-        {
-            UNKNOWN,
-            ANY_STRUCT_SHARED_PTR,
-            BOOL,
-            CHAR,
-            FLOAT,
-            DOUBLE,
-            INT32_T,
-            UINT32_T,
-            BOOL_POINTER,
-            FLOAT_POINTER,
-            DOUBLE_POINTER,
-            INT32_T_POINTER,
-            UINT32_T_POINTER,
-            UNIVERSE_POINTER,
-            SCENE_POINTER,
-            SHADER_POINTER,
-            MATERIAL_POINTER,
-            SPECIES_POINTER,
-            OBJECT_POINTER,
-            VECTORFONT_POINTER,
-            GLYPH_POINTER,
-            TEXT3D_POINTER,
-            SYMBIOSIS_POINTER,
-            TEXT2D_POINTER,
-            CONSOLE_POINTER,
-            MOVABLE_POINTER,
-            CONST_MOVABLE_POINTER,
-            SPHERICAL_COORDINATES_STRUCT_POINTER,
-            STD_STRING_POINTER,
-            CONST_STD_STRING_POINTER,
-            STD_VECTOR_INT8_T_SHARED_PTR,
-            STD_VECTOR_UINT8_T_SHARED_PTR,
-            STD_VECTOR_INT16_T_SHARED_PTR,
-            STD_VECTOR_UINT16_T_SHARED_PTR,
-            STD_VECTOR_INT32_T_SHARED_PTR,
-            STD_VECTOR_UINT32_T_SHARED_PTR,
-            STD_VECTOR_FLOAT_SHARED_PTR,
-            GLM_VEC3_POINTER,
-            GLM_VEC4_POINTER
-        };
-
         class AnyStruct;
+        class SphericalCoordinatesStruct;
 
         class AnyValue
         {
@@ -111,9 +76,10 @@ namespace yli
                 // copy constructor.
                 AnyValue(const yli::common::AnyValue& original);
 
-                AnyValue(const std::string& type, const std::string& value_string);
-                AnyValue();
-                AnyValue(std::shared_ptr<yli::common::AnyStruct> any_struct_shared_ptr);
+                // common constructors.
+
+                AnyValue(); // This constructor initializes `AnyValue` with default values.
+                AnyValue(const std::string& type, const std::string& value_string); // This constructor takes also the value as a string.
                 AnyValue(const bool bool_value);
                 AnyValue(const char char_value);
                 AnyValue(const float float_value);
@@ -121,24 +87,35 @@ namespace yli
                 AnyValue(const int32_t int32_t_value);
                 AnyValue(const uint32_t uint32_t_value);
                 AnyValue(bool* const bool_pointer);
+                AnyValue(char* const char_pointer);
                 AnyValue(float* const float_pointer);
                 AnyValue(double* const double_pointer);
                 AnyValue(int32_t* const int32_t_pointer);
                 AnyValue(uint32_t* const uint32_t_pointer);
-                AnyValue(yli::ontology::Universe* const universe);
+                AnyValue(yli::ontology::Entity* const entity_pointer);
+                AnyValue(yli::ontology::Movable* const movable_pointer);
+                AnyValue(const yli::ontology::Movable* const const_movable_pointer);
+                AnyValue(yli::ontology::Universe* const universe_pointer);
+                AnyValue(yli::ontology::World* const world_pointer);
                 AnyValue(yli::ontology::Scene* const scene_pointer);
                 AnyValue(yli::ontology::Shader* const shader_pointer);
                 AnyValue(yli::ontology::Material* const material_pointer);
                 AnyValue(yli::ontology::Species* const species_pointer);
                 AnyValue(yli::ontology::Object* const object_pointer);
+                AnyValue(yli::ontology::Symbiosis* const symbiosis_pointer);
+                AnyValue(yli::ontology::SymbiontMaterial* const symbiont_material_pointer);
+                AnyValue(yli::ontology::SymbiontSpecies* const symbiont_species_pointer);
+                AnyValue(yli::ontology::Holobiont* const holobiont_pointer);
+                AnyValue(yli::ontology::Biont* const biont_pointer);
+                AnyValue(yli::ontology::Font2D* const font2D_pointer);
+                AnyValue(yli::ontology::Text2D* const text2D_pointer);
                 AnyValue(yli::ontology::VectorFont* const vector_font_pointer);
                 AnyValue(yli::ontology::Glyph* const glyph_pointer);
                 AnyValue(yli::ontology::Text3D* const text3D_pointer);
-                AnyValue(yli::ontology::Symbiosis* const symbiosis_pointer);
-                AnyValue(yli::ontology::Font2D* const font2D_pointer);
                 AnyValue(yli::ontology::Console* const console_pointer);
-                AnyValue(yli::ontology::Movable* const movable_pointer);
-                AnyValue(const yli::ontology::Movable* const const_movable_pointer);
+                AnyValue(yli::ontology::ComputeTask* const compute_task_pointer);
+                AnyValue(std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr);
+                AnyValue(std::shared_ptr<yli::common::AnyStruct> any_struct_shared_ptr);
                 AnyValue(yli::common::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
                 AnyValue(std::string* const std_string_pointer);
                 AnyValue(const std::string* const const_std_string_pointer);
@@ -152,7 +129,6 @@ namespace yli
                 AnyValue(glm::vec3* const glm_vec3_pointer);
                 AnyValue(glm::vec4* const glm_vec4_pointer);
 
-                AnyValue(const std::string& type, std::shared_ptr<yli::common::AnyStruct> any_struct_shared_ptr);
                 AnyValue(const std::string& type, const bool bool_value);
                 AnyValue(const std::string& type, const char char_value);
                 AnyValue(const std::string& type, const float float_value);
@@ -160,24 +136,35 @@ namespace yli
                 AnyValue(const std::string& type, const int32_t int32_t_value);
                 AnyValue(const std::string& type, const uint32_t uint32_t_value);
                 AnyValue(const std::string& type, bool* const bool_pointer);
+                AnyValue(const std::string& type, char* const char_pointer);
                 AnyValue(const std::string& type, float* const float_pointer);
                 AnyValue(const std::string& type, double* const double_pointer);
                 AnyValue(const std::string& type, int32_t* const int32_t_pointer);
                 AnyValue(const std::string& type, uint32_t* const uint32_t_pointer);
-                AnyValue(const std::string& type, yli::ontology::Universe* const universe);
+                AnyValue(const std::string& type, yli::ontology::Entity* const entity_pointer);
+                AnyValue(const std::string& type, yli::ontology::Movable* const movable_pointer);
+                AnyValue(const std::string& type, const yli::ontology::Movable* const const_movable_pointer);
+                AnyValue(const std::string& type, yli::ontology::Universe* const universe_pointer);
+                AnyValue(const std::string& type, yli::ontology::World* const world_pointer);
                 AnyValue(const std::string& type, yli::ontology::Scene* const scene_pointer);
                 AnyValue(const std::string& type, yli::ontology::Shader* const shader_pointer);
                 AnyValue(const std::string& type, yli::ontology::Material* const material_pointer);
                 AnyValue(const std::string& type, yli::ontology::Species* const species_pointer);
                 AnyValue(const std::string& type, yli::ontology::Object* const object_pointer);
+                AnyValue(const std::string& type, yli::ontology::Symbiosis* const symbiosis_pointer);
+                AnyValue(const std::string& type, yli::ontology::SymbiontMaterial* const symbiont_material_pointer);
+                AnyValue(const std::string& type, yli::ontology::SymbiontSpecies* const symbiont_species_pointer);
+                AnyValue(const std::string& type, yli::ontology::Holobiont* const holobiont_pointer);
+                AnyValue(const std::string& type, yli::ontology::Biont* const biont_pointer);
+                AnyValue(const std::string& type, yli::ontology::Font2D* const font2D_pointer);
+                AnyValue(const std::string& type, yli::ontology::Text2D* const text2D_pointer);
                 AnyValue(const std::string& type, yli::ontology::VectorFont* const vector_font_pointer);
                 AnyValue(const std::string& type, yli::ontology::Glyph* const glyph_pointer);
                 AnyValue(const std::string& type, yli::ontology::Text3D* const text3D_pointer);
-                AnyValue(const std::string& type, yli::ontology::Symbiosis* const symbiosis_pointer);
-                AnyValue(const std::string& type, yli::ontology::Font2D* const font2D_pointer);
                 AnyValue(const std::string& type, yli::ontology::Console* const console_pointer);
-                AnyValue(const std::string& type, yli::ontology::Movable* const movable_pointer);
-                AnyValue(const std::string& type, const yli::ontology::Movable* const const_movable_pointer);
+                AnyValue(const std::string& type, yli::ontology::ComputeTask* const compute_task_pointer);
+                AnyValue(const std::string& type, std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr);
+                AnyValue(const std::string& type, std::shared_ptr<yli::common::AnyStruct> any_struct_shared_ptr);
                 AnyValue(const std::string& type, yli::common::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
                 AnyValue(const std::string& type, std::string* const std_string_pointer);
                 AnyValue(const std::string& type, const std::string* const const_std_string_pointer);
@@ -192,6 +179,7 @@ namespace yli
                 AnyValue(const std::string& type, glm::vec4* const glm_vec3_pointer);
 
                 yli::common::Datatype type;
+                std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr;
                 std::shared_ptr<yli::common::AnyStruct> any_struct_shared_ptr;
                 std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr;
                 std::shared_ptr<std::vector<uint8_t>> std_vector_uint8_t_shared_ptr;
@@ -210,24 +198,33 @@ namespace yli
                     int32_t int32_t_value;
                     uint32_t uint32_t_value;
                     bool* bool_pointer;
+                    char* char_pointer;
                     float* float_pointer;
                     double* double_pointer;
                     int32_t* int32_t_pointer;
                     uint32_t* uint32_t_pointer;
-                    yli::ontology::Universe* universe;
+                    yli::ontology::Entity* entity_pointer;
+                    yli::ontology::Movable* movable_pointer;
+                    const yli::ontology::Movable* const_movable_pointer;
+                    yli::ontology::Universe* universe_pointer;
+                    yli::ontology::World* world_pointer;
                     yli::ontology::Scene* scene_pointer;
                     yli::ontology::Shader* shader_pointer;
                     yli::ontology::Material* material_pointer;
                     yli::ontology::Species* species_pointer;
                     yli::ontology::Object* object_pointer;
+                    yli::ontology::Symbiosis* symbiosis_pointer;
+                    yli::ontology::SymbiontMaterial* symbiont_material_pointer;
+                    yli::ontology::SymbiontSpecies* symbiont_species_pointer;
+                    yli::ontology::Holobiont* holobiont_pointer;
+                    yli::ontology::Biont* biont_pointer;
+                    yli::ontology::Font2D* font2D_pointer;
+                    yli::ontology::Text2D* text2D_pointer;
                     yli::ontology::VectorFont* vector_font_pointer;
                     yli::ontology::Glyph* glyph_pointer;
                     yli::ontology::Text3D* text3D_pointer;
-                    yli::ontology::Symbiosis* symbiosis_pointer;
-                    yli::ontology::Font2D* font2D_pointer;
                     yli::ontology::Console* console_pointer;
-                    yli::ontology::Movable* movable_pointer;
-                    const yli::ontology::Movable* const_movable_pointer;
+                    yli::ontology::ComputeTask* compute_task_pointer;
                     yli::common::SphericalCoordinatesStruct* spherical_coordinates_struct_pointer;
                     std::string* std_string_pointer;
                     const std::string* const_std_string_pointer;

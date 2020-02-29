@@ -269,12 +269,16 @@ namespace yli
 
         std::size_t Scene::get_number_of_children() const
         {
-            return this->number_of_shaders + this->parent_of_cameras.get_number_of_children() + this->parent_of_brains.get_number_of_children();
+            return this->number_of_shaders +
+                this->parent_of_default_camera.get_number_of_children() +
+                this->parent_of_cameras.get_number_of_children() +
+                this->parent_of_brains.get_number_of_children();
         }
 
         std::size_t Scene::get_number_of_descendants() const
         {
             return yli::ontology::get_number_of_descendants(this->shader_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->parent_of_default_camera.child_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->parent_of_cameras.child_pointer_vector) +
                 yli::ontology::get_number_of_descendants(this->parent_of_brains.child_pointer_vector);
         }

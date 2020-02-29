@@ -24,8 +24,6 @@
 #include "text3D_struct.hpp"
 #include "object_struct.hpp"
 #include "movable_struct.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-#include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -104,8 +102,6 @@ namespace yli
 
                 friend class Object;
                 friend void create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* text3D);
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
                 yli::ontology::ParentModule parent_of_objects;
 

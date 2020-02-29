@@ -378,6 +378,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/common/any_struct.hpp
     code/ylikuutio/common/any_value.cpp
     code/ylikuutio/common/any_value.hpp
+    code/ylikuutio/common/datatype.hpp
     code/ylikuutio/common/pi.hpp
     code/ylikuutio/common/spherical_coordinates_struct.hpp
 
@@ -771,6 +772,39 @@ add_executable(hirvi
     )
 target_link_libraries(hirvi ylikuutio ${ALL_LIBS} pthread)
 
+# YliEdit
+add_executable(yli_edit
+    # yli_edit, in alphabetical order
+    code/edit/yli_edit.cpp
+    code/edit/yli_edit_console_callbacks.cpp
+    code/edit/yli_edit_console_callbacks.hpp
+
+    # app, in alphabetical order
+    code/app/app_background_colors.cpp
+    code/app/app_background_colors.hpp
+    code/app/app_brain.cpp
+    code/app/app_brain.hpp
+    code/app/app_console.cpp
+    code/app/app_console.hpp
+    code/app/app_console_callbacks.cpp
+    code/app/app_console_callbacks.hpp
+    code/app/app_debug.cpp
+    code/app/app_debug.hpp
+    code/app/app_framebuffer.cpp
+    code/app/app_framebuffer.hpp
+    code/app/app_keyboard_callbacks.cpp
+    code/app/app_keyboard_callbacks.hpp
+    code/app/app_location_and_orientation.cpp
+    code/app/app_location_and_orientation.hpp
+    code/app/app_movement.cpp
+    code/app/app_movement.hpp
+    code/app/app_window.cpp
+    code/app/app_window.hpp
+    code/app/app_wireframe.cpp
+    code/app/app_wireframe.hpp
+    )
+target_link_libraries(yli_edit ylikuutio ${ALL_LIBS} pthread)
+
 # S7 Scheme test
 add_executable(s7_test
     code/s7/s7_test.cpp)
@@ -813,6 +847,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/common/any_struct.hpp
         code/ylikuutio/common/any_value.cpp
         code/ylikuutio/common/any_value.hpp
+        code/ylikuutio/common/datatype.hpp
+        code/ylikuutio/common/spherical_coordinates_struct.hpp
         code/ylikuutio/file/file_loader.cpp
         code/ylikuutio/file/file_loader.hpp
         code/ylikuutio/file/file_writer.hpp

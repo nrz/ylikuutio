@@ -18,6 +18,7 @@
 #ifndef __ENTITY_HPP_INCLUDED
 #define __ENTITY_HPP_INCLUDED
 
+#include "parent_module.hpp"
 #include "pre_render_callback.hpp"
 #include "post_render_callback.hpp"
 
@@ -91,6 +92,8 @@ namespace yli
 
                 PreRenderCallback prerender_callback;
                 PostRenderCallback postrender_callback;
+
+                yli::ontology::ParentModule parent_of_any_struct_entities;
 
             private:
                 void bind_to_Universe();

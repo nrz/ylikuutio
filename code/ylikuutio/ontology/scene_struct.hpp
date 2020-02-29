@@ -18,6 +18,8 @@
 #ifndef __SCENE_STRUCT_HPP_INCLUDED
 #define __SCENE_STRUCT_HPP_INCLUDED
 
+#include "camera_struct.hpp"
+
 namespace yli
 {
     namespace ontology
@@ -34,6 +36,8 @@ namespace yli
             {
                 // constructor.
             }
+
+            CameraStruct default_camera_struct; // parameters of the default `Camera`.
 
             yli::ontology::World* world; // pointer to `World` object.
             float gravity;               // In Bullet, gravity is a feature of `btDiscreteDynamicsWorld` & `
