@@ -375,7 +375,7 @@ TEST(any_value_must_be_initialized_appropriately, bool_pointer_true)
     bool bool_true = true;
     yli::common::AnyValue true_value = yli::common::AnyValue(&bool_true);
     ASSERT_EQ(true_value.type, yli::common::Datatype::BOOL_POINTER);
-    ASSERT_TRUE(true_value.bool_value);
+    ASSERT_EQ(true_value.bool_pointer, &bool_true);
     ASSERT_EQ(std::strlen(true_value.get_datatype().c_str()), std::strlen("bool*"));
     ASSERT_EQ(std::strcmp(true_value.get_datatype().c_str(), "bool*"), 0);
     ASSERT_EQ(true_value.get_entity_pointer(), nullptr);
@@ -386,7 +386,7 @@ TEST(any_value_must_be_initialized_appropriately, bool_pointer_false)
     bool bool_false = false;
     yli::common::AnyValue false_value = yli::common::AnyValue(&bool_false);
     ASSERT_EQ(false_value.type, yli::common::Datatype::BOOL_POINTER);
-    ASSERT_FALSE(false_value.bool_value);
+    ASSERT_EQ(false_value.bool_pointer, &bool_false);
     ASSERT_EQ(std::strlen(false_value.get_datatype().c_str()), std::strlen("bool*"));
     ASSERT_EQ(std::strcmp(false_value.get_datatype().c_str(), "bool*"), 0);
     ASSERT_EQ(false_value.get_entity_pointer(), nullptr);
