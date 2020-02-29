@@ -20,6 +20,11 @@
 
 // `yli::common::Datatype` defines the canonical order of datatypes
 // that should be followed throughout Ylikuutio code.
+//
+// Both raw pointers and `std::shared_ptr` pointers may be supported
+// to some datatypes in the future. However, only raw pointers are
+// supported for `yli::ontology` Entities, as the shared ownership is
+// not supported for any of the `yli::ontology` Entities.
 
 namespace yli
 {
@@ -36,7 +41,7 @@ namespace yli
             DOUBLE,
             INT32_T,
             UINT32_T,
-            // Pointers to primitive datatypes:
+            // Raw pointers to primitive datatypes:
             BOOL_POINTER,
             FLOAT_POINTER,
             DOUBLE_POINTER,
@@ -78,9 +83,10 @@ namespace yli
             ANY_STRUCT_SHARED_PTR,
             // Structs.
             SPHERICAL_COORDINATES_STRUCT_POINTER,
-            // Pointers to standard library datatypes.
+            // Raw pointers to standard library datatypes.
             STD_STRING_POINTER,
             CONST_STD_STRING_POINTER,
+            // Shared pointers to standard library datatypes.
             STD_VECTOR_INT8_T_SHARED_PTR,
             STD_VECTOR_UINT8_T_SHARED_PTR,
             STD_VECTOR_INT16_T_SHARED_PTR,
@@ -88,7 +94,7 @@ namespace yli
             STD_VECTOR_INT32_T_SHARED_PTR,
             STD_VECTOR_UINT32_T_SHARED_PTR,
             STD_VECTOR_FLOAT_SHARED_PTR,
-            // Pointers to GLM datatypes.
+            // Raw pointers to GLM datatypes.
             GLM_VEC3_POINTER,
             GLM_VEC4_POINTER
         };
