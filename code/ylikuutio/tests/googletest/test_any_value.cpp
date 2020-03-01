@@ -1037,24 +1037,24 @@ TEST(any_value_must_be_initialized_appropriately, std_vector_float_shared_ptr)
 
 TEST(any_value_must_be_initialized_appropriately, glm_vec3)
 {
-    glm::vec3 glm_vec3 = glm::vec3(1.0f, 2.0f, 3.0f);
-    yli::common::AnyValue glm_vec3_pointer_any_value = yli::common::AnyValue(&glm_vec3);
-    ASSERT_EQ(glm_vec3_pointer_any_value.type, yli::common::Datatype::GLM_VEC3_POINTER);
-    ASSERT_EQ(glm_vec3_pointer_any_value.glm_vec3_pointer, &glm_vec3);
-    ASSERT_EQ(std::strlen(glm_vec3_pointer_any_value.get_datatype().c_str()), std::strlen("glm::vec3*"));
-    ASSERT_EQ(std::strcmp(glm_vec3_pointer_any_value.get_datatype().c_str(), "glm::vec3*"), 0);
+    std::shared_ptr<glm::vec3> glm_vec3_shared_ptr = std::make_shared<glm::vec3>(1.0f, 2.0f, 3.0f);
+    yli::common::AnyValue glm_vec3_pointer_any_value = yli::common::AnyValue(glm_vec3_shared_ptr);
+    ASSERT_EQ(glm_vec3_pointer_any_value.type, yli::common::Datatype::GLM_VEC3_SHARED_PTR);
+    ASSERT_EQ(glm_vec3_pointer_any_value.glm_vec3_shared_ptr, glm_vec3_shared_ptr);
+    ASSERT_EQ(std::strlen(glm_vec3_pointer_any_value.get_datatype().c_str()), std::strlen("std::shared_ptr<glm::vec3>"));
+    ASSERT_EQ(std::strcmp(glm_vec3_pointer_any_value.get_datatype().c_str(), "std::shared_ptr<glm::vec3>"), 0);
     // TODO: add assertions for `AnyValue::get_string` for `glm::vec3*`!
     ASSERT_EQ(glm_vec3_pointer_any_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, glm_vec4)
 {
-    glm::vec4 glm_vec4 = glm::vec4(1.0f, 2.0f, 3.0f, 4.0f);
-    yli::common::AnyValue glm_vec4_pointer_any_value = yli::common::AnyValue(&glm_vec4);
-    ASSERT_EQ(glm_vec4_pointer_any_value.type, yli::common::Datatype::GLM_VEC4_POINTER);
-    ASSERT_EQ(glm_vec4_pointer_any_value.glm_vec4_pointer, &glm_vec4);
-    ASSERT_EQ(std::strlen(glm_vec4_pointer_any_value.get_datatype().c_str()), std::strlen("glm::vec4*"));
-    ASSERT_EQ(std::strcmp(glm_vec4_pointer_any_value.get_datatype().c_str(), "glm::vec4*"), 0);
+    std::shared_ptr<glm::vec4> glm_vec4_shared_ptr = std::make_shared<glm::vec4>(1.0f, 2.0f, 3.0f, 4.0f);
+    yli::common::AnyValue glm_vec4_pointer_any_value = yli::common::AnyValue(glm_vec4_shared_ptr);
+    ASSERT_EQ(glm_vec4_pointer_any_value.type, yli::common::Datatype::GLM_VEC4_SHARED_PTR);
+    ASSERT_EQ(glm_vec4_pointer_any_value.glm_vec4_shared_ptr, glm_vec4_shared_ptr);
+    ASSERT_EQ(std::strlen(glm_vec4_pointer_any_value.get_datatype().c_str()), std::strlen("std::shared_ptr<glm::vec4>"));
+    ASSERT_EQ(std::strcmp(glm_vec4_pointer_any_value.get_datatype().c_str(), "std::shared_ptr<glm::vec4>"), 0);
     // TODO: add assertions for `AnyValue::get_string` for `glm::vec4*`!
     ASSERT_EQ(glm_vec4_pointer_any_value.get_entity_pointer(), nullptr);
 }

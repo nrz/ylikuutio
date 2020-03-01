@@ -95,9 +95,9 @@ namespace yli
             STD_VECTOR_INT32_T_SHARED_PTR,
             STD_VECTOR_UINT32_T_SHARED_PTR,
             STD_VECTOR_FLOAT_SHARED_PTR,
-            // Raw pointers to GLM datatypes.
-            GLM_VEC3_POINTER,
-            GLM_VEC4_POINTER
+            // Shared pointers to GLM datatypes.
+            GLM_VEC3_SHARED_PTR,
+            GLM_VEC4_SHARED_PTR
         };
     }
 }

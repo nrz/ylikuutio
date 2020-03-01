@@ -163,10 +163,10 @@ namespace yli
                     return "std::shared_ptr<std::vector<uint32_t>>";
                 case (yli::common::Datatype::STD_VECTOR_FLOAT_SHARED_PTR):
                     return "std::shared_ptr<std::vector<float>>";
-                case (yli::common::Datatype::GLM_VEC3_POINTER):
-                    return "glm::vec3*";
-                case (yli::common::Datatype::GLM_VEC4_POINTER):
-                    return "glm::vec4*";
+                case (yli::common::Datatype::GLM_VEC3_SHARED_PTR):
+                    return "std::shared_ptr<glm::vec3>";
+                case (yli::common::Datatype::GLM_VEC4_SHARED_PTR):
+                    return "std::shared_ptr<glm::vec4>";
                 default:
                     return "ERROR: `AnyValue::get_datatype`: no datatype string defined for this datatype!";
             }
@@ -411,30 +411,30 @@ namespace yli
                         any_value_stringstream << "std::shared_ptr<std::vector<float>>";
                     }
                     break;
-                case (yli::common::Datatype::GLM_VEC3_POINTER):
-                    if (this->glm_vec3_pointer == nullptr)
+                case (yli::common::Datatype::GLM_VEC3_SHARED_PTR):
+                    if (this->glm_vec3_shared_ptr == nullptr)
                     {
                         any_value_stringstream << "nullptr";
                     }
                     else
                     {
-                        any_value_stringstream << std::fixed << "{ " << this->glm_vec3_pointer->x
-                            << ", " << this->glm_vec3_pointer->y
-                            << ", " << this->glm_vec3_pointer->z
+                        any_value_stringstream << std::fixed << "{ " << this->glm_vec3_shared_ptr->x
+                            << ", " << this->glm_vec3_shared_ptr->y
+                            << ", " << this->glm_vec3_shared_ptr->z
                             << " }";
                     }
                     break;
-                case (yli::common::Datatype::GLM_VEC4_POINTER):
-                    if (this->glm_vec4_pointer == nullptr)
+                case (yli::common::Datatype::GLM_VEC4_SHARED_PTR):
+                    if (this->glm_vec4_shared_ptr == nullptr)
                     {
                         any_value_stringstream << "nullptr";
                     }
                     else
                     {
-                        any_value_stringstream << std::fixed << "{ " << this->glm_vec4_pointer->x
-                            << ", " << this->glm_vec4_pointer->y
-                            << ", " << this->glm_vec4_pointer->z
-                            << ", " << this->glm_vec4_pointer->w
+                        any_value_stringstream << std::fixed << "{ " << this->glm_vec4_shared_ptr->x
+                            << ", " << this->glm_vec4_shared_ptr->y
+                            << ", " << this->glm_vec4_shared_ptr->z
+                            << ", " << this->glm_vec4_shared_ptr->w
                             << " }";
                     }
                     break;
@@ -974,28 +974,28 @@ namespace yli
 
                     // `AnyValue::set_value` does not support `std::shared_ptr` yet.
 
-                case (yli::common::Datatype::GLM_VEC3_POINTER):
+                case (yli::common::Datatype::GLM_VEC3_SHARED_PTR):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
                             return false;
                         }
 
-                        value_stringstream << value_string;
-                        value_stringstream >> void_pointer;
-                        this->glm_vec3_pointer = static_cast<glm::vec3*>(void_pointer);
+                        std::shared_ptr<glm::vec3> glm_vec3_shared_ptr =
+                            std::make_shared<glm::vec3>();
+                        this->glm_vec3_shared_ptr = glm_vec3_shared_ptr;
                         return true;
                     }
-                case (yli::common::Datatype::GLM_VEC4_POINTER):
+                case (yli::common::Datatype::GLM_VEC4_SHARED_PTR):
                     {
                         if (!yli::string::check_if_unsigned_integer_string(value_string))
                         {
                             return false;
                         }
 
-                        value_stringstream << value_string;
-                        value_stringstream >> void_pointer;
-                        this->glm_vec4_pointer = static_cast<glm::vec4*>(void_pointer);
+                        std::shared_ptr<glm::vec4> glm_vec4_shared_ptr =
+                            std::make_shared<glm::vec4>();
+                        this->glm_vec4_shared_ptr = glm_vec4_shared_ptr;
                         return true;
                     }
                 default:
@@ -1066,8 +1066,8 @@ namespace yli
             this->std_vector_int32_t_shared_ptr = original.std_vector_int32_t_shared_ptr;
             this->std_vector_uint32_t_shared_ptr = original.std_vector_uint32_t_shared_ptr;
             this->std_vector_float_shared_ptr = original.std_vector_float_shared_ptr;
-            this->glm_vec3_pointer = original.glm_vec3_pointer;
-            this->glm_vec4_pointer = original.glm_vec4_pointer;
+            this->glm_vec3_shared_ptr = original.glm_vec3_shared_ptr;
+            this->glm_vec4_shared_ptr = original.glm_vec4_shared_ptr;
         }
 
         AnyValue::AnyValue()
@@ -1265,13 +1265,13 @@ namespace yli
             {
                 this->type = yli::common::Datatype::STD_VECTOR_FLOAT_SHARED_PTR;
             }
-            else if (type == "glm::vec3*")
+            else if (type == "std::shared_ptr<glm::vec3>")
             {
-                this->type = yli::common::Datatype::GLM_VEC3_POINTER;
+                this->type = yli::common::Datatype::GLM_VEC3_SHARED_PTR;
             }
-            else if (type == "glm::vec4*")
+            else if (type == "std::shared_ptr<glm::vec4>")
             {
-                this->type = yli::common::Datatype::GLM_VEC4_POINTER;
+                this->type = yli::common::Datatype::GLM_VEC4_SHARED_PTR;
             }
             else
             {
@@ -2202,43 +2202,43 @@ namespace yli
             }
         }
 
-        AnyValue::AnyValue(glm::vec3* const glm_vec3_pointer)
+        AnyValue::AnyValue(std::shared_ptr<glm::vec3> glm_vec3_shared_ptr)
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::Datatype::GLM_VEC3_POINTER;
-            this->glm_vec3_pointer = glm_vec3_pointer;
+            this->type = yli::common::Datatype::GLM_VEC3_SHARED_PTR;
+            this->glm_vec3_shared_ptr = glm_vec3_shared_ptr;
         }
 
-        AnyValue::AnyValue(const std::string& type, glm::vec3* const glm_vec3_pointer)
+        AnyValue::AnyValue(const std::string& type, std::shared_ptr<glm::vec3> glm_vec3_shared_ptr)
         {
             // constructor.
             this->set_default_values();
 
-            if (type == "glm::vec3*")
+            if (type == "std::shared_ptr<glm::vec3>")
             {
-                this->type = yli::common::Datatype::GLM_VEC3_POINTER;
-                this->glm_vec3_pointer = glm_vec3_pointer;
+                this->type = yli::common::Datatype::GLM_VEC3_SHARED_PTR;
+                this->glm_vec3_shared_ptr = glm_vec3_shared_ptr;
             }
         }
 
-        AnyValue::AnyValue(glm::vec4* const glm_vec4_pointer)
+        AnyValue::AnyValue(std::shared_ptr<glm::vec4> glm_vec4_shared_ptr)
         {
             // constructor.
             this->set_default_values();
-            this->type = yli::common::Datatype::GLM_VEC4_POINTER;
-            this->glm_vec4_pointer = glm_vec4_pointer;
+            this->type = yli::common::Datatype::GLM_VEC4_SHARED_PTR;
+            this->glm_vec4_shared_ptr = glm_vec4_shared_ptr;
         }
 
-        AnyValue::AnyValue(const std::string& type, glm::vec4* const glm_vec4_pointer)
+        AnyValue::AnyValue(const std::string& type, std::shared_ptr<glm::vec4> glm_vec4_shared_ptr)
         {
             // constructor.
             this->set_default_values();
 
-            if (type == "glm::vec4*")
+            if (type == "std::shared_ptr<glm::vec4>")
             {
-                this->type = yli::common::Datatype::GLM_VEC4_POINTER;
-                this->glm_vec4_pointer = glm_vec4_pointer;
+                this->type = yli::common::Datatype::GLM_VEC4_SHARED_PTR;
+                this->glm_vec4_shared_ptr = glm_vec4_shared_ptr;
             }
         }
     }

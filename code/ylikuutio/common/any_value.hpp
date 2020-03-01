@@ -126,8 +126,8 @@ namespace yli
                 AnyValue(std::shared_ptr<std::vector<int32_t>> std_vector_int32_t_shared_ptr);
                 AnyValue(std::shared_ptr<std::vector<uint32_t>> std_vector_uint32_t_shared_ptr);
                 AnyValue(std::shared_ptr<std::vector<float>> std_vector_float_shared_ptr);
-                AnyValue(glm::vec3* const glm_vec3_pointer);
-                AnyValue(glm::vec4* const glm_vec4_pointer);
+                AnyValue(std::shared_ptr<glm::vec3> const glm_vec3_shared_ptr);
+                AnyValue(std::shared_ptr<glm::vec4> const glm_vec4_shared_ptr);
 
                 AnyValue(const std::string& type, const bool bool_value);
                 AnyValue(const std::string& type, const char char_value);
@@ -175,8 +175,8 @@ namespace yli
                 AnyValue(const std::string& type, std::shared_ptr<std::vector<int32_t>> std_vector_int32_t_shared_ptr);
                 AnyValue(const std::string& type, std::shared_ptr<std::vector<uint32_t>> std_vector_uint32_t_shared_ptr);
                 AnyValue(const std::string& type, std::shared_ptr<std::vector<float>> std_vector_float_shared_ptr);
-                AnyValue(const std::string& type, glm::vec3* const glm_vec3_pointer);
-                AnyValue(const std::string& type, glm::vec4* const glm_vec3_pointer);
+                AnyValue(const std::string& type, std::shared_ptr<glm::vec3> const glm_vec3_shared_ptr);
+                AnyValue(const std::string& type, std::shared_ptr<glm::vec4> const glm_vec3_shared_ptr);
 
                 yli::common::Datatype type;
                 std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr;
@@ -188,6 +188,8 @@ namespace yli
                 std::shared_ptr<std::vector<int32_t>> std_vector_int32_t_shared_ptr;
                 std::shared_ptr<std::vector<uint32_t>> std_vector_uint32_t_shared_ptr;
                 std::shared_ptr<std::vector<float>> std_vector_float_shared_ptr;
+                std::shared_ptr<glm::vec3> glm_vec3_shared_ptr;
+                std::shared_ptr<glm::vec4> glm_vec4_shared_ptr;
 
                 union
                 {
@@ -228,8 +230,6 @@ namespace yli
                     yli::common::SphericalCoordinatesStruct* spherical_coordinates_struct_pointer;
                     std::string* std_string_pointer;
                     const std::string* const_std_string_pointer;
-                    glm::vec3* glm_vec3_pointer;
-                    glm::vec4* glm_vec4_pointer;
                 };
 
             private:

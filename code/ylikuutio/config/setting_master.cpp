@@ -903,12 +903,12 @@ namespace yli
 
                 std::shared_ptr<yli::common::AnyValue> cartesian_coordinates_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["cartesian_coordinates"]->setting_value);
 
-                if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != yli::common::Datatype::GLM_VEC3_POINTER)
+                if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != yli::common::Datatype::GLM_VEC3_SHARED_PTR)
                 {
                     return nullptr;
                 }
 
-                movable->cartesian_coordinates = *cartesian_coordinates_any_value->glm_vec3_pointer;
+                movable->cartesian_coordinates = *cartesian_coordinates_any_value->glm_vec3_shared_ptr;
                 return nullptr;
             }
 
@@ -921,12 +921,12 @@ namespace yli
 
             std::shared_ptr<yli::common::AnyValue> cartesian_coordinates_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["cartesian_coordinates"]->setting_value);
 
-            if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != yli::common::Datatype::GLM_VEC3_POINTER)
+            if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != yli::common::Datatype::GLM_VEC3_SHARED_PTR)
             {
                 return nullptr;
             }
 
-            universe->current_camera_cartesian_coordinates = glm::vec3(*cartesian_coordinates_any_value->glm_vec3_pointer);
+            universe->current_camera_cartesian_coordinates = glm::vec3(*cartesian_coordinates_any_value->glm_vec3_shared_ptr);
             return nullptr;
         }
 
