@@ -112,7 +112,8 @@ Real-time-code specific issues
 
 Compiling
 * Avoid large libraries. Try to keep the compiling time reasonable.
-* All code should compile with both GCC and Clang in amd64 Debian Stretch.
-* All code should crosscompile with MinGW-GCC from amd64 Debian Stretch
+* All code should compile with both GCC and Clang in amd64 Debian Buster.
+* All code should crosscompile with MinGW-GCC from amd64 Debian Buster
   to a 64-bit Windows (Google Test unfortunately does not).
+* All code should compile in the environment provided by Travis CI.
 * All code should compile in one `cmake .. && make` run.
