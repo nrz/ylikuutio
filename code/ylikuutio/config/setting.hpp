@@ -29,6 +29,20 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
+// `yli::ontology::Setting` provides setting-related functionality.
+// `Setting`s must be bound to a `SettingMaster`, which may be either
+// global or bound to a specific `yli::ontology::Entity`.
+// Each `Setting` may have `activate_callback` and `read_callback`.
+//
+// If `activate_callback` is defined, then it is used to activate the
+// new value of a `Setting` after defining it.
+//
+// If `read_callback` is defined, then it is used to read the value
+// instead of reading it from the corresponding value in the
+// `setting_pointer_map` member variable of `SettingMaster`.
+//
+// The value of each `Setting` is stored as `yli::common::AnyValue`.
+
 namespace yli
 {
     namespace config

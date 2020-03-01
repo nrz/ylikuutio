@@ -26,6 +26,10 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
+// `yli::config::SettingMaster` is the parent of `yli::config::Setting`.
+// `SettingMaster` may be either global or bound to an `yli::ontology::Entity`.
+// Each `SettingMaster` instance may have several `Setting`s.
+
 namespace yli
 {
     namespace common
