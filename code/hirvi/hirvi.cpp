@@ -1111,10 +1111,7 @@ int main(const int argc, const char* const argv[])
             }
 
             // Render the `Universe`.
-            if (!my_universe->get_is_headless())
-            {
-                my_universe->render();
-            }
+            my_universe->render();
 
             my_universe->finalize_delta_time_loop();
         }
