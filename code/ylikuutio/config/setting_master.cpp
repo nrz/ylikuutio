@@ -365,7 +365,7 @@ namespace yli
             {
                 // Exactly 2 parameters.
 
-                std::string entity_name = command_parameters.at(0);
+                const std::string entity_name = command_parameters.at(0);
 
                 // if `get_and_print` is called through `Console::enter_key`,
                 // then `entity` is `yli::ontology::Universe`, as
