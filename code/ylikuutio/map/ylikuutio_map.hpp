@@ -27,6 +27,7 @@
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
+#include <utility>       // std::pair
 #include <vector>        // std::vector
 
 namespace yli
@@ -48,6 +49,23 @@ namespace yli
                 std::sort(key_vector.begin(), key_vector.end());
 
                 return key_vector;
+            }
+
+        template <class T1>
+            std::vector<std::pair<std::string, T1>> get_keys_and_values(const std::unordered_map<std::string, T1>& unordered_map)
+            {
+                std::vector<std::pair<std::string, T1>> key_and_value_vector;
+                key_and_value_vector.reserve(unordered_map.size());
+
+                for (auto key_and_value : unordered_map)
+                {
+                    key_and_value_vector.push_back(std::pair<std::string, T1>(key_and_value.first, key_and_value.second)); // key and value.
+                }
+
+                // sort key and value vector alphabetically.
+                std::sort(key_and_value_vector.begin(), key_and_value_vector.end());
+
+                return key_and_value_vector;
             }
 
         template <class T1>

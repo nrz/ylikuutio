@@ -82,6 +82,7 @@
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
+#include <utility>       // std::pair
 #include <vector>        // std::vector
 
 namespace yli
@@ -577,6 +578,39 @@ namespace yli
         }
 
         // Public callbacks.
+
+        std::shared_ptr<yli::common::AnyValue> Universe::print_entities(
+                yli::ontology::Console* const console,
+                yli::ontology::Entity* const universe_entity,
+                const std::vector<std::string>& command_parameters)
+        {
+            if (console == nullptr || universe_entity == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            std::vector<std::pair<std::string, yli::ontology::Entity*>> key_and_value_vector = yli::map::get_keys_and_values(universe->entity_map);
+
+            for (auto key_and_value : key_and_value_vector)
+            {
+                uint64_t memory_address = reinterpret_cast<uint64_t>((void*) key_and_value.second); // value.
+                std::stringstream memory_address_stringstream;
+                memory_address_stringstream << " 0x" << std::hex << memory_address;
+
+                std::string entity_info = key_and_value.first; // key.
+                entity_info += memory_address_stringstream.str();
+                console->print_text(entity_info);
+            }
+
+            return nullptr;
+        }
 
         std::shared_ptr<yli::common::AnyValue> Universe::print_parent(
                 yli::ontology::Console* const console,

@@ -645,6 +645,7 @@ int main(const int argc, const char* const argv[])
     my_console->add_command_callback("get", &yli::config::SettingMaster::get_and_print);
 
     // `Entity` handling callbacks.
+    my_console->add_command_callback("entities", &yli::ontology::Universe::print_entities);
     my_console->add_command_callback("parent", &yli::ontology::Universe::print_parent);
     my_console->add_command_callback("activate", &yli::ontology::Universe::activate);
     my_console->add_command_callback("delete", &yli::ontology::Universe::delete_entity);
