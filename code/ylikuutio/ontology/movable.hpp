@@ -123,7 +123,7 @@ namespace yli
 
                     yli::config::SettingMaster* const setting_master = this->get_setting_master();
 
-                    yli::config::SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::common::AnyValue>(new glm::vec3(float_x, float_y, float_z)));
+                    yli::config::SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::common::AnyValue>(std::make_shared<glm::vec3>(float_x, float_y, float_z)));
                     cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
                     cartesian_coordinates_setting_struct.activate_callback = &yli::config::SettingMaster::activate_cartesian_coordinates;
                     cartesian_coordinates_setting_struct.read_callback = &yli::config::SettingMaster::read_cartesian_coordinates;

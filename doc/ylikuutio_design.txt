@@ -94,8 +94,17 @@ used as input for the constructors of `Material` and `SymbiontMaterial`, and `Sp
 for the constructors of `Species`, `SymbiontSpecies`, `ShapeshifterTransformation`, and `ShapeshifterForm`.
 
 Below are listed the ontology classes of Ylikuutio.
+These should be in the canonical class order defined in `yli::common::Datatype`.
 
 There are different hierarchical paths of ontology:
+
+'entity' path:
+
+`Entity` is the class that all other `yli::ontology` classes inherit either directly or indirectly.
+
+'movable' path:
+
+`Movable` is a class that all moving Entities such as animals, vehicles, cameras etc. inherit. `Movable` itself inherits `Entity`.
 
 'simple' path:
 

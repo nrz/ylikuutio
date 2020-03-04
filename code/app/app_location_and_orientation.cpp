@@ -87,7 +87,7 @@ namespace app
         std::cout << "Executing `setting_master->create_Setting(phi_setting_struct);` ...\n";
         setting_master->create_Setting(phi_setting_struct);
 
-        yli::config::SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::common::AnyValue>(new glm::vec3(x, y, z)));
+        yli::config::SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::common::AnyValue>(std::make_shared<glm::vec3>(x, y, z)));
         cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
         cartesian_coordinates_setting_struct.activate_callback = &yli::config::SettingMaster::activate_cartesian_coordinates;
         cartesian_coordinates_setting_struct.read_callback = &yli::config::SettingMaster::read_cartesian_coordinates;

@@ -6,9 +6,12 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
-[ ] Implement creating new named variables in `SettingMaster` using `Console`.
-[ ] Implement creating new named `AnyStruct`s of a given type using `Console`.
-[ ] Implement creating new named Entities using `Console`, with a named `AnyStruct` of correct type as input.
+[ ] Implement printing `Setting`s using `Console`.
+[ ] Implement printing children of Entities using `Console`.
+[ ] Implement printing parent of Entities using `Console`.
+[ ] Implement creating new named `Setting`s in `SettingMaster` using `Console`.
+[ ] Implement creating new named AnyStructEntities of a given type using `Console`.
+[ ] Implement creating new named Entities using `Console`, with a named `AnyStructEntity` of correct type as input.
 [ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
 [ ] Implement octree segmentation.
 [ ] Implement frustrum culling.

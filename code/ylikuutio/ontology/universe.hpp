@@ -617,6 +617,16 @@ namespace yli
 
                 // Public callbacks.
 
+                static std::shared_ptr<yli::common::AnyValue> print_entities(
+                        yli::ontology::Console* const console,
+                        yli::ontology::Entity* const universe_entity,
+                        const std::vector<std::string>& command_parameters);
+
+                static std::shared_ptr<yli::common::AnyValue> print_parent(
+                        yli::ontology::Console* const console,
+                        yli::ontology::Entity* const universe_entity,
+                        const std::vector<std::string>& command_parameters);
+
                 static std::shared_ptr<yli::common::AnyValue> activate(
                         yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
