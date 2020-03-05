@@ -6,6 +6,8 @@ Currently implemented `Console` functionality.
 
 command             function                                    functionality
 -------             --------                                    -------------
+entities            yli::ontology::Universe::print_entities     Prints the names and memory address of all named Entities.
+parent              yli::ontology::Universe::print_parent       Prints the memory address of the parent of the named `Entity`.
 set                 yli::config::SettingMaster::set_and_print   Sets the value of an existing global or `Entity`-specific `Setting`.
 get                 yli::config::SettingMaster::get_and_print   Prints the value of an existing global or `Entity`-specific `Setting`.
 activate            yli::ontology::Universe::activate           Activates an `Entity` that can be activated.

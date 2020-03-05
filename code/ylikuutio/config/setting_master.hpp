@@ -74,6 +74,11 @@ namespace yli
 
                 // Public callbacks.
 
+                static std::shared_ptr<yli::common::AnyValue> print_settings(
+                        yli::ontology::Console* const console,
+                        yli::ontology::Entity* const entity,
+                        const std::vector<std::string>& command_parameters);
+
                 static std::shared_ptr<yli::common::AnyValue> set_and_print(
                         yli::ontology::Console* const console,
                         yli::ontology::Entity* const entity,

@@ -641,6 +641,7 @@ int main(const int argc, const char* const argv[])
     std::cout << "Defining console command callback engines.\n";
 
     // Config callbacks.
+    my_console->add_command_callback("settings", &yli::config::SettingMaster::print_settings);
     my_console->add_command_callback("set", &yli::config::SettingMaster::set_and_print);
     my_console->add_command_callback("get", &yli::config::SettingMaster::get_and_print);
 
