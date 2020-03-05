@@ -80,10 +80,7 @@ namespace yli
 
         bool SettingMaster::is_setting(const std::string& setting_name) const
         {
-            std::cout << "Checking if " << setting_name << " is a Setting.\n";
-            bool is_setting = (this->setting_pointer_map.count(setting_name) == 1);
-            std::cout << "Returning from SettingMaster::is_setting\n";
-            return is_setting;
+            return this->setting_pointer_map.count(setting_name) == 1;
         }
 
         std::string SettingMaster::help() const
