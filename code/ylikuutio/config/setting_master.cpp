@@ -25,6 +25,7 @@
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
+#include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/common/datatype.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
@@ -136,6 +137,82 @@ namespace yli
         }
 
         // public callbacks.
+
+        std::shared_ptr<yli::common::AnyValue> SettingMaster::print_settings(
+                yli::ontology::Console* const console,
+                yli::ontology::Entity* const entity,
+                const std::vector<std::string>& command_parameters)
+        {
+            if (console == nullptr || entity == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (command_parameters.size() == 0)
+            {
+                // No command parameters.
+                // Print global variable names.
+                yli::config::SettingMaster* setting_master = entity->get_setting_master();
+
+                if (setting_master == nullptr)
+                {
+                    return nullptr;
+                }
+
+                yli::map::print_keys_to_console<yli::config::Setting*>(setting_master->setting_pointer_map, console);
+            }
+            else if (command_parameters.size() == 1)
+            {
+                // Exactly 1 parameter.
+                // Print the variable names of the `Entity`.
+
+                const std::string entity_name = command_parameters.at(0);
+
+                // if `print_settings` is called through `Console::enter_key`,
+                // then `entity` is `yli::ontology::Universe`, as
+                // `Console::enter_key` passes `yli::ontology::Universe` as
+                // the 2nd parameter to any `ConsoleCommandCallback` it calls.
+                //
+                // But now we want the `Entity` that corresponds `entity_name`
+                // in `yli::ontology::Universe` 'namespace' (Ylikuutio namespace, not
+                // C++ namespace!), so we need to request it from `yli::ontology::Universe`.
+                // We also want the `SettingMaster` of the same `Entity`.
+
+                yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+                if (universe == nullptr)
+                {
+                    // `entity` is not a `yli::ontology::Universe*`,
+                    // can not proceed further.
+                    return nullptr;
+                }
+
+                // Check the validity of the entity name.
+                if (!universe->is_entity(entity_name))
+                {
+                    // Not a valid `Entity`.
+                    return nullptr;
+                }
+
+                yli::ontology::Entity* named_entity = universe->get_entity(entity_name);
+
+                if (named_entity == nullptr)
+                {
+                    return nullptr;
+                }
+
+                yli::config::SettingMaster* const setting_master = named_entity->get_setting_master();
+
+                if (setting_master == nullptr)
+                {
+                    return nullptr;
+                }
+
+                yli::map::print_keys_to_console<yli::config::Setting*>(setting_master->setting_pointer_map, console);
+            }
+
+            return nullptr;
+        }
 
         std::shared_ptr<yli::common::AnyValue> SettingMaster::set_and_print(
                 yli::ontology::Console* const console,
