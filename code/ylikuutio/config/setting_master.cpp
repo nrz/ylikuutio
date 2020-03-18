@@ -191,7 +191,7 @@ namespace yli
                     return nullptr;
                 }
 
-                yli::ontology::Entity* named_entity = universe->get_entity(entity_name);
+                yli::ontology::Entity* const named_entity = universe->get_entity(entity_name);
 
                 if (named_entity == nullptr)
                 {
@@ -339,7 +339,7 @@ namespace yli
                     return nullptr;
                 }
 
-                yli::ontology::Entity* named_entity = universe->get_entity(entity_name);
+                yli::ontology::Entity* const named_entity = universe->get_entity(entity_name);
                 setting_master = named_entity->get_setting_master();
 
                 std::string setting_name = command_parameters.at(1);
@@ -467,7 +467,7 @@ namespace yli
                     return nullptr;
                 }
 
-                yli::ontology::Entity* named_entity = universe->get_entity(entity_name);
+                yli::ontology::Entity* const named_entity = universe->get_entity(entity_name);
                 setting_master = named_entity->get_setting_master();
 
                 std::string setting_name = command_parameters.at(1);
