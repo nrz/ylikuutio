@@ -20,7 +20,6 @@
 
 #include "material.hpp"
 #include "material_struct.hpp"
-#include "code/ylikuutio/load/texture_loader.hpp"
 #include <ofbx.h>
 
 // Include GLEW
