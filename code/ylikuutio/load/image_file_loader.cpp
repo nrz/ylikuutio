@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "bmp_loader.hpp"
+#include "image_file_loader.hpp"
 #include "code/ylikuutio/file/file_loader.hpp"
 #include "code/ylikuutio/memory/memory_templates.hpp"
 
@@ -36,7 +36,7 @@ namespace yli
 {
     namespace load
     {
-        std::shared_ptr<std::vector<uint8_t>> load_BMP_file(
+        std::shared_ptr<std::vector<uint8_t>> load_image_file(
                 const std::string& filename,
                 std::size_t& image_width,
                 std::size_t& image_height,
@@ -56,13 +56,13 @@ namespace yli
 
             if (x < 0)
             {
-                std::cerr << filename << "ERROR: `yli::load::load_BMP_file`: image width is negative!\n";
+                std::cerr << filename << "ERROR: `yli::load::load_image_file`: image width is negative!\n";
                 has_file_errors = true;
             }
 
             if (y < 0)
             {
-                std::cerr << filename << "ERROR: `yli::load::load_BMP_file`: image height is negative!\n";
+                std::cerr << filename << "ERROR: `yli::load::load_image_file`: image height is negative!\n";
                 has_file_errors = true;
             }
 

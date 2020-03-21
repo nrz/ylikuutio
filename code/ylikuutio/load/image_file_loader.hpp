@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __BMP_LOADER_HPP_INCLUDED
-#define __BMP_LOADER_HPP_INCLUDED
+#ifndef __IMAGE_FILE_LOADER_HPP_INCLUDED
+#define __IMAGE_FILE_LOADER_HPP_INCLUDED
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -28,7 +28,7 @@ namespace yli
 {
     namespace load
     {
-        std::shared_ptr<std::vector<uint8_t>> load_BMP_file(
+        std::shared_ptr<std::vector<uint8_t>> load_image_file(
                 const std::string& filename,
                 std::size_t& image_width,
                 std::size_t& image_height,

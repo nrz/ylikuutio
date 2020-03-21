@@ -465,8 +465,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/ascii_grid_heightmap_loader.hpp
     code/ylikuutio/load/bmp_heightmap_loader.cpp
     code/ylikuutio/load/bmp_heightmap_loader.hpp
-    code/ylikuutio/load/bmp_loader.cpp
-    code/ylikuutio/load/bmp_loader.hpp
     code/ylikuutio/load/bmp_texture_loader.cpp
     code/ylikuutio/load/bmp_texture_loader.hpp
     code/ylikuutio/load/csv_loader.hpp
@@ -481,6 +479,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/font_loader.cpp
     code/ylikuutio/load/font_loader.hpp
     code/ylikuutio/load/heightmap_loader_struct.hpp
+    code/ylikuutio/load/image_file_loader.cpp
+    code/ylikuutio/load/image_file_loader.hpp
     code/ylikuutio/load/obj_loader.cpp
     code/ylikuutio/load/obj_loader.hpp
     code/ylikuutio/load/shader_loader.cpp
@@ -882,14 +882,14 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/load/ascii_grid_heightmap_loader.hpp
         code/ylikuutio/load/bmp_heightmap_loader.cpp
         code/ylikuutio/load/bmp_heightmap_loader.hpp
-        code/ylikuutio/load/bmp_loader.cpp
-        code/ylikuutio/load/bmp_loader.hpp
         code/ylikuutio/load/csv_loader.hpp
         code/ylikuutio/load/fbx_species_loader.cpp
         code/ylikuutio/load/fbx_species_loader.hpp
         code/ylikuutio/load/font_loader.cpp
         code/ylikuutio/load/font_loader.hpp
         code/ylikuutio/load/heightmap_loader_struct.hpp
+        code/ylikuutio/load/image_file_loader.cpp
+        code/ylikuutio/load/image_file_loader.hpp
         code/ylikuutio/memory/memory_templates.hpp
         code/ylikuutio/ontology/brain.cpp
         code/ylikuutio/ontology/brain.hpp

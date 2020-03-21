@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "bmp_texture_loader.hpp"
-#include "bmp_loader.hpp"
+#include "image_file_loader.hpp"
 #include "code/ylikuutio/opengl/opengl_texture.hpp"
 
 // Include GLEW
@@ -42,7 +42,7 @@ namespace yli
                 GLuint& textureID,
                 const bool is_headless)
         {
-            const std::shared_ptr<std::vector<uint8_t>> image_data = load_BMP_file(filename, image_width, image_height, image_size);
+            const std::shared_ptr<std::vector<uint8_t>> image_data = load_image_file(filename, image_width, image_height, image_size);
 
             if (image_data == nullptr)
             {

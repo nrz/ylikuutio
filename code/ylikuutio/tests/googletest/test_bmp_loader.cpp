@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/load/bmp_loader.hpp"
+#include "code/ylikuutio/load/image_file_loader.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -31,7 +31,7 @@ TEST(bmp_files_must_be_loaded_approriately, test3x3_bmp)
     std::size_t image_height;
     std::size_t image_size;
 
-    std::shared_ptr<std::vector<uint8_t>> image_data = yli::load::load_BMP_file(image_path, image_width, image_height, image_size);
+    std::shared_ptr<std::vector<uint8_t>> image_data = yli::load::load_image_file(image_path, image_width, image_height, image_size);
     ASSERT_EQ((*image_data)[0], 0);
     ASSERT_EQ((*image_data)[1], 0);
     ASSERT_EQ((*image_data)[2], 0);
