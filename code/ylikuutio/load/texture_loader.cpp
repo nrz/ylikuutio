@@ -52,7 +52,7 @@ namespace yli
             glBindTexture(GL_TEXTURE_2D, textureID);
 
             // Give the image to OpenGL.
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image_width, image_height, 0, GL_BGR, GL_UNSIGNED_BYTE, &(*image_data)[0]);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image_width, image_height, 0, GL_RGB, GL_UNSIGNED_BYTE, &(*image_data)[0]);
 
             yli::opengl::set_filtering_parameters();
 

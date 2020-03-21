@@ -249,6 +249,12 @@ if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
         )
 endif()
 
+add_library(stb STATIC
+    stb/stb_image.h
+    )
+set_property(TARGET stb PROPERTY LINKER_LANGUAGE C)
+set_property(TARGET stb PROPERTY COMPILE_FLAGS "-std=c89")
+
 add_library(s7 STATIC
     s7/mus-config.h
     s7/s7.c

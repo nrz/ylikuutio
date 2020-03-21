@@ -19,6 +19,9 @@
 #include "code/ylikuutio/file/file_loader.hpp"
 #include "code/ylikuutio/memory/memory_templates.hpp"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 // Include standard headers
 #include <algorithm> // std::copy
 #include <cstddef>   // std::size_t
@@ -41,116 +44,54 @@ namespace yli
         {
             std::cout << "Loading BMP file " << filename << " ...\n";
 
-            // Open the file
-            const std::shared_ptr<std::vector<uint8_t>> file_content = yli::file::binary_slurp(filename);
+            int x = 0;
+            int y = 0;
+            int channels_in_file = 0;
+            const int desired_channels = 3;
 
-            if (file_content == nullptr || file_content->empty())
+            stbi_set_flip_vertically_on_load(true);
+            stbi_uc* stbi_image_data = stbi_load(&filename[0], &x, &y, &channels_in_file, desired_channels);
+
+            bool has_file_errors = false;
+
+            if (x < 0)
             {
-                std::cerr << filename << " could not be opened, or the file is empty.\n";
+                std::cerr << filename << "ERROR: `yli::load::load_BMP_file`: image width is negative!\n";
+                has_file_errors = true;
+            }
+
+            if (y < 0)
+            {
+                std::cerr << filename << "ERROR: `yli::load::load_BMP_file`: image height is negative!\n";
+                has_file_errors = true;
+            }
+
+            if (has_file_errors)
+            {
                 return nullptr;
             }
 
-            const std::size_t header_size = 54;
+            image_width = x;
+            image_height = y;
+            const std::size_t number_of_pixels = image_width * image_height;
 
-            if (file_content->size() < header_size)
+            if (number_of_pixels > std::numeric_limits<std::size_t>::max() / 4)
             {
-                // BMP header size is 54 bytes.
-                std::cerr << filename << " is not a correct BMP file.\n";
+                std::cerr << "BMP file is too big, number of pixels: " << number_of_pixels << "\n";
                 return nullptr;
             }
 
-            if ((*file_content)[0] != 'B' || (*file_content)[1] != 'M')
-            {
-                // BMP begins always with "BM".
-                std::cerr << filename << " is not a correct BMP file.\n";
-                return nullptr;
-            }
-
-            uint8_t* file_content_uint8_t = (uint8_t*) file_content->data();
-
-            // The start offset of pixel array in file.
-            uint32_t pixel_array_start_offset = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content_uint8_t, 0x0a);
-
-            if (pixel_array_start_offset >= file_content->size())
-            {
-                std::cerr << "is not a correct BMP file.\n";
-                return nullptr;
-            }
-
-            // Make sure this is a 24bpp file
-            uint32_t bits_per_pixel = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content_uint8_t, 0x1c);
-
-            if (bits_per_pixel != 24)
-            {
-                std::cerr << "not a correct 24-bit BMP file.\n";
-                return nullptr;
-            }
-
-            uint32_t compression_type = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content_uint8_t, 0x1e);
-
-            if (compression_type != 0)
-            {
-                std::cerr << "not a correct uncompressed 24-bit BMP file.\n";
-                return nullptr;
-            }
-
-            // Read the information about the image
-            uint32_t image_size_uint32_t = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content_uint8_t, 0x22);
-
-            if (image_size_uint32_t > 2147483647)
-            {
-                std::cerr << "BMP file is too big, size: " << image_size_uint32_t << " bytes.\n";
-                return nullptr;
-            }
-
-            image_size = static_cast<std::size_t>(image_size_uint32_t);
-            std::cout << "Image size is " << image_size << " bytes.\n";
-
-            int32_t temp_image_width = yli::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content_uint8_t, 0x12);
-
-            if (temp_image_width < 0)
-            {
-                std::cerr << "image width is negative: " << temp_image_width << "\n";
-                return nullptr;
-            }
-
-            image_width = static_cast<std::size_t>(temp_image_width);
-            std::cout << "Image width is " << image_width << " pixels.\n";
-
-            int32_t temp_image_height = yli::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content_uint8_t, 0x16);
-
-            if (temp_image_height < 0)
-            {
-                std::cerr << "image height is negative: " << temp_image_height << "\n";
-                return nullptr;
-            }
-
-            image_height = static_cast<std::size_t>(temp_image_height);
-            std::cout << "Image height is " << image_height << " pixels.\n";
-
-            // Some BMP files are misformatted, guess missing information
-            if (image_size == 0)
-            {
-                std::size_t number_of_pixels = image_width * image_height;
-                std::cout << "Image contains " << number_of_pixels << " pixels.\n";
-
-                if (number_of_pixels > std::numeric_limits<std::size_t>::max() / 4)
-                {
-                    std::cerr << "BMP file is too big, number of pixels: " << number_of_pixels << "\n";
-                    return nullptr;
-                }
-
-                image_size = number_of_pixels * 3; // 3 : one byte for each Red, Green and Blue component
-            }
+            image_size = static_cast<std::size_t>(desired_channels) * number_of_pixels;
 
             // Create a buffer.
             std::shared_ptr<std::vector<uint8_t>> image_data = std::make_shared<std::vector<uint8_t>>();
             image_data->reserve(image_size);
 
             std::cout << "Copying image data ...\n";
-            std::copy(file_content->begin() + pixel_array_start_offset, file_content->end(), image_data->begin());
+            std::copy(stbi_image_data, stbi_image_data + image_size, image_data->begin());
             std::cout << "Image data copied.\n";
 
+            free(stbi_image_data);
             return image_data;
         }
     }

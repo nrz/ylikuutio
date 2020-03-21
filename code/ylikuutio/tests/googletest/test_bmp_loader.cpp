@@ -44,27 +44,27 @@ TEST(bmp_files_must_be_loaded_approriately, test3x3_bmp)
     ASSERT_EQ((*image_data)[7], 2);
     ASSERT_EQ((*image_data)[8], 2);
 
-    ASSERT_EQ((*image_data)[12], 4);
-    ASSERT_EQ((*image_data)[13], 4);
-    ASSERT_EQ((*image_data)[14], 4);
+    ASSERT_EQ((*image_data)[9], 4);
+    ASSERT_EQ((*image_data)[10], 4);
+    ASSERT_EQ((*image_data)[11], 4);
 
-    ASSERT_EQ((*image_data)[15], 8);
-    ASSERT_EQ((*image_data)[16], 8);
-    ASSERT_EQ((*image_data)[17], 8);
+    ASSERT_EQ((*image_data)[12], 8);
+    ASSERT_EQ((*image_data)[13], 8);
+    ASSERT_EQ((*image_data)[14], 8);
 
-    ASSERT_EQ((*image_data)[18], 16);
-    ASSERT_EQ((*image_data)[19], 16);
-    ASSERT_EQ((*image_data)[20], 16);
+    ASSERT_EQ((*image_data)[15], 16);
+    ASSERT_EQ((*image_data)[16], 16);
+    ASSERT_EQ((*image_data)[17], 16);
 
-    ASSERT_EQ((*image_data)[24], 32);
-    ASSERT_EQ((*image_data)[25], 32);
-    ASSERT_EQ((*image_data)[26], 32);
+    ASSERT_EQ((*image_data)[18], 32);
+    ASSERT_EQ((*image_data)[19], 32);
+    ASSERT_EQ((*image_data)[20], 32);
 
-    ASSERT_EQ((*image_data)[27], 64);
-    ASSERT_EQ((*image_data)[28], 64);
-    ASSERT_EQ((*image_data)[29], 64);
+    ASSERT_EQ((*image_data)[21], 64);
+    ASSERT_EQ((*image_data)[22], 64);
+    ASSERT_EQ((*image_data)[23], 64);
 
-    ASSERT_EQ((*image_data)[30], 128);
-    ASSERT_EQ((*image_data)[31], 128);
-    ASSERT_EQ((*image_data)[32], 128);
+    ASSERT_EQ((*image_data)[24], 128);
+    ASSERT_EQ((*image_data)[25], 128);
+    ASSERT_EQ((*image_data)[26], 128);
 }

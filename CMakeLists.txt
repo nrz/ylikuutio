@@ -88,6 +88,7 @@ include_directories(
     external/OpenFBX/src/
     external/pugixml/src/
     external/s7/
+    external/stb/
     .
     )
 
@@ -217,6 +218,7 @@ set(ALL_LIBS
     miniz
     OpenFBX
     s7
+    stb
     )
 
 if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
@@ -998,7 +1000,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     target_link_libraries(do_tests_googletest code_to_test)
 
     add_executable(unit_tests_with_googletest code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
-    target_link_libraries(unit_tests_with_googletest gtest libgtest rt SDL2 GLEW_200 s7 ylikuutio pthread code_to_test)
+    target_link_libraries(unit_tests_with_googletest gtest libgtest rt SDL2 GLEW_200 s7 stb ylikuutio pthread code_to_test)
 
     # Xcode and Visual working directories
     set_target_properties(unit_tests_with_googletest PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")
