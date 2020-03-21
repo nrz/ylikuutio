@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "fbx_texture_loader.hpp"
-#include "bmp_texture_loader.hpp"
+#include "common_texture_loader.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include GLEW
@@ -94,7 +94,7 @@ namespace yli
             if (texture_file_suffix == "bmp")
             {
                 const std::string filename_string = std::string((char*) &filename_buffer);
-                return yli::load::load_BMP_texture(filename_string, image_width, image_height, image_size, textureID, is_headless);
+                return yli::load::load_common_texture(filename_string, image_width, image_height, image_size, textureID, is_headless);
             }
             else if (texture_file_suffix == "png")
             {

@@ -25,7 +25,7 @@
 #include "font_struct.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
-#include "code/ylikuutio/load/bmp_texture_loader.hpp"
+#include "code/ylikuutio/load/common_texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 
 // Include GLEW
@@ -80,7 +80,7 @@ namespace yli
                     // Initialize texture.
                     if (this->font_texture_file_format == "bmp" || this->font_texture_file_format == "BMP")
                     {
-                        is_texture_loading_successful = yli::load::load_BMP_texture(
+                        is_texture_loading_successful = yli::load::load_common_texture(
                                 this->texture_filename,
                                 this->image_width,
                                 this->image_height,
@@ -174,7 +174,7 @@ namespace yli
                 std::string texture_filename;
                 std::string font_texture_file_format;
 
-                uint32_t texture;                          // Texture containing the glyphs, returned by `load_BMP_texture`,
+                uint32_t texture;                          // Texture containing the glyphs, returned by `load_common_texture`,
                                                            // (used for `glGenTextures` etc.).
 
                 uint32_t vertexbuffer;                     // Buffer containing the vertices.

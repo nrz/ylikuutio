@@ -25,7 +25,7 @@
 #include "pre_iterate_callback.hpp"
 #include "post_iterate_callback.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/load/bmp_texture_loader.hpp"
+#include "code/ylikuutio/load/common_texture_loader.hpp"
 #include "code/ylikuutio/load/csv_texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 
@@ -159,7 +159,7 @@ namespace yli
                     // Load the source texture, just like in `yli::ontology::Material` constructor.
                     if (this->texture_file_format == "bmp" || this->texture_file_format == "BMP")
                     {
-                        if (!yli::load::load_BMP_texture(this->texture_filename, this->texture_width, this->texture_height, this->texture_size, this->source_texture, is_headless))
+                        if (!yli::load::load_common_texture(this->texture_filename, this->texture_width, this->texture_height, this->texture_size, this->source_texture, is_headless))
                         {
                             std::cerr << "ERROR: loading BMP texture failed!\n";
                         }

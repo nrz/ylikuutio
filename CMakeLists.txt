@@ -465,8 +465,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/ascii_grid_heightmap_loader.hpp
     code/ylikuutio/load/bmp_heightmap_loader.cpp
     code/ylikuutio/load/bmp_heightmap_loader.hpp
-    code/ylikuutio/load/bmp_texture_loader.cpp
-    code/ylikuutio/load/bmp_texture_loader.hpp
+    code/ylikuutio/load/common_texture_loader.cpp
+    code/ylikuutio/load/common_texture_loader.hpp
     code/ylikuutio/load/csv_loader.hpp
     code/ylikuutio/load/csv_texture_loader.cpp
     code/ylikuutio/load/csv_texture_loader.hpp

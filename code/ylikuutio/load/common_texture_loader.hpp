@@ -15,49 +15,29 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "bmp_texture_loader.hpp"
-#include "image_file_loader.hpp"
-#include "code/ylikuutio/opengl/opengl_texture.hpp"
+#ifndef __COMMON_TEXTURE_LOADER_HPP_INCLUDED
+#define __COMMON_TEXTURE_LOADER_HPP_INCLUDED
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::make_shared, std::shared_ptr
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
-#include <vector>   // std::vector
 
 namespace yli
 {
     namespace load
     {
-        bool load_BMP_texture(
+        // Load a .BMP file using our custom loader.
+        bool load_common_texture(
                 const std::string& filename,
                 std::size_t& image_width,
                 std::size_t& image_height,
                 std::size_t& image_size,
                 GLuint& textureID,
-                const bool is_headless)
-        {
-            const std::shared_ptr<std::vector<uint8_t>> image_data = load_image_file(filename, image_width, image_height, image_size);
-
-            if (image_data == nullptr)
-            {
-                std::cerr << "ERROR: `image_data` is `nullptr`!\n";
-                return false;
-            }
-
-            if (is_headless)
-            {
-                return true;
-            }
-            else
-            {
-                return yli::opengl::prepare_opengl_texture(image_data, image_width, image_height, textureID);
-            }
-        }
+                const bool is_headless);
     }
 }
+
+#endif
