@@ -493,8 +493,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/symbiosis_loader.cpp
     code/ylikuutio/load/symbiosis_loader.hpp
     code/ylikuutio/load/symbiosis_loader_struct.hpp
-    code/ylikuutio/load/texture_loader.cpp
-    code/ylikuutio/load/texture_loader.hpp
 
     # map, in alphabetical order
     code/ylikuutio/map/ylikuutio_map.hpp
@@ -627,6 +625,8 @@ add_library(ylikuutio STATIC
     # opengl, in alphabetical order
     code/ylikuutio/opengl/opengl.cpp
     code/ylikuutio/opengl/opengl.hpp
+    code/ylikuutio/opengl/opengl_texture.cpp
+    code/ylikuutio/opengl/opengl_texture.hpp
     code/ylikuutio/opengl/vboindexer.cpp
     code/ylikuutio/opengl/vboindexer.hpp
     code/ylikuutio/opengl/ylikuutio_glew.hpp

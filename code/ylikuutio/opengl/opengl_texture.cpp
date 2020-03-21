@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "texture_loader.hpp"
-#include "code/ylikuutio/opengl/opengl.hpp"
+#include "opengl_texture.hpp"
+#include "opengl.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -30,7 +30,7 @@
 
 namespace yli
 {
-    namespace load
+    namespace opengl
     {
         // Load texture from memory.
         bool prepare_opengl_texture(

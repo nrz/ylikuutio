@@ -17,7 +17,7 @@
 
 #include "bmp_texture_loader.hpp"
 #include "bmp_loader.hpp"
-#include "texture_loader.hpp"
+#include "code/ylikuutio/opengl/opengl_texture.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -56,7 +56,7 @@ namespace yli
             }
             else
             {
-                return yli::load::prepare_opengl_texture(image_data, image_width, image_height, textureID);
+                return yli::opengl::prepare_opengl_texture(image_data, image_width, image_height, textureID);
             }
         }
     }
