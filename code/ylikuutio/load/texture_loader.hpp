@@ -37,7 +37,7 @@ namespace yli
     namespace load
     {
         // Load texture from memory.
-        bool load_texture(
+        bool prepare_opengl_texture(
                 const std::shared_ptr<std::vector<uint8_t>> image_data,
                 const std::size_t image_width,
                 const std::size_t image_height,

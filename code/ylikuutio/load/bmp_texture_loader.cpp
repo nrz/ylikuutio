@@ -56,7 +56,7 @@ namespace yli
             }
             else
             {
-                return yli::load::load_texture(image_data, image_width, image_height, textureID);
+                return yli::load::prepare_opengl_texture(image_data, image_width, image_height, textureID);
             }
         }
     }
