@@ -88,6 +88,7 @@ include_directories(
     external/OpenFBX/src/
     external/pugixml/src/
     external/s7/
+    external/stb/
     .
     )
 
@@ -217,6 +218,7 @@ set(ALL_LIBS
     miniz
     OpenFBX
     s7
+    stb
     )
 
 if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
@@ -463,10 +465,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/ascii_grid_heightmap_loader.hpp
     code/ylikuutio/load/bmp_heightmap_loader.cpp
     code/ylikuutio/load/bmp_heightmap_loader.hpp
-    code/ylikuutio/load/bmp_loader.cpp
-    code/ylikuutio/load/bmp_loader.hpp
-    code/ylikuutio/load/bmp_texture_loader.cpp
-    code/ylikuutio/load/bmp_texture_loader.hpp
+    code/ylikuutio/load/common_texture_loader.cpp
+    code/ylikuutio/load/common_texture_loader.hpp
     code/ylikuutio/load/csv_loader.hpp
     code/ylikuutio/load/csv_texture_loader.cpp
     code/ylikuutio/load/csv_texture_loader.hpp
@@ -479,6 +479,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/font_loader.cpp
     code/ylikuutio/load/font_loader.hpp
     code/ylikuutio/load/heightmap_loader_struct.hpp
+    code/ylikuutio/load/image_file_loader.cpp
+    code/ylikuutio/load/image_file_loader.hpp
     code/ylikuutio/load/obj_loader.cpp
     code/ylikuutio/load/obj_loader.hpp
     code/ylikuutio/load/shader_loader.cpp
@@ -491,8 +493,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/symbiosis_loader.cpp
     code/ylikuutio/load/symbiosis_loader.hpp
     code/ylikuutio/load/symbiosis_loader_struct.hpp
-    code/ylikuutio/load/texture_loader.cpp
-    code/ylikuutio/load/texture_loader.hpp
 
     # map, in alphabetical order
     code/ylikuutio/map/ylikuutio_map.hpp
@@ -625,6 +625,8 @@ add_library(ylikuutio STATIC
     # opengl, in alphabetical order
     code/ylikuutio/opengl/opengl.cpp
     code/ylikuutio/opengl/opengl.hpp
+    code/ylikuutio/opengl/opengl_texture.cpp
+    code/ylikuutio/opengl/opengl_texture.hpp
     code/ylikuutio/opengl/vboindexer.cpp
     code/ylikuutio/opengl/vboindexer.hpp
     code/ylikuutio/opengl/ylikuutio_glew.hpp
@@ -880,14 +882,14 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/load/ascii_grid_heightmap_loader.hpp
         code/ylikuutio/load/bmp_heightmap_loader.cpp
         code/ylikuutio/load/bmp_heightmap_loader.hpp
-        code/ylikuutio/load/bmp_loader.cpp
-        code/ylikuutio/load/bmp_loader.hpp
         code/ylikuutio/load/csv_loader.hpp
         code/ylikuutio/load/fbx_species_loader.cpp
         code/ylikuutio/load/fbx_species_loader.hpp
         code/ylikuutio/load/font_loader.cpp
         code/ylikuutio/load/font_loader.hpp
         code/ylikuutio/load/heightmap_loader_struct.hpp
+        code/ylikuutio/load/image_file_loader.cpp
+        code/ylikuutio/load/image_file_loader.hpp
         code/ylikuutio/memory/memory_templates.hpp
         code/ylikuutio/ontology/brain.cpp
         code/ylikuutio/ontology/brain.hpp
@@ -998,7 +1000,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     target_link_libraries(do_tests_googletest code_to_test)
 
     add_executable(unit_tests_with_googletest code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
-    target_link_libraries(unit_tests_with_googletest gtest libgtest rt SDL2 GLEW_200 s7 ylikuutio pthread code_to_test)
+    target_link_libraries(unit_tests_with_googletest gtest libgtest rt SDL2 GLEW_200 s7 stb ylikuutio pthread code_to_test)
 
     # Xcode and Visual working directories
     set_target_properties(unit_tests_with_googletest PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")

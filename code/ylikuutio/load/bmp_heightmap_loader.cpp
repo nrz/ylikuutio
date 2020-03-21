@@ -26,7 +26,7 @@
 
 #include "bmp_heightmap_loader.hpp"
 #include "heightmap_loader_struct.hpp"
-#include "bmp_loader.hpp"
+#include "image_file_loader.hpp"
 #include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
@@ -73,7 +73,7 @@ namespace yli
 
             std::size_t image_size;
 
-            std::shared_ptr<std::vector<uint8_t>> image_data = load_BMP_file(heightmap_loader_struct.filename, image_width, image_height, image_size);
+            std::shared_ptr<std::vector<uint8_t>> image_data = load_image_file(heightmap_loader_struct.filename, image_width, image_height, image_size);
 
             if (image_width < 2 || image_height < 2)
             {

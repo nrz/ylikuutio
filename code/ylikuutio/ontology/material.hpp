@@ -25,7 +25,7 @@
 #include "shader.hpp"
 #include "material_struct.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/load/bmp_texture_loader.hpp"
+#include "code/ylikuutio/load/common_texture_loader.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -74,7 +74,7 @@ namespace yli
                         // Load the texture.
                         if (this->texture_file_format == "bmp" || this->texture_file_format == "BMP")
                         {
-                            if (!yli::load::load_BMP_texture(
+                            if (!yli::load::load_common_texture(
                                         this->texture_filename,
                                         this->image_width,
                                         this->image_height,
@@ -138,7 +138,7 @@ namespace yli
                 std::size_t image_height;
                 std::size_t image_size;
 
-                uint32_t texture;                    // Texture of this `Material`, returned by `load_BMP_texture` (used for `glGenTextures` etc.).
+                uint32_t texture;                    // Texture of this `Material`, returned by `load_common_texture` (used for `glGenTextures` etc.).
                 GLuint openGL_textureID;             // Texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
 
             private:
