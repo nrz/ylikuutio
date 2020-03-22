@@ -68,6 +68,7 @@ namespace yli
 
             if (has_file_errors)
             {
+                free(stbi_image_data);
                 return nullptr;
             }
 
