@@ -725,7 +725,7 @@ namespace ajokki
         yli::ontology::SymbiosisStruct turbo_polizei_symbiosis_struct;
         turbo_polizei_symbiosis_struct.parent = helsinki_east_downtown_shader;
         turbo_polizei_symbiosis_struct.model_file_format = "fbx";
-        turbo_polizei_symbiosis_struct.model_filename = "turbo_polizei.fbx";
+        turbo_polizei_symbiosis_struct.model_filename = "turbo_polizei_bmp_textures.fbx";
         turbo_polizei_symbiosis_struct.light_position = glm::vec3(0, 100000, 100000);
 
         std::cout << "Creating yli::ontology::Entity* turbo_polizei_symbiosis_entity ...\n";
