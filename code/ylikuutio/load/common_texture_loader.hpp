@@ -29,7 +29,7 @@ namespace yli
 {
     namespace load
     {
-        // Load a .BMP file using our custom loader.
+        // Load a BMP or PNG file.
         bool load_common_texture(
                 const std::string& filename,
                 std::size_t& image_width,

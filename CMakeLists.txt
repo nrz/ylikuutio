@@ -286,9 +286,10 @@ configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freigh
 configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_iron_texture_by_pabloalvin.bmp freight_train_iron_texture_by_pabloalvin.bmp COPYONLY)
 configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_stone.bmp freight_train_stone.bmp COPYONLY)
 # Turbo polizei.
-configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/turbo_polizei_bmp_textures.fbx turbo_polizei_bmp_textures.fbx COPYONLY)
+configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/turbo_polizei_png_textures.fbx turbo_polizei_png_textures.fbx COPYONLY)
 configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/car.png car.png COPYONLY)
 configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/wheell.png wheell.png COPYONLY)
+configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/turbo_polizei_bmp_textures.fbx turbo_polizei_bmp_textures.fbx COPYONLY)
 configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/car.bmp car.bmp COPYONLY)
 configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/wheell.bmp wheell.bmp COPYONLY)
 # Fantasy house with balcony.

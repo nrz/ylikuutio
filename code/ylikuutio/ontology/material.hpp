@@ -72,7 +72,10 @@ namespace yli
                     if (!this->is_symbiont_material)
                     {
                         // Load the texture.
-                        if (this->texture_file_format == "bmp" || this->texture_file_format == "BMP")
+                        if (this->texture_file_format == "bmp" ||
+                                this->texture_file_format == "BMP" ||
+                                this->texture_file_format == "png" ||
+                                this->texture_file_format == "PNG")
                         {
                             if (!yli::load::load_common_texture(
                                         this->texture_filename,
@@ -82,7 +85,7 @@ namespace yli
                                         this->texture,
                                         is_headless))
                             {
-                                std::cerr << "ERROR: loading BMP texture failed!\n";
+                                std::cerr << "ERROR: loading " << this->texture_file_format << " texture failed!\n";
                             }
                         }
                         else
