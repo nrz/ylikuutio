@@ -1,0 +1,8 @@
+#!/bin/bash
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# https://blender.stackexchange.com/questions/1365/how-can-i-run-blender-from-command-line-or-a-python-script-without-opening-a-gui
+
+file="$1"
+
+blender "$file" --background --python "$script_dir/../python/show_blend_textures_internal_renderer.py"
