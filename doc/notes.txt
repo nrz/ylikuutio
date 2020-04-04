@@ -1,24 +1,3 @@
-How to export textures in Blender:
-* File -> External data -> [ ] Automatically Pack into .blend (make the box unchecked).
-* File -> External data -> Unpack All Into Files
-
-How to export a model as FBX in Blender:
-* File -> Export -> FBX (.fbx) -> [x] Selected Objects (check the box) -> Export FBX.
-
-How to export UV layout in Blender:
-* in UV/Image Editor mode -> UVs -> Export UV Layout , export as a .png file.
-
-Load .png in GIMP.
-
-Saving file as BMP (it needs to be a 24-bit BMP):
--> Export
--> Windows BMP Image (*.bmp)
--> Compatibility Options
--> Do not write color space information (make sure to have this checked)
--> Advanced Options
--> 24 bits (R8 G8 B8)
--> Export
-
 Marching cubes algorithm
 https://transvoxel.org/Lengyel-VoxelTerrain.pdf
 
@@ -46,6 +25,9 @@ http://www.mars.asu.edu/data/
 
 Mars Global Data Sets - MOLA Shaded Relief (46080 x 23040 pixels):
 http://www.mars.asu.edu/data/mola_color/
+
+Texture Haven (all textures CC-0):
+https://texturehaven.com/
 
 Good free textures (free as beer and free as speech):
 http://www.myfreetextures.com/

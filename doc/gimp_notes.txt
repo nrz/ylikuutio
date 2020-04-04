@@ -1,0 +1,10 @@
+Load .png in GIMP.
+
+Saving file as BMP (it needs to be a 24-bit BMP):
+-> Export
+-> Windows BMP Image (*.bmp)
+-> Compatibility Options
+-> Do not write color space information (make sure to have this checked)
+-> Advanced Options
+-> 24 bits (R8 G8 B8)
+-> Export

@@ -42,7 +42,7 @@ namespace yli
                 std::size_t& image_height,
                 std::size_t& image_size)
         {
-            std::cout << "Loading BMP file " << filename << " ...\n";
+            std::cout << "Loading image file " << filename << " ...\n";
 
             int x = 0;
             int y = 0;
@@ -68,6 +68,7 @@ namespace yli
 
             if (has_file_errors)
             {
+                free(stbi_image_data);
                 return nullptr;
             }
 
@@ -77,7 +78,7 @@ namespace yli
 
             if (number_of_pixels > std::numeric_limits<std::size_t>::max() / 4)
             {
-                std::cerr << "BMP file is too big, number of pixels: " << number_of_pixels << "\n";
+                std::cerr << "ERROR: `yli::load::load_image_file`: file is too big, number of pixels: " << number_of_pixels << "\n";
                 return nullptr;
             }
 

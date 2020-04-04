@@ -1,0 +1,19 @@
+How to export textures in Blender:
+* File -> External data -> [ ] Automatically Pack into .blend (make the box unchecked).
+* File -> External data -> Unpack All Into Files
+
+How to export a model as FBX in Blender:
+* File -> Export -> FBX (.fbx) -> [ ] Selected Objects (make the box unchecked) -> Export FBX.
+
+How to export UV layout in Blender:
+* in UV/Image Editor mode -> UVs -> Export UV Layout , export as a .png file.
+
+How to set Tab to autocomplete hotkey in Python console:
+* in User Preferences mode -> Input -> Console -> Console Autocomplete
+Then click on the button with the current key (Ctrl-Space by default). Press Tab. Click "Save User Settings".
+
+Essential Blender API data structures from Ylikuutio preprocessing point of view:
+bpy.data.images    - images.
+bpy.data.materials - materials used by internal renderer.
+bpy.data.objects   - objects.
+bpy.data.scenes    - scenes.
