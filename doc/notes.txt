@@ -26,6 +26,9 @@ http://www.mars.asu.edu/data/
 Mars Global Data Sets - MOLA Shaded Relief (46080 x 23040 pixels):
 http://www.mars.asu.edu/data/mola_color/
 
+Texture Haven (all textures CC-0):
+https://texturehaven.com/
+
 Good free textures (free as beer and free as speech):
 http://www.myfreetextures.com/
 
