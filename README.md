@@ -280,7 +280,7 @@ A: Some parts of Ylikuutio (some shaders, some file loaders, etc.) are
    based on [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/),
    which I really recommend for anyone interested in learning
    OpenGL programming. Ylikuutio also uses external libraries such as
-   (in alphabetical order) Asio, Assimp, GLM, GLEW, OpenFBX, s7, SDL, and
+   (in alphabetical order) Asio, GLM, GLEW, OpenFBX, s7, SDL, stb, and
    pugixml. The rest is written from scratch.
 
 Q: Why s7 is chosen as the scripting language of Ylikuutio?
@@ -350,13 +350,13 @@ A: Ylikuutio uses right-handed world coordinates,
 ### Libraries currently in use
 * The source code from [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/) is licensed under [WTFPL Public Licence version 2](https://www.opengl-tutorial.org/download/).
 * [Asio](https://think-async.com/) is licensed under [Boost software license](https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt).
-* [Open Asset Import Library (assimp)](http://www.assimp.org/) is licensed under [a 3-clause BSD license](http://www.assimp.org/main_license.html).
 * [OpenGL Mathematics (GLM)](https://glm.g-truc.net/) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](https://glm.g-truc.net/copying.txt).
 * [The OpenGL Extension Wrangler Library (GLEW)](http://glew.sourceforge.net/) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
 * [OpenFBX](https://github.com/nem0/OpenFBX) is licensed under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
 * [Ryan's CMake Modules](https://github.com/rpavlik/cmake-modules) is licensed under [Boost Software License Version 1.0](https://github.com/rpavlik/cmake-modules/blob/master/LICENSE_1_0.txt).
 * [s7](https://ccrma.stanford.edu/software/snd/snd/s7.html) is licensed under a BSD license.
 * [SDL2](https://www.libsdl.org/) is licensed under [the zlib license](https://www.libsdl.org/).
+* [stb](https://github.com/nothings/stb) is licensed under [the MIT license](https://github.com/nothings/stb/blob/master/LICENSE).
 * [pugixml](https://pugixml.org/) is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 
 ### Libraries not yet in use
