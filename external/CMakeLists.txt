@@ -18,7 +18,6 @@ endif()
 
 include_directories(
     # asio/asio/include/
-    assimp/include/
     FastNoiseSIMD/
     glm/
     OpenFBX/src/
@@ -36,11 +35,6 @@ endif()
 
 # pugixml
 add_subdirectory(pugixml)
-
-# assimp
-if(NOT(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
-    add_subdirectory(assimp)
-endif()
 
 if (COMPILE_SDL_FROM_SOURCE)
     include_directories(

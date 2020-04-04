@@ -82,7 +82,6 @@ endif()
 
 include_directories(
     # external/asio/asio/include/
-    external/assimp/include/
     external/FastNoiseSIMD/
     external/glm/
     external/OpenFBX/src/
@@ -670,17 +669,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/triangulation/vertices.cpp
     code/ylikuutio/triangulation/vertices.hpp
     )
-
-# yli_convert
-# do not try to compile `yli_convert` for Android.
-if(NOT(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
-    add_executable(yli_convert
-        # yli_convert, in alphabetical order
-        code/convert/yli_convert.cpp
-        )
-    target_link_libraries(yli_convert ylikuutio ${ALL_LIBS} assimp)
-    set_target_properties(yli_convert PROPERTIES COMPILE_DEFINITIONS "USE_ASSIMP")
-endif()
 
 # Ajokki
 add_executable(ajokki
