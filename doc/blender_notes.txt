@@ -7,3 +7,10 @@ How to export a model as FBX in Blender:
 
 How to export UV layout in Blender:
 * in UV/Image Editor mode -> UVs -> Export UV Layout , export as a .png file.
+
+How to set Tab to autocomplete hotkey in Python console:
+* in User Preferences mode -> Input -> Console -> Console Autocomplete
+Then click on the button with the current key (Ctrl-Space by default). Press Tab. Click "Save User Settings".
+
+Essential Blender API data structures from Ylikuutio preprocessing point of view:
+bpy.data.materials - materials used by internal renderer.
