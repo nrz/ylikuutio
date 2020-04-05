@@ -79,6 +79,7 @@ namespace yli
             if (number_of_pixels > std::numeric_limits<std::size_t>::max() / 4)
             {
                 std::cerr << "ERROR: `yli::load::load_image_file`: file is too big, number of pixels: " << number_of_pixels << "\n";
+                free(stbi_image_data);
                 return nullptr;
             }
 
