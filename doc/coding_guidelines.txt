@@ -100,6 +100,11 @@ Security-related
 * Avoid void pointers (`void*`).
 * Aim for stability. Code defensively.
 * Avoid libraries with known vulnerabilities.
+* Do not implement direct support for unnecessary file formats. Instead
+  write preprocessing scripts that implement the needed preprocessing
+  using established 3D party software such as Blender for converting
+  .blend files into FBX file format. These preprocessing scripts are not
+  considered part of Ylikuutio itself and may have a different license.
 
 Real-time-code specific issues
 * In real-time code, prefer 32-bit variables (due to speed on amd64).
