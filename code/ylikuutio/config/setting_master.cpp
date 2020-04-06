@@ -1600,7 +1600,7 @@ namespace yli
 
             if (movable != nullptr)
             {
-                return std::make_shared<yli::common::AnyValue>(&movable->cartesian_coordinates);
+                return std::make_shared<yli::common::AnyValue>(std::make_shared<glm::vec3>(movable->cartesian_coordinates));
             }
 
             yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
@@ -1610,7 +1610,7 @@ namespace yli
                 return nullptr;
             }
 
-            return std::make_shared<yli::common::AnyValue>(&universe->current_camera_cartesian_coordinates);
+            return std::make_shared<yli::common::AnyValue>(std::make_shared<glm::vec3>(universe->current_camera_cartesian_coordinates));
         }
 
         std::shared_ptr<yli::common::AnyValue> SettingMaster::read_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
