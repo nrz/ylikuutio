@@ -251,45 +251,11 @@ if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
 endif()
 
 add_library(angelscript STATIC
-    angelscript/sdk/add_on/datetime/datetime.h
-    angelscript/sdk/add_on/datetime/datetime.cpp
-    angelscript/sdk/add_on/scriptfile/scriptfile.h
-    angelscript/sdk/add_on/scriptfile/scriptfilesystem.cpp
-    angelscript/sdk/add_on/scriptfile/scriptfile.cpp
-    angelscript/sdk/add_on/scriptfile/scriptfilesystem.h
-    angelscript/sdk/add_on/scriptmath/scriptmathcomplex.h
-    angelscript/sdk/add_on/scriptmath/scriptmathcomplex.cpp
-    angelscript/sdk/add_on/scriptmath/scriptmath.cpp
-    angelscript/sdk/add_on/scriptmath/scriptmath.h
-    angelscript/sdk/add_on/scriptarray/scriptarray.h
-    angelscript/sdk/add_on/scriptarray/scriptarray.cpp
     angelscript/sdk/add_on/scriptstdstring/scriptstdstring_utils.cpp
     angelscript/sdk/add_on/scriptstdstring/scriptstdstring.h
     angelscript/sdk/add_on/scriptstdstring/scriptstdstring.cpp
-    angelscript/sdk/add_on/contextmgr/contextmgr.cpp
-    angelscript/sdk/add_on/contextmgr/contextmgr.h
-    angelscript/sdk/add_on/autowrapper/generator/generator.vcproj
-    angelscript/sdk/add_on/autowrapper/generator/generateheader.cpp
-    angelscript/sdk/add_on/autowrapper/generator/generator.sln
-    angelscript/sdk/add_on/autowrapper/aswrappedcall.h
     angelscript/sdk/add_on/scriptbuilder/scriptbuilder.cpp
     angelscript/sdk/add_on/scriptbuilder/scriptbuilder.h
-    angelscript/sdk/add_on/scriptany/scriptany.cpp
-    angelscript/sdk/add_on/scriptany/scriptany.h
-    angelscript/sdk/add_on/weakref/weakref.h
-    angelscript/sdk/add_on/weakref/weakref.cpp
-    angelscript/sdk/add_on/debugger/debugger.cpp
-    angelscript/sdk/add_on/debugger/debugger.h
-    angelscript/sdk/add_on/scripthelper/scripthelper.h
-    angelscript/sdk/add_on/scripthelper/scripthelper.cpp
-    angelscript/sdk/add_on/scripthandle/scripthandle.cpp
-    angelscript/sdk/add_on/scripthandle/scripthandle.h
-    angelscript/sdk/add_on/scriptgrid/scriptgrid.cpp
-    angelscript/sdk/add_on/scriptgrid/scriptgrid.h
-    angelscript/sdk/add_on/scriptdictionary/scriptdictionary.h
-    angelscript/sdk/add_on/scriptdictionary/scriptdictionary.cpp
-    angelscript/sdk/add_on/serializer/serializer.h
-    angelscript/sdk/add_on/serializer/serializer.cpp
     angelscript/sdk/angelscript/source/as_array.h
     angelscript/sdk/angelscript/source/as_atomic.cpp
     angelscript/sdk/angelscript/source/as_atomic.h
