@@ -1,6 +1,7 @@
 # Ylikuutio. A 3D game and simulation engine.
 A hobby project of mine. Work in progress.
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c9d41824e9e04fb29ee0f4b3bf02d3d1)](https://app.codacy.com/manual/antti.nuortimo/ylikuutio?utm_source=github.com&utm_medium=referral&utm_content=nrz/ylikuutio&utm_campaign=Badge_Grade_Settings)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Travis CI build](https://travis-ci.org/nrz/ylikuutio.svg?branch=master)](https://travis-ci.org/nrz/ylikuutio)
 [![AppVeyor build](https://ci.appveyor.com/api/projects/status/github/nrz/ylikuutio?branch=master&svg=true)](https://ci.appveyor.com/project/nrz/ylikuutio)
