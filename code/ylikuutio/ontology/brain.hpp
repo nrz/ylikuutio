@@ -32,8 +32,8 @@
 // Each `Brain` instance may do some actions for the `Movable`s bound to the `Brain`.
 // The actions the defined in the callback, referenced using `this->callback_engine`.
 // Currently there are some example callbacks for `Brain` in `app/app_brain.hpp`.
-// In the future, some of the callbacks will process s7 Scheme, with an API offered
-// to the s7 Scheme scripts. The API still needs to be defined.
+// In the future, some of the callbacks will process AngelScript, with an API offered
+// to the AngelScript scripts. The API still needs to be defined.
 //
 // `Brain` does not own the `Movable`s it controls.
 // Therefore, `Brain`-`Movable` relationship is not a parent-child relationship.

@@ -82,11 +82,12 @@ endif()
 
 include_directories(
     # external/asio/asio/include/
+    external/angelscript/sdk/angelscript/include/
+    external/angelscript/sdk/add_on/
     external/FastNoiseSIMD/
     external/glm/
     external/OpenFBX/src/
     external/pugixml/src/
-    external/s7/
     external/stb/
     .
     )
@@ -213,10 +214,10 @@ endif()
 
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
+    angelscript
     pugixml
     miniz
     OpenFBX
-    s7
     stb
     )
 
@@ -268,8 +269,8 @@ configure_file(code/ylikuutio/shaders/sobel_gradient_magnitude.frag sobel_gradie
 configure_file(code/ylikuutio/shaders/text_vertex_shader.vert text_vertex_shader.vert COPYONLY)
 configure_file(code/ylikuutio/shaders/text_vertex_shader.frag text_vertex_shader.frag COPYONLY)
 
-# S7 Scheme code.
-configure_file(code/s7/hello_world.scm hello_world.scm COPYONLY)
+# Angelscript code.
+configure_file(code/angelscript/hello_world.angel hello_world.angel COPYONLY)
 
 # 3D models.
 # Suzanne.
@@ -357,6 +358,12 @@ configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
 
 # Ylikuutio
 add_library(ylikuutio STATIC
+    # angelscript, in alphabetical order
+    code/ylikuutio/angelscript/angelscript_callbacks.cpp
+    code/ylikuutio/angelscript/angelscript_callbacks.hpp
+    code/ylikuutio/angelscript/angelscript_master.cpp
+    code/ylikuutio/angelscript/angelscript_master.hpp
+
     # audio, in alphabetical order
     code/ylikuutio/audio/audio_master.cpp
     code/ylikuutio/audio/audio_master.hpp
@@ -631,10 +638,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/opengl/vboindexer.hpp
     code/ylikuutio/opengl/ylikuutio_glew.hpp
 
-    # scheme, in alphabetical order.
-    code/ylikuutio/scheme/scheme_master.cpp
-    code/ylikuutio/scheme/scheme_master.hpp
-
     # sdl, in alphabetical order
     code/ylikuutio/sdl/ylikuutio_sdl.cpp
     code/ylikuutio/sdl/ylikuutio_sdl.hpp
@@ -796,10 +799,11 @@ add_executable(yli_edit
     )
 target_link_libraries(yli_edit ylikuutio ${ALL_LIBS} pthread)
 
-# S7 Scheme test
-add_executable(s7_test
-    code/s7/s7_test.cpp)
-target_link_libraries(s7_test s7 pthread)
+# AngelScript test
+add_executable(angelscript_test
+    code/angelscript/angelscript_test.cpp
+    )
+target_link_libraries(angelscript_test ylikuutio ${ALL_LIBS} pthread)
 
 # Asio-test
 if(FALSE)
@@ -989,7 +993,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     target_link_libraries(do_tests_googletest code_to_test)
 
     add_executable(unit_tests_with_googletest code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
-    target_link_libraries(unit_tests_with_googletest gtest libgtest rt SDL2 GLEW_200 s7 stb ylikuutio pthread code_to_test)
+    target_link_libraries(unit_tests_with_googletest gtest libgtest rt SDL2 GLEW_200 angelscript stb ylikuutio pthread code_to_test)
 
     # Xcode and Visual working directories
     set_target_properties(unit_tests_with_googletest PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")

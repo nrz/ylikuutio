@@ -25,7 +25,7 @@
 #include "code/ylikuutio/audio/audio_master.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
-#include "code/ylikuutio/scheme/scheme_master.hpp"
+#include "code/ylikuutio/angelscript/angelscript_master.hpp"
 #include "code/ylikuutio/time/time.hpp"
 
 #include "SDL.h"
@@ -331,7 +331,7 @@ namespace yli
                     this->active_scene     = nullptr;
                     this->active_font2D    = nullptr;
                     this->active_console   = nullptr;
-                    this->scheme_master    = nullptr;
+                    this->angelscript_master = nullptr;
                     this->audio_master     = nullptr;
 
                     this->background_red   = NAN;
@@ -455,7 +455,7 @@ namespace yli
                         }
                     }
 
-                    this->scheme_master = std::make_shared<yli::scheme::SchemeMaster>();
+                    this->angelscript_master = std::make_shared<yli::angelscript::AngelscriptMaster>();
 
                     if (this->is_silent)
                     {
@@ -748,7 +748,7 @@ namespace yli
                 yli::ontology::Font2D* active_font2D;
                 yli::ontology::Console* active_console;
 
-                std::shared_ptr<yli::scheme::SchemeMaster> scheme_master; // pointer to `SchemeMaster`.
+                std::shared_ptr<yli::angelscript::AngelscriptMaster> angelscript_master; // pointer to `AngelscriptMaster`.
 
                 std::shared_ptr<yli::audio::AudioMaster> audio_master;    // pointer to `AudioMaster`.
 

@@ -193,9 +193,9 @@ namespace yli
                 float get_vertical_angle() const;
                 void set_vertical_angle(const float vertical_angle);
 
-                // Public callbacks (to be called from AI scripts written in s7).
+                // Public callbacks (to be called from AI scripts written in AngelScript).
                 // These are the functions that are available for AI scripts.
-                // Ylikuutio will support scripting of game agents using s7.
+                // Ylikuutio will support scripting of game agents using AngelScript.
                 // Ylikuutio can be used for all kinds of games. However, there is
                 // more support for some kinds of games needing such callbacks.
                 // In particular, Ylikuutio supports simulations of real-life phenomena.
