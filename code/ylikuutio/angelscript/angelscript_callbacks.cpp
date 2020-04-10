@@ -35,6 +35,7 @@ namespace yli
             if (message == nullptr)
             {
                 std::cerr << "ERROR: `message_callback`: `message` is `nullptr`!\n";
+                return;
             }
 
             std::string type;
