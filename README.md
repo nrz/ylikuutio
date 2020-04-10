@@ -5,6 +5,7 @@ A hobby project of mine. Work in progress.
 [![Travis CI build](https://travis-ci.org/nrz/ylikuutio.svg?branch=master)](https://travis-ci.org/nrz/ylikuutio)
 [![AppVeyor build](https://ci.appveyor.com/api/projects/status/github/nrz/ylikuutio?branch=master&svg=true)](https://ci.appveyor.com/project/nrz/ylikuutio)
 [![Coverity Scan](https://scan.coverity.com/projects/nrz-ylikuutio/badge.svg)](https://scan.coverity.com/projects/nrz-ylikuutio)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0d0d48dc3b6947b2ac90bebd1f3a07f2)](https://www.codacy.com/manual/antti.nuortimo/ylikuutio?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nrz/ylikuutio&amp;utm_campaign=Badge_Grade)
 [![Coverage Status](https://coveralls.io/repos/github/nrz/ylikuutio/badge.svg?branch=master)](https://coveralls.io/github/nrz/ylikuutio?branch=master)
 
 ## License
@@ -106,7 +107,7 @@ To cross compile from Linux to Windows:
 Crosscompiling from Linux to Windows fails to compile tests.
 This is a known bug in Google Test. Just run `make` *again* if
 compiling ends before you get `hirvi.exe`, `ajokki.exe`, `gpgpu_test.exe`,
-and `s7_test.exe`.
+and `angelscript_test.exe`.
 
 By default compiling tests is disabled when crosscompiling from Linux
 to Windows, due to this issue:
@@ -280,12 +281,8 @@ A: Some parts of Ylikuutio (some shaders, some file loaders, etc.) are
    based on [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/),
    which I really recommend for anyone interested in learning
    OpenGL programming. Ylikuutio also uses external libraries such as
-   (in alphabetical order) Asio, GLM, GLEW, OpenFBX, s7, SDL, stb, and
+   (in alphabetical order) AngelScript, Asio, GLM, GLEW, OpenFBX, SDL, stb, and
    pugixml. The rest is written from scratch.
-
-Q: Why s7 is chosen as the scripting language of Ylikuutio?
-A: I like Lisp-family languages and s7 fulfils my
-   requirements related to a small size and a suitable license.
 
 Q: Does Ylikuutio use right-handed or left-handed world coordinates?
 A: Ylikuutio uses right-handed world coordinates,
@@ -342,19 +339,18 @@ A: Ylikuutio uses right-handed world coordinates,
 * more physics
 * artificial intelligence (AI) creatures
 * A\* and Theta\* pathfinding
-* s7 as scripting language
 * visual pattern recognition for AI: V1 (primary visual cortex) and V2 simulation
 * GUI for scripting, asset creation etc.
 * Network gaming
 
 ### Libraries currently in use
 * The source code from [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/) is licensed under [WTFPL Public Licence version 2](https://www.opengl-tutorial.org/download/).
+* [AngelScript](https://www.angelcode.com/angelscript/) is licensed under [AngelCode Scripting Library license](https://www.angelcode.com/angelscript/sdk/docs/manual/doc_license.html).
 * [Asio](https://think-async.com/) is licensed under [Boost software license](https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt).
 * [OpenGL Mathematics (GLM)](https://glm.g-truc.net/) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](https://glm.g-truc.net/copying.txt).
 * [The OpenGL Extension Wrangler Library (GLEW)](http://glew.sourceforge.net/) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
 * [OpenFBX](https://github.com/nem0/OpenFBX) is licensed under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
 * [Ryan's CMake Modules](https://github.com/rpavlik/cmake-modules) is licensed under [Boost Software License Version 1.0](https://github.com/rpavlik/cmake-modules/blob/master/LICENSE_1_0.txt).
-* [s7](https://ccrma.stanford.edu/software/snd/snd/s7.html) is licensed under a BSD license.
 * [SDL2](https://www.libsdl.org/) is licensed under [the zlib license](https://www.libsdl.org/).
 * [stb](https://github.com/nothings/stb) is licensed under [the MIT license](https://github.com/nothings/stb/blob/master/LICENSE).
 * [pugixml](https://pugixml.org/) is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
