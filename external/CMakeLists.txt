@@ -7,6 +7,7 @@ add_definitions(
     -DTW_NO_LIB_PRAGMA
     -DTW_NO_DIRECT3D
     -D_CRT_SECURE_NO_WARNINGS
+    -DANGELSCRIPT_EXPORT
     )
 
 if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
@@ -18,6 +19,8 @@ endif()
 
 include_directories(
     # asio/asio/include/
+    angelscript/sdk/angelscript/include/
+    angelscript/sdk/add_on/
     FastNoiseSIMD/
     glm/
     OpenFBX/src/
@@ -247,17 +250,137 @@ if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
         )
 endif()
 
+add_library(angelscript STATIC
+    angelscript/sdk/add_on/datetime/datetime.h
+    angelscript/sdk/add_on/datetime/datetime.cpp
+    angelscript/sdk/add_on/scriptfile/scriptfile.h
+    angelscript/sdk/add_on/scriptfile/scriptfilesystem.cpp
+    angelscript/sdk/add_on/scriptfile/scriptfile.cpp
+    angelscript/sdk/add_on/scriptfile/scriptfilesystem.h
+    angelscript/sdk/add_on/scriptmath/scriptmathcomplex.h
+    angelscript/sdk/add_on/scriptmath/scriptmathcomplex.cpp
+    angelscript/sdk/add_on/scriptmath/scriptmath.cpp
+    angelscript/sdk/add_on/scriptmath/scriptmath.h
+    angelscript/sdk/add_on/scriptarray/scriptarray.h
+    angelscript/sdk/add_on/scriptarray/scriptarray.cpp
+    angelscript/sdk/add_on/scriptstdstring/scriptstdstring_utils.cpp
+    angelscript/sdk/add_on/scriptstdstring/scriptstdstring.h
+    angelscript/sdk/add_on/scriptstdstring/scriptstdstring.cpp
+    angelscript/sdk/add_on/contextmgr/contextmgr.cpp
+    angelscript/sdk/add_on/contextmgr/contextmgr.h
+    angelscript/sdk/add_on/autowrapper/generator/generator.vcproj
+    angelscript/sdk/add_on/autowrapper/generator/generateheader.cpp
+    angelscript/sdk/add_on/autowrapper/generator/generator.sln
+    angelscript/sdk/add_on/autowrapper/aswrappedcall.h
+    angelscript/sdk/add_on/scriptbuilder/scriptbuilder.cpp
+    angelscript/sdk/add_on/scriptbuilder/scriptbuilder.h
+    angelscript/sdk/add_on/scriptany/scriptany.cpp
+    angelscript/sdk/add_on/scriptany/scriptany.h
+    angelscript/sdk/add_on/weakref/weakref.h
+    angelscript/sdk/add_on/weakref/weakref.cpp
+    angelscript/sdk/add_on/debugger/debugger.cpp
+    angelscript/sdk/add_on/debugger/debugger.h
+    angelscript/sdk/add_on/scripthelper/scripthelper.h
+    angelscript/sdk/add_on/scripthelper/scripthelper.cpp
+    angelscript/sdk/add_on/scripthandle/scripthandle.cpp
+    angelscript/sdk/add_on/scripthandle/scripthandle.h
+    angelscript/sdk/add_on/scriptgrid/scriptgrid.cpp
+    angelscript/sdk/add_on/scriptgrid/scriptgrid.h
+    angelscript/sdk/add_on/scriptdictionary/scriptdictionary.h
+    angelscript/sdk/add_on/scriptdictionary/scriptdictionary.cpp
+    angelscript/sdk/add_on/serializer/serializer.h
+    angelscript/sdk/add_on/serializer/serializer.cpp
+    angelscript/sdk/angelscript/source/as_array.h
+    angelscript/sdk/angelscript/source/as_atomic.cpp
+    angelscript/sdk/angelscript/source/as_atomic.h
+    angelscript/sdk/angelscript/source/as_builder.cpp
+    angelscript/sdk/angelscript/source/as_builder.h
+    angelscript/sdk/angelscript/source/as_bytecode.cpp
+    angelscript/sdk/angelscript/source/as_bytecode.h
+    angelscript/sdk/angelscript/source/as_callfunc_arm.cpp
+    angelscript/sdk/angelscript/source/as_callfunc_arm_gcc.S
+    angelscript/sdk/angelscript/source/as_callfunc_arm_msvc.asm
+    angelscript/sdk/angelscript/source/as_callfunc_arm_vita.S
+    angelscript/sdk/angelscript/source/as_callfunc_arm_xcode.S
+    angelscript/sdk/angelscript/source/as_callfunc.cpp
+    angelscript/sdk/angelscript/source/as_callfunc.h
+    angelscript/sdk/angelscript/source/as_callfunc_mips.cpp
+    angelscript/sdk/angelscript/source/as_callfunc_ppc_64.cpp
+    angelscript/sdk/angelscript/source/as_callfunc_ppc.cpp
+    angelscript/sdk/angelscript/source/as_callfunc_sh4.cpp
+    angelscript/sdk/angelscript/source/as_callfunc_x64_gcc.cpp
+    angelscript/sdk/angelscript/source/as_callfunc_x64_mingw.cpp
+    angelscript/sdk/angelscript/source/as_callfunc_x64_msvc_asm.asm
+    angelscript/sdk/angelscript/source/as_callfunc_x64_msvc.cpp
+    angelscript/sdk/angelscript/source/as_callfunc_x86.cpp
+    angelscript/sdk/angelscript/source/as_callfunc_xenon.cpp
+    angelscript/sdk/angelscript/source/as_compiler.cpp
+    angelscript/sdk/angelscript/source/as_compiler.h
+    angelscript/sdk/angelscript/source/as_configgroup.cpp
+    angelscript/sdk/angelscript/source/as_configgroup.h
+    angelscript/sdk/angelscript/source/as_config.h
+    angelscript/sdk/angelscript/source/as_context.cpp
+    angelscript/sdk/angelscript/source/as_context.h
+    angelscript/sdk/angelscript/source/as_criticalsection.h
+    angelscript/sdk/angelscript/source/as_datatype.cpp
+    angelscript/sdk/angelscript/source/as_datatype.h
+    angelscript/sdk/angelscript/source/as_debug.h
+    angelscript/sdk/angelscript/source/as_gc.cpp
+    angelscript/sdk/angelscript/source/as_gc.h
+    angelscript/sdk/angelscript/source/as_generic.cpp
+    angelscript/sdk/angelscript/source/as_generic.h
+    angelscript/sdk/angelscript/source/as_globalproperty.cpp
+    angelscript/sdk/angelscript/source/as_map.h
+    angelscript/sdk/angelscript/source/as_memory.cpp
+    angelscript/sdk/angelscript/source/as_memory.h
+    angelscript/sdk/angelscript/source/as_module.cpp
+    angelscript/sdk/angelscript/source/as_module.h
+    angelscript/sdk/angelscript/source/as_namespace.h
+    angelscript/sdk/angelscript/source/as_objecttype.cpp
+    angelscript/sdk/angelscript/source/as_objecttype.h
+    angelscript/sdk/angelscript/source/as_outputbuffer.cpp
+    angelscript/sdk/angelscript/source/as_outputbuffer.h
+    angelscript/sdk/angelscript/source/as_parser.cpp
+    angelscript/sdk/angelscript/source/as_parser.h
+    angelscript/sdk/angelscript/source/as_property.h
+    angelscript/sdk/angelscript/source/as_restore.cpp
+    angelscript/sdk/angelscript/source/as_restore.h
+    angelscript/sdk/angelscript/source/as_scriptcode.cpp
+    angelscript/sdk/angelscript/source/as_scriptcode.h
+    angelscript/sdk/angelscript/source/as_scriptengine.cpp
+    angelscript/sdk/angelscript/source/as_scriptengine.h
+    angelscript/sdk/angelscript/source/as_scriptfunction.cpp
+    angelscript/sdk/angelscript/source/as_scriptfunction.h
+    angelscript/sdk/angelscript/source/as_scriptnode.cpp
+    angelscript/sdk/angelscript/source/as_scriptnode.h
+    angelscript/sdk/angelscript/source/as_scriptobject.cpp
+    angelscript/sdk/angelscript/source/as_scriptobject.h
+    angelscript/sdk/angelscript/source/as_string.cpp
+    angelscript/sdk/angelscript/source/as_string.h
+    angelscript/sdk/angelscript/source/as_string_util.cpp
+    angelscript/sdk/angelscript/source/as_string_util.h
+    angelscript/sdk/angelscript/source/as_symboltable.h
+    angelscript/sdk/angelscript/source/as_texts.h
+    angelscript/sdk/angelscript/source/as_thread.cpp
+    angelscript/sdk/angelscript/source/as_thread.h
+    angelscript/sdk/angelscript/source/as_tokendef.h
+    angelscript/sdk/angelscript/source/as_tokenizer.cpp
+    angelscript/sdk/angelscript/source/as_tokenizer.h
+    angelscript/sdk/angelscript/source/as_typeinfo.cpp
+    angelscript/sdk/angelscript/source/as_typeinfo.h
+    angelscript/sdk/angelscript/source/as_variablescope.cpp
+    angelscript/sdk/angelscript/source/as_variablescope.h
+    )
+if (CMAKE_COMPILER_IS_GNUCXX)
+    # http://www.angelcode.com/angelscript/sdk/docs/manual/doc_compile_lib.html
+    set_property(TARGET angelscript PROPERTY COMPILE_FLAGS "-fno-strict-aliasing")
+endif()
+
 add_library(stb STATIC
     stb/stb_image.h
     )
 set_property(TARGET stb PROPERTY LINKER_LANGUAGE C)
 set_property(TARGET stb PROPERTY COMPILE_FLAGS "-std=c89")
-
-add_library(s7 STATIC
-    s7/mus-config.h
-    s7/s7.c
-    s7/s7.h
-    )
 
 add_library(miniz STATIC
     OpenFBX/src/miniz.c

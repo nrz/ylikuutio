@@ -53,7 +53,7 @@
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/memory/memory_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
-#include "code/ylikuutio/scheme/scheme_master.hpp"
+#include "code/ylikuutio/angelscript/angelscript_master.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/time/time.hpp"
 
@@ -1173,7 +1173,7 @@ namespace yli
                 return nullptr;
             }
 
-            // Command parameters must form a valid Scheme expression.
+            // Command parameters must form a valid AngelScript expression.
 
             std::string expression;
 
@@ -1197,12 +1197,12 @@ namespace yli
 
         std::string Universe::eval_string(const std::string& my_string) const
         {
-            if (this->scheme_master == nullptr)
+            if (this->angelscript_master == nullptr)
             {
                 return "";
             }
 
-            return this->scheme_master->eval_string(my_string);
+            return this->angelscript_master->eval_string(my_string);
         }
 
         yli::audio::AudioMaster* Universe::get_audio_master() const
