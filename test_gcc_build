@@ -21,7 +21,7 @@ do
     cd ${build_dir}
     ${script_dir}/compile_linux_gcc
     ./unit_tests_with_googletest
-    ./s7_test
+    ./angelscript_test
     break
 done
 
