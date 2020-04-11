@@ -56,7 +56,6 @@ namespace yli
 
             RegisterStdString(this->angelscript_engine);
 
-            // result = angelscript_engine->RegisterObjectMethod("object", "float square(float x)", asMETHODPR(yli::angelscript::AngelscriptMaster, square, (float), float), asCALL_THISCALL);
             result = angelscript_engine->RegisterGlobalFunction("float square(float)", asMETHODPR(yli::angelscript::AngelscriptMaster, square, (float), float), asCALL_THISCALL_ASGLOBAL, this);
 
             if (result < 0)
@@ -64,7 +63,6 @@ namespace yli
                 std::cerr << "Registering global function float `square(float x)` failed!\n";
             }
 
-            // result = angelscript_engine->RegisterObjectMethod("object", "float cube(float x)", asMETHODPR(yli::angelscript::AngelscriptMaster, cube, (float), float), asCALL_THISCALL);
             result = angelscript_engine->RegisterGlobalFunction("float cube(float x)", asMETHODPR(yli::angelscript::AngelscriptMaster, cube, (float), float), asCALL_THISCALL_ASGLOBAL, this);
 
             if (result < 0)
@@ -72,7 +70,6 @@ namespace yli
                 std::cerr << "Registering global function float `cube(float x)` failed!\n";
             }
 
-            // result = angelscript_engine->RegisterObjectMethod("object", "void print(string &in)", asMETHODPR(yli::angelscript::AngelscriptMaster, print, (const std::string&), void), asCALL_THISCALL);
             result = angelscript_engine->RegisterGlobalFunction("void print(string &in)", asMETHODPR(yli::angelscript::AngelscriptMaster, print, (const std::string&), void), asCALL_THISCALL_ASGLOBAL, this);
 
             if (result < 0)
@@ -80,7 +77,6 @@ namespace yli
                 std::cerr << "Registering global function float `void print(const string &in)` failed!\n";
             }
 
-            // result = angelscript_engine->RegisterObjectMethod("object", "void print(float x)", asMETHODPR(yli::angelscript::AngelscriptMaster, print, (float), void), asCALL_THISCALL);
             result = angelscript_engine->RegisterGlobalFunction("void print(float x)", asMETHODPR(yli::angelscript::AngelscriptMaster, print, (float), void), asCALL_THISCALL_ASGLOBAL, this);
 
             if (result < 0)
