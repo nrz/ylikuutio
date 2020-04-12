@@ -1042,7 +1042,6 @@ int main(const int argc, const char* const argv[])
     }
 
     SDL_Event sdl_event;
-    std::string ms_frame_text;
 
     // Print angles and cartesian coordinates on bottom left corner.
     yli::ontology::TextStruct angles_and_coordinates_text_struct;
@@ -1149,7 +1148,7 @@ int main(const int argc, const char* const argv[])
                     std::stringstream ms_frame_text_stringstream;
                     ms_frame_text_stringstream << std::fixed << std::setprecision(2) << 1000.0f / static_cast<double>(my_universe->get_number_of_frames()) << " ms/frame; " <<
                         my_universe->get_number_of_frames() << " Hz";
-                    ms_frame_text = ms_frame_text_stringstream.str();
+                    std::string ms_frame_text = ms_frame_text_stringstream.str();
                     frame_rate_text2D->change_string(ms_frame_text);
                     my_universe->reset_number_of_frames();
                 }
