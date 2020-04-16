@@ -37,6 +37,8 @@ namespace yli
 {
     namespace ontology
     {
+        class Universe;
+
         class ChunkMaster: public yli::ontology::Entity
         {
             public:

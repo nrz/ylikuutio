@@ -53,6 +53,7 @@ namespace yli
     namespace ontology
     {
         class Entity;
+        class Universe;
         class Holobiont;
         class ParentModule;
 
