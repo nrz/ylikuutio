@@ -77,7 +77,6 @@ snake_case_parent_class_name = re.sub(r'(?<!^)(?=[A-Z])', '_', parent_class_name
 # include guard generation.
 # include guard macro name follows Ylikuutio coding guidelines.
 include_guard_macro_name = "__" + re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).upper() + "_HPP_INCLUDED"
-print("include_guard_macro_name: " + include_guard_macro_name)
 ifndef_line = "#ifndef " + include_guard_macro_name
 define_line = "#define " + include_guard_macro_name
 endif_line = "#endif"
