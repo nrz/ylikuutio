@@ -128,7 +128,10 @@ end_class_definition = \
 "        };"
 
 constructor_lines = \
-"                " + class_name + "(" + namespace + "::Universe* const universe, " + struct_variable_type + " " + struct_name + ", " + parent_module_type_and_name + ") // TODO: other_parameters!\n"\
+"                " + class_name + "(\n"\
+"                        " + namespace + "::Universe* const universe,\n"\
+"                        " + struct_variable_type + " " + struct_name + ",\n"\
+"                        " + parent_module_type_and_name + ") // TODO: other_parameters!\n"\
 "                    : " + parent_class_name + "(universe), // TODO: complete the initializer list!\n"\
 "                    " + child_module_variable_name + "(parent_module, this)  // TODO: delete this line if `ChildModule` is not needed!\n"\
 "                {\n"\
