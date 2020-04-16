@@ -52,6 +52,7 @@ namespace yli
 {
     namespace ontology
     {
+        class Universe;
         class Shader;
         class SymbiontMaterial;
         class SymbiontSpecies;

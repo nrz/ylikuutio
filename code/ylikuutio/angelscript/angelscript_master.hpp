@@ -27,6 +27,15 @@
 // Include standard headers
 #include <string> // std::string
 
+// `yli::angelscript::AngelscriptMaster` initializes `asIScriptEngine`.
+// There should be `asIScriptContext` for each human/AI player.
+// These are registered so that each player has their own instance
+// that owns that the `asIScriptContext` that player uses for executing
+// scripts.
+//
+// In addition there should be global `asIScriptContext` for scripts
+// executed through the console, providing debugging functionality etc.
+
 namespace yli
 {
     namespace angelscript

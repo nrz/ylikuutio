@@ -47,6 +47,7 @@ namespace yli
 {
     namespace ontology
     {
+        class Universe;
         class Material;
 
         class VectorFont: public yli::ontology::Entity

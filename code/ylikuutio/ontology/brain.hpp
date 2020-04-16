@@ -58,6 +58,7 @@ namespace yli
 
     namespace ontology
     {
+        class Universe;
         class Scene;
         class Movable;
         class ParentModule;

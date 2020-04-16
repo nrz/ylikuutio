@@ -51,6 +51,7 @@ namespace yli
     namespace ontology
     {
         class Entity;
+        class Universe;
 
         class Holobiont: public yli::ontology::Movable
         {
