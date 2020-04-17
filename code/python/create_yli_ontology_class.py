@@ -92,8 +92,8 @@ struct_filename = snake_case_class_name + "_struct.hpp"
 
 # parent class filename.
 # parent class needs to be #include'd always because it is inherited.
-parent_class_header_filename = snake_case_parent_class_name + ".hpp"
-parent_class_include_line = "#include \"" + parent_class_header_filename + "\""
+parent_class_hpp = snake_case_parent_class_name + ".hpp"
+parent_class_include_line = "#include \"" + parent_class_hpp + "\""
 
 # include line for `yli::ontology::ChildModule`.
 child_module_include_line = "#include \"child_module.hpp\" // TODO: delete this line if `ChildModule` is not needed!"
