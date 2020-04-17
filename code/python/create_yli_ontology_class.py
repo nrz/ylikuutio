@@ -75,10 +75,13 @@ snake_case_class_name = re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).lower()
 snake_case_parent_class_name = re.sub(r'(?<!^)(?=[A-Z])', '_', parent_class_name).lower()
 
 # include guard generation.
-# include guard macro name follows Ylikuutio coding guidelines.
-include_guard_macro_name = "__" + re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).upper() + "_HPP_INCLUDED"
-ifndef_line = "#ifndef " + include_guard_macro_name
-define_line = "#define " + include_guard_macro_name
+# include guard macro names follow Ylikuutio coding guidelines.
+class_include_guard_macro_name = "__" + re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).upper() + "_HPP_INCLUDED"
+struct_include_guard_macro_name = "__" + re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).upper() + "_STRUCT_HPP_INCLUDED"
+class_ifndef_line = "#ifndef " + class_include_guard_macro_name
+class_define_line = "#define " + class_include_guard_macro_name
+struct_ifndef_line = "#ifndef " + struct_include_guard_macro_name
+struct_define_line = "#define " + struct_include_guard_macro_name
 endif_line = "#endif"
 
 # class filenames.
@@ -102,7 +105,8 @@ child_module_include_line = "#include \"child_module.hpp\" // TODO: delete this 
 child_module_variable_name = "child_of_" + snake_case_parent_class_name
 
 # struct variable type and name.
-struct_variable_type = "const " + namespace + "::" + class_name + "Struct&"
+struct_variable_type = class_name + "Struct"
+const_struct_reference_variable_type = "const " + namespace + "::" + struct_variable_type + "&"
 struct_name = snake_case_class_name + "_struct"
 
 # include line for the corresponding struct file.
@@ -139,10 +143,10 @@ private_line = \
 end_class_definition = \
 "        };"
 
-constructor_lines = \
+class_constructor_lines = \
 "                " + class_name + "(\n"\
 "                        " + namespace + "::Universe* const universe,\n"\
-"                        " + struct_variable_type + " " + struct_name + ",\n"\
+"                        " + const_struct_reference_variable_type + " " + struct_name + ",\n"\
 "                        " + parent_module_type_and_name + ") // TODO: other_parameters!\n"\
 "                    : " + parent_class_name + "(universe), // TODO: complete the initializer list!\n"\
 "                    " + child_module_variable_name + "(parent_module, this)  // TODO: delete this line if `ChildModule` is not needed!\n"\
@@ -163,17 +167,32 @@ destructor_declaration_lines = \
 "                // destructor.\n"\
 "                virtual ~" + class_name + "();"
 
+# header file specific lines.
 destructor_definition_lines = \
 "        " + class_name + "::~" + class_name + "()\n"\
 "        {\n"\
 "            // destructor.\n"\
 "        }"
 
+# struct file specific lines.
+begin_struct_definition = \
+"        struct " + struct_variable_type + "\n"\
+"        {"
+
+end_struct_definition = \
+"        };"
+
+struct_constructor_lines = \
+"            " + struct_variable_type + "()\n"\
+"            {\n"\
+"                // constructor.\n"\
+"            }"
+
 with open(class_filename_hpp, 'w') as f:
     print(copyright_notice, file = f)
     print(file = f)
-    print(ifndef_line, file = f)
-    print(define_line, file = f)
+    print(class_ifndef_line, file = f)
+    print(class_define_line, file = f)
     print(file = f)
     print(parent_class_include_line, file = f)
     print(child_module_include_line, file = f)
@@ -185,7 +204,7 @@ with open(class_filename_hpp, 'w') as f:
     print(file = f)
     print(begin_class_definition, file = f)
     print(public_line, file = f)
-    print(constructor_lines, file = f)
+    print(class_constructor_lines, file = f)
     print(file = f)
     print(delete_copy_constructor_line, file = f)
     print(delete_copy_assignment_line, file = f)
@@ -208,3 +227,17 @@ with open(class_filename_cpp, 'w') as f:
     print(begin_namespace_lines, file = f)
     print(destructor_definition_lines, file = f)
     print(end_namespace_lines, file = f)
+
+with open(struct_filename, 'w') as f:
+    print(copyright_notice, file = f)
+    print(file = f)
+    print(struct_ifndef_line, file = f)
+    print(struct_define_line, file = f)
+    print(file = f)
+    print(begin_namespace_lines, file = f)
+    print(begin_struct_definition, file = f)
+    print(struct_constructor_lines, file = f)
+    print(end_struct_definition, file = f)
+    print(end_namespace_lines, file = f)
+    print(file = f)
+    print(endif_line, file = f)
