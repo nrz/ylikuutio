@@ -96,6 +96,9 @@ child_module_variable_name = "child_of_" + snake_case_parent_class_name
 struct_variable_type = "const " + namespace + "::" + class_name + "Struct&"
 struct_name = snake_case_class_name + "_struct"
 
+# include line for the corresponding struct file.
+struct_include_line = "#include \"" + struct_name + ".hpp\" // TODO: modify or delete this line if there is no `" + namespace + "::" + class_name + "Struct`!"
+
 parent_module_type_and_name = "yli::ontology::ParentModule* const parent_module"
 
 # namespace
@@ -158,6 +161,7 @@ print(define_line)
 print()
 print(parent_class_include_line)
 print(child_module_include_line)
+print(struct_include_line)
 print()
 print(begin_namespace_lines)
 print(universe_forward_declaration)
