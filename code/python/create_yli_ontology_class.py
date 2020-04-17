@@ -81,6 +81,15 @@ ifndef_line = "#ifndef " + include_guard_macro_name
 define_line = "#define " + include_guard_macro_name
 endif_line = "#endif"
 
+# class filenames.
+class_filename_hpp = snake_case_class_name + ".hpp"
+class_filename_cpp = snake_case_class_name + ".cpp"
+
+class_include_line = "#include \"" + class_filename_hpp + "\""
+
+# struct filename.
+struct_filename = snake_case_class_name + "_struct.hpp"
+
 # parent class filename.
 # parent class needs to be #include'd always because it is inherited.
 parent_class_header_filename = snake_case_parent_class_name + ".hpp"
@@ -150,36 +159,52 @@ delete_copy_assignment_line = \
 child_module_lines = \
 "                " + namespace + "::ChildModule " + child_module_variable_name + "; // TODO: delete this line if `ChildModule` is not needed!"
 
-destructor_lines = \
+destructor_declaration_lines = \
 "                // destructor.\n"\
 "                virtual ~" + class_name + "();"
 
-print(copyright_notice)
-print()
-print(ifndef_line)
-print(define_line)
-print()
-print(parent_class_include_line)
-print(child_module_include_line)
-print(struct_include_line)
-print()
-print(begin_namespace_lines)
-print(universe_forward_declaration)
-print(parent_module_forward_declaration)
-print()
-print(begin_class_definition)
-print(public_line)
-print(constructor_lines)
-print()
-print(delete_copy_constructor_line)
-print(delete_copy_assignment_line)
-print()
-print(destructor_lines)
-print()
-print(child_module_lines)
-print()
-print(private_line)
-print(end_class_definition)
-print(end_namespace_lines)
-print()
-print(endif_line)
+destructor_definition_lines = \
+"        " + class_name + "::~" + class_name + "()\n"\
+"        {\n"\
+"            // destructor.\n"\
+"        }"
+
+with open(class_filename_hpp, 'w') as f:
+    print(copyright_notice, file = f)
+    print(file = f)
+    print(ifndef_line, file = f)
+    print(define_line, file = f)
+    print(file = f)
+    print(parent_class_include_line, file = f)
+    print(child_module_include_line, file = f)
+    print(struct_include_line, file = f)
+    print(file = f)
+    print(begin_namespace_lines, file = f)
+    print(universe_forward_declaration, file = f)
+    print(parent_module_forward_declaration, file = f)
+    print(file = f)
+    print(begin_class_definition, file = f)
+    print(public_line, file = f)
+    print(constructor_lines, file = f)
+    print(file = f)
+    print(delete_copy_constructor_line, file = f)
+    print(delete_copy_assignment_line, file = f)
+    print(file = f)
+    print(destructor_declaration_lines, file = f)
+    print(file = f)
+    print(child_module_lines, file = f)
+    print(file = f)
+    print(private_line, file = f)
+    print(end_class_definition, file = f)
+    print(end_namespace_lines, file = f)
+    print(file = f)
+    print(endif_line, file = f)
+
+with open(class_filename_cpp, 'w') as f:
+    print(copyright_notice, file = f)
+    print(file = f)
+    print(class_include_line, file = f)
+    print(file = f)
+    print(begin_namespace_lines, file = f)
+    print(destructor_definition_lines, file = f)
+    print(end_namespace_lines, file = f)
