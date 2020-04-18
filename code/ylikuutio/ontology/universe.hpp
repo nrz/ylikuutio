@@ -283,6 +283,11 @@
 
 namespace yli
 {
+    namespace common
+    {
+        class AnyValue;
+    }
+
     namespace config
     {
         class Setting;
