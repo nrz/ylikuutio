@@ -37,8 +37,6 @@ namespace yli
 {
     namespace ontology
     {
-        class Universe;
-
         Model::~Model()
         {
             // destructor.
