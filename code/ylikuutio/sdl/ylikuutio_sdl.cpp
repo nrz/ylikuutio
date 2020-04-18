@@ -24,6 +24,7 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <memory>   // std::make_shared, std::shared_ptr
 
 namespace yli
 {
@@ -58,6 +59,11 @@ namespace yli
                     window_width,
                     window_height,
                     flags);
+        }
+
+        std::shared_ptr<SDL_GLContext> create_context(SDL_Window* const window)
+        {
+            return std::make_shared<SDL_GLContext>(SDL_GL_CreateContext(window));
         }
 
         void set_window_size(SDL_Window* window, const int window_width, const int window_height)

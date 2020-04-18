@@ -323,7 +323,7 @@ namespace yli
 
         void Universe::create_context()
         {
-            this->context = std::make_shared<SDL_GLContext>(SDL_GL_CreateContext(this->window));
+            this->context = yli::sdl::create_context(this->window);
         }
 
         void Universe::make_context_current()
