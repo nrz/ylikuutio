@@ -334,6 +334,11 @@ namespace yli
             }
         }
 
+        void Universe::set_swap_interval(const int32_t interval)
+        {
+            SDL_GL_SetSwapInterval(static_cast<int>(interval));
+        }
+
         void Universe::restore_onscreen_rendering() const
         {
             // Bind the default framebuffer for on-screen rendering.

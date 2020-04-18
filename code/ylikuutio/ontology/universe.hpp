@@ -451,7 +451,7 @@ namespace yli
 
                             // Disable vertical sync.
                             // TODO: add option to enable/disable vsync in the console.
-                            SDL_GL_SetSwapInterval(0);
+                            this->set_swap_interval(0);
                         }
                     }
 
@@ -533,6 +533,7 @@ namespace yli
 
                 void create_context();
                 void make_context_current();
+                void set_swap_interval(const int32_t interval);
                 void restore_onscreen_rendering() const;
                 void set_opengl_background_color() const;
                 void adjust_opengl_viewport() const;
