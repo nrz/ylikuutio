@@ -23,6 +23,7 @@
 #include "entity_factory.hpp"
 #include "universe_struct.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
+#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/angelscript/angelscript_master.hpp"
