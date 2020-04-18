@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "any_struct.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
@@ -44,8 +45,6 @@ namespace yli
 {
     namespace common
     {
-        class AnyValue;
-
         AnyStruct::AnyStruct()
         {
             // constructor.
