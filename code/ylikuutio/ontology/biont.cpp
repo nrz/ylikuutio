@@ -55,6 +55,7 @@ namespace yli
     namespace ontology
     {
         class Entity;
+        class Universe;
 
         void Biont::bind_to_SymbiontSpecies()
         {
