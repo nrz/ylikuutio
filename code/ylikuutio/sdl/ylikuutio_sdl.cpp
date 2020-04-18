@@ -81,6 +81,11 @@ namespace yli
             SDL_GL_MakeCurrent(window, context);
         }
 
+        void set_swap_interval(const int interval)
+        {
+            SDL_GL_SetSwapInterval(interval);
+        }
+
         void flush_sdl_event_queue()
         {
             SDL_Event sdl_event;

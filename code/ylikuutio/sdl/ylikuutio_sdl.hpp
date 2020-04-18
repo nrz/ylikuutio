@@ -33,6 +33,7 @@ namespace yli
         void set_window_size(SDL_Window* window, const int window_width, const int window_height);
         int set_window_windowed(SDL_Window* window);
         void make_context_current(SDL_Window* window, SDL_GLContext context);
+        void set_swap_interval(const int interval);
         void flush_sdl_event_queue();
     }
 }
