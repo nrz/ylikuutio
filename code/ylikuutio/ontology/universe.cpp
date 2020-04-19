@@ -51,9 +51,7 @@
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
-#include "code/ylikuutio/memory/memory_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
-#include "code/ylikuutio/angelscript/angelscript_master.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/time/time.hpp"
 
@@ -82,7 +80,6 @@
 #include <stdint.h>      // uint32_t etc.
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <string>        // std::string
-#include <unordered_map> // std::unordered_map
 #include <utility>       // std::pair
 #include <vector>        // std::vector
 
