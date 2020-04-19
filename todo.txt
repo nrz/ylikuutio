@@ -30,6 +30,7 @@ Tasks which are necessary for the first stage:
 [ ] Create `audio::PlayList` class, whose parent is `Entity`.
 
 Tasks which are necessary for the second stage:
+[ ] Replace stb with libpng (http://www.libpng.org/pub/png/libpng.html) and libjpeg (http://ijg.org/).
 [ ] Implement creating new named `Setting`s in `SettingMaster` using `Console`.
 [ ] Implement YliEdit editor.
 [ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
