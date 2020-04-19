@@ -37,23 +37,12 @@
 #include "entity.hpp"
 #include "scene.hpp"
 #include "camera.hpp"
-#include "brain.hpp"
-#include "movable.hpp"
-#include "any_value_entity.hpp"
-#include "any_struct_entity.hpp"
+#include "console.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/common/pi.hpp"
-#include "code/ylikuutio/config/setting_master.hpp"
-#include "console.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/input/input.hpp"
-#include "code/ylikuutio/input/input_master.hpp"
-#include "code/ylikuutio/map/ylikuutio_map.hpp"
-#include "code/ylikuutio/memory/memory_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
-#include "code/ylikuutio/angelscript/angelscript_master.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/time/time.hpp"
 
@@ -75,21 +64,31 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
+#include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <stdint.h>      // uint32_t etc.
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <string>        // std::string
-#include <unordered_map> // std::unordered_map
 #include <utility>       // std::pair
 #include <vector>        // std::vector
 
 namespace yli
 {
+    namespace common
+    {
+        class AnyValue;
+    }
+
     namespace config
     {
         class Setting;
+    }
+
+    namespace input
+    {
+        class InputMaster;
     }
 
     namespace ontology
@@ -323,7 +322,7 @@ namespace yli
 
         void Universe::create_context()
         {
-            this->context = std::make_shared<SDL_GLContext>(SDL_GL_CreateContext(this->window));
+            this->context = yli::sdl::create_context(this->window);
         }
 
         void Universe::make_context_current()
@@ -332,6 +331,11 @@ namespace yli
             {
                 yli::sdl::make_context_current(this->window, *this->context);
             }
+        }
+
+        void Universe::set_swap_interval(const int32_t interval)
+        {
+            yli::sdl::set_swap_interval(static_cast<int>(interval));
         }
 
         void Universe::restore_onscreen_rendering() const
@@ -576,624 +580,6 @@ namespace yli
 
             return this->entity_factory.get();
         }
-
-        // Public callbacks.
-
-        std::shared_ptr<yli::common::AnyValue> Universe::print_entities(
-                yli::ontology::Console* const console,
-                yli::ontology::Entity* const universe_entity,
-                const std::vector<std::string>& command_parameters)
-        {
-            if (console == nullptr || universe_entity == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
-
-            if (universe == nullptr)
-            {
-                return nullptr;
-            }
-
-            std::vector<std::pair<std::string, yli::ontology::Entity*>> key_and_value_vector = yli::map::get_keys_and_values(universe->entity_map);
-
-            for (auto key_and_value : key_and_value_vector)
-            {
-                uint64_t memory_address = reinterpret_cast<uint64_t>((void*) key_and_value.second); // value.
-                std::stringstream memory_address_stringstream;
-                memory_address_stringstream << " 0x" << std::hex << memory_address;
-
-                std::string entity_info = key_and_value.first; // key.
-                entity_info += memory_address_stringstream.str();
-                console->print_text(entity_info);
-            }
-
-            return nullptr;
-        }
-
-        std::shared_ptr<yli::common::AnyValue> Universe::print_parent(
-                yli::ontology::Console* const console,
-                yli::ontology::Entity* const universe_entity,
-                const std::vector<std::string>& command_parameters)
-        {
-            if (console == nullptr || universe_entity == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
-
-            if (universe == nullptr)
-            {
-                return nullptr;
-            }
-
-            if (command_parameters.size() == 1)
-            {
-                std::string name = command_parameters[0];
-
-                if (universe->entity_map.count(name) != 1)
-                {
-                    return nullptr;
-                }
-
-                yli::ontology::Entity* entity = universe->entity_map[name];
-
-                if (entity == nullptr)
-                {
-                    return nullptr;
-                }
-
-                // OK, let's find out the parent of this `Entity`.
-
-                if (entity->get_parent() == nullptr)
-                {
-                    console->print_text("parent's address: nullptr");
-                }
-                else
-                {
-                    uint64_t parents_memory_address = reinterpret_cast<uint64_t>((void*) entity->get_parent());
-                    std::stringstream parents_memory_address_stringstream;
-                    parents_memory_address_stringstream << "0x" << std::hex << parents_memory_address;
-
-                    std::string parent_info = "parent's address: ";
-                    parent_info += parents_memory_address_stringstream.str();
-                    console->print_text(parent_info);
-                }
-            }
-
-            return nullptr;
-        }
-
-        std::shared_ptr<yli::common::AnyValue> Universe::activate(
-                yli::ontology::Console* const console,
-                yli::ontology::Entity* const universe_entity,
-                const std::vector<std::string>& command_parameters)
-        {
-            // This function can be used to activate a `World`, a `Scene`, a `Camera`, or a `Console`.
-            // A `World` can be activated always, assuming that the `universe_entity` is a `Universe`.
-            // A `Scene` can be activated only if the `Scene` has a `World` parent that can be activated.
-
-            if (console == nullptr || universe_entity == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
-
-            if (universe == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::config::SettingMaster* setting_master = universe->get_setting_master();
-
-            if (setting_master == nullptr)
-            {
-                return nullptr;
-            }
-
-            if (command_parameters.size() == 0)
-            {
-                // No command parameters.
-                // Print variable names.
-                console->print_text(setting_master->help());
-            }
-            else if (command_parameters.size() == 1)
-            {
-                std::string name = command_parameters[0];
-
-                if (universe->entity_map.count(name) == 0)
-                {
-                    return nullptr;
-                }
-
-                yli::ontology::Entity* entity = universe->entity_map[name];
-                yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(entity);
-                yli::ontology::Camera* const camera = dynamic_cast<yli::ontology::Camera*>(entity);
-                yli::ontology::Console* const console = dynamic_cast<yli::ontology::Console*>(entity);
-
-                uint32_t number_of_entity_types = 0;
-                number_of_entity_types += scene != nullptr ? 1 : 0;
-                number_of_entity_types += camera != nullptr ? 1 : 0;
-                number_of_entity_types += console != nullptr ? 1 : 0;
-
-                if (number_of_entity_types != 1)
-                {
-                    // The named `Entity` is neither a `Scene`, a `Camera`, nor a `Console`.
-                    return nullptr;
-                }
-
-                if (scene != nullptr)
-                {
-                    // The named `Entity` is a `Scene`.
-                    universe->set_active_scene(scene);
-                }
-                else if (camera != nullptr)
-                {
-                    // The named `Entity` is a `Camera`.
-                    universe->set_active_camera(camera);
-                }
-                else if (console != nullptr)
-                {
-                    // The named `Entity` is a `Console`.
-                    if (universe->get_active_console() != nullptr)
-                    {
-                        universe->get_active_console()->exit_console();
-                    }
-
-                    universe->set_active_console(console);
-                    console->enter_console();
-                }
-            }
-            return nullptr;
-        }
-
-        std::shared_ptr<yli::common::AnyValue> Universe::delete_entity(
-                yli::ontology::Console* const console,
-                yli::ontology::Entity* const universe_entity,
-                const std::vector<std::string>& command_parameters)
-        {
-            if (console == nullptr || universe_entity == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
-
-            if (universe == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::config::SettingMaster* setting_master = universe->get_setting_master();
-
-            if (setting_master == nullptr)
-            {
-                return nullptr;
-            }
-
-            if (command_parameters.size() == 0)
-            {
-                // No command parameters.
-                // Print variable names.
-                console->print_text(setting_master->help());
-            }
-            else if (command_parameters.size() == 1)
-            {
-                std::string name = command_parameters[0];
-
-                if (universe->entity_map.count(name) == 0)
-                {
-                    return nullptr;
-                }
-
-                yli::ontology::Entity* entity = universe->entity_map[name];
-
-                if (entity == nullptr)
-                {
-                    universe->entity_map.erase(name);
-                    return nullptr;
-                }
-
-                if (entity->get_can_be_erased())
-                {
-                    universe->entity_map.erase(name);
-                    delete entity;
-                }
-            }
-            return nullptr;
-        }
-
-        std::shared_ptr<yli::common::AnyValue> Universe::info(
-                yli::ontology::Console* const console,
-                yli::ontology::Entity* const universe_entity,
-                const std::vector<std::string>& command_parameters)
-        {
-            if (console == nullptr || universe_entity == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
-
-            if (universe == nullptr)
-            {
-                return nullptr;
-            }
-
-            if (command_parameters.size() == 0)
-            {
-                // No command parameters.
-                // Print names of named entities.
-                yli::map::print_keys_to_console(universe->entity_map, console);
-            }
-            else if (command_parameters.size() == 1)
-            {
-                std::string name = command_parameters[0];
-
-                if (universe->entity_map.count(name) != 1)
-                {
-                    return nullptr;
-                }
-
-                yli::ontology::Entity* entity = universe->entity_map[name];
-
-                if (entity == nullptr)
-                {
-                    return nullptr;
-                }
-
-                // OK, let's find out information about this `Entity`.
-
-                console->print_text(entity->get_type());
-
-                uint64_t memory_address = reinterpret_cast<uint64_t>((void*) entity);
-                std::stringstream memory_address_stringstream;
-                memory_address_stringstream << "0x" << std::hex << memory_address;
-
-                std::string entity_info = "memory address:   ";
-                entity_info += memory_address_stringstream.str();
-                console->print_text(entity_info);
-
-                if (entity->get_parent() == nullptr)
-                {
-                    console->print_text("parent's address: nullptr");
-                }
-                else
-                {
-                    uint64_t parents_memory_address = reinterpret_cast<uint64_t>((void*) entity->get_parent());
-                    std::stringstream parents_memory_address_stringstream;
-                    parents_memory_address_stringstream << "0x" << std::hex << parents_memory_address;
-
-                    std::string parent_info = "parent's address: ";
-                    parent_info += parents_memory_address_stringstream.str();
-                    console->print_text(parent_info);
-                }
-
-                std::size_t number_of_children = entity->get_number_of_children();
-                std::stringstream number_of_children_stringstream;
-                number_of_children_stringstream << number_of_children;
-
-                std::string children_info = "number of children: ";
-                children_info += number_of_children_stringstream.str();
-                console->print_text(children_info);
-
-                std::size_t number_of_descendants = entity->get_number_of_descendants();
-                std::stringstream number_of_descendants_stringstream;
-                number_of_descendants_stringstream << number_of_descendants;
-
-                std::string descendants_info = "number of descendants: ";
-                descendants_info += number_of_descendants_stringstream.str();
-                console->print_text(descendants_info);
-            }
-
-            return nullptr;
-        }
-
-        std::shared_ptr<yli::common::AnyValue> Universe::bind(
-                yli::ontology::Console* const console,
-                yli::ontology::Entity* const universe_entity,
-                const std::vector<std::string>& command_parameters)
-        {
-            if (console == nullptr || universe_entity == nullptr)
-            {
-                return nullptr;
-            }
-
-            const yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
-
-            if (universe == nullptr)
-            {
-                return nullptr;
-            }
-
-            if (command_parameters.size() == 2)
-            {
-                const std::string child_or_apprentice_entity_name = command_parameters[0];
-
-                if (universe->entity_map.count(child_or_apprentice_entity_name) != 1)
-                {
-                    return nullptr;
-                }
-
-                yli::ontology::Entity* const child_or_apprentice_entity = universe->entity_map.at(child_or_apprentice_entity_name);
-
-                if (child_or_apprentice_entity == nullptr)
-                {
-                    return nullptr;
-                }
-
-                const std::string parent_or_master_entity_name = command_parameters[1];
-
-                if (universe->entity_map.count(parent_or_master_entity_name) != 1)
-                {
-                    return nullptr;
-                }
-
-                yli::ontology::Entity* const parent_or_master_entity = universe->entity_map.at(parent_or_master_entity_name);
-
-                if (parent_or_master_entity == nullptr)
-                {
-                    return nullptr;
-                }
-
-                yli::ontology::Movable* const child_or_apprentice_movable = dynamic_cast<yli::ontology::Movable*>(child_or_apprentice_entity);
-                yli::ontology::Brain* const parent_or_master_brain = dynamic_cast<yli::ontology::Brain*>(parent_or_master_entity);
-
-                if (child_or_apprentice_movable != nullptr && parent_or_master_brain != nullptr)
-                {
-                    child_or_apprentice_movable->bind_to_new_Brain(parent_or_master_brain);
-                }
-                else
-                {
-                    child_or_apprentice_entity->bind_to_new_parent(parent_or_master_entity);
-                }
-            }
-
-            return nullptr;
-        }
-
-        std::shared_ptr<yli::common::AnyValue> Universe::create_AnyValue(
-                yli::ontology::Console* const console,
-                yli::ontology::Entity* const universe_entity,
-                const std::vector<std::string>& command_parameters)
-        {
-            // usage:
-            // `AnyValue <variable_name> <variable_type> <variable_value>`
-            //
-            // eg.
-            // `AnyValue my_pi float 3.1415927`.
-
-            if (console == nullptr || universe_entity == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
-
-            if (universe == nullptr)
-            {
-                return nullptr;
-            }
-
-            if (command_parameters.size() != 3)
-            {
-                // TODO: print help text.
-                return nullptr;
-            }
-
-            const std::string& variable_name = command_parameters[0];
-
-            if (variable_name.empty())
-            {
-                // TODO: error: somehow variable name is empty!
-                return nullptr;
-            }
-
-            if (universe->is_entity(variable_name))
-            {
-                // TODO: error: variable name is in use already!
-                return nullptr;
-            }
-
-            // OK, variable name is not empty and it is not in use yet either.
-
-            const std::string& variable_type = command_parameters[1];
-
-            if (variable_type.empty())
-            {
-                // TODO: error: somehow variable type is empty!
-                return nullptr;
-            }
-
-            const std::string& value_string = command_parameters[2];
-
-            if (value_string.empty())
-            {
-                // TODO: error: somehow value string is empty!
-                return nullptr;
-            }
-
-            std::shared_ptr<yli::common::AnyValue> any_value = std::make_shared<yli::common::AnyValue>(variable_type, value_string);
-            yli::ontology::AnyValueEntity* const any_value_entity = new yli::ontology::AnyValueEntity(universe, any_value);
-            any_value_entity->set_name(variable_name);
-            return nullptr;
-        }
-
-        std::shared_ptr<yli::common::AnyValue> Universe::create_AnyStruct(
-                yli::ontology::Console* const console,
-                yli::ontology::Entity* const universe_entity,
-                const std::vector<std::string>& command_parameters)
-        {
-            // usage:
-            // `AnyStruct <variable_name>`
-            //
-            // eg.
-            // `AnyValue my_struct`.
-
-            if (console == nullptr || universe_entity == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
-
-            if (universe == nullptr)
-            {
-                return nullptr;
-            }
-
-            if (command_parameters.size() != 1)
-            {
-                // TODO: print help text.
-                return nullptr;
-            }
-
-            const std::string& variable_name = command_parameters[0];
-
-            if (variable_name.empty())
-            {
-                // TODO: error: somehow variable name is empty!
-                return nullptr;
-            }
-
-            if (universe->is_entity(variable_name))
-            {
-                // TODO: error: variable name is in use already!
-                return nullptr;
-            }
-
-            // OK, variable name is not empty and it is not in use yet either.
-
-            yli::ontology::AnyStructEntity* const any_struct_entity = new yli::ontology::AnyStructEntity(universe);
-            any_struct_entity->set_name(variable_name);
-            return nullptr;
-        }
-
-        std::shared_ptr<yli::common::AnyValue> Universe::screenshot(
-                yli::ontology::Console* const console,
-                yli::ontology::Entity* const universe_entity,
-                const std::vector<std::string>& command_parameters)
-        {
-            if (console == nullptr || universe_entity == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
-
-            if (universe == nullptr)
-            {
-                return nullptr;
-            }
-
-            if (command_parameters.size() == 1)
-            {
-                const std::string filename = command_parameters[0];
-
-                // https://learnopengl.com/Advanced-OpenGL/Framebuffers
-
-                const std::size_t texture_width = universe->framebuffer_width;
-                const std::size_t texture_height = universe->framebuffer_height;
-
-                if (!universe->is_framebuffer_initialized)
-                {
-                    // Create an FBO (off-screen framebuffer object).
-                    glGenFramebuffers(1, &universe->framebuffer);
-                }
-
-                // Bind the offscreen buffer.
-                glBindFramebuffer(GL_FRAMEBUFFER, universe->framebuffer);
-
-                if (!universe->is_framebuffer_initialized)
-                {
-                    // Create a texture.
-                    glGenTextures(1, &universe->texture);
-                    glBindTexture(GL_TEXTURE_2D, universe->texture);
-
-                    // Define the texture.
-                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture_width, texture_height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-
-                    yli::opengl::set_filtering_parameters();
-
-                    // Attach the texture.
-                    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, universe->texture, 0);
-
-                    // Create and bind a render buffer with depth and stencil attachments.
-                    glGenRenderbuffers(1, &universe->renderbuffer);
-                    glBindRenderbuffer(GL_RENDERBUFFER, universe->renderbuffer);
-                    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, texture_width, texture_height);
-                    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, universe->renderbuffer);
-
-                    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-                    {
-                        std::cerr << "ERROR: `Universe::screenshot`: framebuffer is not complete!\n";
-                    }
-
-                    // Set background color for the framebuffer.
-                    universe->set_opengl_background_color();
-
-                    universe->is_framebuffer_initialized = true;
-                }
-
-                // Clear the framebuffer.
-                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-                // Adjust viewport for the framebuffer.
-                glViewport(0, 0, texture_width, texture_height);
-                universe->render_without_changing_depth_test(); // Render to framebuffer.
-
-                // Transfer data from the GPU texture to a CPU array and save into a file.
-                const bool should_ylikuutio_flip_texture = true;
-                yli::opengl::save_data_from_gpu_texture_into_file(
-                        GL_RGB, GL_UNSIGNED_BYTE, texture_width, texture_height, filename, should_ylikuutio_flip_texture);
-
-                universe->restore_onscreen_rendering();
-            }
-
-            return nullptr;
-        }
-
-        std::shared_ptr<yli::common::AnyValue> Universe::eval(
-                yli::ontology::Console* const console,
-                yli::ontology::Entity* const universe_entity,
-                const std::vector<std::string>& command_parameters)
-        {
-            if (console == nullptr || universe_entity == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
-
-            if (universe == nullptr)
-            {
-                return nullptr;
-            }
-
-            // Command parameters must form a valid AngelScript expression.
-
-            std::string expression;
-
-            for (std::vector<std::string>::const_iterator it = command_parameters.begin(); it != command_parameters.end(); )
-            {
-                expression += *it;
-
-                if (++it != command_parameters.end())
-                {
-                    expression += " ";
-                }
-            }
-
-            const std::string result = universe->eval_string(expression);
-            console->print_text(result);
-
-            return nullptr;
-        }
-
-        // Public callbacks end here.
 
         std::string Universe::eval_string(const std::string& my_string) const
         {

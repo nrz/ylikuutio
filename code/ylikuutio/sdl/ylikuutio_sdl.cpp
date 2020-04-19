@@ -24,6 +24,7 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <memory>   // std::make_shared, std::shared_ptr
 
 namespace yli
 {
@@ -60,6 +61,11 @@ namespace yli
                     flags);
         }
 
+        std::shared_ptr<SDL_GLContext> create_context(SDL_Window* const window)
+        {
+            return std::make_shared<SDL_GLContext>(SDL_GL_CreateContext(window));
+        }
+
         void set_window_size(SDL_Window* window, const int window_width, const int window_height)
         {
             SDL_SetWindowSize(window, window_width, window_height);
@@ -73,6 +79,11 @@ namespace yli
         void make_context_current(SDL_Window* window, SDL_GLContext context)
         {
             SDL_GL_MakeCurrent(window, context);
+        }
+
+        void set_swap_interval(const int interval)
+        {
+            SDL_GL_SetSwapInterval(interval);
         }
 
         void flush_sdl_event_queue()

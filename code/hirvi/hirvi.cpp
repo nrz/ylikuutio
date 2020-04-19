@@ -89,6 +89,7 @@
 #include <cmath>         // abs, cos, NAN, remainder, sin, std::isnan, std::pow
 #include <cstddef>       // std::size_t
 #include <iomanip>       // std::setfill, std::setprecision, std::setw
+#include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
@@ -697,8 +698,8 @@ int main(const int argc, const char* const argv[])
     my_console->add_command_callback("delete", &yli::ontology::Universe::delete_entity);
     my_console->add_command_callback("info", &yli::ontology::Universe::info);
     my_console->add_command_callback("bind", &yli::ontology::Universe::bind);
-    my_console->add_command_callback("AnyValueEntity", &yli::ontology::Universe::create_AnyValue);
-    my_console->add_command_callback("AnyStructEntity", &yli::ontology::Universe::create_AnyStruct);
+    my_console->add_command_callback("AnyValueEntity", &yli::ontology::Universe::create_AnyValueEntity);
+    my_console->add_command_callback("AnyStructEntity", &yli::ontology::Universe::create_AnyStructEntity);
 
     // Exit program callbacks.
     my_console->add_command_callback("bye", &app::quit);

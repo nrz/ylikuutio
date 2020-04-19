@@ -20,15 +20,20 @@
 
 #include "SDL.h"
 
+// Include standard headers
+#include <memory> // std::make_shared, std::shared_ptr
+
 namespace yli
 {
     namespace sdl
     {
         bool init_SDL();
         SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen);
+        std::shared_ptr<SDL_GLContext> create_context(SDL_Window* const window);
         void set_window_size(SDL_Window* window, const int window_width, const int window_height);
         int set_window_windowed(SDL_Window* window);
         void make_context_current(SDL_Window* window, SDL_GLContext context);
+        void set_swap_interval(const int interval);
         void flush_sdl_event_queue();
     }
 }

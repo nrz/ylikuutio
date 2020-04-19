@@ -71,9 +71,21 @@ namespace yli
         template <class T1>
             void print_keys_to_console(const std::unordered_map<std::string, T1>& unordered_map, yli::ontology::Console* const console)
             {
+                if (console == nullptr)
+                {
+                    return;
+                }
+
+                const yli::ontology::Universe* const universe = console->get_universe();
+
+                if (universe == nullptr)
+                {
+                    return;
+                }
+
                 std::vector<std::string> key_vector = yli::map::get_keys(unordered_map);
 
-                std::size_t characters_for_line = console->get_universe()->get_window_width() / console->get_universe()->get_text_size();
+                std::size_t characters_for_line = universe->get_window_width() / universe->get_text_size();
 
                 std::string keys_text;
 

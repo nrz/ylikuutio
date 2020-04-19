@@ -23,6 +23,7 @@
 #include "entity_factory.hpp"
 #include "universe_struct.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
+#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/angelscript/angelscript_master.hpp"
@@ -283,6 +284,11 @@
 
 namespace yli
 {
+    namespace common
+    {
+        class AnyValue;
+    }
+
     namespace config
     {
         class Setting;
@@ -451,7 +457,7 @@ namespace yli
 
                             // Disable vertical sync.
                             // TODO: add option to enable/disable vsync in the console.
-                            SDL_GL_SetSwapInterval(0);
+                            this->set_swap_interval(0);
                         }
                     }
 
@@ -533,6 +539,7 @@ namespace yli
 
                 void create_context();
                 void make_context_current();
+                void set_swap_interval(const int32_t interval);
                 void restore_onscreen_rendering() const;
                 void set_opengl_background_color() const;
                 void adjust_opengl_viewport() const;
@@ -647,12 +654,12 @@ namespace yli
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::common::AnyValue> create_AnyValue(
+                static std::shared_ptr<yli::common::AnyValue> create_AnyValueEntity(
                         yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::common::AnyValue> create_AnyStruct(
+                static std::shared_ptr<yli::common::AnyValue> create_AnyStructEntity(
                         yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
