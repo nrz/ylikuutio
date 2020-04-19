@@ -160,12 +160,12 @@ delete_copy_constructor_line = \
 delete_copy_assignment_line = \
 "                " + class_name + " &operator=(const " + class_name + "&) = delete; // Delete copy assignment."
 
-child_module_lines = \
-"                " + namespace + "::ChildModule " + child_module_variable_name + "; // TODO: delete this line if `ChildModule` is not needed!"
-
 destructor_declaration_lines = \
 "                // destructor.\n"\
 "                virtual ~" + class_name + "();"
+
+child_module_lines = \
+"                " + namespace + "::ChildModule " + child_module_variable_name + "; // TODO: delete this line if `ChildModule` is not needed!"
 
 # header file specific lines.
 destructor_definition_lines = \
