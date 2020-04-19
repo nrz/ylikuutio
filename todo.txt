@@ -6,7 +6,7 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
-[ ] Implement creating new fields of given type in AnyStructEntities of a using `Console` command `createfield`.
+[ ] Implement creating new fields of given type in AnyStructEntities using `Console` command `createfield`.
 [ ] Implement creating and setting new fields of given type in AnyStructEntities of a using `Console` command `setfield`.
 [ ] Implement printing fields of AnyStructEntities using `Console` command `print`.
 [ ] Implement creating new named Entities using `Console`, with a named `AnyStructEntity` of correct type as input.
