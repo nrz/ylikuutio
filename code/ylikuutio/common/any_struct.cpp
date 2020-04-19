@@ -27,20 +27,6 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-// `yli::common::AnyStruct` is a `class` which functions as a generic replacement for `struct`s.
-// Further, it provides direct access to `AnyStruct`s which are children of current `AnyStruct`.
-// This is implemented using recursion.
-//
-// `yli::common::AnyStruct` uses a notation also used by MATLAB and GNU Octave:
-// `"foo.bar"` refers to `AnyStruct` named `"bar"`, which is a child of `AnyStruct` named `"foo"`.
-// `"foo.bar.baz"` refers to `AnyStruct` named `"baz"`, which is a child of `"baz"`, which is a child of `"foo"`.
-//
-// For example, `set` can be used for setting values and `get` for getting values:
-// `set foo.bar.baz 1.0`
-// `get foo.bar.baz`
-//
-// All links are created using `std::shared_ptr`.
-
 namespace yli
 {
     namespace common
