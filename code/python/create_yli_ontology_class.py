@@ -112,6 +112,11 @@ struct_name = snake_case_class_name + "_struct"
 # include line for the corresponding struct file.
 struct_include_line = "#include \"" + struct_name + ".hpp\" // TODO: modify or delete this line if there is no `" + namespace + "::" + class_name + "Struct`!"
 
+# standard headers include lines.
+standard_headers_include_lines = \
+"// Include standard headers\n"\
+"#include <cstddef> // std::size_t"
+
 parent_module_type_and_name = "yli::ontology::ParentModule* const parent_module"
 
 # namespace
@@ -124,6 +129,9 @@ begin_namespace_lines = \
 end_namespace_lines = \
 "    }\n"\
 "}"
+
+entity_forward_declaration = \
+"        class Entity;"
 
 universe_forward_declaration = \
 "        class Universe;"
@@ -164,6 +172,15 @@ destructor_declaration_lines = \
 "                // destructor.\n"\
 "                virtual ~" + class_name + "();"
 
+get_parent_const_override_line = \
+"                yli::ontology::Entity* get_parent() const override;"
+
+get_number_of_children_const_override_line = \
+"                std::size_t get_number_of_children() const override;"
+
+get_number_of_descendants_const_override_line = \
+"                std::size_t get_number_of_descendants() const override;"
+
 child_module_lines = \
 "                " + namespace + "::ChildModule " + child_module_variable_name + "; // TODO: delete this line if `ChildModule` is not needed!"
 
@@ -198,7 +215,10 @@ with open(class_filename_hpp, 'w') as f:
     print(child_module_include_line, file = f)
     print(struct_include_line, file = f)
     print(file = f)
+    print(standard_headers_include_lines, file = f)
+    print(file = f)
     print(begin_namespace_lines, file = f)
+    print(entity_forward_declaration, file = f)
     print(universe_forward_declaration, file = f)
     print(parent_module_forward_declaration, file = f)
     print(file = f)
@@ -210,6 +230,10 @@ with open(class_filename_hpp, 'w') as f:
     print(delete_copy_assignment_line, file = f)
     print(file = f)
     print(destructor_declaration_lines, file = f)
+    print(file = f)
+    print(get_parent_const_override_line, file = f)
+    print(get_number_of_children_const_override_line, file = f)
+    print(get_number_of_descendants_const_override_line, file = f)
     print(file = f)
     print(child_module_lines, file = f)
     print(file = f)
