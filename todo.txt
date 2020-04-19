@@ -6,11 +6,9 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
-[ ] Write `yli::ontology` class generator in Python.
-[ ] Implement printing children of Entities using `Console`.
-[ ] Implement printing parent of Entities using `Console`.
-[ ] Implement creating new named `Setting`s in `SettingMaster` using `Console`.
-[ ] Implement creating new named AnyStructEntities of a given type using `Console`.
+[ ] Implement creating new fields of given type in AnyStructEntities of a using `Console` command `createfield`.
+[ ] Implement creating and setting new fields of given type in AnyStructEntities of a using `Console` command `setfield`.
+[ ] Implement printing fields of AnyStructEntities using `Console` command `print`.
 [ ] Implement creating new named Entities using `Console`, with a named `AnyStructEntity` of correct type as input.
 [ ] Implement `yli::ontology::Waypoint` class.
 [ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
@@ -32,6 +30,7 @@ Tasks which are necessary for the first stage:
 [ ] Create `audio::PlayList` class, whose parent is `Entity`.
 
 Tasks which are necessary for the second stage:
+[ ] Implement creating new named `Setting`s in `SettingMaster` using `Console`.
 [ ] Implement YliEdit editor.
 [ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
 [ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
@@ -48,6 +47,7 @@ Tasks which are necessary for the third stage:
 [ ] Implement YliServer.
 
 Tasks which are necessary for the development of Ylikuutio:
+[ ] Implement printing children of Entities using `Console` command `children`.
 [ ] Implement `yli::ontology::ShaderSymbiosis`.
 [ ] Implement a custom FBX loader.
 [ ] Replace OpenFBX with the custom FBX loader.
@@ -183,3 +183,6 @@ Ready:
 [x] Fix bug that some `Object`s (e.g. `cat.fbx`) do not appear on screen on some environments.
 [x] Implement printing `Setting`s using `Console`.
 [x] Evaluate LuaJIT: https://luajit.org/
+[x] Write `yli::ontology` class generator in Python.
+[x] Implement printing parent of Entities using `Console`.
+[x] Implement creating new named AnyStructEntities using `Console`.
