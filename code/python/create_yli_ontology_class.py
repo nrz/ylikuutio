@@ -160,6 +160,7 @@ class_constructor_lines = \
 "                    " + child_module_variable_name + "(parent_module, this)  // TODO: delete this line if `ChildModule` is not needed!\n"\
 "                {\n"\
 "                    // constructor.\n"\
+"                    this->parent = " + struct_name + ".parent;\n"\
 "                }"
 
 delete_copy_constructor_line = \
@@ -199,11 +200,18 @@ begin_struct_definition = \
 end_struct_definition = \
 "        };"
 
+parent_class_forward_declaration = \
+"        class " + parent_class_name + ";"
+
 struct_constructor_lines = \
 "            " + struct_variable_type + "()\n"\
+"                : parent(nullptr)\n"\
 "            {\n"\
 "                // constructor.\n"\
 "            }"
+
+parent_pointer_lines = \
+"            " + fully_qualified_parent_class_name + "* parent;"
 
 with open(class_filename_hpp, 'w') as f:
     print(copyright_notice, file = f)
@@ -259,8 +267,12 @@ with open(struct_filename, 'w') as f:
     print(struct_define_line, file = f)
     print(file = f)
     print(begin_namespace_lines, file = f)
+    print(parent_class_forward_declaration, file = f)
+    print(file = f)
     print(begin_struct_definition, file = f)
     print(struct_constructor_lines, file = f)
+    print(file = f)
+    print(parent_pointer_lines, file = f)
     print(end_struct_definition, file = f)
     print(end_namespace_lines, file = f)
     print(file = f)
