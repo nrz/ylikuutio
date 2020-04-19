@@ -659,7 +659,7 @@ namespace yli
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::common::AnyValue> create_AnyStruct(
+                static std::shared_ptr<yli::common::AnyValue> create_AnyStructEntity(
                         yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
