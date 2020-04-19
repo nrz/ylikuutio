@@ -298,6 +298,7 @@ A: Ylikuutio uses right-handed world coordinates,
 * multiple scenes in the same `Universe` (`activate` console command)
 * audio with Simple DirectMedia Layer (SDL)
 * option for wireframe models (`set wireframe true`, `set wireframe false`)
+* GPGPU using `yli::ontology::ComputeTask` class (see also [Skrolli 2019.2](https://skrolli.fi/numerot/2019-2/) for an article in Finnish).
 
 ## Future developments underway
 * full support for different keyboard layouts in console
@@ -305,8 +306,6 @@ A: Ylikuutio uses right-handed world coordinates,
 * command to read console command input from file
 * command to record gameplay
 * command to play recorded gameplay
-* running some Linux command line commands in console, with Toybox
-* option to disassemble some Ylikuutio code (`Entity` objects) using NDISASM
 * copy-paste in console (Shift-Ins for paste)
 * console reference manual (`man` command)
 * rendering to texture (for mirrors and displays)
