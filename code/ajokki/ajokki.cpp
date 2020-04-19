@@ -1010,7 +1010,7 @@ int main(const int argc, const char* const argv[])
     my_console->add_command_callback("delete", &yli::ontology::Universe::delete_entity);
     my_console->add_command_callback("info", &yli::ontology::Universe::info);
     my_console->add_command_callback("bind", &yli::ontology::Universe::bind);
-    my_console->add_command_callback("AnyValueEntity", &yli::ontology::Universe::create_AnyValue);
+    my_console->add_command_callback("AnyValueEntity", &yli::ontology::Universe::create_AnyValueEntity);
     my_console->add_command_callback("AnyStructEntity", &yli::ontology::Universe::create_AnyStruct);
 
     // Exit program callbacks.

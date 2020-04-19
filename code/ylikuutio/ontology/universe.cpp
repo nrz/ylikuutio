@@ -960,7 +960,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::common::AnyValue> Universe::create_AnyValue(
+        std::shared_ptr<yli::common::AnyValue> Universe::create_AnyValueEntity(
                 yli::ontology::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
