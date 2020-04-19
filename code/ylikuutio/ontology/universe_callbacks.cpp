@@ -145,7 +145,7 @@ namespace yli
             // A `World` can be activated always, assuming that the `universe_entity` is a `Universe`.
             // A `Scene` can be activated only if the `Scene` has a `World` parent that can be activated.
 
-            if (console == nullptr || universe_entity == nullptr)
+            if (universe_entity == nullptr)
             {
                 return nullptr;
             }
@@ -168,7 +168,10 @@ namespace yli
             {
                 // No command parameters.
                 // Print variable names.
-                console->print_text(setting_master->help());
+                if (console != nullptr)
+                {
+                    console->print_text(setting_master->help());
+                }
             }
             else if (command_parameters.size() == 1)
             {
@@ -225,7 +228,7 @@ namespace yli
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
-            if (console == nullptr || universe_entity == nullptr)
+            if (universe_entity == nullptr)
             {
                 return nullptr;
             }
@@ -248,7 +251,10 @@ namespace yli
             {
                 // No command parameters.
                 // Print variable names.
-                console->print_text(setting_master->help());
+                if (console != nullptr)
+                {
+                    console->print_text(setting_master->help());
+                }
             }
             else if (command_parameters.size() == 1)
             {
@@ -367,7 +373,7 @@ namespace yli
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
-            if (console == nullptr || universe_entity == nullptr)
+            if (universe_entity == nullptr)
             {
                 return nullptr;
             }
@@ -436,7 +442,7 @@ namespace yli
             // eg.
             // `AnyValue my_pi float 3.1415927`.
 
-            if (console == nullptr || universe_entity == nullptr)
+            if (universe_entity == nullptr)
             {
                 return nullptr;
             }
@@ -503,7 +509,7 @@ namespace yli
             // eg.
             // `AnyValue my_struct`.
 
-            if (console == nullptr || universe_entity == nullptr)
+            if (universe_entity == nullptr)
             {
                 return nullptr;
             }
@@ -547,7 +553,7 @@ namespace yli
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
-            if (console == nullptr || universe_entity == nullptr)
+            if (universe_entity == nullptr)
             {
                 return nullptr;
             }
@@ -631,7 +637,7 @@ namespace yli
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
-            if (console == nullptr || universe_entity == nullptr)
+            if (universe_entity == nullptr)
             {
                 return nullptr;
             }
@@ -658,7 +664,11 @@ namespace yli
             }
 
             const std::string result = universe->eval_string(expression);
-            console->print_text(result);
+
+            if (console != nullptr)
+            {
+                console->print_text(result);
+            }
 
             return nullptr;
         }
