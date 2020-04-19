@@ -20,6 +20,7 @@
 
 // Include standard headers
 #include <fstream>  // std::ifstream
+#include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <vector>   // std::vector
