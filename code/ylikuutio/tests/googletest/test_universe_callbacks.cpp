@@ -19,9 +19,9 @@
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/datatype.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/any_value_entity.hpp"
 #include "code/ylikuutio/ontology/any_struct_entity.hpp"
-#include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 
 // Include standard headers
