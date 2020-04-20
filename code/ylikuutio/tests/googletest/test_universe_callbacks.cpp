@@ -20,6 +20,7 @@
 #include "code/ylikuutio/common/datatype.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/any_value_entity.hpp"
+#include "code/ylikuutio/ontology/any_struct_entity.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 
@@ -552,4 +553,27 @@ TEST(any_value_entity_must_be_created_appropriately, headless_universe_uint32_t_
 
     ASSERT_EQ(any_value_entity->type, yli::common::Datatype::UINT32_T);
     ASSERT_EQ(any_value_entity->uint32_t_value, 4294967295);
+}
+
+TEST(any_struct_entity_must_be_created_appropriately, headless_universe)
+{
+    yli::ontology::Console* const console = nullptr;
+
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    const std::string any_value_entity_name = "foo";
+    ASSERT_FALSE(universe->is_entity(any_value_entity_name));
+    ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
+
+    std::vector<std::string> command_parameters = { any_value_entity_name };
+    universe->create_AnyStructEntity(console, universe, command_parameters);
+    ASSERT_TRUE(universe->is_entity(any_value_entity_name));
+
+    yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
+    ASSERT_NE(entity, nullptr);
+
+    yli::ontology::AnyStructEntity* const any_struct_entity = dynamic_cast<yli::ontology::AnyStructEntity*>(entity);
+    ASSERT_NE(any_struct_entity, nullptr);
 }
