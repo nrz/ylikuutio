@@ -141,9 +141,7 @@ namespace yli
                 yli::ontology::Entity* const universe_entity,
                 const std::vector<std::string>& command_parameters)
         {
-            // This function can be used to activate a `World`, a `Scene`, a `Camera`, or a `Console`.
-            // A `World` can be activated always, assuming that the `universe_entity` is a `Universe`.
-            // A `Scene` can be activated only if the `Scene` has a `World` parent that can be activated.
+            // This function can be used to activate a `Scene`, a `Camera`, or a `Console`.
 
             if (universe_entity == nullptr)
             {
