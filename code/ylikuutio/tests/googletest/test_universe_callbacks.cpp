@@ -41,7 +41,7 @@ namespace yli
     }
 }
 
-TEST(any_value_entity_must_be_created_appropriately, headless_universe_bool_true)
+TEST(any_value_entity_must_be_created_appropriately, universe_callback_bool_true)
 {
     yli::ontology::Console* const console = nullptr;
 
@@ -73,7 +73,7 @@ TEST(any_value_entity_must_be_created_appropriately, headless_universe_bool_true
     ASSERT_EQ(any_value_entity->bool_value, true);
 }
 
-TEST(any_value_entity_must_be_created_appropriately, headless_universe_bool_false)
+TEST(any_value_entity_must_be_created_appropriately, universe_callback_bool_false)
 {
     yli::ontology::Console* const console = nullptr;
 
@@ -105,7 +105,7 @@ TEST(any_value_entity_must_be_created_appropriately, headless_universe_bool_fals
     ASSERT_EQ(any_value_entity->bool_value, false);
 }
 
-TEST(any_value_entity_must_be_created_appropriately, headless_universe_float_0)
+TEST(any_value_entity_must_be_created_appropriately, universe_callback_float_0)
 {
     yli::ontology::Console* const console = nullptr;
 
@@ -137,7 +137,7 @@ TEST(any_value_entity_must_be_created_appropriately, headless_universe_float_0)
     ASSERT_EQ(any_value_entity->float_value, 0.0f);
 }
 
-TEST(any_value_entity_must_be_created_appropriately, headless_universe_float_0_0)
+TEST(any_value_entity_must_be_created_appropriately, universe_callback_float_0_0)
 {
     yli::ontology::Console* const console = nullptr;
 
@@ -169,7 +169,7 @@ TEST(any_value_entity_must_be_created_appropriately, headless_universe_float_0_0
     ASSERT_EQ(any_value_entity->float_value, 0.0f);
 }
 
-TEST(any_value_entity_must_be_created_appropriately, headless_universe_float_pi)
+TEST(any_value_entity_must_be_created_appropriately, universe_callback_float_pi)
 {
     yli::ontology::Console* const console = nullptr;
 
@@ -203,7 +203,7 @@ TEST(any_value_entity_must_be_created_appropriately, headless_universe_float_pi)
     ASSERT_LT(any_value_entity->float_value, 3.141593f);
 }
 
-TEST(any_value_entity_must_be_created_appropriately, headless_universe_double_0)
+TEST(any_value_entity_must_be_created_appropriately, universe_callback_double_0)
 {
     yli::ontology::Console* const console = nullptr;
 
@@ -235,7 +235,7 @@ TEST(any_value_entity_must_be_created_appropriately, headless_universe_double_0)
     ASSERT_EQ(any_value_entity->double_value, 0.0f);
 }
 
-TEST(any_value_entity_must_be_created_appropriately, headless_universe_double_0_0)
+TEST(any_value_entity_must_be_created_appropriately, universe_callback_double_0_0)
 {
     yli::ontology::Console* const console = nullptr;
 
@@ -267,7 +267,7 @@ TEST(any_value_entity_must_be_created_appropriately, headless_universe_double_0_
     ASSERT_EQ(any_value_entity->double_value, 0.0f);
 }
 
-TEST(any_value_entity_must_be_created_appropriately, headless_universe_double_pi)
+TEST(any_value_entity_must_be_created_appropriately, universe_callback_double_pi)
 {
     yli::ontology::Console* const console = nullptr;
 
@@ -299,7 +299,7 @@ TEST(any_value_entity_must_be_created_appropriately, headless_universe_double_pi
     ASSERT_EQ(any_value_entity->double_value, 3.1415927);
 }
 
-TEST(any_value_entity_must_be_created_appropriately, headless_universe_int32_t_0)
+TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_0)
 {
     yli::ontology::Console* const console = nullptr;
 
@@ -331,7 +331,7 @@ TEST(any_value_entity_must_be_created_appropriately, headless_universe_int32_t_0
     ASSERT_EQ(any_value_entity->int32_t_value, 0);
 }
 
-TEST(any_value_entity_must_be_created_appropriately, headless_universe_int32_t_plus_1)
+TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_plus_1)
 {
     yli::ontology::Console* const console = nullptr;
 
@@ -363,7 +363,7 @@ TEST(any_value_entity_must_be_created_appropriately, headless_universe_int32_t_p
     ASSERT_EQ(any_value_entity->int32_t_value, 1);
 }
 
-TEST(any_value_entity_must_be_created_appropriately, headless_universe_int32_t_minus_1)
+TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_minus_1)
 {
     yli::ontology::Console* const console = nullptr;
 
@@ -395,7 +395,7 @@ TEST(any_value_entity_must_be_created_appropriately, headless_universe_int32_t_m
     ASSERT_EQ(any_value_entity->int32_t_value, -1);
 }
 
-TEST(any_value_entity_must_be_created_appropriately, headless_universe_int32_t_max)
+TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_max)
 {
     yli::ontology::Console* const console = nullptr;
 
@@ -427,7 +427,7 @@ TEST(any_value_entity_must_be_created_appropriately, headless_universe_int32_t_m
     ASSERT_EQ(any_value_entity->int32_t_value, 2147483647);
 }
 
-TEST(any_value_entity_must_be_created_appropriately, headless_universe_int32_t_min)
+TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_min)
 {
     yli::ontology::Console* const console = nullptr;
 
@@ -459,7 +459,7 @@ TEST(any_value_entity_must_be_created_appropriately, headless_universe_int32_t_m
     ASSERT_EQ(any_value_entity->int32_t_value, -2147483648);
 }
 
-TEST(any_value_entity_must_be_created_appropriately, headless_universe_uint32_t_0)
+TEST(any_value_entity_must_be_created_appropriately, universe_callback_uint32_t_0)
 {
     yli::ontology::Console* const console = nullptr;
 
@@ -491,7 +491,7 @@ TEST(any_value_entity_must_be_created_appropriately, headless_universe_uint32_t_
     ASSERT_EQ(any_value_entity->uint32_t_value, 0);
 }
 
-TEST(any_value_entity_must_be_created_appropriately, headless_universe_uint32_t_1)
+TEST(any_value_entity_must_be_created_appropriately, universe_callback_uint32_t_1)
 {
     yli::ontology::Console* const console = nullptr;
 
@@ -523,7 +523,7 @@ TEST(any_value_entity_must_be_created_appropriately, headless_universe_uint32_t_
     ASSERT_EQ(any_value_entity->uint32_t_value, 1);
 }
 
-TEST(any_value_entity_must_be_created_appropriately, headless_universe_uint32_t_max)
+TEST(any_value_entity_must_be_created_appropriately, universe_callback_uint32_t_max)
 {
     yli::ontology::Console* const console = nullptr;
 
@@ -555,7 +555,7 @@ TEST(any_value_entity_must_be_created_appropriately, headless_universe_uint32_t_
     ASSERT_EQ(any_value_entity->uint32_t_value, 4294967295);
 }
 
-TEST(any_struct_entity_must_be_created_appropriately, headless_universe)
+TEST(any_struct_entity_must_be_created_appropriately, universe_callback_any_struct)
 {
     yli::ontology::Console* const console = nullptr;
 
