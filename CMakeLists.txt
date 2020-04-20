@@ -885,6 +885,10 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/load/image_file_loader.cpp
         code/ylikuutio/load/image_file_loader.hpp
         code/ylikuutio/memory/memory_templates.hpp
+        code/ylikuutio/ontology/any_struct_entity.cpp
+        code/ylikuutio/ontology/any_struct_entity.hpp
+        code/ylikuutio/ontology/any_value_entity.cpp
+        code/ylikuutio/ontology/any_value_entity.hpp
         code/ylikuutio/ontology/brain.cpp
         code/ylikuutio/ontology/brain.hpp
         code/ylikuutio/ontology/brain_struct.hpp
