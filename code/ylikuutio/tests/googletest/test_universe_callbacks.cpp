@@ -20,6 +20,8 @@
 #include "code/ylikuutio/common/datatype.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/world.hpp"
+#include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/any_value_entity.hpp"
 #include "code/ylikuutio/ontology/any_struct_entity.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
@@ -576,4 +578,28 @@ TEST(any_struct_entity_must_be_created_appropriately, universe_callback_any_stru
 
     yli::ontology::AnyStructEntity* const any_struct_entity = dynamic_cast<yli::ontology::AnyStructEntity*>(entity);
     ASSERT_NE(any_struct_entity, nullptr);
+}
+
+TEST(scene_must_be_activated_appropriately, universe_callback)
+{
+    yli::ontology::Console* const console = nullptr;
+
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    const std::string scene_name = "foo";
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+    scene->set_name(scene_name);
+
+    ASSERT_EQ(universe->get_active_scene(), nullptr);
+
+    std::vector<std::string> command_parameters = { scene_name };
+    universe->activate(console, universe, command_parameters);
+    ASSERT_EQ(universe->get_active_scene(), scene);
 }
