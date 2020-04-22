@@ -35,6 +35,7 @@
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>      // uint32_t etc.
 #include <utility>       // std::swap etc.
+#include <variant>       // std::variant
 
 namespace yli
 {
@@ -173,7 +174,7 @@ namespace yli
                 {
                     const std::shared_ptr<yli::common::AnyValue> end_condition_any_value = this->end_condition_callback_engine->execute(nullptr);
 
-                    if (end_condition_any_value->type == yli::common::Datatype::BOOL && end_condition_any_value->bool_value)
+                    if (end_condition_any_value->type == yli::common::Datatype::BOOL && std::get<bool>(end_condition_any_value->data))
                     {
                         break; // End condition was satisfied. Therefore, no more iterations.
                     }

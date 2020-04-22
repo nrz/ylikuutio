@@ -24,6 +24,7 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
+#include <variant>  // std::variant
 #include <vector>   // std::vector
 
 TEST(any_struct_must_be_initialized_appropriately, no_fields)
@@ -139,7 +140,7 @@ TEST(any_struct_must_function_appropriately, read_data_simple)
     std::shared_ptr<yli::common::AnyValue> foo_any_value_shared_ptr1 = any_struct.read_data("foo");
     ASSERT_NE(foo_any_value_shared_ptr1, nullptr);
     ASSERT_EQ(foo_any_value_shared_ptr1->get_datatype(), "uint32_t");
-    ASSERT_EQ(foo_any_value_shared_ptr1->uint32_t_value, 0xdeadbeef);
+    ASSERT_EQ(std::get<uint32_t>(foo_any_value_shared_ptr1->data), 0xdeadbeef);
 
     // pseudocode: bar_nonexistent_any_value_shared_ptr2 = any_struct.bar
     std::shared_ptr<yli::common::AnyValue> bar_nonexistent_any_value_shared_ptr2 = any_struct.read_data("bar");
@@ -155,13 +156,13 @@ TEST(any_struct_must_function_appropriately, read_data_simple)
     std::shared_ptr<yli::common::AnyValue> foo_any_value_shared_ptr2 = any_struct.read_data("foo");
     ASSERT_NE(foo_any_value_shared_ptr2, nullptr);
     ASSERT_EQ(foo_any_value_shared_ptr2->get_datatype(), "uint32_t");
-    ASSERT_EQ(foo_any_value_shared_ptr2->uint32_t_value, 0xdeadbeef);
+    ASSERT_EQ(std::get<uint32_t>(foo_any_value_shared_ptr2->data), 0xdeadbeef);
 
     // pseudocode: bar_any_value_shared_ptr1 = any_struct.bar
     std::shared_ptr<yli::common::AnyValue> bar_any_value_shared_ptr1 = any_struct.read_data("bar");
     ASSERT_NE(bar_any_value_shared_ptr1, nullptr);
     ASSERT_EQ(bar_any_value_shared_ptr1->get_datatype(), "uint32_t");
-    ASSERT_EQ(bar_any_value_shared_ptr1->uint32_t_value, 0xca7f00d);
+    ASSERT_EQ(std::get<uint32_t>(bar_any_value_shared_ptr1->data), 0xca7f00d);
 }
 
 TEST(any_struct_must_function_appropriately, erase_data_check_if_exist_simple)
@@ -212,7 +213,7 @@ TEST(any_struct_must_function_appropriately, erase_data_read_data_simple)
     std::shared_ptr<yli::common::AnyValue> foo_any_value_shared_ptr1 = any_struct.read_data("foo");
     ASSERT_NE(foo_any_value_shared_ptr1, nullptr);
     ASSERT_EQ(foo_any_value_shared_ptr1->get_datatype(), "uint32_t");
-    ASSERT_EQ(foo_any_value_shared_ptr1->uint32_t_value, 0xdeadbeef);
+    ASSERT_EQ(std::get<uint32_t>(foo_any_value_shared_ptr1->data), 0xdeadbeef);
 
     std::shared_ptr<yli::common::AnyValue> bar_nonexistent_any_value_shared_ptr2 = any_struct.read_data("bar");
     ASSERT_EQ(bar_nonexistent_any_value_shared_ptr2, nullptr);
@@ -226,12 +227,12 @@ TEST(any_struct_must_function_appropriately, erase_data_read_data_simple)
     std::shared_ptr<yli::common::AnyValue> foo_any_value_shared_ptr2 = any_struct.read_data("foo");
     ASSERT_NE(foo_any_value_shared_ptr2, nullptr);
     ASSERT_EQ(foo_any_value_shared_ptr2->get_datatype(), "uint32_t");
-    ASSERT_EQ(foo_any_value_shared_ptr2->uint32_t_value, 0xdeadbeef);
+    ASSERT_EQ(std::get<uint32_t>(foo_any_value_shared_ptr2->data), 0xdeadbeef);
 
     std::shared_ptr<yli::common::AnyValue> bar_any_value_shared_ptr1 = any_struct.read_data("bar");
     ASSERT_NE(bar_any_value_shared_ptr1, nullptr);
     ASSERT_EQ(bar_any_value_shared_ptr1->get_datatype(), "uint32_t");
-    ASSERT_EQ(bar_any_value_shared_ptr1->uint32_t_value, 0xca7f00d);
+    ASSERT_EQ(std::get<uint32_t>(bar_any_value_shared_ptr1->data), 0xca7f00d);
 
     ASSERT_TRUE(any_struct.erase_data(foo_target));
     std::shared_ptr<yli::common::AnyValue> foo_nonexistent_any_value_shared_ptr2 = any_struct.read_data("foo");
@@ -240,7 +241,7 @@ TEST(any_struct_must_function_appropriately, erase_data_read_data_simple)
     std::shared_ptr<yli::common::AnyValue> bar_any_value_shared_ptr2 = any_struct.read_data("bar");
     ASSERT_NE(bar_any_value_shared_ptr2, nullptr);
     ASSERT_EQ(bar_any_value_shared_ptr2->get_datatype(), "uint32_t");
-    ASSERT_EQ(bar_any_value_shared_ptr2->uint32_t_value, 0xca7f00d);
+    ASSERT_EQ(std::get<uint32_t>(bar_any_value_shared_ptr2->data), 0xca7f00d);
 
     ASSERT_TRUE(any_struct.erase_data(bar_target));
     std::shared_ptr<yli::common::AnyValue> foo_nonexistent_any_value_shared_ptr3 = any_struct.read_data("foo");
@@ -287,11 +288,11 @@ TEST(any_struct_must_function_appropriately, all_functionality_simple)
     std::shared_ptr<yli::common::AnyValue> foo_any_value_shared_ptr = any_struct.read_data("foo");
     ASSERT_NE(foo_any_value_shared_ptr, nullptr);
     ASSERT_EQ(foo_any_value_shared_ptr->get_datatype(), "uint32_t");
-    ASSERT_EQ(foo_any_value_shared_ptr->uint32_t_value, 0xdeadbeef);
+    ASSERT_EQ(std::get<uint32_t>(foo_any_value_shared_ptr->data), 0xdeadbeef);
     std::shared_ptr<yli::common::AnyValue> bar_any_value_shared_ptr = any_struct.read_data("bar");
     ASSERT_NE(bar_any_value_shared_ptr, nullptr);
     ASSERT_EQ(bar_any_value_shared_ptr->get_datatype(), "uint32_t");
-    ASSERT_EQ(bar_any_value_shared_ptr->uint32_t_value, 0xca7f00d);
+    ASSERT_EQ(std::get<uint32_t>(bar_any_value_shared_ptr->data), 0xca7f00d);
 }
 
 TEST(any_struct_must_function_appropriately, enter_data_complex_2nd_level)
@@ -596,14 +597,13 @@ TEST(any_struct_must_function_appropriately, erase_data_read_data_complex_2nd_le
 
     ASSERT_NE(any_struct.read_data("a"), nullptr);
     ASSERT_EQ(std::strcmp(any_struct.read_data("a")->get_datatype().c_str(), "std::shared_ptr<yli::common::AnyStruct>"), 0);
-    ASSERT_NE(any_struct.read_data("a")->any_struct_shared_ptr, nullptr);
+    ASSERT_NE(std::get<std::shared_ptr<yli::common::AnyStruct>>(any_struct.read_data("a")->data), nullptr);
 
     ASSERT_EQ(any_struct.read_data("b"), nullptr);
 
     ASSERT_NE(any_struct.read_data("a.b"), nullptr);
     ASSERT_EQ(std::strcmp(any_struct.read_data("a.b")->get_datatype().c_str(), "uint32_t"), 0);
-    ASSERT_EQ(any_struct.read_data("a.b")->any_struct_shared_ptr, nullptr);
-    ASSERT_EQ(any_struct.read_data("a.b")->uint32_t_value, 0xdeadbeef);
+    ASSERT_EQ(std::get<uint32_t>(any_struct.read_data("a.b")->data), 0xdeadbeef);
 
     uint32_t catfood_uint32_t = 0xca7f00d;
     std::shared_ptr<yli::common::AnyValue> catfood_any_value_shared_ptr =
@@ -613,58 +613,54 @@ TEST(any_struct_must_function_appropriately, erase_data_read_data_complex_2nd_le
 
     ASSERT_NE(any_struct.read_data("a"), nullptr);
     ASSERT_EQ(std::strcmp(any_struct.read_data("a")->get_datatype().c_str(), "std::shared_ptr<yli::common::AnyStruct>"), 0);
-    ASSERT_NE(any_struct.read_data("a")->any_struct_shared_ptr, nullptr);
+    ASSERT_NE(std::get<std::shared_ptr<yli::common::AnyStruct>>(any_struct.read_data("a")->data), nullptr);
 
     ASSERT_EQ(any_struct.read_data("b"), nullptr);
 
     ASSERT_NE(any_struct.read_data("a.b"), nullptr);
     ASSERT_EQ(std::strcmp(any_struct.read_data("a.b")->get_datatype().c_str(), "uint32_t"), 0);
-    ASSERT_EQ(any_struct.read_data("a.b")->any_struct_shared_ptr, nullptr);
-    ASSERT_EQ(any_struct.read_data("a.b")->uint32_t_value, 0xdeadbeef);
+    ASSERT_EQ(std::get<uint32_t>(any_struct.read_data("a.b")->data), 0xdeadbeef);
 
     ASSERT_EQ(any_struct.read_data("b"), nullptr);
 
     ASSERT_NE(any_struct.read_data("c"), nullptr);
     ASSERT_EQ(std::strcmp(any_struct.read_data("c")->get_datatype().c_str(), "std::shared_ptr<yli::common::AnyStruct>"), 0);
-    ASSERT_NE(any_struct.read_data("c")->any_struct_shared_ptr, nullptr);
+    ASSERT_NE(std::get<std::shared_ptr<yli::common::AnyStruct>>(any_struct.read_data("c")->data), nullptr);
 
     ASSERT_EQ(any_struct.read_data("d"), nullptr);
 
     ASSERT_NE(any_struct.read_data("a.b"), nullptr);
     ASSERT_EQ(std::strcmp(any_struct.read_data("a.b")->get_datatype().c_str(), "uint32_t"), 0);
-    ASSERT_EQ(any_struct.read_data("a.b")->any_struct_shared_ptr, nullptr);
-    ASSERT_EQ(any_struct.read_data("a.b")->uint32_t_value, 0xdeadbeef);
+    ASSERT_EQ(std::get<uint32_t>(any_struct.read_data("a.b")->data), 0xdeadbeef);
 
     ASSERT_NE(any_struct.read_data("c.d"), nullptr);
     ASSERT_EQ(std::strcmp(any_struct.read_data("a.b")->get_datatype().c_str(), "uint32_t"), 0);
-    ASSERT_EQ(any_struct.read_data("c.d")->any_struct_shared_ptr, nullptr);
-    ASSERT_EQ(any_struct.read_data("c.d")->uint32_t_value, 0xca7f00d);
+    ASSERT_EQ(std::get<uint32_t>(any_struct.read_data("c.d")->data), 0xca7f00d);
 
     ASSERT_TRUE(any_struct.erase_data("a.b"));
 
     ASSERT_NE(any_struct.read_data("a"), nullptr);
     ASSERT_EQ(std::strcmp(any_struct.read_data("a")->get_datatype().c_str(), "std::shared_ptr<yli::common::AnyStruct>"), 0);
-    ASSERT_NE(any_struct.read_data("a")->any_struct_shared_ptr, nullptr);
+    ASSERT_NE(std::get<std::shared_ptr<yli::common::AnyStruct>>(any_struct.read_data("a")->data), nullptr);
 
     ASSERT_EQ(any_struct.read_data("b"), nullptr);
     ASSERT_EQ(any_struct.read_data("a.b"), nullptr);
 
     ASSERT_NE(any_struct.read_data("c"), nullptr);
     ASSERT_EQ(std::strcmp(any_struct.read_data("c")->get_datatype().c_str(), "std::shared_ptr<yli::common::AnyStruct>"), 0);
-    ASSERT_NE(any_struct.read_data("c")->any_struct_shared_ptr, nullptr);
+    ASSERT_NE(std::get<std::shared_ptr<yli::common::AnyStruct>>(any_struct.read_data("c")->data), nullptr);
 
     ASSERT_EQ(any_struct.read_data("d"), nullptr);
 
     ASSERT_NE(any_struct.read_data("c.d"), nullptr);
     ASSERT_EQ(std::strcmp(any_struct.read_data("c.d")->get_datatype().c_str(), "uint32_t"), 0);
-    ASSERT_EQ(any_struct.read_data("c.d")->any_struct_shared_ptr, nullptr);
-    ASSERT_EQ(any_struct.read_data("c.d")->uint32_t_value, 0xca7f00d);
+    ASSERT_EQ(std::get<uint32_t>(any_struct.read_data("c.d")->data), 0xca7f00d);
 
     ASSERT_TRUE(any_struct.erase_data("c"));
 
     ASSERT_NE(any_struct.read_data("a"), nullptr);
     ASSERT_EQ(std::strcmp(any_struct.read_data("a")->get_datatype().c_str(), "std::shared_ptr<yli::common::AnyStruct>"), 0);
-    ASSERT_NE(any_struct.read_data("a")->any_struct_shared_ptr, nullptr);
+    ASSERT_NE(std::get<std::shared_ptr<yli::common::AnyStruct>>(any_struct.read_data("a")->data), nullptr);
 
     ASSERT_EQ(any_struct.read_data("b"), nullptr);
     ASSERT_EQ(any_struct.read_data("a.b"), nullptr);

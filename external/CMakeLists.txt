@@ -341,6 +341,7 @@ if (CMAKE_COMPILER_IS_GNUCXX)
     # http://www.angelcode.com/angelscript/sdk/docs/manual/doc_compile_lib.html
     set_property(TARGET angelscript PROPERTY COMPILE_FLAGS "-fno-strict-aliasing")
 endif()
+set_property(TARGET angelscript PROPERTY CXX_STANDARD 11)
 
 add_library(stb STATIC
     stb/stb_image.h

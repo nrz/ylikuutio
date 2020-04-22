@@ -31,6 +31,7 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
+#include <variant>  // std::variant
 #include <vector>   // std::vector
 
 namespace yli
@@ -179,58 +180,57 @@ namespace yli
                 AnyValue(const std::string& type, std::shared_ptr<glm::vec4> const glm_vec3_shared_ptr);
 
                 yli::common::Datatype type;
-                std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr;
-                std::shared_ptr<yli::common::AnyStruct> any_struct_shared_ptr;
-                std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr;
-                std::shared_ptr<std::vector<uint8_t>> std_vector_uint8_t_shared_ptr;
-                std::shared_ptr<std::vector<int16_t>> std_vector_int16_t_shared_ptr;
-                std::shared_ptr<std::vector<uint16_t>> std_vector_uint16_t_shared_ptr;
-                std::shared_ptr<std::vector<int32_t>> std_vector_int32_t_shared_ptr;
-                std::shared_ptr<std::vector<uint32_t>> std_vector_uint32_t_shared_ptr;
-                std::shared_ptr<std::vector<float>> std_vector_float_shared_ptr;
-                std::shared_ptr<glm::vec3> glm_vec3_shared_ptr;
-                std::shared_ptr<glm::vec4> glm_vec4_shared_ptr;
 
-                union
-                {
-                    bool bool_value;
-                    char char_value;
-                    float float_value;
-                    double double_value;
-                    int32_t int32_t_value;
-                    uint32_t uint32_t_value;
-                    bool* bool_pointer;
-                    char* char_pointer;
-                    float* float_pointer;
-                    double* double_pointer;
-                    int32_t* int32_t_pointer;
-                    uint32_t* uint32_t_pointer;
-                    yli::ontology::Entity* entity_pointer;
-                    yli::ontology::Movable* movable_pointer;
-                    const yli::ontology::Movable* const_movable_pointer;
-                    yli::ontology::Universe* universe_pointer;
-                    yli::ontology::World* world_pointer;
-                    yli::ontology::Scene* scene_pointer;
-                    yli::ontology::Shader* shader_pointer;
-                    yli::ontology::Material* material_pointer;
-                    yli::ontology::Species* species_pointer;
-                    yli::ontology::Object* object_pointer;
-                    yli::ontology::Symbiosis* symbiosis_pointer;
-                    yli::ontology::SymbiontMaterial* symbiont_material_pointer;
-                    yli::ontology::SymbiontSpecies* symbiont_species_pointer;
-                    yli::ontology::Holobiont* holobiont_pointer;
-                    yli::ontology::Biont* biont_pointer;
-                    yli::ontology::Font2D* font2D_pointer;
-                    yli::ontology::Text2D* text2D_pointer;
-                    yli::ontology::VectorFont* vector_font_pointer;
-                    yli::ontology::Glyph* glyph_pointer;
-                    yli::ontology::Text3D* text3D_pointer;
-                    yli::ontology::Console* console_pointer;
-                    yli::ontology::ComputeTask* compute_task_pointer;
-                    yli::common::SphericalCoordinatesStruct* spherical_coordinates_struct_pointer;
-                    std::string* std_string_pointer;
-                    const std::string* const_std_string_pointer;
-                };
+                std::variant<
+                    bool,
+                    char,
+                    float,
+                    double,
+                    int32_t,
+                    uint32_t,
+                    bool*,
+                    char*,
+                    float*,
+                    double*,
+                    int32_t*,
+                    uint32_t*,
+                    yli::ontology::Entity*,
+                    yli::ontology::Movable*,
+                    const yli::ontology::Movable*,
+                    yli::ontology::Universe*,
+                    yli::ontology::World*,
+                    yli::ontology::Scene*,
+                    yli::ontology::Shader*,
+                    yli::ontology::Material*,
+                    yli::ontology::Species*,
+                    yli::ontology::Object*,
+                    yli::ontology::Symbiosis*,
+                    yli::ontology::SymbiontMaterial*,
+                    yli::ontology::SymbiontSpecies*,
+                    yli::ontology::Holobiont*,
+                    yli::ontology::Biont*,
+                    yli::ontology::Font2D*,
+                    yli::ontology::Text2D*,
+                    yli::ontology::VectorFont*,
+                    yli::ontology::Glyph*,
+                    yli::ontology::Text3D*,
+                    yli::ontology::Console*,
+                    yli::ontology::ComputeTask*,
+                    std::shared_ptr<yli::common::AnyValue>,
+                    std::shared_ptr<yli::common::AnyStruct>,
+                    std::shared_ptr<std::vector<int8_t>>,
+                    std::shared_ptr<std::vector<uint8_t>>,
+                    std::shared_ptr<std::vector<int16_t>>,
+                    std::shared_ptr<std::vector<uint16_t>>,
+                    std::shared_ptr<std::vector<int32_t>>,
+                    std::shared_ptr<std::vector<uint32_t>>,
+                    std::shared_ptr<std::vector<float>>,
+                    std::shared_ptr<glm::vec3>,
+                    std::shared_ptr<glm::vec4>,
+                    yli::common::SphericalCoordinatesStruct*,
+                    std::string*,
+                    const std::string*
+                    > data;
 
             private:
                 void set_default_values();

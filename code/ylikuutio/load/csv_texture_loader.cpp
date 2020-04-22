@@ -31,6 +31,7 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
+#include <variant>  // std::variant
 #include <vector>   // std::vector
 
 namespace yli
@@ -73,13 +74,13 @@ namespace yli
                         right_filler_vector_any_value != nullptr &&
                         left_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_INT8_T_SHARED_PTR &&
                         right_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_INT8_T_SHARED_PTR &&
-                        left_filler_vector_any_value->std_vector_int8_t_shared_ptr != nullptr &&
-                        right_filler_vector_any_value->std_vector_int8_t_shared_ptr != nullptr)
+                        std::get<std::shared_ptr<std::vector<int8_t>>>(left_filler_vector_any_value->data) != nullptr &&
+                        std::get<std::shared_ptr<std::vector<int8_t>>>(right_filler_vector_any_value->data) != nullptr)
                 {
                     image_data_int8_t = yli::linear_algebra::insert_elements(
                             *image_data_int8_t,
-                            *left_filler_vector_any_value->std_vector_int8_t_shared_ptr,
-                            *right_filler_vector_any_value->std_vector_int8_t_shared_ptr);
+                            *(std::get<std::shared_ptr<std::vector<int8_t>>>(left_filler_vector_any_value->data)),
+                            *(std::get<std::shared_ptr<std::vector<int8_t>>>(right_filler_vector_any_value->data)));
                     image_data = image_data_int8_t != nullptr ? &(*image_data_int8_t)[0] : nullptr;
                 }
                 else
@@ -99,13 +100,13 @@ namespace yli
                         right_filler_vector_any_value != nullptr &&
                         left_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_UINT8_T_SHARED_PTR &&
                         right_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_UINT8_T_SHARED_PTR &&
-                        left_filler_vector_any_value->std_vector_uint8_t_shared_ptr != nullptr &&
-                        right_filler_vector_any_value->std_vector_uint8_t_shared_ptr != nullptr)
+                        std::get<std::shared_ptr<std::vector<uint8_t>>>(left_filler_vector_any_value->data) != nullptr &&
+                        std::get<std::shared_ptr<std::vector<uint8_t>>>(right_filler_vector_any_value->data) != nullptr)
                 {
                     image_data_uint8_t = yli::linear_algebra::insert_elements(
                             *image_data_uint8_t,
-                            *left_filler_vector_any_value->std_vector_uint8_t_shared_ptr,
-                            *right_filler_vector_any_value->std_vector_uint8_t_shared_ptr);
+                            *(std::get<std::shared_ptr<std::vector<uint8_t>>>(left_filler_vector_any_value->data)),
+                            *(std::get<std::shared_ptr<std::vector<uint8_t>>>(right_filler_vector_any_value->data)));
                     image_data = image_data_uint8_t != nullptr ? &(*image_data_uint8_t)[0] : nullptr;
                 }
                 else
@@ -125,13 +126,13 @@ namespace yli
                         right_filler_vector_any_value != nullptr &&
                         left_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_INT16_T_SHARED_PTR &&
                         right_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_INT16_T_SHARED_PTR &&
-                        left_filler_vector_any_value->std_vector_int16_t_shared_ptr != nullptr &&
-                        right_filler_vector_any_value->std_vector_int16_t_shared_ptr != nullptr)
+                        std::get<std::shared_ptr<std::vector<int16_t>>>(left_filler_vector_any_value->data) != nullptr &&
+                        std::get<std::shared_ptr<std::vector<int16_t>>>(right_filler_vector_any_value->data) != nullptr)
                 {
                     image_data_int16_t = yli::linear_algebra::insert_elements(
                             *image_data_int16_t,
-                            *left_filler_vector_any_value->std_vector_int16_t_shared_ptr,
-                            *right_filler_vector_any_value->std_vector_int16_t_shared_ptr);
+                            *(std::get<std::shared_ptr<std::vector<int16_t>>>(left_filler_vector_any_value->data)),
+                            *(std::get<std::shared_ptr<std::vector<int16_t>>>(right_filler_vector_any_value->data)));
                     image_data = image_data_int16_t != nullptr ? &(*image_data_int16_t)[0] : nullptr;
                 }
                 else
@@ -151,13 +152,13 @@ namespace yli
                         right_filler_vector_any_value != nullptr &&
                         left_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_UINT16_T_SHARED_PTR &&
                         right_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_UINT16_T_SHARED_PTR &&
-                        left_filler_vector_any_value->std_vector_uint16_t_shared_ptr != nullptr &&
-                        right_filler_vector_any_value->std_vector_uint16_t_shared_ptr != nullptr)
+                        std::get<std::shared_ptr<std::vector<uint16_t>>>(left_filler_vector_any_value->data) != nullptr &&
+                        std::get<std::shared_ptr<std::vector<uint16_t>>>(right_filler_vector_any_value->data) != nullptr)
                 {
                     image_data_uint16_t = yli::linear_algebra::insert_elements(
                             *image_data_uint16_t,
-                            *left_filler_vector_any_value->std_vector_uint16_t_shared_ptr,
-                            *right_filler_vector_any_value->std_vector_uint16_t_shared_ptr);
+                            *(std::get<std::shared_ptr<std::vector<uint16_t>>>(left_filler_vector_any_value->data)),
+                            *(std::get<std::shared_ptr<std::vector<uint16_t>>>(right_filler_vector_any_value->data)));
                     image_data = image_data_uint16_t != nullptr ? &(*image_data_uint16_t)[0] : nullptr;
                 }
                 else
@@ -177,13 +178,13 @@ namespace yli
                         right_filler_vector_any_value != nullptr &&
                         left_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_INT32_T_SHARED_PTR &&
                         right_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_INT32_T_SHARED_PTR &&
-                        left_filler_vector_any_value->std_vector_int32_t_shared_ptr != nullptr &&
-                        right_filler_vector_any_value->std_vector_int32_t_shared_ptr != nullptr)
+                        std::get<std::shared_ptr<std::vector<int32_t>>>(left_filler_vector_any_value->data) != nullptr &&
+                        std::get<std::shared_ptr<std::vector<int32_t>>>(right_filler_vector_any_value->data) != nullptr)
                 {
                     image_data_int32_t = yli::linear_algebra::insert_elements(
                             *image_data_int32_t,
-                            *left_filler_vector_any_value->std_vector_int32_t_shared_ptr,
-                            *right_filler_vector_any_value->std_vector_int32_t_shared_ptr);
+                            *(std::get<std::shared_ptr<std::vector<int32_t>>>(left_filler_vector_any_value->data)),
+                            *(std::get<std::shared_ptr<std::vector<int32_t>>>(right_filler_vector_any_value->data)));
                     image_data = image_data_int32_t != nullptr ? &(*image_data_int32_t)[0] : nullptr;
                 }
                 else
@@ -203,13 +204,13 @@ namespace yli
                         right_filler_vector_any_value != nullptr &&
                         left_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_UINT32_T_SHARED_PTR &&
                         right_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_UINT32_T_SHARED_PTR &&
-                        left_filler_vector_any_value->std_vector_uint32_t_shared_ptr != nullptr &&
-                        right_filler_vector_any_value->std_vector_uint32_t_shared_ptr != nullptr)
+                        std::get<std::shared_ptr<std::vector<uint32_t>>>(left_filler_vector_any_value->data) != nullptr &&
+                        std::get<std::shared_ptr<std::vector<uint32_t>>>(right_filler_vector_any_value->data) != nullptr)
                 {
                     image_data_uint32_t = yli::linear_algebra::insert_elements(
                             *image_data_uint32_t,
-                            *left_filler_vector_any_value->std_vector_uint32_t_shared_ptr,
-                            *right_filler_vector_any_value->std_vector_uint32_t_shared_ptr);
+                            *(std::get<std::shared_ptr<std::vector<uint32_t>>>(left_filler_vector_any_value->data)),
+                            *(std::get<std::shared_ptr<std::vector<uint32_t>>>(right_filler_vector_any_value->data)));
                     image_data = image_data_uint32_t != nullptr ? &(*image_data_uint32_t)[0] : nullptr;
                 }
                 else
@@ -237,13 +238,13 @@ namespace yli
                         right_filler_vector_any_value != nullptr &&
                         left_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_FLOAT_SHARED_PTR &&
                         right_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_FLOAT_SHARED_PTR &&
-                        left_filler_vector_any_value->std_vector_float_shared_ptr != nullptr &&
-                        right_filler_vector_any_value->std_vector_float_shared_ptr != nullptr)
+                        std::get<std::shared_ptr<std::vector<float>>>(left_filler_vector_any_value->data) != nullptr &&
+                        std::get<std::shared_ptr<std::vector<float>>>(right_filler_vector_any_value->data) != nullptr)
                 {
                     image_data_float = yli::linear_algebra::insert_elements(
                             *image_data_float,
-                            *left_filler_vector_any_value->std_vector_float_shared_ptr,
-                            *right_filler_vector_any_value->std_vector_float_shared_ptr);
+                            *(std::get<std::shared_ptr<std::vector<float>>>(left_filler_vector_any_value->data)),
+                            *(std::get<std::shared_ptr<std::vector<float>>>(right_filler_vector_any_value->data)));
                     image_data = image_data_float != nullptr ? &(*image_data_float)[0] : nullptr;
                 }
                 else

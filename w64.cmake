@@ -22,6 +22,6 @@ set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 
 set(CMAKE_C_FLAGS "-Wl,-Bstatic -DSDL_STATIC -static -static-libgcc -lpthread -O3 -s")
-set(CMAKE_CXX_FLAGS "-Wl,-Bstatic -std=c++14 -static -static-libgcc -static-libstdc++ -lpthread -O3 -s")
+set(CMAKE_CXX_FLAGS "-Wl,-Bstatic -static -static-libgcc -static-libstdc++ -lpthread -O3 -s")
 set(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "-Wl,-Bstatic -static -static-libgcc -O3 -s")
-set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "-Wl,-Bstatic -std=c++14 -static -static-libgcc -static-libstdc++ -O3 -s")
+set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "-Wl,-Bstatic -static -static-libgcc -static-libstdc++ -O3 -s")

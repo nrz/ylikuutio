@@ -28,6 +28,7 @@
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <variant>  // std::variant
 #include <vector>   // std::vector
 
 namespace yli
@@ -76,7 +77,7 @@ namespace app
             return nullptr;
         }
 
-        yli::ontology::Movable* const movable = any_value->movable_pointer;
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
 
         if (movable == nullptr)
         {
@@ -100,7 +101,7 @@ namespace app
             return nullptr;
         }
 
-        yli::ontology::Movable* const movable = any_value->movable_pointer;
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
 
         if (movable == nullptr)
         {
@@ -124,7 +125,7 @@ namespace app
             return nullptr;
         }
 
-        yli::ontology::Movable* const movable = any_value->movable_pointer;
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
 
         if (movable == nullptr)
         {
@@ -148,7 +149,7 @@ namespace app
             return nullptr;
         }
 
-        yli::ontology::Movable* const movable = any_value->movable_pointer;
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
 
         if (movable == nullptr)
         {
@@ -172,7 +173,7 @@ namespace app
             return nullptr;
         }
 
-        yli::ontology::Movable* const movable = any_value->movable_pointer;
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
 
         if (movable == nullptr)
         {
@@ -196,7 +197,7 @@ namespace app
             return nullptr;
         }
 
-        yli::ontology::Movable* const movable = any_value->movable_pointer;
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
 
         if (movable == nullptr)
         {
@@ -220,7 +221,7 @@ namespace app
             return nullptr;
         }
 
-        yli::ontology::Movable* const movable = any_value->movable_pointer;
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
 
         if (movable == nullptr)
         {
@@ -244,7 +245,7 @@ namespace app
             return nullptr;
         }
 
-        yli::ontology::Movable* const movable = any_value->movable_pointer;
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
 
         if (movable == nullptr)
         {
@@ -268,7 +269,7 @@ namespace app
             return nullptr;
         }
 
-        yli::ontology::Movable* const movable = any_value->movable_pointer;
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
 
         if (movable == nullptr)
         {
@@ -293,7 +294,7 @@ namespace app
             return nullptr;
         }
 
-        yli::ontology::Movable* const movable = any_value->movable_pointer;
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
 
         if (movable == nullptr)
         {
@@ -318,7 +319,7 @@ namespace app
             return nullptr;
         }
 
-        yli::ontology::Movable* const movable = any_value->movable_pointer;
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
 
         if (movable == nullptr)
         {
@@ -343,7 +344,7 @@ namespace app
             return nullptr;
         }
 
-        yli::ontology::Movable* const movable = any_value->movable_pointer;
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
 
         if (movable == nullptr)
         {
@@ -368,7 +369,7 @@ namespace app
             return nullptr;
         }
 
-        yli::ontology::Movable* const movable = any_value->movable_pointer;
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
 
         if (movable == nullptr)
         {
@@ -392,7 +393,7 @@ namespace app
             return nullptr;
         }
 
-        yli::ontology::Movable* const movable = any_value->movable_pointer;
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
 
         if (movable == nullptr)
         {
