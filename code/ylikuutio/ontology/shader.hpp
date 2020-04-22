@@ -142,7 +142,7 @@ namespace yli
                 void bind_to_parent();
 
                 // This method renders all materials using this `Shader`.
-                void render();
+                void render() override;
 
                 yli::ontology::Scene* parent;         // Pointer to the `Scene`.
 

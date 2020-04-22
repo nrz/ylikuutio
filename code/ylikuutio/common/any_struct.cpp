@@ -25,6 +25,7 @@
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
+#include <variant>       // std::variant
 #include <vector>        // std::vector
 
 namespace yli
@@ -178,7 +179,7 @@ namespace yli
             //    -> insert into existing `first_part` child.
             //    -> call `enter_data` recursively.
             std::shared_ptr<yli::common::AnyStruct> child_any_struct_shared_ptr =
-                any_value_shared_ptr->any_struct_shared_ptr;
+                std::get<std::shared_ptr<yli::common::AnyStruct>>(any_value_shared_ptr->data);
             return child_any_struct_shared_ptr->enter_data(target, data_index, any_value, last_part);
         }
 
@@ -253,7 +254,7 @@ namespace yli
             //    child with the name of `first_part` exists, and
             //    and it is `ANY_STRUCT_SHARED_PTR`.
             //    -> call `erase_data` recursively.
-            std::shared_ptr<yli::common::AnyStruct> child_any_struct = any_value->any_struct_shared_ptr;
+            std::shared_ptr<yli::common::AnyStruct> child_any_struct = std::get<std::shared_ptr<yli::common::AnyStruct>>(any_value->data);
             return child_any_struct->erase_data(target, data_index, first_part); // tail recursion.
         }
 
@@ -324,7 +325,7 @@ namespace yli
             //    child with the name of `first_part` exists, and
             //    and it is `ANY_STRUCT_SHARED_PTR`.
             //    -> call `check_if_exist` recursively.
-            std::shared_ptr<yli::common::AnyStruct> child_any_struct = any_value->any_struct_shared_ptr;
+            std::shared_ptr<yli::common::AnyStruct> child_any_struct = std::get<std::shared_ptr<yli::common::AnyStruct>>(any_value->data);
             return child_any_struct->check_if_exist(target, data_index, first_part); // tail recursion.
         }
 
@@ -395,7 +396,7 @@ namespace yli
             //    child with the name of `first_part` exists, and
             //    and it is `ANY_STRUCT_SHARED_PTR`.
             //    -> call `read_data` recursively.
-            std::shared_ptr<yli::common::AnyStruct> child_any_struct = any_value->any_struct_shared_ptr;
+            std::shared_ptr<yli::common::AnyStruct> child_any_struct = std::get<std::shared_ptr<yli::common::AnyStruct>>(any_value->data);
             return child_any_struct->read_data(target, data_index, first_part); // tail recursion.
         }
     }

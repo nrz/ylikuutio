@@ -44,6 +44,7 @@
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
+#include <variant>       // std::variant
 #include <vector>        // std::vector
 
 namespace yli
@@ -543,7 +544,7 @@ namespace yli
                 return nullptr;
             }
 
-            species->planet_radius = planet_radius_any_value->float_value;
+            species->planet_radius = std::get<float>(planet_radius_any_value->data);
 
             return nullptr;
         }
@@ -569,7 +570,7 @@ namespace yli
                 return nullptr;
             }
 
-            uint32_t window_width = window_width_any_value->uint32_t_value;
+            uint32_t window_width = std::get<uint32_t>(window_width_any_value->data);
 
             // window height.
             std::shared_ptr<yli::common::AnyValue> window_height_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["window_height"]->setting_value);
@@ -579,7 +580,7 @@ namespace yli
                 return nullptr;
             }
 
-            uint32_t window_height = window_height_any_value->uint32_t_value;
+            uint32_t window_height = std::get<uint32_t>(window_height_any_value->data);
 
             yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
@@ -621,7 +622,7 @@ namespace yli
                 return nullptr;
             }
 
-            uint32_t framebuffer_width = framebuffer_width_any_value->uint32_t_value;
+            uint32_t framebuffer_width = std::get<uint32_t>(framebuffer_width_any_value->data);
 
             // framebuffer height.
             std::shared_ptr<yli::common::AnyValue> framebuffer_height_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["framebuffer_height"]->setting_value);
@@ -631,7 +632,7 @@ namespace yli
                 return nullptr;
             }
 
-            uint32_t framebuffer_height = framebuffer_height_any_value->uint32_t_value;
+            uint32_t framebuffer_height = std::get<uint32_t>(framebuffer_height_any_value->data);
 
             yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
@@ -669,7 +670,7 @@ namespace yli
                 return nullptr;
             }
 
-            float red = red_any_value->float_value;
+            float red = std::get<float>(red_any_value->data);
 
             // green.
             std::shared_ptr<yli::common::AnyValue> green_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["green"]->setting_value);
@@ -679,7 +680,7 @@ namespace yli
                 return nullptr;
             }
 
-            float green = green_any_value->float_value;
+            float green = std::get<float>(green_any_value->data);
 
             // blue.
             std::shared_ptr<yli::common::AnyValue> blue_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["blue"]->setting_value);
@@ -689,7 +690,7 @@ namespace yli
                 return nullptr;
             }
 
-            float blue = blue_any_value->float_value;
+            float blue = std::get<float>(blue_any_value->data);
 
             // alpha.
             std::shared_ptr<yli::common::AnyValue> alpha_any_value = std::make_shared<yli::common::AnyValue>(*setting_master->setting_pointer_map["alpha"]->setting_value);
@@ -699,7 +700,7 @@ namespace yli
                 return nullptr;
             }
 
-            float alpha = alpha_any_value->float_value;
+            float alpha = std::get<float>(alpha_any_value->data);
 
             yli::opengl::set_background_color(red, green, blue, alpha);
 
@@ -737,7 +738,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::opengl::set_wireframe(wireframe_any_value->bool_value);
+            yli::opengl::set_wireframe(std::get<bool>(wireframe_any_value->data));
             return nullptr;
         }
 
@@ -760,7 +761,7 @@ namespace yli
                 return nullptr;
             }
 
-            entity->should_be_rendered = should_be_rendered_any_value->bool_value;
+            entity->should_be_rendered = std::get<bool>(should_be_rendered_any_value->data);
             return nullptr;
         }
 
@@ -787,7 +788,7 @@ namespace yli
                     return nullptr;
                 }
 
-                movable->spherical_coordinates = *spherical_coordinates_any_value->spherical_coordinates_struct_pointer;
+                movable->spherical_coordinates = *(std::get<yli::common::SphericalCoordinatesStruct*>(spherical_coordinates_any_value->data));
                 return nullptr;
             }
 
@@ -805,7 +806,7 @@ namespace yli
                 return nullptr;
             }
 
-            universe->current_camera_spherical_coordinates = *spherical_coordinates_any_value->spherical_coordinates_struct_pointer;
+            universe->current_camera_spherical_coordinates = *(std::get<yli::common::SphericalCoordinatesStruct*>(spherical_coordinates_any_value->data));
             return nullptr;
         }
 
@@ -832,7 +833,7 @@ namespace yli
                     return nullptr;
                 }
 
-                movable->spherical_coordinates.rho = rho_any_value->float_value;
+                movable->spherical_coordinates.rho = std::get<float>(rho_any_value->data);
                 return nullptr;
             }
 
@@ -855,7 +856,7 @@ namespace yli
                 return nullptr;
             }
 
-            universe->current_camera_spherical_coordinates.rho = rho_any_value->float_value;
+            universe->current_camera_spherical_coordinates.rho = std::get<float>(rho_any_value->data);
             return nullptr;
         }
 
@@ -882,7 +883,7 @@ namespace yli
                     return nullptr;
                 }
 
-                movable->spherical_coordinates.theta = theta_any_value->float_value;
+                movable->spherical_coordinates.theta = std::get<float>(theta_any_value->data);
                 return nullptr;
             }
 
@@ -905,7 +906,7 @@ namespace yli
                 return nullptr;
             }
 
-            universe->current_camera_spherical_coordinates.theta = theta_any_value->float_value;
+            universe->current_camera_spherical_coordinates.theta = std::get<float>(theta_any_value->data);
             return nullptr;
         }
 
@@ -932,7 +933,7 @@ namespace yli
                     return nullptr;
                 }
 
-                movable->spherical_coordinates.phi = phi_any_value->float_value;
+                movable->spherical_coordinates.phi = std::get<float>(phi_any_value->data);
                 return nullptr;
             }
 
@@ -955,7 +956,7 @@ namespace yli
                 return nullptr;
             }
 
-            universe->current_camera_spherical_coordinates.phi = phi_any_value->float_value;
+            universe->current_camera_spherical_coordinates.phi = std::get<float>(phi_any_value->data);
             return nullptr;
         }
 
@@ -982,7 +983,7 @@ namespace yli
                     return nullptr;
                 }
 
-                movable->cartesian_coordinates = *cartesian_coordinates_any_value->glm_vec3_shared_ptr;
+                movable->cartesian_coordinates = *(std::get<std::shared_ptr<glm::vec3>>(cartesian_coordinates_any_value->data));
                 return nullptr;
             }
 
@@ -1000,7 +1001,7 @@ namespace yli
                 return nullptr;
             }
 
-            universe->current_camera_cartesian_coordinates = glm::vec3(*cartesian_coordinates_any_value->glm_vec3_shared_ptr);
+            universe->current_camera_cartesian_coordinates = *(std::get<std::shared_ptr<glm::vec3>>(cartesian_coordinates_any_value->data));
             return nullptr;
         }
 
@@ -1027,14 +1028,14 @@ namespace yli
                     return nullptr;
                 }
 
-                movable->cartesian_coordinates.x = x_any_value->float_value;
-                movable->model_matrix[3][0] = x_any_value->float_value;
+                movable->cartesian_coordinates.x = std::get<float>(x_any_value->data);
+                movable->model_matrix[3][0] = std::get<float>(x_any_value->data);
 
                 yli::ontology::Holobiont* const holobiont = dynamic_cast<yli::ontology::Holobiont*>(movable);
 
                 if (holobiont != nullptr)
                 {
-                    holobiont->update_x(x_any_value->float_value);
+                    holobiont->update_x(std::get<float>(x_any_value->data));
                 }
 
                 return nullptr;
@@ -1059,7 +1060,7 @@ namespace yli
                 return nullptr;
             }
 
-            universe->current_camera_cartesian_coordinates.x = x_any_value->float_value;
+            universe->current_camera_cartesian_coordinates.x = std::get<float>(x_any_value->data);
             return nullptr;
         }
 
@@ -1086,14 +1087,14 @@ namespace yli
                     return nullptr;
                 }
 
-                movable->cartesian_coordinates.y = y_any_value->float_value;
-                movable->model_matrix[3][1] = y_any_value->float_value;
+                movable->cartesian_coordinates.y = std::get<float>(y_any_value->data);
+                movable->model_matrix[3][1] = std::get<float>(y_any_value->data);
 
                 yli::ontology::Holobiont* const holobiont = dynamic_cast<yli::ontology::Holobiont*>(movable);
 
                 if (holobiont != nullptr)
                 {
-                    holobiont->update_y(y_any_value->float_value);
+                    holobiont->update_y(std::get<float>(y_any_value->data));
                 }
 
                 return nullptr;
@@ -1118,7 +1119,7 @@ namespace yli
                 return nullptr;
             }
 
-            universe->current_camera_cartesian_coordinates.y = y_any_value->float_value;
+            universe->current_camera_cartesian_coordinates.y = std::get<float>(y_any_value->data);
             return nullptr;
         }
 
@@ -1145,14 +1146,14 @@ namespace yli
                     return nullptr;
                 }
 
-                movable->cartesian_coordinates.z = z_any_value->float_value;
-                movable->model_matrix[3][2] = z_any_value->float_value;
+                movable->cartesian_coordinates.z = std::get<float>(z_any_value->data);
+                movable->model_matrix[3][2] = std::get<float>(z_any_value->data);
 
                 yli::ontology::Holobiont* const holobiont = dynamic_cast<yli::ontology::Holobiont*>(movable);
 
                 if (holobiont != nullptr)
                 {
-                    holobiont->update_z(z_any_value->float_value);
+                    holobiont->update_z(std::get<float>(z_any_value->data));
                 }
 
                 return nullptr;
@@ -1177,7 +1178,7 @@ namespace yli
                 return nullptr;
             }
 
-            universe->current_camera_cartesian_coordinates.z = z_any_value->float_value;
+            universe->current_camera_cartesian_coordinates.z = std::get<float>(z_any_value->data);
             return nullptr;
         }
 
@@ -1204,7 +1205,7 @@ namespace yli
                     return nullptr;
                 }
 
-                movable->horizontal_angle = horizontal_angle_any_value->double_value;
+                movable->horizontal_angle = std::get<double>(horizontal_angle_any_value->data);
                 return nullptr;
             }
 
@@ -1227,7 +1228,7 @@ namespace yli
                 return nullptr;
             }
 
-            universe->current_camera_horizontal_angle = horizontal_angle_any_value->double_value;
+            universe->current_camera_horizontal_angle = std::get<double>(horizontal_angle_any_value->data);
             return nullptr;
         }
 
@@ -1254,7 +1255,7 @@ namespace yli
                     return nullptr;
                 }
 
-                movable->vertical_angle = vertical_angle_any_value->double_value;
+                movable->vertical_angle = std::get<double>(vertical_angle_any_value->data);
                 return nullptr;
             }
 
@@ -1277,7 +1278,7 @@ namespace yli
                 return nullptr;
             }
 
-            universe->current_camera_vertical_angle = vertical_angle_any_value->double_value;
+            universe->current_camera_vertical_angle = std::get<double>(vertical_angle_any_value->data);
             return nullptr;
         }
 
@@ -1307,7 +1308,7 @@ namespace yli
                 return nullptr;
             }
 
-            universe->speed = speed_any_value->float_value;
+            universe->speed = std::get<float>(speed_any_value->data);
             return nullptr;
         }
 
@@ -1337,7 +1338,7 @@ namespace yli
                 return nullptr;
             }
 
-            universe->turbo_factor = turbo_factor_any_value->float_value;
+            universe->turbo_factor = std::get<float>(turbo_factor_any_value->data);
             return nullptr;
         }
 
@@ -1367,7 +1368,7 @@ namespace yli
                 return nullptr;
             }
 
-            universe->twin_turbo_factor = twin_turbo_factor_any_value->float_value;
+            universe->twin_turbo_factor = std::get<float>(twin_turbo_factor_any_value->data);
             return nullptr;
         }
 
@@ -1397,7 +1398,7 @@ namespace yli
                 return nullptr;
             }
 
-            universe->mouse_speed = mouse_speed_any_value->float_value;
+            universe->mouse_speed = std::get<float>(mouse_speed_any_value->data);
             return nullptr;
         }
 
@@ -1427,7 +1428,7 @@ namespace yli
                 return nullptr;
             }
 
-            scene->set_is_flight_mode_in_use(is_flight_mode_in_use_any_value->bool_value);
+            scene->set_is_flight_mode_in_use(std::get<bool>(is_flight_mode_in_use_any_value->data));
             return nullptr;
         }
 
@@ -1464,7 +1465,7 @@ namespace yli
                 return nullptr;
             }
 
-            console->set_console_top_y(console_top_y_any_value->uint32_t_value);
+            console->set_console_top_y(std::get<uint32_t>(console_top_y_any_value->data));
             return nullptr;
         }
 
@@ -1501,7 +1502,7 @@ namespace yli
                 return nullptr;
             }
 
-            console->set_console_bottom_y(console_bottom_y_any_value->uint32_t_value);
+            console->set_console_bottom_y(std::get<uint32_t>(console_bottom_y_any_value->data));
             return nullptr;
         }
 
@@ -1538,7 +1539,7 @@ namespace yli
                 return nullptr;
             }
 
-            console->set_console_left_x(console_left_x_any_value->uint32_t_value);
+            console->set_console_left_x(std::get<uint32_t>(console_left_x_any_value->data));
             return nullptr;
         }
 
@@ -1575,7 +1576,7 @@ namespace yli
                 return nullptr;
             }
 
-            console->set_console_right_x(console_right_x_any_value->uint32_t_value);
+            console->set_console_right_x(std::get<uint32_t>(console_right_x_any_value->data));
             return nullptr;
         }
 

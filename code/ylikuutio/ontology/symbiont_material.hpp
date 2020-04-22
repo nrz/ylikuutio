@@ -79,7 +79,7 @@ namespace yli
                 void load_texture();
 
                 // this method renders all `SymbiontSpecies` using this `SymbiontMaterial`.
-                void render();
+                void render() override;
 
                 const ofbx::Texture* ofbx_texture;
         };

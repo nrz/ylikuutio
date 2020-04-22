@@ -40,6 +40,7 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
+#include <variant>  // std::variant
 #include <vector>   // std::vector
 
 // Callbacks' input parameters can be accessed either through
@@ -454,8 +455,8 @@ namespace app
 
         const std::string* const entity_string_pointer =
             (any_value_entity_string->type == yli::common::Datatype::STD_STRING_POINTER ?
-             any_value_entity_string->std_string_pointer :
-             any_value_entity_string->const_std_string_pointer);
+             std::get<std::string*>(any_value_entity_string->data) :
+             std::get<const std::string*>(any_value_entity_string->data));
 
         if (entity_string_pointer == nullptr)
         {
@@ -507,8 +508,8 @@ namespace app
 
         const std::string* const entity_string_pointer =
             (any_value_entity_string->type == yli::common::Datatype::STD_STRING_POINTER ?
-             any_value_entity_string->std_string_pointer :
-             any_value_entity_string->const_std_string_pointer);
+             std::get<std::string*>(any_value_entity_string->data) :
+             std::get<const std::string*>(any_value_entity_string->data));
 
         if (entity_string_pointer == nullptr)
         {
@@ -558,8 +559,8 @@ namespace app
 
         const std::string* const new_material_string_pointer =
             (any_value_material_string->type != yli::common::Datatype::STD_STRING_POINTER ?
-             any_value_material_string->std_string_pointer :
-             any_value_material_string->const_std_string_pointer);
+             std::get<std::string*>(any_value_material_string->data) :
+             std::get<const std::string*>(any_value_material_string->data));
 
         if (new_material_string_pointer == nullptr)
         {
@@ -623,8 +624,8 @@ namespace app
 
         const std::string* const entity_string_pointer =
             (any_value_entity_string->type == yli::common::Datatype::STD_STRING_POINTER ?
-             any_value_entity_string->std_string_pointer :
-             any_value_entity_string->const_std_string_pointer);
+             std::get<std::string*>(any_value_entity_string->data) :
+             std::get<const std::string*>(any_value_entity_string->data));
 
         if (entity_string_pointer == nullptr)
         {
@@ -674,8 +675,8 @@ namespace app
 
         const std::string* const new_species_string_pointer =
             (any_value_species_string->type == yli::common::Datatype::STD_STRING_POINTER ?
-             any_value_species_string->std_string_pointer :
-             any_value_species_string->const_std_string_pointer);
+             std::get<std::string*>(any_value_species_string->data) :
+             std::get<const std::string*>(any_value_species_string->data));
 
         if (new_species_string_pointer == nullptr)
         {

@@ -58,7 +58,7 @@ namespace yli
                 std::size_t get_number_of_descendants() const override;
 
             private:
-                void render();
+                void render() override;
         };
     }
 }

@@ -95,6 +95,7 @@
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
+#include <variant>       // std::variant
 #include <vector>        // std::vector
 
 int main(const int argc, const char* const argv[])
@@ -880,7 +881,7 @@ int main(const int argc, const char* const argv[])
 
                         if (any_value != nullptr &&
                                 any_value->type == yli::common::Datatype::UINT32_T &&
-                                any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
+                                std::get<uint32_t>(any_value->data) == EXIT_PROGRAM_MAGIC_NUMBER)
                         {
                             my_universe->request_exit();
                         }
@@ -908,7 +909,7 @@ int main(const int argc, const char* const argv[])
 
                     if (any_value != nullptr &&
                             any_value->type == yli::common::Datatype::UINT32_T &&
-                            any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
+                            std::get<uint32_t>(any_value->data) == EXIT_PROGRAM_MAGIC_NUMBER)
                     {
                         my_universe->request_exit();
                     }
@@ -1027,7 +1028,7 @@ int main(const int argc, const char* const argv[])
 
                         if (any_value != nullptr &&
                                 any_value->type == yli::common::Datatype::UINT32_T &&
-                                any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
+                                std::get<uint32_t>(any_value->data) == EXIT_PROGRAM_MAGIC_NUMBER)
                         {
                             my_universe->request_exit();
                         }
