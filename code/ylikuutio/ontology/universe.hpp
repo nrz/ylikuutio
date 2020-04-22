@@ -502,7 +502,7 @@ namespace yli
                 void act();
 
                 // this method renders the active `Scene` of this `Universe`.
-                void render();
+                void render() override;
 
                 // this method renders the active `Scene` of this `Universe`.
                 void render_without_changing_depth_test();

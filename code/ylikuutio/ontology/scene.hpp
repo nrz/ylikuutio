@@ -143,7 +143,7 @@ namespace yli
                 void act();
 
                 // this method renders all `Shader`s of this `Scene`.
-                void render();
+                void render() override;
 
                 yli::ontology::Camera* get_active_camera() const;
                 void set_active_camera(yli::ontology::Camera* camera);
