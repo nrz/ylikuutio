@@ -271,7 +271,7 @@ namespace yli
                     any_value_stringstream << std::hex << (uint64_t) this->font2D_pointer << std::dec;
                     break;
                 case (yli::common::Datatype::TEXT2D_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) this->font2D_pointer << std::dec;
+                    any_value_stringstream << std::hex << (uint64_t) this->text2D_pointer << std::dec;
                     break;
                 case (yli::common::Datatype::VECTORFONT_POINTER):
                     any_value_stringstream << std::hex << (uint64_t) this->vector_font_pointer << std::dec;
@@ -847,7 +847,7 @@ namespace yli
 
                         value_stringstream << value_string;
                         value_stringstream >> void_pointer;
-                        this->font2D_pointer = static_cast<yli::ontology::Font2D*>(void_pointer);
+                        this->text2D_pointer = static_cast<yli::ontology::Text2D*>(void_pointer);
                         return true;
                     }
                 case (yli::common::Datatype::VECTORFONT_POINTER):
