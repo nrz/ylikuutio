@@ -64,7 +64,7 @@ namespace yli
     namespace common
     {
         class AnyStruct;
-        class SphericalCoordinatesStruct;
+        struct SphericalCoordinatesStruct;
 
         class AnyValue
         {
