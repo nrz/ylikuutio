@@ -22,9 +22,23 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
+#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/material.hpp"
+#include "code/ylikuutio/ontology/species.hpp"
+#include "code/ylikuutio/ontology/object.hpp"
+#include "code/ylikuutio/ontology/camera.hpp"
+#include "code/ylikuutio/ontology/font2D.hpp"
+#include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/any_value_entity.hpp"
 #include "code/ylikuutio/ontology/any_struct_entity.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
+#include "code/ylikuutio/ontology/scene_struct.hpp"
+#include "code/ylikuutio/ontology/shader_struct.hpp"
+#include "code/ylikuutio/ontology/material_struct.hpp"
+#include "code/ylikuutio/ontology/species_struct.hpp"
+#include "code/ylikuutio/ontology/object_struct.hpp"
+#include "code/ylikuutio/ontology/camera_struct.hpp"
+#include "code/ylikuutio/ontology/font2D.hpp"
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
@@ -58,7 +72,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_bool_true
     ASSERT_FALSE(universe->is_entity(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
-    std::vector<std::string> command_parameters = { any_value_entity_name, any_value_entity_type, any_value_entity_value };
+    const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
     universe->create_AnyValueEntity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
@@ -90,7 +104,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_bool_fals
     ASSERT_FALSE(universe->is_entity(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
-    std::vector<std::string> command_parameters = { any_value_entity_name, any_value_entity_type, any_value_entity_value };
+    const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
     universe->create_AnyValueEntity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
@@ -122,7 +136,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_float_0)
     ASSERT_FALSE(universe->is_entity(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
-    std::vector<std::string> command_parameters = { any_value_entity_name, any_value_entity_type, any_value_entity_value };
+    const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
     universe->create_AnyValueEntity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
@@ -154,7 +168,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_float_0_0
     ASSERT_FALSE(universe->is_entity(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
-    std::vector<std::string> command_parameters = { any_value_entity_name, any_value_entity_type, any_value_entity_value };
+    const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
     universe->create_AnyValueEntity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
@@ -186,7 +200,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_float_pi)
     ASSERT_FALSE(universe->is_entity(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
-    std::vector<std::string> command_parameters = { any_value_entity_name, any_value_entity_type, any_value_entity_value };
+    const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
     universe->create_AnyValueEntity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
@@ -220,7 +234,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_double_0)
     ASSERT_FALSE(universe->is_entity(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
-    std::vector<std::string> command_parameters = { any_value_entity_name, any_value_entity_type, any_value_entity_value };
+    const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
     universe->create_AnyValueEntity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
@@ -252,7 +266,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_double_0_
     ASSERT_FALSE(universe->is_entity(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
-    std::vector<std::string> command_parameters = { any_value_entity_name, any_value_entity_type, any_value_entity_value };
+    const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
     universe->create_AnyValueEntity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
@@ -284,7 +298,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_double_pi
     ASSERT_FALSE(universe->is_entity(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
-    std::vector<std::string> command_parameters = { any_value_entity_name, any_value_entity_type, any_value_entity_value };
+    const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
     universe->create_AnyValueEntity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
@@ -316,7 +330,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_0
     ASSERT_FALSE(universe->is_entity(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
-    std::vector<std::string> command_parameters = { any_value_entity_name, any_value_entity_type, any_value_entity_value };
+    const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
     universe->create_AnyValueEntity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
@@ -348,7 +362,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_p
     ASSERT_FALSE(universe->is_entity(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
-    std::vector<std::string> command_parameters = { any_value_entity_name, any_value_entity_type, any_value_entity_value };
+    const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
     universe->create_AnyValueEntity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
@@ -380,7 +394,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_m
     ASSERT_FALSE(universe->is_entity(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
-    std::vector<std::string> command_parameters = { any_value_entity_name, any_value_entity_type, any_value_entity_value };
+    const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
     universe->create_AnyValueEntity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
@@ -412,7 +426,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_m
     ASSERT_FALSE(universe->is_entity(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
-    std::vector<std::string> command_parameters = { any_value_entity_name, any_value_entity_type, any_value_entity_value };
+    const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
     universe->create_AnyValueEntity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
@@ -444,7 +458,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_m
     ASSERT_FALSE(universe->is_entity(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
-    std::vector<std::string> command_parameters = { any_value_entity_name, any_value_entity_type, any_value_entity_value };
+    const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
     universe->create_AnyValueEntity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
@@ -476,7 +490,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_uint32_t_
     ASSERT_FALSE(universe->is_entity(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
-    std::vector<std::string> command_parameters = { any_value_entity_name, any_value_entity_type, any_value_entity_value };
+    const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
     universe->create_AnyValueEntity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
@@ -508,7 +522,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_uint32_t_
     ASSERT_FALSE(universe->is_entity(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
-    std::vector<std::string> command_parameters = { any_value_entity_name, any_value_entity_type, any_value_entity_value };
+    const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
     universe->create_AnyValueEntity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
@@ -540,7 +554,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_uint32_t_
     ASSERT_FALSE(universe->is_entity(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
-    std::vector<std::string> command_parameters = { any_value_entity_name, any_value_entity_type, any_value_entity_value };
+    const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
     universe->create_AnyValueEntity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
@@ -570,7 +584,7 @@ TEST(any_struct_entity_must_be_created_appropriately, universe_callback_any_stru
     ASSERT_FALSE(universe->is_entity(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
-    std::vector<std::string> command_parameters = { any_value_entity_name };
+    const std::vector<std::string> command_parameters { any_value_entity_name };
     universe->create_AnyStructEntity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
@@ -600,7 +614,161 @@ TEST(scene_must_be_activated_appropriately, universe_callback)
 
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
-    std::vector<std::string> command_parameters = { scene_name };
+    const std::vector<std::string> command_parameters { scene_name };
     universe->activate(console, universe, command_parameters);
     ASSERT_EQ(universe->get_active_scene(), scene);
+}
+
+TEST(console_must_be_activated_appropriately, universe_callback_without_font2D)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    const std::string console_name = "foo";
+
+    yli::ontology::Console* const console = new yli::ontology::Console(universe, &universe->parent_of_consoles);
+    console->set_name(console_name);
+
+    ASSERT_EQ(universe->get_active_console(), nullptr);
+
+    const std::vector<std::string> command_parameters { console_name };
+    universe->activate(console, universe, command_parameters);
+    ASSERT_EQ(universe->get_active_console(), console);
+}
+
+TEST(console_must_be_activated_appropriately, universe_callback_with_font2D)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::Font2D* font2D = new yli::ontology::Font2D(universe, yli::ontology::FontStruct(), &universe->parent_of_font2Ds);
+
+    const std::string console_name = "foo";
+
+    yli::ontology::Console* const console = new yli::ontology::Console(universe, &universe->parent_of_consoles);
+    console->set_name(console_name);
+
+    ASSERT_EQ(universe->get_active_console(), nullptr);
+
+    const std::vector<std::string> command_parameters { console_name };
+    universe->activate(console, universe, command_parameters);
+    ASSERT_EQ(universe->get_active_console(), console);
+}
+
+TEST(scene_and_camera_must_be_activated_appropriately, universe_callback)
+{
+    yli::ontology::Console* const console = nullptr;
+
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    const std::string scene_name = "foo";
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+    scene->set_name(scene_name);
+
+    const std::string camera_name = "bar";
+    yli::ontology::Camera* const camera = new yli::ontology::Camera(universe, yli::ontology::CameraStruct(), &scene->parent_of_cameras);
+    camera->set_name(camera_name);
+
+    ASSERT_EQ(universe->get_active_scene(), nullptr);
+    ASSERT_EQ(scene->get_active_camera(), nullptr);
+
+    const std::vector<std::string> activate_scene_command_parameters { scene_name };
+    universe->activate(console, universe, activate_scene_command_parameters);
+    ASSERT_EQ(universe->get_active_scene(), scene);
+    ASSERT_EQ(scene->get_active_camera(), nullptr);
+
+    const std::vector<std::string> activate_camera_command_parameters { camera_name };
+    universe->activate(console, universe, activate_camera_command_parameters);
+    ASSERT_EQ(universe->get_active_scene(), scene);
+    ASSERT_EQ(scene->get_active_camera(), camera);
+}
+
+TEST(scene_must_be_deleted_appropriately, universe_callback)
+{
+    yli::ontology::Console* const console = nullptr;
+
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    const std::string scene_name = "foo";
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+    scene->set_name(scene_name);
+
+    const std::vector<std::string> command_parameters { scene_name };
+    universe->activate(console, universe, command_parameters);
+
+    universe->delete_entity(console, universe, command_parameters);
+    ASSERT_EQ(universe->get_active_scene(), nullptr);
+}
+
+TEST(object_must_be_bound_to_species_appropriately, universe_callback)
+{
+    yli::ontology::Console* const console = nullptr;
+
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::Material* const material = new yli::ontology::Material(universe, yli::ontology::MaterialStruct(), &shader->parent_of_materials);
+
+    const std::string species1_name = "foo";
+
+    yli::ontology::SpeciesStruct species1_struct;
+    species1_struct.scene = scene;
+    species1_struct.shader = shader;
+    species1_struct.material = material;
+    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, species1_struct, &material->parent_of_species);
+    species1->set_name(species1_name);
+
+    const std::string object_name = "bar";
+
+    yli::ontology::ObjectStruct object_struct;
+    object_struct.species_parent = species1;
+    yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species1->parent_of_objects);
+    object->set_name(object_name);
+
+    const std::string species2_name = "baz";
+
+    yli::ontology::SpeciesStruct species2_struct;
+    species2_struct.scene = scene;
+    species2_struct.shader = shader;
+    species2_struct.material = material;
+    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, species2_struct, &material->parent_of_species);
+    species2->set_name(species2_name);
+
+    const std::vector<std::string> bind_object_to_species2_command_parameters { object_name, species2_name };
+
+    ASSERT_EQ(object->get_parent(), species1);
+    ASSERT_EQ(species1->get_number_of_children(), 1);
+    ASSERT_EQ(species2->get_number_of_children(), 0);
+
+    universe->bind(console, universe, bind_object_to_species2_command_parameters);
+    ASSERT_EQ(object->get_parent(), species2);
+    ASSERT_EQ(species1->get_number_of_children(), 0);
+    ASSERT_EQ(species2->get_number_of_children(), 1);
 }

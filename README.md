@@ -42,7 +42,7 @@ In [Skrolli 2019.2](https://skrolli.fi/numerot/2019-2/) there is an article
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 In Visual Studio compiling may break due to compiler-specific bugs.
 Cross compiling from Linux® to Windows using MinGW-w64 works fine.
-C++14 support is required.
+C++17 support is required.
 CMake 2.6.2 or newer is needed for the compiling process, but
 external libraries such as `glm` require CMake 3.2 or a newer version.
 CMake uses git for downloading Google Test testing framework.
