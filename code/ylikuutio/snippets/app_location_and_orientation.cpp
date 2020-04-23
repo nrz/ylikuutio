@@ -40,7 +40,7 @@ namespace yli
     }
 }
 
-namespace app
+namespace yli::snippets
 {
     void set_location_and_orientation(
             yli::config::SettingMaster* const setting_master,

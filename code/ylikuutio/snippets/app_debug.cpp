@@ -23,7 +23,7 @@
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
 
-namespace app
+namespace yli::snippets
 {
     void set_flight_mode(yli::config::SettingMaster* setting_master, const bool is_flight_mode_in_use)
     {

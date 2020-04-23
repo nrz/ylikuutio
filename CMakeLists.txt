@@ -690,29 +690,29 @@ add_executable(ajokki
     code/ajokki/ajokki_tallinn_scene.cpp
     code/ajokki/ajokki_tallinn_scene.hpp
 
-    # app, in alphabetical order
-    code/app/app_background_colors.cpp
-    code/app/app_background_colors.hpp
-    code/app/app_brain.cpp
-    code/app/app_brain.hpp
-    code/app/app_console.cpp
-    code/app/app_console.hpp
-    code/app/app_console_callbacks.cpp
-    code/app/app_console_callbacks.hpp
-    code/app/app_debug.cpp
-    code/app/app_debug.hpp
-    code/app/app_framebuffer.cpp
-    code/app/app_framebuffer.hpp
-    code/app/app_keyboard_callbacks.cpp
-    code/app/app_keyboard_callbacks.hpp
-    code/app/app_location_and_orientation.cpp
-    code/app/app_location_and_orientation.hpp
-    code/app/app_movement.cpp
-    code/app/app_window.cpp
-    code/app/app_window.hpp
-    code/app/app_movement.hpp
-    code/app/app_wireframe.cpp
-    code/app/app_wireframe.hpp
+    # snippets, in alphabetical order
+    code/ylikuutio/snippets/app_background_colors.cpp
+    code/ylikuutio/snippets/app_background_colors.hpp
+    code/ylikuutio/snippets/app_brain.cpp
+    code/ylikuutio/snippets/app_brain.hpp
+    code/ylikuutio/snippets/app_console.cpp
+    code/ylikuutio/snippets/app_console.hpp
+    code/ylikuutio/snippets/app_console_callbacks.cpp
+    code/ylikuutio/snippets/app_console_callbacks.hpp
+    code/ylikuutio/snippets/app_debug.cpp
+    code/ylikuutio/snippets/app_debug.hpp
+    code/ylikuutio/snippets/app_framebuffer.cpp
+    code/ylikuutio/snippets/app_framebuffer.hpp
+    code/ylikuutio/snippets/app_keyboard_callbacks.cpp
+    code/ylikuutio/snippets/app_keyboard_callbacks.hpp
+    code/ylikuutio/snippets/app_location_and_orientation.cpp
+    code/ylikuutio/snippets/app_location_and_orientation.hpp
+    code/ylikuutio/snippets/app_movement.cpp
+    code/ylikuutio/snippets/app_window.cpp
+    code/ylikuutio/snippets/app_window.hpp
+    code/ylikuutio/snippets/app_movement.hpp
+    code/ylikuutio/snippets/app_wireframe.cpp
+    code/ylikuutio/snippets/app_wireframe.hpp
     )
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS} pthread)
 
@@ -723,9 +723,9 @@ add_executable(gpgpu_test
     code/gpgpu_test/gpgpu_test_scene.cpp
     code/gpgpu_test/gpgpu_test_scene.hpp
 
-    # app, in alphabetical order
-    code/app/app_keyboard_callbacks.cpp
-    code/app/app_keyboard_callbacks.hpp
+    # snippets, in alphabetical order
+    code/ylikuutio/snippets/app_keyboard_callbacks.cpp
+    code/ylikuutio/snippets/app_keyboard_callbacks.hpp
     )
 target_link_libraries(gpgpu_test ylikuutio ${ALL_LIBS} pthread)
 
@@ -742,29 +742,29 @@ add_executable(hirvi
     code/ajokki/ajokki_joensuu_center_west_scene.cpp
     code/ajokki/ajokki_joensuu_center_west_scene.hpp
 
-    # app, in alphabetical order
-    code/app/app_background_colors.cpp
-    code/app/app_background_colors.hpp
-    code/app/app_brain.cpp
-    code/app/app_brain.hpp
-    code/app/app_console.cpp
-    code/app/app_console.hpp
-    code/app/app_console_callbacks.cpp
-    code/app/app_console_callbacks.hpp
-    code/app/app_debug.cpp
-    code/app/app_debug.hpp
-    code/app/app_framebuffer.cpp
-    code/app/app_framebuffer.hpp
-    code/app/app_keyboard_callbacks.cpp
-    code/app/app_keyboard_callbacks.hpp
-    code/app/app_location_and_orientation.cpp
-    code/app/app_location_and_orientation.hpp
-    code/app/app_movement.cpp
-    code/app/app_movement.hpp
-    code/app/app_window.cpp
-    code/app/app_window.hpp
-    code/app/app_wireframe.cpp
-    code/app/app_wireframe.hpp
+    # snippets, in alphabetical order
+    code/ylikuutio/snippets/app_background_colors.cpp
+    code/ylikuutio/snippets/app_background_colors.hpp
+    code/ylikuutio/snippets/app_brain.cpp
+    code/ylikuutio/snippets/app_brain.hpp
+    code/ylikuutio/snippets/app_console.cpp
+    code/ylikuutio/snippets/app_console.hpp
+    code/ylikuutio/snippets/app_console_callbacks.cpp
+    code/ylikuutio/snippets/app_console_callbacks.hpp
+    code/ylikuutio/snippets/app_debug.cpp
+    code/ylikuutio/snippets/app_debug.hpp
+    code/ylikuutio/snippets/app_framebuffer.cpp
+    code/ylikuutio/snippets/app_framebuffer.hpp
+    code/ylikuutio/snippets/app_keyboard_callbacks.cpp
+    code/ylikuutio/snippets/app_keyboard_callbacks.hpp
+    code/ylikuutio/snippets/app_location_and_orientation.cpp
+    code/ylikuutio/snippets/app_location_and_orientation.hpp
+    code/ylikuutio/snippets/app_movement.cpp
+    code/ylikuutio/snippets/app_movement.hpp
+    code/ylikuutio/snippets/app_window.cpp
+    code/ylikuutio/snippets/app_window.hpp
+    code/ylikuutio/snippets/app_wireframe.cpp
+    code/ylikuutio/snippets/app_wireframe.hpp
     )
 target_link_libraries(hirvi ylikuutio ${ALL_LIBS} pthread)
 
@@ -775,29 +775,29 @@ add_executable(yli_edit
     code/edit/yli_edit_console_callbacks.cpp
     code/edit/yli_edit_console_callbacks.hpp
 
-    # app, in alphabetical order
-    code/app/app_background_colors.cpp
-    code/app/app_background_colors.hpp
-    code/app/app_brain.cpp
-    code/app/app_brain.hpp
-    code/app/app_console.cpp
-    code/app/app_console.hpp
-    code/app/app_console_callbacks.cpp
-    code/app/app_console_callbacks.hpp
-    code/app/app_debug.cpp
-    code/app/app_debug.hpp
-    code/app/app_framebuffer.cpp
-    code/app/app_framebuffer.hpp
-    code/app/app_keyboard_callbacks.cpp
-    code/app/app_keyboard_callbacks.hpp
-    code/app/app_location_and_orientation.cpp
-    code/app/app_location_and_orientation.hpp
-    code/app/app_movement.cpp
-    code/app/app_movement.hpp
-    code/app/app_window.cpp
-    code/app/app_window.hpp
-    code/app/app_wireframe.cpp
-    code/app/app_wireframe.hpp
+    # snippets, in alphabetical order
+    code/ylikuutio/snippets/app_background_colors.cpp
+    code/ylikuutio/snippets/app_background_colors.hpp
+    code/ylikuutio/snippets/app_brain.cpp
+    code/ylikuutio/snippets/app_brain.hpp
+    code/ylikuutio/snippets/app_console.cpp
+    code/ylikuutio/snippets/app_console.hpp
+    code/ylikuutio/snippets/app_console_callbacks.cpp
+    code/ylikuutio/snippets/app_console_callbacks.hpp
+    code/ylikuutio/snippets/app_debug.cpp
+    code/ylikuutio/snippets/app_debug.hpp
+    code/ylikuutio/snippets/app_framebuffer.cpp
+    code/ylikuutio/snippets/app_framebuffer.hpp
+    code/ylikuutio/snippets/app_keyboard_callbacks.cpp
+    code/ylikuutio/snippets/app_keyboard_callbacks.hpp
+    code/ylikuutio/snippets/app_location_and_orientation.cpp
+    code/ylikuutio/snippets/app_location_and_orientation.hpp
+    code/ylikuutio/snippets/app_movement.cpp
+    code/ylikuutio/snippets/app_movement.hpp
+    code/ylikuutio/snippets/app_window.cpp
+    code/ylikuutio/snippets/app_window.hpp
+    code/ylikuutio/snippets/app_wireframe.cpp
+    code/ylikuutio/snippets/app_wireframe.hpp
     )
 target_link_libraries(yli_edit ylikuutio ${ALL_LIBS} pthread)
 

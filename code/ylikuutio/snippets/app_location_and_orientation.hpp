@@ -15,11 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __APP_FRAMEBUFFER_HPP_INCLUDED
-#define __APP_FRAMEBUFFER_HPP_INCLUDED
-
-// Include standard headers
-#include <stdint.h> // uint32_t etc.
+#ifndef __APP_LOCATION_AND_ORIENTATION_HPP_INCLUDED
+#define __APP_LOCATION_AND_ORIENTATION_HPP_INCLUDED
 
 namespace yli
 {
@@ -29,9 +26,16 @@ namespace yli
     }
 }
 
-namespace app
+namespace yli::snippets
 {
-    void set_framebuffer_size(yli::config::SettingMaster* setting_master, const uint32_t framebuffer_width, const uint32_t framebuffer_height);
+    void set_location_and_orientation(
+            yli::config::SettingMaster* const setting_master,
+            const float rho,
+            const float theta,
+            const float phi,
+            const float x,
+            const float y,
+            const float z);
 }
 
 #endif

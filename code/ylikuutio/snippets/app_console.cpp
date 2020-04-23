@@ -32,7 +32,7 @@ namespace yli
     }
 }
 
-namespace app
+namespace yli::snippets
 {
     void set_console(
             yli::config::SettingMaster* const setting_master,

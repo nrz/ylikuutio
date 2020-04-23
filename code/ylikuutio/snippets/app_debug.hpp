@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __APP_WIREFRAME_HPP_INCLUDED
-#define __APP_WIREFRAME_HPP_INCLUDED
+#ifndef __APP_DEBUG_HPP_INCLUDED
+#define __APP_DEBUG_HPP_INCLUDED
 
 namespace yli
 {
@@ -26,9 +26,9 @@ namespace yli
     }
 }
 
-namespace app
+namespace yli::snippets
 {
-    void set_wireframe(yli::config::SettingMaster* setting_master, const bool use_wireframe);
+    void set_flight_mode(yli::config::SettingMaster* setting_master, const bool is_flight_mode_in_use);
 }
 
 #endif

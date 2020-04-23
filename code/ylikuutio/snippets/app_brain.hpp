@@ -42,7 +42,7 @@ namespace yli
     }
 }
 
-namespace app
+namespace yli::snippets
 {
     std::shared_ptr<yli::common::AnyValue> rest(
             yli::ontology::Universe*,

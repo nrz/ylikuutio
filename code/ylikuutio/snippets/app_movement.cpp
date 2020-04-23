@@ -31,7 +31,7 @@ namespace yli
     }
 }
 
-namespace app
+namespace yli::snippets
 {
     void set_movement(
             yli::config::SettingMaster* const setting_master,

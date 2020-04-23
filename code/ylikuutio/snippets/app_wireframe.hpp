@@ -15,11 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __APP_WINDOW_HPP_INCLUDED
-#define __APP_WINDOW_HPP_INCLUDED
-
-// Include standard headers
-#include <stdint.h> // uint32_t etc.
+#ifndef __APP_WIREFRAME_HPP_INCLUDED
+#define __APP_WIREFRAME_HPP_INCLUDED
 
 namespace yli
 {
@@ -29,9 +26,9 @@ namespace yli
     }
 }
 
-namespace app
+namespace yli::snippets
 {
-    void set_window_size(yli::config::SettingMaster* setting_master, const uint32_t window_width, const uint32_t window_height);
+    void set_wireframe(yli::config::SettingMaster* setting_master, const bool use_wireframe);
 }
 
 #endif

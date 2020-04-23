@@ -51,7 +51,7 @@ namespace yli
     }
 }
 
-namespace app
+namespace yli::snippets
 {
     std::shared_ptr<yli::common::AnyValue> rest(
             yli::ontology::Universe*,
@@ -73,7 +73,7 @@ namespace app
     {
         if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
         {
-            std::cerr << "ERROR: `app::go_east`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
+            std::cerr << "ERROR: `yli::snippets::go_east`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
         }
 
@@ -97,7 +97,7 @@ namespace app
     {
         if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
         {
-            std::cerr << "ERROR: `app::go_west`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
+            std::cerr << "ERROR: `yli::snippets::go_west`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
         }
 
@@ -121,7 +121,7 @@ namespace app
     {
         if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
         {
-            std::cerr << "ERROR: `app::go_north`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
+            std::cerr << "ERROR: `yli::snippets::go_north`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
         }
 
@@ -145,7 +145,7 @@ namespace app
     {
         if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
         {
-            std::cerr << "ERROR: `app::go_south`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
+            std::cerr << "ERROR: `yli::snippets::go_south`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
         }
 
@@ -169,7 +169,7 @@ namespace app
     {
         if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
         {
-            std::cerr << "ERROR: `app::orient_to_east`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
+            std::cerr << "ERROR: `yli::snippets::orient_to_east`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
         }
 
@@ -193,7 +193,7 @@ namespace app
     {
         if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
         {
-            std::cerr << "ERROR: `app::orient_to_west`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
+            std::cerr << "ERROR: `yli::snippets::orient_to_west`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
         }
 
@@ -217,7 +217,7 @@ namespace app
     {
         if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
         {
-            std::cerr << "ERROR: `app::orient_to_north`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
+            std::cerr << "ERROR: `yli::snippets::orient_to_north`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
         }
 
@@ -241,7 +241,7 @@ namespace app
     {
         if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
         {
-            std::cerr << "ERROR: `app::orient_to_south`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
+            std::cerr << "ERROR: `yli::snippets::orient_to_south`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
         }
 
@@ -265,7 +265,7 @@ namespace app
     {
         if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
         {
-            std::cerr << "ERROR: `app::orient_and_go_east`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
+            std::cerr << "ERROR: `yli::snippets::orient_and_go_east`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
         }
 
@@ -290,7 +290,7 @@ namespace app
     {
         if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
         {
-            std::cerr << "ERROR: `app::orient_and_go_west`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
+            std::cerr << "ERROR: `yli::snippets::orient_and_go_west`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
         }
 
@@ -315,7 +315,7 @@ namespace app
     {
         if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
         {
-            std::cerr << "ERROR: `app::orient_and_go_north`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
+            std::cerr << "ERROR: `yli::snippets::orient_and_go_north`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
         }
 
@@ -340,7 +340,7 @@ namespace app
     {
         if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
         {
-            std::cerr << "ERROR: `app::orient_and_go_south`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
+            std::cerr << "ERROR: `yli::snippets::orient_and_go_south`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
         }
 
@@ -365,7 +365,7 @@ namespace app
     {
         if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
         {
-            std::cerr << "ERROR: `app::rotate_clockwise`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
+            std::cerr << "ERROR: `yli::snippets::rotate_clockwise`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
         }
 
@@ -389,7 +389,7 @@ namespace app
     {
         if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
         {
-            std::cerr << "ERROR: `app::rotate_counterclockwise`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
+            std::cerr << "ERROR: `yli::snippets::rotate_counterclockwise`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
         }
 

@@ -42,7 +42,7 @@ namespace yli
     }
 }
 
-namespace app
+namespace yli::snippets
 {
     /*********************************************************************\
      *  Callback engines for action mode keyreleases begin here.         *

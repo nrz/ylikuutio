@@ -15,28 +15,22 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __APP_CONSOLE_HPP_INCLUDED
-#define __APP_CONSOLE_HPP_INCLUDED
+#include "app_wireframe.hpp"
+#include "code/ylikuutio/config/setting_master.hpp"
+#include "code/ylikuutio/config/setting_struct.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <memory> // std::make_shared, std::shared_ptr
 
-namespace yli
+namespace yli::snippets
 {
-    namespace config
+    void set_wireframe(yli::config::SettingMaster* setting_master, const bool use_wireframe)
     {
-        class SettingMaster;
+        yli::config::SettingStruct wireframe_setting_struct(std::make_shared<yli::common::AnyValue>(use_wireframe));
+        wireframe_setting_struct.name = "wireframe";
+        wireframe_setting_struct.activate_callback = &yli::config::SettingMaster::activate_wireframe;
+        wireframe_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+        setting_master->create_Setting(wireframe_setting_struct);
     }
 }
-
-namespace app
-{
-    void set_console(
-            yli::config::SettingMaster* const setting_master,
-            const uint32_t console_top_y,
-            const uint32_t console_bottom_y,
-            const uint32_t console_left_x,
-            const uint32_t console_right_x);
-}
-
-#endif

@@ -23,7 +23,7 @@
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
 
-namespace app
+namespace yli::snippets
 {
     void set_background_colors(yli::config::SettingMaster* setting_master, const float red, const float green, const float blue, const float alpha)
     {

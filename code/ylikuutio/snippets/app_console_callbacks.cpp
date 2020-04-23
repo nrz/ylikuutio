@@ -35,7 +35,7 @@ namespace yli
     }
 }
 
-namespace app
+namespace yli::snippets
 {
     std::shared_ptr<yli::common::AnyValue> quit(
             yli::ontology::Console* const,
