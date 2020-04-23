@@ -893,10 +893,16 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/brain.cpp
         code/ylikuutio/ontology/brain.hpp
         code/ylikuutio/ontology/brain_struct.hpp
+        code/ylikuutio/ontology/camera.cpp
+        code/ylikuutio/ontology/camera.hpp
+        code/ylikuutio/ontology/camera_struct.hpp
         code/ylikuutio/ontology/child_module.cpp
         code/ylikuutio/ontology/child_module.hpp
+        code/ylikuutio/ontology/console.cpp
+        code/ylikuutio/ontology/console.hpp
         code/ylikuutio/ontology/font2D.cpp
         code/ylikuutio/ontology/font2D.hpp
+        code/ylikuutio/ontology/font_struct.hpp
         code/ylikuutio/ontology/glyph_struct.hpp
         code/ylikuutio/ontology/holobiont.cpp
         code/ylikuutio/ontology/holobiont.hpp
