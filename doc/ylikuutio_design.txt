@@ -7,15 +7,14 @@ and turn-based 3D strategy games, specifically
 simultaneously executed and clock-based turns.
 
 code/ajokki/                    - Ajokki sandbox code.
-code/app/                       - app code snippets that can be used in different applications which use Ylikuutio.
-code/awk/                       - scripts written in AWK.
+code/angelscript/               - AngelScript test code.
 code/bash/                      - scripts written in Bash.
-code/convert/                   - code related to `yli_convert` asset file conversion tool.
+code/edit/                      - YliEdit editor code.
 code/gpgpu_test/                - GPGPU test code.
 code/hirvi/                     - Hirvi game code.
-code/perl/                      - scripts written in Perl.
-code/s7/                        - s7 Scheme test code.
+code/python/                    - scripts written in Python.
 code/ylikuutio                  - Ylikuutio code.
+code/ylikuutio/angelscript/     - AngelScript related code. See below for more detailed description about AngelScript-related code.
 code/ylikuutio/audio/           - audio code. See below for more detailed description about audio.
 code/ylikuutio/callback_system/ - callback functionality.
 code/ylikuutio/command_line/    - command line argument processing.
@@ -36,13 +35,17 @@ code/ylikuutio/memory/          - memory related code.
 code/ylikuutio/network/         - network related code.
 code/ylikuutio/ontology/        - ontology related code. See below for more detailed description about Ylikuutio ontology.
 code/ylikuutio/opengl/          - OpenGL related code.
-code/ylikuutio/scheme/          - s7 Scheme related code. See below for more detailed description about Scheme-related code.
 code/ylikuutio/sdl/             - SDL related code.
 code/ylikuutio/shaders/         - GLSL shaders.
+code/ylikuutio/snippets/        - code snippets that can be used in different applications which use Ylikuutio.
 code/ylikuutio/string/          - string processing code.
 code/ylikuutio/tests/           - unit tests.
 code/ylikuutio/time/            - time related code.
 code/ylikuutio/triangulation/   - triangulation related code. See below for more detailed description about triangulation.
+
+code/ylikuutio/angelscript/
+
+`AngelscriptMaster` is the master class of Ylikuutio AngelScript functionality.
 
 code/ylikuutio/audio/
 
@@ -161,10 +164,6 @@ There are different hierarchical paths of ontology:
 `Scene` (see above).
 `Shader` (see above).
 `ComputeTask` is a class that owns the data used for GPGPU computation using the GLSL vertex shader and GLSL fragment shader owned by the `Shader`.
-
-code/ylikuutio/scheme/
-
-`SchemeMaster` is the master class of Ylikuutio Scheme functionality.
 
 Triangulation
 
