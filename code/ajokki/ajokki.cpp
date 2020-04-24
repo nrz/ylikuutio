@@ -29,10 +29,8 @@
 #endif
 
 #include "ajokki_console_callbacks.hpp"
-#include "ajokki_altiplano_scene.hpp"
 #include "ajokki_helsinki_east_downtown_scene.hpp"
 #include "ajokki_joensuu_center_west_scene.hpp"
-#include "ajokki_tallinn_scene.hpp"
 #include "code/ylikuutio/snippets/window_snippets.hpp"
 #include "code/ylikuutio/snippets/framebuffer_snippets.hpp"
 #include "code/ylikuutio/snippets/background_color_snippets.hpp"
@@ -355,8 +353,6 @@ int main(const int argc, const char* const argv[])
     // The `Scene`s will be created in the following order:
     // 1. Helsinki
     // 2. Joensuu
-    // 3. altiplano
-    // 4. Tallinn
 
     // Helsinki `Scene` begins here.
 
@@ -394,28 +390,6 @@ int main(const int argc, const char* const argv[])
     }
 
     // Joensuu `Scene` ends here.
-
-    // altiplano `Scene` begins here.
-
-    std::cout << "Creating yli::ontology::Scene* altiplano_scene and its contents ...\n";
-    if (ajokki::create_altiplano_scene(entity_factory, earth_world) == nullptr)
-    {
-        cleanup_callback_engine.execute(nullptr);
-        return -1;
-    }
-
-    // altiplano `Scene` ends here.
-
-    // Tallinn `Scene` begins here.
-
-    std::cout << "Creating yli::ontology::Scene* tallinn_scene and its contents ...\n";
-    if (ajokki::create_tallinn_scene(entity_factory, earth_world) == nullptr)
-    {
-        cleanup_callback_engine.execute(nullptr);
-        return -1;
-    }
-
-    // Tallinn `Scene` ends here.
 
     std::cout << "Creating yli::ontology::Entity* my_font2D_entity ...\n";
 
