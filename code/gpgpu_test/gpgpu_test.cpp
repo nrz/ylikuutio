@@ -53,10 +53,11 @@
 #include "SDL.h"
 
 // Include standard headers
+#include <exception>     // try, catch, std::exception
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 
-int main(const int argc, const char* const argv[])
+int main(const int argc, const char* const argv[]) try
 {
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
 
@@ -160,4 +161,8 @@ int main(const int argc, const char* const argv[])
     cleanup_callback_engine.execute(nullptr);
 
     return 0;
+}
+catch (const std::exception& exception)
+{
+    std::cerr << "ERROR: exception: " << exception.what() << "\n";
 }

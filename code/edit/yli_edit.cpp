@@ -85,6 +85,7 @@
 // Include standard headers
 #include <cmath>         // abs, cos, NAN, remainder, sin, std::isnan, std::pow
 #include <cstddef>       // std::size_t
+#include <exception>     // try, catch, std::exception
 #include <iomanip>       // std::setfill, std::setprecision, std::setw
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <memory>        // std::make_shared, std::shared_ptr
@@ -93,7 +94,7 @@
 #include <string>        // std::string
 #include <vector>        // std::vector
 
-int main(const int argc, const char* const argv[])
+int main(const int argc, const char* const argv[]) try
 {
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
 
@@ -765,4 +766,8 @@ int main(const int argc, const char* const argv[])
     cleanup_callback_engine.execute(nullptr);
 
     return 0;
+}
+catch (const std::exception& exception)
+{
+    std::cerr << "ERROR: exception: " << exception.what() << "\n";
 }
