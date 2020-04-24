@@ -6,6 +6,13 @@ The main supported genres are 3D action adventures
 and turn-based 3D strategy games, specifically
 simultaneously executed and clock-based turns.
 
+Hirvi is a first person action-adventure of the adventures of
+a moose/elk called Hirvi. Work in progress.
+
+Tulevaisuus ("the future" in Finnish) is a turn-based
+3D tactical combat game with programmable robots.
+Work in progress.
+
 code/ajokki/                    - Ajokki sandbox code.
 code/angelscript/               - AngelScript test code.
 code/bash/                      - scripts written in Bash.
@@ -13,6 +20,7 @@ code/edit/                      - YliEdit editor code.
 code/gpgpu_test/                - GPGPU test code.
 code/hirvi/                     - Hirvi game code.
 code/python/                    - scripts written in Python.
+code/tulevaisuus/               - Tulevaisuus game code.
 code/ylikuutio                  - Ylikuutio code.
 code/ylikuutio/angelscript/     - AngelScript related code. See below for more detailed description about AngelScript-related code.
 code/ylikuutio/audio/           - audio code. See below for more detailed description about audio.
