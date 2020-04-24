@@ -420,8 +420,6 @@ namespace yli
             private:
                 yli::ontology::Entity* get_parent() const override;
 
-                static void charmods_callback(SDL_Window* window, unsigned int codepoint, int mods);
-
                 // Callbacks end here.
 
                 void copy_historical_input_into_current_input();
