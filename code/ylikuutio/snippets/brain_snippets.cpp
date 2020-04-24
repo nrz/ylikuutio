@@ -19,7 +19,7 @@
 #define PI 3.14159265359f
 #endif
 
-#include "app_brain.hpp"
+#include "brain_snippets.hpp"
 #include "code/ylikuutio/common/datatype.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"

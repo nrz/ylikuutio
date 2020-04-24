@@ -15,39 +15,20 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __APP_CONSOLE_CALLBACKS_HPP_INCLUDED
-#define __APP_CONSOLE_CALLBACKS_HPP_INCLUDED
-
-// Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
-#include <string>   // std::string
-#include <vector>   // std::vector
+#ifndef __DEBUG_SNIPPETS_HPP_INCLUDED
+#define __DEBUG_SNIPPETS_HPP_INCLUDED
 
 namespace yli
 {
-    namespace common
+    namespace config
     {
-        class AnyValue;
-    }
-
-    namespace ontology
-    {
-        class Entity;
-        class Console;
+        class SettingMaster;
     }
 }
 
 namespace yli::snippets
 {
-    std::shared_ptr<yli::common::AnyValue> quit(
-            yli::ontology::Console* const,
-            yli::ontology::Entity* const,
-            const std::vector<std::string>& command_parameters);
-
-    std::shared_ptr<yli::common::AnyValue> help(
-            yli::ontology::Console* const,
-            yli::ontology::Entity* const,
-            const std::vector<std::string>& command_parameters);
+    void set_flight_mode(yli::config::SettingMaster* setting_master, const bool is_flight_mode_in_use);
 }
 
 #endif

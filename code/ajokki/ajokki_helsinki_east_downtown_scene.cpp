@@ -20,8 +20,8 @@
 #endif
 
 #include "ajokki_helsinki_east_downtown_scene.hpp"
-#include "code/ylikuutio/snippets/app_brain.hpp"
-#include "code/ylikuutio/snippets/app_keyboard_callbacks.hpp"
+#include "code/ylikuutio/snippets/brain_snippets.hpp"
+#include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/shader.hpp"

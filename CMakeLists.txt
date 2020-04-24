@@ -692,28 +692,28 @@ add_executable(ajokki
     code/ajokki/ajokki_tallinn_scene.hpp
 
     # snippets, in alphabetical order
-    code/ylikuutio/snippets/app_background_colors.cpp
-    code/ylikuutio/snippets/app_background_colors.hpp
-    code/ylikuutio/snippets/app_brain.cpp
-    code/ylikuutio/snippets/app_brain.hpp
-    code/ylikuutio/snippets/app_console.cpp
-    code/ylikuutio/snippets/app_console.hpp
-    code/ylikuutio/snippets/app_console_callbacks.cpp
-    code/ylikuutio/snippets/app_console_callbacks.hpp
-    code/ylikuutio/snippets/app_debug.cpp
-    code/ylikuutio/snippets/app_debug.hpp
-    code/ylikuutio/snippets/app_framebuffer.cpp
-    code/ylikuutio/snippets/app_framebuffer.hpp
-    code/ylikuutio/snippets/app_keyboard_callbacks.cpp
-    code/ylikuutio/snippets/app_keyboard_callbacks.hpp
-    code/ylikuutio/snippets/app_location_and_orientation.cpp
-    code/ylikuutio/snippets/app_location_and_orientation.hpp
-    code/ylikuutio/snippets/app_movement.cpp
-    code/ylikuutio/snippets/app_window.cpp
-    code/ylikuutio/snippets/app_window.hpp
-    code/ylikuutio/snippets/app_movement.hpp
-    code/ylikuutio/snippets/app_wireframe.cpp
-    code/ylikuutio/snippets/app_wireframe.hpp
+    code/ylikuutio/snippets/background_color_snippets.cpp
+    code/ylikuutio/snippets/background_color_snippets.hpp
+    code/ylikuutio/snippets/brain_snippets.cpp
+    code/ylikuutio/snippets/brain_snippets.hpp
+    code/ylikuutio/snippets/console_snippets.cpp
+    code/ylikuutio/snippets/console_snippets.hpp
+    code/ylikuutio/snippets/console_callback_snippets.cpp
+    code/ylikuutio/snippets/console_callback_snippets.hpp
+    code/ylikuutio/snippets/debug_snippets.cpp
+    code/ylikuutio/snippets/debug_snippets.hpp
+    code/ylikuutio/snippets/framebuffer_snippets.cpp
+    code/ylikuutio/snippets/framebuffer_snippets.hpp
+    code/ylikuutio/snippets/keyboard_callback_snippets.cpp
+    code/ylikuutio/snippets/keyboard_callback_snippets.hpp
+    code/ylikuutio/snippets/location_and_orientation_snippets.cpp
+    code/ylikuutio/snippets/location_and_orientation_snippets.hpp
+    code/ylikuutio/snippets/movement_snippets.cpp
+    code/ylikuutio/snippets/window_snippets.cpp
+    code/ylikuutio/snippets/window_snippets.hpp
+    code/ylikuutio/snippets/movement_snippets.hpp
+    code/ylikuutio/snippets/wireframe_snippets.cpp
+    code/ylikuutio/snippets/wireframe_snippets.hpp
     )
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS} pthread)
 
@@ -725,8 +725,8 @@ add_executable(gpgpu_test
     code/gpgpu_test/gpgpu_test_scene.hpp
 
     # snippets, in alphabetical order
-    code/ylikuutio/snippets/app_keyboard_callbacks.cpp
-    code/ylikuutio/snippets/app_keyboard_callbacks.hpp
+    code/ylikuutio/snippets/keyboard_callback_snippets.cpp
+    code/ylikuutio/snippets/keyboard_callback_snippets.hpp
     )
 target_link_libraries(gpgpu_test ylikuutio ${ALL_LIBS} pthread)
 
@@ -744,28 +744,28 @@ add_executable(hirvi
     code/ajokki/ajokki_joensuu_center_west_scene.hpp
 
     # snippets, in alphabetical order
-    code/ylikuutio/snippets/app_background_colors.cpp
-    code/ylikuutio/snippets/app_background_colors.hpp
-    code/ylikuutio/snippets/app_brain.cpp
-    code/ylikuutio/snippets/app_brain.hpp
-    code/ylikuutio/snippets/app_console.cpp
-    code/ylikuutio/snippets/app_console.hpp
-    code/ylikuutio/snippets/app_console_callbacks.cpp
-    code/ylikuutio/snippets/app_console_callbacks.hpp
-    code/ylikuutio/snippets/app_debug.cpp
-    code/ylikuutio/snippets/app_debug.hpp
-    code/ylikuutio/snippets/app_framebuffer.cpp
-    code/ylikuutio/snippets/app_framebuffer.hpp
-    code/ylikuutio/snippets/app_keyboard_callbacks.cpp
-    code/ylikuutio/snippets/app_keyboard_callbacks.hpp
-    code/ylikuutio/snippets/app_location_and_orientation.cpp
-    code/ylikuutio/snippets/app_location_and_orientation.hpp
-    code/ylikuutio/snippets/app_movement.cpp
-    code/ylikuutio/snippets/app_movement.hpp
-    code/ylikuutio/snippets/app_window.cpp
-    code/ylikuutio/snippets/app_window.hpp
-    code/ylikuutio/snippets/app_wireframe.cpp
-    code/ylikuutio/snippets/app_wireframe.hpp
+    code/ylikuutio/snippets/background_color_snippets.cpp
+    code/ylikuutio/snippets/background_color_snippets.hpp
+    code/ylikuutio/snippets/brain_snippets.cpp
+    code/ylikuutio/snippets/brain_snippets.hpp
+    code/ylikuutio/snippets/console_snippets.cpp
+    code/ylikuutio/snippets/console_snippets.hpp
+    code/ylikuutio/snippets/console_callback_snippets.cpp
+    code/ylikuutio/snippets/console_callback_snippets.hpp
+    code/ylikuutio/snippets/debug_snippets.cpp
+    code/ylikuutio/snippets/debug_snippets.hpp
+    code/ylikuutio/snippets/framebuffer_snippets.cpp
+    code/ylikuutio/snippets/framebuffer_snippets.hpp
+    code/ylikuutio/snippets/keyboard_callback_snippets.cpp
+    code/ylikuutio/snippets/keyboard_callback_snippets.hpp
+    code/ylikuutio/snippets/location_and_orientation_snippets.cpp
+    code/ylikuutio/snippets/location_and_orientation_snippets.hpp
+    code/ylikuutio/snippets/movement_snippets.cpp
+    code/ylikuutio/snippets/movement_snippets.hpp
+    code/ylikuutio/snippets/window_snippets.cpp
+    code/ylikuutio/snippets/window_snippets.hpp
+    code/ylikuutio/snippets/wireframe_snippets.cpp
+    code/ylikuutio/snippets/wireframe_snippets.hpp
     )
 target_link_libraries(hirvi ylikuutio ${ALL_LIBS} pthread)
 
@@ -777,28 +777,28 @@ add_executable(yli_edit
     code/edit/yli_edit_console_callbacks.hpp
 
     # snippets, in alphabetical order
-    code/ylikuutio/snippets/app_background_colors.cpp
-    code/ylikuutio/snippets/app_background_colors.hpp
-    code/ylikuutio/snippets/app_brain.cpp
-    code/ylikuutio/snippets/app_brain.hpp
-    code/ylikuutio/snippets/app_console.cpp
-    code/ylikuutio/snippets/app_console.hpp
-    code/ylikuutio/snippets/app_console_callbacks.cpp
-    code/ylikuutio/snippets/app_console_callbacks.hpp
-    code/ylikuutio/snippets/app_debug.cpp
-    code/ylikuutio/snippets/app_debug.hpp
-    code/ylikuutio/snippets/app_framebuffer.cpp
-    code/ylikuutio/snippets/app_framebuffer.hpp
-    code/ylikuutio/snippets/app_keyboard_callbacks.cpp
-    code/ylikuutio/snippets/app_keyboard_callbacks.hpp
-    code/ylikuutio/snippets/app_location_and_orientation.cpp
-    code/ylikuutio/snippets/app_location_and_orientation.hpp
-    code/ylikuutio/snippets/app_movement.cpp
-    code/ylikuutio/snippets/app_movement.hpp
-    code/ylikuutio/snippets/app_window.cpp
-    code/ylikuutio/snippets/app_window.hpp
-    code/ylikuutio/snippets/app_wireframe.cpp
-    code/ylikuutio/snippets/app_wireframe.hpp
+    code/ylikuutio/snippets/background_color_snippets.cpp
+    code/ylikuutio/snippets/background_color_snippets.hpp
+    code/ylikuutio/snippets/brain_snippets.cpp
+    code/ylikuutio/snippets/brain_snippets.hpp
+    code/ylikuutio/snippets/console_snippets.cpp
+    code/ylikuutio/snippets/console_snippets.hpp
+    code/ylikuutio/snippets/console_callback_snippets.cpp
+    code/ylikuutio/snippets/console_callback_snippets.hpp
+    code/ylikuutio/snippets/debug_snippets.cpp
+    code/ylikuutio/snippets/debug_snippets.hpp
+    code/ylikuutio/snippets/framebuffer_snippets.cpp
+    code/ylikuutio/snippets/framebuffer_snippets.hpp
+    code/ylikuutio/snippets/keyboard_callback_snippets.cpp
+    code/ylikuutio/snippets/keyboard_callback_snippets.hpp
+    code/ylikuutio/snippets/location_and_orientation_snippets.cpp
+    code/ylikuutio/snippets/location_and_orientation_snippets.hpp
+    code/ylikuutio/snippets/movement_snippets.cpp
+    code/ylikuutio/snippets/movement_snippets.hpp
+    code/ylikuutio/snippets/window_snippets.cpp
+    code/ylikuutio/snippets/window_snippets.hpp
+    code/ylikuutio/snippets/wireframe_snippets.cpp
+    code/ylikuutio/snippets/wireframe_snippets.hpp
     )
 target_link_libraries(yli_edit ylikuutio ${ALL_LIBS} pthread)
 

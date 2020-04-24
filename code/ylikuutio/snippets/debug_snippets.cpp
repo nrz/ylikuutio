@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "app_debug.hpp"
+#include "debug_snippets.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/common/any_value.hpp"

@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __APP_WINDOW_HPP_INCLUDED
-#define __APP_WINDOW_HPP_INCLUDED
+#ifndef __FRAMEBUFFER_SNIPPETS_HPP_INCLUDED
+#define __FRAMEBUFFER_SNIPPETS_HPP_INCLUDED
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
@@ -31,7 +31,7 @@ namespace yli
 
 namespace yli::snippets
 {
-    void set_window_size(yli::config::SettingMaster* setting_master, const uint32_t window_width, const uint32_t window_height);
+    void set_framebuffer_size(yli::config::SettingMaster* setting_master, const uint32_t framebuffer_width, const uint32_t framebuffer_height);
 }
 
 #endif

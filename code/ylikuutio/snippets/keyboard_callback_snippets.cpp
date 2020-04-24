@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "app_keyboard_callbacks.hpp"
+#include "keyboard_callback_snippets.hpp"
 #include "code/ylikuutio/callback/callback_parameter.hpp"
 #include "code/ylikuutio/callback/callback_object.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"

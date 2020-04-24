@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __APP_BRAIN_HPP_INCLUDED
-#define __APP_BRAIN_HPP_INCLUDED
+#ifndef __BRAIN_SNIPPETS_HPP_INCLUDED
+#define __BRAIN_SNIPPETS_HPP_INCLUDED
 
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr

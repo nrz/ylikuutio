@@ -15,8 +15,11 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __APP_MOVEMENT_HPP_INCLUDED
-#define __APP_MOVEMENT_HPP_INCLUDED
+#ifndef __WINDOW_SNIPPETS_HPP_INCLUDED
+#define __WINDOW_SNIPPETS_HPP_INCLUDED
+
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
 
 namespace yli
 {
@@ -28,12 +31,7 @@ namespace yli
 
 namespace yli::snippets
 {
-    void set_movement(
-            yli::config::SettingMaster* const setting_master,
-            const float speed,
-            const float turbo_factor,
-            const float twin_turbo_factor,
-            const float mouse_speed);
+    void set_window_size(yli::config::SettingMaster* setting_master, const uint32_t window_width, const uint32_t window_height);
 }
 
 #endif

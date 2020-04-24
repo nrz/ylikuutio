@@ -29,7 +29,7 @@
 #endif
 
 #include "gpgpu_test_scene.hpp"
-#include "code/ylikuutio/snippets/app_keyboard_callbacks.hpp"
+#include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/callback/callback_object.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"

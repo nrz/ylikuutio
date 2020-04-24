@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __APP_DEBUG_HPP_INCLUDED
-#define __APP_DEBUG_HPP_INCLUDED
+#ifndef __MOVEMENT_SNIPPETS_HPP_INCLUDED
+#define __MOVEMENT_SNIPPETS_HPP_INCLUDED
 
 namespace yli
 {
@@ -28,7 +28,12 @@ namespace yli
 
 namespace yli::snippets
 {
-    void set_flight_mode(yli::config::SettingMaster* setting_master, const bool is_flight_mode_in_use);
+    void set_movement(
+            yli::config::SettingMaster* const setting_master,
+            const float speed,
+            const float turbo_factor,
+            const float twin_turbo_factor,
+            const float mouse_speed);
 }
 
 #endif

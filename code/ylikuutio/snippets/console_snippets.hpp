@@ -15,8 +15,11 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __APP_WIREFRAME_HPP_INCLUDED
-#define __APP_WIREFRAME_HPP_INCLUDED
+#ifndef __CONSOLE_SNIPPETS_HPP_INCLUDED
+#define __CONSOLE_SNIPPETS_HPP_INCLUDED
+
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
 
 namespace yli
 {
@@ -28,7 +31,12 @@ namespace yli
 
 namespace yli::snippets
 {
-    void set_wireframe(yli::config::SettingMaster* setting_master, const bool use_wireframe);
+    void set_console(
+            yli::config::SettingMaster* const setting_master,
+            const uint32_t console_top_y,
+            const uint32_t console_bottom_y,
+            const uint32_t console_left_x,
+            const uint32_t console_right_x);
 }
 
 #endif

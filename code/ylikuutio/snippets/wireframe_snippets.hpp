@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __APP_BACKGROUND_COLORS_HPP_INCLUDED
-#define __APP_BACKGROUND_COLORS_HPP_INCLUDED
+#ifndef __WIREFRAME_SNIPPETS_HPP_INCLUDED
+#define __WIREFRAME_SNIPPETS_HPP_INCLUDED
 
 namespace yli
 {
@@ -28,7 +28,7 @@ namespace yli
 
 namespace yli::snippets
 {
-    void set_background_colors(yli::config::SettingMaster* setting_master, const float red, const float green, const float blue, const float alpha);
+    void set_wireframe(yli::config::SettingMaster* setting_master, const bool use_wireframe);
 }
 
 #endif
