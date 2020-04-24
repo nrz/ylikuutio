@@ -31,24 +31,21 @@
 #include <variant>  // std::variant
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::callback
 {
-    namespace callback
-    {
-        class CallbackEngine;
-        class CallbackObject;
-        class CallbackParameter;
-    }
+    class CallbackEngine;
+    class CallbackObject;
+    class CallbackParameter;
+}
 
-    namespace common
-    {
-        class AnyValue;
-    }
+namespace yli::common
+{
+    class AnyValue;
+}
 
-    namespace ontology
-    {
-        class Universe;
-    }
+namespace yli::ontology
+{
+    class Universe;
 }
 
 namespace yli::snippets

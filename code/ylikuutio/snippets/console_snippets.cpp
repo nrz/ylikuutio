@@ -24,12 +24,9 @@
 #include <memory> // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 
-namespace yli
+namespace yli::config
 {
-    namespace config
-    {
-        class SettingMaster;
-    }
+    class SettingMaster;
 }
 
 namespace yli::snippets

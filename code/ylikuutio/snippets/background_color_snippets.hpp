@@ -18,12 +18,9 @@
 #ifndef __BACKGROUND_COLOR_SNIPPETS_HPP_INCLUDED
 #define __BACKGROUND_COLOR_SNIPPETS_HPP_INCLUDED
 
-namespace yli
+namespace yli::config
 {
-    namespace config
-    {
-        class SettingMaster;
-    }
+    class SettingMaster;
 }
 
 namespace yli::snippets

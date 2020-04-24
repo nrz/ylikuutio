@@ -23,18 +23,15 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::common
 {
-    namespace common
-    {
-        class AnyValue;
-    }
+    class AnyValue;
+}
 
-    namespace ontology
-    {
-        class Entity;
-        class Console;
-    }
+namespace yli::ontology
+{
+    class Entity;
+    class Console;
 }
 
 namespace yli::snippets

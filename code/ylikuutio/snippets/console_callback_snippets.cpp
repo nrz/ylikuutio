@@ -26,13 +26,10 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
-    {
-        class Entity;
-        class Console;
-    }
+    class Entity;
+    class Console;
 }
 
 namespace yli::snippets

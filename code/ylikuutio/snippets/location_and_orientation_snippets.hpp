@@ -18,12 +18,9 @@
 #ifndef __LOCATION_AND_ORIENTATION_SNIPPETS_HPP_INCLUDED
 #define __LOCATION_AND_ORIENTATION_SNIPPETS_HPP_INCLUDED
 
-namespace yli
+namespace yli::config
 {
-    namespace config
-    {
-        class SettingMaster;
-    }
+    class SettingMaster;
 }
 
 namespace yli::snippets
