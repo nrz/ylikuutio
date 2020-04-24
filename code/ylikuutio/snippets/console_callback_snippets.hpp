@@ -15,23 +15,36 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __APP_FRAMEBUFFER_HPP_INCLUDED
-#define __APP_FRAMEBUFFER_HPP_INCLUDED
+#ifndef __CONSOLE_CALLBACK_SNIPPETS_HPP_INCLUDED
+#define __CONSOLE_CALLBACK_SNIPPETS_HPP_INCLUDED
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <memory>   // std::make_shared, std::shared_ptr
+#include <string>   // std::string
+#include <vector>   // std::vector
 
-namespace yli
+namespace yli::common
 {
-    namespace config
-    {
-        class SettingMaster;
-    }
+    class AnyValue;
 }
 
-namespace app
+namespace yli::ontology
 {
-    void set_framebuffer_size(yli::config::SettingMaster* setting_master, const uint32_t framebuffer_width, const uint32_t framebuffer_height);
+    class Entity;
+    class Console;
+}
+
+namespace yli::snippets
+{
+    std::shared_ptr<yli::common::AnyValue> quit(
+            yli::ontology::Console* const,
+            yli::ontology::Entity* const,
+            const std::vector<std::string>& command_parameters);
+
+    std::shared_ptr<yli::common::AnyValue> help(
+            yli::ontology::Console* const,
+            yli::ontology::Entity* const,
+            const std::vector<std::string>& command_parameters);
 }
 
 #endif

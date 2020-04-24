@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "app_console_callbacks.hpp"
+#include "console_callback_snippets.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
@@ -26,16 +26,13 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
-    {
-        class Entity;
-        class Console;
-    }
+    class Entity;
+    class Console;
 }
 
-namespace app
+namespace yli::snippets
 {
     std::shared_ptr<yli::common::AnyValue> quit(
             yli::ontology::Console* const,

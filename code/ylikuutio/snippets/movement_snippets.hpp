@@ -15,27 +15,22 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __APP_LOCATION_AND_ORIENTATION_HPP_INCLUDED
-#define __APP_LOCATION_AND_ORIENTATION_HPP_INCLUDED
+#ifndef __MOVEMENT_SNIPPETS_HPP_INCLUDED
+#define __MOVEMENT_SNIPPETS_HPP_INCLUDED
 
-namespace yli
+namespace yli::config
 {
-    namespace config
-    {
-        class SettingMaster;
-    }
+    class SettingMaster;
 }
 
-namespace app
+namespace yli::snippets
 {
-    void set_location_and_orientation(
+    void set_movement(
             yli::config::SettingMaster* const setting_master,
-            const float rho,
-            const float theta,
-            const float phi,
-            const float x,
-            const float y,
-            const float z);
+            const float speed,
+            const float turbo_factor,
+            const float twin_turbo_factor,
+            const float mouse_speed);
 }
 
 #endif

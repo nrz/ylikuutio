@@ -15,20 +15,24 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __APP_WIREFRAME_HPP_INCLUDED
-#define __APP_WIREFRAME_HPP_INCLUDED
+#ifndef __LOCATION_AND_ORIENTATION_SNIPPETS_HPP_INCLUDED
+#define __LOCATION_AND_ORIENTATION_SNIPPETS_HPP_INCLUDED
 
-namespace yli
+namespace yli::config
 {
-    namespace config
-    {
-        class SettingMaster;
-    }
+    class SettingMaster;
 }
 
-namespace app
+namespace yli::snippets
 {
-    void set_wireframe(yli::config::SettingMaster* setting_master, const bool use_wireframe);
+    void set_location_and_orientation(
+            yli::config::SettingMaster* const setting_master,
+            const float rho,
+            const float theta,
+            const float phi,
+            const float x,
+            const float y,
+            const float z);
 }
 
 #endif

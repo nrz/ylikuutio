@@ -15,20 +15,20 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __APP_BACKGROUND_COLORS_HPP_INCLUDED
-#define __APP_BACKGROUND_COLORS_HPP_INCLUDED
+#ifndef __WINDOW_SNIPPETS_HPP_INCLUDED
+#define __WINDOW_SNIPPETS_HPP_INCLUDED
 
-namespace yli
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+
+namespace yli::config
 {
-    namespace config
-    {
-        class SettingMaster;
-    }
+    class SettingMaster;
 }
 
-namespace app
+namespace yli::snippets
 {
-    void set_background_colors(yli::config::SettingMaster* setting_master, const float red, const float green, const float blue, const float alpha);
+    void set_window_size(yli::config::SettingMaster* setting_master, const uint32_t window_width, const uint32_t window_height);
 }
 
 #endif

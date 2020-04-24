@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "app_framebuffer.hpp"
+#include "framebuffer_snippets.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
@@ -23,7 +23,7 @@
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 
-namespace app
+namespace yli::snippets
 {
     void set_framebuffer_size(yli::config::SettingMaster* setting_master, const uint32_t framebuffer_width, const uint32_t framebuffer_height)
     {

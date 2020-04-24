@@ -31,16 +31,16 @@
 #include "hirvi_console_callbacks.hpp"
 #include "code/ajokki/ajokki_helsinki_east_downtown_scene.hpp"
 #include "code/ajokki/ajokki_joensuu_center_west_scene.hpp"
-#include "code/app/app_window.hpp"
-#include "code/app/app_framebuffer.hpp"
-#include "code/app/app_background_colors.hpp"
-#include "code/app/app_keyboard_callbacks.hpp"
-#include "code/app/app_debug.hpp"
-#include "code/app/app_console.hpp"
-#include "code/app/app_movement.hpp"
-#include "code/app/app_location_and_orientation.hpp"
-#include "code/app/app_wireframe.hpp"
-#include "code/app/app_console_callbacks.hpp"
+#include "code/ylikuutio/snippets/window_snippets.hpp"
+#include "code/ylikuutio/snippets/framebuffer_snippets.hpp"
+#include "code/ylikuutio/snippets/background_color_snippets.hpp"
+#include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
+#include "code/ylikuutio/snippets/debug_snippets.hpp"
+#include "code/ylikuutio/snippets/console_snippets.hpp"
+#include "code/ylikuutio/snippets/movement_snippets.hpp"
+#include "code/ylikuutio/snippets/location_and_orientation_snippets.hpp"
+#include "code/ylikuutio/snippets/wireframe_snippets.hpp"
+#include "code/ylikuutio/snippets/console_callback_snippets.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
 #include "code/ylikuutio/callback/callback_parameter.hpp"
 #include "code/ylikuutio/callback/callback_object.hpp"
@@ -88,6 +88,7 @@
 // Include standard headers
 #include <cmath>         // abs, cos, NAN, remainder, sin, std::isnan, std::pow
 #include <cstddef>       // std::size_t
+#include <exception>     // try, catch, std::exception
 #include <iomanip>       // std::setfill, std::setprecision, std::setw
 #include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream>      // std::cout, std::cin, std::cerr
@@ -98,7 +99,7 @@
 #include <variant>       // std::variant
 #include <vector>        // std::vector
 
-int main(const int argc, const char* const argv[])
+int main(const int argc, const char* const argv[]) try
 {
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
 
@@ -293,7 +294,7 @@ int main(const int argc, const char* const argv[])
     my_universe->set_active_console(my_console);
 
     std::cout << "Setting up console ...\n";
-    app::set_console(my_universe->get_setting_master(), 15, 0, 0, 39);
+    yli::snippets::set_console(my_universe->get_setting_master(), 15, 0, 0, 39);
 
     // Create the `World`.
 
@@ -387,23 +388,23 @@ int main(const int argc, const char* const argv[])
 
     // Callback code for left Control release: release first turbo.
     yli::callback::CallbackEngine release_first_turbo_callback_engine(my_universe);
-    release_first_turbo_callback_engine.create_CallbackObject(&app::release_first_turbo);
+    release_first_turbo_callback_engine.create_CallbackObject(&yli::snippets::release_first_turbo);
 
     // Callback code for right Control release: release second turbo.
     yli::callback::CallbackEngine release_second_turbo_callback_engine(my_universe);
-    release_second_turbo_callback_engine.create_CallbackObject(&app::release_second_turbo);
+    release_second_turbo_callback_engine.create_CallbackObject(&yli::snippets::release_second_turbo);
 
     // Callback code for I release: enable_toggle invert mouse.
     yli::callback::CallbackEngine enable_toggle_invert_mouse_callback_engine(my_universe);
-    enable_toggle_invert_mouse_callback_engine.create_CallbackObject(&app::enable_toggle_invert_mouse);
+    enable_toggle_invert_mouse_callback_engine.create_CallbackObject(&yli::snippets::enable_toggle_invert_mouse);
 
     // Callback code for F release: enable_toggle flight mode.
     yli::callback::CallbackEngine enable_toggle_flight_mode_callback_engine(my_universe);
-    enable_toggle_flight_mode_callback_engine.create_CallbackObject(&app::enable_toggle_flight_mode);
+    enable_toggle_flight_mode_callback_engine.create_CallbackObject(&yli::snippets::enable_toggle_flight_mode);
 
     // Callback code for F1 release: enable toggle help mode.
     yli::callback::CallbackEngine enable_toggle_help_mode_callback_engine(my_universe);
-    enable_toggle_help_mode_callback_engine.create_CallbackObject(&app::enable_toggle_help_mode);
+    enable_toggle_help_mode_callback_engine.create_CallbackObject(&yli::snippets::enable_toggle_help_mode);
 
     /*********************************************************************
      *  Callback engines for action mode keypresses begin here.          *
@@ -417,51 +418,51 @@ int main(const int argc, const char* const argv[])
 
     // Callback code for esc: exit program.
     yli::callback::CallbackEngine exit_program_callback_engine;
-    exit_program_callback_engine.create_CallbackObject(&app::exit_program);
+    exit_program_callback_engine.create_CallbackObject(&yli::snippets::exit_program);
 
     // Callback code for left Control: first turbo.
     yli::callback::CallbackEngine first_turbo_callback_engine(my_universe);
-    first_turbo_callback_engine.create_CallbackObject(&app::first_turbo);
+    first_turbo_callback_engine.create_CallbackObject(&yli::snippets::first_turbo);
 
     // Callback code for right Control: second turbo.
     yli::callback::CallbackEngine second_turbo_callback_engine(my_universe);
-    second_turbo_callback_engine.create_CallbackObject(&app::second_turbo);
+    second_turbo_callback_engine.create_CallbackObject(&yli::snippets::second_turbo);
 
     // Callback code for key up: move forward.
     yli::callback::CallbackEngine move_forward_callback_engine(my_universe);
-    move_forward_callback_engine.create_CallbackObject(&app::move_forward);
+    move_forward_callback_engine.create_CallbackObject(&yli::snippets::move_forward);
 
     // Callback code for key down: move backward.
     yli::callback::CallbackEngine move_backward_callback_engine(my_universe);
-    move_backward_callback_engine.create_CallbackObject(&app::move_backward);
+    move_backward_callback_engine.create_CallbackObject(&yli::snippets::move_backward);
 
     // Callback code for key left: strafe left.
     yli::callback::CallbackEngine strafe_left_callback_engine(my_universe);
-    strafe_left_callback_engine.create_CallbackObject(&app::strafe_left);
+    strafe_left_callback_engine.create_CallbackObject(&yli::snippets::strafe_left);
 
     // Callback code for key right: strafe right.
     yli::callback::CallbackEngine strafe_right_callback_engine(my_universe);
-    strafe_right_callback_engine.create_CallbackObject(&app::strafe_right);
+    strafe_right_callback_engine.create_CallbackObject(&yli::snippets::strafe_right);
 
     // Callback code for space: ascent.
     yli::callback::CallbackEngine ascent_callback_engine(my_universe);
-    ascent_callback_engine.create_CallbackObject(&app::ascent);
+    ascent_callback_engine.create_CallbackObject(&yli::snippets::ascent);
 
     // Callback code for enter: descent.
     yli::callback::CallbackEngine descent_callback_engine(my_universe);
-    descent_callback_engine.create_CallbackObject(&app::descent);
+    descent_callback_engine.create_CallbackObject(&yli::snippets::descent);
 
     // Callback code for I: toggle invert mouse.
     yli::callback::CallbackEngine toggle_invert_mouse_callback_engine(my_universe);
-    toggle_invert_mouse_callback_engine.create_CallbackObject(&app::toggle_invert_mouse);
+    toggle_invert_mouse_callback_engine.create_CallbackObject(&yli::snippets::toggle_invert_mouse);
 
     // Callback code for F: toggle flight mode.
     yli::callback::CallbackEngine toggle_flight_mode_callback_engine(my_universe);
-    toggle_flight_mode_callback_engine.create_CallbackObject(&app::toggle_flight_mode);
+    toggle_flight_mode_callback_engine.create_CallbackObject(&yli::snippets::toggle_flight_mode);
 
     // Callback code for F1: toggle help mode.
     yli::callback::CallbackEngine toggle_help_mode_callback_engine(my_universe);
-    toggle_help_mode_callback_engine.create_CallbackObject(&app::toggle_help_mode);
+    toggle_help_mode_callback_engine.create_CallbackObject(&yli::snippets::toggle_help_mode);
 
     /*********************************************************************
      *  Callback engines for console keyreleases begin here.             *
@@ -703,16 +704,16 @@ int main(const int argc, const char* const argv[])
     my_console->add_command_callback("AnyStructEntity", &yli::ontology::Universe::create_AnyStructEntity);
 
     // Exit program callbacks.
-    my_console->add_command_callback("bye", &app::quit);
-    my_console->add_command_callback("chau", &app::quit);
-    my_console->add_command_callback("ciao", &app::quit);
-    my_console->add_command_callback("heippa", &app::quit);
-    my_console->add_command_callback("quit", &app::quit);
-    my_console->add_command_callback("sayonara", &app::quit);
+    my_console->add_command_callback("bye", &yli::snippets::quit);
+    my_console->add_command_callback("chau", &yli::snippets::quit);
+    my_console->add_command_callback("ciao", &yli::snippets::quit);
+    my_console->add_command_callback("heippa", &yli::snippets::quit);
+    my_console->add_command_callback("quit", &yli::snippets::quit);
+    my_console->add_command_callback("sayonara", &yli::snippets::quit);
 
     // Other callbacks.
     my_console->add_command_callback("eval", &yli::ontology::Universe::eval);
-    my_console->add_command_callback("help", &app::help);
+    my_console->add_command_callback("help", &yli::snippets::help);
     my_console->add_command_callback("version", &hirvi::version);
     my_console->add_command_callback("clear", &yli::ontology::Console::clear);
     my_console->add_command_callback("screenshot", &yli::ontology::Universe::screenshot);
@@ -798,19 +799,19 @@ int main(const int argc, const char* const argv[])
     yli::ontology::Text2D* frame_rate_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_Text2D(frame_rate_text_struct));
 
     std::cout << "Setting up window size ...\n";
-    app::set_window_size(my_universe->get_setting_master(), my_universe->get_window_width(), my_universe->get_window_height());
+    yli::snippets::set_window_size(my_universe->get_setting_master(), my_universe->get_window_width(), my_universe->get_window_height());
     std::cout << "Setting up framebuffer size ...\n";
-    app::set_framebuffer_size(my_universe->get_setting_master(), my_universe->get_framebuffer_width(), my_universe->get_framebuffer_height());
+    yli::snippets::set_framebuffer_size(my_universe->get_setting_master(), my_universe->get_framebuffer_width(), my_universe->get_framebuffer_height());
     std::cout << "Setting up background colors ...\n";
-    app::set_background_colors(my_universe->get_setting_master(), 0.0f, 0.0f, 1.0f, 0.0f);
+    yli::snippets::set_background_colors(my_universe->get_setting_master(), 0.0f, 0.0f, 1.0f, 0.0f);
     std::cout << "Setting up wireframe state ...\n";
-    app::set_wireframe(my_universe->get_setting_master(), false);
+    yli::snippets::set_wireframe(my_universe->get_setting_master(), false);
     std::cout << "Setting up movement ...\n";
-    app::set_movement(my_universe->get_setting_master(), my_universe->speed, my_universe->turbo_factor, my_universe->twin_turbo_factor, my_universe->mouse_speed);
+    yli::snippets::set_movement(my_universe->get_setting_master(), my_universe->speed, my_universe->turbo_factor, my_universe->twin_turbo_factor, my_universe->mouse_speed);
     std::cout << "Setting up location and orientation ...\n";
-    app::set_location_and_orientation(my_universe->get_setting_master(), -5682.32f, -1641.20f, 2376.45f, 100.0f, 100.0f, 100.0f);
+    yli::snippets::set_location_and_orientation(my_universe->get_setting_master(), -5682.32f, -1641.20f, 2376.45f, 100.0f, 100.0f, 100.0f);
     std::cout << "Setting up debug variables ...\n";
-    app::set_flight_mode(my_universe->get_setting_master(), true);
+    yli::snippets::set_flight_mode(my_universe->get_setting_master(), true);
 
     yli::sdl::flush_sdl_event_queue();
 
@@ -1125,4 +1126,8 @@ int main(const int argc, const char* const argv[])
     cleanup_callback_engine.execute(nullptr);
 
     return 0;
+}
+catch (const std::exception& exception)
+{
+    std::cerr << "ERROR: exception: " << exception.what() << "\n";
 }

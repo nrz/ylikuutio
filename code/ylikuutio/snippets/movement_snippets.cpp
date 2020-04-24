@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "app_movement.hpp"
+#include "movement_snippets.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
@@ -23,15 +23,12 @@
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
 
-namespace yli
+namespace yli::config
 {
-    namespace config
-    {
-        class SettingMaster;
-    }
+    class SettingMaster;
 }
 
-namespace app
+namespace yli::snippets
 {
     void set_movement(
             yli::config::SettingMaster* const setting_master,

@@ -121,97 +121,94 @@ parent_module_type_and_name = "yli::ontology::ParentModule* const parent_module"
 
 # namespace
 begin_namespace_lines = \
-"namespace yli\n"\
-"{\n"\
-"    namespace ontology\n"\
-"    {"
+"namespace yli::ontology\n"\
+"{"\
 
 end_namespace_lines = \
-"    }\n"\
 "}"
 
 entity_forward_declaration = \
-"        class Entity;"
+"    class Entity;"
 
 universe_forward_declaration = \
-"        class Universe;"
+"    class Universe;"
 
 parent_module_forward_declaration = \
-"        class ParentModule; // TODO: delete this line if `ChildModule` is not needed!"
+"    class ParentModule; // TODO: delete this line if `ChildModule` is not needed!"
 
 begin_class_definition = \
-"        class " + class_name + ": public " + namespace + "::" + parent_class_name + "\n"\
-"        {"
+"    class " + class_name + ": public " + namespace + "::" + parent_class_name + "\n"\
+"    {"
 
 public_line = \
-"            public:"
+"        public:"
 private_line = \
-"            private:"
+"        private:"
 
 end_class_definition = \
-"        };"
+"    };"
 
 class_constructor_lines = \
-"                " + class_name + "(\n"\
-"                        " + namespace + "::Universe* const universe,\n"\
-"                        " + const_struct_reference_variable_type + " " + struct_name + ",\n"\
-"                        " + parent_module_type_and_name + ") // TODO: other_parameters!\n"\
-"                    : " + parent_class_name + "(universe), // TODO: complete the initializer list!\n"\
-"                    " + child_module_variable_name + "(parent_module, this)  // TODO: delete this line if `ChildModule` is not needed!\n"\
-"                {\n"\
-"                    // constructor.\n"\
-"                    this->parent = " + struct_name + ".parent;\n"\
-"                }"
+"            " + class_name + "(\n"\
+"                    " + namespace + "::Universe* const universe,\n"\
+"                    " + const_struct_reference_variable_type + " " + struct_name + ",\n"\
+"                    " + parent_module_type_and_name + ") // TODO: other_parameters!\n"\
+"                : " + parent_class_name + "(universe), // TODO: complete the initializer list!\n"\
+"                " + child_module_variable_name + "(parent_module, this)  // TODO: delete this line if `ChildModule` is not needed!\n"\
+"            {\n"\
+"                // constructor.\n"\
+"                this->parent = " + struct_name + ".parent;\n"\
+"            }"
 
 delete_copy_constructor_line = \
-"                " + class_name + "(const " + class_name + "&) = delete;            // Delete copy constructor."
+"            " + class_name + "(const " + class_name + "&) = delete;            // Delete copy constructor."
 
 delete_copy_assignment_line = \
-"                " + class_name + " &operator=(const " + class_name + "&) = delete; // Delete copy assignment."
+"            " + class_name + " &operator=(const " + class_name + "&) = delete; // Delete copy assignment."
 
 destructor_declaration_lines = \
-"                // destructor.\n"\
-"                virtual ~" + class_name + "();"
+"            // destructor.\n"\
+"            virtual ~" + class_name + "();"
 
 get_parent_const_override_line = \
-"                yli::ontology::Entity* get_parent() const override;"
+"            yli::ontology::Entity* get_parent() const override;"
 
 get_number_of_children_const_override_line = \
-"                std::size_t get_number_of_children() const override;"
+"            std::size_t get_number_of_children() const override;"
 
 get_number_of_descendants_const_override_line = \
-"                std::size_t get_number_of_descendants() const override;"
+"            std::size_t get_number_of_descendants() const override;"
 
 child_module_lines = \
-"                " + namespace + "::ChildModule " + child_module_variable_name + "; // TODO: delete this line if `ChildModule` is not needed!"
+"            " + namespace + "::ChildModule " + child_module_variable_name + "; // TODO: delete this line if `ChildModule` is not needed!"
 
 # header file specific lines.
 destructor_definition_lines = \
-"        " + class_name + "::~" + class_name + "()\n"\
-"        {\n"\
-"            // destructor.\n"\
-"        }"
+"    " + class_name + "::~" + class_name + "()\n"\
+"    {\n"\
+"        // destructor.\n"\
+"    }"
 
 # struct file specific lines.
 begin_struct_definition = \
-"        struct " + struct_variable_type + "\n"\
-"        {"
+"    struct " + struct_variable_type + "\n"\
+"    {"
 
 end_struct_definition = \
-"        };"
+"    };"
 
 parent_class_forward_declaration = \
-"        class " + parent_class_name + ";"
+"    class " + parent_class_name + ";"
 
 struct_constructor_lines = \
-"            " + struct_variable_type + "()\n"\
-"                : parent(nullptr)\n"\
-"            {\n"\
-"                // constructor.\n"\
-"            }"
+"        " + struct_variable_type + "()\n"\
+"            : parent(nullptr)\n"\
+"        {\n"\
+"            // constructor.\n"\
+"        }"
 
 parent_pointer_lines = \
-"            " + fully_qualified_parent_class_name + "* parent;"
+"        " + fully_qualified_parent_class_name + "* parent;"
 
 with open(class_filename_hpp, 'w') as f:
     print(copyright_notice, file = f)

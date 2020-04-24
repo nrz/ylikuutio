@@ -15,34 +15,31 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __APP_KEYBOARD_CALLBACKS_HPP_INCLUDED
-#define __APP_KEYBOARD_CALLBACKS_HPP_INCLUDED
+#ifndef __KEYBOARD_CALLBACK_SNIPPETS_HPP_INCLUDED
+#define __KEYBOARD_CALLBACK_SNIPPETS_HPP_INCLUDED
 
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
 #include <vector> // std::vector
 
-namespace yli
+namespace yli::callback
 {
-    namespace callback
-    {
-        class CallbackEngine;
-        class CallbackObject;
-        class CallbackParameter;
-    }
-
-    namespace common
-    {
-        class AnyValue;
-    }
-
-    namespace ontology
-    {
-        class Universe;
-    }
+    class CallbackEngine;
+    class CallbackObject;
+    class CallbackParameter;
 }
 
-namespace app
+namespace yli::common
+{
+    class AnyValue;
+}
+
+namespace yli::ontology
+{
+    class Universe;
+}
+
+namespace yli::snippets
 {
     /*********************************************************************\
      *  Callback engines for action mode keyreleases begin here.         *

@@ -624,35 +624,14 @@ namespace yli
 
                 // Public callbacks.
 
-                static std::shared_ptr<yli::common::AnyValue> print_entities(
-                        yli::ontology::Console* const console,
-                        yli::ontology::Entity* const universe_entity,
-                        const std::vector<std::string>& command_parameters);
-
-                static std::shared_ptr<yli::common::AnyValue> print_parent(
-                        yli::ontology::Console* const console,
-                        yli::ontology::Entity* const universe_entity,
-                        const std::vector<std::string>& command_parameters);
-
-                static std::shared_ptr<yli::common::AnyValue> activate(
-                        yli::ontology::Console* const console,
-                        yli::ontology::Entity* const universe_entity,
-                        const std::vector<std::string>& command_parameters);
-
-                static std::shared_ptr<yli::common::AnyValue> delete_entity(
-                        yli::ontology::Console* const console,
-                        yli::ontology::Entity* const universe_entity,
-                        const std::vector<std::string>& command_parameters);
-
-                static std::shared_ptr<yli::common::AnyValue> info(
-                        yli::ontology::Console* const console,
-                        yli::ontology::Entity* const universe_entity,
-                        const std::vector<std::string>& command_parameters);
+                // Public `Entity` bind callbacks.
 
                 static std::shared_ptr<yli::common::AnyValue> bind(
                         yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
+
+                // Public `Entity` create callbacks.
 
                 static std::shared_ptr<yli::common::AnyValue> create_AnyValueEntity(
                         yli::ontology::Console* const console,
@@ -664,12 +643,47 @@ namespace yli
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::common::AnyValue> screenshot(
+                // Public `Entity` delete callbacks.
+
+                static std::shared_ptr<yli::common::AnyValue> delete_entity(
                         yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);
 
+                // Public `Entity` activate callbacks.
+
+                static std::shared_ptr<yli::common::AnyValue> activate(
+                        yli::ontology::Console* const console,
+                        yli::ontology::Entity* const universe_entity,
+                        const std::vector<std::string>& command_parameters);
+
+                // Public AngelScript-related callbacks.
+
                 static std::shared_ptr<yli::common::AnyValue> eval(
+                        yli::ontology::Console* const console,
+                        yli::ontology::Entity* const universe_entity,
+                        const std::vector<std::string>& command_parameters);
+
+                // Public data printing callbacks.
+
+                static std::shared_ptr<yli::common::AnyValue> info(
+                        yli::ontology::Console* const console,
+                        yli::ontology::Entity* const universe_entity,
+                        const std::vector<std::string>& command_parameters);
+
+                static std::shared_ptr<yli::common::AnyValue> print_entities(
+                        yli::ontology::Console* const console,
+                        yli::ontology::Entity* const universe_entity,
+                        const std::vector<std::string>& command_parameters);
+
+                static std::shared_ptr<yli::common::AnyValue> print_parent(
+                        yli::ontology::Console* const console,
+                        yli::ontology::Entity* const universe_entity,
+                        const std::vector<std::string>& command_parameters);
+
+                // Other public callbacks.
+
+                static std::shared_ptr<yli::common::AnyValue> screenshot(
                         yli::ontology::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         const std::vector<std::string>& command_parameters);

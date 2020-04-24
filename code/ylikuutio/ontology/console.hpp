@@ -35,11 +35,10 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-// `Console` works through keypress callbacks and keyrelease callbacks, and
-// `glfwSetCharModsCallback`. If the action of a key should not happen many
-// times in a very fast succession, some means to control the frequency is
-// needed. The easiest option is to use a `bool` variable like
-// `bool enable_action`.
+// `Console` works through keypress callbacks and keyrelease callbacks.
+// If the action of a key should not happen many times in a very fast
+// succession, some means to control the frequency is needed.
+// The easiest option is to use a `bool` variable like `bool enable_action`.
 //
 // In the keypress callback, the value of `enable_action` is tested, and
 // nothing is done if it's `false`.
@@ -49,14 +48,12 @@
 //
 // In the keyrelease callback `enable_action` is set to `true`.
 //
-// `glfwSetCharModsCallback` sets a separate callback for some special keys.
-// This is used for entering text into console (writing commands).
-// All other console-related functions are implemented through keypress
+// All console-related functions are implemented through keypress
 // callbacks and keyrelease callbacks.
 //
-// `Console` is created by `yli::ontology::Universe` constructor and
-// deleted by `Universe` destructor, but `Console` is not an `Entity`.
-// Thus there is no way to refer to the `Console` from the console input.
+// `Console` is an `Entity` and multiple `Console`s can be created,
+// each with its own commands. It is possible to change between the
+// `Console`s by activating another `Console`.
 
 namespace yli
 {
@@ -419,8 +416,6 @@ namespace yli
 
             private:
                 yli::ontology::Entity* get_parent() const override;
-
-                static void charmods_callback(SDL_Window* window, unsigned int codepoint, int mods);
 
                 // Callbacks end here.
 

@@ -44,6 +44,8 @@ Tasks which are necessary for the second stage:
 [ ] Implement chat client using the chosen network library.
 
 Tasks which are necessary for the third stage:
+[ ] Implement interpreter for strongly typed YliLisp scripting language that combines Scheme syntax and AngelScript data types.
+[ ] Implement compiler for YliLisp that compiles into AngelScript.
 [ ] Implement `yli::ontology::Multiverse` class.
 [ ] Implement YliServer.
 

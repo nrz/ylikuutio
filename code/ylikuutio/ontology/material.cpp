@@ -128,6 +128,25 @@ namespace yli
             this->child_of_shader_or_symbiosis.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_materials);
         }
 
+        void Material::bind_to_new_parent(yli::ontology::Entity* const new_parent)
+        {
+            // this method sets pointer to this `Material` to `nullptr`, sets `parent` according to the input,
+            // and requests a new `childID` from the new `Shader`.
+            //
+            // requirements:
+            // `new_parent` must not be `nullptr`.
+
+            yli::ontology::Shader* const shader = dynamic_cast<yli::ontology::Shader*>(new_parent);
+
+            if (shader != nullptr)
+            {
+                this->bind_to_new_parent(shader);
+                return;
+            }
+
+            std::cerr << "ERROR: `Material::bind_to_new_parent`: `new_parent` is not `yli::ontology::Shader*`!\n";
+        }
+
         void Material::set_terrain_species(yli::ontology::Species* const terrain_species)
         {
             // Requirements:

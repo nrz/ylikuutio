@@ -15,22 +15,34 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "app_wireframe.hpp"
-#include "code/ylikuutio/config/setting_master.hpp"
-#include "code/ylikuutio/config/setting_struct.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#ifndef __TULEVAISUUS_CONSOLE_CALLBACKS_HPP_INCLUDED
+#define __TULEVAISUUS_CONSOLE_CALLBACKS_HPP_INCLUDED
 
 // Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
+#include <memory>   // std::make_shared, std::shared_ptr
+#include <string>   // std::string
+#include <vector>   // std::vector
 
-namespace app
+namespace yli
 {
-    void set_wireframe(yli::config::SettingMaster* setting_master, const bool use_wireframe)
+    namespace common
     {
-        yli::config::SettingStruct wireframe_setting_struct(std::make_shared<yli::common::AnyValue>(use_wireframe));
-        wireframe_setting_struct.name = "wireframe";
-        wireframe_setting_struct.activate_callback = &yli::config::SettingMaster::activate_wireframe;
-        wireframe_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        setting_master->create_Setting(wireframe_setting_struct);
+        class AnyValue;
+    }
+
+    namespace ontology
+    {
+        class Entity;
+        class Console;
     }
 }
+
+namespace tulevaisuus
+{
+    std::shared_ptr<yli::common::AnyValue> version(
+            yli::ontology::Console* const console,
+            yli::ontology::Entity* const universe_entity,
+            const std::vector<std::string>& command_parameters);
+}
+
+#endif

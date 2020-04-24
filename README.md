@@ -133,6 +133,17 @@ even through moose are well-known pasifists.
 "hirvi" means a moose/elk in Finnish.
 Hirvi is a work in progress.
 
+Tulevaisuus ("the future" in Finnish) is
+a turn-based 3D tactical combat game with programmable robots.
+The robots controlled by an evil AI have taken over the world. Almost.
+The last hope of the human species is the Lisp Resistance Force.
+You, as the lead Lisp hacker of the Lisp Resistance Force,
+are responsible for the programming of the robots of
+the Lisp Resistance Force. Your task is write Lisp
+to control the robots reowned by humans.
+And save the human species, too.
+Tulevaisuus is a work in progress.
+
 Ajokki is sandbox demo program to check out some properties of
 Ylikuutio 3D engine. "Ajokki" is a working title based on a
 Finnish bus body manufacturer.

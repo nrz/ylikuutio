@@ -15,39 +15,25 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __APP_CONSOLE_CALLBACKS_HPP_INCLUDED
-#define __APP_CONSOLE_CALLBACKS_HPP_INCLUDED
+#ifndef __CONSOLE_SNIPPETS_HPP_INCLUDED
+#define __CONSOLE_SNIPPETS_HPP_INCLUDED
 
 // Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
-#include <string>   // std::string
-#include <vector>   // std::vector
+#include <stdint.h> // uint32_t etc.
 
-namespace yli
+namespace yli::config
 {
-    namespace common
-    {
-        class AnyValue;
-    }
-
-    namespace ontology
-    {
-        class Entity;
-        class Console;
-    }
+    class SettingMaster;
 }
 
-namespace app
+namespace yli::snippets
 {
-    std::shared_ptr<yli::common::AnyValue> quit(
-            yli::ontology::Console* const,
-            yli::ontology::Entity* const,
-            const std::vector<std::string>& command_parameters);
-
-    std::shared_ptr<yli::common::AnyValue> help(
-            yli::ontology::Console* const,
-            yli::ontology::Entity* const,
-            const std::vector<std::string>& command_parameters);
+    void set_console(
+            yli::config::SettingMaster* const setting_master,
+            const uint32_t console_top_y,
+            const uint32_t console_bottom_y,
+            const uint32_t console_left_x,
+            const uint32_t console_right_x);
 }
 
 #endif

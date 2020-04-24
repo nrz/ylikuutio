@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "app_background_colors.hpp"
+#include "background_color_snippets.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
@@ -23,7 +23,7 @@
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
 
-namespace app
+namespace yli::snippets
 {
     void set_background_colors(yli::config::SettingMaster* setting_master, const float red, const float green, const float blue, const float alpha)
     {

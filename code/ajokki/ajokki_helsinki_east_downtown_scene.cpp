@@ -20,8 +20,8 @@
 #endif
 
 #include "ajokki_helsinki_east_downtown_scene.hpp"
-#include "code/app/app_brain.hpp"
-#include "code/app/app_keyboard_callbacks.hpp"
+#include "code/ylikuutio/snippets/brain_snippets.hpp"
+#include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/shader.hpp"
@@ -90,49 +90,49 @@ namespace ajokki
 
         // Create the `CallbackEngine`s for the `Brain`s.
         std::shared_ptr<yli::callback::CallbackEngine> rest_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        rest_callback_engine->create_CallbackObject(&app::rest);
+        rest_callback_engine->create_CallbackObject(&yli::snippets::rest);
 
         std::shared_ptr<yli::callback::CallbackEngine> go_east_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        go_east_callback_engine->create_CallbackObject(&app::go_east);
+        go_east_callback_engine->create_CallbackObject(&yli::snippets::go_east);
 
         std::shared_ptr<yli::callback::CallbackEngine> go_west_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        go_west_callback_engine->create_CallbackObject(&app::go_west);
+        go_west_callback_engine->create_CallbackObject(&yli::snippets::go_west);
 
         std::shared_ptr<yli::callback::CallbackEngine> go_north_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        go_north_callback_engine->create_CallbackObject(&app::go_north);
+        go_north_callback_engine->create_CallbackObject(&yli::snippets::go_north);
 
         std::shared_ptr<yli::callback::CallbackEngine> go_south_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        go_south_callback_engine->create_CallbackObject(&app::go_south);
+        go_south_callback_engine->create_CallbackObject(&yli::snippets::go_south);
 
         std::shared_ptr<yli::callback::CallbackEngine> orient_to_east_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        orient_to_east_callback_engine->create_CallbackObject(&app::orient_to_east);
+        orient_to_east_callback_engine->create_CallbackObject(&yli::snippets::orient_to_east);
 
         std::shared_ptr<yli::callback::CallbackEngine> orient_to_west_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        orient_to_west_callback_engine->create_CallbackObject(&app::orient_to_west);
+        orient_to_west_callback_engine->create_CallbackObject(&yli::snippets::orient_to_west);
 
         std::shared_ptr<yli::callback::CallbackEngine> orient_to_north_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        orient_to_north_callback_engine->create_CallbackObject(&app::orient_to_north);
+        orient_to_north_callback_engine->create_CallbackObject(&yli::snippets::orient_to_north);
 
         std::shared_ptr<yli::callback::CallbackEngine> orient_to_south_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        orient_to_south_callback_engine->create_CallbackObject(&app::orient_to_south);
+        orient_to_south_callback_engine->create_CallbackObject(&yli::snippets::orient_to_south);
 
         std::shared_ptr<yli::callback::CallbackEngine> orient_and_go_east_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        orient_and_go_east_callback_engine->create_CallbackObject(&app::orient_and_go_east);
+        orient_and_go_east_callback_engine->create_CallbackObject(&yli::snippets::orient_and_go_east);
 
         std::shared_ptr<yli::callback::CallbackEngine> orient_and_go_west_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        orient_and_go_west_callback_engine->create_CallbackObject(&app::orient_and_go_west);
+        orient_and_go_west_callback_engine->create_CallbackObject(&yli::snippets::orient_and_go_west);
 
         std::shared_ptr<yli::callback::CallbackEngine> orient_and_go_north_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        orient_and_go_north_callback_engine->create_CallbackObject(&app::orient_and_go_north);
+        orient_and_go_north_callback_engine->create_CallbackObject(&yli::snippets::orient_and_go_north);
 
         std::shared_ptr<yli::callback::CallbackEngine> orient_and_go_south_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        orient_and_go_south_callback_engine->create_CallbackObject(&app::orient_and_go_south);
+        orient_and_go_south_callback_engine->create_CallbackObject(&yli::snippets::orient_and_go_south);
 
         std::shared_ptr<yli::callback::CallbackEngine> rotate_clockwise_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        rotate_clockwise_callback_engine->create_CallbackObject(&app::rotate_clockwise);
+        rotate_clockwise_callback_engine->create_CallbackObject(&yli::snippets::rotate_clockwise);
 
         std::shared_ptr<yli::callback::CallbackEngine> rotate_counterclockwise_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        rotate_counterclockwise_callback_engine->create_CallbackObject(&app::rotate_counterclockwise);
+        rotate_counterclockwise_callback_engine->create_CallbackObject(&yli::snippets::rotate_counterclockwise);
 
         // Create the `Brain`s.
 
@@ -409,6 +409,25 @@ namespace ajokki
         }
 
         helsinki_east_downtown_shader->set_name("helsinki_east_downtown_shader");
+
+        // Create the grayscale shader, store it in `helsinki_east_downtown_grayscale_shader`.
+        yli::ontology::ShaderStruct helsinki_east_downtown_grayscale_shader_struct;
+        helsinki_east_downtown_grayscale_shader_struct.parent = helsinki_east_downtown_scene;
+        helsinki_east_downtown_grayscale_shader_struct.vertex_shader = "standard_shading.vert";
+        helsinki_east_downtown_grayscale_shader_struct.fragment_shader = "grayscale_standard_shading.frag";
+
+        std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_grayscale_shader_entity ...\n";
+        yli::ontology::Entity* const helsinki_east_downtown_grayscale_shader_entity = entity_factory->create_Shader(helsinki_east_downtown_grayscale_shader_struct);
+        std::cout << "Creating yli::ontology::Shader* helsinki_east_downtown_grayscale_shader ...\n";
+        yli::ontology::Shader* const helsinki_east_downtown_grayscale_shader = dynamic_cast<yli::ontology::Shader*>(helsinki_east_downtown_grayscale_shader_entity);
+
+        if (helsinki_east_downtown_grayscale_shader == nullptr)
+        {
+            std::cerr << "Failed to create Shader.\n";
+            return nullptr;
+        }
+
+        helsinki_east_downtown_grayscale_shader->set_name("helsinki_east_downtown_grayscale_shader");
 
         // Create the material, store it in `helsinki_east_downtown_grass_material`.
         yli::ontology::MaterialStruct helsinki_east_downtown_grass_material_struct;
