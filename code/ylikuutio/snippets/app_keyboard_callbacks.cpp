@@ -558,7 +558,7 @@ namespace yli::snippets
         }
 
         const std::string* const new_material_string_pointer =
-            (any_value_material_string->type != yli::common::Datatype::STD_STRING_POINTER ?
+            (any_value_material_string->type == yli::common::Datatype::STD_STRING_POINTER ?
              std::get<std::string*>(any_value_material_string->data) :
              std::get<const std::string*>(any_value_material_string->data));
 
