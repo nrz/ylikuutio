@@ -410,6 +410,25 @@ namespace ajokki
 
         helsinki_east_downtown_shader->set_name("helsinki_east_downtown_shader");
 
+        // Create the grayscale shader, store it in `helsinki_east_downtown_grayscale_shader`.
+        yli::ontology::ShaderStruct helsinki_east_downtown_grayscale_shader_struct;
+        helsinki_east_downtown_grayscale_shader_struct.parent = helsinki_east_downtown_scene;
+        helsinki_east_downtown_grayscale_shader_struct.vertex_shader = "standard_shading.vert";
+        helsinki_east_downtown_grayscale_shader_struct.fragment_shader = "grayscale_standard_shading.frag";
+
+        std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_grayscale_shader_entity ...\n";
+        yli::ontology::Entity* const helsinki_east_downtown_grayscale_shader_entity = entity_factory->create_Shader(helsinki_east_downtown_grayscale_shader_struct);
+        std::cout << "Creating yli::ontology::Shader* helsinki_east_downtown_grayscale_shader ...\n";
+        yli::ontology::Shader* const helsinki_east_downtown_grayscale_shader = dynamic_cast<yli::ontology::Shader*>(helsinki_east_downtown_grayscale_shader_entity);
+
+        if (helsinki_east_downtown_grayscale_shader == nullptr)
+        {
+            std::cerr << "Failed to create Shader.\n";
+            return nullptr;
+        }
+
+        helsinki_east_downtown_grayscale_shader->set_name("helsinki_east_downtown_grayscale_shader");
+
         // Create the material, store it in `helsinki_east_downtown_grass_material`.
         yli::ontology::MaterialStruct helsinki_east_downtown_grass_material_struct;
         helsinki_east_downtown_grass_material_struct.shader = helsinki_east_downtown_shader;
