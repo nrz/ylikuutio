@@ -31,7 +31,7 @@
 // `yli::ontology::Brain` is a general purpose AI and controller class for `Movable`s.
 // Each `Brain` instance may do some actions for the `Movable`s bound to the `Brain`.
 // The actions the defined in the callback, referenced using `this->callback_engine`.
-// Currently there are some example callbacks for `Brain` in `app/app_brain.hpp`.
+// There are some callback snippets for `Brain` in `code/ylikuutio/brain_snippets.hpp`.
 // In the future, some of the callbacks will process AngelScript, with an API offered
 // to the AngelScript scripts. The API still needs to be defined.
 //
