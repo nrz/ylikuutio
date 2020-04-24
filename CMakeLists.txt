@@ -769,6 +769,45 @@ add_executable(hirvi
     )
 target_link_libraries(hirvi ylikuutio ${ALL_LIBS} pthread)
 
+# Tulevaisuus
+add_executable(tulevaisuus
+    # tulevaisuus, in alphabetical order
+    code/tulevaisuus/tulevaisuus.cpp
+    code/tulevaisuus/tulevaisuus_console_callbacks.cpp
+    code/tulevaisuus/tulevaisuus_console_callbacks.hpp
+
+    # ajokki, in alphabetical order.
+    code/ajokki/ajokki_helsinki_east_downtown_scene.cpp
+    code/ajokki/ajokki_helsinki_east_downtown_scene.hpp
+    code/ajokki/ajokki_joensuu_center_west_scene.cpp
+    code/ajokki/ajokki_joensuu_center_west_scene.hpp
+
+    # snippets, in alphabetical order
+    code/ylikuutio/snippets/background_color_snippets.cpp
+    code/ylikuutio/snippets/background_color_snippets.hpp
+    code/ylikuutio/snippets/brain_snippets.cpp
+    code/ylikuutio/snippets/brain_snippets.hpp
+    code/ylikuutio/snippets/console_snippets.cpp
+    code/ylikuutio/snippets/console_snippets.hpp
+    code/ylikuutio/snippets/console_callback_snippets.cpp
+    code/ylikuutio/snippets/console_callback_snippets.hpp
+    code/ylikuutio/snippets/debug_snippets.cpp
+    code/ylikuutio/snippets/debug_snippets.hpp
+    code/ylikuutio/snippets/framebuffer_snippets.cpp
+    code/ylikuutio/snippets/framebuffer_snippets.hpp
+    code/ylikuutio/snippets/keyboard_callback_snippets.cpp
+    code/ylikuutio/snippets/keyboard_callback_snippets.hpp
+    code/ylikuutio/snippets/location_and_orientation_snippets.cpp
+    code/ylikuutio/snippets/location_and_orientation_snippets.hpp
+    code/ylikuutio/snippets/movement_snippets.cpp
+    code/ylikuutio/snippets/movement_snippets.hpp
+    code/ylikuutio/snippets/window_snippets.cpp
+    code/ylikuutio/snippets/window_snippets.hpp
+    code/ylikuutio/snippets/wireframe_snippets.cpp
+    code/ylikuutio/snippets/wireframe_snippets.hpp
+    )
+target_link_libraries(tulevaisuus ylikuutio ${ALL_LIBS} pthread)
+
 # YliEdit
 add_executable(yli_edit
     # yli_edit, in alphabetical order
