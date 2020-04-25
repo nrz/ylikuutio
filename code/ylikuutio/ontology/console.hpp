@@ -20,6 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
+#include "parent_module.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
 
 #include "SDL.h"
@@ -83,7 +84,6 @@ namespace yli
     namespace ontology
     {
         class Universe;
-        class ParentModule;
 
         class Console: public yli::ontology::Entity
         {
@@ -91,7 +91,8 @@ namespace yli
                 // constructor.
                 Console(yli::ontology::Universe* const universe, yli::ontology::ParentModule* const parent_module)
                     : Entity(universe),
-                    child_of_universe(parent_module, this)
+                    child_of_universe(parent_module, this),
+                    parent_of_console_commands(this)
                 {
                     // constructor.
                     this->should_be_rendered = true;
@@ -413,6 +414,7 @@ namespace yli
                 bool should_be_rendered;
 
                 yli::ontology::ChildModule child_of_universe;
+                yli::ontology::ParentModule parent_of_console_commands;
 
             private:
                 yli::ontology::Entity* get_parent() const override;
