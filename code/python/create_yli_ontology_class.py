@@ -40,12 +40,15 @@ if n_command_line_args <= 2:
     sys.exit()
 
 x = 0
+inherited_class_name = "Entity"
 
 for arg in sys.argv:
     if x == 1:
-        class_name = arg
+        class_name = arg           # 1st argument: name of the new class.
     elif x == 2:
-        parent_class_name = arg
+        parent_class_name = arg    # 2nd argument: name of its compositional parent class (part-of relation).
+    elif x == 3:
+        inherited_class_name = arg # 3rd argument (optional): inherited class. If not given, then `Entity is inherited`.
     x += 1
 
 copyright_notice = \
@@ -69,10 +72,12 @@ copyright_notice = \
 namespace = "yli::ontology"
 fully_qualified_class_name = namespace + "::" + class_name
 fully_qualified_parent_class_name = namespace + "::" + parent_class_name
+fully_qualified_inherited_class_name = namespace + "::" + inherited_class_name
 
 # snake_case lowercase names.
 snake_case_class_name = re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).lower()
 snake_case_parent_class_name = re.sub(r'(?<!^)(?=[A-Z])', '_', parent_class_name).lower()
+snake_case_inherited_class_name = re.sub(r'(?<!^)(?=[A-Z])', '_', inherited_class_name).lower()
 
 # include guard generation.
 # include guard macro names follow Ylikuutio coding guidelines.
@@ -93,10 +98,10 @@ class_include_line = "#include \"" + class_filename_hpp + "\""
 # struct filename.
 struct_filename = snake_case_class_name + "_struct.hpp"
 
-# parent class filename.
-# parent class needs to be #include'd always because it is inherited.
-parent_class_hpp = snake_case_parent_class_name + ".hpp"
-parent_class_include_line = "#include \"" + parent_class_hpp + "\""
+# inherited class filename.
+# inherited class needs to be #include'd always because it is inherited.
+inherited_class_hpp = snake_case_inherited_class_name + ".hpp"
+inherited_class_include_line = "#include \"" + inherited_class_hpp + "\""
 
 # include line for `yli::ontology::ChildModule`.
 child_module_include_line = "#include \"child_module.hpp\" // TODO: delete this line if `ChildModule` is not needed!"
@@ -137,13 +142,16 @@ parent_module_forward_declaration = \
 "    class ParentModule; // TODO: delete this line if `ChildModule` is not needed!"
 
 begin_class_definition = \
-"    class " + class_name + ": public " + namespace + "::" + parent_class_name + "\n"\
+"    class " + class_name + ": public " + fully_qualified_inherited_class_name + "\n"\
 "    {"
 
 public_line = \
 "        public:"
 private_line = \
 "        private:"
+
+parent_pointer_line_in_header = \
+"            " + fully_qualified_parent_class_name + "* parent;"
 
 end_class_definition = \
 "    };"
@@ -153,8 +161,8 @@ class_constructor_lines = \
 "                    " + namespace + "::Universe* const universe,\n"\
 "                    " + const_struct_reference_variable_type + " " + struct_name + ",\n"\
 "                    " + parent_module_type_and_name + ") // TODO: other_parameters!\n"\
-"                : " + parent_class_name + "(universe), // TODO: complete the initializer list!\n"\
-"                " + child_module_variable_name + "(parent_module, this)  // TODO: delete this line if `ChildModule` is not needed!\n"\
+"                : " + inherited_class_name + "(universe), // TODO: complete the initializer list!\n"\
+"                " + child_module_variable_name + "(parent_module, this) // TODO: delete this line if `ChildModule` is not needed!\n"\
 "            {\n"\
 "                // constructor.\n"\
 "                this->parent = " + struct_name + ".parent;\n"\
@@ -216,14 +224,15 @@ with open(class_filename_hpp, 'w') as f:
     print(class_ifndef_line, file = f)
     print(class_define_line, file = f)
     print(file = f)
-    print(parent_class_include_line, file = f)
+    print(inherited_class_include_line, file = f)
     print(child_module_include_line, file = f)
     print(struct_include_line, file = f)
     print(file = f)
     print(standard_headers_include_lines, file = f)
     print(file = f)
     print(begin_namespace_lines, file = f)
-    print(entity_forward_declaration, file = f)
+    if inherited_class_name != "Entity":
+        print(entity_forward_declaration, file = f)
     print(universe_forward_declaration, file = f)
     print(parent_module_forward_declaration, file = f)
     print(file = f)
@@ -243,6 +252,7 @@ with open(class_filename_hpp, 'w') as f:
     print(child_module_lines, file = f)
     print(file = f)
     print(private_line, file = f)
+    print(parent_pointer_line_in_header, file = f)
     print(end_class_definition, file = f)
     print(end_namespace_lines, file = f)
     print(file = f)
