@@ -56,10 +56,17 @@ namespace yli
         class Species;
         class Object;
         class Symbiosis;
+        class SymbiontMaterial;
+        class SymbiontSpecies;
+        class Holobiont;
+        class Biont;
+        class Font2D;
+        class Text2D;
         class VectorFont;
         class Glyph;
         class Text3D;
         class Console;
+        class ComputeTask;
     }
 
     namespace common
