@@ -77,11 +77,30 @@ General
 
 Naming
 * Use CamelCase for class names: `class MyClass;`.
-* Use underscores in variable names: `std::string my_string`.
+* Parts of class names separated by uppercase characters should reflect
+  a functionality or a subsystem. Therefore, `ShapeshifterTransformation`, not
+  `ShapeShifterTransformation`, because `ShapeshifterTransformation` is not
+  related to any general 'shifting' functionality or subsystem, but it is
+  related to the 'shapeshifting' functionality.
+* An exception the above rule are suffixes that mark the number of dimensions
+  involved such as  `2D`, `3D` and `4D`. These suffixes may appear
+  in the end of the class name, such as `Text2D` and `Text3D`.
+* Use snake_case for variable names: `std::string my_string`.
+* Use 2-level nested namespaces for Ylikuutio code, such as `yli::ontology`.
+* All Ylikuutio code should be under the namespaces under `yli` namespace.
+* Prefer single words in namespaces names, but use snake_case
+  when multiple words are needed.
+* Use snake_case for namespace names: `std::string my_string`.
 * Write acronyms properly with either upper or lowercase: `class AI;`, `yli::ontology::AI* ai`.
-* Use underscores and lowercase in function names, except write
-  class names as they are (`create_Holobiont`, `create_Setting`),
-  and write file formats using uppercase (`load_BMP_file`).
+* Use lowercase_snake_case in all function names.
+* Class names in function names should be in lowercase_snake_case as well,
+  e.g. `create_holobiont`, `create_setting`.
+* Acronyms, file formats, etc. in function names should be
+  in lowercase_snake_case as well, e.g. `load_bmp_file`.
+* Use snake_case also for variable names with dimensionality suffixes,
+  e.g. `my_font_2d`.
+* Separate numbers in variable names with an underscore, e.g.
+  e.g. `entity_1` and `entity_1_name`.
 * Test source code files shall be named `test_foo.cpp`, where `foo.cpp`
   (or `foo.hpp` for templates) is the filename of the source code file to be tested.
 * When the test or tests are not specific to any particular source code file,

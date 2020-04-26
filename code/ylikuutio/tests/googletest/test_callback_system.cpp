@@ -71,14 +71,14 @@ std::shared_ptr<yli::common::AnyValue> square(
     }
     else if (any_value->type == yli::common::Datatype::FLOAT)
     {
-        const float factor = std::get<uint32_t>(any_value->data);
+        const float factor = std::get<float>(any_value->data);
         const float squared = factor * factor;
         std::cout << "Square of (float) " << factor << " is " << squared << ".\n";
         return std::make_shared<yli::common::AnyValue>(squared);
     }
-    else if (any_value->type == yli::common::Datatype::FLOAT)
+    else if (any_value->type == yli::common::Datatype::DOUBLE)
     {
-        const double factor = std::get<uint32_t>(any_value->data);
+        const double factor = std::get<double>(any_value->data);
         const double squared = factor * factor;
         std::cout << "Square of (double) " << factor << " is " << squared << ".\n";
         return std::make_shared<yli::common::AnyValue>(squared);
@@ -123,14 +123,14 @@ std::shared_ptr<yli::common::AnyValue> square_last(
     }
     else if (return_value_any_value->type == yli::common::Datatype::FLOAT)
     {
-        const float factor = std::get<uint32_t>(return_value_any_value->data);
+        const float factor = std::get<float>(return_value_any_value->data);
         const float squared = factor * factor;
         std::cout << "Square of (float) " << factor << " is " << squared << ".\n";
         return std::make_shared<yli::common::AnyValue>(squared);
     }
-    else if (return_value_any_value->type == yli::common::Datatype::FLOAT)
+    else if (return_value_any_value->type == yli::common::Datatype::DOUBLE)
     {
-        const double factor = std::get<uint32_t>(return_value_any_value->data);
+        const double factor = std::get<double>(return_value_any_value->data);
         const double squared = factor * factor;
         std::cout << "Square of (double) " << factor << " is " << squared << ".\n";
         return std::make_shared<yli::common::AnyValue>(squared);

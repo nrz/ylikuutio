@@ -16,14 +16,14 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "console.hpp"
-#include "code/ylikuutio/console/console_command_callback.hpp"
-#include "font2D.hpp"
 #include "universe.hpp"
+#include "font2D.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
+#include "code/ylikuutio/console/console_command_callback.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
-#include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
+#include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 #include "SDL.h"
 
