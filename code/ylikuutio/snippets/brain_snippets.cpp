@@ -20,7 +20,6 @@
 #endif
 
 #include "brain_snippets.hpp"
-#include "code/ylikuutio/common/datatype.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"
@@ -68,7 +67,7 @@ namespace yli::snippets
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
             std::shared_ptr<yli::common::AnyValue> any_value)
     {
-        if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
+        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::go_east`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
@@ -92,7 +91,7 @@ namespace yli::snippets
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
             std::shared_ptr<yli::common::AnyValue> any_value)
     {
-        if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
+        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::go_west`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
@@ -116,7 +115,7 @@ namespace yli::snippets
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
             std::shared_ptr<yli::common::AnyValue> any_value)
     {
-        if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
+        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::go_north`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
@@ -140,7 +139,7 @@ namespace yli::snippets
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
             std::shared_ptr<yli::common::AnyValue> any_value)
     {
-        if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
+        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::go_south`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
@@ -164,7 +163,7 @@ namespace yli::snippets
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
             std::shared_ptr<yli::common::AnyValue> any_value)
     {
-        if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
+        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::orient_to_east`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
@@ -188,7 +187,7 @@ namespace yli::snippets
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
             std::shared_ptr<yli::common::AnyValue> any_value)
     {
-        if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
+        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::orient_to_west`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
@@ -212,7 +211,7 @@ namespace yli::snippets
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
             std::shared_ptr<yli::common::AnyValue> any_value)
     {
-        if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
+        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::orient_to_north`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
@@ -236,7 +235,7 @@ namespace yli::snippets
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
             std::shared_ptr<yli::common::AnyValue> any_value)
     {
-        if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
+        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::orient_to_south`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
@@ -260,7 +259,7 @@ namespace yli::snippets
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
             std::shared_ptr<yli::common::AnyValue> any_value)
     {
-        if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
+        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::orient_and_go_east`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
@@ -285,7 +284,7 @@ namespace yli::snippets
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
             std::shared_ptr<yli::common::AnyValue> any_value)
     {
-        if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
+        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::orient_and_go_west`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
@@ -310,7 +309,7 @@ namespace yli::snippets
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
             std::shared_ptr<yli::common::AnyValue> any_value)
     {
-        if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
+        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::orient_and_go_north`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
@@ -335,7 +334,7 @@ namespace yli::snippets
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
             std::shared_ptr<yli::common::AnyValue> any_value)
     {
-        if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
+        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::orient_and_go_south`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
@@ -360,7 +359,7 @@ namespace yli::snippets
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
             std::shared_ptr<yli::common::AnyValue> any_value)
     {
-        if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
+        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::rotate_clockwise`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
@@ -384,7 +383,7 @@ namespace yli::snippets
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
             std::shared_ptr<yli::common::AnyValue> any_value)
     {
-        if (any_value->type != yli::common::Datatype::MOVABLE_POINTER)
+        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::rotate_counterclockwise`: `any_value->type` is not `yli::common::Datatype::MOVABLE_POINTER`.\n";
             return nullptr;
