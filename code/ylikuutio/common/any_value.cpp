@@ -274,269 +274,313 @@ namespace yli
             std::stringstream any_value_stringstream;
             any_value_stringstream.precision(6); // 6 decimals in floating point output.
 
-            switch (this->type)
+            if (std::holds_alternative<bool>(this->data))
             {
-                case (yli::common::Datatype::UNKNOWN):
-                    any_value_stringstream << "unknown";
-                    break;
-                case (yli::common::Datatype::BOOL):
-                    any_value_stringstream << (std::get<bool>(this->data) ? "true" : "false");
-                    break;
-                case (yli::common::Datatype::CHAR):
-                    any_value_stringstream << std::get<char>(this->data);
-                    break;
-                case (yli::common::Datatype::FLOAT):
-                    any_value_stringstream << std::fixed << std::get<float>(this->data);
-                    break;
-                case (yli::common::Datatype::DOUBLE):
-                    any_value_stringstream << std::fixed << std::get<double>(this->data);
-                    break;
-                case (yli::common::Datatype::INT32_T):
-                    // in Linux `int` is 32 bits, `long` is 64 bits, `long long` is also 64 bits.
-                    // in Windows `int` is 32 bits, `long` is also 32 bits, `long long` is 64 bits.
-                    any_value_stringstream << std::get<int32_t>(this->data);
-                    break;
-                case (yli::common::Datatype::UINT32_T):
-                    // in Linux `int` is 32 bits, `long` is 64 bits, `long long` is also 64 bits.
-                    // in Windows `int` is 32 bits, `long` is also 32 bits, `long long` is 64 bits.
-                    any_value_stringstream << std::get<uint32_t>(this->data);
-                    break;
-                case (yli::common::Datatype::BOOL_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<bool*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::CHAR_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<char*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::FLOAT_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<float*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::DOUBLE_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<double*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::INT32_T_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<int32_t*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::UINT32_T_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<uint32_t*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::ENTITY_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Entity*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::MOVABLE_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Movable*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::CONST_MOVABLE_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<const yli::ontology::Movable*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::UNIVERSE_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Universe*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::WORLD_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::World*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::SCENE_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Scene*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::SHADER_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Shader*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::MATERIAL_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Material*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::SPECIES_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Species*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::OBJECT_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Object*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::SYMBIOSIS_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Symbiosis*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::SYMBIONTMATERIAL_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::SymbiontMaterial*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::SYMBIONTSPECIES_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::SymbiontSpecies*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::HOLOBIONT_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Holobiont*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::BIONT_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Biont*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::FONT2D_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Font2D*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::TEXT2D_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Text2D*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::VECTORFONT_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::VectorFont*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::GLYPH_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Glyph*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::TEXT3D_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Text3D*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::CONSOLE_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Console*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::COMPUTETASK_POINTER):
-                    any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::ComputeTask*>(this->data) << std::dec;
-                    break;
-                case (yli::common::Datatype::ANY_VALUE_SHARED_PTR):
-                    if (std::get<std::shared_ptr<yli::common::AnyValue>>(this->data) == nullptr)
-                    {
-                        any_value_stringstream << "nullptr";
-                    }
-                    else
-                    {
-                        any_value_stringstream << std::hex << std::get<std::shared_ptr<yli::common::AnyValue>>(this->data).get() << std::dec;
-                    }
-                    break;
-                case (yli::common::Datatype::ANY_STRUCT_SHARED_PTR):
-                    if (std::get<std::shared_ptr<yli::common::AnyStruct>>(this->data) == nullptr)
-                    {
-                        any_value_stringstream << "nullptr";
-                    }
-                    else
-                    {
-                        any_value_stringstream << std::hex << std::get<std::shared_ptr<yli::common::AnyStruct>>(this->data).get() << std::dec;
-                    }
-                    break;
-                case (yli::common::Datatype::SPHERICAL_COORDINATES_STRUCT_POINTER):
-                    if (std::get<yli::common::SphericalCoordinatesStruct*>(this->data) == nullptr)
-                    {
-                        any_value_stringstream << "nullptr";
-                    }
-                    else
-                    {
-                        any_value_stringstream << std::fixed << "{ " << std::get<yli::common::SphericalCoordinatesStruct*>(this->data)->rho
-                            << ", " << std::get<yli::common::SphericalCoordinatesStruct*>(this->data)->theta
-                            << ", " << std::get<yli::common::SphericalCoordinatesStruct*>(this->data)->phi
-                            << " }";
-                    }
-                    break;
-                case (yli::common::Datatype::STD_STRING_POINTER):
-                    if (std::get<std::string*>(this->data) == nullptr)
-                    {
-                        any_value_stringstream << "nullptr";
-                    }
-                    else
-                    {
-                        any_value_stringstream << *(std::get<std::string*>(this->data));
-                    }
-                    break;
-                case (yli::common::Datatype::CONST_STD_STRING_POINTER):
-                    if (std::get<const std::string*>(this->data) == nullptr)
-                    {
-                        any_value_stringstream << "nullptr";
-                    }
-                    else
-                    {
-                        any_value_stringstream << *(std::get<const std::string*>(this->data));
-                    }
-                    break;
-                case (yli::common::Datatype::STD_VECTOR_INT8_T_SHARED_PTR):
-                    if (std::get<std::shared_ptr<std::vector<int8_t>>>(this->data) == nullptr)
-                    {
-                        any_value_stringstream << "nullptr";
-                    }
-                    else
-                    {
-                        any_value_stringstream << "std::shared_ptr<std::vector<int8_t>>";
-                    }
-                    break;
-                case (yli::common::Datatype::STD_VECTOR_UINT8_T_SHARED_PTR):
-                    if (std::get<std::shared_ptr<std::vector<uint8_t>>>(this->data) == nullptr)
-                    {
-                        any_value_stringstream << "nullptr";
-                    }
-                    else
-                    {
-                        any_value_stringstream << "std::shared_ptr<std::vector<uint8_t>>";
-                    }
-                    break;
-                case (yli::common::Datatype::STD_VECTOR_INT16_T_SHARED_PTR):
-                    if (std::get<std::shared_ptr<std::vector<int16_t>>>(this->data) == nullptr)
-                    {
-                        any_value_stringstream << "nullptr";
-                    }
-                    else
-                    {
-                        any_value_stringstream << "std::shared_ptr<std::vector<int16_t>>";
-                    }
-                    break;
-                case (yli::common::Datatype::STD_VECTOR_UINT16_T_SHARED_PTR):
-                    if (std::get<std::shared_ptr<std::vector<uint16_t>>>(this->data) == nullptr)
-                    {
-                        any_value_stringstream << "nullptr";
-                    }
-                    else
-                    {
-                        any_value_stringstream << "std::shared_ptr<std::vector<uint16_t>>";
-                    }
-                    break;
-                case (yli::common::Datatype::STD_VECTOR_INT32_T_SHARED_PTR):
-                    if (std::get<std::shared_ptr<std::vector<int32_t>>>(this->data) == nullptr)
-                    {
-                        any_value_stringstream << "nullptr";
-                    }
-                    else
-                    {
-                        any_value_stringstream << "std::shared_ptr<std::vector<int32_t>>";
-                    }
-                    break;
-                case (yli::common::Datatype::STD_VECTOR_UINT32_T_SHARED_PTR):
-                    if (std::get<std::shared_ptr<std::vector<uint32_t>>>(this->data) == nullptr)
-                    {
-                        any_value_stringstream << "nullptr";
-                    }
-                    else
-                    {
-                        any_value_stringstream << "std::shared_ptr<std::vector<uint32_t>>";
-                    }
-                    break;
-                case (yli::common::Datatype::STD_VECTOR_FLOAT_SHARED_PTR):
-                    if (std::get<std::shared_ptr<std::vector<float>>>(this->data) == nullptr)
-                    {
-                        any_value_stringstream << "nullptr";
-                    }
-                    else
-                    {
-                        any_value_stringstream << "std::shared_ptr<std::vector<float>>";
-                    }
-                    break;
-                case (yli::common::Datatype::GLM_VEC3_SHARED_PTR):
-                    if (std::get<std::shared_ptr<glm::vec3>>(this->data) == nullptr)
-                    {
-                        any_value_stringstream << "nullptr";
-                    }
-                    else
-                    {
-                        any_value_stringstream << std::fixed << "{ " << std::get<std::shared_ptr<glm::vec3>>(this->data)->x
-                            << ", " << std::get<std::shared_ptr<glm::vec3>>(this->data)->y
-                            << ", " << std::get<std::shared_ptr<glm::vec3>>(this->data)->z
-                            << " }";
-                    }
-                    break;
-                case (yli::common::Datatype::GLM_VEC4_SHARED_PTR):
-                    if (std::get<std::shared_ptr<glm::vec4>>(this->data) == nullptr)
-                    {
-                        any_value_stringstream << "nullptr";
-                    }
-                    else
-                    {
-                        any_value_stringstream << std::fixed << "{ " << std::get<std::shared_ptr<glm::vec4>>(this->data)->x
-                            << ", " << std::get<std::shared_ptr<glm::vec4>>(this->data)->y
-                            << ", " << std::get<std::shared_ptr<glm::vec4>>(this->data)->z
-                            << ", " << std::get<std::shared_ptr<glm::vec4>>(this->data)->w
-                            << " }";
-                    }
-                    break;
-                default:
-                    return "ERROR: `AnyValue::get_string`: no string defined for this datatype!";
+                any_value_stringstream << (std::get<bool>(this->data) ? "true" : "false");
+            }
+            else if (std::holds_alternative<char>(this->data))
+            {
+                any_value_stringstream << std::get<char>(this->data);
+            }
+            else if (std::holds_alternative<float>(this->data))
+            {
+                any_value_stringstream << std::fixed << std::get<float>(this->data);
+            }
+            else if (std::holds_alternative<double>(this->data))
+            {
+                any_value_stringstream << std::fixed << std::get<double>(this->data);
+            }
+            else if (std::holds_alternative<int32_t>(this->data))
+            {
+                // in Linux `int` is 32 bits, `long` is 64 bits, `long long` is also 64 bits.
+                // in Windows `int` is 32 bits, `long` is also 32 bits, `long long` is 64 bits.
+                any_value_stringstream << std::get<int32_t>(this->data);
+            }
+            else if (std::holds_alternative<uint32_t>(this->data))
+            {
+                // in Linux `int` is 32 bits, `long` is 64 bits, `long long` is also 64 bits.
+                // in Windows `int` is 32 bits, `long` is also 32 bits, `long long` is 64 bits.
+                any_value_stringstream << std::get<uint32_t>(this->data);
+            }
+            else if (std::holds_alternative<bool*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<bool*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<char*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<char*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<float*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<float*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<double*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<double*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<int32_t*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<int32_t*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<uint32_t*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<uint32_t*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::Entity*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Entity*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::Movable*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Movable*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<const yli::ontology::Movable*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<const yli::ontology::Movable*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::Universe*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Universe*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::World*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::World*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::Scene*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Scene*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::Shader*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Shader*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::Material*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Material*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::Species*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Species*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::Object*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Object*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::Symbiosis*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Symbiosis*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::SymbiontMaterial*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::SymbiontMaterial*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::SymbiontSpecies*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::SymbiontSpecies*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::Holobiont*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Holobiont*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::Biont*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Biont*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::Font2D*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Font2D*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::Text2D*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Text2D*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::VectorFont*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::VectorFont*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::Glyph*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Glyph*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::Text3D*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Text3D*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::Console*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Console*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<yli::ontology::ComputeTask*>(this->data))
+            {
+                any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::ComputeTask*>(this->data) << std::dec;
+            }
+            else if (std::holds_alternative<std::shared_ptr<yli::common::AnyValue>>(this->data))
+            {
+                if (std::get<std::shared_ptr<yli::common::AnyValue>>(this->data) == nullptr)
+                {
+                    any_value_stringstream << "nullptr";
+                }
+                else
+                {
+                    any_value_stringstream << std::hex << std::get<std::shared_ptr<yli::common::AnyValue>>(this->data).get() << std::dec;
+                }
+            }
+            else if (std::holds_alternative<std::shared_ptr<yli::common::AnyStruct>>(this->data))
+            {
+                if (std::get<std::shared_ptr<yli::common::AnyStruct>>(this->data) == nullptr)
+                {
+                    any_value_stringstream << "nullptr";
+                }
+                else
+                {
+                    any_value_stringstream << std::hex << std::get<std::shared_ptr<yli::common::AnyStruct>>(this->data).get() << std::dec;
+                }
+            }
+            else if (std::holds_alternative<yli::common::SphericalCoordinatesStruct*>(this->data))
+            {
+                if (std::get<yli::common::SphericalCoordinatesStruct*>(this->data) == nullptr)
+                {
+                    any_value_stringstream << "nullptr";
+                }
+                else
+                {
+                    any_value_stringstream << std::fixed << "{ " << std::get<yli::common::SphericalCoordinatesStruct*>(this->data)->rho
+                        << ", " << std::get<yli::common::SphericalCoordinatesStruct*>(this->data)->theta
+                        << ", " << std::get<yli::common::SphericalCoordinatesStruct*>(this->data)->phi
+                        << " }";
+                }
+            }
+            else if (std::holds_alternative<std::string*>(this->data))
+            {
+                if (std::get<std::string*>(this->data) == nullptr)
+                {
+                    any_value_stringstream << "nullptr";
+                }
+                else
+                {
+                    any_value_stringstream << *(std::get<std::string*>(this->data));
+                }
+            }
+            else if (std::holds_alternative<const std::string*>(this->data))
+            {
+                if (std::get<const std::string*>(this->data) == nullptr)
+                {
+                    any_value_stringstream << "nullptr";
+                }
+                else
+                {
+                    any_value_stringstream << *(std::get<const std::string*>(this->data));
+                }
+            }
+            else if (std::holds_alternative<std::shared_ptr<std::vector<int8_t>>>(this->data))
+            {
+                if (std::get<std::shared_ptr<std::vector<int8_t>>>(this->data) == nullptr)
+                {
+                    any_value_stringstream << "nullptr";
+                }
+                else
+                {
+                    any_value_stringstream << "std::shared_ptr<std::vector<int8_t>>";
+                }
+            }
+            else if (std::holds_alternative<std::shared_ptr<std::vector<uint8_t>>>(this->data))
+            {
+                if (std::get<std::shared_ptr<std::vector<uint8_t>>>(this->data) == nullptr)
+                {
+                    any_value_stringstream << "nullptr";
+                }
+                else
+                {
+                    any_value_stringstream << "std::shared_ptr<std::vector<uint8_t>>";
+                }
+            }
+            else if (std::holds_alternative<std::shared_ptr<std::vector<int16_t>>>(this->data))
+            {
+                if (std::get<std::shared_ptr<std::vector<int16_t>>>(this->data) == nullptr)
+                {
+                    any_value_stringstream << "nullptr";
+                }
+                else
+                {
+                    any_value_stringstream << "std::shared_ptr<std::vector<int16_t>>";
+                }
+            }
+            else if (std::holds_alternative<std::shared_ptr<std::vector<uint16_t>>>(this->data))
+            {
+                if (std::get<std::shared_ptr<std::vector<uint16_t>>>(this->data) == nullptr)
+                {
+                    any_value_stringstream << "nullptr";
+                }
+                else
+                {
+                    any_value_stringstream << "std::shared_ptr<std::vector<uint16_t>>";
+                }
+            }
+            else if (std::holds_alternative<std::shared_ptr<std::vector<int32_t>>>(this->data))
+            {
+                if (std::get<std::shared_ptr<std::vector<int32_t>>>(this->data) == nullptr)
+                {
+                    any_value_stringstream << "nullptr";
+                }
+                else
+                {
+                    any_value_stringstream << "std::shared_ptr<std::vector<int32_t>>";
+                }
+            }
+            else if (std::holds_alternative<std::shared_ptr<std::vector<uint32_t>>>(this->data))
+            {
+                if (std::get<std::shared_ptr<std::vector<uint32_t>>>(this->data) == nullptr)
+                {
+                    any_value_stringstream << "nullptr";
+                }
+                else
+                {
+                    any_value_stringstream << "std::shared_ptr<std::vector<uint32_t>>";
+                }
+            }
+            else if (std::holds_alternative<std::shared_ptr<std::vector<float>>>(this->data))
+            {
+                if (std::get<std::shared_ptr<std::vector<float>>>(this->data) == nullptr)
+                {
+                    any_value_stringstream << "nullptr";
+                }
+                else
+                {
+                    any_value_stringstream << "std::shared_ptr<std::vector<float>>";
+                }
+            }
+            else if (std::holds_alternative<std::shared_ptr<glm::vec3>>(this->data))
+            {
+                if (std::get<std::shared_ptr<glm::vec3>>(this->data) == nullptr)
+                {
+                    any_value_stringstream << "nullptr";
+                }
+                else
+                {
+                    any_value_stringstream << std::fixed << "{ " << std::get<std::shared_ptr<glm::vec3>>(this->data)->x
+                        << ", " << std::get<std::shared_ptr<glm::vec3>>(this->data)->y
+                        << ", " << std::get<std::shared_ptr<glm::vec3>>(this->data)->z
+                        << " }";
+                }
+            }
+            else if (std::holds_alternative<std::shared_ptr<glm::vec4>>(this->data))
+            {
+                if (std::get<std::shared_ptr<glm::vec4>>(this->data) == nullptr)
+                {
+                    any_value_stringstream << "nullptr";
+                }
+                else
+                {
+                    any_value_stringstream << std::fixed << "{ " << std::get<std::shared_ptr<glm::vec4>>(this->data)->x
+                        << ", " << std::get<std::shared_ptr<glm::vec4>>(this->data)->y
+                        << ", " << std::get<std::shared_ptr<glm::vec4>>(this->data)->z
+                        << ", " << std::get<std::shared_ptr<glm::vec4>>(this->data)->w
+                        << " }";
+                }
+            }
+            else
+            {
+                return "ERROR: `AnyValue::get_string`: no string defined for this datatype!";
             }
 
             return any_value_stringstream.str();
