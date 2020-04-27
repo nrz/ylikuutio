@@ -19,7 +19,6 @@
 #include "universe.hpp"
 #include "shader.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
-#include "code/ylikuutio/common/datatype.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 
@@ -174,7 +173,7 @@ namespace yli
                 {
                     const std::shared_ptr<yli::common::AnyValue> end_condition_any_value = this->end_condition_callback_engine->execute(nullptr);
 
-                    if (end_condition_any_value->type == yli::common::Datatype::BOOL && std::get<bool>(end_condition_any_value->data))
+                    if (std::holds_alternative<bool>(end_condition_any_value->data) && std::get<bool>(end_condition_any_value->data))
                     {
                         break; // End condition was satisfied. Therefore, no more iterations.
                     }

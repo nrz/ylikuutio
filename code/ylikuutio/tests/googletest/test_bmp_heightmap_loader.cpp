@@ -46,7 +46,7 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_3x3_BMP_terrain)
     std::size_t image_height = 0;
     const std::string color_channel = "mean";
 
-    bool model_loading_result = yli::load::load_BMP_terrain(
+    bool model_loading_result = yli::load::load_bmp_terrain(
             heightmap_loader_struct,
             out_vertices,
             out_UVs,
@@ -382,7 +382,7 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_256x256_BMP_terrain)
     std::size_t image_height = 0;
     const std::string color_channel = "mean";
 
-    const bool model_loading_result = yli::load::load_BMP_terrain(
+    const bool model_loading_result = yli::load::load_bmp_terrain(
             heightmap_loader_struct,
             out_vertices,
             out_UVs,

@@ -68,7 +68,6 @@
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/time/time.hpp"
-#include "code/ylikuutio/common/datatype.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/pi.hpp"
 
@@ -881,7 +880,7 @@ int main(const int argc, const char* const argv[]) try
                         const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute(nullptr);
 
                         if (any_value != nullptr &&
-                                any_value->type == yli::common::Datatype::UINT32_T &&
+                                std::holds_alternative<uint32_t>(any_value->data) &&
                                 std::get<uint32_t>(any_value->data) == EXIT_PROGRAM_MAGIC_NUMBER)
                         {
                             my_universe->request_exit();
@@ -909,7 +908,7 @@ int main(const int argc, const char* const argv[]) try
                     const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute(nullptr);
 
                     if (any_value != nullptr &&
-                            any_value->type == yli::common::Datatype::UINT32_T &&
+                            std::holds_alternative<uint32_t>(any_value->data) &&
                             std::get<uint32_t>(any_value->data) == EXIT_PROGRAM_MAGIC_NUMBER)
                     {
                         my_universe->request_exit();
@@ -1028,7 +1027,7 @@ int main(const int argc, const char* const argv[]) try
                         const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute(nullptr);
 
                         if (any_value != nullptr &&
-                                any_value->type == yli::common::Datatype::UINT32_T &&
+                                std::holds_alternative<uint32_t>(any_value->data) &&
                                 std::get<uint32_t>(any_value->data) == EXIT_PROGRAM_MAGIC_NUMBER)
                         {
                             my_universe->request_exit();

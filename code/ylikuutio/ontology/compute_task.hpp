@@ -171,7 +171,7 @@ namespace yli
                     }
                     else if (this->texture_file_format == "csv" || this->texture_file_format == "CSV")
                     {
-                        if (!yli::load::load_CSV_texture(
+                        if (!yli::load::load_csv_texture(
                                     this->texture_filename,
                                     this->format,
                                     this->internal_format,

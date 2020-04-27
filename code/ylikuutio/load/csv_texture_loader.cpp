@@ -17,7 +17,6 @@
 
 #include "csv_texture_loader.hpp"
 #include "csv_loader.hpp"
-#include "code/ylikuutio/common/datatype.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/linear_algebra/vector_functions.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -38,7 +37,7 @@ namespace yli
 {
     namespace load
     {
-        bool load_CSV_texture(
+        bool load_csv_texture(
                 const std::string& filename,
                 const GLenum format,
                 const GLenum internal_format,
@@ -67,13 +66,13 @@ namespace yli
                 image_data_int8_t = load_CSV_file<int8_t>(filename, image_width, image_height, image_size);
                 if (image_data_int8_t == nullptr)
                 {
-                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_int8_t` is `nullptr`!\n";
+                    std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_int8_t` is `nullptr`!\n";
                     return false;
                 }
                 if (left_filler_vector_any_value != nullptr &&
                         right_filler_vector_any_value != nullptr &&
-                        left_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_INT8_T_SHARED_PTR &&
-                        right_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_INT8_T_SHARED_PTR &&
+                        std::holds_alternative<std::shared_ptr<std::vector<int8_t>>>(left_filler_vector_any_value->data) &&
+                        std::holds_alternative<std::shared_ptr<std::vector<int8_t>>>(right_filler_vector_any_value->data) &&
                         std::get<std::shared_ptr<std::vector<int8_t>>>(left_filler_vector_any_value->data) != nullptr &&
                         std::get<std::shared_ptr<std::vector<int8_t>>>(right_filler_vector_any_value->data) != nullptr)
                 {
@@ -93,13 +92,13 @@ namespace yli
                 image_data_uint8_t = load_CSV_file<uint8_t>(filename, image_width, image_height, image_size);
                 if (image_data_uint8_t == nullptr)
                 {
-                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_uint8_t` is `nullptr`!\n";
+                    std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_uint8_t` is `nullptr`!\n";
                     return false;
                 }
                 if (left_filler_vector_any_value != nullptr &&
                         right_filler_vector_any_value != nullptr &&
-                        left_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_UINT8_T_SHARED_PTR &&
-                        right_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_UINT8_T_SHARED_PTR &&
+                        std::holds_alternative<std::shared_ptr<std::vector<uint8_t>>>(left_filler_vector_any_value->data) &&
+                        std::holds_alternative<std::shared_ptr<std::vector<uint8_t>>>(right_filler_vector_any_value->data) &&
                         std::get<std::shared_ptr<std::vector<uint8_t>>>(left_filler_vector_any_value->data) != nullptr &&
                         std::get<std::shared_ptr<std::vector<uint8_t>>>(right_filler_vector_any_value->data) != nullptr)
                 {
@@ -119,13 +118,13 @@ namespace yli
                 image_data_int16_t = load_CSV_file<int16_t>(filename, image_width, image_height, image_size);
                 if (image_data_int16_t == nullptr)
                 {
-                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_int16_t` is `nullptr`!\n";
+                    std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_int16_t` is `nullptr`!\n";
                     return false;
                 }
                 if (left_filler_vector_any_value != nullptr &&
                         right_filler_vector_any_value != nullptr &&
-                        left_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_INT16_T_SHARED_PTR &&
-                        right_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_INT16_T_SHARED_PTR &&
+                        std::holds_alternative<std::shared_ptr<std::vector<int16_t>>>(left_filler_vector_any_value->data) &&
+                        std::holds_alternative<std::shared_ptr<std::vector<int16_t>>>(right_filler_vector_any_value->data) &&
                         std::get<std::shared_ptr<std::vector<int16_t>>>(left_filler_vector_any_value->data) != nullptr &&
                         std::get<std::shared_ptr<std::vector<int16_t>>>(right_filler_vector_any_value->data) != nullptr)
                 {
@@ -145,13 +144,13 @@ namespace yli
                 image_data_uint16_t = load_CSV_file<uint16_t>(filename, image_width, image_height, image_size);
                 if (image_data_uint16_t == nullptr)
                 {
-                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_uint16_t` is `nullptr`!\n";
+                    std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_uint16_t` is `nullptr`!\n";
                     return false;
                 }
                 if (left_filler_vector_any_value != nullptr &&
                         right_filler_vector_any_value != nullptr &&
-                        left_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_UINT16_T_SHARED_PTR &&
-                        right_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_UINT16_T_SHARED_PTR &&
+                        std::holds_alternative<std::shared_ptr<std::vector<uint16_t>>>(left_filler_vector_any_value->data) &&
+                        std::holds_alternative<std::shared_ptr<std::vector<uint16_t>>>(right_filler_vector_any_value->data) &&
                         std::get<std::shared_ptr<std::vector<uint16_t>>>(left_filler_vector_any_value->data) != nullptr &&
                         std::get<std::shared_ptr<std::vector<uint16_t>>>(right_filler_vector_any_value->data) != nullptr)
                 {
@@ -171,13 +170,13 @@ namespace yli
                 image_data_int32_t = load_CSV_file<int32_t>(filename, image_width, image_height, image_size);
                 if (image_data_int32_t == nullptr)
                 {
-                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_int32_t` is `nullptr`!\n";
+                    std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_int32_t` is `nullptr`!\n";
                     return false;
                 }
                 if (left_filler_vector_any_value != nullptr &&
                         right_filler_vector_any_value != nullptr &&
-                        left_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_INT32_T_SHARED_PTR &&
-                        right_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_INT32_T_SHARED_PTR &&
+                        std::holds_alternative<std::shared_ptr<std::vector<int32_t>>>(left_filler_vector_any_value->data) &&
+                        std::holds_alternative<std::shared_ptr<std::vector<int32_t>>>(right_filler_vector_any_value->data) &&
                         std::get<std::shared_ptr<std::vector<int32_t>>>(left_filler_vector_any_value->data) != nullptr &&
                         std::get<std::shared_ptr<std::vector<int32_t>>>(right_filler_vector_any_value->data) != nullptr)
                 {
@@ -197,13 +196,13 @@ namespace yli
                 image_data_uint32_t = load_CSV_file<uint32_t>(filename, image_width, image_height, image_size);
                 if (image_data_uint32_t == nullptr)
                 {
-                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_uint32_t` is `nullptr`!\n";
+                    std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_uint32_t` is `nullptr`!\n";
                     return false;
                 }
                 if (left_filler_vector_any_value != nullptr &&
                         right_filler_vector_any_value != nullptr &&
-                        left_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_UINT32_T_SHARED_PTR &&
-                        right_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_UINT32_T_SHARED_PTR &&
+                        std::holds_alternative<std::shared_ptr<std::vector<uint32_t>>>(left_filler_vector_any_value->data) &&
+                        std::holds_alternative<std::shared_ptr<std::vector<uint32_t>>>(right_filler_vector_any_value->data) &&
                         std::get<std::shared_ptr<std::vector<uint32_t>>>(left_filler_vector_any_value->data) != nullptr &&
                         std::get<std::shared_ptr<std::vector<uint32_t>>>(right_filler_vector_any_value->data) != nullptr)
                 {
@@ -231,13 +230,13 @@ namespace yli
                 image_data_float = load_CSV_file<float>(filename, image_width, image_height, image_size);
                 if (image_data_float == nullptr)
                 {
-                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_float` is `nullptr`!\n";
+                    std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_float` is `nullptr`!\n";
                     return false;
                 }
                 if (left_filler_vector_any_value != nullptr &&
                         right_filler_vector_any_value != nullptr &&
-                        left_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_FLOAT_SHARED_PTR &&
-                        right_filler_vector_any_value->type == yli::common::Datatype::STD_VECTOR_FLOAT_SHARED_PTR &&
+                        std::holds_alternative<std::shared_ptr<std::vector<float>>>(left_filler_vector_any_value->data) &&
+                        std::holds_alternative<std::shared_ptr<std::vector<float>>>(right_filler_vector_any_value->data) &&
                         std::get<std::shared_ptr<std::vector<float>>>(left_filler_vector_any_value->data) != nullptr &&
                         std::get<std::shared_ptr<std::vector<float>>>(right_filler_vector_any_value->data) != nullptr)
                 {
@@ -291,7 +290,7 @@ namespace yli
             return true;
         }
 
-        bool load_CSV_texture(
+        bool load_csv_texture(
                 const std::string& filename,
                 const GLenum format,
                 const GLenum internal_format,
@@ -301,7 +300,7 @@ namespace yli
                 std::size_t& image_size,
                 uint32_t& textureID)
         {
-            return yli::load::load_CSV_texture(
+            return yli::load::load_csv_texture(
                     filename,
                     format,
                     internal_format,
