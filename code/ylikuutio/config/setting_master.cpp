@@ -302,6 +302,10 @@ namespace yli
                             setting->activate_callback(entity, setting_master);
                         }
                     }
+                    else
+                    {
+                        std::cerr << "ERROR: Setting a new value for `yli::config::Setting` " << setting_name << " failed! Attempted value: " << command_parameters.at(1) << "\n";
+                    }
                 }
                 else
                 {
@@ -368,6 +372,10 @@ namespace yli
                         {
                             setting->activate_callback(named_entity, setting_master);
                         }
+                    }
+                    else
+                    {
+                        std::cerr << "ERROR: Setting a new value for `yli::ontology::Entity` " << entity_name << ", `yli::config::Setting` " << setting_name << " failed! Attempted value: " << command_parameters.at(2) << "\n";
                     }
                 }
                 else
