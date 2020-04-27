@@ -26,7 +26,6 @@
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/common/datatype.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 
 // Include GLM
@@ -445,8 +444,8 @@ namespace yli::snippets
             return nullptr;
         }
 
-        if (any_value_entity_string->type != yli::common::Datatype::STD_STRING_POINTER &&
-                any_value_entity_string->type != yli::common::Datatype::CONST_STD_STRING_POINTER)
+        if (!std::holds_alternative<std::string*>(any_value_entity_string->data) &&
+                !std::holds_alternative<const std::string*>(any_value_entity_string->data))
         {
             std::cerr << "ERROR: `yli::snippets::delete_entity`: invalid datatype.\n";
             std::cerr << "Datatype should be either yli::common::Datatype::STD_STRING_POINTER or yli::common::Datatype::CONST_STD_STRING_POINTER\n";
@@ -454,7 +453,7 @@ namespace yli::snippets
         }
 
         const std::string* const entity_string_pointer =
-            (any_value_entity_string->type == yli::common::Datatype::STD_STRING_POINTER ?
+            (std::holds_alternative<std::string*>(any_value_entity_string->data) ?
              std::get<std::string*>(any_value_entity_string->data) :
              std::get<const std::string*>(any_value_entity_string->data));
 
@@ -498,8 +497,8 @@ namespace yli::snippets
             return nullptr;
         }
 
-        if (any_value_entity_string->type != yli::common::Datatype::STD_STRING_POINTER &&
-                any_value_entity_string->type != yli::common::Datatype::CONST_STD_STRING_POINTER)
+        if (!std::holds_alternative<std::string*>(any_value_entity_string->data) &&
+                !std::holds_alternative<const std::string*>(any_value_entity_string->data))
         {
             std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: invalid datatype.\n";
             std::cerr << "Datatype should be either yli::common::Datatype::STD_STRING_POINTER or yli::common::Datatype::CONST_STD_STRING_POINTER\n";
@@ -507,7 +506,7 @@ namespace yli::snippets
         }
 
         const std::string* const entity_string_pointer =
-            (any_value_entity_string->type == yli::common::Datatype::STD_STRING_POINTER ?
+            (std::holds_alternative<std::string*>(any_value_entity_string->data) ?
              std::get<std::string*>(any_value_entity_string->data) :
              std::get<const std::string*>(any_value_entity_string->data));
 
@@ -549,8 +548,8 @@ namespace yli::snippets
             return nullptr;
         }
 
-        if (any_value_material_string->type != yli::common::Datatype::STD_STRING_POINTER &&
-                any_value_material_string->type != yli::common::Datatype::CONST_STD_STRING_POINTER)
+        if (!std::holds_alternative<std::string*>(any_value_material_string->data) &&
+                !std::holds_alternative<const std::string*>(any_value_material_string->data))
         {
             std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: invalid datatype.\n";
             std::cerr << "Datatype should be either yli::common::Datatype::STD_STRING_POINTER or yli::common::Datatype::CONST_STD_STRING_POINTER\n";
@@ -558,7 +557,7 @@ namespace yli::snippets
         }
 
         const std::string* const new_material_string_pointer =
-            (any_value_material_string->type == yli::common::Datatype::STD_STRING_POINTER ?
+            (std::holds_alternative<std::string*>(any_value_material_string->data) ?
              std::get<std::string*>(any_value_material_string->data) :
              std::get<const std::string*>(any_value_material_string->data));
 
@@ -614,8 +613,8 @@ namespace yli::snippets
             return nullptr;
         }
 
-        if (any_value_entity_string->type != yli::common::Datatype::STD_STRING_POINTER &&
-                any_value_entity_string->type != yli::common::Datatype::CONST_STD_STRING_POINTER)
+        if (!std::holds_alternative<std::string*>(any_value_entity_string->data) &&
+                !std::holds_alternative<const std::string*>(any_value_entity_string->data))
         {
             std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: invalid datatype.\n";
             std::cerr << "Datatype should be either yli::common::Datatype::STD_STRING_POINTER or yli::common::Datatype::CONST_STD_STRING_POINTER\n";
@@ -623,7 +622,7 @@ namespace yli::snippets
         }
 
         const std::string* const entity_string_pointer =
-            (any_value_entity_string->type == yli::common::Datatype::STD_STRING_POINTER ?
+            (std::holds_alternative<std::string*>(any_value_entity_string->data) ?
              std::get<std::string*>(any_value_entity_string->data) :
              std::get<const std::string*>(any_value_entity_string->data));
 
@@ -665,8 +664,8 @@ namespace yli::snippets
             return nullptr;
         }
 
-        if (any_value_species_string->type != yli::common::Datatype::STD_STRING_POINTER &&
-                any_value_species_string->type != yli::common::Datatype::CONST_STD_STRING_POINTER)
+        if (!std::holds_alternative<std::string*>(any_value_species_string->data) &&
+                !std::holds_alternative<const std::string*>(any_value_species_string->data))
         {
             std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: invalid datatype.\n";
             std::cerr << "Datatype should be either yli::common::Datatype::STD_STRING_POINTER or yli::common::Datatype::CONST_STD_STRING_POINTER\n";
@@ -674,7 +673,7 @@ namespace yli::snippets
         }
 
         const std::string* const new_species_string_pointer =
-            (any_value_species_string->type == yli::common::Datatype::STD_STRING_POINTER ?
+            (std::holds_alternative<std::string*>(any_value_species_string->data) ?
              std::get<std::string*>(any_value_species_string->data) :
              std::get<const std::string*>(any_value_species_string->data));
 
