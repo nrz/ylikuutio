@@ -588,55 +588,96 @@ namespace yli
 
         yli::ontology::Entity* AnyValue::get_entity_pointer() const
         {
-            switch (this->type)
+            if (std::holds_alternative<yli::ontology::Entity*>(this->data))
             {
-                case (yli::common::Datatype::ENTITY_POINTER):
-                    return std::get<yli::ontology::Entity*>(this->data);
-                case (yli::common::Datatype::MOVABLE_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Movable*>(this->data)));
-                case (yli::common::Datatype::CONST_MOVABLE_POINTER):
-                    return nullptr; // Conversion which loses constness is not supported.
-                case (yli::common::Datatype::UNIVERSE_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Universe*>(this->data)));
-                case (yli::common::Datatype::WORLD_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::World*>(this->data)));
-                case (yli::common::Datatype::SCENE_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Scene*>(this->data)));
-                case (yli::common::Datatype::SHADER_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Shader*>(this->data)));
-                case (yli::common::Datatype::MATERIAL_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Material*>(this->data)));
-                case (yli::common::Datatype::SPECIES_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Species*>(this->data)));
-                case (yli::common::Datatype::OBJECT_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Object*>(this->data)));
-                case (yli::common::Datatype::SYMBIOSIS_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Symbiosis*>(this->data)));
-                case (yli::common::Datatype::SYMBIONTMATERIAL_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::SymbiontMaterial*>(this->data)));
-                case (yli::common::Datatype::SYMBIONTSPECIES_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::SymbiontSpecies*>(this->data)));
-                case (yli::common::Datatype::HOLOBIONT_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Holobiont*>(this->data)));
-                case (yli::common::Datatype::BIONT_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Biont*>(this->data)));
-                case (yli::common::Datatype::FONT2D_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Font2D*>(this->data)));
-                case (yli::common::Datatype::TEXT2D_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Text2D*>(this->data)));
-                case (yli::common::Datatype::VECTORFONT_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::VectorFont*>(this->data)));
-                case (yli::common::Datatype::GLYPH_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Glyph*>(this->data)));
-                case (yli::common::Datatype::TEXT3D_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Text3D*>(this->data)));
-                case (yli::common::Datatype::CONSOLE_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Console*>(this->data)));
-                case (yli::common::Datatype::COMPUTETASK_POINTER):
-                    return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::ComputeTask*>(this->data)));
-                default:
-                    return nullptr;
+                return std::get<yli::ontology::Entity*>(this->data);
             }
+            else if (std::holds_alternative<yli::ontology::Universe*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Universe*>(this->data)));
+            }
+            else if (std::holds_alternative<yli::ontology::Movable*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Movable*>(this->data)));
+            }
+            else if (std::holds_alternative<const yli::ontology::Movable*>(this->data))
+            {
+                return nullptr; // Conversion which loses constness is not supported.
+            }
+            else if (std::holds_alternative<yli::ontology::World*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::World*>(this->data)));
+            }
+            else if (std::holds_alternative<yli::ontology::Scene*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Scene*>(this->data)));
+            }
+            else if (std::holds_alternative<yli::ontology::Shader*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Shader*>(this->data)));
+            }
+            else if (std::holds_alternative<yli::ontology::Material*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Material*>(this->data)));
+            }
+            else if (std::holds_alternative<yli::ontology::Species*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Species*>(this->data)));
+            }
+            else if (std::holds_alternative<yli::ontology::Object*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Object*>(this->data)));
+            }
+            else if (std::holds_alternative<yli::ontology::Symbiosis*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Symbiosis*>(this->data)));
+            }
+            else if (std::holds_alternative<yli::ontology::SymbiontMaterial*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::SymbiontMaterial*>(this->data)));
+            }
+            else if (std::holds_alternative<yli::ontology::SymbiontSpecies*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::SymbiontSpecies*>(this->data)));
+            }
+            else if (std::holds_alternative<yli::ontology::Holobiont*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Holobiont*>(this->data)));
+            }
+            else if (std::holds_alternative<yli::ontology::Biont*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Biont*>(this->data)));
+            }
+            else if (std::holds_alternative<yli::ontology::Font2D*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Font2D*>(this->data)));
+            }
+            else if (std::holds_alternative<yli::ontology::Text2D*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Text2D*>(this->data)));
+            }
+            else if (std::holds_alternative<yli::ontology::VectorFont*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::VectorFont*>(this->data)));
+            }
+            else if (std::holds_alternative<yli::ontology::Glyph*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Glyph*>(this->data)));
+            }
+            else if (std::holds_alternative<yli::ontology::Text3D*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Text3D*>(this->data)));
+            }
+            else if (std::holds_alternative<yli::ontology::Console*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Console*>(this->data)));
+            }
+            else if (std::holds_alternative<yli::ontology::ComputeTask*>(this->data))
+            {
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::ComputeTask*>(this->data)));
+            }
+
+            return nullptr;
         }
 
         bool AnyValue::set_value(const std::string& value_string)
