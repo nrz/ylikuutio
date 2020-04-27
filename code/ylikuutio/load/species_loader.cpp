@@ -127,7 +127,7 @@ namespace yli
                 }
                 else if (species_loader_struct.model_file_format == "bmp" || species_loader_struct.model_file_format == "BMP")
                 {
-                    model_loading_result = yli::load::load_BMP_terrain(
+                    model_loading_result = yli::load::load_bmp_terrain(
                             heightmap_loader_struct,
                             out_vertices,
                             out_UVs,
