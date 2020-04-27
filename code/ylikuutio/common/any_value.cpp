@@ -73,111 +73,200 @@ namespace yli
     {
         std::string AnyValue::get_datatype() const
         {
-            std::string datatype_string;
-
-            switch (this->type)
+            if (std::holds_alternative<bool>(this->data))
             {
-                case (yli::common::Datatype::UNKNOWN):
-                    return "unknown";
-                case (yli::common::Datatype::BOOL):
-                    return "bool";
-                case (yli::common::Datatype::CHAR):
-                    return "char";
-                case (yli::common::Datatype::FLOAT):
-                    return "float";
-                case (yli::common::Datatype::DOUBLE):
-                    return "double";
-                case (yli::common::Datatype::INT32_T):
-                    return "int32_t";
-                case (yli::common::Datatype::UINT32_T):
-                    return "uint32_t";
-                case (yli::common::Datatype::BOOL_POINTER):
-                    return "bool*";
-                case (yli::common::Datatype::CHAR_POINTER):
-                    return "char*";
-                case (yli::common::Datatype::FLOAT_POINTER):
-                    return "float*";
-                case (yli::common::Datatype::DOUBLE_POINTER):
-                    return "double*";
-                case (yli::common::Datatype::INT32_T_POINTER):
-                    return "int32_t*";
-                case (yli::common::Datatype::UINT32_T_POINTER):
-                    return "uint32_t*";
-                case (yli::common::Datatype::ENTITY_POINTER):
-                    return "yli::ontology::Entity*";
-                case (yli::common::Datatype::MOVABLE_POINTER):
-                    return "yli::ontology::Movable*";
-                case (yli::common::Datatype::CONST_MOVABLE_POINTER):
-                    return "const yli::ontology::Movable*";
-                case (yli::common::Datatype::UNIVERSE_POINTER):
-                    return "yli::ontology::Universe*";
-                case (yli::common::Datatype::WORLD_POINTER):
-                    return "yli::ontology::World*";
-                case (yli::common::Datatype::SCENE_POINTER):
-                    return "yli::ontology::Scene*";
-                case (yli::common::Datatype::SHADER_POINTER):
-                    return "yli::ontology::Shader*";
-                case (yli::common::Datatype::MATERIAL_POINTER):
-                    return "yli::ontology::Material*";
-                case (yli::common::Datatype::SPECIES_POINTER):
-                    return "yli::ontology::Species*";
-                case (yli::common::Datatype::OBJECT_POINTER):
-                    return "yli::ontology::Object*";
-                case (yli::common::Datatype::SYMBIOSIS_POINTER):
-                    return "yli::ontology::Symbiosis*";
-                case (yli::common::Datatype::SYMBIONTMATERIAL_POINTER):
-                    return "yli::ontology::SymbiontMaterial*";
-                case (yli::common::Datatype::SYMBIONTSPECIES_POINTER):
-                    return "yli::ontology::SymbiontSpecies*";
-                case (yli::common::Datatype::HOLOBIONT_POINTER):
-                    return "yli::ontology::Holobiont*";
-                case (yli::common::Datatype::BIONT_POINTER):
-                    return "yli::ontology::Biont*";
-                case (yli::common::Datatype::FONT2D_POINTER):
-                    return "yli::ontology::Font2D*";
-                case (yli::common::Datatype::TEXT2D_POINTER):
-                    return "yli::ontology::Text2D*";
-                case (yli::common::Datatype::VECTORFONT_POINTER):
-                    return "yli::ontology::VectorFont*";
-                case (yli::common::Datatype::GLYPH_POINTER):
-                    return "yli::ontology::Glyph*";
-                case (yli::common::Datatype::TEXT3D_POINTER):
-                    return "yli::ontology::Text3D*";
-                case (yli::common::Datatype::CONSOLE_POINTER):
-                    return "yli::ontology::Console*";
-                case (yli::common::Datatype::COMPUTETASK_POINTER):
-                    return "yli::ontology::ComputeTask*";
-                case (yli::common::Datatype::ANY_VALUE_SHARED_PTR):
-                    return "std::shared_ptr<yli::common::AnyValue>";
-                case (yli::common::Datatype::ANY_STRUCT_SHARED_PTR):
-                    return "std::shared_ptr<yli::common::AnyStruct>";
-                case (yli::common::Datatype::SPHERICAL_COORDINATES_STRUCT_POINTER):
-                    return "yli::common::SphericalCoordinatesStruct*";
-                case (yli::common::Datatype::STD_STRING_POINTER):
-                    return "std::string*";
-                case (yli::common::Datatype::CONST_STD_STRING_POINTER):
-                    return "const std::string*";
-                case (yli::common::Datatype::STD_VECTOR_INT8_T_SHARED_PTR):
-                    return "std::shared_ptr<std::vector<int8_t>>";
-                case (yli::common::Datatype::STD_VECTOR_UINT8_T_SHARED_PTR):
-                    return "std::shared_ptr<std::vector<uint8_t>>";
-                case (yli::common::Datatype::STD_VECTOR_INT16_T_SHARED_PTR):
-                    return "std::shared_ptr<std::vector<int16_t>>";
-                case (yli::common::Datatype::STD_VECTOR_UINT16_T_SHARED_PTR):
-                    return "std::shared_ptr<std::vector<uint16_t>>";
-                case (yli::common::Datatype::STD_VECTOR_INT32_T_SHARED_PTR):
-                    return "std::shared_ptr<std::vector<int32_t>>";
-                case (yli::common::Datatype::STD_VECTOR_UINT32_T_SHARED_PTR):
-                    return "std::shared_ptr<std::vector<uint32_t>>";
-                case (yli::common::Datatype::STD_VECTOR_FLOAT_SHARED_PTR):
-                    return "std::shared_ptr<std::vector<float>>";
-                case (yli::common::Datatype::GLM_VEC3_SHARED_PTR):
-                    return "std::shared_ptr<glm::vec3>";
-                case (yli::common::Datatype::GLM_VEC4_SHARED_PTR):
-                    return "std::shared_ptr<glm::vec4>";
-                default:
-                    return "ERROR: `AnyValue::get_datatype`: no datatype string defined for this datatype!";
+                return "bool";
             }
+            else if (std::holds_alternative<char>(this->data))
+            {
+                return "char";
+            }
+            else if (std::holds_alternative<float>(this->data))
+            {
+                return "float";
+            }
+            else if (std::holds_alternative<double>(this->data))
+            {
+                return "double";
+            }
+            else if (std::holds_alternative<int32_t>(this->data))
+            {
+                return "int32_t";
+            }
+            else if (std::holds_alternative<uint32_t>(this->data))
+            {
+                return "uint32_t";
+            }
+            else if (std::holds_alternative<bool*>(this->data))
+            {
+                return "bool*";
+            }
+            else if (std::holds_alternative<char*>(this->data))
+            {
+                return "char*";
+            }
+            else if (std::holds_alternative<float*>(this->data))
+            {
+                return "float*";
+            }
+            else if (std::holds_alternative<double*>(this->data))
+            {
+                return "double*";
+            }
+            else if (std::holds_alternative<int32_t*>(this->data))
+            {
+                return "int32_t*";
+            }
+            else if (std::holds_alternative<uint32_t*>(this->data))
+            {
+                return "uint32_t*";
+            }
+            else if (std::holds_alternative<yli::ontology::Entity*>(this->data))
+            {
+                return "yli::ontology::Entity*";
+            }
+            else if (std::holds_alternative<yli::ontology::Movable*>(this->data))
+            {
+                return "yli::ontology::Movable*";
+            }
+            else if (std::holds_alternative<const yli::ontology::Movable*>(this->data))
+            {
+                return "const yli::ontology::Movable*";
+            }
+            else if (std::holds_alternative<yli::ontology::Universe*>(this->data))
+            {
+                return "yli::ontology::Universe*";
+            }
+            else if (std::holds_alternative<yli::ontology::World*>(this->data))
+            {
+                return "yli::ontology::World*";
+            }
+            else if (std::holds_alternative<yli::ontology::Scene*>(this->data))
+            {
+                return "yli::ontology::Scene*";
+            }
+            else if (std::holds_alternative<yli::ontology::Shader*>(this->data))
+            {
+                return "yli::ontology::Shader*";
+            }
+            else if (std::holds_alternative<yli::ontology::Material*>(this->data))
+            {
+                return "yli::ontology::Material*";
+            }
+            else if (std::holds_alternative<yli::ontology::Species*>(this->data))
+            {
+                return "yli::ontology::Species*";
+            }
+            else if (std::holds_alternative<yli::ontology::Object*>(this->data))
+            {
+                return "yli::ontology::Object*";
+            }
+            else if (std::holds_alternative<yli::ontology::Symbiosis*>(this->data))
+            {
+                return "yli::ontology::Symbiosis*";
+            }
+            else if (std::holds_alternative<yli::ontology::SymbiontMaterial*>(this->data))
+            {
+                return "yli::ontology::SymbiontMaterial*";
+            }
+            else if (std::holds_alternative<yli::ontology::SymbiontSpecies*>(this->data))
+            {
+                return "yli::ontology::SymbiontSpecies*";
+            }
+            else if (std::holds_alternative<yli::ontology::Holobiont*>(this->data))
+            {
+                return "yli::ontology::Holobiont*";
+            }
+            else if (std::holds_alternative<yli::ontology::Biont*>(this->data))
+            {
+                return "yli::ontology::Biont*";
+            }
+            else if (std::holds_alternative<yli::ontology::Font2D*>(this->data))
+            {
+                return "yli::ontology::Font2D*";
+            }
+            else if (std::holds_alternative<yli::ontology::Text2D*>(this->data))
+            {
+                return "yli::ontology::Text2D*";
+            }
+            else if (std::holds_alternative<yli::ontology::VectorFont*>(this->data))
+            {
+                return "yli::ontology::VectorFont*";
+            }
+            else if (std::holds_alternative<yli::ontology::Glyph*>(this->data))
+            {
+                return "yli::ontology::Glyph*";
+            }
+            else if (std::holds_alternative<yli::ontology::Text3D*>(this->data))
+            {
+                return "yli::ontology::Text3D*";
+            }
+            else if (std::holds_alternative<yli::ontology::Console*>(this->data))
+            {
+                return "yli::ontology::Console*";
+            }
+            else if (std::holds_alternative<yli::ontology::ComputeTask*>(this->data))
+            {
+                return "yli::ontology::ComputeTask*";
+            }
+            else if (std::holds_alternative<std::shared_ptr<yli::common::AnyValue>>(this->data))
+            {
+                return "std::shared_ptr<yli::common::AnyValue>";
+            }
+            else if (std::holds_alternative<std::shared_ptr<yli::common::AnyStruct>>(this->data))
+            {
+                return "std::shared_ptr<yli::common::AnyStruct>";
+            }
+            else if (std::holds_alternative<yli::common::SphericalCoordinatesStruct*>(this->data))
+            {
+                return "yli::common::SphericalCoordinatesStruct*";
+            }
+            else if (std::holds_alternative<std::string*>(this->data))
+            {
+                return "std::string*";
+            }
+            else if (std::holds_alternative<const std::string*>(this->data))
+            {
+                return "const std::string*";
+            }
+            else if (std::holds_alternative<std::shared_ptr<std::vector<int8_t>>>(this->data))
+            {
+                return "std::shared_ptr<std::vector<int8_t>>";
+            }
+            else if (std::holds_alternative<std::shared_ptr<std::vector<uint8_t>>>(this->data))
+            {
+                return "std::shared_ptr<std::vector<uint8_t>>";
+            }
+            else if (std::holds_alternative<std::shared_ptr<std::vector<int16_t>>>(this->data))
+            {
+                return "std::shared_ptr<std::vector<int16_t>>";
+            }
+            else if (std::holds_alternative<std::shared_ptr<std::vector<uint16_t>>>(this->data))
+            {
+                return "std::shared_ptr<std::vector<uint16_t>>";
+            }
+            else if (std::holds_alternative<std::shared_ptr<std::vector<int32_t>>>(this->data))
+            {
+                return "std::shared_ptr<std::vector<int32_t>>";
+            }
+            else if (std::holds_alternative<std::shared_ptr<std::vector<uint32_t>>>(this->data))
+            {
+                return "std::shared_ptr<std::vector<uint32_t>>";
+            }
+            else if (std::holds_alternative<std::shared_ptr<std::vector<float>>>(this->data))
+            {
+                return "std::shared_ptr<std::vector<float>>";
+            }
+            else if (std::holds_alternative<std::shared_ptr<glm::vec3>>(this->data))
+            {
+                return "std::shared_ptr<glm::vec3>";
+            }
+            else if (std::holds_alternative<std::shared_ptr<glm::vec4>>(this->data))
+            {
+                return "std::shared_ptr<glm::vec4>";
+            }
+
+            return "ERROR: `AnyValue::get_datatype`: no datatype string defined for this datatype!";
         }
 
         std::string AnyValue::get_string() const
