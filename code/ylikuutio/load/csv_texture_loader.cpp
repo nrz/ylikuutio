@@ -37,7 +37,7 @@ namespace yli
 {
     namespace load
     {
-        bool load_CSV_texture(
+        bool load_csv_texture(
                 const std::string& filename,
                 const GLenum format,
                 const GLenum internal_format,
@@ -66,7 +66,7 @@ namespace yli
                 image_data_int8_t = load_CSV_file<int8_t>(filename, image_width, image_height, image_size);
                 if (image_data_int8_t == nullptr)
                 {
-                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_int8_t` is `nullptr`!\n";
+                    std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_int8_t` is `nullptr`!\n";
                     return false;
                 }
                 if (left_filler_vector_any_value != nullptr &&
@@ -92,7 +92,7 @@ namespace yli
                 image_data_uint8_t = load_CSV_file<uint8_t>(filename, image_width, image_height, image_size);
                 if (image_data_uint8_t == nullptr)
                 {
-                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_uint8_t` is `nullptr`!\n";
+                    std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_uint8_t` is `nullptr`!\n";
                     return false;
                 }
                 if (left_filler_vector_any_value != nullptr &&
@@ -118,7 +118,7 @@ namespace yli
                 image_data_int16_t = load_CSV_file<int16_t>(filename, image_width, image_height, image_size);
                 if (image_data_int16_t == nullptr)
                 {
-                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_int16_t` is `nullptr`!\n";
+                    std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_int16_t` is `nullptr`!\n";
                     return false;
                 }
                 if (left_filler_vector_any_value != nullptr &&
@@ -144,7 +144,7 @@ namespace yli
                 image_data_uint16_t = load_CSV_file<uint16_t>(filename, image_width, image_height, image_size);
                 if (image_data_uint16_t == nullptr)
                 {
-                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_uint16_t` is `nullptr`!\n";
+                    std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_uint16_t` is `nullptr`!\n";
                     return false;
                 }
                 if (left_filler_vector_any_value != nullptr &&
@@ -170,7 +170,7 @@ namespace yli
                 image_data_int32_t = load_CSV_file<int32_t>(filename, image_width, image_height, image_size);
                 if (image_data_int32_t == nullptr)
                 {
-                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_int32_t` is `nullptr`!\n";
+                    std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_int32_t` is `nullptr`!\n";
                     return false;
                 }
                 if (left_filler_vector_any_value != nullptr &&
@@ -196,7 +196,7 @@ namespace yli
                 image_data_uint32_t = load_CSV_file<uint32_t>(filename, image_width, image_height, image_size);
                 if (image_data_uint32_t == nullptr)
                 {
-                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_uint32_t` is `nullptr`!\n";
+                    std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_uint32_t` is `nullptr`!\n";
                     return false;
                 }
                 if (left_filler_vector_any_value != nullptr &&
@@ -230,7 +230,7 @@ namespace yli
                 image_data_float = load_CSV_file<float>(filename, image_width, image_height, image_size);
                 if (image_data_float == nullptr)
                 {
-                    std::cerr << "ERROR: `yli::load::load_CSV_texture`: `image_data_float` is `nullptr`!\n";
+                    std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_float` is `nullptr`!\n";
                     return false;
                 }
                 if (left_filler_vector_any_value != nullptr &&
@@ -290,7 +290,7 @@ namespace yli
             return true;
         }
 
-        bool load_CSV_texture(
+        bool load_csv_texture(
                 const std::string& filename,
                 const GLenum format,
                 const GLenum internal_format,
@@ -300,7 +300,7 @@ namespace yli
                 std::size_t& image_size,
                 uint32_t& textureID)
         {
-            return yli::load::load_CSV_texture(
+            return yli::load::load_csv_texture(
                     filename,
                     format,
                     internal_format,

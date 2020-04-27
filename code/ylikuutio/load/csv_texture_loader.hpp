@@ -38,7 +38,7 @@ namespace yli
         // Load a .CSV file using our custom loader.
         // Insert elementes of `left_filler_vector_any_value` to the left side of each element,
         // and elementes of `right_filler_vector_any_value` to the right side of each element.
-        bool load_CSV_texture(
+        bool load_csv_texture(
                 const std::string& filename,
                 const GLenum format,
                 const GLenum internal_format,
@@ -51,7 +51,7 @@ namespace yli
                 GLuint& textureID);
 
         // Load a .CSV file using our custom loader.
-        bool load_CSV_texture(
+        bool load_csv_texture(
                 const std::string& filename,
                 const GLenum format,
                 const GLenum internal_format,
