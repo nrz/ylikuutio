@@ -903,26 +903,26 @@ TEST(any_value_must_be_initialized_appropriately, std_string)
 {
     std::string foo_string = "foo";
     std::string* const foo_string_pointer = &foo_string;
-    yli::common::AnyValue object_pointer_any_value = yli::common::AnyValue(foo_string_pointer);
-    ASSERT_TRUE(std::holds_alternative<std::string*>(object_pointer_any_value.data));
-    ASSERT_EQ(std::get<std::string*>(object_pointer_any_value.data), foo_string_pointer);
-    ASSERT_EQ(std::strlen(object_pointer_any_value.get_datatype().c_str()), std::strlen("std::string*"));
-    ASSERT_EQ(std::strcmp(object_pointer_any_value.get_datatype().c_str(), "std::string*"), 0);
-    ASSERT_EQ(std::strlen(object_pointer_any_value.get_string().c_str()), std::strlen("foo"));
-    ASSERT_EQ(std::strcmp(object_pointer_any_value.get_string().c_str(), "foo"), 0);
+    yli::common::AnyValue std_string_pointer_any_value = yli::common::AnyValue(foo_string_pointer);
+    ASSERT_TRUE(std::holds_alternative<std::string*>(std_string_pointer_any_value.data));
+    ASSERT_EQ(std::get<std::string*>(std_string_pointer_any_value.data), foo_string_pointer);
+    ASSERT_EQ(std::strlen(std_string_pointer_any_value.get_datatype().c_str()), std::strlen("std::string*"));
+    ASSERT_EQ(std::strcmp(std_string_pointer_any_value.get_datatype().c_str(), "std::string*"), 0);
+    ASSERT_EQ(std::strlen(std_string_pointer_any_value.get_string().c_str()), std::strlen("foo"));
+    ASSERT_EQ(std::strcmp(std_string_pointer_any_value.get_string().c_str(), "foo"), 0);
 }
 
 TEST(any_value_must_be_initialized_appropriately, const_std_string)
 {
     const std::string foo_string = "foo";
     const std::string* const foo_string_pointer = &foo_string;
-    yli::common::AnyValue object_pointer_any_value = yli::common::AnyValue(foo_string_pointer);
-    ASSERT_TRUE(std::holds_alternative<const std::string*>(object_pointer_any_value.data));
-    ASSERT_EQ(std::get<const std::string*>(object_pointer_any_value.data), foo_string_pointer);
-    ASSERT_EQ(std::strlen(object_pointer_any_value.get_datatype().c_str()), std::strlen("const std::string*"));
-    ASSERT_EQ(std::strcmp(object_pointer_any_value.get_datatype().c_str(), "const std::string*"), 0);
-    ASSERT_EQ(std::strlen(object_pointer_any_value.get_string().c_str()), std::strlen("foo"));
-    ASSERT_EQ(std::strcmp(object_pointer_any_value.get_string().c_str(), "foo"), 0);
+    yli::common::AnyValue const_std_string_pointer_any_value = yli::common::AnyValue(foo_string_pointer);
+    ASSERT_TRUE(std::holds_alternative<const std::string*>(const_std_string_pointer_any_value.data));
+    ASSERT_EQ(std::get<const std::string*>(const_std_string_pointer_any_value.data), foo_string_pointer);
+    ASSERT_EQ(std::strlen(const_std_string_pointer_any_value.get_datatype().c_str()), std::strlen("const std::string*"));
+    ASSERT_EQ(std::strcmp(const_std_string_pointer_any_value.get_datatype().c_str(), "const std::string*"), 0);
+    ASSERT_EQ(std::strlen(const_std_string_pointer_any_value.get_string().c_str()), std::strlen("foo"));
+    ASSERT_EQ(std::strcmp(const_std_string_pointer_any_value.get_string().c_str(), "foo"), 0);
 }
 
 TEST(any_value_must_be_initialized_appropriately, std_vector_int8_t_shared_ptr)
