@@ -282,9 +282,8 @@ namespace yli
                     // calling the corresponding activate callback.
                     yli::config::Setting* setting = setting_master->setting_pointer_map[setting_name];
 
-                    // create empty `AnyValue` (there is no suitable constructor yet).
-                    std::shared_ptr<yli::common::AnyValue> setting_any_value = std::make_shared<yli::common::AnyValue>();
-                    setting_any_value->type = setting->setting_value->type;
+                    // copy current `AnyValue`.
+                    std::shared_ptr<yli::common::AnyValue> setting_any_value = setting->setting_value;
 
                     // set a new value.
                     bool success = setting_any_value->set_value(command_parameters.at(1));
@@ -353,9 +352,8 @@ namespace yli
                     // calling the corresponding activate callback.
                     yli::config::Setting* setting = setting_master->setting_pointer_map[setting_name];
 
-                    // create empty `AnyValue` (there is no suitable constructor yet).
-                    std::shared_ptr<yli::common::AnyValue> setting_any_value = std::make_shared<yli::common::AnyValue>();
-                    setting_any_value->type = setting->setting_value->type;
+                    // copy current `AnyValue`.
+                    std::shared_ptr<yli::common::AnyValue> setting_any_value = setting->setting_value;
 
                     // set a new value.
                     bool success = setting_any_value->set_value(command_parameters.at(2));
