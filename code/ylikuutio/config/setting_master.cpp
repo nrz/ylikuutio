@@ -115,9 +115,6 @@ namespace yli
             // calling the corresponding activate callback.
             yli::config::Setting* setting = this->setting_pointer_map[setting_name];
 
-            // create empty `AnyValue` (there is no suitable constructor yet).
-            setting_new_any_value->type = setting->setting_value->type;
-
             setting->setting_value = setting_new_any_value;
             setting->activate_callback(this->parent, this);
             return true;
