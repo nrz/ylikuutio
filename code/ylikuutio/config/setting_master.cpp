@@ -286,7 +286,7 @@ namespace yli
                     std::shared_ptr<yli::common::AnyValue> setting_any_value = setting->setting_value;
 
                     // set a new value.
-                    bool success = setting_any_value->set_value(command_parameters.at(1));
+                    bool success = setting_any_value->set_new_value(command_parameters.at(1));
 
                     if (success)
                     {
@@ -356,7 +356,7 @@ namespace yli
                     std::shared_ptr<yli::common::AnyValue> setting_any_value = setting->setting_value;
 
                     // set a new value.
-                    bool success = setting_any_value->set_value(command_parameters.at(2));
+                    bool success = setting_any_value->set_new_value(command_parameters.at(2));
 
                     if (success)
                     {

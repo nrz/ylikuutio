@@ -144,10 +144,10 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_bool_true
     ASSERT_NE(any_value_entity, nullptr);
 
     yli::common::AnyValue* any_value = any_value_entity;
-    ASSERT_EQ(any_value->type, yli::common::Datatype::BOOL);
+    ASSERT_TRUE(std::holds_alternative<bool>(any_value->data));
     ASSERT_TRUE(std::get<bool>(any_value->data));
 
-    ASSERT_EQ(any_value_entity->type, yli::common::Datatype::BOOL);
+    ASSERT_TRUE(std::holds_alternative<bool>(any_value_entity->data));
     ASSERT_TRUE(std::get<bool>(any_value_entity->data));
 }
 
@@ -176,10 +176,10 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_bool_fals
     ASSERT_NE(any_value_entity, nullptr);
 
     yli::common::AnyValue* any_value = any_value_entity;
-    ASSERT_EQ(any_value->type, yli::common::Datatype::BOOL);
+    ASSERT_TRUE(std::holds_alternative<bool>(any_value->data));
     ASSERT_FALSE(std::get<bool>(any_value->data));
 
-    ASSERT_EQ(any_value_entity->type, yli::common::Datatype::BOOL);
+    ASSERT_TRUE(std::holds_alternative<bool>(any_value_entity->data));
     ASSERT_FALSE(std::get<bool>(any_value_entity->data));
 }
 
@@ -208,10 +208,10 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_float_0)
     ASSERT_NE(any_value_entity, nullptr);
 
     yli::common::AnyValue* any_value = any_value_entity;
-    ASSERT_EQ(any_value->type, yli::common::Datatype::FLOAT);
+    ASSERT_TRUE(std::holds_alternative<float>(any_value->data));
     ASSERT_EQ(std::get<float>(any_value->data), 0.0f);
 
-    ASSERT_EQ(any_value_entity->type, yli::common::Datatype::FLOAT);
+    ASSERT_TRUE(std::holds_alternative<float>(any_value_entity->data));
     ASSERT_EQ(std::get<float>(any_value_entity->data), 0.0f);
 }
 
@@ -240,10 +240,10 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_float_0_0
     ASSERT_NE(any_value_entity, nullptr);
 
     yli::common::AnyValue* any_value = any_value_entity;
-    ASSERT_EQ(any_value->type, yli::common::Datatype::FLOAT);
+    ASSERT_TRUE(std::holds_alternative<float>(any_value->data));
     ASSERT_EQ(std::get<float>(any_value->data), 0.0f);
 
-    ASSERT_EQ(any_value_entity->type, yli::common::Datatype::FLOAT);
+    ASSERT_TRUE(std::holds_alternative<float>(any_value_entity->data));
     ASSERT_EQ(std::get<float>(any_value_entity->data), 0.0f);
 }
 
@@ -272,11 +272,11 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_float_pi)
     ASSERT_NE(any_value_entity, nullptr);
 
     yli::common::AnyValue* any_value = any_value_entity;
-    ASSERT_EQ(any_value->type, yli::common::Datatype::FLOAT);
+    ASSERT_TRUE(std::holds_alternative<float>(any_value->data));
     ASSERT_GT(std::get<float>(any_value->data), 3.141592f);
     ASSERT_LT(std::get<float>(any_value->data), 3.141593f);
 
-    ASSERT_EQ(any_value_entity->type, yli::common::Datatype::FLOAT);
+    ASSERT_TRUE(std::holds_alternative<float>(any_value_entity->data));
     ASSERT_GT(std::get<float>(any_value_entity->data), 3.141592f);
     ASSERT_LT(std::get<float>(any_value_entity->data), 3.141593f);
 }
@@ -306,10 +306,10 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_double_0)
     ASSERT_NE(any_value_entity, nullptr);
 
     yli::common::AnyValue* any_value = any_value_entity;
-    ASSERT_EQ(any_value->type, yli::common::Datatype::DOUBLE);
+    ASSERT_TRUE(std::holds_alternative<double>(any_value->data));
     ASSERT_EQ(std::get<double>(any_value->data), 0.0f);
 
-    ASSERT_EQ(any_value_entity->type, yli::common::Datatype::DOUBLE);
+    ASSERT_TRUE(std::holds_alternative<double>(any_value_entity->data));
     ASSERT_EQ(std::get<double>(any_value_entity->data), 0.0f);
 }
 
@@ -338,10 +338,10 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_double_0_
     ASSERT_NE(any_value_entity, nullptr);
 
     yli::common::AnyValue* any_value = any_value_entity;
-    ASSERT_EQ(any_value->type, yli::common::Datatype::DOUBLE);
+    ASSERT_TRUE(std::holds_alternative<double>(any_value->data));
     ASSERT_EQ(std::get<double>(any_value->data), 0.0f);
 
-    ASSERT_EQ(any_value_entity->type, yli::common::Datatype::DOUBLE);
+    ASSERT_TRUE(std::holds_alternative<double>(any_value_entity->data));
     ASSERT_EQ(std::get<double>(any_value_entity->data), 0.0f);
 }
 
@@ -370,10 +370,10 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_double_pi
     ASSERT_NE(any_value_entity, nullptr);
 
     yli::common::AnyValue* any_value = any_value_entity;
-    ASSERT_EQ(any_value->type, yli::common::Datatype::DOUBLE);
+    ASSERT_TRUE(std::holds_alternative<double>(any_value->data));
     ASSERT_EQ(std::get<double>(any_value->data), 3.1415927);
 
-    ASSERT_EQ(any_value_entity->type, yli::common::Datatype::DOUBLE);
+    ASSERT_TRUE(std::holds_alternative<double>(any_value_entity->data));
     ASSERT_EQ(std::get<double>(any_value_entity->data), 3.1415927);
 }
 
@@ -402,10 +402,10 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_0
     ASSERT_NE(any_value_entity, nullptr);
 
     yli::common::AnyValue* any_value = any_value_entity;
-    ASSERT_EQ(any_value->type, yli::common::Datatype::INT32_T);
+    ASSERT_TRUE(std::holds_alternative<int32_t>(any_value->data));
     ASSERT_EQ(std::get<int32_t>(any_value->data), 0);
 
-    ASSERT_EQ(any_value_entity->type, yli::common::Datatype::INT32_T);
+    ASSERT_TRUE(std::holds_alternative<int32_t>(any_value_entity->data));
     ASSERT_EQ(std::get<int32_t>(any_value_entity->data), 0);
 }
 
@@ -434,10 +434,10 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_p
     ASSERT_NE(any_value_entity, nullptr);
 
     yli::common::AnyValue* any_value = any_value_entity;
-    ASSERT_EQ(any_value->type, yli::common::Datatype::INT32_T);
+    ASSERT_TRUE(std::holds_alternative<int32_t>(any_value->data));
     ASSERT_EQ(std::get<int32_t>(any_value->data), 1);
 
-    ASSERT_EQ(any_value_entity->type, yli::common::Datatype::INT32_T);
+    ASSERT_TRUE(std::holds_alternative<int32_t>(any_value_entity->data));
     ASSERT_EQ(std::get<int32_t>(any_value_entity->data), 1);
 }
 
@@ -466,10 +466,10 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_m
     ASSERT_NE(any_value_entity, nullptr);
 
     yli::common::AnyValue* any_value = any_value_entity;
-    ASSERT_EQ(any_value->type, yli::common::Datatype::INT32_T);
+    ASSERT_TRUE(std::holds_alternative<int32_t>(any_value->data));
     ASSERT_EQ(std::get<int32_t>(any_value->data), -1);
 
-    ASSERT_EQ(any_value_entity->type, yli::common::Datatype::INT32_T);
+    ASSERT_TRUE(std::holds_alternative<int32_t>(any_value_entity->data));
     ASSERT_EQ(std::get<int32_t>(any_value_entity->data), -1);
 }
 
@@ -498,10 +498,10 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_m
     ASSERT_NE(any_value_entity, nullptr);
 
     yli::common::AnyValue* any_value = any_value_entity;
-    ASSERT_EQ(any_value->type, yli::common::Datatype::INT32_T);
+    ASSERT_TRUE(std::holds_alternative<int32_t>(any_value->data));
     ASSERT_EQ(std::get<int32_t>(any_value->data), 2147483647);
 
-    ASSERT_EQ(any_value_entity->type, yli::common::Datatype::INT32_T);
+    ASSERT_TRUE(std::holds_alternative<int32_t>(any_value_entity->data));
     ASSERT_EQ(std::get<int32_t>(any_value_entity->data), 2147483647);
 }
 
@@ -530,10 +530,10 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_m
     ASSERT_NE(any_value_entity, nullptr);
 
     yli::common::AnyValue* any_value = any_value_entity;
-    ASSERT_EQ(any_value->type, yli::common::Datatype::INT32_T);
+    ASSERT_TRUE(std::holds_alternative<int32_t>(any_value->data));
     ASSERT_EQ(std::get<int32_t>(any_value->data), -2147483648);
 
-    ASSERT_EQ(any_value_entity->type, yli::common::Datatype::INT32_T);
+    ASSERT_TRUE(std::holds_alternative<int32_t>(any_value_entity->data));
     ASSERT_EQ(std::get<int32_t>(any_value_entity->data), -2147483648);
 }
 
@@ -562,10 +562,10 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_uint32_t_
     ASSERT_NE(any_value_entity, nullptr);
 
     yli::common::AnyValue* any_value = any_value_entity;
-    ASSERT_EQ(any_value->type, yli::common::Datatype::UINT32_T);
+    ASSERT_TRUE(std::holds_alternative<uint32_t>(any_value->data));
     ASSERT_EQ(std::get<uint32_t>(any_value->data), 0);
 
-    ASSERT_EQ(any_value_entity->type, yli::common::Datatype::UINT32_T);
+    ASSERT_TRUE(std::holds_alternative<uint32_t>(any_value_entity->data));
     ASSERT_EQ(std::get<uint32_t>(any_value_entity->data), 0);
 }
 
@@ -594,10 +594,10 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_uint32_t_
     ASSERT_NE(any_value_entity, nullptr);
 
     yli::common::AnyValue* any_value = any_value_entity;
-    ASSERT_EQ(any_value->type, yli::common::Datatype::UINT32_T);
+    ASSERT_TRUE(std::holds_alternative<uint32_t>(any_value->data));
     ASSERT_EQ(std::get<uint32_t>(any_value->data), 1);
 
-    ASSERT_EQ(any_value_entity->type, yli::common::Datatype::UINT32_T);
+    ASSERT_TRUE(std::holds_alternative<uint32_t>(any_value_entity->data));
     ASSERT_EQ(std::get<uint32_t>(any_value_entity->data), 1);
 }
 
@@ -626,10 +626,10 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_uint32_t_
     ASSERT_NE(any_value_entity, nullptr);
 
     yli::common::AnyValue* any_value = any_value_entity;
-    ASSERT_EQ(any_value->type, yli::common::Datatype::UINT32_T);
+    ASSERT_TRUE(std::holds_alternative<uint32_t>(any_value->data));
     ASSERT_EQ(std::get<uint32_t>(any_value->data), 4294967295);
 
-    ASSERT_EQ(any_value_entity->type, yli::common::Datatype::UINT32_T);
+    ASSERT_TRUE(std::holds_alternative<uint32_t>(any_value_entity->data));
     ASSERT_EQ(std::get<uint32_t>(any_value_entity->data), 4294967295);
 }
 

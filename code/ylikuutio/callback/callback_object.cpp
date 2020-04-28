@@ -99,7 +99,7 @@ namespace yli
         // setter function for callbacks and callback objects.
         void CallbackObject::set_any_value(const std::string& name, std::shared_ptr<yli::common::AnyValue> any_value)
         {
-            this->anyvalue_hashmap[name] = *any_value;
+            this->anyvalue_hashmap[name] = yli::common::AnyValue(*any_value);
         }
 
         void CallbackObject::bind_to_parent()

@@ -392,6 +392,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/common/datatype.hpp
     code/ylikuutio/common/pi.hpp
     code/ylikuutio/common/spherical_coordinates_struct.hpp
+    code/ylikuutio/common/variant_templates.hpp
 
     # config, in alphabetical order.
     code/ylikuutio/config/activate_callback.hpp

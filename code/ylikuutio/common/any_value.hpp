@@ -18,8 +18,6 @@
 #ifndef __ANY_VALUE_HPP_INCLUDED
 #define __ANY_VALUE_HPP_INCLUDED
 
-#include "datatype.hpp"
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -72,7 +70,7 @@ namespace yli
                 std::string get_datatype() const;
                 std::string get_string() const;
                 yli::ontology::Entity* get_entity_pointer() const;
-                bool set_value(const std::string& value_string);
+                bool set_new_value(const std::string& value_string);
 
                 // copy constructor.
                 AnyValue(const yli::common::AnyValue& original);
@@ -130,8 +128,6 @@ namespace yli
                 AnyValue(std::shared_ptr<glm::vec3> const glm_vec3_shared_ptr);
                 AnyValue(std::shared_ptr<glm::vec4> const glm_vec4_shared_ptr);
 
-                yli::common::Datatype type;
-
                 std::variant<
                     bool,
                     char,
@@ -182,9 +178,6 @@ namespace yli
                     std::string*,
                     const std::string*
                     > data;
-
-            private:
-                void set_default_values();
         };
     }
 }
