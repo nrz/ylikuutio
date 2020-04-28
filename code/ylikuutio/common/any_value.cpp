@@ -1252,291 +1252,291 @@ namespace yli
         }
 
         AnyValue::AnyValue(const bool bool_value)
+            : data(bool_value)
         {
             // constructor.
-            this->data = bool_value;
         }
 
         AnyValue::AnyValue(const char char_value)
+            : data(char_value)
         {
             // constructor.
-            this->data = char_value;
         }
 
         AnyValue::AnyValue(const float float_value)
+            : data(float_value)
         {
             // constructor.
-            this->data = float_value;
         }
 
         AnyValue::AnyValue(const double double_value)
+            : data(double_value)
         {
             // constructor.
-            this->data = double_value;
         }
 
         AnyValue::AnyValue(const int32_t int32_t_value)
+            : data(int32_t_value)
         {
             // constructor.
-            this->data = int32_t_value;
         }
 
         AnyValue::AnyValue(const uint32_t uint32_t_value)
+            : data(uint32_t_value)
         {
             // constructor.
-            this->data = uint32_t_value;
         }
 
         AnyValue::AnyValue(bool* const bool_pointer)
+            : data(bool_pointer)
         {
             // constructor.
-            this->data = bool_pointer;
         }
 
         AnyValue::AnyValue(char* const char_pointer)
+            : data(char_pointer)
         {
             // constructor.
-            this->data = char_pointer;
         }
 
         AnyValue::AnyValue(float* const float_pointer)
+            : data(float_pointer)
         {
             // constructor.
-            this->data = float_pointer;
         }
 
         AnyValue::AnyValue(double* const double_pointer)
+            : data(double_pointer)
         {
             // constructor.
-            this->data = double_pointer;
         }
 
         AnyValue::AnyValue(int32_t* const int32_t_pointer)
+            : data(int32_t_pointer)
         {
             // constructor.
-            this->data = int32_t_pointer;
         }
 
         AnyValue::AnyValue(uint32_t* const uint32_t_pointer)
+            : data(uint32_t_pointer)
         {
             // constructor.
-            this->data = uint32_t_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::Entity* const entity_pointer)
+            : data(entity_pointer)
         {
             // constructor.
-            this->data = entity_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::Movable* const movable_pointer)
+            : data(movable_pointer)
         {
             // constructor.
-            this->data = movable_pointer;
         }
 
         AnyValue::AnyValue(const yli::ontology::Movable* const const_movable_pointer)
+            : data(const_movable_pointer)
         {
             // constructor.
-            this->data = const_movable_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::Universe* const universe_pointer)
+            : data(universe_pointer)
         {
             // constructor.
-            this->data = universe_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::World* const world_pointer)
+            : data(world_pointer)
         {
             // constructor.
-            this->data = world_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::Scene* const scene_pointer)
+            : data(scene_pointer)
         {
             // constructor.
-            this->data = scene_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::Shader* const shader_pointer)
+            : data(shader_pointer)
         {
             // constructor.
-            this->data = shader_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::Material* const material_pointer)
+            : data(material_pointer)
         {
             // constructor.
-            this->data = material_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::Species* const species_pointer)
+            : data(species_pointer)
         {
             // constructor.
-            this->data = species_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::Object* const object_pointer)
+            : data(object_pointer)
         {
             // constructor.
-            this->data = object_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::Symbiosis* const symbiosis_pointer)
+            : data(symbiosis_pointer)
         {
             // constructor.
-            this->data = symbiosis_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::SymbiontMaterial* const symbiont_material_pointer)
+            : data(symbiont_material_pointer)
         {
             // constructor.
-            this->data = symbiont_material_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::SymbiontSpecies* const symbiont_species_pointer)
+            : data(symbiont_species_pointer)
         {
             // constructor.
-            this->data = symbiont_species_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::Holobiont* const holobiont_pointer)
+            : data(holobiont_pointer)
         {
             // constructor.
-            this->data = holobiont_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::Biont* const biont_pointer)
+            : data(biont_pointer)
         {
             // constructor.
-            this->data = biont_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::Font2D* const font2D_pointer)
+            : data(font2D_pointer)
         {
             // constructor.
-            this->data = font2D_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::Text2D* const text2D_pointer)
+            : data(text2D_pointer)
         {
             // constructor.
-            this->data = text2D_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::VectorFont* const vector_font_pointer)
+            : data(vector_font_pointer)
         {
             // constructor.
-            this->data = vector_font_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::Glyph* const glyph_pointer)
+            : data(glyph_pointer)
         {
             // constructor.
-            this->data = glyph_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::Text3D* const text3D_pointer)
+            : data(text3D_pointer)
         {
             // constructor.
-            this->data = text3D_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::Console* const console_pointer)
+            : data(console_pointer)
         {
             // constructor.
-            this->data = console_pointer;
         }
 
         AnyValue::AnyValue(yli::ontology::ComputeTask* const compute_task_pointer)
+            : data(compute_task_pointer)
         {
             // constructor.
-            this->data = compute_task_pointer;
         }
 
         AnyValue::AnyValue(std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr)
+            : data(any_value_shared_ptr)
         {
             // constructor.
-            this->data = any_value_shared_ptr;
         }
 
         AnyValue::AnyValue(std::shared_ptr<yli::common::AnyStruct> any_struct_shared_ptr)
+            : data(any_struct_shared_ptr)
         {
             // constructor.
-            this->data = any_struct_shared_ptr;
         }
 
         AnyValue::AnyValue(yli::common::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer)
+            : data(spherical_coordinates_struct_pointer)
         {
             // constructor.
-            this->data = spherical_coordinates_struct_pointer;
         }
 
         AnyValue::AnyValue(std::string* const std_string_pointer)
+            : data(std_string_pointer)
         {
             // constructor.
-            this->data = std_string_pointer;
         }
 
         AnyValue::AnyValue(const std::string* const const_std_string_pointer)
+            : data(const_std_string_pointer)
         {
             // constructor.
-            this->data = const_std_string_pointer;
         }
 
         AnyValue::AnyValue(std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr)
+            : data(std_vector_int8_t_shared_ptr)
         {
             // constructor.
-            this->data = std_vector_int8_t_shared_ptr;
         }
 
         AnyValue::AnyValue(std::shared_ptr<std::vector<uint8_t>> std_vector_uint8_t_shared_ptr)
+            : data(std_vector_uint8_t_shared_ptr)
         {
             // constructor.
-            this->data = std_vector_uint8_t_shared_ptr;
         }
 
         AnyValue::AnyValue(std::shared_ptr<std::vector<int16_t>> std_vector_int16_t_shared_ptr)
+            : data(std_vector_int16_t_shared_ptr)
         {
             // constructor.
-            this->data = std_vector_int16_t_shared_ptr;
         }
 
         AnyValue::AnyValue(std::shared_ptr<std::vector<uint16_t>> std_vector_uint16_t_shared_ptr)
+            : data(std_vector_uint16_t_shared_ptr)
         {
             // constructor.
-            this->data = std_vector_uint16_t_shared_ptr;
         }
 
         AnyValue::AnyValue(std::shared_ptr<std::vector<int32_t>> std_vector_int32_t_shared_ptr)
+            : data(std_vector_int32_t_shared_ptr)
         {
             // constructor.
-            this->data = std_vector_int32_t_shared_ptr;
         }
 
         AnyValue::AnyValue(std::shared_ptr<std::vector<uint32_t>> std_vector_uint32_t_shared_ptr)
+            : data(std_vector_uint32_t_shared_ptr)
         {
             // constructor.
-            this->data = std_vector_uint32_t_shared_ptr;
         }
 
         AnyValue::AnyValue(std::shared_ptr<std::vector<float>> std_vector_float_shared_ptr)
+            : data(std_vector_float_shared_ptr)
         {
             // constructor.
-            this->data = std_vector_float_shared_ptr;
         }
 
         AnyValue::AnyValue(std::shared_ptr<glm::vec3> glm_vec3_shared_ptr)
+            : data(glm_vec3_shared_ptr)
         {
             // constructor.
-            this->data = glm_vec3_shared_ptr;
         }
 
         AnyValue::AnyValue(std::shared_ptr<glm::vec4> glm_vec4_shared_ptr)
+            : data(glm_vec4_shared_ptr)
         {
             // constructor.
-            this->data = glm_vec4_shared_ptr;
         }
     }
 }
