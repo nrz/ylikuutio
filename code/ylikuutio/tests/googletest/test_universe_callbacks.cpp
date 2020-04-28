@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/common/datatype.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
