@@ -130,55 +130,6 @@ namespace yli
                 AnyValue(std::shared_ptr<glm::vec3> const glm_vec3_shared_ptr);
                 AnyValue(std::shared_ptr<glm::vec4> const glm_vec4_shared_ptr);
 
-                AnyValue(const std::string& type, const bool bool_value);
-                AnyValue(const std::string& type, const char char_value);
-                AnyValue(const std::string& type, const float float_value);
-                AnyValue(const std::string& type, const double double_value);
-                AnyValue(const std::string& type, const int32_t int32_t_value);
-                AnyValue(const std::string& type, const uint32_t uint32_t_value);
-                AnyValue(const std::string& type, bool* const bool_pointer);
-                AnyValue(const std::string& type, char* const char_pointer);
-                AnyValue(const std::string& type, float* const float_pointer);
-                AnyValue(const std::string& type, double* const double_pointer);
-                AnyValue(const std::string& type, int32_t* const int32_t_pointer);
-                AnyValue(const std::string& type, uint32_t* const uint32_t_pointer);
-                AnyValue(const std::string& type, yli::ontology::Entity* const entity_pointer);
-                AnyValue(const std::string& type, yli::ontology::Movable* const movable_pointer);
-                AnyValue(const std::string& type, const yli::ontology::Movable* const const_movable_pointer);
-                AnyValue(const std::string& type, yli::ontology::Universe* const universe_pointer);
-                AnyValue(const std::string& type, yli::ontology::World* const world_pointer);
-                AnyValue(const std::string& type, yli::ontology::Scene* const scene_pointer);
-                AnyValue(const std::string& type, yli::ontology::Shader* const shader_pointer);
-                AnyValue(const std::string& type, yli::ontology::Material* const material_pointer);
-                AnyValue(const std::string& type, yli::ontology::Species* const species_pointer);
-                AnyValue(const std::string& type, yli::ontology::Object* const object_pointer);
-                AnyValue(const std::string& type, yli::ontology::Symbiosis* const symbiosis_pointer);
-                AnyValue(const std::string& type, yli::ontology::SymbiontMaterial* const symbiont_material_pointer);
-                AnyValue(const std::string& type, yli::ontology::SymbiontSpecies* const symbiont_species_pointer);
-                AnyValue(const std::string& type, yli::ontology::Holobiont* const holobiont_pointer);
-                AnyValue(const std::string& type, yli::ontology::Biont* const biont_pointer);
-                AnyValue(const std::string& type, yli::ontology::Font2D* const font2D_pointer);
-                AnyValue(const std::string& type, yli::ontology::Text2D* const text2D_pointer);
-                AnyValue(const std::string& type, yli::ontology::VectorFont* const vector_font_pointer);
-                AnyValue(const std::string& type, yli::ontology::Glyph* const glyph_pointer);
-                AnyValue(const std::string& type, yli::ontology::Text3D* const text3D_pointer);
-                AnyValue(const std::string& type, yli::ontology::Console* const console_pointer);
-                AnyValue(const std::string& type, yli::ontology::ComputeTask* const compute_task_pointer);
-                AnyValue(const std::string& type, std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr);
-                AnyValue(const std::string& type, std::shared_ptr<yli::common::AnyStruct> any_struct_shared_ptr);
-                AnyValue(const std::string& type, yli::common::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
-                AnyValue(const std::string& type, std::string* const std_string_pointer);
-                AnyValue(const std::string& type, const std::string* const const_std_string_pointer);
-                AnyValue(const std::string& type, std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr);
-                AnyValue(const std::string& type, std::shared_ptr<std::vector<uint8_t>> std_vector_uint8_t_shared_ptr);
-                AnyValue(const std::string& type, std::shared_ptr<std::vector<int16_t>> std_vector_int16_t_shared_ptr);
-                AnyValue(const std::string& type, std::shared_ptr<std::vector<uint16_t>> std_vector_uint16_t_shared_ptr);
-                AnyValue(const std::string& type, std::shared_ptr<std::vector<int32_t>> std_vector_int32_t_shared_ptr);
-                AnyValue(const std::string& type, std::shared_ptr<std::vector<uint32_t>> std_vector_uint32_t_shared_ptr);
-                AnyValue(const std::string& type, std::shared_ptr<std::vector<float>> std_vector_float_shared_ptr);
-                AnyValue(const std::string& type, std::shared_ptr<glm::vec3> const glm_vec3_shared_ptr);
-                AnyValue(const std::string& type, std::shared_ptr<glm::vec4> const glm_vec3_shared_ptr);
-
                 yli::common::Datatype type;
 
                 std::variant<
