@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/common/datatype.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
 #include "code/ylikuutio/callback/callback_object.hpp"
@@ -55,28 +54,28 @@ std::shared_ptr<yli::common::AnyValue> square(
 
     std::shared_ptr<yli::common::AnyValue> any_value = std::make_shared<yli::common::AnyValue>(*input_parameters.at(0)->get_any_value());
 
-    if (any_value->type == yli::common::Datatype::INT32_T)
+    if (std::holds_alternative<int32_t>(any_value->data))
     {
         const int32_t factor = std::get<int32_t>(any_value->data);
         const int32_t squared = factor * factor;
         std::cout << "Square of (int32_t) " << factor << " is " << squared << ".\n";
         return std::make_shared<yli::common::AnyValue>(squared);
     }
-    else if (any_value->type == yli::common::Datatype::UINT32_T)
+    else if (std::holds_alternative<uint32_t>(any_value->data))
     {
         const uint32_t factor = std::get<uint32_t>(any_value->data);
         const uint32_t squared = factor * factor;
         std::cout << "Square of (uint32_t) " << factor << " is " << squared << ".\n";
         return std::make_shared<yli::common::AnyValue>(squared);
     }
-    else if (any_value->type == yli::common::Datatype::FLOAT)
+    else if (std::holds_alternative<float>(any_value->data))
     {
         const float factor = std::get<float>(any_value->data);
         const float squared = factor * factor;
         std::cout << "Square of (float) " << factor << " is " << squared << ".\n";
         return std::make_shared<yli::common::AnyValue>(squared);
     }
-    else if (any_value->type == yli::common::Datatype::DOUBLE)
+    else if (std::holds_alternative<double>(any_value->data))
     {
         const double factor = std::get<double>(any_value->data);
         const double squared = factor * factor;
@@ -107,28 +106,28 @@ std::shared_ptr<yli::common::AnyValue> square_last(
         return nullptr;
     }
 
-    if (return_value_any_value->type == yli::common::Datatype::INT32_T)
+    if (std::holds_alternative<int32_t>(return_value_any_value->data))
     {
         const int32_t factor = std::get<int32_t>(return_value_any_value->data);
         const int32_t squared = factor * factor;
         std::cout << "Square of (int32_t) " << factor << " is " << squared << ".\n";
         return std::make_shared<yli::common::AnyValue>(squared);
     }
-    else if (return_value_any_value->type == yli::common::Datatype::UINT32_T)
+    else if (std::holds_alternative<uint32_t>(return_value_any_value->data))
     {
         const uint32_t factor = std::get<uint32_t>(return_value_any_value->data);
         const uint32_t squared = factor * factor;
         std::cout << "Square of (uint32_t) " << factor << " is " << squared << ".\n";
         return std::make_shared<yli::common::AnyValue>(squared);
     }
-    else if (return_value_any_value->type == yli::common::Datatype::FLOAT)
+    else if (std::holds_alternative<float>(return_value_any_value->data))
     {
         const float factor = std::get<float>(return_value_any_value->data);
         const float squared = factor * factor;
         std::cout << "Square of (float) " << factor << " is " << squared << ".\n";
         return std::make_shared<yli::common::AnyValue>(squared);
     }
-    else if (return_value_any_value->type == yli::common::Datatype::DOUBLE)
+    else if (std::holds_alternative<double>(return_value_any_value->data))
     {
         const double factor = std::get<double>(return_value_any_value->data);
         const double squared = factor * factor;
@@ -154,25 +153,25 @@ std::shared_ptr<yli::common::AnyValue> expt(
     std::shared_ptr<yli::common::AnyValue> base = std::make_shared<yli::common::AnyValue>(*input_parameters.at(0)->get_any_value());
     std::shared_ptr<yli::common::AnyValue> exponent = std::make_shared<yli::common::AnyValue>(*input_parameters.at(1)->get_any_value());
 
-    if (base->type == yli::common::Datatype::INT32_T && exponent->type == yli::common::Datatype::INT32_T)
+    if (std::holds_alternative<int32_t>(base->data) && std::holds_alternative<int32_t>(exponent->data))
     {
         const int32_t power = std::pow(std::get<int32_t>(base->data), std::get<int32_t>(exponent->data));
         std::cout << "(int32_t) " << std::get<int32_t>(base->data) << "^" << std::get<int32_t>(exponent->data) << " is " << power << ".\n";
         return std::make_shared<yli::common::AnyValue>(power);
     }
-    else if (base->type == yli::common::Datatype::UINT32_T && exponent->type == yli::common::Datatype::UINT32_T)
+    else if (std::holds_alternative<uint32_t>(base->data) && std::holds_alternative<uint32_t>(exponent->data))
     {
         const uint32_t power = std::pow(std::get<uint32_t>(base->data), std::get<uint32_t>(exponent->data));
         std::cout << "(uint32_t) " << std::get<uint32_t>(base->data) << "^" << std::get<uint32_t>(exponent->data) << " is " << power << ".\n";
         return std::make_shared<yli::common::AnyValue>(power);
     }
-    else if (base->type == yli::common::Datatype::FLOAT && exponent->type == yli::common::Datatype::FLOAT)
+    else if (std::holds_alternative<float>(base->data) && std::holds_alternative<float>(exponent->data))
     {
         const float power = std::pow(std::get<float>(base->data), std::get<float>(exponent->data));
         std::cout << "(float) " << std::get<float>(base->data) << "^" << std::get<float>(exponent->data) << " is " << power << ".\n";
         return std::make_shared<yli::common::AnyValue>(power);
     }
-    else if (base->type == yli::common::Datatype::DOUBLE && exponent->type == yli::common::Datatype::DOUBLE)
+    else if (std::holds_alternative<double>(base->data) && std::holds_alternative<double>(exponent->data))
     {
         const double power = std::pow(std::get<double>(base->data), std::get<double>(exponent->data));
         std::cout << "(double) " << std::get<double>(base->data) << "^" << std::get<double>(exponent->data) << " is " << power << ".\n";
@@ -191,25 +190,25 @@ std::shared_ptr<yli::common::AnyValue> expt_with_named_inputs(
     std::shared_ptr<yli::common::AnyValue> base = std::make_shared<yli::common::AnyValue>(*callback_object->get_any_value("base"));
     std::shared_ptr<yli::common::AnyValue> exponent = std::make_shared<yli::common::AnyValue>(*callback_object->get_any_value("exponent"));
 
-    if (base->type == yli::common::Datatype::INT32_T && exponent->type == yli::common::Datatype::INT32_T)
+    if (std::holds_alternative<int32_t>(base->data) && std::holds_alternative<int32_t>(exponent->data))
     {
         const int32_t power = std::pow(std::get<int32_t>(base->data), std::get<int32_t>(exponent->data));
         std::cout << "(int32_t) " << std::get<int32_t>(base->data) << "^" << std::get<int32_t>(exponent->data) << " is " << power << ".\n";
         return std::make_shared<yli::common::AnyValue>(power);
     }
-    else if (base->type == yli::common::Datatype::UINT32_T && exponent->type == yli::common::Datatype::UINT32_T)
+    else if (std::holds_alternative<uint32_t>(base->data) && std::holds_alternative<uint32_t>(exponent->data))
     {
         const uint32_t power = std::pow(std::get<uint32_t>(base->data), std::get<uint32_t>(exponent->data));
         std::cout << "(uint32_t) " << std::get<uint32_t>(base->data) << "^" << std::get<uint32_t>(exponent->data) << " is " << power << ".\n";
         return std::make_shared<yli::common::AnyValue>(power);
     }
-    else if (base->type == yli::common::Datatype::FLOAT && exponent->type == yli::common::Datatype::FLOAT)
+    else if (std::holds_alternative<float>(base->data) && std::holds_alternative<float>(exponent->data))
     {
         const float power = std::pow(std::get<float>(base->data), std::get<float>(exponent->data));
         std::cout << "(float) " << std::get<float>(base->data) << "^" << std::get<float>(exponent->data) << " is " << power << ".\n";
         return std::make_shared<yli::common::AnyValue>(power);
     }
-    else if (base->type == yli::common::Datatype::DOUBLE && exponent->type == yli::common::Datatype::DOUBLE)
+    else if (std::holds_alternative<double>(base->data) && std::holds_alternative<double>(exponent->data))
     {
         const double power = std::pow(std::get<double>(base->data), std::get<double>(exponent->data));
         std::cout << "(double) " << std::get<double>(base->data) << "^" << std::get<double>(exponent->data) << " is " << power << ".\n";
@@ -233,19 +232,19 @@ std::shared_ptr<yli::common::AnyValue> neg(
 
     std::shared_ptr<yli::common::AnyValue> any_value = std::make_shared<yli::common::AnyValue>(*input_parameters.at(0)->get_any_value());
 
-    if (any_value->type == yli::common::Datatype::INT32_T)
+    if (std::holds_alternative<int32_t>(any_value->data))
     {
         const int32_t product = -1 * std::get<int32_t>(any_value->data);
         std::cout << "-1 * (int32_t) " << std::get<int32_t>(any_value->data) << " is " << product << ".\n";
         return std::make_shared<yli::common::AnyValue>(product);
     }
-    else if (any_value->type == yli::common::Datatype::FLOAT)
+    else if (std::holds_alternative<float>(any_value->data))
     {
         const float product = -1.0 * std::get<float>(any_value->data);
         std::cout << "-1 * (float) " << std::get<float>(any_value->data) << " is " << product << ".\n";
         return std::make_shared<yli::common::AnyValue>(product);
     }
-    else if (any_value->type == yli::common::Datatype::DOUBLE)
+    else if (std::holds_alternative<double>(any_value->data))
     {
         const double product = -1.0 * std::get<double>(any_value->data);
         std::cout << "-1 * (double) " << std::get<double>(any_value->data) << " is " << product << ".\n";
@@ -267,7 +266,7 @@ TEST(callback_engine_must_function_properly, int32_t_zero_negated_equals_zero)
 
     std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
-    ASSERT_EQ(result->type, yli::common::Datatype::INT32_T);
+    ASSERT_TRUE(std::holds_alternative<int32_t>(result->data));
     ASSERT_EQ(std::get<int32_t>(result->data), 0);
 }
 
@@ -284,7 +283,7 @@ TEST(callback_engine_must_function_properly, int32_t_one_negated_equals_minus_on
 
     std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
-    ASSERT_EQ(result->type, yli::common::Datatype::INT32_T);
+    ASSERT_TRUE(std::holds_alternative<int32_t>(result->data));
     ASSERT_EQ(std::get<int32_t>(result->data), -1);
 }
 
@@ -301,7 +300,7 @@ TEST(callback_engine_must_function_properly, int32_t_two_negated_equals_minus_tw
 
     std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
-    ASSERT_EQ(result->type, yli::common::Datatype::INT32_T);
+    ASSERT_TRUE(std::holds_alternative<int32_t>(result->data));
     ASSERT_EQ(std::get<int32_t>(result->data), -2);
 }
 
@@ -318,7 +317,7 @@ TEST(callback_engine_must_function_properly, int32_t_minus_one_negated_equals_on
 
     std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
-    ASSERT_EQ(result->type, yli::common::Datatype::INT32_T);
+    ASSERT_TRUE(std::holds_alternative<int32_t>(result->data));
     ASSERT_EQ(std::get<int32_t>(result->data), 1);
 }
 
@@ -335,7 +334,7 @@ TEST(callback_engine_must_function_properly, int32_t_minus_two_negated_equals_tw
 
     std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
-    ASSERT_EQ(result->type, yli::common::Datatype::INT32_T);
+    ASSERT_TRUE(std::holds_alternative<int32_t>(result->data));
     ASSERT_EQ(std::get<int32_t>(result->data), 2);
 }
 
@@ -352,7 +351,7 @@ TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
 
     std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
-    ASSERT_EQ(result->type, yli::common::Datatype::INT32_T);
+    ASSERT_TRUE(std::holds_alternative<int32_t>(result->data));
     ASSERT_EQ(std::get<int32_t>(result->data), 9);
 }
 
@@ -369,7 +368,7 @@ TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
 
     std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
-    ASSERT_EQ(result->type, yli::common::Datatype::UINT32_T);
+    ASSERT_TRUE(std::holds_alternative<uint32_t>(result->data));
     ASSERT_EQ(std::get<uint32_t>(result->data), 9);
 }
 
@@ -391,7 +390,7 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
 
     std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
-    ASSERT_EQ(result->type, yli::common::Datatype::UINT32_T);
+    ASSERT_TRUE(std::holds_alternative<uint32_t>(result->data));
     ASSERT_EQ(std::get<uint32_t>(result->data), 78125);
 }
 
@@ -406,7 +405,7 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125_with
     std::shared_ptr<yli::common::AnyValue> five_value = std::make_shared<yli::common::AnyValue>(five);
     callback_object->create_CallbackParameter("base", five_value, is_reference_5);
     std::shared_ptr<yli::common::AnyValue> anyvalue_base = std::make_shared<yli::common::AnyValue>(*callback_object->get_any_value("base"));
-    ASSERT_EQ(anyvalue_base->type, yli::common::Datatype::UINT32_T);
+    ASSERT_TRUE(std::holds_alternative<uint32_t>(anyvalue_base->data));
 
     const uint32_t seven = 7;
     const bool is_reference_7 = false;
@@ -415,7 +414,7 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125_with
 
     std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
-    ASSERT_EQ(result->type, yli::common::Datatype::UINT32_T);
+    ASSERT_TRUE(std::holds_alternative<uint32_t>(result->data));
     ASSERT_EQ(std::get<uint32_t>(result->data), 78125);
 }
 
@@ -439,7 +438,7 @@ TEST(callback_engine_must_function_properly, uint32_t_7_expt_5_then_squared_equa
 
     std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
-    ASSERT_EQ(result->type, yli::common::Datatype::UINT32_T);
+    ASSERT_TRUE(std::holds_alternative<uint32_t>(result->data));
     ASSERT_EQ(std::get<uint32_t>(result->data), 282475249);
 }
 
@@ -463,6 +462,6 @@ TEST(callback_engine_must_function_properly, two_squared_four_times_equals_65536
 
     std::shared_ptr<yli::common::AnyValue> result = callback_engine.execute(nullptr);
     ASSERT_NE(result, nullptr);
-    ASSERT_EQ(result->type, yli::common::Datatype::UINT32_T);
+    ASSERT_TRUE(std::holds_alternative<uint32_t>(result->data));
     ASSERT_EQ(std::get<uint32_t>(result->data), 65536);
 }

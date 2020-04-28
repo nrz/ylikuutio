@@ -115,9 +115,6 @@ namespace yli
             // calling the corresponding activate callback.
             yli::config::Setting* setting = this->setting_pointer_map[setting_name];
 
-            // create empty `AnyValue` (there is no suitable constructor yet).
-            setting_new_any_value->type = setting->setting_value->type;
-
             setting->setting_value = setting_new_any_value;
             setting->activate_callback(this->parent, this);
             return true;
@@ -285,12 +282,11 @@ namespace yli
                     // calling the corresponding activate callback.
                     yli::config::Setting* setting = setting_master->setting_pointer_map[setting_name];
 
-                    // create empty `AnyValue` (there is no suitable constructor yet).
-                    std::shared_ptr<yli::common::AnyValue> setting_any_value = std::make_shared<yli::common::AnyValue>();
-                    setting_any_value->type = setting->setting_value->type;
+                    // copy current `AnyValue`.
+                    std::shared_ptr<yli::common::AnyValue> setting_any_value = setting->setting_value;
 
                     // set a new value.
-                    bool success = setting_any_value->set_value(command_parameters.at(1));
+                    bool success = setting_any_value->set_new_value(command_parameters.at(1));
 
                     if (success)
                     {
@@ -356,12 +352,11 @@ namespace yli
                     // calling the corresponding activate callback.
                     yli::config::Setting* setting = setting_master->setting_pointer_map[setting_name];
 
-                    // create empty `AnyValue` (there is no suitable constructor yet).
-                    std::shared_ptr<yli::common::AnyValue> setting_any_value = std::make_shared<yli::common::AnyValue>();
-                    setting_any_value->type = setting->setting_value->type;
+                    // copy current `AnyValue`.
+                    std::shared_ptr<yli::common::AnyValue> setting_any_value = setting->setting_value;
 
                     // set a new value.
-                    bool success = setting_any_value->set_value(command_parameters.at(2));
+                    bool success = setting_any_value->set_new_value(command_parameters.at(2));
 
                     if (success)
                     {
