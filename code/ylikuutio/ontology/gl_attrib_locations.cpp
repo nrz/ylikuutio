@@ -22,15 +22,12 @@
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    void store_gl_attrib_locations(yli::ontology::Shader* const shader, yli::ontology::Glyph* const glyph)
     {
-        void store_gl_attrib_locations(yli::ontology::Shader* const shader, yli::ontology::Glyph* const glyph)
-        {
-            glyph->store_vertex_position_modelspaceID(glGetAttribLocation(shader->get_programID(), "vertex_position_modelspace"));
-            glyph->store_vertexUVID(glGetAttribLocation(shader->get_programID(), "vertexUV"));
-            glyph->store_vertex_normal_modelspaceID(glGetAttribLocation(shader->get_programID(), "vertex_normal_modelspace"));
-        }
+        glyph->store_vertex_position_modelspaceID(glGetAttribLocation(shader->get_programID(), "vertex_position_modelspace"));
+        glyph->store_vertexUVID(glGetAttribLocation(shader->get_programID(), "vertexUV"));
+        glyph->store_vertex_normal_modelspaceID(glGetAttribLocation(shader->get_programID(), "vertex_normal_modelspace"));
     }
 }

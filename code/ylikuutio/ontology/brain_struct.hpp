@@ -21,29 +21,26 @@
 #ifndef __BRAIN_STRUCT_HPP_INCLUDED
 #define __BRAIN_STRUCT_HPP_INCLUDED
 
-namespace yli
+namespace yli::callback
 {
-    namespace callback
-    {
-        class CallbackEngine;
-    }
+    class CallbackEngine;
+}
 
-    namespace ontology
-    {
-        class Scene;
+namespace yli::ontology
+{
+    class Scene;
 
-        struct BrainStruct
+    struct BrainStruct
+    {
+        BrainStruct()
+            : parent(nullptr),
+            callback_engine(nullptr)
         {
-            BrainStruct()
-                : parent(nullptr),
-                callback_engine(nullptr)
-            {
-            }
+        }
 
-            yli::ontology::Scene* parent;
-            std::shared_ptr<yli::callback::CallbackEngine> callback_engine;
-        };
-    }
+        yli::ontology::Scene* parent;
+        std::shared_ptr<yli::callback::CallbackEngine> callback_engine;
+    };
 }
 
 #endif

@@ -25,37 +25,34 @@
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
-    {
-        template<class T1>
-            void render_species_or_glyph(T1 const species_or_glyph_pointer)
-            {
-                // Compute the MVP matrix from keyboard and mouse input.
-                glUniform3f(
-                        species_or_glyph_pointer->lightID,
-                        species_or_glyph_pointer->light_position.x,
-                        species_or_glyph_pointer->light_position.y,
-                        species_or_glyph_pointer->light_position.z);
+    template<class T1>
+        void render_species_or_glyph(T1 const species_or_glyph_pointer)
+        {
+            // Compute the MVP matrix from keyboard and mouse input.
+            glUniform3f(
+                    species_or_glyph_pointer->lightID,
+                    species_or_glyph_pointer->light_position.x,
+                    species_or_glyph_pointer->light_position.y,
+                    species_or_glyph_pointer->light_position.z);
 
-                // 1st attribute buffer: vertices.
-                yli::opengl::enable_vertex_attrib_array(species_or_glyph_pointer->vertex_position_modelspaceID);
+            // 1st attribute buffer: vertices.
+            yli::opengl::enable_vertex_attrib_array(species_or_glyph_pointer->vertex_position_modelspaceID);
 
-                // 2nd attribute buffer: UVs.
-                yli::opengl::enable_vertex_attrib_array(species_or_glyph_pointer->vertexUVID);
+            // 2nd attribute buffer: UVs.
+            yli::opengl::enable_vertex_attrib_array(species_or_glyph_pointer->vertexUVID);
 
-                // 3rd attribute buffer: normals.
-                yli::opengl::enable_vertex_attrib_array(species_or_glyph_pointer->vertex_normal_modelspaceID);
+            // 3rd attribute buffer: normals.
+            yli::opengl::enable_vertex_attrib_array(species_or_glyph_pointer->vertex_normal_modelspaceID);
 
-                // Render this `Species` or `Glyph` by calling `render()` function of each `Object`.
-                yli::ontology::render_children<yli::ontology::Entity*>(species_or_glyph_pointer->parent_of_objects.child_pointer_vector);
+            // Render this `Species` or `Glyph` by calling `render()` function of each `Object`.
+            yli::ontology::render_children<yli::ontology::Entity*>(species_or_glyph_pointer->parent_of_objects.child_pointer_vector);
 
-                yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertex_position_modelspaceID);
-                yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertexUVID);
-                yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertex_normal_modelspaceID);
-            }
-    }
+            yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertex_position_modelspaceID);
+            yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertexUVID);
+            yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertex_normal_modelspaceID);
+        }
 }
 
 #endif

@@ -282,542 +282,539 @@
 //    y-coordinates of these are compared. The piece with the smallest y-coordinate (lowest altitude) remains terrain, other pieces become
 //    regular objects. The pieces that become regular objects will be subject to gravity the same way as any regular object.
 
-namespace yli
+namespace yli::common
 {
-    namespace common
+    class AnyValue;
+}
+
+namespace yli::config
+{
+    class Setting;
+}
+
+namespace yli::input
+{
+    enum class InputMethod;
+}
+
+namespace yli::ontology
+{
+    class Scene;
+    class Camera;
+    class Font2D;
+    class Console;
+
+    class Universe: public yli::ontology::Entity
     {
-        class AnyValue;
-    }
+        public:
+            void bind_Entity(yli::ontology::Entity* const entity);
 
-    namespace config
-    {
-        class Setting;
-    }
+            void unbind_Entity(const std::size_t entityID);
 
-    namespace input
-    {
-        enum class InputMethod;
-    }
+            // constructor.
+            Universe(const yli::ontology::UniverseStruct& universe_struct)
+                : Entity(this), // `Universe` has no parent.
+                parent_of_worlds(this),
+                parent_of_font2Ds(this),
+                parent_of_consoles(this),
+                parent_of_any_value_entities(this),
+                parent_of_any_struct_entities(this),
+                parent_of_callback_engine_entities(this)
+            {
+                // call `bind_Entity` here since it couldn't be performed from `Entity` constructor.
+                this->bind_Entity(this);
 
-    namespace ontology
-    {
-        class Scene;
-        class Camera;
-        class Font2D;
-        class Console;
+                this->entity_factory = std::make_shared<yli::ontology::EntityFactory>(this);
 
-        class Universe: public yli::ontology::Entity
-        {
-            public:
-                void bind_Entity(yli::ontology::Entity* const entity);
+                this->current_camera_cartesian_coordinates = glm::vec3(NAN, NAN, NAN); // dummy coordinates.
 
-                void unbind_Entity(const std::size_t entityID);
+                this->current_camera_spherical_coordinates.rho   = NAN; // dummy coordinates.
+                this->current_camera_spherical_coordinates.theta = NAN; // dummy coordinates.
+                this->current_camera_spherical_coordinates.phi   = NAN; // dummy coordinates.
 
-                // constructor.
-                Universe(const yli::ontology::UniverseStruct& universe_struct)
-                    : Entity(this), // `Universe` has no parent.
-                    parent_of_worlds(this),
-                    parent_of_font2Ds(this),
-                    parent_of_consoles(this),
-                    parent_of_any_value_entities(this),
-                    parent_of_any_struct_entities(this),
-                    parent_of_callback_engine_entities(this)
+                this->active_scene     = nullptr;
+                this->active_font2D    = nullptr;
+                this->active_console   = nullptr;
+                this->angelscript_master = nullptr;
+                this->audio_master     = nullptr;
+
+                this->background_red   = NAN;
+                this->background_green = NAN;
+                this->background_blue  = NAN;
+                this->background_alpha = NAN;
+
+                // Variables related to the window.
+                this->window             = nullptr;
+                this->window_width       = universe_struct.window_width;
+                this->window_height      = universe_struct.window_height;
+                this->framebuffer_width  = universe_struct.framebuffer_width;
+                this->framebuffer_height = universe_struct.framebuffer_height;
+                this->window_title       = universe_struct.window_title;
+
+                if (this->window_title.empty())
                 {
-                    // call `bind_Entity` here since it couldn't be performed from `Entity` constructor.
-                    this->bind_Entity(this);
-
-                    this->entity_factory = std::make_shared<yli::ontology::EntityFactory>(this);
-
-                    this->current_camera_cartesian_coordinates = glm::vec3(NAN, NAN, NAN); // dummy coordinates.
-
-                    this->current_camera_spherical_coordinates.rho   = NAN; // dummy coordinates.
-                    this->current_camera_spherical_coordinates.theta = NAN; // dummy coordinates.
-                    this->current_camera_spherical_coordinates.phi   = NAN; // dummy coordinates.
-
-                    this->active_scene     = nullptr;
-                    this->active_font2D    = nullptr;
-                    this->active_console   = nullptr;
-                    this->angelscript_master = nullptr;
-                    this->audio_master     = nullptr;
-
-                    this->background_red   = NAN;
-                    this->background_green = NAN;
-                    this->background_blue  = NAN;
-                    this->background_alpha = NAN;
-
-                    // Variables related to the window.
-                    this->window             = nullptr;
-                    this->window_width       = universe_struct.window_width;
-                    this->window_height      = universe_struct.window_height;
-                    this->framebuffer_width  = universe_struct.framebuffer_width;
-                    this->framebuffer_height = universe_struct.framebuffer_height;
-                    this->window_title       = universe_struct.window_title;
-
-                    if (this->window_title.empty())
-                    {
-                        std::stringstream window_title_stringstream;
-                        window_title_stringstream << "Ylikuutio " << yli::ontology::Universe::version;
-                        this->window_title = window_title_stringstream.str();
-                    }
-
-                    this->is_physical  = universe_struct.is_physical;
-                    this->is_fullscreen = universe_struct.is_fullscreen;
-                    this->is_headless  = universe_struct.is_headless;
-                    this->is_silent    = universe_struct.is_silent;
-
-                    // mouse coordinates.
-                    this->mouse_x      = this->window_width / 2;
-                    this->mouse_y      = this->window_height / 2;
-
-                    // variables related to the framebuffer.
-                    this->framebuffer  = 0;
-                    this->texture      = 0;
-                    this->renderbuffer = 0;
-                    this->is_framebuffer_initialized = false;
-
-                    this->current_camera_projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
-                    this->current_camera_view_matrix       = glm::mat4(1.0f); // identity matrix (dummy value).
-                    this->current_camera_horizontal_angle  = NAN;
-                    this->current_camera_vertical_angle    = NAN;
-
-                    // Variables related to the camera.
-                    this->aspect_ratio = static_cast<float>(this->window_width) / static_cast<float>(this->window_height);
-
-                    this->initialFoV   = 60.0f;
-
-                    this->text_size = universe_struct.text_size;
-                    this->font_size = universe_struct.font_size;
-
-                    this->max_FPS    = universe_struct.max_FPS;
-                    this->last_time_to_display_FPS = yli::time::get_time();
-                    this->last_time_for_display_sync = yli::time::get_time();
-                    this->delta_time = NAN;
-                    this->number_of_frames = 0;
-
-                    // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
-                    this->last_time_before_reading_keyboard    = std::numeric_limits<uint32_t>::max();
-
-                    // `std::numeric_limits<std::size_t>::max()` means that `current_time_before_reading_keyboard` is not defined.
-                    this->current_time_before_reading_keyboard = std::numeric_limits<uint32_t>::max();
-
-                    this->has_mouse_ever_moved    = false;
-
-                    this->can_toggle_invert_mouse = false;
-                    this->can_toggle_flight_mode  = false;
-                    this->can_toggle_help_mode    = false;
-
-                    this->is_invert_mouse_in_use  = false;
-                    this->is_first_turbo_pressed  = false;
-                    this->is_second_turbo_pressed = false;
-                    this->is_exit_requested       = false;
-
-                    this->speed             = universe_struct.speed;
-                    this->turbo_factor      = universe_struct.turbo_factor;
-                    this->twin_turbo_factor = universe_struct.twin_turbo_factor;
-                    this->mouse_speed       = universe_struct.mouse_speed;
-
-                    this->znear             = universe_struct.znear;
-                    this->zfar              = universe_struct.zfar;
-
-                    this->testing_spherical_terrain_in_use = false;
-                    this->in_console                       = false;
-                    this->in_help_mode                     = true;
-                    this->can_display_help_screen          = true;
-
-                    this->number_of_entities            = 0;
-
-                    this->context = nullptr;
-                    this->window  = nullptr;
-
-                    if (!this->is_headless)
-                    {
-                        // Initialise SDL
-                        if (!yli::sdl::init_SDL())
-                        {
-                            std::cerr << "Failed to initialize SDL.\n";
-                            this->is_headless = true;
-                        }
-                        else
-                        {
-                            // Open a window and create its OpenGL context.
-                            std::cout << "Opening a window and creating its OpenGL context...\n";
-                            this->window = yli::sdl::create_window(
-                                    static_cast<int>(this->window_width),
-                                    static_cast<int>(this->window_height),
-                                    this->window_title.c_str(),
-                                    this->is_fullscreen);
-
-                            if (this->window == nullptr)
-                            {
-                                std::cerr << "SDL Window could not be created!\n";
-                            }
-
-                            this->create_context();
-                            this->make_context_current();
-
-                            // Disable vertical sync.
-                            // TODO: add option to enable/disable vsync in the console.
-                            this->set_swap_interval(0);
-                        }
-                    }
-
-                    this->angelscript_master = std::make_shared<yli::angelscript::AngelscriptMaster>();
-
-                    if (this->is_silent)
-                    {
-                        this->audio_master = nullptr;
-                    }
-                    else
-                    {
-                        this->audio_master = std::make_shared<yli::audio::AudioMaster>(this);
-                    }
-
-                    if (this->is_headless)
-                    {
-                        this->input_master = nullptr;
-                        this->is_exit_requested = true;
-                    }
-                    else
-                    {
-                        this->input_master = std::make_shared<yli::input::InputMaster>(this);
-                    }
-
-                    // `yli::ontology::Entity` member variables begin here.
-                    this->type_string = "yli::ontology::Universe*";
+                    std::stringstream window_title_stringstream;
+                    window_title_stringstream << "Ylikuutio " << yli::ontology::Universe::version;
+                    this->window_title = window_title_stringstream.str();
                 }
 
-                Universe(const Universe&) = delete;            // Delete copy constructor.
-                Universe &operator=(const Universe&) = delete; // Delete copy assignment.
-
-                // destructor.
-                virtual ~Universe();
-
-                // this method requests exit.
-                void request_exit();
-
-                // this method processes the physics.
-                void do_physics();
-
-                // Intentional actors (AIs and keyboard controlled ones).
-                void act();
-
-                // this method renders the active `Scene` of this `Universe`.
-                void render() override;
-
-                // this method renders the active `Scene` of this `Universe`.
-                void render_without_changing_depth_test();
-
-                // this method sets the active `Scene`.
-                void set_active_scene(yli::ontology::Scene* const world);
-
-                yli::ontology::Font2D* get_active_font2D() const;
-                void set_active_font2D(yli::ontology::Font2D* const font2D);
-
-                // this method sets the active `Camera`.
-                // Setting the active `Camera` does not change the active `Scene`!
-                void set_active_camera(yli::ontology::Camera* const camera) const;
-
-                yli::ontology::Console* get_active_console() const;
-                void set_active_console(yli::ontology::Console* const console);
-
-                yli::input::InputMethod get_input_method() const;
-
-                bool get_is_headless() const;
-
-                std::string eval_string(const std::string& my_string) const;
-
-                yli::audio::AudioMaster* get_audio_master() const;
-                yli::input::InputMaster* get_input_master() const;
-
-                std::size_t get_number_of_worlds() const;
-
-                yli::ontology::Scene* get_active_scene() const;
-
-                yli::ontology::Entity* get_parent() const override;
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
-
-                void create_context();
-                void make_context_current();
-                void set_swap_interval(const int32_t interval);
-                void restore_onscreen_rendering() const;
-                void set_opengl_background_color() const;
-                void adjust_opengl_viewport() const;
-
-                bool get_is_exit_requested() const;
-
-                // this method returns current `window`.
-                SDL_Window* get_window() const;
-
-                // this method returns current `window_width`.
-                uint32_t get_window_width() const;
-
-                // this method sets `window_width`.
-                void set_window_width(const uint32_t window_width);
-
-                // this method returns current `window_height`.
-                uint32_t get_window_height() const;
-
-                // this method sets `window_height`.
-                void set_window_height(const uint32_t window_height);
-
-                // this method returns current `framebuffer_width`.
-                uint32_t get_framebuffer_width() const;
-
-                // this method sets `framebuffer_width`.
-                void set_framebuffer_width(const uint32_t framebuffer_width);
-
-                // this method returns current `framebuffer_height`.
-                uint32_t get_framebuffer_height() const;
-
-                // this method sets `framebuffer_height`.
-                void set_framebuffer_height(const uint32_t framebuffer_height);
-
-                // this method returns current `text_size`.
-                std::size_t get_text_size() const;
-
-                // this method returns current `font_size`.
-                std::size_t get_font_size() const;
-
-                // this method computes the new delta time and returns it.
-                float compute_delta_time();
-
-                // this method returns the last computed delta time.
-                float get_delta_time() const;
-
-                // this method stores `current_time_before_reading_keyboard` into `last_time_before_reading_keyboard`.
-                void finalize_delta_time_loop();
-
-                // this method returns current `max_FPS`.
-                std::size_t get_max_FPS() const;
-                double get_last_time_to_display_FPS() const;
-                double get_last_time_for_display_sync() const;
-                int32_t get_number_of_frames() const;
-
-                void increment_last_time_to_display_FPS();
-                void update_last_time_for_display_sync();
-                void increment_number_of_frames();
-                void reset_number_of_frames();
-
-                void set(const std::string& setting_name, std::shared_ptr<yli::common::AnyValue> setting_any_value);
-
-                // this method returns a pointer to `yli::config::Setting` corresponding to the given `key`.
-                yli::config::Setting* get(const std::string& key) const;
-
-                bool is_entity(const std::string& name) const;
-                yli::ontology::Entity* get_entity(const std::string& name) const;
-                std::string get_entity_names() const;
-
-                void add_entity(const std::string& name, yli::ontology::Entity* const entity);
-                void erase_entity(const std::string& name);
-
-                yli::ontology::EntityFactory* get_entity_factory() const;
-
-                const glm::mat4& get_projection_matrix() const;
-                void set_projection_matrix(const glm::mat4& projection_matrix);
-
-                const glm::mat4& get_view_matrix() const;
-                void set_view_matrix(const glm::mat4& view_matrix);
-
-                float get_aspect_ratio() const;
-                float get_initialFoV() const;
-
-                // Public callbacks.
-
-                // Public `Entity` bind callbacks.
-
-                static std::shared_ptr<yli::common::AnyValue> bind(
-                        yli::ontology::Console* const console,
-                        yli::ontology::Entity* const universe_entity,
-                        const std::vector<std::string>& command_parameters);
-
-                // Public `Entity` create callbacks.
-
-                static std::shared_ptr<yli::common::AnyValue> create_AnyValueEntity(
-                        yli::ontology::Console* const console,
-                        yli::ontology::Entity* const universe_entity,
-                        const std::vector<std::string>& command_parameters);
-
-                static std::shared_ptr<yli::common::AnyValue> create_AnyStructEntity(
-                        yli::ontology::Console* const console,
-                        yli::ontology::Entity* const universe_entity,
-                        const std::vector<std::string>& command_parameters);
-
-                // Public `Entity` delete callbacks.
-
-                static std::shared_ptr<yli::common::AnyValue> delete_entity(
-                        yli::ontology::Console* const console,
-                        yli::ontology::Entity* const universe_entity,
-                        const std::vector<std::string>& command_parameters);
-
-                // Public `Entity` activate callbacks.
-
-                static std::shared_ptr<yli::common::AnyValue> activate(
-                        yli::ontology::Console* const console,
-                        yli::ontology::Entity* const universe_entity,
-                        const std::vector<std::string>& command_parameters);
-
-                // Public AngelScript-related callbacks.
-
-                static std::shared_ptr<yli::common::AnyValue> eval(
-                        yli::ontology::Console* const console,
-                        yli::ontology::Entity* const universe_entity,
-                        const std::vector<std::string>& command_parameters);
-
-                // Public data printing callbacks.
-
-                static std::shared_ptr<yli::common::AnyValue> info(
-                        yli::ontology::Console* const console,
-                        yli::ontology::Entity* const universe_entity,
-                        const std::vector<std::string>& command_parameters);
-
-                static std::shared_ptr<yli::common::AnyValue> print_entities(
-                        yli::ontology::Console* const console,
-                        yli::ontology::Entity* const universe_entity,
-                        const std::vector<std::string>& command_parameters);
-
-                static std::shared_ptr<yli::common::AnyValue> print_parent(
-                        yli::ontology::Console* const console,
-                        yli::ontology::Entity* const universe_entity,
-                        const std::vector<std::string>& command_parameters);
-
-                // Other public callbacks.
-
-                static std::shared_ptr<yli::common::AnyValue> screenshot(
-                        yli::ontology::Console* const console,
-                        yli::ontology::Entity* const universe_entity,
-                        const std::vector<std::string>& command_parameters);
-
-                // Public callbacks end here.
-
-                // Ylikuutio version.
-                static const std::string version;
-
-                // Variables related to location and orientation.
-
-                // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
-                glm::vec3 current_camera_cartesian_coordinates;
-
-                // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
-                yli::common::SphericalCoordinatesStruct current_camera_spherical_coordinates;
-
-                // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
-                glm::vec3 current_camera_direction;
-
-                glm::vec3 current_camera_right; // note: `right` can not be set directly using console.
-                glm::vec3 current_camera_up;    // note: `up` can not be set directly using console.
-
-                double current_camera_horizontal_angle;
-                double current_camera_vertical_angle;
-
-                int32_t mouse_x;
-                int32_t mouse_y;
-
-                float speed;
-                float turbo_factor;
-                float twin_turbo_factor;
-                float mouse_speed;
-                bool has_mouse_ever_moved;
-
-                // 'can toggle'-type of boolean keypress control variables
-                // should all be stored in the `Universe` to avoid locking.
-                bool can_toggle_invert_mouse;
-                bool can_toggle_flight_mode;
-                bool can_toggle_help_mode;
-
-                bool is_invert_mouse_in_use;
-                bool is_first_turbo_pressed;
-                bool is_second_turbo_pressed;
-                bool is_exit_requested;
-
-                // Variables related to graphics.
-                float znear;
-                float zfar;
-
-                // Variables related to the current `Scene`.
-                bool testing_spherical_terrain_in_use;
-
-                // Variables related to `Console`s.
-                bool in_console;
-
-                // Variables related to help mode.
-                bool in_help_mode;
-                bool can_display_help_screen;
-
-                float background_red;
-                float background_green;
-                float background_blue;
-                float background_alpha;
-
-                yli::ontology::ParentModule parent_of_worlds;
-                yli::ontology::ParentModule parent_of_font2Ds;
-                yli::ontology::ParentModule parent_of_consoles;
-                yli::ontology::ParentModule parent_of_any_value_entities;
-                yli::ontology::ParentModule parent_of_any_struct_entities;
-                yli::ontology::ParentModule parent_of_callback_engine_entities;
-
-            private:
-                bool compute_and_update_matrices_from_inputs();
-
-                std::shared_ptr<yli::ontology::EntityFactory> entity_factory;
-
-                std::vector<yli::ontology::Entity*> entity_pointer_vector;
-                std::queue<std::size_t> free_entityID_queue;
-                std::size_t number_of_entities;
-
-                yli::ontology::Scene* active_scene;
-                yli::ontology::Font2D* active_font2D;
-                yli::ontology::Console* active_console;
-
-                std::shared_ptr<yli::angelscript::AngelscriptMaster> angelscript_master; // pointer to `AngelscriptMaster`.
-
-                std::shared_ptr<yli::audio::AudioMaster> audio_master;    // pointer to `AudioMaster`.
-
-                std::shared_ptr<yli::input::InputMaster> input_master;    // pointer to `InputMaster`.
-
-                // Named entities are stored here so that they can be recalled, if needed.
-                std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
-
-                // variables related to the window.
-                std::shared_ptr<SDL_GLContext> context;
-                SDL_Window* window;
-                uint32_t window_width;
-                uint32_t window_height;
-                std::size_t framebuffer_width;
-                std::size_t framebuffer_height;
-                std::string window_title;
-                bool is_physical;
-                bool is_fullscreen;
-                bool is_headless;
-                bool is_silent;
+                this->is_physical  = universe_struct.is_physical;
+                this->is_fullscreen = universe_struct.is_fullscreen;
+                this->is_headless  = universe_struct.is_headless;
+                this->is_silent    = universe_struct.is_silent;
+
+                // mouse coordinates.
+                this->mouse_x      = this->window_width / 2;
+                this->mouse_y      = this->window_height / 2;
 
                 // variables related to the framebuffer.
-                uint32_t framebuffer;
-                uint32_t texture;
-                uint32_t renderbuffer;
-                bool is_framebuffer_initialized;
+                this->framebuffer  = 0;
+                this->texture      = 0;
+                this->renderbuffer = 0;
+                this->is_framebuffer_initialized = false;
 
-                // variables related to `Camera` (projection).
-                glm::mat4 current_camera_projection_matrix;
-                glm::mat4 current_camera_view_matrix;
-                float aspect_ratio;    // At the moment all `Camera`s use the same aspect ratio.
-                float initialFoV;      // At the moment all `Camera`s use the same FoV.
+                this->current_camera_projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
+                this->current_camera_view_matrix       = glm::mat4(1.0f); // identity matrix (dummy value).
+                this->current_camera_horizontal_angle  = NAN;
+                this->current_camera_vertical_angle    = NAN;
 
-                // variables related to the fonts and texts used.
-                std::size_t text_size;
-                std::size_t font_size;
+                // Variables related to the camera.
+                this->aspect_ratio = static_cast<float>(this->window_width) / static_cast<float>(this->window_height);
 
-                // variables related to timing of events.
-                std::size_t max_FPS;
-                double last_time_to_display_FPS;
-                double last_time_for_display_sync;
-                double delta_time;
-                int32_t number_of_frames;
+                this->initialFoV   = 60.0f;
 
-                uint32_t last_time_before_reading_keyboard;
-                uint32_t current_time_before_reading_keyboard;
-        };
-    }
+                this->text_size = universe_struct.text_size;
+                this->font_size = universe_struct.font_size;
+
+                this->max_FPS    = universe_struct.max_FPS;
+                this->last_time_to_display_FPS = yli::time::get_time();
+                this->last_time_for_display_sync = yli::time::get_time();
+                this->delta_time = NAN;
+                this->number_of_frames = 0;
+
+                // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
+                this->last_time_before_reading_keyboard    = std::numeric_limits<uint32_t>::max();
+
+                // `std::numeric_limits<std::size_t>::max()` means that `current_time_before_reading_keyboard` is not defined.
+                this->current_time_before_reading_keyboard = std::numeric_limits<uint32_t>::max();
+
+                this->has_mouse_ever_moved    = false;
+
+                this->can_toggle_invert_mouse = false;
+                this->can_toggle_flight_mode  = false;
+                this->can_toggle_help_mode    = false;
+
+                this->is_invert_mouse_in_use  = false;
+                this->is_first_turbo_pressed  = false;
+                this->is_second_turbo_pressed = false;
+                this->is_exit_requested       = false;
+
+                this->speed             = universe_struct.speed;
+                this->turbo_factor      = universe_struct.turbo_factor;
+                this->twin_turbo_factor = universe_struct.twin_turbo_factor;
+                this->mouse_speed       = universe_struct.mouse_speed;
+
+                this->znear             = universe_struct.znear;
+                this->zfar              = universe_struct.zfar;
+
+                this->testing_spherical_terrain_in_use = false;
+                this->in_console                       = false;
+                this->in_help_mode                     = true;
+                this->can_display_help_screen          = true;
+
+                this->number_of_entities            = 0;
+
+                this->context = nullptr;
+                this->window  = nullptr;
+
+                if (!this->is_headless)
+                {
+                    // Initialise SDL
+                    if (!yli::sdl::init_SDL())
+                    {
+                        std::cerr << "Failed to initialize SDL.\n";
+                        this->is_headless = true;
+                    }
+                    else
+                    {
+                        // Open a window and create its OpenGL context.
+                        std::cout << "Opening a window and creating its OpenGL context...\n";
+                        this->window = yli::sdl::create_window(
+                                static_cast<int>(this->window_width),
+                                static_cast<int>(this->window_height),
+                                this->window_title.c_str(),
+                                this->is_fullscreen);
+
+                        if (this->window == nullptr)
+                        {
+                            std::cerr << "SDL Window could not be created!\n";
+                        }
+
+                        this->create_context();
+                        this->make_context_current();
+
+                        // Disable vertical sync.
+                        // TODO: add option to enable/disable vsync in the console.
+                        this->set_swap_interval(0);
+                    }
+                }
+
+                this->angelscript_master = std::make_shared<yli::angelscript::AngelscriptMaster>();
+
+                if (this->is_silent)
+                {
+                    this->audio_master = nullptr;
+                }
+                else
+                {
+                    this->audio_master = std::make_shared<yli::audio::AudioMaster>(this);
+                }
+
+                if (this->is_headless)
+                {
+                    this->input_master = nullptr;
+                    this->is_exit_requested = true;
+                }
+                else
+                {
+                    this->input_master = std::make_shared<yli::input::InputMaster>(this);
+                }
+
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "yli::ontology::Universe*";
+            }
+
+            Universe(const Universe&) = delete;            // Delete copy constructor.
+            Universe &operator=(const Universe&) = delete; // Delete copy assignment.
+
+            // destructor.
+            virtual ~Universe();
+
+            // this method requests exit.
+            void request_exit();
+
+            // this method processes the physics.
+            void do_physics();
+
+            // Intentional actors (AIs and keyboard controlled ones).
+            void act();
+
+            // this method renders the active `Scene` of this `Universe`.
+            void render() override;
+
+            // this method renders the active `Scene` of this `Universe`.
+            void render_without_changing_depth_test();
+
+            // this method sets the active `Scene`.
+            void set_active_scene(yli::ontology::Scene* const world);
+
+            yli::ontology::Font2D* get_active_font2D() const;
+            void set_active_font2D(yli::ontology::Font2D* const font2D);
+
+            // this method sets the active `Camera`.
+            // Setting the active `Camera` does not change the active `Scene`!
+            void set_active_camera(yli::ontology::Camera* const camera) const;
+
+            yli::ontology::Console* get_active_console() const;
+            void set_active_console(yli::ontology::Console* const console);
+
+            yli::input::InputMethod get_input_method() const;
+
+            bool get_is_headless() const;
+
+            std::string eval_string(const std::string& my_string) const;
+
+            yli::audio::AudioMaster* get_audio_master() const;
+            yli::input::InputMaster* get_input_master() const;
+
+            std::size_t get_number_of_worlds() const;
+
+            yli::ontology::Scene* get_active_scene() const;
+
+            yli::ontology::Entity* get_parent() const override;
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
+
+            void create_context();
+            void make_context_current();
+            void set_swap_interval(const int32_t interval);
+            void restore_onscreen_rendering() const;
+            void set_opengl_background_color() const;
+            void adjust_opengl_viewport() const;
+
+            bool get_is_exit_requested() const;
+
+            // this method returns current `window`.
+            SDL_Window* get_window() const;
+
+            // this method returns current `window_width`.
+            uint32_t get_window_width() const;
+
+            // this method sets `window_width`.
+            void set_window_width(const uint32_t window_width);
+
+            // this method returns current `window_height`.
+            uint32_t get_window_height() const;
+
+            // this method sets `window_height`.
+            void set_window_height(const uint32_t window_height);
+
+            // this method returns current `framebuffer_width`.
+            uint32_t get_framebuffer_width() const;
+
+            // this method sets `framebuffer_width`.
+            void set_framebuffer_width(const uint32_t framebuffer_width);
+
+            // this method returns current `framebuffer_height`.
+            uint32_t get_framebuffer_height() const;
+
+            // this method sets `framebuffer_height`.
+            void set_framebuffer_height(const uint32_t framebuffer_height);
+
+            // this method returns current `text_size`.
+            std::size_t get_text_size() const;
+
+            // this method returns current `font_size`.
+            std::size_t get_font_size() const;
+
+            // this method computes the new delta time and returns it.
+            float compute_delta_time();
+
+            // this method returns the last computed delta time.
+            float get_delta_time() const;
+
+            // this method stores `current_time_before_reading_keyboard` into `last_time_before_reading_keyboard`.
+            void finalize_delta_time_loop();
+
+            // this method returns current `max_FPS`.
+            std::size_t get_max_FPS() const;
+            double get_last_time_to_display_FPS() const;
+            double get_last_time_for_display_sync() const;
+            int32_t get_number_of_frames() const;
+
+            void increment_last_time_to_display_FPS();
+            void update_last_time_for_display_sync();
+            void increment_number_of_frames();
+            void reset_number_of_frames();
+
+            void set(const std::string& setting_name, std::shared_ptr<yli::common::AnyValue> setting_any_value);
+
+            // this method returns a pointer to `yli::config::Setting` corresponding to the given `key`.
+            yli::config::Setting* get(const std::string& key) const;
+
+            bool is_entity(const std::string& name) const;
+            yli::ontology::Entity* get_entity(const std::string& name) const;
+            std::string get_entity_names() const;
+
+            void add_entity(const std::string& name, yli::ontology::Entity* const entity);
+            void erase_entity(const std::string& name);
+
+            yli::ontology::EntityFactory* get_entity_factory() const;
+
+            const glm::mat4& get_projection_matrix() const;
+            void set_projection_matrix(const glm::mat4& projection_matrix);
+
+            const glm::mat4& get_view_matrix() const;
+            void set_view_matrix(const glm::mat4& view_matrix);
+
+            float get_aspect_ratio() const;
+            float get_initialFoV() const;
+
+            // Public callbacks.
+
+            // Public `Entity` bind callbacks.
+
+            static std::shared_ptr<yli::common::AnyValue> bind(
+                    yli::ontology::Console* const console,
+                    yli::ontology::Entity* const universe_entity,
+                    const std::vector<std::string>& command_parameters);
+
+            // Public `Entity` create callbacks.
+
+            static std::shared_ptr<yli::common::AnyValue> create_AnyValueEntity(
+                    yli::ontology::Console* const console,
+                    yli::ontology::Entity* const universe_entity,
+                    const std::vector<std::string>& command_parameters);
+
+            static std::shared_ptr<yli::common::AnyValue> create_AnyStructEntity(
+                    yli::ontology::Console* const console,
+                    yli::ontology::Entity* const universe_entity,
+                    const std::vector<std::string>& command_parameters);
+
+            // Public `Entity` delete callbacks.
+
+            static std::shared_ptr<yli::common::AnyValue> delete_entity(
+                    yli::ontology::Console* const console,
+                    yli::ontology::Entity* const universe_entity,
+                    const std::vector<std::string>& command_parameters);
+
+            // Public `Entity` activate callbacks.
+
+            static std::shared_ptr<yli::common::AnyValue> activate(
+                    yli::ontology::Console* const console,
+                    yli::ontology::Entity* const universe_entity,
+                    const std::vector<std::string>& command_parameters);
+
+            // Public AngelScript-related callbacks.
+
+            static std::shared_ptr<yli::common::AnyValue> eval(
+                    yli::ontology::Console* const console,
+                    yli::ontology::Entity* const universe_entity,
+                    const std::vector<std::string>& command_parameters);
+
+            // Public data printing callbacks.
+
+            static std::shared_ptr<yli::common::AnyValue> info(
+                    yli::ontology::Console* const console,
+                    yli::ontology::Entity* const universe_entity,
+                    const std::vector<std::string>& command_parameters);
+
+            static std::shared_ptr<yli::common::AnyValue> print_entities(
+                    yli::ontology::Console* const console,
+                    yli::ontology::Entity* const universe_entity,
+                    const std::vector<std::string>& command_parameters);
+
+            static std::shared_ptr<yli::common::AnyValue> print_parent(
+                    yli::ontology::Console* const console,
+                    yli::ontology::Entity* const universe_entity,
+                    const std::vector<std::string>& command_parameters);
+
+            // Other public callbacks.
+
+            static std::shared_ptr<yli::common::AnyValue> screenshot(
+                    yli::ontology::Console* const console,
+                    yli::ontology::Entity* const universe_entity,
+                    const std::vector<std::string>& command_parameters);
+
+            // Public callbacks end here.
+
+            // Ylikuutio version.
+            static const std::string version;
+
+            // Variables related to location and orientation.
+
+            // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
+            glm::vec3 current_camera_cartesian_coordinates;
+
+            // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
+            yli::common::SphericalCoordinatesStruct current_camera_spherical_coordinates;
+
+            // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
+            glm::vec3 current_camera_direction;
+
+            glm::vec3 current_camera_right; // note: `right` can not be set directly using console.
+            glm::vec3 current_camera_up;    // note: `up` can not be set directly using console.
+
+            double current_camera_horizontal_angle;
+            double current_camera_vertical_angle;
+
+            int32_t mouse_x;
+            int32_t mouse_y;
+
+            float speed;
+            float turbo_factor;
+            float twin_turbo_factor;
+            float mouse_speed;
+            bool has_mouse_ever_moved;
+
+            // 'can toggle'-type of boolean keypress control variables
+            // should all be stored in the `Universe` to avoid locking.
+            bool can_toggle_invert_mouse;
+            bool can_toggle_flight_mode;
+            bool can_toggle_help_mode;
+
+            bool is_invert_mouse_in_use;
+            bool is_first_turbo_pressed;
+            bool is_second_turbo_pressed;
+            bool is_exit_requested;
+
+            // Variables related to graphics.
+            float znear;
+            float zfar;
+
+            // Variables related to the current `Scene`.
+            bool testing_spherical_terrain_in_use;
+
+            // Variables related to `Console`s.
+            bool in_console;
+
+            // Variables related to help mode.
+            bool in_help_mode;
+            bool can_display_help_screen;
+
+            float background_red;
+            float background_green;
+            float background_blue;
+            float background_alpha;
+
+            yli::ontology::ParentModule parent_of_worlds;
+            yli::ontology::ParentModule parent_of_font2Ds;
+            yli::ontology::ParentModule parent_of_consoles;
+            yli::ontology::ParentModule parent_of_any_value_entities;
+            yli::ontology::ParentModule parent_of_any_struct_entities;
+            yli::ontology::ParentModule parent_of_callback_engine_entities;
+
+        private:
+            bool compute_and_update_matrices_from_inputs();
+
+            std::shared_ptr<yli::ontology::EntityFactory> entity_factory;
+
+            std::vector<yli::ontology::Entity*> entity_pointer_vector;
+            std::queue<std::size_t> free_entityID_queue;
+            std::size_t number_of_entities;
+
+            yli::ontology::Scene* active_scene;
+            yli::ontology::Font2D* active_font2D;
+            yli::ontology::Console* active_console;
+
+            std::shared_ptr<yli::angelscript::AngelscriptMaster> angelscript_master; // pointer to `AngelscriptMaster`.
+
+            std::shared_ptr<yli::audio::AudioMaster> audio_master;    // pointer to `AudioMaster`.
+
+            std::shared_ptr<yli::input::InputMaster> input_master;    // pointer to `InputMaster`.
+
+            // Named entities are stored here so that they can be recalled, if needed.
+            std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
+
+            // variables related to the window.
+            std::shared_ptr<SDL_GLContext> context;
+            SDL_Window* window;
+            uint32_t window_width;
+            uint32_t window_height;
+            std::size_t framebuffer_width;
+            std::size_t framebuffer_height;
+            std::string window_title;
+            bool is_physical;
+            bool is_fullscreen;
+            bool is_headless;
+            bool is_silent;
+
+            // variables related to the framebuffer.
+            uint32_t framebuffer;
+            uint32_t texture;
+            uint32_t renderbuffer;
+            bool is_framebuffer_initialized;
+
+            // variables related to `Camera` (projection).
+            glm::mat4 current_camera_projection_matrix;
+            glm::mat4 current_camera_view_matrix;
+            float aspect_ratio;    // At the moment all `Camera`s use the same aspect ratio.
+            float initialFoV;      // At the moment all `Camera`s use the same FoV.
+
+            // variables related to the fonts and texts used.
+            std::size_t text_size;
+            std::size_t font_size;
+
+            // variables related to timing of events.
+            std::size_t max_FPS;
+            double last_time_to_display_FPS;
+            double last_time_for_display_sync;
+            double delta_time;
+            int32_t number_of_frames;
+
+            uint32_t last_time_before_reading_keyboard;
+            uint32_t current_time_before_reading_keyboard;
+    };
 }
 
 #endif

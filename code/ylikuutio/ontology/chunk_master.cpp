@@ -27,51 +27,48 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    void ChunkMaster::bind_to_parent()
     {
-        void ChunkMaster::bind_to_parent()
+        // requirements:
+        // `this->parent` must not be `nullptr`.
+        yli::ontology::Material* const material = this->parent;
+
+        if (material == nullptr)
         {
-            // requirements:
-            // `this->parent` must not be `nullptr`.
-            yli::ontology::Material* const material = this->parent;
-
-            if (material == nullptr)
-            {
-                std::cerr << "ERROR: `ChunkMaster::bind_to_parent`: `material` is `nullptr`!\n";
-                return;
-            }
-
-            // get `childID` from `Material` and set pointer to this `ChunkMaster`.
-            material->parent_of_chunk_masters.bind_child(this);
+            std::cerr << "ERROR: `ChunkMaster::bind_to_parent`: `material` is `nullptr`!\n";
+            return;
         }
 
-        ChunkMaster::~ChunkMaster()
+        // get `childID` from `Material` and set pointer to this `ChunkMaster`.
+        material->parent_of_chunk_masters.bind_child(this);
+    }
+
+    ChunkMaster::~ChunkMaster()
+    {
+        // destructor.
+
+        // requirements for further actions:
+        // `this->parent` must not be `nullptr`.
+        yli::ontology::Material* const material = this->parent;
+
+        if (material == nullptr)
         {
-            // destructor.
-
-            // requirements for further actions:
-            // `this->parent` must not be `nullptr`.
-            yli::ontology::Material* const material = this->parent;
-
-            if (material == nullptr)
-            {
-                std::cerr << "ERROR: `ChunkMaster::~ChunkMaster`: `material` is `nullptr`!\n";
-                return;
-            }
-
-            // set pointer to this `ChunkMaster` to `nullptr`.
-            material->parent_of_chunk_masters.unbind_child(this->childID);
+            std::cerr << "ERROR: `ChunkMaster::~ChunkMaster`: `material` is `nullptr`!\n";
+            return;
         }
 
-        void ChunkMaster::render()
+        // set pointer to this `ChunkMaster` to `nullptr`.
+        material->parent_of_chunk_masters.unbind_child(this->childID);
+    }
+
+    void ChunkMaster::render()
+    {
+        if (this->should_be_rendered)
         {
-            if (this->should_be_rendered)
-            {
-                // render `ChunkMaster` by calling `render()` function of each `Chunk`.
-                yli::ontology::render_children<ontology::Entity*>(this->parent_of_chunks.child_pointer_vector);
-            }
+            // render `ChunkMaster` by calling `render()` function of each `Chunk`.
+            yli::ontology::render_children<ontology::Entity*>(this->parent_of_chunks.child_pointer_vector);
         }
     }
 }

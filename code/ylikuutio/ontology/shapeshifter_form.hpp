@@ -26,41 +26,38 @@
 
 // `ShapeshifterForm` is a `Model` and a part of `ShapeshifterTransformation`.
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Entity;
+    class Universe;
+    class ShapeshifterTransformation;
+    class ParentModule;
+
+    class ShapeshifterForm: public yli::ontology::Model
     {
-        class Entity;
-        class Universe;
-        class ShapeshifterTransformation;
-        class ParentModule;
-
-        class ShapeshifterForm: public yli::ontology::Model
-        {
-            public:
+        public:
+            // constructor.
+            ShapeshifterForm(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::SpeciesStruct& species_struct,
+                    yli::ontology::ParentModule* const parent_module)
+                : Model(universe, species_struct.opengl_in_use, parent_module)
+            {
                 // constructor.
-                ShapeshifterForm(
-                        yli::ontology::Universe* const universe,
-                        const yli::ontology::SpeciesStruct& species_struct,
-                        yli::ontology::ParentModule* const parent_module)
-                    : Model(universe, species_struct.opengl_in_use, parent_module)
-                {
-                    // constructor.
 
-                    // `yli::ontology::Entity` member variables begin here.
-                    this->type_string = "yli::ontology::ShapeshifterForm*";
-                }
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "yli::ontology::ShapeshifterForm*";
+            }
 
-                // destructor.
-                virtual ~ShapeshifterForm();
+            // destructor.
+            virtual ~ShapeshifterForm();
 
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
 
-            private:
-                void render() override;
-        };
-    }
+        private:
+            void render() override;
+    };
 }
 
 #endif

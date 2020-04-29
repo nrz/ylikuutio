@@ -22,51 +22,48 @@
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    void Chunk::bind_to_parent()
     {
-        void Chunk::bind_to_parent()
+        // requirements:
+        // `this->parent` must not be `nullptr`.
+        yli::ontology::ChunkMaster* const chunk_master = this->parent;
+
+        if (chunk_master == nullptr)
         {
-            // requirements:
-            // `this->parent` must not be `nullptr`.
-            yli::ontology::ChunkMaster* const chunk_master = this->parent;
-
-            if (chunk_master == nullptr)
-            {
-                std::cerr << "ERROR: `Chunk::bind_to_parent`: `chunk_master` is `nullptr`!\n";
-                return;
-            }
-
-            // get `childID` from the `ChunkMaster` and set pointer to this `Chunk`.
-            chunk_master->parent_of_chunks.bind_child(this);
+            std::cerr << "ERROR: `Chunk::bind_to_parent`: `chunk_master` is `nullptr`!\n";
+            return;
         }
 
-        Chunk::~Chunk()
+        // get `childID` from the `ChunkMaster` and set pointer to this `Chunk`.
+        chunk_master->parent_of_chunks.bind_child(this);
+    }
+
+    Chunk::~Chunk()
+    {
+        // destructor.
+        //
+        // requirements:
+        // `this->parent` must not be `nullptr`.
+        yli::ontology::ChunkMaster* const chunk_master = this->parent;
+
+        if (chunk_master == nullptr)
         {
-            // destructor.
-            //
-            // requirements:
-            // `this->parent` must not be `nullptr`.
-            yli::ontology::ChunkMaster* const chunk_master = this->parent;
-
-            if (chunk_master == nullptr)
-            {
-                std::cerr << "ERROR: `Chunk::~Chunk`: `chunk_master` is `nullptr`!\n";
-                return;
-            }
-
-            chunk_master->parent_of_chunks.unbind_child(this->childID);
+            std::cerr << "ERROR: `Chunk::~Chunk`: `chunk_master` is `nullptr`!\n";
+            return;
         }
 
-        void Chunk::render()
+        chunk_master->parent_of_chunks.unbind_child(this->childID);
+    }
+
+    void Chunk::render()
+    {
+        if (this->opengl_in_use)
         {
-            if (this->opengl_in_use)
-            {
-                // Render this `Chunk`.
-                // If any vertex of the `Chunk` has changed, the vertex data
-                // of the `Chunk` needs to be reconstructed before rendering.
-            }
+            // Render this `Chunk`.
+            // If any vertex of the `Chunk` has changed, the vertex data
+            // of the `Chunk` needs to be reconstructed before rendering.
         }
     }
 }

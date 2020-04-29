@@ -29,81 +29,78 @@
 #include <string>        // std::string
 #include <vector>        // std::vector
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Universe;
+}
+
+namespace yli::callback
+{
+    class CallbackObject;
+
+    class CallbackEngine
     {
-        class Universe;
-    }
+        // `CallbackEngine` is an object that contains some callbacks and hashmaps that are used for input and output parameters.
+        // `CallbackEngine` provides a way to create callback chains.
+        //
+        // Hierarchy of callbacks:
+        //
+        //     CallbackEngine
+        //           ^
+        //     CallbackObject
+        //           ^
+        //   CallbackParameter
+        //
+        // How to use.
+        // 1. Create a new `CallbackEngine`. No callbacks have been
+        //    defined yet. Calling `CallbackEngine.execute(nullptr)` at this
+        //    point will simply go through an empty vector and
+        //    practically won't do anything interesting.
+        // 2. Create a new `CallbackObject`, give pointer to the
+        //    recently created `CallbackEngine` as input parameter.
+        // 3. If the callback has parameter[s], create a new
+        //    `CallbackParameter` for each parameter, give `CallbackObject`
+        //    as input parameter for the `CallbackParameter` constructor.
 
-    namespace callback
-    {
-        class CallbackObject;
+        public:
+            void bind_CallbackObject(yli::callback::CallbackObject* const callback_object);
 
-        class CallbackEngine
-        {
-            // `CallbackEngine` is an object that contains some callbacks and hashmaps that are used for input and output parameters.
-            // `CallbackEngine` provides a way to create callback chains.
-            //
-            // Hierarchy of callbacks:
-            //
-            //     CallbackEngine
-            //           ^
-            //     CallbackObject
-            //           ^
-            //   CallbackParameter
-            //
-            // How to use.
-            // 1. Create a new `CallbackEngine`. No callbacks have been
-            //    defined yet. Calling `CallbackEngine.execute(nullptr)` at this
-            //    point will simply go through an empty vector and
-            //    practically won't do anything interesting.
-            // 2. Create a new `CallbackObject`, give pointer to the
-            //    recently created `CallbackEngine` as input parameter.
-            // 3. If the callback has parameter[s], create a new
-            //    `CallbackParameter` for each parameter, give `CallbackObject`
-            //    as input parameter for the `CallbackParameter` constructor.
+            // constructor.
+            CallbackEngine();
 
-            public:
-                void bind_CallbackObject(yli::callback::CallbackObject* const callback_object);
+            // constructor.
+            CallbackEngine(yli::ontology::Universe* const universe);
 
-                // constructor.
-                CallbackEngine();
+            // destructor.
+            ~CallbackEngine();
 
-                // constructor.
-                CallbackEngine(yli::ontology::Universe* const universe);
+            yli::callback::CallbackObject* create_CallbackObject();
+            yli::callback::CallbackObject* create_CallbackObject(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
-                // destructor.
-                ~CallbackEngine();
+            // execute all callbacks with a parameter.
+            std::shared_ptr<yli::common::AnyValue> execute(std::shared_ptr<yli::common::AnyValue> any_value);
 
-                yli::callback::CallbackObject* create_CallbackObject();
-                yli::callback::CallbackObject* create_CallbackObject(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
+            std::size_t get_n_of_return_values() const;
+            std::shared_ptr<yli::common::AnyValue> get_nth_return_value(std::size_t n) const;
+            std::shared_ptr<yli::common::AnyValue> get_previous_return_value() const;
 
-                // execute all callbacks with a parameter.
-                std::shared_ptr<yli::common::AnyValue> execute(std::shared_ptr<yli::common::AnyValue> any_value);
+            friend class CallbackObject;
 
-                std::size_t get_n_of_return_values() const;
-                std::shared_ptr<yli::common::AnyValue> get_nth_return_value(std::size_t n) const;
-                std::shared_ptr<yli::common::AnyValue> get_previous_return_value() const;
+        private:
+            // `CallbackEngine` is not an `Entity`.
+            // Therefore they are not descendants of the `Universe`.
+            // Some `CallbackEngine`s just have a pointer to the `Universe`.
+            yli::ontology::Universe* universe;
 
-                friend class CallbackObject;
+            // this method sets a callback object pointer.
+            void set_callback_object_pointer(const std::size_t childID, yli::callback::CallbackObject* const child_pointer);
 
-            private:
-                // `CallbackEngine` is not an `Entity`.
-                // Therefore they are not descendants of the `Universe`.
-                // Some `CallbackEngine`s just have a pointer to the `Universe`.
-                yli::ontology::Universe* universe;
+            std::vector<yli::callback::CallbackObject*> callback_object_pointer_vector;
+            std::queue<std::size_t> free_callback_objectID_queue;
+            std::size_t number_of_callback_objects;
 
-                // this method sets a callback object pointer.
-                void set_callback_object_pointer(const std::size_t childID, yli::callback::CallbackObject* const child_pointer);
-
-                std::vector<yli::callback::CallbackObject*> callback_object_pointer_vector;
-                std::queue<std::size_t> free_callback_objectID_queue;
-                std::size_t number_of_callback_objects;
-
-                std::vector<std::shared_ptr<yli::common::AnyValue>> return_values;
-        };
-    }
+            std::vector<std::shared_ptr<yli::common::AnyValue>> return_values;
+    };
 }
 
 #endif

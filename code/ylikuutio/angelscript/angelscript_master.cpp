@@ -25,170 +25,167 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 
-namespace yli
+namespace yli::angelscript
 {
-    namespace angelscript
+    AngelscriptMaster::AngelscriptMaster()
     {
-        AngelscriptMaster::AngelscriptMaster()
+        // constructor.
+        this->angelscript_engine = asCreateScriptEngine();
+
+        if (angelscript_engine == nullptr)
         {
-            // constructor.
-            this->angelscript_engine = asCreateScriptEngine();
-
-            if (angelscript_engine == nullptr)
-            {
-                std::cerr << "ERROR: `angelscript_engine` is `nullptr`!\n";
-                return;
-            }
-
-            int result = angelscript_engine->SetMessageCallback(asFUNCTION(yli::angelscript::message_callback), 0, asCALL_CDECL);
-
-            if (result < 0)
-            {
-                std::cerr << "Setting message callback failed!\n";
-            }
-
-            result = angelscript_engine->SetEngineProperty(asEP_ALLOW_MULTILINE_STRINGS, 1); // enable multiline strings.
-
-            if (result < 0)
-            {
-                std::cerr << "Setting engine property `asEP_ALLOW_MULTILINE_STRINGS` failed!\n";
-            }
-
-            RegisterStdString(this->angelscript_engine);
-
-            result = angelscript_engine->RegisterGlobalFunction("float square(float)", asMETHODPR(yli::angelscript::AngelscriptMaster, square, (float), float), asCALL_THISCALL_ASGLOBAL, this);
-
-            if (result < 0)
-            {
-                std::cerr << "Registering global function float `square(float x)` failed!\n";
-            }
-
-            result = angelscript_engine->RegisterGlobalFunction("float cube(float x)", asMETHODPR(yli::angelscript::AngelscriptMaster, cube, (float), float), asCALL_THISCALL_ASGLOBAL, this);
-
-            if (result < 0)
-            {
-                std::cerr << "Registering global function float `cube(float x)` failed!\n";
-            }
-
-            result = angelscript_engine->RegisterGlobalFunction("void print(string &in)", asMETHODPR(yli::angelscript::AngelscriptMaster, print, (const std::string&), void), asCALL_THISCALL_ASGLOBAL, this);
-
-            if (result < 0)
-            {
-                std::cerr << "Registering global function float `void print(const string &in)` failed!\n";
-            }
-
-            result = angelscript_engine->RegisterGlobalFunction("void print(float x)", asMETHODPR(yli::angelscript::AngelscriptMaster, print, (float), void), asCALL_THISCALL_ASGLOBAL, this);
-
-            if (result < 0)
-            {
-                std::cerr << "Registering global function float `void print(float x)` failed!\n";
-            }
+            std::cerr << "ERROR: `angelscript_engine` is `nullptr`!\n";
+            return;
         }
 
-        AngelscriptMaster::~AngelscriptMaster()
+        int result = angelscript_engine->SetMessageCallback(asFUNCTION(yli::angelscript::message_callback), 0, asCALL_CDECL);
+
+        if (result < 0)
         {
-            // destructor.
-            this->angelscript_engine->ShutDownAndRelease();
+            std::cerr << "Setting message callback failed!\n";
         }
 
-        std::string AngelscriptMaster::eval_string(const std::string& my_string)
+        result = angelscript_engine->SetEngineProperty(asEP_ALLOW_MULTILINE_STRINGS, 1); // enable multiline strings.
+
+        if (result < 0)
         {
-            this->eval_output = ""; // reset eval output.
+            std::cerr << "Setting engine property `asEP_ALLOW_MULTILINE_STRINGS` failed!\n";
+        }
 
-            if (this->angelscript_engine == nullptr)
+        RegisterStdString(this->angelscript_engine);
+
+        result = angelscript_engine->RegisterGlobalFunction("float square(float)", asMETHODPR(yli::angelscript::AngelscriptMaster, square, (float), float), asCALL_THISCALL_ASGLOBAL, this);
+
+        if (result < 0)
+        {
+            std::cerr << "Registering global function float `square(float x)` failed!\n";
+        }
+
+        result = angelscript_engine->RegisterGlobalFunction("float cube(float x)", asMETHODPR(yli::angelscript::AngelscriptMaster, cube, (float), float), asCALL_THISCALL_ASGLOBAL, this);
+
+        if (result < 0)
+        {
+            std::cerr << "Registering global function float `cube(float x)` failed!\n";
+        }
+
+        result = angelscript_engine->RegisterGlobalFunction("void print(string &in)", asMETHODPR(yli::angelscript::AngelscriptMaster, print, (const std::string&), void), asCALL_THISCALL_ASGLOBAL, this);
+
+        if (result < 0)
+        {
+            std::cerr << "Registering global function float `void print(const string &in)` failed!\n";
+        }
+
+        result = angelscript_engine->RegisterGlobalFunction("void print(float x)", asMETHODPR(yli::angelscript::AngelscriptMaster, print, (float), void), asCALL_THISCALL_ASGLOBAL, this);
+
+        if (result < 0)
+        {
+            std::cerr << "Registering global function float `void print(float x)` failed!\n";
+        }
+    }
+
+    AngelscriptMaster::~AngelscriptMaster()
+    {
+        // destructor.
+        this->angelscript_engine->ShutDownAndRelease();
+    }
+
+    std::string AngelscriptMaster::eval_string(const std::string& my_string)
+    {
+        this->eval_output = ""; // reset eval output.
+
+        if (this->angelscript_engine == nullptr)
+        {
+            return "";
+        }
+
+        CScriptBuilder builder;
+
+        int result = builder.StartNewModule(this->angelscript_engine, "MyModule");
+
+        if (result < 0)
+        {
+            std::cerr << "Error when executing `builder.StartNewModule`!\n";
+            return "";
+        }
+
+        result = builder.AddSectionFromMemory("MySection", my_string.c_str(), my_string.size(), 0);
+
+        if (result < 0)
+        {
+            std::cerr << "Error when executing `builder.AddSectionFromMemory`!\n";
+            return "";
+        }
+
+        result = builder.BuildModule();
+
+        if (result < 0)
+        {
+            std::cerr << "Error when executing `builder.BuildModule`!\n";
+            return "";
+        }
+
+        asIScriptModule* module = this->angelscript_engine->GetModule("MyModule");
+
+        if (module == nullptr)
+        {
+            std::cerr << "ERROR: `module` is `nullptr`!\n";
+            return "";
+        }
+
+        asIScriptFunction* function = module->GetFunctionByDecl("void main()");
+
+        if (function == nullptr)
+        {
+            std::cerr << "ERROR: function` is `nullptr`!\n";
+            return "";
+        }
+
+        asIScriptContext* context = this->angelscript_engine->CreateContext();
+
+        if (context == nullptr)
+        {
+            std::cerr << "ERROR: context` is `nullptr`!\n";
+            return "";
+        }
+
+        context->Prepare(function);
+
+        result = context->Execute();
+
+        if (result != asEXECUTION_FINISHED)
+        {
+            std::cerr << "ERROR: execution did not finish normally!\n";
+
+            if (result == asEXECUTION_EXCEPTION)
             {
-                return "";
-            }
-
-            CScriptBuilder builder;
-
-            int result = builder.StartNewModule(this->angelscript_engine, "MyModule");
-
-            if (result < 0)
-            {
-                std::cerr << "Error when executing `builder.StartNewModule`!\n";
-                return "";
-            }
-
-            result = builder.AddSectionFromMemory("MySection", my_string.c_str(), my_string.size(), 0);
-
-            if (result < 0)
-            {
-                std::cerr << "Error when executing `builder.AddSectionFromMemory`!\n";
-                return "";
-            }
-
-            result = builder.BuildModule();
-
-            if (result < 0)
-            {
-                std::cerr << "Error when executing `builder.BuildModule`!\n";
-                return "";
-            }
-
-            asIScriptModule* module = this->angelscript_engine->GetModule("MyModule");
-
-            if (module == nullptr)
-            {
-                std::cerr << "ERROR: `module` is `nullptr`!\n";
-                return "";
-            }
-
-            asIScriptFunction* function = module->GetFunctionByDecl("void main()");
-
-            if (function == nullptr)
-            {
-                std::cerr << "ERROR: function` is `nullptr`!\n";
-                return "";
-            }
-
-            asIScriptContext* context = this->angelscript_engine->CreateContext();
-
-            if (context == nullptr)
-            {
-                std::cerr << "ERROR: context` is `nullptr`!\n";
-                return "";
-            }
-
-            context->Prepare(function);
-
-            result = context->Execute();
-
-            if (result != asEXECUTION_FINISHED)
-            {
-                std::cerr << "ERROR: execution did not finish normally!\n";
-
-                if (result == asEXECUTION_EXCEPTION)
-                {
-                    std::cerr << "ERROR: `asEXECUTION_EXCEPTION`!\n";
-                }
-
-                context->Release();
-                return "";
+                std::cerr << "ERROR: `asEXECUTION_EXCEPTION`!\n";
             }
 
             context->Release();
-            return this->eval_output;
+            return "";
         }
 
-        float AngelscriptMaster::square(const float x)
-        {
-            return x * x;
-        }
+        context->Release();
+        return this->eval_output;
+    }
 
-        float AngelscriptMaster::cube(const float x)
-        {
-            return x * x * x;
-        }
+    float AngelscriptMaster::square(const float x)
+    {
+        return x * x;
+    }
 
-        void AngelscriptMaster::print(const std::string& my_message)
-        {
-            this->eval_output += my_message;
-        }
+    float AngelscriptMaster::cube(const float x)
+    {
+        return x * x * x;
+    }
 
-        void AngelscriptMaster::print(const float value)
-        {
-            this->eval_output += std::to_string(value);
-        }
+    void AngelscriptMaster::print(const std::string& my_message)
+    {
+        this->eval_output += my_message;
+    }
+
+    void AngelscriptMaster::print(const float value)
+    {
+        this->eval_output += std::to_string(value);
     }
 }

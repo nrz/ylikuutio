@@ -24,16 +24,13 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::load
 {
-    namespace load
-    {
-        std::shared_ptr<std::vector<uint8_t>> load_image_file(
-                const std::string& filename,
-                std::size_t& image_width,
-                std::size_t& image_height,
-                std::size_t& image_size);
-    }
+    std::shared_ptr<std::vector<uint8_t>> load_image_file(
+            const std::string& filename,
+            std::size_t& image_width,
+            std::size_t& image_height,
+            std::size_t& image_size);
 }
 
 #endif

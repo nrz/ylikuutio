@@ -22,29 +22,26 @@
 #include <cstddef> // std::size_t
 #include <string>  // std::string
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    struct FontStruct
     {
-        struct FontStruct
+        FontStruct()
+            : screen_width(0),
+            screen_height(0),
+            text_size(0),
+            font_size(0)
         {
-            FontStruct()
-                : screen_width(0),
-                screen_height(0),
-                text_size(0),
-                font_size(0)
-            {
-                // constructor.
-            }
+            // constructor.
+        }
 
-            std::string texture_filename;
-            std::string font_texture_file_format;
-            std::size_t screen_width;
-            std::size_t screen_height;
-            std::size_t text_size;
-            std::size_t font_size;
-        };
-    }
+        std::string texture_filename;
+        std::string font_texture_file_format;
+        std::size_t screen_width;
+        std::size_t screen_height;
+        std::size_t text_size;
+        std::size_t font_size;
+    };
 }
 
 #endif

@@ -22,13 +22,10 @@
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 
-namespace yli
+namespace yli::time
 {
-    namespace time
+    double get_time()
     {
-        double get_time()
-        {
-            return static_cast<double>(SDL_GetTicks()) / 1000; // `SDL_GetTicks` return milliseconds.
-        }
+        return static_cast<double>(SDL_GetTicks()) / 1000; // `SDL_GetTicks` return milliseconds.
     }
 }

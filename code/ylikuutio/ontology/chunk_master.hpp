@@ -33,52 +33,49 @@
 // objects (if vertices have been modified) and deactivating (by
 // unbinding) and possibly deleting `Chunk` objects (if needed).
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Universe;
+
+    class ChunkMaster: public yli::ontology::Entity
     {
-        class Universe;
-
-        class ChunkMaster: public yli::ontology::Entity
-        {
-            public:
+        public:
+            // constructor.
+            ChunkMaster(yli::ontology::Universe* universe, yli::ontology::Material* const parent, GetContentCallback get_content_callback)
+                : yli::ontology::Entity(universe),
+                parent_of_chunks(this)
+            {
                 // constructor.
-                ChunkMaster(yli::ontology::Universe* universe, yli::ontology::Material* const parent, GetContentCallback get_content_callback)
-                    : yli::ontology::Entity(universe),
-                    parent_of_chunks(this)
-                {
-                    // constructor.
-                    this->get_content_callback = get_content_callback;
-                    this->parent               = parent;
+                this->get_content_callback = get_content_callback;
+                this->parent               = parent;
 
-                    // get `childID` from `Material` and set pointer to this `ChunkMaster`.
-                    this->bind_to_parent();
+                // get `childID` from `Material` and set pointer to this `ChunkMaster`.
+                this->bind_to_parent();
 
-                    // `yli::ontology::Entity` member variables begin here.
-                    this->type_string = "ontology::ChunkMaster*";
-                }
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "ontology::ChunkMaster*";
+            }
 
-                ChunkMaster(const ChunkMaster&) = delete;            // Delete copy constructor.
-                ChunkMaster &operator=(const ChunkMaster&) = delete; // Delete copy assignment.
+            ChunkMaster(const ChunkMaster&) = delete;            // Delete copy constructor.
+            ChunkMaster &operator=(const ChunkMaster&) = delete; // Delete copy assignment.
 
-                // destructor.
-                virtual ~ChunkMaster();
+            // destructor.
+            virtual ~ChunkMaster();
 
-                yli::ontology::ParentModule parent_of_chunks;
+            yli::ontology::ParentModule parent_of_chunks;
 
-            private:
-                void bind_to_parent();
+        private:
+            void bind_to_parent();
 
-                // this method renders all `Chunk`s bound to this `ChunkMaster`.
-                void render() override;
+            // this method renders all `Chunk`s bound to this `ChunkMaster`.
+            void render() override;
 
-                std::size_t childID;              // `ChunkMaster` ID, returned by `yli::ontology::Material->get_chunk_masterID()`.
+            std::size_t childID;              // `ChunkMaster` ID, returned by `yli::ontology::Material->get_chunk_masterID()`.
 
-                // Callback used to get the content based on x, y, z.
-                GetContentCallback get_content_callback;
+            // Callback used to get the content based on x, y, z.
+            GetContentCallback get_content_callback;
 
-                yli::ontology::Material* parent;  // pointer to the `Material`.
-        };
+            yli::ontology::Material* parent;  // pointer to the `Material`.
     };
 }
 

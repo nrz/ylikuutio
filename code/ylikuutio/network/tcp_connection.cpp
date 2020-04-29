@@ -35,29 +35,26 @@
 //
 // This file has been modified by Antti Nuortimo.
 
-namespace yli
+namespace yli::network
 {
-    namespace network
+    std::shared_ptr<TcpConnection> TcpConnection::create(asio::io_context& io_context)
     {
-        std::shared_ptr<TcpConnection> TcpConnection::create(asio::io_context& io_context)
-        {
-            return std::make_shared<TcpConnection>(io_context);
-        }
+        return std::make_shared<TcpConnection>(io_context);
+    }
 
-        asio::ip::tcp::socket& TcpConnection::socket()
-        {
-            return socket_;
-        }
+    asio::ip::tcp::socket& TcpConnection::socket()
+    {
+        return socket_;
+    }
 
-        void TcpConnection::start()
-        {
-            message_ = make_daytime_string();
-            // asio::async_write(socket_, asio::buffer(message_),
-        }
+    void TcpConnection::start()
+    {
+        message_ = make_daytime_string();
+        // asio::async_write(socket_, asio::buffer(message_),
+    }
 
-        std::string TcpConnection::make_daytime_string()
-        {
-            return "test_daytime_string";
-        }
+    std::string TcpConnection::make_daytime_string()
+    {
+        return "test_daytime_string";
     }
 }

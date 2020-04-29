@@ -72,66 +72,63 @@
 // When a `Scene` is deleted:
 // 1. Every child of `Scene` gets deleted as usual, including the `Camera`s.
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Universe;
+    class ParentModule;
+
+    class Camera: public yli::ontology::Movable
     {
-        class Universe;
-        class ParentModule;
+        public:
+            Camera(yli::ontology::Universe* const universe, const yli::ontology::CameraStruct& camera_struct, yli::ontology::ParentModule* const parent_module)
+                : Movable(
+                        universe,
+                        yli::ontology::MovableStruct(
+                            camera_struct.brain,
+                            camera_struct.cartesian_coordinates,
+                            camera_struct.spherical_coordinates,
+                            camera_struct.horizontal_angle,
+                            camera_struct.vertical_angle),
+                        parent_module)
+            {
+                // constructor.
 
-        class Camera: public yli::ontology::Movable
-        {
-            public:
-                Camera(yli::ontology::Universe* const universe, const yli::ontology::CameraStruct& camera_struct, yli::ontology::ParentModule* const parent_module)
-                    : Movable(
-                            universe,
-                            yli::ontology::MovableStruct(
-                                camera_struct.brain,
-                                camera_struct.cartesian_coordinates,
-                                camera_struct.spherical_coordinates,
-                                camera_struct.horizontal_angle,
-                                camera_struct.vertical_angle),
-                            parent_module)
-                {
-                    // constructor.
+                this->horizontal_angle  = camera_struct.horizontal_angle;
+                this->vertical_angle    = camera_struct.vertical_angle;
+                this->is_static_view    = camera_struct.is_static_view;
 
-                    this->horizontal_angle  = camera_struct.horizontal_angle;
-                    this->vertical_angle    = camera_struct.vertical_angle;
-                    this->is_static_view    = camera_struct.is_static_view;
-
-                    // variables related to the projection.
-                    this->projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
-                    this->view_matrix       = glm::mat4(1.0f); // identity matrix (dummy value).
-
-                    // `yli::ontology::Entity` member variables begin here.
-                    this->type_string = "yli::ontology::Camera*";
-                }
-
-                Camera(const Camera&) = delete;            // Delete copy constructor.
-                Camera &operator=(const Camera&) = delete; // Delete copy assignment.
-
-                // destructor.
-                virtual ~Camera();
-
-                void adjust_horizontal_angle(float adjustment);
-
-                const glm::mat4& get_projection_matrix() const;
-                const glm::mat4& get_view_matrix() const;
-                bool get_is_static_view() const;
-
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
-
-                friend class Universe;
-
-            private:
                 // variables related to the projection.
-                glm::mat4 projection_matrix;
-                glm::mat4 view_matrix;
+                this->projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
+                this->view_matrix       = glm::mat4(1.0f); // identity matrix (dummy value).
 
-                bool is_static_view;
-        };
-    }
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "yli::ontology::Camera*";
+            }
+
+            Camera(const Camera&) = delete;            // Delete copy constructor.
+            Camera &operator=(const Camera&) = delete; // Delete copy assignment.
+
+            // destructor.
+            virtual ~Camera();
+
+            void adjust_horizontal_angle(float adjustment);
+
+            const glm::mat4& get_projection_matrix() const;
+            const glm::mat4& get_view_matrix() const;
+            bool get_is_static_view() const;
+
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
+
+            friend class Universe;
+
+        private:
+            // variables related to the projection.
+            glm::mat4 projection_matrix;
+            glm::mat4 view_matrix;
+
+            bool is_static_view;
+    };
 }
 
 #endif

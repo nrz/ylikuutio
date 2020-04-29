@@ -28,55 +28,52 @@
 #include <queue>     // std::queue
 #include <algorithm> // std::find
 
-namespace yli
+namespace yli::graph
 {
-    namespace graph
+    class Node
     {
-        class Node
-        {
-            public:
-                // constructor.
-                Node(const yli::graph::NodeStruct& node_struct);
+        public:
+            // constructor.
+            Node(const yli::graph::NodeStruct& node_struct);
 
-                // destructor.
-                ~Node();
+            // destructor.
+            ~Node();
 
-                friend class Graph;
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
+            friend class Graph;
+            template<class T1>
+                friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
-            private:
-                void bind_to_parent();
+        private:
+            void bind_to_parent();
 
-                // this method creates a bidirectional link.
-                // creating of bidirectional links is not possible before all nodes are created.
-                void create_bidirectional_link(std::size_t nodeID);
+            // this method creates a bidirectional link.
+            // creating of bidirectional links is not possible before all nodes are created.
+            void create_bidirectional_link(std::size_t nodeID);
 
-                // this method deletes a bidirectional link.
-                // deleting of links is not possible before all nodes are created.
-                void delete_bidirectional_link(std::size_t nodeID);
+            // this method deletes a bidirectional link.
+            // deleting of links is not possible before all nodes are created.
+            void delete_bidirectional_link(std::size_t nodeID);
 
-                // this method transfers this node to a new graph.
-                // links will not be changed.
-                // all nodes that are to be transferred must be transferred separately.
-                // before transfering any node to a new graph,
-                // all links to nodes that do not belong to the new graph of this node must be deleted with separate `delete_bidirectional_link` calls.
-                void bind_to_new_parent(yli::graph::Graph* const new_parent);
+            // this method transfers this node to a new graph.
+            // links will not be changed.
+            // all nodes that are to be transferred must be transferred separately.
+            // before transfering any node to a new graph,
+            // all links to nodes that do not belong to the new graph of this node must be deleted with separate `delete_bidirectional_link` calls.
+            void bind_to_new_parent(yli::graph::Graph* const new_parent);
 
-                std::size_t childID;
-                yli::graph::Graph* parent;
+            std::size_t childID;
+            yli::graph::Graph* parent;
 
-                // nodes do not keep pointers to neighbor nodes, because all pointer values are not known yet before all nodes are created.
-                std::vector<std::size_t> neighbor_nodeIDs;
+            // nodes do not keep pointers to neighbor nodes, because all pointer values are not known yet before all nodes are created.
+            std::vector<std::size_t> neighbor_nodeIDs;
 
-                // this method creates an unidirectional link.
-                // in the constructor only unidirectional links can be created.
-                void create_unidirectional_link(std::size_t nodeID);
+            // this method creates an unidirectional link.
+            // in the constructor only unidirectional links can be created.
+            void create_unidirectional_link(std::size_t nodeID);
 
-                // this method deletes an unidirectional link.
-                void delete_unidirectional_link(std::size_t nodeID);
-        };
-    }
+            // this method deletes an unidirectional link.
+            void delete_unidirectional_link(std::size_t nodeID);
+    };
 }
 
 #endif

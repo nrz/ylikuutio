@@ -22,24 +22,21 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::callback
 {
-    namespace callback
-    {
-        class CallbackEngine;
-        class CallbackObject;
-        class CallbackParameter;
-    }
+    class CallbackEngine;
+    class CallbackObject;
+    class CallbackParameter;
+}
 
-    namespace common
-    {
-        class AnyValue;
-    }
+namespace yli::common
+{
+    class AnyValue;
+}
 
-    namespace ontology
-    {
-        class Universe;
-    }
+namespace yli::ontology
+{
+    class Universe;
 }
 
 typedef std::shared_ptr<yli::common::AnyValue> (*InputParametersAndAnyValueToAnyValueCallbackWithUniverse) (

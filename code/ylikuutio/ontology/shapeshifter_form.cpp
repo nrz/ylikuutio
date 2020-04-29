@@ -22,32 +22,29 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Entity;
+
+    ShapeshifterForm::~ShapeshifterForm()
     {
-        class Entity;
+        // destructor.
+    }
 
-        ShapeshifterForm::~ShapeshifterForm()
-        {
-            // destructor.
-        }
+    std::size_t ShapeshifterForm::get_number_of_children() const
+    {
+        return 0; // `ShapeshifterForm` has no children.
+    }
 
-        std::size_t ShapeshifterForm::get_number_of_children() const
-        {
-            return 0; // `ShapeshifterForm` has no children.
-        }
+    std::size_t ShapeshifterForm::get_number_of_descendants() const
+    {
+        return 0; // `ShapeshifterForm` has no children.
+    }
 
-        std::size_t ShapeshifterForm::get_number_of_descendants() const
-        {
-            return 0; // `ShapeshifterForm` has no children.
-        }
+    void ShapeshifterForm::render()
+    {
+        // Render this `ShapeshifterForm`.
 
-        void ShapeshifterForm::render()
-        {
-            // Render this `ShapeshifterForm`.
-
-            // TODO.
-        }
+        // TODO.
     }
 }

@@ -21,22 +21,19 @@
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
 
-namespace yli
+namespace yli::common
 {
-    namespace common
-    {
-        class AnyValue;
-    }
+    class AnyValue;
+}
 
-    namespace ontology
-    {
-        class Entity;
-    }
+namespace yli::ontology
+{
+    class Entity;
+}
 
-    namespace config
-    {
-        class SettingMaster;
-    }
+namespace yli::config
+{
+    class SettingMaster;
 }
 
 typedef std::shared_ptr<yli::common::AnyValue> (*PreIterateCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);

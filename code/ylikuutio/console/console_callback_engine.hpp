@@ -21,24 +21,21 @@
 #ifndef __CONSOLE_CALLBACK_ENGINE_HPP_INCLUDED
 #define __CONSOLE_CALLBACK_ENGINE_HPP_INCLUDED
 
-namespace yli
+namespace yli::console
 {
-    namespace console
+    class ConsoleCallbackObject;
+
+    class ConsoleCallbackEngine : public yli::callback::CallbackEngine
     {
-        class ConsoleCallbackObject;
+        public:
+            // constructor.
+            ConsoleCallbackEngine();
 
-        class ConsoleCallbackEngine : public yli::callback::CallbackEngine
-        {
-            public:
-                // constructor.
-                ConsoleCallbackEngine();
+            // destructor.
+            ~ConsoleCallbackEngine();
 
-                // destructor.
-                ~ConsoleCallbackEngine();
-
-                yli::console::ConsoleCallbackObject* create_ConsoleCallbackObject(const InputParametersToAnyValueCallbackWithConsole callback, yli::ontology::Console* console_pointer);
-        };
-    }
+            yli::console::ConsoleCallbackObject* create_ConsoleCallbackObject(const InputParametersToAnyValueCallbackWithConsole callback, yli::ontology::Console* console_pointer);
+    };
 }
 
 #endif

@@ -29,20 +29,17 @@
 // Include standard headers
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::geometry
 {
-    namespace geometry
+    class LineSegment3D : public LineSegment
     {
-        class LineSegment3D : public LineSegment
-        {
-            public:
-                // constructor.
-                LineSegment3D(const std::vector<float> point1, const std::vector<float> point2)
-                    : LineSegment(point1, point2)
-                {
-                }
-        };
-    }
+        public:
+            // constructor.
+            LineSegment3D(const std::vector<float> point1, const std::vector<float> point2)
+                : LineSegment(point1, point2)
+            {
+            }
+    };
 }
 
 #endif

@@ -17,13 +17,10 @@
 
 #include "vertex_node.hpp"
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    VertexNode::~VertexNode()
     {
-        VertexNode::~VertexNode()
-        {
-            // destructor.
-        }
+        // destructor.
     }
 }

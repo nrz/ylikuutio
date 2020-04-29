@@ -34,24 +34,21 @@
 //
 // This file has been modified by Antti Nuortimo.
 
-namespace yli
+namespace yli::network
 {
-    namespace network
+    class TcpServer
     {
-        class TcpServer
-        {
-            public:
-                TcpServer(asio::io_context& io_context, int port)
-                    : acceptor_(io_context, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))
-                {
-                    start_accept();
-                }
+        public:
+            TcpServer(asio::io_context& io_context, int port)
+                : acceptor_(io_context, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))
+            {
+                start_accept();
+            }
 
-            private:
-                void start_accept();
-                void handle_accept(std::shared_ptr<TcpConnection> new_connection, const asio::error_code& error);
+        private:
+            void start_accept();
+            void handle_accept(std::shared_ptr<TcpConnection> new_connection, const asio::error_code& error);
 
-                asio::ip::tcp::acceptor acceptor_;
-        };
-    }
+            asio::ip::tcp::acceptor acceptor_;
+    };
 }

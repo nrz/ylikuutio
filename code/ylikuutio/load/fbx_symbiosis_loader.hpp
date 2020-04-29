@@ -33,23 +33,20 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-namespace yli
+namespace yli::load
 {
-    namespace load
-    {
-        bool load_FBX(
-                const std::string& filename,
-                std::vector<std::vector<glm::vec3>>& out_vertices,
-                std::vector<std::vector<glm::vec2>>& out_uvs,
-                std::vector<std::vector<glm::vec3>>& out_normals,
-                std::unordered_map<const ofbx::Texture*, std::vector<int32_t>>& ofbx_diffuse_texture_mesh_map,
-                std::vector<const ofbx::Mesh*>& ofbx_meshes,
-                std::vector<const ofbx::Texture*>& ofbx_diffuse_texture_vector,
-                std::vector<const ofbx::Texture*>& ofbx_normal_texture_vector,
-                std::vector<const ofbx::Texture*>& ofbx_count_texture_vector,
-                std::size_t& mesh_count,
-                const bool is_debug_mode);
-    }
+    bool load_FBX(
+            const std::string& filename,
+            std::vector<std::vector<glm::vec3>>& out_vertices,
+            std::vector<std::vector<glm::vec2>>& out_uvs,
+            std::vector<std::vector<glm::vec3>>& out_normals,
+            std::unordered_map<const ofbx::Texture*, std::vector<int32_t>>& ofbx_diffuse_texture_mesh_map,
+            std::vector<const ofbx::Mesh*>& ofbx_meshes,
+            std::vector<const ofbx::Texture*>& ofbx_diffuse_texture_vector,
+            std::vector<const ofbx::Texture*>& ofbx_normal_texture_vector,
+            std::vector<const ofbx::Texture*>& ofbx_count_texture_vector,
+            std::size_t& mesh_count,
+            const bool is_debug_mode);
 }
 
 #endif

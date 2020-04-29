@@ -21,28 +21,25 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 
-namespace yli
+namespace yli::common
 {
-    namespace common
+    struct SphericalCoordinatesStruct
     {
-        struct SphericalCoordinatesStruct
+        SphericalCoordinatesStruct()
+            : rho(NAN), theta(NAN), phi(NAN)
         {
-            SphericalCoordinatesStruct()
-                : rho(NAN), theta(NAN), phi(NAN)
-            {
-                // constructor.
-            }
+            // constructor.
+        }
 
-            SphericalCoordinatesStruct(float rho, float theta, float phi)
-                : rho(rho), theta(theta), phi(phi)
-            {
-                // constructor.
-            }
-            double rho;
-            double theta;
-            double phi;
-        };
-    }
+        SphericalCoordinatesStruct(float rho, float theta, float phi)
+            : rho(rho), theta(theta), phi(phi)
+        {
+            // constructor.
+        }
+        double rho;
+        double theta;
+        double phi;
+    };
 }
 
 #endif

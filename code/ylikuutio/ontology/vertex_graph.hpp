@@ -31,27 +31,24 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class VertexGraph: public yli::graph::Graph
     {
-        class VertexGraph: public yli::graph::Graph
-        {
-            public:
-                // This constructor creates a graph from vertex data produced eg. by `bool triangulate_quads`.
-                VertexGraph(std::vector<glm::vec3>& in_vertices, uint32_t image_width, uint32_t image_height, std::string triangulation_type)
-                    : yli::graph::Graph()
-                {
-                    // constructor.
-                }
+        public:
+            // This constructor creates a graph from vertex data produced eg. by `bool triangulate_quads`.
+            VertexGraph(std::vector<glm::vec3>& in_vertices, uint32_t image_width, uint32_t image_height, std::string triangulation_type)
+                : yli::graph::Graph()
+            {
+                // constructor.
+            }
 
-                VertexGraph(const VertexGraph&) = delete;            // Delete copy constructor.
-                VertexGraph &operator=(const VertexGraph&) = delete; // Delete copy assignment.
+            VertexGraph(const VertexGraph&) = delete;            // Delete copy constructor.
+            VertexGraph &operator=(const VertexGraph&) = delete; // Delete copy assignment.
 
-                // destructor.
-                ~VertexGraph();
-        };
-    }
+            // destructor.
+            ~VertexGraph();
+    };
 }
 
 #endif

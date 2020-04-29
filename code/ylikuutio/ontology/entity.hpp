@@ -27,77 +27,75 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 
-namespace yli
+namespace yli::config
 {
-    namespace config
-    {
-        class SettingMaster;
-    }
-
-    namespace ontology
-    {
-        class Universe;
-
-        class Entity
-        {
-            public:
-                // Each class that supports binding to a new parent needs to `override` this function.
-                virtual void bind_to_new_parent(yli::ontology::Entity* const new_entity_parent);
-
-                // constructor.
-                Entity(yli::ontology::Universe* const universe);
-
-                Entity(const Entity&) = delete;            // Delete copy constructor.
-                Entity &operator=(const Entity&) = delete; // Delete copy assignment.
-
-                // destructor.
-                virtual ~Entity();
-
-                virtual void render();
-
-                std::size_t get_childID() const;
-                std::string get_type() const;
-
-                bool get_can_be_erased() const;
-
-                yli::ontology::Universe* get_universe() const;
-                yli::config::SettingMaster* get_setting_master() const;
-                void set_setting_master(yli::config::SettingMaster* const setting_master);
-
-                virtual yli::ontology::Entity* get_parent() const = 0;
-                virtual std::size_t get_number_of_children() const = 0;
-                virtual std::size_t get_number_of_descendants() const = 0;
-
-                void set_name(const std::string& name);
-
-                bool should_be_rendered;
-
-                friend yli::ontology::Universe;
-
-                std::size_t childID; // TODO: add checks for `std::numeric_limits<std::size_t>::max();` (invalid value).
-
-            protected:
-                void prerender() const;
-                void postrender() const;
-
-                yli::ontology::Universe* universe;                          // pointer to the `Universe`.
-                std::shared_ptr<yli::config::SettingMaster> setting_master; // pointer to the `SettingMaster`.
-                std::size_t entityID;
-
-                std::string type_string;
-
-                std::string name;    // name of this `Entity`.
-
-                bool can_be_erased;
-
-                PreRenderCallback prerender_callback;
-                PostRenderCallback postrender_callback;
-
-                yli::ontology::ParentModule parent_of_any_struct_entities;
-
-            private:
-                void bind_to_Universe();
-        };
-    }
+    class SettingMaster;
 }
+
+namespace yli::ontology
+{
+    class Universe;
+
+    class Entity
+    {
+        public:
+            // Each class that supports binding to a new parent needs to `override` this function.
+            virtual void bind_to_new_parent(yli::ontology::Entity* const new_entity_parent);
+
+            // constructor.
+            Entity(yli::ontology::Universe* const universe);
+
+            Entity(const Entity&) = delete;            // Delete copy constructor.
+            Entity &operator=(const Entity&) = delete; // Delete copy assignment.
+
+            // destructor.
+            virtual ~Entity();
+
+            virtual void render();
+
+            std::size_t get_childID() const;
+            std::string get_type() const;
+
+            bool get_can_be_erased() const;
+
+            yli::ontology::Universe* get_universe() const;
+            yli::config::SettingMaster* get_setting_master() const;
+            void set_setting_master(yli::config::SettingMaster* const setting_master);
+
+            virtual yli::ontology::Entity* get_parent() const = 0;
+            virtual std::size_t get_number_of_children() const = 0;
+            virtual std::size_t get_number_of_descendants() const = 0;
+
+            void set_name(const std::string& name);
+
+            bool should_be_rendered;
+
+            friend yli::ontology::Universe;
+
+            std::size_t childID; // TODO: add checks for `std::numeric_limits<std::size_t>::max();` (invalid value).
+
+        protected:
+            void prerender() const;
+            void postrender() const;
+
+            yli::ontology::Universe* universe;                          // pointer to the `Universe`.
+            std::shared_ptr<yli::config::SettingMaster> setting_master; // pointer to the `SettingMaster`.
+            std::size_t entityID;
+
+            std::string type_string;
+
+            std::string name;    // name of this `Entity`.
+
+            bool can_be_erased;
+
+            PreRenderCallback prerender_callback;
+            PostRenderCallback postrender_callback;
+
+            yli::ontology::ParentModule parent_of_any_struct_entities;
+
+        private:
+            void bind_to_Universe();
+    };
+}
+
 #endif

@@ -29,43 +29,40 @@
 // Include standard headers
 #include <cmath> // NAN, std::isnan, std::pow
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Scene;
+    class Brain;
+
+    struct CameraStruct
     {
-        class Scene;
-        class Brain;
-
-        struct CameraStruct
+        CameraStruct()
+            : cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
+            spherical_coordinates(NAN, NAN, NAN),
+            parent(nullptr),
+            brain(nullptr),
+            horizontal_angle(0.0),
+            vertical_angle(0.0),
+            is_static_view(false)
         {
-            CameraStruct()
-                : cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
-                spherical_coordinates(NAN, NAN, NAN),
-                parent(nullptr),
-                brain(nullptr),
-                horizontal_angle(0.0),
-                vertical_angle(0.0),
-                is_static_view(false)
-            {
-                // constructor.
-            }
+            // constructor.
+        }
 
-            // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
-            glm::vec3 cartesian_coordinates; // coordinate vector.
+        // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
+        glm::vec3 cartesian_coordinates; // coordinate vector.
 
-            yli::common::SphericalCoordinatesStruct spherical_coordinates;
+        yli::common::SphericalCoordinatesStruct spherical_coordinates;
 
-            yli::ontology::Scene* parent;    // pointer to the `Scene`.
-            yli::ontology::Brain* brain;     // pointer to the `Brain` (not a parent!).
+        yli::ontology::Scene* parent;    // pointer to the `Scene`.
+        yli::ontology::Brain* brain;     // pointer to the `Brain` (not a parent!).
 
-            double horizontal_angle;         // horizontal angle in radians.
-            double vertical_angle;           // vertical angle in radians.
+        double horizontal_angle;         // horizontal angle in radians.
+        double vertical_angle;           // vertical angle in radians.
 
-            // Static view `Camera`'s coordinates do not change by moving in a `Scene`. However,
-            // they can be modified by adjusting the `Entity`-specific variables of the `Camera` directly.
-            bool is_static_view;
-        };
-    }
+        // Static view `Camera`'s coordinates do not change by moving in a `Scene`. However,
+        // they can be modified by adjusting the `Entity`-specific variables of the `Camera` directly.
+        bool is_static_view;
+    };
 }
 
 #endif

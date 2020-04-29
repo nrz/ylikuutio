@@ -18,28 +18,25 @@
 #ifndef __CHUNK_STRUCT_HPP_INCLUDED
 #define __CHUNK_STRUCT_HPP_INCLUDED
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Universe;
+    class ChunkMaster;
+
+    struct ChunkStruct
     {
-        class Universe;
-        class ChunkMaster;
-
-        struct ChunkStruct
+        ChunkStruct()
+            : universe(nullptr),
+            parent(nullptr),
+            opengl_in_use(true)
         {
-            ChunkStruct()
-                : universe(nullptr),
-                parent(nullptr),
-                opengl_in_use(true)
-            {
-                // constructor.
-            }
+            // constructor.
+        }
 
-            yli::ontology::Universe* universe;  // pointer to the `Universe`.
-            yli::ontology::ChunkMaster* parent; // pointer to the `ChunkMaster`.
-            bool opengl_in_use;                 // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
-        };
-    }
+        yli::ontology::Universe* universe;  // pointer to the `Universe`.
+        yli::ontology::ChunkMaster* parent; // pointer to the `ChunkMaster`.
+        bool opengl_in_use;                 // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
+    };
 }
 
 #endif

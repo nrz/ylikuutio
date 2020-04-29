@@ -33,103 +33,100 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    Model::~Model()
     {
-        Model::~Model()
-        {
-            // destructor.
-        }
+        // destructor.
+    }
 
-        yli::ontology::Entity* Model::get_parent() const
-        {
-            return this->child.get_parent();
-        }
+    yli::ontology::Entity* Model::get_parent() const
+    {
+        return this->child.get_parent();
+    }
 
-        std::size_t Model::get_number_of_children() const
-        {
-            return this->parent_of_objects.get_number_of_children();
-        }
+    std::size_t Model::get_number_of_children() const
+    {
+        return this->parent_of_objects.get_number_of_children();
+    }
 
-        std::size_t Model::get_number_of_descendants() const
-        {
-            return yli::ontology::get_number_of_descendants(this->parent_of_objects.child_pointer_vector);
-        }
+    std::size_t Model::get_number_of_descendants() const
+    {
+        return yli::ontology::get_number_of_descendants(this->parent_of_objects.child_pointer_vector);
+    }
 
-        std::size_t Model::get_number_of_vertices() const
-        {
-            return this->vertices.size();
-        }
+    std::size_t Model::get_number_of_vertices() const
+    {
+        return this->vertices.size();
+    }
 
-        const std::vector<glm::vec3>& Model::get_vertices() const
-        {
-            return this->vertices;
-        }
+    const std::vector<glm::vec3>& Model::get_vertices() const
+    {
+        return this->vertices;
+    }
 
-        const std::vector<glm::vec2>& Model::get_uvs() const
-        {
-            return this->uvs;
-        }
+    const std::vector<glm::vec2>& Model::get_uvs() const
+    {
+        return this->uvs;
+    }
 
-        const std::vector<glm::vec3>& Model::get_normals() const
-        {
-            return this->normals;
-        }
+    const std::vector<glm::vec3>& Model::get_normals() const
+    {
+        return this->normals;
+    }
 
-        const std::vector<uint32_t>& Model::get_indices() const
-        {
-            return this->indices;
-        }
+    const std::vector<uint32_t>& Model::get_indices() const
+    {
+        return this->indices;
+    }
 
-        GLint Model::get_vertex_position_modelspaceID() const
-        {
-            return this->vertex_position_modelspaceID;
-        }
+    GLint Model::get_vertex_position_modelspaceID() const
+    {
+        return this->vertex_position_modelspaceID;
+    }
 
-        GLint Model::get_vertexUVID() const
-        {
-            return this->vertexUVID;
-        }
+    GLint Model::get_vertexUVID() const
+    {
+        return this->vertexUVID;
+    }
 
-        GLint Model::get_vertex_normal_modelspaceID() const
-        {
-            return this->vertex_normal_modelspaceID;
-        }
+    GLint Model::get_vertex_normal_modelspaceID() const
+    {
+        return this->vertex_normal_modelspaceID;
+    }
 
-        uint32_t Model::get_vertexbuffer() const
-        {
-            return this->vertexbuffer;
-        }
+    uint32_t Model::get_vertexbuffer() const
+    {
+        return this->vertexbuffer;
+    }
 
-        uint32_t Model::get_uvbuffer() const
-        {
-            return this->uvbuffer;
-        }
+    uint32_t Model::get_uvbuffer() const
+    {
+        return this->uvbuffer;
+    }
 
-        uint32_t Model::get_normalbuffer() const
-        {
-            return this->normalbuffer;
-        }
+    uint32_t Model::get_normalbuffer() const
+    {
+        return this->normalbuffer;
+    }
 
-        uint32_t Model::get_elementbuffer() const
-        {
-            return this->elementbuffer;
-        }
+    uint32_t Model::get_elementbuffer() const
+    {
+        return this->elementbuffer;
+    }
 
-        void Model::store_vertex_position_modelspaceID(const GLint vertex_position_modelspaceID)
-        {
-            this->vertex_position_modelspaceID = vertex_position_modelspaceID;
-        }
+    void Model::store_vertex_position_modelspaceID(const GLint vertex_position_modelspaceID)
+    {
+        this->vertex_position_modelspaceID = vertex_position_modelspaceID;
+    }
 
-        void Model::store_vertexUVID(const GLint vertexUVID)
-        {
-            this->vertexUVID = vertexUVID;
-        }
+    void Model::store_vertexUVID(const GLint vertexUVID)
+    {
+        this->vertexUVID = vertexUVID;
+    }
 
-        void Model::store_vertex_normal_modelspaceID(const GLint vertex_normal_modelspaceID)
-        {
-            this->vertex_normal_modelspaceID = vertex_normal_modelspaceID;
-        }
+    void Model::store_vertex_normal_modelspaceID(const GLint vertex_normal_modelspaceID)
+    {
+        this->vertex_normal_modelspaceID = vertex_normal_modelspaceID;
     }
 }

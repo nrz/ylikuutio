@@ -24,16 +24,13 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-namespace yli
+namespace yli::geometry
 {
-    namespace geometry
-    {
-        class LineSegment2D;
-        class LineSegment3D;
+    class LineSegment2D;
+    class LineSegment3D;
 
-        glm::vec2 get_intersection_point(const yli::geometry::LineSegment2D* const line1, const yli::geometry::LineSegment2D* const line2);
-        glm::vec3 get_intersection_point(const yli::geometry::LineSegment3D* const line1, const yli::geometry::LineSegment3D* const line2);
-    }
+    glm::vec2 get_intersection_point(const yli::geometry::LineSegment2D* const line1, const yli::geometry::LineSegment2D* const line2);
+    glm::vec3 get_intersection_point(const yli::geometry::LineSegment3D* const line1, const yli::geometry::LineSegment3D* const line2);
 }
 
 #endif

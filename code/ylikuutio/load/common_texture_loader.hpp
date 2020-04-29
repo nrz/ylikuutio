@@ -25,19 +25,16 @@
 #include <cstddef>  // std::size_t
 #include <string>   // std::string
 
-namespace yli
+namespace yli::load
 {
-    namespace load
-    {
-        // Load a BMP or PNG file.
-        bool load_common_texture(
-                const std::string& filename,
-                std::size_t& image_width,
-                std::size_t& image_height,
-                std::size_t& image_size,
-                GLuint& textureID,
-                const bool is_headless);
-    }
+    // Load a BMP or PNG file.
+    bool load_common_texture(
+            const std::string& filename,
+            std::size_t& image_width,
+            std::size_t& image_height,
+            std::size_t& image_size,
+            GLuint& textureID,
+            const bool is_headless);
 }
 
 #endif

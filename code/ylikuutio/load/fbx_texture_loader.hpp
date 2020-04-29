@@ -26,19 +26,16 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 
-namespace yli
+namespace yli::load
 {
-    namespace load
-    {
-        // Load texture from memory.
-        bool load_FBX_texture(
-                const ofbx::Texture* const ofbx_texture,
-                std::size_t& image_width,
-                std::size_t& image_height,
-                std::size_t& image_size,
-                GLuint& textureID,
-                const bool is_headless);
-    }
+    // Load texture from memory.
+    bool load_FBX_texture(
+            const ofbx::Texture* const ofbx_texture,
+            std::size_t& image_width,
+            std::size_t& image_height,
+            std::size_t& image_size,
+            GLuint& textureID,
+            const bool is_headless);
 }
 
 #endif

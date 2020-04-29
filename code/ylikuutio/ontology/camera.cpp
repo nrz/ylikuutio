@@ -46,38 +46,35 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    Camera::~Camera()
     {
-        Camera::~Camera()
-        {
-            // destructor.
-        }
+        // destructor.
+    }
 
-        std::size_t Camera::get_number_of_children() const
-        {
-            return 0; // `Camera` has no children.
-        }
+    std::size_t Camera::get_number_of_children() const
+    {
+        return 0; // `Camera` has no children.
+    }
 
-        std::size_t Camera::get_number_of_descendants() const
-        {
-            return 0; // `Camera` has no children.
-        }
+    std::size_t Camera::get_number_of_descendants() const
+    {
+        return 0; // `Camera` has no children.
+    }
 
-        const glm::mat4& Camera::get_projection_matrix() const
-        {
-            return this->projection_matrix;
-        }
+    const glm::mat4& Camera::get_projection_matrix() const
+    {
+        return this->projection_matrix;
+    }
 
-        const glm::mat4& Camera::get_view_matrix() const
-        {
-            return this->view_matrix;
-        }
+    const glm::mat4& Camera::get_view_matrix() const
+    {
+        return this->view_matrix;
+    }
 
-        bool Camera::get_is_static_view() const
-        {
-            return this->is_static_view;
-        }
+    bool Camera::get_is_static_view() const
+    {
+        return this->is_static_view;
     }
 }

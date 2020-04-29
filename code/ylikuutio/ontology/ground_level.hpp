@@ -24,15 +24,12 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
-    {
-        class Species;
+    class Species;
 
-        float get_ground_level(const yli::ontology::Species* const terrain_species, const glm::vec3& position);
-        float get_floor_level(const yli::ontology::Species* const terrain_species, const glm::vec3& position);
-    }
+    float get_ground_level(const yli::ontology::Species* const terrain_species, const glm::vec3& position);
+    float get_floor_level(const yli::ontology::Species* const terrain_species, const glm::vec3& position);
 }
 
 #endif

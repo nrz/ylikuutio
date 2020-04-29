@@ -27,21 +27,18 @@
 // Include standard headers
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::triangulation
 {
-    namespace triangulation
+    struct TriangulatePolygonsStruct
     {
-        struct TriangulatePolygonsStruct
+        TriangulatePolygonsStruct()
+            : input_vertices(nullptr), use_real_texture_coordinates(true)
         {
-            TriangulatePolygonsStruct()
-                : input_vertices(nullptr), use_real_texture_coordinates(true)
-            {
-                // constructor.
-            }
-            std::vector<std::vector<glm::vec2>>* input_vertices;
-            bool use_real_texture_coordinates;
-        };
-    }
+            // constructor.
+        }
+        std::vector<std::vector<glm::vec2>>* input_vertices;
+        bool use_real_texture_coordinates;
+    };
 }
 
 #endif

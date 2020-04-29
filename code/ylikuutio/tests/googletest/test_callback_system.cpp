@@ -31,12 +31,9 @@
 #include <variant>  // std::variant
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
-    {
-        class Universe;
-    }
+    class Universe;
 }
 
 std::shared_ptr<yli::common::AnyValue> square(

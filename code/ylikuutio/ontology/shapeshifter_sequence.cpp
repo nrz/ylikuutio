@@ -24,64 +24,61 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    void ShapeshifterSequence::bind_to_parent()
     {
-        void ShapeshifterSequence::bind_to_parent()
+        // requirements:
+        // `this->parent` must not be `nullptr`.
+        yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = this->parent;
+
+        if (shapeshifter_transformation == nullptr)
         {
-            // requirements:
-            // `this->parent` must not be `nullptr`.
-            yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = this->parent;
-
-            if (shapeshifter_transformation == nullptr)
-            {
-                std::cerr << "ERROR: `ShapeshifterSequence::bind_to_parent`: `shapeshifter_transformation` is `nullptr`!\n";
-                return;
-            }
-
-            // get `childID` from `ShapeshifterTransformation` and set pointer to this `ShapeshifterSequence`.
-            this->parent->parent_of_shapeshifter_sequences.bind_child(this);
+            std::cerr << "ERROR: `ShapeshifterSequence::bind_to_parent`: `shapeshifter_transformation` is `nullptr`!\n";
+            return;
         }
 
-        ShapeshifterSequence::~ShapeshifterSequence()
+        // get `childID` from `ShapeshifterTransformation` and set pointer to this `ShapeshifterSequence`.
+        this->parent->parent_of_shapeshifter_sequences.bind_child(this);
+    }
+
+    ShapeshifterSequence::~ShapeshifterSequence()
+    {
+        // destructor.
+
+        // requirements for further actions:
+        // `this->parent` must not be `nullptr`.
+
+        yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = this->parent;
+
+        if (shapeshifter_transformation == nullptr)
         {
-            // destructor.
-
-            // requirements for further actions:
-            // `this->parent` must not be `nullptr`.
-
-            yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = this->parent;
-
-            if (shapeshifter_transformation == nullptr)
-            {
-                std::cerr << "ERROR: `ShapeshifterSequence::~ShapeshifterSequence`: `shapeshifter_transformation` is `nullptr`!\n";
-                return;
-            }
-
-            shapeshifter_transformation->parent_of_shapeshifter_sequences.unbind_child(this->childID);
+            std::cerr << "ERROR: `ShapeshifterSequence::~ShapeshifterSequence`: `shapeshifter_transformation` is `nullptr`!\n";
+            return;
         }
 
-        yli::ontology::Entity* ShapeshifterSequence::get_parent() const
-        {
-            return this->parent;
-        }
+        shapeshifter_transformation->parent_of_shapeshifter_sequences.unbind_child(this->childID);
+    }
 
-        std::size_t ShapeshifterSequence::get_number_of_children() const
-        {
-            return this->parent_of_objects.get_number_of_children();
-        }
+    yli::ontology::Entity* ShapeshifterSequence::get_parent() const
+    {
+        return this->parent;
+    }
 
-        std::size_t ShapeshifterSequence::get_number_of_descendants() const
-        {
-            return yli::ontology::get_number_of_descendants(this->parent_of_objects.child_pointer_vector);
-        }
+    std::size_t ShapeshifterSequence::get_number_of_children() const
+    {
+        return this->parent_of_objects.get_number_of_children();
+    }
 
-        void ShapeshifterSequence::render()
-        {
-            // Render this `ShapeshifterSequence`.
+    std::size_t ShapeshifterSequence::get_number_of_descendants() const
+    {
+        return yli::ontology::get_number_of_descendants(this->parent_of_objects.child_pointer_vector);
+    }
 
-            // TODO.
-        }
+    void ShapeshifterSequence::render()
+    {
+        // Render this `ShapeshifterSequence`.
+
+        // TODO.
     }
 }

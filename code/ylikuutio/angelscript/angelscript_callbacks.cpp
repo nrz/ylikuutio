@@ -26,46 +26,43 @@
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <string>   // std::string
 
-namespace yli
+namespace yli::angelscript
 {
-    namespace angelscript
+    void message_callback(const asSMessageInfo* message, void* parameters)
     {
-        void message_callback(const asSMessageInfo* message, void* parameters)
+        if (message == nullptr)
         {
-            if (message == nullptr)
-            {
-                std::cerr << "ERROR: `message_callback`: `message` is `nullptr`!\n";
-                return;
-            }
-
-            std::string type;
-
-            if (message->type == asMSGTYPE_ERROR)
-            {
-                type = "ERROR";
-            }
-            else if (message->type == asMSGTYPE_WARNING)
-            {
-                type = "WARNING";
-            }
-            else if (message->type == asMSGTYPE_INFORMATION)
-            {
-                type = "INFORMATION";
-            }
-
-            std::stringstream output_stringstream;
-            output_stringstream << type << " " << message->section << " (" << message->row << ", " << message->col << ") : " << type << " : " << message->message << "\n";
-            std::cout << output_stringstream.str();
+            std::cerr << "ERROR: `message_callback`: `message` is `nullptr`!\n";
+            return;
         }
 
-        void print(const std::string& my_message)
+        std::string type;
+
+        if (message->type == asMSGTYPE_ERROR)
         {
-            std::cout << my_message;
+            type = "ERROR";
+        }
+        else if (message->type == asMSGTYPE_WARNING)
+        {
+            type = "WARNING";
+        }
+        else if (message->type == asMSGTYPE_INFORMATION)
+        {
+            type = "INFORMATION";
         }
 
-        void print(const float value)
-        {
-            std::cout << value;
-        }
+        std::stringstream output_stringstream;
+        output_stringstream << type << " " << message->section << " (" << message->row << ", " << message->col << ") : " << type << " : " << message->message << "\n";
+        std::cout << output_stringstream.str();
+    }
+
+    void print(const std::string& my_message)
+    {
+        std::cout << my_message;
+    }
+
+    void print(const float value)
+    {
+        std::cout << value;
     }
 }

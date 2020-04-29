@@ -20,14 +20,11 @@
 // Include standard headers
 #include <string>   // std::string
 
-namespace yli
+namespace yli::geometry
 {
-    namespace geometry
+    std::string LineSegment::get_equation()
     {
-        std::string LineSegment::get_equation()
-        {
-            std::string line_segment_equation;
-            return line_segment_equation;
-        }
+        std::string line_segment_equation;
+        return line_segment_equation;
     }
 }

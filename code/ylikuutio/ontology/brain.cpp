@@ -26,86 +26,83 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    void Brain::bind_Movable(yli::ontology::Movable* const movable)
     {
-        void Brain::bind_Movable(yli::ontology::Movable* const movable)
-        {
-            // get `childID` from `Brain` and set pointer to `movable`.
-            yli::hierarchy::bind_apprentice_to_master<yli::ontology::Movable*>(
-                    movable,
-                    movable->movableID,
-                    this->movable_pointer_vector,
-                    this->free_movableID_queue,
-                    this->number_of_movables);
-        }
+        // get `childID` from `Brain` and set pointer to `movable`.
+        yli::hierarchy::bind_apprentice_to_master<yli::ontology::Movable*>(
+                movable,
+                movable->movableID,
+                this->movable_pointer_vector,
+                this->free_movableID_queue,
+                this->number_of_movables);
+    }
 
-        void Brain::unbind_Movable(const std::size_t movableID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    movableID,
-                    this->movable_pointer_vector,
-                    this->free_movableID_queue,
-                    this->number_of_movables);
-        }
+    void Brain::unbind_Movable(const std::size_t movableID)
+    {
+        yli::hierarchy::unbind_child_from_parent(
+                movableID,
+                this->movable_pointer_vector,
+                this->free_movableID_queue,
+                this->number_of_movables);
+    }
 
-        Brain::~Brain()
-        {
-            // destructor.
+    Brain::~Brain()
+    {
+        // destructor.
 
-            for (std::size_t child_i = 0; child_i < this->movable_pointer_vector.size(); child_i++)
+        for (std::size_t child_i = 0; child_i < this->movable_pointer_vector.size(); child_i++)
+        {
+            yli::ontology::Movable* const movable = this->movable_pointer_vector[child_i];
+
+            if (movable != nullptr)
             {
-                yli::ontology::Movable* const movable = this->movable_pointer_vector[child_i];
-
-                if (movable != nullptr)
-                {
-                    movable->unbind_from_Brain();
-                }
+                movable->unbind_from_Brain();
             }
         }
+    }
 
-        yli::ontology::Entity* Brain::get_parent() const
+    yli::ontology::Entity* Brain::get_parent() const
+    {
+        return this->child_of_scene.get_parent();
+    }
+
+    std::size_t Brain::get_number_of_children() const
+    {
+        return 0; // `Brain` has no children. `Movable`s controlled by `Brain` are not its children.
+    }
+
+    std::size_t Brain::get_number_of_descendants() const
+    {
+        return 0; // `Brain` has no children. `Movable`s controlled by `Brain` are not its children.
+    }
+
+    std::size_t Brain::get_number_of_apprentices() const
+    {
+        return this->number_of_movables; // `Movable`s controlled by `Brain` are its apprentices.
+    }
+
+    void Brain::act()
+    {
+        if (this->callback_engine == nullptr)
         {
-            return this->child_of_scene.get_parent();
+            std::cerr << "ERROR: `Brain::act`: `this->callback_engine` is `nullptr`!\n";
+            return;
         }
 
-        std::size_t Brain::get_number_of_children() const
+        for (std::size_t movable_i = 0; movable_i < this->movable_pointer_vector.size(); movable_i++)
         {
-            return 0; // `Brain` has no children. `Movable`s controlled by `Brain` are not its children.
-        }
+            // Apply this `Brain` to the current `Movable`.
+            yli::ontology::Movable* movable = this->movable_pointer_vector[movable_i];
 
-        std::size_t Brain::get_number_of_descendants() const
-        {
-            return 0; // `Brain` has no children. `Movable`s controlled by `Brain` are not its children.
-        }
-
-        std::size_t Brain::get_number_of_apprentices() const
-        {
-            return this->number_of_movables; // `Movable`s controlled by `Brain` are its apprentices.
-        }
-
-        void Brain::act()
-        {
-            if (this->callback_engine == nullptr)
+            if (movable == nullptr)
             {
-                std::cerr << "ERROR: `Brain::act`: `this->callback_engine` is `nullptr`!\n";
-                return;
+                // Do not waste time in calling the callback function for `nullptr` targets.
+                continue;
             }
 
-            for (std::size_t movable_i = 0; movable_i < this->movable_pointer_vector.size(); movable_i++)
-            {
-                // Apply this `Brain` to the current `Movable`.
-                yli::ontology::Movable* movable = this->movable_pointer_vector[movable_i];
-
-                if (movable == nullptr)
-                {
-                    // Do not waste time in calling the callback function for `nullptr` targets.
-                    continue;
-                }
-
-                this->callback_engine->execute(std::make_shared<yli::common::AnyValue>(movable));
-            }
+            this->callback_engine->execute(std::make_shared<yli::common::AnyValue>(movable));
         }
     }
 }

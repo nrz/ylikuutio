@@ -25,14 +25,11 @@
 // Include standard headers
 #include <string> // std::string
 
-namespace yli
+namespace yli::angelscript
 {
-    namespace angelscript
-    {
-        void message_callback(const asSMessageInfo* message, void* parameters);
-        void print(const std::string& my_message);
-        void print(const float value);
-    }
+    void message_callback(const asSMessageInfo* message, void* parameters);
+    void print(const std::string& my_message);
+    void print(const float value);
 }
 
 #endif

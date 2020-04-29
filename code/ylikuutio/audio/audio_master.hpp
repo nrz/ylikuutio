@@ -26,60 +26,57 @@
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Universe;
+}
+
+namespace yli::audio
+{
+    class AudioMaster
     {
-        class Universe;
-    }
+        public:
+            // constructor.
+            AudioMaster(yli::ontology::Universe* const universe);
 
-    namespace audio
-    {
-        class AudioMaster
-        {
-            public:
-                // constructor.
-                AudioMaster(yli::ontology::Universe* const universe);
+            AudioMaster(const AudioMaster&) = delete;            // Delete copy constructor.
+            AudioMaster &operator=(const AudioMaster&) = delete; // Delete copy assignment.
 
-                AudioMaster(const AudioMaster&) = delete;            // Delete copy constructor.
-                AudioMaster &operator=(const AudioMaster&) = delete; // Delete copy assignment.
+            // destructor.
+            ~AudioMaster();
 
-                // destructor.
-                ~AudioMaster();
+            bool load_and_play(const std::string& audio_file);
+            void unload(const std::string& audio_file);
+            void add_to_playlist(const std::string& playlist, const std::string& audio_file);
+            void remove_from_playlist(const std::string& playlist, const std::string& audio_file);
+            void play_playlist(const std::string& playlist);
+            void update();
+            void pause();
+            void continue_after_pause();
+            void clear_playlist(const std::string& playlist);
+            void erase_playlist(const std::string& playlist);
 
-                bool load_and_play(const std::string& audio_file);
-                void unload(const std::string& audio_file);
-                void add_to_playlist(const std::string& playlist, const std::string& audio_file);
-                void remove_from_playlist(const std::string& playlist, const std::string& audio_file);
-                void play_playlist(const std::string& playlist);
-                void update();
-                void pause();
-                void continue_after_pause();
-                void clear_playlist(const std::string& playlist);
-                void erase_playlist(const std::string& playlist);
+            int get_remaining_length(); // This function is not `const` due to use of `SDL_AtomicGet`.
 
-                int get_remaining_length(); // This function is not `const` due to use of `SDL_AtomicGet`.
+        private:
+            void play_audio(void* userdata, uint8_t* stream, int length);
+            static void play_audio_callback(void* userdata, uint8_t* stream, int length);
+            static yli::audio::AudioMaster* audio_master;
 
-            private:
-                void play_audio(void* userdata, uint8_t* stream, int length);
-                static void play_audio_callback(void* userdata, uint8_t* stream, int length);
-                static yli::audio::AudioMaster* audio_master;
+            yli::ontology::Universe* universe;
 
-                yli::ontology::Universe* universe;
+            SDL_AudioSpec audio_spec;
+            SDL_AudioDeviceID device;
 
-                SDL_AudioSpec audio_spec;
-                SDL_AudioDeviceID device;
+            uint8_t* wav_pointer;
+            SDL_atomic_t remaining_length;
 
-                uint8_t* wav_pointer;
-                SDL_atomic_t remaining_length;
-
-                std::unordered_map<std::string, uint8_t*> wav_buffer_pointer_map;     // filename is the key.
-                std::unordered_map<std::string, std::list<std::string>> playlist_map; // key: name of playlist, value: list of filenames.
-                std::string current_playlist;                                         // name of current playlist.
-                std::list<std::string>::iterator current_playlist_sound_iterator;
-                bool loop;
-        };
-    }
+            std::unordered_map<std::string, uint8_t*> wav_buffer_pointer_map;     // filename is the key.
+            std::unordered_map<std::string, std::list<std::string>> playlist_map; // key: name of playlist, value: list of filenames.
+            std::string current_playlist;                                         // name of current playlist.
+            std::list<std::string>::iterator current_playlist_sound_iterator;
+            bool loop;
+    };
 }
 
 #endif

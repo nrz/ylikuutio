@@ -74,41 +74,38 @@
 //
 // TODO: implement `World`-bound entities!
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Universe;
+
+    class World: public yli::ontology::Entity
     {
-        class Universe;
+        public:
+            World(yli::ontology::Universe* const universe, yli::ontology::ParentModule* const parent_module)
+                : Entity(universe),
+                child_of_universe(parent_module, this),
+                parent_of_scenes(this)
+            {
+                // constructor.
 
-        class World: public yli::ontology::Entity
-        {
-            public:
-                World(yli::ontology::Universe* const universe, yli::ontology::ParentModule* const parent_module)
-                    : Entity(universe),
-                    child_of_universe(parent_module, this),
-                    parent_of_scenes(this)
-                {
-                    // constructor.
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "yli::ontology::World*";
+                this->can_be_erased = true;
+            }
 
-                    // `yli::ontology::Entity` member variables begin here.
-                    this->type_string = "yli::ontology::World*";
-                    this->can_be_erased = true;
-                }
+            World(const World&) = delete;            // Delete copy constructor.
+            World &operator=(const World&) = delete; // Delete copy assignment.
 
-                World(const World&) = delete;            // Delete copy constructor.
-                World &operator=(const World&) = delete; // Delete copy assignment.
+            // destructor.
+            virtual ~World();
 
-                // destructor.
-                virtual ~World();
+            yli::ontology::Entity* get_parent() const override;
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
 
-                yli::ontology::Entity* get_parent() const override;
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
-
-                yli::ontology::ChildModule child_of_universe;
-                yli::ontology::ParentModule parent_of_scenes;
-        };
-    }
+            yli::ontology::ChildModule child_of_universe;
+            yli::ontology::ParentModule parent_of_scenes;
+    };
 }
 
 #endif

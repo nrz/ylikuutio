@@ -23,27 +23,24 @@
 
 #define DEFAULT_VERTEX_SCALING_FACTOR (0.001f)
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Material;
+
+    struct VectorFontStruct
     {
-        class Material;
-
-        struct VectorFontStruct
+        VectorFontStruct()
+            : parent(nullptr), vertex_scaling_factor(DEFAULT_VERTEX_SCALING_FACTOR)
         {
-            VectorFontStruct()
-                : parent(nullptr), vertex_scaling_factor(DEFAULT_VERTEX_SCALING_FACTOR)
-            {
-                // constructor.
-            }
+            // constructor.
+        }
 
-            // used for all files (for all `VectorFont`s).
-            yli::ontology::Material* parent; // pointer to the `Material`.
-            float vertex_scaling_factor;
-            std::string font_file_format;    // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
-            std::string font_filename;       // filename of the font file.
-        };
-    }
+        // used for all files (for all `VectorFont`s).
+        yli::ontology::Material* parent; // pointer to the `Material`.
+        float vertex_scaling_factor;
+        std::string font_file_format;    // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
+        std::string font_filename;       // filename of the font file.
+    };
 }
 
 #endif

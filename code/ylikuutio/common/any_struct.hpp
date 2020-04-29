@@ -50,52 +50,49 @@
 // If the `datatype` of a child is `ANY_STRUCT_SHARED_PTR`,
 // then the child itself contains `yli::common::AnyStruct`.
 
-namespace yli
+namespace yli::common
 {
-    namespace common
+    class AnyValue;
+
+    class AnyStruct
     {
-        class AnyValue;
+        public:
+            // constructor.
+            AnyStruct();
 
-        class AnyStruct
-        {
-            public:
-                // constructor.
-                AnyStruct();
+            // destructor.
+            ~AnyStruct();
 
-                // destructor.
-                ~AnyStruct();
+            bool enter_data(const std::string& target, std::shared_ptr<yli::common::AnyValue> any_value);
+            bool erase_data(const std::string& target);
+            bool check_if_exist(const std::string& target) const;
+            std::shared_ptr<yli::common::AnyValue> read_data(const std::string& target) const;
+            std::vector<std::string> get_fieldnames() const;
 
-                bool enter_data(const std::string& target, std::shared_ptr<yli::common::AnyValue> any_value);
-                bool erase_data(const std::string& target);
-                bool check_if_exist(const std::string& target) const;
-                std::shared_ptr<yli::common::AnyValue> read_data(const std::string& target) const;
-                std::vector<std::string> get_fieldnames() const;
+        private:
+            bool enter_data(
+                    const std::string& target,
+                    std::size_t& data_index,
+                    const std::shared_ptr<yli::common::AnyValue> any_value,
+                    std::string& first_part);
 
-            private:
-                bool enter_data(
-                        const std::string& target,
-                        std::size_t& data_index,
-                        const std::shared_ptr<yli::common::AnyValue> any_value,
-                        std::string& first_part);
+            bool erase_data(
+                    const std::string& target,
+                    std::size_t& data_index,
+                    std::string& first_part);
 
-                bool erase_data(
-                        const std::string& target,
-                        std::size_t& data_index,
-                        std::string& first_part);
+            bool check_if_exist(
+                    const std::string& target,
+                    std::size_t& data_index,
+                    std::string& first_part) const;
 
-                bool check_if_exist(
-                        const std::string& target,
-                        std::size_t& data_index,
-                        std::string& first_part) const;
+            std::shared_ptr<yli::common::AnyValue> read_data(
+                    const std::string& target,
+                    std::size_t& data_index,
+                    std::string& first_part) const;
 
-                std::shared_ptr<yli::common::AnyValue> read_data(
-                        const std::string& target,
-                        std::size_t& data_index,
-                        std::string& first_part) const;
-
-                std::unordered_map<std::string, std::shared_ptr<yli::common::AnyValue>> values;
-        };
-    }
+            std::unordered_map<std::string, std::shared_ptr<yli::common::AnyValue>> values;
+    };
 }
 
 #endif

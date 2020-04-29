@@ -20,32 +20,29 @@
 
 #include "camera_struct.hpp"
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class World;
+
+    struct SceneStruct
     {
-        class World;
-
-        struct SceneStruct
+        SceneStruct()
+            : world(nullptr),
+            gravity(9.81f / 60.0f),  // default Earth gravity (9.81 m/s^2).
+            water_level(0.0f),       // default water level: 0.0 meters.
+            is_flight_mode_in_use(true)
         {
-            SceneStruct()
-                : world(nullptr),
-                gravity(9.81f / 60.0f),  // default Earth gravity (9.81 m/s^2).
-                water_level(0.0f),       // default water level: 0.0 meters.
-                is_flight_mode_in_use(true)
-            {
-                // constructor.
-            }
+            // constructor.
+        }
 
-            CameraStruct default_camera_struct; // parameters of the default `Camera`.
+        CameraStruct default_camera_struct; // parameters of the default `Camera`.
 
-            yli::ontology::World* world; // pointer to `World` object.
-            float gravity;               // In Bullet, gravity is a feature of `btDiscreteDynamicsWorld` & `
-                                         // `btSoftRigidDynamicsWorld` (`btSoftRigidDynamicsWorld` inherits `btDiscreteDynamicsWorld`).
-            float water_level;
-            bool is_flight_mode_in_use;
-        };
-    }
+        yli::ontology::World* world; // pointer to `World` object.
+        float gravity;               // In Bullet, gravity is a feature of `btDiscreteDynamicsWorld` & `
+                                     // `btSoftRigidDynamicsWorld` (`btSoftRigidDynamicsWorld` inherits `btDiscreteDynamicsWorld`).
+        float water_level;
+        bool is_flight_mode_in_use;
+    };
 }
 
 #endif

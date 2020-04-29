@@ -43,48 +43,45 @@
 //
 // The value of each `Setting` is stored as `yli::common::AnyValue`.
 
-namespace yli
+namespace yli::config
 {
-    namespace config
+    class SettingMaster;
+    struct SettingStruct;
+
+    class Setting
     {
-        class SettingMaster;
-        struct SettingStruct;
+        public:
+            // destructor.
+            ~Setting();
 
-        class Setting
-        {
-            public:
-                // destructor.
-                ~Setting();
+            std::string help() const;
 
-                std::string help() const;
+            friend SettingMaster;
 
-                friend SettingMaster;
+            template<class T1>
+                friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
+        private:
+            // constructor (to be called from `SettingMaster::create_Setting`).
+            Setting(yli::config::SettingMaster* const setting_master, const yli::config::SettingStruct& setting_struct);
 
-            private:
-                // constructor (to be called from `SettingMaster::create_Setting`).
-                Setting(yli::config::SettingMaster* const setting_master, const yli::config::SettingStruct& setting_struct);
+            void bind_to_parent();
 
-                void bind_to_parent();
+            std::string name;
 
-                std::string name;
+            // The setting value (may be a pointer a some datatype).
+            std::shared_ptr<yli::common::AnyValue> setting_value;
 
-                // The setting value (may be a pointer a some datatype).
-                std::shared_ptr<yli::common::AnyValue> setting_value;
+            // pointer to `ActivateCallback` used to activate the new value after setting it.
+            ActivateCallback activate_callback;
 
-                // pointer to `ActivateCallback` used to activate the new value after setting it.
-                ActivateCallback activate_callback;
+            // pointer to `ReadCallback` used to read the value. Leave to `nullptr` to read the value from `setting_value` of `class Setting`.
+            ReadCallback read_callback;
 
-                // pointer to `ReadCallback` used to read the value. Leave to `nullptr` to read the value from `setting_value` of `class Setting`.
-                ReadCallback read_callback;
+            yli::config::SettingMaster* parent; // pointer to `SettingMaster`.
 
-                yli::config::SettingMaster* parent; // pointer to `SettingMaster`.
-
-                std::size_t childID;                // setting ID, returned by `yli::config::SettingMaster->get_settingID()`.
-        };
-    }
+            std::size_t childID;                // setting ID, returned by `yli::config::SettingMaster->get_settingID()`.
+    };
 }
 
 #endif
