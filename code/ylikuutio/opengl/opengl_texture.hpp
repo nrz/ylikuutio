@@ -27,22 +27,19 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::common
 {
-    namespace common
-    {
-        class AnyValue;
-    }
+    class AnyValue;
+}
 
-    namespace opengl
-    {
-        // Load texture from memory.
-        bool prepare_opengl_texture(
-                const std::shared_ptr<std::vector<uint8_t>> image_data,
-                const std::size_t image_width,
-                const std::size_t image_height,
-                GLuint& textureID);
-    }
+namespace yli::opengl
+{
+    // Load texture from memory.
+    bool prepare_opengl_texture(
+            const std::shared_ptr<std::vector<uint8_t>> image_data,
+            const std::size_t image_width,
+            const std::size_t image_height,
+            GLuint& textureID);
 }
 
 #endif

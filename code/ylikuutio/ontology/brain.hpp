@@ -49,61 +49,58 @@
 // makes it orbit its host planet. An electrical module `Movable` (e.g. a synthetizer module)
 // may have a `Brain` that defines how it processes its inputs and what kind of output it sends.
 
-namespace yli
+namespace yli::callback
 {
-    namespace callback
+    class CallbackEngine;
+}
+
+namespace yli::ontology
+{
+    class Universe;
+    class Scene;
+    class Movable;
+    class ParentModule;
+
+    class Brain: public yli::ontology::Entity
     {
-        class CallbackEngine;
-    }
+        public:
+            void bind_Movable(yli::ontology::Movable* const movable);
+            void unbind_Movable(const std::size_t movableID);
 
-    namespace ontology
-    {
-        class Universe;
-        class Scene;
-        class Movable;
-        class ParentModule;
+            Brain(yli::ontology::Universe* const universe, const yli::ontology::BrainStruct& brain_struct, yli::ontology::ParentModule* const parent_module)
+                : Entity(universe),
+                child_of_scene(parent_module, this)
+            {
+                // constructor.
+                this->callback_engine    = brain_struct.callback_engine;
+                this->number_of_movables = 0;
 
-        class Brain: public yli::ontology::Entity
-        {
-            public:
-                void bind_Movable(yli::ontology::Movable* const movable);
-                void unbind_Movable(const std::size_t movableID);
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "yli::ontology::Brain*";
+                this->can_be_erased = true;
+            }
 
-                Brain(yli::ontology::Universe* const universe, const yli::ontology::BrainStruct& brain_struct, yli::ontology::ParentModule* const parent_module)
-                    : Entity(universe),
-                    child_of_scene(parent_module, this)
-                {
-                    // constructor.
-                    this->callback_engine    = brain_struct.callback_engine;
-                    this->number_of_movables = 0;
+            // destructor.
+            ~Brain();
 
-                    // `yli::ontology::Entity` member variables begin here.
-                    this->type_string = "yli::ontology::Brain*";
-                    this->can_be_erased = true;
-                }
+            yli::ontology::Entity* get_parent() const override;
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
 
-                // destructor.
-                ~Brain();
+            std::size_t get_number_of_apprentices() const;
 
-                yli::ontology::Entity* get_parent() const override;
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
+            void act();
 
-                std::size_t get_number_of_apprentices() const;
+            yli::ontology::ChildModule child_of_scene;
 
-                void act();
+        private:
+            std::shared_ptr<yli::callback::CallbackEngine> callback_engine;
 
-                yli::ontology::ChildModule child_of_scene;
-
-            private:
-                std::shared_ptr<yli::callback::CallbackEngine> callback_engine;
-
-                // Currently only `Movable`s can be intentional Entities.
-                std::vector<yli::ontology::Movable*> movable_pointer_vector;
-                std::queue<std::size_t> free_movableID_queue;
-                std::size_t number_of_movables;
-        };
-    }
+            // Currently only `Movable`s can be intentional Entities.
+            std::vector<yli::ontology::Movable*> movable_pointer_vector;
+            std::queue<std::size_t> free_movableID_queue;
+            std::size_t number_of_movables;
+    };
 }
 
 #endif

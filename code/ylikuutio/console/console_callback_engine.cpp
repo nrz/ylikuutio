@@ -19,23 +19,20 @@
 #include "console_callback_object.hpp"
 #include "input_parameters_to_any_value_callback_with_console.hpp"
 
-namespace yli
+namespace yli::console
 {
-    namespace console
+    ConsoleCallbackEngine::ConsoleCallbackEngine()
     {
-        ConsoleCallbackEngine::ConsoleCallbackEngine()
-        {
-            // constructor.
-        }
+        // constructor.
+    }
 
-        ConsoleCallbackEngine::~ConsoleCallbackEngine()
-        {
-            // destructor.
-        }
+    ConsoleCallbackEngine::~ConsoleCallbackEngine()
+    {
+        // destructor.
+    }
 
-        yli::console::ConsoleCallbackObject* ConsoleCallbackEngine::create_ConsoleCallbackObject(const InputParametersToAnyValueCallbackWithConsole callback, yli::ontology::Console* console_pointer)
-        {
-            return new yli::console::ConsoleCallbackObject(callback, this, console_pointer);
-        }
+    yli::console::ConsoleCallbackObject* ConsoleCallbackEngine::create_ConsoleCallbackObject(const InputParametersToAnyValueCallbackWithConsole callback, yli::ontology::Console* console_pointer)
+    {
+        return new yli::console::ConsoleCallbackObject(callback, this, console_pointer);
     }
 }

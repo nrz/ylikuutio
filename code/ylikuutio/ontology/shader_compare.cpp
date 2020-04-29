@@ -18,28 +18,13 @@
 #include "shader_compare.hpp"
 #include "shader.hpp"
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    bool ShaderCompare::operator() (yli::ontology::Shader* first, yli::ontology::Shader* second)
     {
-        bool ShaderCompare::operator() (yli::ontology::Shader* first, yli::ontology::Shader* second)
+        if (first->is_gpgpu_shader)
         {
-            if (first->is_gpgpu_shader)
-            {
-                if (!second->is_gpgpu_shader)
-                {
-                    return false;
-                }
-
-                if (first->get_childID() < second->get_childID())
-                {
-                    return true;
-                }
-
-                return false;
-            }
-
-            if (second->is_gpgpu_shader)
+            if (!second->is_gpgpu_shader)
             {
                 return false;
             }
@@ -51,5 +36,17 @@ namespace yli
 
             return false;
         }
+
+        if (second->is_gpgpu_shader)
+        {
+            return false;
+        }
+
+        if (first->get_childID() < second->get_childID())
+        {
+            return true;
+        }
+
+        return false;
     }
 }

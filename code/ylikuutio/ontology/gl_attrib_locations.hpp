@@ -18,15 +18,12 @@
 #ifndef __GL_ATTRIB_LOCATIONS_HPP_INCLUDED
 #define __GL_ATTRIB_LOCATIONS_HPP_INCLUDED
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
-    {
-        class Shader;
-        class Glyph;
+    class Shader;
+    class Glyph;
 
-        void store_gl_attrib_locations(yli::ontology::Shader* const shader, yli::ontology::Glyph* const glyph);
-    }
+    void store_gl_attrib_locations(yli::ontology::Shader* const shader, yli::ontology::Glyph* const glyph);
 }
 
 #endif

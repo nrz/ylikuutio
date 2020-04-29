@@ -21,12 +21,9 @@
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 
-namespace yli
+namespace yli::load
 {
-    namespace load
-    {
-        uint32_t load_shaders(const char* const vertex_shader_filename, const char* const fragment_shader_filename);
-    }
+    uint32_t load_shaders(const char* const vertex_shader_filename, const char* const fragment_shader_filename);
 }
 
 #endif

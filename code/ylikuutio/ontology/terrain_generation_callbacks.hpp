@@ -21,12 +21,9 @@
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
-    {
-        float* get_noise(int32_t x_start, int32_t y_start, int32_t z_start, int32_t x_size, int32_t y_size, int32_t z_size, float scale_modifier);
-    }
+    float* get_noise(int32_t x_start, int32_t y_start, int32_t z_start, int32_t x_size, int32_t y_size, int32_t z_size, float scale_modifier);
 }
 
 #endif

@@ -18,17 +18,14 @@
 #ifndef __OBJECT_TYPE_HPP_INCLUDED
 #define __OBJECT_TYPE_HPP_INCLUDED
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    enum class ObjectType
     {
-        enum class ObjectType
-        {
-            REGULAR,
-            SHAPESHIFTER,
-            CHARACTER
-        };
-    }
+        REGULAR,
+        SHAPESHIFTER,
+        CHARACTER
+    };
 }
 
 #endif

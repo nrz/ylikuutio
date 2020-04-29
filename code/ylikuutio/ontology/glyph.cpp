@@ -29,40 +29,37 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    Glyph::~Glyph()
     {
-        Glyph::~Glyph()
+        // destructor.
+        std::string glyph_name_string = this->glyph_name_pointer;
+        std::string unicode_string = this->unicode_char_pointer;
+        std::cout << "This `Glyph` (\"" << glyph_name_string << "\", Unicode: \"" << std::dec << unicode_string << "\") will be destroyed.\n";
+
+        // Cleanup buffers.
+        glDeleteBuffers(1, &this->vertexbuffer);
+        glDeleteBuffers(1, &this->uvbuffer);
+        glDeleteBuffers(1, &this->normalbuffer);
+        glDeleteBuffers(1, &this->elementbuffer);
+    }
+
+    void Glyph::render()
+    {
+        if (this->opengl_in_use)
         {
-            // destructor.
-            std::string glyph_name_string = this->glyph_name_pointer;
-            std::string unicode_string = this->unicode_char_pointer;
-            std::cout << "This `Glyph` (\"" << glyph_name_string << "\", Unicode: \"" << std::dec << unicode_string << "\") will be destroyed.\n";
+            this->prerender();
 
-            // Cleanup buffers.
-            glDeleteBuffers(1, &this->vertexbuffer);
-            glDeleteBuffers(1, &this->uvbuffer);
-            glDeleteBuffers(1, &this->normalbuffer);
-            glDeleteBuffers(1, &this->elementbuffer);
+            // render this `Glyph`.
+            yli::ontology::render_species_or_glyph<yli::ontology::Glyph*>(this);
+
+            this->postrender();
         }
+    }
 
-        void Glyph::render()
-        {
-            if (this->opengl_in_use)
-            {
-                this->prerender();
-
-                // render this `Glyph`.
-                yli::ontology::render_species_or_glyph<yli::ontology::Glyph*>(this);
-
-                this->postrender();
-            }
-        }
-
-        const char* Glyph::get_unicode_char_pointer() const
-        {
-            return this->unicode_char_pointer;
-        }
+    const char* Glyph::get_unicode_char_pointer() const
+    {
+        return this->unicode_char_pointer;
     }
 }

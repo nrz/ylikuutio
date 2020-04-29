@@ -25,33 +25,30 @@
 #include <cstddef>  // std::size_t
 #include <string>   // std::string
 
-namespace yli
+namespace yli::triangulation
 {
-    namespace triangulation
+    struct TriangulateQuadsStruct
     {
-        struct TriangulateQuadsStruct
+        TriangulateQuadsStruct()
+            : image_width(0),
+            image_height(0),
+            x_step(1),
+            z_step(1),
+            use_real_texture_coordinates(true),
+            sphere_radius(NAN),
+            spherical_terrain_struct(yli::geometry::SphericalTerrainStruct())
         {
-            TriangulateQuadsStruct()
-                : image_width(0),
-                image_height(0),
-                x_step(1),
-                z_step(1),
-                use_real_texture_coordinates(true),
-                sphere_radius(NAN),
-                spherical_terrain_struct(yli::geometry::SphericalTerrainStruct())
-            {
-                // constructor.
-            }
-            std::size_t image_width;
-            std::size_t image_height;
-            std::size_t x_step;
-            std::size_t z_step;
-            std::string triangulation_type;
-            bool use_real_texture_coordinates;
-            double sphere_radius;
-            yli::geometry::SphericalTerrainStruct spherical_terrain_struct;
-        };
-    }
+            // constructor.
+        }
+        std::size_t image_width;
+        std::size_t image_height;
+        std::size_t x_step;
+        std::size_t z_step;
+        std::string triangulation_type;
+        bool use_real_texture_coordinates;
+        double sphere_radius;
+        yli::geometry::SphericalTerrainStruct spherical_terrain_struct;
+    };
 }
 
 #endif

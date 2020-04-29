@@ -23,32 +23,29 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 
-namespace yli
+namespace yli::common
 {
-    namespace common
+    class AnyValue;
+}
+
+namespace yli::console
+{
+    ConsoleCallbackObject::~ConsoleCallbackObject()
     {
-        class AnyValue;
+        // destroy all callback parameters of this callback object.
+        std::cout << "All callback parameters of this console callback object will be destroyed.\n";
+        for (std::size_t child_i = 0; child_i < this->callback_parameter_pointer_vector.size(); child_i++)
+        {
+            delete this->callback_parameter_pointer_vector[child_i];
+        }
     }
 
-    namespace console
+    std::shared_ptr<yli::common::AnyValue> ConsoleCallbackObject::execute(std::shared_ptr<yli::common::AnyValue>)
     {
-        ConsoleCallbackObject::~ConsoleCallbackObject()
+        if (this->console_callback != nullptr)
         {
-            // destroy all callback parameters of this callback object.
-            std::cout << "All callback parameters of this console callback object will be destroyed.\n";
-            for (std::size_t child_i = 0; child_i < this->callback_parameter_pointer_vector.size(); child_i++)
-            {
-                delete this->callback_parameter_pointer_vector[child_i];
-            }
+            return std::shared_ptr<yli::common::AnyValue>(this->console_callback(this->parent, this, this->callback_parameter_pointer_vector, this->console_pointer));
         }
-
-        std::shared_ptr<yli::common::AnyValue> ConsoleCallbackObject::execute(std::shared_ptr<yli::common::AnyValue>)
-        {
-            if (this->console_callback != nullptr)
-            {
-                return std::shared_ptr<yli::common::AnyValue>(this->console_callback(this->parent, this, this->callback_parameter_pointer_vector, this->console_pointer));
-            }
-            return nullptr;
-        }
+        return nullptr;
     }
 }

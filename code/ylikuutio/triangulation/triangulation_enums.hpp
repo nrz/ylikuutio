@@ -18,19 +18,16 @@
 #ifndef __TRIANGULATION_ENUMS_HPP_INCLUDED
 #define __TRIANGULATION_ENUMS_HPP_INCLUDED
 
-namespace yli
+namespace yli::triangulation
 {
-    namespace triangulation
-    {
-        // for bilinear interpolation.
-        enum class BilinearDirections { SSW, WSW, WNW, NNW, NNE, ENE, ESE, SSE };
+    // for bilinear interpolation.
+    enum class BilinearDirections { SSW, WSW, WNW, NNW, NNE, ENE, ESE, SSE };
 
-        // for southeast-northwest edges.
-        enum class SoutheastNorthwestEdgesDirections { SSE, WNW, ESE, NNW, SW, NE };
+    // for southeast-northwest edges.
+    enum class SoutheastNorthwestEdgesDirections { SSE, WNW, ESE, NNW, SW, NE };
 
-        // for southeast-northwest edges.
-        enum class SouthwestNortheastEdgesDirections { SSW, ENE, WSW, NNE, SE, NW };
-    }
+    // for southeast-northwest edges.
+    enum class SouthwestNortheastEdgesDirections { SSW, ENE, WSW, NNE, SE, NW };
 }
 
 #endif

@@ -26,54 +26,51 @@
 #include <stack>   // std::stack
 #include <vector>  // std::vector
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Universe;
+}
+
+namespace yli::input
+{
+    class InputMode;
+
+    class InputMaster
     {
-        class Universe;
-    }
+        public:
+            void bind_InputMode(yli::input::InputMode* const input_mode);
 
-    namespace input
-    {
-        class InputMode;
+            // constructor.
+            InputMaster(yli::ontology::Universe* const universe);
 
-        class InputMaster
-        {
-            public:
-                void bind_InputMode(yli::input::InputMode* const input_mode);
+            InputMaster(const InputMaster&) = delete;            // Delete copy constructor.
+            InputMaster &operator=(const InputMaster&) = delete; // Delete copy assignment.
 
-                // constructor.
-                InputMaster(yli::ontology::Universe* const universe);
+            // destructor.
+            ~InputMaster();
 
-                InputMaster(const InputMaster&) = delete;            // Delete copy constructor.
-                InputMaster &operator=(const InputMaster&) = delete; // Delete copy assignment.
+            yli::input::InputMode* create_InputMode();
 
-                // destructor.
-                ~InputMaster();
+            void set_active_input_mode(yli::input::InputMode* const input_mode);
+            yli::input::InputMode* get_active_input_mode() const;
 
-                yli::input::InputMode* create_InputMode();
+            void pop_input_mode();
 
-                void set_active_input_mode(yli::input::InputMode* const input_mode);
-                yli::input::InputMode* get_active_input_mode() const;
+            yli::input::InputMethod get_input_method() const;
 
-                void pop_input_mode();
+        private:
+            yli::ontology::Universe* universe;
 
-                yli::input::InputMethod get_input_method() const;
+            yli::input::InputMode* active_input_mode;
 
-            private:
-                yli::ontology::Universe* universe;
+            std::stack<yli::input::InputMode*> input_mode_stack;
 
-                yli::input::InputMode* active_input_mode;
+            std::vector<yli::input::InputMode*> input_mode_pointer_vector;
+            std::queue<std::size_t> free_input_modeID_queue;
+            std::size_t number_of_input_modes;
 
-                std::stack<yli::input::InputMode*> input_mode_stack;
-
-                std::vector<yli::input::InputMode*> input_mode_pointer_vector;
-                std::queue<std::size_t> free_input_modeID_queue;
-                std::size_t number_of_input_modes;
-
-                yli::input::InputMethod input_method;
-        };
-    }
+            yli::input::InputMethod input_method;
+    };
 }
 
 #endif

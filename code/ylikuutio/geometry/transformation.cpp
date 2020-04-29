@@ -41,38 +41,81 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::geometry
 {
-    namespace geometry
+    glm::vec3 transform_planar_world_vertex_into_cartesian_vertex(
+            const glm::vec3& planar_world_vertex,
+            const double sphere_radius)
     {
-        glm::vec3 transform_planar_world_vertex_into_cartesian_vertex(
-                const glm::vec3& planar_world_vertex,
-                const double sphere_radius)
+        yli::common::SphericalCoordinatesStruct spherical_vertex;
+        spherical_vertex.rho = planar_world_vertex.y + sphere_radius;       // rho is altitude.
+        spherical_vertex.theta = DEGREES_TO_RADIANS(planar_world_vertex.x); // theta is longitude, the azimuthal angle.
+        spherical_vertex.phi = DEGREES_TO_RADIANS(-planar_world_vertex.z);  // phi is latitude, the polar angle.
+
+        glm::vec3 cartesian_vertex;
+        cartesian_vertex.x = spherical_vertex.rho * sin(spherical_vertex.theta) * cos(spherical_vertex.phi);
+        cartesian_vertex.y = spherical_vertex.rho * sin(spherical_vertex.theta) * sin(spherical_vertex.phi);
+        cartesian_vertex.z = spherical_vertex.rho * cos(spherical_vertex.theta);
+
+        return cartesian_vertex;
+    }
+
+    void transform_coordinates_to_curved_surface(
+            const TransformationStruct& transformation_struct,
+            std::vector<glm::vec3>& temp_vertices)
+    {
+        const std::size_t image_width = transformation_struct.image_width;
+        const std::size_t image_height = transformation_struct.image_height;
+        const double sphere_radius = transformation_struct.sphere_radius;
+        const bool is_bilinear_interpolation_in_use = transformation_struct.is_bilinear_interpolation_in_use;
+        yli::geometry::SphericalTerrainStruct spherical_terrain_struct = transformation_struct.spherical_terrain_struct;
+
+        // 3a. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
+        //
+        // Wikipedia:
+        // https://en.wikipedia.org/wiki/List_of_common_coordinate_transformations#From_spherical_coordinates
+        //
+        // x = rho * sin(theta) * cos(phi)
+        // y = rho * sin(theta) * sin(phi)
+        // z = rho * cos(theta)
+
+        std::cout << "transforming spherical coordinates loaded from file to cartesian coordinates.\n";
+        std::cout << "radius: " << sphere_radius << "\n";
+
+        const double latitude_step_in_degrees = spherical_terrain_struct.SRTM_latitude_step_in_degrees;
+        // double latitude_step_in_degrees = (360.0f / image_height); // for testing, creates a sphere always.
+        std::cout << "latitude step in degrees: " << latitude_step_in_degrees << "\n";
+
+        const double longitude_step_in_degrees = spherical_terrain_struct.SRTM_longitude_step_in_degrees;
+        // double longitude_step_in_degrees = (360.0f / image_width); // for testing, creates a sphere always.
+        std::cout << "longitude step in degrees: " << longitude_step_in_degrees << "\n";
+
+        double current_latitude_in_degrees = spherical_terrain_struct.southern_latitude;
+
+        std::size_t temp_vertices_i = 0;
+
+        // Loop through `temp_vertices` and transform all vertices from spherical coordinates to cartesian coordinates.
+        for (std::size_t z = 0; z < image_height; z++)
         {
-            yli::common::SphericalCoordinatesStruct spherical_vertex;
-            spherical_vertex.rho = planar_world_vertex.y + sphere_radius;       // rho is altitude.
-            spherical_vertex.theta = DEGREES_TO_RADIANS(planar_world_vertex.x); // theta is longitude, the azimuthal angle.
-            spherical_vertex.phi = DEGREES_TO_RADIANS(-planar_world_vertex.z);  // phi is latitude, the polar angle.
+            // loop through all latitudes.
 
-            glm::vec3 cartesian_vertex;
-            cartesian_vertex.x = spherical_vertex.rho * sin(spherical_vertex.theta) * cos(spherical_vertex.phi);
-            cartesian_vertex.y = spherical_vertex.rho * sin(spherical_vertex.theta) * sin(spherical_vertex.phi);
-            cartesian_vertex.z = spherical_vertex.rho * cos(spherical_vertex.theta);
+            double current_longitude_in_degrees = spherical_terrain_struct.western_longitude;
 
-            return cartesian_vertex;
+            for (uint32_t x = 0; x < image_width; x++)
+            {
+                glm::vec3 spherical_terrain_vertex = temp_vertices[temp_vertices_i];
+                spherical_terrain_vertex.x = static_cast<float>(current_longitude_in_degrees);
+                spherical_terrain_vertex.z = static_cast<float>(current_latitude_in_degrees);
+                temp_vertices[temp_vertices_i++] = yli::geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_terrain_vertex, sphere_radius);
+
+                current_longitude_in_degrees += longitude_step_in_degrees;
+            }
+            current_latitude_in_degrees += latitude_step_in_degrees;
         }
 
-        void transform_coordinates_to_curved_surface(
-                const TransformationStruct& transformation_struct,
-                std::vector<glm::vec3>& temp_vertices)
+        if (is_bilinear_interpolation_in_use)
         {
-            const std::size_t image_width = transformation_struct.image_width;
-            const std::size_t image_height = transformation_struct.image_height;
-            const double sphere_radius = transformation_struct.sphere_radius;
-            const bool is_bilinear_interpolation_in_use = transformation_struct.is_bilinear_interpolation_in_use;
-            yli::geometry::SphericalTerrainStruct spherical_terrain_struct = transformation_struct.spherical_terrain_struct;
-
-            // 3a. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
+            // 3b. For bilinear interpolation: Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
             //
             // Wikipedia:
             // https://en.wikipedia.org/wiki/List_of_common_coordinate_transformations#From_spherical_coordinates
@@ -81,29 +124,18 @@ namespace yli
             // y = rho * sin(theta) * sin(phi)
             // z = rho * cos(theta)
 
-            std::cout << "transforming spherical coordinates loaded from file to cartesian coordinates.\n";
+            std::cout << "transforming interpolated spherical coordinates to cartesian coordinates.\n";
             std::cout << "radius: " << sphere_radius << "\n";
-
-            const double latitude_step_in_degrees = spherical_terrain_struct.SRTM_latitude_step_in_degrees;
-            // double latitude_step_in_degrees = (360.0f / image_height); // for testing, creates a sphere always.
-            std::cout << "latitude step in degrees: " << latitude_step_in_degrees << "\n";
-
-            const double longitude_step_in_degrees = spherical_terrain_struct.SRTM_longitude_step_in_degrees;
-            // double longitude_step_in_degrees = (360.0f / image_width); // for testing, creates a sphere always.
-            std::cout << "longitude step in degrees: " << longitude_step_in_degrees << "\n";
 
             double current_latitude_in_degrees = spherical_terrain_struct.southern_latitude;
 
-            std::size_t temp_vertices_i = 0;
-
-            // Loop through `temp_vertices` and transform all vertices from spherical coordinates to cartesian coordinates.
-            for (std::size_t z = 0; z < image_height; z++)
+            for (std::size_t z = 1; z < image_height; z++)
             {
                 // loop through all latitudes.
 
                 double current_longitude_in_degrees = spherical_terrain_struct.western_longitude;
 
-                for (uint32_t x = 0; x < image_width; x++)
+                for (std::size_t x = 1; x < image_width; x++)
                 {
                     glm::vec3 spherical_terrain_vertex = temp_vertices[temp_vertices_i];
                     spherical_terrain_vertex.x = static_cast<float>(current_longitude_in_degrees);
@@ -113,41 +145,6 @@ namespace yli
                     current_longitude_in_degrees += longitude_step_in_degrees;
                 }
                 current_latitude_in_degrees += latitude_step_in_degrees;
-            }
-
-            if (is_bilinear_interpolation_in_use)
-            {
-                // 3b. For bilinear interpolation: Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
-                //
-                // Wikipedia:
-                // https://en.wikipedia.org/wiki/List_of_common_coordinate_transformations#From_spherical_coordinates
-                //
-                // x = rho * sin(theta) * cos(phi)
-                // y = rho * sin(theta) * sin(phi)
-                // z = rho * cos(theta)
-
-                std::cout << "transforming interpolated spherical coordinates to cartesian coordinates.\n";
-                std::cout << "radius: " << sphere_radius << "\n";
-
-                double current_latitude_in_degrees = spherical_terrain_struct.southern_latitude;
-
-                for (std::size_t z = 1; z < image_height; z++)
-                {
-                    // loop through all latitudes.
-
-                    double current_longitude_in_degrees = spherical_terrain_struct.western_longitude;
-
-                    for (std::size_t x = 1; x < image_width; x++)
-                    {
-                        glm::vec3 spherical_terrain_vertex = temp_vertices[temp_vertices_i];
-                        spherical_terrain_vertex.x = static_cast<float>(current_longitude_in_degrees);
-                        spherical_terrain_vertex.z = static_cast<float>(current_latitude_in_degrees);
-                        temp_vertices[temp_vertices_i++] = yli::geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_terrain_vertex, sphere_radius);
-
-                        current_longitude_in_degrees += longitude_step_in_degrees;
-                    }
-                    current_latitude_in_degrees += latitude_step_in_degrees;
-                }
             }
         }
     }

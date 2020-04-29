@@ -25,62 +25,59 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 
-namespace yli
+namespace yli::callback
 {
-    namespace callback
+    void CallbackParameter::bind_to_parent()
     {
-        void CallbackParameter::bind_to_parent()
+        // requirements:
+        // `this->parent` must not be `nullptr`.
+        yli::callback::CallbackObject* const callback_object = this->parent;
+
+        if (callback_object == nullptr)
         {
-            // requirements:
-            // `this->parent` must not be `nullptr`.
-            yli::callback::CallbackObject* const callback_object = this->parent;
-
-            if (callback_object == nullptr)
-            {
-                std::cerr << "ERROR: `CallbackParameter::bind_to_parent`: `callback_object` is `nullptr`!\n";
-                return;
-            }
-
-            // note: `CallbackObject::bind_CallbackParameter` also stores named variables in its `anyvalue_hashmap`.
-            callback_object->bind_CallbackParameter(this);
+            std::cerr << "ERROR: `CallbackParameter::bind_to_parent`: `callback_object` is `nullptr`!\n";
+            return;
         }
 
-        CallbackParameter::CallbackParameter(const std::string& name, std::shared_ptr<yli::common::AnyValue> any_value, const bool is_reference, yli::callback::CallbackObject* const parent)
-        {
-            // constructor.
-            this->name = name;
-            this->any_value = any_value;
-            this->is_reference = is_reference;
-            this->parent = parent;
+        // note: `CallbackObject::bind_CallbackParameter` also stores named variables in its `anyvalue_hashmap`.
+        callback_object->bind_CallbackParameter(this);
+    }
 
-            // get `childID` from the `CallbackObject` and set pointer to this `CallbackParameter`.
-            this->bind_to_parent();
+    CallbackParameter::CallbackParameter(const std::string& name, std::shared_ptr<yli::common::AnyValue> any_value, const bool is_reference, yli::callback::CallbackObject* const parent)
+    {
+        // constructor.
+        this->name = name;
+        this->any_value = any_value;
+        this->is_reference = is_reference;
+        this->parent = parent;
+
+        // get `childID` from the `CallbackObject` and set pointer to this `CallbackParameter`.
+        this->bind_to_parent();
+    }
+
+    CallbackParameter::~CallbackParameter()
+    {
+        // destructor.
+        //
+        // requirements:
+        // `this->parent` must not be `nullptr`.
+
+        std::cout << "Callback parameter with childID " << this->childID << " will be destroyed.\n";
+
+        yli::callback::CallbackObject* const callback_object = this->parent;
+
+        if (callback_object == nullptr)
+        {
+            std::cerr << "ERROR: `CallbackParameter::~CallbackParameter`: `callback_object` is `nullptr`!\n";
+            return;
         }
 
-        CallbackParameter::~CallbackParameter()
-        {
-            // destructor.
-            //
-            // requirements:
-            // `this->parent` must not be `nullptr`.
+        // set pointer to this `CallbackParameter` to `nullptr`.
+        callback_object->set_callback_parameter_pointer(this->childID, nullptr);
+    }
 
-            std::cout << "Callback parameter with childID " << this->childID << " will be destroyed.\n";
-
-            yli::callback::CallbackObject* const callback_object = this->parent;
-
-            if (callback_object == nullptr)
-            {
-                std::cerr << "ERROR: `CallbackParameter::~CallbackParameter`: `callback_object` is `nullptr`!\n";
-                return;
-            }
-
-            // set pointer to this `CallbackParameter` to `nullptr`.
-            callback_object->set_callback_parameter_pointer(this->childID, nullptr);
-        }
-
-        std::shared_ptr<yli::common::AnyValue> CallbackParameter::get_any_value() const
-        {
-            return std::make_shared<yli::common::AnyValue>(*this->any_value);
-        }
+    std::shared_ptr<yli::common::AnyValue> CallbackParameter::get_any_value() const
+    {
+        return std::make_shared<yli::common::AnyValue>(*this->any_value);
     }
 }

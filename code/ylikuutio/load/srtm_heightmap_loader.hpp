@@ -31,19 +31,16 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::load
 {
-    namespace load
-    {
-        bool load_SRTM_terrain(
-                const yli::load::HeightmapLoaderStruct& heightmap_loader_struct,
-                const std::string& heightmap_directory,
-                std::vector<glm::vec3>& out_vertices,
-                std::vector<glm::vec2>& out_UVs,
-                std::vector<glm::vec3>& out_normals,
-                std::size_t& image_width,
-                std::size_t& image_height);
-    }
+    bool load_SRTM_terrain(
+            const yli::load::HeightmapLoaderStruct& heightmap_loader_struct,
+            const std::string& heightmap_directory,
+            std::vector<glm::vec3>& out_vertices,
+            std::vector<glm::vec2>& out_UVs,
+            std::vector<glm::vec3>& out_normals,
+            std::size_t& image_width,
+            std::size_t& image_height);
 }
 
 #endif

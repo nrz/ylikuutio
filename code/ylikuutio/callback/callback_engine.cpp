@@ -29,116 +29,113 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Universe;
+}
+
+namespace yli::callback
+{
+    void CallbackEngine::bind_CallbackObject(yli::callback::CallbackObject* const callback_object)
     {
-        class Universe;
+        yli::hierarchy::bind_child_to_parent<yli::callback::CallbackObject*>(
+                callback_object,
+                this->callback_object_pointer_vector,
+                this->free_callback_objectID_queue,
+                this->number_of_callback_objects);
     }
 
-    namespace callback
+    CallbackEngine::CallbackEngine()
     {
-        void CallbackEngine::bind_CallbackObject(yli::callback::CallbackObject* const callback_object)
+        // constructor.
+        this->universe = nullptr;
+        this->number_of_callback_objects = 0;
+    }
+
+    CallbackEngine::CallbackEngine(yli::ontology::Universe* const universe)
+    {
+        // constructor.
+        this->universe = universe;
+        this->number_of_callback_objects = 0;
+    }
+
+    CallbackEngine::~CallbackEngine()
+    {
+        // destructor.
+        std::cout << "This callback engine will be destroyed.\n";
+
+        // destroy all callback objects of this callback engine.
+        std::cout << "All callback objects of this callback engine will be destroyed.\n";
+        yli::hierarchy::delete_children<yli::callback::CallbackObject*>(this->callback_object_pointer_vector, this->number_of_callback_objects);
+    }
+
+    yli::callback::CallbackObject* CallbackEngine::create_CallbackObject()
+    {
+        return new yli::callback::CallbackObject(this);
+    }
+
+    yli::callback::CallbackObject* CallbackEngine::create_CallbackObject(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
+    {
+        return new yli::callback::CallbackObject(callback, this);
+    }
+
+    void CallbackEngine::set_callback_object_pointer(const std::size_t childID, yli::callback::CallbackObject* const child_pointer)
+    {
+        yli::hierarchy::set_child_pointer(childID, child_pointer, this->callback_object_pointer_vector, this->free_callback_objectID_queue, this->number_of_callback_objects);
+    }
+
+    std::shared_ptr<yli::common::AnyValue> CallbackEngine::execute(std::shared_ptr<yli::common::AnyValue> any_value)
+    {
+        std::shared_ptr<yli::common::AnyValue> return_any_value = nullptr;
+
+        // execute all callbacks.
+        for (std::size_t child_i = 0; child_i < this->callback_object_pointer_vector.size(); child_i++)
         {
-            yli::hierarchy::bind_child_to_parent<yli::callback::CallbackObject*>(
-                    callback_object,
-                    this->callback_object_pointer_vector,
-                    this->free_callback_objectID_queue,
-                    this->number_of_callback_objects);
-        }
+            yli::callback::CallbackObject* callback_object_pointer = static_cast<yli::callback::CallbackObject*>(this->callback_object_pointer_vector[child_i]);
 
-        CallbackEngine::CallbackEngine()
-        {
-            // constructor.
-            this->universe = nullptr;
-            this->number_of_callback_objects = 0;
-        }
-
-        CallbackEngine::CallbackEngine(yli::ontology::Universe* const universe)
-        {
-            // constructor.
-            this->universe = universe;
-            this->number_of_callback_objects = 0;
-        }
-
-        CallbackEngine::~CallbackEngine()
-        {
-            // destructor.
-            std::cout << "This callback engine will be destroyed.\n";
-
-            // destroy all callback objects of this callback engine.
-            std::cout << "All callback objects of this callback engine will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::callback::CallbackObject*>(this->callback_object_pointer_vector, this->number_of_callback_objects);
-        }
-
-        yli::callback::CallbackObject* CallbackEngine::create_CallbackObject()
-        {
-            return new yli::callback::CallbackObject(this);
-        }
-
-        yli::callback::CallbackObject* CallbackEngine::create_CallbackObject(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
-        {
-            return new yli::callback::CallbackObject(callback, this);
-        }
-
-        void CallbackEngine::set_callback_object_pointer(const std::size_t childID, yli::callback::CallbackObject* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->callback_object_pointer_vector, this->free_callback_objectID_queue, this->number_of_callback_objects);
-        }
-
-        std::shared_ptr<yli::common::AnyValue> CallbackEngine::execute(std::shared_ptr<yli::common::AnyValue> any_value)
-        {
-            std::shared_ptr<yli::common::AnyValue> return_any_value = nullptr;
-
-            // execute all callbacks.
-            for (std::size_t child_i = 0; child_i < this->callback_object_pointer_vector.size(); child_i++)
+            if (callback_object_pointer != nullptr)
             {
-                yli::callback::CallbackObject* callback_object_pointer = static_cast<yli::callback::CallbackObject*>(this->callback_object_pointer_vector[child_i]);
-
-                if (callback_object_pointer != nullptr)
-                {
-                    return_any_value = callback_object_pointer->execute(any_value);
-                    this->return_values.push_back(return_any_value);
-                }
-                else
-                {
-                    this->return_values.push_back(nullptr);
-                }
+                return_any_value = callback_object_pointer->execute(any_value);
+                this->return_values.push_back(return_any_value);
             }
-
-            this->return_values.clear();
-            return std::shared_ptr<yli::common::AnyValue>(return_any_value);
-        }
-
-        std::size_t CallbackEngine::get_n_of_return_values() const
-        {
-            return this->return_values.size();
-        }
-
-        std::shared_ptr<yli::common::AnyValue> CallbackEngine::get_nth_return_value(std::size_t n) const
-        {
-            // note: indexing of `n` begins from 0.
-
-            std::size_t n_of_return_values = this->get_n_of_return_values();
-
-            if (n_of_return_values <= n)
+            else
             {
-                return nullptr;
+                this->return_values.push_back(nullptr);
             }
-
-            return this->return_values.at(n_of_return_values - 1);
         }
 
-        std::shared_ptr<yli::common::AnyValue> CallbackEngine::get_previous_return_value() const
+        this->return_values.clear();
+        return std::shared_ptr<yli::common::AnyValue>(return_any_value);
+    }
+
+    std::size_t CallbackEngine::get_n_of_return_values() const
+    {
+        return this->return_values.size();
+    }
+
+    std::shared_ptr<yli::common::AnyValue> CallbackEngine::get_nth_return_value(std::size_t n) const
+    {
+        // note: indexing of `n` begins from 0.
+
+        std::size_t n_of_return_values = this->get_n_of_return_values();
+
+        if (n_of_return_values <= n)
         {
-            std::size_t n_of_return_values = this->get_n_of_return_values();
-
-            if (n_of_return_values == 0)
-            {
-                return nullptr;
-            }
-
-            return this->return_values.at(this->return_values.size() - 1);
+            return nullptr;
         }
+
+        return this->return_values.at(n_of_return_values - 1);
+    }
+
+    std::shared_ptr<yli::common::AnyValue> CallbackEngine::get_previous_return_value() const
+    {
+        std::size_t n_of_return_values = this->get_n_of_return_values();
+
+        if (n_of_return_values == 0)
+        {
+            return nullptr;
+        }
+
+        return this->return_values.at(this->return_values.size() - 1);
     }
 }

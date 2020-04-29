@@ -49,53 +49,50 @@
 // From rendering point of view, `Chunk` is like `Species`, with the
 // exception that `Chunk` normally contains only 1 `Object`.
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Chunk: yli::ontology::Model
     {
-        class Chunk: yli::ontology::Model
-        {
-            public:
+        public:
+            // constructor.
+            Chunk(const yli::ontology::ChunkStruct& chunk_struct)
+                : Model(
+                        chunk_struct.universe,
+                        chunk_struct.opengl_in_use,
+                        (chunk_struct.parent == nullptr ? nullptr : &chunk_struct.parent->parent_of_chunks))
+            {
                 // constructor.
-                Chunk(const yli::ontology::ChunkStruct& chunk_struct)
-                    : Model(
-                            chunk_struct.universe,
-                            chunk_struct.opengl_in_use,
-                            (chunk_struct.parent == nullptr ? nullptr : &chunk_struct.parent->parent_of_chunks))
-                {
-                    // constructor.
-                    this->is_original = true;
+                this->is_original = true;
 
-                    this->parent      = chunk_struct.parent;
+                this->parent      = chunk_struct.parent;
 
-                    // get `childID` from `ChunkMaster` and set pointer to this `Chunk`.
-                    this->bind_to_parent();
+                // get `childID` from `ChunkMaster` and set pointer to this `Chunk`.
+                this->bind_to_parent();
 
-                    // `yli::ontology::Entity` member variables begin here.
-                    this->type_string = "ontology::Chunk*";
-                }
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "ontology::Chunk*";
+            }
 
-                Chunk(const Chunk&) = delete;            // Delete copy constructor.
-                Chunk &operator=(const Chunk&) = delete; // Delete copy assignment.
+            Chunk(const Chunk&) = delete;            // Delete copy constructor.
+            Chunk &operator=(const Chunk&) = delete; // Delete copy assignment.
 
-                // destructor.
-                virtual ~Chunk();
+            // destructor.
+            virtual ~Chunk();
 
-                glm::vec3 light_position;            // light position.
+            glm::vec3 light_position;            // light position.
 
-                template<class T1>
-                    friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+            template<class T1>
+                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
-            private:
-                void bind_to_parent();
+        private:
+            void bind_to_parent();
 
-                void render() override;
+            void render() override;
 
-                yli::ontology::ChunkMaster* parent;  // pointer to the `ChunkMaster`.
+            yli::ontology::ChunkMaster* parent;  // pointer to the `ChunkMaster`.
 
-                bool is_original;                    // If `Chunk` is original, if can be reconstructed using `get_content_callback`.
-        };
-    }
+            bool is_original;                    // If `Chunk` is original, if can be reconstructed using `get_content_callback`.
+    };
 }
 
 #endif

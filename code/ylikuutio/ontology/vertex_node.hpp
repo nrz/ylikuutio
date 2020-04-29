@@ -27,31 +27,28 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class VertexNode: public yli::graph::Node
     {
-        class VertexNode: public yli::graph::Node
-        {
-            public:
+        public:
+            // constructor.
+            VertexNode(glm::vec3 coordinate_vector, const yli::graph::NodeStruct& node_struct)
+                : yli::graph::Node(node_struct)
+            {
                 // constructor.
-                VertexNode(glm::vec3 coordinate_vector, const yli::graph::NodeStruct& node_struct)
-                    : yli::graph::Node(node_struct)
-                {
-                    // constructor.
-                    this->coordinate_vector = coordinate_vector;
-                }
+                this->coordinate_vector = coordinate_vector;
+            }
 
-                VertexNode(const VertexNode&) = delete;            // Delete copy constructor.
-                VertexNode &operator=(const VertexNode&) = delete; // Delete copy assignment.
+            VertexNode(const VertexNode&) = delete;            // Delete copy constructor.
+            VertexNode &operator=(const VertexNode&) = delete; // Delete copy assignment.
 
-                // destructor.
-                ~VertexNode();
+            // destructor.
+            ~VertexNode();
 
-            private:
-                glm::vec3 coordinate_vector;
-        };
-    }
+        private:
+            glm::vec3 coordinate_vector;
+    };
 }
 
 #endif

@@ -30,48 +30,45 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::graph
 {
-    namespace graph
+    void Graph::bind_Node(yli::graph::Node* const node)
     {
-        void Graph::bind_Node(yli::graph::Node* const node)
-        {
-            // get `childID` from `Symbiosis` and set pointer to `symbiont_material`.
-            yli::hierarchy::bind_child_to_parent<yli::graph::Node*>(
-                    node,
-                    this->node_pointer_vector,
-                    this->free_nodeID_queue,
-                    this->number_of_nodes);
-        }
+        // get `childID` from `Symbiosis` and set pointer to `symbiont_material`.
+        yli::hierarchy::bind_child_to_parent<yli::graph::Node*>(
+                node,
+                this->node_pointer_vector,
+                this->free_nodeID_queue,
+                this->number_of_nodes);
+    }
 
-        void Graph::unbind_Node(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->node_pointer_vector,
-                    this->free_nodeID_queue,
-                    this->number_of_nodes);
-        }
+    void Graph::unbind_Node(const std::size_t childID)
+    {
+        yli::hierarchy::unbind_child_from_parent(
+                childID,
+                this->node_pointer_vector,
+                this->free_nodeID_queue,
+                this->number_of_nodes);
+    }
 
-        Graph::Graph()
-        {
-            // constructor.
-            this->number_of_nodes = 0;
-        }
+    Graph::Graph()
+    {
+        // constructor.
+        this->number_of_nodes = 0;
+    }
 
-        yli::graph::Node* Graph::get_node_pointer(std::size_t childID)
-        {
-            return this->node_pointer_vector[childID];
-        }
+    yli::graph::Node* Graph::get_node_pointer(std::size_t childID)
+    {
+        return this->node_pointer_vector[childID];
+    }
 
-        Graph::~Graph()
-        {
-            // destructor.
-            std::cout << "This graph will be destroyed.\n";
+    Graph::~Graph()
+    {
+        // destructor.
+        std::cout << "This graph will be destroyed.\n";
 
-            // destroy all nodes of this graph.
-            std::cout << "All nodes of this graph will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::graph::Node*>(this->node_pointer_vector, this->number_of_nodes);
-        }
+        // destroy all nodes of this graph.
+        std::cout << "All nodes of this graph will be destroyed.\n";
+        yli::hierarchy::delete_children<yli::graph::Node*>(this->node_pointer_vector, this->number_of_nodes);
     }
 }

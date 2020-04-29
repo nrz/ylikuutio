@@ -33,57 +33,54 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Entity;
+    class Universe;
+    class SymbiontSpecies;
+    class ParentModule;
+
+    class SymbiontMaterial: public yli::ontology::Material
     {
-        class Entity;
-        class Universe;
-        class SymbiontSpecies;
-        class ParentModule;
+        public:
+            void bind_SymbiontSpecies(yli::ontology::SymbiontSpecies* const symbiont_species);
+            void unbind_SymbiontSpecies(const std::size_t childID);
 
-        class SymbiontMaterial: public yli::ontology::Material
-        {
-            public:
-                void bind_SymbiontSpecies(yli::ontology::SymbiontSpecies* const symbiont_species);
-                void unbind_SymbiontSpecies(const std::size_t childID);
-
+            // constructor.
+            SymbiontMaterial(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::MaterialStruct& material_struct,
+                    yli::ontology::ParentModule* const parent_module)
+                : Material(universe, material_struct, parent_module)
+            {
                 // constructor.
-                SymbiontMaterial(
-                        yli::ontology::Universe* const universe,
-                        const yli::ontology::MaterialStruct& material_struct,
-                        yli::ontology::ParentModule* const parent_module)
-                    : Material(universe, material_struct, parent_module)
-                {
-                    // constructor.
-                    this->ofbx_texture               = material_struct.ofbx_texture;
-                    this->load_texture();
+                this->ofbx_texture               = material_struct.ofbx_texture;
+                this->load_texture();
 
-                    // `yli::ontology::Entity` member variables begin here.
-                    this->type_string = "yli::ontology::SymbiontMaterial*";
-                }
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "yli::ontology::SymbiontMaterial*";
+            }
 
-                SymbiontMaterial(const SymbiontMaterial&) = delete;            // Delete copy constructor.
-                SymbiontMaterial &operator=(const SymbiontMaterial&) = delete; // Delete copy assignment.
+            SymbiontMaterial(const SymbiontMaterial&) = delete;            // Delete copy constructor.
+            SymbiontMaterial &operator=(const SymbiontMaterial&) = delete; // Delete copy assignment.
 
-                // destructor.
-                virtual ~SymbiontMaterial();
+            // destructor.
+            virtual ~SymbiontMaterial();
 
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
 
-                uint32_t get_texture() const;
-                GLint get_openGL_textureID() const;
+            uint32_t get_texture() const;
+            GLint get_openGL_textureID() const;
 
-            private:
-                void load_texture();
+        private:
+            void load_texture();
 
-                // this method renders all `SymbiontSpecies` using this `SymbiontMaterial`.
-                void render() override;
+            // this method renders all `SymbiontSpecies` using this `SymbiontMaterial`.
+            void render() override;
 
-                const ofbx::Texture* ofbx_texture;
-        };
-    }
+            const ofbx::Texture* ofbx_texture;
+    };
 }
 
 #endif

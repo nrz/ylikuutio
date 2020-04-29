@@ -20,27 +20,24 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-namespace yli
+namespace yli::command_line
 {
-    namespace command_line
+    class CommandLineMaster
     {
-        class CommandLineMaster
-        {
-            public:
-                CommandLineMaster(const int argc, const char* const argv[]);
-                bool get_are_arguments_valid() const;
-                bool check_keys(const std::vector<std::string>& valid_keys) const;
-                std::vector<std::string> get_invalid_keys(const std::vector<std::string>& valid_keys) const;
-                bool is_key(const std::string& key) const;
-                std::string get_value(const std::string& key) const;
-                void print_keys() const;
-                void print_keys_and_values() const;
+        public:
+            CommandLineMaster(const int argc, const char* const argv[]);
+            bool get_are_arguments_valid() const;
+            bool check_keys(const std::vector<std::string>& valid_keys) const;
+            std::vector<std::string> get_invalid_keys(const std::vector<std::string>& valid_keys) const;
+            bool is_key(const std::string& key) const;
+            std::string get_value(const std::string& key) const;
+            void print_keys() const;
+            void print_keys_and_values() const;
 
-            private:
-                int argc;
-                bool are_arguments_valid;
-                std::vector<std::string> arg_vector;
-                std::unordered_map<std::string, std::string> arg_map;
-        };
-    }
+        private:
+            int argc;
+            bool are_arguments_valid;
+            std::vector<std::string> arg_vector;
+            std::unordered_map<std::string, std::string> arg_map;
+    };
 }

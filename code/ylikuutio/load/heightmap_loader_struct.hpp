@@ -23,36 +23,33 @@
 #include <cstddef>  // std::size_t
 #include <string>   // std::string
 
-namespace yli
+namespace yli::load
 {
-    namespace load
+    struct HeightmapLoaderStruct
     {
-        struct HeightmapLoaderStruct
+        HeightmapLoaderStruct()
+            : latitude(NAN),
+            longitude(NAN),
+            planet_radius(NAN),
+            divisor(NAN),
+            x_step(1),
+            z_step(1),
+            use_real_texture_coordinates(true)
         {
-            HeightmapLoaderStruct()
-                : latitude(NAN),
-                longitude(NAN),
-                planet_radius(NAN),
-                divisor(NAN),
-                x_step(1),
-                z_step(1),
-                use_real_texture_coordinates(true)
-            {
-                // constructor.
-            }
+            // constructor.
+        }
 
-            std::string filename;
-            std::string file_format;
-            float latitude;
-            float longitude;
-            float planet_radius;
-            float divisor;
-            std::size_t x_step;
-            std::size_t z_step;
-            std::string triangulation_type;
-            bool use_real_texture_coordinates;
-        };
-    }
+        std::string filename;
+        std::string file_format;
+        float latitude;
+        float longitude;
+        float planet_radius;
+        float divisor;
+        std::size_t x_step;
+        std::size_t z_step;
+        std::string triangulation_type;
+        bool use_real_texture_coordinates;
+    };
 }
 
 #endif

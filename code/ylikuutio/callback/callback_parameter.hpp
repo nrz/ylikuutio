@@ -29,43 +29,40 @@
 #include <string>        // std::string
 #include <vector>        // std::vector
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Universe;
+}
+
+namespace yli::callback
+{
+    class CallbackParameter
     {
-        class Universe;
-    }
+        public:
+            // destructor.
+            ~CallbackParameter();
 
-    namespace callback
-    {
-        class CallbackParameter
-        {
-            public:
-                // destructor.
-                ~CallbackParameter();
+            // getter.
+            std::shared_ptr<yli::common::AnyValue> get_any_value() const;
 
-                // getter.
-                std::shared_ptr<yli::common::AnyValue> get_any_value() const;
+            friend class CallbackObject;
+            template<class T1>
+                friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
-                friend class CallbackObject;
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
+        private:
+            void bind_to_parent();
 
-            private:
-                void bind_to_parent();
+            // constructor.
+            CallbackParameter(const std::string& name, std::shared_ptr<yli::common::AnyValue> any_value, const bool is_reference, yli::callback::CallbackObject* const parent);
 
-                // constructor.
-                CallbackParameter(const std::string& name, std::shared_ptr<yli::common::AnyValue> any_value, const bool is_reference, yli::callback::CallbackObject* const parent);
+            yli::callback::CallbackObject* parent; // pointer to the callback object.
 
-                yli::callback::CallbackObject* parent; // pointer to the callback object.
+            std::size_t childID;            // callback parameter ID, returned by `yli::callback::CallbackObject->get_callback_parameterID()`.
 
-                std::size_t childID;            // callback parameter ID, returned by `yli::callback::CallbackObject->get_callback_parameterID()`.
-
-                std::string name;
-                std::shared_ptr<yli::common::AnyValue> any_value; // this is `private` to make sure that someone does not overwrite it.
-                bool is_reference;              // if true, the value is read from the hashmap. if false, then the value is read from the union.
-        };
-    }
+            std::string name;
+            std::shared_ptr<yli::common::AnyValue> any_value; // this is `private` to make sure that someone does not overwrite it.
+            bool is_reference;              // if true, the value is read from the hashmap. if false, then the value is read from the union.
+    };
 }
 
 #endif

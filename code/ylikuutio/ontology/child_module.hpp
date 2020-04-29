@@ -21,41 +21,38 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Entity;
+    class ParentModule;
+
+    class ChildModule
     {
-        class Entity;
-        class ParentModule;
+        public:
+            ChildModule(yli::ontology::ParentModule* const parent_module, yli::ontology::Entity* const entity)
+                : parent_module(parent_module),
+                entity(entity)
+            {
+                // constructor.
+                this->bind_to_parent_module();
+            }
 
-        class ChildModule
-        {
-            public:
-                ChildModule(yli::ontology::ParentModule* const parent_module, yli::ontology::Entity* const entity)
-                    : parent_module(parent_module),
-                    entity(entity)
-                {
-                    // constructor.
-                    this->bind_to_parent_module();
-                }
+            ChildModule(const ChildModule&) = delete;            // Delete copy constructor.
+            ChildModule &operator=(const ChildModule&) = delete; // Delete copy assignment.
 
-                ChildModule(const ChildModule&) = delete;            // Delete copy constructor.
-                ChildModule &operator=(const ChildModule&) = delete; // Delete copy assignment.
+            // destructor.
+            ~ChildModule();
 
-                // destructor.
-                ~ChildModule();
+            yli::ontology::Entity* get_parent() const;
+            void unbind_child(const std::size_t childID) const;
+            void set_parent_module_and_bind_to_new_parent(yli::ontology::ParentModule* const new_parent_module);
 
-                yli::ontology::Entity* get_parent() const;
-                void unbind_child(const std::size_t childID) const;
-                void set_parent_module_and_bind_to_new_parent(yli::ontology::ParentModule* const new_parent_module);
+        private:
+            void bind_to_parent_module();
 
-            private:
-                void bind_to_parent_module();
-
-                yli::ontology::ParentModule* parent_module;
-                yli::ontology::Entity* entity;
-        };
-    }
+            yli::ontology::ParentModule* parent_module;
+            yli::ontology::Entity* entity;
+    };
 }
 
 #endif

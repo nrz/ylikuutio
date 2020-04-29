@@ -30,164 +30,161 @@
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    void Entity::bind_to_Universe()
     {
-        void Entity::bind_to_Universe()
+        // Requirements:
+        // `this->universe` must not be `nullptr`.
+        yli::ontology::Universe* const universe = this->universe;
+
+        if (universe == nullptr)
         {
-            // Requirements:
-            // `this->universe` must not be `nullptr`.
-            yli::ontology::Universe* const universe = this->universe;
-
-            if (universe == nullptr)
-            {
-                std::cerr << "ERROR: `Entity::bind_to_Universe`: `universe` is `nullptr`!\n";
-                return;
-            }
-
-            // Get `entityID` from the `Universe` and set pointer to this `Entity`.
-            universe->bind_Entity(this);
+            std::cerr << "ERROR: `Entity::bind_to_Universe`: `universe` is `nullptr`!\n";
+            return;
         }
 
-        void Entity::bind_to_new_parent(yli::ontology::Entity* new_entity_parent)
+        // Get `entityID` from the `Universe` and set pointer to this `Entity`.
+        universe->bind_Entity(this);
+    }
+
+    void Entity::bind_to_new_parent(yli::ontology::Entity* new_entity_parent)
+    {
+        // Do nothing.
+        // `yli::ontology` classes which support binding must `override`
+        // this `yli::ontology::Entity` base class implementation.
+    }
+
+    Entity::Entity(yli::ontology::Universe* const universe)
+        : parent_of_any_struct_entities(this)
+    {
+        // constructor.
+        this->universe = universe;
+
+        // Get `entityID` from `Universe` and set pointer to this `Entity`.
+        this->bind_to_Universe();
+
+        this->childID = std::numeric_limits<std::size_t>::max(); // `std::numeric_limits<std::size_t>::max()` means that `childID` is not defined.
+        this->prerender_callback = nullptr;
+        this->postrender_callback = nullptr;
+        this->setting_master = std::make_shared<yli::config::SettingMaster>(this);
+        this->can_be_erased = false;
+        this->should_be_rendered = (this->universe == nullptr ? false : !this->universe->get_is_headless());
+
+        yli::config::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::common::AnyValue>(this->should_be_rendered));
+        should_be_rendered_setting_struct.name = "should_be_rendered";
+        should_be_rendered_setting_struct.activate_callback = &yli::config::SettingMaster::activate_should_be_rendered;
+        should_be_rendered_setting_struct.read_callback = &yli::config::SettingMaster::read_should_be_rendered;
+        should_be_rendered_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+        std::cout << "Executing `setting_master->create_Setting(should_be_rendered_setting_struct);` ...\n";
+        this->setting_master->create_Setting(should_be_rendered_setting_struct);
+    }
+
+    Entity::~Entity()
+    {
+        // destructor.
+        std::cout << "`Entity` destructor called.\n";
+
+        if (this->universe == nullptr)
         {
-            // Do nothing.
-            // `yli::ontology` classes which support binding must `override`
-            // this `yli::ontology::Entity` base class implementation.
+            std::cerr << "ERROR: `Entity::~Entity`: `this->universe` is `nullptr`.\n";
+            return;
         }
 
-        Entity::Entity(yli::ontology::Universe* const universe)
-            : parent_of_any_struct_entities(this)
+        this->universe->unbind_Entity(this->entityID);
+
+        if (this->name.empty())
         {
-            // constructor.
-            this->universe = universe;
-
-            // Get `entityID` from `Universe` and set pointer to this `Entity`.
-            this->bind_to_Universe();
-
-            this->childID = std::numeric_limits<std::size_t>::max(); // `std::numeric_limits<std::size_t>::max()` means that `childID` is not defined.
-            this->prerender_callback = nullptr;
-            this->postrender_callback = nullptr;
-            this->setting_master = std::make_shared<yli::config::SettingMaster>(this);
-            this->can_be_erased = false;
-            this->should_be_rendered = (this->universe == nullptr ? false : !this->universe->get_is_headless());
-
-            yli::config::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::common::AnyValue>(this->should_be_rendered));
-            should_be_rendered_setting_struct.name = "should_be_rendered";
-            should_be_rendered_setting_struct.activate_callback = &yli::config::SettingMaster::activate_should_be_rendered;
-            should_be_rendered_setting_struct.read_callback = &yli::config::SettingMaster::read_should_be_rendered;
-            should_be_rendered_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-            std::cout << "Executing `setting_master->create_Setting(should_be_rendered_setting_struct);` ...\n";
-            this->setting_master->create_Setting(should_be_rendered_setting_struct);
+            return;
         }
 
-        Entity::~Entity()
+        // OK, this `Entity` had a name, so it's name shall be erased.
+        this->universe->erase_entity(this->name);
+    }
+
+    void Entity::render()
+    {
+    }
+
+    std::size_t Entity::get_childID() const
+    {
+        return this->childID;
+    }
+
+    std::string Entity::get_type() const
+    {
+        return this->type_string;
+    }
+
+    bool Entity::get_can_be_erased() const
+    {
+        return this->can_be_erased;
+    }
+
+    yli::ontology::Universe* Entity::get_universe() const
+    {
+        return this->universe;
+    }
+
+    yli::config::SettingMaster* Entity::get_setting_master() const
+    {
+        if (this->setting_master == nullptr)
         {
-            // destructor.
-            std::cout << "`Entity` destructor called.\n";
-
-            if (this->universe == nullptr)
-            {
-                std::cerr << "ERROR: `Entity::~Entity`: `this->universe` is `nullptr`.\n";
-                return;
-            }
-
-            this->universe->unbind_Entity(this->entityID);
-
-            if (this->name.empty())
-            {
-                return;
-            }
-
-            // OK, this `Entity` had a name, so it's name shall be erased.
-            this->universe->erase_entity(this->name);
+            std::cerr << "ERROR: `Entity::get_setting_master`: `this->setting_master` is `nullptr`.\n";
+            return nullptr;
         }
 
-        void Entity::render()
+        return this->setting_master.get();
+    }
+
+    void Entity::prerender() const
+    {
+        // Requirements:
+        // `this->prerender_callback` must not be `nullptr`.
+        // `this->universe` must not be `nullptr`.
+        // `this->universe->setting_master` must not be `nullptr`.
+
+        if (this->prerender_callback != nullptr &&
+                this->universe != nullptr &&
+                this->universe->setting_master != nullptr)
         {
+            this->prerender_callback(this->universe, this->universe->setting_master.get());
+        }
+    }
+
+    void Entity::postrender() const
+    {
+        // Requirements:
+        // `this->postrender_callback` must not be `nullptr`.
+        // `this->universe` must not be `nullptr`.
+        // `this->universe->setting_master` must not be `nullptr`.
+
+        if (this->postrender_callback != nullptr &&
+                this->universe != nullptr &&
+                this->universe->setting_master != nullptr)
+        {
+            this->postrender_callback(this->universe, this->universe->setting_master.get());
+        }
+    }
+
+    void Entity::set_name(const std::string& name)
+    {
+        // Requirements:
+        // `this->universe` must not be `nullptr`.
+        // `name` must not be already in use.
+
+        if (this->universe == nullptr)
+        {
+            return;
         }
 
-        std::size_t Entity::get_childID() const
+        if (this->universe->is_entity(name))
         {
-            return this->childID;
+            // The name is already in use.
+            return;
         }
 
-        std::string Entity::get_type() const
-        {
-            return this->type_string;
-        }
-
-        bool Entity::get_can_be_erased() const
-        {
-            return this->can_be_erased;
-        }
-
-        yli::ontology::Universe* Entity::get_universe() const
-        {
-            return this->universe;
-        }
-
-        yli::config::SettingMaster* Entity::get_setting_master() const
-        {
-            if (this->setting_master == nullptr)
-            {
-                std::cerr << "ERROR: `Entity::get_setting_master`: `this->setting_master` is `nullptr`.\n";
-                return nullptr;
-            }
-
-            return this->setting_master.get();
-        }
-
-        void Entity::prerender() const
-        {
-            // Requirements:
-            // `this->prerender_callback` must not be `nullptr`.
-            // `this->universe` must not be `nullptr`.
-            // `this->universe->setting_master` must not be `nullptr`.
-
-            if (this->prerender_callback != nullptr &&
-                    this->universe != nullptr &&
-                    this->universe->setting_master != nullptr)
-            {
-                this->prerender_callback(this->universe, this->universe->setting_master.get());
-            }
-        }
-
-        void Entity::postrender() const
-        {
-            // Requirements:
-            // `this->postrender_callback` must not be `nullptr`.
-            // `this->universe` must not be `nullptr`.
-            // `this->universe->setting_master` must not be `nullptr`.
-
-            if (this->postrender_callback != nullptr &&
-                    this->universe != nullptr &&
-                    this->universe->setting_master != nullptr)
-            {
-                this->postrender_callback(this->universe, this->universe->setting_master.get());
-            }
-        }
-
-        void Entity::set_name(const std::string& name)
-        {
-            // Requirements:
-            // `this->universe` must not be `nullptr`.
-            // `name` must not be already in use.
-
-            if (this->universe == nullptr)
-            {
-                return;
-            }
-
-            if (this->universe->is_entity(name))
-            {
-                // The name is already in use.
-                return;
-            }
-
-            this->name = name;
-            this->universe->add_entity(name, this);
-        }
+        this->name = name;
+        this->universe->add_entity(name, this);
     }
 }

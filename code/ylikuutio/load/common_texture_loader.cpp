@@ -30,34 +30,31 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::load
 {
-    namespace load
+    bool load_common_texture(
+            const std::string& filename,
+            std::size_t& image_width,
+            std::size_t& image_height,
+            std::size_t& image_size,
+            GLuint& textureID,
+            const bool is_headless)
     {
-        bool load_common_texture(
-                const std::string& filename,
-                std::size_t& image_width,
-                std::size_t& image_height,
-                std::size_t& image_size,
-                GLuint& textureID,
-                const bool is_headless)
+        const std::shared_ptr<std::vector<uint8_t>> image_data = load_image_file(filename, image_width, image_height, image_size);
+
+        if (image_data == nullptr)
         {
-            const std::shared_ptr<std::vector<uint8_t>> image_data = load_image_file(filename, image_width, image_height, image_size);
+            std::cerr << "ERROR: `image_data` is `nullptr`!\n";
+            return false;
+        }
 
-            if (image_data == nullptr)
-            {
-                std::cerr << "ERROR: `image_data` is `nullptr`!\n";
-                return false;
-            }
-
-            if (is_headless)
-            {
-                return true;
-            }
-            else
-            {
-                return yli::opengl::prepare_opengl_texture(image_data, image_width, image_height, textureID);
-            }
+        if (is_headless)
+        {
+            return true;
+        }
+        else
+        {
+            return yli::opengl::prepare_opengl_texture(image_data, image_width, image_height, textureID);
         }
     }
 }

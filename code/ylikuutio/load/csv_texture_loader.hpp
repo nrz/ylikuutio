@@ -26,41 +26,38 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 
-namespace yli
+namespace yli::common
 {
-    namespace common
-    {
-        class AnyValue;
-    }
+    class AnyValue;
+}
 
-    namespace load
-    {
-        // Load a .CSV file using our custom loader.
-        // Insert elementes of `left_filler_vector_any_value` to the left side of each element,
-        // and elementes of `right_filler_vector_any_value` to the right side of each element.
-        bool load_csv_texture(
-                const std::string& filename,
-                const GLenum format,
-                const GLenum internal_format,
-                const GLenum type,
-                const std::shared_ptr<yli::common::AnyValue> left_filler_vector_any_value,
-                const std::shared_ptr<yli::common::AnyValue> right_filler_vector_any_value,
-                std::size_t& image_width,
-                std::size_t& image_height,
-                std::size_t& image_size,
-                GLuint& textureID);
+namespace yli::load
+{
+    // Load a .CSV file using our custom loader.
+    // Insert elementes of `left_filler_vector_any_value` to the left side of each element,
+    // and elementes of `right_filler_vector_any_value` to the right side of each element.
+    bool load_csv_texture(
+            const std::string& filename,
+            const GLenum format,
+            const GLenum internal_format,
+            const GLenum type,
+            const std::shared_ptr<yli::common::AnyValue> left_filler_vector_any_value,
+            const std::shared_ptr<yli::common::AnyValue> right_filler_vector_any_value,
+            std::size_t& image_width,
+            std::size_t& image_height,
+            std::size_t& image_size,
+            GLuint& textureID);
 
-        // Load a .CSV file using our custom loader.
-        bool load_csv_texture(
-                const std::string& filename,
-                const GLenum format,
-                const GLenum internal_format,
-                const GLenum type,
-                std::size_t& image_width,
-                std::size_t& image_height,
-                std::size_t& image_size,
-                GLuint& textureID);
-    }
+    // Load a .CSV file using our custom loader.
+    bool load_csv_texture(
+            const std::string& filename,
+            const GLenum format,
+            const GLenum internal_format,
+            const GLenum type,
+            std::size_t& image_width,
+            std::size_t& image_height,
+            std::size_t& image_size,
+            GLuint& textureID);
 }
 
 #endif

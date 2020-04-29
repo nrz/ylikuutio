@@ -23,31 +23,28 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class SettingMaster;
+
+    World::~World()
     {
-        class SettingMaster;
+        // destructor.
+        std::cout << "This `World` will be destroyed.\n";
+    }
 
-        World::~World()
-        {
-            // destructor.
-            std::cout << "This `World` will be destroyed.\n";
-        }
+    yli::ontology::Entity* World::get_parent() const
+    {
+        return this->child_of_universe.get_parent();
+    }
 
-        yli::ontology::Entity* World::get_parent() const
-        {
-            return this->child_of_universe.get_parent();
-        }
+    std::size_t World::get_number_of_children() const
+    {
+        return this->parent_of_scenes.get_number_of_children();
+    }
 
-        std::size_t World::get_number_of_children() const
-        {
-            return this->parent_of_scenes.get_number_of_children();
-        }
-
-        std::size_t World::get_number_of_descendants() const
-        {
-            return yli::ontology::get_number_of_descendants(this->parent_of_scenes.child_pointer_vector);
-        }
+    std::size_t World::get_number_of_descendants() const
+    {
+        return yli::ontology::get_number_of_descendants(this->parent_of_scenes.child_pointer_vector);
     }
 }

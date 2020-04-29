@@ -46,94 +46,91 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Universe;
+    class Shader;
+    class Species;
+    class ShapeshifterSequence;
+    class Text3D;
+    class Glyph;
+    class ParentModule;
+
+    class Object: public yli::ontology::Movable
     {
-        class Universe;
-        class Shader;
-        class Species;
-        class ShapeshifterSequence;
-        class Text3D;
-        class Glyph;
-        class ParentModule;
+        public:
+            // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
+            // and requests a new `childID` from the new `Species` or from the new `Text3D`.
+            void bind_to_new_parent(yli::ontology::Species* const new_parent);
+            void bind_to_new_parent(yli::ontology::ShapeshifterSequence* const new_parent);
+            void bind_to_new_parent(yli::ontology::Text3D* const new_parent);
+            void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-        class Object: public yli::ontology::Movable
-        {
-            public:
-                // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
-                // and requests a new `childID` from the new `Species` or from the new `Text3D`.
-                void bind_to_new_parent(yli::ontology::Species* const new_parent);
-                void bind_to_new_parent(yli::ontology::ShapeshifterSequence* const new_parent);
-                void bind_to_new_parent(yli::ontology::Text3D* const new_parent);
-                void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
-
+            // constructor.
+            Object(yli::ontology::Universe* const universe, const yli::ontology::ObjectStruct& object_struct, yli::ontology::ParentModule* const parent_module)
+                : Movable(
+                        universe,
+                        yli::ontology::MovableStruct(
+                            object_struct.brain,
+                            object_struct.cartesian_coordinates,
+                            object_struct.spherical_coordinates,
+                            object_struct.horizontal_angle,
+                            object_struct.vertical_angle),
+                        parent_module)
+            {
                 // constructor.
-                Object(yli::ontology::Universe* const universe, const yli::ontology::ObjectStruct& object_struct, yli::ontology::ParentModule* const parent_module)
-                    : Movable(
-                            universe,
-                            yli::ontology::MovableStruct(
-                                object_struct.brain,
-                                object_struct.cartesian_coordinates,
-                                object_struct.spherical_coordinates,
-                                object_struct.horizontal_angle,
-                                object_struct.vertical_angle),
-                            parent_module)
+                this->original_scale_vector = object_struct.original_scale_vector;
+                this->rotate_vector         = object_struct.rotate_vector;
+                this->translate_vector      = object_struct.translate_vector;
+                this->initial_rotate_vector = object_struct.initial_rotate_vector;
+
+                this->initial_rotate_angle  = object_struct.initial_rotate_angle;
+                this->rotate_angle          = object_struct.rotate_angle;
+
+                this->object_type           = object_struct.object_type;
+
+                if (this->object_type == yli::ontology::ObjectType::CHARACTER)
                 {
-                    // constructor.
-                    this->original_scale_vector = object_struct.original_scale_vector;
-                    this->rotate_vector         = object_struct.rotate_vector;
-                    this->translate_vector      = object_struct.translate_vector;
-                    this->initial_rotate_vector = object_struct.initial_rotate_vector;
-
-                    this->initial_rotate_angle  = object_struct.initial_rotate_angle;
-                    this->rotate_angle          = object_struct.rotate_angle;
-
-                    this->object_type           = object_struct.object_type;
-
-                    if (this->object_type == yli::ontology::ObjectType::CHARACTER)
-                    {
-                        this->glyph          = object_struct.glyph;
-                    }
-                    else
-                    {
-                        this->glyph = nullptr;
-                    }
-
-                    // `yli::ontology::Entity` member variables begin here.
-                    this->type_string = "yli::ontology::Object*";
-                    this->can_be_erased = true;
+                    this->glyph          = object_struct.glyph;
+                }
+                else
+                {
+                    this->glyph = nullptr;
                 }
 
-                Object(const Object&) = delete;            // Delete copy constructor.
-                Object &operator=(const Object&) = delete; // Delete copy assignment.
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "yli::ontology::Object*";
+                this->can_be_erased = true;
+            }
 
-                // destructor.
-                virtual ~Object();
+            Object(const Object&) = delete;            // Delete copy constructor.
+            Object &operator=(const Object&) = delete; // Delete copy assignment.
 
-                yli::ontology::Glyph* get_glyph() const;
+            // destructor.
+            virtual ~Object();
 
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
+            yli::ontology::Glyph* get_glyph() const;
 
-            private:
-                // this method renders this `Object`.
-                void render() override;
-                void render_this_object(yli::ontology::Shader* const shader_pointer);
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
 
-                yli::ontology::Glyph* glyph;            // pointer to the `Glyph` (not a parent!).
+        private:
+            // this method renders this `Object`.
+            void render() override;
+            void render_this_object(yli::ontology::Shader* const shader_pointer);
 
-                yli::ontology::ObjectType object_type;
+            yli::ontology::Glyph* glyph;            // pointer to the `Glyph` (not a parent!).
 
-                glm::vec3 original_scale_vector;        // original scale vector.
-                glm::vec3 rotate_vector;                // rotate vector.
-                glm::vec3 translate_vector;             // translate vector.
-                glm::vec3 initial_rotate_vector;        // initial rotate vector.
+            yli::ontology::ObjectType object_type;
 
-                float initial_rotate_angle;             // initial rotate angle.
-                float rotate_angle;                     // rotate angle.
-        };
-    }
+            glm::vec3 original_scale_vector;        // original scale vector.
+            glm::vec3 rotate_vector;                // rotate vector.
+            glm::vec3 translate_vector;             // translate vector.
+            glm::vec3 initial_rotate_vector;        // initial rotate vector.
+
+            float initial_rotate_angle;             // initial rotate angle.
+            float rotate_angle;                     // rotate angle.
+    };
 }
 
 #endif

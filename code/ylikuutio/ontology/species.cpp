@@ -29,111 +29,108 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    void Species::bind_to_new_parent(yli::ontology::Material* const new_parent)
     {
-        void Species::bind_to_new_parent(yli::ontology::Material* const new_parent)
+        // this method sets pointer to this `Species` to `nullptr`, sets `material_parent` according to the input,
+        // and requests a new `childID` from the new `Material`.
+        //
+        // requirements:
+        // `this->material_parent` must not be `nullptr`.
+        // `new_parent` must not be `nullptr`.
+
+        yli::ontology::Entity* const material = this->child.get_parent();
+
+        if (material == nullptr)
         {
-            // this method sets pointer to this `Species` to `nullptr`, sets `material_parent` according to the input,
-            // and requests a new `childID` from the new `Material`.
-            //
-            // requirements:
-            // `this->material_parent` must not be `nullptr`.
-            // `new_parent` must not be `nullptr`.
-
-            yli::ontology::Entity* const material = this->child.get_parent();
-
-            if (material == nullptr)
-            {
-                std::cerr << "ERROR: `Species::bind_to_new_parent`: `material` is `nullptr`!\n";
-                return;
-            }
-
-            if (new_parent == nullptr)
-            {
-                std::cerr << "ERROR: `Species::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
-                return;
-            }
-
-            // unbind from the old parent `Material`.
-            this->child.unbind_child(this->childID);
-
-            // get `childID` from `Material` and set pointer to this `Species`.
-            this->child.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_species);
+            std::cerr << "ERROR: `Species::bind_to_new_parent`: `material` is `nullptr`!\n";
+            return;
         }
 
-        void Species::bind_to_new_parent(yli::ontology::Entity* const new_parent)
+        if (new_parent == nullptr)
         {
-            // this method sets pointer to this `Species` to `nullptr`, sets `material_parent` according to the input,
-            // and requests a new `childID` from the new `Material`.
-            //
-            // requirements:
-            // `this->material_parent` must not be `nullptr`.
-            // `new_parent` must not be `nullptr`.
-
-            yli::ontology::Material* const material_parent = dynamic_cast<yli::ontology::Material*>(new_parent);
-
-            if (material_parent == nullptr)
-            {
-                std::cerr << "ERROR: `Species::bind_to_new_parent`: `new_parent` is not `yli::ontology::Material*`!\n";
-                return;
-            }
-
-            this->bind_to_new_parent(material_parent);
+            std::cerr << "ERROR: `Species::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+            return;
         }
 
-        Species::~Species()
-        {
-            if (!this->is_symbiont_species)
-            {
-                // destructor.
-                std::cout << "`Species` with childID " << std::dec << this->childID << " will be destroyed.\n";
+        // unbind from the old parent `Material`.
+        this->child.unbind_child(this->childID);
 
-                // Cleanup buffers.
-                glDeleteBuffers(1, &this->vertexbuffer);
-                glDeleteBuffers(1, &this->uvbuffer);
-                glDeleteBuffers(1, &this->normalbuffer);
-                glDeleteBuffers(1, &this->elementbuffer);
-            }
+        // get `childID` from `Material` and set pointer to this `Species`.
+        this->child.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_species);
+    }
+
+    void Species::bind_to_new_parent(yli::ontology::Entity* const new_parent)
+    {
+        // this method sets pointer to this `Species` to `nullptr`, sets `material_parent` according to the input,
+        // and requests a new `childID` from the new `Material`.
+        //
+        // requirements:
+        // `this->material_parent` must not be `nullptr`.
+        // `new_parent` must not be `nullptr`.
+
+        yli::ontology::Material* const material_parent = dynamic_cast<yli::ontology::Material*>(new_parent);
+
+        if (material_parent == nullptr)
+        {
+            std::cerr << "ERROR: `Species::bind_to_new_parent`: `new_parent` is not `yli::ontology::Material*`!\n";
+            return;
         }
 
-        void Species::render()
+        this->bind_to_new_parent(material_parent);
+    }
+
+    Species::~Species()
+    {
+        if (!this->is_symbiont_species)
         {
-            if (this->should_be_rendered && this->opengl_in_use)
-            {
-                this->prerender();
+            // destructor.
+            std::cout << "`Species` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-                // render this `Species`.
-                yli::ontology::render_species_or_glyph<yli::ontology::Species*>(this);
-
-                this->postrender();
-            }
+            // Cleanup buffers.
+            glDeleteBuffers(1, &this->vertexbuffer);
+            glDeleteBuffers(1, &this->uvbuffer);
+            glDeleteBuffers(1, &this->normalbuffer);
+            glDeleteBuffers(1, &this->elementbuffer);
         }
+    }
 
-        std::size_t Species::get_x_step() const
+    void Species::render()
+    {
+        if (this->should_be_rendered && this->opengl_in_use)
         {
-            return this->x_step;
-        }
+            this->prerender();
 
-        std::size_t Species::get_z_step() const
-        {
-            return this->z_step;
-        }
+            // render this `Species`.
+            yli::ontology::render_species_or_glyph<yli::ontology::Species*>(this);
 
-        std::size_t Species::get_image_width() const
-        {
-            return this->image_width;
+            this->postrender();
         }
+    }
 
-        const std::string& Species::get_model_file_format() const
-        {
-            return this->model_file_format;
-        }
+    std::size_t Species::get_x_step() const
+    {
+        return this->x_step;
+    }
 
-        std::size_t Species::get_image_height() const
-        {
-            return this->image_height;
-        }
+    std::size_t Species::get_z_step() const
+    {
+        return this->z_step;
+    }
+
+    std::size_t Species::get_image_width() const
+    {
+        return this->image_width;
+    }
+
+    const std::string& Species::get_model_file_format() const
+    {
+        return this->model_file_format;
+    }
+
+    std::size_t Species::get_image_height() const
+    {
+        return this->image_height;
     }
 }

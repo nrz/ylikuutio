@@ -34,26 +34,23 @@
 //
 // This file has been modified by Antti Nuortimo.
 
-namespace yli
+namespace yli::network
 {
-    namespace network
+    void TcpServer::start_accept()
     {
-        void TcpServer::start_accept()
+        std::shared_ptr<TcpConnection> new_connection = TcpConnection::create(acceptor_.get_io_service());
+        acceptor_.async_accept(
+                new_connection->socket(),
+                std::bind(&TcpServer::handle_accept, this, new_connection, std::placeholders::_1));
+    }
+
+    void TcpServer::handle_accept(std::shared_ptr<TcpConnection> new_connection, const asio::error_code& error)
+    {
+        if (!error)
         {
-            std::shared_ptr<TcpConnection> new_connection = TcpConnection::create(acceptor_.get_io_service());
-            acceptor_.async_accept(
-                    new_connection->socket(),
-                    std::bind(&TcpServer::handle_accept, this, new_connection, std::placeholders::_1));
+            new_connection->start();
         }
 
-        void TcpServer::handle_accept(std::shared_ptr<TcpConnection> new_connection, const asio::error_code& error)
-        {
-            if (!error)
-            {
-                new_connection->start();
-            }
-
-            start_accept();
-        }
+        start_accept();
     }
 }

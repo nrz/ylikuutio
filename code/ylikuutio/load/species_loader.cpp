@@ -40,166 +40,163 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::load
 {
-    namespace load
+    bool load_Species(
+            const yli::load::SpeciesLoaderStruct& species_loader_struct,
+            std::vector<glm::vec3>& out_vertices,
+            std::vector<glm::vec2>& out_UVs,
+            std::vector<glm::vec3>& out_normals,
+            std::vector<uint32_t>& indices,
+            std::vector<glm::vec3>& indexed_vertices,
+            std::vector<glm::vec2>& indexed_UVs,
+            std::vector<glm::vec3>& indexed_normals,
+            uint32_t* vertexbuffer,
+            uint32_t* uvbuffer,
+            uint32_t* normalbuffer,
+            uint32_t* elementbuffer,
+            bool& opengl_in_use,
+            const bool is_debug_mode)
     {
-        bool load_Species(
-                const yli::load::SpeciesLoaderStruct& species_loader_struct,
-                std::vector<glm::vec3>& out_vertices,
-                std::vector<glm::vec2>& out_UVs,
-                std::vector<glm::vec3>& out_normals,
-                std::vector<uint32_t>& indices,
-                std::vector<glm::vec3>& indexed_vertices,
-                std::vector<glm::vec2>& indexed_UVs,
-                std::vector<glm::vec3>& indexed_normals,
-                uint32_t* vertexbuffer,
-                uint32_t* uvbuffer,
-                uint32_t* normalbuffer,
-                uint32_t* elementbuffer,
-                bool& opengl_in_use,
-                const bool is_debug_mode)
+        bool model_loading_result = false;
+
+        if (species_loader_struct.model_file_format == "obj" || species_loader_struct.model_file_format == "OBJ")
         {
-            bool model_loading_result = false;
-
-            if (species_loader_struct.model_file_format == "obj" || species_loader_struct.model_file_format == "OBJ")
-            {
-                model_loading_result = yli::load::load_OBJ(
-                        species_loader_struct.model_filename,
-                        out_vertices,
-                        out_UVs,
-                        out_normals);
-            }
-            else if (species_loader_struct.model_file_format == "fbx" || species_loader_struct.model_file_format == "FBX")
-            {
-                model_loading_result = yli::load::load_FBX(
-                        species_loader_struct.model_filename,
-                        species_loader_struct.mesh_i,
-                        out_vertices,
-                        out_UVs,
-                        out_normals,
-                        is_debug_mode);
-
-                std::cout << species_loader_struct.model_filename << " loaded successfully.\n";
-            }
-            else if (species_loader_struct.model_file_format == "srtm" || species_loader_struct.model_file_format == "SRTM" ||
-                    species_loader_struct.model_file_format == "bmp" || species_loader_struct.model_file_format == "BMP" ||
-                    species_loader_struct.model_file_format == "asc" ||
-                    species_loader_struct.model_file_format == "ascii_grid" ||
-                    species_loader_struct.model_file_format == "ASCII_grid")
-            {
-                if (species_loader_struct.image_width_pointer == nullptr)
-                {
-                    std::cerr << "ERROR: `yli::load::load_Species`: !\n";
-                    std::cerr << "`species_loader_struct.image_width_pointer` is `nullptr`!\n";
-                    return false;
-                }
-
-                if (species_loader_struct.image_height_pointer == nullptr)
-                {
-                    std::cerr << "ERROR: `yli::load::load_Species`: !\n";
-                    std::cerr << "`species_loader_struct.image_height_pointer` is `nullptr`!\n";
-                    return false;
-                }
-
-                yli::load::HeightmapLoaderStruct heightmap_loader_struct;
-                heightmap_loader_struct.filename                     = species_loader_struct.model_filename;
-                heightmap_loader_struct.file_format                  = species_loader_struct.model_file_format;
-                heightmap_loader_struct.latitude                     = species_loader_struct.latitude;
-                heightmap_loader_struct.longitude                    = species_loader_struct.longitude;
-                heightmap_loader_struct.planet_radius                = species_loader_struct.planet_radius;
-                heightmap_loader_struct.divisor                      = species_loader_struct.divisor;
-                heightmap_loader_struct.x_step                       = species_loader_struct.x_step;
-                heightmap_loader_struct.z_step                       = species_loader_struct.z_step;
-                heightmap_loader_struct.triangulation_type           = species_loader_struct.triangulation_type;
-                heightmap_loader_struct.use_real_texture_coordinates = species_loader_struct.use_real_texture_coordinates;
-
-                if (species_loader_struct.model_file_format == "srtm" || species_loader_struct.model_file_format == "SRTM")
-                {
-                    model_loading_result = yli::load::load_SRTM_terrain(
-                            heightmap_loader_struct,
-                            species_loader_struct.model_filename,
-                            out_vertices,
-                            out_UVs,
-                            out_normals,
-                            *species_loader_struct.image_width_pointer,
-                            *species_loader_struct.image_height_pointer);
-                }
-                else if (species_loader_struct.model_file_format == "bmp" || species_loader_struct.model_file_format == "BMP")
-                {
-                    model_loading_result = yli::load::load_bmp_terrain(
-                            heightmap_loader_struct,
-                            out_vertices,
-                            out_UVs,
-                            out_normals,
-                            *species_loader_struct.image_width_pointer,
-                            *species_loader_struct.image_height_pointer,
-                            species_loader_struct.color_channel);
-                }
-                else if (species_loader_struct.model_file_format == "asc" ||
-                        species_loader_struct.model_file_format == "ascii_grid" ||
-                        species_loader_struct.model_file_format == "ASCII_grid")
-                {
-                    model_loading_result = yli::load::load_ASCII_grid_terrain(
-                            heightmap_loader_struct,
-                            out_vertices,
-                            out_UVs,
-                            out_normals,
-                            *species_loader_struct.image_width_pointer,
-                            *species_loader_struct.image_height_pointer);
-                }
-
-            }
-            else
-            {
-                std::cerr << "ERROR: no model was loaded!\n";
-                std::cerr << "Model file format: " << species_loader_struct.model_file_format << "\n";
-                return false;
-            }
-
-            std::cout << "Indexing...\n";
-
-            // Fill the index buffer.
-            yli::opengl::indexVBO(
+            model_loading_result = yli::load::load_OBJ(
+                    species_loader_struct.model_filename,
+                    out_vertices,
+                    out_UVs,
+                    out_normals);
+        }
+        else if (species_loader_struct.model_file_format == "fbx" || species_loader_struct.model_file_format == "FBX")
+        {
+            model_loading_result = yli::load::load_FBX(
+                    species_loader_struct.model_filename,
+                    species_loader_struct.mesh_i,
                     out_vertices,
                     out_UVs,
                     out_normals,
-                    indices,
-                    indexed_vertices,
-                    indexed_UVs,
-                    indexed_normals);
+                    is_debug_mode);
 
-            std::cout << "Indexing completed successfully.\n";
-
-            opengl_in_use = species_loader_struct.opengl_in_use;
-
-            if (!species_loader_struct.is_headless &&
-                    opengl_in_use &&
-                    vertexbuffer != nullptr &&
-                    uvbuffer != nullptr &&
-                    normalbuffer != nullptr &&
-                    elementbuffer != nullptr)
+            std::cout << species_loader_struct.model_filename << " loaded successfully.\n";
+        }
+        else if (species_loader_struct.model_file_format == "srtm" || species_loader_struct.model_file_format == "SRTM" ||
+                species_loader_struct.model_file_format == "bmp" || species_loader_struct.model_file_format == "BMP" ||
+                species_loader_struct.model_file_format == "asc" ||
+                species_loader_struct.model_file_format == "ascii_grid" ||
+                species_loader_struct.model_file_format == "ASCII_grid")
+        {
+            if (species_loader_struct.image_width_pointer == nullptr)
             {
-                // Load it into a VBO.
-                glGenBuffers(1, vertexbuffer);
-                glBindBuffer(GL_ARRAY_BUFFER, *vertexbuffer);
-                glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(glm::vec3), &indexed_vertices[0], GL_STATIC_DRAW);
-
-                glGenBuffers(1, uvbuffer);
-                glBindBuffer(GL_ARRAY_BUFFER, *uvbuffer);
-                glBufferData(GL_ARRAY_BUFFER, indexed_UVs.size() * sizeof(glm::vec2), &indexed_UVs[0], GL_STATIC_DRAW);
-
-                glGenBuffers(1, normalbuffer);
-                glBindBuffer(GL_ARRAY_BUFFER, *normalbuffer);
-                glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals[0], GL_STATIC_DRAW);
-
-                glGenBuffers(1, elementbuffer);
-                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *elementbuffer);
-                glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), &indices[0] , GL_STATIC_DRAW);
+                std::cerr << "ERROR: `yli::load::load_Species`: !\n";
+                std::cerr << "`species_loader_struct.image_width_pointer` is `nullptr`!\n";
+                return false;
             }
 
-            // TODO: Compute the graph of the mesh of this `Species` to enable object vertex modification!
-            return model_loading_result;
+            if (species_loader_struct.image_height_pointer == nullptr)
+            {
+                std::cerr << "ERROR: `yli::load::load_Species`: !\n";
+                std::cerr << "`species_loader_struct.image_height_pointer` is `nullptr`!\n";
+                return false;
+            }
+
+            yli::load::HeightmapLoaderStruct heightmap_loader_struct;
+            heightmap_loader_struct.filename                     = species_loader_struct.model_filename;
+            heightmap_loader_struct.file_format                  = species_loader_struct.model_file_format;
+            heightmap_loader_struct.latitude                     = species_loader_struct.latitude;
+            heightmap_loader_struct.longitude                    = species_loader_struct.longitude;
+            heightmap_loader_struct.planet_radius                = species_loader_struct.planet_radius;
+            heightmap_loader_struct.divisor                      = species_loader_struct.divisor;
+            heightmap_loader_struct.x_step                       = species_loader_struct.x_step;
+            heightmap_loader_struct.z_step                       = species_loader_struct.z_step;
+            heightmap_loader_struct.triangulation_type           = species_loader_struct.triangulation_type;
+            heightmap_loader_struct.use_real_texture_coordinates = species_loader_struct.use_real_texture_coordinates;
+
+            if (species_loader_struct.model_file_format == "srtm" || species_loader_struct.model_file_format == "SRTM")
+            {
+                model_loading_result = yli::load::load_SRTM_terrain(
+                        heightmap_loader_struct,
+                        species_loader_struct.model_filename,
+                        out_vertices,
+                        out_UVs,
+                        out_normals,
+                        *species_loader_struct.image_width_pointer,
+                        *species_loader_struct.image_height_pointer);
+            }
+            else if (species_loader_struct.model_file_format == "bmp" || species_loader_struct.model_file_format == "BMP")
+            {
+                model_loading_result = yli::load::load_bmp_terrain(
+                        heightmap_loader_struct,
+                        out_vertices,
+                        out_UVs,
+                        out_normals,
+                        *species_loader_struct.image_width_pointer,
+                        *species_loader_struct.image_height_pointer,
+                        species_loader_struct.color_channel);
+            }
+            else if (species_loader_struct.model_file_format == "asc" ||
+                    species_loader_struct.model_file_format == "ascii_grid" ||
+                    species_loader_struct.model_file_format == "ASCII_grid")
+            {
+                model_loading_result = yli::load::load_ASCII_grid_terrain(
+                        heightmap_loader_struct,
+                        out_vertices,
+                        out_UVs,
+                        out_normals,
+                        *species_loader_struct.image_width_pointer,
+                        *species_loader_struct.image_height_pointer);
+            }
+
         }
+        else
+        {
+            std::cerr << "ERROR: no model was loaded!\n";
+            std::cerr << "Model file format: " << species_loader_struct.model_file_format << "\n";
+            return false;
+        }
+
+        std::cout << "Indexing...\n";
+
+        // Fill the index buffer.
+        yli::opengl::indexVBO(
+                out_vertices,
+                out_UVs,
+                out_normals,
+                indices,
+                indexed_vertices,
+                indexed_UVs,
+                indexed_normals);
+
+        std::cout << "Indexing completed successfully.\n";
+
+        opengl_in_use = species_loader_struct.opengl_in_use;
+
+        if (!species_loader_struct.is_headless &&
+                opengl_in_use &&
+                vertexbuffer != nullptr &&
+                uvbuffer != nullptr &&
+                normalbuffer != nullptr &&
+                elementbuffer != nullptr)
+        {
+            // Load it into a VBO.
+            glGenBuffers(1, vertexbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, *vertexbuffer);
+            glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(glm::vec3), &indexed_vertices[0], GL_STATIC_DRAW);
+
+            glGenBuffers(1, uvbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, *uvbuffer);
+            glBufferData(GL_ARRAY_BUFFER, indexed_UVs.size() * sizeof(glm::vec2), &indexed_UVs[0], GL_STATIC_DRAW);
+
+            glGenBuffers(1, normalbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, *normalbuffer);
+            glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals[0], GL_STATIC_DRAW);
+
+            glGenBuffers(1, elementbuffer);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *elementbuffer);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), &indices[0] , GL_STATIC_DRAW);
+        }
+
+        // TODO: Compute the graph of the mesh of this `Species` to enable object vertex modification!
+        return model_loading_result;
     }
 }

@@ -30,35 +30,32 @@
 #include <queue>    // std::queue
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::graph
 {
-    namespace graph
+    class Node;
+
+    class Graph
     {
-        class Node;
+        public:
+            void bind_Node(yli::graph::Node* const node);
+            void unbind_Node(const std::size_t childID);
 
-        class Graph
-        {
-            public:
-                void bind_Node(yli::graph::Node* const node);
-                void unbind_Node(const std::size_t childID);
+            // constructor.
+            Graph();
 
-                // constructor.
-                Graph();
+            // destructor.
+            ~Graph();
 
-                // destructor.
-                ~Graph();
+            friend class Node;
 
-                friend class Node;
+        private:
+            // this method gets a node pointer.
+            yli::graph::Node* get_node_pointer(std::size_t nodeID);
 
-            private:
-                // this method gets a node pointer.
-                yli::graph::Node* get_node_pointer(std::size_t nodeID);
-
-                std::vector<yli::graph::Node*> node_pointer_vector;
-                std::queue<std::size_t> free_nodeID_queue;
-                std::size_t number_of_nodes;
-        };
-    }
+            std::vector<yli::graph::Node*> node_pointer_vector;
+            std::queue<std::size_t> free_nodeID_queue;
+            std::size_t number_of_nodes;
+    };
 }
 
 #endif

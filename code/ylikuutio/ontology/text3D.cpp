@@ -25,24 +25,21 @@
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    Text3D::~Text3D()
     {
-        Text3D::~Text3D()
-        {
-            // destructor.
-            std::cout << "This `Text3D` (\"" << this->text_string << "\", childID " << std::dec << this->childID << ") will be destroyed.\n";
-        }
+        // destructor.
+        std::cout << "This `Text3D` (\"" << this->text_string << "\", childID " << std::dec << this->childID << ") will be destroyed.\n";
+    }
 
-        std::size_t Text3D::get_number_of_children() const
-        {
-            return this->parent_of_objects.get_number_of_children();
-        }
+    std::size_t Text3D::get_number_of_children() const
+    {
+        return this->parent_of_objects.get_number_of_children();
+    }
 
-        std::size_t Text3D::get_number_of_descendants() const
-        {
-            return yli::ontology::get_number_of_descendants(this->parent_of_objects.child_pointer_vector);
-        }
+    std::size_t Text3D::get_number_of_descendants() const
+    {
+        return yli::ontology::get_number_of_descendants(this->parent_of_objects.child_pointer_vector);
     }
 }

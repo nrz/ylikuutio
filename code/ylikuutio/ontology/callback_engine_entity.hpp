@@ -28,42 +28,39 @@
 #include <queue>    // std::queue
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Universe;
+    class ParentModule;
+
+    class CallbackEngineEntity: public yli::callback::CallbackEngine, public yli::ontology::Entity
     {
-        class Universe;
-        class ParentModule;
+        public:
+            // constructor.
+            CallbackEngineEntity(
+                    yli::ontology::Universe* const universe,
+                    const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
+                    yli::ontology::ParentModule* const parent_module)
+                : Entity(universe),
+                child_of_universe(parent_module, this)
+            {
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "yli::ontology::CallbackEngineEntity*";
+                this->can_be_erased = true;
+            }
 
-        class CallbackEngineEntity: public yli::callback::CallbackEngine, public yli::ontology::Entity
-        {
-            public:
-                // constructor.
-                CallbackEngineEntity(
-                        yli::ontology::Universe* const universe,
-                        const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
-                        yli::ontology::ParentModule* const parent_module)
-                    : Entity(universe),
-                    child_of_universe(parent_module, this)
-                {
-                    // `yli::ontology::Entity` member variables begin here.
-                    this->type_string = "yli::ontology::CallbackEngineEntity*";
-                    this->can_be_erased = true;
-                }
+            CallbackEngineEntity(const CallbackEngineEntity&) = delete;            // Delete copy constructor.
+            CallbackEngineEntity &operator=(const CallbackEngineEntity&) = delete; // Delete copy assignment.
 
-                CallbackEngineEntity(const CallbackEngineEntity&) = delete;            // Delete copy constructor.
-                CallbackEngineEntity &operator=(const CallbackEngineEntity&) = delete; // Delete copy assignment.
+            // destructor.
+            virtual ~CallbackEngineEntity();
 
-                // destructor.
-                virtual ~CallbackEngineEntity();
+            yli::ontology::Entity* get_parent() const override;
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
 
-                yli::ontology::Entity* get_parent() const override;
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
-
-                yli::ontology::ChildModule child_of_universe;
-        };
-    }
+            yli::ontology::ChildModule child_of_universe;
+    };
 }
 
 #endif

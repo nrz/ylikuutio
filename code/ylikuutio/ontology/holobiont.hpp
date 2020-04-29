@@ -46,82 +46,79 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Entity;
+    class Universe;
+
+    class Holobiont: public yli::ontology::Movable
     {
-        class Entity;
-        class Universe;
+        public:
+            // constructor.
+            Holobiont(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::HolobiontStruct& holobiont_struct,
+                    yli::ontology::ParentModule* const parent_module)
+                : Movable(
+                        universe,
+                        yli::ontology::MovableStruct(
+                            holobiont_struct.brain,
+                            holobiont_struct.cartesian_coordinates,
+                            holobiont_struct.spherical_coordinates,
+                            holobiont_struct.horizontal_angle,
+                            holobiont_struct.vertical_angle),
+                        parent_module),
+                parent_of_bionts(this)
+            {
+                this->original_scale_vector = holobiont_struct.original_scale_vector;
+                this->rotate_vector         = holobiont_struct.rotate_vector;
+                this->translate_vector      = holobiont_struct.translate_vector;
+                this->initial_rotate_vector = holobiont_struct.initial_rotate_vector;
 
-        class Holobiont: public yli::ontology::Movable
-        {
-            public:
-                // constructor.
-                Holobiont(
-                        yli::ontology::Universe* const universe,
-                        const yli::ontology::HolobiontStruct& holobiont_struct,
-                        yli::ontology::ParentModule* const parent_module)
-                    : Movable(
-                            universe,
-                            yli::ontology::MovableStruct(
-                                holobiont_struct.brain,
-                                holobiont_struct.cartesian_coordinates,
-                                holobiont_struct.spherical_coordinates,
-                                holobiont_struct.horizontal_angle,
-                                holobiont_struct.vertical_angle),
-                            parent_module),
-                    parent_of_bionts(this)
-                {
-                    this->original_scale_vector = holobiont_struct.original_scale_vector;
-                    this->rotate_vector         = holobiont_struct.rotate_vector;
-                    this->translate_vector      = holobiont_struct.translate_vector;
-                    this->initial_rotate_vector = holobiont_struct.initial_rotate_vector;
+                this->rotate_angle          = holobiont_struct.rotate_angle;
+                this->initial_rotate_angle  = holobiont_struct.initial_rotate_angle;
 
-                    this->rotate_angle          = holobiont_struct.rotate_angle;
-                    this->initial_rotate_angle  = holobiont_struct.initial_rotate_angle;
+                this->cartesian_coordinates = holobiont_struct.cartesian_coordinates;
+                this->spherical_coordinates = holobiont_struct.spherical_coordinates;
 
-                    this->cartesian_coordinates = holobiont_struct.cartesian_coordinates;
-                    this->spherical_coordinates = holobiont_struct.spherical_coordinates;
+                this->create_Bionts();
 
-                    this->create_Bionts();
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "yli::ontology::Holobiont*";
+                this->can_be_erased = true;
+            }
 
-                    // `yli::ontology::Entity` member variables begin here.
-                    this->type_string = "yli::ontology::Holobiont*";
-                    this->can_be_erased = true;
-                }
+            Holobiont(const Holobiont&) = delete;            // Delete copy constructor.
+            Holobiont &operator=(const Holobiont&) = delete; // Delete copy assignment.
 
-                Holobiont(const Holobiont&) = delete;            // Delete copy constructor.
-                Holobiont &operator=(const Holobiont&) = delete; // Delete copy assignment.
+            // destructor.
+            virtual ~Holobiont();
 
-                // destructor.
-                virtual ~Holobiont();
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
 
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
+            void update_x(float x);
+            void update_y(float y);
+            void update_z(float z);
 
-                void update_x(float x);
-                void update_y(float y);
-                void update_z(float z);
+            yli::ontology::ParentModule parent_of_bionts;
 
-                yli::ontology::ParentModule parent_of_bionts;
+        private:
+            // this method renders this `Holobiont`.
+            void render() override;
 
-            private:
-                // this method renders this `Holobiont`.
-                void render() override;
+            void create_Bionts();
 
-                void create_Bionts();
+            glm::vec3 original_scale_vector;            // original scale vector.
+            glm::vec3 rotate_vector;                    // rotate vector.
+            glm::vec3 translate_vector;                 // translate vector.
+            glm::vec3 initial_rotate_vector;            // initial rotate vector.
 
-                glm::vec3 original_scale_vector;            // original scale vector.
-                glm::vec3 rotate_vector;                    // rotate vector.
-                glm::vec3 translate_vector;                 // translate vector.
-                glm::vec3 initial_rotate_vector;            // initial rotate vector.
+            yli::common::SphericalCoordinatesStruct spherical_coordinates;
 
-                yli::common::SphericalCoordinatesStruct spherical_coordinates;
-
-                float rotate_angle;                         // rotate angle.
-                float initial_rotate_angle;                 // initial rotate angle.
-        };
-    }
+            float rotate_angle;                         // rotate angle.
+            float initial_rotate_angle;                 // initial rotate angle.
+    };
 }
 
 #endif

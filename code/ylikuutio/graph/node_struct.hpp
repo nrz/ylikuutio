@@ -23,24 +23,21 @@
 #include <limits>   // std::numeric_limits
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::graph
 {
-    namespace graph
-    {
-        class Graph;
+    class Graph;
 
-        struct NodeStruct
+    struct NodeStruct
+    {
+        NodeStruct()
+            : nodeID(std::numeric_limits<std::size_t>::max()), parent(nullptr)
         {
-            NodeStruct()
-                : nodeID(std::numeric_limits<std::size_t>::max()), parent(nullptr)
-            {
-                // constructor.
-            }
-            std::size_t nodeID;
-            yli::graph::Graph* parent;
-            std::vector<std::size_t> neighbor_nodeIDs;
-        };
-    }
+            // constructor.
+        }
+        std::size_t nodeID;
+        yli::graph::Graph* parent;
+        std::vector<std::size_t> neighbor_nodeIDs;
+    };
 }
 
 #endif

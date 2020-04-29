@@ -33,28 +33,25 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-namespace yli
+namespace yli::load
 {
-    namespace load
-    {
-        bool load_Symbiosis(
-                yli::load::SymbiosisLoaderStruct& symbiosis_loader_struct,
-                std::vector<std::vector<glm::vec3>>& out_vertices,
-                std::vector<std::vector<glm::vec2>>& out_UVs,
-                std::vector<std::vector<glm::vec3>>& out_normals,
-                std::vector<std::vector<uint32_t>>& indices,
-                std::vector<std::vector<glm::vec3>>& indexed_vertices,
-                std::vector<std::vector<glm::vec2>>& indexed_UVs,
-                std::vector<std::vector<glm::vec3>>& indexed_normals,
-                std::unordered_map<const ofbx::Texture*, std::vector<int32_t>>& ofbx_diffuse_texture_mesh_map,
-                std::vector<const ofbx::Mesh*>& ofbx_meshes,
-                std::vector<const ofbx::Texture*>& ofbx_diffuse_texture_vector,
-                std::vector<const ofbx::Texture*>& ofbx_normal_texture_vector,
-                std::vector<const ofbx::Texture*>& ofbx_count_texture_vector,
-                std::size_t& mesh_count,
-                bool& opengl_in_use,
-                const bool is_debug_mode);
-    }
+    bool load_Symbiosis(
+            yli::load::SymbiosisLoaderStruct& symbiosis_loader_struct,
+            std::vector<std::vector<glm::vec3>>& out_vertices,
+            std::vector<std::vector<glm::vec2>>& out_UVs,
+            std::vector<std::vector<glm::vec3>>& out_normals,
+            std::vector<std::vector<uint32_t>>& indices,
+            std::vector<std::vector<glm::vec3>>& indexed_vertices,
+            std::vector<std::vector<glm::vec2>>& indexed_UVs,
+            std::vector<std::vector<glm::vec3>>& indexed_normals,
+            std::unordered_map<const ofbx::Texture*, std::vector<int32_t>>& ofbx_diffuse_texture_mesh_map,
+            std::vector<const ofbx::Mesh*>& ofbx_meshes,
+            std::vector<const ofbx::Texture*>& ofbx_diffuse_texture_vector,
+            std::vector<const ofbx::Texture*>& ofbx_normal_texture_vector,
+            std::vector<const ofbx::Texture*>& ofbx_count_texture_vector,
+            std::size_t& mesh_count,
+            bool& opengl_in_use,
+            const bool is_debug_mode);
 }
 
 #endif

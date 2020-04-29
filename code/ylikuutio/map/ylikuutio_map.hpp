@@ -30,117 +30,114 @@
 #include <utility>       // std::pair
 #include <vector>        // std::vector
 
-namespace yli
+namespace yli::map
 {
-    namespace map
-    {
-        template <class T1>
-            std::vector<std::string> get_keys(const std::unordered_map<std::string, T1>& unordered_map)
+    template <class T1>
+        std::vector<std::string> get_keys(const std::unordered_map<std::string, T1>& unordered_map)
+        {
+            std::vector<std::string> key_vector;
+            key_vector.reserve(unordered_map.size());
+
+            for (auto key_and_value : unordered_map)
             {
-                std::vector<std::string> key_vector;
-                key_vector.reserve(unordered_map.size());
-
-                for (auto key_and_value : unordered_map)
-                {
-                    key_vector.push_back(key_and_value.first); // key.
-                }
-
-                // sort key vector alphabetically.
-                std::sort(key_vector.begin(), key_vector.end());
-
-                return key_vector;
+                key_vector.push_back(key_and_value.first); // key.
             }
 
-        template <class T1>
-            std::vector<std::pair<std::string, T1>> get_keys_and_values(const std::unordered_map<std::string, T1>& unordered_map)
+            // sort key vector alphabetically.
+            std::sort(key_vector.begin(), key_vector.end());
+
+            return key_vector;
+        }
+
+    template <class T1>
+        std::vector<std::pair<std::string, T1>> get_keys_and_values(const std::unordered_map<std::string, T1>& unordered_map)
+        {
+            std::vector<std::pair<std::string, T1>> key_and_value_vector;
+            key_and_value_vector.reserve(unordered_map.size());
+
+            for (auto key_and_value : unordered_map)
             {
-                std::vector<std::pair<std::string, T1>> key_and_value_vector;
-                key_and_value_vector.reserve(unordered_map.size());
-
-                for (auto key_and_value : unordered_map)
-                {
-                    key_and_value_vector.push_back(std::pair<std::string, T1>(key_and_value.first, key_and_value.second)); // key and value.
-                }
-
-                // sort key and value vector alphabetically.
-                std::sort(key_and_value_vector.begin(), key_and_value_vector.end());
-
-                return key_and_value_vector;
+                key_and_value_vector.push_back(std::pair<std::string, T1>(key_and_value.first, key_and_value.second)); // key and value.
             }
 
-        template <class T1>
-            void print_keys_to_console(const std::unordered_map<std::string, T1>& unordered_map, yli::ontology::Console* const console)
+            // sort key and value vector alphabetically.
+            std::sort(key_and_value_vector.begin(), key_and_value_vector.end());
+
+            return key_and_value_vector;
+        }
+
+    template <class T1>
+        void print_keys_to_console(const std::unordered_map<std::string, T1>& unordered_map, yli::ontology::Console* const console)
+        {
+            if (console == nullptr)
             {
-                if (console == nullptr)
+                return;
+            }
+
+            const yli::ontology::Universe* const universe = console->get_universe();
+
+            if (universe == nullptr)
+            {
+                return;
+            }
+
+            std::vector<std::string> key_vector = yli::map::get_keys(unordered_map);
+
+            std::size_t characters_for_line = universe->get_window_width() / universe->get_text_size();
+
+            std::string keys_text;
+
+            for (std::string key : key_vector)
+            {
+                if (keys_text.size() > 0 &&
+                        keys_text.size() + key.size() >= characters_for_line)
                 {
-                    return;
-                }
-
-                const yli::ontology::Universe* const universe = console->get_universe();
-
-                if (universe == nullptr)
-                {
-                    return;
-                }
-
-                std::vector<std::string> key_vector = yli::map::get_keys(unordered_map);
-
-                std::size_t characters_for_line = universe->get_window_width() / universe->get_text_size();
-
-                std::string keys_text;
-
-                for (std::string key : key_vector)
-                {
-                    if (keys_text.size() > 0 &&
-                            keys_text.size() + key.size() >= characters_for_line)
-                    {
-                        // Not enough space for this key on this line.
-                        // Print this line.
-                        console->print_text(keys_text);
-                        keys_text = key;
-                    }
-                    else if (keys_text.size() > 0)
-                    {
-                        // There is space, and this is not the first key on this line.
-                        keys_text += " " + key;
-                    }
-                    else
-                    {
-                        // This is the first key on this line.
-                        keys_text += key;
-                    }
-                }
-                if (keys_text.size() > 0)
-                {
-                    // Print the last line.
+                    // Not enough space for this key on this line.
+                    // Print this line.
                     console->print_text(keys_text);
+                    keys_text = key;
+                }
+                else if (keys_text.size() > 0)
+                {
+                    // There is space, and this is not the first key on this line.
+                    keys_text += " " + key;
+                }
+                else
+                {
+                    // This is the first key on this line.
+                    keys_text += key;
                 }
             }
-
-        template <class T1>
-            void print_keys_and_values(const std::unordered_map<std::string, T1>& unordered_map)
+            if (keys_text.size() > 0)
             {
-                if (unordered_map.size() == 0)
+                // Print the last line.
+                console->print_text(keys_text);
+            }
+        }
+
+    template <class T1>
+        void print_keys_and_values(const std::unordered_map<std::string, T1>& unordered_map)
+        {
+            if (unordered_map.size() == 0)
+            {
+                std::cout << "no keys.\n";
+                return;
+            }
+
+            std::vector<std::string> key_vector = yli::map::get_keys(unordered_map);
+
+            for (std::string key : key_vector)
+            {
+                if (unordered_map.at(key).empty())
                 {
-                    std::cout << "no keys.\n";
-                    return;
+                    std::cout << key << " (no value)\n";
                 }
-
-                std::vector<std::string> key_vector = yli::map::get_keys(unordered_map);
-
-                for (std::string key : key_vector)
+                else
                 {
-                    if (unordered_map.at(key).empty())
-                    {
-                        std::cout << key << " (no value)\n";
-                    }
-                    else
-                    {
-                        std::cout << key << " = " << unordered_map.at(key) << "\n";
-                    }
+                    std::cout << key << " = " << unordered_map.at(key) << "\n";
                 }
             }
-    }
+        }
 }
 
 #endif

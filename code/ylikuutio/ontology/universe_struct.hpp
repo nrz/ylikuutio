@@ -26,57 +26,54 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    struct UniverseStruct
     {
-        struct UniverseStruct
+        UniverseStruct()
+            : window_title(""),
+            window_width(1600),
+            window_height(900),
+            framebuffer_width(8000),
+            framebuffer_height(4500),
+            text_size(40),
+            font_size(16),
+            max_FPS(50000),         // default value max 50000 frames per second.
+            speed(5.0f),            // default value 5.0 units / second.
+            turbo_factor(5.0f),        // default value 5.0 x speed.
+            twin_turbo_factor(100.0f), // default value 100.0 x speed.
+            mouse_speed(0.005f),
+            znear(1.0f),
+            zfar(5000.0f),          // visibility: from 1 to 5000 units.
+            is_physical(true),      // physics simulation in use.
+            is_fullscreen(false),   // windowed mode in use.
+            is_headless(false),
+            is_silent(false),
+            input_method(yli::input::InputMethod::KEYBOARD)
         {
-            UniverseStruct()
-                : window_title(""),
-                window_width(1600),
-                window_height(900),
-                framebuffer_width(8000),
-                framebuffer_height(4500),
-                text_size(40),
-                font_size(16),
-                max_FPS(50000),         // default value max 50000 frames per second.
-                speed(5.0f),            // default value 5.0 units / second.
-                turbo_factor(5.0f),        // default value 5.0 x speed.
-                twin_turbo_factor(100.0f), // default value 100.0 x speed.
-                mouse_speed(0.005f),
-                znear(1.0f),
-                zfar(5000.0f),          // visibility: from 1 to 5000 units.
-                is_physical(true),      // physics simulation in use.
-                is_fullscreen(false),   // windowed mode in use.
-                is_headless(false),
-                is_silent(false),
-                input_method(yli::input::InputMethod::KEYBOARD)
-            {
-                // constructor.
-            }
+            // constructor.
+        }
 
-            std::string window_title;
-            uint32_t window_width;
-            uint32_t window_height;
-            uint32_t framebuffer_width;
-            uint32_t framebuffer_height;
-            std::size_t text_size;
-            std::size_t font_size;
-            std::size_t max_FPS;
-            float speed;
-            float turbo_factor;
-            float twin_turbo_factor;
-            float mouse_speed;
-            float znear;
-            float zfar;
-            bool is_physical;
-            bool is_fullscreen;
-            bool is_headless;
-            bool is_silent;
-            yli::input::InputMethod input_method;
-        };
-    }
+        std::string window_title;
+        uint32_t window_width;
+        uint32_t window_height;
+        uint32_t framebuffer_width;
+        uint32_t framebuffer_height;
+        std::size_t text_size;
+        std::size_t font_size;
+        std::size_t max_FPS;
+        float speed;
+        float turbo_factor;
+        float twin_turbo_factor;
+        float mouse_speed;
+        float znear;
+        float zfar;
+        bool is_physical;
+        bool is_fullscreen;
+        bool is_headless;
+        bool is_silent;
+        yli::input::InputMethod input_method;
+    };
 }
 
 #endif

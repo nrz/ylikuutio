@@ -23,34 +23,31 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Entity;
+
+    // destructor.
+    CallbackEngineEntity::~CallbackEngineEntity()
     {
-        class Entity;
-
         // destructor.
-        CallbackEngineEntity::~CallbackEngineEntity()
-        {
-            // destructor.
-            std::cout << "This `CallbackEngineEntity` will be destroyed.\n";
-        }
+        std::cout << "This `CallbackEngineEntity` will be destroyed.\n";
+    }
 
-        yli::ontology::Entity* CallbackEngineEntity::get_parent() const
-        {
-            // Every `CallbackEngineEntity` is a child of the `Universe`.
-            // The base class needs to be specified due to ambiguity caused by diamond inheritance.
-            return static_cast<yli::ontology::Entity*>(this->yli::ontology::Entity::universe);
-        }
+    yli::ontology::Entity* CallbackEngineEntity::get_parent() const
+    {
+        // Every `CallbackEngineEntity` is a child of the `Universe`.
+        // The base class needs to be specified due to ambiguity caused by diamond inheritance.
+        return static_cast<yli::ontology::Entity*>(this->yli::ontology::Entity::universe);
+    }
 
-        std::size_t CallbackEngineEntity::get_number_of_children() const
-        {
-            return 0; // `CallbackEngineEntity` has no children.
-        }
+    std::size_t CallbackEngineEntity::get_number_of_children() const
+    {
+        return 0; // `CallbackEngineEntity` has no children.
+    }
 
-        std::size_t CallbackEngineEntity::get_number_of_descendants() const
-        {
-            return 0; // `CallbackEngineEntity` has no children.
-        }
+    std::size_t CallbackEngineEntity::get_number_of_descendants() const
+    {
+        return 0; // `CallbackEngineEntity` has no children.
     }
 }

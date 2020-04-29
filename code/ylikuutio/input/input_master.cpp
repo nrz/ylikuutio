@@ -19,70 +19,67 @@
 #include "input_mode.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
-namespace yli
+namespace yli::input
 {
-    namespace input
+    void InputMaster::bind_InputMode(yli::input::InputMode* const input_mode)
     {
-        void InputMaster::bind_InputMode(yli::input::InputMode* const input_mode)
+        // get `childID` from `InputMaster` and set pointer to `input_mode`.
+        yli::hierarchy::bind_child_to_parent<yli::input::InputMode*>(
+                input_mode,
+                this->input_mode_pointer_vector,
+                this->free_input_modeID_queue,
+                this->number_of_input_modes);
+    }
+
+    InputMaster::InputMaster(yli::ontology::Universe* const universe)
+    {
+        // constructor.
+
+        this->universe = universe;
+        this->active_input_mode = nullptr;
+        this->number_of_input_modes = 0;
+        this->input_method = yli::input::InputMethod::KEYBOARD;
+    }
+
+    InputMaster::~InputMaster()
+    {
+        // destructor.
+
+        // destroy all `InputMode`s of this `InputMaster`.
+        yli::hierarchy::delete_children<yli::input::InputMode*>(this->input_mode_pointer_vector, this->number_of_input_modes);
+    }
+
+    yli::input::InputMode* InputMaster::create_InputMode()
+    {
+        return new yli::input::InputMode(this);
+    }
+
+    void InputMaster::set_active_input_mode(yli::input::InputMode* const input_mode)
+    {
+        if (this->active_input_mode != nullptr)
         {
-            // get `childID` from `InputMaster` and set pointer to `input_mode`.
-            yli::hierarchy::bind_child_to_parent<yli::input::InputMode*>(
-                    input_mode,
-                    this->input_mode_pointer_vector,
-                    this->free_input_modeID_queue,
-                    this->number_of_input_modes);
+            this->input_mode_stack.push(this->active_input_mode);
         }
 
-        InputMaster::InputMaster(yli::ontology::Universe* const universe)
+        this->active_input_mode = input_mode;
+    }
+
+    yli::input::InputMode* InputMaster::get_active_input_mode() const
+    {
+        return this->active_input_mode;
+    }
+
+    void InputMaster::pop_input_mode()
+    {
+        if (!this->input_mode_stack.empty())
         {
-            // constructor.
-
-            this->universe = universe;
-            this->active_input_mode = nullptr;
-            this->number_of_input_modes = 0;
-            this->input_method = yli::input::InputMethod::KEYBOARD;
+            this->active_input_mode = this->input_mode_stack.top();
+            this->input_mode_stack.pop();
         }
+    }
 
-        InputMaster::~InputMaster()
-        {
-            // destructor.
-
-            // destroy all `InputMode`s of this `InputMaster`.
-            yli::hierarchy::delete_children<yli::input::InputMode*>(this->input_mode_pointer_vector, this->number_of_input_modes);
-        }
-
-        yli::input::InputMode* InputMaster::create_InputMode()
-        {
-            return new yli::input::InputMode(this);
-        }
-
-        void InputMaster::set_active_input_mode(yli::input::InputMode* const input_mode)
-        {
-            if (this->active_input_mode != nullptr)
-            {
-                this->input_mode_stack.push(this->active_input_mode);
-            }
-
-            this->active_input_mode = input_mode;
-        }
-
-        yli::input::InputMode* InputMaster::get_active_input_mode() const
-        {
-            return this->active_input_mode;
-        }
-
-        void InputMaster::pop_input_mode()
-        {
-            if (!this->input_mode_stack.empty())
-            {
-                this->active_input_mode = this->input_mode_stack.top();
-                this->input_mode_stack.pop();
-            }
-        }
-
-        yli::input::InputMethod InputMaster::get_input_method() const
-        {
-            return this->input_method;
-        }
+    yli::input::InputMethod InputMaster::get_input_method() const
+    {
+        return this->input_method;
     }
 }

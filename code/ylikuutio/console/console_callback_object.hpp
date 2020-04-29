@@ -25,50 +25,47 @@
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
 
-namespace yli
+namespace yli::callback
 {
-    namespace callback
+    class CallbackEngine;
+    class CallbackParameter;
+}
+
+namespace yli::common
+{
+    class AnyValue;
+}
+
+namespace yli::console
+{
+    class ConsoleCallbackEngine;
+
+    class ConsoleCallbackObject : public yli::callback::CallbackObject
     {
-        class CallbackEngine;
-        class CallbackParameter;
-    }
+        public:
+            // destructor.
+            ~ConsoleCallbackObject();
 
-    namespace common
-    {
-        class AnyValue;
-    }
+            friend ConsoleCallbackEngine;
 
-    namespace console
-    {
-        class ConsoleCallbackEngine;
-
-        class ConsoleCallbackObject : public yli::callback::CallbackObject
-        {
-            public:
-                // destructor.
-                ~ConsoleCallbackObject();
-
-                friend ConsoleCallbackEngine;
-
-            private:
+        private:
+            // constructor.
+            ConsoleCallbackObject(InputParametersToAnyValueCallbackWithConsole console_callback,
+                    yli::callback::CallbackEngine* parent, yli::ontology::Console* console_pointer)
+                : yli::callback::CallbackObject(nullptr, parent)
+            {
                 // constructor.
-                ConsoleCallbackObject(InputParametersToAnyValueCallbackWithConsole console_callback,
-                        yli::callback::CallbackEngine* parent, yli::ontology::Console* console_pointer)
-                    : yli::callback::CallbackObject(nullptr, parent)
-                {
-                    // constructor.
-                    this->callback = nullptr;
-                    this->console_callback = console_callback;
-                    this->console_pointer = console_pointer;
-                }
+                this->callback = nullptr;
+                this->console_callback = console_callback;
+                this->console_pointer = console_pointer;
+            }
 
-                // execute this callback.
-                std::shared_ptr<yli::common::AnyValue> execute(std::shared_ptr<yli::common::AnyValue>) override;
+            // execute this callback.
+            std::shared_ptr<yli::common::AnyValue> execute(std::shared_ptr<yli::common::AnyValue>) override;
 
-                InputParametersToAnyValueCallbackWithConsole console_callback;
-                yli::ontology::Console* console_pointer;
-        };
-    }
+            InputParametersToAnyValueCallbackWithConsole console_callback;
+            yli::ontology::Console* console_pointer;
+    };
 }
 
 #endif

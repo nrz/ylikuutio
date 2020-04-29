@@ -60,144 +60,141 @@
 #include <memory>    // std::make_shared, std::shared_ptr
 #include <string>    // std::string
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    EntityFactory::EntityFactory(yli::ontology::Universe* const universe)
     {
-        EntityFactory::EntityFactory(yli::ontology::Universe* const universe)
-        {
-            // constructor.
-            this->universe = universe;
-        }
+        // constructor.
+        this->universe = universe;
+    }
 
-        EntityFactory::~EntityFactory()
-        {
-            // destructor.
-        }
+    EntityFactory::~EntityFactory()
+    {
+        // destructor.
+    }
 
-        yli::ontology::Universe* EntityFactory::get_universe() const
-        {
-            return this->universe;
-        }
+    yli::ontology::Universe* EntityFactory::get_universe() const
+    {
+        return this->universe;
+    }
 
-        yli::ontology::Entity* EntityFactory::create_World() const
-        {
-            return new yli::ontology::World(this->universe, (this->universe == nullptr ? nullptr : &this->universe->parent_of_worlds));
-        }
+    yli::ontology::Entity* EntityFactory::create_World() const
+    {
+        return new yli::ontology::World(this->universe, (this->universe == nullptr ? nullptr : &this->universe->parent_of_worlds));
+    }
 
-        yli::ontology::Entity* EntityFactory::create_Scene(const yli::ontology::SceneStruct& scene_struct) const
-        {
-            return new yli::ontology::Scene(this->universe, scene_struct, (scene_struct.world == nullptr ? nullptr : &scene_struct.world->parent_of_scenes));
-        }
+    yli::ontology::Entity* EntityFactory::create_Scene(const yli::ontology::SceneStruct& scene_struct) const
+    {
+        return new yli::ontology::Scene(this->universe, scene_struct, (scene_struct.world == nullptr ? nullptr : &scene_struct.world->parent_of_scenes));
+    }
 
-        yli::ontology::Entity* EntityFactory::create_Shader(const yli::ontology::ShaderStruct& shader_struct) const
-        {
-            return new yli::ontology::Shader(this->universe, shader_struct);
-        }
+    yli::ontology::Entity* EntityFactory::create_Shader(const yli::ontology::ShaderStruct& shader_struct) const
+    {
+        return new yli::ontology::Shader(this->universe, shader_struct);
+    }
 
-        yli::ontology::Entity* EntityFactory::create_Material(const yli::ontology::MaterialStruct& material_struct) const
-        {
-            return new yli::ontology::Material(
-                    this->universe,
-                    material_struct,
-                    (material_struct.shader == nullptr ? nullptr : &material_struct.shader->parent_of_materials));
-        }
+    yli::ontology::Entity* EntityFactory::create_Material(const yli::ontology::MaterialStruct& material_struct) const
+    {
+        return new yli::ontology::Material(
+                this->universe,
+                material_struct,
+                (material_struct.shader == nullptr ? nullptr : &material_struct.shader->parent_of_materials));
+    }
 
-        yli::ontology::Entity* EntityFactory::create_Species(const yli::ontology::SpeciesStruct& species_struct) const
-        {
-            return new yli::ontology::Species(
-                    this->universe,
-                    species_struct,
-                    (species_struct.material == nullptr ? nullptr : &species_struct.material->parent_of_species));
-        }
+    yli::ontology::Entity* EntityFactory::create_Species(const yli::ontology::SpeciesStruct& species_struct) const
+    {
+        return new yli::ontology::Species(
+                this->universe,
+                species_struct,
+                (species_struct.material == nullptr ? nullptr : &species_struct.material->parent_of_species));
+    }
 
-        yli::ontology::Entity* EntityFactory::create_Object(const yli::ontology::ObjectStruct& object_struct) const
-        {
-            return new yli::ontology::Object(
-                    this->universe,
-                    object_struct,
-                    (object_struct.object_type == yli::ontology::ObjectType::REGULAR ? &object_struct.species_parent->parent_of_objects :
-                     object_struct.object_type == yli::ontology::ObjectType::SHAPESHIFTER ? &object_struct.shapeshifter_sequence_parent->parent_of_objects :
-                     object_struct.object_type == yli::ontology::ObjectType::CHARACTER ? &object_struct.text3D_parent->parent_of_objects :
-                     nullptr));
-        }
+    yli::ontology::Entity* EntityFactory::create_Object(const yli::ontology::ObjectStruct& object_struct) const
+    {
+        return new yli::ontology::Object(
+                this->universe,
+                object_struct,
+                (object_struct.object_type == yli::ontology::ObjectType::REGULAR ? &object_struct.species_parent->parent_of_objects :
+                 object_struct.object_type == yli::ontology::ObjectType::SHAPESHIFTER ? &object_struct.shapeshifter_sequence_parent->parent_of_objects :
+                 object_struct.object_type == yli::ontology::ObjectType::CHARACTER ? &object_struct.text3D_parent->parent_of_objects :
+                 nullptr));
+    }
 
-        yli::ontology::Entity* EntityFactory::create_Symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const
-        {
-            return new yli::ontology::Symbiosis(this->universe, symbiosis_struct, (symbiosis_struct.parent == nullptr ? nullptr : &symbiosis_struct.parent->parent_of_symbioses));
-        }
+    yli::ontology::Entity* EntityFactory::create_Symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const
+    {
+        return new yli::ontology::Symbiosis(this->universe, symbiosis_struct, (symbiosis_struct.parent == nullptr ? nullptr : &symbiosis_struct.parent->parent_of_symbioses));
+    }
 
-        yli::ontology::Entity* EntityFactory::create_Holobiont(const yli::ontology::HolobiontStruct& holobiont_struct) const
-        {
-            return new yli::ontology::Holobiont(this->universe, holobiont_struct, (holobiont_struct.symbiosis_parent == nullptr ? nullptr : &holobiont_struct.symbiosis_parent->parent_of_holobionts));
-        }
+    yli::ontology::Entity* EntityFactory::create_Holobiont(const yli::ontology::HolobiontStruct& holobiont_struct) const
+    {
+        return new yli::ontology::Holobiont(this->universe, holobiont_struct, (holobiont_struct.symbiosis_parent == nullptr ? nullptr : &holobiont_struct.symbiosis_parent->parent_of_holobionts));
+    }
 
-        yli::ontology::Entity* EntityFactory::create_VectorFont(const yli::ontology::VectorFontStruct& vector_font_struct) const
-        {
-            return new yli::ontology::VectorFont(this->universe, vector_font_struct);
-        }
+    yli::ontology::Entity* EntityFactory::create_VectorFont(const yli::ontology::VectorFontStruct& vector_font_struct) const
+    {
+        return new yli::ontology::VectorFont(this->universe, vector_font_struct);
+    }
 
-        yli::ontology::Entity* EntityFactory::create_Text2D(const yli::ontology::TextStruct& text_struct) const
-        {
-            return new yli::ontology::Text2D(this->universe, text_struct, (text_struct.font2D_parent == nullptr ? nullptr : &text_struct.font2D_parent->parent_of_text2Ds));
-        }
+    yli::ontology::Entity* EntityFactory::create_Text2D(const yli::ontology::TextStruct& text_struct) const
+    {
+        return new yli::ontology::Text2D(this->universe, text_struct, (text_struct.font2D_parent == nullptr ? nullptr : &text_struct.font2D_parent->parent_of_text2Ds));
+    }
 
-        yli::ontology::Entity* EntityFactory::create_Text3D(const yli::ontology::Text3DStruct& text3D_struct) const
-        {
-            return new yli::ontology::Text3D(this->universe, text3D_struct, (text3D_struct.parent == nullptr ? nullptr : &text3D_struct.parent->parent_of_text3Ds));
-        }
+    yli::ontology::Entity* EntityFactory::create_Text3D(const yli::ontology::Text3DStruct& text3D_struct) const
+    {
+        return new yli::ontology::Text3D(this->universe, text3D_struct, (text3D_struct.parent == nullptr ? nullptr : &text3D_struct.parent->parent_of_text3Ds));
+    }
 
-        yli::ontology::Entity* EntityFactory::create_Font2D(const yli::ontology::FontStruct& font_struct) const
-        {
-            return new yli::ontology::Font2D(this->universe, font_struct, (this->universe == nullptr ? nullptr : &this->universe->parent_of_font2Ds));
-        }
+    yli::ontology::Entity* EntityFactory::create_Font2D(const yli::ontology::FontStruct& font_struct) const
+    {
+        return new yli::ontology::Font2D(this->universe, font_struct, (this->universe == nullptr ? nullptr : &this->universe->parent_of_font2Ds));
+    }
 
-        yli::ontology::Entity* EntityFactory::create_Console() const
-        {
-            return new yli::ontology::Console(this->universe, (this->universe == nullptr ? nullptr : &this->universe->parent_of_consoles));
-        }
+    yli::ontology::Entity* EntityFactory::create_Console() const
+    {
+        return new yli::ontology::Console(this->universe, (this->universe == nullptr ? nullptr : &this->universe->parent_of_consoles));
+    }
 
-        yli::ontology::Entity* EntityFactory::create_Camera(const yli::ontology::CameraStruct& camera_struct) const
-        {
-            return new yli::ontology::Camera(this->universe, camera_struct, (camera_struct.parent == nullptr ? nullptr : &camera_struct.parent->parent_of_cameras));
-        }
+    yli::ontology::Entity* EntityFactory::create_Camera(const yli::ontology::CameraStruct& camera_struct) const
+    {
+        return new yli::ontology::Camera(this->universe, camera_struct, (camera_struct.parent == nullptr ? nullptr : &camera_struct.parent->parent_of_cameras));
+    }
 
-        yli::ontology::Entity* EntityFactory::create_ComputeTask(const yli::ontology::ComputeTaskStruct& compute_task_struct) const
-        {
-            return new yli::ontology::ComputeTask(this->universe, compute_task_struct);
-        }
+    yli::ontology::Entity* EntityFactory::create_ComputeTask(const yli::ontology::ComputeTaskStruct& compute_task_struct) const
+    {
+        return new yli::ontology::ComputeTask(this->universe, compute_task_struct);
+    }
 
-        yli::ontology::Entity* EntityFactory::create_Brain(const yli::ontology::BrainStruct& brain_struct) const
-        {
-            return new yli::ontology::Brain(this->universe, brain_struct, (brain_struct.parent == nullptr ? nullptr : &brain_struct.parent->parent_of_brains));
-        }
+    yli::ontology::Entity* EntityFactory::create_Brain(const yli::ontology::BrainStruct& brain_struct) const
+    {
+        return new yli::ontology::Brain(this->universe, brain_struct, (brain_struct.parent == nullptr ? nullptr : &brain_struct.parent->parent_of_brains));
+    }
 
-        yli::ontology::Entity* EntityFactory::create_AnyValueEntity(const std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr) const
-        {
-            return new yli::ontology::AnyValueEntity(this->universe, any_value_shared_ptr);
-        }
+    yli::ontology::Entity* EntityFactory::create_AnyValueEntity(const std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr) const
+    {
+        return new yli::ontology::AnyValueEntity(this->universe, any_value_shared_ptr);
+    }
 
-        yli::ontology::Entity* EntityFactory::create_AnyValueEntity(const yli::common::AnyValue& any_value) const
-        {
-            return new yli::ontology::AnyValueEntity(this->universe, any_value);
-        }
+    yli::ontology::Entity* EntityFactory::create_AnyValueEntity(const yli::common::AnyValue& any_value) const
+    {
+        return new yli::ontology::AnyValueEntity(this->universe, any_value);
+    }
 
-        yli::ontology::Entity* EntityFactory::create_AnyStructEntity() const
-        {
-            return new yli::ontology::AnyStructEntity(this->universe);
-        }
+    yli::ontology::Entity* EntityFactory::create_AnyStructEntity() const
+    {
+        return new yli::ontology::AnyStructEntity(this->universe);
+    }
 
-        yli::ontology::Entity* EntityFactory::create_AnyStructEntity(const yli::common::AnyStruct& any_struct) const
-        {
-            return new yli::ontology::AnyStructEntity(this->universe, any_struct);
-        }
+    yli::ontology::Entity* EntityFactory::create_AnyStructEntity(const yli::common::AnyStruct& any_struct) const
+    {
+        return new yli::ontology::AnyStructEntity(this->universe, any_struct);
+    }
 
-        yli::ontology::Entity* EntityFactory::create_CallbackEngineEntity(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback) const
-        {
-            return new yli::ontology::CallbackEngineEntity(
-                    this->universe,
-                    callback,
-                    (this->universe == nullptr ? nullptr : &this->universe->parent_of_callback_engine_entities));
-        }
+    yli::ontology::Entity* EntityFactory::create_CallbackEngineEntity(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback) const
+    {
+        return new yli::ontology::CallbackEngineEntity(
+                this->universe,
+                callback,
+                (this->universe == nullptr ? nullptr : &this->universe->parent_of_callback_engine_entities));
     }
 }

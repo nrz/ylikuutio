@@ -23,19 +23,16 @@
 // Include standard headers
 #include <cstddef>       // std::size_t
 
-namespace yli
+namespace yli::geometry
 {
-    namespace geometry
+    struct TransformationStruct
     {
-        struct TransformationStruct
-        {
-            std::size_t image_width;
-            std::size_t image_height;
-            double sphere_radius;
-            bool is_bilinear_interpolation_in_use;
-            yli::geometry::SphericalTerrainStruct spherical_terrain_struct;
-        };
-    }
+        std::size_t image_width;
+        std::size_t image_height;
+        double sphere_radius;
+        bool is_bilinear_interpolation_in_use;
+        yli::geometry::SphericalTerrainStruct spherical_terrain_struct;
+    };
 }
 
 #endif

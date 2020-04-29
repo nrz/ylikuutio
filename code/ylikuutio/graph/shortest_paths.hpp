@@ -21,20 +21,17 @@
 // Include standard headers
 #include <memory>  // std::make_shared, std::shared_ptr
 
-namespace yli
+namespace yli::linear_algebra
 {
-    namespace linear_algebra
-    {
-        class Matrix;
-    }
+    class Matrix;
+}
 
-    namespace graph
-    {
-        // TODO: convert `yli::linear_algebra::Matrix` into a class template.
-        // TODO: convert this function into a function template.
-        // Then, the maximum value of `T` is considered as infinite distance (no link).
-        std::shared_ptr<yli::linear_algebra::Matrix> floyd_warshall(const yli::linear_algebra::Matrix& adjacency_matrix);
-    }
+namespace yli::graph
+{
+    // TODO: convert `yli::linear_algebra::Matrix` into a class template.
+    // TODO: convert this function into a function template.
+    // Then, the maximum value of `T` is considered as infinite distance (no link).
+    std::shared_ptr<yli::linear_algebra::Matrix> floyd_warshall(const yli::linear_algebra::Matrix& adjacency_matrix);
 }
 
 #endif

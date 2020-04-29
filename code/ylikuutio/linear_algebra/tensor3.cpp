@@ -22,144 +22,171 @@
 #include <cstddef>  // std::size_t
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::linear_algebra
 {
-    namespace linear_algebra
+    // `class Tensor3` uses the same coordinate order as MATLAB,
+    // to make testing easier. So: y, x, z.
+    // y = 0 is the uppermost slice
+    // x = 0 is the leftmost slice.
+    // z = 0 is the front slice.
+
+    Tensor3::Tensor3(std::size_t width, std::size_t height, std::size_t depth)
     {
-        // `class Tensor3` uses the same coordinate order as MATLAB,
-        // to make testing easier. So: y, x, z.
-        // y = 0 is the uppermost slice
-        // x = 0 is the leftmost slice.
-        // z = 0 is the front slice.
+        // constructor.
+        this->width = width;
+        this->height = height;
+        this->depth = depth;
+        this->array_of_arrays_of_arrays.resize(this->width);
 
-        Tensor3::Tensor3(std::size_t width, std::size_t height, std::size_t depth)
+        for (std::size_t x = 0; x < this->width; x++)
         {
-            // constructor.
-            this->width = width;
-            this->height = height;
-            this->depth = depth;
-            this->array_of_arrays_of_arrays.resize(this->width);
+            this->array_of_arrays_of_arrays[x].resize(this->height);
 
-            for (std::size_t x = 0; x < this->width; x++)
+            for (std::size_t y = 0; y < this->height; y++)
             {
-                this->array_of_arrays_of_arrays[x].resize(this->height);
-
-                for (std::size_t y = 0; y < this->height; y++)
-                {
-                    this->array_of_arrays_of_arrays[x][y].resize(this->depth);
-                }
-            }
-
-            this->next_x_to_populate = 0;
-            this->next_y_to_populate = 0;
-            this->next_z_to_populate = 0;
-            this->is_fully_populated = false;
-
-            if (this->width == this->height && this->height == this->depth)
-            {
-                this->is_cube = true;
-            }
-            else
-            {
-                this->is_cube = false;
+                this->array_of_arrays_of_arrays[x][y].resize(this->depth);
             }
         }
 
-        Tensor3::Tensor3(const yli::linear_algebra::Tensor3& old_tensor3)
+        this->next_x_to_populate = 0;
+        this->next_y_to_populate = 0;
+        this->next_z_to_populate = 0;
+        this->is_fully_populated = false;
+
+        if (this->width == this->height && this->height == this->depth)
         {
-            // copy constructor.
-            this->width = old_tensor3.width;
-            this->height = old_tensor3.height;
-            this->depth = old_tensor3.depth;
-            this->array_of_arrays_of_arrays.resize(this->width);
-
-            for (std::size_t x = 0; x < this->width; x++)
-            {
-                this->array_of_arrays_of_arrays[x].resize(this->height);
-
-                for (std::size_t y = 0; y < this->height; y++)
-                {
-                    this->array_of_arrays_of_arrays[x][y].resize(this->depth);
-                }
-            }
-
-            this->next_x_to_populate = 0;
-            this->next_y_to_populate = 0;
-            this->next_z_to_populate = 0;
-            this->is_fully_populated = false;
-
-            // Copy values from old tensor (deep copy).
-            // Don't care whether `old_tensor3` is fully populated or not.
-            for (std::size_t x = 0; x < this->width; x++)
-            {
-                // Get the slices of both arrays.
-                std::vector<std::vector<float>>& my_array_of_arrays = this->array_of_arrays_of_arrays[x];
-                const std::vector<std::vector<float>>& other_array_of_arrays = old_tensor3.array_of_arrays_of_arrays[x];
-
-                for (std::size_t y = 0; y < this->height; y++)
-                {
-                    // Get the slices of both arrays.
-                    std::vector<float>& my_array = my_array_of_arrays[y];
-                    const std::vector<float>& other_array = other_array_of_arrays[y];
-
-                    for (std::size_t z = 0; z < this->depth; z++)
-                    {
-                        my_array[z] = other_array[z];
-                    }
-                }
-            }
-
-            if (this->width == this->height && this->height == this->depth)
-            {
-                this->is_cube = true;
-            }
-            else
-            {
-                this->is_cube = false;
-            }
+            this->is_cube = true;
         }
-
-        Tensor3::Tensor3(const yli::linear_algebra::Matrix& old_matrix)
+        else
         {
-            // constructor.
-
-            this->width = old_matrix.width;
-            this->height = old_matrix.height;
-            this->depth = 1;
-            this->array_of_arrays_of_arrays.resize(this->width);
-
-            for (std::size_t x = 0; x < this->width; x++)
-            {
-                this->array_of_arrays_of_arrays[x].resize(this->height);
-
-                for (std::size_t y = 0; y < this->height; y++)
-                {
-                    this->array_of_arrays_of_arrays[x][y].resize(this->depth);
-                }
-            }
-
-            this->next_x_to_populate = 0;
-            this->next_y_to_populate = 0;
-            this->next_z_to_populate = 0;
-            this->is_fully_populated = false;
-
             this->is_cube = false;
         }
+    }
 
-        void Tensor3::operator<<(const float rhs)
+    Tensor3::Tensor3(const yli::linear_algebra::Tensor3& old_tensor3)
+    {
+        // copy constructor.
+        this->width = old_tensor3.width;
+        this->height = old_tensor3.height;
+        this->depth = old_tensor3.depth;
+        this->array_of_arrays_of_arrays.resize(this->width);
+
+        for (std::size_t x = 0; x < this->width; x++)
         {
-            if (this->is_fully_populated)
-            {
-                // Array is already fully populated. Nothing to do.
-                return;
-            }
+            this->array_of_arrays_of_arrays[x].resize(this->height);
 
+            for (std::size_t y = 0; y < this->height; y++)
+            {
+                this->array_of_arrays_of_arrays[x][y].resize(this->depth);
+            }
+        }
+
+        this->next_x_to_populate = 0;
+        this->next_y_to_populate = 0;
+        this->next_z_to_populate = 0;
+        this->is_fully_populated = false;
+
+        // Copy values from old tensor (deep copy).
+        // Don't care whether `old_tensor3` is fully populated or not.
+        for (std::size_t x = 0; x < this->width; x++)
+        {
+            // Get the slices of both arrays.
+            std::vector<std::vector<float>>& my_array_of_arrays = this->array_of_arrays_of_arrays[x];
+            const std::vector<std::vector<float>>& other_array_of_arrays = old_tensor3.array_of_arrays_of_arrays[x];
+
+            for (std::size_t y = 0; y < this->height; y++)
+            {
+                // Get the slices of both arrays.
+                std::vector<float>& my_array = my_array_of_arrays[y];
+                const std::vector<float>& other_array = other_array_of_arrays[y];
+
+                for (std::size_t z = 0; z < this->depth; z++)
+                {
+                    my_array[z] = other_array[z];
+                }
+            }
+        }
+
+        if (this->width == this->height && this->height == this->depth)
+        {
+            this->is_cube = true;
+        }
+        else
+        {
+            this->is_cube = false;
+        }
+    }
+
+    Tensor3::Tensor3(const yli::linear_algebra::Matrix& old_matrix)
+    {
+        // constructor.
+
+        this->width = old_matrix.width;
+        this->height = old_matrix.height;
+        this->depth = 1;
+        this->array_of_arrays_of_arrays.resize(this->width);
+
+        for (std::size_t x = 0; x < this->width; x++)
+        {
+            this->array_of_arrays_of_arrays[x].resize(this->height);
+
+            for (std::size_t y = 0; y < this->height; y++)
+            {
+                this->array_of_arrays_of_arrays[x][y].resize(this->depth);
+            }
+        }
+
+        this->next_x_to_populate = 0;
+        this->next_y_to_populate = 0;
+        this->next_z_to_populate = 0;
+        this->is_fully_populated = false;
+
+        this->is_cube = false;
+    }
+
+    void Tensor3::operator<<(const float rhs)
+    {
+        if (this->is_fully_populated)
+        {
+            // Array is already fully populated. Nothing to do.
+            return;
+        }
+
+        // First, get the slice.
+        std::vector<std::vector<float>>& my_array_of_arrays = this->array_of_arrays_of_arrays[this->next_x_to_populate];
+        std::vector<float>& my_array = my_array_of_arrays[this->next_y_to_populate];
+
+        // Then store the value.
+        my_array[this->next_z_to_populate] = rhs;
+
+        if (++this->next_x_to_populate >= this->width)
+        {
+            this->next_x_to_populate = 0;
+
+            if (++this->next_y_to_populate >= this->height)
+            {
+                this->next_y_to_populate = 0;
+
+                if (++this->next_z_to_populate >= this->depth)
+                {
+                    this->is_fully_populated = true;
+                }
+            }
+        }
+    }
+
+    void Tensor3::operator<<(const std::vector<float>& rhs)
+    {
+        std::size_t rhs_i = 0;
+
+        while (!this->is_fully_populated && rhs_i < rhs.size())
+        {
             // First, get the slice.
             std::vector<std::vector<float>>& my_array_of_arrays = this->array_of_arrays_of_arrays[this->next_x_to_populate];
             std::vector<float>& my_array = my_array_of_arrays[this->next_y_to_populate];
 
             // Then store the value.
-            my_array[this->next_z_to_populate] = rhs;
+            my_array[this->next_z_to_populate] = rhs[rhs_i++];
 
             if (++this->next_x_to_populate >= this->width)
             {
@@ -176,109 +203,79 @@ namespace yli
                 }
             }
         }
+    }
 
-        void Tensor3::operator<<(const std::vector<float>& rhs)
+    bool Tensor3::operator==(const yli::linear_algebra::Tensor3& rhs) const
+    {
+        // compare if tensors are equal.
+        if (this->width != rhs.width ||
+                this->height != rhs.height ||
+                this->depth != rhs.depth)
         {
-            std::size_t rhs_i = 0;
+            // Tensors are not equal, if they have different sizes.
+            return false;
+        }
 
-            while (!this->is_fully_populated && rhs_i < rhs.size())
+        for (std::size_t x = 0; x < this->width; x++)
+        {
+            // Get the slices of both arrays.
+            const std::vector<std::vector<float>>& my_array_of_arrays = this->array_of_arrays_of_arrays[x];
+            const std::vector<std::vector<float>>& other_array_of_arrays = rhs.array_of_arrays_of_arrays[x];
+
+            for (std::size_t y = 0; y < this->height; y++)
             {
-                // First, get the slice.
-                std::vector<std::vector<float>>& my_array_of_arrays = this->array_of_arrays_of_arrays[this->next_x_to_populate];
-                std::vector<float>& my_array = my_array_of_arrays[this->next_y_to_populate];
+                const std::vector<float>& my_array = my_array_of_arrays[y];
+                const std::vector<float>& other_array = other_array_of_arrays[y];
 
-                // Then store the value.
-                my_array[this->next_z_to_populate] = rhs[rhs_i++];
-
-                if (++this->next_x_to_populate >= this->width)
+                for (std::size_t z = 0; z < this->depth; z++)
                 {
-                    this->next_x_to_populate = 0;
-
-                    if (++this->next_y_to_populate >= this->height)
+                    if (my_array[z] != other_array[z])
                     {
-                        this->next_y_to_populate = 0;
-
-                        if (++this->next_z_to_populate >= this->depth)
-                        {
-                            this->is_fully_populated = true;
-                        }
+                        // Arrays are not identical.
+                        return false;
                     }
                 }
             }
         }
 
-        bool Tensor3::operator==(const yli::linear_algebra::Tensor3& rhs) const
+        // Everything matches. Arrays are identical.
+        return true;
+    }
+
+    bool Tensor3::operator!=(const yli::linear_algebra::Tensor3& rhs) const
+    {
+        // compare if tensors are equal.
+        if (this->width != rhs.width ||
+                this->height != rhs.height ||
+                this->depth != rhs.depth)
         {
-            // compare if tensors are equal.
-            if (this->width != rhs.width ||
-                    this->height != rhs.height ||
-                    this->depth != rhs.depth)
-            {
-                // Tensors are not equal, if they have different sizes.
-                return false;
-            }
-
-            for (std::size_t x = 0; x < this->width; x++)
-            {
-                // Get the slices of both arrays.
-                const std::vector<std::vector<float>>& my_array_of_arrays = this->array_of_arrays_of_arrays[x];
-                const std::vector<std::vector<float>>& other_array_of_arrays = rhs.array_of_arrays_of_arrays[x];
-
-                for (std::size_t y = 0; y < this->height; y++)
-                {
-                    const std::vector<float>& my_array = my_array_of_arrays[y];
-                    const std::vector<float>& other_array = other_array_of_arrays[y];
-
-                    for (std::size_t z = 0; z < this->depth; z++)
-                    {
-                        if (my_array[z] != other_array[z])
-                        {
-                            // Arrays are not identical.
-                            return false;
-                        }
-                    }
-                }
-            }
-
-            // Everything matches. Arrays are identical.
+            // Tensors are not equal, if they have different sizes.
             return true;
         }
 
-        bool Tensor3::operator!=(const yli::linear_algebra::Tensor3& rhs) const
+        for (std::size_t x = 0; x < this->width; x++)
         {
-            // compare if tensors are equal.
-            if (this->width != rhs.width ||
-                    this->height != rhs.height ||
-                    this->depth != rhs.depth)
-            {
-                // Tensors are not equal, if they have different sizes.
-                return true;
-            }
+            // Get the slices of both arrays.
+            const std::vector<std::vector<float>>& my_array_of_arrays = this->array_of_arrays_of_arrays[x];
+            const std::vector<std::vector<float>>& other_array_of_arrays = rhs.array_of_arrays_of_arrays[x];
 
-            for (std::size_t x = 0; x < this->width; x++)
+            for (std::size_t y = 0; y < this->height; y++)
             {
-                // Get the slices of both arrays.
-                const std::vector<std::vector<float>>& my_array_of_arrays = this->array_of_arrays_of_arrays[x];
-                const std::vector<std::vector<float>>& other_array_of_arrays = rhs.array_of_arrays_of_arrays[x];
+                const std::vector<float>& my_array = my_array_of_arrays[y];
+                const std::vector<float>& other_array = other_array_of_arrays[y];
 
-                for (std::size_t y = 0; y < this->height; y++)
+                for (std::size_t z = 0; z < this->depth; z++)
                 {
-                    const std::vector<float>& my_array = my_array_of_arrays[y];
-                    const std::vector<float>& other_array = other_array_of_arrays[y];
-
-                    for (std::size_t z = 0; z < this->depth; z++)
+                    if (my_array[z] != other_array[z])
                     {
-                        if (my_array[z] != other_array[z])
-                        {
-                            // Arrays are not identical.
-                            return true;
-                        }
+                        // Arrays are not identical.
+                        return true;
                     }
                 }
             }
-
-            // Everything matches. Arrays are identical.
-            return false;
         }
+
+        // Everything matches. Arrays are identical.
+        return false;
     }
 }

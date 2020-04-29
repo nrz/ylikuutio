@@ -32,69 +32,66 @@
 #include <string>    // std::string
 #include <vector>    // std::vector
 
-namespace yli
+namespace yli::load
 {
-    namespace load
+    std::shared_ptr<std::vector<uint8_t>> load_image_file(
+            const std::string& filename,
+            std::size_t& image_width,
+            std::size_t& image_height,
+            std::size_t& image_size)
     {
-        std::shared_ptr<std::vector<uint8_t>> load_image_file(
-                const std::string& filename,
-                std::size_t& image_width,
-                std::size_t& image_height,
-                std::size_t& image_size)
+        std::cout << "Loading image file " << filename << " ...\n";
+
+        int x = 0;
+        int y = 0;
+        int channels_in_file = 0;
+        const int desired_channels = 3;
+
+        stbi_set_flip_vertically_on_load(true);
+        stbi_uc* stbi_image_data = stbi_load(&filename[0], &x, &y, &channels_in_file, desired_channels);
+
+        bool has_file_errors = false;
+
+        if (x < 0)
         {
-            std::cout << "Loading image file " << filename << " ...\n";
-
-            int x = 0;
-            int y = 0;
-            int channels_in_file = 0;
-            const int desired_channels = 3;
-
-            stbi_set_flip_vertically_on_load(true);
-            stbi_uc* stbi_image_data = stbi_load(&filename[0], &x, &y, &channels_in_file, desired_channels);
-
-            bool has_file_errors = false;
-
-            if (x < 0)
-            {
-                std::cerr << filename << "ERROR: `yli::load::load_image_file`: image width is negative!\n";
-                has_file_errors = true;
-            }
-
-            if (y < 0)
-            {
-                std::cerr << filename << "ERROR: `yli::load::load_image_file`: image height is negative!\n";
-                has_file_errors = true;
-            }
-
-            if (has_file_errors)
-            {
-                free(stbi_image_data);
-                return nullptr;
-            }
-
-            image_width = x;
-            image_height = y;
-            const std::size_t number_of_pixels = image_width * image_height;
-
-            if (number_of_pixels > std::numeric_limits<std::size_t>::max() / 4)
-            {
-                std::cerr << "ERROR: `yli::load::load_image_file`: file is too big, number of pixels: " << number_of_pixels << "\n";
-                free(stbi_image_data);
-                return nullptr;
-            }
-
-            image_size = static_cast<std::size_t>(desired_channels) * number_of_pixels;
-
-            // Create a buffer.
-            std::shared_ptr<std::vector<uint8_t>> image_data = std::make_shared<std::vector<uint8_t>>();
-            image_data->reserve(image_size);
-
-            std::cout << "Copying image data ...\n";
-            std::copy(stbi_image_data, stbi_image_data + image_size, image_data->begin());
-            std::cout << "Image data copied.\n";
-
-            free(stbi_image_data);
-            return image_data;
+            std::cerr << filename << "ERROR: `yli::load::load_image_file`: image width is negative!\n";
+            has_file_errors = true;
         }
+
+        if (y < 0)
+        {
+            std::cerr << filename << "ERROR: `yli::load::load_image_file`: image height is negative!\n";
+            has_file_errors = true;
+        }
+
+        if (has_file_errors)
+        {
+            free(stbi_image_data);
+            return nullptr;
+        }
+
+        image_width = x;
+        image_height = y;
+        const std::size_t number_of_pixels = image_width * image_height;
+
+        if (number_of_pixels > std::numeric_limits<std::size_t>::max() / 4)
+        {
+            std::cerr << "ERROR: `yli::load::load_image_file`: file is too big, number of pixels: " << number_of_pixels << "\n";
+            free(stbi_image_data);
+            return nullptr;
+        }
+
+        image_size = static_cast<std::size_t>(desired_channels) * number_of_pixels;
+
+        // Create a buffer.
+        std::shared_ptr<std::vector<uint8_t>> image_data = std::make_shared<std::vector<uint8_t>>();
+        image_data->reserve(image_size);
+
+        std::cout << "Copying image data ...\n";
+        std::copy(stbi_image_data, stbi_image_data + image_size, image_data->begin());
+        std::cout << "Image data copied.\n";
+
+        free(stbi_image_data);
+        return image_data;
     }
 }

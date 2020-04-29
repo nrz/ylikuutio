@@ -21,41 +21,38 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class ShapeshifterTransformation;
+
+    struct ShapeshifterSequenceStruct
     {
-        class ShapeshifterTransformation;
-
-        struct ShapeshifterSequenceStruct
+        ShapeshifterSequenceStruct()
+            : parent(nullptr),
+            transformation_speed(0.0f),
+            initial_offset(0),
+            is_repeating_transformation(true),
+            bounce_from_start(false),
+            bounce_from_end(false)
         {
-            ShapeshifterSequenceStruct()
-                : parent(nullptr),
-                transformation_speed(0.0f),
-                initial_offset(0),
-                is_repeating_transformation(true),
-                bounce_from_start(false),
-                bounce_from_end(false)
-            {
-                // constructor.
-            }
+            // constructor.
+        }
 
-            yli::ontology::ShapeshifterTransformation* parent; // Pointer to `ShapeshifterTransformation` object.
-            float transformation_speed;                        // Negative speed means inverse initial transition direction.
-            std::size_t initial_offset;                        // Index of the `ShapeshifterForm` from which to begin the transition.
+        yli::ontology::ShapeshifterTransformation* parent; // Pointer to `ShapeshifterTransformation` object.
+        float transformation_speed;                        // Negative speed means inverse initial transition direction.
+        std::size_t initial_offset;                        // Index of the `ShapeshifterForm` from which to begin the transition.
 
-            // Repeating transitions begin from the `initial_offset`
-            // endlessly in the same initial transition direction,
-            // after all potential bouncing has ended.
-            bool is_repeating_transformation;
+        // Repeating transitions begin from the `initial_offset`
+        // endlessly in the same initial transition direction,
+        // after all potential bouncing has ended.
+        bool is_repeating_transformation;
 
-            // If both `bounce_from_start` and `bounce_from_end` are `true`,
-            // then bouncing continues endlessly and the value of
-            // `is_repeating_transformation` has no effect.
-            bool bounce_from_start;
-            bool bounce_from_end;
-        };
-    }
+        // If both `bounce_from_start` and `bounce_from_end` are `true`,
+        // then bouncing continues endlessly and the value of
+        // `is_repeating_transformation` has no effect.
+        bool bounce_from_start;
+        bool bounce_from_end;
+    };
 }
 
 #endif

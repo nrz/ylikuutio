@@ -30,76 +30,73 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Entity;
+
+    void SymbiontSpecies::bind_Biont(yli::ontology::Biont* const biont)
     {
-        class Entity;
+        // `SymbiontSpecies` is not the ontological parent of `Biont`,
+        // as `Holobiont` is the ontological parent of `Biont`.
+        // The relationship between `SymbiontSpecies` and `Biont`
+        // is purely only for rendering.
+        //
+        // To avoid potential problems in the future, follow this order:
+        // 1. bind `Biont` to its `Holobiont` parent.
+        // 2. bind `Biont` to its corresponding `SymbiontSpecies`.
+        // 3. do stuff
+        // 4. unbind `Biont` from its `SymbiontSpecies`.
+        // 5. unbind `Biont` from its `Holobiont` parent.
+        //
+        // get `childID` from `SymbiontSpecies` and set pointer to `biont`.
+        yli::hierarchy::bind_child_to_parent<yli::ontology::Biont*>(
+                biont,
+                this->biont_pointer_vector,
+                this->free_biontID_queue,
+                this->number_of_bionts);
+    }
 
-        void SymbiontSpecies::bind_Biont(yli::ontology::Biont* const biont)
+    void SymbiontSpecies::unbind_Biont(const std::size_t childID)
+    {
+        yli::hierarchy::unbind_child_from_parent(
+                childID,
+                this->biont_pointer_vector,
+                this->free_biontID_queue,
+                this->number_of_bionts);
+    }
+
+    SymbiontSpecies::~SymbiontSpecies()
+    {
+        // destructor.
+        std::cout << "`SymbiontSpecies` with childID " << std::dec << this->childID << " will be destroyed.\n";
+
+        if (this->opengl_in_use)
         {
-            // `SymbiontSpecies` is not the ontological parent of `Biont`,
-            // as `Holobiont` is the ontological parent of `Biont`.
-            // The relationship between `SymbiontSpecies` and `Biont`
-            // is purely only for rendering.
-            //
-            // To avoid potential problems in the future, follow this order:
-            // 1. bind `Biont` to its `Holobiont` parent.
-            // 2. bind `Biont` to its corresponding `SymbiontSpecies`.
-            // 3. do stuff
-            // 4. unbind `Biont` from its `SymbiontSpecies`.
-            // 5. unbind `Biont` from its `Holobiont` parent.
-            //
-            // get `childID` from `SymbiontSpecies` and set pointer to `biont`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Biont*>(
-                    biont,
-                    this->biont_pointer_vector,
-                    this->free_biontID_queue,
-                    this->number_of_bionts);
+            glDeleteBuffers(1, &this->normalbuffer);
+            glDeleteBuffers(1, &this->elementbuffer);
         }
+    }
 
-        void SymbiontSpecies::unbind_Biont(const std::size_t childID)
+    void SymbiontSpecies::render()
+    {
+        if (this->opengl_in_use)
         {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->biont_pointer_vector,
-                    this->free_biontID_queue,
-                    this->number_of_bionts);
+            this->prerender();
+
+            // render this `SymbiontSpecies`.
+            yli::ontology::render_species_or_glyph<yli::ontology::SymbiontSpecies*>(this);
+
+            this->postrender();
         }
+    }
 
-        SymbiontSpecies::~SymbiontSpecies()
-        {
-            // destructor.
-            std::cout << "`SymbiontSpecies` with childID " << std::dec << this->childID << " will be destroyed.\n";
+    std::size_t SymbiontSpecies::get_indices_size() const
+    {
+        return this->indices.size();
+    }
 
-            if (this->opengl_in_use)
-            {
-                glDeleteBuffers(1, &this->normalbuffer);
-                glDeleteBuffers(1, &this->elementbuffer);
-            }
-        }
-
-        void SymbiontSpecies::render()
-        {
-            if (this->opengl_in_use)
-            {
-                this->prerender();
-
-                // render this `SymbiontSpecies`.
-                yli::ontology::render_species_or_glyph<yli::ontology::SymbiontSpecies*>(this);
-
-                this->postrender();
-            }
-        }
-
-        std::size_t SymbiontSpecies::get_indices_size() const
-        {
-            return this->indices.size();
-        }
-
-        GLint SymbiontSpecies::get_lightID() const
-        {
-            return this->lightID;
-        }
+    GLint SymbiontSpecies::get_lightID() const
+    {
+        return this->lightID;
     }
 }

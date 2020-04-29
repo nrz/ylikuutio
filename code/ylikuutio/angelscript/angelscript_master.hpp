@@ -36,35 +36,32 @@
 // In addition there should be global `asIScriptContext` for scripts
 // executed through the console, providing debugging functionality etc.
 
-namespace yli
+namespace yli::angelscript
 {
-    namespace angelscript
+    class AngelscriptMaster
     {
-        class AngelscriptMaster
-        {
-            public:
-                // constructor.
-                AngelscriptMaster();
+        public:
+            // constructor.
+            AngelscriptMaster();
 
-                AngelscriptMaster(const AngelscriptMaster&) = delete;            // Delete copy constructor.
-                AngelscriptMaster &operator=(const AngelscriptMaster&) = delete; // Delete copy assignment.
+            AngelscriptMaster(const AngelscriptMaster&) = delete;            // Delete copy constructor.
+            AngelscriptMaster &operator=(const AngelscriptMaster&) = delete; // Delete copy assignment.
 
-                // destructor.
-                ~AngelscriptMaster();
+            // destructor.
+            ~AngelscriptMaster();
 
-                std::string eval_string(const std::string& my_string);
+            std::string eval_string(const std::string& my_string);
 
-            private:
-                asIScriptEngine* angelscript_engine;
+        private:
+            asIScriptEngine* angelscript_engine;
 
-                std::string eval_output;
+            std::string eval_output;
 
-                float square(const float x);
-                float cube(const float x);
-                void print(const std::string& my_message);
-                void print(const float value);
-        };
-    }
+            float square(const float x);
+            float cube(const float x);
+            void print(const std::string& my_message);
+            void print(const float value);
+    };
 }
 
 #endif

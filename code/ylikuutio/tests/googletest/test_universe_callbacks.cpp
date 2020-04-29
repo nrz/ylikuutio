@@ -48,13 +48,10 @@
 // Tests for `yli::ontology::Universe` callbacks
 // that can be tested in headless mode.
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
-    {
-        class Entity;
-        class Console;
-    }
+    class Entity;
+    class Console;
 }
 
 // Public `Entity` bind callbacks.

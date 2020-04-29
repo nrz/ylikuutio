@@ -17,9 +17,6 @@
 
 #include "line_segment3D.hpp"
 
-namespace yli
+namespace yli::geometry
 {
-    namespace geometry
-    {
-    }
 }

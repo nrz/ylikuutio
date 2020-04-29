@@ -22,29 +22,26 @@
 #include <cstddef>  // std::size_t
 #include <string>   // std::string
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Scene;
+
+    struct ShaderStruct
     {
-        class Scene;
-
-        struct ShaderStruct
+        ShaderStruct()
+            : parent(nullptr),
+            is_gpgpu_shader(false),
+            opengl_in_use(true)
         {
-            ShaderStruct()
-                : parent(nullptr),
-                is_gpgpu_shader(false),
-                opengl_in_use(true)
-            {
-                // constructor.
-            }
+            // constructor.
+        }
 
-            std::string vertex_shader;    // filename of vertex shader.
-            std::string fragment_shader;  // filename of fragment shader.
-            yli::ontology::Scene* parent; // pointer to the `Scene`.
-            bool is_gpgpu_shader;         // TODO: GPGPU `Shader`s are not rendered on screen but their result textures can be used by `Material`s.
-            bool opengl_in_use;           // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
-        };
-    }
+        std::string vertex_shader;    // filename of vertex shader.
+        std::string fragment_shader;  // filename of fragment shader.
+        yli::ontology::Scene* parent; // pointer to the `Scene`.
+        bool is_gpgpu_shader;         // TODO: GPGPU `Shader`s are not rendered on screen but their result textures can be used by `Material`s.
+        bool opengl_in_use;           // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
+    };
 }
 
 #endif

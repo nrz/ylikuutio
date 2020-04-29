@@ -17,13 +17,10 @@
 
 #include "vertex_graph.hpp"
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    VertexGraph::~VertexGraph()
     {
-        VertexGraph::~VertexGraph()
-        {
-            // destructor.
-        }
+        // destructor.
     }
 }

@@ -31,55 +31,52 @@
 // make up the transition that may be e.g. a walk cycle or
 // a metamorphosis of some kind.
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Universe;
+
+    class ShapeshifterTransformation: public yli::ontology::Entity
     {
-        class Universe;
+        public:
+            // This method sets pointer to this `ShapeshifterTransformation` to `nullptr`,
+            // sets `parent` according to the input, and requests a new `childID` from the new `Material`.
+            void bind_to_new_parent(yli::ontology::Material* const new_parent);
+            void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-        class ShapeshifterTransformation: public yli::ontology::Entity
-        {
-            public:
-                // This method sets pointer to this `ShapeshifterTransformation` to `nullptr`,
-                // sets `parent` according to the input, and requests a new `childID` from the new `Material`.
-                void bind_to_new_parent(yli::ontology::Material* const new_parent);
-                void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
-
+            // constructor.
+            ShapeshifterTransformation(yli::ontology::Universe* const universe, const yli::ontology::SpeciesStruct& species_struct)
+                : Entity(universe),
+                parent_of_shapeshifter_forms(this),
+                parent_of_shapeshifter_sequences(this)
+            {
                 // constructor.
-                ShapeshifterTransformation(yli::ontology::Universe* const universe, const yli::ontology::SpeciesStruct& species_struct)
-                    : Entity(universe),
-                    parent_of_shapeshifter_forms(this),
-                    parent_of_shapeshifter_sequences(this)
-                {
-                    // constructor.
-                    this->parent = species_struct.material;
+                this->parent = species_struct.material;
 
-                    // get `childID` from `Material` and set pointer to this `Species`.
-                    this->bind_to_parent();
+                // get `childID` from `Material` and set pointer to this `Species`.
+                this->bind_to_parent();
 
-                    // `yli::ontology::Entity` member variables begin here.
-                    this->type_string = "yli::ontology::ShapeshifterTransformation*";
-                    this->can_be_erased = true;
-                }
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "yli::ontology::ShapeshifterTransformation*";
+                this->can_be_erased = true;
+            }
 
-                // destructor.
-                virtual ~ShapeshifterTransformation();
+            // destructor.
+            virtual ~ShapeshifterTransformation();
 
-                yli::ontology::Entity* get_parent() const override;
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
+            yli::ontology::Entity* get_parent() const override;
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
 
-                yli::ontology::ParentModule parent_of_shapeshifter_forms;
-                yli::ontology::ParentModule parent_of_shapeshifter_sequences;
+            yli::ontology::ParentModule parent_of_shapeshifter_forms;
+            yli::ontology::ParentModule parent_of_shapeshifter_sequences;
 
-            private:
-                void bind_to_parent();
+        private:
+            void bind_to_parent();
 
-                void render() override;
+            void render() override;
 
-                yli::ontology::Material* parent; // pointer to the `Material`.
-        };
-    }
+            yli::ontology::Material* parent; // pointer to the `Material`.
+    };
 }
 
 #endif

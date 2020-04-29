@@ -30,44 +30,41 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <string>   // std::string
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class VectorFont;
+    class Brain;
+
+    struct Text3DStruct
     {
-        class VectorFont;
-        class Brain;
-
-        struct Text3DStruct
+        Text3DStruct()
+            : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
+            cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
+            rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
+            translate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
+            text_string_char(nullptr),
+            parent(nullptr),
+            brain(nullptr),
+            rotate_angle(NAN),
+            horizontal_angle(0.0),
+            vertical_angle(0.0)
         {
-            Text3DStruct()
-                : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
-                cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
-                rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
-                translate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
-                text_string_char(nullptr),
-                parent(nullptr),
-                brain(nullptr),
-                rotate_angle(NAN),
-                horizontal_angle(0.0),
-                vertical_angle(0.0)
-            {
-                // constructor.
-            }
+            // constructor.
+        }
 
-            glm::vec3 original_scale_vector;   // original scale vector.
-            glm::vec3 cartesian_coordinates;   // coordinate vector.
-            glm::vec3 rotate_vector;           // rotate vector.
-            glm::vec3 translate_vector;        // translate vector.
-            yli::common::SphericalCoordinatesStruct spherical_coordinates;
-            std::string text_string;
-            const char* text_string_char;
-            yli::ontology::VectorFont* parent; // pointer to the `VectorFont` (parent).
-            yli::ontology::Brain* brain;       // pointer to the `Brain` (not a parent!).
-            float rotate_angle;                // rotate angle.
-            double horizontal_angle;           // horizontal angle in radians.
-            double vertical_angle;             // vertical angle in radians.
-        };
-    }
+        glm::vec3 original_scale_vector;   // original scale vector.
+        glm::vec3 cartesian_coordinates;   // coordinate vector.
+        glm::vec3 rotate_vector;           // rotate vector.
+        glm::vec3 translate_vector;        // translate vector.
+        yli::common::SphericalCoordinatesStruct spherical_coordinates;
+        std::string text_string;
+        const char* text_string_char;
+        yli::ontology::VectorFont* parent; // pointer to the `VectorFont` (parent).
+        yli::ontology::Brain* brain;       // pointer to the `Brain` (not a parent!).
+        float rotate_angle;                // rotate angle.
+        double horizontal_angle;           // horizontal angle in radians.
+        double vertical_angle;             // vertical angle in radians.
+    };
 }
 
 #endif

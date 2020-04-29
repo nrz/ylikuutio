@@ -36,135 +36,132 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    Holobiont::~Holobiont()
     {
-        Holobiont::~Holobiont()
+        // destructor.
+        std::cout << "`Holobiont` with childID " << std::dec << this->childID << " will be destroyed.\n";
+    }
+
+    void Holobiont::render()
+    {
+        // render this `Holobiont`.
+
+        if (this->should_be_rendered)
         {
-            // destructor.
-            std::cout << "`Holobiont` with childID " << std::dec << this->childID << " will be destroyed.\n";
+            this->prerender();
+
+            // render this `Holobiont` by calling `render()` function of each `Biont`.
+            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_bionts.child_pointer_vector);
+
+            this->postrender();
+        }
+    }
+
+    void Holobiont::create_Bionts()
+    {
+        // requirements:
+        // `this->symbiosis_parent` must not be `nullptr`.
+
+        yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->child.get_parent());
+
+        if (symbiosis == nullptr)
+        {
+            std::cerr << "ERROR: `Holobiont::create_Bionts`: `symbiosis` is `nullptr`!\n";
+            return;
         }
 
-        void Holobiont::render()
+        std::cout << "Creating bionts for Holobiont located at 0x" << std::hex << (uint64_t) this << std::dec << " ...\n";
+
+        // Create `Biont` entities so that they bind to this `Holobiont`.
+        const std::size_t correct_number_of_bionts = symbiosis->get_number_of_ofbx_meshes();
+        std::cout << "Number of bionts to be created: " << correct_number_of_bionts << "\n";
+
+        for (std::size_t biontID = 0; biontID < correct_number_of_bionts; biontID++)
         {
-            // render this `Holobiont`.
-
-            if (this->should_be_rendered)
+            if (!symbiosis->has_texture(biontID))
             {
-                this->prerender();
+                std::cerr << "ERROR: `Holobiont::create_Bionts`: There is no texture for biont with biontID " << biontID << "\n";
+                continue;
+            }
 
-                // render this `Holobiont` by calling `render()` function of each `Biont`.
-                yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_bionts.child_pointer_vector);
+            yli::ontology::BiontStruct biont_struct;
+            biont_struct.biontID               = biontID;
+            biont_struct.holobiont_parent      = this;
+            biont_struct.symbiont_species      = symbiosis->get_symbiont_species(biontID);
+            biont_struct.original_scale_vector = this->original_scale_vector;
+            biont_struct.rotate_angle          = this->rotate_angle;
+            biont_struct.rotate_vector         = this->rotate_vector;
+            biont_struct.initial_rotate_angle  = this->initial_rotate_angle;
+            biont_struct.initial_rotate_vector = this->initial_rotate_vector;
+            biont_struct.cartesian_coordinates = this->cartesian_coordinates;
+            biont_struct.translate_vector      = this->translate_vector;
 
-                this->postrender();
+            std::cout << "Creating biont with biontID " << biontID << " ...\n";
+
+            new yli::ontology::Biont(this->universe, biont_struct, &this->parent_of_bionts);
+        }
+    }
+
+    void Holobiont::update_x(float x)
+    {
+        this->cartesian_coordinates.x = x;
+        this->model_matrix[3][0] = x;
+
+        for (yli::ontology::Entity* biont_entity : this->parent_of_bionts.child_pointer_vector)
+        {
+            yli::ontology::Biont* biont = static_cast<yli::ontology::Biont*>(biont_entity);
+
+            if (biont != nullptr)
+            {
+                biont->cartesian_coordinates.x = x;
+                biont->model_matrix[3][0] = x;
             }
         }
+    }
 
-        void Holobiont::create_Bionts()
+    void Holobiont::update_y(float y)
+    {
+        this->cartesian_coordinates.y = y;
+        this->model_matrix[3][1] = y;
+
+        for (yli::ontology::Entity* biont_entity : this->parent_of_bionts.child_pointer_vector)
         {
-            // requirements:
-            // `this->symbiosis_parent` must not be `nullptr`.
+            yli::ontology::Biont* biont = static_cast<yli::ontology::Biont*>(biont_entity);
 
-            yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->child.get_parent());
-
-            if (symbiosis == nullptr)
+            if (biont != nullptr)
             {
-                std::cerr << "ERROR: `Holobiont::create_Bionts`: `symbiosis` is `nullptr`!\n";
-                return;
-            }
-
-            std::cout << "Creating bionts for Holobiont located at 0x" << std::hex << (uint64_t) this << std::dec << " ...\n";
-
-            // Create `Biont` entities so that they bind to this `Holobiont`.
-            const std::size_t correct_number_of_bionts = symbiosis->get_number_of_ofbx_meshes();
-            std::cout << "Number of bionts to be created: " << correct_number_of_bionts << "\n";
-
-            for (std::size_t biontID = 0; biontID < correct_number_of_bionts; biontID++)
-            {
-                if (!symbiosis->has_texture(biontID))
-                {
-                    std::cerr << "ERROR: `Holobiont::create_Bionts`: There is no texture for biont with biontID " << biontID << "\n";
-                    continue;
-                }
-
-                yli::ontology::BiontStruct biont_struct;
-                biont_struct.biontID               = biontID;
-                biont_struct.holobiont_parent      = this;
-                biont_struct.symbiont_species      = symbiosis->get_symbiont_species(biontID);
-                biont_struct.original_scale_vector = this->original_scale_vector;
-                biont_struct.rotate_angle          = this->rotate_angle;
-                biont_struct.rotate_vector         = this->rotate_vector;
-                biont_struct.initial_rotate_angle  = this->initial_rotate_angle;
-                biont_struct.initial_rotate_vector = this->initial_rotate_vector;
-                biont_struct.cartesian_coordinates = this->cartesian_coordinates;
-                biont_struct.translate_vector      = this->translate_vector;
-
-                std::cout << "Creating biont with biontID " << biontID << " ...\n";
-
-                new yli::ontology::Biont(this->universe, biont_struct, &this->parent_of_bionts);
+                biont->cartesian_coordinates.y = y;
+                biont->model_matrix[3][1] = y;
             }
         }
+    }
 
-        void Holobiont::update_x(float x)
+    void Holobiont::update_z(float z)
+    {
+        this->cartesian_coordinates.z = z;
+        this->model_matrix[3][2] = z;
+
+        for (yli::ontology::Entity* biont_entity : this->parent_of_bionts.child_pointer_vector)
         {
-            this->cartesian_coordinates.x = x;
-            this->model_matrix[3][0] = x;
+            yli::ontology::Biont* biont = static_cast<yli::ontology::Biont*>(biont_entity);
 
-            for (yli::ontology::Entity* biont_entity : this->parent_of_bionts.child_pointer_vector)
+            if (biont != nullptr)
             {
-                yli::ontology::Biont* biont = static_cast<yli::ontology::Biont*>(biont_entity);
-
-                if (biont != nullptr)
-                {
-                    biont->cartesian_coordinates.x = x;
-                    biont->model_matrix[3][0] = x;
-                }
+                biont->cartesian_coordinates.z = z;
+                biont->model_matrix[3][2] = z;
             }
         }
+    }
 
-        void Holobiont::update_y(float y)
-        {
-            this->cartesian_coordinates.y = y;
-            this->model_matrix[3][1] = y;
+    std::size_t Holobiont::get_number_of_children() const
+    {
+        return this->parent_of_bionts.get_number_of_children();
+    }
 
-            for (yli::ontology::Entity* biont_entity : this->parent_of_bionts.child_pointer_vector)
-            {
-                yli::ontology::Biont* biont = static_cast<yli::ontology::Biont*>(biont_entity);
-
-                if (biont != nullptr)
-                {
-                    biont->cartesian_coordinates.y = y;
-                    biont->model_matrix[3][1] = y;
-                }
-            }
-        }
-
-        void Holobiont::update_z(float z)
-        {
-            this->cartesian_coordinates.z = z;
-            this->model_matrix[3][2] = z;
-
-            for (yli::ontology::Entity* biont_entity : this->parent_of_bionts.child_pointer_vector)
-            {
-                yli::ontology::Biont* biont = static_cast<yli::ontology::Biont*>(biont_entity);
-
-                if (biont != nullptr)
-                {
-                    biont->cartesian_coordinates.z = z;
-                    biont->model_matrix[3][2] = z;
-                }
-            }
-        }
-
-        std::size_t Holobiont::get_number_of_children() const
-        {
-            return this->parent_of_bionts.get_number_of_children();
-        }
-
-        std::size_t Holobiont::get_number_of_descendants() const
-        {
-            return yli::ontology::get_number_of_descendants(this->parent_of_bionts.child_pointer_vector);
-        }
+    std::size_t Holobiont::get_number_of_descendants() const
+    {
+        return yli::ontology::get_number_of_descendants(this->parent_of_bionts.child_pointer_vector);
     }
 }

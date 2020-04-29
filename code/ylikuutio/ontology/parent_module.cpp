@@ -23,48 +23,45 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    void ParentModule::bind_child(yli::ontology::Entity* const child)
     {
-        void ParentModule::bind_child(yli::ontology::Entity* const child)
-        {
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Entity*>(
-                    child,
-                    this->child_pointer_vector,
-                    this->free_childID_queue,
-                    this->number_of_children);
-        }
+        yli::hierarchy::bind_child_to_parent<yli::ontology::Entity*>(
+                child,
+                this->child_pointer_vector,
+                this->free_childID_queue,
+                this->number_of_children);
+    }
 
-        void ParentModule::unbind_child(std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent<yli::ontology::Entity*>(
-                    childID,
-                    this->child_pointer_vector,
-                    this->free_childID_queue,
-                    this->number_of_children);
-        }
+    void ParentModule::unbind_child(std::size_t childID)
+    {
+        yli::hierarchy::unbind_child_from_parent<yli::ontology::Entity*>(
+                childID,
+                this->child_pointer_vector,
+                this->free_childID_queue,
+                this->number_of_children);
+    }
 
-        ParentModule::~ParentModule()
-        {
-            // destructor.
+    ParentModule::~ParentModule()
+    {
+        // destructor.
 
-            yli::hierarchy::delete_children<yli::ontology::Entity*>(this->child_pointer_vector, this->number_of_children);
-        }
+        yli::hierarchy::delete_children<yli::ontology::Entity*>(this->child_pointer_vector, this->number_of_children);
+    }
 
-        yli::ontology::Entity* ParentModule::get_entity() const
-        {
-            return this->entity;
-        }
+    yli::ontology::Entity* ParentModule::get_entity() const
+    {
+        return this->entity;
+    }
 
-        std::size_t ParentModule::get_number_of_children() const
-        {
-            return this->number_of_children;
-        }
+    std::size_t ParentModule::get_number_of_children() const
+    {
+        return this->number_of_children;
+    }
 
-        std::size_t ParentModule::get_number_of_descendants() const
-        {
-            return yli::ontology::get_number_of_descendants(this->child_pointer_vector);
-        }
+    std::size_t ParentModule::get_number_of_descendants() const
+    {
+        return yli::ontology::get_number_of_descendants(this->child_pointer_vector);
     }
 }

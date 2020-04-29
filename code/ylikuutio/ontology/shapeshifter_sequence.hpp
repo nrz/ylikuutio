@@ -32,68 +32,65 @@
 // that make up the `ShapeshifterTransformation` are used in rendering
 // the `Object`s that are children of the `ShapeshifterSequence`.
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Universe;
+
+    class ShapeshifterSequence: public yli::ontology::Entity
     {
-        class Universe;
-
-        class ShapeshifterSequence: public yli::ontology::Entity
-        {
-            public:
+        public:
+            // constructor.
+            ShapeshifterSequence(yli::ontology::Universe* const universe, const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct)
+                : Entity(universe),
+                parent_of_objects(this)
+            {
                 // constructor.
-                ShapeshifterSequence(yli::ontology::Universe* const universe, const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct)
-                    : Entity(universe),
-                    parent_of_objects(this)
-                {
-                    // constructor.
-                    this->parent = shapeshifter_sequence_struct.parent;
+                this->parent = shapeshifter_sequence_struct.parent;
 
-                    this->transformation_speed        = shapeshifter_sequence_struct.transformation_speed;
-                    this->initial_offset              = shapeshifter_sequence_struct.initial_offset;
-                    this->is_repeating_transformation = shapeshifter_sequence_struct.is_repeating_transformation;
-                    this->bounce_from_start           = shapeshifter_sequence_struct.bounce_from_start;
-                    this->bounce_from_end             = shapeshifter_sequence_struct.bounce_from_end;
+                this->transformation_speed        = shapeshifter_sequence_struct.transformation_speed;
+                this->initial_offset              = shapeshifter_sequence_struct.initial_offset;
+                this->is_repeating_transformation = shapeshifter_sequence_struct.is_repeating_transformation;
+                this->bounce_from_start           = shapeshifter_sequence_struct.bounce_from_start;
+                this->bounce_from_end             = shapeshifter_sequence_struct.bounce_from_end;
 
-                    // get `childID` from `ShapeshifterTransformation` and set pointer to this `ShapeshifterSequence`.
-                    this->bind_to_parent();
+                // get `childID` from `ShapeshifterTransformation` and set pointer to this `ShapeshifterSequence`.
+                this->bind_to_parent();
 
-                    // `yli::ontology::Entity` member variables begin here.
-                    this->type_string = "yli::ontology::ShapeshifterSequence*";
-                    this->can_be_erased = true;
-                }
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "yli::ontology::ShapeshifterSequence*";
+                this->can_be_erased = true;
+            }
 
-                // destructor.
-                virtual ~ShapeshifterSequence();
+            // destructor.
+            virtual ~ShapeshifterSequence();
 
-                yli::ontology::Entity* get_parent() const override;
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
+            yli::ontology::Entity* get_parent() const override;
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
 
-                yli::ontology::ParentModule parent_of_objects;
+            yli::ontology::ParentModule parent_of_objects;
 
-            private:
-                void bind_to_parent();
+        private:
+            void bind_to_parent();
 
-                void render() override;
+            void render() override;
 
-                yli::ontology::ShapeshifterTransformation* parent; // Pointer to `ShapeshifterTransformation` object.
+            yli::ontology::ShapeshifterTransformation* parent; // Pointer to `ShapeshifterTransformation` object.
 
-                float transformation_speed;                        // Negative speed means inverse initial transition direction.
-                std::size_t initial_offset;                        // Index of the `ShapeshifterForm` from which to begin the transition.
+            float transformation_speed;                        // Negative speed means inverse initial transition direction.
+            std::size_t initial_offset;                        // Index of the `ShapeshifterForm` from which to begin the transition.
 
-                // Repeating transitions begin from the `initial_offset`
-                // endlessly in the same initial transition direction,
-                // after all potential bouncing has ended.
-                bool is_repeating_transformation;
+            // Repeating transitions begin from the `initial_offset`
+            // endlessly in the same initial transition direction,
+            // after all potential bouncing has ended.
+            bool is_repeating_transformation;
 
-                // If both `bounce_from_start` and `bounce_from_end` are `true`,
-                // then bouncing continues endlessly and the value of
-                // `is_repeating_transformation` has no effect.
-                bool bounce_from_start;
-                bool bounce_from_end;
-        };
-    }
+            // If both `bounce_from_start` and `bounce_from_end` are `true`,
+            // then bouncing continues endlessly and the value of
+            // `is_repeating_transformation` has no effect.
+            bool bounce_from_start;
+            bool bounce_from_end;
+    };
 }
 
 #endif

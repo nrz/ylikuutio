@@ -30,48 +30,45 @@
 // Include standard headers
 #include <cmath> // NAN, std::isnan, std::pow
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Brain;
+
+    struct MovableStruct
     {
-        class Brain;
-
-        struct MovableStruct
+        MovableStruct()
+            : input_method(yli::input::InputMethod::AI),
+            brain(nullptr),
+            cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
+            spherical_coordinates(NAN, NAN, NAN),
+            horizontal_angle(0.0),
+            vertical_angle(0.0)
         {
-            MovableStruct()
-                : input_method(yli::input::InputMethod::AI),
-                brain(nullptr),
-                cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
-                spherical_coordinates(NAN, NAN, NAN),
-                horizontal_angle(0.0),
-                vertical_angle(0.0)
-            {
-                // constructor.
-            }
+            // constructor.
+        }
 
-            MovableStruct(
-                    yli::ontology::Brain* const brain,
-                    const glm::vec3& cartesian_coordinates,
-                    yli::common::SphericalCoordinatesStruct spherical_coordinates,
-                    const double horizontal_angle,
-                    const double vertical_angle)
-                : input_method(yli::input::InputMethod::AI),
-                brain(brain),
-                cartesian_coordinates(cartesian_coordinates),
-                spherical_coordinates(spherical_coordinates),
-                horizontal_angle(horizontal_angle),
-                vertical_angle(vertical_angle)
-            {
-            }
+        MovableStruct(
+                yli::ontology::Brain* const brain,
+                const glm::vec3& cartesian_coordinates,
+                yli::common::SphericalCoordinatesStruct spherical_coordinates,
+                const double horizontal_angle,
+                const double vertical_angle)
+            : input_method(yli::input::InputMethod::AI),
+            brain(brain),
+            cartesian_coordinates(cartesian_coordinates),
+            spherical_coordinates(spherical_coordinates),
+            horizontal_angle(horizontal_angle),
+            vertical_angle(vertical_angle)
+        {
+        }
 
-            yli::input::InputMethod input_method;
-            yli::ontology::Brain* brain;     // brain.
-            glm::vec3 cartesian_coordinates; // coordinate vector.
-            yli::common::SphericalCoordinatesStruct spherical_coordinates;
-            double horizontal_angle;
-            double vertical_angle;
-        };
-    }
+        yli::input::InputMethod input_method;
+        yli::ontology::Brain* brain;     // brain.
+        glm::vec3 cartesian_coordinates; // coordinate vector.
+        yli::common::SphericalCoordinatesStruct spherical_coordinates;
+        double horizontal_angle;
+        double vertical_angle;
+    };
 }
 
 #endif

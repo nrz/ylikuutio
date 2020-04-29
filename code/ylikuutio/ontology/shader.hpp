@@ -48,120 +48,117 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Scene;
+    class Species;
+    class ShaderCompare;
+
+    class Shader: public yli::ontology::Entity
     {
-        class Scene;
-        class Species;
-        class ShaderCompare;
+        public:
+            // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
+            void bind_to_new_parent(yli::ontology::Scene* const new_parent);
+            void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-        class Shader: public yli::ontology::Entity
-        {
-            public:
-                // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
-                void bind_to_new_parent(yli::ontology::Scene* const new_parent);
-                void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
+            Shader(yli::ontology::Universe* const universe, const yli::ontology::ShaderStruct& shader_struct)
+                : Entity(universe),
+                parent_of_compute_tasks(this),
+                parent_of_materials(this),
+                parent_of_symbioses(this)
+            {
+                // constructor.
 
-                Shader(yli::ontology::Universe* const universe, const yli::ontology::ShaderStruct& shader_struct)
-                    : Entity(universe),
-                    parent_of_compute_tasks(this),
-                    parent_of_materials(this),
-                    parent_of_symbioses(this)
+                this->vertex_shader        = shader_struct.vertex_shader;
+                this->fragment_shader      = shader_struct.fragment_shader;
+
+                this->char_vertex_shader   = this->vertex_shader.c_str();
+                this->char_fragment_shader = this->fragment_shader.c_str();
+                this->parent               = shader_struct.parent;
+
+                this->programID            = 0; // dummy value.
+                this->matrixID             = 0; // dummy value.
+                this->view_matrixID        = 0; // dummy value.
+                this->model_matrixID       = 0; // dummy value.
+
+                // Each GPGPU `Shader` owns 0 or more output `ComputeTask`s.
+                // Each `Material` rendered after a given GPGPU `Shader`
+                // may also use the output `ComputeTask`s offered by
+                // a given GPGPU `Shader` as its texture.
+                this->is_gpgpu_shader         = shader_struct.is_gpgpu_shader;
+
+                this->opengl_in_use           = shader_struct.opengl_in_use;
+
+                // Get `childID` from `Scene` and set pointer to this `Shader`.
+                this->bind_to_parent();
+
+                if (this->universe != nullptr && !this->universe->get_is_headless() && this->opengl_in_use)
                 {
-                    // constructor.
+                    // Create and compile our GLSL program from the shaders.
+                    this->programID = yli::load::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
 
-                    this->vertex_shader        = shader_struct.vertex_shader;
-                    this->fragment_shader      = shader_struct.fragment_shader;
-
-                    this->char_vertex_shader   = this->vertex_shader.c_str();
-                    this->char_fragment_shader = this->fragment_shader.c_str();
-                    this->parent               = shader_struct.parent;
-
-                    this->programID            = 0; // dummy value.
-                    this->matrixID             = 0; // dummy value.
-                    this->view_matrixID        = 0; // dummy value.
-                    this->model_matrixID       = 0; // dummy value.
-
-                    // Each GPGPU `Shader` owns 0 or more output `ComputeTask`s.
-                    // Each `Material` rendered after a given GPGPU `Shader`
-                    // may also use the output `ComputeTask`s offered by
-                    // a given GPGPU `Shader` as its texture.
-                    this->is_gpgpu_shader         = shader_struct.is_gpgpu_shader;
-
-                    this->opengl_in_use           = shader_struct.opengl_in_use;
-
-                    // Get `childID` from `Scene` and set pointer to this `Shader`.
-                    this->bind_to_parent();
-
-                    if (this->universe != nullptr && !this->universe->get_is_headless() && this->opengl_in_use)
-                    {
-                        // Create and compile our GLSL program from the shaders.
-                        this->programID = yli::load::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
-
-                        // Get a handle for our "MVP" uniform.
-                        this->matrixID = glGetUniformLocation(this->programID, "MVP");
-                        this->view_matrixID = glGetUniformLocation(this->programID, "V");
-                        this->model_matrixID = glGetUniformLocation(this->programID, "M");
-                    }
-
-                    // `yli::ontology::Entity` member variables begin here.
-                    this->type_string = "yli::ontology::Shader*";
-                    this->can_be_erased = true;
+                    // Get a handle for our "MVP" uniform.
+                    this->matrixID = glGetUniformLocation(this->programID, "MVP");
+                    this->view_matrixID = glGetUniformLocation(this->programID, "V");
+                    this->model_matrixID = glGetUniformLocation(this->programID, "M");
                 }
 
-                Shader(const Shader&) = delete;            // Delete copy constructor.
-                Shader &operator=(const Shader&) = delete; // Delete copy assignment.
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "yli::ontology::Shader*";
+                this->can_be_erased = true;
+            }
 
-                // destructor.
-                virtual ~Shader();
+            Shader(const Shader&) = delete;            // Delete copy constructor.
+            Shader &operator=(const Shader&) = delete; // Delete copy assignment.
 
-                yli::ontology::Entity* get_parent() const override;
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
+            // destructor.
+            virtual ~Shader();
 
-                // Set terrain `Species` pointers in `Scene` and `Universe` so that they point to the chosen terrain `Species`.
-                // Currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
-                void set_terrain_species(yli::ontology::Species* terrain_species);
+            yli::ontology::Entity* get_parent() const override;
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
 
-                uint32_t get_programID() const;
-                uint32_t get_matrixID() const;
-                uint32_t get_model_matrixID() const;
+            // Set terrain `Species` pointers in `Scene` and `Universe` so that they point to the chosen terrain `Species`.
+            // Currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
+            void set_terrain_species(yli::ontology::Species* terrain_species);
 
-                friend yli::ontology::ShaderCompare;
-                template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
-                template<class T1>
-                    friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+            uint32_t get_programID() const;
+            uint32_t get_matrixID() const;
+            uint32_t get_model_matrixID() const;
 
-                yli::ontology::ParentModule parent_of_compute_tasks;
-                yli::ontology::ParentModule parent_of_materials;
-                yli::ontology::ParentModule parent_of_symbioses;
+            friend yli::ontology::ShaderCompare;
+            template<class T1>
+                friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
+            template<class T1>
+                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
-            private:
-                void bind_to_parent();
+            yli::ontology::ParentModule parent_of_compute_tasks;
+            yli::ontology::ParentModule parent_of_materials;
+            yli::ontology::ParentModule parent_of_symbioses;
 
-                // This method renders all materials using this `Shader`.
-                void render() override;
+        private:
+            void bind_to_parent();
 
-                yli::ontology::Scene* parent;         // Pointer to the `Scene`.
+            // This method renders all materials using this `Shader`.
+            void render() override;
 
-                uint32_t programID;                   // This `Shader`'s `programID`, returned by `load_shaders`.
+            yli::ontology::Scene* parent;         // Pointer to the `Scene`.
 
-                uint32_t matrixID;
-                uint32_t view_matrixID;
-                uint32_t model_matrixID;
+            uint32_t programID;                   // This `Shader`'s `programID`, returned by `load_shaders`.
 
-                std::string vertex_shader;            // Filename of vertex shader.
-                std::string fragment_shader;          // Filename of fragment shader.
+            uint32_t matrixID;
+            uint32_t view_matrixID;
+            uint32_t model_matrixID;
 
-                const char* char_vertex_shader;
-                const char* char_fragment_shader;
+            std::string vertex_shader;            // Filename of vertex shader.
+            std::string fragment_shader;          // Filename of fragment shader.
 
-                bool is_gpgpu_shader;                 // TODO: GPGPU `Shader`s are not rendered on screen but their result `ComputeTask`s can be used by `Material`s.
-                bool opengl_in_use;                   // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
-        };
-    }
+            const char* char_vertex_shader;
+            const char* char_fragment_shader;
+
+            bool is_gpgpu_shader;                 // TODO: GPGPU `Shader`s are not rendered on screen but their result `ComputeTask`s can be used by `Material`s.
+            bool opengl_in_use;                   // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
+    };
 }
 
 #endif

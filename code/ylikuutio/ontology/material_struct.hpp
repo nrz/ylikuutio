@@ -27,32 +27,29 @@ namespace ofbx
     struct Texture;
 }
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
+    class Shader;
+    class Symbiosis;
+
+    struct MaterialStruct
     {
-        class Shader;
-        class Symbiosis;
-
-        struct MaterialStruct
+        MaterialStruct()
+            : shader(nullptr),
+            symbiosis(nullptr),
+            ofbx_texture(nullptr),
+            is_symbiont_material(false)
         {
-            MaterialStruct()
-                : shader(nullptr),
-                symbiosis(nullptr),
-                ofbx_texture(nullptr),
-                is_symbiont_material(false)
-            {
-                // constructor.
-            }
+            // constructor.
+        }
 
-            std::string texture_file_format;     // Type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`/`"png"`/`"PNG"`.
-            std::string texture_filename;        // Filename of the model file.
-            yli::ontology::Shader* shader;       // Pointer to `Shader`.
-            yli::ontology::Symbiosis* symbiosis; // Pointer to `Symbiosis`.
-            const ofbx::Texture* ofbx_texture;   // For `SymbiontMaterial`s.
-            bool is_symbiont_material;
-        };
-    }
+        std::string texture_file_format;     // Type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`/`"png"`/`"PNG"`.
+        std::string texture_filename;        // Filename of the model file.
+        yli::ontology::Shader* shader;       // Pointer to `Shader`.
+        yli::ontology::Symbiosis* symbiosis; // Pointer to `Symbiosis`.
+        const ofbx::Texture* ofbx_texture;   // For `SymbiontMaterial`s.
+        bool is_symbiont_material;
+    };
 }
 
 #endif
