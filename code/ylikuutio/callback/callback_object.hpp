@@ -46,7 +46,7 @@ namespace yli::callback
             // destructor.
             virtual ~CallbackObject();
 
-            yli::callback::CallbackParameter* create_CallbackParameter(
+            yli::callback::CallbackParameter* create_callback_parameter(
                     const std::string& name,
                     std::shared_ptr<yli::common::AnyValue> any_value,
                     const bool is_reference);

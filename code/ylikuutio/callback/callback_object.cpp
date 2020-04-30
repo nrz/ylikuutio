@@ -56,7 +56,7 @@ namespace yli::callback
                 this->number_of_callback_parameters);
     }
 
-    yli::callback::CallbackParameter* CallbackObject::create_CallbackParameter(
+    yli::callback::CallbackParameter* CallbackObject::create_callback_parameter(
             const std::string& name,
             std::shared_ptr<yli::common::AnyValue> any_value,
             const bool is_reference)

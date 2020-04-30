@@ -90,49 +90,49 @@ namespace ajokki
 
         // Create the `CallbackEngine`s for the `Brain`s.
         std::shared_ptr<yli::callback::CallbackEngine> rest_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        rest_callback_engine->create_CallbackObject(&yli::snippets::rest);
+        rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
         std::shared_ptr<yli::callback::CallbackEngine> go_east_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        go_east_callback_engine->create_CallbackObject(&yli::snippets::go_east);
+        go_east_callback_engine->create_callback_object(&yli::snippets::go_east);
 
         std::shared_ptr<yli::callback::CallbackEngine> go_west_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        go_west_callback_engine->create_CallbackObject(&yli::snippets::go_west);
+        go_west_callback_engine->create_callback_object(&yli::snippets::go_west);
 
         std::shared_ptr<yli::callback::CallbackEngine> go_north_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        go_north_callback_engine->create_CallbackObject(&yli::snippets::go_north);
+        go_north_callback_engine->create_callback_object(&yli::snippets::go_north);
 
         std::shared_ptr<yli::callback::CallbackEngine> go_south_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        go_south_callback_engine->create_CallbackObject(&yli::snippets::go_south);
+        go_south_callback_engine->create_callback_object(&yli::snippets::go_south);
 
         std::shared_ptr<yli::callback::CallbackEngine> orient_to_east_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        orient_to_east_callback_engine->create_CallbackObject(&yli::snippets::orient_to_east);
+        orient_to_east_callback_engine->create_callback_object(&yli::snippets::orient_to_east);
 
         std::shared_ptr<yli::callback::CallbackEngine> orient_to_west_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        orient_to_west_callback_engine->create_CallbackObject(&yli::snippets::orient_to_west);
+        orient_to_west_callback_engine->create_callback_object(&yli::snippets::orient_to_west);
 
         std::shared_ptr<yli::callback::CallbackEngine> orient_to_north_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        orient_to_north_callback_engine->create_CallbackObject(&yli::snippets::orient_to_north);
+        orient_to_north_callback_engine->create_callback_object(&yli::snippets::orient_to_north);
 
         std::shared_ptr<yli::callback::CallbackEngine> orient_to_south_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        orient_to_south_callback_engine->create_CallbackObject(&yli::snippets::orient_to_south);
+        orient_to_south_callback_engine->create_callback_object(&yli::snippets::orient_to_south);
 
         std::shared_ptr<yli::callback::CallbackEngine> orient_and_go_east_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        orient_and_go_east_callback_engine->create_CallbackObject(&yli::snippets::orient_and_go_east);
+        orient_and_go_east_callback_engine->create_callback_object(&yli::snippets::orient_and_go_east);
 
         std::shared_ptr<yli::callback::CallbackEngine> orient_and_go_west_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        orient_and_go_west_callback_engine->create_CallbackObject(&yli::snippets::orient_and_go_west);
+        orient_and_go_west_callback_engine->create_callback_object(&yli::snippets::orient_and_go_west);
 
         std::shared_ptr<yli::callback::CallbackEngine> orient_and_go_north_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        orient_and_go_north_callback_engine->create_CallbackObject(&yli::snippets::orient_and_go_north);
+        orient_and_go_north_callback_engine->create_callback_object(&yli::snippets::orient_and_go_north);
 
         std::shared_ptr<yli::callback::CallbackEngine> orient_and_go_south_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        orient_and_go_south_callback_engine->create_CallbackObject(&yli::snippets::orient_and_go_south);
+        orient_and_go_south_callback_engine->create_callback_object(&yli::snippets::orient_and_go_south);
 
         std::shared_ptr<yli::callback::CallbackEngine> rotate_clockwise_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        rotate_clockwise_callback_engine->create_CallbackObject(&yli::snippets::rotate_clockwise);
+        rotate_clockwise_callback_engine->create_callback_object(&yli::snippets::rotate_clockwise);
 
         std::shared_ptr<yli::callback::CallbackEngine> rotate_counterclockwise_callback_engine = std::make_shared<yli::callback::CallbackEngine>();
-        rotate_counterclockwise_callback_engine->create_CallbackObject(&yli::snippets::rotate_counterclockwise);
+        rotate_counterclockwise_callback_engine->create_callback_object(&yli::snippets::rotate_counterclockwise);
 
         // Create the `Brain`s.
 

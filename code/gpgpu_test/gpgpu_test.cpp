@@ -84,7 +84,7 @@ int main(const int argc, const char* const argv[]) try
 
     std::cout << "Creating yli::callback::CallbackEngine cleanup_callback_engine ...\n";
     yli::callback::CallbackEngine cleanup_callback_engine = yli::callback::CallbackEngine();
-    cleanup_callback_engine.create_CallbackObject(nullptr);
+    cleanup_callback_engine.create_callback_object(nullptr);
 
     if (my_universe->get_window() == nullptr)
     {

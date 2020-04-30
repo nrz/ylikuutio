@@ -34,7 +34,7 @@ namespace yli::console
             // destructor.
             ~ConsoleCallbackEngine();
 
-            yli::console::ConsoleCallbackObject* create_ConsoleCallbackObject(const InputParametersToAnyValueCallbackWithConsole callback, yli::ontology::Console* console_pointer);
+            yli::console::ConsoleCallbackObject* create_console_callback_object(const InputParametersToAnyValueCallbackWithConsole callback, yli::ontology::Console* console_pointer);
     };
 }
 

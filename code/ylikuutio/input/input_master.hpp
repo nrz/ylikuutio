@@ -49,7 +49,7 @@ namespace yli::input
             // destructor.
             ~InputMaster();
 
-            yli::input::InputMode* create_InputMode();
+            yli::input::InputMode* create_input_mode();
 
             void set_active_input_mode(yli::input::InputMode* const input_mode);
             yli::input::InputMode* get_active_input_mode() const;

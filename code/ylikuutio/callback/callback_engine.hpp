@@ -74,8 +74,8 @@ namespace yli::callback
             // destructor.
             ~CallbackEngine();
 
-            yli::callback::CallbackObject* create_CallbackObject();
-            yli::callback::CallbackObject* create_CallbackObject(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
+            yli::callback::CallbackObject* create_callback_object();
+            yli::callback::CallbackObject* create_callback_object(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
             // execute all callbacks with a parameter.
             std::shared_ptr<yli::common::AnyValue> execute(std::shared_ptr<yli::common::AnyValue> any_value);
