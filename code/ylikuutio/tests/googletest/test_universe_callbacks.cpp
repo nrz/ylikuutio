@@ -130,7 +130,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_bool_true
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
-    universe->create_AnyValueEntity(console, universe, command_parameters);
+    universe->create_any_value_entity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
@@ -162,7 +162,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_bool_fals
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
-    universe->create_AnyValueEntity(console, universe, command_parameters);
+    universe->create_any_value_entity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
@@ -194,7 +194,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_float_0)
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
-    universe->create_AnyValueEntity(console, universe, command_parameters);
+    universe->create_any_value_entity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
@@ -226,7 +226,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_float_0_0
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
-    universe->create_AnyValueEntity(console, universe, command_parameters);
+    universe->create_any_value_entity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
@@ -258,7 +258,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_float_pi)
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
-    universe->create_AnyValueEntity(console, universe, command_parameters);
+    universe->create_any_value_entity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
@@ -292,7 +292,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_double_0)
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
-    universe->create_AnyValueEntity(console, universe, command_parameters);
+    universe->create_any_value_entity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
@@ -324,7 +324,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_double_0_
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
-    universe->create_AnyValueEntity(console, universe, command_parameters);
+    universe->create_any_value_entity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
@@ -356,7 +356,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_double_pi
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
-    universe->create_AnyValueEntity(console, universe, command_parameters);
+    universe->create_any_value_entity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
@@ -388,7 +388,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_0
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
-    universe->create_AnyValueEntity(console, universe, command_parameters);
+    universe->create_any_value_entity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
@@ -420,7 +420,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_p
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
-    universe->create_AnyValueEntity(console, universe, command_parameters);
+    universe->create_any_value_entity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
@@ -452,7 +452,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_m
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
-    universe->create_AnyValueEntity(console, universe, command_parameters);
+    universe->create_any_value_entity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
@@ -484,7 +484,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_m
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
-    universe->create_AnyValueEntity(console, universe, command_parameters);
+    universe->create_any_value_entity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
@@ -516,7 +516,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_m
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
-    universe->create_AnyValueEntity(console, universe, command_parameters);
+    universe->create_any_value_entity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
@@ -548,7 +548,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_uint32_t_
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
-    universe->create_AnyValueEntity(console, universe, command_parameters);
+    universe->create_any_value_entity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
@@ -580,7 +580,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_uint32_t_
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
-    universe->create_AnyValueEntity(console, universe, command_parameters);
+    universe->create_any_value_entity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
@@ -612,7 +612,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_uint32_t_
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     const std::vector<std::string> command_parameters { any_value_entity_name, any_value_entity_type, any_value_entity_value };
-    universe->create_AnyValueEntity(console, universe, command_parameters);
+    universe->create_any_value_entity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
@@ -642,7 +642,7 @@ TEST(any_struct_entity_must_be_created_appropriately, universe_callback_any_stru
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     const std::vector<std::string> command_parameters { any_value_entity_name };
-    universe->create_AnyStructEntity(console, universe, command_parameters);
+    universe->create_any_struct_entity(console, universe, command_parameters);
     ASSERT_TRUE(universe->is_entity(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);

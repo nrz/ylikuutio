@@ -115,7 +115,7 @@ int main(const int argc, const char* const argv[]) try
     // Create the `World`.
 
     std::cout << "Creating yli::ontology::Entity* gpgpu_test_world_entity ...\n";
-    yli::ontology::Entity* const gpgpu_test_world_entity = entity_factory->create_World();
+    yli::ontology::Entity* const gpgpu_test_world_entity = entity_factory->create_world();
     std::cout << "Creating yli::ontology::World* gpgpu_test_world ...\n";
     yli::ontology::World* const gpgpu_test_world = dynamic_cast<yli::ontology::World*>(gpgpu_test_world_entity);
 

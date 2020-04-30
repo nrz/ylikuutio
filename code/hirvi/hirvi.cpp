@@ -280,7 +280,7 @@ int main(const int argc, const char* const argv[]) try
 
     // Create the `Console`.
     std::cout << "Creating yli::ontology::Entity* my_console_entity ...\n";
-    yli::ontology::Entity* const my_console_entity = entity_factory->create_Console();
+    yli::ontology::Entity* const my_console_entity = entity_factory->create_console();
     std::cout << "Creating yli::ontology::Console* my_console ...\n";
     yli::ontology::Console* const my_console = dynamic_cast<yli::ontology::Console*>(my_console_entity);
 
@@ -298,7 +298,7 @@ int main(const int argc, const char* const argv[]) try
     // Create the `World`.
 
     std::cout << "Creating yli::ontology::Entity* earth_world_entity ...\n";
-    yli::ontology::Entity* const earth_world_entity = entity_factory->create_World();
+    yli::ontology::Entity* const earth_world_entity = entity_factory->create_world();
     std::cout << "Creating yli::ontology::World* earth_world ...\n";
     yli::ontology::World* const earth_world = dynamic_cast<yli::ontology::World*>(earth_world_entity);
 
@@ -360,7 +360,7 @@ int main(const int argc, const char* const argv[]) try
     font_struct.text_size = my_universe->get_text_size();
     font_struct.font_size = my_universe->get_font_size();
 
-    yli::ontology::Entity* const my_font2D_entity = entity_factory->create_Font2D(font_struct);
+    yli::ontology::Entity* const my_font2D_entity = entity_factory->create_font2d(font_struct);
 
     std::cout << "Creating yli::ontology::Font2D* my_font2D ...\n";
     yli::ontology::Font2D* const my_font2D = dynamic_cast<yli::ontology::Font2D*>(my_font2D_entity);
@@ -699,8 +699,8 @@ int main(const int argc, const char* const argv[]) try
     my_console->add_command_callback("delete", &yli::ontology::Universe::delete_entity);
     my_console->add_command_callback("info", &yli::ontology::Universe::info);
     my_console->add_command_callback("bind", &yli::ontology::Universe::bind);
-    my_console->add_command_callback("AnyValueEntity", &yli::ontology::Universe::create_AnyValueEntity);
-    my_console->add_command_callback("AnyStructEntity", &yli::ontology::Universe::create_AnyStructEntity);
+    my_console->add_command_callback("AnyValueEntity", &yli::ontology::Universe::create_any_value_entity);
+    my_console->add_command_callback("AnyStructEntity", &yli::ontology::Universe::create_any_struct_entity);
 
     // Exit program callbacks.
     my_console->add_command_callback("bye", &yli::snippets::quit);
@@ -740,7 +740,7 @@ int main(const int argc, const char* const argv[]) try
     angles_and_coordinates_text_struct.font_texture_file_format = "bmp";
     angles_and_coordinates_text_struct.horizontal_alignment = "left";
     angles_and_coordinates_text_struct.vertical_alignment = "bottom";
-    yli::ontology::Text2D* angles_and_coordinates_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_Text2D(angles_and_coordinates_text_struct));
+    yli::ontology::Text2D* angles_and_coordinates_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_text2d(angles_and_coordinates_text_struct));
 
     // Print spherical coordinates on second line from the bottom left.
     yli::ontology::TextStruct spherical_coordinates_text_struct;
@@ -753,7 +753,7 @@ int main(const int argc, const char* const argv[]) try
     spherical_coordinates_text_struct.font_size = my_universe->get_font_size();
     spherical_coordinates_text_struct.horizontal_alignment = "left";
     spherical_coordinates_text_struct.vertical_alignment = "bottom";
-    yli::ontology::Text2D* spherical_coordinates_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_Text2D(spherical_coordinates_text_struct));
+    yli::ontology::Text2D* spherical_coordinates_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_text2d(spherical_coordinates_text_struct));
 
     // Print time data on top left corner.
     yli::ontology::TextStruct time_text_struct;
@@ -767,7 +767,7 @@ int main(const int argc, const char* const argv[]) try
     time_text_struct.font_texture_file_format = "bmp";
     time_text_struct.horizontal_alignment = "left";
     time_text_struct.vertical_alignment = "top";
-    yli::ontology::Text2D* time_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_Text2D(time_text_struct));
+    yli::ontology::Text2D* time_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_text2d(time_text_struct));
 
     // Print help text.
     yli::ontology::TextStruct help_text_struct;
@@ -781,7 +781,7 @@ int main(const int argc, const char* const argv[]) try
     help_text_struct.font_texture_file_format = "bmp";
     help_text_struct.horizontal_alignment = "left";
     help_text_struct.vertical_alignment = "top";
-    yli::ontology::Text2D* help_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_Text2D(help_text_struct));
+    yli::ontology::Text2D* help_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_text2d(help_text_struct));
 
     // Print frame rate data on top right corner.
     yli::ontology::TextStruct frame_rate_text_struct;
@@ -795,7 +795,7 @@ int main(const int argc, const char* const argv[]) try
     frame_rate_text_struct.font_texture_file_format = "bmp";
     frame_rate_text_struct.horizontal_alignment = "right";
     frame_rate_text_struct.vertical_alignment = "top";
-    yli::ontology::Text2D* frame_rate_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_Text2D(frame_rate_text_struct));
+    yli::ontology::Text2D* frame_rate_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_text2d(frame_rate_text_struct));
 
     std::cout << "Setting up window size ...\n";
     yli::snippets::set_window_size(my_universe->get_setting_master(), my_universe->get_window_width(), my_universe->get_window_height());
