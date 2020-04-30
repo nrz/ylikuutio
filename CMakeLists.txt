@@ -890,6 +890,11 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/common/any_value.hpp
         code/ylikuutio/common/datatype.hpp
         code/ylikuutio/common/spherical_coordinates_struct.hpp
+        code/ylikuutio/config/setting.cpp
+        code/ylikuutio/config/setting.hpp
+        code/ylikuutio/config/setting_master.cpp
+        code/ylikuutio/config/setting_master.hpp
+        code/ylikuutio/config/setting_struct.hpp
         code/ylikuutio/file/file_loader.cpp
         code/ylikuutio/file/file_loader.hpp
         code/ylikuutio/file/file_writer.hpp
@@ -1013,6 +1018,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_callback_system.cpp
         code/ylikuutio/tests/googletest/test_check_and_report_if_some_string_matches.cpp
         code/ylikuutio/tests/googletest/test_command_line_master.cpp
+        code/ylikuutio/tests/googletest/test_config.cpp
         code/ylikuutio/tests/googletest/test_csv_loader.cpp
         code/ylikuutio/tests/googletest/test_extract_last_part_of_string.cpp
         code/ylikuutio/tests/googletest/test_extract_string.cpp
