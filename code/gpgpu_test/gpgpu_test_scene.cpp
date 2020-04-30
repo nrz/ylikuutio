@@ -62,7 +62,7 @@ namespace gpgpu_test
         std::cout << "Creating yli::ontology::Entity* gpgpu_test_scene_entity ...\n";
         yli::ontology::SceneStruct scene_struct;
         scene_struct.world = world;
-        yli::ontology::Entity* const gpgpu_test_scene_entity = entity_factory->create_Scene(scene_struct);
+        yli::ontology::Entity* const gpgpu_test_scene_entity = entity_factory->create_scene(scene_struct);
         std::cout << "Creating yli::ontology::Scene* gpgpu_test_scene ...\n";
         yli::ontology::Scene* const gpgpu_test_scene = dynamic_cast<yli::ontology::Scene*>(gpgpu_test_scene_entity);
 
@@ -82,7 +82,7 @@ namespace gpgpu_test
         identity_shader_struct.fragment_shader = "identity.frag";
 
         std::cout << "Creating yli::ontology::Entity* identity_shader_entity ...\n";
-        yli::ontology::Entity* const identity_shader_entity = entity_factory->create_Shader(identity_shader_struct);
+        yli::ontology::Entity* const identity_shader_entity = entity_factory->create_shader(identity_shader_struct);
         std::cout << "Creating yli::ontology::Shader* identity_shader ...\n";
         yli::ontology::Shader* const identity_shader = dynamic_cast<yli::ontology::Shader*>(identity_shader_entity);
 
@@ -101,7 +101,7 @@ namespace gpgpu_test
         identity_shader_BMP_compute_task_struct.texture_height = 512;
 
         std::cout << "Creating yli::ontology::Entity* identity_shader_BMP_compute_task_entity ...\n";
-        yli::ontology::Entity* const identity_shader_BMP_compute_task_entity = entity_factory->create_ComputeTask(identity_shader_BMP_compute_task_struct);
+        yli::ontology::Entity* const identity_shader_BMP_compute_task_entity = entity_factory->create_compute_task(identity_shader_BMP_compute_task_struct);
         std::cout << "Creating yli::ontology::ComputeTask* identity_shader_BMP_compute_task ...\n";
         yli::ontology::ComputeTask* const identity_shader_BMP_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(identity_shader_BMP_compute_task_entity);
 
@@ -123,7 +123,7 @@ namespace gpgpu_test
         identity_shader_CSV_unsigned_short_compute_task_struct.should_ylikuutio_flip_texture = false;
 
         std::cout << "Creating yli::ontology::Entity* identity_shader_CSV_unsigned_short_compute_task_entity ...\n";
-        yli::ontology::Entity* const identity_shader_CSV_unsigned_short_compute_task_entity = entity_factory->create_ComputeTask(identity_shader_CSV_unsigned_short_compute_task_struct);
+        yli::ontology::Entity* const identity_shader_CSV_unsigned_short_compute_task_entity = entity_factory->create_compute_task(identity_shader_CSV_unsigned_short_compute_task_struct);
         std::cout << "Creating yli::ontology::ComputeTask* identity_shader_CSV_unsigned_short_compute_task ...\n";
         yli::ontology::ComputeTask* const identity_shader_CSV_unsigned_short_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(identity_shader_CSV_unsigned_short_compute_task_entity);
 
@@ -140,7 +140,7 @@ namespace gpgpu_test
         sobel_shader_struct.fragment_shader = "sobel_gradient_magnitude.frag";
 
         std::cout << "Creating yli::ontology::Entity* sobel_shader_entity ...\n";
-        yli::ontology::Entity* const sobel_shader_entity = entity_factory->create_Shader(sobel_shader_struct);
+        yli::ontology::Entity* const sobel_shader_entity = entity_factory->create_shader(sobel_shader_struct);
         std::cout << "Creating yli::ontology::Shader* sobel_shader ...\n";
         yli::ontology::Shader* const sobel_shader = dynamic_cast<yli::ontology::Shader*>(sobel_shader_entity);
 
@@ -161,7 +161,7 @@ namespace gpgpu_test
         sobel_shader_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
 
         std::cout << "Creating yli::ontology::Entity* sobel_shader_compute_task_entity ...\n";
-        yli::ontology::Entity* const sobel_shader_compute_task_entity = entity_factory->create_ComputeTask(sobel_shader_compute_task_struct);
+        yli::ontology::Entity* const sobel_shader_compute_task_entity = entity_factory->create_compute_task(sobel_shader_compute_task_struct);
         std::cout << "Creating yli::ontology::ComputeTask* sobel_shader_compute_task ...\n";
         yli::ontology::ComputeTask* const sobel_shader_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(sobel_shader_compute_task_entity);
 
@@ -178,7 +178,7 @@ namespace gpgpu_test
         go_west_shader_struct.fragment_shader = "go_west.frag";
 
         std::cout << "Creating yli::ontology::Entity* go_west_shader_entity ...\n";
-        yli::ontology::Entity* const go_west_shader_entity = entity_factory->create_Shader(go_west_shader_struct);
+        yli::ontology::Entity* const go_west_shader_entity = entity_factory->create_shader(go_west_shader_struct);
         std::cout << "Creating yli::ontology::Shader* go_west_shader ...\n";
         yli::ontology::Shader* const go_west_shader = dynamic_cast<yli::ontology::Shader*>(go_west_shader_entity);
 
@@ -199,7 +199,7 @@ namespace gpgpu_test
         go_west_shader_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
 
         std::cout << "Creating yli::ontology::Entity* go_west_shader_compute_task_entity ...\n";
-        yli::ontology::Entity* const go_west_shader_compute_task_entity = entity_factory->create_ComputeTask(go_west_shader_compute_task_struct);
+        yli::ontology::Entity* const go_west_shader_compute_task_entity = entity_factory->create_compute_task(go_west_shader_compute_task_struct);
         std::cout << "Creating yli::ontology::ComputeTask* go_west_shader_compute_task ...\n";
         yli::ontology::ComputeTask* const go_west_shader_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(go_west_shader_compute_task_entity);
 
@@ -216,7 +216,7 @@ namespace gpgpu_test
         vanish_west_shader_struct.fragment_shader = "vanish_west.frag";
 
         std::cout << "Creating yli::ontology::Entity* vanish_west_shader_entity ...\n";
-        yli::ontology::Entity* const vanish_west_shader_entity = entity_factory->create_Shader(vanish_west_shader_struct);
+        yli::ontology::Entity* const vanish_west_shader_entity = entity_factory->create_shader(vanish_west_shader_struct);
         std::cout << "Creating yli::ontology::Shader* vanish_west_shader ...\n";
         yli::ontology::Shader* const vanish_west_shader = dynamic_cast<yli::ontology::Shader*>(vanish_west_shader_entity);
 
@@ -237,7 +237,7 @@ namespace gpgpu_test
         vanish_west_shader_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
 
         std::cout << "Creating yli::ontology::Entity* vanish_west_shader_compute_task_entity ...\n";
-        yli::ontology::Entity* const vanish_west_shader_compute_task_entity = entity_factory->create_ComputeTask(vanish_west_shader_compute_task_struct);
+        yli::ontology::Entity* const vanish_west_shader_compute_task_entity = entity_factory->create_compute_task(vanish_west_shader_compute_task_struct);
         std::cout << "Creating yli::ontology::ComputeTask* vanish_west_shader_compute_task ...\n";
         yli::ontology::ComputeTask* const vanish_west_shader_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(vanish_west_shader_compute_task_entity);
 
@@ -254,7 +254,7 @@ namespace gpgpu_test
         floyd_warshall_shader_struct.fragment_shader = "floyd_warshall.frag";
 
         std::cout << "Creating yli::ontology::Entity* floyd_warshall_shader_entity ...\n";
-        yli::ontology::Entity* const floyd_warshall_shader_entity = entity_factory->create_Shader(floyd_warshall_shader_struct);
+        yli::ontology::Entity* const floyd_warshall_shader_entity = entity_factory->create_shader(floyd_warshall_shader_struct);
         std::cout << "Creating yli::ontology::Shader* floyd_warshall_shader ...\n";
         yli::ontology::Shader* const floyd_warshall_shader = dynamic_cast<yli::ontology::Shader*>(floyd_warshall_shader_entity);
 
@@ -277,7 +277,7 @@ namespace gpgpu_test
         floyd_warshall_shader_CSV_unsigned_short_compute_task_struct.should_ylikuutio_flip_texture = false;
 
         std::cout << "Creating yli::ontology::Entity* floyd_warshall_shader_CSV_unsigned_short_compute_task_entity ...\n";
-        yli::ontology::Entity* const floyd_warshall_shader_CSV_unsigned_short_compute_task_entity = entity_factory->create_ComputeTask(floyd_warshall_shader_CSV_unsigned_short_compute_task_struct);
+        yli::ontology::Entity* const floyd_warshall_shader_CSV_unsigned_short_compute_task_entity = entity_factory->create_compute_task(floyd_warshall_shader_CSV_unsigned_short_compute_task_struct);
         std::cout << "Creating yli::ontology::ComputeTask* floyd_warshall_shader_CSV_unsigned_short_compute_task ...\n";
         yli::ontology::ComputeTask* const floyd_warshall_shader_CSV_unsigned_short_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(floyd_warshall_shader_CSV_unsigned_short_compute_task_entity);
 
@@ -300,7 +300,7 @@ namespace gpgpu_test
         floyd_warshall_shader_CSV_float_compute_task_struct.should_ylikuutio_flip_texture = false;
 
         std::cout << "Creating yli::ontology::Entity* floyd_warshall_shader_CSV_float_compute_task_entity ...\n";
-        yli::ontology::Entity* const floyd_warshall_shader_CSV_float_compute_task_entity = entity_factory->create_ComputeTask(floyd_warshall_shader_CSV_float_compute_task_struct);
+        yli::ontology::Entity* const floyd_warshall_shader_CSV_float_compute_task_entity = entity_factory->create_compute_task(floyd_warshall_shader_CSV_float_compute_task_struct);
         std::cout << "Creating yli::ontology::ComputeTask* floyd_warshall_shader_CSV_float_compute_task ...\n";
         yli::ontology::ComputeTask* const floyd_warshall_shader_CSV_float_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(floyd_warshall_shader_CSV_float_compute_task_entity);
 

@@ -84,7 +84,7 @@ int main(const int argc, const char* const argv[]) try
 
     std::cout << "Creating yli::callback::CallbackEngine cleanup_callback_engine ...\n";
     yli::callback::CallbackEngine cleanup_callback_engine = yli::callback::CallbackEngine();
-    cleanup_callback_engine.create_CallbackObject(nullptr);
+    cleanup_callback_engine.create_callback_object(nullptr);
 
     if (my_universe->get_window() == nullptr)
     {
@@ -115,7 +115,7 @@ int main(const int argc, const char* const argv[]) try
     // Create the `World`.
 
     std::cout << "Creating yli::ontology::Entity* gpgpu_test_world_entity ...\n";
-    yli::ontology::Entity* const gpgpu_test_world_entity = entity_factory->create_World();
+    yli::ontology::Entity* const gpgpu_test_world_entity = entity_factory->create_world();
     std::cout << "Creating yli::ontology::World* gpgpu_test_world ...\n";
     yli::ontology::World* const gpgpu_test_world = dynamic_cast<yli::ontology::World*>(gpgpu_test_world_entity);
 

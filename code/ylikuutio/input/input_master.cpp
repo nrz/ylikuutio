@@ -49,7 +49,7 @@ namespace yli::input
         yli::hierarchy::delete_children<yli::input::InputMode*>(this->input_mode_pointer_vector, this->number_of_input_modes);
     }
 
-    yli::input::InputMode* InputMaster::create_InputMode()
+    yli::input::InputMode* InputMaster::create_input_mode()
     {
         return new yli::input::InputMode(this);
     }

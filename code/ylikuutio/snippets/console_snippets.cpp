@@ -43,24 +43,24 @@ namespace yli::snippets
         console_top_y_setting_struct.name = "console_top_y";
         console_top_y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_console_top_y;
         console_top_y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        setting_master->create_Setting(console_top_y_setting_struct);
+        setting_master->create_setting(console_top_y_setting_struct);
 
         yli::config::SettingStruct console_bottom_y_setting_struct(std::make_shared<yli::common::AnyValue>(console_bottom_y));
         console_bottom_y_setting_struct.name = "console_bottom_y";
         console_bottom_y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_console_bottom_y;
         console_bottom_y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        setting_master->create_Setting(console_bottom_y_setting_struct);
+        setting_master->create_setting(console_bottom_y_setting_struct);
 
         yli::config::SettingStruct console_left_x_setting_struct(std::make_shared<yli::common::AnyValue>(console_left_x));
         console_left_x_setting_struct.name = "console_left_x";
         console_left_x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_console_left_x;
         console_left_x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        setting_master->create_Setting(console_left_x_setting_struct);
+        setting_master->create_setting(console_left_x_setting_struct);
 
         yli::config::SettingStruct console_right_x_setting_struct(std::make_shared<yli::common::AnyValue>(console_right_x));
         console_right_x_setting_struct.name = "console_right_x";
         console_right_x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_console_right_x;
         console_right_x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        setting_master->create_Setting(console_right_x_setting_struct);
+        setting_master->create_setting(console_right_x_setting_struct);
     }
 }

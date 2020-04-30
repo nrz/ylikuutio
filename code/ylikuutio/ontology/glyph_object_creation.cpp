@@ -77,7 +77,7 @@ namespace yli::ontology
 
             if (entity_factory != nullptr)
             {
-                entity_factory->create_Object(object_struct);
+                entity_factory->create_object(object_struct);
             }
         }
 

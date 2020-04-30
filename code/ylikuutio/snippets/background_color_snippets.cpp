@@ -31,24 +31,24 @@ namespace yli::snippets
         red_setting_struct.name = "red";
         red_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
         red_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        setting_master->create_Setting(red_setting_struct);
+        setting_master->create_setting(red_setting_struct);
 
         yli::config::SettingStruct green_setting_struct(std::make_shared<yli::common::AnyValue>(green));
         green_setting_struct.name = "green";
         green_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
         green_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        setting_master->create_Setting(green_setting_struct);
+        setting_master->create_setting(green_setting_struct);
 
         yli::config::SettingStruct blue_setting_struct(std::make_shared<yli::common::AnyValue>(blue));
         blue_setting_struct.name = "blue";
         blue_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
         blue_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        setting_master->create_Setting(blue_setting_struct);
+        setting_master->create_setting(blue_setting_struct);
 
         yli::config::SettingStruct alpha_setting_struct(std::make_shared<yli::common::AnyValue>(alpha));
         alpha_setting_struct.name = "alpha";
         alpha_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
         alpha_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        setting_master->create_Setting(alpha_setting_struct);
+        setting_master->create_setting(alpha_setting_struct);
     }
 }

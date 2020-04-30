@@ -31,12 +31,12 @@ namespace yli::snippets
         window_width_setting_struct.name = "window_width";
         window_width_setting_struct.activate_callback = &yli::config::SettingMaster::activate_window_size;
         window_width_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        setting_master->create_Setting(window_width_setting_struct);
+        setting_master->create_setting(window_width_setting_struct);
 
         yli::config::SettingStruct window_height_setting_struct(std::make_shared<yli::common::AnyValue>(window_height));
         window_height_setting_struct.name = "window_height";
         window_height_setting_struct.activate_callback = &yli::config::SettingMaster::activate_window_size;
         window_height_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        setting_master->create_Setting(window_height_setting_struct);
+        setting_master->create_setting(window_height_setting_struct);
     }
 }

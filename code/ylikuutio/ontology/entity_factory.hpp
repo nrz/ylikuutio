@@ -70,27 +70,27 @@ namespace yli::ontology
 
             yli::ontology::Universe* get_universe() const;
 
-            yli::ontology::Entity* create_World() const;
-            yli::ontology::Entity* create_Scene(const yli::ontology::SceneStruct& scene_struct) const;
-            yli::ontology::Entity* create_Shader(const yli::ontology::ShaderStruct& shader_struct) const;
-            yli::ontology::Entity* create_Material(const yli::ontology::MaterialStruct& material_struct) const;
-            yli::ontology::Entity* create_Species(const yli::ontology::SpeciesStruct& species_struct) const;
-            yli::ontology::Entity* create_Object(const yli::ontology::ObjectStruct& object_struct) const;
-            yli::ontology::Entity* create_Symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const;
-            yli::ontology::Entity* create_Holobiont(const yli::ontology::HolobiontStruct& object_struct) const;
-            yli::ontology::Entity* create_VectorFont(const yli::ontology::VectorFontStruct& vector_font_struct) const;
-            yli::ontology::Entity* create_Text2D(const yli::ontology::TextStruct& text_struct) const;
-            yli::ontology::Entity* create_Text3D(const yli::ontology::Text3DStruct& text3D_struct) const;
-            yli::ontology::Entity* create_Font2D(const yli::ontology::FontStruct& font_struct) const;
-            yli::ontology::Entity* create_Console() const;
-            yli::ontology::Entity* create_Camera(const yli::ontology::CameraStruct& camera_struct) const;
-            yli::ontology::Entity* create_ComputeTask(const yli::ontology::ComputeTaskStruct& compute_task_struct) const;
-            yli::ontology::Entity* create_Brain(const yli::ontology::BrainStruct& brain_struct) const;
-            yli::ontology::Entity* create_AnyValueEntity(const std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr) const;
-            yli::ontology::Entity* create_AnyValueEntity(const yli::common::AnyValue& any_value) const;
-            yli::ontology::Entity* create_AnyStructEntity() const;
-            yli::ontology::Entity* create_AnyStructEntity(const yli::common::AnyStruct& any_struct) const;
-            yli::ontology::Entity* create_CallbackEngineEntity(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback) const;
+            yli::ontology::Entity* create_world() const;
+            yli::ontology::Entity* create_scene(const yli::ontology::SceneStruct& scene_struct) const;
+            yli::ontology::Entity* create_shader(const yli::ontology::ShaderStruct& shader_struct) const;
+            yli::ontology::Entity* create_material(const yli::ontology::MaterialStruct& material_struct) const;
+            yli::ontology::Entity* create_species(const yli::ontology::SpeciesStruct& species_struct) const;
+            yli::ontology::Entity* create_object(const yli::ontology::ObjectStruct& object_struct) const;
+            yli::ontology::Entity* create_symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const;
+            yli::ontology::Entity* create_holobiont(const yli::ontology::HolobiontStruct& object_struct) const;
+            yli::ontology::Entity* create_vector_font(const yli::ontology::VectorFontStruct& vector_font_struct) const;
+            yli::ontology::Entity* create_text2d(const yli::ontology::TextStruct& text_struct) const;
+            yli::ontology::Entity* create_text3d(const yli::ontology::Text3DStruct& text3D_struct) const;
+            yli::ontology::Entity* create_font2d(const yli::ontology::FontStruct& font_struct) const;
+            yli::ontology::Entity* create_console() const;
+            yli::ontology::Entity* create_camera(const yli::ontology::CameraStruct& camera_struct) const;
+            yli::ontology::Entity* create_compute_task(const yli::ontology::ComputeTaskStruct& compute_task_struct) const;
+            yli::ontology::Entity* create_brain(const yli::ontology::BrainStruct& brain_struct) const;
+            yli::ontology::Entity* create_any_value_entity(const std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr) const;
+            yli::ontology::Entity* create_any_value_entity(const yli::common::AnyValue& any_value) const;
+            yli::ontology::Entity* create_any_struct_entity() const;
+            yli::ontology::Entity* create_any_struct_entity(const yli::common::AnyStruct& any_struct) const;
+            yli::ontology::Entity* create_callback_engine_entity(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback) const;
 
             friend class Universe;
 

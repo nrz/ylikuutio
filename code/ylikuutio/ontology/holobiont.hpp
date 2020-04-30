@@ -81,7 +81,7 @@ namespace yli::ontology
                 this->cartesian_coordinates = holobiont_struct.cartesian_coordinates;
                 this->spherical_coordinates = holobiont_struct.spherical_coordinates;
 
-                this->create_Bionts();
+                this->create_bionts();
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Holobiont*";
@@ -107,7 +107,7 @@ namespace yli::ontology
             // this method renders this `Holobiont`.
             void render() override;
 
-            void create_Bionts();
+            void create_bionts();
 
             glm::vec3 original_scale_vector;            // original scale vector.
             glm::vec3 rotate_vector;                    // rotate vector.

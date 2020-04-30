@@ -33,6 +33,6 @@ namespace yli::snippets
         is_flight_mode_in_use_setting_struct.activate_callback = &yli::config::SettingMaster::activate_is_flight_mode_in_use;
         is_flight_mode_in_use_setting_struct.read_callback = &yli::config::SettingMaster::read_is_flight_mode_in_use;
         is_flight_mode_in_use_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        setting_master->create_Setting(is_flight_mode_in_use_setting_struct);
+        setting_master->create_setting(is_flight_mode_in_use_setting_struct);
     }
 }

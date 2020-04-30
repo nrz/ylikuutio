@@ -31,6 +31,6 @@ namespace yli::snippets
         wireframe_setting_struct.name = "wireframe";
         wireframe_setting_struct.activate_callback = &yli::config::SettingMaster::activate_wireframe;
         wireframe_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        setting_master->create_Setting(wireframe_setting_struct);
+        setting_master->create_setting(wireframe_setting_struct);
     }
 }

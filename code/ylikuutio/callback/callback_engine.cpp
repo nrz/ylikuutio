@@ -69,12 +69,12 @@ namespace yli::callback
         yli::hierarchy::delete_children<yli::callback::CallbackObject*>(this->callback_object_pointer_vector, this->number_of_callback_objects);
     }
 
-    yli::callback::CallbackObject* CallbackEngine::create_CallbackObject()
+    yli::callback::CallbackObject* CallbackEngine::create_callback_object()
     {
         return new yli::callback::CallbackObject(this);
     }
 
-    yli::callback::CallbackObject* CallbackEngine::create_CallbackObject(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
+    yli::callback::CallbackObject* CallbackEngine::create_callback_object(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
     {
         return new yli::callback::CallbackObject(callback, this);
     }

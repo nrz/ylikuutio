@@ -114,7 +114,7 @@ namespace yli::ontology
 
     // Public `Entity` create callbacks.
 
-    std::shared_ptr<yli::common::AnyValue> Universe::create_AnyValueEntity(
+    std::shared_ptr<yli::common::AnyValue> Universe::create_any_value_entity(
             yli::ontology::Console* const console,
             yli::ontology::Entity* const universe_entity,
             const std::vector<std::string>& command_parameters)
@@ -181,7 +181,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::common::AnyValue> Universe::create_AnyStructEntity(
+    std::shared_ptr<yli::common::AnyValue> Universe::create_any_struct_entity(
             yli::ontology::Console* const console,
             yli::ontology::Entity* const universe_entity,
             const std::vector<std::string>& command_parameters)
