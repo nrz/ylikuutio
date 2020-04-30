@@ -55,7 +55,7 @@ namespace yli::config
             // destructor.
             ~SettingMaster();
 
-            void create_Setting(const yli::config::SettingStruct& setting_struct);
+            void create_setting(const yli::config::SettingStruct& setting_struct);
 
             // does setting `setting` exist?
             bool is_setting(const std::string& setting_name) const;

@@ -76,8 +76,8 @@ namespace yli::ontology
         should_be_rendered_setting_struct.activate_callback = &yli::config::SettingMaster::activate_should_be_rendered;
         should_be_rendered_setting_struct.read_callback = &yli::config::SettingMaster::read_should_be_rendered;
         should_be_rendered_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        std::cout << "Executing `setting_master->create_Setting(should_be_rendered_setting_struct);` ...\n";
-        this->setting_master->create_Setting(should_be_rendered_setting_struct);
+        std::cout << "Executing `setting_master->create_setting(should_be_rendered_setting_struct);` ...\n";
+        this->setting_master->create_setting(should_be_rendered_setting_struct);
     }
 
     Entity::~Entity()

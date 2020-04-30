@@ -31,12 +31,12 @@ namespace yli::snippets
         framebuffer_width_setting_struct.name = "framebuffer_width";
         framebuffer_width_setting_struct.activate_callback = &yli::config::SettingMaster::activate_framebuffer_size;
         framebuffer_width_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        setting_master->create_Setting(framebuffer_width_setting_struct);
+        setting_master->create_setting(framebuffer_width_setting_struct);
 
         yli::config::SettingStruct framebuffer_height_setting_struct(std::make_shared<yli::common::AnyValue>(framebuffer_height));
         framebuffer_height_setting_struct.name = "framebuffer_height";
         framebuffer_height_setting_struct.activate_callback = &yli::config::SettingMaster::activate_framebuffer_size;
         framebuffer_height_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        setting_master->create_Setting(framebuffer_height_setting_struct);
+        setting_master->create_setting(framebuffer_height_setting_struct);
     }
 }
