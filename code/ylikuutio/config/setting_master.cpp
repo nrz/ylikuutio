@@ -241,16 +241,11 @@ namespace yli::config
                 // calling the corresponding activate callback.
                 yli::config::Setting* setting = setting_master->setting_pointer_map[setting_name];
 
-                // copy current `AnyValue`.
-                std::shared_ptr<yli::common::AnyValue> setting_any_value = setting->setting_value;
-
                 // set a new value.
-                bool success = setting_any_value->set_new_value(command_parameters.at(1));
+                bool success = setting->setting_value->set_new_value(command_parameters.at(1));
 
                 if (success)
                 {
-                    setting->setting_value = setting_any_value;
-
                     if (setting->activate_callback != nullptr)
                     {
                         setting->activate_callback(entity, setting_master);
@@ -328,16 +323,11 @@ namespace yli::config
                 // calling the corresponding activate callback.
                 yli::config::Setting* setting = setting_master->setting_pointer_map[setting_name];
 
-                // copy current `AnyValue`.
-                std::shared_ptr<yli::common::AnyValue> setting_any_value = setting->setting_value;
-
                 // set a new value.
-                bool success = setting_any_value->set_new_value(command_parameters.at(2));
+                bool success = setting->setting_value->set_new_value(command_parameters.at(2));
 
                 if (success)
                 {
-                    setting->setting_value = setting_any_value;
-
                     if (setting->activate_callback != nullptr)
                     {
                         setting->activate_callback(named_entity, setting_master);
