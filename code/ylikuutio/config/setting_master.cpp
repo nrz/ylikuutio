@@ -370,7 +370,23 @@ namespace yli::config
         // Usage:
         // to get variable value: get <variable-name>
         // to get variable value: get <entity-name> <variable-name>
+
+        if (console == nullptr)
+        {
+            std::cerr << "ERROR: `SettingMaster::get_and_print`: `console` is `nullptr`!\n";
+        }
+
+        if (entity == nullptr)
+        {
+            std::cerr << "ERROR: `SettingMaster::get_and_print`: `entity` is `nullptr`!\n";
+        }
+
         yli::config::SettingMaster* setting_master = entity->get_setting_master();
+
+        if (setting_master == nullptr)
+        {
+            std::cerr << "ERROR: `SettingMaster::get_and_print`: `setting_master` is `nullptr`!\n";
+        }
 
         if (command_parameters.size() == 1)
         {
