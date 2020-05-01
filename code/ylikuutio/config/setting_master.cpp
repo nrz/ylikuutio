@@ -258,7 +258,16 @@ namespace yli::config
                 }
                 else
                 {
-                    std::cerr << "ERROR: Setting a new value for `yli::config::Setting` " << setting_name << " failed! Attempted value: " << command_parameters.at(1) << "\n";
+                    std::stringstream setting_value_failed_stringstream;
+                    setting_value_failed_stringstream <<
+                        "ERROR: Setting a new value failed!\n" <<
+                        "`yli::config::Setting`: " << setting_name << "\n" <<
+                        "Attempted value:        " << command_parameters.at(1);
+
+                    if (console != nullptr)
+                    {
+                        console->print_text(setting_value_failed_stringstream.str());
+                    }
                 }
             }
             else
@@ -336,7 +345,17 @@ namespace yli::config
                 }
                 else
                 {
-                    std::cerr << "ERROR: Setting a new value for `yli::ontology::Entity` " << entity_name << ", `yli::config::Setting` " << setting_name << " failed! Attempted value: " << command_parameters.at(2) << "\n";
+                    std::stringstream setting_value_failed_stringstream;
+                    setting_value_failed_stringstream <<
+                        "ERROR: Setting a new value failed!\n" <<
+                        "`yli::ontology::Entity`: " << entity_name << "\n" <<
+                        "`yli::config::Setting`:  " << setting_name << "\n" <<
+                        "Attempted value:         " << command_parameters.at(2);
+
+                    if (console != nullptr)
+                    {
+                        console->print_text(setting_value_failed_stringstream.str());
+                    }
                 }
             }
             else
