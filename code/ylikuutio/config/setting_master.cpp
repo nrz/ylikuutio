@@ -219,52 +219,13 @@ namespace yli::config
 
         yli::config::SettingMaster* setting_master = entity->get_setting_master();
 
-        if (command_parameters.size() == 0)
+        if (command_parameters.size() < 2)
         {
-            // No command parameters.
-            // Print variable names.
-            console->print_text(setting_master->help());
-        }
-        else if (command_parameters.size() == 1)
-        {
-            // Exactly 1 parameter.
-
-            std::string setting_name = command_parameters.at(0);
-
-            // Print current value of the given variable.
-            if (setting_master->is_setting(setting_name))
-            {
-                yli::config::Setting* setting = setting_master->get(setting_name);
-
-                if (setting != nullptr && setting->setting_value != nullptr && setting->read_callback == nullptr)
-                {
-                    // Print variable value.
-                    console->print_text(setting->setting_value->get_string());
-                }
-                else if (setting != nullptr && setting->setting_value != nullptr)
-                {
-                    std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr = setting->read_callback(entity, setting_master);
-
-                    if (any_value_shared_ptr != nullptr)
-                    {
-                        console->print_text(any_value_shared_ptr->get_string());
-                    }
-                    else
-                    {
-                        console->print_text("read_callback returned nullptr");
-                    }
-                }
-                else
-                {
-                    // Invalid variable name.
-                    console->print_text("invalid variable name");
-                }
-            }
-            else
-            {
-                // Invalid variable name.
-                console->print_text("invalid variable name");
-            }
+            // Too few command parameters.
+            // Print usage instructions.
+            console->print_text("usage:");
+            console->print_text("set <setting-name> <setting-value>");
+            console->print_text("set <entity-name> <setting-name> <setting-value>");
         }
         else if (command_parameters.size() == 2)
         {
