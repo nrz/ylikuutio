@@ -350,15 +350,7 @@ namespace yli::config
         // to get variable value: get <variable>
         yli::config::SettingMaster* setting_master = entity->get_setting_master();
 
-        if (command_parameters.size() == 0)
-        {
-            // No command parameters.
-            // Print usage instructions.
-            console->print_text("usage:");
-            console->print_text("get <setting-name>");
-            console->print_text("get <entity-name> <setting-name>");
-        }
-        else if (command_parameters.size() == 1)
+        if (command_parameters.size() == 1)
         {
             // Exactly 1 parameter.
 
@@ -473,9 +465,11 @@ namespace yli::config
         }
         else
         {
-            // More than 2 command parameters.
-            // Print variable names.
-            console->print_text(setting_master->help());
+            // Incorrect number of command parameters.
+            // Print usage instructions.
+            console->print_text("usage:");
+            console->print_text("get <setting-name>");
+            console->print_text("get <entity-name> <setting-name>");
         }
 
         return nullptr;
