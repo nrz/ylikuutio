@@ -420,6 +420,7 @@ namespace yli::config
             if (!universe->is_entity(entity_name))
             {
                 // Not a valid `Entity`.
+                console->print_text("invalid entity name");
                 return nullptr;
             }
 
