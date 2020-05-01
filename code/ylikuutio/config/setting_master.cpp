@@ -353,8 +353,10 @@ namespace yli::config
         if (command_parameters.size() == 0)
         {
             // No command parameters.
-            // Print variable names.
-            console->print_text(setting_master->help());
+            // Print usage instructions.
+            console->print_text("usage:");
+            console->print_text("get <setting-name>");
+            console->print_text("get <entity-name> <setting-name>");
         }
         else if (command_parameters.size() == 1)
         {
