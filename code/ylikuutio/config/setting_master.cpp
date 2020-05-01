@@ -212,10 +212,8 @@ namespace yli::config
             const std::vector<std::string>& command_parameters)
     {
         // Usage:
-        // to get variable names: set
-        // to get valid values:   set <variable>
-        // to set variable:       set <variable> <value>
-        // to set variable:       set <entity> <variable> <value>
+        // to set variable:       set <variable-name> <setting-value>
+        // to set variable:       set <entity-name> <variable-name> <setting-value>
 
         yli::config::SettingMaster* setting_master = entity->get_setting_master();
 
@@ -347,8 +345,8 @@ namespace yli::config
             const std::vector<std::string>& command_parameters)
     {
         // Usage:
-        // to get variable names: get
-        // to get variable value: get <variable>
+        // to get variable value: get <variable-name>
+        // to get variable value: get <entity-name> <variable-name>
         yli::config::SettingMaster* setting_master = entity->get_setting_master();
 
         if (command_parameters.size() == 1)
