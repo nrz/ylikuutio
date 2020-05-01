@@ -215,7 +215,17 @@ namespace yli::config
         // to set variable:       set <variable-name> <setting-value>
         // to set variable:       set <entity-name> <variable-name> <setting-value>
 
+        if (entity == nullptr)
+        {
+            std::cerr << "ERROR: `SettingMaster::set_and_print`: `entity` is `nullptr`!\n";
+        }
+
         yli::config::SettingMaster* setting_master = entity->get_setting_master();
+
+        if (setting_master == nullptr)
+        {
+            std::cerr << "ERROR: `SettingMaster::set_and_print`: `setting_master` is `nullptr`!\n";
+        }
 
         if (command_parameters.size() == 2)
         {
@@ -253,7 +263,10 @@ namespace yli::config
             }
             else
             {
-                console->print_text(setting_master->help());
+                if (console != nullptr)
+                {
+                    console->print_text(setting_master->help());
+                }
             }
         }
         else if (command_parameters.size() == 3)
@@ -285,7 +298,11 @@ namespace yli::config
             if (!universe->is_entity(entity_name))
             {
                 // Not a valid `Entity`.
-                console->print_text("invalid entity name");
+                if (console != nullptr)
+                {
+                    console->print_text("invalid entity name");
+                }
+
                 return nullptr;
             }
 
@@ -324,16 +341,22 @@ namespace yli::config
             }
             else
             {
-                console->print_text(setting_master->help());
+                if (console != nullptr)
+                {
+                    console->print_text(setting_master->help());
+                }
             }
         }
         else
         {
-            // Incorrect number of command parameters.
-            // Print usage instructions.
-            console->print_text("usage:");
-            console->print_text("set <setting-name> <setting-value>");
-            console->print_text("set <entity-name> <setting-name> <setting-value>");
+            if (console != nullptr)
+            {
+                // Incorrect number of command parameters.
+                // Print usage instructions.
+                console->print_text("usage:");
+                console->print_text("set <setting-name> <setting-value>");
+                console->print_text("set <entity-name> <setting-name> <setting-value>");
+            }
         }
 
         return nullptr;
