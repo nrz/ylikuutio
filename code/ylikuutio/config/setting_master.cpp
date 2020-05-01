@@ -219,15 +219,7 @@ namespace yli::config
 
         yli::config::SettingMaster* setting_master = entity->get_setting_master();
 
-        if (command_parameters.size() < 2)
-        {
-            // Too few command parameters.
-            // Print usage instructions.
-            console->print_text("usage:");
-            console->print_text("set <setting-name> <setting-value>");
-            console->print_text("set <entity-name> <setting-name> <setting-value>");
-        }
-        else if (command_parameters.size() == 2)
+        if (command_parameters.size() == 2)
         {
             // Exactly 2 parameters.
 
@@ -335,6 +327,14 @@ namespace yli::config
             {
                 console->print_text(setting_master->help());
             }
+        }
+        else
+        {
+            // Incorrect number of command parameters.
+            // Print usage instructions.
+            console->print_text("usage:");
+            console->print_text("set <setting-name> <setting-value>");
+            console->print_text("set <entity-name> <setting-name> <setting-value>");
         }
 
         return nullptr;
