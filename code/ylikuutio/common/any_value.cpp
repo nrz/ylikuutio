@@ -39,7 +39,6 @@
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
-#include <variant>  // std::variant
 #include <vector>   // std::vector
 
 namespace yli::ontology
@@ -1196,7 +1195,6 @@ namespace yli::common
 
     AnyValue::AnyValue(const std::string& type, const std::string& value_string)
         : data(yli::common::get_variant<
-                std::variant<
                 bool,
                 char,
                 float,
@@ -1244,7 +1242,7 @@ namespace yli::common
                 std::shared_ptr<glm::vec4>,
                 yli::common::SphericalCoordinatesStruct*,
                 std::string*,
-                const std::string*>>(type, value_string))
+                const std::string*>(type, value_string))
     {
         // constructor.
     }

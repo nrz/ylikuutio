@@ -65,11 +65,11 @@ namespace yli::common
     struct SphericalCoordinatesStruct;
 
     // Get a variant based on `std::variant` type, a type string and a value string.
-    template<class V>
-        V get_variant(const std::string& type, const std::string& value_string)
+    template<class... V>
+        std::variant<V...> get_variant(const std::string& type, const std::string& value_string)
         {
             std::stringstream value_stringstream;
-            V my_variant;
+            std::variant<V...> my_variant;
 
             if (type == "bool")
             {
