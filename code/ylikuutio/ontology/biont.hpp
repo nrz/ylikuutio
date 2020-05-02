@@ -52,16 +52,11 @@ namespace yli::ontology
 {
     class Entity;
     class Universe;
-    class Holobiont;
     class ParentModule;
 
     class Biont: public yli::ontology::Movable
     {
         public:
-            // This method sets pointer to this `Biont` to `nullptr`, sets `parent` according to the input,
-            // and requests a new `childID` from the new `Species` or from the new `Glyph`.
-            void bind_to_new_parent(yli::ontology::Holobiont* const new_parent);
-
             Biont(yli::ontology::Universe* const universe, yli::ontology::BiontStruct& biont_struct, yli::ontology::ParentModule* const parent_module)
                 : Movable(
                         universe,

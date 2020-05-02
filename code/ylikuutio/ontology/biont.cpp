@@ -90,36 +90,6 @@ namespace yli::ontology
         symbiont_species->bind_Biont(this);
     }
 
-    void Biont::bind_to_new_parent(yli::ontology::Holobiont* const new_parent)
-    {
-        // This method sets pointer to this `Biont` to `nullptr`, sets `parent` according to the input,
-        // and requests a new `childID` from the new `Holobiont`.
-        //
-        // Requirements:
-        // `this->holobiont_parent` must not be `nullptr`.
-        // `new_parent` must not be `nullptr`.
-
-        // Unbind from the old parent `Holobiont`.
-        yli::ontology::Holobiont* const holobiont = static_cast<yli::ontology::Holobiont*>(this->child.get_parent());
-
-        if (holobiont == nullptr)
-        {
-            std::cerr << "ERROR: `Biont::bind_to_new_parent`: `holobiont` is `nullptr`!\n";
-            return;
-        }
-
-        if (new_parent == nullptr)
-        {
-            std::cerr << "ERROR: `Biont::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
-            return;
-        }
-
-        holobiont->parent_of_bionts.unbind_child(this->childID);
-
-        // Get `childID` from `Holobiont` and set pointer to this `Biont`.
-        this->child.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_bionts);
-    }
-
     Biont::~Biont()
     {
         // destructor.
