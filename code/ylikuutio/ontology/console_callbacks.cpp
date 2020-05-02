@@ -319,6 +319,11 @@ namespace yli::ontology
             std::vector<yli::callback::CallbackParameter*>&,
             yli::ontology::Console* console)
     {
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
+
         if (console->in_console)
         {
             console->is_left_control_pressed = true;
@@ -332,6 +337,11 @@ namespace yli::ontology
             std::vector<yli::callback::CallbackParameter*>&,
             yli::ontology::Console* console)
     {
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
+
         if (console->in_console)
         {
             console->is_right_control_pressed = true;
@@ -345,6 +355,11 @@ namespace yli::ontology
             std::vector<yli::callback::CallbackParameter*>&,
             yli::ontology::Console* console)
     {
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
+
         if (console->in_console)
         {
             console->is_left_alt_pressed = true;
@@ -358,6 +373,11 @@ namespace yli::ontology
             std::vector<yli::callback::CallbackParameter*>&,
             yli::ontology::Console* console)
     {
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
+
         if (console->in_console)
         {
             console->is_right_alt_pressed = true;
@@ -371,6 +391,11 @@ namespace yli::ontology
             std::vector<yli::callback::CallbackParameter*>&,
             yli::ontology::Console* console)
     {
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
+
         if (console->in_console)
         {
             console->is_left_shift_pressed = true;
@@ -384,6 +409,11 @@ namespace yli::ontology
             std::vector<yli::callback::CallbackParameter*>&,
             yli::ontology::Console* console)
     {
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
+
         if (console->in_console)
         {
             console->is_right_shift_pressed = true;
@@ -397,6 +427,11 @@ namespace yli::ontology
             std::vector<yli::callback::CallbackParameter*>&,
             yli::ontology::Console* console)
     {
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
+
         if (console->in_console && console->can_move_to_previous_input)
         {
             if (!console->in_historical_input && console->command_history.size() > 0)
@@ -437,6 +472,11 @@ namespace yli::ontology
             std::vector<yli::callback::CallbackParameter*>&,
             yli::ontology::Console* console)
     {
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
+
         if (console->in_console && console->can_move_to_next_input)
         {
             if (console->in_historical_input && console->historical_input_i == console->command_history.size() - 1)
@@ -472,6 +512,11 @@ namespace yli::ontology
             std::vector<yli::callback::CallbackParameter*>&,
             yli::ontology::Console* console)
     {
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
+
         if (console->in_console &&
                 console->can_backspace &&
                 console->cursor_it != console->current_input.begin())
@@ -489,7 +534,7 @@ namespace yli::ontology
             std::vector<yli::callback::CallbackParameter*>&,
             yli::ontology::Console* console)
     {
-        if (!console->in_console || !console->can_enter_key)
+        if (console == nullptr || !console->in_console || !console->can_enter_key)
         {
             return nullptr;
         }
@@ -585,6 +630,11 @@ namespace yli::ontology
             std::vector<yli::callback::CallbackParameter*>&,
             yli::ontology::Console* console)
     {
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
+
         if (console->in_console &&
                 console->can_ctrl_c &&
                 (console->is_left_control_pressed || console->is_right_control_pressed) &&
@@ -606,6 +656,11 @@ namespace yli::ontology
             std::vector<yli::callback::CallbackParameter*>&,
             yli::ontology::Console* console)
     {
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
+
         if (console->in_console &&
                 console->can_ctrl_w &&
                 (console->is_left_control_pressed || console->is_right_control_pressed) &&
@@ -651,6 +706,11 @@ namespace yli::ontology
             std::vector<yli::callback::CallbackParameter*>&,
             yli::ontology::Console* console)
     {
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
+
         if (console->in_console && console->can_page_up)
         {
             if (console->in_history)
@@ -680,6 +740,11 @@ namespace yli::ontology
             std::vector<yli::callback::CallbackParameter*>&,
             yli::ontology::Console* console)
     {
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
+
         if (console->in_console && console->can_page_down)
         {
             if (console->in_history)
@@ -703,6 +768,11 @@ namespace yli::ontology
             std::vector<yli::callback::CallbackParameter*>&,
             yli::ontology::Console* console)
     {
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
+
         if (console->in_console && console->can_home)
         {
             console->history_line_i = 0;
@@ -727,6 +797,11 @@ namespace yli::ontology
             std::vector<yli::callback::CallbackParameter*>&,
             yli::ontology::Console* console)
     {
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
+
         if (console->in_console && console->can_end)
         {
             console->in_history = false;
