@@ -26,6 +26,7 @@
 #include <limits>   // std::numeric_limits
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
 #include <variant>  // std::variant
 #include <vector>   // std::vector
 
@@ -1000,6 +1001,16 @@ TEST(any_value_must_be_initialized_appropriately, std_vector_float_shared_ptr)
     ASSERT_EQ(std::get<std::shared_ptr<std::vector<float>>>(std_vector_float_shared_ptr_any_value.data), std_vector_float_shared_ptr);
     ASSERT_EQ(std::strlen(std_vector_float_shared_ptr_any_value.get_datatype().c_str()), std::strlen("std::shared_ptr<std::vector<float>>"));
     ASSERT_EQ(std::strcmp(std_vector_float_shared_ptr_any_value.get_datatype().c_str(), "std::shared_ptr<std::vector<float>>"), 0);
+}
+
+TEST(any_value_must_be_initialized_appropriately, std_string_shared_ptr)
+{
+    std::shared_ptr<std::string> std_string_shared_ptr = std::make_shared<std::string>("foo");
+    yli::common::AnyValue std_string_shared_ptr_any_value = yli::common::AnyValue(std_string_shared_ptr);
+    ASSERT_TRUE(std::holds_alternative<std::shared_ptr<std::string>>(std_string_shared_ptr_any_value.data));
+    ASSERT_EQ(std::get<std::shared_ptr<std::string>>(std_string_shared_ptr_any_value.data), std_string_shared_ptr);
+    ASSERT_EQ(std::strlen(std_string_shared_ptr_any_value.get_datatype().c_str()), std::strlen("std::shared_ptr<std::string>"));
+    ASSERT_EQ(std::strcmp(std_string_shared_ptr_any_value.get_datatype().c_str(), "std::shared_ptr<std::string>"), 0);
 }
 
 TEST(any_value_must_be_initialized_appropriately, glm_vec3_shared_ptr)

@@ -254,6 +254,10 @@ namespace yli::common
         {
             return "std::shared_ptr<std::vector<float>>";
         }
+        else if (std::holds_alternative<std::shared_ptr<std::string>>(this->data))
+        {
+            return "std::shared_ptr<std::string>";
+        }
         else if (std::holds_alternative<std::shared_ptr<glm::vec3>>(this->data))
         {
             return "std::shared_ptr<glm::vec3>";
@@ -544,6 +548,17 @@ namespace yli::common
             else
             {
                 any_value_stringstream << "std::shared_ptr<std::vector<float>>";
+            }
+        }
+        else if (std::holds_alternative<std::shared_ptr<std::string>>(this->data))
+        {
+            if (std::get<std::shared_ptr<std::string>>(this->data) == nullptr)
+            {
+                any_value_stringstream << "nullptr";
+            }
+            else
+            {
+                any_value_stringstream << "std::shared_ptr<std::string>";
             }
         }
         else if (std::holds_alternative<std::shared_ptr<glm::vec3>>(this->data))
@@ -1238,6 +1253,7 @@ namespace yli::common
                 std::shared_ptr<std::vector<int32_t>>,
                 std::shared_ptr<std::vector<uint32_t>>,
                 std::shared_ptr<std::vector<float>>,
+                std::shared_ptr<std::string>,
                 std::shared_ptr<glm::vec3>,
                 std::shared_ptr<glm::vec4>,
                 yli::common::SphericalCoordinatesStruct*,
@@ -1519,6 +1535,12 @@ namespace yli::common
 
     AnyValue::AnyValue(std::shared_ptr<std::vector<float>> std_vector_float_shared_ptr)
         : data(std_vector_float_shared_ptr)
+    {
+        // constructor.
+    }
+
+    AnyValue::AnyValue(std::shared_ptr<std::string> std_string_shared_ptr)
+        : data(std_string_shared_ptr)
     {
         // constructor.
     }
