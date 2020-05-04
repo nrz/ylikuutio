@@ -1002,7 +1002,7 @@ TEST(any_value_must_be_initialized_appropriately, std_vector_float_shared_ptr)
     ASSERT_EQ(std::strcmp(std_vector_float_shared_ptr_any_value.get_datatype().c_str(), "std::shared_ptr<std::vector<float>>"), 0);
 }
 
-TEST(any_value_must_be_initialized_appropriately, glm_vec3)
+TEST(any_value_must_be_initialized_appropriately, glm_vec3_shared_ptr)
 {
     std::shared_ptr<glm::vec3> glm_vec3_shared_ptr = std::make_shared<glm::vec3>(1.0f, 2.0f, 3.0f);
     yli::common::AnyValue glm_vec3_pointer_any_value = yli::common::AnyValue(glm_vec3_shared_ptr);
@@ -1014,7 +1014,7 @@ TEST(any_value_must_be_initialized_appropriately, glm_vec3)
     ASSERT_EQ(glm_vec3_pointer_any_value.get_entity_pointer(), nullptr);
 }
 
-TEST(any_value_must_be_initialized_appropriately, glm_vec4)
+TEST(any_value_must_be_initialized_appropriately, glm_vec4_shared_ptr)
 {
     std::shared_ptr<glm::vec4> glm_vec4_shared_ptr = std::make_shared<glm::vec4>(1.0f, 2.0f, 3.0f, 4.0f);
     yli::common::AnyValue glm_vec4_pointer_any_value = yli::common::AnyValue(glm_vec4_shared_ptr);
