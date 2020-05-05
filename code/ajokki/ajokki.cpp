@@ -54,6 +54,8 @@
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
+#include "code/ylikuutio/ontology/console_command.hpp"
+#include "code/ylikuutio/ontology/generic_console_command.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/text2D.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
@@ -65,8 +67,10 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
+#include "code/ylikuutio/ontology/entity_factory_templates.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
+#include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -93,6 +97,7 @@
 #include <cmath>         // abs, cos, NAN, remainder, sin, std::isnan, std::pow
 #include <cstddef>       // std::size_t
 #include <exception>     // try, catch, std::exception
+#include <functional>    // std::function
 #include <iomanip>       // std::setfill, std::setprecision, std::setw
 #include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream>      // std::cout, std::cin, std::cerr
@@ -975,38 +980,43 @@ int main(const int argc, const char* const argv[]) try
     std::cout << "Defining console command callback engines.\n";
 
     // Config callbacks.
-    my_console->add_command_callback("settings", &yli::config::SettingMaster::print_settings);
-    my_console->add_command_callback("set", &yli::config::SettingMaster::set_and_print);
-    my_console->add_command_callback("get", &yli::config::SettingMaster::get_and_print);
+    yli::ontology::create_console_command("settings0", my_universe, my_console, std::function(&yli::config::SettingMaster::print_settings0));
+    yli::ontology::create_console_command("settings1", my_universe, my_console, std::function(&yli::config::SettingMaster::print_settings1));
+    yli::ontology::create_console_command("set2", my_universe, my_console, std::function(&yli::config::Setting::set2));
+    yli::ontology::create_console_command("set3", my_universe, my_console, std::function(&yli::config::Setting::set3));
+    yli::ontology::create_console_command("get1", my_universe, my_console, std::function(&yli::config::Setting::print_value1));
+    yli::ontology::create_console_command("get2", my_universe, my_console, std::function(&yli::config::Setting::print_value2));
 
     // `Entity` handling callbacks.
-    my_console->add_command_callback("entities", &yli::ontology::Universe::print_entities);
-    my_console->add_command_callback("parent", &yli::ontology::Universe::print_parent);
-    my_console->add_command_callback("activate", &yli::ontology::Universe::activate);
-    my_console->add_command_callback("delete", &yli::ontology::Universe::delete_entity);
-    my_console->add_command_callback("info", &yli::ontology::Universe::info);
-    my_console->add_command_callback("bind", &yli::ontology::Universe::bind);
-    my_console->add_command_callback("AnyValueEntity", &yli::ontology::Universe::create_any_value_entity);
-    my_console->add_command_callback("AnyStructEntity", &yli::ontology::Universe::create_any_struct_entity);
+    yli::ontology::create_console_command("entities", my_universe, my_console, std::function(&yli::ontology::Universe::print_entities));
+    yli::ontology::create_console_command("parent", my_universe, my_console, std::function(&yli::ontology::Universe::print_parent));
+    yli::ontology::create_console_command("activate", my_universe, my_console, std::function(&yli::ontology::Universe::activate));
+    yli::ontology::create_console_command("delete", my_universe, my_console, std::function(&yli::ontology::Universe::delete_entity));
+    yli::ontology::create_console_command("info0", my_universe, my_console, std::function(&yli::ontology::Universe::info0));
+    yli::ontology::create_console_command("info1", my_universe, my_console, std::function(&yli::ontology::Universe::info1));
+    yli::ontology::create_console_command("bind", my_universe, my_console, std::function(&yli::ontology::Universe::bind));
+    // yli::ontology::create_console_command("AnyValueEntity", my_universe, my_console, std::function(&yli::ontology::Universe::create_any_value_entity));
+    // yli::ontology::create_console_command("AnyStructEntity", my_universe, my_console, std::function(&yli::ontology::Universe::create_any_struct_entity));
 
     // Exit program callbacks.
-    my_console->add_command_callback("bye", &yli::snippets::quit);
-    my_console->add_command_callback("chau", &yli::snippets::quit);
-    my_console->add_command_callback("ciao", &yli::snippets::quit);
-    my_console->add_command_callback("heippa", &yli::snippets::quit);
-    my_console->add_command_callback("quit", &yli::snippets::quit);
-    my_console->add_command_callback("sayonara", &yli::snippets::quit);
+    yli::ontology::create_console_command("bye", my_universe, my_console, std::function(&yli::snippets::quit));
+    yli::ontology::create_console_command("chau", my_universe, my_console, std::function(&yli::snippets::quit));
+    yli::ontology::create_console_command("ciao", my_universe, my_console, std::function(&yli::snippets::quit));
+    yli::ontology::create_console_command("heippa", my_universe, my_console, std::function(&yli::snippets::quit));
+    yli::ontology::create_console_command("quit", my_universe, my_console, std::function(&yli::snippets::quit));
+    yli::ontology::create_console_command("sayonara", my_universe, my_console, std::function(&yli::snippets::quit));
 
     // Other callbacks.
-    my_console->add_command_callback("eval", &yli::ontology::Universe::eval);
-    my_console->add_command_callback("help", &yli::snippets::help);
-    my_console->add_command_callback("version", &ajokki::version);
-    my_console->add_command_callback("clear", &yli::ontology::Console::clear);
-    my_console->add_command_callback("screenshot", &yli::ontology::Universe::screenshot);
+    // my_console->add_command_callback("eval", &yli::ontology::Universe::eval);
+    yli::ontology::create_console_command("help", my_universe, my_console, std::function(&yli::snippets::help));
+    yli::ontology::create_console_command("version", my_universe, my_console, std::function(&ajokki::version));
+    yli::ontology::create_console_command("clear", my_universe, my_console, std::function(&yli::ontology::Console::clear));
+    // yli::ontology::create_console_command("screenshot", my_universe, my_console, std::function(&yli::ontology::Universe::screenshot));
 
     // mini-console callbacks.
-    mini_console->add_command_callback("activate", &yli::ontology::Universe::activate);
-    mini_console->add_command_callback("info", &yli::ontology::Universe::info);
+    yli::ontology::create_console_command("miniactivate", my_universe, mini_console, std::function(&yli::ontology::Universe::activate));
+    yli::ontology::create_console_command("miniinfo0", my_universe, mini_console, std::function(&yli::ontology::Universe::info0));
+    yli::ontology::create_console_command("miniinfo1", my_universe, mini_console, std::function(&yli::ontology::Universe::info1));
 
     bool has_mouse_focus = true;
 

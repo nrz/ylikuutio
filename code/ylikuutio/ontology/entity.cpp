@@ -167,6 +167,11 @@ namespace yli::ontology
         }
     }
 
+    std::string Entity::get_name() const
+    {
+        return this->name;
+    }
+
     void Entity::set_name(const std::string& name)
     {
         // Requirements:

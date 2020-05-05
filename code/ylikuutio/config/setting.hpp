@@ -43,6 +43,17 @@
 //
 // The value of each `Setting` is stored as `yli::common::AnyValue`.
 
+namespace yli::ontology
+{
+    class Entity;
+    class Console;
+}
+
+namespace yli::common
+{
+    class AnyValue;
+}
+
 namespace yli::config
 {
     class SettingMaster;
@@ -55,6 +66,32 @@ namespace yli::config
             ~Setting();
 
             std::string help() const;
+
+            std::shared_ptr<yli::common::AnyValue> get();
+            void set(const std::string& new_value);
+
+            // Public callbacks.
+
+            static std::shared_ptr<yli::common::AnyValue> set2(
+                    yli::config::Setting* const setting,
+                    std::shared_ptr<std::string> new_value);
+
+            static std::shared_ptr<yli::common::AnyValue> set3(
+                    yli::ontology::Entity* const context,
+                    yli::config::Setting* const setting,
+                    std::shared_ptr<std::string> new_value);
+
+            static std::shared_ptr<yli::common::AnyValue> print_value1(
+                    yli::ontology::Console* const console,
+                    yli::ontology::Universe* const context, // A context is needed so that correct `Setting is bound to the function call.
+                    yli::config::Setting* const setting);
+
+            static std::shared_ptr<yli::common::AnyValue> print_value2(
+                    yli::ontology::Console* const console,
+                    yli::ontology::Entity* const context,   // A context is needed so that correct `Setting is bound to the function call.
+                    yli::config::Setting* const setting);
+
+            // Public callbacks and here.
 
             friend SettingMaster;
 

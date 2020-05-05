@@ -20,29 +20,23 @@
 
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
-#include <string>   // std::string
-#include <vector>   // std::vector
 
-namespace yli
+namespace yli::common
 {
-    namespace common
-    {
-        class AnyValue;
-    }
+    class AnyValue;
+}
 
-    namespace ontology
-    {
-        class Entity;
-        class Console;
-    }
+namespace yli::ontology
+{
+    class Universe;
+    class Console;
 }
 
 namespace tulevaisuus
 {
     std::shared_ptr<yli::common::AnyValue> version(
-            yli::ontology::Console* const console,
-            yli::ontology::Entity* const universe_entity,
-            const std::vector<std::string>& command_parameters);
+            yli::ontology::Universe* const universe,
+            yli::ontology::Console* const console);
 }
 
 #endif

@@ -36,15 +36,9 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    std::shared_ptr<yli::common::AnyValue> quit(
-            yli::ontology::Console* const,
-            yli::ontology::Entity* const,
-            const std::vector<std::string>& command_parameters);
+    std::shared_ptr<yli::common::AnyValue> quit(yli::ontology::Console* const console);
 
-    std::shared_ptr<yli::common::AnyValue> help(
-            yli::ontology::Console* const,
-            yli::ontology::Entity* const,
-            const std::vector<std::string>& command_parameters);
+    std::shared_ptr<yli::common::AnyValue> help(yli::ontology::Console* const console);
 }
 
 #endif

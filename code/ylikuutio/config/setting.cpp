@@ -19,11 +19,18 @@
 #include "setting_master.hpp"
 #include "setting_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/console.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
 #include <string>   // std::string
+
+namespace yli::ontology
+{
+    class Entity;
+}
 
 namespace yli::config
 {
@@ -69,4 +76,102 @@ namespace yli::config
         std::string help_string = this->name + " TODO: create helptext for " + this->name;
         return help_string;
     }
+
+    std::shared_ptr<yli::common::AnyValue> Setting::get()
+    {
+        if (this->parent == nullptr || this->parent->parent == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (this->read_callback == nullptr)
+        {
+            return this->setting_value;
+        }
+
+        return this->read_callback(this->parent->parent, this->parent);
+    }
+
+    void Setting::set(const std::string& new_value)
+    {
+        if (this->setting_value == nullptr || this->parent == nullptr || this->parent->parent == nullptr)
+        {
+            return;
+        }
+
+        this->setting_value->set_new_value(new_value);
+
+        if (this->activate_callback != nullptr)
+        {
+            this->activate_callback(this->parent->parent, this->parent);
+        }
+    }
+
+    // Public callbacks.
+
+    std::shared_ptr<yli::common::AnyValue> Setting::set2(
+            yli::config::Setting* const setting,
+            std::shared_ptr<std::string> new_value)
+    {
+        // Usage:
+        // to set variable: set2 <variable-name> <setting-value>
+
+        if (setting == nullptr || new_value == nullptr)
+        {
+            return nullptr;
+        }
+
+        // Set a new value and call activate callback if there is such.
+        setting->set(*new_value);
+        return nullptr;
+    }
+
+    std::shared_ptr<yli::common::AnyValue> Setting::set3(
+            yli::ontology::Entity* const context,         // A context is needed so that correct `Setting is bound to the function call.
+            yli::config::Setting* const setting,
+            std::shared_ptr<std::string> new_value)
+    {
+        // Usage:
+        // to set variable:       set3 <entity-name> <variable-name> <setting-value>
+
+        // Set a new value and call activate callback if there is such.
+        return yli::config::Setting::set2(setting, new_value);
+    }
+
+    std::shared_ptr<yli::common::AnyValue> Setting::print_value1(
+            yli::ontology::Console* const console,
+            yli::ontology::Universe* const context, // A context is needed so that correct `Setting is bound to the function call.
+            yli::config::Setting* const setting)
+    {
+        // Usage:
+        // to get variable value: get1 <variable-name>
+
+        return yli::config::Setting::print_value2(console, context, setting);
+    }
+
+    std::shared_ptr<yli::common::AnyValue> Setting::print_value2(
+            yli::ontology::Console* const console,
+            yli::ontology::Entity* const context,  // A context is needed so that correct `Setting is bound to the function call.
+            yli::config::Setting* const setting)
+    {
+        // Usage:
+        // to get variable value: get2 <entity-name> <variable-name>
+
+        if (console == nullptr || context == nullptr || setting == nullptr)
+        {
+            return nullptr;
+        }
+
+        std::shared_ptr<yli::common::AnyValue> setting_value_shared_ptr = setting->get();
+
+        if (setting_value_shared_ptr == nullptr)
+        {
+            return nullptr;
+        }
+
+        console->print_text(setting_value_shared_ptr->get_string());
+        return nullptr;
+    }
+
+    // Public callbacks end here.
 }

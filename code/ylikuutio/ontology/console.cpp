@@ -22,7 +22,6 @@
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
-#include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 #include "SDL.h"
@@ -81,12 +80,6 @@ namespace yli::ontology
     void Console::set_input_mode(yli::input::InputMode* const input_mode)
     {
         this->input_mode = input_mode;
-    }
-
-    void Console::add_command_callback(const std::string& command, ConsoleCommandCallback callback)
-    {
-        // This function is used to define what different console commands actually do.
-        this->command_callback_map[command] = callback;
     }
 
     void Console::set_console_top_y(const uint32_t console_top_y)
@@ -176,8 +169,7 @@ namespace yli::ontology
 
     void Console::print_help()
     {
-        this->print_text("Available commands:");
-        yli::map::print_keys_to_console(this->command_callback_map, this);
+        this->print_text("TODO: help text here");
     }
 
     void Console::render()
@@ -540,9 +532,7 @@ namespace yli::ontology
     // Console command callbacks begin here.
 
     std::shared_ptr<yli::common::AnyValue> Console::clear(
-            yli::ontology::Console* const console,
-            yli::ontology::Entity* const universe_entity,
-            const std::vector<std::string>& command_parameters)
+            yli::ontology::Console* const console)
     {
         if (console != nullptr)
         {

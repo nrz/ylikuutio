@@ -38,6 +38,7 @@ namespace yli::common
 namespace yli::ontology
 {
     class Entity;
+    class Universe;
     class Console;
 }
 
@@ -72,20 +73,14 @@ namespace yli::config
 
             // Public callbacks.
 
-            static std::shared_ptr<yli::common::AnyValue> print_settings(
-                    yli::ontology::Console* const console,
-                    yli::ontology::Entity* const entity,
-                    const std::vector<std::string>& command_parameters);
+            static std::shared_ptr<yli::common::AnyValue> print_settings0(
+                    yli::ontology::Universe* const universe,
+                    yli::ontology::Console* const console);
 
-            static std::shared_ptr<yli::common::AnyValue> set_and_print(
+            static std::shared_ptr<yli::common::AnyValue> print_settings1(
+                    yli::ontology::Universe* const universe,
                     yli::ontology::Console* const console,
-                    yli::ontology::Entity* const entity,
-                    const std::vector<std::string>& command_parameters);
-
-            static std::shared_ptr<yli::common::AnyValue> get_and_print(
-                    yli::ontology::Console* const console,
-                    yli::ontology::Entity* const entity,
-                    const std::vector<std::string>& command_parameters);
+                    yli::ontology::Entity* const entity);
 
             static std::shared_ptr<yli::common::AnyValue> activate_planet_radius(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 

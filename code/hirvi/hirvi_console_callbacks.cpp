@@ -16,42 +16,26 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "hirvi_console_callbacks.hpp"
-#include "code/ylikuutio/ontology/console.hpp"
-#include "code/ylikuutio/callback/callback_magic_numbers.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/console.hpp"
 
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
-#include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace yli
+namespace yli::common
 {
-    namespace ontology
-    {
-        class Entity;
-        class Console;
-    }
+    class AnyValue;
 }
 
 namespace hirvi
 {
     std::shared_ptr<yli::common::AnyValue> version(
-            yli::ontology::Console* const console,
-            yli::ontology::Entity* const universe_entity,
-            const std::vector<std::string>& command_parameters)
+            yli::ontology::Universe* const universe,
+            yli::ontology::Console* const console)
     {
-        if (console == nullptr)
-        {
-            return nullptr;
-        }
-
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
-
-        if (universe == nullptr)
+        if (universe == nullptr || console == nullptr)
         {
             return nullptr;
         }
