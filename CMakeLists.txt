@@ -390,6 +390,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/common/any_value.cpp
     code/ylikuutio/common/any_value.hpp
     code/ylikuutio/common/datatype.hpp
+    code/ylikuutio/common/data_templates.hpp
     code/ylikuutio/common/pi.hpp
     code/ylikuutio/common/spherical_coordinates_struct.hpp
     code/ylikuutio/common/variant_templates.hpp
@@ -542,9 +543,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/console.cpp
     code/ylikuutio/ontology/console.hpp
     code/ylikuutio/ontology/console_callbacks.cpp
-    code/ylikuutio/ontology/console_command.cpp
     code/ylikuutio/ontology/console_command.hpp
-    code/ylikuutio/ontology/console_command_struct.hpp
+    code/ylikuutio/ontology/generic_console_command.cpp
+    code/ylikuutio/ontology/generic_console_command.hpp
     code/ylikuutio/ontology/get_content_callback.hpp
     code/ylikuutio/ontology/gl_attrib_locations.cpp
     code/ylikuutio/ontology/gl_attrib_locations.hpp
@@ -554,6 +555,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/entity.hpp
     code/ylikuutio/ontology/entity_factory.cpp
     code/ylikuutio/ontology/entity_factory.hpp
+    code/ylikuutio/ontology/entity_factory_templates.hpp
     code/ylikuutio/ontology/family_templates.hpp
     code/ylikuutio/ontology/font2D.cpp
     code/ylikuutio/ontology/font2D.hpp

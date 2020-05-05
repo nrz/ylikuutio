@@ -128,7 +128,8 @@ get a binary for Windows is to cross compile from Linux to Windows.
 Ylikuutio repository contains the following games/demos:
 
 Hirvi is a first person action-adventure of the adventures of
-a moose/elk called Hirvi. Cities are dangerous places for moose,
+a moose/elk called Hirvi. Cities are dangerous places for moose, and
+in particular an encounter with the police may prove deadly for Hirvi,
 even through moose are well-known pasifists.
 "hirvi" means a moose/elk in Finnish.
 Hirvi is a work in progress.

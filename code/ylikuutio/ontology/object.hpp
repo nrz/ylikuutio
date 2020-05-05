@@ -91,7 +91,7 @@ namespace yli::ontology
 
                 if (this->object_type == yli::ontology::ObjectType::CHARACTER)
                 {
-                    this->glyph          = object_struct.glyph;
+                    this->glyph = object_struct.glyph;
                 }
                 else
                 {

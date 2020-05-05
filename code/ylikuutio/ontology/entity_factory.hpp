@@ -92,8 +92,6 @@ namespace yli::ontology
             yli::ontology::Entity* create_any_struct_entity(const yli::common::AnyStruct& any_struct) const;
             yli::ontology::Entity* create_callback_engine_entity(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback) const;
 
-            friend class Universe;
-
         private:
             yli::ontology::Universe* universe;
     };

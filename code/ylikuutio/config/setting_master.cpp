@@ -130,390 +130,48 @@ namespace yli::config
 
     // public callbacks.
 
-    std::shared_ptr<yli::common::AnyValue> SettingMaster::print_settings(
-            yli::ontology::Console* const console,
-            yli::ontology::Entity* const entity,
-            const std::vector<std::string>& command_parameters)
+    std::shared_ptr<yli::common::AnyValue> SettingMaster::print_settings0(
+            yli::ontology::Universe* const universe,
+            yli::ontology::Console* const console)
     {
-        if (console == nullptr || entity == nullptr)
+        if (universe == nullptr || console == nullptr)
         {
             return nullptr;
         }
 
-        if (command_parameters.size() == 0)
+        // Print global variable names.
+        yli::config::SettingMaster* setting_master = universe->get_setting_master();
+
+        if (setting_master == nullptr)
         {
-            // No command parameters.
-            // Print global variable names.
-            yli::config::SettingMaster* setting_master = entity->get_setting_master();
-
-            if (setting_master == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::map::print_keys_to_console<yli::config::Setting*>(setting_master->setting_pointer_map, console);
+            return nullptr;
         }
-        else if (command_parameters.size() == 1)
-        {
-            // Exactly 1 parameter.
-            // Print the variable names of the `Entity`.
 
-            const std::string entity_name = command_parameters.at(0);
-
-            // if `print_settings` is called through `Console::enter_key`,
-            // then `entity` is `yli::ontology::Universe`, as
-            // `Console::enter_key` passes `yli::ontology::Universe` as
-            // the 2nd parameter to any `ConsoleCommandCallback` it calls.
-            //
-            // But now we want the `Entity` that corresponds `entity_name`
-            // in `yli::ontology::Universe` 'namespace' (Ylikuutio namespace, not
-            // C++ namespace!), so we need to request it from `yli::ontology::Universe`.
-            // We also want the `SettingMaster` of the same `Entity`.
-
-            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
-
-            if (universe == nullptr)
-            {
-                // `entity` is not a `yli::ontology::Universe*`,
-                // can not proceed further.
-                return nullptr;
-            }
-
-            // Check the validity of the entity name.
-            if (!universe->is_entity(entity_name))
-            {
-                // Not a valid `Entity`.
-                return nullptr;
-            }
-
-            yli::ontology::Entity* const named_entity = universe->get_entity(entity_name);
-
-            if (named_entity == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::config::SettingMaster* const setting_master = named_entity->get_setting_master();
-
-            if (setting_master == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::map::print_keys_to_console<yli::config::Setting*>(setting_master->setting_pointer_map, console);
-        }
+        yli::map::print_keys_to_console<yli::config::Setting*>(setting_master->setting_pointer_map, console);
 
         return nullptr;
     }
 
-    std::shared_ptr<yli::common::AnyValue> SettingMaster::set_and_print(
+    std::shared_ptr<yli::common::AnyValue> SettingMaster::print_settings1(
+            yli::ontology::Universe* const universe,
             yli::ontology::Console* const console,
-            yli::ontology::Entity* const entity,
-            const std::vector<std::string>& command_parameters)
+            yli::ontology::Entity* const entity)
     {
-        // Usage:
-        // to get variable names: set
-        // to get valid values:   set <variable>
-        // to set variable:       set <variable> <value>
-        // to set variable:       set <entity> <variable> <value>
-
-        yli::config::SettingMaster* setting_master = entity->get_setting_master();
-
-        if (command_parameters.size() == 0)
+        if (universe == nullptr || console == nullptr || entity == nullptr)
         {
-            // No command parameters.
-            // Print variable names.
-            console->print_text(setting_master->help());
-        }
-        else if (command_parameters.size() == 1)
-        {
-            // Exactly 1 parameter.
-
-            std::string setting_name = command_parameters.at(0);
-
-            // Print current value of the given variable.
-            if (setting_master->is_setting(setting_name))
-            {
-                yli::config::Setting* setting = setting_master->get(setting_name);
-
-                if (setting != nullptr && setting->setting_value != nullptr && setting->read_callback == nullptr)
-                {
-                    // Print variable value.
-                    console->print_text(setting->setting_value->get_string());
-                }
-                else if (setting != nullptr && setting->setting_value != nullptr)
-                {
-                    std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr = setting->read_callback(entity, setting_master);
-
-                    if (any_value_shared_ptr != nullptr)
-                    {
-                        console->print_text(any_value_shared_ptr->get_string());
-                    }
-                    else
-                    {
-                        console->print_text("read_callback returned nullptr");
-                    }
-                }
-                else
-                {
-                    // Invalid variable name.
-                    console->print_text("invalid variable name");
-                }
-            }
-            else
-            {
-                // Invalid variable name.
-                console->print_text("invalid variable name");
-            }
-        }
-        else if (command_parameters.size() == 2)
-        {
-            // Exactly 2 parameters.
-
-            std::string setting_name = command_parameters.at(0);
-
-            // Check the validity of the variable name.
-            if (setting_master->is_setting(setting_name))
-            {
-                // OK, this is a valid variable name.
-                // Set the variable value and activate it by
-                // calling the corresponding activate callback.
-                yli::config::Setting* setting = setting_master->setting_pointer_map[setting_name];
-
-                // copy current `AnyValue`.
-                std::shared_ptr<yli::common::AnyValue> setting_any_value = setting->setting_value;
-
-                // set a new value.
-                bool success = setting_any_value->set_new_value(command_parameters.at(1));
-
-                if (success)
-                {
-                    setting->setting_value = setting_any_value;
-
-                    if (setting->activate_callback != nullptr)
-                    {
-                        setting->activate_callback(entity, setting_master);
-                    }
-                }
-                else
-                {
-                    std::cerr << "ERROR: Setting a new value for `yli::config::Setting` " << setting_name << " failed! Attempted value: " << command_parameters.at(1) << "\n";
-                }
-            }
-            else
-            {
-                console->print_text(setting_master->help());
-            }
-        }
-        else if (command_parameters.size() == 3)
-        {
-            // Exactly 3 parameters.
-
-            std::string entity_name = command_parameters.at(0);
-
-            // if `set_and_print` is called through `Console::enter_key`,
-            // then `entity` is `yli::ontology::Universe`, as
-            // `Console::enter_key` passes `yli::ontology::Universe` as
-            // the 2nd parameter to any `ConsoleCommandCallback` it calls.
-            //
-            // But now we want the `Entity` that corresponds `entity_name`
-            // in `yli::ontology::Universe` 'namespace' (Ylikuutio namespace, not
-            // C++ namespace!), so we need to request it from `yli::ontology::Universe`.
-            // We also want the `SettingMaster` of the same `Entity`.
-
-            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
-
-            if (universe == nullptr)
-            {
-                // `entity` is not a `yli::ontology::Universe*`,
-                // can not proceed further.
-                return nullptr;
-            }
-
-            // Check the validity of the entity name.
-            if (!universe->is_entity(entity_name))
-            {
-                // Not a valid `Entity`.
-                return nullptr;
-            }
-
-            yli::ontology::Entity* const named_entity = universe->get_entity(entity_name);
-            setting_master = named_entity->get_setting_master();
-
-            std::string setting_name = command_parameters.at(1);
-
-            // Check the validity of the variable name.
-            if (setting_master->is_setting(setting_name))
-            {
-                // OK, this is a valid variable name.
-                // Set the variable value and activate it by
-                // calling the corresponding activate callback.
-                yli::config::Setting* setting = setting_master->setting_pointer_map[setting_name];
-
-                // copy current `AnyValue`.
-                std::shared_ptr<yli::common::AnyValue> setting_any_value = setting->setting_value;
-
-                // set a new value.
-                bool success = setting_any_value->set_new_value(command_parameters.at(2));
-
-                if (success)
-                {
-                    setting->setting_value = setting_any_value;
-
-                    if (setting->activate_callback != nullptr)
-                    {
-                        setting->activate_callback(named_entity, setting_master);
-                    }
-                }
-                else
-                {
-                    std::cerr << "ERROR: Setting a new value for `yli::ontology::Entity` " << entity_name << ", `yli::config::Setting` " << setting_name << " failed! Attempted value: " << command_parameters.at(2) << "\n";
-                }
-            }
-            else
-            {
-                console->print_text(setting_master->help());
-            }
+            return nullptr;
         }
 
-        return nullptr;
-    }
+        // Print the variable names of the `Entity`.
 
-    std::shared_ptr<yli::common::AnyValue> SettingMaster::get_and_print(
-            yli::ontology::Console* const console,
-            yli::ontology::Entity* const entity,
-            const std::vector<std::string>& command_parameters)
-    {
-        // Usage:
-        // to get variable names: get
-        // to get variable value: get <variable>
-        yli::config::SettingMaster* setting_master = entity->get_setting_master();
+        yli::config::SettingMaster* const setting_master = entity->get_setting_master();
 
-        if (command_parameters.size() == 0)
+        if (setting_master == nullptr)
         {
-            // No command parameters.
-            // Print variable names.
-            console->print_text(setting_master->help());
+            return nullptr;
         }
-        else if (command_parameters.size() == 1)
-        {
-            // Exactly 1 parameter.
 
-            std::string setting_name = command_parameters.at(0);
-
-            // Print valid values of the given variable.
-            if (setting_master->is_setting(setting_name))
-            {
-                yli::config::Setting* setting = setting_master->get(setting_name);
-
-                if (setting != nullptr && setting->setting_value != nullptr && setting->read_callback == nullptr)
-                {
-                    // Print variable value.
-                    console->print_text(setting->setting_value->get_string());
-                }
-                else if (setting != nullptr && setting->setting_value != nullptr)
-                {
-                    std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr = setting->read_callback(entity, setting_master);
-
-                    if (any_value_shared_ptr != nullptr)
-                    {
-                        console->print_text(any_value_shared_ptr->get_string());
-                    }
-                    else
-                    {
-                        console->print_text("read_callback returned nullptr");
-                    }
-                }
-                else
-                {
-                    // Invalid variable name.
-                    console->print_text("invalid variable name");
-                }
-            }
-            else
-            {
-                // Invalid variable name.
-                console->print_text("invalid variable name");
-            }
-        }
-        else if (command_parameters.size() == 2)
-        {
-            // Exactly 2 parameters.
-
-            const std::string entity_name = command_parameters.at(0);
-
-            // if `get_and_print` is called through `Console::enter_key`,
-            // then `entity` is `yli::ontology::Universe`, as
-            // `Console::enter_key` passes `yli::ontology::Universe` as
-            // the 2nd parameter to any `ConsoleCommandCallback` it calls.
-            //
-            // But now we want the `Entity` that corresponds `entity_name`
-            // in `yli::ontology::Universe` 'namespace' (Ylikuutio namespace, not
-            // C++ namespace!), so we need to request it from `yli::ontology::Universe`.
-            // We also want the `SettingMaster` of the same `Entity`.
-
-            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
-
-            if (universe == nullptr)
-            {
-                // `entity` is not a `yli::ontology::Universe*`,
-                // can not proceed further.
-                return nullptr;
-            }
-
-            // Check the validity of the entity name.
-            if (!universe->is_entity(entity_name))
-            {
-                // Not a valid `Entity`.
-                return nullptr;
-            }
-
-            yli::ontology::Entity* const named_entity = universe->get_entity(entity_name);
-            setting_master = named_entity->get_setting_master();
-
-            std::string setting_name = command_parameters.at(1);
-
-            // Print valid values of the given variable.
-            if (setting_master->is_setting(setting_name))
-            {
-                yli::config::Setting* setting = setting_master->get(setting_name);
-
-                if (setting != nullptr && setting->setting_value != nullptr && setting->read_callback == nullptr)
-                {
-                    // Print variable value.
-                    console->print_text(setting->setting_value->get_string());
-                }
-                else if (setting != nullptr && setting->setting_value != nullptr)
-                {
-                    std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr = setting->read_callback(named_entity, setting_master);
-
-                    if (any_value_shared_ptr != nullptr)
-                    {
-                        console->print_text(any_value_shared_ptr->get_string());
-                    }
-                    else
-                    {
-                        console->print_text("read_callback returned nullptr");
-                    }
-                }
-                else
-                {
-                    // Invalid variable name.
-                    console->print_text("invalid variable name");
-                }
-            }
-            else
-            {
-                // Invalid variable name.
-                console->print_text("invalid variable name");
-            }
-        }
-        else
-        {
-            // More than 2 command parameters.
-            // Print variable names.
-            console->print_text(setting_master->help());
-        }
+        yli::map::print_keys_to_console<yli::config::Setting*>(setting_master->setting_pointer_map, console);
 
         return nullptr;
     }

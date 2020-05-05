@@ -27,6 +27,7 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
+#include <functional>    // std::function
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
 #include <list>          // std::list
@@ -171,7 +172,6 @@ namespace yli::ontology
             void adjust_n_rows();
 
             void set_input_mode(yli::input::InputMode* const input_mode);
-            void add_command_callback(const std::string& command, ConsoleCommandCallback callback);
             void set_console_top_y(const uint32_t console_top_y);
             void set_console_bottom_y(const uint32_t console_bottom_y);
             void set_console_left_x(const uint32_t console_left_x);
@@ -403,9 +403,7 @@ namespace yli::ontology
             // Console command callbacks begin here.
 
             static std::shared_ptr<yli::common::AnyValue> clear(
-                    yli::ontology::Console* const console,
-                    yli::ontology::Entity* const universe_entity,
-                    const std::vector<std::string>& command_parameters);
+                    yli::ontology::Console* const console);
 
             // Public callbacks end here.
 
@@ -457,9 +455,6 @@ namespace yli::ontology
             std::list<char> temp_input;    // This is used for temporary storage of new input while modifying historical inputs.
 
             yli::input::InputMode* input_mode;
-
-            // `std::unordered_map` contains console command callbacks.
-            std::unordered_map<std::string, ConsoleCommandCallback> command_callback_map;
 
             std::size_t console_top_y;
             std::size_t console_bottom_y;

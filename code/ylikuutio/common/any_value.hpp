@@ -123,6 +123,7 @@ namespace yli::common
             AnyValue(std::shared_ptr<std::vector<int32_t>> std_vector_int32_t_shared_ptr);
             AnyValue(std::shared_ptr<std::vector<uint32_t>> std_vector_uint32_t_shared_ptr);
             AnyValue(std::shared_ptr<std::vector<float>> std_vector_float_shared_ptr);
+            AnyValue(std::shared_ptr<std::string> std_string_shared_ptr);
             AnyValue(std::shared_ptr<glm::vec3> const glm_vec3_shared_ptr);
             AnyValue(std::shared_ptr<glm::vec4> const glm_vec4_shared_ptr);
 
@@ -170,6 +171,7 @@ namespace yli::common
                 std::shared_ptr<std::vector<int32_t>>,
                 std::shared_ptr<std::vector<uint32_t>>,
                 std::shared_ptr<std::vector<float>>,
+                std::shared_ptr<std::string>,
                 std::shared_ptr<glm::vec3>,
                 std::shared_ptr<glm::vec4>,
                 yli::common::SphericalCoordinatesStruct*,

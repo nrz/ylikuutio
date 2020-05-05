@@ -34,20 +34,19 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    std::shared_ptr<yli::common::AnyValue> quit(
-            yli::ontology::Console* const,
-            yli::ontology::Entity* const,
-            const std::vector<std::string>& command_parameters)
+    std::shared_ptr<yli::common::AnyValue> quit(yli::ontology::Console* const console)
     {
         uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
         return std::make_shared<yli::common::AnyValue>(exit_program_magic_number);
     }
 
-    std::shared_ptr<yli::common::AnyValue> help(
-            yli::ontology::Console* const console,
-            yli::ontology::Entity* const,
-            const std::vector<std::string>& command_parameters)
+    std::shared_ptr<yli::common::AnyValue> help(yli::ontology::Console* const console)
     {
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
+
         console->print_help();
         return nullptr;
     }
