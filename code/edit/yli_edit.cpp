@@ -660,7 +660,7 @@ int main(const int argc, const char* const argv[]) try
     yli::ontology::create_console_command("info0", my_universe, my_console, std::function(&yli::ontology::Universe::info0));
     yli::ontology::create_console_command("info1", my_universe, my_console, std::function(&yli::ontology::Universe::info1));
     yli::ontology::create_console_command("bind", my_universe, my_console, std::function(&yli::ontology::Universe::bind));
-    // yli::ontology::create_console_command("AnyValueEntity", my_universe, my_console, std::function(&yli::ontology::Universe::create_any_value_entity));
+    yli::ontology::create_console_command("AnyValueEntity", my_universe, my_console, std::function(&yli::ontology::Universe::create_any_value_entity));
     yli::ontology::create_console_command("AnyStructEntity", my_universe, my_console, std::function(&yli::ontology::Universe::create_any_struct_entity));
 
     // Exit program callbacks.
