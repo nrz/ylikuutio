@@ -706,8 +706,8 @@ int main(const int argc, const char* const argv[]) try
     yli::ontology::create_console_command("info0", my_universe, my_console, std::function(&yli::ontology::Universe::info0));
     yli::ontology::create_console_command("info1", my_universe, my_console, std::function(&yli::ontology::Universe::info1));
     yli::ontology::create_console_command("bind", my_universe, my_console, std::function(&yli::ontology::Universe::bind));
-    // yli::ontology::create_console_command("AnyValueEntity", my_universe, my_console, std::function(&yli::ontology::Universe::create_any_value_entity));
-    // yli::ontology::create_console_command("AnyStructEntity", my_universe, my_console, std::function(&yli::ontology::Universe::create_any_struct_entity));
+    yli::ontology::create_console_command("AnyValueEntity", my_universe, my_console, std::function(&yli::ontology::Universe::create_any_value_entity));
+    yli::ontology::create_console_command("AnyStructEntity", my_universe, my_console, std::function(&yli::ontology::Universe::create_any_struct_entity));
 
     // Exit program callbacks.
     yli::ontology::create_console_command("bye", my_universe, my_console, std::function(&yli::snippets::quit));
@@ -722,7 +722,7 @@ int main(const int argc, const char* const argv[]) try
     yli::ontology::create_console_command("help", my_universe, my_console, std::function(&yli::snippets::help));
     yli::ontology::create_console_command("version", my_universe, my_console, std::function(&tulevaisuus::version));
     yli::ontology::create_console_command("clear", my_universe, my_console, std::function(&yli::ontology::Console::clear));
-    // yli::ontology::create_console_command("screenshot", my_universe, my_console, std::function(&yli::ontology::Universe::screenshot));
+    yli::ontology::create_console_command("screenshot", my_universe, my_console, std::function(&yli::ontology::Universe::screenshot));
 
     bool has_mouse_focus = true;
 

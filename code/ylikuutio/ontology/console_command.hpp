@@ -71,8 +71,88 @@ namespace yli::ontology
     class Universe;
     class ParentModule;
 
-    template<class T1, class T2 = void, class T3 = void>
+    template<class T1, class T2 = void, class T3 = void, class T4 = void>
         class ConsoleCommand: public yli::ontology::GenericConsoleCommand
+    {
+        public:
+            ConsoleCommand(
+                    yli::ontology::Universe* const universe,
+                    yli::ontology::ParentModule* const parent_module,
+                    std::function<std::shared_ptr<yli::common::AnyValue>(T1 arg1, T2 arg2, T3 arg3, T4 arg4)> callback)
+                : GenericConsoleCommand(universe, parent_module),
+                callback(callback)
+            {
+                // constructor.
+
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "yli::ontology::ConsoleCommand*";
+            }
+
+            ConsoleCommand(const ConsoleCommand&) = delete;            // Delete copy constructor.
+            ConsoleCommand &operator=(const ConsoleCommand&) = delete; // Delete copy assignment.
+
+            // destructor.
+            virtual ~ConsoleCommand()
+            {
+                // destructor.
+            }
+
+            std::shared_ptr<yli::common::AnyValue> execute(const std::vector<std::string>& parameter_vector) override
+            {
+                yli::ontology::Universe* const universe = this->get_universe();
+
+                if (universe == nullptr)
+                {
+                    std::cerr << "ERROR: `ConsoleCommand::execute`: `universe` is `nullptr`!\n";
+                    return nullptr;
+                }
+
+                yli::ontology::Entity* const console_entity = this->child_of_console.get_parent();
+
+                if (console_entity == nullptr)
+                {
+                    std::cerr << "ERROR: `ConsoleCommand::execute`: `console_entity` is `nullptr`!\n";
+                    return nullptr;
+                }
+
+                yli::ontology::Console* const console = dynamic_cast<yli::ontology::Console*>(console_entity);
+
+                if (console == nullptr)
+                {
+                    std::cerr << "ERROR: `ConsoleCommand::execute`: `console` is `nullptr`!\n";
+                    return nullptr;
+                }
+
+                bool success1 = true;
+                bool success2 = true;
+                bool success3 = true;
+                bool success4 = true;
+
+                std::size_t parameter_i = 0;
+
+                yli::ontology::Entity* context = universe; // `Universe` is the default context.
+                T1 value1 = yli::common::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, success1);
+                T2 value2 = yli::common::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, success2);
+                T3 value3 = yli::common::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, success3);
+                T4 value4 = yli::common::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, success3);
+
+                if (success1 && success2 && success3 && success4)
+                {
+                    // Call the callback function if binding was successful.
+                    std::tuple parameter_tuple = std::make_tuple(value1, value2, value3, value4);
+                    return std::apply(this->callback, parameter_tuple);
+                }
+
+                return nullptr;
+            }
+
+        private:
+            // The callback may receive different kinds of arguments.
+            const std::function<std::shared_ptr<yli::common::AnyValue>(T1, T2, T3, T4)> callback;
+    };
+
+    template<class T1, class T2, class T3>
+    class ConsoleCommand<T1, T2, T3, void>: public yli::ontology::GenericConsoleCommand
     {
         public:
             ConsoleCommand(
@@ -150,7 +230,7 @@ namespace yli::ontology
     };
 
     template<class T1, class T2>
-    class ConsoleCommand<T1, T2, void>: public yli::ontology::GenericConsoleCommand
+    class ConsoleCommand<T1, T2, void, void>: public yli::ontology::GenericConsoleCommand
     {
         public:
             ConsoleCommand(
@@ -226,7 +306,7 @@ namespace yli::ontology
     };
 
     template<class T1>
-    class ConsoleCommand<T1, void, void>: public yli::ontology::GenericConsoleCommand
+    class ConsoleCommand<T1, void, void, void>: public yli::ontology::GenericConsoleCommand
     {
         public:
             ConsoleCommand(
