@@ -631,13 +631,13 @@ namespace yli::ontology
 
             // Public `Entity` create callbacks.
 
-            std::shared_ptr<yli::common::AnyValue> create_any_value_entity(
+            static std::shared_ptr<yli::common::AnyValue> create_any_value_entity(
                     yli::ontology::Universe* const universe,
                     std::shared_ptr<std::string> variable_name_shared_ptr,
                     std::shared_ptr<std::string> variable_type_shared_ptr,
                     std::shared_ptr<std::string> value_string_shared_ptr);
 
-            std::shared_ptr<yli::common::AnyValue> create_any_struct_entity(
+            static std::shared_ptr<yli::common::AnyValue> create_any_struct_entity(
                     yli::ontology::Universe* const universe,
                     std::shared_ptr<std::string> variable_name_shared_ptr);
 
@@ -682,7 +682,7 @@ namespace yli::ontology
 
             // Other public callbacks.
 
-            std::shared_ptr<yli::common::AnyValue> screenshot(
+            static std::shared_ptr<yli::common::AnyValue> screenshot(
                     yli::ontology::Universe* const universe,
                     std::shared_ptr<std::string> filename);
 
