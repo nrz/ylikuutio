@@ -1660,6 +1660,25 @@ namespace yli::common
             success = true;
             return std::make_shared<std::string>(parameter_vector.at(parameter_i++));
         }
+
+    template<>
+        std::string convert_string_to_value_and_advance_index(
+                yli::ontology::Universe* universe,
+                yli::ontology::Console* console,
+                yli::ontology::Entity*& context,
+                const std::vector<std::string>& parameter_vector,
+                std::size_t& parameter_i,
+                bool& success)
+        {
+            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
+            {
+                success = false;
+                return nullptr;
+            }
+
+            success = true;
+            return parameter_vector.at(parameter_i++);
+        }
 }
 
 #endif
