@@ -51,8 +51,6 @@ namespace yli::ontology
                 // constructor.
 
                 // `yli::ontology::Entity` member variables begin here.
-                // Descendant classes of `yli::ontology::Model` need to set the value of `type_string`!
-                // Descendant classes of `yli::ontology::Model` need to set the value of `can_be_erased`!
                 this->type_string = "yli::ontology::GenericConsoleCommand*";
             }
 
