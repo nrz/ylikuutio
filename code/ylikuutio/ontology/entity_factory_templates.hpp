@@ -19,7 +19,7 @@
 #define __ENTITY_FACTORY_TEMPLATES_HPP_INCLUDED
 
 #include "console.hpp"
-#include "console_command.hpp"
+#include "console_command_overload.hpp"
 #include "generic_console_command.hpp"
 
 // Include standard headers
@@ -45,7 +45,7 @@ namespace yli::ontology
                 yli::ontology::Console* const console,
                 std::function<std::shared_ptr<yli::common::AnyValue>(Args...)> callback)
         {
-            yli::ontology::GenericConsoleCommand* const generic_console_command = new yli::ontology::ConsoleCommand<Args...>(
+            yli::ontology::GenericConsoleCommand* const generic_console_command = new yli::ontology::ConsoleCommandOverload<Args...>(
                     universe,
                     (console == nullptr ? nullptr : &console->parent_of_console_commands),
                     callback);

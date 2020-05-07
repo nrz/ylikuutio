@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __CONSOLE_COMMAND_HPP_INCLUDED
-#define __CONSOLE_COMMAND_HPP_INCLUDED
+#ifndef __CONSOLE_COMMAND_OVERLOAD_HPP_INCLUDED
+#define __CONSOLE_COMMAND_OVERLOAD_HPP_INCLUDED
 
 #include "generic_console_command.hpp"
 #include "console.hpp"
@@ -72,10 +72,10 @@ namespace yli::ontology
     class ParentModule;
 
     template<class T1, class T2 = void, class T3 = void, class T4 = void>
-        class ConsoleCommand: public yli::ontology::GenericConsoleCommand
+        class ConsoleCommandOverload: public yli::ontology::GenericConsoleCommand
     {
         public:
-            ConsoleCommand(
+            ConsoleCommandOverload(
                     yli::ontology::Universe* const universe,
                     yli::ontology::ParentModule* const parent_module,
                     std::function<std::shared_ptr<yli::common::AnyValue>(T1 arg1, T2 arg2, T3 arg3, T4 arg4)> callback)
@@ -85,14 +85,14 @@ namespace yli::ontology
                 // constructor.
 
                 // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::ConsoleCommand*";
+                this->type_string = "yli::ontology::ConsoleCommandOverload*";
             }
 
-            ConsoleCommand(const ConsoleCommand&) = delete;            // Delete copy constructor.
-            ConsoleCommand &operator=(const ConsoleCommand&) = delete; // Delete copy assignment.
+            ConsoleCommandOverload(const ConsoleCommandOverload&) = delete;            // Delete copy constructor.
+            ConsoleCommandOverload &operator=(const ConsoleCommandOverload&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~ConsoleCommand()
+            virtual ~ConsoleCommandOverload()
             {
                 // destructor.
             }
@@ -103,7 +103,7 @@ namespace yli::ontology
 
                 if (universe == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommand::execute`: `universe` is `nullptr`!\n";
+                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `universe` is `nullptr`!\n";
                     return nullptr;
                 }
 
@@ -111,7 +111,7 @@ namespace yli::ontology
 
                 if (console_entity == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommand::execute`: `console_entity` is `nullptr`!\n";
+                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console_entity` is `nullptr`!\n";
                     return nullptr;
                 }
 
@@ -119,7 +119,7 @@ namespace yli::ontology
 
                 if (console == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommand::execute`: `console` is `nullptr`!\n";
+                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console` is `nullptr`!\n";
                     return nullptr;
                 }
 
@@ -152,10 +152,10 @@ namespace yli::ontology
     };
 
     template<class T1, class T2, class T3>
-    class ConsoleCommand<T1, T2, T3, void>: public yli::ontology::GenericConsoleCommand
+    class ConsoleCommandOverload<T1, T2, T3, void>: public yli::ontology::GenericConsoleCommand
     {
         public:
-            ConsoleCommand(
+            ConsoleCommandOverload(
                     yli::ontology::Universe* const universe,
                     yli::ontology::ParentModule* const parent_module,
                     std::function<std::shared_ptr<yli::common::AnyValue>(T1 arg1, T2 arg2, T3 arg3)> callback)
@@ -165,14 +165,14 @@ namespace yli::ontology
                 // constructor.
 
                 // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::ConsoleCommand*";
+                this->type_string = "yli::ontology::ConsoleCommandOverload*";
             }
 
-            ConsoleCommand(const ConsoleCommand&) = delete;            // Delete copy constructor.
-            ConsoleCommand &operator=(const ConsoleCommand&) = delete; // Delete copy assignment.
+            ConsoleCommandOverload(const ConsoleCommandOverload&) = delete;            // Delete copy constructor.
+            ConsoleCommandOverload &operator=(const ConsoleCommandOverload&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~ConsoleCommand()
+            virtual ~ConsoleCommandOverload()
             {
                 // destructor.
             }
@@ -183,7 +183,7 @@ namespace yli::ontology
 
                 if (universe == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommand::execute`: `universe` is `nullptr`!\n";
+                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `universe` is `nullptr`!\n";
                     return nullptr;
                 }
 
@@ -191,7 +191,7 @@ namespace yli::ontology
 
                 if (console_entity == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommand::execute`: `console_entity` is `nullptr`!\n";
+                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console_entity` is `nullptr`!\n";
                     return nullptr;
                 }
 
@@ -199,7 +199,7 @@ namespace yli::ontology
 
                 if (console == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommand::execute`: `console` is `nullptr`!\n";
+                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console` is `nullptr`!\n";
                     return nullptr;
                 }
 
@@ -230,10 +230,10 @@ namespace yli::ontology
     };
 
     template<class T1, class T2>
-    class ConsoleCommand<T1, T2, void, void>: public yli::ontology::GenericConsoleCommand
+    class ConsoleCommandOverload<T1, T2, void, void>: public yli::ontology::GenericConsoleCommand
     {
         public:
-            ConsoleCommand(
+            ConsoleCommandOverload(
                     yli::ontology::Universe* const universe,
                     yli::ontology::ParentModule* const parent_module,
                     std::function<std::shared_ptr<yli::common::AnyValue>(T1 arg1, T2 arg2)> callback)
@@ -243,14 +243,14 @@ namespace yli::ontology
                 // constructor.
 
                 // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::ConsoleCommand*";
+                this->type_string = "yli::ontology::ConsoleCommandOverload*";
             }
 
-            ConsoleCommand(const ConsoleCommand&) = delete;            // Delete copy constructor.
-            ConsoleCommand &operator=(const ConsoleCommand&) = delete; // Delete copy assignment.
+            ConsoleCommandOverload(const ConsoleCommandOverload&) = delete;            // Delete copy constructor.
+            ConsoleCommandOverload &operator=(const ConsoleCommandOverload&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~ConsoleCommand()
+            virtual ~ConsoleCommandOverload()
             {
                 // destructor.
             }
@@ -261,7 +261,7 @@ namespace yli::ontology
 
                 if (universe == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommand::execute`: `universe` is `nullptr`!\n";
+                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `universe` is `nullptr`!\n";
                     return nullptr;
                 }
 
@@ -269,7 +269,7 @@ namespace yli::ontology
 
                 if (console_entity == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommand::execute`: `console_entity` is `nullptr`!\n";
+                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console_entity` is `nullptr`!\n";
                     return nullptr;
                 }
 
@@ -277,7 +277,7 @@ namespace yli::ontology
 
                 if (console == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommand::execute`: `console` is `nullptr`!\n";
+                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console` is `nullptr`!\n";
                     return nullptr;
                 }
 
@@ -306,10 +306,10 @@ namespace yli::ontology
     };
 
     template<class T1>
-    class ConsoleCommand<T1, void, void, void>: public yli::ontology::GenericConsoleCommand
+    class ConsoleCommandOverload<T1, void, void, void>: public yli::ontology::GenericConsoleCommand
     {
         public:
-            ConsoleCommand(
+            ConsoleCommandOverload(
                     yli::ontology::Universe* const universe,
                     yli::ontology::ParentModule* const parent_module,
                     std::function<std::shared_ptr<yli::common::AnyValue>(T1 arg1)> callback)
@@ -319,14 +319,14 @@ namespace yli::ontology
                 // constructor.
 
                 // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::ConsoleCommand*";
+                this->type_string = "yli::ontology::ConsoleCommandOverload*";
             }
 
-            ConsoleCommand(const ConsoleCommand&) = delete;            // Delete copy constructor.
-            ConsoleCommand &operator=(const ConsoleCommand&) = delete; // Delete copy assignment.
+            ConsoleCommandOverload(const ConsoleCommandOverload&) = delete;            // Delete copy constructor.
+            ConsoleCommandOverload &operator=(const ConsoleCommandOverload&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~ConsoleCommand()
+            virtual ~ConsoleCommandOverload()
             {
                 // destructor.
             }
@@ -337,7 +337,7 @@ namespace yli::ontology
 
                 if (universe == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommand::execute`: `universe` is `nullptr`!\n";
+                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `universe` is `nullptr`!\n";
                     return nullptr;
                 }
 
@@ -345,7 +345,7 @@ namespace yli::ontology
 
                 if (console_entity == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommand::execute`: `console_entity` is `nullptr`!\n";
+                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console_entity` is `nullptr`!\n";
                     return nullptr;
                 }
 
@@ -353,7 +353,7 @@ namespace yli::ontology
 
                 if (console == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommand::execute`: `console` is `nullptr`!\n";
+                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console` is `nullptr`!\n";
                     return nullptr;
                 }
 
