@@ -54,8 +54,6 @@
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
-#include "code/ylikuutio/ontology/console_command.hpp"
-#include "code/ylikuutio/ontology/generic_console_command.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/text2D.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
