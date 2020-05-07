@@ -691,38 +691,38 @@ int main(const int argc, const char* const argv[]) try
     std::cout << "Defining console command callback engines.\n";
 
     // Config callbacks.
-    yli::ontology::create_console_command("settings0", my_universe, my_console, std::function(&yli::config::SettingMaster::print_settings0));
-    yli::ontology::create_console_command("settings1", my_universe, my_console, std::function(&yli::config::SettingMaster::print_settings1));
-    yli::ontology::create_console_command("set2", my_universe, my_console, std::function(&yli::config::Setting::set2));
-    yli::ontology::create_console_command("set3", my_universe, my_console, std::function(&yli::config::Setting::set3));
-    yli::ontology::create_console_command("get1", my_universe, my_console, std::function(&yli::config::Setting::print_value1));
-    yli::ontology::create_console_command("get2", my_universe, my_console, std::function(&yli::config::Setting::print_value2));
+    yli::ontology::create_console_command_overload("settings", my_console, std::function(&yli::config::SettingMaster::print_settings0));
+    yli::ontology::create_console_command_overload("settings", my_console, std::function(&yli::config::SettingMaster::print_settings1));
+    yli::ontology::create_console_command_overload("set", my_console, std::function(&yli::config::Setting::set2));
+    yli::ontology::create_console_command_overload("set", my_console, std::function(&yli::config::Setting::set3));
+    yli::ontology::create_console_command_overload("get", my_console, std::function(&yli::config::Setting::print_value1));
+    yli::ontology::create_console_command_overload("get", my_console, std::function(&yli::config::Setting::print_value2));
 
     // `Entity` handling callbacks.
-    yli::ontology::create_console_command("entities", my_universe, my_console, std::function(&yli::ontology::Universe::print_entities));
-    yli::ontology::create_console_command("parent", my_universe, my_console, std::function(&yli::ontology::Universe::print_parent));
-    yli::ontology::create_console_command("activate", my_universe, my_console, std::function(&yli::ontology::Universe::activate));
-    yli::ontology::create_console_command("delete", my_universe, my_console, std::function(&yli::ontology::Universe::delete_entity));
-    yli::ontology::create_console_command("info0", my_universe, my_console, std::function(&yli::ontology::Universe::info0));
-    yli::ontology::create_console_command("info1", my_universe, my_console, std::function(&yli::ontology::Universe::info1));
-    yli::ontology::create_console_command("bind", my_universe, my_console, std::function(&yli::ontology::Universe::bind));
-    yli::ontology::create_console_command("AnyValueEntity", my_universe, my_console, std::function(&yli::ontology::Universe::create_any_value_entity));
-    yli::ontology::create_console_command("AnyStructEntity", my_universe, my_console, std::function(&yli::ontology::Universe::create_any_struct_entity));
+    yli::ontology::create_console_command_overload("entities", my_console, std::function(&yli::ontology::Universe::print_entities));
+    yli::ontology::create_console_command_overload("parent", my_console, std::function(&yli::ontology::Universe::print_parent));
+    yli::ontology::create_console_command_overload("activate", my_console, std::function(&yli::ontology::Universe::activate));
+    yli::ontology::create_console_command_overload("delete", my_console, std::function(&yli::ontology::Universe::delete_entity));
+    yli::ontology::create_console_command_overload("info", my_console, std::function(&yli::ontology::Universe::info0));
+    yli::ontology::create_console_command_overload("info", my_console, std::function(&yli::ontology::Universe::info1));
+    yli::ontology::create_console_command_overload("bind", my_console, std::function(&yli::ontology::Universe::bind));
+    yli::ontology::create_console_command_overload("AnyValueEntity", my_console, std::function(&yli::ontology::Universe::create_any_value_entity));
+    yli::ontology::create_console_command_overload("AnyStructEntity", my_console, std::function(&yli::ontology::Universe::create_any_struct_entity));
 
     // Exit program callbacks.
-    yli::ontology::create_console_command("bye", my_universe, my_console, std::function(&yli::snippets::quit));
-    yli::ontology::create_console_command("chau", my_universe, my_console, std::function(&yli::snippets::quit));
-    yli::ontology::create_console_command("ciao", my_universe, my_console, std::function(&yli::snippets::quit));
-    yli::ontology::create_console_command("heippa", my_universe, my_console, std::function(&yli::snippets::quit));
-    yli::ontology::create_console_command("quit", my_universe, my_console, std::function(&yli::snippets::quit));
-    yli::ontology::create_console_command("sayonara", my_universe, my_console, std::function(&yli::snippets::quit));
+    yli::ontology::create_console_command_overload("bye", my_console, std::function(&yli::snippets::quit));
+    yli::ontology::create_console_command_overload("chau", my_console, std::function(&yli::snippets::quit));
+    yli::ontology::create_console_command_overload("ciao", my_console, std::function(&yli::snippets::quit));
+    yli::ontology::create_console_command_overload("heippa", my_console, std::function(&yli::snippets::quit));
+    yli::ontology::create_console_command_overload("quit", my_console, std::function(&yli::snippets::quit));
+    yli::ontology::create_console_command_overload("sayonara", my_console, std::function(&yli::snippets::quit));
 
     // Other callbacks.
     // my_console->add_command_callback("eval", &yli::ontology::Universe::eval);
-    yli::ontology::create_console_command("help", my_universe, my_console, std::function(&yli::snippets::help));
-    yli::ontology::create_console_command("version", my_universe, my_console, std::function(&tulevaisuus::version));
-    yli::ontology::create_console_command("clear", my_universe, my_console, std::function(&yli::ontology::Console::clear));
-    yli::ontology::create_console_command("screenshot", my_universe, my_console, std::function(&yli::ontology::Universe::screenshot));
+    yli::ontology::create_console_command_overload("help", my_console, std::function(&yli::snippets::help));
+    yli::ontology::create_console_command_overload("version", my_console, std::function(&tulevaisuus::version));
+    yli::ontology::create_console_command_overload("clear", my_console, std::function(&yli::ontology::Console::clear));
+    yli::ontology::create_console_command_overload("screenshot", my_console, std::function(&yli::ontology::Universe::screenshot));
 
     bool has_mouse_focus = true;
 

@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __GENERIC_CONSOLE_COMMAND_HPP_INCLUDED
-#define __GENERIC_CONSOLE_COMMAND_HPP_INCLUDED
+#ifndef __GENERIC_CONSOLE_COMMAND_OVERLOAD_HPP_INCLUDED
+#define __GENERIC_CONSOLE_COMMAND_OVERLOAD_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "child_module.hpp"
@@ -26,6 +26,7 @@
 #include <functional> // std::function
 #include <memory>     // std::make_shared, std::shared_ptr
 #include <string>     // std::string
+#include <utility>    // std::pair
 #include <vector>     // std::vector
 
 namespace yli::common
@@ -39,34 +40,34 @@ namespace yli::ontology
     class ParentModule;
     class Console;
 
-    class GenericConsoleCommand: public yli::ontology::Entity
+    class GenericConsoleCommandOverload: public yli::ontology::Entity
     {
         public:
-            GenericConsoleCommand(
+            GenericConsoleCommandOverload(
                     yli::ontology::Universe* const universe,
                     yli::ontology::ParentModule* const parent_module)
                 : Entity(universe),
-                child_of_console(parent_module, this)
+                child_of_console_command(parent_module, this)
             {
                 // constructor.
 
                 // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::GenericConsoleCommand*";
+                this->type_string = "yli::ontology::GenericConsoleCommandOverload*";
             }
 
-            GenericConsoleCommand(const GenericConsoleCommand&) = delete;            // Delete copy constructor.
-            GenericConsoleCommand &operator=(const GenericConsoleCommand&) = delete; // Delete copy assignment.
+            GenericConsoleCommandOverload(const GenericConsoleCommandOverload&) = delete;            // Delete copy constructor.
+            GenericConsoleCommandOverload &operator=(const GenericConsoleCommandOverload&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~GenericConsoleCommand();
+            virtual ~GenericConsoleCommandOverload();
 
             yli::ontology::Entity* get_parent() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            virtual std::shared_ptr<yli::common::AnyValue> execute(const std::vector<std::string>& parameter_vector) = 0;
+            virtual std::pair<bool, std::shared_ptr<yli::common::AnyValue>> execute(const std::vector<std::string>& parameter_vector) = 0;
 
-            yli::ontology::ChildModule child_of_console;
+            yli::ontology::ChildModule child_of_console_command;
     };
 }
 

@@ -29,6 +29,7 @@
 #include "text_struct.hpp"
 #include "text3D_struct.hpp"
 #include "font_struct.hpp"
+#include "console_command_struct.hpp"
 #include "camera_struct.hpp"
 #include "compute_task_struct.hpp"
 #include "brain_struct.hpp"
@@ -83,6 +84,7 @@ namespace yli::ontology
             yli::ontology::Entity* create_text3d(const yli::ontology::Text3DStruct& text3D_struct) const;
             yli::ontology::Entity* create_font2d(const yli::ontology::FontStruct& font_struct) const;
             yli::ontology::Entity* create_console() const;
+            yli::ontology::Entity* create_console_command(const yli::ontology::ConsoleCommandStruct& console_command_struct) const;
             yli::ontology::Entity* create_camera(const yli::ontology::CameraStruct& camera_struct) const;
             yli::ontology::Entity* create_compute_task(const yli::ontology::ComputeTaskStruct& compute_task_struct) const;
             yli::ontology::Entity* create_brain(const yli::ontology::BrainStruct& brain_struct) const;
