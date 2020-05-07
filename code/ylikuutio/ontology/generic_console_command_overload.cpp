@@ -22,6 +22,8 @@
 
 namespace yli::ontology
 {
+    class Entity;
+
     GenericConsoleCommandOverload::~GenericConsoleCommandOverload()
     {
         // destructor.
