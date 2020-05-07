@@ -17,6 +17,9 @@
 
 #include "generic_console_command_overload.hpp"
 
+// Include standard headers
+#include <cstddef> // std::size_t
+
 namespace yli::ontology
 {
     GenericConsoleCommandOverload::~GenericConsoleCommandOverload()
