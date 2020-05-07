@@ -20,6 +20,7 @@
 
 #include "generic_console_command_overload.hpp"
 #include "console.hpp"
+#include "console_command.hpp"
 #include "code/ylikuutio/common/data_templates.hpp"
 
 // Include standard headers
@@ -28,6 +29,7 @@
 #include <memory>     // std::make_shared, std::shared_ptr
 #include <string>     // std::string
 #include <tuple>      // std::apply, std::tuple, std::tuple_cat
+#include <utility>    // std::pair
 #include <vector>     // std::vector
 
 // This is a bit complicated, as the callback may receive different kinds of arguments.
@@ -97,22 +99,32 @@ namespace yli::ontology
                 // destructor.
             }
 
-            std::shared_ptr<yli::common::AnyValue> execute(const std::vector<std::string>& parameter_vector) override
+            std::pair<bool, std::shared_ptr<yli::common::AnyValue>> execute(const std::vector<std::string>& parameter_vector) override
             {
                 yli::ontology::Universe* const universe = this->get_universe();
 
                 if (universe == nullptr)
                 {
                     std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `universe` is `nullptr`!\n";
-                    return nullptr;
+                    return std::pair(false, nullptr);
                 }
 
-                yli::ontology::Entity* const console_entity = this->child_of_console.get_parent();
+                yli::ontology::Entity* const console_command_entity = this->child_of_console_command.get_parent();
+
+                yli::ontology::ConsoleCommand* const console_command = dynamic_cast<yli::ontology::ConsoleCommand*>(console_command_entity);
+
+                if (console_command == nullptr)
+                {
+                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console_command` is `nullptr`!\n";
+                    return std::pair(false, nullptr);
+                }
+
+                yli::ontology::Entity* const console_entity = console_command->get_parent();
 
                 if (console_entity == nullptr)
                 {
                     std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console_entity` is `nullptr`!\n";
-                    return nullptr;
+                    return std::pair(false, nullptr);
                 }
 
                 yli::ontology::Console* const console = dynamic_cast<yli::ontology::Console*>(console_entity);
@@ -120,7 +132,7 @@ namespace yli::ontology
                 if (console == nullptr)
                 {
                     std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console` is `nullptr`!\n";
-                    return nullptr;
+                    return std::pair(false, nullptr);
                 }
 
                 bool success1 = true;
@@ -136,14 +148,14 @@ namespace yli::ontology
                 T3 value3 = yli::common::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, success3);
                 T4 value4 = yli::common::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, success3);
 
-                if (success1 && success2 && success3 && success4)
+                if (success1 && success2 && success3 && success4 && parameter_i == parameter_vector.size())
                 {
                     // Call the callback function if binding was successful.
                     std::tuple parameter_tuple = std::make_tuple(value1, value2, value3, value4);
-                    return std::apply(this->callback, parameter_tuple);
+                    return std::pair(true, std::apply(this->callback, parameter_tuple));
                 }
 
-                return nullptr;
+                return std::pair(false, nullptr);
             }
 
         private:
@@ -177,22 +189,32 @@ namespace yli::ontology
                 // destructor.
             }
 
-            std::shared_ptr<yli::common::AnyValue> execute(const std::vector<std::string>& parameter_vector) override
+            std::pair<bool, std::shared_ptr<yli::common::AnyValue>> execute(const std::vector<std::string>& parameter_vector) override
             {
                 yli::ontology::Universe* const universe = this->get_universe();
 
                 if (universe == nullptr)
                 {
                     std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `universe` is `nullptr`!\n";
-                    return nullptr;
+                    return std::pair(false, nullptr);
                 }
 
-                yli::ontology::Entity* const console_entity = this->child_of_console.get_parent();
+                yli::ontology::Entity* const console_command_entity = this->child_of_console_command.get_parent();
+
+                yli::ontology::ConsoleCommand* const console_command = dynamic_cast<yli::ontology::ConsoleCommand*>(console_command_entity);
+
+                if (console_command == nullptr)
+                {
+                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console_command` is `nullptr`!\n";
+                    return std::pair(false, nullptr);
+                }
+
+                yli::ontology::Entity* const console_entity = console_command->get_parent();
 
                 if (console_entity == nullptr)
                 {
                     std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console_entity` is `nullptr`!\n";
-                    return nullptr;
+                    return std::pair(false, nullptr);
                 }
 
                 yli::ontology::Console* const console = dynamic_cast<yli::ontology::Console*>(console_entity);
@@ -200,7 +222,7 @@ namespace yli::ontology
                 if (console == nullptr)
                 {
                     std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console` is `nullptr`!\n";
-                    return nullptr;
+                    return std::pair(false, nullptr);
                 }
 
                 bool success1 = true;
@@ -214,14 +236,14 @@ namespace yli::ontology
                 T2 value2 = yli::common::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, success2);
                 T3 value3 = yli::common::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, success3);
 
-                if (success1 && success2 && success3)
+                if (success1 && success2 && success3 && parameter_i == parameter_vector.size())
                 {
                     // Call the callback function if binding was successful.
                     std::tuple parameter_tuple = std::make_tuple(value1, value2, value3);
-                    return std::apply(this->callback, parameter_tuple);
+                    return std::pair(true, std::apply(this->callback, parameter_tuple));
                 }
 
-                return nullptr;
+                return std::pair(false, nullptr);
             }
 
         private:
@@ -255,22 +277,32 @@ namespace yli::ontology
                 // destructor.
             }
 
-            std::shared_ptr<yli::common::AnyValue> execute(const std::vector<std::string>& parameter_vector) override
+            std::pair<bool, std::shared_ptr<yli::common::AnyValue>> execute(const std::vector<std::string>& parameter_vector) override
             {
                 yli::ontology::Universe* const universe = this->get_universe();
 
                 if (universe == nullptr)
                 {
                     std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `universe` is `nullptr`!\n";
-                    return nullptr;
+                    return std::pair(false, nullptr);
                 }
 
-                yli::ontology::Entity* const console_entity = this->child_of_console.get_parent();
+                yli::ontology::Entity* const console_command_entity = this->child_of_console_command.get_parent();
+
+                yli::ontology::ConsoleCommand* const console_command = dynamic_cast<yli::ontology::ConsoleCommand*>(console_command_entity);
+
+                if (console_command == nullptr)
+                {
+                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console_command` is `nullptr`!\n";
+                    return std::pair(false, nullptr);
+                }
+
+                yli::ontology::Entity* const console_entity = console_command->get_parent();
 
                 if (console_entity == nullptr)
                 {
                     std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console_entity` is `nullptr`!\n";
-                    return nullptr;
+                    return std::pair(false, nullptr);
                 }
 
                 yli::ontology::Console* const console = dynamic_cast<yli::ontology::Console*>(console_entity);
@@ -278,7 +310,7 @@ namespace yli::ontology
                 if (console == nullptr)
                 {
                     std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console` is `nullptr`!\n";
-                    return nullptr;
+                    return std::pair(false, nullptr);
                 }
 
                 bool success1 = true;
@@ -290,14 +322,14 @@ namespace yli::ontology
                 T1 value1 = yli::common::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, success1);
                 T2 value2 = yli::common::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, success2);
 
-                if (success1 && success2)
+                if (success1 && success2 && parameter_i == parameter_vector.size())
                 {
                     // Call the callback function if binding was successful.
                     std::tuple parameter_tuple = std::make_tuple(value1, value2);
-                    return std::apply(this->callback, parameter_tuple);
+                    return std::pair(true, std::apply(this->callback, parameter_tuple));
                 }
 
-                return nullptr;
+                return std::pair(false, nullptr);
             }
 
         private:
@@ -331,22 +363,32 @@ namespace yli::ontology
                 // destructor.
             }
 
-            std::shared_ptr<yli::common::AnyValue> execute(const std::vector<std::string>& parameter_vector) override
+            std::pair<bool, std::shared_ptr<yli::common::AnyValue>> execute(const std::vector<std::string>& parameter_vector) override
             {
                 yli::ontology::Universe* const universe = this->get_universe();
 
                 if (universe == nullptr)
                 {
                     std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `universe` is `nullptr`!\n";
-                    return nullptr;
+                    return std::pair(false, nullptr);
                 }
 
-                yli::ontology::Entity* const console_entity = this->child_of_console.get_parent();
+                yli::ontology::Entity* const console_command_entity = this->child_of_console_command.get_parent();
+
+                yli::ontology::ConsoleCommand* const console_command = dynamic_cast<yli::ontology::ConsoleCommand*>(console_command_entity);
+
+                if (console_command == nullptr)
+                {
+                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console_command` is `nullptr`!\n";
+                    return std::pair(false, nullptr);
+                }
+
+                yli::ontology::Entity* const console_entity = console_command->get_parent();
 
                 if (console_entity == nullptr)
                 {
                     std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console_entity` is `nullptr`!\n";
-                    return nullptr;
+                    return std::pair(false, nullptr);
                 }
 
                 yli::ontology::Console* const console = dynamic_cast<yli::ontology::Console*>(console_entity);
@@ -354,7 +396,7 @@ namespace yli::ontology
                 if (console == nullptr)
                 {
                     std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console` is `nullptr`!\n";
-                    return nullptr;
+                    return std::pair(false, nullptr);
                 }
 
                 bool success1 = true;
@@ -364,14 +406,14 @@ namespace yli::ontology
                 yli::ontology::Entity* context = universe; // `Universe` is the default context.
                 T1 value1 = yli::common::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, success1);
 
-                if (success1)
+                if (success1 && parameter_i == parameter_vector.size())
                 {
                     // Call the callback function if binding was successful.
                     std::tuple parameter_tuple = std::make_tuple(value1);
-                    return std::apply(this->callback, parameter_tuple);
+                    return std::pair(true, std::apply(this->callback, parameter_tuple));
                 }
 
-                return nullptr;
+                return std::pair(false, nullptr);
             }
 
         private:

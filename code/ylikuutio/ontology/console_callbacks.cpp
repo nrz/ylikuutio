@@ -17,7 +17,7 @@
 
 #include "console.hpp"
 #include "universe.hpp"
-#include "generic_console_command_overload.hpp"
+#include "console_command.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 
@@ -614,16 +614,16 @@ namespace yli::ontology
 
             if (universe != nullptr)
             {
-                yli::ontology::Entity* const generic_console_command_entity = universe->get_entity(command);
+                yli::ontology::Entity* const console_command_entity = universe->get_entity(command);
 
-                if (generic_console_command_entity != nullptr && generic_console_command_entity->get_parent() == console)
+                if (console_command_entity != nullptr && console_command_entity->get_parent() == console)
                 {
-                    yli::ontology::GenericConsoleCommandOverload* const generic_console_command =
-                        dynamic_cast<yli::ontology::GenericConsoleCommandOverload*>(generic_console_command_entity);
+                    yli::ontology::ConsoleCommand* const console_command =
+                        dynamic_cast<yli::ontology::ConsoleCommand*>(console_command_entity);
 
-                    if (generic_console_command != nullptr)
+                    if (console_command != nullptr)
                     {
-                        any_value = generic_console_command->execute(parameter_vector);
+                        any_value = console_command->execute(parameter_vector);
                     }
                 }
             }

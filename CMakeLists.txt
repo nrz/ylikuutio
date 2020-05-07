@@ -543,7 +543,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/console.cpp
     code/ylikuutio/ontology/console.hpp
     code/ylikuutio/ontology/console_callbacks.cpp
+    code/ylikuutio/ontology/console_command.cpp
+    code/ylikuutio/ontology/console_command.hpp
     code/ylikuutio/ontology/console_command_overload.hpp
+    code/ylikuutio/ontology/console_command_struct.hpp
     code/ylikuutio/ontology/generic_console_command_overload.cpp
     code/ylikuutio/ontology/generic_console_command_overload.hpp
     code/ylikuutio/ontology/get_content_callback.hpp
