@@ -18,7 +18,7 @@
 #ifndef __CONSOLE_COMMAND_OVERLOAD_HPP_INCLUDED
 #define __CONSOLE_COMMAND_OVERLOAD_HPP_INCLUDED
 
-#include "generic_console_command.hpp"
+#include "generic_console_command_overload.hpp"
 #include "console.hpp"
 #include "code/ylikuutio/common/data_templates.hpp"
 
@@ -72,14 +72,14 @@ namespace yli::ontology
     class ParentModule;
 
     template<class T1, class T2 = void, class T3 = void, class T4 = void>
-        class ConsoleCommandOverload: public yli::ontology::GenericConsoleCommand
+        class ConsoleCommandOverload: public yli::ontology::GenericConsoleCommandOverload
     {
         public:
             ConsoleCommandOverload(
                     yli::ontology::Universe* const universe,
                     yli::ontology::ParentModule* const parent_module,
                     std::function<std::shared_ptr<yli::common::AnyValue>(T1 arg1, T2 arg2, T3 arg3, T4 arg4)> callback)
-                : GenericConsoleCommand(universe, parent_module),
+                : GenericConsoleCommandOverload(universe, parent_module),
                 callback(callback)
             {
                 // constructor.
@@ -152,14 +152,14 @@ namespace yli::ontology
     };
 
     template<class T1, class T2, class T3>
-    class ConsoleCommandOverload<T1, T2, T3, void>: public yli::ontology::GenericConsoleCommand
+    class ConsoleCommandOverload<T1, T2, T3, void>: public yli::ontology::GenericConsoleCommandOverload
     {
         public:
             ConsoleCommandOverload(
                     yli::ontology::Universe* const universe,
                     yli::ontology::ParentModule* const parent_module,
                     std::function<std::shared_ptr<yli::common::AnyValue>(T1 arg1, T2 arg2, T3 arg3)> callback)
-                : GenericConsoleCommand(universe, parent_module),
+                : GenericConsoleCommandOverload(universe, parent_module),
                 callback(callback)
             {
                 // constructor.
@@ -230,14 +230,14 @@ namespace yli::ontology
     };
 
     template<class T1, class T2>
-    class ConsoleCommandOverload<T1, T2, void, void>: public yli::ontology::GenericConsoleCommand
+    class ConsoleCommandOverload<T1, T2, void, void>: public yli::ontology::GenericConsoleCommandOverload
     {
         public:
             ConsoleCommandOverload(
                     yli::ontology::Universe* const universe,
                     yli::ontology::ParentModule* const parent_module,
                     std::function<std::shared_ptr<yli::common::AnyValue>(T1 arg1, T2 arg2)> callback)
-                : GenericConsoleCommand(universe, parent_module),
+                : GenericConsoleCommandOverload(universe, parent_module),
                 callback(callback)
             {
                 // constructor.
@@ -306,14 +306,14 @@ namespace yli::ontology
     };
 
     template<class T1>
-    class ConsoleCommandOverload<T1, void, void, void>: public yli::ontology::GenericConsoleCommand
+    class ConsoleCommandOverload<T1, void, void, void>: public yli::ontology::GenericConsoleCommandOverload
     {
         public:
             ConsoleCommandOverload(
                     yli::ontology::Universe* const universe,
                     yli::ontology::ParentModule* const parent_module,
                     std::function<std::shared_ptr<yli::common::AnyValue>(T1 arg1)> callback)
-                : GenericConsoleCommand(universe, parent_module),
+                : GenericConsoleCommandOverload(universe, parent_module),
                 callback(callback)
             {
                 // constructor.

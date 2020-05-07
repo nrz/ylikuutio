@@ -15,27 +15,27 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "generic_console_command.hpp"
+#include "generic_console_command_overload.hpp"
 
 namespace yli::ontology
 {
-    GenericConsoleCommand::~GenericConsoleCommand()
+    GenericConsoleCommandOverload::~GenericConsoleCommandOverload()
     {
         // destructor.
     }
 
-    yli::ontology::Entity* GenericConsoleCommand::get_parent() const
+    yli::ontology::Entity* GenericConsoleCommandOverload::get_parent() const
     {
         return this->child_of_console.get_parent();
     }
 
-    std::size_t GenericConsoleCommand::get_number_of_children() const
+    std::size_t GenericConsoleCommandOverload::get_number_of_children() const
     {
-        return 0; // `GenericConsoleCommand` has no children.
+        return 0; // `GenericConsoleCommandOverload` has no children.
     }
 
-    std::size_t GenericConsoleCommand::get_number_of_descendants() const
+    std::size_t GenericConsoleCommandOverload::get_number_of_descendants() const
     {
-        return 0; // `GenericConsoleCommand` has no children.
+        return 0; // `GenericConsoleCommandOverload` has no children.
     }
 }

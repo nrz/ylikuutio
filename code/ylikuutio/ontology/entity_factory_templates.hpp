@@ -20,7 +20,7 @@
 
 #include "console.hpp"
 #include "console_command_overload.hpp"
-#include "generic_console_command.hpp"
+#include "generic_console_command_overload.hpp"
 
 // Include standard headers
 #include <functional> // std::function
@@ -39,13 +39,13 @@ namespace yli::ontology
     class ParentModule;
 
     template<class... Args>
-        yli::ontology::GenericConsoleCommand* create_console_command(
+        yli::ontology::GenericConsoleCommandOverload* create_console_command(
                 const std::string& name,
                 yli::ontology::Universe* const universe,
                 yli::ontology::Console* const console,
                 std::function<std::shared_ptr<yli::common::AnyValue>(Args...)> callback)
         {
-            yli::ontology::GenericConsoleCommand* const generic_console_command = new yli::ontology::ConsoleCommandOverload<Args...>(
+            yli::ontology::GenericConsoleCommandOverload* const generic_console_command = new yli::ontology::ConsoleCommandOverload<Args...>(
                     universe,
                     (console == nullptr ? nullptr : &console->parent_of_console_commands),
                     callback);
