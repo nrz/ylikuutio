@@ -66,7 +66,7 @@ namespace yli::ontology
     class Movable: public yli::ontology::Entity
     {
         public:
-            void bind_to_Brain();
+            void bind_to_brain();
             void unbind_from_Brain();
 
             // This method sets pointer to this `Movable` to `nullptr`, sets `brain` according to the input, and requests a new `movableID` from the new `Brain`.
@@ -169,7 +169,7 @@ namespace yli::ontology
                 std::cout << "Executing `setting_master->create_setting(vertical_angle_setting_struct);` ...\n";
                 setting_master->create_setting(vertical_angle_setting_struct);
 
-                this->bind_to_Brain();
+                this->bind_to_brain();
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Movable*";

@@ -28,7 +28,7 @@
 
 namespace yli::ontology
 {
-    void Movable::bind_to_Brain()
+    void Movable::bind_to_brain()
     {
         // requirements:
         // `this->brain` must not be `nullptr`.
@@ -36,7 +36,7 @@ namespace yli::ontology
 
         if (brain == nullptr)
         {
-            std::cerr << "ERROR: `Movable::bind_to_Brain`: `brain` is `nullptr`!\n";
+            std::cerr << "ERROR: `Movable::bind_to_brain`: `brain` is `nullptr`!\n";
             return;
         }
 
@@ -60,7 +60,7 @@ namespace yli::ontology
         this->unbind_from_Brain(); // unbind from the current `Brain` if there is such.
 
         this->brain = new_brain;
-        this->bind_to_Brain();
+        this->bind_to_brain();
     }
 
     Movable::~Movable()
