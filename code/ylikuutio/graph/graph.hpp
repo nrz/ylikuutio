@@ -38,7 +38,7 @@ namespace yli::graph
     {
         public:
             void bind_node(yli::graph::Node* const node);
-            void unbind_Node(const std::size_t childID);
+            void unbind_node(const std::size_t childID);
 
             // constructor.
             Graph();

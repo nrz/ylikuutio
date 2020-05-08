@@ -42,7 +42,7 @@ namespace yli::graph
                 this->number_of_nodes);
     }
 
-    void Graph::unbind_Node(const std::size_t childID)
+    void Graph::unbind_node(const std::size_t childID)
     {
         yli::hierarchy::unbind_child_from_parent(
                 childID,

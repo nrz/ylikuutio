@@ -93,7 +93,7 @@ namespace yli::graph
         }
 
         // set pointer to this `Node` to `nullptr`.
-        graph->unbind_Node(this->childID);
+        graph->unbind_node(this->childID);
     }
 
     void Node::create_unidirectional_link(std::size_t nodeID)
@@ -191,7 +191,7 @@ namespace yli::graph
         }
 
         // unbind from the old parent `Graph`.
-        graph->unbind_Node(this->childID);
+        graph->unbind_node(this->childID);
 
         // get `childID` from `Graph` and set pointer to this `Node`.
         this->parent = new_parent;
