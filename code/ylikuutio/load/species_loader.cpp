@@ -114,7 +114,7 @@ namespace yli::load
 
             if (species_loader_struct.model_file_format == "srtm" || species_loader_struct.model_file_format == "SRTM")
             {
-                model_loading_result = yli::load::load_SRTM_terrain(
+                model_loading_result = yli::load::load_srtm_terrain(
                         heightmap_loader_struct,
                         species_loader_struct.model_filename,
                         out_vertices,
