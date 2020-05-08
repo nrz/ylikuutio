@@ -49,7 +49,7 @@
 
 namespace yli::load
 {
-    bool load_ASCII_grid_terrain(
+    bool load_ascii_grid_terrain(
             const yli::load::HeightmapLoaderStruct& heightmap_loader_struct,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
@@ -71,13 +71,13 @@ namespace yli::load
 
         if (heightmap_loader_struct.x_step < 1)
         {
-            std::cerr << "ERROR: `yli::load::load_ASCII_grid_terrain`: `heightmap_loader_struct.x_step` is less than 1.\n";
+            std::cerr << "ERROR: `yli::load::load_ascii_grid_terrain`: `heightmap_loader_struct.x_step` is less than 1.\n";
             return false;
         }
 
         if (heightmap_loader_struct.z_step < 1)
         {
-            std::cerr << "ERROR: `yli::load::load_ASCII_grid_terrain`: `heightmap_loader_struct.z_step` is less than 1.\n";
+            std::cerr << "ERROR: `yli::load::load_ascii_grid_terrain`: `heightmap_loader_struct.z_step` is less than 1.\n";
             return false;
         }
 
