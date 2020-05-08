@@ -47,7 +47,7 @@ namespace yli::callback
         }
     }
 
-    void CallbackObject::unbind_CallbackParameter(const std::size_t childID)
+    void CallbackObject::unbind_callback_parameter(const std::size_t childID)
     {
         yli::hierarchy::unbind_child_from_parent(
                 childID,

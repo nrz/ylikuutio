@@ -41,7 +41,7 @@ namespace yli::callback
 
         public:
             void bind_callback_parameter(yli::callback::CallbackParameter* const callback_parameter);
-            void unbind_CallbackParameter(const std::size_t childID);
+            void unbind_callback_parameter(const std::size_t childID);
 
             // destructor.
             virtual ~CallbackObject();
