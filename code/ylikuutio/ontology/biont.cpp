@@ -87,7 +87,7 @@ namespace yli::ontology
             return;
         }
 
-        symbiont_species->bind_Biont(this);
+        symbiont_species->bind_biont(this);
     }
 
     Biont::~Biont()
