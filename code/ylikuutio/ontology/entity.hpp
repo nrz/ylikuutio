@@ -95,7 +95,7 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_any_struct_entities;
 
         private:
-            void bind_to_Universe();
+            void bind_to_universe();
     };
 }
 
