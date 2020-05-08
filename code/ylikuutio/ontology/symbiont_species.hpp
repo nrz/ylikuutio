@@ -54,7 +54,7 @@ namespace yli::ontology
     {
         public:
             void bind_biont(yli::ontology::Biont* const biont);
-            void unbind_Biont(const std::size_t childID);
+            void unbind_biont(const std::size_t childID);
 
             std::size_t get_indices_size() const;
             GLint get_lightID() const;

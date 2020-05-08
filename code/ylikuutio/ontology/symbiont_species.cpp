@@ -56,7 +56,7 @@ namespace yli::ontology
                 this->number_of_bionts);
     }
 
-    void SymbiontSpecies::unbind_Biont(const std::size_t childID)
+    void SymbiontSpecies::unbind_biont(const std::size_t childID)
     {
         yli::hierarchy::unbind_child_from_parent(
                 childID,
