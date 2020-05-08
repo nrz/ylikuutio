@@ -28,7 +28,7 @@
 
 namespace yli::ontology
 {
-    void Brain::bind_Movable(yli::ontology::Movable* const movable)
+    void Brain::bind_movable(yli::ontology::Movable* const movable)
     {
         // get `childID` from `Brain` and set pointer to `movable`.
         yli::hierarchy::bind_apprentice_to_master<yli::ontology::Movable*>(
@@ -39,7 +39,7 @@ namespace yli::ontology
                 this->number_of_movables);
     }
 
-    void Brain::unbind_Movable(const std::size_t movableID)
+    void Brain::unbind_movable(const std::size_t movableID)
     {
         yli::hierarchy::unbind_child_from_parent(
                 movableID,
@@ -58,7 +58,7 @@ namespace yli::ontology
 
             if (movable != nullptr)
             {
-                movable->unbind_from_Brain();
+                movable->unbind_from_brain();
             }
         }
     }

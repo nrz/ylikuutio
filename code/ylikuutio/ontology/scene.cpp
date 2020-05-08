@@ -50,7 +50,7 @@ namespace yli::ontology
 {
     class Species;
 
-    void Scene::bind_Shader(yli::ontology::Shader* const shader)
+    void Scene::bind_shader(yli::ontology::Shader* const shader)
     {
         // get `childID` from `Scene` and set pointer to `shader`.
         yli::hierarchy::bind_child_to_parent<yli::ontology::Shader*>(
@@ -63,7 +63,7 @@ namespace yli::ontology
         this->shader_priority_queue.push(shader);
     }
 
-    void Scene::unbind_Shader(const std::size_t childID)
+    void Scene::unbind_shader(const std::size_t childID)
     {
         // `shader` needs to be removed from the priority queue as well.
         this->shader_priority_queue.remove(childID);

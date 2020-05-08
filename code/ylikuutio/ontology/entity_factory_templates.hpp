@@ -102,7 +102,7 @@ namespace yli::ontology
 
             yli::ontology::GenericConsoleCommandOverload* const generic_console_command_overload = new yli::ontology::ConsoleCommandOverload<Args...>(
                     universe,
-                    (console_command == nullptr ? nullptr : &console_command->parent_of_generic_console_command_overloads),
+                    &console_command->parent_of_generic_console_command_overloads,
                     callback);
             generic_console_command_overload->set_name(name);
             return generic_console_command_overload;

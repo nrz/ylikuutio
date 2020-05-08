@@ -28,7 +28,7 @@
 
 namespace yli::ontology
 {
-    void Movable::bind_to_Brain()
+    void Movable::bind_to_brain()
     {
         // requirements:
         // `this->brain` must not be `nullptr`.
@@ -36,38 +36,38 @@ namespace yli::ontology
 
         if (brain == nullptr)
         {
-            std::cerr << "ERROR: `Movable::bind_to_Brain`: `brain` is `nullptr`!\n";
+            std::cerr << "ERROR: `Movable::bind_to_brain`: `brain` is `nullptr`!\n";
             return;
         }
 
         // get `movableID` from `Brain` and set pointer to this `Movable`.
-        this->brain->bind_Movable(this);
+        this->brain->bind_movable(this);
     }
 
-    void Movable::unbind_from_Brain()
+    void Movable::unbind_from_brain()
     {
         if (this->brain != nullptr)
         {
-            this->brain->unbind_Movable(this->movableID);
+            this->brain->unbind_movable(this->movableID);
         }
     }
 
-    void Movable::bind_to_new_Brain(yli::ontology::Brain* const new_brain)
+    void Movable::bind_to_new_brain(yli::ontology::Brain* const new_brain)
     {
         // This method sets pointer to this `Movable` to `nullptr`, sets `brain` according to the input,
         // and requests a new `movableID` from the new `Brain`.
 
-        this->unbind_from_Brain(); // unbind from the current `Brain` if there is such.
+        this->unbind_from_brain(); // unbind from the current `Brain` if there is such.
 
         this->brain = new_brain;
-        this->bind_to_Brain();
+        this->bind_to_brain();
     }
 
     Movable::~Movable()
     {
         // destructor.
 
-        this->unbind_from_Brain();
+        this->unbind_from_brain();
     }
 
     yli::ontology::Entity* Movable::get_parent() const

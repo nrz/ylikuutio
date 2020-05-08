@@ -21,7 +21,7 @@
 
 namespace yli::input
 {
-    void InputMaster::bind_InputMode(yli::input::InputMode* const input_mode)
+    void InputMaster::bind_input_mode(yli::input::InputMode* const input_mode)
     {
         // get `childID` from `InputMaster` and set pointer to `input_mode`.
         yli::hierarchy::bind_child_to_parent<yli::input::InputMode*>(

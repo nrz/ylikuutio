@@ -36,7 +36,7 @@ namespace yli::ontology
 
 namespace yli::callback
 {
-    void CallbackEngine::bind_CallbackObject(yli::callback::CallbackObject* const callback_object)
+    void CallbackEngine::bind_callback_object(yli::callback::CallbackObject* const callback_object)
     {
         yli::hierarchy::bind_child_to_parent<yli::callback::CallbackObject*>(
                 callback_object,

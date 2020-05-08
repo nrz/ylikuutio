@@ -114,7 +114,7 @@ namespace yli::load
 
             if (species_loader_struct.model_file_format == "srtm" || species_loader_struct.model_file_format == "SRTM")
             {
-                model_loading_result = yli::load::load_SRTM_terrain(
+                model_loading_result = yli::load::load_srtm_terrain(
                         heightmap_loader_struct,
                         species_loader_struct.model_filename,
                         out_vertices,
@@ -138,7 +138,7 @@ namespace yli::load
                     species_loader_struct.model_file_format == "ascii_grid" ||
                     species_loader_struct.model_file_format == "ASCII_grid")
             {
-                model_loading_result = yli::load::load_ASCII_grid_terrain(
+                model_loading_result = yli::load::load_ascii_grid_terrain(
                         heightmap_loader_struct,
                         out_vertices,
                         out_UVs,

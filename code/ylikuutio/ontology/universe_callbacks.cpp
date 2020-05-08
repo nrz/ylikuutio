@@ -64,7 +64,7 @@ namespace yli::ontology
 
         if (child_or_apprentice_movable != nullptr && parent_or_master_brain != nullptr)
         {
-            child_or_apprentice_movable->bind_to_new_Brain(parent_or_master_brain);
+            child_or_apprentice_movable->bind_to_new_brain(parent_or_master_brain);
         }
         else
         {

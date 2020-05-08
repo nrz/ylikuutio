@@ -53,8 +53,8 @@ namespace yli::ontology
     class SymbiontSpecies: public yli::ontology::Species
     {
         public:
-            void bind_Biont(yli::ontology::Biont* const biont);
-            void unbind_Biont(const std::size_t childID);
+            void bind_biont(yli::ontology::Biont* const biont);
+            void unbind_biont(const std::size_t childID);
 
             std::size_t get_indices_size() const;
             GLint get_lightID() const;

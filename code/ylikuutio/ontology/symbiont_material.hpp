@@ -43,9 +43,6 @@ namespace yli::ontology
     class SymbiontMaterial: public yli::ontology::Material
     {
         public:
-            void bind_SymbiontSpecies(yli::ontology::SymbiontSpecies* const symbiont_species);
-            void unbind_SymbiontSpecies(const std::size_t childID);
-
             // constructor.
             SymbiontMaterial(
                     yli::ontology::Universe* const universe,

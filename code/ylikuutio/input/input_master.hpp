@@ -38,7 +38,7 @@ namespace yli::input
     class InputMaster
     {
         public:
-            void bind_InputMode(yli::input::InputMode* const input_mode);
+            void bind_input_mode(yli::input::InputMode* const input_mode);
 
             // constructor.
             InputMaster(yli::ontology::Universe* const universe);

@@ -31,7 +31,7 @@
 
 namespace yli::callback
 {
-    void CallbackObject::bind_CallbackParameter(yli::callback::CallbackParameter* const callback_parameter)
+    void CallbackObject::bind_callback_parameter(yli::callback::CallbackParameter* const callback_parameter)
     {
         // get `childID` from `CallbackObject` and set pointer to `callback_parameter`.
         yli::hierarchy::bind_child_to_parent<yli::callback::CallbackParameter*>(
@@ -47,7 +47,7 @@ namespace yli::callback
         }
     }
 
-    void CallbackObject::unbind_CallbackParameter(const std::size_t childID)
+    void CallbackObject::unbind_callback_parameter(const std::size_t childID)
     {
         yli::hierarchy::unbind_child_from_parent(
                 childID,
@@ -113,7 +113,7 @@ namespace yli::callback
             return;
         }
 
-        callback_engine->bind_CallbackObject(this);
+        callback_engine->bind_callback_object(this);
     }
 
     void CallbackObject::set_new_callback(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)

@@ -81,9 +81,9 @@ namespace yli::ontology
     class Scene: public yli::ontology::Entity
     {
         public:
-            void bind_Shader(yli::ontology::Shader* const shader);
+            void bind_shader(yli::ontology::Shader* const shader);
 
-            void unbind_Shader(const std::size_t childID);
+            void unbind_shader(const std::size_t childID);
 
             // This method sets pointer to this `Scene` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `World`.
             void bind_to_new_parent(yli::ontology::World* const new_parent);

@@ -307,9 +307,9 @@ namespace yli::ontology
     class Universe: public yli::ontology::Entity
     {
         public:
-            void bind_Entity(yli::ontology::Entity* const entity);
+            void bind_entity(yli::ontology::Entity* const entity);
 
-            void unbind_Entity(const std::size_t entityID);
+            void unbind_entity(const std::size_t entityID);
 
             // constructor.
             Universe(const yli::ontology::UniverseStruct& universe_struct)
@@ -321,8 +321,8 @@ namespace yli::ontology
                 parent_of_any_struct_entities(this),
                 parent_of_callback_engine_entities(this)
             {
-                // call `bind_Entity` here since it couldn't be performed from `Entity` constructor.
-                this->bind_Entity(this);
+                // call `bind_entity` here since it couldn't be performed from `Entity` constructor.
+                this->bind_entity(this);
 
                 this->entity_factory = std::make_shared<yli::ontology::EntityFactory>(this);
 

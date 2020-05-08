@@ -34,7 +34,7 @@ namespace yli::ontology
 {
     class Entity;
 
-    void SymbiontSpecies::bind_Biont(yli::ontology::Biont* const biont)
+    void SymbiontSpecies::bind_biont(yli::ontology::Biont* const biont)
     {
         // `SymbiontSpecies` is not the ontological parent of `Biont`,
         // as `Holobiont` is the ontological parent of `Biont`.
@@ -56,7 +56,7 @@ namespace yli::ontology
                 this->number_of_bionts);
     }
 
-    void SymbiontSpecies::unbind_Biont(const std::size_t childID)
+    void SymbiontSpecies::unbind_biont(const std::size_t childID)
     {
         yli::hierarchy::unbind_child_from_parent(
                 childID,
