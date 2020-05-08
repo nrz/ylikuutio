@@ -40,7 +40,7 @@ namespace yli::graph
             return;
         }
 
-        graph->bind_Node(this);
+        graph->bind_node(this);
     }
 
     Node::Node(const yli::graph::NodeStruct& node_struct)
@@ -61,7 +61,7 @@ namespace yli::graph
         }
 
         // set pointer to this `Node`.
-        graph->bind_Node(this);
+        graph->bind_node(this);
 
         // create all bidirectional links between this node and neighbor nodes.
         for (std::size_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
@@ -195,6 +195,6 @@ namespace yli::graph
 
         // get `childID` from `Graph` and set pointer to this `Node`.
         this->parent = new_parent;
-        this->parent->bind_Node(this);
+        this->parent->bind_node(this);
     }
 }
