@@ -111,7 +111,7 @@ namespace yli::ontology
         yli::hierarchy::set_child_pointer(entity->entityID, entity, this->entity_pointer_vector, this->free_entityID_queue, this->number_of_entities);
     }
 
-    void Universe::unbind_Entity(const std::size_t entityID)
+    void Universe::unbind_entity(const std::size_t entityID)
     {
         yli::hierarchy::unbind_child_from_parent(
                 entityID,

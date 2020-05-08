@@ -309,7 +309,7 @@ namespace yli::ontology
         public:
             void bind_entity(yli::ontology::Entity* const entity);
 
-            void unbind_Entity(const std::size_t entityID);
+            void unbind_entity(const std::size_t entityID);
 
             // constructor.
             Universe(const yli::ontology::UniverseStruct& universe_struct)

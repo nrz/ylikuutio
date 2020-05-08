@@ -91,7 +91,7 @@ namespace yli::ontology
             return;
         }
 
-        this->universe->unbind_Entity(this->entityID);
+        this->universe->unbind_entity(this->entityID);
 
         if (this->name.empty())
         {
