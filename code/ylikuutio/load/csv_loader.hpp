@@ -31,7 +31,7 @@
 namespace yli::load
 {
     template<class T1>
-        std::shared_ptr<std::vector<T1>> load_CSV_file(
+        std::shared_ptr<std::vector<T1>> load_csv_file(
                 const std::string& filename,
                 std::size_t& data_width,
                 std::size_t& data_height,
