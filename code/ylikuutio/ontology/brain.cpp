@@ -39,7 +39,7 @@ namespace yli::ontology
                 this->number_of_movables);
     }
 
-    void Brain::unbind_Movable(const std::size_t movableID)
+    void Brain::unbind_movable(const std::size_t movableID)
     {
         yli::hierarchy::unbind_child_from_parent(
                 movableID,

@@ -48,7 +48,7 @@ namespace yli::ontology
     {
         if (this->brain != nullptr)
         {
-            this->brain->unbind_Movable(this->movableID);
+            this->brain->unbind_movable(this->movableID);
         }
     }
 
