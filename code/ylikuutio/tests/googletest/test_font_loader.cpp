@@ -46,52 +46,52 @@ TEST(glyphs_must_be_found_appropriately, kongtext_svg)
     char* SVG_data_pointer = SVG_data; 
 
     // SVG files are XML files, so we just need to read until we find the data we need.
-    const bool is_first_glyph_found = yli::load::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_first_glyph_found = yli::load::find_first_glyph_in_svg(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_first_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x2e0);
     SVG_data_pointer++;
 
-    const bool is_second_glyph_found = yli::load::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_second_glyph_found = yli::load::find_first_glyph_in_svg(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_second_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x320);
     SVG_data_pointer++;
 
-    const bool is_third_glyph_found = yli::load::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_third_glyph_found = yli::load::find_first_glyph_in_svg(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_third_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x353);
     SVG_data_pointer++;
 
-    const bool is_fourth_glyph_found = yli::load::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_fourth_glyph_found = yli::load::find_first_glyph_in_svg(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_fourth_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x386);
     SVG_data_pointer++;
 
-    const bool is_fifth_glyph_found = yli::load::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_fifth_glyph_found = yli::load::find_first_glyph_in_svg(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_fifth_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x3b4);
     SVG_data_pointer++;
 
-    const bool is_sixth_glyph_found = yli::load::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_sixth_glyph_found = yli::load::find_first_glyph_in_svg(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_sixth_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x3f2);
     SVG_data_pointer++;
 
-    const bool is_seventh_glyph_found = yli::load::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_seventh_glyph_found = yli::load::find_first_glyph_in_svg(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_seventh_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x421);
     SVG_data_pointer++;
 
-    const bool is_eigth_glyph_found = yli::load::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_eigth_glyph_found = yli::load::find_first_glyph_in_svg(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_eigth_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x48b);
     SVG_data_pointer++;
 
-    const bool is_ninth_glyph_found = yli::load::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_ninth_glyph_found = yli::load::find_first_glyph_in_svg(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_ninth_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x4fc);
     SVG_data_pointer++;
 
-    const bool is_tenth_glyph_found = yli::load::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_tenth_glyph_found = yli::load::find_first_glyph_in_svg(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_tenth_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x5d6);
 }
