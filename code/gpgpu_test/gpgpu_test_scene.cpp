@@ -92,42 +92,42 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        yli::ontology::ComputeTaskStruct identity_shader_BMP_compute_task_struct;
-        identity_shader_BMP_compute_task_struct.texture_file_format = "bmp";
-        identity_shader_BMP_compute_task_struct.texture_filename = "numbers_123456_black_and_white.bmp";
-        identity_shader_BMP_compute_task_struct.output_filename = "gpgpu_identity_output.data";
-        identity_shader_BMP_compute_task_struct.parent = identity_shader;
-        identity_shader_BMP_compute_task_struct.texture_width = 512;
-        identity_shader_BMP_compute_task_struct.texture_height = 512;
+        yli::ontology::ComputeTaskStruct identity_shader_bmp_compute_task_struct;
+        identity_shader_bmp_compute_task_struct.texture_file_format = "bmp";
+        identity_shader_bmp_compute_task_struct.texture_filename = "numbers_123456_black_and_white.bmp";
+        identity_shader_bmp_compute_task_struct.output_filename = "gpgpu_identity_output.data";
+        identity_shader_bmp_compute_task_struct.parent = identity_shader;
+        identity_shader_bmp_compute_task_struct.texture_width = 512;
+        identity_shader_bmp_compute_task_struct.texture_height = 512;
 
-        std::cout << "Creating yli::ontology::Entity* identity_shader_BMP_compute_task_entity ...\n";
-        yli::ontology::Entity* const identity_shader_BMP_compute_task_entity = entity_factory->create_compute_task(identity_shader_BMP_compute_task_struct);
-        std::cout << "Creating yli::ontology::ComputeTask* identity_shader_BMP_compute_task ...\n";
-        yli::ontology::ComputeTask* const identity_shader_BMP_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(identity_shader_BMP_compute_task_entity);
+        std::cout << "Creating yli::ontology::Entity* identity_shader_bmp_compute_task_entity ...\n";
+        yli::ontology::Entity* const identity_shader_bmp_compute_task_entity = entity_factory->create_compute_task(identity_shader_bmp_compute_task_struct);
+        std::cout << "Creating yli::ontology::ComputeTask* identity_shader_bmp_compute_task ...\n";
+        yli::ontology::ComputeTask* const identity_shader_bmp_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(identity_shader_bmp_compute_task_entity);
 
-        if (identity_shader_BMP_compute_task == nullptr)
+        if (identity_shader_bmp_compute_task == nullptr)
         {
             std::cerr << "Failed to create identity BMP `ComputeTask`.\n";
             return nullptr;
         }
 
-        yli::ontology::ComputeTaskStruct identity_shader_CSV_unsigned_short_compute_task_struct;
-        identity_shader_CSV_unsigned_short_compute_task_struct.texture_file_format = "csv";
-        identity_shader_CSV_unsigned_short_compute_task_struct.texture_filename = "some_finnish_railway_stations_unsigned_integer_with_fill.csv";
-        identity_shader_CSV_unsigned_short_compute_task_struct.output_filename = "gpgpu_identity_output_unsigned_short_with_fill.data";
-        identity_shader_CSV_unsigned_short_compute_task_struct.parent = identity_shader;
-        identity_shader_CSV_unsigned_short_compute_task_struct.format = GL_RED;
-        identity_shader_CSV_unsigned_short_compute_task_struct.internal_format = GL_R16;
-        identity_shader_CSV_unsigned_short_compute_task_struct.type = GL_UNSIGNED_SHORT;
-        identity_shader_CSV_unsigned_short_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
-        identity_shader_CSV_unsigned_short_compute_task_struct.should_ylikuutio_flip_texture = false;
+        yli::ontology::ComputeTaskStruct identity_shader_csv_unsigned_short_compute_task_struct;
+        identity_shader_csv_unsigned_short_compute_task_struct.texture_file_format = "csv";
+        identity_shader_csv_unsigned_short_compute_task_struct.texture_filename = "some_finnish_railway_stations_unsigned_integer_with_fill.csv";
+        identity_shader_csv_unsigned_short_compute_task_struct.output_filename = "gpgpu_identity_output_unsigned_short_with_fill.data";
+        identity_shader_csv_unsigned_short_compute_task_struct.parent = identity_shader;
+        identity_shader_csv_unsigned_short_compute_task_struct.format = GL_RED;
+        identity_shader_csv_unsigned_short_compute_task_struct.internal_format = GL_R16;
+        identity_shader_csv_unsigned_short_compute_task_struct.type = GL_UNSIGNED_SHORT;
+        identity_shader_csv_unsigned_short_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
+        identity_shader_csv_unsigned_short_compute_task_struct.should_ylikuutio_flip_texture = false;
 
-        std::cout << "Creating yli::ontology::Entity* identity_shader_CSV_unsigned_short_compute_task_entity ...\n";
-        yli::ontology::Entity* const identity_shader_CSV_unsigned_short_compute_task_entity = entity_factory->create_compute_task(identity_shader_CSV_unsigned_short_compute_task_struct);
-        std::cout << "Creating yli::ontology::ComputeTask* identity_shader_CSV_unsigned_short_compute_task ...\n";
-        yli::ontology::ComputeTask* const identity_shader_CSV_unsigned_short_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(identity_shader_CSV_unsigned_short_compute_task_entity);
+        std::cout << "Creating yli::ontology::Entity* identity_shader_csv_unsigned_short_compute_task_entity ...\n";
+        yli::ontology::Entity* const identity_shader_csv_unsigned_short_compute_task_entity = entity_factory->create_compute_task(identity_shader_csv_unsigned_short_compute_task_struct);
+        std::cout << "Creating yli::ontology::ComputeTask* identity_shader_csv_unsigned_short_compute_task ...\n";
+        yli::ontology::ComputeTask* const identity_shader_csv_unsigned_short_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(identity_shader_csv_unsigned_short_compute_task_entity);
 
-        if (identity_shader_CSV_unsigned_short_compute_task == nullptr)
+        if (identity_shader_csv_unsigned_short_compute_task == nullptr)
         {
             std::cerr << "Failed to create identity CSV `ComputeTask`.\n";
             return nullptr;
@@ -264,47 +264,47 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        yli::ontology::ComputeTaskStruct floyd_warshall_shader_CSV_unsigned_short_compute_task_struct;
-        floyd_warshall_shader_CSV_unsigned_short_compute_task_struct.texture_file_format = "csv";
-        floyd_warshall_shader_CSV_unsigned_short_compute_task_struct.texture_filename = "more_finnish_railway_stations_unsigned_integer.csv";
-        floyd_warshall_shader_CSV_unsigned_short_compute_task_struct.output_filename = "gpgpu_floyd_warshall_output_unsigned_short.data";
-        floyd_warshall_shader_CSV_unsigned_short_compute_task_struct.parent = floyd_warshall_shader;
-        floyd_warshall_shader_CSV_unsigned_short_compute_task_struct.n_max_iterations = 32;
-        floyd_warshall_shader_CSV_unsigned_short_compute_task_struct.format = GL_RED;
-        floyd_warshall_shader_CSV_unsigned_short_compute_task_struct.internal_format = GL_R16;
-        floyd_warshall_shader_CSV_unsigned_short_compute_task_struct.type = GL_UNSIGNED_SHORT;
-        floyd_warshall_shader_CSV_unsigned_short_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
-        floyd_warshall_shader_CSV_unsigned_short_compute_task_struct.should_ylikuutio_flip_texture = false;
+        yli::ontology::ComputeTaskStruct floyd_warshall_shader_csv_unsigned_short_compute_task_struct;
+        floyd_warshall_shader_csv_unsigned_short_compute_task_struct.texture_file_format = "csv";
+        floyd_warshall_shader_csv_unsigned_short_compute_task_struct.texture_filename = "more_finnish_railway_stations_unsigned_integer.csv";
+        floyd_warshall_shader_csv_unsigned_short_compute_task_struct.output_filename = "gpgpu_floyd_warshall_output_unsigned_short.data";
+        floyd_warshall_shader_csv_unsigned_short_compute_task_struct.parent = floyd_warshall_shader;
+        floyd_warshall_shader_csv_unsigned_short_compute_task_struct.n_max_iterations = 32;
+        floyd_warshall_shader_csv_unsigned_short_compute_task_struct.format = GL_RED;
+        floyd_warshall_shader_csv_unsigned_short_compute_task_struct.internal_format = GL_R16;
+        floyd_warshall_shader_csv_unsigned_short_compute_task_struct.type = GL_UNSIGNED_SHORT;
+        floyd_warshall_shader_csv_unsigned_short_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
+        floyd_warshall_shader_csv_unsigned_short_compute_task_struct.should_ylikuutio_flip_texture = false;
 
-        std::cout << "Creating yli::ontology::Entity* floyd_warshall_shader_CSV_unsigned_short_compute_task_entity ...\n";
-        yli::ontology::Entity* const floyd_warshall_shader_CSV_unsigned_short_compute_task_entity = entity_factory->create_compute_task(floyd_warshall_shader_CSV_unsigned_short_compute_task_struct);
-        std::cout << "Creating yli::ontology::ComputeTask* floyd_warshall_shader_CSV_unsigned_short_compute_task ...\n";
-        yli::ontology::ComputeTask* const floyd_warshall_shader_CSV_unsigned_short_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(floyd_warshall_shader_CSV_unsigned_short_compute_task_entity);
+        std::cout << "Creating yli::ontology::Entity* floyd_warshall_shader_csv_unsigned_short_compute_task_entity ...\n";
+        yli::ontology::Entity* const floyd_warshall_shader_csv_unsigned_short_compute_task_entity = entity_factory->create_compute_task(floyd_warshall_shader_csv_unsigned_short_compute_task_struct);
+        std::cout << "Creating yli::ontology::ComputeTask* floyd_warshall_shader_csv_unsigned_short_compute_task ...\n";
+        yli::ontology::ComputeTask* const floyd_warshall_shader_csv_unsigned_short_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(floyd_warshall_shader_csv_unsigned_short_compute_task_entity);
 
-        if (floyd_warshall_shader_CSV_unsigned_short_compute_task == nullptr)
+        if (floyd_warshall_shader_csv_unsigned_short_compute_task == nullptr)
         {
             std::cerr << "Failed to create Floyd-Warshall CSV unsigned short `ComputeTask`.\n";
             return nullptr;
         }
 
-        yli::ontology::ComputeTaskStruct floyd_warshall_shader_CSV_float_compute_task_struct;
-        floyd_warshall_shader_CSV_float_compute_task_struct.texture_file_format = "csv";
-        floyd_warshall_shader_CSV_float_compute_task_struct.texture_filename = "more_finnish_railway_stations_unsigned_integer.csv";
-        floyd_warshall_shader_CSV_float_compute_task_struct.output_filename = "gpgpu_floyd_warshall_output_float.data";
-        floyd_warshall_shader_CSV_float_compute_task_struct.parent = floyd_warshall_shader;
-        floyd_warshall_shader_CSV_float_compute_task_struct.n_max_iterations = 32;
-        floyd_warshall_shader_CSV_float_compute_task_struct.format = GL_RED;
-        floyd_warshall_shader_CSV_float_compute_task_struct.internal_format = GL_R32F;
-        floyd_warshall_shader_CSV_float_compute_task_struct.type = GL_FLOAT;
-        floyd_warshall_shader_CSV_float_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
-        floyd_warshall_shader_CSV_float_compute_task_struct.should_ylikuutio_flip_texture = false;
+        yli::ontology::ComputeTaskStruct floyd_warshall_shader_csv_float_compute_task_struct;
+        floyd_warshall_shader_csv_float_compute_task_struct.texture_file_format = "csv";
+        floyd_warshall_shader_csv_float_compute_task_struct.texture_filename = "more_finnish_railway_stations_unsigned_integer.csv";
+        floyd_warshall_shader_csv_float_compute_task_struct.output_filename = "gpgpu_floyd_warshall_output_float.data";
+        floyd_warshall_shader_csv_float_compute_task_struct.parent = floyd_warshall_shader;
+        floyd_warshall_shader_csv_float_compute_task_struct.n_max_iterations = 32;
+        floyd_warshall_shader_csv_float_compute_task_struct.format = GL_RED;
+        floyd_warshall_shader_csv_float_compute_task_struct.internal_format = GL_R32F;
+        floyd_warshall_shader_csv_float_compute_task_struct.type = GL_FLOAT;
+        floyd_warshall_shader_csv_float_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
+        floyd_warshall_shader_csv_float_compute_task_struct.should_ylikuutio_flip_texture = false;
 
-        std::cout << "Creating yli::ontology::Entity* floyd_warshall_shader_CSV_float_compute_task_entity ...\n";
-        yli::ontology::Entity* const floyd_warshall_shader_CSV_float_compute_task_entity = entity_factory->create_compute_task(floyd_warshall_shader_CSV_float_compute_task_struct);
-        std::cout << "Creating yli::ontology::ComputeTask* floyd_warshall_shader_CSV_float_compute_task ...\n";
-        yli::ontology::ComputeTask* const floyd_warshall_shader_CSV_float_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(floyd_warshall_shader_CSV_float_compute_task_entity);
+        std::cout << "Creating yli::ontology::Entity* floyd_warshall_shader_csv_float_compute_task_entity ...\n";
+        yli::ontology::Entity* const floyd_warshall_shader_csv_float_compute_task_entity = entity_factory->create_compute_task(floyd_warshall_shader_csv_float_compute_task_struct);
+        std::cout << "Creating yli::ontology::ComputeTask* floyd_warshall_shader_csv_float_compute_task ...\n";
+        yli::ontology::ComputeTask* const floyd_warshall_shader_csv_float_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(floyd_warshall_shader_csv_float_compute_task_entity);
 
-        if (floyd_warshall_shader_CSV_float_compute_task == nullptr)
+        if (floyd_warshall_shader_csv_float_compute_task == nullptr)
         {
             std::cerr << "Failed to create Floyd-Warshall CSV float `ComputeTask`.\n";
             return nullptr;
