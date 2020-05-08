@@ -58,7 +58,7 @@ namespace yli::ontology
 
             if (movable != nullptr)
             {
-                movable->unbind_from_Brain();
+                movable->unbind_from_brain();
             }
         }
     }
