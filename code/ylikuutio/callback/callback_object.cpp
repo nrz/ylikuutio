@@ -113,7 +113,7 @@ namespace yli::callback
             return;
         }
 
-        callback_engine->bind_CallbackObject(this);
+        callback_engine->bind_callback_object(this);
     }
 
     void CallbackObject::set_new_callback(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
