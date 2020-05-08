@@ -63,7 +63,7 @@ namespace yli::ontology
         this->shader_priority_queue.push(shader);
     }
 
-    void Scene::unbind_Shader(const std::size_t childID)
+    void Scene::unbind_shader(const std::size_t childID)
     {
         // `shader` needs to be removed from the priority queue as well.
         this->shader_priority_queue.remove(childID);

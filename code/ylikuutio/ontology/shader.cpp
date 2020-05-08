@@ -76,7 +76,7 @@ namespace yli::ontology
         }
 
         // Unbind from the old parent `Scene`.
-        this->parent->unbind_Shader(this->childID);
+        this->parent->unbind_shader(this->childID);
 
         // Get `childID` from `Scene` and set pointer to this `Shader`.
         this->parent = new_parent;
@@ -120,7 +120,7 @@ namespace yli::ontology
         else
         {
             // Set pointer to this `Shader` to `nullptr`.
-            scene->unbind_Shader(this->childID);
+            scene->unbind_shader(this->childID);
         }
 
         glDeleteProgram(this->programID);
