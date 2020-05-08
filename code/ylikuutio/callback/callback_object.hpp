@@ -40,7 +40,7 @@ namespace yli::callback
         // CallbackObject is an object that contains a single callback.
 
         public:
-            void bind_CallbackParameter(yli::callback::CallbackParameter* const callback_parameter);
+            void bind_callback_parameter(yli::callback::CallbackParameter* const callback_parameter);
             void unbind_CallbackParameter(const std::size_t childID);
 
             // destructor.

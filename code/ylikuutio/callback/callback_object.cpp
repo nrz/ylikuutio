@@ -31,7 +31,7 @@
 
 namespace yli::callback
 {
-    void CallbackObject::bind_CallbackParameter(yli::callback::CallbackParameter* const callback_parameter)
+    void CallbackObject::bind_callback_parameter(yli::callback::CallbackParameter* const callback_parameter)
     {
         // get `childID` from `CallbackObject` and set pointer to `callback_parameter`.
         yli::hierarchy::bind_child_to_parent<yli::callback::CallbackParameter*>(

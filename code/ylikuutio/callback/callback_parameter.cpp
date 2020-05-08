@@ -39,8 +39,8 @@ namespace yli::callback
             return;
         }
 
-        // note: `CallbackObject::bind_CallbackParameter` also stores named variables in its `anyvalue_hashmap`.
-        callback_object->bind_CallbackParameter(this);
+        // note: `CallbackObject::bind_callback_parameter` also stores named variables in its `anyvalue_hashmap`.
+        callback_object->bind_callback_parameter(this);
     }
 
     CallbackParameter::CallbackParameter(const std::string& name, std::shared_ptr<yli::common::AnyValue> any_value, const bool is_reference, yli::callback::CallbackObject* const parent)
