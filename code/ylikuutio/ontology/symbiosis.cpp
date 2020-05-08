@@ -167,7 +167,7 @@ namespace yli::ontology
 
         const bool is_debug_mode = true;
 
-        if (yli::load::load_Symbiosis(
+        if (yli::load::load_symbiosis(
                     symbiosis_loader_struct,
                     this->vertices,
                     this->uvs,
