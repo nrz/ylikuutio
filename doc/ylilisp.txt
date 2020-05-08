@@ -1,0 +1,26 @@
+YliLisp is the scripting language of Ylikuutio.
+
+Planned features:
+* Variables and functions in the same namespace (Lisp-1).
+* Mutators marked with `!` like in Scheme, e.g. `set!`.
+* Predicates marked with `?` like in Scheme, e.g. `null?`.
+* Common function names follow names used by Scheme.
+* Object-orientation supported following C++ classes.
+* Statically typed: `(define my-number 'uint64 123)`.
+* Functions can be overloaded.
+* Struct syntax: `foo . bar . baz`.
+* All objects, both variables and functions,
+  are `yli::ontology::Entity` entities.
+* All named `yli::ontology::Entity` entities
+  are YliLisp variables.
+* YliLisp syntax follows Scheme syntax when possible
+  considering other YliLisp design goals.
+
+Planned implementation details:
+* Functions are `yli::ontology::LispFunction`,
+  which inherits `yli::ontology::Entity`.
+* Function overloads are `yli::ontology::LispFunctionOverload`,
+  which inherits `yli::ontology::Entity`.
+* Each `yli::ontology::Console` may import
+  YliLisp functions into its local context.
+* All variables are always available in all contexts.
