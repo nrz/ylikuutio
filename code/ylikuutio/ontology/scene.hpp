@@ -81,7 +81,7 @@ namespace yli::ontology
     class Scene: public yli::ontology::Entity
     {
         public:
-            void bind_Shader(yli::ontology::Shader* const shader);
+            void bind_shader(yli::ontology::Shader* const shader);
 
             void unbind_Shader(const std::size_t childID);
 

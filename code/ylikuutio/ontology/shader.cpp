@@ -49,7 +49,7 @@ namespace yli::ontology
         }
 
         // Get `childID` from the `Scene` and set pointer to this `Shader`.
-        scene->bind_Shader(this);
+        scene->bind_shader(this);
     }
 
     void Shader::bind_to_new_parent(yli::ontology::Scene* const new_parent)
@@ -80,7 +80,7 @@ namespace yli::ontology
 
         // Get `childID` from `Scene` and set pointer to this `Shader`.
         this->parent = new_parent;
-        this->parent->bind_Shader(this);
+        this->parent->bind_shader(this);
     }
 
     void Shader::bind_to_new_parent(yli::ontology::Entity* const new_parent)
