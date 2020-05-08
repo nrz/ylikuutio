@@ -45,7 +45,7 @@ namespace yli::ontology
         }
 
         // Get `entityID` from the `Universe` and set pointer to this `Entity`.
-        universe->bind_Entity(this);
+        universe->bind_entity(this);
     }
 
     void Entity::bind_to_new_parent(yli::ontology::Entity* new_entity_parent)

@@ -95,7 +95,7 @@ namespace yli::ontology
 
     const std::string Universe::version = "0.0.6";
 
-    void Universe::bind_Entity(yli::ontology::Entity* const entity)
+    void Universe::bind_entity(yli::ontology::Entity* const entity)
     {
         // no-op when called during initialization of the `Entity` base class of `Universe` itself.
         if (entity == this)
