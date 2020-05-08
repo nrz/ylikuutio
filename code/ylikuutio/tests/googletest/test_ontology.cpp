@@ -2680,6 +2680,6 @@ TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
     yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species->parent_of_objects);
 
     ASSERT_EQ(brain->get_number_of_apprentices(), 0);
-    object->bind_to_new_Brain(brain);
+    object->bind_to_new_brain(brain);
     ASSERT_EQ(brain->get_number_of_apprentices(), 1);
 }

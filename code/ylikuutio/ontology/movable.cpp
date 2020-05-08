@@ -52,7 +52,7 @@ namespace yli::ontology
         }
     }
 
-    void Movable::bind_to_new_Brain(yli::ontology::Brain* const new_brain)
+    void Movable::bind_to_new_brain(yli::ontology::Brain* const new_brain)
     {
         // This method sets pointer to this `Movable` to `nullptr`, sets `brain` according to the input,
         // and requests a new `movableID` from the new `Brain`.
