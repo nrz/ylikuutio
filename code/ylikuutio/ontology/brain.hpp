@@ -64,7 +64,7 @@ namespace yli::ontology
     class Brain: public yli::ontology::Entity
     {
         public:
-            void bind_Movable(yli::ontology::Movable* const movable);
+            void bind_movable(yli::ontology::Movable* const movable);
             void unbind_Movable(const std::size_t movableID);
 
             Brain(yli::ontology::Universe* const universe, const yli::ontology::BrainStruct& brain_struct, yli::ontology::ParentModule* const parent_module)

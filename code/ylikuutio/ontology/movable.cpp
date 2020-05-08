@@ -41,7 +41,7 @@ namespace yli::ontology
         }
 
         // get `movableID` from `Brain` and set pointer to this `Movable`.
-        this->brain->bind_Movable(this);
+        this->brain->bind_movable(this);
     }
 
     void Movable::unbind_from_brain()

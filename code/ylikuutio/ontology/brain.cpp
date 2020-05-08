@@ -28,7 +28,7 @@
 
 namespace yli::ontology
 {
-    void Brain::bind_Movable(yli::ontology::Movable* const movable)
+    void Brain::bind_movable(yli::ontology::Movable* const movable)
     {
         // get `childID` from `Brain` and set pointer to `movable`.
         yli::hierarchy::bind_apprentice_to_master<yli::ontology::Movable*>(
