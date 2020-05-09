@@ -1117,7 +1117,7 @@ int main(const int argc, const char* const argv[]) try
     {
         const double current_time_in_main_loop = yli::time::get_time();
 
-        if (current_time_in_main_loop - my_universe->get_last_time_for_display_sync() >= (1.0f / my_universe->get_max_FPS()))
+        if (current_time_in_main_loop - my_universe->get_last_time_for_display_sync() >= (1.0f / my_universe->get_max_fps()))
         {
             my_universe->update_last_time_for_display_sync();
 

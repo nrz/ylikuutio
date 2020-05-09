@@ -587,7 +587,7 @@ namespace yli::ontology
             void finalize_delta_time_loop();
 
             // this method returns current `max_FPS`.
-            std::size_t get_max_FPS() const;
+            std::size_t get_max_fps() const;
             double get_last_time_to_display_fps() const;
             double get_last_time_for_display_sync() const;
             int32_t get_number_of_frames() const;
