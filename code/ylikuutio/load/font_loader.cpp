@@ -229,7 +229,7 @@ namespace yli::load
         } // while (true)
     }
 
-    bool load_SVG_glyph(
+    bool load_svg_glyph(
             const char* const SVG_base_pointer,
             char*& SVG_data_pointer,
             uint64_t data_size,
@@ -488,7 +488,7 @@ namespace yli::load
         {
             if (std::strncmp(SVG_data_pointer, "<glyph", std::strlen("<glyph")) == 0)
             {
-                bool result = yli::load::load_SVG_glyph(
+                bool result = yli::load::load_svg_glyph(
                         SVG_base_pointer,
                         SVG_data_pointer,
                         file_size,

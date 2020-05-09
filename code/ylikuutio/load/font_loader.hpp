@@ -46,7 +46,7 @@ namespace yli::load
             std::vector<std::vector<glm::vec2>>& current_glyph_vertices,
             const bool is_debug_mode);
 
-    bool load_SVG_glyph(
+    bool load_svg_glyph(
             const char* const SVG_base_pointer,
             char*& SVG_data_pointer,
             uint64_t data_size,
