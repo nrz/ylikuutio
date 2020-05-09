@@ -57,7 +57,7 @@ namespace yli::load
 
         if (symbiosis_loader_struct.model_file_format == "fbx" || symbiosis_loader_struct.model_file_format == "FBX")
         {
-            model_loading_result = yli::load::load_FBX(
+            model_loading_result = yli::load::load_fbx(
                     symbiosis_loader_struct.model_filename,
                     out_vertices,
                     out_uvs,

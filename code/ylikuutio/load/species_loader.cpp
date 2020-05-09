@@ -70,7 +70,7 @@ namespace yli::load
         }
         else if (species_loader_struct.model_file_format == "fbx" || species_loader_struct.model_file_format == "FBX")
         {
-            model_loading_result = yli::load::load_FBX(
+            model_loading_result = yli::load::load_fbx(
                     species_loader_struct.model_filename,
                     species_loader_struct.mesh_i,
                     out_vertices,

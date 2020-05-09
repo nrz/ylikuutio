@@ -35,7 +35,7 @@
 
 namespace yli::load
 {
-    bool load_FBX(
+    bool load_fbx(
             const std::string& filename,
             std::vector<std::vector<glm::vec3>>& out_vertices,
             std::vector<std::vector<glm::vec2>>& out_uvs,

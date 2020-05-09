@@ -38,7 +38,7 @@ typedef unsigned char u8;
 
 namespace yli::load
 {
-    bool load_FBX(
+    bool load_fbx(
             const std::string& filename,
             const std::size_t mesh_i,
             std::vector<glm::vec3>& out_vertices,
