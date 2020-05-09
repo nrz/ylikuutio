@@ -468,7 +468,7 @@ namespace yli::ontology
 
     std::size_t Universe::get_max_fps() const
     {
-        return this->max_FPS;
+        return this->max_fps;
     }
 
     double Universe::get_last_time_to_display_fps() const

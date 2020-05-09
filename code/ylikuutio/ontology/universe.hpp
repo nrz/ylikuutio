@@ -386,7 +386,7 @@ namespace yli::ontology
                 this->text_size = universe_struct.text_size;
                 this->font_size = universe_struct.font_size;
 
-                this->max_FPS    = universe_struct.max_FPS;
+                this->max_fps    = universe_struct.max_fps;
                 this->last_time_to_display_fps = yli::time::get_time();
                 this->last_time_for_display_sync = yli::time::get_time();
                 this->delta_time = NAN;
@@ -586,7 +586,7 @@ namespace yli::ontology
             // this method stores `current_time_before_reading_keyboard` into `last_time_before_reading_keyboard`.
             void finalize_delta_time_loop();
 
-            // this method returns current `max_FPS`.
+            // this method returns current `max_fps`.
             std::size_t get_max_fps() const;
             double get_last_time_to_display_fps() const;
             double get_last_time_for_display_sync() const;
@@ -806,7 +806,7 @@ namespace yli::ontology
             std::size_t font_size;
 
             // variables related to timing of events.
-            std::size_t max_FPS;
+            std::size_t max_fps;
             double last_time_to_display_fps;
             double last_time_for_display_sync;
             double delta_time;

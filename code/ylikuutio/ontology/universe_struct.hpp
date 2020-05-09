@@ -38,7 +38,7 @@ namespace yli::ontology
             framebuffer_height(4500),
             text_size(40),
             font_size(16),
-            max_FPS(50000),         // default value max 50000 frames per second.
+            max_fps(50000),         // default value max 50000 frames per second.
             speed(5.0f),            // default value 5.0 units / second.
             turbo_factor(5.0f),        // default value 5.0 x speed.
             twin_turbo_factor(100.0f), // default value 100.0 x speed.
@@ -61,7 +61,7 @@ namespace yli::ontology
         uint32_t framebuffer_height;
         std::size_t text_size;
         std::size_t font_size;
-        std::size_t max_FPS;
+        std::size_t max_fps;
         float speed;
         float turbo_factor;
         float twin_turbo_factor;
