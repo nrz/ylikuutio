@@ -242,7 +242,7 @@ namespace yli::ontology
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform.
         glUniformMatrix4fv(shader->get_matrix_id(), 1, GL_FALSE, &this->MVP_matrix[0][0]);
-        glUniformMatrix4fv(shader->get_model_matrixID(), 1, GL_FALSE, &this->model_matrix[0][0]);
+        glUniformMatrix4fv(shader->get_model_matrix_id(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
         uint32_t vertexbuffer = symbiont_species->get_vertexbuffer();
         uint32_t vertex_position_modelspace_id = symbiont_species->get_vertex_position_modelspace_id();

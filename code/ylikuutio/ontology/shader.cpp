@@ -179,7 +179,7 @@ namespace yli::ontology
         return this->matrixID;
     }
 
-    uint32_t Shader::get_model_matrixID() const
+    uint32_t Shader::get_model_matrix_id() const
     {
         return this->model_matrixID;
     }
