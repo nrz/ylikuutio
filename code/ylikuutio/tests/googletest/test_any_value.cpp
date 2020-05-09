@@ -201,10 +201,10 @@ TEST(any_value_must_be_initialized_appropriately, double_negative_infinity)
     ASSERT_EQ(double_negative_infinity_value.get_entity_pointer(), nullptr);
 }
 
-TEST(any_value_must_be_initialized_appropriately, double_NAN)
+TEST(any_value_must_be_initialized_appropriately, double_nan)
 {
-    double double_NAN = NAN;
-    yli::common::AnyValue double_nan_value = yli::common::AnyValue(double_NAN);
+    double double_nan = NAN;
+    yli::common::AnyValue double_nan_value = yli::common::AnyValue(double_nan);
     ASSERT_TRUE(std::holds_alternative<double>(double_nan_value.data));
     ASSERT_TRUE(std::isnan(std::get<double>(double_nan_value.data)));
     ASSERT_EQ(std::strlen(double_nan_value.get_datatype().c_str()), std::strlen("double"));
@@ -483,10 +483,10 @@ TEST(any_value_must_be_initialized_appropriately, double_pointer_negative_infini
 
 TEST(any_value_must_be_initialized_appropriately, double_pointer_NAN)
 {
-    double double_NAN = NAN;
-    yli::common::AnyValue double_nan_value = yli::common::AnyValue(&double_NAN);
+    double double_nan = NAN;
+    yli::common::AnyValue double_nan_value = yli::common::AnyValue(&double_nan);
     ASSERT_TRUE(std::holds_alternative<double*>(double_nan_value.data));
-    ASSERT_EQ(std::get<double*>(double_nan_value.data), &double_NAN);
+    ASSERT_EQ(std::get<double*>(double_nan_value.data), &double_nan);
     ASSERT_EQ(std::strlen(double_nan_value.get_datatype().c_str()), std::strlen("double*"));
     ASSERT_EQ(std::strcmp(double_nan_value.get_datatype().c_str(), "double*"), 0);
     ASSERT_EQ(double_nan_value.get_entity_pointer(), nullptr);
