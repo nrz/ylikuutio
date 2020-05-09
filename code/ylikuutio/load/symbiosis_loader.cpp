@@ -42,7 +42,7 @@ namespace yli::load
             std::vector<std::vector<glm::vec3>>& out_normals,
             std::vector<std::vector<uint32_t>>& indices,
             std::vector<std::vector<glm::vec3>>& indexed_vertices,
-            std::vector<std::vector<glm::vec2>>& indexed_UVs,
+            std::vector<std::vector<glm::vec2>>& indexed_uvs,
             std::vector<std::vector<glm::vec3>>& indexed_normals,
             std::unordered_map<const ofbx::Texture*, std::vector<int32_t>>& ofbx_diffuse_texture_mesh_map,
             std::vector<const ofbx::Mesh*>& ofbx_meshes,

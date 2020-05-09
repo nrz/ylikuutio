@@ -49,7 +49,7 @@ namespace yli::load
             std::vector<glm::vec3>& out_normals,
             std::vector<uint32_t>& indices,
             std::vector<glm::vec3>& indexed_vertices,
-            std::vector<glm::vec2>& indexed_UVs,
+            std::vector<glm::vec2>& indexed_uvs,
             std::vector<glm::vec3>& indexed_normals,
             uint32_t* vertexbuffer,
             uint32_t* uvbuffer,
@@ -164,7 +164,7 @@ namespace yli::load
                 out_normals,
                 indices,
                 indexed_vertices,
-                indexed_UVs,
+                indexed_uvs,
                 indexed_normals);
 
         std::cout << "Indexing completed successfully.\n";
@@ -185,7 +185,7 @@ namespace yli::load
 
             glGenBuffers(1, uvbuffer);
             glBindBuffer(GL_ARRAY_BUFFER, *uvbuffer);
-            glBufferData(GL_ARRAY_BUFFER, indexed_UVs.size() * sizeof(glm::vec2), &indexed_UVs[0], GL_STATIC_DRAW);
+            glBufferData(GL_ARRAY_BUFFER, indexed_uvs.size() * sizeof(glm::vec2), &indexed_uvs[0], GL_STATIC_DRAW);
 
             glGenBuffers(1, normalbuffer);
             glBindBuffer(GL_ARRAY_BUFFER, *normalbuffer);

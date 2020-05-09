@@ -39,7 +39,7 @@ namespace yli::load
             std::vector<glm::vec3>& out_normals,
             std::vector<uint32_t>& indices,
             std::vector<glm::vec3>& indexed_vertices,
-            std::vector<glm::vec2>& indexed_UVs,
+            std::vector<glm::vec2>& indexed_uvs,
             std::vector<glm::vec3>& indexed_normals,
             uint32_t* vertexbuffer,
             uint32_t* uvbuffer,
