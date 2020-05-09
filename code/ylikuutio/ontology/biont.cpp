@@ -56,7 +56,7 @@ namespace yli::ontology
     class Entity;
     class Universe;
 
-    void Biont::bind_to_SymbiontSpecies()
+    void Biont::bind_to_symbiont_species()
     {
         // Requirements:
         // `this->holobiont_parent` must not be `nullptr`.
@@ -67,7 +67,7 @@ namespace yli::ontology
 
         if (holobiont == nullptr)
         {
-            std::cerr << "ERROR: `Biont::bind_to_SymbiontSpecies`: `holobiont` is `nullptr`!\n";
+            std::cerr << "ERROR: `Biont::bind_to_symbiont_species`: `holobiont` is `nullptr`!\n";
             return;
         }
 
@@ -75,7 +75,7 @@ namespace yli::ontology
 
         if (symbiosis == nullptr)
         {
-            std::cerr << "ERROR: `Biont::bind_to_SymbiontSpecies`: `symbiosis` is `nullptr`!\n";
+            std::cerr << "ERROR: `Biont::bind_to_symbiont_species`: `symbiosis` is `nullptr`!\n";
             return;
         }
 
@@ -83,7 +83,7 @@ namespace yli::ontology
 
         if (symbiont_species == nullptr)
         {
-            std::cerr << "ERROR: `Biont::bind_to_SymbiontSpecies`: `symbiont_species` is `nullptr`!\n";
+            std::cerr << "ERROR: `Biont::bind_to_symbiont_species`: `symbiont_species` is `nullptr`!\n";
             return;
         }
 

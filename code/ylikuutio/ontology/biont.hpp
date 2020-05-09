@@ -91,7 +91,7 @@ namespace yli::ontology
                 this->MVP_matrix            = glm::mat4(1.0f); // identity matrix (dummy value).
 
                 // Get `childID` from `SymbiontSpecies` (not a parent!) and set pointer to this `Biont`.
-                this->bind_to_SymbiontSpecies();
+                this->bind_to_symbiont_species();
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Biont*";
@@ -107,7 +107,7 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
         protected:
-            void bind_to_SymbiontSpecies();
+            void bind_to_symbiont_species();
 
             // This method renders this `Biont`.
             void render() override;
