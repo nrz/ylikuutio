@@ -180,7 +180,7 @@ namespace yli::triangulation
             // 3.   `transform_coordinates_to_curved_surface`                       `transform_coordinates_to_curved_surface`   `transform_coordinates_to_curved_surface`
             // 4.   `compute_face_normals`                                          `compute_face_normals`                      `compute_face_normals`
             // 5.   `compute_vertex_normals`                                        `compute_vertex_normals`                    `compute_vertex_normals`
-            // 6.   `define_vertices_UVs_and_normals`                               `define_vertices_UVs_and_normals`           `define_vertices_UVs_and_normals`
+            // 6.   `define_vertices_uvs_and_normals`                               `define_vertices_uvs_and_normals`           `define_vertices_uvs_and_normals`
             //
             // stg. = stage
 
@@ -292,7 +292,7 @@ namespace yli::triangulation
 
             // 6. Loop through all vertices and `yli::geometry::output_triangle_vertices`.
 
-            if (!yli::triangulation::define_vertices_UVs_and_normals(
+            if (!yli::triangulation::define_vertices_uvs_and_normals(
                         triangulate_quads_struct,
                         temp_vertices,
                         temp_uvs,

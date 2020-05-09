@@ -56,7 +56,7 @@ namespace yli::triangulation
         out_normals.push_back(temp_normals[normal_index[2]]);
     }
 
-    bool define_vertices_UVs_and_normals(
+    bool define_vertices_uvs_and_normals(
             const yli::triangulation::TriangulateQuadsStruct& triangulate_quads_struct,
             const std::vector<glm::vec3>& temp_vertices,
             const std::vector<glm::vec2>& temp_uvs,
