@@ -66,7 +66,7 @@ namespace yli::ontology
                 this->vertex_position_in_screenspaceID = 0;
                 this->vertexUVID                       = 0;
                 this->Text2DUniformID                  = 0;
-                this->screen_width_uniform_ID          = 0;
+                this->screen_width_uniform_id          = 0;
                 this->screen_height_uniform_ID         = 0;
                 this->image_width                      = 0;
                 this->image_height                     = 0;
@@ -114,8 +114,8 @@ namespace yli::ontology
                     this->Text2DUniformID = glGetUniformLocation(this->programID, "texture_sampler");
 
                     // Initialize uniform window width.
-                    this->screen_width_uniform_ID = glGetUniformLocation(this->programID, "screen_width");
-                    yli::opengl::uniform_1i(this->screen_width_uniform_ID, this->screen_width);
+                    this->screen_width_uniform_id = glGetUniformLocation(this->programID, "screen_width");
+                    yli::opengl::uniform_1i(this->screen_width_uniform_id, this->screen_width);
 
                     // Initialize uniform window height.
                     this->screen_height_uniform_ID = glGetUniformLocation(this->programID, "screen_height");
@@ -181,7 +181,7 @@ namespace yli::ontology
             GLint vertex_position_in_screenspaceID;    // Location of the program's `vertex_position_screenspace` attribute.
             GLint vertexUVID;                          // Location of the program's `vertexUV` attribute.
             GLint Text2DUniformID;                     // Location of the program's texture attribute.
-            GLint screen_width_uniform_ID;             // Location of the program's window width uniform.
+            GLint screen_width_uniform_id;             // Location of the program's window width uniform.
             GLint screen_height_uniform_ID;            // Location of the program's window height uniform.
 
             std::size_t screen_width;

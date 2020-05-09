@@ -110,7 +110,7 @@ namespace yli::ontology
         yli::opengl::uniform_1i(this->Text2DUniformID, 0);
 
         // Set screen width.
-        yli::opengl::uniform_1i(this->screen_width_uniform_ID, this->screen_width);
+        yli::opengl::uniform_1i(this->screen_width_uniform_id, this->screen_width);
 
         // Set screen height.
         yli::opengl::uniform_1i(this->screen_height_uniform_ID, this->screen_height);
