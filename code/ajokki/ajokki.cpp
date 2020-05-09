@@ -1123,7 +1123,7 @@ int main(const int argc, const char* const argv[]) try
 
             my_universe->increment_number_of_frames();
 
-            while (current_time_in_main_loop - my_universe->get_last_time_to_display_FPS() >= 1.0f)
+            while (current_time_in_main_loop - my_universe->get_last_time_to_display_fps() >= 1.0f)
             {
                 // If last `std::stringstream` here was more than 1 sec ago,
                 // std::stringstream` and reset number of frames.

@@ -471,7 +471,7 @@ namespace yli::ontology
         return this->max_FPS;
     }
 
-    double Universe::get_last_time_to_display_FPS() const
+    double Universe::get_last_time_to_display_fps() const
     {
         return this->last_time_to_display_FPS;
     }
