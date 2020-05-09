@@ -62,7 +62,7 @@ namespace yli::ontology
                 // Initialize class members with some dummy values.
                 this->lightID                      = 0;
                 this->vertex_position_modelspace_id = 0;
-                this->vertexUVID                   = 0;
+                this->vertex_uv_id                   = 0;
                 this->vertex_normal_modelspaceID   = 0;
                 this->vertexbuffer                 = 0;
                 this->uvbuffer                     = 0;
@@ -105,7 +105,7 @@ namespace yli::ontology
             uint32_t get_elementbuffer() const;
 
             void store_vertex_position_modelspaceID(const GLint vertex_position_modelspace_id);
-            void store_vertexUVID(const GLint vertexUVID);
+            void store_vertexUVID(const GLint vertex_uv_id);
             void store_vertex_normal_modelspaceID(const GLint vertex_normal_modelspaceID);
 
             template<class T1>
@@ -129,7 +129,7 @@ namespace yli::ontology
             std::string triangulation_type;
 
             GLint vertex_position_modelspace_id;
-            GLint vertexUVID;
+            GLint vertex_uv_id;
             GLint vertex_normal_modelspaceID;
 
             std::vector<glm::vec3> vertices;         // vertices of the `Model`.

@@ -193,7 +193,7 @@ namespace yli::ontology
             yli::opengl::enable_vertex_attrib_array(this->vertex_position_modelspace_id);
 
             // 2nd attribute buffer: UVs.
-            yli::opengl::enable_vertex_attrib_array(this->vertexUVID);
+            yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
 
             // 1st attribute buffer: vertices.
             glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
@@ -209,7 +209,7 @@ namespace yli::ontology
             // 2nd attribute buffer: UVs.
             glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
             glVertexAttribPointer(
-                    this->vertexUVID, // The attribute we want to configure
+                    this->vertex_uv_id, // The attribute we want to configure
                     2,                // size : U+V => 2
                     GL_FLOAT,         // type
                     GL_FALSE,         // normalized?
@@ -221,7 +221,7 @@ namespace yli::ontology
             glDrawArrays(GL_TRIANGLE_STRIP, 0, this->vertices_size); // draw 2 triangles (6 vertices, no VBO indexing).
 
             yli::opengl::disable_vertex_attrib_array(this->vertex_position_modelspace_id);
-            yli::opengl::disable_vertex_attrib_array(this->vertexUVID);
+            yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
 
             if (this->should_ylikuutio_save_intermediate_results && !this->output_filename.empty())
             {

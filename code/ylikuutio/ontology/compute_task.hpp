@@ -121,7 +121,7 @@ namespace yli::ontology
                 this->is_ready                     = false;
 
                 this->vertex_position_modelspace_id = 0; // some dummy value.
-                this->vertexUVID                   = 0; // some dummy value.
+                this->vertex_uv_id                   = 0; // some dummy value.
                 this->screen_width_uniform_id      = 0; // some dummy value.
                 this->screen_height_uniform_id     = 0; // some dummy value.
                 this->iteration_i_uniform_id       = 0; // some dummy value.
@@ -147,7 +147,7 @@ namespace yli::ontology
                 {
                     // Get a handle for our buffers.
                     this->vertex_position_modelspace_id = glGetAttribLocation(this->parent->get_programID(), "vertex_position_modelspace");
-                    this->vertexUVID = glGetAttribLocation(this->parent->get_programID(), "vertexUV");
+                    this->vertex_uv_id = glGetAttribLocation(this->parent->get_programID(), "vertexUV");
 
                     glUseProgram(this->parent->get_programID());
                 }
@@ -301,7 +301,7 @@ namespace yli::ontology
             bool is_ready;
 
             GLint vertex_position_modelspace_id;
-            GLint vertexUVID;
+            GLint vertex_uv_id;
             GLint screen_width_uniform_id;             // Location of the program's window width uniform.
             GLint screen_height_uniform_id;            // Location of the program's window height uniform.
             GLint iteration_i_uniform_id;              // Location of the program's iteration index uniform.

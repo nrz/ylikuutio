@@ -87,7 +87,7 @@ namespace yli::ontology
 
     GLint Model::get_vertexUVID() const
     {
-        return this->vertexUVID;
+        return this->vertex_uv_id;
     }
 
     GLint Model::get_vertex_normal_modelspaceID() const
@@ -120,9 +120,9 @@ namespace yli::ontology
         this->vertex_position_modelspace_id = vertex_position_modelspace_id;
     }
 
-    void Model::store_vertexUVID(const GLint vertexUVID)
+    void Model::store_vertexUVID(const GLint vertex_uv_id)
     {
-        this->vertexUVID = vertexUVID;
+        this->vertex_uv_id = vertex_uv_id;
     }
 
     void Model::store_vertex_normal_modelspaceID(const GLint vertex_normal_modelspaceID)

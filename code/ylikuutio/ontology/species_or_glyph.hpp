@@ -41,7 +41,7 @@ namespace yli::ontology
             yli::opengl::enable_vertex_attrib_array(species_or_glyph_pointer->vertex_position_modelspace_id);
 
             // 2nd attribute buffer: UVs.
-            yli::opengl::enable_vertex_attrib_array(species_or_glyph_pointer->vertexUVID);
+            yli::opengl::enable_vertex_attrib_array(species_or_glyph_pointer->vertex_uv_id);
 
             // 3rd attribute buffer: normals.
             yli::opengl::enable_vertex_attrib_array(species_or_glyph_pointer->vertex_normal_modelspaceID);
@@ -50,7 +50,7 @@ namespace yli::ontology
             yli::ontology::render_children<yli::ontology::Entity*>(species_or_glyph_pointer->parent_of_objects.child_pointer_vector);
 
             yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertex_position_modelspace_id);
-            yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertexUVID);
+            yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertex_uv_id);
             yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertex_normal_modelspaceID);
         }
 }
