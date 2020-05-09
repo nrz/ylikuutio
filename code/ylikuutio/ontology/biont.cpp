@@ -235,7 +235,7 @@ namespace yli::ontology
         yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertex_uv_id());
 
         // 3rd attribute buffer : normals.
-        yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertex_normal_modelspaceID());
+        yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertex_normal_modelspace_id());
 
         // '`Species`' part ends here.
 
@@ -249,7 +249,7 @@ namespace yli::ontology
         uint32_t uvbuffer = symbiont_species->get_uvbuffer();
         uint32_t vertex_uv_id = symbiont_species->get_vertex_uv_id();
         uint32_t normalbuffer = symbiont_species->get_normalbuffer();
-        uint32_t vertex_normal_modelspaceID = symbiont_species->get_vertex_normal_modelspaceID();
+        uint32_t vertex_normal_modelspaceID = symbiont_species->get_vertex_normal_modelspace_id();
         uint32_t elementbuffer = symbiont_species->get_elementbuffer();
         uint32_t indices_size = symbiont_species->get_indices_size();
 

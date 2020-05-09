@@ -90,7 +90,7 @@ namespace yli::ontology
         return this->vertex_uv_id;
     }
 
-    GLint Model::get_vertex_normal_modelspaceID() const
+    GLint Model::get_vertex_normal_modelspace_id() const
     {
         return this->vertex_normal_modelspaceID;
     }

@@ -297,7 +297,7 @@ namespace yli::ontology
         uint32_t uvbuffer = parent_model->get_uvbuffer();
         uint32_t vertex_uv_id = parent_model->get_vertex_uv_id();
         uint32_t normalbuffer = parent_model->get_normalbuffer();
-        uint32_t vertex_normal_modelspaceID = parent_model->get_vertex_normal_modelspaceID();
+        uint32_t vertex_normal_modelspaceID = parent_model->get_vertex_normal_modelspace_id();
         uint32_t elementbuffer = parent_model->get_elementbuffer();
         uint32_t indices_size = parent_model->get_indices().size();
 

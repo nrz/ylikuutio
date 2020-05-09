@@ -97,7 +97,7 @@ namespace yli::ontology
 
             GLint get_vertex_position_modelspace_id() const;
             GLint get_vertex_uv_id() const;
-            GLint get_vertex_normal_modelspaceID() const;
+            GLint get_vertex_normal_modelspace_id() const;
 
             uint32_t get_vertexbuffer() const;
             uint32_t get_uvbuffer() const;
