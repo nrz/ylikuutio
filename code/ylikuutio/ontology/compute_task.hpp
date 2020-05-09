@@ -124,7 +124,7 @@ namespace yli::ontology
                 this->vertex_position_modelspaceID = 0; // some dummy value.
                 this->vertexUVID                   = 0; // some dummy value.
                 this->screen_width_uniform_id      = 0; // some dummy value.
-                this->screen_height_uniform_ID     = 0; // some dummy value.
+                this->screen_height_uniform_id     = 0; // some dummy value.
                 this->screen_depth_uniform_ID      = 0; // some dummy value.
                 this->iteration_i_uniform_ID       = 0; // some dummy value.
                 this->vertexbuffer                 = 0; // some dummy value.
@@ -207,8 +207,8 @@ namespace yli::ontology
 
                     // Initialize uniform window height.
                     // This is named `screen_height` instead of `texture_height` for compatibility with other shaders.
-                    this->screen_height_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_height");
-                    yli::opengl::uniform_1i(this->screen_height_uniform_ID, this->texture_height);
+                    this->screen_height_uniform_id = glGetUniformLocation(this->parent->get_programID(), "screen_height");
+                    yli::opengl::uniform_1i(this->screen_height_uniform_id, this->texture_height);
 
                     // Initialize uniform window depth.
                     // This is named `screen_depth` instead of `texture_depth`, for consistency with other uniforms.
@@ -313,7 +313,7 @@ namespace yli::ontology
             GLint vertex_position_modelspaceID;
             GLint vertexUVID;
             GLint screen_width_uniform_id;             // Location of the program's window width uniform.
-            GLint screen_height_uniform_ID;            // Location of the program's window height uniform.
+            GLint screen_height_uniform_id;            // Location of the program's window height uniform.
             GLint screen_depth_uniform_ID;             // Location of the program's window depth uniform.
             GLint iteration_i_uniform_ID;              // Location of the program's iteration index uniform.
 

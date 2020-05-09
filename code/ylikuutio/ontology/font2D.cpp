@@ -113,7 +113,7 @@ namespace yli::ontology
         yli::opengl::uniform_1i(this->screen_width_uniform_id, this->screen_width);
 
         // Set screen height.
-        yli::opengl::uniform_1i(this->screen_height_uniform_ID, this->screen_height);
+        yli::opengl::uniform_1i(this->screen_height_uniform_id, this->screen_height);
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

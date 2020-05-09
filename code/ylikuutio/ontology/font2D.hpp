@@ -67,7 +67,7 @@ namespace yli::ontology
                 this->vertexUVID                       = 0;
                 this->Text2DUniformID                  = 0;
                 this->screen_width_uniform_id          = 0;
-                this->screen_height_uniform_ID         = 0;
+                this->screen_height_uniform_id         = 0;
                 this->image_width                      = 0;
                 this->image_height                     = 0;
                 this->image_size                       = 0;
@@ -118,8 +118,8 @@ namespace yli::ontology
                     yli::opengl::uniform_1i(this->screen_width_uniform_id, this->screen_width);
 
                     // Initialize uniform window height.
-                    this->screen_height_uniform_ID = glGetUniformLocation(this->programID, "screen_height");
-                    yli::opengl::uniform_1i(this->screen_height_uniform_ID, this->screen_height);
+                    this->screen_height_uniform_id = glGetUniformLocation(this->programID, "screen_height");
+                    yli::opengl::uniform_1i(this->screen_height_uniform_id, this->screen_height);
                 }
 
                 // `yli::ontology::Entity` member variables begin here.
@@ -182,7 +182,7 @@ namespace yli::ontology
             GLint vertexUVID;                          // Location of the program's `vertexUV` attribute.
             GLint Text2DUniformID;                     // Location of the program's texture attribute.
             GLint screen_width_uniform_id;             // Location of the program's window width uniform.
-            GLint screen_height_uniform_ID;            // Location of the program's window height uniform.
+            GLint screen_height_uniform_id;            // Location of the program's window height uniform.
 
             std::size_t screen_width;
             std::size_t screen_height;
