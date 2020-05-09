@@ -120,7 +120,7 @@ namespace yli::ontology
                 this->is_framebuffer_initialized   = false;
                 this->is_ready                     = false;
 
-                this->vertex_position_modelspaceID = 0; // some dummy value.
+                this->vertex_position_modelspace_id = 0; // some dummy value.
                 this->vertexUVID                   = 0; // some dummy value.
                 this->screen_width_uniform_id      = 0; // some dummy value.
                 this->screen_height_uniform_id     = 0; // some dummy value.
@@ -146,7 +146,7 @@ namespace yli::ontology
                 if (!is_headless)
                 {
                     // Get a handle for our buffers.
-                    this->vertex_position_modelspaceID = glGetAttribLocation(this->parent->get_programID(), "vertex_position_modelspace");
+                    this->vertex_position_modelspace_id = glGetAttribLocation(this->parent->get_programID(), "vertex_position_modelspace");
                     this->vertexUVID = glGetAttribLocation(this->parent->get_programID(), "vertexUV");
 
                     glUseProgram(this->parent->get_programID());
@@ -300,7 +300,7 @@ namespace yli::ontology
             bool is_framebuffer_initialized;
             bool is_ready;
 
-            GLint vertex_position_modelspaceID;
+            GLint vertex_position_modelspace_id;
             GLint vertexUVID;
             GLint screen_width_uniform_id;             // Location of the program's window width uniform.
             GLint screen_height_uniform_id;            // Location of the program's window height uniform.

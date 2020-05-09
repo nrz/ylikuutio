@@ -293,7 +293,7 @@ namespace yli::ontology
         }
 
         uint32_t vertexbuffer = parent_model->get_vertexbuffer();
-        uint32_t vertex_position_modelspaceID = parent_model->get_vertex_position_modelspaceID();
+        uint32_t vertex_position_modelspace_id = parent_model->get_vertex_position_modelspaceID();
         uint32_t uvbuffer = parent_model->get_uvbuffer();
         uint32_t vertexUVID = parent_model->get_vertexUVID();
         uint32_t normalbuffer = parent_model->get_normalbuffer();
@@ -304,7 +304,7 @@ namespace yli::ontology
         // 1st attribute buffer: vertices.
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glVertexAttribPointer(
-                vertex_position_modelspaceID, // The attribute we want to configure
+                vertex_position_modelspace_id, // The attribute we want to configure
                 3,                           // size
                 GL_FLOAT,                    // type
                 GL_FALSE,                    // normalized?

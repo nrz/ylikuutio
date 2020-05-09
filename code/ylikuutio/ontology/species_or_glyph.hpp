@@ -38,7 +38,7 @@ namespace yli::ontology
                     species_or_glyph_pointer->light_position.z);
 
             // 1st attribute buffer: vertices.
-            yli::opengl::enable_vertex_attrib_array(species_or_glyph_pointer->vertex_position_modelspaceID);
+            yli::opengl::enable_vertex_attrib_array(species_or_glyph_pointer->vertex_position_modelspace_id);
 
             // 2nd attribute buffer: UVs.
             yli::opengl::enable_vertex_attrib_array(species_or_glyph_pointer->vertexUVID);
@@ -49,7 +49,7 @@ namespace yli::ontology
             // Render this `Species` or `Glyph` by calling `render()` function of each `Object`.
             yli::ontology::render_children<yli::ontology::Entity*>(species_or_glyph_pointer->parent_of_objects.child_pointer_vector);
 
-            yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertex_position_modelspaceID);
+            yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertex_position_modelspace_id);
             yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertexUVID);
             yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertex_normal_modelspaceID);
         }

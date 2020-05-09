@@ -87,7 +87,7 @@ namespace yli::ontology
                 if (!is_headless)
                 {
                     // Get a handle for our buffers.
-                    this->vertex_position_modelspaceID = glGetAttribLocation(this->shader->get_programID(), "vertex_position_modelspace");
+                    this->vertex_position_modelspace_id = glGetAttribLocation(this->shader->get_programID(), "vertex_position_modelspace");
                     this->vertexUVID                   = glGetAttribLocation(this->shader->get_programID(), "vertexUV");
                     this->vertex_normal_modelspaceID   = glGetAttribLocation(this->shader->get_programID(), "vertex_normal_modelspace");
 

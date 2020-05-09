@@ -245,7 +245,7 @@ namespace yli::ontology
         glUniformMatrix4fv(shader->get_model_matrixID(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
         uint32_t vertexbuffer = symbiont_species->get_vertexbuffer();
-        uint32_t vertex_position_modelspaceID = symbiont_species->get_vertex_position_modelspaceID();
+        uint32_t vertex_position_modelspace_id = symbiont_species->get_vertex_position_modelspaceID();
         uint32_t uvbuffer = symbiont_species->get_uvbuffer();
         uint32_t vertexUVID = symbiont_species->get_vertexUVID();
         uint32_t normalbuffer = symbiont_species->get_normalbuffer();
@@ -256,7 +256,7 @@ namespace yli::ontology
         // 1st attribute buffer : vertices.
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glVertexAttribPointer(
-                vertex_position_modelspaceID, // The attribute we want to configure
+                vertex_position_modelspace_id, // The attribute we want to configure
                 3,                            // size
                 GL_FLOAT,                     // type
                 GL_FALSE,                     // normalized?
