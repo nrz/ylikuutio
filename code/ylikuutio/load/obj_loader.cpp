@@ -57,7 +57,7 @@ namespace yli::load
 
         std::vector<int32_t> vertex_indices, uv_indices, normal_indices;
         std::vector<glm::vec3> temp_vertices;
-        std::vector<glm::vec2> temp_UVs;
+        std::vector<glm::vec2> temp_uvs;
         std::vector<glm::vec3> temp_normals;
 
         std::size_t file_content_i = 0;
@@ -111,7 +111,7 @@ namespace yli::load
                 // vt 0.748573 0.750412
                 glm::vec2 uv;
                 current_line_stringstream >> prefix >> uv.x >> uv.y;
-                temp_UVs.push_back(uv);
+                temp_uvs.push_back(uv);
             }
             else if (current_line_string.compare(0, std::strlen("vn"), "vn") == 0)
             {
@@ -203,7 +203,7 @@ namespace yli::load
 
             // Get the attributes thanks to the index
             glm::vec3 vertex = temp_vertices[vertex_index - 1];
-            glm::vec2 uv = temp_UVs[uv_index - 1];
+            glm::vec2 uv = temp_uvs[uv_index - 1];
             glm::vec3 normal = temp_normals[normal_index - 1];
 
             // Put the attributes in buffers

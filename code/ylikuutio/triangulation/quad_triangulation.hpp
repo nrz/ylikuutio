@@ -162,12 +162,12 @@ namespace yli::triangulation
             }
 
             std::vector<glm::vec3> temp_vertices;
-            std::vector<glm::vec2> temp_UVs;
+            std::vector<glm::vec2> temp_uvs;
             std::vector<glm::vec3> temp_normals;
 
             // Processing stages:
-            // 1. Define the (float) vertices for vertices loaded from file, `push_back` to `temp_vertices` and `temp_UVs`.
-            // 2. Interpolate the (float) vertices between, using bilinear interpolation, `push_back` to `temp_vertices` and `temp_UVs`.
+            // 1. Define the (float) vertices for vertices loaded from file, `push_back` to `temp_vertices` and `temp_uvs`.
+            // 2. Interpolate the (float) vertices between, using bilinear interpolation, `push_back` to `temp_vertices` and `temp_uvs`.
             // 3a. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
             // 3b. For bilinear interpolation: Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
             // 4. Compute the face normals, `push_back` to `face_normals`.
@@ -194,7 +194,7 @@ namespace yli::triangulation
                         z_step,
                         triangulate_quads_struct.use_real_texture_coordinates,
                         temp_vertices,
-                        temp_UVs))
+                        temp_uvs))
             {
                 return false;
             }
@@ -220,7 +220,7 @@ namespace yli::triangulation
                             z_step,
                             triangulate_quads_struct.use_real_texture_coordinates,
                             temp_vertices,
-                            temp_UVs))
+                            temp_uvs))
                 {
                     std::cerr << "ERROR: `yli::triangulation::triangulate_quads`: interpolating and defining vertices using bilinear interpolation failed.\n";
                     return false;
@@ -295,7 +295,7 @@ namespace yli::triangulation
             if (!yli::triangulation::define_vertices_UVs_and_normals(
                         triangulate_quads_struct,
                         temp_vertices,
-                        temp_UVs,
+                        temp_uvs,
                         temp_normals,
                         out_vertices,
                         out_uvs,
