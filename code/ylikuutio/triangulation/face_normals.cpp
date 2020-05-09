@@ -211,7 +211,7 @@ namespace yli::triangulation
     }
 
     // for southeast-northwest edges.
-    glm::vec3 get_face_normal_for_SE_NW(
+    glm::vec3 get_face_normal_for_se_nw(
             const std::vector<glm::vec3>& face_normal_data,
             const std::size_t x,
             const std::size_t z,
