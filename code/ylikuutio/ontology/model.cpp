@@ -85,7 +85,7 @@ namespace yli::ontology
         return this->vertex_position_modelspace_id;
     }
 
-    GLint Model::get_vertexUVID() const
+    GLint Model::get_vertex_uv_id() const
     {
         return this->vertex_uv_id;
     }

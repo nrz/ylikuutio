@@ -96,7 +96,7 @@ namespace yli::ontology
             const std::vector<uint32_t>& get_indices() const;
 
             GLint get_vertex_position_modelspace_id() const;
-            GLint get_vertexUVID() const;
+            GLint get_vertex_uv_id() const;
             GLint get_vertex_normal_modelspaceID() const;
 
             uint32_t get_vertexbuffer() const;
