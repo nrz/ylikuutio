@@ -33,17 +33,17 @@ TEST(obj_files_must_be_loaded_approriately, suzanne_obj)
 {
     const std::string obj_filename = "suzanne.obj";
     std::vector<glm::vec3> out_vertices;
-    std::vector<glm::vec2> out_UVs;
+    std::vector<glm::vec2> out_uvs;
     std::vector<glm::vec3> out_normals;
 
-    const bool result = yli::load::load_OBJ(obj_filename.c_str(), out_vertices, out_UVs, out_normals);
+    const bool result = yli::load::load_OBJ(obj_filename.c_str(), out_vertices, out_uvs, out_normals);
     ASSERT_TRUE(result);
 
     // note: `load_OBJ` only loads the OBJ file. `load_OBJ` does not remove duplicate vertices.
     const int32_t number_of_faces = 968;
     const int32_t number_of_vertices_in_triangle = 3;
     ASSERT_EQ(out_vertices.size(), number_of_faces * number_of_vertices_in_triangle);
-    ASSERT_EQ(out_UVs.size(), number_of_faces * number_of_vertices_in_triangle);
+    ASSERT_EQ(out_uvs.size(), number_of_faces * number_of_vertices_in_triangle);
     ASSERT_EQ(out_normals.size(), number_of_faces * number_of_vertices_in_triangle);
 
     // face 0:
@@ -57,10 +57,10 @@ TEST(obj_files_must_be_loaded_approriately, suzanne_obj)
     ASSERT_EQ(out_vertices[0].z, 0.828125);
     // UV 1 (UV numbering begins from 1):
     // vt 0.315596 0.792535
-    ASSERT_GT(out_UVs[0].x, 0.314453125);
-    ASSERT_LT(out_UVs[0].x, 0.31640625);
-    ASSERT_GT(out_UVs[0].y, 0.791015625);
-    ASSERT_LT(out_UVs[0].y, 0.79296875);
+    ASSERT_GT(out_uvs[0].x, 0.314453125);
+    ASSERT_LT(out_uvs[0].x, 0.31640625);
+    ASSERT_GT(out_uvs[0].y, 0.791015625);
+    ASSERT_LT(out_uvs[0].y, 0.79296875);
     // vertex normal 1 (vertex normal numbering begins from 1):
     // vn 0.189764 -0.003571 0.981811
     ASSERT_GT(out_normals[0].x, 0.189453125);
@@ -78,10 +78,10 @@ TEST(obj_files_must_be_loaded_approriately, suzanne_obj)
     ASSERT_EQ(out_vertices[1].z, 0.78125);
     // UV 2 (UV numbering begins from 1):
     // vt 0.331462 0.787091
-    ASSERT_GT(out_UVs[1].x, 0.330078125);
-    ASSERT_LT(out_UVs[1].x, 0.33203125);
-    ASSERT_GT(out_UVs[1].y, 0.786132813);
-    ASSERT_LT(out_UVs[1].y, 0.787109375);
+    ASSERT_GT(out_uvs[1].x, 0.330078125);
+    ASSERT_LT(out_uvs[1].x, 0.33203125);
+    ASSERT_GT(out_uvs[1].y, 0.786132813);
+    ASSERT_LT(out_uvs[1].y, 0.787109375);
     // vertex normal 2 (vertex normal numbering begins from 1):
     // vn 0.646809 -0.758202 0.082095
     ASSERT_GT(out_normals[1].x, 0.64453125);
@@ -101,10 +101,10 @@ TEST(obj_files_must_be_loaded_approriately, suzanne_obj)
     ASSERT_LT(out_vertices[2].z, 0.77734375);
     // UV 3 (UV numbering begins from 1):
     // vt 0.331944 0.799704
-    ASSERT_GT(out_UVs[2].x, 0.330078125);
-    ASSERT_LT(out_UVs[2].x, 0.33203125);
-    ASSERT_GT(out_UVs[2].y, 0.798828125);
-    ASSERT_LT(out_UVs[2].y, 0.8046875);
+    ASSERT_GT(out_uvs[2].x, 0.330078125);
+    ASSERT_LT(out_uvs[2].x, 0.33203125);
+    ASSERT_GT(out_uvs[2].y, 0.798828125);
+    ASSERT_LT(out_uvs[2].y, 0.8046875);
 
     // face 1:
     // f 50/4/4 66/5/5 62/6/6
@@ -118,10 +118,10 @@ TEST(obj_files_must_be_loaded_approriately, suzanne_obj)
     ASSERT_LT(out_vertices[3].z, 0.77734375);
     // UV 4 (UV numbering begins from 1):
     // vt 0.049262 0.798007
-    ASSERT_GT(out_UVs[3].x, 0.048828125);
-    ASSERT_LT(out_UVs[3].x, 0.05078125);
-    ASSERT_GT(out_UVs[3].y, 0.797851563);
-    ASSERT_LT(out_UVs[3].y, 0.798828125);
+    ASSERT_GT(out_uvs[3].x, 0.048828125);
+    ASSERT_LT(out_uvs[3].x, 0.05078125);
+    ASSERT_GT(out_uvs[3].y, 0.797851563);
+    ASSERT_LT(out_uvs[3].y, 0.798828125);
 
     // vertex 66 (vertex numbering begins from 1):
     // v -0.445313 0.156250 0.781250
@@ -131,10 +131,10 @@ TEST(obj_files_must_be_loaded_approriately, suzanne_obj)
     ASSERT_EQ(out_vertices[4].z, 0.78125);
     // UV 5 (UV numbering begins from 1):
     // vt 0.050304 0.785428
-    ASSERT_GT(out_UVs[4].x, 0.050292969);
-    ASSERT_LT(out_UVs[4].x, 0.050537109);
-    ASSERT_GT(out_UVs[4].y, 0.78515625);
-    ASSERT_LT(out_UVs[4].y, 0.785644531);
+    ASSERT_GT(out_uvs[4].x, 0.050292969);
+    ASSERT_LT(out_uvs[4].x, 0.050537109);
+    ASSERT_GT(out_uvs[4].y, 0.78515625);
+    ASSERT_LT(out_uvs[4].y, 0.785644531);
 
     // vertex 62 (vertex numbering begins from 1):
     // v -0.351563 0.242188 0.828125
@@ -145,10 +145,10 @@ TEST(obj_files_must_be_loaded_approriately, suzanne_obj)
     ASSERT_EQ(out_vertices[5].z, 0.828125);
     // UV 5 (UV numbering begins from 1):
     // vt 0.065913 0.791570
-    ASSERT_GT(out_UVs[5].x, 0.065673828);
-    ASSERT_LT(out_UVs[5].x, 0.065917969);
-    ASSERT_GT(out_UVs[5].y, 0.791503906);
-    ASSERT_LT(out_UVs[5].y, 0.791992188);
+    ASSERT_GT(out_uvs[5].x, 0.065673828);
+    ASSERT_LT(out_uvs[5].x, 0.065917969);
+    ASSERT_GT(out_uvs[5].y, 0.791503906);
+    ASSERT_LT(out_uvs[5].y, 0.791992188);
 
     // face 2:
     // f 63/7/7 65/2/2 61/1/1

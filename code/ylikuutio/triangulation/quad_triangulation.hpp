@@ -60,7 +60,7 @@ namespace yli::triangulation
                 const T1* input_vertex_pointer,
                 const yli::triangulation::TriangulateQuadsStruct& triangulate_quads_struct,
                 std::vector<glm::vec3>& out_vertices,
-                std::vector<glm::vec2>& out_UVs,
+                std::vector<glm::vec2>& out_uvs,
                 std::vector<glm::vec3>& out_normals)
         {
             const std::size_t image_width = triangulate_quads_struct.image_width;
@@ -298,7 +298,7 @@ namespace yli::triangulation
                         temp_UVs,
                         temp_normals,
                         out_vertices,
-                        out_UVs,
+                        out_uvs,
                         out_normals,
                         actual_image_width,
                         actual_image_height,
@@ -311,7 +311,7 @@ namespace yli::triangulation
             }
 
             std::cout << "Number of vertices: " << out_vertices.size() << ".\n";
-            std::cout << "Number of UVs: " << out_UVs.size() << ".\n";
+            std::cout << "Number of UVs: " << out_uvs.size() << ".\n";
             std::cout << "Number of normals: " << out_normals.size() << ".\n";
 
             return true;

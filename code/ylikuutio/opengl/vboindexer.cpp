@@ -44,7 +44,7 @@ bool getSimilarVertexIndex(
         const glm::vec2& in_uv,
         const glm::vec3& in_normal,
         std::vector<glm::vec3>& out_vertices,
-        std::vector<glm::vec2>& out_UVs,
+        std::vector<glm::vec2>& out_uvs,
         std::vector<glm::vec3>& out_normals,
         uint32_t &result)
 {
@@ -54,8 +54,8 @@ bool getSimilarVertexIndex(
         if (is_near(in_vertex.x, out_vertices[i].x) &&
                 is_near(in_vertex.y, out_vertices[i].y) &&
                 is_near(in_vertex.z, out_vertices[i].z) &&
-                is_near(in_uv.x, out_UVs[i].x) &&
-                is_near(in_uv.y, out_UVs[i].y) &&
+                is_near(in_uv.x, out_uvs[i].x) &&
+                is_near(in_uv.y, out_uvs[i].y) &&
                 is_near(in_normal.x, out_normals [i].x) &&
                 is_near(in_normal.y, out_normals [i].y) &&
                 is_near(in_normal.z, out_normals [i].z))
@@ -106,7 +106,7 @@ namespace yli::opengl
             const std::vector<glm::vec3>& in_normals,
             std::vector<uint32_t>& out_indices,
             std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_UVs,
+            std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals)
     {
         std::map<PackedVertex, uint32_t> VertexToOutIndex;
@@ -129,7 +129,7 @@ namespace yli::opengl
             {
                 // If not, it needs to be added in the output data.
                 out_vertices.push_back(in_vertices[i]);
-                out_UVs.push_back(in_UVs[i]);
+                out_uvs.push_back(in_UVs[i]);
                 out_normals.push_back(in_normals[i]);
                 uint32_t newindex = (uint32_t) out_vertices.size() - 1;
                 out_indices.push_back(newindex);

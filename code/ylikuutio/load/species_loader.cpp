@@ -45,7 +45,7 @@ namespace yli::load
     bool load_Species(
             const yli::load::SpeciesLoaderStruct& species_loader_struct,
             std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_UVs,
+            std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals,
             std::vector<uint32_t>& indices,
             std::vector<glm::vec3>& indexed_vertices,
@@ -65,7 +65,7 @@ namespace yli::load
             model_loading_result = yli::load::load_OBJ(
                     species_loader_struct.model_filename,
                     out_vertices,
-                    out_UVs,
+                    out_uvs,
                     out_normals);
         }
         else if (species_loader_struct.model_file_format == "fbx" || species_loader_struct.model_file_format == "FBX")
@@ -74,7 +74,7 @@ namespace yli::load
                     species_loader_struct.model_filename,
                     species_loader_struct.mesh_i,
                     out_vertices,
-                    out_UVs,
+                    out_uvs,
                     out_normals,
                     is_debug_mode);
 
@@ -118,7 +118,7 @@ namespace yli::load
                         heightmap_loader_struct,
                         species_loader_struct.model_filename,
                         out_vertices,
-                        out_UVs,
+                        out_uvs,
                         out_normals,
                         *species_loader_struct.image_width_pointer,
                         *species_loader_struct.image_height_pointer);
@@ -128,7 +128,7 @@ namespace yli::load
                 model_loading_result = yli::load::load_bmp_terrain(
                         heightmap_loader_struct,
                         out_vertices,
-                        out_UVs,
+                        out_uvs,
                         out_normals,
                         *species_loader_struct.image_width_pointer,
                         *species_loader_struct.image_height_pointer,
@@ -141,7 +141,7 @@ namespace yli::load
                 model_loading_result = yli::load::load_ascii_grid_terrain(
                         heightmap_loader_struct,
                         out_vertices,
-                        out_UVs,
+                        out_uvs,
                         out_normals,
                         *species_loader_struct.image_width_pointer,
                         *species_loader_struct.image_height_pointer);
@@ -160,7 +160,7 @@ namespace yli::load
         // Fill the index buffer.
         yli::opengl::indexVBO(
                 out_vertices,
-                out_UVs,
+                out_uvs,
                 out_normals,
                 indices,
                 indexed_vertices,
