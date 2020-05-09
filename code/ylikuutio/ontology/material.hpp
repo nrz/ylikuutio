@@ -96,7 +96,7 @@ namespace yli::ontology
                     if (this->universe != nullptr && !this->universe->get_is_headless() && this->child_of_shader_or_symbiosis.get_parent() != nullptr)
                     {
                         yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->child_of_shader_or_symbiosis.get_parent());
-                        this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "texture_sampler");
+                        this->openGL_textureID = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
                     }
 
                     // `yli::ontology::Entity` member variables begin here.

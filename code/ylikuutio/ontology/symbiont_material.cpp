@@ -105,7 +105,7 @@ namespace yli::ontology
 
         const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
 
-        if (!yli::load::load_FBX_texture(texture, this->image_width, this->image_height, this->image_size, this->texture, is_headless))
+        if (!yli::load::load_fbx_texture(texture, this->image_width, this->image_height, this->image_size, this->texture, is_headless))
         {
             std::cerr << "ERROR: loading FBX texture failed!\n";
         }
@@ -113,7 +113,7 @@ namespace yli::ontology
         if (!is_headless)
         {
             // Get a handle for our "texture_sampler" uniform.
-            this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "texture_sampler");
+            this->openGL_textureID = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
         }
     }
 

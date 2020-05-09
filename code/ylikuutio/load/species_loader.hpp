@@ -32,14 +32,14 @@
 
 namespace yli::load
 {
-    bool load_Species(
+    bool load_species(
             const yli::load::SpeciesLoaderStruct& species_loader_struct,
             std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_UVs,
+            std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals,
             std::vector<uint32_t>& indices,
             std::vector<glm::vec3>& indexed_vertices,
-            std::vector<glm::vec2>& indexed_UVs,
+            std::vector<glm::vec2>& indexed_uvs,
             std::vector<glm::vec3>& indexed_normals,
             uint32_t* vertexbuffer,
             uint32_t* uvbuffer,

@@ -466,14 +466,14 @@ namespace yli::ontology
         this->last_time_before_reading_keyboard = this->current_time_before_reading_keyboard;
     }
 
-    std::size_t Universe::get_max_FPS() const
+    std::size_t Universe::get_max_fps() const
     {
-        return this->max_FPS;
+        return this->max_fps;
     }
 
-    double Universe::get_last_time_to_display_FPS() const
+    double Universe::get_last_time_to_display_fps() const
     {
-        return this->last_time_to_display_FPS;
+        return this->last_time_to_display_fps;
     }
 
     double Universe::get_last_time_for_display_sync() const
@@ -486,9 +486,9 @@ namespace yli::ontology
         return this->number_of_frames;
     }
 
-    void Universe::increment_last_time_to_display_FPS()
+    void Universe::increment_last_time_to_display_fps()
     {
-        this->last_time_to_display_FPS += 1.0f;
+        this->last_time_to_display_fps += 1.0f;
     }
 
     void Universe::update_last_time_for_display_sync()

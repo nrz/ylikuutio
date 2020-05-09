@@ -270,12 +270,12 @@ namespace yli::ontology
         this->model_matrix[3][1] = this->cartesian_coordinates.y;
         this->model_matrix[3][2] = this->cartesian_coordinates.z;
 
-        this->MVP_matrix = this->universe->get_projection_matrix() * this->universe->get_view_matrix() * this->model_matrix;
+        this->mvp_matrix = this->universe->get_projection_matrix() * this->universe->get_view_matrix() * this->model_matrix;
 
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform.
-        glUniformMatrix4fv(shader_pointer->get_matrixID(), 1, GL_FALSE, &this->MVP_matrix[0][0]);
-        glUniformMatrix4fv(shader_pointer->get_model_matrixID(), 1, GL_FALSE, &this->model_matrix[0][0]);
+        glUniformMatrix4fv(shader_pointer->get_matrix_id(), 1, GL_FALSE, &this->mvp_matrix[0][0]);
+        glUniformMatrix4fv(shader_pointer->get_model_matrix_id(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
         yli::ontology::Model* parent_model = nullptr;
 
@@ -293,18 +293,18 @@ namespace yli::ontology
         }
 
         uint32_t vertexbuffer = parent_model->get_vertexbuffer();
-        uint32_t vertex_position_modelspaceID = parent_model->get_vertex_position_modelspaceID();
+        uint32_t vertex_position_modelspace_id = parent_model->get_vertex_position_modelspace_id();
         uint32_t uvbuffer = parent_model->get_uvbuffer();
-        uint32_t vertexUVID = parent_model->get_vertexUVID();
+        uint32_t vertex_uv_id = parent_model->get_vertex_uv_id();
         uint32_t normalbuffer = parent_model->get_normalbuffer();
-        uint32_t vertex_normal_modelspaceID = parent_model->get_vertex_normal_modelspaceID();
+        uint32_t vertex_normal_modelspaceID = parent_model->get_vertex_normal_modelspace_id();
         uint32_t elementbuffer = parent_model->get_elementbuffer();
         uint32_t indices_size = parent_model->get_indices().size();
 
         // 1st attribute buffer: vertices.
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glVertexAttribPointer(
-                vertex_position_modelspaceID, // The attribute we want to configure
+                vertex_position_modelspace_id, // The attribute we want to configure
                 3,                           // size
                 GL_FLOAT,                    // type
                 GL_FALSE,                    // normalized?
@@ -315,7 +315,7 @@ namespace yli::ontology
         // 2nd attribute buffer: UVs.
         glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
         glVertexAttribPointer(
-                vertexUVID, // The attribute we want to configure
+                vertex_uv_id, // The attribute we want to configure
                 2,          // size : U+V => 2
                 GL_FLOAT,   // type
                 GL_FALSE,   // normalized?

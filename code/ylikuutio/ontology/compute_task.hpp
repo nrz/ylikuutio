@@ -105,7 +105,6 @@ namespace yli::ontology
                 this->compute_taskID = compute_task_struct.compute_taskID;
                 this->texture_width = compute_task_struct.texture_width;
                 this->texture_height = compute_task_struct.texture_height;
-                this->texture_depth = compute_task_struct.texture_depth;
                 this->texture_size = 0; // dummy value.
                 this->n_index_characters = compute_task_struct.n_index_characters;
 
@@ -121,12 +120,11 @@ namespace yli::ontology
                 this->is_framebuffer_initialized   = false;
                 this->is_ready                     = false;
 
-                this->vertex_position_modelspaceID = 0; // some dummy value.
-                this->vertexUVID                   = 0; // some dummy value.
-                this->screen_width_uniform_ID      = 0; // some dummy value.
-                this->screen_height_uniform_ID     = 0; // some dummy value.
-                this->screen_depth_uniform_ID      = 0; // some dummy value.
-                this->iteration_i_uniform_ID       = 0; // some dummy value.
+                this->vertex_position_modelspace_id = 0; // some dummy value.
+                this->vertex_uv_id                   = 0; // some dummy value.
+                this->screen_width_uniform_id      = 0; // some dummy value.
+                this->screen_height_uniform_id     = 0; // some dummy value.
+                this->iteration_i_uniform_id       = 0; // some dummy value.
                 this->vertexbuffer                 = 0; // some dummy value.
                 this->uvbuffer                     = 0; // some dummy value.
 
@@ -148,10 +146,10 @@ namespace yli::ontology
                 if (!is_headless)
                 {
                     // Get a handle for our buffers.
-                    this->vertex_position_modelspaceID = glGetAttribLocation(this->parent->get_programID(), "vertex_position_modelspace");
-                    this->vertexUVID = glGetAttribLocation(this->parent->get_programID(), "vertexUV");
+                    this->vertex_position_modelspace_id = glGetAttribLocation(this->parent->get_program_id(), "vertex_position_modelspace");
+                    this->vertex_uv_id = glGetAttribLocation(this->parent->get_program_id(), "vertexUV");
 
-                    glUseProgram(this->parent->get_programID());
+                    glUseProgram(this->parent->get_program_id());
                 }
 
                 // Load the source texture, just like in `yli::ontology::Material` constructor.
@@ -164,7 +162,6 @@ namespace yli::ontology
                     else
                     {
                         this->is_texture_loaded = true;
-                        this->texture_depth = 1;
                     }
                 }
                 else if (this->texture_file_format == "csv" || this->texture_file_format == "CSV")
@@ -186,7 +183,6 @@ namespace yli::ontology
                     else
                     {
                         this->is_texture_loaded = true;
-                        this->texture_depth = 1;
                     }
                 }
                 else
@@ -198,26 +194,21 @@ namespace yli::ontology
                 if (!is_headless && this->is_texture_loaded)
                 {
                     // Get a handle for our "texture_sampler" uniform.
-                    this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "texture_sampler");
+                    this->openGL_textureID = glGetUniformLocation(this->parent->get_program_id(), "texture_sampler");
 
                     // Initialize uniform window width.
                     // This is named `screen_width` instead of `texture_width` for compatibility with other shaders.
-                    this->screen_width_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_width");
-                    yli::opengl::uniform_1i(this->screen_width_uniform_ID, this->texture_width);
+                    this->screen_width_uniform_id = glGetUniformLocation(this->parent->get_program_id(), "screen_width");
+                    yli::opengl::uniform_1i(this->screen_width_uniform_id, this->texture_width);
 
                     // Initialize uniform window height.
                     // This is named `screen_height` instead of `texture_height` for compatibility with other shaders.
-                    this->screen_height_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_height");
-                    yli::opengl::uniform_1i(this->screen_height_uniform_ID, this->texture_height);
-
-                    // Initialize uniform window depth.
-                    // This is named `screen_depth` instead of `texture_depth`, for consistency with other uniforms.
-                    this->screen_depth_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "screen_depth");
-                    yli::opengl::uniform_1i(this->screen_depth_uniform_ID, this->texture_depth);
+                    this->screen_height_uniform_id = glGetUniformLocation(this->parent->get_program_id(), "screen_height");
+                    yli::opengl::uniform_1i(this->screen_height_uniform_id, this->texture_height);
 
                     // Initialize uniform iteration index.
-                    this->iteration_i_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "iteration_i");
-                    yli::opengl::uniform_1i(this->iteration_i_uniform_ID, 0);
+                    this->iteration_i_uniform_id = glGetUniformLocation(this->parent->get_program_id(), "iteration_i");
+                    yli::opengl::uniform_1i(this->iteration_i_uniform_id, 0);
 
                     // Create model (a square which consists of 2 triangles).
                     // *---*
@@ -293,7 +284,6 @@ namespace yli::ontology
 
             std::size_t texture_width;
             std::size_t texture_height;
-            std::size_t texture_depth;
             std::size_t texture_size;
 
             std::size_t n_index_characters; // For intermediate results' filenames.
@@ -305,17 +295,16 @@ namespace yli::ontology
             uint32_t framebuffer;
             uint32_t source_texture;
             uint32_t target_texture;
-            GLint openGL_textureID;              // Texture ID, returned by `glGetUniformLocation(this->parent->get_programID(), "texture_sampler")`.
+            GLint openGL_textureID;              // Texture ID, returned by `glGetUniformLocation(this->parent->get_program_id(), "texture_sampler")`.
             bool is_texture_loaded;
             bool is_framebuffer_initialized;
             bool is_ready;
 
-            GLint vertex_position_modelspaceID;
-            GLint vertexUVID;
-            GLint screen_width_uniform_ID;             // Location of the program's window width uniform.
-            GLint screen_height_uniform_ID;            // Location of the program's window height uniform.
-            GLint screen_depth_uniform_ID;             // Location of the program's window depth uniform.
-            GLint iteration_i_uniform_ID;              // Location of the program's iteration index uniform.
+            GLint vertex_position_modelspace_id;
+            GLint vertex_uv_id;
+            GLint screen_width_uniform_id;             // Location of the program's window width uniform.
+            GLint screen_height_uniform_id;            // Location of the program's window height uniform.
+            GLint iteration_i_uniform_id;              // Location of the program's iteration index uniform.
 
             uint32_t vertexbuffer;
             uint32_t uvbuffer;

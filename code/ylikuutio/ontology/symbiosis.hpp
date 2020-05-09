@@ -105,9 +105,9 @@ namespace yli::ontology
 
             yli::ontology::SymbiontMaterial* get_symbiont_material(const std::size_t symbiont_material_i) const;
             yli::ontology::SymbiontSpecies* get_symbiont_species(const std::size_t biontID) const;
-            GLint get_vertex_position_modelspaceID(const std::size_t biontID) const;
-            GLint get_vertexUVID(const std::size_t biontID) const;
-            GLint get_vertex_normal_modelspaceID(const std::size_t biontID) const;
+            GLint get_vertex_position_modelspace_id(const std::size_t biontID) const;
+            GLint get_vertex_uv_id(const std::size_t biontID) const;
+            GLint get_vertex_normal_modelspace_id(const std::size_t biontID) const;
 
             uint32_t get_vertexbuffer(const std::size_t biontID) const;
             uint32_t get_uvbuffer(const std::size_t biontID) const;

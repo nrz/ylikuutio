@@ -33,7 +33,7 @@
 namespace yli::load
 {
     // Load texture from memory.
-    bool load_FBX_texture(
+    bool load_fbx_texture(
             const ofbx::Texture* const ofbx_texture,
             std::size_t& image_width,
             std::size_t& image_height,
@@ -46,7 +46,7 @@ namespace yli::load
 
         if (ofbx_texture == nullptr)
         {
-            std::cerr << "ERROR: `yli::load::load_FBX_texture`: `ofbx_texture` is `nullptr`!\n";
+            std::cerr << "ERROR: `yli::load::load_fbx_texture`: `ofbx_texture` is `nullptr`!\n";
             return false;
         }
 

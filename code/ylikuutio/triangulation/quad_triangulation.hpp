@@ -60,7 +60,7 @@ namespace yli::triangulation
                 const T1* input_vertex_pointer,
                 const yli::triangulation::TriangulateQuadsStruct& triangulate_quads_struct,
                 std::vector<glm::vec3>& out_vertices,
-                std::vector<glm::vec2>& out_UVs,
+                std::vector<glm::vec2>& out_uvs,
                 std::vector<glm::vec3>& out_normals)
         {
             const std::size_t image_width = triangulate_quads_struct.image_width;
@@ -162,12 +162,12 @@ namespace yli::triangulation
             }
 
             std::vector<glm::vec3> temp_vertices;
-            std::vector<glm::vec2> temp_UVs;
+            std::vector<glm::vec2> temp_uvs;
             std::vector<glm::vec3> temp_normals;
 
             // Processing stages:
-            // 1. Define the (float) vertices for vertices loaded from file, `push_back` to `temp_vertices` and `temp_UVs`.
-            // 2. Interpolate the (float) vertices between, using bilinear interpolation, `push_back` to `temp_vertices` and `temp_UVs`.
+            // 1. Define the (float) vertices for vertices loaded from file, `push_back` to `temp_vertices` and `temp_uvs`.
+            // 2. Interpolate the (float) vertices between, using bilinear interpolation, `push_back` to `temp_vertices` and `temp_uvs`.
             // 3a. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
             // 3b. For bilinear interpolation: Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
             // 4. Compute the face normals, `push_back` to `face_normals`.
@@ -180,7 +180,7 @@ namespace yli::triangulation
             // 3.   `transform_coordinates_to_curved_surface`                       `transform_coordinates_to_curved_surface`   `transform_coordinates_to_curved_surface`
             // 4.   `compute_face_normals`                                          `compute_face_normals`                      `compute_face_normals`
             // 5.   `compute_vertex_normals`                                        `compute_vertex_normals`                    `compute_vertex_normals`
-            // 6.   `define_vertices_UVs_and_normals`                               `define_vertices_UVs_and_normals`           `define_vertices_UVs_and_normals`
+            // 6.   `define_vertices_uvs_and_normals`                               `define_vertices_uvs_and_normals`           `define_vertices_uvs_and_normals`
             //
             // stg. = stage
 
@@ -194,7 +194,7 @@ namespace yli::triangulation
                         z_step,
                         triangulate_quads_struct.use_real_texture_coordinates,
                         temp_vertices,
-                        temp_UVs))
+                        temp_uvs))
             {
                 return false;
             }
@@ -220,7 +220,7 @@ namespace yli::triangulation
                             z_step,
                             triangulate_quads_struct.use_real_texture_coordinates,
                             temp_vertices,
-                            temp_UVs))
+                            temp_uvs))
                 {
                     std::cerr << "ERROR: `yli::triangulation::triangulate_quads`: interpolating and defining vertices using bilinear interpolation failed.\n";
                     return false;
@@ -292,13 +292,13 @@ namespace yli::triangulation
 
             // 6. Loop through all vertices and `yli::geometry::output_triangle_vertices`.
 
-            if (!yli::triangulation::define_vertices_UVs_and_normals(
+            if (!yli::triangulation::define_vertices_uvs_and_normals(
                         triangulate_quads_struct,
                         temp_vertices,
-                        temp_UVs,
+                        temp_uvs,
                         temp_normals,
                         out_vertices,
-                        out_UVs,
+                        out_uvs,
                         out_normals,
                         actual_image_width,
                         actual_image_height,
@@ -311,7 +311,7 @@ namespace yli::triangulation
             }
 
             std::cout << "Number of vertices: " << out_vertices.size() << ".\n";
-            std::cout << "Number of UVs: " << out_UVs.size() << ".\n";
+            std::cout << "Number of UVs: " << out_uvs.size() << ".\n";
             std::cout << "Number of normals: " << out_normals.size() << ".\n";
 
             return true;

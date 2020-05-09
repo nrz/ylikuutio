@@ -1,4 +1,6 @@
 YliLisp is the scripting language of Ylikuutio.
+YliLisp is influenced by Scheme, Common Lisp, C++, and
+AngelScript.
 
 Planned features:
 * Variables and functions in the same namespace (Lisp-1).
@@ -19,8 +21,13 @@ Planned features:
 Planned implementation details:
 * Functions are `yli::ontology::LispFunction`,
   which inherits `yli::ontology::Entity`.
-* Function overloads are `yli::ontology::LispFunctionOverload`,
-  which inherits `yli::ontology::Entity`.
-* Each `yli::ontology::Console` may import
-  YliLisp functions into its local context.
+* Function overloads are implemented by a
+  class template `yli::ontology::LispFunctionOverload`,
+  which inherits `yli::ontology::GenericLispFunctionOverload`,
+  a non-template class.
+* `yli::ontology::GenericLispFunctionOverload` inherits
+  `yli::ontology::Entity`.
+* Each `yli::ontology::Console` may register
+  YliLisp functions into its local context,
+  similarly to AngelScript.
 * All variables are always available in all contexts.

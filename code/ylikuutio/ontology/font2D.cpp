@@ -92,7 +92,7 @@ namespace yli::ontology
         return this->font_texture_file_format;
     }
 
-    uint32_t Font2D::get_programID() const
+    uint32_t Font2D::get_program_id() const
     {
         return this->programID;
     }
@@ -110,10 +110,10 @@ namespace yli::ontology
         yli::opengl::uniform_1i(this->Text2DUniformID, 0);
 
         // Set screen width.
-        yli::opengl::uniform_1i(this->screen_width_uniform_ID, this->screen_width);
+        yli::opengl::uniform_1i(this->screen_width_uniform_id, this->screen_width);
 
         // Set screen height.
-        yli::opengl::uniform_1i(this->screen_height_uniform_ID, this->screen_height);
+        yli::opengl::uniform_1i(this->screen_height_uniform_id, this->screen_height);
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -334,15 +334,15 @@ namespace yli::ontology
         glVertexAttribPointer(this->vertex_position_in_screenspaceID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
         // 2nd attribute buffer: UVs.
-        yli::opengl::enable_vertex_attrib_array(this->vertexUVID);
+        yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
         glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
-        glVertexAttribPointer(this->vertexUVID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+        glVertexAttribPointer(this->vertex_uv_id, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
         // Draw call.
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
         yli::opengl::disable_vertex_attrib_array(this->vertex_position_in_screenspaceID);
-        yli::opengl::disable_vertex_attrib_array(this->vertexUVID);
+        yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
 
         glDisable(GL_BLEND);
     }

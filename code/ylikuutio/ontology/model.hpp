@@ -61,8 +61,8 @@ namespace yli::ontology
 
                 // Initialize class members with some dummy values.
                 this->lightID                      = 0;
-                this->vertex_position_modelspaceID = 0;
-                this->vertexUVID                   = 0;
+                this->vertex_position_modelspace_id = 0;
+                this->vertex_uv_id                   = 0;
                 this->vertex_normal_modelspaceID   = 0;
                 this->vertexbuffer                 = 0;
                 this->uvbuffer                     = 0;
@@ -95,17 +95,17 @@ namespace yli::ontology
             const std::vector<glm::vec3>& get_normals() const;
             const std::vector<uint32_t>& get_indices() const;
 
-            GLint get_vertex_position_modelspaceID() const;
-            GLint get_vertexUVID() const;
-            GLint get_vertex_normal_modelspaceID() const;
+            GLint get_vertex_position_modelspace_id() const;
+            GLint get_vertex_uv_id() const;
+            GLint get_vertex_normal_modelspace_id() const;
 
             uint32_t get_vertexbuffer() const;
             uint32_t get_uvbuffer() const;
             uint32_t get_normalbuffer() const;
             uint32_t get_elementbuffer() const;
 
-            void store_vertex_position_modelspaceID(const GLint vertex_position_modelspaceID);
-            void store_vertexUVID(const GLint vertexUVID);
+            void store_vertex_position_modelspaceID(const GLint vertex_position_modelspace_id);
+            void store_vertexUVID(const GLint vertex_uv_id);
             void store_vertex_normal_modelspaceID(const GLint vertex_normal_modelspaceID);
 
             template<class T1>
@@ -128,8 +128,8 @@ namespace yli::ontology
 
             std::string triangulation_type;
 
-            GLint vertex_position_modelspaceID;
-            GLint vertexUVID;
+            GLint vertex_position_modelspace_id;
+            GLint vertex_uv_id;
             GLint vertex_normal_modelspaceID;
 
             std::vector<glm::vec3> vertices;         // vertices of the `Model`.

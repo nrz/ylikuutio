@@ -42,14 +42,14 @@
 
 namespace yli::load
 {
-    bool load_Species(
+    bool load_species(
             const yli::load::SpeciesLoaderStruct& species_loader_struct,
             std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_UVs,
+            std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals,
             std::vector<uint32_t>& indices,
             std::vector<glm::vec3>& indexed_vertices,
-            std::vector<glm::vec2>& indexed_UVs,
+            std::vector<glm::vec2>& indexed_uvs,
             std::vector<glm::vec3>& indexed_normals,
             uint32_t* vertexbuffer,
             uint32_t* uvbuffer,
@@ -62,19 +62,19 @@ namespace yli::load
 
         if (species_loader_struct.model_file_format == "obj" || species_loader_struct.model_file_format == "OBJ")
         {
-            model_loading_result = yli::load::load_OBJ(
+            model_loading_result = yli::load::load_obj(
                     species_loader_struct.model_filename,
                     out_vertices,
-                    out_UVs,
+                    out_uvs,
                     out_normals);
         }
         else if (species_loader_struct.model_file_format == "fbx" || species_loader_struct.model_file_format == "FBX")
         {
-            model_loading_result = yli::load::load_FBX(
+            model_loading_result = yli::load::load_fbx(
                     species_loader_struct.model_filename,
                     species_loader_struct.mesh_i,
                     out_vertices,
-                    out_UVs,
+                    out_uvs,
                     out_normals,
                     is_debug_mode);
 
@@ -88,14 +88,14 @@ namespace yli::load
         {
             if (species_loader_struct.image_width_pointer == nullptr)
             {
-                std::cerr << "ERROR: `yli::load::load_Species`: !\n";
+                std::cerr << "ERROR: `yli::load::load_species`: !\n";
                 std::cerr << "`species_loader_struct.image_width_pointer` is `nullptr`!\n";
                 return false;
             }
 
             if (species_loader_struct.image_height_pointer == nullptr)
             {
-                std::cerr << "ERROR: `yli::load::load_Species`: !\n";
+                std::cerr << "ERROR: `yli::load::load_species`: !\n";
                 std::cerr << "`species_loader_struct.image_height_pointer` is `nullptr`!\n";
                 return false;
             }
@@ -118,7 +118,7 @@ namespace yli::load
                         heightmap_loader_struct,
                         species_loader_struct.model_filename,
                         out_vertices,
-                        out_UVs,
+                        out_uvs,
                         out_normals,
                         *species_loader_struct.image_width_pointer,
                         *species_loader_struct.image_height_pointer);
@@ -128,7 +128,7 @@ namespace yli::load
                 model_loading_result = yli::load::load_bmp_terrain(
                         heightmap_loader_struct,
                         out_vertices,
-                        out_UVs,
+                        out_uvs,
                         out_normals,
                         *species_loader_struct.image_width_pointer,
                         *species_loader_struct.image_height_pointer,
@@ -141,7 +141,7 @@ namespace yli::load
                 model_loading_result = yli::load::load_ascii_grid_terrain(
                         heightmap_loader_struct,
                         out_vertices,
-                        out_UVs,
+                        out_uvs,
                         out_normals,
                         *species_loader_struct.image_width_pointer,
                         *species_loader_struct.image_height_pointer);
@@ -160,11 +160,11 @@ namespace yli::load
         // Fill the index buffer.
         yli::opengl::indexVBO(
                 out_vertices,
-                out_UVs,
+                out_uvs,
                 out_normals,
                 indices,
                 indexed_vertices,
-                indexed_UVs,
+                indexed_uvs,
                 indexed_normals);
 
         std::cout << "Indexing completed successfully.\n";
@@ -185,7 +185,7 @@ namespace yli::load
 
             glGenBuffers(1, uvbuffer);
             glBindBuffer(GL_ARRAY_BUFFER, *uvbuffer);
-            glBufferData(GL_ARRAY_BUFFER, indexed_UVs.size() * sizeof(glm::vec2), &indexed_UVs[0], GL_STATIC_DRAW);
+            glBufferData(GL_ARRAY_BUFFER, indexed_uvs.size() * sizeof(glm::vec2), &indexed_uvs[0], GL_STATIC_DRAW);
 
             glGenBuffers(1, normalbuffer);
             glBindBuffer(GL_ARRAY_BUFFER, *normalbuffer);

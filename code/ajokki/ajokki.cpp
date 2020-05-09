@@ -1117,13 +1117,13 @@ int main(const int argc, const char* const argv[]) try
     {
         const double current_time_in_main_loop = yli::time::get_time();
 
-        if (current_time_in_main_loop - my_universe->get_last_time_for_display_sync() >= (1.0f / my_universe->get_max_FPS()))
+        if (current_time_in_main_loop - my_universe->get_last_time_for_display_sync() >= (1.0f / my_universe->get_max_fps()))
         {
             my_universe->update_last_time_for_display_sync();
 
             my_universe->increment_number_of_frames();
 
-            while (current_time_in_main_loop - my_universe->get_last_time_to_display_FPS() >= 1.0f)
+            while (current_time_in_main_loop - my_universe->get_last_time_to_display_fps() >= 1.0f)
             {
                 // If last `std::stringstream` here was more than 1 sec ago,
                 // std::stringstream` and reset number of frames.
@@ -1137,8 +1137,8 @@ int main(const int argc, const char* const argv[]) try
                     my_universe->reset_number_of_frames();
                 }
 
-                // `last_time_to_display_FPS` needs to be incremented to avoid infinite loop.
-                my_universe->increment_last_time_to_display_FPS();
+                // `last_time_to_display_fps` needs to be incremented to avoid infinite loop.
+                my_universe->increment_last_time_to_display_fps();
 
                 // Update audio also (in case the sound has reached the end).
                 if (audio_master != nullptr)

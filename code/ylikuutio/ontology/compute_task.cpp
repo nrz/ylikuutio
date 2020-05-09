@@ -178,7 +178,7 @@ namespace yli::ontology
             }
 
             // Update the value of `uniform` variable `iteration_i`.
-            yli::opengl::uniform_1i(this->iteration_i_uniform_ID, iteration_i);
+            yli::opengl::uniform_1i(this->iteration_i_uniform_id, iteration_i);
 
             this->preiterate();
 
@@ -190,15 +190,15 @@ namespace yli::ontology
             yli::opengl::uniform_1i(this->openGL_textureID, 0);
 
             // 1st attribute buffer: vertices.
-            yli::opengl::enable_vertex_attrib_array(this->vertex_position_modelspaceID);
+            yli::opengl::enable_vertex_attrib_array(this->vertex_position_modelspace_id);
 
             // 2nd attribute buffer: UVs.
-            yli::opengl::enable_vertex_attrib_array(this->vertexUVID);
+            yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
 
             // 1st attribute buffer: vertices.
             glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
             glVertexAttribPointer(
-                    this->vertex_position_modelspaceID, // The attribute we want to configure
+                    this->vertex_position_modelspace_id, // The attribute we want to configure
                     2,                                  // size
                     GL_FLOAT,                           // type
                     GL_FALSE,                           // normalized?
@@ -209,7 +209,7 @@ namespace yli::ontology
             // 2nd attribute buffer: UVs.
             glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
             glVertexAttribPointer(
-                    this->vertexUVID, // The attribute we want to configure
+                    this->vertex_uv_id, // The attribute we want to configure
                     2,                // size : U+V => 2
                     GL_FLOAT,         // type
                     GL_FALSE,         // normalized?
@@ -220,8 +220,8 @@ namespace yli::ontology
             // Draw the triangles!
             glDrawArrays(GL_TRIANGLE_STRIP, 0, this->vertices_size); // draw 2 triangles (6 vertices, no VBO indexing).
 
-            yli::opengl::disable_vertex_attrib_array(this->vertex_position_modelspaceID);
-            yli::opengl::disable_vertex_attrib_array(this->vertexUVID);
+            yli::opengl::disable_vertex_attrib_array(this->vertex_position_modelspace_id);
+            yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
 
             if (this->should_ylikuutio_save_intermediate_results && !this->output_filename.empty())
             {
@@ -237,7 +237,6 @@ namespace yli::ontology
                             this->type,
                             this->texture_width,
                             this->texture_height,
-                            this->texture_depth,
                             filename_stringstream.str(),
                             this->should_ylikuutio_flip_texture);
                 }
@@ -249,7 +248,6 @@ namespace yli::ontology
                             this->type,
                             this->texture_width,
                             this->texture_height,
-                            this->texture_depth,
                             filename_stringstream.str(),
                             this->should_ylikuutio_flip_texture);
                 }
@@ -291,7 +289,6 @@ namespace yli::ontology
                     this->type,
                     this->texture_width,
                     this->texture_height,
-                    this->texture_depth,
                     this->output_filename,
                     this->should_ylikuutio_flip_texture);
         }
@@ -303,7 +300,6 @@ namespace yli::ontology
                     this->type,
                     this->texture_width,
                     this->texture_height,
-                    this->texture_depth,
                     this->output_filename,
                     this->should_ylikuutio_flip_texture);
         }

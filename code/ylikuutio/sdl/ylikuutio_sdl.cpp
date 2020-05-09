@@ -28,7 +28,7 @@
 
 namespace yli::sdl
 {
-    bool init_SDL()
+    bool init_sdl()
     {
         if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
         {

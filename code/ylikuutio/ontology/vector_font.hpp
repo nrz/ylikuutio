@@ -79,7 +79,7 @@ namespace yli::ontology
                 {
                     const bool is_debug_mode = true;
 
-                    font_loading_result = yli::load::load_SVG_font(
+                    font_loading_result = yli::load::load_svg_font(
                             this->font_filename,
                             this->glyph_vertex_data,
                             this->glyph_names,

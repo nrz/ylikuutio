@@ -130,7 +130,7 @@ namespace yli::triangulation
                 const std::size_t z_step,
                 const bool use_real_texture_coordinates,
                 std::vector<glm::vec3>& temp_vertices,
-                std::vector<glm::vec2>& temp_UVs)
+                std::vector<glm::vec2>& temp_uvs)
         {
             if (image_width < 2 || image_height < 2)
             {
@@ -172,7 +172,7 @@ namespace yli::triangulation
             const std::size_t actual_image_height = image_height / z_step;
             std::size_t number_of_vertices = actual_image_width * actual_image_height;
             temp_vertices.reserve(number_of_vertices);
-            temp_UVs.reserve(number_of_vertices);
+            temp_uvs.reserve(number_of_vertices);
 
             // Define the temporary vertices in a double loop.
             std::size_t texture_y = 0;
@@ -207,7 +207,7 @@ namespace yli::triangulation
                         uv.y = 0.0f;
                     }
 
-                    temp_UVs.push_back(uv);
+                    temp_uvs.push_back(uv);
 
                     // `uv.x` is repeated 0, 1, 0, 1 ... when moving eastward.
                     // this causes the texture be mirrored horizontally for every other quad.
@@ -231,7 +231,7 @@ namespace yli::triangulation
                 const std::size_t z_step,
                 const bool use_real_texture_coordinates,
                 std::vector<glm::vec3>& temp_vertices,
-                std::vector<glm::vec2>& temp_UVs)
+                std::vector<glm::vec2>& temp_uvs)
         {
             std::cout << "Interpolating center vertices.\n";
 
@@ -305,7 +305,7 @@ namespace yli::triangulation
                         uv.y = 0.0f;
                     }
 
-                    temp_UVs.push_back(uv);
+                    temp_uvs.push_back(uv);
                 }
             }
 

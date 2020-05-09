@@ -106,7 +106,7 @@ TEST(font_must_be_loaded_appropriately, kongtext_svg)
 
     const bool is_debug_mode = false; // Travis fails for too much output.
 
-    ASSERT_TRUE(yli::load::load_SVG_font(
+    ASSERT_TRUE(yli::load::load_svg_font(
                 font_filename,
                 glyph_vertex_data,
                 glyph_names,

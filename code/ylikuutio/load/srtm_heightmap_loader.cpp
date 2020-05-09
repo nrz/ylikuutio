@@ -55,7 +55,7 @@ namespace yli::load
             const yli::load::HeightmapLoaderStruct& heightmap_loader_struct,
             const std::string& heightmap_directory,
             std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_UVs,
+            std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals,
             std::size_t& image_width,
             std::size_t& image_height)
@@ -202,6 +202,6 @@ namespace yli::load
             triangulate_quads_struct.spherical_terrain_struct = spherical_terrain_struct;
         }
 
-        return yli::triangulation::triangulate_quads(&vertex_data[0], triangulate_quads_struct, out_vertices, out_UVs, out_normals);
+        return yli::triangulation::triangulate_quads(&vertex_data[0], triangulate_quads_struct, out_vertices, out_uvs, out_normals);
     }
 }

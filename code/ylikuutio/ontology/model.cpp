@@ -80,17 +80,17 @@ namespace yli::ontology
         return this->indices;
     }
 
-    GLint Model::get_vertex_position_modelspaceID() const
+    GLint Model::get_vertex_position_modelspace_id() const
     {
-        return this->vertex_position_modelspaceID;
+        return this->vertex_position_modelspace_id;
     }
 
-    GLint Model::get_vertexUVID() const
+    GLint Model::get_vertex_uv_id() const
     {
-        return this->vertexUVID;
+        return this->vertex_uv_id;
     }
 
-    GLint Model::get_vertex_normal_modelspaceID() const
+    GLint Model::get_vertex_normal_modelspace_id() const
     {
         return this->vertex_normal_modelspaceID;
     }
@@ -115,14 +115,14 @@ namespace yli::ontology
         return this->elementbuffer;
     }
 
-    void Model::store_vertex_position_modelspaceID(const GLint vertex_position_modelspaceID)
+    void Model::store_vertex_position_modelspaceID(const GLint vertex_position_modelspace_id)
     {
-        this->vertex_position_modelspaceID = vertex_position_modelspaceID;
+        this->vertex_position_modelspace_id = vertex_position_modelspace_id;
     }
 
-    void Model::store_vertexUVID(const GLint vertexUVID)
+    void Model::store_vertexUVID(const GLint vertex_uv_id)
     {
-        this->vertexUVID = vertexUVID;
+        this->vertex_uv_id = vertex_uv_id;
     }
 
     void Model::store_vertex_normal_modelspaceID(const GLint vertex_normal_modelspaceID)

@@ -289,19 +289,19 @@ namespace yli::ontology
         return this->biontID_symbiont_species_vector[biontID];
     }
 
-    GLint Symbiosis::get_vertex_position_modelspaceID(const std::size_t biontID) const
+    GLint Symbiosis::get_vertex_position_modelspace_id(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->get_vertex_position_modelspaceID();
+        return this->biontID_symbiont_species_vector[biontID]->get_vertex_position_modelspace_id();
     }
 
-    GLint Symbiosis::get_vertexUVID(const std::size_t biontID) const
+    GLint Symbiosis::get_vertex_uv_id(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->get_vertexUVID();
+        return this->biontID_symbiont_species_vector[biontID]->get_vertex_uv_id();
     }
 
-    GLint Symbiosis::get_vertex_normal_modelspaceID(const std::size_t biontID) const
+    GLint Symbiosis::get_vertex_normal_modelspace_id(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->get_vertex_normal_modelspaceID();
+        return this->biontID_symbiont_species_vector[biontID]->get_vertex_normal_modelspace_id();
     }
 
     uint32_t Symbiosis::get_vertexbuffer(const std::size_t biontID) const

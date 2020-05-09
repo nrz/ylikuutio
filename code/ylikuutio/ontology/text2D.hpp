@@ -64,7 +64,7 @@ namespace yli::ontology
                 this->uvbuffer                         = 0;
                 this->programID                        = 0;
                 this->vertex_position_in_screenspaceID = 0;
-                this->vertexUVID                       = 0;
+                this->vertex_uv_id                       = 0;
 
                 const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
 
@@ -79,8 +79,8 @@ namespace yli::ontology
 
                     if (font2D != nullptr)
                     {
-                        this->vertex_position_in_screenspaceID = glGetAttribLocation(font2D->get_programID(), "vertex_position_screenspace");
-                        this->vertexUVID = glGetAttribLocation(font2D->get_programID(), "vertexUV");
+                        this->vertex_position_in_screenspaceID = glGetAttribLocation(font2D->get_program_id(), "vertex_position_screenspace");
+                        this->vertex_uv_id = glGetAttribLocation(font2D->get_program_id(), "vertexUV");
                     }
                 }
 
@@ -109,7 +109,7 @@ namespace yli::ontology
             uint32_t uvbuffer;                         // Buffer containing the UVs
             uint32_t programID;                        // The `programID` of the shader used to display the text, returned by `load_shaders`.
             GLint vertex_position_in_screenspaceID;    // Location of the program's `vertex_position_screenspace` attribute.
-            GLint vertexUVID;                          // Location of the program's `vertexUV` attribute.
+            GLint vertex_uv_id;                          // Location of the program's `vertexUV` attribute.
 
             std::string text;
             std::string horizontal_alignment;

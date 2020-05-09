@@ -82,10 +82,17 @@ Naming
   `ShapeShifterTransformation`, because `ShapeshifterTransformation` is not
   related to any general 'shifting' functionality or subsystem, but it is
   related to the 'shapeshifting' functionality.
-* An exception the above rule are suffixes that mark the number of dimensions
+* An exception to the above rule are suffixes that mark the number of dimensions
   involved such as  `2D`, `3D` and `4D`. These suffixes may appear
   in the end of the class name, such as `Text2D` and `Text3D`.
 * Use snake_case for variable names: `std::string my_string`.
+* An exception to the above rule is `ID` suffix that marks that the
+  variable in an ID of an `Entity`, e.g. `childID`. However, use `_id`
+  for OpenGL variables not related to the ID's of the Entities.
+  This makes it easier to distinguish between ID's and indexes
+  (see the next rule about Levenshtein distance).
+* Keep Levenshtein distance of at least 2 between different names
+  visible in the same scope.
 * Use 2-level nested namespaces for Ylikuutio code, such as `yli::ontology`.
 * All Ylikuutio code should be under the namespaces under `yli` namespace.
 * Prefer single words in namespaces names, but use snake_case

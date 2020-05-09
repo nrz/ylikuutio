@@ -34,7 +34,7 @@ namespace yli::triangulation
     bool triangulate_simple_polygon(
             const yli::triangulation::TriangulatePolygonsStruct& triangulate_polygons_struct,
             std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_UVs,
+            std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals)
     {
         // TODO: implement this function!
@@ -44,7 +44,7 @@ namespace yli::triangulation
     bool triangulate_polygons(
             const yli::triangulation::TriangulatePolygonsStruct& triangulate_polygons_struct,
             std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_UVs,
+            std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals)
     {
         // TODO: implement this function!

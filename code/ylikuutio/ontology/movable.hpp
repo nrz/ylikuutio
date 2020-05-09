@@ -113,7 +113,7 @@ namespace yli::ontology
                 this->air_deceleration            = 0.0f;
 
                 this->model_matrix                = glm::mat4(1.0f); // identity matrix (dummy value).
-                this->MVP_matrix                  = glm::mat4(1.0f); // identity matrix (dummy value).
+                this->mvp_matrix                  = glm::mat4(1.0f); // identity matrix (dummy value).
 
                 float float_x                     = this->cartesian_coordinates.x;
                 float float_y                     = this->cartesian_coordinates.y;
@@ -366,7 +366,7 @@ namespace yli::ontology
 
             // The rest fields are created in the constructor.
             glm::mat4 model_matrix;                                // model matrix.
-            glm::mat4 MVP_matrix;                                  // model view projection matrix.
+            glm::mat4 mvp_matrix;                                  // model view projection matrix.
 
             friend class Brain;
 

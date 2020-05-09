@@ -56,7 +56,7 @@ namespace yli::ontology
     class Entity;
     class Universe;
 
-    void Biont::bind_to_SymbiontSpecies()
+    void Biont::bind_to_symbiont_species()
     {
         // Requirements:
         // `this->holobiont_parent` must not be `nullptr`.
@@ -67,7 +67,7 @@ namespace yli::ontology
 
         if (holobiont == nullptr)
         {
-            std::cerr << "ERROR: `Biont::bind_to_SymbiontSpecies`: `holobiont` is `nullptr`!\n";
+            std::cerr << "ERROR: `Biont::bind_to_symbiont_species`: `holobiont` is `nullptr`!\n";
             return;
         }
 
@@ -75,7 +75,7 @@ namespace yli::ontology
 
         if (symbiosis == nullptr)
         {
-            std::cerr << "ERROR: `Biont::bind_to_SymbiontSpecies`: `symbiosis` is `nullptr`!\n";
+            std::cerr << "ERROR: `Biont::bind_to_symbiont_species`: `symbiosis` is `nullptr`!\n";
             return;
         }
 
@@ -83,7 +83,7 @@ namespace yli::ontology
 
         if (symbiont_species == nullptr)
         {
-            std::cerr << "ERROR: `Biont::bind_to_SymbiontSpecies`: `symbiont_species` is `nullptr`!\n";
+            std::cerr << "ERROR: `Biont::bind_to_symbiont_species`: `symbiont_species` is `nullptr`!\n";
             return;
         }
 
@@ -208,7 +208,7 @@ namespace yli::ontology
         this->model_matrix[3][1] = holobiont->cartesian_coordinates.y;
         this->model_matrix[3][2] = holobiont->cartesian_coordinates.z;
 
-        this->MVP_matrix = universe->get_projection_matrix() * universe->get_view_matrix() * this->model_matrix;
+        this->mvp_matrix = universe->get_projection_matrix() * universe->get_view_matrix() * this->model_matrix;
 
         // Bind our texture in Texture Unit 0.
         glActiveTexture(GL_TEXTURE0);
@@ -229,34 +229,34 @@ namespace yli::ontology
                 light_position.z);
 
         // 1st attribute buffer : vertices.
-        yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertex_position_modelspaceID());
+        yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertex_position_modelspace_id());
 
         // 2nd attribute buffer : UVs.
-        yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertexUVID());
+        yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertex_uv_id());
 
         // 3rd attribute buffer : normals.
-        yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertex_normal_modelspaceID());
+        yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertex_normal_modelspace_id());
 
         // '`Species`' part ends here.
 
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform.
-        glUniformMatrix4fv(shader->get_matrixID(), 1, GL_FALSE, &this->MVP_matrix[0][0]);
-        glUniformMatrix4fv(shader->get_model_matrixID(), 1, GL_FALSE, &this->model_matrix[0][0]);
+        glUniformMatrix4fv(shader->get_matrix_id(), 1, GL_FALSE, &this->mvp_matrix[0][0]);
+        glUniformMatrix4fv(shader->get_model_matrix_id(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
         uint32_t vertexbuffer = symbiont_species->get_vertexbuffer();
-        uint32_t vertex_position_modelspaceID = symbiont_species->get_vertex_position_modelspaceID();
+        uint32_t vertex_position_modelspace_id = symbiont_species->get_vertex_position_modelspace_id();
         uint32_t uvbuffer = symbiont_species->get_uvbuffer();
-        uint32_t vertexUVID = symbiont_species->get_vertexUVID();
+        uint32_t vertex_uv_id = symbiont_species->get_vertex_uv_id();
         uint32_t normalbuffer = symbiont_species->get_normalbuffer();
-        uint32_t vertex_normal_modelspaceID = symbiont_species->get_vertex_normal_modelspaceID();
+        uint32_t vertex_normal_modelspaceID = symbiont_species->get_vertex_normal_modelspace_id();
         uint32_t elementbuffer = symbiont_species->get_elementbuffer();
         uint32_t indices_size = symbiont_species->get_indices_size();
 
         // 1st attribute buffer : vertices.
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glVertexAttribPointer(
-                vertex_position_modelspaceID, // The attribute we want to configure
+                vertex_position_modelspace_id, // The attribute we want to configure
                 3,                            // size
                 GL_FLOAT,                     // type
                 GL_FALSE,                     // normalized?
@@ -267,7 +267,7 @@ namespace yli::ontology
         // 2nd attribute buffer : UVs.
         glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
         glVertexAttribPointer(
-                vertexUVID,                   // The attribute we want to configure
+                vertex_uv_id,                   // The attribute we want to configure
                 2,                            // size : U+V => 2
                 GL_FLOAT,                     // type
                 GL_FALSE,                     // normalized?

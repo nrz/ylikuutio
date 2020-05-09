@@ -87,16 +87,16 @@ namespace yli::ontology
                 if (!is_headless)
                 {
                     // Get a handle for our buffers.
-                    this->vertex_position_modelspaceID = glGetAttribLocation(this->shader->get_programID(), "vertex_position_modelspace");
-                    this->vertexUVID                   = glGetAttribLocation(this->shader->get_programID(), "vertexUV");
-                    this->vertex_normal_modelspaceID   = glGetAttribLocation(this->shader->get_programID(), "vertex_normal_modelspace");
+                    this->vertex_position_modelspace_id = glGetAttribLocation(this->shader->get_program_id(), "vertex_position_modelspace");
+                    this->vertex_uv_id                   = glGetAttribLocation(this->shader->get_program_id(), "vertexUV");
+                    this->vertex_normal_modelspaceID   = glGetAttribLocation(this->shader->get_program_id(), "vertex_normal_modelspace");
 
                     // Get a handle for our "LightPosition" uniform.
-                    glUseProgram(this->shader->get_programID());
-                    this->lightID = glGetUniformLocation(this->shader->get_programID(), "light_position_worldspace");
+                    glUseProgram(this->shader->get_program_id());
+                    this->lightID = glGetUniformLocation(this->shader->get_program_id(), "light_position_worldspace");
 
                     // water level.
-                    GLint water_level_uniform_location = glGetUniformLocation(this->shader->get_programID(), "water_level");
+                    GLint water_level_uniform_location = glGetUniformLocation(this->shader->get_program_id(), "water_level");
 
                     const yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(this->shader->get_parent());
                     glUniform1f(water_level_uniform_location, scene->get_water_level());

@@ -60,8 +60,8 @@
 //
 // Rendering of `WorldShader`s works as follows:
 // 1. `Scene::render` calls the following function:
-//    `World::render_WorldShaders(const std::size_t entityID)`.
-// 2. `World::render_WorldShaders then calls `WorldShader::render` for
+//    `World::render_world_shaders(const std::size_t entityID)`.
+// 2. `World::render_world_shaders then calls `WorldShader::render` for
 //    its every `WorldShader` child.
 // 3. `WorldShader::render` then renders only those `Material`, `Symbiosis`,
 //    and `ComputeTask` entities which belong to the `Scene` with that

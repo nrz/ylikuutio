@@ -169,17 +169,17 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_symbioses.child_pointer_vector);
     }
 
-    uint32_t Shader::get_programID() const
+    uint32_t Shader::get_program_id() const
     {
         return this->programID;
     }
 
-    uint32_t Shader::get_matrixID() const
+    uint32_t Shader::get_matrix_id() const
     {
         return this->matrixID;
     }
 
-    uint32_t Shader::get_model_matrixID() const
+    uint32_t Shader::get_model_matrix_id() const
     {
         return this->model_matrixID;
     }

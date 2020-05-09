@@ -386,8 +386,8 @@ namespace yli::ontology
                 this->text_size = universe_struct.text_size;
                 this->font_size = universe_struct.font_size;
 
-                this->max_FPS    = universe_struct.max_FPS;
-                this->last_time_to_display_FPS = yli::time::get_time();
+                this->max_fps    = universe_struct.max_fps;
+                this->last_time_to_display_fps = yli::time::get_time();
                 this->last_time_for_display_sync = yli::time::get_time();
                 this->delta_time = NAN;
                 this->number_of_frames = 0;
@@ -430,7 +430,7 @@ namespace yli::ontology
                 if (!this->is_headless)
                 {
                     // Initialise SDL
-                    if (!yli::sdl::init_SDL())
+                    if (!yli::sdl::init_sdl())
                     {
                         std::cerr << "Failed to initialize SDL.\n";
                         this->is_headless = true;
@@ -586,13 +586,13 @@ namespace yli::ontology
             // this method stores `current_time_before_reading_keyboard` into `last_time_before_reading_keyboard`.
             void finalize_delta_time_loop();
 
-            // this method returns current `max_FPS`.
-            std::size_t get_max_FPS() const;
-            double get_last_time_to_display_FPS() const;
+            // this method returns current `max_fps`.
+            std::size_t get_max_fps() const;
+            double get_last_time_to_display_fps() const;
             double get_last_time_for_display_sync() const;
             int32_t get_number_of_frames() const;
 
-            void increment_last_time_to_display_FPS();
+            void increment_last_time_to_display_fps();
             void update_last_time_for_display_sync();
             void increment_number_of_frames();
             void reset_number_of_frames();
@@ -806,8 +806,8 @@ namespace yli::ontology
             std::size_t font_size;
 
             // variables related to timing of events.
-            std::size_t max_FPS;
-            double last_time_to_display_FPS;
+            std::size_t max_fps;
+            double last_time_to_display_fps;
             double last_time_for_display_sync;
             double delta_time;
             int32_t number_of_frames;
