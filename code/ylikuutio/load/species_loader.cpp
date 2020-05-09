@@ -42,7 +42,7 @@
 
 namespace yli::load
 {
-    bool load_Species(
+    bool load_species(
             const yli::load::SpeciesLoaderStruct& species_loader_struct,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_uvs,
@@ -88,14 +88,14 @@ namespace yli::load
         {
             if (species_loader_struct.image_width_pointer == nullptr)
             {
-                std::cerr << "ERROR: `yli::load::load_Species`: !\n";
+                std::cerr << "ERROR: `yli::load::load_species`: !\n";
                 std::cerr << "`species_loader_struct.image_width_pointer` is `nullptr`!\n";
                 return false;
             }
 
             if (species_loader_struct.image_height_pointer == nullptr)
             {
-                std::cerr << "ERROR: `yli::load::load_Species`: !\n";
+                std::cerr << "ERROR: `yli::load::load_species`: !\n";
                 std::cerr << "`species_loader_struct.image_height_pointer` is `nullptr`!\n";
                 return false;
             }
