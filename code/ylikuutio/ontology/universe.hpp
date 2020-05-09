@@ -430,7 +430,7 @@ namespace yli::ontology
                 if (!this->is_headless)
                 {
                     // Initialise SDL
-                    if (!yli::sdl::init_SDL())
+                    if (!yli::sdl::init_sdl())
                     {
                         std::cerr << "Failed to initialize SDL.\n";
                         this->is_headless = true;
