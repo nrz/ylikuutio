@@ -293,7 +293,7 @@ namespace yli::ontology
         }
 
         uint32_t vertexbuffer = parent_model->get_vertexbuffer();
-        uint32_t vertex_position_modelspace_id = parent_model->get_vertex_position_modelspaceID();
+        uint32_t vertex_position_modelspace_id = parent_model->get_vertex_position_modelspace_id();
         uint32_t uvbuffer = parent_model->get_uvbuffer();
         uint32_t vertex_uv_id = parent_model->get_vertexUVID();
         uint32_t normalbuffer = parent_model->get_normalbuffer();

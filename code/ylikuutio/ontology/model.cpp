@@ -80,7 +80,7 @@ namespace yli::ontology
         return this->indices;
     }
 
-    GLint Model::get_vertex_position_modelspaceID() const
+    GLint Model::get_vertex_position_modelspace_id() const
     {
         return this->vertex_position_modelspace_id;
     }

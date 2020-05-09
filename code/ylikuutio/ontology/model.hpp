@@ -95,7 +95,7 @@ namespace yli::ontology
             const std::vector<glm::vec3>& get_normals() const;
             const std::vector<uint32_t>& get_indices() const;
 
-            GLint get_vertex_position_modelspaceID() const;
+            GLint get_vertex_position_modelspace_id() const;
             GLint get_vertexUVID() const;
             GLint get_vertex_normal_modelspaceID() const;
 

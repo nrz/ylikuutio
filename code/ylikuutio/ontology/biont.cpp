@@ -229,7 +229,7 @@ namespace yli::ontology
                 light_position.z);
 
         // 1st attribute buffer : vertices.
-        yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertex_position_modelspaceID());
+        yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertex_position_modelspace_id());
 
         // 2nd attribute buffer : UVs.
         yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertexUVID());
@@ -245,7 +245,7 @@ namespace yli::ontology
         glUniformMatrix4fv(shader->get_model_matrixID(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
         uint32_t vertexbuffer = symbiont_species->get_vertexbuffer();
-        uint32_t vertex_position_modelspace_id = symbiont_species->get_vertex_position_modelspaceID();
+        uint32_t vertex_position_modelspace_id = symbiont_species->get_vertex_position_modelspace_id();
         uint32_t uvbuffer = symbiont_species->get_uvbuffer();
         uint32_t vertex_uv_id = symbiont_species->get_vertexUVID();
         uint32_t normalbuffer = symbiont_species->get_normalbuffer();
