@@ -208,7 +208,7 @@ namespace yli::ontology
         this->model_matrix[3][1] = holobiont->cartesian_coordinates.y;
         this->model_matrix[3][2] = holobiont->cartesian_coordinates.z;
 
-        this->MVP_matrix = universe->get_projection_matrix() * universe->get_view_matrix() * this->model_matrix;
+        this->mvp_matrix = universe->get_projection_matrix() * universe->get_view_matrix() * this->model_matrix;
 
         // Bind our texture in Texture Unit 0.
         glActiveTexture(GL_TEXTURE0);
@@ -241,7 +241,7 @@ namespace yli::ontology
 
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform.
-        glUniformMatrix4fv(shader->get_matrix_id(), 1, GL_FALSE, &this->MVP_matrix[0][0]);
+        glUniformMatrix4fv(shader->get_matrix_id(), 1, GL_FALSE, &this->mvp_matrix[0][0]);
         glUniformMatrix4fv(shader->get_model_matrix_id(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
         uint32_t vertexbuffer = symbiont_species->get_vertexbuffer();

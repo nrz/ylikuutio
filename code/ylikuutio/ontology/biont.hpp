@@ -88,7 +88,7 @@ namespace yli::ontology
                 // `yli::ontology::Movable` member variables begin here.
                 this->cartesian_coordinates = biont_struct.cartesian_coordinates;
                 this->model_matrix          = glm::mat4(1.0f); // identity matrix (dummy value).
-                this->MVP_matrix            = glm::mat4(1.0f); // identity matrix (dummy value).
+                this->mvp_matrix            = glm::mat4(1.0f); // identity matrix (dummy value).
 
                 // Get `childID` from `SymbiontSpecies` (not a parent!) and set pointer to this `Biont`.
                 this->bind_to_symbiont_species();

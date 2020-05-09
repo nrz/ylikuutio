@@ -270,11 +270,11 @@ namespace yli::ontology
         this->model_matrix[3][1] = this->cartesian_coordinates.y;
         this->model_matrix[3][2] = this->cartesian_coordinates.z;
 
-        this->MVP_matrix = this->universe->get_projection_matrix() * this->universe->get_view_matrix() * this->model_matrix;
+        this->mvp_matrix = this->universe->get_projection_matrix() * this->universe->get_view_matrix() * this->model_matrix;
 
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform.
-        glUniformMatrix4fv(shader_pointer->get_matrix_id(), 1, GL_FALSE, &this->MVP_matrix[0][0]);
+        glUniformMatrix4fv(shader_pointer->get_matrix_id(), 1, GL_FALSE, &this->mvp_matrix[0][0]);
         glUniformMatrix4fv(shader_pointer->get_model_matrix_id(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
         yli::ontology::Model* parent_model = nullptr;
