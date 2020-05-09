@@ -113,7 +113,7 @@ namespace yli::ontology
         if (!is_headless)
         {
             // Get a handle for our "texture_sampler" uniform.
-            this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "texture_sampler");
+            this->openGL_textureID = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
         }
     }
 

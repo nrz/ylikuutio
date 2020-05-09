@@ -139,7 +139,7 @@ namespace yli::ontology
             std::size_t get_text_size() const;
             std::size_t get_font_size() const;
             const std::string& get_font_texture_file_format() const;
-            uint32_t get_programID() const;
+            uint32_t get_program_id() const;
 
             void prepare_to_print() const;
 

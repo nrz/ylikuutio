@@ -146,10 +146,10 @@ namespace yli::ontology
                 if (!is_headless)
                 {
                     // Get a handle for our buffers.
-                    this->vertex_position_modelspace_id = glGetAttribLocation(this->parent->get_programID(), "vertex_position_modelspace");
-                    this->vertex_uv_id = glGetAttribLocation(this->parent->get_programID(), "vertexUV");
+                    this->vertex_position_modelspace_id = glGetAttribLocation(this->parent->get_program_id(), "vertex_position_modelspace");
+                    this->vertex_uv_id = glGetAttribLocation(this->parent->get_program_id(), "vertexUV");
 
-                    glUseProgram(this->parent->get_programID());
+                    glUseProgram(this->parent->get_program_id());
                 }
 
                 // Load the source texture, just like in `yli::ontology::Material` constructor.
@@ -194,20 +194,20 @@ namespace yli::ontology
                 if (!is_headless && this->is_texture_loaded)
                 {
                     // Get a handle for our "texture_sampler" uniform.
-                    this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "texture_sampler");
+                    this->openGL_textureID = glGetUniformLocation(this->parent->get_program_id(), "texture_sampler");
 
                     // Initialize uniform window width.
                     // This is named `screen_width` instead of `texture_width` for compatibility with other shaders.
-                    this->screen_width_uniform_id = glGetUniformLocation(this->parent->get_programID(), "screen_width");
+                    this->screen_width_uniform_id = glGetUniformLocation(this->parent->get_program_id(), "screen_width");
                     yli::opengl::uniform_1i(this->screen_width_uniform_id, this->texture_width);
 
                     // Initialize uniform window height.
                     // This is named `screen_height` instead of `texture_height` for compatibility with other shaders.
-                    this->screen_height_uniform_id = glGetUniformLocation(this->parent->get_programID(), "screen_height");
+                    this->screen_height_uniform_id = glGetUniformLocation(this->parent->get_program_id(), "screen_height");
                     yli::opengl::uniform_1i(this->screen_height_uniform_id, this->texture_height);
 
                     // Initialize uniform iteration index.
-                    this->iteration_i_uniform_id = glGetUniformLocation(this->parent->get_programID(), "iteration_i");
+                    this->iteration_i_uniform_id = glGetUniformLocation(this->parent->get_program_id(), "iteration_i");
                     yli::opengl::uniform_1i(this->iteration_i_uniform_id, 0);
 
                     // Create model (a square which consists of 2 triangles).
@@ -295,7 +295,7 @@ namespace yli::ontology
             uint32_t framebuffer;
             uint32_t source_texture;
             uint32_t target_texture;
-            GLint openGL_textureID;              // Texture ID, returned by `glGetUniformLocation(this->parent->get_programID(), "texture_sampler")`.
+            GLint openGL_textureID;              // Texture ID, returned by `glGetUniformLocation(this->parent->get_program_id(), "texture_sampler")`.
             bool is_texture_loaded;
             bool is_framebuffer_initialized;
             bool is_ready;

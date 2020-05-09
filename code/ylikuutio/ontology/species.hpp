@@ -88,13 +88,13 @@ namespace yli::ontology
                     if (!is_headless && this->opengl_in_use)
                     {
                         // Get a handle for our buffers.
-                        this->vertex_position_modelspace_id = glGetAttribLocation(species_struct.shader->get_programID(), "vertex_position_modelspace");
-                        this->vertex_uv_id = glGetAttribLocation(species_struct.shader->get_programID(), "vertexUV");
-                        this->vertex_normal_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertex_normal_modelspace");
+                        this->vertex_position_modelspace_id = glGetAttribLocation(species_struct.shader->get_program_id(), "vertex_position_modelspace");
+                        this->vertex_uv_id = glGetAttribLocation(species_struct.shader->get_program_id(), "vertexUV");
+                        this->vertex_normal_modelspaceID = glGetAttribLocation(species_struct.shader->get_program_id(), "vertex_normal_modelspace");
 
                         // Get a handle for our "LightPosition" uniform.
-                        glUseProgram(species_struct.shader->get_programID());
-                        this->lightID = glGetUniformLocation(species_struct.shader->get_programID(), "light_position_worldspace");
+                        glUseProgram(species_struct.shader->get_program_id());
+                        this->lightID = glGetUniformLocation(species_struct.shader->get_program_id(), "light_position_worldspace");
                     }
 
                     if (this->is_terrain)
@@ -112,7 +112,7 @@ namespace yli::ontology
                     if (!is_headless && this->opengl_in_use)
                     {
                         // water level.
-                        GLint water_level_uniform_location = glGetUniformLocation(species_struct.shader->get_programID(), "water_level");
+                        GLint water_level_uniform_location = glGetUniformLocation(species_struct.shader->get_program_id(), "water_level");
                         glUniform1f(water_level_uniform_location, species_struct.scene->get_water_level());
                     }
 

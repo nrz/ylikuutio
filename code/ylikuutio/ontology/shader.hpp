@@ -122,7 +122,7 @@ namespace yli::ontology
             // Currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
             void set_terrain_species(yli::ontology::Species* terrain_species);
 
-            uint32_t get_programID() const;
+            uint32_t get_program_id() const;
             uint32_t get_matrix_id() const;
             uint32_t get_model_matrixID() const;
 

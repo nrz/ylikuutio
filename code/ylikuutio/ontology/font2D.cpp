@@ -92,7 +92,7 @@ namespace yli::ontology
         return this->font_texture_file_format;
     }
 
-    uint32_t Font2D::get_programID() const
+    uint32_t Font2D::get_program_id() const
     {
         return this->programID;
     }
