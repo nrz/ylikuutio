@@ -845,7 +845,7 @@ int main(const int argc, const char* const argv[]) try
                     my_universe->reset_number_of_frames();
                 }
 
-                // `last_time_to_display_FPS` needs to be incremented to avoid infinite loop.
+                // `last_time_to_display_fps` needs to be incremented to avoid infinite loop.
                 my_universe->increment_last_time_to_display_fps();
 
                 // Update audio also (in case the sound has reached the end).

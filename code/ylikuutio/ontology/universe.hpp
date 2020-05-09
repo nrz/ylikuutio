@@ -387,7 +387,7 @@ namespace yli::ontology
                 this->font_size = universe_struct.font_size;
 
                 this->max_FPS    = universe_struct.max_FPS;
-                this->last_time_to_display_FPS = yli::time::get_time();
+                this->last_time_to_display_fps = yli::time::get_time();
                 this->last_time_for_display_sync = yli::time::get_time();
                 this->delta_time = NAN;
                 this->number_of_frames = 0;
@@ -807,7 +807,7 @@ namespace yli::ontology
 
             // variables related to timing of events.
             std::size_t max_FPS;
-            double last_time_to_display_FPS;
+            double last_time_to_display_fps;
             double last_time_for_display_sync;
             double delta_time;
             int32_t number_of_frames;

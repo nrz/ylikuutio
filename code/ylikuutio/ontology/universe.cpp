@@ -473,7 +473,7 @@ namespace yli::ontology
 
     double Universe::get_last_time_to_display_fps() const
     {
-        return this->last_time_to_display_FPS;
+        return this->last_time_to_display_fps;
     }
 
     double Universe::get_last_time_for_display_sync() const
@@ -488,7 +488,7 @@ namespace yli::ontology
 
     void Universe::increment_last_time_to_display_fps()
     {
-        this->last_time_to_display_FPS += 1.0f;
+        this->last_time_to_display_fps += 1.0f;
     }
 
     void Universe::update_last_time_for_display_sync()
