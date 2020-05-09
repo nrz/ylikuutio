@@ -123,7 +123,7 @@ namespace yli::ontology
             void set_terrain_species(yli::ontology::Species* terrain_species);
 
             uint32_t get_programID() const;
-            uint32_t get_matrixID() const;
+            uint32_t get_matrix_id() const;
             uint32_t get_model_matrixID() const;
 
             friend yli::ontology::ShaderCompare;
