@@ -486,7 +486,7 @@ namespace yli::ontology
         return this->number_of_frames;
     }
 
-    void Universe::increment_last_time_to_display_FPS()
+    void Universe::increment_last_time_to_display_fps()
     {
         this->last_time_to_display_FPS += 1.0f;
     }
