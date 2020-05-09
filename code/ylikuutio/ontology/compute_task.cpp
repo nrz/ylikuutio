@@ -178,7 +178,7 @@ namespace yli::ontology
             }
 
             // Update the value of `uniform` variable `iteration_i`.
-            yli::opengl::uniform_1i(this->iteration_i_uniform_ID, iteration_i);
+            yli::opengl::uniform_1i(this->iteration_i_uniform_id, iteration_i);
 
             this->preiterate();
 

@@ -124,7 +124,7 @@ namespace yli::ontology
                 this->vertexUVID                   = 0; // some dummy value.
                 this->screen_width_uniform_id      = 0; // some dummy value.
                 this->screen_height_uniform_id     = 0; // some dummy value.
-                this->iteration_i_uniform_ID       = 0; // some dummy value.
+                this->iteration_i_uniform_id       = 0; // some dummy value.
                 this->vertexbuffer                 = 0; // some dummy value.
                 this->uvbuffer                     = 0; // some dummy value.
 
@@ -207,8 +207,8 @@ namespace yli::ontology
                     yli::opengl::uniform_1i(this->screen_height_uniform_id, this->texture_height);
 
                     // Initialize uniform iteration index.
-                    this->iteration_i_uniform_ID = glGetUniformLocation(this->parent->get_programID(), "iteration_i");
-                    yli::opengl::uniform_1i(this->iteration_i_uniform_ID, 0);
+                    this->iteration_i_uniform_id = glGetUniformLocation(this->parent->get_programID(), "iteration_i");
+                    yli::opengl::uniform_1i(this->iteration_i_uniform_id, 0);
 
                     // Create model (a square which consists of 2 triangles).
                     // *---*
@@ -304,7 +304,7 @@ namespace yli::ontology
             GLint vertexUVID;
             GLint screen_width_uniform_id;             // Location of the program's window width uniform.
             GLint screen_height_uniform_id;            // Location of the program's window height uniform.
-            GLint iteration_i_uniform_ID;              // Location of the program's iteration index uniform.
+            GLint iteration_i_uniform_id;              // Location of the program's iteration index uniform.
 
             uint32_t vertexbuffer;
             uint32_t uvbuffer;
