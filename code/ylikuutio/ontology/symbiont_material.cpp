@@ -105,7 +105,7 @@ namespace yli::ontology
 
         const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
 
-        if (!yli::load::load_FBX_texture(texture, this->image_width, this->image_height, this->image_size, this->texture, is_headless))
+        if (!yli::load::load_fbx_texture(texture, this->image_width, this->image_height, this->image_size, this->texture, is_headless))
         {
             std::cerr << "ERROR: loading FBX texture failed!\n";
         }
