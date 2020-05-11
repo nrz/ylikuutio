@@ -506,16 +506,6 @@ namespace yli::ontology
         this->number_of_frames = 0;
     }
 
-    void Universe::set(const std::string& setting_name, std::shared_ptr<yli::common::AnyValue> setting_any_value)
-    {
-        this->setting_master->set(setting_name, setting_any_value);
-    }
-
-    yli::config::Setting* Universe::get(const std::string& key) const
-    {
-        return this->setting_master->get(key);
-    }
-
     bool Universe::is_entity(const std::string& name) const
     {
         return this->entity_map.count(name) == 1;
