@@ -9,6 +9,8 @@ Planned features:
 * Common function names follow names used by Scheme.
 * Object-orientation supported following C++ classes.
 * Statically typed: `(define my-number 'uint64 123)`.
+* Type conversion must be explicit when precision loss
+  or truncation would occur: `(cast my-number 'float)`.
 * Functions can be overloaded.
 * Struct syntax: `foo . bar . baz`.
 * All objects, both variables and functions,
@@ -31,3 +33,7 @@ Planned implementation details:
   YliLisp functions into its local context,
   similarly to AngelScript.
 * All variables are always available in all contexts.
+
+Command examples:
+* `(define my-number 'uint64 123)`.
+* `(cast my-number 'float)`.

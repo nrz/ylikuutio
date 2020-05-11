@@ -597,11 +597,6 @@ namespace yli::ontology
             void increment_number_of_frames();
             void reset_number_of_frames();
 
-            void set(const std::string& setting_name, std::shared_ptr<yli::common::AnyValue> setting_any_value);
-
-            // this method returns a pointer to `yli::config::Setting` corresponding to the given `key`.
-            yli::config::Setting* get(const std::string& key) const;
-
             bool is_entity(const std::string& name) const;
             yli::ontology::Entity* get_entity(const std::string& name) const;
             std::string get_entity_names() const;

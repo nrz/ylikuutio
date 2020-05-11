@@ -33,25 +33,31 @@
 #include <vector>     // std::vector
 
 // This is a bit complicated, as the callback may receive different kinds of arguments.
+//
+// The default context is `Universe`.
+//
 // 1. If the callback has `yli::ontology::Universe*` as an argument, then the `Universe*` will be provided.
-//    This does not consume any parameters.
+//    This does not consume any parameters. The `Universe` is set as context.
 //
 // 2. If the callback has `yli::ontology::Console*` as an argument, then this `Console*` will be provided.
 //    This does not consume any parameters. In the future other `Console`s will be made reachable as well,
-//    with `yli::ontology::SomeConsole*`.
+//    with `yli::ontology::SomeConsole*`. The `Console` is set as context.
 //
 // 3. Otherwise, if the callback has `yli::ontology::Entity*` or some subtype of `Entity` as an argument,
-//    then the string will be looked up and converted into that.
+//    then the string will be looked up and converted into that. The `Entity` is set as context.
 //
-// 4. If the callback has `bool` as an argument, then the string will be converted into that.
+// 4. If the callback has `yli::config::Setting*` as an argument, then the `Setting` with that name
+//    will be looked up from the current context.
 //
-// 5. If the callback has `float` as an argument, then the string will be converted into that.
+// 5. If the callback has `bool` as an argument, then the string will be converted into that.
 //
-// 6. If the callback has `double` as an argument, then the string will be converted into that.
+// 6. If the callback has `float` as an argument, then the string will be converted into that.
 //
-// 7. If the callback has `int32_t` as an argument, then the string will be converted into that.
+// 7. If the callback has `double` as an argument, then the string will be converted into that.
 //
-// 8. If the callback has `uint32_t` as an argument, then the string will be converted into that.
+// 8. If the callback has `int32_t` as an argument, then the string will be converted into that.
+//
+// 9. If the callback has `uint32_t` as an argument, then the string will be converted into that.
 //
 // If any lookup or conversion fails, the callback will not be called.
 // If `dynamic_cast` from `yli::ontology::Entity*` into its subtype results in `nullptr`, the callback will not be called.
