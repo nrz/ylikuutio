@@ -471,6 +471,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/linear_algebra/tensor3.hpp
     code/ylikuutio/linear_algebra/vector_functions.hpp
 
+    # lisp, in alphabetical order.
+    code/ylikuutio/lisp/lisp_templates.hpp
+
     # load, in alphabetical order.
     code/ylikuutio/load/ascii_grid_heightmap_loader.cpp
     code/ylikuutio/load/ascii_grid_heightmap_loader.hpp

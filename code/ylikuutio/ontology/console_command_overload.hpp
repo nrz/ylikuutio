@@ -21,7 +21,7 @@
 #include "generic_console_command_overload.hpp"
 #include "console.hpp"
 #include "console_command.hpp"
-#include "code/ylikuutio/common/data_templates.hpp"
+#include "code/ylikuutio/lisp/lisp_templates.hpp"
 
 // Include standard headers
 #include <cstddef>    // std::size_t
@@ -150,22 +150,22 @@ namespace yli::ontology
                 T3 value3;
                 T4 value4;
 
-                if (!yli::common::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, value1))
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, value1))
                 {
                     return std::pair(false, nullptr);
                 }
 
-                if (!yli::common::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, value2))
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, value2))
                 {
                     return std::pair(false, nullptr);
                 }
 
-                if (!yli::common::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, value3))
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, value3))
                 {
                     return std::pair(false, nullptr);
                 }
 
-                if (!yli::common::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, value4))
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, value4))
                 {
                     return std::pair(false, nullptr);
                 }
@@ -255,17 +255,17 @@ namespace yli::ontology
                 T2 value2;
                 T3 value3;
 
-                if (!yli::common::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, value1))
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, value1))
                 {
                     return std::pair(false, nullptr);
                 }
 
-                if (!yli::common::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, value2))
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, value2))
                 {
                     return std::pair(false, nullptr);
                 }
 
-                if (!yli::common::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, value3))
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, value3))
                 {
                     return std::pair(false, nullptr);
                 }
@@ -354,12 +354,12 @@ namespace yli::ontology
                 T1 value1;
                 T2 value2;
 
-                if (!yli::common::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, value1))
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, value1))
                 {
                     return std::pair(false, nullptr);
                 }
 
-                if (!yli::common::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, value2))
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, value2))
                 {
                     return std::pair(false, nullptr);
                 }
@@ -447,7 +447,7 @@ namespace yli::ontology
 
                 T1 value1;
 
-                if (!yli::common::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, value1))
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, value1))
                 {
                     return std::pair(false, nullptr);
                 }
