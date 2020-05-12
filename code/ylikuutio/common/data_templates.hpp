@@ -40,11 +40,9 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <stdint.h> // uint32_t etc.
-#include <cmath>    // NAN, std::isnan, std::pow
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <string>   // std::string
-#include <tuple>    // std::apply, std::tuple, std::tuple_cat
 #include <vector>   // std::vector
 
 namespace yli::common
