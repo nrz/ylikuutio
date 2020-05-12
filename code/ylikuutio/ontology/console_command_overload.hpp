@@ -21,7 +21,7 @@
 #include "generic_console_command_overload.hpp"
 #include "console.hpp"
 #include "console_command.hpp"
-#include "code/ylikuutio/common/data_templates.hpp"
+#include "code/ylikuutio/lisp/lisp_templates.hpp"
 
 // Include standard headers
 #include <cstddef>    // std::size_t
@@ -141,20 +141,36 @@ namespace yli::ontology
                     return std::pair(false, nullptr);
                 }
 
-                bool success1 = true;
-                bool success2 = true;
-                bool success3 = true;
-                bool success4 = true;
-
                 std::size_t parameter_i = 0;
 
                 yli::ontology::Entity* context = universe; // `Universe` is the default context.
-                T1 value1 = yli::common::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, success1);
-                T2 value2 = yli::common::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, success2);
-                T3 value3 = yli::common::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, success3);
-                T4 value4 = yli::common::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, success3);
 
-                if (success1 && success2 && success3 && success4 && parameter_i == parameter_vector.size())
+                T1 value1;
+                T2 value2;
+                T3 value3;
+                T4 value4;
+
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, value1))
+                {
+                    return std::pair(false, nullptr);
+                }
+
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, value2))
+                {
+                    return std::pair(false, nullptr);
+                }
+
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, value3))
+                {
+                    return std::pair(false, nullptr);
+                }
+
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, value4))
+                {
+                    return std::pair(false, nullptr);
+                }
+
+                if (parameter_i == parameter_vector.size())
                 {
                     // Call the callback function if binding was successful.
                     std::tuple parameter_tuple = std::make_tuple(value1, value2, value3, value4);
@@ -231,18 +247,30 @@ namespace yli::ontology
                     return std::pair(false, nullptr);
                 }
 
-                bool success1 = true;
-                bool success2 = true;
-                bool success3 = true;
-
                 std::size_t parameter_i = 0;
 
                 yli::ontology::Entity* context = universe; // `Universe` is the default context.
-                T1 value1 = yli::common::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, success1);
-                T2 value2 = yli::common::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, success2);
-                T3 value3 = yli::common::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, success3);
 
-                if (success1 && success2 && success3 && parameter_i == parameter_vector.size())
+                T1 value1;
+                T2 value2;
+                T3 value3;
+
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, value1))
+                {
+                    return std::pair(false, nullptr);
+                }
+
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, value2))
+                {
+                    return std::pair(false, nullptr);
+                }
+
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, value3))
+                {
+                    return std::pair(false, nullptr);
+                }
+
+                if (parameter_i == parameter_vector.size())
                 {
                     // Call the callback function if binding was successful.
                     std::tuple parameter_tuple = std::make_tuple(value1, value2, value3);
@@ -319,16 +347,24 @@ namespace yli::ontology
                     return std::pair(false, nullptr);
                 }
 
-                bool success1 = true;
-                bool success2 = true;
-
                 std::size_t parameter_i = 0;
 
                 yli::ontology::Entity* context = universe; // `Universe` is the default context.
-                T1 value1 = yli::common::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, success1);
-                T2 value2 = yli::common::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, success2);
 
-                if (success1 && success2 && parameter_i == parameter_vector.size())
+                T1 value1;
+                T2 value2;
+
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, value1))
+                {
+                    return std::pair(false, nullptr);
+                }
+
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, value2))
+                {
+                    return std::pair(false, nullptr);
+                }
+
+                if (parameter_i == parameter_vector.size())
                 {
                     // Call the callback function if binding was successful.
                     std::tuple parameter_tuple = std::make_tuple(value1, value2);
@@ -405,14 +441,18 @@ namespace yli::ontology
                     return std::pair(false, nullptr);
                 }
 
-                bool success1 = true;
-
                 std::size_t parameter_i = 0;
 
                 yli::ontology::Entity* context = universe; // `Universe` is the default context.
-                T1 value1 = yli::common::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, success1);
 
-                if (success1 && parameter_i == parameter_vector.size())
+                T1 value1;
+
+                if (!yli::lisp::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, value1))
+                {
+                    return std::pair(false, nullptr);
+                }
+
+                if (parameter_i == parameter_vector.size())
                 {
                     // Call the callback function if binding was successful.
                     std::tuple parameter_tuple = std::make_tuple(value1);
