@@ -6,6 +6,7 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
+[ ] Implement abstract syntax tree (AST) creation code for console commands.
 [ ] Create basic implementation of YliLisp (YliLisp is a Lisp-1 type scripting language).
 [ ] Implement creating new fields of given type in AnyStructEntities using `Console` command `createfield`.
 [ ] Implement creating and setting new fields of given type in AnyStructEntities of a using `Console` command `setfield`.
