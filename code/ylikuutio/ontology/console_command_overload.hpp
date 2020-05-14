@@ -146,17 +146,6 @@ namespace yli::ontology
                 // Now, process the arguments.
                 std::tuple<Types...> arg_tuple;
 
-                if constexpr (sizeof...(Types) == 0)
-                {
-                    if (parameter_vector.size() == 0)
-                    {
-                        bool return_value = this->callback();
-                        return std::pair(true, return_value);
-                    }
-
-                    return std::pair(false, nullptr);
-                }
-
                 if (this->start_process_args(parameter_vector, arg_tuple))
                 {
 
