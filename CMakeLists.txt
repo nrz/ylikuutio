@@ -393,6 +393,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/common/data_templates.hpp
     code/ylikuutio/common/pi.hpp
     code/ylikuutio/common/spherical_coordinates_struct.hpp
+    code/ylikuutio/common/tuple_templates.hpp
     code/ylikuutio/common/variant_templates.hpp
 
     # config, in alphabetical order.
@@ -472,6 +473,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/linear_algebra/vector_functions.hpp
 
     # lisp, in alphabetical order.
+    code/ylikuutio/lisp/arg_processing_templates.hpp
     code/ylikuutio/lisp/lisp_templates.hpp
 
     # load, in alphabetical order.
