@@ -24,14 +24,14 @@
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <vector>   // std::vector
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 }
 
 namespace yli_edit
 {
-    std::shared_ptr<yli::common::AnyValue> version(
+    std::shared_ptr<yli::data::AnyValue> version(
             yli::ontology::Universe* const universe,
             yli::ontology::Console* const console)
     {

@@ -28,7 +28,7 @@
 #endif
 
 #include "triangulation_enums.hpp"
-#include "code/ylikuutio/common/pi.hpp"
+#include "code/ylikuutio/data/pi.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

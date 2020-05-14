@@ -53,8 +53,8 @@
 #include "camera_struct.hpp"
 #include "compute_task_struct.hpp"
 #include "brain_struct.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/common/any_struct.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/any_struct.hpp"
 #include "code/ylikuutio/callback/input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 
 // Include standard headers
@@ -180,12 +180,12 @@ namespace yli::ontology
         return new yli::ontology::Brain(this->universe, brain_struct, (brain_struct.parent == nullptr ? nullptr : &brain_struct.parent->parent_of_brains));
     }
 
-    yli::ontology::Entity* EntityFactory::create_any_value_entity(const std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr) const
+    yli::ontology::Entity* EntityFactory::create_any_value_entity(const std::shared_ptr<yli::data::AnyValue> any_value_shared_ptr) const
     {
         return new yli::ontology::AnyValueEntity(this->universe, any_value_shared_ptr);
     }
 
-    yli::ontology::Entity* EntityFactory::create_any_value_entity(const yli::common::AnyValue& any_value) const
+    yli::ontology::Entity* EntityFactory::create_any_value_entity(const yli::data::AnyValue& any_value) const
     {
         return new yli::ontology::AnyValueEntity(this->universe, any_value);
     }
@@ -195,7 +195,7 @@ namespace yli::ontology
         return new yli::ontology::AnyStructEntity(this->universe);
     }
 
-    yli::ontology::Entity* EntityFactory::create_any_struct_entity(const yli::common::AnyStruct& any_struct) const
+    yli::ontology::Entity* EntityFactory::create_any_struct_entity(const yli::data::AnyStruct& any_struct) const
     {
         return new yli::ontology::AnyStructEntity(this->universe, any_struct);
     }

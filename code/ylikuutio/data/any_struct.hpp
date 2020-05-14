@@ -25,11 +25,11 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-// `yli::common::AnyStruct` is a `class` which functions as a generic replacement for `struct`s.
+// `yli::data::AnyStruct` is a `class` which functions as a generic replacement for `struct`s.
 // Further, it provides direct access to `AnyStruct`s which are children of current `AnyStruct`.
 // This is implemented using recursion.
 //
-// `yli::common::AnyStruct` uses a notation also used by MATLAB and GNU Octave:
+// `yli::data::AnyStruct` uses a notation also used by MATLAB and GNU Octave:
 // `"foo.bar"` refers to `AnyStruct` named `"bar"`, which is a child of `AnyStruct` named `"foo"`.
 // `"foo.bar.baz"` refers to `AnyStruct` named `"baz"`, which is a child of `"baz"`, which is a child of `"foo"`.
 //
@@ -40,17 +40,17 @@
 // All links are created using `std::shared_ptr`.
 //
 // The hierachical 'struct' tree of Ylikuutio are based on classes
-// `yli::common::AnyStruct` and `yli::common::AnyValue`.
+// `yli::data::AnyStruct` and `yli::data::AnyValue`.
 //
-// The root of this tree is always `yli::common::AnyStruct`.
-// Each `yli::common::AnyStruct` has 0 or more `yli::common::AnyValue`s as its named child nodes,
+// The root of this tree is always `yli::data::AnyStruct`.
+// Each `yli::data::AnyStruct` has 0 or more `yli::data::AnyValue`s as its named child nodes,
 // stored in `std::unordered_map` called `values`.  The name of the child node is stored as a key.
 //
-// Each child can therefore have any `datatype` supported by `yli::common::AnyValue`.
+// Each child can therefore have any `datatype` supported by `yli::data::AnyValue`.
 // If the `datatype` of a child is `ANY_STRUCT_SHARED_PTR`,
-// then the child itself contains `yli::common::AnyStruct`.
+// then the child itself contains `yli::data::AnyStruct`.
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 
@@ -63,17 +63,17 @@ namespace yli::common
             // destructor.
             ~AnyStruct();
 
-            bool enter_data(const std::string& target, std::shared_ptr<yli::common::AnyValue> any_value);
+            bool enter_data(const std::string& target, std::shared_ptr<yli::data::AnyValue> any_value);
             bool erase_data(const std::string& target);
             bool check_if_exist(const std::string& target) const;
-            std::shared_ptr<yli::common::AnyValue> read_data(const std::string& target) const;
+            std::shared_ptr<yli::data::AnyValue> read_data(const std::string& target) const;
             std::vector<std::string> get_fieldnames() const;
 
         private:
             bool enter_data(
                     const std::string& target,
                     std::size_t& data_index,
-                    const std::shared_ptr<yli::common::AnyValue> any_value,
+                    const std::shared_ptr<yli::data::AnyValue> any_value,
                     std::string& first_part);
 
             bool erase_data(
@@ -86,12 +86,12 @@ namespace yli::common
                     std::size_t& data_index,
                     std::string& first_part) const;
 
-            std::shared_ptr<yli::common::AnyValue> read_data(
+            std::shared_ptr<yli::data::AnyValue> read_data(
                     const std::string& target,
                     std::size_t& data_index,
                     std::string& first_part) const;
 
-            std::unordered_map<std::string, std::shared_ptr<yli::common::AnyValue>> values;
+            std::unordered_map<std::string, std::shared_ptr<yli::data::AnyValue>> values;
     };
 }
 

@@ -24,7 +24,7 @@
 #include "console.hpp"
 #include "any_value_entity.hpp"
 #include "any_struct_entity.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -49,7 +49,7 @@ namespace yli::ontology
 
     // Public `Entity` bind callbacks.
 
-    std::shared_ptr<yli::common::AnyValue> Universe::bind(
+    std::shared_ptr<yli::data::AnyValue> Universe::bind(
             yli::ontology::Universe* const universe,
             yli::ontology::Entity* const child_or_apprentice_entity,
             yli::ontology::Entity* const parent_or_master_entity)
@@ -76,7 +76,7 @@ namespace yli::ontology
 
     // Public `Entity` create callbacks.
 
-    std::shared_ptr<yli::common::AnyValue> Universe::create_any_value_entity(
+    std::shared_ptr<yli::data::AnyValue> Universe::create_any_value_entity(
             yli::ontology::Universe* const universe,
             std::shared_ptr<std::string> variable_name_shared_ptr,
             std::shared_ptr<std::string> variable_type_shared_ptr,
@@ -115,13 +115,13 @@ namespace yli::ontology
             return nullptr;
         }
 
-        std::shared_ptr<yli::common::AnyValue> any_value = std::make_shared<yli::common::AnyValue>(*variable_type_shared_ptr, *value_string_shared_ptr);
+        std::shared_ptr<yli::data::AnyValue> any_value = std::make_shared<yli::data::AnyValue>(*variable_type_shared_ptr, *value_string_shared_ptr);
         yli::ontology::AnyValueEntity* const any_value_entity = new yli::ontology::AnyValueEntity(universe, any_value);
         any_value_entity->set_name(*variable_name_shared_ptr);
         return nullptr;
     }
 
-    std::shared_ptr<yli::common::AnyValue> Universe::create_any_struct_entity(
+    std::shared_ptr<yli::data::AnyValue> Universe::create_any_struct_entity(
             yli::ontology::Universe* const universe,
             std::shared_ptr<std::string> variable_name_shared_ptr)
     {
@@ -157,7 +157,7 @@ namespace yli::ontology
 
     // Public `Entity` delete callbacks.
 
-    std::shared_ptr<yli::common::AnyValue> Universe::delete_entity(
+    std::shared_ptr<yli::data::AnyValue> Universe::delete_entity(
             yli::ontology::Universe* const universe,
             yli::ontology::Entity* const entity)
     {
@@ -184,7 +184,7 @@ namespace yli::ontology
 
     // Public `Entity` activate callbacks.
 
-    std::shared_ptr<yli::common::AnyValue> Universe::activate(
+    std::shared_ptr<yli::data::AnyValue> Universe::activate(
             yli::ontology::Universe* const universe,
             yli::ontology::Entity* const entity)
     {
@@ -244,7 +244,7 @@ namespace yli::ontology
 
     // Public AngelScript-related callbacks.
 
-    std::shared_ptr<yli::common::AnyValue> Universe::eval(
+    std::shared_ptr<yli::data::AnyValue> Universe::eval(
             yli::ontology::Console* const console,
             yli::ontology::Entity* const universe_entity,
             const std::vector<std::string>& command_parameters)
@@ -287,7 +287,7 @@ namespace yli::ontology
 
     // Public data printing callbacks.
 
-    std::shared_ptr<yli::common::AnyValue> Universe::info0(
+    std::shared_ptr<yli::data::AnyValue> Universe::info0(
             yli::ontology::Universe* const universe,
             yli::ontology::Console* const console)
     {
@@ -301,7 +301,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::common::AnyValue> Universe::info1(
+    std::shared_ptr<yli::data::AnyValue> Universe::info1(
             yli::ontology::Universe* const universe,
             yli::ontology::Console* const console,
             yli::ontology::Entity* const entity)
@@ -357,7 +357,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::common::AnyValue> Universe::print_entities(
+    std::shared_ptr<yli::data::AnyValue> Universe::print_entities(
             yli::ontology::Universe* const universe,
             yli::ontology::Console* const console)
     {
@@ -382,7 +382,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::common::AnyValue> Universe::print_parent(
+    std::shared_ptr<yli::data::AnyValue> Universe::print_parent(
             yli::ontology::Universe* const universe,
             yli::ontology::Console* const console,
             yli::ontology::Entity* const entity)
@@ -414,7 +414,7 @@ namespace yli::ontology
 
     // Other public callbacks.
 
-    std::shared_ptr<yli::common::AnyValue> Universe::screenshot(
+    std::shared_ptr<yli::data::AnyValue> Universe::screenshot(
             yli::ontology::Universe* const universe,
             std::shared_ptr<std::string> filename)
     {

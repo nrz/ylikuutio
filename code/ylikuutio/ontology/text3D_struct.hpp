@@ -18,7 +18,7 @@
 #ifndef __TEXT3D_STRUCT_HPP_INCLUDED
 #define __TEXT3D_STRUCT_HPP_INCLUDED
 
-#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -56,7 +56,7 @@ namespace yli::ontology
         glm::vec3 cartesian_coordinates;   // coordinate vector.
         glm::vec3 rotate_vector;           // rotate vector.
         glm::vec3 translate_vector;        // translate vector.
-        yli::common::SphericalCoordinatesStruct spherical_coordinates;
+        yli::data::SphericalCoordinatesStruct spherical_coordinates;
         std::string text_string;
         const char* text_string_char;
         yli::ontology::VectorFont* parent; // pointer to the `VectorFont` (parent).

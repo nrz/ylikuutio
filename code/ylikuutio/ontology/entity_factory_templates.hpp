@@ -31,7 +31,7 @@
 #include <memory>     // std::make_shared, std::shared_ptr
 #include <string>     // std::string
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 }
@@ -46,7 +46,7 @@ namespace yli::ontology
         yli::ontology::GenericConsoleCommandOverload* create_console_command_overload(
                 const std::string& name,
                 yli::ontology::Console* const console,
-                std::function<std::shared_ptr<yli::common::AnyValue>(Args...)> callback)
+                std::function<std::shared_ptr<yli::data::AnyValue>(Args...)> callback)
         {
             if (console == nullptr)
             {

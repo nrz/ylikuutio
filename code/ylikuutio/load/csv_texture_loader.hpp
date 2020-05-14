@@ -26,7 +26,7 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 }
@@ -41,8 +41,8 @@ namespace yli::load
             const GLenum format,
             const GLenum internal_format,
             const GLenum type,
-            const std::shared_ptr<yli::common::AnyValue> left_filler_vector_any_value,
-            const std::shared_ptr<yli::common::AnyValue> right_filler_vector_any_value,
+            const std::shared_ptr<yli::data::AnyValue> left_filler_vector_any_value,
+            const std::shared_ptr<yli::data::AnyValue> right_filler_vector_any_value,
             std::size_t& image_width,
             std::size_t& image_height,
             std::size_t& image_size,

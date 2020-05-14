@@ -88,10 +88,10 @@ namespace yli::ontology
             yli::ontology::Entity* create_camera(const yli::ontology::CameraStruct& camera_struct) const;
             yli::ontology::Entity* create_compute_task(const yli::ontology::ComputeTaskStruct& compute_task_struct) const;
             yli::ontology::Entity* create_brain(const yli::ontology::BrainStruct& brain_struct) const;
-            yli::ontology::Entity* create_any_value_entity(const std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr) const;
-            yli::ontology::Entity* create_any_value_entity(const yli::common::AnyValue& any_value) const;
+            yli::ontology::Entity* create_any_value_entity(const std::shared_ptr<yli::data::AnyValue> any_value_shared_ptr) const;
+            yli::ontology::Entity* create_any_value_entity(const yli::data::AnyValue& any_value) const;
             yli::ontology::Entity* create_any_struct_entity() const;
-            yli::ontology::Entity* create_any_struct_entity(const yli::common::AnyStruct& any_struct) const;
+            yli::ontology::Entity* create_any_struct_entity(const yli::data::AnyStruct& any_struct) const;
             yli::ontology::Entity* create_callback_engine_entity(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback) const;
 
         private:

@@ -19,7 +19,7 @@
 #define __ANY_STRUCT_ENTITY_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "code/ylikuutio/common/any_struct.hpp"
+#include "code/ylikuutio/data/any_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -29,7 +29,7 @@
 
 // `AnyStructEntity` is a child of the `Universe`.
 //
-// `AnyStructEntity` inherits both `yli::common::AnyStruct` and `yli::ontology::Entity`.
+// `AnyStructEntity` inherits both `yli::data::AnyStruct` and `yli::ontology::Entity`.
 // Therefore, `AnyStructEntity` is an `Entity` but it functions also as an `AnyStruct`.
 // Each `AnyStructEntity` may have 0 or more `AnyValueEntity` objects as its children.
 // Each `AnyValueEntity` child of a `AnyStructEntity` needs to have a name from its
@@ -41,13 +41,13 @@ namespace yli::ontology
 {
     class Universe;
 
-    class AnyStructEntity: public yli::common::AnyStruct, public yli::ontology::Entity
+    class AnyStructEntity: public yli::data::AnyStruct, public yli::ontology::Entity
     {
         public:
             // constructor.
-            // use the default copy constructor of `yli::common::AnyStruct`.
+            // use the default copy constructor of `yli::data::AnyStruct`.
             AnyStructEntity(yli::ontology::Universe* const universe)
-                : yli::common::AnyStruct(), yli::ontology::Entity(universe)
+                : yli::data::AnyStruct(), yli::ontology::Entity(universe)
             {
                 this->parent = universe;
 
@@ -60,9 +60,9 @@ namespace yli::ontology
             }
 
             // constructor.
-            // use the default copy constructor of `yli::common::AnyStruct`.
-            AnyStructEntity(yli::ontology::Universe* const universe, const yli::common::AnyStruct& any_struct)
-                : yli::common::AnyStruct(any_struct), yli::ontology::Entity(universe)
+            // use the default copy constructor of `yli::data::AnyStruct`.
+            AnyStructEntity(yli::ontology::Universe* const universe, const yli::data::AnyStruct& any_struct)
+                : yli::data::AnyStruct(any_struct), yli::ontology::Entity(universe)
             {
                 this->parent = universe;
 

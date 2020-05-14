@@ -20,7 +20,7 @@
 #include "parent_module.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <cstddef>       // std::size_t
@@ -71,7 +71,7 @@ namespace yli::ontology
         this->can_be_erased = false;
         this->should_be_rendered = (this->universe == nullptr ? false : !this->universe->get_is_headless());
 
-        yli::config::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::common::AnyValue>(this->should_be_rendered));
+        yli::config::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::data::AnyValue>(this->should_be_rendered));
         should_be_rendered_setting_struct.name = "should_be_rendered";
         should_be_rendered_setting_struct.activate_callback = &yli::config::SettingMaster::activate_should_be_rendered;
         should_be_rendered_setting_struct.read_callback = &yli::config::SettingMaster::read_should_be_rendered;

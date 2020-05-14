@@ -27,7 +27,7 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 }

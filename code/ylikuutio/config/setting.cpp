@@ -77,7 +77,7 @@ namespace yli::config
         return help_string;
     }
 
-    std::shared_ptr<yli::common::AnyValue> Setting::get()
+    std::shared_ptr<yli::data::AnyValue> Setting::get()
     {
         if (this->parent == nullptr || this->parent->parent == nullptr)
         {
@@ -109,7 +109,7 @@ namespace yli::config
 
     // Public callbacks.
 
-    std::shared_ptr<yli::common::AnyValue> Setting::set2(
+    std::shared_ptr<yli::data::AnyValue> Setting::set2(
             yli::config::Setting* const setting,
             std::shared_ptr<std::string> new_value)
     {
@@ -126,7 +126,7 @@ namespace yli::config
         return nullptr;
     }
 
-    std::shared_ptr<yli::common::AnyValue> Setting::set3(
+    std::shared_ptr<yli::data::AnyValue> Setting::set3(
             yli::ontology::Entity* const context,         // A context is needed so that correct `Setting` is bound to the function call.
             yli::config::Setting* const setting,
             std::shared_ptr<std::string> new_value)
@@ -138,7 +138,7 @@ namespace yli::config
         return yli::config::Setting::set2(setting, new_value);
     }
 
-    std::shared_ptr<yli::common::AnyValue> Setting::print_value1(
+    std::shared_ptr<yli::data::AnyValue> Setting::print_value1(
             yli::ontology::Console* const console,
             yli::ontology::Universe* const context, // A context is needed so that correct `Setting` is bound to the function call.
             yli::config::Setting* const setting)
@@ -149,7 +149,7 @@ namespace yli::config
         return yli::config::Setting::print_value2(console, context, setting);
     }
 
-    std::shared_ptr<yli::common::AnyValue> Setting::print_value2(
+    std::shared_ptr<yli::data::AnyValue> Setting::print_value2(
             yli::ontology::Console* const console,
             yli::ontology::Entity* const context,  // A context is needed so that correct `Setting` is bound to the function call.
             yli::config::Setting* const setting)
@@ -162,7 +162,7 @@ namespace yli::config
             return nullptr;
         }
 
-        std::shared_ptr<yli::common::AnyValue> setting_value_shared_ptr = setting->get();
+        std::shared_ptr<yli::data::AnyValue> setting_value_shared_ptr = setting->get();
 
         if (setting_value_shared_ptr == nullptr)
         {

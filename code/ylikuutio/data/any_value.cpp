@@ -66,7 +66,7 @@ namespace yli::ontology
     class ComputeTask;
 }
 
-namespace yli::common
+namespace yli::data
 {
     std::string AnyValue::get_datatype() const
     {
@@ -206,17 +206,17 @@ namespace yli::common
         {
             return "yli::ontology::ComputeTask*";
         }
-        else if (std::holds_alternative<std::shared_ptr<yli::common::AnyValue>>(this->data))
+        else if (std::holds_alternative<std::shared_ptr<yli::data::AnyValue>>(this->data))
         {
-            return "std::shared_ptr<yli::common::AnyValue>";
+            return "std::shared_ptr<yli::data::AnyValue>";
         }
-        else if (std::holds_alternative<std::shared_ptr<yli::common::AnyStruct>>(this->data))
+        else if (std::holds_alternative<std::shared_ptr<yli::data::AnyStruct>>(this->data))
         {
-            return "std::shared_ptr<yli::common::AnyStruct>";
+            return "std::shared_ptr<yli::data::AnyStruct>";
         }
-        else if (std::holds_alternative<yli::common::SphericalCoordinatesStruct*>(this->data))
+        else if (std::holds_alternative<yli::data::SphericalCoordinatesStruct*>(this->data))
         {
-            return "yli::common::SphericalCoordinatesStruct*";
+            return "yli::data::SphericalCoordinatesStruct*";
         }
         else if (std::holds_alternative<std::string*>(this->data))
         {
@@ -415,39 +415,39 @@ namespace yli::common
         {
             any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::ComputeTask*>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::shared_ptr<yli::common::AnyValue>>(this->data))
+        else if (std::holds_alternative<std::shared_ptr<yli::data::AnyValue>>(this->data))
         {
-            if (std::get<std::shared_ptr<yli::common::AnyValue>>(this->data) == nullptr)
+            if (std::get<std::shared_ptr<yli::data::AnyValue>>(this->data) == nullptr)
             {
                 any_value_stringstream << "nullptr";
             }
             else
             {
-                any_value_stringstream << std::hex << std::get<std::shared_ptr<yli::common::AnyValue>>(this->data).get() << std::dec;
+                any_value_stringstream << std::hex << std::get<std::shared_ptr<yli::data::AnyValue>>(this->data).get() << std::dec;
             }
         }
-        else if (std::holds_alternative<std::shared_ptr<yli::common::AnyStruct>>(this->data))
+        else if (std::holds_alternative<std::shared_ptr<yli::data::AnyStruct>>(this->data))
         {
-            if (std::get<std::shared_ptr<yli::common::AnyStruct>>(this->data) == nullptr)
+            if (std::get<std::shared_ptr<yli::data::AnyStruct>>(this->data) == nullptr)
             {
                 any_value_stringstream << "nullptr";
             }
             else
             {
-                any_value_stringstream << std::hex << std::get<std::shared_ptr<yli::common::AnyStruct>>(this->data).get() << std::dec;
+                any_value_stringstream << std::hex << std::get<std::shared_ptr<yli::data::AnyStruct>>(this->data).get() << std::dec;
             }
         }
-        else if (std::holds_alternative<yli::common::SphericalCoordinatesStruct*>(this->data))
+        else if (std::holds_alternative<yli::data::SphericalCoordinatesStruct*>(this->data))
         {
-            if (std::get<yli::common::SphericalCoordinatesStruct*>(this->data) == nullptr)
+            if (std::get<yli::data::SphericalCoordinatesStruct*>(this->data) == nullptr)
             {
                 any_value_stringstream << "nullptr";
             }
             else
             {
-                any_value_stringstream << std::fixed << "{ " << std::get<yli::common::SphericalCoordinatesStruct*>(this->data)->rho
-                    << ", " << std::get<yli::common::SphericalCoordinatesStruct*>(this->data)->theta
-                    << ", " << std::get<yli::common::SphericalCoordinatesStruct*>(this->data)->phi
+                any_value_stringstream << std::fixed << "{ " << std::get<yli::data::SphericalCoordinatesStruct*>(this->data)->rho
+                    << ", " << std::get<yli::data::SphericalCoordinatesStruct*>(this->data)->theta
+                    << ", " << std::get<yli::data::SphericalCoordinatesStruct*>(this->data)->phi
                     << " }";
             }
         }
@@ -1108,32 +1108,32 @@ namespace yli::common
             this->data = static_cast<yli::ontology::ComputeTask*>(void_pointer);
             return true;
         }
-        else if (std::holds_alternative<std::shared_ptr<yli::common::AnyValue>>(this->data))
+        else if (std::holds_alternative<std::shared_ptr<yli::data::AnyValue>>(this->data))
         {
             if (!yli::string::check_if_unsigned_integer_string(value_string))
             {
                 return false;
             }
 
-            std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr =
-                std::make_shared<yli::common::AnyValue>(this);
+            std::shared_ptr<yli::data::AnyValue> any_value_shared_ptr =
+                std::make_shared<yli::data::AnyValue>(this);
             any_value_shared_ptr->set_new_value(value_string);
             this->data = any_value_shared_ptr;
             return true;
         }
-        else if (std::holds_alternative<std::shared_ptr<yli::common::AnyStruct>>(this->data))
+        else if (std::holds_alternative<std::shared_ptr<yli::data::AnyStruct>>(this->data))
         {
             if (!yli::string::check_if_unsigned_integer_string(value_string))
             {
                 return false;
             }
 
-            std::shared_ptr<yli::common::AnyStruct> any_struct_shared_ptr =
-                std::make_shared<yli::common::AnyStruct>();
+            std::shared_ptr<yli::data::AnyStruct> any_struct_shared_ptr =
+                std::make_shared<yli::data::AnyStruct>();
             this->data = any_struct_shared_ptr;
             return true;
         }
-        else if (std::holds_alternative<yli::common::SphericalCoordinatesStruct*>(this->data))
+        else if (std::holds_alternative<yli::data::SphericalCoordinatesStruct*>(this->data))
         {
             if (!yli::string::check_if_unsigned_integer_string(value_string))
             {
@@ -1142,7 +1142,7 @@ namespace yli::common
 
             value_stringstream << value_string;
             value_stringstream >> void_pointer;
-            this->data = static_cast<yli::common::SphericalCoordinatesStruct*>(void_pointer);
+            this->data = static_cast<yli::data::SphericalCoordinatesStruct*>(void_pointer);
             return true;
         }
         else if (std::holds_alternative<std::string*>(this->data))
@@ -1197,7 +1197,7 @@ namespace yli::common
         return false;
     }
 
-    AnyValue::AnyValue(const yli::common::AnyValue& original)
+    AnyValue::AnyValue(const yli::data::AnyValue& original)
     {
         // copy constructor.
         this->data = original.data;
@@ -1209,7 +1209,7 @@ namespace yli::common
     }
 
     AnyValue::AnyValue(const std::string& type, const std::string& value_string)
-        : data(yli::common::get_variant<
+        : data(yli::data::get_variant<
                 bool,
                 char,
                 float,
@@ -1244,8 +1244,8 @@ namespace yli::common
                 yli::ontology::Text3D*,
                 yli::ontology::Console*,
                 yli::ontology::ComputeTask*,
-                std::shared_ptr<yli::common::AnyValue>,
-                std::shared_ptr<yli::common::AnyStruct>,
+                std::shared_ptr<yli::data::AnyValue>,
+                std::shared_ptr<yli::data::AnyStruct>,
                 std::shared_ptr<std::vector<int8_t>>,
                 std::shared_ptr<std::vector<uint8_t>>,
                 std::shared_ptr<std::vector<int16_t>>,
@@ -1256,7 +1256,7 @@ namespace yli::common
                 std::shared_ptr<std::string>,
                 std::shared_ptr<glm::vec3>,
                 std::shared_ptr<glm::vec4>,
-                yli::common::SphericalCoordinatesStruct*,
+                yli::data::SphericalCoordinatesStruct*,
                 std::string*,
                 const std::string*>(type, value_string))
     {
@@ -1467,19 +1467,19 @@ namespace yli::common
         // constructor.
     }
 
-    AnyValue::AnyValue(std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr)
+    AnyValue::AnyValue(std::shared_ptr<yli::data::AnyValue> any_value_shared_ptr)
         : data(any_value_shared_ptr)
     {
         // constructor.
     }
 
-    AnyValue::AnyValue(std::shared_ptr<yli::common::AnyStruct> any_struct_shared_ptr)
+    AnyValue::AnyValue(std::shared_ptr<yli::data::AnyStruct> any_struct_shared_ptr)
         : data(any_struct_shared_ptr)
     {
         // constructor.
     }
 
-    AnyValue::AnyValue(yli::common::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer)
+    AnyValue::AnyValue(yli::data::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer)
         : data(spherical_coordinates_struct_pointer)
     {
         // constructor.

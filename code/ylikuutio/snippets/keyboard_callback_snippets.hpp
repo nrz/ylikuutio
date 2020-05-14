@@ -29,7 +29,7 @@ namespace yli::callback
     class CallbackParameter;
 }
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 }
@@ -45,149 +45,149 @@ namespace yli::snippets
      *  Callback engines for action mode keyreleases begin here.         *
     \*********************************************************************/
 
-    std::shared_ptr<yli::common::AnyValue> release_first_turbo(
+    std::shared_ptr<yli::data::AnyValue> release_first_turbo(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> release_second_turbo(
+    std::shared_ptr<yli::data::AnyValue> release_second_turbo(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> enable_toggle_invert_mouse(
+    std::shared_ptr<yli::data::AnyValue> enable_toggle_invert_mouse(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> enable_toggle_flight_mode(
+    std::shared_ptr<yli::data::AnyValue> enable_toggle_flight_mode(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> enable_toggle_help_mode(
+    std::shared_ptr<yli::data::AnyValue> enable_toggle_help_mode(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
     /*********************************************************************\
      *  Callback engines for action mode keypresses begin here.          *
     \*********************************************************************/
 
-    std::shared_ptr<yli::common::AnyValue> exit_program(
+    std::shared_ptr<yli::data::AnyValue> exit_program(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> first_turbo(
+    std::shared_ptr<yli::data::AnyValue> first_turbo(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> second_turbo(
+    std::shared_ptr<yli::data::AnyValue> second_turbo(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> move_forward(
+    std::shared_ptr<yli::data::AnyValue> move_forward(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> move_backward(
+    std::shared_ptr<yli::data::AnyValue> move_backward(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> strafe_left(
+    std::shared_ptr<yli::data::AnyValue> strafe_left(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> strafe_right(
+    std::shared_ptr<yli::data::AnyValue> strafe_right(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> ascent(
+    std::shared_ptr<yli::data::AnyValue> ascent(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> descent(
+    std::shared_ptr<yli::data::AnyValue> descent(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> toggle_invert_mouse(
+    std::shared_ptr<yli::data::AnyValue> toggle_invert_mouse(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> toggle_flight_mode(
+    std::shared_ptr<yli::data::AnyValue> toggle_flight_mode(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> toggle_help_mode(
+    std::shared_ptr<yli::data::AnyValue> toggle_help_mode(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> delete_entity(
+    std::shared_ptr<yli::data::AnyValue> delete_entity(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> switch_to_new_material(
+    std::shared_ptr<yli::data::AnyValue> switch_to_new_material(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> transform_into_new_species(
+    std::shared_ptr<yli::data::AnyValue> transform_into_new_species(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 }
 
 #endif

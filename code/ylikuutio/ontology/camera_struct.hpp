@@ -18,7 +18,7 @@
 #ifndef __CAMERA_STRUCT_HPP_INCLUDED
 #define __CAMERA_STRUCT_HPP_INCLUDED
 
-#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -51,7 +51,7 @@ namespace yli::ontology
         // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
         glm::vec3 cartesian_coordinates; // coordinate vector.
 
-        yli::common::SphericalCoordinatesStruct spherical_coordinates;
+        yli::data::SphericalCoordinatesStruct spherical_coordinates;
 
         yli::ontology::Scene* parent;    // pointer to the `Scene`.
         yli::ontology::Brain* brain;     // pointer to the `Brain` (not a parent!).

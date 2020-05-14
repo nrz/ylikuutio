@@ -25,7 +25,7 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 }
@@ -34,7 +34,7 @@ namespace yli::config
 {
     struct SettingStruct
     {
-        SettingStruct(std::shared_ptr<yli::common::AnyValue> initial_value)
+        SettingStruct(std::shared_ptr<yli::data::AnyValue> initial_value)
             : initial_value(initial_value),
             activate_callback(nullptr),
             read_callback(nullptr),
@@ -43,7 +43,7 @@ namespace yli::config
             // constructor.
         }
         std::string name;
-        std::shared_ptr<yli::common::AnyValue> initial_value;
+        std::shared_ptr<yli::data::AnyValue> initial_value;
         ActivateCallback activate_callback;
         ReadCallback read_callback;
         bool should_ylikuutio_call_activate_callback_now;

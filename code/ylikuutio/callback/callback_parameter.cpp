@@ -17,7 +17,7 @@
 
 #include "callback_parameter.hpp"
 #include "callback_object.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -43,7 +43,7 @@ namespace yli::callback
         callback_object->bind_callback_parameter(this);
     }
 
-    CallbackParameter::CallbackParameter(const std::string& name, std::shared_ptr<yli::common::AnyValue> any_value, const bool is_reference, yli::callback::CallbackObject* const parent)
+    CallbackParameter::CallbackParameter(const std::string& name, std::shared_ptr<yli::data::AnyValue> any_value, const bool is_reference, yli::callback::CallbackObject* const parent)
     {
         // constructor.
         this->name = name;
@@ -76,8 +76,8 @@ namespace yli::callback
         callback_object->set_callback_parameter_pointer(this->childID, nullptr);
     }
 
-    std::shared_ptr<yli::common::AnyValue> CallbackParameter::get_any_value() const
+    std::shared_ptr<yli::data::AnyValue> CallbackParameter::get_any_value() const
     {
-        return std::make_shared<yli::common::AnyValue>(*this->any_value);
+        return std::make_shared<yli::data::AnyValue>(*this->any_value);
     }
 }

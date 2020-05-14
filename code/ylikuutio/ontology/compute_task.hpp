@@ -24,7 +24,7 @@
 #include "compute_task_struct.hpp"
 #include "pre_iterate_callback.hpp"
 #include "post_iterate_callback.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/load/common_texture_loader.hpp"
 #include "code/ylikuutio/load/csv_texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -61,7 +61,7 @@
 // `end_condition_callback_engine->execute(nullptr)` returns `true`, or until
 // `n_max_iterations` is reached. If `end_condition_callback_engine` is `nullptr`
 // or `end_condition_callback_engine->execute(nullptr)` does not not return an `AnyValue`
-// which contains `yli::common::BOOL`, then `end_condition_callback_engine` is ignored
+// which contains `yli::data::BOOL`, then `end_condition_callback_engine` is ignored
 // and `n_max_iterations` is the exact number of iterations to be done. However,
 // even if `end_condition_callback_engine->execute(nullptr)` would return an invalid return
 // value, that is, not an `AnyValue` which contains `common::BOOL`,
@@ -267,8 +267,8 @@ namespace yli::ontology
 
             yli::ontology::Shader* parent; // pointer to the `Shader`.
 
-            std::shared_ptr<yli::common::AnyValue> left_filler_vector_any_value;
-            std::shared_ptr<yli::common::AnyValue> right_filler_vector_any_value;
+            std::shared_ptr<yli::data::AnyValue> left_filler_vector_any_value;
+            std::shared_ptr<yli::data::AnyValue> right_filler_vector_any_value;
 
             // End iterating when `end_condition_callback_engine` returns `true`.
             std::shared_ptr<yli::callback::CallbackEngine> end_condition_callback_engine;

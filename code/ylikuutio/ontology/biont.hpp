@@ -24,7 +24,7 @@
 #include "biont_struct.hpp"
 #include "movable_struct.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

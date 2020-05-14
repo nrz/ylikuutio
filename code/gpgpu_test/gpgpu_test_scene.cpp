@@ -20,7 +20,7 @@
 #endif
 
 #include "gpgpu_test_scene.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/shader.hpp"
 #include "code/ylikuutio/ontology/compute_task.hpp"

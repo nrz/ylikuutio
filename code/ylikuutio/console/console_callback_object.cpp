@@ -23,7 +23,7 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 }
@@ -40,11 +40,11 @@ namespace yli::console
         }
     }
 
-    std::shared_ptr<yli::common::AnyValue> ConsoleCallbackObject::execute(std::shared_ptr<yli::common::AnyValue>)
+    std::shared_ptr<yli::data::AnyValue> ConsoleCallbackObject::execute(std::shared_ptr<yli::data::AnyValue>)
     {
         if (this->console_callback != nullptr)
         {
-            return std::shared_ptr<yli::common::AnyValue>(this->console_callback(this->parent, this, this->callback_parameter_pointer_vector, this->console_pointer));
+            return std::shared_ptr<yli::data::AnyValue>(this->console_callback(this->parent, this, this->callback_parameter_pointer_vector, this->console_pointer));
         }
         return nullptr;
     }

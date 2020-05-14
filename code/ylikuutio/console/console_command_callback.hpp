@@ -23,7 +23,7 @@
 #include <string> // std::string
 #include <vector> // std::vector
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 }
@@ -34,7 +34,7 @@ namespace yli::ontology
     class Console;
 }
 
-typedef std::shared_ptr<yli::common::AnyValue> (*ConsoleCommandCallback) (
+typedef std::shared_ptr<yli::data::AnyValue> (*ConsoleCommandCallback) (
         yli::ontology::Console* const,
         yli::ontology::Entity* const,
         const std::vector<std::string>& command_parameters);

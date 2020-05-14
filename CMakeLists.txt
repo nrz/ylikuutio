@@ -384,18 +384,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/command_line/command_line_master.cpp
     code/ylikuutio/command_line/command_line_master.hpp
 
-    # common, in alphabetical order
-    code/ylikuutio/common/any_struct.cpp
-    code/ylikuutio/common/any_struct.hpp
-    code/ylikuutio/common/any_value.cpp
-    code/ylikuutio/common/any_value.hpp
-    code/ylikuutio/common/datatype.hpp
-    code/ylikuutio/common/data_templates.hpp
-    code/ylikuutio/common/pi.hpp
-    code/ylikuutio/common/spherical_coordinates_struct.hpp
-    code/ylikuutio/common/tuple_templates.hpp
-    code/ylikuutio/common/variant_templates.hpp
-
     # config, in alphabetical order.
     code/ylikuutio/config/activate_callback.hpp
     code/ylikuutio/config/read_callback.hpp
@@ -412,6 +400,18 @@ add_library(ylikuutio STATIC
     code/ylikuutio/console/console_callback_object.cpp
     code/ylikuutio/console/console_callback_object.hpp
     code/ylikuutio/console/input_parameters_to_any_value_callback_with_console.hpp
+
+    # data, in alphabetical order
+    code/ylikuutio/data/any_struct.cpp
+    code/ylikuutio/data/any_struct.hpp
+    code/ylikuutio/data/any_value.cpp
+    code/ylikuutio/data/any_value.hpp
+    code/ylikuutio/data/datatype.hpp
+    code/ylikuutio/data/data_templates.hpp
+    code/ylikuutio/data/pi.hpp
+    code/ylikuutio/data/spherical_coordinates_struct.hpp
+    code/ylikuutio/data/tuple_templates.hpp
+    code/ylikuutio/data/variant_templates.hpp
 
     # file, in alphabetical order.
     code/ylikuutio/file/file_loader.cpp
@@ -894,17 +894,17 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/callback/callback_parameter.hpp
         code/ylikuutio/command_line/command_line_master.cpp
         code/ylikuutio/command_line/command_line_master.hpp
-        code/ylikuutio/common/any_struct.cpp
-        code/ylikuutio/common/any_struct.hpp
-        code/ylikuutio/common/any_value.cpp
-        code/ylikuutio/common/any_value.hpp
-        code/ylikuutio/common/datatype.hpp
-        code/ylikuutio/common/spherical_coordinates_struct.hpp
         code/ylikuutio/config/setting.cpp
         code/ylikuutio/config/setting.hpp
         code/ylikuutio/config/setting_master.cpp
         code/ylikuutio/config/setting_master.hpp
         code/ylikuutio/config/setting_struct.hpp
+        code/ylikuutio/data/any_struct.cpp
+        code/ylikuutio/data/any_struct.hpp
+        code/ylikuutio/data/any_value.cpp
+        code/ylikuutio/data/any_value.hpp
+        code/ylikuutio/data/datatype.hpp
+        code/ylikuutio/data/spherical_coordinates_struct.hpp
         code/ylikuutio/file/file_loader.cpp
         code/ylikuutio/file/file_loader.hpp
         code/ylikuutio/file/file_writer.hpp

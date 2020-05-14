@@ -19,7 +19,7 @@
 #define __CALLBACK_PARAMETER_HPP_INCLUDED
 
 #include "callback_object.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -43,7 +43,7 @@ namespace yli::callback
             ~CallbackParameter();
 
             // getter.
-            std::shared_ptr<yli::common::AnyValue> get_any_value() const;
+            std::shared_ptr<yli::data::AnyValue> get_any_value() const;
 
             friend class CallbackObject;
             template<class T1>
@@ -53,14 +53,14 @@ namespace yli::callback
             void bind_to_parent();
 
             // constructor.
-            CallbackParameter(const std::string& name, std::shared_ptr<yli::common::AnyValue> any_value, const bool is_reference, yli::callback::CallbackObject* const parent);
+            CallbackParameter(const std::string& name, std::shared_ptr<yli::data::AnyValue> any_value, const bool is_reference, yli::callback::CallbackObject* const parent);
 
             yli::callback::CallbackObject* parent; // pointer to the callback object.
 
             std::size_t childID;            // callback parameter ID, returned by `yli::callback::CallbackObject->get_callback_parameterID()`.
 
             std::string name;
-            std::shared_ptr<yli::common::AnyValue> any_value; // this is `private` to make sure that someone does not overwrite it.
+            std::shared_ptr<yli::data::AnyValue> any_value; // this is `private` to make sure that someone does not overwrite it.
             bool is_reference;              // if true, the value is read from the hashmap. if false, then the value is read from the union.
     };
 }

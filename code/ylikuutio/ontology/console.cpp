@@ -531,7 +531,7 @@ namespace yli::ontology
 
     // Console command callbacks begin here.
 
-    std::shared_ptr<yli::common::AnyValue> Console::clear(
+    std::shared_ptr<yli::data::AnyValue> Console::clear(
             yli::ontology::Console* const console)
     {
         if (console != nullptr)
@@ -546,7 +546,7 @@ namespace yli::ontology
         }
 
         const uint32_t clear_console_magic_number = CLEAR_CONSOLE_MAGIC_NUMBER;
-        return std::make_shared<yli::common::AnyValue>(clear_console_magic_number);
+        return std::make_shared<yli::data::AnyValue>(clear_console_magic_number);
     }
 
     // Public callbacks end here.

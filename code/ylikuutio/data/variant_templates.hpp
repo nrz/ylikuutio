@@ -60,7 +60,7 @@ namespace yli::ontology
     class ComputeTask;
 }
 
-namespace yli::common
+namespace yli::data
 {
     struct SphericalCoordinatesStruct;
 
@@ -409,32 +409,32 @@ namespace yli::common
                     my_variant = static_cast<yli::ontology::ComputeTask*>(void_pointer);
                 }
             }
-            else if (type == "std::shared_ptr<yli::common::AnyValue>")
+            else if (type == "std::shared_ptr<yli::data::AnyValue>")
             {
                 if (yli::string::check_if_unsigned_integer_string(value_string))
                 {
-                    std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr =
-                        std::make_shared<yli::common::AnyValue>();
+                    std::shared_ptr<yli::data::AnyValue> any_value_shared_ptr =
+                        std::make_shared<yli::data::AnyValue>();
                     my_variant = any_value_shared_ptr;
                 }
             }
-            else if (type == "std::shared_ptr<yli::common::AnyStruct>")
+            else if (type == "std::shared_ptr<yli::data::AnyStruct>")
             {
                 if (yli::string::check_if_unsigned_integer_string(value_string))
                 {
-                    std::shared_ptr<yli::common::AnyStruct> any_struct_shared_ptr =
-                        std::make_shared<yli::common::AnyStruct>();
+                    std::shared_ptr<yli::data::AnyStruct> any_struct_shared_ptr =
+                        std::make_shared<yli::data::AnyStruct>();
                     my_variant = any_struct_shared_ptr;
                 }
             }
-            else if (type == "yli::common::SphericalCoordinatesStruct*")
+            else if (type == "yli::data::SphericalCoordinatesStruct*")
             {
                 if (yli::string::check_if_unsigned_integer_string(value_string))
                 {
                     void* void_pointer = nullptr;
                     value_stringstream << value_string;
                     value_stringstream >> void_pointer;
-                    my_variant = static_cast<yli::common::SphericalCoordinatesStruct*>(void_pointer);
+                    my_variant = static_cast<yli::data::SphericalCoordinatesStruct*>(void_pointer);
                 }
             }
             else if (type == "std::string*")

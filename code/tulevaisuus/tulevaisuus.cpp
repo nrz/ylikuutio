@@ -70,8 +70,8 @@
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/time/time.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/common/pi.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/pi.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -884,7 +884,7 @@ int main(const int argc, const char* const argv[]) try
 
                     if (callback_engine != nullptr)
                     {
-                        const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute(nullptr);
+                        const std::shared_ptr<yli::data::AnyValue> any_value = callback_engine->execute(nullptr);
 
                         if (any_value != nullptr &&
                                 std::holds_alternative<uint32_t>(any_value->data) &&
@@ -912,7 +912,7 @@ int main(const int argc, const char* const argv[]) try
                         continue;
                     }
 
-                    const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute(nullptr);
+                    const std::shared_ptr<yli::data::AnyValue> any_value = callback_engine->execute(nullptr);
 
                     if (any_value != nullptr &&
                             std::holds_alternative<uint32_t>(any_value->data) &&
@@ -1031,7 +1031,7 @@ int main(const int argc, const char* const argv[]) try
                             continue;
                         }
 
-                        const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute(nullptr);
+                        const std::shared_ptr<yli::data::AnyValue> any_value = callback_engine->execute(nullptr);
 
                         if (any_value != nullptr &&
                                 std::holds_alternative<uint32_t>(any_value->data) &&

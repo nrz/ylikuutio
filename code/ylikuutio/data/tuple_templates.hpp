@@ -22,7 +22,7 @@
 #include <tuple>    // std::apply, std::tie, std::tuple, std::tuple_cat
 #include <utility>  // std::index_sequence, std::integer_sequence
 
-namespace yli::common
+namespace yli::data
 {
     // Inspired by https://stackoverflow.com/questions/10626856/how-to-split-a-tuple
 
@@ -41,7 +41,7 @@ namespace yli::common
     template<class... Types>
         auto rest(std::tuple<Types...>& my_tuple)
         {
-            return yli::common::rest_impl(std::make_index_sequence<sizeof...(Types) - 1u>(), my_tuple);
+            return yli::data::rest_impl(std::make_index_sequence<sizeof...(Types) - 1u>(), my_tuple);
         }
 }
 
