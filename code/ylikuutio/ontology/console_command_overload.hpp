@@ -69,7 +69,7 @@
 //
 // number-of-provided-parameters = number-of-function-arguments - number-of-Universe-arguments - number-of-Console-arguments
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 }
@@ -87,7 +87,7 @@ namespace yli::ontology
             ConsoleCommandOverload(
                     yli::ontology::Universe* const universe,
                     yli::ontology::ParentModule* const parent_module,
-                    std::function<std::shared_ptr<yli::common::AnyValue>(Types... types)> callback)
+                    std::function<std::shared_ptr<yli::data::AnyValue>(Types... types)> callback)
                 : GenericConsoleCommandOverload(universe, parent_module),
                 callback(callback)
             {
@@ -106,7 +106,7 @@ namespace yli::ontology
                 // destructor.
             }
 
-            std::pair<bool, std::shared_ptr<yli::common::AnyValue>> execute(const std::vector<std::string>& parameter_vector) override
+            std::pair<bool, std::shared_ptr<yli::data::AnyValue>> execute(const std::vector<std::string>& parameter_vector) override
             {
                 yli::ontology::Universe* const universe = this->get_universe();
 
@@ -153,7 +153,7 @@ namespace yli::ontology
                     return std::pair(true, std::apply(this->callback, arg_tuple));
                 }
 
-                // std::tuple<bool, std::shared_ptr<yli::common::AnyValue>, std::tuple<Types...>> this->start_process_args(parameter_vector);
+                // std::tuple<bool, std::shared_ptr<yli::data::AnyValue>, std::tuple<Types...>> this->start_process_args(parameter_vector);
 
                 /*
                 bool success1 = true;
@@ -164,10 +164,10 @@ namespace yli::ontology
                 std::size_t parameter_i = 0;
 
                 yli::ontology::Entity* context = universe; // `Universe` is the default context.
-                T1 value1 = yli::common::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, success1);
-                T2 value2 = yli::common::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, success2);
-                T3 value3 = yli::common::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, success3);
-                T4 value4 = yli::common::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, success3);
+                T1 value1 = yli::data::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, success1);
+                T2 value2 = yli::data::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, success2);
+                T3 value3 = yli::data::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, success3);
+                T4 value4 = yli::data::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, success3);
 
                 if (success1 && success2 && success3 && success4 && parameter_i == parameter_vector.size())
                 {
@@ -211,7 +211,7 @@ namespace yli::ontology
             }
 
             // The callback may receive different kinds of arguments.
-            const std::function<std::shared_ptr<yli::common::AnyValue>(Types...)> callback;
+            const std::function<std::shared_ptr<yli::data::AnyValue>(Types...)> callback;
     };
 }
 

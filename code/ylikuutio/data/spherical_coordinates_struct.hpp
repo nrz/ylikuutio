@@ -21,7 +21,7 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 
-namespace yli::common
+namespace yli::data
 {
     struct SphericalCoordinatesStruct
     {

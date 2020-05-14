@@ -18,7 +18,7 @@
 #include "console_callback_snippets.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
@@ -34,13 +34,13 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    std::shared_ptr<yli::common::AnyValue> quit(yli::ontology::Console* const console)
+    std::shared_ptr<yli::data::AnyValue> quit(yli::ontology::Console* const console)
     {
         uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
-        return std::make_shared<yli::common::AnyValue>(exit_program_magic_number);
+        return std::make_shared<yli::data::AnyValue>(exit_program_magic_number);
     }
 
-    std::shared_ptr<yli::common::AnyValue> help(yli::ontology::Console* const console)
+    std::shared_ptr<yli::data::AnyValue> help(yli::ontology::Console* const console)
     {
         if (console == nullptr)
         {

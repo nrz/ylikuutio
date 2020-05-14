@@ -23,7 +23,7 @@
 #endif
 
 #include "object_type.hpp"
-#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -70,7 +70,7 @@ namespace yli::ontology
         glm::vec3 rotate_vector;                // rotate vector.
         glm::vec3 initial_rotate_vector;        // initial rotate vector.
         glm::vec3 translate_vector;             // translate vector.
-        yli::common::SphericalCoordinatesStruct spherical_coordinates;
+        yli::data::SphericalCoordinatesStruct spherical_coordinates;
         yli::ontology::Species* species_parent; // pointer to the parent `Species`.
         yli::ontology::ShapeshifterSequence* shapeshifter_sequence_parent; // pointer to the `ShapeshifterSequence` parent.
         yli::ontology::Text3D* text3D_parent;   // pointer to the parent `Text3D`.

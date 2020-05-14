@@ -75,8 +75,8 @@
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/time/time.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/common/pi.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/pi.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -512,7 +512,7 @@ int main(const int argc, const char* const argv[]) try
     yli::callback::CallbackEngine delete_suzanne_species_callback_engine(my_universe);
     yli::callback::CallbackObject* const delete_suzanne_species_callback_object = delete_suzanne_species_callback_engine.create_callback_object(
             &yli::snippets::delete_entity);
-    delete_suzanne_species_callback_object->create_callback_parameter("", std::make_shared<yli::common::AnyValue>(&suzanne_species_string), false);
+    delete_suzanne_species_callback_object->create_callback_parameter("", std::make_shared<yli::data::AnyValue>(&suzanne_species_string), false);
 
     // Callback code for G: switch to grass material.
     const std::string grass_material_string = "helsinki_east_downtown_grass_material";
@@ -521,11 +521,11 @@ int main(const int argc, const char* const argv[]) try
             &yli::snippets::switch_to_new_material);
     switch_to_grass_material_callback_object->create_callback_parameter(
             "",
-            std::make_shared<yli::common::AnyValue>(&suzanne_species_string),
+            std::make_shared<yli::data::AnyValue>(&suzanne_species_string),
             false);
     switch_to_grass_material_callback_object->create_callback_parameter(
             "",
-            std::make_shared<yli::common::AnyValue>(&grass_material_string),
+            std::make_shared<yli::data::AnyValue>(&grass_material_string),
             false);
 
     // Callback code for O: switch to orange fur material.
@@ -535,11 +535,11 @@ int main(const int argc, const char* const argv[]) try
             &yli::snippets::switch_to_new_material);
     switch_to_orange_fur_material_callback_object->create_callback_parameter(
             "",
-            std::make_shared<yli::common::AnyValue>(&suzanne_species_string),
+            std::make_shared<yli::data::AnyValue>(&suzanne_species_string),
             false);
     switch_to_orange_fur_material_callback_object->create_callback_parameter(
             "",
-            std::make_shared<yli::common::AnyValue>(&orange_fur_material_string),
+            std::make_shared<yli::data::AnyValue>(&orange_fur_material_string),
             false);
 
     // Callback code for P: switch to pink_geometric_tiles_material.
@@ -549,11 +549,11 @@ int main(const int argc, const char* const argv[]) try
             &yli::snippets::switch_to_new_material);
     switch_to_pink_geometric_tiles_material_callback_object->create_callback_parameter(
             "",
-            std::make_shared<yli::common::AnyValue>(&suzanne_species_string),
+            std::make_shared<yli::data::AnyValue>(&suzanne_species_string),
             false);
     switch_to_pink_geometric_tiles_material_callback_object->create_callback_parameter(
             "",
-            std::make_shared<yli::common::AnyValue>(&pink_geometric_tiles_material_string),
+            std::make_shared<yli::data::AnyValue>(&pink_geometric_tiles_material_string),
             false);
 
     // Callback code for T: transform `suzanne2` into terrain.
@@ -562,15 +562,15 @@ int main(const int argc, const char* const argv[]) try
     yli::callback::CallbackEngine transform_into_terrain_callback_engine(my_universe);
     yli::callback::CallbackObject* const transform_into_terrain_callback_object = transform_into_terrain_callback_engine.create_callback_object(
             &yli::snippets::transform_into_new_species);
-    transform_into_terrain_callback_object->create_callback_parameter("", std::make_shared<yli::common::AnyValue>(&suzanne2_string), false);
-    transform_into_terrain_callback_object->create_callback_parameter("", std::make_shared<yli::common::AnyValue>(&helsinki_species_string), false);
+    transform_into_terrain_callback_object->create_callback_parameter("", std::make_shared<yli::data::AnyValue>(&suzanne2_string), false);
+    transform_into_terrain_callback_object->create_callback_parameter("", std::make_shared<yli::data::AnyValue>(&helsinki_species_string), false);
 
     // Callback code for A: transform `suzanne2` back into monkey.
     yli::callback::CallbackEngine transform_into_monkey_callback_engine(my_universe);
     yli::callback::CallbackObject* const transform_into_monkey_callback_object = transform_into_monkey_callback_engine.create_callback_object(
             &yli::snippets::transform_into_new_species);
-    transform_into_monkey_callback_object->create_callback_parameter("", std::make_shared<yli::common::AnyValue>(&suzanne2_string), false);
-    transform_into_monkey_callback_object->create_callback_parameter("", std::make_shared<yli::common::AnyValue>(&suzanne_species_string), false);
+    transform_into_monkey_callback_object->create_callback_parameter("", std::make_shared<yli::data::AnyValue>(&suzanne2_string), false);
+    transform_into_monkey_callback_object->create_callback_parameter("", std::make_shared<yli::data::AnyValue>(&suzanne_species_string), false);
 
     /*********************************************************************
      *  Callback engines for console keyreleases begin here.             *
@@ -1176,7 +1176,7 @@ int main(const int argc, const char* const argv[]) try
 
                     if (callback_engine != nullptr)
                     {
-                        const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute(nullptr);
+                        const std::shared_ptr<yli::data::AnyValue> any_value = callback_engine->execute(nullptr);
 
                         if (any_value != nullptr &&
                                 std::holds_alternative<uint32_t>(any_value->data) &&
@@ -1204,7 +1204,7 @@ int main(const int argc, const char* const argv[]) try
                         continue;
                     }
 
-                    const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute(nullptr);
+                    const std::shared_ptr<yli::data::AnyValue> any_value = callback_engine->execute(nullptr);
 
                     if (any_value != nullptr &&
                             std::holds_alternative<uint32_t>(any_value->data) &&
@@ -1323,7 +1323,7 @@ int main(const int argc, const char* const argv[]) try
                             continue;
                         }
 
-                        const std::shared_ptr<yli::common::AnyValue> any_value = callback_engine->execute(nullptr);
+                        const std::shared_ptr<yli::data::AnyValue> any_value = callback_engine->execute(nullptr);
 
                         if (any_value != nullptr &&
                                 std::holds_alternative<uint32_t>(any_value->data) &&

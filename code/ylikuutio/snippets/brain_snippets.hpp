@@ -29,7 +29,7 @@ namespace yli::callback
     class CallbackParameter;
 }
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 }
@@ -41,110 +41,110 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    std::shared_ptr<yli::common::AnyValue> rest(
+    std::shared_ptr<yli::data::AnyValue> rest(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> go_east(
+    std::shared_ptr<yli::data::AnyValue> go_east(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> go_west(
+    std::shared_ptr<yli::data::AnyValue> go_west(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> go_north(
+    std::shared_ptr<yli::data::AnyValue> go_north(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> go_south(
+    std::shared_ptr<yli::data::AnyValue> go_south(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> orient_to_east(
+    std::shared_ptr<yli::data::AnyValue> orient_to_east(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> orient_to_west(
+    std::shared_ptr<yli::data::AnyValue> orient_to_west(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> orient_to_north(
+    std::shared_ptr<yli::data::AnyValue> orient_to_north(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> orient_to_south(
+    std::shared_ptr<yli::data::AnyValue> orient_to_south(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> orient_and_go_east(
+    std::shared_ptr<yli::data::AnyValue> orient_and_go_east(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> orient_and_go_west(
+    std::shared_ptr<yli::data::AnyValue> orient_and_go_west(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> orient_and_go_north(
+    std::shared_ptr<yli::data::AnyValue> orient_and_go_north(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> orient_and_go_south(
+    std::shared_ptr<yli::data::AnyValue> orient_and_go_south(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> rotate_clockwise(
+    std::shared_ptr<yli::data::AnyValue> rotate_clockwise(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 
-    std::shared_ptr<yli::common::AnyValue> rotate_counterclockwise(
+    std::shared_ptr<yli::data::AnyValue> rotate_counterclockwise(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>& input_parameters,
-            std::shared_ptr<yli::common::AnyValue>);
+            std::shared_ptr<yli::data::AnyValue>);
 }
 
 #endif

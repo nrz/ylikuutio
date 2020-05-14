@@ -30,12 +30,12 @@ namespace yli::callback
     class CallbackParameter;
 }
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 }
 
-typedef std::shared_ptr<yli::common::AnyValue> (*GetContentCallback) (
+typedef std::shared_ptr<yli::data::AnyValue> (*GetContentCallback) (
         yli::callback::CallbackEngine*,
         yli::callback::CallbackObject*,
         std::vector<yli::callback::CallbackParameter*>&,

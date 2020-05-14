@@ -30,7 +30,7 @@
 // `SettingMaster` may be either global or bound to an `yli::ontology::Entity`.
 // Each `SettingMaster` instance may have several `Setting`s.
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 }
@@ -67,75 +67,75 @@ namespace yli::config
             // this function returns help string for setting `setting`.
             std::string help(const std::string& setting_name) const;
 
-            bool set(const std::string& setting_name, std::shared_ptr<yli::common::AnyValue> setting_new_any_value);
+            bool set(const std::string& setting_name, std::shared_ptr<yli::data::AnyValue> setting_new_any_value);
 
             yli::config::Setting* get(const std::string& setting_name) const;
 
             // Public callbacks.
 
-            static std::shared_ptr<yli::common::AnyValue> print_settings0(
+            static std::shared_ptr<yli::data::AnyValue> print_settings0(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Console* const console);
 
-            static std::shared_ptr<yli::common::AnyValue> print_settings1(
+            static std::shared_ptr<yli::data::AnyValue> print_settings1(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Console* const console,
                     yli::ontology::Entity* const entity);
 
-            static std::shared_ptr<yli::common::AnyValue> activate_planet_radius(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_planet_radius(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<yli::common::AnyValue> activate_window_size(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> activate_framebuffer_size(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> activate_background_color(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_window_size(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_framebuffer_size(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_background_color(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<yli::common::AnyValue> activate_wireframe(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_wireframe(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<yli::common::AnyValue> activate_should_be_rendered(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> activate_spherical_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> activate_rho(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> activate_theta(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> activate_phi(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_should_be_rendered(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_spherical_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_rho(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_theta(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_phi(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<yli::common::AnyValue> activate_cartesian_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> activate_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> activate_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> activate_z(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_cartesian_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_z(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<yli::common::AnyValue> activate_horizontal_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_horizontal_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<yli::common::AnyValue> activate_vertical_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_vertical_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<yli::common::AnyValue> activate_speed(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_speed(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<yli::common::AnyValue> activate_turbo_factor(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_turbo_factor(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<yli::common::AnyValue> activate_twin_turbo_factor(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_twin_turbo_factor(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<yli::common::AnyValue> activate_mouse_speed(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_mouse_speed(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<yli::common::AnyValue> activate_is_flight_mode_in_use(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> activate_console_top_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> activate_console_bottom_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> activate_console_left_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> activate_console_right_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_is_flight_mode_in_use(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_console_top_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_console_bottom_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_console_left_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> activate_console_right_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<yli::common::AnyValue> read_should_be_rendered(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> read_cartesian_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> read_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> read_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> read_z(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> read_should_be_rendered(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> read_cartesian_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> read_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> read_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> read_z(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<yli::common::AnyValue> read_rho(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> read_theta(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> read_phi(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> read_rho(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> read_theta(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> read_phi(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<yli::common::AnyValue> read_up(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> read_right(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> read_up(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> read_right(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<yli::common::AnyValue> read_horizontal_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
-            static std::shared_ptr<yli::common::AnyValue> read_vertical_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> read_horizontal_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> read_vertical_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<yli::common::AnyValue> read_is_flight_mode_in_use(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+            static std::shared_ptr<yli::data::AnyValue> read_is_flight_mode_in_use(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
             // Public callbacks end here.
 

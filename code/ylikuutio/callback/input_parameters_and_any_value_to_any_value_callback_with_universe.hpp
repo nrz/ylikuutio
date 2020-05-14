@@ -29,7 +29,7 @@ namespace yli::callback
     class CallbackParameter;
 }
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 }
@@ -39,11 +39,11 @@ namespace yli::ontology
     class Universe;
 }
 
-typedef std::shared_ptr<yli::common::AnyValue> (*InputParametersAndAnyValueToAnyValueCallbackWithUniverse) (
+typedef std::shared_ptr<yli::data::AnyValue> (*InputParametersAndAnyValueToAnyValueCallbackWithUniverse) (
         yli::ontology::Universe*,
         yli::callback::CallbackEngine*,
         yli::callback::CallbackObject*,
         std::vector<yli::callback::CallbackParameter*>&,
-        std::shared_ptr<yli::common::AnyValue>);
+        std::shared_ptr<yli::data::AnyValue>);
 
 #endif

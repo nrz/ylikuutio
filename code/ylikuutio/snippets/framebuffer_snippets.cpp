@@ -18,7 +18,7 @@
 #include "framebuffer_snippets.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
@@ -27,13 +27,13 @@ namespace yli::snippets
 {
     void set_framebuffer_size(yli::config::SettingMaster* setting_master, const uint32_t framebuffer_width, const uint32_t framebuffer_height)
     {
-        yli::config::SettingStruct framebuffer_width_setting_struct(std::make_shared<yli::common::AnyValue>(framebuffer_width));
+        yli::config::SettingStruct framebuffer_width_setting_struct(std::make_shared<yli::data::AnyValue>(framebuffer_width));
         framebuffer_width_setting_struct.name = "framebuffer_width";
         framebuffer_width_setting_struct.activate_callback = &yli::config::SettingMaster::activate_framebuffer_size;
         framebuffer_width_setting_struct.should_ylikuutio_call_activate_callback_now = false;
         setting_master->create_setting(framebuffer_width_setting_struct);
 
-        yli::config::SettingStruct framebuffer_height_setting_struct(std::make_shared<yli::common::AnyValue>(framebuffer_height));
+        yli::config::SettingStruct framebuffer_height_setting_struct(std::make_shared<yli::data::AnyValue>(framebuffer_height));
         framebuffer_height_setting_struct.name = "framebuffer_height";
         framebuffer_height_setting_struct.activate_callback = &yli::config::SettingMaster::activate_framebuffer_size;
         framebuffer_height_setting_struct.should_ylikuutio_call_activate_callback_now = true;

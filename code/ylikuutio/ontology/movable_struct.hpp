@@ -18,7 +18,7 @@
 #ifndef __MOVABLE_STRUCT_HPP_INCLUDED
 #define __MOVABLE_STRUCT_HPP_INCLUDED
 
-#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/input/input.hpp"
 
 // Include GLM
@@ -50,7 +50,7 @@ namespace yli::ontology
         MovableStruct(
                 yli::ontology::Brain* const brain,
                 const glm::vec3& cartesian_coordinates,
-                yli::common::SphericalCoordinatesStruct spherical_coordinates,
+                yli::data::SphericalCoordinatesStruct spherical_coordinates,
                 const double horizontal_angle,
                 const double vertical_angle)
             : input_method(yli::input::InputMethod::AI),
@@ -65,7 +65,7 @@ namespace yli::ontology
         yli::input::InputMethod input_method;
         yli::ontology::Brain* brain;     // brain.
         glm::vec3 cartesian_coordinates; // coordinate vector.
-        yli::common::SphericalCoordinatesStruct spherical_coordinates;
+        yli::data::SphericalCoordinatesStruct spherical_coordinates;
         double horizontal_angle;
         double vertical_angle;
     };

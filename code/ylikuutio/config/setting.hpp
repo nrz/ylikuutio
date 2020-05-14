@@ -41,7 +41,7 @@
 // instead of reading it from the corresponding value in the
 // `setting_pointer_map` member variable of `SettingMaster`.
 //
-// The value of each `Setting` is stored as `yli::common::AnyValue`.
+// The value of each `Setting` is stored as `yli::data::AnyValue`.
 
 namespace yli::ontology
 {
@@ -49,7 +49,7 @@ namespace yli::ontology
     class Console;
 }
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 }
@@ -67,26 +67,26 @@ namespace yli::config
 
             std::string help() const;
 
-            std::shared_ptr<yli::common::AnyValue> get();
+            std::shared_ptr<yli::data::AnyValue> get();
             void set(const std::string& new_value);
 
             // Public callbacks.
 
-            static std::shared_ptr<yli::common::AnyValue> set2(
+            static std::shared_ptr<yli::data::AnyValue> set2(
                     yli::config::Setting* const setting,
                     std::shared_ptr<std::string> new_value);
 
-            static std::shared_ptr<yli::common::AnyValue> set3(
+            static std::shared_ptr<yli::data::AnyValue> set3(
                     yli::ontology::Entity* const context,
                     yli::config::Setting* const setting,
                     std::shared_ptr<std::string> new_value);
 
-            static std::shared_ptr<yli::common::AnyValue> print_value1(
+            static std::shared_ptr<yli::data::AnyValue> print_value1(
                     yli::ontology::Console* const console,
                     yli::ontology::Universe* const context, // A context is needed so that correct `Setting is bound to the function call.
                     yli::config::Setting* const setting);
 
-            static std::shared_ptr<yli::common::AnyValue> print_value2(
+            static std::shared_ptr<yli::data::AnyValue> print_value2(
                     yli::ontology::Console* const console,
                     yli::ontology::Entity* const context,   // A context is needed so that correct `Setting is bound to the function call.
                     yli::config::Setting* const setting);
@@ -107,7 +107,7 @@ namespace yli::config
             std::string name;
 
             // The setting value (may be a pointer a some datatype).
-            std::shared_ptr<yli::common::AnyValue> setting_value;
+            std::shared_ptr<yli::data::AnyValue> setting_value;
 
             // pointer to `ActivateCallback` used to activate the new value after setting it.
             ActivateCallback activate_callback;

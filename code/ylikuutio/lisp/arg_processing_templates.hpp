@@ -19,7 +19,7 @@
 #define __ARG_PROCESSING_TEMPLATES_HPP_INCLUDED
 
 #include "lisp_templates.hpp"
-#include "code/ylikuutio/common/tuple_templates.hpp"
+#include "code/ylikuutio/data/tuple_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -75,7 +75,7 @@ namespace yli::lisp
             // OK, binding successful for this argument.
             // Proceed to the next argument.
 
-            std::tuple<Types...> new_arg_tuple = yli::common::rest(arg_tuple);
+            std::tuple<Types...> new_arg_tuple = yli::data::rest(arg_tuple);
 
             if (!yli::lisp::process_args(universe, console, context, parameter_vector, parameter_i, new_arg_tuple))
             {

@@ -26,8 +26,8 @@
 
 #include "transformation.hpp"
 #include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
-#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
-#include "code/ylikuutio/common/pi.hpp"
+#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/data/pi.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -47,7 +47,7 @@ namespace yli::geometry
             const glm::vec3& planar_world_vertex,
             const double sphere_radius)
     {
-        yli::common::SphericalCoordinatesStruct spherical_vertex;
+        yli::data::SphericalCoordinatesStruct spherical_vertex;
         spherical_vertex.rho = planar_world_vertex.y + sphere_radius;       // rho is altitude.
         spherical_vertex.theta = DEGREES_TO_RADIANS(planar_world_vertex.x); // theta is longitude, the azimuthal angle.
         spherical_vertex.phi = DEGREES_TO_RADIANS(-planar_world_vertex.z);  // phi is latitude, the polar angle.

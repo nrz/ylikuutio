@@ -20,7 +20,7 @@
 
 #include "callback_engine.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -48,18 +48,18 @@ namespace yli::callback
 
             yli::callback::CallbackParameter* create_callback_parameter(
                     const std::string& name,
-                    std::shared_ptr<yli::common::AnyValue> any_value,
+                    std::shared_ptr<yli::data::AnyValue> any_value,
                     const bool is_reference);
 
             // this method changes the callback without changing the parameters of CallbackObject.
             void set_new_callback(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
             // getter functions for callbacks and callback objects.
-            std::shared_ptr<yli::common::AnyValue> get_any_value(const std::string& name) const;
-            std::shared_ptr<yli::common::AnyValue> get_arg(const std::size_t arg_i) const;
+            std::shared_ptr<yli::data::AnyValue> get_any_value(const std::string& name) const;
+            std::shared_ptr<yli::data::AnyValue> get_arg(const std::size_t arg_i) const;
 
             // setter function for callbacks and callback objects.
-            void set_any_value(const std::string& name, std::shared_ptr<yli::common::AnyValue> any_value);
+            void set_any_value(const std::string& name, std::shared_ptr<yli::data::AnyValue> any_value);
 
             friend class CallbackEngine;
             friend class CallbackParameter;
@@ -90,12 +90,12 @@ namespace yli::callback
             void bind_child_to_parent(yli::callback::CallbackParameter* child_pointer);
 
             // execute this callback with a parameter.
-            virtual std::shared_ptr<yli::common::AnyValue> execute(std::shared_ptr<yli::common::AnyValue> any_value);
+            virtual std::shared_ptr<yli::data::AnyValue> execute(std::shared_ptr<yli::data::AnyValue> any_value);
 
             std::size_t childID;                          // callback object ID, returned by `yli::callback::CallbackEngine->get_callback_objectID()`.
 
             // A hash map used to store variables.
-            std::unordered_map<std::string, yli::common::AnyValue> anyvalue_hashmap;
+            std::unordered_map<std::string, yli::data::AnyValue> anyvalue_hashmap;
     };
 }
 

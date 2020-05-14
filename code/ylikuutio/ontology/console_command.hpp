@@ -30,7 +30,7 @@
 #include <string>     // std::string
 #include <vector>     // std::vector
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 }
@@ -67,7 +67,7 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            std::shared_ptr<yli::common::AnyValue> execute(const std::vector<std::string>& parameter_vector);
+            std::shared_ptr<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector);
 
             yli::ontology::ChildModule child_of_console;
             yli::ontology::ParentModule parent_of_generic_console_command_overloads;

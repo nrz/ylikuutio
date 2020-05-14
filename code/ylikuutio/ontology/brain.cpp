@@ -18,7 +18,7 @@
 #include "brain.hpp"
 #include "movable.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -102,7 +102,7 @@ namespace yli::ontology
                 continue;
             }
 
-            this->callback_engine->execute(std::make_shared<yli::common::AnyValue>(movable));
+            this->callback_engine->execute(std::make_shared<yli::data::AnyValue>(movable));
         }
     }
 }

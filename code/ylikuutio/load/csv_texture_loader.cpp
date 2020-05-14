@@ -17,7 +17,7 @@
 
 #include "csv_texture_loader.hpp"
 #include "csv_loader.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/linear_algebra/vector_functions.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 
@@ -40,8 +40,8 @@ namespace yli::load
             const GLenum format,
             const GLenum internal_format,
             const GLenum type,
-            const std::shared_ptr<yli::common::AnyValue> left_filler_vector_any_value,
-            const std::shared_ptr<yli::common::AnyValue> right_filler_vector_any_value,
+            const std::shared_ptr<yli::data::AnyValue> left_filler_vector_any_value,
+            const std::shared_ptr<yli::data::AnyValue> right_filler_vector_any_value,
             std::size_t& image_width,
             std::size_t& image_height,
             std::size_t& image_size,

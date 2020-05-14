@@ -23,7 +23,7 @@
 #include "entity_factory.hpp"
 #include "universe_struct.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
-#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/angelscript/angelscript_master.hpp"
@@ -282,7 +282,7 @@
 //    y-coordinates of these are compared. The piece with the smallest y-coordinate (lowest altitude) remains terrain, other pieces become
 //    regular objects. The pieces that become regular objects will be subject to gravity the same way as any regular object.
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 }
@@ -619,65 +619,65 @@ namespace yli::ontology
 
             // Public `Entity` bind callbacks.
 
-            static std::shared_ptr<yli::common::AnyValue> bind(
+            static std::shared_ptr<yli::data::AnyValue> bind(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Entity* const child_or_apprentice_entity,
                     yli::ontology::Entity* const parent_or_master_entity);
 
             // Public `Entity` create callbacks.
 
-            static std::shared_ptr<yli::common::AnyValue> create_any_value_entity(
+            static std::shared_ptr<yli::data::AnyValue> create_any_value_entity(
                     yli::ontology::Universe* const universe,
                     std::shared_ptr<std::string> variable_name_shared_ptr,
                     std::shared_ptr<std::string> variable_type_shared_ptr,
                     std::shared_ptr<std::string> value_string_shared_ptr);
 
-            static std::shared_ptr<yli::common::AnyValue> create_any_struct_entity(
+            static std::shared_ptr<yli::data::AnyValue> create_any_struct_entity(
                     yli::ontology::Universe* const universe,
                     std::shared_ptr<std::string> variable_name_shared_ptr);
 
             // Public `Entity` delete callbacks.
 
-            static std::shared_ptr<yli::common::AnyValue> delete_entity(
+            static std::shared_ptr<yli::data::AnyValue> delete_entity(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Entity* const entity);
 
             // Public `Entity` activate callbacks.
 
-            static std::shared_ptr<yli::common::AnyValue> activate(
+            static std::shared_ptr<yli::data::AnyValue> activate(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Entity* const entity);
 
             // Public AngelScript-related callbacks.
 
-            static std::shared_ptr<yli::common::AnyValue> eval(
+            static std::shared_ptr<yli::data::AnyValue> eval(
                     yli::ontology::Console* const console,
                     yli::ontology::Entity* const universe_entity,
                     const std::vector<std::string>& command_parameters);
 
             // Public data printing callbacks.
 
-            static std::shared_ptr<yli::common::AnyValue> info0(
+            static std::shared_ptr<yli::data::AnyValue> info0(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Console* const console);
 
-            static std::shared_ptr<yli::common::AnyValue> info1(
+            static std::shared_ptr<yli::data::AnyValue> info1(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Console* const console,
                     yli::ontology::Entity* const entity);
 
-            static std::shared_ptr<yli::common::AnyValue> print_entities(
+            static std::shared_ptr<yli::data::AnyValue> print_entities(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Console* const console);
 
-            static std::shared_ptr<yli::common::AnyValue> print_parent(
+            static std::shared_ptr<yli::data::AnyValue> print_parent(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Console* const console,
                     yli::ontology::Entity* const entity);
 
             // Other public callbacks.
 
-            static std::shared_ptr<yli::common::AnyValue> screenshot(
+            static std::shared_ptr<yli::data::AnyValue> screenshot(
                     yli::ontology::Universe* const universe,
                     std::shared_ptr<std::string> filename);
 
@@ -692,7 +692,7 @@ namespace yli::ontology
             glm::vec3 current_camera_cartesian_coordinates;
 
             // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
-            yli::common::SphericalCoordinatesStruct current_camera_spherical_coordinates;
+            yli::data::SphericalCoordinatesStruct current_camera_spherical_coordinates;
 
             // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
             glm::vec3 current_camera_direction;

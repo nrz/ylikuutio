@@ -74,7 +74,7 @@
 #include <utility>       // std::pair
 #include <vector>        // std::vector
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 }

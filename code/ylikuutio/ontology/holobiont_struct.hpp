@@ -22,7 +22,7 @@
 #define PI 3.14159265359f
 #endif
 
-#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -62,7 +62,7 @@ namespace yli::ontology
         glm::vec3 rotate_vector;                    // rotate vector.
         glm::vec3 initial_rotate_vector;            // initial rotate vector.
         glm::vec3 translate_vector;                 // translate vector.
-        yli::common::SphericalCoordinatesStruct spherical_coordinates;
+        yli::data::SphericalCoordinatesStruct spherical_coordinates;
         yli::ontology::Symbiosis* symbiosis_parent; // pointer to the `Symbiosis`.
         yli::ontology::Brain* brain;                // pointer to the `Brain` (not a parent!).
         float rotate_angle;                         // rotate angle.

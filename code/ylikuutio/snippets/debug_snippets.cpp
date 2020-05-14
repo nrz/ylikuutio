@@ -18,7 +18,7 @@
 #include "debug_snippets.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
@@ -27,7 +27,7 @@ namespace yli::snippets
 {
     void set_flight_mode(yli::config::SettingMaster* setting_master, const bool is_flight_mode_in_use)
     {
-        std::shared_ptr<yli::common::AnyValue> any_value_is_flight_mode_in_use = std::make_shared<yli::common::AnyValue>(is_flight_mode_in_use);
+        std::shared_ptr<yli::data::AnyValue> any_value_is_flight_mode_in_use = std::make_shared<yli::data::AnyValue>(is_flight_mode_in_use);
         yli::config::SettingStruct is_flight_mode_in_use_setting_struct(any_value_is_flight_mode_in_use);
         is_flight_mode_in_use_setting_struct.name = "is_flight_mode_in_use";
         is_flight_mode_in_use_setting_struct.activate_callback = &yli::config::SettingMaster::activate_is_flight_mode_in_use;

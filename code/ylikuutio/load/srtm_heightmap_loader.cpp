@@ -30,7 +30,7 @@
 #include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
-#include "code/ylikuutio/common/pi.hpp"
+#include "code/ylikuutio/data/pi.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

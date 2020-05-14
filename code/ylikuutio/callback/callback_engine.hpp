@@ -19,7 +19,7 @@
 #define __CALLBACK_ENGINE_HPP_INCLUDED
 
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -78,11 +78,11 @@ namespace yli::callback
             yli::callback::CallbackObject* create_callback_object(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
             // execute all callbacks with a parameter.
-            std::shared_ptr<yli::common::AnyValue> execute(std::shared_ptr<yli::common::AnyValue> any_value);
+            std::shared_ptr<yli::data::AnyValue> execute(std::shared_ptr<yli::data::AnyValue> any_value);
 
             std::size_t get_n_of_return_values() const;
-            std::shared_ptr<yli::common::AnyValue> get_nth_return_value(std::size_t n) const;
-            std::shared_ptr<yli::common::AnyValue> get_previous_return_value() const;
+            std::shared_ptr<yli::data::AnyValue> get_nth_return_value(std::size_t n) const;
+            std::shared_ptr<yli::data::AnyValue> get_previous_return_value() const;
 
             friend class CallbackObject;
 
@@ -99,7 +99,7 @@ namespace yli::callback
             std::queue<std::size_t> free_callback_objectID_queue;
             std::size_t number_of_callback_objects;
 
-            std::vector<std::shared_ptr<yli::common::AnyValue>> return_values;
+            std::vector<std::shared_ptr<yli::data::AnyValue>> return_values;
     };
 }
 

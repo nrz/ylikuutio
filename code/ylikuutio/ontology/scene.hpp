@@ -64,7 +64,7 @@
 // When a `Scene` is deleted:
 // 1. Every child of `Scene` gets deleted as usual, including the `Camera`s.
 
-namespace yli::common
+namespace yli::data
 {
     struct SphericalCoordinatesStruct;
 }
@@ -149,8 +149,8 @@ namespace yli::ontology
             // this method returns a pointer to an `Entity` using the name as key.
             yli::ontology::Entity* get_entity(const std::string& name) const;
 
-            // this method returns a pointer to `yli::common::AnyValue` corresponding to the given `key`.
-            std::shared_ptr<yli::common::AnyValue> get_variable(const std::string& key) const;
+            // this method returns a pointer to `yli::data::AnyValue` corresponding to the given `key`.
+            std::shared_ptr<yli::data::AnyValue> get_variable(const std::string& key) const;
             float get_turbo_factor() const;
             void set_turbo_factor(const float turbo_factor);
             float get_twin_turbo_factor() const;
@@ -214,7 +214,7 @@ namespace yli::ontology
             glm::vec3 up;    // note: `up` can not be set directly using console.
 
             // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
-            yli::common::SphericalCoordinatesStruct* spherical_coordinates;
+            yli::data::SphericalCoordinatesStruct* spherical_coordinates;
 
             double horizontal_angle;
             double vertical_angle;

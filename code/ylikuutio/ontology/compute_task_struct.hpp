@@ -20,7 +20,7 @@
 
 #include "pre_iterate_callback.hpp"
 #include "post_iterate_callback.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -68,8 +68,8 @@ namespace yli::ontology
         std::string texture_filename;    // Filename of the model file.
         std::string output_filename;     // Filename of the output file.
         yli::ontology::Shader* parent;   // Pointer to the `Shader`.
-        std::shared_ptr<yli::common::AnyValue> left_filler_vector_any_value;
-        std::shared_ptr<yli::common::AnyValue> right_filler_vector_any_value;
+        std::shared_ptr<yli::data::AnyValue> left_filler_vector_any_value;
+        std::shared_ptr<yli::data::AnyValue> right_filler_vector_any_value;
         std::shared_ptr<yli::callback::CallbackEngine> end_condition_callback_engine;
         std::size_t n_max_iterations;
         std::size_t compute_taskID;

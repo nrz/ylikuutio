@@ -68,8 +68,8 @@
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/time/time.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/common/pi.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/pi.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.

@@ -36,7 +36,7 @@
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-#include "code/ylikuutio/common/pi.hpp"
+#include "code/ylikuutio/data/pi.hpp"
 
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow

@@ -24,7 +24,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace yli::common
+namespace yli::data
 {
     // Get the datatype of a variable.
     template<class T1>
@@ -238,21 +238,21 @@ namespace yli::common
         }
 
     template<>
-        std::string get_type_string(std::shared_ptr<yli::common::AnyValue> data)
+        std::string get_type_string(std::shared_ptr<yli::data::AnyValue> data)
         {
-            return "std::shared_ptr<yli::common::AnyValue>";
+            return "std::shared_ptr<yli::data::AnyValue>";
         }
 
     template<>
-        std::string get_type_string(std::shared_ptr<yli::common::AnyStruct> data)
+        std::string get_type_string(std::shared_ptr<yli::data::AnyStruct> data)
         {
-            return "std::shared_ptr<yli::common::AnyStruct>";
+            return "std::shared_ptr<yli::data::AnyStruct>";
         }
 
     template<>
-        std::string get_type_string(yli::common::SphericalCoordinatesStruct* data)
+        std::string get_type_string(yli::data::SphericalCoordinatesStruct* data)
         {
-            return "yli::common::SphericalCoordinatesStruct*";
+            return "yli::data::SphericalCoordinatesStruct*";
         }
 
     template<>

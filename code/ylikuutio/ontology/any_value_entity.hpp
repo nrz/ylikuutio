@@ -19,7 +19,7 @@
 #define __ANY_VALUE_ENTITY_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -30,7 +30,7 @@
 
 // `AnyValueEntity` is a child of the `Universe`.
 //
-// `AnyValueEntity` inherits both `yli::common::AnyValue` and `yli::ontology::Entity`.
+// `AnyValueEntity` inherits both `yli::data::AnyValue` and `yli::ontology::Entity`.
 // Therefore, `AnyValueEntity` is an `Entity` but it functions also as an `AnyValue`.
 // Each `AnyValueEntity` may refer to an other `Entity`. If that `Entity` is deleted, it
 // will delete all `AnyValueEntity` objects referring to it as well: the destructors of
@@ -41,13 +41,13 @@ namespace yli::ontology
 {
     class Universe;
 
-    class AnyValueEntity: public yli::common::AnyValue, public yli::ontology::Entity
+    class AnyValueEntity: public yli::data::AnyValue, public yli::ontology::Entity
     {
         public:
             // constructor.
-            // use the default copy constructor of `yli::common::AnyValue`.
-            AnyValueEntity(yli::ontology::Universe* const universe, const std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr)
-                : yli::common::AnyValue(*any_value_shared_ptr), yli::ontology::Entity(universe)
+            // use the default copy constructor of `yli::data::AnyValue`.
+            AnyValueEntity(yli::ontology::Universe* const universe, const std::shared_ptr<yli::data::AnyValue> any_value_shared_ptr)
+                : yli::data::AnyValue(*any_value_shared_ptr), yli::ontology::Entity(universe)
             {
                 this->parent = universe;
 
@@ -60,9 +60,9 @@ namespace yli::ontology
             }
 
             // constructor.
-            // use the default copy constructor of `yli::common::AnyValue`.
-            AnyValueEntity(yli::ontology::Universe* const universe, const yli::common::AnyValue& any_value)
-                : yli::common::AnyValue(any_value), yli::ontology::Entity(universe)
+            // use the default copy constructor of `yli::data::AnyValue`.
+            AnyValueEntity(yli::ontology::Universe* const universe, const yli::data::AnyValue& any_value)
+                : yli::data::AnyValue(any_value), yli::ontology::Entity(universe)
             {
                 this->parent = universe;
 

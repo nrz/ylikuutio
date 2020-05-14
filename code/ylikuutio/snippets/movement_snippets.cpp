@@ -18,7 +18,7 @@
 #include "movement_snippets.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
@@ -38,28 +38,28 @@ namespace yli::snippets
             const float mouse_speed)
     {
         // Variables related to voluntary movement.
-        std::shared_ptr<yli::common::AnyValue> any_value_speed = std::make_shared<yli::common::AnyValue>(speed);
+        std::shared_ptr<yli::data::AnyValue> any_value_speed = std::make_shared<yli::data::AnyValue>(speed);
         yli::config::SettingStruct speed_setting_struct(any_value_speed);
         speed_setting_struct.name = "speed";
         speed_setting_struct.activate_callback = &yli::config::SettingMaster::activate_speed;
         speed_setting_struct.should_ylikuutio_call_activate_callback_now = true;
         setting_master->create_setting(speed_setting_struct);
 
-        std::shared_ptr<yli::common::AnyValue> any_value_turbo_factor = std::make_shared<yli::common::AnyValue>(turbo_factor);
+        std::shared_ptr<yli::data::AnyValue> any_value_turbo_factor = std::make_shared<yli::data::AnyValue>(turbo_factor);
         yli::config::SettingStruct turbo_factor_setting_struct(any_value_turbo_factor);
         turbo_factor_setting_struct.name = "turbo_factor";
         turbo_factor_setting_struct.activate_callback = &yli::config::SettingMaster::activate_turbo_factor;
         turbo_factor_setting_struct.should_ylikuutio_call_activate_callback_now = true;
         setting_master->create_setting(turbo_factor_setting_struct);
 
-        std::shared_ptr<yli::common::AnyValue> any_value_twin_turbo_factor = std::make_shared<yli::common::AnyValue>(twin_turbo_factor);
+        std::shared_ptr<yli::data::AnyValue> any_value_twin_turbo_factor = std::make_shared<yli::data::AnyValue>(twin_turbo_factor);
         yli::config::SettingStruct twin_turbo_factor_setting_struct(any_value_twin_turbo_factor);
         twin_turbo_factor_setting_struct.name = "twin_turbo_factor";
         twin_turbo_factor_setting_struct.activate_callback = &yli::config::SettingMaster::activate_twin_turbo_factor;
         twin_turbo_factor_setting_struct.should_ylikuutio_call_activate_callback_now = true;
         setting_master->create_setting(twin_turbo_factor_setting_struct);
 
-        std::shared_ptr<yli::common::AnyValue> any_value_mouse_speed = std::make_shared<yli::common::AnyValue>(mouse_speed);
+        std::shared_ptr<yli::data::AnyValue> any_value_mouse_speed = std::make_shared<yli::data::AnyValue>(mouse_speed);
         yli::config::SettingStruct mouse_speed_setting_struct(any_value_mouse_speed);
         mouse_speed_setting_struct.name = "mouse_speed";
         mouse_speed_setting_struct.activate_callback = &yli::config::SettingMaster::activate_mouse_speed;

@@ -37,7 +37,7 @@
 #include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/geometry/transformation_struct.hpp"
 #include "code/ylikuutio/geometry/transformation.hpp"
-#include "code/ylikuutio/common/pi.hpp"
+#include "code/ylikuutio/data/pi.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

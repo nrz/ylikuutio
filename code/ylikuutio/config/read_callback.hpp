@@ -18,7 +18,7 @@
 #ifndef __READ_CALLBACK_HPP_INCLUDED
 #define __READ_CALLBACK_HPP_INCLUDED
 
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
@@ -33,6 +33,6 @@ namespace yli::ontology
     class Entity;
 }
 
-typedef std::shared_ptr<yli::common::AnyValue> (*ReadCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
+typedef std::shared_ptr<yli::data::AnyValue> (*ReadCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
 
 #endif

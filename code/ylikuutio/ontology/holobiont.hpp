@@ -22,7 +22,7 @@
 #include "parent_module.hpp"
 #include "holobiont_struct.hpp"
 #include "movable_struct.hpp"
-#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -114,7 +114,7 @@ namespace yli::ontology
             glm::vec3 translate_vector;                 // translate vector.
             glm::vec3 initial_rotate_vector;            // initial rotate vector.
 
-            yli::common::SphericalCoordinatesStruct spherical_coordinates;
+            yli::data::SphericalCoordinatesStruct spherical_coordinates;
 
             float rotate_angle;                         // rotate angle.
             float initial_rotate_angle;                 // initial rotate angle.

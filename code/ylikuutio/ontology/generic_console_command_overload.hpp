@@ -29,7 +29,7 @@
 #include <utility>    // std::pair
 #include <vector>     // std::vector
 
-namespace yli::common
+namespace yli::data
 {
     class AnyValue;
 }
@@ -65,7 +65,7 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            virtual std::pair<bool, std::shared_ptr<yli::common::AnyValue>> execute(const std::vector<std::string>& parameter_vector) = 0;
+            virtual std::pair<bool, std::shared_ptr<yli::data::AnyValue>> execute(const std::vector<std::string>& parameter_vector) = 0;
 
             yli::ontology::ChildModule child_of_console_command;
     };

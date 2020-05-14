@@ -45,7 +45,7 @@ namespace yli::ontology
         return yli::ontology::get_number_of_descendants(this->parent_of_generic_console_command_overloads.child_pointer_vector);
     }
 
-    std::shared_ptr<yli::common::AnyValue> ConsoleCommand::execute(const std::vector<std::string>& parameter_vector)
+    std::shared_ptr<yli::data::AnyValue> ConsoleCommand::execute(const std::vector<std::string>& parameter_vector)
     {
         // The execution of a `ConsoleCommand` proceeds as follows:
         // The execution of `GenericConsoleCommandOverload` children of
@@ -70,7 +70,7 @@ namespace yli::ontology
                 it != this->parent_of_generic_console_command_overloads.child_pointer_vector.end();
                 it++)
         {
-            std::pair<bool, std::shared_ptr<yli::common::AnyValue>> success_and_return_value =
+            std::pair<bool, std::shared_ptr<yli::data::AnyValue>> success_and_return_value =
                 static_cast<yli::ontology::GenericConsoleCommandOverload*>(*it)->execute(parameter_vector);
 
             if (success_and_return_value.first == true)

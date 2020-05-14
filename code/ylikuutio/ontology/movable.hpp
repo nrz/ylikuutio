@@ -21,10 +21,10 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "movable_struct.hpp"
-#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -121,7 +121,7 @@ namespace yli::ontology
 
                 yli::config::SettingMaster* const setting_master = this->get_setting_master();
 
-                yli::config::SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::common::AnyValue>(std::make_shared<glm::vec3>(float_x, float_y, float_z)));
+                yli::config::SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(float_x, float_y, float_z)));
                 cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
                 cartesian_coordinates_setting_struct.activate_callback = &yli::config::SettingMaster::activate_cartesian_coordinates;
                 cartesian_coordinates_setting_struct.read_callback = &yli::config::SettingMaster::read_cartesian_coordinates;
@@ -129,7 +129,7 @@ namespace yli::ontology
                 std::cout << "Executing `setting_master->create_setting(cartesian_coordinates_setting_struct);` ...\n";
                 setting_master->create_setting(cartesian_coordinates_setting_struct);
 
-                yli::config::SettingStruct x_setting_struct(std::make_shared<yli::common::AnyValue>(float_x));
+                yli::config::SettingStruct x_setting_struct(std::make_shared<yli::data::AnyValue>(float_x));
                 x_setting_struct.name = "x";
                 x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_x;
                 x_setting_struct.read_callback = &yli::config::SettingMaster::read_x;
@@ -137,7 +137,7 @@ namespace yli::ontology
                 std::cout << "Executing `setting_master->create_setting(x_setting_struct);` ...\n";
                 setting_master->create_setting(x_setting_struct);
 
-                yli::config::SettingStruct y_setting_struct(std::make_shared<yli::common::AnyValue>(float_y));
+                yli::config::SettingStruct y_setting_struct(std::make_shared<yli::data::AnyValue>(float_y));
                 y_setting_struct.name = "y";
                 y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_y;
                 y_setting_struct.read_callback = &yli::config::SettingMaster::read_y;
@@ -145,7 +145,7 @@ namespace yli::ontology
                 std::cout << "Executing `setting_master->create_setting(y_setting_struct);` ...\n";
                 setting_master->create_setting(y_setting_struct);
 
-                yli::config::SettingStruct z_setting_struct(std::make_shared<yli::common::AnyValue>(float_z));
+                yli::config::SettingStruct z_setting_struct(std::make_shared<yli::data::AnyValue>(float_z));
                 z_setting_struct.name = "z";
                 z_setting_struct.activate_callback = &yli::config::SettingMaster::activate_z;
                 z_setting_struct.read_callback = &yli::config::SettingMaster::read_z;
@@ -153,7 +153,7 @@ namespace yli::ontology
                 std::cout << "Executing `setting_master->create_setting(z_setting_struct);` ...\n";
                 setting_master->create_setting(z_setting_struct);
 
-                yli::config::SettingStruct horizontal_angle_setting_struct(std::make_shared<yli::common::AnyValue>(this->horizontal_angle));
+                yli::config::SettingStruct horizontal_angle_setting_struct(std::make_shared<yli::data::AnyValue>(this->horizontal_angle));
                 horizontal_angle_setting_struct.name = "horizontal_angle";
                 horizontal_angle_setting_struct.activate_callback = &yli::config::SettingMaster::activate_horizontal_angle;
                 horizontal_angle_setting_struct.read_callback = &yli::config::SettingMaster::read_horizontal_angle;
@@ -161,7 +161,7 @@ namespace yli::ontology
                 std::cout << "Executing `setting_master->create_setting(horizontal_angle_setting_struct);` ...\n";
                 setting_master->create_setting(horizontal_angle_setting_struct);
 
-                yli::config::SettingStruct vertical_angle_setting_struct(std::make_shared<yli::common::AnyValue>(this->vertical_angle));
+                yli::config::SettingStruct vertical_angle_setting_struct(std::make_shared<yli::data::AnyValue>(this->vertical_angle));
                 vertical_angle_setting_struct.name = "vertical_angle";
                 vertical_angle_setting_struct.activate_callback = &yli::config::SettingMaster::activate_vertical_angle;
                 vertical_angle_setting_struct.read_callback = &yli::config::SettingMaster::read_vertical_angle;
@@ -330,10 +330,10 @@ namespace yli::ontology
             glm::vec3 cartesian_coordinates;                       // cartesian coordinates.
 
             // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
-            yli::common::SphericalCoordinatesStruct spherical_coordinates;      // spherical coordinates.
+            yli::data::SphericalCoordinatesStruct spherical_coordinates;      // spherical coordinates.
 
             glm::vec3 dest_cartesian_coordinates;                  // cartesian destination coordinates.
-            yli::common::SphericalCoordinatesStruct dest_spherical_coordinates; // spherical destination coordinates.
+            yli::data::SphericalCoordinatesStruct dest_spherical_coordinates; // spherical destination coordinates.
 
             // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
             glm::vec3 direction;

@@ -57,7 +57,7 @@ namespace yli::ontology
     class ComputeTask;
 }
 
-namespace yli::common
+namespace yli::data
 {
     class AnyStruct;
     struct SphericalCoordinatesStruct;
@@ -71,7 +71,7 @@ namespace yli::common
             bool set_new_value(const std::string& value_string);
 
             // copy constructor.
-            AnyValue(const yli::common::AnyValue& original);
+            AnyValue(const yli::data::AnyValue& original);
 
             // common constructors.
 
@@ -111,9 +111,9 @@ namespace yli::common
             AnyValue(yli::ontology::Text3D* const text3D_pointer);
             AnyValue(yli::ontology::Console* const console_pointer);
             AnyValue(yli::ontology::ComputeTask* const compute_task_pointer);
-            AnyValue(std::shared_ptr<yli::common::AnyValue> any_value_shared_ptr);
-            AnyValue(std::shared_ptr<yli::common::AnyStruct> any_struct_shared_ptr);
-            AnyValue(yli::common::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
+            AnyValue(std::shared_ptr<yli::data::AnyValue> any_value_shared_ptr);
+            AnyValue(std::shared_ptr<yli::data::AnyStruct> any_struct_shared_ptr);
+            AnyValue(yli::data::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
             AnyValue(std::string* const std_string_pointer);
             AnyValue(const std::string* const const_std_string_pointer);
             AnyValue(std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr);
@@ -162,8 +162,8 @@ namespace yli::common
                 yli::ontology::Text3D*,
                 yli::ontology::Console*,
                 yli::ontology::ComputeTask*,
-                std::shared_ptr<yli::common::AnyValue>,
-                std::shared_ptr<yli::common::AnyStruct>,
+                std::shared_ptr<yli::data::AnyValue>,
+                std::shared_ptr<yli::data::AnyStruct>,
                 std::shared_ptr<std::vector<int8_t>>,
                 std::shared_ptr<std::vector<uint8_t>>,
                 std::shared_ptr<std::vector<int16_t>>,
@@ -174,7 +174,7 @@ namespace yli::common
                 std::shared_ptr<std::string>,
                 std::shared_ptr<glm::vec3>,
                 std::shared_ptr<glm::vec4>,
-                yli::common::SphericalCoordinatesStruct*,
+                yli::data::SphericalCoordinatesStruct*,
                 std::string*,
                 const std::string*
                     > data;

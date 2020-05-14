@@ -18,7 +18,7 @@
 #ifndef __DATATYPE_HPP_INCLUDED
 #define __DATATYPE_HPP_INCLUDED
 
-// `yli::common::Datatype` defines the canonical order of datatypes
+// `yli::data::Datatype` defines the canonical order of datatypes
 // that should be followed throughout Ylikuutio code.
 //
 // Both raw pointers and `std::shared_ptr` pointers may be supported
@@ -26,7 +26,7 @@
 // supported for `yli::ontology` Entities, as the shared ownership is
 // not supported for any of the `yli::ontology` Entities.
 
-namespace yli::common
+namespace yli::data
 {
     enum class Datatype
     {
