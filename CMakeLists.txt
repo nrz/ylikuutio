@@ -944,6 +944,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/load/heightmap_loader_struct.hpp
         code/ylikuutio/load/image_file_loader.cpp
         code/ylikuutio/load/image_file_loader.hpp
+        code/ylikuutio/load/obj_loader.cpp
+        code/ylikuutio/load/obj_loader.hpp
         code/ylikuutio/memory/memory_templates.hpp
         code/ylikuutio/ontology/any_struct_entity.cpp
         code/ylikuutio/ontology/any_struct_entity.hpp
