@@ -888,6 +888,8 @@ create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cod
 # Tests
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set(FILES_TO_TEST
+        code/ylikuutio/audio/audio_master.cpp
+        code/ylikuutio/audio/audio_master.hpp
         code/ylikuutio/callback/callback_engine.cpp
         code/ylikuutio/callback/callback_engine.hpp
         code/ylikuutio/callback/callback_object.cpp
