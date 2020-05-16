@@ -43,7 +43,7 @@ namespace yli::ontology
     class ParentModule;
 
     template<class... Args>
-        yli::ontology::GenericLispFunctionOverload* create_console_command_overload(
+        yli::ontology::GenericLispFunctionOverload* create_lisp_function_overload(
                 const std::string& name,
                 yli::ontology::Console* const console,
                 std::function<std::shared_ptr<yli::data::AnyValue>(Args...)> callback)
