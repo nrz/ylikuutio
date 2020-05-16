@@ -20,7 +20,7 @@
 
 #include "generic_lisp_function_overload.hpp"
 #include "console.hpp"
-#include "console_command.hpp"
+#include "lisp_function.hpp"
 #include "code/ylikuutio/lisp/arg_processing_templates.hpp"
 #include "code/ylikuutio/lisp/lisp_templates.hpp"
 
@@ -116,17 +116,17 @@ namespace yli::ontology
                     return std::pair(false, nullptr);
                 }
 
-                yli::ontology::Entity* const console_command_entity = this->child_of_console_command.get_parent();
+                yli::ontology::Entity* const lisp_function_entity = this->child_of_lisp_function.get_parent();
 
-                yli::ontology::ConsoleCommand* const console_command = dynamic_cast<yli::ontology::ConsoleCommand*>(console_command_entity);
+                yli::ontology::LispFunction* const lisp_function = dynamic_cast<yli::ontology::LispFunction*>(lisp_function_entity);
 
-                if (console_command == nullptr)
+                if (lisp_function == nullptr)
                 {
-                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `console_command` is `nullptr`!\n";
+                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `lisp_function` is `nullptr`!\n";
                     return std::pair(false, nullptr);
                 }
 
-                yli::ontology::Entity* const console_entity = console_command->get_parent();
+                yli::ontology::Entity* const console_entity = lisp_function->get_parent();
 
                 if (console_entity == nullptr)
                 {
@@ -166,14 +166,14 @@ namespace yli::ontology
                     return false;
                 }
 
-                yli::ontology::ConsoleCommand* const console_command = static_cast<yli::ontology::ConsoleCommand*>(this->get_parent());
+                yli::ontology::LispFunction* const lisp_function = static_cast<yli::ontology::LispFunction*>(this->get_parent());
 
-                if (console_command == nullptr)
+                if (lisp_function == nullptr)
                 {
                     return false;
                 }
 
-                yli::ontology::Console* const console = static_cast<yli::ontology::Console*>(console_command->get_parent());
+                yli::ontology::Console* const console = static_cast<yli::ontology::Console*>(lisp_function->get_parent());
 
                 if (console == nullptr)
                 {

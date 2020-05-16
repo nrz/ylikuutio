@@ -47,7 +47,7 @@ namespace yli::ontology
                     yli::ontology::Universe* const universe,
                     yli::ontology::ParentModule* const parent_module)
                 : Entity(universe),
-                child_of_console_command(parent_module, this)
+                child_of_lisp_function(parent_module, this)
             {
                 // constructor.
 
@@ -67,7 +67,7 @@ namespace yli::ontology
 
             virtual std::pair<bool, std::shared_ptr<yli::data::AnyValue>> execute(const std::vector<std::string>& parameter_vector) = 0;
 
-            yli::ontology::ChildModule child_of_console_command;
+            yli::ontology::ChildModule child_of_lisp_function;
     };
 }
 

@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "console_command.hpp"
+#include "lisp_function.hpp"
 #include "generic_lisp_function_overload.hpp"
 #include "family_templates.hpp"
 
@@ -25,31 +25,31 @@
 
 namespace yli::ontology
 {
-    ConsoleCommand::~ConsoleCommand()
+    LispFunction::~LispFunction()
     {
         // destructor.
     }
 
-    yli::ontology::Entity* ConsoleCommand::get_parent() const
+    yli::ontology::Entity* LispFunction::get_parent() const
     {
         return this->child_of_console.get_parent();
     }
 
-    std::size_t ConsoleCommand::get_number_of_children() const
+    std::size_t LispFunction::get_number_of_children() const
     {
         return this->parent_of_generic_lisp_function_overloads.get_number_of_children();
     }
 
-    std::size_t ConsoleCommand::get_number_of_descendants() const
+    std::size_t LispFunction::get_number_of_descendants() const
     {
         return yli::ontology::get_number_of_descendants(this->parent_of_generic_lisp_function_overloads.child_pointer_vector);
     }
 
-    std::shared_ptr<yli::data::AnyValue> ConsoleCommand::execute(const std::vector<std::string>& parameter_vector)
+    std::shared_ptr<yli::data::AnyValue> LispFunction::execute(const std::vector<std::string>& parameter_vector)
     {
-        // The execution of a `ConsoleCommand` proceeds as follows:
+        // The execution of a `LispFunction` proceeds as follows:
         // The execution of `GenericLispFunctionOverload` children of
-        // this `ConsoleCommand` is attempted in ID order, in
+        // this `LispFunction` is attempted in ID order, in
         // the order of the child pointer vector.
         //
         // If the variable binding succeeds, then that

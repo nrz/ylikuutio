@@ -15,13 +15,13 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __CONSOLE_COMMAND_HPP_INCLUDED
-#define __CONSOLE_COMMAND_HPP_INCLUDED
+#ifndef __LISP_FUNCTION_HPP_INCLUDED
+#define __LISP_FUNCTION_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "parent_module.hpp"
-#include "console_command_struct.hpp"
+#include "lisp_function_struct.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -40,12 +40,12 @@ namespace yli::ontology
     class Universe;
     class Console;
 
-    class ConsoleCommand: public yli::ontology::Entity
+    class LispFunction: public yli::ontology::Entity
     {
         public:
-            ConsoleCommand(
+            LispFunction(
                     yli::ontology::Universe* const universe,
-                    const yli::ontology::ConsoleCommandStruct& console_command_struct,
+                    const yli::ontology::LispFunctionStruct& lisp_function_struct,
                     yli::ontology::ParentModule* const parent_module)
                 : Entity(universe),
                 child_of_console(parent_module, this),
@@ -54,14 +54,14 @@ namespace yli::ontology
                 // constructor.
 
                 // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::ConsoleCommand*";
+                this->type_string = "yli::ontology::LispFunction*";
             }
 
-            ConsoleCommand(const ConsoleCommand&) = delete;            // Delete copy constructor.
-            ConsoleCommand &operator=(const ConsoleCommand&) = delete; // Delete copy assignment.
+            LispFunction(const LispFunction&) = delete;            // Delete copy constructor.
+            LispFunction &operator=(const LispFunction&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~ConsoleCommand();
+            virtual ~LispFunction();
 
             yli::ontology::Entity* get_parent() const override;
             std::size_t get_number_of_children() const override;

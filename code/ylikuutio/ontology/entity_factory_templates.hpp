@@ -20,11 +20,11 @@
 
 #include "universe.hpp"
 #include "console.hpp"
-#include "console_command.hpp"
+#include "lisp_function.hpp"
 #include "lisp_function_overload.hpp"
 #include "generic_lisp_function_overload.hpp"
 #include "entity_factory.hpp"
-#include "console_command_struct.hpp"
+#include "lisp_function_struct.hpp"
 
 // Include standard headers
 #include <functional> // std::function
@@ -67,42 +67,42 @@ namespace yli::ontology
                 return nullptr;
             }
 
-            yli::ontology::Entity* const console_command_entity = universe->get_entity(name);
+            yli::ontology::Entity* const lisp_function_entity = universe->get_entity(name);
 
-            yli::ontology::ConsoleCommand* console_command = nullptr;
+            yli::ontology::LispFunction* lisp_function = nullptr;
 
-            if (console_command_entity == nullptr)
+            if (lisp_function_entity == nullptr)
             {
                 // There was not any `Entity` with that name.
-                yli::ontology::ConsoleCommandStruct console_command_struct;
-                console_command_struct.parent = console;
-                yli::ontology::Entity* const new_console_command_entity = entity_factory->create_console_command(console_command_struct);
+                yli::ontology::LispFunctionStruct lisp_function_struct;
+                lisp_function_struct.parent = console;
+                yli::ontology::Entity* const new_lisp_function_entity = entity_factory->create_lisp_function(lisp_function_struct);
 
-                console_command = dynamic_cast<yli::ontology::ConsoleCommand*>(new_console_command_entity);
+                lisp_function = dynamic_cast<yli::ontology::LispFunction*>(new_lisp_function_entity);
 
-                if (console_command == nullptr)
+                if (lisp_function == nullptr)
                 {
-                    // Creating `ConsoleCommand` failed.
+                    // Creating `LispFunction` failed.
                     return nullptr;
                 }
 
-                // OK, set a name for the newly created `ConsoleCommand`.
-                console_command->set_name(name);
+                // OK, set a name for the newly created `LispFunction`.
+                lisp_function->set_name(name);
             }
             else
             {
-                console_command = dynamic_cast<yli::ontology::ConsoleCommand*>(console_command_entity);
+                lisp_function = dynamic_cast<yli::ontology::LispFunction*>(lisp_function_entity);
 
-                if (console_command == nullptr)
+                if (lisp_function == nullptr)
                 {
-                    // The name is in use and the `Entity` is not a `ConsoleCommand`.
+                    // The name is in use and the `Entity` is not a `LispFunction`.
                     return nullptr;
                 }
             }
 
             yli::ontology::GenericLispFunctionOverload* const generic_lisp_function_overload = new yli::ontology::LispFunctionOverload<Args...>(
                     universe,
-                    &console_command->parent_of_generic_lisp_function_overloads,
+                    &lisp_function->parent_of_generic_lisp_function_overloads,
                     callback);
             generic_lisp_function_overload->set_name(name);
             return generic_lisp_function_overload;

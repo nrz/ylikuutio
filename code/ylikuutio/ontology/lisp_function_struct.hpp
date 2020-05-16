@@ -15,16 +15,16 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __CONSOLE_COMMAND_STRUCT_HPP_INCLUDED
-#define __CONSOLE_COMMAND_STRUCT_HPP_INCLUDED
+#ifndef __LISP_FUNCTION_STRUCT_HPP_INCLUDED
+#define __LISP_FUNCTION_STRUCT_HPP_INCLUDED
 
 namespace yli::ontology
 {
     class Console;
 
-    struct ConsoleCommandStruct
+    struct LispFunctionStruct
     {
-        ConsoleCommandStruct()
+        LispFunctionStruct()
             : parent(nullptr)
         {
             // constructor.
