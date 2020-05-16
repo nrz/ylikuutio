@@ -15,18 +15,19 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __GENERIC_CONSOLE_COMMAND_OVERLOAD_HPP_INCLUDED
-#define __GENERIC_CONSOLE_COMMAND_OVERLOAD_HPP_INCLUDED
+#ifndef __LISP_FUNCTION_HPP_INCLUDED
+#define __LISP_FUNCTION_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "child_module.hpp"
+#include "parent_module.hpp"
+#include "lisp_function_struct.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <functional> // std::function
 #include <memory>     // std::make_shared, std::shared_ptr
 #include <string>     // std::string
-#include <utility>    // std::pair
 #include <vector>     // std::vector
 
 namespace yli::data
@@ -37,37 +38,39 @@ namespace yli::data
 namespace yli::ontology
 {
     class Universe;
-    class ParentModule;
     class Console;
 
-    class GenericConsoleCommandOverload: public yli::ontology::Entity
+    class LispFunction: public yli::ontology::Entity
     {
         public:
-            GenericConsoleCommandOverload(
+            LispFunction(
                     yli::ontology::Universe* const universe,
+                    const yli::ontology::LispFunctionStruct& lisp_function_struct,
                     yli::ontology::ParentModule* const parent_module)
                 : Entity(universe),
-                child_of_console_command(parent_module, this)
+                child_of_console(parent_module, this),
+                parent_of_generic_lisp_function_overloads(this)
             {
                 // constructor.
 
                 // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::GenericConsoleCommandOverload*";
+                this->type_string = "yli::ontology::LispFunction*";
             }
 
-            GenericConsoleCommandOverload(const GenericConsoleCommandOverload&) = delete;            // Delete copy constructor.
-            GenericConsoleCommandOverload &operator=(const GenericConsoleCommandOverload&) = delete; // Delete copy assignment.
+            LispFunction(const LispFunction&) = delete;            // Delete copy constructor.
+            LispFunction &operator=(const LispFunction&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~GenericConsoleCommandOverload();
+            virtual ~LispFunction();
 
             yli::ontology::Entity* get_parent() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            virtual std::pair<bool, std::shared_ptr<yli::data::AnyValue>> execute(const std::vector<std::string>& parameter_vector) = 0;
+            std::shared_ptr<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector);
 
-            yli::ontology::ChildModule child_of_console_command;
+            yli::ontology::ChildModule child_of_console;
+            yli::ontology::ParentModule parent_of_generic_lisp_function_overloads;
     };
 }
 

@@ -548,12 +548,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/console.cpp
     code/ylikuutio/ontology/console.hpp
     code/ylikuutio/ontology/console_callbacks.cpp
-    code/ylikuutio/ontology/console_command.cpp
-    code/ylikuutio/ontology/console_command.hpp
-    code/ylikuutio/ontology/console_command_overload.hpp
-    code/ylikuutio/ontology/console_command_struct.hpp
-    code/ylikuutio/ontology/generic_console_command_overload.cpp
-    code/ylikuutio/ontology/generic_console_command_overload.hpp
+    code/ylikuutio/ontology/generic_lisp_function_overload.cpp
+    code/ylikuutio/ontology/generic_lisp_function_overload.hpp
     code/ylikuutio/ontology/get_content_callback.hpp
     code/ylikuutio/ontology/gl_attrib_locations.cpp
     code/ylikuutio/ontology/gl_attrib_locations.hpp
@@ -576,6 +572,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/holobiont.cpp
     code/ylikuutio/ontology/holobiont.hpp
     code/ylikuutio/ontology/holobiont_struct.hpp
+    code/ylikuutio/ontology/lisp_function.cpp
+    code/ylikuutio/ontology/lisp_function.hpp
+    code/ylikuutio/ontology/lisp_function_overload.hpp
+    code/ylikuutio/ontology/lisp_function_struct.hpp
     code/ylikuutio/ontology/material.cpp
     code/ylikuutio/ontology/material.hpp
     code/ylikuutio/ontology/material_struct.hpp

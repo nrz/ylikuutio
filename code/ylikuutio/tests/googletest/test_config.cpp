@@ -28,6 +28,7 @@
 #include <limits>   // std::numeric_limits
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
+#include <variant>  // std::variant
 
 TEST(setting_master_must_be_initialized_appropriately, headless_universe)
 {
@@ -845,6 +846,321 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     ASSERT_NE(setting_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<uint32_t>(setting_value->data));
     ASSERT_EQ(std::get<uint32_t>(setting_value->data), std::numeric_limits<uint32_t>::max());
+}
+
+TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_x_float_1234_dot_25_with_activate_callback_and_read_callback)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::config::SettingMaster* setting_master = universe->get_setting_master();
+
+    float x = 1234.25f;
+    yli::config::SettingStruct x_setting_struct(std::make_shared<yli::data::AnyValue>(x));
+    x_setting_struct.name = "x";
+    x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_x;
+    x_setting_struct.read_callback = &yli::config::SettingMaster::read_x;
+    x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    ASSERT_EQ(setting_master->get("x"), nullptr);
+    setting_master->create_setting(x_setting_struct);
+
+    ASSERT_NE(setting_master->get("x"), nullptr);
+    yli::config::Setting* x_setting = setting_master->get("x");
+    ASSERT_NE(x_setting, nullptr);
+
+    std::shared_ptr<yli::data::AnyValue> x_value = x_setting->get();
+    ASSERT_NE(x_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<float>(x_value->data));
+    ASSERT_EQ(std::get<float>(x_value->data), 1234.25f);
+}
+
+TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_y_float_1234_dot_5678_with_activate_callback_and_read_callback)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::config::SettingMaster* setting_master = universe->get_setting_master();
+
+    float y = 1234.5678f;
+    yli::config::SettingStruct y_setting_struct(std::make_shared<yli::data::AnyValue>(y));
+    y_setting_struct.name = "y";
+    y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_y;
+    y_setting_struct.read_callback = &yli::config::SettingMaster::read_y;
+    y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    ASSERT_EQ(setting_master->get("y"), nullptr);
+    setting_master->create_setting(y_setting_struct);
+
+    ASSERT_NE(setting_master->get("y"), nullptr);
+    yli::config::Setting* y_setting = setting_master->get("y");
+    ASSERT_NE(y_setting, nullptr);
+
+    std::shared_ptr<yli::data::AnyValue> y_value = y_setting->get();
+    ASSERT_NE(y_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<float>(y_value->data));
+    ASSERT_EQ(std::get<float>(y_value->data), 1234.5678f);
+}
+
+TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_z_float_1234_dot_5678_with_activate_callback_and_read_callback)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::config::SettingMaster* setting_master = universe->get_setting_master();
+
+    float z = 1234.5678f;
+    yli::config::SettingStruct z_setting_struct(std::make_shared<yli::data::AnyValue>(z));
+    z_setting_struct.name = "z";
+    z_setting_struct.activate_callback = &yli::config::SettingMaster::activate_z;
+    z_setting_struct.read_callback = &yli::config::SettingMaster::read_z;
+    z_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    ASSERT_EQ(setting_master->get("z"), nullptr);
+    setting_master->create_setting(z_setting_struct);
+
+    ASSERT_NE(setting_master->get("z"), nullptr);
+    yli::config::Setting* z_setting = setting_master->get("z");
+    ASSERT_NE(z_setting, nullptr);
+
+    std::shared_ptr<yli::data::AnyValue> z_value = z_setting->get();
+    ASSERT_NE(z_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<float>(z_value->data));
+    ASSERT_EQ(std::get<float>(z_value->data), 1234.5678f);
+}
+
+TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_red_float_0_dot_0_with_activate_callback)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::config::SettingMaster* setting_master = universe->get_setting_master();
+
+    float red = 0.0f;
+    yli::config::SettingStruct red_setting_struct(std::make_shared<yli::data::AnyValue>(red));
+    red_setting_struct.name = "red";
+    red_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+    red_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    ASSERT_EQ(setting_master->get("red"), nullptr);
+    setting_master->create_setting(red_setting_struct);
+
+    ASSERT_NE(setting_master->get("red"), nullptr);
+    yli::config::Setting* red_setting = setting_master->get("red");
+    ASSERT_NE(red_setting, nullptr);
+
+    std::shared_ptr<yli::data::AnyValue> red_value = red_setting->get();
+    ASSERT_NE(red_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<float>(red_value->data));
+    ASSERT_EQ(std::get<float>(red_value->data), 0.0f);
+}
+
+TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_red_float_1_dot_0_with_activate_callback)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::config::SettingMaster* setting_master = universe->get_setting_master();
+
+    float red = 1.0f;
+    yli::config::SettingStruct red_setting_struct(std::make_shared<yli::data::AnyValue>(red));
+    red_setting_struct.name = "red";
+    red_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+    red_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    ASSERT_EQ(setting_master->get("red"), nullptr);
+    setting_master->create_setting(red_setting_struct);
+
+    ASSERT_NE(setting_master->get("red"), nullptr);
+    yli::config::Setting* red_setting = setting_master->get("red");
+    ASSERT_NE(red_setting, nullptr);
+
+    std::shared_ptr<yli::data::AnyValue> red_value = red_setting->get();
+    ASSERT_NE(red_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<float>(red_value->data));
+    ASSERT_EQ(std::get<float>(red_value->data), 1.0f);
+}
+
+TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_red_float_0_dot_875_with_activate_callback)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::config::SettingMaster* setting_master = universe->get_setting_master();
+
+    float red = 0.875f;
+    yli::config::SettingStruct red_setting_struct(std::make_shared<yli::data::AnyValue>(red));
+    red_setting_struct.name = "red";
+    red_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+    red_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    ASSERT_EQ(setting_master->get("red"), nullptr);
+    setting_master->create_setting(red_setting_struct);
+
+    ASSERT_NE(setting_master->get("red"), nullptr);
+    yli::config::Setting* red_setting = setting_master->get("red");
+    ASSERT_NE(red_setting, nullptr);
+
+    std::shared_ptr<yli::data::AnyValue> red_value = red_setting->get();
+    ASSERT_NE(red_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<float>(red_value->data));
+    ASSERT_EQ(std::get<float>(red_value->data), 0.875f);
+}
+
+TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_green_float_0_dot_0_with_activate_callback)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::config::SettingMaster* setting_master = universe->get_setting_master();
+
+    float green = 0.0f;
+    yli::config::SettingStruct green_setting_struct(std::make_shared<yli::data::AnyValue>(green));
+    green_setting_struct.name = "green";
+    green_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+    green_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    ASSERT_EQ(setting_master->get("green"), nullptr);
+    setting_master->create_setting(green_setting_struct);
+
+    ASSERT_NE(setting_master->get("green"), nullptr);
+    yli::config::Setting* green_setting = setting_master->get("green");
+    ASSERT_NE(green_setting, nullptr);
+
+    std::shared_ptr<yli::data::AnyValue> green_value = green_setting->get();
+    ASSERT_NE(green_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<float>(green_value->data));
+    ASSERT_EQ(std::get<float>(green_value->data), 0.0f);
+}
+
+TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_green_float_1_dot_0_with_activate_callback)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::config::SettingMaster* setting_master = universe->get_setting_master();
+
+    float green = 1.0f;
+    yli::config::SettingStruct green_setting_struct(std::make_shared<yli::data::AnyValue>(green));
+    green_setting_struct.name = "green";
+    green_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+    green_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    ASSERT_EQ(setting_master->get("green"), nullptr);
+    setting_master->create_setting(green_setting_struct);
+
+    ASSERT_NE(setting_master->get("green"), nullptr);
+    yli::config::Setting* green_setting = setting_master->get("green");
+    ASSERT_NE(green_setting, nullptr);
+
+    std::shared_ptr<yli::data::AnyValue> green_value = green_setting->get();
+    ASSERT_NE(green_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<float>(green_value->data));
+    ASSERT_EQ(std::get<float>(green_value->data), 1.0f);
+}
+
+TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_green_float_0_dot_875_with_activate_callback)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::config::SettingMaster* setting_master = universe->get_setting_master();
+
+    float green = 0.875f;
+    yli::config::SettingStruct green_setting_struct(std::make_shared<yli::data::AnyValue>(green));
+    green_setting_struct.name = "green";
+    green_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+    green_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    ASSERT_EQ(setting_master->get("green"), nullptr);
+    setting_master->create_setting(green_setting_struct);
+
+    ASSERT_NE(setting_master->get("green"), nullptr);
+    yli::config::Setting* green_setting = setting_master->get("green");
+    ASSERT_NE(green_setting, nullptr);
+
+    std::shared_ptr<yli::data::AnyValue> green_value = green_setting->get();
+    ASSERT_NE(green_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<float>(green_value->data));
+    ASSERT_EQ(std::get<float>(green_value->data), 0.875f);
+}
+
+TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_blue_float_0_dot_0_with_activate_callback)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::config::SettingMaster* setting_master = universe->get_setting_master();
+
+    float blue = 0.0f;
+    yli::config::SettingStruct blue_setting_struct(std::make_shared<yli::data::AnyValue>(blue));
+    blue_setting_struct.name = "blue";
+    blue_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+    blue_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    ASSERT_EQ(setting_master->get("blue"), nullptr);
+    setting_master->create_setting(blue_setting_struct);
+
+    ASSERT_NE(setting_master->get("blue"), nullptr);
+    yli::config::Setting* blue_setting = setting_master->get("blue");
+    ASSERT_NE(blue_setting, nullptr);
+
+    std::shared_ptr<yli::data::AnyValue> blue_value = blue_setting->get();
+    ASSERT_NE(blue_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<float>(blue_value->data));
+    ASSERT_EQ(std::get<float>(blue_value->data), 0.0f);
+}
+
+TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_blue_float_1_dot_0_with_activate_callback)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::config::SettingMaster* setting_master = universe->get_setting_master();
+
+    float blue = 1.0f;
+    yli::config::SettingStruct blue_setting_struct(std::make_shared<yli::data::AnyValue>(blue));
+    blue_setting_struct.name = "blue";
+    blue_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+    blue_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    ASSERT_EQ(setting_master->get("blue"), nullptr);
+    setting_master->create_setting(blue_setting_struct);
+
+    ASSERT_NE(setting_master->get("blue"), nullptr);
+    yli::config::Setting* blue_setting = setting_master->get("blue");
+    ASSERT_NE(blue_setting, nullptr);
+
+    std::shared_ptr<yli::data::AnyValue> blue_value = blue_setting->get();
+    ASSERT_NE(blue_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<float>(blue_value->data));
+    ASSERT_EQ(std::get<float>(blue_value->data), 1.0f);
+}
+
+TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_blue_float_0_dot_875_with_activate_callback)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::config::SettingMaster* setting_master = universe->get_setting_master();
+
+    float blue = 0.875f;
+    yli::config::SettingStruct blue_setting_struct(std::make_shared<yli::data::AnyValue>(blue));
+    blue_setting_struct.name = "blue";
+    blue_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+    blue_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    ASSERT_EQ(setting_master->get("blue"), nullptr);
+    setting_master->create_setting(blue_setting_struct);
+
+    ASSERT_NE(setting_master->get("blue"), nullptr);
+    yli::config::Setting* blue_setting = setting_master->get("blue");
+    ASSERT_NE(blue_setting, nullptr);
+
+    std::shared_ptr<yli::data::AnyValue> blue_value = blue_setting->get();
+    ASSERT_NE(blue_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<float>(blue_value->data));
+    ASSERT_EQ(std::get<float>(blue_value->data), 0.875f);
 }
 
 TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setting_originally_bool_true_new_value_true_no_activate_callback_no_read_callback)

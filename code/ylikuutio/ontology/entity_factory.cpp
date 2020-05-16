@@ -31,7 +31,7 @@
 #include "text3D.hpp"
 #include "font2D.hpp"
 #include "console.hpp"
-#include "console_command.hpp"
+#include "lisp_function.hpp"
 #include "shapeshifter_sequence.hpp"
 #include "camera.hpp"
 #include "compute_task.hpp"
@@ -49,7 +49,7 @@
 #include "vector_font_struct.hpp"
 #include "text3D_struct.hpp"
 #include "font_struct.hpp"
-#include "console_command_struct.hpp"
+#include "lisp_function_struct.hpp"
 #include "camera_struct.hpp"
 #include "compute_task_struct.hpp"
 #include "brain_struct.hpp"
@@ -157,12 +157,12 @@ namespace yli::ontology
         return new yli::ontology::Console(this->universe, (this->universe == nullptr ? nullptr : &this->universe->parent_of_consoles));
     }
 
-    yli::ontology::Entity* EntityFactory::create_console_command(const yli::ontology::ConsoleCommandStruct& console_command_struct) const
+    yli::ontology::Entity* EntityFactory::create_lisp_function(const yli::ontology::LispFunctionStruct& lisp_function_struct) const
     {
-        return new yli::ontology::ConsoleCommand(
+        return new yli::ontology::LispFunction(
                 this->universe,
-                console_command_struct,
-                (console_command_struct.parent == nullptr ? nullptr : &console_command_struct.parent->parent_of_console_commands));
+                lisp_function_struct,
+                (lisp_function_struct.parent == nullptr ? nullptr : &lisp_function_struct.parent->parent_of_lisp_functions));
     }
 
     yli::ontology::Entity* EntityFactory::create_camera(const yli::ontology::CameraStruct& camera_struct) const

@@ -15,12 +15,12 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __CONSOLE_COMMAND_OVERLOAD_HPP_INCLUDED
-#define __CONSOLE_COMMAND_OVERLOAD_HPP_INCLUDED
+#ifndef __LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
+#define __LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
 
-#include "generic_console_command_overload.hpp"
+#include "generic_lisp_function_overload.hpp"
 #include "console.hpp"
-#include "console_command.hpp"
+#include "lisp_function.hpp"
 #include "code/ylikuutio/lisp/arg_processing_templates.hpp"
 #include "code/ylikuutio/lisp/lisp_templates.hpp"
 
@@ -81,27 +81,27 @@ namespace yli::ontology
     class ParentModule;
 
     template<class... Types>
-        class ConsoleCommandOverload: public yli::ontology::GenericConsoleCommandOverload
+        class LispFunctionOverload: public yli::ontology::GenericLispFunctionOverload
     {
         public:
-            ConsoleCommandOverload(
+            LispFunctionOverload(
                     yli::ontology::Universe* const universe,
                     yli::ontology::ParentModule* const parent_module,
                     std::function<std::shared_ptr<yli::data::AnyValue>(Types... types)> callback)
-                : GenericConsoleCommandOverload(universe, parent_module),
+                : GenericLispFunctionOverload(universe, parent_module),
                 callback(callback)
             {
                 // constructor.
 
                 // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::ConsoleCommandOverload*";
+                this->type_string = "yli::ontology::LispFunctionOverload*";
             }
 
-            ConsoleCommandOverload(const ConsoleCommandOverload&) = delete;            // Delete copy constructor.
-            ConsoleCommandOverload &operator=(const ConsoleCommandOverload&) = delete; // Delete copy assignment.
+            LispFunctionOverload(const LispFunctionOverload&) = delete;            // Delete copy constructor.
+            LispFunctionOverload &operator=(const LispFunctionOverload&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~ConsoleCommandOverload()
+            virtual ~LispFunctionOverload()
             {
                 // destructor.
             }
@@ -112,25 +112,25 @@ namespace yli::ontology
 
                 if (universe == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `universe` is `nullptr`!\n";
+                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `universe` is `nullptr`!\n";
                     return std::pair(false, nullptr);
                 }
 
-                yli::ontology::Entity* const console_command_entity = this->child_of_console_command.get_parent();
+                yli::ontology::Entity* const lisp_function_entity = this->child_of_lisp_function.get_parent();
 
-                yli::ontology::ConsoleCommand* const console_command = dynamic_cast<yli::ontology::ConsoleCommand*>(console_command_entity);
+                yli::ontology::LispFunction* const lisp_function = dynamic_cast<yli::ontology::LispFunction*>(lisp_function_entity);
 
-                if (console_command == nullptr)
+                if (lisp_function == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console_command` is `nullptr`!\n";
+                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `lisp_function` is `nullptr`!\n";
                     return std::pair(false, nullptr);
                 }
 
-                yli::ontology::Entity* const console_entity = console_command->get_parent();
+                yli::ontology::Entity* const console_entity = lisp_function->get_parent();
 
                 if (console_entity == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console_entity` is `nullptr`!\n";
+                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `console_entity` is `nullptr`!\n";
                     return std::pair(false, nullptr);
                 }
 
@@ -138,7 +138,7 @@ namespace yli::ontology
 
                 if (console == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console` is `nullptr`!\n";
+                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `console` is `nullptr`!\n";
                     return std::pair(false, nullptr);
                 }
 
@@ -153,30 +153,6 @@ namespace yli::ontology
                     return std::pair(true, std::apply(this->callback, arg_tuple));
                 }
 
-                // std::tuple<bool, std::shared_ptr<yli::data::AnyValue>, std::tuple<Types...>> this->start_process_args(parameter_vector);
-
-                /*
-                bool success1 = true;
-                bool success2 = true;
-                bool success3 = true;
-                bool success4 = true;
-
-                std::size_t parameter_i = 0;
-
-                yli::ontology::Entity* context = universe; // `Universe` is the default context.
-                T1 value1 = yli::data::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, success1);
-                T2 value2 = yli::data::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, success2);
-                T3 value3 = yli::data::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, success3);
-                T4 value4 = yli::data::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, success3);
-
-                if (success1 && success2 && success3 && success4 && parameter_i == parameter_vector.size())
-                {
-                    // Call the callback function if binding was successful.
-                    std::tuple parameter_tuple = std::make_tuple(value1, value2, value3, value4);
-                    return std::pair(true, std::apply(this->callback, parameter_tuple));
-                }
-                */
-
                 return std::pair(false, nullptr);
             }
 
@@ -190,14 +166,14 @@ namespace yli::ontology
                     return false;
                 }
 
-                yli::ontology::ConsoleCommand* const console_command = static_cast<yli::ontology::ConsoleCommand*>(this->get_parent());
+                yli::ontology::LispFunction* const lisp_function = static_cast<yli::ontology::LispFunction*>(this->get_parent());
 
-                if (console_command == nullptr)
+                if (lisp_function == nullptr)
                 {
                     return false;
                 }
 
-                yli::ontology::Console* const console = static_cast<yli::ontology::Console*>(console_command->get_parent());
+                yli::ontology::Console* const console = static_cast<yli::ontology::Console*>(lisp_function->get_parent());
 
                 if (console == nullptr)
                 {

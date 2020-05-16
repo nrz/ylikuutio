@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/load/obj_loader.cpp"
+#include "code/ylikuutio/load/obj_loader.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

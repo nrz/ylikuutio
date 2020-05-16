@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "generic_console_command_overload.hpp"
+#include "generic_lisp_function_overload.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
@@ -26,23 +26,23 @@ namespace yli::ontology
 {
     class Entity;
 
-    GenericConsoleCommandOverload::~GenericConsoleCommandOverload()
+    GenericLispFunctionOverload::~GenericLispFunctionOverload()
     {
         // destructor.
     }
 
-    yli::ontology::Entity* GenericConsoleCommandOverload::get_parent() const
+    yli::ontology::Entity* GenericLispFunctionOverload::get_parent() const
     {
-        return this->child_of_console_command.get_parent();
+        return this->child_of_lisp_function.get_parent();
     }
 
-    std::size_t GenericConsoleCommandOverload::get_number_of_children() const
+    std::size_t GenericLispFunctionOverload::get_number_of_children() const
     {
-        return 0; // `GenericConsoleCommandOverload` has no children.
+        return 0; // `GenericLispFunctionOverload` has no children.
     }
 
-    std::size_t GenericConsoleCommandOverload::get_number_of_descendants() const
+    std::size_t GenericLispFunctionOverload::get_number_of_descendants() const
     {
-        return 0; // `GenericConsoleCommandOverload` has no children.
+        return 0; // `GenericLispFunctionOverload` has no children.
     }
 }

@@ -17,7 +17,7 @@
 
 #include "console.hpp"
 #include "universe.hpp"
-#include "console_command.hpp"
+#include "lisp_function.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
@@ -614,16 +614,16 @@ namespace yli::ontology
 
             if (universe != nullptr)
             {
-                yli::ontology::Entity* const console_command_entity = universe->get_entity(command);
+                yli::ontology::Entity* const lisp_function_entity = universe->get_entity(command);
 
-                if (console_command_entity != nullptr && console_command_entity->get_parent() == console)
+                if (lisp_function_entity != nullptr && lisp_function_entity->get_parent() == console)
                 {
-                    yli::ontology::ConsoleCommand* const console_command =
-                        dynamic_cast<yli::ontology::ConsoleCommand*>(console_command_entity);
+                    yli::ontology::LispFunction* const lisp_function =
+                        dynamic_cast<yli::ontology::LispFunction*>(lisp_function_entity);
 
-                    if (console_command != nullptr)
+                    if (lisp_function != nullptr)
                     {
-                        any_value = console_command->execute(parameter_vector);
+                        any_value = lisp_function->execute(parameter_vector);
                     }
                 }
             }
