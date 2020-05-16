@@ -25,9 +25,15 @@ endif()
 
 find_package(Threads REQUIRED)
 
-if (NOT(COMPILE_SDL_FROM_SOURCE))
+if(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    # crosscompiling from Linux to Windows must compile SDL from source.
+    # dynamic linking of SDL when crosscompiling from Linux to Windows is not supported.
+    set(COMPILE_SDL_FROM_SOURCE true)
+endif()
+
+# When doing a regular build in Linux, SDL can be linked either statically or dynamically.
+if(NOT(COMPILE_SDL_FROM_SOURCE))
     set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
-    set(CMAKE_EXE_LINKER_FLAGS "-static -static-libgcc -static-libstdc++")
     find_package(SDL2 REQUIRED)
 endif()
 
