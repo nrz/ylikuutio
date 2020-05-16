@@ -65,8 +65,7 @@ namespace yli::ontology
         // If there is no `GenericConsoleCommandOverload`s,
         // then `nullptr` is returned as well.
 
-        // for (std::vector<yli::ontology::Entity>::const_iterator it = this->parent_of_generic_console_command_overloads.child_pointer_vector.begin();
-        for (auto it = this->parent_of_generic_console_command_overloads.child_pointer_vector.begin();
+        for (std::vector<yli::ontology::Entity*>::const_iterator it = this->parent_of_generic_console_command_overloads.child_pointer_vector.begin();
                 it != this->parent_of_generic_console_command_overloads.child_pointer_vector.end();
                 it++)
         {
