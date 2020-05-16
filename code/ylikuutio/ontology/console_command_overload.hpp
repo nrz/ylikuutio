@@ -153,30 +153,6 @@ namespace yli::ontology
                     return std::pair(true, std::apply(this->callback, arg_tuple));
                 }
 
-                // std::tuple<bool, std::shared_ptr<yli::data::AnyValue>, std::tuple<Types...>> this->start_process_args(parameter_vector);
-
-                /*
-                bool success1 = true;
-                bool success2 = true;
-                bool success3 = true;
-                bool success4 = true;
-
-                std::size_t parameter_i = 0;
-
-                yli::ontology::Entity* context = universe; // `Universe` is the default context.
-                T1 value1 = yli::data::convert_string_to_value_and_advance_index<T1>(universe, console, context, parameter_vector, parameter_i, success1);
-                T2 value2 = yli::data::convert_string_to_value_and_advance_index<T2>(universe, console, context, parameter_vector, parameter_i, success2);
-                T3 value3 = yli::data::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, success3);
-                T4 value4 = yli::data::convert_string_to_value_and_advance_index<T3>(universe, console, context, parameter_vector, parameter_i, success3);
-
-                if (success1 && success2 && success3 && success4 && parameter_i == parameter_vector.size())
-                {
-                    // Call the callback function if binding was successful.
-                    std::tuple parameter_tuple = std::make_tuple(value1, value2, value3, value4);
-                    return std::pair(true, std::apply(this->callback, parameter_tuple));
-                }
-                */
-
                 return std::pair(false, nullptr);
             }
 
