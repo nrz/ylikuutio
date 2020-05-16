@@ -29,6 +29,10 @@ Planned implementation details:
   a non-template class.
 * `yli::ontology::GenericLispFunctionOverload` inherits
   `yli::ontology::Entity`.
+* Lambda expressions are `yli::ontology::Lambda`,
+  which inherits `yli::ontology::Entity`.
+* S-expressions are `yli::ontology::Sexp`,
+  which inherits `yli::ontology::Entity`.
 * Each `yli::ontology::Console` may register
   YliLisp functions into its local context,
   similarly to AngelScript.
