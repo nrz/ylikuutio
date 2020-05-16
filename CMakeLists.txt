@@ -1062,10 +1062,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     add_library(code_to_test ${FILES_TO_TEST})
     add_dependencies(code_to_test ylikuutio ${ALL_LIBS} pthread)
 
-    add_executable(do_tests_googletest ${MAIN_FILE})
-    add_dependencies(do_tests_googletest ylikuutio ${ALL_LIBS} pthread)
-    target_link_libraries(do_tests_googletest code_to_test)
-
     add_executable(unit_tests_with_googletest code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
     target_link_libraries(unit_tests_with_googletest gtest libgtest rt SDL2 GLEW_200 angelscript stb ylikuutio pthread code_to_test)
 
