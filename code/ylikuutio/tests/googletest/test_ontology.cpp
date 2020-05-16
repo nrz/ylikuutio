@@ -18,6 +18,7 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/angelscript/angelscript_master.cpp"
 #include "code/ylikuutio/angelscript/angelscript_master.hpp"
+#include "code/ylikuutio/ontology/universe.cpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
