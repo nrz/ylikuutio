@@ -412,7 +412,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_unnamed_settin
 
     yli::config::SettingMaster* const setting_master = universe->get_setting_master();
 
-    double double_zero = 0.0d;
+    double double_zero = 0.0;
     yli::config::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_zero));
     setting_master->create_setting(setting_struct);
     ASSERT_FALSE(setting_master->is_setting("foo"));
@@ -428,7 +428,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
 
     yli::config::SettingMaster* const setting_master = universe->get_setting_master();
 
-    double double_zero = 0.0d;
+    double double_zero = 0.0;
     yli::config::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_zero));
     setting_struct.name = "foo";
     setting_master->create_setting(setting_struct);
@@ -442,7 +442,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     std::shared_ptr<yli::data::AnyValue> setting_value = setting->get();
     ASSERT_NE(setting_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<double>(setting_value->data));
-    ASSERT_EQ(std::get<double>(setting_value->data), 0.0d);
+    ASSERT_EQ(std::get<double>(setting_value->data), 0.0);
 }
 
 TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_double_positive_infinity_no_activate_callback_no_read_callback)
@@ -478,7 +478,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
 
     yli::config::SettingMaster* const setting_master = universe->get_setting_master();
 
-    double double_negative_infinity = -1.0d * std::numeric_limits<double>::infinity();
+    double double_negative_infinity = -1.0 * std::numeric_limits<double>::infinity();
     yli::config::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_negative_infinity));
     setting_struct.name = "foo";
     setting_master->create_setting(setting_struct);
@@ -492,7 +492,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     std::shared_ptr<yli::data::AnyValue> setting_value = setting->get();
     ASSERT_NE(setting_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<double>(setting_value->data));
-    ASSERT_EQ(std::get<double>(setting_value->data), -1.0d * std::numeric_limits<double>::infinity());
+    ASSERT_EQ(std::get<double>(setting_value->data), -1.0 * std::numeric_limits<double>::infinity());
 }
 
 TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_double_nan_no_activate_callback_no_read_callback)
@@ -1759,7 +1759,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
 
     yli::config::SettingMaster* const setting_master = universe->get_setting_master();
 
-    double double_zero = 0.0d;
+    double double_zero = 0.0;
     yli::config::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_zero));
     setting_struct.name = "foo";
     setting_master->create_setting(setting_struct);
@@ -1769,7 +1769,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
     std::shared_ptr<yli::data::AnyValue> setting_value = setting->get();
     ASSERT_NE(setting_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<double>(setting_value->data));
-    ASSERT_EQ(std::get<double>(setting_value->data), 0.0d);
+    ASSERT_EQ(std::get<double>(setting_value->data), 0.0);
 }
 
 TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setting_originally_double_0_new_value_0_dot_0_no_activate_callback_no_read_callback)
@@ -1780,7 +1780,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
 
     yli::config::SettingMaster* const setting_master = universe->get_setting_master();
 
-    double double_zero = 0.0d;
+    double double_zero = 0.0;
     yli::config::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_zero));
     setting_struct.name = "foo";
     setting_master->create_setting(setting_struct);
@@ -1790,7 +1790,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
     std::shared_ptr<yli::data::AnyValue> setting_value = setting->get();
     ASSERT_NE(setting_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<double>(setting_value->data));
-    ASSERT_EQ(std::get<double>(setting_value->data), 0.0d);
+    ASSERT_EQ(std::get<double>(setting_value->data), 0.0);
 }
 
 TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setting_originally_double_0_new_value_plus_1_no_activate_callback_no_read_callback)
@@ -1801,7 +1801,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
 
     yli::config::SettingMaster* const setting_master = universe->get_setting_master();
 
-    double double_zero = 0.0d;
+    double double_zero = 0.0;
     yli::config::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_zero));
     setting_struct.name = "foo";
     setting_master->create_setting(setting_struct);
@@ -1811,7 +1811,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
     std::shared_ptr<yli::data::AnyValue> setting_value = setting->get();
     ASSERT_NE(setting_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<double>(setting_value->data));
-    ASSERT_EQ(std::get<double>(setting_value->data), 1.0d);
+    ASSERT_EQ(std::get<double>(setting_value->data), 1.0);
 }
 
 TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setting_originally_double_0_new_value_plus_1_dot_0_no_activate_callback_no_read_callback)
@@ -1822,7 +1822,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
 
     yli::config::SettingMaster* const setting_master = universe->get_setting_master();
 
-    double double_zero = 0.0d;
+    double double_zero = 0.0;
     yli::config::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_zero));
     setting_struct.name = "foo";
     setting_master->create_setting(setting_struct);
@@ -1832,7 +1832,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
     std::shared_ptr<yli::data::AnyValue> setting_value = setting->get();
     ASSERT_NE(setting_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<double>(setting_value->data));
-    ASSERT_EQ(std::get<double>(setting_value->data), 1.0d);
+    ASSERT_EQ(std::get<double>(setting_value->data), 1.0);
 }
 
 TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setting_originally_double_0_new_value_minus_1_no_activate_callback_no_read_callback)
@@ -1843,7 +1843,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
 
     yli::config::SettingMaster* const setting_master = universe->get_setting_master();
 
-    double double_zero = 0.0d;
+    double double_zero = 0.0;
     yli::config::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_zero));
     setting_struct.name = "foo";
     setting_master->create_setting(setting_struct);
@@ -1853,7 +1853,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
     std::shared_ptr<yli::data::AnyValue> setting_value = setting->get();
     ASSERT_NE(setting_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<double>(setting_value->data));
-    ASSERT_EQ(std::get<double>(setting_value->data), -1.0d);
+    ASSERT_EQ(std::get<double>(setting_value->data), -1.0);
 }
 
 TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setting_originally_double_0_new_value_minus_1_dot_0_no_activate_callback_no_read_callback)
@@ -1864,7 +1864,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
 
     yli::config::SettingMaster* const setting_master = universe->get_setting_master();
 
-    double double_zero = 0.0d;
+    double double_zero = 0.0;
     yli::config::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_zero));
     setting_struct.name = "foo";
     setting_master->create_setting(setting_struct);
@@ -1874,7 +1874,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
     std::shared_ptr<yli::data::AnyValue> setting_value = setting->get();
     ASSERT_NE(setting_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<double>(setting_value->data));
-    ASSERT_EQ(std::get<double>(setting_value->data), -1.0d);
+    ASSERT_EQ(std::get<double>(setting_value->data), -1.0);
 }
 
 TEST(setting_value_must_not_be_modified_for_invalid_value, headless_universe_named_setting_originally_double_0_new_value_foo_no_activate_callback_no_read_callback)
@@ -1885,7 +1885,7 @@ TEST(setting_value_must_not_be_modified_for_invalid_value, headless_universe_nam
 
     yli::config::SettingMaster* const setting_master = universe->get_setting_master();
 
-    double double_zero = 0.0d;
+    double double_zero = 0.0;
     yli::config::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_zero));
     setting_struct.name = "foo";
     setting_master->create_setting(setting_struct);
@@ -1895,7 +1895,7 @@ TEST(setting_value_must_not_be_modified_for_invalid_value, headless_universe_nam
     std::shared_ptr<yli::data::AnyValue> setting_value = setting->get();
     ASSERT_NE(setting_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<double>(setting_value->data));
-    ASSERT_EQ(std::get<double>(setting_value->data), 0.0d);
+    ASSERT_EQ(std::get<double>(setting_value->data), 0.0);
 }
 
 TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setting_originally_double_plus_1_new_value_0_no_activate_callback_no_read_callback)
@@ -1906,7 +1906,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
 
     yli::config::SettingMaster* const setting_master = universe->get_setting_master();
 
-    double double_plus_1 = 1.0d;
+    double double_plus_1 = 1.0;
     yli::config::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_plus_1));
     setting_struct.name = "foo";
     setting_master->create_setting(setting_struct);
@@ -1916,7 +1916,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
     std::shared_ptr<yli::data::AnyValue> setting_value = setting->get();
     ASSERT_NE(setting_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<double>(setting_value->data));
-    ASSERT_EQ(std::get<double>(setting_value->data), 0.0d);
+    ASSERT_EQ(std::get<double>(setting_value->data), 0.0);
 }
 
 TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setting_originally_double_plus_1_new_value_0_dot_0_no_activate_callback_no_read_callback)
@@ -1927,7 +1927,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
 
     yli::config::SettingMaster* const setting_master = universe->get_setting_master();
 
-    double double_plus_1 = 1.0d;
+    double double_plus_1 = 1.0;
     yli::config::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_plus_1));
     setting_struct.name = "foo";
     setting_master->create_setting(setting_struct);
@@ -1937,7 +1937,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
     std::shared_ptr<yli::data::AnyValue> setting_value = setting->get();
     ASSERT_NE(setting_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<double>(setting_value->data));
-    ASSERT_EQ(std::get<double>(setting_value->data), 0.0d);
+    ASSERT_EQ(std::get<double>(setting_value->data), 0.0);
 }
 
 TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setting_originally_double_plus_1_new_value_plus_1_no_activate_callback_no_read_callback)
@@ -1948,7 +1948,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
 
     yli::config::SettingMaster* const setting_master = universe->get_setting_master();
 
-    double double_plus_1 = 1.0d;
+    double double_plus_1 = 1.0;
     yli::config::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_plus_1));
     setting_struct.name = "foo";
     setting_master->create_setting(setting_struct);
@@ -1958,7 +1958,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
     std::shared_ptr<yli::data::AnyValue> setting_value = setting->get();
     ASSERT_NE(setting_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<double>(setting_value->data));
-    ASSERT_EQ(std::get<double>(setting_value->data), 1.0d);
+    ASSERT_EQ(std::get<double>(setting_value->data), 1.0);
 }
 
 TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setting_originally_double_plus_1_new_value_plus_1_dot_0_no_activate_callback_no_read_callback)
@@ -1969,7 +1969,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
 
     yli::config::SettingMaster* const setting_master = universe->get_setting_master();
 
-    double double_plus_1 = 1.0d;
+    double double_plus_1 = 1.0;
     yli::config::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_plus_1));
     setting_struct.name = "foo";
     setting_master->create_setting(setting_struct);
@@ -1979,7 +1979,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
     std::shared_ptr<yli::data::AnyValue> setting_value = setting->get();
     ASSERT_NE(setting_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<double>(setting_value->data));
-    ASSERT_EQ(std::get<double>(setting_value->data), 1.0d);
+    ASSERT_EQ(std::get<double>(setting_value->data), 1.0);
 }
 
 TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setting_originally_double_plus_1_new_value_minus_1_no_activate_callback_no_read_callback)
@@ -1990,7 +1990,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
 
     yli::config::SettingMaster* const setting_master = universe->get_setting_master();
 
-    double double_plus_1 = 1.0d;
+    double double_plus_1 = 1.0;
     yli::config::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_plus_1));
     setting_struct.name = "foo";
     setting_master->create_setting(setting_struct);
@@ -2000,7 +2000,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
     std::shared_ptr<yli::data::AnyValue> setting_value = setting->get();
     ASSERT_NE(setting_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<double>(setting_value->data));
-    ASSERT_EQ(std::get<double>(setting_value->data), -1.0d);
+    ASSERT_EQ(std::get<double>(setting_value->data), -1.0);
 }
 
 TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setting_originally_double_plus_1_new_value_minus_1_dot_0_no_activate_callback_no_read_callback)
@@ -2011,7 +2011,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
 
     yli::config::SettingMaster* const setting_master = universe->get_setting_master();
 
-    double double_plus_1 = 1.0d;
+    double double_plus_1 = 1.0;
     yli::config::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_plus_1));
     setting_struct.name = "foo";
     setting_master->create_setting(setting_struct);
@@ -2021,7 +2021,7 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setti
     std::shared_ptr<yli::data::AnyValue> setting_value = setting->get();
     ASSERT_NE(setting_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<double>(setting_value->data));
-    ASSERT_EQ(std::get<double>(setting_value->data), -1.0d);
+    ASSERT_EQ(std::get<double>(setting_value->data), -1.0);
 }
 
 TEST(setting_value_must_not_be_modified_for_invalid_value, headless_universe_named_setting_originally_double_plus_1_new_value_foo_no_activate_callback_no_read_callback)
@@ -2032,7 +2032,7 @@ TEST(setting_value_must_not_be_modified_for_invalid_value, headless_universe_nam
 
     yli::config::SettingMaster* const setting_master = universe->get_setting_master();
 
-    double double_plus_1 = 1.0d;
+    double double_plus_1 = 1.0;
     yli::config::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_plus_1));
     setting_struct.name = "foo";
     setting_master->create_setting(setting_struct);
@@ -2042,7 +2042,7 @@ TEST(setting_value_must_not_be_modified_for_invalid_value, headless_universe_nam
     std::shared_ptr<yli::data::AnyValue> setting_value = setting->get();
     ASSERT_NE(setting_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<double>(setting_value->data));
-    ASSERT_EQ(std::get<double>(setting_value->data), 1.0d);
+    ASSERT_EQ(std::get<double>(setting_value->data), 1.0);
 }
 
 TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setting_originally_int32_t_0_new_value_0_no_activate_callback_no_read_callback)
