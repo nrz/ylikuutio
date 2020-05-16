@@ -22,7 +22,7 @@
 #include "console.hpp"
 #include "console_command.hpp"
 #include "lisp_function_overload.hpp"
-#include "generic_console_command_overload.hpp"
+#include "generic_lisp_function_overload.hpp"
 #include "entity_factory.hpp"
 #include "console_command_struct.hpp"
 
@@ -43,7 +43,7 @@ namespace yli::ontology
     class ParentModule;
 
     template<class... Args>
-        yli::ontology::GenericConsoleCommandOverload* create_console_command_overload(
+        yli::ontology::GenericLispFunctionOverload* create_console_command_overload(
                 const std::string& name,
                 yli::ontology::Console* const console,
                 std::function<std::shared_ptr<yli::data::AnyValue>(Args...)> callback)
@@ -100,12 +100,12 @@ namespace yli::ontology
                 }
             }
 
-            yli::ontology::GenericConsoleCommandOverload* const generic_console_command_overload = new yli::ontology::LispFunctionOverload<Args...>(
+            yli::ontology::GenericLispFunctionOverload* const generic_lisp_function_overload = new yli::ontology::LispFunctionOverload<Args...>(
                     universe,
-                    &console_command->parent_of_generic_console_command_overloads,
+                    &console_command->parent_of_generic_lisp_function_overloads,
                     callback);
-            generic_console_command_overload->set_name(name);
-            return generic_console_command_overload;
+            generic_lisp_function_overload->set_name(name);
+            return generic_lisp_function_overload;
         }
 }
 

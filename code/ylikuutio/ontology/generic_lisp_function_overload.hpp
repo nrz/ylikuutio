@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __GENERIC_CONSOLE_COMMAND_OVERLOAD_HPP_INCLUDED
-#define __GENERIC_CONSOLE_COMMAND_OVERLOAD_HPP_INCLUDED
+#ifndef __GENERIC_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
+#define __GENERIC_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "child_module.hpp"
@@ -40,10 +40,10 @@ namespace yli::ontology
     class ParentModule;
     class Console;
 
-    class GenericConsoleCommandOverload: public yli::ontology::Entity
+    class GenericLispFunctionOverload: public yli::ontology::Entity
     {
         public:
-            GenericConsoleCommandOverload(
+            GenericLispFunctionOverload(
                     yli::ontology::Universe* const universe,
                     yli::ontology::ParentModule* const parent_module)
                 : Entity(universe),
@@ -52,14 +52,14 @@ namespace yli::ontology
                 // constructor.
 
                 // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::GenericConsoleCommandOverload*";
+                this->type_string = "yli::ontology::GenericLispFunctionOverload*";
             }
 
-            GenericConsoleCommandOverload(const GenericConsoleCommandOverload&) = delete;            // Delete copy constructor.
-            GenericConsoleCommandOverload &operator=(const GenericConsoleCommandOverload&) = delete; // Delete copy assignment.
+            GenericLispFunctionOverload(const GenericLispFunctionOverload&) = delete;            // Delete copy constructor.
+            GenericLispFunctionOverload &operator=(const GenericLispFunctionOverload&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~GenericConsoleCommandOverload();
+            virtual ~GenericLispFunctionOverload();
 
             yli::ontology::Entity* get_parent() const override;
             std::size_t get_number_of_children() const override;

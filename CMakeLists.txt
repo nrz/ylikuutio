@@ -551,8 +551,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/console_command.cpp
     code/ylikuutio/ontology/console_command.hpp
     code/ylikuutio/ontology/console_command_struct.hpp
-    code/ylikuutio/ontology/generic_console_command_overload.cpp
-    code/ylikuutio/ontology/generic_console_command_overload.hpp
+    code/ylikuutio/ontology/generic_lisp_function_overload.cpp
+    code/ylikuutio/ontology/generic_lisp_function_overload.hpp
     code/ylikuutio/ontology/get_content_callback.hpp
     code/ylikuutio/ontology/gl_attrib_locations.cpp
     code/ylikuutio/ontology/gl_attrib_locations.hpp

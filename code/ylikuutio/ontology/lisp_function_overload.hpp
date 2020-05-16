@@ -18,7 +18,7 @@
 #ifndef __LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
 #define __LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
 
-#include "generic_console_command_overload.hpp"
+#include "generic_lisp_function_overload.hpp"
 #include "console.hpp"
 #include "console_command.hpp"
 #include "code/ylikuutio/lisp/arg_processing_templates.hpp"
@@ -81,14 +81,14 @@ namespace yli::ontology
     class ParentModule;
 
     template<class... Types>
-        class LispFunctionOverload: public yli::ontology::GenericConsoleCommandOverload
+        class LispFunctionOverload: public yli::ontology::GenericLispFunctionOverload
     {
         public:
             LispFunctionOverload(
                     yli::ontology::Universe* const universe,
                     yli::ontology::ParentModule* const parent_module,
                     std::function<std::shared_ptr<yli::data::AnyValue>(Types... types)> callback)
-                : GenericConsoleCommandOverload(universe, parent_module),
+                : GenericLispFunctionOverload(universe, parent_module),
                 callback(callback)
             {
                 // constructor.

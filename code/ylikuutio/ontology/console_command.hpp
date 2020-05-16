@@ -49,7 +49,7 @@ namespace yli::ontology
                     yli::ontology::ParentModule* const parent_module)
                 : Entity(universe),
                 child_of_console(parent_module, this),
-                parent_of_generic_console_command_overloads(this)
+                parent_of_generic_lisp_function_overloads(this)
             {
                 // constructor.
 
@@ -70,7 +70,7 @@ namespace yli::ontology
             std::shared_ptr<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector);
 
             yli::ontology::ChildModule child_of_console;
-            yli::ontology::ParentModule parent_of_generic_console_command_overloads;
+            yli::ontology::ParentModule parent_of_generic_lisp_function_overloads;
     };
 }
 
