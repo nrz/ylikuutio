@@ -31,10 +31,6 @@ if (NOT(COMPILE_SDL_FROM_SOURCE))
     find_package(SDL2 REQUIRED)
 endif()
 
-if (NOT(COMPILE_SDL_FROM_SOURCE))
-    set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
-endif()
-
 # Compile external dependencies
 add_subdirectory (external)
 
