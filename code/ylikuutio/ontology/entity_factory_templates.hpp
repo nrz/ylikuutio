@@ -21,7 +21,7 @@
 #include "universe.hpp"
 #include "console.hpp"
 #include "console_command.hpp"
-#include "console_command_overload.hpp"
+#include "lisp_function_overload.hpp"
 #include "generic_console_command_overload.hpp"
 #include "entity_factory.hpp"
 #include "console_command_struct.hpp"
@@ -100,7 +100,7 @@ namespace yli::ontology
                 }
             }
 
-            yli::ontology::GenericConsoleCommandOverload* const generic_console_command_overload = new yli::ontology::ConsoleCommandOverload<Args...>(
+            yli::ontology::GenericConsoleCommandOverload* const generic_console_command_overload = new yli::ontology::LispFunctionOverload<Args...>(
                     universe,
                     &console_command->parent_of_generic_console_command_overloads,
                     callback);

@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __CONSOLE_COMMAND_OVERLOAD_HPP_INCLUDED
-#define __CONSOLE_COMMAND_OVERLOAD_HPP_INCLUDED
+#ifndef __LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
+#define __LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
 
 #include "generic_console_command_overload.hpp"
 #include "console.hpp"
@@ -81,10 +81,10 @@ namespace yli::ontology
     class ParentModule;
 
     template<class... Types>
-        class ConsoleCommandOverload: public yli::ontology::GenericConsoleCommandOverload
+        class LispFunctionOverload: public yli::ontology::GenericConsoleCommandOverload
     {
         public:
-            ConsoleCommandOverload(
+            LispFunctionOverload(
                     yli::ontology::Universe* const universe,
                     yli::ontology::ParentModule* const parent_module,
                     std::function<std::shared_ptr<yli::data::AnyValue>(Types... types)> callback)
@@ -94,14 +94,14 @@ namespace yli::ontology
                 // constructor.
 
                 // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::ConsoleCommandOverload*";
+                this->type_string = "yli::ontology::LispFunctionOverload*";
             }
 
-            ConsoleCommandOverload(const ConsoleCommandOverload&) = delete;            // Delete copy constructor.
-            ConsoleCommandOverload &operator=(const ConsoleCommandOverload&) = delete; // Delete copy assignment.
+            LispFunctionOverload(const LispFunctionOverload&) = delete;            // Delete copy constructor.
+            LispFunctionOverload &operator=(const LispFunctionOverload&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~ConsoleCommandOverload()
+            virtual ~LispFunctionOverload()
             {
                 // destructor.
             }
@@ -112,7 +112,7 @@ namespace yli::ontology
 
                 if (universe == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `universe` is `nullptr`!\n";
+                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `universe` is `nullptr`!\n";
                     return std::pair(false, nullptr);
                 }
 
@@ -122,7 +122,7 @@ namespace yli::ontology
 
                 if (console_command == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console_command` is `nullptr`!\n";
+                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `console_command` is `nullptr`!\n";
                     return std::pair(false, nullptr);
                 }
 
@@ -130,7 +130,7 @@ namespace yli::ontology
 
                 if (console_entity == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console_entity` is `nullptr`!\n";
+                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `console_entity` is `nullptr`!\n";
                     return std::pair(false, nullptr);
                 }
 
@@ -138,7 +138,7 @@ namespace yli::ontology
 
                 if (console == nullptr)
                 {
-                    std::cerr << "ERROR: `ConsoleCommandOverload::execute`: `console` is `nullptr`!\n";
+                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `console` is `nullptr`!\n";
                     return std::pair(false, nullptr);
                 }
 
