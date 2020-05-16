@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/load/ascii_grid_heightmap_loader.hpp"
+#include "code/ylikuutio/load/ascii_grid_heightmap_loader.cpp"
 #include "code/ylikuutio/load/heightmap_loader_struct.hpp"
 
 // Include GLM
