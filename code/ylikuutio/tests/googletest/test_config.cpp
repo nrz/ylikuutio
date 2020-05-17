@@ -23,6 +23,12 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <limits>   // std::numeric_limits
@@ -875,7 +881,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     ASSERT_EQ(std::get<float>(x_value->data), 1234.25f);
 }
 
-TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_y_float_1234_dot_5678_with_activate_callback_and_read_callback)
+TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_y_float_1234_dot_25_with_activate_callback_and_read_callback)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
@@ -883,7 +889,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
 
     yli::config::SettingMaster* setting_master = universe->get_setting_master();
 
-    float y = 1234.5678f;
+    float y = 1234.25f;
     yli::config::SettingStruct y_setting_struct(std::make_shared<yli::data::AnyValue>(y));
     y_setting_struct.name = "y";
     y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_y;
@@ -899,10 +905,10 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     std::shared_ptr<yli::data::AnyValue> y_value = y_setting->get();
     ASSERT_NE(y_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<float>(y_value->data));
-    ASSERT_EQ(std::get<float>(y_value->data), 1234.5678f);
+    ASSERT_EQ(std::get<float>(y_value->data), 1234.25f);
 }
 
-TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_z_float_1234_dot_5678_with_activate_callback_and_read_callback)
+TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_z_float_1234_dot_25_with_activate_callback_and_read_callback)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
@@ -910,7 +916,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
 
     yli::config::SettingMaster* setting_master = universe->get_setting_master();
 
-    float z = 1234.5678f;
+    float z = 1234.25f;
     yli::config::SettingStruct z_setting_struct(std::make_shared<yli::data::AnyValue>(z));
     z_setting_struct.name = "z";
     z_setting_struct.activate_callback = &yli::config::SettingMaster::activate_z;
@@ -926,7 +932,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     std::shared_ptr<yli::data::AnyValue> z_value = z_setting->get();
     ASSERT_NE(z_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<float>(z_value->data));
-    ASSERT_EQ(std::get<float>(z_value->data), 1234.5678f);
+    ASSERT_EQ(std::get<float>(z_value->data), 1234.25f);
 }
 
 TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_red_float_0_dot_0_with_activate_callback)
@@ -1161,6 +1167,152 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     ASSERT_NE(blue_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<float>(blue_value->data));
     ASSERT_EQ(std::get<float>(blue_value->data), 0.875f);
+}
+
+TEST(settings_must_be_initialized_appropriately, headless_universe_setting_universe_cartesian_coordinates_x_y_z_activate_callbacks_and_read_callbacks)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::config::SettingMaster* setting_master = universe->get_setting_master();
+
+    float x = 1234.25f;
+    float y = 2345.50f;
+    float z = 3456.75f;
+
+    yli::config::SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
+    cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
+    cartesian_coordinates_setting_struct.activate_callback = &yli::config::SettingMaster::activate_cartesian_coordinates;
+    cartesian_coordinates_setting_struct.read_callback = &yli::config::SettingMaster::read_cartesian_coordinates;
+    cartesian_coordinates_setting_struct.should_ylikuutio_call_activate_callback_now = false;
+    setting_master->create_setting(cartesian_coordinates_setting_struct);
+
+    yli::config::SettingStruct x_setting_struct(std::make_shared<yli::data::AnyValue>(x));
+    x_setting_struct.name = "x";
+    x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_x;
+    x_setting_struct.read_callback = &yli::config::SettingMaster::read_x;
+    x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    setting_master->create_setting(x_setting_struct);
+
+    yli::config::SettingStruct y_setting_struct(std::make_shared<yli::data::AnyValue>(y));
+    y_setting_struct.name = "y";
+    y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_y;
+    y_setting_struct.read_callback = &yli::config::SettingMaster::read_y;
+    y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    setting_master->create_setting(y_setting_struct);
+
+    yli::config::SettingStruct z_setting_struct(std::make_shared<yli::data::AnyValue>(z));
+    z_setting_struct.name = "z";
+    z_setting_struct.activate_callback = &yli::config::SettingMaster::activate_z;
+    z_setting_struct.read_callback = &yli::config::SettingMaster::read_z;
+    z_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    setting_master->create_setting(z_setting_struct);
+
+    ASSERT_NE(setting_master->get("x"), nullptr);
+    yli::config::Setting* x_setting = setting_master->get("x");
+    ASSERT_NE(x_setting, nullptr);
+    std::shared_ptr<yli::data::AnyValue> x_value = x_setting->get();
+    ASSERT_NE(x_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<float>(x_value->data));
+    ASSERT_EQ(std::get<float>(x_value->data), 1234.25f);
+
+    ASSERT_NE(setting_master->get("y"), nullptr);
+    yli::config::Setting* y_setting = setting_master->get("y");
+    ASSERT_NE(y_setting, nullptr);
+    std::shared_ptr<yli::data::AnyValue> y_value = y_setting->get();
+    ASSERT_NE(y_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<float>(y_value->data));
+    ASSERT_EQ(std::get<float>(y_value->data), 2345.50f);
+
+    ASSERT_NE(setting_master->get("z"), nullptr);
+    yli::config::Setting* z_setting = setting_master->get("z");
+    ASSERT_NE(z_setting, nullptr);
+    std::shared_ptr<yli::data::AnyValue> z_value = z_setting->get();
+    ASSERT_NE(z_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<float>(z_value->data));
+    ASSERT_EQ(std::get<float>(z_value->data), 3456.75f);
+
+    ASSERT_NE(setting_master->get("cartesian_coordinates"), nullptr);
+    yli::config::Setting* cartesian_coordinates_setting = setting_master->get("cartesian_coordinates");
+    ASSERT_NE(cartesian_coordinates_setting, nullptr);
+    std::shared_ptr<yli::data::AnyValue> cartesian_coordinates_value = cartesian_coordinates_setting->get();
+    ASSERT_NE(cartesian_coordinates_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<std::shared_ptr<glm::vec3>>(cartesian_coordinates_value->data));
+    ASSERT_EQ(*(std::get<std::shared_ptr<glm::vec3>>(cartesian_coordinates_value->data)), glm::vec3(1234.25f, 2345.50f, 3456.75f));
+}
+
+TEST(settings_must_be_initialized_appropriately, headless_universe_setting_universe_x_y_z_cartesian_coordinates_activate_callbacks_and_read_callbacks)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::config::SettingMaster* setting_master = universe->get_setting_master();
+
+    float x = 1234.25f;
+    float y = 2345.50f;
+    float z = 3456.75f;
+
+    yli::config::SettingStruct x_setting_struct(std::make_shared<yli::data::AnyValue>(x));
+    x_setting_struct.name = "x";
+    x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_x;
+    x_setting_struct.read_callback = &yli::config::SettingMaster::read_x;
+    x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    setting_master->create_setting(x_setting_struct);
+
+    yli::config::SettingStruct y_setting_struct(std::make_shared<yli::data::AnyValue>(y));
+    y_setting_struct.name = "y";
+    y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_y;
+    y_setting_struct.read_callback = &yli::config::SettingMaster::read_y;
+    y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    setting_master->create_setting(y_setting_struct);
+
+    yli::config::SettingStruct z_setting_struct(std::make_shared<yli::data::AnyValue>(z));
+    z_setting_struct.name = "z";
+    z_setting_struct.activate_callback = &yli::config::SettingMaster::activate_z;
+    z_setting_struct.read_callback = &yli::config::SettingMaster::read_z;
+    z_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    setting_master->create_setting(z_setting_struct);
+
+    yli::config::SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
+    cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
+    cartesian_coordinates_setting_struct.activate_callback = &yli::config::SettingMaster::activate_cartesian_coordinates;
+    cartesian_coordinates_setting_struct.read_callback = &yli::config::SettingMaster::read_cartesian_coordinates;
+    cartesian_coordinates_setting_struct.should_ylikuutio_call_activate_callback_now = false;
+    setting_master->create_setting(cartesian_coordinates_setting_struct);
+
+    ASSERT_NE(setting_master->get("x"), nullptr);
+    yli::config::Setting* x_setting = setting_master->get("x");
+    ASSERT_NE(x_setting, nullptr);
+    std::shared_ptr<yli::data::AnyValue> x_value = x_setting->get();
+    ASSERT_NE(x_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<float>(x_value->data));
+    ASSERT_EQ(std::get<float>(x_value->data), 1234.25f);
+
+    ASSERT_NE(setting_master->get("y"), nullptr);
+    yli::config::Setting* y_setting = setting_master->get("y");
+    ASSERT_NE(y_setting, nullptr);
+    std::shared_ptr<yli::data::AnyValue> y_value = y_setting->get();
+    ASSERT_NE(y_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<float>(y_value->data));
+    ASSERT_EQ(std::get<float>(y_value->data), 2345.50f);
+
+    ASSERT_NE(setting_master->get("z"), nullptr);
+    yli::config::Setting* z_setting = setting_master->get("z");
+    ASSERT_NE(z_setting, nullptr);
+    std::shared_ptr<yli::data::AnyValue> z_value = z_setting->get();
+    ASSERT_NE(z_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<float>(z_value->data));
+    ASSERT_EQ(std::get<float>(z_value->data), 3456.75f);
+
+    ASSERT_NE(setting_master->get("cartesian_coordinates"), nullptr);
+    yli::config::Setting* cartesian_coordinates_setting = setting_master->get("cartesian_coordinates");
+    ASSERT_NE(cartesian_coordinates_setting, nullptr);
+    std::shared_ptr<yli::data::AnyValue> cartesian_coordinates_value = cartesian_coordinates_setting->get();
+    ASSERT_NE(cartesian_coordinates_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<std::shared_ptr<glm::vec3>>(cartesian_coordinates_value->data));
+    ASSERT_EQ(*(std::get<std::shared_ptr<glm::vec3>>(cartesian_coordinates_value->data)), glm::vec3(1234.25f, 2345.50f, 3456.75f));
 }
 
 TEST(setting_value_must_be_modified_appropriately, headless_universe_named_setting_originally_bool_true_new_value_true_no_activate_callback_no_read_callback)

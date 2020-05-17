@@ -6,13 +6,26 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
-[ ] Implement abstract syntax tree (AST) creation code for console commands.
-[ ] Create basic implementation of YliLisp (YliLisp is a Lisp-1 type scripting language).
 [ ] Implement creating new fields of given type in AnyStructEntities using `Console` command `createfield`.
 [ ] Implement creating and setting new fields of given type in AnyStructEntities of a using `Console` command `setfield`.
 [ ] Implement printing fields of AnyStructEntities using `Console` command `print`.
 [ ] Implement creating new named Entities using `Console`, with a named `AnyStructEntity` of correct type as input.
+[ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
+[ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
+
+Tasks which are necessary for the second stage:
+[ ] Implement abstract syntax tree (AST) creation code for YliLisp.
+[ ] Implement continuations for YliLisp by logging the last relevant successful `Setting::set` function call for each `Setting` and setting that again when needed.
+[ ] Implement closures for YliLisp.
+[ ] Evaluate mingw-std-threads: https://github.com/meganz/mingw-std-threads
+[ ] Evaluate winpthreads: https://sourceforge.net/p/mingw-w64/mingw-w64/ci/master/tree/mingw-w64-libraries/winpthreads/ https://en.wikipedia.org/wiki/MinGW#MinGW-w64
+[ ] Evaluate Pthreads-win32, in particular MinGW-w64 support: https://sourceware.org/pthreads-win32/ https://sourceforge.net/p/mingw-w64/wiki2/Compile%20pthreads/
+[ ] Write test code using C++14 threads.
+[ ] Write test code using pthreads.
+[ ] Add support for multithreaded code.
+[ ] Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
 [ ] Implement `yli::ontology::Waypoint` class.
+[ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
 [ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
 [ ] Implement octree segmentation.
 [ ] Implement frustrum culling.
@@ -20,9 +33,10 @@ Tasks which are necessary for the first stage:
 [ ] Implement `yli::ontology::ShapeshifterForm : public Model`.
 [ ] Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.
 [ ] Implement skeletal animation.
-[ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
-[ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
-[ ] Add support for vector fonts.
+[ ] Replace stb with libpng (http://www.libpng.org/pub/png/libpng.html) and libjpeg (http://ijg.org/).
+[ ] Implement creating new named `Setting`s in `SettingMaster` using `Console`.
+[ ] Implement YliEdit editor.
+[ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
 [ ] Add support for changing font size.
 [ ] Implement transparent rendering of 3D objects.
 [ ] Implement transparent rendering of 4D objects.
@@ -31,11 +45,9 @@ Tasks which are necessary for the first stage:
 [ ] Create `audio::Sound` class, whose parent is `Entity`.
 [ ] Create `audio::PlayList` class, whose parent is `Entity`.
 
-Tasks which are necessary for the second stage:
-[ ] Replace stb with libpng (http://www.libpng.org/pub/png/libpng.html) and libjpeg (http://ijg.org/).
-[ ] Implement creating new named `Setting`s in `SettingMaster` using `Console`.
-[ ] Implement YliEdit editor.
-[ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
+Tasks which are necessary for the third stage:
+[ ] Add support for vector fonts.
+[ ] Implement `yli::ontology::Multiverse` class.
 [ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
 [ ] Evaluate ZeroMQ: https://zeromq.org/
 [ ] Evaluate SDL_net: https://www.libsdl.org/projects/SDL_net/
@@ -44,11 +56,6 @@ Tasks which are necessary for the second stage:
 [ ] Evaluate kNet (network library): https://github.com/juj/kNet/ (used by Urho3D: https://urho3d.github.io/ )
 [ ] Implement chat server using the chosen network library.
 [ ] Implement chat client using the chosen network library.
-
-Tasks which are necessary for the third stage:
-[ ] Implement interpreter for strongly typed YliLisp scripting language that combines Scheme syntax and AngelScript data types.
-[ ] Implement compiler for YliLisp that compiles into AngelScript.
-[ ] Implement `yli::ontology::Multiverse` class.
 [ ] Implement YliServer.
 
 Tasks which are necessary for the development of Ylikuutio:
@@ -84,11 +91,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Test code used to convert ASCII grid files (height maps) to binary FBX files by loading the FBX files created with it.
 [ ] Convert ASCII grid files into binary FBX files.
 [ ] Implement vertex selection and modification (with a mouse cursor), using Bullet Physics SDK. https://pybullet.org/
-[ ] Evaluate mingw-std-threads: https://github.com/meganz/mingw-std-threads
-[ ] Evaluate winpthreads: https://sourceforge.net/p/mingw-w64/mingw-w64/ci/master/tree/mingw-w64-libraries/winpthreads/ https://en.wikipedia.org/wiki/MinGW#MinGW-w64
-[ ] Evaluate Pthreads-win32, in particular MinGW-w64 support: https://sourceware.org/pthreads-win32/ https://sourceforge.net/p/mingw-w64/wiki2/Compile%20pthreads/
-[ ] Write test code using C++14 threads.
-[ ] Write test code using pthreads.
 [ ] Implement scene loading which works in the background.
 [ ] Evaluate AppVeyor: https://github.com/marketplace/appveyor
 [ ] Implement `ConsoleCommand` class.
@@ -99,7 +101,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Add support for packed files.
 [ ] Add support for CityGML file format.
 [ ] Add support for 3D model of Vantaa: https://hri.fi/data/en_GB/dataset/vantaan-3d-rakennukset https://hri.fi/data/fi/dataset/vantaan-3d-rakennukset
-[ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
 [ ] Add support for 3D model of Oulu: http://ubicomp.oulu.fi/infrastructure-virtualoulu/ https://github.com/Oulu-UCC/3D_City_fbx
 [ ] Add support for Collada .dae file format.
 [ ] Add support for 3D model of Turku campus and science park area: http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
