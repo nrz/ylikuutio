@@ -875,7 +875,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     ASSERT_EQ(std::get<float>(x_value->data), 1234.25f);
 }
 
-TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_y_float_1234_dot_5678_with_activate_callback_and_read_callback)
+TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_y_float_1234_dot_25_with_activate_callback_and_read_callback)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
@@ -883,7 +883,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
 
     yli::config::SettingMaster* setting_master = universe->get_setting_master();
 
-    float y = 1234.5678f;
+    float y = 1234.25f;
     yli::config::SettingStruct y_setting_struct(std::make_shared<yli::data::AnyValue>(y));
     y_setting_struct.name = "y";
     y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_y;
@@ -899,10 +899,10 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     std::shared_ptr<yli::data::AnyValue> y_value = y_setting->get();
     ASSERT_NE(y_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<float>(y_value->data));
-    ASSERT_EQ(std::get<float>(y_value->data), 1234.5678f);
+    ASSERT_EQ(std::get<float>(y_value->data), 1234.25f);
 }
 
-TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_z_float_1234_dot_5678_with_activate_callback_and_read_callback)
+TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_z_float_1234_dot_25_with_activate_callback_and_read_callback)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
@@ -910,7 +910,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
 
     yli::config::SettingMaster* setting_master = universe->get_setting_master();
 
-    float z = 1234.5678f;
+    float z = 1234.25f;
     yli::config::SettingStruct z_setting_struct(std::make_shared<yli::data::AnyValue>(z));
     z_setting_struct.name = "z";
     z_setting_struct.activate_callback = &yli::config::SettingMaster::activate_z;
@@ -926,7 +926,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     std::shared_ptr<yli::data::AnyValue> z_value = z_setting->get();
     ASSERT_NE(z_value, nullptr);
     ASSERT_TRUE(std::holds_alternative<float>(z_value->data));
-    ASSERT_EQ(std::get<float>(z_value->data), 1234.5678f);
+    ASSERT_EQ(std::get<float>(z_value->data), 1234.25f);
 }
 
 TEST(setting_must_be_initialized_appropriately, headless_universe_setting_universe_red_float_0_dot_0_with_activate_callback)
