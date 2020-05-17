@@ -3,6 +3,10 @@ cmake_minimum_required(VERSION 2.6.2)
 set(CMAKE_CXX_STANDARD 17)
 project(ylikuutio)
 
+#-------------------------------------------------------+
+# the options part intended to be modified begins here. |
+#-------------------------------------------------------+
+
 # http://stackoverflow.com/questions/11783932/how-to-add-linker-or-compile-flag-in-cmake-file/11797272#11797272
 # SET(GCC_COVERAGE_LINK_FLAGS "-ldl")
 # SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
@@ -16,6 +20,10 @@ set(COMPILE_SDL_FROM_SOURCE true)
 
 # uncomment the following line to disable updating of external projects.
 set(DISABLE_UPDATE_STEP true)
+
+#-------------------------------------------------------+
+# the options part intended to be modified ends here.   |
+#-------------------------------------------------------+
 
 if(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android")
     find_library(OpenGL REQUIRED)
