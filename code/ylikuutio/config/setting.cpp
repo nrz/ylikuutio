@@ -92,6 +92,21 @@ namespace yli::config
         return this->read_callback(this->parent->parent, this->parent);
     }
 
+    void Setting::set(std::shared_ptr<yli::data::AnyValue> new_value)
+    {
+        if (this->setting_value == nullptr || this->parent == nullptr || this->parent->parent == nullptr)
+        {
+            return;
+        }
+
+        this->setting_value = new_value;
+
+        if (this->activate_callback != nullptr)
+        {
+            this->activate_callback(this->parent->parent, this->parent);
+        }
+    }
+
     void Setting::set(const std::string& new_value)
     {
         if (this->setting_value == nullptr || this->parent == nullptr || this->parent->parent == nullptr)
