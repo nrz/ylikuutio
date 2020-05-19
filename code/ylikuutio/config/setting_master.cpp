@@ -1237,7 +1237,7 @@ namespace yli::config
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_should_be_rendered(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_should_be_rendered(yli::ontology::Entity* const entity)
     {
         if (entity == nullptr)
         {
@@ -1247,7 +1247,7 @@ namespace yli::config
         return std::make_shared<yli::data::AnyValue>(entity->should_be_rendered);
     }
 
-    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_cartesian_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_cartesian_coordinates(yli::ontology::Entity* const entity)
     {
         if (entity == nullptr)
         {
@@ -1271,7 +1271,7 @@ namespace yli::config
         return std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(universe->current_camera_cartesian_coordinates));
     }
 
-    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_x(yli::ontology::Entity* const entity)
     {
         if (entity == nullptr)
         {
@@ -1295,7 +1295,7 @@ namespace yli::config
         return std::make_shared<yli::data::AnyValue>(universe->current_camera_cartesian_coordinates.x);
     }
 
-    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_y(yli::ontology::Entity* const entity)
     {
         if (entity == nullptr)
         {
@@ -1319,7 +1319,7 @@ namespace yli::config
         return std::make_shared<yli::data::AnyValue>(universe->current_camera_cartesian_coordinates.y);
     }
 
-    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_z(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_z(yli::ontology::Entity* const entity)
     {
         if (entity == nullptr)
         {
@@ -1343,7 +1343,7 @@ namespace yli::config
         return std::make_shared<yli::data::AnyValue>(universe->current_camera_cartesian_coordinates.z);
     }
 
-    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_rho(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_rho(yli::ontology::Entity* const entity)
     {
         if (entity == nullptr)
         {
@@ -1367,7 +1367,7 @@ namespace yli::config
         return std::make_shared<yli::data::AnyValue>(universe->current_camera_spherical_coordinates.rho);
     }
 
-    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_theta(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_theta(yli::ontology::Entity* const entity)
     {
         if (entity == nullptr)
         {
@@ -1391,7 +1391,7 @@ namespace yli::config
         return std::make_shared<yli::data::AnyValue>(universe->current_camera_spherical_coordinates.theta);
     }
 
-    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_phi(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_phi(yli::ontology::Entity* const entity)
     {
         if (entity == nullptr)
         {
@@ -1415,7 +1415,7 @@ namespace yli::config
         return std::make_shared<yli::data::AnyValue>(universe->current_camera_spherical_coordinates.phi);
     }
 
-    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_up(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_up(yli::ontology::Entity* const entity)
     {
         if (entity == nullptr)
         {
@@ -1432,7 +1432,7 @@ namespace yli::config
         return std::make_shared<yli::data::AnyValue>(&universe->current_camera_up);
     }
 
-    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_right(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_right(yli::ontology::Entity* const entity)
     {
         if (entity == nullptr)
         {
@@ -1449,7 +1449,7 @@ namespace yli::config
         return std::make_shared<yli::data::AnyValue>(&universe->current_camera_right);
     }
 
-    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_horizontal_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_horizontal_angle(yli::ontology::Entity* const entity)
     {
         if (entity == nullptr)
         {
@@ -1473,7 +1473,7 @@ namespace yli::config
         return std::make_shared<yli::data::AnyValue>(universe->current_camera_horizontal_angle);
     }
 
-    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_vertical_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_vertical_angle(yli::ontology::Entity* const entity)
     {
         if (entity == nullptr)
         {
@@ -1497,7 +1497,7 @@ namespace yli::config
         return std::make_shared<yli::data::AnyValue>(universe->current_camera_vertical_angle);
     }
 
-    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_is_flight_mode_in_use(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+    std::shared_ptr<yli::data::AnyValue> SettingMaster::read_is_flight_mode_in_use(yli::ontology::Entity* const entity)
     {
         if (entity == nullptr)
         {

@@ -89,7 +89,7 @@ namespace yli::config
             return this->setting_value;
         }
 
-        return this->read_callback(this->parent->parent, this->parent);
+        return this->read_callback(this->parent->parent);
     }
 
     void Setting::set(std::shared_ptr<yli::data::AnyValue> new_value)
