@@ -403,6 +403,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/config/read_callback.hpp
     code/ylikuutio/config/setting.cpp
     code/ylikuutio/config/setting.hpp
+    code/ylikuutio/config/setting_callbacks.cpp
     code/ylikuutio/config/setting_master.cpp
     code/ylikuutio/config/setting_master.hpp
     code/ylikuutio/config/setting_struct.hpp
@@ -912,6 +913,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/command_line/command_line_master.hpp
         code/ylikuutio/config/setting.cpp
         code/ylikuutio/config/setting.hpp
+        code/ylikuutio/config/setting_callbacks.cpp
         code/ylikuutio/config/setting_master.cpp
         code/ylikuutio/config/setting_master.hpp
         code/ylikuutio/config/setting_struct.hpp

@@ -17,6 +17,7 @@
 
 #include "background_color_snippets.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
+#include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
@@ -29,25 +30,25 @@ namespace yli::snippets
     {
         yli::config::SettingStruct red_setting_struct(std::make_shared<yli::data::AnyValue>(red));
         red_setting_struct.name = "red";
-        red_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+        red_setting_struct.activate_callback = &yli::config::Setting::activate_background_color;
         red_setting_struct.should_ylikuutio_call_activate_callback_now = false;
         setting_master->create_setting(red_setting_struct);
 
         yli::config::SettingStruct green_setting_struct(std::make_shared<yli::data::AnyValue>(green));
         green_setting_struct.name = "green";
-        green_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+        green_setting_struct.activate_callback = &yli::config::Setting::activate_background_color;
         green_setting_struct.should_ylikuutio_call_activate_callback_now = false;
         setting_master->create_setting(green_setting_struct);
 
         yli::config::SettingStruct blue_setting_struct(std::make_shared<yli::data::AnyValue>(blue));
         blue_setting_struct.name = "blue";
-        blue_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+        blue_setting_struct.activate_callback = &yli::config::Setting::activate_background_color;
         blue_setting_struct.should_ylikuutio_call_activate_callback_now = false;
         setting_master->create_setting(blue_setting_struct);
 
         yli::config::SettingStruct alpha_setting_struct(std::make_shared<yli::data::AnyValue>(alpha));
         alpha_setting_struct.name = "alpha";
-        alpha_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+        alpha_setting_struct.activate_callback = &yli::config::Setting::activate_background_color;
         alpha_setting_struct.should_ylikuutio_call_activate_callback_now = true;
         setting_master->create_setting(alpha_setting_struct);
     }

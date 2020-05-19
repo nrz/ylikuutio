@@ -61,7 +61,7 @@ namespace yli::config
 
         if (setting_struct.should_ylikuutio_call_activate_callback_now && this->activate_callback != nullptr && this->parent->parent != nullptr)
         {
-            this->activate_callback(this->parent->parent, this->parent);
+            this->activate_callback(this->parent->parent, this);
         }
     }
 
@@ -89,7 +89,7 @@ namespace yli::config
             return this->setting_value;
         }
 
-        return this->read_callback(this->parent->parent, this->parent);
+        return this->read_callback(this->parent->parent);
     }
 
     void Setting::set(std::shared_ptr<yli::data::AnyValue> new_value)
@@ -103,7 +103,7 @@ namespace yli::config
 
         if (this->activate_callback != nullptr)
         {
-            this->activate_callback(this->parent->parent, this->parent);
+            this->activate_callback(this->parent->parent, this);
         }
     }
 
@@ -118,7 +118,7 @@ namespace yli::config
 
         if (this->activate_callback != nullptr)
         {
-            this->activate_callback(this->parent->parent, this->parent);
+            this->activate_callback(this->parent->parent, this);
         }
     }
 

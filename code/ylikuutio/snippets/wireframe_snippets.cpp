@@ -17,6 +17,7 @@
 
 #include "wireframe_snippets.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
+#include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
@@ -29,7 +30,7 @@ namespace yli::snippets
     {
         yli::config::SettingStruct wireframe_setting_struct(std::make_shared<yli::data::AnyValue>(use_wireframe));
         wireframe_setting_struct.name = "wireframe";
-        wireframe_setting_struct.activate_callback = &yli::config::SettingMaster::activate_wireframe;
+        wireframe_setting_struct.activate_callback = &yli::config::Setting::activate_wireframe;
         wireframe_setting_struct.should_ylikuutio_call_activate_callback_now = true;
         setting_master->create_setting(wireframe_setting_struct);
     }
