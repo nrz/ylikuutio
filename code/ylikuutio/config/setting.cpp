@@ -61,7 +61,7 @@ namespace yli::config
 
         if (setting_struct.should_ylikuutio_call_activate_callback_now && this->activate_callback != nullptr && this->parent->parent != nullptr)
         {
-            this->activate_callback(this->parent->parent, this->parent);
+            this->activate_callback(this->parent->parent, this);
         }
     }
 
@@ -103,7 +103,7 @@ namespace yli::config
 
         if (this->activate_callback != nullptr)
         {
-            this->activate_callback(this->parent->parent, this->parent);
+            this->activate_callback(this->parent->parent, this);
         }
     }
 
@@ -118,7 +118,7 @@ namespace yli::config
 
         if (this->activate_callback != nullptr)
         {
-            this->activate_callback(this->parent->parent, this->parent);
+            this->activate_callback(this->parent->parent, this);
         }
     }
 

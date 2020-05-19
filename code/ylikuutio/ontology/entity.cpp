@@ -19,6 +19,7 @@
 #include "universe.hpp"
 #include "parent_module.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
+#include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
@@ -73,8 +74,8 @@ namespace yli::ontology
 
         yli::config::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::data::AnyValue>(this->should_be_rendered));
         should_be_rendered_setting_struct.name = "should_be_rendered";
-        should_be_rendered_setting_struct.activate_callback = &yli::config::SettingMaster::activate_should_be_rendered;
-        should_be_rendered_setting_struct.read_callback = &yli::config::SettingMaster::read_should_be_rendered;
+        should_be_rendered_setting_struct.activate_callback = &yli::config::Setting::activate_should_be_rendered;
+        should_be_rendered_setting_struct.read_callback = &yli::config::Setting::read_should_be_rendered;
         should_be_rendered_setting_struct.should_ylikuutio_call_activate_callback_now = true;
         std::cout << "Executing `setting_master->create_setting(should_be_rendered_setting_struct);` ...\n";
         this->setting_master->create_setting(should_be_rendered_setting_struct);

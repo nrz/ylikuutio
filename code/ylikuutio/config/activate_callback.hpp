@@ -25,7 +25,7 @@
 
 namespace yli::config
 {
-    class SettingMaster;
+    class Setting;
 }
 
 namespace yli::ontology
@@ -33,6 +33,6 @@ namespace yli::ontology
     class Entity;
 }
 
-typedef std::shared_ptr<yli::data::AnyValue> (*ActivateCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
+typedef std::shared_ptr<yli::data::AnyValue> (*ActivateCallback) (yli::ontology::Entity* entity, yli::config::Setting* setting);
 
 #endif

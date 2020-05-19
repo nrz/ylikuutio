@@ -19,6 +19,7 @@
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
+#include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
@@ -865,8 +866,8 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     float x = 1234.25f;
     yli::config::SettingStruct x_setting_struct(std::make_shared<yli::data::AnyValue>(x));
     x_setting_struct.name = "x";
-    x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_x;
-    x_setting_struct.read_callback = &yli::config::SettingMaster::read_x;
+    x_setting_struct.activate_callback = &yli::config::Setting::activate_x;
+    x_setting_struct.read_callback = &yli::config::Setting::read_x;
     x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     ASSERT_EQ(setting_master->get("x"), nullptr);
     setting_master->create_setting(x_setting_struct);
@@ -892,8 +893,8 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     float y = 1234.25f;
     yli::config::SettingStruct y_setting_struct(std::make_shared<yli::data::AnyValue>(y));
     y_setting_struct.name = "y";
-    y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_y;
-    y_setting_struct.read_callback = &yli::config::SettingMaster::read_y;
+    y_setting_struct.activate_callback = &yli::config::Setting::activate_y;
+    y_setting_struct.read_callback = &yli::config::Setting::read_y;
     y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     ASSERT_EQ(setting_master->get("y"), nullptr);
     setting_master->create_setting(y_setting_struct);
@@ -919,8 +920,8 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     float z = 1234.25f;
     yli::config::SettingStruct z_setting_struct(std::make_shared<yli::data::AnyValue>(z));
     z_setting_struct.name = "z";
-    z_setting_struct.activate_callback = &yli::config::SettingMaster::activate_z;
-    z_setting_struct.read_callback = &yli::config::SettingMaster::read_z;
+    z_setting_struct.activate_callback = &yli::config::Setting::activate_z;
+    z_setting_struct.read_callback = &yli::config::Setting::read_z;
     z_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     ASSERT_EQ(setting_master->get("z"), nullptr);
     setting_master->create_setting(z_setting_struct);
@@ -946,7 +947,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     float red = 0.0f;
     yli::config::SettingStruct red_setting_struct(std::make_shared<yli::data::AnyValue>(red));
     red_setting_struct.name = "red";
-    red_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+    red_setting_struct.activate_callback = &yli::config::Setting::activate_background_color;
     red_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     ASSERT_EQ(setting_master->get("red"), nullptr);
     setting_master->create_setting(red_setting_struct);
@@ -972,7 +973,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     float red = 1.0f;
     yli::config::SettingStruct red_setting_struct(std::make_shared<yli::data::AnyValue>(red));
     red_setting_struct.name = "red";
-    red_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+    red_setting_struct.activate_callback = &yli::config::Setting::activate_background_color;
     red_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     ASSERT_EQ(setting_master->get("red"), nullptr);
     setting_master->create_setting(red_setting_struct);
@@ -998,7 +999,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     float red = 0.875f;
     yli::config::SettingStruct red_setting_struct(std::make_shared<yli::data::AnyValue>(red));
     red_setting_struct.name = "red";
-    red_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+    red_setting_struct.activate_callback = &yli::config::Setting::activate_background_color;
     red_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     ASSERT_EQ(setting_master->get("red"), nullptr);
     setting_master->create_setting(red_setting_struct);
@@ -1024,7 +1025,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     float green = 0.0f;
     yli::config::SettingStruct green_setting_struct(std::make_shared<yli::data::AnyValue>(green));
     green_setting_struct.name = "green";
-    green_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+    green_setting_struct.activate_callback = &yli::config::Setting::activate_background_color;
     green_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     ASSERT_EQ(setting_master->get("green"), nullptr);
     setting_master->create_setting(green_setting_struct);
@@ -1050,7 +1051,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     float green = 1.0f;
     yli::config::SettingStruct green_setting_struct(std::make_shared<yli::data::AnyValue>(green));
     green_setting_struct.name = "green";
-    green_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+    green_setting_struct.activate_callback = &yli::config::Setting::activate_background_color;
     green_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     ASSERT_EQ(setting_master->get("green"), nullptr);
     setting_master->create_setting(green_setting_struct);
@@ -1076,7 +1077,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     float green = 0.875f;
     yli::config::SettingStruct green_setting_struct(std::make_shared<yli::data::AnyValue>(green));
     green_setting_struct.name = "green";
-    green_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+    green_setting_struct.activate_callback = &yli::config::Setting::activate_background_color;
     green_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     ASSERT_EQ(setting_master->get("green"), nullptr);
     setting_master->create_setting(green_setting_struct);
@@ -1102,7 +1103,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     float blue = 0.0f;
     yli::config::SettingStruct blue_setting_struct(std::make_shared<yli::data::AnyValue>(blue));
     blue_setting_struct.name = "blue";
-    blue_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+    blue_setting_struct.activate_callback = &yli::config::Setting::activate_background_color;
     blue_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     ASSERT_EQ(setting_master->get("blue"), nullptr);
     setting_master->create_setting(blue_setting_struct);
@@ -1128,7 +1129,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     float blue = 1.0f;
     yli::config::SettingStruct blue_setting_struct(std::make_shared<yli::data::AnyValue>(blue));
     blue_setting_struct.name = "blue";
-    blue_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+    blue_setting_struct.activate_callback = &yli::config::Setting::activate_background_color;
     blue_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     ASSERT_EQ(setting_master->get("blue"), nullptr);
     setting_master->create_setting(blue_setting_struct);
@@ -1154,7 +1155,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_setting_univer
     float blue = 0.875f;
     yli::config::SettingStruct blue_setting_struct(std::make_shared<yli::data::AnyValue>(blue));
     blue_setting_struct.name = "blue";
-    blue_setting_struct.activate_callback = &yli::config::SettingMaster::activate_background_color;
+    blue_setting_struct.activate_callback = &yli::config::Setting::activate_background_color;
     blue_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     ASSERT_EQ(setting_master->get("blue"), nullptr);
     setting_master->create_setting(blue_setting_struct);
@@ -1183,29 +1184,29 @@ TEST(settings_must_be_initialized_appropriately, headless_universe_setting_unive
 
     yli::config::SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
     cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
-    cartesian_coordinates_setting_struct.activate_callback = &yli::config::SettingMaster::activate_cartesian_coordinates;
-    cartesian_coordinates_setting_struct.read_callback = &yli::config::SettingMaster::read_cartesian_coordinates;
+    cartesian_coordinates_setting_struct.activate_callback = &yli::config::Setting::activate_cartesian_coordinates;
+    cartesian_coordinates_setting_struct.read_callback = &yli::config::Setting::read_cartesian_coordinates;
     cartesian_coordinates_setting_struct.should_ylikuutio_call_activate_callback_now = false;
     setting_master->create_setting(cartesian_coordinates_setting_struct);
 
     yli::config::SettingStruct x_setting_struct(std::make_shared<yli::data::AnyValue>(x));
     x_setting_struct.name = "x";
-    x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_x;
-    x_setting_struct.read_callback = &yli::config::SettingMaster::read_x;
+    x_setting_struct.activate_callback = &yli::config::Setting::activate_x;
+    x_setting_struct.read_callback = &yli::config::Setting::read_x;
     x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     setting_master->create_setting(x_setting_struct);
 
     yli::config::SettingStruct y_setting_struct(std::make_shared<yli::data::AnyValue>(y));
     y_setting_struct.name = "y";
-    y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_y;
-    y_setting_struct.read_callback = &yli::config::SettingMaster::read_y;
+    y_setting_struct.activate_callback = &yli::config::Setting::activate_y;
+    y_setting_struct.read_callback = &yli::config::Setting::read_y;
     y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     setting_master->create_setting(y_setting_struct);
 
     yli::config::SettingStruct z_setting_struct(std::make_shared<yli::data::AnyValue>(z));
     z_setting_struct.name = "z";
-    z_setting_struct.activate_callback = &yli::config::SettingMaster::activate_z;
-    z_setting_struct.read_callback = &yli::config::SettingMaster::read_z;
+    z_setting_struct.activate_callback = &yli::config::Setting::activate_z;
+    z_setting_struct.read_callback = &yli::config::Setting::read_z;
     z_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     setting_master->create_setting(z_setting_struct);
 
@@ -1256,29 +1257,29 @@ TEST(settings_must_be_initialized_appropriately, headless_universe_setting_unive
 
     yli::config::SettingStruct x_setting_struct(std::make_shared<yli::data::AnyValue>(x));
     x_setting_struct.name = "x";
-    x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_x;
-    x_setting_struct.read_callback = &yli::config::SettingMaster::read_x;
+    x_setting_struct.activate_callback = &yli::config::Setting::activate_x;
+    x_setting_struct.read_callback = &yli::config::Setting::read_x;
     x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     setting_master->create_setting(x_setting_struct);
 
     yli::config::SettingStruct y_setting_struct(std::make_shared<yli::data::AnyValue>(y));
     y_setting_struct.name = "y";
-    y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_y;
-    y_setting_struct.read_callback = &yli::config::SettingMaster::read_y;
+    y_setting_struct.activate_callback = &yli::config::Setting::activate_y;
+    y_setting_struct.read_callback = &yli::config::Setting::read_y;
     y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     setting_master->create_setting(y_setting_struct);
 
     yli::config::SettingStruct z_setting_struct(std::make_shared<yli::data::AnyValue>(z));
     z_setting_struct.name = "z";
-    z_setting_struct.activate_callback = &yli::config::SettingMaster::activate_z;
-    z_setting_struct.read_callback = &yli::config::SettingMaster::read_z;
+    z_setting_struct.activate_callback = &yli::config::Setting::activate_z;
+    z_setting_struct.read_callback = &yli::config::Setting::read_z;
     z_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     setting_master->create_setting(z_setting_struct);
 
     yli::config::SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
     cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
-    cartesian_coordinates_setting_struct.activate_callback = &yli::config::SettingMaster::activate_cartesian_coordinates;
-    cartesian_coordinates_setting_struct.read_callback = &yli::config::SettingMaster::read_cartesian_coordinates;
+    cartesian_coordinates_setting_struct.activate_callback = &yli::config::Setting::activate_cartesian_coordinates;
+    cartesian_coordinates_setting_struct.read_callback = &yli::config::Setting::read_cartesian_coordinates;
     cartesian_coordinates_setting_struct.should_ylikuutio_call_activate_callback_now = false;
     setting_master->create_setting(cartesian_coordinates_setting_struct);
 
@@ -1329,29 +1330,29 @@ TEST(setting_value_must_be_modified_appropriately, headless_universe_setting_uni
 
     yli::config::SettingStruct x_setting_struct(std::make_shared<yli::data::AnyValue>(x));
     x_setting_struct.name = "x";
-    x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_x;
-    x_setting_struct.read_callback = &yli::config::SettingMaster::read_x;
+    x_setting_struct.activate_callback = &yli::config::Setting::activate_x;
+    x_setting_struct.read_callback = &yli::config::Setting::read_x;
     x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     setting_master->create_setting(x_setting_struct);
 
     yli::config::SettingStruct y_setting_struct(std::make_shared<yli::data::AnyValue>(y));
     y_setting_struct.name = "y";
-    y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_y;
-    y_setting_struct.read_callback = &yli::config::SettingMaster::read_y;
+    y_setting_struct.activate_callback = &yli::config::Setting::activate_y;
+    y_setting_struct.read_callback = &yli::config::Setting::read_y;
     y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     setting_master->create_setting(y_setting_struct);
 
     yli::config::SettingStruct z_setting_struct(std::make_shared<yli::data::AnyValue>(z));
     z_setting_struct.name = "z";
-    z_setting_struct.activate_callback = &yli::config::SettingMaster::activate_z;
-    z_setting_struct.read_callback = &yli::config::SettingMaster::read_z;
+    z_setting_struct.activate_callback = &yli::config::Setting::activate_z;
+    z_setting_struct.read_callback = &yli::config::Setting::read_z;
     z_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     setting_master->create_setting(z_setting_struct);
 
     yli::config::SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
     cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
-    cartesian_coordinates_setting_struct.activate_callback = &yli::config::SettingMaster::activate_cartesian_coordinates;
-    cartesian_coordinates_setting_struct.read_callback = &yli::config::SettingMaster::read_cartesian_coordinates;
+    cartesian_coordinates_setting_struct.activate_callback = &yli::config::Setting::activate_cartesian_coordinates;
+    cartesian_coordinates_setting_struct.read_callback = &yli::config::Setting::read_cartesian_coordinates;
     cartesian_coordinates_setting_struct.should_ylikuutio_call_activate_callback_now = false;
     setting_master->create_setting(cartesian_coordinates_setting_struct);
 
