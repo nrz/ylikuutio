@@ -18,6 +18,7 @@
 #include "setting.hpp"
 #include "setting_master.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -25,6 +26,7 @@
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
+#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
 #include <stdint.h>      // uint32_t etc.
