@@ -17,7 +17,6 @@
 
 #include "setting_master.hpp"
 #include "setting.hpp"
-#include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
@@ -47,6 +46,7 @@ namespace yli::data
 namespace yli::ontology
 {
     class Entity;
+    class Console;
 }
 
 namespace yli::config
