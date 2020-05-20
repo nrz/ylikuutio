@@ -78,7 +78,7 @@ int main(const int argc, const char* const argv[]) try
     universe_struct.window_width = 512;
     universe_struct.window_height = 512;
     yli::ontology::Universe* const my_universe = new yli::ontology::Universe(universe_struct);
-    my_universe->set_name("universe");
+    my_universe->set_global_name("universe");
 
     yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
 

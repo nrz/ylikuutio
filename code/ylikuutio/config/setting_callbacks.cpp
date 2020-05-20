@@ -18,6 +18,7 @@
 #include "setting.hpp"
 #include "setting_master.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -25,12 +26,18 @@
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
+#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
 #include <stdint.h>      // uint32_t etc.
 #include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <variant>       // std::variant
+
+namespace yli::data
+{
+    class SphericalCoordinatesStruct;
+}
 
 namespace yli::config
 {
@@ -160,16 +167,16 @@ namespace yli::config
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("red") != 1 ||
-                setting_master->setting_pointer_map.count("green") != 1 ||
-                setting_master->setting_pointer_map.count("blue") != 1 ||
-                setting_master->setting_pointer_map.count("alpha") != 1)
+        if (!setting_master->is_setting("red") ||
+                !setting_master->is_setting("green") ||
+                !setting_master->is_setting("blue") ||
+                !setting_master->is_setting("alpha"))
         {
             return nullptr;
         }
 
         // red.
-        std::shared_ptr<yli::data::AnyValue> red_any_value = setting_master->setting_pointer_map["red"]->get();
+        std::shared_ptr<yli::data::AnyValue> red_any_value = setting_master->get("red")->get();
 
         if (red_any_value == nullptr || !std::holds_alternative<float>(red_any_value->data))
         {
@@ -179,7 +186,7 @@ namespace yli::config
         float red = std::get<float>(red_any_value->data);
 
         // green.
-        std::shared_ptr<yli::data::AnyValue> green_any_value = setting_master->setting_pointer_map["green"]->get();
+        std::shared_ptr<yli::data::AnyValue> green_any_value = setting_master->get("green")->get();
 
         if (green_any_value == nullptr || !std::holds_alternative<float>(green_any_value->data))
         {
@@ -189,7 +196,7 @@ namespace yli::config
         float green = std::get<float>(green_any_value->data);
 
         // blue.
-        std::shared_ptr<yli::data::AnyValue> blue_any_value = setting_master->setting_pointer_map["blue"]->get();
+        std::shared_ptr<yli::data::AnyValue> blue_any_value = setting_master->get("blue")->get();
 
         if (blue_any_value == nullptr || !std::holds_alternative<float>(blue_any_value->data))
         {
@@ -199,7 +206,7 @@ namespace yli::config
         float blue = std::get<float>(blue_any_value->data);
 
         // alpha.
-        std::shared_ptr<yli::data::AnyValue> alpha_any_value = setting_master->setting_pointer_map["alpha"]->get();
+        std::shared_ptr<yli::data::AnyValue> alpha_any_value = setting_master->get("alpha")->get();
 
         if (alpha_any_value == nullptr || !std::holds_alternative<float>(alpha_any_value->data))
         {

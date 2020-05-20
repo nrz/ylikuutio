@@ -117,7 +117,7 @@ namespace yli::ontology
 
         std::shared_ptr<yli::data::AnyValue> any_value = std::make_shared<yli::data::AnyValue>(*variable_type_shared_ptr, *value_string_shared_ptr);
         yli::ontology::AnyValueEntity* const any_value_entity = new yli::ontology::AnyValueEntity(universe, any_value);
-        any_value_entity->set_name(*variable_name_shared_ptr);
+        any_value_entity->set_global_name(*variable_name_shared_ptr);
         return nullptr;
     }
 
@@ -151,7 +151,7 @@ namespace yli::ontology
         // OK, variable name is not empty and it is not in use yet either.
 
         yli::ontology::AnyStructEntity* const any_struct_entity = new yli::ontology::AnyStructEntity(universe);
-        any_struct_entity->set_name(*variable_name_shared_ptr);
+        any_struct_entity->set_global_name(*variable_name_shared_ptr);
         return nullptr;
     }
 

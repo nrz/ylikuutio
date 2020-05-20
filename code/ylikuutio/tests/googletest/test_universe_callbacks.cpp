@@ -83,14 +83,14 @@ TEST(object_must_be_bound_to_species_appropriately, universe_callback)
     species1_struct.shader = shader;
     species1_struct.material = material;
     yli::ontology::Species* const species1 = new yli::ontology::Species(universe, species1_struct, &material->parent_of_species);
-    species1->set_name(species1_name);
+    species1->set_global_name(species1_name);
 
     const std::string object_name = "bar";
 
     yli::ontology::ObjectStruct object_struct;
     object_struct.species_parent = species1;
     yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species1->parent_of_objects);
-    object->set_name(object_name);
+    object->set_global_name(object_name);
 
     const std::string species2_name = "baz";
 
@@ -99,7 +99,7 @@ TEST(object_must_be_bound_to_species_appropriately, universe_callback)
     species2_struct.shader = shader;
     species2_struct.material = material;
     yli::ontology::Species* const species2 = new yli::ontology::Species(universe, species2_struct, &material->parent_of_species);
-    species2->set_name(species2_name);
+    species2->set_global_name(species2_name);
 
     ASSERT_EQ(object->get_parent(), species1);
     ASSERT_EQ(species1->get_number_of_children(), 1);
@@ -714,7 +714,7 @@ TEST(scene_must_be_deleted_appropriately, universe_callback)
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
-    scene->set_name(scene_name);
+    scene->set_global_name(scene_name);
 
     universe->activate(universe, scene);
 
@@ -739,7 +739,7 @@ TEST(scene_must_be_activated_appropriately, universe_callback)
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
-    scene->set_name(scene_name);
+    scene->set_global_name(scene_name);
 
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
@@ -756,7 +756,7 @@ TEST(console_must_be_activated_appropriately, universe_callback_without_font2D)
     const std::string console_name = "foo";
 
     yli::ontology::Console* const console = new yli::ontology::Console(universe, &universe->parent_of_consoles);
-    console->set_name(console_name);
+    console->set_global_name(console_name);
 
     ASSERT_EQ(universe->get_active_console(), nullptr);
 
@@ -775,7 +775,7 @@ TEST(console_must_be_activated_appropriately, universe_callback_with_font2D)
     const std::string console_name = "foo";
 
     yli::ontology::Console* const console = new yli::ontology::Console(universe, &universe->parent_of_consoles);
-    console->set_name(console_name);
+    console->set_global_name(console_name);
 
     ASSERT_EQ(universe->get_active_console(), nullptr);
 
@@ -798,11 +798,11 @@ TEST(scene_and_camera_must_be_activated_appropriately, universe_callback)
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
-    scene->set_name(scene_name);
+    scene->set_global_name(scene_name);
 
     const std::string camera_name = "bar";
     yli::ontology::Camera* const camera = new yli::ontology::Camera(universe, yli::ontology::CameraStruct(), &scene->parent_of_cameras);
-    camera->set_name(camera_name);
+    camera->set_global_name(camera_name);
 
     ASSERT_EQ(universe->get_active_scene(), nullptr);
     ASSERT_EQ(scene->get_active_camera(), nullptr);

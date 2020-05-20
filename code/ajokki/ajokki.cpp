@@ -244,7 +244,7 @@ int main(const int argc, const char* const argv[]) try
     }
 
     yli::ontology::Universe* const my_universe = new yli::ontology::Universe(universe_struct);
-    my_universe->set_name("universe");
+    my_universe->set_global_name("universe");
 
     yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
 
@@ -298,7 +298,7 @@ int main(const int argc, const char* const argv[]) try
         return -1;
     }
 
-    my_console->set_name("my_console");
+    my_console->set_global_name("my_console");
     my_universe->set_active_console(my_console);
 
     std::cout << "Setting up console ...\n";
@@ -316,7 +316,7 @@ int main(const int argc, const char* const argv[]) try
         return -1;
     }
 
-    mini_console->set_name("mini_console");
+    mini_console->set_global_name("mini_console");
     my_universe->set_active_console(mini_console);
 
     std::cout << "Setting up console ...\n";
@@ -337,7 +337,7 @@ int main(const int argc, const char* const argv[]) try
         return -1;
     }
 
-    earth_world->set_name("earth_world");
+    earth_world->set_global_name("earth_world");
 
     std::cout << "Creating yli::ontology::Entity* mars_world_entity ...\n";
     yli::ontology::Entity* const mars_world_entity = entity_factory->create_world();
@@ -350,7 +350,7 @@ int main(const int argc, const char* const argv[]) try
         return -1;
     }
 
-    mars_world->set_name("mars_world");
+    mars_world->set_global_name("mars_world");
 
     // Create the `Scene`s.
     // The `Scene`s will be created in the following order:
@@ -417,7 +417,7 @@ int main(const int argc, const char* const argv[]) try
     }
 
     std::cout << "Font2D created successfully.\n";
-    my_font2D->set_name("my_font2D");
+    my_font2D->set_global_name("my_font2D");
 
     my_universe->set_active_font2D(my_font2D);
     my_console->print_text("Welcome! Please write \"help\" for more");

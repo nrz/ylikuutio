@@ -17,17 +17,9 @@
 
 #include "setting_master.hpp"
 #include "setting.hpp"
-#include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/species.hpp"
-#include "code/ylikuutio/ontology/holobiont.hpp"
-#include "code/ylikuutio/ontology/movable.hpp"
-#include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
-#include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM
@@ -48,12 +40,13 @@
 
 namespace yli::data
 {
-    class SphericalCoordinatesStruct;
+    class AnyValue;
 }
 
 namespace yli::ontology
 {
     class Entity;
+    class Console;
 }
 
 namespace yli::config

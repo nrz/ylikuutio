@@ -239,7 +239,7 @@ int main(const int argc, const char* const argv[]) try
     }
 
     yli::ontology::Universe* const my_universe = new yli::ontology::Universe(universe_struct);
-    my_universe->set_name("universe");
+    my_universe->set_global_name("universe");
 
     yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
 
@@ -376,7 +376,7 @@ int main(const int argc, const char* const argv[]) try
     }
 
     std::cout << "Font2D created successfully.\n";
-    my_font2D->set_name("my_font2D");
+    my_font2D->set_global_name("my_font2D");
 
     my_universe->set_active_font2D(my_font2D);
     my_console->print_text("Welcome! Please write \"help\" for more");

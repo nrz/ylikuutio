@@ -87,7 +87,7 @@ namespace yli::ontology
                 }
 
                 // OK, set a name for the newly created `LispFunction`.
-                lisp_function->set_name(name);
+                lisp_function->set_global_name(name);
             }
             else
             {
@@ -104,7 +104,7 @@ namespace yli::ontology
                     universe,
                     &lisp_function->parent_of_generic_lisp_function_overloads,
                     callback);
-            generic_lisp_function_overload->set_name(name);
+            generic_lisp_function_overload->set_global_name(name);
             return generic_lisp_function_overload;
         }
 }
