@@ -34,6 +34,11 @@
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <variant>       // std::variant
 
+namespace yli::data
+{
+    class SphericalCoordinatesStruct;
+}
+
 namespace yli::config
 {
     std::shared_ptr<yli::data::AnyValue> Setting::activate_planet_radius(yli::ontology::Entity* const entity, yli::config::Setting* const setting)
