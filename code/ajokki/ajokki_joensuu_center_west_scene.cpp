@@ -69,7 +69,7 @@ namespace ajokki
             return nullptr;
         }
 
-        joensuu_center_west_scene->set_name("joensuu_center_west_scene");
+        joensuu_center_west_scene->set_global_name("joensuu_center_west_scene");
 
         // Set `joensuu_center_west_scene` to be the currently active `Scene`.
         // my_universe->set_active_scene(joensuu_center_west_scene);
@@ -94,7 +94,7 @@ namespace ajokki
             return nullptr;
         }
 
-        joensuu_center_west_shader->set_name("joensuu_center_west_shader");
+        joensuu_center_west_shader->set_global_name("joensuu_center_west_shader");
 
         // Create the material, store it in `joensuu_center_west_grass_material_struct`.
         yli::ontology::MaterialStruct joensuu_center_west_grass_material_struct;
@@ -113,7 +113,7 @@ namespace ajokki
             return nullptr;
         }
 
-        joensuu_center_west_grass_material->set_name("joensuu_center_west_grass_material");
+        joensuu_center_west_grass_material->set_global_name("joensuu_center_west_grass_material");
 
         yli::ontology::SpeciesStruct joensuu_center_west_terrain_species_struct;
         joensuu_center_west_terrain_species_struct.scene = joensuu_center_west_scene;
@@ -136,7 +136,7 @@ namespace ajokki
             return nullptr;
         }
 
-        joensuu_center_west_terrain_species->set_name("joensuu_center_west_terrain_species");
+        joensuu_center_west_terrain_species->set_global_name("joensuu_center_west_terrain_species");
 
         // Create Joensuu center west terrain.
         yli::ontology::ObjectStruct joensuu_center_west_struct;
@@ -164,7 +164,7 @@ namespace ajokki
             return nullptr;
         }
 
-        orange_fur_material_joensuu->set_name("joensuu_center_west_orange_fur_material");
+        orange_fur_material_joensuu->set_global_name("joensuu_center_west_orange_fur_material");
 
         yli::ontology::SpeciesStruct horse_species_struct;
         horse_species_struct.scene = joensuu_center_west_scene;
@@ -186,7 +186,7 @@ namespace ajokki
             return nullptr;
         }
 
-        horse_species->set_name("horse_species");
+        horse_species->set_global_name("horse_species");
 
         yli::ontology::ObjectStruct horse_object_struct1;
         horse_object_struct1.species_parent = horse_species;
@@ -204,7 +204,7 @@ namespace ajokki
             return nullptr;
         }
 
-        horse1->set_name("horse1");
+        horse1->set_global_name("horse1");
 
         yli::ontology::CameraStruct horse_camera_struct;
         horse_camera_struct.cartesian_coordinates = glm::vec3(2303.00f, 201.00f, 1822.00f);
@@ -223,7 +223,7 @@ namespace ajokki
             return nullptr;
         }
 
-        horse_camera->set_name("horse_camera");
+        horse_camera->set_global_name("horse_camera");
 
         return joensuu_center_west_scene_entity;
         // Joensuu `Scene` ends here.

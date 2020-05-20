@@ -83,7 +83,7 @@ namespace ajokki
             return nullptr;
         }
 
-        helsinki_east_downtown_scene->set_name("helsinki_east_downtown_scene");
+        helsinki_east_downtown_scene->set_global_name("helsinki_east_downtown_scene");
 
         helsinki_east_downtown_scene->set_turbo_factor(5.0f);
         helsinki_east_downtown_scene->set_twin_turbo_factor(100.0f);
@@ -151,7 +151,7 @@ namespace ajokki
             return nullptr;
         }
 
-        rest_brain->set_name("rest_brain");
+        rest_brain->set_global_name("rest_brain");
 
         // `go_east_brain`.
         yli::ontology::BrainStruct go_east_brain_struct;
@@ -168,7 +168,7 @@ namespace ajokki
             return nullptr;
         }
 
-        go_east_brain->set_name("go_east_brain");
+        go_east_brain->set_global_name("go_east_brain");
 
         // `go_west_brain`.
         yli::ontology::BrainStruct go_west_brain_struct;
@@ -185,7 +185,7 @@ namespace ajokki
             return nullptr;
         }
 
-        go_west_brain->set_name("go_west_brain");
+        go_west_brain->set_global_name("go_west_brain");
 
         // `go_north_brain`.
         yli::ontology::BrainStruct go_north_brain_struct;
@@ -202,7 +202,7 @@ namespace ajokki
             return nullptr;
         }
 
-        go_north_brain->set_name("go_north_brain");
+        go_north_brain->set_global_name("go_north_brain");
 
         // `go_south_brain`.
         yli::ontology::BrainStruct go_south_brain_struct;
@@ -219,7 +219,7 @@ namespace ajokki
             return nullptr;
         }
 
-        go_south_brain->set_name("go_south_brain");
+        go_south_brain->set_global_name("go_south_brain");
 
         // `orient_to_east_brain`.
         yli::ontology::BrainStruct orient_to_east_brain_struct;
@@ -236,7 +236,7 @@ namespace ajokki
             return nullptr;
         }
 
-        orient_to_east_brain->set_name("orient_to_east_brain");
+        orient_to_east_brain->set_global_name("orient_to_east_brain");
 
         // `orient_to_west_brain`.
         yli::ontology::BrainStruct orient_to_west_brain_struct;
@@ -253,7 +253,7 @@ namespace ajokki
             return nullptr;
         }
 
-        orient_to_west_brain->set_name("orient_to_west_brain");
+        orient_to_west_brain->set_global_name("orient_to_west_brain");
 
         // `orient_to_north_brain`.
         yli::ontology::BrainStruct orient_to_north_brain_struct;
@@ -270,7 +270,7 @@ namespace ajokki
             return nullptr;
         }
 
-        orient_to_north_brain->set_name("orient_to_north_brain");
+        orient_to_north_brain->set_global_name("orient_to_north_brain");
 
         // `orient_to_south_brain`.
         yli::ontology::BrainStruct orient_to_south_brain_struct;
@@ -287,7 +287,7 @@ namespace ajokki
             return nullptr;
         }
 
-        orient_to_south_brain->set_name("orient_to_south_brain");
+        orient_to_south_brain->set_global_name("orient_to_south_brain");
 
         // `rotate_clockwise_brain`.
         yli::ontology::BrainStruct rotate_clockwise_brain_struct;
@@ -304,7 +304,7 @@ namespace ajokki
             return nullptr;
         }
 
-        rotate_clockwise_brain->set_name("rotate_clockwise_brain");
+        rotate_clockwise_brain->set_global_name("rotate_clockwise_brain");
 
         // `orient_and_go_east_brain`.
         yli::ontology::BrainStruct orient_and_go_east_brain_struct;
@@ -321,7 +321,7 @@ namespace ajokki
             return nullptr;
         }
 
-        orient_and_go_east_brain->set_name("orient_and_go_east_brain");
+        orient_and_go_east_brain->set_global_name("orient_and_go_east_brain");
 
         // `orient_and_go_west_brain`.
         yli::ontology::BrainStruct orient_and_go_west_brain_struct;
@@ -338,7 +338,7 @@ namespace ajokki
             return nullptr;
         }
 
-        orient_and_go_west_brain->set_name("orient_and_go_west_brain");
+        orient_and_go_west_brain->set_global_name("orient_and_go_west_brain");
 
         // `orient_and_go_north_brain`.
         yli::ontology::BrainStruct orient_and_go_north_brain_struct;
@@ -355,7 +355,7 @@ namespace ajokki
             return nullptr;
         }
 
-        orient_and_go_north_brain->set_name("orient_and_go_north_brain");
+        orient_and_go_north_brain->set_global_name("orient_and_go_north_brain");
 
         // `orient_and_go_south_brain`.
         yli::ontology::BrainStruct orient_and_go_south_brain_struct;
@@ -372,7 +372,7 @@ namespace ajokki
             return nullptr;
         }
 
-        orient_and_go_south_brain->set_name("orient_and_go_south_brain");
+        orient_and_go_south_brain->set_global_name("orient_and_go_south_brain");
 
         // `rotate_counterclockwise_brain`.
         yli::ontology::BrainStruct rotate_counterclockwise_brain_struct;
@@ -389,7 +389,7 @@ namespace ajokki
             return nullptr;
         }
 
-        rotate_counterclockwise_brain->set_name("rotate_counterclockwise_brain");
+        rotate_counterclockwise_brain->set_global_name("rotate_counterclockwise_brain");
 
         // Create the shader, store it in `helsinki_east_downtown_shader`.
         yli::ontology::ShaderStruct helsinki_east_downtown_shader_struct;
@@ -408,7 +408,7 @@ namespace ajokki
             return nullptr;
         }
 
-        helsinki_east_downtown_shader->set_name("helsinki_east_downtown_shader");
+        helsinki_east_downtown_shader->set_global_name("helsinki_east_downtown_shader");
 
         // Create the grayscale shader, store it in `helsinki_east_downtown_grayscale_shader`.
         yli::ontology::ShaderStruct helsinki_east_downtown_grayscale_shader_struct;
@@ -427,7 +427,7 @@ namespace ajokki
             return nullptr;
         }
 
-        helsinki_east_downtown_grayscale_shader->set_name("helsinki_east_downtown_grayscale_shader");
+        helsinki_east_downtown_grayscale_shader->set_global_name("helsinki_east_downtown_grayscale_shader");
 
         // Create the material, store it in `helsinki_east_downtown_grass_material`.
         yli::ontology::MaterialStruct helsinki_east_downtown_grass_material_struct;
@@ -446,7 +446,7 @@ namespace ajokki
             return nullptr;
         }
 
-        helsinki_east_downtown_grass_material->set_name("helsinki_east_downtown_grass_material");
+        helsinki_east_downtown_grass_material->set_global_name("helsinki_east_downtown_grass_material");
 
         // Create the material, store it in `pink_geometric_tiles_material`.
         yli::ontology::MaterialStruct pink_geometric_tiles_material_struct;
@@ -465,7 +465,7 @@ namespace ajokki
             return nullptr;
         }
 
-        pink_geometric_tiles_material->set_name("helsinki_east_downtown_pink_geometric_tiles_material");
+        pink_geometric_tiles_material->set_global_name("helsinki_east_downtown_pink_geometric_tiles_material");
 
         // Create the material, store it in `orange_fur_material`.
         yli::ontology::MaterialStruct orange_fur_material_struct;
@@ -484,7 +484,7 @@ namespace ajokki
             return nullptr;
         }
 
-        orange_fur_material->set_name("helsinki_east_downtown_orange_fur_material");
+        orange_fur_material->set_global_name("helsinki_east_downtown_orange_fur_material");
 
         yli::ontology::SpeciesStruct helsinki_east_downtown_terrain_species_struct;
         helsinki_east_downtown_terrain_species_struct.scene = helsinki_east_downtown_scene;
@@ -507,7 +507,7 @@ namespace ajokki
             return nullptr;
         }
 
-        helsinki_east_downtown_terrain_species->set_name("helsinki_east_downtown_terrain_species");
+        helsinki_east_downtown_terrain_species->set_global_name("helsinki_east_downtown_terrain_species");
 
         // Create Helsinki eastern downtown terrain.
         yli::ontology::ObjectStruct helsinki_east_downtown_struct;
@@ -537,7 +537,7 @@ namespace ajokki
             return nullptr;
         }
 
-        suzanne_species->set_name("suzanne_species");
+        suzanne_species->set_global_name("suzanne_species");
 
         // Create suzanne1, store it in `suzanne1`.
         yli::ontology::ObjectStruct suzanne_object_struct1;
@@ -557,9 +557,9 @@ namespace ajokki
             return nullptr;
         }
 
-        suzanne1->set_name("suzanne1");
+        suzanne1->set_global_name("suzanne1");
 
-        suzanne_species->set_name("suzanne_species");
+        suzanne_species->set_global_name("suzanne_species");
         yli::ontology::ObjectStruct suzanne_object_struct2;
         suzanne_object_struct2.species_parent = suzanne_species;
         suzanne_object_struct2.cartesian_coordinates = glm::vec3(112.90f, 113.90f, 75.50f);
@@ -577,7 +577,7 @@ namespace ajokki
             return nullptr;
         }
 
-        suzanne2->set_name("suzanne2");
+        suzanne2->set_global_name("suzanne2");
 
         yli::ontology::ObjectStruct suzanne_object_struct3;
         suzanne_object_struct3.species_parent = suzanne_species;
@@ -596,7 +596,7 @@ namespace ajokki
             return nullptr;
         }
 
-        suzanne3->set_name("suzanne3");
+        suzanne3->set_global_name("suzanne3");
 
         yli::ontology::ObjectStruct suzanne_object_struct4;
         suzanne_object_struct4.species_parent = suzanne_species;
@@ -615,7 +615,7 @@ namespace ajokki
             return nullptr;
         }
 
-        suzanne4->set_name("suzanne4");
+        suzanne4->set_global_name("suzanne4");
 
         yli::ontology::ObjectStruct suzanne_object_struct5;
         suzanne_object_struct5.species_parent = suzanne_species;
@@ -635,7 +635,7 @@ namespace ajokki
             return nullptr;
         }
 
-        suzanne5->set_name("suzanne5");
+        suzanne5->set_global_name("suzanne5");
 
         yli::ontology::SpeciesStruct cat_species_struct;
         cat_species_struct.scene = helsinki_east_downtown_scene;
@@ -657,7 +657,7 @@ namespace ajokki
             return nullptr;
         }
 
-        cat_species->set_name("cat_species");
+        cat_species->set_global_name("cat_species");
 
         yli::ontology::ObjectStruct cat_object_struct1;
         cat_object_struct1.species_parent = cat_species;
@@ -676,7 +676,7 @@ namespace ajokki
             return nullptr;
         }
 
-        cat1->set_name("cat1");
+        cat1->set_global_name("cat1");
 
         yli::ontology::ObjectStruct cat_object_struct2;
         cat_object_struct2.species_parent = cat_species;
@@ -695,7 +695,7 @@ namespace ajokki
             return nullptr;
         }
 
-        cat2->set_name("cat2");
+        cat2->set_global_name("cat2");
 
         yli::ontology::SymbiosisStruct freight_train_symbiosis_struct;
         freight_train_symbiosis_struct.parent = helsinki_east_downtown_shader;
@@ -715,7 +715,7 @@ namespace ajokki
             return nullptr;
         }
 
-        freight_train_symbiosis->set_name("freight_train_symbiosis");
+        freight_train_symbiosis->set_global_name("freight_train_symbiosis");
 
         yli::ontology::HolobiontStruct freight_train_holobiont_struct1;
         freight_train_holobiont_struct1.symbiosis_parent = freight_train_symbiosis;
@@ -739,7 +739,7 @@ namespace ajokki
             return nullptr;
         }
 
-        freight_train1->set_name("freight_train1");
+        freight_train1->set_global_name("freight_train1");
 
         yli::ontology::SymbiosisStruct turbo_polizei_png_symbiosis_struct;
         turbo_polizei_png_symbiosis_struct.parent = helsinki_east_downtown_shader;
@@ -759,7 +759,7 @@ namespace ajokki
             return nullptr;
         }
 
-        turbo_polizei_png_symbiosis->set_name("turbo_polizei_png_symbiosis");
+        turbo_polizei_png_symbiosis->set_global_name("turbo_polizei_png_symbiosis");
 
         yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct1;
         turbo_polizei_png_holobiont_struct1.symbiosis_parent = turbo_polizei_png_symbiosis;
@@ -784,7 +784,7 @@ namespace ajokki
             return nullptr;
         }
 
-        turbo_polizei_png1->set_name("turbo_polizei_png1");
+        turbo_polizei_png1->set_global_name("turbo_polizei_png1");
 
         yli::ontology::SymbiosisStruct turbo_polizei_bmp_symbiosis_struct;
         turbo_polizei_bmp_symbiosis_struct.parent = helsinki_east_downtown_shader;
@@ -804,7 +804,7 @@ namespace ajokki
             return nullptr;
         }
 
-        turbo_polizei_bmp_symbiosis->set_name("turbo_polizei_bmp_symbiosis");
+        turbo_polizei_bmp_symbiosis->set_global_name("turbo_polizei_bmp_symbiosis");
 
         yli::ontology::HolobiontStruct turbo_polizei_bmp_holobiont_struct1;
         turbo_polizei_bmp_holobiont_struct1.symbiosis_parent = turbo_polizei_bmp_symbiosis;
@@ -829,7 +829,7 @@ namespace ajokki
             return nullptr;
         }
 
-        turbo_polizei_bmp1->set_name("turbo_polizei_bmp1");
+        turbo_polizei_bmp1->set_global_name("turbo_polizei_bmp1");
 
         yli::ontology::SymbiosisStruct fantasy_house_with_balcony_symbiosis_struct;
         fantasy_house_with_balcony_symbiosis_struct.parent = helsinki_east_downtown_shader;
@@ -849,7 +849,7 @@ namespace ajokki
             return nullptr;
         }
 
-        fantasy_house_with_balcony_symbiosis->set_name("fantasy_house_with_balcony_symbiosis");
+        fantasy_house_with_balcony_symbiosis->set_global_name("fantasy_house_with_balcony_symbiosis");
 
         yli::ontology::HolobiontStruct fantasy_house_with_balcony_holobiont_struct1;
         fantasy_house_with_balcony_holobiont_struct1.symbiosis_parent = fantasy_house_with_balcony_symbiosis;
@@ -874,7 +874,7 @@ namespace ajokki
             return nullptr;
         }
 
-        fantasy_house_with_balcony1->set_name("fantasy_house_with_balcony1");
+        fantasy_house_with_balcony1->set_global_name("fantasy_house_with_balcony1");
 
         yli::ontology::HolobiontStruct fantasy_house_with_balcony_holobiont_struct2;
         fantasy_house_with_balcony_holobiont_struct2.symbiosis_parent = fantasy_house_with_balcony_symbiosis;
@@ -900,7 +900,7 @@ namespace ajokki
             return nullptr;
         }
 
-        fantasy_house_with_balcony2->set_name("fantasy_house_with_balcony2");
+        fantasy_house_with_balcony2->set_global_name("fantasy_house_with_balcony2");
 
         yli::ontology::VectorFontStruct kongtext_vector_font_struct;
         kongtext_vector_font_struct.parent = helsinki_east_downtown_grass_material;
@@ -945,7 +945,7 @@ namespace ajokki
             return nullptr;
         }
 
-        cat_camera->set_name("cat_camera");
+        cat_camera->set_global_name("cat_camera");
 
         yli::ontology::CameraStruct turbo_polizei_camera_struct;
         turbo_polizei_camera_struct.cartesian_coordinates = glm::vec3(87.00f, 28.00f, 169.00f);
@@ -964,7 +964,7 @@ namespace ajokki
             return nullptr;
         }
 
-        turbo_polizei_camera->set_name("turbo_polizei_camera");
+        turbo_polizei_camera->set_global_name("turbo_polizei_camera");
 
         return helsinki_east_downtown_scene_entity;
         // Helsinki `Scene` ends here.

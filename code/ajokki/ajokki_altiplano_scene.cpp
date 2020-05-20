@@ -67,7 +67,7 @@ namespace ajokki
             return nullptr;
         }
 
-        altiplano_scene->set_name("altiplano_scene");
+        altiplano_scene->set_global_name("altiplano_scene");
 
         // Set `altiplano_scene` to be the currently active `Scene`.
         // my_universe->set_active_scene(altiplano_scene);
@@ -109,7 +109,7 @@ namespace ajokki
             return nullptr;
         }
 
-        altiplano_grass_material->set_name("altiplano_grass_material");
+        altiplano_grass_material->set_global_name("altiplano_grass_material");
 
         // Create the species, store it in `terrain_species`.
         yli::ontology::SpeciesStruct altiplano_terrain_species_struct;
@@ -135,7 +135,7 @@ namespace ajokki
             return nullptr;
         }
 
-        altiplano_terrain_species->set_name("altiplano_terrain_species");
+        altiplano_terrain_species->set_global_name("altiplano_terrain_species");
 
         // Create altiplano terrain.
         yli::ontology::ObjectStruct altiplano_struct;

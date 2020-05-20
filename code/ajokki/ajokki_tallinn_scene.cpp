@@ -67,7 +67,7 @@ namespace ajokki
             return nullptr;
         }
 
-        tallinn_scene->set_name("tallinn_scene");
+        tallinn_scene->set_global_name("tallinn_scene");
 
         // Set `tallinn_scene` to be the currently active `Scene`.
         // my_universe->set_active_scene(tallinn_scene);
@@ -109,7 +109,7 @@ namespace ajokki
             return nullptr;
         }
 
-        tallinn_grass_material->set_name("tallinn_grass_material");
+        tallinn_grass_material->set_global_name("tallinn_grass_material");
 
         // Create the species, store it in `terrain_species`.
         yli::ontology::SpeciesStruct tallinn_terrain_species_struct;
@@ -135,7 +135,7 @@ namespace ajokki
             return nullptr;
         }
 
-        tallinn_terrain_species->set_name("tallinn_terrain_species");
+        tallinn_terrain_species->set_global_name("tallinn_terrain_species");
 
         // Create tallinn terrain.
         yli::ontology::ObjectStruct tallinn_struct;

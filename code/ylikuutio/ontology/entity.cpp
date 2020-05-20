@@ -173,7 +173,7 @@ namespace yli::ontology
         return this->name;
     }
 
-    void Entity::set_name(const std::string& name)
+    void Entity::set_global_name(const std::string& name)
     {
         // Requirements:
         // `this->universe` must not be `nullptr`.
