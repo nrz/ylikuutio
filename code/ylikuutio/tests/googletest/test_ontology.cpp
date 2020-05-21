@@ -2683,3 +2683,403 @@ TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
     object->bind_to_new_brain(brain);
     ASSERT_EQ(brain->get_number_of_apprentices(), 1);
 }
+
+TEST(universe_must_be_given_a_global_name_appropriately, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    ASSERT_EQ(universe->get_global_name(), "");
+    ASSERT_EQ(universe->get_local_name(), "");
+
+    universe->set_global_name("foo");
+    ASSERT_EQ(universe->get_global_name(), "foo");
+    ASSERT_EQ(universe->get_local_name(), "");
+}
+
+TEST(universe_must_not_accept_a_local_name_before_setting_a_global_name, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    ASSERT_EQ(universe->get_global_name(), "");
+    ASSERT_EQ(universe->get_local_name(), "");
+
+    universe->set_local_name("foo");
+    ASSERT_EQ(universe->get_global_name(), "");
+    ASSERT_EQ(universe->get_local_name(), "");
+}
+
+TEST(universe_must_not_accept_a_local_name_after_setting_a_global_name, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    ASSERT_EQ(universe->get_global_name(), "");
+    ASSERT_EQ(universe->get_local_name(), "");
+
+    universe->set_global_name("foo");
+    universe->set_local_name("bar");
+    ASSERT_EQ(universe->get_global_name(), "foo");
+    ASSERT_EQ(universe->get_local_name(), "");
+}
+
+TEST(world_must_be_given_a_global_name_appropriately, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    ASSERT_EQ(world->get_global_name(), "");
+    ASSERT_EQ(world->get_local_name(), "");
+
+    // `World`s are children of the `Universe` and thus global name is local name, and vice versa.
+    world->set_global_name("foo");
+    ASSERT_EQ(world->get_global_name(), "foo");
+    ASSERT_EQ(world->get_local_name(), "foo");
+}
+
+TEST(world_must_be_given_a_local_name_appropriately, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    ASSERT_EQ(world->get_global_name(), "");
+    ASSERT_EQ(world->get_local_name(), "");
+
+    // `World`s are children of the `Universe` and thus global name is local name, and vice versa.
+    world->set_local_name("foo");
+    ASSERT_EQ(world->get_global_name(), "foo");
+    ASSERT_EQ(world->get_local_name(), "foo");
+}
+
+TEST(world_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    ASSERT_EQ(world->get_global_name(), "");
+    ASSERT_EQ(world->get_local_name(), "");
+
+    // `World`s are children of the `Universe` and thus global name is local name, and vice versa.
+    world->set_global_name("foo");
+    world->set_global_name("bar");
+    ASSERT_EQ(world->get_global_name(), "bar");
+    ASSERT_EQ(world->get_local_name(), "bar");
+}
+
+TEST(world_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    ASSERT_EQ(world->get_global_name(), "");
+    ASSERT_EQ(world->get_local_name(), "");
+
+    // `World`s are children of the `Universe` and thus global name is local name, and vice versa.
+    world->set_local_name("foo");
+    world->set_local_name("bar");
+    ASSERT_EQ(world->get_global_name(), "bar");
+    ASSERT_EQ(world->get_local_name(), "bar");
+}
+
+TEST(world_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    ASSERT_EQ(world->get_global_name(), "");
+    ASSERT_EQ(world->get_local_name(), "");
+
+    // `World`s are children of the `Universe` and thus global name is local name, and vice versa.
+    world->set_local_name("foo");
+    world->set_global_name("bar");
+    ASSERT_EQ(world->get_global_name(), "bar");
+    ASSERT_EQ(world->get_local_name(), "bar");
+}
+
+TEST(world_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    ASSERT_EQ(world->get_global_name(), "");
+    ASSERT_EQ(world->get_local_name(), "");
+
+    // `World`s are children of the `Universe` and thus global name is local name, and vice versa.
+    world->set_global_name("foo");
+    world->set_local_name("bar");
+    ASSERT_EQ(world->get_global_name(), "bar");
+    ASSERT_EQ(world->get_local_name(), "bar");
+}
+
+TEST(scene_must_be_given_a_global_name_appropriately, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+    ASSERT_EQ(scene->get_global_name(), "");
+    ASSERT_EQ(scene->get_local_name(), "");
+
+    scene->set_global_name("foo");
+    ASSERT_EQ(scene->get_global_name(), "foo");
+    ASSERT_EQ(scene->get_local_name(), "");
+}
+
+TEST(scene_must_be_given_a_local_name_appropriately, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+    ASSERT_EQ(scene->get_global_name(), "");
+    ASSERT_EQ(scene->get_local_name(), "");
+
+    scene->set_local_name("foo");
+    ASSERT_EQ(scene->get_global_name(), "");
+    ASSERT_EQ(scene->get_local_name(), "foo");
+}
+
+TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+    ASSERT_EQ(scene->get_global_name(), "");
+    ASSERT_EQ(scene->get_local_name(), "");
+
+    scene->set_global_name("foo");
+    scene->set_global_name("bar");
+    ASSERT_EQ(scene->get_global_name(), "bar");
+    ASSERT_EQ(scene->get_local_name(), "");
+}
+
+TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+    ASSERT_EQ(scene->get_global_name(), "");
+    ASSERT_EQ(scene->get_local_name(), "");
+
+    scene->set_local_name("foo");
+    scene->set_local_name("bar");
+    ASSERT_EQ(scene->get_global_name(), "");
+    ASSERT_EQ(scene->get_local_name(), "bar");
+}
+
+TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+    ASSERT_EQ(scene->get_global_name(), "");
+    ASSERT_EQ(scene->get_local_name(), "");
+
+    scene->set_local_name("foo");
+    scene->set_global_name("bar");
+    ASSERT_EQ(scene->get_global_name(), "bar");
+    ASSERT_EQ(scene->get_local_name(), "foo");
+}
+
+TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+    ASSERT_EQ(scene->get_global_name(), "");
+    ASSERT_EQ(scene->get_local_name(), "");
+
+    scene->set_global_name("foo");
+    scene->set_local_name("bar");
+    ASSERT_EQ(scene->get_global_name(), "foo");
+    ASSERT_EQ(scene->get_local_name(), "bar");
+}
+
+TEST(shader_must_be_given_a_global_name_appropriately, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    ASSERT_EQ(shader->get_global_name(), "");
+    ASSERT_EQ(shader->get_local_name(), "");
+
+    shader->set_global_name("foo");
+    ASSERT_EQ(shader->get_global_name(), "foo");
+    ASSERT_EQ(shader->get_local_name(), "");
+}
+
+TEST(shader_must_be_given_a_local_name_appropriately, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    ASSERT_EQ(shader->get_global_name(), "");
+    ASSERT_EQ(shader->get_local_name(), "");
+
+    shader->set_local_name("foo");
+    ASSERT_EQ(shader->get_global_name(), "");
+    ASSERT_EQ(shader->get_local_name(), "foo");
+}
+
+TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    ASSERT_EQ(shader->get_global_name(), "");
+    ASSERT_EQ(shader->get_local_name(), "");
+
+    shader->set_global_name("foo");
+    shader->set_global_name("bar");
+    ASSERT_EQ(shader->get_global_name(), "bar");
+    ASSERT_EQ(shader->get_local_name(), "");
+}
+
+TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    ASSERT_EQ(shader->get_global_name(), "");
+    ASSERT_EQ(shader->get_local_name(), "");
+
+    shader->set_local_name("foo");
+    shader->set_local_name("bar");
+    ASSERT_EQ(shader->get_global_name(), "");
+    ASSERT_EQ(shader->get_local_name(), "bar");
+}
+
+TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    ASSERT_EQ(shader->get_global_name(), "");
+    ASSERT_EQ(shader->get_local_name(), "");
+
+    shader->set_local_name("foo");
+    shader->set_global_name("bar");
+    ASSERT_EQ(shader->get_global_name(), "bar");
+    ASSERT_EQ(shader->get_local_name(), "foo");
+}
+
+TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    ASSERT_EQ(shader->get_global_name(), "");
+    ASSERT_EQ(shader->get_local_name(), "");
+
+    shader->set_global_name("foo");
+    shader->set_local_name("bar");
+    ASSERT_EQ(shader->get_global_name(), "foo");
+    ASSERT_EQ(shader->get_local_name(), "bar");
+}

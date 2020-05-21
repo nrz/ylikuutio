@@ -18,6 +18,7 @@
 #include "entity.hpp"
 #include "universe.hpp"
 #include "parent_module.hpp"
+#include "entity_functions.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
@@ -30,6 +31,7 @@
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
+#include <vector>        // std::vector
 
 namespace yli::ontology
 {
@@ -94,13 +96,19 @@ namespace yli::ontology
 
         this->universe->unbind_entity(this->entityID);
 
-        if (this->name.empty())
+        if (!this->global_name.empty())
         {
-            return;
+            // OK, this `Entity` had a global name, so it's global name shall be erased.
+            this->universe->erase_entity(this->global_name);
         }
 
-        // OK, this `Entity` had a name, so it's name shall be erased.
-        this->universe->erase_entity(this->name);
+        // Local names must be erased in the destructors
+        // of classes that inherit `yli::ontology::Entity`!
+        // They can not be erased here in `Entity` destructor,
+        // because `Entity` class does not keep track of the
+        // parent. `Entity` only provides virtual function
+        // `Entity::get_parent`, but that can not be called
+        // from here.
     }
 
     void Entity::render()
@@ -138,6 +146,60 @@ namespace yli::ontology
         return this->setting_master.get();
     }
 
+    bool Entity::is_entity(const std::string& name) const
+    {
+        return this->entity_map.count(name) == 1;
+    }
+
+    yli::ontology::Entity* Entity::get_entity(const std::string& name) const
+    {
+        if (this->entity_map.count(name) != 1)
+        {
+            return nullptr;
+        }
+
+        return this->entity_map.at(name);
+    }
+
+    std::string Entity::get_entity_names() const
+    {
+        std::string entity_names = "";
+
+        std::vector<std::string> keys;
+        keys.reserve(this->entity_map.size());
+
+        for (auto it : this->entity_map)
+        {
+            if (!entity_names.empty())
+            {
+                entity_names += " ";
+            }
+            std::string key = static_cast<std::string>(it.first);
+            entity_names += key;
+        }
+
+        return entity_names;
+    }
+
+    void Entity::add_entity(const std::string& name, yli::ontology::Entity* const entity)
+    {
+        if (this->entity_map.count(name) == 0)
+        {
+            this->entity_map[name] = entity;
+        }
+    }
+
+    void Entity::erase_entity(const std::string& name)
+    {
+        if (this->entity_map.count(name) == 1)
+        {
+            if (this->entity_map[name]->get_can_be_erased())
+            {
+                this->entity_map.erase(name);
+            }
+        }
+    }
+
     void Entity::prerender() const
     {
         // Requirements:
@@ -168,29 +230,70 @@ namespace yli::ontology
         }
     }
 
-    std::string Entity::get_name() const
+    std::string Entity::get_global_name() const
     {
-        return this->name;
+        return this->global_name;
     }
 
-    void Entity::set_global_name(const std::string& name)
+    std::string Entity::get_local_name() const
+    {
+        return this->local_name;
+    }
+
+    void Entity::set_global_name(const std::string& global_name)
     {
         // Requirements:
         // `this->universe` must not be `nullptr`.
-        // `name` must not be already in use.
+        // `global_name` must not be already in use.
 
         if (this->universe == nullptr)
         {
             return;
         }
 
-        if (this->universe->is_entity(name))
+        if (this->universe->is_entity(global_name))
         {
-            // The name is already in use.
+            // The global name is already in use.
             return;
         }
 
-        this->name = name;
-        this->universe->add_entity(name, this);
+        this->global_name = global_name;
+        this->universe->add_entity(global_name, this);
+
+        if (this->universe == this->get_parent())
+        {
+            // `Universe` is the parent of this `Entity`.
+            // Therefore, local name and global name
+            // are the same for this `Entity`.
+            this->local_name = global_name;
+        }
+    }
+
+    void Entity::set_local_name(const std::string& local_name)
+    {
+        yli::ontology::Entity* const parent = this->get_parent();
+
+        if (parent == nullptr)
+        {
+            return;
+        }
+
+        if (parent->is_entity(local_name))
+        {
+            // The name is in use.
+            return;
+        }
+
+        parent->add_entity(local_name, this);
+        this->local_name = local_name;
+
+        if (parent == this->universe)
+        {
+            // Special case: this `Entity` is a child of the `Universe`!
+            // Therefore, the local name is also the global name,
+            // and vice versa. This means that the requested
+            // global name must not be in use.
+            this->global_name = local_name;
+        }
     }
 }

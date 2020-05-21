@@ -72,7 +72,6 @@
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <string>        // std::string
 #include <utility>       // std::pair
-#include <vector>        // std::vector
 
 namespace yli::data
 {
@@ -504,59 +503,6 @@ namespace yli::ontology
     void Universe::reset_number_of_frames()
     {
         this->number_of_frames = 0;
-    }
-
-    bool Universe::is_entity(const std::string& name) const
-    {
-        return this->entity_map.count(name) == 1;
-    }
-
-    yli::ontology::Entity* Universe::get_entity(const std::string& name) const
-    {
-        if (this->entity_map.count(name) != 1)
-        {
-            return nullptr;
-        }
-        return this->entity_map.at(name);
-    }
-
-    std::string Universe::get_entity_names() const
-    {
-        std::string entity_names = "";
-
-        std::vector<std::string> keys;
-        keys.reserve(this->entity_map.size());
-
-        for (auto it : this->entity_map)
-        {
-            if (!entity_names.empty())
-            {
-                entity_names += " ";
-            }
-            std::string key = static_cast<std::string>(it.first);
-            entity_names += key;
-        }
-
-        return entity_names;
-    }
-
-    void Universe::add_entity(const std::string& name, yli::ontology::Entity* const entity)
-    {
-        if (this->entity_map.count(name) == 0)
-        {
-            this->entity_map[name] = entity;
-        }
-    }
-
-    void Universe::erase_entity(const std::string& name)
-    {
-        if (this->entity_map.count(name) == 1)
-        {
-            if (this->entity_map[name]->get_can_be_erased())
-            {
-                this->entity_map.erase(name);
-            }
-        }
     }
 
     yli::ontology::EntityFactory* Universe::get_entity_factory() const

@@ -175,7 +175,7 @@ namespace yli::ontology
 
         if (entity->get_can_be_erased())
         {
-            universe->entity_map.erase(entity->get_name());
+            universe->entity_map.erase(entity->get_global_name());
             delete entity;
         }
 

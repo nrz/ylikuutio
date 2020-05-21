@@ -26,6 +26,7 @@
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
+#include <unordered_map> // std::unordered_map
 
 namespace yli::config
 {
@@ -66,8 +67,16 @@ namespace yli::ontology
             virtual std::size_t get_number_of_children() const = 0;
             virtual std::size_t get_number_of_descendants() const = 0;
 
-            std::string get_name() const;
-            void set_global_name(const std::string& name);
+            std::string get_global_name() const;
+            std::string get_local_name() const;
+            void set_global_name(const std::string& global_name);
+            void set_local_name(const std::string& local_name);
+
+            bool is_entity(const std::string& name) const;
+            yli::ontology::Entity* get_entity(const std::string& name) const;
+            std::string get_entity_names() const;
+            void add_entity(const std::string& name, yli::ontology::Entity* const entity);
+            void erase_entity(const std::string& name);
 
             bool should_be_rendered;
 
@@ -85,7 +94,8 @@ namespace yli::ontology
 
             std::string type_string;
 
-            std::string name;    // name of this `Entity`.
+            std::string global_name; // global name of this `Entity`.
+            std::string local_name;  // local name of this `Entity`.
 
             bool can_be_erased;
 
@@ -93,6 +103,11 @@ namespace yli::ontology
             PostRenderCallback postrender_callback;
 
             yli::ontology::ParentModule parent_of_any_struct_entities;
+
+            // Named entities are stored here so that they can be recalled, if needed.
+            std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
+
+            yli::ontology::Entity* temp_parent;
 
         private:
             void bind_to_universe();

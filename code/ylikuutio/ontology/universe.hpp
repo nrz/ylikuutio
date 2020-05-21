@@ -45,7 +45,6 @@
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
-#include <unordered_map> // std::unordered_map
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <string>        // std::string
 #include <vector>        // std::vector
@@ -597,13 +596,6 @@ namespace yli::ontology
             void increment_number_of_frames();
             void reset_number_of_frames();
 
-            bool is_entity(const std::string& name) const;
-            yli::ontology::Entity* get_entity(const std::string& name) const;
-            std::string get_entity_names() const;
-
-            void add_entity(const std::string& name, yli::ontology::Entity* const entity);
-            void erase_entity(const std::string& name);
-
             yli::ontology::EntityFactory* get_entity_factory() const;
 
             const glm::mat4& get_projection_matrix() const;
@@ -767,9 +759,6 @@ namespace yli::ontology
             std::shared_ptr<yli::audio::AudioMaster> audio_master;    // pointer to `AudioMaster`.
 
             std::shared_ptr<yli::input::InputMaster> input_master;    // pointer to `InputMaster`.
-
-            // Named entities are stored here so that they can be recalled, if needed.
-            std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
 
             // variables related to the window.
             std::shared_ptr<SDL_GLContext> context;
