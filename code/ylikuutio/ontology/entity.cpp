@@ -94,13 +94,13 @@ namespace yli::ontology
 
         this->universe->unbind_entity(this->entityID);
 
-        if (this->name.empty())
+        if (this->global_name.empty())
         {
             return;
         }
 
-        // OK, this `Entity` had a name, so it's name shall be erased.
-        this->universe->erase_entity(this->name);
+        // OK, this `Entity` had a global name, so it's global name shall be erased.
+        this->universe->erase_entity(this->global_name);
     }
 
     void Entity::render()
@@ -170,27 +170,27 @@ namespace yli::ontology
 
     std::string Entity::get_global_name() const
     {
-        return this->name;
+        return this->global_name;
     }
 
-    void Entity::set_global_name(const std::string& name)
+    void Entity::set_global_name(const std::string& global_name)
     {
         // Requirements:
         // `this->universe` must not be `nullptr`.
-        // `name` must not be already in use.
+        // `global_name` must not be already in use.
 
         if (this->universe == nullptr)
         {
             return;
         }
 
-        if (this->universe->is_entity(name))
+        if (this->universe->is_entity(global_name))
         {
-            // The name is already in use.
+            // The global name is already in use.
             return;
         }
 
-        this->name = name;
-        this->universe->add_entity(name, this);
+        this->global_name = global_name;
+        this->universe->add_entity(global_name, this);
     }
 }

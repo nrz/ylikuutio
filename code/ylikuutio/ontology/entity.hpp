@@ -67,7 +67,7 @@ namespace yli::ontology
             virtual std::size_t get_number_of_descendants() const = 0;
 
             std::string get_global_name() const;
-            void set_global_name(const std::string& name);
+            void set_global_name(const std::string& global_name);
 
             bool should_be_rendered;
 
@@ -85,7 +85,7 @@ namespace yli::ontology
 
             std::string type_string;
 
-            std::string name;    // name of this `Entity`.
+            std::string global_name; // global name of this `Entity`.
 
             bool can_be_erased;
 
