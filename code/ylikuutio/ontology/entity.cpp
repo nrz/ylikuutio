@@ -18,7 +18,6 @@
 #include "entity.hpp"
 #include "universe.hpp"
 #include "parent_module.hpp"
-#include "entity_functions.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
