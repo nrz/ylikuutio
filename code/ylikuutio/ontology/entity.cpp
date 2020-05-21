@@ -168,7 +168,7 @@ namespace yli::ontology
         }
     }
 
-    std::string Entity::get_name() const
+    std::string Entity::get_global_name() const
     {
         return this->name;
     }

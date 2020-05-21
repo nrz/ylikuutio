@@ -66,7 +66,7 @@ namespace yli::ontology
             virtual std::size_t get_number_of_children() const = 0;
             virtual std::size_t get_number_of_descendants() const = 0;
 
-            std::string get_name() const;
+            std::string get_global_name() const;
             void set_global_name(const std::string& name);
 
             bool should_be_rendered;
