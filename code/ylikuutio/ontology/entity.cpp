@@ -30,6 +30,7 @@
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
+#include <vector>        // std::vector
 
 namespace yli::ontology
 {
@@ -136,6 +137,60 @@ namespace yli::ontology
         }
 
         return this->setting_master.get();
+    }
+
+    bool Entity::is_entity(const std::string& name) const
+    {
+        return this->entity_map.count(name) == 1;
+    }
+
+    yli::ontology::Entity* Entity::get_entity(const std::string& name) const
+    {
+        if (this->entity_map.count(name) != 1)
+        {
+            return nullptr;
+        }
+
+        return this->entity_map.at(name);
+    }
+
+    std::string Entity::get_entity_names() const
+    {
+        std::string entity_names = "";
+
+        std::vector<std::string> keys;
+        keys.reserve(this->entity_map.size());
+
+        for (auto it : this->entity_map)
+        {
+            if (!entity_names.empty())
+            {
+                entity_names += " ";
+            }
+            std::string key = static_cast<std::string>(it.first);
+            entity_names += key;
+        }
+
+        return entity_names;
+    }
+
+    void Entity::add_entity(const std::string& name, yli::ontology::Entity* const entity)
+    {
+        if (this->entity_map.count(name) == 0)
+        {
+            this->entity_map[name] = entity;
+        }
+    }
+
+    void Entity::erase_entity(const std::string& name)
+    {
+        if (this->entity_map.count(name) == 1)
+        {
+            if (this->entity_map[name]->get_can_be_erased())
+            {
+                this->entity_map.erase(name);
+            }
+        }
     }
 
     void Entity::prerender() const

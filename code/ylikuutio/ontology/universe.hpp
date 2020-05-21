@@ -596,13 +596,6 @@ namespace yli::ontology
             void increment_number_of_frames();
             void reset_number_of_frames();
 
-            bool is_entity(const std::string& name) const;
-            yli::ontology::Entity* get_entity(const std::string& name) const;
-            std::string get_entity_names() const;
-
-            void add_entity(const std::string& name, yli::ontology::Entity* const entity);
-            void erase_entity(const std::string& name);
-
             yli::ontology::EntityFactory* get_entity_factory() const;
 
             const glm::mat4& get_projection_matrix() const;

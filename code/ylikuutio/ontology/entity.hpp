@@ -70,6 +70,12 @@ namespace yli::ontology
             std::string get_global_name() const;
             void set_global_name(const std::string& global_name);
 
+            bool is_entity(const std::string& name) const;
+            yli::ontology::Entity* get_entity(const std::string& name) const;
+            std::string get_entity_names() const;
+            void add_entity(const std::string& name, yli::ontology::Entity* const entity);
+            void erase_entity(const std::string& name);
+
             bool should_be_rendered;
 
             friend yli::ontology::Universe;
