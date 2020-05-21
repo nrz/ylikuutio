@@ -107,8 +107,6 @@ namespace yli::ontology
             // Named entities are stored here so that they can be recalled, if needed.
             std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
 
-            yli::ontology::Entity* temp_parent;
-
         private:
             void bind_to_universe();
     };
