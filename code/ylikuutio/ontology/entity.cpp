@@ -18,6 +18,7 @@
 #include "entity.hpp"
 #include "universe.hpp"
 #include "parent_module.hpp"
+#include "entity_functions.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
@@ -95,13 +96,19 @@ namespace yli::ontology
 
         this->universe->unbind_entity(this->entityID);
 
-        if (this->global_name.empty())
+        if (!this->global_name.empty())
         {
-            return;
+            // OK, this `Entity` had a global name, so it's global name shall be erased.
+            this->universe->erase_entity(this->global_name);
         }
 
-        // OK, this `Entity` had a global name, so it's global name shall be erased.
-        this->universe->erase_entity(this->global_name);
+        // Local names must be erased in the destructors
+        // of classes that inherit `yli::ontology::Entity`!
+        // They can not be erased here in `Entity` destructor,
+        // because `Entity` class does not keep track of the
+        // parent. `Entity` only provides virtual function
+        // `Entity::get_parent`, but that can not be called
+        // from here.
     }
 
     void Entity::render()
@@ -228,6 +235,11 @@ namespace yli::ontology
         return this->global_name;
     }
 
+    std::string Entity::get_local_name() const
+    {
+        return this->local_name;
+    }
+
     void Entity::set_global_name(const std::string& global_name)
     {
         // Requirements:
@@ -247,5 +259,41 @@ namespace yli::ontology
 
         this->global_name = global_name;
         this->universe->add_entity(global_name, this);
+
+        if (this->universe == this->get_parent())
+        {
+            // `Universe` is the parent of this `Entity`.
+            // Therefore, local name and global name
+            // are the same for this `Entity`.
+            this->local_name = global_name;
+        }
+    }
+
+    void Entity::set_local_name(const std::string& local_name)
+    {
+        yli::ontology::Entity* const parent = this->get_parent();
+
+        if (parent == nullptr)
+        {
+            return;
+        }
+
+        if (parent->is_entity(local_name))
+        {
+            // The name is in use.
+            return;
+        }
+
+        parent->add_entity(local_name, this);
+        this->local_name = local_name;
+
+        if (parent == this->universe)
+        {
+            // Special case: this `Entity` is a child of the `Universe`!
+            // Therefore, the local name is also the global name,
+            // and vice versa. This means that the requested
+            // global name must not be in use.
+            this->global_name = local_name;
+        }
     }
 }
