@@ -45,7 +45,6 @@
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
-#include <unordered_map> // std::unordered_map
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <string>        // std::string
 #include <vector>        // std::vector
@@ -767,9 +766,6 @@ namespace yli::ontology
             std::shared_ptr<yli::audio::AudioMaster> audio_master;    // pointer to `AudioMaster`.
 
             std::shared_ptr<yli::input::InputMaster> input_master;    // pointer to `InputMaster`.
-
-            // Named entities are stored here so that they can be recalled, if needed.
-            std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
 
             // variables related to the window.
             std::shared_ptr<SDL_GLContext> context;

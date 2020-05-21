@@ -26,6 +26,7 @@
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
+#include <unordered_map> // std::unordered_map
 
 namespace yli::config
 {
@@ -93,6 +94,9 @@ namespace yli::ontology
             PostRenderCallback postrender_callback;
 
             yli::ontology::ParentModule parent_of_any_struct_entities;
+
+            // Named entities are stored here so that they can be recalled, if needed.
+            std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
 
         private:
             void bind_to_universe();
