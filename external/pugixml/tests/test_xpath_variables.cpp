@@ -454,7 +454,7 @@ TEST_XML(xpath_variables_copy, "<node />")
 
 	CHECK_XPATH_STRING_VAR(xml_node(), STR("substring($c, count($d[$a]) + $b)"), &set2, STR("ring"));
 
-	set3 = set3;
+	set3 = xpath_variable_set(set3);
 
 	CHECK_XPATH_STRING_VAR(xml_node(), STR("substring($c, count($d[$a]) + $b)"), &set2, STR("ring"));
 
@@ -641,5 +641,31 @@ TEST_XML(xpath_variables_evaluate_node_set_out_of_memory, "<node />")
 	test_runner::_memory_fail_threshold = 1;
 
 	CHECK_ALLOC_FAIL(q.evaluate_node_set(xml_node()).empty());
+}
+
+TEST_XML(xpath_variables_type_conversion, "<node>15</node>")
+{
+	xpath_variable_set set;
+
+	set.set(STR("a"), true);
+	set.set(STR("b"), 42.0);
+	set.set(STR("c"), STR("test"));
+	set.set(STR("d"), doc.select_nodes(STR("node")));
+
+	CHECK_XPATH_BOOLEAN_VAR(xml_node(), STR("boolean($a) = true()"), &set, true);
+	CHECK_XPATH_BOOLEAN_VAR(xml_node(), STR("number($a) = 1"), &set, true);
+	CHECK_XPATH_BOOLEAN_VAR(xml_node(), STR("string($a) = 'true'"), &set, true);
+
+	CHECK_XPATH_BOOLEAN_VAR(xml_node(), STR("boolean($b) = true()"), &set, true);
+	CHECK_XPATH_BOOLEAN_VAR(xml_node(), STR("number($b) = 42"), &set, true);
+	CHECK_XPATH_BOOLEAN_VAR(xml_node(), STR("string($b) = '42'"), &set, true);
+
+	CHECK_XPATH_BOOLEAN_VAR(xml_node(), STR("boolean($c) = true()"), &set, true);
+	CHECK_XPATH_BOOLEAN_VAR(xml_node(), STR("number($c) = 0"), &set, false);
+	CHECK_XPATH_BOOLEAN_VAR(xml_node(), STR("string($c) = 'test'"), &set, true);
+
+	CHECK_XPATH_BOOLEAN_VAR(xml_node(), STR("boolean($d) = true()"), &set, true);
+	CHECK_XPATH_BOOLEAN_VAR(xml_node(), STR("number($d) = 15"), &set, true);
+	CHECK_XPATH_BOOLEAN_VAR(xml_node(), STR("string($d) = '15'"), &set, true);
 }
 #endif

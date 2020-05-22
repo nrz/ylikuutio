@@ -492,6 +492,36 @@ TEST_XML(dom_node_remove_attribute, "<node a1='v1' a2='v2' a3='v3'><child a4='v4
 	CHECK_NODE(doc, STR("<node a2=\"v2\"><child/></node>"));
 }
 
+TEST_XML(dom_node_remove_attributes, "<node a1='v1' a2='v2' a3='v3'><child a4='v4'/></node>")
+{
+	CHECK(!xml_node().remove_attributes());
+	xml_node node = doc.child(STR("node"));
+	xml_node child = node.child(STR("child"));
+
+	CHECK(child.remove_attributes());
+	CHECK_NODE(child, STR("<child/>"));
+
+	CHECK(node.remove_attributes());
+	CHECK_NODE(node, STR("<node><child/></node>"));
+}
+
+TEST_XML(dom_node_remove_attributes_lots, "<node/>")
+{
+	xml_node node = doc.child(STR("node"));
+
+	// this test makes sure we generate at least 2 pages (64K) worth of attribute data
+	// so that we can trigger page deallocation to make sure code is memory safe
+	for (size_t i = 0; i < 10000; ++i)
+		node.append_attribute(STR("a")) = STR("v");
+
+	CHECK_STRING(node.attribute(STR("a")).value(), STR("v"));
+
+	CHECK(node.remove_attributes());
+
+	CHECK_STRING(node.attribute(STR("a")).value(), STR(""));
+	CHECK_NODE(node, STR("<node/>"));
+}
+
 TEST_XML(dom_node_prepend_child, "<node>foo<child/></node>")
 {
 	CHECK(xml_node().prepend_child() == xml_node());
@@ -705,6 +735,36 @@ TEST_XML(dom_node_remove_child, "<node><n1/><n2/><n3/><child><n4/></child></node
 	CHECK(child.remove_child(STR("n4")));
 
 	CHECK_NODE(doc, STR("<node><n2/><child/></node>"));
+}
+
+TEST_XML(dom_node_remove_children, "<node><n1/><n2/><n3/><child><n4/></child></node>")
+{
+	CHECK(!xml_node().remove_children());
+	xml_node node = doc.child(STR("node"));
+	xml_node child = node.child(STR("child"));
+
+	CHECK(child.remove_children());
+	CHECK_NODE(child, STR("<child/>"));
+
+	CHECK(node.remove_children());
+	CHECK_NODE(node, STR("<node/>"));
+}
+
+TEST_XML(dom_node_remove_children_lots, "<node/>")
+{
+	xml_node node = doc.child(STR("node"));
+
+	// this test makes sure we generate at least 2 pages (64K) worth of node data
+	// so that we can trigger page deallocation to make sure code is memory safe
+	for (size_t i = 0; i < 10000; ++i)
+		node.append_child().set_name(STR("n"));
+
+	CHECK(node.child(STR("n")));
+
+	CHECK(node.remove_children());
+
+	CHECK(!node.child(STR("n")));
+	CHECK_NODE(node, STR("<node/>"));
 }
 
 TEST_XML(dom_node_remove_child_complex, "<node id='1'><n1 id1='1' id2='2'/><n2/><n3/><child><n4/></child></node>")
@@ -1699,6 +1759,31 @@ TEST(dom_fp_roundtrip_min_max_double)
 	CHECK(fp_equal(attr.as_double(), std::numeric_limits<double>::min()));
 
 	node.text().set(std::numeric_limits<double>::max());
+	CHECK(fp_equal(node.text().as_double(), std::numeric_limits<double>::max()));
+}
+
+TEST(dom_fp_double_custom_precision)
+{
+	xml_document doc;
+	xml_node node = doc.append_child(STR("node"));
+	xml_attribute attr = node.append_attribute(STR("attr"));
+
+	attr.set_value(std::numeric_limits<double>::min(), 20);
+	CHECK(fp_equal(attr.as_double(), std::numeric_limits<double>::min()));
+
+	attr.set_value(1.0f, 5);
+	CHECK(fp_equal(attr.as_double(), static_cast<double>(1.0f)));
+
+	attr.set_value(3.1415926f, 3);
+	CHECK(!fp_equal(attr.as_double(), static_cast<double>(3.1415926f)));
+
+	node.text().set(1.0f, 5);
+	CHECK(fp_equal(node.text().as_double(), static_cast<double>(1.0f)));
+
+	node.text().set(3.1415926f, 3);
+	CHECK(!fp_equal(node.text().as_double(), static_cast<double>(3.1415926f)));
+
+	node.text().set(std::numeric_limits<double>::max(), 20);
 	CHECK(fp_equal(node.text().as_double(), std::numeric_limits<double>::max()));
 }
 
