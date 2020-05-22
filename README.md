@@ -106,8 +106,8 @@ To cross compile from Linux to Windows:
 
 Crosscompiling from Linux to Windows fails to compile tests.
 This is a known bug in Google Test. Just run `make` *again* if
-compiling ends before you get `hirvi.exe`, `ajokki.exe`, `gpgpu_test.exe`,
-and `angelscript_test.exe`.
+compiling ends before you get `nirvi.exe`, `tulevaisuus.exe`,
+`ajokki.exe`, `gpgpu_test.exe`, and `yli_edit.exe`.
 
 By default compiling tests is disabled when crosscompiling from Linux
 to Windows, due to this issue:
@@ -153,28 +153,37 @@ GPGPU test is a simple GPGPU example. It computes e.g. the distances
 between some railway stations on the current passenger railway network
 of Finland using both floating point and unsigned short values, using
 Floyd-Warshall algorithm. GPGPU test includes also some simpler examples
-on how to copy data and how to shift textures. Press Esc to exit. After
-computing, e.g. Bash scripts `print_float_results_of_width_32` &
-`print_integer_results_of_width_32` can be used to display the
-Floyd-Warshall results in Bash.
+on how to copy data and how to shift textures. After computing,
+e.g. Bash scripts `code/bash/print_float_results_of_width_32` &
+`code/bash/print_integer_results_of_width_32` can be used to display
+the Floyd-Warshall results in Bash.
+
+YliEdit is a universe editor for Ylikuutio. Work in progress.
 
 In Linux:
 
     $ ./hirvi
+    $ ./tulevaisuus
     $ ./ajokki
     $ ./gpgpu_test
+    $ ./yli_edit
 
 In Windows:
 
     > hirvi.exe
+    > tulevaisuus.exe
     > ajokki.exe
     > gpgpu_test.exe
+    > yli_edit.exe
 
-`hirvi.exe`, `ajokki.exe`, and `gpgpu_test.exe` can also be executed in Linux, using Wine:
+`hirvi.exe`, `tulevaisuus.exe`, `ajokki.exe`, `gpgpu_test.exe`, and
+`yli_edit.exe` can also be executed in Linux, using Wine:
 
     $ wine ./hirvi.exe
+    $ wine ./tulevaisuus.exe
     $ wine ./ajokki.exe
     $ wine ./gpgpu_test.exe
+    $ wine ./yli_edit.exe
 
 Press `` to get console. Press F to toggle flying on off.
 Arrow keys work too. Ctrl is turbo. F1 toggles help display
@@ -182,7 +191,7 @@ and there you'll see some more options to try.
 
 To run tests (coverage is still quite limited but underway):
 
-    $ ./unit_tests_with_Google_Test
+    $ ./unit_tests_with_googletest
 
 ## Ylikuutio usage
 This part reflects the current usage of Ylikuutio and will change as new
@@ -195,14 +204,11 @@ and ends the program (cleaning-up). In all these phases mentioned above
 Ylikuutio library functions may be used. Ylikuutio library code is located
 in `code/ylikuutio/` tree. Ylikuutio code may change a lot and so far no
 stable API has been defined. There are also some application code snippets
-in `code/app/` directory. Hirvi, Ajokki and Ylikuutio code itself are the
-best references on how to use Ylikuutio in practice.
+in `code/ylikuutio/snippets/` directory. Hirvi, Ajokki and Ylikuutio code
+itself are the best references on how to use Ylikuutio in practice.
 
 Some available console commands to try in Ajokki:
 * `activate joensuu_center_and_west_scene`
-* `activate helsinki_east_downtown_scene`
-* `activate altiplano_scene`
-* `activate tallinn_scene`
 * `activate helsinki_east_downtown_scene`
 * `set red 1.0`
 * `set green 0.15`
@@ -222,13 +228,13 @@ Some available console commands to try in Ajokki:
 * `set wireframe true`
 * `set wireframe false`
 * `activate turbo_polizei_camera`
-* `get turbo_polizei1 cartesian_coordinates`
-* `get turbo_polizei1 x`
-* `get turbo_polizei1 y`
-* `get turbo_polizei1 z`
-* `set turbo_polizei1 y 50`
-* `set turbo_polizei1 x 100`
-* `set turbo_polizei1 z 200`
+* `get turbo_polizei_bmp1 cartesian_coordinates`
+* `get turbo_polizei_bmp1 x`
+* `get turbo_polizei_bmp1 y`
+* `get turbo_polizei_bmp1 z`
+* `set turbo_polizei_bmp1 y 50`
+* `set turbo_polizei_bmp1 x 100`
+* `set turbo_polizei_bmp1 z 200`
 * `activate cat_camera`
 * `get cat1 cartesian_coordinates`
 * `get cat1 x`
@@ -236,6 +242,12 @@ Some available console commands to try in Ajokki:
 * `get cat1 z`
 * `set cat1 x 123.45`
 * `set cat1 z 210`
+* `bind helsinki_east_downtown_orange_fur_material helsinki_east_downtown_grayscale_shader`.
+* `bind helsinki_east_downtown_orange_fur_material helsinki_east_downtown_shader`.
+* `bind cat1 orient_to_south_brain`.
+* `bind cat1 orient_and_go_east_brain`.
+* `bind cat1 orient_and_go_west_brain`.
+* `bind cat1 rest_brain`.
 * `get framebuffer_width`
 * `get framebuffer_height`
 * `screenshot screenshot1.data`
