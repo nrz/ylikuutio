@@ -19,6 +19,9 @@
 #include "parent_module.hpp"
 #include "entity.hpp"
 
+// Include standard headers
+#include <cstddef> // std::size_t
+
 namespace yli::ontology
 {
     void ChildModule::bind_to_parent_module()
