@@ -24,6 +24,8 @@
 
 namespace yli::ontology
 {
+    class ParentModule;
+
     void ChildModule::bind_to_parent_module()
     {
         // requirements:
