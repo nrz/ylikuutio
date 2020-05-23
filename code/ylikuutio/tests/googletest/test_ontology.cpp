@@ -2738,6 +2738,7 @@ TEST(world_must_be_given_a_global_name_appropriately, headless)
     world->set_global_name("foo");
     ASSERT_EQ(world->get_global_name(), "foo");
     ASSERT_EQ(world->get_local_name(), "foo");
+    ASSERT_TRUE(universe->is_entity("foo"));
 }
 
 TEST(world_must_be_given_a_local_name_appropriately, headless)
@@ -2754,6 +2755,7 @@ TEST(world_must_be_given_a_local_name_appropriately, headless)
     world->set_local_name("foo");
     ASSERT_EQ(world->get_global_name(), "foo");
     ASSERT_EQ(world->get_local_name(), "foo");
+    ASSERT_TRUE(universe->is_entity("foo"));
 }
 
 TEST(world_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
@@ -2771,6 +2773,8 @@ TEST(world_must_be_given_a_global_name_appropriately_after_setting_a_global_name
     world->set_global_name("bar");
     ASSERT_EQ(world->get_global_name(), "bar");
     ASSERT_EQ(world->get_local_name(), "bar");
+    ASSERT_FALSE(universe->is_entity("foo"));
+    ASSERT_TRUE(universe->is_entity("bar"));
 }
 
 TEST(world_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
@@ -2788,6 +2792,8 @@ TEST(world_must_be_given_a_local_name_appropriately_after_setting_a_local_name, 
     world->set_local_name("bar");
     ASSERT_EQ(world->get_global_name(), "bar");
     ASSERT_EQ(world->get_local_name(), "bar");
+    ASSERT_FALSE(universe->is_entity("foo"));
+    ASSERT_TRUE(universe->is_entity("bar"));
 }
 
 TEST(world_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
@@ -2805,6 +2811,8 @@ TEST(world_must_be_given_a_global_name_appropriately_after_setting_a_local_name,
     world->set_global_name("bar");
     ASSERT_EQ(world->get_global_name(), "bar");
     ASSERT_EQ(world->get_local_name(), "bar");
+    ASSERT_FALSE(universe->is_entity("foo"));
+    ASSERT_TRUE(universe->is_entity("bar"));
 }
 
 TEST(world_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
@@ -2822,6 +2830,8 @@ TEST(world_must_be_given_a_local_name_appropriately_after_setting_a_global_name,
     world->set_local_name("bar");
     ASSERT_EQ(world->get_global_name(), "bar");
     ASSERT_EQ(world->get_local_name(), "bar");
+    ASSERT_FALSE(universe->is_entity("foo"));
+    ASSERT_TRUE(universe->is_entity("bar"));
 }
 
 TEST(scene_must_be_given_a_global_name_appropriately, headless)
@@ -2841,6 +2851,8 @@ TEST(scene_must_be_given_a_global_name_appropriately, headless)
     scene->set_global_name("foo");
     ASSERT_EQ(scene->get_global_name(), "foo");
     ASSERT_EQ(scene->get_local_name(), "");
+    ASSERT_TRUE(universe->is_entity("foo"));
+    ASSERT_FALSE(world->is_entity("foo"));
 }
 
 TEST(scene_must_be_given_a_local_name_appropriately, headless)
@@ -2860,6 +2872,8 @@ TEST(scene_must_be_given_a_local_name_appropriately, headless)
     scene->set_local_name("foo");
     ASSERT_EQ(scene->get_global_name(), "");
     ASSERT_EQ(scene->get_local_name(), "foo");
+    ASSERT_FALSE(universe->is_entity("foo"));
+    ASSERT_TRUE(world->is_entity("foo"));
 }
 
 TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
@@ -2880,6 +2894,10 @@ TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_global_name
     scene->set_global_name("bar");
     ASSERT_EQ(scene->get_global_name(), "bar");
     ASSERT_EQ(scene->get_local_name(), "");
+    ASSERT_FALSE(universe->is_entity("foo"));
+    ASSERT_TRUE(universe->is_entity("bar"));
+    ASSERT_FALSE(world->is_entity("foo"));
+    ASSERT_FALSE(world->is_entity("bar"));
 }
 
 TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
@@ -2900,6 +2918,10 @@ TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_local_name, 
     scene->set_local_name("bar");
     ASSERT_EQ(scene->get_global_name(), "");
     ASSERT_EQ(scene->get_local_name(), "bar");
+    ASSERT_FALSE(universe->is_entity("foo"));
+    ASSERT_FALSE(universe->is_entity("bar"));
+    ASSERT_FALSE(world->is_entity("foo"));
+    ASSERT_TRUE(world->is_entity("bar"));
 }
 
 TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
@@ -2920,6 +2942,10 @@ TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_local_name,
     scene->set_global_name("bar");
     ASSERT_EQ(scene->get_global_name(), "bar");
     ASSERT_EQ(scene->get_local_name(), "foo");
+    ASSERT_FALSE(universe->is_entity("foo"));
+    ASSERT_TRUE(universe->is_entity("bar"));
+    ASSERT_TRUE(world->is_entity("foo"));
+    ASSERT_FALSE(world->is_entity("bar"));
 }
 
 TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
@@ -2940,6 +2966,10 @@ TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_global_name,
     scene->set_local_name("bar");
     ASSERT_EQ(scene->get_global_name(), "foo");
     ASSERT_EQ(scene->get_local_name(), "bar");
+    ASSERT_TRUE(universe->is_entity("foo"));
+    ASSERT_FALSE(universe->is_entity("bar"));
+    ASSERT_FALSE(world->is_entity("foo"));
+    ASSERT_TRUE(world->is_entity("bar"));
 }
 
 TEST(shader_must_be_given_a_global_name_appropriately, headless)
@@ -2963,6 +2993,9 @@ TEST(shader_must_be_given_a_global_name_appropriately, headless)
     shader->set_global_name("foo");
     ASSERT_EQ(shader->get_global_name(), "foo");
     ASSERT_EQ(shader->get_local_name(), "");
+    ASSERT_TRUE(universe->is_entity("foo"));
+    ASSERT_FALSE(world->is_entity("foo"));
+    ASSERT_FALSE(scene->is_entity("foo"));
 }
 
 TEST(shader_must_be_given_a_local_name_appropriately, headless)
@@ -2986,6 +3019,9 @@ TEST(shader_must_be_given_a_local_name_appropriately, headless)
     shader->set_local_name("foo");
     ASSERT_EQ(shader->get_global_name(), "");
     ASSERT_EQ(shader->get_local_name(), "foo");
+    ASSERT_FALSE(universe->is_entity("foo"));
+    ASSERT_FALSE(world->is_entity("foo"));
+    ASSERT_TRUE(scene->is_entity("foo"));
 }
 
 TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
@@ -3010,6 +3046,12 @@ TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_global_nam
     shader->set_global_name("bar");
     ASSERT_EQ(shader->get_global_name(), "bar");
     ASSERT_EQ(shader->get_local_name(), "");
+    ASSERT_FALSE(universe->is_entity("foo"));
+    ASSERT_TRUE(universe->is_entity("bar"));
+    ASSERT_FALSE(world->is_entity("foo"));
+    ASSERT_FALSE(world->is_entity("bar"));
+    ASSERT_FALSE(scene->is_entity("foo"));
+    ASSERT_FALSE(scene->is_entity("bar"));
 }
 
 TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
@@ -3034,6 +3076,12 @@ TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_local_name,
     shader->set_local_name("bar");
     ASSERT_EQ(shader->get_global_name(), "");
     ASSERT_EQ(shader->get_local_name(), "bar");
+    ASSERT_FALSE(universe->is_entity("foo"));
+    ASSERT_FALSE(universe->is_entity("bar"));
+    ASSERT_FALSE(world->is_entity("foo"));
+    ASSERT_FALSE(world->is_entity("bar"));
+    ASSERT_FALSE(scene->is_entity("foo"));
+    ASSERT_TRUE(scene->is_entity("bar"));
 }
 
 TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
@@ -3058,6 +3106,12 @@ TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_local_name
     shader->set_global_name("bar");
     ASSERT_EQ(shader->get_global_name(), "bar");
     ASSERT_EQ(shader->get_local_name(), "foo");
+    ASSERT_FALSE(universe->is_entity("foo"));
+    ASSERT_TRUE(universe->is_entity("bar"));
+    ASSERT_FALSE(world->is_entity("foo"));
+    ASSERT_FALSE(world->is_entity("bar"));
+    ASSERT_TRUE(scene->is_entity("foo"));
+    ASSERT_FALSE(scene->is_entity("bar"));
 }
 
 TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
@@ -3082,4 +3136,10 @@ TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_global_name
     shader->set_local_name("bar");
     ASSERT_EQ(shader->get_global_name(), "foo");
     ASSERT_EQ(shader->get_local_name(), "bar");
+    ASSERT_TRUE(universe->is_entity("foo"));
+    ASSERT_FALSE(universe->is_entity("bar"));
+    ASSERT_FALSE(world->is_entity("foo"));
+    ASSERT_FALSE(world->is_entity("bar"));
+    ASSERT_FALSE(scene->is_entity("foo"));
+    ASSERT_TRUE(scene->is_entity("bar"));
 }
