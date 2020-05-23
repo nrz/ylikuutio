@@ -213,33 +213,33 @@ Some available console commands to try in Ajokki:
 * `set red 1.0`
 * `set green 0.15`
 * `set blue 0.77`
-* `get red`
-* `get green`
-* `get blue`
+* `print red`
+* `print green`
+* `print blue`
 * `set x 123`
 * `set y 456`
 * `set z 789`
-* `get x`
-* `get y`
-* `get z`
+* `print x`
+* `print y`
+* `print z`
 * `info`
 * `info cat_species`
 * `info cat2`
 * `set wireframe true`
 * `set wireframe false`
 * `activate turbo_polizei_camera`
-* `get turbo_polizei_bmp1 cartesian_coordinates`
-* `get turbo_polizei_bmp1 x`
-* `get turbo_polizei_bmp1 y`
-* `get turbo_polizei_bmp1 z`
+* `print turbo_polizei_bmp1 cartesian_coordinates`
+* `print turbo_polizei_bmp1 x`
+* `print turbo_polizei_bmp1 y`
+* `print turbo_polizei_bmp1 z`
 * `set turbo_polizei_bmp1 y 50`
 * `set turbo_polizei_bmp1 x 100`
 * `set turbo_polizei_bmp1 z 200`
 * `activate cat_camera`
-* `get cat1 cartesian_coordinates`
-* `get cat1 x`
-* `get cat1 y`
-* `get cat1 z`
+* `print cat1 cartesian_coordinates`
+* `print cat1 x`
+* `print cat1 y`
+* `print cat1 z`
 * `set cat1 x 123.45`
 * `set cat1 z 210`
 * `bind helsinki_east_downtown_orange_fur_material helsinki_east_downtown_grayscale_shader`.
@@ -248,14 +248,14 @@ Some available console commands to try in Ajokki:
 * `bind cat1 orient_and_go_east_brain`.
 * `bind cat1 orient_and_go_west_brain`.
 * `bind cat1 rest_brain`.
-* `get framebuffer_width`
-* `get framebuffer_height`
+* `print framebuffer_width`
+* `print framebuffer_height`
 * `screenshot screenshot1.data`
 * `set framebuffer_width 2000`
 * `set framebuffer_height 1000`
 * `screenshot screenshot2.data`
-* `get window_width`
-* `get window_height`
+* `print window_width`
+* `print window_height`
 * `set window_width 1000`
 * `set window_height 500`
 
