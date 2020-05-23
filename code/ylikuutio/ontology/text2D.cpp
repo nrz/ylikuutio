@@ -59,6 +59,12 @@ namespace yli::ontology
             return;
         }
 
+        if (new_parent->is_entity(this->local_name))
+        {
+            std::cerr << "ERROR: `Text2D::bind_to_new_parent`: local name is already in use!\n";
+            return;
+        }
+
         // Unbind from the old parent `Font2D`.
         this->child_of_font2D.unbind_child();
 

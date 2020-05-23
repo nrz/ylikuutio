@@ -75,8 +75,14 @@ namespace yli::ontology
             return;
         }
 
+        if (new_parent->is_entity(this->local_name))
+        {
+            std::cerr << "ERROR: `Shader::bind_to_new_parent`: local name is already in use!\n";
+            return;
+        }
+
         // Unbind from the old parent `Scene`.
-        this->parent->unbind_shader(this->childID);
+        this->parent->unbind_shader(this->childID, this->local_name);
 
         // Get `childID` from `Scene` and set pointer to this `Shader`.
         this->parent = new_parent;
@@ -120,7 +126,7 @@ namespace yli::ontology
         else
         {
             // Set pointer to this `Shader` to `nullptr`.
-            scene->unbind_shader(this->childID);
+            scene->unbind_shader(this->childID, this->local_name);
         }
 
         glDeleteProgram(this->programID);

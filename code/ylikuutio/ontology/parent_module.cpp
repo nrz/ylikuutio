@@ -22,25 +22,53 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string>  // std::string
 
 namespace yli::ontology
 {
     void ParentModule::bind_child(yli::ontology::Entity* const child)
     {
-        yli::hierarchy::bind_child_to_parent<yli::ontology::Entity*>(
+        if (this->entity == nullptr || child == nullptr)
+        {
+            return;
+        }
+
+        yli::ontology::bind_child_to_parent<yli::ontology::Entity*>(
                 child,
                 this->child_pointer_vector,
                 this->free_childID_queue,
-                this->number_of_children);
+                this->number_of_children,
+                this->entity->entity_map);
     }
 
     void ParentModule::unbind_child(std::size_t childID)
     {
-        yli::hierarchy::unbind_child_from_parent<yli::ontology::Entity*>(
+        if (this->entity == nullptr)
+        {
+            return;
+        }
+
+        if (childID >= this->child_pointer_vector.size())
+        {
+           return;
+        }
+
+        yli::ontology::Entity* const child = this->child_pointer_vector.at(childID);
+
+        if (child == nullptr)
+        {
+            return;
+        }
+
+        const std::string name = child->get_local_name();
+
+        yli::ontology::unbind_child_from_parent<yli::ontology::Entity*>(
                 childID,
+                name,
                 this->child_pointer_vector,
                 this->free_childID_queue,
-                this->number_of_children);
+                this->number_of_children,
+                this->entity->entity_map);
     }
 
     ParentModule::~ParentModule()

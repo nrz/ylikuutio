@@ -54,6 +54,12 @@ namespace yli::ontology
             return;
         }
 
+        if (new_parent->is_entity(this->local_name))
+        {
+            std::cerr << "ERROR: `Species::bind_to_new_parent`: local name is already in use!\n";
+            return;
+        }
+
         // unbind from the old parent `Material`.
         this->child.unbind_child();
 

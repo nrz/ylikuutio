@@ -3143,3 +3143,900 @@ TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_global_name
     ASSERT_FALSE(scene->is_entity("foo"));
     ASSERT_TRUE(scene->is_entity("bar"));
 }
+
+TEST(scene_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_scene_with_only_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world1 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world1;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world1->parent_of_scenes);
+
+    yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    scene->set_local_name("foo");
+    scene->bind_to_new_parent(world2);
+    ASSERT_FALSE(world1->is_entity("foo"));
+    ASSERT_TRUE(world2->is_entity("foo"));
+    ASSERT_EQ(scene->get_parent(), world2);
+    ASSERT_EQ(world1->get_number_of_children(), 0);
+    ASSERT_EQ(world1->get_number_of_descendants(), 0);
+    ASSERT_EQ(world2->get_number_of_children(), 1);
+    ASSERT_EQ(world2->get_number_of_descendants(), 2);
+
+    scene->bind_to_new_parent(world1);
+    ASSERT_TRUE(world1->is_entity("foo"));
+    ASSERT_FALSE(world2->is_entity("foo"));
+    ASSERT_EQ(scene->get_parent(), world1);
+    ASSERT_EQ(world1->get_number_of_children(), 1);
+    ASSERT_EQ(world1->get_number_of_descendants(), 2);
+    ASSERT_EQ(world2->get_number_of_children(), 0);
+    ASSERT_EQ(world2->get_number_of_descendants(), 0);
+}
+
+TEST(scene_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_scene_with_global_name_and_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world1 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world1;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world1->parent_of_scenes);
+
+    yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    scene->set_global_name("foo");
+    scene->set_local_name("bar");
+    scene->bind_to_new_parent(world2);
+    ASSERT_FALSE(world1->is_entity("foo"));
+    ASSERT_FALSE(world2->is_entity("foo"));
+    ASSERT_FALSE(world1->is_entity("bar"));
+    ASSERT_TRUE(world2->is_entity("bar"));
+    ASSERT_EQ(scene->get_parent(), world2);
+    ASSERT_EQ(world1->get_number_of_children(), 0);
+    ASSERT_EQ(world1->get_number_of_descendants(), 0);
+    ASSERT_EQ(world2->get_number_of_children(), 1);
+    ASSERT_EQ(world2->get_number_of_descendants(), 2);
+
+    scene->bind_to_new_parent(world1);
+    ASSERT_FALSE(world1->is_entity("foo"));
+    ASSERT_FALSE(world2->is_entity("foo"));
+    ASSERT_TRUE(world1->is_entity("bar"));
+    ASSERT_FALSE(world2->is_entity("bar"));
+    ASSERT_EQ(scene->get_parent(), world1);
+    ASSERT_EQ(world1->get_number_of_children(), 1);
+    ASSERT_EQ(world1->get_number_of_descendants(), 2);
+    ASSERT_EQ(world2->get_number_of_children(), 0);
+    ASSERT_EQ(world2->get_number_of_descendants(), 0);
+}
+
+TEST(scene_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_scenes_with_only_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world1 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct1;
+    scene_struct1.world = world1;
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct1, &world1->parent_of_scenes);
+
+    yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct2;
+    scene_struct2.world = world2;
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct2, &world2->parent_of_scenes);
+
+    scene1->set_local_name("foo");
+    scene2->set_local_name("foo");
+    scene1->bind_to_new_parent(world2);
+    ASSERT_EQ(scene1->get_parent(), world1);
+    ASSERT_EQ(scene2->get_parent(), world2);
+    ASSERT_EQ(world1->get_number_of_children(), 1);
+    ASSERT_EQ(world1->get_number_of_descendants(), 2);
+    ASSERT_EQ(world2->get_number_of_children(), 1);
+    ASSERT_EQ(world2->get_number_of_descendants(), 2);
+    ASSERT_TRUE(world1->is_entity("foo"));
+    ASSERT_TRUE(world2->is_entity("foo"));
+}
+
+TEST(scene_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_scenes_with_different_global_names_and_same_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world1 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct1;
+    scene_struct1.world = world1;
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct1, &world1->parent_of_scenes);
+
+    yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct2;
+    scene_struct2.world = world2;
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct2, &world2->parent_of_scenes);
+
+    scene1->set_global_name("foo");
+    scene2->set_global_name("bar");
+    scene1->set_local_name("baz");
+    scene2->set_local_name("baz");
+    scene1->bind_to_new_parent(world2);
+    ASSERT_EQ(scene1->get_parent(), world1);
+    ASSERT_EQ(scene2->get_parent(), world2);
+    ASSERT_EQ(world1->get_number_of_children(), 1);
+    ASSERT_EQ(world1->get_number_of_descendants(), 2);
+    ASSERT_EQ(world2->get_number_of_children(), 1);
+    ASSERT_EQ(world2->get_number_of_descendants(), 2);
+    ASSERT_FALSE(world1->is_entity("foo"));
+    ASSERT_FALSE(world2->is_entity("foo"));
+    ASSERT_FALSE(world1->is_entity("bar"));
+    ASSERT_FALSE(world2->is_entity("bar"));
+    ASSERT_TRUE(world1->is_entity("baz"));
+    ASSERT_TRUE(world2->is_entity("baz"));
+}
+
+TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_shader_with_only_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct1;
+    scene_struct1.world = world;
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct1, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene1;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::SceneStruct scene_struct2;
+    scene_struct2.world = world;
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct2, &world->parent_of_scenes);
+
+    shader->set_local_name("foo");
+    shader->bind_to_new_parent(scene2);
+    ASSERT_FALSE(scene1->is_entity("foo"));
+    ASSERT_TRUE(scene2->is_entity("foo"));
+    ASSERT_EQ(shader->get_parent(), scene2);
+    ASSERT_EQ(scene1->get_number_of_children(), 1);
+    ASSERT_EQ(scene1->get_number_of_descendants(), 1);
+    ASSERT_EQ(scene2->get_number_of_children(), 2);
+    ASSERT_EQ(scene2->get_number_of_descendants(), 2);
+
+    shader->bind_to_new_parent(scene1);
+    ASSERT_TRUE(scene1->is_entity("foo"));
+    ASSERT_FALSE(scene2->is_entity("foo"));
+    ASSERT_EQ(shader->get_parent(), scene1);
+    ASSERT_EQ(scene1->get_number_of_children(), 2);
+    ASSERT_EQ(scene1->get_number_of_descendants(), 2);
+    ASSERT_EQ(scene2->get_number_of_children(), 1);
+    ASSERT_EQ(scene2->get_number_of_descendants(), 1);
+}
+
+TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_shader_with_global_name_and_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct1;
+    scene_struct1.world = world;
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct1, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene1;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::SceneStruct scene_struct2;
+    scene_struct2.world = world;
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct2, &world->parent_of_scenes);
+
+    shader->set_global_name("foo");
+    shader->set_local_name("bar");
+    shader->bind_to_new_parent(scene2);
+    ASSERT_FALSE(scene1->is_entity("foo"));
+    ASSERT_FALSE(scene2->is_entity("foo"));
+    ASSERT_FALSE(scene1->is_entity("bar"));
+    ASSERT_TRUE(scene2->is_entity("bar"));
+    ASSERT_EQ(shader->get_parent(), scene2);
+    ASSERT_EQ(scene1->get_number_of_children(), 1);
+    ASSERT_EQ(scene1->get_number_of_descendants(), 1);
+    ASSERT_EQ(scene2->get_number_of_children(), 2);
+    ASSERT_EQ(scene2->get_number_of_descendants(), 2);
+
+    shader->bind_to_new_parent(scene1);
+    ASSERT_FALSE(scene1->is_entity("foo"));
+    ASSERT_FALSE(scene2->is_entity("foo"));
+    ASSERT_TRUE(scene1->is_entity("bar"));
+    ASSERT_FALSE(scene2->is_entity("bar"));
+    ASSERT_EQ(shader->get_parent(), scene1);
+    ASSERT_EQ(scene1->get_number_of_children(), 2);
+    ASSERT_EQ(scene1->get_number_of_descendants(), 2);
+    ASSERT_EQ(scene2->get_number_of_children(), 1);
+    ASSERT_EQ(scene2->get_number_of_descendants(), 1);
+}
+
+TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_shaders_with_only_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct1;
+    scene_struct1.world = world;
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct1, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct1;
+    shader_struct1.parent = scene1;
+    yli::ontology::Shader* const shader1 = new yli::ontology::Shader(universe, shader_struct1);
+
+    yli::ontology::SceneStruct scene_struct2;
+    scene_struct2.world = world;
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct2, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct2;
+    shader_struct2.parent = scene2;
+    yli::ontology::Shader* const shader2 = new yli::ontology::Shader(universe, shader_struct2);
+
+    shader1->set_local_name("foo");
+    shader2->set_local_name("foo");
+    shader1->bind_to_new_parent(scene2);
+    ASSERT_EQ(shader1->get_parent(), scene1);
+    ASSERT_EQ(scene1->get_number_of_children(), 2);
+    ASSERT_EQ(scene1->get_number_of_descendants(), 2);
+    ASSERT_EQ(scene2->get_number_of_children(), 2);
+    ASSERT_EQ(scene2->get_number_of_descendants(), 2);
+    ASSERT_TRUE(scene1->is_entity("foo"));
+    ASSERT_TRUE(scene2->is_entity("foo"));
+}
+
+TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_shaders_with_different_global_names_and_same_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct1;
+    scene_struct1.world = world;
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct1, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct1;
+    shader_struct1.parent = scene1;
+    yli::ontology::Shader* const shader1 = new yli::ontology::Shader(universe, shader_struct1);
+
+    yli::ontology::SceneStruct scene_struct2;
+    scene_struct2.world = world;
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct2, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct2;
+    shader_struct2.parent = scene2;
+    yli::ontology::Shader* const shader2 = new yli::ontology::Shader(universe, shader_struct2);
+
+    shader1->set_global_name("foo");
+    shader2->set_global_name("bar");
+    shader1->set_local_name("baz");
+    shader2->set_local_name("baz");
+    shader1->bind_to_new_parent(scene2);
+    ASSERT_EQ(shader1->get_parent(), scene1);
+    ASSERT_EQ(scene1->get_number_of_children(), 2);
+    ASSERT_EQ(scene1->get_number_of_descendants(), 2);
+    ASSERT_EQ(scene2->get_number_of_children(), 2);
+    ASSERT_EQ(scene2->get_number_of_descendants(), 2);
+    ASSERT_FALSE(scene1->is_entity("foo"));
+    ASSERT_FALSE(scene2->is_entity("foo"));
+    ASSERT_FALSE(scene1->is_entity("bar"));
+    ASSERT_FALSE(scene2->is_entity("bar"));
+    ASSERT_TRUE(scene1->is_entity("baz"));
+    ASSERT_TRUE(scene2->is_entity("baz"));
+}
+
+TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_material_with_only_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct1;
+    shader_struct1.parent = scene;
+    yli::ontology::Shader* const shader1 = new yli::ontology::Shader(universe, shader_struct1);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.shader = shader1;
+    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &shader1->parent_of_materials);
+
+    yli::ontology::ShaderStruct shader_struct2;
+    shader_struct2.parent = scene;
+    yli::ontology::Shader* const shader2 = new yli::ontology::Shader(universe, shader_struct2);
+
+    material->set_local_name("foo");
+    material->bind_to_new_parent(shader2);
+    ASSERT_FALSE(shader1->is_entity("foo"));
+    ASSERT_TRUE(shader2->is_entity("foo"));
+    ASSERT_EQ(material->get_parent(), shader2);
+    ASSERT_EQ(shader1->get_number_of_children(), 0);
+    ASSERT_EQ(shader1->get_number_of_descendants(), 0);
+    ASSERT_EQ(shader2->get_number_of_children(), 1);
+    ASSERT_EQ(shader2->get_number_of_descendants(), 1);
+
+    material->bind_to_new_parent(shader1);
+    ASSERT_TRUE(shader1->is_entity("foo"));
+    ASSERT_FALSE(shader2->is_entity("foo"));
+    ASSERT_EQ(material->get_parent(), shader1);
+    ASSERT_EQ(shader1->get_number_of_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader2->get_number_of_children(), 0);
+    ASSERT_EQ(shader2->get_number_of_descendants(), 0);
+}
+
+TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_material_with_global_name_and_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct1;
+    shader_struct1.parent = scene;
+    yli::ontology::Shader* const shader1 = new yli::ontology::Shader(universe, shader_struct1);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.shader = shader1;
+    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &shader1->parent_of_materials);
+
+    yli::ontology::ShaderStruct shader_struct2;
+    shader_struct2.parent = scene;
+    yli::ontology::Shader* const shader2 = new yli::ontology::Shader(universe, shader_struct2);
+
+    material->set_global_name("foo");
+    material->set_local_name("bar");
+    material->bind_to_new_parent(shader2);
+    ASSERT_FALSE(shader1->is_entity("foo"));
+    ASSERT_FALSE(shader2->is_entity("foo"));
+    ASSERT_FALSE(shader1->is_entity("bar"));
+    ASSERT_TRUE(shader2->is_entity("bar"));
+    ASSERT_EQ(material->get_parent(), shader2);
+    ASSERT_EQ(shader1->get_number_of_children(), 0);
+    ASSERT_EQ(shader1->get_number_of_descendants(), 0);
+    ASSERT_EQ(shader2->get_number_of_children(), 1);
+    ASSERT_EQ(shader2->get_number_of_descendants(), 1);
+
+    material->bind_to_new_parent(shader1);
+    ASSERT_FALSE(shader1->is_entity("foo"));
+    ASSERT_FALSE(shader2->is_entity("foo"));
+    ASSERT_TRUE(shader1->is_entity("bar"));
+    ASSERT_FALSE(shader2->is_entity("bar"));
+    ASSERT_EQ(material->get_parent(), shader1);
+    ASSERT_EQ(shader1->get_number_of_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader2->get_number_of_children(), 0);
+    ASSERT_EQ(shader2->get_number_of_descendants(), 0);
+}
+
+TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_materials_with_only_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct1;
+    shader_struct1.parent = scene;
+    yli::ontology::Shader* const shader1 = new yli::ontology::Shader(universe, shader_struct1);
+
+    yli::ontology::MaterialStruct material_struct1;
+    material_struct1.shader = shader1;
+    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &shader1->parent_of_materials);
+
+    yli::ontology::ShaderStruct shader_struct2;
+    shader_struct2.parent = scene;
+    yli::ontology::Shader* const shader2 = new yli::ontology::Shader(universe, shader_struct2);
+
+    yli::ontology::MaterialStruct material_struct2;
+    material_struct2.shader = shader2;
+    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &shader2->parent_of_materials);
+
+    material1->set_local_name("foo");
+    material2->set_local_name("foo");
+    material1->bind_to_new_parent(shader2);
+    ASSERT_EQ(material1->get_parent(), shader1);
+    ASSERT_EQ(shader1->get_number_of_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader2->get_number_of_children(), 1);
+    ASSERT_EQ(shader2->get_number_of_descendants(), 1);
+    ASSERT_TRUE(shader1->is_entity("foo"));
+    ASSERT_TRUE(shader2->is_entity("foo"));
+}
+
+TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_materials_with_different_global_names_and_same_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct1;
+    shader_struct1.parent = scene;
+    yli::ontology::Shader* const shader1 = new yli::ontology::Shader(universe, shader_struct1);
+
+    yli::ontology::MaterialStruct material_struct1;
+    material_struct1.shader = shader1;
+    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &shader1->parent_of_materials);
+
+    yli::ontology::ShaderStruct shader_struct2;
+    shader_struct2.parent = scene;
+    yli::ontology::Shader* const shader2 = new yli::ontology::Shader(universe, shader_struct2);
+
+    yli::ontology::MaterialStruct material_struct2;
+    material_struct2.shader = shader2;
+    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &shader2->parent_of_materials);
+
+    material1->set_global_name("foo");
+    material2->set_global_name("bar");
+    material1->set_local_name("baz");
+    material2->set_local_name("baz");
+    material1->bind_to_new_parent(shader2);
+    ASSERT_EQ(material1->get_parent(), shader1);
+    ASSERT_EQ(shader1->get_number_of_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader2->get_number_of_children(), 1);
+    ASSERT_EQ(shader2->get_number_of_descendants(), 1);
+    ASSERT_FALSE(shader1->is_entity("foo"));
+    ASSERT_FALSE(shader2->is_entity("foo"));
+    ASSERT_FALSE(shader1->is_entity("bar"));
+    ASSERT_FALSE(shader2->is_entity("bar"));
+    ASSERT_TRUE(shader1->is_entity("baz"));
+    ASSERT_TRUE(shader2->is_entity("baz"));
+}
+
+TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_species_with_only_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::MaterialStruct material_struct1;
+    material_struct1.shader = shader;
+    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &shader->parent_of_materials);
+
+    yli::ontology::SpeciesStruct species_struct;
+    species_struct.scene = scene;
+    species_struct.shader = shader;
+    species_struct.material = material1;
+    yli::ontology::Species* const species = new yli::ontology::Species(universe, species_struct, &material1->parent_of_species);
+
+    yli::ontology::MaterialStruct material_struct2;
+    material_struct2.shader = shader;
+    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &shader->parent_of_materials);
+
+    species->set_local_name("foo");
+    species->bind_to_new_parent(material2);
+    ASSERT_FALSE(material1->is_entity("foo"));
+    ASSERT_TRUE(material2->is_entity("foo"));
+    ASSERT_EQ(species->get_parent(), material2);
+    ASSERT_EQ(material1->get_number_of_children(), 0);
+    ASSERT_EQ(material1->get_number_of_descendants(), 0);
+    ASSERT_EQ(material2->get_number_of_children(), 1);
+    ASSERT_EQ(material2->get_number_of_descendants(), 1);
+
+    species->bind_to_new_parent(material1);
+    ASSERT_TRUE(material1->is_entity("foo"));
+    ASSERT_FALSE(material2->is_entity("foo"));
+    ASSERT_EQ(species->get_parent(), material1);
+    ASSERT_EQ(material1->get_number_of_children(), 1);
+    ASSERT_EQ(material1->get_number_of_descendants(), 1);
+    ASSERT_EQ(material2->get_number_of_children(), 0);
+    ASSERT_EQ(material2->get_number_of_descendants(), 0);
+}
+
+TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_species_with_global_name_and_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::MaterialStruct material_struct1;
+    material_struct1.shader = shader;
+    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &shader->parent_of_materials);
+
+    yli::ontology::SpeciesStruct species_struct;
+    species_struct.scene = scene;
+    species_struct.shader = shader;
+    species_struct.material = material1;
+    yli::ontology::Species* const species = new yli::ontology::Species(universe, species_struct, &material1->parent_of_species);
+
+    yli::ontology::MaterialStruct material_struct2;
+    material_struct2.shader = shader;
+    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &shader->parent_of_materials);
+
+    species->set_global_name("foo");
+    species->set_local_name("bar");
+    species->bind_to_new_parent(material2);
+    ASSERT_FALSE(material1->is_entity("foo"));
+    ASSERT_FALSE(material2->is_entity("foo"));
+    ASSERT_FALSE(material1->is_entity("bar"));
+    ASSERT_TRUE(material2->is_entity("bar"));
+    ASSERT_EQ(species->get_parent(), material2);
+    ASSERT_EQ(material1->get_number_of_children(), 0);
+    ASSERT_EQ(material1->get_number_of_descendants(), 0);
+    ASSERT_EQ(material2->get_number_of_children(), 1);
+    ASSERT_EQ(material2->get_number_of_descendants(), 1);
+
+    species->bind_to_new_parent(material1);
+    ASSERT_FALSE(material1->is_entity("foo"));
+    ASSERT_FALSE(material2->is_entity("foo"));
+    ASSERT_TRUE(material1->is_entity("bar"));
+    ASSERT_FALSE(material2->is_entity("bar"));
+    ASSERT_EQ(species->get_parent(), material1);
+    ASSERT_EQ(material1->get_number_of_children(), 1);
+    ASSERT_EQ(material1->get_number_of_descendants(), 1);
+    ASSERT_EQ(material2->get_number_of_children(), 0);
+    ASSERT_EQ(material2->get_number_of_descendants(), 0);
+}
+
+TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_species_with_only_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::MaterialStruct material_struct1;
+    material_struct1.shader = shader;
+    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &shader->parent_of_materials);
+
+    yli::ontology::SpeciesStruct species_struct1;
+    species_struct1.scene = scene;
+    species_struct1.shader = shader;
+    species_struct1.material = material1;
+    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, species_struct1, &material1->parent_of_species);
+
+    yli::ontology::MaterialStruct material_struct2;
+    material_struct2.shader = shader;
+    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &shader->parent_of_materials);
+
+    yli::ontology::SpeciesStruct species_struct2;
+    species_struct2.scene = scene;
+    species_struct2.shader = shader;
+    species_struct2.material = material2;
+    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, species_struct2, &material2->parent_of_species);
+
+    species1->set_local_name("foo");
+    species2->set_local_name("foo");
+    species1->bind_to_new_parent(material2);
+    ASSERT_EQ(species1->get_parent(), material1);
+    ASSERT_EQ(material1->get_number_of_children(), 1);
+    ASSERT_EQ(material1->get_number_of_descendants(), 1);
+    ASSERT_EQ(material2->get_number_of_children(), 1);
+    ASSERT_EQ(material2->get_number_of_descendants(), 1);
+    ASSERT_TRUE(material1->is_entity("foo"));
+    ASSERT_TRUE(material2->is_entity("foo"));
+}
+
+TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_species_with_different_global_names_and_same_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::MaterialStruct material_struct1;
+    material_struct1.shader = shader;
+    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &shader->parent_of_materials);
+
+    yli::ontology::SpeciesStruct species_struct1;
+    species_struct1.scene = scene;
+    species_struct1.shader = shader;
+    species_struct1.material = material1;
+    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, species_struct1, &material1->parent_of_species);
+
+    yli::ontology::MaterialStruct material_struct2;
+    material_struct2.shader = shader;
+    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &shader->parent_of_materials);
+
+    yli::ontology::SpeciesStruct species_struct2;
+    species_struct2.scene = scene;
+    species_struct2.shader = shader;
+    species_struct2.material = material2;
+    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, species_struct2, &material2->parent_of_species);
+
+    species1->set_global_name("foo");
+    species2->set_global_name("bar");
+    species1->set_local_name("baz");
+    species2->set_local_name("baz");
+    species1->bind_to_new_parent(material2);
+    ASSERT_EQ(species1->get_parent(), material1);
+    ASSERT_EQ(material1->get_number_of_children(), 1);
+    ASSERT_EQ(material1->get_number_of_descendants(), 1);
+    ASSERT_EQ(material2->get_number_of_children(), 1);
+    ASSERT_EQ(material2->get_number_of_descendants(), 1);
+    ASSERT_FALSE(material1->is_entity("foo"));
+    ASSERT_FALSE(material2->is_entity("foo"));
+    ASSERT_FALSE(material1->is_entity("bar"));
+    ASSERT_FALSE(material2->is_entity("bar"));
+    ASSERT_TRUE(material1->is_entity("baz"));
+    ASSERT_TRUE(material2->is_entity("baz"));
+}
+
+TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_object_with_only_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.shader = shader;
+    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &shader->parent_of_materials);
+
+    yli::ontology::SpeciesStruct species_struct1;
+    species_struct1.scene = scene;
+    species_struct1.shader = shader;
+    species_struct1.material = material;
+    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, species_struct1, &material->parent_of_species);
+
+    yli::ontology::ObjectStruct object_struct;
+    object_struct.species_parent = species1;
+    yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species1->parent_of_objects);
+
+    yli::ontology::SpeciesStruct species_struct2;
+    species_struct2.scene = scene;
+    species_struct2.shader = shader;
+    species_struct2.material = material;
+    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, species_struct2, &material->parent_of_species);
+
+    object->set_local_name("foo");
+    object->bind_to_new_parent(species2);
+    ASSERT_FALSE(species1->is_entity("foo"));
+    ASSERT_TRUE(species2->is_entity("foo"));
+    ASSERT_EQ(object->get_parent(), species2);
+    ASSERT_EQ(species1->get_number_of_children(), 0);
+    ASSERT_EQ(species1->get_number_of_descendants(), 0);
+    ASSERT_EQ(species2->get_number_of_children(), 1);
+    ASSERT_EQ(species2->get_number_of_descendants(), 1);
+
+    object->bind_to_new_parent(species1);
+    ASSERT_TRUE(species1->is_entity("foo"));
+    ASSERT_FALSE(species2->is_entity("foo"));
+    ASSERT_EQ(object->get_parent(), species1);
+    ASSERT_EQ(species1->get_number_of_children(), 1);
+    ASSERT_EQ(species1->get_number_of_descendants(), 1);
+    ASSERT_EQ(species2->get_number_of_children(), 0);
+    ASSERT_EQ(species2->get_number_of_descendants(), 0);
+}
+
+TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_object_with_global_name_and_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.shader = shader;
+    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &shader->parent_of_materials);
+
+    yli::ontology::SpeciesStruct species_struct1;
+    species_struct1.scene = scene;
+    species_struct1.shader = shader;
+    species_struct1.material = material;
+    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, species_struct1, &material->parent_of_species);
+
+    yli::ontology::ObjectStruct object_struct;
+    object_struct.species_parent = species1;
+    yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species1->parent_of_objects);
+
+    yli::ontology::SpeciesStruct species_struct2;
+    species_struct2.scene = scene;
+    species_struct2.shader = shader;
+    species_struct2.material = material;
+    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, species_struct2, &material->parent_of_species);
+
+    object->set_global_name("foo");
+    object->set_local_name("bar");
+    object->bind_to_new_parent(species2);
+    ASSERT_FALSE(species1->is_entity("foo"));
+    ASSERT_FALSE(species2->is_entity("foo"));
+    ASSERT_FALSE(species1->is_entity("bar"));
+    ASSERT_TRUE(species2->is_entity("bar"));
+    ASSERT_EQ(object->get_parent(), species2);
+    ASSERT_EQ(species1->get_number_of_children(), 0);
+    ASSERT_EQ(species1->get_number_of_descendants(), 0);
+    ASSERT_EQ(species2->get_number_of_children(), 1);
+    ASSERT_EQ(species2->get_number_of_descendants(), 1);
+
+    object->bind_to_new_parent(species1);
+    ASSERT_FALSE(species1->is_entity("foo"));
+    ASSERT_FALSE(species2->is_entity("foo"));
+    ASSERT_TRUE(species1->is_entity("bar"));
+    ASSERT_FALSE(species2->is_entity("bar"));
+    ASSERT_EQ(object->get_parent(), species1);
+    ASSERT_EQ(species1->get_number_of_children(), 1);
+    ASSERT_EQ(species1->get_number_of_descendants(), 1);
+    ASSERT_EQ(species2->get_number_of_children(), 0);
+    ASSERT_EQ(species2->get_number_of_descendants(), 0);
+}
+
+TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_objects_with_only_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.shader = shader;
+    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &shader->parent_of_materials);
+
+    yli::ontology::SpeciesStruct species_struct1;
+    species_struct1.scene = scene;
+    species_struct1.shader = shader;
+    species_struct1.material = material;
+    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, species_struct1, &material->parent_of_species);
+
+    yli::ontology::ObjectStruct object_struct1;
+    object_struct1.species_parent = species1;
+    yli::ontology::Object* const object1 = new yli::ontology::Object(universe, object_struct1, &species1->parent_of_objects);
+
+    yli::ontology::SpeciesStruct species_struct2;
+    species_struct2.scene = scene;
+    species_struct2.shader = shader;
+    species_struct2.material = material;
+    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, species_struct2, &material->parent_of_species);
+
+    yli::ontology::ObjectStruct object_struct2;
+    object_struct2.species_parent = species2;
+    yli::ontology::Object* const object2 = new yli::ontology::Object(universe, object_struct2, &species2->parent_of_objects);
+
+    object1->set_local_name("foo");
+    object2->set_local_name("foo");
+    object1->bind_to_new_parent(species2);
+    ASSERT_EQ(object1->get_parent(), species1);
+    ASSERT_EQ(species1->get_number_of_children(), 1);
+    ASSERT_EQ(species1->get_number_of_descendants(), 1);
+    ASSERT_EQ(species2->get_number_of_children(), 1);
+    ASSERT_EQ(species2->get_number_of_descendants(), 1);
+    ASSERT_TRUE(species1->is_entity("foo"));
+    ASSERT_TRUE(species2->is_entity("foo"));
+}
+
+TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_objects_with_different_global_names_and_same_local_name)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.world = world;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.shader = shader;
+    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &shader->parent_of_materials);
+
+    yli::ontology::SpeciesStruct species_struct1;
+    species_struct1.scene = scene;
+    species_struct1.shader = shader;
+    species_struct1.material = material;
+    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, species_struct1, &material->parent_of_species);
+
+    yli::ontology::ObjectStruct object_struct1;
+    object_struct1.species_parent = species1;
+    yli::ontology::Object* const object1 = new yli::ontology::Object(universe, object_struct1, &species1->parent_of_objects);
+
+    yli::ontology::SpeciesStruct species_struct2;
+    species_struct2.scene = scene;
+    species_struct2.shader = shader;
+    species_struct2.material = material;
+    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, species_struct2, &material->parent_of_species);
+
+    yli::ontology::ObjectStruct object_struct2;
+    object_struct2.species_parent = species2;
+    yli::ontology::Object* const object2 = new yli::ontology::Object(universe, object_struct2, &species2->parent_of_objects);
+
+    object1->set_global_name("foo");
+    object2->set_global_name("bar");
+    object1->set_local_name("baz");
+    object2->set_local_name("baz");
+    object1->bind_to_new_parent(species2);
+    ASSERT_EQ(object1->get_parent(), species1);
+    ASSERT_EQ(species1->get_number_of_children(), 1);
+    ASSERT_EQ(species1->get_number_of_descendants(), 1);
+    ASSERT_EQ(species2->get_number_of_children(), 1);
+    ASSERT_EQ(species2->get_number_of_descendants(), 1);
+    ASSERT_FALSE(species1->is_entity("foo"));
+    ASSERT_FALSE(species2->is_entity("foo"));
+    ASSERT_FALSE(species1->is_entity("bar"));
+    ASSERT_FALSE(species2->is_entity("bar"));
+    ASSERT_TRUE(species1->is_entity("baz"));
+    ASSERT_TRUE(species2->is_entity("baz"));
+}
