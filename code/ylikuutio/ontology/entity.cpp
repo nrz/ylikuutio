@@ -256,6 +256,10 @@ namespace yli::ontology
             return;
         }
 
+        // Erase old global name.
+        this->universe->erase_entity(this->global_name);
+
+        // Set new global name.
         this->global_name = global_name;
         this->universe->add_entity(global_name, this);
 
