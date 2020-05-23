@@ -182,7 +182,7 @@ namespace yli::ontology
 
     void Entity::add_entity(const std::string& name, yli::ontology::Entity* const entity)
     {
-        if (this->entity_map.count(name) == 0)
+        if (!name.empty() && this->entity_map.count(name) == 0)
         {
             this->entity_map[name] = entity;
         }
