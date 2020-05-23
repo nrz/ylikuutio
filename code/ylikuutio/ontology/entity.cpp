@@ -182,7 +182,7 @@ namespace yli::ontology
 
     void Entity::add_entity(const std::string& name, yli::ontology::Entity* const entity)
     {
-        if (this->entity_map.count(name) == 0)
+        if (!name.empty() && this->entity_map.count(name) == 0)
         {
             this->entity_map[name] = entity;
         }
@@ -256,6 +256,10 @@ namespace yli::ontology
             return;
         }
 
+        // Erase old global name.
+        this->universe->erase_entity(this->global_name);
+
+        // Set new global name.
         this->global_name = global_name;
         this->universe->add_entity(global_name, this);
 
@@ -283,6 +287,10 @@ namespace yli::ontology
             return;
         }
 
+        // Erase old local name.
+        parent->erase_entity(this->local_name);
+
+        // Set new local name.
         parent->add_entity(local_name, this);
         this->local_name = local_name;
 

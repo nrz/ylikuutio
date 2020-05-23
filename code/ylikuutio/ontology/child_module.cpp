@@ -21,6 +21,8 @@
 
 namespace yli::ontology
 {
+    class ParentModule;
+
     void ChildModule::bind_to_parent_module()
     {
         // requirements:
@@ -72,14 +74,19 @@ namespace yli::ontology
         return this->parent_module->get_entity();
     }
 
-    void ChildModule::unbind_child(const std::size_t childID) const
+    void ChildModule::unbind_child() const
     {
         if (this->parent_module == nullptr)
         {
             return;
         }
 
-        this->parent_module->unbind_child(childID);
+        if (this->entity == nullptr)
+        {
+            return;
+        }
+
+        this->parent_module->unbind_child(entity->get_childID());
     }
 
     void ChildModule::set_parent_module_and_bind_to_new_parent(yli::ontology::ParentModule* const new_parent_module)

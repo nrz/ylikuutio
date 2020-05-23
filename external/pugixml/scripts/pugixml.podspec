@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
   s.name         = "pugixml"
-  s.version      = "1.9"
+  s.version      = "1.10"
   s.summary      = "C++ XML parser library."
-  s.homepage     = "http://pugixml.org"
+  s.homepage     = "https://pugixml.org"
   s.license      = "MIT"
   s.author       = { "Arseny Kapoulkine" => "arseny.kapoulkine@gmail.com" }
   s.platform     = :ios, "7.0"

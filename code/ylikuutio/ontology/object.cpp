@@ -80,8 +80,14 @@ namespace yli::ontology
                 return;
             }
 
+            if (new_parent->is_entity(this->local_name))
+            {
+                std::cerr << "ERROR: `Object::bind_to_new_parent`: local name is already in use!\n";
+                return;
+            }
+
             // unbind from the old parent `Species`.
-            this->child.unbind_child(this->childID);
+            this->child.unbind_child();
 
             // get `childID` from `Species` and set pointer to this `Object`.
             this->child.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_objects);
@@ -113,8 +119,14 @@ namespace yli::ontology
                 return;
             }
 
+            if (new_parent->is_entity(this->local_name))
+            {
+                std::cerr << "ERROR: `Object::bind_to_new_parent`: local name is already in use!\n";
+                return;
+            }
+
             // unbind from the old parent `ShapeshifterSequence`.
-            this->child.unbind_child(this->childID);
+            this->child.unbind_child();
 
             // get `childID` from `ShapeshifterSequence` and set pointer to this `Object`.
             this->child.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_objects);
@@ -146,8 +158,14 @@ namespace yli::ontology
                 return;
             }
 
+            if (new_parent->is_entity(this->local_name))
+            {
+                std::cerr << "ERROR: `Object::bind_to_new_parent`: local name is already in use!\n";
+                return;
+            }
+
             // unbind from the old parent `Text3D`.
-            this->child.unbind_child(this->childID);
+            this->child.unbind_child();
 
             // get `childID` from `Text3D` and set pointer to this `Object`.
             this->child.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_objects);

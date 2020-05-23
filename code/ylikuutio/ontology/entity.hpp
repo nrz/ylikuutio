@@ -81,6 +81,7 @@ namespace yli::ontology
             bool should_be_rendered;
 
             friend yli::ontology::Universe;
+            friend yli::ontology::ParentModule;
 
             std::size_t childID; // TODO: add checks for `std::numeric_limits<std::size_t>::max();` (invalid value).
 

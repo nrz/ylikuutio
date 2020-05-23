@@ -72,6 +72,12 @@ namespace yli::ontology
             return;
         }
 
+        if (new_parent->is_entity(this->local_name))
+        {
+            std::cerr << "ERROR: `VectorFont::bind_to_new_parent`: local name is already in use!\n";
+            return;
+        }
+
         // Unbind from the old parent `Material`.
         material->parent_of_vector_fonts.unbind_child(this->childID);
 

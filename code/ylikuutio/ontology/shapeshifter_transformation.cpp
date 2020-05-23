@@ -68,6 +68,12 @@ namespace yli::ontology
             return;
         }
 
+        if (new_parent->is_entity(this->local_name))
+        {
+            std::cerr << "ERROR: `ShapeshifterTransformation::bind_to_new_parent`: local name is already in use!\n";
+            return;
+        }
+
         // unbind from the old parent `Material`.
         material->parent_of_shapeshifter_transformations.unbind_child(this->childID);
 

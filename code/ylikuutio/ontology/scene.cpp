@@ -61,18 +61,23 @@ namespace yli::ontology
 
         // `shader` needs to be added to the priority queue as well.
         this->shader_priority_queue.push(shader);
+
+        // `shader` with a local name needs to be added to `entity_map` as well.
+        this->add_entity(shader->get_local_name(), shader);
     }
 
-    void Scene::unbind_shader(const std::size_t childID)
+    void Scene::unbind_shader(const std::size_t childID, const std::string& local_name)
     {
         // `shader` needs to be removed from the priority queue as well.
         this->shader_priority_queue.remove(childID);
 
-        yli::hierarchy::unbind_child_from_parent(
+        yli::ontology::unbind_child_from_parent(
                 childID,
+                local_name,
                 this->shader_pointer_vector,
                 this->free_shaderID_queue,
-                this->number_of_shaders);
+                this->number_of_shaders,
+                this->entity_map);
     }
 
     void Scene::bind_to_new_parent(yli::ontology::World* const new_parent)
@@ -98,8 +103,14 @@ namespace yli::ontology
             return;
         }
 
+        if (new_parent->is_entity(this->local_name))
+        {
+            std::cerr << "ERROR: `Scene::bind_to_new_parent`: local name is already in use!\n";
+            return;
+        }
+
         // Unbind from the old parent `World`.
-        this->child_of_world.unbind_child(this->childID);
+        this->child_of_world.unbind_child();
 
         // Get `childID` from `World` and set pointer to this `Scene`.
         this->child_of_world.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_scenes);

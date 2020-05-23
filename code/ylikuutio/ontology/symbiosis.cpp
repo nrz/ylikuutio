@@ -73,8 +73,14 @@ namespace yli::ontology
             return;
         }
 
+        if (new_parent->is_entity(this->local_name))
+        {
+            std::cerr << "ERROR: `Symbiosis::bind_to_new_parent`: local name is already in use!\n";
+            return;
+        }
+
         // unbind from the old parent `Shader`.
-        this->child_of_shader.unbind_child(this->childID);
+        this->child_of_shader.unbind_child();
 
         // get `childID` from `Shader` and set pointer to this `Symbiosis`.
         this->child_of_shader.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_symbioses);

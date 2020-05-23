@@ -10,6 +10,14 @@
 #include <algorithm>
 #include <limits>
 
+//  std::random_shuffle is deprecated in c++14, is removed in c++17.
+#if defined(__cplusplus) && (__cplusplus >= 201402L)
+#  include <random>
+#  define PUGIXML_SHUFFLE(rng)  std::shuffle(rng.begin(), rng.end(), std::default_random_engine{std::random_device{}()})
+#else
+#  define PUGIXML_SHUFFLE(rng)  std::random_shuffle(rng.begin(), rng.end())
+#endif
+
 using namespace pugi;
 
 static void load_document_copy(xml_document& doc, const char_t* text)
@@ -155,7 +163,7 @@ TEST(xpath_sort_random_medium)
 	xpath_node_set ns = doc.select_nodes(STR("//node() | //@*"));
 
 	std::vector<xpath_node> nsv(ns.begin(), ns.end());
-	std::random_shuffle(nsv.begin(), nsv.end());
+	PUGIXML_SHUFFLE(nsv);
 
 	xpath_node_set copy(&nsv[0], &nsv[0] + nsv.size());
 	copy.sort();
@@ -184,7 +192,7 @@ TEST(xpath_sort_random_large)
 	xpath_node_set ns = doc.select_nodes(STR("//node() | //@*"));
 
 	std::vector<xpath_node> nsv(ns.begin(), ns.end());
-	std::random_shuffle(nsv.begin(), nsv.end());
+	PUGIXML_SHUFFLE(nsv);
 
 	xpath_node_set copy(&nsv[0], &nsv[0] + nsv.size());
 	copy.sort();
@@ -205,8 +213,8 @@ TEST(xpath_long_numbers_parse)
 	xml_node c;
 
 	// check parsing
-	CHECK_XPATH_NUMBER(c, str_flt_max, std::numeric_limits<float>::max());
-	CHECK_XPATH_NUMBER(c, str_flt_max_dec, std::numeric_limits<float>::max());
+	CHECK_XPATH_NUMBER(c, str_flt_max, double(std::numeric_limits<float>::max()));
+	CHECK_XPATH_NUMBER(c, str_flt_max_dec, double(std::numeric_limits<float>::max()));
 	CHECK_XPATH_NUMBER(c, str_dbl_max, std::numeric_limits<double>::max());
 	CHECK_XPATH_NUMBER(c, str_dbl_max_dec, std::numeric_limits<double>::max());
 }
@@ -449,14 +457,41 @@ TEST(xpath_out_of_memory_evaluate_substring)
 	CHECK_ALLOC_FAIL(CHECK(q.evaluate_string(0, 0, xml_node()) == 1));
 }
 
-TEST_XML(xpath_out_of_memory_evaluate_union, "<node><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/></node>")
+TEST_XML(xpath_out_of_memory_evaluate_union, "<node />")
 {
-	test_runner::_memory_fail_threshold = 32768 + 4096 * 2;
+	// left hand side: size * sizeof(xpath_node) (8 on 32-bit, 16 on 64-bit)
+	// right hand side: same
+	// to make sure that when we append right hand side to left hand side, we run out of an XPath stack page (4K), we need slightly more than 2K/8 = 256 nodes on 32-bit, 128 nodes on 64-bit
+	size_t count = sizeof(void*) == 4 ? 300 : 150;
 
-	xpath_query q(STR("a|(a|(a|(a|(a|(a|(a|(a|(a|(a|(a|(a|(a|(a|(a|(a|(a|(a|(a|(a|a)))))))))))))))))))"));
+	for (size_t i = 0; i < count; ++i)
+		doc.first_child().append_child(STR("a"));
+
+	xpath_query q(STR("a|a"));
+
+	test_runner::_memory_fail_threshold = 1;
 
 	CHECK_ALLOC_FAIL(CHECK(q.evaluate_node_set(doc.child(STR("node"))).empty()));
 }
+
+TEST_XML(xpath_out_of_memory_evaluate_union_hash, "<node />")
+{
+	// left hand side: size * sizeof(xpath_node) (8 on 32-bit, 16 on 64-bit)
+	// right hand side: same
+	// hash table: size * 1.5 * sizeof(void*)
+	// to make sure that when we append right hand side to left hand side, we do *not* run out of an XPath stack page (4K), we need slightly less than 2K/8 = 256 nodes on 32-bit, 128 nodes on 64-bit
+	size_t count = sizeof(void*) == 4 ? 200 : 100;
+
+	for (size_t i = 0; i < count; ++i)
+		doc.first_child().append_child(STR("a"));
+
+	xpath_query q(STR("a|a"));
+
+	test_runner::_memory_fail_threshold = 1;
+
+	CHECK_ALLOC_FAIL(CHECK(q.evaluate_node_set(doc.child(STR("node"))).empty()));
+}
+
 
 TEST_XML(xpath_out_of_memory_evaluate_predicate, "<node><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/><a/></node>")
 {

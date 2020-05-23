@@ -119,6 +119,12 @@ namespace yli::ontology
             return;
         }
 
+        if (new_parent->is_entity(this->local_name))
+        {
+            std::cerr << "ERROR: `Material::bind_to_new_parent`: local name is already in use!\n";
+            return;
+        }
+
         // Unbind from the old parent `Shader`.
         shader->parent_of_materials.unbind_child(this->childID);
 
