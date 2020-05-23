@@ -18,9 +18,6 @@
 #ifndef __CHILD_MODULE_HPP_INCLUDED
 #define __CHILD_MODULE_HPP_INCLUDED
 
-// Include standard headers
-#include <cstddef> // std::size_t
-
 namespace yli::ontology
 {
     class Entity;
@@ -44,7 +41,7 @@ namespace yli::ontology
             ~ChildModule();
 
             yli::ontology::Entity* get_parent() const;
-            void unbind_child(const std::size_t childID) const;
+            void unbind_child() const;
             void set_parent_module_and_bind_to_new_parent(yli::ontology::ParentModule* const new_parent_module);
 
         private:

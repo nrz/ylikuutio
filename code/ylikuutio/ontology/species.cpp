@@ -55,7 +55,7 @@ namespace yli::ontology
         }
 
         // unbind from the old parent `Material`.
-        this->child.unbind_child(this->childID);
+        this->child.unbind_child();
 
         // get `childID` from `Material` and set pointer to this `Species`.
         this->child.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_species);

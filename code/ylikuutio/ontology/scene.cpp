@@ -99,7 +99,7 @@ namespace yli::ontology
         }
 
         // Unbind from the old parent `World`.
-        this->child_of_world.unbind_child(this->childID);
+        this->child_of_world.unbind_child();
 
         // Get `childID` from `World` and set pointer to this `Scene`.
         this->child_of_world.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_scenes);
