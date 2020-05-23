@@ -81,11 +81,9 @@ namespace yli::ontology
             bool should_be_rendered;
 
             friend yli::ontology::Universe;
+            friend yli::ontology::ParentModule;
 
             std::size_t childID; // TODO: add checks for `std::numeric_limits<std::size_t>::max();` (invalid value).
-
-            // Named entities are stored here so that they can be recalled, if needed.
-            std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
 
         protected:
             void prerender() const;
@@ -106,6 +104,9 @@ namespace yli::ontology
             PostRenderCallback postrender_callback;
 
             yli::ontology::ParentModule parent_of_any_struct_entities;
+
+            // Named entities are stored here so that they can be recalled, if needed.
+            std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
 
         private:
             void bind_to_universe();
