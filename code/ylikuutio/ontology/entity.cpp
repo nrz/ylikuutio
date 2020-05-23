@@ -287,6 +287,10 @@ namespace yli::ontology
             return;
         }
 
+        // Erase old local name.
+        parent->erase_entity(this->local_name);
+
+        // Set new local name.
         parent->add_entity(local_name, this);
         this->local_name = local_name;
 
