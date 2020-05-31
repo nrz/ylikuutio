@@ -18,6 +18,7 @@
 #ifndef __COMPUTE_TASK_STRUCT_HPP_INCLUDED
 #define __COMPUTE_TASK_STRUCT_HPP_INCLUDED
 
+#include "entity_struct.hpp"
 #include "pre_iterate_callback.hpp"
 #include "post_iterate_callback.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -40,7 +41,7 @@ namespace yli::ontology
 {
     class Shader;
 
-    struct ComputeTaskStruct
+    struct ComputeTaskStruct: public yli::ontology::EntityStruct
     {
         ComputeTaskStruct()
             : parent(nullptr),

@@ -22,6 +22,7 @@
 #define PI 3.14159265359f
 #endif
 
+#include "entity_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 
 // Include GLM
@@ -38,7 +39,7 @@ namespace yli::ontology
     class Symbiosis;
     class Brain;
 
-    struct HolobiontStruct
+    struct HolobiontStruct: public yli::ontology::EntityStruct
     {
         HolobiontStruct()
             : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),

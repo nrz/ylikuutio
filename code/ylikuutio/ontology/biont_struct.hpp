@@ -22,6 +22,7 @@
 #define PI 3.14159265359f
 #endif
 
+#include "entity_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 
 // Include GLM
@@ -41,7 +42,7 @@ namespace yli::ontology
     class SymbiontSpecies;
     class Brain;
 
-    struct BiontStruct
+    struct BiontStruct: public yli::ontology::EntityStruct
     {
         BiontStruct()
             : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),

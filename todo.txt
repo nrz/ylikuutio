@@ -6,8 +6,6 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
-[ ] Implement `yli::ontology::EntityStruct` that all other `struct`s used for creating different kinds of Entities should inherit.
-[ ] Inherit `yli::ontology::EntityStruct` in all `struct`s that are used for creating different kinds of Entities.
 [ ] Implement setting the global name by defining the `global_name` member variable of `yli::ontology::EntityStruct`.
 [ ] Implement setting the local name by defining the `local_name` member variable of `yli::ontology::EntityStruct`.
 [ ] Restrict what characters are allowed in global names (regex: `[a-zA-Z][a-zA-Z0-9_-]*`).
@@ -206,3 +204,5 @@ Ready:
 [x] Write `yli::ontology` class generator in Python.
 [x] Implement printing parent of Entities using `Console`.
 [x] Implement creating new named AnyStructEntities using `Console`.
+[x] Implement `yli::ontology::EntityStruct` that all other `struct`s used for creating different kinds of Entities should inherit.
+[x] Inherit `yli::ontology::EntityStruct` in all `struct`s that are used for creating different kinds of Entities.

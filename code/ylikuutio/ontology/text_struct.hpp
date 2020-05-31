@@ -18,6 +18,8 @@
 #ifndef __TEXT_STRUCT_HPP_INCLUDED
 #define __TEXT_STRUCT_HPP_INCLUDED
 
+#include "entity_struct.hpp"
+
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <string>  // std::string
@@ -26,7 +28,7 @@ namespace yli::ontology
 {
     class Font2D;
 
-    struct TextStruct
+    struct TextStruct: public yli::ontology::EntityStruct
     {
         TextStruct()
             : font2D_parent(nullptr),

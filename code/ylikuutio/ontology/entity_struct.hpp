@@ -15,34 +15,23 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __FONT_STRUCT_HPP_INCLUDED
-#define __FONT_STRUCT_HPP_INCLUDED
-
-#include "entity_struct.hpp"
+#ifndef __ENTITY_STRUCT_HPP_INCLUDED
+#define __ENTITY_STRUCT_HPP_INCLUDED
 
 // Include standard headers
-#include <cstddef> // std::size_t
-#include <string>  // std::string
+#include <string> // std::string
 
 namespace yli::ontology
 {
-    struct FontStruct: public yli::ontology::EntityStruct
+    struct EntityStruct
     {
-        FontStruct()
-            : screen_width(0),
-            screen_height(0),
-            text_size(0),
-            font_size(0)
+        EntityStruct()
         {
             // constructor.
         }
 
-        std::string texture_filename;
-        std::string font_texture_file_format;
-        std::size_t screen_width;
-        std::size_t screen_height;
-        std::size_t text_size;
-        std::size_t font_size;
+        std::string global_name;
+        std::string local_name;
     };
 }
 

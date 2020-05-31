@@ -18,6 +18,8 @@
 #ifndef __VECTOR_FONT_STRUCT_HPP_INCLUDED
 #define __VECTOR_FONT_STRUCT_HPP_INCLUDED
 
+#include "entity_struct.hpp"
+
 // Include standard headers
 #include <string>   // std::string
 
@@ -27,7 +29,7 @@ namespace yli::ontology
 {
     class Material;
 
-    struct VectorFontStruct
+    struct VectorFontStruct: public yli::ontology::EntityStruct
     {
         VectorFontStruct()
             : parent(nullptr), vertex_scaling_factor(DEFAULT_VERTEX_SCALING_FACTOR)

@@ -575,6 +575,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/entity_factory.cpp
     code/ylikuutio/ontology/entity_factory.hpp
     code/ylikuutio/ontology/entity_factory_templates.hpp
+    code/ylikuutio/ontology/entity_struct.hpp
     code/ylikuutio/ontology/family_templates.hpp
     code/ylikuutio/ontology/font2D.cpp
     code/ylikuutio/ontology/font2D.hpp

@@ -18,12 +18,14 @@
 #ifndef __CHUNK_STRUCT_HPP_INCLUDED
 #define __CHUNK_STRUCT_HPP_INCLUDED
 
+#include "entity_struct.hpp"
+
 namespace yli::ontology
 {
     class Universe;
     class ChunkMaster;
 
-    struct ChunkStruct
+    struct ChunkStruct: public yli::ontology::EntityStruct
     {
         ChunkStruct()
             : universe(nullptr),

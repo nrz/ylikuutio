@@ -18,6 +18,7 @@
 #ifndef __TEXT3D_STRUCT_HPP_INCLUDED
 #define __TEXT3D_STRUCT_HPP_INCLUDED
 
+#include "entity_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 
 // Include GLM
@@ -35,7 +36,7 @@ namespace yli::ontology
     class VectorFont;
     class Brain;
 
-    struct Text3DStruct
+    struct Text3DStruct: public yli::ontology::EntityStruct
     {
         Text3DStruct()
             : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),

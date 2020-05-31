@@ -18,6 +18,8 @@
 #ifndef __SYMBIOSIS_STRUCT_HPP_INCLUDED
 #define __SYMBIOSIS_STRUCT_HPP_INCLUDED
 
+#include "entity_struct.hpp"
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -31,7 +33,7 @@ namespace yli::ontology
 {
     class Shader;
 
-    struct SymbiosisStruct
+    struct SymbiosisStruct: public yli::ontology::EntityStruct
     {
         SymbiosisStruct()
             : triangulation_type("bilinear_interpolation"),

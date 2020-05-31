@@ -18,6 +18,8 @@
 #ifndef __SHADER_STRUCT_HPP_INCLUDED
 #define __SHADER_STRUCT_HPP_INCLUDED
 
+#include "entity_struct.hpp"
+
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <string>   // std::string
@@ -26,7 +28,7 @@ namespace yli::ontology
 {
     class Scene;
 
-    struct ShaderStruct
+    struct ShaderStruct: public yli::ontology::EntityStruct
     {
         ShaderStruct()
             : parent(nullptr),

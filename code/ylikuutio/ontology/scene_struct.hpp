@@ -18,13 +18,14 @@
 #ifndef __SCENE_STRUCT_HPP_INCLUDED
 #define __SCENE_STRUCT_HPP_INCLUDED
 
+#include "entity_struct.hpp"
 #include "camera_struct.hpp"
 
 namespace yli::ontology
 {
     class World;
 
-    struct SceneStruct
+    struct SceneStruct: public yli::ontology::EntityStruct
     {
         SceneStruct()
             : world(nullptr),

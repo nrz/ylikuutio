@@ -22,6 +22,7 @@
 #define PI 3.14159265359f
 #endif
 
+#include "entity_struct.hpp"
 #include "object_type.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 
@@ -42,7 +43,7 @@ namespace yli::ontology
     class Text3D;
     class Brain;
 
-    struct ObjectStruct
+    struct ObjectStruct: public yli::ontology::EntityStruct
     {
         ObjectStruct()
             : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),

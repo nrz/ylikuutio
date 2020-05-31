@@ -18,11 +18,13 @@
 #ifndef __LISP_FUNCTION_STRUCT_HPP_INCLUDED
 #define __LISP_FUNCTION_STRUCT_HPP_INCLUDED
 
+#include "entity_struct.hpp"
+
 namespace yli::ontology
 {
     class Console;
 
-    struct LispFunctionStruct
+    struct LispFunctionStruct: public yli::ontology::EntityStruct
     {
         LispFunctionStruct()
             : parent(nullptr)
