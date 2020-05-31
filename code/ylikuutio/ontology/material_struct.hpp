@@ -18,6 +18,8 @@
 #ifndef __MATERIAL_STRUCT_HPP_INCLUDED
 #define __MATERIAL_STRUCT_HPP_INCLUDED
 
+#include "entity_struct.hpp"
+
 // Include standard headers
 #include <string>   // std::string
 
@@ -32,7 +34,7 @@ namespace yli::ontology
     class Shader;
     class Symbiosis;
 
-    struct MaterialStruct
+    struct MaterialStruct: public yli::ontology::EntityStruct
     {
         MaterialStruct()
             : shader(nullptr),

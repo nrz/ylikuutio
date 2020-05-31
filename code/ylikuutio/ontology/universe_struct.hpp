@@ -18,6 +18,7 @@
 #ifndef __UNIVERSE_STRUCT_HPP_INCLUDED
 #define __UNIVERSE_STRUCT_HPP_INCLUDED
 
+#include "entity_struct.hpp"
 #include "code/ylikuutio/input/input.hpp"
 
 // Include standard headers
@@ -28,7 +29,7 @@
 
 namespace yli::ontology
 {
-    struct UniverseStruct
+    struct UniverseStruct: public yli::ontology::EntityStruct
     {
         UniverseStruct()
             : window_title(""),

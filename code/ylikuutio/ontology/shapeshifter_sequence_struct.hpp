@@ -18,6 +18,8 @@
 #ifndef __SHAPESHIFTER_SEQUENCE_STRUCT_HPP_INCLUDED
 #define __SHAPESHIFTER_SEQUENCE_STRUCT_HPP_INCLUDED
 
+#include "entity_struct.hpp"
+
 // Include standard headers
 #include <cstddef> // std::size_t
 
@@ -25,7 +27,7 @@ namespace yli::ontology
 {
     class ShapeshifterTransformation;
 
-    struct ShapeshifterSequenceStruct
+    struct ShapeshifterSequenceStruct: public yli::ontology::EntityStruct
     {
         ShapeshifterSequenceStruct()
             : parent(nullptr),

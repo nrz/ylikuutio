@@ -18,6 +18,7 @@
 #ifndef __MOVABLE_STRUCT_HPP_INCLUDED
 #define __MOVABLE_STRUCT_HPP_INCLUDED
 
+#include "entity_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/input/input.hpp"
 
@@ -34,7 +35,7 @@ namespace yli::ontology
 {
     class Brain;
 
-    struct MovableStruct
+    struct MovableStruct: public yli::ontology::EntityStruct
     {
         MovableStruct()
             : input_method(yli::input::InputMethod::AI),

@@ -6,7 +6,15 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
+[ ] Implement setting the global name by defining the `global_name` member variable of `yli::ontology::EntityStruct`.
+[ ] Implement setting the local name by defining the `local_name` member variable of `yli::ontology::EntityStruct`.
+[ ] Modify `set` console command so that setting a value is done using `set 'value foo bar` or `set 'value foo bar baz` (`'value` must be used).
+[ ] Modify `set` console command so that setting a global name is done using `set 'global-name foo bar`.
+[ ] Modify `set` console command so that setting a local name is done using `set 'local-name foo bar`.
+[ ] Implement support for local variables in `bind` console command.
 [ ] Convert `Setting` into a an `yli::ontology` class that inherits `yli::ontology::Entity`.
+[ ] Implement support for local variables in `set` console command.
+[ ] Implement support for local variables in `print` console command.
 [ ] Implement creating new fields of given type in AnyStructEntities using `Console` command `createfield`.
 [ ] Implement creating and setting new fields of given type in AnyStructEntities of a using `Console` command `setfield`.
 [ ] Implement printing fields of AnyStructEntities using `Console` command `print`.
@@ -60,6 +68,7 @@ Tasks which are necessary for the third stage:
 [ ] Implement YliServer.
 
 Tasks which are necessary for the development of Ylikuutio:
+[ ] Add support for hexadecimal input in `set` console command.
 [ ] Implement printing children of Entities using `Console` command `children`.
 [ ] Implement `yli::ontology::ShaderSymbiosis`.
 [ ] Implement a custom FBX loader.
@@ -193,3 +202,7 @@ Ready:
 [x] Write `yli::ontology` class generator in Python.
 [x] Implement printing parent of Entities using `Console`.
 [x] Implement creating new named AnyStructEntities using `Console`.
+[x] Implement `yli::ontology::EntityStruct` that all other `struct`s used for creating different kinds of Entities should inherit.
+[x] Inherit `yli::ontology::EntityStruct` in all `struct`s that are used for creating different kinds of Entities.
+[x] Restrict what characters are allowed in global names (regex: `[a-zA-Z][a-zA-Z0-9_-]*`).
+[x] Restrict what characters are allowed in local names (regex: `[a-zA-Z][a-zA-Z0-9_-]*`).

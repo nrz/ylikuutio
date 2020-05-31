@@ -18,6 +18,7 @@
 #ifndef __CAMERA_STRUCT_HPP_INCLUDED
 #define __CAMERA_STRUCT_HPP_INCLUDED
 
+#include "entity_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 
 // Include GLM
@@ -34,7 +35,7 @@ namespace yli::ontology
     class Scene;
     class Brain;
 
-    struct CameraStruct
+    struct CameraStruct: public yli::ontology::EntityStruct
     {
         CameraStruct()
             : cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),

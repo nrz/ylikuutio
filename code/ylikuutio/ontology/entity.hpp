@@ -23,9 +23,9 @@
 #include "post_render_callback.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
-#include <memory>   // std::make_shared, std::shared_ptr
-#include <string>   // std::string
+#include <cstddef>       // std::size_t
+#include <memory>        // std::make_shared, std::shared_ptr
+#include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 
 namespace yli::config

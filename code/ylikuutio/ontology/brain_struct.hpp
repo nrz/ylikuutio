@@ -21,6 +21,8 @@
 #ifndef __BRAIN_STRUCT_HPP_INCLUDED
 #define __BRAIN_STRUCT_HPP_INCLUDED
 
+#include "entity_struct.hpp"
+
 namespace yli::callback
 {
     class CallbackEngine;
@@ -30,7 +32,7 @@ namespace yli::ontology
 {
     class Scene;
 
-    struct BrainStruct
+    struct BrainStruct: public yli::ontology::EntityStruct
     {
         BrainStruct()
             : parent(nullptr),
