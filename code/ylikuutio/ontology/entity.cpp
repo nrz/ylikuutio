@@ -28,6 +28,7 @@
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
+#include <regex>         // std::regex, std::regex_match
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -245,6 +246,11 @@ namespace yli::ontology
         // `this->universe` must not be `nullptr`.
         // `global_name` must not be already in use.
 
+        if (!std::regex_match(global_name, std::regex("[a-zA-Z][a-zA-Z0-9_-]*")))
+        {
+            return;
+        }
+
         if (this->universe == nullptr)
         {
             return;
@@ -274,6 +280,11 @@ namespace yli::ontology
 
     void Entity::set_local_name(const std::string& local_name)
     {
+        if (!std::regex_match(local_name, std::regex("[a-zA-Z][a-zA-Z0-9_-]*")))
+        {
+            return;
+        }
+
         yli::ontology::Entity* const parent = this->get_parent();
 
         if (parent == nullptr)
