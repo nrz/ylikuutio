@@ -63,7 +63,7 @@ namespace yli::ontology
                 this->lightID                      = 0;
                 this->vertex_position_modelspace_id = 0;
                 this->vertex_uv_id                   = 0;
-                this->vertex_normal_modelspaceID   = 0;
+                this->vertex_normal_modelspace_id   = 0;
                 this->vertexbuffer                 = 0;
                 this->uvbuffer                     = 0;
                 this->normalbuffer                 = 0;
@@ -106,7 +106,7 @@ namespace yli::ontology
 
             void store_vertex_position_modelspaceID(const GLint vertex_position_modelspace_id);
             void store_vertexUVID(const GLint vertex_uv_id);
-            void store_vertex_normal_modelspaceID(const GLint vertex_normal_modelspaceID);
+            void store_vertex_normal_modelspaceID(const GLint vertex_normal_modelspace_id);
 
             template<class T1>
                 friend void yli::ontology::render_species_or_glyph(T1 species_or_glyph_pointer);
@@ -130,7 +130,7 @@ namespace yli::ontology
 
             GLint vertex_position_modelspace_id;
             GLint vertex_uv_id;
-            GLint vertex_normal_modelspaceID;
+            GLint vertex_normal_modelspace_id;
 
             std::vector<glm::vec3> vertices;         // vertices of the `Model`.
             std::vector<glm::vec2> uvs;              // UVs of the `Model`.

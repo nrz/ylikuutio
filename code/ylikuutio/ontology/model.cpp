@@ -92,7 +92,7 @@ namespace yli::ontology
 
     GLint Model::get_vertex_normal_modelspace_id() const
     {
-        return this->vertex_normal_modelspaceID;
+        return this->vertex_normal_modelspace_id;
     }
 
     uint32_t Model::get_vertexbuffer() const
@@ -125,8 +125,8 @@ namespace yli::ontology
         this->vertex_uv_id = vertex_uv_id;
     }
 
-    void Model::store_vertex_normal_modelspaceID(const GLint vertex_normal_modelspaceID)
+    void Model::store_vertex_normal_modelspaceID(const GLint vertex_normal_modelspace_id)
     {
-        this->vertex_normal_modelspaceID = vertex_normal_modelspaceID;
+        this->vertex_normal_modelspace_id = vertex_normal_modelspace_id;
     }
 }

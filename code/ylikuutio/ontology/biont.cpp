@@ -249,7 +249,7 @@ namespace yli::ontology
         uint32_t uvbuffer = symbiont_species->get_uvbuffer();
         uint32_t vertex_uv_id = symbiont_species->get_vertex_uv_id();
         uint32_t normalbuffer = symbiont_species->get_normalbuffer();
-        uint32_t vertex_normal_modelspaceID = symbiont_species->get_vertex_normal_modelspace_id();
+        uint32_t vertex_normal_modelspace_id = symbiont_species->get_vertex_normal_modelspace_id();
         uint32_t elementbuffer = symbiont_species->get_elementbuffer();
         uint32_t indices_size = symbiont_species->get_indices_size();
 
@@ -278,7 +278,7 @@ namespace yli::ontology
         // 3rd attribute buffer : normals.
         glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
         glVertexAttribPointer(
-                vertex_normal_modelspaceID,   // The attribute we want to configure
+                vertex_normal_modelspace_id,   // The attribute we want to configure
                 3,                            // size
                 GL_FLOAT,                     // type
                 GL_FALSE,                     // normalized?
