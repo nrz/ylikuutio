@@ -60,16 +60,16 @@ namespace yli::ontology
                 // constructor.
 
                 // Initialize class members with some dummy values.
-                this->lightID                      = 0;
+                this->lightID                       = 0;
                 this->vertex_position_modelspace_id = 0;
-                this->vertex_uv_id                   = 0;
+                this->vertex_uv_id                  = 0;
                 this->vertex_normal_modelspace_id   = 0;
-                this->vertexbuffer                 = 0;
-                this->uvbuffer                     = 0;
-                this->normalbuffer                 = 0;
-                this->elementbuffer                = 0;
-                this->initial_rotate_angle         = 0.0f;
-                this->initial_rotate_vector        = glm::vec3(0.0f, 1.0f, 1.0f);
+                this->vertexbuffer                  = 0;
+                this->uvbuffer                      = 0;
+                this->normalbuffer                  = 0;
+                this->elementbuffer                 = 0;
+                this->initial_rotate_angle          = 0.0f;
+                this->initial_rotate_vector         = glm::vec3(0.0f, 1.0f, 1.0f);
 
                 this->opengl_in_use = opengl_in_use;
 

@@ -88,7 +88,7 @@ namespace yli::ontology
                 {
                     // Get a handle for our buffers.
                     this->vertex_position_modelspace_id = glGetAttribLocation(this->shader->get_program_id(), "vertex_position_modelspace");
-                    this->vertex_uv_id                   = glGetAttribLocation(this->shader->get_program_id(), "vertexUV");
+                    this->vertex_uv_id                  = glGetAttribLocation(this->shader->get_program_id(), "vertexUV");
                     this->vertex_normal_modelspace_id   = glGetAttribLocation(this->shader->get_program_id(), "vertex_normal_modelspace");
 
                     // Get a handle for our "LightPosition" uniform.
