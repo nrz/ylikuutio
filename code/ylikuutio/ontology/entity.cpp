@@ -72,15 +72,20 @@ namespace yli::ontology
         this->postrender_callback = nullptr;
         this->setting_master = std::make_shared<yli::config::SettingMaster>(this);
         this->can_be_erased = false;
-        this->should_be_rendered = (this->universe == nullptr ? false : !this->universe->get_is_headless());
+        this->should_be_rendered = false;
 
-        yli::config::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::data::AnyValue>(this->should_be_rendered));
-        should_be_rendered_setting_struct.name = "should_be_rendered";
-        should_be_rendered_setting_struct.activate_callback = &yli::config::Setting::activate_should_be_rendered;
-        should_be_rendered_setting_struct.read_callback = &yli::config::Setting::read_should_be_rendered;
-        should_be_rendered_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        std::cout << "Executing `setting_master->create_setting(should_be_rendered_setting_struct);` ...\n";
-        this->setting_master->create_setting(should_be_rendered_setting_struct);
+        if (this->universe != this)
+        {
+            this->should_be_rendered = (this->universe == nullptr ? false : !this->universe->get_is_headless());
+
+            yli::config::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::data::AnyValue>(this->should_be_rendered));
+            should_be_rendered_setting_struct.name = "should_be_rendered";
+            should_be_rendered_setting_struct.activate_callback = &yli::config::Setting::activate_should_be_rendered;
+            should_be_rendered_setting_struct.read_callback = &yli::config::Setting::read_should_be_rendered;
+            should_be_rendered_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+            std::cout << "Executing `setting_master->create_setting(should_be_rendered_setting_struct);` ...\n";
+            this->setting_master->create_setting(should_be_rendered_setting_struct);
+        }
     }
 
     Entity::~Entity()

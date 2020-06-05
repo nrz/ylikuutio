@@ -23,6 +23,10 @@
 #include "entity_factory.hpp"
 #include "universe_struct.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
+#include "code/ylikuutio/config/setting_master.hpp"
+#include "code/ylikuutio/config/setting.hpp"
+#include "code/ylikuutio/config/setting_struct.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
@@ -281,16 +285,6 @@
 //    y-coordinates of these are compared. The piece with the smallest y-coordinate (lowest altitude) remains terrain, other pieces become
 //    regular objects. The pieces that become regular objects will be subject to gravity the same way as any regular object.
 
-namespace yli::data
-{
-    class AnyValue;
-}
-
-namespace yli::config
-{
-    class Setting;
-}
-
 namespace yli::input
 {
     enum class InputMethod;
@@ -457,6 +451,18 @@ namespace yli::ontology
                         this->set_swap_interval(0);
                     }
                 }
+
+                // Set the value of `should_be_rendered` here because it can't be done in `Entity` constructor.
+                this->should_be_rendered = !this->get_is_headless();
+
+                // Create `Setting` `should_be_rendered` here because it can't be done in `Entity` constructor.
+                yli::config::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::data::AnyValue>(this->should_be_rendered));
+                should_be_rendered_setting_struct.name = "should_be_rendered";
+                should_be_rendered_setting_struct.activate_callback = &yli::config::Setting::activate_should_be_rendered;
+                should_be_rendered_setting_struct.read_callback = &yli::config::Setting::read_should_be_rendered;
+                should_be_rendered_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+                std::cout << "Executing `setting_master->create_setting(should_be_rendered_setting_struct);` ...\n";
+                this->setting_master->create_setting(should_be_rendered_setting_struct);
 
                 this->angelscript_master = std::make_shared<yli::angelscript::AngelscriptMaster>();
 
