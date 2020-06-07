@@ -21,6 +21,7 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "parent_module.hpp"
+#include "entity_struct.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
 
 #include "SDL.h"
@@ -89,7 +90,7 @@ namespace yli::ontology
         public:
             // constructor.
             Console(yli::ontology::Universe* const universe, yli::ontology::ParentModule* const parent_module)
-                : Entity(universe),
+                : Entity(universe, yli::ontology::EntityStruct()),
                 child_of_universe(parent_module, this),
                 parent_of_lisp_functions(this)
             {

@@ -77,7 +77,7 @@ namespace yli::ontology
             Movable(yli::ontology::Universe* const universe,
                     const yli::ontology::MovableStruct& movable_struct,
                     yli::ontology::ParentModule* const parent_module)
-                : Entity(universe),
+                : Entity(universe, movable_struct),
                 child(parent_module, this)
             {
                 // constructor.

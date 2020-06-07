@@ -58,7 +58,7 @@ namespace yli::ontology
 
             // constructor.
             Species(yli::ontology::Universe* const universe, const yli::ontology::SpeciesStruct& species_struct, yli::ontology::ParentModule* const parent_module)
-                : Model(universe, species_struct.opengl_in_use, parent_module)
+                : Model(universe, species_struct, species_struct.opengl_in_use, parent_module)
             {
                 // constructor.
                 this->is_terrain          = species_struct.is_terrain;

@@ -62,7 +62,7 @@ namespace yli::ontology
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
             Shader(yli::ontology::Universe* const universe, const yli::ontology::ShaderStruct& shader_struct)
-                : Entity(universe),
+                : Entity(universe, shader_struct),
                 parent_of_compute_tasks(this),
                 parent_of_materials(this),
                 parent_of_symbioses(this)

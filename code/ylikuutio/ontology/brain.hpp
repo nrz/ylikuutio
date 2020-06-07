@@ -68,7 +68,7 @@ namespace yli::ontology
             void unbind_movable(const std::size_t movableID);
 
             Brain(yli::ontology::Universe* const universe, const yli::ontology::BrainStruct& brain_struct, yli::ontology::ParentModule* const parent_module)
-                : Entity(universe),
+                : Entity(universe, brain_struct),
                 child_of_scene(parent_module, this)
             {
                 // constructor.

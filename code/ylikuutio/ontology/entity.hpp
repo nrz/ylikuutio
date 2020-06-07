@@ -36,6 +36,7 @@ namespace yli::config
 namespace yli::ontology
 {
     class Universe;
+    struct EntityStruct;
 
     class Entity
     {
@@ -44,7 +45,7 @@ namespace yli::ontology
             virtual void bind_to_new_parent(yli::ontology::Entity* const new_entity_parent);
 
             // constructor.
-            Entity(yli::ontology::Universe* const universe);
+            Entity(yli::ontology::Universe* const universe, const yli::ontology::EntityStruct& entity_struct);
 
             Entity(const Entity&) = delete;            // Delete copy constructor.
             Entity &operator=(const Entity&) = delete; // Delete copy assignment.

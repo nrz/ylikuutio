@@ -21,6 +21,7 @@
 #include "entity.hpp"
 #include "parent_module.hpp"
 #include "material.hpp"
+#include "entity_struct.hpp"
 #include "get_content_callback.hpp"
 
 // Include standard headers
@@ -42,7 +43,7 @@ namespace yli::ontology
         public:
             // constructor.
             ChunkMaster(yli::ontology::Universe* universe, yli::ontology::Material* const parent, GetContentCallback get_content_callback)
-                : yli::ontology::Entity(universe),
+                : yli::ontology::Entity(universe, yli::ontology::EntityStruct()),
                 parent_of_chunks(this)
             {
                 // constructor.

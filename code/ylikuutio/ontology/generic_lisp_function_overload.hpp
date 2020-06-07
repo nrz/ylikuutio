@@ -20,6 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
+#include "entity_struct.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -46,7 +47,7 @@ namespace yli::ontology
             GenericLispFunctionOverload(
                     yli::ontology::Universe* const universe,
                     yli::ontology::ParentModule* const parent_module)
-                : Entity(universe),
+                : Entity(universe, yli::ontology::EntityStruct()),
                 child_of_lisp_function(parent_module, this)
             {
                 // constructor.

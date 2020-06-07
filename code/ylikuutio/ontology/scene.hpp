@@ -91,7 +91,7 @@ namespace yli::ontology
 
             // constructor.
             Scene(yli::ontology::Universe* const universe, const yli::ontology::SceneStruct& scene_struct, yli::ontology::ParentModule* const parent_module)
-                : Entity(universe),
+                : Entity(universe, scene_struct),
                 child_of_world(parent_module, this),
                 parent_of_default_camera(this),
                 parent_of_cameras(this),

@@ -38,7 +38,8 @@ namespace yli::ontology
     struct MovableStruct: public yli::ontology::EntityStruct
     {
         MovableStruct()
-            : input_method(yli::input::InputMethod::AI),
+            : EntityStruct(),
+            input_method(yli::input::InputMethod::AI),
             brain(nullptr),
             cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
             spherical_coordinates(NAN, NAN, NAN),
@@ -54,7 +55,26 @@ namespace yli::ontology
                 yli::data::SphericalCoordinatesStruct spherical_coordinates,
                 const double horizontal_angle,
                 const double vertical_angle)
-            : input_method(yli::input::InputMethod::AI),
+            : EntityStruct(),
+            input_method(yli::input::InputMethod::AI),
+            brain(brain),
+            cartesian_coordinates(cartesian_coordinates),
+            spherical_coordinates(spherical_coordinates),
+            horizontal_angle(horizontal_angle),
+            vertical_angle(vertical_angle)
+        {
+        }
+
+        MovableStruct(
+                yli::ontology::Brain* const brain,
+                const glm::vec3& cartesian_coordinates,
+                yli::data::SphericalCoordinatesStruct spherical_coordinates,
+                const double horizontal_angle,
+                const double vertical_angle,
+                const std::string& global_name,
+                const std::string& local_name)
+            : EntityStruct(global_name, local_name),
+            input_method(yli::input::InputMethod::AI),
             brain(brain),
             cartesian_coordinates(cartesian_coordinates),
             spherical_coordinates(spherical_coordinates),

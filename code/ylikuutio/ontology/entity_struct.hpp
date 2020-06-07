@@ -26,6 +26,15 @@ namespace yli::ontology
     struct EntityStruct
     {
         EntityStruct()
+            : global_name(""),
+            local_name("")
+        {
+            // constructor.
+        }
+
+        EntityStruct(const std::string& global_name, const std::string& local_name)
+            : global_name(global_name),
+            local_name(local_name)
         {
             // constructor.
         }

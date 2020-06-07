@@ -48,7 +48,7 @@ namespace yli::ontology
     {
         public:
             Material(yli::ontology::Universe* const universe, const yli::ontology::MaterialStruct& material_struct, yli::ontology::ParentModule* const parent_module)
-                : Entity(universe),
+                : Entity(universe, material_struct),
                 child_of_shader_or_symbiosis(parent_module, this),
                 parent_of_species(this),
                 parent_of_shapeshifter_transformations(this),

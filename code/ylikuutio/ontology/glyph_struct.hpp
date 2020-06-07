@@ -18,7 +18,7 @@
 #ifndef __GLYPH_STRUCT_HPP_INCLUDED
 #define __GLYPH_STRUCT_HPP_INCLUDED
 
-#include "entity_struct.hpp"
+#include "model_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -35,10 +35,11 @@ namespace yli::ontology
     class Shader;
     class VectorFont;
 
-    struct GlyphStruct: public yli::ontology::EntityStruct
+    struct GlyphStruct: public yli::ontology::ModelStruct
     {
         GlyphStruct()
-            : light_position(glm::vec3(0.0f, 0.0f, 0.0f)),
+            : ModelStruct(),
+            light_position(glm::vec3(0.0f, 0.0f, 0.0f)),
             glyph_vertex_data(nullptr),
             glyph_name_pointer(nullptr),
             unicode_char_pointer(nullptr),

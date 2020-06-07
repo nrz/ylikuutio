@@ -306,7 +306,7 @@ namespace yli::ontology
 
             // constructor.
             Universe(const yli::ontology::UniverseStruct& universe_struct)
-                : Entity(this), // `Universe` has no parent.
+                : Entity(this, universe_struct), // `Universe` has no parent.
                 parent_of_worlds(this),
                 parent_of_font2Ds(this),
                 parent_of_consoles(this),
@@ -316,6 +316,9 @@ namespace yli::ontology
             {
                 // call `bind_entity` here since it couldn't be performed from `Entity` constructor.
                 this->bind_entity(this);
+
+                // call `set_global_name` here because it can't be done in `Entity` constructor.
+                this->set_global_name(universe_struct.global_name);
 
                 this->entity_factory = std::make_shared<yli::ontology::EntityFactory>(this);
 

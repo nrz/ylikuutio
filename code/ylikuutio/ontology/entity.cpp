@@ -18,6 +18,7 @@
 #include "entity.hpp"
 #include "universe.hpp"
 #include "parent_module.hpp"
+#include "entity_struct.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
@@ -58,7 +59,7 @@ namespace yli::ontology
         // this `yli::ontology::Entity` base class implementation.
     }
 
-    Entity::Entity(yli::ontology::Universe* const universe)
+    Entity::Entity(yli::ontology::Universe* const universe, const yli::ontology::EntityStruct& entity_struct)
         : parent_of_any_struct_entities(this)
     {
         // constructor.
@@ -68,14 +69,19 @@ namespace yli::ontology
         this->bind_to_universe();
 
         this->childID = std::numeric_limits<std::size_t>::max(); // `std::numeric_limits<std::size_t>::max()` means that `childID` is not defined.
+
         this->prerender_callback = nullptr;
         this->postrender_callback = nullptr;
         this->setting_master = std::make_shared<yli::config::SettingMaster>(this);
         this->can_be_erased = false;
         this->should_be_rendered = false;
 
+        this->set_local_name(entity_struct.local_name);
+
         if (this->universe != this)
         {
+            this->set_global_name(entity_struct.global_name);
+
             this->should_be_rendered = (this->universe == nullptr ? false : !this->universe->get_is_headless());
 
             yli::config::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::data::AnyValue>(this->should_be_rendered));

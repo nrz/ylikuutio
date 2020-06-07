@@ -21,6 +21,7 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "parent_module.hpp"
+#include "entity_struct.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -82,7 +83,7 @@ namespace yli::ontology
     {
         public:
             World(yli::ontology::Universe* const universe, yli::ontology::ParentModule* const parent_module)
-                : Entity(universe),
+                : Entity(universe, yli::ontology::EntityStruct()),
                 child_of_universe(parent_module, this),
                 parent_of_scenes(this)
             {

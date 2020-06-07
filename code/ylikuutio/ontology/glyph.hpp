@@ -57,7 +57,7 @@ namespace yli::ontology
 
         private:
             Glyph(const yli::ontology::GlyphStruct& glyph_struct, yli::ontology::ParentModule* const parent_module)
-                : Model(glyph_struct.universe, glyph_struct.opengl_in_use, parent_module)
+                : Model(glyph_struct.universe, glyph_struct, glyph_struct.opengl_in_use, parent_module)
             {
                 // constructor.
                 this->glyph_vertex_data    = glyph_struct.glyph_vertex_data;

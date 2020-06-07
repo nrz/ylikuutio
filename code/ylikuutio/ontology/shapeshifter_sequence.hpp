@@ -41,7 +41,7 @@ namespace yli::ontology
         public:
             // constructor.
             ShapeshifterSequence(yli::ontology::Universe* const universe, const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct)
-                : Entity(universe),
+                : Entity(universe, shapeshifter_sequence_struct),
                 parent_of_objects(this)
             {
                 // constructor.

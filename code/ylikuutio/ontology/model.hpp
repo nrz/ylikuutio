@@ -22,6 +22,7 @@
 #include "child_module.hpp"
 #include "parent_module.hpp"
 #include "species_or_glyph.hpp"
+#include "model_struct.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -51,9 +52,10 @@ namespace yli::ontology
             // constructor.
             Model(
                     yli::ontology::Universe* const universe,
+                    const yli::ontology::ModelStruct& model_struct,
                     const bool opengl_in_use,
                     yli::ontology::ParentModule* const parent_module)
-                : Entity(universe),
+                : Entity(universe, model_struct),
                 child(parent_module, this),
                 parent_of_objects(this)
             {
