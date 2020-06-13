@@ -583,7 +583,9 @@ namespace yli::ontology
 
         if (yli::lisp::parse(input_string, command, parameter_vector))
         {
-            // Call the corresponding console command callback, if there is one.
+            // Call the corresponding `yli::ontology::LispFunction`, if there is one.
+            // `LispFunction` itself takes care of resolving the correct overbind
+            // and binding the arguments and calling the overload with the arguments.
             yli::ontology::Universe* universe = console->get_universe();
 
             if (universe != nullptr)
