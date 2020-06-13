@@ -20,6 +20,7 @@
 #include "lisp_function.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/lisp/parser.hpp"
 
 // Include standard headers
 #include <algorithm> // std::copy etc.
@@ -575,41 +576,16 @@ namespace yli::ontology
             console->console_history.push_back(current_input_char_list);
         }
 
-        bool is_command = false;
-        std::istringstream input_stringstream(input_string);
         std::vector<std::string> parameter_vector;
         std::string command;
-        std::string token;
-
-        // The reader begins here.
-
-        while (std::getline(input_stringstream, token, ' '))
-        {
-            if (token.empty())
-            {
-                continue;
-            }
-
-            if (!is_command)
-            {
-                // First non-empty token is the command.
-                command = token;
-                is_command = true;
-            }
-            else
-            {
-                // The rest non-empty tokens are the parameters.
-                parameter_vector.push_back(token);
-            }
-        }
-
-        // The reader ends here.
 
         console->current_input.clear();
 
-        if (is_command)
+        if (yli::lisp::parse(input_string, command, parameter_vector))
         {
-            // Call the corresponding console command callback, if there is one.
+            // Call the corresponding `yli::ontology::LispFunction`, if there is one.
+            // `LispFunction` itself takes care of resolving the correct overbind
+            // and binding the arguments and calling the overload with the arguments.
             yli::ontology::Universe* universe = console->get_universe();
 
             if (universe != nullptr)

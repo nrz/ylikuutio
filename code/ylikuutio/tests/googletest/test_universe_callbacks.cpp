@@ -816,4 +816,4 @@ TEST(scene_and_camera_must_be_activated_appropriately, universe_callback)
     ASSERT_EQ(scene->get_active_camera(), camera);
 }
 
-// Public AngelScript-related callbacks.
+// Public YliLisp-related callbacks.

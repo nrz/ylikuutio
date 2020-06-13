@@ -20,6 +20,7 @@
 
 #include "entity.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "entity_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -47,7 +48,7 @@ namespace yli::ontology
             // constructor.
             // use the default copy constructor of `yli::data::AnyValue`.
             AnyValueEntity(yli::ontology::Universe* const universe, const std::shared_ptr<yli::data::AnyValue> any_value_shared_ptr)
-                : yli::data::AnyValue(*any_value_shared_ptr), yli::ontology::Entity(universe)
+                : yli::data::AnyValue(*any_value_shared_ptr), yli::ontology::Entity(universe, yli::ontology::EntityStruct())
             {
                 this->parent = universe;
 
@@ -62,7 +63,7 @@ namespace yli::ontology
             // constructor.
             // use the default copy constructor of `yli::data::AnyValue`.
             AnyValueEntity(yli::ontology::Universe* const universe, const yli::data::AnyValue& any_value)
-                : yli::data::AnyValue(any_value), yli::ontology::Entity(universe)
+                : yli::data::AnyValue(any_value), yli::ontology::Entity(universe, yli::ontology::EntityStruct())
             {
                 this->parent = universe;
 

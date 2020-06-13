@@ -20,6 +20,7 @@
 
 #include "entity.hpp"
 #include "code/ylikuutio/data/any_struct.hpp"
+#include "entity_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -47,7 +48,7 @@ namespace yli::ontology
             // constructor.
             // use the default copy constructor of `yli::data::AnyStruct`.
             AnyStructEntity(yli::ontology::Universe* const universe)
-                : yli::data::AnyStruct(), yli::ontology::Entity(universe)
+                : yli::data::AnyStruct(), yli::ontology::Entity(universe, yli::ontology::EntityStruct())
             {
                 this->parent = universe;
 
@@ -62,7 +63,7 @@ namespace yli::ontology
             // constructor.
             // use the default copy constructor of `yli::data::AnyStruct`.
             AnyStructEntity(yli::ontology::Universe* const universe, const yli::data::AnyStruct& any_struct)
-                : yli::data::AnyStruct(any_struct), yli::ontology::Entity(universe)
+                : yli::data::AnyStruct(any_struct), yli::ontology::Entity(universe, yli::ontology::EntityStruct())
             {
                 this->parent = universe;
 

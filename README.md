@@ -37,6 +37,7 @@ as a hobby project"). Skrolli 2018.4 can be freely downloaded as PDF.
 
 In [Skrolli 2019.2](https://skrolli.fi/numerot/2019-2/) there is an article
 "GPGPU-laskenta" (in Finnish, translation: "GPGPU computation").
+Skrolli 2019.2 can be freely downloaded as PDF.
 
 ## Compiling
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.

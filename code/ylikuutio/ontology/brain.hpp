@@ -32,8 +32,8 @@
 // Each `Brain` instance may do some actions for the `Movable`s bound to the `Brain`.
 // The actions the defined in the callback, referenced using `this->callback_engine`.
 // There are some callback snippets for `Brain` in `code/ylikuutio/brain_snippets.hpp`.
-// In the future, some of the callbacks will process AngelScript, with an API offered
-// to the AngelScript scripts. The API still needs to be defined.
+// In the future, some of the callbacks will process YliLisp, with an API offered
+// to the YliLisp scripts. The API still needs to be defined.
 //
 // `Brain` does not own the `Movable`s it controls.
 // Therefore, `Brain`-`Movable` relationship is not a parent-child relationship.
@@ -68,7 +68,7 @@ namespace yli::ontology
             void unbind_movable(const std::size_t movableID);
 
             Brain(yli::ontology::Universe* const universe, const yli::ontology::BrainStruct& brain_struct, yli::ontology::ParentModule* const parent_module)
-                : Entity(universe),
+                : Entity(universe, brain_struct),
                 child_of_scene(parent_module, this)
             {
                 // constructor.

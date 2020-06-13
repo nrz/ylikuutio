@@ -58,7 +58,7 @@ namespace yli::ontology
 
             // constructor.
             Species(yli::ontology::Universe* const universe, const yli::ontology::SpeciesStruct& species_struct, yli::ontology::ParentModule* const parent_module)
-                : Model(universe, species_struct.opengl_in_use, parent_module)
+                : Model(universe, species_struct, species_struct.opengl_in_use, parent_module)
             {
                 // constructor.
                 this->is_terrain          = species_struct.is_terrain;
@@ -90,7 +90,7 @@ namespace yli::ontology
                         // Get a handle for our buffers.
                         this->vertex_position_modelspace_id = glGetAttribLocation(species_struct.shader->get_program_id(), "vertex_position_modelspace");
                         this->vertex_uv_id = glGetAttribLocation(species_struct.shader->get_program_id(), "vertexUV");
-                        this->vertex_normal_modelspaceID = glGetAttribLocation(species_struct.shader->get_program_id(), "vertex_normal_modelspace");
+                        this->vertex_normal_modelspace_id = glGetAttribLocation(species_struct.shader->get_program_id(), "vertex_normal_modelspace");
 
                         // Get a handle for our "LightPosition" uniform.
                         glUseProgram(species_struct.shader->get_program_id());

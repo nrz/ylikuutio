@@ -88,7 +88,7 @@ namespace yli::ontology
     {
         public:
             ComputeTask(yli::ontology::Universe* const universe, const yli::ontology::ComputeTaskStruct& compute_task_struct)
-                : Entity(universe)
+                : Entity(universe, compute_task_struct)
             {
                 // constructor.
                 this->texture_file_format = compute_task_struct.texture_file_format;

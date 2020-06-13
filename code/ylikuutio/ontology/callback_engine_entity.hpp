@@ -21,6 +21,7 @@
 #include "code/ylikuutio/callback/callback_engine.hpp"
 #include "child_module.hpp"
 #include "entity.hpp"
+#include "entity_struct.hpp"
 #include "code/ylikuutio/callback/input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 
 // Include standard headers
@@ -41,7 +42,7 @@ namespace yli::ontology
                     yli::ontology::Universe* const universe,
                     const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
                     yli::ontology::ParentModule* const parent_module)
-                : Entity(universe),
+                : Entity(universe, yli::ontology::EntityStruct()),
                 child_of_universe(parent_module, this)
             {
                 // `yli::ontology::Entity` member variables begin here.

@@ -15,31 +15,16 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __CHUNK_STRUCT_HPP_INCLUDED
-#define __CHUNK_STRUCT_HPP_INCLUDED
+#ifndef __PARSER_HPP_INCLUDED
+#define __PARSER_HPP_INCLUDED
 
-#include "model_struct.hpp"
+// Include standard headers
+#include <string> // std::string
+#include <vector> // std::vector
 
-namespace yli::ontology
+namespace yli::lisp
 {
-    class Universe;
-    class ChunkMaster;
-
-    struct ChunkStruct: public yli::ontology::ModelStruct
-    {
-        ChunkStruct()
-            : ModelStruct(),
-            universe(nullptr),
-            parent(nullptr),
-            opengl_in_use(true)
-        {
-            // constructor.
-        }
-
-        yli::ontology::Universe* universe;  // pointer to the `Universe`.
-        yli::ontology::ChunkMaster* parent; // pointer to the `ChunkMaster`.
-        bool opengl_in_use;                 // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
-    };
+    bool parse(const std::string& input_string, std::string& command, std::vector<std::string>& parameter_vector);
 }
 
 #endif

@@ -46,7 +46,7 @@ namespace yli::ontology
 
             // constructor.
             Text2D(yli::ontology::Universe* const universe, const yli::ontology::TextStruct& text_struct, yli::ontology::ParentModule* const parent_module)
-                : Entity(universe),
+                : Entity(universe, text_struct),
                 child_of_font2D(parent_module, this)
             {
                 this->text = text_struct.text;

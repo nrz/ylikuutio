@@ -58,6 +58,7 @@ namespace yli::ontology
             Chunk(const yli::ontology::ChunkStruct& chunk_struct)
                 : Model(
                         chunk_struct.universe,
+                        chunk_struct,
                         chunk_struct.opengl_in_use,
                         (chunk_struct.parent == nullptr ? nullptr : &chunk_struct.parent->parent_of_chunks))
             {

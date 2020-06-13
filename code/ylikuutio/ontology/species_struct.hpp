@@ -18,7 +18,7 @@
 #ifndef __SPECIES_STRUCT_HPP_INCLUDED
 #define __SPECIES_STRUCT_HPP_INCLUDED
 
-#include "entity_struct.hpp"
+#include "model_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -41,10 +41,11 @@ namespace yli::ontology
     class SymbiontMaterial;
     class ShapeshifterTransformation;
 
-    struct SpeciesStruct: public yli::ontology::EntityStruct
+    struct SpeciesStruct: public yli::ontology::ModelStruct
     {
         SpeciesStruct()
-            : triangulation_type("bilinear_interpolation"),
+            : ModelStruct(),
+            triangulation_type("bilinear_interpolation"),
             light_position(glm::vec3(0.0f, 0.0f, 0.0f)),
             scene(nullptr),
             shader(nullptr),

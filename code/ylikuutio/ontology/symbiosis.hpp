@@ -64,7 +64,7 @@ namespace yli::ontology
 
             // constructor.
             Symbiosis(yli::ontology::Universe* universe, const yli::ontology::SymbiosisStruct& symbiosis_struct, yli::ontology::ParentModule* const parent_module)
-                : Entity(universe),
+                : Entity(universe, symbiosis_struct),
                 child_of_shader(parent_module, this),
                 parent_of_symbiont_materials(this),
                 parent_of_holobionts(this)

@@ -22,6 +22,7 @@
 #include "child_module.hpp"
 #include "parent_module.hpp"
 #include "species_or_glyph.hpp"
+#include "model_struct.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -51,25 +52,26 @@ namespace yli::ontology
             // constructor.
             Model(
                     yli::ontology::Universe* const universe,
+                    const yli::ontology::ModelStruct& model_struct,
                     const bool opengl_in_use,
                     yli::ontology::ParentModule* const parent_module)
-                : Entity(universe),
+                : Entity(universe, model_struct),
                 child(parent_module, this),
                 parent_of_objects(this)
             {
                 // constructor.
 
                 // Initialize class members with some dummy values.
-                this->lightID                      = 0;
+                this->lightID                       = 0;
                 this->vertex_position_modelspace_id = 0;
-                this->vertex_uv_id                   = 0;
-                this->vertex_normal_modelspaceID   = 0;
-                this->vertexbuffer                 = 0;
-                this->uvbuffer                     = 0;
-                this->normalbuffer                 = 0;
-                this->elementbuffer                = 0;
-                this->initial_rotate_angle         = 0.0f;
-                this->initial_rotate_vector        = glm::vec3(0.0f, 1.0f, 1.0f);
+                this->vertex_uv_id                  = 0;
+                this->vertex_normal_modelspace_id   = 0;
+                this->vertexbuffer                  = 0;
+                this->uvbuffer                      = 0;
+                this->normalbuffer                  = 0;
+                this->elementbuffer                 = 0;
+                this->initial_rotate_angle          = 0.0f;
+                this->initial_rotate_vector         = glm::vec3(0.0f, 1.0f, 1.0f);
 
                 this->opengl_in_use = opengl_in_use;
 
@@ -106,7 +108,7 @@ namespace yli::ontology
 
             void store_vertex_position_modelspaceID(const GLint vertex_position_modelspace_id);
             void store_vertexUVID(const GLint vertex_uv_id);
-            void store_vertex_normal_modelspaceID(const GLint vertex_normal_modelspaceID);
+            void store_vertex_normal_modelspaceID(const GLint vertex_normal_modelspace_id);
 
             template<class T1>
                 friend void yli::ontology::render_species_or_glyph(T1 species_or_glyph_pointer);
@@ -130,7 +132,7 @@ namespace yli::ontology
 
             GLint vertex_position_modelspace_id;
             GLint vertex_uv_id;
-            GLint vertex_normal_modelspaceID;
+            GLint vertex_normal_modelspace_id;
 
             std::vector<glm::vec3> vertices;         // vertices of the `Model`.
             std::vector<glm::vec2> uvs;              // UVs of the `Model`.

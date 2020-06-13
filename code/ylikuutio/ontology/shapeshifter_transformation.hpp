@@ -45,7 +45,7 @@ namespace yli::ontology
 
             // constructor.
             ShapeshifterTransformation(yli::ontology::Universe* const universe, const yli::ontology::SpeciesStruct& species_struct)
-                : Entity(universe),
+                : Entity(universe, species_struct),
                 parent_of_shapeshifter_forms(this),
                 parent_of_shapeshifter_sequences(this)
             {

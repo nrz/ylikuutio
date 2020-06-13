@@ -105,7 +105,7 @@ namespace yli::ontology
         this->vertical_angle = vertical_angle;
     }
 
-    // Public callbacks (to be called from AI scripts written in AngelScript).
+    // Public callbacks (to be called from AI scripts written in YliLisp).
 
     void Movable::set_dest(yli::ontology::Movable* const movable, const float x, const float y, const float z)
     {
