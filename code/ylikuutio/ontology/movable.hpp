@@ -192,9 +192,9 @@ namespace yli::ontology
             float get_vertical_angle() const;
             void set_vertical_angle(const float vertical_angle);
 
-            // Public callbacks (to be called from AI scripts written in AngelScript).
+            // Public callbacks (to be called from AI scripts written in YliLisp).
             // These are the functions that are available for AI scripts.
-            // Ylikuutio will support scripting of game agents using AngelScript.
+            // Ylikuutio will support scripting of game agents using YliLisp.
             // Ylikuutio can be used for all kinds of games. However, there is
             // more support for some kinds of games needing such callbacks.
             // In particular, Ylikuutio supports simulations of real-life phenomena.
