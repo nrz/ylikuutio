@@ -76,8 +76,6 @@ namespace yli::ontology
         this->can_be_erased = false;
         this->should_be_rendered = false;
 
-        this->set_local_name(entity_struct.local_name);
-
         if (this->universe != this)
         {
             this->set_global_name(entity_struct.global_name);
