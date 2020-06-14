@@ -296,6 +296,11 @@ namespace yli::ontology
 
     void Entity::set_local_name(const std::string& local_name)
     {
+        if (local_name.empty())
+        {
+            return;
+        }
+
         if (!std::regex_match(local_name, std::regex("[a-zA-Z][a-zA-Z0-9_-]*")))
         {
             return;
