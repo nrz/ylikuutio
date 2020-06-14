@@ -78,8 +78,6 @@ namespace yli::ontology
 
         if (this->universe != this)
         {
-            this->set_global_name(entity_struct.global_name);
-
             this->should_be_rendered = (this->universe == nullptr ? false : !this->universe->get_is_headless());
 
             yli::config::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::data::AnyValue>(this->should_be_rendered));
