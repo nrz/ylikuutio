@@ -47,7 +47,7 @@
 
 namespace yli::lisp
 {
-    // Templates for processing console command arguments.
+    // Templates for processing Lisp function arguments.
 
     template<class T1>
         bool convert_string_to_value_and_advance_index(
