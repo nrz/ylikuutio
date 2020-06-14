@@ -62,6 +62,7 @@
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
+#include "code/ylikuutio/ontology/world_struct.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
@@ -326,8 +327,11 @@ int main(const int argc, const char* const argv[]) try
 
     // Create the `World`.
 
+    yli::ontology::WorldStruct earth_world_struct;
+    earth_world_struct.global_name = "earth_world";
+
     std::cout << "Creating yli::ontology::Entity* earth_world_entity ...\n";
-    yli::ontology::Entity* const earth_world_entity = entity_factory->create_world();
+    yli::ontology::Entity* const earth_world_entity = entity_factory->create_world(earth_world_struct);
     std::cout << "Creating yli::ontology::World* earth_world ...\n";
     yli::ontology::World* const earth_world = dynamic_cast<yli::ontology::World*>(earth_world_entity);
 
@@ -337,10 +341,11 @@ int main(const int argc, const char* const argv[]) try
         return -1;
     }
 
-    earth_world->set_global_name("earth_world");
+    yli::ontology::WorldStruct mars_world_struct;
+    mars_world_struct.global_name = "mars_world";
 
     std::cout << "Creating yli::ontology::Entity* mars_world_entity ...\n";
-    yli::ontology::Entity* const mars_world_entity = entity_factory->create_world();
+    yli::ontology::Entity* const mars_world_entity = entity_factory->create_world(mars_world_struct);
     std::cout << "Creating yli::ontology::World* mars_world ...\n";
     yli::ontology::World* const mars_world = dynamic_cast<yli::ontology::World*>(mars_world_entity);
 
@@ -349,8 +354,6 @@ int main(const int argc, const char* const argv[]) try
         cleanup_callback_engine.execute(nullptr);
         return -1;
     }
-
-    mars_world->set_global_name("mars_world");
 
     // Create the `Scene`s.
     // The `Scene`s will be created in the following order:

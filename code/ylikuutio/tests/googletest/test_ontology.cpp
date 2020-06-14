@@ -36,6 +36,7 @@
 #include "code/ylikuutio/ontology/brain.hpp"
 #include "code/ylikuutio/ontology/object_type.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
+#include "code/ylikuutio/ontology/world_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
@@ -88,7 +89,8 @@ TEST(worlds_must_be_initialized_appropriately, headless)
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world1 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct1;
+    yli::ontology::World* const world1 = new yli::ontology::World(universe, world_struct1, &universe->parent_of_worlds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 1);
@@ -108,7 +110,8 @@ TEST(worlds_must_be_initialized_appropriately, headless)
     ASSERT_EQ(world1->get_number_of_children(), 0);
     ASSERT_EQ(world1->get_number_of_descendants(), 0);
 
-    yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct2;
+    yli::ontology::World* const world2 = new yli::ontology::World(universe, world_struct2, &universe->parent_of_worlds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 2);
@@ -128,7 +131,8 @@ TEST(worlds_must_be_initialized_appropriately, headless)
     ASSERT_EQ(world2->get_number_of_children(), 0);
     ASSERT_EQ(world2->get_number_of_descendants(), 0);
 
-    yli::ontology::World* const world3 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct3;
+    yli::ontology::World* const world3 = new yli::ontology::World(universe, world_struct3, &universe->parent_of_worlds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 3);
@@ -148,7 +152,8 @@ TEST(worlds_must_be_initialized_appropriately, headless)
     ASSERT_EQ(world3->get_number_of_children(), 0);
     ASSERT_EQ(world3->get_number_of_descendants(), 0);
 
-    yli::ontology::World* const world4 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct4;
+    yli::ontology::World* const world4 = new yli::ontology::World(universe, world_struct4, &universe->parent_of_worlds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 4);
@@ -175,7 +180,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_the_earlier_w
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world1 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct1;
+    yli::ontology::World* const world1 = new yli::ontology::World(universe, world_struct1, &universe->parent_of_worlds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 1);
@@ -196,7 +202,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_the_earlier_w
     ASSERT_EQ(world1->get_number_of_descendants(), 0);
 
     delete world1;
-    yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct2;
+    yli::ontology::World* const world2 = new yli::ontology::World(universe, world_struct2, &universe->parent_of_worlds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 1);
@@ -217,7 +224,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_the_earlier_w
     ASSERT_EQ(world2->get_number_of_descendants(), 0);
 
     delete world2;
-    yli::ontology::World* const world3 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct3;
+    yli::ontology::World* const world3 = new yli::ontology::World(universe, world_struct3, &universe->parent_of_worlds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 1);
@@ -238,7 +246,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_the_earlier_w
     ASSERT_EQ(world3->get_number_of_descendants(), 0);
 
     delete world3;
-    yli::ontology::World* const world4 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct4;
+    yli::ontology::World* const world4 = new yli::ontology::World(universe, world_struct4, &universe->parent_of_worlds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 1);
@@ -265,7 +274,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_some_earlier_
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world1 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct1;
+    yli::ontology::World* const world1 = new yli::ontology::World(universe, world_struct1, &universe->parent_of_worlds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 1);
@@ -285,7 +295,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_some_earlier_
     ASSERT_EQ(world1->get_number_of_children(), 0);
     ASSERT_EQ(world1->get_number_of_descendants(), 0);
 
-    yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct2;
+    yli::ontology::World* const world2 = new yli::ontology::World(universe, world_struct2, &universe->parent_of_worlds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 2);
@@ -306,7 +317,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_some_earlier_
     ASSERT_EQ(world2->get_number_of_descendants(), 0);
 
     delete world1;
-    yli::ontology::World* const world3 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct3;
+    yli::ontology::World* const world3 = new yli::ontology::World(universe, world_struct3, &universe->parent_of_worlds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 2);
@@ -326,7 +338,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_some_earlier_
     ASSERT_EQ(world3->get_number_of_children(), 0);
     ASSERT_EQ(world3->get_number_of_descendants(), 0);
 
-    yli::ontology::World* const world4 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct4;
+    yli::ontology::World* const world4 = new yli::ontology::World(universe, world_struct4, &universe->parent_of_worlds);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_worlds(), 3);
@@ -349,7 +362,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_some_earlier_
 
 TEST(world_must_be_initialized_appropriately, no_universe)
 {
-    yli::ontology::World* const world = new yli::ontology::World(nullptr, nullptr);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(nullptr, world_struct, nullptr);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(world->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -367,7 +381,9 @@ TEST(scene_must_be_initialized_appropriately, headless)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -398,7 +414,8 @@ TEST(scene_must_be_initialized_appropriately, headless)
 
 TEST(scene_must_be_initialized_appropriately, no_universe)
 {
-    yli::ontology::World* const world = new yli::ontology::World(nullptr, nullptr);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(nullptr, world_struct, nullptr);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -441,7 +458,9 @@ TEST(shader_must_be_initialized_appropriately, headless)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -476,7 +495,8 @@ TEST(shader_must_be_initialized_appropriately, headless)
 
 TEST(shader_must_be_initialized_appropriately, no_universe)
 {
-    yli::ontology::World* const world = new yli::ontology::World(nullptr, nullptr);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(nullptr, world_struct, nullptr);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -552,7 +572,9 @@ TEST(material_must_be_initialized_appropriately, headless)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -595,7 +617,8 @@ TEST(material_must_be_initialized_appropriately, headless)
 
 TEST(material_must_be_initialized_appropriately, no_universe)
 {
-    yli::ontology::World* const world = new yli::ontology::World(nullptr, nullptr);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(nullptr, world_struct, nullptr);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -712,7 +735,9 @@ TEST(species_must_be_initialized_appropriately, headless)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -787,7 +812,9 @@ TEST(object_must_be_initialized_appropriately, headless)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -870,7 +897,9 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -933,7 +962,9 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -1000,7 +1031,9 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -1071,7 +1104,9 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -1154,7 +1189,9 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -1229,7 +1266,9 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -1345,7 +1384,9 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -1449,7 +1490,9 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -1581,7 +1624,9 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -1749,7 +1794,9 @@ TEST(brain_must_be_initialized_appropriately, headless)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -1910,7 +1957,9 @@ TEST(scene_must_be_activated_appropriately, scene)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -1926,7 +1975,9 @@ TEST(scene_must_bind_to_worlds_appropriately, scene)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world1 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct1;
+    yli::ontology::World* const world1 = new yli::ontology::World(universe, world_struct1, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world1;
@@ -1935,7 +1986,8 @@ TEST(scene_must_bind_to_worlds_appropriately, scene)
     ASSERT_EQ(world1->get_number_of_children(), 1);
     ASSERT_EQ(world1->get_number_of_descendants(), 2);
 
-    yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct2;
+    yli::ontology::World* const world2 = new yli::ontology::World(universe, world_struct2, &universe->parent_of_worlds);
     ASSERT_EQ(scene->get_parent(), world1);
     ASSERT_EQ(world2->get_number_of_children(), 0);
     ASSERT_EQ(world2->get_number_of_descendants(), 0);
@@ -1964,7 +2016,9 @@ TEST(active_scene_must_remain_active_scene_after_binding_to_a_new_parent, scene)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world1 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct1;
+    yli::ontology::World* const world1 = new yli::ontology::World(universe, world_struct1, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world1;
@@ -1972,7 +2026,8 @@ TEST(active_scene_must_remain_active_scene_after_binding_to_a_new_parent, scene)
     universe->set_active_scene(scene);
     ASSERT_EQ(universe->get_active_scene(), scene);
 
-    yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct2;
+    yli::ontology::World* const world2 = new yli::ontology::World(universe, world_struct2, &universe->parent_of_worlds);
     scene->bind_to_new_parent(world2);
     ASSERT_EQ(universe->get_active_scene(), scene);
 }
@@ -1982,14 +2037,17 @@ TEST(inactive_scene_must_remain_inactive_scene_after_binding_to_a_new_parent, sc
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world1 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct1;
+    yli::ontology::World* const world1 = new yli::ontology::World(universe, world_struct1, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world1;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world1->parent_of_scenes);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
-    yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct2;
+    yli::ontology::World* const world2 = new yli::ontology::World(universe, world_struct2, &universe->parent_of_worlds);
     scene->bind_to_new_parent(world2);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 }
@@ -1999,7 +2057,9 @@ TEST(shader_must_bind_to_scene_appropriately, scenes_of_the_same_world)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -2043,7 +2103,9 @@ TEST(shader_must_bind_to_scene_appropriately, scenes_of_the_different_worlds)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world1 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct1;
+    yli::ontology::World* const world1 = new yli::ontology::World(universe, world_struct1, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct1;
     scene_struct1.world = world1;
@@ -2056,7 +2118,8 @@ TEST(shader_must_bind_to_scene_appropriately, scenes_of_the_different_worlds)
     ASSERT_EQ(scene1->get_number_of_children(), 2);
     ASSERT_EQ(scene1->get_number_of_descendants(), 2);
 
-    yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct2;
+    yli::ontology::World* const world2 = new yli::ontology::World(universe, world_struct2, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct2;
     scene_struct2.world = world2;
@@ -2099,7 +2162,9 @@ TEST(material_must_bind_to_shader_appropriately, shaders_of_the_same_scene)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct1;
     scene_struct1.world = world;
@@ -2156,7 +2221,9 @@ TEST(material_must_bind_to_shader_appropriately, shaders_of_different_scenes)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct1;
     scene_struct1.world = world;
@@ -2221,7 +2288,9 @@ TEST(species_must_bind_to_material_appropriately, materials_of_the_same_shader)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct1;
     scene_struct1.world = world;
@@ -2286,7 +2355,9 @@ TEST(species_must_bind_to_material_appropriately, materials_of_different_shaders
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct1;
     scene_struct1.world = world;
@@ -2359,7 +2430,9 @@ TEST(object_must_bind_to_species_appropriately, species_of_the_same_material)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct1;
     scene_struct1.world = world;
@@ -2432,7 +2505,9 @@ TEST(object_must_bind_to_species_appropriately, species_of_different_materials)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct1;
     scene_struct1.world = world;
@@ -2513,7 +2588,9 @@ TEST(shapeshifter_transformation_must_bind_to_material_appropriately, materials_
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct1;
     scene_struct1.world = world;
@@ -2578,7 +2655,9 @@ TEST(shapeshifter_transformation_must_bind_to_material_appropriately, materials_
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct1;
     scene_struct1.world = world;
@@ -2651,7 +2730,9 @@ TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -2730,7 +2811,8 @@ TEST(world_must_be_given_a_global_name_appropriately, headless)
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
     ASSERT_EQ(world->get_global_name(), "");
     ASSERT_EQ(world->get_local_name(), "");
 
@@ -2747,7 +2829,8 @@ TEST(world_must_be_given_a_local_name_appropriately, headless)
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
     ASSERT_EQ(world->get_global_name(), "");
     ASSERT_EQ(world->get_local_name(), "");
 
@@ -2764,7 +2847,8 @@ TEST(world_must_be_given_a_global_name_appropriately_after_setting_a_global_name
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
     ASSERT_EQ(world->get_global_name(), "");
     ASSERT_EQ(world->get_local_name(), "");
 
@@ -2783,7 +2867,8 @@ TEST(world_must_be_given_a_local_name_appropriately_after_setting_a_local_name, 
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
     ASSERT_EQ(world->get_global_name(), "");
     ASSERT_EQ(world->get_local_name(), "");
 
@@ -2802,7 +2887,8 @@ TEST(world_must_be_given_a_global_name_appropriately_after_setting_a_local_name,
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
     ASSERT_EQ(world->get_global_name(), "");
     ASSERT_EQ(world->get_local_name(), "");
 
@@ -2821,7 +2907,8 @@ TEST(world_must_be_given_a_local_name_appropriately_after_setting_a_global_name,
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
     ASSERT_EQ(world->get_global_name(), "");
     ASSERT_EQ(world->get_local_name(), "");
 
@@ -2840,7 +2927,8 @@ TEST(scene_must_be_given_a_global_name_appropriately, headless)
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -2861,7 +2949,8 @@ TEST(scene_must_be_given_a_local_name_appropriately, headless)
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -2882,7 +2971,8 @@ TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_global_name
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -2906,7 +2996,8 @@ TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_local_name, 
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -2930,7 +3021,8 @@ TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_local_name,
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -2954,7 +3046,8 @@ TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_global_name,
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -2978,7 +3071,8 @@ TEST(shader_must_be_given_a_global_name_appropriately, headless)
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -3004,7 +3098,8 @@ TEST(shader_must_be_given_a_local_name_appropriately, headless)
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -3030,7 +3125,8 @@ TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_global_nam
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -3060,7 +3156,8 @@ TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_local_name,
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -3090,7 +3187,8 @@ TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_local_name
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -3120,7 +3218,8 @@ TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_global_name
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -3149,13 +3248,16 @@ TEST(scene_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world1 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct1;
+    yli::ontology::World* const world1 = new yli::ontology::World(universe, world_struct1, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world1;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world1->parent_of_scenes);
 
-    yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct2;
+    yli::ontology::World* const world2 = new yli::ontology::World(universe, world_struct2, &universe->parent_of_worlds);
 
     scene->set_local_name("foo");
     scene->bind_to_new_parent(world2);
@@ -3182,13 +3284,16 @@ TEST(scene_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world1 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct1;
+    yli::ontology::World* const world1 = new yli::ontology::World(universe, world_struct1, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world1;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world1->parent_of_scenes);
 
-    yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct2;
+    yli::ontology::World* const world2 = new yli::ontology::World(universe, world_struct2, &universe->parent_of_worlds);
 
     scene->set_global_name("foo");
     scene->set_local_name("bar");
@@ -3220,13 +3325,16 @@ TEST(scene_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, head
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world1 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct1;
+    yli::ontology::World* const world1 = new yli::ontology::World(universe, world_struct1, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct1;
     scene_struct1.world = world1;
     yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct1, &world1->parent_of_scenes);
 
-    yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct2;
+    yli::ontology::World* const world2 = new yli::ontology::World(universe, world_struct2, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct2;
     scene_struct2.world = world2;
@@ -3250,13 +3358,16 @@ TEST(scene_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, head
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world1 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct1;
+    yli::ontology::World* const world1 = new yli::ontology::World(universe, world_struct1, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct1;
     scene_struct1.world = world1;
     yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct1, &world1->parent_of_scenes);
 
-    yli::ontology::World* const world2 = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct2;
+    yli::ontology::World* const world2 = new yli::ontology::World(universe, world_struct2, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct2;
     scene_struct2.world = world2;
@@ -3286,7 +3397,9 @@ TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct1;
     scene_struct1.world = world;
@@ -3325,7 +3438,9 @@ TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct1;
     scene_struct1.world = world;
@@ -3369,7 +3484,9 @@ TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct1;
     scene_struct1.world = world;
@@ -3404,7 +3521,9 @@ TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct1;
     scene_struct1.world = world;
@@ -3445,7 +3564,9 @@ TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -3488,7 +3609,9 @@ TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -3536,7 +3659,9 @@ TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -3575,7 +3700,9 @@ TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -3620,7 +3747,9 @@ TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headles
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -3669,7 +3798,9 @@ TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headles
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -3723,7 +3854,9 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -3770,7 +3903,9 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -3823,7 +3958,9 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -3878,7 +4015,9 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -3938,7 +4077,9 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -3989,7 +4130,9 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;

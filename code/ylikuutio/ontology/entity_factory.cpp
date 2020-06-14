@@ -39,6 +39,7 @@
 #include "any_value_entity.hpp"
 #include "any_struct_entity.hpp"
 #include "callback_engine_entity.hpp"
+#include "world_struct.hpp"
 #include "scene_struct.hpp"
 #include "shader_struct.hpp"
 #include "material_struct.hpp"
@@ -80,9 +81,9 @@ namespace yli::ontology
         return this->universe;
     }
 
-    yli::ontology::Entity* EntityFactory::create_world() const
+    yli::ontology::Entity* EntityFactory::create_world(const yli::ontology::WorldStruct& world_struct) const
     {
-        return new yli::ontology::World(this->universe, (this->universe == nullptr ? nullptr : &this->universe->parent_of_worlds));
+        return new yli::ontology::World(this->universe, world_struct, (this->universe == nullptr ? nullptr : &this->universe->parent_of_worlds));
     }
 
     yli::ontology::Entity* EntityFactory::create_scene(const yli::ontology::SceneStruct& scene_struct) const

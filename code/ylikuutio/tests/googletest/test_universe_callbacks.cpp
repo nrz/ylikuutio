@@ -31,6 +31,7 @@
 #include "code/ylikuutio/ontology/any_value_entity.hpp"
 #include "code/ylikuutio/ontology/any_struct_entity.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
+#include "code/ylikuutio/ontology/world_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
@@ -64,7 +65,8 @@ TEST(object_must_be_bound_to_species_appropriately, universe_callback)
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.world = world;
@@ -707,7 +709,8 @@ TEST(scene_must_be_deleted_appropriately, universe_callback)
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     const std::string scene_name = "foo";
 
@@ -732,7 +735,8 @@ TEST(scene_must_be_activated_appropriately, universe_callback)
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     const std::string scene_name = "foo";
 
@@ -791,7 +795,8 @@ TEST(scene_and_camera_must_be_activated_appropriately, universe_callback)
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::World* const world = new yli::ontology::World(universe, &universe->parent_of_worlds);
+    yli::ontology::WorldStruct world_struct;
+    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
 
     const std::string scene_name = "foo";
 
