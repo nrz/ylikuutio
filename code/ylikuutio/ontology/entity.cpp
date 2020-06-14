@@ -257,6 +257,11 @@ namespace yli::ontology
         // `this->universe` must not be `nullptr`.
         // `global_name` must not be already in use.
 
+        if (global_name.empty())
+        {
+            return;
+        }
+
         if (!std::regex_match(global_name, std::regex("[a-zA-Z][a-zA-Z0-9_-]*")))
         {
             return;
