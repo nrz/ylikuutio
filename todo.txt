@@ -6,6 +6,7 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
+[ ] Implement setting global name in `yli::ontology::EntityFactory` factory functions by calling `set_global_name`.
 [ ] Implement setting local name in `yli::ontology::EntityFactory` factory functions by calling `set_local_name`.
 [ ] Modify `set` console command so that setting a value is done using `set 'value foo bar` or `set 'value foo bar baz` (`'value` must be used).
 [ ] Modify `set` console command so that setting a global name is done using `set 'global-name foo bar`.
