@@ -206,3 +206,5 @@ Ready:
 [x] Restrict what characters are allowed in local names (regex: `[a-zA-Z][a-zA-Z0-9_-]*`).
 [x] Implement setting the global name by defining the `global_name` member variable of `yli::ontology::EntityStruct`.
 [x] Implement setting the local name by defining the `local_name` member variable of `yli::ontology::EntityStruct`.
+[x] Implement setting global name in `yli::ontology::EntityFactory` factory functions by calling `set_global_name`.
+[x] Implement setting local name in `yli::ontology::EntityFactory` factory functions by calling `set_local_name`.

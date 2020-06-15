@@ -57,10 +57,12 @@
 #include "code/ylikuutio/ontology/text2D.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
+#include "code/ylikuutio/ontology/world_struct.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/ontology/entity_factory_templates.hpp"
+#include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
 #include "code/ylikuutio/config/setting.hpp"
@@ -283,7 +285,8 @@ int main(const int argc, const char* const argv[]) try
 
     // Create the `Console`.
     std::cout << "Creating yli::ontology::Entity* my_console_entity ...\n";
-    yli::ontology::Entity* const my_console_entity = entity_factory->create_console();
+    yli::ontology::ConsoleStruct my_console_struct;
+    yli::ontology::Entity* const my_console_entity = entity_factory->create_console(my_console_struct);
     std::cout << "Creating yli::ontology::Console* my_console ...\n";
     yli::ontology::Console* const my_console = dynamic_cast<yli::ontology::Console*>(my_console_entity);
 
@@ -300,8 +303,10 @@ int main(const int argc, const char* const argv[]) try
 
     // Create the `World`.
 
+    yli::ontology::WorldStruct world_struct;
+
     std::cout << "Creating yli::ontology::Entity* earth_world_entity ...\n";
-    yli::ontology::Entity* const earth_world_entity = entity_factory->create_world();
+    yli::ontology::Entity* const earth_world_entity = entity_factory->create_world(world_struct);
     std::cout << "Creating yli::ontology::World* earth_world ...\n";
     yli::ontology::World* const earth_world = dynamic_cast<yli::ontology::World*>(earth_world_entity);
 

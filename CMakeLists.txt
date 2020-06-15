@@ -564,6 +564,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/chunk_struct.hpp
     code/ylikuutio/ontology/console.cpp
     code/ylikuutio/ontology/console.hpp
+    code/ylikuutio/ontology/console_struct.hpp
     code/ylikuutio/ontology/console_callbacks.cpp
     code/ylikuutio/ontology/generic_lisp_function_overload.cpp
     code/ylikuutio/ontology/generic_lisp_function_overload.hpp
@@ -664,6 +665,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/vertex_node.hpp
     code/ylikuutio/ontology/world.cpp
     code/ylikuutio/ontology/world.hpp
+    code/ylikuutio/ontology/world_struct.hpp
 
     # opengl, in alphabetical order
     code/ylikuutio/opengl/opengl.cpp
@@ -983,6 +985,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/child_module.hpp
         code/ylikuutio/ontology/console.cpp
         code/ylikuutio/ontology/console.hpp
+        code/ylikuutio/ontology/console_struct.hpp
         code/ylikuutio/ontology/font2D.cpp
         code/ylikuutio/ontology/font2D.hpp
         code/ylikuutio/ontology/font_struct.hpp
@@ -1026,6 +1029,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/universe_struct.hpp
         code/ylikuutio/ontology/world.cpp
         code/ylikuutio/ontology/world.hpp
+        code/ylikuutio/ontology/world_struct.hpp
         code/ylikuutio/string/ylikuutio_string.cpp
         code/ylikuutio/string/ylikuutio_string.hpp
         code/ylikuutio/triangulation/face_normals.cpp

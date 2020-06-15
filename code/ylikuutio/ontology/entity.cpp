@@ -76,12 +76,8 @@ namespace yli::ontology
         this->can_be_erased = false;
         this->should_be_rendered = false;
 
-        this->set_local_name(entity_struct.local_name);
-
         if (this->universe != this)
         {
-            this->set_global_name(entity_struct.global_name);
-
             this->should_be_rendered = (this->universe == nullptr ? false : !this->universe->get_is_headless());
 
             yli::config::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::data::AnyValue>(this->should_be_rendered));
@@ -257,6 +253,11 @@ namespace yli::ontology
         // `this->universe` must not be `nullptr`.
         // `global_name` must not be already in use.
 
+        if (global_name.empty())
+        {
+            return;
+        }
+
         if (!std::regex_match(global_name, std::regex("[a-zA-Z][a-zA-Z0-9_-]*")))
         {
             return;
@@ -291,6 +292,11 @@ namespace yli::ontology
 
     void Entity::set_local_name(const std::string& local_name)
     {
+        if (local_name.empty())
+        {
+            return;
+        }
+
         if (!std::regex_match(local_name, std::regex("[a-zA-Z][a-zA-Z0-9_-]*")))
         {
             return;

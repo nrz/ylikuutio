@@ -18,6 +18,7 @@
 #ifndef __ENTITY_FACTORY_HPP_INCLUDED
 #define __ENTITY_FACTORY_HPP_INCLUDED
 
+#include "world_struct.hpp"
 #include "scene_struct.hpp"
 #include "shader_struct.hpp"
 #include "material_struct.hpp"
@@ -28,6 +29,7 @@
 #include "vector_font_struct.hpp"
 #include "text_struct.hpp"
 #include "text3D_struct.hpp"
+#include "console_struct.hpp"
 #include "font_struct.hpp"
 #include "lisp_function_struct.hpp"
 #include "camera_struct.hpp"
@@ -71,7 +73,7 @@ namespace yli::ontology
 
             yli::ontology::Universe* get_universe() const;
 
-            yli::ontology::Entity* create_world() const;
+            yli::ontology::Entity* create_world(const yli::ontology::WorldStruct& world_struct) const;
             yli::ontology::Entity* create_scene(const yli::ontology::SceneStruct& scene_struct) const;
             yli::ontology::Entity* create_shader(const yli::ontology::ShaderStruct& shader_struct) const;
             yli::ontology::Entity* create_material(const yli::ontology::MaterialStruct& material_struct) const;
@@ -83,7 +85,7 @@ namespace yli::ontology
             yli::ontology::Entity* create_text2d(const yli::ontology::TextStruct& text_struct) const;
             yli::ontology::Entity* create_text3d(const yli::ontology::Text3DStruct& text3D_struct) const;
             yli::ontology::Entity* create_font2d(const yli::ontology::FontStruct& font_struct) const;
-            yli::ontology::Entity* create_console() const;
+            yli::ontology::Entity* create_console(const yli::ontology::ConsoleStruct& console_struct) const;
             yli::ontology::Entity* create_lisp_function(const yli::ontology::LispFunctionStruct& lisp_function_struct) const;
             yli::ontology::Entity* create_camera(const yli::ontology::CameraStruct& camera_struct) const;
             yli::ontology::Entity* create_compute_task(const yli::ontology::ComputeTaskStruct& compute_task_struct) const;

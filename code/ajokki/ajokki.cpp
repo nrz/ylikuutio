@@ -62,10 +62,12 @@
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
+#include "code/ylikuutio/ontology/world_struct.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/ontology/entity_factory_templates.hpp"
+#include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
 #include "code/ylikuutio/config/setting.hpp"
@@ -288,7 +290,9 @@ int main(const int argc, const char* const argv[]) try
 
     // Create the main `Console`.
     std::cout << "Creating yli::ontology::Entity* my_console_entity ...\n";
-    yli::ontology::Entity* const my_console_entity = entity_factory->create_console();
+    yli::ontology::ConsoleStruct my_console_struct;
+    my_console_struct.global_name = "my_console";
+    yli::ontology::Entity* const my_console_entity = entity_factory->create_console(my_console_struct);
     std::cout << "Creating yli::ontology::Console* my_console ...\n";
     yli::ontology::Console* const my_console = dynamic_cast<yli::ontology::Console*>(my_console_entity);
 
@@ -298,7 +302,6 @@ int main(const int argc, const char* const argv[]) try
         return -1;
     }
 
-    my_console->set_global_name("my_console");
     my_universe->set_active_console(my_console);
 
     std::cout << "Setting up console ...\n";
@@ -306,7 +309,9 @@ int main(const int argc, const char* const argv[]) try
 
     // Create the 'mini' `Console`.
     std::cout << "Creating yli::ontology::Entity* mini_console_entity ...\n";
-    yli::ontology::Entity* const mini_console_entity = entity_factory->create_console();
+    yli::ontology::ConsoleStruct mini_console_struct;
+    mini_console_struct.global_name = "mini_console";
+    yli::ontology::Entity* const mini_console_entity = entity_factory->create_console(mini_console_struct);
     std::cout << "Creating yli::ontology::Console* mini_console ...\n";
     yli::ontology::Console* const mini_console = dynamic_cast<yli::ontology::Console*>(mini_console_entity);
 
@@ -316,7 +321,6 @@ int main(const int argc, const char* const argv[]) try
         return -1;
     }
 
-    mini_console->set_global_name("mini_console");
     my_universe->set_active_console(mini_console);
 
     std::cout << "Setting up console ...\n";
@@ -326,8 +330,11 @@ int main(const int argc, const char* const argv[]) try
 
     // Create the `World`.
 
+    yli::ontology::WorldStruct earth_world_struct;
+    earth_world_struct.global_name = "earth_world";
+
     std::cout << "Creating yli::ontology::Entity* earth_world_entity ...\n";
-    yli::ontology::Entity* const earth_world_entity = entity_factory->create_world();
+    yli::ontology::Entity* const earth_world_entity = entity_factory->create_world(earth_world_struct);
     std::cout << "Creating yli::ontology::World* earth_world ...\n";
     yli::ontology::World* const earth_world = dynamic_cast<yli::ontology::World*>(earth_world_entity);
 
@@ -337,10 +344,11 @@ int main(const int argc, const char* const argv[]) try
         return -1;
     }
 
-    earth_world->set_global_name("earth_world");
+    yli::ontology::WorldStruct mars_world_struct;
+    mars_world_struct.global_name = "mars_world";
 
     std::cout << "Creating yli::ontology::Entity* mars_world_entity ...\n";
-    yli::ontology::Entity* const mars_world_entity = entity_factory->create_world();
+    yli::ontology::Entity* const mars_world_entity = entity_factory->create_world(mars_world_struct);
     std::cout << "Creating yli::ontology::World* mars_world ...\n";
     yli::ontology::World* const mars_world = dynamic_cast<yli::ontology::World*>(mars_world_entity);
 
@@ -349,8 +357,6 @@ int main(const int argc, const char* const argv[]) try
         cleanup_callback_engine.execute(nullptr);
         return -1;
     }
-
-    mars_world->set_global_name("mars_world");
 
     // Create the `Scene`s.
     // The `Scene`s will be created in the following order:
