@@ -6,8 +6,6 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
-[ ] Implement setting global name in `yli::ontology::EntityFactory` factory functions by calling `set_global_name`.
-[ ] Implement setting local name in `yli::ontology::EntityFactory` factory functions by calling `set_local_name`.
 [ ] Modify `set` console command so that setting a value is done using `set 'value foo bar` or `set 'value foo bar baz` (`'value` must be used).
 [ ] Modify `set` console command so that setting a global name is done using `set 'global-name foo bar`.
 [ ] Modify `set` console command so that setting a local name is done using `set 'local-name foo bar`.
@@ -208,3 +206,5 @@ Ready:
 [x] Restrict what characters are allowed in local names (regex: `[a-zA-Z][a-zA-Z0-9_-]*`).
 [x] Implement setting the global name by defining the `global_name` member variable of `yli::ontology::EntityStruct`.
 [x] Implement setting the local name by defining the `local_name` member variable of `yli::ontology::EntityStruct`.
+[x] Implement setting global name in `yli::ontology::EntityFactory` factory functions by calling `set_global_name`.
+[x] Implement setting local name in `yli::ontology::EntityFactory` factory functions by calling `set_local_name`.
