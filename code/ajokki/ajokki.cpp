@@ -67,6 +67,7 @@
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/ontology/entity_factory_templates.hpp"
+#include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
 #include "code/ylikuutio/config/setting.hpp"
@@ -289,7 +290,9 @@ int main(const int argc, const char* const argv[]) try
 
     // Create the main `Console`.
     std::cout << "Creating yli::ontology::Entity* my_console_entity ...\n";
-    yli::ontology::Entity* const my_console_entity = entity_factory->create_console();
+    yli::ontology::ConsoleStruct my_console_struct;
+    my_console_struct.global_name = "my_console";
+    yli::ontology::Entity* const my_console_entity = entity_factory->create_console(my_console_struct);
     std::cout << "Creating yli::ontology::Console* my_console ...\n";
     yli::ontology::Console* const my_console = dynamic_cast<yli::ontology::Console*>(my_console_entity);
 
@@ -299,7 +302,6 @@ int main(const int argc, const char* const argv[]) try
         return -1;
     }
 
-    my_console->set_global_name("my_console");
     my_universe->set_active_console(my_console);
 
     std::cout << "Setting up console ...\n";
@@ -307,7 +309,9 @@ int main(const int argc, const char* const argv[]) try
 
     // Create the 'mini' `Console`.
     std::cout << "Creating yli::ontology::Entity* mini_console_entity ...\n";
-    yli::ontology::Entity* const mini_console_entity = entity_factory->create_console();
+    yli::ontology::ConsoleStruct mini_console_struct;
+    mini_console_struct.global_name = "mini_console";
+    yli::ontology::Entity* const mini_console_entity = entity_factory->create_console(mini_console_struct);
     std::cout << "Creating yli::ontology::Console* mini_console ...\n";
     yli::ontology::Console* const mini_console = dynamic_cast<yli::ontology::Console*>(mini_console_entity);
 
@@ -317,7 +321,6 @@ int main(const int argc, const char* const argv[]) try
         return -1;
     }
 
-    mini_console->set_global_name("mini_console");
     my_universe->set_active_console(mini_console);
 
     std::cout << "Setting up console ...\n";

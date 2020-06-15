@@ -38,6 +38,7 @@
 #include "code/ylikuutio/ontology/species_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/camera_struct.hpp"
+#include "code/ylikuutio/ontology/console_struct.hpp"
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
@@ -758,7 +759,8 @@ TEST(console_must_be_activated_appropriately, universe_callback_without_font2D)
 
     const std::string console_name = "foo";
 
-    yli::ontology::Console* const console = new yli::ontology::Console(universe, &universe->parent_of_consoles);
+    yli::ontology::ConsoleStruct console_struct;
+    yli::ontology::Console* const console = new yli::ontology::Console(universe, console_struct, &universe->parent_of_consoles);
     console->set_global_name(console_name);
 
     ASSERT_EQ(universe->get_active_console(), nullptr);
@@ -777,7 +779,8 @@ TEST(console_must_be_activated_appropriately, universe_callback_with_font2D)
 
     const std::string console_name = "foo";
 
-    yli::ontology::Console* const console = new yli::ontology::Console(universe, &universe->parent_of_consoles);
+    yli::ontology::ConsoleStruct console_struct;
+    yli::ontology::Console* const console = new yli::ontology::Console(universe, console_struct, &universe->parent_of_consoles);
     console->set_global_name(console_name);
 
     ASSERT_EQ(universe->get_active_console(), nullptr);

@@ -49,6 +49,7 @@
 #include "holobiont_struct.hpp"
 #include "vector_font_struct.hpp"
 #include "text3D_struct.hpp"
+#include "console_struct.hpp"
 #include "font_struct.hpp"
 #include "lisp_function_struct.hpp"
 #include "camera_struct.hpp"
@@ -212,9 +213,22 @@ namespace yli::ontology
         return font2d_entity;
     }
 
-    yli::ontology::Entity* EntityFactory::create_console() const
+    yli::ontology::Entity* EntityFactory::create_console(const yli::ontology::ConsoleStruct& console_struct) const
     {
-        return new yli::ontology::Console(this->universe, (this->universe == nullptr ? nullptr : &this->universe->parent_of_consoles));
+        yli::ontology::Entity* console_entity = new yli::ontology::Console(this->universe, console_struct, (this->universe == nullptr ? nullptr : &this->universe->parent_of_consoles));
+
+        if (!console_struct.global_name.empty() && console_struct.local_name.empty())
+        {
+            // Only `global_name` given, OK.
+            console_entity->set_global_name(console_struct.global_name);
+        }
+        else if (console_struct.global_name.empty() && !console_struct.local_name.empty())
+        {
+            // Only `local_name` given, OK.
+            console_entity->set_local_name(console_struct.local_name);
+        }
+
+        return console_entity;
     }
 
     yli::ontology::Entity* EntityFactory::create_lisp_function(const yli::ontology::LispFunctionStruct& lisp_function_struct) const

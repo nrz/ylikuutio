@@ -60,6 +60,7 @@
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/ontology/entity_factory_templates.hpp"
+#include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
 #include "code/ylikuutio/config/setting.hpp"
@@ -280,7 +281,8 @@ int main(const int argc, const char* const argv[]) try
 
     // Create the `Console`.
     std::cout << "Creating yli::ontology::Entity* my_console_entity ...\n";
-    yli::ontology::Entity* const my_console_entity = entity_factory->create_console();
+    yli::ontology::ConsoleStruct my_console_struct;
+    yli::ontology::Entity* const my_console_entity = entity_factory->create_console(my_console_struct);
     std::cout << "Creating yli::ontology::Console* my_console ...\n";
     yli::ontology::Console* const my_console = dynamic_cast<yli::ontology::Console*>(my_console_entity);
 
