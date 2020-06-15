@@ -38,7 +38,6 @@
 #include "code/ylikuutio/ontology/species_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/camera_struct.hpp"
-#include "code/ylikuutio/ontology/font2D.hpp"
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
