@@ -44,7 +44,6 @@
 #include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <string>        // std::string
-#include <unordered_map> // std::unordered_map
 
 namespace yli::ontology
 {
@@ -291,17 +290,6 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_default_camera.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_cameras.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_brains.child_pointer_vector);
-    }
-
-    // this method returns a pointer to an `Entity` using the name as key.
-    yli::ontology::Entity* Scene::get_entity(const std::string& name) const
-    {
-        if (this->name_map.count(name) != 1)
-        {
-            return nullptr;
-        }
-
-        return this->name_map.at(name);
     }
 
     float Scene::get_turbo_factor() const

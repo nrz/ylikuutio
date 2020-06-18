@@ -38,7 +38,6 @@
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <queue>         // std::priority_queue, std::queue
 #include <string>        // std::string
-#include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
 // How `yli::ontology::Scene` class works:
@@ -146,9 +145,6 @@ namespace yli::ontology
             yli::ontology::Camera* get_active_camera() const;
             void set_active_camera(yli::ontology::Camera* camera);
 
-            // this method returns a pointer to an `Entity` using the name as key.
-            yli::ontology::Entity* get_entity(const std::string& name) const;
-
             // this method returns a pointer to `yli::data::AnyValue` corresponding to the given `key`.
             std::shared_ptr<yli::data::AnyValue> get_variable(const std::string& key) const;
             float get_turbo_factor() const;
@@ -198,9 +194,6 @@ namespace yli::ontology
             yli::ontology::Camera* active_camera;
 
             yli::ontology::Species* terrain_species; // pointer to terrain `Species` (used in collision detection).
-
-            // For finding any `Entity`s of this `Scene` by using its name.
-            std::unordered_map<std::string, yli::ontology::Entity*> name_map;
 
             // Variables related to location and orientation.
 
