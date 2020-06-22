@@ -6,8 +6,6 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
-[ ] Implement `set-global-name` console command so that setting a global name is done using `set-global-name foo bar`.
-[ ] Implement `set-local-name` console command so that setting a local name is done using `set-local-name foo bar`.
 [ ] Implement support for local variables in `bind` console command.
 [ ] Convert `Setting` into a an `yli::ontology` class that inherits `yli::ontology::Entity`.
 [ ] Implement support for local variables in `set` console command.
@@ -210,3 +208,5 @@ Ready:
 [x] Implement setting the local name by defining the `local_name` member variable of `yli::ontology::EntityStruct`.
 [x] Implement setting global name in `yli::ontology::EntityFactory` factory functions by calling `set_global_name`.
 [x] Implement setting local name in `yli::ontology::EntityFactory` factory functions by calling `set_local_name`.
+[x] Implement `set-global-name` console command so that setting a global name is done using `set-global-name foo bar`.
+[x] Implement `set-local-name` console command so that setting a local name is done using `set-local-name foo bar`.
