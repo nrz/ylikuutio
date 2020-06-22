@@ -182,6 +182,38 @@ namespace yli::ontology
         return nullptr;
     }
 
+    // Public `Entity` naming callbacks.
+
+    std::shared_ptr<yli::data::AnyValue> Universe::set_global_name_for_entity(
+            yli::ontology::Universe* const universe,
+            yli::ontology::Entity* const entity,
+            std::shared_ptr<std::string> global_name)
+    {
+        if (universe == nullptr || entity == nullptr || global_name == nullptr)
+        {
+            return nullptr;
+        }
+
+        entity->set_global_name(*global_name);
+
+        return nullptr;
+    }
+
+    std::shared_ptr<yli::data::AnyValue> Universe::set_local_name_for_entity(
+            yli::ontology::Universe* const universe,
+            yli::ontology::Entity* const entity,
+            std::shared_ptr<std::string> local_name)
+    {
+        if (universe == nullptr || entity == nullptr || local_name == nullptr)
+        {
+            return nullptr;
+        }
+
+        entity->set_local_name(*local_name);
+
+        return nullptr;
+    }
+
     // Public `Entity` activate callbacks.
 
     std::shared_ptr<yli::data::AnyValue> Universe::activate(
