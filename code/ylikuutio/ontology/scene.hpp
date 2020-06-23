@@ -140,6 +140,8 @@ namespace yli::ontology
             // Intentional actors (AIs and keyboard controlled ones).
             void act();
 
+            void activate() override;
+
             // this method renders all `Shader`s of this `Scene`.
             void render() override;
 

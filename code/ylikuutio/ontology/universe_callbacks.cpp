@@ -17,8 +17,6 @@
 
 #include "universe.hpp"
 #include "entity.hpp"
-#include "scene.hpp"
-#include "camera.hpp"
 #include "movable.hpp"
 #include "brain.hpp"
 #include "console.hpp"
@@ -206,52 +204,11 @@ namespace yli::ontology
 
     // Public `Entity` activate callbacks.
 
-    std::shared_ptr<yli::data::AnyValue> Universe::activate(
-            yli::ontology::Universe* const universe,
-            yli::ontology::Entity* const entity)
+    std::shared_ptr<yli::data::AnyValue> Universe::activate_entity(yli::ontology::Entity* const entity)
     {
-        // This function can be used to activate a `Scene`, a `Camera`, or a `Console`.
-
-        if (universe == nullptr || entity == nullptr)
+        if (entity != nullptr)
         {
-            return nullptr;
-        }
-
-        yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(entity);
-        yli::ontology::Camera* const camera = dynamic_cast<yli::ontology::Camera*>(entity);
-        yli::ontology::Console* const console = dynamic_cast<yli::ontology::Console*>(entity);
-
-        uint32_t number_of_entity_types = 0;
-        number_of_entity_types += scene != nullptr ? 1 : 0;
-        number_of_entity_types += camera != nullptr ? 1 : 0;
-        number_of_entity_types += console != nullptr ? 1 : 0;
-
-        if (number_of_entity_types != 1)
-        {
-            // The named `Entity` is neither a `Scene`, a `Camera`, nor a `Console`.
-            return nullptr;
-        }
-
-        if (scene != nullptr)
-        {
-            // The named `Entity` is a `Scene`.
-            universe->set_active_scene(scene);
-        }
-        else if (camera != nullptr)
-        {
-            // The named `Entity` is a `Camera`.
-            universe->set_active_camera(camera);
-        }
-        else if (console != nullptr)
-        {
-            // The named `Entity` is a `Console`.
-            if (universe->get_active_console() != nullptr)
-            {
-                universe->get_active_console()->exit_console();
-            }
-
-            universe->set_active_console(console);
-            console->enter_console();
+            entity->activate();
         }
 
         return nullptr;

@@ -53,6 +53,14 @@ namespace yli::ontology
         // destructor.
     }
 
+    void Camera::activate()
+    {
+        if (this->universe != nullptr)
+        {
+            this->universe->set_active_camera(this);
+        }
+    }
+
     std::size_t Camera::get_number_of_children() const
     {
         return 0; // `Camera` has no children.

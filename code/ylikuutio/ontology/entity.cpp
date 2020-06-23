@@ -118,6 +118,10 @@ namespace yli::ontology
         // from here.
     }
 
+    void Entity::activate()
+    {
+    }
+
     void Entity::render()
     {
     }

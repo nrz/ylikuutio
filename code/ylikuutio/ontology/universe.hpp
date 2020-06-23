@@ -655,9 +655,7 @@ namespace yli::ontology
 
             // Public `Entity` activate callbacks.
 
-            static std::shared_ptr<yli::data::AnyValue> activate(
-                    yli::ontology::Universe* const universe,
-                    yli::ontology::Entity* const entity);
+            static std::shared_ptr<yli::data::AnyValue> activate_entity(yli::ontology::Entity* const entity);
 
             // Public AngelScript-related callbacks.
 

@@ -172,6 +172,20 @@ namespace yli::ontology
         this->print_text("TODO: help text here");
     }
 
+    void Console::activate()
+    {
+        if (this->universe != nullptr)
+        {
+            if (this->universe->get_active_console() != nullptr)
+            {
+                this->universe->get_active_console()->exit_console();
+            }
+
+            this->universe->set_active_console(this);
+            this->enter_console();
+        }
+    }
+
     void Console::render()
     {
         if (!this->in_console || !this->should_be_rendered)

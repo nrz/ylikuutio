@@ -994,7 +994,7 @@ int main(const int argc, const char* const argv[]) try
     // `Entity` handling callbacks.
     yli::ontology::create_lisp_function_overload("entities", my_console, std::function(&yli::ontology::Universe::print_entities));
     yli::ontology::create_lisp_function_overload("parent", my_console, std::function(&yli::ontology::Universe::print_parent));
-    yli::ontology::create_lisp_function_overload("activate", my_console, std::function(&yli::ontology::Universe::activate));
+    yli::ontology::create_lisp_function_overload("activate", my_console, std::function(&yli::ontology::Universe::activate_entity));
     yli::ontology::create_lisp_function_overload("delete", my_console, std::function(&yli::ontology::Universe::delete_entity));
     yli::ontology::create_lisp_function_overload("info", my_console, std::function(&yli::ontology::Universe::info0));
     yli::ontology::create_lisp_function_overload("info", my_console, std::function(&yli::ontology::Universe::info1));
@@ -1020,7 +1020,7 @@ int main(const int argc, const char* const argv[]) try
     yli::ontology::create_lisp_function_overload("screenshot", my_console, std::function(&yli::ontology::Universe::screenshot));
 
     // mini-console callbacks.
-    yli::ontology::create_lisp_function_overload("miniactivate", mini_console, std::function(&yli::ontology::Universe::activate));
+    yli::ontology::create_lisp_function_overload("miniactivate", mini_console, std::function(&yli::ontology::Universe::activate_entity));
     yli::ontology::create_lisp_function_overload("miniinfo", mini_console, std::function(&yli::ontology::Universe::info0));
     yli::ontology::create_lisp_function_overload("miniinfo", mini_console, std::function(&yli::ontology::Universe::info1));
 

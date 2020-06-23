@@ -53,6 +53,7 @@ namespace yli::ontology
             // destructor.
             virtual ~Entity();
 
+            virtual void activate();
             virtual void render();
 
             std::size_t get_childID() const;
