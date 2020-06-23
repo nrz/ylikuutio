@@ -6,10 +6,7 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
-[ ] Implement support for local variables in YliLisp function argument binding.
 [ ] Convert `Setting` into a an `yli::ontology` class that inherits `yli::ontology::Entity`.
-[ ] Implement support for local variables in `set` console command.
-[ ] Implement support for local variables in `print` console command.
 [ ] Implement creating new fields of given type in AnyStructEntities using `Console` command `createfield`.
 [ ] Implement creating and setting new fields of given type in AnyStructEntities of a using `Console` command `setfield`.
 [ ] Implement printing fields of AnyStructEntities using `Console` command `print`.
@@ -210,3 +207,5 @@ Ready:
 [x] Implement setting local name in `yli::ontology::EntityFactory` factory functions by calling `set_local_name`.
 [x] Implement `set-global-name` console command so that setting a global name is done using `set-global-name foo bar`.
 [x] Implement `set-local-name` console command so that setting a local name is done using `set-local-name foo bar`.
+[x] Implement support for local variables in YliLisp function argument binding.
+[x] Implement support for local variables in all console commands.
