@@ -185,11 +185,10 @@ namespace yli::ontology
     // Public `Entity` naming callbacks.
 
     std::shared_ptr<yli::data::AnyValue> Universe::set_global_name_for_entity(
-            yli::ontology::Universe* const universe,
             yli::ontology::Entity* const entity,
             std::shared_ptr<std::string> global_name)
     {
-        if (universe == nullptr || entity == nullptr || global_name == nullptr)
+        if (entity == nullptr || global_name == nullptr)
         {
             return nullptr;
         }
@@ -200,11 +199,10 @@ namespace yli::ontology
     }
 
     std::shared_ptr<yli::data::AnyValue> Universe::set_local_name_for_entity(
-            yli::ontology::Universe* const universe,
             yli::ontology::Entity* const entity,
             std::shared_ptr<std::string> local_name)
     {
-        if (universe == nullptr || entity == nullptr || local_name == nullptr)
+        if (entity == nullptr || local_name == nullptr)
         {
             return nullptr;
         }

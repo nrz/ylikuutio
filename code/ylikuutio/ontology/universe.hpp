@@ -646,12 +646,10 @@ namespace yli::ontology
             // Public `Entity` naming callbacks.
 
             static std::shared_ptr<yli::data::AnyValue> set_global_name_for_entity(
-                    yli::ontology::Universe* const universe,
                     yli::ontology::Entity* const entity,
                     std::shared_ptr<std::string> new_value);
 
             static std::shared_ptr<yli::data::AnyValue> set_local_name_for_entity(
-                    yli::ontology::Universe* const universe,
                     yli::ontology::Entity* const entity,
                     std::shared_ptr<std::string> new_value);
 
