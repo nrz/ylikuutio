@@ -489,6 +489,8 @@ add_library(ylikuutio STATIC
 
     # lisp, in alphabetical order.
     code/ylikuutio/lisp/arg_processing_templates.hpp
+    code/ylikuutio/lisp/executor.cpp
+    code/ylikuutio/lisp/executor.hpp
     code/ylikuutio/lisp/lisp_templates.hpp
     code/ylikuutio/lisp/parser.cpp
     code/ylikuutio/lisp/parser.hpp
