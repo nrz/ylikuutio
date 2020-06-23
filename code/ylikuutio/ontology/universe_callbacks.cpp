@@ -25,7 +25,6 @@
 #include "any_value_entity.hpp"
 #include "any_struct_entity.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 
@@ -166,13 +165,6 @@ namespace yli::ontology
             return nullptr;
         }
 
-        yli::config::SettingMaster* setting_master = universe->get_setting_master();
-
-        if (setting_master == nullptr)
-        {
-            return nullptr;
-        }
-
         if (entity->get_can_be_erased())
         {
             universe->entity_map.erase(entity->get_global_name());
@@ -221,13 +213,6 @@ namespace yli::ontology
         // This function can be used to activate a `Scene`, a `Camera`, or a `Console`.
 
         if (universe == nullptr || entity == nullptr)
-        {
-            return nullptr;
-        }
-
-        yli::config::SettingMaster* setting_master = universe->get_setting_master();
-
-        if (setting_master == nullptr)
         {
             return nullptr;
         }
