@@ -6,7 +6,7 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
-[ ] Implement support for local variables in `bind` console command.
+[ ] Implement support for local variables in YliLisp function argument binding.
 [ ] Convert `Setting` into a an `yli::ontology` class that inherits `yli::ontology::Entity`.
 [ ] Implement support for local variables in `set` console command.
 [ ] Implement support for local variables in `print` console command.
