@@ -113,6 +113,8 @@ namespace yli::ontology
             // destructor.
             virtual ~Camera();
 
+            void activate() override;
+
             void adjust_horizontal_angle(float adjustment);
 
             const glm::mat4& get_projection_matrix() const;

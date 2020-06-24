@@ -118,6 +118,10 @@ namespace yli::ontology
         // from here.
     }
 
+    void Entity::activate()
+    {
+    }
+
     void Entity::render()
     {
     }
@@ -160,12 +164,47 @@ namespace yli::ontology
 
     yli::ontology::Entity* Entity::get_entity(const std::string& name) const
     {
-        if (this->entity_map.count(name) != 1)
+        // Requirements:
+        // `name` must not begin with a dot.
+        // `name` must not end with a dot.
+        std::size_t first_dot_pos = name.find_first_of('.');
+
+        if (first_dot_pos == std::string::npos)
+        {
+            // There are no dots in the name.
+
+            if (this->entity_map.count(name) != 1)
+            {
+                return nullptr;
+            }
+
+            return this->entity_map.at(name);
+        }
+
+        // OK, assumedly we have a multi-part name.
+
+        const std::string first = std::string(name, 0, first_dot_pos);
+        const std::string rest = std::string(name, ++first_dot_pos);
+
+        if (first.empty())
+        {
+            // Name must not be empty.
+            return nullptr;
+        }
+
+        if (this->entity_map.count(first) != 1)
         {
             return nullptr;
         }
 
-        return this->entity_map.at(name);
+        yli::ontology::Entity* entity = this->entity_map.at(first);
+
+        if (entity == nullptr)
+        {
+            return nullptr;
+        }
+
+        return entity->get_entity(rest);
     }
 
     std::string Entity::get_entity_names() const

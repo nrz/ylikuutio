@@ -489,6 +489,8 @@ add_library(ylikuutio STATIC
 
     # lisp, in alphabetical order.
     code/ylikuutio/lisp/arg_processing_templates.hpp
+    code/ylikuutio/lisp/executor.cpp
+    code/ylikuutio/lisp/executor.hpp
     code/ylikuutio/lisp/lisp_templates.hpp
     code/ylikuutio/lisp/parser.cpp
     code/ylikuutio/lisp/parser.hpp
@@ -575,6 +577,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/glyph_object_creation.hpp
     code/ylikuutio/ontology/entity.cpp
     code/ylikuutio/ontology/entity.hpp
+    code/ylikuutio/ontology/entity_callbacks.cpp
     code/ylikuutio/ontology/entity_factory.cpp
     code/ylikuutio/ontology/entity_factory.hpp
     code/ylikuutio/ontology/entity_factory_templates.hpp

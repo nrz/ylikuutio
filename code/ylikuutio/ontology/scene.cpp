@@ -202,6 +202,14 @@ namespace yli::ontology
         }
     }
 
+    void Scene::activate()
+    {
+        if (this->universe != nullptr)
+        {
+            this->universe->set_active_scene(this);
+        }
+    }
+
     void Scene::render()
     {
         if (this->should_be_rendered)

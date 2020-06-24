@@ -36,6 +36,7 @@ namespace yli::config
 namespace yli::ontology
 {
     class Universe;
+    class Console;
     struct EntityStruct;
 
     class Entity
@@ -53,6 +54,7 @@ namespace yli::ontology
             // destructor.
             virtual ~Entity();
 
+            virtual void activate();
             virtual void render();
 
             std::size_t get_childID() const;
@@ -78,6 +80,16 @@ namespace yli::ontology
             std::string get_entity_names() const;
             void add_entity(const std::string& name, yli::ontology::Entity* const entity);
             void erase_entity(const std::string& name);
+
+            // Public callbacks.
+
+            // Public data printing callbacks.
+
+            static std::shared_ptr<yli::data::AnyValue> print_children(
+                    yli::ontology::Console* const console,
+                    yli::ontology::Entity* const entity);
+
+            // Public callbacks end here.
 
             bool should_be_rendered;
 

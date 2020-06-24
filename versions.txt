@@ -32,6 +32,15 @@ https://semver.org/spec/v2.0.0.html
 * Headless mode.
 * Fullscreen mode.
 
+0.0.7
+* Support for local names for Entities, in addition to global names.
+* Global names and local names can be set also using
+  factory functions provided by `yli::ontology::EntityFactory`.
+* Development of YliLisp scripting language started.
+* Improved binding for YliLisp function arguments.
+* YliLisp function argument binding supports overloading.
+* C++17 is required.
+
 Future versions:
 
 0.0.x

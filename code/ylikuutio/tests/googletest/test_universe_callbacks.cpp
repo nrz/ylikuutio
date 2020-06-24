@@ -719,7 +719,7 @@ TEST(scene_must_be_deleted_appropriately, universe_callback)
     yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
     scene->set_global_name(scene_name);
 
-    universe->activate(universe, scene);
+    universe->activate_entity(scene);
 
     universe->delete_entity(universe, scene);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
@@ -747,7 +747,7 @@ TEST(scene_must_be_activated_appropriately, universe_callback)
 
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
-    universe->activate(universe, scene);
+    universe->activate_entity(scene);
     ASSERT_EQ(universe->get_active_scene(), scene);
 }
 
@@ -765,7 +765,7 @@ TEST(console_must_be_activated_appropriately, universe_callback_without_font2D)
 
     ASSERT_EQ(universe->get_active_console(), nullptr);
 
-    universe->activate(universe, console);
+    universe->activate_entity(console);
     ASSERT_EQ(universe->get_active_console(), console);
 }
 
@@ -785,7 +785,7 @@ TEST(console_must_be_activated_appropriately, universe_callback_with_font2D)
 
     ASSERT_EQ(universe->get_active_console(), nullptr);
 
-    universe->activate(universe, console);
+    universe->activate_entity(console);
     ASSERT_EQ(universe->get_active_console(), console);
 }
 
@@ -814,11 +814,11 @@ TEST(scene_and_camera_must_be_activated_appropriately, universe_callback)
     ASSERT_EQ(universe->get_active_scene(), nullptr);
     ASSERT_EQ(scene->get_active_camera(), nullptr);
 
-    universe->activate(universe, scene);
+    universe->activate_entity(scene);
     ASSERT_EQ(universe->get_active_scene(), scene);
     ASSERT_EQ(scene->get_active_camera(), nullptr);
 
-    universe->activate(universe, camera);
+    universe->activate_entity(camera);
     ASSERT_EQ(universe->get_active_scene(), scene);
     ASSERT_EQ(scene->get_active_camera(), camera);
 }
