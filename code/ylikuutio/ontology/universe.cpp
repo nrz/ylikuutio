@@ -92,7 +92,7 @@ namespace yli::ontology
 {
     class Font2D;
 
-    const std::string Universe::version = "0.0.6";
+    const std::string Universe::version = "0.0.7";
 
     void Universe::bind_entity(yli::ontology::Entity* const entity)
     {
