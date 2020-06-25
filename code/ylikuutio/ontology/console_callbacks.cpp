@@ -25,12 +25,12 @@
 
 // Include standard headers
 #include <algorithm> // std::copy etc.
-#include <iterator> // std::back_inserter
-#include <list>     // std::list
-#include <memory>   // std::make_shared, std::shared_ptr
-#include <stdint.h> // uint32_t etc.
-#include <string>   // std::string, std::getline
-#include <vector>   // std::vector
+#include <iterator>  // std::back_inserter
+#include <list>      // std::list
+#include <memory>    // std::make_shared, std::shared_ptr
+#include <stdint.h>  // uint32_t etc.
+#include <string>    // std::string, std::getline
+#include <vector>    // std::vector
 
 namespace yli::callback
 {
