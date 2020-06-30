@@ -21,16 +21,16 @@
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/lisp/parser.hpp"
+#include "code/ylikuutio/lisp/executor.hpp"
 
 // Include standard headers
 #include <algorithm> // std::copy etc.
-#include <iterator> // std::back_inserter
-#include <list>     // std::list
-#include <memory>   // std::make_shared, std::shared_ptr
-#include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
-#include <stdint.h> // uint32_t etc.
-#include <string>   // std::string, std::getline
-#include <vector>   // std::vector
+#include <iterator>  // std::back_inserter
+#include <list>      // std::list
+#include <memory>    // std::make_shared, std::shared_ptr
+#include <stdint.h>  // uint32_t etc.
+#include <string>    // std::string, std::getline
+#include <vector>    // std::vector
 
 namespace yli::callback
 {
@@ -541,8 +541,6 @@ namespace yli::ontology
             return nullptr;
         }
 
-        std::shared_ptr<yli::data::AnyValue> any_value = nullptr;
-
         // Copy current input into a `std::string`.
         std::string input_string(console->current_input.begin(), console->current_input.end());
 
@@ -581,28 +579,11 @@ namespace yli::ontology
 
         console->current_input.clear();
 
+        std::shared_ptr<yli::data::AnyValue> any_value = nullptr;
+
         if (yli::lisp::parse(input_string, command, parameter_vector))
         {
-            // Call the corresponding `yli::ontology::LispFunction`, if there is one.
-            // `LispFunction` itself takes care of resolving the correct overbind
-            // and binding the arguments and calling the overload with the arguments.
-            yli::ontology::Universe* universe = console->get_universe();
-
-            if (universe != nullptr)
-            {
-                yli::ontology::Entity* const lisp_function_entity = universe->get_entity(command);
-
-                if (lisp_function_entity != nullptr && lisp_function_entity->get_parent() == console)
-                {
-                    yli::ontology::LispFunction* const lisp_function =
-                        dynamic_cast<yli::ontology::LispFunction*>(lisp_function_entity);
-
-                    if (lisp_function != nullptr)
-                    {
-                        any_value = lisp_function->execute(parameter_vector);
-                    }
-                }
-            }
+            any_value = yli::lisp::execute(console, command, parameter_vector);
         }
 
         console->in_historical_input = false;

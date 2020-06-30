@@ -43,7 +43,7 @@ addons:
     coverity_scan:
         project:
             name: nrz/ylikuutio
-            version: 0.0.6
+            version: 0.0.7
             description: Ylikuutio 3D engine. Build submitted via Travis CI
 
         notification_email: antti.nuortimo@gmail.com

@@ -17,15 +17,12 @@
 
 #include "universe.hpp"
 #include "entity.hpp"
-#include "scene.hpp"
-#include "camera.hpp"
 #include "movable.hpp"
 #include "brain.hpp"
 #include "console.hpp"
 #include "any_value_entity.hpp"
 #include "any_struct_entity.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 
@@ -166,13 +163,6 @@ namespace yli::ontology
             return nullptr;
         }
 
-        yli::config::SettingMaster* setting_master = universe->get_setting_master();
-
-        if (setting_master == nullptr)
-        {
-            return nullptr;
-        }
-
         if (entity->get_can_be_erased())
         {
             universe->entity_map.erase(entity->get_global_name());
@@ -182,61 +172,43 @@ namespace yli::ontology
         return nullptr;
     }
 
+    // Public `Entity` naming callbacks.
+
+    std::shared_ptr<yli::data::AnyValue> Universe::set_global_name_for_entity(
+            yli::ontology::Entity* const entity,
+            std::shared_ptr<std::string> global_name)
+    {
+        if (entity == nullptr || global_name == nullptr)
+        {
+            return nullptr;
+        }
+
+        entity->set_global_name(*global_name);
+
+        return nullptr;
+    }
+
+    std::shared_ptr<yli::data::AnyValue> Universe::set_local_name_for_entity(
+            yli::ontology::Entity* const entity,
+            std::shared_ptr<std::string> local_name)
+    {
+        if (entity == nullptr || local_name == nullptr)
+        {
+            return nullptr;
+        }
+
+        entity->set_local_name(*local_name);
+
+        return nullptr;
+    }
+
     // Public `Entity` activate callbacks.
 
-    std::shared_ptr<yli::data::AnyValue> Universe::activate(
-            yli::ontology::Universe* const universe,
-            yli::ontology::Entity* const entity)
+    std::shared_ptr<yli::data::AnyValue> Universe::activate_entity(yli::ontology::Entity* const entity)
     {
-        // This function can be used to activate a `Scene`, a `Camera`, or a `Console`.
-
-        if (universe == nullptr || entity == nullptr)
+        if (entity != nullptr)
         {
-            return nullptr;
-        }
-
-        yli::config::SettingMaster* setting_master = universe->get_setting_master();
-
-        if (setting_master == nullptr)
-        {
-            return nullptr;
-        }
-
-        yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(entity);
-        yli::ontology::Camera* const camera = dynamic_cast<yli::ontology::Camera*>(entity);
-        yli::ontology::Console* const console = dynamic_cast<yli::ontology::Console*>(entity);
-
-        uint32_t number_of_entity_types = 0;
-        number_of_entity_types += scene != nullptr ? 1 : 0;
-        number_of_entity_types += camera != nullptr ? 1 : 0;
-        number_of_entity_types += console != nullptr ? 1 : 0;
-
-        if (number_of_entity_types != 1)
-        {
-            // The named `Entity` is neither a `Scene`, a `Camera`, nor a `Console`.
-            return nullptr;
-        }
-
-        if (scene != nullptr)
-        {
-            // The named `Entity` is a `Scene`.
-            universe->set_active_scene(scene);
-        }
-        else if (camera != nullptr)
-        {
-            // The named `Entity` is a `Camera`.
-            universe->set_active_camera(camera);
-        }
-        else if (console != nullptr)
-        {
-            // The named `Entity` is a `Console`.
-            if (universe->get_active_console() != nullptr)
-            {
-                universe->get_active_console()->exit_console();
-            }
-
-            universe->set_active_console(console);
-            console->enter_console();
+            entity->activate();
         }
 
         return nullptr;

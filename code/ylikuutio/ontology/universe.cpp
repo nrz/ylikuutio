@@ -69,7 +69,6 @@
 #include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <stdint.h>      // uint32_t etc.
-#include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <string>        // std::string
 #include <utility>       // std::pair
 
@@ -92,7 +91,7 @@ namespace yli::ontology
 {
     class Font2D;
 
-    const std::string Universe::version = "0.0.6";
+    const std::string Universe::version = "0.0.7";
 
     void Universe::bind_entity(yli::ontology::Entity* const entity)
     {

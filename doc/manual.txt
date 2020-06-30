@@ -1,4 +1,4 @@
-Hirvi 0.0.4 / Ajokki 0.0.4 / Ylikuutio 0.0.4 manual.
+Ylikuutio 0.0.7 / Hirvi 0.0.7 / Tulevaisuus 0.0.7 manual.
 
 Ylikuutio is a 3D game and simulation engine.
 It is designed with two different game types in mind:
@@ -13,7 +13,7 @@ OpenGL 3.0 or newer is required.
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 In Visual Studio compiling may break due to compiler-specific bugs.
 Cross compiling from Linux® to Windows using MinGW-w64 works fine.
-C++14 support is required.
+C++17 support is required.
 CMake 2.6.2 or newer is needed for the compiling process, but
 external libraries such as `glm` require CMake 3.2 or a newer version.
 CMake uses git for downloading Google Test testing framework.
@@ -23,16 +23,27 @@ understand how to use Ylikuutio in practice, Hirvi, Ajokki and Ylikuutio
 code itself are the best references on that. The information in the
 present manual reflects the current state of development of Ylikuutio.
 
-Ylikuutio has an ontological hierarchy (class hierarchy), consisting of
-classes most of which belong to namespace `yli::ontology`. The top
-class of this ontological hierarchy is `yli::ontology::Universe`. Each
-class is responsible of the lifetime of its children. The hierarchy is
-implemented using function templates belonging to `yli::hierarchy`.
-This means that the destructor of each `yli::ontology` class must
-`delete` all its children. `yli::ontology::EntityFactory` is available
-by calling `Universe::get_entity_factory` member function. This is the
-recommended way to create entities, because it takes care of providing
-`yli::ontology::Universe` pointer to the constructor of new `Entity`.
+Ylikuutio has an ontological hierarchy (class hierarchy) based on
+composition, consisting of classes most of which belong to namespace
+`yli::ontology`. The top class of this ontological hierarchy is
+`yli::ontology::Universe`. Each class is responsible of the lifetime of
+its children. This means that the destructor of each `yli::ontology`
+class must `delete` all its children. `yli::ontology::EntityFactory` is
+available by calling `Universe::get_entity_factory` member function.
+This is the recommended way to create entities after creating
+`yli::ontology::Universe` directly. Using factory functions provided
+by `yli::ontology::EntityFactory` takes care of providing
+`yli::ontology::Universe` pointer to the constructor of new `Entity`
+and also setting global and local name for the newly created `Entity`.
+
+In addition to the parent-child relationships based on composition
+described above, there can be master-apprentice relationships. Masters
+do not control the lifetime of their children. Each `Entity` may have
+different kinds of masters. An example of master-apprentice relationship
+is the relationship between `yli::ontology::Brain` (master, an AI class)
+and `yli::ontology::Movable` (apprentice). In order to use an AI
+provided by a `Brain`, `Movable` must to be bound to the `Brain` using
+`Movable::bind_to_brain` member function.
 
 To initialize the ontological hierarchy, `yli::ontology::Universe` needs
 to be created. After that an `EntityFactory` should be requested from
@@ -51,53 +62,100 @@ Game event processing will be based on callbacks.
 Hirvi
 
 Hirvi is a first person action-adventure of the adventures of
-a moose/elk called Hirvi. Cities are dangerous places for moose,
+a moose/elk called Hirvi. Cities are dangerous places for moose, and
+in particular an encounter with the police may prove deadly for Hirvi,
 even through moose are well-known pasifists.
 "hirvi" means a moose/elk in Finnish.
 Hirvi is a work in progress.
 
+Tulevaisuus
+
+Tulevaisuus ("the future" in Finnish) is
+a turn-based 3D tactical combat game with programmable robots.
+The robots controlled by an evil AI have taken over the world. Almost.
+The last hope of the human species is the Lisp Resistance Force.
+You, as the lead Lisp hacker of the Lisp Resistance Force,
+are responsible for the programming of the robots of
+the Lisp Resistance Force. Your task is write Lisp
+to control the robots reowned by humans.
+And save the human species, too.
+Tulevaisuus is a work in progress.
+
+Ajokki is a demo program for testing Ylikuutio.
+
+In Ajokki all console commands of Hirvi and Tulevaisuus work, but in
+addition there are some console commands for debugging use as well.
+Therefore, Hirvi and Tulevaisuus reflect their actual game development,
+whereas Ajokki showcases different functionalities of Ylikuutio.
+
 F1 to get help.
 ` to enter/exit console.
 
-Console commands:
+Some console commands to try out in Ajokki (appropriate parameters
+should be given after the command, separated with spaces):
 
-To activate a scene or a camera:
-`activate`
-
-To get info about the entities:
-`info`
+To print settings:
+`settings`
 
 To set the value of an existing variable:
 `set`
 
-To get the value of a variable:
-`get`
+To print the value of a variable in console:
+`print`
+
+To print global names of Entities and the memory addresses
+of those Entities:
+`entities`
+
+To print the memory address of a parent of an `Entity`:
+`parent`
+
+To print the local names of the children of an `Entity`:
+`children`
+
+To activate an `Entity` (`Scene`, `Camera`, or `Console`):
+`activate`
 
 To delete an entity (and all its descendants):
 `delete`
 
-To exit Hirvi:
+To get info about Entities:
+`info`
+
+To bind an `Entity` to another `Entity` to either parent-child
+relationship or master-apprentice relationship:
+`bind`
+
+To set the global name of an `Entity`:
+`set-global-name`
+
+To set the local name of an `Entity`:
+`set-local-name`
+
+To create an `AnyValueEntity`:
+`AnyValueEntity`
+
+To create an `AnyStructEntity`:
+`AnyStructEntity`
+
+To print version:
+`version`
+
+To clear the `Console` and history:
+`clear`
+
+To take a screenshot:
+`screenshot`
+
+To exit Ajokki/Hirvi/Tulevaisuus/YliEdit/GPGPU test:
 `bye`
 `chau`
 `ciao`
 `heippa`
+`quit`
 `sayonara`
-
-To evaluate s7 Scheme code:
-`eval`
-
-Ajokki
-
-Ajokki is a demo program for testing Ylikuutio.
-
-In Ajokki all console commands of Hirvi work, but in addition there
-are some console commands for debugging use as well. Therefore, Hirvi
-reflects actual game development, whereas Ajokki showcases different
-functionalities of Ylikuutio.
 
 External libraries
 
-Assimp is to be used only in `yli_convert` file conversion tool.
-The actual asset loading is done using OpenFBX for `.fbx` files and
+Asset loading is done using OpenFBX for `.fbx` files and
 custom file loaders for other supported file formats.
-In the future Assimp will probably be replaced by a custom FBX writer.
