@@ -18,6 +18,8 @@
 #ifndef __LISP_TEMPLATES_HPP_INCLUDED
 #define __LISP_TEMPLATES_HPP_INCLUDED
 
+#include "code/ylikuutio/config/setting.hpp"
+#include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
