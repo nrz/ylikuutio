@@ -18,6 +18,11 @@
 #include "entity.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 
+namespace yli::data
+{
+    class AnyValue;
+}
+
 namespace yli::ontology
 {
     class Console;
