@@ -34,12 +34,10 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <limits>   // std::numeric_limits
 #include <memory>   // std::make_shared, std::shared_ptr
-#include <queue>    // std::queue
 #include <vector>   // std::vector
 
 // `Movable` is a mixin class, not intended to be instantiated.
