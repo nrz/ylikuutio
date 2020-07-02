@@ -43,7 +43,7 @@
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string, std::getline
-#include <variant>  // std::variant
+#include <variant>  // std::holds_alternative, std::variant
 #include <vector>   // std::vector
 
 // Tests for `yli::ontology::Universe` callbacks

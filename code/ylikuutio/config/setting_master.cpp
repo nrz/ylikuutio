@@ -35,7 +35,7 @@
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
-#include <variant>       // std::variant
+#include <variant>       // std::holds_alternative, std::variant
 #include <vector>        // std::vector
 
 namespace yli::data

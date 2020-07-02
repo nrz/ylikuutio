@@ -101,7 +101,7 @@
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
-#include <variant>       // std::variant
+#include <variant>       // std::holds_alternative, std::variant
 #include <vector>        // std::vector
 
 int main(const int argc, const char* const argv[]) try

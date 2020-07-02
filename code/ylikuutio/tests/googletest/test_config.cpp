@@ -35,7 +35,7 @@
 #include <limits>   // std::numeric_limits
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
-#include <variant>  // std::variant
+#include <variant>  // std::holds_alternative, std::variant
 
 TEST(setting_master_must_be_initialized_appropriately, headless_universe)
 {

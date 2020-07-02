@@ -34,7 +34,7 @@
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>      // uint32_t etc.
 #include <utility>       // std::swap etc.
-#include <variant>       // std::variant
+#include <variant>       // std::holds_alternative, std::variant
 
 namespace yli::ontology
 {

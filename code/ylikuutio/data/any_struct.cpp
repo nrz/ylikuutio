@@ -25,7 +25,7 @@
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
-#include <variant>       // std::variant
+#include <variant>       // std::holds_alternative, std::variant
 #include <vector>        // std::vector
 
 namespace yli::data
