@@ -18,6 +18,11 @@ Planned languages on launch: English (elk), English (moose), Finnish, Spanish.
 
 3D models of Helsinki, Espoo, Vantaa, Oulu, and Turku will be used.
 
+Hirvi sex:
+female/male/something else
+hembra/macho/algo diferente
+naaras/uros/joku muu
+
 ## Potential audio for Hirvi
 * Hirvi - tragic intro music: [https://freesound.org/people/Greek555/sounds/413610/](https://freesound.org/people/Greek555/sounds/413610/)
 * Hirvi - evening campfire, "there were epic adventures": [https://freesound.org/people/frankum/sounds/353249/](https://freesound.org/people/frankum/sounds/353249/)
