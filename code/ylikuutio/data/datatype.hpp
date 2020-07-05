@@ -48,6 +48,9 @@ namespace yli::data
         UINT32_T_POINTER,
         // `yli::ontology` datatypes, 'entity' path.
         ENTITY_POINTER,
+        // `yli::ontology` datatypes, 'setting' path.
+        SETTING_POINTER,
+        CONST_SETTING_POINTER,
         // `yli::ontology` datatypes, 'movable' path.
         MOVABLE_POINTER,
         CONST_MOVABLE_POINTER,
@@ -96,9 +99,6 @@ namespace yli::data
         // `yli::ontology` datatypes, 'compute' path.
         COMPUTETASK_POINTER,
         CONST_COMPUTETASK_POINTER,
-        // `yli::config` datatypes.
-        SETTING_POINTER,
-        CONST_SETTING_POINTER,
         // `std::shared_ptr` objects.
         ANY_VALUE_SHARED_PTR,
         ANY_STRUCT_SHARED_PTR,
