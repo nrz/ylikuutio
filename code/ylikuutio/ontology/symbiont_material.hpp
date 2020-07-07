@@ -64,13 +64,13 @@ namespace yli::ontology
             // destructor.
             virtual ~SymbiontMaterial();
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
-
             uint32_t get_texture() const;
             GLint get_openGL_textureID() const;
 
         private:
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
+
             void load_texture();
 
             // this method renders all `SymbiontSpecies` using this `SymbiontMaterial`.

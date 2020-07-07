@@ -103,9 +103,6 @@ namespace yli::ontology
             // destructor.
             virtual ~Biont();
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
-
         protected:
             void bind_to_symbiont_species();
 
@@ -126,6 +123,10 @@ namespace yli::ontology
             float rotate_angle;                    // rotate angle.
 
             bool should_ylikuutio_render_this_biont;
+
+        private:
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
     };
 }
 

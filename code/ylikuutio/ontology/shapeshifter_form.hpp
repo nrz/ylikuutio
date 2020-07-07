@@ -52,10 +52,10 @@ namespace yli::ontology
             // destructor.
             virtual ~ShapeshifterForm();
 
+        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-        private:
             void render() override;
     };
 }

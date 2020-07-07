@@ -133,8 +133,6 @@ namespace yli::ontology
             virtual ~Font2D();
 
             yli::ontology::Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
 
             std::size_t get_text_size() const;
             std::size_t get_font_size() const;
@@ -169,6 +167,9 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_text2Ds;
 
         private:
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
+
             std::string texture_filename;
             std::string font_texture_file_format;
 

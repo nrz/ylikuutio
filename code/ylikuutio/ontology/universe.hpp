@@ -539,8 +539,6 @@ namespace yli::ontology
             yli::ontology::Scene* get_active_scene() const;
 
             yli::ontology::Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
 
             void create_context();
             void make_context_current();
@@ -757,6 +755,9 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_callback_engine_entities;
 
         private:
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
+
             bool compute_and_update_matrices_from_inputs();
 
             std::shared_ptr<yli::ontology::EntityFactory> entity_factory;

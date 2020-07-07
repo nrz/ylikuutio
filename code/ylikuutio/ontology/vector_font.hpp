@@ -150,8 +150,6 @@ namespace yli::ontology
             virtual ~VectorFont();
 
             yli::ontology::Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
 
             // This method returns a pointer to `Glyph` that matches the given `unicode_value`,
             // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
@@ -166,6 +164,9 @@ namespace yli::ontology
 
         private:
             void bind_to_parent();
+
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
 
             // This method renders all `Glyph`s of this `VectorFont`.
             void render() override;

@@ -97,14 +97,15 @@ namespace yli::ontology
             void render() override;
 
             yli::ontology::Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
 
             void change_string(const std::string& text);
 
             yli::ontology::ChildModule child_of_font2D;
 
         private:
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
+
             uint32_t vertexbuffer;                     // Buffer containing the vertices
             uint32_t uvbuffer;                         // Buffer containing the UVs
             uint32_t programID;                        // The `programID` of the shader used to display the text, returned by `load_shaders`.

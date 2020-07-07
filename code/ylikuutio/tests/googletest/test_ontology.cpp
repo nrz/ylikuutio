@@ -79,8 +79,8 @@ TEST(universe_must_be_initialized_appropriately, headless)
     ASSERT_EQ(universe->get_universe(), universe);
     ASSERT_NE(universe->get_setting_master(), nullptr);
     ASSERT_EQ(universe->get_parent(), nullptr);
-    ASSERT_EQ(universe->get_number_of_children(), 0);
-    ASSERT_EQ(universe->get_number_of_descendants(), 0);
+    ASSERT_EQ(universe->get_number_of_all_children(), 0);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 0);
 }
 
 TEST(worlds_must_be_initialized_appropriately, headless)
@@ -97,8 +97,8 @@ TEST(worlds_must_be_initialized_appropriately, headless)
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 1);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(world1->get_childID(), 0);
@@ -107,8 +107,8 @@ TEST(worlds_must_be_initialized_appropriately, headless)
     ASSERT_EQ(world1->get_universe(), universe);
     ASSERT_NE(world1->get_setting_master(), nullptr);
     ASSERT_EQ(world1->get_parent(), universe);
-    ASSERT_EQ(world1->get_number_of_children(), 0);
-    ASSERT_EQ(world1->get_number_of_descendants(), 0);
+    ASSERT_EQ(world1->get_number_of_all_children(), 0);
+    ASSERT_EQ(world1->get_number_of_all_descendants(), 0);
 
     yli::ontology::WorldStruct world_struct2;
     yli::ontology::World* const world2 = new yli::ontology::World(universe, world_struct2, &universe->parent_of_worlds);
@@ -118,8 +118,8 @@ TEST(worlds_must_be_initialized_appropriately, headless)
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 2);
-    ASSERT_EQ(universe->get_number_of_descendants(), 2);
+    ASSERT_EQ(universe->get_number_of_all_children(), 2);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 2);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(world2->get_childID(), 1);
@@ -128,8 +128,8 @@ TEST(worlds_must_be_initialized_appropriately, headless)
     ASSERT_EQ(world2->get_universe(), universe);
     ASSERT_NE(world2->get_setting_master(), nullptr);
     ASSERT_EQ(world2->get_parent(), universe);
-    ASSERT_EQ(world2->get_number_of_children(), 0);
-    ASSERT_EQ(world2->get_number_of_descendants(), 0);
+    ASSERT_EQ(world2->get_number_of_all_children(), 0);
+    ASSERT_EQ(world2->get_number_of_all_descendants(), 0);
 
     yli::ontology::WorldStruct world_struct3;
     yli::ontology::World* const world3 = new yli::ontology::World(universe, world_struct3, &universe->parent_of_worlds);
@@ -139,8 +139,8 @@ TEST(worlds_must_be_initialized_appropriately, headless)
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 3);
-    ASSERT_EQ(universe->get_number_of_descendants(), 3);
+    ASSERT_EQ(universe->get_number_of_all_children(), 3);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 3);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(world3->get_childID(), 2);
@@ -149,8 +149,8 @@ TEST(worlds_must_be_initialized_appropriately, headless)
     ASSERT_EQ(world3->get_universe(), universe);
     ASSERT_NE(world3->get_setting_master(), nullptr);
     ASSERT_EQ(world3->get_parent(), universe);
-    ASSERT_EQ(world3->get_number_of_children(), 0);
-    ASSERT_EQ(world3->get_number_of_descendants(), 0);
+    ASSERT_EQ(world3->get_number_of_all_children(), 0);
+    ASSERT_EQ(world3->get_number_of_all_descendants(), 0);
 
     yli::ontology::WorldStruct world_struct4;
     yli::ontology::World* const world4 = new yli::ontology::World(universe, world_struct4, &universe->parent_of_worlds);
@@ -160,8 +160,8 @@ TEST(worlds_must_be_initialized_appropriately, headless)
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 4);
-    ASSERT_EQ(universe->get_number_of_descendants(), 4);
+    ASSERT_EQ(universe->get_number_of_all_children(), 4);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 4);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(world4->get_childID(), 3);
@@ -170,8 +170,8 @@ TEST(worlds_must_be_initialized_appropriately, headless)
     ASSERT_EQ(world4->get_universe(), universe);
     ASSERT_NE(world4->get_setting_master(), nullptr);
     ASSERT_EQ(world4->get_parent(), universe);
-    ASSERT_EQ(world4->get_number_of_children(), 0);
-    ASSERT_EQ(world4->get_number_of_descendants(), 0);
+    ASSERT_EQ(world4->get_number_of_all_children(), 0);
+    ASSERT_EQ(world4->get_number_of_all_descendants(), 0);
 }
 
 TEST(worlds_must_be_initialized_appropriately_after_having_deleted_the_earlier_worlds, headless)
@@ -188,8 +188,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_the_earlier_w
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 1);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(world1->get_childID(), 0);
@@ -198,8 +198,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_the_earlier_w
     ASSERT_EQ(world1->get_universe(), universe);
     ASSERT_NE(world1->get_setting_master(), nullptr);
     ASSERT_EQ(world1->get_parent(), universe);
-    ASSERT_EQ(world1->get_number_of_children(), 0);
-    ASSERT_EQ(world1->get_number_of_descendants(), 0);
+    ASSERT_EQ(world1->get_number_of_all_children(), 0);
+    ASSERT_EQ(world1->get_number_of_all_descendants(), 0);
 
     delete world1;
     yli::ontology::WorldStruct world_struct2;
@@ -210,8 +210,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_the_earlier_w
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 1);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(world2->get_childID(), 0);
@@ -220,8 +220,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_the_earlier_w
     ASSERT_EQ(world2->get_universe(), universe);
     ASSERT_NE(world2->get_setting_master(), nullptr);
     ASSERT_EQ(world2->get_parent(), universe);
-    ASSERT_EQ(world2->get_number_of_children(), 0);
-    ASSERT_EQ(world2->get_number_of_descendants(), 0);
+    ASSERT_EQ(world2->get_number_of_all_children(), 0);
+    ASSERT_EQ(world2->get_number_of_all_descendants(), 0);
 
     delete world2;
     yli::ontology::WorldStruct world_struct3;
@@ -232,8 +232,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_the_earlier_w
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 1);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(world3->get_childID(), 0);
@@ -242,8 +242,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_the_earlier_w
     ASSERT_EQ(world3->get_universe(), universe);
     ASSERT_NE(world3->get_setting_master(), nullptr);
     ASSERT_EQ(world3->get_parent(), universe);
-    ASSERT_EQ(world3->get_number_of_children(), 0);
-    ASSERT_EQ(world3->get_number_of_descendants(), 0);
+    ASSERT_EQ(world3->get_number_of_all_children(), 0);
+    ASSERT_EQ(world3->get_number_of_all_descendants(), 0);
 
     delete world3;
     yli::ontology::WorldStruct world_struct4;
@@ -254,8 +254,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_the_earlier_w
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 1);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(world4->get_childID(), 0);
@@ -264,8 +264,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_the_earlier_w
     ASSERT_EQ(world4->get_universe(), universe);
     ASSERT_NE(world4->get_setting_master(), nullptr);
     ASSERT_EQ(world4->get_parent(), universe);
-    ASSERT_EQ(world4->get_number_of_children(), 0);
-    ASSERT_EQ(world4->get_number_of_descendants(), 0);
+    ASSERT_EQ(world4->get_number_of_all_children(), 0);
+    ASSERT_EQ(world4->get_number_of_all_descendants(), 0);
 }
 
 TEST(worlds_must_be_initialized_appropriately_after_having_deleted_some_earlier_worlds, headless)
@@ -282,8 +282,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_some_earlier_
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 1);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(world1->get_childID(), 0);
@@ -292,8 +292,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_some_earlier_
     ASSERT_EQ(world1->get_universe(), universe);
     ASSERT_NE(world1->get_setting_master(), nullptr);
     ASSERT_EQ(world1->get_parent(), universe);
-    ASSERT_EQ(world1->get_number_of_children(), 0);
-    ASSERT_EQ(world1->get_number_of_descendants(), 0);
+    ASSERT_EQ(world1->get_number_of_all_children(), 0);
+    ASSERT_EQ(world1->get_number_of_all_descendants(), 0);
 
     yli::ontology::WorldStruct world_struct2;
     yli::ontology::World* const world2 = new yli::ontology::World(universe, world_struct2, &universe->parent_of_worlds);
@@ -303,8 +303,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_some_earlier_
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 2);
-    ASSERT_EQ(universe->get_number_of_descendants(), 2);
+    ASSERT_EQ(universe->get_number_of_all_children(), 2);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 2);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(world2->get_childID(), 1);
@@ -313,8 +313,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_some_earlier_
     ASSERT_EQ(world2->get_universe(), universe);
     ASSERT_NE(world2->get_setting_master(), nullptr);
     ASSERT_EQ(world2->get_parent(), universe);
-    ASSERT_EQ(world2->get_number_of_children(), 0);
-    ASSERT_EQ(world2->get_number_of_descendants(), 0);
+    ASSERT_EQ(world2->get_number_of_all_children(), 0);
+    ASSERT_EQ(world2->get_number_of_all_descendants(), 0);
 
     delete world1;
     yli::ontology::WorldStruct world_struct3;
@@ -325,8 +325,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_some_earlier_
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 2);
-    ASSERT_EQ(universe->get_number_of_descendants(), 2);
+    ASSERT_EQ(universe->get_number_of_all_children(), 2);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 2);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(world3->get_childID(), 0);
@@ -335,8 +335,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_some_earlier_
     ASSERT_EQ(world3->get_universe(), universe);
     ASSERT_NE(world3->get_setting_master(), nullptr);
     ASSERT_EQ(world3->get_parent(), universe);
-    ASSERT_EQ(world3->get_number_of_children(), 0);
-    ASSERT_EQ(world3->get_number_of_descendants(), 0);
+    ASSERT_EQ(world3->get_number_of_all_children(), 0);
+    ASSERT_EQ(world3->get_number_of_all_descendants(), 0);
 
     yli::ontology::WorldStruct world_struct4;
     yli::ontology::World* const world4 = new yli::ontology::World(universe, world_struct4, &universe->parent_of_worlds);
@@ -346,8 +346,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_some_earlier_
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 3);
-    ASSERT_EQ(universe->get_number_of_descendants(), 3);
+    ASSERT_EQ(universe->get_number_of_all_children(), 3);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 3);
 
     // `Entity` member functions of `World`.
     ASSERT_EQ(world4->get_childID(), 2);
@@ -356,8 +356,8 @@ TEST(worlds_must_be_initialized_appropriately_after_having_deleted_some_earlier_
     ASSERT_EQ(world4->get_universe(), universe);
     ASSERT_NE(world4->get_setting_master(), nullptr);
     ASSERT_EQ(world4->get_parent(), universe);
-    ASSERT_EQ(world4->get_number_of_children(), 0);
-    ASSERT_EQ(world4->get_number_of_descendants(), 0);
+    ASSERT_EQ(world4->get_number_of_all_children(), 0);
+    ASSERT_EQ(world4->get_number_of_all_descendants(), 0);
 }
 
 TEST(world_must_be_initialized_appropriately, no_universe)
@@ -372,8 +372,8 @@ TEST(world_must_be_initialized_appropriately, no_universe)
     ASSERT_EQ(world->get_universe(), nullptr);
     ASSERT_NE(world->get_setting_master(), nullptr);
     ASSERT_EQ(world->get_parent(), nullptr);
-    ASSERT_EQ(world->get_number_of_children(), 0);
-    ASSERT_EQ(world->get_number_of_descendants(), 0);
+    ASSERT_EQ(world->get_number_of_all_children(), 0);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 0);
 }
 
 TEST(scene_must_be_initialized_appropriately, headless)
@@ -394,12 +394,12 @@ TEST(scene_must_be_initialized_appropriately, headless)
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 3);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 3);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 2);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 2);
 
     // `Entity` member functions.
     ASSERT_EQ(scene->get_childID(), 0);
@@ -408,8 +408,8 @@ TEST(scene_must_be_initialized_appropriately, headless)
     ASSERT_EQ(scene->get_universe(), universe);
     ASSERT_NE(scene->get_setting_master(), nullptr);
     ASSERT_EQ(scene->get_parent(), world);
-    ASSERT_EQ(scene->get_number_of_children(), 1);
-    ASSERT_EQ(scene->get_number_of_descendants(), 1);
+    ASSERT_EQ(scene->get_number_of_all_children(), 1);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 1);
 }
 
 TEST(scene_must_be_initialized_appropriately, no_universe)
@@ -422,8 +422,8 @@ TEST(scene_must_be_initialized_appropriately, no_universe)
     yli::ontology::Scene* const scene = new yli::ontology::Scene(nullptr, scene_struct, &world->parent_of_scenes);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 2);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 2);
 
     // `Entity` member functions.
     ASSERT_EQ(scene->get_childID(), 0);
@@ -432,8 +432,8 @@ TEST(scene_must_be_initialized_appropriately, no_universe)
     ASSERT_EQ(scene->get_universe(), nullptr);
     ASSERT_NE(scene->get_setting_master(), nullptr);
     ASSERT_EQ(scene->get_parent(), world);
-    ASSERT_EQ(scene->get_number_of_children(), 1);
-    ASSERT_EQ(scene->get_number_of_descendants(), 1);
+    ASSERT_EQ(scene->get_number_of_all_children(), 1);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 1);
 }
 
 TEST(scene_must_be_initialized_appropriately, no_universe_no_world)
@@ -449,8 +449,8 @@ TEST(scene_must_be_initialized_appropriately, no_universe_no_world)
     ASSERT_EQ(scene->get_universe(), nullptr);
     ASSERT_NE(scene->get_setting_master(), nullptr);
     ASSERT_EQ(scene->get_parent(), nullptr);
-    ASSERT_EQ(scene->get_number_of_children(), 1);
-    ASSERT_EQ(scene->get_number_of_descendants(), 1);
+    ASSERT_EQ(scene->get_number_of_all_children(), 1);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 1);
 }
 
 TEST(shader_must_be_initialized_appropriately, headless)
@@ -471,16 +471,16 @@ TEST(shader_must_be_initialized_appropriately, headless)
     yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 4);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 4);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 3);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 3);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 2);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 2);
 
     // `Entity` member functions.
     ASSERT_EQ(shader->get_childID(), 0);
@@ -489,8 +489,8 @@ TEST(shader_must_be_initialized_appropriately, headless)
     ASSERT_EQ(shader->get_universe(), universe);
     ASSERT_NE(shader->get_setting_master(), nullptr);
     ASSERT_EQ(shader->get_parent(), scene);
-    ASSERT_EQ(shader->get_number_of_children(), 0);
-    ASSERT_EQ(shader->get_number_of_descendants(), 0);
+    ASSERT_EQ(shader->get_number_of_all_children(), 0);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 0);
 }
 
 TEST(shader_must_be_initialized_appropriately, no_universe)
@@ -507,12 +507,12 @@ TEST(shader_must_be_initialized_appropriately, no_universe)
     yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 3);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 3);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 2);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 2);
 
     // `Entity` member functions.
     ASSERT_EQ(shader->get_childID(), 0);
@@ -521,8 +521,8 @@ TEST(shader_must_be_initialized_appropriately, no_universe)
     ASSERT_EQ(shader->get_universe(), nullptr);
     ASSERT_NE(shader->get_setting_master(), nullptr);
     ASSERT_EQ(shader->get_parent(), scene);
-    ASSERT_EQ(shader->get_number_of_children(), 0);
-    ASSERT_EQ(shader->get_number_of_descendants(), 0);
+    ASSERT_EQ(shader->get_number_of_all_children(), 0);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 0);
 }
 
 TEST(shader_must_be_initialized_appropriately, no_universe_no_world)
@@ -536,8 +536,8 @@ TEST(shader_must_be_initialized_appropriately, no_universe_no_world)
     yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 2);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 2);
 
     // `Entity` member functions.
     ASSERT_EQ(shader->get_childID(), 0);
@@ -546,8 +546,8 @@ TEST(shader_must_be_initialized_appropriately, no_universe_no_world)
     ASSERT_EQ(shader->get_universe(), nullptr);
     ASSERT_NE(shader->get_setting_master(), nullptr);
     ASSERT_EQ(shader->get_parent(), scene);
-    ASSERT_EQ(shader->get_number_of_children(), 0);
-    ASSERT_EQ(shader->get_number_of_descendants(), 0);
+    ASSERT_EQ(shader->get_number_of_all_children(), 0);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 0);
 }
 
 TEST(shader_must_be_initialized_appropriately, no_universe_no_world_no_scene)
@@ -563,8 +563,8 @@ TEST(shader_must_be_initialized_appropriately, no_universe_no_world_no_scene)
     ASSERT_EQ(shader->get_universe(), nullptr);
     ASSERT_NE(shader->get_setting_master(), nullptr);
     ASSERT_EQ(shader->get_parent(), nullptr);
-    ASSERT_EQ(shader->get_number_of_children(), 0);
-    ASSERT_EQ(shader->get_number_of_descendants(), 0);
+    ASSERT_EQ(shader->get_number_of_all_children(), 0);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 0);
 }
 
 TEST(material_must_be_initialized_appropriately, headless)
@@ -589,20 +589,20 @@ TEST(material_must_be_initialized_appropriately, headless)
     yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &shader->parent_of_materials);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 5);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 5);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 4);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 4);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 3);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 3);
 
     // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_children(), 1);
-    ASSERT_EQ(shader->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions.
     ASSERT_EQ(material->get_childID(), 0);
@@ -611,8 +611,8 @@ TEST(material_must_be_initialized_appropriately, headless)
     ASSERT_EQ(material->get_universe(), universe);
     ASSERT_NE(material->get_setting_master(), nullptr);
     ASSERT_EQ(material->get_parent(), shader);
-    ASSERT_EQ(material->get_number_of_children(), 0);
-    ASSERT_EQ(material->get_number_of_descendants(), 0);
+    ASSERT_EQ(material->get_number_of_all_children(), 0);
+    ASSERT_EQ(material->get_number_of_all_descendants(), 0);
 }
 
 TEST(material_must_be_initialized_appropriately, no_universe)
@@ -633,16 +633,16 @@ TEST(material_must_be_initialized_appropriately, no_universe)
     yli::ontology::Material* const material = new yli::ontology::Material(nullptr, material_struct, &shader->parent_of_materials);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 4);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 4);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 3);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 3);
 
     // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_children(), 1);
-    ASSERT_EQ(shader->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions.
     ASSERT_EQ(material->get_childID(), 0);
@@ -651,8 +651,8 @@ TEST(material_must_be_initialized_appropriately, no_universe)
     ASSERT_EQ(material->get_universe(), nullptr);
     ASSERT_NE(material->get_setting_master(), nullptr);
     ASSERT_EQ(material->get_parent(), shader);
-    ASSERT_EQ(material->get_number_of_children(), 0);
-    ASSERT_EQ(material->get_number_of_descendants(), 0);
+    ASSERT_EQ(material->get_number_of_all_children(), 0);
+    ASSERT_EQ(material->get_number_of_all_descendants(), 0);
 }
 
 TEST(material_must_be_initialized_appropriately, no_universe_no_world)
@@ -670,12 +670,12 @@ TEST(material_must_be_initialized_appropriately, no_universe_no_world)
     yli::ontology::Material* const material = new yli::ontology::Material(nullptr, material_struct, &shader->parent_of_materials);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 3);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 3);
 
     // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_children(), 1);
-    ASSERT_EQ(shader->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions.
     ASSERT_EQ(material->get_childID(), 0);
@@ -684,8 +684,8 @@ TEST(material_must_be_initialized_appropriately, no_universe_no_world)
     ASSERT_EQ(material->get_universe(), nullptr);
     ASSERT_NE(material->get_setting_master(), nullptr);
     ASSERT_EQ(material->get_parent(), shader);
-    ASSERT_EQ(material->get_number_of_children(), 0);
-    ASSERT_EQ(material->get_number_of_descendants(), 0);
+    ASSERT_EQ(material->get_number_of_all_children(), 0);
+    ASSERT_EQ(material->get_number_of_all_descendants(), 0);
 }
 
 TEST(material_must_be_initialized_appropriately, no_universe_no_world_no_scene)
@@ -699,8 +699,8 @@ TEST(material_must_be_initialized_appropriately, no_universe_no_world_no_scene)
     yli::ontology::Material* const material = new yli::ontology::Material(nullptr, material_struct, &shader->parent_of_materials);
 
     // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_children(), 1);
-    ASSERT_EQ(shader->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions.
     ASSERT_EQ(material->get_childID(), 0);
@@ -709,8 +709,8 @@ TEST(material_must_be_initialized_appropriately, no_universe_no_world_no_scene)
     ASSERT_EQ(material->get_universe(), nullptr);
     ASSERT_NE(material->get_setting_master(), nullptr);
     ASSERT_EQ(material->get_parent(), shader);
-    ASSERT_EQ(material->get_number_of_children(), 0);
-    ASSERT_EQ(material->get_number_of_descendants(), 0);
+    ASSERT_EQ(material->get_number_of_all_children(), 0);
+    ASSERT_EQ(material->get_number_of_all_descendants(), 0);
 }
 
 TEST(material_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader)
@@ -726,8 +726,8 @@ TEST(material_must_be_initialized_appropriately, no_universe_no_world_no_scene_n
     ASSERT_EQ(material->get_universe(), nullptr);
     ASSERT_NE(material->get_setting_master(), nullptr);
     ASSERT_EQ(material->get_parent(), nullptr);
-    ASSERT_EQ(material->get_number_of_children(), 0);
-    ASSERT_EQ(material->get_number_of_descendants(), 0);
+    ASSERT_EQ(material->get_number_of_all_children(), 0);
+    ASSERT_EQ(material->get_number_of_all_descendants(), 0);
 }
 
 TEST(species_must_be_initialized_appropriately, headless)
@@ -758,24 +758,24 @@ TEST(species_must_be_initialized_appropriately, headless)
     yli::ontology::Species* const species = new yli::ontology::Species(universe, species_struct, &material->parent_of_species);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 6);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 6);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 5);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 5);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 4);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 4);
 
     // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_children(), 1);
-    ASSERT_EQ(shader->get_number_of_descendants(), 2);
+    ASSERT_EQ(shader->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 2);
 
     // `Entity` member functions of `Material`.
-    ASSERT_EQ(material->get_number_of_children(), 1);
-    ASSERT_EQ(material->get_number_of_descendants(), 1);
+    ASSERT_EQ(material->get_number_of_all_children(), 1);
+    ASSERT_EQ(material->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions.
     ASSERT_EQ(species->get_childID(), 0);
@@ -784,8 +784,8 @@ TEST(species_must_be_initialized_appropriately, headless)
     ASSERT_EQ(species->get_universe(), universe);
     ASSERT_NE(species->get_setting_master(), nullptr);
     ASSERT_EQ(species->get_parent(), material);
-    ASSERT_EQ(species->get_number_of_children(), 0);
-    ASSERT_EQ(species->get_number_of_descendants(), 0);
+    ASSERT_EQ(species->get_number_of_all_children(), 0);
+    ASSERT_EQ(species->get_number_of_all_descendants(), 0);
 }
 
 TEST(species_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material)
@@ -803,8 +803,8 @@ TEST(species_must_be_initialized_appropriately, no_universe_no_world_no_scene_no
     ASSERT_EQ(species->get_universe(), nullptr);
     ASSERT_NE(species->get_setting_master(), nullptr);
     ASSERT_EQ(species->get_parent(), nullptr);
-    ASSERT_EQ(species->get_number_of_children(), 0);
-    ASSERT_EQ(species->get_number_of_descendants(), 0);
+    ASSERT_EQ(species->get_number_of_all_children(), 0);
+    ASSERT_EQ(species->get_number_of_all_descendants(), 0);
 }
 
 TEST(object_must_be_initialized_appropriately, headless)
@@ -839,28 +839,28 @@ TEST(object_must_be_initialized_appropriately, headless)
     yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species->parent_of_objects);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 7);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 7);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 6);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 6);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 5);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 5);
 
     // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_children(), 1);
-    ASSERT_EQ(shader->get_number_of_descendants(), 3);
+    ASSERT_EQ(shader->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 3);
 
     // `Entity` member functions of `Material`.
-    ASSERT_EQ(material->get_number_of_children(), 1);
-    ASSERT_EQ(material->get_number_of_descendants(), 2);
+    ASSERT_EQ(material->get_number_of_all_children(), 1);
+    ASSERT_EQ(material->get_number_of_all_descendants(), 2);
 
     // `Entity` member functions of `Species`.
-    ASSERT_EQ(species->get_number_of_children(), 1);
-    ASSERT_EQ(species->get_number_of_descendants(), 1);
+    ASSERT_EQ(species->get_number_of_all_children(), 1);
+    ASSERT_EQ(species->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions.
     ASSERT_EQ(object->get_childID(), 0);
@@ -870,8 +870,8 @@ TEST(object_must_be_initialized_appropriately, headless)
     ASSERT_NE(object->get_setting_master(), nullptr);
     ASSERT_EQ(object->get_glyph(), nullptr);
     ASSERT_EQ(object->get_parent(), species);
-    ASSERT_EQ(object->get_number_of_children(), 0);
-    ASSERT_EQ(object->get_number_of_descendants(), 0);
+    ASSERT_EQ(object->get_number_of_all_children(), 0);
+    ASSERT_EQ(object->get_number_of_all_descendants(), 0);
 }
 
 TEST(object_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material_no_species)
@@ -888,8 +888,8 @@ TEST(object_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_
     ASSERT_NE(object->get_setting_master(), nullptr);
     ASSERT_EQ(object->get_glyph(), nullptr);
     ASSERT_EQ(object->get_parent(), nullptr);
-    ASSERT_EQ(object->get_number_of_children(), 0);
-    ASSERT_EQ(object->get_number_of_descendants(), 0);
+    ASSERT_EQ(object->get_number_of_all_children(), 0);
+    ASSERT_EQ(object->get_number_of_all_descendants(), 0);
 }
 
 TEST(symbiosis_must_be_initialized_appropriately, headless)
@@ -914,20 +914,20 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct, &shader->parent_of_symbioses);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 5);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 5);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 4);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 4);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 3);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 3);
 
     // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_children(), 1);
-    ASSERT_EQ(shader->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions.
     ASSERT_EQ(symbiosis->get_childID(), 0);
@@ -936,8 +936,8 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
     ASSERT_EQ(symbiosis->get_universe(), universe);
     ASSERT_NE(symbiosis->get_setting_master(), nullptr);
     ASSERT_EQ(symbiosis->get_parent(), shader);
-    ASSERT_EQ(symbiosis->get_number_of_children(), 0);
-    ASSERT_EQ(symbiosis->get_number_of_descendants(), 0);
+    ASSERT_EQ(symbiosis->get_number_of_all_children(), 0);
+    ASSERT_EQ(symbiosis->get_number_of_all_descendants(), 0);
 }
 
 TEST(symbiosis_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_material_no_shader)
@@ -953,8 +953,8 @@ TEST(symbiosis_must_be_initialized_appropriately, no_universe_no_world_no_scene_
     ASSERT_EQ(symbiosis->get_universe(), nullptr);
     ASSERT_NE(symbiosis->get_setting_master(), nullptr);
     ASSERT_EQ(symbiosis->get_parent(), nullptr);
-    ASSERT_EQ(symbiosis->get_number_of_children(), 0);
-    ASSERT_EQ(symbiosis->get_number_of_descendants(), 0);
+    ASSERT_EQ(symbiosis->get_number_of_all_children(), 0);
+    ASSERT_EQ(symbiosis->get_number_of_all_descendants(), 0);
 }
 
 TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
@@ -981,20 +981,20 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct, &shader->parent_of_symbioses);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 12);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 12);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 11);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 11);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 10);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 10);
 
     // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_children(), 1);
-    ASSERT_EQ(shader->get_number_of_descendants(), 8);
+    ASSERT_EQ(shader->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 8);
 
     // `Entity` member functions.
     ASSERT_EQ(symbiosis->get_childID(), 0);
@@ -1003,8 +1003,8 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
     ASSERT_EQ(symbiosis->get_universe(), universe);
     ASSERT_NE(symbiosis->get_setting_master(), nullptr);
     ASSERT_EQ(symbiosis->get_parent(), shader);
-    ASSERT_EQ(symbiosis->get_number_of_children(), 2);    // 2 `SymbiontMaterial`s.
-    ASSERT_EQ(symbiosis->get_number_of_descendants(), 7); // 2 `SymbiontMaterial`s and 5 `SymbiontSpecies`.
+    ASSERT_EQ(symbiosis->get_number_of_all_children(), 2);    // 2 `SymbiontMaterial`s.
+    ASSERT_EQ(symbiosis->get_number_of_all_descendants(), 7); // 2 `SymbiontMaterial`s and 5 `SymbiontSpecies`.
 }
 
 TEST(symbiosis_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_material_no_shader_turbo_polizei)
@@ -1022,8 +1022,8 @@ TEST(symbiosis_must_be_initialized_appropriately, no_universe_no_world_no_scene_
     ASSERT_EQ(symbiosis->get_universe(), nullptr);
     ASSERT_NE(symbiosis->get_setting_master(), nullptr);
     ASSERT_EQ(symbiosis->get_parent(), nullptr);
-    ASSERT_EQ(symbiosis->get_number_of_children(), 2);    // 2 `SymbiontMaterial`s.
-    ASSERT_EQ(symbiosis->get_number_of_descendants(), 7); // 2 `SymbiontMaterial`s and 5 `SymbiontSpecies`.
+    ASSERT_EQ(symbiosis->get_number_of_all_children(), 2);    // 2 `SymbiontMaterial`s.
+    ASSERT_EQ(symbiosis->get_number_of_all_descendants(), 7); // 2 `SymbiontMaterial`s and 5 `SymbiontSpecies`.
 }
 
 TEST(holobiont_must_be_initialized_appropriately, headless)
@@ -1052,24 +1052,24 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
     yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(universe, holobiont_struct, &symbiosis->parent_of_holobionts);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 6);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 6);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 5);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 5);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 4);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 4);
 
     // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_children(), 1);
-    ASSERT_EQ(shader->get_number_of_descendants(), 2);
+    ASSERT_EQ(shader->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 2);
 
     // `Entity` member functions of `Symbiosis`.
-    ASSERT_EQ(symbiosis->get_number_of_children(), 1);
-    ASSERT_EQ(symbiosis->get_number_of_descendants(), 1);
+    ASSERT_EQ(symbiosis->get_number_of_all_children(), 1);
+    ASSERT_EQ(symbiosis->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions.
     ASSERT_EQ(holobiont->get_childID(), 0);
@@ -1078,8 +1078,8 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
     ASSERT_EQ(holobiont->get_universe(), universe);
     ASSERT_NE(holobiont->get_setting_master(), nullptr);
     ASSERT_EQ(holobiont->get_parent(), symbiosis);
-    ASSERT_EQ(holobiont->get_number_of_children(), 0);
-    ASSERT_EQ(holobiont->get_number_of_descendants(), 0);
+    ASSERT_EQ(holobiont->get_number_of_all_children(), 0);
+    ASSERT_EQ(holobiont->get_number_of_all_descendants(), 0);
 }
 
 TEST(holobiont_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_symbiosis)
@@ -1095,8 +1095,8 @@ TEST(holobiont_must_be_initialized_appropriately, no_universe_no_world_no_scene_
     ASSERT_EQ(holobiont->get_universe(), nullptr);
     ASSERT_NE(holobiont->get_setting_master(), nullptr);
     ASSERT_EQ(holobiont->get_parent(), nullptr);
-    ASSERT_EQ(holobiont->get_number_of_children(), 0);
-    ASSERT_EQ(holobiont->get_number_of_descendants(), 0);
+    ASSERT_EQ(holobiont->get_number_of_all_children(), 0);
+    ASSERT_EQ(holobiont->get_number_of_all_descendants(), 0);
 }
 
 TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
@@ -1127,24 +1127,24 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(universe, holobiont_struct, &symbiosis->parent_of_holobionts);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 18);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 18);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 17);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 17);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 16);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 16);
 
     // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_children(), 1);
-    ASSERT_EQ(shader->get_number_of_descendants(), 14);
+    ASSERT_EQ(shader->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 14);
 
     // `Entity` member functions of `Symbiosis`.
-    ASSERT_EQ(symbiosis->get_number_of_children(), 3);     // 2 `SymbiontMaterial`s and 1 `Holobiont`.
-    ASSERT_EQ(symbiosis->get_number_of_descendants(), 13); // 2 `SymbiontMaterial`s, 5 `SymbiontSpecies`, 1 `Holobiont`, and 5 `Biont`s.
+    ASSERT_EQ(symbiosis->get_number_of_all_children(), 3);     // 2 `SymbiontMaterial`s and 1 `Holobiont`.
+    ASSERT_EQ(symbiosis->get_number_of_all_descendants(), 13); // 2 `SymbiontMaterial`s, 5 `SymbiontSpecies`, 1 `Holobiont`, and 5 `Biont`s.
 
     // `Entity` member functions.
     ASSERT_EQ(holobiont->get_childID(), 0);
@@ -1153,8 +1153,8 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     ASSERT_EQ(holobiont->get_universe(), universe);
     ASSERT_NE(holobiont->get_setting_master(), nullptr);
     ASSERT_EQ(holobiont->get_parent(), symbiosis);
-    ASSERT_EQ(holobiont->get_number_of_children(), 5);     // 5 `Biont`s.
-    ASSERT_EQ(holobiont->get_number_of_descendants(), 5);  // 5 `Biont`s.
+    ASSERT_EQ(holobiont->get_number_of_all_children(), 5);     // 5 `Biont`s.
+    ASSERT_EQ(holobiont->get_number_of_all_descendants(), 5);  // 5 `Biont`s.
 }
 
 TEST(holobiont_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_turbo_polizei)
@@ -1170,8 +1170,8 @@ TEST(holobiont_must_be_initialized_appropriately, no_universe_no_world_no_scene_
     yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(nullptr, holobiont_struct, &symbiosis->parent_of_holobionts);
 
     // `Entity` member functions of `Symbiosis`.
-    ASSERT_EQ(symbiosis->get_number_of_children(), 3);     // 2 `SymbiontMaterial`s and 1 `Holobiont`.
-    ASSERT_EQ(symbiosis->get_number_of_descendants(), 13); // 2 `SymbiontMaterial`s, 5 `SymbiontSpecies`, 1 `Holobiont`, and 5 `Biont`s.
+    ASSERT_EQ(symbiosis->get_number_of_all_children(), 3);     // 2 `SymbiontMaterial`s and 1 `Holobiont`.
+    ASSERT_EQ(symbiosis->get_number_of_all_descendants(), 13); // 2 `SymbiontMaterial`s, 5 `SymbiontSpecies`, 1 `Holobiont`, and 5 `Biont`s.
 
     // `Entity` member functions.
     ASSERT_EQ(holobiont->get_childID(), 0);
@@ -1180,8 +1180,8 @@ TEST(holobiont_must_be_initialized_appropriately, no_universe_no_world_no_scene_
     ASSERT_EQ(holobiont->get_universe(), nullptr);
     ASSERT_NE(holobiont->get_setting_master(), nullptr);
     ASSERT_EQ(holobiont->get_parent(), symbiosis);
-    ASSERT_EQ(holobiont->get_number_of_children(), 5);     // 5 `Biont`s.
-    ASSERT_EQ(holobiont->get_number_of_descendants(), 5);  // 5 `Biont`s.
+    ASSERT_EQ(holobiont->get_number_of_all_children(), 5);     // 5 `Biont`s.
+    ASSERT_EQ(holobiont->get_number_of_all_descendants(), 5);  // 5 `Biont`s.
 }
 
 TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
@@ -1212,24 +1212,24 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(universe, shapeshifter_transformation_struct);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 6);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 6);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 5);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 5);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 4);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 4);
 
     // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_children(), 1);
-    ASSERT_EQ(shader->get_number_of_descendants(), 2);
+    ASSERT_EQ(shader->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 2);
 
     // `Entity` member functions of `Material`.
-    ASSERT_EQ(material->get_number_of_children(), 1);
-    ASSERT_EQ(material->get_number_of_descendants(), 1);
+    ASSERT_EQ(material->get_number_of_all_children(), 1);
+    ASSERT_EQ(material->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions.
     ASSERT_EQ(shapeshifter_transformation->get_childID(), 0);
@@ -1238,8 +1238,8 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
     ASSERT_EQ(shapeshifter_transformation->get_universe(), universe);
     ASSERT_NE(shapeshifter_transformation->get_setting_master(), nullptr);
     ASSERT_EQ(shapeshifter_transformation->get_parent(), material);
-    ASSERT_EQ(shapeshifter_transformation->get_number_of_children(), 0);
-    ASSERT_EQ(shapeshifter_transformation->get_number_of_descendants(), 0);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_all_children(), 0);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_all_descendants(), 0);
 }
 
 TEST(shapeshifter_transformation_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material)
@@ -1257,8 +1257,8 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, no_universe_
     ASSERT_EQ(shapeshifter_transformation->get_universe(), nullptr);
     ASSERT_NE(shapeshifter_transformation->get_setting_master(), nullptr);
     ASSERT_EQ(shapeshifter_transformation->get_parent(), nullptr);
-    ASSERT_EQ(shapeshifter_transformation->get_number_of_children(), 0);
-    ASSERT_EQ(shapeshifter_transformation->get_number_of_descendants(), 0);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_all_children(), 0);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_all_descendants(), 0);
 }
 
 TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
@@ -1296,28 +1296,28 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
             &shapeshifter_transformation->parent_of_shapeshifter_forms);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 7);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 7);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 6);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 6);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 5);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 5);
 
     // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_children(), 1);
-    ASSERT_EQ(shader->get_number_of_descendants(), 3);
+    ASSERT_EQ(shader->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 3);
 
     // `Entity` member functions of `Material`.
-    ASSERT_EQ(material->get_number_of_children(), 1);
-    ASSERT_EQ(material->get_number_of_descendants(), 2);
+    ASSERT_EQ(material->get_number_of_all_children(), 1);
+    ASSERT_EQ(material->get_number_of_all_descendants(), 2);
 
     // `Entity` member functions of `ShapeshifterTransformation`.
-    ASSERT_EQ(shapeshifter_transformation->get_number_of_children(), 1);
-    ASSERT_EQ(shapeshifter_transformation->get_number_of_descendants(), 1);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_all_children(), 1);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions.
     ASSERT_EQ(shapeshifter_form->get_childID(), 0);
@@ -1326,8 +1326,8 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
     ASSERT_EQ(shapeshifter_form->get_universe(), universe);
     ASSERT_NE(shapeshifter_form->get_setting_master(), nullptr);
     ASSERT_EQ(shapeshifter_form->get_parent(), shapeshifter_transformation);
-    ASSERT_EQ(shapeshifter_form->get_number_of_children(), 0);
-    ASSERT_EQ(shapeshifter_form->get_number_of_descendants(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_all_children(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_all_descendants(), 0);
 }
 
 TEST(shapeshifter_form_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material)
@@ -1355,8 +1355,8 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, no_universe_no_world_n
     ASSERT_EQ(shapeshifter_form->get_universe(), nullptr);
     ASSERT_NE(shapeshifter_form->get_setting_master(), nullptr);
     ASSERT_EQ(shapeshifter_form->get_parent(), shapeshifter_transformation);
-    ASSERT_EQ(shapeshifter_form->get_number_of_children(), 0);
-    ASSERT_EQ(shapeshifter_form->get_number_of_descendants(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_all_children(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_all_descendants(), 0);
 }
 
 TEST(shapeshifter_form_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material_no_shapeshifter_transformation)
@@ -1375,8 +1375,8 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, no_universe_no_world_n
     ASSERT_EQ(shapeshifter_form->get_universe(), nullptr);
     ASSERT_NE(shapeshifter_form->get_setting_master(), nullptr);
     ASSERT_EQ(shapeshifter_form->get_parent(), nullptr);
-    ASSERT_EQ(shapeshifter_form->get_number_of_children(), 0);
-    ASSERT_EQ(shapeshifter_form->get_number_of_descendants(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_all_children(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_all_descendants(), 0);
 }
 
 TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
@@ -1411,28 +1411,28 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(universe, shapeshifter_sequence_struct);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 7);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 7);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 6);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 6);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 5);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 5);
 
     // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_children(), 1);
-    ASSERT_EQ(shader->get_number_of_descendants(), 3);
+    ASSERT_EQ(shader->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 3);
 
     // `Entity` member functions of `Material`.
-    ASSERT_EQ(material->get_number_of_children(), 1);
-    ASSERT_EQ(material->get_number_of_descendants(), 2);
+    ASSERT_EQ(material->get_number_of_all_children(), 1);
+    ASSERT_EQ(material->get_number_of_all_descendants(), 2);
 
     // `Entity` member functions of `ShapeshifterTransformation`.
-    ASSERT_EQ(shapeshifter_transformation->get_number_of_children(), 1);
-    ASSERT_EQ(shapeshifter_transformation->get_number_of_descendants(), 1);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_all_children(), 1);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions.
     ASSERT_EQ(shapeshifter_sequence->get_childID(), 0);
@@ -1441,8 +1441,8 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
     ASSERT_EQ(shapeshifter_sequence->get_universe(), universe);
     ASSERT_NE(shapeshifter_sequence->get_setting_master(), nullptr);
     ASSERT_EQ(shapeshifter_sequence->get_parent(), shapeshifter_transformation);
-    ASSERT_EQ(shapeshifter_sequence->get_number_of_children(), 0);
-    ASSERT_EQ(shapeshifter_sequence->get_number_of_descendants(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_all_children(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_all_descendants(), 0);
 }
 
 TEST(shapeshifter_sequence_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material)
@@ -1464,8 +1464,8 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, no_universe_no_wor
     ASSERT_EQ(shapeshifter_sequence->get_universe(), nullptr);
     ASSERT_NE(shapeshifter_sequence->get_setting_master(), nullptr);
     ASSERT_EQ(shapeshifter_sequence->get_parent(), shapeshifter_transformation);
-    ASSERT_EQ(shapeshifter_sequence->get_number_of_children(), 0);
-    ASSERT_EQ(shapeshifter_sequence->get_number_of_descendants(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_all_children(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_all_descendants(), 0);
 }
 
 TEST(shapeshifter_sequence_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material_no_shapeshifter_transformation)
@@ -1481,8 +1481,8 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, no_universe_no_wor
     ASSERT_EQ(shapeshifter_sequence->get_universe(), nullptr);
     ASSERT_NE(shapeshifter_sequence->get_setting_master(), nullptr);
     ASSERT_EQ(shapeshifter_sequence->get_parent(), nullptr);
-    ASSERT_EQ(shapeshifter_sequence->get_number_of_children(), 0);
-    ASSERT_EQ(shapeshifter_sequence->get_number_of_descendants(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_all_children(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_all_descendants(), 0);
 }
 
 TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
@@ -1526,28 +1526,28 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(universe, shapeshifter_sequence_struct);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 8);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 8);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 7);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 7);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 6);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 6);
 
     // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_children(), 1);
-    ASSERT_EQ(shader->get_number_of_descendants(), 4);
+    ASSERT_EQ(shader->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 4);
 
     // `Entity` member functions of `Material`.
-    ASSERT_EQ(material->get_number_of_children(), 1);
-    ASSERT_EQ(material->get_number_of_descendants(), 3);
+    ASSERT_EQ(material->get_number_of_all_children(), 1);
+    ASSERT_EQ(material->get_number_of_all_descendants(), 3);
 
     // `Entity` member functions of `ShapeshifterTransformation`.
-    ASSERT_EQ(shapeshifter_transformation->get_number_of_children(), 2);
-    ASSERT_EQ(shapeshifter_transformation->get_number_of_descendants(), 2);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_all_children(), 2);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_all_descendants(), 2);
 
     // `Entity` member functions.
     ASSERT_EQ(shapeshifter_form->get_childID(), 0);
@@ -1556,8 +1556,8 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
     ASSERT_EQ(shapeshifter_form->get_universe(), universe);
     ASSERT_NE(shapeshifter_form->get_setting_master(), nullptr);
     ASSERT_EQ(shapeshifter_form->get_parent(), shapeshifter_transformation);
-    ASSERT_EQ(shapeshifter_form->get_number_of_children(), 0);
-    ASSERT_EQ(shapeshifter_form->get_number_of_descendants(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_all_children(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_all_descendants(), 0);
 
     // `Entity` member functions.
     ASSERT_EQ(shapeshifter_sequence->get_childID(), 0);
@@ -1566,8 +1566,8 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
     ASSERT_EQ(shapeshifter_sequence->get_universe(), universe);
     ASSERT_NE(shapeshifter_sequence->get_setting_master(), nullptr);
     ASSERT_EQ(shapeshifter_sequence->get_parent(), shapeshifter_transformation);
-    ASSERT_EQ(shapeshifter_sequence->get_number_of_children(), 0);
-    ASSERT_EQ(shapeshifter_sequence->get_number_of_descendants(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_all_children(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_all_descendants(), 0);
 }
 
 TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material)
@@ -1595,8 +1595,8 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, no_univer
     yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct);
 
     // `Entity` member functions of `ShapeshifterTransformation`.
-    ASSERT_EQ(shapeshifter_transformation->get_number_of_children(), 2);
-    ASSERT_EQ(shapeshifter_transformation->get_number_of_descendants(), 2);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_all_children(), 2);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_all_descendants(), 2);
 
     // `Entity` member functions.
     ASSERT_EQ(shapeshifter_form->get_childID(), 0);
@@ -1605,8 +1605,8 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, no_univer
     ASSERT_EQ(shapeshifter_form->get_universe(), nullptr);
     ASSERT_NE(shapeshifter_form->get_setting_master(), nullptr);
     ASSERT_EQ(shapeshifter_form->get_parent(), shapeshifter_transformation);
-    ASSERT_EQ(shapeshifter_form->get_number_of_children(), 0);
-    ASSERT_EQ(shapeshifter_form->get_number_of_descendants(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_all_children(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_all_descendants(), 0);
 
     // `Entity` member functions.
     ASSERT_EQ(shapeshifter_sequence->get_childID(), 0);
@@ -1615,8 +1615,8 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, no_univer
     ASSERT_EQ(shapeshifter_sequence->get_universe(), nullptr);
     ASSERT_NE(shapeshifter_sequence->get_setting_master(), nullptr);
     ASSERT_EQ(shapeshifter_sequence->get_parent(), shapeshifter_transformation);
-    ASSERT_EQ(shapeshifter_sequence->get_number_of_children(), 0);
-    ASSERT_EQ(shapeshifter_sequence->get_number_of_descendants(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_all_children(), 0);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_all_descendants(), 0);
 }
 
 TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
@@ -1665,36 +1665,36 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &shapeshifter_sequence->parent_of_objects);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 9);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 9);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 8);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 8);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 7);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 7);
 
     // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_children(), 1);
-    ASSERT_EQ(shader->get_number_of_descendants(), 5);
+    ASSERT_EQ(shader->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 5);
 
     // `Entity` member functions of `Material`.
-    ASSERT_EQ(material->get_number_of_children(), 1);
-    ASSERT_EQ(material->get_number_of_descendants(), 4);
+    ASSERT_EQ(material->get_number_of_all_children(), 1);
+    ASSERT_EQ(material->get_number_of_all_descendants(), 4);
 
     // `Entity` member functions of `ShapeshifterTransformation`.
-    ASSERT_EQ(shapeshifter_transformation->get_number_of_children(), 2);
-    ASSERT_EQ(shapeshifter_transformation->get_number_of_descendants(), 3);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_all_children(), 2);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_all_descendants(), 3);
 
     // `Entity` member functions of `ShapeshifterForm`.
-    ASSERT_EQ(shapeshifter_form->get_number_of_children(), 0);
-    ASSERT_EQ(shapeshifter_form->get_number_of_descendants(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_all_children(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_all_descendants(), 0);
 
     // `Entity` member functions of `ShapeshifterSequence`.
-    ASSERT_EQ(shapeshifter_sequence->get_number_of_children(), 1);
-    ASSERT_EQ(shapeshifter_sequence->get_number_of_descendants(), 1);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_all_children(), 1);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions.
     ASSERT_EQ(object->get_childID(), 0);
@@ -1704,8 +1704,8 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     ASSERT_NE(object->get_setting_master(), nullptr);
     ASSERT_EQ(object->get_glyph(), nullptr);
     ASSERT_EQ(object->get_parent(), shapeshifter_sequence);
-    ASSERT_EQ(object->get_number_of_children(), 0);
-    ASSERT_EQ(object->get_number_of_descendants(), 0);
+    ASSERT_EQ(object->get_number_of_all_children(), 0);
+    ASSERT_EQ(object->get_number_of_all_descendants(), 0);
 }
 
 TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material)
@@ -1736,16 +1736,16 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_world
     yli::ontology::Object* const object = new yli::ontology::Object(nullptr, object_struct, &shapeshifter_sequence->parent_of_objects);
 
     // `Entity` member functions of `ShapeshifterTransformation`.
-    ASSERT_EQ(shapeshifter_transformation->get_number_of_children(), 2);
-    ASSERT_EQ(shapeshifter_transformation->get_number_of_descendants(), 3);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_all_children(), 2);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_all_descendants(), 3);
 
     // `Entity` member functions of `ShapeshifterForm`.
-    ASSERT_EQ(shapeshifter_form->get_number_of_children(), 0);
-    ASSERT_EQ(shapeshifter_form->get_number_of_descendants(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_all_children(), 0);
+    ASSERT_EQ(shapeshifter_form->get_number_of_all_descendants(), 0);
 
     // `Entity` member functions of `ShapeshifterSequence`.
-    ASSERT_EQ(shapeshifter_sequence->get_number_of_children(), 1);
-    ASSERT_EQ(shapeshifter_sequence->get_number_of_descendants(), 1);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_all_children(), 1);
+    ASSERT_EQ(shapeshifter_sequence->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions.
     ASSERT_EQ(object->get_childID(), 0);
@@ -1755,8 +1755,8 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_world
     ASSERT_NE(object->get_setting_master(), nullptr);
     ASSERT_EQ(object->get_glyph(), nullptr);
     ASSERT_EQ(object->get_parent(), shapeshifter_sequence);
-    ASSERT_EQ(object->get_number_of_children(), 0);
-    ASSERT_EQ(object->get_number_of_descendants(), 0);
+    ASSERT_EQ(object->get_number_of_all_children(), 0);
+    ASSERT_EQ(object->get_number_of_all_descendants(), 0);
 }
 
 TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material_no_shapeshifter_transformation)
@@ -1785,8 +1785,8 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_world
     ASSERT_NE(object->get_setting_master(), nullptr);
     ASSERT_EQ(object->get_glyph(), nullptr);
     ASSERT_EQ(object->get_parent(), shapeshifter_sequence);
-    ASSERT_EQ(object->get_number_of_children(), 0);
-    ASSERT_EQ(object->get_number_of_descendants(), 0);
+    ASSERT_EQ(object->get_number_of_all_children(), 0);
+    ASSERT_EQ(object->get_number_of_all_descendants(), 0);
 }
 
 TEST(brain_must_be_initialized_appropriately, headless)
@@ -1807,16 +1807,16 @@ TEST(brain_must_be_initialized_appropriately, headless)
     yli::ontology::Brain* const brain = new yli::ontology::Brain(universe, brain_struct, &scene->parent_of_brains);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 4);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 4);
 
     // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 3);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 3);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 2);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 2);
 
     // `Brain` member functions.
     ASSERT_EQ(brain->get_number_of_apprentices(), 0);
@@ -1828,8 +1828,8 @@ TEST(brain_must_be_initialized_appropriately, headless)
     ASSERT_EQ(brain->get_universe(), universe);
     ASSERT_NE(brain->get_setting_master(), nullptr);
     ASSERT_EQ(brain->get_parent(), scene);
-    ASSERT_EQ(brain->get_number_of_children(), 0);
-    ASSERT_EQ(brain->get_number_of_descendants(), 0);
+    ASSERT_EQ(brain->get_number_of_all_children(), 0);
+    ASSERT_EQ(brain->get_number_of_all_descendants(), 0);
 }
 
 TEST(font2D_must_be_initialized_appropriately, headless)
@@ -1850,8 +1850,8 @@ TEST(font2D_must_be_initialized_appropriately, headless)
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 1);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions of `Font2D`.
     ASSERT_EQ(font2D->get_childID(), 0);
@@ -1860,8 +1860,8 @@ TEST(font2D_must_be_initialized_appropriately, headless)
     ASSERT_EQ(font2D->get_universe(), universe);
     ASSERT_NE(font2D->get_setting_master(), nullptr);
     ASSERT_EQ(font2D->get_parent(), universe);
-    ASSERT_EQ(font2D->get_number_of_children(), 0);
-    ASSERT_EQ(font2D->get_number_of_descendants(), 0);
+    ASSERT_EQ(font2D->get_number_of_all_children(), 0);
+    ASSERT_EQ(font2D->get_number_of_all_descendants(), 0);
 }
 
 TEST(font2D_must_be_initialized_appropriately, no_universe)
@@ -1876,8 +1876,8 @@ TEST(font2D_must_be_initialized_appropriately, no_universe)
     ASSERT_EQ(font2D->get_universe(), nullptr);
     ASSERT_NE(font2D->get_setting_master(), nullptr);
     ASSERT_EQ(font2D->get_parent(), nullptr);
-    ASSERT_EQ(font2D->get_number_of_children(), 0);
-    ASSERT_EQ(font2D->get_number_of_descendants(), 0);
+    ASSERT_EQ(font2D->get_number_of_all_children(), 0);
+    ASSERT_EQ(font2D->get_number_of_all_descendants(), 0);
 }
 
 TEST(font2D_must_be_initialized_appropriately, headless_holstein)
@@ -1900,8 +1900,8 @@ TEST(font2D_must_be_initialized_appropriately, headless_holstein)
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 1);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 1);
 
     // `Entity` member functions of `Font2D`.
     ASSERT_EQ(font2D->get_childID(), 0);
@@ -1910,8 +1910,8 @@ TEST(font2D_must_be_initialized_appropriately, headless_holstein)
     ASSERT_EQ(font2D->get_universe(), universe);
     ASSERT_NE(font2D->get_setting_master(), nullptr);
     ASSERT_EQ(font2D->get_parent(), universe);
-    ASSERT_EQ(font2D->get_number_of_children(), 0);
-    ASSERT_EQ(font2D->get_number_of_descendants(), 0);
+    ASSERT_EQ(font2D->get_number_of_all_children(), 0);
+    ASSERT_EQ(font2D->get_number_of_all_descendants(), 0);
 }
 
 TEST(font2D_must_be_initialized_appropriately, no_universe_holstein)
@@ -1928,8 +1928,8 @@ TEST(font2D_must_be_initialized_appropriately, no_universe_holstein)
     ASSERT_EQ(font2D->get_universe(), nullptr);
     ASSERT_NE(font2D->get_setting_master(), nullptr);
     ASSERT_EQ(font2D->get_parent(), nullptr);
-    ASSERT_EQ(font2D->get_number_of_children(), 0);
-    ASSERT_EQ(font2D->get_number_of_descendants(), 0);
+    ASSERT_EQ(font2D->get_number_of_all_children(), 0);
+    ASSERT_EQ(font2D->get_number_of_all_descendants(), 0);
 }
 
 TEST(brain_must_be_initialized_appropriately, no_universe_no_world_no_scene)
@@ -1948,8 +1948,8 @@ TEST(brain_must_be_initialized_appropriately, no_universe_no_world_no_scene)
     ASSERT_EQ(brain->get_universe(), nullptr);
     ASSERT_NE(brain->get_setting_master(), nullptr);
     ASSERT_EQ(brain->get_parent(), nullptr);
-    ASSERT_EQ(brain->get_number_of_children(), 0);
-    ASSERT_EQ(brain->get_number_of_descendants(), 0);
+    ASSERT_EQ(brain->get_number_of_all_children(), 0);
+    ASSERT_EQ(brain->get_number_of_all_descendants(), 0);
 }
 
 TEST(scene_must_be_activated_appropriately, scene)
@@ -1983,32 +1983,32 @@ TEST(scene_must_bind_to_worlds_appropriately, scene)
     scene_struct.world = world1;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &world1->parent_of_scenes);
     ASSERT_EQ(scene->get_parent(), world1);
-    ASSERT_EQ(world1->get_number_of_children(), 1);
-    ASSERT_EQ(world1->get_number_of_descendants(), 2);
+    ASSERT_EQ(world1->get_number_of_all_children(), 1);
+    ASSERT_EQ(world1->get_number_of_all_descendants(), 2);
 
     yli::ontology::WorldStruct world_struct2;
     yli::ontology::World* const world2 = new yli::ontology::World(universe, world_struct2, &universe->parent_of_worlds);
     ASSERT_EQ(scene->get_parent(), world1);
-    ASSERT_EQ(world2->get_number_of_children(), 0);
-    ASSERT_EQ(world2->get_number_of_descendants(), 0);
+    ASSERT_EQ(world2->get_number_of_all_children(), 0);
+    ASSERT_EQ(world2->get_number_of_all_descendants(), 0);
 
     scene->bind_to_new_parent(world2);
     ASSERT_EQ(scene->get_parent(), world2);
-    ASSERT_EQ(world1->get_number_of_children(), 0);
-    ASSERT_EQ(world1->get_number_of_descendants(), 0);
-    ASSERT_EQ(world2->get_number_of_children(), 1);
-    ASSERT_EQ(world2->get_number_of_descendants(), 2);
-    ASSERT_EQ(universe->get_number_of_children(), 2);
-    ASSERT_EQ(universe->get_number_of_descendants(), 4);
+    ASSERT_EQ(world1->get_number_of_all_children(), 0);
+    ASSERT_EQ(world1->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(world2->get_number_of_all_children(), 1);
+    ASSERT_EQ(world2->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(universe->get_number_of_all_children(), 2);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 4);
 
     scene->bind_to_new_parent(world1);
     ASSERT_EQ(scene->get_parent(), world1);
-    ASSERT_EQ(world1->get_number_of_children(), 1);
-    ASSERT_EQ(world1->get_number_of_descendants(), 2);
-    ASSERT_EQ(world2->get_number_of_children(), 0);
-    ASSERT_EQ(world2->get_number_of_descendants(), 0);
-    ASSERT_EQ(universe->get_number_of_children(), 2);
-    ASSERT_EQ(universe->get_number_of_descendants(), 4);
+    ASSERT_EQ(world1->get_number_of_all_children(), 1);
+    ASSERT_EQ(world1->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(world2->get_number_of_all_children(), 0);
+    ASSERT_EQ(world2->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(universe->get_number_of_all_children(), 2);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 4);
 }
 
 TEST(active_scene_must_remain_active_scene_after_binding_to_a_new_parent, scene)
@@ -2069,33 +2069,33 @@ TEST(shader_must_bind_to_scene_appropriately, scenes_of_the_same_world)
     shader_struct.parent = scene1;
     yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
     ASSERT_EQ(shader->get_parent(), scene1);
-    ASSERT_EQ(scene1->get_number_of_children(), 2);
+    ASSERT_EQ(scene1->get_number_of_all_children(), 2);
 
     yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct, &world->parent_of_scenes);
     ASSERT_EQ(shader->get_parent(), scene1);
-    ASSERT_EQ(scene2->get_number_of_children(), 1);
+    ASSERT_EQ(scene2->get_number_of_all_children(), 1);
 
     shader->bind_to_new_parent(scene2);
     ASSERT_EQ(shader->get_parent(), scene2);
-    ASSERT_EQ(scene1->get_number_of_children(), 1);
-    ASSERT_EQ(scene1->get_number_of_descendants(), 1);
-    ASSERT_EQ(scene2->get_number_of_children(), 2);
-    ASSERT_EQ(scene2->get_number_of_descendants(), 2);
-    ASSERT_EQ(world->get_number_of_children(), 2);
-    ASSERT_EQ(world->get_number_of_descendants(), 5);
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 6);
+    ASSERT_EQ(scene1->get_number_of_all_children(), 1);
+    ASSERT_EQ(scene1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(scene2->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene2->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(world->get_number_of_all_children(), 2);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 5);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 6);
 
     shader->bind_to_new_parent(scene1);
     ASSERT_EQ(shader->get_parent(), scene1);
-    ASSERT_EQ(scene1->get_number_of_children(), 2);
-    ASSERT_EQ(scene1->get_number_of_descendants(), 2);
-    ASSERT_EQ(scene2->get_number_of_children(), 1);
-    ASSERT_EQ(scene2->get_number_of_descendants(), 1);
-    ASSERT_EQ(world->get_number_of_children(), 2);
-    ASSERT_EQ(world->get_number_of_descendants(), 5);
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 6);
+    ASSERT_EQ(scene1->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene1->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(scene2->get_number_of_all_children(), 1);
+    ASSERT_EQ(scene2->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(world->get_number_of_all_children(), 2);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 5);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 6);
 }
 
 TEST(shader_must_bind_to_scene_appropriately, scenes_of_the_different_worlds)
@@ -2115,8 +2115,8 @@ TEST(shader_must_bind_to_scene_appropriately, scenes_of_the_different_worlds)
     shader_struct.parent = scene1;
     yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
     ASSERT_EQ(shader->get_parent(), scene1);
-    ASSERT_EQ(scene1->get_number_of_children(), 2);
-    ASSERT_EQ(scene1->get_number_of_descendants(), 2);
+    ASSERT_EQ(scene1->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene1->get_number_of_all_descendants(), 2);
 
     yli::ontology::WorldStruct world_struct2;
     yli::ontology::World* const world2 = new yli::ontology::World(universe, world_struct2, &universe->parent_of_worlds);
@@ -2125,36 +2125,36 @@ TEST(shader_must_bind_to_scene_appropriately, scenes_of_the_different_worlds)
     scene_struct2.world = world2;
     yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct2, &world2->parent_of_scenes);
     ASSERT_EQ(shader->get_parent(), scene1);
-    ASSERT_EQ(world2->get_number_of_children(), 1);
-    ASSERT_EQ(world2->get_number_of_descendants(), 2);
-    ASSERT_EQ(scene2->get_number_of_children(), 1);
-    ASSERT_EQ(scene2->get_number_of_descendants(), 1);
+    ASSERT_EQ(world2->get_number_of_all_children(), 1);
+    ASSERT_EQ(world2->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(scene2->get_number_of_all_children(), 1);
+    ASSERT_EQ(scene2->get_number_of_all_descendants(), 1);
 
     shader->bind_to_new_parent(scene2);
     ASSERT_EQ(shader->get_parent(), scene2);
-    ASSERT_EQ(scene1->get_number_of_children(), 1);
-    ASSERT_EQ(scene1->get_number_of_descendants(), 1);
-    ASSERT_EQ(scene2->get_number_of_children(), 2);
-    ASSERT_EQ(scene2->get_number_of_descendants(), 2);
-    ASSERT_EQ(world1->get_number_of_children(), 1);
-    ASSERT_EQ(world1->get_number_of_descendants(), 2);
-    ASSERT_EQ(world2->get_number_of_children(), 1);
-    ASSERT_EQ(world2->get_number_of_descendants(), 3);
-    ASSERT_EQ(universe->get_number_of_children(), 2);
-    ASSERT_EQ(universe->get_number_of_descendants(), 7);
+    ASSERT_EQ(scene1->get_number_of_all_children(), 1);
+    ASSERT_EQ(scene1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(scene2->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene2->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(world1->get_number_of_all_children(), 1);
+    ASSERT_EQ(world1->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(world2->get_number_of_all_children(), 1);
+    ASSERT_EQ(world2->get_number_of_all_descendants(), 3);
+    ASSERT_EQ(universe->get_number_of_all_children(), 2);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 7);
 
     shader->bind_to_new_parent(scene1);
     ASSERT_EQ(shader->get_parent(), scene1);
-    ASSERT_EQ(scene1->get_number_of_children(), 2);
-    ASSERT_EQ(scene1->get_number_of_descendants(), 2);
-    ASSERT_EQ(scene2->get_number_of_children(), 1);
-    ASSERT_EQ(scene2->get_number_of_descendants(), 1);
-    ASSERT_EQ(world1->get_number_of_children(), 1);
-    ASSERT_EQ(world1->get_number_of_descendants(), 3);
-    ASSERT_EQ(world2->get_number_of_children(), 1);
-    ASSERT_EQ(world2->get_number_of_descendants(), 2);
-    ASSERT_EQ(universe->get_number_of_children(), 2);
-    ASSERT_EQ(universe->get_number_of_descendants(), 7);
+    ASSERT_EQ(scene1->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene1->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(scene2->get_number_of_all_children(), 1);
+    ASSERT_EQ(scene2->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(world1->get_number_of_all_children(), 1);
+    ASSERT_EQ(world1->get_number_of_all_descendants(), 3);
+    ASSERT_EQ(world2->get_number_of_all_children(), 1);
+    ASSERT_EQ(world2->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(universe->get_number_of_all_children(), 2);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 7);
 }
 
 TEST(material_must_bind_to_shader_appropriately, shaders_of_the_same_scene)
@@ -2173,47 +2173,47 @@ TEST(material_must_bind_to_shader_appropriately, shaders_of_the_same_scene)
     yli::ontology::ShaderStruct shader_struct1;
     shader_struct1.parent = scene;
     yli::ontology::Shader* const shader1 = new yli::ontology::Shader(universe, shader_struct1);
-    ASSERT_EQ(shader1->get_number_of_children(), 0);
-    ASSERT_EQ(shader1->get_number_of_descendants(), 0);
+    ASSERT_EQ(shader1->get_number_of_all_children(), 0);
+    ASSERT_EQ(shader1->get_number_of_all_descendants(), 0);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.shader = shader1;
     yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &shader1->parent_of_materials);
     ASSERT_EQ(material->get_parent(), shader1);
-    ASSERT_EQ(shader1->get_number_of_children(), 1);
-    ASSERT_EQ(shader1->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_descendants(), 1);
 
     yli::ontology::ShaderStruct shader_struct2;
     shader_struct2.parent = scene;
     yli::ontology::Shader* const shader2 = new yli::ontology::Shader(universe, shader_struct2);
-    ASSERT_EQ(shader2->get_number_of_children(), 0);
-    ASSERT_EQ(shader2->get_number_of_descendants(), 0);
+    ASSERT_EQ(shader2->get_number_of_all_children(), 0);
+    ASSERT_EQ(shader2->get_number_of_all_descendants(), 0);
 
     material->bind_to_new_parent(shader2);
     ASSERT_EQ(material->get_parent(), shader2);
-    ASSERT_EQ(shader1->get_number_of_children(), 0);
-    ASSERT_EQ(shader1->get_number_of_descendants(), 0);
-    ASSERT_EQ(shader2->get_number_of_children(), 1);
-    ASSERT_EQ(shader2->get_number_of_descendants(), 1);
-    ASSERT_EQ(scene->get_number_of_children(), 3);
-    ASSERT_EQ(scene->get_number_of_descendants(), 4);
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 5);
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 6);
+    ASSERT_EQ(shader1->get_number_of_all_children(), 0);
+    ASSERT_EQ(shader1->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(shader2->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader2->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(scene->get_number_of_all_children(), 3);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 4);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 5);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 6);
 
     material->bind_to_new_parent(shader1);
     ASSERT_EQ(material->get_parent(), shader1);
-    ASSERT_EQ(shader1->get_number_of_children(), 1);
-    ASSERT_EQ(shader1->get_number_of_descendants(), 1);
-    ASSERT_EQ(shader2->get_number_of_children(), 0);
-    ASSERT_EQ(shader2->get_number_of_descendants(), 0);
-    ASSERT_EQ(scene->get_number_of_children(), 3);
-    ASSERT_EQ(scene->get_number_of_descendants(), 4);
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 5);
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 6);
+    ASSERT_EQ(shader1->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(shader2->get_number_of_all_children(), 0);
+    ASSERT_EQ(shader2->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(scene->get_number_of_all_children(), 3);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 4);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 5);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 6);
 }
 
 TEST(material_must_bind_to_shader_appropriately, shaders_of_different_scenes)
@@ -2232,15 +2232,15 @@ TEST(material_must_bind_to_shader_appropriately, shaders_of_different_scenes)
     yli::ontology::ShaderStruct shader_struct1;
     shader_struct1.parent = scene1;
     yli::ontology::Shader* const shader1 = new yli::ontology::Shader(universe, shader_struct1);
-    ASSERT_EQ(shader1->get_number_of_children(), 0);
-    ASSERT_EQ(shader1->get_number_of_descendants(), 0);
+    ASSERT_EQ(shader1->get_number_of_all_children(), 0);
+    ASSERT_EQ(shader1->get_number_of_all_descendants(), 0);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.shader = shader1;
     yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &shader1->parent_of_materials);
     ASSERT_EQ(material->get_parent(), shader1);
-    ASSERT_EQ(shader1->get_number_of_children(), 1);
-    ASSERT_EQ(shader1->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_descendants(), 1);
 
     yli::ontology::SceneStruct scene_struct2;
     scene_struct2.world = world;
@@ -2249,38 +2249,38 @@ TEST(material_must_bind_to_shader_appropriately, shaders_of_different_scenes)
     yli::ontology::ShaderStruct shader_struct2;
     shader_struct2.parent = scene2;
     yli::ontology::Shader* const shader2 = new yli::ontology::Shader(universe, shader_struct2);
-    ASSERT_EQ(shader2->get_number_of_children(), 0);
-    ASSERT_EQ(shader2->get_number_of_descendants(), 0);
+    ASSERT_EQ(shader2->get_number_of_all_children(), 0);
+    ASSERT_EQ(shader2->get_number_of_all_descendants(), 0);
 
     material->bind_to_new_parent(shader2);
     ASSERT_EQ(material->get_parent(), shader2);
-    ASSERT_EQ(shader1->get_number_of_children(), 0);
-    ASSERT_EQ(shader1->get_number_of_descendants(), 0);
-    ASSERT_EQ(shader2->get_number_of_children(), 1);
-    ASSERT_EQ(shader2->get_number_of_descendants(), 1);
-    ASSERT_EQ(scene1->get_number_of_children(), 2);
-    ASSERT_EQ(scene1->get_number_of_descendants(), 2);
-    ASSERT_EQ(scene2->get_number_of_children(), 2);
-    ASSERT_EQ(scene2->get_number_of_descendants(), 3);
-    ASSERT_EQ(world->get_number_of_children(), 2);
-    ASSERT_EQ(world->get_number_of_descendants(), 7);
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 8);
+    ASSERT_EQ(shader1->get_number_of_all_children(), 0);
+    ASSERT_EQ(shader1->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(shader2->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader2->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(scene1->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene1->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(scene2->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene2->get_number_of_all_descendants(), 3);
+    ASSERT_EQ(world->get_number_of_all_children(), 2);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 7);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 8);
 
     material->bind_to_new_parent(shader1);
     ASSERT_EQ(material->get_parent(), shader1);
-    ASSERT_EQ(shader1->get_number_of_children(), 1);
-    ASSERT_EQ(shader1->get_number_of_descendants(), 1);
-    ASSERT_EQ(shader2->get_number_of_children(), 0);
-    ASSERT_EQ(shader2->get_number_of_descendants(), 0);
-    ASSERT_EQ(scene1->get_number_of_children(), 2);
-    ASSERT_EQ(scene1->get_number_of_descendants(), 3);
-    ASSERT_EQ(scene2->get_number_of_children(), 2);
-    ASSERT_EQ(scene2->get_number_of_descendants(), 2);
-    ASSERT_EQ(world->get_number_of_children(), 2);
-    ASSERT_EQ(world->get_number_of_descendants(), 7);
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 8);
+    ASSERT_EQ(shader1->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(shader2->get_number_of_all_children(), 0);
+    ASSERT_EQ(shader2->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(scene1->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene1->get_number_of_all_descendants(), 3);
+    ASSERT_EQ(scene2->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene2->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(world->get_number_of_all_children(), 2);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 7);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 8);
 }
 
 TEST(species_must_bind_to_material_appropriately, materials_of_the_same_shader)
@@ -2310,44 +2310,44 @@ TEST(species_must_bind_to_material_appropriately, materials_of_the_same_shader)
     species_struct.material = material1;
     yli::ontology::Species* const species = new yli::ontology::Species(universe, species_struct, &material1->parent_of_species);
     ASSERT_EQ(species->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_children(), 1);
-    ASSERT_EQ(material1->get_number_of_descendants(), 1);
+    ASSERT_EQ(material1->get_number_of_all_children(), 1);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 1);
 
     yli::ontology::MaterialStruct material_struct2;
     material_struct2.shader = shader;
     yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &shader->parent_of_materials);
-    ASSERT_EQ(material2->get_number_of_children(), 0);
-    ASSERT_EQ(material2->get_number_of_descendants(), 0);
+    ASSERT_EQ(material2->get_number_of_all_children(), 0);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 0);
 
     species->bind_to_new_parent(material2);
     ASSERT_EQ(species->get_parent(), material2);
-    ASSERT_EQ(material1->get_number_of_children(), 0);
-    ASSERT_EQ(material1->get_number_of_descendants(), 0);
-    ASSERT_EQ(material2->get_number_of_children(), 1);
-    ASSERT_EQ(material2->get_number_of_descendants(), 1);
-    ASSERT_EQ(shader->get_number_of_children(), 2);
-    ASSERT_EQ(shader->get_number_of_descendants(), 3);
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 5);
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 6);
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 7);
+    ASSERT_EQ(material1->get_number_of_all_children(), 0);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(material2->get_number_of_all_children(), 1);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(shader->get_number_of_all_children(), 2);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 3);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 5);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 6);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 7);
 
     species->bind_to_new_parent(material1);
     ASSERT_EQ(species->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_children(), 1);
-    ASSERT_EQ(material1->get_number_of_descendants(), 1);
-    ASSERT_EQ(material2->get_number_of_children(), 0);
-    ASSERT_EQ(material2->get_number_of_descendants(), 0);
-    ASSERT_EQ(shader->get_number_of_children(), 2);
-    ASSERT_EQ(shader->get_number_of_descendants(), 3);
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 5);
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 6);
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 7);
+    ASSERT_EQ(material1->get_number_of_all_children(), 1);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(material2->get_number_of_all_children(), 0);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(shader->get_number_of_all_children(), 2);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 3);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 5);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 6);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 7);
 }
 
 TEST(species_must_bind_to_material_appropriately, materials_of_different_shaders)
@@ -2377,8 +2377,8 @@ TEST(species_must_bind_to_material_appropriately, materials_of_different_shaders
     species_struct.material = material1;
     yli::ontology::Species* const species = new yli::ontology::Species(universe, species_struct, &material1->parent_of_species);
     ASSERT_EQ(species->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_children(), 1);
-    ASSERT_EQ(material1->get_number_of_descendants(), 1);
+    ASSERT_EQ(material1->get_number_of_all_children(), 1);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 1);
 
     yli::ontology::ShaderStruct shader_struct2;
     shader_struct2.parent = scene;
@@ -2387,42 +2387,42 @@ TEST(species_must_bind_to_material_appropriately, materials_of_different_shaders
     yli::ontology::MaterialStruct material_struct2;
     material_struct2.shader = shader2;
     yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &shader2->parent_of_materials);
-    ASSERT_EQ(material2->get_number_of_children(), 0);
-    ASSERT_EQ(material2->get_number_of_descendants(), 0);
+    ASSERT_EQ(material2->get_number_of_all_children(), 0);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 0);
 
     species->bind_to_new_parent(material2);
     ASSERT_EQ(species->get_parent(), material2);
-    ASSERT_EQ(material1->get_number_of_children(), 0);
-    ASSERT_EQ(material1->get_number_of_descendants(), 0);
-    ASSERT_EQ(material2->get_number_of_children(), 1);
-    ASSERT_EQ(material2->get_number_of_descendants(), 1);
-    ASSERT_EQ(shader1->get_number_of_children(), 1);
-    ASSERT_EQ(shader1->get_number_of_descendants(), 1);
-    ASSERT_EQ(shader2->get_number_of_children(), 1);
-    ASSERT_EQ(shader2->get_number_of_descendants(), 2);
-    ASSERT_EQ(scene->get_number_of_children(), 3);
-    ASSERT_EQ(scene->get_number_of_descendants(), 6);
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 7);
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 8);
+    ASSERT_EQ(material1->get_number_of_all_children(), 0);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(material2->get_number_of_all_children(), 1);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(shader2->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader2->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(scene->get_number_of_all_children(), 3);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 6);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 7);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 8);
 
     species->bind_to_new_parent(material1);
     ASSERT_EQ(species->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_children(), 1);
-    ASSERT_EQ(material1->get_number_of_descendants(), 1);
-    ASSERT_EQ(material2->get_number_of_children(), 0);
-    ASSERT_EQ(material2->get_number_of_descendants(), 0);
-    ASSERT_EQ(shader1->get_number_of_children(), 1);
-    ASSERT_EQ(shader1->get_number_of_descendants(), 2);
-    ASSERT_EQ(shader2->get_number_of_children(), 1);
-    ASSERT_EQ(shader2->get_number_of_descendants(), 1);
-    ASSERT_EQ(scene->get_number_of_children(), 3);
-    ASSERT_EQ(scene->get_number_of_descendants(), 6);
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 7);
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 8);
+    ASSERT_EQ(material1->get_number_of_all_children(), 1);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(material2->get_number_of_all_children(), 0);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(shader1->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(shader2->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader2->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(scene->get_number_of_all_children(), 3);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 6);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 7);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 8);
 }
 
 TEST(object_must_bind_to_species_appropriately, species_of_the_same_material)
@@ -2456,8 +2456,8 @@ TEST(object_must_bind_to_species_appropriately, species_of_the_same_material)
     object_struct.species_parent = species1;
     yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species1->parent_of_objects);
     ASSERT_EQ(object->get_parent(), species1);
-    ASSERT_EQ(species1->get_number_of_children(), 1);
-    ASSERT_EQ(species1->get_number_of_descendants(), 1);
+    ASSERT_EQ(species1->get_number_of_all_children(), 1);
+    ASSERT_EQ(species1->get_number_of_all_descendants(), 1);
 
     yli::ontology::SpeciesStruct species_struct2;
     species_struct2.scene = scene;
@@ -2467,37 +2467,37 @@ TEST(object_must_bind_to_species_appropriately, species_of_the_same_material)
 
     object->bind_to_new_parent(species2);
     ASSERT_EQ(object->get_parent(), species2);
-    ASSERT_EQ(species1->get_number_of_children(), 0);
-    ASSERT_EQ(species1->get_number_of_descendants(), 0);
-    ASSERT_EQ(species2->get_number_of_children(), 1);
-    ASSERT_EQ(species2->get_number_of_descendants(), 1);
-    ASSERT_EQ(material->get_number_of_children(), 2);
-    ASSERT_EQ(material->get_number_of_descendants(), 3);
-    ASSERT_EQ(shader->get_number_of_children(), 1);
-    ASSERT_EQ(shader->get_number_of_descendants(), 4);
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 6);
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 7);
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 8);
+    ASSERT_EQ(species1->get_number_of_all_children(), 0);
+    ASSERT_EQ(species1->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(species2->get_number_of_all_children(), 1);
+    ASSERT_EQ(species2->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(material->get_number_of_all_children(), 2);
+    ASSERT_EQ(material->get_number_of_all_descendants(), 3);
+    ASSERT_EQ(shader->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 4);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 6);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 7);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 8);
 
     object->bind_to_new_parent(species1);
     ASSERT_EQ(object->get_parent(), species1);
-    ASSERT_EQ(species1->get_number_of_children(), 1);
-    ASSERT_EQ(species1->get_number_of_descendants(), 1);
-    ASSERT_EQ(species2->get_number_of_children(), 0);
-    ASSERT_EQ(species2->get_number_of_descendants(), 0);
-    ASSERT_EQ(material->get_number_of_children(), 2);
-    ASSERT_EQ(material->get_number_of_descendants(), 3);
-    ASSERT_EQ(shader->get_number_of_children(), 1);
-    ASSERT_EQ(shader->get_number_of_descendants(), 4);
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 6);
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 7);
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 8);
+    ASSERT_EQ(species1->get_number_of_all_children(), 1);
+    ASSERT_EQ(species1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(species2->get_number_of_all_children(), 0);
+    ASSERT_EQ(species2->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(material->get_number_of_all_children(), 2);
+    ASSERT_EQ(material->get_number_of_all_descendants(), 3);
+    ASSERT_EQ(shader->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 4);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 6);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 7);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 8);
 }
 
 TEST(object_must_bind_to_species_appropriately, species_of_different_materials)
@@ -2531,8 +2531,8 @@ TEST(object_must_bind_to_species_appropriately, species_of_different_materials)
     object_struct.species_parent = species1;
     yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species1->parent_of_objects);
     ASSERT_EQ(object->get_parent(), species1);
-    ASSERT_EQ(species1->get_number_of_children(), 1);
-    ASSERT_EQ(species1->get_number_of_descendants(), 1);
+    ASSERT_EQ(species1->get_number_of_all_children(), 1);
+    ASSERT_EQ(species1->get_number_of_all_descendants(), 1);
 
     yli::ontology::MaterialStruct material_struct2;
     material_struct2.shader = shader;
@@ -2546,41 +2546,41 @@ TEST(object_must_bind_to_species_appropriately, species_of_different_materials)
 
     object->bind_to_new_parent(species2);
     ASSERT_EQ(object->get_parent(), species2);
-    ASSERT_EQ(species1->get_number_of_children(), 0);
-    ASSERT_EQ(species1->get_number_of_descendants(), 0);
-    ASSERT_EQ(species2->get_number_of_children(), 1);
-    ASSERT_EQ(species2->get_number_of_descendants(), 1);
-    ASSERT_EQ(material1->get_number_of_children(), 1);
-    ASSERT_EQ(material1->get_number_of_descendants(), 1);
-    ASSERT_EQ(material2->get_number_of_children(), 1);
-    ASSERT_EQ(material2->get_number_of_descendants(), 2);
-    ASSERT_EQ(shader->get_number_of_children(), 2);
-    ASSERT_EQ(shader->get_number_of_descendants(), 5);
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 7);
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 8);
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 9);
+    ASSERT_EQ(species1->get_number_of_all_children(), 0);
+    ASSERT_EQ(species1->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(species2->get_number_of_all_children(), 1);
+    ASSERT_EQ(species2->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(material1->get_number_of_all_children(), 1);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(material2->get_number_of_all_children(), 1);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(shader->get_number_of_all_children(), 2);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 5);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 7);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 8);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 9);
 
     object->bind_to_new_parent(species1);
     ASSERT_EQ(object->get_parent(), species1);
-    ASSERT_EQ(species1->get_number_of_children(), 1);
-    ASSERT_EQ(species1->get_number_of_descendants(), 1);
-    ASSERT_EQ(species2->get_number_of_children(), 0);
-    ASSERT_EQ(species2->get_number_of_descendants(), 0);
-    ASSERT_EQ(material1->get_number_of_children(), 1);
-    ASSERT_EQ(material1->get_number_of_descendants(), 2);
-    ASSERT_EQ(material2->get_number_of_children(), 1);
-    ASSERT_EQ(material2->get_number_of_descendants(), 1);
-    ASSERT_EQ(shader->get_number_of_children(), 2);
-    ASSERT_EQ(shader->get_number_of_descendants(), 5);
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 7);
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 8);
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 9);
+    ASSERT_EQ(species1->get_number_of_all_children(), 1);
+    ASSERT_EQ(species1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(species2->get_number_of_all_children(), 0);
+    ASSERT_EQ(species2->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(material1->get_number_of_all_children(), 1);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(material2->get_number_of_all_children(), 1);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(shader->get_number_of_all_children(), 2);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 5);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 7);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 8);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 9);
 }
 
 TEST(shapeshifter_transformation_must_bind_to_material_appropriately, materials_of_the_same_shader)
@@ -2610,44 +2610,44 @@ TEST(shapeshifter_transformation_must_bind_to_material_appropriately, materials_
     shapeshifter_transformation_struct.material = material1;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(universe, shapeshifter_transformation_struct);
     ASSERT_EQ(shapeshifter_transformation->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_children(), 1);
-    ASSERT_EQ(material1->get_number_of_descendants(), 1);
+    ASSERT_EQ(material1->get_number_of_all_children(), 1);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 1);
 
     yli::ontology::MaterialStruct material_struct2;
     material_struct2.shader = shader;
     yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &shader->parent_of_materials);
-    ASSERT_EQ(material2->get_number_of_children(), 0);
-    ASSERT_EQ(material2->get_number_of_descendants(), 0);
+    ASSERT_EQ(material2->get_number_of_all_children(), 0);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 0);
 
     shapeshifter_transformation->bind_to_new_parent(material2);
     ASSERT_EQ(shapeshifter_transformation->get_parent(), material2);
-    ASSERT_EQ(material1->get_number_of_children(), 0);
-    ASSERT_EQ(material1->get_number_of_descendants(), 0);
-    ASSERT_EQ(material2->get_number_of_children(), 1);
-    ASSERT_EQ(material2->get_number_of_descendants(), 1);
-    ASSERT_EQ(shader->get_number_of_children(), 2);
-    ASSERT_EQ(shader->get_number_of_descendants(), 3);
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 5);
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 6);
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 7);
+    ASSERT_EQ(material1->get_number_of_all_children(), 0);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(material2->get_number_of_all_children(), 1);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(shader->get_number_of_all_children(), 2);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 3);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 5);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 6);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 7);
 
     shapeshifter_transformation->bind_to_new_parent(material1);
     ASSERT_EQ(shapeshifter_transformation->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_children(), 1);
-    ASSERT_EQ(material1->get_number_of_descendants(), 1);
-    ASSERT_EQ(material2->get_number_of_children(), 0);
-    ASSERT_EQ(material2->get_number_of_descendants(), 0);
-    ASSERT_EQ(shader->get_number_of_children(), 2);
-    ASSERT_EQ(shader->get_number_of_descendants(), 3);
-    ASSERT_EQ(scene->get_number_of_children(), 2);
-    ASSERT_EQ(scene->get_number_of_descendants(), 5);
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 6);
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 7);
+    ASSERT_EQ(material1->get_number_of_all_children(), 1);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(material2->get_number_of_all_children(), 0);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(shader->get_number_of_all_children(), 2);
+    ASSERT_EQ(shader->get_number_of_all_descendants(), 3);
+    ASSERT_EQ(scene->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 5);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 6);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 7);
 }
 
 TEST(shapeshifter_transformation_must_bind_to_material_appropriately, materials_of_different_shaders)
@@ -2677,8 +2677,8 @@ TEST(shapeshifter_transformation_must_bind_to_material_appropriately, materials_
     shapeshifter_transformation_struct.material = material1;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(universe, shapeshifter_transformation_struct);
     ASSERT_EQ(shapeshifter_transformation->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_children(), 1);
-    ASSERT_EQ(material1->get_number_of_descendants(), 1);
+    ASSERT_EQ(material1->get_number_of_all_children(), 1);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 1);
 
     yli::ontology::ShaderStruct shader_struct2;
     shader_struct2.parent = scene;
@@ -2687,42 +2687,42 @@ TEST(shapeshifter_transformation_must_bind_to_material_appropriately, materials_
     yli::ontology::MaterialStruct material_struct2;
     material_struct2.shader = shader2;
     yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &shader2->parent_of_materials);
-    ASSERT_EQ(material2->get_number_of_children(), 0);
-    ASSERT_EQ(material2->get_number_of_descendants(), 0);
+    ASSERT_EQ(material2->get_number_of_all_children(), 0);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 0);
 
     shapeshifter_transformation->bind_to_new_parent(material2);
     ASSERT_EQ(shapeshifter_transformation->get_parent(), material2);
-    ASSERT_EQ(material1->get_number_of_children(), 0);
-    ASSERT_EQ(material1->get_number_of_descendants(), 0);
-    ASSERT_EQ(material2->get_number_of_children(), 1);
-    ASSERT_EQ(material2->get_number_of_descendants(), 1);
-    ASSERT_EQ(shader1->get_number_of_children(), 1);
-    ASSERT_EQ(shader1->get_number_of_descendants(), 1);
-    ASSERT_EQ(shader2->get_number_of_children(), 1);
-    ASSERT_EQ(shader2->get_number_of_descendants(), 2);
-    ASSERT_EQ(scene->get_number_of_children(), 3);
-    ASSERT_EQ(scene->get_number_of_descendants(), 6);
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 7);
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 8);
+    ASSERT_EQ(material1->get_number_of_all_children(), 0);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(material2->get_number_of_all_children(), 1);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(shader2->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader2->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(scene->get_number_of_all_children(), 3);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 6);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 7);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 8);
 
     shapeshifter_transformation->bind_to_new_parent(material1);
     ASSERT_EQ(shapeshifter_transformation->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_children(), 1);
-    ASSERT_EQ(material1->get_number_of_descendants(), 1);
-    ASSERT_EQ(material2->get_number_of_children(), 0);
-    ASSERT_EQ(material2->get_number_of_descendants(), 0);
-    ASSERT_EQ(shader1->get_number_of_children(), 1);
-    ASSERT_EQ(shader1->get_number_of_descendants(), 2);
-    ASSERT_EQ(shader2->get_number_of_children(), 1);
-    ASSERT_EQ(shader2->get_number_of_descendants(), 1);
-    ASSERT_EQ(scene->get_number_of_children(), 3);
-    ASSERT_EQ(scene->get_number_of_descendants(), 6);
-    ASSERT_EQ(world->get_number_of_children(), 1);
-    ASSERT_EQ(world->get_number_of_descendants(), 7);
-    ASSERT_EQ(universe->get_number_of_children(), 1);
-    ASSERT_EQ(universe->get_number_of_descendants(), 8);
+    ASSERT_EQ(material1->get_number_of_all_children(), 1);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(material2->get_number_of_all_children(), 0);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(shader1->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(shader2->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader2->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(scene->get_number_of_all_children(), 3);
+    ASSERT_EQ(scene->get_number_of_all_descendants(), 6);
+    ASSERT_EQ(world->get_number_of_all_children(), 1);
+    ASSERT_EQ(world->get_number_of_all_descendants(), 7);
+    ASSERT_EQ(universe->get_number_of_all_children(), 1);
+    ASSERT_EQ(universe->get_number_of_all_descendants(), 8);
 }
 
 TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
@@ -3264,19 +3264,19 @@ TEST(scene_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_
     ASSERT_FALSE(world1->is_entity("foo"));
     ASSERT_TRUE(world2->is_entity("foo"));
     ASSERT_EQ(scene->get_parent(), world2);
-    ASSERT_EQ(world1->get_number_of_children(), 0);
-    ASSERT_EQ(world1->get_number_of_descendants(), 0);
-    ASSERT_EQ(world2->get_number_of_children(), 1);
-    ASSERT_EQ(world2->get_number_of_descendants(), 2);
+    ASSERT_EQ(world1->get_number_of_all_children(), 0);
+    ASSERT_EQ(world1->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(world2->get_number_of_all_children(), 1);
+    ASSERT_EQ(world2->get_number_of_all_descendants(), 2);
 
     scene->bind_to_new_parent(world1);
     ASSERT_TRUE(world1->is_entity("foo"));
     ASSERT_FALSE(world2->is_entity("foo"));
     ASSERT_EQ(scene->get_parent(), world1);
-    ASSERT_EQ(world1->get_number_of_children(), 1);
-    ASSERT_EQ(world1->get_number_of_descendants(), 2);
-    ASSERT_EQ(world2->get_number_of_children(), 0);
-    ASSERT_EQ(world2->get_number_of_descendants(), 0);
+    ASSERT_EQ(world1->get_number_of_all_children(), 1);
+    ASSERT_EQ(world1->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(world2->get_number_of_all_children(), 0);
+    ASSERT_EQ(world2->get_number_of_all_descendants(), 0);
 }
 
 TEST(scene_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_scene_with_global_name_and_local_name)
@@ -3303,10 +3303,10 @@ TEST(scene_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_
     ASSERT_FALSE(world1->is_entity("bar"));
     ASSERT_TRUE(world2->is_entity("bar"));
     ASSERT_EQ(scene->get_parent(), world2);
-    ASSERT_EQ(world1->get_number_of_children(), 0);
-    ASSERT_EQ(world1->get_number_of_descendants(), 0);
-    ASSERT_EQ(world2->get_number_of_children(), 1);
-    ASSERT_EQ(world2->get_number_of_descendants(), 2);
+    ASSERT_EQ(world1->get_number_of_all_children(), 0);
+    ASSERT_EQ(world1->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(world2->get_number_of_all_children(), 1);
+    ASSERT_EQ(world2->get_number_of_all_descendants(), 2);
 
     scene->bind_to_new_parent(world1);
     ASSERT_FALSE(world1->is_entity("foo"));
@@ -3314,10 +3314,10 @@ TEST(scene_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_
     ASSERT_TRUE(world1->is_entity("bar"));
     ASSERT_FALSE(world2->is_entity("bar"));
     ASSERT_EQ(scene->get_parent(), world1);
-    ASSERT_EQ(world1->get_number_of_children(), 1);
-    ASSERT_EQ(world1->get_number_of_descendants(), 2);
-    ASSERT_EQ(world2->get_number_of_children(), 0);
-    ASSERT_EQ(world2->get_number_of_descendants(), 0);
+    ASSERT_EQ(world1->get_number_of_all_children(), 1);
+    ASSERT_EQ(world1->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(world2->get_number_of_all_children(), 0);
+    ASSERT_EQ(world2->get_number_of_all_descendants(), 0);
 }
 
 TEST(scene_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_scenes_with_only_local_name)
@@ -3345,10 +3345,10 @@ TEST(scene_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, head
     scene1->bind_to_new_parent(world2);
     ASSERT_EQ(scene1->get_parent(), world1);
     ASSERT_EQ(scene2->get_parent(), world2);
-    ASSERT_EQ(world1->get_number_of_children(), 1);
-    ASSERT_EQ(world1->get_number_of_descendants(), 2);
-    ASSERT_EQ(world2->get_number_of_children(), 1);
-    ASSERT_EQ(world2->get_number_of_descendants(), 2);
+    ASSERT_EQ(world1->get_number_of_all_children(), 1);
+    ASSERT_EQ(world1->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(world2->get_number_of_all_children(), 1);
+    ASSERT_EQ(world2->get_number_of_all_descendants(), 2);
     ASSERT_TRUE(world1->is_entity("foo"));
     ASSERT_TRUE(world2->is_entity("foo"));
 }
@@ -3380,10 +3380,10 @@ TEST(scene_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, head
     scene1->bind_to_new_parent(world2);
     ASSERT_EQ(scene1->get_parent(), world1);
     ASSERT_EQ(scene2->get_parent(), world2);
-    ASSERT_EQ(world1->get_number_of_children(), 1);
-    ASSERT_EQ(world1->get_number_of_descendants(), 2);
-    ASSERT_EQ(world2->get_number_of_children(), 1);
-    ASSERT_EQ(world2->get_number_of_descendants(), 2);
+    ASSERT_EQ(world1->get_number_of_all_children(), 1);
+    ASSERT_EQ(world1->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(world2->get_number_of_all_children(), 1);
+    ASSERT_EQ(world2->get_number_of_all_descendants(), 2);
     ASSERT_FALSE(world1->is_entity("foo"));
     ASSERT_FALSE(world2->is_entity("foo"));
     ASSERT_FALSE(world1->is_entity("bar"));
@@ -3418,19 +3418,19 @@ TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     ASSERT_FALSE(scene1->is_entity("foo"));
     ASSERT_TRUE(scene2->is_entity("foo"));
     ASSERT_EQ(shader->get_parent(), scene2);
-    ASSERT_EQ(scene1->get_number_of_children(), 1);
-    ASSERT_EQ(scene1->get_number_of_descendants(), 1);
-    ASSERT_EQ(scene2->get_number_of_children(), 2);
-    ASSERT_EQ(scene2->get_number_of_descendants(), 2);
+    ASSERT_EQ(scene1->get_number_of_all_children(), 1);
+    ASSERT_EQ(scene1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(scene2->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene2->get_number_of_all_descendants(), 2);
 
     shader->bind_to_new_parent(scene1);
     ASSERT_TRUE(scene1->is_entity("foo"));
     ASSERT_FALSE(scene2->is_entity("foo"));
     ASSERT_EQ(shader->get_parent(), scene1);
-    ASSERT_EQ(scene1->get_number_of_children(), 2);
-    ASSERT_EQ(scene1->get_number_of_descendants(), 2);
-    ASSERT_EQ(scene2->get_number_of_children(), 1);
-    ASSERT_EQ(scene2->get_number_of_descendants(), 1);
+    ASSERT_EQ(scene1->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene1->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(scene2->get_number_of_all_children(), 1);
+    ASSERT_EQ(scene2->get_number_of_all_descendants(), 1);
 }
 
 TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_shader_with_global_name_and_local_name)
@@ -3462,10 +3462,10 @@ TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     ASSERT_FALSE(scene1->is_entity("bar"));
     ASSERT_TRUE(scene2->is_entity("bar"));
     ASSERT_EQ(shader->get_parent(), scene2);
-    ASSERT_EQ(scene1->get_number_of_children(), 1);
-    ASSERT_EQ(scene1->get_number_of_descendants(), 1);
-    ASSERT_EQ(scene2->get_number_of_children(), 2);
-    ASSERT_EQ(scene2->get_number_of_descendants(), 2);
+    ASSERT_EQ(scene1->get_number_of_all_children(), 1);
+    ASSERT_EQ(scene1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(scene2->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene2->get_number_of_all_descendants(), 2);
 
     shader->bind_to_new_parent(scene1);
     ASSERT_FALSE(scene1->is_entity("foo"));
@@ -3473,10 +3473,10 @@ TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     ASSERT_TRUE(scene1->is_entity("bar"));
     ASSERT_FALSE(scene2->is_entity("bar"));
     ASSERT_EQ(shader->get_parent(), scene1);
-    ASSERT_EQ(scene1->get_number_of_children(), 2);
-    ASSERT_EQ(scene1->get_number_of_descendants(), 2);
-    ASSERT_EQ(scene2->get_number_of_children(), 1);
-    ASSERT_EQ(scene2->get_number_of_descendants(), 1);
+    ASSERT_EQ(scene1->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene1->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(scene2->get_number_of_all_children(), 1);
+    ASSERT_EQ(scene2->get_number_of_all_descendants(), 1);
 }
 
 TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_shaders_with_only_local_name)
@@ -3508,10 +3508,10 @@ TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     shader2->set_local_name("foo");
     shader1->bind_to_new_parent(scene2);
     ASSERT_EQ(shader1->get_parent(), scene1);
-    ASSERT_EQ(scene1->get_number_of_children(), 2);
-    ASSERT_EQ(scene1->get_number_of_descendants(), 2);
-    ASSERT_EQ(scene2->get_number_of_children(), 2);
-    ASSERT_EQ(scene2->get_number_of_descendants(), 2);
+    ASSERT_EQ(scene1->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene1->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(scene2->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene2->get_number_of_all_descendants(), 2);
     ASSERT_TRUE(scene1->is_entity("foo"));
     ASSERT_TRUE(scene2->is_entity("foo"));
 }
@@ -3547,10 +3547,10 @@ TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     shader2->set_local_name("baz");
     shader1->bind_to_new_parent(scene2);
     ASSERT_EQ(shader1->get_parent(), scene1);
-    ASSERT_EQ(scene1->get_number_of_children(), 2);
-    ASSERT_EQ(scene1->get_number_of_descendants(), 2);
-    ASSERT_EQ(scene2->get_number_of_children(), 2);
-    ASSERT_EQ(scene2->get_number_of_descendants(), 2);
+    ASSERT_EQ(scene1->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene1->get_number_of_all_descendants(), 2);
+    ASSERT_EQ(scene2->get_number_of_all_children(), 2);
+    ASSERT_EQ(scene2->get_number_of_all_descendants(), 2);
     ASSERT_FALSE(scene1->is_entity("foo"));
     ASSERT_FALSE(scene2->is_entity("foo"));
     ASSERT_FALSE(scene1->is_entity("bar"));
@@ -3589,19 +3589,19 @@ TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
     ASSERT_FALSE(shader1->is_entity("foo"));
     ASSERT_TRUE(shader2->is_entity("foo"));
     ASSERT_EQ(material->get_parent(), shader2);
-    ASSERT_EQ(shader1->get_number_of_children(), 0);
-    ASSERT_EQ(shader1->get_number_of_descendants(), 0);
-    ASSERT_EQ(shader2->get_number_of_children(), 1);
-    ASSERT_EQ(shader2->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_children(), 0);
+    ASSERT_EQ(shader1->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(shader2->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader2->get_number_of_all_descendants(), 1);
 
     material->bind_to_new_parent(shader1);
     ASSERT_TRUE(shader1->is_entity("foo"));
     ASSERT_FALSE(shader2->is_entity("foo"));
     ASSERT_EQ(material->get_parent(), shader1);
-    ASSERT_EQ(shader1->get_number_of_children(), 1);
-    ASSERT_EQ(shader1->get_number_of_descendants(), 1);
-    ASSERT_EQ(shader2->get_number_of_children(), 0);
-    ASSERT_EQ(shader2->get_number_of_descendants(), 0);
+    ASSERT_EQ(shader1->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(shader2->get_number_of_all_children(), 0);
+    ASSERT_EQ(shader2->get_number_of_all_descendants(), 0);
 }
 
 TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_material_with_global_name_and_local_name)
@@ -3637,10 +3637,10 @@ TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
     ASSERT_FALSE(shader1->is_entity("bar"));
     ASSERT_TRUE(shader2->is_entity("bar"));
     ASSERT_EQ(material->get_parent(), shader2);
-    ASSERT_EQ(shader1->get_number_of_children(), 0);
-    ASSERT_EQ(shader1->get_number_of_descendants(), 0);
-    ASSERT_EQ(shader2->get_number_of_children(), 1);
-    ASSERT_EQ(shader2->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_children(), 0);
+    ASSERT_EQ(shader1->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(shader2->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader2->get_number_of_all_descendants(), 1);
 
     material->bind_to_new_parent(shader1);
     ASSERT_FALSE(shader1->is_entity("foo"));
@@ -3648,10 +3648,10 @@ TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
     ASSERT_TRUE(shader1->is_entity("bar"));
     ASSERT_FALSE(shader2->is_entity("bar"));
     ASSERT_EQ(material->get_parent(), shader1);
-    ASSERT_EQ(shader1->get_number_of_children(), 1);
-    ASSERT_EQ(shader1->get_number_of_descendants(), 1);
-    ASSERT_EQ(shader2->get_number_of_children(), 0);
-    ASSERT_EQ(shader2->get_number_of_descendants(), 0);
+    ASSERT_EQ(shader1->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(shader2->get_number_of_all_children(), 0);
+    ASSERT_EQ(shader2->get_number_of_all_descendants(), 0);
 }
 
 TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_materials_with_only_local_name)
@@ -3687,10 +3687,10 @@ TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
     material2->set_local_name("foo");
     material1->bind_to_new_parent(shader2);
     ASSERT_EQ(material1->get_parent(), shader1);
-    ASSERT_EQ(shader1->get_number_of_children(), 1);
-    ASSERT_EQ(shader1->get_number_of_descendants(), 1);
-    ASSERT_EQ(shader2->get_number_of_children(), 1);
-    ASSERT_EQ(shader2->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(shader2->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader2->get_number_of_all_descendants(), 1);
     ASSERT_TRUE(shader1->is_entity("foo"));
     ASSERT_TRUE(shader2->is_entity("foo"));
 }
@@ -3730,10 +3730,10 @@ TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
     material2->set_local_name("baz");
     material1->bind_to_new_parent(shader2);
     ASSERT_EQ(material1->get_parent(), shader1);
-    ASSERT_EQ(shader1->get_number_of_children(), 1);
-    ASSERT_EQ(shader1->get_number_of_descendants(), 1);
-    ASSERT_EQ(shader2->get_number_of_children(), 1);
-    ASSERT_EQ(shader2->get_number_of_descendants(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(shader2->get_number_of_all_children(), 1);
+    ASSERT_EQ(shader2->get_number_of_all_descendants(), 1);
     ASSERT_FALSE(shader1->is_entity("foo"));
     ASSERT_FALSE(shader2->is_entity("foo"));
     ASSERT_FALSE(shader1->is_entity("bar"));
@@ -3778,19 +3778,19 @@ TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headles
     ASSERT_FALSE(material1->is_entity("foo"));
     ASSERT_TRUE(material2->is_entity("foo"));
     ASSERT_EQ(species->get_parent(), material2);
-    ASSERT_EQ(material1->get_number_of_children(), 0);
-    ASSERT_EQ(material1->get_number_of_descendants(), 0);
-    ASSERT_EQ(material2->get_number_of_children(), 1);
-    ASSERT_EQ(material2->get_number_of_descendants(), 1);
+    ASSERT_EQ(material1->get_number_of_all_children(), 0);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(material2->get_number_of_all_children(), 1);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 1);
 
     species->bind_to_new_parent(material1);
     ASSERT_TRUE(material1->is_entity("foo"));
     ASSERT_FALSE(material2->is_entity("foo"));
     ASSERT_EQ(species->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_children(), 1);
-    ASSERT_EQ(material1->get_number_of_descendants(), 1);
-    ASSERT_EQ(material2->get_number_of_children(), 0);
-    ASSERT_EQ(material2->get_number_of_descendants(), 0);
+    ASSERT_EQ(material1->get_number_of_all_children(), 1);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(material2->get_number_of_all_children(), 0);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 0);
 }
 
 TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_species_with_global_name_and_local_name)
@@ -3832,10 +3832,10 @@ TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headles
     ASSERT_FALSE(material1->is_entity("bar"));
     ASSERT_TRUE(material2->is_entity("bar"));
     ASSERT_EQ(species->get_parent(), material2);
-    ASSERT_EQ(material1->get_number_of_children(), 0);
-    ASSERT_EQ(material1->get_number_of_descendants(), 0);
-    ASSERT_EQ(material2->get_number_of_children(), 1);
-    ASSERT_EQ(material2->get_number_of_descendants(), 1);
+    ASSERT_EQ(material1->get_number_of_all_children(), 0);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(material2->get_number_of_all_children(), 1);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 1);
 
     species->bind_to_new_parent(material1);
     ASSERT_FALSE(material1->is_entity("foo"));
@@ -3843,10 +3843,10 @@ TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headles
     ASSERT_TRUE(material1->is_entity("bar"));
     ASSERT_FALSE(material2->is_entity("bar"));
     ASSERT_EQ(species->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_children(), 1);
-    ASSERT_EQ(material1->get_number_of_descendants(), 1);
-    ASSERT_EQ(material2->get_number_of_children(), 0);
-    ASSERT_EQ(material2->get_number_of_descendants(), 0);
+    ASSERT_EQ(material1->get_number_of_all_children(), 1);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(material2->get_number_of_all_children(), 0);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 0);
 }
 
 TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_species_with_only_local_name)
@@ -3890,10 +3890,10 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
     species2->set_local_name("foo");
     species1->bind_to_new_parent(material2);
     ASSERT_EQ(species1->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_children(), 1);
-    ASSERT_EQ(material1->get_number_of_descendants(), 1);
-    ASSERT_EQ(material2->get_number_of_children(), 1);
-    ASSERT_EQ(material2->get_number_of_descendants(), 1);
+    ASSERT_EQ(material1->get_number_of_all_children(), 1);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(material2->get_number_of_all_children(), 1);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 1);
     ASSERT_TRUE(material1->is_entity("foo"));
     ASSERT_TRUE(material2->is_entity("foo"));
 }
@@ -3941,10 +3941,10 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
     species2->set_local_name("baz");
     species1->bind_to_new_parent(material2);
     ASSERT_EQ(species1->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_children(), 1);
-    ASSERT_EQ(material1->get_number_of_descendants(), 1);
-    ASSERT_EQ(material2->get_number_of_children(), 1);
-    ASSERT_EQ(material2->get_number_of_descendants(), 1);
+    ASSERT_EQ(material1->get_number_of_all_children(), 1);
+    ASSERT_EQ(material1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(material2->get_number_of_all_children(), 1);
+    ASSERT_EQ(material2->get_number_of_all_descendants(), 1);
     ASSERT_FALSE(material1->is_entity("foo"));
     ASSERT_FALSE(material2->is_entity("foo"));
     ASSERT_FALSE(material1->is_entity("bar"));
@@ -3995,19 +3995,19 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     ASSERT_FALSE(species1->is_entity("foo"));
     ASSERT_TRUE(species2->is_entity("foo"));
     ASSERT_EQ(object->get_parent(), species2);
-    ASSERT_EQ(species1->get_number_of_children(), 0);
-    ASSERT_EQ(species1->get_number_of_descendants(), 0);
-    ASSERT_EQ(species2->get_number_of_children(), 1);
-    ASSERT_EQ(species2->get_number_of_descendants(), 1);
+    ASSERT_EQ(species1->get_number_of_all_children(), 0);
+    ASSERT_EQ(species1->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(species2->get_number_of_all_children(), 1);
+    ASSERT_EQ(species2->get_number_of_all_descendants(), 1);
 
     object->bind_to_new_parent(species1);
     ASSERT_TRUE(species1->is_entity("foo"));
     ASSERT_FALSE(species2->is_entity("foo"));
     ASSERT_EQ(object->get_parent(), species1);
-    ASSERT_EQ(species1->get_number_of_children(), 1);
-    ASSERT_EQ(species1->get_number_of_descendants(), 1);
-    ASSERT_EQ(species2->get_number_of_children(), 0);
-    ASSERT_EQ(species2->get_number_of_descendants(), 0);
+    ASSERT_EQ(species1->get_number_of_all_children(), 1);
+    ASSERT_EQ(species1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(species2->get_number_of_all_children(), 0);
+    ASSERT_EQ(species2->get_number_of_all_descendants(), 0);
 }
 
 TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_object_with_global_name_and_local_name)
@@ -4055,10 +4055,10 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     ASSERT_FALSE(species1->is_entity("bar"));
     ASSERT_TRUE(species2->is_entity("bar"));
     ASSERT_EQ(object->get_parent(), species2);
-    ASSERT_EQ(species1->get_number_of_children(), 0);
-    ASSERT_EQ(species1->get_number_of_descendants(), 0);
-    ASSERT_EQ(species2->get_number_of_children(), 1);
-    ASSERT_EQ(species2->get_number_of_descendants(), 1);
+    ASSERT_EQ(species1->get_number_of_all_children(), 0);
+    ASSERT_EQ(species1->get_number_of_all_descendants(), 0);
+    ASSERT_EQ(species2->get_number_of_all_children(), 1);
+    ASSERT_EQ(species2->get_number_of_all_descendants(), 1);
 
     object->bind_to_new_parent(species1);
     ASSERT_FALSE(species1->is_entity("foo"));
@@ -4066,10 +4066,10 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     ASSERT_TRUE(species1->is_entity("bar"));
     ASSERT_FALSE(species2->is_entity("bar"));
     ASSERT_EQ(object->get_parent(), species1);
-    ASSERT_EQ(species1->get_number_of_children(), 1);
-    ASSERT_EQ(species1->get_number_of_descendants(), 1);
-    ASSERT_EQ(species2->get_number_of_children(), 0);
-    ASSERT_EQ(species2->get_number_of_descendants(), 0);
+    ASSERT_EQ(species1->get_number_of_all_children(), 1);
+    ASSERT_EQ(species1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(species2->get_number_of_all_children(), 0);
+    ASSERT_EQ(species2->get_number_of_all_descendants(), 0);
 }
 
 TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_objects_with_only_local_name)
@@ -4117,10 +4117,10 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     object2->set_local_name("foo");
     object1->bind_to_new_parent(species2);
     ASSERT_EQ(object1->get_parent(), species1);
-    ASSERT_EQ(species1->get_number_of_children(), 1);
-    ASSERT_EQ(species1->get_number_of_descendants(), 1);
-    ASSERT_EQ(species2->get_number_of_children(), 1);
-    ASSERT_EQ(species2->get_number_of_descendants(), 1);
+    ASSERT_EQ(species1->get_number_of_all_children(), 1);
+    ASSERT_EQ(species1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(species2->get_number_of_all_children(), 1);
+    ASSERT_EQ(species2->get_number_of_all_descendants(), 1);
     ASSERT_TRUE(species1->is_entity("foo"));
     ASSERT_TRUE(species2->is_entity("foo"));
 }
@@ -4172,10 +4172,10 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     object2->set_local_name("baz");
     object1->bind_to_new_parent(species2);
     ASSERT_EQ(object1->get_parent(), species1);
-    ASSERT_EQ(species1->get_number_of_children(), 1);
-    ASSERT_EQ(species1->get_number_of_descendants(), 1);
-    ASSERT_EQ(species2->get_number_of_children(), 1);
-    ASSERT_EQ(species2->get_number_of_descendants(), 1);
+    ASSERT_EQ(species1->get_number_of_all_children(), 1);
+    ASSERT_EQ(species1->get_number_of_all_descendants(), 1);
+    ASSERT_EQ(species2->get_number_of_all_children(), 1);
+    ASSERT_EQ(species2->get_number_of_all_descendants(), 1);
     ASSERT_FALSE(species1->is_entity("foo"));
     ASSERT_FALSE(species2->is_entity("foo"));
     ASSERT_FALSE(species1->is_entity("bar"));

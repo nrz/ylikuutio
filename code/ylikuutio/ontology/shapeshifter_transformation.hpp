@@ -64,14 +64,15 @@ namespace yli::ontology
             virtual ~ShapeshifterTransformation();
 
             yli::ontology::Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
 
             yli::ontology::ParentModule parent_of_shapeshifter_forms;
             yli::ontology::ParentModule parent_of_shapeshifter_sequences;
 
         private:
             void bind_to_parent();
+
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
 
             void render() override;
 

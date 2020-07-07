@@ -95,15 +95,15 @@ namespace yli::ontology
             // destructor.
             virtual ~Text3D();
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
-
             friend class Object;
             friend void create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* text3D);
 
             yli::ontology::ParentModule parent_of_objects;
 
         private:
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
+
             std::string text_string;
 
             glm::vec3 original_scale_vector;   // original scale vector.

@@ -121,12 +121,12 @@ namespace yli::ontology
             const glm::mat4& get_view_matrix() const;
             bool get_is_static_view() const;
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
-
             friend class Universe;
 
         private:
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
+
             // variables related to the projection.
             glm::mat4 projection_matrix;
             glm::mat4 view_matrix;

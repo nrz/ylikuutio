@@ -130,8 +130,6 @@ namespace yli::ontology
             virtual ~Scene();
 
             yli::ontology::Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
 
             // this method processes the physics.
             void do_physics();
@@ -176,6 +174,9 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_brains;
 
         private:
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
+
             // `yli::ontology::ShaderPriorityQueue` is a priority queue for `Shader`s.
             // `yli::ontology::ShaderPriorityQueue` also has
             // a function `remove(const std::size_t childID)`.

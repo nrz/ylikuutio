@@ -92,8 +92,6 @@ namespace yli::ontology
             virtual ~Symbiosis();
 
             yli::ontology::Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
 
             std::size_t get_number_of_symbiont_materials() const;
             std::size_t get_number_of_symbiont_species() const;
@@ -129,6 +127,9 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_holobionts;
 
         private:
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
+
             void create_symbionts();
 
             std::string model_file_format;  // type of the model file, eg. `"fbx"`.

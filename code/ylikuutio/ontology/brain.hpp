@@ -84,8 +84,6 @@ namespace yli::ontology
             ~Brain();
 
             yli::ontology::Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
 
             std::size_t get_number_of_apprentices() const;
 
@@ -94,6 +92,9 @@ namespace yli::ontology
             yli::ontology::ChildModule child_of_scene;
 
         private:
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
+
             std::shared_ptr<yli::callback::CallbackEngine> callback_engine;
 
             // Currently only `Movable`s can be intentional Entities.
