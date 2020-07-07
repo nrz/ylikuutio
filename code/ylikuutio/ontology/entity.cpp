@@ -61,7 +61,8 @@ namespace yli::ontology
     }
 
     Entity::Entity(yli::ontology::Universe* const universe, const yli::ontology::EntityStruct& entity_struct)
-        : parent_of_any_struct_entities(this)
+        : parent_of_settings(this),
+        parent_of_any_struct_entities(this)
     {
         // constructor.
         this->universe = universe;
@@ -284,13 +285,15 @@ namespace yli::ontology
 
     std::size_t Entity::get_number_of_all_children() const
     {
-        return this->parent_of_any_struct_entities.get_number_of_children() +
+        return this->parent_of_settings.get_number_of_children() +
+            this->parent_of_any_struct_entities.get_number_of_children() +
             this->get_number_of_children();
     }
 
     std::size_t Entity::get_number_of_all_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_any_struct_entities.child_pointer_vector) +
+        return yli::ontology::get_number_of_descendants(this->parent_of_settings.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_any_struct_entities.child_pointer_vector) +
             this->get_number_of_descendants();
     }
 

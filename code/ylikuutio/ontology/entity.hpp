@@ -98,6 +98,7 @@ namespace yli::ontology
 
             std::size_t childID; // TODO: add checks for `std::numeric_limits<std::size_t>::max();` (invalid value).
 
+            yli::ontology::ParentModule parent_of_settings;
             yli::ontology::ParentModule parent_of_any_struct_entities;
 
         protected:
