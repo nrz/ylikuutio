@@ -37,6 +37,8 @@
 // parent's namespace. The name controls how the `AnyValueEntity` child is used when
 // creating a particular `struct` from this `AnyStructEntity`.
 // TODO: implement the described functionality!
+//
+// Note: do not confuse `AnyStruct`, `AnyStructEntity`, and `AnyStructEntityStruct`.
 
 namespace yli::ontology
 {
