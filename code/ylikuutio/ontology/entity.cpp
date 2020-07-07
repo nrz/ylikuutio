@@ -61,22 +61,21 @@ namespace yli::ontology
     }
 
     Entity::Entity(yli::ontology::Universe* const universe, const yli::ontology::EntityStruct& entity_struct)
-        : parent_of_settings(this),
-        parent_of_any_struct_entities(this)
+        : should_be_rendered { false },
+        childID { std::numeric_limits<std::size_t>::max() }, // `std::numeric_limits<std::size_t>::max()` means that `childID` is not defined.
+        parent_of_settings(this),
+        parent_of_any_struct_entities(this),
+        universe { universe },
+        setting_master { std::make_shared<yli::config::SettingMaster>(this) },
+        entityID { std::numeric_limits<std::size_t>::max() }, // `std::numeric_limits<std::size_t>::max()` means that `entityID` is not defined.
+        can_be_erased { false },
+        prerender_callback { nullptr },
+        postrender_callback { nullptr }
     {
         // constructor.
-        this->universe = universe;
 
         // Get `entityID` from `Universe` and set pointer to this `Entity`.
         this->bind_to_universe();
-
-        this->childID = std::numeric_limits<std::size_t>::max(); // `std::numeric_limits<std::size_t>::max()` means that `childID` is not defined.
-
-        this->prerender_callback = nullptr;
-        this->postrender_callback = nullptr;
-        this->setting_master = std::make_shared<yli::config::SettingMaster>(this);
-        this->can_be_erased = false;
-        this->should_be_rendered = false;
 
         if (this->universe != this)
         {
