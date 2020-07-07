@@ -36,7 +36,7 @@
 
 namespace yli::data
 {
-    class SphericalCoordinatesStruct;
+    struct SphericalCoordinatesStruct;
 }
 
 namespace yli::config
