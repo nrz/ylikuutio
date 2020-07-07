@@ -48,7 +48,7 @@ endif()
 # Compile external dependencies
 add_subdirectory (external)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -Werror=return-type")
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     # Clang and GCC accept `-Wextra`, but Visual Studio does not seem to accept it.
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wextra")
