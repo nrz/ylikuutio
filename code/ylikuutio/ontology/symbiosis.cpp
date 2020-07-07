@@ -136,7 +136,7 @@ namespace yli::ontology
 
         for (auto symbiont_material : this->parent_of_symbiont_materials.child_pointer_vector)
         {
-            number_of_symbiont_species += symbiont_material->get_number_of_children();
+            number_of_symbiont_species += symbiont_material->get_number_of_all_children();
         }
 
         return number_of_symbiont_species;

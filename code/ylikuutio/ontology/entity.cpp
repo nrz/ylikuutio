@@ -18,6 +18,7 @@
 #include "entity.hpp"
 #include "universe.hpp"
 #include "parent_module.hpp"
+#include "family_templates.hpp"
 #include "entity_struct.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting.hpp"
@@ -279,6 +280,18 @@ namespace yli::ontology
     std::string Entity::get_global_name() const
     {
         return this->global_name;
+    }
+
+    std::size_t Entity::get_number_of_all_children() const
+    {
+        return this->parent_of_any_struct_entities.get_number_of_children() +
+            this->get_number_of_children();
+    }
+
+    std::size_t Entity::get_number_of_all_descendants() const
+    {
+        return yli::ontology::get_number_of_descendants(this->parent_of_any_struct_entities.child_pointer_vector) +
+            this->get_number_of_descendants();
     }
 
     std::string Entity::get_local_name() const

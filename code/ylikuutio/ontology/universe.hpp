@@ -311,7 +311,6 @@ namespace yli::ontology
                 parent_of_font2Ds(this),
                 parent_of_consoles(this),
                 parent_of_any_value_entities(this),
-                parent_of_any_struct_entities(this),
                 parent_of_callback_engine_entities(this)
             {
                 // call `bind_entity` here since it couldn't be performed from `Entity` constructor.
@@ -755,7 +754,6 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_font2Ds;
             yli::ontology::ParentModule parent_of_consoles;
             yli::ontology::ParentModule parent_of_any_value_entities;
-            yli::ontology::ParentModule parent_of_any_struct_entities;
             yli::ontology::ParentModule parent_of_callback_engine_entities;
 
         private:

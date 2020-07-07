@@ -302,7 +302,6 @@ namespace yli::ontology
             this->parent_of_font2Ds.get_number_of_children() +
             this->parent_of_consoles.get_number_of_children() +
             this->parent_of_any_value_entities.get_number_of_children() +
-            this->parent_of_any_struct_entities.get_number_of_children() +
             this->parent_of_callback_engine_entities.get_number_of_children();
     }
 
@@ -312,7 +311,6 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_font2Ds.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_any_value_entities.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_any_struct_entities.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_callback_engine_entities.child_pointer_vector);
     }
 

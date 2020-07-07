@@ -114,7 +114,7 @@ namespace yli::ontology
 
                 if (child_pointer != nullptr)
                 {
-                    number_of_descendants += child_pointer->get_number_of_descendants() + 1; // +1 for the child itself.
+                    number_of_descendants += child_pointer->get_number_of_all_descendants() + 1; // +1 for the child itself.
                 }
             }
 

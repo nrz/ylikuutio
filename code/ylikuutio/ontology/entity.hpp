@@ -67,8 +67,8 @@ namespace yli::ontology
             void set_setting_master(yli::config::SettingMaster* const setting_master);
 
             virtual yli::ontology::Entity* get_parent() const = 0;
-            virtual std::size_t get_number_of_children() const = 0;
-            virtual std::size_t get_number_of_descendants() const = 0;
+            std::size_t get_number_of_all_children() const;
+            std::size_t get_number_of_all_descendants() const;
 
             std::string get_global_name() const;
             std::string get_local_name() const;
@@ -98,6 +98,8 @@ namespace yli::ontology
 
             std::size_t childID; // TODO: add checks for `std::numeric_limits<std::size_t>::max();` (invalid value).
 
+            yli::ontology::ParentModule parent_of_any_struct_entities;
+
         protected:
             void prerender() const;
             void postrender() const;
@@ -116,13 +118,14 @@ namespace yli::ontology
             PreRenderCallback prerender_callback;
             PostRenderCallback postrender_callback;
 
-            yli::ontology::ParentModule parent_of_any_struct_entities;
-
             // Named entities are stored here so that they can be recalled, if needed.
             std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
 
         private:
             void bind_to_universe();
+
+            virtual std::size_t get_number_of_children() const = 0;
+            virtual std::size_t get_number_of_descendants() const = 0;
     };
 }
 

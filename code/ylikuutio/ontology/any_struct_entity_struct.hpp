@@ -15,34 +15,21 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "any_struct_entity.hpp"
-#include "universe.hpp"
+#ifndef __ANY_STRUCT_ENTITY_STRUCT_HPP_INCLUDED
+#define __ANY_STRUCT_ENTITY_STRUCT_HPP_INCLUDED
 
-// Include standard headers
-#include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
+#include "entity_struct.hpp"
 
 namespace yli::ontology
 {
-    AnyStructEntity::~AnyStructEntity()
+    struct AnyStructEntityStruct: public yli::ontology::EntityStruct
     {
-        // destructor.
-        std::cout << "This `AnyStructEntity` will be destroyed.\n";
-    }
-
-    yli::ontology::Entity* AnyStructEntity::get_parent() const
-    {
-        return this->child_of_entity.get_parent();
-    }
-
-    std::size_t AnyStructEntity::get_number_of_children() const
-    {
-        return 0; // `AnyStructEntity` has no children.
-    }
-
-    std::size_t AnyStructEntity::get_number_of_descendants() const
-    {
-        return 0; // `AnyStructEntity` has no children.
-    }
+        AnyStructEntityStruct()
+            : EntityStruct()
+        {
+            // constructor.
+        }
+    };
 }
 
+#endif

@@ -22,6 +22,7 @@
 #include "console.hpp"
 #include "any_value_entity.hpp"
 #include "any_struct_entity.hpp"
+#include "any_struct_entity_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -147,7 +148,11 @@ namespace yli::ontology
 
         // OK, variable name is not empty and it is not in use yet either.
 
-        yli::ontology::AnyStructEntity* const any_struct_entity = new yli::ontology::AnyStructEntity(universe);
+        yli::ontology::AnyStructEntityStruct any_struct_entity_struct;
+        yli::ontology::AnyStructEntity* const any_struct_entity = new yli::ontology::AnyStructEntity(
+                universe,
+                any_struct_entity_struct,
+                &universe->parent_of_any_struct_entities);
         any_struct_entity->set_global_name(*variable_name_shared_ptr);
         return nullptr;
     }
@@ -310,7 +315,7 @@ namespace yli::ontology
             console->print_text(parent_info);
         }
 
-        std::size_t number_of_children = entity->get_number_of_children();
+        std::size_t number_of_children = entity->get_number_of_all_children();
         std::stringstream number_of_children_stringstream;
         number_of_children_stringstream << number_of_children;
 
@@ -318,7 +323,7 @@ namespace yli::ontology
         children_info += number_of_children_stringstream.str();
         console->print_text(children_info);
 
-        std::size_t number_of_descendants = entity->get_number_of_descendants();
+        std::size_t number_of_descendants = entity->get_number_of_all_descendants();
         std::stringstream number_of_descendants_stringstream;
         number_of_descendants_stringstream << number_of_descendants;
 
