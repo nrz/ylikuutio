@@ -33,11 +33,15 @@
 #define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
-#include "universe.hpp"
 #include "entity.hpp"
+#include "setting.hpp"
+#include "universe.hpp"
 #include "scene.hpp"
 #include "camera.hpp"
 #include "console.hpp"
+#include "entity_setting_activation.hpp"
+#include "entity_setting_read.hpp"
+#include "setting_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -77,11 +81,6 @@ namespace yli::data
     class AnyValue;
 }
 
-namespace yli::config
-{
-    class Setting;
-}
-
 namespace yli::input
 {
     class InputMaster;
@@ -90,6 +89,7 @@ namespace yli::input
 namespace yli::ontology
 {
     class Font2D;
+    class Setting;
 
     const std::string Universe::version = "0.0.7";
 
@@ -609,5 +609,17 @@ namespace yli::ontology
                 this->current_camera_up);                                      // Head is up (set to 0,-1,0 to look upside-down).
 
         return true;
+    }
+
+    void Universe::create_should_be_rendered_setting()
+    {
+        // Create `Setting` `should_be_rendered` here because it can't be done in `Entity` constructor.
+        yli::ontology::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::data::AnyValue>(this->should_be_rendered));
+        should_be_rendered_setting_struct.local_name = "should_be_rendered";
+        should_be_rendered_setting_struct.activate_callback = &yli::ontology::activate_should_be_rendered;
+        should_be_rendered_setting_struct.read_callback = &yli::ontology::read_should_be_rendered;
+        should_be_rendered_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+        std::cout << "Executing `this->create_setting(should_be_rendered_setting_struct);` ...\n";
+        this->create_setting(should_be_rendered_setting_struct);
     }
 }

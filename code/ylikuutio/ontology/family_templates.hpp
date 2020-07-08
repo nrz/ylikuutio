@@ -22,6 +22,7 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
+#include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
 #include <queue>         // std::queue
 #include <string>        // std::string
@@ -60,6 +61,7 @@ namespace yli::ontology
 
             if (child == nullptr)
             {
+                std::cerr << "ERROR: `yli::ontology::bind_child_to_parent`: `child` is `nullptr`!\n";
                 return;
             }
 
@@ -90,6 +92,7 @@ namespace yli::ontology
 
             if (childID == std::numeric_limits<std::size_t>::max())
             {
+                std::cerr << "ERROR: `yli::ontology::unbind_child_from_parent`: `childID` is uninitialized!\n";
                 return;
             }
 

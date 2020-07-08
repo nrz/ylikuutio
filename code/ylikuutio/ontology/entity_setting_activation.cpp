@@ -15,23 +15,32 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "wireframe_snippets.hpp"
-#include "code/ylikuutio/ontology/setting.hpp"
-#include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/setting_struct.hpp"
+#include "entity_setting_activation.hpp"
+#include "entity.hpp"
+#include "setting.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
+#include <memory>  // std::make_shared, std::shared_ptr
+#include <variant> // std::holds_alternative, std::variant
 
-namespace yli::snippets
+namespace yli::ontology
 {
-    void set_wireframe(yli::ontology::Universe* universe, const bool use_wireframe)
+    std::shared_ptr<yli::data::AnyValue> activate_should_be_rendered(yli::ontology::Entity* const entity, yli::ontology::Setting* const setting)
     {
-        yli::ontology::SettingStruct wireframe_setting_struct(std::make_shared<yli::data::AnyValue>(use_wireframe));
-        wireframe_setting_struct.local_name = "wireframe";
-        wireframe_setting_struct.activate_callback = &yli::ontology::Setting::activate_wireframe;
-        wireframe_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        universe->create_setting(wireframe_setting_struct);
+        if (entity == nullptr || setting == nullptr)
+        {
+            return nullptr;
+        }
+
+        std::shared_ptr<yli::data::AnyValue> should_be_rendered_any_value = setting->setting_value;
+
+        if (should_be_rendered_any_value == nullptr || !std::holds_alternative<bool>(should_be_rendered_any_value->data))
+        {
+            return nullptr;
+        }
+
+        entity->should_be_rendered = std::get<bool>(should_be_rendered_any_value->data);
+        return nullptr;
     }
 }

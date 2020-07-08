@@ -15,19 +15,22 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __READ_CALLBACK_HPP_INCLUDED
-#define __READ_CALLBACK_HPP_INCLUDED
-
+#include "entity_setting_read.hpp"
+#include "entity.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
+#include <memory>  // std::make_shared, std::shared_ptr
 
 namespace yli::ontology
 {
-    class Entity;
+    std::shared_ptr<yli::data::AnyValue> read_should_be_rendered(yli::ontology::Entity* const entity)
+    {
+        if (entity == nullptr)
+        {
+            return nullptr;
+        }
+
+        return std::make_shared<yli::data::AnyValue>(entity->should_be_rendered);
+    }
 }
-
-typedef std::shared_ptr<yli::data::AnyValue> (*ReadCallback) (yli::ontology::Entity* entity);
-
-#endif

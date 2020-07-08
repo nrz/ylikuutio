@@ -17,6 +17,7 @@
 
 #include "entity_factory.hpp"
 #include "entity.hpp"
+#include "setting.hpp"
 #include "universe.hpp"
 #include "world.hpp"
 #include "scene.hpp"
@@ -39,6 +40,7 @@
 #include "any_value_entity.hpp"
 #include "any_struct_entity.hpp"
 #include "callback_engine_entity.hpp"
+#include "setting_struct.hpp"
 #include "world_struct.hpp"
 #include "scene_struct.hpp"
 #include "shader_struct.hpp"
@@ -81,6 +83,41 @@ namespace yli::ontology
     yli::ontology::Universe* EntityFactory::get_universe() const
     {
         return this->universe;
+    }
+
+    yli::ontology::Entity* EntityFactory::create_setting(const yli::ontology::SettingStruct& setting_struct) const
+    {
+        yli::ontology::Entity* setting_entity = new yli::ontology::Setting(this->universe, setting_struct);
+
+        if (this->universe == setting_struct.parent)
+        {
+            // OK, this is a `setting` of the `Universe`.
+
+            if (!setting_struct.global_name.empty() && setting_struct.local_name.empty())
+            {
+                // Only `global_name` given, OK.
+                setting_entity->set_global_name(setting_struct.global_name);
+            }
+            else if (setting_struct.global_name.empty() && !setting_struct.local_name.empty())
+            {
+                // Only `local_name` given, OK.
+                setting_entity->set_local_name(setting_struct.local_name);
+            }
+        }
+        else
+        {
+            // This is not a `setting` of the `Universe`.
+
+            setting_entity->set_global_name(setting_struct.global_name);
+            setting_entity->set_local_name(setting_struct.local_name);
+        }
+
+        if (setting_struct.should_ylikuutio_call_activate_callback_now)
+        {
+            setting_entity->activate();
+        }
+
+        return setting_entity;
     }
 
     yli::ontology::Entity* EntityFactory::create_world(const yli::ontology::WorldStruct& world_struct) const

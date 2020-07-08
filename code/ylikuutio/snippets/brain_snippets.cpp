@@ -21,7 +21,6 @@
 
 #include "brain_snippets.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"
 
 // Include standard headers

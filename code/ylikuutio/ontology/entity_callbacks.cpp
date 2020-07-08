@@ -16,7 +16,12 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "entity.hpp"
+#include "setting.hpp"
+#include "universe.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
+
+// Include standard headers
+#include <memory> // std::make_shared, std::shared_ptr
 
 namespace yli::data
 {
@@ -38,6 +43,39 @@ namespace yli::ontology
 
         // OK, let's print the children of this `Entity`.
         yli::map::print_keys_to_console(entity->entity_map, console);
+
+        return nullptr;
+    }
+
+    std::shared_ptr<yli::data::AnyValue> Entity::print_settings0(
+            yli::ontology::Universe* const universe,
+            yli::ontology::Console* const console)
+    {
+        if (universe == nullptr || console == nullptr)
+        {
+            return nullptr;
+        }
+
+        // Print global variable names.
+
+        yli::map::print_keys_of_specific_type_to_console<yli::ontology::Entity*, yli::ontology::Setting*>(universe->entity_map, console);
+
+        return nullptr;
+    }
+
+    std::shared_ptr<yli::data::AnyValue> Entity::print_settings1(
+            yli::ontology::Universe* const universe,
+            yli::ontology::Console* const console,
+            yli::ontology::Entity* const entity)
+    {
+        if (universe == nullptr || console == nullptr || entity == nullptr)
+        {
+            return nullptr;
+        }
+
+        // Print the variable names of the `Entity`.
+
+        yli::map::print_keys_of_specific_type_to_console<yli::ontology::Entity*, yli::ontology::Setting*>(entity->entity_map, console);
 
         return nullptr;
     }

@@ -15,9 +15,9 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "universe.hpp"
 #include "entity.hpp"
 #include "movable.hpp"
+#include "universe.hpp"
 #include "brain.hpp"
 #include "console.hpp"
 #include "any_value_entity.hpp"
@@ -170,6 +170,15 @@ namespace yli::ontology
 
         if (entity->get_can_be_erased())
         {
+            yli::ontology::Entity* const parent = entity->get_parent();
+
+            if (parent != nullptr)
+            {
+                // Erase the local name.
+                parent->entity_map.erase(entity->get_local_name());
+            }
+
+            // Erase the global name.
             universe->entity_map.erase(entity->get_global_name());
             delete entity;
         }

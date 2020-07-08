@@ -15,33 +15,22 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "world.hpp"
-#include "family_templates.hpp"
+#ifndef __READ_CALLBACK_HPP_INCLUDED
+#define __READ_CALLBACK_HPP_INCLUDED
 
 // Include standard headers
-#include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
+#include <memory> // std::make_shared, std::shared_ptr
+
+namespace yli::data
+{
+    class AnyValue;
+}
 
 namespace yli::ontology
 {
-    World::~World()
-    {
-        // destructor.
-        std::cout << "This `World` will be destroyed.\n";
-    }
-
-    yli::ontology::Entity* World::get_parent() const
-    {
-        return this->child_of_universe.get_parent();
-    }
-
-    std::size_t World::get_number_of_children() const
-    {
-        return this->parent_of_scenes.get_number_of_children();
-    }
-
-    std::size_t World::get_number_of_descendants() const
-    {
-        return yli::ontology::get_number_of_descendants(this->parent_of_scenes.child_pointer_vector);
-    }
+    class Entity;
 }
+
+typedef std::shared_ptr<yli::data::AnyValue> (*ReadCallback) (yli::ontology::Entity* entity);
+
+#endif

@@ -23,9 +23,6 @@
 #include "entity_factory.hpp"
 #include "universe_struct.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
-#include "code/ylikuutio/config/setting_master.hpp"
-#include "code/ylikuutio/config/setting.hpp"
-#include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
@@ -457,14 +454,7 @@ namespace yli::ontology
                 // Set the value of `should_be_rendered` here because it can't be done in `Entity` constructor.
                 this->should_be_rendered = !this->get_is_headless();
 
-                // Create `Setting` `should_be_rendered` here because it can't be done in `Entity` constructor.
-                yli::config::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::data::AnyValue>(this->should_be_rendered));
-                should_be_rendered_setting_struct.name = "should_be_rendered";
-                should_be_rendered_setting_struct.activate_callback = &yli::config::Setting::activate_should_be_rendered;
-                should_be_rendered_setting_struct.read_callback = &yli::config::Setting::read_should_be_rendered;
-                should_be_rendered_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                std::cout << "Executing `setting_master->create_setting(should_be_rendered_setting_struct);` ...\n";
-                this->setting_master->create_setting(should_be_rendered_setting_struct);
+                this->create_should_be_rendered_setting();
 
                 this->angelscript_master = std::make_shared<yli::angelscript::AngelscriptMaster>();
 
@@ -757,6 +747,8 @@ namespace yli::ontology
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
+
+            void create_should_be_rendered_setting();
 
             bool compute_and_update_matrices_from_inputs();
 

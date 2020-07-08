@@ -18,14 +18,14 @@
 #ifndef __WIREFRAME_SNIPPETS_HPP_INCLUDED
 #define __WIREFRAME_SNIPPETS_HPP_INCLUDED
 
-namespace yli::config
+namespace yli::ontology
 {
-    class SettingMaster;
+    class Universe;
 }
 
 namespace yli::snippets
 {
-    void set_wireframe(yli::config::SettingMaster* setting_master, const bool use_wireframe);
+    void set_wireframe(yli::ontology::Universe* universe, const bool use_wireframe);
 }
 
 #endif

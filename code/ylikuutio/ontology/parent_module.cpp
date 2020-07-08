@@ -22,6 +22,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <string>  // std::string
 
 namespace yli::ontology
@@ -45,18 +46,21 @@ namespace yli::ontology
     {
         if (this->entity == nullptr)
         {
+            std::cerr << "ERROR: `ParentModule::unbind_child`: `this->entity` is `nullptr`!\n";
             return;
         }
 
         if (childID >= this->child_pointer_vector.size())
         {
-           return;
+            std::cerr << "ERROR: `ParentModule::unbind_child`: the value of `childID` is too big!\n";
+            return;
         }
 
         yli::ontology::Entity* const child = this->child_pointer_vector.at(childID);
 
         if (child == nullptr)
         {
+            std::cerr << "ERROR: `ParentModule::unbind_child`: `child` is `nullptr`!\n";
             return;
         }
 

@@ -21,14 +21,14 @@
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 
-namespace yli::config
+namespace yli::ontology
 {
-    class SettingMaster;
+    class Entity;
 }
 
 namespace yli::snippets
 {
-    void set_window_size(yli::config::SettingMaster* setting_master, const uint32_t window_width, const uint32_t window_height);
+    void set_window_size(yli::ontology::Entity* entity, const uint32_t window_width, const uint32_t window_height);
 }
 
 #endif

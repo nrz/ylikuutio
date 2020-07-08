@@ -331,13 +331,11 @@ namespace yli::ontology
         // Requirements:
         // `this->preiterate_callback` must not be `nullptr`.
         // `this->universe` must not be `nullptr`.
-        // `this->universe->setting_master` must not be `nullptr`.
 
         if (this->preiterate_callback != nullptr &&
-                this->universe != nullptr &&
-                this->universe->get_setting_master() != nullptr)
+                this->universe != nullptr)
         {
-            this->preiterate_callback(this->universe, this->universe->get_setting_master());
+            this->preiterate_callback(this->universe);
         }
     }
 
@@ -346,13 +344,11 @@ namespace yli::ontology
         // Requirements:
         // `this->postiterate_callback` must not be `nullptr`.
         // `this->universe` must not be `nullptr`.
-        // `this->universe->setting_master` must not be `nullptr`.
 
         if (this->postiterate_callback != nullptr &&
-                this->universe != nullptr &&
-                this->universe->get_setting_master() != nullptr)
+                this->universe != nullptr)
         {
-            this->postiterate_callback(this->universe, this->universe->get_setting_master());
+            this->postiterate_callback(this->universe);
         }
     }
 }

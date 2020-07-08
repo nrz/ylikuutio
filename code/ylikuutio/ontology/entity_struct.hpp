@@ -27,20 +27,32 @@ namespace yli::ontology
     {
         EntityStruct()
             : global_name(""),
-            local_name("")
+            local_name(""),
+            is_setting(false)
         {
             // constructor.
         }
 
+        EntityStruct(const yli::ontology::EntityStruct& entity_struct)
+        {
+            // copy constructor.
+
+            this->global_name = entity_struct.global_name;
+            this->local_name = entity_struct.local_name;
+            this->is_setting = entity_struct.is_setting;
+        }
+
         EntityStruct(const std::string& global_name, const std::string& local_name)
             : global_name(global_name),
-            local_name(local_name)
+            local_name(local_name),
+            is_setting(false)
         {
             // constructor.
         }
 
         std::string global_name;
         std::string local_name;
+        bool is_setting;
     };
 }
 

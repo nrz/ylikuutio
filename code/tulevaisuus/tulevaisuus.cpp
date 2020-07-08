@@ -31,16 +31,6 @@
 #include "tulevaisuus_console_callbacks.hpp"
 #include "code/ajokki/ajokki_helsinki_east_downtown_scene.hpp"
 #include "code/ajokki/ajokki_joensuu_center_west_scene.hpp"
-#include "code/ylikuutio/snippets/window_snippets.hpp"
-#include "code/ylikuutio/snippets/framebuffer_snippets.hpp"
-#include "code/ylikuutio/snippets/background_color_snippets.hpp"
-#include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
-#include "code/ylikuutio/snippets/debug_snippets.hpp"
-#include "code/ylikuutio/snippets/console_snippets.hpp"
-#include "code/ylikuutio/snippets/movement_snippets.hpp"
-#include "code/ylikuutio/snippets/location_and_orientation_snippets.hpp"
-#include "code/ylikuutio/snippets/wireframe_snippets.hpp"
-#include "code/ylikuutio/snippets/console_callback_snippets.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
 #include "code/ylikuutio/callback/callback_parameter.hpp"
 #include "code/ylikuutio/callback/callback_object.hpp"
@@ -49,31 +39,46 @@
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/console/console_callback_engine.hpp"
 #include "code/ylikuutio/console/console_callback_object.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
-#include "code/ylikuutio/ontology/console.hpp"
+
+// `yli::ontology` files must be included in the canonical order
+// defined in `code/ylikuutio/data/datatypes.hpp` in order to
+// avoid cyclic dependencies.
+#include "code/ylikuutio/ontology/entity.hpp"
+#include "code/ylikuutio/ontology/setting.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/world.hpp"
+#include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/text2D.hpp"
-#include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/world.hpp"
-#include "code/ylikuutio/ontology/world_struct.hpp"
-#include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/console.hpp"
+#include "code/ylikuutio/ontology/setting_struct.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
-#include "code/ylikuutio/ontology/entity_factory.hpp"
-#include "code/ylikuutio/ontology/entity_factory_templates.hpp"
+#include "code/ylikuutio/ontology/world_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
-#include "code/ylikuutio/config/setting.hpp"
-#include "code/ylikuutio/config/setting_master.hpp"
-#include "code/ylikuutio/config/setting_struct.hpp"
+#include "code/ylikuutio/ontology/entity_factory.hpp"
+#include "code/ylikuutio/ontology/entity_factory_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
+#include "code/ylikuutio/snippets/window_snippets.hpp"
+#include "code/ylikuutio/snippets/framebuffer_snippets.hpp"
+#include "code/ylikuutio/snippets/background_color_snippets.hpp"
+#include "code/ylikuutio/snippets/console_callback_snippets.hpp"
+#include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
+#include "code/ylikuutio/snippets/debug_snippets.hpp"
+#include "code/ylikuutio/snippets/console_snippets.hpp"
+#include "code/ylikuutio/snippets/movement_snippets.hpp"
+#include "code/ylikuutio/snippets/location_and_orientation_snippets.hpp"
+#include "code/ylikuutio/snippets/wireframe_snippets.hpp"
+#include "code/ylikuutio/snippets/console_callback_snippets.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/time/time.hpp"
-#include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/pi.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -299,7 +304,7 @@ int main(const int argc, const char* const argv[]) try
     my_universe->set_active_console(my_console);
 
     std::cout << "Setting up console ...\n";
-    yli::snippets::set_console(my_universe->get_setting_master(), 15, 0, 0, 39);
+    yli::snippets::set_console(my_universe, 15, 0, 0, 39);
 
     // Create the `World`.
 
@@ -696,12 +701,12 @@ int main(const int argc, const char* const argv[]) try
     std::cout << "Defining console command callback engines.\n";
 
     // Config callbacks.
-    yli::ontology::create_lisp_function_overload("settings", my_console, std::function(&yli::config::SettingMaster::print_settings0));
-    yli::ontology::create_lisp_function_overload("settings", my_console, std::function(&yli::config::SettingMaster::print_settings1));
-    yli::ontology::create_lisp_function_overload("set", my_console, std::function(&yli::config::Setting::set2));
-    yli::ontology::create_lisp_function_overload("set", my_console, std::function(&yli::config::Setting::set3));
-    yli::ontology::create_lisp_function_overload("print", my_console, std::function(&yli::config::Setting::print_value1));
-    yli::ontology::create_lisp_function_overload("print", my_console, std::function(&yli::config::Setting::print_value2));
+    yli::ontology::create_lisp_function_overload("settings", my_console, std::function(&yli::ontology::Entity::print_settings0));
+    yli::ontology::create_lisp_function_overload("settings", my_console, std::function(&yli::ontology::Entity::print_settings1));
+    yli::ontology::create_lisp_function_overload("set", my_console, std::function(&yli::ontology::Setting::set2));
+    yli::ontology::create_lisp_function_overload("set", my_console, std::function(&yli::ontology::Setting::set3));
+    yli::ontology::create_lisp_function_overload("print", my_console, std::function(&yli::ontology::Setting::print_value1));
+    yli::ontology::create_lisp_function_overload("print", my_console, std::function(&yli::ontology::Setting::print_value2));
 
     // `Entity` handling callbacks.
     yli::ontology::create_lisp_function_overload("entities", my_console, std::function(&yli::ontology::Universe::print_entities));
@@ -810,19 +815,19 @@ int main(const int argc, const char* const argv[]) try
     yli::ontology::Text2D* frame_rate_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_text2d(frame_rate_text_struct));
 
     std::cout << "Setting up window size ...\n";
-    yli::snippets::set_window_size(my_universe->get_setting_master(), my_universe->get_window_width(), my_universe->get_window_height());
+    yli::snippets::set_window_size(my_universe, my_universe->get_window_width(), my_universe->get_window_height());
     std::cout << "Setting up framebuffer size ...\n";
-    yli::snippets::set_framebuffer_size(my_universe->get_setting_master(), my_universe->get_framebuffer_width(), my_universe->get_framebuffer_height());
+    yli::snippets::set_framebuffer_size(my_universe, my_universe->get_framebuffer_width(), my_universe->get_framebuffer_height());
     std::cout << "Setting up background colors ...\n";
-    yli::snippets::set_background_colors(my_universe->get_setting_master(), 0.0f, 0.0f, 1.0f, 0.0f);
+    yli::snippets::set_background_colors(my_universe, 0.0f, 0.0f, 1.0f, 0.0f);
     std::cout << "Setting up wireframe state ...\n";
-    yli::snippets::set_wireframe(my_universe->get_setting_master(), false);
+    yli::snippets::set_wireframe(my_universe, false);
     std::cout << "Setting up movement ...\n";
-    yli::snippets::set_movement(my_universe->get_setting_master(), my_universe->speed, my_universe->turbo_factor, my_universe->twin_turbo_factor, my_universe->mouse_speed);
+    yli::snippets::set_movement(my_universe, my_universe->speed, my_universe->turbo_factor, my_universe->twin_turbo_factor, my_universe->mouse_speed);
     std::cout << "Setting up location and orientation ...\n";
-    yli::snippets::set_location_and_orientation(my_universe->get_setting_master(), -5682.32f, -1641.20f, 2376.45f, 100.0f, 100.0f, 100.0f);
+    yli::snippets::set_location_and_orientation(my_universe, -5682.32f, -1641.20f, 2376.45f, 100.0f, 100.0f, 100.0f);
     std::cout << "Setting up debug variables ...\n";
-    yli::snippets::set_flight_mode(my_universe->get_setting_master(), true);
+    yli::snippets::set_flight_mode(my_universe, true);
 
     yli::sdl::flush_sdl_event_queue();
 

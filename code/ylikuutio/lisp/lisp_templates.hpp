@@ -18,8 +18,6 @@
 #ifndef __LISP_TEMPLATES_HPP_INCLUDED
 #define __LISP_TEMPLATES_HPP_INCLUDED
 
-#include "code/ylikuutio/config/setting.hpp"
-#include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
@@ -37,6 +35,7 @@
 #include "code/ylikuutio/ontology/text3D.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/compute_task.hpp"
+#include "code/ylikuutio/ontology/setting.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
@@ -307,23 +306,21 @@ namespace yli::lisp
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
-                yli::config::Setting*& value)
+                yli::ontology::Setting*& value)
         {
             if (parameter_i >= parameter_vector.size()) // No argument left to consume.
             {
                 return false;
             }
 
-            yli::config::SettingMaster* setting_master = context->get_setting_master();
-
-            if (setting_master == nullptr)
+            if (context == nullptr)
             {
                 return false;
             }
 
             const std::string my_string = parameter_vector.at(parameter_i++);
 
-            value = setting_master->get(my_string);
+            value = context->get(my_string);
 
             if (value == nullptr)
             {
@@ -340,23 +337,21 @@ namespace yli::lisp
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
-                const yli::config::Setting*& value)
+                const yli::ontology::Setting*& value)
         {
             if (parameter_i >= parameter_vector.size()) // No argument left to consume.
             {
                 return false;
             }
 
-            yli::config::SettingMaster* setting_master = context->get_setting_master();
-
-            if (setting_master == nullptr)
+            if (context == nullptr)
             {
                 return false;
             }
 
             const std::string my_string = parameter_vector.at(parameter_i++);
 
-            value = setting_master->get(my_string);
+            value = context->get(my_string);
 
             if (value == nullptr)
             {

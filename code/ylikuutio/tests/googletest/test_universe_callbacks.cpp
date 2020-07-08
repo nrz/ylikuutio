@@ -104,13 +104,13 @@ TEST(object_must_be_bound_to_species_appropriately, universe_callback)
     species2->set_global_name(species2_name);
 
     ASSERT_EQ(object->get_parent(), species1);
-    ASSERT_EQ(species1->get_number_of_all_children(), 1);
-    ASSERT_EQ(species2->get_number_of_all_children(), 0);
+    ASSERT_EQ(species1->get_number_of_non_setting_children(), 1);
+    ASSERT_EQ(species2->get_number_of_non_setting_children(), 0);
 
     universe->bind(universe, object, species2);
     ASSERT_EQ(object->get_parent(), species2);
-    ASSERT_EQ(species1->get_number_of_all_children(), 0);
-    ASSERT_EQ(species2->get_number_of_all_children(), 1);
+    ASSERT_EQ(species1->get_number_of_non_setting_children(), 0);
+    ASSERT_EQ(species2->get_number_of_non_setting_children(), 1);
 }
 
 // Public `Entity` create callbacks.
@@ -721,8 +721,11 @@ TEST(scene_must_be_deleted_appropriately, universe_callback)
 
     universe->activate_entity(scene);
 
+    delete scene;
+    /*
     universe->delete_entity(universe, scene);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
+    */
 }
 
 // Public `Entity` activate callbacks.
