@@ -147,18 +147,6 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Setting::set3(
-            yli::ontology::Entity* const context,         // A context is needed so that correct `Setting` is bound to the function call.
-            yli::ontology::Setting* const setting,
-            std::shared_ptr<std::string> new_value)
-    {
-        // Usage:
-        // to set variable:       set3 <entity-name> <variable-name> <setting-value>
-
-        // Set a new value and call activate callback if there is such.
-        return yli::ontology::Setting::set2(setting, new_value);
-    }
-
     std::shared_ptr<yli::data::AnyValue> Setting::print_value1(
             yli::ontology::Console* const console,
             yli::ontology::Universe* const context, // A context is needed so that correct `Setting` is bound to the function call.
@@ -166,17 +154,6 @@ namespace yli::ontology
     {
         // Usage:
         // to get variable value: get1 <variable-name>
-
-        return yli::ontology::Setting::print_value2(console, context, setting);
-    }
-
-    std::shared_ptr<yli::data::AnyValue> Setting::print_value2(
-            yli::ontology::Console* const console,
-            yli::ontology::Entity* const context,  // A context is needed so that correct `Setting` is bound to the function call.
-            yli::ontology::Setting* const setting)
-    {
-        // Usage:
-        // to get variable value: get2 <entity-name> <variable-name>
 
         if (console == nullptr || context == nullptr || setting == nullptr)
         {

@@ -704,9 +704,7 @@ int main(const int argc, const char* const argv[]) try
     yli::ontology::create_lisp_function_overload("settings", my_console, std::function(&yli::ontology::Entity::print_settings0));
     yli::ontology::create_lisp_function_overload("settings", my_console, std::function(&yli::ontology::Entity::print_settings1));
     yli::ontology::create_lisp_function_overload("set", my_console, std::function(&yli::ontology::Setting::set2));
-    yli::ontology::create_lisp_function_overload("set", my_console, std::function(&yli::ontology::Setting::set3));
     yli::ontology::create_lisp_function_overload("print", my_console, std::function(&yli::ontology::Setting::print_value1));
-    yli::ontology::create_lisp_function_overload("print", my_console, std::function(&yli::ontology::Setting::print_value2));
 
     // `Entity` handling callbacks.
     yli::ontology::create_lisp_function_overload("entities", my_console, std::function(&yli::ontology::Universe::print_entities));

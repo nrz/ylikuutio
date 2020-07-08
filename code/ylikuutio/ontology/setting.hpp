@@ -98,19 +98,9 @@ namespace yli::ontology
                     yli::ontology::Setting* const setting,
                     std::shared_ptr<std::string> new_value);
 
-            static std::shared_ptr<yli::data::AnyValue> set3(
-                    yli::ontology::Entity* const context,
-                    yli::ontology::Setting* const setting,
-                    std::shared_ptr<std::string> new_value);
-
             static std::shared_ptr<yli::data::AnyValue> print_value1(
                     yli::ontology::Console* const console,
                     yli::ontology::Universe* const context, // A context is needed so that correct `Setting is bound to the function call.
-                    yli::ontology::Setting* const setting);
-
-            static std::shared_ptr<yli::data::AnyValue> print_value2(
-                    yli::ontology::Console* const console,
-                    yli::ontology::Entity* const context,   // A context is needed so that correct `Setting is bound to the function call.
                     yli::ontology::Setting* const setting);
 
             static std::shared_ptr<yli::data::AnyValue> activate_planet_radius(yli::ontology::Entity* const entity, yli::ontology::Setting* const setting);

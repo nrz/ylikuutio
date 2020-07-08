@@ -19,6 +19,7 @@
 #define __LISP_TEMPLATES_HPP_INCLUDED
 
 #include "code/ylikuutio/ontology/entity.hpp"
+#include "code/ylikuutio/ontology/setting.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
@@ -313,20 +314,16 @@ namespace yli::lisp
                 return false;
             }
 
-            if (context == nullptr)
-            {
-                return false;
-            }
-
             const std::string my_string = parameter_vector.at(parameter_i++);
 
-            value = context->get(my_string);
+            value = dynamic_cast<yli::ontology::Setting*>(universe->get_entity(my_string));
 
             if (value == nullptr)
             {
                 return false;
             }
 
+            context = value;
             return true;
         }
 
@@ -344,20 +341,16 @@ namespace yli::lisp
                 return false;
             }
 
-            if (context == nullptr)
-            {
-                return false;
-            }
-
             const std::string my_string = parameter_vector.at(parameter_i++);
 
-            value = context->get(my_string);
+            value = dynamic_cast<yli::ontology::Setting*>(universe->get_entity(my_string));
 
             if (value == nullptr)
             {
                 return false;
             }
 
+            context = const_cast<yli::ontology::Setting*>(value);
             return true;
         }
 

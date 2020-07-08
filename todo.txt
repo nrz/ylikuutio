@@ -2,8 +2,6 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Fixes needed:
-[ ] Fix bug in `print` so that it accepts `print cat1.x` (instead of `print cat1 x`).
-[ ] Fix bug in `set` so that it accepts `set cat1.x 1234` (instead of `set cat1 x 1234`).
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size.
 [ ] Fix compiling on Visual Studio.
 
@@ -212,3 +210,5 @@ Ready:
 [x] Implement support for local variables in YliLisp function argument binding.
 [x] Implement support for local variables in all console commands.
 [x] Convert `Setting` into a an `yli::ontology` class that inherits `yli::ontology::Entity`.
+[x] Fix bug in `print` so that it accepts `print cat1.x` (instead of `print cat1 x`).
+[x] Fix bug in `set` so that it accepts `set cat1.x 1234` (instead of `set cat1 x 1234`).
