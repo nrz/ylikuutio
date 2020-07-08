@@ -176,3 +176,18 @@ There are different hierarchical paths of ontology:
 Triangulation
 
 Height maps are usually provided as a 2D grid. As Ylikuutio uses only triangles, the 2D grid needs to be triangulated.
+
+About the ontological hierarchy
+
+As described above, `yli::ontology` contains many classes that are in a compositional part-of-relationship (in Ylikuutio terminology, parts are 'children' and the Entities they belong are their 'parents'). Being a parent is called 'parenting' and being a child is called 'childing'.
+
+Naturally, children must be bound to their parents somehow. There are different options for different parent-child-relationships:
+
+1. Parent is `yli::ontology::Entity`. This is quite complex case. Children include `yli::ontology::Setting` and `yli::ontology::AnyStructEntity`.
+2. Parent uses `yli::ontology::ParentModule` for 'parenting' and child used `yli::ontology::ChildModule` for 'childing'.
+   Use this when possible. Constructor of `ChildModule` does the binding and destructor of `ChildModule` does the unbinding.
+3. Parent uses `yli::ontology::ParentModule` for 'parenting' and child uses custom code for 'childing'.
+   Custom code does the binding and unbinding, using `ParentModule` interface, just like `ChildModule` does.
+4. Parent uses custom code for parenting and child uses custom code for 'childing'. see `Scene`-`Shader`-relationship for an example.
+   The reason to use custom binding code in `Scene`-`Shader`-relationship is to keep `Shader`s ordered in `ShaderPriorityQueue`.
+   In this case binding is completely custom for both 'parenting' and 'childing'. Use this only as a last resort.
