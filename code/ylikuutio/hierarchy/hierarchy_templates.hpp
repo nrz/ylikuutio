@@ -154,7 +154,6 @@ namespace yli::hierarchy
     template<class T1>
         void bind_apprentice_to_master(
                 const T1 apprentice_pointer,
-                std::size_t& apprenticeID,
                 std::vector<T1>& apprentice_pointer_vector,
                 std::queue<std::size_t>& free_apprenticeID_queue,
                 std::size_t& number_of_apprentices)
@@ -173,9 +172,9 @@ namespace yli::hierarchy
                 return;
             }
 
-            apprenticeID = yli::hierarchy::request_childID(apprentice_pointer_vector, free_apprenticeID_queue);
+            apprentice_pointer->apprenticeID = yli::hierarchy::request_childID(apprentice_pointer_vector, free_apprenticeID_queue);
             // set pointer to the apprentice in master's apprentice pointer vector so that master knows about apprentices' whereabouts!
-            yli::hierarchy::set_child_pointer(apprenticeID, apprentice_pointer, apprentice_pointer_vector, free_apprenticeID_queue, number_of_apprentices);
+            yli::hierarchy::set_child_pointer(apprentice_pointer->apprenticeID, apprentice_pointer, apprentice_pointer_vector, free_apprenticeID_queue, number_of_apprentices);
         }
 
     template <class T1>

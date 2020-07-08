@@ -20,9 +20,11 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
+#include "master_module.hpp"
 #include "movable_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -65,7 +67,7 @@ namespace yli::ontology
             void bind_to_brain();
             void unbind_from_brain();
 
-            // This method sets pointer to this `Movable` to `nullptr`, sets `brain` according to the input, and requests a new `movableID` from the new `Brain`.
+            // This method sets pointer to this `Movable` to `nullptr`, sets `brain` according to the input, and requests a new `apprenticeID` from the new `Brain`.
             void bind_to_new_brain(yli::ontology::Brain* const new_brain);
 
             // constructor.
@@ -78,7 +80,7 @@ namespace yli::ontology
                 // constructor.
                 this->input_method                = movable_struct.input_method;
                 this->brain                       = movable_struct.brain;
-                this->movableID                   = std::numeric_limits<std::size_t>::max(); // uninitialized.
+                this->apprenticeID                = std::numeric_limits<std::size_t>::max(); // uninitialized.
                 this->cartesian_coordinates.x     = movable_struct.cartesian_coordinates.x;
                 this->cartesian_coordinates.y     = movable_struct.cartesian_coordinates.y;
                 this->cartesian_coordinates.z     = movable_struct.cartesian_coordinates.z;
@@ -312,7 +314,13 @@ namespace yli::ontology
             glm::mat4 model_matrix;                                // model matrix.
             glm::mat4 mvp_matrix;                                  // model view projection matrix.
 
-            friend class Brain;
+            friend yli::ontology::Brain;
+
+            template<class T1, class T2>
+                friend class yli::ontology::MasterModule;
+
+            template<class T1>
+                friend void yli::hierarchy::bind_apprentice_to_master(T1 apprentice_pointer, std::vector<T1>& apprentice_pointer_vector, std::queue<std::size_t>& free_apprenticeID_queue, std::size_t& number_of_apprenticeren);
 
         protected:
             yli::ontology::ChildModule child;
@@ -323,7 +331,7 @@ namespace yli::ontology
             yli::input::InputMethod input_method;                  // If `input_method` is `KEYBOARD`, then keypresses control this `Movable`.
                                                                    // If `input_method` is `AI`, then the chosen `Brain` controls this `Movable`.
             yli::ontology::Brain* brain;                           // Different kind of controls can be implemented as `Brain`s, e.g. train control systems.
-            std::size_t movableID;
+            std::size_t apprenticeID;
     };
 }
 

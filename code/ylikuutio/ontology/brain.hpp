@@ -19,7 +19,9 @@
 #define __BRAIN_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "movable.hpp"
 #include "child_module.hpp"
+#include "master_module.hpp"
 #include "brain_struct.hpp"
 
 // Include standard headers
@@ -58,22 +60,18 @@ namespace yli::ontology
 {
     class Universe;
     class Scene;
-    class Movable;
     class ParentModule;
 
     class Brain: public yli::ontology::Entity
     {
         public:
-            void bind_movable(yli::ontology::Movable* const movable);
-            void unbind_movable(const std::size_t movableID);
-
             Brain(yli::ontology::Universe* const universe, const yli::ontology::BrainStruct& brain_struct, yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, brain_struct),
-                child_of_scene(parent_module, this)
+                child_of_scene(parent_module, this),
+                master_of_movables(this)
             {
                 // constructor.
                 this->callback_engine    = brain_struct.callback_engine;
-                this->number_of_movables = 0;
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Brain*";
@@ -90,17 +88,13 @@ namespace yli::ontology
             void act();
 
             yli::ontology::ChildModule child_of_scene;
+            yli::ontology::MasterModule<yli::ontology::Brain*, yli::ontology::Movable*> master_of_movables;
 
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
             std::shared_ptr<yli::callback::CallbackEngine> callback_engine;
-
-            // Currently only `Movable`s can be intentional Entities.
-            std::vector<yli::ontology::Movable*> movable_pointer_vector;
-            std::queue<std::size_t> free_movableID_queue;
-            std::size_t number_of_movables;
     };
 }
 

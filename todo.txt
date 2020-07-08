@@ -14,7 +14,6 @@ Tasks which are necessary for the first stage:
 [ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
 
 Tasks which are necessary for the second stage:
-[ ] Implement `yli::ontology::MasterModule`.
 [ ] Modify `set` console command so that setting a value is done using `set 'value foo bar` or `set 'value foo bar baz` (`'value` must be used).
 [ ] Modify `set` console command so that setting a global name is done using `set 'global-name foo bar`.
 [ ] Modify `set` console command so that setting a local name is done using `set 'local-name foo bar`.
@@ -212,3 +211,4 @@ Ready:
 [x] Convert `Setting` into a an `yli::ontology` class that inherits `yli::ontology::Entity`.
 [x] Fix bug in `print` so that it accepts `print cat1.x` (instead of `print cat1 x`).
 [x] Fix bug in `set` so that it accepts `set cat1.x 1234` (instead of `set cat1 x 1234`).
+[x] Implement `yli::ontology::MasterModule`.

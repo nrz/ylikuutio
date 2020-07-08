@@ -46,22 +46,22 @@ namespace yli::ontology
             return;
         }
 
-        // get `movableID` from `Brain` and set pointer to this `Movable`.
-        this->brain->bind_movable(this);
+        // get `apprenticeID` from `Brain` and set pointer to this `Movable`.
+        this->brain->master_of_movables.bind_apprentice(this);
     }
 
     void Movable::unbind_from_brain()
     {
         if (this->brain != nullptr)
         {
-            this->brain->unbind_movable(this->movableID);
+            this->brain->master_of_movables.unbind_apprentice(this->apprenticeID);
         }
     }
 
     void Movable::bind_to_new_brain(yli::ontology::Brain* const new_brain)
     {
         // This method sets pointer to this `Movable` to `nullptr`, sets `brain` according to the input,
-        // and requests a new `movableID` from the new `Brain`.
+        // and requests a new `apprenticeID` from the new `Brain`.
 
         this->unbind_from_brain(); // unbind from the current `Brain` if there is such.
 

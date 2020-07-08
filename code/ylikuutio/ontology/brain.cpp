@@ -28,39 +28,9 @@
 
 namespace yli::ontology
 {
-    void Brain::bind_movable(yli::ontology::Movable* const movable)
-    {
-        // get `childID` from `Brain` and set pointer to `movable`.
-        yli::hierarchy::bind_apprentice_to_master<yli::ontology::Movable*>(
-                movable,
-                movable->movableID,
-                this->movable_pointer_vector,
-                this->free_movableID_queue,
-                this->number_of_movables);
-    }
-
-    void Brain::unbind_movable(const std::size_t movableID)
-    {
-        yli::hierarchy::unbind_child_from_parent(
-                movableID,
-                this->movable_pointer_vector,
-                this->free_movableID_queue,
-                this->number_of_movables);
-    }
-
     Brain::~Brain()
     {
         // destructor.
-
-        for (std::size_t child_i = 0; child_i < this->movable_pointer_vector.size(); child_i++)
-        {
-            yli::ontology::Movable* const movable = this->movable_pointer_vector[child_i];
-
-            if (movable != nullptr)
-            {
-                movable->unbind_from_brain();
-            }
-        }
     }
 
     yli::ontology::Entity* Brain::get_parent() const
@@ -80,7 +50,7 @@ namespace yli::ontology
 
     std::size_t Brain::get_number_of_apprentices() const
     {
-        return this->number_of_movables; // `Movable`s controlled by `Brain` are its apprentices.
+        return this->master_of_movables.get_number_of_apprentices(); // `Movable`s controlled by `Brain` are its apprentices.
     }
 
     void Brain::act()
@@ -91,10 +61,10 @@ namespace yli::ontology
             return;
         }
 
-        for (std::size_t movable_i = 0; movable_i < this->movable_pointer_vector.size(); movable_i++)
+        for (std::size_t movable_i = 0; movable_i < this->master_of_movables.apprentice_pointer_vector.size(); movable_i++)
         {
             // Apply this `Brain` to the current `Movable`.
-            yli::ontology::Movable* movable = this->movable_pointer_vector[movable_i];
+            yli::ontology::Movable* movable = this->master_of_movables.apprentice_pointer_vector[movable_i];
 
             if (movable == nullptr)
             {

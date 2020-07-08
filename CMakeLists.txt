@@ -582,6 +582,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/lisp_function.hpp
     code/ylikuutio/ontology/lisp_function_overload.hpp
     code/ylikuutio/ontology/lisp_function_struct.hpp
+    code/ylikuutio/ontology/master_module.hpp
     code/ylikuutio/ontology/material.cpp
     code/ylikuutio/ontology/material.hpp
     code/ylikuutio/ontology/material_struct.hpp
