@@ -228,7 +228,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    // Public AngelScript-related callbacks.
+    // Public YliLisp-related callbacks.
 
     std::shared_ptr<yli::data::AnyValue> Universe::eval(
             yli::ontology::Console* const console,

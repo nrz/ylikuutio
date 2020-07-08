@@ -97,8 +97,6 @@ endif()
 
 include_directories(
     # external/asio/asio/include/
-    external/angelscript/sdk/angelscript/include/
-    external/angelscript/sdk/add_on/
     external/FastNoiseSIMD/
     external/glm/
     external/OpenFBX/src/
@@ -229,7 +227,6 @@ endif()
 
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
-    angelscript
     pugixml
     miniz
     OpenFBX
@@ -284,9 +281,6 @@ configure_file(code/ylikuutio/shaders/sobel_y.frag sobel_y.frag COPYONLY)
 configure_file(code/ylikuutio/shaders/sobel_gradient_magnitude.frag sobel_gradient_magnitude.frag COPYONLY)
 configure_file(code/ylikuutio/shaders/text_vertex_shader.vert text_vertex_shader.vert COPYONLY)
 configure_file(code/ylikuutio/shaders/text_vertex_shader.frag text_vertex_shader.frag COPYONLY)
-
-# Angelscript code.
-configure_file(code/angelscript/hello_world.angel hello_world.angel COPYONLY)
 
 # 3D models.
 # Suzanne.
@@ -374,12 +368,6 @@ configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
 
 # Ylikuutio
 add_library(ylikuutio STATIC
-    # angelscript, in alphabetical order
-    code/ylikuutio/angelscript/angelscript_callbacks.cpp
-    code/ylikuutio/angelscript/angelscript_callbacks.hpp
-    code/ylikuutio/angelscript/angelscript_master.cpp
-    code/ylikuutio/angelscript/angelscript_master.hpp
-
     # audio, in alphabetical order
     code/ylikuutio/audio/audio_master.cpp
     code/ylikuutio/audio/audio_master.hpp
@@ -884,12 +872,6 @@ add_executable(yli_edit
     )
 target_link_libraries(yli_edit ylikuutio ${ALL_LIBS} pthread)
 
-# AngelScript test
-add_executable(angelscript_test
-    code/angelscript/angelscript_test.cpp
-    )
-target_link_libraries(angelscript_test ylikuutio ${ALL_LIBS} pthread)
-
 # Asio-test
 if(FALSE)
     add_executable(asio_chat_server
@@ -1098,7 +1080,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     add_dependencies(code_to_test ylikuutio ${ALL_LIBS} pthread)
 
     add_executable(unit_tests_with_googletest code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
-    target_link_libraries(unit_tests_with_googletest gtest libgtest rt SDL2 GLEW_200 angelscript stb ylikuutio pthread code_to_test)
+    target_link_libraries(unit_tests_with_googletest gtest libgtest rt SDL2 GLEW_200 stb ylikuutio pthread code_to_test)
 
     # Xcode and Visual working directories
     set_target_properties(unit_tests_with_googletest PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")

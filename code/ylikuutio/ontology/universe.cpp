@@ -514,12 +514,7 @@ namespace yli::ontology
 
     std::string Universe::eval_string(const std::string& my_string) const
     {
-        if (this->angelscript_master == nullptr)
-        {
-            return "";
-        }
-
-        return this->angelscript_master->eval_string(my_string);
+        return "TODO: eval";
     }
 
     yli::audio::AudioMaster* Universe::get_audio_master() const

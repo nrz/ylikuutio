@@ -27,7 +27,6 @@
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
-#include "code/ylikuutio/angelscript/angelscript_master.hpp"
 #include "code/ylikuutio/time/time.hpp"
 
 #include "SDL.h"
@@ -327,7 +326,6 @@ namespace yli::ontology
                 this->active_scene     = nullptr;
                 this->active_font2D    = nullptr;
                 this->active_console   = nullptr;
-                this->angelscript_master = nullptr;
                 this->audio_master     = nullptr;
 
                 this->background_red   = NAN;
@@ -455,8 +453,6 @@ namespace yli::ontology
                 this->should_be_rendered = !this->get_is_headless();
 
                 this->create_should_be_rendered_setting();
-
-                this->angelscript_master = std::make_shared<yli::angelscript::AngelscriptMaster>();
 
                 if (this->is_silent)
                 {
@@ -644,7 +640,7 @@ namespace yli::ontology
 
             static std::shared_ptr<yli::data::AnyValue> activate_entity(yli::ontology::Entity* const entity);
 
-            // Public AngelScript-related callbacks.
+            // Public YliLisp-related callbacks.
 
             static std::shared_ptr<yli::data::AnyValue> eval(
                     yli::ontology::Console* const console,
@@ -761,8 +757,6 @@ namespace yli::ontology
             yli::ontology::Scene* active_scene;
             yli::ontology::Font2D* active_font2D;
             yli::ontology::Console* active_console;
-
-            std::shared_ptr<yli::angelscript::AngelscriptMaster> angelscript_master; // pointer to `AngelscriptMaster`.
 
             std::shared_ptr<yli::audio::AudioMaster> audio_master;    // pointer to `AudioMaster`.
 
