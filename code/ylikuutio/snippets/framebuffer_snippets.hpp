@@ -21,14 +21,14 @@
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 
-namespace yli::config
+namespace yli::ontology
 {
-    class SettingMaster;
+    class Universe;
 }
 
 namespace yli::snippets
 {
-    void set_framebuffer_size(yli::config::SettingMaster* setting_master, const uint32_t framebuffer_width, const uint32_t framebuffer_height);
+    void set_framebuffer_size(yli::ontology::Universe* universe, const uint32_t framebuffer_width, const uint32_t framebuffer_height);
 }
 
 #endif

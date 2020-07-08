@@ -115,6 +115,34 @@ namespace yli::map
             }
         }
 
+    template <class T1, class T2>
+        void print_keys_of_specific_type_to_console(const std::unordered_map<std::string, T1>& unordered_map, yli::ontology::Console* const console)
+        {
+            if (console == nullptr)
+            {
+                return;
+            }
+
+            const yli::ontology::Universe* const universe = console->get_universe();
+
+            if (universe == nullptr)
+            {
+                return;
+            }
+
+            std::vector<std::pair<std::string, T1>> keys_and_values = get_keys_and_values(unordered_map);
+
+            for (auto& key_and_value : keys_and_values)
+            {
+                T2 inherited_type = dynamic_cast<T2>(key_and_value.second);
+
+                if (inherited_type != nullptr)
+                {
+                    console->print_text(key_and_value.first);
+                }
+            }
+        }
+
     template <class T1>
         void print_keys_and_values(const std::unordered_map<std::string, T1>& unordered_map)
         {

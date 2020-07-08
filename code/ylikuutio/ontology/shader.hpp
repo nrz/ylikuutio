@@ -115,8 +115,6 @@ namespace yli::ontology
             virtual ~Shader();
 
             yli::ontology::Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
 
             // Set terrain `Species` pointers in `Scene` and `Universe` so that they point to the chosen terrain `Species`.
             // Currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
@@ -138,6 +136,9 @@ namespace yli::ontology
 
         private:
             void bind_to_parent();
+
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
 
             // This method renders all materials using this `Shader`.
             void render() override;

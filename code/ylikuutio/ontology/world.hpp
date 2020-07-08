@@ -104,11 +104,13 @@ namespace yli::ontology
             virtual ~World();
 
             yli::ontology::Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
 
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::ParentModule parent_of_scenes;
+
+        private:
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
     };
 }
 

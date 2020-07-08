@@ -18,15 +18,15 @@
 #ifndef __LOCATION_AND_ORIENTATION_SNIPPETS_HPP_INCLUDED
 #define __LOCATION_AND_ORIENTATION_SNIPPETS_HPP_INCLUDED
 
-namespace yli::config
+namespace yli::ontology
 {
-    class SettingMaster;
+    class Entity;
 }
 
 namespace yli::snippets
 {
     void set_location_and_orientation(
-            yli::config::SettingMaster* const setting_master,
+            yli::ontology::Entity* const entity,
             const float rho,
             const float theta,
             const float phi,

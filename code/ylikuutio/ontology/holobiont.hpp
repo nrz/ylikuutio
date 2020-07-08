@@ -94,9 +94,6 @@ namespace yli::ontology
             // destructor.
             virtual ~Holobiont();
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
-
             void update_x(float x);
             void update_y(float y);
             void update_z(float z);
@@ -104,6 +101,9 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_bionts;
 
         private:
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
+
             // this method renders this `Holobiont`.
             void render() override;
 

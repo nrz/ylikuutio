@@ -18,21 +18,20 @@
 #ifndef __ACTIVATE_CALLBACK_HPP_INCLUDED
 #define __ACTIVATE_CALLBACK_HPP_INCLUDED
 
-#include "code/ylikuutio/data/any_value.hpp"
-
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
 
-namespace yli::config
+namespace yli::data
 {
-    class Setting;
+    class AnyValue;
 }
 
 namespace yli::ontology
 {
     class Entity;
+    class Setting;
 }
 
-typedef std::shared_ptr<yli::data::AnyValue> (*ActivateCallback) (yli::ontology::Entity* entity, yli::config::Setting* setting);
+typedef std::shared_ptr<yli::data::AnyValue> (*ActivateCallback) (yli::ontology::Entity* entity, yli::ontology::Setting* setting);
 
 #endif

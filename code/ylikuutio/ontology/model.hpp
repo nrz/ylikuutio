@@ -88,8 +88,6 @@ namespace yli::ontology
             virtual ~Model();
 
             yli::ontology::Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
 
             std::size_t get_number_of_vertices() const;
             const std::vector<glm::vec3>& get_vertices() const;
@@ -149,6 +147,10 @@ namespace yli::ontology
             uint32_t elementbuffer;
 
             bool opengl_in_use;
+
+        private:
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
     };
 }
 

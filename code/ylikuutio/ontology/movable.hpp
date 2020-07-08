@@ -22,9 +22,6 @@
 #include "child_module.hpp"
 #include "movable_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
-#include "code/ylikuutio/config/setting_master.hpp"
-#include "code/ylikuutio/config/setting.hpp"
-#include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include GLM
@@ -34,12 +31,10 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <limits>   // std::numeric_limits
 #include <memory>   // std::make_shared, std::shared_ptr
-#include <queue>    // std::queue
 #include <vector>   // std::vector
 
 // `Movable` is a mixin class, not intended to be instantiated.
@@ -116,59 +111,7 @@ namespace yli::ontology
                 this->model_matrix                = glm::mat4(1.0f); // identity matrix (dummy value).
                 this->mvp_matrix                  = glm::mat4(1.0f); // identity matrix (dummy value).
 
-                float float_x                     = this->cartesian_coordinates.x;
-                float float_y                     = this->cartesian_coordinates.y;
-                float float_z                     = this->cartesian_coordinates.z;
-
-                yli::config::SettingMaster* const setting_master = this->get_setting_master();
-
-                yli::config::SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(float_x, float_y, float_z)));
-                cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
-                cartesian_coordinates_setting_struct.activate_callback = &yli::config::Setting::activate_cartesian_coordinates;
-                cartesian_coordinates_setting_struct.read_callback = &yli::config::Setting::read_cartesian_coordinates;
-                cartesian_coordinates_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                std::cout << "Executing `setting_master->create_setting(cartesian_coordinates_setting_struct);` ...\n";
-                setting_master->create_setting(cartesian_coordinates_setting_struct);
-
-                yli::config::SettingStruct x_setting_struct(std::make_shared<yli::data::AnyValue>(float_x));
-                x_setting_struct.name = "x";
-                x_setting_struct.activate_callback = &yli::config::Setting::activate_x;
-                x_setting_struct.read_callback = &yli::config::Setting::read_x;
-                x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                std::cout << "Executing `setting_master->create_setting(x_setting_struct);` ...\n";
-                setting_master->create_setting(x_setting_struct);
-
-                yli::config::SettingStruct y_setting_struct(std::make_shared<yli::data::AnyValue>(float_y));
-                y_setting_struct.name = "y";
-                y_setting_struct.activate_callback = &yli::config::Setting::activate_y;
-                y_setting_struct.read_callback = &yli::config::Setting::read_y;
-                y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                std::cout << "Executing `setting_master->create_setting(y_setting_struct);` ...\n";
-                setting_master->create_setting(y_setting_struct);
-
-                yli::config::SettingStruct z_setting_struct(std::make_shared<yli::data::AnyValue>(float_z));
-                z_setting_struct.name = "z";
-                z_setting_struct.activate_callback = &yli::config::Setting::activate_z;
-                z_setting_struct.read_callback = &yli::config::Setting::read_z;
-                z_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                std::cout << "Executing `setting_master->create_setting(z_setting_struct);` ...\n";
-                setting_master->create_setting(z_setting_struct);
-
-                yli::config::SettingStruct horizontal_angle_setting_struct(std::make_shared<yli::data::AnyValue>(this->horizontal_angle));
-                horizontal_angle_setting_struct.name = "horizontal_angle";
-                horizontal_angle_setting_struct.activate_callback = &yli::config::Setting::activate_horizontal_angle;
-                horizontal_angle_setting_struct.read_callback = &yli::config::Setting::read_horizontal_angle;
-                horizontal_angle_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                std::cout << "Executing `setting_master->create_setting(horizontal_angle_setting_struct);` ...\n";
-                setting_master->create_setting(horizontal_angle_setting_struct);
-
-                yli::config::SettingStruct vertical_angle_setting_struct(std::make_shared<yli::data::AnyValue>(this->vertical_angle));
-                vertical_angle_setting_struct.name = "vertical_angle";
-                vertical_angle_setting_struct.activate_callback = &yli::config::Setting::activate_vertical_angle;
-                vertical_angle_setting_struct.read_callback = &yli::config::Setting::read_vertical_angle;
-                vertical_angle_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                std::cout << "Executing `setting_master->create_setting(vertical_angle_setting_struct);` ...\n";
-                setting_master->create_setting(vertical_angle_setting_struct);
+                this->create_coordinate_and_angle_settings();
 
                 this->bind_to_brain();
 
@@ -375,6 +318,8 @@ namespace yli::ontology
             yli::ontology::ChildModule child;
 
         private:
+            void create_coordinate_and_angle_settings();
+
             yli::input::InputMethod input_method;                  // If `input_method` is `KEYBOARD`, then keypresses control this `Movable`.
                                                                    // If `input_method` is `AI`, then the chosen `Brain` controls this `Movable`.
             yli::ontology::Brain* brain;                           // Different kind of controls can be implemented as `Brain`s, e.g. train control systems.

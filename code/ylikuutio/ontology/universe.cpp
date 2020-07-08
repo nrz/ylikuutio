@@ -33,11 +33,15 @@
 #define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
-#include "universe.hpp"
 #include "entity.hpp"
+#include "setting.hpp"
+#include "universe.hpp"
 #include "scene.hpp"
 #include "camera.hpp"
 #include "console.hpp"
+#include "entity_setting_activation.hpp"
+#include "entity_setting_read.hpp"
+#include "setting_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -69,18 +73,12 @@
 #include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <stdint.h>      // uint32_t etc.
-#include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <string>        // std::string
 #include <utility>       // std::pair
 
 namespace yli::data
 {
     class AnyValue;
-}
-
-namespace yli::config
-{
-    class Setting;
 }
 
 namespace yli::input
@@ -91,6 +89,7 @@ namespace yli::input
 namespace yli::ontology
 {
     class Font2D;
+    class Setting;
 
     const std::string Universe::version = "0.0.7";
 
@@ -303,7 +302,6 @@ namespace yli::ontology
             this->parent_of_font2Ds.get_number_of_children() +
             this->parent_of_consoles.get_number_of_children() +
             this->parent_of_any_value_entities.get_number_of_children() +
-            this->parent_of_any_struct_entities.get_number_of_children() +
             this->parent_of_callback_engine_entities.get_number_of_children();
     }
 
@@ -313,7 +311,6 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_font2Ds.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_any_value_entities.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_any_struct_entities.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_callback_engine_entities.child_pointer_vector);
     }
 
@@ -612,5 +609,17 @@ namespace yli::ontology
                 this->current_camera_up);                                      // Head is up (set to 0,-1,0 to look upside-down).
 
         return true;
+    }
+
+    void Universe::create_should_be_rendered_setting()
+    {
+        // Create `Setting` `should_be_rendered` here because it can't be done in `Entity` constructor.
+        yli::ontology::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::data::AnyValue>(this->should_be_rendered));
+        should_be_rendered_setting_struct.local_name = "should_be_rendered";
+        should_be_rendered_setting_struct.activate_callback = &yli::ontology::activate_should_be_rendered;
+        should_be_rendered_setting_struct.read_callback = &yli::ontology::read_should_be_rendered;
+        should_be_rendered_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+        std::cout << "Executing `this->create_setting(should_be_rendered_setting_struct);` ...\n";
+        this->create_setting(should_be_rendered_setting_struct);
     }
 }

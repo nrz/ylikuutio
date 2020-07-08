@@ -25,23 +25,26 @@
 // Include standard headers
 #include <cstddef>       // std::size_t
 #include <memory>        // std::make_shared, std::shared_ptr
+#include <queue>         // std::priority_queue, std::queue
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
-
-namespace yli::config
-{
-    class SettingMaster;
-}
+#include <vector>        // std::vector
 
 namespace yli::ontology
 {
     class Universe;
     class Console;
+    class Setting;
     struct EntityStruct;
+    struct SettingStruct;
 
     class Entity
     {
         public:
+            void bind_setting(yli::ontology::Setting* const setting);
+
+            void unbind_setting(const std::size_t childID, const std::string& local_name);
+
             // Each class that supports binding to a new parent needs to `override` this function.
             virtual void bind_to_new_parent(yli::ontology::Entity* const new_entity_parent);
 
@@ -63,12 +66,12 @@ namespace yli::ontology
             bool get_can_be_erased() const;
 
             yli::ontology::Universe* get_universe() const;
-            yli::config::SettingMaster* get_setting_master() const;
-            void set_setting_master(yli::config::SettingMaster* const setting_master);
 
             virtual yli::ontology::Entity* get_parent() const = 0;
-            virtual std::size_t get_number_of_children() const = 0;
-            virtual std::size_t get_number_of_descendants() const = 0;
+            std::size_t get_number_of_all_children() const;
+            std::size_t get_number_of_all_descendants() const;
+            std::size_t get_number_of_settings() const;
+            std::size_t get_number_of_non_setting_children() const;
 
             std::string get_global_name() const;
             std::string get_local_name() const;
@@ -81,11 +84,28 @@ namespace yli::ontology
             void add_entity(const std::string& name, yli::ontology::Entity* const entity);
             void erase_entity(const std::string& name);
 
+            void create_setting(const yli::ontology::SettingStruct& setting_struct);
+            bool is_setting(const std::string& setting_name) const;
+            yli::ontology::Setting* get(const std::string& setting_name) const;
+            bool set(const std::string& setting_name, std::shared_ptr<yli::data::AnyValue> setting_new_any_value);
+
+            std::string help() const;                                // this function returns general help string.
+            std::string help(const std::string& setting_name) const; // this function returns the help string for the `Setting`.
+
             // Public callbacks.
 
             // Public data printing callbacks.
 
             static std::shared_ptr<yli::data::AnyValue> print_children(
+                    yli::ontology::Console* const console,
+                    yli::ontology::Entity* const entity);
+
+            static std::shared_ptr<yli::data::AnyValue> print_settings0(
+                    yli::ontology::Universe* const universe,
+                    yli::ontology::Console* const console);
+
+            static std::shared_ptr<yli::data::AnyValue> print_settings1(
+                    yli::ontology::Universe* const universe,
                     yli::ontology::Console* const console,
                     yli::ontology::Entity* const entity);
 
@@ -98,12 +118,13 @@ namespace yli::ontology
 
             std::size_t childID; // TODO: add checks for `std::numeric_limits<std::size_t>::max();` (invalid value).
 
+            yli::ontology::ParentModule parent_of_any_struct_entities;
+
         protected:
             void prerender() const;
             void postrender() const;
 
             yli::ontology::Universe* universe;                          // pointer to the `Universe`.
-            std::shared_ptr<yli::config::SettingMaster> setting_master; // pointer to the `SettingMaster`.
             std::size_t entityID;
 
             std::string type_string;
@@ -116,13 +137,18 @@ namespace yli::ontology
             PreRenderCallback prerender_callback;
             PostRenderCallback postrender_callback;
 
-            yli::ontology::ParentModule parent_of_any_struct_entities;
-
             // Named entities are stored here so that they can be recalled, if needed.
             std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
 
         private:
             void bind_to_universe();
+
+            std::vector<yli::ontology::Setting*> setting_pointer_vector;
+            std::queue<std::size_t> free_settingID_queue;
+            std::size_t number_of_settings;
+
+            virtual std::size_t get_number_of_children() const = 0;
+            virtual std::size_t get_number_of_descendants() const = 0;
     };
 }
 

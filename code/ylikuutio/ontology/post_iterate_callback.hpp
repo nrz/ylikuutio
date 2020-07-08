@@ -31,11 +31,6 @@ namespace yli::ontology
     class Entity;
 }
 
-namespace yli::config
-{
-    class SettingMaster;
-}
-
-typedef std::shared_ptr<yli::data::AnyValue> (*PreIterateCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
+typedef std::shared_ptr<yli::data::AnyValue> (*PreIterateCallback) (yli::ontology::Entity* entity);
 
 #endif

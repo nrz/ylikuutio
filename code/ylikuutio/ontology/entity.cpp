@@ -16,13 +16,16 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "entity.hpp"
+#include "setting.hpp"
 #include "universe.hpp"
-#include "parent_module.hpp"
+#include "family_templates.hpp"
+#include "entity_factory.hpp"
+#include "entity_setting_activation.hpp"
+#include "entity_setting_read.hpp"
 #include "entity_struct.hpp"
-#include "code/ylikuutio/config/setting_master.hpp"
-#include "code/ylikuutio/config/setting.hpp"
-#include "code/ylikuutio/config/setting_struct.hpp"
+#include "setting_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <cstddef>       // std::size_t
@@ -36,6 +39,30 @@
 
 namespace yli::ontology
 {
+    void Entity::bind_setting(yli::ontology::Setting* const setting)
+    {
+        // get `childID` from `Entity` and set pointer to `setting`.
+        yli::hierarchy::bind_child_to_parent<yli::ontology::Setting*>(
+                setting,
+                this->setting_pointer_vector,
+                this->free_settingID_queue,
+                this->number_of_settings);
+
+        // `setting` with a local name needs to be added to `entity_map` as well.
+        this->add_entity(setting->get_local_name(), setting);
+    }
+
+    void Entity::unbind_setting(const std::size_t childID, const std::string& local_name)
+    {
+        yli::ontology::unbind_child_from_parent(
+                childID,
+                local_name,
+                this->setting_pointer_vector,
+                this->free_settingID_queue,
+                this->number_of_settings,
+                this->entity_map);
+    }
+
     void Entity::bind_to_universe()
     {
         // Requirements:
@@ -60,33 +87,32 @@ namespace yli::ontology
     }
 
     Entity::Entity(yli::ontology::Universe* const universe, const yli::ontology::EntityStruct& entity_struct)
-        : parent_of_any_struct_entities(this)
+        : should_be_rendered { false },
+        childID { std::numeric_limits<std::size_t>::max() }, // `std::numeric_limits<std::size_t>::max()` means that `childID` is not defined.
+        parent_of_any_struct_entities(this),
+        universe { universe },
+        entityID { std::numeric_limits<std::size_t>::max() }, // `std::numeric_limits<std::size_t>::max()` means that `entityID` is not defined.
+        can_be_erased { false },
+        prerender_callback { nullptr },
+        postrender_callback { nullptr },
+        number_of_settings { 0 }
     {
         // constructor.
-        this->universe = universe;
 
         // Get `entityID` from `Universe` and set pointer to this `Entity`.
         this->bind_to_universe();
 
-        this->childID = std::numeric_limits<std::size_t>::max(); // `std::numeric_limits<std::size_t>::max()` means that `childID` is not defined.
-
-        this->prerender_callback = nullptr;
-        this->postrender_callback = nullptr;
-        this->setting_master = std::make_shared<yli::config::SettingMaster>(this);
-        this->can_be_erased = false;
-        this->should_be_rendered = false;
-
-        if (this->universe != this)
+        if (!entity_struct.is_setting && this->universe != this)
         {
             this->should_be_rendered = (this->universe == nullptr ? false : !this->universe->get_is_headless());
 
-            yli::config::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::data::AnyValue>(this->should_be_rendered));
-            should_be_rendered_setting_struct.name = "should_be_rendered";
-            should_be_rendered_setting_struct.activate_callback = &yli::config::Setting::activate_should_be_rendered;
-            should_be_rendered_setting_struct.read_callback = &yli::config::Setting::read_should_be_rendered;
+            yli::ontology::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::data::AnyValue>(this->should_be_rendered));
+            should_be_rendered_setting_struct.local_name = "should_be_rendered";
+            should_be_rendered_setting_struct.activate_callback = &yli::ontology::activate_should_be_rendered;
+            should_be_rendered_setting_struct.read_callback = &yli::ontology::read_should_be_rendered;
             should_be_rendered_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-            std::cout << "Executing `setting_master->create_setting(should_be_rendered_setting_struct);` ...\n";
-            this->setting_master->create_setting(should_be_rendered_setting_struct);
+            std::cout << "Executing `this->create_setting(should_be_rendered_setting_struct);` ...\n";
+            this->create_setting(should_be_rendered_setting_struct);
         }
     }
 
@@ -103,7 +129,7 @@ namespace yli::ontology
 
         this->universe->unbind_entity(this->entityID);
 
-        if (!this->global_name.empty())
+        if (!this->global_name.empty() && this->universe != nullptr)
         {
             // OK, this `Entity` had a global name, so it's global name shall be erased.
             this->universe->erase_entity(this->global_name);
@@ -144,17 +170,6 @@ namespace yli::ontology
     yli::ontology::Universe* Entity::get_universe() const
     {
         return this->universe;
-    }
-
-    yli::config::SettingMaster* Entity::get_setting_master() const
-    {
-        if (this->setting_master == nullptr)
-        {
-            std::cerr << "ERROR: `Entity::get_setting_master`: `this->setting_master` is `nullptr`.\n";
-            return nullptr;
-        }
-
-        return this->setting_master.get();
     }
 
     bool Entity::is_entity(const std::string& name) const
@@ -237,13 +252,97 @@ namespace yli::ontology
 
     void Entity::erase_entity(const std::string& name)
     {
-        if (this->entity_map.count(name) == 1)
+        if (!name.empty() && this->entity_map.count(name) == 1)
         {
-            if (this->entity_map[name]->get_can_be_erased())
+            if (this->entity_map.at(name)->get_can_be_erased())
             {
                 this->entity_map.erase(name);
             }
         }
+    }
+
+    void Entity::create_setting(const yli::ontology::SettingStruct& setting_struct)
+    {
+        if (this->universe == nullptr)
+        {
+            return;
+        }
+
+        yli::ontology::Setting* const setting = dynamic_cast<yli::ontology::Setting*>(this);
+
+        if (setting != nullptr)
+        {
+            // `Setting`s may not have subsettings.
+            return;
+        }
+
+        yli::ontology::EntityFactory* const entity_factory = this->universe->get_entity_factory();
+
+        if (entity_factory == nullptr)
+        {
+            return;
+        }
+
+        yli::ontology::SettingStruct new_setting_struct(setting_struct);
+        new_setting_struct.parent = this;
+        entity_factory->create_setting(new_setting_struct);
+    }
+
+    bool Entity::is_setting(const std::string& setting_name) const
+    {
+        if (this->entity_map.count(setting_name) != 1)
+        {
+            return false;
+        }
+
+        yli::ontology::Entity* const entity = this->entity_map.at(setting_name);
+        yli::ontology::Setting* const setting = dynamic_cast<yli::ontology::Setting*>(entity);
+        return setting != nullptr;
+    }
+
+    yli::ontology::Setting* Entity::get(const std::string& setting_name) const
+    {
+        if (this->entity_map.count(setting_name) != 1)
+        {
+            return nullptr;
+        }
+
+        return dynamic_cast<yli::ontology::Setting*>(this->entity_map.at(setting_name));
+    }
+
+    bool Entity::set(const std::string& setting_name, std::shared_ptr<yli::data::AnyValue> setting_new_any_value)
+    {
+        yli::ontology::Setting* const setting = this->get(setting_name);
+
+        if (setting == nullptr)
+        {
+            return false;
+        }
+
+        // OK, this is a valid variable name.
+        // Set the variable value and activate it by
+        // calling the corresponding activate callback.
+
+        setting->set(setting_new_any_value);
+        return true;
+    }
+
+    std::string Entity::help() const
+    {
+        std::string help_string = "TODO: create general helptext";
+        return help_string;
+    }
+
+    std::string Entity::help(const std::string& setting_name) const
+    {
+        yli::ontology::Setting* const setting = this->get(setting_name);
+
+        if (setting == nullptr)
+        {
+            return this->help();
+        }
+
+        return setting->help();
     }
 
     void Entity::prerender() const
@@ -251,13 +350,11 @@ namespace yli::ontology
         // Requirements:
         // `this->prerender_callback` must not be `nullptr`.
         // `this->universe` must not be `nullptr`.
-        // `this->universe->setting_master` must not be `nullptr`.
 
         if (this->prerender_callback != nullptr &&
-                this->universe != nullptr &&
-                this->universe->setting_master != nullptr)
+                this->universe != nullptr)
         {
-            this->prerender_callback(this->universe, this->universe->setting_master.get());
+            this->prerender_callback(this->universe);
         }
     }
 
@@ -266,19 +363,41 @@ namespace yli::ontology
         // Requirements:
         // `this->postrender_callback` must not be `nullptr`.
         // `this->universe` must not be `nullptr`.
-        // `this->universe->setting_master` must not be `nullptr`.
 
         if (this->postrender_callback != nullptr &&
-                this->universe != nullptr &&
-                this->universe->setting_master != nullptr)
+                this->universe != nullptr)
         {
-            this->postrender_callback(this->universe, this->universe->setting_master.get());
+            this->postrender_callback(this->universe);
         }
     }
 
     std::string Entity::get_global_name() const
     {
         return this->global_name;
+    }
+
+    std::size_t Entity::get_number_of_all_children() const
+    {
+        return this->number_of_settings +
+            this->get_number_of_non_setting_children();
+    }
+
+    std::size_t Entity::get_number_of_all_descendants() const
+    {
+        return yli::ontology::get_number_of_descendants(this->setting_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_any_struct_entities.child_pointer_vector) +
+            this->get_number_of_descendants();
+    }
+
+    std::size_t Entity::get_number_of_settings() const
+    {
+        return this->number_of_settings;
+    }
+
+    std::size_t Entity::get_number_of_non_setting_children() const
+    {
+        return this->parent_of_any_struct_entities.get_number_of_children() +
+            this->get_number_of_children();
     }
 
     std::string Entity::get_local_name() const

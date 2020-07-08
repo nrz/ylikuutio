@@ -16,9 +16,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "background_color_snippets.hpp"
-#include "code/ylikuutio/config/setting_master.hpp"
-#include "code/ylikuutio/config/setting.hpp"
-#include "code/ylikuutio/config/setting_struct.hpp"
+#include "code/ylikuutio/ontology/setting.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/setting_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
@@ -26,30 +26,35 @@
 
 namespace yli::snippets
 {
-    void set_background_colors(yli::config::SettingMaster* setting_master, const float red, const float green, const float blue, const float alpha)
+    void set_background_colors(yli::ontology::Universe* universe, const float red, const float green, const float blue, const float alpha)
     {
-        yli::config::SettingStruct red_setting_struct(std::make_shared<yli::data::AnyValue>(red));
-        red_setting_struct.name = "red";
-        red_setting_struct.activate_callback = &yli::config::Setting::activate_background_color;
+        if (universe == nullptr)
+        {
+            return;
+        }
+
+        yli::ontology::SettingStruct red_setting_struct(std::make_shared<yli::data::AnyValue>(red));
+        red_setting_struct.local_name = "red";
+        red_setting_struct.activate_callback = &yli::ontology::Setting::activate_background_color;
         red_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        setting_master->create_setting(red_setting_struct);
+        universe->create_setting(red_setting_struct);
 
-        yli::config::SettingStruct green_setting_struct(std::make_shared<yli::data::AnyValue>(green));
-        green_setting_struct.name = "green";
-        green_setting_struct.activate_callback = &yli::config::Setting::activate_background_color;
+        yli::ontology::SettingStruct green_setting_struct(std::make_shared<yli::data::AnyValue>(green));
+        green_setting_struct.local_name = "green";
+        green_setting_struct.activate_callback = &yli::ontology::Setting::activate_background_color;
         green_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        setting_master->create_setting(green_setting_struct);
+        universe->create_setting(green_setting_struct);
 
-        yli::config::SettingStruct blue_setting_struct(std::make_shared<yli::data::AnyValue>(blue));
-        blue_setting_struct.name = "blue";
-        blue_setting_struct.activate_callback = &yli::config::Setting::activate_background_color;
+        yli::ontology::SettingStruct blue_setting_struct(std::make_shared<yli::data::AnyValue>(blue));
+        blue_setting_struct.local_name = "blue";
+        blue_setting_struct.activate_callback = &yli::ontology::Setting::activate_background_color;
         blue_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        setting_master->create_setting(blue_setting_struct);
+        universe->create_setting(blue_setting_struct);
 
-        yli::config::SettingStruct alpha_setting_struct(std::make_shared<yli::data::AnyValue>(alpha));
-        alpha_setting_struct.name = "alpha";
-        alpha_setting_struct.activate_callback = &yli::config::Setting::activate_background_color;
+        yli::ontology::SettingStruct alpha_setting_struct(std::make_shared<yli::data::AnyValue>(alpha));
+        alpha_setting_struct.local_name = "alpha";
+        alpha_setting_struct.activate_callback = &yli::ontology::Setting::activate_background_color;
         alpha_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        setting_master->create_setting(alpha_setting_struct);
+        universe->create_setting(alpha_setting_struct);
     }
 }

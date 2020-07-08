@@ -21,13 +21,12 @@
 
 #include "brain_snippets.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
-#include <variant>  // std::variant
+#include <variant>  // std::holds_alternative, std::variant
 #include <vector>   // std::vector
 
 namespace yli::callback

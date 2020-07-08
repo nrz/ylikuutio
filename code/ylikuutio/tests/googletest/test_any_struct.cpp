@@ -24,7 +24,7 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
-#include <variant>  // std::variant
+#include <variant>  // std::holds_alternative, std::variant
 #include <vector>   // std::vector
 
 TEST(any_struct_must_be_initialized_appropriately, no_fields)

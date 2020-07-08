@@ -63,12 +63,14 @@ namespace yli::ontology
             virtual ~GenericLispFunctionOverload();
 
             yli::ontology::Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
 
             virtual std::pair<bool, std::shared_ptr<yli::data::AnyValue>> execute(const std::vector<std::string>& parameter_vector) = 0;
 
             yli::ontology::ChildModule child_of_lisp_function;
+
+        private:
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
     };
 }
 

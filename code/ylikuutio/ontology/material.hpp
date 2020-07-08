@@ -116,8 +116,6 @@ namespace yli::ontology
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
             yli::ontology::Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
 
             // Set terrain `Species` pointers in `Scene` and `Universe` so that they point to the chosen terrain `Species`.
             // Currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
@@ -144,6 +142,9 @@ namespace yli::ontology
             GLuint openGL_textureID;             // Texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
 
         private:
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
+
             // This method renders all `Species` using this `Material`.
             void render() override;
 

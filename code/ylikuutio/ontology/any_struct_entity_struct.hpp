@@ -15,38 +15,20 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __SETTING_STRUCT_HPP_INCLUDED
-#define __SETTING_STRUCT_HPP_INCLUDED
+#ifndef __ANY_STRUCT_ENTITY_STRUCT_HPP_INCLUDED
+#define __ANY_STRUCT_ENTITY_STRUCT_HPP_INCLUDED
 
-#include "activate_callback.hpp"
-#include "read_callback.hpp"
+#include "entity_struct.hpp"
 
-// Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
-#include <string>   // std::string
-
-namespace yli::data
+namespace yli::ontology
 {
-    class AnyValue;
-}
-
-namespace yli::config
-{
-    struct SettingStruct
+    struct AnyStructEntityStruct: public yli::ontology::EntityStruct
     {
-        SettingStruct(std::shared_ptr<yli::data::AnyValue> initial_value)
-            : initial_value(initial_value),
-            activate_callback(nullptr),
-            read_callback(nullptr),
-            should_ylikuutio_call_activate_callback_now(true)
+        AnyStructEntityStruct()
+            : EntityStruct()
         {
             // constructor.
         }
-        std::string name;
-        std::shared_ptr<yli::data::AnyValue> initial_value;
-        ActivateCallback activate_callback;
-        ReadCallback read_callback;
-        bool should_ylikuutio_call_activate_callback_now;
     };
 }
 

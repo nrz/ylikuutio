@@ -24,46 +24,15 @@
 
 namespace yli::ontology
 {
-    void AnyStructEntity::bind_to_parent()
-    {
-        // Requirements:
-        // `this->parent` must not be `nullptr`.
-        yli::ontology::Universe* const universe = this->parent;
-
-        if (universe == nullptr)
-        {
-            std::cerr << "ERROR: `AnyStructEntity::bind_to_parent`: `universe` is `nullptr`!\n";
-            return;
-        }
-
-        // Get `childID` from the `Universe` and set pointer to this `AnyStructEntity`.
-        universe->parent_of_any_struct_entities.bind_child(this);
-    }
-
     AnyStructEntity::~AnyStructEntity()
     {
         // destructor.
         std::cout << "This `AnyStructEntity` will be destroyed.\n";
-
-        // requirements for further actions:
-        // `this->parent` must not be `nullptr`.
-
-        yli::ontology::Universe* const universe = this->parent;
-
-        if (universe == nullptr)
-        {
-            std::cerr << "ERROR: `AnyStructEntity::~AnyStructEntity`: `universe` is `nullptr`!\n";
-            return;
-        }
-
-        // set pointer to this `AnyStructEntity` to `nullptr`.
-        universe->parent_of_any_struct_entities.unbind_child(this->childID);
     }
 
     yli::ontology::Entity* AnyStructEntity::get_parent() const
     {
-        // Every `AnyStructEntity` is a child of the `Universe`.
-        return this->yli::ontology::Entity::universe;
+        return this->child_of_entity.get_parent();
     }
 
     std::size_t AnyStructEntity::get_number_of_children() const

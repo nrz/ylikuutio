@@ -18,15 +18,15 @@
 #ifndef __MOVEMENT_SNIPPETS_HPP_INCLUDED
 #define __MOVEMENT_SNIPPETS_HPP_INCLUDED
 
-namespace yli::config
+namespace yli::ontology
 {
-    class SettingMaster;
+    class Universe;
 }
 
 namespace yli::snippets
 {
     void set_movement(
-            yli::config::SettingMaster* const setting_master,
+            yli::ontology::Universe* const universe,
             const float speed,
             const float turbo_factor,
             const float twin_turbo_factor,

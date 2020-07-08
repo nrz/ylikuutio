@@ -18,14 +18,14 @@
 #ifndef __BACKGROUND_COLOR_SNIPPETS_HPP_INCLUDED
 #define __BACKGROUND_COLOR_SNIPPETS_HPP_INCLUDED
 
-namespace yli::config
+namespace yli::ontology
 {
-    class SettingMaster;
+    class Universe;
 }
 
 namespace yli::snippets
 {
-    void set_background_colors(yli::config::SettingMaster* setting_master, const float red, const float green, const float blue, const float alpha);
+    void set_background_colors(yli::ontology::Universe* const universe, const float red, const float green, const float blue, const float alpha);
 }
 
 #endif

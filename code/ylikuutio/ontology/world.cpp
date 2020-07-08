@@ -17,7 +17,6 @@
 
 #include "world.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/config/setting_master.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -25,8 +24,6 @@
 
 namespace yli::ontology
 {
-    class SettingMaster;
-
     World::~World()
     {
         // destructor.

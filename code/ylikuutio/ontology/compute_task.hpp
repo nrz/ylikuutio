@@ -249,11 +249,12 @@ namespace yli::ontology
             ~ComputeTask();
 
             yli::ontology::Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
 
         private:
             void bind_to_parent();
+
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
 
             // This method renders this `ComputeTask`, that is, computes this task.
             void render() override;

@@ -48,7 +48,7 @@ endif()
 # Compile external dependencies
 add_subdirectory (external)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -Werror=return-type")
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     # Clang and GCC accept `-Wextra`, but Visual Studio does not seem to accept it.
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wextra")
@@ -398,16 +398,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/command_line/command_line_master.cpp
     code/ylikuutio/command_line/command_line_master.hpp
 
-    # config, in alphabetical order.
-    code/ylikuutio/config/activate_callback.hpp
-    code/ylikuutio/config/read_callback.hpp
-    code/ylikuutio/config/setting.cpp
-    code/ylikuutio/config/setting.hpp
-    code/ylikuutio/config/setting_callbacks.cpp
-    code/ylikuutio/config/setting_master.cpp
-    code/ylikuutio/config/setting_master.hpp
-    code/ylikuutio/config/setting_struct.hpp
-
     # console, in alphabetical order.
     code/ylikuutio/console/console_command_callback.hpp
     code/ylikuutio/console/console_callback_engine.cpp
@@ -542,8 +532,10 @@ add_library(ylikuutio STATIC
     # code/ylikuutio/network/tcp_server.hpp
 
     # ontology, in alphabetical order
+    code/ylikuutio/ontology/activate_callback.hpp
     code/ylikuutio/ontology/any_struct_entity.cpp
     code/ylikuutio/ontology/any_struct_entity.hpp
+    code/ylikuutio/ontology/any_struct_entity_struct.hpp
     code/ylikuutio/ontology/any_value_entity.cpp
     code/ylikuutio/ontology/any_value_entity.hpp
     code/ylikuutio/ontology/biont.cpp
@@ -581,6 +573,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/entity_factory.cpp
     code/ylikuutio/ontology/entity_factory.hpp
     code/ylikuutio/ontology/entity_factory_templates.hpp
+    code/ylikuutio/ontology/entity_setting_activation.cpp
+    code/ylikuutio/ontology/entity_setting_activation.hpp
+    code/ylikuutio/ontology/entity_setting_read.cpp
+    code/ylikuutio/ontology/entity_setting_read.hpp
     code/ylikuutio/ontology/entity_struct.hpp
     code/ylikuutio/ontology/family_templates.hpp
     code/ylikuutio/ontology/font2D.cpp
@@ -606,6 +602,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/model_struct.hpp
     code/ylikuutio/ontology/movable.cpp
     code/ylikuutio/ontology/movable.hpp
+    code/ylikuutio/ontology/movable_setting_activation.cpp
+    code/ylikuutio/ontology/movable_setting_activation.hpp
+    code/ylikuutio/ontology/movable_setting_read.cpp
+    code/ylikuutio/ontology/movable_setting_read.hpp
     code/ylikuutio/ontology/movable_struct.hpp
     code/ylikuutio/ontology/object.cpp
     code/ylikuutio/ontology/object.hpp
@@ -615,10 +615,15 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/parent_module.hpp
     code/ylikuutio/ontology/post_render_callback.hpp
     code/ylikuutio/ontology/pre_render_callback.hpp
+    code/ylikuutio/ontology/read_callback.hpp
     code/ylikuutio/ontology/render_templates.hpp
     code/ylikuutio/ontology/scene.cpp
     code/ylikuutio/ontology/scene.hpp
     code/ylikuutio/ontology/scene_struct.hpp
+    code/ylikuutio/ontology/setting.cpp
+    code/ylikuutio/ontology/setting.hpp
+    code/ylikuutio/ontology/setting_callbacks.cpp
+    code/ylikuutio/ontology/setting_struct.hpp
     code/ylikuutio/ontology/shader.cpp
     code/ylikuutio/ontology/shader.hpp
     code/ylikuutio/ontology/shader_compare.cpp
@@ -920,12 +925,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/callback/callback_parameter.hpp
         code/ylikuutio/command_line/command_line_master.cpp
         code/ylikuutio/command_line/command_line_master.hpp
-        code/ylikuutio/config/setting.cpp
-        code/ylikuutio/config/setting.hpp
-        code/ylikuutio/config/setting_callbacks.cpp
-        code/ylikuutio/config/setting_master.cpp
-        code/ylikuutio/config/setting_master.hpp
-        code/ylikuutio/config/setting_struct.hpp
         code/ylikuutio/data/any_struct.cpp
         code/ylikuutio/data/any_struct.hpp
         code/ylikuutio/data/any_value.cpp
@@ -976,6 +975,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/memory/memory_templates.hpp
         code/ylikuutio/ontology/any_struct_entity.cpp
         code/ylikuutio/ontology/any_struct_entity.hpp
+        code/ylikuutio/ontology/any_struct_entity_struct.hpp
         code/ylikuutio/ontology/any_value_entity.cpp
         code/ylikuutio/ontology/any_value_entity.hpp
         code/ylikuutio/ontology/brain.cpp
@@ -1008,6 +1008,10 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/scene.cpp
         code/ylikuutio/ontology/scene.hpp
         code/ylikuutio/ontology/scene_struct.hpp
+        code/ylikuutio/ontology/setting.cpp
+        code/ylikuutio/ontology/setting.hpp
+        code/ylikuutio/ontology/setting_callbacks.cpp
+        code/ylikuutio/ontology/setting_struct.hpp
         code/ylikuutio/ontology/shader.cpp
         code/ylikuutio/ontology/shader.hpp
         code/ylikuutio/ontology/shader_struct.hpp

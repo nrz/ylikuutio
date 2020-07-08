@@ -17,6 +17,7 @@
 
 #include "entity_factory.hpp"
 #include "entity.hpp"
+#include "setting.hpp"
 #include "universe.hpp"
 #include "world.hpp"
 #include "scene.hpp"
@@ -39,6 +40,7 @@
 #include "any_value_entity.hpp"
 #include "any_struct_entity.hpp"
 #include "callback_engine_entity.hpp"
+#include "setting_struct.hpp"
 #include "world_struct.hpp"
 #include "scene_struct.hpp"
 #include "shader_struct.hpp"
@@ -55,6 +57,7 @@
 #include "camera_struct.hpp"
 #include "compute_task_struct.hpp"
 #include "brain_struct.hpp"
+#include "any_struct_entity_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/any_struct.hpp"
 #include "code/ylikuutio/callback/input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
@@ -80,6 +83,41 @@ namespace yli::ontology
     yli::ontology::Universe* EntityFactory::get_universe() const
     {
         return this->universe;
+    }
+
+    yli::ontology::Entity* EntityFactory::create_setting(const yli::ontology::SettingStruct& setting_struct) const
+    {
+        yli::ontology::Entity* setting_entity = new yli::ontology::Setting(this->universe, setting_struct);
+
+        if (this->universe == setting_struct.parent)
+        {
+            // OK, this is a `setting` of the `Universe`.
+
+            if (!setting_struct.global_name.empty() && setting_struct.local_name.empty())
+            {
+                // Only `global_name` given, OK.
+                setting_entity->set_global_name(setting_struct.global_name);
+            }
+            else if (setting_struct.global_name.empty() && !setting_struct.local_name.empty())
+            {
+                // Only `local_name` given, OK.
+                setting_entity->set_local_name(setting_struct.local_name);
+            }
+        }
+        else
+        {
+            // This is not a `setting` of the `Universe`.
+
+            setting_entity->set_global_name(setting_struct.global_name);
+            setting_entity->set_local_name(setting_struct.local_name);
+        }
+
+        if (setting_struct.should_ylikuutio_call_activate_callback_now)
+        {
+            setting_entity->activate();
+        }
+
+        return setting_entity;
     }
 
     yli::ontology::Entity* EntityFactory::create_world(const yli::ontology::WorldStruct& world_struct) const
@@ -277,14 +315,38 @@ namespace yli::ontology
         return new yli::ontology::AnyValueEntity(this->universe, any_value);
     }
 
-    yli::ontology::Entity* EntityFactory::create_any_struct_entity() const
+    yli::ontology::Entity* EntityFactory::create_any_struct_entity(
+            yli::ontology::Entity* const parent,
+            const yli::ontology::AnyStructEntityStruct& any_struct_entity_struct) const
     {
-        return new yli::ontology::AnyStructEntity(this->universe);
-    }
+        yli::ontology::Entity* any_struct_entity_entity = new yli::ontology::AnyStructEntity(this->universe, any_struct_entity_struct, (parent == nullptr ? nullptr : &parent->parent_of_any_struct_entities));
 
-    yli::ontology::Entity* EntityFactory::create_any_struct_entity(const yli::data::AnyStruct& any_struct) const
-    {
-        return new yli::ontology::AnyStructEntity(this->universe, any_struct);
+        any_struct_entity_entity->set_local_name(any_struct_entity_struct.local_name);
+
+        if (this->universe == parent)
+        {
+            // OK, this is a `any_struct_entity` of the `Universe`.
+
+            if (!any_struct_entity_struct.global_name.empty() && any_struct_entity_struct.local_name.empty())
+            {
+                // Only `global_name` given, OK.
+                any_struct_entity_entity->set_global_name(any_struct_entity_struct.global_name);
+            }
+            else if (any_struct_entity_struct.global_name.empty() && !any_struct_entity_struct.local_name.empty())
+            {
+                // Only `local_name` given, OK.
+                any_struct_entity_entity->set_local_name(any_struct_entity_struct.local_name);
+            }
+        }
+        else
+        {
+            // This is not a `any_struct_entity` of the `Universe`.
+
+            any_struct_entity_entity->set_global_name(any_struct_entity_struct.global_name);
+            any_struct_entity_entity->set_local_name(any_struct_entity_struct.local_name);
+        }
+
+        return any_struct_entity_entity;
     }
 
     yli::ontology::Entity* EntityFactory::create_callback_engine_entity(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback) const

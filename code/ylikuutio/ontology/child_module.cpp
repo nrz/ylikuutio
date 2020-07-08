@@ -39,7 +39,7 @@ namespace yli::ontology
             return;
         }
 
-        // get `childID` from the `ParentModule` and set pointer to this `ChildModule`.
+        // get `childID` from the `ParentModule` and set pointer to this child.
         this->parent_module->bind_child(this->entity);
     }
 

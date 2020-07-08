@@ -21,15 +21,15 @@
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 
-namespace yli::config
+namespace yli::ontology
 {
-    class SettingMaster;
+    class Entity;
 }
 
 namespace yli::snippets
 {
     void set_console(
-            yli::config::SettingMaster* const setting_master,
+            yli::ontology::Entity* const entity,
             const uint32_t console_top_y,
             const uint32_t console_bottom_y,
             const uint32_t console_left_x,
