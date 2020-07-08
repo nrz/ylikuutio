@@ -306,12 +306,15 @@ A: Some parts of Ylikuutio (some shaders, some file loaders, etc.) are
    based on [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/),
    which I really recommend for anyone interested in learning
    OpenGL programming. Ylikuutio also uses external libraries such as
-   (in alphabetical order) AngelScript, Asio, GLM, GLEW, OpenFBX, SDL, stb, and
+   (in alphabetical order) Asio, GLM, GLEW, OpenFBX, SDL, stb, and
    pugixml. The rest is written from scratch.
 
 Q: Does Ylikuutio use right-handed or left-handed world coordinates?
 A: Ylikuutio uses right-handed world coordinates,
    so X grows eastward, Z grows southward, and Y grows upwards.
+
+Q: Is there a scripting language in Ylikuutio?
+A: YliLisp scripting language is a work in progress.
 
 ## Implemented functionality
 * 3D rendering
@@ -369,7 +372,6 @@ A: Ylikuutio uses right-handed world coordinates,
 
 ### Libraries currently in use
 * The source code from [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/) is licensed under [WTFPL Public Licence version 2](https://www.opengl-tutorial.org/download/).
-* [AngelScript](https://www.angelcode.com/angelscript/) is licensed under [AngelCode Scripting Library license](https://www.angelcode.com/angelscript/sdk/docs/manual/doc_license.html).
 * [Asio](https://think-async.com/) is licensed under [Boost software license](https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt).
 * [OpenGL Mathematics (GLM)](https://glm.g-truc.net/) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](https://glm.g-truc.net/copying.txt).
 * [The OpenGL Extension Wrangler Library (GLEW)](http://glew.sourceforge.net/) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
