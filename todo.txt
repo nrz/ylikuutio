@@ -6,12 +6,18 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
-[ ] Implement creating new fields of given type in AnyStructEntities using `Console` command `create-field`.
+[ ] Make `AnyValueEntity` a child of `yli::ontology::Entity`, instead of being a child of `yli::ontology::Universe`.
+[ ] Implement creating new fields (AnyValueEntities) of given type in AnyStructEntities using `Console` command `create-field`.
 [ ] Implement creating and setting new fields of given type in AnyStructEntities of a using `Console` command `set-field`.
 [ ] Implement printing fields of AnyStructEntities using `Console` command `print`.
 [ ] Implement creating new named Entities using `Console`, with a named `AnyStructEntity` of correct type as input.
+[ ] Implement `yli::ontology::HeightmapStruct` that inherits `yli::ontology::EntityStruct`, to support heightmaps consisting of several sheets.
+[ ] Implement `yli::ontology::Heightmap` class that inherits `yli::ontology::Entity`, to support heightmaps consisting of several sheets.
+[ ] Implement `yli::ontology::HeightmapSheet` class that inherits `yli::ontology::Species`, to handle each sheet of a multisheet heightmap.
+[ ] Implement support for loading multiple sheets of elevation model of National Land Survey of Finland at once.
 [ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
 [ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
+[ ] Implement `yli::ontology::Waypoint` class.
 
 Tasks which are necessary for the second stage:
 [ ] Modify `set` console command so that setting a value is done using `set 'value foo bar` or `set 'value foo bar baz` (`'value` must be used).
@@ -27,7 +33,6 @@ Tasks which are necessary for the second stage:
 [ ] Write test code using pthreads.
 [ ] Add support for multithreaded code.
 [ ] Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
-[ ] Implement `yli::ontology::Waypoint` class.
 [ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
 [ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
 [ ] Implement octree segmentation.
