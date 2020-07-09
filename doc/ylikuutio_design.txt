@@ -13,6 +13,13 @@ Tulevaisuus ("the future" in Finnish) is a turn-based
 3D tactical combat game with programmable robots.
 Work in progress.
 
+Ylikuutio design is based on a 'monolithic class hierarchy',
+that is, a number of classes all of which inherit
+`yli::ontology::Entity` directly or indirectly.
+The term 'monolithic class hierarchy' is from
+Game Engine Architecture, 2nd Ed., page 876, written by
+Jason Gregory, with Unreal Engine mentioned as an example.
+
 code/ajokki/                    - Ajokki sandbox code.
 code/angelscript/               - AngelScript test code.
 code/bash/                      - scripts written in Bash.
