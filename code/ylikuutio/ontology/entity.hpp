@@ -30,6 +30,11 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
+namespace yli::data
+{
+    class AnyValue;
+}
+
 namespace yli::ontology
 {
     class Universe;
