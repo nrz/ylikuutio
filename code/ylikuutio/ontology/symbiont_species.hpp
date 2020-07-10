@@ -57,7 +57,7 @@ namespace yli::ontology
             void unbind_biont(const std::size_t childID);
 
             std::size_t get_indices_size() const;
-            GLint get_lightID() const;
+            GLint get_light_id() const;
 
             // constructor.
             SymbiontSpecies(

@@ -119,7 +119,7 @@ namespace yli::ontology
             uint32_t get_texture(const std::size_t biontID) const;
             GLint get_openGL_textureID(const std::size_t biontID) const;
 
-            GLint get_lightID(const std::size_t biontID) const;
+            GLint get_light_id(const std::size_t biontID) const;
             const glm::vec3& get_light_position(const std::size_t biontID) const;
 
             yli::ontology::ChildModule child_of_shader;

@@ -223,7 +223,7 @@ namespace yli::ontology
         // Compute the MVP matrix from keyboard and mouse input.
         const glm::vec3& light_position = symbiosis->get_light_position(this->biontID);
         glUniform3f(
-                symbiosis->get_lightID(this->biontID),
+                symbiosis->get_light_id(this->biontID),
                 light_position.x,
                 light_position.y,
                 light_position.z);

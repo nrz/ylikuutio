@@ -373,9 +373,9 @@ namespace yli::ontology
         return this->biontID_symbiont_material_vector.at(biontID)->get_openGL_textureID();
     }
 
-    GLint Symbiosis::get_lightID(const std::size_t biontID) const
+    GLint Symbiosis::get_light_id(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector.at(biontID)->get_lightID();
+        return this->biontID_symbiont_species_vector.at(biontID)->get_light_id();
     }
 
     const glm::vec3& Symbiosis::get_light_position(const std::size_t biontID) const
