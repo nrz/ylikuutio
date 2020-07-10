@@ -107,7 +107,7 @@ namespace yli::ontology
         glBindTexture(GL_TEXTURE_2D, this->texture);
 
         // Set our "texture_sampler" sampler to user Material Unit 0
-        yli::opengl::uniform_1i(this->Text2DUniformID, 0);
+        yli::opengl::uniform_1i(this->text_2d_uniform_id, 0);
 
         // Set screen width.
         yli::opengl::uniform_1i(this->screen_width_uniform_id, this->screen_width);
