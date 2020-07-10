@@ -72,8 +72,8 @@ namespace yli::ontology
                 // Get `childID` from the `Material` and set pointer to this `VectorFont`.
                 this->bind_to_parent();
 
-                this->can_be_erased      = true;
-                bool font_loading_result = false;
+                this->can_be_erased         = true;
+                bool font_loading_result    = false;
 
                 if (this->font_file_format == "svg" || this->font_file_format == "SVG")
                 {
@@ -171,8 +171,8 @@ namespace yli::ontology
             // This method renders all `Glyph`s of this `VectorFont`.
             void render() override;
 
-            std::string font_file_format;         // Type of the model file, eg. `"bmp"`.
-            std::string font_filename;            // Filename of the model file.
+            std::string font_file_format; // Type of the model file, eg. `"bmp"`.
+            std::string font_filename;    // Filename of the model file.
             float vertex_scaling_factor;
 
             std::vector<std::vector<std::vector<glm::vec2>>> glyph_vertex_data;

@@ -39,15 +39,15 @@ namespace yli::ontology
             framebuffer_height(4500),
             text_size(40),
             font_size(16),
-            max_fps(50000),         // default value max 50000 frames per second.
-            speed(5.0f),            // default value 5.0 units / second.
+            max_fps(50000),            // default value max 50000 frames per second.
+            speed(5.0f),               // default value 5.0 units / second.
             turbo_factor(5.0f),        // default value 5.0 x speed.
             twin_turbo_factor(100.0f), // default value 100.0 x speed.
             mouse_speed(0.005f),
             znear(1.0f),
-            zfar(5000.0f),          // visibility: from 1 to 5000 units.
-            is_physical(true),      // physics simulation in use.
-            is_fullscreen(false),   // windowed mode in use.
+            zfar(5000.0f),             // visibility: from 1 to 5000 units.
+            is_physical(true),         // physics simulation in use.
+            is_fullscreen(false),      // windowed mode in use.
             is_headless(false),
             is_silent(false),
             input_method(yli::input::InputMethod::KEYBOARD)

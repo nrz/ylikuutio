@@ -70,13 +70,13 @@ namespace yli::ontology
                 parent_of_holobionts(this)
             {
                 // constructor.
-                this->model_filename               = symbiosis_struct.model_filename;
-                this->model_file_format            = symbiosis_struct.model_file_format;
-                this->triangulation_type           = symbiosis_struct.triangulation_type;
-                this->light_position               = symbiosis_struct.light_position;
+                this->model_filename     = symbiosis_struct.model_filename;
+                this->model_file_format  = symbiosis_struct.model_file_format;
+                this->triangulation_type = symbiosis_struct.triangulation_type;
+                this->light_position     = symbiosis_struct.light_position;
 
-                this->ofbx_mesh_count              = 0;
-                this->opengl_in_use                = symbiosis_struct.opengl_in_use;
+                this->ofbx_mesh_count    = 0;
+                this->opengl_in_use      = symbiosis_struct.opengl_in_use;
 
                 this->create_symbionts();
 

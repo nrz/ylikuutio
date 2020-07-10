@@ -159,10 +159,10 @@ namespace yli::ontology
             std::queue<std::size_t> free_biontID_queue;
             std::size_t number_of_bionts;
 
-            yli::ontology::Shader* shader;                             // pointer to `Shader` (not a parent!).
+            yli::ontology::Shader* shader; // pointer to `Shader` (not a parent!).
 
-            std::string model_file_format;                             // type of the model file, eg. `"bmp"`.
-            std::string model_filename;                                // filename of the model file.
+            std::string model_file_format; // type of the model file, eg. `"bmp"`.
+            std::string model_filename;    // filename of the model file.
     };
 }
 

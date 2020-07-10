@@ -59,18 +59,18 @@ namespace yli::ontology
                 this->font_size = font_struct.font_size;
 
                 // Initialize class members with some dummy values.
-                this->texture                          = 0;
-                this->vertexbuffer                     = 0;
-                this->uvbuffer                         = 0;
-                this->program_id                       = 0;
+                this->texture                           = 0;
+                this->vertexbuffer                      = 0;
+                this->uvbuffer                          = 0;
+                this->program_id                        = 0;
                 this->vertex_position_in_screenspace_id = 0;
-                this->vertex_uv_id                       = 0;
-                this->text_2d_uniform_id               = 0;
-                this->screen_width_uniform_id          = 0;
-                this->screen_height_uniform_id         = 0;
-                this->image_width                      = 0;
-                this->image_height                     = 0;
-                this->image_size                       = 0;
+                this->vertex_uv_id                      = 0;
+                this->text_2d_uniform_id                = 0;
+                this->screen_width_uniform_id           = 0;
+                this->screen_height_uniform_id          = 0;
+                this->image_width                       = 0;
+                this->image_height                      = 0;
+                this->image_size                        = 0;
 
                 const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
                 bool is_texture_loading_successful = false;
@@ -173,17 +173,17 @@ namespace yli::ontology
             std::string texture_filename;
             std::string font_texture_file_format;
 
-            uint32_t texture;                          // Texture containing the glyphs, returned by `load_common_texture`,
-                                                       // (used for `glGenTextures` etc.).
+            uint32_t texture;                        // Texture containing the glyphs, returned by `load_common_texture`,
+                                                     // (used for `glGenTextures` etc.).
 
-            uint32_t vertexbuffer;                     // Buffer containing the vertices.
-            uint32_t uvbuffer;                         // Buffer containing the UVs.
-            uint32_t program_id;                       // The `program_id` of the shader used to display the text, returned by `load_shaders`.
-            GLint vertex_position_in_screenspace_id;   // Location of the program's `vertex_position_screenspace` attribute.
-            GLint vertex_uv_id;                          // Location of the program's `vertexUV` attribute.
-            GLint text_2d_uniform_id;                  // Location of the program's texture attribute.
-            GLint screen_width_uniform_id;             // Location of the program's window width uniform.
-            GLint screen_height_uniform_id;            // Location of the program's window height uniform.
+            uint32_t vertexbuffer;                   // Buffer containing the vertices.
+            uint32_t uvbuffer;                       // Buffer containing the UVs.
+            uint32_t program_id;                     // The `program_id` of the shader used to display the text, returned by `load_shaders`.
+            GLint vertex_position_in_screenspace_id; // Location of the program's `vertex_position_screenspace` attribute.
+            GLint vertex_uv_id;                      // Location of the program's `vertexUV` attribute.
+            GLint text_2d_uniform_id;                // Location of the program's texture attribute.
+            GLint screen_width_uniform_id;           // Location of the program's window width uniform.
+            GLint screen_height_uniform_id;          // Location of the program's window height uniform.
 
             std::size_t screen_width;
             std::size_t screen_height;

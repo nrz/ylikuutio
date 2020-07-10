@@ -85,9 +85,9 @@ namespace yli::ontology
                 // Each `Material` rendered after a given GPGPU `Shader`
                 // may also use the output `ComputeTask`s offered by
                 // a given GPGPU `Shader` as its texture.
-                this->is_gpgpu_shader         = shader_struct.is_gpgpu_shader;
+                this->is_gpgpu_shader      = shader_struct.is_gpgpu_shader;
 
-                this->opengl_in_use           = shader_struct.opengl_in_use;
+                this->opengl_in_use        = shader_struct.opengl_in_use;
 
                 // Get `childID` from `Scene` and set pointer to this `Shader`.
                 this->bind_to_parent();
