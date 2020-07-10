@@ -50,6 +50,41 @@ naaras/uros/joku muu
 * Hirvi - slow dancing music: [https://freesound.org/people/Greek555/sounds/404352/](https://freesound.org/people/Greek555/sounds/404352/)
 * Hirvi - end scene: moose are partying: [https://freesound.org/people/MahanMahan/sounds/447197/](https://freesound.org/people/MahanMahan/sounds/447197/)
 
+## Potential 3D models for Hirvi
+* The Deer Rigger (as Hirvi) https://www.blendswap.com/blend/15997
+* Deer low poly (as Hirvi) https://www.blendswap.com/blend/19642
+
+## Potential 3D models for police
+* Porsche 997 turbo polizei https://www.blendswap.com/blend/12758
+* Low poly wolf (as a police dog) https://www.blendswap.com/blend/11562
+* Horse (as a police horse) https://www.blendswap.com/blend/13903
+* Dora Railway Gun (as a police railway gun) https://www.blendswap.com/blend/5565
+
+## Potential 3D models for trains, metro, and trams
+* Freight train https://www.blendswap.com/blend/5599
+* Train https://www.blendswap.com/blend/4044
+* Industrial train (Dr14 locomotive) https://www.blendswap.com/blend/22147
+* German Train BR646 of the UBB https://www.blendswap.com/blend/17239
+* Train https://www.blendswap.com/blend/7550
+
+## Potential 3D models for other non-human animals
+* Unicorn (of Jill Janus) https://www.blendswap.com/blend/11586
+
+## Potential 3D models for humans
+* Liz https://www.blendswap.com/blend/19440
+* Breanna Older https://www.blendswap.com/blend/12450
+* Ingrid https://www.blendswap.com/blend/8016
+* Simple girl https://www.blendswap.com/blend/8013
+* Cute lady full rig https://www.blendswap.com/blend/7475
+* Illumina - Blender Game Engine Low Poly Girl https://www.blendswap.com/blend/11172
+* Chubby boy https://www.blendswap.com/blend/8015
+* Lowpoly man https://www.blendswap.com/blend/8012
+* Brave https://www.blendswap.com/blend/3374
+
+## Potential 3D models for the environment
+* Landscape Assets v2.1 https://www.blendswap.com/blend/13167
+* Rail Basic Assets v1 https://www.blendswap.com/blend/13879
+
 ## Game instructions
 * Hirvet ovat erinomaisia maastoutujia, ja ihmiset eivät siksi havaitse puun alla piilossa olevaa Hirveä.
 * The moose are camouflage experts, and therefore humans do not notice Hirvi hidden under a tree.
