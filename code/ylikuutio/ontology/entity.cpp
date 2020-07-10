@@ -172,7 +172,7 @@ namespace yli::ontology
         return this->universe;
     }
 
-    bool Entity::is_entity(const std::string& name) const
+    bool Entity::has_child(const std::string& name) const
     {
         return this->entity_map.count(name) == 1;
     }
@@ -426,7 +426,7 @@ namespace yli::ontology
             return;
         }
 
-        if (this->universe->is_entity(global_name))
+        if (this->universe->has_child(global_name))
         {
             // The global name is already in use.
             return;
@@ -467,7 +467,7 @@ namespace yli::ontology
             return;
         }
 
-        if (parent->is_entity(local_name))
+        if (parent->has_child(local_name))
         {
             // The name is in use.
             return;

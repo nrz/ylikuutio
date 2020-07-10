@@ -83,7 +83,7 @@ namespace yli::ontology
             void set_global_name(const std::string& global_name);
             void set_local_name(const std::string& local_name);
 
-            bool is_entity(const std::string& name) const;
+            bool has_child(const std::string& name) const;
             yli::ontology::Entity* get_entity(const std::string& name) const;
             std::string get_entity_names() const;
             void add_entity(const std::string& name, yli::ontology::Entity* const entity);

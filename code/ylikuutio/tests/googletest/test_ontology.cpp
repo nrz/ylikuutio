@@ -2450,7 +2450,7 @@ TEST(world_must_be_given_a_global_name_appropriately, headless)
     world->set_global_name("foo");
     ASSERT_EQ(world->get_global_name(), "foo");
     ASSERT_EQ(world->get_local_name(), "foo");
-    ASSERT_TRUE(universe->is_entity("foo"));
+    ASSERT_TRUE(universe->has_child("foo"));
 }
 
 TEST(world_must_be_given_a_local_name_appropriately, headless)
@@ -2468,7 +2468,7 @@ TEST(world_must_be_given_a_local_name_appropriately, headless)
     world->set_local_name("foo");
     ASSERT_EQ(world->get_global_name(), "foo");
     ASSERT_EQ(world->get_local_name(), "foo");
-    ASSERT_TRUE(universe->is_entity("foo"));
+    ASSERT_TRUE(universe->has_child("foo"));
 }
 
 TEST(world_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
@@ -2487,8 +2487,8 @@ TEST(world_must_be_given_a_global_name_appropriately_after_setting_a_global_name
     world->set_global_name("bar");
     ASSERT_EQ(world->get_global_name(), "bar");
     ASSERT_EQ(world->get_local_name(), "bar");
-    ASSERT_FALSE(universe->is_entity("foo"));
-    ASSERT_TRUE(universe->is_entity("bar"));
+    ASSERT_FALSE(universe->has_child("foo"));
+    ASSERT_TRUE(universe->has_child("bar"));
 }
 
 TEST(world_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
@@ -2507,8 +2507,8 @@ TEST(world_must_be_given_a_local_name_appropriately_after_setting_a_local_name, 
     world->set_local_name("bar");
     ASSERT_EQ(world->get_global_name(), "bar");
     ASSERT_EQ(world->get_local_name(), "bar");
-    ASSERT_FALSE(universe->is_entity("foo"));
-    ASSERT_TRUE(universe->is_entity("bar"));
+    ASSERT_FALSE(universe->has_child("foo"));
+    ASSERT_TRUE(universe->has_child("bar"));
 }
 
 TEST(world_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
@@ -2527,8 +2527,8 @@ TEST(world_must_be_given_a_global_name_appropriately_after_setting_a_local_name,
     world->set_global_name("bar");
     ASSERT_EQ(world->get_global_name(), "bar");
     ASSERT_EQ(world->get_local_name(), "bar");
-    ASSERT_FALSE(universe->is_entity("foo"));
-    ASSERT_TRUE(universe->is_entity("bar"));
+    ASSERT_FALSE(universe->has_child("foo"));
+    ASSERT_TRUE(universe->has_child("bar"));
 }
 
 TEST(world_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
@@ -2547,8 +2547,8 @@ TEST(world_must_be_given_a_local_name_appropriately_after_setting_a_global_name,
     world->set_local_name("bar");
     ASSERT_EQ(world->get_global_name(), "bar");
     ASSERT_EQ(world->get_local_name(), "bar");
-    ASSERT_FALSE(universe->is_entity("foo"));
-    ASSERT_TRUE(universe->is_entity("bar"));
+    ASSERT_FALSE(universe->has_child("foo"));
+    ASSERT_TRUE(universe->has_child("bar"));
 }
 
 TEST(scene_must_be_given_a_global_name_appropriately, headless)
@@ -2569,8 +2569,8 @@ TEST(scene_must_be_given_a_global_name_appropriately, headless)
     scene->set_global_name("foo");
     ASSERT_EQ(scene->get_global_name(), "foo");
     ASSERT_EQ(scene->get_local_name(), "");
-    ASSERT_TRUE(universe->is_entity("foo"));
-    ASSERT_FALSE(world->is_entity("foo"));
+    ASSERT_TRUE(universe->has_child("foo"));
+    ASSERT_FALSE(world->has_child("foo"));
 }
 
 TEST(scene_must_be_given_a_local_name_appropriately, headless)
@@ -2591,8 +2591,8 @@ TEST(scene_must_be_given_a_local_name_appropriately, headless)
     scene->set_local_name("foo");
     ASSERT_EQ(scene->get_global_name(), "");
     ASSERT_EQ(scene->get_local_name(), "foo");
-    ASSERT_FALSE(universe->is_entity("foo"));
-    ASSERT_TRUE(world->is_entity("foo"));
+    ASSERT_FALSE(universe->has_child("foo"));
+    ASSERT_TRUE(world->has_child("foo"));
 }
 
 TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
@@ -2614,10 +2614,10 @@ TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_global_name
     scene->set_global_name("bar");
     ASSERT_EQ(scene->get_global_name(), "bar");
     ASSERT_EQ(scene->get_local_name(), "");
-    ASSERT_FALSE(universe->is_entity("foo"));
-    ASSERT_TRUE(universe->is_entity("bar"));
-    ASSERT_FALSE(world->is_entity("foo"));
-    ASSERT_FALSE(world->is_entity("bar"));
+    ASSERT_FALSE(universe->has_child("foo"));
+    ASSERT_TRUE(universe->has_child("bar"));
+    ASSERT_FALSE(world->has_child("foo"));
+    ASSERT_FALSE(world->has_child("bar"));
 }
 
 TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
@@ -2639,10 +2639,10 @@ TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_local_name, 
     scene->set_local_name("bar");
     ASSERT_EQ(scene->get_global_name(), "");
     ASSERT_EQ(scene->get_local_name(), "bar");
-    ASSERT_FALSE(universe->is_entity("foo"));
-    ASSERT_FALSE(universe->is_entity("bar"));
-    ASSERT_FALSE(world->is_entity("foo"));
-    ASSERT_TRUE(world->is_entity("bar"));
+    ASSERT_FALSE(universe->has_child("foo"));
+    ASSERT_FALSE(universe->has_child("bar"));
+    ASSERT_FALSE(world->has_child("foo"));
+    ASSERT_TRUE(world->has_child("bar"));
 }
 
 TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
@@ -2664,10 +2664,10 @@ TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_local_name,
     scene->set_global_name("bar");
     ASSERT_EQ(scene->get_global_name(), "bar");
     ASSERT_EQ(scene->get_local_name(), "foo");
-    ASSERT_FALSE(universe->is_entity("foo"));
-    ASSERT_TRUE(universe->is_entity("bar"));
-    ASSERT_TRUE(world->is_entity("foo"));
-    ASSERT_FALSE(world->is_entity("bar"));
+    ASSERT_FALSE(universe->has_child("foo"));
+    ASSERT_TRUE(universe->has_child("bar"));
+    ASSERT_TRUE(world->has_child("foo"));
+    ASSERT_FALSE(world->has_child("bar"));
 }
 
 TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
@@ -2689,10 +2689,10 @@ TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_global_name,
     scene->set_local_name("bar");
     ASSERT_EQ(scene->get_global_name(), "foo");
     ASSERT_EQ(scene->get_local_name(), "bar");
-    ASSERT_TRUE(universe->is_entity("foo"));
-    ASSERT_FALSE(universe->is_entity("bar"));
-    ASSERT_FALSE(world->is_entity("foo"));
-    ASSERT_TRUE(world->is_entity("bar"));
+    ASSERT_TRUE(universe->has_child("foo"));
+    ASSERT_FALSE(universe->has_child("bar"));
+    ASSERT_FALSE(world->has_child("foo"));
+    ASSERT_TRUE(world->has_child("bar"));
 }
 
 TEST(shader_must_be_given_a_global_name_appropriately, headless)
@@ -2717,9 +2717,9 @@ TEST(shader_must_be_given_a_global_name_appropriately, headless)
     shader->set_global_name("foo");
     ASSERT_EQ(shader->get_global_name(), "foo");
     ASSERT_EQ(shader->get_local_name(), "");
-    ASSERT_TRUE(universe->is_entity("foo"));
-    ASSERT_FALSE(world->is_entity("foo"));
-    ASSERT_FALSE(scene->is_entity("foo"));
+    ASSERT_TRUE(universe->has_child("foo"));
+    ASSERT_FALSE(world->has_child("foo"));
+    ASSERT_FALSE(scene->has_child("foo"));
 }
 
 TEST(shader_must_be_given_a_local_name_appropriately, headless)
@@ -2744,9 +2744,9 @@ TEST(shader_must_be_given_a_local_name_appropriately, headless)
     shader->set_local_name("foo");
     ASSERT_EQ(shader->get_global_name(), "");
     ASSERT_EQ(shader->get_local_name(), "foo");
-    ASSERT_FALSE(universe->is_entity("foo"));
-    ASSERT_FALSE(world->is_entity("foo"));
-    ASSERT_TRUE(scene->is_entity("foo"));
+    ASSERT_FALSE(universe->has_child("foo"));
+    ASSERT_FALSE(world->has_child("foo"));
+    ASSERT_TRUE(scene->has_child("foo"));
 }
 
 TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
@@ -2772,12 +2772,12 @@ TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_global_nam
     shader->set_global_name("bar");
     ASSERT_EQ(shader->get_global_name(), "bar");
     ASSERT_EQ(shader->get_local_name(), "");
-    ASSERT_FALSE(universe->is_entity("foo"));
-    ASSERT_TRUE(universe->is_entity("bar"));
-    ASSERT_FALSE(world->is_entity("foo"));
-    ASSERT_FALSE(world->is_entity("bar"));
-    ASSERT_FALSE(scene->is_entity("foo"));
-    ASSERT_FALSE(scene->is_entity("bar"));
+    ASSERT_FALSE(universe->has_child("foo"));
+    ASSERT_TRUE(universe->has_child("bar"));
+    ASSERT_FALSE(world->has_child("foo"));
+    ASSERT_FALSE(world->has_child("bar"));
+    ASSERT_FALSE(scene->has_child("foo"));
+    ASSERT_FALSE(scene->has_child("bar"));
 }
 
 TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
@@ -2803,12 +2803,12 @@ TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_local_name,
     shader->set_local_name("bar");
     ASSERT_EQ(shader->get_global_name(), "");
     ASSERT_EQ(shader->get_local_name(), "bar");
-    ASSERT_FALSE(universe->is_entity("foo"));
-    ASSERT_FALSE(universe->is_entity("bar"));
-    ASSERT_FALSE(world->is_entity("foo"));
-    ASSERT_FALSE(world->is_entity("bar"));
-    ASSERT_FALSE(scene->is_entity("foo"));
-    ASSERT_TRUE(scene->is_entity("bar"));
+    ASSERT_FALSE(universe->has_child("foo"));
+    ASSERT_FALSE(universe->has_child("bar"));
+    ASSERT_FALSE(world->has_child("foo"));
+    ASSERT_FALSE(world->has_child("bar"));
+    ASSERT_FALSE(scene->has_child("foo"));
+    ASSERT_TRUE(scene->has_child("bar"));
 }
 
 TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
@@ -2834,12 +2834,12 @@ TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_local_name
     shader->set_global_name("bar");
     ASSERT_EQ(shader->get_global_name(), "bar");
     ASSERT_EQ(shader->get_local_name(), "foo");
-    ASSERT_FALSE(universe->is_entity("foo"));
-    ASSERT_TRUE(universe->is_entity("bar"));
-    ASSERT_FALSE(world->is_entity("foo"));
-    ASSERT_FALSE(world->is_entity("bar"));
-    ASSERT_TRUE(scene->is_entity("foo"));
-    ASSERT_FALSE(scene->is_entity("bar"));
+    ASSERT_FALSE(universe->has_child("foo"));
+    ASSERT_TRUE(universe->has_child("bar"));
+    ASSERT_FALSE(world->has_child("foo"));
+    ASSERT_FALSE(world->has_child("bar"));
+    ASSERT_TRUE(scene->has_child("foo"));
+    ASSERT_FALSE(scene->has_child("bar"));
 }
 
 TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
@@ -2865,12 +2865,12 @@ TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_global_name
     shader->set_local_name("bar");
     ASSERT_EQ(shader->get_global_name(), "foo");
     ASSERT_EQ(shader->get_local_name(), "bar");
-    ASSERT_TRUE(universe->is_entity("foo"));
-    ASSERT_FALSE(universe->is_entity("bar"));
-    ASSERT_FALSE(world->is_entity("foo"));
-    ASSERT_FALSE(world->is_entity("bar"));
-    ASSERT_FALSE(scene->is_entity("foo"));
-    ASSERT_TRUE(scene->is_entity("bar"));
+    ASSERT_TRUE(universe->has_child("foo"));
+    ASSERT_FALSE(universe->has_child("bar"));
+    ASSERT_FALSE(world->has_child("foo"));
+    ASSERT_FALSE(world->has_child("bar"));
+    ASSERT_FALSE(scene->has_child("foo"));
+    ASSERT_TRUE(scene->has_child("bar"));
 }
 
 TEST(scene_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_scene_with_only_local_name)
@@ -2891,15 +2891,15 @@ TEST(scene_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_
 
     scene->set_local_name("foo");
     scene->bind_to_new_parent(world2);
-    ASSERT_FALSE(world1->is_entity("foo"));
-    ASSERT_TRUE(world2->is_entity("foo"));
+    ASSERT_FALSE(world1->has_child("foo"));
+    ASSERT_TRUE(world2->has_child("foo"));
     ASSERT_EQ(scene->get_parent(), world2);
     ASSERT_EQ(world1->get_number_of_non_setting_children(), 0);
     ASSERT_EQ(world2->get_number_of_non_setting_children(), 1);
 
     scene->bind_to_new_parent(world1);
-    ASSERT_TRUE(world1->is_entity("foo"));
-    ASSERT_FALSE(world2->is_entity("foo"));
+    ASSERT_TRUE(world1->has_child("foo"));
+    ASSERT_FALSE(world2->has_child("foo"));
     ASSERT_EQ(scene->get_parent(), world1);
     ASSERT_EQ(world1->get_number_of_non_setting_children(), 1);
     ASSERT_EQ(world2->get_number_of_non_setting_children(), 0);
@@ -2924,19 +2924,19 @@ TEST(scene_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_
     scene->set_global_name("foo");
     scene->set_local_name("bar");
     scene->bind_to_new_parent(world2);
-    ASSERT_FALSE(world1->is_entity("foo"));
-    ASSERT_FALSE(world2->is_entity("foo"));
-    ASSERT_FALSE(world1->is_entity("bar"));
-    ASSERT_TRUE(world2->is_entity("bar"));
+    ASSERT_FALSE(world1->has_child("foo"));
+    ASSERT_FALSE(world2->has_child("foo"));
+    ASSERT_FALSE(world1->has_child("bar"));
+    ASSERT_TRUE(world2->has_child("bar"));
     ASSERT_EQ(scene->get_parent(), world2);
     ASSERT_EQ(world1->get_number_of_non_setting_children(), 0);
     ASSERT_EQ(world2->get_number_of_non_setting_children(), 1);
 
     scene->bind_to_new_parent(world1);
-    ASSERT_FALSE(world1->is_entity("foo"));
-    ASSERT_FALSE(world2->is_entity("foo"));
-    ASSERT_TRUE(world1->is_entity("bar"));
-    ASSERT_FALSE(world2->is_entity("bar"));
+    ASSERT_FALSE(world1->has_child("foo"));
+    ASSERT_FALSE(world2->has_child("foo"));
+    ASSERT_TRUE(world1->has_child("bar"));
+    ASSERT_FALSE(world2->has_child("bar"));
     ASSERT_EQ(scene->get_parent(), world1);
     ASSERT_EQ(world1->get_number_of_non_setting_children(), 1);
     ASSERT_EQ(world2->get_number_of_non_setting_children(), 0);
@@ -2969,8 +2969,8 @@ TEST(scene_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, head
     ASSERT_EQ(scene2->get_parent(), world2);
     ASSERT_EQ(world1->get_number_of_non_setting_children(), 1);
     ASSERT_EQ(world2->get_number_of_non_setting_children(), 1);
-    ASSERT_TRUE(world1->is_entity("foo"));
-    ASSERT_TRUE(world2->is_entity("foo"));
+    ASSERT_TRUE(world1->has_child("foo"));
+    ASSERT_TRUE(world2->has_child("foo"));
 }
 
 TEST(scene_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_scenes_with_different_global_names_and_same_local_name)
@@ -3002,12 +3002,12 @@ TEST(scene_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, head
     ASSERT_EQ(scene2->get_parent(), world2);
     ASSERT_EQ(world1->get_number_of_non_setting_children(), 1);
     ASSERT_EQ(world2->get_number_of_non_setting_children(), 1);
-    ASSERT_FALSE(world1->is_entity("foo"));
-    ASSERT_FALSE(world2->is_entity("foo"));
-    ASSERT_FALSE(world1->is_entity("bar"));
-    ASSERT_FALSE(world2->is_entity("bar"));
-    ASSERT_TRUE(world1->is_entity("baz"));
-    ASSERT_TRUE(world2->is_entity("baz"));
+    ASSERT_FALSE(world1->has_child("foo"));
+    ASSERT_FALSE(world2->has_child("foo"));
+    ASSERT_FALSE(world1->has_child("bar"));
+    ASSERT_FALSE(world2->has_child("bar"));
+    ASSERT_TRUE(world1->has_child("baz"));
+    ASSERT_TRUE(world2->has_child("baz"));
 }
 
 TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_shader_with_only_local_name)
@@ -3033,15 +3033,15 @@ TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
 
     shader->set_local_name("foo");
     shader->bind_to_new_parent(scene2);
-    ASSERT_FALSE(scene1->is_entity("foo"));
-    ASSERT_TRUE(scene2->is_entity("foo"));
+    ASSERT_FALSE(scene1->has_child("foo"));
+    ASSERT_TRUE(scene2->has_child("foo"));
     ASSERT_EQ(shader->get_parent(), scene2);
     ASSERT_EQ(scene1->get_number_of_non_setting_children(), 1);
     ASSERT_EQ(scene2->get_number_of_non_setting_children(), 2);
 
     shader->bind_to_new_parent(scene1);
-    ASSERT_TRUE(scene1->is_entity("foo"));
-    ASSERT_FALSE(scene2->is_entity("foo"));
+    ASSERT_TRUE(scene1->has_child("foo"));
+    ASSERT_FALSE(scene2->has_child("foo"));
     ASSERT_EQ(shader->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_setting_children(), 2);
     ASSERT_EQ(scene2->get_number_of_non_setting_children(), 1);
@@ -3071,19 +3071,19 @@ TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     shader->set_global_name("foo");
     shader->set_local_name("bar");
     shader->bind_to_new_parent(scene2);
-    ASSERT_FALSE(scene1->is_entity("foo"));
-    ASSERT_FALSE(scene2->is_entity("foo"));
-    ASSERT_FALSE(scene1->is_entity("bar"));
-    ASSERT_TRUE(scene2->is_entity("bar"));
+    ASSERT_FALSE(scene1->has_child("foo"));
+    ASSERT_FALSE(scene2->has_child("foo"));
+    ASSERT_FALSE(scene1->has_child("bar"));
+    ASSERT_TRUE(scene2->has_child("bar"));
     ASSERT_EQ(shader->get_parent(), scene2);
     ASSERT_EQ(scene1->get_number_of_non_setting_children(), 1);
     ASSERT_EQ(scene2->get_number_of_non_setting_children(), 2);
 
     shader->bind_to_new_parent(scene1);
-    ASSERT_FALSE(scene1->is_entity("foo"));
-    ASSERT_FALSE(scene2->is_entity("foo"));
-    ASSERT_TRUE(scene1->is_entity("bar"));
-    ASSERT_FALSE(scene2->is_entity("bar"));
+    ASSERT_FALSE(scene1->has_child("foo"));
+    ASSERT_FALSE(scene2->has_child("foo"));
+    ASSERT_TRUE(scene1->has_child("bar"));
+    ASSERT_FALSE(scene2->has_child("bar"));
     ASSERT_EQ(shader->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_setting_children(), 2);
     ASSERT_EQ(scene2->get_number_of_non_setting_children(), 1);
@@ -3120,8 +3120,8 @@ TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     ASSERT_EQ(shader1->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_setting_children(), 2);
     ASSERT_EQ(scene2->get_number_of_non_setting_children(), 2);
-    ASSERT_TRUE(scene1->is_entity("foo"));
-    ASSERT_TRUE(scene2->is_entity("foo"));
+    ASSERT_TRUE(scene1->has_child("foo"));
+    ASSERT_TRUE(scene2->has_child("foo"));
 }
 
 TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_shaders_with_different_global_names_and_same_local_name)
@@ -3157,12 +3157,12 @@ TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     ASSERT_EQ(shader1->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_setting_children(), 2);
     ASSERT_EQ(scene2->get_number_of_non_setting_children(), 2);
-    ASSERT_FALSE(scene1->is_entity("foo"));
-    ASSERT_FALSE(scene2->is_entity("foo"));
-    ASSERT_FALSE(scene1->is_entity("bar"));
-    ASSERT_FALSE(scene2->is_entity("bar"));
-    ASSERT_TRUE(scene1->is_entity("baz"));
-    ASSERT_TRUE(scene2->is_entity("baz"));
+    ASSERT_FALSE(scene1->has_child("foo"));
+    ASSERT_FALSE(scene2->has_child("foo"));
+    ASSERT_FALSE(scene1->has_child("bar"));
+    ASSERT_FALSE(scene2->has_child("bar"));
+    ASSERT_TRUE(scene1->has_child("baz"));
+    ASSERT_TRUE(scene2->has_child("baz"));
 }
 
 TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_material_with_only_local_name)
@@ -3192,15 +3192,15 @@ TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
 
     material->set_local_name("foo");
     material->bind_to_new_parent(shader2);
-    ASSERT_FALSE(shader1->is_entity("foo"));
-    ASSERT_TRUE(shader2->is_entity("foo"));
+    ASSERT_FALSE(shader1->has_child("foo"));
+    ASSERT_TRUE(shader2->has_child("foo"));
     ASSERT_EQ(material->get_parent(), shader2);
     ASSERT_EQ(shader1->get_number_of_non_setting_children(), 0);
     ASSERT_EQ(shader2->get_number_of_non_setting_children(), 1);
 
     material->bind_to_new_parent(shader1);
-    ASSERT_TRUE(shader1->is_entity("foo"));
-    ASSERT_FALSE(shader2->is_entity("foo"));
+    ASSERT_TRUE(shader1->has_child("foo"));
+    ASSERT_FALSE(shader2->has_child("foo"));
     ASSERT_EQ(material->get_parent(), shader1);
     ASSERT_EQ(shader1->get_number_of_non_setting_children(), 1);
     ASSERT_EQ(shader2->get_number_of_non_setting_children(), 0);
@@ -3234,19 +3234,19 @@ TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
     material->set_global_name("foo");
     material->set_local_name("bar");
     material->bind_to_new_parent(shader2);
-    ASSERT_FALSE(shader1->is_entity("foo"));
-    ASSERT_FALSE(shader2->is_entity("foo"));
-    ASSERT_FALSE(shader1->is_entity("bar"));
-    ASSERT_TRUE(shader2->is_entity("bar"));
+    ASSERT_FALSE(shader1->has_child("foo"));
+    ASSERT_FALSE(shader2->has_child("foo"));
+    ASSERT_FALSE(shader1->has_child("bar"));
+    ASSERT_TRUE(shader2->has_child("bar"));
     ASSERT_EQ(material->get_parent(), shader2);
     ASSERT_EQ(shader1->get_number_of_non_setting_children(), 0);
     ASSERT_EQ(shader2->get_number_of_non_setting_children(), 1);
 
     material->bind_to_new_parent(shader1);
-    ASSERT_FALSE(shader1->is_entity("foo"));
-    ASSERT_FALSE(shader2->is_entity("foo"));
-    ASSERT_TRUE(shader1->is_entity("bar"));
-    ASSERT_FALSE(shader2->is_entity("bar"));
+    ASSERT_FALSE(shader1->has_child("foo"));
+    ASSERT_FALSE(shader2->has_child("foo"));
+    ASSERT_TRUE(shader1->has_child("bar"));
+    ASSERT_FALSE(shader2->has_child("bar"));
     ASSERT_EQ(material->get_parent(), shader1);
     ASSERT_EQ(shader1->get_number_of_non_setting_children(), 1);
     ASSERT_EQ(shader2->get_number_of_non_setting_children(), 0);
@@ -3287,8 +3287,8 @@ TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
     ASSERT_EQ(material1->get_parent(), shader1);
     ASSERT_EQ(shader1->get_number_of_non_setting_children(), 1);
     ASSERT_EQ(shader2->get_number_of_non_setting_children(), 1);
-    ASSERT_TRUE(shader1->is_entity("foo"));
-    ASSERT_TRUE(shader2->is_entity("foo"));
+    ASSERT_TRUE(shader1->has_child("foo"));
+    ASSERT_TRUE(shader2->has_child("foo"));
 }
 
 TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_materials_with_different_global_names_and_same_local_name)
@@ -3328,12 +3328,12 @@ TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
     ASSERT_EQ(material1->get_parent(), shader1);
     ASSERT_EQ(shader1->get_number_of_non_setting_children(), 1);
     ASSERT_EQ(shader2->get_number_of_non_setting_children(), 1);
-    ASSERT_FALSE(shader1->is_entity("foo"));
-    ASSERT_FALSE(shader2->is_entity("foo"));
-    ASSERT_FALSE(shader1->is_entity("bar"));
-    ASSERT_FALSE(shader2->is_entity("bar"));
-    ASSERT_TRUE(shader1->is_entity("baz"));
-    ASSERT_TRUE(shader2->is_entity("baz"));
+    ASSERT_FALSE(shader1->has_child("foo"));
+    ASSERT_FALSE(shader2->has_child("foo"));
+    ASSERT_FALSE(shader1->has_child("bar"));
+    ASSERT_FALSE(shader2->has_child("bar"));
+    ASSERT_TRUE(shader1->has_child("baz"));
+    ASSERT_TRUE(shader2->has_child("baz"));
 }
 
 TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_species_with_only_local_name)
@@ -3369,15 +3369,15 @@ TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headles
 
     species->set_local_name("foo");
     species->bind_to_new_parent(material2);
-    ASSERT_FALSE(material1->is_entity("foo"));
-    ASSERT_TRUE(material2->is_entity("foo"));
+    ASSERT_FALSE(material1->has_child("foo"));
+    ASSERT_TRUE(material2->has_child("foo"));
     ASSERT_EQ(species->get_parent(), material2);
     ASSERT_EQ(material1->get_number_of_non_setting_children(), 0);
     ASSERT_EQ(material2->get_number_of_non_setting_children(), 1);
 
     species->bind_to_new_parent(material1);
-    ASSERT_TRUE(material1->is_entity("foo"));
-    ASSERT_FALSE(material2->is_entity("foo"));
+    ASSERT_TRUE(material1->has_child("foo"));
+    ASSERT_FALSE(material2->has_child("foo"));
     ASSERT_EQ(species->get_parent(), material1);
     ASSERT_EQ(material1->get_number_of_non_setting_children(), 1);
     ASSERT_EQ(material2->get_number_of_non_setting_children(), 0);
@@ -3417,19 +3417,19 @@ TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headles
     species->set_global_name("foo");
     species->set_local_name("bar");
     species->bind_to_new_parent(material2);
-    ASSERT_FALSE(material1->is_entity("foo"));
-    ASSERT_FALSE(material2->is_entity("foo"));
-    ASSERT_FALSE(material1->is_entity("bar"));
-    ASSERT_TRUE(material2->is_entity("bar"));
+    ASSERT_FALSE(material1->has_child("foo"));
+    ASSERT_FALSE(material2->has_child("foo"));
+    ASSERT_FALSE(material1->has_child("bar"));
+    ASSERT_TRUE(material2->has_child("bar"));
     ASSERT_EQ(species->get_parent(), material2);
     ASSERT_EQ(material1->get_number_of_non_setting_children(), 0);
     ASSERT_EQ(material2->get_number_of_non_setting_children(), 1);
 
     species->bind_to_new_parent(material1);
-    ASSERT_FALSE(material1->is_entity("foo"));
-    ASSERT_FALSE(material2->is_entity("foo"));
-    ASSERT_TRUE(material1->is_entity("bar"));
-    ASSERT_FALSE(material2->is_entity("bar"));
+    ASSERT_FALSE(material1->has_child("foo"));
+    ASSERT_FALSE(material2->has_child("foo"));
+    ASSERT_TRUE(material1->has_child("bar"));
+    ASSERT_FALSE(material2->has_child("bar"));
     ASSERT_EQ(species->get_parent(), material1);
     ASSERT_EQ(material1->get_number_of_non_setting_children(), 1);
     ASSERT_EQ(material2->get_number_of_non_setting_children(), 0);
@@ -3478,8 +3478,8 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
     ASSERT_EQ(species1->get_parent(), material1);
     ASSERT_EQ(material1->get_number_of_non_setting_children(), 1);
     ASSERT_EQ(material2->get_number_of_non_setting_children(), 1);
-    ASSERT_TRUE(material1->is_entity("foo"));
-    ASSERT_TRUE(material2->is_entity("foo"));
+    ASSERT_TRUE(material1->has_child("foo"));
+    ASSERT_TRUE(material2->has_child("foo"));
 }
 
 TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_species_with_different_global_names_and_same_local_name)
@@ -3527,12 +3527,12 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
     ASSERT_EQ(species1->get_parent(), material1);
     ASSERT_EQ(material1->get_number_of_non_setting_children(), 1);
     ASSERT_EQ(material2->get_number_of_non_setting_children(), 1);
-    ASSERT_FALSE(material1->is_entity("foo"));
-    ASSERT_FALSE(material2->is_entity("foo"));
-    ASSERT_FALSE(material1->is_entity("bar"));
-    ASSERT_FALSE(material2->is_entity("bar"));
-    ASSERT_TRUE(material1->is_entity("baz"));
-    ASSERT_TRUE(material2->is_entity("baz"));
+    ASSERT_FALSE(material1->has_child("foo"));
+    ASSERT_FALSE(material2->has_child("foo"));
+    ASSERT_FALSE(material1->has_child("bar"));
+    ASSERT_FALSE(material2->has_child("bar"));
+    ASSERT_TRUE(material1->has_child("baz"));
+    ASSERT_TRUE(material2->has_child("baz"));
 }
 
 TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_object_with_only_local_name)
@@ -3574,15 +3574,15 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
 
     object->set_local_name("foo");
     object->bind_to_new_parent(species2);
-    ASSERT_FALSE(species1->is_entity("foo"));
-    ASSERT_TRUE(species2->is_entity("foo"));
+    ASSERT_FALSE(species1->has_child("foo"));
+    ASSERT_TRUE(species2->has_child("foo"));
     ASSERT_EQ(object->get_parent(), species2);
     ASSERT_EQ(species1->get_number_of_non_setting_children(), 0);
     ASSERT_EQ(species2->get_number_of_non_setting_children(), 1);
 
     object->bind_to_new_parent(species1);
-    ASSERT_TRUE(species1->is_entity("foo"));
-    ASSERT_FALSE(species2->is_entity("foo"));
+    ASSERT_TRUE(species1->has_child("foo"));
+    ASSERT_FALSE(species2->has_child("foo"));
     ASSERT_EQ(object->get_parent(), species1);
     ASSERT_EQ(species1->get_number_of_non_setting_children(), 1);
     ASSERT_EQ(species2->get_number_of_non_setting_children(), 0);
@@ -3628,19 +3628,19 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     object->set_global_name("foo");
     object->set_local_name("bar");
     object->bind_to_new_parent(species2);
-    ASSERT_FALSE(species1->is_entity("foo"));
-    ASSERT_FALSE(species2->is_entity("foo"));
-    ASSERT_FALSE(species1->is_entity("bar"));
-    ASSERT_TRUE(species2->is_entity("bar"));
+    ASSERT_FALSE(species1->has_child("foo"));
+    ASSERT_FALSE(species2->has_child("foo"));
+    ASSERT_FALSE(species1->has_child("bar"));
+    ASSERT_TRUE(species2->has_child("bar"));
     ASSERT_EQ(object->get_parent(), species2);
     ASSERT_EQ(species1->get_number_of_non_setting_children(), 0);
     ASSERT_EQ(species2->get_number_of_non_setting_children(), 1);
 
     object->bind_to_new_parent(species1);
-    ASSERT_FALSE(species1->is_entity("foo"));
-    ASSERT_FALSE(species2->is_entity("foo"));
-    ASSERT_TRUE(species1->is_entity("bar"));
-    ASSERT_FALSE(species2->is_entity("bar"));
+    ASSERT_FALSE(species1->has_child("foo"));
+    ASSERT_FALSE(species2->has_child("foo"));
+    ASSERT_TRUE(species1->has_child("bar"));
+    ASSERT_FALSE(species2->has_child("bar"));
     ASSERT_EQ(object->get_parent(), species1);
     ASSERT_EQ(species1->get_number_of_non_setting_children(), 1);
     ASSERT_EQ(species2->get_number_of_non_setting_children(), 0);
@@ -3693,8 +3693,8 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     ASSERT_EQ(object1->get_parent(), species1);
     ASSERT_EQ(species1->get_number_of_non_setting_children(), 1);
     ASSERT_EQ(species2->get_number_of_non_setting_children(), 1);
-    ASSERT_TRUE(species1->is_entity("foo"));
-    ASSERT_TRUE(species2->is_entity("foo"));
+    ASSERT_TRUE(species1->has_child("foo"));
+    ASSERT_TRUE(species2->has_child("foo"));
 }
 
 TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_objects_with_different_global_names_and_same_local_name)
@@ -3746,10 +3746,10 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     ASSERT_EQ(object1->get_parent(), species1);
     ASSERT_EQ(species1->get_number_of_non_setting_children(), 1);
     ASSERT_EQ(species2->get_number_of_non_setting_children(), 1);
-    ASSERT_FALSE(species1->is_entity("foo"));
-    ASSERT_FALSE(species2->is_entity("foo"));
-    ASSERT_FALSE(species1->is_entity("bar"));
-    ASSERT_FALSE(species2->is_entity("bar"));
-    ASSERT_TRUE(species1->is_entity("baz"));
-    ASSERT_TRUE(species2->is_entity("baz"));
+    ASSERT_FALSE(species1->has_child("foo"));
+    ASSERT_FALSE(species2->has_child("foo"));
+    ASSERT_FALSE(species1->has_child("bar"));
+    ASSERT_FALSE(species2->has_child("bar"));
+    ASSERT_TRUE(species1->has_child("baz"));
+    ASSERT_TRUE(species2->has_child("baz"));
 }

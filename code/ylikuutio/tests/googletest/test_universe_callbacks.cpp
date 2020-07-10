@@ -126,7 +126,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_bool_true
     const std::string any_value_entity_name = "foo";
     const std::string any_value_entity_type = "bool";
     const std::string any_value_entity_value = "true";
-    ASSERT_FALSE(universe->is_entity(any_value_entity_name));
+    ASSERT_FALSE(universe->has_child(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     universe->create_any_value_entity(
@@ -134,7 +134,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_bool_true
             std::make_shared<std::string>(any_value_entity_name),
             std::make_shared<std::string>(any_value_entity_type),
             std::make_shared<std::string>(any_value_entity_value));
-    ASSERT_TRUE(universe->is_entity(any_value_entity_name));
+    ASSERT_TRUE(universe->has_child(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
     ASSERT_NE(entity, nullptr);
@@ -161,7 +161,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_bool_fals
     const std::string any_value_entity_name = "foo";
     const std::string any_value_entity_type = "bool";
     const std::string any_value_entity_value = "false";
-    ASSERT_FALSE(universe->is_entity(any_value_entity_name));
+    ASSERT_FALSE(universe->has_child(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     universe->create_any_value_entity(
@@ -169,7 +169,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_bool_fals
             std::make_shared<std::string>(any_value_entity_name),
             std::make_shared<std::string>(any_value_entity_type),
             std::make_shared<std::string>(any_value_entity_value));
-    ASSERT_TRUE(universe->is_entity(any_value_entity_name));
+    ASSERT_TRUE(universe->has_child(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
     ASSERT_NE(entity, nullptr);
@@ -196,7 +196,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_float_0)
     const std::string any_value_entity_name = "foo";
     const std::string any_value_entity_type = "float";
     const std::string any_value_entity_value = "0";
-    ASSERT_FALSE(universe->is_entity(any_value_entity_name));
+    ASSERT_FALSE(universe->has_child(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     universe->create_any_value_entity(
@@ -204,7 +204,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_float_0)
             std::make_shared<std::string>(any_value_entity_name),
             std::make_shared<std::string>(any_value_entity_type),
             std::make_shared<std::string>(any_value_entity_value));
-    ASSERT_TRUE(universe->is_entity(any_value_entity_name));
+    ASSERT_TRUE(universe->has_child(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
     ASSERT_NE(entity, nullptr);
@@ -231,7 +231,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_float_0_0
     const std::string any_value_entity_name = "foo";
     const std::string any_value_entity_type = "float";
     const std::string any_value_entity_value = "0.0";
-    ASSERT_FALSE(universe->is_entity(any_value_entity_name));
+    ASSERT_FALSE(universe->has_child(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     universe->create_any_value_entity(
@@ -239,7 +239,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_float_0_0
             std::make_shared<std::string>(any_value_entity_name),
             std::make_shared<std::string>(any_value_entity_type),
             std::make_shared<std::string>(any_value_entity_value));
-    ASSERT_TRUE(universe->is_entity(any_value_entity_name));
+    ASSERT_TRUE(universe->has_child(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
     ASSERT_NE(entity, nullptr);
@@ -266,7 +266,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_float_pi)
     const std::string any_value_entity_name = "foo";
     const std::string any_value_entity_type = "float";
     const std::string any_value_entity_value = "3.1415927";
-    ASSERT_FALSE(universe->is_entity(any_value_entity_name));
+    ASSERT_FALSE(universe->has_child(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     universe->create_any_value_entity(
@@ -274,7 +274,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_float_pi)
             std::make_shared<std::string>(any_value_entity_name),
             std::make_shared<std::string>(any_value_entity_type),
             std::make_shared<std::string>(any_value_entity_value));
-    ASSERT_TRUE(universe->is_entity(any_value_entity_name));
+    ASSERT_TRUE(universe->has_child(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
     ASSERT_NE(entity, nullptr);
@@ -303,7 +303,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_double_0)
     const std::string any_value_entity_name = "foo";
     const std::string any_value_entity_type = "double";
     const std::string any_value_entity_value = "0";
-    ASSERT_FALSE(universe->is_entity(any_value_entity_name));
+    ASSERT_FALSE(universe->has_child(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     universe->create_any_value_entity(
@@ -311,7 +311,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_double_0)
             std::make_shared<std::string>(any_value_entity_name),
             std::make_shared<std::string>(any_value_entity_type),
             std::make_shared<std::string>(any_value_entity_value));
-    ASSERT_TRUE(universe->is_entity(any_value_entity_name));
+    ASSERT_TRUE(universe->has_child(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
     ASSERT_NE(entity, nullptr);
@@ -338,7 +338,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_double_0_
     const std::string any_value_entity_name = "foo";
     const std::string any_value_entity_type = "double";
     const std::string any_value_entity_value = "0.0";
-    ASSERT_FALSE(universe->is_entity(any_value_entity_name));
+    ASSERT_FALSE(universe->has_child(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     universe->create_any_value_entity(
@@ -346,7 +346,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_double_0_
             std::make_shared<std::string>(any_value_entity_name),
             std::make_shared<std::string>(any_value_entity_type),
             std::make_shared<std::string>(any_value_entity_value));
-    ASSERT_TRUE(universe->is_entity(any_value_entity_name));
+    ASSERT_TRUE(universe->has_child(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
     ASSERT_NE(entity, nullptr);
@@ -373,7 +373,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_double_pi
     const std::string any_value_entity_name = "foo";
     const std::string any_value_entity_type = "double";
     const std::string any_value_entity_value = "3.1415927";
-    ASSERT_FALSE(universe->is_entity(any_value_entity_name));
+    ASSERT_FALSE(universe->has_child(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     universe->create_any_value_entity(
@@ -381,7 +381,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_double_pi
             std::make_shared<std::string>(any_value_entity_name),
             std::make_shared<std::string>(any_value_entity_type),
             std::make_shared<std::string>(any_value_entity_value));
-    ASSERT_TRUE(universe->is_entity(any_value_entity_name));
+    ASSERT_TRUE(universe->has_child(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
     ASSERT_NE(entity, nullptr);
@@ -408,7 +408,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_0
     const std::string any_value_entity_name = "foo";
     const std::string any_value_entity_type = "int32_t";
     const std::string any_value_entity_value = "0";
-    ASSERT_FALSE(universe->is_entity(any_value_entity_name));
+    ASSERT_FALSE(universe->has_child(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     universe->create_any_value_entity(
@@ -416,7 +416,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_0
             std::make_shared<std::string>(any_value_entity_name),
             std::make_shared<std::string>(any_value_entity_type),
             std::make_shared<std::string>(any_value_entity_value));
-    ASSERT_TRUE(universe->is_entity(any_value_entity_name));
+    ASSERT_TRUE(universe->has_child(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
     ASSERT_NE(entity, nullptr);
@@ -443,7 +443,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_p
     const std::string any_value_entity_name = "foo";
     const std::string any_value_entity_type = "int32_t";
     const std::string any_value_entity_value = "1";
-    ASSERT_FALSE(universe->is_entity(any_value_entity_name));
+    ASSERT_FALSE(universe->has_child(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     universe->create_any_value_entity(
@@ -451,7 +451,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_p
             std::make_shared<std::string>(any_value_entity_name),
             std::make_shared<std::string>(any_value_entity_type),
             std::make_shared<std::string>(any_value_entity_value));
-    ASSERT_TRUE(universe->is_entity(any_value_entity_name));
+    ASSERT_TRUE(universe->has_child(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
     ASSERT_NE(entity, nullptr);
@@ -478,7 +478,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_m
     const std::string any_value_entity_name = "foo";
     const std::string any_value_entity_type = "int32_t";
     const std::string any_value_entity_value = "-1";
-    ASSERT_FALSE(universe->is_entity(any_value_entity_name));
+    ASSERT_FALSE(universe->has_child(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     universe->create_any_value_entity(
@@ -486,7 +486,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_m
             std::make_shared<std::string>(any_value_entity_name),
             std::make_shared<std::string>(any_value_entity_type),
             std::make_shared<std::string>(any_value_entity_value));
-    ASSERT_TRUE(universe->is_entity(any_value_entity_name));
+    ASSERT_TRUE(universe->has_child(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
     ASSERT_NE(entity, nullptr);
@@ -513,7 +513,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_m
     const std::string any_value_entity_name = "foo";
     const std::string any_value_entity_type = "int32_t";
     const std::string any_value_entity_value = "2147483647";
-    ASSERT_FALSE(universe->is_entity(any_value_entity_name));
+    ASSERT_FALSE(universe->has_child(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     universe->create_any_value_entity(
@@ -521,7 +521,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_m
             std::make_shared<std::string>(any_value_entity_name),
             std::make_shared<std::string>(any_value_entity_type),
             std::make_shared<std::string>(any_value_entity_value));
-    ASSERT_TRUE(universe->is_entity(any_value_entity_name));
+    ASSERT_TRUE(universe->has_child(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
     ASSERT_NE(entity, nullptr);
@@ -548,7 +548,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_m
     const std::string any_value_entity_name = "foo";
     const std::string any_value_entity_type = "int32_t";
     const std::string any_value_entity_value = "-2147483648";
-    ASSERT_FALSE(universe->is_entity(any_value_entity_name));
+    ASSERT_FALSE(universe->has_child(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     universe->create_any_value_entity(
@@ -556,7 +556,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_int32_t_m
             std::make_shared<std::string>(any_value_entity_name),
             std::make_shared<std::string>(any_value_entity_type),
             std::make_shared<std::string>(any_value_entity_value));
-    ASSERT_TRUE(universe->is_entity(any_value_entity_name));
+    ASSERT_TRUE(universe->has_child(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
     ASSERT_NE(entity, nullptr);
@@ -583,7 +583,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_uint32_t_
     const std::string any_value_entity_name = "foo";
     const std::string any_value_entity_type = "uint32_t";
     const std::string any_value_entity_value = "0";
-    ASSERT_FALSE(universe->is_entity(any_value_entity_name));
+    ASSERT_FALSE(universe->has_child(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     universe->create_any_value_entity(
@@ -591,7 +591,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_uint32_t_
             std::make_shared<std::string>(any_value_entity_name),
             std::make_shared<std::string>(any_value_entity_type),
             std::make_shared<std::string>(any_value_entity_value));
-    ASSERT_TRUE(universe->is_entity(any_value_entity_name));
+    ASSERT_TRUE(universe->has_child(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
     ASSERT_NE(entity, nullptr);
@@ -618,7 +618,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_uint32_t_
     const std::string any_value_entity_name = "foo";
     const std::string any_value_entity_type = "uint32_t";
     const std::string any_value_entity_value = "1";
-    ASSERT_FALSE(universe->is_entity(any_value_entity_name));
+    ASSERT_FALSE(universe->has_child(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     universe->create_any_value_entity(
@@ -626,7 +626,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_uint32_t_
             std::make_shared<std::string>(any_value_entity_name),
             std::make_shared<std::string>(any_value_entity_type),
             std::make_shared<std::string>(any_value_entity_value));
-    ASSERT_TRUE(universe->is_entity(any_value_entity_name));
+    ASSERT_TRUE(universe->has_child(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
     ASSERT_NE(entity, nullptr);
@@ -653,7 +653,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_uint32_t_
     const std::string any_value_entity_name = "foo";
     const std::string any_value_entity_type = "uint32_t";
     const std::string any_value_entity_value = "4294967295";
-    ASSERT_FALSE(universe->is_entity(any_value_entity_name));
+    ASSERT_FALSE(universe->has_child(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     universe->create_any_value_entity(
@@ -661,7 +661,7 @@ TEST(any_value_entity_must_be_created_appropriately, universe_callback_uint32_t_
             std::make_shared<std::string>(any_value_entity_name),
             std::make_shared<std::string>(any_value_entity_type),
             std::make_shared<std::string>(any_value_entity_value));
-    ASSERT_TRUE(universe->is_entity(any_value_entity_name));
+    ASSERT_TRUE(universe->has_child(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
     ASSERT_NE(entity, nullptr);
@@ -686,11 +686,11 @@ TEST(any_struct_entity_must_be_created_appropriately, universe_callback_any_stru
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     const std::string any_value_entity_name = "foo";
-    ASSERT_FALSE(universe->is_entity(any_value_entity_name));
+    ASSERT_FALSE(universe->has_child(any_value_entity_name));
     ASSERT_EQ(universe->get_entity(any_value_entity_name), nullptr);
 
     universe->create_any_struct_entity(universe, std::make_shared<std::string>(any_value_entity_name));
-    ASSERT_TRUE(universe->is_entity(any_value_entity_name));
+    ASSERT_TRUE(universe->has_child(any_value_entity_name));
 
     yli::ontology::Entity* const entity = universe->get_entity(any_value_entity_name);
     ASSERT_NE(entity, nullptr);

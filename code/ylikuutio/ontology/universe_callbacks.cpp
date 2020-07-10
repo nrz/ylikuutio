@@ -96,7 +96,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        if (universe->is_entity(*variable_name_shared_ptr))
+        if (universe->has_child(*variable_name_shared_ptr))
         {
             return nullptr;
         }
@@ -140,7 +140,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        if (universe->is_entity(*variable_name_shared_ptr))
+        if (universe->has_child(*variable_name_shared_ptr))
         {
             // Variable name is in use already!
             return nullptr;

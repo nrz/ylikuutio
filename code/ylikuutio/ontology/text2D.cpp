@@ -59,7 +59,7 @@ namespace yli::ontology
             return;
         }
 
-        if (new_parent->is_entity(this->local_name))
+        if (new_parent->has_child(this->local_name))
         {
             std::cerr << "ERROR: `Text2D::bind_to_new_parent`: local name is already in use!\n";
             return;
