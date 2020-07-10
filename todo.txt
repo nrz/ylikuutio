@@ -21,6 +21,16 @@ Tasks which are necessary for the first stage:
 [ ] Implement `yli::ontology::Waypoint` class.
 
 Tasks which are necessary for the second stage:
+[ ] Implement `yli::ontology::WorldShader` to support sharing shaders between multiple `Scene`s.
+[ ] Implement `yli::ontology::WorldMaterial` to support sharing materials between multiple `Scene`s.
+[ ] Implement `yli::ontology::WorldSpecies` to support sharing species between multiple `Scene`s.
+[ ] Implement `yli::ontology::WorldSymbiosis` to support sharing symbioses between multiple `Scene`s.
+[ ] Implement `yli::ontology::WorldBrain` to support sharing brains between multiple `Scene`s.
+[ ] Implement `yli::ontology::WorldShader` constructor that receives `yli::ontology::Shader` and converts it into a `yli::ontology::WorldShader`.
+[ ] Implement `yli::ontology::WorldMaterial` constructor that receives `yli::ontology::Material` and converts it into a `yli::ontology::WorldMaterial`.
+[ ] Implement `yli::ontology::WorldSpecies` constructor that receives `yli::ontology::Species` and converts it into a `yli::ontology::WorldSpecies`.
+[ ] Implement `yli::ontology::WorldSymbiosis` constructor that receives `yli::ontology::Symbiosis` and converts it into a `yli::ontology::WorldSymbiosis`.
+[ ] Implement `yli::ontology::WorldBrain` constructor that receives `yli::ontology::Brain` and converts it into a `yli::ontology::WorldBrain`.
 [ ] Modify `set` console command so that setting a value is done using `set 'value foo bar` or `set 'value foo bar baz` (`'value` must be used).
 [ ] Modify `set` console command so that setting a global name is done using `set 'global-name foo bar`.
 [ ] Modify `set` console command so that setting a local name is done using `set 'local-name foo bar`.
