@@ -288,7 +288,7 @@ namespace yli::ontology
         entity_factory->create_setting(new_setting_struct);
     }
 
-    bool Entity::is_setting(const std::string& setting_name) const
+    bool Entity::has_setting(const std::string& setting_name) const
     {
         if (this->entity_map.count(setting_name) != 1)
         {

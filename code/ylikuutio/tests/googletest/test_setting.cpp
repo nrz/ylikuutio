@@ -42,7 +42,7 @@ TEST(is_setting_must_return_false_for_nonexisting_settings, headless_universe)
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    ASSERT_FALSE(universe->is_setting("foo"));
+    ASSERT_FALSE(universe->has_setting("foo"));
 }
 
 TEST(get_must_return_nullptr_for_nonexisting_settings, headless_universe)
@@ -62,7 +62,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_unnamed_settin
     bool bool_true = true;
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(bool_true));
     universe->create_setting(setting_struct);
-    ASSERT_FALSE(universe->is_setting("foo"));
+    ASSERT_FALSE(universe->has_setting("foo"));
     yli::ontology::Setting* const setting = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
 }
@@ -77,9 +77,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(bool_true));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -99,7 +99,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_unnamed_settin
     bool bool_false = false;
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(bool_false));
     universe->create_setting(setting_struct);
-    ASSERT_FALSE(universe->is_setting("foo"));
+    ASSERT_FALSE(universe->has_setting("foo"));
     yli::ontology::Setting* const setting = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
 }
@@ -114,9 +114,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(bool_false));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -136,7 +136,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_unnamed_settin
     char char_lowercase_a = 'a';
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(char_lowercase_a));
     universe->create_setting(setting_struct);
-    ASSERT_FALSE(universe->is_setting("foo"));
+    ASSERT_FALSE(universe->has_setting("foo"));
     yli::ontology::Setting* const setting = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
 }
@@ -151,9 +151,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(char_lowercase_a));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -173,7 +173,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_unnamed_settin
     char char_lowercase_b = 'b';
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(char_lowercase_b));
     universe->create_setting(setting_struct);
-    ASSERT_FALSE(universe->is_setting("foo"));
+    ASSERT_FALSE(universe->has_setting("foo"));
     yli::ontology::Setting* const setting = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
 }
@@ -188,9 +188,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(char_lowercase_b));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -210,7 +210,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_unnamed_settin
     char char_space = ' ';
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(char_space));
     universe->create_setting(setting_struct);
-    ASSERT_FALSE(universe->is_setting("foo"));
+    ASSERT_FALSE(universe->has_setting("foo"));
     yli::ontology::Setting* const setting = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
 }
@@ -225,9 +225,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(char_space));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -247,7 +247,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_unnamed_settin
     char char_newline = '\n';
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(char_newline));
     universe->create_setting(setting_struct);
-    ASSERT_FALSE(universe->is_setting("foo"));
+    ASSERT_FALSE(universe->has_setting("foo"));
     yli::ontology::Setting* const setting = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
 }
@@ -262,9 +262,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(char_newline));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -284,7 +284,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_unnamed_settin
     float float_zero = 0.0f;
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(float_zero));
     universe->create_setting(setting_struct);
-    ASSERT_FALSE(universe->is_setting("foo"));
+    ASSERT_FALSE(universe->has_setting("foo"));
     yli::ontology::Setting* const setting = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
 }
@@ -299,9 +299,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(float_zero));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -322,9 +322,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(float_positive_infinity));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -345,9 +345,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(float_negative_infinity));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -368,9 +368,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(float_nan));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -390,7 +390,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_unnamed_settin
     double double_zero = 0.0;
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_zero));
     universe->create_setting(setting_struct);
-    ASSERT_FALSE(universe->is_setting("foo"));
+    ASSERT_FALSE(universe->has_setting("foo"));
     yli::ontology::Setting* const setting = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
 }
@@ -405,9 +405,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_zero));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -428,9 +428,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_positive_infinity));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -451,9 +451,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_negative_infinity));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -474,9 +474,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(double_nan));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -496,7 +496,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_unnamed_settin
     int32_t int32_t_zero = 0;
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(int32_t_zero));
     universe->create_setting(setting_struct);
-    ASSERT_FALSE(universe->is_setting("foo"));
+    ASSERT_FALSE(universe->has_setting("foo"));
     yli::ontology::Setting* const setting = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
 }
@@ -511,9 +511,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(int32_t_zero));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -533,7 +533,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_unnamed_settin
     int32_t int32_t_plus_1 = 1;
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(int32_t_plus_1));
     universe->create_setting(setting_struct);
-    ASSERT_FALSE(universe->is_setting("foo"));
+    ASSERT_FALSE(universe->has_setting("foo"));
     yli::ontology::Setting* const setting = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
 }
@@ -548,9 +548,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(int32_t_plus_1));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -570,7 +570,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_unnamed_settin
     int32_t int32_t_minus_1 = -1;
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(int32_t_minus_1));
     universe->create_setting(setting_struct);
-    ASSERT_FALSE(universe->is_setting("foo"));
+    ASSERT_FALSE(universe->has_setting("foo"));
     yli::ontology::Setting* const setting = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
 }
@@ -585,9 +585,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(int32_t_minus_1));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -607,7 +607,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_unnamed_settin
     int32_t int32_t_max = std::numeric_limits<int32_t>::max();
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(int32_t_max));
     universe->create_setting(setting_struct);
-    ASSERT_FALSE(universe->is_setting("foo"));
+    ASSERT_FALSE(universe->has_setting("foo"));
     yli::ontology::Setting* const setting = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
 }
@@ -622,9 +622,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(int32_t_max));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -644,7 +644,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_unnamed_settin
     int32_t int32_t_min = std::numeric_limits<int32_t>::min();
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(int32_t_min));
     universe->create_setting(setting_struct);
-    ASSERT_FALSE(universe->is_setting("foo"));
+    ASSERT_FALSE(universe->has_setting("foo"));
     yli::ontology::Setting* const setting = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
 }
@@ -659,9 +659,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(int32_t_min));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -681,7 +681,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_unnamed_settin
     uint32_t uint32_t_zero = 0;
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(uint32_t_zero));
     universe->create_setting(setting_struct);
-    ASSERT_FALSE(universe->is_setting("foo"));
+    ASSERT_FALSE(universe->has_setting("foo"));
     yli::ontology::Setting* const setting = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
 }
@@ -696,9 +696,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(uint32_t_zero));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -718,7 +718,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_unnamed_settin
     uint32_t uint32_t_plus_1 = 1;
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(uint32_t_plus_1));
     universe->create_setting(setting_struct);
-    ASSERT_FALSE(universe->is_setting("foo"));
+    ASSERT_FALSE(universe->has_setting("foo"));
     yli::ontology::Setting* const setting = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
 }
@@ -733,9 +733,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(uint32_t_plus_1));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");
@@ -755,7 +755,7 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_unnamed_settin
     uint32_t uint32_t_max = std::numeric_limits<uint32_t>::max();
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(uint32_t_max));
     universe->create_setting(setting_struct);
-    ASSERT_FALSE(universe->is_setting("foo"));
+    ASSERT_FALSE(universe->has_setting("foo"));
     yli::ontology::Setting* const setting = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
 }
@@ -770,9 +770,9 @@ TEST(setting_must_be_initialized_appropriately, headless_universe_named_setting_
     yli::ontology::SettingStruct setting_struct(std::make_shared<yli::data::AnyValue>(uint32_t_max));
     setting_struct.local_name = "foo";
     universe->create_setting(setting_struct);
-    ASSERT_TRUE(universe->is_setting("foo"));
+    ASSERT_TRUE(universe->has_setting("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->is_setting("bar"));
+    ASSERT_FALSE(universe->has_setting("bar"));
     ASSERT_EQ(universe->get("bar"), nullptr);
 
     yli::ontology::Setting* const setting = universe->get("foo");

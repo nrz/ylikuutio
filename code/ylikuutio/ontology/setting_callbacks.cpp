@@ -159,10 +159,10 @@ namespace yli::ontology
             return nullptr;
         }
 
-        if (!entity->is_setting("red") ||
-                !entity->is_setting("green") ||
-                !entity->is_setting("blue") ||
-                !entity->is_setting("alpha"))
+        if (!entity->has_setting("red") ||
+                !entity->has_setting("green") ||
+                !entity->has_setting("blue") ||
+                !entity->has_setting("alpha"))
         {
             return nullptr;
         }

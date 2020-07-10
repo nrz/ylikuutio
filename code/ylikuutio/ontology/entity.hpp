@@ -90,7 +90,7 @@ namespace yli::ontology
             void erase_entity(const std::string& name);
 
             void create_setting(const yli::ontology::SettingStruct& setting_struct);
-            bool is_setting(const std::string& setting_name) const;
+            bool has_setting(const std::string& setting_name) const;
             yli::ontology::Setting* get(const std::string& setting_name) const;
             bool set(const std::string& setting_name, std::shared_ptr<yli::data::AnyValue> setting_new_any_value);
 
