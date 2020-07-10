@@ -187,7 +187,7 @@ namespace yli::ontology
             glBindTexture(GL_TEXTURE_2D, this->source_texture);
 
             // Set our "texture_sampler" sampler to use Texture Unit 0.
-            yli::opengl::uniform_1i(this->openGL_textureID, 0);
+            yli::opengl::uniform_1i(this->opengl_texture_id, 0);
 
             // 1st attribute buffer: vertices.
             yli::opengl::enable_vertex_attrib_array(this->vertex_position_modelspace_id);

@@ -54,7 +54,7 @@ namespace yli::ontology
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, this->texture);
         // Set our "texture_sampler" sampler to user Texture Unit 0.
-        yli::opengl::uniform_1i(this->openGL_textureID, 0);
+        yli::opengl::uniform_1i(this->opengl_texture_id, 0);
 
         // render this `SymbiontMaterial` by calling `render()` function of each `SymbiontSpecies`.
         yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_species.child_pointer_vector);
@@ -113,7 +113,7 @@ namespace yli::ontology
         if (!is_headless)
         {
             // Get a handle for our "texture_sampler" uniform.
-            this->openGL_textureID = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
+            this->opengl_texture_id = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
         }
     }
 
@@ -124,6 +124,6 @@ namespace yli::ontology
 
     GLint SymbiontMaterial::get_openGL_textureID() const
     {
-        return this->openGL_textureID;
+        return this->opengl_texture_id;
     }
 }

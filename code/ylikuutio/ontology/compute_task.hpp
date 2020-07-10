@@ -115,7 +115,7 @@ namespace yli::ontology
                 this->framebuffer                  = 0; // some dummy value.
                 this->source_texture               = 0; // some dummy value.
                 this->target_texture               = 0; // some dummy value.
-                this->openGL_textureID             = 0; // some dummy value.
+                this->opengl_texture_id            = 0; // some dummy value.
                 this->is_texture_loaded            = false;
                 this->is_framebuffer_initialized   = false;
                 this->is_ready                     = false;
@@ -194,7 +194,7 @@ namespace yli::ontology
                 if (!is_headless && this->is_texture_loaded)
                 {
                     // Get a handle for our "texture_sampler" uniform.
-                    this->openGL_textureID = glGetUniformLocation(this->parent->get_program_id(), "texture_sampler");
+                    this->opengl_texture_id = glGetUniformLocation(this->parent->get_program_id(), "texture_sampler");
 
                     // Initialize uniform window width.
                     // This is named `screen_width` instead of `texture_width` for compatibility with other shaders.
@@ -296,7 +296,7 @@ namespace yli::ontology
             uint32_t framebuffer;
             uint32_t source_texture;
             uint32_t target_texture;
-            GLint openGL_textureID;              // Texture ID, returned by `glGetUniformLocation(this->parent->get_program_id(), "texture_sampler")`.
+            GLint opengl_texture_id;         // Texture ID, returned by `glGetUniformLocation(this->parent->get_program_id(), "texture_sampler")`.
             bool is_texture_loaded;
             bool is_framebuffer_initialized;
             bool is_ready;
