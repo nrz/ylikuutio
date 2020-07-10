@@ -95,14 +95,15 @@ namespace yli::ontology
         can_be_erased { false },
         prerender_callback { nullptr },
         postrender_callback { nullptr },
-        number_of_settings { 0 }
+        number_of_settings { 0 },
+        is_setting { entity_struct.is_setting }
     {
         // constructor.
 
         // Get `entityID` from `Universe` and set pointer to this `Entity`.
         this->bind_to_universe();
 
-        if (!entity_struct.is_setting && this->universe != this)
+        if (!this->is_setting && this->universe != this)
         {
             this->should_be_rendered = (this->universe == nullptr ? false : !this->universe->get_is_headless());
 
@@ -268,9 +269,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Setting* const setting = dynamic_cast<yli::ontology::Setting*>(this);
-
-        if (setting != nullptr)
+        if (this->is_setting)
         {
             // `Setting`s may not have subsettings.
             return;
