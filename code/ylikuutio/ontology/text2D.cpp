@@ -82,7 +82,7 @@ namespace yli::ontology
         glDeleteBuffers(1, &this->uvbuffer);
 
         // Delete shader.
-        glDeleteProgram(this->programID);
+        glDeleteProgram(this->program_id);
     }
 
     void Text2D::render()

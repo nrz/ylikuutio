@@ -124,7 +124,7 @@ namespace yli::ontology
             std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
             glm::vec3 light_position;                // light position.
 
-            GLint light_id;                          // light ID, returned by `glGetUniformLocation(programID, "light_position_worldspace");`.
+            GLint light_id;                          // light ID, returned by `glGetUniformLocation(program_id, "light_position_worldspace");`.
 
             std::string triangulation_type;
 

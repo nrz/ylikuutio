@@ -59,7 +59,7 @@ namespace yli::ontology
         glDeleteTextures(1, &this->texture);
 
         // Delete shader.
-        glDeleteProgram(this->programID);
+        glDeleteProgram(this->program_id);
     }
 
     yli::ontology::Entity* Font2D::get_parent() const
@@ -94,13 +94,13 @@ namespace yli::ontology
 
     uint32_t Font2D::get_program_id() const
     {
-        return this->programID;
+        return this->program_id;
     }
 
     void Font2D::prepare_to_print() const
     {
         // Bind shader.
-        glUseProgram(this->programID);
+        glUseProgram(this->program_id);
 
         // Bind texture.
         glActiveTexture(GL_TEXTURE0);

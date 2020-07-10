@@ -62,7 +62,7 @@ namespace yli::ontology
                 // Initialize class members with some dummy values.
                 this->vertexbuffer                     = 0;
                 this->uvbuffer                         = 0;
-                this->programID                        = 0;
+                this->program_id                       = 0;
                 this->vertex_position_in_screenspaceID = 0;
                 this->vertex_uv_id                       = 0;
 
@@ -108,7 +108,7 @@ namespace yli::ontology
 
             uint32_t vertexbuffer;                     // Buffer containing the vertices
             uint32_t uvbuffer;                         // Buffer containing the UVs
-            uint32_t programID;                        // The `programID` of the shader used to display the text, returned by `load_shaders`.
+            uint32_t program_id;                       // The `program_id` of the shader used to display the text, returned by `load_shaders`.
             GLint vertex_position_in_screenspaceID;    // Location of the program's `vertex_position_screenspace` attribute.
             GLint vertex_uv_id;                          // Location of the program's `vertexUV` attribute.
 

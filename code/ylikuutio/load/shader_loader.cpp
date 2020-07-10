@@ -86,19 +86,19 @@ namespace yli::load
 
         // Link the program.
         std::cout << "Linking program\n";
-        const uint32_t programID = glCreateProgram();
-        glAttachShader(programID, vertex_shaderID);
-        glAttachShader(programID, fragment_shaderID);
-        glLinkProgram(programID);
+        const uint32_t program_id = glCreateProgram();
+        glAttachShader(program_id, vertex_shaderID);
+        glAttachShader(program_id, fragment_shaderID);
+        glLinkProgram(program_id);
 
         // Check the program.
-        glGetProgramiv(programID, GL_LINK_STATUS, &result);
-        glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &info_log_length);
+        glGetProgramiv(program_id, GL_LINK_STATUS, &result);
+        glGetProgramiv(program_id, GL_INFO_LOG_LENGTH, &info_log_length);
 
         if (info_log_length > 0)
         {
             std::vector<char> program_error_message(info_log_length + 1);
-            glGetProgramInfoLog(programID, info_log_length, nullptr, &program_error_message[0]);
+            glGetProgramInfoLog(program_id, info_log_length, nullptr, &program_error_message[0]);
             const std::string error_string(program_error_message.begin(), program_error_message.end());
             std::cerr << error_string << "\n";
         }
@@ -106,7 +106,7 @@ namespace yli::load
         glDeleteShader(vertex_shaderID);
         glDeleteShader(fragment_shaderID);
 
-        return programID;
+        return program_id;
     }
 }
 #endif
