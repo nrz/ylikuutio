@@ -32,7 +32,7 @@ namespace yli::ontology
         {
             // Compute the MVP matrix from keyboard and mouse input.
             glUniform3f(
-                    species_or_glyph_pointer->lightID,
+                    species_or_glyph_pointer->light_id,
                     species_or_glyph_pointer->light_position.x,
                     species_or_glyph_pointer->light_position.y,
                     species_or_glyph_pointer->light_position.z);

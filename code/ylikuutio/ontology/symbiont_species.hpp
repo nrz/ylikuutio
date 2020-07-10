@@ -93,7 +93,7 @@ namespace yli::ontology
 
                     // Get a handle for our "LightPosition" uniform.
                     glUseProgram(this->shader->get_program_id());
-                    this->lightID = glGetUniformLocation(this->shader->get_program_id(), "light_position_worldspace");
+                    this->light_id = glGetUniformLocation(this->shader->get_program_id(), "light_position_worldspace");
 
                     // water level.
                     GLint water_level_uniform_location = glGetUniformLocation(this->shader->get_program_id(), "water_level");

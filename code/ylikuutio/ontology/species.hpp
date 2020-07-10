@@ -94,7 +94,7 @@ namespace yli::ontology
 
                         // Get a handle for our "LightPosition" uniform.
                         glUseProgram(species_struct.shader->get_program_id());
-                        this->lightID = glGetUniformLocation(species_struct.shader->get_program_id(), "light_position_worldspace");
+                        this->light_id = glGetUniformLocation(species_struct.shader->get_program_id(), "light_position_worldspace");
                     }
 
                     if (this->is_terrain)

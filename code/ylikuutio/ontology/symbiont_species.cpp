@@ -97,6 +97,6 @@ namespace yli::ontology
 
     GLint SymbiontSpecies::get_lightID() const
     {
-        return this->lightID;
+        return this->light_id;
     }
 }
