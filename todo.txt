@@ -6,7 +6,6 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
-[ ] Make `AnyValueEntity` a child of `yli::ontology::Entity`, instead of being a child of `yli::ontology::Universe`.
 [ ] Implement creating new fields (AnyValueEntities) of given type in AnyStructEntities using `Console` command `create-field`.
 [ ] Implement creating and setting new fields of given type in AnyStructEntities of a using `Console` command `set-field`.
 [ ] Implement printing fields of AnyStructEntities using `Console` command `print`.
@@ -35,7 +34,7 @@ Tasks which are necessary for the second stage:
 [ ] Modify `set` console command so that setting a global name is done using `set 'global-name foo bar`.
 [ ] Modify `set` console command so that setting a local name is done using `set 'local-name foo bar`.
 [ ] Implement abstract syntax tree (AST) creation code for YliLisp.
-[ ] Implement continuations for YliLisp by logging the last relevant successful `Setting::set` function call for each `Setting` and setting that again when needed.
+[ ] Implement continuations for YliLisp by logging the last relevant successful `Variable::set` function call for each `Variable` and setting that again when needed.
 [ ] Implement closures for YliLisp.
 [ ] Evaluate mingw-std-threads: https://github.com/meganz/mingw-std-threads
 [ ] Evaluate winpthreads: https://sourceforge.net/p/mingw-w64/mingw-w64/ci/master/tree/mingw-w64-libraries/winpthreads/ https://en.wikipedia.org/wiki/MinGW#MinGW-w64
@@ -53,7 +52,7 @@ Tasks which are necessary for the second stage:
 [ ] Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.
 [ ] Implement skeletal animation.
 [ ] Replace stb with libpng (http://www.libpng.org/pub/png/libpng.html) and libjpeg (http://ijg.org/).
-[ ] Implement creating new named `Setting`s in `SettingMaster` using `Console`.
+[ ] Implement creating new named `Variable`s using `Console`.
 [ ] Implement YliEdit editor.
 [ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
 [ ] Add support for changing font size.
