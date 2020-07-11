@@ -189,7 +189,7 @@ As described above, `yli::ontology` contains many classes that are in a composit
 
 Naturally, children must be bound to their parents somehow. There are different options for different parent-child-relationships:
 
-1. Parent is `yli::ontology::Entity`. This is quite complex case. Children include `yli::ontology::Setting` and `yli::ontology::AnyStructEntity`.
+1. Parent is `yli::ontology::Entity`. This is quite complex case. Children include `yli::ontology::Variable` and `yli::ontology::AnyStructEntity`.
 2. Parent uses `yli::ontology::ParentModule` for 'parenting' and child used `yli::ontology::ChildModule` for 'childing'.
    Use this when possible. Constructor of `ChildModule` does the binding and destructor of `ChildModule` does the unbinding.
 3. Parent uses `yli::ontology::ParentModule` for 'parenting' and child uses custom code for 'childing'.
@@ -198,12 +198,14 @@ Naturally, children must be bound to their parents somehow. There are different 
    The reason to use custom binding code in `Scene`-`Shader`-relationship is to keep `Shader`s ordered in `ShaderPriorityQueue`.
    In this case binding is completely custom for both 'parenting' and 'childing'. Use this only as a last resort.
 
-About Settings, AnyValueEntities, AnyStructEntities and YliLisp
+About Variables, AnyValueEntities, AnyStructEntities and YliLisp
 
 Note: the followng part describes development goals and is not yet fully implemented.
 
-`yli::ontology::Setting`s present configuration that is intrinsic to the `yli::ontology::Entity` it belongs to. `Setting`s also may have activate and read callbacks which are native C++ code and can thus call whatever functions avalable, reference e.g. member variables directly, etc. On the other hand, we want to be able to create new named variables using YliLisp scripting language. These named variables are to be implemented using `yli::ontology::AnyValueEntity`. While ability to call native code directly is not desirable for `AnyValueEntity`, we still want to be able to use activate and read callbacks. These callbacks then just to have to registered `LispFunction`s instead of whatever C++ code and thus they are to be called following common YliLisp function argument binding rules.
+`yli::ontology::Variable`s present configuration that is intrinsic to the `yli::ontology::Entity` it belongs to. `Variable`s also may have activate and read callbacks which are native C++ code and can thus call whatever functions avalable, reference e.g. member variables directly, etc. On the other hand, we want to be able to create new named variables using YliLisp scripting language. These named variables are to be implemented using `yli::ontology::AnyValueEntity`. While ability to call native code directly is not desirable for `AnyValueEntity`, we still want to be able to use activate and read callbacks. These callbacks then just to have to registered `LispFunction`s instead of whatever C++ code and thus they are to be called following common YliLisp function argument binding rules.
 
 AnyStructEntities on the other hand represent structs that may have named named fields that can be modified on the fly, just like in Python, MATLAB, or GNU Octave. Each field of `AnyStructEntity` is always an `AnyValueEntity`.
 
-Neither Settings nor AnyValueEntities may have children, therefore they must be leaves in the ontological hierarchy.
+Variables may have only AnyStructEntities as their children.
+
+Continuations are to be supported by logging all `Variable::set` actions and all binding and unbinding actions. Complete game/simulation state therefore needs to be defined as an ordered list (log) that may contain `Variable::set` actions and any binding and unbinding actions. Therefore suitable machine-format logging needs to be implemented for these to make continuations possible.
