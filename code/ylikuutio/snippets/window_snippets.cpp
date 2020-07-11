@@ -17,8 +17,8 @@
 
 #include "window_snippets.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
-#include "code/ylikuutio/ontology/setting.hpp"
-#include "code/ylikuutio/ontology/setting_struct.hpp"
+#include "code/ylikuutio/ontology/variable.hpp"
+#include "code/ylikuutio/ontology/variable_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
@@ -28,16 +28,16 @@ namespace yli::snippets
 {
     void set_window_size(yli::ontology::Entity* entity, const uint32_t window_width, const uint32_t window_height)
     {
-        yli::ontology::SettingStruct window_width_setting_struct(std::make_shared<yli::data::AnyValue>(window_width));
-        window_width_setting_struct.local_name = "window_width";
-        window_width_setting_struct.activate_callback = &yli::ontology::Setting::activate_window_size;
-        window_width_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        entity->create_setting(window_width_setting_struct);
+        yli::ontology::VariableStruct window_width_variable_struct(std::make_shared<yli::data::AnyValue>(window_width));
+        window_width_variable_struct.local_name = "window_width";
+        window_width_variable_struct.activate_callback = &yli::ontology::Variable::activate_window_size;
+        window_width_variable_struct.should_ylikuutio_call_activate_callback_now = false;
+        entity->create_variable(window_width_variable_struct);
 
-        yli::ontology::SettingStruct window_height_setting_struct(std::make_shared<yli::data::AnyValue>(window_height));
-        window_height_setting_struct.local_name = "window_height";
-        window_height_setting_struct.activate_callback = &yli::ontology::Setting::activate_window_size;
-        window_height_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        entity->create_setting(window_height_setting_struct);
+        yli::ontology::VariableStruct window_height_variable_struct(std::make_shared<yli::data::AnyValue>(window_height));
+        window_height_variable_struct.local_name = "window_height";
+        window_height_variable_struct.activate_callback = &yli::ontology::Variable::activate_window_size;
+        window_height_variable_struct.should_ylikuutio_call_activate_callback_now = false;
+        entity->create_variable(window_height_variable_struct);
     }
 }

@@ -29,9 +29,9 @@ namespace yli::data
 namespace yli::ontology
 {
     class Entity;
-    class Setting;
+    class Variable;
 }
 
-typedef std::shared_ptr<yli::data::AnyValue> (*ActivateCallback) (yli::ontology::Entity* entity, yli::ontology::Setting* setting);
+typedef std::shared_ptr<yli::data::AnyValue> (*ActivateCallback) (yli::ontology::Entity* entity, yli::ontology::Variable* variable);
 
 #endif

@@ -452,7 +452,7 @@ namespace yli::ontology
                 // Set the value of `should_be_rendered` here because it can't be done in `Entity` constructor.
                 this->should_be_rendered = !this->get_is_headless();
 
-                this->create_should_be_rendered_setting();
+                this->create_should_be_rendered_variable();
 
                 if (this->is_silent)
                 {
@@ -738,7 +738,7 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            void create_should_be_rendered_setting();
+            void create_should_be_rendered_variable();
 
             bool compute_and_update_matrices_from_inputs();
 

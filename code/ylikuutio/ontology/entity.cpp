@@ -16,14 +16,14 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "entity.hpp"
-#include "setting.hpp"
+#include "variable.hpp"
 #include "universe.hpp"
 #include "family_templates.hpp"
 #include "entity_factory.hpp"
-#include "entity_setting_activation.hpp"
-#include "entity_setting_read.hpp"
+#include "entity_variable_activation.hpp"
+#include "entity_variable_read.hpp"
 #include "entity_struct.hpp"
-#include "setting_struct.hpp"
+#include "variable_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -39,27 +39,27 @@
 
 namespace yli::ontology
 {
-    void Entity::bind_setting(yli::ontology::Setting* const setting)
+    void Entity::bind_variable(yli::ontology::Variable* const variable)
     {
-        // get `childID` from `Entity` and set pointer to `setting`.
-        yli::hierarchy::bind_child_to_parent<yli::ontology::Setting*>(
-                setting,
-                this->setting_pointer_vector,
-                this->free_settingID_queue,
-                this->number_of_settings);
+        // get `childID` from `Entity` and set pointer to `variable`.
+        yli::hierarchy::bind_child_to_parent<yli::ontology::Variable*>(
+                variable,
+                this->variable_pointer_vector,
+                this->free_variableID_queue,
+                this->number_of_variables);
 
-        // `setting` with a local name needs to be added to `entity_map` as well.
-        this->add_entity(setting->get_local_name(), setting);
+        // `variable` with a local name needs to be added to `entity_map` as well.
+        this->add_entity(variable->get_local_name(), variable);
     }
 
-    void Entity::unbind_setting(const std::size_t childID, const std::string& local_name)
+    void Entity::unbind_variable(const std::size_t childID, const std::string& local_name)
     {
         yli::ontology::unbind_child_from_parent(
                 childID,
                 local_name,
-                this->setting_pointer_vector,
-                this->free_settingID_queue,
-                this->number_of_settings,
+                this->variable_pointer_vector,
+                this->free_variableID_queue,
+                this->number_of_variables,
                 this->entity_map);
     }
 
@@ -95,25 +95,25 @@ namespace yli::ontology
         can_be_erased { false },
         prerender_callback { nullptr },
         postrender_callback { nullptr },
-        number_of_settings { 0 },
-        is_setting { entity_struct.is_setting }
+        number_of_variables { 0 },
+        is_variable { entity_struct.is_variable }
     {
         // constructor.
 
         // Get `entityID` from `Universe` and set pointer to this `Entity`.
         this->bind_to_universe();
 
-        if (!this->is_setting && this->universe != this)
+        if (!this->is_variable && this->universe != this)
         {
             this->should_be_rendered = (this->universe == nullptr ? false : !this->universe->get_is_headless());
 
-            yli::ontology::SettingStruct should_be_rendered_setting_struct(std::make_shared<yli::data::AnyValue>(this->should_be_rendered));
-            should_be_rendered_setting_struct.local_name = "should_be_rendered";
-            should_be_rendered_setting_struct.activate_callback = &yli::ontology::activate_should_be_rendered;
-            should_be_rendered_setting_struct.read_callback = &yli::ontology::read_should_be_rendered;
-            should_be_rendered_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-            std::cout << "Executing `this->create_setting(should_be_rendered_setting_struct);` ...\n";
-            this->create_setting(should_be_rendered_setting_struct);
+            yli::ontology::VariableStruct should_be_rendered_variable_struct(std::make_shared<yli::data::AnyValue>(this->should_be_rendered));
+            should_be_rendered_variable_struct.local_name = "should_be_rendered";
+            should_be_rendered_variable_struct.activate_callback = &yli::ontology::activate_should_be_rendered;
+            should_be_rendered_variable_struct.read_callback = &yli::ontology::read_should_be_rendered;
+            should_be_rendered_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+            std::cout << "Executing `this->create_variable(should_be_rendered_variable_struct);` ...\n";
+            this->create_variable(should_be_rendered_variable_struct);
         }
     }
 
@@ -262,16 +262,16 @@ namespace yli::ontology
         }
     }
 
-    void Entity::create_setting(const yli::ontology::SettingStruct& setting_struct)
+    void Entity::create_variable(const yli::ontology::VariableStruct& variable_struct)
     {
         if (this->universe == nullptr)
         {
             return;
         }
 
-        if (this->is_setting)
+        if (this->is_variable)
         {
-            // `Setting`s may not have subsettings.
+            // `Variable`s may not have subvariables.
             return;
         }
 
@@ -282,38 +282,38 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::SettingStruct new_setting_struct(setting_struct);
-        new_setting_struct.parent = this;
-        entity_factory->create_setting(new_setting_struct);
+        yli::ontology::VariableStruct new_variable_struct(variable_struct);
+        new_variable_struct.parent = this;
+        entity_factory->create_variable(new_variable_struct);
     }
 
-    bool Entity::has_setting(const std::string& setting_name) const
+    bool Entity::has_variable(const std::string& variable_name) const
     {
-        if (this->entity_map.count(setting_name) != 1)
+        if (this->entity_map.count(variable_name) != 1)
         {
             return false;
         }
 
-        yli::ontology::Entity* const entity = this->entity_map.at(setting_name);
-        yli::ontology::Setting* const setting = dynamic_cast<yli::ontology::Setting*>(entity);
-        return setting != nullptr;
+        yli::ontology::Entity* const entity = this->entity_map.at(variable_name);
+        yli::ontology::Variable* const variable = dynamic_cast<yli::ontology::Variable*>(entity);
+        return variable != nullptr;
     }
 
-    yli::ontology::Setting* Entity::get(const std::string& setting_name) const
+    yli::ontology::Variable* Entity::get(const std::string& variable_name) const
     {
-        if (this->entity_map.count(setting_name) != 1)
+        if (this->entity_map.count(variable_name) != 1)
         {
             return nullptr;
         }
 
-        return dynamic_cast<yli::ontology::Setting*>(this->entity_map.at(setting_name));
+        return dynamic_cast<yli::ontology::Variable*>(this->entity_map.at(variable_name));
     }
 
-    bool Entity::set(const std::string& setting_name, std::shared_ptr<yli::data::AnyValue> setting_new_any_value)
+    bool Entity::set(const std::string& variable_name, std::shared_ptr<yli::data::AnyValue> variable_new_any_value)
     {
-        yli::ontology::Setting* const setting = this->get(setting_name);
+        yli::ontology::Variable* const variable = this->get(variable_name);
 
-        if (setting == nullptr)
+        if (variable == nullptr)
         {
             return false;
         }
@@ -322,7 +322,7 @@ namespace yli::ontology
         // Set the variable value and activate it by
         // calling the corresponding activate callback.
 
-        setting->set(setting_new_any_value);
+        variable->set(variable_new_any_value);
         return true;
     }
 
@@ -332,16 +332,16 @@ namespace yli::ontology
         return help_string;
     }
 
-    std::string Entity::help(const std::string& setting_name) const
+    std::string Entity::help(const std::string& variable_name) const
     {
-        yli::ontology::Setting* const setting = this->get(setting_name);
+        yli::ontology::Variable* const variable = this->get(variable_name);
 
-        if (setting == nullptr)
+        if (variable == nullptr)
         {
             return this->help();
         }
 
-        return setting->help();
+        return variable->help();
     }
 
     void Entity::prerender() const
@@ -377,23 +377,23 @@ namespace yli::ontology
 
     std::size_t Entity::get_number_of_all_children() const
     {
-        return this->number_of_settings +
-            this->get_number_of_non_setting_children();
+        return this->number_of_variables +
+            this->get_number_of_non_variable_children();
     }
 
     std::size_t Entity::get_number_of_all_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->setting_pointer_vector) +
+        return yli::ontology::get_number_of_descendants(this->variable_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_any_struct_entities.child_pointer_vector) +
             this->get_number_of_descendants();
     }
 
-    std::size_t Entity::get_number_of_settings() const
+    std::size_t Entity::get_number_of_variables() const
     {
-        return this->number_of_settings;
+        return this->number_of_variables;
     }
 
-    std::size_t Entity::get_number_of_non_setting_children() const
+    std::size_t Entity::get_number_of_non_variable_children() const
     {
         return this->parent_of_any_struct_entities.get_number_of_children() +
             this->get_number_of_children();

@@ -15,32 +15,22 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "entity_setting_activation.hpp"
+#include "entity_variable_read.hpp"
 #include "entity.hpp"
-#include "setting.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <memory>  // std::make_shared, std::shared_ptr
-#include <variant> // std::holds_alternative, std::variant
 
 namespace yli::ontology
 {
-    std::shared_ptr<yli::data::AnyValue> activate_should_be_rendered(yli::ontology::Entity* const entity, yli::ontology::Setting* const setting)
+    std::shared_ptr<yli::data::AnyValue> read_should_be_rendered(yli::ontology::Entity* const entity)
     {
-        if (entity == nullptr || setting == nullptr)
+        if (entity == nullptr)
         {
             return nullptr;
         }
 
-        std::shared_ptr<yli::data::AnyValue> should_be_rendered_any_value = setting->setting_value;
-
-        if (should_be_rendered_any_value == nullptr || !std::holds_alternative<bool>(should_be_rendered_any_value->data))
-        {
-            return nullptr;
-        }
-
-        entity->should_be_rendered = std::get<bool>(should_be_rendered_any_value->data);
-        return nullptr;
+        return std::make_shared<yli::data::AnyValue>(entity->should_be_rendered);
     }
 }

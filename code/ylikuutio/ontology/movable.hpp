@@ -113,7 +113,7 @@ namespace yli::ontology
                 this->model_matrix                = glm::mat4(1.0f); // identity matrix (dummy value).
                 this->mvp_matrix                  = glm::mat4(1.0f); // identity matrix (dummy value).
 
-                this->create_coordinate_and_angle_settings();
+                this->create_coordinate_and_angle_variables();
 
                 this->bind_to_brain();
 
@@ -326,7 +326,7 @@ namespace yli::ontology
             yli::ontology::ChildModule child;
 
         private:
-            void create_coordinate_and_angle_settings();
+            void create_coordinate_and_angle_variables();
 
             yli::input::InputMethod input_method;                  // If `input_method` is `KEYBOARD`, then keypresses control this `Movable`.
                                                                    // If `input_method` is `AI`, then the chosen `Brain` controls this `Movable`.

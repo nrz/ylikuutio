@@ -18,7 +18,7 @@
 #ifndef __ENTITY_FACTORY_HPP_INCLUDED
 #define __ENTITY_FACTORY_HPP_INCLUDED
 
-#include "setting_struct.hpp"
+#include "variable_struct.hpp"
 #include "world_struct.hpp"
 #include "scene_struct.hpp"
 #include "shader_struct.hpp"
@@ -47,7 +47,7 @@
 namespace yli::ontology
 {
     class Entity;
-    class Setting;
+    class Variable;
     class Universe;
     class World;
     class Scene;
@@ -76,7 +76,7 @@ namespace yli::ontology
 
             yli::ontology::Universe* get_universe() const;
 
-            yli::ontology::Entity* create_setting(const yli::ontology::SettingStruct& setting_struct) const;
+            yli::ontology::Entity* create_variable(const yli::ontology::VariableStruct& variable_struct) const;
             yli::ontology::Entity* create_world(const yli::ontology::WorldStruct& world_struct) const;
             yli::ontology::Entity* create_scene(const yli::ontology::SceneStruct& scene_struct) const;
             yli::ontology::Entity* create_shader(const yli::ontology::ShaderStruct& shader_struct) const;

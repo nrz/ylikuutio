@@ -16,9 +16,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "wireframe_snippets.hpp"
-#include "code/ylikuutio/ontology/setting.hpp"
+#include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/setting_struct.hpp"
+#include "code/ylikuutio/ontology/variable_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
@@ -28,10 +28,10 @@ namespace yli::snippets
 {
     void set_wireframe(yli::ontology::Universe* universe, const bool use_wireframe)
     {
-        yli::ontology::SettingStruct wireframe_setting_struct(std::make_shared<yli::data::AnyValue>(use_wireframe));
-        wireframe_setting_struct.local_name = "wireframe";
-        wireframe_setting_struct.activate_callback = &yli::ontology::Setting::activate_wireframe;
-        wireframe_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        universe->create_setting(wireframe_setting_struct);
+        yli::ontology::VariableStruct wireframe_variable_struct(std::make_shared<yli::data::AnyValue>(use_wireframe));
+        wireframe_variable_struct.local_name = "wireframe";
+        wireframe_variable_struct.activate_callback = &yli::ontology::Variable::activate_wireframe;
+        wireframe_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        universe->create_variable(wireframe_variable_struct);
     }
 }

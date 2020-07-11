@@ -39,16 +39,16 @@ namespace yli::ontology
 {
     class Universe;
     class Console;
-    class Setting;
+    class Variable;
     struct EntityStruct;
-    struct SettingStruct;
+    struct VariableStruct;
 
     class Entity
     {
         public:
-            void bind_setting(yli::ontology::Setting* const setting);
+            void bind_variable(yli::ontology::Variable* const variable);
 
-            void unbind_setting(const std::size_t childID, const std::string& local_name);
+            void unbind_variable(const std::size_t childID, const std::string& local_name);
 
             // Each class that supports binding to a new parent needs to `override` this function.
             virtual void bind_to_new_parent(yli::ontology::Entity* const new_entity_parent);
@@ -75,8 +75,8 @@ namespace yli::ontology
             virtual yli::ontology::Entity* get_parent() const = 0;
             std::size_t get_number_of_all_children() const;
             std::size_t get_number_of_all_descendants() const;
-            std::size_t get_number_of_settings() const;
-            std::size_t get_number_of_non_setting_children() const;
+            std::size_t get_number_of_variables() const;
+            std::size_t get_number_of_non_variable_children() const;
 
             std::string get_global_name() const;
             std::string get_local_name() const;
@@ -89,13 +89,13 @@ namespace yli::ontology
             void add_entity(const std::string& name, yli::ontology::Entity* const entity);
             void erase_entity(const std::string& name);
 
-            void create_setting(const yli::ontology::SettingStruct& setting_struct);
-            bool has_setting(const std::string& setting_name) const;
-            yli::ontology::Setting* get(const std::string& setting_name) const;
-            bool set(const std::string& setting_name, std::shared_ptr<yli::data::AnyValue> setting_new_any_value);
+            void create_variable(const yli::ontology::VariableStruct& variable_struct);
+            bool has_variable(const std::string& variable_name) const;
+            yli::ontology::Variable* get(const std::string& variable_name) const;
+            bool set(const std::string& variable_name, std::shared_ptr<yli::data::AnyValue> variable_new_any_value);
 
             std::string help() const;                                // this function returns general help string.
-            std::string help(const std::string& setting_name) const; // this function returns the help string for the `Setting`.
+            std::string help(const std::string& variable_name) const; // this function returns the help string for the `Variable`.
 
             // Public callbacks.
 
@@ -105,11 +105,11 @@ namespace yli::ontology
                     yli::ontology::Console* const console,
                     yli::ontology::Entity* const entity);
 
-            static std::shared_ptr<yli::data::AnyValue> print_settings0(
+            static std::shared_ptr<yli::data::AnyValue> print_variables0(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Console* const console);
 
-            static std::shared_ptr<yli::data::AnyValue> print_settings1(
+            static std::shared_ptr<yli::data::AnyValue> print_variables1(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Console* const console,
                     yli::ontology::Entity* const entity);
@@ -148,14 +148,14 @@ namespace yli::ontology
         private:
             void bind_to_universe();
 
-            std::vector<yli::ontology::Setting*> setting_pointer_vector;
-            std::queue<std::size_t> free_settingID_queue;
-            std::size_t number_of_settings;
+            std::vector<yli::ontology::Variable*> variable_pointer_vector;
+            std::queue<std::size_t> free_variableID_queue;
+            std::size_t number_of_variables;
 
             virtual std::size_t get_number_of_children() const = 0;
             virtual std::size_t get_number_of_descendants() const = 0;
 
-            bool is_setting;
+            bool is_variable;
     };
 }
 

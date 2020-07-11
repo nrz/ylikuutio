@@ -19,7 +19,7 @@
 #define __LISP_TEMPLATES_HPP_INCLUDED
 
 #include "code/ylikuutio/ontology/entity.hpp"
-#include "code/ylikuutio/ontology/setting.hpp"
+#include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
@@ -36,7 +36,6 @@
 #include "code/ylikuutio/ontology/text3D.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/compute_task.hpp"
-#include "code/ylikuutio/ontology/setting.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
@@ -307,7 +306,7 @@ namespace yli::lisp
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
-                yli::ontology::Setting*& value)
+                yli::ontology::Variable*& value)
         {
             if (parameter_i >= parameter_vector.size()) // No argument left to consume.
             {
@@ -316,7 +315,7 @@ namespace yli::lisp
 
             const std::string my_string = parameter_vector.at(parameter_i++);
 
-            value = dynamic_cast<yli::ontology::Setting*>(universe->get_entity(my_string));
+            value = dynamic_cast<yli::ontology::Variable*>(universe->get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -334,7 +333,7 @@ namespace yli::lisp
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
-                const yli::ontology::Setting*& value)
+                const yli::ontology::Variable*& value)
         {
             if (parameter_i >= parameter_vector.size()) // No argument left to consume.
             {
@@ -343,14 +342,14 @@ namespace yli::lisp
 
             const std::string my_string = parameter_vector.at(parameter_i++);
 
-            value = dynamic_cast<yli::ontology::Setting*>(universe->get_entity(my_string));
+            value = dynamic_cast<yli::ontology::Variable*>(universe->get_entity(my_string));
 
             if (value == nullptr)
             {
                 return false;
             }
 
-            context = const_cast<yli::ontology::Setting*>(value);
+            context = const_cast<yli::ontology::Variable*>(value);
             return true;
         }
 
