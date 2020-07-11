@@ -51,6 +51,12 @@ namespace yli::data
         // `yli::ontology` datatypes, 'setting' path.
         SETTING_POINTER,
         CONST_SETTING_POINTER,
+        // `yli::ontology` datatypes, 'anyvalueentity' path.
+        ANY_VALUE_ENTITY_POINTER,
+        CONST_ANY_VALUE_ENTITY_POINTER,
+        // `yli::ontology` datatypes, 'anystructentity' path.
+        ANY_STRUCT_ENTITY_POINTER,
+        CONST_ANY_STRUCT_ENTITY_POINTER,
         // `yli::ontology` datatypes, 'movable' path.
         MOVABLE_POINTER,
         CONST_MOVABLE_POINTER,
