@@ -436,16 +436,16 @@ namespace yli::snippets
             return nullptr;
         }
 
-        const std::shared_ptr<yli::data::AnyValue> any_value_entity_string = callback_object->get_arg(0);
+        const std::shared_ptr<yli::data::AnyValue> entity_name_string_pointer_any_value = callback_object->get_arg(0);
 
-        if (any_value_entity_string == nullptr)
+        if (entity_name_string_pointer_any_value == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::delete_entity`: `entity_string` not found!\n";
             return nullptr;
         }
 
-        if (!std::holds_alternative<std::string*>(any_value_entity_string->data) &&
-                !std::holds_alternative<const std::string*>(any_value_entity_string->data))
+        if (!std::holds_alternative<std::string*>(entity_name_string_pointer_any_value->data) &&
+                !std::holds_alternative<const std::string*>(entity_name_string_pointer_any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::delete_entity`: invalid datatype.\n";
             std::cerr << "Datatype should be either yli::data::Datatype::STD_STRING_POINTER or yli::data::Datatype::CONST_STD_STRING_POINTER\n";
@@ -453,9 +453,9 @@ namespace yli::snippets
         }
 
         const std::string* const entity_string_pointer =
-            (std::holds_alternative<std::string*>(any_value_entity_string->data) ?
-             std::get<std::string*>(any_value_entity_string->data) :
-             std::get<const std::string*>(any_value_entity_string->data));
+            (std::holds_alternative<std::string*>(entity_name_string_pointer_any_value->data) ?
+             std::get<std::string*>(entity_name_string_pointer_any_value->data) :
+             std::get<const std::string*>(entity_name_string_pointer_any_value->data));
 
         if (entity_string_pointer == nullptr)
         {
@@ -489,16 +489,16 @@ namespace yli::snippets
             return nullptr;
         }
 
-        std::shared_ptr<yli::data::AnyValue> any_value_entity_string = callback_object->get_arg(0);
+        std::shared_ptr<yli::data::AnyValue> entity_name_string_pointer_any_value = callback_object->get_arg(0);
 
-        if (any_value_entity_string == nullptr)
+        if (entity_name_string_pointer_any_value == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: `entity_string` not found!\n";
             return nullptr;
         }
 
-        if (!std::holds_alternative<std::string*>(any_value_entity_string->data) &&
-                !std::holds_alternative<const std::string*>(any_value_entity_string->data))
+        if (!std::holds_alternative<std::string*>(entity_name_string_pointer_any_value->data) &&
+                !std::holds_alternative<const std::string*>(entity_name_string_pointer_any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: invalid datatype.\n";
             std::cerr << "Datatype should be either yli::data::Datatype::STD_STRING_POINTER or yli::data::Datatype::CONST_STD_STRING_POINTER\n";
@@ -506,9 +506,9 @@ namespace yli::snippets
         }
 
         const std::string* const entity_string_pointer =
-            (std::holds_alternative<std::string*>(any_value_entity_string->data) ?
-             std::get<std::string*>(any_value_entity_string->data) :
-             std::get<const std::string*>(any_value_entity_string->data));
+            (std::holds_alternative<std::string*>(entity_name_string_pointer_any_value->data) ?
+             std::get<std::string*>(entity_name_string_pointer_any_value->data) :
+             std::get<const std::string*>(entity_name_string_pointer_any_value->data));
 
         if (entity_string_pointer == nullptr)
         {
@@ -605,16 +605,16 @@ namespace yli::snippets
             return nullptr;
         }
 
-        std::shared_ptr<yli::data::AnyValue> any_value_entity_string = callback_object->get_arg(0);
+        std::shared_ptr<yli::data::AnyValue> entity_name_string_pointer_any_value = callback_object->get_arg(0);
 
-        if (any_value_entity_string == nullptr)
+        if (entity_name_string_pointer_any_value == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: `entity_string` not found!\n";
             return nullptr;
         }
 
-        if (!std::holds_alternative<std::string*>(any_value_entity_string->data) &&
-                !std::holds_alternative<const std::string*>(any_value_entity_string->data))
+        if (!std::holds_alternative<std::string*>(entity_name_string_pointer_any_value->data) &&
+                !std::holds_alternative<const std::string*>(entity_name_string_pointer_any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: invalid datatype.\n";
             std::cerr << "Datatype should be either yli::data::Datatype::STD_STRING_POINTER or yli::data::Datatype::CONST_STD_STRING_POINTER\n";
@@ -622,9 +622,9 @@ namespace yli::snippets
         }
 
         const std::string* const entity_string_pointer =
-            (std::holds_alternative<std::string*>(any_value_entity_string->data) ?
-             std::get<std::string*>(any_value_entity_string->data) :
-             std::get<const std::string*>(any_value_entity_string->data));
+            (std::holds_alternative<std::string*>(entity_name_string_pointer_any_value->data) ?
+             std::get<std::string*>(entity_name_string_pointer_any_value->data) :
+             std::get<const std::string*>(entity_name_string_pointer_any_value->data));
 
         if (entity_string_pointer == nullptr)
         {

@@ -87,12 +87,14 @@ Naming
   in the end of the class name, such as `Text2D` and `Text3D`.
 * Use snake_case for variable names: `std::string my_string`.
 * An exception to the above rule is `ID` suffix that marks that the
-  variable in an ID of an `Entity`, e.g. `childID`. However, use `_id`
-  for OpenGL variables not related to the ID's of the Entities.
-  This makes it easier to distinguish between ID's and indexes
-  (see the next rule about Levenshtein distance).
-* Keep Levenshtein distance of at least 2 between different names
-  visible in the same scope.
+  variable in an ID of an `Entity`, e.g. `childID`, `biontID`, `apprenticeID`.
+  However, use `_id` for OpenGL variables not related to the ID's of the Entities,
+  e.g. `program_id`, `light_id`. This makes it easier to distinguish between ID's
+  and indexes (see the next rule about Levenshtein distance).
+* Try to keep Levenshtein distance of at least 2 between different names
+  visible in the same scope, but do not add junk characters to
+  the variable names just because of this. For example,
+  `entity_1` & `entity_2` is OK, when the names are reasonable for the context.
 * Use 2-level nested namespaces for Ylikuutio code, such as `yli::ontology`.
 * All Ylikuutio code should be under the namespaces under `yli` namespace.
 * Prefer single words in namespaces names, but use snake_case

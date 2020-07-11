@@ -59,7 +59,7 @@ namespace yli::ontology
             return;
         }
 
-        if (new_parent->is_entity(this->local_name))
+        if (new_parent->has_child(this->local_name))
         {
             std::cerr << "ERROR: `Text2D::bind_to_new_parent`: local name is already in use!\n";
             return;
@@ -82,7 +82,7 @@ namespace yli::ontology
         glDeleteBuffers(1, &this->uvbuffer);
 
         // Delete shader.
-        glDeleteProgram(this->programID);
+        glDeleteProgram(this->program_id);
     }
 
     void Text2D::render()
@@ -295,9 +295,9 @@ namespace yli::ontology
         glBufferData(GL_ARRAY_BUFFER, UVs.size() * sizeof(glm::vec2), &UVs[0], GL_STATIC_DRAW);
 
         // 1st attribute buffer: vertices.
-        yli::opengl::enable_vertex_attrib_array(this->vertex_position_in_screenspaceID);
+        yli::opengl::enable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
         glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
-        glVertexAttribPointer(this->vertex_position_in_screenspaceID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+        glVertexAttribPointer(this->vertex_position_in_screenspace_id, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
         // 2nd attribute buffer: UVs.
         yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
@@ -305,9 +305,9 @@ namespace yli::ontology
         glVertexAttribPointer(this->vertex_uv_id, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
         // 1st attribute buffer: vertices.
-        yli::opengl::enable_vertex_attrib_array(this->vertex_position_in_screenspaceID);
+        yli::opengl::enable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
         glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
-        glVertexAttribPointer(this->vertex_position_in_screenspaceID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+        glVertexAttribPointer(this->vertex_position_in_screenspace_id, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
         // 2nd attribute buffer: UVs.
         yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
@@ -317,7 +317,7 @@ namespace yli::ontology
         // Draw call.
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
-        yli::opengl::disable_vertex_attrib_array(this->vertex_position_in_screenspaceID);
+        yli::opengl::disable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
         yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
     }
 

@@ -15,11 +15,11 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __ENTITY_SETTING_READ_HPP_INCLUDED
-#define __ENTITY_SETTING_READ_HPP_INCLUDED
+#ifndef __ENTITY_VARIABLE_ACTIVATION_HPP_INCLUDED
+#define __ENTITY_VARIABLE_ACTIVATION_HPP_INCLUDED
 
 // Include standard headers
-#include <memory>  // std::make_shared, std::shared_ptr
+#include <memory> // std::make_shared, std::shared_ptr
 
 namespace yli::data
 {
@@ -29,8 +29,9 @@ namespace yli::data
 namespace yli::ontology
 {
     class Entity;
+    class Variable;
 
-    std::shared_ptr<yli::data::AnyValue> read_should_be_rendered(yli::ontology::Entity* const entity);
+    std::shared_ptr<yli::data::AnyValue> activate_should_be_rendered(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
 }
 
 #endif

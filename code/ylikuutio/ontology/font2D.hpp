@@ -59,18 +59,18 @@ namespace yli::ontology
                 this->font_size = font_struct.font_size;
 
                 // Initialize class members with some dummy values.
-                this->texture                          = 0;
-                this->vertexbuffer                     = 0;
-                this->uvbuffer                         = 0;
-                this->programID                        = 0;
-                this->vertex_position_in_screenspaceID = 0;
-                this->vertex_uv_id                       = 0;
-                this->Text2DUniformID                  = 0;
-                this->screen_width_uniform_id          = 0;
-                this->screen_height_uniform_id         = 0;
-                this->image_width                      = 0;
-                this->image_height                     = 0;
-                this->image_size                       = 0;
+                this->texture                           = 0;
+                this->vertexbuffer                      = 0;
+                this->uvbuffer                          = 0;
+                this->program_id                        = 0;
+                this->vertex_position_in_screenspace_id = 0;
+                this->vertex_uv_id                      = 0;
+                this->text_2d_uniform_id                = 0;
+                this->screen_width_uniform_id           = 0;
+                this->screen_height_uniform_id          = 0;
+                this->image_width                       = 0;
+                this->image_height                      = 0;
+                this->image_size                        = 0;
 
                 const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
                 bool is_texture_loading_successful = false;
@@ -104,21 +104,21 @@ namespace yli::ontology
                     glGenBuffers(1, &this->uvbuffer);
 
                     // Initialize `Shader`.
-                    this->programID = yli::load::load_shaders("text_vertex_shader.vert", "text_vertex_shader.frag");
+                    this->program_id = yli::load::load_shaders("text_vertex_shader.vert", "text_vertex_shader.frag");
 
                     // Get a handle for our buffers.
-                    this->vertex_position_in_screenspaceID = glGetAttribLocation(this->programID, "vertex_position_screenspace");
-                    this->vertex_uv_id = glGetAttribLocation(this->programID, "vertexUV");
+                    this->vertex_position_in_screenspace_id = glGetAttribLocation(this->program_id, "vertex_position_screenspace");
+                    this->vertex_uv_id = glGetAttribLocation(this->program_id, "vertexUV");
 
                     // Initialize uniforms' IDs.
-                    this->Text2DUniformID = glGetUniformLocation(this->programID, "texture_sampler");
+                    this->text_2d_uniform_id = glGetUniformLocation(this->program_id, "texture_sampler");
 
                     // Initialize uniform window width.
-                    this->screen_width_uniform_id = glGetUniformLocation(this->programID, "screen_width");
+                    this->screen_width_uniform_id = glGetUniformLocation(this->program_id, "screen_width");
                     yli::opengl::uniform_1i(this->screen_width_uniform_id, this->screen_width);
 
                     // Initialize uniform window height.
-                    this->screen_height_uniform_id = glGetUniformLocation(this->programID, "screen_height");
+                    this->screen_height_uniform_id = glGetUniformLocation(this->program_id, "screen_height");
                     yli::opengl::uniform_1i(this->screen_height_uniform_id, this->screen_height);
                 }
 
@@ -173,17 +173,17 @@ namespace yli::ontology
             std::string texture_filename;
             std::string font_texture_file_format;
 
-            uint32_t texture;                          // Texture containing the glyphs, returned by `load_common_texture`,
-                                                       // (used for `glGenTextures` etc.).
+            uint32_t texture;                        // Texture containing the glyphs, returned by `load_common_texture`,
+                                                     // (used for `glGenTextures` etc.).
 
-            uint32_t vertexbuffer;                     // Buffer containing the vertices.
-            uint32_t uvbuffer;                         // Buffer containing the UVs.
-            uint32_t programID;                        // The `programID` of the shader used to display the text, returned by `load_shaders`.
-            GLint vertex_position_in_screenspaceID;    // Location of the program's `vertex_position_screenspace` attribute.
-            GLint vertex_uv_id;                          // Location of the program's `vertexUV` attribute.
-            GLint Text2DUniformID;                     // Location of the program's texture attribute.
-            GLint screen_width_uniform_id;             // Location of the program's window width uniform.
-            GLint screen_height_uniform_id;            // Location of the program's window height uniform.
+            uint32_t vertexbuffer;                   // Buffer containing the vertices.
+            uint32_t uvbuffer;                       // Buffer containing the UVs.
+            uint32_t program_id;                     // The `program_id` of the shader used to display the text, returned by `load_shaders`.
+            GLint vertex_position_in_screenspace_id; // Location of the program's `vertex_position_screenspace` attribute.
+            GLint vertex_uv_id;                      // Location of the program's `vertexUV` attribute.
+            GLint text_2d_uniform_id;                // Location of the program's texture attribute.
+            GLint screen_width_uniform_id;           // Location of the program's window width uniform.
+            GLint screen_height_uniform_id;          // Location of the program's window height uniform.
 
             std::size_t screen_width;
             std::size_t screen_height;

@@ -62,7 +62,7 @@ namespace yli::ontology
         glBindTexture(GL_TEXTURE_2D, this->texture);
 
         // Set our "texture_sampler" sampler to use Texture Unit 0.
-        yli::opengl::uniform_1i(this->openGL_textureID, 0);
+        yli::opengl::uniform_1i(this->opengl_texture_id, 0);
 
         // Render this `Material` by calling `render()` function of each `Species`, each `VectorFont`, and each `ChunkMaster`.
         yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_species.child_pointer_vector);
@@ -119,7 +119,7 @@ namespace yli::ontology
             return;
         }
 
-        if (new_parent->is_entity(this->local_name))
+        if (new_parent->has_child(this->local_name))
         {
             std::cerr << "ERROR: `Material::bind_to_new_parent`: local name is already in use!\n";
             return;

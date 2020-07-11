@@ -76,7 +76,7 @@ namespace yli::ontology
                 this->char_fragment_shader = this->fragment_shader.c_str();
                 this->parent               = shader_struct.parent;
 
-                this->programID            = 0; // dummy value.
+                this->program_id           = 0; // dummy value.
                 this->matrixID             = 0; // dummy value.
                 this->view_matrixID        = 0; // dummy value.
                 this->model_matrixID       = 0; // dummy value.
@@ -85,9 +85,9 @@ namespace yli::ontology
                 // Each `Material` rendered after a given GPGPU `Shader`
                 // may also use the output `ComputeTask`s offered by
                 // a given GPGPU `Shader` as its texture.
-                this->is_gpgpu_shader         = shader_struct.is_gpgpu_shader;
+                this->is_gpgpu_shader      = shader_struct.is_gpgpu_shader;
 
-                this->opengl_in_use           = shader_struct.opengl_in_use;
+                this->opengl_in_use        = shader_struct.opengl_in_use;
 
                 // Get `childID` from `Scene` and set pointer to this `Shader`.
                 this->bind_to_parent();
@@ -95,12 +95,12 @@ namespace yli::ontology
                 if (this->universe != nullptr && !this->universe->get_is_headless() && this->opengl_in_use)
                 {
                     // Create and compile our GLSL program from the shaders.
-                    this->programID = yli::load::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
+                    this->program_id = yli::load::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
 
                     // Get a handle for our "MVP" uniform.
-                    this->matrixID = glGetUniformLocation(this->programID, "MVP");
-                    this->view_matrixID = glGetUniformLocation(this->programID, "V");
-                    this->model_matrixID = glGetUniformLocation(this->programID, "M");
+                    this->matrixID = glGetUniformLocation(this->program_id, "MVP");
+                    this->view_matrixID = glGetUniformLocation(this->program_id, "V");
+                    this->model_matrixID = glGetUniformLocation(this->program_id, "M");
                 }
 
                 // `yli::ontology::Entity` member variables begin here.
@@ -145,7 +145,7 @@ namespace yli::ontology
 
             yli::ontology::Scene* parent;         // Pointer to the `Scene`.
 
-            uint32_t programID;                   // This `Shader`'s `programID`, returned by `load_shaders`.
+            uint32_t program_id;                  // This `Shader`'s `program_id`, returned by `load_shaders`.
 
             uint32_t matrixID;
             uint32_t view_matrixID;

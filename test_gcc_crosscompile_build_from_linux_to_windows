@@ -20,7 +20,6 @@ do
     echo "changing into ${build_dir}"
     cd ${build_dir}
     ${script_dir}/crosscompile_from_linux_to_windows_gcc
-    wine angelscript_test.exe
     break
 done
 

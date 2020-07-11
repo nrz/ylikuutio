@@ -94,7 +94,7 @@ namespace yli::ontology
 
                         // Get a handle for our "LightPosition" uniform.
                         glUseProgram(species_struct.shader->get_program_id());
-                        this->lightID = glGetUniformLocation(species_struct.shader->get_program_id(), "light_position_worldspace");
+                        this->light_id = glGetUniformLocation(species_struct.shader->get_program_id(), "light_position_worldspace");
                     }
 
                     if (this->is_terrain)
@@ -173,12 +173,12 @@ namespace yli::ontology
 
             const std::string& get_model_file_format() const;
 
-            bool is_terrain;                           // worlds currently do not rotate nor translate.
-            float planet_radius;                      // radius of sea level in kilometers. used only for worlds.
-            float divisor;                           // value by which SRTM values are divided to convert them to kilometers.
+            bool is_terrain;               // worlds currently do not rotate nor translate.
+            float planet_radius;           // radius of sea level in kilometers. used only for worlds.
+            float divisor;                 // value by which SRTM values are divided to convert them to kilometers.
 
-            std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
-            glm::vec3 light_position;                // light position.
+            std::string color_channel;     // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
+            glm::vec3 light_position;      // light position.
 
         private:
             // this method renders all `Object`s of this `Species`.
@@ -186,11 +186,11 @@ namespace yli::ontology
 
             bool is_symbiont_species;
 
-            std::string model_file_format;            // type of the model file, eg. `"bmp"`.
-            std::string model_filename;               // filename of the model file.
+            std::string model_file_format; // type of the model file, eg. `"bmp"`.
+            std::string model_filename;    // filename of the model file.
 
-            double latitude;                          // for SRTM.
-            double longitude;                         // for SRTM.
+            double latitude;               // for SRTM.
+            double longitude;              // for SRTM.
 
             std::size_t mesh_i;
 

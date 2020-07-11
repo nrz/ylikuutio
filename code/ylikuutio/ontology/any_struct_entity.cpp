@@ -45,4 +45,3 @@ namespace yli::ontology
         return 0; // `AnyStructEntity` has no children.
     }
 }
-

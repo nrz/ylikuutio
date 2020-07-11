@@ -49,14 +49,14 @@
 // defined in `code/ylikuutio/data/datatypes.hpp` in order to
 // avoid cyclic dependencies.
 #include "code/ylikuutio/ontology/entity.hpp"
-#include "code/ylikuutio/ontology/setting.hpp"
+#include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/text2D.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
-#include "code/ylikuutio/ontology/setting_struct.hpp"
+#include "code/ylikuutio/ontology/variable_struct.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/world_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
@@ -984,10 +984,10 @@ int main(const int argc, const char* const argv[]) try
     std::cout << "Defining console command callback engines.\n";
 
     // Config callbacks.
-    yli::ontology::create_lisp_function_overload("settings", my_console, std::function(&yli::ontology::Entity::print_settings0));
-    yli::ontology::create_lisp_function_overload("settings", my_console, std::function(&yli::ontology::Entity::print_settings1));
-    yli::ontology::create_lisp_function_overload("set", my_console, std::function(&yli::ontology::Setting::set2));
-    yli::ontology::create_lisp_function_overload("print", my_console, std::function(&yli::ontology::Setting::print_value1));
+    yli::ontology::create_lisp_function_overload("variables", my_console, std::function(&yli::ontology::Entity::print_variables0));
+    yli::ontology::create_lisp_function_overload("variables", my_console, std::function(&yli::ontology::Entity::print_variables1));
+    yli::ontology::create_lisp_function_overload("set", my_console, std::function(&yli::ontology::Variable::set2));
+    yli::ontology::create_lisp_function_overload("print", my_console, std::function(&yli::ontology::Variable::print_value1));
 
     // `Entity` handling callbacks.
     yli::ontology::create_lisp_function_overload("entities", my_console, std::function(&yli::ontology::Universe::print_entities));
@@ -1000,7 +1000,6 @@ int main(const int argc, const char* const argv[]) try
     yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Universe::bind));
     yli::ontology::create_lisp_function_overload("set-global-name", my_console, std::function(&yli::ontology::Universe::set_global_name_for_entity));
     yli::ontology::create_lisp_function_overload("set-local-name", my_console, std::function(&yli::ontology::Universe::set_local_name_for_entity));
-    yli::ontology::create_lisp_function_overload("AnyValueEntity", my_console, std::function(&yli::ontology::Universe::create_any_value_entity));
     yli::ontology::create_lisp_function_overload("AnyStructEntity", my_console, std::function(&yli::ontology::Universe::create_any_struct_entity));
 
     // Exit program callbacks.

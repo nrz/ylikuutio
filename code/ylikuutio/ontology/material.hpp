@@ -60,7 +60,7 @@ namespace yli::ontology
                 this->texture_file_format      = material_struct.texture_file_format;
                 this->texture_filename         = material_struct.texture_filename;
                 this->texture                  = 0; // some dummy value.
-                this->openGL_textureID         = 0; // some dummy value.
+                this->opengl_texture_id        = 0; // some dummy value.
                 this->image_width              = 0;
                 this->image_height             = 0;
                 this->image_size               = 0;
@@ -96,7 +96,7 @@ namespace yli::ontology
                     if (this->universe != nullptr && !this->universe->get_is_headless() && this->child_of_shader_or_symbiosis.get_parent() != nullptr)
                     {
                         yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->child_of_shader_or_symbiosis.get_parent());
-                        this->openGL_textureID = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
+                        this->opengl_texture_id = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
                     }
 
                     // `yli::ontology::Entity` member variables begin here.
@@ -139,7 +139,7 @@ namespace yli::ontology
             std::size_t image_size;
 
             uint32_t texture;                    // Texture of this `Material`, returned by `load_common_texture` (used for `glGenTextures` etc.).
-            GLuint openGL_textureID;             // Texture ID, returned by `glGetUniformLocation(programID, "texture_sampler")`.
+            GLuint opengl_texture_id;             // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`.
 
         private:
             std::size_t get_number_of_children() const override;

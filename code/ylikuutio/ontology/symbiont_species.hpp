@@ -57,7 +57,7 @@ namespace yli::ontology
             void unbind_biont(const std::size_t childID);
 
             std::size_t get_indices_size() const;
-            GLint get_lightID() const;
+            GLint get_light_id() const;
 
             // constructor.
             SymbiontSpecies(
@@ -93,7 +93,7 @@ namespace yli::ontology
 
                     // Get a handle for our "LightPosition" uniform.
                     glUseProgram(this->shader->get_program_id());
-                    this->lightID = glGetUniformLocation(this->shader->get_program_id(), "light_position_worldspace");
+                    this->light_id = glGetUniformLocation(this->shader->get_program_id(), "light_position_worldspace");
 
                     // water level.
                     GLint water_level_uniform_location = glGetUniformLocation(this->shader->get_program_id(), "water_level");
@@ -159,10 +159,10 @@ namespace yli::ontology
             std::queue<std::size_t> free_biontID_queue;
             std::size_t number_of_bionts;
 
-            yli::ontology::Shader* shader;                             // pointer to `Shader` (not a parent!).
+            yli::ontology::Shader* shader; // pointer to `Shader` (not a parent!).
 
-            std::string model_file_format;                             // type of the model file, eg. `"bmp"`.
-            std::string model_filename;                                // filename of the model file.
+            std::string model_file_format; // type of the model file, eg. `"bmp"`.
+            std::string model_filename;    // filename of the model file.
     };
 }
 

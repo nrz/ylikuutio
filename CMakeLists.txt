@@ -524,8 +524,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/any_struct_entity.cpp
     code/ylikuutio/ontology/any_struct_entity.hpp
     code/ylikuutio/ontology/any_struct_entity_struct.hpp
-    code/ylikuutio/ontology/any_value_entity.cpp
-    code/ylikuutio/ontology/any_value_entity.hpp
     code/ylikuutio/ontology/biont.cpp
     code/ylikuutio/ontology/biont.hpp
     code/ylikuutio/ontology/biont_struct.hpp
@@ -561,10 +559,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/entity_factory.cpp
     code/ylikuutio/ontology/entity_factory.hpp
     code/ylikuutio/ontology/entity_factory_templates.hpp
-    code/ylikuutio/ontology/entity_setting_activation.cpp
-    code/ylikuutio/ontology/entity_setting_activation.hpp
-    code/ylikuutio/ontology/entity_setting_read.cpp
-    code/ylikuutio/ontology/entity_setting_read.hpp
+    code/ylikuutio/ontology/entity_variable_activation.cpp
+    code/ylikuutio/ontology/entity_variable_activation.hpp
+    code/ylikuutio/ontology/entity_variable_read.cpp
+    code/ylikuutio/ontology/entity_variable_read.hpp
     code/ylikuutio/ontology/entity_struct.hpp
     code/ylikuutio/ontology/family_templates.hpp
     code/ylikuutio/ontology/font2D.cpp
@@ -591,10 +589,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/model_struct.hpp
     code/ylikuutio/ontology/movable.cpp
     code/ylikuutio/ontology/movable.hpp
-    code/ylikuutio/ontology/movable_setting_activation.cpp
-    code/ylikuutio/ontology/movable_setting_activation.hpp
-    code/ylikuutio/ontology/movable_setting_read.cpp
-    code/ylikuutio/ontology/movable_setting_read.hpp
+    code/ylikuutio/ontology/movable_variable_activation.cpp
+    code/ylikuutio/ontology/movable_variable_activation.hpp
+    code/ylikuutio/ontology/movable_variable_read.cpp
+    code/ylikuutio/ontology/movable_variable_read.hpp
     code/ylikuutio/ontology/movable_struct.hpp
     code/ylikuutio/ontology/object.cpp
     code/ylikuutio/ontology/object.hpp
@@ -609,10 +607,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/scene.cpp
     code/ylikuutio/ontology/scene.hpp
     code/ylikuutio/ontology/scene_struct.hpp
-    code/ylikuutio/ontology/setting.cpp
-    code/ylikuutio/ontology/setting.hpp
-    code/ylikuutio/ontology/setting_callbacks.cpp
-    code/ylikuutio/ontology/setting_struct.hpp
+    code/ylikuutio/ontology/variable.cpp
+    code/ylikuutio/ontology/variable.hpp
+    code/ylikuutio/ontology/variable_callbacks.cpp
+    code/ylikuutio/ontology/variable_struct.hpp
     code/ylikuutio/ontology/shader.cpp
     code/ylikuutio/ontology/shader.hpp
     code/ylikuutio/ontology/shader_compare.cpp
@@ -959,8 +957,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/any_struct_entity.cpp
         code/ylikuutio/ontology/any_struct_entity.hpp
         code/ylikuutio/ontology/any_struct_entity_struct.hpp
-        code/ylikuutio/ontology/any_value_entity.cpp
-        code/ylikuutio/ontology/any_value_entity.hpp
         code/ylikuutio/ontology/brain.cpp
         code/ylikuutio/ontology/brain.hpp
         code/ylikuutio/ontology/brain_struct.hpp
@@ -991,10 +987,10 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/scene.cpp
         code/ylikuutio/ontology/scene.hpp
         code/ylikuutio/ontology/scene_struct.hpp
-        code/ylikuutio/ontology/setting.cpp
-        code/ylikuutio/ontology/setting.hpp
-        code/ylikuutio/ontology/setting_callbacks.cpp
-        code/ylikuutio/ontology/setting_struct.hpp
+        code/ylikuutio/ontology/variable.cpp
+        code/ylikuutio/ontology/variable.hpp
+        code/ylikuutio/ontology/variable_callbacks.cpp
+        code/ylikuutio/ontology/variable_struct.hpp
         code/ylikuutio/ontology/shader.cpp
         code/ylikuutio/ontology/shader.hpp
         code/ylikuutio/ontology/shader_struct.hpp
@@ -1046,7 +1042,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_callback_system.cpp
         code/ylikuutio/tests/googletest/test_check_and_report_if_some_string_matches.cpp
         code/ylikuutio/tests/googletest/test_command_line_master.cpp
-        code/ylikuutio/tests/googletest/test_config.cpp
         code/ylikuutio/tests/googletest/test_csv_loader.cpp
         code/ylikuutio/tests/googletest/test_extract_last_part_of_string.cpp
         code/ylikuutio/tests/googletest/test_extract_string.cpp
@@ -1069,6 +1064,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_ontology.cpp
         code/ylikuutio/tests/googletest/test_pugixml.cpp
         code/ylikuutio/tests/googletest/test_quad_triangulation.cpp
+        code/ylikuutio/tests/googletest/test_variable.cpp
         code/ylikuutio/tests/googletest/test_shader_struct.cpp
         code/ylikuutio/tests/googletest/test_species_struct.cpp
         code/ylikuutio/tests/googletest/test_triangulation.cpp

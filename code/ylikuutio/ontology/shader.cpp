@@ -75,7 +75,7 @@ namespace yli::ontology
             return;
         }
 
-        if (new_parent->is_entity(this->local_name))
+        if (new_parent->has_child(this->local_name))
         {
             std::cerr << "ERROR: `Shader::bind_to_new_parent`: local name is already in use!\n";
             return;
@@ -129,7 +129,7 @@ namespace yli::ontology
             scene->unbind_shader(this->childID, this->local_name);
         }
 
-        glDeleteProgram(this->programID);
+        glDeleteProgram(this->program_id);
     }
 
     void Shader::render()
@@ -141,11 +141,11 @@ namespace yli::ontology
 
         this->prerender();
 
-        // [Re]bind `programID` shader.
-        glUseProgram(this->programID);
+        // [Re]bind `program_id` shader.
+        glUseProgram(this->program_id);
 
         // `glUniformMatrix4fv` doesn't change between objects,
-        // so this can be done once for all objects that use the same `programID`.
+        // so this can be done once for all objects that use the same `program_id`.
         glUniformMatrix4fv(this->view_matrixID, 1, GL_FALSE, &this->universe->get_view_matrix()[0][0]);
 
         // Render this `Shader` by calling `render()` function of each `ComputeTask`, each `Material`, and each `Symbiosis`.
@@ -177,7 +177,7 @@ namespace yli::ontology
 
     uint32_t Shader::get_program_id() const
     {
-        return this->programID;
+        return this->program_id;
     }
 
     uint32_t Shader::get_matrix_id() const

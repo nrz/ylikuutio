@@ -59,7 +59,7 @@ namespace yli::ontology
         glDeleteTextures(1, &this->texture);
 
         // Delete shader.
-        glDeleteProgram(this->programID);
+        glDeleteProgram(this->program_id);
     }
 
     yli::ontology::Entity* Font2D::get_parent() const
@@ -94,20 +94,20 @@ namespace yli::ontology
 
     uint32_t Font2D::get_program_id() const
     {
-        return this->programID;
+        return this->program_id;
     }
 
     void Font2D::prepare_to_print() const
     {
         // Bind shader.
-        glUseProgram(this->programID);
+        glUseProgram(this->program_id);
 
         // Bind texture.
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, this->texture);
 
         // Set our "texture_sampler" sampler to user Material Unit 0
-        yli::opengl::uniform_1i(this->Text2DUniformID, 0);
+        yli::opengl::uniform_1i(this->text_2d_uniform_id, 0);
 
         // Set screen width.
         yli::opengl::uniform_1i(this->screen_width_uniform_id, this->screen_width);
@@ -329,9 +329,9 @@ namespace yli::ontology
         glBufferData(GL_ARRAY_BUFFER, UVs.size() * sizeof(glm::vec2), &UVs[0], GL_STATIC_DRAW);
 
         // 1st attribute buffer: vertices.
-        yli::opengl::enable_vertex_attrib_array(this->vertex_position_in_screenspaceID);
+        yli::opengl::enable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
         glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
-        glVertexAttribPointer(this->vertex_position_in_screenspaceID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+        glVertexAttribPointer(this->vertex_position_in_screenspace_id, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
         // 2nd attribute buffer: UVs.
         yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
@@ -341,7 +341,7 @@ namespace yli::ontology
         // Draw call.
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
-        yli::opengl::disable_vertex_attrib_array(this->vertex_position_in_screenspaceID);
+        yli::opengl::disable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
         yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
 
         glDisable(GL_BLEND);

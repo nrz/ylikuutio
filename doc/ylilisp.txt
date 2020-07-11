@@ -37,6 +37,11 @@ Planned implementation details:
   YliLisp functions into its local context,
   similarly to AngelScript.
 * All variables are always available in all contexts.
+* Ylikuutio uses an C++ exception handler to handle
+  exceptions triggered by execution of YliLisp code.
+* When an exception occurs, the effects caused by already
+  executed YliLisp code are undone by setting and
+  activating the old values stored on each change.
 
 Command examples:
 * `(define my-number 'uint64 123)`.

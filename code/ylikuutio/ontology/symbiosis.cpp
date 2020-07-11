@@ -73,7 +73,7 @@ namespace yli::ontology
             return;
         }
 
-        if (new_parent->is_entity(this->local_name))
+        if (new_parent->has_child(this->local_name))
         {
             std::cerr << "ERROR: `Symbiosis::bind_to_new_parent`: local name is already in use!\n";
             return;
@@ -373,9 +373,9 @@ namespace yli::ontology
         return this->biontID_symbiont_material_vector.at(biontID)->get_openGL_textureID();
     }
 
-    GLint Symbiosis::get_lightID(const std::size_t biontID) const
+    GLint Symbiosis::get_light_id(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector.at(biontID)->get_lightID();
+        return this->biontID_symbiont_species_vector.at(biontID)->get_light_id();
     }
 
     const glm::vec3& Symbiosis::get_light_position(const std::size_t biontID) const

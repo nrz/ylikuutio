@@ -70,13 +70,13 @@ namespace yli::ontology
                 parent_of_holobionts(this)
             {
                 // constructor.
-                this->model_filename               = symbiosis_struct.model_filename;
-                this->model_file_format            = symbiosis_struct.model_file_format;
-                this->triangulation_type           = symbiosis_struct.triangulation_type;
-                this->light_position               = symbiosis_struct.light_position;
+                this->model_filename     = symbiosis_struct.model_filename;
+                this->model_file_format  = symbiosis_struct.model_file_format;
+                this->triangulation_type = symbiosis_struct.triangulation_type;
+                this->light_position     = symbiosis_struct.light_position;
 
-                this->ofbx_mesh_count              = 0;
-                this->opengl_in_use                = symbiosis_struct.opengl_in_use;
+                this->ofbx_mesh_count    = 0;
+                this->opengl_in_use      = symbiosis_struct.opengl_in_use;
 
                 this->create_symbionts();
 
@@ -119,7 +119,7 @@ namespace yli::ontology
             uint32_t get_texture(const std::size_t biontID) const;
             GLint get_openGL_textureID(const std::size_t biontID) const;
 
-            GLint get_lightID(const std::size_t biontID) const;
+            GLint get_light_id(const std::size_t biontID) const;
             const glm::vec3& get_light_position(const std::size_t biontID) const;
 
             yli::ontology::ChildModule child_of_shader;

@@ -47,7 +47,7 @@
 // 3. Otherwise, if the callback has `yli::ontology::Entity*` or some subtype of `Entity` as an argument,
 //    then the string will be looked up and converted into that. The `Entity` is set as context.
 //
-// 4. If the callback has `yli::ontology::Setting*` as an argument, then the `Setting` with that name
+// 4. If the callback has `yli::ontology::Variable*` as an argument, then the `Variable` with that name
 //    will be looked up from the current context.
 //
 // 5. If the callback has `bool` as an argument, then the string will be converted into that.

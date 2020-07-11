@@ -60,11 +60,11 @@ namespace yli::ontology
                 this->font_size = text_struct.font_size;
 
                 // Initialize class members with some dummy values.
-                this->vertexbuffer                     = 0;
-                this->uvbuffer                         = 0;
-                this->programID                        = 0;
-                this->vertex_position_in_screenspaceID = 0;
-                this->vertex_uv_id                       = 0;
+                this->vertexbuffer                      = 0;
+                this->uvbuffer                          = 0;
+                this->program_id                        = 0;
+                this->vertex_position_in_screenspace_id = 0;
+                this->vertex_uv_id                      = 0;
 
                 const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
 
@@ -79,7 +79,7 @@ namespace yli::ontology
 
                     if (font2D != nullptr)
                     {
-                        this->vertex_position_in_screenspaceID = glGetAttribLocation(font2D->get_program_id(), "vertex_position_screenspace");
+                        this->vertex_position_in_screenspace_id = glGetAttribLocation(font2D->get_program_id(), "vertex_position_screenspace");
                         this->vertex_uv_id = glGetAttribLocation(font2D->get_program_id(), "vertexUV");
                     }
                 }
@@ -106,11 +106,11 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            uint32_t vertexbuffer;                     // Buffer containing the vertices
-            uint32_t uvbuffer;                         // Buffer containing the UVs
-            uint32_t programID;                        // The `programID` of the shader used to display the text, returned by `load_shaders`.
-            GLint vertex_position_in_screenspaceID;    // Location of the program's `vertex_position_screenspace` attribute.
-            GLint vertex_uv_id;                          // Location of the program's `vertexUV` attribute.
+            uint32_t vertexbuffer;                   // Buffer containing the vertices
+            uint32_t uvbuffer;                       // Buffer containing the UVs
+            uint32_t program_id;                     // The `program_id` of the shader used to display the text, returned by `load_shaders`.
+            GLint vertex_position_in_screenspace_id; // Location of the program's `vertex_position_screenspace` attribute.
+            GLint vertex_uv_id;                      // Location of the program's `vertexUV` attribute.
 
             std::string text;
             std::string horizontal_alignment;

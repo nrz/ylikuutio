@@ -306,12 +306,15 @@ A: Some parts of Ylikuutio (some shaders, some file loaders, etc.) are
    based on [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/),
    which I really recommend for anyone interested in learning
    OpenGL programming. Ylikuutio also uses external libraries such as
-   (in alphabetical order) AngelScript, Asio, GLM, GLEW, OpenFBX, SDL, stb, and
+   (in alphabetical order) Asio, GLM, GLEW, OpenFBX, SDL, stb, and
    pugixml. The rest is written from scratch.
 
 Q: Does Ylikuutio use right-handed or left-handed world coordinates?
 A: Ylikuutio uses right-handed world coordinates,
    so X grows eastward, Z grows southward, and Y grows upwards.
+
+Q: Is there a scripting language in Ylikuutio?
+A: YliLisp scripting language is a work in progress.
 
 ## Implemented functionality
 * 3D rendering
@@ -369,7 +372,6 @@ A: Ylikuutio uses right-handed world coordinates,
 
 ### Libraries currently in use
 * The source code from [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/) is licensed under [WTFPL Public Licence version 2](https://www.opengl-tutorial.org/download/).
-* [AngelScript](https://www.angelcode.com/angelscript/) is licensed under [AngelCode Scripting Library license](https://www.angelcode.com/angelscript/sdk/docs/manual/doc_license.html).
 * [Asio](https://think-async.com/) is licensed under [Boost software license](https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt).
 * [OpenGL Mathematics (GLM)](https://glm.g-truc.net/) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](https://glm.g-truc.net/copying.txt).
 * [The OpenGL Extension Wrangler Library (GLEW)](http://glew.sourceforge.net/) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
@@ -386,11 +388,11 @@ A: Ylikuutio uses right-handed world coordinates,
 
 ### 3D models
 * [3D model of Helsinki.](https://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli) The administrator of 3D model of Helsinki is Helsingin kaupunginkanslia and the original creator is Helsingin kaupungin kaupunginkanslia, tietotekniikka- ja viestintäosasto. The data has been downloaded from the [Helsinki Region Infoshare](https://www.hri.fi/) service 19.11.2017 using the license [Creative Commons Nimeä 4.0 Kansainvälinen (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.fi).
-* [Horse](https://www.blendswap.com/blends/view/76528) is made by b2przemo and it is licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/). The `horse.fbx` file shipped with Ylikuutio is made from the original `horse.blend` by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
-* [Turbo polizei](https://www.blendswap.com/blends/view/74227) is made by corvusd and it is licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/). The `turbo_polizei.fbx` file shipped with Ylikuutio is made from the original `porche_997_turbo_polizei_blendswap.blend` (sic) by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
-* [Fantasy house with balcony](https://www.blendswap.com/blends/view/55007) is made by Daniel74 and it is licensed under [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication ](https://creativecommons.org/publicdomain/zero/1.0/). The `fantasy_house_with_balcony.fbx` file shipped with Ylikuutio is made from the original `FantasyHouseNo6.blend` by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
-* [Freight train](https://www.blendswap.com/blends/view/46359) is made by SONGKRO and it is licensed under [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication ](https://creativecommons.org/publicdomain/zero/1.0/). The `freight_train.fbx` file shipped with Ylikuutio is made from the original `freight.blend` by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
-* [Rigged and animated cat](https://www.blendswap.com/blends/view/86110) is made by JonasDichelle and it is licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/). The `cat.fbx` file shipped with Ylikuutio is made from the original `cat.blend` by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
+* [Horse](https://www.blendswap.com/blend/13903) is made by b2przemo and it is licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/). The `horse.fbx` file shipped with Ylikuutio is made from the original `horse.blend` by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
+* [Turbo polizei](https://www.blendswap.com/blend/12758) is made by corvusd and it is licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/). The `turbo_polizei.fbx` file shipped with Ylikuutio is made from the original `porche_997_turbo_polizei_blendswap.blend` (sic) by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
+* [Fantasy house with balcony](https://www.blendswap.com/blend/6670) is made by Daniel74 and it is licensed under [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication ](https://creativecommons.org/publicdomain/zero/1.0/). The `fantasy_house_with_balcony.fbx` file shipped with Ylikuutio is made from the original `FantasyHouseNo6.blend` by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
+* [Freight train](https://www.blendswap.com/blend/5599) is made by SONGKRO and it is licensed under [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication ](https://creativecommons.org/publicdomain/zero/1.0/). The `freight_train.fbx` file shipped with Ylikuutio is made from the original `freight.blend` by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
+* [Rigged and animated cat](https://www.blendswap.com/blend/18519) is made by JonasDichelle and it is licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/). The `cat.fbx` file shipped with Ylikuutio is made from the original `cat.blend` by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
 * Suzanne the monkey is a standard [Blender](https://www.blender.org/) object. According to Blender license information: "All your artwork – images or movie files – including the .blend files and other data files Blender can write, is free for you to use as you like." Ylikuutio does not contain any code from Blender, however. [Blender itself is released under the GNU General Public License (GPL) 2 or later](https://www.blender.org/about/license/).
 
 ### Textures

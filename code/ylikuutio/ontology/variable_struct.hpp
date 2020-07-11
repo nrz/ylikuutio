@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __SETTING_STRUCT_HPP_INCLUDED
-#define __SETTING_STRUCT_HPP_INCLUDED
+#ifndef __VARIABLE_STRUCT_HPP_INCLUDED
+#define __VARIABLE_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
 #include "activate_callback.hpp"
@@ -34,9 +34,9 @@ namespace yli::ontology
 {
     class Entity;
 
-    struct SettingStruct: public yli::ontology::EntityStruct
+    struct VariableStruct: public yli::ontology::EntityStruct
     {
-        SettingStruct()
+        VariableStruct()
             : EntityStruct(),
             parent(nullptr),
             initial_value(nullptr),
@@ -45,10 +45,10 @@ namespace yli::ontology
             should_ylikuutio_call_activate_callback_now(true)
         {
             // constructor.
-            this->is_setting = true;
+            this->is_variable = true;
         }
 
-        SettingStruct(std::shared_ptr<yli::data::AnyValue> initial_value)
+        VariableStruct(std::shared_ptr<yli::data::AnyValue> initial_value)
             : EntityStruct(),
             parent(nullptr),
             initial_value(initial_value),
@@ -57,21 +57,21 @@ namespace yli::ontology
             should_ylikuutio_call_activate_callback_now(true)
         {
             // constructor.
-            this->is_setting = true;
+            this->is_variable = true;
         }
 
-        SettingStruct(const yli::ontology::SettingStruct& setting_struct)
-            : EntityStruct(setting_struct),
-            parent(setting_struct.parent),
-            initial_value(setting_struct.initial_value),
-            activate_callback(setting_struct.activate_callback),
-            read_callback(setting_struct.read_callback),
-            should_ylikuutio_call_activate_callback_now(setting_struct.should_ylikuutio_call_activate_callback_now)
+        VariableStruct(const yli::ontology::VariableStruct& variable_struct)
+            : EntityStruct(variable_struct),
+            parent(variable_struct.parent),
+            initial_value(variable_struct.initial_value),
+            activate_callback(variable_struct.activate_callback),
+            read_callback(variable_struct.read_callback),
+            should_ylikuutio_call_activate_callback_now(variable_struct.should_ylikuutio_call_activate_callback_now)
         {
             // copy constructor.
-            this->global_name = setting_struct.global_name;
-            this->local_name = setting_struct.local_name;
-            this->is_setting = true;
+            this->global_name = variable_struct.global_name;
+            this->local_name = variable_struct.local_name;
+            this->is_variable = true;
         }
 
         yli::ontology::Entity* parent;

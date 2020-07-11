@@ -323,15 +323,15 @@ namespace yli::ontology
                 this->current_camera_spherical_coordinates.theta = NAN; // dummy coordinates.
                 this->current_camera_spherical_coordinates.phi   = NAN; // dummy coordinates.
 
-                this->active_scene     = nullptr;
-                this->active_font2D    = nullptr;
-                this->active_console   = nullptr;
-                this->audio_master     = nullptr;
+                this->active_scene       = nullptr;
+                this->active_font2D      = nullptr;
+                this->active_console     = nullptr;
+                this->audio_master       = nullptr;
 
-                this->background_red   = NAN;
-                this->background_green = NAN;
-                this->background_blue  = NAN;
-                this->background_alpha = NAN;
+                this->background_red     = NAN;
+                this->background_green   = NAN;
+                this->background_blue    = NAN;
+                this->background_alpha   = NAN;
 
                 // Variables related to the window.
                 this->window             = nullptr;
@@ -348,19 +348,19 @@ namespace yli::ontology
                     this->window_title = window_title_stringstream.str();
                 }
 
-                this->is_physical  = universe_struct.is_physical;
+                this->is_physical   = universe_struct.is_physical;
                 this->is_fullscreen = universe_struct.is_fullscreen;
-                this->is_headless  = universe_struct.is_headless;
-                this->is_silent    = universe_struct.is_silent;
+                this->is_headless   = universe_struct.is_headless;
+                this->is_silent     = universe_struct.is_silent;
 
                 // mouse coordinates.
-                this->mouse_x      = this->window_width / 2;
-                this->mouse_y      = this->window_height / 2;
+                this->mouse_x       = this->window_width / 2;
+                this->mouse_y       = this->window_height / 2;
 
                 // variables related to the framebuffer.
-                this->framebuffer  = 0;
-                this->texture      = 0;
-                this->renderbuffer = 0;
+                this->framebuffer                = 0;
+                this->texture                    = 0;
+                this->renderbuffer               = 0;
                 this->is_framebuffer_initialized = false;
 
                 this->current_camera_projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
@@ -376,11 +376,11 @@ namespace yli::ontology
                 this->text_size = universe_struct.text_size;
                 this->font_size = universe_struct.font_size;
 
-                this->max_fps    = universe_struct.max_fps;
-                this->last_time_to_display_fps = yli::time::get_time();
+                this->max_fps                    = universe_struct.max_fps;
+                this->last_time_to_display_fps   = yli::time::get_time();
                 this->last_time_for_display_sync = yli::time::get_time();
-                this->delta_time = NAN;
-                this->number_of_frames = 0;
+                this->delta_time                 = NAN;
+                this->number_of_frames           = 0;
 
                 // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
                 this->last_time_before_reading_keyboard    = std::numeric_limits<uint32_t>::max();
@@ -399,20 +399,20 @@ namespace yli::ontology
                 this->is_second_turbo_pressed = false;
                 this->is_exit_requested       = false;
 
-                this->speed             = universe_struct.speed;
-                this->turbo_factor      = universe_struct.turbo_factor;
-                this->twin_turbo_factor = universe_struct.twin_turbo_factor;
-                this->mouse_speed       = universe_struct.mouse_speed;
+                this->speed                   = universe_struct.speed;
+                this->turbo_factor            = universe_struct.turbo_factor;
+                this->twin_turbo_factor       = universe_struct.twin_turbo_factor;
+                this->mouse_speed             = universe_struct.mouse_speed;
 
-                this->znear             = universe_struct.znear;
-                this->zfar              = universe_struct.zfar;
+                this->znear                   = universe_struct.znear;
+                this->zfar                    = universe_struct.zfar;
 
                 this->testing_spherical_terrain_in_use = false;
                 this->in_console                       = false;
                 this->in_help_mode                     = true;
                 this->can_display_help_screen          = true;
 
-                this->number_of_entities            = 0;
+                this->number_of_entities               = 0;
 
                 this->context = nullptr;
                 this->window  = nullptr;
@@ -452,7 +452,7 @@ namespace yli::ontology
                 // Set the value of `should_be_rendered` here because it can't be done in `Entity` constructor.
                 this->should_be_rendered = !this->get_is_headless();
 
-                this->create_should_be_rendered_setting();
+                this->create_should_be_rendered_variable();
 
                 if (this->is_silent)
                 {
@@ -610,12 +610,6 @@ namespace yli::ontology
 
             // Public `Entity` create callbacks.
 
-            static std::shared_ptr<yli::data::AnyValue> create_any_value_entity(
-                    yli::ontology::Universe* const universe,
-                    std::shared_ptr<std::string> variable_name_shared_ptr,
-                    std::shared_ptr<std::string> variable_type_shared_ptr,
-                    std::shared_ptr<std::string> value_string_shared_ptr);
-
             static std::shared_ptr<yli::data::AnyValue> create_any_struct_entity(
                     yli::ontology::Universe* const universe,
                     std::shared_ptr<std::string> variable_name_shared_ptr);
@@ -744,7 +738,7 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            void create_should_be_rendered_setting();
+            void create_should_be_rendered_variable();
 
             bool compute_and_update_matrices_from_inputs();
 
@@ -758,9 +752,9 @@ namespace yli::ontology
             yli::ontology::Font2D* active_font2D;
             yli::ontology::Console* active_console;
 
-            std::shared_ptr<yli::audio::AudioMaster> audio_master;    // pointer to `AudioMaster`.
+            std::shared_ptr<yli::audio::AudioMaster> audio_master; // pointer to `AudioMaster`.
 
-            std::shared_ptr<yli::input::InputMaster> input_master;    // pointer to `InputMaster`.
+            std::shared_ptr<yli::input::InputMaster> input_master; // pointer to `InputMaster`.
 
             // variables related to the window.
             std::shared_ptr<SDL_GLContext> context;

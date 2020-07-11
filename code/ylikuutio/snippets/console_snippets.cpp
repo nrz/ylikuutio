@@ -17,8 +17,8 @@
 
 #include "console_snippets.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
-#include "code/ylikuutio/ontology/setting.hpp"
-#include "code/ylikuutio/ontology/setting_struct.hpp"
+#include "code/ylikuutio/ontology/variable.hpp"
+#include "code/ylikuutio/ontology/variable_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
@@ -35,28 +35,28 @@ namespace yli::snippets
             const uint32_t console_right_x)
     {
         // Variables related to console.
-        yli::ontology::SettingStruct console_top_y_setting_struct(std::make_shared<yli::data::AnyValue>(console_top_y));
-        console_top_y_setting_struct.local_name = "console_top_y";
-        console_top_y_setting_struct.activate_callback = &yli::ontology::Setting::activate_console_top_y;
-        console_top_y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        entity->create_setting(console_top_y_setting_struct);
+        yli::ontology::VariableStruct console_top_y_variable_struct(std::make_shared<yli::data::AnyValue>(console_top_y));
+        console_top_y_variable_struct.local_name = "console_top_y";
+        console_top_y_variable_struct.activate_callback = &yli::ontology::Variable::activate_console_top_y;
+        console_top_y_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        entity->create_variable(console_top_y_variable_struct);
 
-        yli::ontology::SettingStruct console_bottom_y_setting_struct(std::make_shared<yli::data::AnyValue>(console_bottom_y));
-        console_bottom_y_setting_struct.local_name = "console_bottom_y";
-        console_bottom_y_setting_struct.activate_callback = &yli::ontology::Setting::activate_console_bottom_y;
-        console_bottom_y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        entity->create_setting(console_bottom_y_setting_struct);
+        yli::ontology::VariableStruct console_bottom_y_variable_struct(std::make_shared<yli::data::AnyValue>(console_bottom_y));
+        console_bottom_y_variable_struct.local_name = "console_bottom_y";
+        console_bottom_y_variable_struct.activate_callback = &yli::ontology::Variable::activate_console_bottom_y;
+        console_bottom_y_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        entity->create_variable(console_bottom_y_variable_struct);
 
-        yli::ontology::SettingStruct console_left_x_setting_struct(std::make_shared<yli::data::AnyValue>(console_left_x));
-        console_left_x_setting_struct.local_name = "console_left_x";
-        console_left_x_setting_struct.activate_callback = &yli::ontology::Setting::activate_console_left_x;
-        console_left_x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        entity->create_setting(console_left_x_setting_struct);
+        yli::ontology::VariableStruct console_left_x_variable_struct(std::make_shared<yli::data::AnyValue>(console_left_x));
+        console_left_x_variable_struct.local_name = "console_left_x";
+        console_left_x_variable_struct.activate_callback = &yli::ontology::Variable::activate_console_left_x;
+        console_left_x_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        entity->create_variable(console_left_x_variable_struct);
 
-        yli::ontology::SettingStruct console_right_x_setting_struct(std::make_shared<yli::data::AnyValue>(console_right_x));
-        console_right_x_setting_struct.local_name = "console_right_x";
-        console_right_x_setting_struct.activate_callback = &yli::ontology::Setting::activate_console_right_x;
-        console_right_x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        entity->create_setting(console_right_x_setting_struct);
+        yli::ontology::VariableStruct console_right_x_variable_struct(std::make_shared<yli::data::AnyValue>(console_right_x));
+        console_right_x_variable_struct.local_name = "console_right_x";
+        console_right_x_variable_struct.activate_callback = &yli::ontology::Variable::activate_console_right_x;
+        console_right_x_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        entity->create_variable(console_right_x_variable_struct);
     }
 }

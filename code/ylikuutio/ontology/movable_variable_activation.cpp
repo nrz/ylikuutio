@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "movable_setting_activation.hpp"
-#include "setting.hpp"
+#include "movable_variable_activation.hpp"
+#include "variable.hpp"
 #include "movable.hpp"
 #include "universe.hpp"
 #include "holobiont.hpp"
@@ -36,9 +36,9 @@ namespace yli::ontology
 {
     class Entity;
 
-    std::shared_ptr<yli::data::AnyValue> activate_cartesian_coordinates(yli::ontology::Entity* const entity, yli::ontology::Setting* const setting)
+    std::shared_ptr<yli::data::AnyValue> activate_cartesian_coordinates(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
-        if (entity == nullptr || setting == nullptr)
+        if (entity == nullptr || variable == nullptr)
         {
             return nullptr;
         }
@@ -47,7 +47,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            std::shared_ptr<yli::data::AnyValue> cartesian_coordinates_any_value = setting->setting_value;
+            std::shared_ptr<yli::data::AnyValue> cartesian_coordinates_any_value = variable->variable_value;
 
             if (cartesian_coordinates_any_value == nullptr || !std::holds_alternative<std::shared_ptr<glm::vec3>>(cartesian_coordinates_any_value->data))
             {
@@ -65,7 +65,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        std::shared_ptr<yli::data::AnyValue> cartesian_coordinates_any_value = setting->setting_value;
+        std::shared_ptr<yli::data::AnyValue> cartesian_coordinates_any_value = variable->variable_value;
 
         if (cartesian_coordinates_any_value == nullptr || !std::holds_alternative<std::shared_ptr<glm::vec3>>(cartesian_coordinates_any_value->data))
         {
@@ -76,9 +76,9 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> activate_x(yli::ontology::Entity* const entity, yli::ontology::Setting* const setting)
+    std::shared_ptr<yli::data::AnyValue> activate_x(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
-        if (entity == nullptr || setting == nullptr)
+        if (entity == nullptr || variable == nullptr)
         {
             return nullptr;
         }
@@ -87,7 +87,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            std::shared_ptr<yli::data::AnyValue> x_any_value = setting->setting_value;
+            std::shared_ptr<yli::data::AnyValue> x_any_value = variable->variable_value;
 
             if (x_any_value == nullptr || !std::holds_alternative<float>(x_any_value->data))
             {
@@ -114,7 +114,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        std::shared_ptr<yli::data::AnyValue> x_any_value = setting->setting_value;
+        std::shared_ptr<yli::data::AnyValue> x_any_value = variable->variable_value;
 
         if (x_any_value == nullptr || !std::holds_alternative<float>(x_any_value->data))
         {
@@ -125,9 +125,9 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> activate_y(yli::ontology::Entity* const entity, yli::ontology::Setting* const setting)
+    std::shared_ptr<yli::data::AnyValue> activate_y(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
-        if (entity == nullptr || setting == nullptr)
+        if (entity == nullptr || variable == nullptr)
         {
             return nullptr;
         }
@@ -136,7 +136,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            std::shared_ptr<yli::data::AnyValue> y_any_value = setting->setting_value;
+            std::shared_ptr<yli::data::AnyValue> y_any_value = variable->variable_value;
 
             if (y_any_value == nullptr || !std::holds_alternative<float>(y_any_value->data))
             {
@@ -163,7 +163,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        std::shared_ptr<yli::data::AnyValue> y_any_value = setting->setting_value;
+        std::shared_ptr<yli::data::AnyValue> y_any_value = variable->variable_value;
 
         if (y_any_value == nullptr || !std::holds_alternative<float>(y_any_value->data))
         {
@@ -174,9 +174,9 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> activate_z(yli::ontology::Entity* const entity, yli::ontology::Setting* const setting)
+    std::shared_ptr<yli::data::AnyValue> activate_z(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
-        if (entity == nullptr || setting == nullptr)
+        if (entity == nullptr || variable == nullptr)
         {
             return nullptr;
         }
@@ -185,7 +185,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            std::shared_ptr<yli::data::AnyValue> z_any_value = setting->setting_value;
+            std::shared_ptr<yli::data::AnyValue> z_any_value = variable->variable_value;
 
             if (z_any_value == nullptr || !std::holds_alternative<float>(z_any_value->data))
             {
@@ -212,7 +212,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        std::shared_ptr<yli::data::AnyValue> z_any_value = setting->setting_value;
+        std::shared_ptr<yli::data::AnyValue> z_any_value = variable->variable_value;
 
         if (z_any_value == nullptr || !std::holds_alternative<float>(z_any_value->data))
         {
@@ -223,9 +223,9 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> activate_spherical_coordinates(yli::ontology::Entity* const entity, yli::ontology::Setting* const setting)
+    std::shared_ptr<yli::data::AnyValue> activate_spherical_coordinates(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
-        if (entity == nullptr || setting == nullptr)
+        if (entity == nullptr || variable == nullptr)
         {
             return nullptr;
         }
@@ -234,7 +234,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            std::shared_ptr<yli::data::AnyValue> spherical_coordinates_any_value = setting->setting_value;
+            std::shared_ptr<yli::data::AnyValue> spherical_coordinates_any_value = variable->variable_value;
 
             if (spherical_coordinates_any_value == nullptr || !std::holds_alternative<yli::data::SphericalCoordinatesStruct*>(spherical_coordinates_any_value->data))
             {
@@ -247,7 +247,7 @@ namespace yli::ontology
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
-        std::shared_ptr<yli::data::AnyValue> spherical_coordinates_any_value = setting->setting_value;
+        std::shared_ptr<yli::data::AnyValue> spherical_coordinates_any_value = variable->variable_value;
 
         if (spherical_coordinates_any_value == nullptr || !std::holds_alternative<yli::data::SphericalCoordinatesStruct*>(spherical_coordinates_any_value->data))
         {
@@ -258,9 +258,9 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> activate_rho(yli::ontology::Entity* const entity, yli::ontology::Setting* const setting)
+    std::shared_ptr<yli::data::AnyValue> activate_rho(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
-        if (entity == nullptr || setting == nullptr)
+        if (entity == nullptr || variable == nullptr)
         {
             return nullptr;
         }
@@ -269,7 +269,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            std::shared_ptr<yli::data::AnyValue> rho_any_value = setting->setting_value;
+            std::shared_ptr<yli::data::AnyValue> rho_any_value = variable->variable_value;
 
             if (rho_any_value == nullptr || !std::holds_alternative<float>(rho_any_value->data))
             {
@@ -287,7 +287,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        std::shared_ptr<yli::data::AnyValue> rho_any_value = setting->setting_value;
+        std::shared_ptr<yli::data::AnyValue> rho_any_value = variable->variable_value;
 
         if (rho_any_value == nullptr || !std::holds_alternative<float>(rho_any_value->data))
         {
@@ -298,9 +298,9 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> activate_theta(yli::ontology::Entity* const entity, yli::ontology::Setting* const setting)
+    std::shared_ptr<yli::data::AnyValue> activate_theta(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
-        if (entity == nullptr || setting == nullptr)
+        if (entity == nullptr || variable == nullptr)
         {
             return nullptr;
         }
@@ -309,7 +309,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            std::shared_ptr<yli::data::AnyValue> theta_any_value = setting->setting_value;
+            std::shared_ptr<yli::data::AnyValue> theta_any_value = variable->variable_value;
 
             if (theta_any_value == nullptr || !std::holds_alternative<float>(theta_any_value->data))
             {
@@ -327,7 +327,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        std::shared_ptr<yli::data::AnyValue> theta_any_value = setting->setting_value;
+        std::shared_ptr<yli::data::AnyValue> theta_any_value = variable->variable_value;
 
         if (theta_any_value == nullptr || !std::holds_alternative<float>(theta_any_value->data))
         {
@@ -338,9 +338,9 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> activate_phi(yli::ontology::Entity* const entity, yli::ontology::Setting* const setting)
+    std::shared_ptr<yli::data::AnyValue> activate_phi(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
-        if (entity == nullptr || setting == nullptr)
+        if (entity == nullptr || variable == nullptr)
         {
             return nullptr;
         }
@@ -349,7 +349,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            std::shared_ptr<yli::data::AnyValue> phi_any_value = setting->setting_value;
+            std::shared_ptr<yli::data::AnyValue> phi_any_value = variable->variable_value;
 
             if (phi_any_value == nullptr || !std::holds_alternative<float>(phi_any_value->data))
             {
@@ -367,7 +367,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        std::shared_ptr<yli::data::AnyValue> phi_any_value = setting->setting_value;
+        std::shared_ptr<yli::data::AnyValue> phi_any_value = variable->variable_value;
 
         if (phi_any_value == nullptr || !std::holds_alternative<float>(phi_any_value->data))
         {
@@ -379,9 +379,9 @@ namespace yli::ontology
     }
 
 
-    std::shared_ptr<yli::data::AnyValue> activate_horizontal_angle(yli::ontology::Entity* const entity, yli::ontology::Setting* const setting)
+    std::shared_ptr<yli::data::AnyValue> activate_horizontal_angle(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
-        if (entity == nullptr || setting == nullptr)
+        if (entity == nullptr || variable == nullptr)
         {
             return nullptr;
         }
@@ -390,7 +390,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            std::shared_ptr<yli::data::AnyValue> horizontal_angle_any_value = setting->setting_value;
+            std::shared_ptr<yli::data::AnyValue> horizontal_angle_any_value = variable->variable_value;
 
             if (horizontal_angle_any_value == nullptr || !std::holds_alternative<double>(horizontal_angle_any_value->data))
             {
@@ -408,7 +408,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        std::shared_ptr<yli::data::AnyValue> horizontal_angle_any_value = setting->setting_value;
+        std::shared_ptr<yli::data::AnyValue> horizontal_angle_any_value = variable->variable_value;
 
         if (horizontal_angle_any_value == nullptr || !std::holds_alternative<double>(horizontal_angle_any_value->data))
         {
@@ -419,9 +419,9 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> activate_vertical_angle(yli::ontology::Entity* const entity, yli::ontology::Setting* const setting)
+    std::shared_ptr<yli::data::AnyValue> activate_vertical_angle(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
-        if (entity == nullptr || setting == nullptr)
+        if (entity == nullptr || variable == nullptr)
         {
             return nullptr;
         }
@@ -430,7 +430,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            std::shared_ptr<yli::data::AnyValue> vertical_angle_any_value = setting->setting_value;
+            std::shared_ptr<yli::data::AnyValue> vertical_angle_any_value = variable->variable_value;
 
             if (vertical_angle_any_value == nullptr || !std::holds_alternative<double>(vertical_angle_any_value->data))
             {
@@ -448,7 +448,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        std::shared_ptr<yli::data::AnyValue> vertical_angle_any_value = setting->setting_value;
+        std::shared_ptr<yli::data::AnyValue> vertical_angle_any_value = variable->variable_value;
 
         if (vertical_angle_any_value == nullptr || !std::holds_alternative<double>(vertical_angle_any_value->data))
         {

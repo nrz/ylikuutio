@@ -108,35 +108,35 @@ namespace yli::ontology
                 this->texture_size = 0; // dummy value.
                 this->n_index_characters = compute_task_struct.n_index_characters;
 
-                this->vertices_size                = 0;
-                this->uvs_size                     = 0;
+                this->vertices_size                 = 0;
+                this->uvs_size                      = 0;
 
                 // variables related to the framebuffer.
-                this->framebuffer                  = 0; // some dummy value.
-                this->source_texture               = 0; // some dummy value.
-                this->target_texture               = 0; // some dummy value.
-                this->openGL_textureID             = 0; // some dummy value.
-                this->is_texture_loaded            = false;
-                this->is_framebuffer_initialized   = false;
-                this->is_ready                     = false;
+                this->framebuffer                   = 0; // some dummy value.
+                this->source_texture                = 0; // some dummy value.
+                this->target_texture                = 0; // some dummy value.
+                this->opengl_texture_id             = 0; // some dummy value.
+                this->is_texture_loaded             = false;
+                this->is_framebuffer_initialized    = false;
+                this->is_ready                      = false;
 
                 this->vertex_position_modelspace_id = 0; // some dummy value.
-                this->vertex_uv_id                   = 0; // some dummy value.
-                this->screen_width_uniform_id      = 0; // some dummy value.
-                this->screen_height_uniform_id     = 0; // some dummy value.
-                this->iteration_i_uniform_id       = 0; // some dummy value.
-                this->vertexbuffer                 = 0; // some dummy value.
-                this->uvbuffer                     = 0; // some dummy value.
+                this->vertex_uv_id                  = 0; // some dummy value.
+                this->screen_width_uniform_id       = 0; // some dummy value.
+                this->screen_height_uniform_id      = 0; // some dummy value.
+                this->iteration_i_uniform_id        = 0; // some dummy value.
+                this->vertexbuffer                  = 0; // some dummy value.
+                this->uvbuffer                      = 0; // some dummy value.
 
-                this->format                       = compute_task_struct.format;
-                this->internal_format              = compute_task_struct.internal_format;
-                this->output_format                = compute_task_struct.output_format;
-                this->type                         = compute_task_struct.type;
+                this->format                                     = compute_task_struct.format;
+                this->internal_format                            = compute_task_struct.internal_format;
+                this->output_format                              = compute_task_struct.output_format;
+                this->type                                       = compute_task_struct.type;
                 this->should_ylikuutio_save_intermediate_results = compute_task_struct.should_ylikuutio_save_intermediate_results;
                 this->should_ylikuutio_flip_texture              = compute_task_struct.should_ylikuutio_flip_texture;
 
-                this->preiterate_callback = compute_task_struct.preiterate_callback;
-                this->postiterate_callback = compute_task_struct.postiterate_callback;
+                this->preiterate_callback                        = compute_task_struct.preiterate_callback;
+                this->postiterate_callback                       = compute_task_struct.postiterate_callback;
 
                 // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
                 this->bind_to_parent();
@@ -194,7 +194,7 @@ namespace yli::ontology
                 if (!is_headless && this->is_texture_loaded)
                 {
                     // Get a handle for our "texture_sampler" uniform.
-                    this->openGL_textureID = glGetUniformLocation(this->parent->get_program_id(), "texture_sampler");
+                    this->opengl_texture_id = glGetUniformLocation(this->parent->get_program_id(), "texture_sampler");
 
                     // Initialize uniform window width.
                     // This is named `screen_width` instead of `texture_width` for compatibility with other shaders.
@@ -266,7 +266,7 @@ namespace yli::ontology
             std::string texture_filename;    // Filename of the model file.
             std::string output_filename;     // Filename of the output file.
 
-            yli::ontology::Shader* parent; // pointer to the `Shader`.
+            yli::ontology::Shader* parent;   // pointer to the `Shader`.
 
             std::shared_ptr<yli::data::AnyValue> left_filler_vector_any_value;
             std::shared_ptr<yli::data::AnyValue> right_filler_vector_any_value;
@@ -296,16 +296,16 @@ namespace yli::ontology
             uint32_t framebuffer;
             uint32_t source_texture;
             uint32_t target_texture;
-            GLint openGL_textureID;              // Texture ID, returned by `glGetUniformLocation(this->parent->get_program_id(), "texture_sampler")`.
+            GLint opengl_texture_id;         // Texture ID, returned by `glGetUniformLocation(this->parent->get_program_id(), "texture_sampler")`.
             bool is_texture_loaded;
             bool is_framebuffer_initialized;
             bool is_ready;
 
             GLint vertex_position_modelspace_id;
             GLint vertex_uv_id;
-            GLint screen_width_uniform_id;             // Location of the program's window width uniform.
-            GLint screen_height_uniform_id;            // Location of the program's window height uniform.
-            GLint iteration_i_uniform_id;              // Location of the program's iteration index uniform.
+            GLint screen_width_uniform_id;       // Location of the program's window width uniform.
+            GLint screen_height_uniform_id;      // Location of the program's window height uniform.
+            GLint iteration_i_uniform_id;        // Location of the program's iteration index uniform.
 
             uint32_t vertexbuffer;
             uint32_t uvbuffer;

@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "setting.hpp"
+#include "variable.hpp"
 #include "entity.hpp"
 #include "universe.hpp"
 #include "console.hpp"
@@ -31,7 +31,7 @@ namespace yli::ontology
 {
     class Entity;
 
-    void Setting::bind_to_parent()
+    void Variable::bind_to_parent()
     {
         // Requirements:
         // `this->parent` must not be `nullptr`.
@@ -40,50 +40,50 @@ namespace yli::ontology
 
         if (entity == nullptr)
         {
-            std::cerr << "ERROR: `Setting::bind_to_parent`: `entity` is `nullptr`!\n";
+            std::cerr << "ERROR: `Variable::bind_to_parent`: `entity` is `nullptr`!\n";
             return;
         }
 
-        // Get `childID` from `Entity` and set pointer to this `Setting`.
-        entity->bind_setting(this);
+        // Get `childID` from `Entity` and set pointer to this `Variable`.
+        entity->bind_variable(this);
     }
 
-    Setting::~Setting()
+    Variable::~Variable()
     {
         // destructor.
-        std::cout << "This `Setting` will be destroyed.\n";
+        std::cout << "This `Variable` will be destroyed.\n";
 
         if (this->parent == nullptr)
         {
             return;
         }
 
-        this->parent->unbind_setting(this->childID, this->local_name);
+        this->parent->unbind_variable(this->childID, this->local_name);
     }
 
-    yli::ontology::Entity* Setting::get_parent() const
+    yli::ontology::Entity* Variable::get_parent() const
     {
         return this->parent;
     }
 
-    std::size_t Setting::get_number_of_children() const
+    std::size_t Variable::get_number_of_children() const
     {
-        return 0; // `Setting` has no children.
+        return 0; // `Variable` has no children.
     }
 
-    std::size_t Setting::get_number_of_descendants() const
+    std::size_t Variable::get_number_of_descendants() const
     {
-        return 0; // `Setting` has no children.
+        return 0; // `Variable` has no children.
     }
 
-    std::string Setting::help() const
+    std::string Variable::help() const
     {
-        // this function returns the help string for this setting.
+        // this function returns the help string for this variable.
         std::string help_string = this->local_name + " TODO: create helptext for " + this->local_name;
         return help_string;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Setting::get()
+    std::shared_ptr<yli::data::AnyValue> Variable::get()
     {
         if (this->parent == nullptr)
         {
@@ -92,20 +92,20 @@ namespace yli::ontology
 
         if (this->read_callback == nullptr)
         {
-            return this->setting_value;
+            return this->variable_value;
         }
 
         return this->read_callback(this->parent);
     }
 
-    void Setting::set(std::shared_ptr<yli::data::AnyValue> new_value)
+    void Variable::set(std::shared_ptr<yli::data::AnyValue> new_value)
     {
-        if (this->setting_value == nullptr || this->parent == nullptr)
+        if (this->variable_value == nullptr || this->parent == nullptr)
         {
             return;
         }
 
-        this->setting_value = new_value;
+        this->variable_value = new_value;
 
         if (this->activate_callback != nullptr)
         {
@@ -113,14 +113,14 @@ namespace yli::ontology
         }
     }
 
-    void Setting::set(const std::string& new_value)
+    void Variable::set(const std::string& new_value)
     {
-        if (this->setting_value == nullptr || this->parent == nullptr)
+        if (this->variable_value == nullptr || this->parent == nullptr)
         {
             return;
         }
 
-        this->setting_value->set_new_value(new_value);
+        this->variable_value->set_new_value(new_value);
 
         if (this->activate_callback != nullptr)
         {
@@ -130,50 +130,50 @@ namespace yli::ontology
 
     // Public callbacks.
 
-    std::shared_ptr<yli::data::AnyValue> Setting::set2(
-            yli::ontology::Setting* const setting,
+    std::shared_ptr<yli::data::AnyValue> Variable::set2(
+            yli::ontology::Variable* const variable,
             std::shared_ptr<std::string> new_value)
     {
         // Usage:
-        // to set variable: set2 <variable-name> <setting-value>
+        // to set variable: set2 <variable-name> <variable-value>
 
-        if (setting == nullptr || new_value == nullptr)
+        if (variable == nullptr || new_value == nullptr)
         {
             return nullptr;
         }
 
         // Set a new value and call activate callback if there is such.
-        setting->set(*new_value);
+        variable->set(*new_value);
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Setting::print_value1(
+    std::shared_ptr<yli::data::AnyValue> Variable::print_value1(
             yli::ontology::Console* const console,
-            yli::ontology::Universe* const context, // A context is needed so that correct `Setting` is bound to the function call.
-            yli::ontology::Setting* const setting)
+            yli::ontology::Universe* const context, // A context is needed so that correct `Variable` is bound to the function call.
+            yli::ontology::Variable* const variable)
     {
         // Usage:
         // to get variable value: get1 <variable-name>
 
-        if (console == nullptr || context == nullptr || setting == nullptr)
+        if (console == nullptr || context == nullptr || variable == nullptr)
         {
             return nullptr;
         }
 
-        std::shared_ptr<yli::data::AnyValue> setting_value_shared_ptr = setting->get();
+        std::shared_ptr<yli::data::AnyValue> variable_value_shared_ptr = variable->get();
 
-        if (setting_value_shared_ptr == nullptr)
+        if (variable_value_shared_ptr == nullptr)
         {
             return nullptr;
         }
 
-        console->print_text(setting_value_shared_ptr->get_string());
+        console->print_text(variable_value_shared_ptr->get_string());
         return nullptr;
     }
 
     // Public callbacks end here.
 
-    void Setting::activate()
+    void Variable::activate()
     {
         if (this->activate_callback != nullptr)
         {
