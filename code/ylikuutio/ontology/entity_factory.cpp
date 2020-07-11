@@ -37,7 +37,6 @@
 #include "camera.hpp"
 #include "compute_task.hpp"
 #include "brain.hpp"
-#include "any_value_entity.hpp"
 #include "any_struct_entity.hpp"
 #include "callback_engine_entity.hpp"
 #include "setting_struct.hpp"
@@ -303,16 +302,6 @@ namespace yli::ontology
         brain_entity->set_global_name(brain_struct.global_name);
         brain_entity->set_local_name(brain_struct.local_name);
         return brain_entity;
-    }
-
-    yli::ontology::Entity* EntityFactory::create_any_value_entity(const std::shared_ptr<yli::data::AnyValue> any_value_shared_ptr) const
-    {
-        return new yli::ontology::AnyValueEntity(this->universe, any_value_shared_ptr);
-    }
-
-    yli::ontology::Entity* EntityFactory::create_any_value_entity(const yli::data::AnyValue& any_value) const
-    {
-        return new yli::ontology::AnyValueEntity(this->universe, any_value);
     }
 
     yli::ontology::Entity* EntityFactory::create_any_struct_entity(

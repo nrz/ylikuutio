@@ -20,7 +20,6 @@
 #include "universe.hpp"
 #include "brain.hpp"
 #include "console.hpp"
-#include "any_value_entity.hpp"
 #include "any_struct_entity.hpp"
 #include "any_struct_entity_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -73,51 +72,6 @@ namespace yli::ontology
     }
 
     // Public `Entity` create callbacks.
-
-    std::shared_ptr<yli::data::AnyValue> Universe::create_any_value_entity(
-            yli::ontology::Universe* const universe,
-            std::shared_ptr<std::string> variable_name_shared_ptr,
-            std::shared_ptr<std::string> variable_type_shared_ptr,
-            std::shared_ptr<std::string> value_string_shared_ptr)
-    {
-        // usage:
-        // `AnyValue <variable_name> <variable_type> <variable_value>`
-        //
-        // eg.
-        // `AnyValue my_pi float 3.1415927`.
-
-        if (universe == nullptr || variable_name_shared_ptr == nullptr || variable_type_shared_ptr == nullptr || value_string_shared_ptr == nullptr)
-        {
-            return nullptr;
-        }
-
-        if (variable_name_shared_ptr->empty())
-        {
-            return nullptr;
-        }
-
-        if (universe->has_child(*variable_name_shared_ptr))
-        {
-            return nullptr;
-        }
-
-        // OK, variable name is not empty and it is not in use yet either.
-
-        if (variable_type_shared_ptr->empty())
-        {
-            return nullptr;
-        }
-
-        if (value_string_shared_ptr->empty())
-        {
-            return nullptr;
-        }
-
-        std::shared_ptr<yli::data::AnyValue> any_value = std::make_shared<yli::data::AnyValue>(*variable_type_shared_ptr, *value_string_shared_ptr);
-        yli::ontology::AnyValueEntity* const any_value_entity = new yli::ontology::AnyValueEntity(universe, any_value);
-        any_value_entity->set_global_name(*variable_name_shared_ptr);
-        return nullptr;
-    }
 
     std::shared_ptr<yli::data::AnyValue> Universe::create_any_struct_entity(
             yli::ontology::Universe* const universe,
