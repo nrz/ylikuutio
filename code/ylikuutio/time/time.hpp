@@ -15,7 +15,12 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#ifndef __TIME_HPP_INCLUDED
+#define __TIME_HPP_INCLUDED
+
 namespace yli::time
 {
     double get_time();
 }
+
+#endif
