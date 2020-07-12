@@ -113,6 +113,21 @@ namespace yli::ontology
         }
     }
 
+    void Variable::set_shallow(std::shared_ptr<yli::data::AnyValue> new_value)
+    {
+        if (this->variable_value == nullptr || this->parent == nullptr)
+        {
+            return;
+        }
+
+        this->variable_value = new_value;
+
+        if (this->activate_callback != nullptr)
+        {
+            this->activate_callback(this->parent, this);
+        }
+    }
+
     void Variable::set(const std::string& new_value)
     {
         if (this->variable_value == nullptr || this->parent == nullptr)

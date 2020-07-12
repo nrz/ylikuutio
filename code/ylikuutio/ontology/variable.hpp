@@ -90,6 +90,7 @@ namespace yli::ontology
 
             std::shared_ptr<yli::data::AnyValue> get();
             void set(std::shared_ptr<yli::data::AnyValue> new_value);
+            void set_shallow(std::shared_ptr<yli::data::AnyValue> new_value);
             void set(const std::string& new_value);
 
             // Public callbacks.
