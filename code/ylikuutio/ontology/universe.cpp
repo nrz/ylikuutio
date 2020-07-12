@@ -344,7 +344,7 @@ namespace yli::ontology
         glClear(GL_COLOR_BUFFER_BIT);
 
         // Adjust viewport for the default framebuffer.
-        universe->universe->adjust_opengl_viewport();
+        universe->adjust_opengl_viewport();
     }
 
     void Universe::set_opengl_background_color() const
