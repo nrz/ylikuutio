@@ -2664,3 +2664,95 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     bool_false_any_value->data = true;
     ASSERT_FALSE(std::get<bool>(variable_value->data)); // Must do a deep copy, that is, changing the source value after copying must not affect the dest value.
 }
+
+TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_bool_true_shallow_copy_value_true_no_activate_callback_no_read_callback)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    bool bool_true = true;
+    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_true));
+    variable_struct.local_name = "foo";
+    universe->create_variable(variable_struct);
+
+    yli::ontology::Variable* const variable = universe->get("foo");
+    std::shared_ptr<yli::data::AnyValue> bool_true_any_value = std::make_shared<yli::data::AnyValue>(true);
+    variable->set_shallow(bool_true_any_value);
+    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
+    ASSERT_NE(variable_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
+    ASSERT_TRUE(std::get<bool>(variable_value->data));
+
+    bool_true_any_value->data = false;
+    ASSERT_FALSE(std::get<bool>(variable_value->data)); // Must do a shallow copy, that is, changing the source value after copying must affect the dest value.
+}
+
+TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_bool_true_shallow_copy_value_false_no_activate_callback_no_read_callback)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    bool bool_true = true;
+    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_true));
+    variable_struct.local_name = "foo";
+    universe->create_variable(variable_struct);
+
+    yli::ontology::Variable* const variable = universe->get("foo");
+    std::shared_ptr<yli::data::AnyValue> bool_false_any_value = std::make_shared<yli::data::AnyValue>(false);
+    variable->set_shallow(bool_false_any_value);
+    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
+    ASSERT_NE(variable_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
+    ASSERT_FALSE(std::get<bool>(variable_value->data));
+
+    bool_false_any_value->data = true;
+    ASSERT_TRUE(std::get<bool>(variable_value->data)); // Must do a shallow copy, that is, changing the source value after copying must affect the dest value.
+}
+
+TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_bool_false_shallow_copy_value_true_no_activate_callback_no_read_callback)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    bool bool_false = false;
+    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_false));
+    variable_struct.local_name = "foo";
+    universe->create_variable(variable_struct);
+
+    yli::ontology::Variable* const variable = universe->get("foo");
+    std::shared_ptr<yli::data::AnyValue> bool_true_any_value = std::make_shared<yli::data::AnyValue>(true);
+    variable->set_shallow(bool_true_any_value);
+    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
+    ASSERT_NE(variable_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
+    ASSERT_TRUE(std::get<bool>(variable_value->data));
+
+    bool_true_any_value->data = false;
+    ASSERT_FALSE(std::get<bool>(variable_value->data)); // Must do a shallow copy, that is, changing the source value after copying must affect the dest value.
+}
+
+TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_bool_false_shallow_copy_value_false_no_activate_callback_no_read_callback)
+{
+    yli::ontology::UniverseStruct universe_struct;
+    universe_struct.is_headless = true;
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    bool bool_false = false;
+    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_false));
+    variable_struct.local_name = "foo";
+    universe->create_variable(variable_struct);
+
+    yli::ontology::Variable* const variable = universe->get("foo");
+    std::shared_ptr<yli::data::AnyValue> bool_false_any_value = std::make_shared<yli::data::AnyValue>(false);
+    variable->set_shallow(bool_false_any_value);
+    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
+    ASSERT_NE(variable_value, nullptr);
+    ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
+    ASSERT_FALSE(std::get<bool>(variable_value->data));
+
+    bool_false_any_value->data = true;
+    ASSERT_TRUE(std::get<bool>(variable_value->data)); // Must do a shallow copy, that is, changing the source value after copying must affect the dest value.
+}
