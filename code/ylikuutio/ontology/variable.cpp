@@ -105,7 +105,7 @@ namespace yli::ontology
             return;
         }
 
-        this->variable_value = new_value;
+        this->variable_value = std::make_shared<yli::data::AnyValue>(*new_value);
 
         if (this->activate_callback != nullptr)
         {
