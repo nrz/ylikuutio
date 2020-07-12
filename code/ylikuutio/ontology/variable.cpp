@@ -130,7 +130,7 @@ namespace yli::ontology
 
     // Public callbacks.
 
-    std::shared_ptr<yli::data::AnyValue> Variable::set2(
+    std::shared_ptr<yli::data::AnyValue> Variable::set_variable_shared_ptr_string(
             yli::ontology::Variable* const variable,
             std::shared_ptr<std::string> new_value)
     {
