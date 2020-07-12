@@ -14,7 +14,6 @@ Tasks which are necessary for the first stage:
 [ ] Implement support for multiple water levels within a `Scene`.
 [ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
 [ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
-[ ] Implement `yli::ontology::Waypoint` class.
 
 Tasks which are necessary for the second stage:
 [ ] Implement `yli::ontology::WorldShader` to support sharing shaders between multiple `Scene`s.
