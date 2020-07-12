@@ -6,7 +6,6 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
-[ ] Implement creating new named `yli::ontology::Variable`s of given type in Entities using `Console` command `create-variable`.
 [ ] Implement creating new named `yli::ontology::Object`s, with a named `Entity` with correct `Variable`s as input using `Console` command `create-object`.
 [ ] Implement `yli::ontology::HeightmapStruct` that inherits `yli::ontology::EntityStruct`, to support heightmaps consisting of several sheets.
 [ ] Implement `yli::ontology::Heightmap` class that inherits `yli::ontology::Entity`, to support heightmaps consisting of several sheets.
@@ -225,3 +224,4 @@ Ready:
 [x] Fix bug in `print` so that it accepts `print cat1.x` (instead of `print cat1 x`).
 [x] Fix bug in `set` so that it accepts `set cat1.x 1234` (instead of `set cat1 x 1234`).
 [x] Implement `yli::ontology::MasterModule`.
+[x] Implement creating new named `yli::ontology::Variable`s of given type in Entities using `Console` command `create-variable`.

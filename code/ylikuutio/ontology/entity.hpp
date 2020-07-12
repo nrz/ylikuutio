@@ -99,6 +99,14 @@ namespace yli::ontology
 
             // Public callbacks.
 
+            // Public `Entity` creation callbacks.
+
+            static std::shared_ptr<yli::data::AnyValue> create_variable_with_parent_name_type_value(
+                    yli::ontology::Entity* const parent,
+                    std::shared_ptr<std::string> variable_name,
+                    std::shared_ptr<std::string> variable_type,
+                    std::shared_ptr<std::string> variable_value);
+
             // Public data printing callbacks.
 
             static std::shared_ptr<yli::data::AnyValue> print_children(
