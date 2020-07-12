@@ -269,12 +269,6 @@ namespace yli::ontology
             return;
         }
 
-        if (this->is_variable)
-        {
-            // `Variable`s may not have subvariables.
-            return;
-        }
-
         yli::ontology::EntityFactory* const entity_factory = this->universe->get_entity_factory();
 
         if (entity_factory == nullptr)
