@@ -137,7 +137,7 @@ namespace yli::ontology
             void prerender() const;
             void postrender() const;
 
-            yli::ontology::Universe* universe;                          // pointer to the `Universe`.
+            yli::ontology::Universe* universe; // pointer to the `Universe`.
             std::size_t entityID;
 
             std::string type_string;
