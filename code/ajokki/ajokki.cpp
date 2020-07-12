@@ -983,7 +983,7 @@ int main(const int argc, const char* const argv[]) try
 
     std::cout << "Defining console command callback engines.\n";
 
-    // Config callbacks.
+    // Variable callbacks.
     yli::ontology::create_lisp_function_overload("variables", my_console, std::function(&yli::ontology::Entity::print_variables0));
     yli::ontology::create_lisp_function_overload("variables", my_console, std::function(&yli::ontology::Entity::print_variables1));
     yli::ontology::create_lisp_function_overload("set", my_console, std::function(&yli::ontology::Variable::set_variable_shared_ptr_string));
