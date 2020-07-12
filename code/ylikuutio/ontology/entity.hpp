@@ -40,6 +40,7 @@ namespace yli::ontology
     class Universe;
     class Console;
     class Variable;
+    class EntityFactory;
     struct EntityStruct;
     struct VariableStruct;
 
@@ -71,6 +72,7 @@ namespace yli::ontology
             bool get_can_be_erased() const;
 
             yli::ontology::Universe* get_universe() const;
+            virtual yli::ontology::EntityFactory* get_entity_factory() const;
 
             virtual yli::ontology::Entity* get_parent() const = 0;
             std::size_t get_number_of_all_children() const;

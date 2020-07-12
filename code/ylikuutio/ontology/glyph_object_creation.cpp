@@ -17,7 +17,6 @@
 
 #include "glyph_object_creation.hpp"
 #include "entity_factory.hpp"
-#include "universe.hpp"
 #include "vector_font.hpp"
 #include "text3D.hpp"
 #include "object.hpp"
@@ -73,7 +72,7 @@ namespace yli::ontology
             object_struct.cartesian_coordinates = text3D->cartesian_coordinates; // TODO: adjust this as needed.
             object_struct.rotate_vector = text3D->rotate_vector;
 
-            yli::ontology::EntityFactory* const entity_factory = text3D->universe->get_entity_factory();
+            yli::ontology::EntityFactory* const entity_factory = text3D->get_entity_factory();
 
             if (entity_factory != nullptr)
             {

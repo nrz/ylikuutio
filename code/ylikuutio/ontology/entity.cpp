@@ -173,6 +173,16 @@ namespace yli::ontology
         return this->universe;
     }
 
+    yli::ontology::EntityFactory* Entity::get_entity_factory() const
+    {
+        if (this->universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        return this->universe->get_entity_factory();
+    }
+
     bool Entity::has_child(const std::string& name) const
     {
         return this->entity_map.count(name) == 1;
