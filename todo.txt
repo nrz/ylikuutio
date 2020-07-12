@@ -6,10 +6,8 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
-[ ] Implement creating new fields (`yli::ontology::Variable`) of given type in AnyStructEntities using `Console` command `create-field`.
-[ ] Implement creating and setting new fields of given type in AnyStructEntities of a using `Console` command `set-field`.
-[ ] Implement printing fields of AnyStructEntities using `Console` command `print`.
-[ ] Implement creating new named Entities using `Console`, with a named `AnyStructEntity` of correct type as input.
+[ ] Implement creating new named `yli::ontology::Variable`s of given type in Entities using `Console` command `create-variable`.
+[ ] Implement creating new named `yli::ontology::Object`s, with a named `Entity` with correct `Variable`s as input using `Console` command `create-object`.
 [ ] Implement `yli::ontology::HeightmapStruct` that inherits `yli::ontology::EntityStruct`, to support heightmaps consisting of several sheets.
 [ ] Implement `yli::ontology::Heightmap` class that inherits `yli::ontology::Entity`, to support heightmaps consisting of several sheets.
 [ ] Implement `yli::ontology::HeightmapSheet` class that inherits `yli::ontology::Species`, to handle each sheet of a multisheet heightmap.
