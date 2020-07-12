@@ -99,6 +99,11 @@ namespace yli::ontology
                     yli::ontology::Variable* const variable,
                     std::shared_ptr<std::string> new_value);
 
+            static std::shared_ptr<yli::data::AnyValue> set_variable_variable(
+                    yli::ontology::Variable* const dest_variable,
+                    yli::ontology::Universe* const context, // A context is needed so that correct `Variable is bound to the function call.
+                    yli::ontology::Variable* const src_variable);
+
             static std::shared_ptr<yli::data::AnyValue> print_value1(
                     yli::ontology::Console* const console,
                     yli::ontology::Universe* const context, // A context is needed so that correct `Variable is bound to the function call.
