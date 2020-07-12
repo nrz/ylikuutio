@@ -668,7 +668,6 @@ int main(const int argc, const char* const argv[]) try
     yli::ontology::create_lisp_function_overload("info", my_console, std::function(&yli::ontology::Universe::info0));
     yli::ontology::create_lisp_function_overload("info", my_console, std::function(&yli::ontology::Universe::info1));
     yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Universe::bind));
-    yli::ontology::create_lisp_function_overload("AnyStructEntity", my_console, std::function(&yli::ontology::Universe::create_any_struct_entity));
 
     // Exit program callbacks.
     yli::ontology::create_lisp_function_overload("bye", my_console, std::function(&yli::snippets::quit));

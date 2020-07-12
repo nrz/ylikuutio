@@ -610,10 +610,6 @@ namespace yli::ontology
 
             // Public `Entity` create callbacks.
 
-            static std::shared_ptr<yli::data::AnyValue> create_any_struct_entity(
-                    yli::ontology::Universe* const universe,
-                    std::shared_ptr<std::string> variable_name_shared_ptr);
-
             // Public `Entity` delete callbacks.
 
             static std::shared_ptr<yli::data::AnyValue> delete_entity(

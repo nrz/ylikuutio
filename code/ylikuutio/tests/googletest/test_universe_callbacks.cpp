@@ -28,7 +28,6 @@
 #include "code/ylikuutio/ontology/camera.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
-#include "code/ylikuutio/ontology/any_struct_entity.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/world_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
@@ -113,28 +112,6 @@ TEST(object_must_be_bound_to_species_appropriately, universe_callback)
 }
 
 // Public `Entity` create callbacks.
-
-TEST(any_struct_entity_must_be_created_appropriately, universe_callback_any_struct)
-{
-    yli::ontology::Console* const console = nullptr;
-
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
-    const std::string value_name = "foo";
-    ASSERT_FALSE(universe->has_child(value_name));
-    ASSERT_EQ(universe->get_entity(value_name), nullptr);
-
-    universe->create_any_struct_entity(universe, std::make_shared<std::string>(value_name));
-    ASSERT_TRUE(universe->has_child(value_name));
-
-    yli::ontology::Entity* const entity = universe->get_entity(value_name);
-    ASSERT_NE(entity, nullptr);
-
-    yli::ontology::AnyStructEntity* const any_struct_entity = dynamic_cast<yli::ontology::AnyStructEntity*>(entity);
-    ASSERT_NE(any_struct_entity, nullptr);
-}
 
 // Public `Entity` delete callbacks.
 
