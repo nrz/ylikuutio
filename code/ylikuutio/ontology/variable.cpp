@@ -180,6 +180,24 @@ namespace yli::ontology
         return nullptr;
     }
 
+    std::shared_ptr<yli::data::AnyValue> Variable::set_shallow_variable_variable(
+            yli::ontology::Variable* const dest_variable,
+            yli::ontology::Universe* const context, // A context is needed so that correct `Variable is bound to the function call.
+            yli::ontology::Variable* const src_variable)
+    {
+        // Usage:
+        // to set variable: set-shallow <dest-variable-name> <src-variable-name>
+
+        if (dest_variable == nullptr || src_variable == nullptr)
+        {
+            return nullptr;
+        }
+
+        // Set a new value and call activate callback if there is such.
+        dest_variable->set_shallow(src_variable->get());
+        return nullptr;
+    }
+
     std::shared_ptr<yli::data::AnyValue> Variable::print_value1(
             yli::ontology::Console* const console,
             yli::ontology::Universe* const context, // A context is needed so that correct `Variable` is bound to the function call.
