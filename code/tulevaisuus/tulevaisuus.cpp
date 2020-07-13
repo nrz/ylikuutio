@@ -709,6 +709,10 @@ int main(const int argc, const char* const argv[]) try
     yli::ontology::create_lisp_function_overload("copy-shallow", my_console, std::function(&yli::ontology::Variable::set_shallow_variable_variable));
     yli::ontology::create_lisp_function_overload("print", my_console, std::function(&yli::ontology::Variable::print_value1));
 
+    // Object callbacks.
+    yli::ontology::create_lisp_function_overload("create-object", my_console, std::function(&yli::ontology::Object::create_object_with_parent_name_x_y_z));
+    yli::ontology::create_lisp_function_overload("create-object", my_console, std::function(&yli::ontology::Object::create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle));
+
     // `Entity` handling callbacks.
     yli::ontology::create_lisp_function_overload("entities", my_console, std::function(&yli::ontology::Universe::print_entities));
     yli::ontology::create_lisp_function_overload("parent", my_console, std::function(&yli::ontology::Universe::print_parent));

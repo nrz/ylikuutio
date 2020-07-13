@@ -42,6 +42,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <queue>    // std::queue
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -110,6 +111,26 @@ namespace yli::ontology
             virtual ~Object();
 
             yli::ontology::Glyph* get_glyph() const;
+
+            // Public callbacks.
+
+            static std::shared_ptr<yli::data::AnyValue> create_object_with_parent_name_x_y_z(
+                    yli::ontology::Species* const parent,
+                    std::shared_ptr<std::string> object_name,
+                    std::shared_ptr<std::string> x,
+                    std::shared_ptr<std::string> y,
+                    std::shared_ptr<std::string> z);
+
+            static std::shared_ptr<yli::data::AnyValue> create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle(
+                    yli::ontology::Species* const parent,
+                    std::shared_ptr<std::string> object_name,
+                    std::shared_ptr<std::string> x,
+                    std::shared_ptr<std::string> y,
+                    std::shared_ptr<std::string> z,
+                    std::shared_ptr<std::string> horizontal_angle,
+                    std::shared_ptr<std::string> vertical_angle);
+
+            // Public callbacks end here.
 
         private:
             std::size_t get_number_of_children() const override;
