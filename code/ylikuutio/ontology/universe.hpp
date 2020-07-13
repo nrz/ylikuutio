@@ -579,8 +579,8 @@ namespace yli::ontology
 
             // this method returns current `max_fps`.
             std::size_t get_max_fps() const;
-            double get_last_time_to_display_fps() const;
-            double get_last_time_for_display_sync() const;
+            float get_last_time_to_display_fps() const;
+            float get_last_time_for_display_sync() const;
             int32_t get_number_of_frames() const;
 
             void increment_last_time_to_display_fps();
@@ -682,8 +682,8 @@ namespace yli::ontology
             glm::vec3 current_camera_right; // note: `right` can not be set directly using console.
             glm::vec3 current_camera_up;    // note: `up` can not be set directly using console.
 
-            double current_camera_horizontal_angle;
-            double current_camera_vertical_angle;
+            float current_camera_horizontal_angle;
+            float current_camera_vertical_angle;
 
             int32_t mouse_x;
             int32_t mouse_y;
@@ -783,9 +783,9 @@ namespace yli::ontology
 
             // variables related to timing of events.
             std::size_t max_fps;
-            double last_time_to_display_fps;
-            double last_time_for_display_sync;
-            double delta_time;
+            float last_time_to_display_fps;
+            float last_time_for_display_sync;
+            float delta_time;
             int32_t number_of_frames;
 
             uint32_t last_time_before_reading_keyboard;

@@ -26,7 +26,7 @@ namespace yli::input
         SDL_ShowCursor(SDL_DISABLE);
     }
 
-    void set_cursor_position(SDL_Window* window, double xpos, double ypos)
+    void set_cursor_position(SDL_Window* window, float xpos, float ypos)
     {
         SDL_WarpMouseInWindow(window, static_cast<int>(xpos), static_cast<int>(ypos));
     }

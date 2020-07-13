@@ -832,7 +832,7 @@ int main(const int argc, const char* const argv[]) try
 
     while (!my_universe->get_is_exit_requested() && input_master != nullptr)
     {
-        const double current_time_in_main_loop = yli::time::get_time();
+        const float current_time_in_main_loop = yli::time::get_time();
 
         if (current_time_in_main_loop - my_universe->get_last_time_for_display_sync() >= (1.0f / my_universe->get_max_fps()))
         {
@@ -847,7 +847,7 @@ int main(const int argc, const char* const argv[]) try
                 if (frame_rate_text2D != nullptr && my_universe->get_number_of_frames() > 0)
                 {
                     std::stringstream ms_frame_text_stringstream;
-                    ms_frame_text_stringstream << std::fixed << std::setprecision(2) << 1000.0f / static_cast<double>(my_universe->get_number_of_frames()) << " ms/frame; " <<
+                    ms_frame_text_stringstream << std::fixed << std::setprecision(2) << 1000.0f / static_cast<float>(my_universe->get_number_of_frames()) << " ms/frame; " <<
                         my_universe->get_number_of_frames() << " Hz";
                     std::string ms_frame_text = ms_frame_text_stringstream.str();
                     frame_rate_text2D->change_string(ms_frame_text);
@@ -948,16 +948,16 @@ int main(const int argc, const char* const argv[]) try
             }
 
             // mouse position.
-            const double xpos = static_cast<double>(my_universe->mouse_x);
-            const double ypos = static_cast<double>(my_universe->mouse_y);
+            const float xpos = static_cast<float>(my_universe->mouse_x);
+            const float ypos = static_cast<float>(my_universe->mouse_y);
 
             // Reset mouse position for next frame.
             if (has_mouse_focus)
             {
                 yli::input::set_cursor_position(
                         my_universe->get_window(),
-                        static_cast<double>(my_universe->get_window_width()) / 2,
-                        static_cast<double>(my_universe->get_window_height()) / 2);
+                        static_cast<float>(my_universe->get_window_width()) / 2,
+                        static_cast<float>(my_universe->get_window_height()) / 2);
 
                 if (my_universe->has_mouse_ever_moved || (std::abs(xpos) > 0.0001) || (std::abs(ypos) > 0.0001))
                 {

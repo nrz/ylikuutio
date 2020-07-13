@@ -287,8 +287,8 @@ namespace yli::ontology
             glm::vec3 right;                                       // note: can not be set directly using console.
             glm::vec3 up;                                          // note: can not be set directly using console.
 
-            double horizontal_angle;
-            double vertical_angle;
+            float horizontal_angle;
+            float vertical_angle;
 
             float speed;                                           // m/s
             float angular_speed;                                   // 1/s

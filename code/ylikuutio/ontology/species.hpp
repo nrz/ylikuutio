@@ -189,8 +189,8 @@ namespace yli::ontology
             std::string model_file_format; // type of the model file, eg. `"bmp"`.
             std::string model_filename;    // filename of the model file.
 
-            double latitude;               // for SRTM.
-            double longitude;              // for SRTM.
+            float latitude;                // for SRTM.
+            float longitude;               // for SRTM.
 
             std::size_t mesh_i;
 

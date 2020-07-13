@@ -212,8 +212,8 @@ namespace yli::ontology
             // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
             yli::data::SphericalCoordinatesStruct* spherical_coordinates;
 
-            double horizontal_angle;
-            double vertical_angle;
+            float horizontal_angle;
+            float vertical_angle;
 
             float turbo_factor;
             float twin_turbo_factor;

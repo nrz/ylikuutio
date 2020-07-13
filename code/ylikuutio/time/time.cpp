@@ -24,8 +24,8 @@
 
 namespace yli::time
 {
-    double get_time()
+    float get_time()
     {
-        return static_cast<double>(SDL_GetTicks()) / 1000; // `SDL_GetTicks` return milliseconds.
+        return static_cast<float>(SDL_GetTicks()) / 1000; // `SDL_GetTicks` return milliseconds.
     }
 }

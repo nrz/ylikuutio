@@ -57,8 +57,8 @@ namespace yli::ontology
             biontID(std::numeric_limits<std::size_t>::max()), // `std::numeric_limits<std::size_t>::max()` means that `biontID` is not defined.
             rotate_angle(0.0f),
             initial_rotate_angle(PI),
-            horizontal_angle(0.0),
-            vertical_angle(0.0)
+            horizontal_angle(0.0f),
+            vertical_angle(0.0f)
         {
             // constructor.
         }
@@ -74,8 +74,8 @@ namespace yli::ontology
         std::size_t biontID;
         float rotate_angle;                               // rotate angle.
         float initial_rotate_angle;                       // initial rotate angle.
-        double horizontal_angle;                          // horizontal angle in radians.
-        double vertical_angle;                            // vertical angle in radians.
+        float horizontal_angle;                           // horizontal angle in radians.
+        float vertical_angle;                             // vertical angle in radians.
     };
 }
 

@@ -467,12 +467,12 @@ namespace yli::ontology
         return this->max_fps;
     }
 
-    double Universe::get_last_time_to_display_fps() const
+    float Universe::get_last_time_to_display_fps() const
     {
         return this->last_time_to_display_fps;
     }
 
-    double Universe::get_last_time_for_display_sync() const
+    float Universe::get_last_time_for_display_sync() const
     {
         return this->last_time_for_display_sync;
     }

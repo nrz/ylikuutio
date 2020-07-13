@@ -33,7 +33,7 @@ namespace yli::geometry
 {
     glm::vec3 transform_planar_world_vertex_into_cartesian_vertex(
             const glm::vec3& planar_world_vertex,
-            const double sphere_radius);
+            const float sphere_radius);
 
     void transform_coordinates_to_curved_surface(
             const yli::geometry::TransformationStruct& transformation_struct,

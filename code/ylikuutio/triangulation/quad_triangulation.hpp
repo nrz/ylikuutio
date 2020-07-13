@@ -117,7 +117,7 @@ namespace yli::triangulation
             }
 
             const std::string triangulation_type = triangulate_quads_struct.triangulation_type;
-            const double sphere_radius = triangulate_quads_struct.sphere_radius;
+            const float sphere_radius = triangulate_quads_struct.sphere_radius;
             const yli::geometry::SphericalTerrainStruct spherical_terrain_struct = triangulate_quads_struct.spherical_terrain_struct;
 
             bool is_bilinear_interpolation_in_use = false;

@@ -35,12 +35,12 @@ namespace yli::geometry
         {
             // constructor.
         }
-        double southern_latitude;
-        double northern_latitude;
-        double western_longitude;
-        double eastern_longitude;
-        double SRTM_latitude_step_in_degrees;
-        double SRTM_longitude_step_in_degrees;
+        float southern_latitude;
+        float northern_latitude;
+        float western_longitude;
+        float eastern_longitude;
+        float SRTM_latitude_step_in_degrees;
+        float SRTM_longitude_step_in_degrees;
     };
 }
 

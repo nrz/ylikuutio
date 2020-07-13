@@ -36,9 +36,9 @@ namespace yli::data
         {
             // constructor.
         }
-        double rho;
-        double theta;
-        double phi;
+        float rho;
+        float theta;
+        float phi;
     };
 }
 

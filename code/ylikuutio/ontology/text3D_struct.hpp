@@ -63,8 +63,8 @@ namespace yli::ontology
         yli::ontology::VectorFont* parent; // pointer to the `VectorFont` (parent).
         yli::ontology::Brain* brain;       // pointer to the `Brain` (not a parent!).
         float rotate_angle;                // rotate angle.
-        double horizontal_angle;           // horizontal angle in radians.
-        double vertical_angle;             // vertical angle in radians.
+        float horizontal_angle;            // horizontal angle in radians.
+        float vertical_angle;              // vertical angle in radians.
     };
 }
 
