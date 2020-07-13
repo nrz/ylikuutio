@@ -414,6 +414,60 @@ namespace yli::lisp
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
+                yli::ontology::Symbiosis*& value)
+        {
+            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
+            {
+                return false;
+            }
+
+            const std::string my_string = parameter_vector.at(parameter_i++);
+
+            value = dynamic_cast<yli::ontology::Symbiosis*>(universe->get_entity(my_string));
+
+            if (value == nullptr)
+            {
+                return false;
+            }
+
+            context = value;
+            return true;
+        }
+
+    template<>
+        bool convert_string_to_value_and_advance_index(
+                yli::ontology::Universe* universe,
+                yli::ontology::Console* console,
+                yli::ontology::Entity*& context,
+                const std::vector<std::string>& parameter_vector,
+                std::size_t& parameter_i,
+                const yli::ontology::Symbiosis*& value)
+        {
+            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
+            {
+                return false;
+            }
+
+            const std::string my_string = parameter_vector.at(parameter_i++);
+
+            value = dynamic_cast<yli::ontology::Symbiosis*>(universe->get_entity(my_string));
+
+            if (value == nullptr)
+            {
+                return false;
+            }
+
+            context = const_cast<yli::ontology::Symbiosis*>(value);
+            return true;
+        }
+
+    template<>
+        bool convert_string_to_value_and_advance_index(
+                yli::ontology::Universe* universe,
+                yli::ontology::Console* console,
+                yli::ontology::Entity*& context,
+                const std::vector<std::string>& parameter_vector,
+                std::size_t& parameter_i,
                 std::shared_ptr<std::string>& value)
         {
             if (parameter_i >= parameter_vector.size()) // No argument left to consume.
