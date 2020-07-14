@@ -59,6 +59,8 @@ Tasks which are necessary for the second stage:
 [ ] Create `audio::PlayList` class, whose parent is `Entity`.
 
 Tasks which are necessary for the third stage:
+[ ] Upgrade CMake to at least 3.16 to enable support of precompiled headers directly in CMake.
+[ ] Use precompiled headers with `target_precompile_headers` in CMake: https://cmake.org/cmake/help/git-stage/command/target_precompile_headers.html
 [ ] Add support for vector fonts.
 [ ] Implement `yli::ontology::Multiverse` class.
 [ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
@@ -72,8 +74,8 @@ Tasks which are necessary for the third stage:
 [ ] Implement YliServer.
 
 Tasks which are necessary for the development of Ylikuutio:
+[ ] Split `ylikuutio` library into `yli_core`, `yli_server`, and `yli_client` libraries. `yli_server` and `yli_client` both depend on `yli_core`.
 [ ] Add support for hexadecimal input in `set` console command.
-[ ] Implement printing children of Entities using `Console` command `children`.
 [ ] Implement `yli::ontology::ShaderSymbiosis`.
 [ ] Implement a custom FBX loader.
 [ ] Replace OpenFBX with the custom FBX loader.
@@ -225,3 +227,4 @@ Ready:
 [x] Implement creating new named `yli::ontology::Variable`s of given type in Entities using `Console` command `create-variable`.
 [x] Implement creating new named `yli::ontology::Object`s using `Console` command `create-object`.
 [x] Implement creating new named `yli::ontology::Holobiont`s using `Console` command `create-holobiont`.
+[x] Implement printing children of Entities using `Console` command `children`.
