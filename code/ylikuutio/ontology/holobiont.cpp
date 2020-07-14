@@ -19,6 +19,7 @@
 #include "entity.hpp"
 #include "symbiosis.hpp"
 #include "biont.hpp"
+#include "holobiont_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -164,4 +165,134 @@ namespace yli::ontology
     {
         return yli::ontology::get_number_of_descendants(this->parent_of_bionts.child_pointer_vector);
     }
+
+    // Public callbacks.
+
+    std::shared_ptr<yli::data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z(
+            yli::ontology::Symbiosis* const parent,
+            std::shared_ptr<std::string> holobiont_name,
+            std::shared_ptr<std::string> x,
+            std::shared_ptr<std::string> y,
+            std::shared_ptr<std::string> z)
+    {
+        if (parent == nullptr || holobiont_name == nullptr || x == nullptr || y == nullptr || z == nullptr)
+        {
+            return nullptr;
+        }
+
+        yli::ontology::EntityFactory* const entity_factory = parent->get_entity_factory();
+
+        if (entity_factory == nullptr)
+        {
+            return nullptr;
+        }
+
+        yli::data::AnyValue x_any_value("float", *x);
+        yli::data::AnyValue y_any_value("float", *y);
+        yli::data::AnyValue z_any_value("float", *z);
+
+        if (!std::holds_alternative<float>(x_any_value.data))
+        {
+            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z`: invalid value for `x`!\n";
+            return nullptr;
+        }
+
+        if (!std::holds_alternative<float>(y_any_value.data))
+        {
+            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z`: invalid value for `y`!\n";
+            return nullptr;
+        }
+
+        if (!std::holds_alternative<float>(z_any_value.data))
+        {
+            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z`: invalid value for `z`!\n";
+            return nullptr;
+        }
+
+        float float_x = std::get<float>(x_any_value.data);
+        float float_y = std::get<float>(y_any_value.data);
+        float float_z = std::get<float>(z_any_value.data);
+
+        yli::ontology::HolobiontStruct holobiont_struct;
+        holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
+        holobiont_struct.symbiosis_parent = parent;
+        holobiont_struct.local_name = *holobiont_name;
+        entity_factory->create_holobiont(holobiont_struct);
+        return nullptr;
+    }
+
+    std::shared_ptr<yli::data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle(
+            yli::ontology::Symbiosis* const parent,
+            std::shared_ptr<std::string> holobiont_name,
+            std::shared_ptr<std::string> x,
+            std::shared_ptr<std::string> y,
+            std::shared_ptr<std::string> z,
+            std::shared_ptr<std::string> horizontal_angle,
+            std::shared_ptr<std::string> vertical_angle)
+    {
+        if (parent == nullptr || holobiont_name == nullptr || x == nullptr || y == nullptr || z == nullptr || horizontal_angle == nullptr || vertical_angle == nullptr)
+        {
+            return nullptr;
+        }
+
+        yli::ontology::EntityFactory* const entity_factory = parent->get_entity_factory();
+
+        if (entity_factory == nullptr)
+        {
+            return nullptr;
+        }
+
+        yli::data::AnyValue x_any_value("float", *x);
+        yli::data::AnyValue y_any_value("float", *y);
+        yli::data::AnyValue z_any_value("float", *z);
+        yli::data::AnyValue horizontal_angle_any_value("float", *horizontal_angle);
+        yli::data::AnyValue vertical_angle_any_value("float", *vertical_angle);
+
+        if (!std::holds_alternative<float>(x_any_value.data))
+        {
+            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `x`!\n";
+            return nullptr;
+        }
+
+        if (!std::holds_alternative<float>(y_any_value.data))
+        {
+            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `y`!\n";
+            return nullptr;
+        }
+
+        if (!std::holds_alternative<float>(z_any_value.data))
+        {
+            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `z`!\n";
+            return nullptr;
+        }
+
+        if (!std::holds_alternative<float>(horizontal_angle_any_value.data))
+        {
+            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `horizontal_angle`!\n";
+            return nullptr;
+        }
+
+        if (!std::holds_alternative<float>(vertical_angle_any_value.data))
+        {
+            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `vertical_angle`!\n";
+            return nullptr;
+        }
+
+        float float_x = std::get<float>(x_any_value.data);
+        float float_y = std::get<float>(y_any_value.data);
+        float float_z = std::get<float>(z_any_value.data);
+        float float_horizontal_angle = std::get<float>(horizontal_angle_any_value.data);
+        float float_vertical_angle = std::get<float>(vertical_angle_any_value.data);
+
+        yli::ontology::HolobiontStruct holobiont_struct;
+        holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
+        holobiont_struct.horizontal_angle = float_horizontal_angle;
+        holobiont_struct.vertical_angle = float_vertical_angle;
+        holobiont_struct.symbiosis_parent = parent;
+        holobiont_struct.local_name = *holobiont_name;
+        entity_factory->create_holobiont(holobiont_struct);
+        return nullptr;
+    }
+
+    // Public callbacks end here.
 }

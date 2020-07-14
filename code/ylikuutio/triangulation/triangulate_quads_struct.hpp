@@ -46,7 +46,7 @@ namespace yli::triangulation
         std::size_t z_step;
         std::string triangulation_type;
         bool use_real_texture_coordinates;
-        double sphere_radius;
+        float sphere_radius;
         yli::geometry::SphericalTerrainStruct spherical_terrain_struct;
     };
 }

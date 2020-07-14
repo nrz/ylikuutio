@@ -45,7 +45,7 @@ namespace yli::geometry
 {
     glm::vec3 transform_planar_world_vertex_into_cartesian_vertex(
             const glm::vec3& planar_world_vertex,
-            const double sphere_radius)
+            const float sphere_radius)
     {
         yli::data::SphericalCoordinatesStruct spherical_vertex;
         spherical_vertex.rho = planar_world_vertex.y + sphere_radius;       // rho is altitude.
@@ -66,7 +66,7 @@ namespace yli::geometry
     {
         const std::size_t image_width = transformation_struct.image_width;
         const std::size_t image_height = transformation_struct.image_height;
-        const double sphere_radius = transformation_struct.sphere_radius;
+        const float sphere_radius = transformation_struct.sphere_radius;
         const bool is_bilinear_interpolation_in_use = transformation_struct.is_bilinear_interpolation_in_use;
         yli::geometry::SphericalTerrainStruct spherical_terrain_struct = transformation_struct.spherical_terrain_struct;
 
@@ -82,15 +82,15 @@ namespace yli::geometry
         std::cout << "transforming spherical coordinates loaded from file to cartesian coordinates.\n";
         std::cout << "radius: " << sphere_radius << "\n";
 
-        const double latitude_step_in_degrees = spherical_terrain_struct.SRTM_latitude_step_in_degrees;
-        // double latitude_step_in_degrees = (360.0f / image_height); // for testing, creates a sphere always.
+        const float latitude_step_in_degrees = spherical_terrain_struct.SRTM_latitude_step_in_degrees;
+        // float latitude_step_in_degrees = (360.0f / image_height); // for testing, creates a sphere always.
         std::cout << "latitude step in degrees: " << latitude_step_in_degrees << "\n";
 
-        const double longitude_step_in_degrees = spherical_terrain_struct.SRTM_longitude_step_in_degrees;
-        // double longitude_step_in_degrees = (360.0f / image_width); // for testing, creates a sphere always.
+        const float longitude_step_in_degrees = spherical_terrain_struct.SRTM_longitude_step_in_degrees;
+        // float longitude_step_in_degrees = (360.0f / image_width); // for testing, creates a sphere always.
         std::cout << "longitude step in degrees: " << longitude_step_in_degrees << "\n";
 
-        double current_latitude_in_degrees = spherical_terrain_struct.southern_latitude;
+        float current_latitude_in_degrees = spherical_terrain_struct.southern_latitude;
 
         std::size_t temp_vertices_i = 0;
 
@@ -99,7 +99,7 @@ namespace yli::geometry
         {
             // loop through all latitudes.
 
-            double current_longitude_in_degrees = spherical_terrain_struct.western_longitude;
+            float current_longitude_in_degrees = spherical_terrain_struct.western_longitude;
 
             for (uint32_t x = 0; x < image_width; x++)
             {
@@ -127,13 +127,13 @@ namespace yli::geometry
             std::cout << "transforming interpolated spherical coordinates to cartesian coordinates.\n";
             std::cout << "radius: " << sphere_radius << "\n";
 
-            double current_latitude_in_degrees = spherical_terrain_struct.southern_latitude;
+            float current_latitude_in_degrees = spherical_terrain_struct.southern_latitude;
 
             for (std::size_t z = 1; z < image_height; z++)
             {
                 // loop through all latitudes.
 
-                double current_longitude_in_degrees = spherical_terrain_struct.western_longitude;
+                float current_longitude_in_degrees = spherical_terrain_struct.western_longitude;
 
                 for (std::size_t x = 1; x < image_width; x++)
                 {

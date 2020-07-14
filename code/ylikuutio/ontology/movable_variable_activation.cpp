@@ -392,12 +392,12 @@ namespace yli::ontology
         {
             std::shared_ptr<yli::data::AnyValue> horizontal_angle_any_value = variable->variable_value;
 
-            if (horizontal_angle_any_value == nullptr || !std::holds_alternative<double>(horizontal_angle_any_value->data))
+            if (horizontal_angle_any_value == nullptr || !std::holds_alternative<float>(horizontal_angle_any_value->data))
             {
                 return nullptr;
             }
 
-            movable->horizontal_angle = std::get<double>(horizontal_angle_any_value->data);
+            movable->horizontal_angle = std::get<float>(horizontal_angle_any_value->data);
             return nullptr;
         }
 
@@ -410,12 +410,12 @@ namespace yli::ontology
 
         std::shared_ptr<yli::data::AnyValue> horizontal_angle_any_value = variable->variable_value;
 
-        if (horizontal_angle_any_value == nullptr || !std::holds_alternative<double>(horizontal_angle_any_value->data))
+        if (horizontal_angle_any_value == nullptr || !std::holds_alternative<float>(horizontal_angle_any_value->data))
         {
             return nullptr;
         }
 
-        universe->current_camera_horizontal_angle = std::get<double>(horizontal_angle_any_value->data);
+        universe->current_camera_horizontal_angle = std::get<float>(horizontal_angle_any_value->data);
         return nullptr;
     }
 
@@ -432,12 +432,12 @@ namespace yli::ontology
         {
             std::shared_ptr<yli::data::AnyValue> vertical_angle_any_value = variable->variable_value;
 
-            if (vertical_angle_any_value == nullptr || !std::holds_alternative<double>(vertical_angle_any_value->data))
+            if (vertical_angle_any_value == nullptr || !std::holds_alternative<float>(vertical_angle_any_value->data))
             {
                 return nullptr;
             }
 
-            movable->vertical_angle = std::get<double>(vertical_angle_any_value->data);
+            movable->vertical_angle = std::get<float>(vertical_angle_any_value->data);
             return nullptr;
         }
 
@@ -450,12 +450,12 @@ namespace yli::ontology
 
         std::shared_ptr<yli::data::AnyValue> vertical_angle_any_value = variable->variable_value;
 
-        if (vertical_angle_any_value == nullptr || !std::holds_alternative<double>(vertical_angle_any_value->data))
+        if (vertical_angle_any_value == nullptr || !std::holds_alternative<float>(vertical_angle_any_value->data))
         {
             return nullptr;
         }
 
-        universe->current_camera_vertical_angle = std::get<double>(vertical_angle_any_value->data);
+        universe->current_camera_vertical_angle = std::get<float>(vertical_angle_any_value->data);
         return nullptr;
     }
 }

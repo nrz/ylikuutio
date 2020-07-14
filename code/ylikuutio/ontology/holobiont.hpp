@@ -98,6 +98,26 @@ namespace yli::ontology
             void update_y(float y);
             void update_z(float z);
 
+            // Public callbacks.
+
+            static std::shared_ptr<yli::data::AnyValue> create_holobiont_with_parent_name_x_y_z(
+                    yli::ontology::Symbiosis* const parent,
+                    std::shared_ptr<std::string> holobiont_name,
+                    std::shared_ptr<std::string> x,
+                    std::shared_ptr<std::string> y,
+                    std::shared_ptr<std::string> z);
+
+            static std::shared_ptr<yli::data::AnyValue> create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle(
+                    yli::ontology::Symbiosis* const parent,
+                    std::shared_ptr<std::string> holobiont_name,
+                    std::shared_ptr<std::string> x,
+                    std::shared_ptr<std::string> y,
+                    std::shared_ptr<std::string> z,
+                    std::shared_ptr<std::string> horizontal_angle,
+                    std::shared_ptr<std::string> vertical_angle);
+
+            // Public callbacks end here.
+
             yli::ontology::ParentModule parent_of_bionts;
 
         private:

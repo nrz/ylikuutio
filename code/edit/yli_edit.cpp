@@ -654,11 +654,22 @@ int main(const int argc, const char* const argv[]) try
 
     std::cout << "Defining console command callback engines.\n";
 
-    // Config callbacks.
+    // Variable callbacks.
     yli::ontology::create_lisp_function_overload("variables", my_console, std::function(&yli::ontology::Entity::print_variables0));
     yli::ontology::create_lisp_function_overload("variables", my_console, std::function(&yli::ontology::Entity::print_variables1));
-    yli::ontology::create_lisp_function_overload("set", my_console, std::function(&yli::ontology::Variable::set2));
+    yli::ontology::create_lisp_function_overload("create-variable", my_console, std::function(&yli::ontology::Entity::create_variable_with_parent_name_type_value));
+    yli::ontology::create_lisp_function_overload("set", my_console, std::function(&yli::ontology::Variable::set_variable_shared_ptr_string));
+    yli::ontology::create_lisp_function_overload("copy", my_console, std::function(&yli::ontology::Variable::set_variable_variable));
+    yli::ontology::create_lisp_function_overload("copy-shallow", my_console, std::function(&yli::ontology::Variable::set_shallow_variable_variable));
     yli::ontology::create_lisp_function_overload("print", my_console, std::function(&yli::ontology::Variable::print_value1));
+
+    // Object callbacks.
+    yli::ontology::create_lisp_function_overload("create-object", my_console, std::function(&yli::ontology::Object::create_object_with_parent_name_x_y_z));
+    yli::ontology::create_lisp_function_overload("create-object", my_console, std::function(&yli::ontology::Object::create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle));
+
+    // Holobiont callbacks.
+    yli::ontology::create_lisp_function_overload("create-holobiont", my_console, std::function(&yli::ontology::Holobiont::create_holobiont_with_parent_name_x_y_z));
+    yli::ontology::create_lisp_function_overload("create-holobiont", my_console, std::function(&yli::ontology::Holobiont::create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle));
 
     // `Entity` handling callbacks.
     yli::ontology::create_lisp_function_overload("entities", my_console, std::function(&yli::ontology::Universe::print_entities));
@@ -668,7 +679,6 @@ int main(const int argc, const char* const argv[]) try
     yli::ontology::create_lisp_function_overload("info", my_console, std::function(&yli::ontology::Universe::info0));
     yli::ontology::create_lisp_function_overload("info", my_console, std::function(&yli::ontology::Universe::info1));
     yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Universe::bind));
-    yli::ontology::create_lisp_function_overload("AnyStructEntity", my_console, std::function(&yli::ontology::Universe::create_any_struct_entity));
 
     // Exit program callbacks.
     yli::ontology::create_lisp_function_overload("bye", my_console, std::function(&yli::snippets::quit));

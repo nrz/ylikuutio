@@ -57,8 +57,8 @@ namespace yli::ontology
         yli::ontology::Scene* parent;    // pointer to the `Scene`.
         yli::ontology::Brain* brain;     // pointer to the `Brain` (not a parent!).
 
-        double horizontal_angle;         // horizontal angle in radians.
-        double vertical_angle;           // vertical angle in radians.
+        float horizontal_angle;          // horizontal angle in radians.
+        float vertical_angle;            // vertical angle in radians.
 
         // Static view `Camera`'s coordinates do not change by moving in a `Scene`. However,
         // they can be modified by adjusting the `Entity`-specific variables of the `Camera` directly.

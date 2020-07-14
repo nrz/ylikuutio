@@ -20,8 +20,6 @@
 #include "universe.hpp"
 #include "brain.hpp"
 #include "console.hpp"
-#include "any_struct_entity.hpp"
-#include "any_struct_entity_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -72,44 +70,6 @@ namespace yli::ontology
     }
 
     // Public `Entity` create callbacks.
-
-    std::shared_ptr<yli::data::AnyValue> Universe::create_any_struct_entity(
-            yli::ontology::Universe* const universe,
-            std::shared_ptr<std::string> variable_name_shared_ptr)
-    {
-        // usage:
-        // `AnyStruct <variable_name>`
-        //
-        // eg.
-        // `AnyValue my_struct`.
-
-        if (universe == nullptr || variable_name_shared_ptr == nullptr)
-        {
-            return nullptr;
-        }
-
-        if (variable_name_shared_ptr->empty())
-        {
-            // Somehow variable name is empty!
-            return nullptr;
-        }
-
-        if (universe->has_child(*variable_name_shared_ptr))
-        {
-            // Variable name is in use already!
-            return nullptr;
-        }
-
-        // OK, variable name is not empty and it is not in use yet either.
-
-        yli::ontology::AnyStructEntityStruct any_struct_entity_struct;
-        yli::ontology::AnyStructEntity* const any_struct_entity = new yli::ontology::AnyStructEntity(
-                universe,
-                any_struct_entity_struct,
-                &universe->parent_of_any_struct_entities);
-        any_struct_entity->set_global_name(*variable_name_shared_ptr);
-        return nullptr;
-    }
 
     // Public `Entity` delete callbacks.
 

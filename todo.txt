@@ -6,10 +6,6 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage:
-[ ] Implement creating new fields (AnyValueEntities) of given type in AnyStructEntities using `Console` command `create-field`.
-[ ] Implement creating and setting new fields of given type in AnyStructEntities of a using `Console` command `set-field`.
-[ ] Implement printing fields of AnyStructEntities using `Console` command `print`.
-[ ] Implement creating new named Entities using `Console`, with a named `AnyStructEntity` of correct type as input.
 [ ] Implement `yli::ontology::HeightmapStruct` that inherits `yli::ontology::EntityStruct`, to support heightmaps consisting of several sheets.
 [ ] Implement `yli::ontology::Heightmap` class that inherits `yli::ontology::Entity`, to support heightmaps consisting of several sheets.
 [ ] Implement `yli::ontology::HeightmapSheet` class that inherits `yli::ontology::Species`, to handle each sheet of a multisheet heightmap.
@@ -17,7 +13,6 @@ Tasks which are necessary for the first stage:
 [ ] Implement support for multiple water levels within a `Scene`.
 [ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
 [ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
-[ ] Implement `yli::ontology::Waypoint` class.
 
 Tasks which are necessary for the second stage:
 [ ] Implement `yli::ontology::WorldShader` to support sharing shaders between multiple `Scene`s.
@@ -227,3 +222,6 @@ Ready:
 [x] Fix bug in `print` so that it accepts `print cat1.x` (instead of `print cat1 x`).
 [x] Fix bug in `set` so that it accepts `set cat1.x 1234` (instead of `set cat1 x 1234`).
 [x] Implement `yli::ontology::MasterModule`.
+[x] Implement creating new named `yli::ontology::Variable`s of given type in Entities using `Console` command `create-variable`.
+[x] Implement creating new named `yli::ontology::Object`s using `Console` command `create-object`.
+[x] Implement creating new named `yli::ontology::Holobiont`s using `Console` command `create-holobiont`.

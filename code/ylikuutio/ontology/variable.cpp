@@ -105,6 +105,21 @@ namespace yli::ontology
             return;
         }
 
+        this->variable_value = std::make_shared<yli::data::AnyValue>(*new_value);
+
+        if (this->activate_callback != nullptr)
+        {
+            this->activate_callback(this->parent, this);
+        }
+    }
+
+    void Variable::set_shallow(std::shared_ptr<yli::data::AnyValue> new_value)
+    {
+        if (this->variable_value == nullptr || this->parent == nullptr)
+        {
+            return;
+        }
+
         this->variable_value = new_value;
 
         if (this->activate_callback != nullptr)
@@ -130,7 +145,7 @@ namespace yli::ontology
 
     // Public callbacks.
 
-    std::shared_ptr<yli::data::AnyValue> Variable::set2(
+    std::shared_ptr<yli::data::AnyValue> Variable::set_variable_shared_ptr_string(
             yli::ontology::Variable* const variable,
             std::shared_ptr<std::string> new_value)
     {
@@ -144,6 +159,42 @@ namespace yli::ontology
 
         // Set a new value and call activate callback if there is such.
         variable->set(*new_value);
+        return nullptr;
+    }
+
+    std::shared_ptr<yli::data::AnyValue> Variable::set_variable_variable(
+            yli::ontology::Variable* const dest_variable,
+            yli::ontology::Universe* const context, // A context is needed so that correct `Variable is bound to the function call.
+            yli::ontology::Variable* const src_variable)
+    {
+        // Usage:
+        // to set variable: set <dest-variable-name> <src-variable-name>
+
+        if (dest_variable == nullptr || src_variable == nullptr)
+        {
+            return nullptr;
+        }
+
+        // Set a new value and call activate callback if there is such.
+        dest_variable->set(src_variable->get());
+        return nullptr;
+    }
+
+    std::shared_ptr<yli::data::AnyValue> Variable::set_shallow_variable_variable(
+            yli::ontology::Variable* const dest_variable,
+            yli::ontology::Universe* const context, // A context is needed so that correct `Variable is bound to the function call.
+            yli::ontology::Variable* const src_variable)
+    {
+        // Usage:
+        // to set variable: set-shallow <dest-variable-name> <src-variable-name>
+
+        if (dest_variable == nullptr || src_variable == nullptr)
+        {
+            return nullptr;
+        }
+
+        // Set a new value and call activate callback if there is such.
+        dest_variable->set_shallow(src_variable->get());
         return nullptr;
     }
 

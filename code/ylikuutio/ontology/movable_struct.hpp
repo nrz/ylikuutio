@@ -53,8 +53,8 @@ namespace yli::ontology
                 yli::ontology::Brain* const brain,
                 const glm::vec3& cartesian_coordinates,
                 yli::data::SphericalCoordinatesStruct spherical_coordinates,
-                const double horizontal_angle,
-                const double vertical_angle)
+                const float horizontal_angle,
+                const float vertical_angle)
             : EntityStruct(),
             input_method(yli::input::InputMethod::AI),
             brain(brain),
@@ -69,8 +69,8 @@ namespace yli::ontology
                 yli::ontology::Brain* const brain,
                 const glm::vec3& cartesian_coordinates,
                 yli::data::SphericalCoordinatesStruct spherical_coordinates,
-                const double horizontal_angle,
-                const double vertical_angle,
+                const float horizontal_angle,
+                const float vertical_angle,
                 const std::string& global_name,
                 const std::string& local_name)
             : EntityStruct(global_name, local_name),
@@ -87,8 +87,8 @@ namespace yli::ontology
         yli::ontology::Brain* brain;     // brain.
         glm::vec3 cartesian_coordinates; // coordinate vector.
         yli::data::SphericalCoordinatesStruct spherical_coordinates;
-        double horizontal_angle;
-        double vertical_angle;
+        float horizontal_angle;
+        float vertical_angle;
     };
 }
 

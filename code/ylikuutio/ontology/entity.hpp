@@ -40,6 +40,7 @@ namespace yli::ontology
     class Universe;
     class Console;
     class Variable;
+    class EntityFactory;
     struct EntityStruct;
     struct VariableStruct;
 
@@ -71,6 +72,7 @@ namespace yli::ontology
             bool get_can_be_erased() const;
 
             yli::ontology::Universe* get_universe() const;
+            virtual yli::ontology::EntityFactory* get_entity_factory() const;
 
             virtual yli::ontology::Entity* get_parent() const = 0;
             std::size_t get_number_of_all_children() const;
@@ -98,6 +100,14 @@ namespace yli::ontology
             std::string help(const std::string& variable_name) const; // this function returns the help string for the `Variable`.
 
             // Public callbacks.
+
+            // Public `Entity` creation callbacks.
+
+            static std::shared_ptr<yli::data::AnyValue> create_variable_with_parent_name_type_value(
+                    yli::ontology::Entity* const parent,
+                    std::shared_ptr<std::string> variable_name,
+                    std::shared_ptr<std::string> variable_type,
+                    std::shared_ptr<std::string> variable_value);
 
             // Public data printing callbacks.
 
@@ -129,7 +139,7 @@ namespace yli::ontology
             void prerender() const;
             void postrender() const;
 
-            yli::ontology::Universe* universe;                          // pointer to the `Universe`.
+            yli::ontology::Universe* universe; // pointer to the `Universe`.
             std::size_t entityID;
 
             std::string type_string;

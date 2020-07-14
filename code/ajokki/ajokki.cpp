@@ -983,11 +983,22 @@ int main(const int argc, const char* const argv[]) try
 
     std::cout << "Defining console command callback engines.\n";
 
-    // Config callbacks.
+    // Variable callbacks.
     yli::ontology::create_lisp_function_overload("variables", my_console, std::function(&yli::ontology::Entity::print_variables0));
     yli::ontology::create_lisp_function_overload("variables", my_console, std::function(&yli::ontology::Entity::print_variables1));
-    yli::ontology::create_lisp_function_overload("set", my_console, std::function(&yli::ontology::Variable::set2));
+    yli::ontology::create_lisp_function_overload("create-variable", my_console, std::function(&yli::ontology::Entity::create_variable_with_parent_name_type_value));
+    yli::ontology::create_lisp_function_overload("set", my_console, std::function(&yli::ontology::Variable::set_variable_shared_ptr_string));
+    yli::ontology::create_lisp_function_overload("copy", my_console, std::function(&yli::ontology::Variable::set_variable_variable));
+    yli::ontology::create_lisp_function_overload("copy-shallow", my_console, std::function(&yli::ontology::Variable::set_shallow_variable_variable));
     yli::ontology::create_lisp_function_overload("print", my_console, std::function(&yli::ontology::Variable::print_value1));
+
+    // Object callbacks.
+    yli::ontology::create_lisp_function_overload("create-object", my_console, std::function(&yli::ontology::Object::create_object_with_parent_name_x_y_z));
+    yli::ontology::create_lisp_function_overload("create-object", my_console, std::function(&yli::ontology::Object::create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle));
+
+    // Holobiont callbacks.
+    yli::ontology::create_lisp_function_overload("create-holobiont", my_console, std::function(&yli::ontology::Holobiont::create_holobiont_with_parent_name_x_y_z));
+    yli::ontology::create_lisp_function_overload("create-holobiont", my_console, std::function(&yli::ontology::Holobiont::create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle));
 
     // `Entity` handling callbacks.
     yli::ontology::create_lisp_function_overload("entities", my_console, std::function(&yli::ontology::Universe::print_entities));
@@ -1000,7 +1011,6 @@ int main(const int argc, const char* const argv[]) try
     yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Universe::bind));
     yli::ontology::create_lisp_function_overload("set-global-name", my_console, std::function(&yli::ontology::Universe::set_global_name_for_entity));
     yli::ontology::create_lisp_function_overload("set-local-name", my_console, std::function(&yli::ontology::Universe::set_local_name_for_entity));
-    yli::ontology::create_lisp_function_overload("AnyStructEntity", my_console, std::function(&yli::ontology::Universe::create_any_struct_entity));
 
     // Exit program callbacks.
     yli::ontology::create_lisp_function_overload("bye", my_console, std::function(&yli::snippets::quit));
@@ -1121,7 +1131,7 @@ int main(const int argc, const char* const argv[]) try
 
     while (!my_universe->get_is_exit_requested() && input_master != nullptr)
     {
-        const double current_time_in_main_loop = yli::time::get_time();
+        const float current_time_in_main_loop = yli::time::get_time();
 
         if (current_time_in_main_loop - my_universe->get_last_time_for_display_sync() >= (1.0f / my_universe->get_max_fps()))
         {
@@ -1136,7 +1146,7 @@ int main(const int argc, const char* const argv[]) try
                 if (frame_rate_text2D != nullptr && my_universe->get_number_of_frames() > 0)
                 {
                     std::stringstream ms_frame_text_stringstream;
-                    ms_frame_text_stringstream << std::fixed << std::setprecision(2) << 1000.0f / static_cast<double>(my_universe->get_number_of_frames()) << " ms/frame; " <<
+                    ms_frame_text_stringstream << std::fixed << std::setprecision(2) << 1000.0f / static_cast<float>(my_universe->get_number_of_frames()) << " ms/frame; " <<
                         my_universe->get_number_of_frames() << " Hz";
                     std::string ms_frame_text = ms_frame_text_stringstream.str();
                     frame_rate_text2D->change_string(ms_frame_text);
@@ -1237,16 +1247,16 @@ int main(const int argc, const char* const argv[]) try
             }
 
             // mouse position.
-            const double xpos = static_cast<double>(my_universe->mouse_x);
-            const double ypos = static_cast<double>(my_universe->mouse_y);
+            const float xpos = static_cast<float>(my_universe->mouse_x);
+            const float ypos = static_cast<float>(my_universe->mouse_y);
 
             // Reset mouse position for next frame.
             if (has_mouse_focus)
             {
                 yli::input::set_cursor_position(
                         my_universe->get_window(),
-                        static_cast<double>(my_universe->get_window_width()) / 2,
-                        static_cast<double>(my_universe->get_window_height()) / 2);
+                        static_cast<float>(my_universe->get_window_width()) / 2,
+                        static_cast<float>(my_universe->get_window_height()) / 2);
 
                 if (my_universe->has_mouse_ever_moved || (std::abs(xpos) > 0.0001) || (std::abs(ypos) > 0.0001))
                 {

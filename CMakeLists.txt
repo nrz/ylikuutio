@@ -521,9 +521,6 @@ add_library(ylikuutio STATIC
 
     # ontology, in alphabetical order
     code/ylikuutio/ontology/activate_callback.hpp
-    code/ylikuutio/ontology/any_struct_entity.cpp
-    code/ylikuutio/ontology/any_struct_entity.hpp
-    code/ylikuutio/ontology/any_struct_entity_struct.hpp
     code/ylikuutio/ontology/biont.cpp
     code/ylikuutio/ontology/biont.hpp
     code/ylikuutio/ontology/biont_struct.hpp
@@ -954,9 +951,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/load/obj_loader.cpp
         code/ylikuutio/load/obj_loader.hpp
         code/ylikuutio/memory/memory_templates.hpp
-        code/ylikuutio/ontology/any_struct_entity.cpp
-        code/ylikuutio/ontology/any_struct_entity.hpp
-        code/ylikuutio/ontology/any_struct_entity_struct.hpp
         code/ylikuutio/ontology/brain.cpp
         code/ylikuutio/ontology/brain.hpp
         code/ylikuutio/ontology/brain_struct.hpp

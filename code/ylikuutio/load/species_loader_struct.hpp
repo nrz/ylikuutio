@@ -53,8 +53,8 @@ namespace yli::load
         std::size_t z_step;
         std::size_t* image_width_pointer;
         std::size_t* image_height_pointer;
-        double latitude;                // in degrees, for SRTM.
-        double longitude;               // in degrees, for SRTM.
+        float latitude;                 // in degrees, for SRTM.
+        float longitude;                // in degrees, for SRTM.
         float planet_radius;            // for SRTM. can be a planet or a moon.
         float divisor;                  // for SRTM.
         bool is_headless;

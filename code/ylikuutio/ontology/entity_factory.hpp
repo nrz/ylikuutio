@@ -36,7 +36,6 @@
 #include "camera_struct.hpp"
 #include "compute_task_struct.hpp"
 #include "brain_struct.hpp"
-#include "any_struct_entity_struct.hpp"
 #include "code/ylikuutio/callback/input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 
 // Include standard headers
@@ -94,9 +93,6 @@ namespace yli::ontology
             yli::ontology::Entity* create_camera(const yli::ontology::CameraStruct& camera_struct) const;
             yli::ontology::Entity* create_compute_task(const yli::ontology::ComputeTaskStruct& compute_task_struct) const;
             yli::ontology::Entity* create_brain(const yli::ontology::BrainStruct& brain_struct) const;
-            yli::ontology::Entity* create_any_struct_entity(
-                    yli::ontology::Entity* const parent,
-                    const yli::ontology::AnyStructEntityStruct& any_struct_entity_struct) const;
             yli::ontology::Entity* create_callback_engine_entity(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback) const;
 
         private:

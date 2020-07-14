@@ -18,6 +18,8 @@
 #include "entity.hpp"
 #include "variable.hpp"
 #include "universe.hpp"
+#include "variable_struct.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 
 // Include standard headers
@@ -31,6 +33,24 @@ namespace yli::data
 namespace yli::ontology
 {
     class Console;
+
+    std::shared_ptr<yli::data::AnyValue> Entity::create_variable_with_parent_name_type_value(
+            yli::ontology::Entity* const parent,
+            std::shared_ptr<std::string> variable_name,
+            std::shared_ptr<std::string> variable_type,
+            std::shared_ptr<std::string> variable_value)
+    {
+        if (parent == nullptr || variable_name == nullptr || variable_type == nullptr || variable_value == nullptr)
+        {
+            return nullptr;
+        }
+
+        yli::ontology::VariableStruct variable_struct;
+        variable_struct.local_name    = *variable_name;
+        variable_struct.initial_value = std::make_shared<yli::data::AnyValue>(*variable_type, *variable_value);
+        parent->create_variable(variable_struct);
+        return nullptr;
+    }
 
     std::shared_ptr<yli::data::AnyValue> Entity::print_children(
             yli::ontology::Console* const console,

@@ -579,8 +579,8 @@ namespace yli::ontology
 
             // this method returns current `max_fps`.
             std::size_t get_max_fps() const;
-            double get_last_time_to_display_fps() const;
-            double get_last_time_for_display_sync() const;
+            float get_last_time_to_display_fps() const;
+            float get_last_time_for_display_sync() const;
             int32_t get_number_of_frames() const;
 
             void increment_last_time_to_display_fps();
@@ -588,7 +588,7 @@ namespace yli::ontology
             void increment_number_of_frames();
             void reset_number_of_frames();
 
-            yli::ontology::EntityFactory* get_entity_factory() const;
+            yli::ontology::EntityFactory* get_entity_factory() const override;
 
             const glm::mat4& get_projection_matrix() const;
             void set_projection_matrix(const glm::mat4& projection_matrix);
@@ -609,10 +609,6 @@ namespace yli::ontology
                     yli::ontology::Entity* const parent_or_master_entity);
 
             // Public `Entity` create callbacks.
-
-            static std::shared_ptr<yli::data::AnyValue> create_any_struct_entity(
-                    yli::ontology::Universe* const universe,
-                    std::shared_ptr<std::string> variable_name_shared_ptr);
 
             // Public `Entity` delete callbacks.
 
@@ -686,8 +682,8 @@ namespace yli::ontology
             glm::vec3 current_camera_right; // note: `right` can not be set directly using console.
             glm::vec3 current_camera_up;    // note: `up` can not be set directly using console.
 
-            double current_camera_horizontal_angle;
-            double current_camera_vertical_angle;
+            float current_camera_horizontal_angle;
+            float current_camera_vertical_angle;
 
             int32_t mouse_x;
             int32_t mouse_y;
@@ -787,9 +783,9 @@ namespace yli::ontology
 
             // variables related to timing of events.
             std::size_t max_fps;
-            double last_time_to_display_fps;
-            double last_time_for_display_sync;
-            double delta_time;
+            float last_time_to_display_fps;
+            float last_time_for_display_sync;
+            float delta_time;
             int32_t number_of_frames;
 
             uint32_t last_time_before_reading_keyboard;
