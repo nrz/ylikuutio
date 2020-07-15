@@ -87,6 +87,7 @@ class_ifndef_line = "#ifndef " + class_include_guard_macro_name
 class_define_line = "#define " + class_include_guard_macro_name
 struct_ifndef_line = "#ifndef " + struct_include_guard_macro_name
 struct_define_line = "#define " + struct_include_guard_macro_name
+entity_struct_include_line = "#include \"entity_struct.hpp\""
 endif_line = "#endif"
 
 # class filenames.
@@ -161,11 +162,15 @@ class_constructor_lines = \
 "                    " + namespace + "::Universe* const universe,\n"\
 "                    " + const_struct_reference_variable_type + " " + struct_name + ",\n"\
 "                    " + parent_module_type_and_name + ") // TODO: other_parameters!\n"\
-"                : " + inherited_class_name + "(universe), // TODO: complete the initializer list!\n"\
+"                : " + inherited_class_name + "(universe, " + struct_name + "), // TODO: complete the initializer list!\n"\
 "                " + child_module_variable_name + "(parent_module, this) // TODO: delete this line if `ChildModule` is not needed!\n"\
 "            {\n"\
 "                // constructor.\n"\
 "                this->parent = " + struct_name + ".parent;\n"\
+"\n"\
+"                // `yli::ontology::Entity` member variables begin here.\n"\
+"                this->type_string = \"" + fully_qualified_class_name + "*\";\n"\
+"                // TODO: add other `yli::ontology::Entity` member variables such as `can_be_erased` if needed!\n"\
 "            }"
 
 delete_copy_constructor_line = \
@@ -199,7 +204,7 @@ destructor_definition_lines = \
 
 # struct file specific lines.
 begin_struct_definition = \
-"    struct " + struct_variable_type + "\n"\
+"    struct " + struct_variable_type + ": public yli::ontology::EntityStruct\n"\
 "    {"
 
 end_struct_definition = \
@@ -234,6 +239,7 @@ with open(class_filename_hpp, 'w') as f:
     if inherited_class_name != "Entity":
         print(entity_forward_declaration, file = f)
     print(universe_forward_declaration, file = f)
+    print(parent_class_forward_declaration, file = f)
     print(parent_module_forward_declaration, file = f)
     print(file = f)
     print(begin_class_definition, file = f)
@@ -272,6 +278,8 @@ with open(struct_filename, 'w') as f:
     print(file = f)
     print(struct_ifndef_line, file = f)
     print(struct_define_line, file = f)
+    print(file = f)
+    print(entity_struct_include_line, file = f)
     print(file = f)
     print(begin_namespace_lines, file = f)
     print(parent_class_forward_declaration, file = f)
