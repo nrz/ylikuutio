@@ -67,6 +67,15 @@ namespace yli::load
         // NODATA_value  -9999.000
         // 34.315 34.467 34.441 34.260 33.972 33.564 33.229 33.130 33.102 33.024 32.902 32.669 32.305 32.013 31.937 31.893 31.831 31.832
 
+        // Notes:
+        // field           meaning
+        // ncols           number of columns
+        // nrows           number of rows
+        // xllcorner       the x-coordinate of bottom left corner
+        // yllcorner       the y-coordinate of bottom left corner (note: consider this as z-coordinate in Ylikuutio)
+        // cellsize        grid resolution in meters
+        // NODATA_value    the value used to indicate a missing value
+
         std::cout << "Loading ASCII grid file " << heightmap_loader_struct.filename << " ...\n";
 
         if (heightmap_loader_struct.x_step < 1)
