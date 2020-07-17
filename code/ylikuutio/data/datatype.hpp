@@ -72,6 +72,11 @@ namespace yli::data
         CONST_SPECIES_POINTER,
         OBJECT_POINTER,
         CONST_OBJECT_POINTER,
+        // `yli::ontology` datatypes, 'heightmap' path.
+        HEIGHTMAP_POINTER,
+        CONST_HEIGHTMAP_POINTER,
+        HEIGHTMAP_SHEET_POINTER,
+        CONST_HEIGHTMAP_SHEET_POINTER,
         // `yli::ontology` datatypes, 'symbiont' path.
         SYMBIOSIS_POINTER,
         CONST_SYMBIOSIS_POINTER,

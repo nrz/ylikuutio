@@ -539,17 +539,13 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/chunk_master.cpp
     code/ylikuutio/ontology/chunk_master.hpp
     code/ylikuutio/ontology/chunk_struct.hpp
+    code/ylikuutio/ontology/compute_task.cpp
+    code/ylikuutio/ontology/compute_task.hpp
+    code/ylikuutio/ontology/compute_task_struct.hpp
     code/ylikuutio/ontology/console.cpp
     code/ylikuutio/ontology/console.hpp
     code/ylikuutio/ontology/console_struct.hpp
     code/ylikuutio/ontology/console_callbacks.cpp
-    code/ylikuutio/ontology/generic_lisp_function_overload.cpp
-    code/ylikuutio/ontology/generic_lisp_function_overload.hpp
-    code/ylikuutio/ontology/get_content_callback.hpp
-    code/ylikuutio/ontology/gl_attrib_locations.cpp
-    code/ylikuutio/ontology/gl_attrib_locations.hpp
-    code/ylikuutio/ontology/glyph_object_creation.cpp
-    code/ylikuutio/ontology/glyph_object_creation.hpp
     code/ylikuutio/ontology/entity.cpp
     code/ylikuutio/ontology/entity.hpp
     code/ylikuutio/ontology/entity_callbacks.cpp
@@ -565,8 +561,15 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/font2D.cpp
     code/ylikuutio/ontology/font2D.hpp
     code/ylikuutio/ontology/font_struct.hpp
+    code/ylikuutio/ontology/generic_lisp_function_overload.cpp
+    code/ylikuutio/ontology/generic_lisp_function_overload.hpp
+    code/ylikuutio/ontology/get_content_callback.hpp
+    code/ylikuutio/ontology/gl_attrib_locations.cpp
+    code/ylikuutio/ontology/gl_attrib_locations.hpp
     code/ylikuutio/ontology/glyph.cpp
     code/ylikuutio/ontology/glyph.hpp
+    code/ylikuutio/ontology/glyph_object_creation.cpp
+    code/ylikuutio/ontology/glyph_object_creation.hpp
     code/ylikuutio/ontology/glyph_struct.hpp
     code/ylikuutio/ontology/ground_level.cpp
     code/ylikuutio/ontology/ground_level.hpp
@@ -586,11 +589,11 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/model_struct.hpp
     code/ylikuutio/ontology/movable.cpp
     code/ylikuutio/ontology/movable.hpp
+    code/ylikuutio/ontology/movable_struct.hpp
     code/ylikuutio/ontology/movable_variable_activation.cpp
     code/ylikuutio/ontology/movable_variable_activation.hpp
     code/ylikuutio/ontology/movable_variable_read.cpp
     code/ylikuutio/ontology/movable_variable_read.hpp
-    code/ylikuutio/ontology/movable_struct.hpp
     code/ylikuutio/ontology/object.cpp
     code/ylikuutio/ontology/object.hpp
     code/ylikuutio/ontology/object_struct.hpp
@@ -640,9 +643,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/text3D.hpp
     code/ylikuutio/ontology/text3D.cpp
     code/ylikuutio/ontology/text3D_struct.hpp
-    code/ylikuutio/ontology/compute_task.cpp
-    code/ylikuutio/ontology/compute_task.hpp
-    code/ylikuutio/ontology/compute_task_struct.hpp
     code/ylikuutio/ontology/text_struct.hpp
     code/ylikuutio/ontology/universe.cpp
     code/ylikuutio/ontology/universe.hpp
@@ -1002,11 +1002,11 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/symbiosis.hpp
         code/ylikuutio/ontology/symbiosis_struct.hpp
         code/ylikuutio/ontology/text3D_struct.hpp
-        code/ylikuutio/ontology/vector_font_struct.hpp
         code/ylikuutio/ontology/universe.cpp
         code/ylikuutio/ontology/universe.hpp
         code/ylikuutio/ontology/universe_callbacks.cpp
         code/ylikuutio/ontology/universe_struct.hpp
+        code/ylikuutio/ontology/vector_font_struct.hpp
         code/ylikuutio/ontology/world.cpp
         code/ylikuutio/ontology/world.hpp
         code/ylikuutio/ontology/world_struct.hpp
