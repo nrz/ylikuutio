@@ -34,7 +34,7 @@ Tasks which are necessary for the second stage:
 [ ] Evaluate mingw-std-threads: https://github.com/meganz/mingw-std-threads
 [ ] Evaluate winpthreads: https://sourceforge.net/p/mingw-w64/mingw-w64/ci/master/tree/mingw-w64-libraries/winpthreads/ https://en.wikipedia.org/wiki/MinGW#MinGW-w64
 [ ] Evaluate Pthreads-win32, in particular MinGW-w64 support: https://sourceware.org/pthreads-win32/ https://sourceforge.net/p/mingw-w64/wiki2/Compile%20pthreads/
-[ ] Write test code using C++14 threads.
+[ ] Write test code using C++17 threads.
 [ ] Write test code using pthreads.
 [ ] Add support for multithreaded code.
 [ ] Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
