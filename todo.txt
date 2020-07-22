@@ -41,7 +41,7 @@ Tasks which are necessary for the second stage:
 [ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
 [ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
 [ ] Implement octree segmentation.
-[ ] Implement frustrum culling.
+[ ] Implement frustum culling using bounding spheres.
 [ ] Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
 [ ] Implement `yli::ontology::ShapeshifterForm : public Model`.
 [ ] Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.
