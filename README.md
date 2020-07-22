@@ -259,6 +259,10 @@ Some available console commands to try in Ajokki:
 * `print window_height`
 * `set window_width 1000`
 * `set window_height 500`
+* `create-object cat_species cat3 500 100 600 3.14 0`
+* `create-object cat_species cat4 500 100 650`
+* `create-holobiont turbo_polizei_bmp_symbiosis polizei3 500 100 700 3.14 0`
+* `create-holobiont turbo_polizei_bmp_symbiosis polizei3 480 100 700`
 
 ## FAQ
 Q: What is "Ylikuutio"?
@@ -306,7 +310,7 @@ A: Some parts of Ylikuutio (some shaders, some file loaders, etc.) are
    based on [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/),
    which I really recommend for anyone interested in learning
    OpenGL programming. Ylikuutio also uses external libraries such as
-   (in alphabetical order) Asio, GLM, GLEW, OpenFBX, pugixml, SDL, and stb.
+   (in alphabetical order) Asio, Bullet, GLM, GLEW, OpenFBX, pugixml, SDL, and stb.
    The rest is written from scratch.
 
 Q: Does Ylikuutio use right-handed or left-handed world coordinates?
@@ -373,6 +377,7 @@ A: YliLisp scripting language is a work in progress.
 ### Libraries currently in use
 * The source code from [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/) is licensed under [WTFPL Public Licence version 2](https://www.opengl-tutorial.org/download/).
 * [Asio](https://think-async.com/) is licensed under [Boost software license](https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt).
+* [Bullet](http://bulletphysics.org/) is licensed under [the zlib license](https://github.com/bulletphysics/bullet3/blob/master/LICENSE.txt).
 * [OpenGL Mathematics (GLM)](https://glm.g-truc.net/) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](https://glm.g-truc.net/copying.txt).
 * [The OpenGL Extension Wrangler Library (GLEW)](http://glew.sourceforge.net/) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
 * [OpenFBX](https://github.com/nem0/OpenFBX) is licensed under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
