@@ -58,13 +58,13 @@ endif()
 # set(CMAKE_VERBOSE_MAKEFILE ON)
 
 if(CMAKE_BINARY_DIR STREQUAL CMAKE_SOURCE_DIR)
-    message( FATAL_ERROR "Please select another Build Directory ! (and give it a clever name, like bin_Visual2012_64bits/)" )
+    message(FATAL_ERROR "ERROR: in-source builds are not supported! Please create a build directory and build from there!")
 endif()
 if(CMAKE_SOURCE_DIR MATCHES " ")
-    message( "Your Source Directory contains spaces. If you experience problems when compiling, this can be the cause." )
+    message("WARNING: Your source directory contains spaces. If you experience problems when compiling, this can be the cause.")
 endif()
 if(CMAKE_BINARY_DIR MATCHES " ")
-    message( "Your Build Directory contains spaces. If you experience problems when compiling, this can be the cause." )
+    message("WARNING: Your build directory contains spaces. If you experience problems when compiling, this can be the cause.")
 endif()
 
 # On Visual 2005 and above, this module can set the debug working directory
