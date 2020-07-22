@@ -37,6 +37,9 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+// Include Bullet
+#include <btBulletDynamicsCommon.h>
+
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstddef>       // std::size_t
@@ -473,6 +476,12 @@ namespace yli::ontology
                     this->input_master = std::make_shared<yli::input::InputMaster>(this);
                 }
 
+                // Bullet variables.
+                this->collision_configuration = std::make_shared<btDefaultCollisionConfiguration>();
+                this->dispatcher              = std::make_shared<btCollisionDispatcher>(this->collision_configuration.get());
+                this->overlapping_pair_cache  = std::make_shared<btDbvtBroadphase>();
+                this->solver                  = std::make_shared<btSequentialImpulseConstraintSolver>();
+
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Universe*";
             }
@@ -519,6 +528,11 @@ namespace yli::ontology
 
             yli::audio::AudioMaster* get_audio_master() const;
             yli::input::InputMaster* get_input_master() const;
+
+            btDefaultCollisionConfiguration* get_collision_configuration() const;
+            btCollisionDispatcher* get_dispatcher() const;
+            btBroadphaseInterface* get_overlapping_pair_cache() const;
+            btSequentialImpulseConstraintSolver* get_solver() const;
 
             std::size_t get_number_of_worlds() const;
 
@@ -751,6 +765,12 @@ namespace yli::ontology
             std::shared_ptr<yli::audio::AudioMaster> audio_master; // pointer to `AudioMaster`.
 
             std::shared_ptr<yli::input::InputMaster> input_master; // pointer to `InputMaster`.
+
+            // Bullet variables.
+            std::shared_ptr<btDefaultCollisionConfiguration> collision_configuration;
+            std::shared_ptr<btCollisionDispatcher> dispatcher;
+            std::shared_ptr<btBroadphaseInterface> overlapping_pair_cache;
+            std::shared_ptr<btSequentialImpulseConstraintSolver> solver;
 
             // variables related to the window.
             std::shared_ptr<SDL_GLContext> context;
