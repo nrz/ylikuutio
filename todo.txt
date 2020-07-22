@@ -15,6 +15,7 @@ Tasks which are necessary for the first stage:
 [ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
 
 Tasks which are necessary for the second stage:
+[ ] Evaluate Dear ImGUI: https://github.com/ocornut/imgui
 [ ] Implement `yli::ontology::WorldShader` to support sharing shaders between multiple `Scene`s.
 [ ] Implement `yli::ontology::WorldMaterial` to support sharing materials between multiple `Scene`s.
 [ ] Implement `yli::ontology::WorldSpecies` to support sharing species between multiple `Scene`s.
