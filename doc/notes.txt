@@ -100,3 +100,7 @@ https://git-lfs.github.com/
 
 Good free music (free as beer and free as speech), check the license of each file:
 https://freesound.org/
+
+About frustum culling and occlusion culling:
+https://www.mpc-rnd.com/unity-gpu-culling-experiments/?t=unity
+https://www.mpc-rnd.com/unity-gpu-culling-experiments-part2-optimizations/?t=unity

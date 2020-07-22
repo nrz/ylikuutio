@@ -32,6 +32,9 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+// Include Bullet
+#include <btBulletDynamicsCommon.h>
+
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstddef>       // std::size_t
@@ -117,6 +120,20 @@ namespace yli::ontology
                 yli::ontology::CameraStruct camera_struct = scene_struct.default_camera_struct;
                 camera_struct.parent = this;
                 new yli::ontology::Camera(this->universe, camera_struct, &this->parent_of_default_camera); // create the default camera.
+
+                // Bullet variables.
+                if (this->universe == nullptr)
+                {
+                    this->dynamics_world = nullptr;
+                }
+                else
+                {
+                    this->dynamics_world = std::make_shared<btDiscreteDynamicsWorld>(
+                            this->universe->get_dispatcher(),
+                            this->universe->get_overlapping_pair_cache(),
+                            this->universe->get_solver(),
+                            this->universe->get_collision_configuration());
+                }
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Scene*";
@@ -211,6 +228,8 @@ namespace yli::ontology
 
             // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
             yli::data::SphericalCoordinatesStruct* spherical_coordinates;
+
+            std::shared_ptr<btDiscreteDynamicsWorld> dynamics_world;
 
             float horizontal_angle;
             float vertical_angle;

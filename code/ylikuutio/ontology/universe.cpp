@@ -66,6 +66,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #endif
 
+// Include Bullet
+#include <btBulletDynamicsCommon.h>
+
 // Include standard headers
 #include <cstddef>       // std::size_t
 #include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
@@ -535,6 +538,46 @@ namespace yli::ontology
         }
 
         return this->input_master.get();
+    }
+
+    btDefaultCollisionConfiguration* Universe::get_collision_configuration() const
+    {
+        if (this->collision_configuration == nullptr)
+        {
+            return nullptr;
+        }
+
+        return this->collision_configuration.get();
+    }
+
+    btCollisionDispatcher* Universe::get_dispatcher() const
+    {
+        if (this->dispatcher == nullptr)
+        {
+            return nullptr;
+        }
+
+        return this->dispatcher.get();
+    }
+
+    btBroadphaseInterface* Universe::get_overlapping_pair_cache() const
+    {
+        if (this->overlapping_pair_cache == nullptr)
+        {
+            return nullptr;
+        }
+
+        return this->overlapping_pair_cache.get();
+    }
+
+    btSequentialImpulseConstraintSolver* Universe::get_solver() const
+    {
+        if (this->solver == nullptr)
+        {
+            return nullptr;
+        }
+
+        return this->solver.get();
     }
 
     const glm::mat4& Universe::get_projection_matrix() const
