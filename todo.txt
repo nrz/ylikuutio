@@ -75,6 +75,7 @@ Tasks which are necessary for the third stage:
 [ ] Implement YliServer.
 
 Tasks which are necessary for the development of Ylikuutio:
+[ ] Implement custom memory allocator.
 [ ] Split `ylikuutio` library into `yli_core`, `yli_server`, and `yli_client` libraries. `yli_server` and `yli_client` both depend on `yli_core`.
 [ ] Add support for hexadecimal input in `set` console command.
 [ ] Implement `yli::ontology::ShaderSymbiosis`.
