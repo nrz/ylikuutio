@@ -303,7 +303,6 @@ namespace yli::ontology
 
             void unbind_entity(const std::size_t entityID);
 
-            // constructor.
             Universe(const yli::ontology::UniverseStruct& universe_struct)
                 : Entity(this, universe_struct), // `Universe` has no parent.
                 parent_of_worlds(this),
@@ -312,6 +311,8 @@ namespace yli::ontology
                 parent_of_any_value_entities(this),
                 parent_of_callback_engine_entities(this)
             {
+                // constructor.
+
                 // call `bind_entity` here since it couldn't be performed from `Entity` constructor.
                 this->bind_entity(this);
 

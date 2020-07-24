@@ -88,7 +88,6 @@ namespace yli::ontology
     class Console: public yli::ontology::Entity
     {
         public:
-            // constructor.
             Console(yli::ontology::Universe* const universe,
                     const yli::ontology::ConsoleStruct& console_struct,
                     yli::ontology::ParentModule* const parent_module)

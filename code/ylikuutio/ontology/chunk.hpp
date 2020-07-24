@@ -54,7 +54,6 @@ namespace yli::ontology
     class Chunk: yli::ontology::Model
     {
         public:
-            // constructor.
             Chunk(const yli::ontology::ChunkStruct& chunk_struct)
                 : Model(
                         chunk_struct.universe,

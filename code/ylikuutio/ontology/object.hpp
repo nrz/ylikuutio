@@ -67,7 +67,6 @@ namespace yli::ontology
             void bind_to_new_parent(yli::ontology::Text3D* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-            // constructor.
             Object(yli::ontology::Universe* const universe, const yli::ontology::ObjectStruct& object_struct, yli::ontology::ParentModule* const parent_module)
                 : Movable(
                         universe,

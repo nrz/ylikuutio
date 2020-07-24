@@ -62,7 +62,6 @@ namespace yli::ontology
             void bind_to_new_parent(yli::ontology::Shader* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-            // constructor.
             Symbiosis(yli::ontology::Universe* universe, const yli::ontology::SymbiosisStruct& symbiosis_struct, yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, symbiosis_struct),
                 child_of_shader(parent_module, this),

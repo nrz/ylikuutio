@@ -54,7 +54,6 @@ namespace yli::ontology
     class Holobiont: public yli::ontology::Movable
     {
         public:
-            // constructor.
             Holobiont(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::HolobiontStruct& holobiont_struct,
@@ -70,6 +69,8 @@ namespace yli::ontology
                         parent_module),
                 parent_of_bionts(this)
             {
+                // constructor.
+
                 this->original_scale_vector = holobiont_struct.original_scale_vector;
                 this->rotate_vector         = holobiont_struct.rotate_vector;
                 this->translate_vector      = holobiont_struct.translate_vector;

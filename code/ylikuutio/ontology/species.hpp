@@ -56,7 +56,6 @@ namespace yli::ontology
             void bind_to_new_parent(yli::ontology::Material* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-            // constructor.
             Species(yli::ontology::Universe* const universe, const yli::ontology::SpeciesStruct& species_struct, yli::ontology::ParentModule* const parent_module)
                 : Model(universe, species_struct, species_struct.opengl_in_use, parent_module)
             {

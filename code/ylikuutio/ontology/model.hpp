@@ -49,7 +49,6 @@ namespace yli::ontology
     class Model: public yli::ontology::Entity
     {
         public:
-            // constructor.
             Model(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::ModelStruct& model_struct,

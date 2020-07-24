@@ -91,7 +91,6 @@ namespace yli::ontology
             void bind_to_new_parent(yli::ontology::World* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-            // constructor.
             Scene(yli::ontology::Universe* const universe, const yli::ontology::SceneStruct& scene_struct, yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, scene_struct),
                 child_of_world(parent_module, this),
