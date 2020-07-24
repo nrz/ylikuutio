@@ -111,7 +111,7 @@ namespace yli::hierarchy
             childID = child_pointer_vector.size();
 
             // child pointer vector must also be extended with an appropriate nullptr pointer.
-            child_pointer_vector.push_back(nullptr);
+            child_pointer_vector.emplace_back(nullptr);
 
             return childID;
         }

@@ -43,17 +43,17 @@ namespace yli::triangulation
             std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals)
     {
-        out_vertices.push_back(temp_vertices[vertex_index[0]]);
-        out_uvs.push_back(temp_uvs[uv_index[0]]);
-        out_normals.push_back(temp_normals[normal_index[0]]);
+        out_vertices.emplace_back(temp_vertices[vertex_index[0]]);
+        out_uvs.emplace_back(temp_uvs[uv_index[0]]);
+        out_normals.emplace_back(temp_normals[normal_index[0]]);
 
-        out_vertices.push_back(temp_vertices[vertex_index[1]]);
-        out_uvs.push_back(temp_uvs[uv_index[1]]);
-        out_normals.push_back(temp_normals[normal_index[1]]);
+        out_vertices.emplace_back(temp_vertices[vertex_index[1]]);
+        out_uvs.emplace_back(temp_uvs[uv_index[1]]);
+        out_normals.emplace_back(temp_normals[normal_index[1]]);
 
-        out_vertices.push_back(temp_vertices[vertex_index[2]]);
-        out_uvs.push_back(temp_uvs[uv_index[2]]);
-        out_normals.push_back(temp_normals[normal_index[2]]);
+        out_vertices.emplace_back(temp_vertices[vertex_index[2]]);
+        out_uvs.emplace_back(temp_uvs[uv_index[2]]);
+        out_normals.emplace_back(temp_normals[normal_index[2]]);
     }
 
     bool define_vertices_uvs_and_normals(

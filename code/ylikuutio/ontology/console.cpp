@@ -142,28 +142,28 @@ namespace yli::ontology
             if (my_char == '\n')
             {
                 // A newline.
-                this->console_history.push_back(text_char_list);
+                this->console_history.emplace_back(text_char_list);
                 text_char_list.clear();
                 current_line_length = 0;
             }
             else if (++current_line_length <= this->n_columns)
             {
                 // Normal case.
-                text_char_list.push_back(my_char);
+                text_char_list.emplace_back(my_char);
             }
             else
             {
                 // Newline is needed due to too long line.
-                this->console_history.push_back(text_char_list);
+                this->console_history.emplace_back(text_char_list);
                 text_char_list.clear();
-                text_char_list.push_back(my_char);
+                text_char_list.emplace_back(my_char);
                 current_line_length = 1;
             }
         }
 
         if (text_char_list.size() > 0)
         {
-            this->console_history.push_back(text_char_list);
+            this->console_history.emplace_back(text_char_list);
         }
     }
 

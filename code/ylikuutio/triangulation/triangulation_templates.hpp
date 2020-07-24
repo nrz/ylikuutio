@@ -191,7 +191,7 @@ namespace yli::triangulation
                     vertex.x = static_cast<float>(x);
                     vertex.y = static_cast<float>(y);
                     vertex.z = static_cast<float>(z);
-                    temp_vertices.push_back(vertex);
+                    temp_vertices.emplace_back(vertex);
 
                     // This corresponds to "vt": specify texture coordinates of one vertex.
                     glm::vec2 uv;
@@ -207,7 +207,7 @@ namespace yli::triangulation
                         uv.y = 0.0f;
                     }
 
-                    temp_uvs.push_back(uv);
+                    temp_uvs.emplace_back(uv);
 
                     // `uv.x` is repeated 0, 1, 0, 1 ... when moving eastward.
                     // this causes the texture be mirrored horizontally for every other quad.
@@ -289,7 +289,7 @@ namespace yli::triangulation
                     vertex.x = static_cast<float>(x) - 0.5f * x_step;
                     vertex.y = static_cast<float>(y);
                     vertex.z = static_cast<float>(z) - 0.5f * z_step;
-                    temp_vertices.push_back(vertex);
+                    temp_vertices.emplace_back(vertex);
 
                     // This corresponds to "vt": specify texture coordinates of one vertex.
                     glm::vec2 uv;
@@ -305,7 +305,7 @@ namespace yli::triangulation
                         uv.y = 0.0f;
                     }
 
-                    temp_uvs.push_back(uv);
+                    temp_uvs.emplace_back(uv);
                 }
             }
 

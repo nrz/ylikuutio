@@ -40,7 +40,7 @@ namespace yli::map
 
             for (auto key_and_value : unordered_map)
             {
-                key_vector.push_back(key_and_value.first); // key.
+                key_vector.emplace_back(key_and_value.first); // key.
             }
 
             // sort key vector alphabetically.
@@ -57,7 +57,7 @@ namespace yli::map
 
             for (auto key_and_value : unordered_map)
             {
-                key_and_value_vector.push_back(std::pair<std::string, T1>(key_and_value.first, key_and_value.second)); // key and value.
+                key_and_value_vector.emplace_back(std::pair<std::string, T1>(key_and_value.first, key_and_value.second)); // key and value.
             }
 
             // sort key and value vector alphabetically.

@@ -172,7 +172,7 @@ namespace yli::load
                         (const char* const) "space (moveto y coordinate)",
                         is_debug_mode);
 
-                vertices_of_current_edge_section.push_back(current_vertex);
+                vertices_of_current_edge_section.emplace_back(current_vertex);
 
             } // if (std::strncmp(vertex_data_pointer, "M", std::strlen("M")) == 0)
             else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
@@ -186,7 +186,7 @@ namespace yli::load
                         is_debug_mode);
 
                 current_vertex.x += horizontal_lineto_value;
-                vertices_of_current_edge_section.push_back(current_vertex);
+                vertices_of_current_edge_section.emplace_back(current_vertex);
             } // else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
             else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)
             {
@@ -199,7 +199,7 @@ namespace yli::load
                         is_debug_mode);
 
                 current_vertex.y += vertical_lineto_value;
-                vertices_of_current_edge_section.push_back(current_vertex);
+                vertices_of_current_edge_section.emplace_back(current_vertex);
             } // else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)
             else if (std::strncmp(vertex_data_pointer, "z", std::strlen("z")) == 0)
             {
@@ -208,7 +208,7 @@ namespace yli::load
                     std::cout << "z (closepath)\n";
                 }
 
-                current_glyph_vertices.push_back(vertices_of_current_edge_section); // store the vertices of the current edge section.
+                current_glyph_vertices.emplace_back(vertices_of_current_edge_section); // store the vertices of the current edge section.
                 vertices_of_current_edge_section.clear();                           // clear the vector of vertices of the current edge section.
                 vertex_data_pointer++;
             } // else if (std::strncmp(vertex_data_pointer, "z", std::strlen("z")) == 0)
@@ -410,7 +410,7 @@ namespace yli::load
                     // OK, this glyph has an unicode, so it can be stored.
                     std::string glyph_unicode_string;
                     glyph_unicode_string = char_unicode;
-                    unicode_strings.push_back(glyph_unicode_string);
+                    unicode_strings.emplace_back(glyph_unicode_string);
 
                     std::string glyph_name_string;
 
@@ -422,7 +422,7 @@ namespace yli::load
                     {
                         glyph_name_string = char_glyph_name;
                     }
-                    glyph_names.push_back(glyph_name_string);
+                    glyph_names.emplace_back(glyph_name_string);
 
                     // TODO: Create default vertex vector (no vertices), if needed.
                     if (is_debug_mode)
@@ -432,7 +432,7 @@ namespace yli::load
 
                     // Store the vertices of the current vector to the glyph vertex vector
                     // which contains the vertices of all the glyphs.
-                    out_glyph_vertex_data.push_back(current_glyph_vertices);
+                    out_glyph_vertex_data.emplace_back(current_glyph_vertices);
                 } // if (has_glyph_unicode)
                 SVG_data_pointer += std::strlen("/>");
                 return true;

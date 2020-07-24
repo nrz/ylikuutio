@@ -34,7 +34,7 @@ namespace yli::geometry
         {
             this->is_valid = false; // two identical points do not define a line.
             this->are_points_defined = false;
-            this->general_form_coefficients.push_back(NAN);
+            this->general_form_coefficients.emplace_back(NAN);
         }
         else
         {

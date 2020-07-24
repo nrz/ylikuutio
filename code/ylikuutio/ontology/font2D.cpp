@@ -281,13 +281,13 @@ namespace yli::ontology
             glm::vec2 vertex_down_left = glm::vec2(vertex_down_left_x, vertex_down_left_y);
             glm::vec2 vertex_down_right = glm::vec2(vertex_down_right_x, vertex_down_right_y);
 
-            vertices.push_back(vertex_up_left);
-            vertices.push_back(vertex_down_left);
-            vertices.push_back(vertex_up_right);
+            vertices.emplace_back(vertex_up_left);
+            vertices.emplace_back(vertex_down_left);
+            vertices.emplace_back(vertex_up_right);
 
-            vertices.push_back(vertex_down_right);
-            vertices.push_back(vertex_up_right);
-            vertices.push_back(vertex_down_left);
+            vertices.emplace_back(vertex_down_right);
+            vertices.emplace_back(vertex_up_right);
+            vertices.emplace_back(vertex_down_left);
 
             float uv_x = (character % font_size) / static_cast<float>(font_size);
             float uv_y;
@@ -314,13 +314,13 @@ namespace yli::ontology
                 uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(font_size)), (uv_y - 1.0f / static_cast<float>(font_size)));
                 uv_down_left = glm::vec2(uv_x, (uv_y - 1.0f / static_cast<float>(font_size)));
             }
-            UVs.push_back(uv_up_left);
-            UVs.push_back(uv_down_left);
-            UVs.push_back(uv_up_right);
+            UVs.emplace_back(uv_up_left);
+            UVs.emplace_back(uv_down_left);
+            UVs.emplace_back(uv_up_right);
 
-            UVs.push_back(uv_down_right);
-            UVs.push_back(uv_up_right);
-            UVs.push_back(uv_down_left);
+            UVs.emplace_back(uv_down_right);
+            UVs.emplace_back(uv_up_right);
+            UVs.emplace_back(uv_down_left);
         }
 
         glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);

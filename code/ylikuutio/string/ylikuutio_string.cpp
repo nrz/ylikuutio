@@ -1058,7 +1058,7 @@ namespace yli::string
         {
             if (remaining_characters_on_this_line == 0)
             {
-                my_vector.push_back(my_string);
+                my_vector.emplace_back(my_string);
                 my_string.clear();
                 remaining_characters_on_this_line = line_length;
             }
@@ -1068,7 +1068,7 @@ namespace yli::string
 
         if (my_string.size() > 0)
         {
-            my_vector.push_back(my_string);
+            my_vector.emplace_back(my_string);
         }
 
         return my_vector;

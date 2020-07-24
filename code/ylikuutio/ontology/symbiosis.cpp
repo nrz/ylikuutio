@@ -201,7 +201,7 @@ namespace yli::ontology
 
             for (auto key_and_value : this->ofbx_diffuse_texture_mesh_map)
             {
-                ofbx_diffuse_texture_pointer_vector.push_back(key_and_value.first); // key.
+                ofbx_diffuse_texture_pointer_vector.emplace_back(key_and_value.first); // key.
             }
 
             yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->child_of_shader.get_parent());

@@ -96,11 +96,11 @@ namespace yli::callback
             if (callback_object_pointer != nullptr)
             {
                 return_any_value = callback_object_pointer->execute(any_value);
-                this->return_values.push_back(return_any_value);
+                this->return_values.emplace_back(return_any_value);
             }
             else
             {
-                this->return_values.push_back(nullptr);
+                this->return_values.emplace_back(nullptr);
             }
         }
 

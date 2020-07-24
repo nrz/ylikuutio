@@ -108,16 +108,16 @@ namespace yli::triangulation
                     const glm::vec3& northeast_edge = temp_vertices[northeast(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
 
                     // Compute the normal of S face.
-                    face_normal_vector_vec3.push_back(glm::normalize(glm::cross(southeast_edge, southwest_edge)));
+                    face_normal_vector_vec3.emplace_back(glm::normalize(glm::cross(southeast_edge, southwest_edge)));
 
                     // Compute the normal of W face.
-                    face_normal_vector_vec3.push_back(glm::normalize(glm::cross(southwest_edge, northwest_edge)));
+                    face_normal_vector_vec3.emplace_back(glm::normalize(glm::cross(southwest_edge, northwest_edge)));
 
                     // Compute the normal of N face.
-                    face_normal_vector_vec3.push_back(glm::normalize(glm::cross(northwest_edge, northeast_edge)));
+                    face_normal_vector_vec3.emplace_back(glm::normalize(glm::cross(northwest_edge, northeast_edge)));
 
                     // Compute the normal of E face.
-                    face_normal_vector_vec3.push_back(glm::normalize(glm::cross(northeast_edge, southeast_edge)));
+                    face_normal_vector_vec3.emplace_back(glm::normalize(glm::cross(northeast_edge, southeast_edge)));
                 }
                 else if (is_southwest_northeast_edges_in_use)
                 {
@@ -129,13 +129,13 @@ namespace yli::triangulation
                     edge1 = temp_vertices[southwest(current_vertex_i, actual_image_width)] - temp_vertices[southeast(current_vertex_i, actual_image_width)];
                     edge2 = temp_vertices[northeast(current_vertex_i, actual_image_width)] - temp_vertices[southeast(current_vertex_i, actual_image_width)];
                     face_normal = glm::normalize(glm::cross(edge1, edge2));
-                    face_normal_vector_vec3.push_back(face_normal);
+                    face_normal_vector_vec3.emplace_back(face_normal);
 
                     // Compute the normal of NW face.
                     edge1 = temp_vertices[northeast(current_vertex_i, actual_image_width)] - temp_vertices[northwest(current_vertex_i, actual_image_width)];
                     edge2 = temp_vertices[southwest(current_vertex_i, actual_image_width)] - temp_vertices[northwest(current_vertex_i, actual_image_width)];
                     face_normal = glm::normalize(glm::cross(edge1, edge2));
-                    face_normal_vector_vec3.push_back(face_normal);
+                    face_normal_vector_vec3.emplace_back(face_normal);
                 }
                 else if (is_southeast_northwest_edges_in_use)
                 {
@@ -147,13 +147,13 @@ namespace yli::triangulation
                     edge1 = temp_vertices[northwest(current_vertex_i, actual_image_width)] - temp_vertices[southwest(current_vertex_i, actual_image_width)];
                     edge2 = temp_vertices[southeast(current_vertex_i, actual_image_width)] - temp_vertices[southwest(current_vertex_i, actual_image_width)];
                     face_normal = glm::normalize(glm::cross(edge1, edge2));
-                    face_normal_vector_vec3.push_back(face_normal);
+                    face_normal_vector_vec3.emplace_back(face_normal);
 
                     // Compute the normal of NE face.
                     edge1 = temp_vertices[southeast(current_vertex_i, actual_image_width)] - temp_vertices[northeast(current_vertex_i, actual_image_width)];
                     edge2 = temp_vertices[northwest(current_vertex_i, actual_image_width)] - temp_vertices[northeast(current_vertex_i, actual_image_width)];
                     face_normal = glm::normalize(glm::cross(edge1, edge2));
-                    face_normal_vector_vec3.push_back(face_normal);
+                    face_normal_vector_vec3.emplace_back(face_normal);
                 }
 
                 current_interpolated_vertex_i++;

@@ -36,14 +36,14 @@ namespace yli::linear_algebra
             {
                 for (const T1& left_value : left_filler_vector)
                 {
-                    output_vector->push_back(left_value);
+                    output_vector->emplace_back(left_value);
                 }
 
-                output_vector->push_back(data);
+                output_vector->emplace_back(data);
 
                 for (const T1& right_value : right_filler_vector)
                 {
-                    output_vector->push_back(right_value);
+                    output_vector->emplace_back(right_value);
                 }
             }
 

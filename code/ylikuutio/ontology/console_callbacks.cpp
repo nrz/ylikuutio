@@ -545,7 +545,7 @@ namespace yli::ontology
         std::string input_string(console->current_input.begin(), console->current_input.end());
 
         // Copy current input into the command history.
-        console->command_history.push_back(console->current_input);
+        console->command_history.emplace_back(console->current_input);
 
         // Prefix current input with the prompt, for saving into `console_history`.
         std::list<char>::iterator it = console->current_input.begin();
@@ -557,21 +557,21 @@ namespace yli::ontology
 
         std::list<char> current_input_char_list;
 
-        // Split into lines, push_back each line into `console_history` separately.
+        // Split into lines, emplace_back each line into `console_history` separately.
         for (const char& my_char : console->current_input)
         {
-            current_input_char_list.push_back(my_char);
+            current_input_char_list.emplace_back(my_char);
 
             if (current_input_char_list.size () >= console->n_columns)
             {
-                console->console_history.push_back(current_input_char_list);
+                console->console_history.emplace_back(current_input_char_list);
                 current_input_char_list.clear();
             }
         }
 
         if (current_input_char_list.size() > 0)
         {
-            console->console_history.push_back(current_input_char_list);
+            console->console_history.emplace_back(current_input_char_list);
         }
 
         std::vector<std::string> parameter_vector;
