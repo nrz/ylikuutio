@@ -127,7 +127,7 @@ namespace yli::ontology
                 }
                 else
                 {
-                    this->dynamics_world = std::make_shared<btDiscreteDynamicsWorld>(
+                    this->dynamics_world = std::make_unique<btDiscreteDynamicsWorld>(
                             this->universe->get_dispatcher(),
                             this->universe->get_overlapping_pair_cache(),
                             this->universe->get_solver(),
@@ -228,7 +228,7 @@ namespace yli::ontology
             // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
             yli::data::SphericalCoordinatesStruct* spherical_coordinates;
 
-            std::shared_ptr<btDiscreteDynamicsWorld> dynamics_world;
+            std::unique_ptr<btDiscreteDynamicsWorld> dynamics_world;
 
             float horizontal_angle;
             float vertical_angle;
