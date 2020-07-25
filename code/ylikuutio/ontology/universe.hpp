@@ -774,7 +774,7 @@ namespace yli::ontology
             std::shared_ptr<btSequentialImpulseConstraintSolver> solver;
 
             // variables related to the window.
-            std::shared_ptr<SDL_GLContext> context;
+            std::unique_ptr<SDL_GLContext> context;
             SDL_Window* window;
             uint32_t window_width;
             uint32_t window_height;
