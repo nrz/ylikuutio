@@ -38,7 +38,7 @@
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstddef>       // std::size_t
-#include <memory>        // std::make_shared, std::shared_ptr
+#include <memory>        // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
 #include <queue>         // std::priority_queue, std::queue
 #include <string>        // std::string
 #include <vector>        // std::vector

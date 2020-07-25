@@ -45,7 +45,7 @@
 #include <cstddef>       // std::size_t
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
-#include <memory>        // std::make_shared, std::shared_ptr
+#include <memory>        // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
 #include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
