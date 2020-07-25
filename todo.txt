@@ -5,7 +5,11 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size.
 [ ] Fix compiling on Visual Studio.
 
-Tasks which are necessary for the first stage:
+Tasks which are necessary for the first stage (Hirvi prototype):
+[ ] Implement processing of command line arguments using callbacks in `yli::command_line::CommandLineMaster`.
+[ ] Implement `int main(const int argc, const char* const argv[])` function with `try` & `catch` in new function file `code/ylikuutio/core/entrypoint.hpp`.
+[ ] Implement `yli::ontology::Application` class that inherits `yli::ontology::Entity` and binds to the `yli::ontology::Universe`.
+[ ] Implement processing command line arguments in the `yli::ontology::Application` class based on the data received from the application itself (as before).
 [ ] Implement `yli::ontology::HeightmapStruct` that inherits `yli::ontology::EntityStruct`, to support heightmaps consisting of several sheets.
 [ ] Implement `yli::ontology::Heightmap` class that inherits `yli::ontology::Entity`, to support heightmaps consisting of several sheets.
 [ ] Implement `yli::ontology::HeightmapSheet` class that inherits `yli::ontology::Species`, to handle each sheet of a multisheet heightmap.
@@ -63,7 +67,6 @@ Tasks which are necessary for the third stage:
 [ ] Upgrade CMake to at least 3.16 to enable support of precompiled headers directly in CMake.
 [ ] Use precompiled headers with `target_precompile_headers` in CMake: https://cmake.org/cmake/help/git-stage/command/target_precompile_headers.html
 [ ] Add support for vector fonts.
-[ ] Implement `yli::ontology::Multiverse` class.
 [ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
 [ ] Evaluate ZeroMQ: https://zeromq.org/
 [ ] Evaluate SDL_net: https://www.libsdl.org/projects/SDL_net/
@@ -72,11 +75,30 @@ Tasks which are necessary for the third stage:
 [ ] Evaluate kNet (network library): https://github.com/juj/kNet/ (used by Urho3D: https://urho3d.github.io/ )
 [ ] Implement chat server using the chosen network library.
 [ ] Implement chat client using the chosen network library.
-[ ] Implement YliServer.
+[ ] Implement software rendering.
+[ ] Use dependency injection to select between OpenGL/software rendering (software rendering may render into a video file or a into a series of image files).
+
+Tasks which are necessary for Tulevaisuus:
+[ ] Split `ylikuutio` library into `yli_core`, `yli_opengl`, `yli_network`, `yli_server`, and `yli_client` libraries. All libraries depend on `yli_core`.
+[ ] Make `yli_server` depend on `yli_core` and `yli_network`.
+[ ] Make `yli_client` depend on `yli_core` and `yli_network`.
+[ ] Make `hirvi` to depend on `yli_core` and `yli_opengl`.
+[ ] Make `gpgpu_test` to depend on `yli_core` and `yli_opengl`.
+[ ] Make `tulevaisuus` to depend on `yli_core`, `yli_opengl`, and `yli_client`.
+[ ] Make `tulevaisuus_server` to depend on `yli_core`, `yli_opengl`, and `yli_server`.
+[ ] Implement turn file sending over the network into `yli_client`.
+[ ] Implement turn file receiving over the network into `yli_server`.
+[ ] Implement processing of turn files in `yli_server`.
+[ ] Implement `yli::ontology::Multiverse` class.
+[ ] In `yli_server`, implement creation of the master `Universe`, that is a child of the `Multiverse` and knows everything..
+[ ] In `yli_server`, implement creation of apprentice `Universe`s, one for each player.
+[ ] In `yli_server`, implement computing turn outputs to each human and AI player, using software rendering for computing visual detection and rendering turn videos.
+[ ] In `yli_server`, implement master-apprentice relationship between the master `Universe` and apprentice `Universe`s.
+[ ] In `yli_server`, implement producing result files for players.
+[ ] In `yli_server`, implement sending result files for players over the network.
 
 Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement custom memory allocator.
-[ ] Split `ylikuutio` library into `yli_core`, `yli_server`, and `yli_client` libraries. `yli_server` and `yli_client` both depend on `yli_core`.
 [ ] Add support for hexadecimal input in `set` console command.
 [ ] Implement `yli::ontology::ShaderSymbiosis`.
 [ ] Implement a custom FBX loader.
