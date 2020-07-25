@@ -478,10 +478,10 @@ namespace yli::ontology
                 }
 
                 // Bullet variables.
-                this->collision_configuration = std::make_shared<btDefaultCollisionConfiguration>();
-                this->dispatcher              = std::make_shared<btCollisionDispatcher>(this->collision_configuration.get());
-                this->overlapping_pair_cache  = std::make_shared<btDbvtBroadphase>();
-                this->solver                  = std::make_shared<btSequentialImpulseConstraintSolver>();
+                this->collision_configuration = std::make_unique<btDefaultCollisionConfiguration>();
+                this->dispatcher              = std::make_unique<btCollisionDispatcher>(this->collision_configuration.get());
+                this->overlapping_pair_cache  = std::make_unique<btDbvtBroadphase>();
+                this->solver                  = std::make_unique<btSequentialImpulseConstraintSolver>();
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Universe*";
@@ -768,10 +768,10 @@ namespace yli::ontology
             std::shared_ptr<yli::input::InputMaster> input_master; // pointer to `InputMaster`.
 
             // Bullet variables.
-            std::shared_ptr<btDefaultCollisionConfiguration> collision_configuration;
-            std::shared_ptr<btCollisionDispatcher> dispatcher;
-            std::shared_ptr<btBroadphaseInterface> overlapping_pair_cache;
-            std::shared_ptr<btSequentialImpulseConstraintSolver> solver;
+            std::unique_ptr<btDefaultCollisionConfiguration> collision_configuration;
+            std::unique_ptr<btCollisionDispatcher> dispatcher;
+            std::unique_ptr<btBroadphaseInterface> overlapping_pair_cache;
+            std::unique_ptr<btSequentialImpulseConstraintSolver> solver;
 
             // variables related to the window.
             std::unique_ptr<SDL_GLContext> context;
