@@ -474,7 +474,7 @@ namespace yli::ontology
                 }
                 else
                 {
-                    this->input_master = std::make_shared<yli::input::InputMaster>(this);
+                    this->input_master = std::make_unique<yli::input::InputMaster>(this);
                 }
 
                 // Bullet variables.
@@ -765,7 +765,7 @@ namespace yli::ontology
 
             std::unique_ptr<yli::audio::AudioMaster> audio_master; // pointer to `AudioMaster`.
 
-            std::shared_ptr<yli::input::InputMaster> input_master; // pointer to `InputMaster`.
+            std::unique_ptr<yli::input::InputMaster> input_master; // pointer to `InputMaster`.
 
             // Bullet variables.
             std::unique_ptr<btDefaultCollisionConfiguration> collision_configuration;
