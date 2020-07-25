@@ -319,7 +319,7 @@ namespace yli::ontology
                 // call `set_global_name` here because it can't be done in `Entity` constructor.
                 this->set_global_name(universe_struct.global_name);
 
-                this->entity_factory = std::make_shared<yli::ontology::EntityFactory>(this);
+                this->entity_factory = std::make_unique<yli::ontology::EntityFactory>(this);
 
                 this->current_camera_cartesian_coordinates = glm::vec3(NAN, NAN, NAN); // dummy coordinates.
 
@@ -753,7 +753,7 @@ namespace yli::ontology
 
             bool compute_and_update_matrices_from_inputs();
 
-            std::shared_ptr<yli::ontology::EntityFactory> entity_factory;
+            std::unique_ptr<yli::ontology::EntityFactory> entity_factory;
 
             std::vector<yli::ontology::Entity*> entity_pointer_vector;
             std::queue<std::size_t> free_entityID_queue;
