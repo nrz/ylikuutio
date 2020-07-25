@@ -464,7 +464,7 @@ namespace yli::ontology
                 }
                 else
                 {
-                    this->audio_master = std::make_shared<yli::audio::AudioMaster>(this);
+                    this->audio_master = std::make_unique<yli::audio::AudioMaster>(this);
                 }
 
                 if (this->is_headless)
@@ -763,7 +763,7 @@ namespace yli::ontology
             yli::ontology::Font2D* active_font2D;
             yli::ontology::Console* active_console;
 
-            std::shared_ptr<yli::audio::AudioMaster> audio_master; // pointer to `AudioMaster`.
+            std::unique_ptr<yli::audio::AudioMaster> audio_master; // pointer to `AudioMaster`.
 
             std::shared_ptr<yli::input::InputMaster> input_master; // pointer to `InputMaster`.
 
