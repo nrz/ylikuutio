@@ -28,7 +28,6 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
-#include <functional>    // std::function
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
 #include <list>          // std::list
@@ -88,7 +87,6 @@ namespace yli::ontology
     class Console: public yli::ontology::Entity
     {
         public:
-            // constructor.
             Console(yli::ontology::Universe* const universe,
                     const yli::ontology::ConsoleStruct& console_struct,
                     yli::ontology::ParentModule* const parent_module)

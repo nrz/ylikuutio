@@ -105,11 +105,11 @@ namespace yli::graph
         {
             // OK, it does not exist yet,
             // so create a link from this node to destination node.
-            this->neighbor_nodeIDs.push_back(nodeID);
+            this->neighbor_nodeIDs.emplace_back(nodeID);
         }
 
         // an alternative: create a link from this node to destination node without checking its prior existence.
-        // this->neighbor_nodeIDs.push_back(nodeID);
+        // this->neighbor_nodeIDs.emplace_back(nodeID);
     }
 
     void Node::create_bidirectional_link(std::size_t nodeID)

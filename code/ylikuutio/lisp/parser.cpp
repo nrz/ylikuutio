@@ -49,7 +49,7 @@ namespace yli::lisp
             else
             {
                 // The rest non-empty tokens are the parameters.
-                parameter_vector.push_back(token);
+                parameter_vector.emplace_back(token);
             }
         }
 

@@ -43,7 +43,6 @@ namespace yli::ontology
     class SymbiontMaterial: public yli::ontology::Material
     {
         public:
-            // constructor.
             SymbiontMaterial(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::MaterialStruct& material_struct,

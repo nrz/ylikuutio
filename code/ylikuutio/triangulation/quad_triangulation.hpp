@@ -166,12 +166,12 @@ namespace yli::triangulation
             std::vector<glm::vec3> temp_normals;
 
             // Processing stages:
-            // 1. Define the (float) vertices for vertices loaded from file, `push_back` to `temp_vertices` and `temp_uvs`.
-            // 2. Interpolate the (float) vertices between, using bilinear interpolation, `push_back` to `temp_vertices` and `temp_uvs`.
+            // 1. Define the (float) vertices for vertices loaded from file, `emplace_back` to `temp_vertices` and `temp_uvs`.
+            // 2. Interpolate the (float) vertices between, using bilinear interpolation, `emplace_back` to `temp_vertices` and `temp_uvs`.
             // 3a. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
             // 3b. For bilinear interpolation: Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
-            // 4. Compute the face normals, `push_back` to `face_normals`.
-            // 5. Compute the vertex normals for vertices loaded from file and for interpolated vertices (for `"bilinear_interpolation"`), `push_back` to `temp_normals`.
+            // 4. Compute the face normals, `emplace_back` to `face_normals`.
+            // 5. Compute the vertex normals for vertices loaded from file and for interpolated vertices (for `"bilinear_interpolation"`), `emplace_back` to `temp_normals`.
             // 6. Loop through all vertices and `yli::geometry::output_triangle_vertices`.
             //
             // stg. `"bilinear_interpolation"`                                      `"southwest_northeast_edges"`               `"southeast_northwest_edges"`
@@ -184,7 +184,7 @@ namespace yli::triangulation
             //
             // stg. = stage
 
-            // 1. Define the vertices for vertices loaded from file, `push_back` to `temp_vertices`.
+            // 1. Define the vertices for vertices loaded from file, `emplace_back` to `temp_vertices`.
 
             if (!yli::triangulation::define_vertices(
                         input_vertex_pointer,
@@ -211,7 +211,7 @@ namespace yli::triangulation
 
             if (is_bilinear_interpolation_in_use)
             {
-                // 2. Interpolate the vertices between, using bilinear interpolation, `push_back` to `temp_vertices`.
+                // 2. Interpolate the vertices between, using bilinear interpolation, `emplace_back` to `temp_vertices`.
                 if (!yli::triangulation::interpolate_and_define_vertices_using_bilinear_interpolation(
                             input_vertex_pointer,
                             image_width,
@@ -252,7 +252,7 @@ namespace yli::triangulation
                 std::cout << "No coordinate transformation is needed.\n";
             }
 
-            // 4. Compute the face normals, `push_back` to `face_normals`.
+            // 4. Compute the face normals, `emplace_back` to `face_normals`.
             // Triangle order: S - W - N - E.
             //
             // First triangle: center, southeast, southwest.
@@ -276,7 +276,7 @@ namespace yli::triangulation
                 return false;
             }
 
-            // 5. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
+            // 5. Compute the vertex normals for vertices loaded from file, `emplace_back` to `temp_normals`.
             if (!yli::triangulation::compute_vertex_normals(
                         temp_normals,
                         face_normal_vector_vec3,

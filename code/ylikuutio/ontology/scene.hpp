@@ -38,7 +38,7 @@
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstddef>       // std::size_t
-#include <memory>        // std::make_shared, std::shared_ptr
+#include <memory>        // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
 #include <queue>         // std::priority_queue, std::queue
 #include <string>        // std::string
 #include <vector>        // std::vector
@@ -91,7 +91,6 @@ namespace yli::ontology
             void bind_to_new_parent(yli::ontology::World* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-            // constructor.
             Scene(yli::ontology::Universe* const universe, const yli::ontology::SceneStruct& scene_struct, yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, scene_struct),
                 child_of_world(parent_module, this),
@@ -128,7 +127,7 @@ namespace yli::ontology
                 }
                 else
                 {
-                    this->dynamics_world = std::make_shared<btDiscreteDynamicsWorld>(
+                    this->dynamics_world = std::make_unique<btDiscreteDynamicsWorld>(
                             this->universe->get_dispatcher(),
                             this->universe->get_overlapping_pair_cache(),
                             this->universe->get_solver(),
@@ -229,7 +228,7 @@ namespace yli::ontology
             // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
             yli::data::SphericalCoordinatesStruct* spherical_coordinates;
 
-            std::shared_ptr<btDiscreteDynamicsWorld> dynamics_world;
+            std::unique_ptr<btDiscreteDynamicsWorld> dynamics_world;
 
             float horizontal_angle;
             float vertical_angle;

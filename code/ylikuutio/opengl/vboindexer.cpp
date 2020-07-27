@@ -123,16 +123,16 @@ namespace yli::opengl
             if (found)
             {
                 // A similar vertex is already in the VBO, use it instead !
-                out_indices.push_back(index);
+                out_indices.emplace_back(index);
             }
             else
             {
                 // If not, it needs to be added in the output data.
-                out_vertices.push_back(in_vertices[i]);
-                out_uvs.push_back(in_UVs[i]);
-                out_normals.push_back(in_normals[i]);
+                out_vertices.emplace_back(in_vertices[i]);
+                out_uvs.emplace_back(in_UVs[i]);
+                out_normals.emplace_back(in_normals[i]);
                 uint32_t newindex = (uint32_t) out_vertices.size() - 1;
-                out_indices.push_back(newindex);
+                out_indices.emplace_back(newindex);
                 VertexToOutIndex[packed] = newindex;
             }
         }

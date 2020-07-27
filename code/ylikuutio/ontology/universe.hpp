@@ -45,7 +45,7 @@
 #include <cstddef>       // std::size_t
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
-#include <memory>        // std::make_shared, std::shared_ptr
+#include <memory>        // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
 #include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
@@ -303,7 +303,6 @@ namespace yli::ontology
 
             void unbind_entity(const std::size_t entityID);
 
-            // constructor.
             Universe(const yli::ontology::UniverseStruct& universe_struct)
                 : Entity(this, universe_struct), // `Universe` has no parent.
                 parent_of_worlds(this),
@@ -312,13 +311,15 @@ namespace yli::ontology
                 parent_of_any_value_entities(this),
                 parent_of_callback_engine_entities(this)
             {
+                // constructor.
+
                 // call `bind_entity` here since it couldn't be performed from `Entity` constructor.
                 this->bind_entity(this);
 
                 // call `set_global_name` here because it can't be done in `Entity` constructor.
                 this->set_global_name(universe_struct.global_name);
 
-                this->entity_factory = std::make_shared<yli::ontology::EntityFactory>(this);
+                this->entity_factory = std::make_unique<yli::ontology::EntityFactory>(this);
 
                 this->current_camera_cartesian_coordinates = glm::vec3(NAN, NAN, NAN); // dummy coordinates.
 
@@ -463,7 +464,7 @@ namespace yli::ontology
                 }
                 else
                 {
-                    this->audio_master = std::make_shared<yli::audio::AudioMaster>(this);
+                    this->audio_master = std::make_unique<yli::audio::AudioMaster>(this);
                 }
 
                 if (this->is_headless)
@@ -473,14 +474,14 @@ namespace yli::ontology
                 }
                 else
                 {
-                    this->input_master = std::make_shared<yli::input::InputMaster>(this);
+                    this->input_master = std::make_unique<yli::input::InputMaster>(this);
                 }
 
                 // Bullet variables.
-                this->collision_configuration = std::make_shared<btDefaultCollisionConfiguration>();
-                this->dispatcher              = std::make_shared<btCollisionDispatcher>(this->collision_configuration.get());
-                this->overlapping_pair_cache  = std::make_shared<btDbvtBroadphase>();
-                this->solver                  = std::make_shared<btSequentialImpulseConstraintSolver>();
+                this->collision_configuration = std::make_unique<btDefaultCollisionConfiguration>();
+                this->dispatcher              = std::make_unique<btCollisionDispatcher>(this->collision_configuration.get());
+                this->overlapping_pair_cache  = std::make_unique<btDbvtBroadphase>();
+                this->solver                  = std::make_unique<btSequentialImpulseConstraintSolver>();
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Universe*";
@@ -752,7 +753,7 @@ namespace yli::ontology
 
             bool compute_and_update_matrices_from_inputs();
 
-            std::shared_ptr<yli::ontology::EntityFactory> entity_factory;
+            std::unique_ptr<yli::ontology::EntityFactory> entity_factory;
 
             std::vector<yli::ontology::Entity*> entity_pointer_vector;
             std::queue<std::size_t> free_entityID_queue;
@@ -762,18 +763,18 @@ namespace yli::ontology
             yli::ontology::Font2D* active_font2D;
             yli::ontology::Console* active_console;
 
-            std::shared_ptr<yli::audio::AudioMaster> audio_master; // pointer to `AudioMaster`.
+            std::unique_ptr<yli::audio::AudioMaster> audio_master; // pointer to `AudioMaster`.
 
-            std::shared_ptr<yli::input::InputMaster> input_master; // pointer to `InputMaster`.
+            std::unique_ptr<yli::input::InputMaster> input_master; // pointer to `InputMaster`.
 
             // Bullet variables.
-            std::shared_ptr<btDefaultCollisionConfiguration> collision_configuration;
-            std::shared_ptr<btCollisionDispatcher> dispatcher;
-            std::shared_ptr<btBroadphaseInterface> overlapping_pair_cache;
-            std::shared_ptr<btSequentialImpulseConstraintSolver> solver;
+            std::unique_ptr<btDefaultCollisionConfiguration> collision_configuration;
+            std::unique_ptr<btCollisionDispatcher> dispatcher;
+            std::unique_ptr<btBroadphaseInterface> overlapping_pair_cache;
+            std::unique_ptr<btSequentialImpulseConstraintSolver> solver;
 
             // variables related to the window.
-            std::shared_ptr<SDL_GLContext> context;
+            std::unique_ptr<SDL_GLContext> context;
             SDL_Window* window;
             uint32_t window_width;
             uint32_t window_height;

@@ -158,7 +158,7 @@ namespace yli::load
         {
             // vertices.
             glm::vec3 vertex = { vertices[i].x, vertices[i].y, vertices[i].z };
-            out_vertices.push_back(vertex);
+            out_vertices.emplace_back(vertex);
         }
 
         const ofbx::Vec2* uvs = geometry->getUVs();
@@ -174,7 +174,7 @@ namespace yli::load
             {
                 // UVs.
                 glm::vec2 uv = { uvs[vertex_i].x, uvs[vertex_i].y };
-                out_uvs.push_back(uv);
+                out_uvs.emplace_back(uv);
             }
         }
 
@@ -182,7 +182,7 @@ namespace yli::load
         {
             // Normals.
             glm::vec3 normal = { normals[i].x, normals[i].y, normals[i].z };
-            out_normals.push_back(normal);
+            out_normals.emplace_back(normal);
         }
 
         return true;

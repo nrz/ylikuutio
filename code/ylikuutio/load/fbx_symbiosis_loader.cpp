@@ -182,14 +182,14 @@ namespace yli::load
                         std::cout << "Adding mesh " << mesh_i << " to DIFFUSE texture at " << std::hex << (void*) diffuse_texture << std::dec << "\n";
                     }
 
-                    ofbx_diffuse_texture_mesh_map[diffuse_texture].push_back(mesh_i);
+                    ofbx_diffuse_texture_mesh_map[diffuse_texture].emplace_back(mesh_i);
 
                     if (is_debug_mode)
                     {
                         std::cout << "Adding mesh " << mesh_i << " to DIFFUSE textures.\n";
                     }
 
-                    ofbx_diffuse_texture_vector.push_back(diffuse_texture);
+                    ofbx_diffuse_texture_vector.emplace_back(diffuse_texture);
                 }
 
                 const ofbx::Texture* normal_texture = material->getTexture(ofbx::Texture::NORMAL);
@@ -215,7 +215,7 @@ namespace yli::load
                         std::cout << "Adding mesh " << mesh_i << " to NORMAL textures.\n";
                     }
 
-                    ofbx_normal_texture_vector.push_back(normal_texture);
+                    ofbx_normal_texture_vector.emplace_back(normal_texture);
                 }
 
                 const ofbx::Texture* count_texture = material->getTexture(ofbx::Texture::COUNT);
@@ -240,7 +240,7 @@ namespace yli::load
                     {
                         std::cout << "Adding mesh " << mesh_i << " to COUNT textures.\n";
                     }
-                    ofbx_count_texture_vector.push_back(count_texture);
+                    ofbx_count_texture_vector.emplace_back(count_texture);
                 }
             }
 
@@ -281,10 +281,10 @@ namespace yli::load
             {
                 // vertices.
                 glm::vec3 vertex = { vertices[i].x, vertices[i].y, vertices[i].z };
-                mesh_out_vertices.push_back(vertex);
+                mesh_out_vertices.emplace_back(vertex);
             }
 
-            out_vertices.push_back(mesh_out_vertices);
+            out_vertices.emplace_back(mesh_out_vertices);
 
             std::vector<glm::vec2> mesh_out_uvs;
 
@@ -301,11 +301,11 @@ namespace yli::load
                 {
                     // UVs.
                     glm::vec2 uv = { uvs[vertex_i].x, uvs[vertex_i].y };
-                    mesh_out_uvs.push_back(uv);
+                    mesh_out_uvs.emplace_back(uv);
                 }
             }
 
-            out_uvs.push_back(mesh_out_uvs);
+            out_uvs.emplace_back(mesh_out_uvs);
 
             std::vector<glm::vec3> mesh_out_normals;
 
@@ -313,10 +313,10 @@ namespace yli::load
             {
                 // Normals.
                 glm::vec3 normal = { normals[i].x, normals[i].y, normals[i].z };
-                mesh_out_normals.push_back(normal);
+                mesh_out_normals.emplace_back(normal);
             }
 
-            out_normals.push_back(mesh_out_normals);
+            out_normals.emplace_back(mesh_out_normals);
         }
 
         return true;

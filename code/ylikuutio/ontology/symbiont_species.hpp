@@ -59,7 +59,6 @@ namespace yli::ontology
             std::size_t get_indices_size() const;
             GLint get_light_id() const;
 
-            // constructor.
             SymbiontSpecies(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::SpeciesStruct& species_struct,

@@ -32,12 +32,12 @@
 TEST(line2D_must_be_defined_as_expected, line2D_std_vector_float_x1_0_y1_0_x2_1_y2_1)
 {
     std::vector<float> point1;
-    point1.push_back(0.0f); // x = 0.0
-    point1.push_back(0.0f); // y = 0.0
+    point1.emplace_back(0.0f); // x = 0.0
+    point1.emplace_back(0.0f); // y = 0.0
 
     std::vector<float> point2;
-    point2.push_back(1.0f); // x = 1.0
-    point2.push_back(1.0f); // y = 1.0
+    point2.emplace_back(1.0f); // x = 1.0
+    point2.emplace_back(1.0f); // y = 1.0
 
     const yli::geometry::Line2D line1 = yli::geometry::Line2D(point1, point2);
     ASSERT_EQ(line1.x1, 0.0f);
@@ -120,14 +120,14 @@ TEST(line2D_must_be_defined_as_expected, line2D_x1_340_y1_150_x2_100_y2_50)
     std::vector<float> point1;
     float x1 = 340.0f;
     float y1 = 150.0f;
-    point1.push_back(x1); // x = 340.0
-    point1.push_back(y1); // y = 150.0
+    point1.emplace_back(x1); // x = 340.0
+    point1.emplace_back(y1); // y = 150.0
 
     std::vector<float> point2;
     float x2 = 100.0f;
     float y2 = 50.0f;
-    point2.push_back(x2); // x = 100.0
-    point2.push_back(y2); // y = 50.0
+    point2.emplace_back(x2); // x = 100.0
+    point2.emplace_back(y2); // y = 50.0
 
     const yli::geometry::Line2D* const line1 = new yli::geometry::Line2D(point1, point2);
     const yli::geometry::Line2D* const line2 = new yli::geometry::Line2D(std::vector<float>{ x1, y1 }, std::vector<float>{ x2, y2 });

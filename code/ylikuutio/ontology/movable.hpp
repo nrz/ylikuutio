@@ -70,7 +70,6 @@ namespace yli::ontology
             // This method sets pointer to this `Movable` to `nullptr`, sets `brain` according to the input, and requests a new `apprenticeID` from the new `Brain`.
             void bind_to_new_brain(yli::ontology::Brain* const new_brain);
 
-            // constructor.
             Movable(yli::ontology::Universe* const universe,
                     const yli::ontology::MovableStruct& movable_struct,
                     yli::ontology::ParentModule* const parent_module)

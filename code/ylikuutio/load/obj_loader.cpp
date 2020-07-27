@@ -111,7 +111,7 @@ namespace yli::load
                 // vt 0.748573 0.750412
                 glm::vec2 uv;
                 current_line_stringstream >> prefix >> uv.x >> uv.y;
-                temp_uvs.push_back(uv);
+                temp_uvs.emplace_back(uv);
             }
             else if (current_line_string.compare(0, std::strlen("vn"), "vn") == 0)
             {
@@ -121,7 +121,7 @@ namespace yli::load
                 // vn 0.000000 0.000000 -1.000000
                 glm::vec3 normal;
                 current_line_stringstream >> prefix >> normal.x >> normal.y >> normal.z;
-                temp_normals.push_back(normal);
+                temp_normals.emplace_back(normal);
             }
             else if (current_line_string.compare(0, std::strlen("v"), "v") == 0)
             {
@@ -131,7 +131,7 @@ namespace yli::load
                 // v 1.000000 -1.000000 -1.000000
                 glm::vec3 vertex;
                 current_line_stringstream >> prefix >> vertex.x >> vertex.y >> vertex.z;
-                temp_vertices.push_back(vertex);
+                temp_vertices.emplace_back(vertex);
             }
             else if (current_line_string.compare(0, std::strlen("f"), "f") == 0)
             {
@@ -149,15 +149,15 @@ namespace yli::load
                 int32_t normal_i2;
                 int32_t normal_i3;
                 current_line_stringstream >> prefix >> vertex_i1 >> uv_i1 >> normal_i1 >> vertex_i2 >> uv_i2 >> normal_i2 >> vertex_i3 >> uv_i3 >> normal_i3;
-                vertex_indices.push_back(vertex_i1);
-                vertex_indices.push_back(vertex_i2);
-                vertex_indices.push_back(vertex_i3);
-                uv_indices.push_back(uv_i1);
-                uv_indices.push_back(uv_i2);
-                uv_indices.push_back(uv_i3);
-                normal_indices.push_back(normal_i1);
-                normal_indices.push_back(normal_i2);
-                normal_indices.push_back(normal_i3);
+                vertex_indices.emplace_back(vertex_i1);
+                vertex_indices.emplace_back(vertex_i2);
+                vertex_indices.emplace_back(vertex_i3);
+                uv_indices.emplace_back(uv_i1);
+                uv_indices.emplace_back(uv_i2);
+                uv_indices.emplace_back(uv_i3);
+                normal_indices.emplace_back(normal_i1);
+                normal_indices.emplace_back(normal_i2);
+                normal_indices.emplace_back(normal_i3);
             }
             else if (current_line_string.compare(0, std::strlen("l"), "l") == 0)
             {
@@ -207,9 +207,9 @@ namespace yli::load
             glm::vec3 normal = temp_normals[normal_index - 1];
 
             // Put the attributes in buffers
-            out_vertices.push_back(vertex);
-            out_uvs.push_back(uv);
-            out_normals.push_back(normal);
+            out_vertices.emplace_back(vertex);
+            out_uvs.emplace_back(uv);
+            out_normals.emplace_back(normal);
         }
 
         return true;

@@ -44,7 +44,6 @@ namespace yli::ontology
     class Font2D: public yli::ontology::Entity
     {
         public:
-            // constructor.
             Font2D(yli::ontology::Universe* const universe, const yli::ontology::FontStruct& font_struct, yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, font_struct),
                 child_of_universe(parent_module, this),

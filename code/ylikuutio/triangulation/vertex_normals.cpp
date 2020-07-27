@@ -40,7 +40,7 @@ namespace yli::triangulation
             const bool is_southwest_northeast_edges_in_use,
             const bool is_southeast_northwest_edges_in_use)
     {
-        // 5. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
+        // 5. Compute the vertex normals for vertices loaded from file, `emplace_back` to `temp_normals`.
 
         if (actual_image_width < 2 || actual_image_height < 2)
         {
@@ -87,7 +87,7 @@ namespace yli::triangulation
 
             // Compute the normal of the southwesternmost vertex.
             // Number of adjacent faces: 2.
-            temp_normals.push_back(glm::normalize(
+            temp_normals.emplace_back(glm::normalize(
                         get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::NNE, actual_image_width) +
                         get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::ENE, actual_image_width)));
 
@@ -96,7 +96,7 @@ namespace yli::triangulation
             {
                 // Compute the normal of a southern vertex.
                 // Number of adjacent faces: 4.
-                temp_normals.push_back(glm::normalize(
+                temp_normals.emplace_back(glm::normalize(
                             get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::WNW, actual_image_width) +
                             get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::NNW, actual_image_width) +
                             get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::NNE, actual_image_width) +
@@ -106,7 +106,7 @@ namespace yli::triangulation
             // Compute the normal of the southeasternmost vertex.
             // Number of adjacent faces: 2.
             x = actual_image_width - 1;
-            temp_normals.push_back(glm::normalize(
+            temp_normals.emplace_back(glm::normalize(
                         get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::WNW, actual_image_width) +
                         get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::NNW, actual_image_width)));
 
@@ -116,7 +116,7 @@ namespace yli::triangulation
                 // Compute the normal of a western vertex.
                 // Number of adjacent faces: 4.
                 x = 0;
-                temp_normals.push_back(glm::normalize(
+                temp_normals.emplace_back(glm::normalize(
                             get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::NNE, actual_image_width) +
                             get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::ENE, actual_image_width) +
                             get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::ESE, actual_image_width) +
@@ -126,7 +126,7 @@ namespace yli::triangulation
                 {
                     // Compute the normal of a central vertex.
                     // Number of adjacent faces: 8.
-                    temp_normals.push_back(glm::normalize(
+                    temp_normals.emplace_back(glm::normalize(
                                 get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::SSW, actual_image_width) +
                                 get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::WSW, actual_image_width) +
                                 get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::WNW, actual_image_width) +
@@ -141,7 +141,7 @@ namespace yli::triangulation
 
                 // Compute the normal of an eastern vertex.
                 // Number of adjacent faces: 4.
-                temp_normals.push_back(glm::normalize(
+                temp_normals.emplace_back(glm::normalize(
                             get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::SSW, actual_image_width) +
                             get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::WSW, actual_image_width) +
                             get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::WNW, actual_image_width) +
@@ -151,7 +151,7 @@ namespace yli::triangulation
             // Compute the normal of the northwesternmost vertex.
             // Number of adjacent faces: 2.
             x = 0;
-            temp_normals.push_back(glm::normalize(
+            temp_normals.emplace_back(glm::normalize(
                         get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::SSE, actual_image_width) +
                         get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::ESE, actual_image_width)));
 
@@ -160,7 +160,7 @@ namespace yli::triangulation
             {
                 // Compute the normal of a northern vertex.
                 // Number of adjacent faces: 4.
-                temp_normals.push_back(glm::normalize(
+                temp_normals.emplace_back(glm::normalize(
                             get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::SSW, actual_image_width) +
                             get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::WSW, actual_image_width) +
                             get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::ESE, actual_image_width) +
@@ -170,18 +170,18 @@ namespace yli::triangulation
             // Compute the normal of the northeasternmost vertex.
             // Number of adjacent faces: 2.
             x = actual_image_width - 1;
-            temp_normals.push_back(glm::normalize(
+            temp_normals.emplace_back(glm::normalize(
                         get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::SSW, actual_image_width) +
                         get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::WSW, actual_image_width)));
 
-            // 6. Compute the vertices between, `push_back` to `temp_normals`.
+            // 6. Compute the vertices between, `emplace_back` to `temp_normals`.
             // Number of adjacent faces: 4.
 
             for (z = 1; z < actual_image_height; z++)
             {
                 for (x = 1; x < actual_image_width; x++)
                 {
-                    temp_normals.push_back(glm::normalize(
+                    temp_normals.emplace_back(glm::normalize(
                                 s_face_normal(face_normal_vector_vec3, x, z, actual_image_width) +
                                 w_face_normal(face_normal_vector_vec3, x, z, actual_image_width) +
                                 n_face_normal(face_normal_vector_vec3, x, z, actual_image_width) +
@@ -196,7 +196,7 @@ namespace yli::triangulation
 
             // Compute the normal of the southwesternmost vertex.
             // Number of adjacent faces: 2.
-            temp_normals.push_back(glm::normalize(
+            temp_normals.emplace_back(glm::normalize(
                         get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::ENE, actual_image_width) +
                         get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::NNE, actual_image_width)));
 
@@ -205,7 +205,7 @@ namespace yli::triangulation
             {
                 // Compute the normal of a southern vertex.
                 // Number of adjacent faces: 3.
-                temp_normals.push_back(glm::normalize(
+                temp_normals.emplace_back(glm::normalize(
                             get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::ENE, actual_image_width) +
                             get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::NNE, actual_image_width) +
                             get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::NW, actual_image_width)));
@@ -214,7 +214,7 @@ namespace yli::triangulation
             // Compute the normal of the southeasternmost vertex.
             // Number of adjacent faces: 1.
             x = actual_image_width - 1;
-            temp_normals.push_back(get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::NW, actual_image_width));
+            temp_normals.emplace_back(get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::NW, actual_image_width));
 
             // Then, define most normals in a double loop.
             for (z = 1; z < actual_image_height - 1; z++)
@@ -222,7 +222,7 @@ namespace yli::triangulation
                 // Compute the normal of a western vertex.
                 // Number of adjacent faces: 3.
                 x = 0;
-                temp_normals.push_back(glm::normalize(
+                temp_normals.emplace_back(glm::normalize(
                             get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::SE, actual_image_width) +
                             get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::ENE, actual_image_width) +
                             get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::NNE, actual_image_width)));
@@ -231,7 +231,7 @@ namespace yli::triangulation
                 {
                     // Compute the normal of a central vertex.
                     // Number of adjacent faces: 6.
-                    temp_normals.push_back(glm::normalize(
+                    temp_normals.emplace_back(glm::normalize(
                                 get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::SE, actual_image_width) +
                                 get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::SSW, actual_image_width) +
                                 get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::WSW, actual_image_width) +
@@ -244,7 +244,7 @@ namespace yli::triangulation
 
                 // Compute the normal of an eastern vertex.
                 // Number of adjacent faces: 3.
-                temp_normals.push_back(glm::normalize(
+                temp_normals.emplace_back(glm::normalize(
                             get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::SSW, actual_image_width) +
                             get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::WSW, actual_image_width) +
                             get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::NW, actual_image_width)));
@@ -253,14 +253,14 @@ namespace yli::triangulation
             // Compute the normal of the northwesternmost vertex.
             // Number of adjacent faces: 1.
             x = 0;
-            temp_normals.push_back(get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::SE, actual_image_width));
+            temp_normals.emplace_back(get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::SE, actual_image_width));
 
             // Compute the normals of northern vertices.
             for (x = 1; x < actual_image_width - 1; x++)
             {
                 // Compute the normal of a northern vertex.
                 // Number of adjacent faces: 3.
-                temp_normals.push_back(glm::normalize(
+                temp_normals.emplace_back(glm::normalize(
                             get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::SE, actual_image_width) +
                             get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::SSW, actual_image_width) +
                             get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::WSW, actual_image_width)));
@@ -269,7 +269,7 @@ namespace yli::triangulation
             // Compute the normal of the northeasternmost vertex.
             // Number of adjacent faces: 2.
             x = actual_image_width - 1;
-            temp_normals.push_back(glm::normalize(
+            temp_normals.emplace_back(glm::normalize(
                         get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::SSW, actual_image_width) +
                         get_face_normal_for_sw_ne(face_normal_vector_vec3, x, z, yli::triangulation::SouthwestNortheastEdgesDirections::WSW, actual_image_width)));
         }
@@ -280,14 +280,14 @@ namespace yli::triangulation
 
             // Compute the normal of the southwesternmost vertex.
             // Number of adjacent faces: 1.
-            temp_normals.push_back(get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::NE, actual_image_width));
+            temp_normals.emplace_back(get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::NE, actual_image_width));
 
             // Compute the normals of southern vertices.
             for (x = 1; x < actual_image_width - 1; x++)
             {
                 // Compute the normal of a southern vertex.
                 // Number of adjacent faces: 3.
-                temp_normals.push_back(glm::normalize(
+                temp_normals.emplace_back(glm::normalize(
                             get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::WNW, actual_image_width) +
                             get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::NNW, actual_image_width) +
                             get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::NE, actual_image_width)));
@@ -296,7 +296,7 @@ namespace yli::triangulation
             // Compute the normal of the southeasternmost vertex.
             // Number of adjacent faces: 2.
             x = actual_image_width - 1;
-            temp_normals.push_back(glm::normalize(
+            temp_normals.emplace_back(glm::normalize(
                         get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::WNW, actual_image_width) +
                         get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::NNW, actual_image_width)));
 
@@ -306,7 +306,7 @@ namespace yli::triangulation
                 // Compute the normal of a western vertex.
                 // Number of adjacent faces: 3.
                 x = 0;
-                temp_normals.push_back(glm::normalize(
+                temp_normals.emplace_back(glm::normalize(
                             get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::NE, actual_image_width) +
                             get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::ESE, actual_image_width) +
                             get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::SSE, actual_image_width)));
@@ -315,7 +315,7 @@ namespace yli::triangulation
                 {
                     // Compute the normal of a central vertex.
                     // Number of adjacent faces: 6.
-                    temp_normals.push_back(glm::normalize(
+                    temp_normals.emplace_back(glm::normalize(
                                 get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::SSE, actual_image_width) +
                                 get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::SW, actual_image_width) +
                                 get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::WNW, actual_image_width) +
@@ -328,7 +328,7 @@ namespace yli::triangulation
 
                 // Compute the normal of an eastern vertex.
                 // Number of adjacent faces: 3.
-                temp_normals.push_back(glm::normalize(
+                temp_normals.emplace_back(glm::normalize(
                             get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::SW, actual_image_width) +
                             get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::WNW, actual_image_width) +
                             get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::NNW, actual_image_width)));
@@ -337,7 +337,7 @@ namespace yli::triangulation
             // Compute the normal of the northwesternmost vertex.
             // Number of adjacent faces: 2.
             x = 0;
-            temp_normals.push_back(glm::normalize(
+            temp_normals.emplace_back(glm::normalize(
                         get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::SSE, actual_image_width) +
                         get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::ESE, actual_image_width)));
 
@@ -346,7 +346,7 @@ namespace yli::triangulation
             {
                 // Compute the normal of a northern vertex.
                 // Number of adjacent faces: 3.
-                temp_normals.push_back(glm::normalize(
+                temp_normals.emplace_back(glm::normalize(
                             get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::SW, actual_image_width) +
                             get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::ESE, actual_image_width) +
                             get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::SSE, actual_image_width)));
@@ -355,7 +355,7 @@ namespace yli::triangulation
             // Compute the normal of the northeasternmost vertex.
             // Number of adjacent faces: 1.
             x = actual_image_width - 1;
-            temp_normals.push_back(glm::normalize(
+            temp_normals.emplace_back(glm::normalize(
                         get_face_normal_for_se_nw(face_normal_vector_vec3, x, z, yli::triangulation::SoutheastNorthwestEdgesDirections::SW, actual_image_width)));
         }
 

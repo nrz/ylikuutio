@@ -37,7 +37,6 @@ namespace yli::ontology
     class CallbackEngineEntity: public yli::callback::CallbackEngine, public yli::ontology::Entity
     {
         public:
-            // constructor.
             CallbackEngineEntity(
                     yli::ontology::Universe* const universe,
                     const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
@@ -45,6 +44,8 @@ namespace yli::ontology
                 : Entity(universe, yli::ontology::EntityStruct()),
                 child_of_universe(parent_module, this)
             {
+                // constructor.
+
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::CallbackEngineEntity*";
                 this->can_be_erased = true;

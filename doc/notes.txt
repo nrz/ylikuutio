@@ -63,6 +63,8 @@ http://tulrich.com/geekstuff/partitioning.html
 
 Octree instructions:
 http://www.gamedev.net/page/resources/_/technical/game-programming/introduction-to-octrees-r3529
+https://research.nvidia.com/publication/efficient-sparse-voxel-octrees
+https://research.nvidia.com/sites/default/files/pubs/2012-06_Maximizing-Parallelism-in/karras2012hpg_paper.pdf
 
 A Real-Time Procedural Universe, Part Three: Matters of Scale:
 http://www.gamasutra.com/view/feature/2984/a_realtime_procedural_universe_.php
@@ -104,3 +106,7 @@ https://freesound.org/
 About frustum culling and occlusion culling:
 https://www.mpc-rnd.com/unity-gpu-culling-experiments/?t=unity
 https://www.mpc-rnd.com/unity-gpu-culling-experiments-part2-optimizations/?t=unity
+
+About frustum culling using Bullet:
+https://pybullet.org/Bullet/phpBB3/viewtopic.php?t=7575
+https://pybullet.org/Bullet/phpBB3/viewtopic.php?t=7764

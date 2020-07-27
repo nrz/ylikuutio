@@ -146,7 +146,7 @@ namespace yli::audio
             this->playlist_map[playlist] = std::list<std::string>();
         }
 
-        this->playlist_map[playlist].push_back(audio_file);
+        this->playlist_map[playlist].emplace_back(audio_file);
     }
 
     void AudioMaster::remove_from_playlist(const std::string& playlist, const std::string& audio_file)

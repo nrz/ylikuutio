@@ -208,7 +208,7 @@ namespace yli::command_line
 
             if (!is_valid_key)
             {
-                invalid_keys.push_back(*arg_it);
+                invalid_keys.emplace_back(*arg_it);
             }
         }
 

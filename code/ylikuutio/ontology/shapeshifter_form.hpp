@@ -36,7 +36,6 @@ namespace yli::ontology
     class ShapeshifterForm: public yli::ontology::Model
     {
         public:
-            // constructor.
             ShapeshifterForm(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::SpeciesStruct& species_struct,

@@ -58,10 +58,6 @@ namespace yli::ontology
             // Note: different fonts may provide glyphs for different Unicodes!
             void bind_to_new_parent(yli::ontology::VectorFont* const new_vector_font_pointer);
 
-            // constructor.
-            // TODO: `Text3D` constructor also creates each `Object`,
-            // and binds each to its corresponding `Glyph` for rendering hierarchy,
-            // and also binds each to this `Text3D` for ontological hierarchy.
             Text3D(yli::ontology::Universe* const universe, const yli::ontology::Text3DStruct& text3D_struct, yli::ontology::ParentModule* const parent_module)
                 : Movable(
                         universe,
@@ -75,6 +71,11 @@ namespace yli::ontology
                 parent_of_objects(this)
             {
                 // constructor.
+
+                // TODO: `Text3D` constructor also creates each `Object`,
+                // and binds each to its corresponding `Glyph` for rendering hierarchy,
+                // and also binds each to this `Text3D` for ontological hierarchy.
+
                 this->rotate_angle = NAN;
                 this->text_string  = text3D_struct.text_string;
 

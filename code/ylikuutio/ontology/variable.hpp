@@ -58,11 +58,11 @@ namespace yli::ontology
     class Variable: public yli::ontology::Entity 
     {
         public:
-            // constructor (to be called from `Entity::create_variable`).
             Variable(yli::ontology::Universe* const universe, const yli::ontology::VariableStruct& variable_struct)
                 : Entity(universe, variable_struct)
             {
-                // constructor.
+                // constructor (to be called from `Entity::create_variable`).
+
                 this->parent = variable_struct.parent;
                 this->variable_value = variable_struct.initial_value;
                 this->activate_callback = variable_struct.activate_callback;

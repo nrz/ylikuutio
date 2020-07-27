@@ -62,6 +62,7 @@ namespace yli::ontology
         {
             // constructor.
         }
+
         glm::vec3 original_scale_vector;                  // original scale vector.
         glm::vec3 cartesian_coordinates;                  // coordinate vector.
         glm::vec3 rotate_vector;                          // rotate vector.
