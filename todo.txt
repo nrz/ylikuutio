@@ -6,6 +6,7 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage (Hirvi prototype):
+[ ] Implement main game loop inside `yli::ontology::Universe` class.
 [ ] Implement processing of command line arguments using callbacks in `yli::command_line::CommandLineMaster`.
 [ ] Implement `int main(const int argc, const char* const argv[])` function with `try` & `catch` in new function file `code/ylikuutio/core/entrypoint.hpp`.
 [ ] Implement `yli::ontology::Application` class that inherits `yli::ontology::Entity` and binds to the `yli::ontology::Universe`.
