@@ -493,28 +493,28 @@ namespace yli::ontology
             // destructor.
             virtual ~Universe();
 
-            // this method requests exit.
+            // This method requests exit.
             void request_exit();
 
-            // this method processes the physics.
+            // This method processes the physics.
             void do_physics();
 
             // Intentional actors (AIs and keyboard controlled ones).
             void act();
 
-            // this method renders the active `Scene` of this `Universe`.
+            // This method renders the active `Scene` of this `Universe`.
             void render() override;
 
-            // this method renders the active `Scene` of this `Universe`.
+            // This method renders the active `Scene` of this `Universe`.
             void render_without_changing_depth_test();
 
-            // this method sets the active `Scene`.
+            // This method sets the active `Scene`.
             void set_active_scene(yli::ontology::Scene* const world);
 
             yli::ontology::Font2D* get_active_font2D() const;
             void set_active_font2D(yli::ontology::Font2D* const font2D);
 
-            // this method sets the active `Camera`.
+            // This method sets the active `Camera`.
             // Setting the active `Camera` does not change the active `Scene`!
             void set_active_camera(yli::ontology::Camera* const camera) const;
 
@@ -550,49 +550,49 @@ namespace yli::ontology
 
             bool get_is_exit_requested() const;
 
-            // this method returns current `window`.
+            // This method returns current `window`.
             SDL_Window* get_window() const;
 
-            // this method returns current `window_width`.
+            // This method returns current `window_width`.
             uint32_t get_window_width() const;
 
-            // this method sets `window_width`.
+            // This method sets `window_width`.
             void set_window_width(const uint32_t window_width);
 
-            // this method returns current `window_height`.
+            // This method returns current `window_height`.
             uint32_t get_window_height() const;
 
-            // this method sets `window_height`.
+            // This method sets `window_height`.
             void set_window_height(const uint32_t window_height);
 
-            // this method returns current `framebuffer_width`.
+            // This method returns current `framebuffer_width`.
             uint32_t get_framebuffer_width() const;
 
-            // this method sets `framebuffer_width`.
+            // This method sets `framebuffer_width`.
             void set_framebuffer_width(const uint32_t framebuffer_width);
 
-            // this method returns current `framebuffer_height`.
+            // This method returns current `framebuffer_height`.
             uint32_t get_framebuffer_height() const;
 
-            // this method sets `framebuffer_height`.
+            // This method sets `framebuffer_height`.
             void set_framebuffer_height(const uint32_t framebuffer_height);
 
-            // this method returns current `text_size`.
+            // This method returns current `text_size`.
             std::size_t get_text_size() const;
 
-            // this method returns current `font_size`.
+            // This method returns current `font_size`.
             std::size_t get_font_size() const;
 
-            // this method computes the new delta time and returns it.
+            // This method computes the new delta time and returns it.
             float compute_delta_time();
 
-            // this method returns the last computed delta time.
+            // This method returns the last computed delta time.
             float get_delta_time() const;
 
-            // this method stores `current_time_before_reading_keyboard` into `last_time_before_reading_keyboard`.
+            // This method stores `current_time_before_reading_keyboard` into `last_time_before_reading_keyboard`.
             void finalize_delta_time_loop();
 
-            // this method returns current `max_fps`.
+            // This method returns current `max_fps`.
             std::size_t get_max_fps() const;
             float get_last_time_to_display_fps() const;
             float get_last_time_for_display_sync() const;
