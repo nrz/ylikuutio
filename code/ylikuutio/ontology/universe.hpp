@@ -493,6 +493,9 @@ namespace yli::ontology
             // destructor.
             virtual ~Universe();
 
+            // This method contains the main loop.
+            void start_simulation();
+
             // This method requests exit.
             void request_exit();
 
@@ -682,6 +685,8 @@ namespace yli::ontology
 
             // Ylikuutio version.
             static const std::string version;
+
+            std::string application_name;
 
             // Variables related to location and orientation.
 

@@ -76,7 +76,6 @@
 #include "code/ylikuutio/snippets/wireframe_snippets.hpp"
 #include "code/ylikuutio/snippets/console_callback_snippets.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
-#include "code/ylikuutio/time/time.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -243,6 +242,8 @@ int main(const int argc, const char* const argv[]) try
 
     yli::ontology::Universe* const my_universe = new yli::ontology::Universe(universe_struct);
     my_universe->set_global_name("universe");
+
+    my_universe->application_name = "YliEdit";
 
     yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
 
@@ -695,80 +696,6 @@ int main(const int argc, const char* const argv[]) try
     yli::ontology::create_lisp_function_overload("clear", my_console, std::function(&yli::ontology::Console::clear));
     yli::ontology::create_lisp_function_overload("screenshot", my_console, std::function(&yli::ontology::Universe::screenshot));
 
-    bool has_mouse_focus = true;
-
-    SDL_Event sdl_event;
-    std::string ms_frame_text;
-
-    // Print angles and cartesian coordinates on bottom left corner.
-    yli::ontology::TextStruct angles_and_coordinates_text_struct;
-    angles_and_coordinates_text_struct.font2D_parent = my_font2D;
-    angles_and_coordinates_text_struct.screen_width = my_universe->get_window_width();
-    angles_and_coordinates_text_struct.screen_height = my_universe->get_window_height();
-    angles_and_coordinates_text_struct.x = 0;
-    angles_and_coordinates_text_struct.y = 0;
-    angles_and_coordinates_text_struct.text_size = my_universe->get_text_size();
-    angles_and_coordinates_text_struct.font_size = my_universe->get_font_size();
-    angles_and_coordinates_text_struct.font_texture_file_format = "bmp";
-    angles_and_coordinates_text_struct.horizontal_alignment = "left";
-    angles_and_coordinates_text_struct.vertical_alignment = "bottom";
-    yli::ontology::Text2D* angles_and_coordinates_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_text2d(angles_and_coordinates_text_struct));
-
-    // Print spherical coordinates on second line from the bottom left.
-    yli::ontology::TextStruct spherical_coordinates_text_struct;
-    spherical_coordinates_text_struct.font2D_parent = my_font2D;
-    spherical_coordinates_text_struct.screen_width = my_universe->get_window_width();
-    spherical_coordinates_text_struct.screen_height = my_universe->get_window_height();
-    spherical_coordinates_text_struct.x = 0;
-    spherical_coordinates_text_struct.y = 2 * my_universe->get_text_size();
-    spherical_coordinates_text_struct.text_size = my_universe->get_text_size();
-    spherical_coordinates_text_struct.font_size = my_universe->get_font_size();
-    spherical_coordinates_text_struct.horizontal_alignment = "left";
-    spherical_coordinates_text_struct.vertical_alignment = "bottom";
-    yli::ontology::Text2D* spherical_coordinates_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_text2d(spherical_coordinates_text_struct));
-
-    // Print time data on top left corner.
-    yli::ontology::TextStruct time_text_struct;
-    time_text_struct.font2D_parent = my_font2D;
-    time_text_struct.screen_width = my_universe->get_window_width();
-    time_text_struct.screen_height = my_universe->get_window_height();
-    time_text_struct.x = 0;
-    time_text_struct.y = my_universe->get_window_height();
-    time_text_struct.text_size = my_universe->get_text_size();
-    time_text_struct.font_size = my_universe->get_font_size();
-    time_text_struct.font_texture_file_format = "bmp";
-    time_text_struct.horizontal_alignment = "left";
-    time_text_struct.vertical_alignment = "top";
-    yli::ontology::Text2D* time_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_text2d(time_text_struct));
-
-    // Print help text.
-    yli::ontology::TextStruct help_text_struct;
-    help_text_struct.font2D_parent = my_font2D;
-    help_text_struct.screen_width = my_universe->get_window_width();
-    help_text_struct.screen_height = my_universe->get_window_height();
-    help_text_struct.x = 0;
-    help_text_struct.y = my_universe->get_window_height() - (3 * my_universe->get_text_size());
-    help_text_struct.text_size = my_universe->get_text_size();
-    help_text_struct.font_size = my_universe->get_font_size();
-    help_text_struct.font_texture_file_format = "bmp";
-    help_text_struct.horizontal_alignment = "left";
-    help_text_struct.vertical_alignment = "top";
-    yli::ontology::Text2D* help_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_text2d(help_text_struct));
-
-    // Print frame rate data on top right corner.
-    yli::ontology::TextStruct frame_rate_text_struct;
-    frame_rate_text_struct.font2D_parent = my_font2D;
-    frame_rate_text_struct.screen_width = my_universe->get_window_width();
-    frame_rate_text_struct.screen_height = my_universe->get_window_height();
-    frame_rate_text_struct.x = my_universe->get_window_width();;
-    frame_rate_text_struct.y = my_universe->get_window_height();
-    frame_rate_text_struct.text_size = my_universe->get_text_size();
-    frame_rate_text_struct.font_size = my_universe->get_font_size();
-    frame_rate_text_struct.font_texture_file_format = "bmp";
-    frame_rate_text_struct.horizontal_alignment = "right";
-    frame_rate_text_struct.vertical_alignment = "top";
-    yli::ontology::Text2D* frame_rate_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_text2d(frame_rate_text_struct));
-
     std::cout << "Setting up window size ...\n";
     yli::snippets::set_window_size(my_universe, my_universe->get_window_width(), my_universe->get_window_height());
     std::cout << "Setting up framebuffer size ...\n";
@@ -784,7 +711,7 @@ int main(const int argc, const char* const argv[]) try
     std::cout << "Setting up debug variables ...\n";
     yli::snippets::set_flight_mode(my_universe, true);
 
-    yli::sdl::flush_sdl_event_queue();
+    my_universe->start_simulation();
 
     // Do cleanup.
     cleanup_callback_engine.execute(nullptr);
