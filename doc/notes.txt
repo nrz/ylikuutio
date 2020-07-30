@@ -110,3 +110,6 @@ https://www.mpc-rnd.com/unity-gpu-culling-experiments-part2-optimizations/?t=uni
 About frustum culling using Bullet:
 https://pybullet.org/Bullet/phpBB3/viewtopic.php?t=7575
 https://pybullet.org/Bullet/phpBB3/viewtopic.php?t=7764
+
+About categories and how to implement logging, exceptions and continuations:
+https://www.youtube.com/watch?v=eCUfzvz7Z20

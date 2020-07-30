@@ -37,6 +37,7 @@
 #include "variable.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
+#include "text2D.hpp"
 #include "camera.hpp"
 #include "console.hpp"
 #include "entity_variable_activation.hpp"
@@ -44,7 +45,13 @@
 #include "variable_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/audio/audio_master.hpp"
+#include "code/ylikuutio/callback/callback_engine.hpp"
+#include "code/ylikuutio/callback/callback_magic_numbers.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/input/input_master.hpp"
+#include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
@@ -71,13 +78,16 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
+#include <iomanip>       // std::setfill, std::setprecision, std::setw
 #include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
+#include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <utility>       // std::pair
+#include <variant>       // std::holds_alternative, std::variant
 
 namespace yli::data
 {
@@ -151,6 +161,440 @@ namespace yli::ontology
         if (this->active_scene != nullptr)
         {
             this->active_scene->act();
+        }
+    }
+
+    void Universe::start_simulation()
+    {
+        if (this->active_font2D == nullptr)
+        {
+            return;
+        }
+
+        if (this->entity_factory == nullptr)
+        {
+            return;
+        }
+
+        yli::ontology::Font2D* const font2D = this->active_font2D;
+
+        // Create angles and cartesian coordinates text, on bottom left corner.
+        yli::ontology::TextStruct angles_and_coordinates_text_struct;
+        angles_and_coordinates_text_struct.font2D_parent = font2D;
+        angles_and_coordinates_text_struct.screen_width = this->window_width;
+        angles_and_coordinates_text_struct.screen_height = this->window_height;
+        angles_and_coordinates_text_struct.x = 0;
+        angles_and_coordinates_text_struct.y = 0;
+        angles_and_coordinates_text_struct.text_size = this->text_size;
+        angles_and_coordinates_text_struct.font_size = this->font_size;
+        angles_and_coordinates_text_struct.font_texture_file_format = "bmp";
+        angles_and_coordinates_text_struct.horizontal_alignment = "left";
+        angles_and_coordinates_text_struct.vertical_alignment = "bottom";
+        yli::ontology::Text2D* angles_and_coordinates_text2D = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(angles_and_coordinates_text_struct));
+
+        if (angles_and_coordinates_text2D == nullptr)
+        {
+            return;
+        }
+
+        // Create spherical coordinates text, on second line from the bottom left.
+        yli::ontology::TextStruct spherical_coordinates_text_struct;
+        spherical_coordinates_text_struct.font2D_parent = font2D;
+        spherical_coordinates_text_struct.screen_width = this->window_width;
+        spherical_coordinates_text_struct.screen_height = this->window_height;
+        spherical_coordinates_text_struct.x = 0;
+        spherical_coordinates_text_struct.y = 2 * this->text_size;
+        spherical_coordinates_text_struct.text_size = this->text_size;
+        spherical_coordinates_text_struct.font_size = this->font_size;
+        spherical_coordinates_text_struct.horizontal_alignment = "left";
+        spherical_coordinates_text_struct.vertical_alignment = "bottom";
+        yli::ontology::Text2D* spherical_coordinates_text2D = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(spherical_coordinates_text_struct));
+
+        if (spherical_coordinates_text2D == nullptr)
+        {
+            return;
+        }
+
+        // Create time data text, on top left corner.
+        yli::ontology::TextStruct time_text_struct;
+        time_text_struct.font2D_parent = font2D;
+        time_text_struct.screen_width = this->window_width;
+        time_text_struct.screen_height = this->window_height;
+        time_text_struct.x = 0;
+        time_text_struct.y = this->window_height;
+        time_text_struct.text_size = this->text_size;
+        time_text_struct.font_size = this->font_size;
+        time_text_struct.font_texture_file_format = "bmp";
+        time_text_struct.horizontal_alignment = "left";
+        time_text_struct.vertical_alignment = "top";
+        yli::ontology::Text2D* time_text2D = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(time_text_struct));
+
+        if (time_text2D == nullptr)
+        {
+            return;
+        }
+
+        // Create help text.
+        yli::ontology::TextStruct help_text_struct;
+        help_text_struct.font2D_parent = font2D;
+        help_text_struct.screen_width = this->window_width;
+        help_text_struct.screen_height = this->window_height;
+        help_text_struct.x = 0;
+        help_text_struct.y = this->window_height - (3 * this->text_size);
+        help_text_struct.text_size = this->text_size;
+        help_text_struct.font_size = this->font_size;
+        help_text_struct.font_texture_file_format = "bmp";
+        help_text_struct.horizontal_alignment = "left";
+        help_text_struct.vertical_alignment = "top";
+        yli::ontology::Text2D* help_text2D = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(help_text_struct));
+
+        if (help_text2D == nullptr)
+        {
+            return;
+        }
+
+        // Print frame rate data on top right corner.
+        yli::ontology::TextStruct frame_rate_text_struct;
+        frame_rate_text_struct.font2D_parent = font2D;
+        frame_rate_text_struct.screen_width = this->window_width;
+        frame_rate_text_struct.screen_height = this->window_height;
+        frame_rate_text_struct.x = this->window_width;
+        frame_rate_text_struct.y = this->window_height;
+        frame_rate_text_struct.text_size = this->text_size;
+        frame_rate_text_struct.font_size = this->font_size;
+        frame_rate_text_struct.font_texture_file_format = "bmp";
+        frame_rate_text_struct.horizontal_alignment = "right";
+        frame_rate_text_struct.vertical_alignment = "top";
+        yli::ontology::Text2D* frame_rate_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_text2d(frame_rate_text_struct));
+
+        if (frame_rate_text2D == nullptr)
+        {
+            return;
+        }
+
+        SDL_Event sdl_event;
+        yli::sdl::flush_sdl_event_queue();
+
+        // This method contains the main loop.
+        bool has_mouse_focus = true;
+
+        while (!this->is_exit_requested && this->input_master != nullptr)
+        {
+            const float current_time_in_main_loop = yli::time::get_time();
+
+            if (current_time_in_main_loop - this->last_time_for_display_sync >= (1.0f / this->max_fps))
+            {
+                this->update_last_time_for_display_sync();
+
+                this->increment_number_of_frames();
+
+                while (current_time_in_main_loop - this->last_time_to_display_fps >= 1.0f)
+                {
+                    // If last `std::stringstream` here was more than 1 sec ago,
+                    // std::stringstream` and reset number of frames.
+                    if (frame_rate_text2D != nullptr && this->number_of_frames > 0)
+                    {
+                        std::stringstream ms_frame_text_stringstream;
+                        ms_frame_text_stringstream << std::fixed << std::setprecision(2) <<
+                            1000.0f / static_cast<float>(this->number_of_frames) << " ms/frame; " <<
+                            this->number_of_frames << " Hz";
+                        std::string ms_frame_text = ms_frame_text_stringstream.str();
+                        frame_rate_text2D->change_string(ms_frame_text);
+                        this->reset_number_of_frames();
+                    }
+
+                    // `last_time_to_display_fps` needs to be incremented to avoid infinite loop.
+                    this->increment_last_time_to_display_fps();
+
+                    // Update audio also (in case the sound has reached the end).
+                    if (audio_master != nullptr)
+                    {
+                        audio_master->update();
+                    }
+                }
+
+                // Clear the screen.
+                if (!this->is_headless)
+                {
+                    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+                }
+
+                this->compute_delta_time();
+
+                this->mouse_x = this->window_width / 2;
+                this->mouse_y = this->window_height / 2;
+
+                const yli::input::InputMode* const input_mode = input_master->get_active_input_mode();
+
+                if (input_mode == nullptr)
+                {
+                    return;
+                }
+
+                // Poll all SDL events.
+                while (SDL_PollEvent(&sdl_event))
+                {
+                    if (sdl_event.type == SDL_MOUSEMOTION)
+                    {
+                        this->mouse_x += sdl_event.motion.xrel; // horizontal motion relative to screen center.
+                        this->mouse_y += sdl_event.motion.yrel; // vertical motion relative to screen center.
+                    }
+                    else if (sdl_event.type == SDL_KEYDOWN)
+                    {
+                        const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
+
+                        yli::callback::CallbackEngine* const callback_engine = input_mode->get_keypress_callback_engine(scancode);
+
+                        if (callback_engine != nullptr)
+                        {
+                            const std::shared_ptr<yli::data::AnyValue> any_value = callback_engine->execute(nullptr);
+
+                            if (any_value != nullptr &&
+                                    std::holds_alternative<uint32_t>(any_value->data) &&
+                                    std::get<uint32_t>(any_value->data) == EXIT_PROGRAM_MAGIC_NUMBER)
+                            {
+                                this->request_exit();
+                            }
+                        }
+
+                        yli::ontology::Console* const active_console = this->active_console;
+
+                        if (active_console != nullptr)
+                        {
+                            active_console->process_key_event(sdl_event.key);
+                        }
+                    }
+                    else if (sdl_event.type == SDL_KEYUP)
+                    {
+                        const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
+
+                        yli::callback::CallbackEngine* const callback_engine = input_mode->get_keyrelease_callback_engine(scancode);
+
+                        if (callback_engine == nullptr)
+                        {
+                            continue;
+                        }
+
+                        const std::shared_ptr<yli::data::AnyValue> any_value = callback_engine->execute(nullptr);
+
+                        if (any_value != nullptr &&
+                                std::holds_alternative<uint32_t>(any_value->data) &&
+                                std::get<uint32_t>(any_value->data) == EXIT_PROGRAM_MAGIC_NUMBER)
+                        {
+                            this->request_exit();
+                        }
+                    }
+                    else if (sdl_event.type == SDL_WINDOWEVENT)
+                    {
+                        if (sdl_event.window.event == SDL_WINDOWEVENT_FOCUS_GAINED)
+                        {
+                            has_mouse_focus = true;
+                        }
+                        else if (sdl_event.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
+                        {
+                            has_mouse_focus = false;
+                        }
+                    }
+                    else if (sdl_event.type == SDL_QUIT)
+                    {
+                        this->request_exit();
+                    }
+                }
+
+                // mouse position.
+                const float xpos = static_cast<float>(this->mouse_x);
+                const float ypos = static_cast<float>(this->mouse_y);
+
+                // Reset mouse position for next frame.
+                if (has_mouse_focus)
+                {
+                    yli::input::set_cursor_position(
+                            this->window,
+                            static_cast<float>(this->window_width) / 2,
+                            static_cast<float>(this->window_height) / 2);
+
+                    if (this->has_mouse_ever_moved || (std::abs(xpos) > 0.0001) || (std::abs(ypos) > 0.0001))
+                    {
+                        this->has_mouse_ever_moved = true;
+
+                        // Compute new orientation.
+                        this->current_camera_horizontal_angle += this->mouse_speed * static_cast<float>(this->window_width / 2 - xpos);
+                        this->current_camera_horizontal_angle = remainder(this->current_camera_horizontal_angle, (2.0f * PI));
+
+                        if (this->is_invert_mouse_in_use)
+                        {
+                            // Invert mouse.
+                            this->current_camera_vertical_angle -= this->mouse_speed * static_cast<float>(this->window_height / 2 - ypos);
+                        }
+                        else
+                        {
+                            // Don't invert mouse.
+                            this->current_camera_vertical_angle += this->mouse_speed * static_cast<float>(this->window_height / 2 - ypos);
+                        }
+
+                        this->current_camera_vertical_angle = remainder(this->current_camera_vertical_angle, (2.0f * PI));
+                    }
+                }
+
+                // Direction: spherical coordinates to cartesian coordinates conversion.
+                this->current_camera_direction = glm::vec3(
+                        cos(this->current_camera_vertical_angle) * sin(this->current_camera_horizontal_angle),
+                        sin(this->current_camera_vertical_angle),
+                        cos(this->current_camera_vertical_angle) * cos(this->current_camera_horizontal_angle));
+
+                // Right vector.
+                this->current_camera_right = glm::vec3(
+                        sin(this->current_camera_horizontal_angle - PI/2.0f),
+                        0,
+                        cos(this->current_camera_horizontal_angle - PI/2.0f));
+
+                // Up vector.
+                this->current_camera_up = glm::cross(this->current_camera_right, this->current_camera_direction);
+
+                if (!this->in_console)
+                {
+                    const uint8_t* const current_key_states = SDL_GetKeyboardState(nullptr);
+                    const std::vector<yli::callback::CallbackEngine*>* const continuous_keypress_callback_engines = input_mode->get_continuous_keypress_callback_engines();
+                    if (continuous_keypress_callback_engines == nullptr)
+                    {
+                        continue;
+                    }
+
+                    // Check for keypresses and call corresponding callbacks.
+                    for (std::size_t i = 0; i < continuous_keypress_callback_engines->size(); i++)
+                    {
+                        bool is_pressed = false;
+
+                        if (this->get_input_method() == yli::input::InputMethod::KEYBOARD)
+                        {
+                            if (current_key_states[i] == 1) // 1 = pressed, 0 = not pressed.
+                            {
+                                is_pressed = true;
+                            }
+                        }
+                        else if (this->get_input_method() == yli::input::InputMethod::INPUT_FILE)
+                        {
+                            // TODO: implement optionally loading keyreleases from a file (do not execute `SDL_GetKeyboardState` in that case).
+                            if (false)
+                            {
+                                is_pressed = true;
+                            }
+                        }
+                        else
+                        {
+                            std::cerr << "ERROR: unsupported input method.\n";
+                        }
+
+                        if (is_pressed)
+                        {
+                            yli::callback::CallbackEngine* const callback_engine = continuous_keypress_callback_engines->at(i);
+
+                            if (callback_engine == nullptr)
+                            {
+                                continue;
+                            }
+
+                            const std::shared_ptr<yli::data::AnyValue> any_value = callback_engine->execute(nullptr);
+
+                            if (any_value != nullptr &&
+                                    std::holds_alternative<uint32_t>(any_value->data) &&
+                                    std::get<uint32_t>(any_value->data) == EXIT_PROGRAM_MAGIC_NUMBER)
+                            {
+                                this->request_exit();
+                            }
+                        }
+                    }
+                }
+
+                // Gravity etc. physical phenomena.
+                this->do_physics();
+
+                // Intentional actors (AIs and keyboard controlled ones).
+                this->act();
+
+                if (angles_and_coordinates_text2D != nullptr)
+                {
+                    std::stringstream angles_and_coordinates_stringstream;
+                    angles_and_coordinates_stringstream << std::fixed << std::setprecision(2) <<
+                        this->current_camera_horizontal_angle << "," <<
+                        this->current_camera_vertical_angle << " rad; " <<
+                        RADIANS_TO_DEGREES(this->current_camera_horizontal_angle) << "," <<
+                        RADIANS_TO_DEGREES(this->current_camera_vertical_angle) << " deg\n" <<
+                        "(" <<
+                        this->current_camera_cartesian_coordinates.x << "," <<
+                        this->current_camera_cartesian_coordinates.y << "," <<
+                        this->current_camera_cartesian_coordinates.z << ")";
+                    const std::string angles_and_coordinates_string = angles_and_coordinates_stringstream.str();
+                    angles_and_coordinates_text2D->change_string(angles_and_coordinates_string);
+                }
+
+                if (time_text2D != nullptr)
+                {
+                    std::stringstream time_stringstream;
+                    time_stringstream << std::fixed << std::setprecision(2) << yli::time::get_time() << " sec";
+                    const std::string time_string = time_stringstream.str();
+                    time_text2D->change_string(time_string);
+                }
+
+                const std::string on_string = "on";
+                const std::string off_string = "off";
+
+                if (help_text2D != nullptr)
+                {
+                    if (this->in_help_mode && this->can_display_help_screen)
+                    {
+                        std::stringstream help_text_stringstream;
+                        yli::ontology::Scene* const scene = this->active_scene;
+                        help_text_stringstream <<
+                            (this->application_name.empty() ? "Ylikuutio" : this->application_name) << " " << yli::ontology::Universe::version << "\n"
+                            "\n"
+                            "arrow keys\n"
+                            "space jump\n"
+                            "enter duck\n"
+                            "F1 help mode\n"
+                            "`  enter console\n"
+                            "I  invert mouse (" << (this->is_invert_mouse_in_use ? on_string : off_string) << ")\n"
+                            "F  flight mode (" << (scene == nullptr || scene->get_is_flight_mode_in_use() ? on_string : off_string) << ")\n"
+                            "Ctrl      turbo\n" <<
+                            "Ctrl+Ctrl extra turbo\n" <<
+                            "for debugging:\n" <<
+                            "G  grass texture\n" <<
+                            "O  orange fur texture\n" <<
+                            "P  pink geometric tiles texture\n" <<
+                            "T  terrain species\n" <<
+                            "A  suzanne species\n";
+                        const std::string help_text_string = help_text_stringstream.str();
+                        help_text2D->change_string(help_text_string);
+                    }
+                    else
+                    {
+                        help_text2D->change_string("");
+                    }
+                }
+
+                if (spherical_coordinates_text2D != nullptr)
+                {
+                    if (this->testing_spherical_terrain_in_use)
+                    {
+                        std::stringstream spherical_coordinates_stringstream;
+                        spherical_coordinates_stringstream << std::fixed << std::setprecision(2) <<
+                            "rho:" << this->current_camera_spherical_coordinates.rho <<
+                            "theta:" << this->current_camera_spherical_coordinates.theta <<
+                            "phi:" << this->current_camera_spherical_coordinates.phi;
+                        std::string spherical_coordinates_string = spherical_coordinates_stringstream.str();
+                        spherical_coordinates_text2D->change_string(spherical_coordinates_string);
+                    }
+                    else
+                    {
+                        spherical_coordinates_text2D->change_string("");
+                    }
+                }
+
+                // Render the `Universe`.
+                this->render();
+
+                this->finalize_delta_time_loop();
+            }
         }
     }
 
