@@ -30,6 +30,8 @@ namespace yli::command_line
 {
     CommandLineMaster::CommandLineMaster(const int argc, const char* const argv[])
     {
+        // constructor.
+
         this->argc = argc;
         this->arg_vector.assign(argv + 1, argv + argc); // Copy all arguments except the executable name.
         this->are_arguments_valid = true;               // Arguments are valid if their syntax is valid.
