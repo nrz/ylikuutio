@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __BILINEAR_INTERPOLATION2D_HPP_INCLUDED
-#define __BILINEAR_INTERPOLATION2D_HPP_INCLUDED
+#ifndef __YLIKUUTIO_INTERPOLATION_BILINEAR_INTERPOLATION2D_HPP_INCLUDED
+#define __YLIKUUTIO_INTERPOLATION_BILINEAR_INTERPOLATION2D_HPP_INCLUDED
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.

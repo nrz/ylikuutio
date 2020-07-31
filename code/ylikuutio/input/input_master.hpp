@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __INPUT_MASTER_HPP_INCLUDED
-#define __INPUT_MASTER_HPP_INCLUDED
+#ifndef __YLIKUUTIO_INPUT_INPUT_MASTER_HPP_INCLUDED
+#define __YLIKUUTIO_INPUT_INPUT_MASTER_HPP_INCLUDED
 
 #include "input.hpp"
 

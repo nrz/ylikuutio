@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __SPHERICAL_COORDNATES_STRUCT_HPP_INCLUDED
-#define __SPHERICAL_COORDNATES_STRUCT_HPP_INCLUDED
+#ifndef __YLIKUUTIO_DATA_SPHERICAL_COORDINATES_STRUCT_HPP_INCLUDED
+#define __YLIKUUTIO_DATA_SPHERICAL_COORDINATES_STRUCT_HPP_INCLUDED
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow

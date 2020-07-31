@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __LINE2D_HPP_INCLUDED
-#define __LINE2D_HPP_INCLUDED
+#ifndef __YLIKUUTIO_GEOMETRY_LINE2D_HPP_INCLUDED
+#define __YLIKUUTIO_GEOMETRY_LINE2D_HPP_INCLUDED
 
 #include "line.hpp"
 #include "code/ylikuutio/linear_algebra/matrix.hpp"

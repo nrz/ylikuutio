@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __AJOKKI_HELSINKI_EAST_DOWNTOWN_SCENE_HPP_INCLUDED
-#define __AJOKKI_HELSINKI_EAST_DOWNTOWN_SCENE_HPP_INCLUDED
+#ifndef __AJOKKI_AJOKKI_HELSINKI_EAST_DOWNTOWN_SCENE_HPP_INCLUDED
+#define __AJOKKI_AJOKKI_HELSINKI_EAST_DOWNTOWN_SCENE_HPP_INCLUDED
 
 namespace yli
 {

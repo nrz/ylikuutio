@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __BACKGROUND_COLOR_SNIPPETS_HPP_INCLUDED
-#define __BACKGROUND_COLOR_SNIPPETS_HPP_INCLUDED
+#ifndef __YLIKUUTIO_SNIPPETS_BACKGROUND_COLOR_SNIPPETS_HPP_INCLUDED
+#define __YLIKUUTIO_SNIPPETS_BACKGROUND_COLOR_SNIPPETS_HPP_INCLUDED
 
 namespace yli::ontology
 {

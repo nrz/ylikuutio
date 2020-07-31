@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __CALLBACK_OBJECT_HPP_INCLUDED
-#define __CALLBACK_OBJECT_HPP_INCLUDED
+#ifndef __YLIKUUTIO_CALLBACK_CALLBACK_OBJECT_HPP_INCLUDED
+#define __YLIKUUTIO_CALLBACK_CALLBACK_OBJECT_HPP_INCLUDED
 
 #include "callback_engine.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"

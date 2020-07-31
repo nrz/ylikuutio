@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __FBX_TEXTURE_LOADER_HPP_INCLUDED
-#define __FBX_TEXTURE_LOADER_HPP_INCLUDED
+#ifndef __YLIKUUTIO_LOAD_FBX_TEXTURE_LOADER_HPP_INCLUDED
+#define __YLIKUUTIO_LOAD_FBX_TEXTURE_LOADER_HPP_INCLUDED
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.

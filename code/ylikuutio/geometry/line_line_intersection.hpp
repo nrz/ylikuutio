@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __LINE_LINE_INTERSECTION_HPP_INCLUDED
-#define __LINE_LINE_INTERSECTION_HPP_INCLUDED
+#ifndef __YLIKUUTIO_GEOMETRY_LINE_LINE_INTERSECTION_HPP_INCLUDED
+#define __YLIKUUTIO_GEOMETRY_LINE_LINE_INTERSECTION_HPP_INCLUDED
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

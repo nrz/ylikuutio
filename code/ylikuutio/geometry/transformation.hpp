@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __TRANSFORMATION_HPP_INCLUDED
-#define __TRANSFORMATION_HPP_INCLUDED
+#ifndef __YLIKUUTIO_GEOMETRY_TRANSFORMATION_HPP_INCLUDED
+#define __YLIKUUTIO_GEOMETRY_TRANSFORMATION_HPP_INCLUDED
 
 #include "code/ylikuutio/geometry/transformation_struct.hpp"
 
