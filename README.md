@@ -243,12 +243,12 @@ Some available console commands to try in Ajokki:
 * `print cat1 z`
 * `set cat1 x 123.45`
 * `set cat1 z 210`
-* `bind helsinki_east_downtown_orange_fur_material helsinki_east_downtown_grayscale_shader`.
-* `bind helsinki_east_downtown_orange_fur_material helsinki_east_downtown_shader`.
-* `bind cat1 orient_to_south_brain`.
-* `bind cat1 orient_and_go_east_brain`.
-* `bind cat1 orient_and_go_west_brain`.
-* `bind cat1 rest_brain`.
+* `bind helsinki_east_downtown_orange_fur_material helsinki_east_downtown_grayscale_shader`
+* `bind helsinki_east_downtown_orange_fur_material helsinki_east_downtown_shader`
+* `bind cat1 orient_to_south_brain`
+* `bind cat1 orient_and_go_east_brain`
+* `bind cat1 orient_and_go_west_brain`
+* `bind cat1 rest_brain`
 * `print framebuffer_width`
 * `print framebuffer_height`
 * `screenshot screenshot1.data`
@@ -262,7 +262,7 @@ Some available console commands to try in Ajokki:
 * `create-object cat_species cat3 500 100 600 3.14 0`
 * `create-object cat_species cat4 500 100 650`
 * `create-holobiont turbo_polizei_bmp_symbiosis polizei3 500 100 700 3.14 0`
-* `create-holobiont turbo_polizei_bmp_symbiosis polizei3 480 100 700`
+* `create-holobiont turbo_polizei_bmp_symbiosis polizei4 480 100 700`
 
 ## FAQ
 Q: What is "Ylikuutio"?
