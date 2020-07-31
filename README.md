@@ -229,20 +229,20 @@ Some available console commands to try in Ajokki:
 * `set wireframe true`
 * `set wireframe false`
 * `activate turbo_polizei_camera`
-* `print turbo_polizei_bmp1 cartesian_coordinates`
-* `print turbo_polizei_bmp1 x`
-* `print turbo_polizei_bmp1 y`
-* `print turbo_polizei_bmp1 z`
-* `set turbo_polizei_bmp1 y 50`
-* `set turbo_polizei_bmp1 x 100`
-* `set turbo_polizei_bmp1 z 200`
+* `print turbo_polizei_bmp1.cartesian_coordinates`
+* `print turbo_polizei_bmp1.x`
+* `print turbo_polizei_bmp1.y`
+* `print turbo_polizei_bmp1.z`
+* `set turbo_polizei_bmp1.y 50`
+* `set turbo_polizei_bmp1.x 100`
+* `set turbo_polizei_bmp1.z 200`
 * `activate cat_camera`
-* `print cat1 cartesian_coordinates`
+* `print cat1.cartesian_coordinates`
 * `print cat1 x`
-* `print cat1 y`
-* `print cat1 z`
-* `set cat1 x 123.45`
-* `set cat1 z 210`
+* `print cat1.y`
+* `print cat1.z`
+* `set cat1.x 123.45`
+* `set cat1.z 210`
 * `bind helsinki_east_downtown_orange_fur_material helsinki_east_downtown_grayscale_shader`
 * `bind helsinki_east_downtown_orange_fur_material helsinki_east_downtown_shader`
 * `bind cat1 orient_to_south_brain`
