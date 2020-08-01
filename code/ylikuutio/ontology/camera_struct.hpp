@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __CAMERA_STRUCT_HPP_INCLUDED
-#define __CAMERA_STRUCT_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_CAMERA_STRUCT_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_CAMERA_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"

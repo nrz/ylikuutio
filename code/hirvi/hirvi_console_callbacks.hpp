@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __HIRVI_CONSOLE_CALLBACKS_HPP_INCLUDED
-#define __HIRVI_CONSOLE_CALLBACKS_HPP_INCLUDED
+#ifndef __HIRVI_HIRVI_CONSOLE_CALLBACKS_HPP_INCLUDED
+#define __HIRVI_HIRVI_CONSOLE_CALLBACKS_HPP_INCLUDED
 
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr

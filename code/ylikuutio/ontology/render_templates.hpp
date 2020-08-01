@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __RENDER_TEMPLATES_HPP_INCLUDED
-#define __RENDER_TEMPLATES_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_RENDER_TEMPLATES_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_RENDER_TEMPLATES_HPP_INCLUDED
 
 // Include standard headers
 #include <cstddef>  // std::size_t

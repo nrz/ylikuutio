@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
-#define __LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
 
 #include "generic_lisp_function_overload.hpp"
 #include "console.hpp"

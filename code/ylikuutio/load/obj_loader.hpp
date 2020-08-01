@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __OBJLOADER_HPP_INCLUDED
-#define __OBJLOADER_HPP_INCLUDED
+#ifndef __YLIKUUTIO_LOAD_OBJ_LOADER_HPP_INCLUDED
+#define __YLIKUUTIO_LOAD_OBJ_LOADER_HPP_INCLUDED
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

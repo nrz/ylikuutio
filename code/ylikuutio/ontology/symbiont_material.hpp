@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __SYMBIONT_MATERIAL_HPP_INCLUDED
-#define __SYMBIONT_MATERIAL_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_SYMBIONT_MATERIAL_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_SYMBIONT_MATERIAL_HPP_INCLUDED
 
 #include "material.hpp"
 #include "material_struct.hpp"

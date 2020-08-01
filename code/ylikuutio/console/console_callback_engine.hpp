@@ -18,8 +18,8 @@
 #include "code/ylikuutio/callback/callback_engine.hpp"
 #include "input_parameters_to_any_value_callback_with_console.hpp"
 
-#ifndef __CONSOLE_CALLBACK_ENGINE_HPP_INCLUDED
-#define __CONSOLE_CALLBACK_ENGINE_HPP_INCLUDED
+#ifndef __YLIKUUTIO_CONSOLE_CONSOLE_CALLBACK_ENGINE_HPP_INCLUDED
+#define __YLIKUUTIO_CONSOLE_CONSOLE_CALLBACK_ENGINE_HPP_INCLUDED
 
 namespace yli::console
 {

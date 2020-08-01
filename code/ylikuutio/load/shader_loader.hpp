@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __SHADER_LOADER_HPP_INCLUDED
-#define __SHADER_LOADER_HPP_INCLUDED
+#ifndef __YLIKUUTIO_LOAD_SHADER_LOADER_HPP_INCLUDED
+#define __YLIKUUTIO_LOAD_SHADER_LOADER_HPP_INCLUDED
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.

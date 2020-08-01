@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __CSV_LOADER_HPP_INCLUDED
-#define __CSV_LOADER_HPP_INCLUDED
+#ifndef __YLIKUUTIO_LOAD_CSV_LOADER_HPP_INCLUDED
+#define __YLIKUUTIO_LOAD_CSV_LOADER_HPP_INCLUDED
 
 #include "code/ylikuutio/file/file_loader.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"

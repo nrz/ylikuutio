@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __SHADER_STRUCT_HPP_INCLUDED
-#define __SHADER_STRUCT_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_SHADER_STRUCT_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_SHADER_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
 

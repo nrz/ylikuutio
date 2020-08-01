@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __VERTEX_NORMALS_HPP_INCLUDED
-#define __VERTEX_NORMALS_HPP_INCLUDED
+#ifndef __YLIKUUTIO_TRIANGULATION_VERTEX_NORMALS_HPP_INCLUDED
+#define __YLIKUUTIO_TRIANGULATION_VERTEX_NORMALS_HPP_INCLUDED
 
 #ifndef PI
 #define PI 3.14159265359f

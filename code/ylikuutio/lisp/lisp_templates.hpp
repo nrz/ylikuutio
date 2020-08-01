@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __LISP_TEMPLATES_HPP_INCLUDED
-#define __LISP_TEMPLATES_HPP_INCLUDED
+#ifndef __YLIKUUTIO_LISP_LISP_TEMPLATES_HPP_INCLUDED
+#define __YLIKUUTIO_LISP_LISP_TEMPLATES_HPP_INCLUDED
 
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"

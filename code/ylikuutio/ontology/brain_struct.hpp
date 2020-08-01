@@ -18,8 +18,8 @@
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
 
-#ifndef __BRAIN_STRUCT_HPP_INCLUDED
-#define __BRAIN_STRUCT_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_BRAIN_STRUCT_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_BRAIN_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
 

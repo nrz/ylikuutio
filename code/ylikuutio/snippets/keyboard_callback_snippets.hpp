@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __KEYBOARD_CALLBACK_SNIPPETS_HPP_INCLUDED
-#define __KEYBOARD_CALLBACK_SNIPPETS_HPP_INCLUDED
+#ifndef __YLIKUUTIO_SNIPPETS_KEYBOARD_CALLBACK_SNIPPETS_HPP_INCLUDED
+#define __YLIKUUTIO_SNIPPETS_KEYBOARD_CALLBACK_SNIPPETS_HPP_INCLUDED
 
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr

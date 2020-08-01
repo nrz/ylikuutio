@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __SYMBIOSIS_HPP_INCLUDED
-#define __SYMBIOSIS_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_SYMBIOSIS_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_SYMBIOSIS_HPP_INCLUDED
 // `Symbiosis` consists usually of 2 or more different `SymbiontMaterial`s and 2 or more `SymbiontSpecies` bound to these `SymbiontMaterial`s.
 // All `SymbiontSpecies` of the same `Symbiosis` use the same `Shader`.
 //
