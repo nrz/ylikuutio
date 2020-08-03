@@ -43,9 +43,7 @@
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
 
-// `yli::ontology` files must be included in the canonical order
-// defined in `code/ylikuutio/data/datatypes.hpp` in order to
-// avoid cyclic dependencies.
+// `yli::ontology` files included in the canonical order.
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
