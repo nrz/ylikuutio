@@ -572,6 +572,8 @@ add_library(ylikuutio STATIC
 
     # ontology, in alphabetical order
     code/ylikuutio/ontology/activate_callback.hpp
+    code/ylikuutio/ontology/application.cpp
+    code/ylikuutio/ontology/application.hpp
     code/ylikuutio/ontology/biont.cpp
     code/ylikuutio/ontology/biont.hpp
     code/ylikuutio/ontology/biont_struct.hpp

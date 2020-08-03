@@ -745,7 +745,8 @@ namespace yli::ontology
 
     std::size_t Universe::get_number_of_children() const
     {
-        return this->parent_of_worlds.get_number_of_children() +
+        return this->parent_of_applications.get_number_of_children() +
+            this->parent_of_worlds.get_number_of_children() +
             this->parent_of_font2Ds.get_number_of_children() +
             this->parent_of_consoles.get_number_of_children() +
             this->parent_of_any_value_entities.get_number_of_children() +
@@ -754,7 +755,8 @@ namespace yli::ontology
 
     std::size_t Universe::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_worlds.child_pointer_vector) +
+        return yli::ontology::get_number_of_descendants(this->parent_of_applications.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_worlds.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_font2Ds.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_any_value_entities.child_pointer_vector) +

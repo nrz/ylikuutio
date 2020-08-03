@@ -305,6 +305,7 @@ namespace yli::ontology
 
             Universe(const yli::ontology::UniverseStruct& universe_struct)
                 : Entity(this, universe_struct), // `Universe` has no parent.
+                parent_of_applications(this),
                 parent_of_worlds(this),
                 parent_of_font2Ds(this),
                 parent_of_consoles(this),
@@ -744,6 +745,7 @@ namespace yli::ontology
             float background_blue;
             float background_alpha;
 
+            yli::ontology::ParentModule parent_of_applications;
             yli::ontology::ParentModule parent_of_worlds;
             yli::ontology::ParentModule parent_of_font2Ds;
             yli::ontology::ParentModule parent_of_consoles;
