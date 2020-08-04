@@ -184,6 +184,7 @@ namespace yli::callback
         {
             return this->callback(this->parent->get_universe(), this->parent, this, this->callback_parameter_pointer_vector, any_value);
         }
+
         return nullptr;
     }
 }
