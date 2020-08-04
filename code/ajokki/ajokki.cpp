@@ -253,14 +253,9 @@ int main(const int argc, const char* const argv[]) try
 
     yli::input::InputMaster* const input_master = my_universe->get_input_master();
 
-    std::cout << "Creating yli::callback::CallbackEngine cleanup_callback_engine ...\n";
-    yli::callback::CallbackEngine cleanup_callback_engine = yli::callback::CallbackEngine();
-    cleanup_callback_engine.create_callback_object(nullptr);
-
     if (!my_universe->get_is_headless() && my_universe->get_window() == nullptr)
     {
         std::cerr << "Failed to open SDL window.\n";
-        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -271,7 +266,6 @@ int main(const int argc, const char* const argv[]) try
         // Initialize GLEW.
         if (!yli::opengl::init_glew())
         {
-            cleanup_callback_engine.execute(nullptr);
             return -1;
         }
 
@@ -297,7 +291,6 @@ int main(const int argc, const char* const argv[]) try
 
     if (my_console == nullptr)
     {
-        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -316,7 +309,6 @@ int main(const int argc, const char* const argv[]) try
 
     if (mini_console == nullptr)
     {
-        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -339,7 +331,6 @@ int main(const int argc, const char* const argv[]) try
 
     if (earth_world == nullptr)
     {
-        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -353,7 +344,6 @@ int main(const int argc, const char* const argv[]) try
 
     if (mars_world == nullptr)
     {
-        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -369,7 +359,6 @@ int main(const int argc, const char* const argv[]) try
 
     if (helsinki_east_downtown_scene_entity == nullptr)
     {
-        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -378,7 +367,6 @@ int main(const int argc, const char* const argv[]) try
 
     if (helsinki_east_downtown_scene == nullptr)
     {
-        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -393,7 +381,6 @@ int main(const int argc, const char* const argv[]) try
     std::cout << "Creating yli::ontology::Scene* joensuu_center_west_scene and its contents ...\n";
     if (ajokki::create_joensuu_center_west_scene(entity_factory, earth_world) == nullptr)
     {
-        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -417,7 +404,6 @@ int main(const int argc, const char* const argv[]) try
     if (my_font2D == nullptr)
     {
         std::cerr << "Failed to create Font2D.\n";
-        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -1054,9 +1040,6 @@ int main(const int argc, const char* const argv[]) try
     yli::snippets::set_flight_mode(my_universe, true);
 
     my_universe->start_simulation();
-
-    // Do cleanup.
-    cleanup_callback_engine.execute(nullptr);
 
     return 0;
 }
