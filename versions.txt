@@ -41,6 +41,14 @@ https://semver.org/spec/v2.0.0.html
 * YliLisp function argument binding supports overloading.
 * C++17 is required.
 
+0.0.8 (release date 2020-08-05)
+* `main` entry point moved from the application into Ylikuutio code.
+* `Application` creates and starts the simulation.
+* `Application` is an `Entity`.
+* `Variable`s are Entities.
+* `Object`s can be created using the console.
+* `Holobiont`s can be created using the console.
+
 Future versions:
 
 0.0.x

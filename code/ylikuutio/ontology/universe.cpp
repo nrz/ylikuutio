@@ -105,7 +105,7 @@ namespace yli::ontology
     class Font2D;
     class Variable;
 
-    const std::string Universe::version = "0.0.7";
+    const std::string Universe::version = "0.0.8";
 
     void Universe::bind_entity(yli::ontology::Entity* const entity)
     {
