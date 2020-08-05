@@ -48,6 +48,8 @@ namespace yli::data
         UINT32_T_POINTER,
         // `yli::ontology` datatypes, 'entity' path.
         ENTITY_POINTER,
+        // `yli::ontology` datatypes, 'application' path.
+        APPLICATION_POINTER,
         // `yli::ontology` datatypes, 'variable' path.
         VARIABLE_POINTER,
         CONST_VARIABLE_POINTER,

@@ -24,5 +24,6 @@
 #define PAUSE_MAGIC_NUMBER 0x1c1a1ca          // "iciaica" ~ "ikiaika" in modern Finnish ortography, means "eternity" in Finnish
 #define CONTINUE_MAGIC_NUMBER 0xede11e        // "edelle", means "ahead" or "before" in Finnish
 #define EXIT_PROGRAM_MAGIC_NUMBER 0x0c0ea1ca  // "coeaica" ~ "koeaika" in modern Finnish ortography, means "trial period" or "probation" or "parole" in Finnish
+#define ERROR_MAGIC_NUMBER 0xc01cc0           // "colcco" ~ "kolkko" in modern Finnish ortography, means "gloomy" or "dismal" or "dreary" in Finnish
 
 #endif

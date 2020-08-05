@@ -96,16 +96,20 @@ namespace yli::ontology
         prerender_callback { nullptr },
         postrender_callback { nullptr },
         number_of_variables { 0 },
+        is_application { entity_struct.is_application },
         is_variable { entity_struct.is_variable }
     {
         // constructor.
 
         // Get `entityID` from `Universe` and set pointer to this `Entity`.
-        this->bind_to_universe();
-
-        if (!this->is_variable && this->universe != this)
+        if (!this->is_application)
         {
-            this->should_be_rendered = (this->universe == nullptr ? false : !this->universe->get_is_headless());
+            this->bind_to_universe();
+        }
+
+        if (!this->is_application && !this->is_variable && this->universe != nullptr && this->universe != this)
+        {
+            this->should_be_rendered = !this->universe->get_is_headless();
 
             yli::ontology::VariableStruct should_be_rendered_variable_struct(std::make_shared<yli::data::AnyValue>(this->should_be_rendered));
             should_be_rendered_variable_struct.local_name = "should_be_rendered";

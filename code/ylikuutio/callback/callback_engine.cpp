@@ -138,4 +138,9 @@ namespace yli::callback
 
         return this->return_values.at(this->return_values.size() - 1);
     }
+
+    yli::ontology::Universe* CallbackEngine::get_universe() const
+    {
+        return this->universe;
+    }
 }

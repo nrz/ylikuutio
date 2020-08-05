@@ -15,6 +15,9 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#ifndef __YLIKUUTIO_COMMAND_LINE_COMMAND_LINE_MASTER_HPP_INCLUDED
+#define __YLIKUUTIO_COMMAND_LINE_COMMAND_LINE_MASTER_HPP_INCLUDED
+
 // Include standard headers
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
@@ -43,3 +46,5 @@ namespace yli::command_line
             std::unordered_map<std::string, std::string> arg_map;
     };
 }
+
+#endif

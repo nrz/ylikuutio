@@ -291,6 +291,7 @@ namespace yli::input
 
 namespace yli::ontology
 {
+    class Application;
     class Scene;
     class Camera;
     class Font2D;
@@ -300,8 +301,10 @@ namespace yli::ontology
     {
         public:
             void bind_entity(yli::ontology::Entity* const entity);
-
             void unbind_entity(const std::size_t entityID);
+
+            void bind_application(yli::ontology::Application* const application);
+            void unbind_application(const std::size_t childID, const std::string& local_name);
 
             Universe(const yli::ontology::UniverseStruct& universe_struct)
                 : Entity(this, universe_struct), // `Universe` has no parent.
@@ -326,6 +329,8 @@ namespace yli::ontology
                 this->current_camera_spherical_coordinates.rho   = NAN; // dummy coordinates.
                 this->current_camera_spherical_coordinates.theta = NAN; // dummy coordinates.
                 this->current_camera_spherical_coordinates.phi   = NAN; // dummy coordinates.
+
+                this->number_of_applications = 0;
 
                 this->active_scene       = nullptr;
                 this->active_font2D      = nullptr;
@@ -763,6 +768,10 @@ namespace yli::ontology
             std::vector<yli::ontology::Entity*> entity_pointer_vector;
             std::queue<std::size_t> free_entityID_queue;
             std::size_t number_of_entities;
+
+            std::vector<yli::ontology::Application*> application_pointer_vector;
+            std::queue<std::size_t> free_applicationID_queue;
+            std::size_t number_of_applications;
 
             yli::ontology::Scene* active_scene;
             yli::ontology::Font2D* active_font2D;

@@ -180,10 +180,11 @@ namespace yli::callback
 
     std::shared_ptr<yli::data::AnyValue> CallbackObject::execute(std::shared_ptr<yli::data::AnyValue> any_value)
     {
-        if (this->callback != nullptr)
+        if (this->parent != nullptr && this->callback != nullptr)
         {
-            return this->callback(this->parent->universe, this->parent, this, this->callback_parameter_pointer_vector, any_value);
+            return this->callback(this->parent->get_universe(), this->parent, this, this->callback_parameter_pointer_vector, any_value);
         }
+
         return nullptr;
     }
 }

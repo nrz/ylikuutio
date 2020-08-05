@@ -84,7 +84,7 @@ namespace yli::callback
             std::shared_ptr<yli::data::AnyValue> get_nth_return_value(std::size_t n) const;
             std::shared_ptr<yli::data::AnyValue> get_previous_return_value() const;
 
-            friend class CallbackObject;
+            yli::ontology::Universe* get_universe() const;
 
         private:
             // `CallbackEngine` is not an `Entity`.
