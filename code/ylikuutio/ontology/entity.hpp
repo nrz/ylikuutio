@@ -54,6 +54,8 @@ namespace yli::ontology
             // Each class that supports binding to a new parent needs to `override` this function.
             virtual void bind_to_new_parent(yli::ontology::Entity* const new_entity_parent);
 
+            void bind_to_universe();
+
             // constructor.
             Entity(yli::ontology::Universe* const universe, const yli::ontology::EntityStruct& entity_struct);
 
@@ -156,8 +158,6 @@ namespace yli::ontology
             std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
 
         private:
-            void bind_to_universe();
-
             std::vector<yli::ontology::Variable*> variable_pointer_vector;
             std::queue<std::size_t> free_variableID_queue;
             std::size_t number_of_variables;
@@ -165,6 +165,7 @@ namespace yli::ontology
             virtual std::size_t get_number_of_children() const = 0;
             virtual std::size_t get_number_of_descendants() const = 0;
 
+            bool is_application;
             bool is_variable;
     };
 }

@@ -23,20 +23,28 @@
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 
 // Include standard headers
-#include <memory> // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
+#include <cstddef> // std::size_t
+#include <memory>  // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
+#include <utility> // std::pair
 
 namespace yli::ontology
 {
+    class Universe;
     struct UniverseStruct;
 
     class Application: public yli::ontology::Entity
     {
         public:
+            void bind_to_parent();
+
             Application(const int argc, const char* const argv[])
                 : Entity(nullptr, yli::ontology::EntityStruct()), // `Application` has no parent yet.
                 command_line_master(argc, argv)
             {
                 // constructor.
+
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "yli::ontology::Application*";
             }
 
             Application(const Application&) = delete;            // Delete copy constructor.
@@ -45,15 +53,23 @@ namespace yli::ontology
             // destructor.
             virtual ~Application();
 
-            virtual std::shared_ptr<yli::ontology::UniverseStruct> get_universe_struct(
-                    std::shared_ptr<yli::ontology::UniverseStruct> universe_struct_shared_ptr) = 0;
+            void set_universe(yli::ontology::Universe* const universe);
+
+            virtual std::pair<bool, std::shared_ptr<yli::ontology::UniverseStruct>> get_universe_struct() = 0;
 
             // This method can be used e.g. to instantiate different Entities before entering the main loop.
-            virtual void create_simulation() = 0;
+            virtual bool create_simulation() = 0;
+
+        protected:
+            yli::command_line::CommandLineMaster command_line_master;
 
         private:
-            yli::command_line::CommandLineMaster command_line_master;
+            yli::ontology::Entity* get_parent() const override final;
+            std::size_t get_number_of_children() const override final;
+            std::size_t get_number_of_descendants() const override final;
     };
+
+    yli::ontology::Application* create_application();
 }
 
 #endif

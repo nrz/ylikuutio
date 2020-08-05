@@ -16,11 +16,52 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "application.hpp"
+#include "universe.hpp"
+
+// Include standard headers
+#include <cstddef>  // std::size_t
+#include <iostream> // std::cout, std::cin, std::cerr
 
 namespace yli::ontology
 {
+    void Application::bind_to_parent()
+    {
+        // Requirements:
+        // `this->parent` must not be `nullptr`.
+        yli::ontology::Universe* const universe = this->universe;
+
+        if (universe == nullptr)
+        {
+            std::cerr << "ERROR: `Application::bind_to_parent`: `universe` is `nullptr`!\n";
+            return;
+        }
+
+        // Get `childID` from the `Universe` and set pointer to this `Application`.
+        universe->bind_application(this);
+    }
+
     Application::~Application()
     {
         // destructor.
+    }
+
+    void Application::set_universe(yli::ontology::Universe* const universe)
+    {
+        this->universe = universe;
+    }
+
+    yli::ontology::Entity* Application::get_parent() const
+    {
+        return this->universe;
+    }
+
+    std::size_t Application::get_number_of_children() const
+    {
+        return 0; // `Application` has no children.
+    }
+
+    std::size_t Application::get_number_of_descendants() const
+    {
+        return 0; // `Application` has no children.
     }
 }

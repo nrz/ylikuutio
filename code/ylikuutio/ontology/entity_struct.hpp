@@ -28,6 +28,7 @@ namespace yli::ontology
         EntityStruct()
             : global_name(""),
             local_name(""),
+            is_application(false),
             is_variable(false)
         {
             // constructor.
@@ -39,12 +40,14 @@ namespace yli::ontology
 
             this->global_name = entity_struct.global_name;
             this->local_name = entity_struct.local_name;
+            this->is_application = entity_struct.is_application;
             this->is_variable = entity_struct.is_variable;
         }
 
         EntityStruct(const std::string& global_name, const std::string& local_name)
             : global_name(global_name),
             local_name(local_name),
+            is_application(false),
             is_variable(false)
         {
             // constructor.
@@ -52,6 +55,7 @@ namespace yli::ontology
 
         std::string global_name;
         std::string local_name;
+        bool is_application;
         bool is_variable;
     };
 }

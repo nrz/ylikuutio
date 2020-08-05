@@ -34,6 +34,7 @@
 #endif
 
 #include "entity.hpp"
+#include "application.hpp"
 #include "variable.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
@@ -131,10 +132,35 @@ namespace yli::ontology
                 this->number_of_entities);
     }
 
+    void Universe::bind_application(yli::ontology::Application* const application)
+    {
+        // get `childID` from `Universe` and set pointer to `application`.
+        yli::hierarchy::bind_child_to_parent<yli::ontology::Application*>(
+                application,
+                this->application_pointer_vector,
+                this->free_applicationID_queue,
+                this->number_of_applications);
+    }
+
+    void Universe::unbind_application(const std::size_t childID, const std::string& local_name)
+    {
+        yli::ontology::unbind_child_from_parent(
+                childID,
+                local_name,
+                this->application_pointer_vector,
+                this->free_applicationID_queue,
+                this->number_of_applications,
+                this->entity_map);
+    }
+
     Universe::~Universe()
     {
         // destructor.
         std::cout << "This `Universe` will be destroyed.\n";
+
+        // destroy all `Application`s of this `Scene`.
+        std::cout << "All `Application`s of this `Scene` will be destroyed.\n";
+        yli::hierarchy::delete_children<yli::ontology::Application*>(this->application_pointer_vector, this->number_of_applications);
 
         if (!this->is_headless && this->is_framebuffer_initialized)
         {
@@ -275,7 +301,7 @@ namespace yli::ontology
         SDL_Event sdl_event;
         yli::sdl::flush_sdl_event_queue();
 
-        // This method contains the main loop.
+        // This method contains the main simulation loop.
         bool has_mouse_focus = true;
 
         while (!this->is_exit_requested && this->input_master != nullptr)
@@ -745,7 +771,7 @@ namespace yli::ontology
 
     std::size_t Universe::get_number_of_children() const
     {
-        return this->parent_of_applications.get_number_of_children() +
+        return this->number_of_applications +
             this->parent_of_worlds.get_number_of_children() +
             this->parent_of_font2Ds.get_number_of_children() +
             this->parent_of_consoles.get_number_of_children() +
@@ -755,7 +781,7 @@ namespace yli::ontology
 
     std::size_t Universe::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_applications.child_pointer_vector) +
+        return yli::ontology::get_number_of_descendants(this->application_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_worlds.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_font2Ds.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector) +

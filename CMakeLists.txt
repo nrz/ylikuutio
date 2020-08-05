@@ -445,6 +445,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/console/console_callback_object.hpp
     code/ylikuutio/console/input_parameters_to_any_value_callback_with_console.hpp
 
+    # core, in alphabetical order
+    code/ylikuutio/core/entrypoint.hpp
+
     # data, in alphabetical order
     code/ylikuutio/data/any_struct.cpp
     code/ylikuutio/data/any_struct.hpp
