@@ -57,7 +57,6 @@
 #include "brain_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/any_struct.hpp"
-#include "code/ylikuutio/callback/input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 
 // Include standard headers
 #include <cstddef>   // std::size_t
@@ -302,11 +301,10 @@ namespace yli::ontology
         return brain_entity;
     }
 
-    yli::ontology::Entity* EntityFactory::create_callback_engine_entity(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback) const
+    yli::ontology::Entity* EntityFactory::create_callback_engine_entity() const
     {
         return new yli::ontology::CallbackEngineEntity(
                 this->universe,
-                callback,
                 (this->universe == nullptr ? nullptr : &this->universe->parent_of_callback_engine_entities));
     }
 }

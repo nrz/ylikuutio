@@ -18,7 +18,7 @@
 #ifndef __YLIKUUTIO_CORE_ENTRYPOINT_HPP_INCLUDED
 #define __YLIKUUTIO_CORE_ENTRYPOINT_HPP_INCLUDED
 
-// #define SDL_main main
+#define SDL_main main
 
 #include "code/ylikuutio/ontology/application.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
