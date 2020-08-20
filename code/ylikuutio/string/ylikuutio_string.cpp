@@ -1012,68 +1012,6 @@ namespace yli::string
         return unicode_value;
     }
 
-    std::string convert_std_list_char_to_std_string(const std::list<char>& std_list_char)
-    {
-        std::string my_string;
-
-        for (std::list<char>::const_iterator it = std_list_char.begin(); it != std_list_char.end(); it++)
-        {
-            my_string.push_back(*it);
-        }
-
-        return my_string;
-    }
-
-    std::string convert_std_list_char_to_std_string(
-            const std::list<char>& std_list_char,
-            const std::size_t first_line_length,
-            const std::size_t line_length)
-    {
-        std::string my_string;
-        std::size_t remaining_characters_on_this_line = first_line_length;
-
-        for (std::list<char>::const_iterator it = std_list_char.begin(); it != std_list_char.end(); it++)
-        {
-            if (remaining_characters_on_this_line == 0)
-            {
-                my_string.push_back('\\');
-                my_string.push_back('n');
-                remaining_characters_on_this_line = line_length;
-            }
-            my_string.push_back(*it);
-            remaining_characters_on_this_line--;
-        }
-        return my_string;
-    }
-
-    std::vector<std::string> convert_std_list_char_to_std_vector_std_string(
-            const std::list<char>& std_list_char,
-            const std::size_t line_length)
-    {
-        std::vector<std::string> my_vector;
-        std::string my_string;
-        std::size_t remaining_characters_on_this_line = line_length;
-
-        for (std::list<char>::const_iterator it = std_list_char.begin(); it != std_list_char.end(); it++)
-        {
-            if (remaining_characters_on_this_line == 0)
-            {
-                my_vector.emplace_back(my_string);
-                my_string.clear();
-                remaining_characters_on_this_line = line_length;
-            }
-            my_string.push_back(*it);
-            remaining_characters_on_this_line--;
-        }
-
-        if (my_string.size() > 0)
-        {
-            my_vector.emplace_back(my_string);
-        }
-
-        return my_vector;
-    }
-
     bool check_if_float_string(const std::string& my_string)
     {
         const std::size_t maximum_safe_length_for_float_string = 38;

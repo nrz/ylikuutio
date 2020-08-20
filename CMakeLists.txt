@@ -53,6 +53,10 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU
     # Clang and GCC accept `-Wextra`, but Visual Studio does not seem to accept it.
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wextra")
 endif()
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    # Clang is by default more strict than standard with template template arguments.
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frelaxed-template-template-args")
+endif()
 
 # set(CMAKE_COLOR_MAKEFILE ON)
 # set(CMAKE_VERBOSE_MAKEFILE ON)

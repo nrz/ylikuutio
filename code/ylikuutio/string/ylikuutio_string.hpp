@@ -292,16 +292,60 @@ namespace yli::string
 
     int32_t extract_unicode_value_from_string(const char*& unicode_char_pointer);
 
-    std::string convert_std_list_char_to_std_string(const std::list<char>& std_list_char);
+    template<template<class> class T1>
+        std::string convert_std_list_char_to_std_string(
+                const T1<char>& char_container,
+                const std::size_t first_line_length,
+                const std::size_t line_length)
+        {
+            std::string my_string;
+            std::size_t remaining_characters_on_this_line = first_line_length;
 
-    std::string convert_std_list_char_to_std_string(
-            const std::list<char>& std_list_char,
-            const std::size_t first_line_length,
-            const std::size_t line_length);
+            for (auto it = char_container.begin(); it != char_container.end(); it++)
+            {
+                if (remaining_characters_on_this_line == 0)
+                {
+                    my_string.push_back('\\');
+                    my_string.push_back('n');
+                    remaining_characters_on_this_line = line_length;
+                }
 
-    std::vector<std::string> convert_std_list_char_to_std_vector_std_string(
-            const std::list<char>& std_list_char,
-            const std::size_t line_length);
+                my_string.push_back(*it);
+                remaining_characters_on_this_line--;
+            }
+
+            return my_string;
+        }
+
+    template<template<class> class T1>
+        std::vector<std::string> convert_std_list_char_to_std_vector_std_string(
+                const T1<char>& char_container,
+                const std::size_t line_length)
+        {
+            std::vector<std::string> my_vector;
+            std::string my_string;
+            std::size_t remaining_characters_on_this_line = line_length;
+
+            for (auto it = char_container.begin(); it != char_container.end(); it++)
+            {
+                if (remaining_characters_on_this_line == 0)
+                {
+                    my_vector.emplace_back(my_string);
+                    my_string.clear();
+                    remaining_characters_on_this_line = line_length;
+                }
+
+                my_string.push_back(*it);
+                remaining_characters_on_this_line--;
+            }
+
+            if (my_string.size() > 0)
+            {
+                my_vector.emplace_back(my_string);
+            }
+
+            return my_vector;
+        }
 
     bool check_if_float_string(const std::string& my_string);
     bool check_if_double_string(const std::string& my_string);
