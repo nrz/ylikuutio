@@ -19,7 +19,7 @@
 #define __YLIKUUTIO_LOAD_FONT_LOADER_HPP_INCLUDED
 
 // Include standard headers
-#include <stdint.h>  // uint32_t etc.
+#include <cstddef>   // std::size_t
 #include <string>    // std::string
 #include <vector>    // std::vector
 
@@ -34,23 +34,23 @@ namespace yli::load
     int32_t extract_value_from_string_with_standard_endings(
             const char* const vertex_base_pointer,
             char*& vertex_data_pointer,
-            const uint64_t vertex_data_size,
+            const std::size_t vertex_data_size,
             const char* const description,
             const bool is_debug_mode);
 
-    bool find_first_glyph_in_svg(const char* SVG_base_pointer, char*& SVG_data_pointer, uint64_t data_size);
+    bool find_first_glyph_in_svg(const char* SVG_base_pointer, char*& SVG_data_pointer, std::size_t data_size);
 
     bool load_vertex_data(
             const char* const SVG_base_pointer,
             char*& SVG_data_pointer,
-            uint64_t data_size,
+            std::size_t data_size,
             std::vector<std::vector<glm::vec2>>& current_glyph_vertices,
             const bool is_debug_mode);
 
     bool load_svg_glyph(
             const char* const SVG_base_pointer,
             char*& SVG_data_pointer,
-            uint64_t data_size,
+            std::size_t data_size,
             std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
             std::vector<std::string>& glyph_names,
             std::vector<std::string>& unicode_strings,

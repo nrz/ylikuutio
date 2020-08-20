@@ -26,18 +26,18 @@
 #endif
 
 // Include standard headers
+#include <cstddef>    // std::size_t
 #include <cstring>    // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <ios>        // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream>   // std::cout, std::cin, std::cerr
 #include <memory>     // std::make_shared, std::shared_ptr
 #include <sstream>    // std::istringstream, std::ostringstream, std::stringstream
-#include <stdint.h>   // uint32_t etc.
 #include <string>     // std::string
 #include <vector>     // std::vector
 
 namespace yli::load
 {
-    bool check_if_we_are_inside_block(const char* SVG_base_pointer, char*& SVG_data_pointer, const uint64_t data_size)
+    bool check_if_we_are_inside_block(const char* SVG_base_pointer, char*& SVG_data_pointer, const std::size_t data_size)
     {
         // This function returns `true` if we are inside block, `false` otherwise.
 
@@ -51,7 +51,7 @@ namespace yli::load
     int32_t extract_value_from_string_with_standard_endings(
             const char* const vertex_base_pointer,
             char*& vertex_data_pointer,
-            const uint64_t vertex_data_size,
+            const std::size_t vertex_data_size,
             const char* const description,
             const bool is_debug_mode)
     {
@@ -63,7 +63,7 @@ namespace yli::load
                 is_debug_mode ? description : nullptr);
     }
 
-    bool find_first_glyph_in_svg(const char* SVG_base_pointer, char*& SVG_data_pointer, uint64_t data_size)
+    bool find_first_glyph_in_svg(const char* SVG_base_pointer, char*& SVG_data_pointer, std::size_t data_size)
     {
         // This function advances `SVG_data_pointer` to the start of the first glyph.
         // Returns true if a glyph was found.
@@ -112,7 +112,7 @@ namespace yli::load
     bool load_vertex_data(
             const char* const SVG_base_pointer,
             char*& SVG_data_pointer,
-            uint64_t data_size,
+            std::size_t data_size,
             std::vector<std::vector<glm::vec2>>& current_glyph_vertices,
             const bool is_debug_mode)
     {
@@ -233,7 +233,7 @@ namespace yli::load
     bool load_svg_glyph(
             const char* const SVG_base_pointer,
             char*& SVG_data_pointer,
-            uint64_t data_size,
+            std::size_t data_size,
             std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
             std::vector<std::string>& glyph_names,
             std::vector<std::string>& unicode_strings,
@@ -250,7 +250,7 @@ namespace yli::load
         if (is_debug_mode)
         {
             std::stringstream data_pointer_stringstream;
-            data_pointer_stringstream << std::hex << (uint64_t) SVG_data_pointer;
+            data_pointer_stringstream << std::hex << (std::size_t) SVG_data_pointer;
             std::cout << "<glyph found at 0x" << data_pointer_stringstream.str() << ".\n";
         }
 
@@ -270,7 +270,7 @@ namespace yli::load
                 if (is_debug_mode)
                 {
                     std::stringstream data_pointer_stringstream;
-                    data_pointer_stringstream << std::hex << (uint64_t) SVG_data_pointer;
+                    data_pointer_stringstream << std::hex << (std::size_t) SVG_data_pointer;
                     std::cout << "glyph-name= found at 0x" << data_pointer_stringstream.str() << ".\n";
                 }
 
@@ -281,7 +281,7 @@ namespace yli::load
                     if (is_debug_mode)
                     {
                         std::stringstream opening_double_quote_pointer_stringstream;
-                        opening_double_quote_pointer_stringstream << std::hex << (uint64_t) opening_double_quote_pointer;
+                        opening_double_quote_pointer_stringstream << std::hex << (std::size_t) opening_double_quote_pointer;
                         std::cout << "Opening \" found at 0x" << opening_double_quote_pointer_stringstream.str() << ".\n";
                     }
 
@@ -294,7 +294,7 @@ namespace yli::load
                         if (is_debug_mode)
                         {
                             std::stringstream closing_double_quote_pointer_stringstream;
-                            closing_double_quote_pointer_stringstream << std::hex << (uint64_t) closing_double_quote_pointer;
+                            closing_double_quote_pointer_stringstream << std::hex << (std::size_t) closing_double_quote_pointer;
                             std::cout << "Closing \" found at 0x" << closing_double_quote_pointer_stringstream.str() << ".\n";
                         }
 
@@ -337,7 +337,7 @@ namespace yli::load
                 if (is_debug_mode)
                 {
                     std::stringstream data_pointer_stringstream;
-                    data_pointer_stringstream << std::hex << (uint64_t) SVG_data_pointer;
+                    data_pointer_stringstream << std::hex << (std::size_t) SVG_data_pointer;
                     std::cout << "unicode= found at 0x" << data_pointer_stringstream.str() << ".\n";
                 }
 
@@ -348,7 +348,7 @@ namespace yli::load
                     if (is_debug_mode)
                     {
                         std::stringstream opening_double_quote_pointer_stringstream;
-                        opening_double_quote_pointer_stringstream << std::hex << (uint64_t) opening_double_quote_pointer;
+                        opening_double_quote_pointer_stringstream << std::hex << (std::size_t) opening_double_quote_pointer;
                         std::cout << "Opening \" found at 0x" << opening_double_quote_pointer_stringstream.str() << ".\n";
                     }
 
@@ -361,7 +361,7 @@ namespace yli::load
                         if (is_debug_mode)
                         {
                             std::stringstream closing_double_quote_pointer_stringstream;
-                            closing_double_quote_pointer_stringstream << std::hex << (uint64_t) closing_double_quote_pointer;
+                            closing_double_quote_pointer_stringstream << std::hex << (std::size_t) closing_double_quote_pointer;
                             std::cout << "Closing \" found at 0x" << closing_double_quote_pointer_stringstream.str() << ".\n";
                         }
 
@@ -453,7 +453,7 @@ namespace yli::load
             const bool is_debug_mode)
     {
         const std::shared_ptr<std::string> file_content = yli::file::slurp(filename);
-        const uint64_t file_size = file_content->size();
+        const std::size_t file_size = file_content->size();
         std::shared_ptr<std::vector<char>> SVG_data = std::make_shared<std::vector<char>>();
         SVG_data->reserve(file_size);
 
@@ -475,12 +475,12 @@ namespace yli::load
             return false;
         }
 
-        uint64_t offset = (uint64_t) SVG_data_pointer - (uint64_t) SVG_base_pointer;
+        std::size_t offset = (std::size_t) SVG_data_pointer - (std::size_t) SVG_base_pointer;
         if (is_debug_mode)
         {
             std::stringstream first_glyph_found_stringstream;
             first_glyph_found_stringstream << "First glyph found at file offset 0x" << std::hex << offset;
-            first_glyph_found_stringstream << " (memory address 0x" << (uint64_t) SVG_data_pointer << ").\n";
+            first_glyph_found_stringstream << " (memory address 0x" << (std::size_t) SVG_data_pointer << ").\n";
             std::cout << first_glyph_found_stringstream.str();
         }
 
