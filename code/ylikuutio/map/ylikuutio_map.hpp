@@ -55,9 +55,9 @@ namespace yli::map
             std::vector<std::pair<std::string, T1>> key_and_value_vector;
             key_and_value_vector.reserve(unordered_map.size());
 
-            for (auto& key_and_value : unordered_map)
+            for (auto& [key, value] : unordered_map)
             {
-                key_and_value_vector.emplace_back(std::pair<std::string, T1>(key_and_value.first, key_and_value.second)); // key and value.
+                key_and_value_vector.emplace_back(std::pair<std::string, T1>(key, value));
             }
 
             // sort key and value vector alphabetically.
@@ -132,13 +132,13 @@ namespace yli::map
 
             std::vector<std::pair<std::string, T1>> keys_and_values = get_keys_and_values(unordered_map);
 
-            for (auto& key_and_value : keys_and_values)
+            for (auto& [key, value] : keys_and_values)
             {
-                T2 inherited_type = dynamic_cast<T2>(key_and_value.second);
+                T2 inherited_type = dynamic_cast<T2>(value);
 
                 if (inherited_type != nullptr)
                 {
-                    console->print_text(key_and_value.first);
+                    console->print_text(key);
                 }
             }
         }
