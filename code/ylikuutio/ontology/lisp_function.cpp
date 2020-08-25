@@ -21,7 +21,6 @@
 
 // Include standard headers
 #include <memory>     // std::make_shared, std::shared_ptr
-#include <utility>    // std::pair
 
 namespace yli::ontology
 {

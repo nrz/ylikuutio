@@ -87,7 +87,6 @@
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
-#include <utility>       // std::pair
 #include <variant>       // std::holds_alternative, std::variant
 
 namespace yli::data
