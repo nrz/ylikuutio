@@ -33,7 +33,6 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string, std::getline
 #include <utility>  // std::pair
 #include <vector>   // std::vector
@@ -215,7 +214,7 @@ namespace yli::ontology
 
         console->print_text(entity->get_type());
 
-        uint64_t memory_address = reinterpret_cast<uint64_t>((void*) entity);
+        std::size_t memory_address = reinterpret_cast<std::size_t>((void*) entity);
         std::stringstream memory_address_stringstream;
         memory_address_stringstream << "0x" << std::hex << memory_address;
 
@@ -229,7 +228,7 @@ namespace yli::ontology
         }
         else
         {
-            uint64_t parents_memory_address = reinterpret_cast<uint64_t>((void*) entity->get_parent());
+            std::size_t parents_memory_address = reinterpret_cast<std::size_t>((void*) entity->get_parent());
             std::stringstream parents_memory_address_stringstream;
             parents_memory_address_stringstream << "0x" << std::hex << parents_memory_address;
 
@@ -270,7 +269,7 @@ namespace yli::ontology
 
         for (auto& key_and_value : key_and_value_vector)
         {
-            uint64_t memory_address = reinterpret_cast<uint64_t>((void*) key_and_value.second); // value.
+            std::size_t memory_address = reinterpret_cast<std::size_t>((void*) key_and_value.second); // value.
             std::stringstream memory_address_stringstream;
             memory_address_stringstream << " 0x" << std::hex << memory_address;
 
@@ -300,7 +299,7 @@ namespace yli::ontology
         }
         else
         {
-            uint64_t parents_memory_address = reinterpret_cast<uint64_t>((void*) entity->get_parent());
+            std::size_t parents_memory_address = reinterpret_cast<std::size_t>((void*) entity->get_parent());
             std::stringstream parents_memory_address_stringstream;
             parents_memory_address_stringstream << "0x" << std::hex << parents_memory_address;
 
