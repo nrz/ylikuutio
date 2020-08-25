@@ -38,7 +38,7 @@ namespace yli::map
             std::vector<std::string> key_vector;
             key_vector.reserve(unordered_map.size());
 
-            for (auto key_and_value : unordered_map)
+            for (auto& key_and_value : unordered_map)
             {
                 key_vector.emplace_back(key_and_value.first); // key.
             }
@@ -55,7 +55,7 @@ namespace yli::map
             std::vector<std::pair<std::string, T1>> key_and_value_vector;
             key_and_value_vector.reserve(unordered_map.size());
 
-            for (auto key_and_value : unordered_map)
+            for (auto& key_and_value : unordered_map)
             {
                 key_and_value_vector.emplace_back(std::pair<std::string, T1>(key_and_value.first, key_and_value.second)); // key and value.
             }

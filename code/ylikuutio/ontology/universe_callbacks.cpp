@@ -268,7 +268,7 @@ namespace yli::ontology
 
         std::vector<std::pair<std::string, yli::ontology::Entity*>> key_and_value_vector = yli::map::get_keys_and_values(universe->entity_map);
 
-        for (auto key_and_value : key_and_value_vector)
+        for (auto& key_and_value : key_and_value_vector)
         {
             uint64_t memory_address = reinterpret_cast<uint64_t>((void*) key_and_value.second); // value.
             std::stringstream memory_address_stringstream;
