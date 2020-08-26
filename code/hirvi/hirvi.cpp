@@ -174,8 +174,6 @@ namespace hirvi
                     return std::pair(false, nullptr);
                 }
 
-                // Create the `Universe`, store it in `my_universe`.
-                std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
                 std::shared_ptr<yli::ontology::UniverseStruct> universe_struct_shared_ptr = std::make_shared<yli::ontology::UniverseStruct>();
                 std::stringstream window_title_stringstream;
                 window_title_stringstream << "Hirvi " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
