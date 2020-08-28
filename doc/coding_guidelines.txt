@@ -7,7 +7,7 @@ Source code style
 * Use Allman style for all code.
 * Use 4 spaces for indentation. Do not use tabs.
 * C++ header files `*.hpp`, C++ implementation files `*.cpp`.
-* If needed: C header files `*.c`, C implementation files `*.h`.
+* If needed: C header files `*.h`, C implementation files `*.c`.
 
 if (true)
 {
@@ -19,7 +19,9 @@ else
 }
 
 General
-* Do not use `using`. Always use the full name like `std::cout`.
+* Do not use `using namespace std`.
+  Use the full name for standard library functions
+  and objects like `std::cout`.
 * Prefer `uint8_t` to `unsigned char`.
 * Prefer `int32_t` to `int`.
 * Prefer `int64_t` to `long long`.
