@@ -35,15 +35,15 @@ namespace yli::file
         // inspired by http://stackoverflow.com/questions/116038/what-is-the-best-way-to-slurp-a-file-into-a-stdstring-in-c/116220#116220
         std::cout << "Loading file " << file_path << " into memory.\n";
 
-        std::ifstream input_stream(file_path.c_str());
+        std::ifstream file_stream(file_path.c_str());
 
-        if (input_stream.fail())
+        if (file_stream.fail())
         {
             return nullptr;
         }
 
         std::stringstream file_buffer;
-        file_buffer << input_stream.rdbuf();
+        file_buffer << file_stream.rdbuf();
         std::shared_ptr<std::string> file_contents = std::make_shared<std::string>(file_buffer.str());
         return file_contents;
     }
