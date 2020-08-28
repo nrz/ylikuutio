@@ -318,7 +318,7 @@ namespace yli::string
         }
 
     template<template<class> class T1>
-        std::vector<std::string> convert_std_list_char_to_std_vector_std_string(
+        std::vector<std::string> convert_char_container_to_std_vector_std_string(
                 const T1<char>& char_container,
                 const std::size_t line_length)
         {

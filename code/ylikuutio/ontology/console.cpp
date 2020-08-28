@@ -253,7 +253,7 @@ namespace yli::ontology
                 }
 
                 // Convert into a vector of lines.
-                const std::vector<std::string> current_input_vector = yli::string::convert_std_list_char_to_std_vector_std_string(
+                const std::vector<std::string> current_input_vector = yli::string::convert_char_container_to_std_vector_std_string(
                         current_input_with_prompt,
                         this->n_columns);
 
