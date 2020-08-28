@@ -40,6 +40,9 @@ addons:
             - libxi-dev
             - libxinerama-dev
             - make
+            - g++-mingw-w64
+            - gcc-mingw-w64
+            - binutils-mingw-w64
     coverity_scan:
         project:
             name: nrz/ylikuutio
@@ -52,9 +55,24 @@ addons:
         branch_pattern: coverity_scan
 
 script:
-    - gcc -v && g++ -v && cmake --version
+    - cmake --version
+    - gcc -v && g++ -v
     - mkdir build_gcc
     - cd build_gcc
-    - cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
+    - CC=$(which gcc) CXX=$(which g++) cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
     - make -j 4
     - ./unit_tests_with_googletest
+    - cd ..
+    - clang -v && clang++ -v
+    - mkdir build_clang
+    - cd build_clang
+    - gcc -v && g++ -v && cmake --version
+    - CC=$(which clang) CXX=$(which clang++) cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
+    - make -j 4
+    - ./unit_tests_with_googletest
+    - cd ..
+    - x86_64-w64-mingw32-gcc -v && x86_64-w64-mingw32-g++ -v
+    - mkdir build_crosscompile_linux_to_windows_gcc
+    - cd build_crosscompile_linux_to_windows_gcc
+    - cmake .. -DCMAKE_TOOLCHAIN_FILE=../w64.cmake
+    - make -j 4
