@@ -52,7 +52,7 @@ namespace yli::file
     {
         std::cout << "Loading binary file " << file_path << " into memory.\n";
 
-        std::ifstream file_stream(file_path.c_str(), std::fstream::binary);
+        std::ifstream file_stream(file_path.c_str(), std::ios::binary);
 
         if (file_stream.fail())
         {
