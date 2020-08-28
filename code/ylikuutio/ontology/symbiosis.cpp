@@ -134,7 +134,7 @@ namespace yli::ontology
     {
         std::size_t number_of_symbiont_species = 0;
 
-        for (auto symbiont_material : this->parent_of_symbiont_materials.child_pointer_vector)
+        for (auto& symbiont_material : this->parent_of_symbiont_materials.child_pointer_vector)
         {
             number_of_symbiont_species += symbiont_material->get_number_of_all_children();
         }
@@ -199,7 +199,7 @@ namespace yli::ontology
 
             this->biontID_symbiont_species_vector.resize(this->ofbx_mesh_count);
 
-            for (auto key_and_value : this->ofbx_diffuse_texture_mesh_map)
+            for (auto& key_and_value : this->ofbx_diffuse_texture_mesh_map)
             {
                 ofbx_diffuse_texture_pointer_vector.emplace_back(key_and_value.first); // key.
             }

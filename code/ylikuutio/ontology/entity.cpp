@@ -244,13 +244,13 @@ namespace yli::ontology
         std::vector<std::string> keys;
         keys.reserve(this->entity_map.size());
 
-        for (auto it : this->entity_map)
+        for (auto& key_and_value : this->entity_map)
         {
             if (!entity_names.empty())
             {
                 entity_names += " ";
             }
-            std::string key = static_cast<std::string>(it.first);
+            std::string key = static_cast<std::string>(key_and_value.first);
             entity_names += key;
         }
 

@@ -33,7 +33,6 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string, std::getline
 #include <utility>  // std::pair
 #include <vector>   // std::vector
@@ -215,7 +214,7 @@ namespace yli::ontology
 
         console->print_text(entity->get_type());
 
-        uint64_t memory_address = reinterpret_cast<uint64_t>((void*) entity);
+        std::size_t memory_address = reinterpret_cast<std::size_t>((void*) entity);
         std::stringstream memory_address_stringstream;
         memory_address_stringstream << "0x" << std::hex << memory_address;
 
@@ -229,7 +228,7 @@ namespace yli::ontology
         }
         else
         {
-            uint64_t parents_memory_address = reinterpret_cast<uint64_t>((void*) entity->get_parent());
+            std::size_t parents_memory_address = reinterpret_cast<std::size_t>((void*) entity->get_parent());
             std::stringstream parents_memory_address_stringstream;
             parents_memory_address_stringstream << "0x" << std::hex << parents_memory_address;
 
@@ -268,13 +267,13 @@ namespace yli::ontology
 
         std::vector<std::pair<std::string, yli::ontology::Entity*>> key_and_value_vector = yli::map::get_keys_and_values(universe->entity_map);
 
-        for (auto key_and_value : key_and_value_vector)
+        for (auto& [key, value] : key_and_value_vector)
         {
-            uint64_t memory_address = reinterpret_cast<uint64_t>((void*) key_and_value.second); // value.
+            std::size_t memory_address = reinterpret_cast<std::size_t>((void*) value);
             std::stringstream memory_address_stringstream;
             memory_address_stringstream << " 0x" << std::hex << memory_address;
 
-            std::string entity_info = key_and_value.first; // key.
+            std::string entity_info = key;
             entity_info += memory_address_stringstream.str();
             console->print_text(entity_info);
         }
@@ -300,7 +299,7 @@ namespace yli::ontology
         }
         else
         {
-            uint64_t parents_memory_address = reinterpret_cast<uint64_t>((void*) entity->get_parent());
+            std::size_t parents_memory_address = reinterpret_cast<std::size_t>((void*) entity->get_parent());
             std::stringstream parents_memory_address_stringstream;
             parents_memory_address_stringstream << "0x" << std::hex << parents_memory_address;
 

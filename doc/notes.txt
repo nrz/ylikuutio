@@ -1,5 +1,6 @@
 Marching cubes algorithm
 https://transvoxel.org/Lengyel-VoxelTerrain.pdf
+http://www.cs.jhu.edu/~misha/ReadingSeminar/Papers/Chernyaev96.pdf
 
 Marching tetrahedra algorithm
 

@@ -65,9 +65,9 @@ int main(const int argc, const char* const argv[]) try
     //    the tokens and callbacks defined by `Application`
     //    instance, and returns a `std::shared_ptr` to it.
 
-    std::pair<bool, std::shared_ptr<yli::ontology::UniverseStruct>> result = application->get_universe_struct();
+    auto [success, universe_struct_shared_ptr] = application->get_universe_struct();
 
-    if (result.first && result.second == nullptr)
+    if (success && universe_struct_shared_ptr == nullptr)
     {
         // No errors, but do not start the application.
         // This may be due to `--version` or similar.
@@ -75,7 +75,7 @@ int main(const int argc, const char* const argv[]) try
         return 0;
     }
 
-    if (!result.first && result.second != nullptr)
+    if (!success && universe_struct_shared_ptr != nullptr)
     {
         std::cerr << "ERROR: error in `Application::get_universe_struct!\n";
 
@@ -83,7 +83,7 @@ int main(const int argc, const char* const argv[]) try
         return 1;
     }
 
-    if (result.second == nullptr)
+    if (universe_struct_shared_ptr == nullptr)
     {
         // 3. If command line arguments were invalid, a help text
         //    is printed and the program exits.
@@ -96,7 +96,7 @@ int main(const int argc, const char* const argv[]) try
     }
 
     // 4. `Universe` is created. It receives `UniverseStruct` as an argument.
-    yli::ontology::Universe* universe = new yli::ontology::Universe(*result.second);
+    yli::ontology::Universe* universe = new yli::ontology::Universe(*universe_struct_shared_ptr);
 
     // 5. `Application` is bound to the newly created `Universe`.
     application->set_universe(universe);

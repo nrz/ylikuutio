@@ -21,7 +21,6 @@
 
 // Include standard headers
 #include <memory>     // std::make_shared, std::shared_ptr
-#include <utility>    // std::pair
 
 namespace yli::ontology
 {
@@ -69,12 +68,12 @@ namespace yli::ontology
                 it != this->parent_of_generic_lisp_function_overloads.child_pointer_vector.end();
                 it++)
         {
-            std::pair<bool, std::shared_ptr<yli::data::AnyValue>> success_and_return_value =
+            auto [success, return_value] =
                 static_cast<yli::ontology::GenericLispFunctionOverload*>(*it)->execute(parameter_vector);
 
-            if (success_and_return_value.first == true)
+            if (success)
             {
-                return success_and_return_value.second; // Return the return value of the callback.
+                return return_value; // Return the return value of the callback.
             }
         }
 
