@@ -131,7 +131,7 @@ namespace yli::ontology
                         0,
                         this->format,
                         this->type,
-                        NULL);
+                        nullptr);
             }
             else
             {
@@ -145,7 +145,7 @@ namespace yli::ontology
                         0,
                         this->format,
                         this->type,
-                        NULL);
+                        nullptr);
             }
 
             yli::opengl::set_nearest_filtering_parameters();
