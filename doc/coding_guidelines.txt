@@ -22,6 +22,8 @@ General
 * Do not use `using namespace std`.
   Use the full name for standard library functions
   and objects like `std::cout`.
+* Do not define multiple variables on the same line.
+* The asterisk belongs to the type: `char* foo`.
 * Prefer `uint8_t` to `unsigned char`.
 * Prefer `int32_t` to `int`.
 * Prefer `int64_t` to `long long`.
