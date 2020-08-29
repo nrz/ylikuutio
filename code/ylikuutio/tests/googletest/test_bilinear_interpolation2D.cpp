@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/interpolation/bilinear_interpolation2D.hpp"
+#include "code/ylikuutio/interpolation/bilinear_interpolation.hpp"
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.

@@ -512,7 +512,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/input/input_mode.hpp
 
     # interpolation, in alphabetical order
-    code/ylikuutio/interpolation/bilinear_interpolation2D.hpp
+    code/ylikuutio/interpolation/bilinear_interpolation.hpp
 
     # linear algebra, in alphabetical order.
     code/ylikuutio/linear_algebra/matrix.cpp
@@ -988,7 +988,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/graph/shortest_paths.cpp
         code/ylikuutio/graph/shortest_paths.hpp
         code/ylikuutio/hierarchy/hierarchy_templates.hpp
-        code/ylikuutio/interpolation/bilinear_interpolation2D.hpp
+        code/ylikuutio/interpolation/bilinear_interpolation.hpp
         code/ylikuutio/linear_algebra/matrix.cpp
         code/ylikuutio/linear_algebra/matrix.hpp
         code/ylikuutio/linear_algebra/matrix_functions.cpp
