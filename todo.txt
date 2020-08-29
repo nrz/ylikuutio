@@ -152,6 +152,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Use TinySpline.
 [ ] Add bicubic interpolation.
 [ ] Add spline interpolation.
+[ ] Add Lanczos interpolation.
 [ ] Variable `triangulation`: `set triangulation bilinear`/`set triangulation bicubic`/`set triangulation southwest_northeast`/`set triangulation southeast_northwest`.
 [ ] Write integration tests for Ajokki.
 [ ] Learn how to write unit tests for multithreaded C++ code.
