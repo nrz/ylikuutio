@@ -25,7 +25,7 @@
 namespace yli::interpolation
 {
     template<class T1>
-        bool interpolate_bilinearly2D(
+        bool interpolate_bilinearly(
                 T1* input_vertex_pointer,
                 float* output_vertex_pointer,
                 uint32_t image_width,

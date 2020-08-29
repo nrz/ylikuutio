@@ -46,7 +46,7 @@ TEST(a_1x1_terrain_must_be_interpolated_appropriately, no_change)
     float delta_x = 1.0f;
     float delta_z = 1.0f;
 
-    ASSERT_TRUE(yli::interpolation::interpolate_bilinearly2D(input_vertex_data, output_vertex_pointer, image_width, image_height, x1, z1, x2, z2, delta_x, delta_z));
+    ASSERT_TRUE(yli::interpolation::interpolate_bilinearly(input_vertex_data, output_vertex_pointer, image_width, image_height, x1, z1, x2, z2, delta_x, delta_z));
 
     ASSERT_TRUE(*output_vertex_pointer == 8.26875246809035309056e21);
     ASSERT_TRUE(*output_vertex_pointer > 8.26875246809035e21);
@@ -74,7 +74,7 @@ TEST(a_2x2_terrain_must_be_interpolated_appropriately, no_change)
     float delta_x = 1.0f;
     float delta_z = 1.0f;
 
-    ASSERT_TRUE(yli::interpolation::interpolate_bilinearly2D(input_vertex_data, output_vertex_pointer, image_width, image_height, x1, z1, x2, z2, delta_x, delta_z));
+    ASSERT_TRUE(yli::interpolation::interpolate_bilinearly(input_vertex_data, output_vertex_pointer, image_width, image_height, x1, z1, x2, z2, delta_x, delta_z));
     ASSERT_TRUE(*output_vertex_pointer++ == 123.25f);
     ASSERT_TRUE(*output_vertex_pointer++ == 234.25f);
     ASSERT_TRUE(*output_vertex_pointer++ == 345.25f);
@@ -104,7 +104,7 @@ TEST(a_2x2_terrain_must_be_interpolated_appropriately, halfway_points)
     float delta_x = 0.5f;
     float delta_z = 0.5f;
 
-    ASSERT_TRUE(yli::interpolation::interpolate_bilinearly2D(input_vertex_data, output_vertex_pointer, image_width, image_height, x1, z1, x2, z2, delta_x, delta_z));
+    ASSERT_TRUE(yli::interpolation::interpolate_bilinearly(input_vertex_data, output_vertex_pointer, image_width, image_height, x1, z1, x2, z2, delta_x, delta_z));
     ASSERT_TRUE(*output_vertex_pointer++ == 123.25f);                                        // 0.0, 0.0
     ASSERT_TRUE(*output_vertex_pointer++ == (123.25f + 234.25f) / 2.0f);                     // 0.5, 0.0
     ASSERT_TRUE(*output_vertex_pointer++ == 234.25f);                                        // 1.0, 0.0
@@ -139,7 +139,7 @@ TEST(a_2x2_terrain_must_be_interpolated_appropriately, quarter_points)
     float delta_x = 0.25f;
     float delta_z = 0.25f;
 
-    ASSERT_TRUE(yli::interpolation::interpolate_bilinearly2D(input_vertex_data, output_vertex_pointer, image_width, image_height, x1, z1, x2, z2, delta_x, delta_z));
+    ASSERT_TRUE(yli::interpolation::interpolate_bilinearly(input_vertex_data, output_vertex_pointer, image_width, image_height, x1, z1, x2, z2, delta_x, delta_z));
     ASSERT_TRUE(*output_vertex_pointer++ == 123.25f);                                                                                   // 0.00, 0.00
     ASSERT_TRUE(*output_vertex_pointer++ == 0.75f * 123.25f + 0.25f * 234.25f);                                                         // 0.25, 0.00
     ASSERT_TRUE(*output_vertex_pointer++ == 0.5f * 123.25f + 0.5f * 234.25f);                                                           // 0.50, 0.00
