@@ -24,6 +24,7 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 
 // Include standard headers
+#include <cstdlib>   // EXIT_FAILURE, EXIT_SUCCESS
 #include <exception> // try, catch, std::exception
 #include <iostream>  // std::cout, std::cin, std::cerr
 #include <memory>    // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
@@ -63,7 +64,7 @@ int main(const int argc, const char* const argv[]) try
     if (application == nullptr)
     {
         std::cerr << "ERROR: error in `yli::ontology::create_application`!\n";
-        return 1;
+        return EXIT_FAILURE;
     }
 
     // 2. `yli::ontology::Application` creates `UniverseStruct`
@@ -78,7 +79,7 @@ int main(const int argc, const char* const argv[]) try
         // No errors, but do not start the application.
         // This may be due to `--version` or similar.
         delete application;
-        return 0;
+        return EXIT_SUCCESS;
     }
 
     if (!success && universe_struct_shared_ptr != nullptr)
@@ -86,7 +87,7 @@ int main(const int argc, const char* const argv[]) try
         std::cerr << "ERROR: error in `Application::get_universe_struct!\n";
 
         delete application;
-        return 1;
+        return EXIT_FAILURE;
     }
 
     if (universe_struct_shared_ptr == nullptr)
@@ -98,7 +99,7 @@ int main(const int argc, const char* const argv[]) try
 
         // TODO: print the usage of command line arguments!
         delete application;
-        return 1;
+        return EXIT_FAILURE;
     }
 
     // 4. `Universe` is created. It receives `UniverseStruct` as an argument.
