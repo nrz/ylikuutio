@@ -58,14 +58,14 @@ int main(const int argc, const char* const argv[]) try
     // 1. `yli::ontology::Application` is created, but it is not
     //    bound to `yli::ontology::Universe` yet.  `Application`
     //    is defined by the application that uses Ylikuutio.
-    yli::ontology::Application* application = yli::ontology::create_application(argc, argv);
+    yli::ontology::Application* const application = yli::ontology::create_application(argc, argv);
 
     // 2. `yli::ontology::Application` creates `UniverseStruct`
     //    appropriately based on the command line arguments and
     //    the tokens and callbacks defined by `Application`
     //    instance, and returns a `std::shared_ptr` to it.
 
-    auto [success, universe_struct_shared_ptr] = application->get_universe_struct();
+    const auto [success, universe_struct_shared_ptr] = application->get_universe_struct();
 
     if (success && universe_struct_shared_ptr == nullptr)
     {
@@ -96,7 +96,7 @@ int main(const int argc, const char* const argv[]) try
     }
 
     // 4. `Universe` is created. It receives `UniverseStruct` as an argument.
-    yli::ontology::Universe* universe = new yli::ontology::Universe(*universe_struct_shared_ptr);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(*universe_struct_shared_ptr);
 
     // 5. `Application` is bound to the newly created `Universe`.
     application->set_universe(universe);
