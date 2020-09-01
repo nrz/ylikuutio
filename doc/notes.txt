@@ -59,6 +59,9 @@ https://www.khronos.org/opengles/sdk/tools/Reference-Compiler/
 Blender instructions:
 https://www.youtube.com/playlist?list=PLda3VoSoc_TR7X7wfblBGiRz-bvhKpGkS
 
+Concurrency Cost Hierarchy:
+https://travisdowns.github.io/blog/2020/07/06/concurrency-costs.html
+
 Space partitioning:
 http://tulrich.com/geekstuff/partitioning.html
 

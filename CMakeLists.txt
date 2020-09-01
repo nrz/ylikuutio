@@ -512,7 +512,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/input/input_mode.hpp
 
     # interpolation, in alphabetical order
-    code/ylikuutio/interpolation/bilinear_interpolation2D.hpp
+    code/ylikuutio/interpolation/bilinear_interpolation.hpp
+    code/ylikuutio/interpolation/bilinear_interpolation_struct.hpp
 
     # linear algebra, in alphabetical order.
     code/ylikuutio/linear_algebra/matrix.cpp
@@ -988,7 +989,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/graph/shortest_paths.cpp
         code/ylikuutio/graph/shortest_paths.hpp
         code/ylikuutio/hierarchy/hierarchy_templates.hpp
-        code/ylikuutio/interpolation/bilinear_interpolation2D.hpp
+        code/ylikuutio/interpolation/bilinear_interpolation.hpp
+        code/ylikuutio/interpolation/bilinear_interpolation_struct.hpp
         code/ylikuutio/linear_algebra/matrix.cpp
         code/ylikuutio/linear_algebra/matrix.hpp
         code/ylikuutio/linear_algebra/matrix_functions.cpp
@@ -1090,7 +1092,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_any_value.cpp
         code/ylikuutio/tests/googletest/test_ascii_grid_heightmap_loader.cpp
         # code/ylikuutio/tests/googletest/test_asio.cpp
-        code/ylikuutio/tests/googletest/test_bilinear_interpolation2D.cpp
+        code/ylikuutio/tests/googletest/test_bilinear_interpolation.cpp
         code/ylikuutio/tests/googletest/test_bmp_heightmap_loader.cpp
         code/ylikuutio/tests/googletest/test_bmp_loader.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp

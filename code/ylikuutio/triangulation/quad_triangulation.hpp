@@ -49,7 +49,6 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -116,9 +115,9 @@ namespace yli::triangulation
                 return false;
             }
 
-            const std::string triangulation_type = triangulate_quads_struct.triangulation_type;
-            const float sphere_radius = triangulate_quads_struct.sphere_radius;
-            const yli::geometry::SphericalTerrainStruct spherical_terrain_struct = triangulate_quads_struct.spherical_terrain_struct;
+            const std::string& triangulation_type = triangulate_quads_struct.triangulation_type;
+            const float& sphere_radius = triangulate_quads_struct.sphere_radius;
+            const yli::geometry::SphericalTerrainStruct& spherical_terrain_struct = triangulate_quads_struct.spherical_terrain_struct;
 
             bool is_bilinear_interpolation_in_use = false;
             bool is_southwest_northeast_edges_in_use = false;

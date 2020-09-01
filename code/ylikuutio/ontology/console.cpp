@@ -228,7 +228,7 @@ namespace yli::ontology
             for (std::size_t history_i = history_line_i; history_i < history_end_i && history_i < this->console_history.size(); history_i++)
             {
                 std::list<char> historical_text = this->console_history.at(history_i);
-                text_struct.text += yli::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
+                text_struct.text += yli::string::convert_char_container_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
             }
         }
         else
@@ -253,7 +253,7 @@ namespace yli::ontology
                 }
 
                 // Convert into a vector of lines.
-                const std::vector<std::string> current_input_vector = yli::string::convert_std_list_char_to_std_vector_std_string(
+                const std::vector<std::string> current_input_vector = yli::string::convert_char_container_to_std_vector_std_string(
                         current_input_with_prompt,
                         this->n_columns);
 
@@ -282,9 +282,9 @@ namespace yli::ontology
                 for (std::size_t history_i = history_start_i; history_i < this->console_history.size(); history_i++)
                 {
                     const std::list<char> historical_text = this->console_history.at(history_i);
-                    text_struct.text += yli::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
+                    text_struct.text += yli::string::convert_char_container_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
                 }
-                text_struct.text += this->prompt + yli::string::convert_std_list_char_to_std_string(
+                text_struct.text += this->prompt + yli::string::convert_char_container_to_std_string(
                         this->current_input,
                         characters_for_line - this->prompt.size(), // First line is shorter due to space taken by the prompt.
                         characters_for_line);                      // The rest lines have full length.

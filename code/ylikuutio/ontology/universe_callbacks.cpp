@@ -343,7 +343,7 @@ namespace yli::ontology
             glBindTexture(GL_TEXTURE_2D, universe->texture);
 
             // Define the texture.
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture_width, texture_height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture_width, texture_height, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 
             yli::opengl::set_filtering_parameters();
 

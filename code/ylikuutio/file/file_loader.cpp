@@ -35,15 +35,15 @@ namespace yli::file
         // inspired by http://stackoverflow.com/questions/116038/what-is-the-best-way-to-slurp-a-file-into-a-stdstring-in-c/116220#116220
         std::cout << "Loading file " << file_path << " into memory.\n";
 
-        std::ifstream input_stream(file_path.c_str());
+        std::ifstream file_stream(file_path.c_str());
 
-        if (input_stream.fail())
+        if (file_stream.fail())
         {
             return nullptr;
         }
 
         std::stringstream file_buffer;
-        file_buffer << input_stream.rdbuf();
+        file_buffer << file_stream.rdbuf();
         std::shared_ptr<std::string> file_contents = std::make_shared<std::string>(file_buffer.str());
         return file_contents;
     }
@@ -52,22 +52,22 @@ namespace yli::file
     {
         std::cout << "Loading binary file " << file_path << " into memory.\n";
 
-        std::ifstream file(file_path.c_str(), std::fstream::binary);
+        std::ifstream file_stream(file_path.c_str(), std::ios::binary);
 
-        if (file.fail())
+        if (file_stream.fail())
         {
             return nullptr;
         }
 
-        file.unsetf(std::ios::skipws);           // do not skip whitespace.
-        file.seekg(0, std::ios::end);
-        std::streampos file_size = file.tellg();
-        file.seekg(0, std::ios::beg);
+        file_stream.unsetf(std::ios::skipws);           // do not skip whitespace.
+        file_stream.seekg(0, std::ios::end);
+        std::streampos file_size = file_stream.tellg();
+        file_stream.seekg(0, std::ios::beg);
         std::shared_ptr<std::vector<uint8_t>> data_vector = std::make_shared<std::vector<uint8_t>>();
         data_vector->reserve(file_size);
         data_vector->insert(
                 data_vector->begin(),
-                std::istream_iterator<uint8_t>(file),
+                std::istream_iterator<uint8_t>(file_stream),
                 std::istream_iterator<uint8_t>());
         return data_vector;
     }

@@ -54,7 +54,7 @@ namespace yli::audio
 
         // initialize `device` member variable.
         SDL_AudioSpec wav_spec = SDL_AudioSpec();
-        this->device = SDL_OpenAudioDevice(NULL, 0, &wav_spec, &this->audio_spec, SDL_AUDIO_ALLOW_FORMAT_CHANGE);
+        this->device = SDL_OpenAudioDevice(nullptr, 0, &wav_spec, &this->audio_spec, SDL_AUDIO_ALLOW_FORMAT_CHANGE);
         SDL_PauseAudioDevice(this->device, 1); // stop playing.
 
         this->audio_master = this;   // `this` is the `AudioMaster`. Do not create more than 1 `AudioMaster`!
@@ -85,7 +85,7 @@ namespace yli::audio
             uint32_t wav_length;
             uint8_t* wav_buffer;
 
-            if (SDL_LoadWAV(audio_file.c_str(), &wav_spec, &wav_buffer, &wav_length) == NULL)
+            if (SDL_LoadWAV(audio_file.c_str(), &wav_spec, &wav_buffer, &wav_length) == nullptr)
             {
                 // Loading the sound failed.
                 std::cerr << "Loading WAV file " << audio_file << " failed.\n";
@@ -97,7 +97,7 @@ namespace yli::audio
             wav_spec.samples = 4096;
             wav_spec.callback = yli::audio::AudioMaster::play_audio_callback;
 
-            this->device = SDL_OpenAudioDevice(NULL, 0, &wav_spec, &this->audio_spec, SDL_AUDIO_ALLOW_FORMAT_CHANGE);
+            this->device = SDL_OpenAudioDevice(nullptr, 0, &wav_spec, &this->audio_spec, SDL_AUDIO_ALLOW_FORMAT_CHANGE);
 
             if (this->device == 0)
             {
