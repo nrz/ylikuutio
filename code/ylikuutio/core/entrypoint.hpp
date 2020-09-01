@@ -60,6 +60,12 @@ int main(const int argc, const char* const argv[]) try
     //    is defined by the application that uses Ylikuutio.
     yli::ontology::Application* const application = yli::ontology::create_application(argc, argv);
 
+    if (application == nullptr)
+    {
+        std::cerr << "ERROR: error in `yli::ontology::create_application`!\n";
+        return 1;
+    }
+
     // 2. `yli::ontology::Application` creates `UniverseStruct`
     //    appropriately based on the command line arguments and
     //    the tokens and callbacks defined by `Application`
