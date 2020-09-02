@@ -147,8 +147,8 @@ And save the human species, too.
 Tulevaisuus is a work in progress.
 
 Ajokki is sandbox demo program to check out some properties of
-Ylikuutio 3D engine. "Ajokki" is a working title based on a
-Finnish bus body manufacturer.
+Ylikuutio 3D engine. "Ajokki" is a working title named after
+a Finnish bus body manufacturer.
 
 GPGPU test is a simple GPGPU example. It computes e.g. the distances
 between some railway stations on the current passenger railway network
