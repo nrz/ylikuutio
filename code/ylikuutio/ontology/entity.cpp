@@ -29,7 +29,6 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
-#include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <regex>         // std::regex, std::regex_match
@@ -71,7 +70,7 @@ namespace yli::ontology
 
         if (universe == nullptr)
         {
-            std::cerr << "ERROR: `Entity::bind_to_universe`: `universe` is `nullptr`!\n";
+            // When `Application` is created, `universe` is still `nullptr`.
             return;
         }
 
@@ -116,7 +115,6 @@ namespace yli::ontology
             should_be_rendered_variable_struct.activate_callback = &yli::ontology::activate_should_be_rendered;
             should_be_rendered_variable_struct.read_callback = &yli::ontology::read_should_be_rendered;
             should_be_rendered_variable_struct.should_ylikuutio_call_activate_callback_now = true;
-            std::cout << "Executing `this->create_variable(should_be_rendered_variable_struct);` ...\n";
             this->create_variable(should_be_rendered_variable_struct);
         }
     }
@@ -124,11 +122,11 @@ namespace yli::ontology
     Entity::~Entity()
     {
         // destructor.
-        std::cout << "`Entity` destructor called.\n";
 
         if (this->universe == nullptr)
         {
-            std::cerr << "ERROR: `Entity::~Entity`: `this->universe` is `nullptr`.\n";
+            // When leaving the `main` before binding `Application` to `Universe`,
+            // `this->universe` is still `nullptr`.
             return;
         }
 
