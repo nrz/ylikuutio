@@ -132,21 +132,6 @@ namespace hirvi
 
             std::pair<bool, std::shared_ptr<yli::ontology::UniverseStruct>> get_universe_struct() override
             {
-                if (this->command_line_master.is_key("version"))
-                {
-                    std::cout << "Hirvi " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version << "\n";
-                    return std::pair(true, nullptr);
-                }
-
-                this->command_line_master.print_keys_and_values();
-
-                if (!this->command_line_master.get_are_arguments_valid())
-                {
-                    // Some of the arguments do not comply with the Ylikuutio argument syntax.
-                    std::cerr << "ERROR: Invalid syntax used in command line parameters.\n";
-                    return std::pair(false, nullptr);
-                }
-
                 const std::vector<std::string> valid_keys {
                     "help",
                         "version",
