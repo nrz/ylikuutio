@@ -21,6 +21,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <string>   // std::string
 
 namespace yli::ontology
 {
@@ -43,6 +44,16 @@ namespace yli::ontology
     Application::~Application()
     {
         // destructor.
+    }
+
+    std::string Application::get_name() const
+    {
+        return ""; // `override` this in the inherited class.
+    }
+
+    std::string Application::get_version() const
+    {
+        return ""; // `override` this in the inherited class.
     }
 
     void Application::set_universe(yli::ontology::Universe* const universe)

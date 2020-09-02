@@ -67,6 +67,35 @@ int main(const int argc, const char* const argv[]) try
         return EXIT_FAILURE;
     }
 
+    if (application->command_line_master.is_key("version"))
+    {
+        if (!application->get_name().empty() && !application->get_version().empty())
+        {
+            // Application name and application version present.
+            // Print application name and application version normally.
+            std::cout << application->get_name() << " " << application->get_version() <<
+                ", powered by Ylikuutio " << yli::ontology::Universe::version << "\n";
+        }
+        else if (!application->get_name().empty())
+        {
+            // Application name present but application version not present.
+            // Print Ylikuutio version as the application version.
+            std::cout << application->get_name() << " " << yli::ontology::Universe::version <<
+                ", powered by Ylikuutio " << yli::ontology::Universe::version << "\n";
+        }
+        else
+        {
+            // No application name present.
+            // Print only Ylikuutio version.
+            std::cout << "Ylikuutio " << yli::ontology::Universe::version << "\n";
+        }
+
+        delete application;
+        return EXIT_SUCCESS;
+    }
+
+    application->command_line_master.print_keys_and_values();
+
     // 2. `yli::ontology::Application` creates `UniverseStruct`
     //    appropriately based on the command line arguments and
     //    the tokens and callbacks defined by `Application`
