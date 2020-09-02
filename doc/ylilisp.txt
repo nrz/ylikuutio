@@ -46,3 +46,6 @@ Planned implementation details:
 Command examples:
 * `(define my-number 'uint64 123)`.
 * `(cast my-number 'float)`.
+
+Links:
+* https://compilers.iecc.com/crenshaw/

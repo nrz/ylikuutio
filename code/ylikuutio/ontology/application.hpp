@@ -25,6 +25,7 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <memory>  // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
+#include <string>  // std::string
 #include <utility> // std::pair
 
 namespace yli::ontology
@@ -53,6 +54,9 @@ namespace yli::ontology
             // destructor.
             virtual ~Application();
 
+            virtual std::string get_name() const;    // Note: this is not the global name or the local name of the `Application`.
+            virtual std::string get_version() const; // `Application` version.
+
             void set_universe(yli::ontology::Universe* const universe);
 
             virtual std::pair<bool, std::shared_ptr<yli::ontology::UniverseStruct>> get_universe_struct() = 0;
@@ -60,7 +64,6 @@ namespace yli::ontology
             // This method can be used e.g. to instantiate different Entities before entering the main loop.
             virtual bool create_simulation() = 0;
 
-        protected:
             yli::command_line::CommandLineMaster command_line_master;
 
         private:

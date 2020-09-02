@@ -24,6 +24,7 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 
 // Include standard headers
+#include <cstdlib>   // EXIT_FAILURE, EXIT_SUCCESS
 #include <exception> // try, catch, std::exception
 #include <iostream>  // std::cout, std::cin, std::cerr
 #include <memory>    // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
@@ -58,21 +59,66 @@ int main(const int argc, const char* const argv[]) try
     // 1. `yli::ontology::Application` is created, but it is not
     //    bound to `yli::ontology::Universe` yet.  `Application`
     //    is defined by the application that uses Ylikuutio.
-    yli::ontology::Application* application = yli::ontology::create_application(argc, argv);
+    yli::ontology::Application* const application = yli::ontology::create_application(argc, argv);
+
+    if (application == nullptr)
+    {
+        std::cerr << "ERROR: error in `yli::ontology::create_application`!\n";
+        return EXIT_FAILURE;
+    }
+
+    if (!application->command_line_master.get_are_arguments_valid())
+    {
+        // Some of the arguments do not comply with the Ylikuutio argument syntax.
+        std::cerr << "ERROR: Invalid syntax used in command line parameters.\n";
+        application->command_line_master.print_keys_and_values();
+
+        delete application;
+        return EXIT_FAILURE;
+    }
+
+    if (application->command_line_master.is_key("version"))
+    {
+        if (!application->get_name().empty() && !application->get_version().empty())
+        {
+            // Application name and application version present.
+            // Print application name and application version normally.
+            std::cout << application->get_name() << " " << application->get_version() <<
+                ", powered by Ylikuutio " << yli::ontology::Universe::version << "\n";
+        }
+        else if (!application->get_name().empty())
+        {
+            // Application name present but application version not present.
+            // Print Ylikuutio version as the application version.
+            std::cout << application->get_name() << " " << yli::ontology::Universe::version <<
+                ", powered by Ylikuutio " << yli::ontology::Universe::version << "\n";
+        }
+        else
+        {
+            // No application name present.
+            // Print only Ylikuutio version.
+            std::cout << "Ylikuutio " << yli::ontology::Universe::version << "\n";
+        }
+
+        delete application;
+        return EXIT_SUCCESS;
+    }
+
+    application->command_line_master.print_keys_and_values();
 
     // 2. `yli::ontology::Application` creates `UniverseStruct`
     //    appropriately based on the command line arguments and
     //    the tokens and callbacks defined by `Application`
     //    instance, and returns a `std::shared_ptr` to it.
 
-    auto [success, universe_struct_shared_ptr] = application->get_universe_struct();
+    const auto [success, universe_struct_shared_ptr] = application->get_universe_struct();
 
     if (success && universe_struct_shared_ptr == nullptr)
     {
         // No errors, but do not start the application.
         // This may be due to `--version` or similar.
         delete application;
-        return 0;
+        return EXIT_SUCCESS;
     }
 
     if (!success && universe_struct_shared_ptr != nullptr)
@@ -80,7 +126,7 @@ int main(const int argc, const char* const argv[]) try
         std::cerr << "ERROR: error in `Application::get_universe_struct!\n";
 
         delete application;
-        return 1;
+        return EXIT_FAILURE;
     }
 
     if (universe_struct_shared_ptr == nullptr)
@@ -92,11 +138,11 @@ int main(const int argc, const char* const argv[]) try
 
         // TODO: print the usage of command line arguments!
         delete application;
-        return 1;
+        return EXIT_FAILURE;
     }
 
     // 4. `Universe` is created. It receives `UniverseStruct` as an argument.
-    yli::ontology::Universe* universe = new yli::ontology::Universe(*universe_struct_shared_ptr);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(*universe_struct_shared_ptr);
 
     // 5. `Application` is bound to the newly created `Universe`.
     application->set_universe(universe);
