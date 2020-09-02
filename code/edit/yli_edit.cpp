@@ -121,6 +121,11 @@ namespace yli_edit
                 // destructor.
             }
 
+            std::string get_name() const override
+            {
+                return "YliEdit";
+            }
+
             std::pair<bool, std::shared_ptr<yli::ontology::UniverseStruct>> get_universe_struct() override
             {
                 if (this->command_line_master.is_key("version"))
