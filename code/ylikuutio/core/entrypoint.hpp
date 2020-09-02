@@ -67,6 +67,16 @@ int main(const int argc, const char* const argv[]) try
         return EXIT_FAILURE;
     }
 
+    if (!application->command_line_master.get_are_arguments_valid())
+    {
+        // Some of the arguments do not comply with the Ylikuutio argument syntax.
+        std::cerr << "ERROR: Invalid syntax used in command line parameters.\n";
+        application->command_line_master.print_keys_and_values();
+
+        delete application;
+        return EXIT_FAILURE;
+    }
+
     if (application->command_line_master.is_key("version"))
     {
         if (!application->get_name().empty() && !application->get_version().empty())
