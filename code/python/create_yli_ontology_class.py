@@ -140,7 +140,7 @@ universe_forward_declaration = \
 "    class Universe;"
 
 parent_module_forward_declaration = \
-"    class ParentModule; // TODO: delete this line if `ChildModule` is not needed!"
+"    class ParentModule; // TODO: delete this line if `ParentModule` is not needed!"
 
 begin_class_definition = \
 "    class " + class_name + ": public " + fully_qualified_inherited_class_name + "\n"\
