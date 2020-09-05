@@ -43,7 +43,7 @@ namespace yli::ontology
             brain(nullptr),
             cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
             spherical_coordinates(NAN, NAN, NAN),
-            horizontal_angle(0.0),
+            yaw(0.0),
             vertical_angle(0.0)
         {
             // constructor.
@@ -53,14 +53,14 @@ namespace yli::ontology
                 yli::ontology::Brain* const brain,
                 const glm::vec3& cartesian_coordinates,
                 yli::data::SphericalCoordinatesStruct spherical_coordinates,
-                const float horizontal_angle,
+                const float yaw,
                 const float vertical_angle)
             : EntityStruct(),
             input_method(yli::input::InputMethod::AI),
             brain(brain),
             cartesian_coordinates(cartesian_coordinates),
             spherical_coordinates(spherical_coordinates),
-            horizontal_angle(horizontal_angle),
+            yaw(yaw),
             vertical_angle(vertical_angle)
         {
         }
@@ -69,7 +69,7 @@ namespace yli::ontology
                 yli::ontology::Brain* const brain,
                 const glm::vec3& cartesian_coordinates,
                 yli::data::SphericalCoordinatesStruct spherical_coordinates,
-                const float horizontal_angle,
+                const float yaw,
                 const float vertical_angle,
                 const std::string& global_name,
                 const std::string& local_name)
@@ -78,7 +78,7 @@ namespace yli::ontology
             brain(brain),
             cartesian_coordinates(cartesian_coordinates),
             spherical_coordinates(spherical_coordinates),
-            horizontal_angle(horizontal_angle),
+            yaw(yaw),
             vertical_angle(vertical_angle)
         {
         }
@@ -87,7 +87,7 @@ namespace yli::ontology
         yli::ontology::Brain* brain;     // brain.
         glm::vec3 cartesian_coordinates; // coordinate vector.
         yli::data::SphericalCoordinatesStruct spherical_coordinates;
-        float horizontal_angle;
+        float yaw;
         float vertical_angle;
     };
 }

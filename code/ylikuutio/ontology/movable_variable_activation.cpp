@@ -397,7 +397,7 @@ namespace yli::ontology
                 return nullptr;
             }
 
-            movable->horizontal_angle = std::get<float>(horizontal_angle_any_value->data);
+            movable->yaw = std::get<float>(horizontal_angle_any_value->data);
             return nullptr;
         }
 

@@ -87,7 +87,7 @@ namespace yli::ontology
                             camera_struct.brain,
                             camera_struct.cartesian_coordinates,
                             camera_struct.spherical_coordinates,
-                            camera_struct.horizontal_angle,
+                            camera_struct.yaw,
                             camera_struct.vertical_angle,
                             camera_struct.global_name,
                             camera_struct.local_name),
@@ -95,7 +95,7 @@ namespace yli::ontology
             {
                 // constructor.
 
-                this->horizontal_angle  = camera_struct.horizontal_angle;
+                this->yaw               = camera_struct.yaw;
                 this->vertical_angle    = camera_struct.vertical_angle;
                 this->is_static_view    = camera_struct.is_static_view;
 

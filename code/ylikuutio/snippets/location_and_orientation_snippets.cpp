@@ -113,9 +113,9 @@ namespace yli::snippets
         std::cout << "Executing `entity->create_variable(z_variable_struct);` ...\n";
         entity->create_variable(z_variable_struct);
 
-        const float horizontal_angle = 0.31f;
-        yli::ontology::VariableStruct horizontal_angle_variable_struct(std::make_shared<yli::data::AnyValue>(horizontal_angle));
-        horizontal_angle_variable_struct.local_name = "horizontal_angle";
+        const float yaw = 0.31f;
+        yli::ontology::VariableStruct horizontal_angle_variable_struct(std::make_shared<yli::data::AnyValue>(yaw));
+        horizontal_angle_variable_struct.local_name = "yaw";
         horizontal_angle_variable_struct.activate_callback = &yli::ontology::activate_horizontal_angle;
         horizontal_angle_variable_struct.read_callback = &yli::ontology::read_horizontal_angle;
         horizontal_angle_variable_struct.should_ylikuutio_call_activate_callback_now = true;

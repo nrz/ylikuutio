@@ -42,7 +42,7 @@ namespace yli::ontology
             spherical_coordinates(NAN, NAN, NAN),
             parent(nullptr),
             brain(nullptr),
-            horizontal_angle(0.0),
+            yaw(0.0),
             vertical_angle(0.0),
             is_static_view(false)
         {
@@ -57,7 +57,7 @@ namespace yli::ontology
         yli::ontology::Scene* parent;    // pointer to the `Scene`.
         yli::ontology::Brain* brain;     // pointer to the `Brain` (not a parent!).
 
-        float horizontal_angle;          // horizontal angle in radians.
+        float yaw;                       // yaw in radians.
         float vertical_angle;            // vertical angle in radians.
 
         // Static view `Camera`'s coordinates do not change by moving in a `Scene`. However,

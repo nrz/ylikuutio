@@ -74,7 +74,7 @@ namespace yli::ontology
                             object_struct.brain,
                             object_struct.cartesian_coordinates,
                             object_struct.spherical_coordinates,
-                            object_struct.horizontal_angle,
+                            object_struct.yaw,
                             object_struct.vertical_angle),
                         parent_module)
             {
@@ -126,7 +126,7 @@ namespace yli::ontology
                     std::shared_ptr<std::string> x,
                     std::shared_ptr<std::string> y,
                     std::shared_ptr<std::string> z,
-                    std::shared_ptr<std::string> horizontal_angle,
+                    std::shared_ptr<std::string> yaw,
                     std::shared_ptr<std::string> vertical_angle);
 
             // Public callbacks end here.

@@ -931,7 +931,7 @@ namespace ajokki
         yli::ontology::CameraStruct cat_camera_struct;
         cat_camera_struct.cartesian_coordinates = glm::vec3(800.00f, 400.00f, 950.00f);
         cat_camera_struct.parent = helsinki_east_downtown_scene;
-        cat_camera_struct.horizontal_angle = -0.90f;
+        cat_camera_struct.yaw = -0.90f;
         cat_camera_struct.vertical_angle = -1.00f;
 
         std::cout << "Creating yli::ontology::Entity* cat_camera_entity ...\n";
@@ -950,7 +950,7 @@ namespace ajokki
         yli::ontology::CameraStruct turbo_polizei_camera_struct;
         turbo_polizei_camera_struct.cartesian_coordinates = glm::vec3(87.00f, 28.00f, 169.00f);
         turbo_polizei_camera_struct.parent = helsinki_east_downtown_scene;
-        turbo_polizei_camera_struct.horizontal_angle = -0.45f;
+        turbo_polizei_camera_struct.yaw = -0.45f;
         turbo_polizei_camera_struct.vertical_angle = -0.05f;
 
         std::cout << "Creating yli::ontology::Entity* turbo_polizei_camera_entity ...\n";

@@ -47,7 +47,7 @@ namespace yli::ontology
             parent(nullptr),
             brain(nullptr),
             rotate_angle(NAN),
-            horizontal_angle(0.0),
+            yaw(0.0),
             vertical_angle(0.0)
         {
             // constructor.
@@ -63,7 +63,7 @@ namespace yli::ontology
         yli::ontology::VectorFont* parent; // pointer to the `VectorFont` (parent).
         yli::ontology::Brain* brain;       // pointer to the `Brain` (not a parent!).
         float rotate_angle;                // rotate angle.
-        float horizontal_angle;            // horizontal angle in radians.
+        float yaw;                         // yaw in radians.
         float vertical_angle;              // vertical angle in radians.
     };
 }

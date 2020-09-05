@@ -104,7 +104,7 @@ namespace yli::ontology
                 this->water_level           = scene_struct.water_level;
                 this->cartesian_coordinates = nullptr;
                 this->spherical_coordinates = nullptr;
-                this->horizontal_angle      = NAN;
+                this->yaw                   = NAN;
                 this->vertical_angle        = NAN;
                 this->turbo_factor          = 1.0f;
                 this->twin_turbo_factor     = 1.0f;
@@ -230,7 +230,7 @@ namespace yli::ontology
 
             std::unique_ptr<btDiscreteDynamicsWorld> dynamics_world;
 
-            float horizontal_angle;
+            float yaw;
             float vertical_angle;
 
             float turbo_factor;
