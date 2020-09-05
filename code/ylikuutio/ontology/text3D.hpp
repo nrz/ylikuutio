@@ -66,7 +66,7 @@ namespace yli::ontology
                             text3D_struct.cartesian_coordinates,
                             text3D_struct.spherical_coordinates,
                             text3D_struct.yaw,
-                            text3D_struct.vertical_angle),
+                            text3D_struct.pitch),
                         parent_module),
                 parent_of_objects(this)
             {

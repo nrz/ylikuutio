@@ -44,7 +44,7 @@ namespace yli::ontology
             cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
             spherical_coordinates(NAN, NAN, NAN),
             yaw(0.0),
-            vertical_angle(0.0)
+            pitch(0.0)
         {
             // constructor.
         }
@@ -54,14 +54,14 @@ namespace yli::ontology
                 const glm::vec3& cartesian_coordinates,
                 yli::data::SphericalCoordinatesStruct spherical_coordinates,
                 const float yaw,
-                const float vertical_angle)
+                const float pitch)
             : EntityStruct(),
             input_method(yli::input::InputMethod::AI),
             brain(brain),
             cartesian_coordinates(cartesian_coordinates),
             spherical_coordinates(spherical_coordinates),
             yaw(yaw),
-            vertical_angle(vertical_angle)
+            pitch(pitch)
         {
         }
 
@@ -70,7 +70,7 @@ namespace yli::ontology
                 const glm::vec3& cartesian_coordinates,
                 yli::data::SphericalCoordinatesStruct spherical_coordinates,
                 const float yaw,
-                const float vertical_angle,
+                const float pitch,
                 const std::string& global_name,
                 const std::string& local_name)
             : EntityStruct(global_name, local_name),
@@ -79,7 +79,7 @@ namespace yli::ontology
             cartesian_coordinates(cartesian_coordinates),
             spherical_coordinates(spherical_coordinates),
             yaw(yaw),
-            vertical_angle(vertical_angle)
+            pitch(pitch)
         {
         }
 
@@ -88,7 +88,7 @@ namespace yli::ontology
         glm::vec3 cartesian_coordinates; // coordinate vector.
         yli::data::SphericalCoordinatesStruct spherical_coordinates;
         float yaw;
-        float vertical_angle;
+        float pitch;
     };
 }
 

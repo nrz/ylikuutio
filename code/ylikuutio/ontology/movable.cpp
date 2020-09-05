@@ -103,12 +103,12 @@ namespace yli::ontology
 
     float Movable::get_vertical_angle() const
     {
-        return this->vertical_angle;
+        return this->pitch;
     }
 
-    void Movable::set_vertical_angle(const float vertical_angle)
+    void Movable::set_vertical_angle(const float pitch)
     {
-        this->vertical_angle = vertical_angle;
+        this->pitch = pitch;
     }
 
     // Public callbacks (to be called from AI scripts written in YliLisp).
@@ -203,8 +203,8 @@ namespace yli::ontology
         std::cout << "Executing `this->create_variable(horizontal_angle_variable_struct);` ...\n";
         this->create_variable(horizontal_angle_variable_struct);
 
-        yli::ontology::VariableStruct vertical_angle_variable_struct(std::make_shared<yli::data::AnyValue>(this->vertical_angle));
-        vertical_angle_variable_struct.local_name = "vertical_angle";
+        yli::ontology::VariableStruct vertical_angle_variable_struct(std::make_shared<yli::data::AnyValue>(this->pitch));
+        vertical_angle_variable_struct.local_name = "pitch";
         vertical_angle_variable_struct.activate_callback = &yli::ontology::activate_vertical_angle;
         vertical_angle_variable_struct.read_callback = &yli::ontology::read_vertical_angle;
         vertical_angle_variable_struct.should_ylikuutio_call_activate_callback_now = true;

@@ -283,7 +283,7 @@ namespace yli::ontology
         }
 
         this->model_matrix = glm::scale(this->model_matrix, this->original_scale_vector);
-        glm::vec3 euler_angles { this->vertical_angle, this->yaw, 0.0f };
+        glm::vec3 euler_angles { this->pitch, this->yaw, 0.0f };
         glm::quat my_quaternion = glm::quat(euler_angles);
         glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
         this->model_matrix = rotation_matrix * this->model_matrix;
@@ -439,9 +439,9 @@ namespace yli::ontology
             std::shared_ptr<std::string> y,
             std::shared_ptr<std::string> z,
             std::shared_ptr<std::string> yaw,
-            std::shared_ptr<std::string> vertical_angle)
+            std::shared_ptr<std::string> pitch)
     {
-        if (parent == nullptr || object_name == nullptr || x == nullptr || y == nullptr || z == nullptr || yaw == nullptr || vertical_angle == nullptr)
+        if (parent == nullptr || object_name == nullptr || x == nullptr || y == nullptr || z == nullptr || yaw == nullptr || pitch == nullptr)
         {
             return nullptr;
         }
@@ -457,7 +457,7 @@ namespace yli::ontology
         yli::data::AnyValue y_any_value("float", *y);
         yli::data::AnyValue z_any_value("float", *z);
         yli::data::AnyValue horizontal_angle_any_value("float", *yaw);
-        yli::data::AnyValue vertical_angle_any_value("float", *vertical_angle);
+        yli::data::AnyValue vertical_angle_any_value("float", *pitch);
 
         if (!std::holds_alternative<float>(x_any_value.data))
         {
@@ -485,7 +485,7 @@ namespace yli::ontology
 
         if (!std::holds_alternative<float>(vertical_angle_any_value.data))
         {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `vertical_angle`!\n";
+            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `pitch`!\n";
             return nullptr;
         }
 
@@ -498,7 +498,7 @@ namespace yli::ontology
         yli::ontology::ObjectStruct object_struct;
         object_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
         object_struct.yaw = float_horizontal_angle;
-        object_struct.vertical_angle = float_vertical_angle;
+        object_struct.pitch = float_vertical_angle;
         object_struct.species_parent = parent;
         object_struct.local_name = *object_name;
         entity_factory->create_object(object_struct);

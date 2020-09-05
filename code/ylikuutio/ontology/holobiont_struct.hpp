@@ -53,7 +53,7 @@ namespace yli::ontology
             rotate_angle(0.0f),
             initial_rotate_angle(PI),
             yaw(0.0f),
-            vertical_angle(0.0f)
+            pitch(0.0f)
         {
             // constructor.
         }
@@ -69,7 +69,7 @@ namespace yli::ontology
         float rotate_angle;                         // rotate angle.
         float initial_rotate_angle;                 // initial rotate angle.
         float yaw;                                  // yaw in radians.
-        float vertical_angle;                       // vertical angle in radians.
+        float pitch;                                // pitch in radians.
     };
 }
 

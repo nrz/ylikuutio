@@ -48,7 +48,7 @@ namespace yli::ontology
             brain(nullptr),
             rotate_angle(NAN),
             yaw(0.0),
-            vertical_angle(0.0)
+            pitch(0.0)
         {
             // constructor.
         }
@@ -64,7 +64,7 @@ namespace yli::ontology
         yli::ontology::Brain* brain;       // pointer to the `Brain` (not a parent!).
         float rotate_angle;                // rotate angle.
         float yaw;                         // yaw in radians.
-        float vertical_angle;              // vertical angle in radians.
+        float pitch;                       // pitch in radians.
     };
 }
 

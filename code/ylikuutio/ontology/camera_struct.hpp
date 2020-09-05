@@ -43,7 +43,7 @@ namespace yli::ontology
             parent(nullptr),
             brain(nullptr),
             yaw(0.0),
-            vertical_angle(0.0),
+            pitch(0.0),
             is_static_view(false)
         {
             // constructor.
@@ -58,7 +58,7 @@ namespace yli::ontology
         yli::ontology::Brain* brain;     // pointer to the `Brain` (not a parent!).
 
         float yaw;                       // yaw in radians.
-        float vertical_angle;            // vertical angle in radians.
+        float pitch;                     // pitch in radians.
 
         // Static view `Camera`'s coordinates do not change by moving in a `Scene`. However,
         // they can be modified by adjusting the `Entity`-specific variables of the `Camera` directly.

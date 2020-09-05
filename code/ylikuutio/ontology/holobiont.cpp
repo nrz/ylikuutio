@@ -228,9 +228,9 @@ namespace yli::ontology
             std::shared_ptr<std::string> y,
             std::shared_ptr<std::string> z,
             std::shared_ptr<std::string> yaw,
-            std::shared_ptr<std::string> vertical_angle)
+            std::shared_ptr<std::string> pitch)
     {
-        if (parent == nullptr || holobiont_name == nullptr || x == nullptr || y == nullptr || z == nullptr || yaw == nullptr || vertical_angle == nullptr)
+        if (parent == nullptr || holobiont_name == nullptr || x == nullptr || y == nullptr || z == nullptr || yaw == nullptr || pitch == nullptr)
         {
             return nullptr;
         }
@@ -246,7 +246,7 @@ namespace yli::ontology
         yli::data::AnyValue y_any_value("float", *y);
         yli::data::AnyValue z_any_value("float", *z);
         yli::data::AnyValue horizontal_angle_any_value("float", *yaw);
-        yli::data::AnyValue vertical_angle_any_value("float", *vertical_angle);
+        yli::data::AnyValue vertical_angle_any_value("float", *pitch);
 
         if (!std::holds_alternative<float>(x_any_value.data))
         {
@@ -274,7 +274,7 @@ namespace yli::ontology
 
         if (!std::holds_alternative<float>(vertical_angle_any_value.data))
         {
-            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `vertical_angle`!\n";
+            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `pitch`!\n";
             return nullptr;
         }
 
@@ -287,7 +287,7 @@ namespace yli::ontology
         yli::ontology::HolobiontStruct holobiont_struct;
         holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
         holobiont_struct.yaw = float_horizontal_angle;
-        holobiont_struct.vertical_angle = float_vertical_angle;
+        holobiont_struct.pitch = float_vertical_angle;
         holobiont_struct.symbiosis_parent = parent;
         holobiont_struct.local_name = *holobiont_name;
         entity_factory->create_holobiont(holobiont_struct);

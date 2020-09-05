@@ -65,7 +65,7 @@ namespace yli::ontology
                             biont_struct.cartesian_coordinates,
                             biont_struct.spherical_coordinates,
                             biont_struct.yaw,
-                            biont_struct.vertical_angle),
+                            biont_struct.pitch),
                         parent_module)
             {
                 // constructor.

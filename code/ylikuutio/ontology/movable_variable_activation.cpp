@@ -437,7 +437,7 @@ namespace yli::ontology
                 return nullptr;
             }
 
-            movable->vertical_angle = std::get<float>(vertical_angle_any_value->data);
+            movable->pitch = std::get<float>(vertical_angle_any_value->data);
             return nullptr;
         }
 

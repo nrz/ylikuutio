@@ -75,7 +75,7 @@ namespace yli::ontology
                             object_struct.cartesian_coordinates,
                             object_struct.spherical_coordinates,
                             object_struct.yaw,
-                            object_struct.vertical_angle),
+                            object_struct.pitch),
                         parent_module)
             {
                 // constructor.
@@ -127,7 +127,7 @@ namespace yli::ontology
                     std::shared_ptr<std::string> y,
                     std::shared_ptr<std::string> z,
                     std::shared_ptr<std::string> yaw,
-                    std::shared_ptr<std::string> vertical_angle);
+                    std::shared_ptr<std::string> pitch);
 
             // Public callbacks end here.
 
