@@ -15,15 +15,12 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_APPLICATION_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_APPLICATION_HPP_INCLUDED
+#ifndef __YLIKUUTIO_CORE_APPLICATION_HPP_INCLUDED
+#define __YLIKUUTIO_CORE_APPLICATION_HPP_INCLUDED
 
-#include "entity.hpp"
-#include "entity_struct.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 
 // Include standard headers
-#include <cstddef> // std::size_t
 #include <memory>  // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
 #include <string>  // std::string
 #include <utility> // std::pair
@@ -32,20 +29,18 @@ namespace yli::ontology
 {
     class Universe;
     struct UniverseStruct;
+}
 
-    class Application: public yli::ontology::Entity
+namespace yli::core
+{
+    class Application
     {
         public:
-            void bind_to_parent();
-
             Application(const int argc, const char* const argv[])
-                : Entity(nullptr, yli::ontology::EntityStruct()), // `Application` has no parent yet.
-                command_line_master(argc, argv)
+                : command_line_master(argc, argv),
+                universe(nullptr)
             {
                 // constructor.
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::Application*";
             }
 
             Application(const Application&) = delete;            // Delete copy constructor.
@@ -57,6 +52,7 @@ namespace yli::ontology
             virtual std::string get_name() const;    // Note: this is not the global name or the local name of the `Application`.
             virtual std::string get_version() const; // `Application` version.
 
+            yli::ontology::Universe* get_universe() const;
             void set_universe(yli::ontology::Universe* const universe);
 
             virtual std::pair<bool, std::shared_ptr<yli::ontology::UniverseStruct>> get_universe_struct() = 0;
@@ -67,12 +63,10 @@ namespace yli::ontology
             yli::command_line::CommandLineMaster command_line_master;
 
         private:
-            yli::ontology::Entity* get_parent() const override final;
-            std::size_t get_number_of_children() const override final;
-            std::size_t get_number_of_descendants() const override final;
+            yli::ontology::Universe* universe;
     };
 
-    yli::ontology::Application* create_application();
+    yli::core::Application* create_application();
 }
 
 #endif

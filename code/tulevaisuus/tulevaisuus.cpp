@@ -39,6 +39,7 @@
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/console/console_callback_engine.hpp"
 #include "code/ylikuutio/console/console_callback_object.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/core/entrypoint.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/pi.hpp"
@@ -48,7 +49,6 @@
 
 // `yli::ontology` files included in the canonical order.
 #include "code/ylikuutio/ontology/entity.hpp"
-#include "code/ylikuutio/ontology/application.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
@@ -108,16 +108,13 @@
 
 namespace tulevaisuus
 {
-    class TulevaisuusApplication: public yli::ontology::Application
+    class TulevaisuusApplication: public yli::core::Application
     {
         public:
             TulevaisuusApplication(const int argc, const char* const argv[])
-                : yli::ontology::Application(argc, argv)
+                : yli::core::Application(argc, argv)
             {
                 // constructor.
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "tulevaisuus::TulevaisuusApplication*";
             }
 
             ~TulevaisuusApplication()
@@ -167,6 +164,7 @@ namespace tulevaisuus
                 std::shared_ptr<yli::ontology::UniverseStruct> universe_struct_shared_ptr = std::make_shared<yli::ontology::UniverseStruct>();
                 std::stringstream window_title_stringstream;
                 window_title_stringstream << "Tulevaisuus " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
+                universe_struct_shared_ptr->application_name = "Tulevaisuus";
                 universe_struct_shared_ptr->window_title = window_title_stringstream.str();
 
                 if (this->command_line_master.is_key("silent"))
@@ -261,9 +259,6 @@ namespace tulevaisuus
                 }
 
                 my_universe->set_global_name("universe");
-
-                my_universe->application_name = "Tulevaisuus";
-                this->set_global_name("tulevaisuus_application");
 
                 yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
 
@@ -779,9 +774,9 @@ namespace tulevaisuus
     };
 }
 
-namespace yli::ontology
+namespace yli::core
 {
-    yli::ontology::Application* create_application(const int argc, const char* const argv[])
+    yli::core::Application* create_application(const int argc, const char* const argv[])
     {
         return new tulevaisuus::TulevaisuusApplication(argc, argv);
     }

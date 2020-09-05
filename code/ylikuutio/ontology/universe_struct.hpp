@@ -55,6 +55,7 @@ namespace yli::ontology
             // constructor.
         }
 
+        std::string application_name;
         std::string window_title;
         uint32_t window_width;
         uint32_t window_height;

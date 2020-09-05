@@ -39,6 +39,7 @@
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/console/console_callback_engine.hpp"
 #include "code/ylikuutio/console/console_callback_object.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/core/entrypoint.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/pi.hpp"
@@ -48,7 +49,6 @@
 
 // `yli::ontology` files included in the canonical order.
 #include "code/ylikuutio/ontology/entity.hpp"
-#include "code/ylikuutio/ontology/application.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
@@ -108,16 +108,13 @@
 
 namespace ajokki
 {
-    class AjokkiApplication: public yli::ontology::Application
+    class AjokkiApplication: public yli::core::Application
     {
         public:
             AjokkiApplication(const int argc, const char* const argv[])
-                : yli::ontology::Application(argc, argv)
+                : yli::core::Application(argc, argv)
             {
                 // constructor.
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "ajokki::AjokkiApplication*";
             }
 
             ~AjokkiApplication()
@@ -167,6 +164,7 @@ namespace ajokki
                 std::shared_ptr<yli::ontology::UniverseStruct> universe_struct_shared_ptr = std::make_shared<yli::ontology::UniverseStruct>();
                 std::stringstream window_title_stringstream;
                 window_title_stringstream << "Ajokki " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
+                universe_struct_shared_ptr->application_name = "Ajokki";
                 universe_struct_shared_ptr->window_title = window_title_stringstream.str();
 
                 if (this->command_line_master.is_key("silent"))
@@ -261,9 +259,6 @@ namespace ajokki
                 }
 
                 my_universe->set_global_name("universe");
-
-                my_universe->application_name = "Ajokki";
-                this->set_global_name("ajokki_application");
 
                 yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
 
@@ -1063,9 +1058,9 @@ namespace ajokki
     };
 }
 
-namespace yli::ontology
+namespace yli::core
 {
-    yli::ontology::Application* create_application(const int argc, const char* const argv[])
+    yli::core::Application* create_application(const int argc, const char* const argv[])
     {
         return new ajokki::AjokkiApplication(argc, argv);
     }
