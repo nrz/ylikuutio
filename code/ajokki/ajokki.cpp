@@ -1048,7 +1048,7 @@ namespace ajokki
                 std::cout << "Setting up movement ...\n";
                 yli::snippets::set_movement(my_universe, my_universe->speed, my_universe->turbo_factor, my_universe->twin_turbo_factor, my_universe->mouse_speed);
                 std::cout << "Setting up location and orientation ...\n";
-                yli::snippets::set_location_and_orientation(my_universe, -5682.32f, -1641.20f, 2376.45f, 100.0f, 100.0f, 100.0f);
+                yli::snippets::set_location_and_orientation(my_universe, -5682.32f, -1641.20f, 2376.45f, 100.0f, 100.0f, 300.0f);
                 std::cout << "Setting up debug variables ...\n";
                 yli::snippets::set_flight_mode(my_universe, true);
 
