@@ -437,15 +437,15 @@ namespace yli::ontology
 
                 // Direction: spherical coordinates to cartesian coordinates conversion.
                 this->current_camera_direction = glm::vec3(
-                        cos(this->current_camera_vertical_angle) * sin(this->current_camera_horizontal_angle),
+                        cos(this->current_camera_vertical_angle) * sin(this->current_camera_horizontal_angle + PI),
                         sin(this->current_camera_vertical_angle),
-                        cos(this->current_camera_vertical_angle) * cos(this->current_camera_horizontal_angle));
+                        cos(this->current_camera_vertical_angle) * cos(this->current_camera_horizontal_angle + PI));
 
                 // Right vector.
                 this->current_camera_right = glm::vec3(
-                        sin(this->current_camera_horizontal_angle - PI/2.0f),
+                        sin(this->current_camera_horizontal_angle + 0.5f * PI),
                         0,
-                        cos(this->current_camera_horizontal_angle - PI/2.0f));
+                        cos(this->current_camera_horizontal_angle + 0.5f * PI));
 
                 // Up vector.
                 this->current_camera_up = glm::cross(this->current_camera_right, this->current_camera_direction);
