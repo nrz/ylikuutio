@@ -113,7 +113,7 @@ namespace yli::snippets
         std::cout << "Executing `entity->create_variable(z_variable_struct);` ...\n";
         entity->create_variable(z_variable_struct);
 
-        const float yaw = 0.31f;
+        const float yaw = -0.41f;
         yli::ontology::VariableStruct horizontal_angle_variable_struct(std::make_shared<yli::data::AnyValue>(yaw));
         horizontal_angle_variable_struct.local_name = "yaw";
         horizontal_angle_variable_struct.activate_callback = &yli::ontology::activate_horizontal_angle;
@@ -122,7 +122,7 @@ namespace yli::snippets
         std::cout << "Executing `entity->create_variable(horizontal_angle_variable_struct);` ...\n";
         entity->create_variable(horizontal_angle_variable_struct);
 
-        const float pitch = -0.38f;
+        const float pitch = -0.19f;
         yli::ontology::VariableStruct vertical_angle_variable_struct(std::make_shared<yli::data::AnyValue>(pitch));
         vertical_angle_variable_struct.local_name = "pitch";
         vertical_angle_variable_struct.activate_callback = &yli::ontology::activate_vertical_angle;
