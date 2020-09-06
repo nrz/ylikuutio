@@ -25,6 +25,49 @@ before_install:
 install:
     - echo "Hello from install stage"
 
+jobs:
+    include:
+        - name: "GCC native compiler"
+          compiler: gcc
+          branches:
+              only:
+                  - master
+                  - coverity_scan
+          script:
+              - gcc -v && g++ -v
+              - mkdir build_native
+              - cd build_native
+              - echo "Running cmake for GCC native compiler"
+              - cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
+              - make -j 4
+              - ./unit_tests_with_googletest
+              - compiler: clang
+        - name: "Clang native compiler"
+          compiler: clang
+          branches:
+              only:
+                  - master
+          script:
+              - clang -v && clang++ -v
+              - mkdir build_native
+              - cd build_native
+              - echo "Running cmake for Clang native compiler"
+              - cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
+              - make -j 4
+              - ./unit_tests_with_googletest
+        - name: "MinGW-w64 GCC cross compiler"
+          compiler: gcc
+          branches:
+              only:
+                  - master
+          script:
+              - x86_64-w64-mingw32-gcc -v && x86_64-w64-mingw32-g++ -v
+              - mkdir build_crosscompile_linux_to_windows_gcc
+              - cd build_crosscompile_linux_to_windows_gcc
+              - echo "Running cmake for MinGW-w64 GCC cross compiler"
+              - cmake .. -DCMAKE_TOOLCHAIN_FILE=../w64.cmake
+              - make -j 4
+
 addons:
     # following Coverity instructions
     # https://scan.coverity.com/travis_ci
@@ -55,21 +98,3 @@ addons:
         build_command_prepend: mkdir build_coverity && cd build_coverity && cmake ..
         build_command: make -j 4
         branch_pattern: coverity_scan
-
-script:
-    - cmake --version
-    - gcc -v && g++ -v
-    - clang -v && clang++ -v
-    - mkdir build_native
-    - cd build_native
-    - echo "Running cmake for native compiler (GCC or Clang)"
-    - cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
-    - make -j 4
-    - ./unit_tests_with_googletest
-    - cd ..
-    - x86_64-w64-mingw32-gcc -v && x86_64-w64-mingw32-g++ -v
-    - mkdir build_crosscompile_linux_to_windows_gcc
-    - cd build_crosscompile_linux_to_windows_gcc
-    - echo "Running cmake for MinGW-w64 GCC cross compiler"
-    - cmake .. -DCMAKE_TOOLCHAIN_FILE=../w64.cmake
-    - make -j 4
