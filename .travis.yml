@@ -41,7 +41,6 @@ jobs:
               - cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
               - make -j 4
               - ./unit_tests_with_googletest
-              - compiler: clang
         - name: "Clang native compiler"
           compiler: clang
           branches:
