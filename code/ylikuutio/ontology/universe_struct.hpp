@@ -40,7 +40,7 @@ namespace yli::ontology
             text_size(40),
             font_size(16),
             max_fps(50000),            // default value max 50000 frames per second.
-            speed(5.0f),               // default value 5.0 units / second.
+            speed(0.1f),               // default value 0.1 units / second.
             turbo_factor(5.0f),        // default value 5.0 x speed.
             twin_turbo_factor(100.0f), // default value 100.0 x speed.
             mouse_speed(0.005f),
@@ -55,6 +55,7 @@ namespace yli::ontology
             // constructor.
         }
 
+        std::string application_name;
         std::string window_title;
         uint32_t window_width;
         uint32_t window_height;

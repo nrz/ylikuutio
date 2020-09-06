@@ -10,7 +10,9 @@ os: linux
 
 dist: bionic
 
-compiler: gcc
+compiler:
+    - gcc
+    - clang
 
 sudo: required
 
@@ -57,22 +59,17 @@ addons:
 script:
     - cmake --version
     - gcc -v && g++ -v
-    - mkdir build_gcc
-    - cd build_gcc
-    - CC=$(which gcc) CXX=$(which g++) cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
-    - make -j 4
-    - ./unit_tests_with_googletest
-    - cd ..
     - clang -v && clang++ -v
-    - mkdir build_clang
-    - cd build_clang
-    - gcc -v && g++ -v && cmake --version
-    - CC=$(which clang) CXX=$(which clang++) cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
+    - mkdir build_native
+    - cd build_native
+    - echo "Running cmake for native compiler (GCC or Clang)"
+    - cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
     - make -j 4
     - ./unit_tests_with_googletest
     - cd ..
     - x86_64-w64-mingw32-gcc -v && x86_64-w64-mingw32-g++ -v
     - mkdir build_crosscompile_linux_to_windows_gcc
     - cd build_crosscompile_linux_to_windows_gcc
+    - echo "Running cmake for MinGW-w64 GCC cross compiler"
     - cmake .. -DCMAKE_TOOLCHAIN_FILE=../w64.cmake
     - make -j 4

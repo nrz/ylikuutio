@@ -209,8 +209,8 @@ namespace ajokki
         yli::ontology::CameraStruct horse_camera_struct;
         horse_camera_struct.cartesian_coordinates = glm::vec3(2303.00f, 201.00f, 1822.00f);
         horse_camera_struct.parent = joensuu_center_west_scene;
-        horse_camera_struct.horizontal_angle = -0.97f;
-        horse_camera_struct.vertical_angle = -0.18f;
+        horse_camera_struct.yaw = -0.97f;
+        horse_camera_struct.pitch = -0.18f;
 
         std::cout << "Creating yli::ontology::Entity* horse_camera_entity ...\n";
         yli::ontology::Entity* const horse_camera_entity = entity_factory->create_camera(horse_camera_struct);

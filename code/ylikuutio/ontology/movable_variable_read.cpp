@@ -250,7 +250,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            return std::make_shared<yli::data::AnyValue>(movable->horizontal_angle);
+            return std::make_shared<yli::data::AnyValue>(movable->yaw);
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
@@ -274,7 +274,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            return std::make_shared<yli::data::AnyValue>(movable->vertical_angle);
+            return std::make_shared<yli::data::AnyValue>(movable->pitch);
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);

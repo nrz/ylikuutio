@@ -86,8 +86,8 @@ namespace yli::ontology
                 this->spherical_coordinates.rho   = movable_struct.spherical_coordinates.rho;
                 this->spherical_coordinates.theta = movable_struct.spherical_coordinates.theta;
                 this->spherical_coordinates.phi   = movable_struct.spherical_coordinates.phi;
-                this->horizontal_angle            = movable_struct.horizontal_angle;
-                this->vertical_angle              = movable_struct.vertical_angle;
+                this->yaw                         = movable_struct.yaw;
+                this->pitch                       = movable_struct.pitch;
 
                 // Initialize speed, angular speed and maximum speed variables.
                 // These are to be used from the `Brain` callbacks.
@@ -132,9 +132,9 @@ namespace yli::ontology
             const glm::vec3& get_cartesian_coordinates() const;
             void set_cartesian_coordinates(const glm::vec3& cartesian_coordinates);
             float get_horizontal_angle() const;
-            void set_horizontal_angle(const float horizontal_angle);
+            void set_horizontal_angle(const float yaw);
             float get_vertical_angle() const;
-            void set_vertical_angle(const float vertical_angle);
+            void set_vertical_angle(const float pitch);
 
             // Public callbacks (to be called from AI scripts written in YliLisp).
             // These are the functions that are available for AI scripts.
@@ -286,8 +286,8 @@ namespace yli::ontology
             glm::vec3 right;                                       // note: can not be set directly using console.
             glm::vec3 up;                                          // note: can not be set directly using console.
 
-            float horizontal_angle;
-            float vertical_angle;
+            float yaw;
+            float pitch;
 
             float speed;                                           // m/s
             float angular_speed;                                   // 1/s

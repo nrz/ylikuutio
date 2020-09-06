@@ -59,8 +59,8 @@ namespace yli::ontology
             brain(nullptr),
             rotate_angle(0.0f),
             initial_rotate_angle(PI),
-            horizontal_angle(0.0f),
-            vertical_angle(0.0f),
+            yaw(0.0f),
+            pitch(0.0f),
             object_type(yli::ontology::ObjectType::REGULAR)
         {
             // constructor.
@@ -79,8 +79,8 @@ namespace yli::ontology
         yli::ontology::Brain* brain;            // pointer to the `Brain` (not a parent!).
         float rotate_angle;                     // rotate angle.
         float initial_rotate_angle;             // initial rotate angle.
-        float horizontal_angle;                 // horizontal angle in radians.
-        float vertical_angle;                   // vertical angle in radians.
+        float yaw;                              // yaw in radians.
+        float pitch;                            // pitch in radians.
         yli::ontology::ObjectType object_type;  // The parent of a character object is a `Glyph`. The parent of a regular object is a `Species`.
     };
 }

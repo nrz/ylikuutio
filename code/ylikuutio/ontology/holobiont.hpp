@@ -64,8 +64,8 @@ namespace yli::ontology
                             holobiont_struct.brain,
                             holobiont_struct.cartesian_coordinates,
                             holobiont_struct.spherical_coordinates,
-                            holobiont_struct.horizontal_angle,
-                            holobiont_struct.vertical_angle),
+                            holobiont_struct.yaw,
+                            holobiont_struct.pitch),
                         parent_module),
                 parent_of_bionts(this)
             {
@@ -114,8 +114,8 @@ namespace yli::ontology
                     std::shared_ptr<std::string> x,
                     std::shared_ptr<std::string> y,
                     std::shared_ptr<std::string> z,
-                    std::shared_ptr<std::string> horizontal_angle,
-                    std::shared_ptr<std::string> vertical_angle);
+                    std::shared_ptr<std::string> yaw,
+                    std::shared_ptr<std::string> pitch);
 
             // Public callbacks end here.
 

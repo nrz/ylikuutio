@@ -87,16 +87,16 @@ namespace yli::ontology
                             camera_struct.brain,
                             camera_struct.cartesian_coordinates,
                             camera_struct.spherical_coordinates,
-                            camera_struct.horizontal_angle,
-                            camera_struct.vertical_angle,
+                            camera_struct.yaw,
+                            camera_struct.pitch,
                             camera_struct.global_name,
                             camera_struct.local_name),
                         parent_module)
             {
                 // constructor.
 
-                this->horizontal_angle  = camera_struct.horizontal_angle;
-                this->vertical_angle    = camera_struct.vertical_angle;
+                this->yaw               = camera_struct.yaw;
+                this->pitch             = camera_struct.pitch;
                 this->is_static_view    = camera_struct.is_static_view;
 
                 // variables related to the projection.

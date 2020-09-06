@@ -1,0 +1,104 @@
+.yli file format
+
+'next' means beginning immediately from the next byte.
+
+# header
+
+offset           number of bytes   content
+0x0              3                 "YLI"
+0x3              1                 reserved, must be 0
+0x4              4                 number of Entities
+
+0x8              Entity-specific   beginning of first Entity
+                                   (offset 0 of an Entity)
+
+# Entities
+
+0x0              4                 size of current entity
+                                   (also relative offset of next Entity)
+0x4              4                 Entity code (see below)
+0x8              4                 parent's EntityID
+0x8              Entity-specific   Entity-specific data
+
+# Multiverse
+
+0x0              4                 size of the Multiverse
+0x4              4                 "MULV"
+0x8              4                 parent's EntityID
+...
+
+# Universe
+
+0x0              4                 size of the Universe
+0x4              4                 "UNIV"
+0x8              4                 parent's EntityID
+...
+
+# World
+
+0x0              4                 size of the World
+0x4              4                 "WORL"
+0x8              4                 parent's EntityID
+...
+
+# Scene
+
+0x0              4                 size of the Scene
+0x4              4                 "SCEN"
+0x8              4                 parent's EntityID
+...
+
+# Heightmap
+
+0x0              4                 size of the Heightmap
+0x4              4                 "HEIM"
+0x8              4                 parent's EntityID
+0xc              4                 number of heightmap sheets
+0x14             4
+...
+
+# HeightmapSheet
+
+0x0              4                 size of the Heightmap
+0x4              4                 "HEIS"
+0x8              4                 parent's EntityID
+0xc              4                 width
+0x10             4                 height
+0x14             4                 n_vertices
+0x18             12 * n_vertices   vertices, 12 bytes each (glm::vec3)
+next             8 * n_vertices    UVs, 8 bytes each (glm::vec2)
+next             12 * n_vertices   normals, 12 bytes each (glm::vec3)
+...
+
+# codes
+
+class            code
+Application      APPL
+Multiverse       MULV
+Universe         UNIV
+World            WORL
+Scene            SCEN
+Shader           SHAD
+Material         MATE
+Species          SPEC
+Object           OBJE
+Heightmap        HEIM
+HeightmapSheet   HEIS
+Symbiosis        SYMB
+SymbiontMaterial SYMM
+SymbiontSpecies  SYMS
+Holobiont        HOLO
+Biont            BION
+Font2D           FON2
+Text2D           TXT2
+VectorFont       VECF
+Glyph            GLYP
+Text3D           TXT3
+Console          CONS
+ComputeTask      COMT
+Camera           CAME
+ChunkMaster      CHUM
+RailNetwork      RANW
+RoadNetwork      RONW
+TramNetwork      TRNW
+Playlist         PLAY
