@@ -29,6 +29,21 @@ jobs:
     include:
         - name: "GCC native compiler"
           compiler: gcc
+          addons:
+              apt:
+                  packages:
+                      - cmake
+                      - git
+                      - libx11-dev
+                      - libgl1-mesa-dev
+                      - libglu1-mesa-dev
+                      - libsdl2-dev
+                      - libxcursor-dev
+                      - libxrandr-dev
+                      - libxext-dev
+                      - libxi-dev
+                      - libxinerama-dev
+                      - make
           branches:
               only:
                   - master
@@ -43,6 +58,21 @@ jobs:
               - ./unit_tests_with_googletest
         - name: "Clang native compiler"
           compiler: clang
+          addons:
+              apt:
+                  packages:
+                      - cmake
+                      - git
+                      - libx11-dev
+                      - libgl1-mesa-dev
+                      - libglu1-mesa-dev
+                      - libsdl2-dev
+                      - libxcursor-dev
+                      - libxrandr-dev
+                      - libxext-dev
+                      - libxi-dev
+                      - libxinerama-dev
+                      - make
           branches:
               only:
                   - master
@@ -56,6 +86,24 @@ jobs:
               - ./unit_tests_with_googletest
         - name: "MinGW-w64 GCC cross compiler"
           compiler: gcc
+          addons:
+              apt:
+                  packages:
+                      - cmake
+                      - git
+                      - libx11-dev
+                      - libgl1-mesa-dev
+                      - libglu1-mesa-dev
+                      - libsdl2-dev
+                      - libxcursor-dev
+                      - libxrandr-dev
+                      - libxext-dev
+                      - libxi-dev
+                      - libxinerama-dev
+                      - make
+                      - g++-mingw-w64
+                      - gcc-mingw-w64
+                      - binutils-mingw-w64
           branches:
               only:
                   - master
@@ -66,34 +114,34 @@ jobs:
               - echo "Running cmake for MinGW-w64 GCC cross compiler"
               - cmake .. -DCMAKE_TOOLCHAIN_FILE=../w64.cmake
               - make -j 4
-
-addons:
-    # following Coverity instructions
-    # https://scan.coverity.com/travis_ci
-    apt:
-        packages:
-            - cmake
-            - git
-            - libx11-dev
-            - libgl1-mesa-dev
-            - libglu1-mesa-dev
-            - libsdl2-dev
-            - libxcursor-dev
-            - libxrandr-dev
-            - libxext-dev
-            - libxi-dev
-            - libxinerama-dev
-            - make
-            - g++-mingw-w64
-            - gcc-mingw-w64
-            - binutils-mingw-w64
-    coverity_scan:
-        project:
-            name: nrz/ylikuutio
-            version: 0.0.8
-            description: Ylikuutio 3D engine. Build submitted via Travis CI
-
-        notification_email: antti.nuortimo@gmail.com
-        build_command_prepend: mkdir build_coverity && cd build_coverity && cmake ..
-        build_command: make -j 4
-        branch_pattern: coverity_scan
+        - name: "Coverity Scan with GCC"
+          compiler: gcc
+          addons:
+              # following Coverity instructions
+              # https://scan.coverity.com/travis_ci
+              apt:
+                  packages:
+                      - cmake
+                      - git
+                      - libx11-dev
+                      - libgl1-mesa-dev
+                      - libglu1-mesa-dev
+                      - libsdl2-dev
+                      - libxcursor-dev
+                      - libxrandr-dev
+                      - libxext-dev
+                      - libxi-dev
+                      - libxinerama-dev
+                      - make
+                  coverity_scan:
+                      project:
+                          name: nrz/ylikuutio
+                          version: 0.0.8
+                          description: Ylikuutio 3D engine. Build submitted via Travis CI
+                          notification_email: antti.nuortimo@gmail.com
+                          build_command_prepend: mkdir build_coverity && cd build_coverity && cmake ..
+                          build_command: make -j 4
+                          branch_pattern: coverity_scan
+          branches:
+              only:
+                  - coverity_scan
