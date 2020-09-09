@@ -131,38 +131,10 @@ int main(const int argc, const char* const argv[]) try
     //    the tokens and callbacks defined by `Application`
     //    instance, and returns a `std::shared_ptr` to it.
 
-    const auto [success, universe_struct_shared_ptr] = application->get_universe_struct();
-
-    if (success && universe_struct_shared_ptr == nullptr)
-    {
-        // No errors, but do not start the application.
-        // This may be due to `--version` or similar.
-        delete application;
-        return EXIT_SUCCESS;
-    }
-
-    if (!success && universe_struct_shared_ptr != nullptr)
-    {
-        std::cerr << "ERROR: error in `Application::get_universe_struct!\n";
-
-        delete application;
-        return EXIT_FAILURE;
-    }
-
-    if (universe_struct_shared_ptr == nullptr)
-    {
-        // 3. If command line arguments were invalid, a help text
-        //    is printed and the program exits.
-
-        std::cerr << "ERROR: invalid command line arguments!\n";
-
-        // TODO: print the usage of command line arguments!
-        delete application;
-        return EXIT_FAILURE;
-    }
+    const auto universe_struct = application->get_universe_struct();
 
     // 4. `Universe` is created. It receives `UniverseStruct` as an argument.
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(*universe_struct_shared_ptr);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     // 5. A pointer to the `Universe` is stored in the `Application`.
     application->set_universe(universe);

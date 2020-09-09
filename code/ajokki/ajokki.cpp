@@ -146,27 +146,27 @@ namespace ajokki
                 };
             }
 
-            std::pair<bool, std::shared_ptr<yli::ontology::UniverseStruct>> get_universe_struct() override
+            yli::ontology::UniverseStruct get_universe_struct() override
             {
-                std::shared_ptr<yli::ontology::UniverseStruct> universe_struct_shared_ptr = std::make_shared<yli::ontology::UniverseStruct>();
+                yli::ontology::UniverseStruct universe_struct;
                 std::stringstream window_title_stringstream;
                 window_title_stringstream << "Ajokki " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
-                universe_struct_shared_ptr->application_name = "Ajokki";
-                universe_struct_shared_ptr->window_title = window_title_stringstream.str();
+                universe_struct.application_name = "Ajokki";
+                universe_struct.window_title = window_title_stringstream.str();
 
                 if (this->command_line_master.is_key("silent"))
                 {
-                    universe_struct_shared_ptr->is_silent = true;
+                    universe_struct.is_silent = true;
                 }
 
                 if (this->command_line_master.is_key("fullscreen"))
                 {
-                    universe_struct_shared_ptr->is_fullscreen = true;
+                    universe_struct.is_fullscreen = true;
                 }
 
                 if (this->command_line_master.is_key("headless"))
                 {
-                    universe_struct_shared_ptr->is_headless = true;
+                    universe_struct.is_headless = true;
                 }
 
                 if (this->command_line_master.is_key("window_width") &&
@@ -174,7 +174,7 @@ namespace ajokki
                 {
                     const std::string window_width = this->command_line_master.get_value("window_width");
                     std::size_t index = 0;
-                    universe_struct_shared_ptr->window_width = yli::string::extract_uint32_t_value_from_string(window_width, index, nullptr, nullptr);
+                    universe_struct.window_width = yli::string::extract_uint32_t_value_from_string(window_width, index, nullptr, nullptr);
                 }
 
                 if (this->command_line_master.is_key("window_height") &&
@@ -182,7 +182,7 @@ namespace ajokki
                 {
                     const std::string window_height = this->command_line_master.get_value("window_height");
                     std::size_t index = 0;
-                    universe_struct_shared_ptr->window_height = yli::string::extract_uint32_t_value_from_string(window_height, index, nullptr, nullptr);
+                    universe_struct.window_height = yli::string::extract_uint32_t_value_from_string(window_height, index, nullptr, nullptr);
                 }
 
                 if (this->command_line_master.is_key("framebuffer_width") &&
@@ -190,7 +190,7 @@ namespace ajokki
                 {
                     const std::string framebuffer_width = this->command_line_master.get_value("framebuffer_width");
                     std::size_t index = 0;
-                    universe_struct_shared_ptr->framebuffer_width = yli::string::extract_uint32_t_value_from_string(framebuffer_width, index, nullptr, nullptr);
+                    universe_struct.framebuffer_width = yli::string::extract_uint32_t_value_from_string(framebuffer_width, index, nullptr, nullptr);
                 }
 
                 if (this->command_line_master.is_key("framebuffer_height") &&
@@ -198,7 +198,7 @@ namespace ajokki
                 {
                     const std::string framebuffer_height = this->command_line_master.get_value("framebuffer_height");
                     std::size_t index = 0;
-                    universe_struct_shared_ptr->framebuffer_height = yli::string::extract_uint32_t_value_from_string(framebuffer_height, index, nullptr, nullptr);
+                    universe_struct.framebuffer_height = yli::string::extract_uint32_t_value_from_string(framebuffer_height, index, nullptr, nullptr);
                 }
 
                 if (this->command_line_master.is_key("speed") &&
@@ -206,7 +206,7 @@ namespace ajokki
                 {
                     const std::string speed = this->command_line_master.get_value("speed");
                     std::size_t index = 0;
-                    universe_struct_shared_ptr->speed = yli::string::extract_float_value_from_string(speed, index, nullptr, nullptr);
+                    universe_struct.speed = yli::string::extract_float_value_from_string(speed, index, nullptr, nullptr);
                 }
 
                 if (this->command_line_master.is_key("turbo_factor") &&
@@ -214,7 +214,7 @@ namespace ajokki
                 {
                     const std::string turbo_factor = this->command_line_master.get_value("turbo_factor");
                     std::size_t index = 0;
-                    universe_struct_shared_ptr->turbo_factor = yli::string::extract_float_value_from_string(turbo_factor, index, nullptr, nullptr);
+                    universe_struct.turbo_factor = yli::string::extract_float_value_from_string(turbo_factor, index, nullptr, nullptr);
                 }
 
                 if (this->command_line_master.is_key("twin_turbo_factor") &&
@@ -222,7 +222,7 @@ namespace ajokki
                 {
                     const std::string twin_turbo_factor = this->command_line_master.get_value("twin_turbo_factor");
                     std::size_t index = 0;
-                    universe_struct_shared_ptr->twin_turbo_factor = yli::string::extract_float_value_from_string(twin_turbo_factor, index, nullptr, nullptr);
+                    universe_struct.twin_turbo_factor = yli::string::extract_float_value_from_string(twin_turbo_factor, index, nullptr, nullptr);
                 }
 
                 if (this->command_line_master.is_key("mouse_speed") &&
@@ -230,10 +230,10 @@ namespace ajokki
                 {
                     const std::string mouse_speed = this->command_line_master.get_value("mouse_speed");
                     std::size_t index = 0;
-                    universe_struct_shared_ptr->mouse_speed = yli::string::extract_float_value_from_string(mouse_speed, index, nullptr, nullptr);
+                    universe_struct.mouse_speed = yli::string::extract_float_value_from_string(mouse_speed, index, nullptr, nullptr);
                 }
 
-                return std::pair(true, universe_struct_shared_ptr);
+                return universe_struct;
             }
 
             bool create_simulation() override

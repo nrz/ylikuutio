@@ -21,9 +21,7 @@
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 
 // Include standard headers
-#include <memory>  // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
 #include <string>  // std::string
-#include <utility> // std::pair
 #include <vector>  // std::vector
 
 namespace yli::ontology
@@ -57,7 +55,7 @@ namespace yli::core
             void set_universe(yli::ontology::Universe* const universe);
 
             virtual std::vector<std::string> get_valid_keys() = 0;
-            virtual std::pair<bool, std::shared_ptr<yli::ontology::UniverseStruct>> get_universe_struct() = 0;
+            virtual yli::ontology::UniverseStruct get_universe_struct() = 0;
 
             // This method can be used e.g. to instantiate different Entities before entering the main loop.
             virtual bool create_simulation() = 0;
