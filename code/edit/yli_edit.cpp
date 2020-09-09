@@ -125,7 +125,7 @@ namespace yli_edit
 
             std::vector<std::string> get_valid_keys() override
             {
-                return std::vector<std::string> {
+                return {
                     "help",
                         "version",
                         "silent",
