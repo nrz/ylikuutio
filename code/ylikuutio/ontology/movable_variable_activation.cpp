@@ -430,14 +430,14 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            std::shared_ptr<yli::data::AnyValue> vertical_angle_any_value = variable->variable_value;
+            std::shared_ptr<yli::data::AnyValue> pitch_any_value = variable->variable_value;
 
-            if (vertical_angle_any_value == nullptr || !std::holds_alternative<float>(vertical_angle_any_value->data))
+            if (pitch_any_value == nullptr || !std::holds_alternative<float>(pitch_any_value->data))
             {
                 return nullptr;
             }
 
-            movable->pitch = std::get<float>(vertical_angle_any_value->data);
+            movable->pitch = std::get<float>(pitch_any_value->data);
             return nullptr;
         }
 
@@ -448,14 +448,14 @@ namespace yli::ontology
             return nullptr;
         }
 
-        std::shared_ptr<yli::data::AnyValue> vertical_angle_any_value = variable->variable_value;
+        std::shared_ptr<yli::data::AnyValue> pitch_any_value = variable->variable_value;
 
-        if (vertical_angle_any_value == nullptr || !std::holds_alternative<float>(vertical_angle_any_value->data))
+        if (pitch_any_value == nullptr || !std::holds_alternative<float>(pitch_any_value->data))
         {
             return nullptr;
         }
 
-        universe->current_camera_vertical_angle = std::get<float>(vertical_angle_any_value->data);
+        universe->current_camera_vertical_angle = std::get<float>(pitch_any_value->data);
         return nullptr;
     }
 }
