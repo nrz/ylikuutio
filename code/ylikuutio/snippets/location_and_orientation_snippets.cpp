@@ -123,13 +123,13 @@ namespace yli::snippets
         entity->create_variable(yaw_variable_struct);
 
         const float pitch = -0.19f;
-        yli::ontology::VariableStruct vertical_angle_variable_struct(std::make_shared<yli::data::AnyValue>(pitch));
-        vertical_angle_variable_struct.local_name = "pitch";
-        vertical_angle_variable_struct.activate_callback = &yli::ontology::activate_pitch;
-        vertical_angle_variable_struct.read_callback = &yli::ontology::read_vertical_angle;
-        vertical_angle_variable_struct.should_ylikuutio_call_activate_callback_now = true;
-        std::cout << "Executing `entity->create_variable(vertical_angle_variable_struct);` ...\n";
-        entity->create_variable(vertical_angle_variable_struct);
+        yli::ontology::VariableStruct pitch_variable_struct(std::make_shared<yli::data::AnyValue>(pitch));
+        pitch_variable_struct.local_name = "pitch";
+        pitch_variable_struct.activate_callback = &yli::ontology::activate_pitch;
+        pitch_variable_struct.read_callback = &yli::ontology::read_vertical_angle;
+        pitch_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        std::cout << "Executing `entity->create_variable(pitch_variable_struct);` ...\n";
+        entity->create_variable(pitch_variable_struct);
 
         const float right = NAN; // the value does not matter, `right` is read with a read callback.
         yli::ontology::VariableStruct right_variable_struct(std::make_shared<yli::data::AnyValue>(right));
