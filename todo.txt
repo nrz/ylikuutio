@@ -6,7 +6,7 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage (Hirvi prototype):
-[ ] Implement `Variable`s `geo_yaw` (for geographical angles/azimuths) and `mat_yaw` (for mathematical angles).
+[ ] Implement `Variable` `azimuth` (for geographical angles/azimuths), 0 pointing north, pi/2 pointing east, pi pointing south, (4/3)*pi pointing west.
 [ ] Implement new `yli_convert` program that converts ASCII files of elevation model of National Land Survey of Finland into custom `.yli` binary format.
 [ ] Implement `yli::ontology::HeightmapStruct` that inherits `yli::ontology::EntityStruct`, to support heightmaps consisting of several sheets.
 [ ] Implement `yli::ontology::Heightmap` class that inherits `yli::ontology::Entity`, to support heightmaps consisting of several sheets.
