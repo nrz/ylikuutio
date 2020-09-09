@@ -239,7 +239,7 @@ namespace yli::ontology
         return std::make_shared<yli::data::AnyValue>(&universe->current_camera_right);
     }
 
-    std::shared_ptr<yli::data::AnyValue> read_horizontal_angle(yli::ontology::Entity* const entity)
+    std::shared_ptr<yli::data::AnyValue> read_yaw(yli::ontology::Entity* const entity)
     {
         if (entity == nullptr)
         {
