@@ -206,7 +206,7 @@ namespace yli::ontology
         yli::ontology::VariableStruct pitch_variable_struct(std::make_shared<yli::data::AnyValue>(this->pitch));
         pitch_variable_struct.local_name = "pitch";
         pitch_variable_struct.activate_callback = &yli::ontology::activate_pitch;
-        pitch_variable_struct.read_callback = &yli::ontology::read_vertical_angle;
+        pitch_variable_struct.read_callback = &yli::ontology::read_pitch;
         pitch_variable_struct.should_ylikuutio_call_activate_callback_now = true;
         std::cout << "Executing `this->create_variable(pitch_variable_struct);` ...\n";
         this->create_variable(pitch_variable_struct);
