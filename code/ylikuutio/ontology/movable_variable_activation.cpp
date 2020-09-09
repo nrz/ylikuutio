@@ -15,6 +15,10 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#ifndef PI
+#define PI 3.14159265359f
+#endif
+
 #include "movable_variable_activation.hpp"
 #include "variable.hpp"
 #include "movable.hpp"
@@ -456,6 +460,46 @@ namespace yli::ontology
         }
 
         universe->current_camera_vertical_angle = std::get<float>(pitch_any_value->data);
+        return nullptr;
+    }
+
+    std::shared_ptr<yli::data::AnyValue> activate_azimuth(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    {
+        if (entity == nullptr || variable == nullptr)
+        {
+            return nullptr;
+        }
+
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            std::shared_ptr<yli::data::AnyValue> azimuth_any_value = variable->variable_value;
+
+            if (azimuth_any_value == nullptr || !std::holds_alternative<float>(azimuth_any_value->data))
+            {
+                return nullptr;
+            }
+
+            movable->yaw = 0.5f * PI - std::get<float>(azimuth_any_value->data) ;
+            return nullptr;
+        }
+
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        std::shared_ptr<yli::data::AnyValue> azimuth_any_value = variable->variable_value;
+
+        if (azimuth_any_value == nullptr || !std::holds_alternative<float>(azimuth_any_value->data))
+        {
+            return nullptr;
+        }
+
+        universe->current_camera_horizontal_angle = 0.5f * PI - std::get<float>(azimuth_any_value->data);
         return nullptr;
     }
 }

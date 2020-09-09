@@ -131,6 +131,15 @@ namespace yli::snippets
         std::cout << "Executing `entity->create_variable(pitch_variable_struct);` ...\n";
         entity->create_variable(pitch_variable_struct);
 
+        const float azimuth = 0.0f;
+        yli::ontology::VariableStruct azimuth_variable_struct(std::make_shared<yli::data::AnyValue>(azimuth));
+        azimuth_variable_struct.local_name = "azimuth";
+        azimuth_variable_struct.activate_callback = &yli::ontology::activate_azimuth;
+        azimuth_variable_struct.read_callback = &yli::ontology::read_azimuth;
+        azimuth_variable_struct.should_ylikuutio_call_activate_callback_now = false;
+        std::cout << "Executing `entity->create_variable(azimuth_variable_struct);` ...\n";
+        entity->create_variable(azimuth_variable_struct);
+
         const float right = NAN; // the value does not matter, `right` is read with a read callback.
         yli::ontology::VariableStruct right_variable_struct(std::make_shared<yli::data::AnyValue>(right));
         right_variable_struct.local_name = "right";
