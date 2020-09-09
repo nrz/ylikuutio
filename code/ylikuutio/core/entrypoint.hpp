@@ -49,10 +49,12 @@ int main(const int argc, const char* const argv[]) try
     // 1. `yli::core::Application` is created, but it is not
     //    bound to `yli::ontology::Universe`.  `Application`
     //    is defined by the application that uses Ylikuutio.
-    // 2. `yli::core::Application` creates `UniverseStruct`
+    // 2. Valid command line argument keys are requested
+    //    by calling `Application::get_valid_keys`.
+    // 3. `yli::core::Application` creates `UniverseStruct`
     //    appropriately based on the command line arguments and
     //    the tokens and callbacks defined by `Application`
-    //    instance, and returns a `std::shared_ptr` to it.
+    //    instance, and returns it.
     // 3. If command line arguments were invalid, a help text
     //    is printed and the program exits.
     // 4. `Universe` is created. It receives `UniverseStruct` as an argument.
@@ -109,43 +111,33 @@ int main(const int argc, const char* const argv[]) try
 
     application->command_line_master.print_keys_and_values();
 
-    // 2. `yli::core::Application` creates `UniverseStruct`
+    // 2. Valid command line argument keys are requested
+    //    by calling `Application::get_valid_keys`.
+    std::vector<std::string> valid_keys = application->get_valid_keys();
+
+    if (!application->command_line_master.check_keys(valid_keys))
+    {
+        std::cerr << "ERROR: 1 or more invalid command line parameters given.\n";
+
+        const std::vector<std::string> invalid_keys = application->command_line_master.get_invalid_keys(valid_keys);
+
+        for (std::vector<std::string>::const_iterator it = invalid_keys.begin(); it != invalid_keys.end(); it++)
+        {
+            std::cerr << "ERROR: Invalid command line parameter: " << *it << "\n";
+        }
+
+        delete application;
+        return EXIT_FAILURE;
+    }
+
+    // 3. `yli::core::Application` creates `UniverseStruct`
     //    appropriately based on the command line arguments and
     //    the tokens and callbacks defined by `Application`
-    //    instance, and returns a `std::shared_ptr` to it.
-
-    const auto [success, universe_struct_shared_ptr] = application->get_universe_struct();
-
-    if (success && universe_struct_shared_ptr == nullptr)
-    {
-        // No errors, but do not start the application.
-        // This may be due to `--version` or similar.
-        delete application;
-        return EXIT_SUCCESS;
-    }
-
-    if (!success && universe_struct_shared_ptr != nullptr)
-    {
-        std::cerr << "ERROR: error in `Application::get_universe_struct!\n";
-
-        delete application;
-        return EXIT_FAILURE;
-    }
-
-    if (universe_struct_shared_ptr == nullptr)
-    {
-        // 3. If command line arguments were invalid, a help text
-        //    is printed and the program exits.
-
-        std::cerr << "ERROR: invalid command line arguments!\n";
-
-        // TODO: print the usage of command line arguments!
-        delete application;
-        return EXIT_FAILURE;
-    }
+    //    instance, and returns it.
+    const auto universe_struct = application->get_universe_struct();
 
     // 4. `Universe` is created. It receives `UniverseStruct` as an argument.
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(*universe_struct_shared_ptr);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     // 5. A pointer to the `Universe` is stored in the `Application`.
     application->set_universe(universe);

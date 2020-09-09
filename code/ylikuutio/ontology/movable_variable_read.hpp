@@ -43,8 +43,10 @@ namespace yli::ontology
     std::shared_ptr<yli::data::AnyValue> read_up(yli::ontology::Entity* const entity);
     std::shared_ptr<yli::data::AnyValue> read_right(yli::ontology::Entity* const entity);
 
-    std::shared_ptr<yli::data::AnyValue> read_horizontal_angle(yli::ontology::Entity* const entity);
-    std::shared_ptr<yli::data::AnyValue> read_vertical_angle(yli::ontology::Entity* const entity);
+    std::shared_ptr<yli::data::AnyValue> read_yaw(yli::ontology::Entity* const entity);
+    std::shared_ptr<yli::data::AnyValue> read_pitch(yli::ontology::Entity* const entity);
+
+    std::shared_ptr<yli::data::AnyValue> read_azimuth(yli::ontology::Entity* const entity);
 }
 
 #endif

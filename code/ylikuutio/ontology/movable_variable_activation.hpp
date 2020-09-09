@@ -41,8 +41,10 @@ namespace yli::ontology
     std::shared_ptr<yli::data::AnyValue> activate_theta(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
     std::shared_ptr<yli::data::AnyValue> activate_phi(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
 
-    std::shared_ptr<yli::data::AnyValue> activate_horizontal_angle(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-    std::shared_ptr<yli::data::AnyValue> activate_vertical_angle(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+    std::shared_ptr<yli::data::AnyValue> activate_yaw(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+    std::shared_ptr<yli::data::AnyValue> activate_pitch(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+
+    std::shared_ptr<yli::data::AnyValue> activate_azimuth(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
 }
 
 #endif

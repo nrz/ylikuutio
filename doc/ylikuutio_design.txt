@@ -110,10 +110,15 @@ of these classes used for passing parameters are used for more than 1 class. For
 used as input for the constructors of `Material` and `SymbiontMaterial`, and `SpeciesStruct` is used as input
 for the constructors of `Species`, `SymbiontSpecies`, `ShapeshifterTransformation`, and `ShapeshifterForm`.
 
+Ontology also contains `Camera`. Ylikuutio uses right-handed world coordinates, so X grows eastward,
+Z grows southward, and Y grows upwards. Internally Ylikuutio uses mathematical angles, so yaw grows
+counterclockwise from positive X axis (east). Ylikuutio also supports azimuths, so azimuth grows
+clockwise from negative Z axis (north).
+
 Below are listed the ontology classes of Ylikuutio.
 These should be in the canonical class order defined in `yli::common::Datatype`.
 
-There are different hierarchical paths of ontology:
+There are different hierarchical paths in ontology:
 
 'entity' path:
 

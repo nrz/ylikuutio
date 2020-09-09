@@ -15,6 +15,10 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#ifndef PI
+#define PI 3.14159265359f
+#endif
+
 #include "movable_variable_activation.hpp"
 #include "variable.hpp"
 #include "movable.hpp"
@@ -379,7 +383,7 @@ namespace yli::ontology
     }
 
 
-    std::shared_ptr<yli::data::AnyValue> activate_horizontal_angle(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::shared_ptr<yli::data::AnyValue> activate_yaw(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
@@ -390,14 +394,14 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            std::shared_ptr<yli::data::AnyValue> horizontal_angle_any_value = variable->variable_value;
+            std::shared_ptr<yli::data::AnyValue> yaw_any_value = variable->variable_value;
 
-            if (horizontal_angle_any_value == nullptr || !std::holds_alternative<float>(horizontal_angle_any_value->data))
+            if (yaw_any_value == nullptr || !std::holds_alternative<float>(yaw_any_value->data))
             {
                 return nullptr;
             }
 
-            movable->yaw = std::get<float>(horizontal_angle_any_value->data);
+            movable->yaw = std::get<float>(yaw_any_value->data);
             return nullptr;
         }
 
@@ -408,18 +412,18 @@ namespace yli::ontology
             return nullptr;
         }
 
-        std::shared_ptr<yli::data::AnyValue> horizontal_angle_any_value = variable->variable_value;
+        std::shared_ptr<yli::data::AnyValue> yaw_any_value = variable->variable_value;
 
-        if (horizontal_angle_any_value == nullptr || !std::holds_alternative<float>(horizontal_angle_any_value->data))
+        if (yaw_any_value == nullptr || !std::holds_alternative<float>(yaw_any_value->data))
         {
             return nullptr;
         }
 
-        universe->current_camera_horizontal_angle = std::get<float>(horizontal_angle_any_value->data);
+        universe->current_camera_horizontal_angle = std::get<float>(yaw_any_value->data);
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> activate_vertical_angle(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::shared_ptr<yli::data::AnyValue> activate_pitch(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
@@ -430,14 +434,14 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            std::shared_ptr<yli::data::AnyValue> vertical_angle_any_value = variable->variable_value;
+            std::shared_ptr<yli::data::AnyValue> pitch_any_value = variable->variable_value;
 
-            if (vertical_angle_any_value == nullptr || !std::holds_alternative<float>(vertical_angle_any_value->data))
+            if (pitch_any_value == nullptr || !std::holds_alternative<float>(pitch_any_value->data))
             {
                 return nullptr;
             }
 
-            movable->pitch = std::get<float>(vertical_angle_any_value->data);
+            movable->pitch = std::get<float>(pitch_any_value->data);
             return nullptr;
         }
 
@@ -448,14 +452,54 @@ namespace yli::ontology
             return nullptr;
         }
 
-        std::shared_ptr<yli::data::AnyValue> vertical_angle_any_value = variable->variable_value;
+        std::shared_ptr<yli::data::AnyValue> pitch_any_value = variable->variable_value;
 
-        if (vertical_angle_any_value == nullptr || !std::holds_alternative<float>(vertical_angle_any_value->data))
+        if (pitch_any_value == nullptr || !std::holds_alternative<float>(pitch_any_value->data))
         {
             return nullptr;
         }
 
-        universe->current_camera_vertical_angle = std::get<float>(vertical_angle_any_value->data);
+        universe->current_camera_vertical_angle = std::get<float>(pitch_any_value->data);
+        return nullptr;
+    }
+
+    std::shared_ptr<yli::data::AnyValue> activate_azimuth(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    {
+        if (entity == nullptr || variable == nullptr)
+        {
+            return nullptr;
+        }
+
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            std::shared_ptr<yli::data::AnyValue> azimuth_any_value = variable->variable_value;
+
+            if (azimuth_any_value == nullptr || !std::holds_alternative<float>(azimuth_any_value->data))
+            {
+                return nullptr;
+            }
+
+            movable->yaw = 0.5f * PI - std::get<float>(azimuth_any_value->data) ;
+            return nullptr;
+        }
+
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        std::shared_ptr<yli::data::AnyValue> azimuth_any_value = variable->variable_value;
+
+        if (azimuth_any_value == nullptr || !std::holds_alternative<float>(azimuth_any_value->data))
+        {
+            return nullptr;
+        }
+
+        universe->current_camera_horizontal_angle = 0.5f * PI - std::get<float>(azimuth_any_value->data);
         return nullptr;
     }
 }
