@@ -245,7 +245,7 @@ namespace yli::ontology
         yli::data::AnyValue x_any_value("float", *x);
         yli::data::AnyValue y_any_value("float", *y);
         yli::data::AnyValue z_any_value("float", *z);
-        yli::data::AnyValue horizontal_angle_any_value("float", *yaw);
+        yli::data::AnyValue yaw_any_value("float", *yaw);
         yli::data::AnyValue vertical_angle_any_value("float", *pitch);
 
         if (!std::holds_alternative<float>(x_any_value.data))
@@ -266,7 +266,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        if (!std::holds_alternative<float>(horizontal_angle_any_value.data))
+        if (!std::holds_alternative<float>(yaw_any_value.data))
         {
             std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `yaw`!\n";
             return nullptr;
@@ -281,7 +281,7 @@ namespace yli::ontology
         float float_x = std::get<float>(x_any_value.data);
         float float_y = std::get<float>(y_any_value.data);
         float float_z = std::get<float>(z_any_value.data);
-        float float_horizontal_angle = std::get<float>(horizontal_angle_any_value.data);
+        float float_horizontal_angle = std::get<float>(yaw_any_value.data);
         float float_vertical_angle = std::get<float>(vertical_angle_any_value.data);
 
         yli::ontology::HolobiontStruct holobiont_struct;

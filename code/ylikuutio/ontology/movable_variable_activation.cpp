@@ -390,14 +390,14 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            std::shared_ptr<yli::data::AnyValue> horizontal_angle_any_value = variable->variable_value;
+            std::shared_ptr<yli::data::AnyValue> yaw_any_value = variable->variable_value;
 
-            if (horizontal_angle_any_value == nullptr || !std::holds_alternative<float>(horizontal_angle_any_value->data))
+            if (yaw_any_value == nullptr || !std::holds_alternative<float>(yaw_any_value->data))
             {
                 return nullptr;
             }
 
-            movable->yaw = std::get<float>(horizontal_angle_any_value->data);
+            movable->yaw = std::get<float>(yaw_any_value->data);
             return nullptr;
         }
 
@@ -408,14 +408,14 @@ namespace yli::ontology
             return nullptr;
         }
 
-        std::shared_ptr<yli::data::AnyValue> horizontal_angle_any_value = variable->variable_value;
+        std::shared_ptr<yli::data::AnyValue> yaw_any_value = variable->variable_value;
 
-        if (horizontal_angle_any_value == nullptr || !std::holds_alternative<float>(horizontal_angle_any_value->data))
+        if (yaw_any_value == nullptr || !std::holds_alternative<float>(yaw_any_value->data))
         {
             return nullptr;
         }
 
-        universe->current_camera_horizontal_angle = std::get<float>(horizontal_angle_any_value->data);
+        universe->current_camera_horizontal_angle = std::get<float>(yaw_any_value->data);
         return nullptr;
     }
 
