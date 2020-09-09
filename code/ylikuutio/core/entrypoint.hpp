@@ -109,6 +109,23 @@ int main(const int argc, const char* const argv[]) try
 
     application->command_line_master.print_keys_and_values();
 
+    std::vector<std::string> valid_keys = application->get_valid_keys();
+
+    if (!application->command_line_master.check_keys(valid_keys))
+    {
+        std::cerr << "ERROR: 1 or more invalid command line parameters given.\n";
+
+        const std::vector<std::string> invalid_keys = application->command_line_master.get_invalid_keys(valid_keys);
+
+        for (std::vector<std::string>::const_iterator it = invalid_keys.begin(); it != invalid_keys.end(); it++)
+        {
+            std::cerr << "ERROR: Invalid command line parameter: " << *it << "\n";
+        }
+
+        delete application;
+        return EXIT_FAILURE;
+    }
+
     // 2. `yli::core::Application` creates `UniverseStruct`
     //    appropriately based on the command line arguments and
     //    the tokens and callbacks defined by `Application`

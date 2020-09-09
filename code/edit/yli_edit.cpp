@@ -123,9 +123,9 @@ namespace yli_edit
                 return "YliEdit";
             }
 
-            std::pair<bool, std::shared_ptr<yli::ontology::UniverseStruct>> get_universe_struct() override
+            std::vector<std::string> get_valid_keys() override
             {
-                const std::vector<std::string> valid_keys {
+                return std::vector<std::string> {
                     "help",
                         "version",
                         "silent",
@@ -140,23 +140,10 @@ namespace yli_edit
                         "twin_turbo_factor",
                         "mouse_speed"
                 };
+            }
 
-                const std::vector<std::string> invalid_keys = this->command_line_master.get_invalid_keys(valid_keys);
-
-                if (!this->command_line_master.check_keys(valid_keys))
-                {
-                    std::cerr << "ERROR: 1 or more invalid command line parameters given.\n";
-
-                    const std::vector<std::string> invalid_keys = this->command_line_master.get_invalid_keys(valid_keys);
-
-                    for (std::vector<std::string>::const_iterator it = invalid_keys.begin(); it != invalid_keys.end(); it++)
-                    {
-                        std::cerr << "Invalid key: " << *it << "\n";
-                    }
-
-                    return std::pair(false, nullptr);
-                }
-
+            std::pair<bool, std::shared_ptr<yli::ontology::UniverseStruct>> get_universe_struct() override
+            {
                 // Create the `Universe`, store it in `my_universe`.
                 std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
                 std::shared_ptr<yli::ontology::UniverseStruct> universe_struct_shared_ptr = std::make_shared<yli::ontology::UniverseStruct>();
