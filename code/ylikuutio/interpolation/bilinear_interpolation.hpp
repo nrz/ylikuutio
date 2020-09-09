@@ -122,11 +122,11 @@ namespace yli::interpolation
             const float delta_x = static_cast<float>(input_image_width) / static_cast<float>(output_image_width);
             const float delta_z = static_cast<float>(input_image_height) / static_cast<float>(output_image_height);
 
-            float z = delta_z / 2.0f;
+            float z = 0.5f * delta_z;
 
             for (std::size_t z_index = 0; z_index < output_image_height; z_index++, z += delta_z)
             {
-                float x = delta_x / 2.0f;
+                float x = 0.5f * delta_x;
 
                 for (std::size_t x_index = 0; x_index < output_image_width; x_index++, x += delta_x)
                 {
