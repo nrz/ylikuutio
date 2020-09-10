@@ -101,7 +101,7 @@ namespace yli::ontology
         this->yaw = yaw;
     }
 
-    float Movable::get_vertical_angle() const
+    float Movable::get_pitch() const
     {
         return this->pitch;
     }
