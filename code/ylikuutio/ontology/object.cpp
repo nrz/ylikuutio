@@ -432,7 +432,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Object::create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle(
+    std::shared_ptr<yli::data::AnyValue> Object::create_object_with_parent_name_x_y_z_yaw_pitch(
             yli::ontology::Species* const parent,
             std::shared_ptr<std::string> object_name,
             std::shared_ptr<std::string> x,
@@ -461,31 +461,31 @@ namespace yli::ontology
 
         if (!std::holds_alternative<float>(x_any_value.data))
         {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `x`!\n";
+            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `x`!\n";
             return nullptr;
         }
 
         if (!std::holds_alternative<float>(y_any_value.data))
         {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `y`!\n";
+            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `y`!\n";
             return nullptr;
         }
 
         if (!std::holds_alternative<float>(z_any_value.data))
         {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `z`!\n";
+            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `z`!\n";
             return nullptr;
         }
 
         if (!std::holds_alternative<float>(yaw_any_value.data))
         {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `yaw`!\n";
+            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `yaw`!\n";
             return nullptr;
         }
 
         if (!std::holds_alternative<float>(pitch_any_value.data))
         {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `pitch`!\n";
+            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `pitch`!\n";
             return nullptr;
         }
 
