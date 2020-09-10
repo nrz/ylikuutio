@@ -96,7 +96,7 @@ namespace yli::ontology
         return this->yaw;
     }
 
-    void Movable::set_horizontal_angle(const float yaw)
+    void Movable::set_yaw(const float yaw)
     {
         this->yaw = yaw;
     }
