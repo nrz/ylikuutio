@@ -108,7 +108,7 @@ namespace yli::ontology
                     std::shared_ptr<std::string> y,
                     std::shared_ptr<std::string> z);
 
-            static std::shared_ptr<yli::data::AnyValue> create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle(
+            static std::shared_ptr<yli::data::AnyValue> create_holobiont_with_parent_name_x_y_z_yaw_pitch(
                     yli::ontology::Symbiosis* const parent,
                     std::shared_ptr<std::string> holobiont_name,
                     std::shared_ptr<std::string> x,
