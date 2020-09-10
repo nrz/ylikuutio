@@ -115,8 +115,6 @@ namespace yli::ontology
 
             void activate() override;
 
-            void adjust_yaw(float adjustment);
-
             const glm::mat4& get_projection_matrix() const;
             const glm::mat4& get_view_matrix() const;
             bool get_is_static_view() const;
