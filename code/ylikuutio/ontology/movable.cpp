@@ -106,7 +106,7 @@ namespace yli::ontology
         return this->pitch;
     }
 
-    void Movable::set_vertical_angle(const float pitch)
+    void Movable::set_pitch(const float pitch)
     {
         this->pitch = pitch;
     }
