@@ -282,12 +282,12 @@ namespace yli::ontology
         float float_y = std::get<float>(y_any_value.data);
         float float_z = std::get<float>(z_any_value.data);
         float float_yaw = std::get<float>(yaw_any_value.data);
-        float float_vertical_angle = std::get<float>(pitch_any_value.data);
+        float float_pitch = std::get<float>(pitch_any_value.data);
 
         yli::ontology::HolobiontStruct holobiont_struct;
         holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
         holobiont_struct.yaw = float_yaw;
-        holobiont_struct.pitch = float_vertical_angle;
+        holobiont_struct.pitch = float_pitch;
         holobiont_struct.symbiosis_parent = parent;
         holobiont_struct.local_name = *holobiont_name;
         entity_factory->create_holobiont(holobiont_struct);
