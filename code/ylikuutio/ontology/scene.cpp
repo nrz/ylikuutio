@@ -274,7 +274,7 @@ namespace yli::ontology
             // and this is the active `Scene` in the active `World`.
             // Copy `Camera`'s coordinates and angles to the `Universe`.
             this->universe->current_camera_cartesian_coordinates = camera->get_cartesian_coordinates();
-            this->universe->current_camera_horizontal_angle = camera->get_horizontal_angle();
+            this->universe->current_camera_horizontal_angle = camera->get_yaw();
             this->universe->current_camera_vertical_angle = camera->get_vertical_angle();
         }
     }

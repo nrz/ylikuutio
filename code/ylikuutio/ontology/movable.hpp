@@ -131,7 +131,7 @@ namespace yli::ontology
 
             const glm::vec3& get_cartesian_coordinates() const;
             void set_cartesian_coordinates(const glm::vec3& cartesian_coordinates);
-            float get_horizontal_angle() const;
+            float get_yaw() const;
             void set_horizontal_angle(const float yaw);
             float get_vertical_angle() const;
             void set_vertical_angle(const float pitch);

@@ -91,7 +91,7 @@ namespace yli::ontology
         this->cartesian_coordinates = cartesian_coordinates;
     }
 
-    float Movable::get_horizontal_angle() const
+    float Movable::get_yaw() const
     {
         return this->yaw;
     }
