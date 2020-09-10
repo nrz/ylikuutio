@@ -423,23 +423,23 @@ namespace yli::ontology
                         if (this->is_invert_mouse_in_use)
                         {
                             // Invert mouse.
-                            this->current_camera_vertical_angle -= this->mouse_speed * static_cast<float>(this->window_height / 2 - ypos);
+                            this->current_camera_pitch -= this->mouse_speed * static_cast<float>(this->window_height / 2 - ypos);
                         }
                         else
                         {
                             // Don't invert mouse.
-                            this->current_camera_vertical_angle += this->mouse_speed * static_cast<float>(this->window_height / 2 - ypos);
+                            this->current_camera_pitch += this->mouse_speed * static_cast<float>(this->window_height / 2 - ypos);
                         }
 
-                        this->current_camera_vertical_angle = remainder(this->current_camera_vertical_angle, (2.0f * PI));
+                        this->current_camera_pitch = remainder(this->current_camera_pitch, (2.0f * PI));
                     }
                 }
 
                 // Direction: spherical coordinates to cartesian coordinates conversion.
                 this->current_camera_direction = glm::vec3(
-                        cos(this->current_camera_vertical_angle) * sin(this->current_camera_yaw + 0.5f * PI),
-                        sin(this->current_camera_vertical_angle),
-                        cos(this->current_camera_vertical_angle) * cos(this->current_camera_yaw + 0.5f * PI));
+                        cos(this->current_camera_pitch) * sin(this->current_camera_yaw + 0.5f * PI),
+                        sin(this->current_camera_pitch),
+                        cos(this->current_camera_pitch) * cos(this->current_camera_yaw + 0.5f * PI));
 
                 // Right vector.
                 this->current_camera_right = glm::vec3(
@@ -516,9 +516,9 @@ namespace yli::ontology
                     std::stringstream angles_and_coordinates_stringstream;
                     angles_and_coordinates_stringstream << std::fixed << std::setprecision(2) <<
                         this->current_camera_yaw << "," <<
-                        this->current_camera_vertical_angle << " rad; " <<
+                        this->current_camera_pitch << " rad; " <<
                         RADIANS_TO_DEGREES(this->current_camera_yaw) << "," <<
-                        RADIANS_TO_DEGREES(this->current_camera_vertical_angle) << " deg\n" <<
+                        RADIANS_TO_DEGREES(this->current_camera_pitch) << " deg\n" <<
                         "(" <<
                         this->current_camera_cartesian_coordinates.x << "," <<
                         this->current_camera_cartesian_coordinates.y << "," <<

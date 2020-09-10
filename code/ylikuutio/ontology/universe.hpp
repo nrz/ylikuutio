@@ -370,7 +370,7 @@ namespace yli::ontology
                 this->current_camera_projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
                 this->current_camera_view_matrix       = glm::mat4(1.0f); // identity matrix (dummy value).
                 this->current_camera_yaw               = NAN;
-                this->current_camera_vertical_angle    = NAN;
+                this->current_camera_pitch             = NAN;
 
                 // Variables related to the camera.
                 this->aspect_ratio = static_cast<float>(this->window_width) / static_cast<float>(this->window_height);
@@ -703,7 +703,7 @@ namespace yli::ontology
             glm::vec3 current_camera_up;    // note: `up` can not be set directly using console.
 
             float current_camera_yaw;
-            float current_camera_vertical_angle;
+            float current_camera_pitch;
 
             int32_t mouse_x;
             int32_t mouse_y;

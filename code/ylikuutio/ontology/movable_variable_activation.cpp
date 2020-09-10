@@ -459,7 +459,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        universe->current_camera_vertical_angle = std::get<float>(pitch_any_value->data);
+        universe->current_camera_pitch = std::get<float>(pitch_any_value->data);
         return nullptr;
     }
 

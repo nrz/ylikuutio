@@ -288,7 +288,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        return std::make_shared<yli::data::AnyValue>(universe->current_camera_vertical_angle);
+        return std::make_shared<yli::data::AnyValue>(universe->current_camera_pitch);
     }
 
     std::shared_ptr<yli::data::AnyValue> read_azimuth(yli::ontology::Entity* const entity)
