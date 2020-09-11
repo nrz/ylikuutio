@@ -34,7 +34,7 @@
 TEST(an_ASCII_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_2_4_8_16_32_64_128_256_x_step_1_z_step_1)
 {
     yli::load::HeightmapLoaderStruct heightmap_loader_struct;
-    heightmap_loader_struct.filename = "test_3x3_0_1_2_4_8_16_32_64_128.asc"; // Helsinki eastern downtown.
+    heightmap_loader_struct.filename = "test_3x3_0_1_2_4_8_16_32_64_128.asc";
     heightmap_loader_struct.x_step = 1;
     heightmap_loader_struct.z_step = 1;
     heightmap_loader_struct.triangulation_type = "bilinear_interpolation";
