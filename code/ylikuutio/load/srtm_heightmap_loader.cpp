@@ -149,7 +149,6 @@ namespace yli::load
         vertex_data.reserve(image_width * image_height);
 
         const uint8_t* image_pointer = &(*file_content)[0]; // start from northwestern corner.
-        float* vertex_pointer = &vertex_data[0];
 
         // start processing heightmap data.
         // 90 meters is for equator.
@@ -175,7 +174,7 @@ namespace yli::load
                 std::size_t y = static_cast<std::size_t>(*image_pointer) << 8 | static_cast<std::size_t>(*(image_pointer + 1));
 
                 image_pointer += sizeof(int16_t);
-                *vertex_pointer++ = static_cast<float>(y) / heightmap_loader_struct.divisor;
+                vertex_data.emplace_back(static_cast<float>(y) / heightmap_loader_struct.divisor);
             }
             image_pointer += sizeof(int16_t) * (true_image_width - image_width);
         }

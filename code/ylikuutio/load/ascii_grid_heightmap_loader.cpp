@@ -188,8 +188,6 @@ namespace yli::load
         std::vector<float> vertex_data;
         vertex_data.reserve(image_width * image_height);
 
-        float* vertex_pointer = &vertex_data[0];
-
         // start processing image_data.
         std::cout << "Processing image data.\n";
 
@@ -214,11 +212,11 @@ namespace yli::load
                     file_content_i++;
                 }
 
-                *vertex_pointer++ = yli::string::extract_float_value_from_string(
-                        *file_content,
-                        file_content_i,
-                        (const char* const) " \n",
-                        (const char* const) nullptr);
+                vertex_data.emplace_back(yli::string::extract_float_value_from_string(
+                            *file_content,
+                            file_content_i,
+                            (const char* const) " \n",
+                            (const char* const) nullptr));
             }
         }
 
