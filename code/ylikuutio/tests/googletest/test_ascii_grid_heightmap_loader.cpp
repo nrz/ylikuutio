@@ -55,6 +55,9 @@ TEST(an_ASCII_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_
             image_height);
 
     ASSERT_TRUE(model_loading_result);
+    ASSERT_EQ(vertices.size(), 16 * 3);
+    ASSERT_EQ(UVs.size(), 16 * 3);
+    ASSERT_EQ(normals.size(), 16 * 3);
 
     //  +-------+-------+
     //  |\ 10  /|\ 14  /|
