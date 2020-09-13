@@ -31,7 +31,7 @@
 
 TEST(obj_files_must_be_loaded_approriately, suzanne_obj)
 {
-    const std::string obj_filename = "suzanne.obj";
+    const std::string obj_filename = "suzanne_old.obj";
     std::vector<glm::vec3> out_vertices;
     std::vector<glm::vec2> out_uvs;
     std::vector<glm::vec3> out_normals;
