@@ -20,13 +20,13 @@
 
 namespace yli::ontology
 {
-    class Universe;
+    class Entity;
 }
 
 namespace yli::snippets
 {
     void set_movement(
-            yli::ontology::Universe* const universe,
+            yli::ontology::Entity* const entity,
             const float speed,
             const float turbo_factor,
             const float twin_turbo_factor,
