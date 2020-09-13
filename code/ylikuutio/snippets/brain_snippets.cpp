@@ -175,7 +175,7 @@ namespace yli::snippets
             return nullptr;
         }
 
-        movable->yaw = 1.5f * PI;
+        movable->yaw = 0.0f;
         return nullptr;
     }
 
@@ -199,7 +199,7 @@ namespace yli::snippets
             return nullptr;
         }
 
-        movable->yaw = 0.5f * PI;
+        movable->yaw = PI;
         return nullptr;
     }
 
@@ -223,7 +223,7 @@ namespace yli::snippets
             return nullptr;
         }
 
-        movable->yaw = 0.0f;
+        movable->yaw = 0.5f * PI;
         return nullptr;
     }
 
@@ -247,7 +247,7 @@ namespace yli::snippets
             return nullptr;
         }
 
-        movable->yaw = 1.0f * PI;
+        movable->yaw = -0.5f * PI;
         return nullptr;
     }
 
@@ -271,7 +271,7 @@ namespace yli::snippets
             return nullptr;
         }
 
-        movable->yaw = 1.5f * PI;
+        movable->yaw = 0.0f;
         movable->cartesian_coordinates.x += 1.0f;
         return nullptr;
     }
@@ -296,7 +296,7 @@ namespace yli::snippets
             return nullptr;
         }
 
-        movable->yaw = 0.5f * PI;
+        movable->yaw = PI;
         movable->cartesian_coordinates.x -= 1.0f;
         return nullptr;
     }
@@ -321,7 +321,7 @@ namespace yli::snippets
             return nullptr;
         }
 
-        movable->yaw = 0.0f;
+        movable->yaw = 0.5f * PI;
         movable->cartesian_coordinates.z -= 1.0f;
         return nullptr;
     }
@@ -346,7 +346,7 @@ namespace yli::snippets
             return nullptr;
         }
 
-        movable->yaw = 1.0f * PI;
+        movable->yaw = -0.5f * PI;
         movable->cartesian_coordinates.z += 1.0f;
         return nullptr;
     }
