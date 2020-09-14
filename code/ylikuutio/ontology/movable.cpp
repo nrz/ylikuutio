@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#include "variable.hpp"
 #include "movable.hpp"
 #include "brain.hpp"
 #include "movable_variable_activation.hpp"
@@ -219,5 +220,13 @@ namespace yli::ontology
         azimuth_variable_struct.should_ylikuutio_call_activate_callback_now = false;
         std::cout << "Executing `entity->create_variable(azimuth_variable_struct);` ...\n";
         this->create_variable(azimuth_variable_struct);
+
+        const float speed = 0.0f;
+        std::shared_ptr<yli::data::AnyValue> any_value_speed = std::make_shared<yli::data::AnyValue>(speed);
+        yli::ontology::VariableStruct speed_variable_struct(any_value_speed);
+        speed_variable_struct.local_name = "speed";
+        speed_variable_struct.activate_callback = &yli::ontology::Variable::activate_speed;
+        speed_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        this->create_variable(speed_variable_struct);
     }
 }
