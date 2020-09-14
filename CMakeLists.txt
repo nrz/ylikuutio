@@ -336,6 +336,7 @@ configure_file(code/ylikuutio/shaders/text_vertex_shader.frag text_vertex_shader
 # 3D models.
 # Suzanne.
 configure_file(res/objects/custom/suzanne.obj suzanne.obj COPYONLY)
+configure_file(res/objects/custom/suzanne_old.obj suzanne_old.obj COPYONLY)
 # Freight train.
 configure_file(res/objects/www.blendswap.com/46359_freight_train/freight_train.fbx freight_train.fbx COPYONLY)
 configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_chassis.bmp freight_train_chassis.bmp COPYONLY)

@@ -238,7 +238,7 @@ namespace yli::string
         char* src_data_pointer = const_cast<char*>(src_base_pointer);
         char* src_first_char_after_separator_pointer = nullptr;
         char* dest_data_pointer = dest_base_pointer;
-        std::size_t filename_length = 0; // length without trailing null byte.
+        std::size_t length_of_last_part_of_string = 0; // length without trailing null byte.
 
         // + 1 needed for both source and dest because of the null terminator.
         for ( ; src_data_pointer < src_base_pointer + src_data_size && dest_data_pointer + 1 < dest_base_pointer + dest_data_size; src_data_pointer++)
@@ -246,23 +246,23 @@ namespace yli::string
             if (*src_data_pointer == static_cast<char>(separator))
             {
                 src_first_char_after_separator_pointer = src_data_pointer + 1;
-                filename_length = 0;
+                length_of_last_part_of_string = 0;
             }
             else if (src_first_char_after_separator_pointer != nullptr)
             {
                 // separator pointer found.
-                filename_length++;
+                length_of_last_part_of_string++;
             }
         }
 
         if (src_first_char_after_separator_pointer != nullptr)
         {
-            std::copy(src_first_char_after_separator_pointer, src_first_char_after_separator_pointer + filename_length, dest_base_pointer);
+            std::copy(src_first_char_after_separator_pointer, src_first_char_after_separator_pointer + length_of_last_part_of_string, dest_base_pointer);
         }
 
-        dest_data_pointer += filename_length;
+        dest_data_pointer += length_of_last_part_of_string;
         *dest_data_pointer = '\0';
-        return filename_length;
+        return length_of_last_part_of_string;
     }
 
     std::size_t extract_last_part_of_string(
@@ -270,7 +270,7 @@ namespace yli::string
             std::string& dest_string,
             const char separator)
     {
-        std::size_t filename_length = 0;
+        std::size_t length_of_last_part_of_string = 0;
         auto separator_it = data_string.end(); // by default no last part.
 
         for (auto it = data_string.begin(); it != data_string.end(); it++)
@@ -278,11 +278,11 @@ namespace yli::string
             if (*it == separator)
             {
                 separator_it = it;
-                filename_length = 0;
+                length_of_last_part_of_string = 0;
             }
             else
             {
-                filename_length++;
+                length_of_last_part_of_string++;
             }
         }
 
@@ -294,7 +294,7 @@ namespace yli::string
 
         separator_it++;
         dest_string = std::string(separator_it, data_string.end());
-        return filename_length;
+        return length_of_last_part_of_string;
     }
 
     void extract_value_from_string(

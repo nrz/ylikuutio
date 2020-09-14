@@ -417,35 +417,35 @@ namespace yli::ontology
                         this->has_mouse_ever_moved = true;
 
                         // Compute new orientation.
-                        this->current_camera_horizontal_angle += this->mouse_speed * static_cast<float>(this->window_width / 2 - xpos);
-                        this->current_camera_horizontal_angle = remainder(this->current_camera_horizontal_angle, (2.0f * PI));
+                        this->current_camera_yaw += this->mouse_speed * static_cast<float>(this->window_width / 2 - xpos);
+                        this->current_camera_yaw = remainder(this->current_camera_yaw, (2.0f * PI));
 
                         if (this->is_invert_mouse_in_use)
                         {
                             // Invert mouse.
-                            this->current_camera_vertical_angle -= this->mouse_speed * static_cast<float>(this->window_height / 2 - ypos);
+                            this->current_camera_pitch -= this->mouse_speed * static_cast<float>(this->window_height / 2 - ypos);
                         }
                         else
                         {
                             // Don't invert mouse.
-                            this->current_camera_vertical_angle += this->mouse_speed * static_cast<float>(this->window_height / 2 - ypos);
+                            this->current_camera_pitch += this->mouse_speed * static_cast<float>(this->window_height / 2 - ypos);
                         }
 
-                        this->current_camera_vertical_angle = remainder(this->current_camera_vertical_angle, (2.0f * PI));
+                        this->current_camera_pitch = remainder(this->current_camera_pitch, (2.0f * PI));
                     }
                 }
 
                 // Direction: spherical coordinates to cartesian coordinates conversion.
                 this->current_camera_direction = glm::vec3(
-                        cos(this->current_camera_vertical_angle) * sin(this->current_camera_horizontal_angle + 0.5f * PI),
-                        sin(this->current_camera_vertical_angle),
-                        cos(this->current_camera_vertical_angle) * cos(this->current_camera_horizontal_angle + 0.5f * PI));
+                        cos(this->current_camera_pitch) * sin(this->current_camera_yaw + 0.5f * PI),
+                        sin(this->current_camera_pitch),
+                        cos(this->current_camera_pitch) * cos(this->current_camera_yaw + 0.5f * PI));
 
                 // Right vector.
                 this->current_camera_right = glm::vec3(
-                        sin(this->current_camera_horizontal_angle),
+                        sin(this->current_camera_yaw),
                         0,
-                        cos(this->current_camera_horizontal_angle));
+                        cos(this->current_camera_yaw));
 
                 // Up vector.
                 this->current_camera_up = glm::cross(this->current_camera_right, this->current_camera_direction);
@@ -515,10 +515,10 @@ namespace yli::ontology
                 {
                     std::stringstream angles_and_coordinates_stringstream;
                     angles_and_coordinates_stringstream << std::fixed << std::setprecision(2) <<
-                        this->current_camera_horizontal_angle << "," <<
-                        this->current_camera_vertical_angle << " rad; " <<
-                        RADIANS_TO_DEGREES(this->current_camera_horizontal_angle) << "," <<
-                        RADIANS_TO_DEGREES(this->current_camera_vertical_angle) << " deg\n" <<
+                        this->current_camera_yaw << "," <<
+                        this->current_camera_pitch << " rad; " <<
+                        RADIANS_TO_DEGREES(this->current_camera_yaw) << "," <<
+                        RADIANS_TO_DEGREES(this->current_camera_pitch) << " deg\n" <<
                         "(" <<
                         this->current_camera_cartesian_coordinates.x << "," <<
                         this->current_camera_cartesian_coordinates.y << "," <<

@@ -37,11 +37,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #endif
 
-#ifndef __GLM_GTC_QUATERNION_HPP_INCLUDED
-#define __GLM_GTC_QUATERNION_HPP_INCLUDED
-#include <glm/gtc/quaternion.hpp> // glm::quat
-#endif
-
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <queue>    // std::queue
@@ -71,14 +66,15 @@ namespace yli::ontology
                 // constructor.
                 this->symbiont_species      = biont_struct.symbiont_species;
 
+                this->initial_rotate_vectors = biont_struct.initial_rotate_vectors;
+                this->initial_rotate_angles  = biont_struct.initial_rotate_angles;
+
                 this->original_scale_vector = biont_struct.original_scale_vector;
                 this->rotate_vector         = biont_struct.rotate_vector;
-                this->initial_rotate_vector = biont_struct.initial_rotate_vector;
                 this->translate_vector      = biont_struct.translate_vector;
 
                 this->biontID               = biont_struct.biontID;
 
-                this->initial_rotate_angle  = biont_struct.initial_rotate_angle;
                 this->rotate_angle          = biont_struct.rotate_angle;
 
                 // Enable rendering of a recently entered `Biont`.
@@ -112,14 +108,15 @@ namespace yli::ontology
 
             yli::ontology::SymbiontSpecies* symbiont_species; // pointer to the `SymbiontSpecies` (not a parent!).
 
+            std::vector<glm::vec3> initial_rotate_vectors; // initial rotate vector.
+            std::vector<float> initial_rotate_angles;      // initial rotate angle.
+
             glm::vec3 original_scale_vector;       // original scale vector.
             glm::vec3 rotate_vector;               // rotate vector.
             glm::vec3 translate_vector;            // translate vector.
-            glm::vec3 initial_rotate_vector;       // initial rotate vector.
 
             std::size_t biontID;
 
-            float initial_rotate_angle;            // initial rotate angle.
             float rotate_angle;                    // rotate angle.
 
             bool should_ylikuutio_render_this_biont;

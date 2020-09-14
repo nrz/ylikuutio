@@ -419,7 +419,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        universe->current_camera_horizontal_angle = std::get<float>(yaw_any_value->data);
+        universe->current_camera_yaw = std::get<float>(yaw_any_value->data);
         return nullptr;
     }
 
@@ -459,7 +459,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        universe->current_camera_vertical_angle = std::get<float>(pitch_any_value->data);
+        universe->current_camera_pitch = std::get<float>(pitch_any_value->data);
         return nullptr;
     }
 
@@ -499,7 +499,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        universe->current_camera_horizontal_angle = 0.5f * PI - std::get<float>(azimuth_any_value->data);
+        universe->current_camera_yaw = 0.5f * PI - std::get<float>(azimuth_any_value->data);
         return nullptr;
     }
 }

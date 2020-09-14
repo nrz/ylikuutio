@@ -131,10 +131,10 @@ namespace yli::ontology
 
             const glm::vec3& get_cartesian_coordinates() const;
             void set_cartesian_coordinates(const glm::vec3& cartesian_coordinates);
-            float get_horizontal_angle() const;
-            void set_horizontal_angle(const float yaw);
-            float get_vertical_angle() const;
-            void set_vertical_angle(const float pitch);
+            float get_yaw() const;
+            void set_yaw(const float yaw);
+            float get_pitch() const;
+            void set_pitch(const float pitch);
 
             // Public callbacks (to be called from AI scripts written in YliLisp).
             // These are the functions that are available for AI scripts.

@@ -664,6 +664,8 @@ namespace ajokki
         cat_object_struct1.global_name = "cat1";
         cat_object_struct1.local_name = "kissa1";
         cat_object_struct1.brain = rest_brain;
+        cat_object_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
+        cat_object_struct1.initial_rotate_angles = { PI, -0.5f * PI };
         cat_object_struct1.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
         cat_object_struct1.cartesian_coordinates = glm::vec3(500.00f, 100.00f, 1000.00f);
         cat_object_struct1.rotate_angle = 0.00f;
@@ -683,6 +685,8 @@ namespace ajokki
         cat_object_struct2.global_name = "cat2";
         cat_object_struct2.local_name = "kissa2";
         cat_object_struct2.brain = rest_brain;
+        cat_object_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
+        cat_object_struct2.initial_rotate_angles = { PI, -0.5f * PI };
         cat_object_struct2.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
         cat_object_struct2.cartesian_coordinates = glm::vec3(700.00f, 100.00f, 1200.00f);
         cat_object_struct2.rotate_angle = 0.00f;
@@ -719,6 +723,8 @@ namespace ajokki
 
         yli::ontology::HolobiontStruct freight_train_holobiont_struct1;
         freight_train_holobiont_struct1.symbiosis_parent = freight_train_symbiosis;
+        freight_train_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
+        freight_train_holobiont_struct1.initial_rotate_angles = { PI };
         freight_train_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         freight_train_holobiont_struct1.cartesian_coordinates = glm::vec3(125.00f, 40.00f, 80.00f);
         freight_train_holobiont_struct1.rotate_angle = 0.00f;
@@ -764,6 +770,8 @@ namespace ajokki
         yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct1;
         turbo_polizei_png_holobiont_struct1.symbiosis_parent = turbo_polizei_png_symbiosis;
         turbo_polizei_png_holobiont_struct1.brain = rest_brain;
+        turbo_polizei_png_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
+        turbo_polizei_png_holobiont_struct1.initial_rotate_angles = { PI };
         turbo_polizei_png_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         turbo_polizei_png_holobiont_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 160.00f);
         turbo_polizei_png_holobiont_struct1.rotate_angle = 0.00f;
@@ -809,6 +817,8 @@ namespace ajokki
         yli::ontology::HolobiontStruct turbo_polizei_bmp_holobiont_struct1;
         turbo_polizei_bmp_holobiont_struct1.symbiosis_parent = turbo_polizei_bmp_symbiosis;
         turbo_polizei_bmp_holobiont_struct1.brain = rest_brain;
+        turbo_polizei_bmp_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
+        turbo_polizei_bmp_holobiont_struct1.initial_rotate_angles = { PI };
         turbo_polizei_bmp_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         turbo_polizei_bmp_holobiont_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 175.00f);
         turbo_polizei_bmp_holobiont_struct1.rotate_angle = 0.00f;
@@ -856,7 +866,6 @@ namespace ajokki
         fantasy_house_with_balcony_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         fantasy_house_with_balcony_holobiont_struct1.cartesian_coordinates = glm::vec3(268.00f, 59.00f, 174.00f);
         fantasy_house_with_balcony_holobiont_struct1.rotate_angle = 0.00f;
-        fantasy_house_with_balcony_holobiont_struct1.initial_rotate_angle = 0.0f;
         fantasy_house_with_balcony_holobiont_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         fantasy_house_with_balcony_holobiont_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
 
@@ -881,9 +890,7 @@ namespace ajokki
         fantasy_house_with_balcony_holobiont_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         fantasy_house_with_balcony_holobiont_struct2.cartesian_coordinates = glm::vec3(252.00f, 23.50f, 2614.00f);
         fantasy_house_with_balcony_holobiont_struct2.rotate_angle = 0.00f;
-        fantasy_house_with_balcony_holobiont_struct2.initial_rotate_angle = PI / 2;
         fantasy_house_with_balcony_holobiont_struct2.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        fantasy_house_with_balcony_holobiont_struct2.initial_rotate_vector = glm::vec3(0.0f, 1.0f, 0.0f);
         fantasy_house_with_balcony_holobiont_struct2.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
 
         std::cout << "Creating yli::ontology::Entity* fantasy_house_with_balcony2_entity ...\n";

@@ -264,7 +264,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        return std::make_shared<yli::data::AnyValue>(universe->current_camera_horizontal_angle);
+        return std::make_shared<yli::data::AnyValue>(universe->current_camera_yaw);
     }
 
     std::shared_ptr<yli::data::AnyValue> read_pitch(yli::ontology::Entity* const entity)
@@ -288,7 +288,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        return std::make_shared<yli::data::AnyValue>(universe->current_camera_vertical_angle);
+        return std::make_shared<yli::data::AnyValue>(universe->current_camera_pitch);
     }
 
     std::shared_ptr<yli::data::AnyValue> read_azimuth(yli::ontology::Entity* const entity)
@@ -313,7 +313,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        const float azimuth = 0.5f * PI - universe->current_camera_horizontal_angle;
+        const float azimuth = 0.5f * PI - universe->current_camera_yaw;
         return std::make_shared<yli::data::AnyValue>(azimuth);
     }
 }

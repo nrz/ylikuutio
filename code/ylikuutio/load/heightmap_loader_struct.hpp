@@ -34,7 +34,8 @@ namespace yli::load
             divisor(NAN),
             x_step(1),
             z_step(1),
-            use_real_texture_coordinates(true)
+            use_real_texture_coordinates(true),
+            triangulate(true)
         {
             // constructor.
         }
@@ -49,6 +50,7 @@ namespace yli::load
         std::size_t z_step;
         std::string triangulation_type;
         bool use_real_texture_coordinates;
+        bool triangulate;
     };
 }
 

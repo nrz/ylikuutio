@@ -249,6 +249,21 @@ namespace yli::ontology
             return nullptr;
         }
 
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            std::shared_ptr<yli::data::AnyValue> speed_any_value = variable->variable_value;
+
+            if (speed_any_value == nullptr || !std::holds_alternative<float>(speed_any_value->data))
+            {
+                return nullptr;
+            }
+
+            movable->speed = std::get<float>(speed_any_value->data);
+            return nullptr;
+        }
+
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
         if (universe == nullptr)

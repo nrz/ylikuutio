@@ -35,11 +35,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #endif
 
-#ifndef __GLM_GTC_QUATERNION_HPP_INCLUDED
-#define __GLM_GTC_QUATERNION_HPP_INCLUDED
-#include <glm/gtc/quaternion.hpp> // glm::quat
-#endif
-
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
@@ -79,12 +74,13 @@ namespace yli::ontology
                         parent_module)
             {
                 // constructor.
+                this->initial_rotate_vectors = object_struct.initial_rotate_vectors;
+                this->initial_rotate_angles  = object_struct.initial_rotate_angles;
+
                 this->original_scale_vector = object_struct.original_scale_vector;
                 this->rotate_vector         = object_struct.rotate_vector;
                 this->translate_vector      = object_struct.translate_vector;
-                this->initial_rotate_vector = object_struct.initial_rotate_vector;
 
-                this->initial_rotate_angle  = object_struct.initial_rotate_angle;
                 this->rotate_angle          = object_struct.rotate_angle;
 
                 this->object_type           = object_struct.object_type;
@@ -120,7 +116,7 @@ namespace yli::ontology
                     std::shared_ptr<std::string> y,
                     std::shared_ptr<std::string> z);
 
-            static std::shared_ptr<yli::data::AnyValue> create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle(
+            static std::shared_ptr<yli::data::AnyValue> create_object_with_parent_name_x_y_z_yaw_pitch(
                     yli::ontology::Species* const parent,
                     std::shared_ptr<std::string> object_name,
                     std::shared_ptr<std::string> x,
@@ -143,12 +139,13 @@ namespace yli::ontology
 
             yli::ontology::ObjectType object_type;
 
+            std::vector<glm::vec3> initial_rotate_vectors; // initial rotate vector.
+            std::vector<float> initial_rotate_angles;      // initial rotate angle.
+
             glm::vec3 original_scale_vector;        // original scale vector.
             glm::vec3 rotate_vector;                // rotate vector.
             glm::vec3 translate_vector;             // translate vector.
-            glm::vec3 initial_rotate_vector;        // initial rotate vector.
 
-            float initial_rotate_angle;             // initial rotate angle.
             float rotate_angle;                     // rotate angle.
     };
 }

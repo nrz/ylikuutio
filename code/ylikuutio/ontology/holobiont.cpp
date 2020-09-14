@@ -91,11 +91,11 @@ namespace yli::ontology
             biont_struct.biontID               = biontID;
             biont_struct.holobiont_parent      = this;
             biont_struct.symbiont_species      = symbiosis->get_symbiont_species(biontID);
+            biont_struct.initial_rotate_vectors = this->initial_rotate_vectors;
+            biont_struct.initial_rotate_angles  = this->initial_rotate_angles;
             biont_struct.original_scale_vector = this->original_scale_vector;
             biont_struct.rotate_angle          = this->rotate_angle;
             biont_struct.rotate_vector         = this->rotate_vector;
-            biont_struct.initial_rotate_angle  = this->initial_rotate_angle;
-            biont_struct.initial_rotate_vector = this->initial_rotate_vector;
             biont_struct.cartesian_coordinates = this->cartesian_coordinates;
             biont_struct.translate_vector      = this->translate_vector;
 
@@ -221,7 +221,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle(
+    std::shared_ptr<yli::data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch(
             yli::ontology::Symbiosis* const parent,
             std::shared_ptr<std::string> holobiont_name,
             std::shared_ptr<std::string> x,
@@ -250,44 +250,44 @@ namespace yli::ontology
 
         if (!std::holds_alternative<float>(x_any_value.data))
         {
-            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `x`!\n";
+            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `x`!\n";
             return nullptr;
         }
 
         if (!std::holds_alternative<float>(y_any_value.data))
         {
-            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `y`!\n";
+            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `y`!\n";
             return nullptr;
         }
 
         if (!std::holds_alternative<float>(z_any_value.data))
         {
-            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `z`!\n";
+            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `z`!\n";
             return nullptr;
         }
 
         if (!std::holds_alternative<float>(yaw_any_value.data))
         {
-            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `yaw`!\n";
+            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `yaw`!\n";
             return nullptr;
         }
 
         if (!std::holds_alternative<float>(pitch_any_value.data))
         {
-            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `pitch`!\n";
+            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `pitch`!\n";
             return nullptr;
         }
 
         float float_x = std::get<float>(x_any_value.data);
         float float_y = std::get<float>(y_any_value.data);
         float float_z = std::get<float>(z_any_value.data);
-        float float_horizontal_angle = std::get<float>(yaw_any_value.data);
-        float float_vertical_angle = std::get<float>(pitch_any_value.data);
+        float float_yaw = std::get<float>(yaw_any_value.data);
+        float float_pitch = std::get<float>(pitch_any_value.data);
 
         yli::ontology::HolobiontStruct holobiont_struct;
         holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
-        holobiont_struct.yaw = float_horizontal_angle;
-        holobiont_struct.pitch = float_vertical_angle;
+        holobiont_struct.yaw = float_yaw;
+        holobiont_struct.pitch = float_pitch;
         holobiont_struct.symbiosis_parent = parent;
         holobiont_struct.local_name = *holobiont_name;
         entity_factory->create_holobiont(holobiont_struct);

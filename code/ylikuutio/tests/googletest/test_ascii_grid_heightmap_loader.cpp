@@ -34,7 +34,7 @@
 TEST(an_ASCII_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_2_4_8_16_32_64_128_256_x_step_1_z_step_1)
 {
     yli::load::HeightmapLoaderStruct heightmap_loader_struct;
-    heightmap_loader_struct.filename = "test_3x3_0_1_2_4_8_16_32_64_128.asc"; // Helsinki eastern downtown.
+    heightmap_loader_struct.filename = "test_3x3_0_1_2_4_8_16_32_64_128.asc";
     heightmap_loader_struct.x_step = 1;
     heightmap_loader_struct.z_step = 1;
     heightmap_loader_struct.triangulation_type = "bilinear_interpolation";
@@ -55,6 +55,9 @@ TEST(an_ASCII_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_
             image_height);
 
     ASSERT_TRUE(model_loading_result);
+    ASSERT_EQ(vertices.size(), 16 * 3);
+    ASSERT_EQ(UVs.size(), 16 * 3);
+    ASSERT_EQ(normals.size(), 16 * 3);
 
     //  +-------+-------+
     //  |\ 10  /|\ 14  /|
@@ -267,4 +270,46 @@ TEST(an_ASCII_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_
     ASSERT_EQ(UVs[46].y, 0.0f); // northeast vertex.
     ASSERT_EQ(UVs[47].x, 0.0f); // southeast vertex.
     ASSERT_EQ(UVs[47].y, 1.0f); // southeast vertex.
+}
+
+TEST(an_ASCII_grid_must_be_defined_appropriately, test_3x3_0_1_2_4_8_16_32_64_128_256_x_step_1_z_step_1)
+{
+    yli::load::HeightmapLoaderStruct heightmap_loader_struct;
+    heightmap_loader_struct.filename = "test_3x3_0_1_2_4_8_16_32_64_128.asc";
+    heightmap_loader_struct.x_step = 1;
+    heightmap_loader_struct.z_step = 1;
+    heightmap_loader_struct.triangulation_type = "bilinear_interpolation";
+    heightmap_loader_struct.use_real_texture_coordinates = true;
+    heightmap_loader_struct.triangulate = false;
+
+    std::vector<glm::vec3> vertices;         // vertices of the object.
+    std::vector<glm::vec2> UVs;              // UVs of the object.
+    std::vector<glm::vec3> normals;          // normals of the object.
+    std::size_t image_width;
+    std::size_t image_height;
+
+    bool model_loading_result = yli::load::load_ascii_grid_terrain(
+            heightmap_loader_struct,
+            vertices,
+            UVs,
+            normals,
+            image_width,
+            image_height);
+
+    ASSERT_TRUE(model_loading_result);
+    ASSERT_EQ(vertices.size(), 9);
+    ASSERT_EQ(UVs.size(), 0);
+    ASSERT_EQ(normals.size(), 0);
+
+    ASSERT_EQ(vertices[0].y, 0.0f);
+    ASSERT_EQ(vertices[1].y, 1.0f);
+    ASSERT_EQ(vertices[2].y, 2.0f);
+
+    ASSERT_EQ(vertices[3].y, 4.0f);
+    ASSERT_EQ(vertices[4].y, 8.0f);
+    ASSERT_EQ(vertices[5].y, 16.0f);
+
+    ASSERT_EQ(vertices[6].y, 32.0f);
+    ASSERT_EQ(vertices[7].y, 64.0f);
+    ASSERT_EQ(vertices[8].y, 128.0f);
 }

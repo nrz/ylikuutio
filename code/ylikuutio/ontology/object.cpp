@@ -275,15 +275,17 @@ namespace yli::ontology
 
             const std::string model_file_format = species->get_model_file_format();
 
-            if (model_file_format == "fbx" || model_file_format == "FBX")
+            if (this->initial_rotate_vectors.size() == this->initial_rotate_angles.size())
             {
-                // Only FBX objects need initial rotation.
-                this->model_matrix = glm::rotate(this->model_matrix, this->initial_rotate_angle, this->initial_rotate_vector);
+                for (std::size_t i = 0; i < this->initial_rotate_vectors.size() && i < this->initial_rotate_angles.size(); i++)
+                {
+                    this->model_matrix = glm::rotate(this->model_matrix, this->initial_rotate_angles[i], this->initial_rotate_vectors[i]);
+                }
             }
         }
 
         this->model_matrix = glm::scale(this->model_matrix, this->original_scale_vector);
-        glm::vec3 euler_angles { this->pitch, this->yaw, 0.0f };
+        glm::vec3 euler_angles { 0.0f, this->yaw, this->pitch };
         glm::quat my_quaternion = glm::quat(euler_angles);
         glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
         this->model_matrix = rotation_matrix * this->model_matrix;
@@ -432,7 +434,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Object::create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle(
+    std::shared_ptr<yli::data::AnyValue> Object::create_object_with_parent_name_x_y_z_yaw_pitch(
             yli::ontology::Species* const parent,
             std::shared_ptr<std::string> object_name,
             std::shared_ptr<std::string> x,
@@ -461,44 +463,44 @@ namespace yli::ontology
 
         if (!std::holds_alternative<float>(x_any_value.data))
         {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `x`!\n";
+            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `x`!\n";
             return nullptr;
         }
 
         if (!std::holds_alternative<float>(y_any_value.data))
         {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `y`!\n";
+            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `y`!\n";
             return nullptr;
         }
 
         if (!std::holds_alternative<float>(z_any_value.data))
         {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `z`!\n";
+            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `z`!\n";
             return nullptr;
         }
 
         if (!std::holds_alternative<float>(yaw_any_value.data))
         {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `yaw`!\n";
+            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `yaw`!\n";
             return nullptr;
         }
 
         if (!std::holds_alternative<float>(pitch_any_value.data))
         {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_horizontal_angle_vertical_angle`: invalid value for `pitch`!\n";
+            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `pitch`!\n";
             return nullptr;
         }
 
         float float_x = std::get<float>(x_any_value.data);
         float float_y = std::get<float>(y_any_value.data);
         float float_z = std::get<float>(z_any_value.data);
-        float float_horizontal_angle = std::get<float>(yaw_any_value.data);
-        float float_vertical_angle = std::get<float>(pitch_any_value.data);
+        float float_yaw = std::get<float>(yaw_any_value.data);
+        float float_pitch = std::get<float>(pitch_any_value.data);
 
         yli::ontology::ObjectStruct object_struct;
         object_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
-        object_struct.yaw = float_horizontal_angle;
-        object_struct.pitch = float_vertical_angle;
+        object_struct.yaw = float_yaw;
+        object_struct.pitch = float_pitch;
         object_struct.species_parent = parent;
         object_struct.local_name = *object_name;
         entity_factory->create_object(object_struct);

@@ -86,8 +86,6 @@ namespace yli::load
         std::vector<float> vertex_data;
         vertex_data.reserve(terrain_size);
 
-        float* vertex_pointer = &vertex_data[0];
-
         // start processing image_data.
         for (std::size_t z = 0; z < image_height; z++)
         {
@@ -121,7 +119,7 @@ namespace yli::load
                     return false;
                 }
 
-                *vertex_pointer++ = y;
+                vertex_data.emplace_back(y);
                 image_pointer += 3; // R, G, & B.
             }
         }

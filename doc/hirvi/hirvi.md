@@ -6,7 +6,7 @@ even through moose are well-known pasifists.
 "hirvi" means a moose/elk in Finnish.
 
 In Hirvi there are missions in different cities of Finland,
-at least in Helsinkin, Espoo, Vantaa, Oulu, and Turku.
+at least in Helsinki, Espoo, Vantaa, Oulu, and Turku.
 The scenes in which the missions take place are implemented
 using free 3D city models.
 

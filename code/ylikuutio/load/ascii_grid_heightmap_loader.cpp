@@ -188,8 +188,6 @@ namespace yli::load
         std::vector<float> vertex_data;
         vertex_data.reserve(image_width * image_height);
 
-        float* vertex_pointer = &vertex_data[0];
-
         // start processing image_data.
         std::cout << "Processing image data.\n";
 
@@ -214,26 +212,43 @@ namespace yli::load
                     file_content_i++;
                 }
 
-                *vertex_pointer++ = yli::string::extract_float_value_from_string(
-                        *file_content,
-                        file_content_i,
-                        (const char* const) " \n",
-                        (const char* const) nullptr);
+                vertex_data.emplace_back(yli::string::extract_float_value_from_string(
+                            *file_content,
+                            file_content_i,
+                            (const char* const) " \n",
+                            (const char* const) nullptr));
             }
         }
 
         std::cout << "\n";
 
-        std::cout << "Triangulating ASCII grid data.\n";
+        if (heightmap_loader_struct.triangulate)
+        {
+            std::cout << "Triangulating ASCII grid data.\n";
 
-        yli::triangulation::TriangulateQuadsStruct triangulate_quads_struct;
-        triangulate_quads_struct.image_width = image_width;
-        triangulate_quads_struct.image_height = image_height;
-        triangulate_quads_struct.x_step = heightmap_loader_struct.x_step;
-        triangulate_quads_struct.z_step = heightmap_loader_struct.z_step;
-        triangulate_quads_struct.triangulation_type = heightmap_loader_struct.triangulation_type;
-        triangulate_quads_struct.use_real_texture_coordinates = heightmap_loader_struct.use_real_texture_coordinates;
+            yli::triangulation::TriangulateQuadsStruct triangulate_quads_struct;
+            triangulate_quads_struct.image_width = image_width;
+            triangulate_quads_struct.image_height = image_height;
+            triangulate_quads_struct.x_step = heightmap_loader_struct.x_step;
+            triangulate_quads_struct.z_step = heightmap_loader_struct.z_step;
+            triangulate_quads_struct.triangulation_type = heightmap_loader_struct.triangulation_type;
+            triangulate_quads_struct.use_real_texture_coordinates = heightmap_loader_struct.use_real_texture_coordinates;
 
-        return yli::triangulation::triangulate_quads(&vertex_data[0], triangulate_quads_struct, out_vertices, out_uvs, out_normals);
+            return yli::triangulation::triangulate_quads(&vertex_data[0], triangulate_quads_struct, out_vertices, out_uvs, out_normals);
+        }
+
+        // No triangulation.
+        // Just copy the vertices loaded from file to `out_vertices`.
+
+        for (std::size_t i = 0, z = 0; i < vertex_data.size() && z < image_height; z++)
+        {
+            for (std::size_t x = 0; x < image_width; x++)
+            {
+                glm::vec3 vertex { static_cast<float>(x), vertex_data[i++], static_cast<float>(z) };
+                out_vertices.emplace_back(vertex);
+            }
+        }
+
+        return true;
     }
 }

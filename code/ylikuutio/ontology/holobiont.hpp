@@ -35,11 +35,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #endif
 
-#ifndef __GLM_GTC_QUATERNION_HPP_INCLUDED
-#define __GLM_GTC_QUATERNION_HPP_INCLUDED
-#include <glm/gtc/quaternion.hpp> // glm::quat
-#endif
-
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <queue>    // std::queue
@@ -71,13 +66,14 @@ namespace yli::ontology
             {
                 // constructor.
 
+                this->initial_rotate_vectors = holobiont_struct.initial_rotate_vectors;
+                this->initial_rotate_angles  = holobiont_struct.initial_rotate_angles;
+
                 this->original_scale_vector = holobiont_struct.original_scale_vector;
                 this->rotate_vector         = holobiont_struct.rotate_vector;
                 this->translate_vector      = holobiont_struct.translate_vector;
-                this->initial_rotate_vector = holobiont_struct.initial_rotate_vector;
 
                 this->rotate_angle          = holobiont_struct.rotate_angle;
-                this->initial_rotate_angle  = holobiont_struct.initial_rotate_angle;
 
                 this->cartesian_coordinates = holobiont_struct.cartesian_coordinates;
                 this->spherical_coordinates = holobiont_struct.spherical_coordinates;
@@ -108,7 +104,7 @@ namespace yli::ontology
                     std::shared_ptr<std::string> y,
                     std::shared_ptr<std::string> z);
 
-            static std::shared_ptr<yli::data::AnyValue> create_holobiont_with_parent_name_x_y_z_horizontal_angle_vertical_angle(
+            static std::shared_ptr<yli::data::AnyValue> create_holobiont_with_parent_name_x_y_z_yaw_pitch(
                     yli::ontology::Symbiosis* const parent,
                     std::shared_ptr<std::string> holobiont_name,
                     std::shared_ptr<std::string> x,
@@ -130,15 +126,16 @@ namespace yli::ontology
 
             void create_bionts();
 
+            std::vector<glm::vec3> initial_rotate_vectors; // initial rotate vector.
+            std::vector<float> initial_rotate_angles;      // initial rotate angle.
+
             glm::vec3 original_scale_vector;            // original scale vector.
             glm::vec3 rotate_vector;                    // rotate vector.
             glm::vec3 translate_vector;                 // translate vector.
-            glm::vec3 initial_rotate_vector;            // initial rotate vector.
 
             yli::data::SphericalCoordinatesStruct spherical_coordinates;
 
             float rotate_angle;                         // rotate angle.
-            float initial_rotate_angle;                 // initial rotate angle.
     };
 }
 

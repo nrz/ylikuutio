@@ -35,6 +35,7 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
+#include <vector>   // std::vector
 
 namespace yli::ontology
 {
@@ -48,7 +49,6 @@ namespace yli::ontology
             : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
             cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
             rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
-            initial_rotate_vector(glm::vec3(0.0f, 1.0f, 1.0f)),
             translate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
             spherical_coordinates(NAN, NAN, NAN),
             holobiont_parent(nullptr),
@@ -56,17 +56,18 @@ namespace yli::ontology
             brain(nullptr),
             biontID(std::numeric_limits<std::size_t>::max()), // `std::numeric_limits<std::size_t>::max()` means that `biontID` is not defined.
             rotate_angle(0.0f),
-            initial_rotate_angle(PI),
             yaw(0.0f),
             pitch(0.0f)
         {
             // constructor.
         }
 
+        std::vector<glm::vec3> initial_rotate_vectors; // initial rotate vector.
+        std::vector<float> initial_rotate_angles;      // initial rotate angle.
+
         glm::vec3 original_scale_vector;                  // original scale vector.
         glm::vec3 cartesian_coordinates;                  // coordinate vector.
         glm::vec3 rotate_vector;                          // rotate vector.
-        glm::vec3 initial_rotate_vector;                  // initial rotate vector.
         glm::vec3 translate_vector;                       // translate vector.
         yli::data::SphericalCoordinatesStruct spherical_coordinates;
         yli::ontology::Holobiont* holobiont_parent;       // pointer to the `Holobiont`.
@@ -74,7 +75,6 @@ namespace yli::ontology
         yli::ontology::Brain* brain;                      // pointer to the `Brain` (not a parent!).
         std::size_t biontID;
         float rotate_angle;                               // rotate angle.
-        float initial_rotate_angle;                       // initial rotate angle.
         float yaw;                                        // yaw in radians.
         float pitch;                                      // pitch in radians.
     };
