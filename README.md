@@ -245,8 +245,10 @@ Some available console commands to try in Ajokki:
 * `set cat1.z 210`
 * `bind helsinki_east_downtown_orange_fur_material helsinki_east_downtown_grayscale_shader`
 * `bind helsinki_east_downtown_orange_fur_material helsinki_east_downtown_shader`
+* `print cat1.speed`
 * `bind cat1 orient_to_south_brain`
 * `bind cat1 orient_and_go_east_brain`
+* `set cat1.speed 1`
 * `bind cat1 orient_and_go_west_brain`
 * `bind cat1 rest_brain`
 * `print framebuffer_width`
