@@ -69,8 +69,6 @@ namespace yli::ontology
                 this->uvbuffer                      = 0;
                 this->normalbuffer                  = 0;
                 this->elementbuffer                 = 0;
-                this->initial_rotate_angle          = 0.0f;
-                this->initial_rotate_vector         = glm::vec3(0.0f, 1.0f, 1.0f);
 
                 this->opengl_in_use = opengl_in_use;
 
@@ -117,9 +115,6 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_objects;
 
         protected:
-            float initial_rotate_angle;              // initial rotate angle.
-            glm::vec3 initial_rotate_vector;         // initial rotate vector.
-
             std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
             glm::vec3 light_position;                // light position.
 

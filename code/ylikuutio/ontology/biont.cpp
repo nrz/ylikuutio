@@ -193,10 +193,12 @@ namespace yli::ontology
 
         const std::string model_file_format = symbiosis->get_model_file_format();
 
-        if (model_file_format == "fbx" || model_file_format == "FBX")
+        if (this->initial_rotate_vectors.size() == this->initial_rotate_angles.size())
         {
-            // Only FBX objects need initial rotation.
-            this->model_matrix = glm::rotate(this->model_matrix, this->initial_rotate_angle, this->initial_rotate_vector);
+            for (std::size_t i = 0; i < this->initial_rotate_vectors.size() && i < this->initial_rotate_angles.size(); i++)
+            {
+                this->model_matrix = glm::rotate(this->model_matrix, this->initial_rotate_angles[i], this->initial_rotate_vectors[i]);
+            }
         }
 
         this->model_matrix = glm::scale(this->model_matrix, this->original_scale_vector);

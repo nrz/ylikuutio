@@ -74,12 +74,13 @@ namespace yli::ontology
                         parent_module)
             {
                 // constructor.
+                this->initial_rotate_vectors = object_struct.initial_rotate_vectors;
+                this->initial_rotate_angles  = object_struct.initial_rotate_angles;
+
                 this->original_scale_vector = object_struct.original_scale_vector;
                 this->rotate_vector         = object_struct.rotate_vector;
                 this->translate_vector      = object_struct.translate_vector;
-                this->initial_rotate_vector = object_struct.initial_rotate_vector;
 
-                this->initial_rotate_angle  = object_struct.initial_rotate_angle;
                 this->rotate_angle          = object_struct.rotate_angle;
 
                 this->object_type           = object_struct.object_type;
@@ -138,12 +139,13 @@ namespace yli::ontology
 
             yli::ontology::ObjectType object_type;
 
+            std::vector<glm::vec3> initial_rotate_vectors; // initial rotate vector.
+            std::vector<float> initial_rotate_angles;      // initial rotate angle.
+
             glm::vec3 original_scale_vector;        // original scale vector.
             glm::vec3 rotate_vector;                // rotate vector.
             glm::vec3 translate_vector;             // translate vector.
-            glm::vec3 initial_rotate_vector;        // initial rotate vector.
 
-            float initial_rotate_angle;             // initial rotate angle.
             float rotate_angle;                     // rotate angle.
     };
 }

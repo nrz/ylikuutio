@@ -91,11 +91,11 @@ namespace yli::ontology
             biont_struct.biontID               = biontID;
             biont_struct.holobiont_parent      = this;
             biont_struct.symbiont_species      = symbiosis->get_symbiont_species(biontID);
+            biont_struct.initial_rotate_vectors = this->initial_rotate_vectors;
+            biont_struct.initial_rotate_angles  = this->initial_rotate_angles;
             biont_struct.original_scale_vector = this->original_scale_vector;
             biont_struct.rotate_angle          = this->rotate_angle;
             biont_struct.rotate_vector         = this->rotate_vector;
-            biont_struct.initial_rotate_angle  = this->initial_rotate_angle;
-            biont_struct.initial_rotate_vector = this->initial_rotate_vector;
             biont_struct.cartesian_coordinates = this->cartesian_coordinates;
             biont_struct.translate_vector      = this->translate_vector;
 

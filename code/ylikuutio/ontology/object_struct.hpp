@@ -34,6 +34,7 @@
 
 // Include standard headers
 #include <cmath> // NAN, std::isnan, std::pow
+#include <vector> // std::vector
 
 namespace yli::ontology
 {
@@ -49,7 +50,6 @@ namespace yli::ontology
             : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
             cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
             rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
-            initial_rotate_vector(glm::vec3(0.0f, 1.0f, 1.0f)),
             translate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
             spherical_coordinates(NAN, NAN, NAN),
             species_parent(nullptr),
@@ -58,7 +58,6 @@ namespace yli::ontology
             glyph(nullptr),
             brain(nullptr),
             rotate_angle(0.0f),
-            initial_rotate_angle(PI),
             yaw(0.0f),
             pitch(0.0f),
             object_type(yli::ontology::ObjectType::REGULAR)
@@ -66,10 +65,12 @@ namespace yli::ontology
             // constructor.
         }
 
+        std::vector<glm::vec3> initial_rotate_vectors; // initial rotate vector.
+        std::vector<float> initial_rotate_angles;      // initial rotate angle.
+
         glm::vec3 original_scale_vector;        // original scale vector.
         glm::vec3 cartesian_coordinates;        // coordinate vector.
         glm::vec3 rotate_vector;                // rotate vector.
-        glm::vec3 initial_rotate_vector;        // initial rotate vector.
         glm::vec3 translate_vector;             // translate vector.
         yli::data::SphericalCoordinatesStruct spherical_coordinates;
         yli::ontology::Species* species_parent; // pointer to the parent `Species`.
@@ -78,7 +79,6 @@ namespace yli::ontology
         yli::ontology::Glyph* glyph;            // pointer to the `Glyph` (not a parent!).
         yli::ontology::Brain* brain;            // pointer to the `Brain` (not a parent!).
         float rotate_angle;                     // rotate angle.
-        float initial_rotate_angle;             // initial rotate angle.
         float yaw;                              // yaw in radians.
         float pitch;                            // pitch in radians.
         yli::ontology::ObjectType object_type;  // The parent of a character object is a `Glyph`. The parent of a regular object is a `Species`.
