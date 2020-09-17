@@ -48,13 +48,11 @@ namespace yli::ontology
         BiontStruct()
             : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
             cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
-            rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
             spherical_coordinates(NAN, NAN, NAN),
             holobiont_parent(nullptr),
             symbiont_species(nullptr),
             brain(nullptr),
             biontID(std::numeric_limits<std::size_t>::max()), // `std::numeric_limits<std::size_t>::max()` means that `biontID` is not defined.
-            rotate_angle(0.0f),
             yaw(0.0f),
             pitch(0.0f)
         {
@@ -66,13 +64,11 @@ namespace yli::ontology
 
         glm::vec3 original_scale_vector;                  // original scale vector.
         glm::vec3 cartesian_coordinates;                  // coordinate vector.
-        glm::vec3 rotate_vector;                          // rotate vector.
         yli::data::SphericalCoordinatesStruct spherical_coordinates;
         yli::ontology::Holobiont* holobiont_parent;       // pointer to the `Holobiont`.
         yli::ontology::SymbiontSpecies* symbiont_species; // pointer to the `SymbiontSpecies` (not a parent!).
         yli::ontology::Brain* brain;                      // pointer to the `Brain` (not a parent!).
         std::size_t biontID;
-        float rotate_angle;                               // rotate angle.
         float yaw;                                        // yaw in radians.
         float pitch;                                      // pitch in radians.
     };

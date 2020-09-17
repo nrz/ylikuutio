@@ -49,14 +49,12 @@ namespace yli::ontology
         ObjectStruct()
             : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
             cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
-            rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
             spherical_coordinates(NAN, NAN, NAN),
             species_parent(nullptr),
             shapeshifter_sequence_parent(nullptr),
             text3D_parent(nullptr),
             glyph(nullptr),
             brain(nullptr),
-            rotate_angle(0.0f),
             yaw(0.0f),
             pitch(0.0f),
             object_type(yli::ontology::ObjectType::REGULAR)
@@ -69,14 +67,12 @@ namespace yli::ontology
 
         glm::vec3 original_scale_vector;        // original scale vector.
         glm::vec3 cartesian_coordinates;        // coordinate vector.
-        glm::vec3 rotate_vector;                // rotate vector.
         yli::data::SphericalCoordinatesStruct spherical_coordinates;
         yli::ontology::Species* species_parent; // pointer to the parent `Species`.
         yli::ontology::ShapeshifterSequence* shapeshifter_sequence_parent; // pointer to the `ShapeshifterSequence` parent.
         yli::ontology::Text3D* text3D_parent;   // pointer to the parent `Text3D`.
         yli::ontology::Glyph* glyph;            // pointer to the `Glyph` (not a parent!).
         yli::ontology::Brain* brain;            // pointer to the `Brain` (not a parent!).
-        float rotate_angle;                     // rotate angle.
         float yaw;                              // yaw in radians.
         float pitch;                            // pitch in radians.
         yli::ontology::ObjectType object_type;  // The parent of a character object is a `Glyph`. The parent of a regular object is a `Species`.

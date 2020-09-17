@@ -70,11 +70,8 @@ namespace yli::ontology
                 this->initial_rotate_angles  = biont_struct.initial_rotate_angles;
 
                 this->original_scale_vector = biont_struct.original_scale_vector;
-                this->rotate_vector         = biont_struct.rotate_vector;
 
                 this->biontID               = biont_struct.biontID;
-
-                this->rotate_angle          = biont_struct.rotate_angle;
 
                 // Enable rendering of a recently entered `Biont`.
                 // TODO: enable entering without enabling rendering.
@@ -111,11 +108,8 @@ namespace yli::ontology
             std::vector<float> initial_rotate_angles;      // initial rotate angle.
 
             glm::vec3 original_scale_vector;       // original scale vector.
-            glm::vec3 rotate_vector;               // rotate vector.
 
             std::size_t biontID;
-
-            float rotate_angle;                    // rotate angle.
 
             bool should_ylikuutio_render_this_biont;
 

@@ -78,9 +78,6 @@ namespace yli::ontology
                 this->initial_rotate_angles  = object_struct.initial_rotate_angles;
 
                 this->original_scale_vector = object_struct.original_scale_vector;
-                this->rotate_vector         = object_struct.rotate_vector;
-
-                this->rotate_angle          = object_struct.rotate_angle;
 
                 this->object_type           = object_struct.object_type;
 
@@ -142,9 +139,6 @@ namespace yli::ontology
             std::vector<float> initial_rotate_angles;      // initial rotate angle.
 
             glm::vec3 original_scale_vector;        // original scale vector.
-            glm::vec3 rotate_vector;                // rotate vector.
-
-            float rotate_angle;                     // rotate angle.
     };
 }
 

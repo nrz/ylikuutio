@@ -37,10 +37,8 @@ TEST(ObjectStruct_must_be_initialized_appropriately, ObjectStruct)
     ASSERT_EQ(test_object_struct.text3D_parent, nullptr);
     ASSERT_EQ(test_object_struct.glyph, nullptr);
     ASSERT_EQ(test_object_struct.original_scale_vector, glm::vec3(1.0f, 1.0f, 1.0f));
-    ASSERT_EQ(test_object_struct.rotate_angle, 0.0f);
     ASSERT_EQ(test_object_struct.object_type, yli::ontology::ObjectType::REGULAR);
     ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.x));
     ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.y));
     ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.z));
-    ASSERT_EQ(test_object_struct.rotate_vector, glm::vec3(0.0f, 0.0f, 0.0f));
 }

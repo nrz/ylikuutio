@@ -76,7 +76,6 @@ namespace yli::ontology
                 // and binds each to its corresponding `Glyph` for rendering hierarchy,
                 // and also binds each to this `Text3D` for ontological hierarchy.
 
-                this->rotate_angle = NAN;
                 this->text_string  = text3D_struct.text_string;
 
                 std::cout << "Creating the glyph Objects for the string \"" << this->text_string << "\"\n";
@@ -108,8 +107,6 @@ namespace yli::ontology
             std::string text_string;
 
             glm::vec3 original_scale_vector; // original scale vector.
-            float rotate_angle;              // rotate angle.
-            glm::vec3 rotate_vector;         // rotate vector.
     };
 }
 

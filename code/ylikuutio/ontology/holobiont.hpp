@@ -70,9 +70,6 @@ namespace yli::ontology
                 this->initial_rotate_angles  = holobiont_struct.initial_rotate_angles;
 
                 this->original_scale_vector = holobiont_struct.original_scale_vector;
-                this->rotate_vector         = holobiont_struct.rotate_vector;
-
-                this->rotate_angle          = holobiont_struct.rotate_angle;
 
                 this->cartesian_coordinates = holobiont_struct.cartesian_coordinates;
                 this->spherical_coordinates = holobiont_struct.spherical_coordinates;
@@ -129,11 +126,8 @@ namespace yli::ontology
             std::vector<float> initial_rotate_angles;      // initial rotate angle.
 
             glm::vec3 original_scale_vector;            // original scale vector.
-            glm::vec3 rotate_vector;                    // rotate vector.
 
             yli::data::SphericalCoordinatesStruct spherical_coordinates;
-
-            float rotate_angle;                         // rotate angle.
     };
 }
 

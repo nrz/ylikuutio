@@ -513,8 +513,6 @@ namespace ajokki
         yli::ontology::ObjectStruct helsinki_east_downtown_struct;
         helsinki_east_downtown_struct.species_parent = helsinki_east_downtown_terrain_species;
         helsinki_east_downtown_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
-        helsinki_east_downtown_struct.rotate_angle = 0.0f;
-        helsinki_east_downtown_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_object(helsinki_east_downtown_struct);
 
         yli::ontology::SpeciesStruct suzanne_species_struct;
@@ -542,8 +540,6 @@ namespace ajokki
         yli::ontology::ObjectStruct suzanne_object_struct1;
         suzanne_object_struct1.species_parent = suzanne_species;
         suzanne_object_struct1.cartesian_coordinates = glm::vec3(82.50f, 119.00f, 95.50f);
-        suzanne_object_struct1.rotate_angle = 0.10f;
-        suzanne_object_struct1.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
         std::cout << "Creating yli::ontology::Entity* suzanne1_entity ...\n";
         yli::ontology::Entity* const suzanne1_entity = entity_factory->create_object(suzanne_object_struct1);
         std::cout << "Creating yli::ontology::Species* suzanne1 ...\n";
@@ -561,8 +557,6 @@ namespace ajokki
         yli::ontology::ObjectStruct suzanne_object_struct2;
         suzanne_object_struct2.species_parent = suzanne_species;
         suzanne_object_struct2.cartesian_coordinates = glm::vec3(112.90f, 113.90f, 75.50f);
-        suzanne_object_struct2.rotate_angle = 0.20f;
-        suzanne_object_struct2.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
         std::cout << "Creating yli::ontology::Entity* suzanne2_entity ...\n";
         yli::ontology::Entity* const suzanne2_entity = entity_factory->create_object(suzanne_object_struct2);
         std::cout << "Creating yli::ontology::Species* suzanne2 ...\n";
@@ -579,8 +573,6 @@ namespace ajokki
         yli::ontology::ObjectStruct suzanne_object_struct3;
         suzanne_object_struct3.species_parent = suzanne_species;
         suzanne_object_struct3.cartesian_coordinates = glm::vec3(126.90f, 162.90f, 103.00f);
-        suzanne_object_struct3.rotate_angle = 0.05f;
-        suzanne_object_struct3.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
         std::cout << "Creating yli::ontology::Entity* suzanne3_entity ...\n";
         yli::ontology::Entity* const suzanne3_entity = entity_factory->create_object(suzanne_object_struct3);
         std::cout << "Creating yli::ontology::Species* suzanne3 ...\n";
@@ -597,8 +589,6 @@ namespace ajokki
         yli::ontology::ObjectStruct suzanne_object_struct4;
         suzanne_object_struct4.species_parent = suzanne_species;
         suzanne_object_struct4.cartesian_coordinates = glm::vec3(96.00f, 130.00f, 109.00f);
-        suzanne_object_struct4.rotate_angle = 0.15f;
-        suzanne_object_struct4.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
         std::cout << "Creating yli::ontology::Entity* suzanne4_entity ...\n";
         yli::ontology::Entity* const suzanne4_entity = entity_factory->create_object(suzanne_object_struct4);
         std::cout << "Creating yli::ontology::Species* suzanne4 ...\n";
@@ -616,8 +606,6 @@ namespace ajokki
         suzanne_object_struct5.species_parent = suzanne_species;
         suzanne_object_struct5.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
         suzanne_object_struct5.cartesian_coordinates = glm::vec3(103.00f, 140.00f, 109.00f);
-        suzanne_object_struct5.rotate_angle = 0.03f;
-        suzanne_object_struct5.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         std::cout << "Creating yli::ontology::Entity* suzanne5_entity ...\n";
         yli::ontology::Entity* const suzanne5_entity = entity_factory->create_object(suzanne_object_struct5);
         std::cout << "Creating yli::ontology::Species* suzanne5 ...\n";
@@ -662,8 +650,6 @@ namespace ajokki
         cat_object_struct1.initial_rotate_angles = { PI, -0.5f * PI };
         cat_object_struct1.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
         cat_object_struct1.cartesian_coordinates = glm::vec3(500.00f, 100.00f, 1000.00f);
-        cat_object_struct1.rotate_angle = 0.00f;
-        cat_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         yli::ontology::Entity* const cat1_entity = entity_factory->create_object(cat_object_struct1);
         yli::ontology::Object* const cat1 = dynamic_cast<yli::ontology::Object*>(cat1_entity);
 
@@ -682,8 +668,6 @@ namespace ajokki
         cat_object_struct2.initial_rotate_angles = { PI, -0.5f * PI };
         cat_object_struct2.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
         cat_object_struct2.cartesian_coordinates = glm::vec3(700.00f, 100.00f, 1200.00f);
-        cat_object_struct2.rotate_angle = 0.00f;
-        cat_object_struct2.rotate_vector = glm::vec3(1.5f, 1.0f, 0.9f);
         yli::ontology::Entity* const cat2_entity = entity_factory->create_object(cat_object_struct2);
         yli::ontology::Object* const cat2 = dynamic_cast<yli::ontology::Object*>(cat2_entity);
 
@@ -719,8 +703,6 @@ namespace ajokki
         freight_train_holobiont_struct1.initial_rotate_angles = { PI };
         freight_train_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         freight_train_holobiont_struct1.cartesian_coordinates = glm::vec3(125.00f, 40.00f, 80.00f);
-        freight_train_holobiont_struct1.rotate_angle = 0.00f;
-        freight_train_holobiont_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
 
         std::cout << "Creating yli::ontology::Entity* freight_train1_entity ...\n";
 
@@ -765,8 +747,6 @@ namespace ajokki
         turbo_polizei_png_holobiont_struct1.initial_rotate_angles = { PI };
         turbo_polizei_png_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         turbo_polizei_png_holobiont_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 160.00f);
-        turbo_polizei_png_holobiont_struct1.rotate_angle = 0.00f;
-        turbo_polizei_png_holobiont_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
 
         std::cout << "Creating yli::ontology::Entity* turbo_polizei_png1_entity ...\n";
 
@@ -811,8 +791,6 @@ namespace ajokki
         turbo_polizei_bmp_holobiont_struct1.initial_rotate_angles = { PI };
         turbo_polizei_bmp_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         turbo_polizei_bmp_holobiont_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 175.00f);
-        turbo_polizei_bmp_holobiont_struct1.rotate_angle = 0.00f;
-        turbo_polizei_bmp_holobiont_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
 
         std::cout << "Creating yli::ontology::Entity* turbo_polizei_bmp1_entity ...\n";
 
@@ -854,8 +832,6 @@ namespace ajokki
         fantasy_house_with_balcony_holobiont_struct1.symbiosis_parent = fantasy_house_with_balcony_symbiosis;
         fantasy_house_with_balcony_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         fantasy_house_with_balcony_holobiont_struct1.cartesian_coordinates = glm::vec3(268.00f, 59.00f, 174.00f);
-        fantasy_house_with_balcony_holobiont_struct1.rotate_angle = 0.00f;
-        fantasy_house_with_balcony_holobiont_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
 
         std::cout << "Creating yli::ontology::Entity* fantasy_house_with_balcony1_entity ...\n";
 
@@ -877,8 +853,6 @@ namespace ajokki
         fantasy_house_with_balcony_holobiont_struct2.symbiosis_parent = fantasy_house_with_balcony_symbiosis;
         fantasy_house_with_balcony_holobiont_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         fantasy_house_with_balcony_holobiont_struct2.cartesian_coordinates = glm::vec3(252.00f, 23.50f, 2614.00f);
-        fantasy_house_with_balcony_holobiont_struct2.rotate_angle = 0.00f;
-        fantasy_house_with_balcony_holobiont_struct2.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
 
         std::cout << "Creating yli::ontology::Entity* fantasy_house_with_balcony2_entity ...\n";
 
@@ -917,8 +891,6 @@ namespace ajokki
         text3D_struct.text_string = "Hello world &#x26; its habitants!";
         text3D_struct.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         text3D_struct.cartesian_coordinates = glm::vec3(100.00f, 100.00f, 100.00f);
-        text3D_struct.rotate_angle = 0.0f;
-        text3D_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_text3d(text3D_struct);
 
         yli::ontology::CameraStruct cat_camera_struct;

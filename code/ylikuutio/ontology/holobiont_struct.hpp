@@ -45,11 +45,9 @@ namespace yli::ontology
         HolobiontStruct()
             : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
             cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
-            rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
             spherical_coordinates(NAN, NAN, NAN),
             symbiosis_parent(nullptr),
             brain(nullptr),
-            rotate_angle(0.0f),
             yaw(0.0f),
             pitch(0.0f)
         {
@@ -61,11 +59,9 @@ namespace yli::ontology
 
         glm::vec3 original_scale_vector;            // original scale vector.
         glm::vec3 cartesian_coordinates;            // coordinate vector.
-        glm::vec3 rotate_vector;                    // rotate vector.
         yli::data::SphericalCoordinatesStruct spherical_coordinates;
         yli::ontology::Symbiosis* symbiosis_parent; // pointer to the `Symbiosis`.
         yli::ontology::Brain* brain;                // pointer to the `Brain` (not a parent!).
-        float rotate_angle;                         // rotate angle.
         float yaw;                                  // yaw in radians.
         float pitch;                                // pitch in radians.
     };
