@@ -41,7 +41,6 @@ namespace yli::ontology
         Text3DStruct()
             : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
             cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
-            text_string_char(nullptr),
             parent(nullptr),
             brain(nullptr),
             yaw(0.0),
@@ -54,7 +53,6 @@ namespace yli::ontology
         glm::vec3 cartesian_coordinates;   // coordinate vector.
         yli::data::SphericalCoordinatesStruct spherical_coordinates;
         std::string text_string;
-        const char* text_string_char;
         yli::ontology::VectorFont* parent; // pointer to the `VectorFont` (parent).
         yli::ontology::Brain* brain;       // pointer to the `Brain` (not a parent!).
         float yaw;                         // yaw in radians.
