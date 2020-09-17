@@ -18,51 +18,25 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_CAMERA_STRUCT_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_CAMERA_STRUCT_HPP_INCLUDED
 
-#include "entity_struct.hpp"
-#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
-
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
-
-// Include standard headers
-#include <cmath> // NAN, std::isnan, std::pow
+#include "movable_struct.hpp"
 
 namespace yli::ontology
 {
     class Scene;
-    class Brain;
 
-    struct CameraStruct: public yli::ontology::EntityStruct
+    struct CameraStruct: public yli::ontology::MovableStruct
     {
         CameraStruct()
-            : cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
-            spherical_coordinates(NAN, NAN, NAN),
-            parent(nullptr),
-            brain(nullptr),
-            yaw(0.0),
-            pitch(0.0),
-            is_static_view(false)
+            : MovableStruct()
         {
             // constructor.
         }
 
-        // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
-        glm::vec3 cartesian_coordinates; // coordinate vector.
-
-        yli::data::SphericalCoordinatesStruct spherical_coordinates;
-
-        yli::ontology::Scene* parent;    // pointer to the `Scene`.
-        yli::ontology::Brain* brain;     // pointer to the `Brain` (not a parent!).
-
-        float yaw;                       // yaw in radians.
-        float pitch;                     // pitch in radians.
+        yli::ontology::Scene* parent { nullptr }; // pointer to the `Scene`.
 
         // Static view `Camera`'s coordinates do not change by moving in a `Scene`. However,
         // they can be modified by adjusting the `Entity`-specific variables of the `Camera` directly.
-        bool is_static_view;
+        bool is_static_view { false };
     };
 }
 

@@ -33,6 +33,7 @@
 #endif
 
 // Include standard headers
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <limits>   // std::numeric_limits
@@ -77,40 +78,25 @@ namespace yli::ontology
                 child(parent_module, this)
             {
                 // constructor.
+
                 this->input_method                = movable_struct.input_method;
                 this->brain                       = movable_struct.brain;
-                this->apprenticeID                = std::numeric_limits<std::size_t>::max(); // uninitialized.
-                this->cartesian_coordinates.x     = movable_struct.cartesian_coordinates.x;
-                this->cartesian_coordinates.y     = movable_struct.cartesian_coordinates.y;
-                this->cartesian_coordinates.z     = movable_struct.cartesian_coordinates.z;
-                this->spherical_coordinates.rho   = movable_struct.spherical_coordinates.rho;
-                this->spherical_coordinates.theta = movable_struct.spherical_coordinates.theta;
-                this->spherical_coordinates.phi   = movable_struct.spherical_coordinates.phi;
+
+                // Currently an `Entity` can be an apprentice only for one master at any time.
+                // TODO: add support for multiple master-apprentice relationships for each `Entity`!
+                this->initial_rotate_vectors      = movable_struct.initial_rotate_vectors;
+                this->initial_rotate_angles       = movable_struct.initial_rotate_angles;
+
+                this->original_scale_vector       = movable_struct.original_scale_vector;
+
+                this->cartesian_coordinates       = movable_struct.cartesian_coordinates;
+                this->spherical_coordinates       = movable_struct.spherical_coordinates;
+
                 this->yaw                         = movable_struct.yaw;
                 this->pitch                       = movable_struct.pitch;
 
                 // Initialize speed, angular speed and maximum speed variables.
                 // These are to be used from the `Brain` callbacks.
-                this->speed                       = 0.0f;
-                this->angular_speed               = 0.0f;
-                this->max_land_speed              = 0.0f;
-                this->max_land_angular_speed      = 0.0f;
-                this->land_acceleration           = 0.0f;
-                this->land_deceleration           = 0.0f;
-                this->max_rail_speed              = 0.0f;
-                this->rail_acceleration           = 0.0f;
-                this->rail_deceleration           = 0.0f;
-                this->max_water_speed             = 0.0f;
-                this->max_water_angular_speed     = 0.0f;
-                this->water_acceleration          = 0.0f;
-                this->water_deceleration          = 0.0f;
-                this->max_air_speed               = 0.0f;
-                this->max_air_angular_speed       = 0.0f;
-                this->air_acceleration            = 0.0f;
-                this->air_deceleration            = 0.0f;
-
-                this->model_matrix                = glm::mat4(1.0f); // identity matrix (dummy value).
-                this->mvp_matrix                  = glm::mat4(1.0f); // identity matrix (dummy value).
 
                 this->create_coordinate_and_angle_variables();
 
@@ -271,6 +257,11 @@ namespace yli::ontology
 
             // Public callbacks end here.
 
+            std::vector<glm::vec3> initial_rotate_vectors;
+            std::vector<float> initial_rotate_angles;
+
+            glm::vec3 original_scale_vector { glm::vec3(1.0f, 1.0f, 1.0f) };
+
             // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
             glm::vec3 cartesian_coordinates;                       // cartesian coordinates.
 
@@ -281,37 +272,37 @@ namespace yli::ontology
             yli::data::SphericalCoordinatesStruct dest_spherical_coordinates; // spherical destination coordinates.
 
             // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
-            glm::vec3 direction;
+            glm::vec3 direction { glm::vec3(NAN, NAN, NAN) };
 
-            glm::vec3 right;                                       // note: can not be set directly using console.
-            glm::vec3 up;                                          // note: can not be set directly using console.
+            glm::vec3 right { glm::vec3(NAN, NAN, NAN) };          // note: can not be set directly using console.
+            glm::vec3 up { glm::vec3(NAN, NAN, NAN) };             // note: can not be set directly using console.
 
-            float yaw;
-            float pitch;
+            float yaw { 0.0f };
+            float pitch { 0.0f };
 
-            float speed;                                           // m/s
-            float angular_speed;                                   // 1/s
-            float max_land_speed;                                  // m/s
-            float max_land_angular_speed;                          // 1/s
-            float land_acceleration;                               // m/s^2
-            float land_deceleration;                               // m/s^2
-            float max_rail_speed;                                  // m/s. By the way, there is no angular speed for railways.
-            float rail_acceleration;                               // m/s^2
-            float rail_deceleration;                               // m/s^2
-            float max_water_speed;                                 // m/s
-            float max_water_angular_speed;                         // 1/s
-            float water_acceleration;                              // m/s^2
-            float water_deceleration;                              // m/s^2
-            float max_air_speed;                                   // m/s
-            float max_air_angular_speed;                           // 1/s
-            float air_acceleration;                                // m/s^2
-            float air_deceleration;                                // m/s^2
+            float speed { 0.0f };                                  // m/s
+            float angular_speed { 0.0f };                          // 1/s
+            float max_land_speed { 0.0f };                         // m/s
+            float max_land_angular_speed { 0.0f };                 // 1/s
+            float land_acceleration { 0.0f };                      // m/s^2
+            float land_deceleration { 0.0f };                      // m/s^2
+            float max_rail_speed { 0.0f };                         // m/s. By the way, there is no angular speed for railways.
+            float rail_acceleration { 0.0f };                      // m/s^2
+            float rail_deceleration { 0.0f };                      // m/s^2
+            float max_water_speed { 0.0f };                        // m/s
+            float max_water_angular_speed { 0.0f };                // 1/s
+            float water_acceleration { 0.0f };                     // m/s^2
+            float water_deceleration { 0.0f };                     // m/s^2
+            float max_air_speed { 0.0f };                          // m/s
+            float max_air_angular_speed { 0.0f };                  // 1/s
+            float air_acceleration { 0.0f };                       // m/s^2
+            float air_deceleration { 0.0f };                       // m/s^2
             std::vector<yli::ontology::Waypoint*> waypoints;       // Used for actual waypoints. `Brain` can use these freely.
             std::vector<yli::ontology::Waypoint*> control_points;  // Used as B-spline/Bézier/etc. control points. `Brain` can use these freely.
 
             // The rest fields are created in the constructor.
-            glm::mat4 model_matrix;                                // model matrix.
-            glm::mat4 mvp_matrix;                                  // model view projection matrix.
+            glm::mat4 model_matrix { glm::mat4(1.0f) };            // model matrix (initialized with dummy value).
+            glm::mat4 mvp_matrix { glm::mat4(1.0f) };              // model view projection matrix (initialized with dummy value).
 
             friend yli::ontology::Brain;
 
@@ -330,7 +321,7 @@ namespace yli::ontology
             yli::input::InputMethod input_method;                  // If `input_method` is `KEYBOARD`, then keypresses control this `Movable`.
                                                                    // If `input_method` is `AI`, then the chosen `Brain` controls this `Movable`.
             yli::ontology::Brain* brain;                           // Different kind of controls can be implemented as `Brain`s, e.g. train control systems.
-            std::size_t apprenticeID;
+            std::size_t apprenticeID { std::numeric_limits<std::size_t>::max() };
     };
 }
 

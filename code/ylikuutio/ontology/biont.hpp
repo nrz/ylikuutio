@@ -19,34 +19,17 @@
 #define __YLIKUUTIO_ONTOLOGY_BIONT_HPP_INCLUDED
 
 #include "movable.hpp"
-#include "shader.hpp"
-#include "symbiont_species.hpp"
 #include "biont_struct.hpp"
-#include "movable_struct.hpp"
-#include "family_templates.hpp"
-#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
-
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
-
-#ifndef __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
-#define __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
-#include <glm/gtc/matrix_transform.hpp>
-#endif
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <queue>    // std::queue
-#include <string>   // std::string
-#include <vector>   // std::vector
 
 namespace yli::ontology
 {
     class Entity;
     class Universe;
+    class Shader;
+    class SymbiontSpecies;
     class ParentModule;
 
     class Biont: public yli::ontology::Movable
@@ -55,32 +38,13 @@ namespace yli::ontology
             Biont(yli::ontology::Universe* const universe, yli::ontology::BiontStruct& biont_struct, yli::ontology::ParentModule* const parent_module)
                 : Movable(
                         universe,
-                        yli::ontology::MovableStruct(
-                            biont_struct.brain,
-                            biont_struct.cartesian_coordinates,
-                            biont_struct.spherical_coordinates,
-                            biont_struct.yaw,
-                            biont_struct.pitch),
+                        biont_struct,
                         parent_module)
             {
                 // constructor.
-                this->symbiont_species      = biont_struct.symbiont_species;
+                this->symbiont_species = biont_struct.symbiont_species;
 
-                this->initial_rotate_vectors = biont_struct.initial_rotate_vectors;
-                this->initial_rotate_angles  = biont_struct.initial_rotate_angles;
-
-                this->original_scale_vector = biont_struct.original_scale_vector;
-
-                this->biontID               = biont_struct.biontID;
-
-                // Enable rendering of a recently entered `Biont`.
-                // TODO: enable entering without enabling rendering.
-                this->should_ylikuutio_render_this_biont = true;
-
-                // `yli::ontology::Movable` member variables begin here.
-                this->cartesian_coordinates = biont_struct.cartesian_coordinates;
-                this->model_matrix          = glm::mat4(1.0f); // identity matrix (dummy value).
-                this->mvp_matrix            = glm::mat4(1.0f); // identity matrix (dummy value).
+                this->biontID          = biont_struct.biontID;
 
                 // Get `childID` from `SymbiontSpecies` (not a parent!) and set pointer to this `Biont`.
                 this->bind_to_symbiont_species();
@@ -104,14 +68,9 @@ namespace yli::ontology
 
             yli::ontology::SymbiontSpecies* symbiont_species; // pointer to the `SymbiontSpecies` (not a parent!).
 
-            std::vector<glm::vec3> initial_rotate_vectors; // initial rotate vector.
-            std::vector<float> initial_rotate_angles;      // initial rotate angle.
-
-            glm::vec3 original_scale_vector;       // original scale vector.
-
             std::size_t biontID;
 
-            bool should_ylikuutio_render_this_biont;
+            bool should_ylikuutio_render_this_biont { true };
 
         private:
             std::size_t get_number_of_children() const override;

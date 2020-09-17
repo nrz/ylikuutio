@@ -18,52 +18,21 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_HOLOBIONT_STRUCT_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_HOLOBIONT_STRUCT_HPP_INCLUDED
 
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
-#include "entity_struct.hpp"
-#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
-
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
-
-// Include standard headers
-#include <cmath> // NAN, std::isnan, std::pow
-#include <vector> // std::vector
+#include "movable_struct.hpp"
 
 namespace yli::ontology
 {
     class Symbiosis;
-    class Brain;
 
-    struct HolobiontStruct: public yli::ontology::EntityStruct
+    struct HolobiontStruct: public yli::ontology::MovableStruct
     {
         HolobiontStruct()
-            : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
-            cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
-            spherical_coordinates(NAN, NAN, NAN),
-            symbiosis_parent(nullptr),
-            brain(nullptr),
-            yaw(0.0f),
-            pitch(0.0f)
+            : MovableStruct()
         {
             // constructor.
         }
 
-        std::vector<glm::vec3> initial_rotate_vectors; // initial rotate vector.
-        std::vector<float> initial_rotate_angles;      // initial rotate angle.
-
-        glm::vec3 original_scale_vector;            // original scale vector.
-        glm::vec3 cartesian_coordinates;            // coordinate vector.
-        yli::data::SphericalCoordinatesStruct spherical_coordinates;
-        yli::ontology::Symbiosis* symbiosis_parent; // pointer to the `Symbiosis`.
-        yli::ontology::Brain* brain;                // pointer to the `Brain` (not a parent!).
-        float yaw;                                  // yaw in radians.
-        float pitch;                                // pitch in radians.
+        yli::ontology::Symbiosis* symbiosis_parent { nullptr }; // pointer to the `Symbiosis`.
     };
 }
 

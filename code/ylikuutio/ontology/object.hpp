@@ -18,29 +18,14 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_OBJECT_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_OBJECT_HPP_INCLUDED
 
-#include "entity.hpp"
 #include "movable.hpp"
 #include "object_type.hpp"
 #include "object_struct.hpp"
-#include "movable_struct.hpp"
-
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
-
-#ifndef __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
-#define __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
-#include <glm/gtc/matrix_transform.hpp>
-#endif
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
-#include <queue>    // std::queue
 #include <string>   // std::string
-#include <vector>   // std::vector
 
 namespace yli::data
 {
@@ -49,6 +34,7 @@ namespace yli::data
 
 namespace yli::ontology
 {
+    class Entity;
     class Universe;
     class Shader;
     class Species;
@@ -70,21 +56,12 @@ namespace yli::ontology
             Object(yli::ontology::Universe* const universe, const yli::ontology::ObjectStruct& object_struct, yli::ontology::ParentModule* const parent_module)
                 : Movable(
                         universe,
-                        yli::ontology::MovableStruct(
-                            object_struct.brain,
-                            object_struct.cartesian_coordinates,
-                            object_struct.spherical_coordinates,
-                            object_struct.yaw,
-                            object_struct.pitch),
+                        object_struct,
                         parent_module)
             {
                 // constructor.
-                this->initial_rotate_vectors = object_struct.initial_rotate_vectors;
-                this->initial_rotate_angles  = object_struct.initial_rotate_angles;
 
-                this->original_scale_vector = object_struct.original_scale_vector;
-
-                this->object_type           = object_struct.object_type;
+                this->object_type = object_struct.object_type;
 
                 if (this->object_type == yli::ontology::ObjectType::CHARACTER)
                 {
@@ -136,14 +113,9 @@ namespace yli::ontology
             void render() override;
             void render_this_object(yli::ontology::Shader* const shader_pointer);
 
-            yli::ontology::Glyph* glyph;            // pointer to the `Glyph` (not a parent!).
+            yli::ontology::Glyph* glyph { nullptr }; // pointer to the `Glyph` (not a parent!).
 
-            yli::ontology::ObjectType object_type;
-
-            std::vector<glm::vec3> initial_rotate_vectors; // initial rotate vector.
-            std::vector<float> initial_rotate_angles;      // initial rotate angle.
-
-            glm::vec3 original_scale_vector;        // original scale vector.
+            yli::ontology::ObjectType object_type { yli::ontology::ObjectType::REGULAR };
     };
 }
 

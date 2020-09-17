@@ -29,7 +29,8 @@
 #endif
 
 // Include standard headers
-#include <cmath> // NAN, std::isnan, std::pow
+#include <cmath>  // NAN, std::isnan, std::pow
+#include <vector> // std::vector
 
 namespace yli::ontology
 {
@@ -38,13 +39,7 @@ namespace yli::ontology
     struct MovableStruct: public yli::ontology::EntityStruct
     {
         MovableStruct()
-            : EntityStruct(),
-            input_method(yli::input::InputMethod::AI),
-            brain(nullptr),
-            cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
-            spherical_coordinates(NAN, NAN, NAN),
-            yaw(0.0f),
-            pitch(0.0f)
+            : EntityStruct()
         {
             // constructor.
         }
@@ -56,13 +51,13 @@ namespace yli::ontology
                 const float yaw,
                 const float pitch)
             : EntityStruct(),
-            input_method(yli::input::InputMethod::AI),
             brain(brain),
             cartesian_coordinates(cartesian_coordinates),
             spherical_coordinates(spherical_coordinates),
             yaw(yaw),
             pitch(pitch)
         {
+            // constructor.
         }
 
         MovableStruct(
@@ -74,21 +69,27 @@ namespace yli::ontology
                 const std::string& global_name,
                 const std::string& local_name)
             : EntityStruct(global_name, local_name),
-            input_method(yli::input::InputMethod::AI),
             brain(brain),
             cartesian_coordinates(cartesian_coordinates),
             spherical_coordinates(spherical_coordinates),
             yaw(yaw),
             pitch(pitch)
         {
+            // constructor.
         }
 
-        yli::input::InputMethod input_method;
-        yli::ontology::Brain* brain;     // brain.
-        glm::vec3 cartesian_coordinates; // coordinate vector.
-        yli::data::SphericalCoordinatesStruct spherical_coordinates;
-        float yaw;
-        float pitch;
+        yli::input::InputMethod input_method { yli::input::InputMethod::AI };
+        yli::ontology::Brain* brain { nullptr };
+
+        std::vector<glm::vec3> initial_rotate_vectors;
+        std::vector<float> initial_rotate_angles;
+
+        glm::vec3 original_scale_vector { glm::vec3(1.0f, 1.0f, 1.0f) };
+
+        glm::vec3 cartesian_coordinates { glm::vec3(NAN, NAN, NAN) };
+        yli::data::SphericalCoordinatesStruct spherical_coordinates { NAN, NAN, NAN };
+        float yaw { 0.0f };
+        float pitch { 0.0f };
     };
 }
 

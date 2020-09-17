@@ -21,26 +21,11 @@
 #include "movable.hpp"
 #include "parent_module.hpp"
 #include "holobiont_struct.hpp"
-#include "movable_struct.hpp"
-#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
-
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
-
-#ifndef __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
-#define __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
-#include <glm/gtc/matrix_transform.hpp>
-#endif
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
-#include <queue>    // std::queue
 #include <string>   // std::string
-#include <vector>   // std::vector
 
 namespace yli::data
 {
@@ -62,24 +47,11 @@ namespace yli::ontology
                     yli::ontology::ParentModule* const parent_module)
                 : Movable(
                         universe,
-                        yli::ontology::MovableStruct(
-                            holobiont_struct.brain,
-                            holobiont_struct.cartesian_coordinates,
-                            holobiont_struct.spherical_coordinates,
-                            holobiont_struct.yaw,
-                            holobiont_struct.pitch),
+                        holobiont_struct,
                         parent_module),
                 parent_of_bionts(this)
             {
                 // constructor.
-
-                this->initial_rotate_vectors = holobiont_struct.initial_rotate_vectors;
-                this->initial_rotate_angles  = holobiont_struct.initial_rotate_angles;
-
-                this->original_scale_vector = holobiont_struct.original_scale_vector;
-
-                this->cartesian_coordinates = holobiont_struct.cartesian_coordinates;
-                this->spherical_coordinates = holobiont_struct.spherical_coordinates;
 
                 this->create_bionts();
 
@@ -128,13 +100,6 @@ namespace yli::ontology
             void render() override;
 
             void create_bionts();
-
-            std::vector<glm::vec3> initial_rotate_vectors; // initial rotate vector.
-            std::vector<float> initial_rotate_angles;      // initial rotate angle.
-
-            glm::vec3 original_scale_vector;            // original scale vector.
-
-            yli::data::SphericalCoordinatesStruct spherical_coordinates;
     };
 }
 
