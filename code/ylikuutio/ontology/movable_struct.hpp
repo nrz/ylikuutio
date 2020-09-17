@@ -43,8 +43,8 @@ namespace yli::ontology
             brain(nullptr),
             cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
             spherical_coordinates(NAN, NAN, NAN),
-            yaw(0.0),
-            pitch(0.0)
+            yaw(0.0f),
+            pitch(0.0f)
         {
             // constructor.
         }
