@@ -49,7 +49,6 @@ namespace yli::ontology
             : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
             cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
             rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
-            translate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
             spherical_coordinates(NAN, NAN, NAN),
             holobiont_parent(nullptr),
             symbiont_species(nullptr),
@@ -68,7 +67,6 @@ namespace yli::ontology
         glm::vec3 original_scale_vector;                  // original scale vector.
         glm::vec3 cartesian_coordinates;                  // coordinate vector.
         glm::vec3 rotate_vector;                          // rotate vector.
-        glm::vec3 translate_vector;                       // translate vector.
         yli::data::SphericalCoordinatesStruct spherical_coordinates;
         yli::ontology::Holobiont* holobiont_parent;       // pointer to the `Holobiont`.
         yli::ontology::SymbiontSpecies* symbiont_species; // pointer to the `SymbiontSpecies` (not a parent!).

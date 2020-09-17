@@ -143,7 +143,6 @@ namespace ajokki
         tallinn_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         tallinn_struct.rotate_angle = 0.0f;
         tallinn_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-        tallinn_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_object(tallinn_struct);
 
         return tallinn_scene_entity;

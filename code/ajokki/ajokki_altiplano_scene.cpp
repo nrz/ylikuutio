@@ -143,7 +143,6 @@ namespace ajokki
         altiplano_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         altiplano_struct.rotate_angle = 0.0f;
         altiplano_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-        altiplano_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_object(altiplano_struct);
 
         return altiplano_scene_entity;

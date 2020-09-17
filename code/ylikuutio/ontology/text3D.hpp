@@ -110,7 +110,6 @@ namespace yli::ontology
             glm::vec3 original_scale_vector; // original scale vector.
             float rotate_angle;              // rotate angle.
             glm::vec3 rotate_vector;         // rotate vector.
-            glm::vec3 translate_vector;      // translate vector.
     };
 }
 

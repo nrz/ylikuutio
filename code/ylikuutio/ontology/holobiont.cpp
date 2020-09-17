@@ -97,7 +97,6 @@ namespace yli::ontology
             biont_struct.rotate_angle          = this->rotate_angle;
             biont_struct.rotate_vector         = this->rotate_vector;
             biont_struct.cartesian_coordinates = this->cartesian_coordinates;
-            biont_struct.translate_vector      = this->translate_vector;
 
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
 

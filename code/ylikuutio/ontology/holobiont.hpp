@@ -71,7 +71,6 @@ namespace yli::ontology
 
                 this->original_scale_vector = holobiont_struct.original_scale_vector;
                 this->rotate_vector         = holobiont_struct.rotate_vector;
-                this->translate_vector      = holobiont_struct.translate_vector;
 
                 this->rotate_angle          = holobiont_struct.rotate_angle;
 
@@ -131,7 +130,6 @@ namespace yli::ontology
 
             glm::vec3 original_scale_vector;            // original scale vector.
             glm::vec3 rotate_vector;                    // rotate vector.
-            glm::vec3 translate_vector;                 // translate vector.
 
             yli::data::SphericalCoordinatesStruct spherical_coordinates;
 

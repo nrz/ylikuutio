@@ -42,7 +42,6 @@ namespace yli::ontology
             : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
             cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
             rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
-            translate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
             text_string_char(nullptr),
             parent(nullptr),
             brain(nullptr),
@@ -56,7 +55,6 @@ namespace yli::ontology
         glm::vec3 original_scale_vector;   // original scale vector.
         glm::vec3 cartesian_coordinates;   // coordinate vector.
         glm::vec3 rotate_vector;           // rotate vector.
-        glm::vec3 translate_vector;        // translate vector.
         yli::data::SphericalCoordinatesStruct spherical_coordinates;
         std::string text_string;
         const char* text_string_char;

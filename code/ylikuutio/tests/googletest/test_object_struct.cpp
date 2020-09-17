@@ -43,5 +43,4 @@ TEST(ObjectStruct_must_be_initialized_appropriately, ObjectStruct)
     ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.y));
     ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.z));
     ASSERT_EQ(test_object_struct.rotate_vector, glm::vec3(0.0f, 0.0f, 0.0f));
-    ASSERT_EQ(test_object_struct.translate_vector, glm::vec3(0.0f, 0.0f, 0.0f));
 }
