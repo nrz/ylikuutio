@@ -86,15 +86,8 @@ namespace yli::ontology
     }
 
     Entity::Entity(yli::ontology::Universe* const universe, const yli::ontology::EntityStruct& entity_struct)
-        : should_be_rendered { false },
-        childID { std::numeric_limits<std::size_t>::max() }, // `std::numeric_limits<std::size_t>::max()` means that `childID` is not defined.
-        parent_of_any_struct_entities(this),
+        : parent_of_any_struct_entities(this),
         universe { universe },
-        entityID { std::numeric_limits<std::size_t>::max() }, // `std::numeric_limits<std::size_t>::max()` means that `entityID` is not defined.
-        can_be_erased { false },
-        prerender_callback { nullptr },
-        postrender_callback { nullptr },
-        number_of_variables { 0 },
         is_application { entity_struct.is_application },
         is_variable { entity_struct.is_variable }
     {

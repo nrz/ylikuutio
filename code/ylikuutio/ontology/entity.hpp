@@ -128,12 +128,12 @@ namespace yli::ontology
 
             // Public callbacks end here.
 
-            bool should_be_rendered;
+            bool should_be_rendered { false };
 
             friend yli::ontology::Universe;
             friend yli::ontology::ParentModule;
 
-            std::size_t childID; // TODO: add checks for `std::numeric_limits<std::size_t>::max();` (invalid value).
+            std::size_t childID { std::numeric_limits<std::size_t>::max() };
 
             yli::ontology::ParentModule parent_of_any_struct_entities;
 
@@ -141,18 +141,18 @@ namespace yli::ontology
             void prerender() const;
             void postrender() const;
 
-            yli::ontology::Universe* universe; // pointer to the `Universe`.
-            std::size_t entityID;
+            yli::ontology::Universe* universe { nullptr }; // pointer to the `Universe`.
+            std::size_t entityID { std::numeric_limits<std::size_t>::max() };
 
             std::string type_string;
 
             std::string global_name; // global name of this `Entity`.
             std::string local_name;  // local name of this `Entity`.
 
-            bool can_be_erased;
+            bool can_be_erased { false };
 
-            PreRenderCallback prerender_callback;
-            PostRenderCallback postrender_callback;
+            PreRenderCallback prerender_callback { nullptr };
+            PostRenderCallback postrender_callback { nullptr };
 
             // Named entities are stored here so that they can be recalled, if needed.
             std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
@@ -160,7 +160,7 @@ namespace yli::ontology
         private:
             std::vector<yli::ontology::Variable*> variable_pointer_vector;
             std::queue<std::size_t> free_variableID_queue;
-            std::size_t number_of_variables;
+            std::size_t number_of_variables { 0 };
 
             virtual std::size_t get_number_of_children() const = 0;
             virtual std::size_t get_number_of_descendants() const = 0;
