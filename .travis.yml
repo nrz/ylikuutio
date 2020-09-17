@@ -52,6 +52,7 @@ jobs:
           before_install:
               - echo "Hello from before_install stage"
               - test ${TRAVIS_BRANCH} != coverity_scan -o ${TRAVIS_JOB_NUMBER##*.} = 1 || exit 0
+              - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
           compiler: gcc
           addons:
               # following Coverity instructions
