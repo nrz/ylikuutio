@@ -21,7 +21,6 @@
 #include "movable.hpp"
 #include "universe.hpp"
 #include "camera_struct.hpp"
-#include "movable_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -83,25 +82,12 @@ namespace yli::ontology
             Camera(yli::ontology::Universe* const universe, const yli::ontology::CameraStruct& camera_struct, yli::ontology::ParentModule* const parent_module)
                 : Movable(
                         universe,
-                        yli::ontology::MovableStruct(
-                            camera_struct.brain,
-                            camera_struct.cartesian_coordinates,
-                            camera_struct.spherical_coordinates,
-                            camera_struct.yaw,
-                            camera_struct.pitch,
-                            camera_struct.global_name,
-                            camera_struct.local_name),
+                        camera_struct,
                         parent_module)
             {
                 // constructor.
 
-                this->yaw               = camera_struct.yaw;
-                this->pitch             = camera_struct.pitch;
                 this->is_static_view    = camera_struct.is_static_view;
-
-                // variables related to the projection.
-                this->projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
-                this->view_matrix       = glm::mat4(1.0f); // identity matrix (dummy value).
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Camera*";
@@ -126,8 +112,8 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
             // variables related to the projection.
-            glm::mat4 projection_matrix;
-            glm::mat4 view_matrix;
+            glm::mat4 projection_matrix { glm::mat4(1.0f) }; // identity matrix (dummy value).
+            glm::mat4 view_matrix { glm::mat4(1.0f) };       // identity matrix (dummy value).
 
             bool is_static_view;
     };

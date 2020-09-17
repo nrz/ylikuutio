@@ -142,9 +142,6 @@ namespace ajokki
         yli::ontology::ObjectStruct joensuu_center_west_struct;
         joensuu_center_west_struct.species_parent = joensuu_center_west_terrain_species;
         joensuu_center_west_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
-        joensuu_center_west_struct.rotate_angle = 0.0f;
-        joensuu_center_west_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-        joensuu_center_west_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_object(joensuu_center_west_struct);
 
         // Create the material, store it in `orange_fur_material_joensuu`.
@@ -192,9 +189,6 @@ namespace ajokki
         horse_object_struct1.species_parent = horse_species;
         horse_object_struct1.original_scale_vector = glm::vec3(5.0f, 5.0f, 5.0f);
         horse_object_struct1.cartesian_coordinates = glm::vec3(2150.00f, 200.00f, 1990.00f);
-        horse_object_struct1.rotate_angle = 0.00f;
-        horse_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        horse_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         yli::ontology::Entity* const horse1_entity = entity_factory->create_object(horse_object_struct1);
         yli::ontology::Object* const horse1 = dynamic_cast<yli::ontology::Object*>(horse1_entity);
 

@@ -18,23 +18,8 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_OBJECT_STRUCT_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_OBJECT_STRUCT_HPP_INCLUDED
 
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
-#include "entity_struct.hpp"
+#include "movable_struct.hpp"
 #include "object_type.hpp"
-#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
-
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
-
-// Include standard headers
-#include <cmath> // NAN, std::isnan, std::pow
-#include <vector> // std::vector
 
 namespace yli::ontology
 {
@@ -42,46 +27,22 @@ namespace yli::ontology
     class ShapeshifterSequence;
     class Glyph;
     class Text3D;
-    class Brain;
 
-    struct ObjectStruct: public yli::ontology::EntityStruct
+    struct ObjectStruct: public yli::ontology::MovableStruct
     {
         ObjectStruct()
-            : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
-            cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
-            rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
-            translate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
-            spherical_coordinates(NAN, NAN, NAN),
-            species_parent(nullptr),
-            shapeshifter_sequence_parent(nullptr),
-            text3D_parent(nullptr),
-            glyph(nullptr),
-            brain(nullptr),
-            rotate_angle(0.0f),
-            yaw(0.0f),
-            pitch(0.0f),
-            object_type(yli::ontology::ObjectType::REGULAR)
+            : MovableStruct()
         {
             // constructor.
         }
 
-        std::vector<glm::vec3> initial_rotate_vectors; // initial rotate vector.
-        std::vector<float> initial_rotate_angles;      // initial rotate angle.
+        yli::ontology::Species* species_parent { nullptr };                            // pointer to the parent `Species`.
+        yli::ontology::ShapeshifterSequence* shapeshifter_sequence_parent { nullptr }; // pointer to the `ShapeshifterSequence` parent.
+        yli::ontology::Text3D* text3D_parent { nullptr };                              // pointer to the parent `Text3D`.
+        yli::ontology::Glyph* glyph { nullptr };                                       // pointer to the `Glyph` (not a parent!).
 
-        glm::vec3 original_scale_vector;        // original scale vector.
-        glm::vec3 cartesian_coordinates;        // coordinate vector.
-        glm::vec3 rotate_vector;                // rotate vector.
-        glm::vec3 translate_vector;             // translate vector.
-        yli::data::SphericalCoordinatesStruct spherical_coordinates;
-        yli::ontology::Species* species_parent; // pointer to the parent `Species`.
-        yli::ontology::ShapeshifterSequence* shapeshifter_sequence_parent; // pointer to the `ShapeshifterSequence` parent.
-        yli::ontology::Text3D* text3D_parent;   // pointer to the parent `Text3D`.
-        yli::ontology::Glyph* glyph;            // pointer to the `Glyph` (not a parent!).
-        yli::ontology::Brain* brain;            // pointer to the `Brain` (not a parent!).
-        float rotate_angle;                     // rotate angle.
-        float yaw;                              // yaw in radians.
-        float pitch;                            // pitch in radians.
-        yli::ontology::ObjectType object_type;  // The parent of a character object is a `Glyph`. The parent of a regular object is a `Species`.
+        // The parent of a character object is a `Glyph`. The parent of a regular object is a `Species`.
+        yli::ontology::ObjectType object_type { yli::ontology::ObjectType::REGULAR };
     };
 }
 

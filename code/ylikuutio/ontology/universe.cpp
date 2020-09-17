@@ -40,6 +40,7 @@
 #include "text2D.hpp"
 #include "camera.hpp"
 #include "console.hpp"
+#include "entity_factory.hpp"
 #include "entity_variable_activation.hpp"
 #include "entity_variable_read.hpp"
 #include "variable_struct.hpp"

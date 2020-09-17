@@ -22,26 +22,13 @@
 #include "parent_module.hpp"
 #include "glyph_object_creation.hpp"
 #include "text3D_struct.hpp"
-#include "object_struct.hpp"
-#include "movable_struct.hpp"
-
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <queue>    // std::queue
 #include <string>   // std::string
-#include <vector>   // std::vector
 
 namespace yli::ontology
 {
-    class Entity;
     class Universe;
     class Object;
     class ParentModule;
@@ -61,12 +48,7 @@ namespace yli::ontology
             Text3D(yli::ontology::Universe* const universe, const yli::ontology::Text3DStruct& text3D_struct, yli::ontology::ParentModule* const parent_module)
                 : Movable(
                         universe,
-                        yli::ontology::MovableStruct(
-                            text3D_struct.brain,
-                            text3D_struct.cartesian_coordinates,
-                            text3D_struct.spherical_coordinates,
-                            text3D_struct.yaw,
-                            text3D_struct.pitch),
+                        text3D_struct,
                         parent_module),
                 parent_of_objects(this)
             {
@@ -76,10 +58,7 @@ namespace yli::ontology
                 // and binds each to its corresponding `Glyph` for rendering hierarchy,
                 // and also binds each to this `Text3D` for ontological hierarchy.
 
-                this->rotate_angle = NAN;
                 this->text_string  = text3D_struct.text_string;
-
-                std::cout << "Creating the glyph Objects for the string \"" << this->text_string << "\"\n";
 
                 // Let's create each glyph `Object` in a loop.
 
@@ -106,11 +85,6 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
             std::string text_string;
-
-            glm::vec3 original_scale_vector; // original scale vector.
-            float rotate_angle;              // rotate angle.
-            glm::vec3 rotate_vector;         // rotate vector.
-            glm::vec3 translate_vector;      // translate vector.
     };
 }
 
