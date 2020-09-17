@@ -42,10 +42,16 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
+namespace yli::data
+{
+    class AnyValue;
+}
+
 namespace yli::ontology
 {
     class Entity;
     class Universe;
+    class Symbiosis;
 
     class Holobiont: public yli::ontology::Movable
     {
