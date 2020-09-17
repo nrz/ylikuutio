@@ -19,6 +19,7 @@
 #include "entity.hpp"
 #include "symbiosis.hpp"
 #include "biont.hpp"
+#include "entity_factory.hpp"
 #include "holobiont_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
