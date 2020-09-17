@@ -23,6 +23,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <limits>   // std::numeric_limits
 
 namespace yli::ontology
 {
@@ -68,7 +69,7 @@ namespace yli::ontology
 
             yli::ontology::SymbiontSpecies* symbiont_species; // pointer to the `SymbiontSpecies` (not a parent!).
 
-            std::size_t biontID;
+            std::size_t biontID { std::numeric_limits<std::size_t>::max() };
 
             bool should_ylikuutio_render_this_biont { true };
 

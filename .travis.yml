@@ -48,6 +48,50 @@ jobs:
               - cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
               - make -j 4
               - ./unit_tests_with_googletest
+        - name: "GCC native compiler with Coverity Scan"
+          before_install:
+              - echo "Hello from before_install stage"
+              - test ${TRAVIS_BRANCH} != coverity_scan -o ${TRAVIS_JOB_NUMBER##*.} = 1 || exit 0
+          compiler: gcc
+          addons:
+              # following Coverity instructions
+              # https://scan.coverity.com/travis_ci
+              coverity_scan:
+                  project:
+                      name: nrz/ylikuutio
+                      version: 0.0.8
+                      description: Ylikuutio 3D engine. Build submitted via Travis CI
+                      notification_email: antti.nuortimo@gmail.com
+                      build_command_prepend: mkdir build_coverity && cd build_coverity && cmake ..
+                      build_command: make -j 4
+                      branch_pattern: coverity_scan
+              apt:
+                  packages:
+                      - cmake
+                      - git
+                      - libx11-dev
+                      - libgl1-mesa-dev
+                      - libglu1-mesa-dev
+                      - libsdl2-dev
+                      - libxcursor-dev
+                      - libxrandr-dev
+                      - libxext-dev
+                      - libxi-dev
+                      - libxinerama-dev
+                      - make
+          branches:
+              only:
+                  - master
+                  - coverity_scan
+          script:
+              - test ${TRAVIS_BRANCH} != coverity_scan || exit 0
+              - gcc -v && g++ -v
+              - mkdir build_native
+              - cd build_native
+              - echo "Running cmake for GCC native compiler with Coverity Scan"
+              - cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
+              - make -j 4
+              - ./unit_tests_with_googletest
         - name: "Clang native compiler"
           before_install:
               - echo "Hello from before_install stage"
