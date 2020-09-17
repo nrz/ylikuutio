@@ -52,7 +52,7 @@ namespace yli::snippets
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>& input_parameters,
+            std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue> any_value)
     {
         // Do nothing.
@@ -63,7 +63,7 @@ namespace yli::snippets
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>& input_parameters,
+            std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue> any_value)
     {
         if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
@@ -87,7 +87,7 @@ namespace yli::snippets
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>& input_parameters,
+            std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue> any_value)
     {
         if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
@@ -111,7 +111,7 @@ namespace yli::snippets
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>& input_parameters,
+            std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue> any_value)
     {
         if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
@@ -135,7 +135,7 @@ namespace yli::snippets
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>& input_parameters,
+            std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue> any_value)
     {
         if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
@@ -159,7 +159,7 @@ namespace yli::snippets
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>& input_parameters,
+            std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue> any_value)
     {
         if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
@@ -183,7 +183,7 @@ namespace yli::snippets
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>& input_parameters,
+            std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue> any_value)
     {
         if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
@@ -207,7 +207,7 @@ namespace yli::snippets
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>& input_parameters,
+            std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue> any_value)
     {
         if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
@@ -231,7 +231,7 @@ namespace yli::snippets
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>& input_parameters,
+            std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue> any_value)
     {
         if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
@@ -255,7 +255,7 @@ namespace yli::snippets
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>& input_parameters,
+            std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue> any_value)
     {
         if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
@@ -280,7 +280,7 @@ namespace yli::snippets
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>& input_parameters,
+            std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue> any_value)
     {
         if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
@@ -305,7 +305,7 @@ namespace yli::snippets
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>& input_parameters,
+            std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue> any_value)
     {
         if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
@@ -330,7 +330,7 @@ namespace yli::snippets
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>& input_parameters,
+            std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue> any_value)
     {
         if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
@@ -355,7 +355,7 @@ namespace yli::snippets
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>& input_parameters,
+            std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue> any_value)
     {
         if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
@@ -379,7 +379,7 @@ namespace yli::snippets
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>& input_parameters,
+            std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue> any_value)
     {
         if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
