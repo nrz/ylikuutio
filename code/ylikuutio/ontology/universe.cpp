@@ -1049,7 +1049,7 @@ namespace yli::ontology
         return this->aspect_ratio;
     }
 
-    float Universe::get_initialFoV() const
+    float Universe::get_initial_fov() const
     {
         return this->initial_fov;
     }

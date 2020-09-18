@@ -615,7 +615,7 @@ namespace yli::ontology
             void set_view_matrix(const glm::mat4& view_matrix);
 
             float get_aspect_ratio() const;
-            float get_initialFoV() const;
+            float get_initial_fov() const;
 
             // Public callbacks.
 
