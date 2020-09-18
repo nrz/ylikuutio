@@ -17,37 +17,10 @@ install:
 
 jobs:
     include:
-        - name: "GCC native compiler"
-          before_install:
-              - echo "Hello from before_install stage"
-          compiler: gcc
-          addons:
-              apt:
-                  packages:
-                      - cmake
-                      - git
-                      - libx11-dev
-                      - libgl1-mesa-dev
-                      - libglu1-mesa-dev
-                      - libsdl2-dev
-                      - libxcursor-dev
-                      - libxrandr-dev
-                      - libxext-dev
-                      - libxi-dev
-                      - libxinerama-dev
-                      - make
-          branches:
-              only:
-                  - master
-                  - coverity_scan
-          script:
-              - gcc -v && g++ -v
-              - mkdir build_native
-              - cd build_native
-              - echo "Running cmake for GCC native compiler"
-              - cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
-              - make -j 4
-              - ./unit_tests_with_googletest
+        # Coverity Scan job should be first one for two reasons:
+        # 1. to get it running as soon as possible
+        # 2. if Coverity Scan Job is not first, then the expression
+        # `${TRAVIS_JOB_NUMBER##*.} = 1` should be modified accordingly.
         - name: "GCC native compiler with Coverity Scan"
           before_install:
               - echo "Hello from before_install stage"
@@ -90,6 +63,37 @@ jobs:
               - mkdir build_native
               - cd build_native
               - echo "Running cmake for GCC native compiler with Coverity Scan"
+              - cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
+              - make -j 4
+              - ./unit_tests_with_googletest
+        - name: "GCC native compiler"
+          before_install:
+              - echo "Hello from before_install stage"
+          compiler: gcc
+          addons:
+              apt:
+                  packages:
+                      - cmake
+                      - git
+                      - libx11-dev
+                      - libgl1-mesa-dev
+                      - libglu1-mesa-dev
+                      - libsdl2-dev
+                      - libxcursor-dev
+                      - libxrandr-dev
+                      - libxext-dev
+                      - libxi-dev
+                      - libxinerama-dev
+                      - make
+          branches:
+              only:
+                  - master
+                  - coverity_scan
+          script:
+              - gcc -v && g++ -v
+              - mkdir build_native
+              - cd build_native
+              - echo "Running cmake for GCC native compiler"
               - cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
               - make -j 4
               - ./unit_tests_with_googletest
