@@ -55,7 +55,6 @@ jobs:
                       - make
           branches:
               only:
-                  - master
                   - coverity_scan
           script:
               - test ${TRAVIS_BRANCH} != coverity_scan || exit 0
@@ -88,7 +87,6 @@ jobs:
           branches:
               only:
                   - master
-                  - coverity_scan
           script:
               - gcc -v && g++ -v
               - mkdir build_native
