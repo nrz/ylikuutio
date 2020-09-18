@@ -19,7 +19,6 @@
 #define __YLIKUUTIO_ONTOLOGY_CAMERA_HPP_INCLUDED
 
 #include "movable.hpp"
-#include "universe.hpp"
 #include "camera_struct.hpp"
 
 // Include GLM
