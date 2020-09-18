@@ -86,7 +86,7 @@ namespace yli::ontology
             {
                 // constructor.
 
-                this->is_static_view    = camera_struct.is_static_view;
+                this->is_static_view = camera_struct.is_static_view;
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Camera*";
