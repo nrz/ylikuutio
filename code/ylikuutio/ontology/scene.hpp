@@ -19,6 +19,7 @@
 #define __YLIKUUTIO_ONTOLOGY_SCENE_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "universe.hpp"
 #include "camera.hpp"
 #include "child_module.hpp"
 #include "parent_module.hpp"
