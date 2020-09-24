@@ -222,13 +222,14 @@ void btSoftBody::initDefaults()
 	m_windVelocity = btVector3(0, 0, 0);
 	m_restLengthScale = btScalar(1.0);
 	m_dampingCoefficient = 1.0;
-	m_sleepingThreshold = .4;
+	m_sleepingThreshold = .04;
 	m_useSelfCollision = false;
 	m_collisionFlags = 0;
 	m_softSoftCollision = false;
 	m_maxSpeedSquared = 0;
 	m_repulsionStiffness = 0.5;
 	m_gravityFactor = 1;
+	m_cacheBarycenter = false;
 	m_fdbvnt = 0;
 }
 
@@ -749,7 +750,7 @@ void btSoftBody::addAeroForceToNode(const btVector3& windVelocity, int nodeIndex
 					fDrag = 0.5f * kDG * medium.m_density * rel_v2 * tri_area * n_dot_v * (-rel_v_nrm);
 
 					// Check angle of attack
-					// cos(10บ) = 0.98480
+					// cos(10ยบ) = 0.98480
 					if (0 < n_dot_v && n_dot_v < 0.98480f)
 						fLift = 0.5f * kLF * medium.m_density * rel_v_len * tri_area * btSqrt(1.0f - n_dot_v * n_dot_v) * (nrm.cross(rel_v_nrm).cross(rel_v_nrm));
 
@@ -835,7 +836,7 @@ void btSoftBody::addAeroForceToFace(const btVector3& windVelocity, int faceIndex
 				fDrag = 0.5f * kDG * medium.m_density * rel_v2 * tri_area * n_dot_v * (-rel_v_nrm);
 
 				// Check angle of attack
-				// cos(10บ) = 0.98480
+				// cos(10ยบ) = 0.98480
 				if (0 < n_dot_v && n_dot_v < 0.98480f)
 					fLift = 0.5f * kLF * medium.m_density * rel_v_len * tri_area * btSqrt(1.0f - n_dot_v * n_dot_v) * (nrm.cross(rel_v_nrm).cross(rel_v_nrm));
 
@@ -2818,46 +2819,9 @@ bool btSoftBody::checkDeformableFaceContact(const btCollisionObjectWrapper* colO
 	btTransform wtr = (predict) ? (colObjWrap->m_preTransform != NULL ? tmpCollisionObj->getInterpolationWorldTransform() * (*colObjWrap->m_preTransform) : tmpCollisionObj->getInterpolationWorldTransform())
 								: colObjWrap->getWorldTransform();
 	btScalar dst;
+	btGjkEpaSolver2::sResults results;
 
-	//#define USE_QUADRATURE 1
-	//#define CACHE_PREV_COLLISION
-
-	// use the contact position of the previous collision
-#ifdef CACHE_PREV_COLLISION
-	if (f.m_pcontact[3] != 0)
-	{
-		for (int i = 0; i < 3; ++i)
-			bary[i] = f.m_pcontact[i];
-		contact_point = BaryEval(f.m_n[0]->m_x, f.m_n[1]->m_x, f.m_n[2]->m_x, bary);
-		dst = m_worldInfo->m_sparsesdf.Evaluate(
-			wtr.invXform(contact_point),
-			shp,
-			nrm,
-			margin);
-		nrm = wtr.getBasis() * nrm;
-		cti.m_colObj = colObjWrap->getCollisionObject();
-		// use cached contact point
-	}
-	else
-	{
-		btGjkEpaSolver2::sResults results;
-		btTransform triangle_transform;
-		triangle_transform.setIdentity();
-		triangle_transform.setOrigin(f.m_n[0]->m_x);
-		btTriangleShape triangle(btVector3(0, 0, 0), f.m_n[1]->m_x - f.m_n[0]->m_x, f.m_n[2]->m_x - f.m_n[0]->m_x);
-		btVector3 guess(0, 0, 0);
-		const btConvexShape* csh = static_cast<const btConvexShape*>(shp);
-		btGjkEpaSolver2::SignedDistance(&triangle, triangle_transform, csh, wtr, guess, results);
-		dst = results.distance - margin;
-		contact_point = results.witnesses[0];
-		getBarycentric(contact_point, f.m_n[0]->m_x, f.m_n[1]->m_x, f.m_n[2]->m_x, bary);
-		nrm = results.normal;
-		cti.m_colObj = colObjWrap->getCollisionObject();
-		for (int i = 0; i < 3; ++i)
-			f.m_pcontact[i] = bary[i];
-	}
-	return (dst < 0);
-#endif
+//	#define USE_QUADRATURE 1
 
 	// use collision quadrature point
 #ifdef USE_QUADRATURE
@@ -2895,7 +2859,8 @@ bool btSoftBody::checkDeformableFaceContact(const btCollisionObjectWrapper* colO
 		return (dst < 0);
 	}
 #endif
-	btGjkEpaSolver2::sResults results;
+
+	// collision detection using x*
 	btTransform triangle_transform;
 	triangle_transform.setIdentity();
 	triangle_transform.setOrigin(f.m_n[0]->m_q);
@@ -2906,19 +2871,51 @@ bool btSoftBody::checkDeformableFaceContact(const btCollisionObjectWrapper* colO
 	dst = results.distance - 2.0 * csh->getMargin() - margin;  // margin padding so that the distance = the actual distance between face and rigid - margin of rigid - margin of deformable
 	if (dst >= 0)
 		return false;
+
+	// Use consistent barycenter to recalculate distance.
+	if (this->m_cacheBarycenter)
+	{
+		if (f.m_pcontact[3] != 0)
+		{
+			for (int i = 0; i < 3; ++i)
+				bary[i] = f.m_pcontact[i];
+			contact_point = BaryEval(f.m_n[0]->m_x, f.m_n[1]->m_x, f.m_n[2]->m_x, bary);
+			const btConvexShape* csh = static_cast<const btConvexShape*>(shp);
+			btGjkEpaSolver2::SignedDistance(contact_point, margin, csh, wtr, results);
+			cti.m_colObj = colObjWrap->getCollisionObject();
+			dst = results.distance;
+			cti.m_normal = results.normal;
+			cti.m_offset = dst;
+
+			//point-convex CD
+			wtr = colObjWrap->getWorldTransform();
+			btTriangleShape triangle2(btVector3(0, 0, 0), f.m_n[1]->m_x - f.m_n[0]->m_x, f.m_n[2]->m_x - f.m_n[0]->m_x);
+			triangle_transform.setOrigin(f.m_n[0]->m_x);
+			btGjkEpaSolver2::SignedDistance(&triangle2, triangle_transform, csh, wtr, guess, results);
+
+			dst = results.distance - csh->getMargin() - margin;
+			return true;
+		}
+	}
+
+	// Use triangle-convex CD.
 	wtr = colObjWrap->getWorldTransform();
 	btTriangleShape triangle2(btVector3(0, 0, 0), f.m_n[1]->m_x - f.m_n[0]->m_x, f.m_n[2]->m_x - f.m_n[0]->m_x);
 	triangle_transform.setOrigin(f.m_n[0]->m_x);
 	btGjkEpaSolver2::SignedDistance(&triangle2, triangle_transform, csh, wtr, guess, results);
 	contact_point = results.witnesses[0];
 	getBarycentric(contact_point, f.m_n[0]->m_x, f.m_n[1]->m_x, f.m_n[2]->m_x, bary);
+
+	for (int i = 0; i < 3; ++i)
+		f.m_pcontact[i] = bary[i];
+
 	dst = results.distance - csh->getMargin() - margin;
 	cti.m_colObj = colObjWrap->getCollisionObject();
 	cti.m_normal = results.normal;
 	cti.m_offset = dst;
 	return true;
 }
-//
+
 void btSoftBody::updateNormals()
 {
 	const btVector3 zv(0, 0, 0);
@@ -3449,6 +3446,11 @@ void btSoftBody::setGravityFactor(btScalar gravFactor)
 	m_gravityFactor = gravFactor;
 }
 
+void btSoftBody::setCacheBarycenter(bool cacheBarycenter)
+{
+	m_cacheBarycenter = cacheBarycenter;
+}
+
 void btSoftBody::initializeDmInverse()
 {
 	btScalar unit_simplex_measure = 1. / 6.;
@@ -3803,7 +3805,7 @@ void btSoftBody::interpolateRenderMesh()
 			const Node* p2 = m_renderNodesParents[i][2];
 			btVector3 normal = btCross(p1->m_x - p0->m_x, p2->m_x - p0->m_x);
 			btVector3 unit_normal = normal.normalized();
-			Node& n = m_renderNodes[i];
+			RenderNode& n = m_renderNodes[i];
 			n.m_x.setZero();
 			for (int j = 0; j < 3; ++j)
 			{
@@ -3816,7 +3818,7 @@ void btSoftBody::interpolateRenderMesh()
 	{
 		for (int i = 0; i < m_renderNodes.size(); ++i)
 		{
-			Node& n = m_renderNodes[i];
+			RenderNode& n = m_renderNodes[i];
 			n.m_x.setZero();
 			for (int j = 0; j < 4; ++j)
 			{
