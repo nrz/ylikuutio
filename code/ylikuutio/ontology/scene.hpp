@@ -19,6 +19,7 @@
 #define __YLIKUUTIO_ONTOLOGY_SCENE_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "universe.hpp"
 #include "camera.hpp"
 #include "child_module.hpp"
 #include "parent_module.hpp"
@@ -127,11 +128,13 @@ namespace yli::ontology
                 }
                 else
                 {
+                    yli::ontology::Universe* const universe = this->universe;
+
                     this->dynamics_world = std::make_unique<btDiscreteDynamicsWorld>(
-                            this->universe->get_dispatcher(),
-                            this->universe->get_overlapping_pair_cache(),
-                            this->universe->get_solver(),
-                            this->universe->get_collision_configuration());
+                            universe->get_dispatcher(),
+                            universe->get_overlapping_pair_cache(),
+                            universe->get_solver(),
+                            universe->get_collision_configuration());
                 }
 
                 // `yli::ontology::Entity` member variables begin here.

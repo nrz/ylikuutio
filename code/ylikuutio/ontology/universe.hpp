@@ -375,7 +375,7 @@ namespace yli::ontology
                 // Variables related to the camera.
                 this->aspect_ratio = static_cast<float>(this->window_width) / static_cast<float>(this->window_height);
 
-                this->initialFoV   = 60.0f;
+                this->initial_fov  = 60.0f;
 
                 this->text_size = universe_struct.text_size;
                 this->font_size = universe_struct.font_size;
@@ -615,7 +615,7 @@ namespace yli::ontology
             void set_view_matrix(const glm::mat4& view_matrix);
 
             float get_aspect_ratio() const;
-            float get_initialFoV() const;
+            float get_initial_fov() const;
 
             // Public callbacks.
 
@@ -801,7 +801,7 @@ namespace yli::ontology
             glm::mat4 current_camera_projection_matrix;
             glm::mat4 current_camera_view_matrix;
             float aspect_ratio;    // At the moment all `Camera`s use the same aspect ratio.
-            float initialFoV;      // At the moment all `Camera`s use the same FoV.
+            float initial_fov;     // At the moment all `Camera`s use the same FoV.
 
             // variables related to the fonts and texts used.
             std::size_t text_size;

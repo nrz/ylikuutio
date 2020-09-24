@@ -1049,9 +1049,9 @@ namespace yli::ontology
         return this->aspect_ratio;
     }
 
-    float Universe::get_initialFoV() const
+    float Universe::get_initial_fov() const
     {
-        return this->initialFoV;
+        return this->initial_fov;
     }
 
     bool Universe::compute_and_update_matrices_from_inputs()
@@ -1079,7 +1079,7 @@ namespace yli::ontology
 
         // Compute the projection matrix.
         this->current_camera_projection_matrix = glm::perspective(
-                DEGREES_TO_RADIANS(this->initialFoV),
+                DEGREES_TO_RADIANS(this->initial_fov),
                 this->aspect_ratio,
                 this->znear,
                 this->zfar);

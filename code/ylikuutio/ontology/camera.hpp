@@ -19,7 +19,6 @@
 #define __YLIKUUTIO_ONTOLOGY_CAMERA_HPP_INCLUDED
 
 #include "movable.hpp"
-#include "universe.hpp"
 #include "camera_struct.hpp"
 
 // Include GLM
@@ -87,7 +86,7 @@ namespace yli::ontology
             {
                 // constructor.
 
-                this->is_static_view    = camera_struct.is_static_view;
+                this->is_static_view = camera_struct.is_static_view;
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Camera*";
