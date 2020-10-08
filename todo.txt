@@ -17,6 +17,9 @@ Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
 
 Tasks which are necessary for the second stage:
+[ ] Implement support for multiple light sources in each `Scene`.
+[ ] Implement shadows.
+[ ] Implement HDR rendering.
 [ ] Add support for different keyboard layouts in `Console`.
 [ ] Convert local variables of `Application::create_simulation` implementations into heap-allocated ones so that `Universe::start_simulation` can be called from `main`.
 [ ] Call `Universe::start_simulation` from `main` instead of `Application::create_simulation` implementations.
