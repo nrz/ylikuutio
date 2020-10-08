@@ -30,6 +30,12 @@ Android support is a work in progress.
 macOS and iOS will be supported in the future.
 OpenGL 3.0 or newer is required.
 
+## Ylikuutio 0.0.8 Screenshots
+![View of Helsinki with cats and Ylikuutio console](https://github.com/nrz/ylikuutio/blob/master/screenshots/helsinki_cats_2020-10-08.png?raw=true)
+![Turbo polizei and cats](https://github.com/nrz/ylikuutio/blob/master/screenshots/turbo_polizei_2020-10-08.png?raw=true)
+![Cats and debug console commands](https://github.com/nrz/ylikuutio/blob/master/screenshots/cats_2020-10-08.png?raw=true)
+![Turbo polizei and debug console commands](https://github.com/nrz/ylikuutio/blob/master/screenshots/turbo_polizei_info_2020-10-08.png?raw=true)
+
 ## Articles
 In [Skrolli 2018.4](https://skrolli.fi/numerot/2018-4/) there is an article
 "Pelimoottori harrastusprojektina" (in Finnish, translation: "Game engine
