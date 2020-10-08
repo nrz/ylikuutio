@@ -95,7 +95,6 @@ namespace yli::ontology
                 parent_of_lisp_functions(this)
             {
                 // constructor.
-                this->should_be_rendered = true;
                 this->cursor_it = this->current_input.begin();
                 this->cursor_index = 0;
                 this->in_history = false;
@@ -406,8 +405,6 @@ namespace yli::ontology
                     yli::ontology::Console* const console);
 
             // Public callbacks end here.
-
-            bool should_be_rendered;
 
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::ParentModule parent_of_lisp_functions;
