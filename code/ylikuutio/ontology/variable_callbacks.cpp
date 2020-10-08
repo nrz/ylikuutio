@@ -112,7 +112,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_framebuffer_size(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::shared_ptr<yli::data::AnyValue> Variable::activate_framebuffer_width(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
@@ -128,6 +128,25 @@ namespace yli::ontology
         }
 
         uint32_t framebuffer_width = std::get<uint32_t>(framebuffer_width_any_value->data);
+
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        universe->set_framebuffer_width(framebuffer_width);
+
+        return nullptr;
+    }
+
+    std::shared_ptr<yli::data::AnyValue> Variable::activate_framebuffer_height(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    {
+        if (entity == nullptr || variable == nullptr)
+        {
+            return nullptr;
+        }
 
         // framebuffer height.
         std::shared_ptr<yli::data::AnyValue> framebuffer_height_any_value = variable->variable_value;
@@ -146,7 +165,6 @@ namespace yli::ontology
             return nullptr;
         }
 
-        universe->set_framebuffer_width(framebuffer_width);
         universe->set_framebuffer_height(framebuffer_height);
 
         return nullptr;
