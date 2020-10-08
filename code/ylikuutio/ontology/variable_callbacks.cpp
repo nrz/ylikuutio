@@ -81,7 +81,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        uint32_t window_width = std::get<uint32_t>(window_width_any_value->data);
+        const uint32_t window_width = std::get<uint32_t>(window_width_any_value->data);
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
@@ -92,7 +92,7 @@ namespace yli::ontology
 
         universe->set_window_width(window_width);
 
-        uint32_t window_height = universe->get_window_height();
+        const uint32_t window_height = universe->get_window_height();
 
         if (window_width <= std::numeric_limits<int>::max() &&
                 window_height <= std::numeric_limits<int>::max())
@@ -118,7 +118,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        uint32_t window_height = std::get<uint32_t>(window_height_any_value->data);
+        const uint32_t window_height = std::get<uint32_t>(window_height_any_value->data);
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
@@ -129,7 +129,7 @@ namespace yli::ontology
 
         universe->set_window_height(window_height);
 
-        uint32_t window_width = universe->get_window_width();
+        const uint32_t window_width = universe->get_window_width();
 
         if (window_width <= std::numeric_limits<int>::max() &&
                 window_height <= std::numeric_limits<int>::max())
@@ -155,7 +155,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        uint32_t framebuffer_width = std::get<uint32_t>(framebuffer_width_any_value->data);
+        const uint32_t framebuffer_width = std::get<uint32_t>(framebuffer_width_any_value->data);
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
@@ -184,7 +184,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        uint32_t framebuffer_height = std::get<uint32_t>(framebuffer_height_any_value->data);
+        const uint32_t framebuffer_height = std::get<uint32_t>(framebuffer_height_any_value->data);
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
@@ -221,7 +221,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        float red = std::get<float>(red_any_value->data);
+        const float red = std::get<float>(red_any_value->data);
 
         // green.
         std::shared_ptr<yli::data::AnyValue> green_any_value = entity->get("green")->variable_value;
@@ -231,7 +231,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        float green = std::get<float>(green_any_value->data);
+        const float green = std::get<float>(green_any_value->data);
 
         // blue.
         std::shared_ptr<yli::data::AnyValue> blue_any_value = entity->get("blue")->variable_value;
@@ -241,7 +241,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        float blue = std::get<float>(blue_any_value->data);
+        const float blue = std::get<float>(blue_any_value->data);
 
         // alpha.
         std::shared_ptr<yli::data::AnyValue> alpha_any_value = entity->get("alpha")->variable_value;
@@ -251,7 +251,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        float alpha = std::get<float>(alpha_any_value->data);
+        const float alpha = std::get<float>(alpha_any_value->data);
 
         yli::opengl::set_background_color(red, green, blue, alpha);
 
