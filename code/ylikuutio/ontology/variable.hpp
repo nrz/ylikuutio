@@ -116,7 +116,8 @@ namespace yli::ontology
 
             static std::shared_ptr<yli::data::AnyValue> activate_planet_radius(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
 
-            static std::shared_ptr<yli::data::AnyValue> activate_window_size(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::shared_ptr<yli::data::AnyValue> activate_window_width(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::shared_ptr<yli::data::AnyValue> activate_window_height(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
             static std::shared_ptr<yli::data::AnyValue> activate_framebuffer_width(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
             static std::shared_ptr<yli::data::AnyValue> activate_framebuffer_height(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
             static std::shared_ptr<yli::data::AnyValue> activate_background_color(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);

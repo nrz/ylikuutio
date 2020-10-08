@@ -66,7 +66,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_window_size(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::shared_ptr<yli::data::AnyValue> Variable::activate_window_width(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
@@ -82,6 +82,33 @@ namespace yli::ontology
         }
 
         uint32_t window_width = std::get<uint32_t>(window_width_any_value->data);
+
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        universe->set_window_width(window_width);
+
+        uint32_t window_height = universe->get_window_height();
+
+        if (window_width <= std::numeric_limits<int>::max() &&
+                window_height <= std::numeric_limits<int>::max())
+        {
+            yli::sdl::set_window_size(universe->get_window(), static_cast<int>(window_width), static_cast<int>(window_height));
+        }
+
+        return nullptr;
+    }
+
+    std::shared_ptr<yli::data::AnyValue> Variable::activate_window_height(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    {
+        if (entity == nullptr || variable == nullptr)
+        {
+            return nullptr;
+        }
 
         // window height.
         std::shared_ptr<yli::data::AnyValue> window_height_any_value = variable->variable_value;
@@ -100,14 +127,15 @@ namespace yli::ontology
             return nullptr;
         }
 
+        universe->set_window_height(window_height);
+
+        uint32_t window_width = universe->get_window_width();
+
         if (window_width <= std::numeric_limits<int>::max() &&
                 window_height <= std::numeric_limits<int>::max())
         {
             yli::sdl::set_window_size(universe->get_window(), static_cast<int>(window_width), static_cast<int>(window_height));
         }
-
-        universe->set_window_width(window_width);
-        universe->set_window_height(window_height);
 
         return nullptr;
     }
