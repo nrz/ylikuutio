@@ -15,7 +15,7 @@ RECREATE=0
 while [ "$1" != "" ]; do
     case "$1" in
         -r | --recreate )   shift
-                            recreate=1
+                            RECREATE=1
                             ;;
         -h | --help )       shift
                             usage
