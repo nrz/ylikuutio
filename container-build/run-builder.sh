@@ -48,7 +48,7 @@ if ! "$CONTAINER_ENGINE" container exists ylikuutio-builder; then
         --cpus $(($(nproc) - 1)) \
         --volume "$BUILD_DIR:/work/build:rw" \
         --volume "$REPO_DIR:/work:ro" \
-        ylikuutio-builder \ # image name
+        ylikuutio-builder \
         > /dev/null
 fi
 
