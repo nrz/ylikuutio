@@ -3,8 +3,11 @@
 These instructions and the accompanied script currently assume the Podman container engine,
 but Docker should work with relatively few modifications.
 
+Depending on the container runtime configuration in your system,
+you may have to run these commands as root.
+Either run all commands with root or all commands as regular user!
+
 1. Make sure you have Podman installed in your system.
-   Depending on the container runtime configuration in your system, you may have to run Podman as root.
 2. Build the image: `podman build -t ylikuutio-builder .`
 3. Build Ylikuutio using the provided script: `./run-builder.sh`
    * As with Podman, you may have to run this script as root as well.
