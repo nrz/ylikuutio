@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 usage() {
     echo "Usage: ./run-builder.sh [[-r|--recreate] | [-h|--help]]"
     echo
