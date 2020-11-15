@@ -13,7 +13,8 @@ RUN apt-get -qq install -y \
     libxext-dev \
     libxi-dev \
     libxinerama-dev \
-    git
+    git && \
+    apt-get -qq clean
 
 WORKDIR /work/build
 CMD cmake .. && time make -j $(nproc)
