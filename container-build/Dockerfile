@@ -17,4 +17,4 @@ RUN apt-get -qq install -y \
     apt-get -qq clean
 
 WORKDIR /work/build
-CMD cmake .. && time make -j $(nproc)
+CMD ["bash", "-euc", "cmake .. && time make -j $(nproc)"]
