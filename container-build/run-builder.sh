@@ -14,7 +14,7 @@ usage() {
 CONTAINER_ENGINE="podman"
 RECREATE=0
 
-while [ "$1" != "" ]; do
+while [[ -v 1 && "$1" != "" ]]; do
     case "$1" in
         -r | --recreate )   shift
                             RECREATE=1
