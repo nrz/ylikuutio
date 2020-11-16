@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -eo pipefail
 
 usage() {
     echo "Usage: ./run-builder.sh [[-r|--recreate] | [-h|--help]]"
@@ -14,13 +14,11 @@ usage() {
 CONTAINER_ENGINE="podman"
 RECREATE=0
 
-while [[ -v 1 && "$1" != "" ]]; do
+while [[ -z ${var+x} && "$1" != "" ]]; do
     case "$1" in
-        -r | --recreate )   shift
-                            RECREATE=1
+        -r | --recreate )   RECREATE=1
                             ;;
-        -h | --help )       shift
-                            usage
+        -h | --help )       usage
                             exit
                             ;;
         * )                 usage
