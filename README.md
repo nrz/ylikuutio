@@ -113,7 +113,7 @@ To cross compile from Linux to Windows:
 
 Crosscompiling from Linux to Windows fails to compile tests.
 This is a known bug in Google Test. Just run `make` *again* if
-compiling ends before you get `nirvi.exe`, `tulevaisuus.exe`,
+compiling ends before you get `hirvi.exe`, `tulevaisuus.exe`,
 `ajokki.exe`, `gpgpu_test.exe`, and `yli_edit.exe`.
 
 By default compiling tests is disabled when crosscompiling from Linux
