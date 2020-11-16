@@ -8,11 +8,15 @@ usage() {
     echo "-r | --recreate   Force recreation of container before building."
     echo "                  This is useful after rebuilding the image."
     echo
+    echo "-c | --chown      If running with sudo, change ownership of resulting"
+    echo "                  files to \$SUDO_USER."
+    echo
     echo "-h | --help       Display this message."
 }
 
 CONTAINER_ENGINE="podman"
 RECREATE=0
+DO_CHOWN=0
 
 while [[ -z ${var+x} && "$1" != "" ]]; do
     case "$1" in
@@ -20,6 +24,12 @@ while [[ -z ${var+x} && "$1" != "" ]]; do
                             ;;
         -h | --help )       usage
                             exit
+                            ;;
+        -c | --chown )      if [[ ! -v SUDO_USER || -z "$SUDO_USER" ]]; then
+                                echo "Command was not run with sudo"
+                                exit 1
+                            fi
+                            DO_CHOWN=1
                             ;;
         * )                 usage
                             exit 1
@@ -54,3 +64,8 @@ fi
 
 echo "--- Starting build..."
 "$CONTAINER_ENGINE" container start -a ylikuutio-builder
+
+if [ $DO_CHOWN == 1 ]; then
+    echo "--- Chowning build results to user $SUDO_USER..."
+    chown -R $SUDO_UID:$SUDO_GID "$BUILD_DIR"
+fi
