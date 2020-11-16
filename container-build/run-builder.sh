@@ -46,8 +46,8 @@ if ! "$CONTAINER_ENGINE" container exists ylikuutio-builder; then
         --attach stderr \
         --name ylikuutio-builder \
         --cpus $(($(nproc) - 1)) \
-        --volume "$BUILD_DIR:/work/build:rw" \
-        --volume "$REPO_DIR:/work:ro" \
+        --volume "$BUILD_DIR:/work/build:rw,z" \
+        --volume "$REPO_DIR:/work:ro,z" \
         ylikuutio-builder \
         > /dev/null
 fi
