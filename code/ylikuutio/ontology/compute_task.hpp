@@ -155,7 +155,13 @@ namespace yli::ontology
                 // Load the source texture, just like in `yli::ontology::Material` constructor.
                 if (this->texture_file_format == "bmp" || this->texture_file_format == "BMP")
                 {
-                    if (!yli::load::load_common_texture(this->texture_filename, this->texture_width, this->texture_height, this->texture_size, this->source_texture, is_headless))
+                    if (!yli::load::load_common_texture(
+                                this->texture_filename,
+                                this->texture_width,
+                                this->texture_height,
+                                this->texture_size,
+                                this->source_texture,
+                                is_headless))
                     {
                         std::cerr << "ERROR: loading BMP texture failed!\n";
                     }
