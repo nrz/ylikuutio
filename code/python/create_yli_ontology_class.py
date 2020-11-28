@@ -115,6 +115,9 @@ struct_variable_type = class_name + "Struct"
 const_struct_reference_variable_type = "const " + namespace + "::" + struct_variable_type + "&"
 struct_name = snake_case_class_name + "_struct"
 
+# inherited class' variable type and name.
+fully_qualified_inherited_class_struct_variable_type = fully_qualified_inherited_class_name + "Struct"
+
 # include line for the corresponding struct file.
 struct_include_line = "#include \"" + struct_name + ".hpp\" // TODO: modify or delete this line if there is no `" + namespace + "::" + class_name + "Struct`!"
 
@@ -204,7 +207,7 @@ destructor_definition_lines = \
 
 # struct file specific lines.
 begin_struct_definition = \
-"    struct " + struct_variable_type + ": public yli::ontology::EntityStruct\n"\
+"    struct " + struct_variable_type + ": public " + fully_qualified_inherited_class_struct_variable_type + "\n"\
 "    {"
 
 end_struct_definition = \
