@@ -138,6 +138,21 @@ namespace yli::opengl
         return true;
     }
 
+    void bind_gl_framebuffer(const GLuint framebuffer)
+    {
+        glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+    }
+
+    void bind_gl_read_framebuffer(const GLuint framebuffer)
+    {
+        glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer);
+    }
+
+    void bind_gl_draw_framebuffer(const GLuint framebuffer)
+    {
+        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer);
+    }
+
     std::size_t get_n_color_channels(const GLenum format)
     {
         switch (format)

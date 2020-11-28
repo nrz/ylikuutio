@@ -782,7 +782,7 @@ namespace yli::ontology
     void Universe::restore_onscreen_rendering() const
     {
         // Bind the default framebuffer for on-screen rendering.
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        yli::opengl::bind_gl_framebuffer(0);
 
         // Set background color for the default framebuffer.
         universe->set_opengl_background_color();
