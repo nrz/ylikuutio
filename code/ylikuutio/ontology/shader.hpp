@@ -145,7 +145,7 @@ namespace yli::ontology
 
             yli::ontology::Scene* parent;         // Pointer to the `Scene`.
 
-            uint32_t program_id;                  // This `Shader`'s `program_id`, returned by `load_shaders`.
+            GLuint program_id;                    // This `Shader`'s `program_id`, returned by `load_shaders`.
 
             uint32_t matrixID;
             uint32_t view_matrixID;

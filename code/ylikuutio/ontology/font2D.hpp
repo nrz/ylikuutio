@@ -177,7 +177,7 @@ namespace yli::ontology
 
             GLuint vertexbuffer;                     // Buffer containing the vertices.
             GLuint uvbuffer;                         // Buffer containing the UVs.
-            uint32_t program_id;                     // The `program_id` of the shader used to display the text, returned by `load_shaders`.
+            GLuint program_id;                       // The `program_id` of the shader used to display the text, returned by `load_shaders`.
             GLint vertex_position_in_screenspace_id; // Location of the program's `vertex_position_screenspace` attribute.
             GLint vertex_uv_id;                      // Location of the program's `vertexUV` attribute.
             GLint text_2d_uniform_id;                // Location of the program's texture attribute.
