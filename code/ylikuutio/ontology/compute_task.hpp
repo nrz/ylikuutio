@@ -299,7 +299,7 @@ namespace yli::ontology
             std::size_t uvs_size;
 
             // variables related to the framebuffer.
-            uint32_t framebuffer;
+            GLuint framebuffer;
             uint32_t source_texture;
             uint32_t target_texture;
             GLint opengl_texture_id;         // Texture ID, returned by `glGetUniformLocation(this->parent->get_program_id(), "texture_sampler")`.

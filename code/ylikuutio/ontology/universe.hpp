@@ -31,6 +31,9 @@
 
 #include "SDL.h"
 
+// Include GLEW
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -792,7 +795,7 @@ namespace yli::ontology
             bool is_silent;
 
             // variables related to the framebuffer.
-            uint32_t framebuffer;
+            GLuint framebuffer;
             uint32_t texture;
             uint32_t renderbuffer;
             bool is_framebuffer_initialized;
