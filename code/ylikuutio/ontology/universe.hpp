@@ -796,7 +796,7 @@ namespace yli::ontology
 
             // variables related to the framebuffer.
             GLuint framebuffer;
-            uint32_t texture;
+            GLuint texture;
             uint32_t renderbuffer;
             bool is_framebuffer_initialized;
 

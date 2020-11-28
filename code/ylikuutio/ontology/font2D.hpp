@@ -172,7 +172,7 @@ namespace yli::ontology
             std::string texture_filename;
             std::string font_texture_file_format;
 
-            uint32_t texture;                        // Texture containing the glyphs, returned by `load_common_texture`,
+            GLuint texture;                          // Texture containing the glyphs, returned by `load_common_texture`,
                                                      // (used for `glGenTextures` etc.).
 
             uint32_t vertexbuffer;                   // Buffer containing the vertices.

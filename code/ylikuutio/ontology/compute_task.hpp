@@ -300,8 +300,8 @@ namespace yli::ontology
 
             // variables related to the framebuffer.
             GLuint framebuffer;
-            uint32_t source_texture;
-            uint32_t target_texture;
+            GLuint source_texture;
+            GLuint target_texture;
             GLint opengl_texture_id;         // Texture ID, returned by `glGetUniformLocation(this->parent->get_program_id(), "texture_sampler")`.
             bool is_texture_loaded;
             bool is_framebuffer_initialized;
