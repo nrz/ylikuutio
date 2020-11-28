@@ -313,8 +313,8 @@ namespace yli::ontology
             GLint screen_height_uniform_id;      // Location of the program's window height uniform.
             GLint iteration_i_uniform_id;        // Location of the program's iteration index uniform.
 
-            uint32_t vertexbuffer;
-            uint32_t uvbuffer;
+            GLuint vertexbuffer;
+            GLuint uvbuffer;
 
             GLenum format;
             GLenum internal_format;
