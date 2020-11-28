@@ -22,11 +22,6 @@
 #define PI 3.14159265359f
 #endif
 
-#ifndef GLM_FORCE_RADIANS
-#define GLM_FORCE_RADIANS
-#define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
-#endif
-
 #include "entity.hpp"
 #include "parent_module.hpp"
 #include "universe.hpp"
