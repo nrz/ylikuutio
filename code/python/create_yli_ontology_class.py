@@ -87,7 +87,7 @@ class_ifndef_line = "#ifndef " + class_include_guard_macro_name
 class_define_line = "#define " + class_include_guard_macro_name
 struct_ifndef_line = "#ifndef " + struct_include_guard_macro_name
 struct_define_line = "#define " + struct_include_guard_macro_name
-entity_struct_include_line = "#include \"entity_struct.hpp\""
+entity_struct_include_line = "#include \"" + snake_case_inherited_class_name + "_struct.hpp\""
 endif_line = "#endif"
 
 # class filenames.
