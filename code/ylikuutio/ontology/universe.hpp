@@ -446,13 +446,15 @@ namespace yli::ontology
                         {
                             std::cerr << "SDL Window could not be created!\n";
                         }
+                        else
+                        {
+                            this->create_context();
+                            this->make_context_current();
 
-                        this->create_context();
-                        this->make_context_current();
-
-                        // Disable vertical sync.
-                        // TODO: add option to enable/disable vsync in the console.
-                        this->set_swap_interval(0);
+                            // Disable vertical sync.
+                            // TODO: add option to enable/disable vsync in the console.
+                            this->set_swap_interval(0);
+                        }
                     }
                 }
 
