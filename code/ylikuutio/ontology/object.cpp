@@ -380,7 +380,7 @@ namespace yli::ontology
         return 0; // `Object` has no children.
     }
 
-    // Public callabcks.
+    // Public callbacks.
 
     std::shared_ptr<yli::data::AnyValue> Object::create_object_with_parent_name_x_y_z(
             yli::ontology::Species* const parent,
@@ -508,5 +508,5 @@ namespace yli::ontology
         return nullptr;
     }
 
-    // Public callabcks end here.
+    // Public callbacks end here.
 }
