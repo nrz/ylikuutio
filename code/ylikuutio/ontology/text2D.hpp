@@ -94,7 +94,7 @@ namespace yli::ontology
             // destructor.
             virtual ~Text2D();
 
-            void render() override;
+            void render();
 
             yli::ontology::Entity* get_parent() const override;
 

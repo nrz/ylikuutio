@@ -96,7 +96,7 @@ namespace yli::ontology
             std::size_t get_number_of_symbiont_species() const;
 
             // this method renders all `SymbiontMaterial`s belonging to this `Symbiosis`.
-            void render() override;
+            void render();
 
             const std::string& get_model_file_format() const;
 

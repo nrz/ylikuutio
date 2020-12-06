@@ -24,6 +24,7 @@
 #include "shader.hpp"
 #include "material.hpp"
 #include "species_struct.hpp"
+#include "render_templates.hpp"
 #include "code/ylikuutio/load/species_loader.hpp"
 #include "code/ylikuutio/load/species_loader_struct.hpp"
 
@@ -179,9 +180,12 @@ namespace yli::ontology
             std::string color_channel;     // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
             glm::vec3 light_position;      // light position.
 
+            template<class T1, class T2>
+                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+
         private:
             // this method renders all `Object`s of this `Species`.
-            void render() override;
+            void render();
 
             bool is_symbiont_species;
 

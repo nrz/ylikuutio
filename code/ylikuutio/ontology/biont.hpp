@@ -20,6 +20,7 @@
 
 #include "movable.hpp"
 #include "biont_struct.hpp"
+#include "render_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -60,11 +61,14 @@ namespace yli::ontology
             // destructor.
             virtual ~Biont();
 
+            template<class T1, class T2>
+                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+
         protected:
             void bind_to_symbiont_species();
 
             // This method renders this `Biont`.
-            void render() override;
+            void render();
             void render_this_biont(const yli::ontology::Shader* const shader);
 
             yli::ontology::SymbiontSpecies* symbiont_species; // pointer to the `SymbiontSpecies` (not a parent!).

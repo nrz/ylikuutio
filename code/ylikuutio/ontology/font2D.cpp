@@ -17,6 +17,7 @@
 
 #include "font2D.hpp"
 #include "entity.hpp"
+#include "text2D.hpp"
 #include "text_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
@@ -126,7 +127,7 @@ namespace yli::ontology
             this->prepare_to_print();
 
             // Render this `Font2D` by calling `render()` function of each `Text2D`.
-            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_text2Ds.child_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Text2D*>(this->parent_of_text2Ds.child_pointer_vector);
 
             glDisable(GL_BLEND);
         }

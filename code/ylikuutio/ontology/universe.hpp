@@ -511,7 +511,7 @@ namespace yli::ontology
             void act();
 
             // This method renders the active `Scene` of this `Universe`.
-            void render() override;
+            void render();
 
             // This method renders the active `Scene` of this `Universe`.
             void render_without_changing_depth_test();

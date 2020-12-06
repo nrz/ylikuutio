@@ -144,10 +144,6 @@ namespace yli::ontology
     {
     }
 
-    void Entity::render()
-    {
-    }
-
     std::size_t Entity::get_childID() const
     {
         return this->childID;

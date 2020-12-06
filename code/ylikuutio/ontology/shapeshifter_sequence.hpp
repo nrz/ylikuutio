@@ -21,6 +21,7 @@
 #include "entity.hpp"
 #include "parent_module.hpp"
 #include "shapeshifter_sequence_struct.hpp"
+#include "render_templates.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -65,6 +66,9 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
+            template<class T1, class T2>
+                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+
             yli::ontology::ParentModule parent_of_objects;
 
         private:
@@ -73,7 +77,7 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            void render() override;
+            void render();
 
             yli::ontology::ShapeshifterTransformation* parent; // Pointer to `ShapeshifterTransformation` object.
 

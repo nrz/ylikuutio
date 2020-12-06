@@ -24,6 +24,7 @@
 #include "compute_task_struct.hpp"
 #include "pre_iterate_callback.hpp"
 #include "post_iterate_callback.hpp"
+#include "render_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/load/common_texture_loader.hpp"
 #include "code/ylikuutio/load/csv_texture_loader.hpp"
@@ -256,6 +257,9 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
+            template<class T1, class T2>
+                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+
         private:
             void bind_to_parent();
 
@@ -263,7 +267,7 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
             // This method renders this `ComputeTask`, that is, computes this task.
-            void render() override;
+            void render();
 
             void preiterate() const;
             void postiterate() const;

@@ -140,7 +140,7 @@ namespace yli::ontology
 
             void prepare_to_print() const;
 
-            void render() override;
+            void render();
 
             void print_text2D(
                     const std::size_t x,

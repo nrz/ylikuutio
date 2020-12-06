@@ -18,6 +18,9 @@
 #include "material.hpp"
 #include "entity.hpp"
 #include "shader.hpp"
+#include "species.hpp"
+#include "chunk_master.hpp"
+#include "vector_font.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "material_struct.hpp"
@@ -65,9 +68,9 @@ namespace yli::ontology
         yli::opengl::uniform_1i(this->opengl_texture_id, 0);
 
         // Render this `Material` by calling `render()` function of each `Species`, each `VectorFont`, and each `ChunkMaster`.
-        yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_species.child_pointer_vector);
-        yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_vector_fonts.child_pointer_vector);
-        yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_chunk_masters.child_pointer_vector);
+        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Species*>(this->parent_of_species.child_pointer_vector);
+        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::VectorFont*>(this->parent_of_vector_fonts.child_pointer_vector);
+        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::ChunkMaster*>(this->parent_of_chunk_masters.child_pointer_vector);
 
         this->postrender();
     }

@@ -37,6 +37,7 @@
 #include "variable.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
+#include "font2D.hpp"
 #include "text2D.hpp"
 #include "camera.hpp"
 #include "console.hpp"
@@ -627,7 +628,7 @@ namespace yli::ontology
         }
 
         // Render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
-        yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_font2Ds.child_pointer_vector);
+        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Font2D*>(this->parent_of_font2Ds.child_pointer_vector);
 
         yli::opengl::enable_depth_test();
 
@@ -659,7 +660,7 @@ namespace yli::ontology
         }
 
         // Render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
-        yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_font2Ds.child_pointer_vector);
+        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Font2D*>(this->parent_of_font2Ds.child_pointer_vector);
 
         // Swap buffers.
         SDL_GL_SwapWindow(this->get_window());

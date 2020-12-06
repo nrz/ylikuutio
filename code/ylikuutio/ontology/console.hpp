@@ -177,7 +177,7 @@ namespace yli::ontology
             void set_console_right_x(const uint32_t console_right_x);
             void print_text(const std::string& text);
             void print_help();
-            void render() override;
+            void render();
 
             bool enter_console();
             bool exit_console();
