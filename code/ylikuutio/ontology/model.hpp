@@ -79,7 +79,7 @@ namespace yli::ontology
             }
 
             Model(const Model&) = delete;            // Delete copy constructor.
-            Model &operator=(const Model&) = delete; // Delete copy assignment.
+            yli::ontology::Model& operator=(const Model&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Model();

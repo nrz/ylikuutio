@@ -57,7 +57,7 @@ namespace yli::ontology
             }
 
             ChunkMaster(const ChunkMaster&) = delete;            // Delete copy constructor.
-            ChunkMaster &operator=(const ChunkMaster&) = delete; // Delete copy assignment.
+            yli::ontology::ChunkMaster& operator=(const ChunkMaster&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~ChunkMaster();

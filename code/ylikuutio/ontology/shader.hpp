@@ -104,7 +104,7 @@ namespace yli::ontology
             }
 
             Shader(const Shader&) = delete;            // Delete copy constructor.
-            Shader &operator=(const Shader&) = delete; // Delete copy assignment.
+            yli::ontology::Shader& operator=(const Shader&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Shader();

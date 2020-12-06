@@ -144,7 +144,7 @@ namespace yli::ontology
             }
 
             VectorFont(const VectorFont&) = delete;            // Delete copy constructor.
-            VectorFont &operator=(const VectorFont&) = delete; // Delete copy assignment.
+            yli::ontology::VectorFont& operator=(const VectorFont&) = delete; // Delete copy assignment.
 
             // destructor.
             // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.

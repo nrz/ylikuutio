@@ -61,7 +61,7 @@ namespace yli::ontology
             }
 
             Holobiont(const Holobiont&) = delete;            // Delete copy constructor.
-            Holobiont &operator=(const Holobiont&) = delete; // Delete copy assignment.
+            yli::ontology::Holobiont& operator=(const Holobiont&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Holobiont();

@@ -55,7 +55,7 @@ namespace yli::ontology
             }
 
             Biont(const Biont&) = delete;            // Delete copy constructor.
-            Biont &operator=(const Biont&) = delete; // Delete copy assignment.
+            yli::ontology::Biont& operator=(const Biont&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Biont();

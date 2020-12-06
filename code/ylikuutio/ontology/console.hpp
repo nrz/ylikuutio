@@ -160,7 +160,7 @@ namespace yli::ontology
             }
 
             Console(const Console&) = delete;            // Delete copy constructor.
-            Console &operator=(const Console&) = delete; // Delete copy assignment.
+            yli::ontology::Console& operator=(const Console&) = delete; // Delete copy assignment.
 
             // destructor.
             ~Console();

@@ -96,7 +96,7 @@ namespace yli::ontology
             }
 
             Glyph(const Glyph&) = delete;            // Delete copy constructor.
-            Glyph &operator=(const Glyph&) = delete; // Delete copy assignment.
+            yli::ontology::Glyph& operator=(const Glyph&) = delete; // Delete copy assignment.
 
             // this method renders all `Object`s of this `Glyph`.
             void render() override;

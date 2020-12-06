@@ -85,7 +85,7 @@ namespace yli::ontology
             }
 
             Symbiosis(const Symbiosis&) = delete;            // Delete copy constructor.
-            Symbiosis &operator=(const Symbiosis&) = delete; // Delete copy assignment.
+            yli::ontology::Symbiosis& operator=(const Symbiosis&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Symbiosis();
