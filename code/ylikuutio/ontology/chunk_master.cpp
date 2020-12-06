@@ -70,7 +70,7 @@ namespace yli::ontology
         if (this->should_be_rendered)
         {
             // render `ChunkMaster` by calling `render()` function of each `Chunk`.
-            yli::ontology::render_children<ontology::Entity*>(this->parent_of_chunks.child_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_chunks.child_pointer_vector);
         }
 
         this->postrender();
