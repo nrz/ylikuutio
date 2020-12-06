@@ -66,7 +66,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_window_size(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::shared_ptr<yli::data::AnyValue> Variable::activate_window_width(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
@@ -81,7 +81,34 @@ namespace yli::ontology
             return nullptr;
         }
 
-        uint32_t window_width = std::get<uint32_t>(window_width_any_value->data);
+        const uint32_t window_width = std::get<uint32_t>(window_width_any_value->data);
+
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        universe->set_window_width(window_width);
+
+        const uint32_t window_height = universe->get_window_height();
+
+        if (window_width <= std::numeric_limits<int>::max() &&
+                window_height <= std::numeric_limits<int>::max())
+        {
+            yli::sdl::set_window_size(universe->get_window(), static_cast<int>(window_width), static_cast<int>(window_height));
+        }
+
+        return nullptr;
+    }
+
+    std::shared_ptr<yli::data::AnyValue> Variable::activate_window_height(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    {
+        if (entity == nullptr || variable == nullptr)
+        {
+            return nullptr;
+        }
 
         // window height.
         std::shared_ptr<yli::data::AnyValue> window_height_any_value = variable->variable_value;
@@ -91,7 +118,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        uint32_t window_height = std::get<uint32_t>(window_height_any_value->data);
+        const uint32_t window_height = std::get<uint32_t>(window_height_any_value->data);
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
@@ -100,19 +127,20 @@ namespace yli::ontology
             return nullptr;
         }
 
+        universe->set_window_height(window_height);
+
+        const uint32_t window_width = universe->get_window_width();
+
         if (window_width <= std::numeric_limits<int>::max() &&
                 window_height <= std::numeric_limits<int>::max())
         {
             yli::sdl::set_window_size(universe->get_window(), static_cast<int>(window_width), static_cast<int>(window_height));
         }
 
-        universe->set_window_width(window_width);
-        universe->set_window_height(window_height);
-
         return nullptr;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_framebuffer_size(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::shared_ptr<yli::data::AnyValue> Variable::activate_framebuffer_width(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
@@ -127,17 +155,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        uint32_t framebuffer_width = std::get<uint32_t>(framebuffer_width_any_value->data);
-
-        // framebuffer height.
-        std::shared_ptr<yli::data::AnyValue> framebuffer_height_any_value = variable->variable_value;
-
-        if (framebuffer_height_any_value == nullptr || !std::holds_alternative<uint32_t>(framebuffer_height_any_value->data))
-        {
-            return nullptr;
-        }
-
-        uint32_t framebuffer_height = std::get<uint32_t>(framebuffer_height_any_value->data);
+        const uint32_t framebuffer_width = std::get<uint32_t>(framebuffer_width_any_value->data);
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
@@ -147,6 +165,34 @@ namespace yli::ontology
         }
 
         universe->set_framebuffer_width(framebuffer_width);
+
+        return nullptr;
+    }
+
+    std::shared_ptr<yli::data::AnyValue> Variable::activate_framebuffer_height(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    {
+        if (entity == nullptr || variable == nullptr)
+        {
+            return nullptr;
+        }
+
+        // framebuffer height.
+        std::shared_ptr<yli::data::AnyValue> framebuffer_height_any_value = variable->variable_value;
+
+        if (framebuffer_height_any_value == nullptr || !std::holds_alternative<uint32_t>(framebuffer_height_any_value->data))
+        {
+            return nullptr;
+        }
+
+        const uint32_t framebuffer_height = std::get<uint32_t>(framebuffer_height_any_value->data);
+
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
         universe->set_framebuffer_height(framebuffer_height);
 
         return nullptr;
@@ -175,7 +221,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        float red = std::get<float>(red_any_value->data);
+        const float red = std::get<float>(red_any_value->data);
 
         // green.
         std::shared_ptr<yli::data::AnyValue> green_any_value = entity->get("green")->variable_value;
@@ -185,7 +231,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        float green = std::get<float>(green_any_value->data);
+        const float green = std::get<float>(green_any_value->data);
 
         // blue.
         std::shared_ptr<yli::data::AnyValue> blue_any_value = entity->get("blue")->variable_value;
@@ -195,7 +241,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        float blue = std::get<float>(blue_any_value->data);
+        const float blue = std::get<float>(blue_any_value->data);
 
         // alpha.
         std::shared_ptr<yli::data::AnyValue> alpha_any_value = entity->get("alpha")->variable_value;
@@ -205,7 +251,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        float alpha = std::get<float>(alpha_any_value->data);
+        const float alpha = std::get<float>(alpha_any_value->data);
 
         yli::opengl::set_background_color(red, green, blue, alpha);
 

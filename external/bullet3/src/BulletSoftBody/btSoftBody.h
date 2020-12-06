@@ -258,6 +258,12 @@ public:
 		Material* m_material;  // Material
 	};
 	/* Node			*/
+	struct RenderNode
+	{
+		btVector3 m_x;
+		btVector3 m_uv1;
+		btVector3 m_normal;
+	};
 	struct Node : Feature
 	{
 		btVector3 m_x;       // Position
@@ -290,6 +296,11 @@ public:
 
 		BT_DECLARE_ALIGNED_ALLOCATOR();
 	};
+	struct RenderFace
+	{
+		RenderNode* m_n[3];          // Node pointers
+	};
+
 	/* Face			*/
 	struct Face : Feature
 	{
@@ -775,9 +786,11 @@ public:
 	typedef btAlignedObjectArray<Cluster*> tClusterArray;
 	typedef btAlignedObjectArray<Note> tNoteArray;
 	typedef btAlignedObjectArray<Node> tNodeArray;
+	typedef btAlignedObjectArray< RenderNode> tRenderNodeArray;
 	typedef btAlignedObjectArray<btDbvtNode*> tLeafArray;
 	typedef btAlignedObjectArray<Link> tLinkArray;
 	typedef btAlignedObjectArray<Face> tFaceArray;
+	typedef btAlignedObjectArray<RenderFace> tRenderFaceArray;
 	typedef btAlignedObjectArray<Tetra> tTetraArray;
 	typedef btAlignedObjectArray<Anchor> tAnchorArray;
 	typedef btAlignedObjectArray<RContact> tRContactArray;
@@ -797,10 +810,10 @@ public:
 	btSoftBodyWorldInfo* m_worldInfo;  // World info
 	tNoteArray m_notes;                // Notes
 	tNodeArray m_nodes;                // Nodes
-	tNodeArray m_renderNodes;          // Nodes
+	tRenderNodeArray m_renderNodes;    // Render Nodes
 	tLinkArray m_links;                // Links
 	tFaceArray m_faces;                // Faces
-	tFaceArray m_renderFaces;          // Faces
+	tRenderFaceArray m_renderFaces;          // Faces
 	tTetraArray m_tetras;              // Tetras
 	btAlignedObjectArray<TetraScratch> m_tetraScratches;
 	btAlignedObjectArray<TetraScratch> m_tetraScratchesTn;
@@ -827,6 +840,7 @@ public:
 	btAlignedObjectArray<btVector3> m_quads;  // quadrature points for collision detection
 	btScalar m_repulsionStiffness;
 	btScalar m_gravityFactor;
+	bool m_cacheBarycenter;
 	btAlignedObjectArray<btVector3> m_X;  // initial positions
 
 	btAlignedObjectArray<btVector4> m_renderNodesInterpolationWeights;
@@ -1176,6 +1190,7 @@ public:
 	void dampClusters();
 	void setSpringStiffness(btScalar k);
 	void setGravityFactor(btScalar gravFactor);
+	void setCacheBarycenter(bool cacheBarycenter);
 	void initializeDmInverse();
 	void updateDeformation();
 	void advanceDeformation();

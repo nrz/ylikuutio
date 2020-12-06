@@ -117,3 +117,6 @@ https://pybullet.org/Bullet/phpBB3/viewtopic.php?t=7764
 
 About categories and how to implement logging, exceptions and continuations:
 https://www.youtube.com/watch?v=eCUfzvz7Z20
+
+About Entity-Component System (ECS):
+https://www.gamedev.net/articles/programming/general-and-gameplay-programming/the-entity-component-system-c-game-design-pattern-part-1-r4803/

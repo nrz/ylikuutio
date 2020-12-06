@@ -33,7 +33,7 @@
 
 namespace yli::load
 {
-    uint32_t load_shaders(const char* const vertex_shader_filename, const char* const fragment_shader_filename)
+    GLuint load_shaders(const char* const vertex_shader_filename, const char* const fragment_shader_filename)
     {
         // Create the shaders.
         const uint32_t vertex_shaderID = glCreateShader(GL_VERTEX_SHADER);
@@ -86,7 +86,7 @@ namespace yli::load
 
         // Link the program.
         std::cout << "Linking program\n";
-        const uint32_t program_id = glCreateProgram();
+        const GLuint program_id = glCreateProgram();
         glAttachShader(program_id, vertex_shaderID);
         glAttachShader(program_id, fragment_shaderID);
         glLinkProgram(program_id);

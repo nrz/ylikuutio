@@ -21,6 +21,7 @@
 #include "movable.hpp"
 #include "object_type.hpp"
 #include "object_struct.hpp"
+#include "render_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -78,7 +79,7 @@ namespace yli::ontology
             }
 
             Object(const Object&) = delete;            // Delete copy constructor.
-            Object &operator=(const Object&) = delete; // Delete copy assignment.
+            yli::ontology::Object& operator=(const Object&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Object();
@@ -105,12 +106,15 @@ namespace yli::ontology
 
             // Public callbacks end here.
 
+            template<class T1, class T2>
+                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
             // this method renders this `Object`.
-            void render() override;
+            void render();
             void render_this_object(yli::ontology::Shader* const shader_pointer);
 
             yli::ontology::Glyph* glyph { nullptr }; // pointer to the `Glyph` (not a parent!).

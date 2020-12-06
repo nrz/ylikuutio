@@ -40,7 +40,7 @@ namespace yli::audio
             AudioMaster(yli::ontology::Universe* const universe);
 
             AudioMaster(const AudioMaster&) = delete;            // Delete copy constructor.
-            AudioMaster &operator=(const AudioMaster&) = delete; // Delete copy assignment.
+            yli::audio::AudioMaster& operator=(const AudioMaster&) = delete; // Delete copy assignment.
 
             // destructor.
             ~AudioMaster();

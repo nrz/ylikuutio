@@ -51,10 +51,10 @@ namespace yli::load
             std::vector<glm::vec3>& indexed_vertices,
             std::vector<glm::vec2>& indexed_uvs,
             std::vector<glm::vec3>& indexed_normals,
-            uint32_t* vertexbuffer,
-            uint32_t* uvbuffer,
-            uint32_t* normalbuffer,
-            uint32_t* elementbuffer,
+            GLuint* vertexbuffer,
+            GLuint* uvbuffer,
+            GLuint* normalbuffer,
+            GLuint* elementbuffer,
             bool& opengl_in_use,
             const bool is_debug_mode)
     {

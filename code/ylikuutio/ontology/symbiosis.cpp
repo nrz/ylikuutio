@@ -19,6 +19,7 @@
 #include "shader.hpp"
 #include "symbiont_material.hpp"
 #include "symbiont_species.hpp"
+#include "holobiont.hpp"
 #include "material_struct.hpp"
 #include "species_struct.hpp"
 #include "render_templates.hpp"
@@ -119,7 +120,7 @@ namespace yli::ontology
             this->prerender();
 
             // render this `Symbiosis` by calling `render()` function of each `Holobiont`.
-            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_holobionts.child_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Holobiont*>(this->parent_of_holobionts.child_pointer_vector);
 
             this->postrender();
         }

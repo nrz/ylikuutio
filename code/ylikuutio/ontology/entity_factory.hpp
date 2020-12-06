@@ -67,7 +67,7 @@ namespace yli::ontology
             EntityFactory(yli::ontology::Universe* const universe);
 
             EntityFactory(const EntityFactory&) = delete;            // Delete copy constructor.
-            EntityFactory &operator=(const EntityFactory&) = delete; // Delete copy assignment.
+            yli::ontology::EntityFactory& operator=(const EntityFactory&) = delete; // Delete copy assignment.
 
             // destructor.
             ~EntityFactory();

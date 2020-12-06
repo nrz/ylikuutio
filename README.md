@@ -30,6 +30,12 @@ Android support is a work in progress.
 macOS and iOS will be supported in the future.
 OpenGL 3.0 or newer is required.
 
+## Ylikuutio 0.0.8 screenshots
+![View of Helsinki with cats and Ylikuutio console](https://github.com/nrz/ylikuutio/blob/master/screenshots/helsinki_cats_2020-10-08.png?raw=true)
+![Turbo polizei and cats](https://github.com/nrz/ylikuutio/blob/master/screenshots/turbo_polizei_2020-10-08.png?raw=true)
+![Cats and debug console commands](https://github.com/nrz/ylikuutio/blob/master/screenshots/cats_2020-10-08.png?raw=true)
+![Turbo polizei and debug console commands](https://github.com/nrz/ylikuutio/blob/master/screenshots/turbo_polizei_info_2020-10-08.png?raw=true)
+
 ## Articles
 In [Skrolli 2018.4](https://skrolli.fi/numerot/2018-4/) there is an article
 "Pelimoottori harrastusprojektina" (in Finnish, translation: "Game engine
@@ -53,7 +59,7 @@ Ylikuutio repository in GitHub has 2 branches: `master` & `coverity_scan`.
 `coverity_scan` is for Synopsys© Coverity Scan© analysis tool which is run
 through Travis CI.
 
-In Linux it's simple.
+In Debian or Ubuntu it's simple.
 
 First, install all the necessary compilers, tools and libs. You may use
 your favorite package manager such as apt, aptitude, apt-get, yum etc.
@@ -107,7 +113,7 @@ To cross compile from Linux to Windows:
 
 Crosscompiling from Linux to Windows fails to compile tests.
 This is a known bug in Google Test. Just run `make` *again* if
-compiling ends before you get `nirvi.exe`, `tulevaisuus.exe`,
+compiling ends before you get `hirvi.exe`, `tulevaisuus.exe`,
 `ajokki.exe`, `gpgpu_test.exe`, and `yli_edit.exe`.
 
 By default compiling tests is disabled when crosscompiling from Linux
@@ -125,6 +131,10 @@ However, cross compiling from Linux to Android does not work yet!
 
 Compiling in Visual Studio is more difficult. The recommended way to
 get a binary for Windows is to cross compile from Linux to Windows.
+
+You may build Ylikuutio also in a Podman container. See [instructions](https://github.com/nrz/ylikuutio/blob/master/container-build/README.md). Building tested in CentOS 8.
+The built executable is not self-contained so you still need the dependencies.
+Support for self-contained executables may be added in the future.
 
 Ylikuutio repository contains the following games/demos:
 
@@ -434,6 +444,7 @@ A: YliLisp scripting language is a work in progress.
 ## Contributions and bugfixes
 * Antti Nuortimo (most of Ylikuutio code)
 * Mikko Rasa (bugfixes)
+* Ronja Koistinen (support for building in a Podman container)
 
 ## Contact info
 (found bugs and suggestions are very welcome!)

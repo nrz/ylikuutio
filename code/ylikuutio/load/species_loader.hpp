@@ -20,6 +20,9 @@
 
 #include "species_loader_struct.hpp"
 
+// Include GLEW
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -41,10 +44,10 @@ namespace yli::load
             std::vector<glm::vec3>& indexed_vertices,
             std::vector<glm::vec2>& indexed_uvs,
             std::vector<glm::vec3>& indexed_normals,
-            uint32_t* vertexbuffer,
-            uint32_t* uvbuffer,
-            uint32_t* normalbuffer,
-            uint32_t* elementbuffer,
+            GLuint* vertexbuffer,
+            GLuint* uvbuffer,
+            GLuint* normalbuffer,
+            GLuint* elementbuffer,
             bool& opengl_in_use,
             const bool is_debug_mode);
 }

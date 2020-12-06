@@ -18,12 +18,15 @@
 #ifndef __YLIKUUTIO_LOAD_SHADER_LOADER_HPP_INCLUDED
 #define __YLIKUUTIO_LOAD_SHADER_LOADER_HPP_INCLUDED
 
+// Include GLEW
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 
 namespace yli::load
 {
-    uint32_t load_shaders(const char* const vertex_shader_filename, const char* const fragment_shader_filename);
+    GLuint load_shaders(const char* const vertex_shader_filename, const char* const fragment_shader_filename);
 }
 
 #endif

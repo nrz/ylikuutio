@@ -95,7 +95,6 @@ namespace yli::ontology
                 parent_of_lisp_functions(this)
             {
                 // constructor.
-                this->should_be_rendered = true;
                 this->cursor_it = this->current_input.begin();
                 this->cursor_index = 0;
                 this->in_history = false;
@@ -161,7 +160,7 @@ namespace yli::ontology
             }
 
             Console(const Console&) = delete;            // Delete copy constructor.
-            Console &operator=(const Console&) = delete; // Delete copy assignment.
+            yli::ontology::Console& operator=(const Console&) = delete; // Delete copy assignment.
 
             // destructor.
             ~Console();
@@ -178,7 +177,7 @@ namespace yli::ontology
             void set_console_right_x(const uint32_t console_right_x);
             void print_text(const std::string& text);
             void print_help();
-            void render() override;
+            void render();
 
             bool enter_console();
             bool exit_console();
@@ -406,8 +405,6 @@ namespace yli::ontology
                     yli::ontology::Console* const console);
 
             // Public callbacks end here.
-
-            bool should_be_rendered;
 
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::ParentModule parent_of_lisp_functions;

@@ -24,12 +24,12 @@
 
 namespace yli::ontology
 {
-    template<class T1>
+    template<class T1, class T2>
         void render_children(const std::vector<T1>& child_pointer_vector)
         {
             for (std::size_t child_i = 0; child_i < child_pointer_vector.size(); child_i++)
             {
-                T1 child_pointer = static_cast<T1>(child_pointer_vector[child_i]);
+                T2 child_pointer = static_cast<T2>(child_pointer_vector[child_i]);
 
                 if (child_pointer != nullptr && child_pointer->should_be_rendered)
                 {

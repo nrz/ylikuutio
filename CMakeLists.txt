@@ -15,9 +15,6 @@ project(ylikuutio)
 # comment the following line to use `libsdl2-dev` shipped with Linux.
 set(COMPILE_SDL_FROM_SOURCE true)
 
-# comment the following line to disable unit tests with Google Test.
-# set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
-
 # uncomment the following line to disable updating of external projects.
 set(DISABLE_UPDATE_STEP true)
 
@@ -37,6 +34,15 @@ if(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # crosscompiling from Linux to Windows must compile SDL from source.
     # dynamic linking of SDL when crosscompiling from Linux to Windows is not supported.
     set(COMPILE_SDL_FROM_SOURCE true)
+
+    # Do not compile unit tests when crosscompiling on MinGW-w64 GCC.
+    set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    # Compile unit tests when compiling natively on GCC or Clang.
+    set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
+else()
+    # Do not compile unit tests when compiling natively on Visual Studio.
+    set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
 endif()
 
 # When doing a regular build in Linux, SDL can be linked either statically or dynamically.

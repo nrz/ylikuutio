@@ -18,6 +18,7 @@
 #include "symbiont_material.hpp"
 #include "universe.hpp"
 #include "symbiosis.hpp"
+#include "symbiont_species.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -57,7 +58,7 @@ namespace yli::ontology
         yli::opengl::uniform_1i(this->opengl_texture_id, 0);
 
         // render this `SymbiontMaterial` by calling `render()` function of each `SymbiontSpecies`.
-        yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_species.child_pointer_vector);
+        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::SymbiontSpecies*>(this->parent_of_species.child_pointer_vector);
 
         this->postrender();
     }

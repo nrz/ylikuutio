@@ -21,6 +21,7 @@
 #include "movable.hpp"
 #include "parent_module.hpp"
 #include "holobiont_struct.hpp"
+#include "render_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -61,7 +62,7 @@ namespace yli::ontology
             }
 
             Holobiont(const Holobiont&) = delete;            // Delete copy constructor.
-            Holobiont &operator=(const Holobiont&) = delete; // Delete copy assignment.
+            yli::ontology::Holobiont& operator=(const Holobiont&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Holobiont();
@@ -90,6 +91,9 @@ namespace yli::ontology
 
             // Public callbacks end here.
 
+            template<class T1, class T2>
+                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+
             yli::ontology::ParentModule parent_of_bionts;
 
         private:
@@ -97,7 +101,7 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
             // this method renders this `Holobiont`.
-            void render() override;
+            void render();
 
             void create_bionts();
     };

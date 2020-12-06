@@ -87,7 +87,7 @@ namespace yli::ontology
             LispFunctionOverload(
                     yli::ontology::Universe* const universe,
                     yli::ontology::ParentModule* const parent_module,
-                    std::function<std::shared_ptr<yli::data::AnyValue>(Types... types)> callback)
+                    std::function<std::shared_ptr<yli::data::AnyValue>(Types...)> callback)
                 : GenericLispFunctionOverload(universe, parent_module),
                 callback(callback)
             {
@@ -98,7 +98,7 @@ namespace yli::ontology
             }
 
             LispFunctionOverload(const LispFunctionOverload&) = delete;            // Delete copy constructor.
-            LispFunctionOverload &operator=(const LispFunctionOverload&) = delete; // Delete copy assignment.
+            LispFunctionOverload& operator=(const LispFunctionOverload&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~LispFunctionOverload()

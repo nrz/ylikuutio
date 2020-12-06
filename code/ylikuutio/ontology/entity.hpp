@@ -60,13 +60,12 @@ namespace yli::ontology
             Entity(yli::ontology::Universe* const universe, const yli::ontology::EntityStruct& entity_struct);
 
             Entity(const Entity&) = delete;            // Delete copy constructor.
-            Entity &operator=(const Entity&) = delete; // Delete copy assignment.
+            yli::ontology::Entity& operator=(const Entity&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Entity();
 
             virtual void activate();
-            virtual void render();
 
             std::size_t get_childID() const;
             std::string get_type() const;

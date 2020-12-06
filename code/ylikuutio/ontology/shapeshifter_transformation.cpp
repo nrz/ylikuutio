@@ -18,6 +18,7 @@
 #include "shapeshifter_transformation.hpp"
 #include "entity.hpp"
 #include "material.hpp"
+#include "shapeshifter_sequence.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -123,7 +124,7 @@ namespace yli::ontology
     void ShapeshifterTransformation::render()
     {
         // Render this `ShapeshifterTransformation` by calling `render` function of each `ShapeshifterSequence`.
-        yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_shapeshifter_sequences.child_pointer_vector);
+        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::ShapeshifterSequence*>(this->parent_of_shapeshifter_sequences.child_pointer_vector);
     }
 
     yli::ontology::Entity* ShapeshifterTransformation::get_parent() const

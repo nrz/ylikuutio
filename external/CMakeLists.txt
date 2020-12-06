@@ -53,8 +53,8 @@ set(YLI_BULLET_DIRECTORIES
     bullet3/src/Bullet3Dynamics/
     bullet3/src/Bullet3Dynamics/ConstraintSolver/
     bullet3/src/Bullet3Dynamics/shared/
-    bullet3/src/LinearMath/
-    bullet3/src/LinearMath/TaskScheduler/
+    # bullet3/src/LinearMath/
+    # bullet3/src/LinearMath/TaskScheduler/
     bullet3/src/Bullet3Collision/
     bullet3/src/Bullet3Collision/BroadPhaseCollision/
     bullet3/src/Bullet3Collision/BroadPhaseCollision/shared/

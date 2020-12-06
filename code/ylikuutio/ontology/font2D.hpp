@@ -126,7 +126,7 @@ namespace yli::ontology
             }
 
             Font2D(const Font2D&) = delete;            // Delete copy constructor.
-            Font2D &operator=(const Font2D&) = delete; // Delete copy assignment.
+            yli::ontology::Font2D& operator=(const Font2D&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Font2D();
@@ -140,7 +140,7 @@ namespace yli::ontology
 
             void prepare_to_print() const;
 
-            void render() override;
+            void render();
 
             void print_text2D(
                     const std::size_t x,
@@ -172,12 +172,12 @@ namespace yli::ontology
             std::string texture_filename;
             std::string font_texture_file_format;
 
-            uint32_t texture;                        // Texture containing the glyphs, returned by `load_common_texture`,
+            GLuint texture;                          // Texture containing the glyphs, returned by `load_common_texture`,
                                                      // (used for `glGenTextures` etc.).
 
-            uint32_t vertexbuffer;                   // Buffer containing the vertices.
-            uint32_t uvbuffer;                       // Buffer containing the UVs.
-            uint32_t program_id;                     // The `program_id` of the shader used to display the text, returned by `load_shaders`.
+            GLuint vertexbuffer;                     // Buffer containing the vertices.
+            GLuint uvbuffer;                         // Buffer containing the UVs.
+            GLuint program_id;                       // The `program_id` of the shader used to display the text, returned by `load_shaders`.
             GLint vertex_position_in_screenspace_id; // Location of the program's `vertex_position_screenspace` attribute.
             GLint vertex_uv_id;                      // Location of the program's `vertexUV` attribute.
             GLint text_2d_uniform_id;                // Location of the program's texture attribute.

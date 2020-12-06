@@ -45,6 +45,9 @@ namespace yli::opengl
     bool uniform_1i(const GLint location, const GLint v0);
     bool enable_vertex_attrib_array(const GLint attribute);
     bool disable_vertex_attrib_array(const GLint attribute);
+    void bind_gl_framebuffer(const GLuint framebuffer);
+    void bind_gl_read_framebuffer(const GLuint framebuffer);
+    void bind_gl_draw_framebuffer(const GLuint framebuffer);
     std::size_t get_n_color_channels(const GLenum format);
     std::size_t get_size_of_component(const GLenum type);
 

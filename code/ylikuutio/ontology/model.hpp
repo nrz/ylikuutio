@@ -79,7 +79,7 @@ namespace yli::ontology
             }
 
             Model(const Model&) = delete;            // Delete copy constructor.
-            Model &operator=(const Model&) = delete; // Delete copy assignment.
+            yli::ontology::Model& operator=(const Model&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Model();
@@ -96,10 +96,10 @@ namespace yli::ontology
             GLint get_vertex_uv_id() const;
             GLint get_vertex_normal_modelspace_id() const;
 
-            uint32_t get_vertexbuffer() const;
-            uint32_t get_uvbuffer() const;
-            uint32_t get_normalbuffer() const;
-            uint32_t get_elementbuffer() const;
+            GLuint get_vertexbuffer() const;
+            GLuint get_uvbuffer() const;
+            GLuint get_normalbuffer() const;
+            GLuint get_elementbuffer() const;
 
             void store_vertex_position_modelspaceID(const GLint vertex_position_modelspace_id);
             void store_vertexUVID(const GLint vertex_uv_id);
@@ -135,10 +135,10 @@ namespace yli::ontology
             std::vector<glm::vec2> indexed_uvs;
             std::vector<glm::vec3> indexed_normals;
 
-            uint32_t vertexbuffer;
-            uint32_t uvbuffer;
-            uint32_t normalbuffer;
-            uint32_t elementbuffer;
+            GLuint vertexbuffer;
+            GLuint uvbuffer;
+            GLuint normalbuffer;
+            GLuint elementbuffer;
 
             bool opengl_in_use;
 

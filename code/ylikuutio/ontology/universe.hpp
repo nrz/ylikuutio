@@ -31,6 +31,9 @@
 
 #include "SDL.h"
 
+// Include GLEW
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -375,7 +378,7 @@ namespace yli::ontology
                 // Variables related to the camera.
                 this->aspect_ratio = static_cast<float>(this->window_width) / static_cast<float>(this->window_height);
 
-                this->initialFoV   = 60.0f;
+                this->initial_fov  = 60.0f;
 
                 this->text_size = universe_struct.text_size;
                 this->font_size = universe_struct.font_size;
@@ -443,13 +446,15 @@ namespace yli::ontology
                         {
                             std::cerr << "SDL Window could not be created!\n";
                         }
+                        else
+                        {
+                            this->create_context();
+                            this->make_context_current();
 
-                        this->create_context();
-                        this->make_context_current();
-
-                        // Disable vertical sync.
-                        // TODO: add option to enable/disable vsync in the console.
-                        this->set_swap_interval(0);
+                            // Disable vertical sync.
+                            // TODO: add option to enable/disable vsync in the console.
+                            this->set_swap_interval(0);
+                        }
                     }
                 }
 
@@ -488,7 +493,7 @@ namespace yli::ontology
             }
 
             Universe(const Universe&) = delete;            // Delete copy constructor.
-            Universe &operator=(const Universe&) = delete; // Delete copy assignment.
+            yli::ontology::Universe& operator=(const Universe&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Universe();
@@ -506,7 +511,7 @@ namespace yli::ontology
             void act();
 
             // This method renders the active `Scene` of this `Universe`.
-            void render() override;
+            void render();
 
             // This method renders the active `Scene` of this `Universe`.
             void render_without_changing_depth_test();
@@ -615,7 +620,7 @@ namespace yli::ontology
             void set_view_matrix(const glm::mat4& view_matrix);
 
             float get_aspect_ratio() const;
-            float get_initialFoV() const;
+            float get_initial_fov() const;
 
             // Public callbacks.
 
@@ -792,8 +797,8 @@ namespace yli::ontology
             bool is_silent;
 
             // variables related to the framebuffer.
-            uint32_t framebuffer;
-            uint32_t texture;
+            GLuint framebuffer;
+            GLuint texture;
             uint32_t renderbuffer;
             bool is_framebuffer_initialized;
 
@@ -801,7 +806,7 @@ namespace yli::ontology
             glm::mat4 current_camera_projection_matrix;
             glm::mat4 current_camera_view_matrix;
             float aspect_ratio;    // At the moment all `Camera`s use the same aspect ratio.
-            float initialFoV;      // At the moment all `Camera`s use the same FoV.
+            float initial_fov;     // At the moment all `Camera`s use the same FoV.
 
             // variables related to the fonts and texts used.
             std::size_t text_size;

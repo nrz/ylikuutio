@@ -70,7 +70,7 @@ namespace yli::ontology
             }
 
             Text3D(const Text3D&) = delete;            // Delete copy constructor.
-            Text3D &operator=(const Text3D&) = delete; // Delete copy assignment.
+            yli::ontology::Text3D& operator=(const Text3D&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Text3D();

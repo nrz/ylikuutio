@@ -25,6 +25,7 @@
 #include "species_or_glyph.hpp"
 #include "symbiont_material.hpp"
 #include "species_struct.hpp"
+#include "render_templates.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 
 // Include GLEW
@@ -138,10 +139,13 @@ namespace yli::ontology
             }
 
             SymbiontSpecies(const SymbiontSpecies&) = delete;            // Delete copy constructor.
-            SymbiontSpecies &operator=(const SymbiontSpecies&) = delete; // Delete copy assignment.
+            yli::ontology::SymbiontSpecies& operator=(const SymbiontSpecies&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~SymbiontSpecies();
+
+            template<class T1, class T2>
+                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
         private:
             glm::vec3 light_position; // light position.
@@ -152,7 +156,7 @@ namespace yli::ontology
             void bind_to_parent();
 
             // this method renders all `Object`s of this `SymbiontSpecies`.
-            void render() override;
+            void render();
 
             std::vector<yli::ontology::Biont*> biont_pointer_vector;
             std::queue<std::size_t> free_biontID_queue;

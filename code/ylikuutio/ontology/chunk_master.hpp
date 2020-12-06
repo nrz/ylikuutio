@@ -22,6 +22,7 @@
 #include "parent_module.hpp"
 #include "material.hpp"
 #include "entity_struct.hpp"
+#include "render_templates.hpp"
 #include "get_content_callback.hpp"
 
 // Include standard headers
@@ -57,10 +58,13 @@ namespace yli::ontology
             }
 
             ChunkMaster(const ChunkMaster&) = delete;            // Delete copy constructor.
-            ChunkMaster &operator=(const ChunkMaster&) = delete; // Delete copy assignment.
+            yli::ontology::ChunkMaster& operator=(const ChunkMaster&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~ChunkMaster();
+
+            template<class T1, class T2>
+                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
             yli::ontology::ParentModule parent_of_chunks;
 
@@ -68,7 +72,7 @@ namespace yli::ontology
             void bind_to_parent();
 
             // this method renders all `Chunk`s bound to this `ChunkMaster`.
-            void render() override;
+            void render();
 
             std::size_t childID;              // `ChunkMaster` ID, returned by `yli::ontology::Material->get_chunk_masterID()`.
 

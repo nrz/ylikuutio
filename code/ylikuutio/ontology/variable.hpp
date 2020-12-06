@@ -77,7 +77,7 @@ namespace yli::ontology
             }
 
             Variable(const Variable&) = delete;            // Delete copy constructor.
-            Variable &operator=(const Variable&) = delete; // Delete copy assignment.
+            yli::ontology::Variable& operator=(const Variable&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Variable();
@@ -116,8 +116,10 @@ namespace yli::ontology
 
             static std::shared_ptr<yli::data::AnyValue> activate_planet_radius(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
 
-            static std::shared_ptr<yli::data::AnyValue> activate_window_size(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-            static std::shared_ptr<yli::data::AnyValue> activate_framebuffer_size(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::shared_ptr<yli::data::AnyValue> activate_window_width(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::shared_ptr<yli::data::AnyValue> activate_window_height(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::shared_ptr<yli::data::AnyValue> activate_framebuffer_width(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::shared_ptr<yli::data::AnyValue> activate_framebuffer_height(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
             static std::shared_ptr<yli::data::AnyValue> activate_background_color(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
 
             static std::shared_ptr<yli::data::AnyValue> activate_wireframe(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
