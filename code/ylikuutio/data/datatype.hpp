@@ -91,6 +91,18 @@ namespace yli::data
         CONST_HOLOBIONT_POINTER,
         BIONT_POINTER,
         CONST_BIONT_POINTER,
+        // `yli::ontology` datatypes, 'shapeshifter' path.
+        SHAPESHIFTER_TRANSFORMATION_POINTER,
+        CONST_SHAPESHIFTER_TRANSFORMATION_POINTER,
+        SHAPESHIFTER_SEQUENCE_POINTER,
+        CONST_SHAPESHIFTER_SEQUENCE_POINTER,
+        SHAPESHIFTER_FORM_POINTER,
+        CONST_SHAPESHIFTER_FORM_POINTER,
+        // `yli::ontology` datatypes, 'voxel' path.
+        CHUNK_MASTER_POINTER,
+        CONST_CHUNK_MASTER_POINTER,
+        CHUNK_POINTER,
+        CONST_CHUNK_POINTER,
         // `yli::ontology` datatypes, 'text 2D' path.
         FONT2D_POINTER,
         CONST_FONT2D_POINTER,
@@ -109,6 +121,8 @@ namespace yli::data
         // `yli::ontology` datatypes, 'compute' path.
         COMPUTETASK_POINTER,
         CONST_COMPUTETASK_POINTER,
+        FRAMEBUFFER_MATERIAL_POINTER,
+        CONST_FRAMEBUFFER_MATERIAL_POINTER,
         // `std::shared_ptr` objects.
         ANY_VALUE_SHARED_PTR,
         ANY_STRUCT_SHARED_PTR,

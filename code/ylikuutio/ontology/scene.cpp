@@ -216,7 +216,7 @@ namespace yli::ontology
             this->prerender();
 
             // render this `Scene` by calling `render()` function of each `Shader`.
-            yli::ontology::render_children<yli::ontology::Shader*>(this->shader_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Shader*, yli::ontology::Shader*>(this->shader_pointer_vector);
 
             this->postrender();
         }

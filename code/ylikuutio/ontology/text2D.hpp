@@ -63,7 +63,6 @@ namespace yli::ontology
                 // Initialize class members with some dummy values.
                 this->vertexbuffer                      = 0;
                 this->uvbuffer                          = 0;
-                this->program_id                        = 0;
                 this->vertex_position_in_screenspace_id = 0;
                 this->vertex_uv_id                      = 0;
 
@@ -90,12 +89,12 @@ namespace yli::ontology
             }
 
             Text2D(const Text2D&) = delete;            // Delete copy constructor.
-            Text2D &operator=(const Text2D&) = delete; // Delete copy assignment.
+            yli::ontology::Text2D& operator=(const Text2D&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Text2D();
 
-            void render() override;
+            void render();
 
             yli::ontology::Entity* get_parent() const override;
 
@@ -107,9 +106,8 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            uint32_t vertexbuffer;                   // Buffer containing the vertices
-            uint32_t uvbuffer;                       // Buffer containing the UVs
-            uint32_t program_id;                     // The `program_id` of the shader used to display the text, returned by `load_shaders`.
+            GLuint vertexbuffer;                     // Buffer containing the vertices
+            GLuint uvbuffer;                         // Buffer containing the UVs
             GLint vertex_position_in_screenspace_id; // Location of the program's `vertex_position_screenspace` attribute.
             GLint vertex_uv_id;                      // Location of the program's `vertexUV` attribute.
 

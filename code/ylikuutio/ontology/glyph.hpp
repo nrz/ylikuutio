@@ -22,6 +22,7 @@
 #include "model.hpp"
 #include "glyph_struct.hpp"
 #include "gl_attrib_locations.hpp"
+#include "render_templates.hpp"
 #include "code/ylikuutio/triangulation/triangulate_polygons_struct.hpp"
 #include "code/ylikuutio/triangulation/polygon_triangulation.hpp"
 
@@ -54,6 +55,8 @@ namespace yli::ontology
             const char* get_unicode_char_pointer() const;
 
             friend class VectorFont;
+            template<class T1, class T2>
+                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
         private:
             Glyph(const yli::ontology::GlyphStruct& glyph_struct, yli::ontology::ParentModule* const parent_module)
@@ -96,10 +99,10 @@ namespace yli::ontology
             }
 
             Glyph(const Glyph&) = delete;            // Delete copy constructor.
-            Glyph &operator=(const Glyph&) = delete; // Delete copy assignment.
+            yli::ontology::Glyph& operator=(const Glyph&) = delete; // Delete copy assignment.
 
             // this method renders all `Object`s of this `Glyph`.
-            void render() override;
+            void render();
 
             std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
             const char* glyph_name_pointer;    // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.

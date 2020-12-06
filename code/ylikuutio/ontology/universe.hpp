@@ -31,6 +31,9 @@
 
 #include "SDL.h"
 
+// Include GLEW
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -443,13 +446,15 @@ namespace yli::ontology
                         {
                             std::cerr << "SDL Window could not be created!\n";
                         }
+                        else
+                        {
+                            this->create_context();
+                            this->make_context_current();
 
-                        this->create_context();
-                        this->make_context_current();
-
-                        // Disable vertical sync.
-                        // TODO: add option to enable/disable vsync in the console.
-                        this->set_swap_interval(0);
+                            // Disable vertical sync.
+                            // TODO: add option to enable/disable vsync in the console.
+                            this->set_swap_interval(0);
+                        }
                     }
                 }
 
@@ -488,7 +493,7 @@ namespace yli::ontology
             }
 
             Universe(const Universe&) = delete;            // Delete copy constructor.
-            Universe &operator=(const Universe&) = delete; // Delete copy assignment.
+            yli::ontology::Universe& operator=(const Universe&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Universe();
@@ -506,7 +511,7 @@ namespace yli::ontology
             void act();
 
             // This method renders the active `Scene` of this `Universe`.
-            void render() override;
+            void render();
 
             // This method renders the active `Scene` of this `Universe`.
             void render_without_changing_depth_test();
@@ -792,8 +797,8 @@ namespace yli::ontology
             bool is_silent;
 
             // variables related to the framebuffer.
-            uint32_t framebuffer;
-            uint32_t texture;
+            GLuint framebuffer;
+            GLuint texture;
             uint32_t renderbuffer;
             bool is_framebuffer_initialized;
 

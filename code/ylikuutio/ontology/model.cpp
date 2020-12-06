@@ -95,22 +95,22 @@ namespace yli::ontology
         return this->vertex_normal_modelspace_id;
     }
 
-    uint32_t Model::get_vertexbuffer() const
+    GLuint Model::get_vertexbuffer() const
     {
         return this->vertexbuffer;
     }
 
-    uint32_t Model::get_uvbuffer() const
+    GLuint Model::get_uvbuffer() const
     {
         return this->uvbuffer;
     }
 
-    uint32_t Model::get_normalbuffer() const
+    GLuint Model::get_normalbuffer() const
     {
         return this->normalbuffer;
     }
 
-    uint32_t Model::get_elementbuffer() const
+    GLuint Model::get_elementbuffer() const
     {
         return this->elementbuffer;
     }

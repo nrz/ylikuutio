@@ -334,7 +334,7 @@ namespace yli::ontology
         }
 
         // Bind the offscreen buffer.
-        glBindFramebuffer(GL_FRAMEBUFFER, universe->framebuffer);
+        yli::opengl::bind_gl_framebuffer(universe->framebuffer);
 
         if (!universe->is_framebuffer_initialized)
         {

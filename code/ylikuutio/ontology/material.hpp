@@ -24,6 +24,7 @@
 #include "universe.hpp"
 #include "shader.hpp"
 #include "material_struct.hpp"
+#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/load/common_texture_loader.hpp"
 
@@ -106,7 +107,7 @@ namespace yli::ontology
             }
 
             Material(const Material&) = delete;            // Delete copy constructor.
-            Material &operator=(const Material&) = delete; // Delete copy assignment.
+            yli::ontology::Material& operator=(const Material&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Material();
@@ -127,6 +128,9 @@ namespace yli::ontology
             std::size_t get_image_height() const;
             std::size_t get_image_size() const;
 
+            template<class T1, class T2>
+                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+
             yli::ontology::ChildModule child_of_shader_or_symbiosis;
             yli::ontology::ParentModule parent_of_species;
             yli::ontology::ParentModule parent_of_shapeshifter_transformations;
@@ -146,7 +150,7 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
             // This method renders all `Species` using this `Material`.
-            void render() override;
+            void render();
 
             bool is_symbiont_material;
 

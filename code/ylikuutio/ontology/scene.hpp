@@ -143,7 +143,7 @@ namespace yli::ontology
             }
 
             Scene(const Scene&) = delete;            // Delete copy constructor.
-            Scene &operator=(const Scene&) = delete; // Delete copy assignment.
+            yli::ontology::Scene& operator=(const Scene&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Scene();
@@ -159,7 +159,7 @@ namespace yli::ontology
             void activate() override;
 
             // this method renders all `Shader`s of this `Scene`.
-            void render() override;
+            void render();
 
             yli::ontology::Camera* get_active_camera() const;
             void set_active_camera(yli::ontology::Camera* camera);

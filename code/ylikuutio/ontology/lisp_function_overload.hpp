@@ -98,7 +98,7 @@ namespace yli::ontology
             }
 
             LispFunctionOverload(const LispFunctionOverload&) = delete;            // Delete copy constructor.
-            LispFunctionOverload &operator=(const LispFunctionOverload&) = delete; // Delete copy assignment.
+            LispFunctionOverload& operator=(const LispFunctionOverload&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~LispFunctionOverload()

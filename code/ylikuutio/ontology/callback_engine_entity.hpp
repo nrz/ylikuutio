@@ -50,7 +50,7 @@ namespace yli::ontology
             }
 
             CallbackEngineEntity(const CallbackEngineEntity&) = delete;            // Delete copy constructor.
-            CallbackEngineEntity &operator=(const CallbackEngineEntity&) = delete; // Delete copy assignment.
+            yli::ontology::CallbackEngineEntity& operator=(const CallbackEngineEntity&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~CallbackEngineEntity();

@@ -59,7 +59,7 @@ Ylikuutio repository in GitHub has 2 branches: `master` & `coverity_scan`.
 `coverity_scan` is for Synopsys© Coverity Scan© analysis tool which is run
 through Travis CI.
 
-In Linux it's simple.
+In Debian or Ubuntu it's simple.
 
 First, install all the necessary compilers, tools and libs. You may use
 your favorite package manager such as apt, aptitude, apt-get, yum etc.
@@ -131,6 +131,10 @@ However, cross compiling from Linux to Android does not work yet!
 
 Compiling in Visual Studio is more difficult. The recommended way to
 get a binary for Windows is to cross compile from Linux to Windows.
+
+You may build Ylikuutio also in a Podman container. See [instructions](https://github.com/nrz/ylikuutio/blob/master/container-build/README.md). Building tested in CentOS 8.
+The built executable is not self-contained so you still need the dependencies.
+Support for self-contained executables may be added in the future.
 
 Ylikuutio repository contains the following games/demos:
 

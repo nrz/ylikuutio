@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "vector_font.hpp"
+#include "glyph.hpp"
 #include "text3D.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
@@ -128,7 +129,7 @@ namespace yli::ontology
             this->prerender();
 
             // Render this `VectorFont` by calling `render()` function of each `Glyph`.
-            yli::ontology::render_children<yli::ontology::Entity*>(this->parent_of_glyphs.child_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Glyph*>(this->parent_of_glyphs.child_pointer_vector);
 
             this->postrender();
         }

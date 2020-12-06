@@ -22,11 +22,6 @@
 #define PI 3.14159265359f
 #endif
 
-#ifndef GLM_FORCE_RADIANS
-#define GLM_FORCE_RADIANS
-#define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
-#endif
-
 #include "entity.hpp"
 #include "parent_module.hpp"
 #include "universe.hpp"
@@ -109,7 +104,7 @@ namespace yli::ontology
             }
 
             Shader(const Shader&) = delete;            // Delete copy constructor.
-            Shader &operator=(const Shader&) = delete; // Delete copy assignment.
+            yli::ontology::Shader& operator=(const Shader&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Shader();
@@ -127,7 +122,7 @@ namespace yli::ontology
             friend yli::ontology::ShaderCompare;
             template<class T1>
                 friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
-            template<class T1>
+            template<class T1, class T2>
                 friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
             yli::ontology::ParentModule parent_of_compute_tasks;
@@ -141,11 +136,11 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
             // This method renders all materials using this `Shader`.
-            void render() override;
+            void render();
 
             yli::ontology::Scene* parent;         // Pointer to the `Scene`.
 
-            uint32_t program_id;                  // This `Shader`'s `program_id`, returned by `load_shaders`.
+            GLuint program_id;                    // This `Shader`'s `program_id`, returned by `load_shaders`.
 
             uint32_t matrixID;
             uint32_t view_matrixID;

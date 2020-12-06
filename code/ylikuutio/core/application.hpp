@@ -43,7 +43,7 @@ namespace yli::core
             }
 
             Application(const Application&) = delete;            // Delete copy constructor.
-            Application &operator=(const Application&) = delete; // Delete copy assignment.
+            yli::core::Application& operator=(const Application&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Application();

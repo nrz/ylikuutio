@@ -66,7 +66,7 @@ namespace yli::input
             InputMode(yli::input::InputMaster* const input_master);
 
             InputMode(const InputMode&) = delete;            // Delete copy constructor.
-            InputMode &operator=(const InputMode&) = delete; // Delete copy assignment.
+            yli::input::InputMode& operator=(const InputMode&) = delete; // Delete copy assignment.
 
             yli::input::InputMaster* parent;
             std::size_t childID;

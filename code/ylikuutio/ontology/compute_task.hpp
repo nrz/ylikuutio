@@ -24,6 +24,7 @@
 #include "compute_task_struct.hpp"
 #include "pre_iterate_callback.hpp"
 #include "post_iterate_callback.hpp"
+#include "render_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/load/common_texture_loader.hpp"
 #include "code/ylikuutio/load/csv_texture_loader.hpp"
@@ -155,7 +156,13 @@ namespace yli::ontology
                 // Load the source texture, just like in `yli::ontology::Material` constructor.
                 if (this->texture_file_format == "bmp" || this->texture_file_format == "BMP")
                 {
-                    if (!yli::load::load_common_texture(this->texture_filename, this->texture_width, this->texture_height, this->texture_size, this->source_texture, is_headless))
+                    if (!yli::load::load_common_texture(
+                                this->texture_filename,
+                                this->texture_width,
+                                this->texture_height,
+                                this->texture_size,
+                                this->source_texture,
+                                is_headless))
                     {
                         std::cerr << "ERROR: loading BMP texture failed!\n";
                     }
@@ -243,12 +250,15 @@ namespace yli::ontology
             }
 
             ComputeTask(const ComputeTask&) = delete;            // Delete copy constructor.
-            ComputeTask &operator=(const ComputeTask&) = delete; // Delete copy assignment.
+            yli::ontology::ComputeTask& operator=(const ComputeTask&) = delete; // Delete copy assignment.
 
             // destructor.
             ~ComputeTask();
 
             yli::ontology::Entity* get_parent() const override;
+
+            template<class T1, class T2>
+                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
         private:
             void bind_to_parent();
@@ -257,7 +267,7 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
             // This method renders this `ComputeTask`, that is, computes this task.
-            void render() override;
+            void render();
 
             void preiterate() const;
             void postiterate() const;
@@ -293,9 +303,9 @@ namespace yli::ontology
             std::size_t uvs_size;
 
             // variables related to the framebuffer.
-            uint32_t framebuffer;
-            uint32_t source_texture;
-            uint32_t target_texture;
+            GLuint framebuffer;
+            GLuint source_texture;
+            GLuint target_texture;
             GLint opengl_texture_id;         // Texture ID, returned by `glGetUniformLocation(this->parent->get_program_id(), "texture_sampler")`.
             bool is_texture_loaded;
             bool is_framebuffer_initialized;
@@ -307,8 +317,8 @@ namespace yli::ontology
             GLint screen_height_uniform_id;      // Location of the program's window height uniform.
             GLint iteration_i_uniform_id;        // Location of the program's iteration index uniform.
 
-            uint32_t vertexbuffer;
-            uint32_t uvbuffer;
+            GLuint vertexbuffer;
+            GLuint uvbuffer;
 
             GLenum format;
             GLenum internal_format;
