@@ -16,8 +16,8 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "shader.hpp"
-#include "scene.hpp"
 #include "universe.hpp"
+#include "scene.hpp"
 #include "material.hpp"
 #include "symbiosis.hpp"
 #include "compute_task.hpp"
