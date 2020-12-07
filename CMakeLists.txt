@@ -690,7 +690,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/shapeshifter_transformation.hpp
     code/ylikuutio/ontology/species.cpp
     code/ylikuutio/ontology/species.hpp
-    code/ylikuutio/ontology/species_or_glyph.hpp
     code/ylikuutio/ontology/species_struct.hpp
     code/ylikuutio/ontology/symbiont_material.cpp
     code/ylikuutio/ontology/symbiont_material.hpp
@@ -732,6 +731,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/opengl/ylikuutio_glew.hpp
 
     # render, in alphabetical order
+    code/ylikuutio/render/render_species_or_glyph.hpp
     code/ylikuutio/render/render_templates.hpp
 
     # sdl, in alphabetical order

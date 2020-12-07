@@ -16,10 +16,12 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "symbiont_species.hpp"
+#include "entity.hpp"
+#include "object.hpp"
 #include "symbiont_material.hpp"
 #include "biont.hpp"
-#include "species_or_glyph.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/render/render_species_or_glyph.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -58,7 +60,7 @@ namespace yli::ontology
             this->prerender();
 
             // render this `SymbiontSpecies`.
-            yli::ontology::render_species_or_glyph<yli::ontology::SymbiontSpecies*>(this);
+            yli::render::render_species_or_glyph<yli::ontology::SymbiontSpecies*, yli::ontology::Entity*, yli::ontology::Object*>(this);
 
             this->postrender();
         }

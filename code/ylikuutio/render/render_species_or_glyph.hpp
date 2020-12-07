@@ -15,20 +15,21 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_SPECIES_OR_GLYPH_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_SPECIES_OR_GLYPH_HPP_INCLUDED
+#ifndef __YLIKUUTIO_RENDER_RENDER_SPECIES_OR_GLYPH_HPP_INCLUDED
+#define __YLIKUUTIO_RENDER_RENDER_SPECIES_OR_GLYPH_HPP_INCLUDED
 
-#include "entity.hpp"
-#include "object.hpp"
+#include "render_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
-#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
-namespace yli::ontology
+namespace yli::render
 {
-    template<class T1>
+    // T1: `yli::ontology::Object*` or `yli::ontology::Glyph*`.
+    // T2: type of stored child pointers.
+    // T3: type in which to cast the child pointers.
+    template<class T1, class T2, class T3>
         void render_species_or_glyph(T1 const species_or_glyph_pointer)
         {
             // Compute the MVP matrix from keyboard and mouse input.
@@ -48,7 +49,7 @@ namespace yli::ontology
             yli::opengl::enable_vertex_attrib_array(species_or_glyph_pointer->vertex_normal_modelspace_id);
 
             // Render this `Species` or `Glyph` by calling `render()` function of each `Object`.
-            yli::render::render_children<yli::ontology::Entity*, yli::ontology::Object*>(species_or_glyph_pointer->parent_of_objects.child_pointer_vector);
+            yli::render::render_children<T2, T3>(species_or_glyph_pointer->parent_of_objects.child_pointer_vector);
 
             yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertex_position_modelspace_id);
             yli::opengl::disable_vertex_attrib_array(species_or_glyph_pointer->vertex_uv_id);

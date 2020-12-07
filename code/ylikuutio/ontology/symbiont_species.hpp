@@ -23,12 +23,12 @@
 #include "scene.hpp"
 #include "shader.hpp"
 #include "species.hpp"
-#include "species_or_glyph.hpp"
 #include "symbiont_material.hpp"
 #include "biont.hpp"
 #include "species_struct.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
+#include "code/ylikuutio/render/render_species_or_glyph.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -163,8 +163,8 @@ namespace yli::ontology
         private:
             glm::vec3 light_position; // light position.
 
-            template<class T1>
-                friend void yli::ontology::render_species_or_glyph(T1 species_or_glyph_pointer);
+            template<class T1, class T2, class T3>
+                friend void yli::render::render_species_or_glyph(T1 species_or_glyph_pointer);
 
             void bind_to_parent();
 

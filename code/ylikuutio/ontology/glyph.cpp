@@ -16,11 +16,12 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "glyph.hpp"
-#include "vector_font.hpp"
-#include "species_or_glyph.hpp"
+#include "entity.hpp"
 #include "object.hpp"
+#include "vector_font.hpp"
 #include "glyph_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/render/render_species_or_glyph.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -51,7 +52,7 @@ namespace yli::ontology
             this->prerender();
 
             // render this `Glyph`.
-            yli::ontology::render_species_or_glyph<yli::ontology::Glyph*>(this);
+            yli::render::render_species_or_glyph<yli::ontology::Glyph*, yli::ontology::Entity*, yli::ontology::Object*>(this);
 
             this->postrender();
         }
