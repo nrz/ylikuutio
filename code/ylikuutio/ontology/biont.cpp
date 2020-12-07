@@ -86,7 +86,7 @@ namespace yli::ontology
             return;
         }
 
-        symbiont_species->bind_biont(this);
+        symbiont_species->master_of_bionts.bind_apprentice(this);
     }
 
     Biont::~Biont()
@@ -107,7 +107,7 @@ namespace yli::ontology
         }
 
         // Set pointer to this `Biont` to `nullptr`.
-        symbiont_species->unbind_biont(this->childID);
+        symbiont_species->master_of_bionts.unbind_apprentice(this->childID);
     }
 
     void Biont::render()

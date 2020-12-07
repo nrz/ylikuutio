@@ -34,37 +34,6 @@ namespace yli::ontology
 {
     class Entity;
 
-    void SymbiontSpecies::bind_biont(yli::ontology::Biont* const biont)
-    {
-        // `SymbiontSpecies` is not the ontological parent of `Biont`,
-        // as `Holobiont` is the ontological parent of `Biont`.
-        // The relationship between `SymbiontSpecies` and `Biont`
-        // is purely only for rendering.
-        //
-        // To avoid potential problems in the future, follow this order:
-        // 1. bind `Biont` to its `Holobiont` parent.
-        // 2. bind `Biont` to its corresponding `SymbiontSpecies`.
-        // 3. do stuff
-        // 4. unbind `Biont` from its `SymbiontSpecies`.
-        // 5. unbind `Biont` from its `Holobiont` parent.
-        //
-        // get `childID` from `SymbiontSpecies` and set pointer to `biont`.
-        yli::hierarchy::bind_child_to_parent<yli::ontology::Biont*>(
-                biont,
-                this->biont_pointer_vector,
-                this->free_biontID_queue,
-                this->number_of_bionts);
-    }
-
-    void SymbiontSpecies::unbind_biont(const std::size_t childID)
-    {
-        yli::hierarchy::unbind_child_from_parent(
-                childID,
-                this->biont_pointer_vector,
-                this->free_biontID_queue,
-                this->number_of_bionts);
-    }
-
     SymbiontSpecies::~SymbiontSpecies()
     {
         // destructor.
@@ -75,6 +44,11 @@ namespace yli::ontology
             glDeleteBuffers(1, &this->normalbuffer);
             glDeleteBuffers(1, &this->elementbuffer);
         }
+    }
+
+    std::size_t SymbiontSpecies::get_number_of_apprentices() const
+    {
+        return this->master_of_bionts.get_number_of_apprentices(); // `Biont`s belonging to `SymbiontSpecies` are its apprentices.
     }
 
     void SymbiontSpecies::render()
