@@ -36,9 +36,6 @@ General
 * Always set sane default values for member variables of `struct`s
   passed as function parameters.
 * Prefer `typedef struct MyStruct` to repeating `struct MyStruct`.
-* Always directly `#include` everything what is needed in the compilation
-  unit. Do not expect any `#include`d file to `#include` anything.
-* Always use forward reference instead of `#include`, if possible.
 * Try to keep source code headers clear of code. Unfortunately,
   function templates and delegating constructors need to be in headers.
 * Avoid polluting the global namespace. Use your own `namespace`.
@@ -78,6 +75,24 @@ General
 * In code that processes Entities of more than 1 `yli::ontology` class, e.g. in `AnyValue`,
   process the different Entity classes everywhere in the canonical order defined in
   `yli::common::Datatype`, unless there is a reason to do otherwise, e.g. efficiency.
+
+Including files
+* Always directly `#include` everything what is needed in the compilation
+  unit. Do not expect any `#include`d file to `#include` anything.
+* Always use forward reference instead of `#include`, if possible.
+* In general, the `#include` order shall be as follows:
+  1a. The header of the implementation file (for implementation files).
+  1b. The headers of the inherited class files (for header files).
+  2. Other headers of the same `namespace`.
+  3. The headers of the other namespaces, in the alphabetical order of the namespaces.
+  4. Third-party libraries.
+  5. Standard libraries (in alphabetical order).
+* For `yli::ontology` files, the headers of same `namespace` shall be in
+  the following order:
+  2.1. `child_module.hpp`
+  2.2. `parent_module.hpp`
+  2.3. `master_module.hpp`
+  2.4. The rest `yli::ontology` headers in the canonical order (`yli::data::Datatype`).
 
 Naming
 * Use CamelCase for class names: `class MyClass;`.
