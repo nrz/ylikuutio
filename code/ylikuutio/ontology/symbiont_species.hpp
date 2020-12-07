@@ -45,6 +45,18 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
+// `SymbiontSpecies` is not the ontological parent of `Biont`,
+// as `Holobiont` is the ontological parent of `Biont`.
+// The relationship between `SymbiontSpecies` and `Biont`
+// is purely only for rendering.
+//
+// To avoid potential problems in the future, follow this order:
+// 1. bind `Biont` to its `Holobiont` parent.
+// 2. bind `Biont` to its corresponding `SymbiontSpecies`.
+// 3. do stuff
+// 4. unbind `Biont` from its `SymbiontSpecies`.
+// 5. unbind `Biont` from its `Holobiont` parent.
+
 namespace yli::ontology
 {
     class Entity;
