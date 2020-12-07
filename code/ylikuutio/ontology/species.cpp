@@ -106,15 +106,14 @@ namespace yli::ontology
 
     void Species::render()
     {
-        if (this->should_be_rendered && this->opengl_in_use)
+        if (!this->should_be_rendered)
         {
-            this->prerender();
-
-            // render this `Species`.
-            yli::render::render_species_or_glyph<yli::ontology::Species*, yli::ontology::Entity*, yli::ontology::Object*>(this);
-
-            this->postrender();
+            return;
         }
+
+        this->prerender();
+        yli::render::render_species_or_glyph<yli::ontology::Species*, yli::ontology::Entity*, yli::ontology::Object*>(this);
+        this->postrender();
     }
 
     std::size_t Species::get_x_step() const

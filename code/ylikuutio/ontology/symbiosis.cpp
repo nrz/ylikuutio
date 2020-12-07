@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "symbiosis.hpp"
+#include "universe.hpp"
 #include "shader.hpp"
 #include "symbiont_material.hpp"
 #include "symbiont_species.hpp"
@@ -26,6 +27,7 @@
 #include "code/ylikuutio/load/symbiosis_loader.hpp"
 #include "code/ylikuutio/load/symbiosis_loader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/render/render_master.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 #include <ofbx.h>
 
@@ -115,15 +117,21 @@ namespace yli::ontology
 
     void Symbiosis::render()
     {
-        if (this->should_be_rendered && this->opengl_in_use)
+        if (!this->should_be_rendered || !this->opengl_in_use || this->universe == nullptr)
         {
-            this->prerender();
-
-            // render this `Symbiosis` by calling `render()` function of each `Holobiont`.
-            yli::render::render_children<yli::ontology::Entity*, yli::ontology::Holobiont*>(this->parent_of_holobionts.child_pointer_vector);
-
-            this->postrender();
+            return;
         }
+
+        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+
+        if (render_master == nullptr)
+        {
+            return;
+        }
+
+        this->prerender();
+        render_master->render_holobionts(this->parent_of_holobionts.child_pointer_vector);
+        this->postrender();
     }
 
     std::size_t Symbiosis::get_number_of_symbiont_materials() const

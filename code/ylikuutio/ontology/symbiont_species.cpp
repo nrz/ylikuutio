@@ -17,10 +17,12 @@
 
 #include "symbiont_species.hpp"
 #include "entity.hpp"
+#include "universe.hpp"
 #include "object.hpp"
 #include "symbiont_material.hpp"
 #include "biont.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/render/render_master.hpp"
 #include "code/ylikuutio/render/render_species_or_glyph.hpp"
 
 // Include GLEW
@@ -55,15 +57,21 @@ namespace yli::ontology
 
     void SymbiontSpecies::render()
     {
-        if (this->opengl_in_use)
+        if (this->universe == nullptr)
         {
-            this->prerender();
-
-            // render this `SymbiontSpecies`.
-            yli::render::render_species_or_glyph<yli::ontology::SymbiontSpecies*, yli::ontology::Entity*, yli::ontology::Object*>(this);
-
-            this->postrender();
+            return;
         }
+
+        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+
+        if (render_master == nullptr)
+        {
+            return;
+        }
+
+        this->prerender();
+        render_master->render_symbiont_species(this);
+        this->postrender();
     }
 
     std::size_t SymbiontSpecies::get_indices_size() const

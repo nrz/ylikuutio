@@ -731,7 +731,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/opengl/ylikuutio_glew.hpp
 
     # render, in alphabetical order
+    code/ylikuutio/render/render_master.cpp
+    code/ylikuutio/render/render_master.hpp
     code/ylikuutio/render/render_species_or_glyph.hpp
+    code/ylikuutio/render/render_struct.hpp
     code/ylikuutio/render/render_templates.hpp
 
     # sdl, in alphabetical order
