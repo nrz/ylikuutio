@@ -16,14 +16,15 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "shader.hpp"
-#include "scene.hpp"
 #include "universe.hpp"
+#include "scene.hpp"
 #include "material.hpp"
 #include "symbiosis.hpp"
 #include "compute_task.hpp"
-#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -137,7 +138,14 @@ namespace yli::ontology
 
     void Shader::render()
     {
-        if (!this->should_be_rendered)
+        if (!this->should_be_rendered || this->universe == nullptr)
+        {
+            return;
+        }
+
+        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+
+        if (render_master == nullptr)
         {
             return;
         }
@@ -151,10 +159,9 @@ namespace yli::ontology
         // so this can be done once for all objects that use the same `program_id`.
         glUniformMatrix4fv(this->view_matrixID, 1, GL_FALSE, &this->universe->get_view_matrix()[0][0]);
 
-        // Render this `Shader` by calling `render()` function of each `ComputeTask`, each `Material`, and each `Symbiosis`.
-        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::ComputeTask*>(this->parent_of_compute_tasks.child_pointer_vector);
-        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Material*>(this->parent_of_materials.child_pointer_vector);
-        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Symbiosis*>(this->parent_of_symbioses.child_pointer_vector);
+        render_master->render_compute_tasks(this->parent_of_compute_tasks.child_pointer_vector);
+        render_master->render_materials(this->parent_of_materials.child_pointer_vector);
+        render_master->render_symbioses(this->parent_of_symbioses.child_pointer_vector);
 
         this->postrender();
     }

@@ -26,6 +26,7 @@
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
+#include "code/ylikuutio/render/render_master.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/time/time.hpp"
 
@@ -332,6 +333,7 @@ namespace yli::ontology
                 this->active_scene       = nullptr;
                 this->active_font2D      = nullptr;
                 this->active_console     = nullptr;
+                this->render_master      = nullptr;
                 this->audio_master       = nullptr;
 
                 this->background_red     = NAN;
@@ -479,6 +481,7 @@ namespace yli::ontology
                 }
                 else
                 {
+                    this->render_master = std::make_unique<yli::render::RenderMaster>(this);
                     this->input_master = std::make_unique<yli::input::InputMaster>(this);
                 }
 
@@ -535,6 +538,7 @@ namespace yli::ontology
 
             std::string eval_string(const std::string& my_string) const;
 
+            yli::render::RenderMaster* get_render_master() const;
             yli::audio::AudioMaster* get_audio_master() const;
             yli::input::InputMaster* get_input_master() const;
 
@@ -773,6 +777,7 @@ namespace yli::ontology
             yli::ontology::Font2D* active_font2D;
             yli::ontology::Console* active_console;
 
+            std::unique_ptr<yli::render::RenderMaster> render_master; // pointer to `RenderMaster`.
             std::unique_ptr<yli::audio::AudioMaster> audio_master; // pointer to `AudioMaster`.
 
             std::unique_ptr<yli::input::InputMaster> input_master; // pointer to `InputMaster`.

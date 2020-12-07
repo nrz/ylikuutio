@@ -16,10 +16,14 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "symbiont_species.hpp"
+#include "entity.hpp"
+#include "universe.hpp"
+#include "object.hpp"
 #include "symbiont_material.hpp"
 #include "biont.hpp"
-#include "species_or_glyph.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_species_or_glyph.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -34,37 +38,6 @@ namespace yli::ontology
 {
     class Entity;
 
-    void SymbiontSpecies::bind_biont(yli::ontology::Biont* const biont)
-    {
-        // `SymbiontSpecies` is not the ontological parent of `Biont`,
-        // as `Holobiont` is the ontological parent of `Biont`.
-        // The relationship between `SymbiontSpecies` and `Biont`
-        // is purely only for rendering.
-        //
-        // To avoid potential problems in the future, follow this order:
-        // 1. bind `Biont` to its `Holobiont` parent.
-        // 2. bind `Biont` to its corresponding `SymbiontSpecies`.
-        // 3. do stuff
-        // 4. unbind `Biont` from its `SymbiontSpecies`.
-        // 5. unbind `Biont` from its `Holobiont` parent.
-        //
-        // get `childID` from `SymbiontSpecies` and set pointer to `biont`.
-        yli::hierarchy::bind_child_to_parent<yli::ontology::Biont*>(
-                biont,
-                this->biont_pointer_vector,
-                this->free_biontID_queue,
-                this->number_of_bionts);
-    }
-
-    void SymbiontSpecies::unbind_biont(const std::size_t childID)
-    {
-        yli::hierarchy::unbind_child_from_parent(
-                childID,
-                this->biont_pointer_vector,
-                this->free_biontID_queue,
-                this->number_of_bionts);
-    }
-
     SymbiontSpecies::~SymbiontSpecies()
     {
         // destructor.
@@ -77,17 +50,28 @@ namespace yli::ontology
         }
     }
 
+    std::size_t SymbiontSpecies::get_number_of_apprentices() const
+    {
+        return this->master_of_bionts.get_number_of_apprentices(); // `Biont`s belonging to `SymbiontSpecies` are its apprentices.
+    }
+
     void SymbiontSpecies::render()
     {
-        if (this->opengl_in_use)
+        if (this->universe == nullptr)
         {
-            this->prerender();
-
-            // render this `SymbiontSpecies`.
-            yli::ontology::render_species_or_glyph<yli::ontology::SymbiontSpecies*>(this);
-
-            this->postrender();
+            return;
         }
+
+        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+
+        if (render_master == nullptr)
+        {
+            return;
+        }
+
+        this->prerender();
+        render_master->render_symbiont_species(this);
+        this->postrender();
     }
 
     std::size_t SymbiontSpecies::get_indices_size() const

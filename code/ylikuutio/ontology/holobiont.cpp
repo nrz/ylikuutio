@@ -17,13 +17,15 @@
 
 #include "holobiont.hpp"
 #include "entity.hpp"
+#include "universe.hpp"
 #include "symbiosis.hpp"
 #include "biont.hpp"
 #include "entity_factory.hpp"
 #include "holobiont_struct.hpp"
-#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -48,17 +50,21 @@ namespace yli::ontology
 
     void Holobiont::render()
     {
-        // render this `Holobiont`.
-
-        if (this->should_be_rendered)
+        if (!this->should_be_rendered || this->universe == nullptr)
         {
-            this->prerender();
-
-            // render this `Holobiont` by calling `render()` function of each `Biont`.
-            yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Biont*>(this->parent_of_bionts.child_pointer_vector);
-
-            this->postrender();
+            return;
         }
+
+        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+
+        if (render_master == nullptr)
+        {
+            return;
+        }
+
+        this->prerender();
+        render_master->render_bionts(this->parent_of_bionts.child_pointer_vector);
+        this->postrender();
     }
 
     void Holobiont::create_bionts()

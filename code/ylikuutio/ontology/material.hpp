@@ -24,9 +24,9 @@
 #include "universe.hpp"
 #include "shader.hpp"
 #include "material_struct.hpp"
-#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/load/common_texture_loader.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -129,7 +129,7 @@ namespace yli::ontology
             std::size_t get_image_size() const;
 
             template<class T1, class T2>
-                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
             yli::ontology::ChildModule child_of_shader_or_symbiosis;
             yli::ontology::ParentModule parent_of_species;

@@ -19,11 +19,12 @@
 #include "universe.hpp"
 #include "symbiosis.hpp"
 #include "symbiont_species.hpp"
-#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/load/fbx_texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
+#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 #include <ofbx.h>
 
 // Include GLEW
@@ -49,6 +50,18 @@ namespace yli::ontology
 
     void SymbiontMaterial::render()
     {
+        if (!this->should_be_rendered || this->universe == nullptr)
+        {
+            return;
+        }
+
+        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+
+        if (render_master == nullptr)
+        {
+            return;
+        }
+
         this->prerender();
 
         // Bind our texture in Texture Unit 0.
@@ -57,8 +70,7 @@ namespace yli::ontology
         // Set our "texture_sampler" sampler to user Texture Unit 0.
         yli::opengl::uniform_1i(this->opengl_texture_id, 0);
 
-        // render this `SymbiontMaterial` by calling `render()` function of each `SymbiontSpecies`.
-        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::SymbiontSpecies*>(this->parent_of_species.child_pointer_vector);
+        render_master->render_symbiont_species(this->parent_of_species.child_pointer_vector);
 
         this->postrender();
     }

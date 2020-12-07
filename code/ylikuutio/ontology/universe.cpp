@@ -45,7 +45,6 @@
 #include "entity_variable_activation.hpp"
 #include "entity_variable_read.hpp"
 #include "variable_struct.hpp"
-#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
@@ -56,6 +55,9 @@
 #include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
+#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
+#include "code/ylikuutio/render/render_struct.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/time/time.hpp"
 
@@ -606,64 +608,41 @@ namespace yli::ontology
 
     void Universe::render()
     {
-        if (this->is_headless || !this->should_be_rendered)
+        if (this->is_headless || !this->should_be_rendered || this->render_master == nullptr)
         {
             return;
         }
 
         this->prerender();
 
-        if (this->active_scene != nullptr)
-        {
-            // Render this `Universe` by calling `render()` function of the active `World`.
-            this->active_scene->render();
-        }
+        yli::render::RenderStruct render_struct;
+        render_struct.scene = this->active_scene;
+        render_struct.console = this->active_console;
+        render_struct.font2D_pointer_vector = &this->parent_of_font2Ds.child_pointer_vector;
+        render_struct.window = this->window;
 
-        yli::opengl::disable_depth_test();
-
-        if (this->active_console != nullptr)
-        {
-            // Render the active `Console` (including current input).
-            this->active_console->render();
-        }
-
-        // Render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
-        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Font2D*>(this->parent_of_font2Ds.child_pointer_vector);
-
-        yli::opengl::enable_depth_test();
-
-        // Swap buffers.
-        SDL_GL_SwapWindow(this->get_window());
+        this->render_master->render(render_struct);
 
         this->postrender();
     }
 
     void Universe::render_without_changing_depth_test()
     {
-        if (this->is_headless || !this->should_be_rendered)
+        if (this->is_headless || !this->should_be_rendered || this->render_master == nullptr)
         {
             return;
         }
 
         this->prerender();
 
-        if (this->active_scene != nullptr)
-        {
-            // Render this `Universe` by calling `render()` function of the active `World`.
-            this->active_scene->render();
-        }
+        yli::render::RenderStruct render_struct;
+        render_struct.scene = this->active_scene;
+        render_struct.console = this->active_console;
+        render_struct.font2D_pointer_vector = &this->parent_of_font2Ds.child_pointer_vector;
+        render_struct.window = this->window;
+        render_struct.should_ylikuutio_change_depth_test = false;
 
-        if (this->active_console != nullptr)
-        {
-            // Render the active `Console` (including current input).
-            this->active_console->render();
-        }
-
-        // Render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
-        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Font2D*>(this->parent_of_font2Ds.child_pointer_vector);
-
-        // Swap buffers.
-        SDL_GL_SwapWindow(this->get_window());
+        this->render_master->render(render_struct);
 
         this->postrender();
     }
@@ -963,6 +942,16 @@ namespace yli::ontology
     std::string Universe::eval_string(const std::string& my_string) const
     {
         return "TODO: eval";
+    }
+
+    yli::render::RenderMaster* Universe::get_render_master() const
+    {
+        if (this->render_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        return this->render_master.get();
     }
 
     yli::audio::AudioMaster* Universe::get_audio_master() const

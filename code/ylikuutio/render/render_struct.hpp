@@ -15,28 +15,27 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_RENDER_TEMPLATES_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_RENDER_TEMPLATES_HPP_INCLUDED
+#include "SDL.h" // `SDL_Window*`
 
 // Include standard headers
-#include <cstddef>  // std::size_t
-#include <vector>   // std::vector
+#include <vector> // std::vector
 
 namespace yli::ontology
 {
-    template<class T1, class T2>
-        void render_children(const std::vector<T1>& child_pointer_vector)
-        {
-            for (std::size_t child_i = 0; child_i < child_pointer_vector.size(); child_i++)
-            {
-                T2 child_pointer = static_cast<T2>(child_pointer_vector[child_i]);
-
-                if (child_pointer != nullptr && child_pointer->should_be_rendered)
-                {
-                    child_pointer->render();
-                }
-            }
-        }
+    class Entity;
+    class Scene;
+    class Font2D;
+    class Console;
 }
 
-#endif
+namespace yli::render
+{
+    struct RenderStruct
+    {
+        yli::ontology::Scene* scene { nullptr };
+        yli::ontology::Console* console { nullptr };
+        std::vector<yli::ontology::Entity*>* font2D_pointer_vector { nullptr };
+        SDL_Window* window { nullptr };
+        bool should_ylikuutio_change_depth_test { true };
+    };
+}

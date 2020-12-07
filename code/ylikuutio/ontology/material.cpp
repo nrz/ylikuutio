@@ -17,15 +17,17 @@
 
 #include "material.hpp"
 #include "entity.hpp"
+#include "universe.hpp"
 #include "shader.hpp"
 #include "species.hpp"
 #include "chunk_master.hpp"
 #include "vector_font.hpp"
-#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "material_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
+#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -53,7 +55,14 @@ namespace yli::ontology
 
     void Material::render()
     {
-        if (!this->should_be_rendered)
+        if (!this->should_be_rendered || this->universe == nullptr)
+        {
+            return;
+        }
+
+        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+
+        if (render_master == nullptr)
         {
             return;
         }
@@ -67,10 +76,9 @@ namespace yli::ontology
         // Set our "texture_sampler" sampler to use Texture Unit 0.
         yli::opengl::uniform_1i(this->opengl_texture_id, 0);
 
-        // Render this `Material` by calling `render()` function of each `Species`, each `VectorFont`, and each `ChunkMaster`.
-        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Species*>(this->parent_of_species.child_pointer_vector);
-        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::VectorFont*>(this->parent_of_vector_fonts.child_pointer_vector);
-        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::ChunkMaster*>(this->parent_of_chunk_masters.child_pointer_vector);
+        render_master->render_species(this->parent_of_species.child_pointer_vector);
+        render_master->render_vector_fonts(this->parent_of_vector_fonts.child_pointer_vector);
+        render_master->render_chunk_masters(this->parent_of_chunk_masters.child_pointer_vector);
 
         this->postrender();
     }

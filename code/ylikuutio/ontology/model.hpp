@@ -21,8 +21,8 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "parent_module.hpp"
-#include "species_or_glyph.hpp"
 #include "model_struct.hpp"
+#include "code/ylikuutio/render/render_species_or_glyph.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -105,8 +105,8 @@ namespace yli::ontology
             void store_vertexUVID(const GLint vertex_uv_id);
             void store_vertex_normal_modelspaceID(const GLint vertex_normal_modelspace_id);
 
-            template<class T1>
-                friend void yli::ontology::render_species_or_glyph(T1 species_or_glyph_pointer);
+            template<class T1, class T2, class T3>
+                friend void yli::render::render_species_or_glyph(T1 species_or_glyph_pointer);
 
         protected:
             yli::ontology::ChildModule child;

@@ -33,10 +33,11 @@
 #include "camera.hpp"
 #include "brain.hpp"
 #include "ground_level.hpp"
-#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/data/pi.hpp"
+#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
@@ -211,15 +212,21 @@ namespace yli::ontology
 
     void Scene::render()
     {
-        if (this->should_be_rendered)
+        if (!this->should_be_rendered || this->universe == nullptr)
         {
-            this->prerender();
-
-            // render this `Scene` by calling `render()` function of each `Shader`.
-            yli::ontology::render_children<yli::ontology::Shader*, yli::ontology::Shader*>(this->shader_pointer_vector);
-
-            this->postrender();
+            return;
         }
+
+        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+
+        if (render_master == nullptr)
+        {
+            return;
+        }
+
+        this->prerender();
+        render_master->render_shaders(this->shader_pointer_vector);
+        this->postrender();
     }
 
     yli::ontology::Camera* Scene::get_active_camera() const

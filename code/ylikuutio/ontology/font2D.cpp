@@ -16,13 +16,15 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "font2D.hpp"
+#include "universe.hpp"
 #include "entity.hpp"
 #include "text2D.hpp"
 #include "text_struct.hpp"
-#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
+#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -122,15 +124,22 @@ namespace yli::ontology
 
     void Font2D::render()
     {
-        if (this->should_be_rendered)
+        if (!this->should_be_rendered || this->universe == nullptr)
         {
-            this->prepare_to_print();
-
-            // Render this `Font2D` by calling `render()` function of each `Text2D`.
-            yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Text2D*>(this->parent_of_text2Ds.child_pointer_vector);
-
-            glDisable(GL_BLEND);
+            return;
         }
+
+        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+
+        if (render_master == nullptr)
+        {
+            return;
+        }
+
+        this->prerender();
+        this->prepare_to_print();
+        render_master->render_text2Ds(this->parent_of_text2Ds.child_pointer_vector);
+        this->postrender();
     }
 
     void Font2D::print_text2D(

@@ -18,15 +18,17 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_SYMBIONT_SPECIES_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_SYMBIONT_SPECIES_HPP_INCLUDED
 
+#include "master_module.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
 #include "species.hpp"
-#include "species_or_glyph.hpp"
 #include "symbiont_material.hpp"
+#include "biont.hpp"
 #include "species_struct.hpp"
-#include "render_templates.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
+#include "code/ylikuutio/render/render_species_or_glyph.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -40,23 +42,30 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
+// `SymbiontSpecies` is not the ontological parent of `Biont`,
+// as `Holobiont` is the ontological parent of `Biont`.
+// The relationship between `SymbiontSpecies` and `Biont`
+// is purely only for rendering.
+//
+// To avoid potential problems in the future, follow this order:
+// 1. bind `Biont` to its `Holobiont` parent.
+// 2. bind `Biont` to its corresponding `SymbiontSpecies`.
+// 3. do stuff
+// 4. unbind `Biont` from its `SymbiontSpecies`.
+// 5. unbind `Biont` from its `Holobiont` parent.
+
 namespace yli::ontology
 {
     class Entity;
-    class Biont;
     class ParentModule;
 
     class SymbiontSpecies: public yli::ontology::Species
     {
         public:
-            void bind_biont(yli::ontology::Biont* const biont);
-            void unbind_biont(const std::size_t childID);
-
             std::size_t get_indices_size() const;
             GLint get_light_id() const;
 
@@ -64,7 +73,8 @@ namespace yli::ontology
                     yli::ontology::Universe* const universe,
                     const yli::ontology::SpeciesStruct& species_struct,
                     yli::ontology::ParentModule* const parent_module)
-                : Species(universe, species_struct, parent_module)
+                : Species(universe, species_struct, parent_module),
+                master_of_bionts(this)
             {
                 // constructor.
                 this->shader                   = species_struct.shader;
@@ -73,7 +83,6 @@ namespace yli::ontology
                 this->normals                  = species_struct.normals;
                 this->light_position           = species_struct.light_position;
 
-                this->number_of_bionts = 0;
                 this->type_string = "yli::ontology::SymbiontSpecies*";
 
                 if (this->shader == nullptr)
@@ -144,23 +153,23 @@ namespace yli::ontology
             // destructor.
             virtual ~SymbiontSpecies();
 
+            std::size_t get_number_of_apprentices() const;
+
             template<class T1, class T2>
-                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
+
+            yli::ontology::MasterModule<yli::ontology::SymbiontSpecies*, yli::ontology::Biont*> master_of_bionts;
 
         private:
             glm::vec3 light_position; // light position.
 
-            template<class T1>
-                friend void yli::ontology::render_species_or_glyph(T1 species_or_glyph_pointer);
+            template<class T1, class T2, class T3>
+                friend void yli::render::render_species_or_glyph(T1 species_or_glyph_pointer);
 
             void bind_to_parent();
 
             // this method renders all `Object`s of this `SymbiontSpecies`.
             void render();
-
-            std::vector<yli::ontology::Biont*> biont_pointer_vector;
-            std::queue<std::size_t> free_biontID_queue;
-            std::size_t number_of_bionts;
 
             yli::ontology::Shader* shader; // pointer to `Shader` (not a parent!).
 

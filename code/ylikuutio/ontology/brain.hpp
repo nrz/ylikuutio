@@ -19,9 +19,9 @@
 #define __YLIKUUTIO_ONTOLOGY_BRAIN_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "movable.hpp"
 #include "child_module.hpp"
 #include "master_module.hpp"
+#include "movable.hpp"
 #include "brain_struct.hpp"
 
 // Include standard headers

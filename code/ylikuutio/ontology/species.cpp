@@ -16,9 +16,11 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "species.hpp"
+#include "entity.hpp"
 #include "material.hpp"
-#include "species_or_glyph.hpp"
+#include "object.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/render/render_species_or_glyph.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -104,15 +106,14 @@ namespace yli::ontology
 
     void Species::render()
     {
-        if (this->should_be_rendered && this->opengl_in_use)
+        if (!this->should_be_rendered)
         {
-            this->prerender();
-
-            // render this `Species`.
-            yli::ontology::render_species_or_glyph<yli::ontology::Species*>(this);
-
-            this->postrender();
+            return;
         }
+
+        this->prerender();
+        yli::render::render_species_or_glyph<yli::ontology::Species*, yli::ontology::Entity*, yli::ontology::Object*>(this);
+        this->postrender();
     }
 
     std::size_t Species::get_x_step() const
