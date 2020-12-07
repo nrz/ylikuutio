@@ -21,7 +21,6 @@
 #include "symbiosis.hpp"
 #include "symbiont_species.hpp"
 #include "biont_struct.hpp"
-#include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 

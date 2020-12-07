@@ -20,7 +20,6 @@
 #include "species_or_glyph.hpp"
 #include "object.hpp"
 #include "glyph_struct.hpp"
-#include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers

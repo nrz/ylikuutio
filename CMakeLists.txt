@@ -667,7 +667,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/post_render_callback.hpp
     code/ylikuutio/ontology/pre_render_callback.hpp
     code/ylikuutio/ontology/read_callback.hpp
-    code/ylikuutio/ontology/render_templates.hpp
     code/ylikuutio/ontology/scene.cpp
     code/ylikuutio/ontology/scene.hpp
     code/ylikuutio/ontology/scene_struct.hpp
@@ -731,6 +730,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/opengl/vboindexer.cpp
     code/ylikuutio/opengl/vboindexer.hpp
     code/ylikuutio/opengl/ylikuutio_glew.hpp
+
+    # render, in alphabetical order
+    code/ylikuutio/render/render_templates.hpp
 
     # sdl, in alphabetical order
     code/ylikuutio/sdl/ylikuutio_sdl.cpp

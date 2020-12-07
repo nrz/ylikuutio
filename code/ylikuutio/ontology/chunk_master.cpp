@@ -20,8 +20,8 @@
 #include "material.hpp"
 #include "chunk.hpp"
 #include "material.hpp"
-#include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -70,7 +70,7 @@ namespace yli::ontology
         if (this->should_be_rendered)
         {
             // render `ChunkMaster` by calling `render()` function of each `Chunk`.
-            yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Chunk*>(this->parent_of_chunks.child_pointer_vector);
+            yli::render::render_children<yli::ontology::Entity*, yli::ontology::Chunk*>(this->parent_of_chunks.child_pointer_vector);
         }
 
         this->postrender();

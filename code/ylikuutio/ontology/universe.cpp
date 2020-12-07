@@ -45,7 +45,6 @@
 #include "entity_variable_activation.hpp"
 #include "entity_variable_read.hpp"
 #include "variable_struct.hpp"
-#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
@@ -56,6 +55,7 @@
 #include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/time/time.hpp"
 
@@ -628,7 +628,7 @@ namespace yli::ontology
         }
 
         // Render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
-        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Font2D*>(this->parent_of_font2Ds.child_pointer_vector);
+        yli::render::render_children<yli::ontology::Entity*, yli::ontology::Font2D*>(this->parent_of_font2Ds.child_pointer_vector);
 
         yli::opengl::enable_depth_test();
 
@@ -660,7 +660,7 @@ namespace yli::ontology
         }
 
         // Render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
-        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Font2D*>(this->parent_of_font2Ds.child_pointer_vector);
+        yli::render::render_children<yli::ontology::Entity*, yli::ontology::Font2D*>(this->parent_of_font2Ds.child_pointer_vector);
 
         // Swap buffers.
         SDL_GL_SwapWindow(this->get_window());

@@ -22,7 +22,7 @@
 #include "model.hpp"
 #include "glyph_struct.hpp"
 #include "gl_attrib_locations.hpp"
-#include "render_templates.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 #include "code/ylikuutio/triangulation/triangulate_polygons_struct.hpp"
 #include "code/ylikuutio/triangulation/polygon_triangulation.hpp"
 
@@ -56,7 +56,7 @@ namespace yli::ontology
 
             friend class VectorFont;
             template<class T1, class T2>
-                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
         private:
             Glyph(const yli::ontology::GlyphStruct& glyph_struct, yli::ontology::ParentModule* const parent_module)

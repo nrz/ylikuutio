@@ -33,10 +33,10 @@
 #include "camera.hpp"
 #include "brain.hpp"
 #include "ground_level.hpp"
-#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/data/pi.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
@@ -216,7 +216,7 @@ namespace yli::ontology
             this->prerender();
 
             // render this `Scene` by calling `render()` function of each `Shader`.
-            yli::ontology::render_children<yli::ontology::Shader*, yli::ontology::Shader*>(this->shader_pointer_vector);
+            yli::render::render_children<yli::ontology::Shader*, yli::ontology::Shader*>(this->shader_pointer_vector);
 
             this->postrender();
         }

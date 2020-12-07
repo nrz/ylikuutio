@@ -20,7 +20,7 @@
 
 #include "movable.hpp"
 #include "biont_struct.hpp"
-#include "render_templates.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -62,7 +62,7 @@ namespace yli::ontology
             virtual ~Biont();
 
             template<class T1, class T2>
-                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
         protected:
             void bind_to_symbiont_species();

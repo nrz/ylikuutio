@@ -19,11 +19,11 @@
 #include "universe.hpp"
 #include "symbiosis.hpp"
 #include "symbiont_species.hpp"
-#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/load/fbx_texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 #include <ofbx.h>
 
 // Include GLEW
@@ -58,7 +58,7 @@ namespace yli::ontology
         yli::opengl::uniform_1i(this->opengl_texture_id, 0);
 
         // render this `SymbiontMaterial` by calling `render()` function of each `SymbiontSpecies`.
-        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::SymbiontSpecies*>(this->parent_of_species.child_pointer_vector);
+        yli::render::render_children<yli::ontology::Entity*, yli::ontology::SymbiontSpecies*>(this->parent_of_species.child_pointer_vector);
 
         this->postrender();
     }

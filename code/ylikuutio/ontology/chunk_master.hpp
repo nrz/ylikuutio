@@ -22,8 +22,8 @@
 #include "parent_module.hpp"
 #include "material.hpp"
 #include "entity_struct.hpp"
-#include "render_templates.hpp"
 #include "get_content_callback.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -64,7 +64,7 @@ namespace yli::ontology
             virtual ~ChunkMaster();
 
             template<class T1, class T2>
-                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
             yli::ontology::ParentModule parent_of_chunks;
 

@@ -22,11 +22,11 @@
 #include "holobiont.hpp"
 #include "material_struct.hpp"
 #include "species_struct.hpp"
-#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/load/symbiosis_loader.hpp"
 #include "code/ylikuutio/load/symbiosis_loader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 #include <ofbx.h>
 
 // Include GLEW
@@ -120,7 +120,7 @@ namespace yli::ontology
             this->prerender();
 
             // render this `Symbiosis` by calling `render()` function of each `Holobiont`.
-            yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Holobiont*>(this->parent_of_holobionts.child_pointer_vector);
+            yli::render::render_children<yli::ontology::Entity*, yli::ontology::Holobiont*>(this->parent_of_holobionts.child_pointer_vector);
 
             this->postrender();
         }

@@ -15,14 +15,14 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_RENDER_TEMPLATES_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_RENDER_TEMPLATES_HPP_INCLUDED
+#ifndef __YLIKUUTIO_RENDER_RENDER_TEMPLATES_HPP_INCLUDED
+#define __YLIKUUTIO_RENDER_RENDER_TEMPLATES_HPP_INCLUDED
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <vector>   // std::vector
 
-namespace yli::ontology
+namespace yli::render
 {
     template<class T1, class T2>
         void render_children(const std::vector<T1>& child_pointer_vector)

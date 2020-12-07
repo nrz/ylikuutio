@@ -21,9 +21,9 @@
 #include "biont.hpp"
 #include "entity_factory.hpp"
 #include "holobiont_struct.hpp"
-#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -55,7 +55,7 @@ namespace yli::ontology
             this->prerender();
 
             // render this `Holobiont` by calling `render()` function of each `Biont`.
-            yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Biont*>(this->parent_of_bionts.child_pointer_vector);
+            yli::render::render_children<yli::ontology::Entity*, yli::ontology::Biont*>(this->parent_of_bionts.child_pointer_vector);
 
             this->postrender();
         }
