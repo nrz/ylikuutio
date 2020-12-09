@@ -27,6 +27,7 @@
 // Include standard headers
 #include <cstddef>    // std::size_t
 #include <functional> // std::function, std::invoke
+#include <iostream>   // std::cout, std::cin, std::cerr
 #include <memory>     // std::make_shared, std::shared_ptr
 #include <string>     // std::string
 #include <tuple>      // std::apply, std::tuple, std::tuple_cat

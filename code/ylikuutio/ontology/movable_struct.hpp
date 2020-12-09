@@ -30,6 +30,7 @@
 
 // Include standard headers
 #include <cmath>  // NAN, std::isnan, std::pow
+#include <string> // std::string
 #include <vector> // std::vector
 
 namespace yli::ontology

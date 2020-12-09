@@ -25,6 +25,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
+#include <vector>   // std::vector
 
 namespace yli::ontology
 {
