@@ -80,7 +80,7 @@ namespace yli::ontology
             }
 
             Object(const Object&) = delete;            // Delete copy constructor.
-            yli::ontology::Object& operator=(const Object&) = delete; // Delete copy assignment.
+            Object& operator=(const Object&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Object();

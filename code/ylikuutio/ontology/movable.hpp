@@ -108,7 +108,7 @@ namespace yli::ontology
             }
 
             Movable(const Movable&) = delete;            // Delete copy constructor.
-            yli::ontology::Movable& operator=(const Movable&) = delete; // Delete copy assignment.
+            Movable& operator=(const Movable&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Movable();

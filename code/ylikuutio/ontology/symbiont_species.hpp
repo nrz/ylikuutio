@@ -148,7 +148,7 @@ namespace yli::ontology
             }
 
             SymbiontSpecies(const SymbiontSpecies&) = delete;            // Delete copy constructor.
-            yli::ontology::SymbiontSpecies& operator=(const SymbiontSpecies&) = delete; // Delete copy assignment.
+            SymbiontSpecies& operator=(const SymbiontSpecies&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~SymbiontSpecies();

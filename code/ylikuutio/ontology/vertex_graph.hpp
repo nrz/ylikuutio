@@ -45,7 +45,7 @@ namespace yli::ontology
             }
 
             VertexGraph(const VertexGraph&) = delete;            // Delete copy constructor.
-            yli::ontology::VertexGraph& operator=(const VertexGraph&) = delete; // Delete copy assignment.
+            VertexGraph& operator=(const VertexGraph&) = delete; // Delete copy assignment.
 
             // destructor.
             ~VertexGraph();

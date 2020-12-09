@@ -250,7 +250,7 @@ namespace yli::ontology
             }
 
             ComputeTask(const ComputeTask&) = delete;            // Delete copy constructor.
-            yli::ontology::ComputeTask& operator=(const ComputeTask&) = delete; // Delete copy assignment.
+            ComputeTask& operator=(const ComputeTask&) = delete; // Delete copy assignment.
 
             // destructor.
             ~ComputeTask();

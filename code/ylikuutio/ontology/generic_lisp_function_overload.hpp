@@ -57,7 +57,7 @@ namespace yli::ontology
             }
 
             GenericLispFunctionOverload(const GenericLispFunctionOverload&) = delete;            // Delete copy constructor.
-            yli::ontology::GenericLispFunctionOverload& operator=(const GenericLispFunctionOverload&) = delete; // Delete copy assignment.
+            GenericLispFunctionOverload& operator=(const GenericLispFunctionOverload&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~GenericLispFunctionOverload();

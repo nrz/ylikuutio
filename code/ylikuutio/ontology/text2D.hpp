@@ -89,7 +89,7 @@ namespace yli::ontology
             }
 
             Text2D(const Text2D&) = delete;            // Delete copy constructor.
-            yli::ontology::Text2D& operator=(const Text2D&) = delete; // Delete copy assignment.
+            Text2D& operator=(const Text2D&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Text2D();

@@ -58,7 +58,7 @@ namespace yli::ontology
             }
 
             SymbiontMaterial(const SymbiontMaterial&) = delete;            // Delete copy constructor.
-            yli::ontology::SymbiontMaterial& operator=(const SymbiontMaterial&) = delete; // Delete copy assignment.
+            SymbiontMaterial& operator=(const SymbiontMaterial&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~SymbiontMaterial();
