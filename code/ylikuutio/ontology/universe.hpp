@@ -366,12 +366,6 @@ namespace yli::ontology
                 this->mouse_x       = this->window_width / 2;
                 this->mouse_y       = this->window_height / 2;
 
-                // variables related to the framebuffer.
-                this->framebuffer                = 0;
-                this->texture                    = 0;
-                this->renderbuffer               = 0;
-                this->is_framebuffer_initialized = false;
-
                 this->current_camera_projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
                 this->current_camera_view_matrix       = glm::mat4(1.0f); // identity matrix (dummy value).
                 this->current_camera_yaw               = NAN;
@@ -444,11 +438,7 @@ namespace yli::ontology
                                 this->window_title.c_str(),
                                 this->is_fullscreen);
 
-                        if (this->window == nullptr)
-                        {
-                            std::cerr << "SDL Window could not be created!\n";
-                        }
-                        else
+                        if (this->window != nullptr)
                         {
                             this->create_context();
                             this->make_context_current();
@@ -456,6 +446,10 @@ namespace yli::ontology
                             // Disable vertical sync.
                             // TODO: add option to enable/disable vsync in the console.
                             this->set_swap_interval(0);
+                        }
+                        else
+                        {
+                            std::cerr << "SDL Window could not be created!\n";
                         }
                     }
                 }
@@ -802,10 +796,10 @@ namespace yli::ontology
             bool is_silent;
 
             // variables related to the framebuffer.
-            GLuint framebuffer;
-            GLuint texture;
-            uint32_t renderbuffer;
-            bool is_framebuffer_initialized;
+            GLuint framebuffer { 0 };
+            GLuint texture { 0 };
+            uint32_t renderbuffer { 0 };
+            bool is_framebuffer_initialized { false };
 
             // variables related to `Camera` (projection).
             glm::mat4 current_camera_projection_matrix;
