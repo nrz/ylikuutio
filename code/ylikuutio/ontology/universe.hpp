@@ -773,7 +773,6 @@ namespace yli::ontology
 
             std::unique_ptr<yli::render::RenderMaster> render_master; // pointer to `RenderMaster`.
             std::unique_ptr<yli::audio::AudioMaster> audio_master; // pointer to `AudioMaster`.
-
             std::unique_ptr<yli::input::InputMaster> input_master; // pointer to `InputMaster`.
 
             // Bullet variables.
