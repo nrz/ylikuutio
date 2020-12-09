@@ -96,14 +96,14 @@ namespace yli::ontology
             }
 
             yli::ontology::BiontStruct biont_struct;
-            biont_struct.biontID               = biontID;
-            biont_struct.holobiont_parent      = this;
-            biont_struct.symbiont_species      = symbiosis->get_symbiont_species(biontID);
+            biont_struct.biontID                = biontID;
+            biont_struct.holobiont_parent       = this;
+            biont_struct.symbiont_species       = symbiosis->get_symbiont_species(biontID);
             biont_struct.initial_rotate_vectors = this->initial_rotate_vectors;
             biont_struct.initial_rotate_angles  = this->initial_rotate_angles;
-            biont_struct.original_scale_vector = this->original_scale_vector;
-            biont_struct.cartesian_coordinates = this->cartesian_coordinates;
-            biont_struct.should_render         = (should_render_bionts_vector.size() > biontID ? should_render_bionts_vector[biontID] : true);
+            biont_struct.original_scale_vector  = this->original_scale_vector;
+            biont_struct.cartesian_coordinates  = this->cartesian_coordinates;
+            biont_struct.should_render          = (should_render_bionts_vector.size() > biontID ? should_render_bionts_vector[biontID] : true);
 
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
