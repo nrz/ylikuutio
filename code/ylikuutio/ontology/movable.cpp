@@ -15,6 +15,10 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#ifndef PI
+#define PI 3.14159265359f
+#endif
+
 #include "variable.hpp"
 #include "movable.hpp"
 #include "brain.hpp"
@@ -110,6 +114,16 @@ namespace yli::ontology
     void Movable::set_pitch(const float pitch)
     {
         this->pitch = pitch;
+    }
+
+    float Movable::get_azimuth() const
+    {
+        return 0.5f * PI - this->yaw;
+    }
+
+    void Movable::set_azimuth(const float azimuth)
+    {
+        this->yaw = 0.5f * PI - azimuth;
     }
 
     // Public callbacks (to be called from AI scripts written in YliLisp).
