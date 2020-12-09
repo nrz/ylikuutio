@@ -33,11 +33,11 @@
 #endif
 
 // Include standard headers
-// `Movable` is a mixin class, not intended to be instantiated.
-
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
+
+// `Movable` is a mixin class, not intended to be instantiated.
 
 namespace yli::ontology
 {
