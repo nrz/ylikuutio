@@ -48,6 +48,8 @@ namespace yli::ontology
 
                 this->biontID          = biont_struct.biontID;
 
+                this->should_ylikuutio_render_this_biont = biont_struct.should_ylikuutio_render_this_biont;
+
                 // Get `childID` from `SymbiontSpecies` (not a parent!) and set pointer to this `Biont`.
                 this->bind_to_symbiont_species();
 
@@ -75,7 +77,7 @@ namespace yli::ontology
 
             std::size_t biontID { std::numeric_limits<std::size_t>::max() };
 
-            bool should_ylikuutio_render_this_biont { true };
+            bool should_ylikuutio_render_this_biont;
 
         private:
             std::size_t get_number_of_children() const override;
