@@ -39,6 +39,7 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
+#include <vector>   // std::vector
 
 namespace yli::ontology
 {
@@ -67,7 +68,7 @@ namespace yli::ontology
         this->postrender();
     }
 
-    void Holobiont::create_bionts()
+    void Holobiont::create_bionts(const std::vector<bool>& should_render_bionts_vector)
     {
         // requirements:
         // `this->symbiosis_parent` must not be `nullptr`.
@@ -102,6 +103,7 @@ namespace yli::ontology
             biont_struct.initial_rotate_angles  = this->initial_rotate_angles;
             biont_struct.original_scale_vector = this->original_scale_vector;
             biont_struct.cartesian_coordinates = this->cartesian_coordinates;
+            biont_struct.should_render         = (should_render_bionts_vector.size() > biontID ? should_render_bionts_vector[biontID] : true);
 
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
