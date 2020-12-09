@@ -20,6 +20,9 @@
 
 #include "movable_struct.hpp"
 
+// Include standard headers
+#include <vector> // std::vector
+
 namespace yli::ontology
 {
     class Symbiosis;
@@ -33,6 +36,7 @@ namespace yli::ontology
         }
 
         yli::ontology::Symbiosis* symbiosis_parent { nullptr }; // pointer to the `Symbiosis`.
+        std::vector<bool> should_render_bionts_vector;
     };
 }
 

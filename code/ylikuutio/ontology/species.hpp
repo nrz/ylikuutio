@@ -161,7 +161,7 @@ namespace yli::ontology
             }
 
             Species(const Species&) = delete;            // Delete copy constructor.
-            yli::ontology::Species& operator=(const Species&) = delete; // Delete copy assignment.
+            Species& operator=(const Species&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Species();

@@ -143,7 +143,7 @@ namespace yli::ontology
             }
 
             Scene(const Scene&) = delete;            // Delete copy constructor.
-            yli::ontology::Scene& operator=(const Scene&) = delete; // Delete copy assignment.
+            Scene& operator=(const Scene&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Scene();

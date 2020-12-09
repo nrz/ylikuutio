@@ -39,6 +39,10 @@ General
 * Try to keep source code headers clear of code. Unfortunately,
   function templates and delegating constructors need to be in headers.
 * Avoid polluting the global namespace. Use your own `namespace`.
+* Use class names without namespace when deleting copy constructors,
+  e.g. `Entity(const Entity&) = delete;`. This is to make lines shorter.
+* Use class names without namespace when deleting copy assignments,
+  e.g. `Entity& operator=(const Entity&) = delete;`. This is to make lines shorter.
 * Prefer C++-style functions over C-style functions.
 * Prefer virtual functions to function templates.
   Use function templates where needed e.g. for speed.

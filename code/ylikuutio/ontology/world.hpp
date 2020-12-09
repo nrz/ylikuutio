@@ -98,7 +98,7 @@ namespace yli::ontology
             }
 
             World(const World&) = delete;            // Delete copy constructor.
-            yli::ontology::World& operator=(const World&) = delete; // Delete copy assignment.
+            World& operator=(const World&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~World();

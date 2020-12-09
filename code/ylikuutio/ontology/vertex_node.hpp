@@ -40,7 +40,7 @@ namespace yli::ontology
             }
 
             VertexNode(const VertexNode&) = delete;            // Delete copy constructor.
-            yli::ontology::VertexNode& operator=(const VertexNode&) = delete; // Delete copy assignment.
+            VertexNode& operator=(const VertexNode&) = delete; // Delete copy assignment.
 
             // destructor.
             ~VertexNode();

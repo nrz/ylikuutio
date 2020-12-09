@@ -27,6 +27,7 @@
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
+#include <vector>   // std::vector
 
 namespace yli::data
 {
@@ -54,7 +55,7 @@ namespace yli::ontology
             {
                 // constructor.
 
-                this->create_bionts();
+                this->create_bionts(holobiont_struct.should_render_bionts_vector);
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Holobiont*";
@@ -62,7 +63,7 @@ namespace yli::ontology
             }
 
             Holobiont(const Holobiont&) = delete;            // Delete copy constructor.
-            yli::ontology::Holobiont& operator=(const Holobiont&) = delete; // Delete copy assignment.
+            Holobiont& operator=(const Holobiont&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Holobiont();
@@ -103,7 +104,7 @@ namespace yli::ontology
             // this method renders this `Holobiont`.
             void render();
 
-            void create_bionts();
+            void create_bionts(const std::vector<bool>& should_render_bionts_vector);
     };
 }
 

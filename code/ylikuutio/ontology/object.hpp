@@ -27,6 +27,7 @@
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
+#include <vector>   // std::vector
 
 namespace yli::data
 {
@@ -79,7 +80,7 @@ namespace yli::ontology
             }
 
             Object(const Object&) = delete;            // Delete copy constructor.
-            yli::ontology::Object& operator=(const Object&) = delete; // Delete copy assignment.
+            Object& operator=(const Object&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Object();

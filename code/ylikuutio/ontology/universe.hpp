@@ -496,7 +496,7 @@ namespace yli::ontology
             }
 
             Universe(const Universe&) = delete;            // Delete copy constructor.
-            yli::ontology::Universe& operator=(const Universe&) = delete; // Delete copy assignment.
+            Universe& operator=(const Universe&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Universe();

@@ -21,6 +21,8 @@
 
 // Include standard headers
 #include <memory>     // std::make_shared, std::shared_ptr
+#include <string>     // std::string
+#include <vector>     // std::vector
 
 namespace yli::ontology
 {

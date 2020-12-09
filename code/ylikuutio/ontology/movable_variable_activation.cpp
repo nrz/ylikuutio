@@ -481,7 +481,7 @@ namespace yli::ontology
                 return nullptr;
             }
 
-            movable->yaw = 0.5f * PI - std::get<float>(azimuth_any_value->data) ;
+            movable->yaw = 0.5f * PI - std::get<float>(azimuth_any_value->data);
             return nullptr;
         }
 
