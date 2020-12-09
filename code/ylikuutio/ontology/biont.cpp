@@ -134,7 +134,7 @@ namespace yli::ontology
             return;
         }
 
-        if (this->should_ylikuutio_render_this_biont)
+        if (this->should_render)
         {
             this->prerender();
             this->render_this_biont(static_cast<yli::ontology::Shader*>(symbiosis->get_parent()));
