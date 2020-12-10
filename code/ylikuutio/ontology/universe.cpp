@@ -607,7 +607,7 @@ namespace yli::ontology
         this->is_exit_requested = true;
     }
 
-    void Universe::render()
+    void Universe::render(const yli::render::RenderStruct& render_struct)
     {
         if (this->is_headless || !this->should_be_rendered || this->render_master == nullptr)
         {
@@ -615,37 +615,29 @@ namespace yli::ontology
         }
 
         this->prerender();
+        this->render_master->render(render_struct);
+        this->postrender();
+    }
 
+    void Universe::render()
+    {
         yli::render::RenderStruct render_struct;
         render_struct.scene = this->active_scene;
         render_struct.console = this->active_console;
         render_struct.font2D_pointer_vector = &this->parent_of_font2Ds.child_pointer_vector;
         render_struct.window = this->window;
-
-        this->render_master->render(render_struct);
-
-        this->postrender();
+        this->render(render_struct);
     }
 
     void Universe::render_without_changing_depth_test()
     {
-        if (this->is_headless || !this->should_be_rendered || this->render_master == nullptr)
-        {
-            return;
-        }
-
-        this->prerender();
-
         yli::render::RenderStruct render_struct;
         render_struct.scene = this->active_scene;
         render_struct.console = this->active_console;
         render_struct.font2D_pointer_vector = &this->parent_of_font2Ds.child_pointer_vector;
         render_struct.window = this->window;
         render_struct.should_ylikuutio_change_depth_test = false;
-
-        this->render_master->render(render_struct);
-
-        this->postrender();
+        this->render(render_struct);
     }
 
     void Universe::set_active_scene(yli::ontology::Scene* const scene)

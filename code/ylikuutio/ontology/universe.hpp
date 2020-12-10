@@ -293,6 +293,11 @@ namespace yli::input
     enum class InputMethod;
 }
 
+namespace yli::render
+{
+    struct RenderStruct;
+}
+
 namespace yli::ontology
 {
     class Scene;
@@ -506,6 +511,9 @@ namespace yli::ontology
 
             // Intentional actors (AIs and keyboard controlled ones).
             void act();
+
+            // This method renders according to the data given in `render_struct`.
+            void render(const yli::render::RenderStruct& render_struct);
 
             // This method renders the active `Scene` of this `Universe`.
             void render();
