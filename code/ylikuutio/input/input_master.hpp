@@ -44,7 +44,7 @@ namespace yli::input
             InputMaster(yli::ontology::Universe* const universe);
 
             InputMaster(const InputMaster&) = delete;            // Delete copy constructor.
-            yli::input::InputMaster& operator=(const InputMaster&) = delete; // Delete copy assignment.
+            InputMaster& operator=(const InputMaster&) = delete; // Delete copy assignment.
 
             // destructor.
             ~InputMaster();
