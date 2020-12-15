@@ -20,6 +20,7 @@
 
 #include "entity.hpp"
 #include "parent_module.hpp"
+#include "framebuffer_module.hpp"
 #include "entity_factory.hpp"
 #include "universe_struct.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
@@ -317,7 +318,8 @@ namespace yli::ontology
                 parent_of_font2Ds(this),
                 parent_of_consoles(this),
                 parent_of_any_value_entities(this),
-                parent_of_callback_engine_entities(this)
+                parent_of_callback_engine_entities(this),
+                framebuffer_module(universe_struct.framebuffer_module_struct)
             {
                 // constructor.
 
@@ -350,8 +352,6 @@ namespace yli::ontology
                 this->window             = nullptr;
                 this->window_width       = universe_struct.window_width;
                 this->window_height      = universe_struct.window_height;
-                this->framebuffer_width  = universe_struct.framebuffer_width;
-                this->framebuffer_height = universe_struct.framebuffer_height;
                 this->application_name   = universe_struct.application_name;
                 this->window_title       = universe_struct.window_title;
 
@@ -579,18 +579,6 @@ namespace yli::ontology
             // This method sets `window_height`.
             void set_window_height(const uint32_t window_height);
 
-            // This method returns current `framebuffer_width`.
-            uint32_t get_framebuffer_width() const;
-
-            // This method sets `framebuffer_width`.
-            void set_framebuffer_width(const uint32_t framebuffer_width);
-
-            // This method returns current `framebuffer_height`.
-            uint32_t get_framebuffer_height() const;
-
-            // This method sets `framebuffer_height`.
-            void set_framebuffer_height(const uint32_t framebuffer_height);
-
             // This method returns current `text_size`.
             std::size_t get_text_size() const;
 
@@ -761,6 +749,8 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_any_value_entities;
             yli::ontology::ParentModule parent_of_callback_engine_entities;
 
+            yli::ontology::FramebufferModule framebuffer_module;
+
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
@@ -794,19 +784,11 @@ namespace yli::ontology
             SDL_Window* window;
             uint32_t window_width;
             uint32_t window_height;
-            std::size_t framebuffer_width;
-            std::size_t framebuffer_height;
             std::string window_title;
             bool is_physical;
             bool is_fullscreen;
             bool is_headless;
             bool is_silent;
-
-            // variables related to the framebuffer.
-            GLuint framebuffer { 0 };
-            GLuint texture { 0 };
-            uint32_t renderbuffer { 0 };
-            bool is_framebuffer_initialized { false };
 
             // variables related to `Camera` (projection).
             glm::mat4 current_camera_projection_matrix;

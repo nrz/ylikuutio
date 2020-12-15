@@ -190,7 +190,7 @@ namespace ajokki
                 {
                     const std::string framebuffer_width = this->command_line_master.get_value("framebuffer_width");
                     std::size_t index = 0;
-                    universe_struct.framebuffer_width = yli::string::extract_uint32_t_value_from_string(framebuffer_width, index, nullptr, nullptr);
+                    universe_struct.framebuffer_module_struct.texture_width = yli::string::extract_uint32_t_value_from_string(framebuffer_width, index, nullptr, nullptr);
                 }
 
                 if (this->command_line_master.is_key("framebuffer_height") &&
@@ -198,7 +198,7 @@ namespace ajokki
                 {
                     const std::string framebuffer_height = this->command_line_master.get_value("framebuffer_height");
                     std::size_t index = 0;
-                    universe_struct.framebuffer_height = yli::string::extract_uint32_t_value_from_string(framebuffer_height, index, nullptr, nullptr);
+                    universe_struct.framebuffer_module_struct.texture_height = yli::string::extract_uint32_t_value_from_string(framebuffer_height, index, nullptr, nullptr);
                 }
 
                 if (this->command_line_master.is_key("speed") &&
@@ -1027,7 +1027,7 @@ namespace ajokki
                 std::cout << "Setting up window size ...\n";
                 yli::snippets::set_window_size(my_universe, my_universe->get_window_width(), my_universe->get_window_height());
                 std::cout << "Setting up framebuffer size ...\n";
-                yli::snippets::set_framebuffer_size(my_universe, my_universe->get_framebuffer_width(), my_universe->get_framebuffer_height());
+                yli::snippets::set_framebuffer_size(my_universe, my_universe->framebuffer_module.get_texture_width(), my_universe->framebuffer_module.get_texture_height());
                 std::cout << "Setting up background colors ...\n";
                 yli::snippets::set_background_colors(my_universe, 0.0f, 0.0f, 1.0f, 0.0f);
                 std::cout << "Setting up wireframe state ...\n";

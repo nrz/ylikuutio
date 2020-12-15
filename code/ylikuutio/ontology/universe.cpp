@@ -139,14 +139,6 @@ namespace yli::ontology
     {
         // destructor.
         std::cout << "This `Universe` will be destroyed.\n";
-
-        if (!this->is_headless && this->is_framebuffer_initialized)
-        {
-            glDeleteTextures(1, &this->texture);
-            glDeleteRenderbuffers(1, &this->renderbuffer);
-            glDeleteFramebuffers(1, &this->framebuffer);
-        }
-
         SDL_Quit();
     }
 
@@ -825,26 +817,6 @@ namespace yli::ontology
         {
             this->active_console->adjust_n_rows();
         }
-    }
-
-    uint32_t Universe::get_framebuffer_width() const
-    {
-        return this->framebuffer_width;
-    }
-
-    void Universe::set_framebuffer_width(const uint32_t framebuffer_width)
-    {
-        this->framebuffer_width = framebuffer_width;
-    }
-
-    uint32_t Universe::get_framebuffer_height() const
-    {
-        return this->framebuffer_height;
-    }
-
-    void Universe::set_framebuffer_height(const uint32_t framebuffer_height)
-    {
-        this->framebuffer_height = framebuffer_height;
     }
 
     std::size_t Universe::get_text_size() const
