@@ -338,7 +338,6 @@ namespace yli::ontology
                 this->current_camera_spherical_coordinates.phi   = NAN; // dummy coordinates.
 
                 this->active_scene       = nullptr;
-                this->active_font2D      = nullptr;
                 this->active_console     = nullptr;
                 this->render_master      = nullptr;
                 this->audio_master       = nullptr;
@@ -523,9 +522,6 @@ namespace yli::ontology
 
             // This method sets the active `Scene`.
             void set_active_scene(yli::ontology::Scene* const world);
-
-            yli::ontology::Font2D* get_active_font2D() const;
-            void set_active_font2D(yli::ontology::Font2D* const font2D);
 
             // This method sets the active `Camera`.
             // Setting the active `Camera` does not change the active `Scene`!
@@ -766,7 +762,6 @@ namespace yli::ontology
             std::size_t number_of_entities;
 
             yli::ontology::Scene* active_scene;
-            yli::ontology::Font2D* active_font2D;
             yli::ontology::Console* active_console;
 
             std::unique_ptr<yli::render::RenderMaster> render_master; // pointer to `RenderMaster`.

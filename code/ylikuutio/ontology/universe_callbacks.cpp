@@ -16,9 +16,11 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "entity.hpp"
+#include "brain.hpp"
 #include "movable.hpp"
 #include "universe.hpp"
 #include "brain.hpp"
+#include "font2D.hpp"
 #include "console.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
@@ -56,9 +58,16 @@ namespace yli::ontology
         yli::ontology::Movable* const child_or_apprentice_movable = dynamic_cast<yli::ontology::Movable*>(child_or_apprentice_entity);
         yli::ontology::Brain* const parent_or_master_brain = dynamic_cast<yli::ontology::Brain*>(parent_or_master_entity);
 
+        yli::ontology::Console* const child_or_apprentice_console = dynamic_cast<yli::ontology::Console*>(child_or_apprentice_entity);
+        yli::ontology::Font2D* const parent_or_master_font_2d = dynamic_cast<yli::ontology::Font2D*>(parent_or_master_entity);
+
         if (child_or_apprentice_movable != nullptr && parent_or_master_brain != nullptr)
         {
             child_or_apprentice_movable->bind_to_new_brain(parent_or_master_brain);
+        }
+        else if (child_or_apprentice_console != nullptr && parent_or_master_font_2d != nullptr)
+        {
+            child_or_apprentice_console->bind_to_new_font_2d(parent_or_master_font_2d);
         }
         else
         {

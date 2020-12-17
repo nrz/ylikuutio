@@ -410,7 +410,7 @@ namespace ajokki
                 std::cout << "Font2D created successfully.\n";
                 my_font2D->set_global_name("my_font2D");
 
-                my_universe->set_active_font2D(my_font2D);
+                my_console->bind_to_new_font_2d(my_font2D);
                 my_console->print_text("Welcome! Please write \"help\" for more");
                 my_console->print_text("information.");
 

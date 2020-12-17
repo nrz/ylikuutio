@@ -162,7 +162,7 @@ namespace yli::ontology
 
     void Universe::start_simulation()
     {
-        if (this->active_font2D == nullptr)
+        if (this->parent_of_font2Ds.child_pointer_vector.size() == 0)
         {
             return;
         }
@@ -172,7 +172,12 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Font2D* const font2D = this->active_font2D;
+        yli::ontology::Font2D* const font2D = static_cast<yli::ontology::Font2D*>(this->parent_of_font2Ds.child_pointer_vector.at(0));
+
+        if (font2D == nullptr)
+        {
+            return;
+        }
 
         // Create angles and cartesian coordinates text, on bottom left corner.
         yli::ontology::TextStruct angles_and_coordinates_text_struct;
@@ -641,16 +646,6 @@ namespace yli::ontology
             this->turbo_factor = this->active_scene->get_turbo_factor();
             this->twin_turbo_factor = this->active_scene->get_twin_turbo_factor();
         }
-    }
-
-    yli::ontology::Font2D* Universe::get_active_font2D() const
-    {
-        return this->active_font2D;
-    }
-
-    void Universe::set_active_font2D(yli::ontology::Font2D* const font2D)
-    {
-        this->active_font2D = font2D;
     }
 
     void Universe::set_active_camera(yli::ontology::Camera* const camera) const
