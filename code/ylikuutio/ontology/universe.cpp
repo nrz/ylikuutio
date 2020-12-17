@@ -721,7 +721,7 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_callback_engine_entities.child_pointer_vector);
     }
 
-    void Universe::create_context()
+    void Universe::create_context_and_make_it_current()
     {
         this->context = yli::sdl::create_context(this->window);
     }

@@ -444,7 +444,7 @@ namespace yli::ontology
 
                         if (this->window != nullptr)
                         {
-                            this->create_context();
+                            this->create_context_and_make_it_current();
 
                             // Disable vertical sync.
                             // TODO: add option to enable/disable vsync in the console.
@@ -550,7 +550,7 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
-            void create_context();
+            void create_context_and_make_it_current();
             void make_context_current();
             void set_swap_interval(const int32_t interval);
             void restore_onscreen_rendering() const;

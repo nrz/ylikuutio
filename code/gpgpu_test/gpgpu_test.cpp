@@ -93,7 +93,7 @@ int main(const int argc, const char* const argv[]) try
         return -1;
     }
 
-    my_universe->create_context();
+    my_universe->create_context_and_make_it_current();
 
     // Initialize GLEW.
     if (!yli::opengl::init_glew())
