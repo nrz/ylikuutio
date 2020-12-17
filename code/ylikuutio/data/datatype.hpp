@@ -56,6 +56,9 @@ namespace yli::data
         // `yli::ontology` datatypes, 'anystructentity' path.
         ANY_STRUCT_ENTITY_POINTER,
         CONST_ANY_STRUCT_ENTITY_POINTER,
+        // `yli::ontology` datatypes, 'brain' path.
+        BRAIN_POINTER,
+        CONST_BRAIN_POINTER,
         // `yli::ontology` datatypes, 'movable' path.
         MOVABLE_POINTER,
         CONST_MOVABLE_POINTER,
