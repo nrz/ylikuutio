@@ -261,8 +261,6 @@ namespace ajokki
 
                 if (!my_universe->get_is_headless())
                 {
-                    my_universe->create_context_and_make_it_current();
-
                     // Initialize GLEW.
                     if (!yli::opengl::init_glew())
                     {
