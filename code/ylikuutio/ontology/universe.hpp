@@ -26,8 +26,10 @@
 #include "code/ylikuutio/audio/audio_master.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/time/time.hpp"
 
@@ -449,6 +451,25 @@ namespace yli::ontology
                             // Disable vertical sync.
                             // TODO: add option to enable/disable vsync in the console.
                             this->set_swap_interval(0);
+
+                            // Initialize GLEW.
+                            if (!yli::opengl::init_glew())
+                            {
+                                std::cerr << "GLEW initialization failed!\n";
+                            }
+                            else
+                            {
+                                yli::input::disable_cursor();
+                                yli::input::enable_relative_mouse_mode();
+
+                                // Enable depth test.
+                                yli::opengl::enable_depth_test();
+                                // Accept fragment if it is closer to the camera than the former one.
+                                yli::opengl::set_depth_func_to_less();
+
+                                // Cull triangles whose normal is not towards the camera.
+                                yli::opengl::cull_triangles();
+                            }
                         }
                         else
                         {

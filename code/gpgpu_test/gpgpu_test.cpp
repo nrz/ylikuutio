@@ -29,7 +29,6 @@
 #endif
 
 #include "gpgpu_test_scene.hpp"
-#include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
@@ -82,23 +81,6 @@ int main(const int argc, const char* const argv[]) try
         std::cerr << "Failed to open SDL window.\n";
         return -1;
     }
-
-    // Initialize GLEW.
-    if (!yli::opengl::init_glew())
-    {
-        return -1;
-    }
-
-    yli::input::disable_cursor();
-    yli::input::enable_relative_mouse_mode();
-
-    // Enable depth test.
-    yli::opengl::enable_depth_test();
-    // Accept fragment if it closer to the camera than the former one.
-    yli::opengl::set_depth_func_to_less();
-
-    // Cull triangles which normal is not towards the camera.
-    yli::opengl::cull_triangles();
 
     // Create the `World`.
 

@@ -43,7 +43,6 @@
 #include "code/ylikuutio/core/entrypoint.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/pi.hpp"
-#include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
 
@@ -78,9 +77,6 @@
 #include "code/ylikuutio/snippets/wireframe_snippets.hpp"
 #include "code/ylikuutio/snippets/console_callback_snippets.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
-
-// Include GLEW
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 #include "SDL.h"
 
@@ -257,26 +253,6 @@ namespace hirvi
                 {
                     std::cerr << "Failed to open SDL window.\n";
                     return false;
-                }
-
-                if (!my_universe->get_is_headless())
-                {
-                    // Initialize GLEW.
-                    if (!yli::opengl::init_glew())
-                    {
-                        return false;
-                    }
-
-                    yli::input::disable_cursor();
-                    yli::input::enable_relative_mouse_mode();
-
-                    // Enable depth test.
-                    yli::opengl::enable_depth_test();
-                    // Accept fragment if it is closer to the camera than the former one.
-                    yli::opengl::set_depth_func_to_less();
-
-                    // Cull triangles whose normal is not towards the camera.
-                    yli::opengl::cull_triangles();
                 }
 
                 // Create the main `Console`.
