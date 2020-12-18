@@ -29,13 +29,9 @@
 #endif
 
 #include "gpgpu_test_scene.hpp"
-#include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
 #include "code/ylikuutio/input/input.hpp"
-#include "code/ylikuutio/callback/callback_object.hpp"
-#include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/ontology/world_struct.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -43,7 +39,6 @@
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
-#include "code/ylikuutio/time/time.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
