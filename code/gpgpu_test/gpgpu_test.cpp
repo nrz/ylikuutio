@@ -32,7 +32,6 @@
 #include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/callback/callback_object.hpp"
-#include "code/ylikuutio/callback/callback_engine.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
@@ -83,10 +82,6 @@ int main(const int argc, const char* const argv[]) try
 
     yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
 
-    std::cout << "Creating yli::callback::CallbackEngine cleanup_callback_engine ...\n";
-    yli::callback::CallbackEngine cleanup_callback_engine = yli::callback::CallbackEngine();
-    cleanup_callback_engine.create_callback_object(nullptr);
-
     if (my_universe->get_window() == nullptr)
     {
         std::cerr << "Failed to open SDL window.\n";
@@ -96,7 +91,6 @@ int main(const int argc, const char* const argv[]) try
     // Initialize GLEW.
     if (!yli::opengl::init_glew())
     {
-        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -142,7 +136,6 @@ int main(const int argc, const char* const argv[]) try
 
     if (gpgpu_test_scene == nullptr)
     {
-        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -157,9 +150,6 @@ int main(const int argc, const char* const argv[]) try
 
     // Render the `Universe`.
     my_universe->render();
-
-    // do cleanup.
-    cleanup_callback_engine.execute(nullptr);
 
     return 0;
 }
