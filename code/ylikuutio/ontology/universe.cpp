@@ -172,7 +172,10 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Font2D* const font2D = static_cast<yli::ontology::Font2D*>(this->parent_of_font2Ds.child_pointer_vector.at(0));
+        yli::ontology::Font2D* const font2D = static_cast<yli::ontology::Font2D*>(
+                yli::hierarchy::get_first_child(
+                    this->parent_of_font2Ds.child_pointer_vector,
+                    this->parent_of_font2Ds.get_number_of_children()));
 
         if (font2D == nullptr)
         {
