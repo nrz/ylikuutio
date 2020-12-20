@@ -48,14 +48,22 @@ namespace yli::data
         UINT32_T_POINTER,
         // `yli::ontology` datatypes, 'entity' path.
         ENTITY_POINTER,
-        // `yli::ontology` datatypes, 'application' path.
-        APPLICATION_POINTER,
+        // `yli::ontology` datatypes, 'universe' path.
+        UNIVERSE_POINTER,
+        CONST_UNIVERSE_POINTER,
         // `yli::ontology` datatypes, 'variable' path.
         VARIABLE_POINTER,
         CONST_VARIABLE_POINTER,
         // `yli::ontology` datatypes, 'anystructentity' path.
         ANY_STRUCT_ENTITY_POINTER,
         CONST_ANY_STRUCT_ENTITY_POINTER,
+        // `yli::ontology` datatypes, 'window' path.
+        WINDOW_POINTER,
+        CONST_WINDOW_POINTER,
+        WIDGET_POINTER,
+        CONST_WIDGET_POINTER,
+        CAMERAWIDGET_POINTER,
+        CONST_CAMERAWIDGET_POINTER,
         // `yli::ontology` datatypes, 'brain' path.
         BRAIN_POINTER,
         CONST_BRAIN_POINTER,
@@ -63,8 +71,6 @@ namespace yli::data
         MOVABLE_POINTER,
         CONST_MOVABLE_POINTER,
         // `yli::ontology` datatypes, 'simple' path.
-        UNIVERSE_POINTER,
-        CONST_UNIVERSE_POINTER,
         WORLD_POINTER,
         CONST_WORLD_POINTER,
         SCENE_POINTER,
