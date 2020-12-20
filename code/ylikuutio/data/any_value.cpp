@@ -34,7 +34,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
+#include <ios>      // std::boolalpha, std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <string>   // std::string
