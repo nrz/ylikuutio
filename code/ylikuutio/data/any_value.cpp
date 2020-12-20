@@ -278,7 +278,7 @@ namespace yli::data
 
         if (std::holds_alternative<bool>(this->data))
         {
-            any_value_stringstream << (std::get<bool>(this->data) ? "true" : "false");
+            any_value_stringstream << std::boolalpha << std::get<bool>(this->data);
         }
         else if (std::holds_alternative<char>(this->data))
         {
