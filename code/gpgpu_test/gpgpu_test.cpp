@@ -33,11 +33,8 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/shader.hpp"
 #include "code/ylikuutio/ontology/world_struct.hpp"
-#include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
-#include "code/ylikuutio/opengl/opengl.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.

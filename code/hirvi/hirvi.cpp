@@ -63,7 +63,6 @@
 #include "code/ylikuutio/ontology/text_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/ontology/entity_factory_templates.hpp"
-#include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/snippets/window_snippets.hpp"
 #include "code/ylikuutio/snippets/framebuffer_snippets.hpp"
