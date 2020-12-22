@@ -122,9 +122,6 @@ int main(const int argc, const char* const argv[]) try
 
     // GPGPU test `Scene` ends here.
 
-    // Clear the screen.
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
     // Render the `Universe`.
     my_universe->render();
 
