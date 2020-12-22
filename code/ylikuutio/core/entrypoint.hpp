@@ -146,6 +146,7 @@ int main(const int argc, const char* const argv[]) try
     if (!application->create_simulation())
     {
         std::cerr << "ERROR: creating the simulation failed!\n";
+        return EXIT_FAILURE;
     }
 }
 catch (const std::exception& exception)
