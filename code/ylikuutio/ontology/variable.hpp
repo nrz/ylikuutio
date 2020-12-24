@@ -77,7 +77,7 @@ namespace yli::ontology
             }
 
             Variable(const Variable&) = delete;            // Delete copy constructor.
-            yli::ontology::Variable& operator=(const Variable&) = delete; // Delete copy assignment.
+            Variable& operator=(const Variable&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Variable();

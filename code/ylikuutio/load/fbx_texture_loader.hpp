@@ -18,7 +18,6 @@
 #ifndef __YLIKUUTIO_LOAD_FBX_TEXTURE_LOADER_HPP_INCLUDED
 #define __YLIKUUTIO_LOAD_FBX_TEXTURE_LOADER_HPP_INCLUDED
 
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 #include <ofbx.h>

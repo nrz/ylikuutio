@@ -164,7 +164,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        universe->set_framebuffer_width(framebuffer_width);
+        universe->framebuffer_module.set_texture_width(framebuffer_width);
 
         return nullptr;
     }
@@ -193,7 +193,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        universe->set_framebuffer_height(framebuffer_height);
+        universe->framebuffer_module.set_texture_height(framebuffer_height);
 
         return nullptr;
     }

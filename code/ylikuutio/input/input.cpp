@@ -16,8 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "input.hpp"
-
-#include "SDL.h"
+#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 namespace yli::input
 {

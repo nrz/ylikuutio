@@ -15,25 +15,28 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_LOAD_COMMON_TEXTURE_LOADER_HPP_INCLUDED
-#define __YLIKUUTIO_LOAD_COMMON_TEXTURE_LOADER_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_FRAMEBUFFER_MODULE_STRUCT_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_FRAMEBUFFER_MODULE_STRUCT_HPP_INCLUDED
 
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
-#include <cstddef>  // std::size_t
-#include <string>   // std::string
+#include <stdint.h> // uint32_t etc.
 
-namespace yli::load
+namespace yli::ontology
 {
-    // Load a BMP or PNG file.
-    bool load_common_texture(
-            const std::string& filename,
-            std::size_t& image_width,
-            std::size_t& image_height,
-            std::size_t& image_size,
-            GLuint& textureID,
-            const bool is_headless);
+    struct FramebufferModuleStruct
+    {
+        FramebufferModuleStruct()
+        {
+            // constructor.
+        }
+
+        uint32_t texture_width  { 8000 };
+        uint32_t texture_height { 4500 };
+
+        bool in_use { true };
+    };
 }
 
 #endif

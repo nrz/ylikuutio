@@ -625,6 +625,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/font2D.cpp
     code/ylikuutio/ontology/font2D.hpp
     code/ylikuutio/ontology/font_struct.hpp
+    code/ylikuutio/ontology/framebuffer_module.cpp
+    code/ylikuutio/ontology/framebuffer_module.hpp
+    code/ylikuutio/ontology/framebuffer_module_struct.hpp
     code/ylikuutio/ontology/generic_lisp_function_overload.cpp
     code/ylikuutio/ontology/generic_lisp_function_overload.hpp
     code/ylikuutio/ontology/get_content_callback.hpp
@@ -667,7 +670,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/post_render_callback.hpp
     code/ylikuutio/ontology/pre_render_callback.hpp
     code/ylikuutio/ontology/read_callback.hpp
-    code/ylikuutio/ontology/render_templates.hpp
     code/ylikuutio/ontology/scene.cpp
     code/ylikuutio/ontology/scene.hpp
     code/ylikuutio/ontology/scene_struct.hpp
@@ -691,7 +693,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/shapeshifter_transformation.hpp
     code/ylikuutio/ontology/species.cpp
     code/ylikuutio/ontology/species.hpp
-    code/ylikuutio/ontology/species_or_glyph.hpp
     code/ylikuutio/ontology/species_struct.hpp
     code/ylikuutio/ontology/symbiont_material.cpp
     code/ylikuutio/ontology/symbiont_material.hpp
@@ -731,6 +732,14 @@ add_library(ylikuutio STATIC
     code/ylikuutio/opengl/vboindexer.cpp
     code/ylikuutio/opengl/vboindexer.hpp
     code/ylikuutio/opengl/ylikuutio_glew.hpp
+
+    # render, in alphabetical order
+    code/ylikuutio/render/render_master.cpp
+    code/ylikuutio/render/render_master.hpp
+    code/ylikuutio/render/render_master_struct.hpp
+    code/ylikuutio/render/render_species_or_glyph.hpp
+    code/ylikuutio/render/render_struct.hpp
+    code/ylikuutio/render/render_templates.hpp
 
     # sdl, in alphabetical order
     code/ylikuutio/sdl/ylikuutio_sdl.cpp

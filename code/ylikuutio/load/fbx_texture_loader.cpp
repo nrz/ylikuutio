@@ -17,10 +17,8 @@
 
 #include "fbx_texture_loader.hpp"
 #include "common_texture_loader.hpp"
-#include "code/ylikuutio/string/ylikuutio_string.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include OpenFBX
 #include <ofbx.h>

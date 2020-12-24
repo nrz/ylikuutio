@@ -18,7 +18,7 @@
 #ifndef __YLIKUUTIO_AUDIO_AUDIO_MASTER_HPP_INCLUDED
 #define __YLIKUUTIO_AUDIO_AUDIO_MASTER_HPP_INCLUDED
 
-#include "SDL.h"
+#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
 #include <list>          // std::list
@@ -40,7 +40,7 @@ namespace yli::audio
             AudioMaster(yli::ontology::Universe* const universe);
 
             AudioMaster(const AudioMaster&) = delete;            // Delete copy constructor.
-            yli::audio::AudioMaster& operator=(const AudioMaster&) = delete; // Delete copy assignment.
+            AudioMaster& operator=(const AudioMaster&) = delete; // Delete copy assignment.
 
             // destructor.
             ~AudioMaster();

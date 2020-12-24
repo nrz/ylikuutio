@@ -16,12 +16,14 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "glyph.hpp"
-#include "vector_font.hpp"
-#include "species_or_glyph.hpp"
+#include "entity.hpp"
+#include "universe.hpp"
 #include "object.hpp"
+#include "vector_font.hpp"
 #include "glyph_struct.hpp"
-#include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_species_or_glyph.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -47,15 +49,21 @@ namespace yli::ontology
 
     void Glyph::render()
     {
-        if (this->opengl_in_use)
+        if (!this->should_be_rendered || !this->opengl_in_use || this->universe == nullptr)
         {
-            this->prerender();
-
-            // render this `Glyph`.
-            yli::ontology::render_species_or_glyph<yli::ontology::Glyph*>(this);
-
-            this->postrender();
+            return;
         }
+
+        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+
+        if (render_master == nullptr)
+        {
+            return;
+        }
+
+        this->prerender();
+        render_master->render_glyph(this);
+        this->postrender();
     }
 
     const char* Glyph::get_unicode_char_pointer() const

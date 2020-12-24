@@ -24,6 +24,7 @@
 
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
+#include <string> // std::string
 
 namespace yli::data
 {

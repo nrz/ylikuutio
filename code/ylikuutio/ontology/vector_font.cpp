@@ -16,12 +16,14 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "vector_font.hpp"
+#include "universe.hpp"
 #include "glyph.hpp"
 #include "text3D.hpp"
-#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "vector_font_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cstddef>       // std::size_t
@@ -124,15 +126,21 @@ namespace yli::ontology
 
     void VectorFont::render()
     {
-        if (this->should_be_rendered)
+        if (!this->should_be_rendered || this->universe == nullptr)
         {
-            this->prerender();
-
-            // Render this `VectorFont` by calling `render()` function of each `Glyph`.
-            yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Glyph*>(this->parent_of_glyphs.child_pointer_vector);
-
-            this->postrender();
+            return;
         }
+
+        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+
+        if (render_master == nullptr)
+        {
+            return;
+        }
+
+        this->prerender();
+        render_master->render_glyphs(this->parent_of_glyphs.child_pointer_vector);
+        this->postrender();
     }
 
     yli::ontology::Entity* VectorFont::get_parent() const

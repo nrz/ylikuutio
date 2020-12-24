@@ -57,7 +57,7 @@ namespace yli::ontology
             }
 
             LispFunction(const LispFunction&) = delete;            // Delete copy constructor.
-            yli::ontology::LispFunction& operator=(const LispFunction&) = delete; // Delete copy assignment.
+            LispFunction& operator=(const LispFunction&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~LispFunction();

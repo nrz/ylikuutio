@@ -66,7 +66,6 @@ TEST(universe_must_be_initialized_appropriately, headless)
 
     // `Universe` member functions.
     ASSERT_TRUE(universe->get_is_headless());
-    ASSERT_EQ(universe->get_active_font2D(), nullptr);
     ASSERT_EQ(universe->get_number_of_worlds(), 0);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 

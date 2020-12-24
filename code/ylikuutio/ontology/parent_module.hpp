@@ -41,7 +41,7 @@ namespace yli::ontology
             }
 
             ParentModule(const ParentModule&) = delete;            // Delete copy constructor.
-            yli::ontology::ParentModule& operator=(const ParentModule&) = delete; // Delete copy assignment.
+            ParentModule& operator=(const ParentModule&) = delete; // Delete copy assignment.
 
             // destructor.
             ~ParentModule();

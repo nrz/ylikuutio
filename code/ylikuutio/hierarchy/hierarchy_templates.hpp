@@ -207,6 +207,25 @@ namespace yli::hierarchy
 
             number_of_children = 0; // no children any more.
         }
+
+    template<class T1>
+        T1 get_first_child(const std::vector<T1>& child_pointer_vector, const std::size_t number_of_children)
+        {
+            if (number_of_children == 0)
+            {
+                return nullptr;
+            }
+
+            for (T1 child : child_pointer_vector)
+            {
+                if (child != nullptr)
+                {
+                    return child;
+                }
+            }
+
+            return nullptr;
+        }
 }
 
 #endif

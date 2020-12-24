@@ -24,14 +24,12 @@
 #include "compute_task_struct.hpp"
 #include "pre_iterate_callback.hpp"
 #include "post_iterate_callback.hpp"
-#include "render_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/load/common_texture_loader.hpp"
 #include "code/ylikuutio/load/csv_texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -250,7 +248,7 @@ namespace yli::ontology
             }
 
             ComputeTask(const ComputeTask&) = delete;            // Delete copy constructor.
-            yli::ontology::ComputeTask& operator=(const ComputeTask&) = delete; // Delete copy assignment.
+            ComputeTask& operator=(const ComputeTask&) = delete; // Delete copy assignment.
 
             // destructor.
             ~ComputeTask();
@@ -258,7 +256,7 @@ namespace yli::ontology
             yli::ontology::Entity* get_parent() const override;
 
             template<class T1, class T2>
-                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
         private:
             void bind_to_parent();

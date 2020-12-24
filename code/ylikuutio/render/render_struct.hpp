@@ -15,25 +15,27 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_LOAD_COMMON_TEXTURE_LOADER_HPP_INCLUDED
-#define __YLIKUUTIO_LOAD_COMMON_TEXTURE_LOADER_HPP_INCLUDED
-
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
-#include <string>   // std::string
+#include <vector> // std::vector
 
-namespace yli::load
+namespace yli::ontology
 {
-    // Load a BMP or PNG file.
-    bool load_common_texture(
-            const std::string& filename,
-            std::size_t& image_width,
-            std::size_t& image_height,
-            std::size_t& image_size,
-            GLuint& textureID,
-            const bool is_headless);
+    class Entity;
+    class Scene;
+    class Font2D;
+    class Console;
 }
 
-#endif
+namespace yli::render
+{
+    struct RenderStruct
+    {
+        yli::ontology::Scene* scene { nullptr };
+        yli::ontology::Console* console { nullptr };
+        std::vector<yli::ontology::Entity*>* font2D_pointer_vector { nullptr };
+        SDL_Window* window { nullptr };
+        bool should_ylikuutio_change_depth_test { true };
+    };
+}

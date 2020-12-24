@@ -24,9 +24,9 @@
 #include "material.hpp"
 #include "glyph_struct.hpp"
 #include "vector_font_struct.hpp"
-#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/load/font_loader.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include GLM
@@ -145,7 +145,7 @@ namespace yli::ontology
             }
 
             VectorFont(const VectorFont&) = delete;            // Delete copy constructor.
-            yli::ontology::VectorFont& operator=(const VectorFont&) = delete; // Delete copy assignment.
+            VectorFont& operator=(const VectorFont&) = delete; // Delete copy assignment.
 
             // destructor.
             // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
@@ -162,7 +162,7 @@ namespace yli::ontology
             yli::ontology::Material* parent; // Pointer to `Material`.
 
             template<class T1, class T2>
-                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
             yli::ontology::ParentModule parent_of_glyphs;
             yli::ontology::ParentModule parent_of_text3Ds;

@@ -17,13 +17,15 @@
 
 #include "holobiont.hpp"
 #include "entity.hpp"
+#include "universe.hpp"
 #include "symbiosis.hpp"
 #include "biont.hpp"
 #include "entity_factory.hpp"
 #include "holobiont_struct.hpp"
-#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -37,6 +39,7 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
+#include <vector>   // std::vector
 
 namespace yli::ontology
 {
@@ -48,20 +51,24 @@ namespace yli::ontology
 
     void Holobiont::render()
     {
-        // render this `Holobiont`.
-
-        if (this->should_be_rendered)
+        if (!this->should_be_rendered || this->universe == nullptr)
         {
-            this->prerender();
-
-            // render this `Holobiont` by calling `render()` function of each `Biont`.
-            yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Biont*>(this->parent_of_bionts.child_pointer_vector);
-
-            this->postrender();
+            return;
         }
+
+        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+
+        if (render_master == nullptr)
+        {
+            return;
+        }
+
+        this->prerender();
+        render_master->render_bionts(this->parent_of_bionts.child_pointer_vector);
+        this->postrender();
     }
 
-    void Holobiont::create_bionts()
+    void Holobiont::create_bionts(const std::vector<bool>& should_render_bionts_vector)
     {
         // requirements:
         // `this->symbiosis_parent` must not be `nullptr`.
@@ -89,13 +96,14 @@ namespace yli::ontology
             }
 
             yli::ontology::BiontStruct biont_struct;
-            biont_struct.biontID               = biontID;
-            biont_struct.holobiont_parent      = this;
-            biont_struct.symbiont_species      = symbiosis->get_symbiont_species(biontID);
+            biont_struct.biontID                = biontID;
+            biont_struct.holobiont_parent       = this;
+            biont_struct.symbiont_species       = symbiosis->get_symbiont_species(biontID);
             biont_struct.initial_rotate_vectors = this->initial_rotate_vectors;
             biont_struct.initial_rotate_angles  = this->initial_rotate_angles;
-            biont_struct.original_scale_vector = this->original_scale_vector;
-            biont_struct.cartesian_coordinates = this->cartesian_coordinates;
+            biont_struct.original_scale_vector  = this->original_scale_vector;
+            biont_struct.cartesian_coordinates  = this->cartesian_coordinates;
+            biont_struct.should_render          = (should_render_bionts_vector.size() > biontID ? should_render_bionts_vector[biontID] : true);
 
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
 

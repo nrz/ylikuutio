@@ -17,8 +17,7 @@
 
 #include "audio_master.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-
-#include "SDL.h"
+#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
 #include <iostream>      // std::cout, std::cin, std::cerr

@@ -21,11 +21,8 @@
 #include "symbiosis.hpp"
 #include "symbiont_species.hpp"
 #include "biont_struct.hpp"
-#include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
@@ -87,7 +84,7 @@ namespace yli::ontology
             return;
         }
 
-        symbiont_species->bind_biont(this);
+        symbiont_species->master_of_bionts.bind_apprentice(this);
     }
 
     Biont::~Biont()
@@ -108,7 +105,7 @@ namespace yli::ontology
         }
 
         // Set pointer to this `Biont` to `nullptr`.
-        symbiont_species->unbind_biont(this->childID);
+        symbiont_species->master_of_bionts.unbind_apprentice(this->childID);
     }
 
     void Biont::render()
@@ -135,7 +132,7 @@ namespace yli::ontology
             return;
         }
 
-        if (this->should_ylikuutio_render_this_biont)
+        if (this->should_render)
         {
             this->prerender();
             this->render_this_biont(static_cast<yli::ontology::Shader*>(symbiosis->get_parent()));

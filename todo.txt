@@ -7,6 +7,11 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage (Hirvi prototype):
+[ ] Implement `yli::ontology::Window` class.
+[ ] Implement `yli::ontology::Widget` class.
+[ ] Implement `yli::ontology::CameraWidget` class that inherits `yli::ontology::Widget`.
+[ ] Add support for multiple windows.
+[ ] Add support for multiple widgets in each window.
 [ ] Implement new `yli_convert` program that converts ASCII files of elevation model of National Land Survey of Finland into custom `.yli` binary format.
 [ ] Implement `yli::ontology::HeightmapStruct` that inherits `yli::ontology::EntityStruct`, to support heightmaps consisting of several sheets.
 [ ] Implement `yli::ontology::Heightmap` class that inherits `yli::ontology::Entity`, to support heightmaps consisting of several sheets.

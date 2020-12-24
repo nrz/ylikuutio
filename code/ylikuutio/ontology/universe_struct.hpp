@@ -19,6 +19,7 @@
 #define __YLIKUUTIO_ONTOLOGY_UNIVERSE_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
+#include "framebuffer_module_struct.hpp"
 #include "code/ylikuutio/input/input.hpp"
 
 // Include standard headers
@@ -35,8 +36,6 @@ namespace yli::ontology
             : window_title(""),
             window_width(1600),
             window_height(900),
-            framebuffer_width(8000),
-            framebuffer_height(4500),
             text_size(40),
             font_size(16),
             max_fps(50000),            // default value max 50000 frames per second.
@@ -59,8 +58,6 @@ namespace yli::ontology
         std::string window_title;
         uint32_t window_width;
         uint32_t window_height;
-        uint32_t framebuffer_width;
-        uint32_t framebuffer_height;
         std::size_t text_size;
         std::size_t font_size;
         std::size_t max_fps;
@@ -75,6 +72,7 @@ namespace yli::ontology
         bool is_headless;
         bool is_silent;
         yli::input::InputMethod input_method;
+        yli::ontology::FramebufferModuleStruct framebuffer_module_struct;
     };
 }
 

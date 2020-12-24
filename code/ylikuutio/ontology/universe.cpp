@@ -45,7 +45,6 @@
 #include "entity_variable_activation.hpp"
 #include "entity_variable_read.hpp"
 #include "variable_struct.hpp"
-#include "render_templates.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
@@ -56,13 +55,12 @@
 #include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
+#include "code/ylikuutio/render/render_struct.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/time/time.hpp"
-
-// Include GLEW
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-
-#include "SDL.h"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -89,6 +87,7 @@
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <variant>       // std::holds_alternative, std::variant
+#include <vector>        // std::vector
 
 namespace yli::data
 {
@@ -136,14 +135,6 @@ namespace yli::ontology
     {
         // destructor.
         std::cout << "This `Universe` will be destroyed.\n";
-
-        if (!this->is_headless && this->is_framebuffer_initialized)
-        {
-            glDeleteTextures(1, &this->texture);
-            glDeleteRenderbuffers(1, &this->renderbuffer);
-            glDeleteFramebuffers(1, &this->framebuffer);
-        }
-
         SDL_Quit();
     }
 
@@ -167,7 +158,7 @@ namespace yli::ontology
 
     void Universe::start_simulation()
     {
-        if (this->active_font2D == nullptr)
+        if (this->parent_of_font2Ds.child_pointer_vector.size() == 0)
         {
             return;
         }
@@ -177,7 +168,15 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Font2D* const font2D = this->active_font2D;
+        yli::ontology::Font2D* const font2D = static_cast<yli::ontology::Font2D*>(
+                yli::hierarchy::get_first_child(
+                    this->parent_of_font2Ds.child_pointer_vector,
+                    this->parent_of_font2Ds.get_number_of_children()));
+
+        if (font2D == nullptr)
+        {
+            return;
+        }
 
         // Create angles and cartesian coordinates text, on bottom left corner.
         yli::ontology::TextStruct angles_and_coordinates_text_struct;
@@ -604,68 +603,37 @@ namespace yli::ontology
         this->is_exit_requested = true;
     }
 
-    void Universe::render()
+    void Universe::render(const yli::render::RenderStruct& render_struct)
     {
-        if (this->is_headless || !this->should_be_rendered)
+        if (this->is_headless || !this->should_be_rendered || this->render_master == nullptr)
         {
             return;
         }
 
         this->prerender();
-
-        if (this->active_scene != nullptr)
-        {
-            // Render this `Universe` by calling `render()` function of the active `World`.
-            this->active_scene->render();
-        }
-
-        yli::opengl::disable_depth_test();
-
-        if (this->active_console != nullptr)
-        {
-            // Render the active `Console` (including current input).
-            this->active_console->render();
-        }
-
-        // Render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
-        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Font2D*>(this->parent_of_font2Ds.child_pointer_vector);
-
-        yli::opengl::enable_depth_test();
-
-        // Swap buffers.
-        SDL_GL_SwapWindow(this->get_window());
-
+        this->render_master->render(render_struct);
         this->postrender();
+    }
+
+    void Universe::render()
+    {
+        yli::render::RenderStruct render_struct;
+        render_struct.scene = this->active_scene;
+        render_struct.console = this->active_console;
+        render_struct.font2D_pointer_vector = &this->parent_of_font2Ds.child_pointer_vector;
+        render_struct.window = this->window;
+        this->render(render_struct);
     }
 
     void Universe::render_without_changing_depth_test()
     {
-        if (this->is_headless || !this->should_be_rendered)
-        {
-            return;
-        }
-
-        this->prerender();
-
-        if (this->active_scene != nullptr)
-        {
-            // Render this `Universe` by calling `render()` function of the active `World`.
-            this->active_scene->render();
-        }
-
-        if (this->active_console != nullptr)
-        {
-            // Render the active `Console` (including current input).
-            this->active_console->render();
-        }
-
-        // Render `Font2D`s of this `Universe` by calling `render()` function of each `Font2D`.
-        yli::ontology::render_children<yli::ontology::Entity*, yli::ontology::Font2D*>(this->parent_of_font2Ds.child_pointer_vector);
-
-        // Swap buffers.
-        SDL_GL_SwapWindow(this->get_window());
-
-        this->postrender();
+        yli::render::RenderStruct render_struct;
+        render_struct.scene = this->active_scene;
+        render_struct.console = this->active_console;
+        render_struct.font2D_pointer_vector = &this->parent_of_font2Ds.child_pointer_vector;
+        render_struct.window = this->window;
+        render_struct.should_ylikuutio_change_depth_test = false;
+        this->render(render_struct);
     }
 
     void Universe::set_active_scene(yli::ontology::Scene* const scene)
@@ -677,16 +645,6 @@ namespace yli::ontology
             this->turbo_factor = this->active_scene->get_turbo_factor();
             this->twin_turbo_factor = this->active_scene->get_twin_turbo_factor();
         }
-    }
-
-    yli::ontology::Font2D* Universe::get_active_font2D() const
-    {
-        return this->active_font2D;
-    }
-
-    void Universe::set_active_font2D(yli::ontology::Font2D* const font2D)
-    {
-        this->active_font2D = font2D;
     }
 
     void Universe::set_active_camera(yli::ontology::Camera* const camera) const
@@ -762,17 +720,34 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_callback_engine_entities.child_pointer_vector);
     }
 
-    void Universe::create_context()
+    void Universe::create_window()
     {
-        this->context = yli::sdl::create_context(this->window);
+        // Create a window.
+        this->window = yli::sdl::create_window(
+                static_cast<int>(this->window_width),
+                static_cast<int>(this->window_height),
+                this->window_title.c_str(),
+                this->is_fullscreen);
+
+        if (this->window != nullptr)
+        {
+            std::cerr << "SDL Window created successfully.\n";
+        }
+        else
+        {
+            std::cerr << "ERROR: `Universe::create_window`: SDL Window could not be created!\n";
+        }
     }
 
-    void Universe::make_context_current()
+    void Universe::setup_context()
     {
-        if (this->context != nullptr)
-        {
-            yli::sdl::make_context_current(this->window, *this->context);
-        }
+        this->render_master->setup_context(this->window);
+    }
+
+    void Universe::create_window_and_setup_context()
+    {
+        this->create_window();
+        this->setup_context();
     }
 
     void Universe::set_swap_interval(const int32_t interval)
@@ -853,26 +828,6 @@ namespace yli::ontology
         {
             this->active_console->adjust_n_rows();
         }
-    }
-
-    uint32_t Universe::get_framebuffer_width() const
-    {
-        return this->framebuffer_width;
-    }
-
-    void Universe::set_framebuffer_width(const uint32_t framebuffer_width)
-    {
-        this->framebuffer_width = framebuffer_width;
-    }
-
-    uint32_t Universe::get_framebuffer_height() const
-    {
-        return this->framebuffer_height;
-    }
-
-    void Universe::set_framebuffer_height(const uint32_t framebuffer_height)
-    {
-        this->framebuffer_height = framebuffer_height;
     }
 
     std::size_t Universe::get_text_size() const
@@ -963,6 +918,16 @@ namespace yli::ontology
     std::string Universe::eval_string(const std::string& my_string) const
     {
         return "TODO: eval";
+    }
+
+    yli::render::RenderMaster* Universe::get_render_master() const
+    {
+        if (this->render_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        return this->render_master.get();
     }
 
     yli::audio::AudioMaster* Universe::get_audio_master() const

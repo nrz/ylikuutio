@@ -20,19 +20,20 @@
 
 #include "entity.hpp"
 #include "parent_module.hpp"
+#include "framebuffer_module.hpp"
 #include "entity_factory.hpp"
 #include "universe_struct.hpp"
 #include "code/ylikuutio/audio/audio_master.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
+#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_master_struct.hpp"
+#include "code/ylikuutio/opengl/opengl.hpp"
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/time/time.hpp"
-
-#include "SDL.h"
-
-// Include GLEW
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -292,6 +293,11 @@ namespace yli::input
     enum class InputMethod;
 }
 
+namespace yli::render
+{
+    struct RenderStruct;
+}
+
 namespace yli::ontology
 {
     class Scene;
@@ -311,7 +317,8 @@ namespace yli::ontology
                 parent_of_font2Ds(this),
                 parent_of_consoles(this),
                 parent_of_any_value_entities(this),
-                parent_of_callback_engine_entities(this)
+                parent_of_callback_engine_entities(this),
+                framebuffer_module(universe_struct.framebuffer_module_struct)
             {
                 // constructor.
 
@@ -330,8 +337,8 @@ namespace yli::ontology
                 this->current_camera_spherical_coordinates.phi   = NAN; // dummy coordinates.
 
                 this->active_scene       = nullptr;
-                this->active_font2D      = nullptr;
                 this->active_console     = nullptr;
+                this->render_master      = nullptr;
                 this->audio_master       = nullptr;
 
                 this->background_red     = NAN;
@@ -340,11 +347,8 @@ namespace yli::ontology
                 this->background_alpha   = NAN;
 
                 // Variables related to the window.
-                this->window             = nullptr;
                 this->window_width       = universe_struct.window_width;
                 this->window_height      = universe_struct.window_height;
-                this->framebuffer_width  = universe_struct.framebuffer_width;
-                this->framebuffer_height = universe_struct.framebuffer_height;
                 this->application_name   = universe_struct.application_name;
                 this->window_title       = universe_struct.window_title;
 
@@ -363,12 +367,6 @@ namespace yli::ontology
                 // mouse coordinates.
                 this->mouse_x       = this->window_width / 2;
                 this->mouse_y       = this->window_height / 2;
-
-                // variables related to the framebuffer.
-                this->framebuffer                = 0;
-                this->texture                    = 0;
-                this->renderbuffer               = 0;
-                this->is_framebuffer_initialized = false;
 
                 this->current_camera_projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
                 this->current_camera_view_matrix       = glm::mat4(1.0f); // identity matrix (dummy value).
@@ -421,9 +419,6 @@ namespace yli::ontology
 
                 this->number_of_entities               = 0;
 
-                this->context = nullptr;
-                this->window  = nullptr;
-
                 if (!this->is_headless)
                 {
                     // Initialise SDL
@@ -431,30 +426,6 @@ namespace yli::ontology
                     {
                         std::cerr << "Failed to initialize SDL.\n";
                         this->is_headless = true;
-                    }
-                    else
-                    {
-                        // Open a window and create its OpenGL context.
-                        std::cout << "Opening a window and creating its OpenGL context...\n";
-                        this->window = yli::sdl::create_window(
-                                static_cast<int>(this->window_width),
-                                static_cast<int>(this->window_height),
-                                this->window_title.c_str(),
-                                this->is_fullscreen);
-
-                        if (this->window == nullptr)
-                        {
-                            std::cerr << "SDL Window could not be created!\n";
-                        }
-                        else
-                        {
-                            this->create_context();
-                            this->make_context_current();
-
-                            // Disable vertical sync.
-                            // TODO: add option to enable/disable vsync in the console.
-                            this->set_swap_interval(0);
-                        }
                     }
                 }
 
@@ -479,6 +450,8 @@ namespace yli::ontology
                 }
                 else
                 {
+                    yli::render::RenderMasterStruct render_master_struct;
+                    this->render_master = std::make_unique<yli::render::RenderMaster>(this, render_master_struct);
                     this->input_master = std::make_unique<yli::input::InputMaster>(this);
                 }
 
@@ -493,7 +466,7 @@ namespace yli::ontology
             }
 
             Universe(const Universe&) = delete;            // Delete copy constructor.
-            yli::ontology::Universe& operator=(const Universe&) = delete; // Delete copy assignment.
+            Universe& operator=(const Universe&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Universe();
@@ -510,6 +483,9 @@ namespace yli::ontology
             // Intentional actors (AIs and keyboard controlled ones).
             void act();
 
+            // This method renders according to the data given in `render_struct`.
+            void render(const yli::render::RenderStruct& render_struct);
+
             // This method renders the active `Scene` of this `Universe`.
             void render();
 
@@ -518,9 +494,6 @@ namespace yli::ontology
 
             // This method sets the active `Scene`.
             void set_active_scene(yli::ontology::Scene* const world);
-
-            yli::ontology::Font2D* get_active_font2D() const;
-            void set_active_font2D(yli::ontology::Font2D* const font2D);
 
             // This method sets the active `Camera`.
             // Setting the active `Camera` does not change the active `Scene`!
@@ -535,6 +508,7 @@ namespace yli::ontology
 
             std::string eval_string(const std::string& my_string) const;
 
+            yli::render::RenderMaster* get_render_master() const;
             yli::audio::AudioMaster* get_audio_master() const;
             yli::input::InputMaster* get_input_master() const;
 
@@ -549,8 +523,9 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
-            void create_context();
-            void make_context_current();
+            void create_window();
+            void setup_context();
+            void create_window_and_setup_context();
             void set_swap_interval(const int32_t interval);
             void restore_onscreen_rendering() const;
             void set_opengl_background_color() const;
@@ -572,18 +547,6 @@ namespace yli::ontology
 
             // This method sets `window_height`.
             void set_window_height(const uint32_t window_height);
-
-            // This method returns current `framebuffer_width`.
-            uint32_t get_framebuffer_width() const;
-
-            // This method sets `framebuffer_width`.
-            void set_framebuffer_width(const uint32_t framebuffer_width);
-
-            // This method returns current `framebuffer_height`.
-            uint32_t get_framebuffer_height() const;
-
-            // This method sets `framebuffer_height`.
-            void set_framebuffer_height(const uint32_t framebuffer_height);
 
             // This method returns current `text_size`.
             std::size_t get_text_size() const;
@@ -755,6 +718,8 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_any_value_entities;
             yli::ontology::ParentModule parent_of_callback_engine_entities;
 
+            yli::ontology::FramebufferModule framebuffer_module;
+
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
@@ -770,11 +735,10 @@ namespace yli::ontology
             std::size_t number_of_entities;
 
             yli::ontology::Scene* active_scene;
-            yli::ontology::Font2D* active_font2D;
             yli::ontology::Console* active_console;
 
+            std::unique_ptr<yli::render::RenderMaster> render_master; // pointer to `RenderMaster`.
             std::unique_ptr<yli::audio::AudioMaster> audio_master; // pointer to `AudioMaster`.
-
             std::unique_ptr<yli::input::InputMaster> input_master; // pointer to `InputMaster`.
 
             // Bullet variables.
@@ -784,23 +748,15 @@ namespace yli::ontology
             std::unique_ptr<btSequentialImpulseConstraintSolver> solver;
 
             // variables related to the window.
-            std::unique_ptr<SDL_GLContext> context;
-            SDL_Window* window;
+            SDL_Window* window { nullptr };
             uint32_t window_width;
             uint32_t window_height;
-            std::size_t framebuffer_width;
-            std::size_t framebuffer_height;
             std::string window_title;
+
             bool is_physical;
             bool is_fullscreen;
             bool is_headless;
             bool is_silent;
-
-            // variables related to the framebuffer.
-            GLuint framebuffer;
-            GLuint texture;
-            uint32_t renderbuffer;
-            bool is_framebuffer_initialized;
 
             // variables related to `Camera` (projection).
             glm::mat4 current_camera_projection_matrix;

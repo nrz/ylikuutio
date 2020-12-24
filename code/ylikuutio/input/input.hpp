@@ -18,7 +18,7 @@
 #ifndef __YLIKUUTIO_INPUT_INPUT_HPP_INCLUDED
 #define __YLIKUUTIO_INPUT_INPUT_HPP_INCLUDED
 
-#include "SDL.h"
+#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 namespace yli::input
 {

@@ -22,8 +22,6 @@
 #include "pre_iterate_callback.hpp"
 #include "post_iterate_callback.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers

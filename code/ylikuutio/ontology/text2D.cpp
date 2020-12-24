@@ -18,8 +18,6 @@
 #include "text2D.hpp"
 #include "font2D.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM

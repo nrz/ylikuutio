@@ -23,8 +23,6 @@
 #include "universe.hpp"
 #include "font2D.hpp"
 #include "text_struct.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
@@ -89,7 +87,7 @@ namespace yli::ontology
             }
 
             Text2D(const Text2D&) = delete;            // Delete copy constructor.
-            yli::ontology::Text2D& operator=(const Text2D&) = delete; // Delete copy assignment.
+            Text2D& operator=(const Text2D&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Text2D();

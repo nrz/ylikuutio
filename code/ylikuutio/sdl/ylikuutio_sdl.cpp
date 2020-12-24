@@ -16,15 +16,10 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "ylikuutio_sdl.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-
-#include "SDL.h"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
 
 namespace yli::sdl
 {
@@ -36,9 +31,20 @@ namespace yli::sdl
             return false;
         }
 
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
         return true;
+    }
+
+    SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const Uint32 flags)
+    {
+        return SDL_CreateWindow(
+                title,
+                SDL_WINDOWPOS_CENTERED,
+                SDL_WINDOWPOS_CENTERED,
+                window_width,
+                window_height,
+                flags);
     }
 
     SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen)
@@ -50,18 +56,24 @@ namespace yli::sdl
             flags |= SDL_WINDOW_FULLSCREEN;
         }
 
-        return SDL_CreateWindow(
-                title,
-                SDL_WINDOWPOS_CENTERED,
-                SDL_WINDOWPOS_CENTERED,
-                window_width,
-                window_height,
-                flags);
+        return create_window(window_width, window_height, title, flags);
     }
 
-    std::unique_ptr<SDL_GLContext> create_context(SDL_Window* const window)
+    SDL_Window* create_hidden_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen)
     {
-        return std::make_unique<SDL_GLContext>(SDL_GL_CreateContext(window));
+        Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_HIDDEN; // `Uint32` is a SDL datatype.
+
+        if (is_fullscreen)
+        {
+            flags |= SDL_WINDOW_FULLSCREEN;
+        }
+
+        return create_window(window_width, window_height, title, flags);
+    }
+
+    SDL_GLContext create_context(SDL_Window* const window)
+    {
+        return SDL_GL_CreateContext(window);
     }
 
     void set_window_size(SDL_Window* window, const int window_width, const int window_height)

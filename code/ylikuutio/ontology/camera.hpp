@@ -93,7 +93,7 @@ namespace yli::ontology
             }
 
             Camera(const Camera&) = delete;            // Delete copy constructor.
-            yli::ontology::Camera& operator=(const Camera&) = delete; // Delete copy assignment.
+            Camera& operator=(const Camera&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Camera();

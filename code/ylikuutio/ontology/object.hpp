@@ -21,12 +21,13 @@
 #include "movable.hpp"
 #include "object_type.hpp"
 #include "object_struct.hpp"
-#include "render_templates.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
+#include <vector>   // std::vector
 
 namespace yli::data
 {
@@ -79,7 +80,7 @@ namespace yli::ontology
             }
 
             Object(const Object&) = delete;            // Delete copy constructor.
-            yli::ontology::Object& operator=(const Object&) = delete; // Delete copy assignment.
+            Object& operator=(const Object&) = delete; // Delete copy assignment.
 
             // destructor.
             virtual ~Object();
@@ -107,7 +108,7 @@ namespace yli::ontology
             // Public callbacks end here.
 
             template<class T1, class T2>
-                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
         private:
             std::size_t get_number_of_children() const override;
