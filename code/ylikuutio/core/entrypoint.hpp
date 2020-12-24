@@ -148,6 +148,8 @@ int main(const int argc, const char* const argv[]) try
         std::cerr << "ERROR: creating the simulation failed!\n";
         return EXIT_FAILURE;
     }
+
+    return EXIT_SUCCESS;
 }
 catch (const std::exception& exception)
 {
