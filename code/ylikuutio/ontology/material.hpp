@@ -26,10 +26,8 @@
 #include "material_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/load/common_texture_loader.hpp"
-#include "code/ylikuutio/render/render_templates.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t

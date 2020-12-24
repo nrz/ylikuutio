@@ -17,8 +17,6 @@
 
 #include "opengl_texture.hpp"
 #include "opengl.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers

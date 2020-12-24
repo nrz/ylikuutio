@@ -18,8 +18,6 @@
 #include "common_texture_loader.hpp"
 #include "image_file_loader.hpp"
 #include "code/ylikuutio/opengl/opengl_texture.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers

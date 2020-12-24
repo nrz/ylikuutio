@@ -22,10 +22,8 @@
 #include "child_module.hpp"
 #include "parent_module.hpp"
 #include "model_struct.hpp"
-#include "code/ylikuutio/render/render_species_or_glyph.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "code/ylikuutio/render/render_species_or_glyph.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

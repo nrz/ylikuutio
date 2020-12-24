@@ -18,8 +18,6 @@
 #include "gl_attrib_locations.hpp"
 #include "shader.hpp"
 #include "glyph.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 namespace yli::ontology

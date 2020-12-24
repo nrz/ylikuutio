@@ -20,10 +20,8 @@
 
 #include "material.hpp"
 #include "material_struct.hpp"
-#include <ofbx.h>
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include <ofbx.h>
 
 // Include standard headers
 #include <cstddef>  // std::size_t

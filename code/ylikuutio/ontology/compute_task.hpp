@@ -28,10 +28,8 @@
 #include "code/ylikuutio/load/common_texture_loader.hpp"
 #include "code/ylikuutio/load/csv_texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
-#include "code/ylikuutio/render/render_templates.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

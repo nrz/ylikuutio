@@ -29,8 +29,6 @@
 #include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/load/common_texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers

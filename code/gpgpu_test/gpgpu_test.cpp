@@ -35,13 +35,10 @@
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/world_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 #define SDL_main main
-
-#include "SDL.h"
 
 // Include standard headers
 #include <exception>     // try, catch, std::exception

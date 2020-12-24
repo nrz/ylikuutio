@@ -18,7 +18,6 @@
 #ifndef __YLIKUUTIO_OPENGL_OPENGL_TEXTURE_HPP_INCLUDED
 #define __YLIKUUTIO_OPENGL_OPENGL_TEXTURE_HPP_INCLUDED
 
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers

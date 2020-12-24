@@ -18,8 +18,6 @@
 #include "framebuffer_module.hpp"
 #include "framebuffer_module_struct.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers

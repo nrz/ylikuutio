@@ -25,8 +25,7 @@
 #include "console_struct.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-
-#include "SDL.h"
+#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
 #include <cstddef>       // std::size_t

@@ -20,8 +20,6 @@
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/linear_algebra/vector_functions.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers

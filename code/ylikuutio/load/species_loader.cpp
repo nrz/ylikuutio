@@ -24,8 +24,6 @@
 #include "srtm_heightmap_loader.hpp"
 #include "heightmap_loader_struct.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM

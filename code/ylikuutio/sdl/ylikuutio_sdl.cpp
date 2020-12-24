@@ -16,11 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "ylikuutio_sdl.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-
-#include "SDL.h"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr

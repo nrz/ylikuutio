@@ -18,7 +18,7 @@
 #ifndef __YLIKUUTIO_AUDIO_AUDIO_MASTER_HPP_INCLUDED
 #define __YLIKUUTIO_AUDIO_AUDIO_MASTER_HPP_INCLUDED
 
-#include "SDL.h"
+#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
 #include <list>          // std::list
