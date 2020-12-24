@@ -152,6 +152,7 @@ int main(const int argc, const char* const argv[]) try
 catch (const std::exception& exception)
 {
     std::cerr << "ERROR: exception: " << exception.what() << "\n";
+    return EXIT_FAILURE;
 }
 
 #endif
