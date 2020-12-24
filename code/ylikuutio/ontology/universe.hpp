@@ -29,6 +29,7 @@
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_master_struct.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
@@ -346,7 +347,6 @@ namespace yli::ontology
                 this->background_alpha   = NAN;
 
                 // Variables related to the window.
-                this->window             = nullptr;
                 this->window_width       = universe_struct.window_width;
                 this->window_height      = universe_struct.window_height;
                 this->application_name   = universe_struct.application_name;
@@ -419,9 +419,6 @@ namespace yli::ontology
 
                 this->number_of_entities               = 0;
 
-                this->context = nullptr;
-                this->window  = nullptr;
-
                 if (!this->is_headless)
                 {
                     // Initialise SDL
@@ -429,48 +426,6 @@ namespace yli::ontology
                     {
                         std::cerr << "Failed to initialize SDL.\n";
                         this->is_headless = true;
-                    }
-                    else
-                    {
-                        // Open a window and create its OpenGL context.
-                        std::cout << "Opening a window and creating its OpenGL context...\n";
-                        this->window = yli::sdl::create_window(
-                                static_cast<int>(this->window_width),
-                                static_cast<int>(this->window_height),
-                                this->window_title.c_str(),
-                                this->is_fullscreen);
-
-                        if (this->window != nullptr)
-                        {
-                            this->create_context_and_make_it_current();
-
-                            // Disable vertical sync.
-                            // TODO: add option to enable/disable vsync in the console.
-                            this->set_swap_interval(0);
-
-                            // Initialize GLEW.
-                            if (!yli::opengl::init_glew())
-                            {
-                                std::cerr << "GLEW initialization failed!\n";
-                            }
-                            else
-                            {
-                                yli::input::disable_cursor();
-                                yli::input::enable_relative_mouse_mode();
-
-                                // Enable depth test.
-                                yli::opengl::enable_depth_test();
-                                // Accept fragment if it is closer to the camera than the former one.
-                                yli::opengl::set_depth_func_to_less();
-
-                                // Cull triangles whose normal is not towards the camera.
-                                yli::opengl::cull_triangles();
-                            }
-                        }
-                        else
-                        {
-                            std::cerr << "SDL Window could not be created!\n";
-                        }
                     }
                 }
 
@@ -495,7 +450,8 @@ namespace yli::ontology
                 }
                 else
                 {
-                    this->render_master = std::make_unique<yli::render::RenderMaster>(this);
+                    yli::render::RenderMasterStruct render_master_struct;
+                    this->render_master = std::make_unique<yli::render::RenderMaster>(this, render_master_struct);
                     this->input_master = std::make_unique<yli::input::InputMaster>(this);
                 }
 
@@ -567,8 +523,9 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
-            void create_context_and_make_it_current();
-            void make_context_current();
+            void create_window();
+            void setup_context();
+            void create_window_and_setup_context();
             void set_swap_interval(const int32_t interval);
             void restore_onscreen_rendering() const;
             void set_opengl_background_color() const;
@@ -791,8 +748,7 @@ namespace yli::ontology
             std::unique_ptr<btSequentialImpulseConstraintSolver> solver;
 
             // variables related to the window.
-            std::unique_ptr<SDL_GLContext> context;
-            SDL_Window* window;
+            SDL_Window* window { nullptr };
             uint32_t window_width;
             uint32_t window_height;
             std::string window_title;

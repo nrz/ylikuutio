@@ -18,8 +18,6 @@
 #ifndef __YLIKUUTIO_CORE_ENTRYPOINT_HPP_INCLUDED
 #define __YLIKUUTIO_CORE_ENTRYPOINT_HPP_INCLUDED
 
-#define SDL_main main
-
 #include "application.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 
@@ -138,6 +136,8 @@ int main(const int argc, const char* const argv[]) try
 
     // 4. `Universe` is created. It receives `UniverseStruct` as an argument.
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    universe->create_window_and_setup_context();
 
     // 5. A pointer to the `Universe` is stored in the `Application`.
     application->set_universe(universe);

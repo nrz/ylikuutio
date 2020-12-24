@@ -30,6 +30,10 @@
 
 #include "gpgpu_test_scene.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
+#include "code/ylikuutio/core/application.hpp"
+#include "code/ylikuutio/core/entrypoint.hpp"
+
+// `yli::ontology` files included in the canonical order.
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -50,83 +54,115 @@ namespace yli::ontology
     class Entity;
 }
 
-int main(const int argc, const char* const argv[]) try
+namespace gpgpu_test
 {
-    yli::command_line::CommandLineMaster command_line_master(argc, argv);
-
-    if (command_line_master.is_key("version"))
+    class GpgpuTestApplication: public yli::core::Application
     {
-        std::cout << "GPGPU test " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version << "\n";
-        return 0;
-    }
+        public:
+            GpgpuTestApplication(const int argc, const char* const argv[])
+                : yli::core::Application(argc, argv)
+            {
+                // constructor.
+            }
 
-    command_line_master.print_keys_and_values();
+            ~GpgpuTestApplication()
+            {
+                // destructor.
+            }
 
-    // Create the `Universe`, store it in `my_universe`.
-    std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
-    yli::ontology::UniverseStruct universe_struct;
-    std::stringstream window_title_stringstream;
-    window_title_stringstream << "GPGPU test " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
-    universe_struct.window_title = window_title_stringstream.str();
-    universe_struct.window_width = 512;
-    universe_struct.window_height = 512;
-    yli::ontology::Universe* const my_universe = new yli::ontology::Universe(universe_struct);
-    my_universe->set_global_name("universe");
+            std::string get_name() const override
+            {
+                return "GPGPU test";
+            }
 
-    yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
+            std::vector<std::string> get_valid_keys() override
+            {
+                return { "help", "version" };
+            }
 
-    if (my_universe->get_window() == nullptr)
-    {
-        std::cerr << "Failed to open SDL window.\n";
-        return -1;
-    }
+            yli::ontology::UniverseStruct get_universe_struct() override
+            {
+                yli::ontology::UniverseStruct universe_struct;
+                std::stringstream window_title_stringstream;
+                window_title_stringstream << "GPGPU test " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
+                universe_struct.application_name = "GPGPU test";
+                universe_struct.window_title = window_title_stringstream.str();
+                universe_struct.window_width = 512;
+                universe_struct.window_height = 512;
 
-    // Create the `World`.
+                return universe_struct;
+            }
 
-    yli::ontology::WorldStruct world_struct;
+            bool create_simulation() override
+            {
+                yli::ontology::Universe* const my_universe = this->get_universe();
 
-    std::cout << "Creating yli::ontology::Entity* gpgpu_test_world_entity ...\n";
-    yli::ontology::Entity* const gpgpu_test_world_entity = entity_factory->create_world(world_struct);
-    std::cout << "Creating yli::ontology::World* gpgpu_test_world ...\n";
-    yli::ontology::World* const gpgpu_test_world = dynamic_cast<yli::ontology::World*>(gpgpu_test_world_entity);
+                if (my_universe == nullptr)
+                {
+                    return false;
+                }
 
-    if (gpgpu_test_world == nullptr)
-    {
-        return -1;
-    }
+                my_universe->set_global_name("universe");
 
-    // Create the `Scene`s.
+                yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
 
-    // GPGPU test `Scene` begins here.
+                if (!my_universe->get_is_headless() && my_universe->get_window() == nullptr)
+                {
+                    std::cerr << "Failed to open SDL window.\n";
+                    return false;
+                }
 
-    std::cout << "Creating yli::ontology::Entity* gpgpu_test_scene_entity and its contents ...\n";
-    yli::ontology::Entity* const gpgpu_test_scene_entity = gpgpu_test::create_gpgpu_test_scene(entity_factory, gpgpu_test_world);
+                // Create the `World`.
 
-    if (gpgpu_test_scene_entity == nullptr)
-    {
-        return -1;
-    }
+                yli::ontology::WorldStruct world_struct;
 
-    std::cout << "Creating yli::ontology::Scene* gpgpu_test_scene ...\n";
-    yli::ontology::Scene* const gpgpu_test_scene = dynamic_cast<yli::ontology::Scene*>(gpgpu_test_scene_entity);
+                std::cout << "Creating yli::ontology::Entity* gpgpu_test_world_entity ...\n";
+                yli::ontology::Entity* const gpgpu_test_world_entity = entity_factory->create_world(world_struct);
+                std::cout << "Creating yli::ontology::World* gpgpu_test_world ...\n";
+                yli::ontology::World* const gpgpu_test_world = dynamic_cast<yli::ontology::World*>(gpgpu_test_world_entity);
 
-    if (gpgpu_test_scene == nullptr)
-    {
-        return -1;
-    }
+                if (gpgpu_test_world == nullptr)
+                {
+                    return false;
+                }
 
-    // Set `gpgpu_test_scene` to be the currently active `Scene`.
-    std::cout << "Setting gpgpu_test_scene as the active scene ...\n";
-    my_universe->set_active_scene(gpgpu_test_scene);
+                // Create the `Scene`s.
 
-    // GPGPU test `Scene` ends here.
+                // GPGPU test `Scene` begins here.
 
-    // Render the `Universe`.
-    my_universe->render();
+                std::cout << "Creating yli::ontology::Entity* gpgpu_test_scene_entity and its contents ...\n";
+                yli::ontology::Entity* const gpgpu_test_scene_entity = gpgpu_test::create_gpgpu_test_scene(entity_factory, gpgpu_test_world);
 
-    return 0;
+                if (gpgpu_test_scene_entity == nullptr)
+                {
+                    return false;
+                }
+
+                std::cout << "Creating yli::ontology::Scene* gpgpu_test_scene ...\n";
+                yli::ontology::Scene* const gpgpu_test_scene = dynamic_cast<yli::ontology::Scene*>(gpgpu_test_scene_entity);
+
+                if (gpgpu_test_scene == nullptr)
+                {
+                    return false;
+                }
+
+                // Set `gpgpu_test_scene` to be the currently active `Scene`.
+                std::cout << "Setting gpgpu_test_scene as the active scene ...\n";
+                my_universe->set_active_scene(gpgpu_test_scene);
+
+                // GPGPU test `Scene` ends here.
+
+                // Render the `Universe`.
+                my_universe->render();
+                return true;
+            }
+    };
 }
-catch (const std::exception& exception)
+
+namespace yli::core
 {
-    std::cerr << "ERROR: exception: " << exception.what() << "\n";
+    yli::core::Application* create_application(const int argc, const char* const argv[])
+    {
+        return new gpgpu_test::GpgpuTestApplication(argc, argv);
+    }
 }

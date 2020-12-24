@@ -720,17 +720,34 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_callback_engine_entities.child_pointer_vector);
     }
 
-    void Universe::create_context_and_make_it_current()
+    void Universe::create_window()
     {
-        this->context = yli::sdl::create_context(this->window);
+        // Create a window.
+        this->window = yli::sdl::create_window(
+                static_cast<int>(this->window_width),
+                static_cast<int>(this->window_height),
+                this->window_title.c_str(),
+                this->is_fullscreen);
+
+        if (this->window != nullptr)
+        {
+            std::cerr << "SDL Window created successfully.\n";
+        }
+        else
+        {
+            std::cerr << "ERROR: `Universe::create_window`: SDL Window could not be created!\n";
+        }
     }
 
-    void Universe::make_context_current()
+    void Universe::setup_context()
     {
-        if (this->context != nullptr)
-        {
-            yli::sdl::make_context_current(this->window, *this->context);
-        }
+        this->render_master->setup_context(this->window);
+    }
+
+    void Universe::create_window_and_setup_context()
+    {
+        this->create_window();
+        this->setup_context();
     }
 
     void Universe::set_swap_interval(const int32_t interval)
