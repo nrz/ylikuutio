@@ -752,6 +752,7 @@ namespace yli::ontology
             uint32_t window_width;
             uint32_t window_height;
             std::string window_title;
+
             bool is_physical;
             bool is_fullscreen;
             bool is_headless;
