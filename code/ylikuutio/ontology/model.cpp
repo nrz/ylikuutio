@@ -18,8 +18,6 @@
 #include "model.hpp"
 #include "object.hpp"
 #include "family_templates.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM

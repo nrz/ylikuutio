@@ -20,8 +20,6 @@
 
 #include "shader_loader.hpp"
 #include "code/ylikuutio/file/file_loader.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers

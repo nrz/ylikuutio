@@ -15,25 +15,22 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_LOAD_COMMON_TEXTURE_LOADER_HPP_INCLUDED
-#define __YLIKUUTIO_LOAD_COMMON_TEXTURE_LOADER_HPP_INCLUDED
-
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#ifndef __YLIKUUTIO_RENDER_RENDER_MASTER_STRUCT_HPP_INCLUDED
+#define __YLIKUUTIO_RENDER_RENDER_MASTER_STRUCT_HPP_INCLUDED
 
 // Include standard headers
-#include <cstddef>  // std::size_t
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
-namespace yli::load
+namespace yli::render
 {
-    // Load a BMP or PNG file.
-    bool load_common_texture(
-            const std::string& filename,
-            std::size_t& image_width,
-            std::size_t& image_height,
-            std::size_t& image_size,
-            GLuint& textureID,
-            const bool is_headless);
+    struct RenderMasterStruct
+    {
+        std::string hidden_window_title;
+        uint32_t hidden_window_width { 1600 };
+        uint32_t hidden_window_height { 900 };
+        bool is_hidden_window_fullscreen { false };
+    };
 }
 
 #endif

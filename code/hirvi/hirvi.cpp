@@ -64,6 +64,7 @@
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/ontology/entity_factory_templates.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
+#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/snippets/window_snippets.hpp"
 #include "code/ylikuutio/snippets/framebuffer_snippets.hpp"
 #include "code/ylikuutio/snippets/background_color_snippets.hpp"
@@ -76,8 +77,6 @@
 #include "code/ylikuutio/snippets/wireframe_snippets.hpp"
 #include "code/ylikuutio/snippets/console_callback_snippets.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
-
-#include "SDL.h"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

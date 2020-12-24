@@ -27,10 +27,8 @@
 #include "child_module.hpp"
 #include "parent_module.hpp"
 #include "symbiosis_struct.hpp"
-#include <ofbx.h>
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include <ofbx.h>
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

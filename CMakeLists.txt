@@ -736,6 +736,7 @@ add_library(ylikuutio STATIC
     # render, in alphabetical order
     code/ylikuutio/render/render_master.cpp
     code/ylikuutio/render/render_master.hpp
+    code/ylikuutio/render/render_master_struct.hpp
     code/ylikuutio/render/render_species_or_glyph.hpp
     code/ylikuutio/render/render_struct.hpp
     code/ylikuutio/render/render_templates.hpp

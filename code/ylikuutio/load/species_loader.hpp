@@ -19,8 +19,6 @@
 #define __YLIKUUTIO_LOAD_SPECIES_LOADER_HPP_INCLUDED
 
 #include "species_loader_struct.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM

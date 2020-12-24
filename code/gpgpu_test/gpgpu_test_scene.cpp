@@ -28,8 +28,6 @@
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/compute_task_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM

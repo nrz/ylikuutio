@@ -23,8 +23,6 @@
 #include "universe.hpp"
 #include "font2D.hpp"
 #include "text_struct.hpp"
-
-// Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
