@@ -43,7 +43,6 @@
 #include "code/ylikuutio/core/entrypoint.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/pi.hpp"
-#include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
 
@@ -64,7 +63,6 @@
 #include "code/ylikuutio/ontology/text_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/ontology/entity_factory_templates.hpp"
-#include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/snippets/window_snippets.hpp"
 #include "code/ylikuutio/snippets/framebuffer_snippets.hpp"
@@ -78,9 +76,6 @@
 #include "code/ylikuutio/snippets/wireframe_snippets.hpp"
 #include "code/ylikuutio/snippets/console_callback_snippets.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
-
-// Include GLEW
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 #include "SDL.h"
 
@@ -190,7 +185,7 @@ namespace hirvi
                 {
                     const std::string framebuffer_width = this->command_line_master.get_value("framebuffer_width");
                     std::size_t index = 0;
-                    universe_struct.framebuffer_width = yli::string::extract_uint32_t_value_from_string(framebuffer_width, index, nullptr, nullptr);
+                    universe_struct.framebuffer_module_struct.texture_width = yli::string::extract_uint32_t_value_from_string(framebuffer_width, index, nullptr, nullptr);
                 }
 
                 if (this->command_line_master.is_key("framebuffer_height") &&
@@ -198,7 +193,7 @@ namespace hirvi
                 {
                     const std::string framebuffer_height = this->command_line_master.get_value("framebuffer_height");
                     std::size_t index = 0;
-                    universe_struct.framebuffer_height = yli::string::extract_uint32_t_value_from_string(framebuffer_height, index, nullptr, nullptr);
+                    universe_struct.framebuffer_module_struct.texture_height = yli::string::extract_uint32_t_value_from_string(framebuffer_height, index, nullptr, nullptr);
                 }
 
                 if (this->command_line_master.is_key("speed") &&
@@ -257,28 +252,6 @@ namespace hirvi
                 {
                     std::cerr << "Failed to open SDL window.\n";
                     return false;
-                }
-
-                if (!my_universe->get_is_headless())
-                {
-                    my_universe->create_context();
-
-                    // Initialize GLEW.
-                    if (!yli::opengl::init_glew())
-                    {
-                        return false;
-                    }
-
-                    yli::input::disable_cursor();
-                    yli::input::enable_relative_mouse_mode();
-
-                    // Enable depth test.
-                    yli::opengl::enable_depth_test();
-                    // Accept fragment if it is closer to the camera than the former one.
-                    yli::opengl::set_depth_func_to_less();
-
-                    // Cull triangles whose normal is not towards the camera.
-                    yli::opengl::cull_triangles();
                 }
 
                 // Create the main `Console`.
@@ -366,7 +339,7 @@ namespace hirvi
                 std::cout << "Font2D created successfully.\n";
                 my_font2D->set_global_name("my_font2D");
 
-                my_universe->set_active_font2D(my_font2D);
+                my_console->bind_to_new_font_2d(my_font2D);
                 my_console->print_text("Welcome! Please write \"help\" for more");
                 my_console->print_text("information.");
 
@@ -730,7 +703,7 @@ namespace hirvi
                 std::cout << "Setting up window size ...\n";
                 yli::snippets::set_window_size(my_universe, my_universe->get_window_width(), my_universe->get_window_height());
                 std::cout << "Setting up framebuffer size ...\n";
-                yli::snippets::set_framebuffer_size(my_universe, my_universe->get_framebuffer_width(), my_universe->get_framebuffer_height());
+                yli::snippets::set_framebuffer_size(my_universe, my_universe->framebuffer_module.get_texture_width(), my_universe->framebuffer_module.get_texture_height());
                 std::cout << "Setting up background colors ...\n";
                 yli::snippets::set_background_colors(my_universe, 0.0f, 0.0f, 1.0f, 0.0f);
                 std::cout << "Setting up wireframe state ...\n";

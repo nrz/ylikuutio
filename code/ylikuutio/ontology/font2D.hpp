@@ -21,7 +21,9 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "parent_module.hpp"
+#include "master_module.hpp"
 #include "universe.hpp"
+#include "console.hpp"
 #include "font_struct.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
@@ -47,7 +49,8 @@ namespace yli::ontology
             Font2D(yli::ontology::Universe* const universe, const yli::ontology::FontStruct& font_struct, yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, font_struct),
                 child_of_universe(parent_module, this),
-                parent_of_text2Ds(this)
+                parent_of_text2Ds(this),
+                master_of_consoles(this)
         {
                 // constructor.
                 this->texture_filename = font_struct.texture_filename;
@@ -164,6 +167,8 @@ namespace yli::ontology
 
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::ParentModule parent_of_text2Ds;
+
+            yli::ontology::MasterModule<yli::ontology::Font2D*, yli::ontology::Console*> master_of_consoles;
 
         private:
             std::size_t get_number_of_children() const override;

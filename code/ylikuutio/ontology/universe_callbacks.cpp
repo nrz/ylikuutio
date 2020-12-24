@@ -16,9 +16,11 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "entity.hpp"
+#include "brain.hpp"
 #include "movable.hpp"
 #include "universe.hpp"
 #include "brain.hpp"
+#include "font2D.hpp"
 #include "console.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
@@ -56,9 +58,16 @@ namespace yli::ontology
         yli::ontology::Movable* const child_or_apprentice_movable = dynamic_cast<yli::ontology::Movable*>(child_or_apprentice_entity);
         yli::ontology::Brain* const parent_or_master_brain = dynamic_cast<yli::ontology::Brain*>(parent_or_master_entity);
 
+        yli::ontology::Console* const child_or_apprentice_console = dynamic_cast<yli::ontology::Console*>(child_or_apprentice_entity);
+        yli::ontology::Font2D* const parent_or_master_font_2d = dynamic_cast<yli::ontology::Font2D*>(parent_or_master_entity);
+
         if (child_or_apprentice_movable != nullptr && parent_or_master_brain != nullptr)
         {
             child_or_apprentice_movable->bind_to_new_brain(parent_or_master_brain);
+        }
+        else if (child_or_apprentice_console != nullptr && parent_or_master_font_2d != nullptr)
+        {
+            child_or_apprentice_console->bind_to_new_font_2d(parent_or_master_font_2d);
         }
         else
         {
@@ -317,54 +326,26 @@ namespace yli::ontology
             yli::ontology::Universe* const universe,
             std::shared_ptr<std::string> filename)
     {
-        if (universe == nullptr || filename == nullptr)
+        if (universe == nullptr || filename == nullptr || !universe->framebuffer_module.get_in_use())
         {
             return nullptr;
         }
 
         // https://learnopengl.com/Advanced-OpenGL/Framebuffers
 
-        const std::size_t texture_width = universe->framebuffer_width;
-        const std::size_t texture_height = universe->framebuffer_height;
+        const std::size_t texture_width = universe->framebuffer_module.get_texture_width();
+        const std::size_t texture_height = universe->framebuffer_module.get_texture_height();
 
-        if (!universe->is_framebuffer_initialized)
+        if (!universe->framebuffer_module.get_is_initialized())
         {
-            // Create an FBO (off-screen framebuffer object).
-            glGenFramebuffers(1, &universe->framebuffer);
+            universe->framebuffer_module.create_framebuffer_object();
         }
 
-        // Bind the offscreen buffer.
-        yli::opengl::bind_gl_framebuffer(universe->framebuffer);
+        universe->framebuffer_module.bind();
 
-        if (!universe->is_framebuffer_initialized)
+        if (!universe->framebuffer_module.get_is_initialized())
         {
-            // Create a texture.
-            glGenTextures(1, &universe->texture);
-            glBindTexture(GL_TEXTURE_2D, universe->texture);
-
-            // Define the texture.
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture_width, texture_height, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
-
-            yli::opengl::set_filtering_parameters();
-
-            // Attach the texture.
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, universe->texture, 0);
-
-            // Create and bind a render buffer with depth and stencil attachments.
-            glGenRenderbuffers(1, &universe->renderbuffer);
-            glBindRenderbuffer(GL_RENDERBUFFER, universe->renderbuffer);
-            glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, texture_width, texture_height);
-            glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, universe->renderbuffer);
-
-            if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-            {
-                std::cerr << "ERROR: `Universe::screenshot`: framebuffer is not complete!\n";
-            }
-
-            // Set background color for the framebuffer.
-            universe->set_opengl_background_color();
-
-            universe->is_framebuffer_initialized = true;
+            universe->framebuffer_module.initialize(universe->background_red, universe->background_green, universe->background_blue, universe->background_alpha);
         }
 
         // Clear the framebuffer.

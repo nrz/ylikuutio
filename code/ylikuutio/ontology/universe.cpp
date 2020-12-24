@@ -139,14 +139,6 @@ namespace yli::ontology
     {
         // destructor.
         std::cout << "This `Universe` will be destroyed.\n";
-
-        if (!this->is_headless && this->is_framebuffer_initialized)
-        {
-            glDeleteTextures(1, &this->texture);
-            glDeleteRenderbuffers(1, &this->renderbuffer);
-            glDeleteFramebuffers(1, &this->framebuffer);
-        }
-
         SDL_Quit();
     }
 
@@ -170,7 +162,7 @@ namespace yli::ontology
 
     void Universe::start_simulation()
     {
-        if (this->active_font2D == nullptr)
+        if (this->parent_of_font2Ds.child_pointer_vector.size() == 0)
         {
             return;
         }
@@ -180,7 +172,15 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Font2D* const font2D = this->active_font2D;
+        yli::ontology::Font2D* const font2D = static_cast<yli::ontology::Font2D*>(
+                yli::hierarchy::get_first_child(
+                    this->parent_of_font2Ds.child_pointer_vector,
+                    this->parent_of_font2Ds.get_number_of_children()));
+
+        if (font2D == nullptr)
+        {
+            return;
+        }
 
         // Create angles and cartesian coordinates text, on bottom left corner.
         yli::ontology::TextStruct angles_and_coordinates_text_struct;
@@ -607,7 +607,7 @@ namespace yli::ontology
         this->is_exit_requested = true;
     }
 
-    void Universe::render()
+    void Universe::render(const yli::render::RenderStruct& render_struct)
     {
         if (this->is_headless || !this->should_be_rendered || this->render_master == nullptr)
         {
@@ -615,37 +615,29 @@ namespace yli::ontology
         }
 
         this->prerender();
+        this->render_master->render(render_struct);
+        this->postrender();
+    }
 
+    void Universe::render()
+    {
         yli::render::RenderStruct render_struct;
         render_struct.scene = this->active_scene;
         render_struct.console = this->active_console;
         render_struct.font2D_pointer_vector = &this->parent_of_font2Ds.child_pointer_vector;
         render_struct.window = this->window;
-
-        this->render_master->render(render_struct);
-
-        this->postrender();
+        this->render(render_struct);
     }
 
     void Universe::render_without_changing_depth_test()
     {
-        if (this->is_headless || !this->should_be_rendered || this->render_master == nullptr)
-        {
-            return;
-        }
-
-        this->prerender();
-
         yli::render::RenderStruct render_struct;
         render_struct.scene = this->active_scene;
         render_struct.console = this->active_console;
         render_struct.font2D_pointer_vector = &this->parent_of_font2Ds.child_pointer_vector;
         render_struct.window = this->window;
         render_struct.should_ylikuutio_change_depth_test = false;
-
-        this->render_master->render(render_struct);
-
-        this->postrender();
+        this->render(render_struct);
     }
 
     void Universe::set_active_scene(yli::ontology::Scene* const scene)
@@ -657,16 +649,6 @@ namespace yli::ontology
             this->turbo_factor = this->active_scene->get_turbo_factor();
             this->twin_turbo_factor = this->active_scene->get_twin_turbo_factor();
         }
-    }
-
-    yli::ontology::Font2D* Universe::get_active_font2D() const
-    {
-        return this->active_font2D;
-    }
-
-    void Universe::set_active_font2D(yli::ontology::Font2D* const font2D)
-    {
-        this->active_font2D = font2D;
     }
 
     void Universe::set_active_camera(yli::ontology::Camera* const camera) const
@@ -742,7 +724,7 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_callback_engine_entities.child_pointer_vector);
     }
 
-    void Universe::create_context()
+    void Universe::create_context_and_make_it_current()
     {
         this->context = yli::sdl::create_context(this->window);
     }
@@ -833,26 +815,6 @@ namespace yli::ontology
         {
             this->active_console->adjust_n_rows();
         }
-    }
-
-    uint32_t Universe::get_framebuffer_width() const
-    {
-        return this->framebuffer_width;
-    }
-
-    void Universe::set_framebuffer_width(const uint32_t framebuffer_width)
-    {
-        this->framebuffer_width = framebuffer_width;
-    }
-
-    uint32_t Universe::get_framebuffer_height() const
-    {
-        return this->framebuffer_height;
-    }
-
-    void Universe::set_framebuffer_height(const uint32_t framebuffer_height)
-    {
-        this->framebuffer_height = framebuffer_height;
     }
 
     std::size_t Universe::get_text_size() const

@@ -29,22 +29,12 @@
 #endif
 
 #include "gpgpu_test_scene.hpp"
-#include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
-#include "code/ylikuutio/input/input.hpp"
-#include "code/ylikuutio/callback/callback_object.hpp"
-#include "code/ylikuutio/callback/callback_engine.hpp"
-#include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
-#include "code/ylikuutio/ontology/world_struct.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/shader.hpp"
-#include "code/ylikuutio/ontology/shader_struct.hpp"
+#include "code/ylikuutio/ontology/world_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
-#include "code/ylikuutio/opengl/opengl.hpp"
-#include "code/ylikuutio/time/time.hpp"
 
 // Include GLEW
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -57,6 +47,11 @@
 #include <exception>     // try, catch, std::exception
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
+
+namespace yli::ontology
+{
+    class Entity;
+}
 
 int main(const int argc, const char* const argv[]) try
 {
@@ -83,35 +78,11 @@ int main(const int argc, const char* const argv[]) try
 
     yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
 
-    std::cout << "Creating yli::callback::CallbackEngine cleanup_callback_engine ...\n";
-    yli::callback::CallbackEngine cleanup_callback_engine = yli::callback::CallbackEngine();
-    cleanup_callback_engine.create_callback_object(nullptr);
-
     if (my_universe->get_window() == nullptr)
     {
         std::cerr << "Failed to open SDL window.\n";
         return -1;
     }
-
-    my_universe->create_context();
-
-    // Initialize GLEW.
-    if (!yli::opengl::init_glew())
-    {
-        cleanup_callback_engine.execute(nullptr);
-        return -1;
-    }
-
-    yli::input::disable_cursor();
-    yli::input::enable_relative_mouse_mode();
-
-    // Enable depth test.
-    yli::opengl::enable_depth_test();
-    // Accept fragment if it closer to the camera than the former one.
-    yli::opengl::set_depth_func_to_less();
-
-    // Cull triangles which normal is not towards the camera.
-    yli::opengl::cull_triangles();
 
     // Create the `World`.
 
@@ -144,7 +115,6 @@ int main(const int argc, const char* const argv[]) try
 
     if (gpgpu_test_scene == nullptr)
     {
-        cleanup_callback_engine.execute(nullptr);
         return -1;
     }
 
@@ -154,14 +124,8 @@ int main(const int argc, const char* const argv[]) try
 
     // GPGPU test `Scene` ends here.
 
-    // Clear the screen.
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
     // Render the `Universe`.
     my_universe->render();
-
-    // do cleanup.
-    cleanup_callback_engine.execute(nullptr);
 
     return 0;
 }

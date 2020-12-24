@@ -41,7 +41,7 @@ namespace yli::render
             RenderMaster(yli::ontology::Universe* const universe);
 
             RenderMaster(const RenderMaster&) = delete;            // Delete copy constructor.
-            yli::render::RenderMaster& operator=(const RenderMaster&) = delete; // Delete copy assignment.
+            RenderMaster& operator=(const RenderMaster&) = delete; // Delete copy assignment.
 
             // destructor.
             ~RenderMaster();

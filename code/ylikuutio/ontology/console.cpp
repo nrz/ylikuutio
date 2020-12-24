@@ -38,6 +38,41 @@
 
 namespace yli::ontology
 {
+    void Console::bind_to_font_2d()
+    {
+        // requirements:
+        // `this->font_2d` must not be `nullptr`.
+        yli::ontology::Font2D* const font_2d = this->font_2d;
+
+        if (font_2d == nullptr)
+        {
+            std::cerr << "ERROR: `Console::bind_to_font2D`: `font_2d` is `nullptr`!\n";
+            return;
+        }
+
+        // get `apprenticeID` from `Font2D` and set pointer to this `Console`.
+        this->font_2d->master_of_consoles.bind_apprentice(this);
+    }
+
+    void Console::unbind_from_font_2d()
+    {
+        if (this->font_2d != nullptr)
+        {
+            this->font_2d->master_of_consoles.unbind_apprentice(this->apprenticeID);
+        }
+    }
+
+    void Console::bind_to_new_font_2d(yli::ontology::Font2D* const new_font_2d)
+    {
+        // This method sets pointer to this `Console` to `nullptr`, sets `font_2d` according to the input,
+        // and requests a new `apprenticeID` from the new `Font2D`.
+
+        this->unbind_from_font_2d(); // unbind from the current `Font2D` if there is such.
+
+        this->font_2d = new_font_2d;
+        this->bind_to_font_2d();
+    }
+
     Console::~Console()
     {
         // destructor.
@@ -198,7 +233,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Font2D* const font2D = this->universe->get_active_font2D();
+        yli::ontology::Font2D* const font2D = this->font_2d;
 
         if (font2D == nullptr)
         {
