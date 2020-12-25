@@ -79,7 +79,6 @@ namespace yli::ontology
     class Shader;
     class Species;
     class Symbiosis;
-    class Camera;
 
     class Scene: public yli::ontology::Entity
     {
