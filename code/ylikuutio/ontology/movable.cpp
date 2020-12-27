@@ -25,6 +25,7 @@
 #include "movable_variable_activation.hpp"
 #include "movable_variable_read.hpp"
 #include "variable_struct.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
