@@ -89,11 +89,6 @@
 #include <variant>       // std::holds_alternative, std::variant
 #include <vector>        // std::vector
 
-namespace yli::data
-{
-    class AnyValue;
-}
-
 namespace yli::input
 {
     class InputMaster;
