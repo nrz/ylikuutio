@@ -18,9 +18,6 @@
 #include "shader.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
-#include "material.hpp"
-#include "symbiosis.hpp"
-#include "compute_task.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
