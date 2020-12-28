@@ -21,6 +21,7 @@
 #include "text_struct.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
