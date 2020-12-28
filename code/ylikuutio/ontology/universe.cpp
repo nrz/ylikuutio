@@ -152,7 +152,7 @@ namespace yli::ontology
 
     void Universe::start_simulation()
     {
-        if (this->parent_of_font2Ds.child_pointer_vector.size() == 0)
+        if (this->parent_of_font2Ds.get_number_of_children() == 0)
         {
             return;
         }
