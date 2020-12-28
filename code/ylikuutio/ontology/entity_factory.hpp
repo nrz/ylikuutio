@@ -18,25 +18,6 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_ENTITY_FACTORY_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_ENTITY_FACTORY_HPP_INCLUDED
 
-#include "variable_struct.hpp"
-#include "world_struct.hpp"
-#include "scene_struct.hpp"
-#include "shader_struct.hpp"
-#include "material_struct.hpp"
-#include "species_struct.hpp"
-#include "object_struct.hpp"
-#include "symbiosis_struct.hpp"
-#include "holobiont_struct.hpp"
-#include "vector_font_struct.hpp"
-#include "text_struct.hpp"
-#include "text3D_struct.hpp"
-#include "console_struct.hpp"
-#include "font_struct.hpp"
-#include "lisp_function_struct.hpp"
-#include "camera_struct.hpp"
-#include "compute_task_struct.hpp"
-#include "brain_struct.hpp"
-
 // Include standard headers
 #include <cstddef>   // std::size_t
 #include <memory>    // std::make_shared, std::shared_ptr
@@ -59,6 +40,24 @@ namespace yli::ontology
     class Console;
     class ComputeTask;
     class Brain;
+    struct VariableStruct;
+    struct WorldStruct;
+    struct SceneStruct;
+    struct ShaderStruct;
+    struct MaterialStruct;
+    struct SpeciesStruct;
+    struct ObjectStruct;
+    struct SymbiosisStruct;
+    struct HolobiontStruct;
+    struct VectorFontStruct;
+    struct FontStruct;
+    struct TextStruct;
+    struct Text3DStruct;
+    struct ConsoleStruct;
+    struct LispFunctionStruct;
+    struct CameraStruct;
+    struct ComputeTaskStruct;
+    struct BrainStruct;
 
     class EntityFactory
     {
