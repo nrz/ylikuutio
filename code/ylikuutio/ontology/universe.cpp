@@ -97,7 +97,6 @@ namespace yli::input
 namespace yli::ontology
 {
     class Font2D;
-    class Variable;
 
     const std::string Universe::version = "0.0.8";
 

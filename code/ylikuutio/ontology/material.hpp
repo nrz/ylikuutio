@@ -40,8 +40,6 @@
 namespace yli::ontology
 {
     class Species;
-    class Object;
-    class ChunkMaster;
 
     class Material: public yli::ontology::Entity
     {
