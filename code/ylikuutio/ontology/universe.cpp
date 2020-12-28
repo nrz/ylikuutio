@@ -76,6 +76,7 @@
 #include <btBulletDynamicsCommon.h>
 
 // Include standard headers
+#include <cmath>         // NAN, sqrt, std::isnan, std::pow
 #include <cstddef>       // std::size_t
 #include <iomanip>       // std::setfill, std::setprecision, std::setw
 #include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
