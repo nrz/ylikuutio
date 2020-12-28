@@ -26,20 +26,7 @@
 namespace yli::ontology
 {
     class Entity;
-    class Variable;
     class Universe;
-    class World;
-    class Scene;
-    class Shader;
-    class Material;
-    class Species;
-    class Object;
-    class VectorFont;
-    class Text3D;
-    class Font2D;
-    class Console;
-    class ComputeTask;
-    class Brain;
     struct VariableStruct;
     struct WorldStruct;
     struct SceneStruct;
