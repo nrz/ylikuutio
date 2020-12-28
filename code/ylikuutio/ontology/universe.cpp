@@ -34,7 +34,6 @@
 #endif
 
 #include "entity.hpp"
-#include "variable.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
 #include "font2D.hpp"
