@@ -212,7 +212,12 @@ namespace yli::ontology
             return nullptr;
         }
 
-        // TODO: implement `read_up` for `Movable`s!
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            return std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(movable->up));
+        }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
@@ -231,7 +236,12 @@ namespace yli::ontology
             return nullptr;
         }
 
-        // TODO: implement `read_right` for `Movable`s!
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            return std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(movable->right));
+        }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
