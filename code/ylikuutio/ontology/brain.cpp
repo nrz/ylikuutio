@@ -66,13 +66,11 @@ namespace yli::ontology
             // Apply this `Brain` to the current `Movable`.
             yli::ontology::Movable* movable = this->master_of_movables.apprentice_pointer_vector[movable_i];
 
-            if (movable == nullptr)
+            if (movable != nullptr)
             {
                 // Do not waste time in calling the callback function for `nullptr` targets.
-                continue;
+                this->callback_engine->execute(std::make_shared<yli::data::AnyValue>(movable));
             }
-
-            this->callback_engine->execute(std::make_shared<yli::data::AnyValue>(movable));
         }
     }
 }
