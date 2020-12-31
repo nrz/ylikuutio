@@ -1,7 +1,7 @@
 #!/bin/bash
 sed -i \
 '1 i'\
-'// Copyright (C) 2015-2020 Antti Nuortimo.\n'\
+'// Copyright (C) 2015-2021 Antti Nuortimo.\n'\
 '//\n'\
 '// This program is free software; you can redistribute it and/or modify\n'\
 '// it under the terms of the GNU General Public License as published by\n'\
