@@ -47,13 +47,13 @@
 
 namespace yli::ontology
 {
-    template<class T1, class T2>
+    template<class M, class A>
         class MasterModule
         {
             public:
-                void bind_apprentice(T2 const apprentice)
+                void bind_apprentice(A const apprentice)
                 {
-                    yli::hierarchy::bind_apprentice_to_master<T2>(
+                    yli::hierarchy::bind_apprentice_to_master<A>(
                             apprentice,
                             this->apprentice_pointer_vector,
                             this->free_apprenticeID_queue,
@@ -62,14 +62,14 @@ namespace yli::ontology
 
                 void unbind_apprentice(std::size_t apprenticeID)
                 {
-                    yli::hierarchy::unbind_child_from_parent<T2>(
+                    yli::hierarchy::unbind_child_from_parent<A>(
                             apprenticeID,
                             this->apprentice_pointer_vector,
                             this->free_apprenticeID_queue,
                             this->number_of_apprentices);
                 }
 
-                MasterModule(T1 const master)
+                MasterModule(M const master)
                     : number_of_apprentices { 0 },
                     master { master }
                 {
@@ -82,7 +82,7 @@ namespace yli::ontology
 
                     for (std::size_t apprentice_i = 0; apprentice_i < this->apprentice_pointer_vector.size(); apprentice_i++)
                     {
-                        T2 const apprentice = this->apprentice_pointer_vector[apprentice_i];
+                        A const apprentice = this->apprentice_pointer_vector[apprentice_i];
 
                         if (apprentice != nullptr)
                         {
@@ -97,13 +97,13 @@ namespace yli::ontology
                     return this->number_of_apprentices;
                 }
 
-                std::vector<T2> apprentice_pointer_vector;
+                std::vector<A> apprentice_pointer_vector;
 
             private:
                 std::queue<std::size_t> free_apprenticeID_queue;
                 std::size_t number_of_apprentices;
 
-                T1 master; // The `Entity` that owns this `MasterModule`.
+                M master; // The `Entity` that owns this `MasterModule`.
         };
 }
 
