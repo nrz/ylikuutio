@@ -102,6 +102,9 @@ provide standard functions needed for binding in composition relationships betwe
 For special binding needs, e.g. when the children need to be in a specific order, custom code should be used
 instead of `ParentModule`, `ChildModule`, or both.
 
+`ParentModule` mutates certain member variables of the children, namely the following:
+`childID` - an identifier that is unique within the children of a specific parent.
+
 In `ontology` namespace and directory there are also classes used for passing parameters to constructors of
 `ontology` classes. These classes include `UniverseStruct`, `SceneStruct`, `ShaderStruct`, `MaterialStruct`,
 `SpeciesStruct`, `ObjectStruct`, `SymbiosisStruct`, `HolobiontStruct`, `BiontStruct`, `ComputeTaskStruct`,
