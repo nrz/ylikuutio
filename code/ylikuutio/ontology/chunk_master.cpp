@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "chunk_master.hpp"
-#include "parent_module.hpp"
 #include "universe.hpp"
 #include "material.hpp"
 #include "chunk.hpp"
