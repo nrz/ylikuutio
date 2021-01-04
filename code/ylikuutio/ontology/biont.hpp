@@ -38,7 +38,10 @@ namespace yli::ontology
     class Biont: public yli::ontology::Movable
     {
         public:
-            Biont(yli::ontology::Universe* const universe, yli::ontology::BiontStruct& biont_struct, yli::ontology::ParentModule* const parent_module)
+            Biont(
+                    yli::ontology::Universe* const universe,
+                    yli::ontology::BiontStruct& biont_struct,
+                    yli::ontology::ParentModule* const parent_module)
                 : Movable(
                         universe,
                         biont_struct,

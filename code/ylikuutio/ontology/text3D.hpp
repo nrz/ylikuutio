@@ -45,7 +45,10 @@ namespace yli::ontology
             // Note: different fonts may provide glyphs for different Unicodes!
             void bind_to_new_parent(yli::ontology::VectorFont* const new_vector_font_pointer);
 
-            Text3D(yli::ontology::Universe* const universe, const yli::ontology::Text3DStruct& text3D_struct, yli::ontology::ParentModule* const parent_module)
+            Text3D(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::Text3DStruct& text3D_struct,
+                    yli::ontology::ParentModule* const parent_module)
                 : Movable(
                         universe,
                         text3D_struct,

@@ -118,7 +118,10 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_world(const yli::ontology::WorldStruct& world_struct) const
     {
-        yli::ontology::Entity* world_entity = new yli::ontology::World(this->universe, world_struct, (this->universe == nullptr ? nullptr : &this->universe->parent_of_worlds));
+        yli::ontology::Entity* world_entity = new yli::ontology::World(
+                this->universe,
+                world_struct,
+                (this->universe == nullptr ? nullptr : &this->universe->parent_of_worlds));
 
         if (!world_struct.global_name.empty() && world_struct.local_name.empty())
         {
@@ -136,7 +139,11 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_scene(const yli::ontology::SceneStruct& scene_struct) const
     {
-        yli::ontology::Entity* scene_entity = new yli::ontology::Scene(this->universe, scene_struct, (scene_struct.world == nullptr ? nullptr : &scene_struct.world->parent_of_scenes));
+        yli::ontology::Entity* scene_entity = new yli::ontology::Scene(
+                this->universe,
+                scene_struct,
+                (scene_struct.world == nullptr ? nullptr : &scene_struct.world->parent_of_scenes));
+
         scene_entity->set_global_name(scene_struct.global_name);
         scene_entity->set_local_name(scene_struct.local_name);
         return scene_entity;
@@ -191,7 +198,11 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const
     {
-        yli::ontology::Entity* symbiosis_entity = new yli::ontology::Symbiosis(this->universe, symbiosis_struct, (symbiosis_struct.parent == nullptr ? nullptr : &symbiosis_struct.parent->parent_of_symbioses));
+        yli::ontology::Entity* symbiosis_entity = new yli::ontology::Symbiosis(
+                this->universe,
+                symbiosis_struct,
+                (symbiosis_struct.parent == nullptr ? nullptr : &symbiosis_struct.parent->parent_of_symbioses));
+
         symbiosis_entity->set_global_name(symbiosis_struct.global_name);
         symbiosis_entity->set_local_name(symbiosis_struct.local_name);
         return symbiosis_entity;
@@ -199,7 +210,11 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_holobiont(const yli::ontology::HolobiontStruct& holobiont_struct) const
     {
-        yli::ontology::Entity* holobiont_entity = new yli::ontology::Holobiont(this->universe, holobiont_struct, (holobiont_struct.symbiosis_parent == nullptr ? nullptr : &holobiont_struct.symbiosis_parent->parent_of_holobionts));
+        yli::ontology::Entity* holobiont_entity = new yli::ontology::Holobiont(
+                this->universe,
+                holobiont_struct,
+                (holobiont_struct.symbiosis_parent == nullptr ? nullptr : &holobiont_struct.symbiosis_parent->parent_of_holobionts));
+
         holobiont_entity->set_global_name(holobiont_struct.global_name);
         holobiont_entity->set_local_name(holobiont_struct.local_name);
         return holobiont_entity;
@@ -215,7 +230,11 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_text2d(const yli::ontology::TextStruct& text_struct) const
     {
-        yli::ontology::Entity* text2d_entity = new yli::ontology::Text2D(this->universe, text_struct, (text_struct.font2D_parent == nullptr ? nullptr : &text_struct.font2D_parent->parent_of_text2Ds));
+        yli::ontology::Entity* text2d_entity = new yli::ontology::Text2D(
+                this->universe,
+                text_struct,
+                (text_struct.font2D_parent == nullptr ? nullptr : &text_struct.font2D_parent->parent_of_text2Ds));
+
         text2d_entity->set_global_name(text_struct.global_name);
         text2d_entity->set_local_name(text_struct.local_name);
         return text2d_entity;
@@ -223,7 +242,11 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_text3d(const yli::ontology::Text3DStruct& text3D_struct) const
     {
-        yli::ontology::Entity* text3d_entity = new yli::ontology::Text3D(this->universe, text3D_struct, (text3D_struct.parent == nullptr ? nullptr : &text3D_struct.parent->parent_of_text3Ds));
+        yli::ontology::Entity* text3d_entity = new yli::ontology::Text3D(
+                this->universe,
+                text3D_struct,
+                (text3D_struct.parent == nullptr ? nullptr : &text3D_struct.parent->parent_of_text3Ds));
+
         text3d_entity->set_global_name(text3D_struct.global_name);
         text3d_entity->set_local_name(text3D_struct.local_name);
         return text3d_entity;
@@ -231,7 +254,10 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_font2d(const yli::ontology::FontStruct& font_struct) const
     {
-        yli::ontology::Entity* font2d_entity = new yli::ontology::Font2D(this->universe, font_struct, (this->universe == nullptr ? nullptr : &this->universe->parent_of_font2Ds));
+        yli::ontology::Entity* font2d_entity = new yli::ontology::Font2D(
+                this->universe,
+                font_struct,
+                (this->universe == nullptr ? nullptr : &this->universe->parent_of_font2Ds));
 
         if (!font_struct.global_name.empty() && font_struct.local_name.empty())
         {
@@ -249,7 +275,10 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_console(const yli::ontology::ConsoleStruct& console_struct) const
     {
-        yli::ontology::Entity* console_entity = new yli::ontology::Console(this->universe, console_struct, (this->universe == nullptr ? nullptr : &this->universe->parent_of_consoles));
+        yli::ontology::Entity* console_entity = new yli::ontology::Console(
+                this->universe,
+                console_struct,
+                (this->universe == nullptr ? nullptr : &this->universe->parent_of_consoles));
 
         if (!console_struct.global_name.empty() && console_struct.local_name.empty())
         {
@@ -279,7 +308,11 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_camera(const yli::ontology::CameraStruct& camera_struct) const
     {
-        yli::ontology::Entity* camera_entity = new yli::ontology::Camera(this->universe, camera_struct, (camera_struct.parent == nullptr ? nullptr : &camera_struct.parent->parent_of_cameras));
+        yli::ontology::Entity* camera_entity = new yli::ontology::Camera(
+                this->universe,
+                camera_struct,
+                (camera_struct.parent == nullptr ? nullptr : &camera_struct.parent->parent_of_cameras));
+
         camera_entity->set_global_name(camera_struct.global_name);
         camera_entity->set_local_name(camera_struct.local_name);
         return camera_entity;
@@ -295,7 +328,11 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_brain(const yli::ontology::BrainStruct& brain_struct) const
     {
-        yli::ontology::Entity* brain_entity = new yli::ontology::Brain(this->universe, brain_struct, (brain_struct.parent == nullptr ? nullptr : &brain_struct.parent->parent_of_brains));
+        yli::ontology::Entity* brain_entity = new yli::ontology::Brain(
+                this->universe,
+                brain_struct,
+                (brain_struct.parent == nullptr ? nullptr : &brain_struct.parent->parent_of_brains));
+
         brain_entity->set_global_name(brain_struct.global_name);
         brain_entity->set_local_name(brain_struct.local_name);
         return brain_entity;

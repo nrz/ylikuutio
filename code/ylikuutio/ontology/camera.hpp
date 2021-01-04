@@ -78,7 +78,10 @@ namespace yli::ontology
     class Camera: public yli::ontology::Movable
     {
         public:
-            Camera(yli::ontology::Universe* const universe, const yli::ontology::CameraStruct& camera_struct, yli::ontology::ParentModule* const parent_module)
+            Camera(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::CameraStruct& camera_struct,
+                    yli::ontology::ParentModule* const parent_module)
                 : Movable(
                         universe,
                         camera_struct,

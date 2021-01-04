@@ -42,7 +42,10 @@ namespace yli::ontology
             // This method sets pointer to this `Text2D` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Font2D`.
             void bind_to_new_parent(yli::ontology::Font2D* const new_parent);
 
-            Text2D(yli::ontology::Universe* const universe, const yli::ontology::TextStruct& text_struct, yli::ontology::ParentModule* const parent_module)
+            Text2D(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::TextStruct& text_struct,
+                    yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, text_struct),
                 child_of_font2D(parent_module, this)
             {

@@ -65,7 +65,10 @@ namespace yli::ontology
     class Brain: public yli::ontology::Entity
     {
         public:
-            Brain(yli::ontology::Universe* const universe, const yli::ontology::BrainStruct& brain_struct, yli::ontology::ParentModule* const parent_module)
+            Brain(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::BrainStruct& brain_struct,
+                    yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, brain_struct),
                 child_of_scene(parent_module, this),
                 master_of_movables(this)
