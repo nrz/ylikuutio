@@ -19,7 +19,6 @@
 #define __YLIKUUTIO_ONTOLOGY_HOLOBIONT_HPP_INCLUDED
 
 #include "movable.hpp"
-#include "parent_module.hpp"
 #include "holobiont_struct.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 
@@ -36,6 +35,7 @@ namespace yli::data
 
 namespace yli::ontology
 {
+    class ParentModule;
     class Entity;
     class Universe;
     class Symbiosis;
