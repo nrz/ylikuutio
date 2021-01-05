@@ -23,7 +23,6 @@
 #include "parent_module.hpp"
 #include "master_module.hpp"
 #include "universe.hpp"
-#include "console.hpp"
 #include "font_struct.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
@@ -169,7 +168,7 @@ namespace yli::ontology
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::ParentModule parent_of_text2Ds;
 
-            yli::ontology::MasterModule<yli::ontology::Font2D*, yli::ontology::Console*> master_of_consoles;
+            yli::ontology::MasterModule master_of_consoles;
 
         private:
             std::size_t get_number_of_children() const override;

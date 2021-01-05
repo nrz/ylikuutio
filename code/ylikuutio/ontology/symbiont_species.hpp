@@ -24,7 +24,6 @@
 #include "shader.hpp"
 #include "species.hpp"
 #include "symbiont_material.hpp"
-#include "biont.hpp"
 #include "species_struct.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -156,7 +155,7 @@ namespace yli::ontology
             template<class T1, class T2>
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
-            yli::ontology::MasterModule<yli::ontology::SymbiontSpecies*, yli::ontology::Biont*> master_of_bionts;
+            yli::ontology::MasterModule master_of_bionts;
 
         private:
             glm::vec3 light_position; // light position.

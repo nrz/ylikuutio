@@ -19,6 +19,7 @@
 #define __YLIKUUTIO_ONTOLOGY_BIONT_HPP_INCLUDED
 
 #include "movable.hpp"
+#include "apprentice_module.hpp"
 #include "biont_struct.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 
@@ -32,8 +33,8 @@ namespace yli::ontology
     class Entity;
     class Universe;
     class Shader;
-    class SymbiontSpecies;
     class ParentModule;
+    class MasterModule;
 
     class Biont: public yli::ontology::Movable
     {
@@ -41,21 +42,20 @@ namespace yli::ontology
             Biont(
                     yli::ontology::Universe* const universe,
                     yli::ontology::BiontStruct& biont_struct,
-                    yli::ontology::ParentModule* const parent_module)
+                    yli::ontology::ParentModule* const parent_module,
+                    yli::ontology::MasterModule* const symbiont_species_master_module)
                 : Movable(
                         universe,
                         biont_struct,
-                        parent_module)
+                        parent_module,
+                        nullptr),
+                apprentice_of_symbiont_species(symbiont_species_master_module, this)
             {
                 // constructor.
-                this->symbiont_species = biont_struct.symbiont_species;
 
                 this->biontID          = biont_struct.biontID;
 
                 this->should_render    = biont_struct.should_render;
-
-                // Get `childID` from `SymbiontSpecies` (not a parent!) and set pointer to this `Biont`.
-                this->bind_to_symbiont_species();
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Biont*";
@@ -70,14 +70,12 @@ namespace yli::ontology
             template<class T1, class T2>
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
-        protected:
-            void bind_to_symbiont_species();
+            yli::ontology::ApprenticeModule apprentice_of_symbiont_species;
 
+        protected:
             // This method renders this `Biont`.
             void render();
             void render_this_biont(const yli::ontology::Shader* const shader);
-
-            yli::ontology::SymbiontSpecies* symbiont_species; // pointer to the `SymbiontSpecies` (not a parent!).
 
             std::size_t biontID { std::numeric_limits<std::size_t>::max() };
 

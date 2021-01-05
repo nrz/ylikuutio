@@ -21,6 +21,7 @@
 
 #include "variable.hpp"
 #include "movable.hpp"
+#include "apprentice_module.hpp"
 #include "brain.hpp"
 #include "movable_variable_activation.hpp"
 #include "movable_variable_read.hpp"
@@ -42,46 +43,23 @@
 
 namespace yli::ontology
 {
-    void Movable::bind_to_brain()
-    {
-        // requirements:
-        // `this->brain` must not be `nullptr`.
-        yli::ontology::Brain* const brain = this->brain;
-
-        if (brain == nullptr)
-        {
-            std::cerr << "ERROR: `Movable::bind_to_brain`: `brain` is `nullptr`!\n";
-            return;
-        }
-
-        // get `apprenticeID` from `Brain` and set pointer to this `Movable`.
-        this->brain->master_of_movables.bind_apprentice(this);
-    }
-
-    void Movable::unbind_from_brain()
-    {
-        if (this->brain != nullptr)
-        {
-            this->brain->master_of_movables.unbind_apprentice(this->apprenticeID);
-        }
-    }
-
     void Movable::bind_to_new_brain(yli::ontology::Brain* const new_brain)
     {
-        // This method sets pointer to this `Movable` to `nullptr`, sets `brain` according to the input,
-        // and requests a new `apprenticeID` from the new `Brain`.
+        // Unbind from the current `Brain` if there is such.
 
-        this->unbind_from_brain(); // unbind from the current `Brain` if there is such.
-
-        this->brain = new_brain;
-        this->bind_to_brain();
+        if (new_brain != nullptr)
+        {
+            this->apprentice_of_brain.bind_to_new_master_module(&new_brain->master_of_movables);
+        }
+        else
+        {
+            this->apprentice_of_brain.bind_to_new_master_module(nullptr);
+        }
     }
 
     Movable::~Movable()
     {
         // destructor.
-
-        this->unbind_from_brain();
     }
 
     yli::ontology::Entity* Movable::get_parent() const

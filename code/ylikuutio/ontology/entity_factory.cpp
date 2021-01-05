@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "entity_factory.hpp"
+#include "master_module.hpp"
 #include "entity.hpp"
 #include "variable.hpp"
 #include "universe.hpp"
@@ -189,7 +190,8 @@ namespace yli::ontology
                 (object_struct.object_type == yli::ontology::ObjectType::REGULAR ? &object_struct.species_parent->parent_of_objects :
                  object_struct.object_type == yli::ontology::ObjectType::SHAPESHIFTER ? &object_struct.shapeshifter_sequence_parent->parent_of_objects :
                  object_struct.object_type == yli::ontology::ObjectType::CHARACTER ? &object_struct.text3D_parent->parent_of_objects :
-                 nullptr));
+                 nullptr),
+                (object_struct.brain == nullptr ? nullptr : object_struct.brain->get_master_module()));
 
         object_entity->set_global_name(object_struct.global_name);
         object_entity->set_local_name(object_struct.local_name);
@@ -213,7 +215,8 @@ namespace yli::ontology
         yli::ontology::Entity* holobiont_entity = new yli::ontology::Holobiont(
                 this->universe,
                 holobiont_struct,
-                (holobiont_struct.symbiosis_parent == nullptr ? nullptr : &holobiont_struct.symbiosis_parent->parent_of_holobionts));
+                (holobiont_struct.symbiosis_parent == nullptr ? nullptr : &holobiont_struct.symbiosis_parent->parent_of_holobionts),
+                (holobiont_struct.brain == nullptr ? nullptr : holobiont_struct.brain->get_master_module()));
 
         holobiont_entity->set_global_name(holobiont_struct.global_name);
         holobiont_entity->set_local_name(holobiont_struct.local_name);
@@ -245,7 +248,8 @@ namespace yli::ontology
         yli::ontology::Entity* text3d_entity = new yli::ontology::Text3D(
                 this->universe,
                 text3D_struct,
-                (text3D_struct.parent == nullptr ? nullptr : &text3D_struct.parent->parent_of_text3Ds));
+                (text3D_struct.parent == nullptr ? nullptr : &text3D_struct.parent->parent_of_text3Ds),
+                (text3D_struct.brain == nullptr ? nullptr : text3D_struct.brain->get_master_module()));
 
         text3d_entity->set_global_name(text3D_struct.global_name);
         text3d_entity->set_local_name(text3D_struct.local_name);
@@ -278,7 +282,8 @@ namespace yli::ontology
         yli::ontology::Entity* console_entity = new yli::ontology::Console(
                 this->universe,
                 console_struct,
-                (this->universe == nullptr ? nullptr : &this->universe->parent_of_consoles));
+                (this->universe == nullptr ? nullptr : &this->universe->parent_of_consoles),
+                (console_struct.font_2d == nullptr ? nullptr : &console_struct.font_2d->master_of_consoles));
 
         if (!console_struct.global_name.empty() && console_struct.local_name.empty())
         {
@@ -311,7 +316,8 @@ namespace yli::ontology
         yli::ontology::Entity* camera_entity = new yli::ontology::Camera(
                 this->universe,
                 camera_struct,
-                (camera_struct.parent == nullptr ? nullptr : &camera_struct.parent->parent_of_cameras));
+                (camera_struct.parent == nullptr ? nullptr : &camera_struct.parent->parent_of_cameras),
+                (camera_struct.brain == nullptr ? nullptr : camera_struct.brain->get_master_module()));
 
         camera_entity->set_global_name(camera_struct.global_name);
         camera_entity->set_local_name(camera_struct.local_name);

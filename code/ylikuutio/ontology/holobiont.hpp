@@ -36,6 +36,7 @@ namespace yli::data
 namespace yli::ontology
 {
     class ParentModule;
+    class MasterModule;
     class Entity;
     class Universe;
     class Symbiosis;
@@ -46,11 +47,13 @@ namespace yli::ontology
             Holobiont(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::HolobiontStruct& holobiont_struct,
-                    yli::ontology::ParentModule* const parent_module)
+                    yli::ontology::ParentModule* const parent_module,
+                    yli::ontology::MasterModule* const master_module)
                 : Movable(
                         universe,
                         holobiont_struct,
-                        parent_module),
+                        parent_module,
+                        master_module),
                 parent_of_bionts(this)
             {
                 // constructor.

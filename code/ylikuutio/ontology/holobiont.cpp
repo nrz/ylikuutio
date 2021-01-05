@@ -19,6 +19,7 @@
 #include "entity.hpp"
 #include "universe.hpp"
 #include "symbiosis.hpp"
+#include "symbiont_species.hpp"
 #include "biont.hpp"
 #include "entity_factory.hpp"
 #include "holobiont_struct.hpp"
@@ -95,10 +96,17 @@ namespace yli::ontology
                 continue;
             }
 
+            yli::ontology::SymbiontSpecies* const symbiont_species = symbiosis->get_symbiont_species(biontID);
+
+            if (symbiont_species == nullptr)
+            {
+                continue;
+            }
+
             yli::ontology::BiontStruct biont_struct;
             biont_struct.biontID                = biontID;
             biont_struct.holobiont_parent       = this;
-            biont_struct.symbiont_species       = symbiosis->get_symbiont_species(biontID);
+            biont_struct.symbiont_species       = symbiont_species;
             biont_struct.initial_rotate_vectors = this->initial_rotate_vectors;
             biont_struct.initial_rotate_angles  = this->initial_rotate_angles;
             biont_struct.original_scale_vector  = this->original_scale_vector;
@@ -107,7 +115,7 @@ namespace yli::ontology
 
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
-            new yli::ontology::Biont(this->universe, biont_struct, &this->parent_of_bionts);
+            new yli::ontology::Biont(this->universe, biont_struct, &this->parent_of_bionts, &symbiont_species->master_of_bionts);
         }
     }
 

@@ -74,6 +74,7 @@ namespace yli::ontology
 {
     class Universe;
     class ParentModule;
+    class MasterModule;
 
     class Camera: public yli::ontology::Movable
     {
@@ -81,11 +82,13 @@ namespace yli::ontology
             Camera(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::CameraStruct& camera_struct,
-                    yli::ontology::ParentModule* const parent_module)
+                    yli::ontology::ParentModule* const parent_module,
+                    yli::ontology::MasterModule* const master_module)
                 : Movable(
                         universe,
                         camera_struct,
-                        parent_module)
+                        parent_module,
+                        master_module)
             {
                 // constructor.
 

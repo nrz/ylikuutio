@@ -39,6 +39,11 @@ namespace yli::ontology
         return this->child_of_scene.get_parent();
     }
 
+    yli::ontology::MasterModule* Brain::get_master_module() const
+    {
+        return const_cast<yli::ontology::MasterModule*>(&this->master_of_movables);
+    }
+
     std::size_t Brain::get_number_of_children() const
     {
         return 0; // `Brain` has no children. `Movable`s controlled by `Brain` are not its children.
@@ -62,10 +67,14 @@ namespace yli::ontology
             return;
         }
 
-        for (std::size_t movable_i = 0; movable_i < this->master_of_movables.apprentice_pointer_vector.size(); movable_i++)
+        for (const yli::ontology::ApprenticeModule* apprentice_module : this->master_of_movables.apprentice_module_pointer_vector)
         {
-            // Apply this `Brain` to the current `Movable`.
-            yli::ontology::Movable* movable = this->master_of_movables.apprentice_pointer_vector[movable_i];
+            if (apprentice_module == nullptr)
+            {
+                continue;
+            }
+
+            yli::ontology::Movable* movable = static_cast<yli::ontology::Movable*>(apprentice_module->get_apprentice());
 
             if (movable != nullptr)
             {

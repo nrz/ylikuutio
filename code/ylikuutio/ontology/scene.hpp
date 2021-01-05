@@ -121,7 +121,7 @@ namespace yli::ontology
                 // create the default `Camera`.
                 yli::ontology::CameraStruct camera_struct = scene_struct.default_camera_struct;
                 camera_struct.parent = this;
-                new yli::ontology::Camera(this->universe, camera_struct, &this->parent_of_default_camera); // create the default camera.
+                new yli::ontology::Camera(this->universe, camera_struct, &this->parent_of_default_camera, nullptr); // create the default camera.
 
                 // Bullet variables.
                 if (this->universe == nullptr)

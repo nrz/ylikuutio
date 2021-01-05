@@ -23,6 +23,7 @@
 
 namespace yli::ontology
 {
+    class Brain;
     class Species;
     class ShapeshifterSequence;
     class Glyph;
@@ -40,6 +41,7 @@ namespace yli::ontology
         yli::ontology::ShapeshifterSequence* shapeshifter_sequence_parent { nullptr }; // pointer to the `ShapeshifterSequence` parent.
         yli::ontology::Text3D* text3D_parent { nullptr };                              // pointer to the parent `Text3D`.
         yli::ontology::Glyph* glyph { nullptr };                                       // pointer to the `Glyph` (not a parent!).
+        yli::ontology::Brain* brain { nullptr };                                       // pointer to the `Brain` master.
 
         // The parent of a character object is a `Glyph`. The parent of a regular object is a `Species`.
         yli::ontology::ObjectType object_type { yli::ontology::ObjectType::REGULAR };

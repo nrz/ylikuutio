@@ -32,6 +32,7 @@ namespace yli::ontology
     class Universe;
     class Object;
     class ParentModule;
+    class MasterModule;
     class VectorFont;
 
     class Text3D: public yli::ontology::Movable
@@ -48,11 +49,13 @@ namespace yli::ontology
             Text3D(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::Text3DStruct& text3D_struct,
-                    yli::ontology::ParentModule* const parent_module)
+                    yli::ontology::ParentModule* const parent_module,
+                    yli::ontology::MasterModule* const master_module)
                 : Movable(
                         universe,
                         text3D_struct,
-                        parent_module),
+                        parent_module,
+                        master_module),
                 parent_of_objects(this)
             {
                 // constructor.

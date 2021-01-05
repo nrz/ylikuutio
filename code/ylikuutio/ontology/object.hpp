@@ -44,6 +44,7 @@ namespace yli::ontology
     class Text3D;
     class Glyph;
     class ParentModule;
+    class MasterModule;
 
     class Object: public yli::ontology::Movable
     {
@@ -58,11 +59,13 @@ namespace yli::ontology
             Object(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::ObjectStruct& object_struct,
-                    yli::ontology::ParentModule* const parent_module)
+                    yli::ontology::ParentModule* const parent_module,
+                    yli::ontology::MasterModule* const master_module)
                 : Movable(
                         universe,
                         object_struct,
-                        parent_module)
+                        parent_module,
+                        master_module)
             {
                 // constructor.
 

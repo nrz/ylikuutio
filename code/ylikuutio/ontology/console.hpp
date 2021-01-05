@@ -22,6 +22,7 @@
 #include "child_module.hpp"
 #include "parent_module.hpp"
 #include "master_module.hpp"
+#include "apprentice_module.hpp"
 #include "console_struct.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -89,16 +90,16 @@ namespace yli::ontology
     class Console: public yli::ontology::Entity
     {
         public:
-            void bind_to_font_2d();
-            void unbind_from_font_2d();
             void bind_to_new_font_2d(yli::ontology::Font2D* const new_font_2d);
 
             Console(yli::ontology::Universe* const universe,
                     const yli::ontology::ConsoleStruct& console_struct,
-                    yli::ontology::ParentModule* const parent_module)
+                    yli::ontology::ParentModule* const parent_module,
+                    yli::ontology::MasterModule* const master_module)
                 : Entity(universe, console_struct),
                 child_of_universe(parent_module, this),
-                parent_of_lisp_functions(this)
+                parent_of_lisp_functions(this),
+                apprentice_of_font_2d(master_module, this)
             {
                 // constructor.
                 this->cursor_it = this->current_input.begin();
@@ -414,9 +415,9 @@ namespace yli::ontology
 
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::ParentModule parent_of_lisp_functions;
+            yli::ontology::ApprenticeModule apprentice_of_font_2d;
 
-            template<class T1, class T2>
-                friend class yli::ontology::MasterModule;
+            friend class yli::ontology::MasterModule;
 
             template<class T1>
                 friend void yli::hierarchy::bind_apprentice_to_master(T1 apprentice_pointer, std::vector<T1>& apprentice_pointer_vector, std::queue<std::size_t>& free_apprenticeID_queue, std::size_t& number_of_apprenticeren);
@@ -434,9 +435,6 @@ namespace yli::ontology
             void move_cursor_right();
             void move_cursor_to_start_of_line();
             void move_cursor_to_end_of_line();
-
-            yli::ontology::Font2D* font_2d { nullptr }; // `Font2D` is master, `Console` is apprentice.
-            std::size_t apprenticeID { std::numeric_limits<std::size_t>::max() };
 
             std::list<char> current_input; // This is used for actual inputs.
             std::list<char>::iterator cursor_it;
