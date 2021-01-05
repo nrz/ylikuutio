@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -32,6 +32,7 @@ namespace yli::ontology
     class Universe;
     class Object;
     class ParentModule;
+    class MasterModule;
     class VectorFont;
 
     class Text3D: public yli::ontology::Movable
@@ -45,11 +46,16 @@ namespace yli::ontology
             // Note: different fonts may provide glyphs for different Unicodes!
             void bind_to_new_parent(yli::ontology::VectorFont* const new_vector_font_pointer);
 
-            Text3D(yli::ontology::Universe* const universe, const yli::ontology::Text3DStruct& text3D_struct, yli::ontology::ParentModule* const parent_module)
+            Text3D(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::Text3DStruct& text3D_struct,
+                    yli::ontology::ParentModule* const parent_module,
+                    yli::ontology::MasterModule* const master_module)
                 : Movable(
                         universe,
                         text3D_struct,
-                        parent_module),
+                        parent_module,
+                        master_module),
                 parent_of_objects(this)
             {
                 // constructor.

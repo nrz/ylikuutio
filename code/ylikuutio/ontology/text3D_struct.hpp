@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -25,6 +25,7 @@
 
 namespace yli::ontology
 {
+    class Brain;
     class VectorFont;
 
     struct Text3DStruct: public yli::ontology::MovableStruct
@@ -37,6 +38,7 @@ namespace yli::ontology
 
         std::string text_string;
         yli::ontology::VectorFont* parent { nullptr }; // pointer to the `VectorFont` (parent).
+        yli::ontology::Brain* brain { nullptr };       // pointer to the `Brain` master.
     };
 }
 

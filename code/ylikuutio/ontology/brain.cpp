@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "brain.hpp"
+#include "master_module.hpp"
 #include "movable.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -36,6 +37,11 @@ namespace yli::ontology
     yli::ontology::Entity* Brain::get_parent() const
     {
         return this->child_of_scene.get_parent();
+    }
+
+    yli::ontology::MasterModule* Brain::get_master_module() const
+    {
+        return const_cast<yli::ontology::MasterModule*>(&this->master_of_movables);
     }
 
     std::size_t Brain::get_number_of_children() const
@@ -61,18 +67,20 @@ namespace yli::ontology
             return;
         }
 
-        for (std::size_t movable_i = 0; movable_i < this->master_of_movables.apprentice_pointer_vector.size(); movable_i++)
+        for (const yli::ontology::ApprenticeModule* apprentice_module : this->master_of_movables.apprentice_module_pointer_vector)
         {
-            // Apply this `Brain` to the current `Movable`.
-            yli::ontology::Movable* movable = this->master_of_movables.apprentice_pointer_vector[movable_i];
-
-            if (movable == nullptr)
+            if (apprentice_module == nullptr)
             {
-                // Do not waste time in calling the callback function for `nullptr` targets.
                 continue;
             }
 
-            this->callback_engine->execute(std::make_shared<yli::data::AnyValue>(movable));
+            yli::ontology::Movable* movable = static_cast<yli::ontology::Movable*>(apprentice_module->get_apprentice());
+
+            if (movable != nullptr)
+            {
+                // Do not waste time in calling the callback function for `nullptr` targets.
+                this->callback_engine->execute(std::make_shared<yli::data::AnyValue>(movable));
+            }
         }
     }
 }

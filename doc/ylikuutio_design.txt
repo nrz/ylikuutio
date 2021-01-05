@@ -102,6 +102,9 @@ provide standard functions needed for binding in composition relationships betwe
 For special binding needs, e.g. when the children need to be in a specific order, custom code should be used
 instead of `ParentModule`, `ChildModule`, or both.
 
+`ParentModule` mutates certain member variables of the children, namely the following:
+`childID` - an identifier that is unique within the children of a specific parent.
+
 In `ontology` namespace and directory there are also classes used for passing parameters to constructors of
 `ontology` classes. These classes include `UniverseStruct`, `SceneStruct`, `ShaderStruct`, `MaterialStruct`,
 `SpeciesStruct`, `ObjectStruct`, `SymbiosisStruct`, `HolobiontStruct`, `BiontStruct`, `ComputeTaskStruct`,
@@ -202,6 +205,14 @@ Naturally, children must be bound to their parents somehow. There are different 
 4. Parent uses custom code for parenting and child uses custom code for 'childing'. see `Scene`-`Shader`-relationship for an example.
    The reason to use custom binding code in `Scene`-`Shader`-relationship is to keep `Shader`s ordered in `ShaderPriorityQueue`.
    In this case binding is completely custom for both 'parenting' and 'childing'. Use this only as a last resort.
+
+In `ontology` namespace and directory there is also class template `MasterModule` that provides the master functionality
+in a master-apprentice relationship, called elsewhere also a observer pattern. In particular, `MasterModule`
+provides the following functionality:
+1. binding an apprentice with pointer to apprentice as input parameter (`T2 const apprentice`).
+2. unbinding apprentice based on `std::size_t apprenticeID`.
+3. getting number of apprentices.
+4. upon destruction, unbinding all apprentices.
 
 About Variables, AnyValueEntities, AnyStructEntities and YliLisp
 

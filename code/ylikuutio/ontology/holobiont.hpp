@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -19,7 +19,6 @@
 #define __YLIKUUTIO_ONTOLOGY_HOLOBIONT_HPP_INCLUDED
 
 #include "movable.hpp"
-#include "parent_module.hpp"
 #include "holobiont_struct.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 
@@ -36,6 +35,8 @@ namespace yli::data
 
 namespace yli::ontology
 {
+    class ParentModule;
+    class MasterModule;
     class Entity;
     class Universe;
     class Symbiosis;
@@ -46,11 +47,13 @@ namespace yli::ontology
             Holobiont(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::HolobiontStruct& holobiont_struct,
-                    yli::ontology::ParentModule* const parent_module)
+                    yli::ontology::ParentModule* const parent_module,
+                    yli::ontology::MasterModule* const master_module)
                 : Movable(
                         universe,
                         holobiont_struct,
-                        parent_module),
+                        parent_module,
+                        master_module),
                 parent_of_bionts(this)
             {
                 // constructor.

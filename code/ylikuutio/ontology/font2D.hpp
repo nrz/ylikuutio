@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -23,7 +23,6 @@
 #include "parent_module.hpp"
 #include "master_module.hpp"
 #include "universe.hpp"
-#include "console.hpp"
 #include "font_struct.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
@@ -44,7 +43,10 @@ namespace yli::ontology
     class Font2D: public yli::ontology::Entity
     {
         public:
-            Font2D(yli::ontology::Universe* const universe, const yli::ontology::FontStruct& font_struct, yli::ontology::ParentModule* const parent_module)
+            Font2D(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::FontStruct& font_struct,
+                    yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, font_struct),
                 child_of_universe(parent_module, this),
                 parent_of_text2Ds(this),
@@ -166,7 +168,7 @@ namespace yli::ontology
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::ParentModule parent_of_text2Ds;
 
-            yli::ontology::MasterModule<yli::ontology::Font2D*, yli::ontology::Console*> master_of_consoles;
+            yli::ontology::MasterModule master_of_consoles;
 
         private:
             std::size_t get_number_of_children() const override;

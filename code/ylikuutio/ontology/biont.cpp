@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -53,40 +53,6 @@ namespace yli::ontology
     class Entity;
     class Universe;
 
-    void Biont::bind_to_symbiont_species()
-    {
-        // Requirements:
-        // `this->holobiont_parent` must not be `nullptr`.
-        // `this->holobiont_parent->get_parent()` must not be `nullptr`.
-        // `this->symbiont_species` must not be `nullptr`.
-
-        const yli::ontology::Holobiont* const holobiont = static_cast<yli::ontology::Holobiont*>(this->child.get_parent());
-
-        if (holobiont == nullptr)
-        {
-            std::cerr << "ERROR: `Biont::bind_to_symbiont_species`: `holobiont` is `nullptr`!\n";
-            return;
-        }
-
-        const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(holobiont->get_parent());
-
-        if (symbiosis == nullptr)
-        {
-            std::cerr << "ERROR: `Biont::bind_to_symbiont_species`: `symbiosis` is `nullptr`!\n";
-            return;
-        }
-
-        yli::ontology::SymbiontSpecies* const symbiont_species = this->symbiont_species;
-
-        if (symbiont_species == nullptr)
-        {
-            std::cerr << "ERROR: `Biont::bind_to_symbiont_species`: `symbiont_species` is `nullptr`!\n";
-            return;
-        }
-
-        symbiont_species->master_of_bionts.bind_apprentice(this);
-    }
-
     Biont::~Biont()
     {
         // destructor.
@@ -95,17 +61,6 @@ namespace yli::ontology
         // `this->symbiont_species` must not be `nullptr`.
 
         std::cout << "Biont with childID " << std::dec << this->childID << " will be destroyed.\n";
-
-        yli::ontology::SymbiontSpecies* const symbiont_species = this->symbiont_species;
-
-        if (symbiont_species == nullptr)
-        {
-            std::cerr << "ERROR: `Biont::~Biont`: `symbiont_species` is `nullptr`!\n";
-            return;
-        }
-
-        // Set pointer to this `Biont` to `nullptr`.
-        symbiont_species->master_of_bionts.unbind_apprentice(this->childID);
     }
 
     void Biont::render()
@@ -178,7 +133,7 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::SymbiontSpecies* const symbiont_species = this->symbiont_species;
+        const yli::ontology::SymbiontSpecies* const symbiont_species = static_cast<yli::ontology::SymbiontSpecies*>(this->apprentice_of_symbiont_species.get_master());
 
         if (symbiont_species == nullptr)
         {

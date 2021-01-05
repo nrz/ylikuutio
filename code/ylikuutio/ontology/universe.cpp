@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -34,7 +34,6 @@
 #endif
 
 #include "entity.hpp"
-#include "variable.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
 #include "font2D.hpp"
@@ -77,6 +76,7 @@
 #include <btBulletDynamicsCommon.h>
 
 // Include standard headers
+#include <cmath>         // NAN, sqrt, std::isnan, std::pow
 #include <cstddef>       // std::size_t
 #include <iomanip>       // std::setfill, std::setprecision, std::setw
 #include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
@@ -89,11 +89,6 @@
 #include <variant>       // std::holds_alternative, std::variant
 #include <vector>        // std::vector
 
-namespace yli::data
-{
-    class AnyValue;
-}
-
 namespace yli::input
 {
     class InputMaster;
@@ -102,7 +97,6 @@ namespace yli::input
 namespace yli::ontology
 {
     class Font2D;
-    class Variable;
 
     const std::string Universe::version = "0.0.8";
 
@@ -158,7 +152,7 @@ namespace yli::ontology
 
     void Universe::start_simulation()
     {
-        if (this->parent_of_font2Ds.child_pointer_vector.size() == 0)
+        if (this->parent_of_font2Ds.get_number_of_children() == 0)
         {
             return;
         }

@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -74,15 +74,21 @@ namespace yli::ontology
 {
     class Universe;
     class ParentModule;
+    class MasterModule;
 
     class Camera: public yli::ontology::Movable
     {
         public:
-            Camera(yli::ontology::Universe* const universe, const yli::ontology::CameraStruct& camera_struct, yli::ontology::ParentModule* const parent_module)
+            Camera(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::CameraStruct& camera_struct,
+                    yli::ontology::ParentModule* const parent_module,
+                    yli::ontology::MasterModule* const master_module)
                 : Movable(
                         universe,
                         camera_struct,
-                        parent_module)
+                        parent_module,
+                        master_module)
             {
                 // constructor.
 

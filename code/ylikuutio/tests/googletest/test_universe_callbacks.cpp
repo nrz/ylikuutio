@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -89,7 +89,7 @@ TEST(object_must_be_bound_to_species_appropriately, universe_callback)
 
     yli::ontology::ObjectStruct object_struct;
     object_struct.species_parent = species1;
-    yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species1->parent_of_objects);
+    yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species1->parent_of_objects, nullptr);
     object->set_global_name(object_name);
 
     const std::string species2_name = "baz";
@@ -177,7 +177,7 @@ TEST(console_must_be_activated_appropriately, universe_callback_without_font2D)
     const std::string console_name = "foo";
 
     yli::ontology::ConsoleStruct console_struct;
-    yli::ontology::Console* const console = new yli::ontology::Console(universe, console_struct, &universe->parent_of_consoles);
+    yli::ontology::Console* const console = new yli::ontology::Console(universe, console_struct, &universe->parent_of_consoles, nullptr);
     console->set_global_name(console_name);
 
     ASSERT_EQ(universe->get_active_console(), nullptr);
@@ -197,7 +197,7 @@ TEST(console_must_be_activated_appropriately, universe_callback_with_font2D)
     const std::string console_name = "foo";
 
     yli::ontology::ConsoleStruct console_struct;
-    yli::ontology::Console* const console = new yli::ontology::Console(universe, console_struct, &universe->parent_of_consoles);
+    yli::ontology::Console* const console = new yli::ontology::Console(universe, console_struct, &universe->parent_of_consoles, nullptr);
     console->set_global_name(console_name);
 
     ASSERT_EQ(universe->get_active_console(), nullptr);
@@ -225,7 +225,7 @@ TEST(scene_and_camera_must_be_activated_appropriately, universe_callback)
     scene->set_global_name(scene_name);
 
     const std::string camera_name = "bar";
-    yli::ontology::Camera* const camera = new yli::ontology::Camera(universe, yli::ontology::CameraStruct(), &scene->parent_of_cameras);
+    yli::ontology::Camera* const camera = new yli::ontology::Camera(universe, yli::ontology::CameraStruct(), &scene->parent_of_cameras, nullptr);
     camera->set_global_name(camera_name);
 
     ASSERT_EQ(universe->get_active_scene(), nullptr);

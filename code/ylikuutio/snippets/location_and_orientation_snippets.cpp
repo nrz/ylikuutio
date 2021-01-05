@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -140,16 +140,16 @@ namespace yli::snippets
         std::cout << "Executing `entity->create_variable(azimuth_variable_struct);` ...\n";
         entity->create_variable(azimuth_variable_struct);
 
-        const float right = NAN; // the value does not matter, `right` is read with a read callback.
-        yli::ontology::VariableStruct right_variable_struct(std::make_shared<yli::data::AnyValue>(right));
+        // the value does not matter, `right` is read with a read callback.
+        yli::ontology::VariableStruct right_variable_struct(std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
         right_variable_struct.local_name = "right";
         right_variable_struct.read_callback = &yli::ontology::read_right;
         right_variable_struct.should_ylikuutio_call_activate_callback_now = false;
         std::cout << "Executing `entity->create_variable(right_variable_struct);` ...\n";
         entity->create_variable(right_variable_struct);
 
-        const float up = NAN; // the value does not matter, `up` is read with a read callback.
-        yli::ontology::VariableStruct up_variable_struct(std::make_shared<yli::data::AnyValue>(up));
+        // the value does not matter, `up` is read with a read callback.
+        yli::ontology::VariableStruct up_variable_struct(std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
         up_variable_struct.local_name = "up";
         up_variable_struct.read_callback = &yli::ontology::read_up;
         up_variable_struct.should_ylikuutio_call_activate_callback_now = false;

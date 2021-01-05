@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -79,7 +79,6 @@ namespace yli::ontology
     class Shader;
     class Species;
     class Symbiosis;
-    class Camera;
 
     class Scene: public yli::ontology::Entity
     {
@@ -92,7 +91,10 @@ namespace yli::ontology
             void bind_to_new_parent(yli::ontology::World* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-            Scene(yli::ontology::Universe* const universe, const yli::ontology::SceneStruct& scene_struct, yli::ontology::ParentModule* const parent_module)
+            Scene(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::SceneStruct& scene_struct,
+                    yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, scene_struct),
                 child_of_world(parent_module, this),
                 parent_of_default_camera(this),
@@ -119,7 +121,7 @@ namespace yli::ontology
                 // create the default `Camera`.
                 yli::ontology::CameraStruct camera_struct = scene_struct.default_camera_struct;
                 camera_struct.parent = this;
-                new yli::ontology::Camera(this->universe, camera_struct, &this->parent_of_default_camera); // create the default camera.
+                new yli::ontology::Camera(this->universe, camera_struct, &this->parent_of_default_camera, nullptr); // create the default camera.
 
                 // Bullet variables.
                 if (this->universe == nullptr)

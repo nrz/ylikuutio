@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -21,7 +21,6 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "master_module.hpp"
-#include "movable.hpp"
 #include "brain_struct.hpp"
 
 // Include standard headers
@@ -65,7 +64,10 @@ namespace yli::ontology
     class Brain: public yli::ontology::Entity
     {
         public:
-            Brain(yli::ontology::Universe* const universe, const yli::ontology::BrainStruct& brain_struct, yli::ontology::ParentModule* const parent_module)
+            Brain(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::BrainStruct& brain_struct,
+                    yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, brain_struct),
                 child_of_scene(parent_module, this),
                 master_of_movables(this)
@@ -83,12 +85,14 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
+            yli::ontology::MasterModule* get_master_module() const;
+
             std::size_t get_number_of_apprentices() const;
 
             void act();
 
             yli::ontology::ChildModule child_of_scene;
-            yli::ontology::MasterModule<yli::ontology::Brain*, yli::ontology::Movable*> master_of_movables;
+            yli::ontology::MasterModule master_of_movables;
 
         private:
             std::size_t get_number_of_children() const override;
