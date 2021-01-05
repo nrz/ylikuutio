@@ -37,7 +37,6 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <limits>   // std::numeric_limits
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <vector>   // std::vector
 
@@ -80,7 +79,6 @@ namespace yli::ontology
                 // constructor.
 
                 this->input_method                = movable_struct.input_method;
-                this->brain                       = movable_struct.brain;
 
                 // Currently an `Entity` can be an apprentice only for one master at any time.
                 // TODO: add support for multiple master-apprentice relationships for each `Entity`!
@@ -321,8 +319,6 @@ namespace yli::ontology
 
             yli::input::InputMethod input_method;                  // If `input_method` is `KEYBOARD`, then keypresses control this `Movable`.
                                                                    // If `input_method` is `AI`, then the chosen `Brain` controls this `Movable`.
-            yli::ontology::Brain* brain;                           // Different kind of controls can be implemented as `Brain`s, e.g. train control systems.
-            std::size_t apprenticeID { std::numeric_limits<std::size_t>::max() };
     };
 }
 
