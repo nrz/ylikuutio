@@ -80,8 +80,6 @@ namespace yli::ontology
 
                 this->input_method                = movable_struct.input_method;
 
-                // Currently an `Entity` can be an apprentice only for one master at any time.
-                // TODO: add support for multiple master-apprentice relationships for each `Entity`!
                 this->initial_rotate_vectors      = movable_struct.initial_rotate_vectors;
                 this->initial_rotate_angles       = movable_struct.initial_rotate_angles;
 
