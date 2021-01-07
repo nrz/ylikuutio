@@ -47,7 +47,7 @@ namespace yli::ontology
                     const yli::ontology::TextStruct& text_struct,
                     yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, text_struct),
-                child_of_font2D(parent_module, this)
+                child_of_font_2d(parent_module, this)
             {
                 // constructor.
 
@@ -76,12 +76,12 @@ namespace yli::ontology
                     glGenBuffers(1, &this->uvbuffer);
 
                     // Get a handle for our buffers.
-                    yli::ontology::Font2D* const font2D = static_cast<yli::ontology::Font2D*>(this->child_of_font2D.get_parent());
+                    yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(this->child_of_font_2d.get_parent());
 
-                    if (font2D != nullptr)
+                    if (font_2d != nullptr)
                     {
-                        this->vertex_position_in_screenspace_id = glGetAttribLocation(font2D->get_program_id(), "vertex_position_screenspace");
-                        this->vertex_uv_id = glGetAttribLocation(font2D->get_program_id(), "vertexUV");
+                        this->vertex_position_in_screenspace_id = glGetAttribLocation(font_2d->get_program_id(), "vertex_position_screenspace");
+                        this->vertex_uv_id = glGetAttribLocation(font_2d->get_program_id(), "vertexUV");
                     }
                 }
 
@@ -101,7 +101,7 @@ namespace yli::ontology
 
             void change_string(const std::string& text);
 
-            yli::ontology::ChildModule child_of_font2D;
+            yli::ontology::ChildModule child_of_font_2d;
 
         private:
             std::size_t get_number_of_children() const override;

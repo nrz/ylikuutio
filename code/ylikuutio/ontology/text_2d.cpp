@@ -43,11 +43,11 @@ namespace yli::ontology
         // `this->parent` must not be `nullptr`.
         // `new_parent` must not be `nullptr`.
 
-        yli::ontology::Entity* const font2D = this->child_of_font2D.get_parent();
+        yli::ontology::Entity* const font_2d = this->child_of_font_2d.get_parent();
 
-        if (font2D == nullptr)
+        if (font_2d == nullptr)
         {
-            std::cerr << "ERROR: `Text2D::bind_to_new_parent`: `font2D` is `nullptr`!\n";
+            std::cerr << "ERROR: `Text2D::bind_to_new_parent`: `font_2d` is `nullptr`!\n";
             return;
         }
 
@@ -64,10 +64,10 @@ namespace yli::ontology
         }
 
         // Unbind from the old parent `Font2D`.
-        this->child_of_font2D.unbind_child();
+        this->child_of_font_2d.unbind_child();
 
         // Get `childID` from `Font2D` and set pointer to this `Text2D`.
-        this->child_of_font2D.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_text2Ds);
+        this->child_of_font_2d.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_text_2ds);
     }
 
     Text2D::~Text2D()
@@ -87,7 +87,7 @@ namespace yli::ontology
             return;
         }
 
-        if (this->child_of_font2D.get_parent() == nullptr)
+        if (this->child_of_font_2d.get_parent() == nullptr)
         {
             return;
         }
@@ -248,9 +248,9 @@ namespace yli::ontology
             float uv_x = (character % this->font_size) / static_cast<float>(this->font_size);
             float uv_y;
 
-            yli::ontology::Font2D* const font2D = static_cast<yli::ontology::Font2D*>(this->child_of_font2D.get_parent());
+            yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(this->child_of_font_2d.get_parent());
 
-            const std::string& font_texture_file_format = font2D->get_font_texture_file_format();
+            const std::string& font_texture_file_format = font_2d->get_font_texture_file_format();
 
             if (font_texture_file_format == "bmp" || font_texture_file_format == "BMP")
             {
@@ -318,7 +318,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* Text2D::get_parent() const
     {
-        return this->child_of_font2D.get_parent();
+        return this->child_of_font_2d.get_parent();
     }
 
     std::size_t Text2D::get_number_of_children() const

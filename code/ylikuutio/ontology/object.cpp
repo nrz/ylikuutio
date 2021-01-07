@@ -143,14 +143,14 @@ namespace yli::ontology
         if (this->object_type == yli::ontology::ObjectType::CHARACTER)
         {
             // requirements for further actions in this block:
-            // `this->text3D_parent` must not be `nullptr`.
+            // `this->text_3d_parent` must not be `nullptr`.
             // `new_parent` must not be `nullptr`.
 
-            yli::ontology::Entity* const text3D = this->child.get_parent();
+            yli::ontology::Entity* const text_3d = this->child.get_parent();
 
-            if (text3D == nullptr)
+            if (text_3d == nullptr)
             {
-                std::cerr << "ERROR: `Object::bind_to_new_parent`: `text3D` is `nullptr`!\n";
+                std::cerr << "ERROR: `Object::bind_to_new_parent`: `text_3d` is `nullptr`!\n";
                 return;
             }
 
@@ -190,11 +190,11 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Text3D* const text3D_parent = dynamic_cast<yli::ontology::Text3D*>(new_parent);
+        yli::ontology::Text3D* const text_3d_parent = dynamic_cast<yli::ontology::Text3D*>(new_parent);
 
-        if (text3D_parent != nullptr)
+        if (text_3d_parent != nullptr)
         {
-            this->bind_to_new_parent(text3D_parent);
+            this->bind_to_new_parent(text_3d_parent);
             return;
         }
 

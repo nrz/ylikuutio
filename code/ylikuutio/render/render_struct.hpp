@@ -34,7 +34,7 @@ namespace yli::render
     {
         yli::ontology::Scene* scene { nullptr };
         yli::ontology::Console* console { nullptr };
-        std::vector<yli::ontology::Entity*>* font2D_pointer_vector { nullptr };
+        std::vector<yli::ontology::Entity*>* font_2d_pointer_vector { nullptr };
         SDL_Window* window { nullptr };
         bool should_ylikuutio_change_depth_test { true };
     };

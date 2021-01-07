@@ -48,12 +48,12 @@ namespace yli::ontology
 
             Text3D(
                     yli::ontology::Universe* const universe,
-                    const yli::ontology::Text3DStruct& text3D_struct,
+                    const yli::ontology::Text3DStruct& text_3d_struct,
                     yli::ontology::ParentModule* const parent_module,
                     yli::ontology::MasterModule* const master_module)
                 : Movable(
                         universe,
-                        text3D_struct,
+                        text_3d_struct,
                         parent_module,
                         master_module),
                 parent_of_objects(this)
@@ -64,7 +64,7 @@ namespace yli::ontology
                 // and binds each to its corresponding `Glyph` for rendering hierarchy,
                 // and also binds each to this `Text3D` for ontological hierarchy.
 
-                this->text_string  = text3D_struct.text_string;
+                this->text_string  = text_3d_struct.text_string;
 
                 // Let's create each glyph `Object` in a loop.
 
@@ -82,7 +82,7 @@ namespace yli::ontology
             virtual ~Text3D();
 
             friend class Object;
-            friend void create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* text3D);
+            friend void create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* text_3d);
 
             yli::ontology::ParentModule parent_of_objects;
 

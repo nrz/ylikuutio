@@ -213,9 +213,9 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Font2D* const font2D = static_cast<yli::ontology::Font2D*>(this->apprentice_of_font_2d.get_master());
+        yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(this->apprentice_of_font_2d.get_master());
 
-        if (font2D == nullptr)
+        if (font_2d == nullptr)
         {
             return;
         }
@@ -223,7 +223,7 @@ namespace yli::ontology
         // Convert current input into std::string.
         const std::size_t characters_for_line = this->universe->get_window_width() / this->universe->get_text_size();
 
-        // Draw the console to screen using `font2D::print_text2D`.
+        // Draw the console to screen using `font_2d::print_text_2d`.
         yli::ontology::TextStruct text_struct;
         text_struct.screen_width = this->universe->get_window_width();
         text_struct.screen_height = this->universe->get_window_height();
@@ -306,7 +306,7 @@ namespace yli::ontology
             }
         }
 
-        font2D->print_text2D(text_struct);
+        font_2d->print_text_2d(text_struct);
     }
 
     yli::ontology::Entity* Console::get_parent() const

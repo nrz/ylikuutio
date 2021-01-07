@@ -34,7 +34,7 @@ TEST(ObjectStruct_must_be_initialized_appropriately, ObjectStruct)
 {
     const yli::ontology::ObjectStruct test_object_struct;
     ASSERT_EQ(test_object_struct.species_parent, nullptr);
-    ASSERT_EQ(test_object_struct.text3D_parent, nullptr);
+    ASSERT_EQ(test_object_struct.text_3d_parent, nullptr);
     ASSERT_EQ(test_object_struct.glyph, nullptr);
     ASSERT_EQ(test_object_struct.original_scale_vector, glm::vec3(1.0f, 1.0f, 1.0f));
     ASSERT_EQ(test_object_struct.object_type, yli::ontology::ObjectType::REGULAR);

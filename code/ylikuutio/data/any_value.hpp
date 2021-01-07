@@ -104,11 +104,11 @@ namespace yli::data
             AnyValue(yli::ontology::SymbiontSpecies* const symbiont_species_pointer);
             AnyValue(yli::ontology::Holobiont* const holobiont_pointer);
             AnyValue(yli::ontology::Biont* const biont_pointer);
-            AnyValue(yli::ontology::Font2D* const font2D_pointer);
-            AnyValue(yli::ontology::Text2D* const text2D_pointer);
+            AnyValue(yli::ontology::Font2D* const font_2d_pointer);
+            AnyValue(yli::ontology::Text2D* const text_2d_pointer);
             AnyValue(yli::ontology::VectorFont* const vector_font_pointer);
             AnyValue(yli::ontology::Glyph* const glyph_pointer);
-            AnyValue(yli::ontology::Text3D* const text3D_pointer);
+            AnyValue(yli::ontology::Text3D* const text_3d_pointer);
             AnyValue(yli::ontology::Console* const console_pointer);
             AnyValue(yli::ontology::ComputeTask* const compute_task_pointer);
             AnyValue(std::shared_ptr<yli::data::AnyValue> any_value_shared_ptr);

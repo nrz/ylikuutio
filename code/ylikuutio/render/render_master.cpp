@@ -191,9 +191,9 @@ namespace yli::render
             render_struct.console->render();
         }
 
-        if (render_struct.font2D_pointer_vector != nullptr)
+        if (render_struct.font_2d_pointer_vector != nullptr)
         {
-            yli::render::render_children<yli::ontology::Entity*, yli::ontology::Font2D*>(*render_struct.font2D_pointer_vector);
+            yli::render::render_children<yli::ontology::Entity*, yli::ontology::Font2D*>(*render_struct.font_2d_pointer_vector);
         }
 
         if (render_struct.should_ylikuutio_change_depth_test)
@@ -260,9 +260,9 @@ namespace yli::render
         yli::render::render_children<yli::ontology::Entity*, yli::ontology::Chunk*>(chunk_pointer_vector);
     }
 
-    void RenderMaster::render_text2Ds(std::vector<yli::ontology::Entity*>& text2D_pointer_vector) const
+    void RenderMaster::render_text_2ds(std::vector<yli::ontology::Entity*>& text_2d_pointer_vector) const
     {
-        yli::render::render_children<yli::ontology::Entity*, yli::ontology::Text2D*>(text2D_pointer_vector);
+        yli::render::render_children<yli::ontology::Entity*, yli::ontology::Text2D*>(text_2d_pointer_vector);
         glDisable(GL_BLEND);
     }
 

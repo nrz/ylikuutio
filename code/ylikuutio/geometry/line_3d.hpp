@@ -46,8 +46,8 @@ namespace yli::geometry
             {
             }
 
-            bool do_lines3D_intersect(const yli::geometry::Line3D* const line1, const yli::geometry::Line3D* const line2) const;
-            bool do_lines3D_intersect(const yli::geometry::Line3D* const line) const;
+            bool do_lines_3d_intersect(const yli::geometry::Line3D* const line1, const yli::geometry::Line3D* const line2) const;
+            bool do_lines_3d_intersect(const yli::geometry::Line3D* const line) const;
     };
 }
 

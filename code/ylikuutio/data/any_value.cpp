@@ -1426,14 +1426,14 @@ namespace yli::data
         // constructor.
     }
 
-    AnyValue::AnyValue(yli::ontology::Font2D* const font2D_pointer)
-        : data(font2D_pointer)
+    AnyValue::AnyValue(yli::ontology::Font2D* const font_2d_pointer)
+        : data(font_2d_pointer)
     {
         // constructor.
     }
 
-    AnyValue::AnyValue(yli::ontology::Text2D* const text2D_pointer)
-        : data(text2D_pointer)
+    AnyValue::AnyValue(yli::ontology::Text2D* const text_2d_pointer)
+        : data(text_2d_pointer)
     {
         // constructor.
     }
@@ -1450,8 +1450,8 @@ namespace yli::data
         // constructor.
     }
 
-    AnyValue::AnyValue(yli::ontology::Text3D* const text3D_pointer)
-        : data(text3D_pointer)
+    AnyValue::AnyValue(yli::ontology::Text3D* const text_3d_pointer)
+        : data(text_3d_pointer)
     {
         // constructor.
     }

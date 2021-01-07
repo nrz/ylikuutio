@@ -168,7 +168,7 @@ TEST(scene_must_be_activated_appropriately, universe_callback)
     ASSERT_EQ(universe->get_active_scene(), scene);
 }
 
-TEST(console_must_be_activated_appropriately, universe_callback_without_font2D)
+TEST(console_must_be_activated_appropriately, universe_callback_without_font_2d)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
@@ -186,13 +186,13 @@ TEST(console_must_be_activated_appropriately, universe_callback_without_font2D)
     ASSERT_EQ(universe->get_active_console(), console);
 }
 
-TEST(console_must_be_activated_appropriately, universe_callback_with_font2D)
+TEST(console_must_be_activated_appropriately, universe_callback_with_font_2d)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::Font2D* font2D = new yli::ontology::Font2D(universe, yli::ontology::FontStruct(), &universe->parent_of_font2Ds);
+    yli::ontology::Font2D* font_2d = new yli::ontology::Font2D(universe, yli::ontology::FontStruct(), &universe->parent_of_font_2ds);
 
     const std::string console_name = "foo";
 
