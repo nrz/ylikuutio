@@ -64,7 +64,7 @@ namespace yli::ontology
                 // and binds each to its corresponding `Glyph` for rendering hierarchy,
                 // and also binds each to this `Text3D` for ontological hierarchy.
 
-                this->text_string  = text_3d_struct.text_string;
+                this->text_string = text_3d_struct.text_string;
 
                 // Let's create each glyph `Object` in a loop.
 
