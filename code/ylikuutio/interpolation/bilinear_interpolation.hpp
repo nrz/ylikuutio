@@ -79,7 +79,7 @@ namespace yli::interpolation
 
             if (input_image_width == 0)
             {
-                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly_2d`: the value of `input_image_width` is 0.\n";
+                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly`: the value of `input_image_width` is 0.\n";
                 return nullptr;
             }
 
@@ -87,7 +87,7 @@ namespace yli::interpolation
 
             if (input_image_height == 0)
             {
-                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly_2d`: the value of `input_image_height` is 0.\n";
+                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly`: the value of `input_image_height` is 0.\n";
                 return nullptr;
             }
 
@@ -95,7 +95,7 @@ namespace yli::interpolation
 
             if (output_image_width == 0)
             {
-                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly_2d`: the value of `output_image_width` is 0.\n";
+                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly`: the value of `output_image_width` is 0.\n";
                 return nullptr;
             }
 
@@ -103,13 +103,13 @@ namespace yli::interpolation
 
             if (output_image_height == 0)
             {
-                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly_2d`: the value of `output_image_height` is 0.\n";
+                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly`: the value of `output_image_height` is 0.\n";
                 return nullptr;
             }
 
             if (output_image_width > input_image_width || output_image_height > input_image_height)
             {
-                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly_2d`: enlarging is not currently supported!\n";
+                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly`: enlarging is not currently supported!\n";
                 return nullptr;
             }
 
