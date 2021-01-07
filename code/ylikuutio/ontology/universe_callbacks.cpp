@@ -20,7 +20,7 @@
 #include "movable.hpp"
 #include "universe.hpp"
 #include "brain.hpp"
-#include "font2D.hpp"
+#include "font_2d.hpp"
 #include "console.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"

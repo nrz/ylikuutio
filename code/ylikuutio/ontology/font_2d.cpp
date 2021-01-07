@@ -15,10 +15,17 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "text2D.hpp"
-#include "font2D.hpp"
+#include "font_2d.hpp"
+#include "universe.hpp"
+#include "entity.hpp"
+#include "text_2d.hpp"
+#include "text_struct.hpp"
+#include "family_templates.hpp"
+#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -26,71 +33,129 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+#ifndef __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
+#define __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
+#include <glm/gtc/matrix_transform.hpp>
+#endif
+
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli::ontology
 {
-    void Text2D::bind_to_new_parent(yli::ontology::Font2D* const new_parent)
-    {
-        // This method sets pointer to this `Text2D` to `nullptr`, sets `parent` according to the input,
-        // and requests a new `childID` from the new `Font2D`.
-        //
-        // Requirements:
-        // `this->parent` must not be `nullptr`.
-        // `new_parent` must not be `nullptr`.
-
-        yli::ontology::Entity* const font2D = this->child_of_font2D.get_parent();
-
-        if (font2D == nullptr)
-        {
-            std::cerr << "ERROR: `Text2D::bind_to_new_parent`: `font2D` is `nullptr`!\n";
-            return;
-        }
-
-        if (new_parent == nullptr)
-        {
-            std::cerr << "ERROR: `Text2D::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
-            return;
-        }
-
-        if (new_parent->has_child(this->local_name))
-        {
-            std::cerr << "ERROR: `Text2D::bind_to_new_parent`: local name is already in use!\n";
-            return;
-        }
-
-        // Unbind from the old parent `Font2D`.
-        this->child_of_font2D.unbind_child();
-
-        // Get `childID` from `Font2D` and set pointer to this `Text2D`.
-        this->child_of_font2D.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_text2Ds);
-    }
-
-    Text2D::~Text2D()
+    Font2D::~Font2D()
     {
         // destructor.
-        std::cout << "This `Text2D` will be destroyed.\n";
+        std::cout << "This `Font2D` will be destroyed.\n";
 
         // Delete buffers.
         glDeleteBuffers(1, &this->vertexbuffer);
         glDeleteBuffers(1, &this->uvbuffer);
+
+        // Delete texture.
+        glDeleteTextures(1, &this->texture);
+
+        // Delete shader.
+        glDeleteProgram(this->program_id);
     }
 
-    void Text2D::render()
+    yli::ontology::Entity* Font2D::get_parent() const
+    {
+        return this->child_of_universe.get_parent();
+    }
+
+    std::size_t Font2D::get_number_of_children() const
+    {
+        return this->parent_of_text2Ds.get_number_of_children();
+    }
+
+    std::size_t Font2D::get_number_of_descendants() const
+    {
+        return yli::ontology::get_number_of_descendants(this->parent_of_text2Ds.child_pointer_vector);
+    }
+
+    std::size_t Font2D::get_text_size() const
+    {
+        return this->text_size;
+    }
+
+    std::size_t Font2D::get_font_size() const
+    {
+        return this->font_size;
+    }
+
+    const std::string& Font2D::get_font_texture_file_format() const
+    {
+        return this->font_texture_file_format;
+    }
+
+    uint32_t Font2D::get_program_id() const
+    {
+        return this->program_id;
+    }
+
+    void Font2D::prepare_to_print() const
+    {
+        // Bind shader.
+        glUseProgram(this->program_id);
+
+        // Bind texture.
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, this->texture);
+
+        // Set our "texture_sampler" sampler to user Material Unit 0
+        yli::opengl::uniform_1i(this->text_2d_uniform_id, 0);
+
+        // Set screen width.
+        yli::opengl::uniform_1i(this->screen_width_uniform_id, this->screen_width);
+
+        // Set screen height.
+        yli::opengl::uniform_1i(this->screen_height_uniform_id, this->screen_height);
+
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    }
+
+    void Font2D::render()
+    {
+        if (!this->should_be_rendered || this->universe == nullptr)
+        {
+            return;
+        }
+
+        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+
+        if (render_master == nullptr)
+        {
+            return;
+        }
+
+        this->prerender();
+        this->prepare_to_print();
+        render_master->render_text2Ds(this->parent_of_text2Ds.child_pointer_vector);
+        this->postrender();
+    }
+
+    void Font2D::print_text2D(
+            const std::size_t x,
+            const std::size_t y,
+            const std::size_t text_size,
+            const std::size_t font_size,
+            const std::string& text,
+            const std::string& font_texture_file_format,
+            const std::string& horizontal_alignment,
+            const std::string& vertical_alignment) const
     {
         if (!this->should_be_rendered)
         {
             return;
         }
 
-        if (this->child_of_font2D.get_parent() == nullptr)
-        {
-            return;
-        }
+        this->prepare_to_print();
 
         // If horizontal alignment is `"left"`, each line begins from the same x coordinate.
         // If horizontal alignment is `"left"` and vertical alignment is `"top"`,
@@ -99,7 +164,7 @@ namespace yli::ontology
         //
         // If horizontal alignment is right, each line ends in the same x coordinate.
         // Newlines need to be checked beforehand.
-        const std::size_t length = this->text.size();
+        const std::size_t length = text.size();
 
         // Count the number of lines.
         std::size_t number_of_lines = 1;
@@ -127,26 +192,22 @@ namespace yli::ontology
                     number_of_lines++;
                 }
             }
-            else if (character == (char) '\n')
-            {
-                number_of_lines++;
-            }
         }
 
         std::size_t current_left_x;
         std::size_t current_top_y;
 
-        if (this->horizontal_alignment == "left")
+        if (horizontal_alignment == "left")
         {
-            current_left_x = this->x;
+            current_left_x = x;
         }
-        else if (this->horizontal_alignment == "center")
+        else if (horizontal_alignment == "center")
         {
-            current_left_x = this->x - 0.5f * length * this->text_size;
+            current_left_x = x - 0.5f * length * text_size;
         }
-        else if (this->horizontal_alignment == "right")
+        else if (horizontal_alignment == "right")
         {
-            current_left_x = this->x - length * this->text_size;
+            current_left_x = x - length * text_size;
         }
         else
         {
@@ -154,25 +215,25 @@ namespace yli::ontology
             return;
         }
 
-        if (this->vertical_alignment == "top")
+        if (vertical_alignment == "top")
         {
-            current_top_y = this->y;
+            current_top_y = y;
         }
-        else if (this->vertical_alignment == "center")
+        else if (vertical_alignment == "center")
         {
-            current_top_y = this->y + 0.5f * number_of_lines * this->text_size;
+            current_top_y = y + 0.5f * number_of_lines * text_size;
         }
-        else if (this->vertical_alignment == "bottom")
+        else if (vertical_alignment == "bottom")
         {
-            current_top_y = this->y + number_of_lines * this->text_size;
+            current_top_y = y + number_of_lines * text_size;
         }
         else
         {
-            std::cerr << "Invalid vertical alignment: " << this->vertical_alignment << "\n";
+            std::cerr << "Invalid vertical alignment: " << vertical_alignment << "\n";
             return;
         }
 
-        // Fill buffers
+        // Fill buffers.
         std::vector<glm::vec2> vertices;
         std::vector<glm::vec2> UVs;
 
@@ -207,29 +268,20 @@ namespace yli::ontology
 
                 if (character == 'n')
                 {
-                    // jump to the beginning of the next line.
+                    // Jump to the beginning of the next line.
                     // `"left"` horizontal alignment and `"top"` vertical alignment are assumed.
                     // TODO: implement newline for other horizontal and vertical alignments too!
-                    current_left_x = this->x;
-                    current_top_y -= this->text_size;
+                    current_left_x = x;
+                    current_top_y -= text_size;
                     continue;
                 }
             }
-            else if (character == (char) '\n')
-            {
-                // jump to the beginning of the next line.
-                // `"left"` horizontal alignment and `"top"` vertical alignment are assumed.
-                // TODO: implement newline for other horizontal and vertical alignments too!
-                current_left_x = this->x;
-                current_top_y -= this->text_size;
-                continue;
-            }
 
             vertex_up_left_x = vertex_down_left_x = current_left_x;
-            vertex_up_right_x = vertex_down_right_x = current_left_x + this->text_size;
-            current_left_x += this->text_size;
+            vertex_up_right_x = vertex_down_right_x = current_left_x + text_size;
+            current_left_x += text_size;
 
-            vertex_down_left_y = vertex_down_right_y = current_top_y - this->text_size;
+            vertex_down_left_y = vertex_down_right_y = current_top_y - text_size;
             vertex_up_left_y = vertex_up_right_y = current_top_y;
 
             glm::vec2 vertex_up_left = glm::vec2(vertex_up_left_x, vertex_up_left_y);
@@ -245,17 +297,13 @@ namespace yli::ontology
             vertices.emplace_back(vertex_up_right);
             vertices.emplace_back(vertex_down_left);
 
-            float uv_x = (character % this->font_size) / static_cast<float>(this->font_size);
+            float uv_x = (character % font_size) / static_cast<float>(font_size);
             float uv_y;
-
-            yli::ontology::Font2D* const font2D = static_cast<yli::ontology::Font2D*>(this->child_of_font2D.get_parent());
-
-            const std::string& font_texture_file_format = font2D->get_font_texture_file_format();
 
             if (font_texture_file_format == "bmp" || font_texture_file_format == "BMP")
             {
                 // BMP is stored in the file beginning from the bottom line.
-                uv_y = 1 - (character / this->font_size) / static_cast<float>(this->font_size);
+                uv_y = 1 - (character / font_size) / static_cast<float>(font_size);
             }
             else
             {
@@ -264,17 +312,16 @@ namespace yli::ontology
             }
 
             glm::vec2 uv_up_left = glm::vec2(uv_x, uv_y);
-            glm::vec2 uv_up_right = glm::vec2(uv_x + (1.0f / static_cast<float>(this->font_size)), uv_y);
+            glm::vec2 uv_up_right = glm::vec2(uv_x + (1.0f / static_cast<float>(font_size)), uv_y);
             glm::vec2 uv_down_right;
             glm::vec2 uv_down_left;
 
             if (font_texture_file_format == "bmp" || font_texture_file_format == "BMP")
             {
                 // BMP is stored in the file beginning from the bottom line.
-                uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(this->font_size)), (uv_y - 1.0f / static_cast<float>(this->font_size)));
-                uv_down_left = glm::vec2(uv_x, (uv_y - 1.0f / static_cast<float>(this->font_size)));
+                uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(font_size)), (uv_y - 1.0f / static_cast<float>(font_size)));
+                uv_down_left = glm::vec2(uv_x, (uv_y - 1.0f / static_cast<float>(font_size)));
             }
-
             UVs.emplace_back(uv_up_left);
             UVs.emplace_back(uv_down_left);
             UVs.emplace_back(uv_up_right);
@@ -299,40 +346,46 @@ namespace yli::ontology
         glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
         glVertexAttribPointer(this->vertex_uv_id, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
-        // 1st attribute buffer: vertices.
-        yli::opengl::enable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
-        glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
-        glVertexAttribPointer(this->vertex_position_in_screenspace_id, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
-
-        // 2nd attribute buffer: UVs.
-        yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
-        glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
-        glVertexAttribPointer(this->vertex_uv_id, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
-
         // Draw call.
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
         yli::opengl::disable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
         yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
+
+        glDisable(GL_BLEND);
     }
 
-    yli::ontology::Entity* Text2D::get_parent() const
+    void Font2D::print_text2D(const yli::ontology::TextStruct& text_struct) const
     {
-        return this->child_of_font2D.get_parent();
+        if (!this->should_be_rendered)
+        {
+            return;
+        }
+
+        this->print_text2D(
+                text_struct.x,
+                text_struct.y,
+                text_struct.text_size,
+                text_struct.font_size,
+                text_struct.text,
+                text_struct.font_texture_file_format,
+                text_struct.horizontal_alignment,
+                text_struct.vertical_alignment);
     }
 
-    std::size_t Text2D::get_number_of_children() const
+    void Font2D::print_text2D(
+            const std::size_t x,
+            const std::size_t y,
+            const std::size_t text_size,
+            const std::size_t font_size,
+            const std::string& text,
+            const std::string& font_texture_file_format) const
     {
-        return 0; // `Text2D` has no children.
-    }
+        if (!this->should_be_rendered)
+        {
+            return;
+        }
 
-    std::size_t Text2D::get_number_of_descendants() const
-    {
-        return 0; // `Text2D` has no children.
-    }
-
-    void Text2D::change_string(const std::string& text)
-    {
-        this->text = text;
+        this->print_text2D(x, y, text_size, font_size, text, font_texture_file_format, "left", "bottom");
     }
 }

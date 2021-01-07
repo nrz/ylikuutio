@@ -15,13 +15,13 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_TEXT3D_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_TEXT3D_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_TEXT_3D_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_TEXT_3D_HPP_INCLUDED
 
 #include "movable.hpp"
 #include "parent_module.hpp"
 #include "glyph_object_creation.hpp"
-#include "text3D_struct.hpp"
+#include "text_3d_struct.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t

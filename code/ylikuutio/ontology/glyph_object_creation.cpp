@@ -18,7 +18,7 @@
 #include "glyph_object_creation.hpp"
 #include "entity_factory.hpp"
 #include "vector_font.hpp"
-#include "text3D.hpp"
+#include "text_3d.hpp"
 #include "object.hpp"
 #include "object_type.hpp"
 #include "object_struct.hpp"

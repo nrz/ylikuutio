@@ -18,7 +18,7 @@
 #include "vector_font.hpp"
 #include "universe.hpp"
 #include "glyph.hpp"
-#include "text3D.hpp"
+#include "text_3d.hpp"
 #include "family_templates.hpp"
 #include "vector_font_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"

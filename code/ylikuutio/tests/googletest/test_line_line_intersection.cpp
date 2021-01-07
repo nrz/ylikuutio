@@ -17,7 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/geometry/line_line_intersection.hpp"
-#include "code/ylikuutio/geometry/line2D.hpp"
+#include "code/ylikuutio/geometry/line_2d.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

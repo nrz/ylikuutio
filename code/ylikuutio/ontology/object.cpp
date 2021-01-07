@@ -22,7 +22,7 @@
 #include "species.hpp"
 #include "shapeshifter_sequence.hpp"
 #include "model.hpp"
-#include "text3D.hpp"
+#include "text_3d.hpp"
 #include "entity_factory.hpp"
 #include "object_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"

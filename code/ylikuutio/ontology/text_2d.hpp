@@ -15,13 +15,13 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_TEXT2D_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_TEXT2D_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_TEXT_2D_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_TEXT_2D_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "universe.hpp"
-#include "font2D.hpp"
+#include "font_2d.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 

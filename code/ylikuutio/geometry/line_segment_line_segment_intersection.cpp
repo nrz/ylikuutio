@@ -16,9 +16,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "line_segment_line_segment_intersection.hpp"
-#include "line2D.hpp"
-#include "line3D.hpp"
-#include "line_segment2D.hpp"
+#include "line_2d.hpp"
+#include "line_3d.hpp"
+#include "line_segment_2d.hpp"
 #include "line_line_intersection.hpp"
 
 // Include GLM

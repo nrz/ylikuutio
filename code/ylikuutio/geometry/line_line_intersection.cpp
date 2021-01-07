@@ -16,8 +16,8 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "line_line_intersection.hpp"
-#include "line2D.hpp"
-#include "line3D.hpp"
+#include "line_2d.hpp"
+#include "line_3d.hpp"
 #include "code/ylikuutio/linear_algebra/matrix.hpp"
 
 // Include GLM

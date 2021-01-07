@@ -15,11 +15,10 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_GEOMETRY_LINE_SEGMENT2D_HPP_INCLUDED
-#define __YLIKUUTIO_GEOMETRY_LINE_SEGMENT2D_HPP_INCLUDED
+#ifndef __YLIKUUTIO_GEOMETRY_LINE_3D_HPP_INCLUDED
+#define __YLIKUUTIO_GEOMETRY_LINE_3D_HPP_INCLUDED
 
-#include "line2D.hpp"
-#include "line_segment.hpp"
+#include "line.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -32,20 +31,23 @@
 
 namespace yli::geometry
 {
-    class LineSegment2D : public Line2D
+    class Line3D : public Line
     {
         public:
             // constructor.
-            LineSegment2D(const std::vector<float> point1, const std::vector<float> point2)
-                : Line2D(point1, point2)
+            Line3D(const std::vector<float> point1, const std::vector<float> point2)
+                : Line(point1, point2)
             {
             }
 
-            // constructor (delegate the constructor).
-            LineSegment2D(const glm::vec2 point1, const glm::vec2 point2)
-                : LineSegment2D(std::vector<float>{ point1.x, point1.y }, std::vector<float>{ point2.x, point2.y })
-                {
-                }
+            // constructor.
+            Line3D(const std::vector<float> general_form_coefficients, const float general_form_constant)
+                : Line(general_form_coefficients, general_form_constant)
+            {
+            }
+
+            bool do_lines3D_intersect(const yli::geometry::Line3D* const line1, const yli::geometry::Line3D* const line2) const;
+            bool do_lines3D_intersect(const yli::geometry::Line3D* const line) const;
     };
 }
 

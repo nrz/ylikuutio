@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/geometry/line2D.hpp"
+#include "code/ylikuutio/geometry/line_2d.hpp"
 #include "code/ylikuutio/linear_algebra/matrix.hpp"
 
 // Include GLM
