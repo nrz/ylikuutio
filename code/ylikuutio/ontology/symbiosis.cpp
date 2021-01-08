@@ -215,7 +215,7 @@ namespace yli::ontology
             yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->child_of_shader.get_parent());
 
             // Create `SymbiontMaterial`s.
-            for (const ofbx::Texture* ofbx_texture : ofbx_diffuse_texture_pointer_vector)
+            for (const ofbx::Texture* const ofbx_texture : ofbx_diffuse_texture_pointer_vector)
             {
                 if (ofbx_texture == nullptr)
                 {
@@ -232,7 +232,7 @@ namespace yli::ontology
                 material_struct.symbiosis = this;
                 material_struct.is_symbiont_material = true;
                 material_struct.ofbx_texture = ofbx_texture;
-                yli::ontology::SymbiontMaterial* symbiont_material = new yli::ontology::SymbiontMaterial(
+                yli::ontology::SymbiontMaterial* const symbiont_material = new yli::ontology::SymbiontMaterial(
                         this->universe,
                         material_struct,
                         &this->parent_of_symbiont_materials);
