@@ -119,14 +119,14 @@ namespace yli::ontology
         }
     }
 
-    void Holobiont::update_x(float x)
+    void Holobiont::update_x(const float x)
     {
         this->cartesian_coordinates.x = x;
         this->model_matrix[3][0] = x;
 
-        for (yli::ontology::Entity* biont_entity : this->parent_of_bionts.child_pointer_vector)
+        for (yli::ontology::Entity* const biont_entity : this->parent_of_bionts.child_pointer_vector)
         {
-            yli::ontology::Biont* biont = static_cast<yli::ontology::Biont*>(biont_entity);
+            yli::ontology::Biont* const biont = static_cast<yli::ontology::Biont*>(biont_entity);
 
             if (biont != nullptr)
             {
@@ -136,14 +136,14 @@ namespace yli::ontology
         }
     }
 
-    void Holobiont::update_y(float y)
+    void Holobiont::update_y(const float y)
     {
         this->cartesian_coordinates.y = y;
         this->model_matrix[3][1] = y;
 
-        for (yli::ontology::Entity* biont_entity : this->parent_of_bionts.child_pointer_vector)
+        for (yli::ontology::Entity* const biont_entity : this->parent_of_bionts.child_pointer_vector)
         {
-            yli::ontology::Biont* biont = static_cast<yli::ontology::Biont*>(biont_entity);
+            yli::ontology::Biont* const biont = static_cast<yli::ontology::Biont*>(biont_entity);
 
             if (biont != nullptr)
             {
@@ -153,14 +153,14 @@ namespace yli::ontology
         }
     }
 
-    void Holobiont::update_z(float z)
+    void Holobiont::update_z(const float z)
     {
         this->cartesian_coordinates.z = z;
         this->model_matrix[3][2] = z;
 
-        for (yli::ontology::Entity* biont_entity : this->parent_of_bionts.child_pointer_vector)
+        for (yli::ontology::Entity* const biont_entity : this->parent_of_bionts.child_pointer_vector)
         {
-            yli::ontology::Biont* biont = static_cast<yli::ontology::Biont*>(biont_entity);
+            yli::ontology::Biont* const biont = static_cast<yli::ontology::Biont*>(biont_entity);
 
             if (biont != nullptr)
             {
