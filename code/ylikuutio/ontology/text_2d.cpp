@@ -34,7 +34,7 @@
 
 namespace yli::ontology
 {
-    void Text2D::bind_to_new_parent(yli::ontology::Font2D* const new_parent)
+    void Text2D::bind_to_new_font_2d_parent(yli::ontology::Font2D* const new_parent)
     {
         // This method sets pointer to this `Text2D` to `nullptr`, sets `parent` according to the input,
         // and requests a new `childID` from the new `Font2D`.
@@ -47,19 +47,19 @@ namespace yli::ontology
 
         if (font_2d == nullptr)
         {
-            std::cerr << "ERROR: `Text2D::bind_to_new_parent`: `font_2d` is `nullptr`!\n";
+            std::cerr << "ERROR: `Text2D::bind_to_new_font_2d_parent`: `font_2d` is `nullptr`!\n";
             return;
         }
 
         if (new_parent == nullptr)
         {
-            std::cerr << "ERROR: `Text2D::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+            std::cerr << "ERROR: `Text2D::bind_to_new_font_2d_parent`: `new_parent` is `nullptr`!\n";
             return;
         }
 
         if (new_parent->has_child(this->local_name))
         {
-            std::cerr << "ERROR: `Text2D::bind_to_new_parent`: local name is already in use!\n";
+            std::cerr << "ERROR: `Text2D::bind_to_new_font_2d_parent`: local name is already in use!\n";
             return;
         }
 
@@ -68,6 +68,25 @@ namespace yli::ontology
 
         // Get `childID` from `Font2D` and set pointer to this `Text2D`.
         this->child_of_font_2d.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_text_2ds);
+    }
+
+    void Text2D::bind_to_new_parent(yli::ontology::Entity* const new_parent)
+    {
+        // this method sets pointer to this `Text2D` to `nullptr`, sets parent according to the input,
+        // and requests a new `childID` from the new `Font2D`.
+        //
+        // requirements:
+        // `new_parent` must not be `nullptr`.
+
+        yli::ontology::Font2D* const font_2d_parent = dynamic_cast<yli::ontology::Font2D*>(new_parent);
+
+        if (font_2d_parent == nullptr)
+        {
+            std::cerr << "ERROR: `Text2D::bind_to_new_parent`: `new_parent` is not `yli::ontology::Font2D*`!\n";
+            return;
+        }
+
+        this->bind_to_new_font_2d_parent(font_2d_parent);
     }
 
     Text2D::~Text2D()

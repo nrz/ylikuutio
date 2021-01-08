@@ -52,7 +52,7 @@ namespace yli::ontology
     {
         public:
             // this method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
-            void bind_to_new_parent(yli::ontology::Material* const new_parent);
+            void bind_to_new_material_parent(yli::ontology::Material* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
             Species(

@@ -88,7 +88,7 @@ namespace yli::ontology
             void unbind_shader(const std::size_t childID, const std::string& local_name);
 
             // This method sets pointer to this `Scene` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `World`.
-            void bind_to_new_parent(yli::ontology::World* const new_parent);
+            void bind_to_new_world_parent(yli::ontology::World* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
             Scene(

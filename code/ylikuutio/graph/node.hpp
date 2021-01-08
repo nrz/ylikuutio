@@ -46,6 +46,14 @@ namespace yli::graph
         private:
             void bind_to_parent();
 
+            // This method transfers this `Node` to a new `Graph`.
+            // Links will not be changed.
+            // All `Node`s that are to be transferred must be transferred separately.
+            // Before transfering any node to a new `Graph`, all links to `Node`s
+            // that do not belong to the new `Graph` of this `Node`
+            // must be deleted with separate `delete_bidirectional_link` calls.
+            void bind_to_new_graph_parent(yli::graph::Graph* const new_parent);
+
             // this method creates a bidirectional link.
             // creating of bidirectional links is not possible before all nodes are created.
             void create_bidirectional_link(std::size_t nodeID);
@@ -53,13 +61,6 @@ namespace yli::graph
             // this method deletes a bidirectional link.
             // deleting of links is not possible before all nodes are created.
             void delete_bidirectional_link(std::size_t nodeID);
-
-            // this method transfers this node to a new graph.
-            // links will not be changed.
-            // all nodes that are to be transferred must be transferred separately.
-            // before transfering any node to a new graph,
-            // all links to nodes that do not belong to the new graph of this node must be deleted with separate `delete_bidirectional_link` calls.
-            void bind_to_new_parent(yli::graph::Graph* const new_parent);
 
             std::size_t childID;
             yli::graph::Graph* parent;

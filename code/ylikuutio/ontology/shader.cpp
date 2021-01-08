@@ -51,7 +51,7 @@ namespace yli::ontology
         scene->bind_shader(this);
     }
 
-    void Shader::bind_to_new_parent(yli::ontology::Scene* const new_parent)
+    void Shader::bind_to_new_scene_parent(yli::ontology::Scene* const new_parent)
     {
         // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input,
         // and requests a new `childID` from the new `Scene`.
@@ -64,19 +64,19 @@ namespace yli::ontology
 
         if (scene == nullptr)
         {
-            std::cerr << "ERROR: `Shader::bind_to_new_parent`: `scene` is `nullptr`!\n";
+            std::cerr << "ERROR: `Shader::bind_to_new_scene_parent`: `scene` is `nullptr`!\n";
             return;
         }
 
         if (new_parent == nullptr)
         {
-            std::cerr << "ERROR: `Shader::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+            std::cerr << "ERROR: `Shader::bind_to_new_scene_parent`: `new_parent` is `nullptr`!\n";
             return;
         }
 
         if (new_parent->has_child(this->local_name))
         {
-            std::cerr << "ERROR: `Shader::bind_to_new_parent`: local name is already in use!\n";
+            std::cerr << "ERROR: `Shader::bind_to_new_scene_parent`: local name is already in use!\n";
             return;
         }
 
@@ -105,7 +105,7 @@ namespace yli::ontology
             return;
         }
 
-        this->bind_to_new_parent(scene);
+        this->bind_to_new_scene_parent(scene);
     }
 
     Shader::~Shader()

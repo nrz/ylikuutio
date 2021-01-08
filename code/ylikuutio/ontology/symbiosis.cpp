@@ -51,7 +51,7 @@ namespace yli::ontology
     class Entity;
     class Holobiont;
 
-    void Symbiosis::bind_to_new_parent(yli::ontology::Shader* const new_parent)
+    void Symbiosis::bind_to_new_shader_parent(yli::ontology::Shader* const new_parent)
     {
         // this method sets pointer to this `Symbiosis` to `nullptr`, sets `parent` according to the input,
         // and requests a new `childID` from the new `Shader`.
@@ -64,19 +64,19 @@ namespace yli::ontology
 
         if (shader == nullptr)
         {
-            std::cerr << "ERROR: `Symbiosis::bind_to_new_parent`: `shader` is `nullptr`!\n";
+            std::cerr << "ERROR: `Symbiosis::bind_to_new_shader_parent`: `shader` is `nullptr`!\n";
             return;
         }
 
         if (new_parent == nullptr)
         {
-            std::cerr << "ERROR: `Symbiosis::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+            std::cerr << "ERROR: `Symbiosis::bind_to_new_shader_parent`: `new_parent` is `nullptr`!\n";
             return;
         }
 
         if (new_parent->has_child(this->local_name))
         {
-            std::cerr << "ERROR: `Symbiosis::bind_to_new_parent`: local name is already in use!\n";
+            std::cerr << "ERROR: `Symbiosis::bind_to_new_shader_parent`: local name is already in use!\n";
             return;
         }
 
@@ -104,7 +104,7 @@ namespace yli::ontology
             return;
         }
 
-        this->bind_to_new_parent(shader);
+        this->bind_to_new_shader_parent(shader);
     }
 
     Symbiosis::~Symbiosis()

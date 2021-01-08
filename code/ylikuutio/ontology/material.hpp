@@ -44,6 +44,10 @@ namespace yli::ontology
     class Material: public yli::ontology::Entity
     {
         public:
+            // This method sets pointer to this `Material` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
+            void bind_to_new_shader_parent(yli::ontology::Shader* const new_parent);
+            void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
+
             Material(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::MaterialStruct& material_struct,
@@ -110,10 +114,6 @@ namespace yli::ontology
 
             // destructor.
             virtual ~Material();
-
-            // This method sets pointer to this `Material` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
-            void bind_to_new_parent(yli::ontology::Shader* const new_parent);
-            void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
             yli::ontology::Entity* get_parent() const override;
 

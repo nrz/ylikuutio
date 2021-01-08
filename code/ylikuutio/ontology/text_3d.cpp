@@ -27,6 +27,61 @@
 
 namespace yli::ontology
 {
+    void Text3D::bind_to_new_vector_font_parent(yli::ontology::VectorFont* const new_parent)
+    {
+        // This method sets pointer to this `Text3D` to `nullptr`, sets `parent` according to the input,
+        // and requests a new `childID` from the new `VectorFont`.
+        //
+        // Requirements:
+        // `this->parent` must not be `nullptr`.
+        // `new_parent` must not be `nullptr`.
+
+        yli::ontology::Entity* const vector_font = this->child_of_vector_font.get_parent();
+
+        if (vector_font == nullptr)
+        {
+            std::cerr << "ERROR: `Text3D::bind_to_new_vector_font_parent`: `vector_font` is `nullptr`!\n";
+            return;
+        }
+
+        if (new_parent == nullptr)
+        {
+            std::cerr << "ERROR: `Text3D::bind_to_new_vector_font_parent`: `new_parent` is `nullptr`!\n";
+            return;
+        }
+
+        if (new_parent->has_child(this->local_name))
+        {
+            std::cerr << "ERROR: `Text3D::bind_to_new_vector_font_parent`: local name is already in use!\n";
+            return;
+        }
+
+        // Unbind from the old parent `VectorFont`.
+        this->child_of_vector_font.unbind_child();
+
+        // Get `childID` from `VectorFont` and set pointer to this `Text3D`.
+        this->child_of_vector_font.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_text_3ds);
+    }
+
+    void Text3D::bind_to_new_parent(yli::ontology::Entity* const new_parent)
+    {
+        // this method sets pointer to this `Text3D` to `nullptr`, sets parent according to the input,
+        // and requests a new `childID` from the new `VectorFont`.
+        //
+        // requirements:
+        // `new_parent` must not be `nullptr`.
+
+        yli::ontology::VectorFont* const vector_font_parent = dynamic_cast<yli::ontology::VectorFont*>(new_parent);
+
+        if (vector_font_parent == nullptr)
+        {
+            std::cerr << "ERROR: `Text3D::bind_to_new_parent`: `new_parent` is not `yli::ontology::VectorFont*`!\n";
+            return;
+        }
+
+        this->bind_to_new_vector_font_parent(vector_font_parent);
+    }
+
     Text3D::~Text3D()
     {
         // destructor.
