@@ -17,6 +17,7 @@
 
 #include "vector_font.hpp"
 #include "universe.hpp"
+#include "material.hpp"
 #include "glyph.hpp"
 #include "text_3d.hpp"
 #include "family_templates.hpp"
