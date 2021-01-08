@@ -39,9 +39,10 @@
 #endif
 
 // Include standard headers
-#include <cstddef>  // std::size_t
+#include <cstddef>  // std::size_t, std::uintptr_t
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -221,7 +222,11 @@ namespace yli::ontology
                     continue;
                 }
 
-                std::cout << "Creating yli::ontology::SymbiontMaterial* based on ofbx::Texture* at 0x" << std::hex << (uint64_t) ofbx_texture << std::dec << " ...\n";
+                std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) ofbx_texture);
+                std::stringstream memory_address_stringstream;
+                memory_address_stringstream << "0x" << std::hex << memory_address;
+
+                std::cout << "Creating `SymbiontMaterial*` based on `ofbx::Texture*` at 0x" << memory_address_stringstream.str() << " ...\n";
                 yli::ontology::MaterialStruct material_struct;
                 material_struct.shader = shader;
                 material_struct.symbiosis = this;

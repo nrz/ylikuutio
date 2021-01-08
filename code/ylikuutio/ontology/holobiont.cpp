@@ -35,10 +35,11 @@
 #endif
 
 // Include standard headers
-#include <cstddef>  // std::size_t
+#include <cstddef>  // std::size_t, std::uintptr_t
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -82,7 +83,11 @@ namespace yli::ontology
             return;
         }
 
-        std::cout << "Creating bionts for Holobiont located at 0x" << std::hex << (uint64_t) this << std::dec << " ...\n";
+        std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) this);
+        std::stringstream memory_address_stringstream;
+        memory_address_stringstream << "0x" << std::hex << memory_address;
+
+        std::cout << "Creating `Biont`s for `Holobiont` located at 0x" << memory_address_stringstream.str() << " ...\n";
 
         // Create `Biont` entities so that they bind to this `Holobiont`.
         const std::size_t correct_number_of_bionts = symbiosis->get_number_of_ofbx_meshes();
