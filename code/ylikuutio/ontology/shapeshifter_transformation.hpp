@@ -34,6 +34,7 @@
 namespace yli::ontology
 {
     class Universe;
+    class Material;
 
     class ShapeshifterTransformation: public yli::ontology::Entity
     {
