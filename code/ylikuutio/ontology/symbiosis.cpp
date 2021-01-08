@@ -142,7 +142,7 @@ namespace yli::ontology
     {
         std::size_t number_of_symbiont_species = 0;
 
-        for (auto& symbiont_material : this->parent_of_symbiont_materials.child_pointer_vector)
+        for (const auto& symbiont_material : this->parent_of_symbiont_materials.child_pointer_vector)
         {
             number_of_symbiont_species += symbiont_material->get_number_of_all_children();
         }
@@ -207,7 +207,7 @@ namespace yli::ontology
 
             this->biontID_symbiont_species_vector.resize(this->ofbx_mesh_count);
 
-            for (auto& key_and_value : this->ofbx_diffuse_texture_mesh_map)
+            for (const auto& key_and_value : this->ofbx_diffuse_texture_mesh_map)
             {
                 ofbx_diffuse_texture_pointer_vector.emplace_back(key_and_value.first); // key.
             }
@@ -222,7 +222,7 @@ namespace yli::ontology
                     continue;
                 }
 
-                std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) ofbx_texture);
+                const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) ofbx_texture);
                 std::stringstream memory_address_stringstream;
                 memory_address_stringstream << "0x" << std::hex << memory_address;
 
@@ -241,7 +241,7 @@ namespace yli::ontology
 
                 // Create `SymbiontSpecies`s.
                 // Care only about `ofbx::Texture*`s which are DIFFUSE textures.
-                for (std::size_t mesh_i : this->ofbx_diffuse_texture_mesh_map.at(ofbx_texture))
+                for (const std::size_t mesh_i : this->ofbx_diffuse_texture_mesh_map.at(ofbx_texture))
                 {
                     yli::ontology::SpeciesStruct species_struct;
                     species_struct.is_symbiont_species = true;

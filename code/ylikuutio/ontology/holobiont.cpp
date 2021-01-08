@@ -75,7 +75,7 @@ namespace yli::ontology
         // requirements:
         // `this->symbiosis_parent` must not be `nullptr`.
 
-        yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->child.get_parent());
+        const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->child.get_parent());
 
         if (symbiosis == nullptr)
         {
@@ -83,7 +83,7 @@ namespace yli::ontology
             return;
         }
 
-        std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) this);
+        const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) this);
         std::stringstream memory_address_stringstream;
         memory_address_stringstream << "0x" << std::hex << memory_address;
 
@@ -199,7 +199,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        yli::ontology::EntityFactory* const entity_factory = parent->get_entity_factory();
+        const yli::ontology::EntityFactory* const entity_factory = parent->get_entity_factory();
 
         if (entity_factory == nullptr)
         {
@@ -254,7 +254,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        yli::ontology::EntityFactory* const entity_factory = parent->get_entity_factory();
+        const yli::ontology::EntityFactory* const entity_factory = parent->get_entity_factory();
 
         if (entity_factory == nullptr)
         {
@@ -297,11 +297,11 @@ namespace yli::ontology
             return nullptr;
         }
 
-        float float_x = std::get<float>(x_any_value.data);
-        float float_y = std::get<float>(y_any_value.data);
-        float float_z = std::get<float>(z_any_value.data);
-        float float_yaw = std::get<float>(yaw_any_value.data);
-        float float_pitch = std::get<float>(pitch_any_value.data);
+        const float float_x = std::get<float>(x_any_value.data);
+        const float float_y = std::get<float>(y_any_value.data);
+        const float float_z = std::get<float>(z_any_value.data);
+        const float float_yaw = std::get<float>(yaw_any_value.data);
+        const float float_pitch = std::get<float>(pitch_any_value.data);
 
         yli::ontology::HolobiontStruct holobiont_struct;
         holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
