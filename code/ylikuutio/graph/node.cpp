@@ -167,7 +167,7 @@ namespace yli::graph
     // If `Node::bind_to_parent` would cause overflow (2^32 = 4 294 967 295), it will instead give smallest current `childID` of the graph and
     // decrement `childID_bias` by 1.
 
-    void Node::bind_to_new_parent(yli::graph::Graph* const new_parent)
+    void Node::bind_to_new_graph_parent(yli::graph::Graph* const new_parent)
     {
         // this method sets pointer to this `Node` to `nullptr`, sets `parent` according to the input,
         // and requests a new `childID` from the new `Graph`.
@@ -180,13 +180,13 @@ namespace yli::graph
 
         if (graph == nullptr)
         {
-            std::cerr << "ERROR: `Node::bind_to_new_parent`: `graph` is `nullptr`!\n";
+            std::cerr << "ERROR: `Node::bind_to_new_graph_parent`: `graph` is `nullptr`!\n";
             return;
         }
 
         if (new_parent == nullptr)
         {
-            std::cerr << "ERROR: `Node::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+            std::cerr << "ERROR: `Node::bind_to_new_graph_parent`: `new_parent` is `nullptr`!\n";
             return;
         }
 

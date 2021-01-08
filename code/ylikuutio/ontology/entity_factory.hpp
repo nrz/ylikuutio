@@ -71,7 +71,7 @@ namespace yli::ontology
             yli::ontology::Entity* create_holobiont(const yli::ontology::HolobiontStruct& object_struct) const;
             yli::ontology::Entity* create_vector_font(const yli::ontology::VectorFontStruct& vector_font_struct) const;
             yli::ontology::Entity* create_text2d(const yli::ontology::TextStruct& text_struct) const;
-            yli::ontology::Entity* create_text3d(const yli::ontology::Text3DStruct& text3D_struct) const;
+            yli::ontology::Entity* create_text3d(const yli::ontology::Text3DStruct& text_3d_struct) const;
             yli::ontology::Entity* create_font2d(const yli::ontology::FontStruct& font_struct) const;
             yli::ontology::Entity* create_console(const yli::ontology::ConsoleStruct& console_struct) const;
             yli::ontology::Entity* create_lisp_function(const yli::ontology::LispFunctionStruct& lisp_function_struct) const;

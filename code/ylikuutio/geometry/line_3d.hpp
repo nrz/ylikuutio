@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_GEOMETRY_LINE3D_HPP_INCLUDED
-#define __YLIKUUTIO_GEOMETRY_LINE3D_HPP_INCLUDED
+#ifndef __YLIKUUTIO_GEOMETRY_LINE_3D_HPP_INCLUDED
+#define __YLIKUUTIO_GEOMETRY_LINE_3D_HPP_INCLUDED
 
 #include "line.hpp"
 
@@ -46,8 +46,8 @@ namespace yli::geometry
             {
             }
 
-            bool do_lines3D_intersect(const yli::geometry::Line3D* const line1, const yli::geometry::Line3D* const line2) const;
-            bool do_lines3D_intersect(const yli::geometry::Line3D* const line) const;
+            bool do_lines_3d_intersect(const yli::geometry::Line3D* const line1, const yli::geometry::Line3D* const line2) const;
+            bool do_lines_3d_intersect(const yli::geometry::Line3D* const line) const;
     };
 }
 

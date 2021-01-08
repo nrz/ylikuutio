@@ -17,7 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp"
-#include "code/ylikuutio/geometry/line_segment2D.hpp"
+#include "code/ylikuutio/geometry/line_segment_2d.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -28,7 +28,7 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 
-TEST(line_segment2D_line_segment2D_intersection, parallel_line_segments)
+TEST(line_segment_2d_line_segment_2d_intersection, parallel_line_segments)
 {
     // ^............ a1 = point 1 of line segment a at (2, 2).
     // |.....b1..... a2 = point 2 of line segment a at (11, 5).
@@ -81,7 +81,7 @@ TEST(line_segment2D_line_segment2D_intersection, parallel_line_segments)
     ASSERT_TRUE(std::isnan(intersection_point_c_b.y));
 }
 
-TEST(line_segment2D_line_segment2D_intersection, intersecting_line_segments)
+TEST(line_segment_2d_line_segment_2d_intersection, intersecting_line_segments)
 {
     // ^..........*. a1 = point 1 of line segment a at (5, 1).
     // |*.......a2.. a2 = point 2 of line segment a at (10, 6).
@@ -106,7 +106,7 @@ TEST(line_segment2D_line_segment2D_intersection, intersecting_line_segments)
     ASSERT_EQ(intersection_point.y, 3.0f);
 }
 
-TEST(line_segment2D_line_segment2D_intersection, potentially_but_not_intersecting_line_segments)
+TEST(line_segment_2d_line_segment_2d_intersection, potentially_but_not_intersecting_line_segments)
 {
     // ^..........*. a1 = point 1 of line segment a at (5, 1).
     // |*.......a2.. a2 = point 2 of line segment a at (10, 6).
@@ -131,7 +131,7 @@ TEST(line_segment2D_line_segment2D_intersection, potentially_but_not_intersectin
     ASSERT_TRUE(std::isnan(intersection_point.y));
 }
 
-TEST(line_segment2D_line_segment2D_intersection, intersection_at_other_lines_point2)
+TEST(line_segment_2d_line_segment_2d_intersection, intersection_at_other_lines_point2)
 {
     // ^..........*. a1 = point 1 of line segment a at (5, 1).
     // |*.......a2.. a2 = point 2 of line segment a at (10, 6).
@@ -156,7 +156,7 @@ TEST(line_segment2D_line_segment2D_intersection, intersection_at_other_lines_poi
     ASSERT_EQ(intersection_point.y, 3.0f);
 }
 
-TEST(line_segment2D_line_segment2D_intersection, intersection_at_both_lines_point2)
+TEST(line_segment_2d_line_segment_2d_intersection, intersection_at_both_lines_point2)
 {
     // ^............ a1 = point 1 of line segment a at (5, 1).
     // |*........... x = point 2 of line segment a at (7, 3).

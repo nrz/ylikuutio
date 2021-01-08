@@ -15,30 +15,37 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_TEXT3D_STRUCT_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_TEXT3D_STRUCT_HPP_INCLUDED
+#ifndef __YLIKUUTIO_GEOMETRY_LINE_SEGMENT_2D_HPP_INCLUDED
+#define __YLIKUUTIO_GEOMETRY_LINE_SEGMENT_2D_HPP_INCLUDED
 
-#include "movable_struct.hpp"
+#include "line_2d.hpp"
+#include "line_segment.hpp"
+
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
 
 // Include standard headers
-#include <string>   // std::string
+#include <vector>   // std::vector
 
-namespace yli::ontology
+namespace yli::geometry
 {
-    class Brain;
-    class VectorFont;
-
-    struct Text3DStruct: public yli::ontology::MovableStruct
+    class LineSegment2D : public Line2D
     {
-        Text3DStruct()
-            : MovableStruct()
-        {
+        public:
             // constructor.
-        }
+            LineSegment2D(const std::vector<float> point1, const std::vector<float> point2)
+                : Line2D(point1, point2)
+            {
+            }
 
-        std::string text_string;
-        yli::ontology::VectorFont* parent { nullptr }; // pointer to the `VectorFont` (parent).
-        yli::ontology::Brain* brain { nullptr };       // pointer to the `Brain` master.
+            // constructor (delegate the constructor).
+            LineSegment2D(const glm::vec2 point1, const glm::vec2 point2)
+                : LineSegment2D(std::vector<float>{ point1.x, point1.y }, std::vector<float>{ point2.x, point2.y })
+                {
+                }
     };
 }
 

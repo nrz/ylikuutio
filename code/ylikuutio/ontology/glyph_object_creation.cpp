@@ -18,7 +18,7 @@
 #include "glyph_object_creation.hpp"
 #include "entity_factory.hpp"
 #include "vector_font.hpp"
-#include "text3D.hpp"
+#include "text_3d.hpp"
 #include "object.hpp"
 #include "object_type.hpp"
 #include "object_struct.hpp"
@@ -33,14 +33,14 @@ namespace yli::ontology
 {
     class Glyph;
 
-    void create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* const text3D)
+    void create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* const text_3d)
     {
-        if (text3D == nullptr)
+        if (text_3d == nullptr)
         {
             return;
         }
 
-        yli::ontology::VectorFont* const vector_font = static_cast<yli::ontology::VectorFont*>(text3D->get_parent());
+        yli::ontology::VectorFont* const vector_font = static_cast<yli::ontology::VectorFont*>(text_3d->get_parent());
 
         if (vector_font == nullptr)
         {
@@ -65,12 +65,12 @@ namespace yli::ontology
 
             yli::ontology::ObjectStruct object_struct;
             object_struct.glyph = glyph_pointer;
-            object_struct.text3D_parent = text3D;
-            object_struct.original_scale_vector = text3D->original_scale_vector;
+            object_struct.text_3d_parent = text_3d;
+            object_struct.original_scale_vector = text_3d->original_scale_vector;
             object_struct.object_type = yli::ontology::ObjectType::CHARACTER;
-            object_struct.cartesian_coordinates = text3D->cartesian_coordinates; // TODO: adjust this as needed.
+            object_struct.cartesian_coordinates = text_3d->cartesian_coordinates; // TODO: adjust this as needed.
 
-            yli::ontology::EntityFactory* const entity_factory = text3D->get_entity_factory();
+            yli::ontology::EntityFactory* const entity_factory = text_3d->get_entity_factory();
 
             if (entity_factory != nullptr)
             {

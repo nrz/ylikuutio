@@ -17,7 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/geometry/line_line_intersection.hpp"
-#include "code/ylikuutio/geometry/line2D.hpp"
+#include "code/ylikuutio/geometry/line_2d.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -28,7 +28,7 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 
-TEST(line2D_line2D_intersection, parallel_lines)
+TEST(line_2d_line_2d_intersection, parallel_lines)
 {
     // ^............ a1 = point 1 of line a at (2, 2).
     // |.....b1..... a2 = point 2 of line a at (11, 5).
@@ -81,7 +81,7 @@ TEST(line2D_line2D_intersection, parallel_lines)
     ASSERT_TRUE(std::isnan(intersection_point_c_b.y));
 }
 
-TEST(line2D_line2D_intersection, intersecting_lines)
+TEST(line_2d_line_2d_intersection, intersecting_lines)
 {
     // ^..........*. a1 = point 1 of line a at (5, 1).
     // |*.......a2.. a2 = point 2 of line a at (10, 6).

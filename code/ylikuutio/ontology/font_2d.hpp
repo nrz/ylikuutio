@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_FONT2D_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_FONT2D_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_FONT_2D_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_FONT_2D_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "child_module.hpp"
@@ -49,7 +49,7 @@ namespace yli::ontology
                     yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, font_struct),
                 child_of_universe(parent_module, this),
-                parent_of_text2Ds(this),
+                parent_of_text_2ds(this),
                 master_of_consoles(this)
         {
                 // constructor.
@@ -145,7 +145,7 @@ namespace yli::ontology
 
             void render();
 
-            void print_text2D(
+            void print_text_2d(
                     const std::size_t x,
                     const std::size_t y,
                     const std::size_t text_size,
@@ -155,9 +155,9 @@ namespace yli::ontology
                     const std::string& horizontal_alignment,
                     const std::string& vertical_alignment) const;
 
-            void print_text2D(const yli::ontology::TextStruct& text_struct) const;
+            void print_text_2d(const yli::ontology::TextStruct& text_struct) const;
 
-            void print_text2D(
+            void print_text_2d(
                     const std::size_t x,
                     const std::size_t y,
                     const std::size_t text_size,
@@ -166,7 +166,7 @@ namespace yli::ontology
                     const std::string& font_texture_file_format) const;
 
             yli::ontology::ChildModule child_of_universe;
-            yli::ontology::ParentModule parent_of_text2Ds;
+            yli::ontology::ParentModule parent_of_text_2ds;
 
             yli::ontology::MasterModule master_of_consoles;
 

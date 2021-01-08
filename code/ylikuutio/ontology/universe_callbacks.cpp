@@ -20,7 +20,7 @@
 #include "movable.hpp"
 #include "universe.hpp"
 #include "brain.hpp"
-#include "font2D.hpp"
+#include "font_2d.hpp"
 #include "console.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
@@ -221,12 +221,11 @@ namespace yli::ontology
 
         console->print_text(entity->get_type());
 
-        std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) entity);
+        const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) entity);
         std::stringstream memory_address_stringstream;
         memory_address_stringstream << "0x" << std::hex << memory_address;
 
-        std::string entity_info = "memory address:   ";
-        entity_info += memory_address_stringstream.str();
+        const std::string entity_info = "memory address:   " + memory_address_stringstream.str();
         console->print_text(entity_info);
 
         if (entity->get_parent() == nullptr)
@@ -276,12 +275,11 @@ namespace yli::ontology
 
         for (auto& [key, value] : key_and_value_vector)
         {
-            std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) value);
+            const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) value);
             std::stringstream memory_address_stringstream;
             memory_address_stringstream << " 0x" << std::hex << memory_address;
 
-            std::string entity_info = key;
-            entity_info += memory_address_stringstream.str();
+            const std::string entity_info = key + memory_address_stringstream.str();
             console->print_text(entity_info);
         }
 

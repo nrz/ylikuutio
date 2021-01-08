@@ -61,8 +61,8 @@ namespace yli::callback
             // setter function for callbacks and callback objects.
             void set_any_value(const std::string& name, std::shared_ptr<yli::data::AnyValue> any_value);
 
-            friend class CallbackEngine;
-            friend class CallbackParameter;
+            friend class yli::callback::CallbackEngine;
+            friend class yli::callback::CallbackParameter;
             template<class T1>
                 friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 

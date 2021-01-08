@@ -15,27 +15,18 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
+#include "line_3d.hpp"
 
-// Include standard headers
-#include <vector> // std::vector
-
-namespace yli::ontology
+namespace yli::geometry
 {
-    class Entity;
-    class Scene;
-    class Font2D;
-    class Console;
-}
-
-namespace yli::render
-{
-    struct RenderStruct
+    bool Line3D::do_lines_3d_intersect(const yli::geometry::Line3D* const line1, const yli::geometry::Line3D* const line2) const
     {
-        yli::ontology::Scene* scene { nullptr };
-        yli::ontology::Console* console { nullptr };
-        std::vector<yli::ontology::Entity*>* font_2d_pointer_vector { nullptr };
-        SDL_Window* window { nullptr };
-        bool should_ylikuutio_change_depth_test { true };
-    };
+        // TODO: implement the function!
+        return false;
+    }
+
+    bool Line3D::do_lines_3d_intersect(const yli::geometry::Line3D* const line) const
+    {
+        return yli::geometry::Line3D::do_lines_3d_intersect(line, this);
+    }
 }

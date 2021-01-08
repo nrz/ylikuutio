@@ -41,7 +41,7 @@
 #include "code/ylikuutio/ontology/symbiosis_struct.hpp"
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
 #include "code/ylikuutio/ontology/camera_struct.hpp"
-#include "code/ylikuutio/ontology/text3D_struct.hpp"
+#include "code/ylikuutio/ontology/text_3d_struct.hpp"
 #include "code/ylikuutio/ontology/brain_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 
@@ -887,12 +887,12 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Text3DStruct text3D_struct;
-        text3D_struct.parent = kongtext_font;
-        text3D_struct.text_string = "Hello world &#x26; its habitants!";
-        text3D_struct.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        text3D_struct.cartesian_coordinates = glm::vec3(100.00f, 100.00f, 100.00f);
-        entity_factory->create_text3d(text3D_struct);
+        yli::ontology::Text3DStruct text_3d_struct;
+        text_3d_struct.parent = kongtext_font;
+        text_3d_struct.text_string = "Hello world &#x26; its habitants!";
+        text_3d_struct.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        text_3d_struct.cartesian_coordinates = glm::vec3(100.00f, 100.00f, 100.00f);
+        entity_factory->create_text3d(text_3d_struct);
 
         yli::ontology::CameraStruct cat_camera_struct;
         cat_camera_struct.cartesian_coordinates = glm::vec3(800.00f, 400.00f, 950.00f);

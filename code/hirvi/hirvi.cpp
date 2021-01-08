@@ -52,8 +52,8 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/font2D.hpp"
-#include "code/ylikuutio/ontology/text2D.hpp"
+#include "code/ylikuutio/ontology/font_2d.hpp"
+#include "code/ylikuutio/ontology/text_2d.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/variable_struct.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
@@ -314,7 +314,7 @@ namespace hirvi
 
                 // Helsinki `Scene` ends here.
 
-                std::cout << "Creating yli::ontology::Entity* my_font2D_entity ...\n";
+                std::cout << "Creating yli::ontology::Entity* my_font_2d_entity ...\n";
 
                 yli::ontology::FontStruct font_struct;
                 font_struct.texture_filename = "Holstein.bmp";
@@ -324,21 +324,21 @@ namespace hirvi
                 font_struct.text_size = my_universe->get_text_size();
                 font_struct.font_size = my_universe->get_font_size();
 
-                yli::ontology::Entity* const my_font2D_entity = entity_factory->create_font2d(font_struct);
+                yli::ontology::Entity* const my_font_2d_entity = entity_factory->create_font2d(font_struct);
 
-                std::cout << "Creating yli::ontology::Font2D* my_font2D ...\n";
-                yli::ontology::Font2D* const my_font2D = dynamic_cast<yli::ontology::Font2D*>(my_font2D_entity);
+                std::cout << "Creating yli::ontology::Font2D* my_font_2d ...\n";
+                yli::ontology::Font2D* const my_font_2d = dynamic_cast<yli::ontology::Font2D*>(my_font_2d_entity);
 
-                if (my_font2D == nullptr)
+                if (my_font_2d == nullptr)
                 {
                     std::cerr << "Failed to create Font2D.\n";
                     return false;
                 }
 
                 std::cout << "Font2D created successfully.\n";
-                my_font2D->set_global_name("my_font2D");
+                my_font_2d->set_global_name("my_font_2d");
 
-                my_console->bind_to_new_font_2d(my_font2D);
+                my_console->bind_to_new_font_2d(my_font_2d);
                 my_console->print_text("Welcome! Please write \"help\" for more");
                 my_console->print_text("information.");
 

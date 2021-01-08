@@ -22,7 +22,7 @@
 #include "species.hpp"
 #include "shapeshifter_sequence.hpp"
 #include "model.hpp"
-#include "text3D.hpp"
+#include "text_3d.hpp"
 #include "entity_factory.hpp"
 #include "object_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -57,7 +57,7 @@ namespace yli::ontology
     class Entity;
     class Shader;
 
-    void Object::bind_to_new_parent(yli::ontology::Species* const new_parent)
+    void Object::bind_to_new_species_parent(yli::ontology::Species* const new_parent)
     {
         // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
         // and requests a new `childID` from the new `Species`.
@@ -72,19 +72,19 @@ namespace yli::ontology
 
             if (species == nullptr)
             {
-                std::cerr << "ERROR: `Object::bind_to_new_parent`: `species` is `nullptr`!\n";
+                std::cerr << "ERROR: `Object::bind_to_new_species_parent`: `species` is `nullptr`!\n";
                 return;
             }
 
             if (new_parent == nullptr)
             {
-                std::cerr << "ERROR: `Object::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+                std::cerr << "ERROR: `Object::bind_to_new_species_parent`: `new_parent` is `nullptr`!\n";
                 return;
             }
 
             if (new_parent->has_child(this->local_name))
             {
-                std::cerr << "ERROR: `Object::bind_to_new_parent`: local name is already in use!\n";
+                std::cerr << "ERROR: `Object::bind_to_new_species_parent`: local name is already in use!\n";
                 return;
             }
 
@@ -96,7 +96,7 @@ namespace yli::ontology
         }
     }
 
-    void Object::bind_to_new_parent(yli::ontology::ShapeshifterSequence* const new_parent)
+    void Object::bind_to_new_shapeshifter_sequence_parent(yli::ontology::ShapeshifterSequence* const new_parent)
     {
         // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
         // and requests a new `childID` from the new `ShapeshifterSequence`.
@@ -111,19 +111,19 @@ namespace yli::ontology
 
             if (shapeshifter_sequence == nullptr)
             {
-                std::cerr << "ERROR: `Object::bind_to_new_parent`: `shapeshifter_sequence` is `nullptr`!\n";
+                std::cerr << "ERROR: `Object::bind_to_new_shapeshifter_sequence_parent`: `shapeshifter_sequence` is `nullptr`!\n";
                 return;
             }
 
             if (new_parent == nullptr)
             {
-                std::cerr << "ERROR: `Object::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+                std::cerr << "ERROR: `Object::bind_to_new_shapeshifter_sequence_parent`: `new_parent` is `nullptr`!\n";
                 return;
             }
 
             if (new_parent->has_child(this->local_name))
             {
-                std::cerr << "ERROR: `Object::bind_to_new_parent`: local name is already in use!\n";
+                std::cerr << "ERROR: `Object::bind_to_new_shapeshifter_sequence_parent`: local name is already in use!\n";
                 return;
             }
 
@@ -135,7 +135,7 @@ namespace yli::ontology
         }
     }
 
-    void Object::bind_to_new_parent(yli::ontology::Text3D* const new_parent)
+    void Object::bind_to_new_text_3d_parent(yli::ontology::Text3D* const new_parent)
     {
         // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
         // and requests a new `childID` from the new `Text3D`.
@@ -143,26 +143,26 @@ namespace yli::ontology
         if (this->object_type == yli::ontology::ObjectType::CHARACTER)
         {
             // requirements for further actions in this block:
-            // `this->text3D_parent` must not be `nullptr`.
+            // `this->text_3d_parent` must not be `nullptr`.
             // `new_parent` must not be `nullptr`.
 
-            yli::ontology::Entity* const text3D = this->child.get_parent();
+            yli::ontology::Entity* const text_3d = this->child.get_parent();
 
-            if (text3D == nullptr)
+            if (text_3d == nullptr)
             {
-                std::cerr << "ERROR: `Object::bind_to_new_parent`: `text3D` is `nullptr`!\n";
+                std::cerr << "ERROR: `Object::bind_to_new_text_3d_parent`: `text_3d` is `nullptr`!\n";
                 return;
             }
 
             if (new_parent == nullptr)
             {
-                std::cerr << "ERROR: `Object::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+                std::cerr << "ERROR: `Object::bind_to_new_text_3d_parent`: `new_parent` is `nullptr`!\n";
                 return;
             }
 
             if (new_parent->has_child(this->local_name))
             {
-                std::cerr << "ERROR: `Object::bind_to_new_parent`: local name is already in use!\n";
+                std::cerr << "ERROR: `Object::bind_to_new_text_3d_parent`: local name is already in use!\n";
                 return;
             }
 
@@ -186,15 +186,15 @@ namespace yli::ontology
 
         if (species_parent != nullptr)
         {
-            this->bind_to_new_parent(species_parent);
+            this->bind_to_new_species_parent(species_parent);
             return;
         }
 
-        yli::ontology::Text3D* const text3D_parent = dynamic_cast<yli::ontology::Text3D*>(new_parent);
+        yli::ontology::Text3D* const text_3d_parent = dynamic_cast<yli::ontology::Text3D*>(new_parent);
 
-        if (text3D_parent != nullptr)
+        if (text_3d_parent != nullptr)
         {
-            this->bind_to_new_parent(text3D_parent);
+            this->bind_to_new_text_3d_parent(text_3d_parent);
             return;
         }
 

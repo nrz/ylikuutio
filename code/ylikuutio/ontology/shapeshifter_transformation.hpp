@@ -34,13 +34,14 @@
 namespace yli::ontology
 {
     class Universe;
+    class Material;
 
     class ShapeshifterTransformation: public yli::ontology::Entity
     {
         public:
             // This method sets pointer to this `ShapeshifterTransformation` to `nullptr`,
             // sets `parent` according to the input, and requests a new `childID` from the new `Material`.
-            void bind_to_new_parent(yli::ontology::Material* const new_parent);
+            void bind_to_new_material_parent(yli::ontology::Material* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
             ShapeshifterTransformation(yli::ontology::Universe* const universe, const yli::ontology::SpeciesStruct& species_struct)

@@ -31,7 +31,7 @@
 namespace yli::interpolation
 {
     template<class T1>
-        float sample2D(
+        float sample_2d(
                 const T1* source_image,
                 const float image_width,
                 const float image_height,
@@ -79,7 +79,7 @@ namespace yli::interpolation
 
             if (input_image_width == 0)
             {
-                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly2D`: the value of `input_image_width` is 0.\n";
+                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly`: the value of `input_image_width` is 0.\n";
                 return nullptr;
             }
 
@@ -87,7 +87,7 @@ namespace yli::interpolation
 
             if (input_image_height == 0)
             {
-                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly2D`: the value of `input_image_height` is 0.\n";
+                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly`: the value of `input_image_height` is 0.\n";
                 return nullptr;
             }
 
@@ -95,7 +95,7 @@ namespace yli::interpolation
 
             if (output_image_width == 0)
             {
-                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly2D`: the value of `output_image_width` is 0.\n";
+                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly`: the value of `output_image_width` is 0.\n";
                 return nullptr;
             }
 
@@ -103,13 +103,13 @@ namespace yli::interpolation
 
             if (output_image_height == 0)
             {
-                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly2D`: the value of `output_image_height` is 0.\n";
+                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly`: the value of `output_image_height` is 0.\n";
                 return nullptr;
             }
 
             if (output_image_width > input_image_width || output_image_height > input_image_height)
             {
-                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly2D`: enlarging is not currently supported!\n";
+                std::cerr << "ERROR: `yli::interpolation::interpolate_bilinearly`: enlarging is not currently supported!\n";
                 return nullptr;
             }
 
@@ -130,7 +130,7 @@ namespace yli::interpolation
 
                 for (std::size_t x_index = 0; x_index < output_image_width; x_index++, x += delta_x)
                 {
-                    const float value = yli::interpolation::sample2D(source_image, input_image_width, input_image_height, x, z);
+                    const float value = yli::interpolation::sample_2d(source_image, input_image_width, input_image_height, x, z);
 
                     output_vector->emplace_back(value);
                 }

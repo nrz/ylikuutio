@@ -39,7 +39,7 @@ namespace yli::ontology
 
         yli::ontology::Species* species_parent { nullptr };                            // pointer to the parent `Species`.
         yli::ontology::ShapeshifterSequence* shapeshifter_sequence_parent { nullptr }; // pointer to the `ShapeshifterSequence` parent.
-        yli::ontology::Text3D* text3D_parent { nullptr };                              // pointer to the parent `Text3D`.
+        yli::ontology::Text3D* text_3d_parent { nullptr };                             // pointer to the parent `Text3D`.
         yli::ontology::Glyph* glyph { nullptr };                                       // pointer to the `Glyph` (not a parent!).
         yli::ontology::Brain* brain { nullptr };                                       // pointer to the `Brain` master.
 

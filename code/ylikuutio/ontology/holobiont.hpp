@@ -71,9 +71,9 @@ namespace yli::ontology
             // destructor.
             virtual ~Holobiont();
 
-            void update_x(float x);
-            void update_y(float y);
-            void update_z(float z);
+            void update_x(const float x);
+            void update_y(const float y);
+            void update_z(const float z);
 
             // Public callbacks.
 

@@ -588,7 +588,7 @@ namespace yli::snippets
             return nullptr;
         }
 
-        species->bind_to_new_parent(new_material);
+        species->bind_to_new_material_parent(new_material);
         return nullptr;
     }
 
@@ -704,7 +704,7 @@ namespace yli::snippets
             return nullptr;
         }
 
-        object->bind_to_new_parent(new_species);
+        object->bind_to_new_species_parent(new_species);
         return nullptr;
     }
 }

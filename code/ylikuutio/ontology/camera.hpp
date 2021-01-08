@@ -110,7 +110,7 @@ namespace yli::ontology
             const glm::mat4& get_view_matrix() const;
             bool get_is_static_view() const;
 
-            friend class Universe;
+            friend class yli::ontology::Universe;
 
         private:
             std::size_t get_number_of_children() const override;

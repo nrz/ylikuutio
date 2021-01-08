@@ -15,8 +15,30 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "line_segment3D.hpp"
+#include "line_2d.hpp"
 
 namespace yli::geometry
 {
+    bool Line2D::do_lines_2d_intersect(const yli::geometry::Line2D* const line1, const yli::geometry::Line2D* const line2) const
+    {
+        // TODO: implement the function!
+        return false;
+    }
+
+    bool Line2D::do_lines_2d_intersect(const yli::geometry::Line2D* const line) const
+    {
+        return yli::geometry::Line2D::do_lines_2d_intersect(line, this);
+    }
+
+    bool Line2D::is_identical_with(const yli::geometry::Line2D* const line) const
+    {
+        if (this->x1 == line->x1 &&
+                this->y1 == line->y1 &&
+                this->x2 == line->x2 &&
+                this->y2 == line->y2)
+        {
+            return true;
+        }
+        return false;
+    }
 }

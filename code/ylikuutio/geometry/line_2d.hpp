@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_GEOMETRY_LINE2D_HPP_INCLUDED
-#define __YLIKUUTIO_GEOMETRY_LINE2D_HPP_INCLUDED
+#ifndef __YLIKUUTIO_GEOMETRY_LINE_2D_HPP_INCLUDED
+#define __YLIKUUTIO_GEOMETRY_LINE_2D_HPP_INCLUDED
 
 #include "line.hpp"
 #include "code/ylikuutio/linear_algebra/matrix.hpp"
@@ -83,8 +83,8 @@ namespace yli::geometry
 
             bool is_identical_with(const yli::geometry::Line2D* const line) const;   // Here, identical means that points are identical.
 
-            bool do_lines2D_intersect(const yli::geometry::Line2D* const line1, const yli::geometry::Line2D* const line2) const;
-            bool do_lines2D_intersect(const yli::geometry::Line2D* const line) const;
+            bool do_lines_2d_intersect(const yli::geometry::Line2D* const line1, const yli::geometry::Line2D* const line2) const;
+            bool do_lines_2d_intersect(const yli::geometry::Line2D* const line) const;
 
             glm::vec2 vec2_point1;
             glm::vec2 vec2_point2;

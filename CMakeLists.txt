@@ -477,18 +477,18 @@ add_library(ylikuutio STATIC
     # geometry, in alphabetical order.
     code/ylikuutio/geometry/line.cpp
     code/ylikuutio/geometry/line.hpp
-    code/ylikuutio/geometry/line2D.cpp
-    code/ylikuutio/geometry/line2D.hpp
-    code/ylikuutio/geometry/line3D.cpp
-    code/ylikuutio/geometry/line3D.hpp
+    code/ylikuutio/geometry/line_2d.cpp
+    code/ylikuutio/geometry/line_2d.hpp
+    code/ylikuutio/geometry/line_3d.cpp
+    code/ylikuutio/geometry/line_3d.hpp
     code/ylikuutio/geometry/line_line_intersection.cpp
     code/ylikuutio/geometry/line_line_intersection.hpp
     code/ylikuutio/geometry/line_segment.cpp
     code/ylikuutio/geometry/line_segment.hpp
-    code/ylikuutio/geometry/line_segment2D.cpp
-    code/ylikuutio/geometry/line_segment2D.hpp
-    code/ylikuutio/geometry/line_segment3D.cpp
-    code/ylikuutio/geometry/line_segment3D.hpp
+    code/ylikuutio/geometry/line_segment_2d.cpp
+    code/ylikuutio/geometry/line_segment_2d.hpp
+    code/ylikuutio/geometry/line_segment_3d.cpp
+    code/ylikuutio/geometry/line_segment_3d.hpp
     code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
     code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
     code/ylikuutio/geometry/spherical_terrain_struct.hpp
@@ -624,8 +624,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/entity_variable_read.hpp
     code/ylikuutio/ontology/entity_struct.hpp
     code/ylikuutio/ontology/family_templates.hpp
-    code/ylikuutio/ontology/font2D.cpp
-    code/ylikuutio/ontology/font2D.hpp
+    code/ylikuutio/ontology/font_2d.cpp
+    code/ylikuutio/ontology/font_2d.hpp
     code/ylikuutio/ontology/font_struct.hpp
     code/ylikuutio/ontology/framebuffer_module.cpp
     code/ylikuutio/ontology/framebuffer_module.hpp
@@ -706,11 +706,11 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/symbiosis_struct.hpp
     code/ylikuutio/ontology/terrain_generation_callbacks.cpp
     code/ylikuutio/ontology/terrain_generation_callbacks.hpp
-    code/ylikuutio/ontology/text2D.hpp
-    code/ylikuutio/ontology/text2D.cpp
-    code/ylikuutio/ontology/text3D.hpp
-    code/ylikuutio/ontology/text3D.cpp
-    code/ylikuutio/ontology/text3D_struct.hpp
+    code/ylikuutio/ontology/text_2d.hpp
+    code/ylikuutio/ontology/text_2d.cpp
+    code/ylikuutio/ontology/text_3d.hpp
+    code/ylikuutio/ontology/text_3d.cpp
+    code/ylikuutio/ontology/text_3d_struct.hpp
     code/ylikuutio/ontology/text_struct.hpp
     code/ylikuutio/ontology/universe.cpp
     code/ylikuutio/ontology/universe.hpp
@@ -990,12 +990,12 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/file/file_writer.hpp
         code/ylikuutio/geometry/line.cpp
         code/ylikuutio/geometry/line.hpp
-        code/ylikuutio/geometry/line2D.cpp
-        code/ylikuutio/geometry/line2D.hpp
+        code/ylikuutio/geometry/line_2d.cpp
+        code/ylikuutio/geometry/line_2d.hpp
         code/ylikuutio/geometry/line_line_intersection.cpp
         code/ylikuutio/geometry/line_line_intersection.hpp
-        code/ylikuutio/geometry/line_segment2D.cpp
-        code/ylikuutio/geometry/line_segment2D.hpp
+        code/ylikuutio/geometry/line_segment_2d.cpp
+        code/ylikuutio/geometry/line_segment_2d.hpp
         code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
         code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
         code/ylikuutio/geometry/transformation.cpp
@@ -1039,8 +1039,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/console.cpp
         code/ylikuutio/ontology/console.hpp
         code/ylikuutio/ontology/console_struct.hpp
-        code/ylikuutio/ontology/font2D.cpp
-        code/ylikuutio/ontology/font2D.hpp
+        code/ylikuutio/ontology/font_2d.cpp
+        code/ylikuutio/ontology/font_2d.hpp
         code/ylikuutio/ontology/font_struct.hpp
         code/ylikuutio/ontology/glyph_struct.hpp
         code/ylikuutio/ontology/holobiont.cpp
@@ -1078,7 +1078,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/symbiosis.cpp
         code/ylikuutio/ontology/symbiosis.hpp
         code/ylikuutio/ontology/symbiosis_struct.hpp
-        code/ylikuutio/ontology/text3D_struct.hpp
+        code/ylikuutio/ontology/text_3d_struct.hpp
         code/ylikuutio/ontology/universe.cpp
         code/ylikuutio/ontology/universe.hpp
         code/ylikuutio/ontology/universe_callbacks.cpp
@@ -1124,7 +1124,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_glyph_struct.cpp
         code/ylikuutio/tests/googletest/test_graph.cpp
         code/ylikuutio/tests/googletest/test_indexing.cpp
-        code/ylikuutio/tests/googletest/test_line2D.cpp
+        code/ylikuutio/tests/googletest/test_line_2d.cpp
         code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
         code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
         code/ylikuutio/tests/googletest/test_linear_algebra.cpp

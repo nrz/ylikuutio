@@ -54,7 +54,7 @@ namespace yli::ontology
 
             const char* get_unicode_char_pointer() const;
 
-            friend class VectorFont;
+            friend class yli::ontology::VectorFont;
             template<class T1, class T2>
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 

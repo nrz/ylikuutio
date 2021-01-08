@@ -97,7 +97,7 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_chunk_masters.child_pointer_vector);
     }
 
-    void Material::bind_to_new_parent(yli::ontology::Shader* const new_parent)
+    void Material::bind_to_new_shader_parent(yli::ontology::Shader* const new_parent)
     {
         // Requirements:
         // `this->is_symbiont_material` must be `false`.
@@ -113,19 +113,19 @@ namespace yli::ontology
 
         if (shader == nullptr)
         {
-            std::cerr << "ERROR: `Material::bind_to_new_parent`: `shader` is `nullptr`!\n";
+            std::cerr << "ERROR: `Material::bind_to_new_shader_parent`: `shader` is `nullptr`!\n";
             return;
         }
 
         if (new_parent == nullptr)
         {
-            std::cerr << "ERROR: `Material::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+            std::cerr << "ERROR: `Material::bind_to_new_shader_parent`: `new_parent` is `nullptr`!\n";
             return;
         }
 
         if (new_parent->has_child(this->local_name))
         {
-            std::cerr << "ERROR: `Material::bind_to_new_parent`: local name is already in use!\n";
+            std::cerr << "ERROR: `Material::bind_to_new_shader_parent`: local name is already in use!\n";
             return;
         }
 
@@ -148,7 +148,7 @@ namespace yli::ontology
 
         if (shader != nullptr)
         {
-            this->bind_to_new_parent(shader);
+            this->bind_to_new_shader_parent(shader);
             return;
         }
 

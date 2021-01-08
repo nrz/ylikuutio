@@ -46,7 +46,7 @@ namespace yli::console
             // destructor.
             ~ConsoleCallbackObject();
 
-            friend ConsoleCallbackEngine;
+            friend class yli::console::ConsoleCallbackEngine;
 
         private:
             // constructor.

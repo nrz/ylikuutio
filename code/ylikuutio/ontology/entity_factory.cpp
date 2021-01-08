@@ -29,9 +29,9 @@
 #include "symbiosis.hpp"
 #include "holobiont.hpp"
 #include "vector_font.hpp"
-#include "text2D.hpp"
-#include "text3D.hpp"
-#include "font2D.hpp"
+#include "text_2d.hpp"
+#include "text_3d.hpp"
+#include "font_2d.hpp"
 #include "console.hpp"
 #include "lisp_function.hpp"
 #include "shapeshifter_sequence.hpp"
@@ -49,7 +49,7 @@
 #include "symbiosis_struct.hpp"
 #include "holobiont_struct.hpp"
 #include "vector_font_struct.hpp"
-#include "text3D_struct.hpp"
+#include "text_3d_struct.hpp"
 #include "console_struct.hpp"
 #include "font_struct.hpp"
 #include "lisp_function_struct.hpp"
@@ -189,7 +189,7 @@ namespace yli::ontology
                 object_struct,
                 (object_struct.object_type == yli::ontology::ObjectType::REGULAR ? &object_struct.species_parent->parent_of_objects :
                  object_struct.object_type == yli::ontology::ObjectType::SHAPESHIFTER ? &object_struct.shapeshifter_sequence_parent->parent_of_objects :
-                 object_struct.object_type == yli::ontology::ObjectType::CHARACTER ? &object_struct.text3D_parent->parent_of_objects :
+                 object_struct.object_type == yli::ontology::ObjectType::CHARACTER ? &object_struct.text_3d_parent->parent_of_objects :
                  nullptr),
                 (object_struct.brain == nullptr ? nullptr : object_struct.brain->get_master_module()));
 
@@ -236,23 +236,23 @@ namespace yli::ontology
         yli::ontology::Entity* text2d_entity = new yli::ontology::Text2D(
                 this->universe,
                 text_struct,
-                (text_struct.font2D_parent == nullptr ? nullptr : &text_struct.font2D_parent->parent_of_text2Ds));
+                (text_struct.font_2d_parent == nullptr ? nullptr : &text_struct.font_2d_parent->parent_of_text_2ds));
 
         text2d_entity->set_global_name(text_struct.global_name);
         text2d_entity->set_local_name(text_struct.local_name);
         return text2d_entity;
     }
 
-    yli::ontology::Entity* EntityFactory::create_text3d(const yli::ontology::Text3DStruct& text3D_struct) const
+    yli::ontology::Entity* EntityFactory::create_text3d(const yli::ontology::Text3DStruct& text_3d_struct) const
     {
         yli::ontology::Entity* text3d_entity = new yli::ontology::Text3D(
                 this->universe,
-                text3D_struct,
-                (text3D_struct.parent == nullptr ? nullptr : &text3D_struct.parent->parent_of_text3Ds),
-                (text3D_struct.brain == nullptr ? nullptr : text3D_struct.brain->get_master_module()));
+                text_3d_struct,
+                (text_3d_struct.parent == nullptr ? nullptr : &text_3d_struct.parent->parent_of_text_3ds),
+                (text_3d_struct.brain == nullptr ? nullptr : text_3d_struct.brain->get_master_module()));
 
-        text3d_entity->set_global_name(text3D_struct.global_name);
-        text3d_entity->set_local_name(text3D_struct.local_name);
+        text3d_entity->set_global_name(text_3d_struct.global_name);
+        text3d_entity->set_local_name(text_3d_struct.local_name);
         return text3d_entity;
     }
 
@@ -261,7 +261,7 @@ namespace yli::ontology
         yli::ontology::Entity* font2d_entity = new yli::ontology::Font2D(
                 this->universe,
                 font_struct,
-                (this->universe == nullptr ? nullptr : &this->universe->parent_of_font2Ds));
+                (this->universe == nullptr ? nullptr : &this->universe->parent_of_font_2ds));
 
         if (!font_struct.global_name.empty() && font_struct.local_name.empty())
         {

@@ -55,12 +55,13 @@ namespace yli::ontology
         public:
             // This method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input,
             // and requests a new `childID` from the new `Material`.
-            void bind_to_new_parent(yli::ontology::Material* const new_parent);
+            void bind_to_new_material_parent(yli::ontology::Material* const new_parent);
+            void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
             VectorFont(yli::ontology::Universe* const universe, const yli::ontology::VectorFontStruct& vector_font_struct)
                 : Entity(universe, vector_font_struct),
                 parent_of_glyphs(this),
-                parent_of_text3Ds(this)
+                parent_of_text_3ds(this)
             {
                 // constructor.
 
@@ -165,7 +166,7 @@ namespace yli::ontology
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
             yli::ontology::ParentModule parent_of_glyphs;
-            yli::ontology::ParentModule parent_of_text3Ds;
+            yli::ontology::ParentModule parent_of_text_3ds;
 
         private:
             void bind_to_parent();

@@ -130,8 +130,8 @@ namespace yli::ontology
 
             bool should_be_rendered { false };
 
-            friend yli::ontology::Universe;
-            friend yli::ontology::ParentModule;
+            friend class yli::ontology::ParentModule;
+            friend class yli::ontology::Universe;
 
             std::size_t childID { std::numeric_limits<std::size_t>::max() };
 

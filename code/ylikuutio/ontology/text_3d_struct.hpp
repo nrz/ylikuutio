@@ -15,30 +15,30 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_GEOMETRY_LINE_SEGMENT3D_HPP_INCLUDED
-#define __YLIKUUTIO_GEOMETRY_LINE_SEGMENT3D_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_TEXT_3D_STRUCT_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_TEXT_3D_STRUCT_HPP_INCLUDED
 
-#include "line_segment.hpp"
-
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
+#include "movable_struct.hpp"
 
 // Include standard headers
-#include <vector>   // std::vector
+#include <string>   // std::string
 
-namespace yli::geometry
+namespace yli::ontology
 {
-    class LineSegment3D : public LineSegment
+    class Brain;
+    class VectorFont;
+
+    struct Text3DStruct: public yli::ontology::MovableStruct
     {
-        public:
+        Text3DStruct()
+            : MovableStruct()
+        {
             // constructor.
-            LineSegment3D(const std::vector<float> point1, const std::vector<float> point2)
-                : LineSegment(point1, point2)
-            {
-            }
+        }
+
+        std::string text_string;
+        yli::ontology::VectorFont* parent { nullptr }; // pointer to the `VectorFont` (parent).
+        yli::ontology::Brain* brain { nullptr };       // pointer to the `Brain` master.
     };
 }
 

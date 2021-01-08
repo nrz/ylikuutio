@@ -47,7 +47,7 @@ namespace yli::ontology
         this->parent->parent_of_shapeshifter_transformations.bind_child(this);
     }
 
-    void ShapeshifterTransformation::bind_to_new_parent(yli::ontology::Material* const new_parent)
+    void ShapeshifterTransformation::bind_to_new_material_parent(yli::ontology::Material* const new_parent)
     {
         // this method sets pointer to this `ShapeshifterTransformation` to `nullptr`,
         // sets `material_parent` according to the input,
@@ -61,19 +61,19 @@ namespace yli::ontology
 
         if (material == nullptr)
         {
-            std::cerr << "ERROR: `ShapeshifterTransformation::bind_to_new_parent`: `material` is `nullptr`!\n";
+            std::cerr << "ERROR: `ShapeshifterTransformation::bind_to_new_material_parent`: `material` is `nullptr`!\n";
             return;
         }
 
         if (new_parent == nullptr)
         {
-            std::cerr << "ERROR: `ShapeshifterTransformation::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+            std::cerr << "ERROR: `ShapeshifterTransformation::bind_to_new_material_parent`: `new_parent` is `nullptr`!\n";
             return;
         }
 
         if (new_parent->has_child(this->local_name))
         {
-            std::cerr << "ERROR: `ShapeshifterTransformation::bind_to_new_parent`: local name is already in use!\n";
+            std::cerr << "ERROR: `ShapeshifterTransformation::bind_to_new_material_parent`: local name is already in use!\n";
             return;
         }
 
@@ -102,7 +102,7 @@ namespace yli::ontology
             return;
         }
 
-        this->bind_to_new_parent(material_parent);
+        this->bind_to_new_material_parent(material_parent);
     }
 
     ShapeshifterTransformation::~ShapeshifterTransformation()

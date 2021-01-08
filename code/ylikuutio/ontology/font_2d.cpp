@@ -15,10 +15,10 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "font2D.hpp"
+#include "font_2d.hpp"
 #include "universe.hpp"
 #include "entity.hpp"
-#include "text2D.hpp"
+#include "text_2d.hpp"
 #include "text_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -70,12 +70,12 @@ namespace yli::ontology
 
     std::size_t Font2D::get_number_of_children() const
     {
-        return this->parent_of_text2Ds.get_number_of_children();
+        return this->parent_of_text_2ds.get_number_of_children();
     }
 
     std::size_t Font2D::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_text2Ds.child_pointer_vector);
+        return yli::ontology::get_number_of_descendants(this->parent_of_text_2ds.child_pointer_vector);
     }
 
     std::size_t Font2D::get_text_size() const
@@ -136,11 +136,11 @@ namespace yli::ontology
 
         this->prerender();
         this->prepare_to_print();
-        render_master->render_text2Ds(this->parent_of_text2Ds.child_pointer_vector);
+        render_master->render_text_2ds(this->parent_of_text_2ds.child_pointer_vector);
         this->postrender();
     }
 
-    void Font2D::print_text2D(
+    void Font2D::print_text_2d(
             const std::size_t x,
             const std::size_t y,
             const std::size_t text_size,
@@ -355,14 +355,14 @@ namespace yli::ontology
         glDisable(GL_BLEND);
     }
 
-    void Font2D::print_text2D(const yli::ontology::TextStruct& text_struct) const
+    void Font2D::print_text_2d(const yli::ontology::TextStruct& text_struct) const
     {
         if (!this->should_be_rendered)
         {
             return;
         }
 
-        this->print_text2D(
+        this->print_text_2d(
                 text_struct.x,
                 text_struct.y,
                 text_struct.text_size,
@@ -373,7 +373,7 @@ namespace yli::ontology
                 text_struct.vertical_alignment);
     }
 
-    void Font2D::print_text2D(
+    void Font2D::print_text_2d(
             const std::size_t x,
             const std::size_t y,
             const std::size_t text_size,
@@ -386,6 +386,6 @@ namespace yli::ontology
             return;
         }
 
-        this->print_text2D(x, y, text_size, font_size, text, font_texture_file_format, "left", "bottom");
+        this->print_text_2d(x, y, text_size, font_size, text, font_texture_file_format, "left", "bottom");
     }
 }

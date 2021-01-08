@@ -36,8 +36,8 @@
 #include "entity.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
-#include "font2D.hpp"
-#include "text2D.hpp"
+#include "font_2d.hpp"
+#include "text_2d.hpp"
 #include "camera.hpp"
 #include "console.hpp"
 #include "entity_factory.hpp"
@@ -152,7 +152,7 @@ namespace yli::ontology
 
     void Universe::start_simulation()
     {
-        if (this->parent_of_font2Ds.get_number_of_children() == 0)
+        if (this->parent_of_font_2ds.get_number_of_children() == 0)
         {
             return;
         }
@@ -162,19 +162,19 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Font2D* const font2D = static_cast<yli::ontology::Font2D*>(
+        yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(
                 yli::hierarchy::get_first_child(
-                    this->parent_of_font2Ds.child_pointer_vector,
-                    this->parent_of_font2Ds.get_number_of_children()));
+                    this->parent_of_font_2ds.child_pointer_vector,
+                    this->parent_of_font_2ds.get_number_of_children()));
 
-        if (font2D == nullptr)
+        if (font_2d == nullptr)
         {
             return;
         }
 
         // Create angles and cartesian coordinates text, on bottom left corner.
         yli::ontology::TextStruct angles_and_coordinates_text_struct;
-        angles_and_coordinates_text_struct.font2D_parent = font2D;
+        angles_and_coordinates_text_struct.font_2d_parent = font_2d;
         angles_and_coordinates_text_struct.screen_width = this->window_width;
         angles_and_coordinates_text_struct.screen_height = this->window_height;
         angles_and_coordinates_text_struct.x = 0;
@@ -184,16 +184,16 @@ namespace yli::ontology
         angles_and_coordinates_text_struct.font_texture_file_format = "bmp";
         angles_and_coordinates_text_struct.horizontal_alignment = "left";
         angles_and_coordinates_text_struct.vertical_alignment = "bottom";
-        yli::ontology::Text2D* angles_and_coordinates_text2D = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(angles_and_coordinates_text_struct));
+        yli::ontology::Text2D* angles_and_coordinates_text_2d = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(angles_and_coordinates_text_struct));
 
-        if (angles_and_coordinates_text2D == nullptr)
+        if (angles_and_coordinates_text_2d == nullptr)
         {
             return;
         }
 
         // Create spherical coordinates text, on second line from the bottom left.
         yli::ontology::TextStruct spherical_coordinates_text_struct;
-        spherical_coordinates_text_struct.font2D_parent = font2D;
+        spherical_coordinates_text_struct.font_2d_parent = font_2d;
         spherical_coordinates_text_struct.screen_width = this->window_width;
         spherical_coordinates_text_struct.screen_height = this->window_height;
         spherical_coordinates_text_struct.x = 0;
@@ -202,16 +202,16 @@ namespace yli::ontology
         spherical_coordinates_text_struct.font_size = this->font_size;
         spherical_coordinates_text_struct.horizontal_alignment = "left";
         spherical_coordinates_text_struct.vertical_alignment = "bottom";
-        yli::ontology::Text2D* spherical_coordinates_text2D = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(spherical_coordinates_text_struct));
+        yli::ontology::Text2D* spherical_coordinates_text_2d = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(spherical_coordinates_text_struct));
 
-        if (spherical_coordinates_text2D == nullptr)
+        if (spherical_coordinates_text_2d == nullptr)
         {
             return;
         }
 
         // Create time data text, on top left corner.
         yli::ontology::TextStruct time_text_struct;
-        time_text_struct.font2D_parent = font2D;
+        time_text_struct.font_2d_parent = font_2d;
         time_text_struct.screen_width = this->window_width;
         time_text_struct.screen_height = this->window_height;
         time_text_struct.x = 0;
@@ -221,16 +221,16 @@ namespace yli::ontology
         time_text_struct.font_texture_file_format = "bmp";
         time_text_struct.horizontal_alignment = "left";
         time_text_struct.vertical_alignment = "top";
-        yli::ontology::Text2D* time_text2D = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(time_text_struct));
+        yli::ontology::Text2D* time_text_2d = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(time_text_struct));
 
-        if (time_text2D == nullptr)
+        if (time_text_2d == nullptr)
         {
             return;
         }
 
         // Create help text.
         yli::ontology::TextStruct help_text_struct;
-        help_text_struct.font2D_parent = font2D;
+        help_text_struct.font_2d_parent = font_2d;
         help_text_struct.screen_width = this->window_width;
         help_text_struct.screen_height = this->window_height;
         help_text_struct.x = 0;
@@ -240,16 +240,16 @@ namespace yli::ontology
         help_text_struct.font_texture_file_format = "bmp";
         help_text_struct.horizontal_alignment = "left";
         help_text_struct.vertical_alignment = "top";
-        yli::ontology::Text2D* help_text2D = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(help_text_struct));
+        yli::ontology::Text2D* help_text_2d = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(help_text_struct));
 
-        if (help_text2D == nullptr)
+        if (help_text_2d == nullptr)
         {
             return;
         }
 
         // Print frame rate data on top right corner.
         yli::ontology::TextStruct frame_rate_text_struct;
-        frame_rate_text_struct.font2D_parent = font2D;
+        frame_rate_text_struct.font_2d_parent = font_2d;
         frame_rate_text_struct.screen_width = this->window_width;
         frame_rate_text_struct.screen_height = this->window_height;
         frame_rate_text_struct.x = this->window_width;
@@ -259,9 +259,9 @@ namespace yli::ontology
         frame_rate_text_struct.font_texture_file_format = "bmp";
         frame_rate_text_struct.horizontal_alignment = "right";
         frame_rate_text_struct.vertical_alignment = "top";
-        yli::ontology::Text2D* frame_rate_text2D = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_text2d(frame_rate_text_struct));
+        yli::ontology::Text2D* frame_rate_text_2d = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_text2d(frame_rate_text_struct));
 
-        if (frame_rate_text2D == nullptr)
+        if (frame_rate_text_2d == nullptr)
         {
             return;
         }
@@ -286,14 +286,14 @@ namespace yli::ontology
                 {
                     // If last `std::stringstream` here was more than 1 sec ago,
                     // std::stringstream` and reset number of frames.
-                    if (frame_rate_text2D != nullptr && this->number_of_frames > 0)
+                    if (frame_rate_text_2d != nullptr && this->number_of_frames > 0)
                     {
                         std::stringstream ms_frame_text_stringstream;
                         ms_frame_text_stringstream << std::fixed << std::setprecision(2) <<
                             1000.0f / static_cast<float>(this->number_of_frames) << " ms/frame; " <<
                             this->number_of_frames << " Hz";
                         std::string ms_frame_text = ms_frame_text_stringstream.str();
-                        frame_rate_text2D->change_string(ms_frame_text);
+                        frame_rate_text_2d->change_string(ms_frame_text);
                         this->reset_number_of_frames();
                     }
 
@@ -506,7 +506,7 @@ namespace yli::ontology
                 // Intentional actors (AIs and keyboard controlled ones).
                 this->act();
 
-                if (angles_and_coordinates_text2D != nullptr)
+                if (angles_and_coordinates_text_2d != nullptr)
                 {
                     std::stringstream angles_and_coordinates_stringstream;
                     angles_and_coordinates_stringstream << std::fixed << std::setprecision(2) <<
@@ -519,21 +519,21 @@ namespace yli::ontology
                         this->current_camera_cartesian_coordinates.y << "," <<
                         this->current_camera_cartesian_coordinates.z << ")";
                     const std::string angles_and_coordinates_string = angles_and_coordinates_stringstream.str();
-                    angles_and_coordinates_text2D->change_string(angles_and_coordinates_string);
+                    angles_and_coordinates_text_2d->change_string(angles_and_coordinates_string);
                 }
 
-                if (time_text2D != nullptr)
+                if (time_text_2d != nullptr)
                 {
                     std::stringstream time_stringstream;
                     time_stringstream << std::fixed << std::setprecision(2) << yli::time::get_time() << " sec";
                     const std::string time_string = time_stringstream.str();
-                    time_text2D->change_string(time_string);
+                    time_text_2d->change_string(time_string);
                 }
 
                 const std::string on_string = "on";
                 const std::string off_string = "off";
 
-                if (help_text2D != nullptr)
+                if (help_text_2d != nullptr)
                 {
                     if (this->in_help_mode && this->can_display_help_screen)
                     {
@@ -558,15 +558,15 @@ namespace yli::ontology
                             "T  terrain species\n" <<
                             "A  suzanne species\n";
                         const std::string help_text_string = help_text_stringstream.str();
-                        help_text2D->change_string(help_text_string);
+                        help_text_2d->change_string(help_text_string);
                     }
                     else
                     {
-                        help_text2D->change_string("");
+                        help_text_2d->change_string("");
                     }
                 }
 
-                if (spherical_coordinates_text2D != nullptr)
+                if (spherical_coordinates_text_2d != nullptr)
                 {
                     if (this->testing_spherical_terrain_in_use)
                     {
@@ -576,11 +576,11 @@ namespace yli::ontology
                             "theta:" << this->current_camera_spherical_coordinates.theta <<
                             "phi:" << this->current_camera_spherical_coordinates.phi;
                         std::string spherical_coordinates_string = spherical_coordinates_stringstream.str();
-                        spherical_coordinates_text2D->change_string(spherical_coordinates_string);
+                        spherical_coordinates_text_2d->change_string(spherical_coordinates_string);
                     }
                     else
                     {
-                        spherical_coordinates_text2D->change_string("");
+                        spherical_coordinates_text_2d->change_string("");
                     }
                 }
 
@@ -614,7 +614,7 @@ namespace yli::ontology
         yli::render::RenderStruct render_struct;
         render_struct.scene = this->active_scene;
         render_struct.console = this->active_console;
-        render_struct.font2D_pointer_vector = &this->parent_of_font2Ds.child_pointer_vector;
+        render_struct.font_2d_pointer_vector = &this->parent_of_font_2ds.child_pointer_vector;
         render_struct.window = this->window;
         this->render(render_struct);
     }
@@ -624,7 +624,7 @@ namespace yli::ontology
         yli::render::RenderStruct render_struct;
         render_struct.scene = this->active_scene;
         render_struct.console = this->active_console;
-        render_struct.font2D_pointer_vector = &this->parent_of_font2Ds.child_pointer_vector;
+        render_struct.font_2d_pointer_vector = &this->parent_of_font_2ds.child_pointer_vector;
         render_struct.window = this->window;
         render_struct.should_ylikuutio_change_depth_test = false;
         this->render(render_struct);
@@ -699,7 +699,7 @@ namespace yli::ontology
     std::size_t Universe::get_number_of_children() const
     {
         return this->parent_of_worlds.get_number_of_children() +
-            this->parent_of_font2Ds.get_number_of_children() +
+            this->parent_of_font_2ds.get_number_of_children() +
             this->parent_of_consoles.get_number_of_children() +
             this->parent_of_any_value_entities.get_number_of_children() +
             this->parent_of_callback_engine_entities.get_number_of_children();
@@ -708,7 +708,7 @@ namespace yli::ontology
     std::size_t Universe::get_number_of_descendants() const
     {
         return yli::ontology::get_number_of_descendants(this->parent_of_worlds.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_font2Ds.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_font_2ds.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_any_value_entities.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_callback_engine_entities.child_pointer_vector);

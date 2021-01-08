@@ -78,7 +78,7 @@ namespace yli::ontology
                 this->entity_map);
     }
 
-    void Scene::bind_to_new_parent(yli::ontology::World* const new_parent)
+    void Scene::bind_to_new_world_parent(yli::ontology::World* const new_parent)
     {
         // This method sets pointer to this `Scene` to `nullptr`, sets `parent` according to the input,
         // and requests a new `childID` from the new `World`.
@@ -91,19 +91,19 @@ namespace yli::ontology
 
         if (world == nullptr)
         {
-            std::cerr << "ERROR: `Scene::bind_to_new_parent`: `world` is `nullptr`!\n";
+            std::cerr << "ERROR: `Scene::bind_to_new_world_parent`: `world` is `nullptr`!\n";
             return;
         }
 
         if (new_parent == nullptr)
         {
-            std::cerr << "ERROR: `Scene::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+            std::cerr << "ERROR: `Scene::bind_to_new_world_parent`: `new_parent` is `nullptr`!\n";
             return;
         }
 
         if (new_parent->has_child(this->local_name))
         {
-            std::cerr << "ERROR: `Scene::bind_to_new_parent`: local name is already in use!\n";
+            std::cerr << "ERROR: `Scene::bind_to_new_world_parent`: local name is already in use!\n";
             return;
         }
 
@@ -131,7 +131,7 @@ namespace yli::ontology
             return;
         }
 
-        this->bind_to_new_parent(world);
+        this->bind_to_new_world_parent(world);
     }
 
     Scene::~Scene()
