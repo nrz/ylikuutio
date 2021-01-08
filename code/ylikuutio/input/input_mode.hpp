@@ -55,7 +55,7 @@ namespace yli::input
             const std::vector<yli::callback::CallbackEngine*>* get_keyrelease_callback_engines() const;
             const std::vector<yli::callback::CallbackEngine*>* get_continuous_keypress_callback_engines() const;
 
-            friend class InputMaster;
+            friend class yli::input::InputMaster;
             template<class T1>
                 friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 

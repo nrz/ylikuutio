@@ -155,13 +155,13 @@ namespace yli::ontology
             template<class T1, class T2>
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
+            template<class T1, class T2, class T3>
+                friend void yli::render::render_species_or_glyph(T1 species_or_glyph_pointer);
+
             yli::ontology::MasterModule master_of_bionts;
 
         private:
             glm::vec3 light_position; // light position.
-
-            template<class T1, class T2, class T3>
-                friend void yli::render::render_species_or_glyph(T1 species_or_glyph_pointer);
 
             void bind_to_parent();
 

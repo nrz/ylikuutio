@@ -46,7 +46,7 @@ namespace yli::graph
             // destructor.
             ~Graph();
 
-            friend class Node;
+            friend class yli::graph::Node;
 
         private:
             // this method gets a node pointer.

@@ -84,8 +84,8 @@ namespace yli::ontology
             // destructor.
             virtual ~Text3D();
 
-            friend class Object;
-            friend void create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* text_3d);
+            friend class yli::ontology::Object;
+            friend void yli::ontology::create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* text_3d);
 
             yli::ontology::ChildModule child_of_vector_font;
             yli::ontology::ParentModule parent_of_objects;
