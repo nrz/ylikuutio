@@ -279,7 +279,6 @@ namespace yli::ontology
                     this->biontID_symbiont_species_vector.at(mesh_i) = symbiont_species;
 
                     std::cout << "Success.\n";
-                    // TODO: Compute the graph of each type to enable object vertex modification!
                 }
             }
 
