@@ -54,10 +54,10 @@ namespace yli::ontology
                     yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, material_struct),
                 child_of_shader_or_symbiosis(parent_module, this),
-                parent_of_species(this),
-                parent_of_shapeshifter_transformations(this),
-                parent_of_vector_fonts(this),
-                parent_of_chunk_masters(this)
+                parent_of_species(this, &this->registry, "species"),
+                parent_of_shapeshifter_transformations(this, &this->registry, "shapeshifter_transformations"),
+                parent_of_vector_fonts(this, &this->registry, "vector_fonts"),
+                parent_of_chunk_masters(this, &this->registry, "chunk_masters")
             {
                 // constructor.
                 this->is_symbiont_material     = material_struct.is_symbiont_material;

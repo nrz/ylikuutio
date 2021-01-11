@@ -59,7 +59,7 @@ namespace yli::ontology
                         parent_module,
                         master_module),
                 child_of_vector_font(parent_module, this),
-                parent_of_objects(this)
+                parent_of_objects(this, &this->registry, "objects")
             {
                 // constructor.
 

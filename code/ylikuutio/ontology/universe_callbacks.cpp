@@ -95,11 +95,11 @@ namespace yli::ontology
             if (parent != nullptr)
             {
                 // Erase the local name.
-                parent->entity_map.erase(entity->get_local_name());
+                parent->registry.erase_entity(entity->get_local_name());
             }
 
             // Erase the global name.
-            universe->entity_map.erase(entity->get_global_name());
+            universe->registry.erase_entity(entity->get_global_name());
             delete entity;
         }
 
@@ -203,7 +203,7 @@ namespace yli::ontology
         }
 
         // Print names of named entities.
-        yli::map::print_keys_to_console(universe->entity_map, console);
+        yli::map::print_keys_to_console(universe->registry.get_entity_map(), console);
         return nullptr;
     }
 
@@ -271,7 +271,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        std::vector<std::pair<std::string, yli::ontology::Entity*>> key_and_value_vector = yli::map::get_keys_and_values(universe->entity_map);
+        std::vector<std::pair<std::string, yli::ontology::Entity*>> key_and_value_vector = yli::map::get_keys_and_values(universe->registry.get_entity_map());
 
         for (auto& [key, value] : key_and_value_vector)
         {

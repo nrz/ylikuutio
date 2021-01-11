@@ -98,7 +98,7 @@ namespace yli::ontology
                     yli::ontology::MasterModule* const master_module)
                 : Entity(universe, console_struct),
                 child_of_universe(parent_module, this),
-                parent_of_lisp_functions(this),
+                parent_of_lisp_functions(this, &this->registry, "lisp_functions"),
                 apprentice_of_font_2d(master_module, this)
             {
                 // constructor.
@@ -112,6 +112,7 @@ namespace yli::ontology
                 this->can_move_to_previous_input = false;
                 this->can_move_to_next_input = false;
                 this->can_backspace = false;
+                this->can_tab = false;
                 this->can_enter_key = false;
                 this->can_ctrl_c = false;
                 this->can_ctrl_w = false;
@@ -260,6 +261,12 @@ namespace yli::ontology
                     std::vector<yli::callback::CallbackParameter*>&,
                     yli::ontology::Console* console);
 
+            static std::shared_ptr<yli::data::AnyValue> enable_tab(
+                    yli::callback::CallbackEngine*,
+                    yli::callback::CallbackObject*,
+                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::Console* console);
+
             static std::shared_ptr<yli::data::AnyValue> enable_enter_key(
                     yli::callback::CallbackEngine*,
                     yli::callback::CallbackObject*,
@@ -364,6 +371,12 @@ namespace yli::ontology
                     std::vector<yli::callback::CallbackParameter*>&,
                     yli::ontology::Console* console);
 
+            static std::shared_ptr<yli::data::AnyValue> tab(
+                    yli::callback::CallbackEngine*,
+                    yli::callback::CallbackObject*,
+                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::Console* console);
+
             static std::shared_ptr<yli::data::AnyValue> enter_key(
                     yli::callback::CallbackEngine*,
                     yli::callback::CallbackObject*,
@@ -443,6 +456,7 @@ namespace yli::ontology
             bool can_move_to_previous_input;
             bool can_move_to_next_input;
             bool can_backspace;
+            bool can_tab;
             bool can_enter_key;
             bool can_ctrl_c;
             bool can_ctrl_w;

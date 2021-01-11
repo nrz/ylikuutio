@@ -54,7 +54,7 @@ namespace yli::ontology
                         holobiont_struct,
                         parent_module,
                         master_module),
-                parent_of_bionts(this)
+                parent_of_bionts(this, &this->registry, "bionts")
             {
                 // constructor.
 

@@ -62,7 +62,7 @@ namespace yli::ontology
                 this->variable_pointer_vector,
                 this->free_variableID_queue,
                 this->number_of_variables,
-                this->entity_map);
+                this->registry);
     }
 
     void Entity::bind_to_universe()
@@ -89,7 +89,8 @@ namespace yli::ontology
     }
 
     Entity::Entity(yli::ontology::Universe* const universe, const yli::ontology::EntityStruct& entity_struct)
-        : parent_of_any_struct_entities(this),
+        : registry(),
+        parent_of_any_struct_entities(this, &this->registry, "any_struct_entities"),
         universe { universe },
         is_application { entity_struct.is_application },
         is_variable { entity_struct.is_variable }
@@ -179,7 +180,7 @@ namespace yli::ontology
 
     bool Entity::has_child(const std::string& name) const
     {
-        return this->entity_map.count(name) == 1;
+        return this->registry.is_entity(name);
     }
 
     yli::ontology::Entity* Entity::get_entity(const std::string& name) const
@@ -193,12 +194,12 @@ namespace yli::ontology
         {
             // There are no dots in the name.
 
-            if (this->entity_map.count(name) != 1)
+            if (!this->registry.is_entity(name))
             {
                 return nullptr;
             }
 
-            return this->entity_map.at(name);
+            return this->registry.get_entity(name);
         }
 
         // OK, assumedly we have a multi-part name.
@@ -212,12 +213,12 @@ namespace yli::ontology
             return nullptr;
         }
 
-        if (this->entity_map.count(first) != 1)
+        if (!this->registry.is_entity(first))
         {
             return nullptr;
         }
 
-        yli::ontology::Entity* entity = this->entity_map.at(first);
+        yli::ontology::Entity* entity = this->registry.get_entity(first);
 
         if (entity == nullptr)
         {
@@ -229,41 +230,17 @@ namespace yli::ontology
 
     std::string Entity::get_entity_names() const
     {
-        std::string entity_names = "";
-
-        std::vector<std::string> keys;
-        keys.reserve(this->entity_map.size());
-
-        for (auto& key_and_value : this->entity_map)
-        {
-            if (!entity_names.empty())
-            {
-                entity_names += " ";
-            }
-            std::string key = static_cast<std::string>(key_and_value.first);
-            entity_names += key;
-        }
-
-        return entity_names;
+        return this->registry.get_entity_names();
     }
 
     void Entity::add_entity(const std::string& name, yli::ontology::Entity* const entity)
     {
-        if (!name.empty() && this->entity_map.count(name) == 0)
-        {
-            this->entity_map[name] = entity;
-        }
+        this->registry.add_entity(entity, name);
     }
 
     void Entity::erase_entity(const std::string& name)
     {
-        if (!name.empty() && this->entity_map.count(name) == 1)
-        {
-            if (this->entity_map.at(name)->get_can_be_erased())
-            {
-                this->entity_map.erase(name);
-            }
-        }
+        this->registry.erase_entity(name);
     }
 
     void Entity::create_variable(const yli::ontology::VariableStruct& variable_struct)
@@ -287,24 +264,12 @@ namespace yli::ontology
 
     bool Entity::has_variable(const std::string& variable_name) const
     {
-        if (this->entity_map.count(variable_name) != 1)
-        {
-            return false;
-        }
-
-        yli::ontology::Entity* const entity = this->entity_map.at(variable_name);
-        yli::ontology::Variable* const variable = dynamic_cast<yli::ontology::Variable*>(entity);
-        return variable != nullptr;
+        return this->get(variable_name) != nullptr;
     }
 
     yli::ontology::Variable* Entity::get(const std::string& variable_name) const
     {
-        if (this->entity_map.count(variable_name) != 1)
-        {
-            return nullptr;
-        }
-
-        return dynamic_cast<yli::ontology::Variable*>(this->entity_map.at(variable_name));
+        return dynamic_cast<yli::ontology::Variable*>(this->registry.get_entity(variable_name));
     }
 
     bool Entity::set(const std::string& variable_name, std::shared_ptr<yli::data::AnyValue> variable_new_any_value)

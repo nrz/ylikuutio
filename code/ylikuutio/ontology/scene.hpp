@@ -97,9 +97,9 @@ namespace yli::ontology
                     yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, scene_struct),
                 child_of_world(parent_module, this),
-                parent_of_default_camera(this),
-                parent_of_cameras(this),
-                parent_of_brains(this)
+                parent_of_default_camera(this, &this->registry, "default_camera"),
+                parent_of_cameras(this, &this->registry, "cameras"),
+                parent_of_brains(this, &this->registry, "brains")
             {
                 // constructor.
                 this->gravity               = scene_struct.gravity;

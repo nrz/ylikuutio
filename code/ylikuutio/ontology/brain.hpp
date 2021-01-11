@@ -70,7 +70,7 @@ namespace yli::ontology
                     yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, brain_struct),
                 child_of_scene(parent_module, this),
-                master_of_movables(this)
+                master_of_movables(this, &this->registry, "movables")
             {
                 // constructor.
                 this->callback_engine    = brain_struct.callback_engine;

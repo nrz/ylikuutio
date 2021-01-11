@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#include "registry.hpp"
 #include "parent_module.hpp"
 #include "entity.hpp"
 #include "family_templates.hpp"
@@ -39,7 +40,7 @@ namespace yli::ontology
                 this->child_pointer_vector,
                 this->free_childID_queue,
                 this->number_of_children,
-                this->entity->entity_map);
+                this->entity->registry);
     }
 
     void ParentModule::unbind_child(std::size_t childID)
@@ -72,7 +73,16 @@ namespace yli::ontology
                 this->child_pointer_vector,
                 this->free_childID_queue,
                 this->number_of_children,
-                this->entity->entity_map);
+                this->entity->registry);
+    }
+
+    ParentModule::ParentModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name)
+        : number_of_children { 0 },
+        entity { entity }
+    {
+        // constructor.
+
+        registry->add_indexable(this, name);
     }
 
     ParentModule::~ParentModule()
@@ -95,5 +105,15 @@ namespace yli::ontology
     std::size_t ParentModule::get_number_of_descendants() const
     {
         return yli::ontology::get_number_of_descendants(this->child_pointer_vector);
+    }
+
+    yli::ontology::Entity* ParentModule::get(const std::size_t index) const
+    {
+        if (index < this->child_pointer_vector.size())
+        {
+            return this->child_pointer_vector.at(index);
+        }
+
+        return nullptr;
     }
 }

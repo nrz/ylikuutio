@@ -36,6 +36,9 @@ namespace yli::graph
             // constructor.
             Graph();
 
+            Graph(const Graph&) = delete;            // Delete copy constructor.
+            Graph& operator=(const Graph&) = delete; // Delete copy assignment.
+
             // destructor.
             ~Graph();
 

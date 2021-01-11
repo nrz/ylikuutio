@@ -49,8 +49,8 @@ namespace yli::ontology
                     yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, font_struct),
                 child_of_universe(parent_module, this),
-                parent_of_text_2ds(this),
-                master_of_consoles(this)
+                parent_of_text_2ds(this, &this->registry, "text_2ds"),
+                master_of_consoles(this, &this->registry, "consoles")
         {
                 // constructor.
                 this->texture_filename = font_struct.texture_filename;

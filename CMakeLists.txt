@@ -645,6 +645,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/holobiont.cpp
     code/ylikuutio/ontology/holobiont.hpp
     code/ylikuutio/ontology/holobiont_struct.hpp
+    code/ylikuutio/ontology/indexable.hpp
     code/ylikuutio/ontology/lisp_function.cpp
     code/ylikuutio/ontology/lisp_function.hpp
     code/ylikuutio/ontology/lisp_function_overload.hpp
@@ -673,6 +674,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/post_render_callback.hpp
     code/ylikuutio/ontology/pre_render_callback.hpp
     code/ylikuutio/ontology/read_callback.hpp
+    code/ylikuutio/ontology/registry.cpp
+    code/ylikuutio/ontology/registry.hpp
     code/ylikuutio/ontology/scene.cpp
     code/ylikuutio/ontology/scene.hpp
     code/ylikuutio/ontology/scene_struct.hpp
@@ -755,6 +758,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/shaders/text_vertex_shader.vert
 
     # string, in alphabetical order
+    code/ylikuutio/string/string_set.cpp
+    code/ylikuutio/string/string_set.hpp
     code/ylikuutio/string/ylikuutio_string.cpp
     code/ylikuutio/string/ylikuutio_string.hpp
 
@@ -1034,6 +1039,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/camera.cpp
         code/ylikuutio/ontology/camera.hpp
         code/ylikuutio/ontology/camera_struct.hpp
+        code/ylikuutio/ontology/registry.cpp
+        code/ylikuutio/ontology/registry.hpp
         code/ylikuutio/ontology/child_module.cpp
         code/ylikuutio/ontology/child_module.hpp
         code/ylikuutio/ontology/console.cpp
@@ -1135,6 +1142,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_ontology.cpp
         code/ylikuutio/tests/googletest/test_pugixml.cpp
         code/ylikuutio/tests/googletest/test_quad_triangulation.cpp
+        code/ylikuutio/tests/googletest/test_registry.cpp
         code/ylikuutio/tests/googletest/test_variable.cpp
         code/ylikuutio/tests/googletest/test_shader_struct.cpp
         code/ylikuutio/tests/googletest/test_species_struct.cpp

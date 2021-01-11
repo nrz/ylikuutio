@@ -468,6 +468,10 @@ namespace hirvi
                 yli::console::ConsoleCallbackEngine my_enable_backspace_callback_engine;
                 my_enable_backspace_callback_engine.create_console_callback_object(&yli::ontology::Console::enable_backspace, my_console);
 
+                // Callback code for Tab release: enable Tab.
+                yli::console::ConsoleCallbackEngine my_enable_tab_callback_engine;
+                my_enable_tab_callback_engine.create_console_callback_object(&yli::ontology::Console::enable_tab, my_console);
+
                 // Callback code for enter release: enable Enter key.
                 yli::console::ConsoleCallbackEngine my_enable_enter_key_callback_engine;
                 my_enable_enter_key_callback_engine.create_console_callback_object(&yli::ontology::Console::enable_enter_key, my_console);
@@ -542,6 +546,10 @@ namespace hirvi
                 yli::console::ConsoleCallbackEngine my_backspace_callback_engine;
                 my_backspace_callback_engine.create_console_callback_object(&yli::ontology::Console::backspace, my_console);
 
+                // Callback code for Tab.
+                yli::console::ConsoleCallbackEngine my_tab_callback_engine;
+                my_tab_callback_engine.create_console_callback_object(&yli::ontology::Console::tab, my_console);
+
                 // Callback code for Enter key.
                 yli::console::ConsoleCallbackEngine my_enter_callback_engine;
                 my_enter_callback_engine.create_console_callback_object(&yli::ontology::Console::enter_key, my_console);
@@ -611,6 +619,7 @@ namespace hirvi
                 my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_UP, &my_enable_move_to_previous_input_callback_engine);
                 my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_DOWN, &my_enable_move_to_next_input_callback_engine);
                 my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_BACKSPACE, &my_enable_backspace_callback_engine);
+                my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_TAB, &my_enable_tab_callback_engine);
                 my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_RETURN, &my_enable_enter_key_callback_engine);
                 my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_C, &my_enable_ctrl_c_callback_engine);
                 my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_W, &my_enable_ctrl_w_callback_engine);
@@ -631,6 +640,7 @@ namespace hirvi
                 my_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_UP, &my_move_to_previous_input_callback_engine);
                 my_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_DOWN, &my_move_to_next_input_callback_engine);
                 my_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_BACKSPACE, &my_backspace_callback_engine);
+                my_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_TAB, &my_tab_callback_engine);
                 my_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_RETURN, &my_enter_callback_engine);
                 my_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_C, &my_ctrl_c_callback_engine);
                 my_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_W, &my_ctrl_w_callback_engine);
