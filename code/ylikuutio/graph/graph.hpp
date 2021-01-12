@@ -18,15 +18,8 @@
 #ifndef __YLIKUUTIO_GRAPH_GRAPH_HPP_INCLUDED
 #define __YLIKUUTIO_GRAPH_GRAPH_HPP_INCLUDED
 
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
-
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
 #include <queue>    // std::queue
 #include <vector>   // std::vector
 

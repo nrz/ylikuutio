@@ -19,12 +19,6 @@
 #include "node.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
-
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
