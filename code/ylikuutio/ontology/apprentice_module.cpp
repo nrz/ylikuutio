@@ -83,6 +83,6 @@ namespace yli::ontology
 
     yli::ontology::Entity* ApprenticeModule::get_apprentice() const
     {
-        return const_cast<yli::ontology::Entity*>(this->apprentice);
+        return this->apprentice;
     }
 }
