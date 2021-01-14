@@ -68,7 +68,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* MasterModule::get_master() const
     {
-        return const_cast<yli::ontology::Entity*>(this->master);
+        return this->master;
     }
 
     std::size_t MasterModule::get_number_of_apprentices() const

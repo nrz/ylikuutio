@@ -75,7 +75,7 @@ namespace yli::ontology
             std::queue<std::size_t> free_apprenticeID_queue;
             std::size_t number_of_apprentices;
 
-            const yli::ontology::Entity* master; // The `Entity` that owns this `MasterModule`.
+            yli::ontology::Entity* const master; // The `Entity` that owns this `MasterModule`.
     };
 }
 
