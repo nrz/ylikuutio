@@ -69,7 +69,7 @@ namespace yli::ontology
             // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
             yli::hierarchy::set_child_pointer(child->childID, child, child_pointer_vector, free_childID_queue, number_of_children);
 
-            const std::string name = child->get_local_name();
+            const std::string& name = child->get_local_name();
 
             if (!name.empty() && entity_map.count(name) == 0)
             {
