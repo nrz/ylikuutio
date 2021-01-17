@@ -40,15 +40,18 @@ namespace yli::ontology
 {
     void Entity::bind_variable(yli::ontology::Variable* const variable)
     {
-        // get `childID` from `Entity` and set pointer to `variable`.
-        yli::hierarchy::bind_child_to_parent<yli::ontology::Variable*>(
-                variable,
-                this->variable_pointer_vector,
-                this->free_variableID_queue,
-                this->number_of_variables);
+        if (variable != nullptr)
+        {
+            // get `childID` from `Entity` and set pointer to `variable`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::Variable*>(
+                    variable,
+                    this->variable_pointer_vector,
+                    this->free_variableID_queue,
+                    this->number_of_variables);
 
-        // `variable` with a local name needs to be added to `entity_map` as well.
-        this->add_entity(variable->get_local_name(), variable);
+            // `variable` with a local name needs to be added to `entity_map` as well.
+            this->add_entity(variable->get_local_name(), variable);
+        }
     }
 
     void Entity::unbind_variable(const std::size_t childID, const std::string& local_name)
