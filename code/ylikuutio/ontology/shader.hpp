@@ -55,9 +55,9 @@ namespace yli::ontology
 
             Shader(yli::ontology::Universe* const universe, const yli::ontology::ShaderStruct& shader_struct)
                 : Entity(universe, shader_struct),
-                parent_of_compute_tasks(this),
-                parent_of_materials(this),
-                parent_of_symbioses(this)
+                parent_of_compute_tasks(this, &this->registry, "compute_tasks"),
+                parent_of_materials(this, &this->registry, "materials"),
+                parent_of_symbioses(this, &this->registry, "symbioses")
             {
                 // constructor.
 

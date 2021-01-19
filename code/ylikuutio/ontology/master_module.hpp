@@ -38,44 +38,52 @@
 // If the apprentice of a master-apprentice relation dies,
 // the master will survice.
 
+#include "indexable.hpp"
+
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <queue>   // std::queue
+#include <string>  // std::string
 #include <vector>  // std::vector
 
 namespace yli::ontology
 {
+    class Registry;
     class ApprenticeModule;
     class Entity;
 
-    class MasterModule
+    class MasterModule: public yli::ontology::Indexable
     {
         public:
             void bind_apprentice_module(yli::ontology::ApprenticeModule* const apprentice_module);
             void unbind_apprentice_module(std::size_t apprenticeID);
 
             // constructor.
-            MasterModule(yli::ontology::Entity* const master);
+            MasterModule(yli::ontology::Entity* const master, yli::ontology::Registry* const registry, const std::string& name);
 
             MasterModule(const MasterModule&) = delete;            // Delete copy constructor.
             MasterModule& operator=(const MasterModule&) = delete; // Delete copy assignment.
 
             // destructor.
-            ~MasterModule();
+            virtual ~MasterModule();
 
             yli::ontology::Entity* get_master() const;
 
             std::size_t get_number_of_apprentices() const;
 
+            yli::ontology::Entity* get(const std::size_t index) const override;
+
             friend class yli::ontology::ApprenticeModule;
 
+        private:
+            yli::ontology::Entity* const master; // The `Entity` that owns this `MasterModule`.
+
+        public:
             std::vector<yli::ontology::ApprenticeModule*> apprentice_module_pointer_vector;
 
         private:
             std::queue<std::size_t> free_apprenticeID_queue;
             std::size_t number_of_apprentices;
-
-            const yli::ontology::Entity* master; // The `Entity` that owns this `MasterModule`.
     };
 }
 

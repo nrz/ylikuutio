@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#include "registry.hpp"
 #include "master_module.hpp"
 #include "apprentice_module.hpp"
 #include "entity.hpp"
@@ -22,6 +23,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string>  // std::string
 
 namespace yli::ontology
 {
@@ -43,11 +45,13 @@ namespace yli::ontology
                 this->number_of_apprentices);
     }
 
-    MasterModule::MasterModule(yli::ontology::Entity* const master)
+    MasterModule::MasterModule(yli::ontology::Entity* const master, yli::ontology::Registry* const registry, const std::string& name)
         : master { master },
         number_of_apprentices { 0 }
     {
         // constructor.
+
+        registry->add_indexable(this, name);
     }
 
     MasterModule::~MasterModule()
@@ -68,11 +72,26 @@ namespace yli::ontology
 
     yli::ontology::Entity* MasterModule::get_master() const
     {
-        return const_cast<yli::ontology::Entity*>(this->master);
+        return this->master;
     }
 
     std::size_t MasterModule::get_number_of_apprentices() const
     {
         return this->number_of_apprentices;
+    }
+
+    yli::ontology::Entity* MasterModule::get(const std::size_t index) const
+    {
+        if (index < this->apprentice_module_pointer_vector.size())
+        {
+            yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(index);
+
+            if (apprentice_module != nullptr)
+            {
+                return apprentice_module->get_apprentice();
+            }
+        }
+
+        return nullptr;
     }
 }

@@ -18,37 +18,39 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_PARENT_MODULE_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_PARENT_MODULE_HPP_INCLUDED
 
+#include "indexable.hpp"
+
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <queue>   // std::queue
+#include <string>  // std::string
 #include <vector>  // std::vector
 
 namespace yli::ontology
 {
+    class Registry;
     class Entity;
 
-    class ParentModule
+    class ParentModule: public yli::ontology::Indexable
     {
         public:
             void bind_child(yli::ontology::Entity* const child);
             void unbind_child(std::size_t childID);
 
-            ParentModule(yli::ontology::Entity* const entity)
-                : number_of_children(0),
-                entity(entity)
-            {
-                // constructor.
-            }
+            // constructor.
+            ParentModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name);
 
             ParentModule(const ParentModule&) = delete;            // Delete copy constructor.
             ParentModule& operator=(const ParentModule&) = delete; // Delete copy assignment.
 
             // destructor.
-            ~ParentModule();
+            virtual ~ParentModule();
 
             yli::ontology::Entity* get_entity() const;
             std::size_t get_number_of_children() const;
             std::size_t get_number_of_descendants() const;
+
+            yli::ontology::Entity* get(const std::size_t index) const override;
 
             std::vector<yli::ontology::Entity*> child_pointer_vector;
 

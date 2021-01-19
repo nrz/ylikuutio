@@ -60,8 +60,8 @@ namespace yli::ontology
 
             VectorFont(yli::ontology::Universe* const universe, const yli::ontology::VectorFontStruct& vector_font_struct)
                 : Entity(universe, vector_font_struct),
-                parent_of_glyphs(this),
-                parent_of_text_3ds(this)
+                parent_of_glyphs(this, &this->registry, "glyphs"),
+                parent_of_text_3ds(this, &this->registry, "text_3ds")
             {
                 // constructor.
 

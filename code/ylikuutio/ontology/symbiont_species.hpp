@@ -71,7 +71,7 @@ namespace yli::ontology
                     const yli::ontology::SpeciesStruct& species_struct,
                     yli::ontology::ParentModule* const parent_module)
                 : Species(universe, species_struct, parent_module),
-                master_of_bionts(this)
+                master_of_bionts(this, &this->registry, "bionts")
             {
                 // constructor.
                 this->shader                   = species_struct.shader;

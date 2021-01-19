@@ -54,7 +54,7 @@ namespace yli::ontology
                     yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, model_struct),
                 child(parent_module, this),
-                parent_of_objects(this)
+                parent_of_objects(this, &this->registry, "objects")
             {
                 // constructor.
 

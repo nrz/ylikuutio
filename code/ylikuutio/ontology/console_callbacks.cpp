@@ -199,6 +199,19 @@ namespace yli::ontology
         return nullptr;
     }
 
+    std::shared_ptr<yli::data::AnyValue> Console::enable_tab(
+            yli::callback::CallbackEngine*,
+            yli::callback::CallbackObject*,
+            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::Console* console)
+    {
+        if (console->in_console)
+        {
+            console->can_tab = true;
+        }
+        return nullptr;
+    }
+
     std::shared_ptr<yli::data::AnyValue> Console::enable_enter_key(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
@@ -526,6 +539,100 @@ namespace yli::ontology
             console->cursor_it = console->current_input.erase(--console->cursor_it);
             console->cursor_index--;
             console->can_backspace = false;
+        }
+        return nullptr;
+    }
+
+    std::shared_ptr<yli::data::AnyValue> Console::tab(
+            yli::callback::CallbackEngine*,
+            yli::callback::CallbackObject*,
+            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::Console* console)
+    {
+        if (console == nullptr)
+        {
+            return nullptr;
+        }
+
+        yli::ontology::Universe* const universe = console->get_universe();
+
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (console->in_console && console->can_tab)
+        {
+            // Copy current input into a `std::string`.
+            std::string input_string(console->current_input.begin(), console->current_input.end());
+
+            std::vector<std::string> parameter_vector;
+            std::string command;
+
+            if (yli::lisp::parse(input_string, command, parameter_vector))
+            {
+                if (command.empty() ||
+                        (parameter_vector.empty() && input_string.at(input_string.size() - 1) != ' '))
+                {
+                    // If `input_string` is empty, then complete the command.
+                    // Also if there are no parameters and `input_string` does not end with a space, then complete the command.
+                    const std::string completion = universe->registry.complete(command);
+                    console->current_input.clear();
+                    std::copy(completion.begin(), completion.end(), std::back_inserter(console->current_input));
+                }
+                else if (parameter_vector.empty())
+                {
+                    // If `input_string` has no parameters,
+                    // then complete the parameter using the empty string.
+
+                    // If `input_string` is empty, then complete the parameter.
+                    const std::string completion = universe->registry.complete("");
+
+                    if (!completion.empty())
+                    {
+                        std::copy(completion.begin(), completion.end(), std::back_inserter(console->current_input));
+                    }
+                }
+                else if (input_string.at(input_string.size() - 1) != ' ')
+                {
+                    // If `input_string` does not end with a space,
+                    // then complete the current parameter.
+
+                    const std::string completion = universe->registry.complete(parameter_vector.back());
+                    console->current_input.clear();
+                    std::copy(command.begin(), command.end(), std::back_inserter(console->current_input));
+                    console->current_input.emplace_back(' ');
+
+                    // Copy the old parameters except the last.
+
+                    for (std::size_t i = 0; i < parameter_vector.size() - 1; i++)
+                    {
+                        std::copy(parameter_vector[i].begin(), parameter_vector[i].end(), std::back_inserter(console->current_input));
+                        console->move_cursor_to_end_of_line();
+                        console->current_input.emplace_back(' ');
+                    }
+
+                    // Copy the completed parameter.
+                    std::copy(completion.begin(), completion.end(), std::back_inserter(console->current_input));
+                }
+                else
+                {
+                    // Complete the next parameter.
+
+                    const std::string completion = universe->registry.complete("");
+
+                    if (!completion.empty())
+                    {
+                        std::copy(completion.begin(), completion.end(), std::back_inserter(console->current_input));
+                    }
+                }
+            }
+
+            console->move_cursor_to_end_of_line();
+
+            // console->print_text
+
+            console->can_tab = false;
         }
         return nullptr;
     }

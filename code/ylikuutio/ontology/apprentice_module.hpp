@@ -74,7 +74,7 @@ namespace yli::ontology
         private:
             yli::ontology::MasterModule* master_module;
 
-            const yli::ontology::Entity* apprentice;
+            yli::ontology::Entity* const apprentice;
             std::size_t apprenticeID { std::numeric_limits<std::size_t>::max() };
     };
 }

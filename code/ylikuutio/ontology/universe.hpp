@@ -317,11 +317,11 @@ namespace yli::ontology
 
             Universe(const yli::ontology::UniverseStruct& universe_struct)
                 : Entity(this, universe_struct), // `Universe` has no parent.
-                parent_of_worlds(this),
-                parent_of_font_2ds(this),
-                parent_of_consoles(this),
-                parent_of_any_value_entities(this),
-                parent_of_callback_engine_entities(this),
+                parent_of_worlds(this, &this->registry, "worlds"),
+                parent_of_font_2ds(this, &this->registry, "font_2ds"),
+                parent_of_consoles(this, &this->registry, "consoles"),
+                parent_of_any_value_entities(this, &this->registry, "any_value_entities"),
+                parent_of_callback_engine_entities(this, &this->registry, "callback_engine_entities"),
                 framebuffer_module(universe_struct.framebuffer_module_struct)
             {
                 // constructor.

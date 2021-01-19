@@ -4,7 +4,7 @@
 
 # OpenFBX
 
-Lightweight open source FBX importer. Used in [Lumix Engine](https://github.com/nem0/lumixengine). It's not a full-featured importer, but it suits all my needs. It can load geometry (with uvs, normals, tangents, colors), skeletons, animations, materials and textures. 
+Lightweight open source FBX importer. Used in [Lumix Engine](https://github.com/nem0/lumixengine) and [Flax Engine](https://flaxengine.com/). It's an *almost* full-featured importer. It can load geometry (with uvs, normals, tangents, colors), skeletons, animations, blend shapes, materials and textures.
 
 Feel free to request new features. I will eventually try (or not) to add all missing fbx features.
 
@@ -16,7 +16,7 @@ Note: It's recommended to be familiar with fbx format to use this library, you c
 2. use
 
 See [demo](https://github.com/nem0/OpenFBX/blob/master/demo/main.cpp#L203) as an example how to use the library.
-See [Lumix Engine](https://github.com/nem0/LumixEngine/blob/master/src/renderer/editor/import_asset_dialog.cpp#L504) as more advanced use case.
+See [Lumix Engine](https://github.com/nem0/LumixEngine/blob/master/src/renderer/editor/fbx_importer.cpp#L847) as more advanced use case.
 
 ## Compile demo project
 

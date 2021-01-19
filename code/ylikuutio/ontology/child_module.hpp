@@ -27,8 +27,8 @@ namespace yli::ontology
     {
         public:
             ChildModule(yli::ontology::ParentModule* const parent_module, yli::ontology::Entity* const entity)
-                : parent_module(parent_module),
-                entity(entity)
+                : parent_module { parent_module },
+                entity { entity }
             {
                 // constructor.
                 this->bind_to_parent_module();

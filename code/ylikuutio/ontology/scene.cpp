@@ -75,7 +75,7 @@ namespace yli::ontology
                 this->shader_pointer_vector,
                 this->free_shaderID_queue,
                 this->number_of_shaders,
-                this->entity_map);
+                this->registry);
     }
 
     void Scene::bind_to_new_world_parent(yli::ontology::World* const new_parent)
