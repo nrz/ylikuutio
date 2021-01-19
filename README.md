@@ -315,8 +315,8 @@ A: Newer OpenGL versions may be supported in the future, but so far
    OpenGL 3.0 fulfils my requirements. Vulkan needs to be considered.
 
 Q: Does Ylikuutio use modern OpenGL (VAOs and VBOs)?
-A: Yes, Ylikuutio uses VAOs (vertex array objects, VBOs (vertex buffer objects),
-   and index buffers.
+A: Yes, Ylikuutio uses VBOs (vertex buffer objects) and index buffers.
+   VAOs (vertex array objects) are a work in progress.
 
 Q: Is Ylikuutio based on some other 3D engine?
 A: Some parts of Ylikuutio (some shaders, some file loaders, etc.) are
