@@ -7,6 +7,9 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage (Hirvi prototype):
+[ ] Add support for Tab complete for global names in `Console`.
+[ ] Add support for Tab complete for local names in `Console`.
+[ ] Add support for printing alternatives completions in `Console`.
 [ ] Create `yli::ontology::Registry` class in which different modules (`ChildModule`, `ParentModule`, `MasterModule`, `ApprenticeModule` etc.) may bind with a name.
 [ ] Add support for `yli::ontology::Registry` in different modules (`ChildModule`, `ParentModule`, `MasterModule`, `ApprenticeModule` etc.).
 [ ] Add support in `Console` for indexing the children of an `Entity` through the `Registry` and `ParentModule`, e.g. `foo_entity.bar_children[0]`.
@@ -150,8 +153,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement scene loading which works in the background.
 [ ] Evaluate AppVeyor: https://github.com/marketplace/appveyor
 [ ] Implement `ConsoleCommand` class.
-[ ] Store console commands in `Console` instance not only in an `unordered_map` but also in a trie.
-[ ] Implement Tab autocomplete in `Console`.
 [ ] Add support for `man` command in console (a container class with the command callback together with the `man` text for the command).
 [ ] Optimize `Symbiosis` entities' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.
 [ ] Add support for packed files.
