@@ -7,11 +7,8 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage (Hirvi prototype):
-[ ] Add support for Tab complete for global names in `Console`.
 [ ] Add support for Tab complete for local names in `Console`.
 [ ] Add support for printing alternatives completions in `Console`.
-[ ] Create `yli::ontology::Registry` class in which different modules (`ChildModule`, `ParentModule`, `MasterModule`, `ApprenticeModule` etc.) may bind with a name.
-[ ] Add support for `yli::ontology::Registry` in different modules (`ChildModule`, `ParentModule`, `MasterModule`, `ApprenticeModule` etc.).
 [ ] Add support in `Console` for indexing the children of an `Entity` through the `Registry` and `ParentModule`, e.g. `foo_entity.bar_children[0]`.
 [ ] Add support in `Console` for indexing the apprentices of an `Entity` through the `Registry` and `MasterModule`, e.g. `foo_entity.bar_apprentices[0]`.
 [ ] Implement `yli::ontology::Window` class.
@@ -279,3 +276,6 @@ Ready:
 [x] Implement processing command line arguments in the `yli::ontology::Application` class based on the data received from the application itself (as before).
 [x] Create initial design of custom `.yli` binary format.
 [x] Implement `Variable` `azimuth` (for geographical angles/azimuths), 0 pointing north, pi/2 pointing east, pi pointing south, -pi/2 pointing west.
+[x] Create `yli::ontology::Registry` class in which different modules (`ChildModule`, `ParentModule`, `MasterModule`, `ApprenticeModule` etc.) may bind with a name.
+[x] Add support for `yli::ontology::Registry` in different modules (`ParentModule`, `MasterModule`).
+[x] Add support for Tab complete for global names in `Console`.
