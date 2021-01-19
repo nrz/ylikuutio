@@ -323,7 +323,7 @@ A: Some parts of Ylikuutio (some shaders, some file loaders, etc.) are
    based on [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/),
    which I really recommend for anyone interested in learning
    OpenGL programming. Ylikuutio also uses external libraries such as
-   (in alphabetical order) Asio, Bullet, GLM, GLEW, OpenFBX, pugixml, SDL, and stb.
+   (in alphabetical order) Asio, Bullet, GLEW, GLM, OpenFBX, pugixml, SDL, and stb.
    The rest is written from scratch.
 
 Q: Does Ylikuutio use right-handed or left-handed world coordinates?

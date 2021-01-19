@@ -12,7 +12,12 @@ Planned features:
 * Type conversion must be explicit when precision loss
   or truncation would occur: `(cast my-number 'float)`.
 * Functions can be overloaded.
-* Struct syntax: `foo . bar . baz`.
+* Struct syntax: `(member (member foo bar) baz)`.
+* Struct syntax (syntactic sugar): `foo.bar.baz`
+  (whitespace around dot operators is free).
+* Indexing syntax: `(nth foo bar)`
+* Indexing syntax (syntactic sugar): `foo[bar]`.
+  (whitespace around square bracket operators is free).
 * All objects, both variables and functions,
   are `yli::ontology::Entity` entities.
 * All named `yli::ontology::Entity` entities

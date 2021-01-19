@@ -572,7 +572,7 @@ namespace yli::ontology
             if (yli::lisp::parse(input_string, command, parameter_vector))
             {
                 if (command.empty() ||
-                        (parameter_vector.empty() && input_string.at(input_string.size() - 1) != ' '))
+                        (parameter_vector.empty() && input_string.back() != ' '))
                 {
                     // If `input_string` is empty, then complete the command.
                     // Also if there are no parameters and `input_string` does not end with a space, then complete the command.
@@ -593,7 +593,7 @@ namespace yli::ontology
                         std::copy(completion.begin(), completion.end(), std::back_inserter(console->current_input));
                     }
                 }
-                else if (input_string.at(input_string.size() - 1) != ' ')
+                else if (input_string.back() != ' ')
                 {
                     // If `input_string` does not end with a space,
                     // then complete the current parameter.
