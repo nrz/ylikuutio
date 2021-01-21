@@ -48,8 +48,7 @@ namespace yli::ontology
         }
 
         VariableStruct(std::shared_ptr<yli::data::AnyValue> initial_value)
-            : EntityStruct(),
-            parent(nullptr),
+            : parent(nullptr),
             initial_value(initial_value),
             activate_callback(nullptr),
             read_callback(nullptr),
