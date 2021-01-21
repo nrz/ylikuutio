@@ -25,24 +25,39 @@
 #endif
 
 // Include standard headers
-#include <cmath> // NAN, std::isnan, std::pow
+#include <cstddef> // std::size_t
+#include <cmath>   // NAN, std::isnan, std::pow
+#include <limits>  // std::numeric_limits
+#include <vector>  // std::vector
 
 TEST(species_struct_must_be_initialized_appropriately, species_struct)
 {
     const yli::ontology::SpeciesStruct test_species_struct;
-    ASSERT_TRUE(test_species_struct.model_file_format.empty());
-    ASSERT_TRUE(test_species_struct.model_filename.empty());
-    ASSERT_TRUE(test_species_struct.color_channel.empty());
     ASSERT_EQ(test_species_struct.model_filename, "");
     ASSERT_EQ(test_species_struct.model_file_format, "");
     ASSERT_EQ(test_species_struct.color_channel, "");
+    ASSERT_EQ(test_species_struct.triangulation_type, "bilinear_interpolation");
+    ASSERT_EQ(test_species_struct.vertices, std::vector<glm::vec3> { });
+    ASSERT_EQ(test_species_struct.uvs, std::vector<glm::vec2> { });
+    ASSERT_EQ(test_species_struct.normals, std::vector<glm::vec3> { });
+    ASSERT_EQ(test_species_struct.light_position, glm::vec3(0.0f, 0.0f, 0.0f));
     ASSERT_EQ(test_species_struct.scene, nullptr);
     ASSERT_EQ(test_species_struct.shader, nullptr);
     ASSERT_EQ(test_species_struct.material, nullptr);
     ASSERT_EQ(test_species_struct.symbiont_material, nullptr);
-    ASSERT_FALSE(test_species_struct.is_terrain);
-    ASSERT_TRUE(std::isnan(test_species_struct.planet_radius));
-    ASSERT_EQ(test_species_struct.light_position, glm::vec3(0.0f, 0.0f, 0.0f));
+    ASSERT_EQ(test_species_struct.shapeshifter_transformation, nullptr);
+    ASSERT_EQ(test_species_struct.vertex_count, std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(test_species_struct.mesh_i, 0);
+    ASSERT_EQ(test_species_struct.x_step, 1);
+    ASSERT_EQ(test_species_struct.z_step, 1);
     ASSERT_EQ(test_species_struct.latitude, 0.0f);
     ASSERT_EQ(test_species_struct.longitude, 0.0f);
+    ASSERT_TRUE(std::isnan(test_species_struct.planet_radius));
+    ASSERT_EQ(test_species_struct.divisor, 1.0f);
+    ASSERT_EQ(test_species_struct.water_level, -1.0f * std::numeric_limits<float>::infinity());
+    ASSERT_FALSE(test_species_struct.is_terrain);
+    ASSERT_FALSE(test_species_struct.is_symbiont_species);
+    ASSERT_TRUE(test_species_struct.opengl_in_use);
+    ASSERT_TRUE(test_species_struct.use_real_texture_coordinates);
+    ASSERT_FALSE(test_species_struct.is_terrain);
 }
