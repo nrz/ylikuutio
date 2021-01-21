@@ -30,7 +30,7 @@
 // Include standard headers
 #include <cmath> // NAN, std::isnan, std::pow
 
-TEST(ObjectStruct_must_be_initialized_appropriately, ObjectStruct)
+TEST(object_struct_must_be_initialized_appropriately, object_struct)
 {
     const yli::ontology::ObjectStruct test_object_struct;
     ASSERT_EQ(test_object_struct.species_parent, nullptr);

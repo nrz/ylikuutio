@@ -41,7 +41,7 @@
 
 typedef unsigned char u8;
 
-TEST(OpenFBX_must_function_appropriately, rigged_and_animated_cat)
+TEST(openfbx_must_function_appropriately, rigged_and_animated_cat)
 {
     const std::string filename = "cat.fbx";
     std::shared_ptr<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
@@ -162,7 +162,7 @@ TEST(OpenFBX_must_function_appropriately, rigged_and_animated_cat)
     ASSERT_GT(all_object_count, 0);
 }
 
-TEST(OpenFBX_must_function_appropriately, turbo_polizei)
+TEST(openfbx_must_function_appropriately, turbo_polizei)
 {
     const std::string filename = "turbo_polizei_bmp_textures.fbx";
     std::shared_ptr<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
@@ -293,7 +293,7 @@ TEST(fbx_file_must_be_loaded_appropriately, rigged_and_animated_cat)
     ASSERT_TRUE(result);
 }
 
-TEST(OpenFBX_must_function_appropriately, freight_train)
+TEST(openfbx_must_function_appropriately, freight_train)
 {
     const std::string filename = "freight_train.fbx";
     std::shared_ptr<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
@@ -408,7 +408,7 @@ TEST(OpenFBX_must_function_appropriately, freight_train)
     ASSERT_GT(all_object_count, 0);
 }
 
-TEST(OpenFBX_must_function_appropriately, fantasy_house_with_balcony)
+TEST(openfbx_must_function_appropriately, fantasy_house_with_balcony)
 {
     const std::string filename = "fantasy_house_with_balcony.fbx";
     std::shared_ptr<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);

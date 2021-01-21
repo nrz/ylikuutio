@@ -24,7 +24,7 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-TEST(GlyphStruct_must_be_initialized_appropriately, GlyphStruct)
+TEST(glyph_struct_must_be_initialized_appropriately, glyph_struct)
 {
     const yli::ontology::GlyphStruct test_glyph_struct;
     ASSERT_EQ(test_glyph_struct.glyph_vertex_data, nullptr);

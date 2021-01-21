@@ -27,7 +27,7 @@
 // Include standard headers
 #include <cmath> // NAN, std::isnan, std::pow
 
-TEST(SpeciesStruct_must_be_initialized_appropriately, SpeciesStruct)
+TEST(species_struct_must_be_initialized_appropriately, species_struct)
 {
     const yli::ontology::SpeciesStruct test_species_struct;
     ASSERT_TRUE(test_species_struct.model_file_format.empty());

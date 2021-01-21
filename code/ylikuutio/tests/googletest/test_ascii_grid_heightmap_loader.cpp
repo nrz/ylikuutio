@@ -31,7 +31,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-TEST(an_ASCII_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_2_4_8_16_32_64_128_256_x_step_1_z_step_1)
+TEST(an_ascii_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_2_4_8_16_32_64_128_256_x_step_1_z_step_1)
 {
     yli::load::HeightmapLoaderStruct heightmap_loader_struct;
     heightmap_loader_struct.filename = "test_3x3_0_1_2_4_8_16_32_64_128.asc";
@@ -272,7 +272,7 @@ TEST(an_ASCII_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_
     ASSERT_EQ(UVs[47].y, 1.0f); // southeast vertex.
 }
 
-TEST(an_ASCII_grid_must_be_defined_appropriately, test_3x3_0_1_2_4_8_16_32_64_128_256_x_step_1_z_step_1)
+TEST(an_ascii_grid_must_be_defined_appropriately, test_3x3_0_1_2_4_8_16_32_64_128_256_x_step_1_z_step_1)
 {
     yli::load::HeightmapLoaderStruct heightmap_loader_struct;
     heightmap_loader_struct.filename = "test_3x3_0_1_2_4_8_16_32_64_128.asc";
