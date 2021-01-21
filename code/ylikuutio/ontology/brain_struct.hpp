@@ -35,13 +35,11 @@ namespace yli::ontology
     struct BrainStruct: public yli::ontology::EntityStruct
     {
         BrainStruct()
-            : parent(nullptr),
-            callback_engine(nullptr)
         {
         }
 
-        yli::ontology::Scene* parent;
-        std::shared_ptr<yli::callback::CallbackEngine> callback_engine;
+        yli::ontology::Scene* parent { nullptr };
+        std::shared_ptr<yli::callback::CallbackEngine> callback_engine { nullptr };
     };
 }
 
