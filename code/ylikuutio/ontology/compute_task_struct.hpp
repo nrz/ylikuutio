@@ -62,8 +62,8 @@ namespace yli::ontology
         GLenum internal_format { GL_INVALID_ENUM };
         GLenum output_format { GL_INVALID_ENUM };
         GLenum type { GL_UNSIGNED_BYTE };
-        bool should_ylikuutio_save_intermediate_results { false };
-        bool should_ylikuutio_flip_texture { true };
+        bool should_save_intermediate_results { false };
+        bool should_flip_texture { true };
         PreIterateCallback preiterate_callback { nullptr };
         PostIterateCallback postiterate_callback { nullptr };
     };

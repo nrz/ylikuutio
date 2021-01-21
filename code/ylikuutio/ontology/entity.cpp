@@ -111,7 +111,7 @@ namespace yli::ontology
             should_be_rendered_variable_struct.local_name = "should_be_rendered";
             should_be_rendered_variable_struct.activate_callback = &yli::ontology::activate_should_be_rendered;
             should_be_rendered_variable_struct.read_callback = &yli::ontology::read_should_be_rendered;
-            should_be_rendered_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+            should_be_rendered_variable_struct.should_call_activate_callback_now = true;
             this->create_variable(should_be_rendered_variable_struct);
         }
     }

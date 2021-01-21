@@ -163,7 +163,7 @@ namespace yli::ontology
         cartesian_coordinates_variable_struct.local_name = "cartesian_coordinates";
         cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
         cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
-        cartesian_coordinates_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        cartesian_coordinates_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `this->create_variable(cartesian_coordinates_variable_struct);` ...\n";
         this->create_variable(cartesian_coordinates_variable_struct);
 
@@ -171,7 +171,7 @@ namespace yli::ontology
         x_variable_struct.local_name = "x";
         x_variable_struct.activate_callback = &yli::ontology::activate_x;
         x_variable_struct.read_callback = &yli::ontology::read_x;
-        x_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        x_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `this->create_variable(x_variable_struct);` ...\n";
         this->create_variable(x_variable_struct);
 
@@ -179,7 +179,7 @@ namespace yli::ontology
         y_variable_struct.local_name = "y";
         y_variable_struct.activate_callback = &yli::ontology::activate_y;
         y_variable_struct.read_callback = &yli::ontology::read_y;
-        y_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        y_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `this->create_variable(y_variable_struct);` ...\n";
         this->create_variable(y_variable_struct);
 
@@ -187,7 +187,7 @@ namespace yli::ontology
         z_variable_struct.local_name = "z";
         z_variable_struct.activate_callback = &yli::ontology::activate_z;
         z_variable_struct.read_callback = &yli::ontology::read_z;
-        z_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        z_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `this->create_variable(z_variable_struct);` ...\n";
         this->create_variable(z_variable_struct);
 
@@ -195,7 +195,7 @@ namespace yli::ontology
         yaw_variable_struct.local_name = "yaw";
         yaw_variable_struct.activate_callback = &yli::ontology::activate_yaw;
         yaw_variable_struct.read_callback = &yli::ontology::read_yaw;
-        yaw_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        yaw_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `this->create_variable(yaw_variable_struct);` ...\n";
         this->create_variable(yaw_variable_struct);
 
@@ -203,7 +203,7 @@ namespace yli::ontology
         pitch_variable_struct.local_name = "pitch";
         pitch_variable_struct.activate_callback = &yli::ontology::activate_pitch;
         pitch_variable_struct.read_callback = &yli::ontology::read_pitch;
-        pitch_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        pitch_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `this->create_variable(pitch_variable_struct);` ...\n";
         this->create_variable(pitch_variable_struct);
 
@@ -212,7 +212,7 @@ namespace yli::ontology
         azimuth_variable_struct.local_name = "azimuth";
         azimuth_variable_struct.activate_callback = &yli::ontology::activate_azimuth;
         azimuth_variable_struct.read_callback = &yli::ontology::read_azimuth;
-        azimuth_variable_struct.should_ylikuutio_call_activate_callback_now = false;
+        azimuth_variable_struct.should_call_activate_callback_now = false;
         std::cout << "Executing `entity->create_variable(azimuth_variable_struct);` ...\n";
         this->create_variable(azimuth_variable_struct);
 
@@ -221,7 +221,7 @@ namespace yli::ontology
         yli::ontology::VariableStruct speed_variable_struct(any_value_speed);
         speed_variable_struct.local_name = "speed";
         speed_variable_struct.activate_callback = &yli::ontology::Variable::activate_speed;
-        speed_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        speed_variable_struct.should_call_activate_callback_now = true;
         this->create_variable(speed_variable_struct);
     }
 }

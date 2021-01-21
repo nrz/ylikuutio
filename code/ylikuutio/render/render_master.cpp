@@ -181,7 +181,7 @@ namespace yli::render
             render_struct.scene->render();
         }
 
-        if (render_struct.should_ylikuutio_change_depth_test)
+        if (render_struct.should_change_depth_test)
         {
             yli::opengl::disable_depth_test();
         }
@@ -196,7 +196,7 @@ namespace yli::render
             yli::render::render_children<yli::ontology::Entity*, yli::ontology::Font2D*>(*render_struct.font_2d_pointer_vector);
         }
 
-        if (render_struct.should_ylikuutio_change_depth_test)
+        if (render_struct.should_change_depth_test)
         {
             yli::opengl::enable_depth_test();
         }

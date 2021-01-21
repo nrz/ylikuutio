@@ -131,8 +131,8 @@ namespace yli::ontology
                 this->internal_format                            = compute_task_struct.internal_format;
                 this->output_format                              = compute_task_struct.output_format;
                 this->type                                       = compute_task_struct.type;
-                this->should_ylikuutio_save_intermediate_results = compute_task_struct.should_ylikuutio_save_intermediate_results;
-                this->should_ylikuutio_flip_texture              = compute_task_struct.should_ylikuutio_flip_texture;
+                this->should_save_intermediate_results = compute_task_struct.should_save_intermediate_results;
+                this->should_flip_texture              = compute_task_struct.should_flip_texture;
 
                 this->preiterate_callback                        = compute_task_struct.preiterate_callback;
                 this->postiterate_callback                       = compute_task_struct.postiterate_callback;
@@ -323,8 +323,8 @@ namespace yli::ontology
             GLenum output_format;
             GLenum type;
 
-            bool should_ylikuutio_save_intermediate_results;
-            bool should_ylikuutio_flip_texture;
+            bool should_save_intermediate_results;
+            bool should_flip_texture;
 
             PreIterateCallback preiterate_callback;
             PostIterateCallback postiterate_callback;

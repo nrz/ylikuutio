@@ -42,8 +42,8 @@ TEST(compute_task_struct_must_be_initialized_appropriately, compute_task_struct)
     ASSERT_EQ(test_compute_task_struct.internal_format, GL_INVALID_ENUM);
     ASSERT_EQ(test_compute_task_struct.output_format, GL_INVALID_ENUM);
     ASSERT_EQ(test_compute_task_struct.type, GL_UNSIGNED_BYTE);
-    ASSERT_EQ(test_compute_task_struct.should_ylikuutio_save_intermediate_results, false);
-    ASSERT_EQ(test_compute_task_struct.should_ylikuutio_flip_texture, true);
+    ASSERT_EQ(test_compute_task_struct.should_save_intermediate_results, false);
+    ASSERT_EQ(test_compute_task_struct.should_flip_texture, true);
     ASSERT_EQ(test_compute_task_struct.preiterate_callback, nullptr);
     ASSERT_EQ(test_compute_task_struct.postiterate_callback, nullptr);
 }

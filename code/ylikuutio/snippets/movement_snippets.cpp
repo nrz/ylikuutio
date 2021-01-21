@@ -38,28 +38,28 @@ namespace yli::snippets
         yli::ontology::VariableStruct speed_variable_struct(any_value_speed);
         speed_variable_struct.local_name = "speed";
         speed_variable_struct.activate_callback = &yli::ontology::Variable::activate_speed;
-        speed_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        speed_variable_struct.should_call_activate_callback_now = true;
         entity->create_variable(speed_variable_struct);
 
         std::shared_ptr<yli::data::AnyValue> any_value_turbo_factor = std::make_shared<yli::data::AnyValue>(turbo_factor);
         yli::ontology::VariableStruct turbo_factor_variable_struct(any_value_turbo_factor);
         turbo_factor_variable_struct.local_name = "turbo_factor";
         turbo_factor_variable_struct.activate_callback = &yli::ontology::Variable::activate_turbo_factor;
-        turbo_factor_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        turbo_factor_variable_struct.should_call_activate_callback_now = true;
         entity->create_variable(turbo_factor_variable_struct);
 
         std::shared_ptr<yli::data::AnyValue> any_value_twin_turbo_factor = std::make_shared<yli::data::AnyValue>(twin_turbo_factor);
         yli::ontology::VariableStruct twin_turbo_factor_variable_struct(any_value_twin_turbo_factor);
         twin_turbo_factor_variable_struct.local_name = "twin_turbo_factor";
         twin_turbo_factor_variable_struct.activate_callback = &yli::ontology::Variable::activate_twin_turbo_factor;
-        twin_turbo_factor_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        twin_turbo_factor_variable_struct.should_call_activate_callback_now = true;
         entity->create_variable(twin_turbo_factor_variable_struct);
 
         std::shared_ptr<yli::data::AnyValue> any_value_mouse_speed = std::make_shared<yli::data::AnyValue>(mouse_speed);
         yli::ontology::VariableStruct mouse_speed_variable_struct(any_value_mouse_speed);
         mouse_speed_variable_struct.local_name = "mouse_speed";
         mouse_speed_variable_struct.activate_callback = &yli::ontology::Variable::activate_mouse_speed;
-        mouse_speed_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        mouse_speed_variable_struct.should_call_activate_callback_now = true;
         entity->create_variable(mouse_speed_variable_struct);
     }
 }

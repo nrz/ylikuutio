@@ -352,9 +352,9 @@ namespace yli::ontology
         universe->render_without_changing_depth_test(); // Render to framebuffer.
 
         // Transfer data from the GPU texture to a CPU array and save into a file.
-        const bool should_ylikuutio_flip_texture = true;
+        const bool should_flip_texture = true;
         yli::opengl::save_data_from_gpu_texture_into_file(
-                GL_RGB, GL_UNSIGNED_BYTE, texture_width, texture_height, *filename, should_ylikuutio_flip_texture);
+                GL_RGB, GL_UNSIGNED_BYTE, texture_width, texture_height, *filename, should_flip_texture);
 
         universe->restore_onscreen_rendering();
 

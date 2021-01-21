@@ -53,7 +53,7 @@ namespace yli::snippets
         yli::ontology::VariableStruct spherical_coordinates_variable_struct(std::make_shared<yli::data::AnyValue>(&spherical_coordinates_struct));
         spherical_coordinates_variable_struct.local_name = "spherical_coordinates";
         spherical_coordinates_variable_struct.activate_callback = &yli::ontology::activate_spherical_coordinates;
-        spherical_coordinates_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        spherical_coordinates_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `entity->create_variable(spherical_coordinates_variable_struct);` ...\n";
         entity->create_variable(spherical_coordinates_variable_struct);
 
@@ -61,7 +61,7 @@ namespace yli::snippets
         rho_variable_struct.local_name = "rho";
         rho_variable_struct.activate_callback = &yli::ontology::activate_rho;
         rho_variable_struct.read_callback = &yli::ontology::read_rho;
-        rho_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        rho_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `entity->create_variable(rho_variable_struct);` ...\n";
         entity->create_variable(rho_variable_struct);
 
@@ -69,7 +69,7 @@ namespace yli::snippets
         theta_variable_struct.local_name = "theta";
         theta_variable_struct.activate_callback = &yli::ontology::activate_theta;
         theta_variable_struct.read_callback = &yli::ontology::read_theta;
-        theta_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        theta_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `entity->create_variable(theta_variable_struct);` ...\n";
         entity->create_variable(theta_variable_struct);
 
@@ -77,7 +77,7 @@ namespace yli::snippets
         phi_variable_struct.local_name = "phi";
         phi_variable_struct.activate_callback = &yli::ontology::activate_phi;
         phi_variable_struct.read_callback = &yli::ontology::read_phi;
-        phi_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        phi_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `entity->create_variable(phi_variable_struct);` ...\n";
         entity->create_variable(phi_variable_struct);
 
@@ -85,7 +85,7 @@ namespace yli::snippets
         cartesian_coordinates_variable_struct.local_name = "cartesian_coordinates";
         cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
         cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
-        cartesian_coordinates_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        cartesian_coordinates_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `entity->create_variable(cartesian_coordinates_variable_struct);` ...\n";
         entity->create_variable(cartesian_coordinates_variable_struct);
 
@@ -93,7 +93,7 @@ namespace yli::snippets
         x_variable_struct.local_name = "x";
         x_variable_struct.activate_callback = &yli::ontology::activate_x;
         x_variable_struct.read_callback = &yli::ontology::read_x;
-        x_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        x_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `entity->create_variable(x_variable_struct);` ...\n";
         entity->create_variable(x_variable_struct);
 
@@ -101,7 +101,7 @@ namespace yli::snippets
         y_variable_struct.local_name = "y";
         y_variable_struct.activate_callback = &yli::ontology::activate_y;
         y_variable_struct.read_callback = &yli::ontology::read_y;
-        y_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        y_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `entity->create_variable(y_variable_struct);` ...\n";
         entity->create_variable(y_variable_struct);
 
@@ -109,7 +109,7 @@ namespace yli::snippets
         z_variable_struct.local_name = "z";
         z_variable_struct.activate_callback = &yli::ontology::activate_z;
         z_variable_struct.read_callback = &yli::ontology::read_z;
-        z_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        z_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `entity->create_variable(z_variable_struct);` ...\n";
         entity->create_variable(z_variable_struct);
 
@@ -118,7 +118,7 @@ namespace yli::snippets
         yaw_variable_struct.local_name = "yaw";
         yaw_variable_struct.activate_callback = &yli::ontology::activate_yaw;
         yaw_variable_struct.read_callback = &yli::ontology::read_yaw;
-        yaw_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        yaw_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `entity->create_variable(yaw_variable_struct);` ...\n";
         entity->create_variable(yaw_variable_struct);
 
@@ -127,7 +127,7 @@ namespace yli::snippets
         pitch_variable_struct.local_name = "pitch";
         pitch_variable_struct.activate_callback = &yli::ontology::activate_pitch;
         pitch_variable_struct.read_callback = &yli::ontology::read_pitch;
-        pitch_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        pitch_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `entity->create_variable(pitch_variable_struct);` ...\n";
         entity->create_variable(pitch_variable_struct);
 
@@ -136,7 +136,7 @@ namespace yli::snippets
         azimuth_variable_struct.local_name = "azimuth";
         azimuth_variable_struct.activate_callback = &yli::ontology::activate_azimuth;
         azimuth_variable_struct.read_callback = &yli::ontology::read_azimuth;
-        azimuth_variable_struct.should_ylikuutio_call_activate_callback_now = false;
+        azimuth_variable_struct.should_call_activate_callback_now = false;
         std::cout << "Executing `entity->create_variable(azimuth_variable_struct);` ...\n";
         entity->create_variable(azimuth_variable_struct);
 
@@ -144,7 +144,7 @@ namespace yli::snippets
         yli::ontology::VariableStruct right_variable_struct(std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
         right_variable_struct.local_name = "right";
         right_variable_struct.read_callback = &yli::ontology::read_right;
-        right_variable_struct.should_ylikuutio_call_activate_callback_now = false;
+        right_variable_struct.should_call_activate_callback_now = false;
         std::cout << "Executing `entity->create_variable(right_variable_struct);` ...\n";
         entity->create_variable(right_variable_struct);
 
@@ -152,7 +152,7 @@ namespace yli::snippets
         yli::ontology::VariableStruct up_variable_struct(std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
         up_variable_struct.local_name = "up";
         up_variable_struct.read_callback = &yli::ontology::read_up;
-        up_variable_struct.should_ylikuutio_call_activate_callback_now = false;
+        up_variable_struct.should_call_activate_callback_now = false;
         std::cout << "Executing `entity->create_variable(up_variable_struct);` ...\n";
         entity->create_variable(up_variable_struct);
 

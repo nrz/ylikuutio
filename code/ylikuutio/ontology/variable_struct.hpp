@@ -55,7 +55,7 @@ namespace yli::ontology
             initial_value { variable_struct.initial_value },
             activate_callback { variable_struct.activate_callback },
             read_callback { variable_struct.read_callback },
-            should_ylikuutio_call_activate_callback_now { variable_struct.should_ylikuutio_call_activate_callback_now }
+            should_call_activate_callback_now { variable_struct.should_call_activate_callback_now }
         {
             // copy constructor.
             this->global_name = variable_struct.global_name;
@@ -67,7 +67,7 @@ namespace yli::ontology
         std::shared_ptr<yli::data::AnyValue> initial_value { nullptr };
         ActivateCallback activate_callback                 { nullptr };
         ReadCallback read_callback                         { nullptr };
-        bool should_ylikuutio_call_activate_callback_now   { true };
+        bool should_call_activate_callback_now   { true };
     };
 }
 

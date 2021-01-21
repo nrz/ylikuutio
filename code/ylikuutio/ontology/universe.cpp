@@ -626,7 +626,7 @@ namespace yli::ontology
         render_struct.console = this->active_console;
         render_struct.font_2d_pointer_vector = &this->parent_of_font_2ds.child_pointer_vector;
         render_struct.window = this->window;
-        render_struct.should_ylikuutio_change_depth_test = false;
+        render_struct.should_change_depth_test = false;
         this->render(render_struct);
     }
 
@@ -1060,7 +1060,7 @@ namespace yli::ontology
         should_be_rendered_variable_struct.local_name = "should_be_rendered";
         should_be_rendered_variable_struct.activate_callback = &yli::ontology::activate_should_be_rendered;
         should_be_rendered_variable_struct.read_callback = &yli::ontology::read_should_be_rendered;
-        should_be_rendered_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        should_be_rendered_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `this->create_variable(should_be_rendered_variable_struct);` ...\n";
         this->create_variable(should_be_rendered_variable_struct);
     }

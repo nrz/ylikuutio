@@ -31,7 +31,7 @@ TEST(variable_struct_must_be_initialized_appropriately, variable_struct_default_
     ASSERT_EQ(test_variable_struct.initial_value, nullptr);
     ASSERT_EQ(test_variable_struct.activate_callback, nullptr);
     ASSERT_EQ(test_variable_struct.read_callback, nullptr);
-    ASSERT_TRUE(test_variable_struct.should_ylikuutio_call_activate_callback_now);
+    ASSERT_TRUE(test_variable_struct.should_call_activate_callback_now);
     ASSERT_EQ(test_variable_struct.global_name, "");
     ASSERT_EQ(test_variable_struct.local_name, "");
     ASSERT_TRUE(test_variable_struct.is_variable);
@@ -48,7 +48,7 @@ TEST(variable_struct_must_be_initialized_appropriately, variable_struct_initial_
     ASSERT_EQ(std::get<float>(test_variable_struct.initial_value->data), std::numeric_limits<float>::infinity());
     ASSERT_EQ(test_variable_struct.activate_callback, nullptr);
     ASSERT_EQ(test_variable_struct.read_callback, nullptr);
-    ASSERT_TRUE(test_variable_struct.should_ylikuutio_call_activate_callback_now);
+    ASSERT_TRUE(test_variable_struct.should_call_activate_callback_now);
     ASSERT_EQ(test_variable_struct.global_name, "");
     ASSERT_EQ(test_variable_struct.local_name, "");
     ASSERT_TRUE(test_variable_struct.is_variable);
@@ -68,7 +68,7 @@ TEST(variable_struct_must_be_initialized_appropriately, variable_struct_copy_con
     ASSERT_EQ(std::get<float>(copy_variable_struct.initial_value->data), std::numeric_limits<float>::infinity());
     ASSERT_EQ(copy_variable_struct.activate_callback, nullptr);
     ASSERT_EQ(copy_variable_struct.read_callback, nullptr);
-    ASSERT_TRUE(copy_variable_struct.should_ylikuutio_call_activate_callback_now);
+    ASSERT_TRUE(copy_variable_struct.should_call_activate_callback_now);
     ASSERT_EQ(copy_variable_struct.global_name, "foo");
     ASSERT_EQ(copy_variable_struct.local_name, "bar");
     ASSERT_TRUE(copy_variable_struct.is_variable);

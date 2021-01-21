@@ -109,7 +109,7 @@ namespace yli::ontology
             variable_entity->set_local_name(variable_struct.local_name);
         }
 
-        if (variable_struct.should_ylikuutio_call_activate_callback_now)
+        if (variable_struct.should_call_activate_callback_now)
         {
             variable_entity->activate();
         }
