@@ -36,6 +36,7 @@ namespace yli::ontology
     {
         BrainStruct()
         {
+            // constructor.
         }
 
         yli::ontology::Scene* parent { nullptr };
