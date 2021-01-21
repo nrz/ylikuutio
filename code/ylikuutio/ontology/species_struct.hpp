@@ -44,8 +44,7 @@ namespace yli::ontology
     struct SpeciesStruct: public yli::ontology::ModelStruct
     {
         SpeciesStruct()
-            : ModelStruct(),
-            triangulation_type("bilinear_interpolation"),
+            : triangulation_type("bilinear_interpolation"),
             light_position(glm::vec3(0.0f, 0.0f, 0.0f)),
             scene(nullptr),
             shader(nullptr),

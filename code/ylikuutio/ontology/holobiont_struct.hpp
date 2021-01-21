@@ -31,7 +31,6 @@ namespace yli::ontology
     struct HolobiontStruct: public yli::ontology::MovableStruct
     {
         HolobiontStruct()
-            : MovableStruct()
         {
             // constructor.
         }

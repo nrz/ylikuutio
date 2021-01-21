@@ -31,7 +31,6 @@ namespace yli::ontology
     struct Text3DStruct: public yli::ontology::MovableStruct
     {
         Text3DStruct()
-            : MovableStruct()
         {
             // constructor.
         }

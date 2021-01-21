@@ -32,7 +32,6 @@ namespace yli::ontology
     struct BiontStruct: public yli::ontology::MovableStruct
     {
         BiontStruct()
-            : MovableStruct()
         {
             // constructor.
         }

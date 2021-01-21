@@ -28,8 +28,7 @@ namespace yli::ontology
     struct ChunkStruct: public yli::ontology::ModelStruct
     {
         ChunkStruct()
-            : ModelStruct(),
-            universe(nullptr),
+            : universe(nullptr),
             parent(nullptr),
             opengl_in_use(true)
         {

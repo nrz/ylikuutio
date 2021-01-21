@@ -37,8 +37,7 @@ namespace yli::ontology
     struct VariableStruct: public yli::ontology::EntityStruct
     {
         VariableStruct()
-            : EntityStruct(),
-            parent(nullptr),
+            : parent(nullptr),
             initial_value(nullptr),
             activate_callback(nullptr),
             read_callback(nullptr),

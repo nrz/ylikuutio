@@ -32,7 +32,6 @@ namespace yli::ontology
     struct ObjectStruct: public yli::ontology::MovableStruct
     {
         ObjectStruct()
-            : MovableStruct()
         {
             // constructor.
         }
