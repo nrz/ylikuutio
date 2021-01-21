@@ -42,23 +42,6 @@ namespace yli::ontology
     struct ComputeTaskStruct: public yli::ontology::EntityStruct
     {
         ComputeTaskStruct()
-            : parent(nullptr),
-            left_filler_vector_any_value(nullptr),
-            right_filler_vector_any_value(nullptr),
-            end_condition_callback_engine(nullptr),
-            n_max_iterations(1),                                     // By default execute GLSL shader exactly once (do not iterate further).
-            compute_taskID(std::numeric_limits<std::size_t>::max()), // `std::numeric_limits<std::size_t>::max()` means that `compute_taskID` is not defined.
-            texture_width(0),
-            texture_height(0),
-            n_index_characters(4),
-            format(GL_RGB),
-            internal_format(GL_INVALID_ENUM), // If `internal_format` is left to `GL_INVALID_ENUM`, `format` is used as the internal format.
-            output_format(GL_INVALID_ENUM),   // If `output_format` is left to `GL_INVALID_ENUM`, `format` is used as the output format.
-            type(GL_UNSIGNED_BYTE),
-            should_ylikuutio_save_intermediate_results(false),
-            should_ylikuutio_flip_texture(true),
-            preiterate_callback(nullptr),
-            postiterate_callback(nullptr)
         {
             // constructor.
         }
@@ -66,23 +49,23 @@ namespace yli::ontology
         std::string texture_file_format; // Type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"csv"`/`"CSV"`.
         std::string texture_filename;    // Filename of the model file.
         std::string output_filename;     // Filename of the output file.
-        yli::ontology::Shader* parent;   // Pointer to the `Shader`.
-        std::shared_ptr<yli::data::AnyValue> left_filler_vector_any_value;
-        std::shared_ptr<yli::data::AnyValue> right_filler_vector_any_value;
-        std::shared_ptr<yli::callback::CallbackEngine> end_condition_callback_engine;
-        std::size_t n_max_iterations;
-        std::size_t compute_taskID;
-        std::size_t texture_width;
-        std::size_t texture_height;
-        std::size_t n_index_characters;  // For intermediate results' filenames.
-        GLenum format;
-        GLenum internal_format;
-        GLenum output_format;
-        GLenum type;
-        bool should_ylikuutio_save_intermediate_results;
-        bool should_ylikuutio_flip_texture;
-        PreIterateCallback preiterate_callback;
-        PostIterateCallback postiterate_callback;
+        yli::ontology::Shader* parent { nullptr };   // Pointer to the `Shader`.
+        std::shared_ptr<yli::data::AnyValue> left_filler_vector_any_value { nullptr };
+        std::shared_ptr<yli::data::AnyValue> right_filler_vector_any_value { nullptr };
+        std::shared_ptr<yli::callback::CallbackEngine> end_condition_callback_engine { nullptr };
+        std::size_t n_max_iterations { 1 }; // By default execute GLSL shader exactly once (do not iterate further).
+        std::size_t compute_taskID { std::numeric_limits<std::size_t>::max() };
+        std::size_t texture_width { 0 };
+        std::size_t texture_height { 0 };
+        std::size_t n_index_characters { 4 };  // For intermediate results' filenames.
+        GLenum format { GL_RGB };
+        GLenum internal_format { GL_INVALID_ENUM };
+        GLenum output_format { GL_INVALID_ENUM };
+        GLenum type { GL_UNSIGNED_BYTE };
+        bool should_ylikuutio_save_intermediate_results { false };
+        bool should_ylikuutio_flip_texture { true };
+        PreIterateCallback preiterate_callback { nullptr };
+        PostIterateCallback postiterate_callback { nullptr };
     };
 }
 
