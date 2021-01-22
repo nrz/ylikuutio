@@ -192,7 +192,7 @@ namespace yli::ontology
 
     uint32_t Shader::get_model_matrix_id() const
     {
-        return this->model_matrixID;
+        return this->model_matrix_id;
     }
 
     void Shader::set_terrain_species(yli::ontology::Species* const terrain_species)
