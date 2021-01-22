@@ -112,9 +112,9 @@ namespace yli::ontology
             // Currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
             void set_terrain_species(yli::ontology::Species* terrain_species);
 
-            uint32_t get_program_id() const;
-            uint32_t get_matrix_id() const;
-            uint32_t get_model_matrix_id() const;
+            GLuint get_program_id() const;
+            GLint get_matrix_id() const;
+            GLint get_model_matrix_id() const;
 
             friend class yli::ontology::ShaderCompare;
             template<class T1>
@@ -139,9 +139,9 @@ namespace yli::ontology
 
             GLuint program_id;                    // This `Shader`'s `program_id`, returned by `load_shaders`.
 
-            uint32_t matrix_id;
-            uint32_t view_matrix_id;
-            uint32_t model_matrix_id;
+            GLint matrix_id;
+            GLint view_matrix_id;
+            GLint model_matrix_id;
 
             std::string vertex_shader;            // Filename of vertex shader.
             std::string fragment_shader;          // Filename of fragment shader.
