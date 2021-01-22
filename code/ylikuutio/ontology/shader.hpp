@@ -69,7 +69,7 @@ namespace yli::ontology
                 this->parent               = shader_struct.parent;
 
                 this->program_id           = 0; // dummy value.
-                this->matrixID             = 0; // dummy value.
+                this->matrix_id            = 0; // dummy value.
                 this->view_matrixID        = 0; // dummy value.
                 this->model_matrixID       = 0; // dummy value.
 
@@ -90,7 +90,7 @@ namespace yli::ontology
                     this->program_id = yli::load::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
 
                     // Get a handle for our "MVP" uniform.
-                    this->matrixID = glGetUniformLocation(this->program_id, "MVP");
+                    this->matrix_id = glGetUniformLocation(this->program_id, "MVP");
                     this->view_matrixID = glGetUniformLocation(this->program_id, "V");
                     this->model_matrixID = glGetUniformLocation(this->program_id, "M");
                 }
@@ -139,7 +139,7 @@ namespace yli::ontology
 
             GLuint program_id;                    // This `Shader`'s `program_id`, returned by `load_shaders`.
 
-            uint32_t matrixID;
+            uint32_t matrix_id;
             uint32_t view_matrixID;
             uint32_t model_matrixID;
 
