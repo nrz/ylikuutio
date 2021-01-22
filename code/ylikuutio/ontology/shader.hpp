@@ -70,7 +70,7 @@ namespace yli::ontology
 
                 this->program_id           = 0; // dummy value.
                 this->matrix_id            = 0; // dummy value.
-                this->view_matrixID        = 0; // dummy value.
+                this->view_matrix_id       = 0; // dummy value.
                 this->model_matrixID       = 0; // dummy value.
 
                 // Each GPGPU `Shader` owns 0 or more output `ComputeTask`s.
@@ -91,7 +91,7 @@ namespace yli::ontology
 
                     // Get a handle for our "MVP" uniform.
                     this->matrix_id = glGetUniformLocation(this->program_id, "MVP");
-                    this->view_matrixID = glGetUniformLocation(this->program_id, "V");
+                    this->view_matrix_id = glGetUniformLocation(this->program_id, "V");
                     this->model_matrixID = glGetUniformLocation(this->program_id, "M");
                 }
 
@@ -140,7 +140,7 @@ namespace yli::ontology
             GLuint program_id;                    // This `Shader`'s `program_id`, returned by `load_shaders`.
 
             uint32_t matrix_id;
-            uint32_t view_matrixID;
+            uint32_t view_matrix_id;
             uint32_t model_matrixID;
 
             std::string vertex_shader;            // Filename of vertex shader.

@@ -152,7 +152,7 @@ namespace yli::ontology
 
         // `glUniformMatrix4fv` doesn't change between objects,
         // so this can be done once for all objects that use the same `program_id`.
-        glUniformMatrix4fv(this->view_matrixID, 1, GL_FALSE, &this->universe->get_view_matrix()[0][0]);
+        glUniformMatrix4fv(this->view_matrix_id, 1, GL_FALSE, &this->universe->get_view_matrix()[0][0]);
 
         render_master->render_compute_tasks(this->parent_of_compute_tasks.child_pointer_vector);
         render_master->render_materials(this->parent_of_materials.child_pointer_vector);
