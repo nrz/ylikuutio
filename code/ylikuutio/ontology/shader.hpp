@@ -68,11 +68,6 @@ namespace yli::ontology
                 this->char_fragment_shader = this->fragment_shader.c_str();
                 this->parent               = shader_struct.parent;
 
-                this->program_id           = 0; // dummy value.
-                this->matrix_id            = 0; // dummy value.
-                this->view_matrix_id       = 0; // dummy value.
-                this->model_matrix_id      = 0; // dummy value.
-
                 // Each GPGPU `Shader` owns 0 or more output `ComputeTask`s.
                 // Each `Material` rendered after a given GPGPU `Shader`
                 // may also use the output `ComputeTask`s offered by
@@ -137,11 +132,10 @@ namespace yli::ontology
 
             yli::ontology::Scene* parent;         // Pointer to the `Scene`.
 
-            GLuint program_id;                    // This `Shader`'s `program_id`, returned by `load_shaders`.
-
-            GLint matrix_id;
-            GLint view_matrix_id;
-            GLint model_matrix_id;
+            GLuint program_id     { 0 };          // This `Shader`'s `program_id`, returned by `load_shaders`. Dummy value.
+            GLint matrix_id       { 0 };          // Dummy value.
+            GLint view_matrix_id  { 0 };          // Dummy value.
+            GLint model_matrix_id { 0 };          // Dummy value.
 
             std::string vertex_shader;            // Filename of vertex shader.
             std::string fragment_shader;          // Filename of fragment shader.
