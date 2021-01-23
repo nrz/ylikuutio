@@ -69,7 +69,7 @@ namespace yli::input
             InputMode(const InputMode&) = delete;            // Delete copy constructor.
             yli::input::InputMode& operator=(const InputMode&) = delete; // Delete copy assignment.
 
-            yli::input::InputMaster* parent;
+            yli::input::InputMaster* parent { nullptr };
             std::size_t childID { std::numeric_limits<std::size_t>::max() };
 
             std::vector<yli::callback::CallbackEngine*> keypress_callback_engines;
