@@ -56,12 +56,12 @@ namespace yli::callback
             // constructor.
             CallbackParameter(const std::string& name, std::shared_ptr<yli::data::AnyValue> any_value, const bool is_reference, yli::callback::CallbackObject* const parent);
 
-            yli::callback::CallbackObject* parent; // pointer to the callback object.
+            yli::callback::CallbackObject* parent { nullptr }; // pointer to the callback object.
 
             std::size_t childID { std::numeric_limits<std::size_t>::max() }; // callback parameter ID, returned by `yli::callback::CallbackObject->get_callback_parameterID()`.
 
             std::string name;
-            std::shared_ptr<yli::data::AnyValue> any_value; // this is `private` to make sure that someone does not overwrite it.
+            std::shared_ptr<yli::data::AnyValue> any_value { nullptr }; // this is `private` to make sure that someone does not overwrite it.
             bool is_reference;              // if true, the value is read from the hashmap. if false, then the value is read from the union.
     };
 }
