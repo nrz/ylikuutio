@@ -52,8 +52,8 @@ namespace yli::ontology
         }
 
         std::variant<yli::ontology::Species*, yli::ontology::ShapeshifterSequence*, yli::ontology::Text3D*> parent;
-        yli::ontology::Glyph* glyph { nullptr };                                       // pointer to the `Glyph` (not a parent!).
-        yli::ontology::Brain* brain { nullptr };                                       // pointer to the `Brain` master.
+        yli::ontology::Glyph* glyph { nullptr }; // pointer to the `Glyph` (not a parent!).
+        yli::ontology::Brain* brain { nullptr }; // pointer to the `Brain` master.
     };
 }
 
