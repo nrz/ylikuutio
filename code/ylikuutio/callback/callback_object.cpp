@@ -24,6 +24,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <limits>   // std::numeric_limits
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 #include <unordered_map> // std::unordered_map
@@ -124,7 +125,7 @@ namespace yli::callback
     CallbackObject::CallbackObject(yli::callback::CallbackEngine* const parent)
     {
         // constructor.
-        this->childID = -1;
+        this->childID = std::numeric_limits<std::size_t>::max();
         this->callback = nullptr;
         this->parent = parent;
 
@@ -137,7 +138,7 @@ namespace yli::callback
     CallbackObject::CallbackObject(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback, yli::callback::CallbackEngine* const parent)
     {
         // constructor.
-        this->childID = -1;
+        this->childID = std::numeric_limits<std::size_t>::max();
         this->callback = callback;
         this->parent = parent;
 
