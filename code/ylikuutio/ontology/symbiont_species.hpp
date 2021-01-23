@@ -74,11 +74,11 @@ namespace yli::ontology
                 master_of_bionts(this, &this->registry, "bionts")
             {
                 // constructor.
-                this->shader                   = species_struct.shader;
-                this->vertices                 = species_struct.vertices;
-                this->uvs                      = species_struct.uvs;
-                this->normals                  = species_struct.normals;
-                this->light_position           = species_struct.light_position;
+                this->shader         = species_struct.shader;
+                this->vertices       = species_struct.vertices;
+                this->uvs            = species_struct.uvs;
+                this->normals        = species_struct.normals;
+                this->light_position = species_struct.light_position;
 
                 this->type_string = "yli::ontology::SymbiontSpecies*";
 
