@@ -67,7 +67,7 @@ namespace yli::ontology
         std::shared_ptr<yli::data::AnyValue> initial_value { nullptr };
         ActivateCallback activate_callback                 { nullptr };
         ReadCallback read_callback                         { nullptr };
-        bool should_call_activate_callback_now   { true };
+        bool should_call_activate_callback_now             { true };
     };
 }
 
