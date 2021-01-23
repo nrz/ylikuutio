@@ -155,7 +155,7 @@ private_line = \
 "        private:"
 
 parent_pointer_line_in_header = \
-"            " + fully_qualified_parent_class_name + "* parent;"
+"            " + fully_qualified_parent_class_name + "* parent { nullptr };"
 
 end_class_definition = \
 "    };"
