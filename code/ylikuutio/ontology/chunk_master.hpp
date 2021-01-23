@@ -74,7 +74,7 @@ namespace yli::ontology
             // this method renders all `Chunk`s bound to this `ChunkMaster`.
             void render();
 
-            std::size_t childID;              // `ChunkMaster` ID, returned by `yli::ontology::Material->get_chunk_masterID()`.
+            std::size_t childID; // `ChunkMaster` ID, returned by `yli::ontology::Material->get_chunk_masterID()`.
 
             // Callback used to get the content based on x, y, z.
             GetContentCallback get_content_callback { nullptr };
