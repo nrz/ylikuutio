@@ -31,18 +31,15 @@ namespace yli::ontology
     struct ShaderStruct: public yli::ontology::EntityStruct
     {
         ShaderStruct()
-            : parent(nullptr),
-            is_gpgpu_shader(false),
-            opengl_in_use(true)
         {
             // constructor.
         }
 
         std::string vertex_shader;    // filename of vertex shader.
         std::string fragment_shader;  // filename of fragment shader.
-        yli::ontology::Scene* parent; // pointer to the `Scene`.
-        bool is_gpgpu_shader;         // TODO: GPGPU `Shader`s are not rendered on screen but their result textures can be used by `Material`s.
-        bool opengl_in_use;           // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
+        yli::ontology::Scene* parent { nullptr }; // pointer to the `Scene`.
+        bool is_gpgpu_shader         { false };   // TODO: GPGPU `Shader`s are not rendered on screen but their result textures can be used by `Material`s.
+        bool opengl_in_use           { true };    // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
     };
 }
 
