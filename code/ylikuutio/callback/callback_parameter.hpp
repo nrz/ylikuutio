@@ -23,12 +23,12 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
-#include <cstddef>       // std::size_t
-#include <limits>        // std::numeric_limits
-#include <memory>        // std::make_shared, std::shared_ptr
-#include <queue>         // std::queue
-#include <string>        // std::string
-#include <vector>        // std::vector
+#include <cstddef> // std::size_t
+#include <limits>  // std::numeric_limits
+#include <memory>  // std::make_shared, std::shared_ptr
+#include <queue>   // std::queue
+#include <string>  // std::string
+#include <vector>  // std::vector
 
 namespace yli::ontology
 {
