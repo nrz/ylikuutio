@@ -60,9 +60,9 @@ namespace yli::ontology
                 parent_of_chunk_masters(this, &this->registry, "chunk_masters")
             {
                 // constructor.
-                this->is_symbiont_material     = material_struct.is_symbiont_material;
-                this->texture_file_format      = material_struct.texture_file_format;
-                this->texture_filename         = material_struct.texture_filename;
+                this->is_symbiont_material = material_struct.is_symbiont_material;
+                this->texture_file_format  = material_struct.texture_file_format;
+                this->texture_filename     = material_struct.texture_filename;
 
                 const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
 
