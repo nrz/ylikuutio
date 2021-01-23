@@ -32,7 +32,6 @@
 #include "code/ylikuutio/ontology/shapeshifter_sequence_struct.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
-#include "code/ylikuutio/ontology/object_type.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/world_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
@@ -739,8 +738,7 @@ TEST(object_must_be_initialized_appropriately, headless)
     species_struct.material = material;
     yli::ontology::Species* const species = new yli::ontology::Species(universe, species_struct, &material->parent_of_species);
 
-    yli::ontology::ObjectStruct object_struct;
-    object_struct.species_parent = species;
+    yli::ontology::ObjectStruct object_struct(species);
     yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species->parent_of_objects, nullptr);
 
     // `Entity` member functions of `Universe`.
@@ -773,8 +771,7 @@ TEST(object_must_be_initialized_appropriately, headless)
 
 TEST(object_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_material_no_species)
 {
-    yli::ontology::ObjectStruct object_struct;
-    object_struct.species_parent = nullptr;
+    yli::ontology::ObjectStruct object_struct(static_cast<yli::ontology::Species*>(nullptr));
     yli::ontology::Object* const object = new yli::ontology::Object(nullptr, object_struct, nullptr, nullptr);
 
     // `Entity` member functions.
@@ -1471,9 +1468,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
     yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(universe, shapeshifter_sequence_struct);
 
-    yli::ontology::ObjectStruct object_struct;
-    object_struct.shapeshifter_sequence_parent = shapeshifter_sequence;
-    object_struct.object_type = yli::ontology::ObjectType::SHAPESHIFTER;
+    yli::ontology::ObjectStruct object_struct(shapeshifter_sequence);
     yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &shapeshifter_sequence->parent_of_objects, nullptr);
 
     // `Entity` member functions of `Universe`.
@@ -1532,9 +1527,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_world
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
     yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct);
 
-    yli::ontology::ObjectStruct object_struct;
-    object_struct.shapeshifter_sequence_parent = shapeshifter_sequence;
-    object_struct.object_type = yli::ontology::ObjectType::SHAPESHIFTER;
+    yli::ontology::ObjectStruct object_struct(shapeshifter_sequence);
     yli::ontology::Object* const object = new yli::ontology::Object(nullptr, object_struct, &shapeshifter_sequence->parent_of_objects, nullptr);
 
     // `Entity` member functions of `ShapeshifterTransformation`.
@@ -1569,9 +1562,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_world
     shapeshifter_sequence_struct.parent = nullptr;
     yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct);
 
-    yli::ontology::ObjectStruct object_struct;
-    object_struct.shapeshifter_sequence_parent = shapeshifter_sequence;
-    object_struct.object_type = yli::ontology::ObjectType::SHAPESHIFTER;
+    yli::ontology::ObjectStruct object_struct(shapeshifter_sequence);
     yli::ontology::Object* const object = new yli::ontology::Object(nullptr, object_struct, &shapeshifter_sequence->parent_of_objects, nullptr);
 
     // `Entity` member functions.
@@ -2143,8 +2134,7 @@ TEST(object_must_bind_to_species_appropriately, species_of_the_same_material)
     species_struct1.material = material;
     yli::ontology::Species* const species1 = new yli::ontology::Species(universe, species_struct1, &material->parent_of_species);
 
-    yli::ontology::ObjectStruct object_struct;
-    object_struct.species_parent = species1;
+    yli::ontology::ObjectStruct object_struct(species1);
     yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species1->parent_of_objects, nullptr);
     ASSERT_EQ(object->get_parent(), species1);
     ASSERT_EQ(species1->get_number_of_non_variable_children(), 1);
@@ -2203,8 +2193,7 @@ TEST(object_must_bind_to_species_appropriately, species_of_different_materials)
     species_struct1.material = material1;
     yli::ontology::Species* const species1 = new yli::ontology::Species(universe, species_struct1, &material1->parent_of_species);
 
-    yli::ontology::ObjectStruct object_struct;
-    object_struct.species_parent = species1;
+    yli::ontology::ObjectStruct object_struct(species1);
     yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species1->parent_of_objects, nullptr);
     ASSERT_EQ(object->get_parent(), species1);
     ASSERT_EQ(species1->get_number_of_non_variable_children(), 1);
@@ -2385,8 +2374,7 @@ TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
     species_struct.material = material;
     yli::ontology::Species* const species = new yli::ontology::Species(universe, species_struct, &material->parent_of_species);
 
-    yli::ontology::ObjectStruct object_struct;
-    object_struct.species_parent = species;
+    yli::ontology::ObjectStruct object_struct(species);
     yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species->parent_of_objects, nullptr);
 
     ASSERT_EQ(brain->get_number_of_apprentices(), 0);
@@ -3561,8 +3549,7 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     species_struct1.material = material;
     yli::ontology::Species* const species1 = new yli::ontology::Species(universe, species_struct1, &material->parent_of_species);
 
-    yli::ontology::ObjectStruct object_struct;
-    object_struct.species_parent = species1;
+    yli::ontology::ObjectStruct object_struct(species1);
     yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species1->parent_of_objects, nullptr);
 
     yli::ontology::SpeciesStruct species_struct2;
@@ -3614,8 +3601,7 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     species_struct1.material = material;
     yli::ontology::Species* const species1 = new yli::ontology::Species(universe, species_struct1, &material->parent_of_species);
 
-    yli::ontology::ObjectStruct object_struct;
-    object_struct.species_parent = species1;
+    yli::ontology::ObjectStruct object_struct(species1);
     yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species1->parent_of_objects, nullptr);
 
     yli::ontology::SpeciesStruct species_struct2;
@@ -3672,8 +3658,7 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     species_struct1.material = material;
     yli::ontology::Species* const species1 = new yli::ontology::Species(universe, species_struct1, &material->parent_of_species);
 
-    yli::ontology::ObjectStruct object_struct1;
-    object_struct1.species_parent = species1;
+    yli::ontology::ObjectStruct object_struct1(species1);
     yli::ontology::Object* const object1 = new yli::ontology::Object(universe, object_struct1, &species1->parent_of_objects, nullptr);
 
     yli::ontology::SpeciesStruct species_struct2;
@@ -3682,8 +3667,7 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     species_struct2.material = material;
     yli::ontology::Species* const species2 = new yli::ontology::Species(universe, species_struct2, &material->parent_of_species);
 
-    yli::ontology::ObjectStruct object_struct2;
-    object_struct2.species_parent = species2;
+    yli::ontology::ObjectStruct object_struct2(species2);
     yli::ontology::Object* const object2 = new yli::ontology::Object(universe, object_struct2, &species2->parent_of_objects, nullptr);
 
     object1->set_local_name("foo");
@@ -3723,8 +3707,7 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     species_struct1.material = material;
     yli::ontology::Species* const species1 = new yli::ontology::Species(universe, species_struct1, &material->parent_of_species);
 
-    yli::ontology::ObjectStruct object_struct1;
-    object_struct1.species_parent = species1;
+    yli::ontology::ObjectStruct object_struct1(species1);
     yli::ontology::Object* const object1 = new yli::ontology::Object(universe, object_struct1, &species1->parent_of_objects, nullptr);
 
     yli::ontology::SpeciesStruct species_struct2;
@@ -3733,8 +3716,7 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     species_struct2.material = material;
     yli::ontology::Species* const species2 = new yli::ontology::Species(universe, species_struct2, &material->parent_of_species);
 
-    yli::ontology::ObjectStruct object_struct2;
-    object_struct2.species_parent = species2;
+    yli::ontology::ObjectStruct object_struct2(species2);
     yli::ontology::Object* const object2 = new yli::ontology::Object(universe, object_struct2, &species2->parent_of_objects, nullptr);
 
     object1->set_global_name("foo");

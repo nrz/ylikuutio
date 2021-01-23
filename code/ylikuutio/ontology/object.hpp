@@ -27,6 +27,7 @@
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
+#include <variant>  // std::holds_alternative, std::variant
 #include <vector>   // std::vector
 
 namespace yli::data
@@ -69,10 +70,17 @@ namespace yli::ontology
             {
                 // constructor.
 
-                this->object_type = object_struct.object_type;
-
-                if (this->object_type == yli::ontology::ObjectType::CHARACTER)
+                if (std::holds_alternative<yli::ontology::Species*>(object_struct.parent))
                 {
+                    this->object_type = yli::ontology::ObjectType::REGULAR;
+                }
+                else if (std::holds_alternative<yli::ontology::ShapeshifterSequence*>(object_struct.parent))
+                {
+                    this->object_type = yli::ontology::ObjectType::SHAPESHIFTER;
+                }
+                else if (std::holds_alternative<yli::ontology::Text3D*>(object_struct.parent))
+                {
+                    this->object_type = yli::ontology::ObjectType::CHARACTER;
                     this->glyph = object_struct.glyph;
                 }
 
@@ -122,7 +130,7 @@ namespace yli::ontology
 
             yli::ontology::Glyph* glyph { nullptr }; // pointer to the `Glyph` (not a parent!).
 
-            yli::ontology::ObjectType object_type;
+            yli::ontology::ObjectType object_type { yli::ontology::ObjectType::REGULAR };
     };
 }
 

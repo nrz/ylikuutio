@@ -19,7 +19,9 @@
 #define __YLIKUUTIO_ONTOLOGY_OBJECT_STRUCT_HPP_INCLUDED
 
 #include "movable_struct.hpp"
-#include "object_type.hpp"
+
+// Include standard headers
+#include <variant> // std::holds_alternative, std::variant
 
 namespace yli::ontology
 {
@@ -31,19 +33,27 @@ namespace yli::ontology
 
     struct ObjectStruct: public yli::ontology::MovableStruct
     {
-        ObjectStruct()
+        ObjectStruct(yli::ontology::Species* const parent)
+            : parent { parent }
         {
             // constructor.
         }
 
-        yli::ontology::Species* species_parent { nullptr };                            // pointer to the parent `Species`.
-        yli::ontology::ShapeshifterSequence* shapeshifter_sequence_parent { nullptr }; // pointer to the `ShapeshifterSequence` parent.
-        yli::ontology::Text3D* text_3d_parent { nullptr };                             // pointer to the parent `Text3D`.
+        ObjectStruct(yli::ontology::ShapeshifterSequence* const parent)
+            : parent { parent }
+        {
+            // constructor.
+        }
+
+        ObjectStruct(yli::ontology::Text3D* const parent)
+            : parent { parent }
+        {
+            // constructor.
+        }
+
+        std::variant<yli::ontology::Species*, yli::ontology::ShapeshifterSequence*, yli::ontology::Text3D*> parent;
         yli::ontology::Glyph* glyph { nullptr };                                       // pointer to the `Glyph` (not a parent!).
         yli::ontology::Brain* brain { nullptr };                                       // pointer to the `Brain` master.
-
-        // The parent of a character object is a `Glyph`. The parent of a regular object is a `Species`.
-        yli::ontology::ObjectType object_type { yli::ontology::ObjectType::REGULAR };
     };
 }
 
