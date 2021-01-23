@@ -136,8 +136,8 @@ namespace yli::ontology
             std::size_t image_height { 0 };
             std::size_t image_size   { 0 };
 
-            GLuint texture           { 0 };       // Texture of this `Material`, returned by `load_common_texture` (used for `glGenTextures` etc.).
-            GLuint opengl_texture_id { 0 };       // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`.
+            GLuint texture           { 0 }; // Texture of this `Material`, returned by `load_common_texture` (used for `glGenTextures` etc.). Dummy value.
+            GLuint opengl_texture_id { 0 }; // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`. Dummy value.
 
         private:
             std::size_t get_number_of_children() const override;
