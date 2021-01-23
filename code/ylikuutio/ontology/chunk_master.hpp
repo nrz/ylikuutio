@@ -26,7 +26,6 @@
 #include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
 #include <queue>    // std::queue
 #include <vector>   // std::vector
 
@@ -73,8 +72,6 @@ namespace yli::ontology
 
             // this method renders all `Chunk`s bound to this `ChunkMaster`.
             void render();
-
-            std::size_t childID;
 
             // Callback used to get the content based on x, y, z.
             GetContentCallback get_content_callback { nullptr };
