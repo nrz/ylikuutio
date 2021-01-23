@@ -34,7 +34,7 @@ namespace yli::lisp
             const std::vector<std::string>& parameter_vector)
     {
         // Call the corresponding `yli::ontology::LispFunction`, if there is one.
-        // `LispFunction` itself takes care of resolving the correct overbind
+        // `LispFunction` itself takes care of resolving the correct overload
         // and binding the arguments and calling the overload with the arguments.
 
         std::shared_ptr<yli::data::AnyValue> any_value = nullptr;
