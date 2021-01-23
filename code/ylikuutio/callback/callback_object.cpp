@@ -26,7 +26,6 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
-#include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
 namespace yli::callback
