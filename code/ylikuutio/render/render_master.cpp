@@ -55,11 +55,11 @@ namespace yli::ontology
 namespace yli::render
 {
     RenderMaster::RenderMaster(yli::ontology::Universe* const universe, const yli::render::RenderMasterStruct& render_master_struct)
-        : universe(universe),
-        hidden_window_title(render_master_struct.hidden_window_title),
-        hidden_window_width(render_master_struct.hidden_window_width),
-        hidden_window_height(render_master_struct.hidden_window_height),
-        is_hidden_window_fullscreen(render_master_struct.is_hidden_window_fullscreen)
+        : universe { universe },
+        hidden_window_title { render_master_struct.hidden_window_title },
+        hidden_window_width { render_master_struct.hidden_window_width },
+        hidden_window_height { render_master_struct.hidden_window_height },
+        is_hidden_window_fullscreen { render_master_struct.is_hidden_window_fullscreen }
     {
         // constructor.
 
