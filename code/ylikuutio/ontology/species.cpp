@@ -129,13 +129,13 @@ namespace yli::ontology
         return this->image_width;
     }
 
-    const std::string& Species::get_model_file_format() const
-    {
-        return this->model_file_format;
-    }
-
     std::size_t Species::get_image_height() const
     {
         return this->image_height;
+    }
+
+    const std::string& Species::get_model_file_format() const
+    {
+        return this->model_file_format;
     }
 }
