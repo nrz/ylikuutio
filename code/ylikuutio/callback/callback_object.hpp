@@ -93,7 +93,7 @@ namespace yli::callback
             // execute this callback with a parameter.
             virtual std::shared_ptr<yli::data::AnyValue> execute(std::shared_ptr<yli::data::AnyValue> any_value);
 
-            std::size_t childID { std::numeric_limits<std::size_t>::max() }; // callback object ID, returned by `yli::callback::CallbackEngine->get_callback_objectID()`.
+            std::size_t childID { std::numeric_limits<std::size_t>::max() };
 
             // A hash map used to store variables.
             std::unordered_map<std::string, yli::data::AnyValue> anyvalue_hashmap;

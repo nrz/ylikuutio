@@ -58,7 +58,7 @@ namespace yli::callback
 
             yli::callback::CallbackObject* parent { nullptr }; // pointer to the callback object.
 
-            std::size_t childID { std::numeric_limits<std::size_t>::max() }; // callback parameter ID, returned by `yli::callback::CallbackObject->get_callback_parameterID()`.
+            std::size_t childID { std::numeric_limits<std::size_t>::max() };
 
             std::string name;
             std::shared_ptr<yli::data::AnyValue> any_value { nullptr }; // this is `private` to make sure that someone does not overwrite it.
