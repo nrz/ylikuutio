@@ -218,13 +218,12 @@ parent_class_forward_declaration = \
 
 struct_constructor_lines = \
 "        " + struct_variable_type + "()\n"\
-"            : parent(nullptr)\n"\
 "        {\n"\
 "            // constructor.\n"\
 "        }"
 
 parent_pointer_lines = \
-"        " + fully_qualified_parent_class_name + "* parent;"
+"        " + fully_qualified_parent_class_name + "* parent { nullptr };"
 
 with open(class_filename_hpp, 'w') as f:
     print(copyright_notice, file = f)
