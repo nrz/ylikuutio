@@ -48,15 +48,12 @@ namespace yli::callback
     CallbackEngine::CallbackEngine()
     {
         // constructor.
-        this->universe = nullptr;
-        this->number_of_callback_objects = 0;
     }
 
     CallbackEngine::CallbackEngine(yli::ontology::Universe* const universe)
     {
         // constructor.
         this->universe = universe;
-        this->number_of_callback_objects = 0;
     }
 
     CallbackEngine::~CallbackEngine()

@@ -90,14 +90,14 @@ namespace yli::callback
             // `CallbackEngine` is not an `Entity`.
             // Therefore they are not descendants of the `Universe`.
             // Some `CallbackEngine`s just have a pointer to the `Universe`.
-            yli::ontology::Universe* universe;
+            yli::ontology::Universe* universe { nullptr };
 
             // this method sets a callback object pointer.
             void set_callback_object_pointer(const std::size_t childID, yli::callback::CallbackObject* const child_pointer);
 
             std::vector<yli::callback::CallbackObject*> callback_object_pointer_vector;
             std::queue<std::size_t> free_callback_objectID_queue;
-            std::size_t number_of_callback_objects;
+            std::size_t number_of_callback_objects { 0 };
 
             std::vector<std::shared_ptr<yli::data::AnyValue>> return_values;
     };
