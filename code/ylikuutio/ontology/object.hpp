@@ -75,10 +75,6 @@ namespace yli::ontology
                 {
                     this->glyph = object_struct.glyph;
                 }
-                else
-                {
-                    this->glyph = nullptr;
-                }
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Object*";
@@ -126,7 +122,7 @@ namespace yli::ontology
 
             yli::ontology::Glyph* glyph { nullptr }; // pointer to the `Glyph` (not a parent!).
 
-            yli::ontology::ObjectType object_type { yli::ontology::ObjectType::REGULAR };
+            yli::ontology::ObjectType object_type;
     };
 }
 
