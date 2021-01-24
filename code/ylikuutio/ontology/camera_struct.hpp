@@ -28,7 +28,6 @@ namespace yli::ontology
     struct CameraStruct: public yli::ontology::MovableStruct
     {
         CameraStruct()
-            : MovableStruct()
         {
             // constructor.
         }

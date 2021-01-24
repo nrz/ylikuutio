@@ -9,6 +9,7 @@ Fixes needed:
 Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] Add support for Tab complete for local names in `Console`.
 [ ] Add support for printing alternatives completions in `Console`.
+[ ] Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
 [ ] Add support in `Console` for indexing the children of an `Entity` through the `Registry` and `ParentModule`, e.g. `foo_entity.bar_children[0]`.
 [ ] Add support in `Console` for indexing the apprentices of an `Entity` through the `Registry` and `MasterModule`, e.g. `foo_entity.bar_apprentices[0]`.
 [ ] Implement `yli::ontology::Window` class.

@@ -15,30 +15,12 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_TEXT_3D_STRUCT_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_TEXT_3D_STRUCT_HPP_INCLUDED
+#include "gtest/gtest.h"
+#include "code/ylikuutio/ontology/brain_struct.hpp"
 
-#include "movable_struct.hpp"
-
-// Include standard headers
-#include <string>   // std::string
-
-namespace yli::ontology
+TEST(brain_struct_must_be_initialized_appropriately, brain_struct)
 {
-    class Brain;
-    class VectorFont;
-
-    struct Text3DStruct: public yli::ontology::MovableStruct
-    {
-        Text3DStruct()
-        {
-            // constructor.
-        }
-
-        std::string text_string;
-        yli::ontology::VectorFont* parent { nullptr }; // pointer to the `VectorFont` (parent).
-        yli::ontology::Brain* brain { nullptr };       // pointer to the `Brain` master.
-    };
+    const yli::ontology::BrainStruct test_brain_struct;
+    ASSERT_EQ(test_brain_struct.parent, nullptr);
+    ASSERT_EQ(test_brain_struct.callback_engine, nullptr);
 }
-
-#endif

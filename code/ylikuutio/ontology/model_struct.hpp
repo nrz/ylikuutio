@@ -25,7 +25,6 @@ namespace yli::ontology
     struct ModelStruct: public yli::ontology::EntityStruct
     {
         ModelStruct()
-            : EntityStruct()
         {
             // constructor.
         }

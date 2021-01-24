@@ -59,15 +59,15 @@ namespace yli::input
             yli::input::InputMethod get_input_method() const;
 
         private:
-            yli::ontology::Universe* universe;
+            yli::ontology::Universe* universe { nullptr };
 
-            yli::input::InputMode* active_input_mode;
+            yli::input::InputMode* active_input_mode { nullptr };
 
             std::stack<yli::input::InputMode*> input_mode_stack;
 
             std::vector<yli::input::InputMode*> input_mode_pointer_vector;
             std::queue<std::size_t> free_input_modeID_queue;
-            std::size_t number_of_input_modes;
+            std::size_t number_of_input_modes { 0 };
 
             yli::input::InputMethod input_method;
     };

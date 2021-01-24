@@ -40,7 +40,6 @@ namespace yli::ontology
     struct MovableStruct: public yli::ontology::EntityStruct
     {
         MovableStruct()
-            : EntityStruct()
         {
             // constructor.
         }

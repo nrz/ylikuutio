@@ -37,24 +37,13 @@ namespace yli::ontology
     struct VariableStruct: public yli::ontology::EntityStruct
     {
         VariableStruct()
-            : EntityStruct(),
-            parent(nullptr),
-            initial_value(nullptr),
-            activate_callback(nullptr),
-            read_callback(nullptr),
-            should_ylikuutio_call_activate_callback_now(true)
         {
             // constructor.
             this->is_variable = true;
         }
 
         VariableStruct(std::shared_ptr<yli::data::AnyValue> initial_value)
-            : EntityStruct(),
-            parent(nullptr),
-            initial_value(initial_value),
-            activate_callback(nullptr),
-            read_callback(nullptr),
-            should_ylikuutio_call_activate_callback_now(true)
+            : initial_value { initial_value }
         {
             // constructor.
             this->is_variable = true;
@@ -62,11 +51,11 @@ namespace yli::ontology
 
         VariableStruct(const yli::ontology::VariableStruct& variable_struct)
             : EntityStruct(variable_struct),
-            parent(variable_struct.parent),
-            initial_value(variable_struct.initial_value),
-            activate_callback(variable_struct.activate_callback),
-            read_callback(variable_struct.read_callback),
-            should_ylikuutio_call_activate_callback_now(variable_struct.should_ylikuutio_call_activate_callback_now)
+            parent { variable_struct.parent },
+            initial_value { variable_struct.initial_value },
+            activate_callback { variable_struct.activate_callback },
+            read_callback { variable_struct.read_callback },
+            should_call_activate_callback_now { variable_struct.should_call_activate_callback_now }
         {
             // copy constructor.
             this->global_name = variable_struct.global_name;
@@ -74,11 +63,11 @@ namespace yli::ontology
             this->is_variable = true;
         }
 
-        yli::ontology::Entity* parent;
-        std::shared_ptr<yli::data::AnyValue> initial_value;
-        ActivateCallback activate_callback;
-        ReadCallback read_callback;
-        bool should_ylikuutio_call_activate_callback_now;
+        yli::ontology::Entity* parent                      { nullptr };
+        std::shared_ptr<yli::data::AnyValue> initial_value { nullptr };
+        ActivateCallback activate_callback                 { nullptr };
+        ReadCallback read_callback                         { nullptr };
+        bool should_call_activate_callback_now             { true };
     };
 }
 

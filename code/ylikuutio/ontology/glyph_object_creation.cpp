@@ -63,11 +63,9 @@ namespace yli::ontology
 
             std::cout << "Creating the glyph Object for unicode_value 0x" << std::hex << unicode_value << std::dec << "\n";
 
-            yli::ontology::ObjectStruct object_struct;
+            yli::ontology::ObjectStruct object_struct(text_3d);
             object_struct.glyph = glyph_pointer;
-            object_struct.text_3d_parent = text_3d;
             object_struct.original_scale_vector = text_3d->original_scale_vector;
-            object_struct.object_type = yli::ontology::ObjectType::CHARACTER;
             object_struct.cartesian_coordinates = text_3d->cartesian_coordinates; // TODO: adjust this as needed.
 
             yli::ontology::EntityFactory* const entity_factory = text_3d->get_entity_factory();

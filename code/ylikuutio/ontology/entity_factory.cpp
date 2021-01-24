@@ -63,6 +63,7 @@
 #include <cstddef>   // std::size_t
 #include <memory>    // std::make_shared, std::shared_ptr
 #include <string>    // std::string
+#include <variant>   // std::holds_alternative, std::variant
 
 namespace yli::ontology
 {
@@ -109,7 +110,7 @@ namespace yli::ontology
             variable_entity->set_local_name(variable_struct.local_name);
         }
 
-        if (variable_struct.should_ylikuutio_call_activate_callback_now)
+        if (variable_struct.should_call_activate_callback_now)
         {
             variable_entity->activate();
         }
@@ -187,9 +188,12 @@ namespace yli::ontology
         yli::ontology::Entity* object_entity = new yli::ontology::Object(
                 this->universe,
                 object_struct,
-                (object_struct.object_type == yli::ontology::ObjectType::REGULAR ? &object_struct.species_parent->parent_of_objects :
-                 object_struct.object_type == yli::ontology::ObjectType::SHAPESHIFTER ? &object_struct.shapeshifter_sequence_parent->parent_of_objects :
-                 object_struct.object_type == yli::ontology::ObjectType::CHARACTER ? &object_struct.text_3d_parent->parent_of_objects :
+                (std::holds_alternative<yli::ontology::Species*>(object_struct.parent) ?
+                 &(std::get<yli::ontology::Species*>(object_struct.parent)->parent_of_objects) :
+                 std::holds_alternative<yli::ontology::ShapeshifterSequence*>(object_struct.parent) ?
+                 &(std::get<yli::ontology::ShapeshifterSequence*>(object_struct.parent)->parent_of_objects) :
+                 std::holds_alternative<yli::ontology::Text3D*>(object_struct.parent) ?
+                 &(std::get<yli::ontology::Text3D*>(object_struct.parent)->parent_of_objects) :
                  nullptr),
                 (object_struct.brain == nullptr ? nullptr : object_struct.brain->get_master_module()));
 

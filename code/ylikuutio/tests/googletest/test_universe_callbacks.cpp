@@ -87,8 +87,7 @@ TEST(object_must_be_bound_to_species_appropriately, universe_callback)
 
     const std::string object_name = "bar";
 
-    yli::ontology::ObjectStruct object_struct;
-    object_struct.species_parent = species1;
+    yli::ontology::ObjectStruct object_struct(species1);
     yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species1->parent_of_objects, nullptr);
     object->set_global_name(object_name);
 

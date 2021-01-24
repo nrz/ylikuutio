@@ -117,8 +117,8 @@ namespace gpgpu_test
         identity_shader_csv_unsigned_short_compute_task_struct.format = GL_RED;
         identity_shader_csv_unsigned_short_compute_task_struct.internal_format = GL_R16;
         identity_shader_csv_unsigned_short_compute_task_struct.type = GL_UNSIGNED_SHORT;
-        identity_shader_csv_unsigned_short_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
-        identity_shader_csv_unsigned_short_compute_task_struct.should_ylikuutio_flip_texture = false;
+        identity_shader_csv_unsigned_short_compute_task_struct.should_save_intermediate_results = true;
+        identity_shader_csv_unsigned_short_compute_task_struct.should_flip_texture = false;
 
         std::cout << "Creating yli::ontology::Entity* identity_shader_csv_unsigned_short_compute_task_entity ...\n";
         yli::ontology::Entity* const identity_shader_csv_unsigned_short_compute_task_entity = entity_factory->create_compute_task(identity_shader_csv_unsigned_short_compute_task_struct);
@@ -156,7 +156,7 @@ namespace gpgpu_test
         sobel_shader_compute_task_struct.n_max_iterations = 5;
         sobel_shader_compute_task_struct.texture_width = 512;
         sobel_shader_compute_task_struct.texture_height = 512;
-        sobel_shader_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
+        sobel_shader_compute_task_struct.should_save_intermediate_results = true;
 
         std::cout << "Creating yli::ontology::Entity* sobel_shader_compute_task_entity ...\n";
         yli::ontology::Entity* const sobel_shader_compute_task_entity = entity_factory->create_compute_task(sobel_shader_compute_task_struct);
@@ -194,7 +194,7 @@ namespace gpgpu_test
         go_west_shader_compute_task_struct.n_max_iterations = 256;
         go_west_shader_compute_task_struct.texture_width = 512;
         go_west_shader_compute_task_struct.texture_height = 512;
-        go_west_shader_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
+        go_west_shader_compute_task_struct.should_save_intermediate_results = true;
 
         std::cout << "Creating yli::ontology::Entity* go_west_shader_compute_task_entity ...\n";
         yli::ontology::Entity* const go_west_shader_compute_task_entity = entity_factory->create_compute_task(go_west_shader_compute_task_struct);
@@ -232,7 +232,7 @@ namespace gpgpu_test
         vanish_west_shader_compute_task_struct.n_max_iterations = 256;
         vanish_west_shader_compute_task_struct.texture_width = 512;
         vanish_west_shader_compute_task_struct.texture_height = 512;
-        vanish_west_shader_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
+        vanish_west_shader_compute_task_struct.should_save_intermediate_results = true;
 
         std::cout << "Creating yli::ontology::Entity* vanish_west_shader_compute_task_entity ...\n";
         yli::ontology::Entity* const vanish_west_shader_compute_task_entity = entity_factory->create_compute_task(vanish_west_shader_compute_task_struct);
@@ -271,8 +271,8 @@ namespace gpgpu_test
         floyd_warshall_shader_csv_unsigned_short_compute_task_struct.format = GL_RED;
         floyd_warshall_shader_csv_unsigned_short_compute_task_struct.internal_format = GL_R16;
         floyd_warshall_shader_csv_unsigned_short_compute_task_struct.type = GL_UNSIGNED_SHORT;
-        floyd_warshall_shader_csv_unsigned_short_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
-        floyd_warshall_shader_csv_unsigned_short_compute_task_struct.should_ylikuutio_flip_texture = false;
+        floyd_warshall_shader_csv_unsigned_short_compute_task_struct.should_save_intermediate_results = true;
+        floyd_warshall_shader_csv_unsigned_short_compute_task_struct.should_flip_texture = false;
 
         std::cout << "Creating yli::ontology::Entity* floyd_warshall_shader_csv_unsigned_short_compute_task_entity ...\n";
         yli::ontology::Entity* const floyd_warshall_shader_csv_unsigned_short_compute_task_entity = entity_factory->create_compute_task(floyd_warshall_shader_csv_unsigned_short_compute_task_struct);
@@ -294,8 +294,8 @@ namespace gpgpu_test
         floyd_warshall_shader_csv_float_compute_task_struct.format = GL_RED;
         floyd_warshall_shader_csv_float_compute_task_struct.internal_format = GL_R32F;
         floyd_warshall_shader_csv_float_compute_task_struct.type = GL_FLOAT;
-        floyd_warshall_shader_csv_float_compute_task_struct.should_ylikuutio_save_intermediate_results = true;
-        floyd_warshall_shader_csv_float_compute_task_struct.should_ylikuutio_flip_texture = false;
+        floyd_warshall_shader_csv_float_compute_task_struct.should_save_intermediate_results = true;
+        floyd_warshall_shader_csv_float_compute_task_struct.should_flip_texture = false;
 
         std::cout << "Creating yli::ontology::Entity* floyd_warshall_shader_csv_float_compute_task_entity ...\n";
         yli::ontology::Entity* const floyd_warshall_shader_csv_float_compute_task_entity = entity_factory->create_compute_task(floyd_warshall_shader_csv_float_compute_task_struct);

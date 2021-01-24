@@ -22,6 +22,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <limits>   // std::numeric_limits
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
@@ -68,8 +69,8 @@ namespace yli::input
             InputMode(const InputMode&) = delete;            // Delete copy constructor.
             yli::input::InputMode& operator=(const InputMode&) = delete; // Delete copy assignment.
 
-            yli::input::InputMaster* parent;
-            std::size_t childID;
+            yli::input::InputMaster* parent { nullptr };
+            std::size_t childID { std::numeric_limits<std::size_t>::max() };
 
             std::vector<yli::callback::CallbackEngine*> keypress_callback_engines;
             std::vector<yli::callback::CallbackEngine*> keyrelease_callback_engines;

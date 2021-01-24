@@ -55,7 +55,7 @@ namespace yli::opengl
                 const std::size_t texture_width,
                 const std::size_t texture_height,
                 const std::size_t texture_depth,
-                const bool should_ylikuutio_flip_texture)
+                const bool should_flip_texture)
         {
             // Transfer data from the GPU texture to a CPU array.
             const std::size_t n_color_channels = yli::opengl::get_n_color_channels(format);
@@ -66,7 +66,7 @@ namespace yli::opengl
             glReadBuffer(GL_COLOR_ATTACHMENT0);
             glReadPixels(0, 0, texture_width, texture_height, format, type, result_array);
 
-            if (should_ylikuutio_flip_texture)
+            if (should_flip_texture)
             {
                 yli::memory::flip_vertically(result_array, n_color_channels * texture_width, texture_height);
             }
@@ -85,7 +85,7 @@ namespace yli::opengl
                 const std::size_t texture_height,
                 const std::size_t texture_depth,
                 const std::string& filename,
-                const bool should_ylikuutio_flip_texture);
+                const bool should_flip_texture);
 
         void save_data_from_gpu_texture_into_file(
                 const GLenum format,
@@ -93,7 +93,7 @@ namespace yli::opengl
                 const std::size_t texture_width,
                 const std::size_t texture_height,
                 const std::string& filename,
-                const bool should_ylikuutio_flip_texture);
+                const bool should_flip_texture);
 
         GLenum get_base_format(const GLenum format);
 }

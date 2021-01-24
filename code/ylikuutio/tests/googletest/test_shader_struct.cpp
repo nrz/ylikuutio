@@ -18,7 +18,7 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 
-TEST(ShaderStruct_must_be_initialized_appropriately, ShaderStruct)
+TEST(shader_struct_must_be_initialized_appropriately, shader_struct)
 {
     const yli::ontology::ShaderStruct test_shader_struct;
     ASSERT_EQ(test_shader_struct.parent, nullptr);

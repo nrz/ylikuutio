@@ -53,9 +53,8 @@ namespace yli::ontology
             {
                 // constructor.
 
-                this->biontID          = biont_struct.biontID;
-
-                this->should_render    = biont_struct.should_render;
+                this->biontID       = biont_struct.biontID;
+                this->should_render = biont_struct.should_render;
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Biont*";

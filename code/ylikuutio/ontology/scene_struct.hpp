@@ -28,21 +28,18 @@ namespace yli::ontology
     struct SceneStruct: public yli::ontology::EntityStruct
     {
         SceneStruct()
-            : world(nullptr),
-            gravity(9.81f / 60.0f),  // default Earth gravity (9.81 m/s^2).
-            water_level(0.0f),       // default water level: 0.0 meters.
-            is_flight_mode_in_use(true)
         {
             // constructor.
         }
 
         CameraStruct default_camera_struct; // parameters of the default `Camera`.
 
-        yli::ontology::World* world; // pointer to `World` object.
-        float gravity;               // In Bullet, gravity is a feature of `btDiscreteDynamicsWorld` & `
-                                     // `btSoftRigidDynamicsWorld` (`btSoftRigidDynamicsWorld` inherits `btDiscreteDynamicsWorld`).
-        float water_level;
-        bool is_flight_mode_in_use;
+        yli::ontology::World* world { nullptr }; // pointer to `World` object.
+        float gravity { 9.81f / 60.0f };         // Default gravity: Earth gravity, 9.81 m/s^2.
+                                                 // In Bullet, gravity is a feature of `btDiscreteDynamicsWorld` & `btSoftRigidDynamicsWorld`
+                                                 // (`btSoftRigidDynamicsWorld` inherits `btDiscreteDynamicsWorld`).
+        float water_level { 0.0f };              // Default water level: 0.0 meters.
+        bool is_flight_mode_in_use { true };
     };
 }
 

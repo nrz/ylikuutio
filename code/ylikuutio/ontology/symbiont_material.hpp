@@ -48,7 +48,7 @@ namespace yli::ontology
                 : Material(universe, material_struct, parent_module)
             {
                 // constructor.
-                this->ofbx_texture               = material_struct.ofbx_texture;
+                this->ofbx_texture = material_struct.ofbx_texture;
                 this->load_texture();
 
                 // `yli::ontology::Entity` member variables begin here.

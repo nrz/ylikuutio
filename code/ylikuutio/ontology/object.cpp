@@ -425,9 +425,8 @@ namespace yli::ontology
         float float_y = std::get<float>(y_any_value.data);
         float float_z = std::get<float>(z_any_value.data);
 
-        yli::ontology::ObjectStruct object_struct;
+        yli::ontology::ObjectStruct object_struct(parent);
         object_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
-        object_struct.species_parent = parent;
         object_struct.local_name = *object_name;
         entity_factory->create_object(object_struct);
         return nullptr;
@@ -496,11 +495,10 @@ namespace yli::ontology
         float float_yaw = std::get<float>(yaw_any_value.data);
         float float_pitch = std::get<float>(pitch_any_value.data);
 
-        yli::ontology::ObjectStruct object_struct;
+        yli::ontology::ObjectStruct object_struct(parent);
         object_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
         object_struct.yaw = float_yaw;
         object_struct.pitch = float_pitch;
-        object_struct.species_parent = parent;
         object_struct.local_name = *object_name;
         entity_factory->create_object(object_struct);
         return nullptr;

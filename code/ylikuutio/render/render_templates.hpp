@@ -19,8 +19,8 @@
 #define __YLIKUUTIO_RENDER_RENDER_TEMPLATES_HPP_INCLUDED
 
 // Include standard headers
-#include <cstddef>  // std::size_t
-#include <vector>   // std::vector
+#include <cstddef> // std::size_t
+#include <vector>  // std::vector
 
 namespace yli::render
 {

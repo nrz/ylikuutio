@@ -630,8 +630,6 @@ namespace yli::ontology
 
             console->move_cursor_to_end_of_line();
 
-            // console->print_text
-
             console->can_tab = false;
         }
         return nullptr;

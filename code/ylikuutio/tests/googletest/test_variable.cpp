@@ -794,7 +794,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     x_variable_struct.local_name = "x";
     x_variable_struct.activate_callback = &yli::ontology::activate_x;
     x_variable_struct.read_callback = &yli::ontology::read_x;
-    x_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    x_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("x"), nullptr);
     universe->create_variable(x_variable_struct);
 
@@ -819,7 +819,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     y_variable_struct.local_name = "y";
     y_variable_struct.activate_callback = &yli::ontology::activate_y;
     y_variable_struct.read_callback = &yli::ontology::read_y;
-    y_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    y_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("y"), nullptr);
     universe->create_variable(y_variable_struct);
 
@@ -844,7 +844,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     z_variable_struct.local_name = "z";
     z_variable_struct.activate_callback = &yli::ontology::activate_z;
     z_variable_struct.read_callback = &yli::ontology::read_z;
-    z_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    z_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("z"), nullptr);
     universe->create_variable(z_variable_struct);
 
@@ -868,7 +868,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::VariableStruct red_variable_struct(std::make_shared<yli::data::AnyValue>(red));
     red_variable_struct.local_name = "red";
     red_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
-    red_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    red_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("red"), nullptr);
     universe->create_variable(red_variable_struct);
 
@@ -892,7 +892,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::VariableStruct red_variable_struct(std::make_shared<yli::data::AnyValue>(red));
     red_variable_struct.local_name = "red";
     red_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
-    red_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    red_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("red"), nullptr);
     universe->create_variable(red_variable_struct);
 
@@ -916,7 +916,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::VariableStruct red_variable_struct(std::make_shared<yli::data::AnyValue>(red));
     red_variable_struct.local_name = "red";
     red_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
-    red_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    red_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("red"), nullptr);
     universe->create_variable(red_variable_struct);
 
@@ -940,7 +940,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::VariableStruct green_variable_struct(std::make_shared<yli::data::AnyValue>(green));
     green_variable_struct.local_name = "green";
     green_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
-    green_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    green_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("green"), nullptr);
     universe->create_variable(green_variable_struct);
 
@@ -964,7 +964,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::VariableStruct green_variable_struct(std::make_shared<yli::data::AnyValue>(green));
     green_variable_struct.local_name = "green";
     green_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
-    green_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    green_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("green"), nullptr);
     universe->create_variable(green_variable_struct);
 
@@ -988,7 +988,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::VariableStruct green_variable_struct(std::make_shared<yli::data::AnyValue>(green));
     green_variable_struct.local_name = "green";
     green_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
-    green_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    green_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("green"), nullptr);
     universe->create_variable(green_variable_struct);
 
@@ -1012,7 +1012,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::VariableStruct blue_variable_struct(std::make_shared<yli::data::AnyValue>(blue));
     blue_variable_struct.local_name = "blue";
     blue_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
-    blue_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    blue_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("blue"), nullptr);
     universe->create_variable(blue_variable_struct);
 
@@ -1036,7 +1036,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::VariableStruct blue_variable_struct(std::make_shared<yli::data::AnyValue>(blue));
     blue_variable_struct.local_name = "blue";
     blue_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
-    blue_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    blue_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("blue"), nullptr);
     universe->create_variable(blue_variable_struct);
 
@@ -1060,7 +1060,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::VariableStruct blue_variable_struct(std::make_shared<yli::data::AnyValue>(blue));
     blue_variable_struct.local_name = "blue";
     blue_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
-    blue_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    blue_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("blue"), nullptr);
     universe->create_variable(blue_variable_struct);
 
@@ -1088,28 +1088,28 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
     cartesian_coordinates_variable_struct.local_name = "cartesian_coordinates";
     cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
     cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
-    cartesian_coordinates_variable_struct.should_ylikuutio_call_activate_callback_now = false;
+    cartesian_coordinates_variable_struct.should_call_activate_callback_now = false;
     universe->create_variable(cartesian_coordinates_variable_struct);
 
     yli::ontology::VariableStruct x_variable_struct(std::make_shared<yli::data::AnyValue>(x));
     x_variable_struct.local_name = "x";
     x_variable_struct.activate_callback = &yli::ontology::activate_x;
     x_variable_struct.read_callback = &yli::ontology::read_x;
-    x_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    x_variable_struct.should_call_activate_callback_now = true;
     universe->create_variable(x_variable_struct);
 
     yli::ontology::VariableStruct y_variable_struct(std::make_shared<yli::data::AnyValue>(y));
     y_variable_struct.local_name = "y";
     y_variable_struct.activate_callback = &yli::ontology::activate_y;
     y_variable_struct.read_callback = &yli::ontology::read_y;
-    y_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    y_variable_struct.should_call_activate_callback_now = true;
     universe->create_variable(y_variable_struct);
 
     yli::ontology::VariableStruct z_variable_struct(std::make_shared<yli::data::AnyValue>(z));
     z_variable_struct.local_name = "z";
     z_variable_struct.activate_callback = &yli::ontology::activate_z;
     z_variable_struct.read_callback = &yli::ontology::read_z;
-    z_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    z_variable_struct.should_call_activate_callback_now = true;
     universe->create_variable(z_variable_struct);
 
     ASSERT_NE(universe->get("x"), nullptr);
@@ -1159,28 +1159,28 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
     x_variable_struct.local_name = "x";
     x_variable_struct.activate_callback = &yli::ontology::activate_x;
     x_variable_struct.read_callback = &yli::ontology::read_x;
-    x_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    x_variable_struct.should_call_activate_callback_now = true;
     universe->create_variable(x_variable_struct);
 
     yli::ontology::VariableStruct y_variable_struct(std::make_shared<yli::data::AnyValue>(y));
     y_variable_struct.local_name = "y";
     y_variable_struct.activate_callback = &yli::ontology::activate_y;
     y_variable_struct.read_callback = &yli::ontology::read_y;
-    y_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    y_variable_struct.should_call_activate_callback_now = true;
     universe->create_variable(y_variable_struct);
 
     yli::ontology::VariableStruct z_variable_struct(std::make_shared<yli::data::AnyValue>(z));
     z_variable_struct.local_name = "z";
     z_variable_struct.activate_callback = &yli::ontology::activate_z;
     z_variable_struct.read_callback = &yli::ontology::read_z;
-    z_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    z_variable_struct.should_call_activate_callback_now = true;
     universe->create_variable(z_variable_struct);
 
     yli::ontology::VariableStruct cartesian_coordinates_variable_struct(std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
     cartesian_coordinates_variable_struct.local_name = "cartesian_coordinates";
     cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
     cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
-    cartesian_coordinates_variable_struct.should_ylikuutio_call_activate_callback_now = false;
+    cartesian_coordinates_variable_struct.should_call_activate_callback_now = false;
     universe->create_variable(cartesian_coordinates_variable_struct);
 
     ASSERT_NE(universe->get("x"), nullptr);
@@ -1230,28 +1230,28 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_u
     x_variable_struct.local_name = "x";
     x_variable_struct.activate_callback = &yli::ontology::activate_x;
     x_variable_struct.read_callback = &yli::ontology::read_x;
-    x_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    x_variable_struct.should_call_activate_callback_now = true;
     universe->create_variable(x_variable_struct);
 
     yli::ontology::VariableStruct y_variable_struct(std::make_shared<yli::data::AnyValue>(y));
     y_variable_struct.local_name = "y";
     y_variable_struct.activate_callback = &yli::ontology::activate_y;
     y_variable_struct.read_callback = &yli::ontology::read_y;
-    y_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    y_variable_struct.should_call_activate_callback_now = true;
     universe->create_variable(y_variable_struct);
 
     yli::ontology::VariableStruct z_variable_struct(std::make_shared<yli::data::AnyValue>(z));
     z_variable_struct.local_name = "z";
     z_variable_struct.activate_callback = &yli::ontology::activate_z;
     z_variable_struct.read_callback = &yli::ontology::read_z;
-    z_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+    z_variable_struct.should_call_activate_callback_now = true;
     universe->create_variable(z_variable_struct);
 
     yli::ontology::VariableStruct cartesian_coordinates_variable_struct(std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
     cartesian_coordinates_variable_struct.local_name = "cartesian_coordinates";
     cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
     cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
-    cartesian_coordinates_variable_struct.should_ylikuutio_call_activate_callback_now = false;
+    cartesian_coordinates_variable_struct.should_call_activate_callback_now = false;
     universe->create_variable(cartesian_coordinates_variable_struct);
 
     yli::ontology::Variable* x_variable = universe->get("x");

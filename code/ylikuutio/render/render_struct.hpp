@@ -32,10 +32,10 @@ namespace yli::render
 {
     struct RenderStruct
     {
-        yli::ontology::Scene* scene { nullptr };
-        yli::ontology::Console* console { nullptr };
+        yli::ontology::Scene* scene                                 { nullptr };
+        yli::ontology::Console* console                             { nullptr };
         std::vector<yli::ontology::Entity*>* font_2d_pointer_vector { nullptr };
-        SDL_Window* window { nullptr };
-        bool should_ylikuutio_change_depth_test { true };
+        SDL_Window* window                                          { nullptr };
+        bool should_change_depth_test                               { true };
     };
 }

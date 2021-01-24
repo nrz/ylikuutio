@@ -27,7 +27,6 @@ namespace yli::ontology
     struct ConsoleStruct: public yli::ontology::EntityStruct
     {
         ConsoleStruct()
-            : EntityStruct()
         {
             // constructor.
         }

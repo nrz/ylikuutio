@@ -31,13 +31,13 @@ namespace yli::snippets
         yli::ontology::VariableStruct window_width_variable_struct(std::make_shared<yli::data::AnyValue>(window_width));
         window_width_variable_struct.local_name = "window_width";
         window_width_variable_struct.activate_callback = &yli::ontology::Variable::activate_window_width;
-        window_width_variable_struct.should_ylikuutio_call_activate_callback_now = false;
+        window_width_variable_struct.should_call_activate_callback_now = false;
         entity->create_variable(window_width_variable_struct);
 
         yli::ontology::VariableStruct window_height_variable_struct(std::make_shared<yli::data::AnyValue>(window_height));
         window_height_variable_struct.local_name = "window_height";
         window_height_variable_struct.activate_callback = &yli::ontology::Variable::activate_window_height;
-        window_height_variable_struct.should_ylikuutio_call_activate_callback_now = false;
+        window_height_variable_struct.should_call_activate_callback_now = false;
         entity->create_variable(window_height_variable_struct);
     }
 }

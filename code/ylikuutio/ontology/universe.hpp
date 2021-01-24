@@ -332,23 +332,9 @@ namespace yli::ontology
                 // call `set_global_name` here because it can't be done in `Entity` constructor.
                 this->set_global_name(universe_struct.global_name);
 
-                this->entity_factory = std::make_unique<yli::ontology::EntityFactory>(this);
-
-                this->current_camera_cartesian_coordinates = glm::vec3(NAN, NAN, NAN); // dummy coordinates.
-
                 this->current_camera_spherical_coordinates.rho   = NAN; // dummy coordinates.
                 this->current_camera_spherical_coordinates.theta = NAN; // dummy coordinates.
                 this->current_camera_spherical_coordinates.phi   = NAN; // dummy coordinates.
-
-                this->active_scene       = nullptr;
-                this->active_console     = nullptr;
-                this->render_master      = nullptr;
-                this->audio_master       = nullptr;
-
-                this->background_red     = NAN;
-                this->background_green   = NAN;
-                this->background_blue    = NAN;
-                this->background_alpha   = NAN;
 
                 // Variables related to the window.
                 this->window_width       = universe_struct.window_width;
@@ -372,41 +358,13 @@ namespace yli::ontology
                 this->mouse_x       = this->window_width / 2;
                 this->mouse_y       = this->window_height / 2;
 
-                this->current_camera_projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
-                this->current_camera_view_matrix       = glm::mat4(1.0f); // identity matrix (dummy value).
-                this->current_camera_yaw               = NAN;
-                this->current_camera_pitch             = NAN;
-
                 // Variables related to the camera.
                 this->aspect_ratio = static_cast<float>(this->window_width) / static_cast<float>(this->window_height);
-
-                this->initial_fov  = 60.0f;
 
                 this->text_size = universe_struct.text_size;
                 this->font_size = universe_struct.font_size;
 
-                this->max_fps                    = universe_struct.max_fps;
-                this->last_time_to_display_fps   = yli::time::get_time();
-                this->last_time_for_display_sync = yli::time::get_time();
-                this->delta_time                 = NAN;
-                this->number_of_frames           = 0;
-
-                // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
-                this->last_time_before_reading_keyboard    = std::numeric_limits<uint32_t>::max();
-
-                // `std::numeric_limits<std::size_t>::max()` means that `current_time_before_reading_keyboard` is not defined.
-                this->current_time_before_reading_keyboard = std::numeric_limits<uint32_t>::max();
-
-                this->has_mouse_ever_moved    = false;
-
-                this->can_toggle_invert_mouse = false;
-                this->can_toggle_flight_mode  = false;
-                this->can_toggle_help_mode    = false;
-
-                this->is_invert_mouse_in_use  = false;
-                this->is_first_turbo_pressed  = false;
-                this->is_second_turbo_pressed = false;
-                this->is_exit_requested       = false;
+                this->max_fps                 = universe_struct.max_fps;
 
                 this->speed                   = universe_struct.speed;
                 this->turbo_factor            = universe_struct.turbo_factor;
@@ -415,13 +373,6 @@ namespace yli::ontology
 
                 this->znear                   = universe_struct.znear;
                 this->zfar                    = universe_struct.zfar;
-
-                this->testing_spherical_terrain_in_use = false;
-                this->in_console                       = false;
-                this->in_help_mode                     = true;
-                this->can_display_help_screen          = true;
-
-                this->number_of_entities               = 0;
 
                 if (!this->is_headless)
                 {
@@ -438,18 +389,13 @@ namespace yli::ontology
 
                 this->create_should_be_rendered_variable();
 
-                if (this->is_silent)
-                {
-                    this->audio_master = nullptr;
-                }
-                else
+                if (!this->is_silent)
                 {
                     this->audio_master = std::make_unique<yli::audio::AudioMaster>(this);
                 }
 
                 if (this->is_headless)
                 {
-                    this->input_master = nullptr;
                     this->is_exit_requested = true;
                 }
                 else
@@ -458,12 +404,6 @@ namespace yli::ontology
                     this->render_master = std::make_unique<yli::render::RenderMaster>(this, render_master_struct);
                     this->input_master = std::make_unique<yli::input::InputMaster>(this);
                 }
-
-                // Bullet variables.
-                this->collision_configuration = std::make_unique<btDefaultCollisionConfiguration>();
-                this->dispatcher              = std::make_unique<btCollisionDispatcher>(this->collision_configuration.get());
-                this->overlapping_pair_cache  = std::make_unique<btDbvtBroadphase>();
-                this->solver                  = std::make_unique<btSequentialImpulseConstraintSolver>();
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Universe*";
@@ -663,7 +603,7 @@ namespace yli::ontology
             // Variables related to location and orientation.
 
             // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
-            glm::vec3 current_camera_cartesian_coordinates;
+            glm::vec3 current_camera_cartesian_coordinates { glm::vec3(NAN, NAN, NAN) }; // Dummy coordinates.
 
             // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
             yli::data::SphericalCoordinatesStruct current_camera_spherical_coordinates;
@@ -674,8 +614,8 @@ namespace yli::ontology
             glm::vec3 current_camera_right; // note: `right` can not be set directly using console.
             glm::vec3 current_camera_up;    // note: `up` can not be set directly using console.
 
-            float current_camera_yaw;
-            float current_camera_pitch;
+            float current_camera_yaw   { NAN };
+            float current_camera_pitch { NAN };
 
             int32_t mouse_x;
             int32_t mouse_y;
@@ -684,37 +624,37 @@ namespace yli::ontology
             float turbo_factor;
             float twin_turbo_factor;
             float mouse_speed;
-            bool has_mouse_ever_moved;
+            bool has_mouse_ever_moved { false };
 
             // 'can toggle'-type of boolean keypress control variables
             // should all be stored in the `Universe` to avoid locking.
-            bool can_toggle_invert_mouse;
-            bool can_toggle_flight_mode;
-            bool can_toggle_help_mode;
+            bool can_toggle_invert_mouse { false };
+            bool can_toggle_flight_mode  { false };
+            bool can_toggle_help_mode    { false };
 
-            bool is_invert_mouse_in_use;
-            bool is_first_turbo_pressed;
-            bool is_second_turbo_pressed;
-            bool is_exit_requested;
+            bool is_invert_mouse_in_use  { false };
+            bool is_first_turbo_pressed  { false };
+            bool is_second_turbo_pressed { false };
+            bool is_exit_requested       { false };
 
             // Variables related to graphics.
             float znear;
             float zfar;
 
             // Variables related to the current `Scene`.
-            bool testing_spherical_terrain_in_use;
+            bool testing_spherical_terrain_in_use { false };
 
             // Variables related to `Console`s.
-            bool in_console;
+            bool in_console { false };
 
             // Variables related to help mode.
-            bool in_help_mode;
-            bool can_display_help_screen;
+            bool in_help_mode            { true };
+            bool can_display_help_screen { true };
 
-            float background_red;
-            float background_green;
-            float background_blue;
-            float background_alpha;
+            float background_red   { NAN };
+            float background_green { NAN };
+            float background_blue  { NAN };
+            float background_alpha { NAN };
 
             yli::ontology::ParentModule parent_of_worlds;
             yli::ontology::ParentModule parent_of_font_2ds;
@@ -732,30 +672,30 @@ namespace yli::ontology
 
             bool compute_and_update_matrices_from_inputs();
 
-            std::unique_ptr<yli::ontology::EntityFactory> entity_factory;
+            std::unique_ptr<yli::ontology::EntityFactory> entity_factory { std::make_unique<yli::ontology::EntityFactory>(this) };
 
             std::vector<yli::ontology::Entity*> entity_pointer_vector;
             std::queue<std::size_t> free_entityID_queue;
-            std::size_t number_of_entities;
+            std::size_t number_of_entities { 0 };
 
-            yli::ontology::Scene* active_scene;
-            yli::ontology::Console* active_console;
+            yli::ontology::Scene* active_scene     { nullptr };
+            yli::ontology::Console* active_console { nullptr };
 
-            std::unique_ptr<yli::render::RenderMaster> render_master; // pointer to `RenderMaster`.
-            std::unique_ptr<yli::audio::AudioMaster> audio_master; // pointer to `AudioMaster`.
-            std::unique_ptr<yli::input::InputMaster> input_master; // pointer to `InputMaster`.
+            std::unique_ptr<yli::render::RenderMaster> render_master { nullptr }; // pointer to `RenderMaster`.
+            std::unique_ptr<yli::audio::AudioMaster> audio_master    { nullptr }; // pointer to `AudioMaster`.
+            std::unique_ptr<yli::input::InputMaster> input_master    { nullptr }; // pointer to `InputMaster`.
 
             // Bullet variables.
-            std::unique_ptr<btDefaultCollisionConfiguration> collision_configuration;
-            std::unique_ptr<btCollisionDispatcher> dispatcher;
-            std::unique_ptr<btBroadphaseInterface> overlapping_pair_cache;
-            std::unique_ptr<btSequentialImpulseConstraintSolver> solver;
+            std::unique_ptr<btDefaultCollisionConfiguration> collision_configuration { std::make_unique<btDefaultCollisionConfiguration>() };
+            std::unique_ptr<btCollisionDispatcher> dispatcher { std::make_unique<btCollisionDispatcher>(this->collision_configuration.get()) };
+            std::unique_ptr<btBroadphaseInterface> overlapping_pair_cache { std::make_unique<btDbvtBroadphase>() };
+            std::unique_ptr<btSequentialImpulseConstraintSolver> solver { std::make_unique<btSequentialImpulseConstraintSolver>() };
 
             // variables related to the window.
             SDL_Window* window { nullptr };
             uint32_t window_width;
             uint32_t window_height;
-            std::string window_title;
+            std::string window_title { "Ylikuutio " + yli::ontology::Universe::version };
 
             bool is_physical;
             bool is_fullscreen;
@@ -763,10 +703,10 @@ namespace yli::ontology
             bool is_silent;
 
             // variables related to `Camera` (projection).
-            glm::mat4 current_camera_projection_matrix;
-            glm::mat4 current_camera_view_matrix;
-            float aspect_ratio;    // At the moment all `Camera`s use the same aspect ratio.
-            float initial_fov;     // At the moment all `Camera`s use the same FoV.
+            glm::mat4 current_camera_projection_matrix { glm::mat4(1.0f) }; // Identity matrix (dummy value).
+            glm::mat4 current_camera_view_matrix { glm::mat4(1.0f) };       // Identity matrix (dummy value).
+            float aspect_ratio;          // At the moment all `Camera`s use the same aspect ratio.
+            float initial_fov { 60.0f }; // At the moment all `Camera`s use the same FoV.
 
             // variables related to the fonts and texts used.
             std::size_t text_size;
@@ -774,13 +714,16 @@ namespace yli::ontology
 
             // variables related to timing of events.
             std::size_t max_fps;
-            float last_time_to_display_fps;
-            float last_time_for_display_sync;
-            float delta_time;
-            int32_t number_of_frames;
+            float last_time_to_display_fps   { yli::time::get_time() };
+            float last_time_for_display_sync { yli::time::get_time() };
+            float delta_time                 { NAN };
+            int32_t number_of_frames         { 0 };
 
-            uint32_t last_time_before_reading_keyboard;
-            uint32_t current_time_before_reading_keyboard;
+            // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
+            uint32_t last_time_before_reading_keyboard    { std::numeric_limits<uint32_t>::max() };
+
+            // `std::numeric_limits<std::size_t>::max()` means that `current_time_before_reading_keyboard` is not defined.
+            uint32_t current_time_before_reading_keyboard { std::numeric_limits<uint32_t>::max() };
     };
 }
 

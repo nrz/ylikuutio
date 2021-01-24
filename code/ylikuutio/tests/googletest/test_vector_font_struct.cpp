@@ -18,7 +18,7 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/ontology/vector_font_struct.hpp"
 
-TEST(VectorFontStruct_must_be_initialized_appropriately, VectorFontStruct)
+TEST(vector_font_struct_must_be_initialized_appropriately, vector_font_struct)
 {
     const float default_vertex_scaling_factor = 0.001f;
 

@@ -29,15 +29,15 @@
 
 // Include standard headers
 #include <cmath> // NAN, std::isnan, std::pow
+#include <variant> // std::holds_alternative, std::variant
 
-TEST(ObjectStruct_must_be_initialized_appropriately, ObjectStruct)
+TEST(object_struct_must_be_initialized_appropriately, object_struct)
 {
-    const yli::ontology::ObjectStruct test_object_struct;
-    ASSERT_EQ(test_object_struct.species_parent, nullptr);
-    ASSERT_EQ(test_object_struct.text_3d_parent, nullptr);
+    const yli::ontology::ObjectStruct test_object_struct(static_cast<yli::ontology::Species*>(nullptr));
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Species*>(test_object_struct.parent));
+    ASSERT_EQ(std::get<yli::ontology::Species*>(test_object_struct.parent), nullptr);
     ASSERT_EQ(test_object_struct.glyph, nullptr);
     ASSERT_EQ(test_object_struct.original_scale_vector, glm::vec3(1.0f, 1.0f, 1.0f));
-    ASSERT_EQ(test_object_struct.object_type, yli::ontology::ObjectType::REGULAR);
     ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.x));
     ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.y));
     ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.z));

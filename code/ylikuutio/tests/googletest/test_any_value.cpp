@@ -437,7 +437,7 @@ TEST(any_value_must_be_initialized_appropriately, float_pointer_negative_infinit
     ASSERT_EQ(float_negative_infinity_value.get_entity_pointer(), nullptr);
 }
 
-TEST(any_value_must_be_initialized_appropriately, float_pointer_NAN)
+TEST(any_value_must_be_initialized_appropriately, float_pointer_nan)
 {
     float float_nan = NAN;
     yli::data::AnyValue float_nan_value = yli::data::AnyValue(&float_nan);
@@ -481,7 +481,7 @@ TEST(any_value_must_be_initialized_appropriately, double_pointer_negative_infini
     ASSERT_EQ(double_negative_infinity_value.get_entity_pointer(), nullptr);
 }
 
-TEST(any_value_must_be_initialized_appropriately, double_pointer_NAN)
+TEST(any_value_must_be_initialized_appropriately, double_pointer_nan)
 {
     double double_nan = NAN;
     yli::data::AnyValue double_nan_value = yli::data::AnyValue(&double_nan);

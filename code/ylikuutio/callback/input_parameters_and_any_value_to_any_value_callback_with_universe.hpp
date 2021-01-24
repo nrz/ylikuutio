@@ -19,8 +19,8 @@
 #define __YLIKUUTIO_CALLBACK_INPUT_PARAMETERS_AND_ANY_VALUE_TO_ANY_VALUE_CALLBACK_WITH_UNIVERSE_HPP_INCLUDED
 
 // Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
-#include <vector>   // std::vector
+#include <memory> // std::make_shared, std::shared_ptr
+#include <vector> // std::vector
 
 namespace yli::callback
 {

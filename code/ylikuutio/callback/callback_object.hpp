@@ -25,6 +25,7 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
+#include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <queue>         // std::queue
 #include <string>        // std::string
@@ -67,13 +68,13 @@ namespace yli::callback
                 friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
         protected:
-            yli::callback::CallbackEngine* parent; // pointer to the callback engine.
+            yli::callback::CallbackEngine* parent { nullptr }; // pointer to the callback engine.
 
             std::vector<yli::callback::CallbackParameter*> callback_parameter_pointer_vector;
             std::queue<std::size_t> free_callback_parameterID_queue;
-            std::size_t number_of_callback_parameters;
+            std::size_t number_of_callback_parameters { 0 };
 
-            InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback;
+            InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback { nullptr };
 
             // constructor.
             CallbackObject(yli::callback::CallbackEngine* const parent);
@@ -92,7 +93,7 @@ namespace yli::callback
             // execute this callback with a parameter.
             virtual std::shared_ptr<yli::data::AnyValue> execute(std::shared_ptr<yli::data::AnyValue> any_value);
 
-            std::size_t childID;                          // callback object ID, returned by `yli::callback::CallbackEngine->get_callback_objectID()`.
+            std::size_t childID { std::numeric_limits<std::size_t>::max() };
 
             // A hash map used to store variables.
             std::unordered_map<std::string, yli::data::AnyValue> anyvalue_hashmap;

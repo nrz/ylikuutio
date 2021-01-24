@@ -31,7 +31,7 @@ namespace yli::snippets
         yli::ontology::VariableStruct wireframe_variable_struct(std::make_shared<yli::data::AnyValue>(use_wireframe));
         wireframe_variable_struct.local_name = "wireframe";
         wireframe_variable_struct.activate_callback = &yli::ontology::Variable::activate_wireframe;
-        wireframe_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        wireframe_variable_struct.should_call_activate_callback_now = true;
         universe->create_variable(wireframe_variable_struct);
     }
 }

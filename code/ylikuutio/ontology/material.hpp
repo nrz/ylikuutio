@@ -60,14 +60,9 @@ namespace yli::ontology
                 parent_of_chunk_masters(this, &this->registry, "chunk_masters")
             {
                 // constructor.
-                this->is_symbiont_material     = material_struct.is_symbiont_material;
-                this->texture_file_format      = material_struct.texture_file_format;
-                this->texture_filename         = material_struct.texture_filename;
-                this->texture                  = 0; // some dummy value.
-                this->opengl_texture_id        = 0; // some dummy value.
-                this->image_width              = 0;
-                this->image_height             = 0;
-                this->image_size               = 0;
+                this->is_symbiont_material = material_struct.is_symbiont_material;
+                this->texture_file_format  = material_struct.texture_file_format;
+                this->texture_filename     = material_struct.texture_filename;
 
                 const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
 
@@ -137,12 +132,12 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_chunk_masters;
 
         protected:
-            std::size_t image_width;
-            std::size_t image_height;
-            std::size_t image_size;
+            std::size_t image_width  { 0 };
+            std::size_t image_height { 0 };
+            std::size_t image_size   { 0 };
 
-            uint32_t texture;                    // Texture of this `Material`, returned by `load_common_texture` (used for `glGenTextures` etc.).
-            GLuint opengl_texture_id;             // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`.
+            GLuint texture           { 0 }; // Texture of this `Material`, returned by `load_common_texture` (used for `glGenTextures` etc.). Dummy value.
+            GLuint opengl_texture_id { 0 }; // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`. Dummy value.
 
         private:
             std::size_t get_number_of_children() const override;

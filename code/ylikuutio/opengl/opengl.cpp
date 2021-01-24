@@ -241,7 +241,7 @@ namespace yli::opengl
             const std::size_t texture_height,
             const std::size_t texture_depth,
             const std::string& filename,
-            const bool should_ylikuutio_flip_texture)
+            const bool should_flip_texture)
     {
         if (filename.empty())
         {
@@ -256,7 +256,7 @@ namespace yli::opengl
                     texture_width,
                     texture_height,
                     texture_depth,
-                    should_ylikuutio_flip_texture);
+                    should_flip_texture);
             yli::file::binary_write(*data_vector_shared_ptr, filename);
         }
         else if (type == GL_UNSIGNED_BYTE)
@@ -267,7 +267,7 @@ namespace yli::opengl
                     texture_width,
                     texture_height,
                     texture_depth,
-                    should_ylikuutio_flip_texture);
+                    should_flip_texture);
             yli::file::binary_write(*data_vector_shared_ptr, filename);
         }
         else if (type == GL_SHORT)
@@ -278,7 +278,7 @@ namespace yli::opengl
                     texture_width,
                     texture_height,
                     texture_depth,
-                    should_ylikuutio_flip_texture);
+                    should_flip_texture);
             yli::file::binary_write(*data_vector_shared_ptr, filename);
         }
         else if (type == GL_UNSIGNED_SHORT)
@@ -289,7 +289,7 @@ namespace yli::opengl
                     texture_width,
                     texture_height,
                     texture_depth,
-                    should_ylikuutio_flip_texture);
+                    should_flip_texture);
             yli::file::binary_write(*data_vector_shared_ptr, filename);
         }
         else if (type == GL_INT)
@@ -300,7 +300,7 @@ namespace yli::opengl
                     texture_width,
                     texture_height,
                     texture_depth,
-                    should_ylikuutio_flip_texture);
+                    should_flip_texture);
             yli::file::binary_write(*data_vector_shared_ptr, filename);
         }
         else if (type == GL_UNSIGNED_INT)
@@ -311,7 +311,7 @@ namespace yli::opengl
                     texture_width,
                     texture_height,
                     texture_depth,
-                    should_ylikuutio_flip_texture);
+                    should_flip_texture);
             yli::file::binary_write(*data_vector_shared_ptr, filename);
         }
         else if (type == GL_FIXED)
@@ -332,7 +332,7 @@ namespace yli::opengl
                     texture_width,
                     texture_height,
                     texture_depth,
-                    should_ylikuutio_flip_texture);
+                    should_flip_texture);
             yli::file::binary_write(*data_vector_shared_ptr, filename);
         }
         else if (type == GL_DOUBLE)
@@ -343,7 +343,7 @@ namespace yli::opengl
                     texture_width,
                     texture_height,
                     texture_depth,
-                    should_ylikuutio_flip_texture);
+                    should_flip_texture);
             yli::file::binary_write(*data_vector_shared_ptr, filename);
         }
         else
@@ -361,7 +361,7 @@ namespace yli::opengl
             const std::size_t texture_width,
             const std::size_t texture_height,
             const std::string& filename,
-            const bool should_ylikuutio_flip_texture)
+            const bool should_flip_texture)
     {
         const std::size_t texture_depth = 1;
         yli::opengl::save_data_from_gpu_texture_into_file(
@@ -371,7 +371,7 @@ namespace yli::opengl
             texture_height,
             texture_depth,
             filename,
-            should_ylikuutio_flip_texture);
+            should_flip_texture);
     }
 
     GLenum get_base_format(const GLenum format)

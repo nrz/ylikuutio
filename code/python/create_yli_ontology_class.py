@@ -155,7 +155,7 @@ private_line = \
 "        private:"
 
 parent_pointer_line_in_header = \
-"            " + fully_qualified_parent_class_name + "* parent;"
+"            " + fully_qualified_parent_class_name + "* parent { nullptr };"
 
 end_class_definition = \
 "    };"
@@ -166,10 +166,10 @@ class_constructor_lines = \
 "                    " + const_struct_reference_variable_type + " " + struct_name + ",\n"\
 "                    " + parent_module_type_and_name + ") // TODO: other_parameters!\n"\
 "                : " + inherited_class_name + "(universe, " + struct_name + "), // TODO: complete the initializer list!\n"\
-"                " + child_module_variable_name + "(parent_module, this) // TODO: delete this line if `ChildModule` is not needed!\n"\
+"                " + child_module_variable_name + "(parent_module, this), // TODO: delete this line if `ChildModule` is not needed!\n"\
+"                parent { " + struct_name + ".parent }\n"\
 "            {\n"\
 "                // constructor.\n"\
-"                this->parent = " + struct_name + ".parent;\n"\
 "\n"\
 "                // `yli::ontology::Entity` member variables begin here.\n"\
 "                this->type_string = \"" + fully_qualified_class_name + "*\";\n"\
@@ -218,13 +218,12 @@ parent_class_forward_declaration = \
 
 struct_constructor_lines = \
 "        " + struct_variable_type + "()\n"\
-"            : parent(nullptr)\n"\
 "        {\n"\
 "            // constructor.\n"\
 "        }"
 
 parent_pointer_lines = \
-"        " + fully_qualified_parent_class_name + "* parent;"
+"        " + fully_qualified_parent_class_name + "* parent { nullptr };"
 
 with open(class_filename_hpp, 'w') as f:
     print(copyright_notice, file = f)

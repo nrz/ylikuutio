@@ -36,8 +36,6 @@ namespace yli::input
         // constructor.
 
         this->universe = universe;
-        this->active_input_mode = nullptr;
-        this->number_of_input_modes = 0;
         this->input_method = yli::input::InputMethod::KEYBOARD;
     }
 

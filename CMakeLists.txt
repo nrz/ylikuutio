@@ -1039,6 +1039,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/camera.cpp
         code/ylikuutio/ontology/camera.hpp
         code/ylikuutio/ontology/camera_struct.hpp
+        code/ylikuutio/ontology/compute_task_struct.hpp
         code/ylikuutio/ontology/registry.cpp
         code/ylikuutio/ontology/registry.hpp
         code/ylikuutio/ontology/child_module.cpp
@@ -1090,6 +1091,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/universe.hpp
         code/ylikuutio/ontology/universe_callbacks.cpp
         code/ylikuutio/ontology/universe_struct.hpp
+        code/ylikuutio/ontology/variable_struct.hpp
         code/ylikuutio/ontology/vector_font_struct.hpp
         code/ylikuutio/ontology/world.cpp
         code/ylikuutio/ontology/world.hpp
@@ -1117,9 +1119,11 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_bilinear_interpolation.cpp
         code/ylikuutio/tests/googletest/test_bmp_heightmap_loader.cpp
         code/ylikuutio/tests/googletest/test_bmp_loader.cpp
+        code/ylikuutio/tests/googletest/test_brain_struct.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
         code/ylikuutio/tests/googletest/test_check_and_report_if_some_string_matches.cpp
         code/ylikuutio/tests/googletest/test_command_line_master.cpp
+        code/ylikuutio/tests/googletest/test_compute_struct.cpp
         code/ylikuutio/tests/googletest/test_csv_loader.cpp
         code/ylikuutio/tests/googletest/test_extract_last_part_of_string.cpp
         code/ylikuutio/tests/googletest/test_extract_string.cpp
@@ -1148,6 +1152,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_species_struct.cpp
         code/ylikuutio/tests/googletest/test_triangulation.cpp
         code/ylikuutio/tests/googletest/test_universe_callbacks.cpp
+        code/ylikuutio/tests/googletest/test_variable_struct.cpp
         code/ylikuutio/tests/googletest/test_vector_font_struct.cpp
         code/ylikuutio/tests/googletest/test_ylikuutio_map.cpp)
     set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)

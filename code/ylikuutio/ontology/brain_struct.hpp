@@ -15,13 +15,13 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-// Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
-
 #ifndef __YLIKUUTIO_ONTOLOGY_BRAIN_STRUCT_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_BRAIN_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
+
+// Include standard headers
+#include <memory> // std::make_shared, std::shared_ptr
 
 namespace yli::callback
 {
@@ -35,13 +35,12 @@ namespace yli::ontology
     struct BrainStruct: public yli::ontology::EntityStruct
     {
         BrainStruct()
-            : parent(nullptr),
-            callback_engine(nullptr)
         {
+            // constructor.
         }
 
-        yli::ontology::Scene* parent;
-        std::shared_ptr<yli::callback::CallbackEngine> callback_engine;
+        yli::ontology::Scene* parent { nullptr };
+        std::shared_ptr<yli::callback::CallbackEngine> callback_engine { nullptr };
     };
 }
 
