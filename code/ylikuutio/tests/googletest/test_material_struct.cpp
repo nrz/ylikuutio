@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -18,7 +18,7 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 
-TEST(MaterialStruct_must_be_initialized_appropriately, MaterialStruct)
+TEST(material_struct_must_be_initialized_appropriately, material_struct)
 {
     const yli::ontology::MaterialStruct test_material_struct;
     ASSERT_EQ(test_material_struct.shader, nullptr);

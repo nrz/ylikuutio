@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -40,7 +40,6 @@ namespace yli::ontology
     struct MovableStruct: public yli::ontology::EntityStruct
     {
         MovableStruct()
-            : EntityStruct()
         {
             // constructor.
         }

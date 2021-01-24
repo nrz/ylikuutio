@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -16,11 +16,13 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "console.hpp"
+#include "apprentice_module.hpp"
 #include "universe.hpp"
-#include "font2D.hpp"
+#include "font_2d.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
@@ -37,39 +39,18 @@
 
 namespace yli::ontology
 {
-    void Console::bind_to_font_2d()
-    {
-        // requirements:
-        // `this->font_2d` must not be `nullptr`.
-        yli::ontology::Font2D* const font_2d = this->font_2d;
-
-        if (font_2d == nullptr)
-        {
-            std::cerr << "ERROR: `Console::bind_to_font2D`: `font_2d` is `nullptr`!\n";
-            return;
-        }
-
-        // get `apprenticeID` from `Font2D` and set pointer to this `Console`.
-        this->font_2d->master_of_consoles.bind_apprentice(this);
-    }
-
-    void Console::unbind_from_font_2d()
-    {
-        if (this->font_2d != nullptr)
-        {
-            this->font_2d->master_of_consoles.unbind_apprentice(this->apprenticeID);
-        }
-    }
-
     void Console::bind_to_new_font_2d(yli::ontology::Font2D* const new_font_2d)
     {
-        // This method sets pointer to this `Console` to `nullptr`, sets `font_2d` according to the input,
-        // and requests a new `apprenticeID` from the new `Font2D`.
+        // Unbind from the current `Font2D` if there is such.
 
-        this->unbind_from_font_2d(); // unbind from the current `Font2D` if there is such.
-
-        this->font_2d = new_font_2d;
-        this->bind_to_font_2d();
+        if (new_font_2d != nullptr)
+        {
+            this->apprentice_of_font_2d.bind_to_new_master_module(&new_font_2d->master_of_consoles);
+        }
+        else
+        {
+            this->apprentice_of_font_2d.bind_to_new_master_module(nullptr);
+        }
     }
 
     Console::~Console()
@@ -232,9 +213,9 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Font2D* const font2D = this->font_2d;
+        yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(this->apprentice_of_font_2d.get_master());
 
-        if (font2D == nullptr)
+        if (font_2d == nullptr)
         {
             return;
         }
@@ -242,7 +223,7 @@ namespace yli::ontology
         // Convert current input into std::string.
         const std::size_t characters_for_line = this->universe->get_window_width() / this->universe->get_text_size();
 
-        // Draw the console to screen using `font2D::print_text2D`.
+        // Draw the console to screen using `font_2d::print_text_2d`.
         yli::ontology::TextStruct text_struct;
         text_struct.screen_width = this->universe->get_window_width();
         text_struct.screen_height = this->universe->get_window_height();
@@ -325,7 +306,7 @@ namespace yli::ontology
             }
         }
 
-        font2D->print_text2D(text_struct);
+        font_2d->print_text_2d(text_struct);
     }
 
     yli::ontology::Entity* Console::get_parent() const

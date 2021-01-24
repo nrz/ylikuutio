@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -15,19 +15,19 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "line2D.hpp"
+#include "line_2d.hpp"
 
 namespace yli::geometry
 {
-    bool Line2D::do_lines2D_intersect(const yli::geometry::Line2D* const line1, const yli::geometry::Line2D* const line2) const
+    bool Line2D::do_lines_2d_intersect(const yli::geometry::Line2D* const line1, const yli::geometry::Line2D* const line2) const
     {
         // TODO: implement the function!
         return false;
     }
 
-    bool Line2D::do_lines2D_intersect(const yli::geometry::Line2D* const line) const
+    bool Line2D::do_lines_2d_intersect(const yli::geometry::Line2D* const line) const
     {
-        return yli::geometry::Line2D::do_lines2D_intersect(line, this);
+        return yli::geometry::Line2D::do_lines_2d_intersect(line, this);
     }
 
     bool Line2D::is_identical_with(const yli::geometry::Line2D* const line) const

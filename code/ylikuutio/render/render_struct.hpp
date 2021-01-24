@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -32,10 +32,10 @@ namespace yli::render
 {
     struct RenderStruct
     {
-        yli::ontology::Scene* scene { nullptr };
-        yli::ontology::Console* console { nullptr };
-        std::vector<yli::ontology::Entity*>* font2D_pointer_vector { nullptr };
-        SDL_Window* window { nullptr };
-        bool should_ylikuutio_change_depth_test { true };
+        yli::ontology::Scene* scene                                 { nullptr };
+        yli::ontology::Console* console                             { nullptr };
+        std::vector<yli::ontology::Entity*>* font_2d_pointer_vector { nullptr };
+        SDL_Window* window                                          { nullptr };
+        bool should_change_depth_test                               { true };
     };
 }

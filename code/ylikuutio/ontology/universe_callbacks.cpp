@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -20,7 +20,7 @@
 #include "movable.hpp"
 #include "universe.hpp"
 #include "brain.hpp"
-#include "font2D.hpp"
+#include "font_2d.hpp"
 #include "console.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
@@ -95,11 +95,11 @@ namespace yli::ontology
             if (parent != nullptr)
             {
                 // Erase the local name.
-                parent->entity_map.erase(entity->get_local_name());
+                parent->registry.erase_entity(entity->get_local_name());
             }
 
             // Erase the global name.
-            universe->entity_map.erase(entity->get_global_name());
+            universe->registry.erase_entity(entity->get_global_name());
             delete entity;
         }
 
@@ -203,7 +203,7 @@ namespace yli::ontology
         }
 
         // Print names of named entities.
-        yli::map::print_keys_to_console(universe->entity_map, console);
+        yli::map::print_keys_to_console(universe->registry.get_entity_map(), console);
         return nullptr;
     }
 
@@ -221,12 +221,11 @@ namespace yli::ontology
 
         console->print_text(entity->get_type());
 
-        std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) entity);
+        const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) entity);
         std::stringstream memory_address_stringstream;
         memory_address_stringstream << "0x" << std::hex << memory_address;
 
-        std::string entity_info = "memory address:   ";
-        entity_info += memory_address_stringstream.str();
+        const std::string entity_info = "memory address:   " + memory_address_stringstream.str();
         console->print_text(entity_info);
 
         if (entity->get_parent() == nullptr)
@@ -272,16 +271,15 @@ namespace yli::ontology
             return nullptr;
         }
 
-        std::vector<std::pair<std::string, yli::ontology::Entity*>> key_and_value_vector = yli::map::get_keys_and_values(universe->entity_map);
+        std::vector<std::pair<std::string, yli::ontology::Entity*>> key_and_value_vector = yli::map::get_keys_and_values(universe->registry.get_entity_map());
 
         for (auto& [key, value] : key_and_value_vector)
         {
-            std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) value);
+            const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) value);
             std::stringstream memory_address_stringstream;
             memory_address_stringstream << " 0x" << std::hex << memory_address;
 
-            std::string entity_info = key;
-            entity_info += memory_address_stringstream.str();
+            const std::string entity_info = key + memory_address_stringstream.str();
             console->print_text(entity_info);
         }
 
@@ -354,9 +352,9 @@ namespace yli::ontology
         universe->render_without_changing_depth_test(); // Render to framebuffer.
 
         // Transfer data from the GPU texture to a CPU array and save into a file.
-        const bool should_ylikuutio_flip_texture = true;
+        const bool should_flip_texture = true;
         yli::opengl::save_data_from_gpu_texture_into_file(
-                GL_RGB, GL_UNSIGNED_BYTE, texture_width, texture_height, *filename, should_ylikuutio_flip_texture);
+                GL_RGB, GL_UNSIGNED_BYTE, texture_width, texture_height, *filename, should_flip_texture);
 
         universe->restore_onscreen_rendering();
 

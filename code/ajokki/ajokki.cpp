@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -52,8 +52,8 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/font2D.hpp"
-#include "code/ylikuutio/ontology/text2D.hpp"
+#include "code/ylikuutio/ontology/font_2d.hpp"
+#include "code/ylikuutio/ontology/text_2d.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/variable_struct.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
@@ -358,7 +358,7 @@ namespace ajokki
 
                 // Joensuu `Scene` ends here.
 
-                std::cout << "Creating yli::ontology::Entity* my_font2D_entity ...\n";
+                std::cout << "Creating yli::ontology::Entity* my_font_2d_entity ...\n";
 
                 yli::ontology::FontStruct font_struct;
                 font_struct.texture_filename = "Holstein.bmp";
@@ -368,21 +368,21 @@ namespace ajokki
                 font_struct.text_size = my_universe->get_text_size();
                 font_struct.font_size = my_universe->get_font_size();
 
-                yli::ontology::Entity* const my_font2D_entity = entity_factory->create_font2d(font_struct);
+                yli::ontology::Entity* const my_font_2d_entity = entity_factory->create_font2d(font_struct);
 
-                std::cout << "Creating yli::ontology::Font2D* my_font2D ...\n";
-                yli::ontology::Font2D* const my_font2D = dynamic_cast<yli::ontology::Font2D*>(my_font2D_entity);
+                std::cout << "Creating yli::ontology::Font2D* my_font_2d ...\n";
+                yli::ontology::Font2D* const my_font_2d = dynamic_cast<yli::ontology::Font2D*>(my_font_2d_entity);
 
-                if (my_font2D == nullptr)
+                if (my_font_2d == nullptr)
                 {
                     std::cerr << "Failed to create Font2D.\n";
                     return false;
                 }
 
                 std::cout << "Font2D created successfully.\n";
-                my_font2D->set_global_name("my_font2D");
+                my_font_2d->set_global_name("my_font_2d");
 
-                my_console->bind_to_new_font_2d(my_font2D);
+                my_console->bind_to_new_font_2d(my_font_2d);
                 my_console->print_text("Welcome! Please write \"help\" for more");
                 my_console->print_text("information.");
 
@@ -577,6 +577,10 @@ namespace ajokki
                 yli::console::ConsoleCallbackEngine my_enable_backspace_callback_engine;
                 my_enable_backspace_callback_engine.create_console_callback_object(&yli::ontology::Console::enable_backspace, my_console);
 
+                // Callback code for Tab release: enable Tab.
+                yli::console::ConsoleCallbackEngine my_enable_tab_callback_engine;
+                my_enable_tab_callback_engine.create_console_callback_object(&yli::ontology::Console::enable_tab, my_console);
+
                 // Callback code for enter release: enable Enter key.
                 yli::console::ConsoleCallbackEngine my_enable_enter_key_callback_engine;
                 my_enable_enter_key_callback_engine.create_console_callback_object(&yli::ontology::Console::enable_enter_key, my_console);
@@ -716,6 +720,10 @@ namespace ajokki
                 // Callback code for backspace: delete character left of cursor from current input in console.
                 yli::console::ConsoleCallbackEngine my_backspace_callback_engine;
                 my_backspace_callback_engine.create_console_callback_object(&yli::ontology::Console::backspace, my_console);
+
+                // Callback code for Tab.
+                yli::console::ConsoleCallbackEngine my_tab_callback_engine;
+                my_tab_callback_engine.create_console_callback_object(&yli::ontology::Console::tab, my_console);
 
                 // Callback code for Enter key.
                 yli::console::ConsoleCallbackEngine my_enter_callback_engine;
@@ -862,6 +870,7 @@ namespace ajokki
                 my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_UP, &my_enable_move_to_previous_input_callback_engine);
                 my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_DOWN, &my_enable_move_to_next_input_callback_engine);
                 my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_BACKSPACE, &my_enable_backspace_callback_engine);
+                my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_TAB, &my_enable_tab_callback_engine);
                 my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_RETURN, &my_enable_enter_key_callback_engine);
                 my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_C, &my_enable_ctrl_c_callback_engine);
                 my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_W, &my_enable_ctrl_w_callback_engine);
@@ -882,6 +891,7 @@ namespace ajokki
                 my_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_UP, &my_move_to_previous_input_callback_engine);
                 my_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_DOWN, &my_move_to_next_input_callback_engine);
                 my_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_BACKSPACE, &my_backspace_callback_engine);
+                my_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_TAB, &my_tab_callback_engine);
                 my_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_RETURN, &my_enter_callback_engine);
                 my_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_C, &my_ctrl_c_callback_engine);
                 my_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_W, &my_ctrl_w_callback_engine);

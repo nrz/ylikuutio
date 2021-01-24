@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -15,18 +15,9 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "line3D.hpp"
+#include "line_segment_2d.hpp"
+#include "line_segment_line_segment_intersection.hpp"
 
 namespace yli::geometry
 {
-    bool Line3D::do_lines3D_intersect(const yli::geometry::Line3D* const line1, const yli::geometry::Line3D* const line2) const
-    {
-        // TODO: implement the function!
-        return false;
-    }
-
-    bool Line3D::do_lines3D_intersect(const yli::geometry::Line3D* const line) const
-    {
-        return yli::geometry::Line3D::do_lines3D_intersect(line, this);
-    }
 }

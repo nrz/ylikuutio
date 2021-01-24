@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -21,10 +21,12 @@
 
 #include "variable.hpp"
 #include "movable.hpp"
+#include "apprentice_module.hpp"
 #include "brain.hpp"
 #include "movable_variable_activation.hpp"
 #include "movable_variable_read.hpp"
 #include "variable_struct.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -41,46 +43,23 @@
 
 namespace yli::ontology
 {
-    void Movable::bind_to_brain()
-    {
-        // requirements:
-        // `this->brain` must not be `nullptr`.
-        yli::ontology::Brain* const brain = this->brain;
-
-        if (brain == nullptr)
-        {
-            std::cerr << "ERROR: `Movable::bind_to_brain`: `brain` is `nullptr`!\n";
-            return;
-        }
-
-        // get `apprenticeID` from `Brain` and set pointer to this `Movable`.
-        this->brain->master_of_movables.bind_apprentice(this);
-    }
-
-    void Movable::unbind_from_brain()
-    {
-        if (this->brain != nullptr)
-        {
-            this->brain->master_of_movables.unbind_apprentice(this->apprenticeID);
-        }
-    }
-
     void Movable::bind_to_new_brain(yli::ontology::Brain* const new_brain)
     {
-        // This method sets pointer to this `Movable` to `nullptr`, sets `brain` according to the input,
-        // and requests a new `apprenticeID` from the new `Brain`.
+        // Unbind from the current `Brain` if there is such.
 
-        this->unbind_from_brain(); // unbind from the current `Brain` if there is such.
-
-        this->brain = new_brain;
-        this->bind_to_brain();
+        if (new_brain != nullptr)
+        {
+            this->apprentice_of_brain.bind_to_new_master_module(&new_brain->master_of_movables);
+        }
+        else
+        {
+            this->apprentice_of_brain.bind_to_new_master_module(nullptr);
+        }
     }
 
     Movable::~Movable()
     {
         // destructor.
-
-        this->unbind_from_brain();
     }
 
     yli::ontology::Entity* Movable::get_parent() const
@@ -184,7 +163,7 @@ namespace yli::ontology
         cartesian_coordinates_variable_struct.local_name = "cartesian_coordinates";
         cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
         cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
-        cartesian_coordinates_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        cartesian_coordinates_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `this->create_variable(cartesian_coordinates_variable_struct);` ...\n";
         this->create_variable(cartesian_coordinates_variable_struct);
 
@@ -192,7 +171,7 @@ namespace yli::ontology
         x_variable_struct.local_name = "x";
         x_variable_struct.activate_callback = &yli::ontology::activate_x;
         x_variable_struct.read_callback = &yli::ontology::read_x;
-        x_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        x_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `this->create_variable(x_variable_struct);` ...\n";
         this->create_variable(x_variable_struct);
 
@@ -200,7 +179,7 @@ namespace yli::ontology
         y_variable_struct.local_name = "y";
         y_variable_struct.activate_callback = &yli::ontology::activate_y;
         y_variable_struct.read_callback = &yli::ontology::read_y;
-        y_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        y_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `this->create_variable(y_variable_struct);` ...\n";
         this->create_variable(y_variable_struct);
 
@@ -208,7 +187,7 @@ namespace yli::ontology
         z_variable_struct.local_name = "z";
         z_variable_struct.activate_callback = &yli::ontology::activate_z;
         z_variable_struct.read_callback = &yli::ontology::read_z;
-        z_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        z_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `this->create_variable(z_variable_struct);` ...\n";
         this->create_variable(z_variable_struct);
 
@@ -216,7 +195,7 @@ namespace yli::ontology
         yaw_variable_struct.local_name = "yaw";
         yaw_variable_struct.activate_callback = &yli::ontology::activate_yaw;
         yaw_variable_struct.read_callback = &yli::ontology::read_yaw;
-        yaw_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        yaw_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `this->create_variable(yaw_variable_struct);` ...\n";
         this->create_variable(yaw_variable_struct);
 
@@ -224,7 +203,7 @@ namespace yli::ontology
         pitch_variable_struct.local_name = "pitch";
         pitch_variable_struct.activate_callback = &yli::ontology::activate_pitch;
         pitch_variable_struct.read_callback = &yli::ontology::read_pitch;
-        pitch_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        pitch_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `this->create_variable(pitch_variable_struct);` ...\n";
         this->create_variable(pitch_variable_struct);
 
@@ -233,7 +212,7 @@ namespace yli::ontology
         azimuth_variable_struct.local_name = "azimuth";
         azimuth_variable_struct.activate_callback = &yli::ontology::activate_azimuth;
         azimuth_variable_struct.read_callback = &yli::ontology::read_azimuth;
-        azimuth_variable_struct.should_ylikuutio_call_activate_callback_now = false;
+        azimuth_variable_struct.should_call_activate_callback_now = false;
         std::cout << "Executing `entity->create_variable(azimuth_variable_struct);` ...\n";
         this->create_variable(azimuth_variable_struct);
 
@@ -242,7 +221,7 @@ namespace yli::ontology
         yli::ontology::VariableStruct speed_variable_struct(any_value_speed);
         speed_variable_struct.local_name = "speed";
         speed_variable_struct.activate_callback = &yli::ontology::Variable::activate_speed;
-        speed_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        speed_variable_struct.should_call_activate_callback_now = true;
         this->create_variable(speed_variable_struct);
     }
 }

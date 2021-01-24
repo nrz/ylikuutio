@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -27,9 +27,9 @@
 namespace yli::ontology
 {
     FramebufferModule::FramebufferModule(const yli::ontology::FramebufferModuleStruct& framebuffer_module_struct)
-        : texture_width(framebuffer_module_struct.texture_width),
-        texture_height(framebuffer_module_struct.texture_height),
-        in_use(framebuffer_module_struct.in_use)
+        : texture_width { framebuffer_module_struct.texture_width },
+        texture_height { framebuffer_module_struct.texture_height },
+        in_use { framebuffer_module_struct.in_use }
     {
         // constructor.
     }

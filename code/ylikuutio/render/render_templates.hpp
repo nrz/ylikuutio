@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -19,8 +19,8 @@
 #define __YLIKUUTIO_RENDER_RENDER_TEMPLATES_HPP_INCLUDED
 
 // Include standard headers
-#include <cstddef>  // std::size_t
-#include <vector>   // std::vector
+#include <cstddef> // std::size_t
+#include <vector>  // std::vector
 
 namespace yli::render
 {

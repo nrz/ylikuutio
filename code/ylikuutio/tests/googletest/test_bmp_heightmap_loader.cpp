@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -30,7 +30,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-TEST(a_BMP_terrain_must_be_loaded_appropriately, load_3x3_BMP_terrain)
+TEST(a_bmp_terrain_must_be_loaded_appropriately, load_3x3_bmp_terrain)
 {
     yli::load::HeightmapLoaderStruct heightmap_loader_struct;
     heightmap_loader_struct.filename = "test3x3.bmp";
@@ -366,7 +366,7 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_3x3_BMP_terrain)
     // TODO: add assertions for normals!
 }
 
-TEST(a_BMP_terrain_must_be_loaded_appropriately, load_256x256_BMP_terrain)
+TEST(a_bmp_terrain_must_be_loaded_appropriately, load_256x256_bmp_terrain)
 {
     yli::load::HeightmapLoaderStruct heightmap_loader_struct;
     heightmap_loader_struct.filename = "noise256x256.bmp";

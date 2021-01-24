@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -79,7 +79,6 @@ namespace yli::ontology
     class Shader;
     class Species;
     class Symbiosis;
-    class Camera;
 
     class Scene: public yli::ontology::Entity
     {
@@ -89,44 +88,33 @@ namespace yli::ontology
             void unbind_shader(const std::size_t childID, const std::string& local_name);
 
             // This method sets pointer to this `Scene` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `World`.
-            void bind_to_new_parent(yli::ontology::World* const new_parent);
+            void bind_to_new_world_parent(yli::ontology::World* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-            Scene(yli::ontology::Universe* const universe, const yli::ontology::SceneStruct& scene_struct, yli::ontology::ParentModule* const parent_module)
+            Scene(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::SceneStruct& scene_struct,
+                    yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, scene_struct),
                 child_of_world(parent_module, this),
-                parent_of_default_camera(this),
-                parent_of_cameras(this),
-                parent_of_brains(this)
+                parent_of_default_camera(this, &this->registry, "default_camera"),
+                parent_of_cameras(this, &this->registry, "cameras"),
+                parent_of_brains(this, &this->registry, "brains")
             {
                 // constructor.
-                this->gravity               = scene_struct.gravity;
-                this->fall_speed            = scene_struct.gravity;
-                this->water_level           = scene_struct.water_level;
-                this->cartesian_coordinates = nullptr;
-                this->spherical_coordinates = nullptr;
-                this->yaw                   = NAN;
-                this->pitch                 = NAN;
-                this->turbo_factor          = 1.0f;
-                this->twin_turbo_factor     = 1.0f;
-
-                this->number_of_shaders     = 0;
-                this->active_camera         = nullptr;
-                this->terrain_species       = nullptr;
+                this->gravity     = scene_struct.gravity;
+                this->fall_speed  = scene_struct.gravity;
+                this->water_level = scene_struct.water_level;
 
                 this->is_flight_mode_in_use = scene_struct.is_flight_mode_in_use;
 
                 // create the default `Camera`.
                 yli::ontology::CameraStruct camera_struct = scene_struct.default_camera_struct;
                 camera_struct.parent = this;
-                new yli::ontology::Camera(this->universe, camera_struct, &this->parent_of_default_camera); // create the default camera.
+                new yli::ontology::Camera(this->universe, camera_struct, &this->parent_of_default_camera, nullptr); // create the default camera.
 
                 // Bullet variables.
-                if (this->universe == nullptr)
-                {
-                    this->dynamics_world = nullptr;
-                }
-                else
+                if (this->universe != nullptr)
                 {
                     yli::ontology::Universe* const universe = this->universe;
 
@@ -211,16 +199,16 @@ namespace yli::ontology
             yli::ontology::ShaderPriorityQueue shader_priority_queue;
             std::vector<yli::ontology::Shader*> shader_pointer_vector;
             std::queue<std::size_t> free_shaderID_queue;
-            std::size_t number_of_shaders;
+            std::size_t number_of_shaders { 0 };
 
-            yli::ontology::Camera* active_camera;
+            yli::ontology::Camera* active_camera { nullptr };
 
-            yli::ontology::Species* terrain_species; // pointer to terrain `Species` (used in collision detection).
+            yli::ontology::Species* terrain_species { nullptr }; // pointer to terrain `Species` (used in collision detection).
 
             // Variables related to location and orientation.
 
             // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
-            glm::vec3* cartesian_coordinates;
+            glm::vec3* cartesian_coordinates { nullptr };
 
             // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
             glm::vec3 direction;
@@ -229,15 +217,15 @@ namespace yli::ontology
             glm::vec3 up;    // note: `up` can not be set directly using console.
 
             // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
-            yli::data::SphericalCoordinatesStruct* spherical_coordinates;
+            yli::data::SphericalCoordinatesStruct* spherical_coordinates { nullptr };
 
-            std::unique_ptr<btDiscreteDynamicsWorld> dynamics_world;
+            std::unique_ptr<btDiscreteDynamicsWorld> dynamics_world { nullptr };
 
-            float yaw;
-            float pitch;
+            float yaw   { NAN };
+            float pitch { NAN };
 
-            float turbo_factor;
-            float twin_turbo_factor;
+            float turbo_factor      { 1.0f };
+            float twin_turbo_factor { 1.0f };
 
             // Variables related to physics.
             float gravity;

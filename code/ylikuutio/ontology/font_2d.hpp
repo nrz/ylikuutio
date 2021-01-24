@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -15,15 +15,14 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_FONT2D_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_FONT2D_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_FONT_2D_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_FONT_2D_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "parent_module.hpp"
 #include "master_module.hpp"
 #include "universe.hpp"
-#include "console.hpp"
 #include "font_struct.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
@@ -44,11 +43,14 @@ namespace yli::ontology
     class Font2D: public yli::ontology::Entity
     {
         public:
-            Font2D(yli::ontology::Universe* const universe, const yli::ontology::FontStruct& font_struct, yli::ontology::ParentModule* const parent_module)
+            Font2D(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::FontStruct& font_struct,
+                    yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, font_struct),
                 child_of_universe(parent_module, this),
-                parent_of_text2Ds(this),
-                master_of_consoles(this)
+                parent_of_text_2ds(this, &this->registry, "text_2ds"),
+                master_of_consoles(this, &this->registry, "consoles")
         {
                 // constructor.
                 this->texture_filename = font_struct.texture_filename;
@@ -143,7 +145,7 @@ namespace yli::ontology
 
             void render();
 
-            void print_text2D(
+            void print_text_2d(
                     const std::size_t x,
                     const std::size_t y,
                     const std::size_t text_size,
@@ -153,9 +155,9 @@ namespace yli::ontology
                     const std::string& horizontal_alignment,
                     const std::string& vertical_alignment) const;
 
-            void print_text2D(const yli::ontology::TextStruct& text_struct) const;
+            void print_text_2d(const yli::ontology::TextStruct& text_struct) const;
 
-            void print_text2D(
+            void print_text_2d(
                     const std::size_t x,
                     const std::size_t y,
                     const std::size_t text_size,
@@ -164,9 +166,9 @@ namespace yli::ontology
                     const std::string& font_texture_file_format) const;
 
             yli::ontology::ChildModule child_of_universe;
-            yli::ontology::ParentModule parent_of_text2Ds;
+            yli::ontology::ParentModule parent_of_text_2ds;
 
-            yli::ontology::MasterModule<yli::ontology::Font2D*, yli::ontology::Console*> master_of_consoles;
+            yli::ontology::MasterModule master_of_consoles;
 
         private:
             std::size_t get_number_of_children() const override;

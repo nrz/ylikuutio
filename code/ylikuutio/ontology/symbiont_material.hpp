@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -48,7 +48,7 @@ namespace yli::ontology
                 : Material(universe, material_struct, parent_module)
             {
                 // constructor.
-                this->ofbx_texture               = material_struct.ofbx_texture;
+                this->ofbx_texture = material_struct.ofbx_texture;
                 this->load_texture();
 
                 // `yli::ontology::Entity` member variables begin here.

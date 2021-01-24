@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -221,7 +221,7 @@ namespace yli::ontology
             yli::opengl::disable_vertex_attrib_array(this->vertex_position_modelspace_id);
             yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
 
-            if (this->should_ylikuutio_save_intermediate_results && !this->output_filename.empty())
+            if (this->should_save_intermediate_results && !this->output_filename.empty())
             {
                 std::stringstream filename_stringstream;
                 filename_stringstream << this->output_filename << "_" << std::setfill('0') << std::setw(this->n_index_characters) << iteration_i;
@@ -236,7 +236,7 @@ namespace yli::ontology
                             this->texture_width,
                             this->texture_height,
                             filename_stringstream.str(),
-                            this->should_ylikuutio_flip_texture);
+                            this->should_flip_texture);
                 }
                 else
                 {
@@ -247,7 +247,7 @@ namespace yli::ontology
                             this->texture_width,
                             this->texture_height,
                             filename_stringstream.str(),
-                            this->should_ylikuutio_flip_texture);
+                            this->should_flip_texture);
                 }
             }
 
@@ -288,7 +288,7 @@ namespace yli::ontology
                     this->texture_width,
                     this->texture_height,
                     this->output_filename,
-                    this->should_ylikuutio_flip_texture);
+                    this->should_flip_texture);
         }
         else
         {
@@ -299,7 +299,7 @@ namespace yli::ontology
                     this->texture_width,
                     this->texture_height,
                     this->output_filename,
-                    this->should_ylikuutio_flip_texture);
+                    this->should_flip_texture);
         }
 
         universe->restore_onscreen_rendering();

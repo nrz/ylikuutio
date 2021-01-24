@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -18,16 +18,17 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_ENTITY_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_ENTITY_HPP_INCLUDED
 
+#include "registry.hpp"
 #include "parent_module.hpp"
 #include "pre_render_callback.hpp"
 #include "post_render_callback.hpp"
 
 // Include standard headers
 #include <cstddef>       // std::size_t
+#include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <queue>         // std::priority_queue, std::queue
 #include <string>        // std::string
-#include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
 namespace yli::data
@@ -129,11 +130,13 @@ namespace yli::ontology
 
             bool should_be_rendered { false };
 
-            friend yli::ontology::Universe;
-            friend yli::ontology::ParentModule;
+            friend class yli::ontology::ParentModule;
+            friend class yli::ontology::Universe;
 
             std::size_t childID { std::numeric_limits<std::size_t>::max() };
 
+            // Named entities are stored here so that they can be recalled, if needed.
+            yli::ontology::Registry registry;
             yli::ontology::ParentModule parent_of_any_struct_entities;
 
         protected:
@@ -152,9 +155,6 @@ namespace yli::ontology
 
             PreRenderCallback prerender_callback { nullptr };
             PostRenderCallback postrender_callback { nullptr };
-
-            // Named entities are stored here so that they can be recalled, if needed.
-            std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
 
         private:
             std::vector<yli::ontology::Variable*> variable_pointer_vector;

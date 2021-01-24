@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -16,14 +16,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "material.hpp"
-#include "entity.hpp"
 #include "universe.hpp"
 #include "shader.hpp"
-#include "species.hpp"
-#include "chunk_master.hpp"
-#include "vector_font.hpp"
 #include "family_templates.hpp"
-#include "material_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -102,7 +97,7 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_chunk_masters.child_pointer_vector);
     }
 
-    void Material::bind_to_new_parent(yli::ontology::Shader* const new_parent)
+    void Material::bind_to_new_shader_parent(yli::ontology::Shader* const new_parent)
     {
         // Requirements:
         // `this->is_symbiont_material` must be `false`.
@@ -118,19 +113,19 @@ namespace yli::ontology
 
         if (shader == nullptr)
         {
-            std::cerr << "ERROR: `Material::bind_to_new_parent`: `shader` is `nullptr`!\n";
+            std::cerr << "ERROR: `Material::bind_to_new_shader_parent`: `shader` is `nullptr`!\n";
             return;
         }
 
         if (new_parent == nullptr)
         {
-            std::cerr << "ERROR: `Material::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+            std::cerr << "ERROR: `Material::bind_to_new_shader_parent`: `new_parent` is `nullptr`!\n";
             return;
         }
 
         if (new_parent->has_child(this->local_name))
         {
-            std::cerr << "ERROR: `Material::bind_to_new_parent`: local name is already in use!\n";
+            std::cerr << "ERROR: `Material::bind_to_new_shader_parent`: local name is already in use!\n";
             return;
         }
 
@@ -153,7 +148,7 @@ namespace yli::ontology
 
         if (shader != nullptr)
         {
-            this->bind_to_new_parent(shader);
+            this->bind_to_new_shader_parent(shader);
             return;
         }
 

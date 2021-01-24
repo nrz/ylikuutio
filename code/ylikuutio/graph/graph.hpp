@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -18,15 +18,8 @@
 #ifndef __YLIKUUTIO_GRAPH_GRAPH_HPP_INCLUDED
 #define __YLIKUUTIO_GRAPH_GRAPH_HPP_INCLUDED
 
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
-
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
 #include <queue>    // std::queue
 #include <vector>   // std::vector
 
@@ -43,10 +36,13 @@ namespace yli::graph
             // constructor.
             Graph();
 
+            Graph(const Graph&) = delete;            // Delete copy constructor.
+            Graph& operator=(const Graph&) = delete; // Delete copy assignment.
+
             // destructor.
             ~Graph();
 
-            friend class Node;
+            friend class yli::graph::Node;
 
         private:
             // this method gets a node pointer.

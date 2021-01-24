@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -19,8 +19,8 @@
 #define __YLIKUUTIO_CALLBACK_INPUT_PARAMETERS_AND_ANY_VALUE_TO_ANY_VALUE_CALLBACK_WITH_UNIVERSE_HPP_INCLUDED
 
 // Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
-#include <vector>   // std::vector
+#include <memory> // std::make_shared, std::shared_ptr
+#include <vector> // std::vector
 
 namespace yli::callback
 {

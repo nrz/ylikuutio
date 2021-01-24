@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -27,6 +27,7 @@
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
+#include <variant>  // std::holds_alternative, std::variant
 #include <vector>   // std::vector
 
 namespace yli::data
@@ -44,34 +45,43 @@ namespace yli::ontology
     class Text3D;
     class Glyph;
     class ParentModule;
+    class MasterModule;
 
     class Object: public yli::ontology::Movable
     {
         public:
             // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
             // and requests a new `childID` from the new `Species` or from the new `Text3D`.
-            void bind_to_new_parent(yli::ontology::Species* const new_parent);
-            void bind_to_new_parent(yli::ontology::ShapeshifterSequence* const new_parent);
-            void bind_to_new_parent(yli::ontology::Text3D* const new_parent);
+            void bind_to_new_species_parent(yli::ontology::Species* const new_parent);
+            void bind_to_new_shapeshifter_sequence_parent(yli::ontology::ShapeshifterSequence* const new_parent);
+            void bind_to_new_text_3d_parent(yli::ontology::Text3D* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-            Object(yli::ontology::Universe* const universe, const yli::ontology::ObjectStruct& object_struct, yli::ontology::ParentModule* const parent_module)
+            Object(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::ObjectStruct& object_struct,
+                    yli::ontology::ParentModule* const parent_module,
+                    yli::ontology::MasterModule* const master_module)
                 : Movable(
                         universe,
                         object_struct,
-                        parent_module)
+                        parent_module,
+                        master_module)
             {
                 // constructor.
 
-                this->object_type = object_struct.object_type;
-
-                if (this->object_type == yli::ontology::ObjectType::CHARACTER)
+                if (std::holds_alternative<yli::ontology::Species*>(object_struct.parent))
                 {
-                    this->glyph = object_struct.glyph;
+                    this->object_type = yli::ontology::ObjectType::REGULAR;
                 }
-                else
+                else if (std::holds_alternative<yli::ontology::ShapeshifterSequence*>(object_struct.parent))
                 {
-                    this->glyph = nullptr;
+                    this->object_type = yli::ontology::ObjectType::SHAPESHIFTER;
+                }
+                else if (std::holds_alternative<yli::ontology::Text3D*>(object_struct.parent))
+                {
+                    this->object_type = yli::ontology::ObjectType::CHARACTER;
+                    this->glyph = object_struct.glyph;
                 }
 
                 // `yli::ontology::Entity` member variables begin here.

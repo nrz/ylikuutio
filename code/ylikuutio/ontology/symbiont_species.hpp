@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -24,7 +24,6 @@
 #include "shader.hpp"
 #include "species.hpp"
 #include "symbiont_material.hpp"
-#include "biont.hpp"
 #include "species_struct.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -72,14 +71,14 @@ namespace yli::ontology
                     const yli::ontology::SpeciesStruct& species_struct,
                     yli::ontology::ParentModule* const parent_module)
                 : Species(universe, species_struct, parent_module),
-                master_of_bionts(this)
+                master_of_bionts(this, &this->registry, "bionts")
             {
                 // constructor.
-                this->shader                   = species_struct.shader;
-                this->vertices                 = species_struct.vertices;
-                this->uvs                      = species_struct.uvs;
-                this->normals                  = species_struct.normals;
-                this->light_position           = species_struct.light_position;
+                this->shader         = species_struct.shader;
+                this->vertices       = species_struct.vertices;
+                this->uvs            = species_struct.uvs;
+                this->normals        = species_struct.normals;
+                this->light_position = species_struct.light_position;
 
                 this->type_string = "yli::ontology::SymbiontSpecies*";
 
@@ -156,13 +155,13 @@ namespace yli::ontology
             template<class T1, class T2>
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
-            yli::ontology::MasterModule<yli::ontology::SymbiontSpecies*, yli::ontology::Biont*> master_of_bionts;
+            template<class T1, class T2, class T3>
+                friend void yli::render::render_species_or_glyph(T1 species_or_glyph_pointer);
+
+            yli::ontology::MasterModule master_of_bionts;
 
         private:
             glm::vec3 light_position; // light position.
-
-            template<class T1, class T2, class T3>
-                friend void yli::render::render_species_or_glyph(T1 species_or_glyph_pointer);
 
             void bind_to_parent();
 

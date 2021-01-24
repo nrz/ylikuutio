@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -437,7 +437,7 @@ TEST(any_value_must_be_initialized_appropriately, float_pointer_negative_infinit
     ASSERT_EQ(float_negative_infinity_value.get_entity_pointer(), nullptr);
 }
 
-TEST(any_value_must_be_initialized_appropriately, float_pointer_NAN)
+TEST(any_value_must_be_initialized_appropriately, float_pointer_nan)
 {
     float float_nan = NAN;
     yli::data::AnyValue float_nan_value = yli::data::AnyValue(&float_nan);
@@ -481,7 +481,7 @@ TEST(any_value_must_be_initialized_appropriately, double_pointer_negative_infini
     ASSERT_EQ(double_negative_infinity_value.get_entity_pointer(), nullptr);
 }
 
-TEST(any_value_must_be_initialized_appropriately, double_pointer_NAN)
+TEST(any_value_must_be_initialized_appropriately, double_pointer_nan)
 {
     double double_nan = NAN;
     yli::data::AnyValue double_nan_value = yli::data::AnyValue(&double_nan);
@@ -775,30 +775,30 @@ TEST(any_value_must_be_initialized_appropriately, biont)
     ASSERT_EQ(biont_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) biont);
 }
 
-TEST(any_value_must_be_initialized_appropriately, font2D)
+TEST(any_value_must_be_initialized_appropriately, font_2d)
 {
-    yli::ontology::Font2D* font2D = static_cast<yli::ontology::Font2D*>((void*) 0xbadf072d);
-    yli::data::AnyValue font2D_pointer_any_value = yli::data::AnyValue(font2D);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Font2D*>(font2D_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Font2D*>(font2D_pointer_any_value.data), font2D);
-    ASSERT_EQ(std::strlen(font2D_pointer_any_value.get_datatype().c_str()), std::strlen("yli::ontology::Font2D*"));
-    ASSERT_EQ(std::strcmp(font2D_pointer_any_value.get_datatype().c_str(), "yli::ontology::Font2D*"), 0);
-    ASSERT_EQ(std::strlen(font2D_pointer_any_value.get_string().c_str()), std::strlen("badf072d"));
-    ASSERT_EQ(std::strcmp(font2D_pointer_any_value.get_string().c_str(), "badf072d"), 0);
-    ASSERT_EQ(font2D_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) font2D);
+    yli::ontology::Font2D* font_2d = static_cast<yli::ontology::Font2D*>((void*) 0xbadf072d);
+    yli::data::AnyValue font_2d_pointer_any_value = yli::data::AnyValue(font_2d);
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Font2D*>(font_2d_pointer_any_value.data));
+    ASSERT_EQ(std::get<yli::ontology::Font2D*>(font_2d_pointer_any_value.data), font_2d);
+    ASSERT_EQ(std::strlen(font_2d_pointer_any_value.get_datatype().c_str()), std::strlen("yli::ontology::Font2D*"));
+    ASSERT_EQ(std::strcmp(font_2d_pointer_any_value.get_datatype().c_str(), "yli::ontology::Font2D*"), 0);
+    ASSERT_EQ(std::strlen(font_2d_pointer_any_value.get_string().c_str()), std::strlen("badf072d"));
+    ASSERT_EQ(std::strcmp(font_2d_pointer_any_value.get_string().c_str(), "badf072d"), 0);
+    ASSERT_EQ(font_2d_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) font_2d);
 }
 
-TEST(any_value_must_be_initialized_appropriately, text2D)
+TEST(any_value_must_be_initialized_appropriately, text_2d)
 {
-    yli::ontology::Text2D* text2D = static_cast<yli::ontology::Text2D*>((void*) 0xbad7e72d);
-    yli::data::AnyValue text2D_pointer_any_value = yli::data::AnyValue(text2D);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Text2D*>(text2D_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Text2D*>(text2D_pointer_any_value.data), text2D);
-    ASSERT_EQ(std::strlen(text2D_pointer_any_value.get_datatype().c_str()), std::strlen("yli::ontology::Text2D*"));
-    ASSERT_EQ(std::strcmp(text2D_pointer_any_value.get_datatype().c_str(), "yli::ontology::Text2D*"), 0);
-    ASSERT_EQ(std::strlen(text2D_pointer_any_value.get_string().c_str()), std::strlen("bad7e72d"));
-    ASSERT_EQ(std::strcmp(text2D_pointer_any_value.get_string().c_str(), "bad7e72d"), 0);
-    ASSERT_EQ(text2D_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) text2D);
+    yli::ontology::Text2D* text_2d = static_cast<yli::ontology::Text2D*>((void*) 0xbad7e72d);
+    yli::data::AnyValue text_2d_pointer_any_value = yli::data::AnyValue(text_2d);
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Text2D*>(text_2d_pointer_any_value.data));
+    ASSERT_EQ(std::get<yli::ontology::Text2D*>(text_2d_pointer_any_value.data), text_2d);
+    ASSERT_EQ(std::strlen(text_2d_pointer_any_value.get_datatype().c_str()), std::strlen("yli::ontology::Text2D*"));
+    ASSERT_EQ(std::strcmp(text_2d_pointer_any_value.get_datatype().c_str(), "yli::ontology::Text2D*"), 0);
+    ASSERT_EQ(std::strlen(text_2d_pointer_any_value.get_string().c_str()), std::strlen("bad7e72d"));
+    ASSERT_EQ(std::strcmp(text_2d_pointer_any_value.get_string().c_str(), "bad7e72d"), 0);
+    ASSERT_EQ(text_2d_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) text_2d);
 }
 
 TEST(any_value_must_be_initialized_appropriately, vector_font)
@@ -827,17 +827,17 @@ TEST(any_value_must_be_initialized_appropriately, glyph)
     ASSERT_EQ(glyph_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) glyph);
 }
 
-TEST(any_value_must_be_initialized_appropriately, text3D)
+TEST(any_value_must_be_initialized_appropriately, text_3d)
 {
-    yli::ontology::Text3D* text3D = static_cast<yli::ontology::Text3D*>((void*) 0xbad7e73d);
-    yli::data::AnyValue text3D_pointer_any_value = yli::data::AnyValue(text3D);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Text3D*>(text3D_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Text3D*>(text3D_pointer_any_value.data), text3D);
-    ASSERT_EQ(std::strlen(text3D_pointer_any_value.get_datatype().c_str()), std::strlen("yli::ontology::Text3D*"));
-    ASSERT_EQ(std::strcmp(text3D_pointer_any_value.get_datatype().c_str(), "yli::ontology::Text3D*"), 0);
-    ASSERT_EQ(std::strlen(text3D_pointer_any_value.get_string().c_str()), std::strlen("bad7e73d"));
-    ASSERT_EQ(std::strcmp(text3D_pointer_any_value.get_string().c_str(), "bad7e73d"), 0);
-    ASSERT_EQ(text3D_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) text3D);
+    yli::ontology::Text3D* text_3d = static_cast<yli::ontology::Text3D*>((void*) 0xbad7e73d);
+    yli::data::AnyValue text_3d_pointer_any_value = yli::data::AnyValue(text_3d);
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Text3D*>(text_3d_pointer_any_value.data));
+    ASSERT_EQ(std::get<yli::ontology::Text3D*>(text_3d_pointer_any_value.data), text_3d);
+    ASSERT_EQ(std::strlen(text_3d_pointer_any_value.get_datatype().c_str()), std::strlen("yli::ontology::Text3D*"));
+    ASSERT_EQ(std::strcmp(text_3d_pointer_any_value.get_datatype().c_str(), "yli::ontology::Text3D*"), 0);
+    ASSERT_EQ(std::strlen(text_3d_pointer_any_value.get_string().c_str()), std::strlen("bad7e73d"));
+    ASSERT_EQ(std::strcmp(text_3d_pointer_any_value.get_string().c_str(), "bad7e73d"), 0);
+    ASSERT_EQ(text_3d_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) text_3d);
 }
 
 TEST(any_value_must_be_initialized_appropriately, console)

@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -31,7 +31,7 @@
 
 namespace yli::ontology
 {
-    void Species::bind_to_new_parent(yli::ontology::Material* const new_parent)
+    void Species::bind_to_new_material_parent(yli::ontology::Material* const new_parent)
     {
         // this method sets pointer to this `Species` to `nullptr`, sets `material_parent` according to the input,
         // and requests a new `childID` from the new `Material`.
@@ -44,19 +44,19 @@ namespace yli::ontology
 
         if (material == nullptr)
         {
-            std::cerr << "ERROR: `Species::bind_to_new_parent`: `material` is `nullptr`!\n";
+            std::cerr << "ERROR: `Species::bind_to_new_material_parent`: `material` is `nullptr`!\n";
             return;
         }
 
         if (new_parent == nullptr)
         {
-            std::cerr << "ERROR: `Species::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+            std::cerr << "ERROR: `Species::bind_to_new_material_parent`: `new_parent` is `nullptr`!\n";
             return;
         }
 
         if (new_parent->has_child(this->local_name))
         {
-            std::cerr << "ERROR: `Species::bind_to_new_parent`: local name is already in use!\n";
+            std::cerr << "ERROR: `Species::bind_to_new_material_parent`: local name is already in use!\n";
             return;
         }
 
@@ -84,7 +84,7 @@ namespace yli::ontology
             return;
         }
 
-        this->bind_to_new_parent(material_parent);
+        this->bind_to_new_material_parent(material_parent);
     }
 
     Species::~Species()
@@ -129,13 +129,13 @@ namespace yli::ontology
         return this->image_width;
     }
 
-    const std::string& Species::get_model_file_format() const
-    {
-        return this->model_file_format;
-    }
-
     std::size_t Species::get_image_height() const
     {
         return this->image_height;
+    }
+
+    const std::string& Species::get_model_file_format() const
+    {
+        return this->model_file_format;
     }
 }

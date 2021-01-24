@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -26,7 +26,6 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
-#include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
 namespace yli::callback
@@ -124,11 +123,7 @@ namespace yli::callback
     CallbackObject::CallbackObject(yli::callback::CallbackEngine* const parent)
     {
         // constructor.
-        this->childID = -1;
-        this->callback = nullptr;
         this->parent = parent;
-
-        this->number_of_callback_parameters = 0;
 
         // get `childID` from the `CallbackEngine` and set pointer to this `CallbackObject`.
         this->bind_to_parent();
@@ -137,11 +132,8 @@ namespace yli::callback
     CallbackObject::CallbackObject(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback, yli::callback::CallbackEngine* const parent)
     {
         // constructor.
-        this->childID = -1;
         this->callback = callback;
         this->parent = parent;
-
-        this->number_of_callback_parameters = 0;
 
         // get `childID` from the `CallbackEngine` and set pointer to this `CallbackObject`.
         this->bind_to_parent();

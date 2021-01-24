@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -63,7 +63,7 @@ namespace yli::ontology
         }
 
         // OK, let's print the children of this `Entity`.
-        yli::map::print_keys_to_console(entity->entity_map, console);
+        yli::map::print_keys_to_console(entity->registry.get_entity_map(), console);
 
         return nullptr;
     }
@@ -79,7 +79,7 @@ namespace yli::ontology
 
         // Print global variable names.
 
-        yli::map::print_keys_of_specific_type_to_console<yli::ontology::Entity*, yli::ontology::Variable*>(universe->entity_map, console);
+        yli::map::print_keys_of_specific_type_to_console<yli::ontology::Entity*, yli::ontology::Variable*>(universe->registry.get_entity_map(), console);
 
         return nullptr;
     }
@@ -96,7 +96,7 @@ namespace yli::ontology
 
         // Print the variable names of the `Entity`.
 
-        yli::map::print_keys_of_specific_type_to_console<yli::ontology::Entity*, yli::ontology::Variable*>(entity->entity_map, console);
+        yli::map::print_keys_of_specific_type_to_console<yli::ontology::Entity*, yli::ontology::Variable*>(entity->registry.get_entity_map(), console);
 
         return nullptr;
     }

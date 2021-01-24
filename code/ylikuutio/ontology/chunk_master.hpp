@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -26,7 +26,6 @@
 #include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
 #include <queue>    // std::queue
 #include <vector>   // std::vector
 
@@ -44,7 +43,7 @@ namespace yli::ontology
         public:
             ChunkMaster(yli::ontology::Universe* universe, yli::ontology::Material* const parent, GetContentCallback get_content_callback)
                 : yli::ontology::Entity(universe, yli::ontology::EntityStruct()),
-                parent_of_chunks(this)
+                parent_of_chunks(this, &this->registry, "chunks")
             {
                 // constructor.
                 this->get_content_callback = get_content_callback;
@@ -74,12 +73,10 @@ namespace yli::ontology
             // this method renders all `Chunk`s bound to this `ChunkMaster`.
             void render();
 
-            std::size_t childID;              // `ChunkMaster` ID, returned by `yli::ontology::Material->get_chunk_masterID()`.
-
             // Callback used to get the content based on x, y, z.
-            GetContentCallback get_content_callback;
+            GetContentCallback get_content_callback { nullptr };
 
-            yli::ontology::Material* parent;  // pointer to the `Material`.
+            yli::ontology::Material* parent { nullptr }; // pointer to the `Material`.
     };
 }
 

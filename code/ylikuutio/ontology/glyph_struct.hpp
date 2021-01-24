@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -38,8 +38,7 @@ namespace yli::ontology
     struct GlyphStruct: public yli::ontology::ModelStruct
     {
         GlyphStruct()
-            : ModelStruct(),
-            light_position(glm::vec3(0.0f, 0.0f, 0.0f)),
+            : light_position(glm::vec3(0.0f, 0.0f, 0.0f)),
             glyph_vertex_data(nullptr),
             glyph_name_pointer(nullptr),
             unicode_char_pointer(nullptr),

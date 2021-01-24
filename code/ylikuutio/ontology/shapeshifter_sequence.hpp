@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -42,7 +42,7 @@ namespace yli::ontology
         public:
             ShapeshifterSequence(yli::ontology::Universe* const universe, const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct)
                 : Entity(universe, shapeshifter_sequence_struct),
-                parent_of_objects(this)
+                parent_of_objects(this, &this->registry, "objects")
             {
                 // constructor.
                 this->parent = shapeshifter_sequence_struct.parent;

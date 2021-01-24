@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -16,8 +16,8 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "line_line_intersection.hpp"
-#include "line2D.hpp"
-#include "line3D.hpp"
+#include "line_2d.hpp"
+#include "line_3d.hpp"
 #include "code/ylikuutio/linear_algebra/matrix.hpp"
 
 // Include GLM
@@ -68,7 +68,7 @@ namespace yli::geometry
     glm::vec3 get_intersection_point(const yli::geometry::Line3D* const line1, const yli::geometry::Line3D* const line2)
     {
         // TODO: implement this function!
-        glm::vec3 intersection_point;
+        glm::vec3 intersection_point { NAN, NAN, NAN };
         return intersection_point;
     }
 }

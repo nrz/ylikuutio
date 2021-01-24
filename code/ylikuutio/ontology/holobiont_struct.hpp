@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -25,17 +25,19 @@
 
 namespace yli::ontology
 {
+    class Brain;
     class Symbiosis;
 
     struct HolobiontStruct: public yli::ontology::MovableStruct
     {
         HolobiontStruct()
-            : MovableStruct()
         {
             // constructor.
         }
 
         yli::ontology::Symbiosis* symbiosis_parent { nullptr }; // pointer to the `Symbiosis`.
+        yli::ontology::Brain* brain { nullptr };                // pointer to the `Brain` master.
+
         std::vector<bool> should_render_bionts_vector;
     };
 }

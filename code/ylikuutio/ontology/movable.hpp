@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -21,6 +21,7 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "master_module.hpp"
+#include "apprentice_module.hpp"
 #include "movable_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -36,7 +37,6 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <limits>   // std::numeric_limits
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <vector>   // std::vector
 
@@ -61,29 +61,25 @@ namespace yli::ontology
     class Brain;
     class Waypoint;
     class ParentModule;
+    class MasterModule;
 
     class Movable: public yli::ontology::Entity
     {
         public:
-            void bind_to_brain();
-            void unbind_from_brain();
-
-            // This method sets pointer to this `Movable` to `nullptr`, sets `brain` according to the input, and requests a new `apprenticeID` from the new `Brain`.
             void bind_to_new_brain(yli::ontology::Brain* const new_brain);
 
             Movable(yli::ontology::Universe* const universe,
                     const yli::ontology::MovableStruct& movable_struct,
-                    yli::ontology::ParentModule* const parent_module)
+                    yli::ontology::ParentModule* const parent_module,
+                    yli::ontology::MasterModule* const master_module)
                 : Entity(universe, movable_struct),
-                child(parent_module, this)
+                child(parent_module, this),
+                apprentice_of_brain(master_module, this)
             {
                 // constructor.
 
                 this->input_method                = movable_struct.input_method;
-                this->brain                       = movable_struct.brain;
 
-                // Currently an `Entity` can be an apprentice only for one master at any time.
-                // TODO: add support for multiple master-apprentice relationships for each `Entity`!
                 this->initial_rotate_vectors      = movable_struct.initial_rotate_vectors;
                 this->initial_rotate_angles       = movable_struct.initial_rotate_angles;
 
@@ -99,8 +95,6 @@ namespace yli::ontology
                 // These are to be used from the `Brain` callbacks.
 
                 this->create_coordinate_and_angle_variables();
-
-                this->bind_to_brain();
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Movable*";
@@ -306,10 +300,8 @@ namespace yli::ontology
             glm::mat4 model_matrix { glm::mat4(1.0f) };            // model matrix (initialized with dummy value).
             glm::mat4 mvp_matrix { glm::mat4(1.0f) };              // model view projection matrix (initialized with dummy value).
 
-            friend yli::ontology::Brain;
-
-            template<class T1, class T2>
-                friend class yli::ontology::MasterModule;
+            friend class yli::ontology::Brain;
+            friend class yli::ontology::MasterModule;
 
             template<class T1>
                 friend void yli::hierarchy::bind_apprentice_to_master(T1 apprentice_pointer, std::vector<T1>& apprentice_pointer_vector, std::queue<std::size_t>& free_apprenticeID_queue, std::size_t& number_of_apprenticeren);
@@ -317,13 +309,14 @@ namespace yli::ontology
         protected:
             yli::ontology::ChildModule child;
 
+        public:
+            yli::ontology::ApprenticeModule apprentice_of_brain;
+
         private:
             void create_coordinate_and_angle_variables();
 
             yli::input::InputMethod input_method;                  // If `input_method` is `KEYBOARD`, then keypresses control this `Movable`.
                                                                    // If `input_method` is `AI`, then the chosen `Brain` controls this `Movable`.
-            yli::ontology::Brain* brain;                           // Different kind of controls can be implemented as `Brain`s, e.g. train control systems.
-            std::size_t apprenticeID { std::numeric_limits<std::size_t>::max() };
     };
 }
 

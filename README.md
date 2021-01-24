@@ -11,7 +11,7 @@ A hobby project of mine. Work in progress.
 ## License
 Ylikuutio is under The GNU Affero General Public License 3,
 or (at your option) any later version. See COPYING file.
-All my code copyright (C) 2015-2020 Antti Nuortimo.
+All my code copyright (C) 2015-2021 Antti Nuortimo.
 
 An exception in licensing of Ylikuutio code are
 Asio example source code files modified by me, which have
@@ -315,15 +315,15 @@ A: Newer OpenGL versions may be supported in the future, but so far
    OpenGL 3.0 fulfils my requirements. Vulkan needs to be considered.
 
 Q: Does Ylikuutio use modern OpenGL (VAOs and VBOs)?
-A: Yes, Ylikuutio uses VAOs (vertex array objects, VBOs (vertex buffer objects),
-   and index buffers.
+A: Yes, Ylikuutio uses VBOs (vertex buffer objects) and index buffers.
+   VAOs (vertex array objects) are a work in progress.
 
 Q: Is Ylikuutio based on some other 3D engine?
 A: Some parts of Ylikuutio (some shaders, some file loaders, etc.) are
    based on [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/),
    which I really recommend for anyone interested in learning
    OpenGL programming. Ylikuutio also uses external libraries such as
-   (in alphabetical order) Asio, Bullet, GLM, GLEW, OpenFBX, pugixml, SDL, and stb.
+   (in alphabetical order) Asio, Bullet, GLEW, GLM, OpenFBX, pugixml, SDL, and stb.
    The rest is written from scratch.
 
 Q: Does Ylikuutio use right-handed or left-handed world coordinates?

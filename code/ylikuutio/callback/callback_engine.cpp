@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -48,15 +48,12 @@ namespace yli::callback
     CallbackEngine::CallbackEngine()
     {
         // constructor.
-        this->universe = nullptr;
-        this->number_of_callback_objects = 0;
     }
 
     CallbackEngine::CallbackEngine(yli::ontology::Universe* const universe)
     {
         // constructor.
         this->universe = universe;
-        this->number_of_callback_objects = 0;
     }
 
     CallbackEngine::~CallbackEngine()
@@ -136,7 +133,7 @@ namespace yli::callback
             return nullptr;
         }
 
-        return this->return_values.at(this->return_values.size() - 1);
+        return this->return_values.back();
     }
 
     yli::ontology::Universe* CallbackEngine::get_universe() const

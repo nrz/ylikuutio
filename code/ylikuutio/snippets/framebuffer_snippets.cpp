@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -31,13 +31,13 @@ namespace yli::snippets
         yli::ontology::VariableStruct framebuffer_width_variable_struct(std::make_shared<yli::data::AnyValue>(framebuffer_width));
         framebuffer_width_variable_struct.local_name = "framebuffer_width";
         framebuffer_width_variable_struct.activate_callback = &yli::ontology::Variable::activate_framebuffer_width;
-        framebuffer_width_variable_struct.should_ylikuutio_call_activate_callback_now = false;
+        framebuffer_width_variable_struct.should_call_activate_callback_now = false;
         universe->create_variable(framebuffer_width_variable_struct);
 
         yli::ontology::VariableStruct framebuffer_height_variable_struct(std::make_shared<yli::data::AnyValue>(framebuffer_height));
         framebuffer_height_variable_struct.local_name = "framebuffer_height";
         framebuffer_height_variable_struct.activate_callback = &yli::ontology::Variable::activate_framebuffer_height;
-        framebuffer_height_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        framebuffer_height_variable_struct.should_call_activate_callback_now = true;
         universe->create_variable(framebuffer_height_variable_struct);
     }
 }

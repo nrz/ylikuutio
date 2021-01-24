@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -27,8 +27,8 @@ namespace yli::ontology
     {
         public:
             ChildModule(yli::ontology::ParentModule* const parent_module, yli::ontology::Entity* const entity)
-                : parent_module(parent_module),
-                entity(entity)
+                : parent_module { parent_module },
+                entity { entity }
             {
                 // constructor.
                 this->bind_to_parent_module();

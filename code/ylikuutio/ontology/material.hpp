@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -40,29 +40,29 @@
 namespace yli::ontology
 {
     class Species;
-    class Object;
-    class ChunkMaster;
 
     class Material: public yli::ontology::Entity
     {
         public:
-            Material(yli::ontology::Universe* const universe, const yli::ontology::MaterialStruct& material_struct, yli::ontology::ParentModule* const parent_module)
+            // This method sets pointer to this `Material` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
+            void bind_to_new_shader_parent(yli::ontology::Shader* const new_parent);
+            void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
+
+            Material(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::MaterialStruct& material_struct,
+                    yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, material_struct),
                 child_of_shader_or_symbiosis(parent_module, this),
-                parent_of_species(this),
-                parent_of_shapeshifter_transformations(this),
-                parent_of_vector_fonts(this),
-                parent_of_chunk_masters(this)
+                parent_of_species(this, &this->registry, "species"),
+                parent_of_shapeshifter_transformations(this, &this->registry, "shapeshifter_transformations"),
+                parent_of_vector_fonts(this, &this->registry, "vector_fonts"),
+                parent_of_chunk_masters(this, &this->registry, "chunk_masters")
             {
                 // constructor.
-                this->is_symbiont_material     = material_struct.is_symbiont_material;
-                this->texture_file_format      = material_struct.texture_file_format;
-                this->texture_filename         = material_struct.texture_filename;
-                this->texture                  = 0; // some dummy value.
-                this->opengl_texture_id        = 0; // some dummy value.
-                this->image_width              = 0;
-                this->image_height             = 0;
-                this->image_size               = 0;
+                this->is_symbiont_material = material_struct.is_symbiont_material;
+                this->texture_file_format  = material_struct.texture_file_format;
+                this->texture_filename     = material_struct.texture_filename;
 
                 const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
 
@@ -110,10 +110,6 @@ namespace yli::ontology
             // destructor.
             virtual ~Material();
 
-            // This method sets pointer to this `Material` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
-            void bind_to_new_parent(yli::ontology::Shader* const new_parent);
-            void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
-
             yli::ontology::Entity* get_parent() const override;
 
             // Set terrain `Species` pointers in `Scene` and `Universe` so that they point to the chosen terrain `Species`.
@@ -136,12 +132,12 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_chunk_masters;
 
         protected:
-            std::size_t image_width;
-            std::size_t image_height;
-            std::size_t image_size;
+            std::size_t image_width  { 0 };
+            std::size_t image_height { 0 };
+            std::size_t image_size   { 0 };
 
-            uint32_t texture;                    // Texture of this `Material`, returned by `load_common_texture` (used for `glGenTextures` etc.).
-            GLuint opengl_texture_id;             // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`.
+            GLuint texture           { 0 }; // Texture of this `Material`, returned by `load_common_texture` (used for `glGenTextures` etc.). Dummy value.
+            GLuint opengl_texture_id { 0 }; // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`. Dummy value.
 
         private:
             std::size_t get_number_of_children() const override;

@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -18,9 +18,6 @@
 #include "shader.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
-#include "material.hpp"
-#include "symbiosis.hpp"
-#include "compute_task.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -54,7 +51,7 @@ namespace yli::ontology
         scene->bind_shader(this);
     }
 
-    void Shader::bind_to_new_parent(yli::ontology::Scene* const new_parent)
+    void Shader::bind_to_new_scene_parent(yli::ontology::Scene* const new_parent)
     {
         // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input,
         // and requests a new `childID` from the new `Scene`.
@@ -67,19 +64,19 @@ namespace yli::ontology
 
         if (scene == nullptr)
         {
-            std::cerr << "ERROR: `Shader::bind_to_new_parent`: `scene` is `nullptr`!\n";
+            std::cerr << "ERROR: `Shader::bind_to_new_scene_parent`: `scene` is `nullptr`!\n";
             return;
         }
 
         if (new_parent == nullptr)
         {
-            std::cerr << "ERROR: `Shader::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+            std::cerr << "ERROR: `Shader::bind_to_new_scene_parent`: `new_parent` is `nullptr`!\n";
             return;
         }
 
         if (new_parent->has_child(this->local_name))
         {
-            std::cerr << "ERROR: `Shader::bind_to_new_parent`: local name is already in use!\n";
+            std::cerr << "ERROR: `Shader::bind_to_new_scene_parent`: local name is already in use!\n";
             return;
         }
 
@@ -108,7 +105,7 @@ namespace yli::ontology
             return;
         }
 
-        this->bind_to_new_parent(scene);
+        this->bind_to_new_scene_parent(scene);
     }
 
     Shader::~Shader()
@@ -155,7 +152,7 @@ namespace yli::ontology
 
         // `glUniformMatrix4fv` doesn't change between objects,
         // so this can be done once for all objects that use the same `program_id`.
-        glUniformMatrix4fv(this->view_matrixID, 1, GL_FALSE, &this->universe->get_view_matrix()[0][0]);
+        glUniformMatrix4fv(this->view_matrix_id, 1, GL_FALSE, &this->universe->get_view_matrix()[0][0]);
 
         render_master->render_compute_tasks(this->parent_of_compute_tasks.child_pointer_vector);
         render_master->render_materials(this->parent_of_materials.child_pointer_vector);
@@ -183,19 +180,19 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_symbioses.child_pointer_vector);
     }
 
-    uint32_t Shader::get_program_id() const
+    GLuint Shader::get_program_id() const
     {
         return this->program_id;
     }
 
-    uint32_t Shader::get_matrix_id() const
+    GLint Shader::get_matrix_id() const
     {
-        return this->matrixID;
+        return this->matrix_id;
     }
 
-    uint32_t Shader::get_model_matrix_id() const
+    GLint Shader::get_model_matrix_id() const
     {
-        return this->model_matrixID;
+        return this->model_matrix_id;
     }
 
     void Shader::set_terrain_species(yli::ontology::Species* const terrain_species)

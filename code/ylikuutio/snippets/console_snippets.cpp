@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -38,25 +38,25 @@ namespace yli::snippets
         yli::ontology::VariableStruct console_top_y_variable_struct(std::make_shared<yli::data::AnyValue>(console_top_y));
         console_top_y_variable_struct.local_name = "console_top_y";
         console_top_y_variable_struct.activate_callback = &yli::ontology::Variable::activate_console_top_y;
-        console_top_y_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        console_top_y_variable_struct.should_call_activate_callback_now = true;
         entity->create_variable(console_top_y_variable_struct);
 
         yli::ontology::VariableStruct console_bottom_y_variable_struct(std::make_shared<yli::data::AnyValue>(console_bottom_y));
         console_bottom_y_variable_struct.local_name = "console_bottom_y";
         console_bottom_y_variable_struct.activate_callback = &yli::ontology::Variable::activate_console_bottom_y;
-        console_bottom_y_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        console_bottom_y_variable_struct.should_call_activate_callback_now = true;
         entity->create_variable(console_bottom_y_variable_struct);
 
         yli::ontology::VariableStruct console_left_x_variable_struct(std::make_shared<yli::data::AnyValue>(console_left_x));
         console_left_x_variable_struct.local_name = "console_left_x";
         console_left_x_variable_struct.activate_callback = &yli::ontology::Variable::activate_console_left_x;
-        console_left_x_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        console_left_x_variable_struct.should_call_activate_callback_now = true;
         entity->create_variable(console_left_x_variable_struct);
 
         yli::ontology::VariableStruct console_right_x_variable_struct(std::make_shared<yli::data::AnyValue>(console_right_x));
         console_right_x_variable_struct.local_name = "console_right_x";
         console_right_x_variable_struct.activate_callback = &yli::ontology::Variable::activate_console_right_x;
-        console_right_x_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        console_right_x_variable_struct.should_call_activate_callback_now = true;
         entity->create_variable(console_right_x_variable_struct);
     }
 }

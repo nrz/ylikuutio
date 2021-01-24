@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -34,19 +34,20 @@
 namespace yli::ontology
 {
     class Universe;
+    class Material;
 
     class ShapeshifterTransformation: public yli::ontology::Entity
     {
         public:
             // This method sets pointer to this `ShapeshifterTransformation` to `nullptr`,
             // sets `parent` according to the input, and requests a new `childID` from the new `Material`.
-            void bind_to_new_parent(yli::ontology::Material* const new_parent);
+            void bind_to_new_material_parent(yli::ontology::Material* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
             ShapeshifterTransformation(yli::ontology::Universe* const universe, const yli::ontology::SpeciesStruct& species_struct)
                 : Entity(universe, species_struct),
-                parent_of_shapeshifter_forms(this),
-                parent_of_shapeshifter_sequences(this)
+                parent_of_shapeshifter_forms(this, &this->registry, "shapeshifter_forms"),
+                parent_of_shapeshifter_sequences(this, &this->registry, "shapeshifter_sequences")
             {
                 // constructor.
                 this->parent = species_struct.material;

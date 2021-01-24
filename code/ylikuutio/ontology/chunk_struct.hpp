@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,17 +28,13 @@ namespace yli::ontology
     struct ChunkStruct: public yli::ontology::ModelStruct
     {
         ChunkStruct()
-            : ModelStruct(),
-            universe(nullptr),
-            parent(nullptr),
-            opengl_in_use(true)
         {
             // constructor.
         }
 
-        yli::ontology::Universe* universe;  // pointer to the `Universe`.
-        yli::ontology::ChunkMaster* parent; // pointer to the `ChunkMaster`.
-        bool opengl_in_use;                 // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
+        yli::ontology::Universe* universe { nullptr };  // pointer to the `Universe`.
+        yli::ontology::ChunkMaster* parent { nullptr }; // pointer to the `ChunkMaster`.
+        bool opengl_in_use { true };                    // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
     };
 }
 

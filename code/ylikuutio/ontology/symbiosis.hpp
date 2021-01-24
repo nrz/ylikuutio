@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -57,14 +57,14 @@ namespace yli::ontology
     {
         public:
             // this method sets pointer to this `Symbiosis` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
-            void bind_to_new_parent(yli::ontology::Shader* const new_parent);
+            void bind_to_new_shader_parent(yli::ontology::Shader* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
             Symbiosis(yli::ontology::Universe* universe, const yli::ontology::SymbiosisStruct& symbiosis_struct, yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, symbiosis_struct),
                 child_of_shader(parent_module, this),
-                parent_of_symbiont_materials(this),
-                parent_of_holobionts(this)
+                parent_of_symbiont_materials(this, &this->registry, "symbiont_materials"),
+                parent_of_holobionts(this, &this->registry, "holobionts")
             {
                 // constructor.
                 this->model_filename     = symbiosis_struct.model_filename;
@@ -72,7 +72,6 @@ namespace yli::ontology
                 this->triangulation_type = symbiosis_struct.triangulation_type;
                 this->light_position     = symbiosis_struct.light_position;
 
-                this->ofbx_mesh_count    = 0;
                 this->opengl_in_use      = symbiosis_struct.opengl_in_use;
 
                 this->create_symbionts();
@@ -151,7 +150,7 @@ namespace yli::ontology
             std::vector<const ofbx::Texture*> ofbx_diffuse_texture_vector;
             std::vector<const ofbx::Texture*> ofbx_normal_texture_vector;  // currently not in use.
             std::vector<const ofbx::Texture*> ofbx_count_texture_vector;   // currently not in use.
-            std::size_t ofbx_mesh_count;                                   // the value of `ofbx_mesh_count` comes from OpenFBX.
+            std::size_t ofbx_mesh_count { 0 };                             // the value of `ofbx_mesh_count` comes from OpenFBX.
 
             bool opengl_in_use;
     };

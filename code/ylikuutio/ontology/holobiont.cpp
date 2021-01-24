@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -19,6 +19,7 @@
 #include "entity.hpp"
 #include "universe.hpp"
 #include "symbiosis.hpp"
+#include "symbiont_species.hpp"
 #include "biont.hpp"
 #include "entity_factory.hpp"
 #include "holobiont_struct.hpp"
@@ -34,10 +35,11 @@
 #endif
 
 // Include standard headers
-#include <cstddef>  // std::size_t
+#include <cstddef>  // std::size_t, std::uintptr_t
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -73,7 +75,7 @@ namespace yli::ontology
         // requirements:
         // `this->symbiosis_parent` must not be `nullptr`.
 
-        yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->child.get_parent());
+        const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->child.get_parent());
 
         if (symbiosis == nullptr)
         {
@@ -81,7 +83,11 @@ namespace yli::ontology
             return;
         }
 
-        std::cout << "Creating bionts for Holobiont located at 0x" << std::hex << (uint64_t) this << std::dec << " ...\n";
+        const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) this);
+        std::stringstream memory_address_stringstream;
+        memory_address_stringstream << "0x" << std::hex << memory_address;
+
+        std::cout << "Creating `Biont`s for `Holobiont` located at 0x" << memory_address_stringstream.str() << " ...\n";
 
         // Create `Biont` entities so that they bind to this `Holobiont`.
         const std::size_t correct_number_of_bionts = symbiosis->get_number_of_ofbx_meshes();
@@ -95,10 +101,17 @@ namespace yli::ontology
                 continue;
             }
 
+            yli::ontology::SymbiontSpecies* const symbiont_species = symbiosis->get_symbiont_species(biontID);
+
+            if (symbiont_species == nullptr)
+            {
+                continue;
+            }
+
             yli::ontology::BiontStruct biont_struct;
             biont_struct.biontID                = biontID;
             biont_struct.holobiont_parent       = this;
-            biont_struct.symbiont_species       = symbiosis->get_symbiont_species(biontID);
+            biont_struct.symbiont_species       = symbiont_species;
             biont_struct.initial_rotate_vectors = this->initial_rotate_vectors;
             biont_struct.initial_rotate_angles  = this->initial_rotate_angles;
             biont_struct.original_scale_vector  = this->original_scale_vector;
@@ -107,18 +120,18 @@ namespace yli::ontology
 
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
-            new yli::ontology::Biont(this->universe, biont_struct, &this->parent_of_bionts);
+            new yli::ontology::Biont(this->universe, biont_struct, &this->parent_of_bionts, &symbiont_species->master_of_bionts);
         }
     }
 
-    void Holobiont::update_x(float x)
+    void Holobiont::update_x(const float x)
     {
         this->cartesian_coordinates.x = x;
         this->model_matrix[3][0] = x;
 
-        for (yli::ontology::Entity* biont_entity : this->parent_of_bionts.child_pointer_vector)
+        for (yli::ontology::Entity* const biont_entity : this->parent_of_bionts.child_pointer_vector)
         {
-            yli::ontology::Biont* biont = static_cast<yli::ontology::Biont*>(biont_entity);
+            yli::ontology::Biont* const biont = static_cast<yli::ontology::Biont*>(biont_entity);
 
             if (biont != nullptr)
             {
@@ -128,14 +141,14 @@ namespace yli::ontology
         }
     }
 
-    void Holobiont::update_y(float y)
+    void Holobiont::update_y(const float y)
     {
         this->cartesian_coordinates.y = y;
         this->model_matrix[3][1] = y;
 
-        for (yli::ontology::Entity* biont_entity : this->parent_of_bionts.child_pointer_vector)
+        for (yli::ontology::Entity* const biont_entity : this->parent_of_bionts.child_pointer_vector)
         {
-            yli::ontology::Biont* biont = static_cast<yli::ontology::Biont*>(biont_entity);
+            yli::ontology::Biont* const biont = static_cast<yli::ontology::Biont*>(biont_entity);
 
             if (biont != nullptr)
             {
@@ -145,14 +158,14 @@ namespace yli::ontology
         }
     }
 
-    void Holobiont::update_z(float z)
+    void Holobiont::update_z(const float z)
     {
         this->cartesian_coordinates.z = z;
         this->model_matrix[3][2] = z;
 
-        for (yli::ontology::Entity* biont_entity : this->parent_of_bionts.child_pointer_vector)
+        for (yli::ontology::Entity* const biont_entity : this->parent_of_bionts.child_pointer_vector)
         {
-            yli::ontology::Biont* biont = static_cast<yli::ontology::Biont*>(biont_entity);
+            yli::ontology::Biont* const biont = static_cast<yli::ontology::Biont*>(biont_entity);
 
             if (biont != nullptr)
             {
@@ -186,7 +199,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        yli::ontology::EntityFactory* const entity_factory = parent->get_entity_factory();
+        const yli::ontology::EntityFactory* const entity_factory = parent->get_entity_factory();
 
         if (entity_factory == nullptr)
         {
@@ -241,7 +254,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        yli::ontology::EntityFactory* const entity_factory = parent->get_entity_factory();
+        const yli::ontology::EntityFactory* const entity_factory = parent->get_entity_factory();
 
         if (entity_factory == nullptr)
         {
@@ -284,11 +297,11 @@ namespace yli::ontology
             return nullptr;
         }
 
-        float float_x = std::get<float>(x_any_value.data);
-        float float_y = std::get<float>(y_any_value.data);
-        float float_z = std::get<float>(z_any_value.data);
-        float float_yaw = std::get<float>(yaw_any_value.data);
-        float float_pitch = std::get<float>(pitch_any_value.data);
+        const float float_x = std::get<float>(x_any_value.data);
+        const float float_y = std::get<float>(y_any_value.data);
+        const float float_z = std::get<float>(z_any_value.data);
+        const float float_yaw = std::get<float>(yaw_any_value.data);
+        const float float_pitch = std::get<float>(pitch_any_value.data);
 
         yli::ontology::HolobiontStruct holobiont_struct;
         holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);

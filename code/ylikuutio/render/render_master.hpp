@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -75,7 +75,7 @@ namespace yli::render
             void render_shapeshifter_sequences(std::vector<yli::ontology::Entity*>& shapeshifter_sequence_pointer_vector) const;
             void render_chunk_masters(std::vector<yli::ontology::Entity*>& chunk_master_pointer_vector) const;
             void render_chunks(std::vector<yli::ontology::Entity*>& chunk_pointer_vector) const;
-            void render_text2Ds(std::vector<yli::ontology::Entity*>& text2D_pointer_vector) const;
+            void render_text_2ds(std::vector<yli::ontology::Entity*>& text_2d_pointer_vector) const;
             void render_vector_fonts(std::vector<yli::ontology::Entity*>& vector_font_pointer_vector) const;
             void render_glyph(yli::ontology::Glyph* const glyph) const;
             void render_glyphs(std::vector<yli::ontology::Entity*>& glyph_pointer_vector) const;

@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -25,12 +25,11 @@
 #include "entity.hpp"
 #include "parent_module.hpp"
 #include "universe.hpp"
-#include "glyph.hpp"
 #include "shader_struct.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/load/shader_loader.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/data/pi.hpp"
+#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_templates.hpp"
 
@@ -51,14 +50,14 @@ namespace yli::ontology
     {
         public:
             // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
-            void bind_to_new_parent(yli::ontology::Scene* const new_parent);
+            void bind_to_new_scene_parent(yli::ontology::Scene* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
             Shader(yli::ontology::Universe* const universe, const yli::ontology::ShaderStruct& shader_struct)
                 : Entity(universe, shader_struct),
-                parent_of_compute_tasks(this),
-                parent_of_materials(this),
-                parent_of_symbioses(this)
+                parent_of_compute_tasks(this, &this->registry, "compute_tasks"),
+                parent_of_materials(this, &this->registry, "materials"),
+                parent_of_symbioses(this, &this->registry, "symbioses")
             {
                 // constructor.
 
@@ -68,11 +67,6 @@ namespace yli::ontology
                 this->char_vertex_shader   = this->vertex_shader.c_str();
                 this->char_fragment_shader = this->fragment_shader.c_str();
                 this->parent               = shader_struct.parent;
-
-                this->program_id           = 0; // dummy value.
-                this->matrixID             = 0; // dummy value.
-                this->view_matrixID        = 0; // dummy value.
-                this->model_matrixID       = 0; // dummy value.
 
                 // Each GPGPU `Shader` owns 0 or more output `ComputeTask`s.
                 // Each `Material` rendered after a given GPGPU `Shader`
@@ -91,9 +85,9 @@ namespace yli::ontology
                     this->program_id = yli::load::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
 
                     // Get a handle for our "MVP" uniform.
-                    this->matrixID = glGetUniformLocation(this->program_id, "MVP");
-                    this->view_matrixID = glGetUniformLocation(this->program_id, "V");
-                    this->model_matrixID = glGetUniformLocation(this->program_id, "M");
+                    this->matrix_id = glGetUniformLocation(this->program_id, "MVP");
+                    this->view_matrix_id = glGetUniformLocation(this->program_id, "V");
+                    this->model_matrix_id = glGetUniformLocation(this->program_id, "M");
                 }
 
                 // `yli::ontology::Entity` member variables begin here.
@@ -113,11 +107,11 @@ namespace yli::ontology
             // Currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
             void set_terrain_species(yli::ontology::Species* terrain_species);
 
-            uint32_t get_program_id() const;
-            uint32_t get_matrix_id() const;
-            uint32_t get_model_matrix_id() const;
+            GLuint get_program_id() const;
+            GLint get_matrix_id() const;
+            GLint get_model_matrix_id() const;
 
-            friend yli::ontology::ShaderCompare;
+            friend class yli::ontology::ShaderCompare;
             template<class T1>
                 friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
             template<class T1, class T2>
@@ -138,11 +132,10 @@ namespace yli::ontology
 
             yli::ontology::Scene* parent;         // Pointer to the `Scene`.
 
-            GLuint program_id;                    // This `Shader`'s `program_id`, returned by `load_shaders`.
-
-            uint32_t matrixID;
-            uint32_t view_matrixID;
-            uint32_t model_matrixID;
+            GLuint program_id     { 0 };          // This `Shader`'s `program_id`, returned by `load_shaders`. Dummy value.
+            GLint matrix_id       { 0 };          // Dummy value.
+            GLint view_matrix_id  { 0 };          // Dummy value.
+            GLint model_matrix_id { 0 };          // Dummy value.
 
             std::string vertex_shader;            // Filename of vertex shader.
             std::string fragment_shader;          // Filename of fragment shader.

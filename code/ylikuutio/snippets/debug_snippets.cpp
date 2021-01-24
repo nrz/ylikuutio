@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -33,7 +33,7 @@ namespace yli::snippets
         is_flight_mode_in_use_variable_struct.local_name = "is_flight_mode_in_use";
         is_flight_mode_in_use_variable_struct.activate_callback = &yli::ontology::Variable::activate_is_flight_mode_in_use;
         is_flight_mode_in_use_variable_struct.read_callback = &yli::ontology::Variable::read_is_flight_mode_in_use;
-        is_flight_mode_in_use_variable_struct.should_ylikuutio_call_activate_callback_now = true;
+        is_flight_mode_in_use_variable_struct.should_call_activate_callback_now = true;
         universe->create_variable(is_flight_mode_in_use_variable_struct);
     }
 }

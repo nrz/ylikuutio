@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2020 Antti Nuortimo.
+// Copyright (C) 2015-2021 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -15,37 +15,33 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_GEOMETRY_LINE_SEGMENT2D_HPP_INCLUDED
-#define __YLIKUUTIO_GEOMETRY_LINE_SEGMENT2D_HPP_INCLUDED
-
-#include "line2D.hpp"
-#include "line_segment.hpp"
-
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
+#ifndef __YLIKUUTIO_ONTOLOGY_INDEXABLE_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_INDEXABLE_HPP_INCLUDED
 
 // Include standard headers
-#include <vector>   // std::vector
+#include <cstddef> // std::size_t
 
-namespace yli::geometry
+namespace yli::ontology
 {
-    class LineSegment2D : public Line2D
+    class Entity;
+
+    class Indexable
     {
         public:
             // constructor.
-            LineSegment2D(const std::vector<float> point1, const std::vector<float> point2)
-                : Line2D(point1, point2)
+            Indexable()
             {
             }
 
-            // constructor (delegate the constructor).
-            LineSegment2D(const glm::vec2 point1, const glm::vec2 point2)
-                : LineSegment2D(std::vector<float>{ point1.x, point1.y }, std::vector<float>{ point2.x, point2.y })
-                {
-                }
+            Indexable(const Indexable&) = delete;            // Delete copy constructor.
+            Indexable& operator=(const Indexable&) = delete; // Delete copy assignment.
+
+            // destructor.
+            virtual ~Indexable()
+            {
+            }
+
+            virtual yli::ontology::Entity* get(const std::size_t index) const = 0;
     };
 }
 
