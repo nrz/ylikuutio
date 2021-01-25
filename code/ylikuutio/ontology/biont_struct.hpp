@@ -36,7 +36,7 @@ namespace yli::ontology
             // constructor.
         }
 
-        yli::ontology::Holobiont* holobiont_parent { nullptr };          // pointer to the `Holobiont`.
+        yli::ontology::Holobiont* holobiont_parent       { nullptr };    // pointer to the `Holobiont`.
         yli::ontology::SymbiontSpecies* symbiont_species { nullptr };    // pointer to the `SymbiontSpecies` (not a parent!).
         std::size_t biontID { std::numeric_limits<std::size_t>::max() }; // `std::numeric_limits<std::size_t>::max()` means that `biontID` is not defined.
         bool should_render { true };

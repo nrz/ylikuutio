@@ -50,21 +50,21 @@ namespace yli::ontology
         std::string texture_filename;    // Filename of the model file.
         std::string output_filename;     // Filename of the output file.
         yli::ontology::Shader* parent { nullptr };   // Pointer to the `Shader`.
-        std::shared_ptr<yli::data::AnyValue> left_filler_vector_any_value { nullptr };
-        std::shared_ptr<yli::data::AnyValue> right_filler_vector_any_value { nullptr };
+        std::shared_ptr<yli::data::AnyValue> left_filler_vector_any_value            { nullptr };
+        std::shared_ptr<yli::data::AnyValue> right_filler_vector_any_value           { nullptr };
         std::shared_ptr<yli::callback::CallbackEngine> end_condition_callback_engine { nullptr };
-        std::size_t n_max_iterations { 1 }; // By default execute GLSL shader exactly once (do not iterate further).
-        std::size_t compute_taskID { std::numeric_limits<std::size_t>::max() };
-        std::size_t texture_width { 0 };
-        std::size_t texture_height { 0 };
-        std::size_t n_index_characters { 4 };  // For intermediate results' filenames.
-        GLenum format { GL_RGB };
-        GLenum internal_format { GL_INVALID_ENUM };
-        GLenum output_format { GL_INVALID_ENUM };
-        GLenum type { GL_UNSIGNED_BYTE };
-        bool should_save_intermediate_results { false };
-        bool should_flip_texture { true };
-        PreIterateCallback preiterate_callback { nullptr };
+        std::size_t n_max_iterations   { 1 }; // By default execute GLSL shader exactly once (do not iterate further).
+        std::size_t compute_taskID     { std::numeric_limits<std::size_t>::max() };
+        std::size_t texture_width      { 0 };
+        std::size_t texture_height     { 0 };
+        std::size_t n_index_characters { 4 }; // For intermediate results' filenames.
+        GLenum format                  { GL_RGB };
+        GLenum internal_format         { GL_INVALID_ENUM };
+        GLenum output_format           { GL_INVALID_ENUM };
+        GLenum type                    { GL_UNSIGNED_BYTE };
+        bool should_save_intermediate_results    { false };
+        bool should_flip_texture                 { true };
+        PreIterateCallback preiterate_callback   { nullptr };
         PostIterateCallback postiterate_callback { nullptr };
     };
 }

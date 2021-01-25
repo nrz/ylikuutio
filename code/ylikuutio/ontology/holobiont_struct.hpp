@@ -36,7 +36,7 @@ namespace yli::ontology
         }
 
         yli::ontology::Symbiosis* symbiosis_parent { nullptr }; // pointer to the `Symbiosis`.
-        yli::ontology::Brain* brain { nullptr };                // pointer to the `Brain` master.
+        yli::ontology::Brain* brain                { nullptr }; // pointer to the `Brain` master.
 
         std::vector<bool> should_render_bionts_vector;
     };

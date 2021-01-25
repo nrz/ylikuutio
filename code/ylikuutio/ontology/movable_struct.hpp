@@ -88,7 +88,7 @@ namespace yli::ontology
 
         glm::vec3 cartesian_coordinates { glm::vec3(NAN, NAN, NAN) };
         yli::data::SphericalCoordinatesStruct spherical_coordinates { NAN, NAN, NAN };
-        float yaw { 0.0f };
+        float yaw   { 0.0f };
         float pitch { 0.0f };
     };
 }

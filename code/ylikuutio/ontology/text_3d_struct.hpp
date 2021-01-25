@@ -37,7 +37,7 @@ namespace yli::ontology
 
         std::string text_string;
         yli::ontology::VectorFont* parent { nullptr }; // pointer to the `VectorFont` (parent).
-        yli::ontology::Brain* brain { nullptr };       // pointer to the `Brain` master.
+        yli::ontology::Brain* brain       { nullptr }; // pointer to the `Brain` master.
     };
 }
 
