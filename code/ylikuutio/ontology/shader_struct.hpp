@@ -21,7 +21,6 @@
 #include "entity_struct.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
 #include <string>   // std::string
 
 namespace yli::ontology
