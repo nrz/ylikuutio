@@ -50,12 +50,11 @@ namespace yli::ontology
                 yli::data::SphericalCoordinatesStruct spherical_coordinates,
                 const float yaw,
                 const float pitch)
-            : EntityStruct(),
-            brain(brain),
-            cartesian_coordinates(cartesian_coordinates),
-            spherical_coordinates(spherical_coordinates),
-            yaw(yaw),
-            pitch(pitch)
+            : brain { brain },
+            cartesian_coordinates { cartesian_coordinates },
+            spherical_coordinates { spherical_coordinates },
+            yaw { yaw },
+            pitch { pitch }
         {
             // constructor.
         }
@@ -69,11 +68,11 @@ namespace yli::ontology
                 const std::string& global_name,
                 const std::string& local_name)
             : EntityStruct(global_name, local_name),
-            brain(brain),
-            cartesian_coordinates(cartesian_coordinates),
-            spherical_coordinates(spherical_coordinates),
-            yaw(yaw),
-            pitch(pitch)
+            brain { brain },
+            cartesian_coordinates { cartesian_coordinates },
+            spherical_coordinates { spherical_coordinates },
+            yaw { yaw },
+            pitch { pitch }
         {
             // constructor.
         }

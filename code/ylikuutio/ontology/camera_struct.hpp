@@ -27,11 +27,6 @@ namespace yli::ontology
 
     struct CameraStruct: public yli::ontology::MovableStruct
     {
-        CameraStruct()
-        {
-            // constructor.
-        }
-
         yli::ontology::Scene* parent { nullptr }; // pointer to the `Scene`.
         yli::ontology::Brain* brain  { nullptr }; // pointer to the `Brain` master.
 

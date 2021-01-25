@@ -30,11 +30,6 @@ namespace yli::ontology
 
     struct HolobiontStruct: public yli::ontology::MovableStruct
     {
-        HolobiontStruct()
-        {
-            // constructor.
-        }
-
         yli::ontology::Symbiosis* symbiosis_parent { nullptr }; // pointer to the `Symbiosis`.
         yli::ontology::Brain* brain                { nullptr }; // pointer to the `Brain` master.
 

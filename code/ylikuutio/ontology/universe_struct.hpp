@@ -31,11 +31,6 @@ namespace yli::ontology
 {
     struct UniverseStruct: public yli::ontology::EntityStruct
     {
-        UniverseStruct()
-        {
-            // constructor.
-        }
-
         std::string application_name;
         std::string window_title;
         uint32_t window_width   { 1600 };

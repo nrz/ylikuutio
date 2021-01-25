@@ -24,10 +24,6 @@ namespace yli::ontology
 {
     struct WorldStruct: public yli::ontology::EntityStruct
     {
-        WorldStruct()
-        {
-            // constructor.
-        }
     };
 }
 

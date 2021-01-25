@@ -30,11 +30,6 @@ namespace yli::ontology
 
     struct Text3DStruct: public yli::ontology::MovableStruct
     {
-        Text3DStruct()
-        {
-            // constructor.
-        }
-
         std::string text_string;
         yli::ontology::VectorFont* parent { nullptr }; // pointer to the `VectorFont` (parent).
         yli::ontology::Brain* brain       { nullptr }; // pointer to the `Brain` master.
