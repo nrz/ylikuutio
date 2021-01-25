@@ -110,7 +110,7 @@ namespace yli::ontology
 
             yli::ontology::BiontStruct biont_struct;
             biont_struct.biontID                = biontID;
-            biont_struct.holobiont_parent       = this;
+            biont_struct.parent                 = this;
             biont_struct.symbiont_species       = symbiont_species;
             biont_struct.initial_rotate_vectors = this->initial_rotate_vectors;
             biont_struct.initial_rotate_angles  = this->initial_rotate_angles;
