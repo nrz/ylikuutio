@@ -30,7 +30,7 @@ namespace yli::ontology
 
     struct TextStruct: public yli::ontology::EntityStruct
     {
-        yli::ontology::Font2D* font_2d_parent { nullptr };
+        yli::ontology::Font2D* parent { nullptr };
         std::size_t screen_width  { 0 };
         std::size_t screen_height { 0 };
         std::size_t x             { 0 };

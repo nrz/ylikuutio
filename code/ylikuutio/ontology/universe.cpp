@@ -174,7 +174,7 @@ namespace yli::ontology
 
         // Create angles and cartesian coordinates text, on bottom left corner.
         yli::ontology::TextStruct angles_and_coordinates_text_struct;
-        angles_and_coordinates_text_struct.font_2d_parent = font_2d;
+        angles_and_coordinates_text_struct.parent = font_2d;
         angles_and_coordinates_text_struct.screen_width = this->window_width;
         angles_and_coordinates_text_struct.screen_height = this->window_height;
         angles_and_coordinates_text_struct.x = 0;
@@ -193,7 +193,7 @@ namespace yli::ontology
 
         // Create spherical coordinates text, on second line from the bottom left.
         yli::ontology::TextStruct spherical_coordinates_text_struct;
-        spherical_coordinates_text_struct.font_2d_parent = font_2d;
+        spherical_coordinates_text_struct.parent = font_2d;
         spherical_coordinates_text_struct.screen_width = this->window_width;
         spherical_coordinates_text_struct.screen_height = this->window_height;
         spherical_coordinates_text_struct.x = 0;
@@ -211,7 +211,7 @@ namespace yli::ontology
 
         // Create time data text, on top left corner.
         yli::ontology::TextStruct time_text_struct;
-        time_text_struct.font_2d_parent = font_2d;
+        time_text_struct.parent = font_2d;
         time_text_struct.screen_width = this->window_width;
         time_text_struct.screen_height = this->window_height;
         time_text_struct.x = 0;
@@ -230,7 +230,7 @@ namespace yli::ontology
 
         // Create help text.
         yli::ontology::TextStruct help_text_struct;
-        help_text_struct.font_2d_parent = font_2d;
+        help_text_struct.parent = font_2d;
         help_text_struct.screen_width = this->window_width;
         help_text_struct.screen_height = this->window_height;
         help_text_struct.x = 0;
@@ -249,7 +249,7 @@ namespace yli::ontology
 
         // Print frame rate data on top right corner.
         yli::ontology::TextStruct frame_rate_text_struct;
-        frame_rate_text_struct.font_2d_parent = font_2d;
+        frame_rate_text_struct.parent = font_2d;
         frame_rate_text_struct.screen_width = this->window_width;
         frame_rate_text_struct.screen_height = this->window_height;
         frame_rate_text_struct.x = this->window_width;

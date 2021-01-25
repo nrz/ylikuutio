@@ -240,7 +240,7 @@ namespace yli::ontology
         yli::ontology::Entity* text2d_entity = new yli::ontology::Text2D(
                 this->universe,
                 text_struct,
-                (text_struct.font_2d_parent == nullptr ? nullptr : &text_struct.font_2d_parent->parent_of_text_2ds));
+                (text_struct.parent == nullptr ? nullptr : &text_struct.parent->parent_of_text_2ds));
 
         text2d_entity->set_global_name(text_struct.global_name);
         text2d_entity->set_local_name(text_struct.local_name);
