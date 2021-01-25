@@ -234,7 +234,7 @@ namespace yli::ontology
 
         yli::ontology::HolobiontStruct holobiont_struct;
         holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
-        holobiont_struct.symbiosis_parent = parent;
+        holobiont_struct.parent = parent;
         holobiont_struct.local_name = *holobiont_name;
         entity_factory->create_holobiont(holobiont_struct);
         return nullptr;
@@ -307,7 +307,7 @@ namespace yli::ontology
         holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
         holobiont_struct.yaw = float_yaw;
         holobiont_struct.pitch = float_pitch;
-        holobiont_struct.symbiosis_parent = parent;
+        holobiont_struct.parent = parent;
         holobiont_struct.local_name = *holobiont_name;
         entity_factory->create_holobiont(holobiont_struct);
         return nullptr;

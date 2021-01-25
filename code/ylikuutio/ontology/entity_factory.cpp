@@ -219,7 +219,7 @@ namespace yli::ontology
         yli::ontology::Entity* holobiont_entity = new yli::ontology::Holobiont(
                 this->universe,
                 holobiont_struct,
-                (holobiont_struct.symbiosis_parent == nullptr ? nullptr : &holobiont_struct.symbiosis_parent->parent_of_holobionts),
+                (holobiont_struct.parent == nullptr ? nullptr : &holobiont_struct.parent->parent_of_holobionts),
                 (holobiont_struct.brain == nullptr ? nullptr : holobiont_struct.brain->get_master_module()));
 
         holobiont_entity->set_global_name(holobiont_struct.global_name);
