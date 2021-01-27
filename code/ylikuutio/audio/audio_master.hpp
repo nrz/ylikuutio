@@ -63,19 +63,19 @@ namespace yli::audio
             static void play_audio_callback(void* userdata, uint8_t* stream, int length);
             static yli::audio::AudioMaster* audio_master;
 
-            yli::ontology::Universe* universe;
+            yli::ontology::Universe* universe { nullptr };
 
             SDL_AudioSpec audio_spec;
             SDL_AudioDeviceID device;
 
-            uint8_t* wav_pointer;
-            SDL_atomic_t remaining_length;
+            uint8_t* wav_pointer { nullptr };
+            SDL_atomic_t remaining_length { 0 };
 
             std::unordered_map<std::string, uint8_t*> wav_buffer_pointer_map;     // filename is the key.
             std::unordered_map<std::string, std::list<std::string>> playlist_map; // key: name of playlist, value: list of filenames.
             std::string current_playlist;                                         // name of current playlist.
             std::list<std::string>::iterator current_playlist_sound_iterator;
-            bool loop;
+            bool loop { false };
     };
 }
 
