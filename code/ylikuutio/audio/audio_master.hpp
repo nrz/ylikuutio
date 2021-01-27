@@ -63,7 +63,7 @@ namespace yli::audio
             static void play_audio_callback(void* userdata, uint8_t* stream, int length);
             static yli::audio::AudioMaster* audio_master;
 
-            yli::ontology::Universe* universe { nullptr };
+            yli::ontology::Universe* const universe { nullptr };
 
             SDL_AudioSpec audio_spec;
             SDL_AudioDeviceID device;

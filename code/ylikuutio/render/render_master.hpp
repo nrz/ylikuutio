@@ -82,7 +82,7 @@ namespace yli::render
             void render_compute_tasks(std::vector<yli::ontology::Entity*>& compute_task_pointer_vector) const;
 
         private:
-            yli::ontology::Universe* universe { nullptr };
+            yli::ontology::Universe* const universe { nullptr };
 
             SDL_GLContext context { nullptr };
             SDL_Window* hidden_sdl_window { nullptr };
