@@ -31,9 +31,9 @@ namespace yli::audio
     yli::audio::AudioMaster* AudioMaster::audio_master;
 
     AudioMaster::AudioMaster(yli::ontology::Universe* const universe)
+        : universe { universe }
     {
         // constructor.
-        this->universe = universe;
 
         this->wav_pointer = nullptr;
         SDL_AtomicSet(&this->remaining_length, 0);
