@@ -110,7 +110,7 @@ namespace yli::ontology
 
             yli::ontology::BiontStruct biont_struct;
             biont_struct.biontID                = biontID;
-            biont_struct.holobiont_parent       = this;
+            biont_struct.parent                 = this;
             biont_struct.symbiont_species       = symbiont_species;
             biont_struct.initial_rotate_vectors = this->initial_rotate_vectors;
             biont_struct.initial_rotate_angles  = this->initial_rotate_angles;
@@ -234,7 +234,7 @@ namespace yli::ontology
 
         yli::ontology::HolobiontStruct holobiont_struct;
         holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
-        holobiont_struct.symbiosis_parent = parent;
+        holobiont_struct.parent = parent;
         holobiont_struct.local_name = *holobiont_name;
         entity_factory->create_holobiont(holobiont_struct);
         return nullptr;
@@ -307,7 +307,7 @@ namespace yli::ontology
         holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
         holobiont_struct.yaw = float_yaw;
         holobiont_struct.pitch = float_pitch;
-        holobiont_struct.symbiosis_parent = parent;
+        holobiont_struct.parent = parent;
         holobiont_struct.local_name = *holobiont_name;
         entity_factory->create_holobiont(holobiont_struct);
         return nullptr;

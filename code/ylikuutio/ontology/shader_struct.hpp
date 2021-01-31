@@ -21,8 +21,7 @@
 #include "entity_struct.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
-#include <string>   // std::string
+#include <string> // std::string
 
 namespace yli::ontology
 {
@@ -30,11 +29,6 @@ namespace yli::ontology
 
     struct ShaderStruct: public yli::ontology::EntityStruct
     {
-        ShaderStruct()
-        {
-            // constructor.
-        }
-
         std::string vertex_shader;    // filename of vertex shader.
         std::string fragment_shader;  // filename of fragment shader.
         yli::ontology::Scene* parent { nullptr }; // pointer to the `Scene`.

@@ -32,10 +32,10 @@ namespace yli::input
     }
 
     InputMaster::InputMaster(yli::ontology::Universe* const universe)
+        : universe { universe }
     {
         // constructor.
 
-        this->universe = universe;
         this->input_method = yli::input::InputMethod::KEYBOARD;
     }
 

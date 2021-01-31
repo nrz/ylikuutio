@@ -59,7 +59,7 @@ namespace yli::input
             yli::input::InputMethod get_input_method() const;
 
         private:
-            yli::ontology::Universe* universe { nullptr };
+            yli::ontology::Universe* const universe { nullptr };
 
             yli::input::InputMode* active_input_mode { nullptr };
 

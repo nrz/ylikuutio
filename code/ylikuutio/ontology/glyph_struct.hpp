@@ -37,27 +37,14 @@ namespace yli::ontology
 
     struct GlyphStruct: public yli::ontology::ModelStruct
     {
-        GlyphStruct()
-            : light_position(glm::vec3(0.0f, 0.0f, 0.0f)),
-            glyph_vertex_data(nullptr),
-            glyph_name_pointer(nullptr),
-            unicode_char_pointer(nullptr),
-            universe(nullptr),
-            shader_pointer(nullptr),
-            parent(nullptr),
-            opengl_in_use(true)
-        {
-            // constructor.
-        }
-
-        glm::vec3 light_position;              // light position.
-        std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
-        const char* glyph_name_pointer;        // we need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.
-        const char* unicode_char_pointer;      // we need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.
-        yli::ontology::Universe* universe;     // pointer to the `Universe` (not a parent!).
-        yli::ontology::Shader* shader_pointer; // pointer to the `Shader` (not a parent!).
-        yli::ontology::VectorFont* parent;     // pointer to the `VectorFont`.
-        bool opengl_in_use;                    // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
+        glm::vec3 light_position { glm::vec3(0.0f, 0.0f, 0.0f) }; // Light position.
+        std::vector<std::vector<glm::vec2>>* glyph_vertex_data { nullptr };
+        const char* glyph_name_pointer         { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.
+        const char* unicode_char_pointer       { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.
+        yli::ontology::Universe* universe      { nullptr }; // Pointer to the `Universe` (not a parent!).
+        yli::ontology::Shader* shader_pointer  { nullptr }; // Pointer to the `Shader` (not a parent!).
+        yli::ontology::VectorFont* parent      { nullptr }; // pointer to the `VectorFont`.
+        bool opengl_in_use                     { true };    // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
     };
 }
 

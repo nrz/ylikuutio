@@ -82,14 +82,14 @@ namespace yli::render
             void render_compute_tasks(std::vector<yli::ontology::Entity*>& compute_task_pointer_vector) const;
 
         private:
-            yli::ontology::Universe* universe;
+            yli::ontology::Universe* const universe { nullptr };
 
             SDL_GLContext context { nullptr };
-            SDL_Window* hidden_sdl_window;
+            SDL_Window* hidden_sdl_window { nullptr };
             std::string hidden_window_title;
-            uint32_t hidden_window_width;
-            uint32_t hidden_window_height;
-            bool is_hidden_window_fullscreen;
+            uint32_t hidden_window_width     { 0 };
+            uint32_t hidden_window_height    { 0 };
+            bool is_hidden_window_fullscreen { false };
 
             float background_red   { 0.0f };
             float background_green { 0.0f };

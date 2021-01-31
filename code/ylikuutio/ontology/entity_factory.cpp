@@ -219,7 +219,7 @@ namespace yli::ontology
         yli::ontology::Entity* holobiont_entity = new yli::ontology::Holobiont(
                 this->universe,
                 holobiont_struct,
-                (holobiont_struct.symbiosis_parent == nullptr ? nullptr : &holobiont_struct.symbiosis_parent->parent_of_holobionts),
+                (holobiont_struct.parent == nullptr ? nullptr : &holobiont_struct.parent->parent_of_holobionts),
                 (holobiont_struct.brain == nullptr ? nullptr : holobiont_struct.brain->get_master_module()));
 
         holobiont_entity->set_global_name(holobiont_struct.global_name);
@@ -240,7 +240,7 @@ namespace yli::ontology
         yli::ontology::Entity* text2d_entity = new yli::ontology::Text2D(
                 this->universe,
                 text_struct,
-                (text_struct.font_2d_parent == nullptr ? nullptr : &text_struct.font_2d_parent->parent_of_text_2ds));
+                (text_struct.parent == nullptr ? nullptr : &text_struct.parent->parent_of_text_2ds));
 
         text2d_entity->set_global_name(text_struct.global_name);
         text2d_entity->set_local_name(text_struct.local_name);

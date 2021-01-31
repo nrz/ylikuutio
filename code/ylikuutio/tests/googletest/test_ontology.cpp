@@ -924,7 +924,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct, &shader->parent_of_symbioses);
 
     yli::ontology::HolobiontStruct holobiont_struct;
-    holobiont_struct.symbiosis_parent = symbiosis;
+    holobiont_struct.parent = symbiosis;
     yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(universe, holobiont_struct, &symbiosis->parent_of_holobionts, nullptr);
 
     // `Entity` member functions of `Universe`.
@@ -954,7 +954,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
 TEST(holobiont_must_be_initialized_appropriately, no_universe_no_world_no_scene_no_shader_no_symbiosis)
 {
     yli::ontology::HolobiontStruct holobiont_struct;
-    holobiont_struct.symbiosis_parent = nullptr;
+    holobiont_struct.parent = nullptr;
     yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(nullptr, holobiont_struct, nullptr, nullptr);
 
     // `Entity` member functions.
@@ -990,7 +990,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct, &shader->parent_of_symbioses);
 
     yli::ontology::HolobiontStruct holobiont_struct;
-    holobiont_struct.symbiosis_parent = symbiosis;
+    holobiont_struct.parent = symbiosis;
     yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(universe, holobiont_struct, &symbiosis->parent_of_holobionts, nullptr);
 
     // `Entity` member functions of `Universe`.
@@ -1026,7 +1026,7 @@ TEST(holobiont_must_be_initialized_appropriately, no_universe_no_world_no_scene_
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct, nullptr);
 
     yli::ontology::HolobiontStruct holobiont_struct;
-    holobiont_struct.symbiosis_parent = symbiosis;
+    holobiont_struct.parent = symbiosis;
     yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(nullptr, holobiont_struct, &symbiosis->parent_of_holobionts, nullptr);
 
     // `Entity` member functions of `Symbiosis`.
