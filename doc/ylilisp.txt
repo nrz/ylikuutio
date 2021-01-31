@@ -26,22 +26,40 @@ Integer types:
   `try-cast` needs to be used: `(try-cast my-number 'int8)`.
 * If number does not fit in the type, `try-cast` will throw.
 
-Indexing:
-* Indexing syntax: `(nth foo bar)`
-* Indexing syntax (syntactic sugar): `foo[bar]`.
-  (whitespace around square bracket operators is free).
+Floating point types:
+* `float`, `double`.
+
+Boolean types:
+* `bool`.
 
 Structs:
 * Struct syntax: `(struct foo)`.
 * Member syntax: `(member (member foo bar) baz)`.
 * Struct syntax (syntactic sugar): `foo.bar.baz`
   (whitespace around dot operators is free).
+* Generic setter can be used for struct members as well:
+  `(set! (member foo bar) 123)`.
+
+Vectors:
+* Vector syntax: `(vector foo)`.
+
+Indexing:
+* Indexing syntax: `(nth foo bar)`
+* Indexing syntax (syntactic sugar): `foo[bar]`.
+  (whitespace around square bracket operators is free).
 
 Functions:
 * Functions can be overloaded.
+* Member functions/methods are supported as well:
+  `(foo.bar)`, `(foo.bar baz)`, etc.
 
 Pointers:
 * `nullptr` is a null pointer.
+
+Comments:
+* `;` starts a comment until end of line.
+* `//` also starts a comment until end of line.
+* `/*` ... `*/` can be used for block comments.
 
 Planned implementation details:
 * Functions are `yli::ontology::LispFunction`,
