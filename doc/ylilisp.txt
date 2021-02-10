@@ -56,6 +56,9 @@ Functions:
 Pointers:
 * `nullptr` is a null pointer.
 
+Literals:
+* Underscore `_` can be used for readability in numeric literals.
+
 Comments:
 * `;` starts a comment until end of line.
 * `//` also starts a comment until end of line.
