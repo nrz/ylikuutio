@@ -97,3 +97,4 @@ Command examples:
 
 Links:
 * https://compilers.iecc.com/crenshaw/
+* https://craftinginterpreters.com/
