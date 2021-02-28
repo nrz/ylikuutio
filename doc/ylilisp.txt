@@ -3,16 +3,23 @@ YliLisp is influenced by Scheme, Common Lisp, C++,
 AngelScript, and Rust.
 
 General features:
+* Lexically scoped.
 * Variables and functions in the same namespace (Lisp-1).
 * Mutators marked with `!` like in Scheme, e.g. `set!`.
 * Predicates marked with `?` like in Scheme, e.g. `null?`.
 * Common function names follow names used by Scheme.
 * All objects, both variables and functions,
   are `yli::ontology::Entity` entities.
-* All named `yli::ontology::Entity` entities
-  are YliLisp variables.
+* `yli::ontology::Entity` entities with global names
+  are global YliLisp variables with the same name.
 * YliLisp syntax follows Scheme syntax when possible
   considering other YliLisp design goals.
+
+Numeric types:
+* Test if variable is a number: `(number? 1)`         -> `#t`
+* Test if variable is a number: `(number? 'foo)`      -> `#f`
+* Test if variable is a number: `(number? '(1 2 3))`  -> `#f`
+* Test if variable is a number: `(number? '#(1 2 3))` -> `#f`
 
 Integer types:
 * The default type for integer literals is `int32`.
@@ -32,6 +39,20 @@ Floating point types:
 Boolean types:
 * `bool`.
 
+Lists:
+* List syntax: `(list 1 2 3)`.
+* List syntax (syntactic sugar): `'(1 2 3)`.
+* Test if variable is a list: `(list? 'foo)`      -> `#f`
+* Test if variable is a list: `(list? '(1 2 3))`  -> `#t`
+* Test if variable is a list: `(list? '#(1 2 3))` -> `#f`
+
+Vectors:
+* Vector syntax: `(vector 1 2 3)`.
+* Vector syntax (syntactic sugar): `#(1 2 3)`.
+* Test if variable is a vector: `(vector? 'foo)`      -> `#f`
+* Test if variable is a vector: `(vector? '(1 2 3))`  -> `#f`
+* Test if variable is a vector: `(vector? '#(1 2 3))` -> `#t`
+
 Structs:
 * Struct syntax: `(struct foo)`.
 * Member syntax: `(member (member foo bar) baz)`.
@@ -40,18 +61,22 @@ Structs:
 * Generic setter can be used for struct members as well:
   `(set! (member foo bar) 123)`.
 
-Vectors:
-* Vector syntax: `(vector foo)`.
-
 Indexing:
 * Indexing syntax: `(nth foo bar)`
 * Indexing syntax (syntactic sugar): `foo[bar]`.
   (whitespace around square bracket operators is free).
 
 Functions:
+* Functions are first-class citizens.
 * Functions can be overloaded.
 * Member functions/methods are supported as well:
   `(foo.bar)`, `(foo.bar baz)`, etc.
+
+References and borrowing:
+* Reference syntax: `(ref foo)`.
+* Reference syntax (syntactic sugar): `&foo`.
+* Mutable reference syntax: `(mut-ref foo)`.
+* Mutable reference syntax (syntactic sugar): `&mut foo`.
 
 Pointers:
 * `nullptr` is a null pointer.
@@ -97,3 +122,4 @@ Command examples:
 
 Links:
 * https://compilers.iecc.com/crenshaw/
+* https://craftinginterpreters.com/
