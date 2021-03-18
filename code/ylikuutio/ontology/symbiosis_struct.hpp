@@ -35,21 +35,12 @@ namespace yli::ontology
 
     struct SymbiosisStruct: public yli::ontology::EntityStruct
     {
-        SymbiosisStruct()
-            : triangulation_type("bilinear_interpolation"),
-            light_position(glm::vec3(0.0f, 0.0f, 0.0f)),
-            parent(nullptr),
-            opengl_in_use(true)
-        {
-            // constructor.
-        }
-
-        std::string model_filename;     // filename of the symbiosis model file.
-        std::string model_file_format;  // type of the symbiosis model file.
-        std::string triangulation_type; // `"bilinear_interpolation"`, `"southwest_northeast_edges"`, `"southeast_northwest_edges"`.
-        glm::vec3 light_position;       // light position.
-        yli::ontology::Shader* parent;  // pointer to the `Shader`.
-        bool opengl_in_use;             // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
+        std::string model_filename;     // Filename of the symbiosis model file.
+        std::string model_file_format;  // Type of the symbiosis model file.
+        std::string triangulation_type { "bilinear_interpolation" };    // `"bilinear_interpolation"`, `"southwest_northeast_edges"`, `"southeast_northwest_edges"`.
+        glm::vec3 light_position       { glm::vec3(0.0f, 0.0f, 0.0f) }; // Light position.
+        yli::ontology::Shader* parent  { nullptr };                     // Pointer to the `Shader`.
+        bool opengl_in_use             { true };                        // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
     };
 }
 

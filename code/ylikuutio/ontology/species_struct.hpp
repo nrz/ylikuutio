@@ -61,23 +61,23 @@ namespace yli::ontology
         std::vector<glm::vec2> uvs;                         // for `SymbiontSpecies`.
         std::vector<glm::vec3> normals;                     // for `SymbiontSpecies`.
         glm::vec3 light_position { glm::vec3(0.0f, 0.0f, 0.0f) }; // light position.
-        yli::ontology::Scene* scene { nullptr };                                            // pointer to `Scene` object.
-        yli::ontology::Shader* shader { nullptr };                                          // pointer to `Shader` object.
-        yli::ontology::Material* material { nullptr };                                      // pointer to `Material` object.
-        yli::ontology::SymbiontMaterial* symbiont_material { nullptr };                     // pointer to `SymbiontMaterial` object.
-        yli::ontology::ShapeshifterTransformation* shapeshifter_transformation { nullptr }; // pointer to `ShapeshifterTransformation` object.
-        std::size_t vertex_count { std::numeric_limits<std::size_t>::max() };               // for `SymbiontSpecies`.
-        std::size_t mesh_i { 0 };    // for FBX.
-        std::size_t x_step { 1 };    // step in x-dimension for input data (set to 1 to load all data points/measurements).
-        std::size_t z_step { 1 };    // step in z-dimension for input data (set to 1 to load all data points/measurements).
-        float latitude  { 0.0f };    // in degrees, for SRTM model files.
-        float longitude { 0.0f };    // in degrees, for SRTM model files.
-        float planet_radius { NAN }; // radius of sea level in kilometers. used only for terrains (planets and moons). `6371.0f` for Earth.
-        float divisor { 1.0f };;     // value by which SRTM values are divided to convert them to kilometers.
-        float water_level { -1.0f * std::numeric_limits<float>::infinity() }; // water level in meters. used only for terrains (planets and moons).
-        bool is_terrain { false };                                            // Terrains (planets and moons) currently neither rotate nor translate.
-        bool is_symbiont_species { false };                                   // By default `Species` are not `SymbiontSpecies`.
-        bool opengl_in_use { true };                                          // If `opengl_in_use` is `false`, then no OpenGL-specific code shall be executed.
+        yli::ontology::Scene* scene                                            { nullptr }; // Pointer to `Scene` object.
+        yli::ontology::Shader* shader                                          { nullptr }; // Pointer to `Shader` object.
+        yli::ontology::Material* material                                      { nullptr }; // Pointer to `Material` object.
+        yli::ontology::SymbiontMaterial* symbiont_material                     { nullptr }; // Pointer to `SymbiontMaterial` object.
+        yli::ontology::ShapeshifterTransformation* shapeshifter_transformation { nullptr }; // Pointer to `ShapeshifterTransformation` object.
+        std::size_t vertex_count { std::numeric_limits<std::size_t>::max() };               // For `SymbiontSpecies`.
+        std::size_t mesh_i  { 0 };    // for FBX.
+        std::size_t x_step  { 1 };    // step in x-dimension for input data (set to 1 to load all data points/measurements).
+        std::size_t z_step  { 1 };    // step in z-dimension for input data (set to 1 to load all data points/measurements).
+        float latitude      { 0.0f }; // in degrees, for SRTM model files.
+        float longitude     { 0.0f }; // in degrees, for SRTM model files.
+        float planet_radius { NAN };  // radius of sea level in kilometers. used only for terrains (planets and moons). `6371.0f` for Earth.
+        float divisor       { 1.0f }; // value by which SRTM values are divided to convert them to kilometers.
+        float water_level   { -1.0f * std::numeric_limits<float>::infinity() }; // water level in meters. used only for terrains (planets and moons).
+        bool is_terrain                   { false };                          // Terrains (planets and moons) currently neither rotate nor translate.
+        bool is_symbiont_species          { false };                          // By default `Species` are not `SymbiontSpecies`.
+        bool opengl_in_use                { true };                           // If `opengl_in_use` is `false`, then no OpenGL-specific code shall be executed.
         bool use_real_texture_coordinates { true };
     };
 }

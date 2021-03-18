@@ -59,6 +59,8 @@ Ylikuutio repository in GitHub has 2 branches: `master` & `coverity_scan`.
 `coverity_scan` is for Synopsys© Coverity Scan© analysis tool which is run
 through Travis CI.
 
+### Native compiling
+#### Debian or Ubuntu
 In Debian or Ubuntu it's simple.
 
 First, install all the necessary compilers, tools and libs. You may use
@@ -104,14 +106,47 @@ If you have problems compiling tests or for some other reason don't want
 to compile tests, in CMakeLists.txt comment out the line that says:
 `set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)`
 
-To cross compile from Linux to Windows:
+#### MacOS
+Install command line building tools:
+
+    $ gcc
+
+Proceed with the opening pop-up install menu.
+
+You should now be able to run `gcc`, `clang`, `g++`, `clang++`, and `make`.
+
+Download CMake binary from https://cmake.org/download/ .
+
+Install CMake:
+
+    $ sudo "/Applications/CMake.app/Contents/bin/cmake-gui" --install
+
+You should now be able to run `cmake` in terminal.
+
+You can try to build like on Debian or Ubuntu:
+
+    $ mkdir build
+    $ cd build
+    $ cmake ..
+    $ make
+
+However, currently building on MacOS fails on linking `libstb`. This issue
+will hopefully get solved when `libstb` is replaced with `libpng` and `libjpeg`.
+
+#### Windows
+Compiling in Visual Studio is more difficult. The recommended way to
+get a binary for Windows is to cross compile from Linux to Windows. See below.
+
+### Cross compiling
+#### Cross compiling from Debian to Windows
+To cross compile from GNU/Linux to Windows:
 
     $ mkdir build_windows
     $ cd build_windows
     $ cmake -DCMAKE_TOOLCHAIN_FILE=../w64.cmake ..
     $ make
 
-Crosscompiling from Linux to Windows fails to compile tests.
+Crosscompiling from GNU/Linux to Windows fails to compile tests.
 This is a known bug in Google Test. Just run `make` *again* if
 compiling ends before you get `hirvi.exe`, `tulevaisuus.exe`,
 `ajokki.exe`, `gpgpu_test.exe`, and `yli_edit.exe`.
@@ -120,24 +155,25 @@ By default compiling tests is disabled when crosscompiling from Linux
 to Windows, due to this issue:
 https://github.com/google/googletest/issues/606
 
-To cross compile from Linux to Android (using Android NDK):
+#### Cross compiling from Debian to Android
+To cross compile from Debian to Android (using Android NDK):
 
     $ mkdir build_android
     $ cd build_android
     $ cmake -DCMAKE_TOOLCHAIN_FILE=../android.cmake ..
     $ make
 
-However, cross compiling from Linux to Android does not work yet!
+However, cross compiling from Debian to Android does not work yet!
 
-Compiling in Visual Studio is more difficult. The recommended way to
-get a binary for Windows is to cross compile from Linux to Windows.
-
+### Compiling in a Podman container
 You may build Ylikuutio also in a Podman container. See [instructions](https://github.com/nrz/ylikuutio/blob/master/container-build/README.md). Building tested in CentOS 8.
 The built executable is not self-contained so you still need the dependencies.
 Support for self-contained executables may be added in the future.
 
+## Software shipped with Ylikuutio
 Ylikuutio repository contains the following games/demos:
 
+### Hirvi
 Hirvi is a first person action-adventure of the adventures of
 a moose/elk called Hirvi. Cities are dangerous places for moose, and
 in particular an encounter with the police may prove deadly for Hirvi,
@@ -145,6 +181,7 @@ even through moose are well-known pasifists.
 "hirvi" means a moose/elk in Finnish.
 Hirvi is a work in progress.
 
+### Tulevaisuus
 Tulevaisuus ("the future" in Finnish) is
 a turn-based 3D tactical combat game with programmable robots.
 The robots controlled by an evil AI have taken over the world. Almost.
@@ -156,10 +193,12 @@ to control the robots reowned by humans.
 And save the human species, too.
 Tulevaisuus is a work in progress.
 
+### Ajokki
 Ajokki is sandbox demo program to check out some properties of
 Ylikuutio 3D engine. "Ajokki" is a working title named after
 a Finnish bus body manufacturer.
 
+### GPGPU test
 GPGPU test is a simple GPGPU example. It computes e.g. the distances
 between some railway stations on the current passenger railway network
 of Finland using both floating point and unsigned short values, using
@@ -169,23 +208,17 @@ e.g. Bash scripts `code/bash/print_float_results_of_width_32` &
 `code/bash/print_integer_results_of_width_32` can be used to display
 the Floyd-Warshall results in Bash.
 
+### YliEdit
 YliEdit is a universe editor for Ylikuutio. Work in progress.
 
-In Linux:
+## Running software
+### GNU/Linux
 
     $ ./hirvi
     $ ./tulevaisuus
     $ ./ajokki
     $ ./gpgpu_test
     $ ./yli_edit
-
-In Windows:
-
-    > hirvi.exe
-    > tulevaisuus.exe
-    > ajokki.exe
-    > gpgpu_test.exe
-    > yli_edit.exe
 
 `hirvi.exe`, `tulevaisuus.exe`, `ajokki.exe`, `gpgpu_test.exe`, and
 `yli_edit.exe` can also be executed in Linux, using Wine:
@@ -196,6 +229,15 @@ In Windows:
     $ wine ./gpgpu_test.exe
     $ wine ./yli_edit.exe
 
+### Windows
+
+    > hirvi.exe
+    > tulevaisuus.exe
+    > ajokki.exe
+    > gpgpu_test.exe
+    > yli_edit.exe
+
+## Ylikuutio usage
 Press `` to get console. Press F to toggle flying on off.
 Arrow keys work too. Ctrl is turbo. F1 toggles help display
 and there you'll see some more options to try.
@@ -204,7 +246,6 @@ To run tests (coverage is still quite limited but underway):
 
     $ ./unit_tests_with_googletest
 
-## Ylikuutio usage
 This part reflects the current usage of Ylikuutio and will change as new
 functionality is implemented.
 

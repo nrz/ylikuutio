@@ -7,9 +7,9 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage (Hirvi prototype):
+[ ] Add support for AngelScript in `Console` (again, but better support this time).
 [ ] Add support for Tab complete for local names in `Console`.
 [ ] Add support for printing alternatives completions in `Console`.
-[ ] Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
 [ ] Add support in `Console` for indexing the children of an `Entity` through the `Registry` and `ParentModule`, e.g. `foo_entity.bar_children[0]`.
 [ ] Add support in `Console` for indexing the apprentices of an `Entity` through the `Registry` and `MasterModule`, e.g. `foo_entity.bar_apprentices[0]`.
 [ ] Implement `yli::ontology::Window` class.
@@ -48,6 +48,7 @@ Tasks which are necessary for the second stage:
 [ ] Modify `set` console command so that setting a global name is done using `set 'global-name foo bar`.
 [ ] Modify `set` console command so that setting a local name is done using `set 'local-name foo bar`.
 [ ] Implement abstract syntax tree (AST) creation code for YliLisp.
+[ ] Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
 [ ] Implement continuations for YliLisp by logging the last relevant successful `Variable::set` function call for each `Variable` and setting that again when needed.
 [ ] Implement closures for YliLisp.
 [ ] Evaluate mingw-std-threads: https://github.com/meganz/mingw-std-threads

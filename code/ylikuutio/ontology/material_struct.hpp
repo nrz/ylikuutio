@@ -36,11 +36,6 @@ namespace yli::ontology
 
     struct MaterialStruct: public yli::ontology::EntityStruct
     {
-        MaterialStruct()
-        {
-            // constructor.
-        }
-
         std::string texture_file_format;     // Type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`/`"png"`/`"PNG"`.
         std::string texture_filename;        // Filename of the model file.
         yli::ontology::Shader* shader       { nullptr }; // Pointer to `Shader`.

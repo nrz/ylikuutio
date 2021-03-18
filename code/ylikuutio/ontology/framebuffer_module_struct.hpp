@@ -27,15 +27,9 @@ namespace yli::ontology
 {
     struct FramebufferModuleStruct
     {
-        FramebufferModuleStruct()
-        {
-            // constructor.
-        }
-
         uint32_t texture_width  { 8000 };
         uint32_t texture_height { 4500 };
-
-        bool in_use { true };
+        bool in_use             { true };
     };
 }
 

@@ -23,7 +23,7 @@
 #include "read_callback.hpp"
 
 // Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <memory> // std::make_shared, std::shared_ptr
 
 namespace yli::data
 {

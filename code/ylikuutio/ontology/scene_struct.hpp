@@ -27,11 +27,6 @@ namespace yli::ontology
 
     struct SceneStruct: public yli::ontology::EntityStruct
     {
-        SceneStruct()
-        {
-            // constructor.
-        }
-
         CameraStruct default_camera_struct; // parameters of the default `Camera`.
 
         yli::ontology::World* world { nullptr }; // pointer to `World` object.
