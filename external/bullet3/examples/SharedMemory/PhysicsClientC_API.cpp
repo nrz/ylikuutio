@@ -2052,7 +2052,8 @@ B3_SHARED_API int b3CreateMultiBodyLink(b3SharedMemoryCommandHandle commandHandl
 										const double linkInertialFrameOrientation[4],
 										int linkParentIndex,
 										int linkJointType,
-										const double linkJointAxis[3])
+										const double linkJointAxis[3],
+										const char* const linkName)
 {
 	struct SharedMemoryCommand* command = (struct SharedMemoryCommand*)commandHandle;
 	b3Assert(command);
@@ -2097,6 +2098,7 @@ B3_SHARED_API int b3CreateMultiBodyLink(b3SharedMemoryCommandHandle commandHandl
 			command->m_createMultiBodyArgs.m_linkJointAxis[3 * linkIndex + 2] = linkJointAxis[2];
 
 			command->m_createMultiBodyArgs.m_linkMasses[linkIndex] = linkMass;
+			command->m_createMultiBodyArgs.m_linkNames[linkIndex] = linkName;
 			command->m_createMultiBodyArgs.m_numLinks++;
 			return numLinks;
 		}
@@ -3024,6 +3026,16 @@ B3_SHARED_API int b3GetStatusPluginCommandResult(b3SharedMemoryStatusHandle stat
 	return statusUniqueId;
 }
 
+B3_SHARED_API int b3GetStatusPluginCommandReturnData(b3PhysicsClientHandle physClient, struct b3UserDataValue* valueOut)
+{
+	PhysicsClient* cl = (PhysicsClient*)physClient;
+	if (cl)
+	{
+		return cl->getCachedReturnData(valueOut);
+	}
+	return false;
+}
+
 B3_SHARED_API int b3GetStatusPluginUniqueId(b3SharedMemoryStatusHandle statusHandle)
 {
 	int statusUniqueId = -1;
@@ -3059,7 +3071,7 @@ B3_SHARED_API void b3CustomCommandExecutePluginCommand(b3SharedMemoryCommandHand
 	{
 		command->m_updateFlags |= CMD_CUSTOM_COMMAND_EXECUTE_PLUGIN_COMMAND;
 		command->m_customCommandArgs.m_pluginUniqueId = pluginUniqueId;
-
+		command->m_customCommandArgs.m_startingReturnBytes = 0;
 		command->m_customCommandArgs.m_arguments.m_numInts = 0;
 		command->m_customCommandArgs.m_arguments.m_numFloats = 0;
 		command->m_customCommandArgs.m_arguments.m_text[0] = 0;
@@ -3209,6 +3221,17 @@ B3_SHARED_API int b3ChangeDynamicsInfoSetJointLimitForce(b3SharedMemoryCommandHa
 	return 0;
 }
 
+B3_SHARED_API int b3ChangeDynamicsInfoSetDynamicType(b3SharedMemoryCommandHandle commandHandle, int bodyUniqueId, int linkIndex, int dynamicType)
+{
+	struct SharedMemoryCommand* command = (struct SharedMemoryCommand*)commandHandle;
+	b3Assert(command->m_type == CMD_CHANGE_DYNAMICS_INFO);
+	b3Assert(dynamicType == eDynamic || dynamicType == eStatic || dynamicType == eKinematic);
+	command->m_changeDynamicsInfoArgs.m_bodyUniqueId = bodyUniqueId;
+	command->m_changeDynamicsInfoArgs.m_linkIndex = linkIndex;
+	command->m_changeDynamicsInfoArgs.m_dynamicType = dynamicType;
+	command->m_updateFlags |= CHANGE_DYNAMICS_INFO_SET_DYNAMIC_TYPE;
+	return 0;
+}
 
 
 

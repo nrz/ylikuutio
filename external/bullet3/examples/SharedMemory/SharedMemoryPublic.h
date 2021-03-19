@@ -9,7 +9,8 @@
 
 
 
-#define SHARED_MEMORY_MAGIC_NUMBER 202007060
+#define SHARED_MEMORY_MAGIC_NUMBER 202010061
+//#define SHARED_MEMORY_MAGIC_NUMBER 202007060
 //#define SHARED_MEMORY_MAGIC_NUMBER 202005070
 //#define SHARED_MEMORY_MAGIC_NUMBER 202002030
 //#define SHARED_MEMORY_MAGIC_NUMBER 202001230
@@ -237,6 +238,7 @@ enum EnumSharedMemoryServerStatus
 
 	CMD_REQUEST_MESH_DATA_COMPLETED,
 	CMD_REQUEST_MESH_DATA_FAILED,
+
 	//don't go beyond 'CMD_MAX_SERVER_COMMANDS!
 	CMD_MAX_SERVER_COMMANDS
 };
@@ -393,6 +395,7 @@ struct b3DynamicsInfo
 	double m_contactProcessingThreshold;
 	int m_frictionAnchor;
 	double m_collisionMargin;
+	int m_dynamicType;
 };
 
 // copied from btMultiBodyLink.h
@@ -1066,6 +1069,13 @@ struct b3ForwardDynamicsAnalyticsArgs
 	int m_numIslands;
 	int m_numSolverCalls;
 	struct b3ForwardDynamicsAnalyticsIslandData m_islandData[MAX_ISLANDS_ANALYTICS];
+};
+
+enum eDynamicTypes
+{
+	eDynamic= 0,
+	eStatic= 1,
+	eKinematic= 2
 };
 
 enum eFileIOActions

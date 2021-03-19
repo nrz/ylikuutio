@@ -9,7 +9,7 @@ import pybullet
 class BulletClient(object):
   """A wrapper for pybullet to manage different clients."""
 
-  def __init__(self, connection_mode=None):
+  def __init__(self, connection_mode=None, hostName=None, options=''):
     """Creates a Bullet client and connects to a simulation.
 
     Args:
@@ -22,12 +22,15 @@ class BulletClient(object):
     """
     self._shapes = {}
     if connection_mode is None:
-      self._client = pybullet.connect(pybullet.SHARED_MEMORY)
+      self._client = pybullet.connect(pybullet.SHARED_MEMORY, options=options)
       if self._client >= 0:
         return
       else:
         connection_mode = pybullet.DIRECT
-    self._client = pybullet.connect(connection_mode)
+    if hostName is None:
+        self._client = pybullet.connect(connection_mode, options=options)
+    else:
+        self._client = pybullet.connect(connection_mode, hostName=hostName, options=options)
 
   def __del__(self):
     """Clean up connection if not already done."""
