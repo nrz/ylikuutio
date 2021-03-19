@@ -94,7 +94,8 @@ static void ParseUserData(const XMLElement* element, btHashMap<btHashString,
 			if (!key_attr) {
 				logger->reportError("User data tag must have a key attribute.");
 			}
-			user_data.insert(key_attr, user_data_xml->GetText());
+			const char* text = user_data_xml->GetText();
+			user_data.insert(key_attr, text ? text : "");
 		}
 	}
 }
@@ -1132,6 +1133,7 @@ bool UrdfParser::parseDeformable(UrdfModel& model, tinyxml2::XMLElement* config,
 	if (!i)
 	{
 		logger->reportError("expected an inertial element");
+		return false;
 	}
 	UrdfInertia inertia;
 	if (!parseInertia(inertia, i, logger))
@@ -1517,8 +1519,9 @@ bool UrdfParser::parseJoint(UrdfJoint& joint, XMLElement* config, ErrorLogger* l
 			XMLElement* axis_xml = config->FirstChildElement("axis");
 			if (!axis_xml)
 			{
-				logger->reportWarning("urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axis");
-				logger->reportWarning(joint.m_name.c_str());
+				std::string msg("urdfdom: no axis element for Joint, defaulting to (1,0,0) axis");
+				msg = msg + " " + joint.m_name + "\n";
+				logger->reportWarning(msg.c_str());
 				joint.m_localJointAxis.setValue(1, 0, 0);
 			}
 			else
@@ -1584,8 +1587,9 @@ bool UrdfParser::parseJoint(UrdfJoint& joint, XMLElement* config, ErrorLogger* l
 			XMLElement* axis_xml = config->FirstChildElement("axis");
 			if (!axis_xml)
 			{
-				logger->reportWarning("urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axis");
-				logger->reportWarning(joint.m_name.c_str());
+				std::string msg("urdfdom: no axis element for Joint, defaulting to (1,0,0) axis");
+				msg = msg + " " + joint.m_name + "\n";
+				logger->reportWarning(msg.c_str());
 				joint.m_localJointAxis.setValue(1, 0, 0);
 			}
 			else

@@ -128,6 +128,24 @@ static int pybullet_internalGetIntFromSequence(PyObject* seq, int index)
 	return v;
 }
 
+static const char* pybullet_internalGetCStringFromSequence(PyObject* seq, int index)
+{
+	const char* v = 0;
+	PyObject* item;
+
+	if (PyList_Check(seq))
+	{
+		item = PyList_GET_ITEM(seq, index);
+		v = PyUnicode_AsUTF8(item);
+	}
+	else
+	{
+		item = PyTuple_GET_ITEM(seq, index);
+		v = PyUnicode_AsUTF8(item);
+	}
+	return v;
+}
+
 // internal function to set a float matrix[16]
 // used to initialize camera position with
 // a view and projection matrix in renderImage()
@@ -403,6 +421,7 @@ static PyObject* pybullet_connectPhysicsServer(PyObject* self, PyObject* args, P
 
 		if (!PyArg_ParseTupleAndKeywords(args, keywds, "i|is", kwlist1, &method, &key, &options))
 		{
+			PyErr_Clear();
 			int port = -1;
 			if (!PyArg_ParseTupleAndKeywords(args, keywds, "i|sis", kwlist2, &method, &hostName, &port, &options))
 			{
@@ -9349,18 +9368,19 @@ static PyObject* pybullet_createMultiBody(PyObject* self, PyObject* args, PyObje
 	PyObject* linkInertialFramePositionObj = 0;
 	PyObject* linkInertialFrameOrientationObj = 0;
 	PyObject* objBatchPositions = 0;
+	PyObject* linkNamesObj = 0;
 
 	static char* kwlist[] = {
 		"baseMass", "baseCollisionShapeIndex", "baseVisualShapeIndex", "basePosition", "baseOrientation",
 		"baseInertialFramePosition", "baseInertialFrameOrientation", "linkMasses", "linkCollisionShapeIndices",
 		"linkVisualShapeIndices", "linkPositions", "linkOrientations", "linkInertialFramePositions", "linkInertialFrameOrientations", "linkParentIndices",
-		"linkJointTypes", "linkJointAxis", "useMaximalCoordinates", "flags", "batchPositions", "physicsClientId", NULL};
+		"linkJointTypes", "linkJointAxis", "useMaximalCoordinates", "flags", "batchPositions", "linkNames", "physicsClientId", NULL};
 
-	if (!PyArg_ParseTupleAndKeywords(args, keywds, "|diiOOOOOOOOOOOOOOiiOi", kwlist,
+	if (!PyArg_ParseTupleAndKeywords(args, keywds, "|diiOOOOOOOOOOOOOOiiOOi", kwlist,
 									 &baseMass, &baseCollisionShapeIndex, &baseVisualShapeIndex, &basePosObj, &baseOrnObj,
 									 &baseInertialFramePositionObj, &baseInertialFrameOrientationObj, &linkMassesObj, &linkCollisionShapeIndicesObj,
 									 &linkVisualShapeIndicesObj, &linkPositionsObj, &linkOrientationsObj, &linkInertialFramePositionObj, &linkInertialFrameOrientationObj, &linkParentIndicesObj,
-									 &linkJointTypesObj, &linkJointAxisObj, &useMaximalCoordinates, &flags, &objBatchPositions, &physicsClientId))
+									 &linkJointTypesObj, &linkJointAxisObj, &useMaximalCoordinates, &flags, &objBatchPositions, &linkNamesObj, &physicsClientId))
 	{
 		return NULL;
 	}
@@ -9397,6 +9417,7 @@ static PyObject* pybullet_createMultiBody(PyObject* self, PyObject* args, PyObje
 		PyObject* seqLinkInertialFrameOrientations = linkInertialFrameOrientationObj ? PySequence_Fast(linkInertialFrameOrientationObj, "expected a sequence") : 0;
 
 		PyObject* seqBatchPositions = objBatchPositions ? PySequence_Fast(objBatchPositions, "expected a sequence") : 0;
+		PyObject* seqLinkNames = linkNamesObj ? PySequence_Fast(linkNamesObj, "expected a sequence") : 0;
 
 		if ((numLinkMasses == numLinkCollisionShapes) &&
 			(numLinkMasses == numLinkVisualShapes) &&
@@ -9447,6 +9468,7 @@ static PyObject* pybullet_createMultiBody(PyObject* self, PyObject* args, PyObje
 				double linkInertialFrameOrientation[4];
 				int linkParentIndex;
 				int linkJointType;
+				const char* linkName;
 
 				pybullet_internalGetVector3FromSequence(seqLinkInertialFramePositions, i, linkInertialFramePosition);
 				pybullet_internalGetVector4FromSequence(seqLinkInertialFrameOrientations, i, linkInertialFrameOrientation);
@@ -9455,6 +9477,7 @@ static PyObject* pybullet_createMultiBody(PyObject* self, PyObject* args, PyObje
 				pybullet_internalGetVector3FromSequence(seqLinkJoinAxis, i, linkJointAxis);
 				linkParentIndex = pybullet_internalGetIntFromSequence(seqLinkParentIndices, i);
 				linkJointType = pybullet_internalGetIntFromSequence(seqLinkJointTypes, i);
+				linkName = seqLinkNames? pybullet_internalGetCStringFromSequence(seqLinkNames, i) : 0;
 
 				b3CreateMultiBodyLink(commandHandle,
 									  linkMass,
@@ -9466,7 +9489,8 @@ static PyObject* pybullet_createMultiBody(PyObject* self, PyObject* args, PyObje
 									  linkInertialFrameOrientation,
 									  linkParentIndex,
 									  linkJointType,
-									  linkJointAxis);
+									  linkJointAxis,
+									  linkName);
 			}
 
 			if (seqLinkMasses)
@@ -11215,6 +11239,7 @@ static PyObject* pybullet_executePluginCommand(PyObject* self,
 	b3SharedMemoryCommandHandle command = 0;
 	b3SharedMemoryStatusHandle statusHandle = 0;
 	int statusType = -1;
+	int statusResult = -1;
 	PyObject* intArgs = 0;
 	PyObject* floatArgs = 0;
 
@@ -11263,8 +11288,34 @@ static PyObject* pybullet_executePluginCommand(PyObject* self,
 	}
 
 	statusHandle = b3SubmitClientCommandAndWaitStatus(sm, command);
-	statusType = b3GetStatusPluginCommandResult(statusHandle);
-	return PyInt_FromLong(statusType);
+	statusType = b3GetStatusType(statusHandle);
+	if (statusType == CMD_CUSTOM_COMMAND_COMPLETED)
+	{
+		statusResult = b3GetStatusPluginCommandResult(statusHandle);
+		struct b3UserDataValue dv;
+		if (b3GetStatusPluginCommandReturnData(sm, &dv))
+		{
+			assert(dv.m_length>0);
+			PyObject* pylist;
+			PyObject* pydata;
+			int i;
+			//return type
+			//user data type
+			//bytes
+			pylist = PyTuple_New(3);
+			PyTuple_SetItem(pylist, 0, PyInt_FromLong(statusResult));
+			PyTuple_SetItem(pylist, 1, PyInt_FromLong(dv.m_type));
+			pydata = PyTuple_New(dv.m_length);
+			for (i = 0; i < dv.m_length; i++)
+			{
+				PyTuple_SetItem(pydata, i, PyInt_FromLong(dv.m_data1[i]));
+			}
+			PyTuple_SetItem(pylist, 2, pydata);
+			return pylist;
+		}
+		return PyInt_FromLong(statusResult);
+	}
+	return PyInt_FromLong(-1);
 }
 
 
@@ -11614,6 +11665,8 @@ static PyObject* pybullet_calculateInverseKinematics2(PyObject* self,
 					free(upperLimits);
 					free(jointRanges);
 					free(restPoses);
+					free(positions);
+					free(indices);
 					return NULL;
 				}
 				else
@@ -11734,12 +11787,16 @@ static PyObject* pybullet_calculateInverseKinematics2(PyObject* self,
 					}
 
 					free(ikOutPutJointPos);
+					free(positions);
+					free(indices);
 					return pylist;
 				}
 				else
 				{
 					PyErr_SetString(SpamError,
 						"Error in calculateInverseKinematics");
+					free(positions);
+					free(indices);
 					return NULL;
 				}
 			}
@@ -11747,8 +11804,13 @@ static PyObject* pybullet_calculateInverseKinematics2(PyObject* self,
 			{
 				PyErr_SetString(SpamError,
 					"calculateInverseKinematics couldn't extract position vector3");
+				free(positions);
+				free(indices);
 				return NULL;
 			}
+
+			free(positions);
+			free(indices);
 		}
 	}
 
@@ -13039,7 +13101,7 @@ initpybullet(void)
 	SpamError = PyErr_NewException("pybullet.error", NULL, NULL);
 	Py_INCREF(SpamError);
 	PyModule_AddObject(m, "error", SpamError);
-	printf("pybullet build time: %s %s\n", __DATE__, __TIME__);
+	fprintf(stderr, "pybullet build time: %s %s\n", __DATE__, __TIME__);
 
 	Py_AtExit(b3pybulletExitFunc);
 
