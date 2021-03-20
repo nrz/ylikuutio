@@ -5,8 +5,11 @@ Fixes needed:
 [ ] Fix bug on console size after changing window size small enough.
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size.
 [ ] Fix compiling on Visual Studio.
+[ ] Fix compiling on MacOS.
 
 Tasks which are necessary for the first stage (Hirvi prototype):
+[ ] Replace stb with libpng (http://www.libpng.org/pub/png/libpng.html) and libjpeg (http://ijg.org/).
+[ ] Replace Bullet with PhysX.
 [ ] Add support for AngelScript in `Console` (again, but better support this time).
 [ ] Add support for Tab complete for local names in `Console`.
 [ ] Add support for printing alternatives completions in `Console`.
@@ -66,7 +69,6 @@ Tasks which are necessary for the second stage:
 [ ] Implement `yli::ontology::ShapeshifterForm : public Model`.
 [ ] Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.
 [ ] Implement skeletal animation.
-[ ] Replace stb with libpng (http://www.libpng.org/pub/png/libpng.html) and libjpeg (http://ijg.org/).
 [ ] Implement creating new named `Variable`s using `Console`.
 [ ] Implement YliEdit editor.
 [ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
