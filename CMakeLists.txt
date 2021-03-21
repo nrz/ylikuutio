@@ -390,6 +390,7 @@ configure_file(res/fonts/Holstein.bmp Holstein.bmp COPYONLY)
 # Maps.
 configure_file(res/height_maps/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
+configure_file(res/height_maps/noise256x256.png noise256x256.png COPYONLY)
 configure_file(res/height_maps/noise128x128.bmp noise128x128.bmp COPYONLY)
 configure_file(res/height_maps/N59E024.hgt N59E024.hgt COPYONLY)
 configure_file(res/height_maps/S17W069.hgt S17W069.hgt COPYONLY)
@@ -423,6 +424,7 @@ configure_file(res/audio/freesound.org/419588__greek555__dreaming-of-me.ogg 4195
 # Image files for tests.
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
+configure_file(res/textures/test3x3.png test3x3.png COPYONLY)
 
 # Ylikuutio
 add_library(ylikuutio STATIC
@@ -560,6 +562,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/image_file_loader.hpp
     code/ylikuutio/load/obj_loader.cpp
     code/ylikuutio/load/obj_loader.hpp
+    code/ylikuutio/load/png_heightmap_loader.cpp
+    code/ylikuutio/load/png_heightmap_loader.hpp
     code/ylikuutio/load/shader_loader.cpp
     code/ylikuutio/load/shader_loader.hpp
     code/ylikuutio/load/species_loader.cpp
@@ -1144,6 +1148,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_obj_loader.cpp
         code/ylikuutio/tests/googletest/test_object_struct.cpp
         code/ylikuutio/tests/googletest/test_ontology.cpp
+        code/ylikuutio/tests/googletest/test_png_heightmap_loader.cpp
+        code/ylikuutio/tests/googletest/test_png_loader.cpp
         code/ylikuutio/tests/googletest/test_pugixml.cpp
         code/ylikuutio/tests/googletest/test_quad_triangulation.cpp
         code/ylikuutio/tests/googletest/test_registry.cpp
