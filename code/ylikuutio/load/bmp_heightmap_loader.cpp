@@ -73,8 +73,21 @@ namespace yli::load
 
         std::shared_ptr<std::vector<uint8_t>> image_data = load_image_file(heightmap_loader_struct.filename, image_width, image_height, image_size);
 
-        if (image_data == nullptr || image_width < 2 || image_height < 2)
+        if (image_data == nullptr)
         {
+            std::cerr << "ERROR: `yli::load::load_bmp_terrain`: `image_data` is `nullptr`.\n";
+            return false;
+        }
+
+        if (image_width < 2)
+        {
+            std::cerr << "ERROR: `yli::load::load_bmp_terrain`: image width is less than 2.\n";
+            return false;
+        }
+
+        if (image_height < 2)
+        {
+            std::cerr << "ERROR: `yli::load::load_bmp_terrain`: image height is less than 2.\n";
             return false;
         }
 
