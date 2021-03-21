@@ -50,6 +50,12 @@ namespace yli::load
         stbi_set_flip_vertically_on_load(true);
         stbi_uc* stbi_image_data = stbi_load(&filename[0], &x, &y, &channels_in_file, desired_channels);
 
+        if (stbi_image_data == nullptr)
+        {
+            std::cerr << filename << "ERROR: `yli::load::load_image_file`: `stbi_image_data` is `nullptr`!\n";
+            return nullptr;
+        }
+
         bool has_file_errors = false;
 
         if (x < 0)

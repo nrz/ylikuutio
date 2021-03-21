@@ -73,7 +73,7 @@ namespace yli::load
 
         std::shared_ptr<std::vector<uint8_t>> image_data = load_image_file(heightmap_loader_struct.filename, image_width, image_height, image_size);
 
-        if (image_width < 2 || image_height < 2)
+        if (image_data == nullptr || image_width < 2 || image_height < 2)
         {
             return false;
         }

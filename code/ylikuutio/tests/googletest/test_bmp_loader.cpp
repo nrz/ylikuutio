@@ -32,6 +32,7 @@ TEST(bmp_files_must_be_loaded_approriately, test3x3_bmp)
     std::size_t image_size;
 
     std::shared_ptr<std::vector<uint8_t>> image_data = yli::load::load_image_file(image_path, image_width, image_height, image_size);
+    ASSERT_NE(image_data, nullptr);
     ASSERT_EQ((*image_data)[0], 0);
     ASSERT_EQ((*image_data)[1], 0);
     ASSERT_EQ((*image_data)[2], 0);
