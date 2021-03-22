@@ -860,7 +860,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
 
     yli::ontology::SymbiosisStruct symbiosis_struct;
     symbiosis_struct.parent = shader;
-    symbiosis_struct.model_filename = "turbo_polizei_bmp_textures.fbx";
+    symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
     symbiosis_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct, &shader->parent_of_symbioses);
 
@@ -889,7 +889,7 @@ TEST(symbiosis_must_be_initialized_appropriately, no_universe_no_world_no_scene_
 {
     yli::ontology::SymbiosisStruct symbiosis_struct;
     symbiosis_struct.parent = nullptr;
-    symbiosis_struct.model_filename = "turbo_polizei_bmp_textures.fbx";
+    symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
     symbiosis_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct, nullptr);
 
@@ -985,7 +985,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
 
     yli::ontology::SymbiosisStruct symbiosis_struct;
     symbiosis_struct.parent = shader;
-    symbiosis_struct.model_filename = "turbo_polizei_bmp_textures.fbx";
+    symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
     symbiosis_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct, &shader->parent_of_symbioses);
 
@@ -1021,7 +1021,7 @@ TEST(holobiont_must_be_initialized_appropriately, no_universe_no_world_no_scene_
 {
     yli::ontology::SymbiosisStruct symbiosis_struct;
     symbiosis_struct.parent = nullptr;
-    symbiosis_struct.model_filename = "turbo_polizei_bmp_textures.fbx";
+    symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
     symbiosis_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct, nullptr);
 
@@ -1663,8 +1663,8 @@ TEST(font_2d_must_be_initialized_appropriately, headless_holstein)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::FontStruct font_struct;
-    font_struct.texture_filename = "Holstein.bmp";
-    font_struct.font_texture_file_format = "BMP";
+    font_struct.texture_filename = "Holstein.png";
+    font_struct.font_texture_file_format = "PNG";
     font_struct.screen_width = universe->get_window_width();
     font_struct.screen_height = universe->get_window_height();
     font_struct.text_size = universe->get_text_size();
@@ -1690,8 +1690,8 @@ TEST(font_2d_must_be_initialized_appropriately, headless_holstein)
 TEST(font_2d_must_be_initialized_appropriately, no_universe_holstein)
 {
     yli::ontology::FontStruct font_struct;
-    font_struct.texture_filename = "Holstein.bmp";
-    font_struct.font_texture_file_format = "BMP";
+    font_struct.texture_filename = "Holstein.png";
+    font_struct.font_texture_file_format = "PNG";
     yli::ontology::Font2D* const font_2d = new yli::ontology::Font2D(nullptr, font_struct, nullptr);
 
     // `Entity` member functions of `World`.

@@ -20,7 +20,7 @@
 #include "obj_loader.hpp"
 #include "fbx_species_loader.hpp"
 #include "ascii_grid_heightmap_loader.hpp"
-#include "bmp_heightmap_loader.hpp"
+#include "png_heightmap_loader.hpp"
 #include "srtm_heightmap_loader.hpp"
 #include "heightmap_loader_struct.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
@@ -79,7 +79,7 @@ namespace yli::load
             std::cout << species_loader_struct.model_filename << " loaded successfully.\n";
         }
         else if (species_loader_struct.model_file_format == "srtm" || species_loader_struct.model_file_format == "SRTM" ||
-                species_loader_struct.model_file_format == "bmp" || species_loader_struct.model_file_format == "BMP" ||
+                species_loader_struct.model_file_format == "png" || species_loader_struct.model_file_format == "PNG" ||
                 species_loader_struct.model_file_format == "asc" ||
                 species_loader_struct.model_file_format == "ascii_grid" ||
                 species_loader_struct.model_file_format == "ASCII_grid")
@@ -121,9 +121,9 @@ namespace yli::load
                         *species_loader_struct.image_width_pointer,
                         *species_loader_struct.image_height_pointer);
             }
-            else if (species_loader_struct.model_file_format == "bmp" || species_loader_struct.model_file_format == "BMP")
+            else if (species_loader_struct.model_file_format == "png" || species_loader_struct.model_file_format == "PNG")
             {
-                model_loading_result = yli::load::load_bmp_terrain(
+                model_loading_result = yli::load::load_png_terrain(
                         heightmap_loader_struct,
                         out_vertices,
                         out_uvs,

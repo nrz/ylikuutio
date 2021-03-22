@@ -229,7 +229,7 @@ namespace yli::ontology
         text_struct.screen_height = this->universe->get_window_height();
         text_struct.text_size = this->universe->get_text_size();
         text_struct.font_size = this->universe->get_font_size();
-        text_struct.font_texture_file_format = "bmp";
+        text_struct.font_texture_file_format = "png";
 
         text_struct.x = 0;
         text_struct.y = this->universe->get_window_height() - (2 * this->universe->get_text_size());

@@ -87,7 +87,7 @@ namespace yli::load
 
         std::cout << "Texture file suffix: " << texture_file_suffix << "\n";
 
-        if (texture_file_suffix == "bmp" || texture_file_suffix == "png")
+        if (texture_file_suffix == "png")
         {
             const std::string filename_string = std::string((char*) &filename_buffer);
             return yli::load::load_common_texture(filename_string, image_width, image_height, image_size, textureID, is_headless);

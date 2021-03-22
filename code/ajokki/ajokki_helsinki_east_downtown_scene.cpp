@@ -433,8 +433,8 @@ namespace ajokki
         // Create the material, store it in `helsinki_east_downtown_grass_material`.
         yli::ontology::MaterialStruct helsinki_east_downtown_grass_material_struct;
         helsinki_east_downtown_grass_material_struct.shader = helsinki_east_downtown_shader;
-        helsinki_east_downtown_grass_material_struct.texture_file_format = "bmp";
-        helsinki_east_downtown_grass_material_struct.texture_filename = "GrassGreenTexture0002.bmp";
+        helsinki_east_downtown_grass_material_struct.texture_file_format = "png";
+        helsinki_east_downtown_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
         std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_grass_material_entity ...\n";
         yli::ontology::Entity* const helsinki_east_downtown_grass_material_entity = entity_factory->create_material(helsinki_east_downtown_grass_material_struct);
@@ -452,8 +452,8 @@ namespace ajokki
         // Create the material, store it in `pink_geometric_tiles_material`.
         yli::ontology::MaterialStruct pink_geometric_tiles_material_struct;
         pink_geometric_tiles_material_struct.shader = helsinki_east_downtown_shader;
-        pink_geometric_tiles_material_struct.texture_file_format = "bmp";
-        pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.bmp";
+        pink_geometric_tiles_material_struct.texture_file_format = "png";
+        pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.png";
 
         std::cout << "Creating yli::ontology::Entity* pink_geometric_tiles_material_entity ...\n";
         yli::ontology::Entity* const pink_geometric_tiles_material_entity = entity_factory->create_material(pink_geometric_tiles_material_struct);
@@ -471,8 +471,8 @@ namespace ajokki
         // Create the material, store it in `orange_fur_material`.
         yli::ontology::MaterialStruct orange_fur_material_struct;
         orange_fur_material_struct.shader = helsinki_east_downtown_shader;
-        orange_fur_material_struct.texture_file_format = "bmp";
-        orange_fur_material_struct.texture_filename = "orange_fur_texture.bmp";
+        orange_fur_material_struct.texture_file_format = "png";
+        orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
 
         std::cout << "Creating yli::ontology::Entity* orange_fur_material_entity ...\n";
         yli::ontology::Entity* const orange_fur_material_entity = entity_factory->create_material(orange_fur_material_struct);
@@ -757,49 +757,29 @@ namespace ajokki
 
         turbo_polizei_png1->set_global_name("turbo_polizei_png1");
 
-        yli::ontology::SymbiosisStruct turbo_polizei_bmp_symbiosis_struct;
-        turbo_polizei_bmp_symbiosis_struct.parent = helsinki_east_downtown_shader;
-        turbo_polizei_bmp_symbiosis_struct.model_file_format = "fbx";
-        turbo_polizei_bmp_symbiosis_struct.model_filename = "turbo_polizei_bmp_textures.fbx";
-        turbo_polizei_bmp_symbiosis_struct.light_position = glm::vec3(0, 100000, 100000);
+        yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct2;
+        turbo_polizei_png_holobiont_struct2.parent = turbo_polizei_png_symbiosis;
+        turbo_polizei_png_holobiont_struct2.brain = rest_brain;
+        turbo_polizei_png_holobiont_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
+        turbo_polizei_png_holobiont_struct2.initial_rotate_angles = { PI };
+        turbo_polizei_png_holobiont_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        turbo_polizei_png_holobiont_struct2.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 175.00f);
 
-        std::cout << "Creating yli::ontology::Entity* turbo_polizei_bmp_symbiosis_entity ...\n";
-        yli::ontology::Entity* const turbo_polizei_bmp_symbiosis_entity = entity_factory->create_symbiosis(turbo_polizei_bmp_symbiosis_struct);
+        std::cout << "Creating yli::ontology::Entity* turbo_polizei_png2_entity ...\n";
 
-        std::cout << "Creating yli::ontology::Symbiosis* turbo_polizei_bmp_symbiosis ...\n";
-        yli::ontology::Symbiosis* const turbo_polizei_bmp_symbiosis = dynamic_cast<yli::ontology::Symbiosis*>(turbo_polizei_bmp_symbiosis_entity);
+        yli::ontology::Entity* const turbo_polizei_png2_entity = entity_factory->create_holobiont(turbo_polizei_png_holobiont_struct2);
 
-        if (turbo_polizei_bmp_symbiosis == nullptr)
+        std::cout << "Creating yli::ontology::Holobiont* turbo_polizei_png2 ...\n";
+
+        yli::ontology::Holobiont* const turbo_polizei_png2 = dynamic_cast<yli::ontology::Holobiont*>(turbo_polizei_png2_entity);
+
+        if (turbo_polizei_png2 == nullptr)
         {
-            std::cerr << "Failed to create turbo_polizei_bmp Symbiosis.\n";
+            std::cerr << "Failed to create turbo_polizei_png2 Object.\n";
             return nullptr;
         }
 
-        turbo_polizei_bmp_symbiosis->set_global_name("turbo_polizei_bmp_symbiosis");
-
-        yli::ontology::HolobiontStruct turbo_polizei_bmp_holobiont_struct1;
-        turbo_polizei_bmp_holobiont_struct1.parent = turbo_polizei_bmp_symbiosis;
-        turbo_polizei_bmp_holobiont_struct1.brain = rest_brain;
-        turbo_polizei_bmp_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
-        turbo_polizei_bmp_holobiont_struct1.initial_rotate_angles = { PI };
-        turbo_polizei_bmp_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        turbo_polizei_bmp_holobiont_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 175.00f);
-
-        std::cout << "Creating yli::ontology::Entity* turbo_polizei_bmp1_entity ...\n";
-
-        yli::ontology::Entity* const turbo_polizei_bmp1_entity = entity_factory->create_holobiont(turbo_polizei_bmp_holobiont_struct1);
-
-        std::cout << "Creating yli::ontology::Holobiont* turbo_polizei_bmp1 ...\n";
-
-        yli::ontology::Holobiont* const turbo_polizei_bmp1 = dynamic_cast<yli::ontology::Holobiont*>(turbo_polizei_bmp1_entity);
-
-        if (turbo_polizei_bmp1 == nullptr)
-        {
-            std::cerr << "Failed to create turbo_polizei_bmp1 Object.\n";
-            return nullptr;
-        }
-
-        turbo_polizei_bmp1->set_global_name("turbo_polizei_bmp1");
+        turbo_polizei_png2->set_global_name("turbo_polizei_png2");
 
         yli::ontology::VectorFontStruct kongtext_vector_font_struct;
         kongtext_vector_font_struct.parent = helsinki_east_downtown_grass_material;

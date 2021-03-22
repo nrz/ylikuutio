@@ -69,9 +69,7 @@ namespace yli::ontology
                 if (!this->is_symbiont_material)
                 {
                     // Load the texture.
-                    if (this->texture_file_format == "bmp" ||
-                            this->texture_file_format == "BMP" ||
-                            this->texture_file_format == "png" ||
+                    if (this->texture_file_format == "png" ||
                             this->texture_file_format == "PNG")
                     {
                         if (!yli::load::load_common_texture(
@@ -148,7 +146,7 @@ namespace yli::ontology
 
             bool is_symbiont_material;
 
-            std::string texture_file_format;     // Type of the model file, eg. `"bmp"`.
+            std::string texture_file_format;     // Type of the model file, eg. `"png"`.
             std::string texture_filename;        // Filename of the model file.
     };
 }

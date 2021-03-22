@@ -152,7 +152,7 @@ namespace yli::ontology
                 }
 
                 // Load the source texture, just like in `yli::ontology::Material` constructor.
-                if (this->texture_file_format == "bmp" || this->texture_file_format == "BMP")
+                if (this->texture_file_format == "png" || this->texture_file_format == "PNG")
                 {
                     if (!yli::load::load_common_texture(
                                 this->texture_filename,
@@ -162,7 +162,7 @@ namespace yli::ontology
                                 this->source_texture,
                                 is_headless))
                     {
-                        std::cerr << "ERROR: loading BMP texture failed!\n";
+                        std::cerr << "ERROR: loading PNG texture failed!\n";
                     }
                     else
                     {
@@ -270,7 +270,7 @@ namespace yli::ontology
             void preiterate() const;
             void postiterate() const;
 
-            std::string texture_file_format; // Type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"csv"`/`"CSV"`.
+            std::string texture_file_format; // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.
             std::string texture_filename;    // Filename of the model file.
             std::string output_filename;     // Filename of the output file.
 

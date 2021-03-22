@@ -50,31 +50,21 @@ TEST(file_must_be_slurped_appropriately, kongtext_svg)
     ASSERT_EQ(file_content->compare(offset_of_first_character_of_tenth_line, length_of_tenth_line_of_kongtext_svg, tenth_line_of_kongtext_svg), 0);
 }
 
-TEST(file_must_be_slurped_appropriately, test3x3_bmp)
+TEST(file_must_be_slurped_appropriately, test3x3_png)
 {
-    const std::string bmp_filename = "test3x3.bmp";
-    std::shared_ptr<std::vector<uint8_t>> file_content = yli::file::binary_slurp(bmp_filename);
+    const std::string png_filename = "test3x3.png";
+    std::shared_ptr<std::vector<uint8_t>> file_content = yli::file::binary_slurp(png_filename);
     ASSERT_NE(file_content, nullptr);
+    ASSERT_EQ(file_content->size(), 229);
     const uint16_t* file_content_uint16_t = (uint16_t*) file_content->data();
 
-    // a BMP file always begins with "BM".
-    ASSERT_EQ((*file_content)[0], 'B');
-    ASSERT_EQ((*file_content)[1], 'M');
-
-    // size of file (0x9e == 158 bytes)
-    ASSERT_EQ(file_content_uint16_t[2 / sizeof(uint16_t)], 0x9e);
-    ASSERT_EQ(file_content_uint16_t[4 / sizeof(uint16_t)], 0);
-    ASSERT_EQ(file_content_uint16_t[0x1a / sizeof(uint16_t)], 1); // number of color planes (must be 1)
-
-    const uint32_t magic_number_and_file_size = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content->data(), 0);
-    ASSERT_EQ(magic_number_and_file_size, 0x9e4d42);
-
-    const int32_t image_width = yli::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content->data(), 0x12); // bitmap width in pixels (`int32_t`).
-    ASSERT_EQ(image_width, 3);
-
-    const int32_t image_height = yli::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content->data(), 0x16); // bitmap height in pixels (`int32_t`).
-    ASSERT_EQ(image_height, 3);
-
-    const uint32_t image_size = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content->data(), 0x22); // image size.
-    ASSERT_EQ(image_size, 36);
+    // a PNG file begins with 0x89, 0x50, 0x4e, 0x47.
+    ASSERT_EQ((*file_content)[0], 0x89);
+    ASSERT_EQ((*file_content)[1], 'P');
+    ASSERT_EQ((*file_content)[2], 'N');
+    ASSERT_EQ((*file_content)[3], 'G');
+    ASSERT_EQ((*file_content)[4], 0x0d);
+    ASSERT_EQ((*file_content)[5], 0x0a);
+    ASSERT_EQ((*file_content)[6], 0x1a);
+    ASSERT_EQ((*file_content)[7], 0x0a);
 }

@@ -46,7 +46,7 @@ namespace yli::load
         }
         std::string model_filename;
         std::string model_file_format;
-        std::string color_channel;      // for BMP.
+        std::string color_channel;      // for PNG.
         std::string triangulation_type; // for all.
         std::size_t mesh_i;             // for FBX.
         std::size_t x_step;

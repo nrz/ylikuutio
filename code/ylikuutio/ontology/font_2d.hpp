@@ -78,7 +78,7 @@ namespace yli::ontology
                 bool is_texture_loading_successful = false;
 
                 // Initialize texture.
-                if (this->font_texture_file_format == "bmp" || this->font_texture_file_format == "BMP")
+                if (this->font_texture_file_format == "png" || this->font_texture_file_format == "PNG")
                 {
                     is_texture_loading_successful = yli::load::load_common_texture(
                             this->texture_filename,
@@ -90,13 +90,13 @@ namespace yli::ontology
 
                     if (!is_texture_loading_successful)
                     {
-                        std::cerr << "ERROR: loading BMP texture failed!\n";
+                        std::cerr << "ERROR: loading PNG texture failed!\n";
                     }
                 }
                 else
                 {
                     std::cerr << "ERROR: invalid font texture file format: " << this->font_texture_file_format << "\n";
-                    std::cerr << "supported font texture file formats: bmp, BMP.\n";
+                    std::cerr << "supported font texture file formats: png, PNG.\n";
                 }
 
                 if (!is_headless && is_texture_loading_successful)

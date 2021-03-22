@@ -164,16 +164,16 @@ TEST(openfbx_must_function_appropriately, rigged_and_animated_cat)
 
 TEST(openfbx_must_function_appropriately, turbo_polizei)
 {
-    const std::string filename = "turbo_polizei_bmp_textures.fbx";
+    const std::string filename = "turbo_polizei_png_textures.fbx";
     std::shared_ptr<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
     ASSERT_NE(data_vector, nullptr);
-    ASSERT_EQ(data_vector->size(), 364972);                                // size of `turbo_polizei_bmp_textures.fbx` in bytes.
+    ASSERT_EQ(data_vector->size(), 365180);                              // size of `turbo_polizei_png_textures.fbx` in bytes.
 
     const u8* const data = reinterpret_cast<unsigned char*>(data_vector->data());
     ASSERT_NE(data, nullptr);
 
     const int size = data_vector->size();
-    ASSERT_EQ(size, 364972);                                             // size of `turbo_polizei_bmp_textures.fbx` in bytes.
+    ASSERT_EQ(size, 365180);                                             // size of `turbo_polizei_png_textures.fbx` in bytes.
 
     const uint64_t flags = (uint64_t) ofbx::LoadFlags::TRIANGULATE;
     const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size, flags);

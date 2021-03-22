@@ -190,7 +190,7 @@ namespace yli::ontology
 
             bool is_symbiont_species;
 
-            std::string model_file_format; // type of the model file, eg. `"bmp"`.
+            std::string model_file_format; // type of the model file, eg. `"png"`.
             std::string model_filename;    // filename of the model file.
 
             float latitude;                // for SRTM.

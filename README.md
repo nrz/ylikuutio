@@ -279,13 +279,13 @@ Some available console commands to try in Ajokki:
 * `set wireframe true`
 * `set wireframe false`
 * `activate turbo_polizei_camera`
-* `print turbo_polizei_bmp1.cartesian_coordinates`
-* `print turbo_polizei_bmp1.x`
-* `print turbo_polizei_bmp1.y`
-* `print turbo_polizei_bmp1.z`
-* `set turbo_polizei_bmp1.y 50`
-* `set turbo_polizei_bmp1.x 100`
-* `set turbo_polizei_bmp1.z 200`
+* `print turbo_polizei_png2.cartesian_coordinates`
+* `print turbo_polizei_png2.x`
+* `print turbo_polizei_png2.y`
+* `print turbo_polizei_png2.z`
+* `set turbo_polizei_png2.y 50`
+* `set turbo_polizei_png2.x 100`
+* `set turbo_polizei_png2.z 200`
 * `activate cat_camera`
 * `print cat1.cartesian_coordinates`
 * `print cat1 x`
@@ -313,8 +313,8 @@ Some available console commands to try in Ajokki:
 * `set window_height 500`
 * `create-object cat_species cat3 500 100 600 3.14 0`
 * `create-object cat_species cat4 500 100 650`
-* `create-holobiont turbo_polizei_bmp_symbiosis polizei3 500 100 700 3.14 0`
-* `create-holobiont turbo_polizei_bmp_symbiosis polizei4 480 100 700`
+* `create-holobiont turbo_polizei_png_symbiosis polizei3 500 100 700 3.14 0`
+* `create-holobiont turbo_polizei_png_symbiosis polizei4 480 100 700`
 
 ## FAQ
 Q: What is "Ylikuutio"?
@@ -376,7 +376,7 @@ A: YliLisp scripting language is a work in progress.
 ## Implemented functionality
 * 3D rendering
 * 2D text
-* support for different height map formats (SRTM, BMP)
+* support for different height map formats (SRTM, PNG)
 * instant rebinding of instances of classes belonging to ontological hierarchy
 * callbacks
 * fully functioning in-game console
@@ -454,8 +454,8 @@ A: YliLisp scripting language is a work in progress.
 
 ### Textures
 * Grass texture is from [Free Seamless Green Grass Textures](https://www.brusheezy.com/textures/20185-seamless-green-grass-textures), licensed under [Creative Commons Attribution (BY) License](https://support.brusheezy.com/hc/en-us/articles/360002159712-Creative-Commons-Attribution-BY-License-Definition-Usage).
-* A Cool Seamless Orange Fur Texture is from [My Free Textures](http://www.myfreetextures.com/a-cool-seamless-orange-fur-texture/). `orange_fur_texture.bmp` is scaled down and converted into BMP from the original `ornage-fur-texture.jpg` (sic). License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
-* Pink Marble Pavers Or Tiles Background Texture is from [My Free Textures](http://www.myfreetextures.com/marbles-pavers-tiles-background-texture/). `pavers1b2.bmp` is scaled down and converted into BMP from the original `pavers1b2.jpg`. License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
+* A Cool Seamless Orange Fur Texture is from [My Free Textures](http://www.myfreetextures.com/a-cool-seamless-orange-fur-texture/). `orange_fur_texture.png` is scaled down and converted into PNG from the original `ornage-fur-texture.jpg` (sic). License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
+* Pink Marble Pavers Or Tiles Background Texture is from [My Free Textures](http://www.myfreetextures.com/marbles-pavers-tiles-background-texture/). `pavers1b2.png` is scaled down and converted into PNG from the original `pavers1b2.jpg`. License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
 
 ### Fonts
 * kongtext font is made by [codeman38](https://zone38.net/), see res/fonts/kongtext/license.txt for the license.

@@ -95,8 +95,8 @@ namespace ajokki
         // Create the material, store it in `tallinn_grass_material`.
         yli::ontology::MaterialStruct tallinn_grass_material_struct;
         tallinn_grass_material_struct.shader = tallinn_shader;
-        tallinn_grass_material_struct.texture_file_format = "bmp";
-        tallinn_grass_material_struct.texture_filename = "GrassGreenTexture0002.bmp";
+        tallinn_grass_material_struct.texture_file_format = "png";
+        tallinn_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
         std::cout << "Creating yli::ontology::Entity* tallinn_grass_material_entity ...\n";
         yli::ontology::Entity* const tallinn_grass_material_entity = entity_factory->create_material(tallinn_grass_material_struct);
