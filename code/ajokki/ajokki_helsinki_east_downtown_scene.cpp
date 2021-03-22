@@ -801,68 +801,6 @@ namespace ajokki
 
         turbo_polizei_bmp1->set_global_name("turbo_polizei_bmp1");
 
-        yli::ontology::SymbiosisStruct fantasy_house_with_balcony_symbiosis_struct;
-        fantasy_house_with_balcony_symbiosis_struct.parent = helsinki_east_downtown_shader;
-        fantasy_house_with_balcony_symbiosis_struct.model_file_format = "fbx";
-        fantasy_house_with_balcony_symbiosis_struct.model_filename = "fantasy_house_with_balcony.fbx";
-        fantasy_house_with_balcony_symbiosis_struct.light_position = glm::vec3(0, 100000, 100000);
-
-        std::cout << "Creating yli::ontology::Entity* fantasy_house_with_balcony_symbiosis_entity ...\n";
-        yli::ontology::Entity* const fantasy_house_with_balcony_symbiosis_entity = entity_factory->create_symbiosis(fantasy_house_with_balcony_symbiosis_struct);
-
-        std::cout << "Creating yli::ontology::Symbiosis* fantasy_house_with_balcony_symbiosis ...\n";
-        yli::ontology::Symbiosis* const fantasy_house_with_balcony_symbiosis = dynamic_cast<yli::ontology::Symbiosis*>(fantasy_house_with_balcony_symbiosis_entity);
-
-        if (fantasy_house_with_balcony_symbiosis == nullptr)
-        {
-            std::cerr << "Failed to create fantasy_house_with_balcony Symbiosis.\n";
-            return nullptr;
-        }
-
-        fantasy_house_with_balcony_symbiosis->set_global_name("fantasy_house_with_balcony_symbiosis");
-
-        yli::ontology::HolobiontStruct fantasy_house_with_balcony_holobiont_struct1;
-        fantasy_house_with_balcony_holobiont_struct1.parent = fantasy_house_with_balcony_symbiosis;
-        fantasy_house_with_balcony_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        fantasy_house_with_balcony_holobiont_struct1.cartesian_coordinates = glm::vec3(268.00f, 59.00f, 174.00f);
-
-        std::cout << "Creating yli::ontology::Entity* fantasy_house_with_balcony1_entity ...\n";
-
-        yli::ontology::Entity* const fantasy_house_with_balcony1_entity = entity_factory->create_holobiont(fantasy_house_with_balcony_holobiont_struct1);
-
-        std::cout << "Creating yli::ontology::Holobiont* fantasy_house_with_balcony1 ...\n";
-
-        yli::ontology::Holobiont* const fantasy_house_with_balcony1 = dynamic_cast<yli::ontology::Holobiont*>(fantasy_house_with_balcony1_entity);
-
-        if (fantasy_house_with_balcony1 == nullptr)
-        {
-            std::cerr << "Failed to create fantasy_house_with_balcony1 Object.\n";
-            return nullptr;
-        }
-
-        fantasy_house_with_balcony1->set_global_name("fantasy_house_with_balcony1");
-
-        yli::ontology::HolobiontStruct fantasy_house_with_balcony_holobiont_struct2;
-        fantasy_house_with_balcony_holobiont_struct2.parent = fantasy_house_with_balcony_symbiosis;
-        fantasy_house_with_balcony_holobiont_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        fantasy_house_with_balcony_holobiont_struct2.cartesian_coordinates = glm::vec3(252.00f, 23.50f, 2614.00f);
-
-        std::cout << "Creating yli::ontology::Entity* fantasy_house_with_balcony2_entity ...\n";
-
-        yli::ontology::Entity* const fantasy_house_with_balcony2_entity = entity_factory->create_holobiont(fantasy_house_with_balcony_holobiont_struct2);
-
-        std::cout << "Creating yli::ontology::Holobiont* fantasy_house_with_balcony2 ...\n";
-
-        yli::ontology::Holobiont* const fantasy_house_with_balcony2 = dynamic_cast<yli::ontology::Holobiont*>(fantasy_house_with_balcony2_entity);
-
-        if (fantasy_house_with_balcony2 == nullptr)
-        {
-            std::cerr << "Failed to create fantasy_house_with_balcony2 Object.\n";
-            return nullptr;
-        }
-
-        fantasy_house_with_balcony2->set_global_name("fantasy_house_with_balcony2");
-
         yli::ontology::VectorFontStruct kongtext_vector_font_struct;
         kongtext_vector_font_struct.parent = helsinki_east_downtown_grass_material;
         kongtext_vector_font_struct.font_file_format = "svg";
