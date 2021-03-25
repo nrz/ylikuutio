@@ -25,6 +25,7 @@
 #include "universe.hpp"
 #include "font_struct.hpp"
 #include "text_struct.hpp"
+#include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/load/common_texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -73,6 +74,7 @@ namespace yli::ontology
                 this->image_width                       = 0;
                 this->image_height                      = 0;
                 this->image_size                        = 0;
+                this->n_color_channels                  = 0;
 
                 const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
                 bool is_texture_loading_successful = false;
@@ -80,8 +82,12 @@ namespace yli::ontology
                 // Initialize texture.
                 if (this->font_texture_file_format == "png" || this->font_texture_file_format == "PNG")
                 {
+                    yli::load::ImageLoaderStruct image_loader_struct;
+                    image_loader_struct.should_convert_grayscale_to_rgb = true;
+
                     is_texture_loading_successful = yli::load::load_common_texture(
                             this->texture_filename,
+                            image_loader_struct,
                             this->image_width,
                             this->image_height,
                             this->image_size,
@@ -91,6 +97,15 @@ namespace yli::ontology
                     if (!is_texture_loading_successful)
                     {
                         std::cerr << "ERROR: loading PNG texture failed!\n";
+                    }
+                    else if (this->image_size != this->image_width * this->image_height)
+                    {
+                        std::cerr << "ERROR: loading PNG texture failed!\n";
+                        is_texture_loading_successful = false;
+                    }
+                    else
+                    {
+                        this->n_color_channels = this->image_size / (this->image_width * this->image_height);
                     }
                 }
                 else
@@ -136,8 +151,8 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
-            std::size_t get_text_size() const;
-            std::size_t get_font_size() const;
+            uint32_t get_text_size() const;
+            uint32_t get_font_size() const;
             const std::string& get_font_texture_file_format() const;
             uint32_t get_program_id() const;
 
@@ -146,10 +161,10 @@ namespace yli::ontology
             void render();
 
             void print_text_2d(
-                    const std::size_t x,
-                    const std::size_t y,
-                    const std::size_t text_size,
-                    const std::size_t font_size,
+                    const uint32_t x,
+                    const uint32_t y,
+                    const uint32_t text_size,
+                    const uint32_t font_size,
                     const std::string& text,
                     const std::string& font_texture_file_format,
                     const std::string& horizontal_alignment,
@@ -158,10 +173,10 @@ namespace yli::ontology
             void print_text_2d(const yli::ontology::TextStruct& text_struct) const;
 
             void print_text_2d(
-                    const std::size_t x,
-                    const std::size_t y,
-                    const std::size_t text_size,
-                    const std::size_t font_size,
+                    const uint32_t x,
+                    const uint32_t y,
+                    const uint32_t text_size,
+                    const uint32_t font_size,
                     const std::string& text,
                     const std::string& font_texture_file_format) const;
 
@@ -189,13 +204,14 @@ namespace yli::ontology
             GLint screen_width_uniform_id;           // Location of the program's window width uniform.
             GLint screen_height_uniform_id;          // Location of the program's window height uniform.
 
-            std::size_t screen_width;
-            std::size_t screen_height;
-            std::size_t image_width;
-            std::size_t image_height;
-            std::size_t image_size;
-            std::size_t text_size;
-            std::size_t font_size;
+            uint32_t screen_width;
+            uint32_t screen_height;
+            uint32_t image_width;
+            uint32_t image_height;
+            uint32_t image_size;
+            uint32_t text_size;
+            uint32_t font_size;
+            uint32_t n_color_channels;
     };
 }
 

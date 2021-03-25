@@ -40,7 +40,6 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
-#include <cstddef>  // std::size_t
 #include <iomanip>  // std::setfill, std::setw
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
@@ -57,8 +56,8 @@ namespace yli::load
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals,
-            std::size_t& image_width,
-            std::size_t& image_height)
+            uint32_t& image_width,
+            uint32_t& image_height)
     {
         // For SRTM worlds, the right heightmap filename must be resolved first.
         // The SRTM filenames contain always the southwest coordinate of the block.
@@ -118,8 +117,8 @@ namespace yli::load
         std::stringstream latitude_stringstream;
         std::stringstream longitude_stringstream;
 
-        const std::size_t SRTM_filename_n_of_latitude_chars = 2;
-        const std::size_t SRTM_filename_n_of_longitude_chars = 3;
+        const int SRTM_filename_n_of_latitude_chars = 2;
+        const int SRTM_filename_n_of_longitude_chars = 3;
 
         latitude_stringstream << std::setw(SRTM_filename_n_of_latitude_chars) << std::setfill('0') << abs(filename_latitude);
         longitude_stringstream << std::setw(SRTM_filename_n_of_longitude_chars) << std::setfill('0') << abs(filename_longitude);
@@ -141,7 +140,7 @@ namespace yli::load
             return false;
         }
 
-        const std::size_t true_image_width = 1201; // true image height is 1201 as well.
+        const uint32_t true_image_width = 1201; // true image height is 1201 as well.
         image_width = 1200;  // rightmost column is not used (it is duplicated in the next SRTM file to the east).
         image_height = 1200; // bottom row is not used (it us duplicated in the next SRTM file to the south).
 
@@ -158,7 +157,7 @@ namespace yli::load
         int32_t last_percent = -1;
         int32_t current_percent = -1;
 
-        for (std::size_t z = 0; z < image_height; z++)
+        for (uint32_t z = 0; z < image_height; z++)
         {
             // show progress in percents.
             current_percent = static_cast<int32_t>(floor(100.0f * (static_cast<float>(z) / static_cast<float>(image_height - 1))));
@@ -169,9 +168,9 @@ namespace yli::load
                 last_percent = current_percent;
             }
 
-            for (std::size_t x = 0; x < image_width; x++)
+            for (uint32_t x = 0; x < image_width; x++)
             {
-                std::size_t y = static_cast<std::size_t>(*image_pointer) << 8 | static_cast<std::size_t>(*(image_pointer + 1));
+                uint32_t y = static_cast<uint32_t>(*image_pointer) << 8 | static_cast<uint32_t>(*(image_pointer + 1));
 
                 image_pointer += sizeof(int16_t);
                 vertex_data.emplace_back(static_cast<float>(y) / heightmap_loader_struct.divisor);

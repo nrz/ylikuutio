@@ -23,16 +23,16 @@
 #include <ofbx.h>
 
 // Include standard headers
-#include <cstddef>  // std::size_t
+#include <stdint.h> // uint32_t etc.
 
 namespace yli::load
 {
     // Load texture from memory.
     bool load_fbx_texture(
             const ofbx::Texture* const ofbx_texture,
-            std::size_t& image_width,
-            std::size_t& image_height,
-            std::size_t& image_size,
+            uint32_t& image_width,
+            uint32_t& image_height,
+            uint32_t& image_size,
             GLuint& textureID,
             const bool is_headless);
 }

@@ -65,15 +65,15 @@ In Debian or Ubuntu it's simple.
 First, install all the necessary compilers, tools and libs. You may use
 your favorite package manager such as apt, aptitude, apt-get, yum etc.
 You all need these packages:
-cmake make g++ gcc libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
+cmake make g++ gcc libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev zlib1g-dev
 
 Eg. with apt:
 
-    $ sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
+    $ sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev zlib1g-dev
 
 If you are doing a cross compile from Linux to Windows, you need also:
 
-    $ sudo apt install g++-mingw-w64 gcc-mingw-w64 binutils-mingw-w64
+    $ sudo apt install g++-mingw-w64 gcc-mingw-w64 binutils-mingw-w64 libz-mingw-w64-dev
 
 If you are doing a cross compile from Linux to Android™, you need also:
 
@@ -363,7 +363,7 @@ A: Some parts of Ylikuutio (some shaders, some file loaders, etc.) are
    based on [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/),
    which I really recommend for anyone interested in learning
    OpenGL programming. Ylikuutio also uses external libraries such as
-   (in alphabetical order) Asio, Bullet, GLEW, GLM, OpenFBX, pugixml, SDL, and stb.
+   (in alphabetical order) Asio, Bullet, GLEW, GLM, libpng, OpenFBX, pugixml, and SDL.
    The rest is written from scratch.
 
 Q: Does Ylikuutio use right-handed or left-handed world coordinates?
@@ -431,12 +431,12 @@ A: YliLisp scripting language is a work in progress.
 * The source code from [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/) is licensed under [WTFPL Public Licence version 2](https://www.opengl-tutorial.org/download/).
 * [Asio](https://think-async.com/) is licensed under [Boost software license](https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt).
 * [Bullet](http://bulletphysics.org/) is licensed under [the zlib license](https://github.com/bulletphysics/bullet3/blob/master/LICENSE.txt).
+* [libpng](http://libpng.org/pub/png/libpng.html) is licensed under [PNG Reference Library License version 2](http://www.libpng.org/pub/png/src/libpng-LICENSE.txt).
 * [OpenGL Mathematics (GLM)](https://glm.g-truc.net/) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](https://glm.g-truc.net/copying.txt).
 * [The OpenGL Extension Wrangler Library (GLEW)](http://glew.sourceforge.net/) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
 * [OpenFBX](https://github.com/nem0/OpenFBX) is licensed under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
 * [Ryan's CMake Modules](https://github.com/rpavlik/cmake-modules) is licensed under [Boost Software License Version 1.0](https://github.com/rpavlik/cmake-modules/blob/master/LICENSE_1_0.txt).
 * [SDL2](https://www.libsdl.org/) is licensed under [the zlib license](https://www.libsdl.org/).
-* [stb](https://github.com/nothings/stb) is licensed under [the MIT license](https://github.com/nothings/stb/blob/master/LICENSE).
 * [pugixml](https://pugixml.org/) is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 
 ### Libraries not yet in use

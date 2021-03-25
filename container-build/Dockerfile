@@ -13,6 +13,7 @@ RUN apt-get -qq install -y \
     libxext-dev \
     libxi-dev \
     libxinerama-dev \
+    zlib1g-dev \
     git && \
     apt-get -qq clean
 

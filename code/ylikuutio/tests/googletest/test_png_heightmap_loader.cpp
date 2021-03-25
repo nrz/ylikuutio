@@ -26,7 +26,7 @@
 #endif
 
 // Include standard headers
-#include <cstddef>  // std::size_t
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -42,8 +42,8 @@ TEST(a_png_terrain_must_be_loaded_appropriately, load_3x3_png_terrain)
     std::vector<glm::vec3> out_vertices;
     std::vector<glm::vec2> out_uvs;
     std::vector<glm::vec3> out_normals;
-    std::size_t image_width = 0;
-    std::size_t image_height = 0;
+    uint32_t image_width = 0;
+    uint32_t image_height = 0;
     const std::string color_channel = "mean";
 
     bool model_loading_result = yli::load::load_png_terrain(
@@ -57,10 +57,10 @@ TEST(a_png_terrain_must_be_loaded_appropriately, load_3x3_png_terrain)
 
     ASSERT_TRUE(model_loading_result);
 
-    const std::size_t n_vertices_for_face = 3;
-    const std::size_t n_faces_for_bilinear_triangulation = 4;
-    const std::size_t n_width_of_image_file = 3;
-    const std::size_t n_height_of_image_file = 3;
+    const uint32_t n_vertices_for_face = 3;
+    const uint32_t n_faces_for_bilinear_triangulation = 4;
+    const uint32_t n_width_of_image_file = 3;
+    const uint32_t n_height_of_image_file = 3;
 
     //                         48 =                  3 *                                  4 * (                    3 - 1) * (                     3 - 1)
     ASSERT_EQ(out_vertices.size(), n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
@@ -378,8 +378,8 @@ TEST(a_png_terrain_must_be_loaded_appropriately, load_256x256_png_terrain)
     std::vector<glm::vec3> out_vertices;
     std::vector<glm::vec2> out_uvs;
     std::vector<glm::vec3> out_normals;
-    std::size_t image_width = 0;
-    std::size_t image_height = 0;
+    uint32_t image_width = 0;
+    uint32_t image_height = 0;
     const std::string color_channel = "mean";
 
     const bool model_loading_result = yli::load::load_png_terrain(
@@ -393,10 +393,10 @@ TEST(a_png_terrain_must_be_loaded_appropriately, load_256x256_png_terrain)
 
     ASSERT_TRUE(model_loading_result);
 
-    const std::size_t n_vertices_for_face = 3;
-    const std::size_t n_faces_for_bilinear_triangulation = 4;
-    const std::size_t n_width_of_image_file = 256;
-    const std::size_t n_height_of_image_file = 256;
+    const uint32_t n_vertices_for_face = 3;
+    const uint32_t n_faces_for_bilinear_triangulation = 4;
+    const uint32_t n_width_of_image_file = 256;
+    const uint32_t n_height_of_image_file = 256;
 
     ASSERT_EQ(out_vertices.size(), n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
     ASSERT_EQ(out_uvs.size(), n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));

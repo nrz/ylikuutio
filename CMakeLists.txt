@@ -1,7 +1,9 @@
 # CMake entry point
 cmake_minimum_required(VERSION 2.6.2)
+cmake_policy(SET CMP0048 NEW)
+cmake_policy(SET CMP0072 NEW)
 set(CMAKE_CXX_STANDARD 17)
-project(ylikuutio)
+project(ylikuutio VERSION 0.0.8)
 
 #-------------------------------------------------------+
 # the options part intended to be modified begins here. |
@@ -156,7 +158,7 @@ include_directories(
     external/glm/
     external/OpenFBX/src/
     external/pugixml/src/
-    external/stb/
+    external/libpng-1.6.37/
     ${YLI_BULLET_DIRECTORIES}
     .
     )
@@ -286,7 +288,7 @@ set(ALL_LIBS
     pugixml
     miniz
     OpenFBX
-    stb
+    png_static
     bullet
     )
 
@@ -315,6 +317,7 @@ add_definitions(
     -DTW_NO_LIB_PRAGMA
     -DTW_NO_DIRECT3D
     -D_CRT_SECURE_NO_WARNINGS
+    -DPNG_NO_SETJMP
     )
 
 if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
@@ -542,10 +545,13 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/heightmap_loader_struct.hpp
     code/ylikuutio/load/image_file_loader.cpp
     code/ylikuutio/load/image_file_loader.hpp
+    code/ylikuutio/load/image_loader_struct.hpp
     code/ylikuutio/load/obj_loader.cpp
     code/ylikuutio/load/obj_loader.hpp
     code/ylikuutio/load/png_heightmap_loader.cpp
     code/ylikuutio/load/png_heightmap_loader.hpp
+    code/ylikuutio/load/png_loader.cpp
+    code/ylikuutio/load/png_loader.hpp
     code/ylikuutio/load/shader_loader.cpp
     code/ylikuutio/load/shader_loader.hpp
     code/ylikuutio/load/species_loader.cpp
@@ -1014,10 +1020,13 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/load/heightmap_loader_struct.hpp
         code/ylikuutio/load/image_file_loader.cpp
         code/ylikuutio/load/image_file_loader.hpp
+        code/ylikuutio/load/image_loader_struct.hpp
         code/ylikuutio/load/obj_loader.cpp
         code/ylikuutio/load/obj_loader.hpp
         code/ylikuutio/load/png_heightmap_loader.cpp
         code/ylikuutio/load/png_heightmap_loader.hpp
+        code/ylikuutio/load/png_loader.cpp
+        code/ylikuutio/load/png_loader.hpp
         code/ylikuutio/memory/memory_templates.hpp
         code/ylikuutio/ontology/brain.cpp
         code/ylikuutio/ontology/brain.hpp
@@ -1147,7 +1156,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     add_dependencies(code_to_test ylikuutio ${ALL_LIBS} pthread)
 
     add_executable(unit_tests_with_googletest code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
-    target_link_libraries(unit_tests_with_googletest yli_gtest libgtest rt SDL2 GLEW_200 stb bullet ylikuutio pthread code_to_test)
+    target_link_libraries(unit_tests_with_googletest yli_gtest libgtest rt SDL2 GLEW_200 bullet png ylikuutio pthread code_to_test)
 
     # Xcode and Visual working directories
     set_target_properties(unit_tests_with_googletest PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")

@@ -54,8 +54,8 @@ namespace yli::load
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals,
-            std::size_t& image_width,
-            std::size_t& image_height)
+            uint32_t& image_width,
+            uint32_t& image_height)
     {
         // Beginning of `L4133D.asc`.
         //
@@ -182,8 +182,8 @@ namespace yli::load
             return false;
         }
 
-        image_width = static_cast<std::size_t>(image_width_int32_t);
-        image_height = static_cast<std::size_t>(image_height_int32_t);
+        image_width = static_cast<uint32_t>(image_width_int32_t);
+        image_height = static_cast<uint32_t>(image_height_int32_t);
 
         std::vector<float> vertex_data;
         vertex_data.reserve(image_width * image_height);
@@ -194,7 +194,7 @@ namespace yli::load
         int32_t last_percent = -1;
         int32_t current_percent = -1;
 
-        for (std::size_t z = 0; z < image_height; z++)
+        for (uint32_t z = 0; z < image_height; z++)
         {
             // show progress in percents.
             current_percent = static_cast<int32_t>(floor(100.0f * (static_cast<float>(z) / static_cast<float>(image_height - 1))));
@@ -205,7 +205,7 @@ namespace yli::load
                 last_percent = current_percent;
             }
 
-            for (std::size_t x = 0; x < image_width; x++)
+            for (uint32_t x = 0; x < image_width; x++)
             {
                 while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
                 {
@@ -242,7 +242,7 @@ namespace yli::load
 
         for (std::size_t i = 0, z = 0; i < vertex_data.size() && z < image_height; z++)
         {
-            for (std::size_t x = 0; x < image_width; x++)
+            for (uint32_t x = 0; x < image_width; x++)
             {
                 glm::vec3 vertex { static_cast<float>(x), vertex_data[i++], static_cast<float>(z) };
                 out_vertices.emplace_back(vertex);

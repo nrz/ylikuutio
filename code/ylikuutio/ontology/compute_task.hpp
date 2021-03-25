@@ -27,6 +27,7 @@
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/load/common_texture_loader.hpp"
 #include "code/ylikuutio/load/csv_texture_loader.hpp"
+#include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_templates.hpp"
@@ -156,6 +157,7 @@ namespace yli::ontology
                 {
                     if (!yli::load::load_common_texture(
                                 this->texture_filename,
+                                yli::load::ImageLoaderStruct(),
                                 this->texture_width,
                                 this->texture_height,
                                 this->texture_size,
@@ -291,14 +293,14 @@ namespace yli::ontology
 
             std::size_t compute_taskID;
 
-            std::size_t texture_width;
-            std::size_t texture_height;
-            std::size_t texture_size;
+            uint32_t texture_width;
+            uint32_t texture_height;
+            uint32_t texture_size;
 
-            std::size_t n_index_characters; // For intermediate results' filenames.
+            uint32_t n_index_characters; // For intermediate results' filenames.
 
-            std::size_t vertices_size;
-            std::size_t uvs_size;
+            uint32_t vertices_size;
+            uint32_t uvs_size;
 
             // variables related to the framebuffer.
             GLuint framebuffer;

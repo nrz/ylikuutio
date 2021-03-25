@@ -20,7 +20,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
-#include <cstddef>  // std::size_t
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli::load
@@ -46,8 +46,8 @@ namespace yli::load
         float longitude;
         float planet_radius;
         float divisor;
-        std::size_t x_step;
-        std::size_t z_step;
+        uint32_t x_step;
+        uint32_t z_step;
         std::string triangulation_type;
         bool use_real_texture_coordinates;
         bool triangulate;

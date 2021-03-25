@@ -25,6 +25,7 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -33,9 +34,9 @@ namespace yli::load
     template<class T1>
         std::shared_ptr<std::vector<T1>> load_csv_file(
                 const std::string& filename,
-                std::size_t& data_width,
-                std::size_t& data_height,
-                std::size_t& data_size)
+                uint32_t& data_width,
+                uint32_t& data_height,
+                uint32_t& data_size)
         {
             // Open the file
             const std::shared_ptr<std::string> file_content = yli::file::slurp(filename);
@@ -58,9 +59,9 @@ namespace yli::load
             data_size = 0;
 
             std::size_t file_content_i = 0;
-            std::size_t n_lines = 0;
-            std::size_t n_elements_in_first_line = 0;
-            std::size_t n_elements_in_current_line = 0;
+            uint32_t n_lines = 0;
+            uint32_t n_elements_in_first_line = 0;
+            uint32_t n_elements_in_current_line = 0;
             const char* const char_end_string = ", \n";
 
             std::shared_ptr<std::vector<T1>> data_vector = std::make_shared<std::vector<T1>>();

@@ -26,6 +26,7 @@
 #include "material_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/load/common_texture_loader.hpp"
+#include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_templates.hpp"
 
@@ -74,6 +75,7 @@ namespace yli::ontology
                     {
                         if (!yli::load::load_common_texture(
                                     this->texture_filename,
+                                    yli::load::ImageLoaderStruct(),
                                     this->image_width,
                                     this->image_height,
                                     this->image_size,
@@ -116,9 +118,9 @@ namespace yli::ontology
 
             const std::string& get_texture_file_format() const;
             const std::string& get_texture_filename() const;
-            std::size_t get_image_width() const;
-            std::size_t get_image_height() const;
-            std::size_t get_image_size() const;
+            uint32_t get_image_width() const;
+            uint32_t get_image_height() const;
+            uint32_t get_image_size() const;
 
             template<class T1, class T2>
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
@@ -130,9 +132,9 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_chunk_masters;
 
         protected:
-            std::size_t image_width  { 0 };
-            std::size_t image_height { 0 };
-            std::size_t image_size   { 0 };
+            uint32_t image_width  { 0 };
+            uint32_t image_height { 0 };
+            uint32_t image_size   { 0 };
 
             GLuint texture           { 0 }; // Texture of this `Material`, returned by `load_common_texture` (used for `glGenTextures` etc.). Dummy value.
             GLuint opengl_texture_id { 0 }; // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`. Dummy value.

@@ -29,6 +29,7 @@
 #include <cstddef>  // std::size_t
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli::ontology
@@ -183,17 +184,17 @@ namespace yli::ontology
         return this->texture_filename;
     }
 
-    std::size_t Material::get_image_width() const
+    uint32_t Material::get_image_width() const
     {
         return this->image_width;
     }
 
-    std::size_t Material::get_image_height() const
+    uint32_t Material::get_image_height() const
     {
         return this->image_height;
     }
 
-    std::size_t Material::get_image_size() const
+    uint32_t Material::get_image_size() const
     {
         return this->image_size;
     }

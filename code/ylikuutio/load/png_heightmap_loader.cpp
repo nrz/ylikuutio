@@ -28,6 +28,8 @@
 #include "heightmap_loader_struct.hpp"
 #include "image_file_loader.hpp"
 #include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
+#include "code/ylikuutio/load/image_loader_struct.hpp"
+#include "code/ylikuutio/memory/memory_templates.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 #include "code/ylikuutio/data/pi.hpp"
@@ -43,6 +45,7 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -53,8 +56,8 @@ namespace yli::load
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals,
-            std::size_t& image_width,
-            std::size_t& image_height,
+            uint32_t& image_width,
+            uint32_t& image_height,
             const std::string& color_channel)
     {
         if (heightmap_loader_struct.x_step < 1)
@@ -69,9 +72,14 @@ namespace yli::load
             return false;
         }
 
-        std::size_t image_size;
+        uint32_t image_size = 0;
 
-        std::shared_ptr<std::vector<uint8_t>> image_data = load_image_file(heightmap_loader_struct.filename, image_width, image_height, image_size);
+        std::shared_ptr<std::vector<uint8_t>> image_data = load_image_file(
+                heightmap_loader_struct.filename,
+                yli::load::ImageLoaderStruct(),
+                image_width,
+                image_height,
+                image_size);
 
         if (image_data == nullptr)
         {
@@ -91,10 +99,33 @@ namespace yli::load
             return false;
         }
 
+        if (image_size != image_width * image_height)
+        {
+            std::cerr << "ERROR: `yli::load::load_png_terrain`: image size does not match image dimensions!\n";
+            return false;
+        }
+
+        const uint32_t n_color_channels = image_data->size() / image_size;
+
+        if (n_color_channels == 0)
+        {
+            std::cerr << "ERROR: `yli::load::load_png_terrain`: image data is too small for the image size!\n";
+            return false;
+        }
+
+        if (n_color_channels * image_size != image_data->size())
+        {
+            std::cerr << "ERROR: `yli::load::load_png_terrain`: image data size does not match number of color channels and image size!\n";
+            return false;
+        }
+
+        std::cout << n_color_channels << " color channel" << (n_color_channels > 1 ? "s" : "") << " in use.\n";
+        yli::memory::flip_vertically(&(*image_data)[0], n_color_channels * image_width, image_height);
+
         // Define terrain size.
         const std::size_t terrain_size = image_width * image_height;
 
-        const std::size_t line_size_in_bytes = image_size / image_height;
+        const std::size_t line_size_in_bytes = n_color_channels * image_width;
 
         std::vector<float> vertex_data;
         vertex_data.reserve(terrain_size);
@@ -108,32 +139,36 @@ namespace yli::load
             {
                 std::size_t y;
 
-                if (color_channel == "blue")
+                if (color_channel == "red")
                 {
-                    y = static_cast<float>(*image_pointer);       // y-coordinate is the blue (B) value.
+                    y = static_cast<float>(*(image_pointer));     // y-coordinate is the red (R) value.
                 }
-                else if (color_channel == "green")
+                else if (color_channel == "green" && n_color_channels >= 2)
                 {
                     y = static_cast<float>(*(image_pointer + 1)); // y-coordinate is the green (G) value.
                 }
-                else if (color_channel == "red")
+                else if (color_channel == "blue" && n_color_channels >= 3)
                 {
-                    y = static_cast<float>(*(image_pointer + 2)); // y-coordinate is the red (R) value.
+                    y = static_cast<float>(*image_pointer + 2);   // y-coordinate is the blue (B) value.
                 }
-
-                // y-coordinate is the mean of R, G, & B.
                 else if (color_channel == "mean" || color_channel == "all")
                 {
-                    y = (static_cast<float>(*image_pointer) + static_cast<float>(*(image_pointer + 1)) + static_cast<float>(*(image_pointer + 2))) / 3.0f;
+                    float float_y { 0.0f };
+                    for (std::size_t color_channel_i = 0; color_channel_i < n_color_channels; color_channel_i++)
+                    {
+                        float_y += static_cast<float>(*image_pointer + color_channel_i);
+                    }
+
+                    y = float_y / static_cast<float>(n_color_channels);
                 }
                 else
                 {
-                    std::cerr << "ERROR: invalid color channel.\n";
+                    std::cerr << "ERROR: invalid color channel: " << color_channel << "\n";
                     return false;
                 }
 
                 vertex_data.emplace_back(y);
-                image_pointer += 3; // R, G, & B.
+                image_pointer += n_color_channels;
             }
         }
 

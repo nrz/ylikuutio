@@ -16,17 +16,14 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "image_file_loader.hpp"
-#include "code/ylikuutio/file/file_loader.hpp"
-#include "code/ylikuutio/memory/memory_templates.hpp"
+#include "png_loader.hpp"
+#include "code/ylikuutio/load/image_loader_struct.hpp"
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "png.h"
 
 // Include standard headers
-#include <algorithm> // std::copy
 #include <cstddef>   // std::size_t
 #include <iostream>  // std::cout, std::cin, std::cerr
-#include <limits>    // std::numeric_limits
 #include <memory>    // std::make_shared, std::shared_ptr
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
@@ -36,68 +33,28 @@ namespace yli::load
 {
     std::shared_ptr<std::vector<uint8_t>> load_image_file(
             const std::string& filename,
-            std::size_t& image_width,
-            std::size_t& image_height,
-            std::size_t& image_size)
+            const yli::load::ImageLoaderStruct& image_loader_struct,
+            uint32_t& image_width,
+            uint32_t& image_height,
+            uint32_t& image_size)
     {
         std::cout << "Loading image file " << filename << " ...\n";
 
-        int x = 0;
-        int y = 0;
-        int channels_in_file = 0;
-        const int desired_channels = 3;
+        const std::size_t dot_position = filename.find_last_of('.');
 
-        stbi_set_flip_vertically_on_load(true);
-        stbi_uc* stbi_image_data = stbi_load(&filename[0], &x, &y, &channels_in_file, desired_channels);
-
-        if (stbi_image_data == nullptr)
+        if (dot_position == std::string::npos)
         {
-            std::cerr << filename << "ERROR: `yli::load::load_image_file`: `stbi_image_data` is `nullptr`!\n";
+            std::cerr << filename << "ERROR: `yli::load::load_image_file`: filename " << filename << " does not have a dot!\n";
             return nullptr;
         }
 
-        bool has_file_errors = false;
+        const std::string suffix = std::string(&filename[dot_position]);
 
-        if (x < 0)
+        if (suffix == ".png")
         {
-            std::cerr << filename << "ERROR: `yli::load::load_image_file`: image width is negative!\n";
-            has_file_errors = true;
+            return yli::load::load_png_file(filename, image_loader_struct, image_width, image_height, image_size);
         }
 
-        if (y < 0)
-        {
-            std::cerr << filename << "ERROR: `yli::load::load_image_file`: image height is negative!\n";
-            has_file_errors = true;
-        }
-
-        if (has_file_errors)
-        {
-            free(stbi_image_data);
-            return nullptr;
-        }
-
-        image_width = x;
-        image_height = y;
-        const std::size_t number_of_pixels = image_width * image_height;
-
-        if (number_of_pixels > std::numeric_limits<std::size_t>::max() / 4)
-        {
-            std::cerr << "ERROR: `yli::load::load_image_file`: file is too big, number of pixels: " << number_of_pixels << "\n";
-            free(stbi_image_data);
-            return nullptr;
-        }
-
-        image_size = static_cast<std::size_t>(desired_channels) * number_of_pixels;
-
-        // Create a buffer.
-        std::shared_ptr<std::vector<uint8_t>> image_data = std::make_shared<std::vector<uint8_t>>();
-        image_data->reserve(image_size);
-
-        std::cout << "Copying image data ...\n";
-        std::copy(stbi_image_data, stbi_image_data + image_size, image_data->begin());
-        std::cout << "Image data copied.\n";
-
-        free(stbi_image_data);
-        return image_data;
+        return nullptr;
     }
 }

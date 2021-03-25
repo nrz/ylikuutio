@@ -273,8 +273,7 @@ namespace yli::ontology
 
             if (font_texture_file_format == "png" || font_texture_file_format == "PNG")
             {
-                // BMP is stored in the file beginning from the bottom line.
-                uv_y = 1 - (character / this->font_size) / static_cast<float>(this->font_size);
+                uv_y = (character / this->font_size) / static_cast<float>(this->font_size);
             }
             else
             {
@@ -289,9 +288,8 @@ namespace yli::ontology
 
             if (font_texture_file_format == "png" || font_texture_file_format == "PNG")
             {
-                // BMP is stored in the file beginning from the bottom line.
-                uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(this->font_size)), (uv_y - 1.0f / static_cast<float>(this->font_size)));
-                uv_down_left = glm::vec2(uv_x, (uv_y - 1.0f / static_cast<float>(this->font_size)));
+                uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(this->font_size)), (uv_y + 1.0f / static_cast<float>(this->font_size)));
+                uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(this->font_size)));
             }
 
             UVs.emplace_back(uv_up_left);
