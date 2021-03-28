@@ -170,7 +170,7 @@ namespace yli::ontology
 
             yli::ontology::Shader* shader; // pointer to `Shader` (not a parent!).
 
-            std::string model_file_format; // type of the model file, eg. `"bmp"`.
+            std::string model_file_format; // type of the model file, eg. `"png"`.
             std::string model_filename;    // filename of the model file.
     };
 }

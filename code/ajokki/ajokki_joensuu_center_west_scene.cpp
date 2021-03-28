@@ -99,8 +99,8 @@ namespace ajokki
         // Create the material, store it in `joensuu_center_west_grass_material_struct`.
         yli::ontology::MaterialStruct joensuu_center_west_grass_material_struct;
         joensuu_center_west_grass_material_struct.shader = joensuu_center_west_shader;
-        joensuu_center_west_grass_material_struct.texture_file_format = "bmp";
-        joensuu_center_west_grass_material_struct.texture_filename = "GrassGreenTexture0002.bmp";
+        joensuu_center_west_grass_material_struct.texture_file_format = "png";
+        joensuu_center_west_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
         std::cout << "Creating yli::ontology::Entity* joensuu_center_west_grass_material_entity ...\n";
         yli::ontology::Entity* const joensuu_center_west_grass_material_entity = entity_factory->create_material(joensuu_center_west_grass_material_struct);
@@ -146,8 +146,8 @@ namespace ajokki
         // Create the material, store it in `orange_fur_material_joensuu`.
         yli::ontology::MaterialStruct orange_fur_material_joensuu_struct;
         orange_fur_material_joensuu_struct.shader = joensuu_center_west_shader;
-        orange_fur_material_joensuu_struct.texture_file_format = "bmp";
-        orange_fur_material_joensuu_struct.texture_filename = "orange_fur_texture.bmp";
+        orange_fur_material_joensuu_struct.texture_file_format = "png";
+        orange_fur_material_joensuu_struct.texture_filename = "orange_fur_texture.png";
 
         std::cout << "Creating yli::ontology::Entity* orange_fur_material_joensuu_entity ...\n";
         yli::ontology::Entity* const orange_fur_material_joensuu_entity = entity_factory->create_material(orange_fur_material_joensuu_struct);

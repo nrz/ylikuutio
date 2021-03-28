@@ -3,7 +3,6 @@ A hobby project of mine. Work in progress.
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Travis CI build](https://travis-ci.org/nrz/ylikuutio.svg?branch=master)](https://travis-ci.org/nrz/ylikuutio)
-[![AppVeyor build](https://ci.appveyor.com/api/projects/status/github/nrz/ylikuutio?branch=master&svg=true)](https://ci.appveyor.com/project/nrz/ylikuutio)
 [![Coverity Scan](https://scan.coverity.com/projects/nrz-ylikuutio/badge.svg)](https://scan.coverity.com/projects/nrz-ylikuutio)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0d0d48dc3b6947b2ac90bebd1f3a07f2)](https://www.codacy.com/manual/antti.nuortimo/ylikuutio?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nrz/ylikuutio&amp;utm_campaign=Badge_Grade)
 [![Coverage Status](https://coveralls.io/repos/github/nrz/ylikuutio/badge.svg?branch=master)](https://coveralls.io/github/nrz/ylikuutio?branch=master)
@@ -66,15 +65,15 @@ In Debian or Ubuntu it's simple.
 First, install all the necessary compilers, tools and libs. You may use
 your favorite package manager such as apt, aptitude, apt-get, yum etc.
 You all need these packages:
-cmake make g++ gcc libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
+cmake make g++ gcc libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev zlib1g-dev
 
 Eg. with apt:
 
-    $ sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
+    $ sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev zlib1g-dev
 
 If you are doing a cross compile from Linux to Windows, you need also:
 
-    $ sudo apt install g++-mingw-w64 gcc-mingw-w64 binutils-mingw-w64
+    $ sudo apt install g++-mingw-w64 gcc-mingw-w64 binutils-mingw-w64 libz-mingw-w64-dev
 
 If you are doing a cross compile from Linux to Android™, you need also:
 
@@ -280,13 +279,13 @@ Some available console commands to try in Ajokki:
 * `set wireframe true`
 * `set wireframe false`
 * `activate turbo_polizei_camera`
-* `print turbo_polizei_bmp1.cartesian_coordinates`
-* `print turbo_polizei_bmp1.x`
-* `print turbo_polizei_bmp1.y`
-* `print turbo_polizei_bmp1.z`
-* `set turbo_polizei_bmp1.y 50`
-* `set turbo_polizei_bmp1.x 100`
-* `set turbo_polizei_bmp1.z 200`
+* `print turbo_polizei_png2.cartesian_coordinates`
+* `print turbo_polizei_png2.x`
+* `print turbo_polizei_png2.y`
+* `print turbo_polizei_png2.z`
+* `set turbo_polizei_png2.y 50`
+* `set turbo_polizei_png2.x 100`
+* `set turbo_polizei_png2.z 200`
 * `activate cat_camera`
 * `print cat1.cartesian_coordinates`
 * `print cat1 x`
@@ -314,8 +313,8 @@ Some available console commands to try in Ajokki:
 * `set window_height 500`
 * `create-object cat_species cat3 500 100 600 3.14 0`
 * `create-object cat_species cat4 500 100 650`
-* `create-holobiont turbo_polizei_bmp_symbiosis polizei3 500 100 700 3.14 0`
-* `create-holobiont turbo_polizei_bmp_symbiosis polizei4 480 100 700`
+* `create-holobiont turbo_polizei_png_symbiosis polizei3 500 100 700 3.14 0`
+* `create-holobiont turbo_polizei_png_symbiosis polizei4 480 100 700`
 
 ## FAQ
 Q: What is "Ylikuutio"?
@@ -364,7 +363,7 @@ A: Some parts of Ylikuutio (some shaders, some file loaders, etc.) are
    based on [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/),
    which I really recommend for anyone interested in learning
    OpenGL programming. Ylikuutio also uses external libraries such as
-   (in alphabetical order) Asio, Bullet, GLEW, GLM, OpenFBX, pugixml, SDL, and stb.
+   (in alphabetical order) Asio, Bullet, GLEW, GLM, libpng, OpenFBX, pugixml, and SDL.
    The rest is written from scratch.
 
 Q: Does Ylikuutio use right-handed or left-handed world coordinates?
@@ -377,7 +376,7 @@ A: YliLisp scripting language is a work in progress.
 ## Implemented functionality
 * 3D rendering
 * 2D text
-* support for different height map formats (SRTM, BMP)
+* support for different height map formats (SRTM, PNG)
 * instant rebinding of instances of classes belonging to ontological hierarchy
 * callbacks
 * fully functioning in-game console
@@ -432,12 +431,12 @@ A: YliLisp scripting language is a work in progress.
 * The source code from [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/) is licensed under [WTFPL Public Licence version 2](https://www.opengl-tutorial.org/download/).
 * [Asio](https://think-async.com/) is licensed under [Boost software license](https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt).
 * [Bullet](http://bulletphysics.org/) is licensed under [the zlib license](https://github.com/bulletphysics/bullet3/blob/master/LICENSE.txt).
+* [libpng](http://libpng.org/pub/png/libpng.html) is licensed under [PNG Reference Library License version 2](http://www.libpng.org/pub/png/src/libpng-LICENSE.txt).
 * [OpenGL Mathematics (GLM)](https://glm.g-truc.net/) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](https://glm.g-truc.net/copying.txt).
 * [The OpenGL Extension Wrangler Library (GLEW)](http://glew.sourceforge.net/) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
 * [OpenFBX](https://github.com/nem0/OpenFBX) is licensed under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
 * [Ryan's CMake Modules](https://github.com/rpavlik/cmake-modules) is licensed under [Boost Software License Version 1.0](https://github.com/rpavlik/cmake-modules/blob/master/LICENSE_1_0.txt).
 * [SDL2](https://www.libsdl.org/) is licensed under [the zlib license](https://www.libsdl.org/).
-* [stb](https://github.com/nothings/stb) is licensed under [the MIT license](https://github.com/nothings/stb/blob/master/LICENSE).
 * [pugixml](https://pugixml.org/) is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 
 ### Libraries not yet in use
@@ -449,15 +448,14 @@ A: YliLisp scripting language is a work in progress.
 * [3D model of Helsinki.](https://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli) The administrator of 3D model of Helsinki is Helsingin kaupunginkanslia and the original creator is Helsingin kaupungin kaupunginkanslia, tietotekniikka- ja viestintäosasto. The data has been downloaded from the [Helsinki Region Infoshare](https://www.hri.fi/) service 19.11.2017 using the license [Creative Commons Nimeä 4.0 Kansainvälinen (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.fi).
 * [Horse](https://www.blendswap.com/blend/13903) is made by b2przemo and it is licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/). The `horse.fbx` file shipped with Ylikuutio is made from the original `horse.blend` by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
 * [Turbo polizei](https://www.blendswap.com/blend/12758) is made by corvusd and it is licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/). The `turbo_polizei.fbx` file shipped with Ylikuutio is made from the original `porche_997_turbo_polizei_blendswap.blend` (sic) by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
-* [Fantasy house with balcony](https://www.blendswap.com/blend/6670) is made by Daniel74 and it is licensed under [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication ](https://creativecommons.org/publicdomain/zero/1.0/). The `fantasy_house_with_balcony.fbx` file shipped with Ylikuutio is made from the original `FantasyHouseNo6.blend` by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
 * [Freight train](https://www.blendswap.com/blend/5599) is made by SONGKRO and it is licensed under [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication ](https://creativecommons.org/publicdomain/zero/1.0/). The `freight_train.fbx` file shipped with Ylikuutio is made from the original `freight.blend` by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
 * [Rigged and animated cat](https://www.blendswap.com/blend/18519) is made by JonasDichelle and it is licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/). The `cat.fbx` file shipped with Ylikuutio is made from the original `cat.blend` by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
 * Suzanne the monkey is a standard [Blender](https://www.blender.org/) object. According to Blender license information: "All your artwork – images or movie files – including the .blend files and other data files Blender can write, is free for you to use as you like." Ylikuutio does not contain any code from Blender, however. [Blender itself is released under the GNU General Public License (GPL) 2 or later](https://www.blender.org/about/license/).
 
 ### Textures
 * Grass texture is from [Free Seamless Green Grass Textures](https://www.brusheezy.com/textures/20185-seamless-green-grass-textures), licensed under [Creative Commons Attribution (BY) License](https://support.brusheezy.com/hc/en-us/articles/360002159712-Creative-Commons-Attribution-BY-License-Definition-Usage).
-* A Cool Seamless Orange Fur Texture is from [My Free Textures](http://www.myfreetextures.com/a-cool-seamless-orange-fur-texture/). `orange_fur_texture.bmp` is scaled down and converted into BMP from the original `ornage-fur-texture.jpg` (sic). License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
-* Pink Marble Pavers Or Tiles Background Texture is from [My Free Textures](http://www.myfreetextures.com/marbles-pavers-tiles-background-texture/). `pavers1b2.bmp` is scaled down and converted into BMP from the original `pavers1b2.jpg`. License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
+* A Cool Seamless Orange Fur Texture is from [My Free Textures](http://www.myfreetextures.com/a-cool-seamless-orange-fur-texture/). `orange_fur_texture.png` is scaled down and converted into PNG from the original `ornage-fur-texture.jpg` (sic). License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
+* Pink Marble Pavers Or Tiles Background Texture is from [My Free Textures](http://www.myfreetextures.com/marbles-pavers-tiles-background-texture/). `pavers1b2.png` is scaled down and converted into PNG from the original `pavers1b2.jpg`. License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
 
 ### Fonts
 * kongtext font is made by [codeman38](https://zone38.net/), see res/fonts/kongtext/license.txt for the license.

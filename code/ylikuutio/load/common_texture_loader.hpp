@@ -18,20 +18,22 @@
 #ifndef __YLIKUUTIO_LOAD_COMMON_TEXTURE_LOADER_HPP_INCLUDED
 #define __YLIKUUTIO_LOAD_COMMON_TEXTURE_LOADER_HPP_INCLUDED
 
+#include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
-#include <cstddef>  // std::size_t
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli::load
 {
-    // Load a BMP or PNG file.
+    // Load a PNG file.
     bool load_common_texture(
             const std::string& filename,
-            std::size_t& image_width,
-            std::size_t& image_height,
-            std::size_t& image_size,
+            const yli::load::ImageLoaderStruct& image_loader_struct,
+            uint32_t& image_width,
+            uint32_t& image_height,
+            uint32_t& image_size,
             GLuint& textureID,
             const bool is_headless);
 }

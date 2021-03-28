@@ -181,7 +181,7 @@ namespace yli::ontology
         angles_and_coordinates_text_struct.y = 0;
         angles_and_coordinates_text_struct.text_size = this->text_size;
         angles_and_coordinates_text_struct.font_size = this->font_size;
-        angles_and_coordinates_text_struct.font_texture_file_format = "bmp";
+        angles_and_coordinates_text_struct.font_texture_file_format = "png";
         angles_and_coordinates_text_struct.horizontal_alignment = "left";
         angles_and_coordinates_text_struct.vertical_alignment = "bottom";
         yli::ontology::Text2D* angles_and_coordinates_text_2d = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(angles_and_coordinates_text_struct));
@@ -218,7 +218,7 @@ namespace yli::ontology
         time_text_struct.y = this->window_height;
         time_text_struct.text_size = this->text_size;
         time_text_struct.font_size = this->font_size;
-        time_text_struct.font_texture_file_format = "bmp";
+        time_text_struct.font_texture_file_format = "png";
         time_text_struct.horizontal_alignment = "left";
         time_text_struct.vertical_alignment = "top";
         yli::ontology::Text2D* time_text_2d = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(time_text_struct));
@@ -237,7 +237,7 @@ namespace yli::ontology
         help_text_struct.y = this->window_height - (3 * this->text_size);
         help_text_struct.text_size = this->text_size;
         help_text_struct.font_size = this->font_size;
-        help_text_struct.font_texture_file_format = "bmp";
+        help_text_struct.font_texture_file_format = "png";
         help_text_struct.horizontal_alignment = "left";
         help_text_struct.vertical_alignment = "top";
         yli::ontology::Text2D* help_text_2d = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(help_text_struct));
@@ -256,7 +256,7 @@ namespace yli::ontology
         frame_rate_text_struct.y = this->window_height;
         frame_rate_text_struct.text_size = this->text_size;
         frame_rate_text_struct.font_size = this->font_size;
-        frame_rate_text_struct.font_texture_file_format = "bmp";
+        frame_rate_text_struct.font_texture_file_format = "png";
         frame_rate_text_struct.horizontal_alignment = "right";
         frame_rate_text_struct.vertical_alignment = "top";
         yli::ontology::Text2D* frame_rate_text_2d = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_text2d(frame_rate_text_struct));

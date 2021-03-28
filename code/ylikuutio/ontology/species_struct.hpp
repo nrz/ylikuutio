@@ -50,12 +50,12 @@ namespace yli::ontology
 
         std::string model_filename;                         // filename of the model file.
         std::string model_file_format;                      // type of the model file. supported file formats so far:
-                                                            // `"bmp"`/`"BMP"` - BMP heightmap.
+                                                            // `"png"`/`"PNG"` - PNG heightmap.
                                                             // `"fbx"`/`"FBX"` - FBX model.
                                                             // `"obj"`/`"OBJ"` - OBJ model.
                                                             // `"srtm"`/`"SRTM"` - SRTM heightmap.
                                                             // `"asc"`/`"ascii_grid"`/`"ASCII_grid"` - ASCII grid.
-        std::string color_channel;                          // color channel to use for altitude data, for BMP model files.
+        std::string color_channel;                          // color channel to use for altitude data, for PNG model files.
         std::string triangulation_type { "bilinear_interpolation" }; // `"bilinear_interpolation"`, `"southwest_northeast_edges"`, `"southeast_northwest_edges"`.
         std::vector<glm::vec3> vertices;                    // for `SymbiontSpecies`.
         std::vector<glm::vec2> uvs;                         // for `SymbiontSpecies`.

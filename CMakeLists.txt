@@ -1,7 +1,9 @@
 # CMake entry point
 cmake_minimum_required(VERSION 2.6.2)
+cmake_policy(SET CMP0048 NEW)
+cmake_policy(SET CMP0072 NEW)
 set(CMAKE_CXX_STANDARD 17)
-project(ylikuutio)
+project(ylikuutio VERSION 0.0.8)
 
 #-------------------------------------------------------+
 # the options part intended to be modified begins here. |
@@ -54,10 +56,10 @@ endif()
 # Compile external dependencies
 add_subdirectory (external)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    # Command line arguments not accepted by Visual Studio.
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wextra -Wuninitialized -Werror=return-type")
+    # Command line arguments not supported by Visual Studio.
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wextra -Wuninitialized -Werror=return-type")
 endif()
 
 # set(CMAKE_COLOR_MAKEFILE ON)
@@ -156,7 +158,7 @@ include_directories(
     external/glm/
     external/OpenFBX/src/
     external/pugixml/src/
-    external/stb/
+    external/libpng-1.6.37/
     ${YLI_BULLET_DIRECTORIES}
     .
     )
@@ -286,7 +288,7 @@ set(ALL_LIBS
     pugixml
     miniz
     OpenFBX
-    stb
+    png_static
     bullet
     )
 
@@ -315,6 +317,7 @@ add_definitions(
     -DTW_NO_LIB_PRAGMA
     -DTW_NO_DIRECT3D
     -D_CRT_SECURE_NO_WARNINGS
+    -DPNG_NO_SETJMP
     )
 
 if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
@@ -345,52 +348,38 @@ configure_file(res/objects/custom/suzanne.obj suzanne.obj COPYONLY)
 configure_file(res/objects/custom/suzanne_old.obj suzanne_old.obj COPYONLY)
 # Freight train.
 configure_file(res/objects/www.blendswap.com/46359_freight_train/freight_train.fbx freight_train.fbx COPYONLY)
-configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_chassis.bmp freight_train_chassis.bmp COPYONLY)
-configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_box_expage.bmp freight_train_box_expage.bmp COPYONLY)
-configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_body.bmp freight_train_body.bmp COPYONLY)
-configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_expage1.bmp freight_train_expage1.bmp COPYONLY)
-configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_expage2.bmp freight_train_expage2.bmp COPYONLY)
-configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_gray_concrete.bmp freight_train_gray_concrete.bmp COPYONLY)
-configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_iron_texture_by_pabloalvin.bmp freight_train_iron_texture_by_pabloalvin.bmp COPYONLY)
-configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_stone.bmp freight_train_stone.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_chassis.png freight_train_chassis.png COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_box_expage.png freight_train_box_expage.png COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_body.png freight_train_body.png COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_expage1.png freight_train_expage1.png COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_expage2.png freight_train_expage2.png COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_gray_concrete.png freight_train_gray_concrete.png COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_iron_texture_by_pabloalvin.png freight_train_iron_texture_by_pabloalvin.png COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_stone.png freight_train_stone.png COPYONLY)
 # Turbo polizei.
 configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/turbo_polizei_png_textures.fbx turbo_polizei_png_textures.fbx COPYONLY)
 configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/car.png car.png COPYONLY)
 configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/wheell.png wheell.png COPYONLY)
-configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/turbo_polizei_bmp_textures.fbx turbo_polizei_bmp_textures.fbx COPYONLY)
-configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/car.bmp car.bmp COPYONLY)
-configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/wheell.bmp wheell.bmp COPYONLY)
-# Fantasy house with balcony.
-configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/fantasy_house_with_balcony.fbx fantasy_house_with_balcony.fbx COPYONLY)
-configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_bricks.bmp fantasy_house_with_balcony_bricks.bmp COPYONLY)
-configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_copper_roof.bmp fantasy_house_with_balcony_copper_roof.bmp COPYONLY)
-configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_door2.bmp fantasy_house_with_balcony_door2.bmp COPYONLY)
-configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_door3.bmp fantasy_house_with_balcony_door3.bmp COPYONLY)
-configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_plaster.bmp fantasy_house_with_balcony_plaster.bmp COPYONLY)
-configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_roof.bmp fantasy_house_with_balcony_roof.bmp COPYONLY)
-configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_stone_wall.bmp fantasy_house_with_balcony_stone_wall.bmp COPYONLY)
-configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_window.bmp fantasy_house_with_balcony_window.bmp COPYONLY)
-configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_wood_floor.bmp fantasy_house_with_balcony_wood_floor.bmp COPYONLY)
 # Horse.
 configure_file(res/objects/www.blendswap.com/76528_horse/horse.fbx horse.fbx COPYONLY)
 # Cat.
 configure_file(res/objects/www.blendswap.com/86110_rigged_and_animated_cat/cat.fbx cat.fbx COPYONLY)
 
 # Textures.
-configure_file(res/textures/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
-configure_file(res/textures/orange_fur_texture.bmp orange_fur_texture.bmp COPYONLY)
-configure_file(res/textures/pavers1b2.bmp pavers1b2.bmp COPYONLY)
-configure_file(res/textures/numbers_123456_black_and_white.bmp numbers_123456_black_and_white.bmp COPYONLY)
+configure_file(res/textures/GrassGreenTexture0002.png GrassGreenTexture0002.png COPYONLY)
+configure_file(res/textures/orange_fur_texture.png orange_fur_texture.png COPYONLY)
+configure_file(res/textures/pavers1b2.png pavers1b2.png COPYONLY)
+configure_file(res/textures/numbers_123456_black_and_white.png numbers_123456_black_and_white.png COPYONLY)
 
 # Fonts.
 configure_file(res/fonts/kongtext/kongtext.svg kongtext.svg COPYONLY)
 configure_file(res/fonts/Holstein.DDS Holstein.DDS COPYONLY)
-configure_file(res/fonts/Holstein.bmp Holstein.bmp COPYONLY)
+configure_file(res/fonts/Holstein.png Holstein.png COPYONLY)
 
 # Maps.
-configure_file(res/height_maps/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
-configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
-configure_file(res/height_maps/noise128x128.bmp noise128x128.bmp COPYONLY)
+configure_file(res/height_maps/noise1024x1024.png noise1024x1024.png COPYONLY)
+configure_file(res/height_maps/noise256x256.png noise256x256.png COPYONLY)
+configure_file(res/height_maps/noise128x128.png noise128x128.png COPYONLY)
 configure_file(res/height_maps/N59E024.hgt N59E024.hgt COPYONLY)
 configure_file(res/height_maps/S17W069.hgt S17W069.hgt COPYONLY)
 configure_file(res/height_maps/L4133D.asc L4133D.asc COPYONLY)
@@ -421,8 +410,8 @@ configure_file(res/audio/freesound.org/416882__greek555__blue-play.ogg 416882__g
 configure_file(res/audio/freesound.org/419588__greek555__dreaming-of-me.ogg 419588__greek555__dreaming-of-me.ogg COPYONLY)
 
 # Image files for tests.
-configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
-configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
+configure_file(res/height_maps/noise256x256.png noise256x256.png COPYONLY)
+configure_file(res/textures/test3x3.png test3x3.png COPYONLY)
 
 # Ylikuutio
 add_library(ylikuutio STATIC
@@ -540,8 +529,6 @@ add_library(ylikuutio STATIC
     # load, in alphabetical order.
     code/ylikuutio/load/ascii_grid_heightmap_loader.cpp
     code/ylikuutio/load/ascii_grid_heightmap_loader.hpp
-    code/ylikuutio/load/bmp_heightmap_loader.cpp
-    code/ylikuutio/load/bmp_heightmap_loader.hpp
     code/ylikuutio/load/common_texture_loader.cpp
     code/ylikuutio/load/common_texture_loader.hpp
     code/ylikuutio/load/csv_loader.hpp
@@ -558,8 +545,13 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/heightmap_loader_struct.hpp
     code/ylikuutio/load/image_file_loader.cpp
     code/ylikuutio/load/image_file_loader.hpp
+    code/ylikuutio/load/image_loader_struct.hpp
     code/ylikuutio/load/obj_loader.cpp
     code/ylikuutio/load/obj_loader.hpp
+    code/ylikuutio/load/png_heightmap_loader.cpp
+    code/ylikuutio/load/png_heightmap_loader.hpp
+    code/ylikuutio/load/png_loader.cpp
+    code/ylikuutio/load/png_loader.hpp
     code/ylikuutio/load/shader_loader.cpp
     code/ylikuutio/load/shader_loader.hpp
     code/ylikuutio/load/species_loader.cpp
@@ -1020,8 +1012,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/linear_algebra/vector_functions.hpp
         code/ylikuutio/load/ascii_grid_heightmap_loader.cpp
         code/ylikuutio/load/ascii_grid_heightmap_loader.hpp
-        code/ylikuutio/load/bmp_heightmap_loader.cpp
-        code/ylikuutio/load/bmp_heightmap_loader.hpp
         code/ylikuutio/load/csv_loader.hpp
         code/ylikuutio/load/fbx_species_loader.cpp
         code/ylikuutio/load/fbx_species_loader.hpp
@@ -1030,8 +1020,13 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/load/heightmap_loader_struct.hpp
         code/ylikuutio/load/image_file_loader.cpp
         code/ylikuutio/load/image_file_loader.hpp
+        code/ylikuutio/load/image_loader_struct.hpp
         code/ylikuutio/load/obj_loader.cpp
         code/ylikuutio/load/obj_loader.hpp
+        code/ylikuutio/load/png_heightmap_loader.cpp
+        code/ylikuutio/load/png_heightmap_loader.hpp
+        code/ylikuutio/load/png_loader.cpp
+        code/ylikuutio/load/png_loader.hpp
         code/ylikuutio/memory/memory_templates.hpp
         code/ylikuutio/ontology/brain.cpp
         code/ylikuutio/ontology/brain.hpp
@@ -1117,8 +1112,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_ascii_grid_heightmap_loader.cpp
         # code/ylikuutio/tests/googletest/test_asio.cpp
         code/ylikuutio/tests/googletest/test_bilinear_interpolation.cpp
-        code/ylikuutio/tests/googletest/test_bmp_heightmap_loader.cpp
-        code/ylikuutio/tests/googletest/test_bmp_loader.cpp
         code/ylikuutio/tests/googletest/test_brain_struct.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
         code/ylikuutio/tests/googletest/test_check_and_report_if_some_string_matches.cpp
@@ -1144,6 +1137,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_obj_loader.cpp
         code/ylikuutio/tests/googletest/test_object_struct.cpp
         code/ylikuutio/tests/googletest/test_ontology.cpp
+        code/ylikuutio/tests/googletest/test_png_heightmap_loader.cpp
+        code/ylikuutio/tests/googletest/test_png_loader.cpp
         code/ylikuutio/tests/googletest/test_pugixml.cpp
         code/ylikuutio/tests/googletest/test_quad_triangulation.cpp
         code/ylikuutio/tests/googletest/test_registry.cpp
@@ -1161,7 +1156,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     add_dependencies(code_to_test ylikuutio ${ALL_LIBS} pthread)
 
     add_executable(unit_tests_with_googletest code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
-    target_link_libraries(unit_tests_with_googletest yli_gtest libgtest rt SDL2 GLEW_200 stb bullet ylikuutio pthread code_to_test)
+    target_link_libraries(unit_tests_with_googletest yli_gtest libgtest rt SDL2 GLEW_200 bullet png ylikuutio pthread code_to_test)
 
     # Xcode and Visual working directories
     set_target_properties(unit_tests_with_googletest PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")

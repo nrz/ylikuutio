@@ -17,6 +17,7 @@
 
 #include "fbx_texture_loader.hpp"
 #include "common_texture_loader.hpp"
+#include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
@@ -26,6 +27,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli::load
@@ -33,9 +35,9 @@ namespace yli::load
     // Load texture from memory.
     bool load_fbx_texture(
             const ofbx::Texture* const ofbx_texture,
-            std::size_t& image_width,
-            std::size_t& image_height,
-            std::size_t& image_size,
+            uint32_t& image_width,
+            uint32_t& image_height,
+            uint32_t& image_size,
             GLuint& textureID,
             const bool is_headless)
     {
@@ -87,10 +89,13 @@ namespace yli::load
 
         std::cout << "Texture file suffix: " << texture_file_suffix << "\n";
 
-        if (texture_file_suffix == "bmp" || texture_file_suffix == "png")
+        if (texture_file_suffix == "png")
         {
             const std::string filename_string = std::string((char*) &filename_buffer);
-            return yli::load::load_common_texture(filename_string, image_width, image_height, image_size, textureID, is_headless);
+            yli::load::ImageLoaderStruct image_loader_struct;
+            image_loader_struct.should_discard_alpha_channel = true;
+            image_loader_struct.should_flip_vertically = true;
+            return yli::load::load_common_texture(filename_string, image_loader_struct, image_width, image_height, image_size, textureID, is_headless);
         }
 
         return false;

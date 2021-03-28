@@ -167,10 +167,10 @@ namespace yli::ontology
             // destructor.
             virtual ~Species();
 
-            std::size_t get_x_step() const;
-            std::size_t get_z_step() const;
-            std::size_t get_image_width() const;
-            std::size_t get_image_height() const;
+            uint32_t get_x_step() const;
+            uint32_t get_z_step() const;
+            uint32_t get_image_width() const;
+            uint32_t get_image_height() const;
 
             const std::string& get_model_file_format() const;
 
@@ -190,21 +190,21 @@ namespace yli::ontology
 
             bool is_symbiont_species;
 
-            std::string model_file_format; // type of the model file, eg. `"bmp"`.
+            std::string model_file_format; // type of the model file, eg. `"png"`.
             std::string model_filename;    // filename of the model file.
 
             float latitude;                // for SRTM.
             float longitude;               // for SRTM.
 
-            std::size_t mesh_i;
+            uint32_t mesh_i;
 
-            std::size_t x_step;
-            std::size_t z_step;
+            uint32_t x_step;
+            uint32_t z_step;
 
             std::string triangulation_type;
 
-            std::size_t image_width;
-            std::size_t image_height;
+            uint32_t image_width;
+            uint32_t image_height;
 
             bool use_real_texture_coordinates;
     };

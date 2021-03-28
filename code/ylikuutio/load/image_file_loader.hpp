@@ -18,9 +18,11 @@
 #ifndef __YLIKUUTIO_LOAD_IMAGE_FILE_LOADER_HPP_INCLUDED
 #define __YLIKUUTIO_LOAD_IMAGE_FILE_LOADER_HPP_INCLUDED
 
+#include "code/ylikuutio/load/image_loader_struct.hpp"
+
 // Include standard headers
-#include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -28,9 +30,10 @@ namespace yli::load
 {
     std::shared_ptr<std::vector<uint8_t>> load_image_file(
             const std::string& filename,
-            std::size_t& image_width,
-            std::size_t& image_height,
-            std::size_t& image_size);
+            const yli::load::ImageLoaderStruct& image_loader_struct,
+            uint32_t& image_width,
+            uint32_t& image_height,
+            uint32_t& image_size);
 }
 
 #endif

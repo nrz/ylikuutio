@@ -24,9 +24,9 @@
 #include "code/ylikuutio/render/render_species_or_glyph.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli::ontology
@@ -114,22 +114,22 @@ namespace yli::ontology
         this->postrender();
     }
 
-    std::size_t Species::get_x_step() const
+    uint32_t Species::get_x_step() const
     {
         return this->x_step;
     }
 
-    std::size_t Species::get_z_step() const
+    uint32_t Species::get_z_step() const
     {
         return this->z_step;
     }
 
-    std::size_t Species::get_image_width() const
+    uint32_t Species::get_image_width() const
     {
         return this->image_width;
     }
 
-    std::size_t Species::get_image_height() const
+    uint32_t Species::get_image_height() const
     {
         return this->image_height;
     }

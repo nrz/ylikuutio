@@ -78,12 +78,12 @@ namespace yli::ontology
         return yli::ontology::get_number_of_descendants(this->parent_of_text_2ds.child_pointer_vector);
     }
 
-    std::size_t Font2D::get_text_size() const
+    uint32_t Font2D::get_text_size() const
     {
         return this->text_size;
     }
 
-    std::size_t Font2D::get_font_size() const
+    uint32_t Font2D::get_font_size() const
     {
         return this->font_size;
     }
@@ -141,10 +141,10 @@ namespace yli::ontology
     }
 
     void Font2D::print_text_2d(
-            const std::size_t x,
-            const std::size_t y,
-            const std::size_t text_size,
-            const std::size_t font_size,
+            const uint32_t x,
+            const uint32_t y,
+            const uint32_t text_size,
+            const uint32_t font_size,
             const std::string& text,
             const std::string& font_texture_file_format,
             const std::string& horizontal_alignment,
@@ -194,8 +194,8 @@ namespace yli::ontology
             }
         }
 
-        std::size_t current_left_x;
-        std::size_t current_top_y;
+        uint32_t current_left_x;
+        uint32_t current_top_y;
 
         if (horizontal_alignment == "left")
         {
@@ -243,14 +243,14 @@ namespace yli::ontology
         {
             // Print to the right side of X (so far there is no check for input length).
             // Print up of Y.
-            std::size_t vertex_up_left_x;
-            std::size_t vertex_up_left_y;
-            std::size_t vertex_up_right_x;
-            std::size_t vertex_up_right_y;
-            std::size_t vertex_down_left_x;
-            std::size_t vertex_down_left_y;
-            std::size_t vertex_down_right_x;
-            std::size_t vertex_down_right_y;
+            uint32_t vertex_up_left_x;
+            uint32_t vertex_up_left_y;
+            uint32_t vertex_up_right_x;
+            uint32_t vertex_up_right_y;
+            uint32_t vertex_down_left_x;
+            uint32_t vertex_down_left_y;
+            uint32_t vertex_down_right_x;
+            uint32_t vertex_down_right_y;
 
             char character = text[i++];
 
@@ -300,10 +300,9 @@ namespace yli::ontology
             float uv_x = (character % font_size) / static_cast<float>(font_size);
             float uv_y;
 
-            if (font_texture_file_format == "bmp" || font_texture_file_format == "BMP")
+            if (font_texture_file_format == "png" || font_texture_file_format == "PNG")
             {
-                // BMP is stored in the file beginning from the bottom line.
-                uv_y = 1 - (character / font_size) / static_cast<float>(font_size);
+                uv_y = (character / font_size) / static_cast<float>(font_size);
             }
             else
             {
@@ -316,11 +315,10 @@ namespace yli::ontology
             glm::vec2 uv_down_right;
             glm::vec2 uv_down_left;
 
-            if (font_texture_file_format == "bmp" || font_texture_file_format == "BMP")
+            if (font_texture_file_format == "png" || font_texture_file_format == "PNG")
             {
-                // BMP is stored in the file beginning from the bottom line.
-                uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(font_size)), (uv_y - 1.0f / static_cast<float>(font_size)));
-                uv_down_left = glm::vec2(uv_x, (uv_y - 1.0f / static_cast<float>(font_size)));
+                uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(font_size)), (uv_y + 1.0f / static_cast<float>(font_size)));
+                uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(font_size)));
             }
             UVs.emplace_back(uv_up_left);
             UVs.emplace_back(uv_down_left);
@@ -374,10 +372,10 @@ namespace yli::ontology
     }
 
     void Font2D::print_text_2d(
-            const std::size_t x,
-            const std::size_t y,
-            const std::size_t text_size,
-            const std::size_t font_size,
+            const uint32_t x,
+            const uint32_t y,
+            const uint32_t text_size,
+            const uint32_t font_size,
             const std::string& text,
             const std::string& font_texture_file_format) const
     {
