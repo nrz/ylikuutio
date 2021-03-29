@@ -132,7 +132,9 @@ if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
         )
 endif()
 
-add_subdirectory(libpng-1.6.37)
+if(COMPILE_LIBPNG_FROM_SOURCE)
+    add_subdirectory(libpng-1.6.37)
+endif()
 
 add_library(miniz STATIC
     OpenFBX/src/miniz.c

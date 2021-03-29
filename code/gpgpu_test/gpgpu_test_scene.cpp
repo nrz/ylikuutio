@@ -90,20 +90,20 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        yli::ontology::ComputeTaskStruct identity_shader_bmp_compute_task_struct;
-        identity_shader_bmp_compute_task_struct.texture_file_format = "bmp";
-        identity_shader_bmp_compute_task_struct.texture_filename = "numbers_123456_black_and_white.bmp";
-        identity_shader_bmp_compute_task_struct.output_filename = "gpgpu_identity_output.data";
-        identity_shader_bmp_compute_task_struct.parent = identity_shader;
-        identity_shader_bmp_compute_task_struct.texture_width = 512;
-        identity_shader_bmp_compute_task_struct.texture_height = 512;
+        yli::ontology::ComputeTaskStruct identity_shader_png_compute_task_struct;
+        identity_shader_png_compute_task_struct.texture_file_format = "png";
+        identity_shader_png_compute_task_struct.texture_filename = "numbers_123456_black_and_white.png";
+        identity_shader_png_compute_task_struct.output_filename = "gpgpu_identity_output.data";
+        identity_shader_png_compute_task_struct.parent = identity_shader;
+        identity_shader_png_compute_task_struct.texture_width = 512;
+        identity_shader_png_compute_task_struct.texture_height = 512;
 
-        std::cout << "Creating yli::ontology::Entity* identity_shader_bmp_compute_task_entity ...\n";
-        yli::ontology::Entity* const identity_shader_bmp_compute_task_entity = entity_factory->create_compute_task(identity_shader_bmp_compute_task_struct);
-        std::cout << "Creating yli::ontology::ComputeTask* identity_shader_bmp_compute_task ...\n";
-        yli::ontology::ComputeTask* const identity_shader_bmp_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(identity_shader_bmp_compute_task_entity);
+        std::cout << "Creating yli::ontology::Entity* identity_shader_png_compute_task_entity ...\n";
+        yli::ontology::Entity* const identity_shader_png_compute_task_entity = entity_factory->create_compute_task(identity_shader_png_compute_task_struct);
+        std::cout << "Creating yli::ontology::ComputeTask* identity_shader_png_compute_task ...\n";
+        yli::ontology::ComputeTask* const identity_shader_png_compute_task = dynamic_cast<yli::ontology::ComputeTask*>(identity_shader_png_compute_task_entity);
 
-        if (identity_shader_bmp_compute_task == nullptr)
+        if (identity_shader_png_compute_task == nullptr)
         {
             std::cerr << "Failed to create identity BMP `ComputeTask`.\n";
             return nullptr;
@@ -149,8 +149,8 @@ namespace gpgpu_test
         }
 
         yli::ontology::ComputeTaskStruct sobel_shader_compute_task_struct;
-        sobel_shader_compute_task_struct.texture_file_format = "bmp";
-        sobel_shader_compute_task_struct.texture_filename = "numbers_123456_black_and_white.bmp";
+        sobel_shader_compute_task_struct.texture_file_format = "png";
+        sobel_shader_compute_task_struct.texture_filename = "numbers_123456_black_and_white.png";
         sobel_shader_compute_task_struct.output_filename = "gpgpu_sobel_output.data";
         sobel_shader_compute_task_struct.parent = sobel_shader;
         sobel_shader_compute_task_struct.n_max_iterations = 5;
@@ -187,8 +187,8 @@ namespace gpgpu_test
         }
 
         yli::ontology::ComputeTaskStruct go_west_shader_compute_task_struct;
-        go_west_shader_compute_task_struct.texture_file_format = "bmp";
-        go_west_shader_compute_task_struct.texture_filename = "numbers_123456_black_and_white.bmp";
+        go_west_shader_compute_task_struct.texture_file_format = "png";
+        go_west_shader_compute_task_struct.texture_filename = "numbers_123456_black_and_white.png";
         go_west_shader_compute_task_struct.output_filename = "gpgpu_go_west_output.data";
         go_west_shader_compute_task_struct.parent = go_west_shader;
         go_west_shader_compute_task_struct.n_max_iterations = 256;
@@ -225,8 +225,8 @@ namespace gpgpu_test
         }
 
         yli::ontology::ComputeTaskStruct vanish_west_shader_compute_task_struct;
-        vanish_west_shader_compute_task_struct.texture_file_format = "bmp";
-        vanish_west_shader_compute_task_struct.texture_filename = "numbers_123456_black_and_white.bmp";
+        vanish_west_shader_compute_task_struct.texture_file_format = "png";
+        vanish_west_shader_compute_task_struct.texture_filename = "numbers_123456_black_and_white.png";
         vanish_west_shader_compute_task_struct.output_filename = "gpgpu_vanish_west_output.data";
         vanish_west_shader_compute_task_struct.parent = vanish_west_shader;
         vanish_west_shader_compute_task_struct.n_max_iterations = 256;
