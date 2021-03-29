@@ -363,7 +363,8 @@ A: Some parts of Ylikuutio (some shaders, some file loaders, etc.) are
    based on [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/),
    which I really recommend for anyone interested in learning
    OpenGL programming. Ylikuutio also uses external libraries such as
-   (in alphabetical order) Asio, Bullet, GLEW, GLM, libpng, OpenFBX, pugixml, and SDL.
+   (in alphabetical order) Asio, Bullet, GLEW, GLM, libpng, OpenFBX, pugixml,
+   SDL, and zlib.
    The rest is written from scratch.
 
 Q: Does Ylikuutio use right-handed or left-handed world coordinates?
@@ -438,6 +439,7 @@ A: YliLisp scripting language is a work in progress.
 * [Ryan's CMake Modules](https://github.com/rpavlik/cmake-modules) is licensed under [Boost Software License Version 1.0](https://github.com/rpavlik/cmake-modules/blob/master/LICENSE_1_0.txt).
 * [SDL2](https://www.libsdl.org/) is licensed under [the zlib license](https://www.libsdl.org/).
 * [pugixml](https://pugixml.org/) is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
+* [zlib](https://zlib.net/) is licensed under [the zlib license](https://zlib.net/zlib_license.html).
 
 ### Libraries not yet in use
 * [Google logging module (glog)](https://github.com/google/glog) is licensed under [the conditions available in https://github.com/google/glog/blob/master/COPYING](https://github.com/google/glog/blob/master/COPYING).
