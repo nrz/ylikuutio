@@ -7,6 +7,7 @@ RUN apt-get -qq install -y \
     libx11-dev \
     libgl1-mesa-dev \
     libglu1-mesa-dev \
+    libpng-dev \
     libsdl2-dev \
     libxcursor-dev \
     libxrandr-dev \

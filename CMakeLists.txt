@@ -17,6 +17,9 @@ project(ylikuutio VERSION 0.0.8)
 # comment the following line to use `libsdl2-dev` shipped with Linux.
 set(COMPILE_SDL_FROM_SOURCE true)
 
+# comment the following line to use `libpng-dev` shipped with Linux.
+set(COMPILE_LIBPNG_FROM_SOURCE false)
+
 # uncomment the following line to disable updating of external projects.
 set(DISABLE_UPDATE_STEP true)
 
@@ -36,6 +39,9 @@ if(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # crosscompiling from Linux to Windows must compile SDL from source.
     # dynamic linking of SDL when crosscompiling from Linux to Windows is not supported.
     set(COMPILE_SDL_FROM_SOURCE true)
+
+    # crosscompiling from Linux to Windows must compile libpng from source.
+    set(COMPILE_LIBPNG_FROM_SOURCE true)
 
     # Do not compile unit tests when crosscompiling on MinGW-w64 GCC.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
@@ -103,6 +109,20 @@ else()
         )
 endif()
 
+if(COMPILE_LIBPNG_FROM_SOURCE)
+    include_directories(
+        external/libpng-1.6.37/
+        )
+else()
+    # Use libsdl and zlib shipped with the GNU/Linux distribution.
+    find_package(PNG REQUIRED)
+    find_package(ZLIB REQUIRED)
+
+    include_directories(
+        ${PNG_INCLUDE_DIRS}
+        )
+endif()
+
 set(YLI_BULLET_DIRECTORIES
     external/bullet3/src/
     # external/bullet3/src/Bullet3OpenCL/
@@ -158,7 +178,6 @@ include_directories(
     external/glm/
     external/OpenFBX/src/
     external/pugixml/src/
-    external/libpng-1.6.37/
     ${YLI_BULLET_DIRECTORIES}
     .
     )
@@ -288,7 +307,6 @@ set(ALL_LIBS
     pugixml
     miniz
     OpenFBX
-    png_static
     bullet
     )
 
@@ -309,6 +327,18 @@ else()
     set(ALL_LIBS
         ${ALL_LIBS}
         ${SDL2_LIBRARIES}
+        )
+endif()
+
+if (COMPILE_LIBPNG_FROM_SOURCE)
+    set(ALL_LIBS
+        ${ALL_LIBS}
+        png_static
+        )
+else()
+    set(ALL_LIBS
+        ${ALL_LIBS}
+        ${PNG_LIBRARIES}
         )
 endif()
 

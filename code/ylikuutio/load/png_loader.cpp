@@ -19,7 +19,7 @@
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/memory/memory_templates.hpp"
 
-#include "png.h"
+#include <png.h>
 
 // Include standard headers
 #include <algorithm> // std::copy
