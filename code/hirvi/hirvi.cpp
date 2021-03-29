@@ -317,8 +317,8 @@ namespace hirvi
                 std::cout << "Creating yli::ontology::Entity* my_font_2d_entity ...\n";
 
                 yli::ontology::FontStruct font_struct;
-                font_struct.texture_filename = "Holstein.bmp";
-                font_struct.font_texture_file_format = "bmp";
+                font_struct.texture_filename = "Holstein.png";
+                font_struct.font_texture_file_format = "png";
                 font_struct.screen_width = my_universe->get_window_width();
                 font_struct.screen_height = my_universe->get_window_height();
                 font_struct.text_size = my_universe->get_text_size();
