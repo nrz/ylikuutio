@@ -5,10 +5,8 @@ Fixes needed:
 [ ] Fix bug on console size after changing window size small enough.
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size.
 [ ] Fix compiling on Visual Studio.
-[ ] Fix compiling on MacOS.
 
 Tasks which are necessary for the first stage (Hirvi prototype):
-[ ] Replace stb with libpng (http://www.libpng.org/pub/png/libpng.html) and libjpeg (http://ijg.org/).
 [ ] Replace Bullet with PhysX.
 [ ] Add support for AngelScript in `Console` (again, but better support this time).
 [ ] Add support for Tab complete for local names in `Console`.
@@ -283,3 +281,5 @@ Ready:
 [x] Create `yli::ontology::Registry` class in which different modules (`ChildModule`, `ParentModule`, `MasterModule`, `ApprenticeModule` etc.) may bind with a name.
 [x] Add support for `yli::ontology::Registry` in different modules (`ParentModule`, `MasterModule`).
 [x] Add support for Tab complete for global names in `Console`.
+[x] Replace stb with libpng (http://www.libpng.org/pub/png/libpng.html) and libjpeg (http://ijg.org/).
+[x] Fix compiling on MacOS.
