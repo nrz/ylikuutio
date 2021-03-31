@@ -35,15 +35,17 @@ endif()
 
 find_package(Threads REQUIRED)
 
-if(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    # crosscompiling from Linux to Windows must compile SDL from source.
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows" OR CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    # Crosscompiling from Linux to Windows must compile SDL and libpng from source.
+    # Native compiling on Windows must compile SDL and libpng from source.
+    # Native compiling on MacOS must compile SDL and libpng from source.
     # dynamic linking of SDL when crosscompiling from Linux to Windows is not supported.
     set(COMPILE_SDL_FROM_SOURCE true)
 
     # crosscompiling from Linux to Windows must compile libpng from source.
     set(COMPILE_LIBPNG_FROM_SOURCE true)
 
-    # Do not compile unit tests when crosscompiling on MinGW-w64 GCC.
+    # Do not compile unit tests when building on MinGW-w64 or in MacOS.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     # Compile unit tests when compiling natively on GCC or Clang.
