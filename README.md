@@ -24,10 +24,12 @@ following Blender's licensing.
 ## Overview
 Ylikuutio is a 3D game engine designed for 3D games and simulations.
 Ylikuutio aims to run fast and support also older hardware.
-Currently Ylikuutio works on 64-bit Linux and Windows systems.
+Currently Ylikuutio works on 64-bit GNU/Linux, MacOS, and Windows systems.
 Android support is a work in progress.
-macOS and iOS will be supported in the future.
-OpenGL 3.0 or newer is required.
+iOS will be supported in the future.
+OpenGL 2.1 or newer is required for MacOS.
+OpenGL 3.0 is required for other platforms.
+Support for OpenGL 2.1 on GNU/Linux and Windows is a work in progress.
 
 ## Ylikuutio 0.0.8 screenshots
 ![View of Helsinki with cats and Ylikuutio console](https://github.com/nrz/ylikuutio/blob/master/screenshots/helsinki_cats_2020-10-08.png?raw=true)
@@ -122,15 +124,15 @@ Install CMake:
 
 You should now be able to run `cmake` in terminal.
 
-You can try to build like on Debian or Ubuntu:
+You can build like on Debian or Ubuntu:
 
     $ mkdir build
     $ cd build
     $ cmake ..
     $ make
 
-However, currently building on MacOS fails on linking `libstb`. This issue
-will hopefully get solved when `libstb` is replaced with `libpng` and `libjpeg`.
+Building unit tests does not currently work on MacOS,
+so by default they are not built MacOS.
 
 #### Windows
 Compiling in Visual Studio is more difficult. The recommended way to
