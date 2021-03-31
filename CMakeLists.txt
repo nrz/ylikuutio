@@ -15,7 +15,7 @@ project(ylikuutio VERSION 0.0.8)
 # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 
 # Modify the below line to control whether to compile SDL from source in Linux.
-set(COMPILE_SDL_FROM_SOURCE true)
+set(COMPILE_SDL_FROM_SOURCE false)
 
 # Modify the below line to control whether to compile libpng from source in Linux.
 set(COMPILE_LIBPNG_FROM_SOURCE false)
