@@ -14,10 +14,10 @@ project(ylikuutio VERSION 0.0.8)
 # SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 
-# comment the following line to use `libsdl2-dev` shipped with Linux.
+# Modify the below line to control whether to compile SDL from source in Linux.
 set(COMPILE_SDL_FROM_SOURCE true)
 
-# comment the following line to use `libpng-dev` shipped with Linux.
+# Modify the below line to control whether to compile libpng from source in Linux.
 set(COMPILE_LIBPNG_FROM_SOURCE false)
 
 # uncomment the following line to disable updating of external projects.
