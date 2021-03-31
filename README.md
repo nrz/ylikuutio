@@ -124,6 +124,9 @@ Install CMake:
 
 You should now be able to run `cmake` in terminal.
 
+You probably need to install XQuartz: https://www.xquartz.org/
+Download the XQuart .dmg and install it.
+
 You can build like on Debian or Ubuntu:
 
     $ mkdir build
