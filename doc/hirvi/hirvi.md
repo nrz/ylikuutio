@@ -107,7 +107,7 @@ Planned languages on launch:
 * deu: TODO
 * swe: TODO
 
-### Emancipatory bellowing of Hirvi / Hirven emansipatorinen mylvintä / El berrear de Hirvi emancipatoria / Emanzipatorisch Gegrummel von Hirvi
+### Emancipatory bellowing of Hirvi / Hirven emansipatorinen mylvintä / El berrear de Hirvi emancipatoria / Emanzipatorisch Gegrummel von Hirvi / Hirvis emancipatorisk rytning
 * fin: Hirven mylvintä on omiaan emansipoimaan sille lähietäisyydeltä altistuneet poliisikoirat ja -hevoset.
 * eng: The bellowing of Hirvi is very apt to emancipate the police dogs and horses exposed to it in the point blank range.
 * esp: El berrear de Hirvi es muy apto a emancipar a lxs perrxs y los caballos de policía.
