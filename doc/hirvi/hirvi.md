@@ -10,7 +10,7 @@ at least in Helsinki, Espoo, Vantaa, Oulu, and Turku.
 The scenes in which the missions take place are implemented
 using free 3D city models.
 
-Hirvi targets 64-bit Linux and Windows environments.
+Hirvi targets 64-bit Linux, Windows, and MacOS environments.
 Hirvi will be implemented using Ylikuutio 3D engine.
 Hirvi is a work in progress.
 
