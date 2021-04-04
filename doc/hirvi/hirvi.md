@@ -92,22 +92,22 @@ Planned languages on launch:
 * Rail Basic Assets v1 https://www.blendswap.com/blend/13879
 
 ## Game instructions
-### Hiding / Maastoutuminen / Camuflaje
+### Hiding / Maastoutuminen / Camuflaje / Tarnung
 * fin: Hirvet ovat erinomaisia maastoutujia, ja ihmiset eivät siksi havaitse puun alla piilossa olevaa Hirveä.
 * eng (elk): The elks are camouflage experts, and therefore humans do not notice Hirvi hidden under a tree.
 * eng (moose): The moose are camouflage experts, and therefore humans do not notice Hirvi hidden under a tree.
 * esp: Lxs alces son expertxs de camuflaje, y por lo tanto lxs humanxs no se dan cuenta de Hirvi ubicadx debajo de un árbol.
-* deu: TODO
+* deu: Die Elche sind Experte der Tarnung, und deshalb die Mensche der Elch versteckt unter einem Baum nicht erkennen können.
 * swe: TODO
 
-### Police dogs / Poliisikoirat / Lxs perrxs de policia
+### Police dogs / Poliisikoirat / Lxs perrxs de policia / Die Polizeihunden
 * fin: Koirilla on erinomainen hajuaisti, toisin kuin ihmisillä, ja sen vuoksi puun alle piiloutuminen ei suojaa Hirveä poliisikoirilta.
 * eng: Dogs have an excellent sense of smell, unlike humans, and therefore hiding under a tree does not protect Hirvi from police dogs.
 * esp: Lxs perrxs tienen un tremendo sentido de olfato, al contrario a lxs humanxs, y por ello esconderse debajo de un árbol no protege Hirvi de lxs perrxs.
 * deu: TODO
 * swe: TODO
 
-### Emancipatory bellowing of Hirvi / Hirven emansipatorinen mylvintä / El berrear de Hirvi emancipatoria
+### Emancipatory bellowing of Hirvi / Hirven emansipatorinen mylvintä / El berrear de Hirvi emancipatoria / Emanzipatorisch Gegrummel von Hirvi
 * fin: Hirven mylvintä on omiaan emansipoimaan sille lähietäisyydeltä altistuneet poliisikoirat ja -hevoset.
 * eng: The bellowing of Hirvi is very apt to emancipate the police dogs and horses exposed to it in the point blank range.
 * esp: El berrear de Hirvi es muy apto a emancipar a lxs perrxs y los caballos de policía.
