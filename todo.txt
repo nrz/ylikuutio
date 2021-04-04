@@ -7,7 +7,6 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the first stage (Hirvi prototype):
-[ ] Replace Bullet with PhysX.
 [ ] Add support for AngelScript in `Console` (again, but better support this time).
 [ ] Add support for Tab complete for local names in `Console`.
 [ ] Add support for printing alternatives completions in `Console`.
