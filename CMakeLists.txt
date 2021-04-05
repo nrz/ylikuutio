@@ -1,5 +1,5 @@
 # CMake entry point
-cmake_minimum_required(VERSION 2.6.2)
+cmake_minimum_required(VERSION 2.8.12)
 cmake_policy(SET CMP0048 NEW)
 cmake_policy(SET CMP0072 NEW)
 set(CMAKE_CXX_STANDARD 17)
@@ -20,6 +20,9 @@ set(COMPILE_SDL_FROM_SOURCE false)
 # Modify the below line to control whether to compile libpng from source in Linux.
 set(COMPILE_LIBPNG_FROM_SOURCE false)
 
+# Modify the below line to control whether to compile zlib from source in Linux.
+set(COMPILE_ZLIB_FROM_SOURCE false)
+
 # uncomment the following line to disable updating of external projects.
 set(DISABLE_UPDATE_STEP true)
 
@@ -35,15 +38,29 @@ endif()
 
 find_package(Threads REQUIRED)
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows" OR CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+if(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # Crosscompiling from Linux to Windows must compile SDL and libpng from source.
-    # Native compiling on Windows must compile SDL and libpng from source.
-    # Native compiling on MacOS must compile SDL and libpng from source.
-    # dynamic linking of SDL when crosscompiling from Linux to Windows is not supported.
+    # Dynamic linking of SDL when crosscompiling from Linux to Windows is not supported.
     set(COMPILE_SDL_FROM_SOURCE true)
 
     # crosscompiling from Linux to Windows must compile libpng from source.
     set(COMPILE_LIBPNG_FROM_SOURCE true)
+
+    # crosscompiling from Linux to Windows must compile libpng from source.
+    set(COMPILE_ZLIB_FROM_SOURCE false)
+
+    # Do not compile unit tests when building on MinGW-w64 or in MacOS.
+    set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows" OR CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    # Native compiling on Windows must compile SDL and libpng from source.
+    # Native compiling on MacOS must compile SDL and libpng from source.
+    set(COMPILE_SDL_FROM_SOURCE true)
+
+    # crosscompiling from Linux to Windows must compile libpng from source.
+    set(COMPILE_LIBPNG_FROM_SOURCE true)
+
+    # crosscompiling from Linux to Windows must compile libpng from source.
+    set(COMPILE_ZLIB_FROM_SOURCE true)
 
     # Do not compile unit tests when building on MinGW-w64 or in MacOS.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
@@ -116,12 +133,22 @@ if(COMPILE_LIBPNG_FROM_SOURCE)
         external/libpng-1.6.37/
         )
 else()
-    # Use libsdl and zlib shipped with the GNU/Linux distribution.
+    # Use libsdl shipped with the GNU/Linux distribution.
     find_package(PNG REQUIRED)
-    find_package(ZLIB REQUIRED)
-
     include_directories(
         ${PNG_INCLUDE_DIRS}
+        )
+endif()
+
+if(COMPILE_ZLIB_FROM_SOURCE)
+    include_directories(
+        external/zlib-1.2.11/
+        )
+else()
+    # Use zlib shipped with the GNU/Linux distribution.
+    find_package(ZLIB REQUIRED)
+    include_directories(
+        ${ZLIB_INCLUDE_DIRS}
         )
 endif()
 
@@ -329,6 +356,18 @@ else()
     set(ALL_LIBS
         ${ALL_LIBS}
         ${SDL2_LIBRARIES}
+        )
+endif()
+
+if (COMPILE_ZLIB_FROM_SOURCE)
+    set(ALL_LIBS
+        ${ALL_LIBS}
+        zlib
+        )
+else()
+    set(ALL_LIBS
+        ${ALL_LIBS}
+        ${ZLIB_LIBRARIES}
         )
 endif()
 
@@ -1204,7 +1243,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     add_dependencies(code_to_test ylikuutio ${ALL_LIBS} pthread)
 
     add_executable(unit_tests_with_googletest code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
-    target_link_libraries(unit_tests_with_googletest yli_gtest libgtest rt SDL2 GLEW_200 bullet ${PNG_LIBRARIES} ylikuutio pthread code_to_test)
+    target_link_libraries(unit_tests_with_googletest yli_gtest libgtest SDL2 GLEW_200 bullet ${PNG_LIBRARIES} ylikuutio pthread code_to_test)
 
     # Xcode and Visual working directories
     set_target_properties(unit_tests_with_googletest PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")

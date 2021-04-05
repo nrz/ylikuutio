@@ -9,7 +9,7 @@ Lisp Resistance Force. Your task is write YliLisp to
 control the robots reowned by humans.
 And save the human species, too.
 
-Tulevaisuus targets 64-bit Linux and Windows environments.
+Tulevaisuus targets 64-bit Linux, Windows, and MacOS environments.
 Tulevaisuus will be implemented using Ylikuutio 3D engine.
 Tulevaisuus is a work in progress.
 
