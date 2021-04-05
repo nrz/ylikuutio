@@ -14,13 +14,13 @@ project(ylikuutio VERSION 0.0.8)
 # SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 
-# Modify the below line to control whether to compile SDL from source in Linux.
+# Modify the below line to control whether to compile SDL from source on Linux.
 set(COMPILE_SDL_FROM_SOURCE false)
 
-# Modify the below line to control whether to compile libpng from source in Linux.
+# Modify the below line to control whether to compile libpng from source on Linux.
 set(COMPILE_LIBPNG_FROM_SOURCE false)
 
-# Modify the below line to control whether to compile zlib from source in Linux.
+# Modify the below line to control whether to compile zlib from source on Linux.
 set(COMPILE_ZLIB_FROM_SOURCE false)
 
 # uncomment the following line to disable updating of external projects.
@@ -43,26 +43,28 @@ if(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # Dynamic linking of SDL when crosscompiling from Linux to Windows is not supported.
     set(COMPILE_SDL_FROM_SOURCE true)
 
-    # crosscompiling from Linux to Windows must compile libpng from source.
+    # Crosscompiling from Linux to Windows must compile libpng from source.
     set(COMPILE_LIBPNG_FROM_SOURCE true)
 
-    # crosscompiling from Linux to Windows must compile libpng from source.
+    # Crosscompiling from Linux to Windows does not need to compile zlib from source.
     set(COMPILE_ZLIB_FROM_SOURCE false)
 
-    # Do not compile unit tests when building on MinGW-w64 or in MacOS.
+    # Do not compile unit tests when crosscompiling from Linux to Windows.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows" OR CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     # Native compiling on Windows must compile SDL and libpng from source.
     # Native compiling on MacOS must compile SDL and libpng from source.
     set(COMPILE_SDL_FROM_SOURCE true)
 
-    # crosscompiling from Linux to Windows must compile libpng from source.
+    # Native compiling on Windows must compile libpng from source.
+    # Native compiling on MacOS must compile libpng from source.
     set(COMPILE_LIBPNG_FROM_SOURCE true)
 
-    # crosscompiling from Linux to Windows must compile libpng from source.
+    # Native compiling on Windows must compile zlib from source.
+    # Native compiling on MacOS must compile zlib from source.
     set(COMPILE_ZLIB_FROM_SOURCE true)
 
-    # Do not compile unit tests when building on MinGW-w64 or in MacOS.
+    # Do not compile unit tests when building on Windows or on MacOS.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     # Compile unit tests when compiling natively on GCC or Clang.
@@ -72,7 +74,7 @@ else()
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
 endif()
 
-# When doing a regular build in Linux, SDL can be linked either statically or dynamically.
+# When doing a regular build on Linux, SDL can be linked either statically or dynamically.
 if(NOT(COMPILE_SDL_FROM_SOURCE))
     set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
     find_package(SDL2 REQUIRED)
