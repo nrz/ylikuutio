@@ -6,7 +6,6 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size.
 [ ] Fix compiling on Visual Studio.
 [ ] Fix compiling on GCC on Travis CI Bionic Beaver environment.
-[ ] Fix compiling in a Podman container on CentOS 8.
 
 Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] Add support for AngelScript in `Console` (again, but better support this time).
@@ -284,3 +283,4 @@ Ready:
 [x] Add support for Tab complete for global names in `Console`.
 [x] Replace stb with libpng (http://www.libpng.org/pub/png/libpng.html) and libjpeg (http://ijg.org/).
 [x] Fix compiling on MacOS.
+[x] Fix compiling in a Podman container on CentOS 8.

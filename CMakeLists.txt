@@ -137,9 +137,16 @@ if(COMPILE_LIBPNG_FROM_SOURCE)
 else()
     # Use libsdl shipped with the GNU/Linux distribution.
     find_package(PNG REQUIRED)
-    include_directories(
-        ${PNG_INCLUDE_DIRS}
-        )
+
+    if (DEFINED "PNG_INCLUDE_DIRS")
+        include_directories(
+            ${PNG_INCLUDE_DIRS}
+            )
+    else()
+        include_directories(
+            ${PNG_INCLUDE_DIR}
+            )
+    endif()
 endif()
 
 if(COMPILE_ZLIB_FROM_SOURCE)
@@ -149,9 +156,16 @@ if(COMPILE_ZLIB_FROM_SOURCE)
 else()
     # Use zlib shipped with the GNU/Linux distribution.
     find_package(ZLIB REQUIRED)
-    include_directories(
-        ${ZLIB_INCLUDE_DIRS}
-        )
+
+    if (DEFINED "ZLIB_INCLUDE_DIRS")
+        include_directories(
+            ${ZLIB_INCLUDE_DIRS}
+            )
+    else()
+        include_directories(
+            ${ZLIB_INCLUDE_DIR}
+            )
+    endif()
 endif()
 
 set(YLI_BULLET_DIRECTORIES
@@ -367,10 +381,17 @@ if (COMPILE_ZLIB_FROM_SOURCE)
         zlib
         )
 else()
-    set(ALL_LIBS
-        ${ALL_LIBS}
-        ${ZLIB_LIBRARIES}
-        )
+    if (DEFINED "ZLIB_LIBRARIES")
+        set(ALL_LIBS
+            ${ALL_LIBS}
+            ${ZLIB_LIBRARIES}
+            )
+    else()
+        set(ALL_LIBS
+            ${ALL_LIBS}
+            ${ZLIB_LIBRARY}
+            )
+    endif()
 endif()
 
 if (COMPILE_LIBPNG_FROM_SOURCE)
@@ -379,10 +400,17 @@ if (COMPILE_LIBPNG_FROM_SOURCE)
         png_static
         )
 else()
-    set(ALL_LIBS
-        ${ALL_LIBS}
-        ${PNG_LIBRARIES}
-        )
+    if (DEFINED "PNG_LIBRARIES")
+        set(ALL_LIBS
+            ${ALL_LIBS}
+            ${PNG_LIBRARIES}
+            )
+    else()
+        set(ALL_LIBS
+            ${ALL_LIBS}
+            ${PNG_LIBRARY}
+            )
+    endif()
 endif()
 
 add_definitions(
