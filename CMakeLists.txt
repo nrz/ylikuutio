@@ -1273,7 +1273,11 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     add_dependencies(code_to_test ylikuutio ${ALL_LIBS} pthread)
 
     add_executable(unit_tests_with_googletest code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
-    target_link_libraries(unit_tests_with_googletest yli_gtest libgtest SDL2 GLEW_200 bullet ${PNG_LIBRARIES} ylikuutio pthread code_to_test)
+    if (DEFINED "PNG_LIBRARIES")
+        target_link_libraries(unit_tests_with_googletest yli_gtest libgtest SDL2 GLEW_200 bullet ${PNG_LIBRARIES} ylikuutio pthread code_to_test)
+    else()
+        target_link_libraries(unit_tests_with_googletest yli_gtest libgtest SDL2 GLEW_200 bullet ${PNG_LIBRARY} ylikuutio pthread code_to_test)
+    endif()
 
     # Xcode and Visual working directories
     set_target_properties(unit_tests_with_googletest PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")
