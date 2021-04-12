@@ -8,6 +8,8 @@ Fixes needed:
 [ ] Fix compiling on GCC on Travis CI Bionic Beaver environment.
 
 Tasks which are necessary for the first stage (Hirvi prototype):
+[ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
+[ ] Implement object selection (with a mouse cursor), using Bullet Physics SDK. https://pybullet.org/
 [ ] Add support for AngelScript in `Console` (again, but better support this time).
 [ ] Add support for Tab complete for local names in `Console`.
 [ ] Add support for printing alternatives completions in `Console`.
@@ -60,7 +62,6 @@ Tasks which are necessary for the second stage:
 [ ] Add support for multithreaded code.
 [ ] Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
 [ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
-[ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
 [ ] Implement octree segmentation.
 [ ] Implement frustum culling using bounding spheres.
 [ ] Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
