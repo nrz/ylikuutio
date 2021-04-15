@@ -120,6 +120,11 @@ namespace yli::ontology
                             universe->get_overlapping_pair_cache(),
                             universe->get_solver(),
                             universe->get_collision_configuration());
+
+                    // Gravity is stored as a non-negative value, make it negative for Bullet.
+                    this->dynamics_world->setGravity(btVector3(0.0f, -this->gravity, 0.0f));
+
+                    // Bullet is now initialized for this `Scene`.
                 }
 
                 // `yli::ontology::Entity` member variables begin here.
