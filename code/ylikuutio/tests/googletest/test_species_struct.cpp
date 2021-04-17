@@ -25,9 +25,9 @@
 #endif
 
 // Include standard headers
-#include <cstddef> // std::size_t
 #include <cmath>   // NAN, std::isnan, std::pow
 #include <limits>  // std::numeric_limits
+#include <stdint.h> // uint32_t etc.
 #include <vector>  // std::vector
 
 TEST(species_struct_must_be_initialized_appropriately, species_struct)
@@ -46,7 +46,7 @@ TEST(species_struct_must_be_initialized_appropriately, species_struct)
     ASSERT_EQ(test_species_struct.material, nullptr);
     ASSERT_EQ(test_species_struct.symbiont_material, nullptr);
     ASSERT_EQ(test_species_struct.shapeshifter_transformation, nullptr);
-    ASSERT_EQ(test_species_struct.vertex_count, std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(test_species_struct.vertex_count, std::numeric_limits<std::uint32_t>::max());
     ASSERT_EQ(test_species_struct.mesh_i, 0);
     ASSERT_EQ(test_species_struct.x_step, 1);
     ASSERT_EQ(test_species_struct.z_step, 1);
