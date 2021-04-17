@@ -323,6 +323,7 @@ namespace yli::ontology
                 parent_of_any_value_entities(this, &this->registry, "any_value_entities"),
                 parent_of_callback_engine_entities(this, &this->registry, "callback_engine_entities"),
                 framebuffer_module(universe_struct.framebuffer_module_struct),
+                is_headless { yli::sdl::init_sdl(universe_struct.is_headless) },
                 is_physical { universe_struct.is_physical }
             {
                 // constructor.
@@ -351,7 +352,6 @@ namespace yli::ontology
                 }
 
                 this->is_fullscreen = universe_struct.is_fullscreen;
-                this->is_headless   = universe_struct.is_headless;
                 this->is_silent     = universe_struct.is_silent;
 
                 // mouse coordinates.
@@ -373,16 +373,6 @@ namespace yli::ontology
 
                 this->znear                   = universe_struct.znear;
                 this->zfar                    = universe_struct.zfar;
-
-                if (!this->is_headless)
-                {
-                    // Initialise SDL
-                    if (!yli::sdl::init_sdl())
-                    {
-                        std::cerr << "Failed to initialize SDL.\n";
-                        this->is_headless = true;
-                    }
-                }
 
                 // Set the value of `should_be_rendered` here because it can't be done in `Entity` constructor.
                 this->should_be_rendered = !this->get_is_headless();
@@ -697,9 +687,9 @@ namespace yli::ontology
             uint32_t window_height;
             std::string window_title { "Ylikuutio " + yli::ontology::Universe::version };
 
+            const bool is_headless;
             const bool is_physical;
             bool is_fullscreen;
-            bool is_headless;
             bool is_silent;
 
             // variables related to `Camera` (projection).

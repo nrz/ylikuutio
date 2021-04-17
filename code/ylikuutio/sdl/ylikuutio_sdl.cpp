@@ -23,22 +23,29 @@
 
 namespace yli::sdl
 {
-    bool init_sdl()
+    bool init_sdl(const bool is_headless)
     {
-        if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
+        if (!is_headless)
         {
-            std::cerr << "Failed to initialize SDL.\n";
-            return false;
-        }
+            // Initialize SDL.
+
+            if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
+            {
+                std::cerr << "Failed to initialize SDL.\n";
+                return true; // Headless.
+            }
 
 #if __APPLE__
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+            SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+            SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 #else
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+            SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+            SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 #endif
-        return true;
+
+        }
+
+        return is_headless;
     }
 
     SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const Uint32 flags)
