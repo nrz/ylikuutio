@@ -322,7 +322,8 @@ namespace yli::ontology
                 parent_of_consoles(this, &this->registry, "consoles"),
                 parent_of_any_value_entities(this, &this->registry, "any_value_entities"),
                 parent_of_callback_engine_entities(this, &this->registry, "callback_engine_entities"),
-                framebuffer_module(universe_struct.framebuffer_module_struct)
+                framebuffer_module(universe_struct.framebuffer_module_struct),
+                is_physical { universe_struct.is_physical }
             {
                 // constructor.
 
@@ -349,7 +350,6 @@ namespace yli::ontology
                     this->window_title = window_title_stringstream.str();
                 }
 
-                this->is_physical   = universe_struct.is_physical;
                 this->is_fullscreen = universe_struct.is_fullscreen;
                 this->is_headless   = universe_struct.is_headless;
                 this->is_silent     = universe_struct.is_silent;
@@ -697,7 +697,7 @@ namespace yli::ontology
             uint32_t window_height;
             std::string window_title { "Ylikuutio " + yli::ontology::Universe::version };
 
-            bool is_physical;
+            const bool is_physical;
             bool is_fullscreen;
             bool is_headless;
             bool is_silent;
