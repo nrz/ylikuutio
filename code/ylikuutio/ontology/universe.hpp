@@ -324,7 +324,7 @@ namespace yli::ontology
                 parent_of_callback_engine_entities(this, &this->registry, "callback_engine_entities"),
                 framebuffer_module(universe_struct.framebuffer_module_struct),
                 is_headless { yli::sdl::init_sdl(universe_struct.is_headless) },
-                is_silent { this->is_headless | universe_struct.is_silent },
+                is_silent { this->is_headless || universe_struct.is_silent },
                 is_physical { universe_struct.is_physical }
             {
                 // constructor.
