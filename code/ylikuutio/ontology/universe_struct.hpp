@@ -44,10 +44,10 @@ namespace yli::ontology
         float mouse_speed       { 0.005f };
         float znear             { 1.0f };    // Visibility: from 1 to 5000 units.
         float zfar              { 5000.0f }; // Visibility: from 1 to 5000 units.
-        bool is_physical        { true };    // Physics simulation in use.
-        bool is_fullscreen      { false };   // Windowed mode in use.
         bool is_headless        { false };
         bool is_silent          { false };
+        bool is_physical        { true };    // Physics simulation in use.
+        bool is_fullscreen      { false };   // Windowed mode in use.
         yli::input::InputMethod input_method { yli::input::InputMethod::KEYBOARD };
         yli::ontology::FramebufferModuleStruct framebuffer_module_struct;
     };

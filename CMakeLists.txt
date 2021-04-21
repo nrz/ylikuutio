@@ -1,5 +1,7 @@
 # CMake entry point
 cmake_minimum_required(VERSION 2.8.12)
+cmake_policy(SET CMP0003 NEW)
+cmake_policy(SET CMP0004 NEW)
 cmake_policy(SET CMP0048 NEW)
 cmake_policy(SET CMP0072 NEW)
 set(CMAKE_CXX_STANDARD 17)
@@ -1274,9 +1276,9 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
 
     add_executable(unit_tests_with_googletest code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
     if (DEFINED "PNG_LIBRARIES")
-        target_link_libraries(unit_tests_with_googletest yli_gtest libgtest SDL2 GLEW_200 bullet ${PNG_LIBRARIES} ylikuutio pthread code_to_test)
+        target_link_libraries(unit_tests_with_googletest yli_gtest libgtest code_to_test ylikuutio bullet SDL2 GLEW_200 ${PNG_LIBRARIES} pthread)
     else()
-        target_link_libraries(unit_tests_with_googletest yli_gtest libgtest SDL2 GLEW_200 bullet ${PNG_LIBRARY} ylikuutio pthread code_to_test)
+        target_link_libraries(unit_tests_with_googletest yli_gtest libgtest code_to_test ylikuutio bullet SDL2 GLEW_200 ${PNG_LIBRARY} pthread)
     endif()
 
     # Xcode and Visual working directories

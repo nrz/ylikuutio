@@ -28,8 +28,8 @@
 
 // Include standard headers
 #include <cmath>   // NAN, std::isnan, std::pow
-#include <cstddef> // std::size_t
 #include <limits>  // std::numeric_limits
+#include <stdint.h> // uint32_t etc.
 #include <string>  // std::string
 #include <vector>  // std::vector
 
@@ -66,10 +66,10 @@ namespace yli::ontology
         yli::ontology::Material* material                                      { nullptr }; // Pointer to `Material` object.
         yli::ontology::SymbiontMaterial* symbiont_material                     { nullptr }; // Pointer to `SymbiontMaterial` object.
         yli::ontology::ShapeshifterTransformation* shapeshifter_transformation { nullptr }; // Pointer to `ShapeshifterTransformation` object.
-        std::size_t vertex_count { std::numeric_limits<std::size_t>::max() };               // For `SymbiontSpecies`.
-        std::size_t mesh_i  { 0 };    // for FBX.
-        std::size_t x_step  { 1 };    // step in x-dimension for input data (set to 1 to load all data points/measurements).
-        std::size_t z_step  { 1 };    // step in z-dimension for input data (set to 1 to load all data points/measurements).
+        uint32_t vertex_count { std::numeric_limits<uint32_t>::max() };                     // For `SymbiontSpecies`.
+        uint32_t mesh_i     { 0 };    // for FBX.
+        uint32_t x_step     { 1 };    // step in x-dimension for input data (set to 1 to load all data points/measurements).
+        uint32_t z_step     { 1 };    // step in z-dimension for input data (set to 1 to load all data points/measurements).
         float latitude      { 0.0f }; // in degrees, for SRTM model files.
         float longitude     { 0.0f }; // in degrees, for SRTM model files.
         float planet_radius { NAN };  // radius of sea level in kilometers. used only for terrains (planets and moons). `6371.0f` for Earth.

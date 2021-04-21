@@ -24,7 +24,7 @@
 
 namespace yli::sdl
 {
-    bool init_sdl();
+    bool init_sdl(const bool is_headless);
     SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const Uint32 flags);
     SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen);
     SDL_Window* create_hidden_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen);

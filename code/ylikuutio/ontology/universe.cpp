@@ -716,32 +716,41 @@ namespace yli::ontology
 
     void Universe::create_window()
     {
-        // Create a window.
-        this->window = yli::sdl::create_window(
-                static_cast<int>(this->window_width),
-                static_cast<int>(this->window_height),
-                this->window_title.c_str(),
-                this->is_fullscreen);
+        if (!this->is_headless)
+        {
+            // Create a window.
+            this->window = yli::sdl::create_window(
+                    static_cast<int>(this->window_width),
+                    static_cast<int>(this->window_height),
+                    this->window_title.c_str(),
+                    this->is_fullscreen);
 
-        if (this->window != nullptr)
-        {
-            std::cerr << "SDL Window created successfully.\n";
-        }
-        else
-        {
-            std::cerr << "ERROR: `Universe::create_window`: SDL Window could not be created!\n";
+            if (this->window != nullptr)
+            {
+                std::cerr << "SDL Window created successfully.\n";
+            }
+            else
+            {
+                std::cerr << "ERROR: `Universe::create_window`: SDL Window could not be created!\n";
+            }
         }
     }
 
     void Universe::setup_context()
     {
-        this->render_master->setup_context(this->window);
+        if (!this->is_headless)
+        {
+            this->render_master->setup_context(this->window);
+        }
     }
 
     void Universe::create_window_and_setup_context()
     {
-        this->create_window();
-        this->setup_context();
+        if (!this->is_headless)
+        {
+            this->create_window();
+            this->setup_context();
+        }
     }
 
     void Universe::set_swap_interval(const int32_t interval)
