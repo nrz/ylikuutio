@@ -2,8 +2,8 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Fixes needed:
+[ ] Fix compiling on Clang.
 [ ] Fix compiling on Visual Studio.
-[ ] Fix compiling on GCC on Travis CI Bionic Beaver environment.
 [ ] Fix bug on console size after changing window size small enough. (to be fixed in the `Widget` implementation)
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
@@ -286,3 +286,4 @@ Ready:
 [x] Fix compiling on MacOS.
 [x] Fix compiling in a Podman container on CentOS 8.
 [x] Fix segfault when running in headless mode (with `--headless`, bug entered in commit e9ea16157b51403685a3df2d0884cb87fbf500dc).
+[x] Fix compiling on GCC on Travis CI Bionic Beaver environment.
