@@ -74,22 +74,17 @@ namespace yli::ontology
                     yli::ontology::MasterModule* const master_module)
                 : Entity(universe, movable_struct),
                 child(parent_module, this),
-                apprentice_of_brain(master_module, this)
+                apprentice_of_brain(master_module, this),
+                input_method { movable_struct.input_method },
+                initial_rotate_vectors { movable_struct.initial_rotate_vectors },
+                initial_rotate_angles { movable_struct.initial_rotate_angles },
+                original_scale_vector { movable_struct.original_scale_vector },
+                cartesian_coordinates { movable_struct.cartesian_coordinates },
+                spherical_coordinates { movable_struct.spherical_coordinates },
+                yaw { movable_struct.yaw },
+                pitch { movable_struct.pitch }
             {
                 // constructor.
-
-                this->input_method                = movable_struct.input_method;
-
-                this->initial_rotate_vectors      = movable_struct.initial_rotate_vectors;
-                this->initial_rotate_angles       = movable_struct.initial_rotate_angles;
-
-                this->original_scale_vector       = movable_struct.original_scale_vector;
-
-                this->cartesian_coordinates       = movable_struct.cartesian_coordinates;
-                this->spherical_coordinates       = movable_struct.spherical_coordinates;
-
-                this->yaw                         = movable_struct.yaw;
-                this->pitch                       = movable_struct.pitch;
 
                 // Initialize speed, angular speed and maximum speed variables.
                 // These are to be used from the `Brain` callbacks.
