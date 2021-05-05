@@ -82,7 +82,8 @@ namespace yli::ontology
                 cartesian_coordinates { movable_struct.cartesian_coordinates },
                 spherical_coordinates { movable_struct.spherical_coordinates },
                 yaw { movable_struct.yaw },
-                pitch { movable_struct.pitch }
+                pitch { movable_struct.pitch },
+                mass { movable_struct.mass }
             {
                 // constructor.
 
@@ -288,6 +289,7 @@ namespace yli::ontology
             float max_air_angular_speed { 0.0f };                  // 1/s
             float air_acceleration { 0.0f };                       // m/s^2
             float air_deceleration { 0.0f };                       // m/s^2
+            float mass             { 0.0f };                       // An object is static if and only if its mass is 0.
             std::vector<yli::ontology::Waypoint*> waypoints;       // Used for actual waypoints. `Brain` can use these freely.
             std::vector<yli::ontology::Waypoint*> control_points;  // Used as B-spline/Bézier/etc. control points. `Brain` can use these freely.
 

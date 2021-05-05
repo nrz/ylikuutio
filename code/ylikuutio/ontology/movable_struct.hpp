@@ -89,6 +89,7 @@ namespace yli::ontology
         yli::data::SphericalCoordinatesStruct spherical_coordinates { NAN, NAN, NAN };
         float yaw   { 0.0f };
         float pitch { 0.0f };
+        float mass  { 0.0f }; // An object is static if and only if its mass is 0.
     };
 }
 
