@@ -269,27 +269,26 @@ namespace yli::ontology
             glm::vec3 right { glm::vec3(NAN, NAN, NAN) };          // note: can not be set directly using console.
             glm::vec3 up { glm::vec3(NAN, NAN, NAN) };             // note: can not be set directly using console.
 
-            float yaw { 0.0f };
-            float pitch { 0.0f };
-
-            float speed { 0.0f };                                  // m/s
-            float angular_speed { 0.0f };                          // 1/s
-            float max_land_speed { 0.0f };                         // m/s
-            float max_land_angular_speed { 0.0f };                 // 1/s
-            float land_acceleration { 0.0f };                      // m/s^2
-            float land_deceleration { 0.0f };                      // m/s^2
-            float max_rail_speed { 0.0f };                         // m/s. By the way, there is no angular speed for railways.
-            float rail_acceleration { 0.0f };                      // m/s^2
-            float rail_deceleration { 0.0f };                      // m/s^2
-            float max_water_speed { 0.0f };                        // m/s
+            float yaw                     { 0.0f };
+            float pitch                   { 0.0f };
+            float speed                   { 0.0f };                // m/s
+            float angular_speed           { 0.0f };                // 1/s
+            float max_land_speed          { 0.0f };                // m/s
+            float max_land_angular_speed  { 0.0f };                // 1/s
+            float land_acceleration       { 0.0f };                // m/s^2
+            float land_deceleration       { 0.0f };                // m/s^2
+            float max_rail_speed          { 0.0f };                // m/s. By the way, there is no angular speed for railways.
+            float rail_acceleration       { 0.0f };                // m/s^2
+            float rail_deceleration       { 0.0f };                // m/s^2
+            float max_water_speed         { 0.0f };                // m/s
             float max_water_angular_speed { 0.0f };                // 1/s
-            float water_acceleration { 0.0f };                     // m/s^2
-            float water_deceleration { 0.0f };                     // m/s^2
-            float max_air_speed { 0.0f };                          // m/s
-            float max_air_angular_speed { 0.0f };                  // 1/s
-            float air_acceleration { 0.0f };                       // m/s^2
-            float air_deceleration { 0.0f };                       // m/s^2
-            float mass             { 0.0f };                       // An object is static if and only if its mass is 0.
+            float water_acceleration      { 0.0f };                // m/s^2
+            float water_deceleration      { 0.0f };                // m/s^2
+            float max_air_speed           { 0.0f };                // m/s
+            float max_air_angular_speed   { 0.0f };                // 1/s
+            float air_acceleration        { 0.0f };                // m/s^2
+            float air_deceleration        { 0.0f };                // m/s^2
+            float mass                    { 0.0f };                // An object is static if and only if its mass is 0.
             std::vector<yli::ontology::Waypoint*> waypoints;       // Used for actual waypoints. `Brain` can use these freely.
             std::vector<yli::ontology::Waypoint*> control_points;  // Used as B-spline/Bézier/etc. control points. `Brain` can use these freely.
 
