@@ -205,6 +205,24 @@ destructor_definition_lines = \
 "        // destructor.\n"\
 "    }"
 
+get_parent_function_lines = \
+"    yli::ontology::Entity* " + class_name + "::get_parent() const\n"\
+"    {\n"\
+"        return this->" + child_module_variable_name + ".get_parent();\n"\
+"    }"
+
+get_number_of_children_lines = \
+"    std::size_t " + class_name + "::get_number_of_children() const\n"\
+"    {\n"\
+"        return 0; // TODO: modify this line if this class has children!\n"\
+"    }"
+
+get_number_of_descendants_lines = \
+"    std::size_t " + class_name + "::get_number_of_descendants() const\n"\
+"    {\n"\
+"        return 0; // TODO: modify this line if this class has children!\n"\
+"    }"
+
 # struct file specific lines.
 begin_struct_definition = \
 "    struct " + struct_variable_type + ": public " + fully_qualified_inherited_class_struct_variable_type + "\n"\
@@ -271,8 +289,18 @@ with open(class_filename_cpp, 'w') as f:
     print(file = f)
     print(class_include_line, file = f)
     print(file = f)
+    print(standard_headers_include_lines, file = f)
+    print(file = f)
     print(begin_namespace_lines, file = f)
+    print(entity_forward_declaration, file = f)
+    print(file = f)
     print(destructor_definition_lines, file = f)
+    print(file = f)
+    print(get_parent_function_lines, file = f)
+    print(file = f)
+    print(get_number_of_children_lines, file = f)
+    print(file = f)
+    print(get_number_of_descendants_lines, file = f)
     print(end_namespace_lines, file = f)
 
 with open(struct_filename, 'w') as f:
