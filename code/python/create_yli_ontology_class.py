@@ -198,7 +198,7 @@ get_number_of_descendants_const_override_line = \
 child_module_lines = \
 "            " + namespace + "::ChildModule " + child_module_variable_name + "; // TODO: delete this line if `ChildModule` is not needed!"
 
-# header file specific lines.
+# Lines specific to the `.cpp` file.
 destructor_definition_lines = \
 "    " + class_name + "::~" + class_name + "()\n"\
 "    {\n"\
