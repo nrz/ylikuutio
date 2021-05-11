@@ -111,6 +111,9 @@ About frustum culling and occlusion culling:
 https://www.mpc-rnd.com/unity-gpu-culling-experiments/?t=unity
 https://www.mpc-rnd.com/unity-gpu-culling-experiments-part2-optimizations/?t=unity
 
+About setting up Bullet:
+https://github.com/asc-community/MxEngine/blob/master/articles/bullet3_integration.md
+
 About frustum culling using Bullet:
 https://pybullet.org/Bullet/phpBB3/viewtopic.php?t=7575
 https://pybullet.org/Bullet/phpBB3/viewtopic.php?t=7764

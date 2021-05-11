@@ -27,11 +27,11 @@
 #endif
 
 // Include standard headers
-#include <cmath>   // NAN, std::isnan, std::pow
-#include <limits>  // std::numeric_limits
+#include <cmath>    // NAN, std::isnan, std::pow
+#include <limits>   // std::numeric_limits
 #include <stdint.h> // uint32_t etc.
-#include <string>  // std::string
-#include <vector>  // std::vector
+#include <string>   // std::string
+#include <vector>   // std::vector
 
 namespace yli::ontology
 {

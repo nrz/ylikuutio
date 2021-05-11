@@ -787,6 +787,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/read_callback.hpp
     code/ylikuutio/ontology/registry.cpp
     code/ylikuutio/ontology/registry.hpp
+    code/ylikuutio/ontology/rigid_body.cpp
+    code/ylikuutio/ontology/rigid_body.hpp
+    code/ylikuutio/ontology/rigid_body_struct.hpp
     code/ylikuutio/ontology/scene.cpp
     code/ylikuutio/ontology/scene.hpp
     code/ylikuutio/ontology/scene_struct.hpp

@@ -76,6 +76,7 @@ namespace yli::ontology
     class Shader;
     class Species;
     class Symbiosis;
+    class RigidBody;
 
     class Scene: public yli::ontology::Entity
     {
@@ -96,7 +97,8 @@ namespace yli::ontology
                 child_of_world(parent_module, this),
                 parent_of_default_camera(this, &this->registry, "default_camera"),
                 parent_of_cameras(this, &this->registry, "cameras"),
-                parent_of_brains(this, &this->registry, "brains")
+                parent_of_brains(this, &this->registry, "brains"),
+                parent_of_rigid_bodies(this, &this->registry, "rigid_bodies")
             {
                 // constructor.
                 this->gravity     = scene_struct.gravity;
@@ -166,6 +168,8 @@ namespace yli::ontology
             float get_fall_speed() const;
             void set_fall_speed(const float fall_speed);
 
+            void add_rigid_body(yli::ontology::RigidBody* const rigid_body);
+
             yli::ontology::Species* get_terrain_species() const;
 
             // set terrain `Species` pointers in `Scene` and `Universe` so that they point to the chosen terrain `Species`.
@@ -181,6 +185,7 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_default_camera;
             yli::ontology::ParentModule parent_of_cameras;
             yli::ontology::ParentModule parent_of_brains;
+            yli::ontology::ParentModule parent_of_rigid_bodies;
 
         private:
             std::size_t get_number_of_children() const override;
@@ -222,6 +227,7 @@ namespace yli::ontology
             yli::data::SphericalCoordinatesStruct* spherical_coordinates { nullptr };
 
             std::unique_ptr<btDiscreteDynamicsWorld> dynamics_world { nullptr };
+            btAlignedObjectArray<btCollisionShape*> collision_shapes;
 
             float yaw   { NAN };
             float pitch { NAN };
