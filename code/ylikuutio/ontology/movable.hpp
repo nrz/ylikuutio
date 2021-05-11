@@ -75,6 +75,7 @@ namespace yli::ontology
                 : Entity(universe, movable_struct),
                 child(parent_module, this),
                 apprentice_of_brain(master_module, this),
+                apprentice_of_rigid_body(master_module, this),
                 input_method { movable_struct.input_method },
                 initial_rotate_vectors { movable_struct.initial_rotate_vectors },
                 initial_rotate_angles { movable_struct.initial_rotate_angles },
@@ -82,8 +83,7 @@ namespace yli::ontology
                 cartesian_coordinates { movable_struct.cartesian_coordinates },
                 spherical_coordinates { movable_struct.spherical_coordinates },
                 yaw { movable_struct.yaw },
-                pitch { movable_struct.pitch },
-                mass { movable_struct.mass }
+                pitch { movable_struct.pitch }
             {
                 // constructor.
 
@@ -288,7 +288,6 @@ namespace yli::ontology
             float max_air_angular_speed   { 0.0f };                // 1/s
             float air_acceleration        { 0.0f };                // m/s^2
             float air_deceleration        { 0.0f };                // m/s^2
-            float mass                    { 0.0f };                // An object is static if and only if its mass is 0.
             std::vector<yli::ontology::Waypoint*> waypoints;       // Used for actual waypoints. `Brain` can use these freely.
             std::vector<yli::ontology::Waypoint*> control_points;  // Used as B-spline/Bézier/etc. control points. `Brain` can use these freely.
 
@@ -307,6 +306,7 @@ namespace yli::ontology
 
         public:
             yli::ontology::ApprenticeModule apprentice_of_brain;
+            yli::ontology::ApprenticeModule apprentice_of_rigid_body;
 
         private:
             void create_coordinate_and_angle_variables();

@@ -32,6 +32,7 @@
 #include "species.hpp"
 #include "camera.hpp"
 #include "brain.hpp"
+#include "rigid_body.hpp"
 #include "ground_level.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -367,6 +368,23 @@ namespace yli::ontology
     void Scene::set_fall_speed(const float fall_speed)
     {
         this->fall_speed = fall_speed;
+    }
+
+    void Scene::add_rigid_body(yli::ontology::RigidBody* const rigid_body)
+    {
+        if (rigid_body == nullptr)
+        {
+            std::cerr << "ERROR: `Scene::add_rigid_body`: `rigid_body` is `nullptr`!\n";
+            return;
+        }
+
+        if (rigid_body == nullptr)
+        {
+            std::cerr << "ERROR: `Scene::add_rigid_body`: `this->dynamics_world` is `nullptr`!\n";
+            return;
+        }
+
+        this->dynamics_world->addRigidBody(rigid_body->get_bullet_rigid_body());
     }
 
     yli::ontology::Species* Scene::get_terrain_species() const
