@@ -75,6 +75,11 @@ namespace yli::ontology
         return this->master;
     }
 
+    const std::vector<yli::ontology::ApprenticeModule*>& MasterModule::get_apprentice_module_pointer_vector_const_reference() const
+    {
+        return this->apprentice_module_pointer_vector;
+    }
+
     std::size_t MasterModule::get_number_of_apprentices() const
     {
         return this->number_of_apprentices;

@@ -69,6 +69,8 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_master() const;
 
+            const std::vector<yli::ontology::ApprenticeModule*>& get_apprentice_module_pointer_vector_const_reference() const;
+
             std::size_t get_number_of_apprentices() const;
 
             yli::ontology::Entity* get(const std::size_t index) const override;
@@ -78,10 +80,7 @@ namespace yli::ontology
         private:
             yli::ontology::Entity* const master; // The `Entity` that owns this `MasterModule`.
 
-        public:
             std::vector<yli::ontology::ApprenticeModule*> apprentice_module_pointer_vector;
-
-        private:
             std::queue<std::size_t> free_apprenticeID_queue;
             std::size_t number_of_apprentices;
     };

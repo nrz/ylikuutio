@@ -67,7 +67,7 @@ namespace yli::ontology
             return;
         }
 
-        for (const yli::ontology::ApprenticeModule* apprentice_module : this->master_of_movables.apprentice_module_pointer_vector)
+        for (const yli::ontology::ApprenticeModule* apprentice_module : this->master_of_movables.get_apprentice_module_pointer_vector_const_reference())
         {
             if (apprentice_module == nullptr)
             {
