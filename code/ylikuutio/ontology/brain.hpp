@@ -20,7 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "master_module.hpp"
+#include "generic_master_module.hpp"
 #include "brain_struct.hpp"
 
 // Include standard headers
@@ -85,14 +85,14 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
-            yli::ontology::MasterModule* get_master_module() const;
+            yli::ontology::GenericMasterModule* get_generic_master_module() const;
 
             std::size_t get_number_of_apprentices() const;
 
             void act();
 
             yli::ontology::ChildModule child_of_scene;
-            yli::ontology::MasterModule master_of_movables;
+            yli::ontology::GenericMasterModule master_of_movables;
 
         private:
             std::size_t get_number_of_children() const override;

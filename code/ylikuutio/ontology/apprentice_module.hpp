@@ -28,18 +28,21 @@
 
 namespace yli::ontology
 {
-    class MasterModule;
+    class GenericMasterModule;
     class Entity;
+
+    template<class M>
+        class MasterModule;
 
     class ApprenticeModule
     {
         public:
-            void bind_to_master_module();
-            void unbind_from_master_module();
-            void bind_to_new_master_module(yli::ontology::MasterModule* const new_master);
+            void bind_to_generic_master_module();
+            void unbind_from_generic_master_module();
+            void bind_to_new_generic_master_module(yli::ontology::GenericMasterModule* const new_generic_master);
 
             // constructor.
-            ApprenticeModule(yli::ontology::MasterModule* const master_module, yli::ontology::Entity* const apprentice);
+            ApprenticeModule(yli::ontology::GenericMasterModule* const generic_master_module, yli::ontology::Entity* const apprentice);
 
             // destructor.
             ~ApprenticeModule();
@@ -50,7 +53,10 @@ namespace yli::ontology
             ApprenticeModule(const ApprenticeModule&) = delete;            // Delete copy constructor.
             ApprenticeModule& operator=(const ApprenticeModule&) = delete; // Delete copy assignment.
 
-            friend class yli::ontology::MasterModule;
+            friend class yli::ontology::GenericMasterModule;
+
+            template<class M>
+                friend class yli::ontology::MasterModule;
 
             template<class T1>
                 friend void yli::hierarchy::set_child_pointer(
@@ -72,7 +78,7 @@ namespace yli::ontology
                         std::size_t& number_of_apprentices);
 
         private:
-            yli::ontology::MasterModule* master_module;
+            yli::ontology::GenericMasterModule* generic_master_module;
 
             yli::ontology::Entity* const apprentice;
             std::size_t apprenticeID { std::numeric_limits<std::size_t>::max() };

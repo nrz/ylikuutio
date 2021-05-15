@@ -49,11 +49,11 @@ namespace yli::ontology
 
         if (new_brain != nullptr)
         {
-            this->apprentice_of_brain.bind_to_new_master_module(&new_brain->master_of_movables);
+            this->apprentice_of_brain.bind_to_new_generic_master_module(&new_brain->master_of_movables);
         }
         else
         {
-            this->apprentice_of_brain.bind_to_new_master_module(nullptr);
+            this->apprentice_of_brain.bind_to_new_generic_master_module(nullptr);
         }
     }
 

@@ -20,7 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "master_module.hpp"
+#include "generic_master_module.hpp"
 #include "apprentice_module.hpp"
 #include "movable_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
@@ -61,7 +61,7 @@ namespace yli::ontology
     class Brain;
     class Waypoint;
     class ParentModule;
-    class MasterModule;
+    class GenericMasterModule;
 
     class Movable: public yli::ontology::Entity
     {
@@ -71,11 +71,11 @@ namespace yli::ontology
             Movable(yli::ontology::Universe* const universe,
                     const yli::ontology::MovableStruct& movable_struct,
                     yli::ontology::ParentModule* const parent_module,
-                    yli::ontology::MasterModule* const master_module)
+                    yli::ontology::GenericMasterModule* const generic_master_module)
                 : Entity(universe, movable_struct),
                 child(parent_module, this),
-                apprentice_of_brain(master_module, this),
-                apprentice_of_rigid_body(master_module, this),
+                apprentice_of_brain(generic_master_module, this),
+                apprentice_of_rigid_body(generic_master_module, this),
                 input_method { movable_struct.input_method },
                 initial_rotate_vectors { movable_struct.initial_rotate_vectors },
                 initial_rotate_angles { movable_struct.initial_rotate_angles },
@@ -296,7 +296,7 @@ namespace yli::ontology
             glm::mat4 mvp_matrix { glm::mat4(1.0f) };              // model view projection matrix (initialized with dummy value).
 
             friend class yli::ontology::Brain;
-            friend class yli::ontology::MasterModule;
+            friend class yli::ontology::GenericMasterModule;
 
             template<class T1>
                 friend void yli::hierarchy::bind_apprentice_to_master(T1 apprentice_pointer, std::vector<T1>& apprentice_pointer_vector, std::queue<std::size_t>& free_apprenticeID_queue, std::size_t& number_of_apprenticeren);

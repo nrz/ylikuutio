@@ -20,7 +20,9 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
+#include "master_module.hpp"
 #include "scene.hpp"
+#include "movable.hpp"
 #include "rigid_body_struct.hpp"
 
 // Include Bullet
@@ -42,12 +44,15 @@ namespace yli::ontology
     class RigidBody: public yli::ontology::Entity
     {
         public:
+            void unbind_movable(yli::ontology::Entity* movable);
+
             RigidBody(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::RigidBodyStruct& rigid_body_struct,
                     yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, rigid_body_struct),
                 child_of_scene(parent_module, this),
+                master_of_movables(this, &this->registry, "movables", &yli::ontology::RigidBody::unbind_movable),
                 parent { rigid_body_struct.parent },
                 mass { rigid_body_struct.mass }
             {
@@ -103,6 +108,8 @@ namespace yli::ontology
             btRigidBody* get_bullet_rigid_body() const;
 
             yli::ontology::ChildModule child_of_scene;
+
+            yli::ontology::MasterModule<yli::ontology::RigidBody*> master_of_movables;
 
         private:
             yli::ontology::Entity* parent { nullptr };

@@ -16,58 +16,58 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "apprentice_module.hpp"
-#include "master_module.hpp"
+#include "generic_master_module.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 namespace yli::ontology
 {
     class Entity;
 
-    void ApprenticeModule::bind_to_master_module()
+    void ApprenticeModule::bind_to_generic_master_module()
     {
-        if (this->master_module != nullptr)
+        if (this->generic_master_module != nullptr)
         {
-            this->master_module->bind_apprentice_module(this);
+            this->generic_master_module->bind_apprentice_module(this);
         }
     }
 
-    void ApprenticeModule::unbind_from_master_module()
+    void ApprenticeModule::unbind_from_generic_master_module()
     {
-        if (this->master_module != nullptr)
+        if (this->generic_master_module != nullptr)
         {
-            this->master_module->unbind_apprentice_module(this->apprenticeID);
+            this->generic_master_module->unbind_apprentice_module(this->apprenticeID);
         }
     }
 
-    void ApprenticeModule::bind_to_new_master_module(yli::ontology::MasterModule* const new_master)
+    void ApprenticeModule::bind_to_new_generic_master_module(yli::ontology::GenericMasterModule* const new_generic_master)
     {
-        this->unbind_from_master_module(); // unbind from the current master if there is such.
+        this->unbind_from_generic_master_module(); // unbind from the current generic master if there is such.
 
-        this->master_module = new_master;
-        this->bind_to_master_module();
+        this->generic_master_module = new_generic_master;
+        this->bind_to_generic_master_module();
     }
 
-    ApprenticeModule::ApprenticeModule(yli::ontology::MasterModule* const master_module, yli::ontology::Entity* const apprentice)
-        : master_module(master_module),
+    ApprenticeModule::ApprenticeModule(yli::ontology::GenericMasterModule* const generic_master_module, yli::ontology::Entity* const apprentice)
+        : generic_master_module(generic_master_module),
         apprentice(apprentice)
     {
         // constructor.
 
-        this->bind_to_master_module();
+        this->bind_to_generic_master_module();
     }
 
     ApprenticeModule::~ApprenticeModule()
     {
         // destructor.
 
-        this->unbind_from_master_module();
+        this->unbind_from_generic_master_module();
     }
 
     yli::ontology::Entity* ApprenticeModule::get_master() const
     {
-        if (this->master_module != nullptr)
+        if (this->generic_master_module != nullptr)
         {
-            return this->master_module->master;
+            return this->generic_master_module->generic_master;
         }
 
         return nullptr;

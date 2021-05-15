@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#include "movable.hpp"
 #include "rigid_body.hpp"
 
 // Include standard headers
@@ -23,6 +24,11 @@
 namespace yli::ontology
 {
     class Entity;
+
+    void RigidBody::unbind_movable(yli::ontology::Entity* movable)
+    {
+        // TODO: implement the function!
+    }
 
     RigidBody::~RigidBody()
     {

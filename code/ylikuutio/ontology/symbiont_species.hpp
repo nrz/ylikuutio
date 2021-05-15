@@ -18,7 +18,7 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_SYMBIONT_SPECIES_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_SYMBIONT_SPECIES_HPP_INCLUDED
 
-#include "master_module.hpp"
+#include "generic_master_module.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
@@ -158,7 +158,7 @@ namespace yli::ontology
             template<class T1, class T2, class T3>
                 friend void yli::render::render_species_or_glyph(T1 species_or_glyph_pointer);
 
-            yli::ontology::MasterModule master_of_bionts;
+            yli::ontology::GenericMasterModule master_of_bionts;
 
         private:
             glm::vec3 light_position;

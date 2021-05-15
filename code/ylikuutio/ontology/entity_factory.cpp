@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "entity_factory.hpp"
-#include "master_module.hpp"
+#include "generic_master_module.hpp"
 #include "entity.hpp"
 #include "variable.hpp"
 #include "universe.hpp"
@@ -204,7 +204,7 @@ namespace yli::ontology
                  std::holds_alternative<yli::ontology::Text3D*>(object_struct.parent) ?
                  &(std::get<yli::ontology::Text3D*>(object_struct.parent)->parent_of_objects) :
                  nullptr),
-                (object_struct.brain == nullptr ? nullptr : object_struct.brain->get_master_module()));
+                (object_struct.brain == nullptr ? nullptr : object_struct.brain->get_generic_master_module()));
 
         object_entity->set_global_name(object_struct.global_name);
         object_entity->set_local_name(object_struct.local_name);
@@ -229,7 +229,7 @@ namespace yli::ontology
                 this->universe,
                 holobiont_struct,
                 (holobiont_struct.parent == nullptr ? nullptr : &holobiont_struct.parent->parent_of_holobionts),
-                (holobiont_struct.brain == nullptr ? nullptr : holobiont_struct.brain->get_master_module()));
+                (holobiont_struct.brain == nullptr ? nullptr : holobiont_struct.brain->get_generic_master_module()));
 
         holobiont_entity->set_global_name(holobiont_struct.global_name);
         holobiont_entity->set_local_name(holobiont_struct.local_name);
@@ -262,7 +262,7 @@ namespace yli::ontology
                 this->universe,
                 text_3d_struct,
                 (text_3d_struct.parent == nullptr ? nullptr : &text_3d_struct.parent->parent_of_text_3ds),
-                (text_3d_struct.brain == nullptr ? nullptr : text_3d_struct.brain->get_master_module()));
+                (text_3d_struct.brain == nullptr ? nullptr : text_3d_struct.brain->get_generic_master_module()));
 
         text3d_entity->set_global_name(text_3d_struct.global_name);
         text3d_entity->set_local_name(text_3d_struct.local_name);
@@ -330,7 +330,7 @@ namespace yli::ontology
                 this->universe,
                 camera_struct,
                 (camera_struct.parent == nullptr ? nullptr : &camera_struct.parent->parent_of_cameras),
-                (camera_struct.brain == nullptr ? nullptr : camera_struct.brain->get_master_module()));
+                (camera_struct.brain == nullptr ? nullptr : camera_struct.brain->get_generic_master_module()));
 
         camera_entity->set_global_name(camera_struct.global_name);
         camera_entity->set_local_name(camera_struct.local_name);
