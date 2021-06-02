@@ -1081,6 +1081,12 @@ if(FALSE)
     target_link_libraries(asio_nslookup pthread)
 endif()
 
+# thread-test
+add_executable(thread_test
+    code/thread_test/thread_test.cpp
+    )
+target_link_libraries(thread_test pthread)
+
 # Xcode and Visual working directories
 set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
 create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
