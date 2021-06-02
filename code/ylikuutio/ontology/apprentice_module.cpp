@@ -27,11 +27,7 @@ namespace yli::ontology
     {
         if (this->master_module != nullptr)
         {
-            yli::hierarchy::bind_apprentice_to_master<yli::ontology::ApprenticeModule*>(
-                    this,
-                    this->master_module->apprentice_module_pointer_vector,
-                    this->master_module->free_apprenticeID_queue,
-                    this->master_module->number_of_apprentices);
+            this->master_module->bind_apprentice_module(this);
         }
     }
 
@@ -39,11 +35,7 @@ namespace yli::ontology
     {
         if (this->master_module != nullptr)
         {
-            yli::hierarchy::unbind_child_from_parent<yli::ontology::ApprenticeModule*>(
-                    this->apprenticeID,
-                    this->master_module->apprentice_module_pointer_vector,
-                    this->master_module->free_apprenticeID_queue,
-                    this->master_module->number_of_apprentices);
+            this->master_module->unbind_apprentice_module(this->apprenticeID);
         }
     }
 

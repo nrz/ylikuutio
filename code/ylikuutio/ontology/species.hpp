@@ -44,7 +44,6 @@
 namespace yli::ontology
 {
     class Entity;
-    class Material;
     class ParentModule;
 
     class Species: public yli::ontology::Model

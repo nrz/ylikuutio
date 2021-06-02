@@ -5,11 +5,11 @@ set(CMAKE_SYSTEM_NAME Windows)
 set(CMAKE_SYSTEM_VERSION 1)
 
 # which compilers to use for C and C++
-set(CMAKE_C_COMPILER /usr/bin/x86_64-w64-mingw32-gcc)
-set(CMAKE_CXX_COMPILER /usr/bin/x86_64-w64-mingw32-g++)
+set(CMAKE_C_COMPILER /usr/bin/x86_64-w64-mingw32-gcc-posix)
+set(CMAKE_CXX_COMPILER /usr/bin/x86_64-w64-mingw32-g++-posix)
 set(CMAKE_RC_COMPILER /usr/bin/x86_64-w64-mingw32-windres)
 set(CMAKE_ASM_YASM_COMPILER /usr/bin/yasm)
-set(CMAKE_RANLIB /usr/bin/x86_64-w64-mingw32-gcc-ranlib)
+set(CMAKE_RANLIB /usr/bin/x86_64-w64-mingw32-gcc-ranlib-posix)
 
 # here is the target environment located
 set(CMAKE_FIND_ROOT_PATH /usr/x86_64-w64-mingw32/)

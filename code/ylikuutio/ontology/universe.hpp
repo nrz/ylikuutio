@@ -355,8 +355,8 @@ namespace yli::ontology
                 this->is_fullscreen = universe_struct.is_fullscreen;
 
                 // mouse coordinates.
-                this->mouse_x       = this->window_width / 2;
-                this->mouse_y       = this->window_height / 2;
+                this->mouse_x = this->window_width / 2;
+                this->mouse_y = this->window_height / 2;
 
                 // Variables related to the camera.
                 this->aspect_ratio = static_cast<float>(this->window_width) / static_cast<float>(this->window_height);
