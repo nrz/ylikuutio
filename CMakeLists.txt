@@ -1093,6 +1093,12 @@ add_executable(thread_test
     )
 target_link_libraries(thread_test pthread)
 
+# dining philosophers
+add_executable(dining_philosophers
+    code/thread_test/dining_philosophers.cpp
+    )
+target_link_libraries(dining_philosophers pthread)
+
 # Xcode and Visual working directories
 set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
 create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
