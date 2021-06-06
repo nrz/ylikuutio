@@ -1081,11 +1081,23 @@ if(FALSE)
     target_link_libraries(asio_nslookup pthread)
 endif()
 
+# future-test
+add_executable(future_test
+    code/thread_test/future_test.cpp
+    )
+target_link_libraries(future_test pthread)
+
 # thread-test
 add_executable(thread_test
     code/thread_test/thread_test.cpp
     )
 target_link_libraries(thread_test pthread)
+
+# dining philosophers
+add_executable(dining_philosophers
+    code/thread_test/dining_philosophers.cpp
+    )
+target_link_libraries(dining_philosophers pthread)
 
 # Xcode and Visual working directories
 set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")

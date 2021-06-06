@@ -15,38 +15,35 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include <functional> // std::ref
-#include <iostream>   // std::cout, std::cin, std::cerr
-#include <stdint.h>   // uint32_t etc.
-#include <thread>     // std::thread
-#include <vector>     // std::vector
+#include <future>   // std::async, std::launch, std::future
+#include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
+#include <vector>   // std::vector
 
-void square(const uint32_t number, std::vector<uint32_t>& results, const uint32_t index)
+uint32_t square(const uint32_t number)
 {
-    results.at(index) = number * number;
+    return number * number;
 }
 
 int main()
 {
     const std::vector<uint32_t> inputs { 1, 5, 2, 7, 9 };
     const uint32_t n_inputs = inputs.size();
-    std::vector<std::thread> threads;
-    std::vector<uint32_t> results;
-    threads.resize(n_inputs);
-    results.resize(n_inputs);
+    std::vector<std::future<uint32_t>> future_results;
+    future_results.resize(n_inputs);
 
     for (uint32_t i = 0; i < n_inputs; i++)
     {
-        threads.at(i) = std::thread { &square, inputs.at(i), std::ref(results), i };
+        future_results.at(i) = std::async(std::launch::async, square, inputs.at(i));
     }
 
-    for (std::thread& my_thread : threads)
+    for (const auto& my_future : future_results)
     {
-        my_thread.join();
+        my_future.wait();
     }
 
-    for (uint32_t& result : results)
+    for (auto& my_future : future_results)
     {
-        std::cout << result << "\n";
+        std::cout << my_future.get() << "\n";
     }
 }
