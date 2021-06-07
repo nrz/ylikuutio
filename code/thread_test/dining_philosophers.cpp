@@ -39,7 +39,7 @@ class Random
             std::srand(std::time(nullptr)); // Use current time as seed.
         }
 
-        float get_random()
+        float get_random() const
         {
             float dividend = static_cast<float>(std::rand() % 10000);
             float divisor = static_cast<float>(std::rand() % 10000);
@@ -71,26 +71,26 @@ class Philosopher
             id { id }
         {
             // constructor.
-            const std::lock_guard<std::mutex> lock(this->messenger.my_mutex);
+            const std::lock_guard<std::mutex> messenger_lock(this->messenger.my_mutex);
             std::cout << "Philosopher " << this->id << " says hello!\n";
         }
 
-        void eat()
+        void eat() const
         {
-            std::scoped_lock fork_lock(this->left_fork.my_mutex, this->right_fork.my_mutex);
+            const std::scoped_lock fork_lock(this->left_fork.my_mutex, this->right_fork.my_mutex);
             float eat_time = 0.0f;
             {
                 const std::lock_guard<std::mutex> random_lock(this->random.my_mutex);
                 eat_time = this->random.get_random();
             }
             {
-                const std::lock_guard<std::mutex> lock(this->messenger.my_mutex);
+                const std::lock_guard<std::mutex> messenger_lock(this->messenger.my_mutex);
                 std::cout << "Philosopher " << this->id << " is eating for " << eat_time << " seconds...\n";
             }
             std::this_thread::sleep_for(std::chrono::duration<float>(eat_time));
         }
 
-        void think()
+        void think() const
         {
             float think_time = 0.0f;
             {
@@ -98,13 +98,13 @@ class Philosopher
                 think_time = this->random.get_random();
             }
             {
-                const std::lock_guard<std::mutex> lock(this->messenger.my_mutex);
+                const std::lock_guard<std::mutex> messenger_lock(this->messenger.my_mutex);
                 std::cout << "Philosopher " << this->id << " is thinking for " << think_time << " seconds...\n";
             }
             std::this_thread::sleep_for(std::chrono::duration<float>(think_time));
         }
 
-        void philosophize()
+        void philosophize() const
         {
             while (true)
             {
