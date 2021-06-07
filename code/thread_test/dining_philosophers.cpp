@@ -71,7 +71,7 @@ class Philosopher
             id { id }
         {
             // constructor.
-            const std::lock_guard<std::mutex> lock(this->messenger.my_mutex);
+            const std::lock_guard<std::mutex> messenger_lock(this->messenger.my_mutex);
             std::cout << "Philosopher " << this->id << " says hello!\n";
         }
 
@@ -84,7 +84,7 @@ class Philosopher
                 eat_time = this->random.get_random();
             }
             {
-                const std::lock_guard<std::mutex> lock(this->messenger.my_mutex);
+                const std::lock_guard<std::mutex> messenger_lock(this->messenger.my_mutex);
                 std::cout << "Philosopher " << this->id << " is eating for " << eat_time << " seconds...\n";
             }
             std::this_thread::sleep_for(std::chrono::duration<float>(eat_time));
@@ -98,7 +98,7 @@ class Philosopher
                 think_time = this->random.get_random();
             }
             {
-                const std::lock_guard<std::mutex> lock(this->messenger.my_mutex);
+                const std::lock_guard<std::mutex> messenger_lock(this->messenger.my_mutex);
                 std::cout << "Philosopher " << this->id << " is thinking for " << think_time << " seconds...\n";
             }
             std::this_thread::sleep_for(std::chrono::duration<float>(think_time));
