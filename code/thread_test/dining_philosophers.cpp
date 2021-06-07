@@ -77,7 +77,7 @@ class Philosopher
 
         void eat() const
         {
-            std::scoped_lock fork_lock(this->left_fork.my_mutex, this->right_fork.my_mutex);
+            const std::scoped_lock fork_lock(this->left_fork.my_mutex, this->right_fork.my_mutex);
             float eat_time = 0.0f;
             {
                 const std::lock_guard<std::mutex> random_lock(this->random.my_mutex);
