@@ -48,14 +48,12 @@
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/text_2d.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/variable_struct.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
-#include "code/ylikuutio/ontology/world_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
@@ -266,21 +264,6 @@ namespace yli_edit
 
                 std::cout << "Setting up console ...\n";
                 yli::snippets::set_console(my_universe, 15, 0, 0, 39);
-
-                // Create the `World`.
-
-                yli::ontology::WorldStruct earth_world_struct;
-                earth_world_struct.global_name = "earth_world";
-
-                std::cout << "Creating yli::ontology::Entity* earth_world_entity ...\n";
-                yli::ontology::Entity* const earth_world_entity = entity_factory->create_world(earth_world_struct);
-                std::cout << "Creating yli::ontology::World* earth_world ...\n";
-                yli::ontology::World* const earth_world = dynamic_cast<yli::ontology::World*>(earth_world_entity);
-
-                if (earth_world == nullptr)
-                {
-                    return false;
-                }
 
                 std::cout << "Creating yli::ontology::Entity* my_font_2d_entity ...\n";
 

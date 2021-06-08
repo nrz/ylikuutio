@@ -37,11 +37,13 @@ namespace yli::ontology
 
     std::size_t World::get_number_of_children() const
     {
-        return this->parent_of_scenes.get_number_of_children();
+        return 0; // `World` has no children.
+        // TODO: add children!
     }
 
     std::size_t World::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_scenes.child_pointer_vector);
+        return 0; // `World` has no children.
+        // TODO: add children!
     }
 }

@@ -35,9 +35,7 @@
 
 // `yli::ontology` files included in the canonical order.
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/world_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
@@ -112,26 +110,12 @@ namespace gpgpu_test
                     return false;
                 }
 
-                // Create the `World`.
-
-                yli::ontology::WorldStruct world_struct;
-
-                std::cout << "Creating yli::ontology::Entity* gpgpu_test_world_entity ...\n";
-                yli::ontology::Entity* const gpgpu_test_world_entity = entity_factory->create_world(world_struct);
-                std::cout << "Creating yli::ontology::World* gpgpu_test_world ...\n";
-                yli::ontology::World* const gpgpu_test_world = dynamic_cast<yli::ontology::World*>(gpgpu_test_world_entity);
-
-                if (gpgpu_test_world == nullptr)
-                {
-                    return false;
-                }
-
                 // Create the `Scene`s.
 
                 // GPGPU test `Scene` begins here.
 
                 std::cout << "Creating yli::ontology::Entity* gpgpu_test_scene_entity and its contents ...\n";
-                yli::ontology::Entity* const gpgpu_test_scene_entity = gpgpu_test::create_gpgpu_test_scene(entity_factory, gpgpu_test_world);
+                yli::ontology::Entity* const gpgpu_test_scene_entity = gpgpu_test::create_gpgpu_test_scene(entity_factory);
 
                 if (gpgpu_test_scene_entity == nullptr)
                 {

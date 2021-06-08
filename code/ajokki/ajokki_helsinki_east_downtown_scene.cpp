@@ -59,20 +59,18 @@ namespace yli
 {
     namespace ontology
     {
-        class World;
         class Entity;
     }
 }
 
 namespace ajokki
 {
-    yli::ontology::Entity* create_helsinki_east_downtown_scene(yli::ontology::EntityFactory* entity_factory, yli::ontology::World* const world)
+    yli::ontology::Entity* create_helsinki_east_downtown_scene(yli::ontology::EntityFactory* const entity_factory)
     {
         // Helsinki `Scene` begins here.
 
         std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_scene_entity ...\n";
         yli::ontology::SceneStruct scene_struct;
-        scene_struct.world = world;
         scene_struct.global_name = "helsinki_east_downtown_scene";
         scene_struct.local_name = "helsinki";
         scene_struct.water_level = 0.9f;
