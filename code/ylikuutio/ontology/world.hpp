@@ -20,7 +20,6 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "parent_module.hpp"
 #include "world_struct.hpp"
 
 // Include standard headers
@@ -77,6 +76,7 @@
 
 namespace yli::ontology
 {
+    class ParentModule;
     class Universe;
 
     class World: public yli::ontology::Entity
@@ -87,8 +87,7 @@ namespace yli::ontology
                     const yli::ontology::WorldStruct& world_struct,
                     yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, world_struct),
-                child_of_universe(parent_module, this),
-                parent_of_scenes(this, &this->registry, "scenes")
+                child_of_universe(parent_module, this)
             {
                 // constructor.
 
@@ -106,7 +105,6 @@ namespace yli::ontology
             yli::ontology::Entity* get_parent() const override;
 
             yli::ontology::ChildModule child_of_universe;
-            yli::ontology::ParentModule parent_of_scenes;
 
         private:
             std::size_t get_number_of_children() const override;

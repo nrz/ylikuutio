@@ -72,7 +72,6 @@ namespace yli::data
 namespace yli::ontology
 {
     class Universe;
-    class World;
     class Shader;
     class Species;
     class Symbiosis;
@@ -85,16 +84,12 @@ namespace yli::ontology
 
             void unbind_shader(const std::size_t childID, const std::string& local_name);
 
-            // This method sets pointer to this `Scene` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `World`.
-            void bind_to_new_world_parent(yli::ontology::World* const new_parent);
-            void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
-
             Scene(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::SceneStruct& scene_struct,
                     yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, scene_struct),
-                child_of_world(parent_module, this),
+                child_of_universe(parent_module, this),
                 parent_of_default_camera(this, &this->registry, "default_camera"),
                 parent_of_cameras(this, &this->registry, "cameras"),
                 parent_of_brains(this, &this->registry, "brains"),
@@ -181,7 +176,7 @@ namespace yli::ontology
             bool get_is_flight_mode_in_use() const;
             void set_is_flight_mode_in_use(const bool is_flight_mode_in_use);
 
-            yli::ontology::ChildModule child_of_world;
+            yli::ontology::ChildModule child_of_universe;
             yli::ontology::ParentModule parent_of_default_camera;
             yli::ontology::ParentModule parent_of_cameras;
             yli::ontology::ParentModule parent_of_brains;

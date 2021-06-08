@@ -22,7 +22,6 @@ namespace yli
 {
     namespace ontology
     {
-        class World;
         class Entity;
         class EntityFactory;
     }
@@ -30,7 +29,7 @@ namespace yli
 
 namespace ajokki
 {
-    yli::ontology::Entity* create_altiplano_scene(yli::ontology::EntityFactory* entity_factory, yli::ontology::World* const world);
+    yli::ontology::Entity* create_altiplano_scene(yli::ontology::EntityFactory* const entity_factory);
 }
 
 #endif

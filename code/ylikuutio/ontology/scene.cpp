@@ -26,7 +26,6 @@
 
 #include "scene.hpp"
 #include "universe.hpp"
-#include "world.hpp"
 #include "shader.hpp"
 #include "material.hpp"
 #include "species.hpp"
@@ -77,62 +76,6 @@ namespace yli::ontology
                 this->free_shaderID_queue,
                 this->number_of_shaders,
                 this->registry);
-    }
-
-    void Scene::bind_to_new_world_parent(yli::ontology::World* const new_parent)
-    {
-        // This method sets pointer to this `Scene` to `nullptr`, sets `parent` according to the input,
-        // and requests a new `childID` from the new `World`.
-        //
-        // requirements:
-        // `this->parent` must not be `nullptr`.
-        // `new_parent` must not be `nullptr`.
-
-        yli::ontology::Entity* const world = this->child_of_world.get_parent();
-
-        if (world == nullptr)
-        {
-            std::cerr << "ERROR: `Scene::bind_to_new_world_parent`: `world` is `nullptr`!\n";
-            return;
-        }
-
-        if (new_parent == nullptr)
-        {
-            std::cerr << "ERROR: `Scene::bind_to_new_world_parent`: `new_parent` is `nullptr`!\n";
-            return;
-        }
-
-        if (new_parent->has_child(this->local_name))
-        {
-            std::cerr << "ERROR: `Scene::bind_to_new_world_parent`: local name is already in use!\n";
-            return;
-        }
-
-        // Unbind from the old parent `World`.
-        this->child_of_world.unbind_child();
-
-        // Get `childID` from `World` and set pointer to this `Scene`.
-        this->child_of_world.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_scenes);
-    }
-
-    void Scene::bind_to_new_parent(yli::ontology::Entity* const new_parent)
-    {
-        // this method sets pointer to this `Scene` to `nullptr`, sets `parent` according to the input,
-        // and requests a new `childID` from the new `World`.
-        //
-        // requirements:
-        // `this->parent` must not be `nullptr`.
-        // `new_parent` must not be `nullptr`.
-
-        yli::ontology::World* const world = dynamic_cast<yli::ontology::World*>(new_parent);
-
-        if (world == nullptr)
-        {
-            std::cerr << "ERROR: `Scene::bind_to_new_parent`: `new_parent` is not `yli::ontology::World*`!\n";
-            return;
-        }
-
-        this->bind_to_new_world_parent(world);
     }
 
     Scene::~Scene()
@@ -277,7 +220,7 @@ namespace yli::ontology
         if (active_scene == this && camera != nullptr)
         {
             // OK, the newly activated `Camera` is not `nullptr`,
-            // and this is the active `Scene` in the active `World`.
+            // and this is the active `Scene` in the active `Universe`.
             // Copy `Camera`'s coordinates and angles to the `Universe`.
             this->universe->current_camera_cartesian_coordinates = camera->get_cartesian_coordinates();
             this->universe->current_camera_yaw = camera->get_yaw();
@@ -287,7 +230,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* Scene::get_parent() const
     {
-        return this->child_of_world.get_parent();
+        return this->child_of_universe.get_parent();
     }
 
     std::size_t Scene::get_number_of_children() const

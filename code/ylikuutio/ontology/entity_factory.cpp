@@ -144,10 +144,19 @@ namespace yli::ontology
         yli::ontology::Entity* scene_entity = new yli::ontology::Scene(
                 this->universe,
                 scene_struct,
-                (scene_struct.world == nullptr ? nullptr : &scene_struct.world->parent_of_scenes));
+                (this->universe == nullptr ? nullptr : &this->universe->parent_of_scenes));
 
-        scene_entity->set_global_name(scene_struct.global_name);
-        scene_entity->set_local_name(scene_struct.local_name);
+        if (!scene_struct.global_name.empty() && scene_struct.local_name.empty())
+        {
+            // Only `global_name` given, OK.
+            scene_entity->set_global_name(scene_struct.global_name);
+        }
+        else if (scene_struct.global_name.empty() && !scene_struct.local_name.empty())
+        {
+            // Only `local_name` given, OK.
+            scene_entity->set_local_name(scene_struct.local_name);
+        }
+
         return scene_entity;
     }
 

@@ -23,13 +23,10 @@
 
 namespace yli::ontology
 {
-    class World;
-
     struct SceneStruct: public yli::ontology::EntityStruct
     {
         CameraStruct default_camera_struct; // parameters of the default `Camera`.
 
-        yli::ontology::World* world { nullptr }; // pointer to `World` object.
         float gravity { 9.81f / 60.0f };         // Default gravity: Earth gravity, 9.81 m/s^2.
                                                  // In Bullet, gravity is a feature of `btDiscreteDynamicsWorld` & `btSoftRigidDynamicsWorld`
                                                  // (`btSoftRigidDynamicsWorld` inherits `btDiscreteDynamicsWorld`).

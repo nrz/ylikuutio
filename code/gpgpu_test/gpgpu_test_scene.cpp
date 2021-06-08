@@ -47,19 +47,17 @@ namespace yli
 {
     namespace ontology
     {
-        class World;
         class Entity;
     }
 }
 
 namespace gpgpu_test
 {
-    yli::ontology::Entity* create_gpgpu_test_scene(yli::ontology::EntityFactory* entity_factory, yli::ontology::World* const world)
+    yli::ontology::Entity* create_gpgpu_test_scene(yli::ontology::EntityFactory* const entity_factory)
     {
         // GPGPU test `Scene` begins here.
         std::cout << "Creating yli::ontology::Entity* gpgpu_test_scene_entity ...\n";
         yli::ontology::SceneStruct scene_struct;
-        scene_struct.world = world;
         yli::ontology::Entity* const gpgpu_test_scene_entity = entity_factory->create_scene(scene_struct);
         std::cout << "Creating yli::ontology::Scene* gpgpu_test_scene ...\n";
         yli::ontology::Scene* const gpgpu_test_scene = dynamic_cast<yli::ontology::Scene*>(gpgpu_test_scene_entity);

@@ -50,14 +50,12 @@
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/text_2d.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/variable_struct.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
-#include "code/ylikuutio/ontology/world_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
@@ -271,34 +269,6 @@ namespace tulevaisuus
                 std::cout << "Setting up console ...\n";
                 yli::snippets::set_console(my_universe, 15, 0, 0, 39);
 
-                // Create the `World`.
-
-                yli::ontology::WorldStruct earth_world_struct;
-                earth_world_struct.global_name = "earth_world";
-
-                std::cout << "Creating yli::ontology::Entity* earth_world_entity ...\n";
-                yli::ontology::Entity* const earth_world_entity = entity_factory->create_world(earth_world_struct);
-                std::cout << "Creating yli::ontology::World* earth_world ...\n";
-                yli::ontology::World* const earth_world = dynamic_cast<yli::ontology::World*>(earth_world_entity);
-
-                if (earth_world == nullptr)
-                {
-                    return false;
-                }
-
-                yli::ontology::WorldStruct mars_world_struct;
-                mars_world_struct.global_name = "mars_world";
-
-                std::cout << "Creating yli::ontology::Entity* mars_world_entity ...\n";
-                yli::ontology::Entity* const mars_world_entity = entity_factory->create_world(mars_world_struct);
-                std::cout << "Creating yli::ontology::World* mars_world ...\n";
-                yli::ontology::World* const mars_world = dynamic_cast<yli::ontology::World*>(mars_world_entity);
-
-                if (mars_world == nullptr)
-                {
-                    return false;
-                }
-
                 // Create the `Scene`s.
                 // The `Scene`s will be created in the following order:
                 // 1. Helsinki
@@ -306,7 +276,7 @@ namespace tulevaisuus
                 // Helsinki `Scene` begins here.
 
                 std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_scene_entity and its contents ...\n";
-                yli::ontology::Entity* const helsinki_east_downtown_scene_entity = ajokki::create_helsinki_east_downtown_scene(entity_factory, earth_world);
+                yli::ontology::Entity* const helsinki_east_downtown_scene_entity = ajokki::create_helsinki_east_downtown_scene(entity_factory);
 
                 if (helsinki_east_downtown_scene_entity == nullptr)
                 {
