@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/ylikuutio/file/file_loader.hpp"
 #include "code/ylikuutio/load/fbx_species_loader.hpp"
 #include "code/ylikuutio/load/fbx_species_loader.cpp"
 
