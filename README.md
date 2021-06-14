@@ -108,6 +108,8 @@ to compile tests, in CMakeLists.txt comment out the line that says:
 `set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)`
 
 #### MacOS
+MacOS 10.14 or newer is needed for compiling in MacOS.
+
 Install command line building tools:
 
     $ gcc
