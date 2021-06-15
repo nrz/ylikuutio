@@ -34,8 +34,6 @@
 
 namespace yli::ontology
 {
-    class Species;
-
     Material::~Material()
     {
         if (!this->is_symbiont_material)
@@ -154,24 +152,6 @@ namespace yli::ontology
         }
 
         std::cerr << "ERROR: `Material::bind_to_new_parent`: `new_parent` is not `yli::ontology::Shader*`!\n";
-    }
-
-    void Material::set_terrain_species(yli::ontology::Species* const terrain_species)
-    {
-        // Requirements:
-        // `this->is_symbiont_material` must be `false`.
-
-        if (this->is_symbiont_material)
-        {
-            return;
-        }
-
-        yli::ontology::Shader* const shader_parent = static_cast<yli::ontology::Shader*>(this->child_of_shader_or_symbiosis.get_parent());
-
-        if (shader_parent != nullptr)
-        {
-            shader_parent->set_terrain_species(terrain_species);
-        }
     }
 
     const std::string& Material::get_texture_file_format() const

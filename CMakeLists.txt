@@ -751,8 +751,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/glyph_object_creation.cpp
     code/ylikuutio/ontology/glyph_object_creation.hpp
     code/ylikuutio/ontology/glyph_struct.hpp
-    code/ylikuutio/ontology/ground_level.cpp
-    code/ylikuutio/ontology/ground_level.hpp
     code/ylikuutio/ontology/holobiont.cpp
     code/ylikuutio/ontology/holobiont.hpp
     code/ylikuutio/ontology/holobiont_struct.hpp

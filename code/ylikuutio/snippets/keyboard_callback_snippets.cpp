@@ -396,7 +396,6 @@ namespace yli::snippets
             }
 
             scene->set_is_flight_mode_in_use(!scene->get_is_flight_mode_in_use());
-            scene->set_fall_speed(0.0f);
             universe->can_toggle_flight_mode = false;
         }
         return nullptr;

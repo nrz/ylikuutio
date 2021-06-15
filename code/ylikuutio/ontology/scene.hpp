@@ -73,7 +73,6 @@ namespace yli::ontology
 {
     class Universe;
     class Shader;
-    class Species;
     class Symbiosis;
     class RigidBody;
 
@@ -97,7 +96,6 @@ namespace yli::ontology
             {
                 // constructor.
                 this->gravity     = scene_struct.gravity;
-                this->fall_speed  = scene_struct.gravity;
                 this->water_level = scene_struct.water_level;
 
                 this->is_flight_mode_in_use = scene_struct.is_flight_mode_in_use;
@@ -160,16 +158,8 @@ namespace yli::ontology
 
             float get_gravity() const;
             void set_gravity(const float gravity);
-            float get_fall_speed() const;
-            void set_fall_speed(const float fall_speed);
 
             void add_rigid_body(yli::ontology::RigidBody* const rigid_body);
-
-            yli::ontology::Species* get_terrain_species() const;
-
-            // set terrain `Species` pointers in `Scene` and `Universe` so that they point to the chosen terrain `Species`.
-            // currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
-            void set_terrain_species(yli::ontology::Species* const terrain_species);
 
             float get_water_level() const;
 
@@ -205,8 +195,6 @@ namespace yli::ontology
 
             yli::ontology::Camera* active_camera { nullptr };
 
-            yli::ontology::Species* terrain_species { nullptr }; // pointer to terrain `Species` (used in collision detection).
-
             // Variables related to location and orientation.
 
             // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
@@ -232,7 +220,6 @@ namespace yli::ontology
 
             // Variables related to physics.
             float gravity;
-            float fall_speed;
 
             float water_level;
 

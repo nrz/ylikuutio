@@ -40,8 +40,6 @@
 
 namespace yli::ontology
 {
-    class Species;
-
     class Material: public yli::ontology::Entity
     {
         public:
@@ -111,10 +109,6 @@ namespace yli::ontology
             virtual ~Material();
 
             yli::ontology::Entity* get_parent() const override;
-
-            // Set terrain `Species` pointers in `Scene` and `Universe` so that they point to the chosen terrain `Species`.
-            // Currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
-            void set_terrain_species(yli::ontology::Species* const terrain_species);
 
             const std::string& get_texture_file_format() const;
             const std::string& get_texture_filename() const;

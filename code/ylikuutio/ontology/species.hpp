@@ -22,7 +22,6 @@
 #include "universe.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
-#include "material.hpp"
 #include "species_struct.hpp"
 #include "code/ylikuutio/load/species_loader.hpp"
 #include "code/ylikuutio/load/species_loader_struct.hpp"
@@ -44,6 +43,7 @@
 namespace yli::ontology
 {
     class Entity;
+    class Material;
     class ParentModule;
 
     class Species: public yli::ontology::Model
@@ -94,18 +94,6 @@ namespace yli::ontology
                         // Get a handle for our "LightPosition" uniform.
                         glUseProgram(species_struct.shader->get_program_id());
                         this->light_id = glGetUniformLocation(species_struct.shader->get_program_id(), "light_position_worldspace");
-                    }
-
-                    if (this->is_terrain)
-                    {
-                        // set terrain `Species` pointer so that it points to this `Species`.
-                        // currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
-                        yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(this->child.get_parent());
-
-                        if (material != nullptr)
-                        {
-                            material->set_terrain_species(this);
-                        }
                     }
 
                     if (!is_headless && this->opengl_in_use)
