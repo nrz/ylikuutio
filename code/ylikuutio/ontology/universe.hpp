@@ -410,7 +410,7 @@ namespace yli::ontology
             void render_without_changing_depth_test();
 
             // This method sets the active `Scene`.
-            void set_active_scene(yli::ontology::Scene* const world);
+            void set_active_scene(yli::ontology::Scene* const scene);
 
             // This method sets the active `Camera`.
             // Setting the active `Camera` does not change the active `Scene`!
