@@ -28,11 +28,9 @@
 #include "universe.hpp"
 #include "shader.hpp"
 #include "material.hpp"
-#include "species.hpp"
 #include "camera.hpp"
 #include "brain.hpp"
 #include "rigid_body.hpp"
-#include "ground_level.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/data/pi.hpp"
@@ -96,37 +94,12 @@ namespace yli::ontology
 
     void Scene::do_physics()
     {
-        // Coordinates are stored in `Universe`,
-        // but gravity and fall speed are stored in `Scene`.
-        // Therefore, coordinates exist even in a void without any `Scene`.
-
         if (this->universe == nullptr)
         {
             return;
         }
 
-        if (!this->is_flight_mode_in_use)
-        {
-            // Accelerate and fall.
-
-            this->fall_speed += this->gravity;
-            this->universe->current_camera_cartesian_coordinates.y -= this->fall_speed;
-
-            // Adjust position according to the ground.
-
-            if (this->terrain_species != nullptr)
-            {
-                float ground_y = yli::ontology::get_floor_level(
-                        this->terrain_species,
-                        this->universe->current_camera_cartesian_coordinates);
-
-                if (!std::isnan(ground_y) && this->universe->current_camera_cartesian_coordinates.y < ground_y)
-                {
-                    this->universe->current_camera_cartesian_coordinates.y = ground_y;
-                    this->fall_speed = 0.0f;
-                }
-            }
-        }
+        // TODO: implement physics using Bullet!
     }
 
     void Scene::act()
@@ -303,16 +276,6 @@ namespace yli::ontology
         this->gravity = gravity;
     }
 
-    float Scene::get_fall_speed() const
-    {
-        return this->fall_speed;
-    }
-
-    void Scene::set_fall_speed(const float fall_speed)
-    {
-        this->fall_speed = fall_speed;
-    }
-
     void Scene::add_rigid_body(yli::ontology::RigidBody* const rigid_body)
     {
         if (rigid_body == nullptr)
@@ -328,39 +291,6 @@ namespace yli::ontology
         }
 
         this->dynamics_world->addRigidBody(rigid_body->get_bullet_rigid_body());
-    }
-
-    yli::ontology::Species* Scene::get_terrain_species() const
-    {
-        if (this->universe != nullptr &&
-                this == this->universe->get_active_scene())
-        {
-            return this->terrain_species;
-        }
-
-        return nullptr;
-    }
-
-    void Scene::set_terrain_species(yli::ontology::Species* const terrain_species)
-    {
-        yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(terrain_species->get_parent());
-
-        if (material == nullptr)
-        {
-            return;
-        }
-
-        yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(material->get_parent());
-
-        if (shader == nullptr)
-        {
-            return;
-        }
-
-        if (shader->get_parent() == this)
-        {
-            this->terrain_species = terrain_species;
-        }
     }
 
     float Scene::get_water_level() const

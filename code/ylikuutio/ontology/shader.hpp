@@ -43,7 +43,6 @@
 namespace yli::ontology
 {
     class Scene;
-    class Species;
     class ShaderCompare;
 
     class Shader: public yli::ontology::Entity
@@ -102,10 +101,6 @@ namespace yli::ontology
             virtual ~Shader();
 
             yli::ontology::Entity* get_parent() const override;
-
-            // Set terrain `Species` pointers in `Scene` and `Universe` so that they point to the chosen terrain `Species`.
-            // Currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
-            void set_terrain_species(yli::ontology::Species* terrain_species);
 
             GLuint get_program_id() const;
             GLint get_matrix_id() const;

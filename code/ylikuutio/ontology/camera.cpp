@@ -27,7 +27,6 @@
 #include "camera.hpp"
 #include "entity.hpp"
 #include "scene.hpp"
-#include "ground_level.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM

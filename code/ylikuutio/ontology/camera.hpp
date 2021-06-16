@@ -41,7 +41,6 @@
 // TODO: in the future, each `Scene` knows the coordinates and the angles.
 //
 // When the description below does not specifically say otherwise:
-// * "active `Scene`" refers to the active `Scene` of the active `World`.
 // * "active `Camera`" refers to the active `Camera` of the active `Scene`.
 //
 // When a `Camera` is activated:
@@ -58,9 +57,7 @@
 // 1. If there is an active `Camera` in the current `Scene` and the `Camera`
 //    is not static view `Camera`, then the coordinates and angles are
 //    copied from the `Universe` to the `Camera`.
-// 2. The `Scene` is marked as the active `Scene` of its parent `World`.
-// 3. The parent `World` is marked as the active `World` of the `Universe`.
-// 4. If the newly activated `Scene` has an activated `Camera`, then
+// 2. If the newly activated `Scene` has an activated `Camera`, then
 //    the coordinates and angles of that `Camera` are copied to the `Universe`.
 //
 // When a `Camera` is deleted:

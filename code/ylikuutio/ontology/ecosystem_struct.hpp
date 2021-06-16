@@ -15,35 +15,16 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "world.hpp"
-#include "family_templates.hpp"
+#ifndef __YLIKUUTIO_ONTOLOGY_ECOSYSTEM_STRUCT_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_ECOSYSTEM_STRUCT_HPP_INCLUDED
 
-// Include standard headers
-#include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
+#include "entity_struct.hpp"
 
 namespace yli::ontology
 {
-    World::~World()
+    struct EcosystemStruct: public yli::ontology::EntityStruct
     {
-        // destructor.
-        std::cout << "This `World` will be destroyed.\n";
-    }
-
-    yli::ontology::Entity* World::get_parent() const
-    {
-        return this->child_of_universe.get_parent();
-    }
-
-    std::size_t World::get_number_of_children() const
-    {
-        return 0; // `World` has no children.
-        // TODO: add children!
-    }
-
-    std::size_t World::get_number_of_descendants() const
-    {
-        return 0; // `World` has no children.
-        // TODO: add children!
-    }
+    };
 }
+
+#endif

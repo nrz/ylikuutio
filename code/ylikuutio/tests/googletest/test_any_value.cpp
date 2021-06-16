@@ -19,6 +19,31 @@
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/any_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/ecosystem.hpp"
+#include "code/ylikuutio/ontology/scene.hpp"
+#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/material.hpp"
+#include "code/ylikuutio/ontology/species.hpp"
+#include "code/ylikuutio/ontology/object.hpp"
+#include "code/ylikuutio/ontology/symbiosis.hpp"
+#include "code/ylikuutio/ontology/symbiont_material.hpp"
+#include "code/ylikuutio/ontology/symbiont_species.hpp"
+#include "code/ylikuutio/ontology/holobiont.hpp"
+#include "code/ylikuutio/ontology/biont.hpp"
+#include "code/ylikuutio/ontology/font_2d.hpp"
+#include "code/ylikuutio/ontology/text_2d.hpp"
+#include "code/ylikuutio/ontology/vector_font.hpp"
+#include "code/ylikuutio/ontology/glyph.hpp"
+#include "code/ylikuutio/ontology/text_3d.hpp"
+#include "code/ylikuutio/ontology/console.hpp"
+#include "code/ylikuutio/ontology/compute_task.hpp"
+
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
@@ -632,17 +657,17 @@ TEST(any_value_must_be_initialized_appropriately, universe)
     ASSERT_EQ(universe_any_value.get_entity_pointer(), (yli::ontology::Entity*) universe);
 }
 
-TEST(any_value_must_be_initialized_appropriately, world)
+TEST(any_value_must_be_initialized_appropriately, ecosystem)
 {
-    yli::ontology::World* world = static_cast<yli::ontology::World*>((void*) 0xdeadbeef);
-    yli::data::AnyValue world_any_value = yli::data::AnyValue(world);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::World*>(world_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::World*>(world_any_value.data), world);
-    ASSERT_EQ(std::strlen(world_any_value.get_datatype().c_str()), std::strlen("yli::ontology::World*"));
-    ASSERT_EQ(std::strcmp(world_any_value.get_datatype().c_str(), "yli::ontology::World*"), 0);
-    ASSERT_EQ(std::strlen(world_any_value.get_string().c_str()), std::strlen("deadbeef"));
-    ASSERT_EQ(std::strcmp(world_any_value.get_string().c_str(), "deadbeef"), 0);
-    ASSERT_EQ(world_any_value.get_entity_pointer(), (yli::ontology::Entity*) world);
+    yli::ontology::Ecosystem* ecosystem = static_cast<yli::ontology::Ecosystem*>((void*) 0xdeadbeef);
+    yli::data::AnyValue ecosystem_any_value = yli::data::AnyValue(ecosystem);
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Ecosystem*>(ecosystem_any_value.data));
+    ASSERT_EQ(std::get<yli::ontology::Ecosystem*>(ecosystem_any_value.data), ecosystem);
+    ASSERT_EQ(std::strlen(ecosystem_any_value.get_datatype().c_str()), std::strlen("yli::ontology::Ecosystem*"));
+    ASSERT_EQ(std::strcmp(ecosystem_any_value.get_datatype().c_str(), "yli::ontology::Ecosystem*"), 0);
+    ASSERT_EQ(std::strlen(ecosystem_any_value.get_string().c_str()), std::strlen("deadbeef"));
+    ASSERT_EQ(std::strcmp(ecosystem_any_value.get_string().c_str(), "deadbeef"), 0);
+    ASSERT_EQ(ecosystem_any_value.get_entity_pointer(), (yli::ontology::Entity*) ecosystem);
 }
 
 TEST(any_value_must_be_initialized_appropriately, scene)

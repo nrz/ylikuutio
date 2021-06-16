@@ -28,7 +28,7 @@ namespace yli::ontology
     class Entity;
     class Universe;
     struct VariableStruct;
-    struct WorldStruct;
+    struct EcosystemStruct;
     struct SceneStruct;
     struct ShaderStruct;
     struct MaterialStruct;
@@ -61,7 +61,7 @@ namespace yli::ontology
             yli::ontology::Universe* get_universe() const;
 
             yli::ontology::Entity* create_variable(const yli::ontology::VariableStruct& variable_struct) const;
-            yli::ontology::Entity* create_world(const yli::ontology::WorldStruct& world_struct) const;
+            yli::ontology::Entity* create_ecosystem(const yli::ontology::EcosystemStruct& ecosystem_struct) const;
             yli::ontology::Entity* create_scene(const yli::ontology::SceneStruct& scene_struct) const;
             yli::ontology::Entity* create_shader(const yli::ontology::ShaderStruct& shader_struct) const;
             yli::ontology::Entity* create_material(const yli::ontology::MaterialStruct& material_struct) const;

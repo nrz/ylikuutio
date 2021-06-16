@@ -47,7 +47,7 @@ namespace yli::ontology
     class Entity;
     class Movable;
     class Universe;
-    class World;
+    class Ecosystem;
     class Scene;
     class Shader;
     class Material;
@@ -135,9 +135,9 @@ namespace yli::data
         {
             return "yli::ontology::Universe*";
         }
-        else if (std::holds_alternative<yli::ontology::World*>(this->data))
+        else if (std::holds_alternative<yli::ontology::Ecosystem*>(this->data))
         {
-            return "yli::ontology::World*";
+            return "yli::ontology::Ecosystem*";
         }
         else if (std::holds_alternative<yli::ontology::Scene*>(this->data))
         {
@@ -344,9 +344,9 @@ namespace yli::data
         {
             any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Universe*>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<yli::ontology::World*>(this->data))
+        else if (std::holds_alternative<yli::ontology::Ecosystem*>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::World*>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (uint64_t) std::get<yli::ontology::Ecosystem*>(this->data) << std::dec;
         }
         else if (std::holds_alternative<yli::ontology::Scene*>(this->data))
         {
@@ -617,9 +617,9 @@ namespace yli::data
         {
             return nullptr; // Conversion which loses constness is not supported.
         }
-        else if (std::holds_alternative<yli::ontology::World*>(this->data))
+        else if (std::holds_alternative<yli::ontology::Ecosystem*>(this->data))
         {
-            return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::World*>(this->data)));
+            return static_cast<yli::ontology::Entity*>(static_cast<void*>(std::get<yli::ontology::Ecosystem*>(this->data)));
         }
         else if (std::holds_alternative<yli::ontology::Scene*>(this->data))
         {
@@ -893,7 +893,7 @@ namespace yli::data
             this->data = static_cast<yli::ontology::Universe*>(void_pointer);
             return true;
         }
-        else if (std::holds_alternative<yli::ontology::World*>(this->data))
+        else if (std::holds_alternative<yli::ontology::Ecosystem*>(this->data))
         {
             if (!yli::string::check_if_unsigned_integer_string(value_string))
             {
@@ -902,7 +902,7 @@ namespace yli::data
 
             value_stringstream << value_string;
             value_stringstream >> void_pointer;
-            this->data = static_cast<yli::ontology::World*>(void_pointer);
+            this->data = static_cast<yli::ontology::Ecosystem*>(void_pointer);
             return true;
         }
         else if (std::holds_alternative<yli::ontology::Scene*>(this->data))
@@ -1227,7 +1227,7 @@ namespace yli::data
                 yli::ontology::Movable*,
                 const yli::ontology::Movable*,
                 yli::ontology::Universe*,
-                yli::ontology::World*,
+                yli::ontology::Ecosystem*,
                 yli::ontology::Scene*,
                 yli::ontology::Shader*,
                 yli::ontology::Material*,
@@ -1360,8 +1360,8 @@ namespace yli::data
         // constructor.
     }
 
-    AnyValue::AnyValue(yli::ontology::World* const world_pointer)
-        : data(world_pointer)
+    AnyValue::AnyValue(yli::ontology::Ecosystem* const ecosystem_pointer)
+        : data(ecosystem_pointer)
     {
         // constructor.
     }

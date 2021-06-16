@@ -751,8 +751,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/glyph_object_creation.cpp
     code/ylikuutio/ontology/glyph_object_creation.hpp
     code/ylikuutio/ontology/glyph_struct.hpp
-    code/ylikuutio/ontology/ground_level.cpp
-    code/ylikuutio/ontology/ground_level.hpp
     code/ylikuutio/ontology/holobiont.cpp
     code/ylikuutio/ontology/holobiont.hpp
     code/ylikuutio/ontology/holobiont_struct.hpp
@@ -840,9 +838,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/vertex_graph.hpp
     code/ylikuutio/ontology/vertex_node.cpp
     code/ylikuutio/ontology/vertex_node.hpp
-    code/ylikuutio/ontology/world.cpp
-    code/ylikuutio/ontology/world.hpp
-    code/ylikuutio/ontology/world_struct.hpp
+    code/ylikuutio/ontology/ecosystem.cpp
+    code/ylikuutio/ontology/ecosystem.hpp
+    code/ylikuutio/ontology/ecosystem_struct.hpp
 
     # opengl, in alphabetical order
     code/ylikuutio/opengl/opengl.cpp
@@ -1228,9 +1226,9 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/universe_struct.hpp
         code/ylikuutio/ontology/variable_struct.hpp
         code/ylikuutio/ontology/vector_font_struct.hpp
-        code/ylikuutio/ontology/world.cpp
-        code/ylikuutio/ontology/world.hpp
-        code/ylikuutio/ontology/world_struct.hpp
+        code/ylikuutio/ontology/ecosystem.cpp
+        code/ylikuutio/ontology/ecosystem.hpp
+        code/ylikuutio/ontology/ecosystem_struct.hpp
         code/ylikuutio/string/ylikuutio_string.cpp
         code/ylikuutio/string/ylikuutio_string.hpp
         code/ylikuutio/triangulation/face_normals.cpp

@@ -33,8 +33,6 @@
 
 namespace yli::ontology
 {
-    class Species;
-
     void Shader::bind_to_parent()
     {
         // Requirements:
@@ -193,15 +191,5 @@ namespace yli::ontology
     GLint Shader::get_model_matrix_id() const
     {
         return this->model_matrix_id;
-    }
-
-    void Shader::set_terrain_species(yli::ontology::Species* const terrain_species)
-    {
-        yli::ontology::Scene* const scene_parent = this->parent;
-
-        if (scene_parent != nullptr)
-        {
-            scene_parent->set_terrain_species(terrain_species);
-        }
     }
 }

@@ -17,7 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/world.hpp"
+#include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/shader.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
@@ -32,7 +32,7 @@
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
-#include "code/ylikuutio/ontology/world_struct.hpp"
+#include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
@@ -64,7 +64,7 @@ TEST(universe_must_be_initialized_appropriately, headless)
 
     // `Universe` member functions.
     ASSERT_TRUE(universe->get_is_headless());
-    ASSERT_EQ(universe->get_number_of_worlds(), 0);
+    ASSERT_EQ(universe->get_number_of_ecosystems(), 0);
     ASSERT_EQ(universe->get_number_of_scenes(), 0);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
@@ -77,259 +77,259 @@ TEST(universe_must_be_initialized_appropriately, headless)
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 0);
 }
 
-TEST(worlds_must_be_initialized_appropriately, headless)
+TEST(ecosystems_must_be_initialized_appropriately, headless)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::WorldStruct world_struct1;
-    yli::ontology::World* const world1 = new yli::ontology::World(universe, world_struct1, &universe->parent_of_worlds);
+    yli::ontology::EcosystemStruct ecosystem_struct1;
+    yli::ontology::Ecosystem* const ecosystem1 = new yli::ontology::Ecosystem(universe, ecosystem_struct1, &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
-    ASSERT_EQ(universe->get_number_of_worlds(), 1);
+    ASSERT_EQ(universe->get_number_of_ecosystems(), 1);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
 
-    // `Entity` member functions of `World`.
-    ASSERT_EQ(world1->get_childID(), 0);
-    ASSERT_EQ(world1->get_type(), "yli::ontology::World*");
-    ASSERT_TRUE(world1->get_can_be_erased());
-    ASSERT_EQ(world1->get_universe(), universe);
-    ASSERT_EQ(world1->get_parent(), universe);
-    ASSERT_EQ(world1->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem1->get_childID(), 0);
+    ASSERT_EQ(ecosystem1->get_type(), "yli::ontology::Ecosystem*");
+    ASSERT_TRUE(ecosystem1->get_can_be_erased());
+    ASSERT_EQ(ecosystem1->get_universe(), universe);
+    ASSERT_EQ(ecosystem1->get_parent(), universe);
+    ASSERT_EQ(ecosystem1->get_number_of_non_variable_children(), 0);
 
-    yli::ontology::WorldStruct world_struct2;
-    yli::ontology::World* const world2 = new yli::ontology::World(universe, world_struct2, &universe->parent_of_worlds);
+    yli::ontology::EcosystemStruct ecosystem_struct2;
+    yli::ontology::Ecosystem* const ecosystem2 = new yli::ontology::Ecosystem(universe, ecosystem_struct2, &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
-    ASSERT_EQ(universe->get_number_of_worlds(), 2);
+    ASSERT_EQ(universe->get_number_of_ecosystems(), 2);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);
 
-    // `Entity` member functions of `World`.
-    ASSERT_EQ(world2->get_childID(), 1);
-    ASSERT_EQ(world2->get_type(), "yli::ontology::World*");
-    ASSERT_TRUE(world2->get_can_be_erased());
-    ASSERT_EQ(world2->get_universe(), universe);
-    ASSERT_EQ(world2->get_parent(), universe);
-    ASSERT_EQ(world2->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem2->get_childID(), 1);
+    ASSERT_EQ(ecosystem2->get_type(), "yli::ontology::Ecosystem*");
+    ASSERT_TRUE(ecosystem2->get_can_be_erased());
+    ASSERT_EQ(ecosystem2->get_universe(), universe);
+    ASSERT_EQ(ecosystem2->get_parent(), universe);
+    ASSERT_EQ(ecosystem2->get_number_of_non_variable_children(), 0);
 
-    yli::ontology::WorldStruct world_struct3;
-    yli::ontology::World* const world3 = new yli::ontology::World(universe, world_struct3, &universe->parent_of_worlds);
+    yli::ontology::EcosystemStruct ecosystem_struct3;
+    yli::ontology::Ecosystem* const ecosystem3 = new yli::ontology::Ecosystem(universe, ecosystem_struct3, &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
-    ASSERT_EQ(universe->get_number_of_worlds(), 3);
+    ASSERT_EQ(universe->get_number_of_ecosystems(), 3);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 3);
 
-    // `Entity` member functions of `World`.
-    ASSERT_EQ(world3->get_childID(), 2);
-    ASSERT_EQ(world3->get_type(), "yli::ontology::World*");
-    ASSERT_TRUE(world3->get_can_be_erased());
-    ASSERT_EQ(world3->get_universe(), universe);
-    ASSERT_EQ(world3->get_parent(), universe);
-    ASSERT_EQ(world3->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem3->get_childID(), 2);
+    ASSERT_EQ(ecosystem3->get_type(), "yli::ontology::Ecosystem*");
+    ASSERT_TRUE(ecosystem3->get_can_be_erased());
+    ASSERT_EQ(ecosystem3->get_universe(), universe);
+    ASSERT_EQ(ecosystem3->get_parent(), universe);
+    ASSERT_EQ(ecosystem3->get_number_of_non_variable_children(), 0);
 
-    yli::ontology::WorldStruct world_struct4;
-    yli::ontology::World* const world4 = new yli::ontology::World(universe, world_struct4, &universe->parent_of_worlds);
+    yli::ontology::EcosystemStruct ecosystem_struct4;
+    yli::ontology::Ecosystem* const ecosystem4 = new yli::ontology::Ecosystem(universe, ecosystem_struct4, &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
-    ASSERT_EQ(universe->get_number_of_worlds(), 4);
+    ASSERT_EQ(universe->get_number_of_ecosystems(), 4);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 4);
 
-    // `Entity` member functions of `World`.
-    ASSERT_EQ(world4->get_childID(), 3);
-    ASSERT_EQ(world4->get_type(), "yli::ontology::World*");
-    ASSERT_TRUE(world4->get_can_be_erased());
-    ASSERT_EQ(world4->get_universe(), universe);
-    ASSERT_EQ(world4->get_parent(), universe);
-    ASSERT_EQ(world4->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem4->get_childID(), 3);
+    ASSERT_EQ(ecosystem4->get_type(), "yli::ontology::Ecosystem*");
+    ASSERT_TRUE(ecosystem4->get_can_be_erased());
+    ASSERT_EQ(ecosystem4->get_universe(), universe);
+    ASSERT_EQ(ecosystem4->get_parent(), universe);
+    ASSERT_EQ(ecosystem4->get_number_of_non_variable_children(), 0);
 }
 
-TEST(worlds_must_be_initialized_appropriately_after_having_deleted_the_earlier_worlds, headless)
+TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earlier_ecosystems, headless)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::WorldStruct world_struct1;
-    yli::ontology::World* const world1 = new yli::ontology::World(universe, world_struct1, &universe->parent_of_worlds);
+    yli::ontology::EcosystemStruct ecosystem_struct1;
+    yli::ontology::Ecosystem* const ecosystem1 = new yli::ontology::Ecosystem(universe, ecosystem_struct1, &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
-    ASSERT_EQ(universe->get_number_of_worlds(), 1);
+    ASSERT_EQ(universe->get_number_of_ecosystems(), 1);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
 
-    // `Entity` member functions of `World`.
-    ASSERT_EQ(world1->get_childID(), 0);
-    ASSERT_EQ(world1->get_type(), "yli::ontology::World*");
-    ASSERT_TRUE(world1->get_can_be_erased());
-    ASSERT_EQ(world1->get_universe(), universe);
-    ASSERT_EQ(world1->get_parent(), universe);
-    ASSERT_EQ(world1->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem1->get_childID(), 0);
+    ASSERT_EQ(ecosystem1->get_type(), "yli::ontology::Ecosystem*");
+    ASSERT_TRUE(ecosystem1->get_can_be_erased());
+    ASSERT_EQ(ecosystem1->get_universe(), universe);
+    ASSERT_EQ(ecosystem1->get_parent(), universe);
+    ASSERT_EQ(ecosystem1->get_number_of_non_variable_children(), 0);
 
-    delete world1;
-    yli::ontology::WorldStruct world_struct2;
-    yli::ontology::World* const world2 = new yli::ontology::World(universe, world_struct2, &universe->parent_of_worlds);
+    delete ecosystem1;
+    yli::ontology::EcosystemStruct ecosystem_struct2;
+    yli::ontology::Ecosystem* const ecosystem2 = new yli::ontology::Ecosystem(universe, ecosystem_struct2, &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
-    ASSERT_EQ(universe->get_number_of_worlds(), 1);
+    ASSERT_EQ(universe->get_number_of_ecosystems(), 1);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
 
-    // `Entity` member functions of `World`.
-    ASSERT_EQ(world2->get_childID(), 0);
-    ASSERT_EQ(world2->get_type(), "yli::ontology::World*");
-    ASSERT_TRUE(world2->get_can_be_erased());
-    ASSERT_EQ(world2->get_universe(), universe);
-    ASSERT_EQ(world2->get_parent(), universe);
-    ASSERT_EQ(world2->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem2->get_childID(), 0);
+    ASSERT_EQ(ecosystem2->get_type(), "yli::ontology::Ecosystem*");
+    ASSERT_TRUE(ecosystem2->get_can_be_erased());
+    ASSERT_EQ(ecosystem2->get_universe(), universe);
+    ASSERT_EQ(ecosystem2->get_parent(), universe);
+    ASSERT_EQ(ecosystem2->get_number_of_non_variable_children(), 0);
 
-    delete world2;
-    yli::ontology::WorldStruct world_struct3;
-    yli::ontology::World* const world3 = new yli::ontology::World(universe, world_struct3, &universe->parent_of_worlds);
+    delete ecosystem2;
+    yli::ontology::EcosystemStruct ecosystem_struct3;
+    yli::ontology::Ecosystem* const ecosystem3 = new yli::ontology::Ecosystem(universe, ecosystem_struct3, &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
-    ASSERT_EQ(universe->get_number_of_worlds(), 1);
+    ASSERT_EQ(universe->get_number_of_ecosystems(), 1);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
 
-    // `Entity` member functions of `World`.
-    ASSERT_EQ(world3->get_childID(), 0);
-    ASSERT_EQ(world3->get_type(), "yli::ontology::World*");
-    ASSERT_TRUE(world3->get_can_be_erased());
-    ASSERT_EQ(world3->get_universe(), universe);
-    ASSERT_EQ(world3->get_parent(), universe);
-    ASSERT_EQ(world3->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem3->get_childID(), 0);
+    ASSERT_EQ(ecosystem3->get_type(), "yli::ontology::Ecosystem*");
+    ASSERT_TRUE(ecosystem3->get_can_be_erased());
+    ASSERT_EQ(ecosystem3->get_universe(), universe);
+    ASSERT_EQ(ecosystem3->get_parent(), universe);
+    ASSERT_EQ(ecosystem3->get_number_of_non_variable_children(), 0);
 
-    delete world3;
-    yli::ontology::WorldStruct world_struct4;
-    yli::ontology::World* const world4 = new yli::ontology::World(universe, world_struct4, &universe->parent_of_worlds);
+    delete ecosystem3;
+    yli::ontology::EcosystemStruct ecosystem_struct4;
+    yli::ontology::Ecosystem* const ecosystem4 = new yli::ontology::Ecosystem(universe, ecosystem_struct4, &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
-    ASSERT_EQ(universe->get_number_of_worlds(), 1);
+    ASSERT_EQ(universe->get_number_of_ecosystems(), 1);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
 
-    // `Entity` member functions of `World`.
-    ASSERT_EQ(world4->get_childID(), 0);
-    ASSERT_EQ(world4->get_type(), "yli::ontology::World*");
-    ASSERT_TRUE(world4->get_can_be_erased());
-    ASSERT_EQ(world4->get_universe(), universe);
-    ASSERT_EQ(world4->get_parent(), universe);
-    ASSERT_EQ(world4->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem4->get_childID(), 0);
+    ASSERT_EQ(ecosystem4->get_type(), "yli::ontology::Ecosystem*");
+    ASSERT_TRUE(ecosystem4->get_can_be_erased());
+    ASSERT_EQ(ecosystem4->get_universe(), universe);
+    ASSERT_EQ(ecosystem4->get_parent(), universe);
+    ASSERT_EQ(ecosystem4->get_number_of_non_variable_children(), 0);
 }
 
-TEST(worlds_must_be_initialized_appropriately_after_having_deleted_some_earlier_worlds, headless)
+TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_some_earlier_ecosystems, headless)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::WorldStruct world_struct1;
-    yli::ontology::World* const world1 = new yli::ontology::World(universe, world_struct1, &universe->parent_of_worlds);
+    yli::ontology::EcosystemStruct ecosystem_struct1;
+    yli::ontology::Ecosystem* const ecosystem1 = new yli::ontology::Ecosystem(universe, ecosystem_struct1, &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
-    ASSERT_EQ(universe->get_number_of_worlds(), 1);
+    ASSERT_EQ(universe->get_number_of_ecosystems(), 1);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
 
-    // `Entity` member functions of `World`.
-    ASSERT_EQ(world1->get_childID(), 0);
-    ASSERT_EQ(world1->get_type(), "yli::ontology::World*");
-    ASSERT_TRUE(world1->get_can_be_erased());
-    ASSERT_EQ(world1->get_universe(), universe);
-    ASSERT_EQ(world1->get_parent(), universe);
-    ASSERT_EQ(world1->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem1->get_childID(), 0);
+    ASSERT_EQ(ecosystem1->get_type(), "yli::ontology::Ecosystem*");
+    ASSERT_TRUE(ecosystem1->get_can_be_erased());
+    ASSERT_EQ(ecosystem1->get_universe(), universe);
+    ASSERT_EQ(ecosystem1->get_parent(), universe);
+    ASSERT_EQ(ecosystem1->get_number_of_non_variable_children(), 0);
 
-    yli::ontology::WorldStruct world_struct2;
-    yli::ontology::World* const world2 = new yli::ontology::World(universe, world_struct2, &universe->parent_of_worlds);
+    yli::ontology::EcosystemStruct ecosystem_struct2;
+    yli::ontology::Ecosystem* const ecosystem2 = new yli::ontology::Ecosystem(universe, ecosystem_struct2, &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
-    ASSERT_EQ(universe->get_number_of_worlds(), 2);
+    ASSERT_EQ(universe->get_number_of_ecosystems(), 2);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);
 
-    // `Entity` member functions of `World`.
-    ASSERT_EQ(world2->get_childID(), 1);
-    ASSERT_EQ(world2->get_type(), "yli::ontology::World*");
-    ASSERT_TRUE(world2->get_can_be_erased());
-    ASSERT_EQ(world2->get_universe(), universe);
-    ASSERT_EQ(world2->get_parent(), universe);
-    ASSERT_EQ(world2->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem2->get_childID(), 1);
+    ASSERT_EQ(ecosystem2->get_type(), "yli::ontology::Ecosystem*");
+    ASSERT_TRUE(ecosystem2->get_can_be_erased());
+    ASSERT_EQ(ecosystem2->get_universe(), universe);
+    ASSERT_EQ(ecosystem2->get_parent(), universe);
+    ASSERT_EQ(ecosystem2->get_number_of_non_variable_children(), 0);
 
-    delete world1;
-    yli::ontology::WorldStruct world_struct3;
-    yli::ontology::World* const world3 = new yli::ontology::World(universe, world_struct3, &universe->parent_of_worlds);
+    delete ecosystem1;
+    yli::ontology::EcosystemStruct ecosystem_struct3;
+    yli::ontology::Ecosystem* const ecosystem3 = new yli::ontology::Ecosystem(universe, ecosystem_struct3, &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
-    ASSERT_EQ(universe->get_number_of_worlds(), 2);
+    ASSERT_EQ(universe->get_number_of_ecosystems(), 2);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);
 
-    // `Entity` member functions of `World`.
-    ASSERT_EQ(world3->get_childID(), 0);
-    ASSERT_EQ(world3->get_type(), "yli::ontology::World*");
-    ASSERT_TRUE(world3->get_can_be_erased());
-    ASSERT_EQ(world3->get_universe(), universe);
-    ASSERT_EQ(world3->get_parent(), universe);
-    ASSERT_EQ(world3->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem3->get_childID(), 0);
+    ASSERT_EQ(ecosystem3->get_type(), "yli::ontology::Ecosystem*");
+    ASSERT_TRUE(ecosystem3->get_can_be_erased());
+    ASSERT_EQ(ecosystem3->get_universe(), universe);
+    ASSERT_EQ(ecosystem3->get_parent(), universe);
+    ASSERT_EQ(ecosystem3->get_number_of_non_variable_children(), 0);
 
-    yli::ontology::WorldStruct world_struct4;
-    yli::ontology::World* const world4 = new yli::ontology::World(universe, world_struct4, &universe->parent_of_worlds);
+    yli::ontology::EcosystemStruct ecosystem_struct4;
+    yli::ontology::Ecosystem* const ecosystem4 = new yli::ontology::Ecosystem(universe, ecosystem_struct4, &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
-    ASSERT_EQ(universe->get_number_of_worlds(), 3);
+    ASSERT_EQ(universe->get_number_of_ecosystems(), 3);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 3);
 
-    // `Entity` member functions of `World`.
-    ASSERT_EQ(world4->get_childID(), 2);
-    ASSERT_EQ(world4->get_type(), "yli::ontology::World*");
-    ASSERT_TRUE(world4->get_can_be_erased());
-    ASSERT_EQ(world4->get_universe(), universe);
-    ASSERT_EQ(world4->get_parent(), universe);
-    ASSERT_EQ(world4->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem4->get_childID(), 2);
+    ASSERT_EQ(ecosystem4->get_type(), "yli::ontology::Ecosystem*");
+    ASSERT_TRUE(ecosystem4->get_can_be_erased());
+    ASSERT_EQ(ecosystem4->get_universe(), universe);
+    ASSERT_EQ(ecosystem4->get_parent(), universe);
+    ASSERT_EQ(ecosystem4->get_number_of_non_variable_children(), 0);
 }
 
-TEST(world_must_be_initialized_appropriately, no_universe)
+TEST(ecosystem_must_be_initialized_appropriately, no_universe)
 {
-    yli::ontology::WorldStruct world_struct;
-    yli::ontology::World* const world = new yli::ontology::World(nullptr, world_struct, nullptr);
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(nullptr, ecosystem_struct, nullptr);
 
-    // `Entity` member functions of `World`.
-    ASSERT_EQ(world->get_childID(), std::numeric_limits<std::size_t>::max());
-    ASSERT_EQ(world->get_type(), "yli::ontology::World*");
-    ASSERT_TRUE(world->get_can_be_erased());
-    ASSERT_EQ(world->get_universe(), nullptr);
-    ASSERT_EQ(world->get_parent(), nullptr);
-    ASSERT_EQ(world->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(ecosystem->get_type(), "yli::ontology::Ecosystem*");
+    ASSERT_TRUE(ecosystem->get_can_be_erased());
+    ASSERT_EQ(ecosystem->get_universe(), nullptr);
+    ASSERT_EQ(ecosystem->get_parent(), nullptr);
+    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 0);
 }
 
 TEST(scene_must_be_initialized_appropriately, headless)
@@ -342,7 +342,7 @@ TEST(scene_must_be_initialized_appropriately, headless)
     yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
 
     // `Universe` member functions.
-    ASSERT_EQ(universe->get_number_of_worlds(), 0);
+    ASSERT_EQ(universe->get_number_of_ecosystems(), 0);
     ASSERT_EQ(universe->get_number_of_scenes(), 1);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
@@ -372,7 +372,7 @@ TEST(scene_must_be_initialized_appropriately, no_universe)
     ASSERT_EQ(scene->get_number_of_non_variable_children(), 1);
 }
 
-TEST(scene_must_be_initialized_appropriately, no_universe_no_world)
+TEST(scene_must_be_initialized_appropriately, no_universe_no_ecosystem)
 {
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(nullptr, scene_struct, nullptr);
@@ -1509,7 +1509,7 @@ TEST(font_2d_must_be_initialized_appropriately, no_universe_holstein)
     font_struct.font_texture_file_format = "PNG";
     yli::ontology::Font2D* const font_2d = new yli::ontology::Font2D(nullptr, font_struct, nullptr);
 
-    // `Entity` member functions of `World`.
+    // `Entity` member functions of `Ecosystem`.
     ASSERT_EQ(font_2d->get_childID(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(font_2d->get_type(), "yli::ontology::Font2D*");
     ASSERT_FALSE(font_2d->get_can_be_erased());               // Currently `Font2D`s can not be erased.
@@ -1518,7 +1518,7 @@ TEST(font_2d_must_be_initialized_appropriately, no_universe_holstein)
     ASSERT_EQ(font_2d->get_number_of_non_variable_children(), 0);
 }
 
-TEST(brain_must_be_initialized_appropriately, no_universe_no_world_no_scene)
+TEST(brain_must_be_initialized_appropriately, no_universe_no_ecosystem_no_scene)
 {
     yli::ontology::BrainStruct brain_struct;
     brain_struct.parent = nullptr;
@@ -2054,118 +2054,118 @@ TEST(universe_must_not_accept_a_local_name_after_setting_a_global_name, headless
     ASSERT_EQ(universe->get_local_name(), "");
 }
 
-TEST(world_must_be_given_a_global_name_appropriately, headless)
+TEST(ecosystem_must_be_given_a_global_name_appropriately, headless)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::WorldStruct world_struct;
-    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
-    ASSERT_EQ(world->get_global_name(), "");
-    ASSERT_EQ(world->get_local_name(), "");
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(universe, ecosystem_struct, &universe->parent_of_ecosystems);
+    ASSERT_EQ(ecosystem->get_global_name(), "");
+    ASSERT_EQ(ecosystem->get_local_name(), "");
 
-    // `World`s are children of the `Universe` and thus global name is local name, and vice versa.
-    world->set_global_name("foo");
-    ASSERT_EQ(world->get_global_name(), "foo");
-    ASSERT_EQ(world->get_local_name(), "foo");
+    // `Ecosystem`s are children of the `Universe` and thus global name is local name, and vice versa.
+    ecosystem->set_global_name("foo");
+    ASSERT_EQ(ecosystem->get_global_name(), "foo");
+    ASSERT_EQ(ecosystem->get_local_name(), "foo");
     ASSERT_TRUE(universe->has_child("foo"));
 }
 
-TEST(world_must_be_given_a_local_name_appropriately, headless)
+TEST(ecosystem_must_be_given_a_local_name_appropriately, headless)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::WorldStruct world_struct;
-    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
-    ASSERT_EQ(world->get_global_name(), "");
-    ASSERT_EQ(world->get_local_name(), "");
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(universe, ecosystem_struct, &universe->parent_of_ecosystems);
+    ASSERT_EQ(ecosystem->get_global_name(), "");
+    ASSERT_EQ(ecosystem->get_local_name(), "");
 
-    // `World`s are children of the `Universe` and thus global name is local name, and vice versa.
-    world->set_local_name("foo");
-    ASSERT_EQ(world->get_global_name(), "foo");
-    ASSERT_EQ(world->get_local_name(), "foo");
+    // `Ecosystem`s are children of the `Universe` and thus global name is local name, and vice versa.
+    ecosystem->set_local_name("foo");
+    ASSERT_EQ(ecosystem->get_global_name(), "foo");
+    ASSERT_EQ(ecosystem->get_local_name(), "foo");
     ASSERT_TRUE(universe->has_child("foo"));
 }
 
-TEST(world_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
+TEST(ecosystem_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::WorldStruct world_struct;
-    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
-    ASSERT_EQ(world->get_global_name(), "");
-    ASSERT_EQ(world->get_local_name(), "");
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(universe, ecosystem_struct, &universe->parent_of_ecosystems);
+    ASSERT_EQ(ecosystem->get_global_name(), "");
+    ASSERT_EQ(ecosystem->get_local_name(), "");
 
-    // `World`s are children of the `Universe` and thus global name is local name, and vice versa.
-    world->set_global_name("foo");
-    world->set_global_name("bar");
-    ASSERT_EQ(world->get_global_name(), "bar");
-    ASSERT_EQ(world->get_local_name(), "bar");
+    // `Ecosystem`s are children of the `Universe` and thus global name is local name, and vice versa.
+    ecosystem->set_global_name("foo");
+    ecosystem->set_global_name("bar");
+    ASSERT_EQ(ecosystem->get_global_name(), "bar");
+    ASSERT_EQ(ecosystem->get_local_name(), "bar");
     ASSERT_FALSE(universe->has_child("foo"));
     ASSERT_TRUE(universe->has_child("bar"));
 }
 
-TEST(world_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
+TEST(ecosystem_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::WorldStruct world_struct;
-    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
-    ASSERT_EQ(world->get_global_name(), "");
-    ASSERT_EQ(world->get_local_name(), "");
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(universe, ecosystem_struct, &universe->parent_of_ecosystems);
+    ASSERT_EQ(ecosystem->get_global_name(), "");
+    ASSERT_EQ(ecosystem->get_local_name(), "");
 
-    // `World`s are children of the `Universe` and thus global name is local name, and vice versa.
-    world->set_local_name("foo");
-    world->set_local_name("bar");
-    ASSERT_EQ(world->get_global_name(), "bar");
-    ASSERT_EQ(world->get_local_name(), "bar");
+    // `Ecosystem`s are children of the `Universe` and thus global name is local name, and vice versa.
+    ecosystem->set_local_name("foo");
+    ecosystem->set_local_name("bar");
+    ASSERT_EQ(ecosystem->get_global_name(), "bar");
+    ASSERT_EQ(ecosystem->get_local_name(), "bar");
     ASSERT_FALSE(universe->has_child("foo"));
     ASSERT_TRUE(universe->has_child("bar"));
 }
 
-TEST(world_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
+TEST(ecosystem_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::WorldStruct world_struct;
-    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
-    ASSERT_EQ(world->get_global_name(), "");
-    ASSERT_EQ(world->get_local_name(), "");
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(universe, ecosystem_struct, &universe->parent_of_ecosystems);
+    ASSERT_EQ(ecosystem->get_global_name(), "");
+    ASSERT_EQ(ecosystem->get_local_name(), "");
 
-    // `World`s are children of the `Universe` and thus global name is local name, and vice versa.
-    world->set_local_name("foo");
-    world->set_global_name("bar");
-    ASSERT_EQ(world->get_global_name(), "bar");
-    ASSERT_EQ(world->get_local_name(), "bar");
+    // `Ecosystem`s are children of the `Universe` and thus global name is local name, and vice versa.
+    ecosystem->set_local_name("foo");
+    ecosystem->set_global_name("bar");
+    ASSERT_EQ(ecosystem->get_global_name(), "bar");
+    ASSERT_EQ(ecosystem->get_local_name(), "bar");
     ASSERT_FALSE(universe->has_child("foo"));
     ASSERT_TRUE(universe->has_child("bar"));
 }
 
-TEST(world_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
+TEST(ecosystem_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
 {
     yli::ontology::UniverseStruct universe_struct;
     universe_struct.is_headless = true;
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::WorldStruct world_struct;
-    yli::ontology::World* const world = new yli::ontology::World(universe, world_struct, &universe->parent_of_worlds);
-    ASSERT_EQ(world->get_global_name(), "");
-    ASSERT_EQ(world->get_local_name(), "");
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(universe, ecosystem_struct, &universe->parent_of_ecosystems);
+    ASSERT_EQ(ecosystem->get_global_name(), "");
+    ASSERT_EQ(ecosystem->get_local_name(), "");
 
-    // `World`s are children of the `Universe` and thus global name is local name, and vice versa.
-    world->set_global_name("foo");
-    world->set_local_name("bar");
-    ASSERT_EQ(world->get_global_name(), "bar");
-    ASSERT_EQ(world->get_local_name(), "bar");
+    // `Ecosystem`s are children of the `Universe` and thus global name is local name, and vice versa.
+    ecosystem->set_global_name("foo");
+    ecosystem->set_local_name("bar");
+    ASSERT_EQ(ecosystem->get_global_name(), "bar");
+    ASSERT_EQ(ecosystem->get_local_name(), "bar");
     ASSERT_FALSE(universe->has_child("foo"));
     ASSERT_TRUE(universe->has_child("bar"));
 }
