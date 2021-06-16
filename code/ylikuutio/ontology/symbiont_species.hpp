@@ -161,17 +161,17 @@ namespace yli::ontology
             yli::ontology::MasterModule master_of_bionts;
 
         private:
-            glm::vec3 light_position; // light position.
+            glm::vec3 light_position;
 
             void bind_to_parent();
 
             // this method renders all `Object`s of this `SymbiontSpecies`.
             void render();
 
-            yli::ontology::Shader* shader; // pointer to `Shader` (not a parent!).
+            yli::ontology::Shader* shader; // Pointer to `Shader` (not a parent!).
 
-            std::string model_file_format; // type of the model file, eg. `"png"`.
-            std::string model_filename;    // filename of the model file.
+            std::string model_file_format; // Type of the model file, eg. `"png"`.
+            std::string model_filename;    // Filename of the model file.
     };
 }
 

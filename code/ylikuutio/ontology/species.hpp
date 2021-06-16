@@ -160,12 +160,12 @@ namespace yli::ontology
 
             const std::string& get_model_file_format() const;
 
-            bool is_terrain;               // worlds currently do not rotate nor translate.
-            float planet_radius;           // radius of sea level in kilometers. used only for worlds.
-            float divisor;                 // value by which SRTM values are divided to convert them to kilometers.
+            bool is_terrain;               // Terrains do not rotate nor translate.
+            float planet_radius;           // Radius of sea level in kilometers. Used only for terrains.
+            float divisor;                 // Value by which SRTM values are divided to convert them to kilometers.
 
-            std::string color_channel;     // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
-            glm::vec3 light_position;      // light position.
+            std::string color_channel;     // Color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
+            glm::vec3 light_position;      // Light position.
 
             template<class T1, class T2>
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
@@ -176,11 +176,11 @@ namespace yli::ontology
 
             bool is_symbiont_species;
 
-            std::string model_file_format; // type of the model file, eg. `"png"`.
-            std::string model_filename;    // filename of the model file.
+            std::string model_file_format; // Type of the model file, eg. `"png"`.
+            std::string model_filename;    // Filename of the model file.
 
-            float latitude;                // for SRTM.
-            float longitude;               // for SRTM.
+            float latitude;                // For SRTM.
+            float longitude;               // For SRTM.
 
             uint32_t mesh_i;
 
