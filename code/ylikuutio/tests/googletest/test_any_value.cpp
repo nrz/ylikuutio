@@ -19,6 +19,31 @@
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/any_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/world.hpp"
+#include "code/ylikuutio/ontology/scene.hpp"
+#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/material.hpp"
+#include "code/ylikuutio/ontology/species.hpp"
+#include "code/ylikuutio/ontology/object.hpp"
+#include "code/ylikuutio/ontology/symbiosis.hpp"
+#include "code/ylikuutio/ontology/symbiont_material.hpp"
+#include "code/ylikuutio/ontology/symbiont_species.hpp"
+#include "code/ylikuutio/ontology/holobiont.hpp"
+#include "code/ylikuutio/ontology/biont.hpp"
+#include "code/ylikuutio/ontology/font_2d.hpp"
+#include "code/ylikuutio/ontology/text_2d.hpp"
+#include "code/ylikuutio/ontology/vector_font.hpp"
+#include "code/ylikuutio/ontology/glyph.hpp"
+#include "code/ylikuutio/ontology/text_3d.hpp"
+#include "code/ylikuutio/ontology/console.hpp"
+#include "code/ylikuutio/ontology/compute_task.hpp"
+
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
