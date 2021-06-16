@@ -130,9 +130,9 @@ namespace yli::data
         }
 
     template<>
-        std::string get_type_string(yli::ontology::World* data)
+        std::string get_type_string(yli::ontology::Ecosystem* data)
         {
-            return "yli::ontology::World*";
+            return "yli::ontology::Ecosystem*";
         }
 
     template<>

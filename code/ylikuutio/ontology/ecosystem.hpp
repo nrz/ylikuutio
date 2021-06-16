@@ -15,92 +15,92 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_WORLD_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_WORLD_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_ECOSYSTEM_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_ECOSYSTEM_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "world_struct.hpp"
+#include "ecosystem_struct.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <queue>    // std::queue
 #include <vector>   // std::vector
 
-// `World` is a collection of `Scene`s which share some common resources,
-// like `VectorFont`s. In addition to `Scene`s, each `World` may contain
-// `World`-bound Entities. World-bound Entities are Entities, which simply
-// bind to a `World` instead of some ontological descendant of a `World`.
+// `Ecosystem` is a collection of `Scene`s which share some common resources,
+// like `VectorFont`s. In addition to `Scene`s, each `Ecosystem` may contain
+// `Ecosystem`-bound Entities. Ecosystem-bound Entities are Entities, which simply
+// bind to a `Ecosystem` instead of some ontological descendant of a `Ecosystem`.
 //
 // Most child classes of `Scene` and below classes can be converted
-// into corresponding world-bound classes:
-// * `Shader` -> `WorldShader`.
-// * `Material` -> `WorldMaterial`.
-// * `Species` -> `WorldSpecies`.
-// * `Symbiosis` -> `WorldSymbiosis`.
-// * `Brain` -> `WorldBrain`.
+// into corresponding ecosystem-bound classes:
+// * `Shader` -> `EcosystemShader`.
+// * `Material` -> `EcosystemMaterial`.
+// * `Species` -> `EcosystemSpecies`.
+// * `Symbiosis` -> `EcosystemSymbiosis`.
+// * `Brain` -> `EcosystemBrain`.
 // * etc.
 //
-// Each `World`-bound `Entity` class inherits its base class.
+// Each `Ecosystem`-bound `Entity` class inherits its base class.
 //
 // This conversion does not affect already existing children.
 // They function just like before their parent's or parent's parent's etc.
-// conversion into a `World`-bound `Entity`.
+// conversion into a `Ecosystem`-bound `Entity`.
 //
-// So, e.g. `WorldShader` may have the following kinds of children:
+// So, e.g. `EcosystemShader` may have the following kinds of children:
 // 1. `Material`,
 // 2. `Symbiosis`,
 // 3. `ComputeTask`,
-// 4. `WorldMaterial`,
-// 5. `WorldSymbiosis`,
-// 6. `WorldComputeTask`.
+// 4. `EcosystemMaterial`,
+// 5. `EcosystemSymbiosis`,
+// 6. `EcosystemComputeTask`.
 //
 // The storage of `Material`, `Symbiosis`, and `ComputeTask` entities is
 // inherited from the `Shader` base class.
 //
-// Rendering of `WorldShader`s works as follows:
+// Rendering of `EcosystemShader`s works as follows:
 // 1. `Scene::render` calls the following function:
-//    `World::render_world_shaders(const std::size_t entityID)`.
-// 2. `World::render_world_shaders then calls `WorldShader::render` for
-//    its every `WorldShader` child.
-// 3. `WorldShader::render` then renders only those `Material`, `Symbiosis`,
+//    `Ecosystem::render_ecosystem_shaders(const std::size_t entityID)`.
+// 2. `Ecosystem::render_ecosystem_shaders then calls `EcosystemShader::render` for
+//    its every `EcosystemShader` child.
+// 3. `EcosystemShader::render` then renders only those `Material`, `Symbiosis`,
 //    and `ComputeTask` entities which belong to the `Scene` with that
 //    specific `entityID`.
-// 4. `WorldShader::render` also renders all `WorldMaterial`, `WorldSymbiosis`,
-//    and `WorldComputeTask` entities. Each of these renders only those regular
-//    children entities, i.e. not `World`-bound entities, that belong to
-//    the `Scene` with the specific `entityID`, and also all `World`-bound
-//    entities, in a similar fashion compared to `WorldShader`.
+// 4. `EcosystemShader::render` also renders all `EcosystemMaterial`, `EcosystemSymbiosis`,
+//    and `EcosystemComputeTask` entities. Each of these renders only those regular
+//    children entities, i.e. not `Ecosystem`-bound entities, that belong to
+//    the `Scene` with the specific `entityID`, and also all `Ecosystem`-bound
+//    entities, in a similar fashion compared to `EcosystemShader`.
 //
-// TODO: implement `World`-bound entities!
+// TODO: implement `Ecosystem`-bound entities!
 
 namespace yli::ontology
 {
     class ParentModule;
     class Universe;
 
-    class World: public yli::ontology::Entity
+    class Ecosystem: public yli::ontology::Entity
     {
         public:
-            World(
+            Ecosystem(
                     yli::ontology::Universe* const universe,
-                    const yli::ontology::WorldStruct& world_struct,
+                    const yli::ontology::EcosystemStruct& ecosystem_struct,
                     yli::ontology::ParentModule* const parent_module)
-                : Entity(universe, world_struct),
+                : Entity(universe, ecosystem_struct),
                 child_of_universe(parent_module, this)
             {
                 // constructor.
 
                 // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::World*";
+                this->type_string = "yli::ontology::Ecosystem*";
                 this->can_be_erased = true;
             }
 
-            World(const World&) = delete;            // Delete copy constructor.
-            World& operator=(const World&) = delete; // Delete copy assignment.
+            Ecosystem(const Ecosystem&) = delete;            // Delete copy constructor.
+            Ecosystem& operator=(const Ecosystem&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~World();
+            virtual ~Ecosystem();
 
             yli::ontology::Entity* get_parent() const override;
 

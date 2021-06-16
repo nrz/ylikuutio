@@ -680,9 +680,9 @@ namespace yli::ontology
         return this->is_headless;
     }
 
-    std::size_t Universe::get_number_of_worlds() const
+    std::size_t Universe::get_number_of_ecosystems() const
     {
-        return this->parent_of_worlds.get_number_of_children();
+        return this->parent_of_ecosystems.get_number_of_children();
     }
 
     std::size_t Universe::get_number_of_scenes() const
@@ -703,7 +703,7 @@ namespace yli::ontology
 
     std::size_t Universe::get_number_of_children() const
     {
-        return this->parent_of_worlds.get_number_of_children() +
+        return this->parent_of_ecosystems.get_number_of_children() +
             this->parent_of_scenes.get_number_of_children() +
             this->parent_of_font_2ds.get_number_of_children() +
             this->parent_of_consoles.get_number_of_children() +
@@ -713,7 +713,7 @@ namespace yli::ontology
 
     std::size_t Universe::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_worlds.child_pointer_vector) +
+        return yli::ontology::get_number_of_descendants(this->parent_of_ecosystems.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_scenes.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_font_2ds.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector) +

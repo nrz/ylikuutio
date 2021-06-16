@@ -232,8 +232,8 @@
 //
 // TODO: implement optimized rendering hierarchy for `ShaderSymbiosis` entities!
 //
-// Deleting a `Universe` also deletes all worlds, scenes, all shaders, materials, species, fonts, glyphs and objects that are bound to the same `Universe`.
-// Deleting a `World` also deletes all shaders, materials, species, fonts and glyphs that are bound to the same `World`.
+// Deleting a `Universe` also deletes all ecosystems, scenes, all shaders, materials, species, fonts, glyphs and objects that are bound to the same `Universe`.
+// Deleting an `Ecosystem` also deletes all shaders, materials, species, fonts and glyphs that are bound to the same `Ecosystem`.
 // Deleting a `Scene` also deletes all shaders, materials, species, fonts, glyphs and objects that are bound to the same `Scene`.
 // Deleting a `Shader` also deletes all materials, species, fonts, glyphs and objects that are bound to the same `Shader`.
 // Deleting a `Material` also deletes all species, fonts, glyphs and objects that are bound to the same `Material`.
@@ -299,7 +299,7 @@ namespace yli::ontology
 
             Universe(const yli::ontology::UniverseStruct& universe_struct)
                 : Entity(this, universe_struct), // `Universe` has no parent.
-                parent_of_worlds(this, &this->registry, "worlds"),
+                parent_of_ecosystems(this, &this->registry, "ecosystems"),
                 parent_of_scenes(this, &this->registry, "scenes"),
                 parent_of_font_2ds(this, &this->registry, "font_2ds"),
                 parent_of_consoles(this, &this->registry, "consoles"),
@@ -434,7 +434,7 @@ namespace yli::ontology
             btBroadphaseInterface* get_overlapping_pair_cache() const;
             btSequentialImpulseConstraintSolver* get_solver() const;
 
-            std::size_t get_number_of_worlds() const;
+            std::size_t get_number_of_ecosystems() const;
             std::size_t get_number_of_scenes() const;
 
             yli::ontology::Scene* get_active_scene() const;
@@ -630,7 +630,7 @@ namespace yli::ontology
             float background_blue  { NAN };
             float background_alpha { NAN };
 
-            yli::ontology::ParentModule parent_of_worlds;
+            yli::ontology::ParentModule parent_of_ecosystems;
             yli::ontology::ParentModule parent_of_scenes;
             yli::ontology::ParentModule parent_of_font_2ds;
             yli::ontology::ParentModule parent_of_consoles;

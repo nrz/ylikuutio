@@ -20,7 +20,7 @@
 #include "entity.hpp"
 #include "variable.hpp"
 #include "universe.hpp"
-#include "world.hpp"
+#include "ecosystem.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
 #include "material.hpp"
@@ -40,7 +40,7 @@
 #include "brain.hpp"
 #include "callback_engine_entity.hpp"
 #include "variable_struct.hpp"
-#include "world_struct.hpp"
+#include "ecosystem_struct.hpp"
 #include "scene_struct.hpp"
 #include "shader_struct.hpp"
 #include "material_struct.hpp"
@@ -118,25 +118,25 @@ namespace yli::ontology
         return variable_entity;
     }
 
-    yli::ontology::Entity* EntityFactory::create_world(const yli::ontology::WorldStruct& world_struct) const
+    yli::ontology::Entity* EntityFactory::create_ecosystem(const yli::ontology::EcosystemStruct& ecosystem_struct) const
     {
-        yli::ontology::Entity* world_entity = new yli::ontology::World(
+        yli::ontology::Entity* ecosystem_entity = new yli::ontology::Ecosystem(
                 this->universe,
-                world_struct,
-                (this->universe == nullptr ? nullptr : &this->universe->parent_of_worlds));
+                ecosystem_struct,
+                (this->universe == nullptr ? nullptr : &this->universe->parent_of_ecosystems));
 
-        if (!world_struct.global_name.empty() && world_struct.local_name.empty())
+        if (!ecosystem_struct.global_name.empty() && ecosystem_struct.local_name.empty())
         {
             // Only `global_name` given, OK.
-            world_entity->set_global_name(world_struct.global_name);
+            ecosystem_entity->set_global_name(ecosystem_struct.global_name);
         }
-        else if (world_struct.global_name.empty() && !world_struct.local_name.empty())
+        else if (ecosystem_struct.global_name.empty() && !ecosystem_struct.local_name.empty())
         {
             // Only `local_name` given, OK.
-            world_entity->set_local_name(world_struct.local_name);
+            ecosystem_entity->set_local_name(ecosystem_struct.local_name);
         }
 
-        return world_entity;
+        return ecosystem_entity;
     }
 
     yli::ontology::Entity* EntityFactory::create_scene(const yli::ontology::SceneStruct& scene_struct) const

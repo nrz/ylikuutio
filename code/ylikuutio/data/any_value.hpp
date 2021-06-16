@@ -37,7 +37,7 @@ namespace yli::ontology
     class Entity;
     class Movable;
     class Universe;
-    class World;
+    class Ecosystem;
     class Scene;
     class Shader;
     class Material;
@@ -93,7 +93,7 @@ namespace yli::data
             AnyValue(yli::ontology::Movable* const movable_pointer);
             AnyValue(const yli::ontology::Movable* const const_movable_pointer);
             AnyValue(yli::ontology::Universe* const universe_pointer);
-            AnyValue(yli::ontology::World* const world_pointer);
+            AnyValue(yli::ontology::Ecosystem* const ecosystem_pointer);
             AnyValue(yli::ontology::Scene* const scene_pointer);
             AnyValue(yli::ontology::Shader* const shader_pointer);
             AnyValue(yli::ontology::Material* const material_pointer);
@@ -144,7 +144,7 @@ namespace yli::data
                 yli::ontology::Movable*,
                 const yli::ontology::Movable*,
                 yli::ontology::Universe*,
-                yli::ontology::World*,
+                yli::ontology::Ecosystem*,
                 yli::ontology::Scene*,
                 yli::ontology::Shader*,
                 yli::ontology::Material*,
