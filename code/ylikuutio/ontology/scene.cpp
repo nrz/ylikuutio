@@ -30,12 +30,15 @@
 #include "material.hpp"
 #include "camera.hpp"
 #include "brain.hpp"
-#include "rigid_body.hpp"
+#include "rigid_body_module.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/render/render_master.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
+
+// Include Bullet
+#include <btBulletDynamicsCommon.h>
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
@@ -276,21 +279,16 @@ namespace yli::ontology
         this->gravity = gravity;
     }
 
-    void Scene::add_rigid_body(yli::ontology::RigidBody* const rigid_body)
+    void Scene::add_rigid_body_module(const yli::ontology::RigidBodyModule& rigid_body_module)
     {
-        if (rigid_body == nullptr)
+        if (this->dynamics_world == nullptr)
         {
-            std::cerr << "ERROR: `Scene::add_rigid_body`: `rigid_body` is `nullptr`!\n";
+            std::cerr << "ERROR: `Scene::add_rigid_body_module`: `this->dynamics_world` is `nullptr`!\n";
             return;
         }
 
-        if (rigid_body == nullptr)
-        {
-            std::cerr << "ERROR: `Scene::add_rigid_body`: `this->dynamics_world` is `nullptr`!\n";
-            return;
-        }
-
-        this->dynamics_world->addRigidBody(rigid_body->get_bullet_rigid_body());
+        btRigidBody* bullet_rigid_body = rigid_body_module.get_bullet_rigid_body();
+        this->dynamics_world->addRigidBody(bullet_rigid_body);
     }
 
     float Scene::get_water_level() const

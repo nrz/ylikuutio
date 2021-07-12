@@ -40,6 +40,7 @@ namespace yli::ontology
 {
     class Universe;
     class Variable;
+    class Scene;
     class Console;
     class EntityFactory;
     struct EntityStruct;
@@ -74,6 +75,7 @@ namespace yli::ontology
             bool get_can_be_erased() const;
 
             yli::ontology::Universe* get_universe() const;
+            virtual yli::ontology::Scene* get_scene() const;
             virtual yli::ontology::EntityFactory* get_entity_factory() const;
 
             virtual yli::ontology::Entity* get_parent() const = 0;

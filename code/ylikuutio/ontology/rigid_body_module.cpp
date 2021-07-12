@@ -16,7 +16,11 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "movable.hpp"
-#include "rigid_body.hpp"
+#include "scene.hpp"
+#include "rigid_body_module.hpp"
+
+// Include Bullet
+#include <btBulletDynamicsCommon.h>
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -25,32 +29,34 @@ namespace yli::ontology
 {
     class Entity;
 
-    void RigidBody::unbind_movable(yli::ontology::Entity* movable)
-    {
-        // TODO: implement the function!
-    }
-
-    RigidBody::~RigidBody()
+    RigidBodyModule::~RigidBodyModule()
     {
         // destructor.
     }
 
-    yli::ontology::Entity* RigidBody::get_parent() const
+    void RigidBodyModule::add_rigid_body_module_to_scene() const
     {
-        return this->child_of_scene.get_parent();
+        yli::ontology::Movable* const movable = this->movable;
+
+        if (movable == nullptr)
+        {
+            std::cerr << "ERROR: `RigidBodyModule::add_rigid_body_module_to_scene`: `movable` is `nullptr`!\n";
+            return;
+        }
+
+        yli::ontology::Scene* const scene = movable->get_scene();
+
+        if (scene == nullptr)
+        {
+            std::cerr << "ERROR: `RigidBodyModule::add_rigid_body_module_to_scene`: `scene` is `nullptr`!\n";
+            return;
+        }
+
+        // Add the rigid body to the dynamics world.
+        scene->add_rigid_body_module(*this);
     }
 
-    std::size_t RigidBody::get_number_of_children() const
-    {
-        return 0;
-    }
-
-    std::size_t RigidBody::get_number_of_descendants() const
-    {
-        return 0;
-    }
-
-    btRigidBody* RigidBody::get_bullet_rigid_body() const
+    btRigidBody* RigidBodyModule::get_bullet_rigid_body() const
     {
         if (this->bullet_rigid_body == nullptr)
         {

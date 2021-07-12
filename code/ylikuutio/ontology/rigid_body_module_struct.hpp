@@ -15,10 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_RIGID_BODY_STRUCT_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_RIGID_BODY_STRUCT_HPP_INCLUDED
-
-#include "entity_struct.hpp"
+#ifndef __YLIKUUTIO_ONTOLOGY_RIGID_BODY_MODULE_STRUCT_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_RIGID_BODY_MODULE_STRUCT_HPP_INCLUDED
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -31,20 +29,12 @@
 
 namespace yli::ontology
 {
-    class Entity;
-
-    struct RigidBodyStruct: public yli::ontology::EntityStruct
+    struct RigidBodyModuleStruct
     {
-        RigidBodyStruct()
-        {
-            // constructor.
-        }
-
-        yli::ontology::Entity* parent { nullptr };
         std::string type;
-        glm::vec3 half_extents        { 0.0f, 0.0f, 0.0f }; // For `"box"` type.
-        float radius                  { 0.0f };             // For `"sphere"` type.
-        float mass                    { 0.0f };             // An object is static if and only if its mass is 0.
+        glm::vec3 half_extents { 0.0f, 0.0f, 0.0f }; // For `"box"` type.
+        float radius           { 0.0f };             // For `"sphere"` type.
+        float mass             { 0.0f };             // An object is static if and only if its mass is 0.
     };
 }
 

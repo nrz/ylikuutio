@@ -22,6 +22,7 @@
 #include "child_module.hpp"
 #include "generic_master_module.hpp"
 #include "apprentice_module.hpp"
+#include "rigid_body_module.hpp"
 #include "movable_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -59,6 +60,7 @@ namespace yli::ontology
 {
     class Universe;
     class Brain;
+    class Scene;
     class Waypoint;
     class ParentModule;
     class GenericMasterModule;
@@ -75,7 +77,7 @@ namespace yli::ontology
                 : Entity(universe, movable_struct),
                 child(parent_module, this),
                 apprentice_of_brain(generic_master_module, this),
-                apprentice_of_rigid_body(generic_master_module, this),
+                rigid_body_module(movable_struct.rigid_body_module_struct, this),
                 input_method { movable_struct.input_method },
                 initial_rotate_vectors { movable_struct.initial_rotate_vectors },
                 initial_rotate_angles { movable_struct.initial_rotate_angles },
@@ -306,7 +308,9 @@ namespace yli::ontology
 
         public:
             yli::ontology::ApprenticeModule apprentice_of_brain;
-            yli::ontology::ApprenticeModule apprentice_of_rigid_body;
+
+        private:
+            yli::ontology::RigidBodyModule rigid_body_module;
 
         private:
             void create_coordinate_and_angle_variables();

@@ -159,7 +159,7 @@ namespace yli::ontology
             float get_gravity() const;
             void set_gravity(const float gravity);
 
-            void add_rigid_body(yli::ontology::RigidBody* const rigid_body);
+            void add_rigid_body_module(const yli::ontology::RigidBodyModule& rigid_body_module);
 
             float get_water_level() const;
 
