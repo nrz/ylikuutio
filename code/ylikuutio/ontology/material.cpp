@@ -34,6 +34,64 @@
 
 namespace yli::ontology
 {
+    void Material::bind_to_new_shader_parent(yli::ontology::Shader* const new_parent)
+    {
+        // Requirements:
+        // `this->is_symbiont_material` must be `false`.
+        // `this->parent` must not be `nullptr`.
+        // `new_parent` must not be `nullptr`.
+
+        if (this->is_symbiont_material)
+        {
+            return;
+        }
+
+        yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->child_of_shader_or_symbiosis.get_parent());
+
+        if (shader == nullptr)
+        {
+            std::cerr << "ERROR: `Material::bind_to_new_shader_parent`: `shader` is `nullptr`!\n";
+            return;
+        }
+
+        if (new_parent == nullptr)
+        {
+            std::cerr << "ERROR: `Material::bind_to_new_shader_parent`: `new_parent` is `nullptr`!\n";
+            return;
+        }
+
+        if (new_parent->has_child(this->local_name))
+        {
+            std::cerr << "ERROR: `Material::bind_to_new_shader_parent`: local name is already in use!\n";
+            return;
+        }
+
+        // Unbind from the old parent `Shader`.
+        shader->parent_of_materials.unbind_child(this->childID);
+
+        // Get `childID` from `Shader` and set pointer to this `Material`.
+        this->child_of_shader_or_symbiosis.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_materials);
+    }
+
+    void Material::bind_to_new_parent(yli::ontology::Entity* const new_parent)
+    {
+        // this method sets pointer to this `Material` to `nullptr`, sets `parent` according to the input,
+        // and requests a new `childID` from the new `Shader`.
+        //
+        // requirements:
+        // `new_parent` must not be `nullptr`.
+
+        yli::ontology::Shader* const shader = dynamic_cast<yli::ontology::Shader*>(new_parent);
+
+        if (shader != nullptr)
+        {
+            this->bind_to_new_shader_parent(shader);
+            return;
+        }
+
+        std::cerr << "ERROR: `Material::bind_to_new_parent`: `new_parent` is not `yli::ontology::Shader*`!\n";
+    }
+
     Material::~Material()
     {
         if (!this->is_symbiont_material)
@@ -94,64 +152,6 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_shapeshifter_transformations.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_vector_fonts.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_chunk_masters.child_pointer_vector);
-    }
-
-    void Material::bind_to_new_shader_parent(yli::ontology::Shader* const new_parent)
-    {
-        // Requirements:
-        // `this->is_symbiont_material` must be `false`.
-        // `this->parent` must not be `nullptr`.
-        // `new_parent` must not be `nullptr`.
-
-        if (this->is_symbiont_material)
-        {
-            return;
-        }
-
-        yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->child_of_shader_or_symbiosis.get_parent());
-
-        if (shader == nullptr)
-        {
-            std::cerr << "ERROR: `Material::bind_to_new_shader_parent`: `shader` is `nullptr`!\n";
-            return;
-        }
-
-        if (new_parent == nullptr)
-        {
-            std::cerr << "ERROR: `Material::bind_to_new_shader_parent`: `new_parent` is `nullptr`!\n";
-            return;
-        }
-
-        if (new_parent->has_child(this->local_name))
-        {
-            std::cerr << "ERROR: `Material::bind_to_new_shader_parent`: local name is already in use!\n";
-            return;
-        }
-
-        // Unbind from the old parent `Shader`.
-        shader->parent_of_materials.unbind_child(this->childID);
-
-        // Get `childID` from `Shader` and set pointer to this `Material`.
-        this->child_of_shader_or_symbiosis.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_materials);
-    }
-
-    void Material::bind_to_new_parent(yli::ontology::Entity* const new_parent)
-    {
-        // this method sets pointer to this `Material` to `nullptr`, sets `parent` according to the input,
-        // and requests a new `childID` from the new `Shader`.
-        //
-        // requirements:
-        // `new_parent` must not be `nullptr`.
-
-        yli::ontology::Shader* const shader = dynamic_cast<yli::ontology::Shader*>(new_parent);
-
-        if (shader != nullptr)
-        {
-            this->bind_to_new_shader_parent(shader);
-            return;
-        }
-
-        std::cerr << "ERROR: `Material::bind_to_new_parent`: `new_parent` is not `yli::ontology::Shader*`!\n";
     }
 
     const std::string& Material::get_texture_file_format() const
