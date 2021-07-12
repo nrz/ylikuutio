@@ -39,8 +39,8 @@ namespace yli::data
 namespace yli::ontology
 {
     class Universe;
-    class Console;
     class Variable;
+    class Console;
     class EntityFactory;
     struct EntityStruct;
     struct VariableStruct;
