@@ -60,13 +60,13 @@ namespace yli::ontology
 
         private:
             Glyph(const yli::ontology::GlyphStruct& glyph_struct, yli::ontology::ParentModule* const parent_module)
-                : Model(glyph_struct.universe, glyph_struct, glyph_struct.opengl_in_use, parent_module)
+                : Model(glyph_struct.universe, glyph_struct, glyph_struct.opengl_in_use, parent_module),
+                glyph_vertex_data    { glyph_struct.glyph_vertex_data },
+                glyph_name_pointer   { glyph_struct.glyph_name_pointer },
+                unicode_char_pointer { glyph_struct.unicode_char_pointer }
             {
                 // constructor.
-                this->glyph_vertex_data    = glyph_struct.glyph_vertex_data;
-                this->glyph_name_pointer   = glyph_struct.glyph_name_pointer;
-                this->unicode_char_pointer = glyph_struct.unicode_char_pointer;
-                this->light_position       = glyph_struct.light_position;
+                this->light_position = glyph_struct.light_position;
 
                 // TODO: implement triangulation of `Glyph` objects!
                 yli::triangulation::TriangulatePolygonsStruct triangulate_polygons_struct;
