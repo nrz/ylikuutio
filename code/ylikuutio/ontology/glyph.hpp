@@ -81,10 +81,9 @@ namespace yli::ontology
                 {
                     std::cerr << "triangulation failed!\n";
                 }
-
                 const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
 
-                if (!is_headless)
+                if (!is_headless && glyph_struct.shader_pointer != nullptr)
                 {
                     // Get a handle for our buffers.
                     yli::ontology::store_gl_attrib_locations(glyph_struct.shader_pointer, this);

@@ -197,11 +197,11 @@ namespace yli::ontology
         yli::ontology::Entity* object_entity = new yli::ontology::Object(
                 this->universe,
                 object_struct,
-                (std::holds_alternative<yli::ontology::Species*>(object_struct.parent) ?
+                ((std::holds_alternative<yli::ontology::Species*>(object_struct.parent) && std::get<yli::ontology::Species*>(object_struct.parent) != nullptr) ?
                  &(std::get<yli::ontology::Species*>(object_struct.parent)->parent_of_objects) :
-                 std::holds_alternative<yli::ontology::ShapeshifterSequence*>(object_struct.parent) ?
+                 (std::holds_alternative<yli::ontology::ShapeshifterSequence*>(object_struct.parent) && std::get<yli::ontology::ShapeshifterSequence*>(object_struct.parent) != nullptr) ?
                  &(std::get<yli::ontology::ShapeshifterSequence*>(object_struct.parent)->parent_of_objects) :
-                 std::holds_alternative<yli::ontology::Text3D*>(object_struct.parent) ?
+                 (std::holds_alternative<yli::ontology::Text3D*>(object_struct.parent) && std::get<yli::ontology::Text3D*>(object_struct.parent) != nullptr) ?
                  &(std::get<yli::ontology::Text3D*>(object_struct.parent)->parent_of_objects) :
                  nullptr),
                 (object_struct.brain == nullptr ? nullptr : object_struct.brain->get_generic_master_module()));
