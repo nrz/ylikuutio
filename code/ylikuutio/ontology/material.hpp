@@ -56,12 +56,12 @@ namespace yli::ontology
                 parent_of_species(this, &this->registry, "species"),
                 parent_of_shapeshifter_transformations(this, &this->registry, "shapeshifter_transformations"),
                 parent_of_vector_fonts(this, &this->registry, "vector_fonts"),
-                parent_of_chunk_masters(this, &this->registry, "chunk_masters")
+                parent_of_chunk_masters(this, &this->registry, "chunk_masters"),
+                is_symbiont_material { material_struct.is_symbiont_material },
+                texture_file_format  { material_struct.texture_file_format },
+                texture_filename     { material_struct.texture_filename }
             {
                 // constructor.
-                this->is_symbiont_material = material_struct.is_symbiont_material;
-                this->texture_file_format  = material_struct.texture_file_format;
-                this->texture_filename     = material_struct.texture_filename;
 
                 const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
 
