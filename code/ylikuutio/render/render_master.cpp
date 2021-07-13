@@ -167,8 +167,8 @@ namespace yli::render
 
     void RenderMaster::adjust_opengl_viewport(const float window_width, const float window_height) const
     {
-        if (window_width <= std::numeric_limits<GLsizei>::max() &&
-                window_height <= std::numeric_limits<GLsizei>::max())
+        if (window_width >= 0 && window_width <= std::numeric_limits<GLsizei>::max() &&
+                window_height >= 0 && window_height <= std::numeric_limits<GLsizei>::max())
         {
             glViewport(0, 0, window_width, window_height);
         }
