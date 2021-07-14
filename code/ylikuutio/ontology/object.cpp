@@ -218,8 +218,6 @@ namespace yli::ontology
 
         if (this->should_be_rendered)
         {
-            this->prerender();
-
             if (this->object_type == yli::ontology::ObjectType::REGULAR)
             {
                 yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->child.get_parent());
@@ -243,18 +241,22 @@ namespace yli::ontology
                     return;
                 }
 
+                this->prerender();
                 this->render_this_object(shader);
+                this->postrender();
             }
             else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
             {
+                this->prerender();
                 // TODO.
+                this->postrender();
             }
             else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
             {
+                this->prerender();
                 this->render_this_object(static_cast<yli::ontology::Shader*>(this->glyph->get_parent()->get_parent()->get_parent()));
+                this->postrender();
             }
-
-            this->postrender();
         }
     }
 
