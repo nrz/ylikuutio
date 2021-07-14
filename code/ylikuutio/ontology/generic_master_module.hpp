@@ -69,6 +69,7 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_generic_master() const;
 
+            std::vector<yli::ontology::ApprenticeModule*>& get_apprentice_module_pointer_vector_reference();
             const std::vector<yli::ontology::ApprenticeModule*>& get_apprentice_module_pointer_vector_const_reference() const;
 
             std::size_t get_number_of_apprentices() const;

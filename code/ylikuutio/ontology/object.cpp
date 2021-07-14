@@ -234,7 +234,7 @@ namespace yli::ontology
                     return;
                 }
 
-                yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(material->get_parent());
+                yli::ontology::Shader* const shader = material->get_shader();
 
                 if (shader == nullptr)
                 {

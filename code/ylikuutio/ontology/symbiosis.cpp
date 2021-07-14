@@ -150,6 +150,18 @@ namespace yli::ontology
         return number_of_symbiont_species;
     }
 
+    yli::ontology::Scene* Symbiosis::get_scene() const
+    {
+        yli::ontology::Entity* const shader_parent = this->get_parent();
+
+        if (shader_parent != nullptr)
+        {
+            return shader_parent->get_scene();
+        }
+
+        return nullptr;
+    }
+
     yli::ontology::Entity* Symbiosis::get_parent() const
     {
         return this->child_of_shader.get_parent();
@@ -229,7 +241,7 @@ namespace yli::ontology
                 std::cout << "Creating `SymbiontMaterial*` based on `ofbx::Texture*` at 0x" << memory_address_stringstream.str() << " ...\n";
                 yli::ontology::MaterialStruct material_struct;
                 material_struct.shader = shader;
-                material_struct.symbiosis = this;
+                material_struct.parent = this;
                 material_struct.is_symbiont_material = true;
                 material_struct.ofbx_texture = ofbx_texture;
                 yli::ontology::SymbiontMaterial* const symbiont_material = new yli::ontology::SymbiontMaterial(

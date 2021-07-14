@@ -23,6 +23,7 @@
 #include "movable.hpp"
 #include "apprentice_module.hpp"
 #include "brain.hpp"
+#include "scene.hpp"
 #include "movable_variable_activation.hpp"
 #include "movable_variable_read.hpp"
 #include "variable_struct.hpp"

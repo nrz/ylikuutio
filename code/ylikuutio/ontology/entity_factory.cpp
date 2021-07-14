@@ -173,7 +173,10 @@ namespace yli::ontology
         yli::ontology::Entity* material_entity = new yli::ontology::Material(
                 this->universe,
                 material_struct,
-                (material_struct.shader == nullptr ? nullptr : &material_struct.shader->parent_of_materials));
+                ((std::holds_alternative<yli::ontology::Scene*>(material_struct.parent) && std::get<yli::ontology::Scene*>(material_struct.parent) != nullptr) ?
+                 &(std::get<yli::ontology::Scene*>(material_struct.parent)->parent_of_materials) :
+                 nullptr),
+                (material_struct.shader == nullptr ? nullptr : material_struct.shader->get_master_module()));
 
         material_entity->set_global_name(material_struct.global_name);
         material_entity->set_local_name(material_struct.local_name);

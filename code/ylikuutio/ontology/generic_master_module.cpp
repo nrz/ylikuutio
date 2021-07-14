@@ -75,6 +75,11 @@ namespace yli::ontology
         return this->generic_master;
     }
 
+    std::vector<yli::ontology::ApprenticeModule*>& GenericMasterModule::get_apprentice_module_pointer_vector_reference()
+    {
+        return this->apprentice_module_pointer_vector;
+    }
+
     const std::vector<yli::ontology::ApprenticeModule*>& GenericMasterModule::get_apprentice_module_pointer_vector_const_reference() const
     {
         return this->apprentice_module_pointer_vector;

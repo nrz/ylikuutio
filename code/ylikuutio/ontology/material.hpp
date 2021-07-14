@@ -21,6 +21,8 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "parent_module.hpp"
+#include "apprentice_module.hpp"
+#include "master_module.hpp"
 #include "universe.hpp"
 #include "shader.hpp"
 #include "material_struct.hpp"
@@ -43,20 +45,24 @@ namespace yli::ontology
     class Material: public yli::ontology::Entity
     {
         public:
-            // This method sets pointer to this `Material` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
-            void bind_to_new_shader_parent(yli::ontology::Shader* const new_parent);
+            // This method sets pointer to this `Material` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
+            void bind_to_new_scene_parent(yli::ontology::Scene* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
+
+            void bind_to_new_shader(yli::ontology::Shader* const new_shader);
 
             Material(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::MaterialStruct& material_struct,
-                    yli::ontology::ParentModule* const parent_module)
+                    yli::ontology::ParentModule* const scene_or_symbiosis_parent_module, // Parent is a `Scene`, except for `SymbiontMaterial`s its a `Symbiosis`.
+                    yli::ontology::MasterModule<yli::ontology::Shader*>* shader_master_module)
                 : Entity(universe, material_struct),
-                child_of_shader_or_symbiosis(parent_module, this),
+                child_of_scene_or_symbiosis(scene_or_symbiosis_parent_module, this),
                 parent_of_species(this, &this->registry, "species"),
                 parent_of_shapeshifter_transformations(this, &this->registry, "shapeshifter_transformations"),
                 parent_of_vector_fonts(this, &this->registry, "vector_fonts"),
                 parent_of_chunk_masters(this, &this->registry, "chunk_masters"),
+                apprentice_of_shader(static_cast<yli::ontology::GenericMasterModule*>(shader_master_module), this),
                 is_symbiont_material { material_struct.is_symbiont_material },
                 texture_file_format  { material_struct.texture_file_format },
                 texture_filename     { material_struct.texture_filename }
@@ -65,13 +71,16 @@ namespace yli::ontology
 
                 const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
 
-                if (!this->is_symbiont_material)
+                if (this->universe != nullptr &&
+                        !this->universe->get_is_headless() &&
+                        !this->is_symbiont_material &&
+                        this->get_shader() != nullptr)
                 {
                     // Load the texture.
                     if (this->texture_file_format == "png" ||
                             this->texture_file_format == "PNG")
                     {
-                        if (!yli::load::load_common_texture(
+                        if (yli::load::load_common_texture(
                                     this->texture_filename,
                                     yli::load::ImageLoaderStruct(),
                                     this->image_width,
@@ -79,6 +88,10 @@ namespace yli::ontology
                                     this->image_size,
                                     this->texture,
                                     is_headless))
+                        {
+                            this->is_texture_loaded = true;
+                        }
+                        else
                         {
                             std::cerr << "ERROR: loading " << this->texture_file_format << " texture failed!\n";
                         }
@@ -90,16 +103,13 @@ namespace yli::ontology
                     }
 
                     // Get a handle for our "texture_sampler" uniform.
-                    if (this->universe != nullptr && !this->universe->get_is_headless() && this->child_of_shader_or_symbiosis.get_parent() != nullptr)
-                    {
-                        yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->child_of_shader_or_symbiosis.get_parent());
-                        this->opengl_texture_id = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
-                    }
-
-                    // `yli::ontology::Entity` member variables begin here.
-                    this->type_string = "yli::ontology::Material*";
-                    this->can_be_erased = true;
+                    yli::ontology::Shader* const shader = this->get_shader();
+                    this->opengl_texture_id = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
                 }
+
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "yli::ontology::Material*";
+                this->can_be_erased = true;
             }
 
             Material(const Material&) = delete;            // Delete copy constructor.
@@ -108,7 +118,10 @@ namespace yli::ontology
             // destructor.
             virtual ~Material();
 
+            yli::ontology::Scene* get_scene() const override;
             yli::ontology::Entity* get_parent() const override;
+
+            yli::ontology::Shader* get_shader() const;
 
             const std::string& get_texture_file_format() const;
             const std::string& get_texture_filename() const;
@@ -116,14 +129,15 @@ namespace yli::ontology
             uint32_t get_image_height() const;
             uint32_t get_image_size() const;
 
-            template<class T1, class T2>
-                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
+            template<class T1>
+                friend void yli::render::render_apprentices(const std::vector<yli::ontology::ApprenticeModule*>& apprentice_pointer_vector);
 
-            yli::ontology::ChildModule child_of_shader_or_symbiosis;
+            yli::ontology::ChildModule child_of_scene_or_symbiosis;
             yli::ontology::ParentModule parent_of_species;
             yli::ontology::ParentModule parent_of_shapeshifter_transformations;
             yli::ontology::ParentModule parent_of_vector_fonts;
             yli::ontology::ParentModule parent_of_chunk_masters;
+            yli::ontology::ApprenticeModule apprentice_of_shader;
 
         protected:
             uint32_t image_width  { 0 };
@@ -144,6 +158,7 @@ namespace yli::ontology
 
             std::string texture_file_format;     // Type of the model file, eg. `"png"`.
             std::string texture_filename;        // Filename of the model file.
+            bool is_texture_loaded { false };
     };
 }
 

@@ -25,6 +25,7 @@
 #endif
 
 #include "scene.hpp"
+#include "rigid_body_module.hpp"
 #include "universe.hpp"
 #include "shader.hpp"
 #include "material.hpp"
@@ -214,7 +215,8 @@ namespace yli::ontology
         return this->number_of_shaders +
             this->parent_of_default_camera.get_number_of_children() +
             this->parent_of_cameras.get_number_of_children() +
-            this->parent_of_brains.get_number_of_children();
+            this->parent_of_brains.get_number_of_children() +
+            this->parent_of_materials.get_number_of_children();
     }
 
     std::size_t Scene::get_number_of_descendants() const
@@ -222,7 +224,8 @@ namespace yli::ontology
         return yli::ontology::get_number_of_descendants(this->shader_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_default_camera.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_cameras.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_brains.child_pointer_vector);
+            yli::ontology::get_number_of_descendants(this->parent_of_brains.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_materials.child_pointer_vector);
     }
 
     float Scene::get_turbo_factor() const
@@ -287,7 +290,14 @@ namespace yli::ontology
             return;
         }
 
-        btRigidBody* bullet_rigid_body = rigid_body_module.get_bullet_rigid_body();
+        btRigidBody* const bullet_rigid_body = rigid_body_module.get_bullet_rigid_body();
+
+        if (bullet_rigid_body == nullptr)
+        {
+            std::cerr << "ERROR: `Scene::add_rigid_body_module`: `bullet_rigid_body` is `nullptr`!\n";
+            return;
+        }
+
         this->dynamics_world->addRigidBody(bullet_rigid_body);
     }
 

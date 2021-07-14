@@ -18,6 +18,8 @@
 #ifndef __YLIKUUTIO_RENDER_RENDER_TEMPLATES_HPP_INCLUDED
 #define __YLIKUUTIO_RENDER_RENDER_TEMPLATES_HPP_INCLUDED
 
+#include "code/ylikuutio/ontology/apprentice_module.hpp"
+
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <vector>  // std::vector
@@ -34,6 +36,25 @@ namespace yli::render
                 if (child_pointer != nullptr && child_pointer->should_be_rendered)
                 {
                     child_pointer->render();
+                }
+            }
+        }
+
+    template<class T1>
+        void render_apprentices(const std::vector<yli::ontology::ApprenticeModule*>& apprentice_pointer_vector)
+        {
+            for (std::size_t apprentice_i = 0; apprentice_i < apprentice_pointer_vector.size(); apprentice_i++)
+            {
+                yli::ontology::ApprenticeModule* const apprentice_module = apprentice_pointer_vector[apprentice_i];
+
+                if (apprentice_module != nullptr)
+                {
+                    T1 apprentice_pointer = static_cast<T1>(apprentice_module->get_apprentice());
+
+                    if (apprentice_pointer != nullptr && apprentice_pointer->should_be_rendered)
+                    {
+                        apprentice_pointer->render();
+                    }
                 }
             }
         }
