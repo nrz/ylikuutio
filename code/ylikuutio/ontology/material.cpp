@@ -117,9 +117,10 @@ namespace yli::ontology
 
     Material::~Material()
     {
+        // destructor.
+
         if (!this->is_symbiont_material)
         {
-            // destructor.
             std::cout << "`Material` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
             if (this->is_texture_loaded)
