@@ -126,7 +126,7 @@ namespace yli::ontology
 
             // this method renders this `Object`.
             void render();
-            void render_this_object(yli::ontology::Shader* const shader_pointer);
+            void render_this_object(yli::ontology::Shader* const shader);
 
             yli::ontology::Glyph* glyph { nullptr }; // pointer to the `Glyph` (not a parent!).
 

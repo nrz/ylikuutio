@@ -32,7 +32,7 @@ TEST(glyph_struct_must_be_initialized_appropriately, glyph_struct)
     ASSERT_EQ(test_glyph_struct.glyph_name_pointer, nullptr);
     ASSERT_EQ(test_glyph_struct.unicode_char_pointer, nullptr);
     ASSERT_EQ(test_glyph_struct.universe, nullptr);
-    ASSERT_EQ(test_glyph_struct.shader_pointer, nullptr);
+    ASSERT_EQ(test_glyph_struct.shader, nullptr);
     ASSERT_EQ(test_glyph_struct.parent, nullptr);
     ASSERT_EQ(test_glyph_struct.opengl_in_use, true);
 }

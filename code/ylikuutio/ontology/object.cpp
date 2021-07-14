@@ -252,9 +252,9 @@ namespace yli::ontology
         }
     }
 
-    void Object::render_this_object(yli::ontology::Shader* const shader_pointer)
+    void Object::render_this_object(yli::ontology::Shader* const shader)
     {
-        if (shader_pointer == nullptr)
+        if (shader == nullptr)
         {
             return;
         }
@@ -301,8 +301,8 @@ namespace yli::ontology
 
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform.
-        glUniformMatrix4fv(shader_pointer->get_matrix_id(), 1, GL_FALSE, &this->mvp_matrix[0][0]);
-        glUniformMatrix4fv(shader_pointer->get_model_matrix_id(), 1, GL_FALSE, &this->model_matrix[0][0]);
+        glUniformMatrix4fv(shader->get_matrix_id(), 1, GL_FALSE, &this->mvp_matrix[0][0]);
+        glUniformMatrix4fv(shader->get_model_matrix_id(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
         yli::ontology::Model* parent_model = nullptr;
 
