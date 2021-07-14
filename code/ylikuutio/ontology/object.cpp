@@ -237,6 +237,12 @@ namespace yli::ontology
                 }
 
                 yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(material->get_parent());
+
+                if (shader == nullptr)
+                {
+                    return;
+                }
+
                 this->render_this_object(shader);
             }
             else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
