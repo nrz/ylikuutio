@@ -254,6 +254,11 @@ namespace yli::ontology
 
     void Object::render_this_object(yli::ontology::Shader* const shader_pointer)
     {
+        if (shader_pointer == nullptr)
+        {
+            return;
+        }
+
         if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
         {
             // TODO: implement rendering for `SHAPESHIFTER`!
