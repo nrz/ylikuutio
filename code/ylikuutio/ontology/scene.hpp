@@ -92,8 +92,7 @@ namespace yli::ontology
                 parent_of_default_camera(this, &this->registry, "default_camera"),
                 parent_of_cameras(this, &this->registry, "cameras"),
                 parent_of_brains(this, &this->registry, "brains"),
-                parent_of_materials(this, &this->registry, "materials"),
-                parent_of_rigid_bodies(this, &this->registry, "rigid_bodies")
+                parent_of_materials(this, &this->registry, "materials")
             {
                 // constructor.
                 this->gravity     = scene_struct.gravity;
@@ -172,7 +171,6 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_cameras;
             yli::ontology::ParentModule parent_of_brains;
             yli::ontology::ParentModule parent_of_materials;
-            yli::ontology::ParentModule parent_of_rigid_bodies;
 
         private:
             std::size_t get_number_of_children() const override;
