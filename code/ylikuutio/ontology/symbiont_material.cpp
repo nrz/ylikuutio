@@ -37,6 +37,7 @@
 namespace yli::ontology
 {
     class Entity;
+    class Scene;
 
     SymbiontMaterial::~SymbiontMaterial()
     {
@@ -44,6 +45,19 @@ namespace yli::ontology
         std::cout << "`SymbiontMaterial` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
         glDeleteTextures(1, &this->texture);
+    }
+
+    yli::ontology::Scene* SymbiontMaterial::get_scene() const
+    {
+        // Return `Scene*` returned by `Symbiosis::get_scene`.
+        yli::ontology::Entity* const symbiosis_parent = this->get_parent();
+
+        if (symbiosis_parent != nullptr)
+        {
+            return symbiosis_parent->get_scene();
+        }
+
+        return nullptr;
     }
 
     void SymbiontMaterial::render()
@@ -98,7 +112,7 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->child_of_shader_or_symbiosis.get_parent());
+        const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->get_parent());
 
         if (symbiosis == nullptr)
         {

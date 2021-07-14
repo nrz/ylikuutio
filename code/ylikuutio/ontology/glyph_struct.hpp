@@ -42,7 +42,7 @@ namespace yli::ontology
         const char* glyph_name_pointer         { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.
         const char* unicode_char_pointer       { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.
         yli::ontology::Universe* universe      { nullptr }; // Pointer to the `Universe` (not a parent!).
-        yli::ontology::Shader* shader_pointer  { nullptr }; // Pointer to the `Shader` (not a parent!).
+        yli::ontology::Shader* shader          { nullptr }; // Pointer to the `Shader` (not a parent!).
         yli::ontology::VectorFont* parent      { nullptr }; // pointer to the `VectorFont`.
         bool opengl_in_use                     { true };    // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
     };

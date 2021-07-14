@@ -68,7 +68,7 @@ TEST(object_must_be_bound_to_species_appropriately, universe_callback)
     shader_struct.parent = scene;
     yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
 
-    yli::ontology::Material* const material = new yli::ontology::Material(universe, yli::ontology::MaterialStruct(), &shader->parent_of_materials);
+    yli::ontology::Material* const material = new yli::ontology::Material(universe, yli::ontology::MaterialStruct(), &scene->parent_of_materials, &shader->master_of_materials);
 
     const std::string species1_name = "foo";
 

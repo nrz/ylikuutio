@@ -422,6 +422,7 @@ namespace yli::ontology
             yli::input::InputMethod get_input_method() const;
 
             bool get_is_headless() const;
+            bool get_is_physical() const;
 
             std::string eval_string(const std::string& my_string) const;
 

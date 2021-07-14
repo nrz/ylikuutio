@@ -21,7 +21,7 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "parent_module.hpp"
-#include "master_module.hpp"
+#include "generic_master_module.hpp"
 #include "universe.hpp"
 #include "font_struct.hpp"
 #include "text_struct.hpp"
@@ -183,7 +183,7 @@ namespace yli::ontology
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::ParentModule parent_of_text_2ds;
 
-            yli::ontology::MasterModule master_of_consoles;
+            yli::ontology::GenericMasterModule master_of_consoles;
 
         private:
             std::size_t get_number_of_children() const override;

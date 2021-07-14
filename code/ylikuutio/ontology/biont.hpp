@@ -34,7 +34,7 @@ namespace yli::ontology
     class Universe;
     class Shader;
     class ParentModule;
-    class MasterModule;
+    class GenericMasterModule;
 
     class Biont: public yli::ontology::Movable
     {
@@ -43,13 +43,13 @@ namespace yli::ontology
                     yli::ontology::Universe* const universe,
                     yli::ontology::BiontStruct& biont_struct,
                     yli::ontology::ParentModule* const parent_module,
-                    yli::ontology::MasterModule* const symbiont_species_master_module)
+                    yli::ontology::GenericMasterModule* const symbiont_species_generic_master_module)
                 : Movable(
                         universe,
                         biont_struct,
                         parent_module,
                         nullptr),
-                apprentice_of_symbiont_species(symbiont_species_master_module, this)
+                apprentice_of_symbiont_species(symbiont_species_generic_master_module, this)
             {
                 // constructor.
 

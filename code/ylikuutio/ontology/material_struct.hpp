@@ -22,6 +22,7 @@
 
 // Include standard headers
 #include <string>   // std::string
+#include <variant>  // std::holds_alternative, std::variant
 
 namespace ofbx
 {
@@ -31,6 +32,7 @@ namespace ofbx
 
 namespace yli::ontology
 {
+    class Scene;
     class Shader;
     class Symbiosis;
 
@@ -38,8 +40,8 @@ namespace yli::ontology
     {
         std::string texture_file_format;     // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`.
         std::string texture_filename;        // Filename of the model file.
-        yli::ontology::Shader* shader       { nullptr }; // Pointer to `Shader`.
-        yli::ontology::Symbiosis* symbiosis { nullptr }; // Pointer to `Symbiosis`.
+        std::variant<yli::ontology::Scene*, yli::ontology::Symbiosis*> parent;
+        yli::ontology::Shader* shader       { nullptr }; // Pointer to `Shader` master.
         const ofbx::Texture* ofbx_texture   { nullptr }; // For `SymbiontMaterial`s.
         bool is_symbiont_material           { false };
     };

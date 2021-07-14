@@ -49,6 +49,7 @@ typedef unsigned char u8;
 namespace yli::ontology
 {
     class Universe;
+    class Scene;
     class Shader;
     class SymbiontMaterial;
     class SymbiontSpecies;
@@ -87,6 +88,7 @@ namespace yli::ontology
             // destructor.
             virtual ~Symbiosis();
 
+            yli::ontology::Scene* get_scene() const override;
             yli::ontology::Entity* get_parent() const override;
 
             std::size_t get_number_of_symbiont_materials() const;

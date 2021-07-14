@@ -680,6 +680,11 @@ namespace yli::ontology
         return this->is_headless;
     }
 
+    bool Universe::get_is_physical() const
+    {
+        return this->is_physical;
+    }
+
     std::size_t Universe::get_number_of_ecosystems() const
     {
         return this->parent_of_ecosystems.get_number_of_children();

@@ -38,13 +38,13 @@
 // If the apprentice of a master-apprentice relation dies,
 // the master will survice.
 
-#include "indexable.hpp"
+#include "generic_master_module.hpp"
+#include "apprentice_module.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <queue>   // std::queue
+#include <functional> // std::function
 #include <string>  // std::string
-#include <vector>  // std::vector
 
 namespace yli::ontology
 {
@@ -52,37 +52,50 @@ namespace yli::ontology
     class ApprenticeModule;
     class Entity;
 
-    class MasterModule: public yli::ontology::Indexable
+    template<class M>
+        class MasterModule: public yli::ontology::GenericMasterModule
     {
         public:
-            void bind_apprentice_module(yli::ontology::ApprenticeModule* const apprentice_module);
-            void unbind_apprentice_module(std::size_t apprenticeID);
-
             // constructor.
-            MasterModule(yli::ontology::Entity* const master, yli::ontology::Registry* const registry, const std::string& name);
+            MasterModule(
+                    M const master,
+                    yli::ontology::Registry* const registry,
+                    const std::string& name,
+                    std::function<void (const M&, yli::ontology::Entity*)> unbind_callback)
+                : GenericMasterModule(master, registry, name),
+                unbind_callback { unbind_callback }
+            {
+                // constructor.
+            }
 
             MasterModule(const MasterModule&) = delete;            // Delete copy constructor.
             MasterModule& operator=(const MasterModule&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~MasterModule();
+            virtual ~MasterModule()
+            {
+                // destructor.
 
-            yli::ontology::Entity* get_master() const;
+                for (std::size_t apprentice_i = 0; apprentice_i < this->apprentice_module_pointer_vector.size(); apprentice_i++)
+                {
+                    yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector[apprentice_i];
 
-            const std::vector<yli::ontology::ApprenticeModule*>& get_apprentice_module_pointer_vector_const_reference() const;
+                    if (apprentice_module != nullptr)
+                    {
+                        // Call the unbind callback.
+                        this->unbind_apprentice_module(apprentice_module->apprenticeID);
+                    }
+                }
+            }
 
-            std::size_t get_number_of_apprentices() const;
-
-            yli::ontology::Entity* get(const std::size_t index) const override;
+            M get_master() const
+            {
+                return this->master;
+            }
 
             friend class yli::ontology::ApprenticeModule;
 
-        private:
-            yli::ontology::Entity* const master; // The `Entity` that owns this `MasterModule`.
-
-            std::vector<yli::ontology::ApprenticeModule*> apprentice_module_pointer_vector;
-            std::queue<std::size_t> free_apprenticeID_queue;
-            std::size_t number_of_apprentices;
+            std::function<void (const M&, yli::ontology::Entity*)> unbind_callback;
     };
 }
 

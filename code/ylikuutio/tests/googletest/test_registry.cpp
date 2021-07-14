@@ -18,7 +18,7 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/ontology/registry.hpp"
 #include "code/ylikuutio/ontology/parent_module.hpp"
-#include "code/ylikuutio/ontology/master_module.hpp"
+#include "code/ylikuutio/ontology/generic_master_module.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
@@ -131,10 +131,10 @@ TEST(parent_module_must_bind_to_registry_appropriately, parent_module_foo)
     ASSERT_EQ(registry.get_completions("fooz"), empty_completions_vector);
 }
 
-TEST(master_module_must_bind_to_registry_appropriately, master_module_foo)
+TEST(generic_master_module_must_bind_to_registry_appropriately, generic_master_module_foo)
 {
     yli::ontology::Registry registry;
-    yli::ontology::MasterModule master_module(nullptr, &registry, "foo");
+    yli::ontology::GenericMasterModule generic_master_module(nullptr, &registry, "foo");
 
     ASSERT_TRUE(registry.is_name("foo"));
     ASSERT_FALSE(registry.is_name("bar"));

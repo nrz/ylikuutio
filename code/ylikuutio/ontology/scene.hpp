@@ -74,7 +74,7 @@ namespace yli::ontology
     class Universe;
     class Shader;
     class Symbiosis;
-    class RigidBody;
+    class RigidBodyModule;
 
     class Scene: public yli::ontology::Entity
     {
@@ -92,7 +92,7 @@ namespace yli::ontology
                 parent_of_default_camera(this, &this->registry, "default_camera"),
                 parent_of_cameras(this, &this->registry, "cameras"),
                 parent_of_brains(this, &this->registry, "brains"),
-                parent_of_rigid_bodies(this, &this->registry, "rigid_bodies")
+                parent_of_materials(this, &this->registry, "materials")
             {
                 // constructor.
                 this->gravity     = scene_struct.gravity;
@@ -106,7 +106,7 @@ namespace yli::ontology
                 new yli::ontology::Camera(this->universe, camera_struct, &this->parent_of_default_camera, nullptr); // create the default camera.
 
                 // Bullet variables.
-                if (this->universe != nullptr)
+                if (this->universe != nullptr && this->universe->get_is_physical())
                 {
                     yli::ontology::Universe* const universe = this->universe;
 
@@ -159,7 +159,7 @@ namespace yli::ontology
             float get_gravity() const;
             void set_gravity(const float gravity);
 
-            void add_rigid_body(yli::ontology::RigidBody* const rigid_body);
+            void add_rigid_body_module(const yli::ontology::RigidBodyModule& rigid_body_module);
 
             float get_water_level() const;
 
@@ -170,7 +170,7 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_default_camera;
             yli::ontology::ParentModule parent_of_cameras;
             yli::ontology::ParentModule parent_of_brains;
-            yli::ontology::ParentModule parent_of_rigid_bodies;
+            yli::ontology::ParentModule parent_of_materials;
 
         private:
             std::size_t get_number_of_children() const override;

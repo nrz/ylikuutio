@@ -24,6 +24,7 @@
 
 #include "entity.hpp"
 #include "parent_module.hpp"
+#include "master_module.hpp"
 #include "universe.hpp"
 #include "shader_struct.hpp"
 #include "family_templates.hpp"
@@ -55,8 +56,8 @@ namespace yli::ontology
             Shader(yli::ontology::Universe* const universe, const yli::ontology::ShaderStruct& shader_struct)
                 : Entity(universe, shader_struct),
                 parent_of_compute_tasks(this, &this->registry, "compute_tasks"),
-                parent_of_materials(this, &this->registry, "materials"),
-                parent_of_symbioses(this, &this->registry, "symbioses")
+                parent_of_symbioses(this, &this->registry, "symbioses"),
+                master_of_materials(this, &this->registry, "materials", nullptr)
             {
                 // constructor.
 
@@ -100,7 +101,13 @@ namespace yli::ontology
             // destructor.
             virtual ~Shader();
 
+            yli::ontology::Scene* get_scene() const override;
             yli::ontology::Entity* get_parent() const override;
+
+            yli::ontology::MasterModule<yli::ontology::Shader*>* get_master_module() const
+            {
+                return const_cast<yli::ontology::MasterModule<yli::ontology::Shader*>*>(&this->master_of_materials);
+            }
 
             GLuint get_program_id() const;
             GLint get_matrix_id() const;
@@ -113,8 +120,8 @@ namespace yli::ontology
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
             yli::ontology::ParentModule parent_of_compute_tasks;
-            yli::ontology::ParentModule parent_of_materials;
             yli::ontology::ParentModule parent_of_symbioses;
+            yli::ontology::MasterModule<yli::ontology::Shader*> master_of_materials;
 
         private:
             void bind_to_parent();

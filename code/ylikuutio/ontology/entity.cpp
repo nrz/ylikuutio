@@ -38,6 +38,8 @@
 
 namespace yli::ontology
 {
+    class Scene;
+
     void Entity::bind_variable(yli::ontology::Variable* const variable)
     {
         if (variable != nullptr)
@@ -166,6 +168,15 @@ namespace yli::ontology
     yli::ontology::Universe* Entity::get_universe() const
     {
         return this->universe;
+    }
+
+    yli::ontology::Scene* Entity::get_scene() const
+    {
+        // Different classes are bound to `Scene` in different ways,
+        // so they need to `override` this to provide the functionality.
+        // Note: not all classes have any relation to a specific `Scene`.
+        // E.g. `Universe` may have many `Scene`s, but is descendant of none.
+        return nullptr;
     }
 
     yli::ontology::EntityFactory* Entity::get_entity_factory() const

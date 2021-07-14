@@ -25,17 +25,21 @@
 #endif
 
 #include "scene.hpp"
+#include "rigid_body_module.hpp"
 #include "universe.hpp"
 #include "shader.hpp"
 #include "material.hpp"
 #include "camera.hpp"
 #include "brain.hpp"
-#include "rigid_body.hpp"
+#include "rigid_body_module.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/render/render_master.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
+
+// Include Bullet
+#include <btBulletDynamicsCommon.h>
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
@@ -211,7 +215,8 @@ namespace yli::ontology
         return this->number_of_shaders +
             this->parent_of_default_camera.get_number_of_children() +
             this->parent_of_cameras.get_number_of_children() +
-            this->parent_of_brains.get_number_of_children();
+            this->parent_of_brains.get_number_of_children() +
+            this->parent_of_materials.get_number_of_children();
     }
 
     std::size_t Scene::get_number_of_descendants() const
@@ -219,7 +224,8 @@ namespace yli::ontology
         return yli::ontology::get_number_of_descendants(this->shader_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_default_camera.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_cameras.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_brains.child_pointer_vector);
+            yli::ontology::get_number_of_descendants(this->parent_of_brains.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_materials.child_pointer_vector);
     }
 
     float Scene::get_turbo_factor() const
@@ -276,21 +282,23 @@ namespace yli::ontology
         this->gravity = gravity;
     }
 
-    void Scene::add_rigid_body(yli::ontology::RigidBody* const rigid_body)
+    void Scene::add_rigid_body_module(const yli::ontology::RigidBodyModule& rigid_body_module)
     {
-        if (rigid_body == nullptr)
+        if (this->dynamics_world == nullptr)
         {
-            std::cerr << "ERROR: `Scene::add_rigid_body`: `rigid_body` is `nullptr`!\n";
+            std::cerr << "ERROR: `Scene::add_rigid_body_module`: `this->dynamics_world` is `nullptr`!\n";
             return;
         }
 
-        if (rigid_body == nullptr)
+        btRigidBody* const bullet_rigid_body = rigid_body_module.get_bullet_rigid_body();
+
+        if (bullet_rigid_body == nullptr)
         {
-            std::cerr << "ERROR: `Scene::add_rigid_body`: `this->dynamics_world` is `nullptr`!\n";
+            std::cerr << "ERROR: `Scene::add_rigid_body_module`: `bullet_rigid_body` is `nullptr`!\n";
             return;
         }
 
-        this->dynamics_world->addRigidBody(rigid_body->get_bullet_rigid_body());
+        this->dynamics_world->addRigidBody(bullet_rigid_body);
     }
 
     float Scene::get_water_level() const

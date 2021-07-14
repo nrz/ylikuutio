@@ -743,6 +743,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/framebuffer_module_struct.hpp
     code/ylikuutio/ontology/generic_lisp_function_overload.cpp
     code/ylikuutio/ontology/generic_lisp_function_overload.hpp
+    code/ylikuutio/ontology/generic_master_module.cpp
+    code/ylikuutio/ontology/generic_master_module.hpp
     code/ylikuutio/ontology/get_content_callback.hpp
     code/ylikuutio/ontology/gl_attrib_locations.cpp
     code/ylikuutio/ontology/gl_attrib_locations.hpp
@@ -759,7 +761,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/lisp_function.hpp
     code/ylikuutio/ontology/lisp_function_overload.hpp
     code/ylikuutio/ontology/lisp_function_struct.hpp
-    code/ylikuutio/ontology/master_module.cpp
     code/ylikuutio/ontology/master_module.hpp
     code/ylikuutio/ontology/material.cpp
     code/ylikuutio/ontology/material.hpp
@@ -785,9 +786,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/read_callback.hpp
     code/ylikuutio/ontology/registry.cpp
     code/ylikuutio/ontology/registry.hpp
-    code/ylikuutio/ontology/rigid_body.cpp
-    code/ylikuutio/ontology/rigid_body.hpp
-    code/ylikuutio/ontology/rigid_body_struct.hpp
+    code/ylikuutio/ontology/rigid_body_module.cpp
+    code/ylikuutio/ontology/rigid_body_module.hpp
+    code/ylikuutio/ontology/rigid_body_module_struct.hpp
     code/ylikuutio/ontology/scene.cpp
     code/ylikuutio/ontology/scene.hpp
     code/ylikuutio/ontology/scene_struct.hpp

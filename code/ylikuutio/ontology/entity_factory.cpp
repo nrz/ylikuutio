@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "entity_factory.hpp"
-#include "master_module.hpp"
+#include "generic_master_module.hpp"
 #include "entity.hpp"
 #include "variable.hpp"
 #include "universe.hpp"
@@ -173,7 +173,10 @@ namespace yli::ontology
         yli::ontology::Entity* material_entity = new yli::ontology::Material(
                 this->universe,
                 material_struct,
-                (material_struct.shader == nullptr ? nullptr : &material_struct.shader->parent_of_materials));
+                ((std::holds_alternative<yli::ontology::Scene*>(material_struct.parent) && std::get<yli::ontology::Scene*>(material_struct.parent) != nullptr) ?
+                 &(std::get<yli::ontology::Scene*>(material_struct.parent)->parent_of_materials) :
+                 nullptr),
+                (material_struct.shader == nullptr ? nullptr : material_struct.shader->get_master_module()));
 
         material_entity->set_global_name(material_struct.global_name);
         material_entity->set_local_name(material_struct.local_name);
@@ -197,14 +200,14 @@ namespace yli::ontology
         yli::ontology::Entity* object_entity = new yli::ontology::Object(
                 this->universe,
                 object_struct,
-                (std::holds_alternative<yli::ontology::Species*>(object_struct.parent) ?
+                ((std::holds_alternative<yli::ontology::Species*>(object_struct.parent) && std::get<yli::ontology::Species*>(object_struct.parent) != nullptr) ?
                  &(std::get<yli::ontology::Species*>(object_struct.parent)->parent_of_objects) :
-                 std::holds_alternative<yli::ontology::ShapeshifterSequence*>(object_struct.parent) ?
+                 (std::holds_alternative<yli::ontology::ShapeshifterSequence*>(object_struct.parent) && std::get<yli::ontology::ShapeshifterSequence*>(object_struct.parent) != nullptr) ?
                  &(std::get<yli::ontology::ShapeshifterSequence*>(object_struct.parent)->parent_of_objects) :
-                 std::holds_alternative<yli::ontology::Text3D*>(object_struct.parent) ?
+                 (std::holds_alternative<yli::ontology::Text3D*>(object_struct.parent) && std::get<yli::ontology::Text3D*>(object_struct.parent) != nullptr) ?
                  &(std::get<yli::ontology::Text3D*>(object_struct.parent)->parent_of_objects) :
                  nullptr),
-                (object_struct.brain == nullptr ? nullptr : object_struct.brain->get_master_module()));
+                (object_struct.brain == nullptr ? nullptr : object_struct.brain->get_generic_master_module()));
 
         object_entity->set_global_name(object_struct.global_name);
         object_entity->set_local_name(object_struct.local_name);
@@ -229,7 +232,7 @@ namespace yli::ontology
                 this->universe,
                 holobiont_struct,
                 (holobiont_struct.parent == nullptr ? nullptr : &holobiont_struct.parent->parent_of_holobionts),
-                (holobiont_struct.brain == nullptr ? nullptr : holobiont_struct.brain->get_master_module()));
+                (holobiont_struct.brain == nullptr ? nullptr : holobiont_struct.brain->get_generic_master_module()));
 
         holobiont_entity->set_global_name(holobiont_struct.global_name);
         holobiont_entity->set_local_name(holobiont_struct.local_name);
@@ -262,7 +265,7 @@ namespace yli::ontology
                 this->universe,
                 text_3d_struct,
                 (text_3d_struct.parent == nullptr ? nullptr : &text_3d_struct.parent->parent_of_text_3ds),
-                (text_3d_struct.brain == nullptr ? nullptr : text_3d_struct.brain->get_master_module()));
+                (text_3d_struct.brain == nullptr ? nullptr : text_3d_struct.brain->get_generic_master_module()));
 
         text3d_entity->set_global_name(text_3d_struct.global_name);
         text3d_entity->set_local_name(text_3d_struct.local_name);
@@ -330,7 +333,7 @@ namespace yli::ontology
                 this->universe,
                 camera_struct,
                 (camera_struct.parent == nullptr ? nullptr : &camera_struct.parent->parent_of_cameras),
-                (camera_struct.brain == nullptr ? nullptr : camera_struct.brain->get_master_module()));
+                (camera_struct.brain == nullptr ? nullptr : camera_struct.brain->get_generic_master_module()));
 
         camera_entity->set_global_name(camera_struct.global_name);
         camera_entity->set_local_name(camera_struct.local_name);

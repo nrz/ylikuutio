@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "shader.hpp"
+#include "master_module.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
 #include "family_templates.hpp"
@@ -153,10 +154,15 @@ namespace yli::ontology
         glUniformMatrix4fv(this->view_matrix_id, 1, GL_FALSE, &this->universe->get_view_matrix()[0][0]);
 
         render_master->render_compute_tasks(this->parent_of_compute_tasks.child_pointer_vector);
-        render_master->render_materials(this->parent_of_materials.child_pointer_vector);
+        render_master->render_materials(this->master_of_materials.get_apprentice_module_pointer_vector_reference());
         render_master->render_symbioses(this->parent_of_symbioses.child_pointer_vector);
 
         this->postrender();
+    }
+
+    yli::ontology::Scene* Shader::get_scene() const
+    {
+        return this->parent;
     }
 
     yli::ontology::Entity* Shader::get_parent() const
@@ -167,14 +173,12 @@ namespace yli::ontology
     std::size_t Shader::get_number_of_children() const
     {
         return this->parent_of_compute_tasks.get_number_of_children() +
-            this->parent_of_materials.get_number_of_children() +
             this->parent_of_symbioses.get_number_of_children();
     }
 
     std::size_t Shader::get_number_of_descendants() const
     {
         return yli::ontology::get_number_of_descendants(this->parent_of_compute_tasks.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_materials.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_symbioses.child_pointer_vector);
     }
 

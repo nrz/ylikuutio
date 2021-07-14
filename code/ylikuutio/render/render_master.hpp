@@ -34,6 +34,7 @@ namespace yli::ontology
     class Shader;
     class SymbiontSpecies;
     class Glyph;
+    class ApprenticeModule;
 }
 
 namespace yli::render
@@ -65,7 +66,7 @@ namespace yli::render
             void render(const yli::render::RenderStruct& render_struct) const;
 
             void render_shaders(std::vector<yli::ontology::Shader*>& shader_pointer_vector) const;
-            void render_materials(std::vector<yli::ontology::Entity*>& material_pointer_vector) const;
+            void render_materials(std::vector<yli::ontology::ApprenticeModule*>& material_apprentices_pointer_vector) const;
             void render_species(std::vector<yli::ontology::Entity*>& species_pointer_vector) const;
             void render_symbioses(std::vector<yli::ontology::Entity*>& symbiosis_pointer_vector) const;
             void render_symbiont_species(yli::ontology::SymbiontSpecies* const symbiont_species) const;

@@ -21,6 +21,7 @@
 #include "entity_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/input/input.hpp"
+#include "code/ylikuutio/ontology/rigid_body_module_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -89,6 +90,8 @@ namespace yli::ontology
         yli::data::SphericalCoordinatesStruct spherical_coordinates { NAN, NAN, NAN };
         float yaw   { 0.0f };
         float pitch { 0.0f };
+
+        yli::ontology::RigidBodyModuleStruct rigid_body_module_struct;
     };
 }
 

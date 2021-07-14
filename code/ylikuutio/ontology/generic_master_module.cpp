@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "registry.hpp"
-#include "master_module.hpp"
+#include "generic_master_module.hpp"
 #include "apprentice_module.hpp"
 #include "entity.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -27,7 +27,7 @@
 
 namespace yli::ontology
 {
-    void MasterModule::bind_apprentice_module(yli::ontology::ApprenticeModule* const apprentice_module)
+    void GenericMasterModule::bind_apprentice_module(yli::ontology::ApprenticeModule* const apprentice_module)
     {
         yli::hierarchy::bind_apprentice_to_master<yli::ontology::ApprenticeModule*>(
                 apprentice_module,
@@ -36,7 +36,7 @@ namespace yli::ontology
                 this->number_of_apprentices);
     }
 
-    void MasterModule::unbind_apprentice_module(std::size_t apprenticeID)
+    void GenericMasterModule::unbind_apprentice_module(std::size_t apprenticeID)
     {
         yli::hierarchy::unbind_child_from_parent<yli::ontology::ApprenticeModule*>(
                 apprenticeID,
@@ -45,8 +45,8 @@ namespace yli::ontology
                 this->number_of_apprentices);
     }
 
-    MasterModule::MasterModule(yli::ontology::Entity* const master, yli::ontology::Registry* const registry, const std::string& name)
-        : master { master },
+    GenericMasterModule::GenericMasterModule(yli::ontology::Entity* const generic_master, yli::ontology::Registry* const registry, const std::string& name)
+        : generic_master { generic_master },
         number_of_apprentices { 0 }
     {
         // constructor.
@@ -54,7 +54,7 @@ namespace yli::ontology
         registry->add_indexable(this, name);
     }
 
-    MasterModule::~MasterModule()
+    GenericMasterModule::~GenericMasterModule()
     {
         // destructor.
 
@@ -70,22 +70,27 @@ namespace yli::ontology
         }
     }
 
-    yli::ontology::Entity* MasterModule::get_master() const
+    yli::ontology::Entity* GenericMasterModule::get_generic_master() const
     {
-        return this->master;
+        return this->generic_master;
     }
 
-    const std::vector<yli::ontology::ApprenticeModule*>& MasterModule::get_apprentice_module_pointer_vector_const_reference() const
+    std::vector<yli::ontology::ApprenticeModule*>& GenericMasterModule::get_apprentice_module_pointer_vector_reference()
     {
         return this->apprentice_module_pointer_vector;
     }
 
-    std::size_t MasterModule::get_number_of_apprentices() const
+    const std::vector<yli::ontology::ApprenticeModule*>& GenericMasterModule::get_apprentice_module_pointer_vector_const_reference() const
+    {
+        return this->apprentice_module_pointer_vector;
+    }
+
+    std::size_t GenericMasterModule::get_number_of_apprentices() const
     {
         return this->number_of_apprentices;
     }
 
-    yli::ontology::Entity* MasterModule::get(const std::size_t index) const
+    yli::ontology::Entity* GenericMasterModule::get(const std::size_t index) const
     {
         if (index < this->apprentice_module_pointer_vector.size())
         {

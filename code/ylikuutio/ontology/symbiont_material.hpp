@@ -35,6 +35,7 @@ namespace yli::ontology
 {
     class Entity;
     class Universe;
+    class Scene;
     class SymbiontSpecies;
     class ParentModule;
 
@@ -45,7 +46,7 @@ namespace yli::ontology
                     yli::ontology::Universe* const universe,
                     const yli::ontology::MaterialStruct& material_struct,
                     yli::ontology::ParentModule* const parent_module)
-                : Material(universe, material_struct, parent_module)
+                : Material(universe, material_struct, parent_module, nullptr)
             {
                 // constructor.
                 this->ofbx_texture = material_struct.ofbx_texture;
@@ -60,6 +61,8 @@ namespace yli::ontology
 
             // destructor.
             virtual ~SymbiontMaterial();
+
+            yli::ontology::Scene* get_scene() const override;
 
             uint32_t get_texture() const;
             GLint get_openGL_textureID() const;

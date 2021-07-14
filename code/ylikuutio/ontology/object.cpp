@@ -218,8 +218,6 @@ namespace yli::ontology
 
         if (this->should_be_rendered)
         {
-            this->prerender();
-
             if (this->object_type == yli::ontology::ObjectType::REGULAR)
             {
                 yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->child.get_parent());
@@ -236,24 +234,39 @@ namespace yli::ontology
                     return;
                 }
 
-                yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(material->get_parent());
+                yli::ontology::Shader* const shader = material->get_shader();
+
+                if (shader == nullptr)
+                {
+                    return;
+                }
+
+                this->prerender();
                 this->render_this_object(shader);
+                this->postrender();
             }
             else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
             {
+                this->prerender();
                 // TODO.
+                this->postrender();
             }
             else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
             {
+                this->prerender();
                 this->render_this_object(static_cast<yli::ontology::Shader*>(this->glyph->get_parent()->get_parent()->get_parent()));
+                this->postrender();
             }
-
-            this->postrender();
         }
     }
 
-    void Object::render_this_object(yli::ontology::Shader* const shader_pointer)
+    void Object::render_this_object(yli::ontology::Shader* const shader)
     {
+        if (shader == nullptr)
+        {
+            return;
+        }
+
         if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
         {
             // TODO: implement rendering for `SHAPESHIFTER`!
@@ -296,8 +309,8 @@ namespace yli::ontology
 
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform.
-        glUniformMatrix4fv(shader_pointer->get_matrix_id(), 1, GL_FALSE, &this->mvp_matrix[0][0]);
-        glUniformMatrix4fv(shader_pointer->get_model_matrix_id(), 1, GL_FALSE, &this->model_matrix[0][0]);
+        glUniformMatrix4fv(shader->get_matrix_id(), 1, GL_FALSE, &this->mvp_matrix[0][0]);
+        glUniformMatrix4fv(shader->get_model_matrix_id(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
         yli::ontology::Model* parent_model = nullptr;
 

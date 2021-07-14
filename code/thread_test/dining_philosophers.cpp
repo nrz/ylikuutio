@@ -43,7 +43,7 @@ class Random
         {
             float dividend = static_cast<float>(std::rand() % 10000);
             float divisor = static_cast<float>(std::rand() % 10000);
-            return dividend / divisor / 10000.0f;;
+            return dividend / divisor / 10000.0f;
         }
 
         std::mutex my_mutex;
