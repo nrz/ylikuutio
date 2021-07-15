@@ -54,21 +54,10 @@ namespace yli::ontology
                     yli::ontology::ParentModule* const parent_module)
                 : Entity(universe, model_struct),
                 child(parent_module, this),
-                parent_of_objects(this, &this->registry, "objects")
+                parent_of_objects(this, &this->registry, "objects"),
+                opengl_in_use { opengl_in_use }
             {
                 // constructor.
-
-                // Initialize class members with some dummy values.
-                this->light_id                      = 0;
-                this->vertex_position_modelspace_id = 0;
-                this->vertex_uv_id                  = 0;
-                this->vertex_normal_modelspace_id   = 0;
-                this->vertexbuffer                  = 0;
-                this->uvbuffer                      = 0;
-                this->normalbuffer                  = 0;
-                this->elementbuffer                 = 0;
-
-                this->opengl_in_use = opengl_in_use;
 
                 // `yli::ontology::Entity` member variables begin here.
                 // Descendant classes of `yli::ontology::Model` need to set the value of `type_string`!
@@ -116,13 +105,13 @@ namespace yli::ontology
             std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
             glm::vec3 light_position;                // light position.
 
-            GLint light_id;                          // light ID, returned by `glGetUniformLocation(program_id, "light_position_worldspace");`.
+            GLint light_id { 0 };                    // light ID, returned by `glGetUniformLocation(program_id, "light_position_worldspace");`. Dummy value.
 
             std::string triangulation_type;
 
-            GLint vertex_position_modelspace_id;
-            GLint vertex_uv_id;
-            GLint vertex_normal_modelspace_id;
+            GLint vertex_position_modelspace_id { 0 }; // dummy value.
+            GLint vertex_uv_id                  { 0 }; // dummy value.
+            GLint vertex_normal_modelspace_id   { 0 }; // dummy value.
 
             std::vector<glm::vec3> vertices;         // vertices of the `Model`.
             std::vector<glm::vec2> uvs;              // UVs of the `Model`.
@@ -133,10 +122,10 @@ namespace yli::ontology
             std::vector<glm::vec2> indexed_uvs;
             std::vector<glm::vec3> indexed_normals;
 
-            GLuint vertexbuffer;
-            GLuint uvbuffer;
-            GLuint normalbuffer;
-            GLuint elementbuffer;
+            GLuint vertexbuffer  { 0 }; // dummy value.
+            GLuint uvbuffer      { 0 }; // dummy value.
+            GLuint normalbuffer  { 0 }; // dummy value.
+            GLuint elementbuffer { 0 }; // dummy value.
 
             bool opengl_in_use;
 
