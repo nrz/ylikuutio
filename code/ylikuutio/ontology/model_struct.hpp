@@ -20,10 +20,17 @@
 
 #include "entity_struct.hpp"
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 namespace yli::ontology
 {
     struct ModelStruct: public yli::ontology::EntityStruct
     {
+        glm::vec3 light_position { 0.0f, 0.0f, 0.0f }; // Light position.
     };
 }
 
