@@ -57,28 +57,24 @@ namespace yli::ontology
                     yli::ontology::Universe* const universe,
                     const yli::ontology::SpeciesStruct& species_struct,
                     yli::ontology::ParentModule* const parent_module)
-                : Model(universe, species_struct, species_struct.opengl_in_use, parent_module)
+                : Model(universe, species_struct, species_struct.opengl_in_use, parent_module),
+                is_terrain                   { species_struct.is_terrain },
+                is_symbiont_species          { species_struct.is_symbiont_species },
+                planet_radius                { species_struct.planet_radius },
+                divisor                      { species_struct.divisor },
+                model_file_format            { species_struct.model_file_format },
+                model_filename               { species_struct.model_filename },
+                color_channel                { species_struct.color_channel },
+                light_position               { species_struct.light_position },
+                latitude                     { species_struct.latitude },
+                longitude                    { species_struct.longitude },
+                mesh_i                       { species_struct.mesh_i },
+                x_step                       { species_struct.x_step },
+                z_step                       { species_struct.z_step },
+                triangulation_type           { species_struct.triangulation_type },
+                use_real_texture_coordinates { species_struct.use_real_texture_coordinates }
             {
                 // constructor.
-                this->is_terrain          = species_struct.is_terrain;
-                this->is_symbiont_species = species_struct.is_symbiont_species;
-                this->planet_radius       = species_struct.planet_radius;
-                this->divisor             = species_struct.divisor;
-                this->model_file_format   = species_struct.model_file_format;
-                this->model_filename      = species_struct.model_filename;
-                this->color_channel       = species_struct.color_channel;
-                this->light_position      = species_struct.light_position;
-                this->latitude            = species_struct.latitude;
-                this->longitude           = species_struct.longitude;
-                this->mesh_i              = species_struct.mesh_i;
-                this->x_step              = species_struct.x_step;
-                this->z_step              = species_struct.z_step;
-                this->triangulation_type  = species_struct.triangulation_type;
-
-                this->image_width         = 0;
-                this->image_height        = 0;
-
-                this->use_real_texture_coordinates = species_struct.use_real_texture_coordinates;
 
                 if (!this->is_symbiont_species)
                 {
@@ -189,8 +185,8 @@ namespace yli::ontology
 
             std::string triangulation_type;
 
-            uint32_t image_width;
-            uint32_t image_height;
+            uint32_t image_width  { 0 };
+            uint32_t image_height { 0 };
 
             bool use_real_texture_coordinates;
     };
