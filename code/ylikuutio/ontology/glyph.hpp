@@ -66,7 +66,6 @@ namespace yli::ontology
                 unicode_char_pointer { glyph_struct.unicode_char_pointer }
             {
                 // constructor.
-                this->light_position = glyph_struct.light_position;
 
                 // TODO: implement triangulation of `Glyph` objects!
                 yli::triangulation::TriangulatePolygonsStruct triangulate_polygons_struct;

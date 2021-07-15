@@ -55,6 +55,7 @@ namespace yli::ontology
                 : Entity(universe, model_struct),
                 child(parent_module, this),
                 parent_of_objects(this, &this->registry, "objects"),
+                light_position { model_struct.light_position },
                 opengl_in_use { opengl_in_use }
             {
                 // constructor.
