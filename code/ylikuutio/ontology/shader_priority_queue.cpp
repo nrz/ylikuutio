@@ -47,4 +47,3 @@ namespace yli::ontology
         return false;
     }
 }
-

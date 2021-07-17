@@ -42,9 +42,9 @@
 #include "apprentice_module.hpp"
 
 // Include standard headers
-#include <cstddef> // std::size_t
+#include <cstddef>    // std::size_t
 #include <functional> // std::function
-#include <string>  // std::string
+#include <string>     // std::string
 
 namespace yli::ontology
 {

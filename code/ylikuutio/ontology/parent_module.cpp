@@ -22,9 +22,9 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
-#include <cstddef> // std::size_t
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <string>  // std::string
+#include <string>   // std::string
 
 namespace yli::ontology
 {
