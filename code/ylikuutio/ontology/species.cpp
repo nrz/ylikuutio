@@ -40,7 +40,7 @@ namespace yli::ontology
         // `this->material_parent` must not be `nullptr`.
         // `new_parent` must not be `nullptr`.
 
-        yli::ontology::Entity* const material = this->child.get_parent();
+        yli::ontology::Entity* const material = this->child_of_material.get_parent();
 
         if (material == nullptr)
         {
@@ -61,10 +61,10 @@ namespace yli::ontology
         }
 
         // unbind from the old parent `Material`.
-        this->child.unbind_child();
+        this->child_of_material.unbind_child();
 
         // get `childID` from `Material` and set pointer to this `Species`.
-        this->child.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_species);
+        this->child_of_material.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_species);
     }
 
     void Species::bind_to_new_parent(yli::ontology::Entity* const new_parent)
@@ -89,9 +89,10 @@ namespace yli::ontology
 
     Species::~Species()
     {
+        // destructor.
+
         if (!this->is_symbiont_species)
         {
-            // destructor.
             std::cout << "`Species` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
             // Cleanup buffers.
@@ -100,6 +101,11 @@ namespace yli::ontology
             glDeleteBuffers(1, &this->normalbuffer);
             glDeleteBuffers(1, &this->elementbuffer);
         }
+    }
+
+    yli::ontology::Entity* Species::get_parent() const
+    {
+        return this->child_of_material.get_parent();
     }
 
     void Species::render()

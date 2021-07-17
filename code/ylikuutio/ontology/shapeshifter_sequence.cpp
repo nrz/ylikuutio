@@ -26,30 +26,14 @@
 
 namespace yli::ontology
 {
-    void ShapeshifterSequence::bind_to_parent()
-    {
-        // requirements:
-        // `this->parent` must not be `nullptr`.
-        yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = this->parent;
-
-        if (shapeshifter_transformation == nullptr)
-        {
-            std::cerr << "ERROR: `ShapeshifterSequence::bind_to_parent`: `shapeshifter_transformation` is `nullptr`!\n";
-            return;
-        }
-
-        // get `childID` from `ShapeshifterTransformation` and set pointer to this `ShapeshifterSequence`.
-        this->parent->parent_of_shapeshifter_sequences.bind_child(this);
-    }
-
     ShapeshifterSequence::~ShapeshifterSequence()
     {
         // destructor.
 
         // requirements for further actions:
-        // `this->parent` must not be `nullptr`.
+        // `this->child_of_shapeshifter_transformation.get_parent()` must not be `nullptr`.
 
-        yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = this->parent;
+        yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = static_cast<yli::ontology::ShapeshifterTransformation*>(this->child_of_shapeshifter_transformation.get_parent());
 
         if (shapeshifter_transformation == nullptr)
         {
@@ -62,7 +46,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* ShapeshifterSequence::get_parent() const
     {
-        return this->parent;
+        return this->child_of_shapeshifter_transformation.get_parent();
     }
 
     std::size_t ShapeshifterSequence::get_number_of_children() const

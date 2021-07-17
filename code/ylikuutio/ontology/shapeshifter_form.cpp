@@ -20,7 +20,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
 
 namespace yli::ontology
 {
@@ -29,6 +28,11 @@ namespace yli::ontology
     ShapeshifterForm::~ShapeshifterForm()
     {
         // destructor.
+    }
+
+    yli::ontology::Entity* ShapeshifterForm::get_parent() const
+    {
+        return this->child_of_shapeshifter_transformation.get_parent();
     }
 
     std::size_t ShapeshifterForm::get_number_of_children() const

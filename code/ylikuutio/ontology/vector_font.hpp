@@ -39,7 +39,6 @@
 #include <cstddef>       // std::size_t
 #include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream>      // std::cout, std::cin, std::cerr
-#include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <vector>        // std::vector

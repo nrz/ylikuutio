@@ -37,7 +37,6 @@ namespace yli::ontology
 
     struct GlyphStruct: public yli::ontology::ModelStruct
     {
-        glm::vec3 light_position { glm::vec3(0.0f, 0.0f, 0.0f) }; // Light position.
         std::vector<std::vector<glm::vec2>>* glyph_vertex_data { nullptr };
         const char* glyph_name_pointer         { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.
         const char* unicode_char_pointer       { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.

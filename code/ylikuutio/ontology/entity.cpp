@@ -34,7 +34,6 @@
 #include <regex>         // std::regex, std::regex_match
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
-#include <vector>        // std::vector
 
 namespace yli::ontology
 {

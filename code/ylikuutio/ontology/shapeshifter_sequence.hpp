@@ -19,13 +19,13 @@
 #define __YLIKUUTIO_ONTOLOGY_SHAPESHIFTER_SEQUENCE_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "child_module.hpp"
 #include "parent_module.hpp"
 #include "shapeshifter_sequence_struct.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <queue>   // std::priority_queue, std::queue
 #include <vector>  // std::vector
 
 // `ShapeshifterSequence` is a child of `ShapeshifterTransformation`
@@ -40,21 +40,18 @@ namespace yli::ontology
     class ShapeshifterSequence: public yli::ontology::Entity
     {
         public:
-            ShapeshifterSequence(yli::ontology::Universe* const universe, const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct)
+            ShapeshifterSequence(yli::ontology::Universe* const universe, const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct, yli::ontology::ParentModule* const shapeshifter_transformation_parent_module)
                 : Entity(universe, shapeshifter_sequence_struct),
+                child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, this),
                 parent_of_objects(this, &this->registry, "objects")
             {
                 // constructor.
-                this->parent = shapeshifter_sequence_struct.parent;
 
                 this->transformation_speed        = shapeshifter_sequence_struct.transformation_speed;
                 this->initial_offset              = shapeshifter_sequence_struct.initial_offset;
                 this->is_repeating_transformation = shapeshifter_sequence_struct.is_repeating_transformation;
                 this->bounce_from_start           = shapeshifter_sequence_struct.bounce_from_start;
                 this->bounce_from_end             = shapeshifter_sequence_struct.bounce_from_end;
-
-                // get `childID` from `ShapeshifterTransformation` and set pointer to this `ShapeshifterSequence`.
-                this->bind_to_parent();
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::ShapeshifterSequence*";
@@ -69,6 +66,10 @@ namespace yli::ontology
             template<class T1, class T2>
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
+        private:
+            yli::ontology::ChildModule child_of_shapeshifter_transformation;
+
+        public:
             yli::ontology::ParentModule parent_of_objects;
 
         private:
@@ -78,8 +79,6 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
             void render();
-
-            yli::ontology::ShapeshifterTransformation* parent; // Pointer to `ShapeshifterTransformation` object.
 
             float transformation_speed;                        // Negative speed means inverse initial transition direction.
             std::size_t initial_offset;                        // Index of the `ShapeshifterForm` from which to begin the transition.

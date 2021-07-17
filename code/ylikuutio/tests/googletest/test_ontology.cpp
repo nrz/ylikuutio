@@ -1098,7 +1098,7 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
-    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(universe, shapeshifter_sequence_struct);
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(universe, shapeshifter_sequence_struct, &shapeshifter_transformation->parent_of_shapeshifter_sequences);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
@@ -1134,7 +1134,7 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, no_universe_no_sce
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
-    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct);
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct, &shapeshifter_transformation->parent_of_shapeshifter_sequences);
 
     // `Entity` member functions.
     ASSERT_EQ(shapeshifter_sequence->get_childID(), 0);
@@ -1149,7 +1149,7 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, no_universe_no_sce
 {
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = nullptr;
-    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct);
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct, nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(shapeshifter_sequence->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -1195,7 +1195,7 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
-    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(universe, shapeshifter_sequence_struct);
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(universe, shapeshifter_sequence_struct, &shapeshifter_transformation->parent_of_shapeshifter_sequences);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
@@ -1251,7 +1251,7 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, no_univer
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
-    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct);
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct, &shapeshifter_transformation->parent_of_shapeshifter_sequences);
 
     // `Entity` member functions of `ShapeshifterTransformation`.
     ASSERT_EQ(shapeshifter_transformation->get_number_of_non_variable_children(), 2);
@@ -1308,7 +1308,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
-    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(universe, shapeshifter_sequence_struct);
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(universe, shapeshifter_sequence_struct, &shapeshifter_transformation->parent_of_shapeshifter_sequences);
 
     yli::ontology::ObjectStruct object_struct(shapeshifter_sequence);
     yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &shapeshifter_sequence->parent_of_objects, nullptr);
@@ -1364,7 +1364,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_scene
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
-    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct);
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct, &shapeshifter_transformation->parent_of_shapeshifter_sequences);
 
     yli::ontology::ObjectStruct object_struct(shapeshifter_sequence);
     yli::ontology::Object* const object = new yli::ontology::Object(nullptr, object_struct, &shapeshifter_sequence->parent_of_objects, nullptr);
@@ -1399,7 +1399,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_scene
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = nullptr;
-    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct);
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct, nullptr);
 
     yli::ontology::ObjectStruct object_struct(shapeshifter_sequence);
     yli::ontology::Object* const object = new yli::ontology::Object(nullptr, object_struct, &shapeshifter_sequence->parent_of_objects, nullptr);

@@ -24,8 +24,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <queue>    // std::queue
-#include <vector>   // std::vector
 
 // `Ecosystem` is a collection of `Scene`s which share some common resources,
 // like `VectorFont`s. In addition to `Scene`s, each `Ecosystem` may contain

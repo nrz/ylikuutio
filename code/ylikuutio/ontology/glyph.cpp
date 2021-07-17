@@ -26,7 +26,6 @@
 #include "code/ylikuutio/render/render_species_or_glyph.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
@@ -45,6 +44,11 @@ namespace yli::ontology
         glDeleteBuffers(1, &this->uvbuffer);
         glDeleteBuffers(1, &this->normalbuffer);
         glDeleteBuffers(1, &this->elementbuffer);
+    }
+
+    yli::ontology::Entity* Glyph::get_parent() const
+    {
+        return this->child_of_vector_font.get_parent();
     }
 
     void Glyph::render()

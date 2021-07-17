@@ -18,6 +18,7 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_SPECIES_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_SPECIES_HPP_INCLUDED
 
+#include "child_module.hpp"
 #include "model.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
@@ -35,7 +36,6 @@
 #endif
 
 // Include standard headers
-#include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -56,8 +56,9 @@ namespace yli::ontology
             Species(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::SpeciesStruct& species_struct,
-                    yli::ontology::ParentModule* const parent_module)
-                : Model(universe, species_struct, species_struct.opengl_in_use, parent_module),
+                    yli::ontology::ParentModule* const material_parent_module)
+                : Model(universe, species_struct, species_struct.opengl_in_use),
+                child_of_material(material_parent_module, this),
                 is_terrain                   { species_struct.is_terrain },
                 is_symbiont_species          { species_struct.is_symbiont_species },
                 planet_radius                { species_struct.planet_radius },
@@ -149,6 +150,8 @@ namespace yli::ontology
             // destructor.
             virtual ~Species();
 
+            yli::ontology::Entity* get_parent() const override;
+
             uint32_t get_x_step() const;
             uint32_t get_z_step() const;
             uint32_t get_image_width() const;
@@ -167,6 +170,8 @@ namespace yli::ontology
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
         private:
+            yli::ontology::ChildModule child_of_material;
+
             // this method renders all `Object`s of this `Species`.
             void render();
 

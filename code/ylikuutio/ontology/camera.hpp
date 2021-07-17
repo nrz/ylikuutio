@@ -30,9 +30,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
-#include <queue>    // std::queue
 #include <string>   // std::string
-#include <vector>   // std::vector
 
 // How `yli::ontology::Camera` class works:
 //
