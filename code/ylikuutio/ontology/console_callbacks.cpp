@@ -25,6 +25,7 @@
 
 // Include standard headers
 #include <algorithm> // std::copy etc.
+#include <cstddef>   // std::size_t
 #include <iterator>  // std::back_inserter
 #include <list>      // std::list
 #include <memory>    // std::make_shared, std::shared_ptr

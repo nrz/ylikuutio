@@ -23,6 +23,7 @@
 #include <btBulletDynamicsCommon.h>
 
 // Include standard headers
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <cstddef> // std::size_t
 
 namespace yli::ontology
