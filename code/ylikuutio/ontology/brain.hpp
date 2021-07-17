@@ -26,8 +26,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
-#include <queue>    // std::queue
-#include <vector>   // std::vector
 
 // `yli::ontology::Brain` is a general purpose AI and controller class for `Movable`s.
 // Each `Brain` instance may do some actions for the `Movable`s bound to the `Brain`.

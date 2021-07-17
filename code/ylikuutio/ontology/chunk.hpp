@@ -31,8 +31,6 @@
 #endif
 
 // Include standard headers
-#include <cstddef> // std::size_t
-#include <queue>   // std::queue
 #include <vector>  // std::vector
 
 // The content of any `Chunk` can be based either on some predefined
@@ -58,8 +56,7 @@ namespace yli::ontology
                 : Model(
                         chunk_struct.universe,
                         chunk_struct,
-                        chunk_struct.opengl_in_use,
-                        (chunk_struct.parent == nullptr ? nullptr : &chunk_struct.parent->parent_of_chunks))
+                        chunk_struct.opengl_in_use)
             {
                 // constructor.
                 this->is_original = true;

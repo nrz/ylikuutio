@@ -39,6 +39,7 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <queue>    // std::queue
 #include <vector>   // std::vector
 
 // `Movable` is a mixin class, not intended to be instantiated.

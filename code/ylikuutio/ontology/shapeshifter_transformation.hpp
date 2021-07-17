@@ -24,8 +24,6 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <queue>   // std::priority_queue, std::queue
-#include <vector>  // std::vector
 
 // `ShapeshifterTransformation` is a series of `ShapeshifterForm`s that
 // make up the transition that may be e.g. a walk cycle or
