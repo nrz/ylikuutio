@@ -26,7 +26,6 @@
 #include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
-#include <queue>    // std::queue
 #include <vector>   // std::vector
 
 // `ChunkMaster` takes care of acquiring vertices (through `get_content_callback`),

@@ -25,9 +25,7 @@
 
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
-#include <queue>    // std::queue
 #include <string>   // std::string
-#include <vector>   // std::vector
 
 // `yli::ontology::Variable` provides variable-related functionality.
 // `Variable`s must be bound to an `Entity`.
