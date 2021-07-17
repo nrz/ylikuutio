@@ -92,13 +92,12 @@ namespace yli::ontology
                 parent_of_default_camera(this, &this->registry, "default_camera"),
                 parent_of_cameras(this, &this->registry, "cameras"),
                 parent_of_brains(this, &this->registry, "brains"),
-                parent_of_materials(this, &this->registry, "materials")
+                parent_of_materials(this, &this->registry, "materials"),
+                gravity               { scene_struct.gravity },
+                water_level           { scene_struct.water_level },
+                is_flight_mode_in_use { scene_struct.is_flight_mode_in_use }
             {
                 // constructor.
-                this->gravity     = scene_struct.gravity;
-                this->water_level = scene_struct.water_level;
-
-                this->is_flight_mode_in_use = scene_struct.is_flight_mode_in_use;
 
                 // create the default `Camera`.
                 yli::ontology::CameraStruct camera_struct = scene_struct.default_camera_struct;
