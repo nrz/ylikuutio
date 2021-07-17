@@ -170,10 +170,9 @@ namespace yli::ontology
             template<class T1, class T2>
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
-        protected:
+        private:
             yli::ontology::ChildModule child_of_material;
 
-        private:
             // this method renders all `Object`s of this `Species`.
             void render();
 
