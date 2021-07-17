@@ -18,6 +18,7 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_GLYPH_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_GLYPH_HPP_INCLUDED
 
+#include "child_module.hpp"
 #include "universe.hpp"
 #include "model.hpp"
 #include "glyph_struct.hpp"
@@ -41,6 +42,7 @@
 
 namespace yli::ontology
 {
+    class Entity;
     class VectorFont;
     class Object;
     class ParentModule;
@@ -52,6 +54,8 @@ namespace yli::ontology
             // `Glyph`s should be destroyed only by destroying the entire `VectorFont`.
             virtual ~Glyph();
 
+            yli::ontology::Entity* get_parent() const override;
+
             const char* get_unicode_char_pointer() const;
 
             friend class yli::ontology::VectorFont;
@@ -59,8 +63,9 @@ namespace yli::ontology
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
         private:
-            Glyph(const yli::ontology::GlyphStruct& glyph_struct, yli::ontology::ParentModule* const parent_module)
-                : Model(glyph_struct.universe, glyph_struct, glyph_struct.opengl_in_use, parent_module),
+            Glyph(const yli::ontology::GlyphStruct& glyph_struct, yli::ontology::ParentModule* const vector_font_parent_module)
+                : Model(glyph_struct.universe, glyph_struct, glyph_struct.opengl_in_use),
+                child_of_vector_font(vector_font_parent_module, this),
                 glyph_vertex_data    { glyph_struct.glyph_vertex_data },
                 glyph_name_pointer   { glyph_struct.glyph_name_pointer },
                 unicode_char_pointer { glyph_struct.unicode_char_pointer }
@@ -105,6 +110,8 @@ namespace yli::ontology
             std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
             const char* glyph_name_pointer;    // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
             const char* unicode_char_pointer;  // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
+
+            yli::ontology::ChildModule child_of_vector_font;
     };
 }
 

@@ -19,7 +19,6 @@
 #define __YLIKUUTIO_ONTOLOGY_MODEL_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "child_module.hpp"
 #include "parent_module.hpp"
 #include "model_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -50,10 +49,8 @@ namespace yli::ontology
             Model(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::ModelStruct& model_struct,
-                    const bool opengl_in_use,
-                    yli::ontology::ParentModule* const parent_module)
+                    const bool opengl_in_use)
                 : Entity(universe, model_struct),
-                child(parent_module, this),
                 parent_of_objects(this, &this->registry, "objects"),
                 light_position { model_struct.light_position },
                 opengl_in_use { opengl_in_use }
@@ -71,8 +68,6 @@ namespace yli::ontology
 
             // destructor.
             virtual ~Model();
-
-            yli::ontology::Entity* get_parent() const override;
 
             std::size_t get_number_of_vertices() const;
             const std::vector<glm::vec3>& get_vertices() const;
@@ -95,9 +90,6 @@ namespace yli::ontology
 
             template<class T1, class T2, class T3>
                 friend void yli::render::render_species_or_glyph(T1 species_or_glyph_pointer);
-
-        protected:
-            yli::ontology::ChildModule child;
 
         public:
             yli::ontology::ParentModule parent_of_objects;

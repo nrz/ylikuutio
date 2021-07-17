@@ -19,6 +19,7 @@
 #define __YLIKUUTIO_ONTOLOGY_SHAPESHIFTER_FORM_HPP_INCLUDED
 
 #include "model.hpp"
+#include "child_module.hpp"
 #include "species_struct.hpp"
 
 // Include standard headers
@@ -39,8 +40,9 @@ namespace yli::ontology
             ShapeshifterForm(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::SpeciesStruct& species_struct,
-                    yli::ontology::ParentModule* const parent_module)
-                : Model(universe, species_struct, species_struct.opengl_in_use, parent_module)
+                    yli::ontology::ParentModule* const shapeshifter_transformation_parent_module)
+                : Model(universe, species_struct, species_struct.opengl_in_use),
+                child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, this)
             {
                 // constructor.
 
@@ -50,6 +52,10 @@ namespace yli::ontology
 
             // destructor.
             virtual ~ShapeshifterForm();
+
+            yli::ontology::Entity* get_parent() const override;
+
+            yli::ontology::ChildModule child_of_shapeshifter_transformation;
 
         private:
             std::size_t get_number_of_children() const override;

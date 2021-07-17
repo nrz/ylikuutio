@@ -47,6 +47,11 @@ namespace yli::ontology
         glDeleteBuffers(1, &this->elementbuffer);
     }
 
+    yli::ontology::Entity* Glyph::get_parent() const
+    {
+        return this->child_of_vector_font.get_parent();
+    }
+
     void Glyph::render()
     {
         if (!this->should_be_rendered || !this->opengl_in_use || this->universe == nullptr)
