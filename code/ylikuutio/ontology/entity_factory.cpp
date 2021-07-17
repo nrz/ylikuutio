@@ -60,7 +60,6 @@
 #include "code/ylikuutio/data/any_struct.hpp"
 
 // Include standard headers
-#include <cstddef>   // std::size_t
 #include <memory>    // std::make_shared, std::shared_ptr
 #include <string>    // std::string
 #include <variant>   // std::holds_alternative, std::variant

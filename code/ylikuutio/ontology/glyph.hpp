@@ -34,7 +34,6 @@
 #endif
 
 // Include standard headers
-#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <vector>   // std::vector

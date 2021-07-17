@@ -31,7 +31,6 @@
 #endif
 
 // Include standard headers
-#include <cstddef> // std::size_t
 #include <vector>  // std::vector
 
 // The content of any `Chunk` can be based either on some predefined
