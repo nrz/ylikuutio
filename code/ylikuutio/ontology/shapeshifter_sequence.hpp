@@ -67,7 +67,10 @@ namespace yli::ontology
             template<class T1, class T2>
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
+        private:
             yli::ontology::ChildModule child_of_shapeshifter_transformation;
+
+        public:
             yli::ontology::ParentModule parent_of_objects;
 
         private:
