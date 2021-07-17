@@ -89,9 +89,10 @@ namespace yli::ontology
 
     Species::~Species()
     {
+        // destructor.
+
         if (!this->is_symbiont_species)
         {
-            // destructor.
             std::cout << "`Species` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
             // Cleanup buffers.
