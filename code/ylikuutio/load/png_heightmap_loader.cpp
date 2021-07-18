@@ -99,7 +99,7 @@ namespace yli::load
             return false;
         }
 
-        if (image_size != image_width * image_height)
+        if (static_cast<uint64_t>(image_size) != static_cast<uint64_t>(image_width) * static_cast<uint64_t>(image_height))
         {
             std::cerr << "ERROR: `yli::load::load_png_terrain`: image size does not match image dimensions!\n";
             return false;

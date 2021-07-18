@@ -26,6 +26,7 @@
 #endif
 
 // Include standard headers
+#include <cmath>      // NAN, std::isnan, std::pow
 #include <cstddef>    // std::size_t
 #include <cstring>    // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <ios>        // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
@@ -138,7 +139,7 @@ namespace yli::load
             return false;
         }
 
-        glm::vec2 current_vertex;
+        glm::vec2 current_vertex(NAN);
         char char_path[1024];
 
         // copy from opening double quote to the next `"/"`.
