@@ -307,9 +307,9 @@ namespace yli::ontology
                 parent_of_callback_engine_entities(this, &this->registry, "callback_engine_entities"),
                 framebuffer_module(universe_struct.framebuffer_module_struct),
                 application_name  { universe_struct.application_name },
-                is_headless { yli::sdl::init_sdl(universe_struct.is_headless) },
-                is_silent { this->is_headless || universe_struct.is_silent },
-                is_physical { universe_struct.is_physical },
+                is_headless       { yli::sdl::init_sdl(universe_struct.is_headless) },
+                is_silent         { this->is_headless || universe_struct.is_silent },
+                is_physical       { universe_struct.is_physical },
                 is_fullscreen     { universe_struct.is_fullscreen },
                 window_width      { universe_struct.window_width },
                 window_height     { universe_struct.window_height },
@@ -637,9 +637,9 @@ namespace yli::ontology
 
             // Bullet variables.
             std::unique_ptr<btDefaultCollisionConfiguration> collision_configuration { std::make_unique<btDefaultCollisionConfiguration>() };
-            std::unique_ptr<btCollisionDispatcher> dispatcher { std::make_unique<btCollisionDispatcher>(this->collision_configuration.get()) };
-            std::unique_ptr<btBroadphaseInterface> overlapping_pair_cache { std::make_unique<btDbvtBroadphase>() };
-            std::unique_ptr<btSequentialImpulseConstraintSolver> solver { std::make_unique<btSequentialImpulseConstraintSolver>() };
+            std::unique_ptr<btCollisionDispatcher> dispatcher                        { std::make_unique<btCollisionDispatcher>(this->collision_configuration.get()) };
+            std::unique_ptr<btBroadphaseInterface> overlapping_pair_cache            { std::make_unique<btDbvtBroadphase>() };
+            std::unique_ptr<btSequentialImpulseConstraintSolver> solver              { std::make_unique<btSequentialImpulseConstraintSolver>() };
 
             std::string application_name;
 
@@ -672,7 +672,7 @@ namespace yli::ontology
 
             // variables related to `Camera` (projection).
             glm::mat4 current_camera_projection_matrix { glm::mat4(1.0f) }; // Identity matrix (dummy value).
-            glm::mat4 current_camera_view_matrix { glm::mat4(1.0f) };       // Identity matrix (dummy value).
+            glm::mat4 current_camera_view_matrix       { glm::mat4(1.0f) }; // Identity matrix (dummy value).
             float aspect_ratio;          // At the moment all `Camera`s use the same aspect ratio.
             float initial_fov { 60.0f }; // At the moment all `Camera`s use the same FoV.
 
