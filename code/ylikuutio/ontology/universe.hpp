@@ -306,9 +306,26 @@ namespace yli::ontology
                 parent_of_any_value_entities(this, &this->registry, "any_value_entities"),
                 parent_of_callback_engine_entities(this, &this->registry, "callback_engine_entities"),
                 framebuffer_module(universe_struct.framebuffer_module_struct),
+                application_name  { universe_struct.application_name },
                 is_headless { yli::sdl::init_sdl(universe_struct.is_headless) },
                 is_silent { this->is_headless || universe_struct.is_silent },
-                is_physical { universe_struct.is_physical }
+                is_physical { universe_struct.is_physical },
+                is_fullscreen     { universe_struct.is_fullscreen },
+                window_width      { universe_struct.window_width },
+                window_height     { universe_struct.window_height },
+                window_title      { universe_struct.window_title },
+                mouse_x           { this->window_width / 2 },
+                mouse_y           { this->window_height / 2 },
+                speed             { universe_struct.speed },
+                turbo_factor      { universe_struct.turbo_factor },
+                twin_turbo_factor { universe_struct.twin_turbo_factor },
+                mouse_speed       { universe_struct.mouse_speed },
+                znear             { universe_struct.znear },
+                zfar              { universe_struct.zfar },
+                aspect_ratio      { static_cast<float>(this->window_width) / static_cast<float>(this->window_height) },
+                text_size         { universe_struct.text_size },
+                font_size         { universe_struct.font_size },
+                max_fps           { universe_struct.max_fps }
             {
                 // constructor.
 
@@ -322,40 +339,12 @@ namespace yli::ontology
                 this->current_camera_spherical_coordinates.theta = NAN; // dummy coordinates.
                 this->current_camera_spherical_coordinates.phi   = NAN; // dummy coordinates.
 
-                // Variables related to the window.
-                this->window_width       = universe_struct.window_width;
-                this->window_height      = universe_struct.window_height;
-                this->application_name   = universe_struct.application_name;
-                this->window_title       = universe_struct.window_title;
-
                 if (this->window_title.empty())
                 {
                     std::stringstream window_title_stringstream;
                     window_title_stringstream << "Ylikuutio " << yli::ontology::Universe::version;
                     this->window_title = window_title_stringstream.str();
                 }
-
-                this->is_fullscreen = universe_struct.is_fullscreen;
-
-                // mouse coordinates.
-                this->mouse_x = this->window_width / 2;
-                this->mouse_y = this->window_height / 2;
-
-                // Variables related to the camera.
-                this->aspect_ratio = static_cast<float>(this->window_width) / static_cast<float>(this->window_height);
-
-                this->text_size = universe_struct.text_size;
-                this->font_size = universe_struct.font_size;
-
-                this->max_fps                 = universe_struct.max_fps;
-
-                this->speed                   = universe_struct.speed;
-                this->turbo_factor            = universe_struct.turbo_factor;
-                this->twin_turbo_factor       = universe_struct.twin_turbo_factor;
-                this->mouse_speed             = universe_struct.mouse_speed;
-
-                this->znear                   = universe_struct.znear;
-                this->zfar                    = universe_struct.zfar;
 
                 // Set the value of `should_be_rendered` here because it can't be done in `Entity` constructor.
                 this->should_be_rendered = !this->get_is_headless();
@@ -573,8 +562,6 @@ namespace yli::ontology
             // Ylikuutio version.
             static const std::string version;
 
-            std::string application_name;
-
             // Variables related to location and orientation.
 
             // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
@@ -592,15 +579,6 @@ namespace yli::ontology
             float current_camera_yaw   { NAN };
             float current_camera_pitch { NAN };
 
-            int32_t mouse_x;
-            int32_t mouse_y;
-
-            float speed;
-            float turbo_factor;
-            float twin_turbo_factor;
-            float mouse_speed;
-            bool has_mouse_ever_moved { false };
-
             // 'can toggle'-type of boolean keypress control variables
             // should all be stored in the `Universe` to avoid locking.
             bool can_toggle_invert_mouse { false };
@@ -611,10 +589,6 @@ namespace yli::ontology
             bool is_first_turbo_pressed  { false };
             bool is_second_turbo_pressed { false };
             bool is_exit_requested       { false };
-
-            // Variables related to graphics.
-            float znear;
-            float zfar;
 
             // Variables related to the current `Scene`.
             bool testing_spherical_terrain_in_use { false };
@@ -667,16 +641,34 @@ namespace yli::ontology
             std::unique_ptr<btBroadphaseInterface> overlapping_pair_cache { std::make_unique<btDbvtBroadphase>() };
             std::unique_ptr<btSequentialImpulseConstraintSolver> solver { std::make_unique<btSequentialImpulseConstraintSolver>() };
 
+            std::string application_name;
+
+            const bool is_headless;
+            const bool is_silent;
+            const bool is_physical;
+            bool is_fullscreen;
+
             // variables related to the window.
             SDL_Window* window { nullptr };
             uint32_t window_width;
             uint32_t window_height;
             std::string window_title { "Ylikuutio " + yli::ontology::Universe::version };
 
-            const bool is_headless;
-            const bool is_silent;
-            const bool is_physical;
-            bool is_fullscreen;
+            int32_t mouse_x;
+            int32_t mouse_y;
+
+        public:
+            float speed;
+            float turbo_factor;
+            float twin_turbo_factor;
+            float mouse_speed;
+
+        private:
+            bool has_mouse_ever_moved { false };
+
+            // Variables related to graphics.
+            float znear;
+            float zfar;
 
             // variables related to `Camera` (projection).
             glm::mat4 current_camera_projection_matrix { glm::mat4(1.0f) }; // Identity matrix (dummy value).
