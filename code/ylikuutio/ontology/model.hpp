@@ -84,7 +84,7 @@ namespace yli::ontology
             GLuint get_elementbuffer() const;
 
             void store_vertex_position_modelspaceID(const GLint vertex_position_modelspace_id);
-            void store_vertexUVID(const GLint vertex_uv_id);
+            void store_vertex_uv_id(const GLint vertex_uv_id);
             void store_vertex_normal_modelspaceID(const GLint vertex_normal_modelspace_id);
 
             template<class T1, class T2, class T3>

@@ -27,7 +27,7 @@ namespace yli::ontology
         if (shader != nullptr && glyph != nullptr)
         {
             glyph->store_vertex_position_modelspaceID(glGetAttribLocation(shader->get_program_id(), "vertex_position_modelspace"));
-            glyph->store_vertexUVID(glGetAttribLocation(shader->get_program_id(), "vertexUV"));
+            glyph->store_vertex_uv_id(glGetAttribLocation(shader->get_program_id(), "vertexUV"));
             glyph->store_vertex_normal_modelspaceID(glGetAttribLocation(shader->get_program_id(), "vertex_normal_modelspace"));
         }
     }

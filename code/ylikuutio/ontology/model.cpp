@@ -113,7 +113,7 @@ namespace yli::ontology
         this->vertex_position_modelspace_id = vertex_position_modelspace_id;
     }
 
-    void Model::store_vertexUVID(const GLint vertex_uv_id)
+    void Model::store_vertex_uv_id(const GLint vertex_uv_id)
     {
         this->vertex_uv_id = vertex_uv_id;
     }
