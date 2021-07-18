@@ -641,7 +641,7 @@ namespace yli::ontology
             std::unique_ptr<btBroadphaseInterface> overlapping_pair_cache            { std::make_unique<btDbvtBroadphase>() };
             std::unique_ptr<btSequentialImpulseConstraintSolver> solver              { std::make_unique<btSequentialImpulseConstraintSolver>() };
 
-            std::string application_name;
+            const std::string application_name;
 
             const bool is_headless;
             const bool is_silent;
