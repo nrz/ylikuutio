@@ -22,13 +22,13 @@
 
 namespace yli::ontology
 {
-    void store_gl_attrib_locations(yli::ontology::Shader* const shader, yli::ontology::Glyph* const glyph)
+    void set_gl_attrib_locations(yli::ontology::Shader* const shader, yli::ontology::Glyph* const glyph)
     {
         if (shader != nullptr && glyph != nullptr)
         {
-            glyph->store_vertex_position_modelspaceID(glGetAttribLocation(shader->get_program_id(), "vertex_position_modelspace"));
-            glyph->store_vertexUVID(glGetAttribLocation(shader->get_program_id(), "vertexUV"));
-            glyph->store_vertex_normal_modelspaceID(glGetAttribLocation(shader->get_program_id(), "vertex_normal_modelspace"));
+            glyph->set_vertex_position_modelspace_id(glGetAttribLocation(shader->get_program_id(), "vertex_position_modelspace"));
+            glyph->set_vertex_uv_id(glGetAttribLocation(shader->get_program_id(), "vertexUV"));
+            glyph->set_vertex_normal_modelspace_id(glGetAttribLocation(shader->get_program_id(), "vertex_normal_modelspace"));
         }
     }
 }

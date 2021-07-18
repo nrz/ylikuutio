@@ -88,7 +88,7 @@ namespace yli::ontology
                 if (!is_headless && glyph_struct.shader != nullptr)
                 {
                     // Get a handle for our buffers.
-                    yli::ontology::store_gl_attrib_locations(glyph_struct.shader, this);
+                    yli::ontology::set_gl_attrib_locations(glyph_struct.shader, this);
                 }
 
                 // TODO: triangulate the vertex data!

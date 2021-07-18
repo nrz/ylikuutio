@@ -108,17 +108,17 @@ namespace yli::ontology
         return this->elementbuffer;
     }
 
-    void Model::store_vertex_position_modelspaceID(const GLint vertex_position_modelspace_id)
+    void Model::set_vertex_position_modelspace_id(const GLint vertex_position_modelspace_id)
     {
         this->vertex_position_modelspace_id = vertex_position_modelspace_id;
     }
 
-    void Model::store_vertexUVID(const GLint vertex_uv_id)
+    void Model::set_vertex_uv_id(const GLint vertex_uv_id)
     {
         this->vertex_uv_id = vertex_uv_id;
     }
 
-    void Model::store_vertex_normal_modelspaceID(const GLint vertex_normal_modelspace_id)
+    void Model::set_vertex_normal_modelspace_id(const GLint vertex_normal_modelspace_id)
     {
         this->vertex_normal_modelspace_id = vertex_normal_modelspace_id;
     }

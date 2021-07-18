@@ -23,7 +23,7 @@ namespace yli::ontology
     class Shader;
     class Glyph;
 
-    void store_gl_attrib_locations(yli::ontology::Shader* const shader, yli::ontology::Glyph* const glyph);
+    void set_gl_attrib_locations(yli::ontology::Shader* const shader, yli::ontology::Glyph* const glyph);
 }
 
 #endif
