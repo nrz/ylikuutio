@@ -42,7 +42,9 @@ namespace yli::linear_algebra
             class Proxy
             {
                 public:
-                    explicit Proxy(std::vector<float>& proxy_array) : proxy_array(proxy_array) { }
+                    explicit Proxy(std::vector<float>& proxy_array)
+                        : proxy_array(proxy_array)
+                    { }
 
                     float& operator[](const std::size_t index)
                     {
