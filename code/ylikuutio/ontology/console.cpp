@@ -250,8 +250,6 @@ namespace yli::ontology
         {
             const std::size_t n_lines_of_current_input = (this->prompt.size() + this->current_input.size() - 1) / this->n_columns + 1;
 
-            std::size_t history_start_i;
-
             if (n_lines_of_current_input > this->n_rows)
             {
                 // Current input does not fit completely in the console 'window'.
@@ -281,16 +279,12 @@ namespace yli::ontology
             else
             {
                 // Current input fits completely in the console 'window'.
+                std::size_t history_start_i { 0 }; // Assume everything does fit in the console 'window'.
 
                 if (this->console_history.size() + n_lines_of_current_input > this->n_rows)
                 {
                     // Everything does not fit in the console 'window'.
                     history_start_i = this->console_history.size() - this->n_rows + n_lines_of_current_input;
-                }
-                else
-                {
-                    // Everything does fit in the console 'window'.
-                    history_start_i = 0;
                 }
 
                 // We are not in history so print everything to the end of the history.
