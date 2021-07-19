@@ -42,7 +42,7 @@ namespace yli::ontology
             this->is_variable = true;
         }
 
-        VariableStruct(std::shared_ptr<yli::data::AnyValue> initial_value)
+        explicit VariableStruct(std::shared_ptr<yli::data::AnyValue> initial_value)
             : initial_value { initial_value }
         {
             // constructor.
