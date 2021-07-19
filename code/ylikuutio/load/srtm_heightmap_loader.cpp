@@ -154,28 +154,30 @@ namespace yli::load
 
         std::cout << "Processing SRTM heightmap data.\n";
 
-        int32_t last_percent = -1;
-        int32_t current_percent = -1;
-
-        for (uint32_t z = 0; z < image_height; z++)
         {
-            // show progress in percents.
-            current_percent = static_cast<int32_t>(floor(100.0f * (static_cast<float>(z) / static_cast<float>(image_height - 1))));
+            int32_t last_percent = -1;
+            int32_t current_percent = -1;
 
-            if (current_percent > last_percent)
+            for (uint32_t z = 0; z < image_height; z++)
             {
-                std::cout << current_percent << "% ";
-                last_percent = current_percent;
-            }
+                // show progress in percents.
+                current_percent = static_cast<int32_t>(floor(100.0f * (static_cast<float>(z) / static_cast<float>(image_height - 1))));
 
-            for (uint32_t x = 0; x < image_width; x++)
-            {
-                uint32_t y = static_cast<uint32_t>(*image_pointer) << 8 | static_cast<uint32_t>(*(image_pointer + 1));
+                if (current_percent > last_percent)
+                {
+                    std::cout << current_percent << "% ";
+                    last_percent = current_percent;
+                }
 
-                image_pointer += sizeof(int16_t);
-                vertex_data.emplace_back(static_cast<float>(y) / heightmap_loader_struct.divisor);
+                for (uint32_t x = 0; x < image_width; x++)
+                {
+                    uint32_t y = static_cast<uint32_t>(*image_pointer) << 8 | static_cast<uint32_t>(*(image_pointer + 1));
+
+                    image_pointer += sizeof(int16_t);
+                    vertex_data.emplace_back(static_cast<float>(y) / heightmap_loader_struct.divisor);
+                }
+                image_pointer += sizeof(int16_t) * (true_image_width - image_width);
             }
-            image_pointer += sizeof(int16_t) * (true_image_width - image_width);
         }
 
         std::cout << "\n";
