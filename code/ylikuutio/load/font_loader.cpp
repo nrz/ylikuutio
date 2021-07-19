@@ -38,7 +38,7 @@
 
 namespace yli::load
 {
-    bool check_if_we_are_inside_block(const char* SVG_base_pointer, char*& SVG_data_pointer, const std::size_t data_size)
+    bool check_if_we_are_inside_block(const char* svg_base_pointer, char*& SVG_data_pointer, const std::size_t data_size)
     {
         // This function returns `true` if we are inside block, `false` otherwise.
 
@@ -46,7 +46,7 @@ namespace yli::load
         const std::vector<std::string> identifier_strings_vector
         { "<?xml ", "<!DOCTYPE ", "<svg>", "<metadata>", "</metadata>", "<defs>", "<font ", "<font-face", "<missing-glyph" };
 
-        return yli::string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, identifier_strings_vector);
+        return yli::string::check_and_report_if_some_string_matches(svg_base_pointer, SVG_data_pointer, data_size, identifier_strings_vector);
     }
 
     int32_t extract_value_from_string_with_standard_endings(
@@ -64,13 +64,13 @@ namespace yli::load
                 is_debug_mode ? description : nullptr);
     }
 
-    bool find_first_glyph_in_svg(const char* SVG_base_pointer, char*& SVG_data_pointer, std::size_t data_size)
+    bool find_first_glyph_in_svg(const char* svg_base_pointer, char*& SVG_data_pointer, std::size_t data_size)
     {
         // This function advances `SVG_data_pointer` to the start of the first glyph.
         // Returns true if a glyph was found.
         // Returns false if no glyph was found.
 
-        if (SVG_base_pointer == nullptr || SVG_data_pointer == nullptr)
+        if (svg_base_pointer == nullptr || SVG_data_pointer == nullptr)
         {
             return false;
         }
@@ -88,30 +88,30 @@ namespace yli::load
                     return false;
                 }
 
-                if (yli::string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, std::vector<std::string> { "<glyph" }))
+                if (yli::string::check_and_report_if_some_string_matches(svg_base_pointer, SVG_data_pointer, data_size, std::vector<std::string> { "<glyph" }))
                 {
                     return true;
                 }
-                if (yli::string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, std::vector<std::string> { "</svg>" }))
+                if (yli::string::check_and_report_if_some_string_matches(svg_base_pointer, SVG_data_pointer, data_size, std::vector<std::string> { "</svg>" }))
                 {
                     return false;
                 }
 
-                is_inside_block = yli::load::check_if_we_are_inside_block(SVG_base_pointer, SVG_data_pointer, data_size);
+                is_inside_block = yli::load::check_if_we_are_inside_block(svg_base_pointer, SVG_data_pointer, data_size);
                 SVG_data_pointer++;
             }
             else
             {
                 // OK, we are inside a block.
                 SVG_data_pointer = std::strchr(SVG_data_pointer, '>');
-                yli::string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, std::vector<std::string> { ">" });
+                yli::string::check_and_report_if_some_string_matches(svg_base_pointer, SVG_data_pointer, data_size, std::vector<std::string> { ">" });
                 is_inside_block = false;
             }
         }
     }
 
     bool load_vertex_data(
-            const char* const SVG_base_pointer,
+            const char* const svg_base_pointer,
             char*& SVG_data_pointer,
             std::size_t data_size,
             std::vector<std::vector<glm::vec2>>& current_glyph_vertices,
@@ -143,7 +143,7 @@ namespace yli::load
         char char_path[1024];
 
         // copy from opening double quote to the next `"/"`.
-        yli::string::extract_string(SVG_base_pointer, opening_double_quote_pointer, data_size, char_path, char_path, sizeof(char_path), (char*) "/");
+        yli::string::extract_string(svg_base_pointer, opening_double_quote_pointer, data_size, char_path, char_path, sizeof(char_path), (char*) "/");
 
         if (is_debug_mode)
         {
@@ -232,7 +232,7 @@ namespace yli::load
     }
 
     bool load_svg_glyph(
-            const char* const SVG_base_pointer,
+            const char* const svg_base_pointer,
             char*& SVG_data_pointer,
             std::size_t data_size,
             std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
@@ -241,7 +241,7 @@ namespace yli::load
             const bool is_debug_mode)
     {
         // This function loads the next SVG glyph.
-        // SVG_base_pointer: pointer to the origin of the SVG data.
+        // svg_base_pointer: pointer to the origin of the SVG data.
         // SVG_data_pointer: pointer to the current reading address (must point to a glyph!).
         // out_glyph_vertex_data: vector of 2D objects consisting of 1 or more edge sections consisting of glm::vec2 vectors each of which is a vertex of a glyph.
         // glyph_names: vector of glyph names.
@@ -304,7 +304,7 @@ namespace yli::load
                         closing_double_quote_pointer++;
 
                         yli::string::extract_string(
-                                SVG_base_pointer,
+                                svg_base_pointer,
                                 opening_double_quote_pointer,
                                 data_size,
                                 char_glyph_name,
@@ -369,7 +369,7 @@ namespace yli::load
                         has_glyph_unicode = true;
 
                         yli::string::extract_string(
-                                SVG_base_pointer,
+                                svg_base_pointer,
                                 opening_double_quote_pointer,
                                 data_size,
                                 char_unicode,
@@ -398,7 +398,7 @@ namespace yli::load
             } // else if (std::strncmp(SVG_data_pointer, "unicode=", std::char_traits<char>::length("unicode=")) == 0)
             else if (std::strncmp(SVG_data_pointer, "d=", std::char_traits<char>::length("d=")) == 0)
             {
-                bool result = yli::load::load_vertex_data(SVG_base_pointer, SVG_data_pointer, data_size, current_glyph_vertices, is_debug_mode);
+                bool result = yli::load::load_vertex_data(svg_base_pointer, SVG_data_pointer, data_size, current_glyph_vertices, is_debug_mode);
                 if (result == false)
                 {
                     return false;
@@ -462,13 +462,13 @@ namespace yli::load
 
         bool is_first_glyph_found;
 
-        const char* SVG_base_pointer;
+        const char* svg_base_pointer;
         char* SVG_data_pointer;
-        SVG_base_pointer = &(*SVG_data)[0];
+        svg_base_pointer = &(*SVG_data)[0];
         SVG_data_pointer = &(*SVG_data)[0];
 
         // SVG files are XML files, so we just need to read until we find the data we need.
-        is_first_glyph_found = yli::load::find_first_glyph_in_svg(SVG_base_pointer, SVG_data_pointer, file_size);
+        is_first_glyph_found = yli::load::find_first_glyph_in_svg(svg_base_pointer, SVG_data_pointer, file_size);
 
         if (!is_first_glyph_found || SVG_data_pointer == nullptr)
         {
@@ -476,7 +476,7 @@ namespace yli::load
             return false;
         }
 
-        std::size_t offset = (std::size_t) SVG_data_pointer - (std::size_t) SVG_base_pointer;
+        std::size_t offset = (std::size_t) SVG_data_pointer - (std::size_t) svg_base_pointer;
         if (is_debug_mode)
         {
             std::stringstream first_glyph_found_stringstream;
@@ -491,7 +491,7 @@ namespace yli::load
             if (std::strncmp(SVG_data_pointer, "<glyph", std::char_traits<char>::length("<glyph")) == 0)
             {
                 bool result = yli::load::load_svg_glyph(
-                        SVG_base_pointer,
+                        svg_base_pointer,
                         SVG_data_pointer,
                         file_size,
                         out_glyph_vertex_data,
@@ -508,7 +508,7 @@ namespace yli::load
             {
                 const std::vector<std::string> string_vector { "</font>", "</defs>", "</svg>" };
 
-                if (yli::string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, file_size, string_vector))
+                if (yli::string::check_and_report_if_some_string_matches(svg_base_pointer, SVG_data_pointer, file_size, string_vector))
                 {
                     return true;
                 }
