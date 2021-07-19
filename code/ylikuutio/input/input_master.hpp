@@ -41,7 +41,7 @@ namespace yli::input
             void bind_input_mode(yli::input::InputMode* const input_mode);
 
             // constructor.
-            InputMaster(yli::ontology::Universe* const universe);
+            explicit InputMaster(yli::ontology::Universe* const universe);
 
             InputMaster(const InputMaster&) = delete;            // Delete copy constructor.
             InputMaster& operator=(const InputMaster&) = delete; // Delete copy assignment.

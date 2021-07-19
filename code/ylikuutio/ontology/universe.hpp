@@ -297,7 +297,7 @@ namespace yli::ontology
             void bind_entity(yli::ontology::Entity* const entity);
             void unbind_entity(const std::size_t entityID);
 
-            Universe(const yli::ontology::UniverseStruct& universe_struct)
+            explicit Universe(const yli::ontology::UniverseStruct& universe_struct)
                 : Entity(this, universe_struct), // `Universe` has no parent.
                 parent_of_ecosystems(this, &this->registry, "ecosystems"),
                 parent_of_scenes(this, &this->registry, "scenes"),

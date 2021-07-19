@@ -191,32 +191,33 @@ namespace yli::load
         // start processing image_data.
         std::cout << "Processing image data.\n";
 
-        int32_t last_percent = -1;
-        int32_t current_percent = -1;
-
-        for (uint32_t z = 0; z < image_height; z++)
         {
-            // show progress in percents.
-            current_percent = static_cast<int32_t>(floor(100.0f * (static_cast<float>(z) / static_cast<float>(image_height - 1))));
+            int32_t last_percent = -1;
 
-            if (current_percent > last_percent)
+            for (uint32_t z = 0; z < image_height; z++)
             {
-                std::cout << current_percent << "% ";
-                last_percent = current_percent;
-            }
+                // show progress in percents.
+                int32_t current_percent = static_cast<int32_t>(floor(100.0f * (static_cast<float>(z) / static_cast<float>(image_height - 1))));
 
-            for (uint32_t x = 0; x < image_width; x++)
-            {
-                while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
+                if (current_percent > last_percent)
                 {
-                    file_content_i++;
+                    std::cout << current_percent << "% ";
+                    last_percent = current_percent;
                 }
 
-                vertex_data.emplace_back(yli::string::extract_float_value_from_string(
-                            *file_content,
-                            file_content_i,
-                            (const char* const) " \n",
-                            (const char* const) nullptr));
+                for (uint32_t x = 0; x < image_width; x++)
+                {
+                    while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
+                    {
+                        file_content_i++;
+                    }
+
+                    vertex_data.emplace_back(yli::string::extract_float_value_from_string(
+                                *file_content,
+                                file_content_i,
+                                (const char* const) " \n",
+                                (const char* const) nullptr));
+                }
             }
         }
 

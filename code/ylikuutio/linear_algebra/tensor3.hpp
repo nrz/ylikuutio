@@ -40,22 +40,34 @@ namespace yli::linear_algebra
 
             // copy constructor.
             Tensor3(const yli::linear_algebra::Tensor3& old_tensor3);
-            Tensor3(std::shared_ptr<yli::linear_algebra::Tensor3> old_matrix)
-                : Tensor3(*old_matrix) { }
+
+            explicit Tensor3(std::shared_ptr<yli::linear_algebra::Tensor3> old_matrix)
+                : Tensor3(*old_matrix)
+            {
+                // constructor.
+            }
 
             // constructor.
-            Tensor3(const yli::linear_algebra::Matrix& old_matrix);
+            explicit Tensor3(const yli::linear_algebra::Matrix& old_matrix);
 
             // Inspired by http://stackoverflow.com/questions/6969881/operator-overload/6969904#6969904
             class Proxy2D
             {
                 public:
-                    Proxy2D(const std::vector<std::vector<float>>& array_of_arrays) : array_of_arrays(array_of_arrays) { }
+                    explicit Proxy2D(const std::vector<std::vector<float>>& array_of_arrays)
+                        : array_of_arrays(array_of_arrays)
+                    {
+                        // constructor.
+                    }
 
                     class Proxy
                     {
                         public:
-                            Proxy(std::vector<float>& proxy_array) : proxy_array(proxy_array) { }
+                            explicit Proxy(std::vector<float>& proxy_array)
+                                : proxy_array(proxy_array)
+                            {
+                                // constructor.
+                            }
 
                             float& operator[](const std::size_t index)
                             {
@@ -68,7 +80,7 @@ namespace yli::linear_algebra
 
                     Proxy operator[](const std::size_t index)
                     {
-                        return array_of_arrays[index];
+                        return Proxy(array_of_arrays[index]);
                     }
 
                 private:

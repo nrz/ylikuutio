@@ -77,7 +77,7 @@ namespace yli::callback
             InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback { nullptr };
 
             // constructor.
-            CallbackObject(yli::callback::CallbackEngine* const parent);
+            explicit CallbackObject(yli::callback::CallbackEngine* const parent);
 
             // constructor.
             CallbackObject(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback, yli::callback::CallbackEngine* const parent);
