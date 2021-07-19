@@ -406,7 +406,9 @@ struct Property : IElementProperty
 		assert(type == ARRAY_DOUBLE || type == ARRAY_INT || type == ARRAY_FLOAT || type == ARRAY_LONG);
 		if (value.is_binary)
 		{
-			return int(*(u32*)value.begin);
+			int i;
+			memcpy(&i, value.begin, sizeof(i));
+			return i;
 		}
 		return count;
 	}
@@ -713,13 +715,13 @@ static OptionalError<Element*> readElement(Cursor* cursor, u32 version, Allocato
 
 static bool isEndLine(const Cursor& cursor)
 {
-	return *cursor.current == '\n';
+	return *cursor.current == '\n' || *cursor.current == '\r' && cursor.current + 1 < cursor.end && *(cursor.current + 1) != '\n';
 }
 
 
 static void skipInsignificantWhitespaces(Cursor* cursor)
 {
-	while (cursor->current < cursor->end && isspace(*cursor->current) && *cursor->current != '\n')
+	while (cursor->current < cursor->end && isspace(*cursor->current) && !isEndLine(*cursor))
 	{
 		++cursor->current;
 	}
@@ -849,7 +851,7 @@ static OptionalError<Property*> readTextProperty(Cursor* cursor, Allocator& allo
 				if (is_any) ++prop->count;
 				is_any = false;
 			}
-			else if (!isspace(*cursor->current) && *cursor->current != '\n')
+			else if (!isspace(*cursor->current) && !isEndLine(*cursor))
 				is_any = true;
 			if (*cursor->current == '.') prop->type = 'd';
 			++cursor->current;
@@ -879,7 +881,7 @@ static OptionalError<Element*> readTextElement(Cursor* cursor, Allocator& alloca
 	element->id = id;
 
 	Property** prop_link = &element->first_property;
-	while (cursor->current < cursor->end && *cursor->current != '\n' && *cursor->current != '{')
+	while (cursor->current < cursor->end && !isEndLine(*cursor) && *cursor->current != '{')
 	{
 		OptionalError<Property*> prop = readTextProperty(cursor, allocator);
 		if (prop.isError())
@@ -1444,7 +1446,7 @@ struct BlendShapeChannelImpl : BlendShapeChannel
 			if (!parseBinaryArray(*full_weights_el->first_property, &fullWeights)) return false;
 		}
 
-		for (int i = 0; i < shapes.size(); i++)
+		for (int i = 0; i < (int)shapes.size(); i++)
 		{
 			auto shape = (ShapeImpl*)shapes[i];
 			if (!shape->postprocess(geom, allocator)) return false;
@@ -1570,6 +1572,7 @@ struct Scene : IScene
 
 
 	int getAnimationStackCount() const override { return (int)m_animation_stacks.size(); }
+	int getGeometryCount() const override { return (int)m_geometries.size(); }
 	int getMeshCount() const override { return (int)m_meshes.size(); }
 	float getSceneFrameRate() const override { return m_scene_frame_rate; }
 	const GlobalSettings* getGlobalSettings() const override { return &m_settings; }
@@ -1607,6 +1610,14 @@ struct Scene : IScene
 	}
 
 
+	const Geometry* getGeometry(int index) const override
+	{
+		assert(index >= 0);
+		assert(index < m_geometries.size());
+		return m_geometries[index];
+	}
+
+
 	const TakeInfo* getTakeInfo(const char* name) const override
 	{
 		for (const TakeInfo& info : m_take_infos)
@@ -1637,6 +1648,7 @@ struct Scene : IScene
 	std::unordered_map<u64, ObjectPair> m_object_map;
 	std::vector<Object*> m_all_objects;
 	std::vector<Mesh*> m_meshes;
+	std::vector<Geometry*> m_geometries;
 	std::vector<AnimationStack*> m_animation_stacks;
 	std::vector<Connection> m_connections;
 	std::vector<u8> m_data;
@@ -1768,7 +1780,7 @@ struct AnimationLayerImpl : AnimationLayer
 
 	const AnimationCurveNode* getCurveNode(int index) const override
 	{
-		if (index >= curve_nodes.size() || index < 0) return nullptr;
+		if (index >= (int)curve_nodes.size() || index < 0) return nullptr;
 		return curve_nodes[index];
 	}
 
@@ -2465,7 +2477,7 @@ static void triangulate(
 	};
 
 	int in_polygon_idx = 0;
-	for (int i = 0; i < old_indices.size(); ++i)
+	for (int i = 0; i < (int)old_indices.size(); ++i)
 	{
 		int idx = getIdx(i);
 		if (in_polygon_idx <= 2) //-V1051
@@ -2928,63 +2940,54 @@ static float getFramerateFromTimeMode(FrameRate time_mode, float custom_frame_ra
 
 static void parseGlobalSettings(const Element& root, Scene* scene)
 {
-	for (Element* settings = root.child; settings; settings = settings->sibling)
-	{
-		if (settings->id == "GlobalSettings")
-		{
-			for (Element* props70 = settings->child; props70; props70 = props70->sibling)
-			{
-				if (props70->id == "Properties70")
-				{
-					for (Element* node = props70->child; node; node = node->sibling)
-					{
-						if (!node->first_property)
-							continue;
+	const Element* settings = findChild(root, "GlobalSettings");
+	if (!settings) return;
 
-						#define get_property(name, field, type, getter) if(node->first_property->value == name) \
-						{ \
-							IElementProperty* prop = node->getProperty(4); \
-							if (prop) \
-							{ \
-								DataView value = prop->getValue(); \
-								scene->m_settings.field = (type)value.getter(); \
-							} \
-						}
+	const Element* props70 = findChild(*settings, "Properties70");
+	if (!props70) return;
 
-						#define get_time_property(name, field, type, getter) if(node->first_property->value == name) \
-						{ \
-							IElementProperty* prop = node->getProperty(4); \
-							if (prop) \
-							{ \
-								DataView value = prop->getValue(); \
-								scene->m_settings.field = fbxTimeToSeconds((type)value.getter()); \
-							} \
-						}
+	for (Element* node = props70->child; node; node = node->sibling) {
+		if (!node->first_property) continue;
 
-						get_property("UpAxis", UpAxis, UpVector, toInt);
-						get_property("UpAxisSign", UpAxisSign, int, toInt);
-						get_property("FrontAxis", FrontAxis, FrontVector, toInt);
-						get_property("FrontAxisSign", FrontAxisSign, int, toInt);
-						get_property("CoordAxis", CoordAxis, CoordSystem, toInt);
-						get_property("CoordAxisSign", CoordAxisSign, int, toInt);
-						get_property("OriginalUpAxis", OriginalUpAxis, int, toInt);
-						get_property("OriginalUpAxisSign", OriginalUpAxisSign, int, toInt);
-						get_property("UnitScaleFactor", UnitScaleFactor, float, toDouble);
-						get_property("OriginalUnitScaleFactor", OriginalUnitScaleFactor, float, toDouble);
-						get_time_property("TimeSpanStart", TimeSpanStart, u64, toU64);
-						get_time_property("TimeSpanStop", TimeSpanStop, u64, toU64);
-						get_property("TimeMode", TimeMode, FrameRate, toInt);
-						get_property("CustomFrameRate", CustomFrameRate, float, toDouble);
-
-						#undef get_property
-
-						scene->m_scene_frame_rate = getFramerateFromTimeMode(scene->m_settings.TimeMode, scene->m_settings.CustomFrameRate);
-					}
-					break;
-				}
-			}
-			break;
+		#define get_property(name, field, type, getter) if(node->first_property->value == name) \
+		{ \
+			IElementProperty* prop = node->getProperty(4); \
+			if (prop) \
+			{ \
+				DataView value = prop->getValue(); \
+				scene->m_settings.field = (type)value.getter(); \
+			} \
 		}
+
+		#define get_time_property(name, field, type, getter) if(node->first_property->value == name) \
+		{ \
+			IElementProperty* prop = node->getProperty(4); \
+			if (prop) \
+			{ \
+				DataView value = prop->getValue(); \
+				scene->m_settings.field = fbxTimeToSeconds((type)value.getter()); \
+			} \
+		}
+
+		get_property("UpAxis", UpAxis, UpVector, toInt);
+		get_property("UpAxisSign", UpAxisSign, int, toInt);
+		get_property("FrontAxis", FrontAxis, FrontVector, toInt);
+		get_property("FrontAxisSign", FrontAxisSign, int, toInt);
+		get_property("CoordAxis", CoordAxis, CoordSystem, toInt);
+		get_property("CoordAxisSign", CoordAxisSign, int, toInt);
+		get_property("OriginalUpAxis", OriginalUpAxis, int, toInt);
+		get_property("OriginalUpAxisSign", OriginalUpAxisSign, int, toInt);
+		get_property("UnitScaleFactor", UnitScaleFactor, float, toDouble);
+		get_property("OriginalUnitScaleFactor", OriginalUnitScaleFactor, float, toDouble);
+		get_time_property("TimeSpanStart", TimeSpanStart, u64, toU64);
+		get_time_property("TimeSpanStop", TimeSpanStop, u64, toU64);
+		get_property("TimeMode", TimeMode, FrameRate, toInt);
+		get_property("CustomFrameRate", CustomFrameRate, float, toDouble);
+
+		#undef get_property
+		#undef get_time_property
+
+		scene->m_scene_frame_rate = getFramerateFromTimeMode(scene->m_settings.TimeMode, scene->m_settings.CustomFrameRate);
 	}
 }
 
@@ -3046,6 +3049,7 @@ static bool parseObjects(const Element& root, Scene* scene, u64 flags, Allocator
 			if (last_prop && last_prop->value == "Mesh" && !ignore_geometry)
 			{
 				GeometryImpl* geom = allocator.allocate<GeometryImpl>(*scene, *iter.second.element);
+				scene->m_geometries.push_back(geom);
 				ParseGeometryJob job {iter.second.element, triangulate, geom, iter.first, false};
 				parse_geom_jobs.push_back(job);
 				continue;
@@ -3566,7 +3570,7 @@ Object* Object::getParent() const
 		if (connection.from == id)
 		{
 			Object* obj = scene.m_object_map.find(connection.to)->second.object;
-			if (obj && obj->is_node)
+			if (obj && obj->is_node && obj != this)
 			{
 				assert(parent == nullptr);
 				parent = obj;

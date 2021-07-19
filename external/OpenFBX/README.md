@@ -1,5 +1,4 @@
-![build](https://github.com/nem0/OpenFBX/workflows/build/badge.svg)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nem0/LumixEngine?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Discord Chat](https://img.shields.io/discord/480318777943392266.svg)](https://discord.gg/RgFybs6) 
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 
 # OpenFBX
@@ -7,6 +6,8 @@
 Lightweight open source FBX importer. Used in [Lumix Engine](https://github.com/nem0/lumixengine) and [Flax Engine](https://flaxengine.com/). It's an *almost* full-featured importer. It can load geometry (with uvs, normals, tangents, colors), skeletons, animations, blend shapes, materials and textures.
 
 Feel free to request new features. I will eventually try (or not) to add all missing fbx features.
+
+[UFBX](https://github.com/bqqbarbhg/ufbx) is similar project in C.
 
 ## Use the library in your own project
 
@@ -16,13 +17,13 @@ Note: It's recommended to be familiar with fbx format to use this library, you c
 2. use
 
 See [demo](https://github.com/nem0/OpenFBX/blob/master/demo/main.cpp#L203) as an example how to use the library.
-See [Lumix Engine](https://github.com/nem0/LumixEngine/blob/master/src/renderer/editor/fbx_importer.cpp#L847) as more advanced use case.
+See [Lumix Engine](https://github.com/nem0/LumixEngine/blob/master/src/renderer/editor/fbx_importer.cpp) as more advanced use case.
 
 ## Compile demo project
 
 1. download source code
-2. execute [projects/genie_vs15.bat](https://github.com/nem0/OpenFBX/blob/master/projects/genie_vs15.bat)
-3. open projects/tmp/vs2015/OpenFBX.sln in Visual Studio 2015
+2. execute [projects/genie_vs19.bat](https://github.com/nem0/OpenFBX/blob/master/projects/genie_vs19.bat)
+3. open projects/tmp/vs2019/OpenFBX.sln in Visual Studio 2019
 4. compile and run
 
 Demo is windows only. Library is multiplatform.
