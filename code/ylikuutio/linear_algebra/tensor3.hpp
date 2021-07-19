@@ -40,7 +40,8 @@ namespace yli::linear_algebra
 
             // copy constructor.
             Tensor3(const yli::linear_algebra::Tensor3& old_tensor3);
-            Tensor3(std::shared_ptr<yli::linear_algebra::Tensor3> old_matrix)
+
+            explicit Tensor3(std::shared_ptr<yli::linear_algebra::Tensor3> old_matrix)
                 : Tensor3(*old_matrix) { }
 
             // constructor.
