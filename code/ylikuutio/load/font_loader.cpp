@@ -460,13 +460,11 @@ namespace yli::load
 
         std::strncpy(&(*svg_data)[0], file_content->c_str(), file_size);
 
-        bool is_first_glyph_found;
-
         const char* const svg_base_pointer { &(*svg_data)[0] };
         const char* svg_data_pointer       { &(*svg_data)[0] };
 
         // SVG files are XML files, so we just need to read until we find the data we need.
-        is_first_glyph_found = yli::load::find_first_glyph_in_svg(svg_base_pointer, svg_data_pointer, file_size);
+        const bool is_first_glyph_found { yli::load::find_first_glyph_in_svg(svg_base_pointer, svg_data_pointer, file_size) };
 
         if (!is_first_glyph_found || svg_data_pointer == nullptr)
         {
