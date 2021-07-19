@@ -156,7 +156,7 @@ namespace yli::load
 
         while (true)
         {
-            if (std::strncmp(vertex_data_pointer, "M", std::strlen("M")) == 0)
+            if (std::strncmp(vertex_data_pointer, "M", std::char_traits<char>::length("M")) == 0)
             {
                 current_vertex.x = yli::load::extract_value_from_string_with_standard_endings(
                         char_path,
@@ -165,7 +165,7 @@ namespace yli::load
                         (const char* const) "M (moveto)",
                         is_debug_mode);
 
-                while (std::strncmp(vertex_data_pointer++, " ", std::strlen(" ")) != 0);
+                while (std::strncmp(vertex_data_pointer++, " ", std::char_traits<char>::length(" ")) != 0);
 
                 current_vertex.y = yli::load::extract_value_from_string_with_standard_endings(
                         char_path,
@@ -176,8 +176,8 @@ namespace yli::load
 
                 vertices_of_current_edge_section.emplace_back(current_vertex);
 
-            } // if (std::strncmp(vertex_data_pointer, "M", std::strlen("M")) == 0)
-            else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
+            } // if (std::strncmp(vertex_data_pointer, "M", std::char_traits<char>::length("M")) == 0)
+            else if (std::strncmp(vertex_data_pointer, "h", std::char_traits<char>::length("h")) == 0)
             {
                 // OK, this is horizontal relative lineto.
                 int32_t horizontal_lineto_value = yli::load::extract_value_from_string_with_standard_endings(
@@ -189,8 +189,8 @@ namespace yli::load
 
                 current_vertex.x += horizontal_lineto_value;
                 vertices_of_current_edge_section.emplace_back(current_vertex);
-            } // else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
-            else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)
+            } // else if (std::strncmp(vertex_data_pointer, "h", std::char_traits<char>::length("h")) == 0)
+            else if (std::strncmp(vertex_data_pointer, "v", std::char_traits<char>::length("v")) == 0)
             {
                 // OK, this is vertical relative lineto.
                 int32_t vertical_lineto_value = yli::load::extract_value_from_string_with_standard_endings(
@@ -202,8 +202,8 @@ namespace yli::load
 
                 current_vertex.y += vertical_lineto_value;
                 vertices_of_current_edge_section.emplace_back(current_vertex);
-            } // else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)
-            else if (std::strncmp(vertex_data_pointer, "z", std::strlen("z")) == 0)
+            } // else if (std::strncmp(vertex_data_pointer, "v", std::char_traits<char>::length("v")) == 0)
+            else if (std::strncmp(vertex_data_pointer, "z", std::char_traits<char>::length("z")) == 0)
             {
                 if (is_debug_mode)
                 {
@@ -213,8 +213,8 @@ namespace yli::load
                 current_glyph_vertices.emplace_back(vertices_of_current_edge_section); // store the vertices of the current edge section.
                 vertices_of_current_edge_section.clear();                           // clear the vector of vertices of the current edge section.
                 vertex_data_pointer++;
-            } // else if (std::strncmp(vertex_data_pointer, "z", std::strlen("z")) == 0)
-            else if (std::strncmp(vertex_data_pointer, "\"", std::strlen("\"")) == 0)
+            } // else if (std::strncmp(vertex_data_pointer, "z", std::char_traits<char>::length("z")) == 0)
+            else if (std::strncmp(vertex_data_pointer, "\"", std::char_traits<char>::length("\"")) == 0)
             {
                 if (is_debug_mode)
                 {
@@ -223,7 +223,7 @@ namespace yli::load
 
                 SVG_data_pointer = ++closing_double_quote_pointer;
                 return true;
-            } // else if (std::strncmp(vertex_data_pointer, "\"", std::strlen("\"")) == 0)
+            } // else if (std::strncmp(vertex_data_pointer, "\"", std::char_traits<char>::length("\"")) == 0)
             else
             {
                 vertex_data_pointer++;
@@ -264,7 +264,7 @@ namespace yli::load
         while (true)
         {
             // Keep reading the glyph.
-            if (std::strncmp(SVG_data_pointer, "glyph-name=", std::strlen("glyph-name=")) == 0)
+            if (std::strncmp(SVG_data_pointer, "glyph-name=", std::char_traits<char>::length("glyph-name=")) == 0)
             {
                 // A glyph-name was found.
                 // TODO: If the glyph does not have a glyph name, an empty string will be stored as glyph-name.
@@ -330,8 +330,8 @@ namespace yli::load
                     std::cerr << "error: no opening double quote found for glyph-name=!\n";
                     return false;
                 }
-            } // if (std::strncmp(SVG_data_pointer, "glyph-name=", std::strlen("glyph-name=")) == 0)
-            else if (std::strncmp(SVG_data_pointer, "unicode=", std::strlen("unicode=")) == 0)
+            } // if (std::strncmp(SVG_data_pointer, "glyph-name=", std::char_traits<char>::length("glyph-name=")) == 0)
+            else if (std::strncmp(SVG_data_pointer, "unicode=", std::char_traits<char>::length("unicode=")) == 0)
             {
                 // Unicode was found.
                 // TODO: If the glyph does not have unicode, the glyph will be discarded (as there is no way to refer to it).
@@ -395,16 +395,16 @@ namespace yli::load
                     std::cerr << "error: no opening double quote found for unicode=!\n";
                     return false;
                 }
-            } // else if (std::strncmp(SVG_data_pointer, "unicode=", std::strlen("unicode=")) == 0)
-            else if (std::strncmp(SVG_data_pointer, "d=", std::strlen("d=")) == 0)
+            } // else if (std::strncmp(SVG_data_pointer, "unicode=", std::char_traits<char>::length("unicode=")) == 0)
+            else if (std::strncmp(SVG_data_pointer, "d=", std::char_traits<char>::length("d=")) == 0)
             {
                 bool result = yli::load::load_vertex_data(SVG_base_pointer, SVG_data_pointer, data_size, current_glyph_vertices, is_debug_mode);
                 if (result == false)
                 {
                     return false;
                 }
-            } // else if (std::strncmp(SVG_data_pointer, "d=", std::strlen("d=")) == 0)
-            else if (std::strncmp(SVG_data_pointer, "/>", std::strlen("/>")) == 0)
+            } // else if (std::strncmp(SVG_data_pointer, "d=", std::char_traits<char>::length("d=")) == 0)
+            else if (std::strncmp(SVG_data_pointer, "/>", std::char_traits<char>::length("/>")) == 0)
             {
                 // OK, this is the end of this glyph.
                 if (has_glyph_unicode)
@@ -436,9 +436,9 @@ namespace yli::load
                     // which contains the vertices of all the glyphs.
                     out_glyph_vertex_data.emplace_back(current_glyph_vertices);
                 } // if (has_glyph_unicode)
-                SVG_data_pointer += std::strlen("/>");
+                SVG_data_pointer += std::char_traits<char>::length("/>");
                 return true;
-            } // else if (std::strncmp(SVG_data_pointer, ">", std::strlen(">")) == 0)
+            } // else if (std::strncmp(SVG_data_pointer, ">", std::char_traits<char>::length(">")) == 0)
             else
             {
                 SVG_data_pointer++; // Advance to the next byte inside the glyph.
@@ -488,7 +488,7 @@ namespace yli::load
         // Create the vertex data for each glyph in a loop.
         while (true)
         {
-            if (std::strncmp(SVG_data_pointer, "<glyph", std::strlen("<glyph")) == 0)
+            if (std::strncmp(SVG_data_pointer, "<glyph", std::char_traits<char>::length("<glyph")) == 0)
             {
                 bool result = yli::load::load_svg_glyph(
                         SVG_base_pointer,

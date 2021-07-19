@@ -51,7 +51,7 @@ namespace yli::string
                 continue;
             }
 
-            if (std::strncmp(data_pointer, identifier_string_char, std::strlen(identifier_string_char)) == 0)
+            if (std::strncmp(data_pointer, identifier_string_char, std::char_traits<char>::length(identifier_string_char)) == 0)
             {
                 return true;
             }
@@ -107,7 +107,7 @@ namespace yli::string
         // + 1 needed for both source and dest because of the null terminator.
         while (src_data_pointer + 1 < src_base_pointer + src_data_size &&
                 dest_data_pointer + 1 < dest_base_pointer + dest_data_size &&
-                std::strncmp(src_data_pointer, char_end_string, std::strlen(char_end_string)) != 0)
+                std::strncmp(src_data_pointer, char_end_string, std::char_traits<char>::length(char_end_string)) != 0)
         {
             strncpy(dest_data_pointer++, src_data_pointer++, 1);
         }
