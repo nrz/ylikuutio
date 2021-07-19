@@ -38,18 +38,18 @@ namespace yli::load
             const char* const description,
             const bool is_debug_mode);
 
-    bool find_first_glyph_in_svg(const char* SVG_base_pointer, char*& SVG_data_pointer, std::size_t data_size);
+    bool find_first_glyph_in_svg(const char* svg_base_pointer, char*& svg_data_pointer, std::size_t data_size);
 
     bool load_vertex_data(
-            const char* const SVG_base_pointer,
-            char*& SVG_data_pointer,
+            const char* const svg_base_pointer,
+            char*& svg_data_pointer,
             std::size_t data_size,
             std::vector<std::vector<glm::vec2>>& current_glyph_vertices,
             const bool is_debug_mode);
 
     bool load_svg_glyph(
-            const char* const SVG_base_pointer,
-            char*& SVG_data_pointer,
+            const char* const svg_base_pointer,
+            char*& svg_data_pointer,
             std::size_t data_size,
             std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
             std::vector<std::string>& glyph_names,

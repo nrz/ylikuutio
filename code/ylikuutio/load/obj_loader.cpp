@@ -28,7 +28,6 @@
 // Include standard headers
 #include <algorithm> // std::replace
 #include <cstddef>   // std::size_t
-#include <cstring>   // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream>  // std::cout, std::cin, std::cerr
 #include <memory>    // std::make_shared, std::shared_ptr
 #include <sstream>   // std::istringstream, std::ostringstream, std::stringstream
@@ -98,12 +97,12 @@ namespace yli::load
             std::stringstream current_line_stringstream = std::stringstream(current_line_string);
             std::string prefix;
 
-            if (current_line_string.compare(0, std::strlen("#"), "#") == 0)
+            if (current_line_string.compare(0, std::char_traits<char>::length("#"), "#") == 0)
             {
                 // `#`
                 // This line is a comment.
             }
-            else if (current_line_string.compare(0, std::strlen("vt"), "vt") == 0)
+            else if (current_line_string.compare(0, std::char_traits<char>::length("vt"), "vt") == 0)
             {
                 // `vt`
                 // This line specifies texture coordinate of one vertex.
@@ -113,7 +112,7 @@ namespace yli::load
                 current_line_stringstream >> prefix >> uv.x >> uv.y;
                 temp_uvs.emplace_back(uv);
             }
-            else if (current_line_string.compare(0, std::strlen("vn"), "vn") == 0)
+            else if (current_line_string.compare(0, std::char_traits<char>::length("vn"), "vn") == 0)
             {
                 // `vn`
                 // This line specifies the normal of one vertex.
@@ -123,7 +122,7 @@ namespace yli::load
                 current_line_stringstream >> prefix >> normal.x >> normal.y >> normal.z;
                 temp_normals.emplace_back(normal);
             }
-            else if (current_line_string.compare(0, std::strlen("v"), "v") == 0)
+            else if (current_line_string.compare(0, std::char_traits<char>::length("v"), "v") == 0)
             {
                 // `v`
                 // This line specifies a vertex.
@@ -133,7 +132,7 @@ namespace yli::load
                 current_line_stringstream >> prefix >> vertex.x >> vertex.y >> vertex.z;
                 temp_vertices.emplace_back(vertex);
             }
-            else if (current_line_string.compare(0, std::strlen("f"), "f") == 0)
+            else if (current_line_string.compare(0, std::char_traits<char>::length("f"), "f") == 0)
             {
                 // `f`
                 // This line specifies a face.
@@ -159,29 +158,29 @@ namespace yli::load
                 normal_indices.emplace_back(normal_i2);
                 normal_indices.emplace_back(normal_i3);
             }
-            else if (current_line_string.compare(0, std::strlen("l"), "l") == 0)
+            else if (current_line_string.compare(0, std::char_traits<char>::length("l"), "l") == 0)
             {
                 // `l`
                 // TODO: implement `l`.
             }
-            else if (current_line_string.compare(0, std::strlen("o"), "o") == 0)
+            else if (current_line_string.compare(0, std::char_traits<char>::length("o"), "o") == 0)
             {
                 // `o`
                 // TODO: implement `o`.
                 // Currently, terminate processing when `o` is encountered.
                 break;
             }
-            else if (current_line_string.compare(0, std::strlen("s"), "s") == 0)
+            else if (current_line_string.compare(0, std::char_traits<char>::length("s"), "s") == 0)
             {
                 // `s`
                 // TODO: implement `s`.
             }
-            else if (current_line_string.compare(0, std::strlen("mtllib"), "mtllib") == 0)
+            else if (current_line_string.compare(0, std::char_traits<char>::length("mtllib"), "mtllib") == 0)
             {
                 // `mtllib`
                 // TODO: implement `mtllib`.
             }
-            else if (current_line_string.compare(0, std::strlen("usemtl"), "usemtl") == 0)
+            else if (current_line_string.compare(0, std::char_traits<char>::length("usemtl"), "usemtl") == 0)
             {
                 // `usemtl`
                 // TODO: implement `usemtl`.
