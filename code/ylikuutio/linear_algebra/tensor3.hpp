@@ -50,7 +50,7 @@ namespace yli::linear_algebra
             class Proxy2D
             {
                 public:
-                    Proxy2D(const std::vector<std::vector<float>>& array_of_arrays) : array_of_arrays(array_of_arrays) { }
+                    explicit Proxy2D(const std::vector<std::vector<float>>& array_of_arrays) : array_of_arrays(array_of_arrays) { }
 
                     class Proxy
                     {
