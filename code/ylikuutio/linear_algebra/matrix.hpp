@@ -35,6 +35,8 @@ namespace yli::linear_algebra
 
             // copy constructor.
             Matrix(const yli::linear_algebra::Matrix& old_matrix);
+
+            // constructor.
             explicit Matrix(std::shared_ptr<yli::linear_algebra::Matrix> old_matrix)
                 : Matrix(*old_matrix) { }
 
