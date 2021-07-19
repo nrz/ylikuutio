@@ -69,7 +69,7 @@ namespace yli::callback
             CallbackEngine();
 
             // constructor.
-            CallbackEngine(yli::ontology::Universe* const universe);
+            explicit CallbackEngine(yli::ontology::Universe* const universe);
 
             // destructor.
             ~CallbackEngine();
