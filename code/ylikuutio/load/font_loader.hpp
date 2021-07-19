@@ -31,6 +31,8 @@
 
 namespace yli::load
 {
+    bool check_if_we_are_inside_block(const char* const svg_base_pointer, const char* const& svg_data_pointer, const std::size_t data_size);
+
     int32_t extract_value_from_string_with_standard_endings(
             const char* const vertex_base_pointer,
             const char*& vertex_data_pointer,
