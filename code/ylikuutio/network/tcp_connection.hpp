@@ -43,6 +43,7 @@ namespace yli::network
             explicit TcpConnection(asio::io_context& io_context)
                 : socket_(io_context)
             {
+                // constructor.
             }
 
             static std::shared_ptr<TcpConnection> create(asio::io_context& io_context);
