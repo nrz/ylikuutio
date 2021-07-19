@@ -64,7 +64,7 @@ namespace yli::load
                 is_debug_mode ? description : nullptr);
     }
 
-    bool find_first_glyph_in_svg(const char* svg_base_pointer, const char*& svg_data_pointer, std::size_t data_size)
+    bool find_first_glyph_in_svg(const char* const svg_base_pointer, const char*& svg_data_pointer, std::size_t data_size)
     {
         // This function advances `svg_data_pointer` to the start of the first glyph.
         // Returns true if a glyph was found.

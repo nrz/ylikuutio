@@ -38,7 +38,7 @@ namespace yli::load
             const char* const description,
             const bool is_debug_mode);
 
-    bool find_first_glyph_in_svg(const char* svg_base_pointer, const char*& svg_data_pointer, std::size_t data_size);
+    bool find_first_glyph_in_svg(const char* const svg_base_pointer, const char*& svg_data_pointer, std::size_t data_size);
 
     bool load_vertex_data(
             const char* const svg_base_pointer,
