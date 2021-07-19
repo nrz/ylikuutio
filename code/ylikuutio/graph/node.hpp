@@ -34,7 +34,7 @@ namespace yli::graph
     {
         public:
             // constructor.
-            Node(const yli::graph::NodeStruct& node_struct);
+            explicit Node(const yli::graph::NodeStruct& node_struct);
 
             // destructor.
             ~Node();
