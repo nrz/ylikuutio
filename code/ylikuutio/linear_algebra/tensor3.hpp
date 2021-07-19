@@ -44,7 +44,7 @@ namespace yli::linear_algebra
                 : Tensor3(*old_matrix) { }
 
             // constructor.
-            Tensor3(const yli::linear_algebra::Matrix& old_matrix);
+            explicit Tensor3(const yli::linear_algebra::Matrix& old_matrix);
 
             // Inspired by http://stackoverflow.com/questions/6969881/operator-overload/6969904#6969904
             class Proxy2D
