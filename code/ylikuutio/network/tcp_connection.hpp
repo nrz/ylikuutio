@@ -40,7 +40,7 @@ namespace yli::network
     class TcpConnection
     {
         public:
-            TcpConnection(asio::io_context& io_context)
+            explicit TcpConnection(asio::io_context& io_context)
                 : socket_(io_context)
             {
             }
