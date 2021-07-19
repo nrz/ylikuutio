@@ -38,7 +38,7 @@
 
 namespace yli::load
 {
-    bool check_if_we_are_inside_block(const char* svg_base_pointer, char*& SVG_data_pointer, const std::size_t data_size)
+    bool check_if_we_are_inside_block(const char* svg_base_pointer, char*& svg_data_pointer, const std::size_t data_size)
     {
         // This function returns `true` if we are inside block, `false` otherwise.
 
@@ -46,7 +46,7 @@ namespace yli::load
         const std::vector<std::string> identifier_strings_vector
         { "<?xml ", "<!DOCTYPE ", "<svg>", "<metadata>", "</metadata>", "<defs>", "<font ", "<font-face", "<missing-glyph" };
 
-        return yli::string::check_and_report_if_some_string_matches(svg_base_pointer, SVG_data_pointer, data_size, identifier_strings_vector);
+        return yli::string::check_and_report_if_some_string_matches(svg_base_pointer, svg_data_pointer, data_size, identifier_strings_vector);
     }
 
     int32_t extract_value_from_string_with_standard_endings(
@@ -64,13 +64,13 @@ namespace yli::load
                 is_debug_mode ? description : nullptr);
     }
 
-    bool find_first_glyph_in_svg(const char* svg_base_pointer, char*& SVG_data_pointer, std::size_t data_size)
+    bool find_first_glyph_in_svg(const char* svg_base_pointer, char*& svg_data_pointer, std::size_t data_size)
     {
-        // This function advances `SVG_data_pointer` to the start of the first glyph.
+        // This function advances `svg_data_pointer` to the start of the first glyph.
         // Returns true if a glyph was found.
         // Returns false if no glyph was found.
 
-        if (svg_base_pointer == nullptr || SVG_data_pointer == nullptr)
+        if (svg_base_pointer == nullptr || svg_data_pointer == nullptr)
         {
             return false;
         }
@@ -83,28 +83,28 @@ namespace yli::load
             if (!is_inside_block)
             {
                 // OK, were are not inside a block.
-                if (SVG_data_pointer == nullptr)
+                if (svg_data_pointer == nullptr)
                 {
                     return false;
                 }
 
-                if (yli::string::check_and_report_if_some_string_matches(svg_base_pointer, SVG_data_pointer, data_size, std::vector<std::string> { "<glyph" }))
+                if (yli::string::check_and_report_if_some_string_matches(svg_base_pointer, svg_data_pointer, data_size, std::vector<std::string> { "<glyph" }))
                 {
                     return true;
                 }
-                if (yli::string::check_and_report_if_some_string_matches(svg_base_pointer, SVG_data_pointer, data_size, std::vector<std::string> { "</svg>" }))
+                if (yli::string::check_and_report_if_some_string_matches(svg_base_pointer, svg_data_pointer, data_size, std::vector<std::string> { "</svg>" }))
                 {
                     return false;
                 }
 
-                is_inside_block = yli::load::check_if_we_are_inside_block(svg_base_pointer, SVG_data_pointer, data_size);
-                SVG_data_pointer++;
+                is_inside_block = yli::load::check_if_we_are_inside_block(svg_base_pointer, svg_data_pointer, data_size);
+                svg_data_pointer++;
             }
             else
             {
                 // OK, we are inside a block.
-                SVG_data_pointer = std::strchr(SVG_data_pointer, '>');
-                yli::string::check_and_report_if_some_string_matches(svg_base_pointer, SVG_data_pointer, data_size, std::vector<std::string> { ">" });
+                svg_data_pointer = std::strchr(svg_data_pointer, '>');
+                yli::string::check_and_report_if_some_string_matches(svg_base_pointer, svg_data_pointer, data_size, std::vector<std::string> { ">" });
                 is_inside_block = false;
             }
         }
@@ -112,19 +112,19 @@ namespace yli::load
 
     bool load_vertex_data(
             const char* const svg_base_pointer,
-            char*& SVG_data_pointer,
+            char*& svg_data_pointer,
             std::size_t data_size,
             std::vector<std::vector<glm::vec2>>& current_glyph_vertices,
             const bool is_debug_mode)
     {
-        // This function returns a pointer to vertex data of a single glyph and advances `SVG_data_pointer`.
+        // This function returns a pointer to vertex data of a single glyph and advances `svg_data_pointer`.
 
         std::vector<glm::vec2> vertices_of_current_edge_section;    // vertices of the current edge section.
         // d=" was found.
         // Follow the path and create the vertices accordingly.
 
         // Find the memory address of the opening double quote.
-        char* opening_double_quote_pointer = strchr(SVG_data_pointer, '"');
+        char* opening_double_quote_pointer = strchr(svg_data_pointer, '"');
         if (opening_double_quote_pointer == nullptr)
         {
             std::cerr << "error: no opening double quote found for d=!\n";
@@ -221,7 +221,7 @@ namespace yli::load
                     std::cout << "\" (end of vertex data)\n";
                 }
 
-                SVG_data_pointer = ++closing_double_quote_pointer;
+                svg_data_pointer = ++closing_double_quote_pointer;
                 return true;
             } // else if (std::strncmp(vertex_data_pointer, "\"", std::char_traits<char>::length("\"")) == 0)
             else
@@ -233,7 +233,7 @@ namespace yli::load
 
     bool load_svg_glyph(
             const char* const svg_base_pointer,
-            char*& SVG_data_pointer,
+            char*& svg_data_pointer,
             std::size_t data_size,
             std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
             std::vector<std::string>& glyph_names,
@@ -242,7 +242,7 @@ namespace yli::load
     {
         // This function loads the next SVG glyph.
         // svg_base_pointer: pointer to the origin of the SVG data.
-        // SVG_data_pointer: pointer to the current reading address (must point to a glyph!).
+        // svg_data_pointer: pointer to the current reading address (must point to a glyph!).
         // out_glyph_vertex_data: vector of 2D objects consisting of 1 or more edge sections consisting of glm::vec2 vectors each of which is a vertex of a glyph.
         // glyph_names: vector of glyph names.
         // unicode_strings: vector of unicode strings.
@@ -251,7 +251,7 @@ namespace yli::load
         if (is_debug_mode)
         {
             std::stringstream data_pointer_stringstream;
-            data_pointer_stringstream << std::hex << (std::size_t) SVG_data_pointer;
+            data_pointer_stringstream << std::hex << (std::size_t) svg_data_pointer;
             std::cout << "<glyph found at 0x" << data_pointer_stringstream.str() << ".\n";
         }
 
@@ -264,19 +264,19 @@ namespace yli::load
         while (true)
         {
             // Keep reading the glyph.
-            if (std::strncmp(SVG_data_pointer, "glyph-name=", std::char_traits<char>::length("glyph-name=")) == 0)
+            if (std::strncmp(svg_data_pointer, "glyph-name=", std::char_traits<char>::length("glyph-name=")) == 0)
             {
                 // A glyph-name was found.
                 // TODO: If the glyph does not have a glyph name, an empty string will be stored as glyph-name.
                 if (is_debug_mode)
                 {
                     std::stringstream data_pointer_stringstream;
-                    data_pointer_stringstream << std::hex << (std::size_t) SVG_data_pointer;
+                    data_pointer_stringstream << std::hex << (std::size_t) svg_data_pointer;
                     std::cout << "glyph-name= found at 0x" << data_pointer_stringstream.str() << ".\n";
                 }
 
                 // Find the memory address of the opening double quote.
-                char* opening_double_quote_pointer = strchr(SVG_data_pointer, '"');
+                char* opening_double_quote_pointer = strchr(svg_data_pointer, '"');
                 if (opening_double_quote_pointer != nullptr)
                 {
                     if (is_debug_mode)
@@ -317,7 +317,7 @@ namespace yli::load
                             std::cout << "Glyph name: " << char_glyph_name << "\n";
                         }
 
-                        SVG_data_pointer = ++closing_double_quote_pointer;
+                        svg_data_pointer = ++closing_double_quote_pointer;
                     } // if (closing_double_quote_pointer != nullptr)
                     else
                     {
@@ -330,20 +330,20 @@ namespace yli::load
                     std::cerr << "error: no opening double quote found for glyph-name=!\n";
                     return false;
                 }
-            } // if (std::strncmp(SVG_data_pointer, "glyph-name=", std::char_traits<char>::length("glyph-name=")) == 0)
-            else if (std::strncmp(SVG_data_pointer, "unicode=", std::char_traits<char>::length("unicode=")) == 0)
+            } // if (std::strncmp(svg_data_pointer, "glyph-name=", std::char_traits<char>::length("glyph-name=")) == 0)
+            else if (std::strncmp(svg_data_pointer, "unicode=", std::char_traits<char>::length("unicode=")) == 0)
             {
                 // Unicode was found.
                 // TODO: If the glyph does not have unicode, the glyph will be discarded (as there is no way to refer to it).
                 if (is_debug_mode)
                 {
                     std::stringstream data_pointer_stringstream;
-                    data_pointer_stringstream << std::hex << (std::size_t) SVG_data_pointer;
+                    data_pointer_stringstream << std::hex << (std::size_t) svg_data_pointer;
                     std::cout << "unicode= found at 0x" << data_pointer_stringstream.str() << ".\n";
                 }
 
                 // Find the memory address of the opening double quote.
-                char* opening_double_quote_pointer = strchr(SVG_data_pointer, '"');
+                char* opening_double_quote_pointer = strchr(svg_data_pointer, '"');
                 if (opening_double_quote_pointer != nullptr)
                 {
                     if (is_debug_mode)
@@ -382,7 +382,7 @@ namespace yli::load
                             std::cout << "Unicode: " << char_unicode << "\n";
                         }
 
-                        SVG_data_pointer = ++closing_double_quote_pointer;
+                        svg_data_pointer = ++closing_double_quote_pointer;
                     } // if (closing_double_quote_pointer != nullptr)
                     else
                     {
@@ -395,16 +395,16 @@ namespace yli::load
                     std::cerr << "error: no opening double quote found for unicode=!\n";
                     return false;
                 }
-            } // else if (std::strncmp(SVG_data_pointer, "unicode=", std::char_traits<char>::length("unicode=")) == 0)
-            else if (std::strncmp(SVG_data_pointer, "d=", std::char_traits<char>::length("d=")) == 0)
+            } // else if (std::strncmp(svg_data_pointer, "unicode=", std::char_traits<char>::length("unicode=")) == 0)
+            else if (std::strncmp(svg_data_pointer, "d=", std::char_traits<char>::length("d=")) == 0)
             {
-                bool result = yli::load::load_vertex_data(svg_base_pointer, SVG_data_pointer, data_size, current_glyph_vertices, is_debug_mode);
+                bool result = yli::load::load_vertex_data(svg_base_pointer, svg_data_pointer, data_size, current_glyph_vertices, is_debug_mode);
                 if (result == false)
                 {
                     return false;
                 }
-            } // else if (std::strncmp(SVG_data_pointer, "d=", std::char_traits<char>::length("d=")) == 0)
-            else if (std::strncmp(SVG_data_pointer, "/>", std::char_traits<char>::length("/>")) == 0)
+            } // else if (std::strncmp(svg_data_pointer, "d=", std::char_traits<char>::length("d=")) == 0)
+            else if (std::strncmp(svg_data_pointer, "/>", std::char_traits<char>::length("/>")) == 0)
             {
                 // OK, this is the end of this glyph.
                 if (has_glyph_unicode)
@@ -436,12 +436,12 @@ namespace yli::load
                     // which contains the vertices of all the glyphs.
                     out_glyph_vertex_data.emplace_back(current_glyph_vertices);
                 } // if (has_glyph_unicode)
-                SVG_data_pointer += std::char_traits<char>::length("/>");
+                svg_data_pointer += std::char_traits<char>::length("/>");
                 return true;
-            } // else if (std::strncmp(SVG_data_pointer, ">", std::char_traits<char>::length(">")) == 0)
+            } // else if (std::strncmp(svg_data_pointer, ">", std::char_traits<char>::length(">")) == 0)
             else
             {
-                SVG_data_pointer++; // Advance to the next byte inside the glyph.
+                svg_data_pointer++; // Advance to the next byte inside the glyph.
             }
         } // while (true)
     }
@@ -463,36 +463,36 @@ namespace yli::load
         bool is_first_glyph_found;
 
         const char* svg_base_pointer;
-        char* SVG_data_pointer;
+        char* svg_data_pointer;
         svg_base_pointer = &(*SVG_data)[0];
-        SVG_data_pointer = &(*SVG_data)[0];
+        svg_data_pointer = &(*SVG_data)[0];
 
         // SVG files are XML files, so we just need to read until we find the data we need.
-        is_first_glyph_found = yli::load::find_first_glyph_in_svg(svg_base_pointer, SVG_data_pointer, file_size);
+        is_first_glyph_found = yli::load::find_first_glyph_in_svg(svg_base_pointer, svg_data_pointer, file_size);
 
-        if (!is_first_glyph_found || SVG_data_pointer == nullptr)
+        if (!is_first_glyph_found || svg_data_pointer == nullptr)
         {
             std::cerr << "no glyphs were found!\n";
             return false;
         }
 
-        std::size_t offset = (std::size_t) SVG_data_pointer - (std::size_t) svg_base_pointer;
+        std::size_t offset = (std::size_t) svg_data_pointer - (std::size_t) svg_base_pointer;
         if (is_debug_mode)
         {
             std::stringstream first_glyph_found_stringstream;
             first_glyph_found_stringstream << "First glyph found at file offset 0x" << std::hex << offset;
-            first_glyph_found_stringstream << " (memory address 0x" << (std::size_t) SVG_data_pointer << ").\n";
+            first_glyph_found_stringstream << " (memory address 0x" << (std::size_t) svg_data_pointer << ").\n";
             std::cout << first_glyph_found_stringstream.str();
         }
 
         // Create the vertex data for each glyph in a loop.
         while (true)
         {
-            if (std::strncmp(SVG_data_pointer, "<glyph", std::char_traits<char>::length("<glyph")) == 0)
+            if (std::strncmp(svg_data_pointer, "<glyph", std::char_traits<char>::length("<glyph")) == 0)
             {
                 bool result = yli::load::load_svg_glyph(
                         svg_base_pointer,
-                        SVG_data_pointer,
+                        svg_data_pointer,
                         file_size,
                         out_glyph_vertex_data,
                         glyph_names,
@@ -508,11 +508,11 @@ namespace yli::load
             {
                 const std::vector<std::string> string_vector { "</font>", "</defs>", "</svg>" };
 
-                if (yli::string::check_and_report_if_some_string_matches(svg_base_pointer, SVG_data_pointer, file_size, string_vector))
+                if (yli::string::check_and_report_if_some_string_matches(svg_base_pointer, svg_data_pointer, file_size, string_vector))
                 {
                     return true;
                 }
-                SVG_data_pointer++;
+                svg_data_pointer++;
             }
         } // while (true)
     }
