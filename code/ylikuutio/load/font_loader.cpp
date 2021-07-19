@@ -38,7 +38,7 @@
 
 namespace yli::load
 {
-    bool check_if_we_are_inside_block(const char* svg_base_pointer, char*& svg_data_pointer, const std::size_t data_size)
+    bool check_if_we_are_inside_block(const char* const svg_base_pointer, const char* const& svg_data_pointer, const std::size_t data_size)
     {
         // This function returns `true` if we are inside block, `false` otherwise.
 
@@ -51,7 +51,7 @@ namespace yli::load
 
     int32_t extract_value_from_string_with_standard_endings(
             const char* const vertex_base_pointer,
-            char*& vertex_data_pointer,
+            const char*& vertex_data_pointer,
             const std::size_t vertex_data_size,
             const char* const description,
             const bool is_debug_mode)
@@ -64,7 +64,7 @@ namespace yli::load
                 is_debug_mode ? description : nullptr);
     }
 
-    bool find_first_glyph_in_svg(const char* svg_base_pointer, char*& svg_data_pointer, std::size_t data_size)
+    bool find_first_glyph_in_svg(const char* svg_base_pointer, const char*& svg_data_pointer, std::size_t data_size)
     {
         // This function advances `svg_data_pointer` to the start of the first glyph.
         // Returns true if a glyph was found.
@@ -112,7 +112,7 @@ namespace yli::load
 
     bool load_vertex_data(
             const char* const svg_base_pointer,
-            char*& svg_data_pointer,
+            const char*& svg_data_pointer,
             std::size_t data_size,
             std::vector<std::vector<glm::vec2>>& current_glyph_vertices,
             const bool is_debug_mode)
@@ -124,7 +124,7 @@ namespace yli::load
         // Follow the path and create the vertices accordingly.
 
         // Find the memory address of the opening double quote.
-        char* opening_double_quote_pointer = strchr(svg_data_pointer, '"');
+        const char* opening_double_quote_pointer = strchr(svg_data_pointer, '"');
         if (opening_double_quote_pointer == nullptr)
         {
             std::cerr << "error: no opening double quote found for d=!\n";
@@ -132,7 +132,7 @@ namespace yli::load
         }
 
         // Find the memory address of the closing double quote.
-        char* closing_double_quote_pointer = strchr(++opening_double_quote_pointer, '"');
+        const char* closing_double_quote_pointer = strchr(++opening_double_quote_pointer, '"');
         if (closing_double_quote_pointer == nullptr)
         {
             std::cerr << "error: no closing double quote found for d=!\n";
@@ -151,7 +151,7 @@ namespace yli::load
         }
 
         // Loop through vertices and push them to `current_glyph_vertices`.
-        char* vertex_data_pointer;
+        const char* vertex_data_pointer;
         vertex_data_pointer = char_path;
 
         while (true)
@@ -233,7 +233,7 @@ namespace yli::load
 
     bool load_svg_glyph(
             const char* const svg_base_pointer,
-            char*& svg_data_pointer,
+            const char*& svg_data_pointer,
             std::size_t data_size,
             std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
             std::vector<std::string>& glyph_names,
@@ -276,7 +276,7 @@ namespace yli::load
                 }
 
                 // Find the memory address of the opening double quote.
-                char* opening_double_quote_pointer = strchr(svg_data_pointer, '"');
+                const char* opening_double_quote_pointer = strchr(svg_data_pointer, '"');
                 if (opening_double_quote_pointer != nullptr)
                 {
                     if (is_debug_mode)
@@ -289,7 +289,7 @@ namespace yli::load
                     opening_double_quote_pointer++;
 
                     // Find the memory address of the closing double quote.
-                    char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
+                    const char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
                     if (closing_double_quote_pointer != nullptr)
                     {
                         if (is_debug_mode)
@@ -343,7 +343,7 @@ namespace yli::load
                 }
 
                 // Find the memory address of the opening double quote.
-                char* opening_double_quote_pointer = strchr(svg_data_pointer, '"');
+                const char* opening_double_quote_pointer = strchr(svg_data_pointer, '"');
                 if (opening_double_quote_pointer != nullptr)
                 {
                     if (is_debug_mode)
@@ -356,7 +356,7 @@ namespace yli::load
                     opening_double_quote_pointer++;
 
                     // Find the memory address of the closing double quote.
-                    char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
+                    const char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
                     if (closing_double_quote_pointer != nullptr)
                     {
                         if (is_debug_mode)
@@ -463,7 +463,7 @@ namespace yli::load
         bool is_first_glyph_found;
 
         const char* svg_base_pointer;
-        char* svg_data_pointer;
+        const char* svg_data_pointer;
         svg_base_pointer = &(*SVG_data)[0];
         svg_data_pointer = &(*SVG_data)[0];
 

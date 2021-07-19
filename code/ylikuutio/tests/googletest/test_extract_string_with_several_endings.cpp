@@ -26,7 +26,7 @@
 TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_empty_string)
 {
     char text[] = "";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "";
     const std::size_t array_size = 128;
@@ -71,7 +71,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_1_char)
 {
     char text[] = "";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "a";
     const std::size_t array_size = 128;
@@ -116,7 +116,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_2_same_chars)
 {
     char text[] = "";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "aa";
     const std::size_t array_size = 128;
@@ -161,7 +161,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_2_different_chars)
 {
     char text[] = "";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "ab";
     const std::size_t array_size = 128;
@@ -206,7 +206,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_when_source_string_is_1_char_and_end_string_is_matching_1_char)
 {
     char text[] = "a";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "a";
     const std::size_t array_size = 128;
@@ -251,7 +251,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_when_source_string_is_1_char_and_first_char_of_end_string_matches_1st_char)
 {
     char text[] = "a";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "ab";
     const std::size_t array_size = 128;
@@ -296,7 +296,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_when_source_string_is_1_char_and_second_char_of_end_string_matches_1st_char)
 {
     char text[] = "a";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "ba";
     const std::size_t array_size = 128;
@@ -341,7 +341,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_when_source_string_is_1_char_and_both_chars_of_end_string_match_1st_char)
 {
     char text[] = "a";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "aa";
     const std::size_t array_size = 128;
@@ -386,7 +386,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_when_source_string_is_1_char_and_end_string_is_different_1_char)
 {
     char text[] = "a";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "b";
     const std::size_t array_size = 128;
@@ -434,7 +434,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_when_source_string_is_2_chars_and_end_string_is_same_as_1st_char)
 {
     char text[] = "ab";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "a";
     const std::size_t array_size = 128;
@@ -479,7 +479,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_when_source_string_is_2_chars_and_end_string_is_same_as_1st_and_2nd_char)
 {
     char text[] = "aa";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "a";
     const std::size_t array_size = 128;
@@ -524,7 +524,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_when_source_string_is_2_chars_and_end_string_is_same_as_2nd_char)
 {
     char text[] = "ab";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "b";
     const std::size_t array_size = 128;
@@ -572,7 +572,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_when_source_string_is_2_chars_and_first_char_of_end_string_is_same_as_2nd_char)
 {
     char text[] = "ab";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "bc";
     const std::size_t array_size = 128;
@@ -620,7 +620,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_when_source_string_is_2_chars_and_second_char_of_end_string_is_same_as_2nd_char)
 {
     char text[] = "ab";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "cb";
     const std::size_t array_size = 128;
@@ -668,7 +668,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_when_source_string_is_2_chars_and_both_chars_of_end_string_are_same_as_2nd_char)
 {
     char text[] = "ab";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "bb";
     const std::size_t array_size = 128;
@@ -716,7 +716,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_when_source_string_is_2_chars_and_end_string_is_different_1_char)
 {
     char text[] = "ab";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "c";
     const std::size_t array_size = 128;
@@ -767,7 +767,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_
 TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_when_source_string_is_3_chars_and_end_string_is_same_as_1st_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "a";
     const std::size_t array_size = 128;
@@ -812,7 +812,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_when_source_string_is_3_chars_and_end_string_is_same_as_2nd_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "b";
     const std::size_t array_size = 128;
@@ -860,7 +860,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_when_source_string_is_3_chars_and_end_string_is_same_as_3rd_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "c";
     const std::size_t array_size = 128;
@@ -911,7 +911,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_
 TEST(extract_string_with_several_endings_from_memory, 3_chars_must_be_extracted_when_source_string_is_3_chars_and_end_string_is_a_different_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "d";
     const std::size_t array_size = 128;
@@ -965,7 +965,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 3_chars_
 TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_when_source_string_is_3_chars_and_1st_char_of_end_string_is_same_as_1st_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "ad";
     const std::size_t array_size = 128;
@@ -1010,7 +1010,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_when_source_string_is_3_chars_and_2nd_char_of_end_string_is_same_as_1st_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "da";
     const std::size_t array_size = 128;
@@ -1055,7 +1055,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_when_source_string_is_3_chars_and_3rd_char_of_end_string_is_same_as_1st_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "dea";
     const std::size_t array_size = 128;
@@ -1100,7 +1100,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_when_source_string_is_3_chars_and_4th_char_of_end_string_is_same_as_1st_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "defa";
     const std::size_t array_size = 128;
@@ -1145,7 +1145,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_when_source_string_is_3_chars_and_5th_char_of_end_string_is_same_as_1st_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "defga";
     const std::size_t array_size = 128;
@@ -1190,7 +1190,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_when_source_string_is_3_chars_and_1st_char_of_end_string_is_same_as_2nd_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "bd";
     const std::size_t array_size = 128;
@@ -1238,7 +1238,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_when_source_string_is_3_chars_and_2nd_char_of_end_string_is_same_as_2nd_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "db";
     const std::size_t array_size = 128;
@@ -1286,7 +1286,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_when_source_string_is_3_chars_and_3rd_char_of_end_string_is_same_as_2nd_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "deb";
     const std::size_t array_size = 128;
@@ -1334,7 +1334,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_when_source_string_is_3_chars_and_4th_char_of_end_string_is_same_as_2nd_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "defb";
     const std::size_t array_size = 128;
@@ -1382,7 +1382,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_when_source_string_is_3_chars_and_5th_char_of_end_string_is_same_as_2nd_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "defgb";
     const std::size_t array_size = 128;
@@ -1430,7 +1430,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_when_source_string_is_3_chars_and_1st_char_of_end_string_is_same_as_3rd_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "cd";
     const std::size_t array_size = 128;
@@ -1481,7 +1481,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_
 TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_when_source_string_is_3_chars_and_2nd_char_of_end_string_is_same_as_3rd_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "dc";
     const std::size_t array_size = 128;
@@ -1532,7 +1532,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_
 TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_when_source_string_is_3_chars_and_3rd_char_of_end_string_is_same_as_3rd_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "dec";
     const std::size_t array_size = 128;
@@ -1583,7 +1583,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_
 TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_when_source_string_is_3_chars_and_4th_char_of_end_string_is_same_as_3rd_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "defc";
     const std::size_t array_size = 128;
@@ -1634,7 +1634,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_
 TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_when_source_string_is_3_chars_and_5th_char_of_end_string_is_same_as_3rd_char)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "defgc";
     const std::size_t array_size = 128;
@@ -1685,7 +1685,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_
 TEST(extract_string_with_several_endings_from_memory, 3_chars_must_be_extracted_when_source_string_is_3_chars_and_end_string_is_an_empty_string)
 {
     char text[] = "abc";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "";
     const std::size_t array_size = 128;
