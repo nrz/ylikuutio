@@ -33,19 +33,19 @@ namespace yli::ontology
 
     struct ObjectStruct: public yli::ontology::MovableStruct
     {
-        ObjectStruct(yli::ontology::Species* const parent)
+        explicit ObjectStruct(yli::ontology::Species* const parent)
             : parent { parent }
         {
             // constructor.
         }
 
-        ObjectStruct(yli::ontology::ShapeshifterSequence* const parent)
+        explicit ObjectStruct(yli::ontology::ShapeshifterSequence* const parent)
             : parent { parent }
         {
             // constructor.
         }
 
-        ObjectStruct(yli::ontology::Text3D* const parent)
+        explicit ObjectStruct(yli::ontology::Text3D* const parent)
             : parent { parent }
         {
             // constructor.
