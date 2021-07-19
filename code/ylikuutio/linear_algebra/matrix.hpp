@@ -36,10 +36,11 @@ namespace yli::linear_algebra
             // copy constructor.
             Matrix(const yli::linear_algebra::Matrix& old_matrix);
 
-            // constructor.
             explicit Matrix(std::shared_ptr<yli::linear_algebra::Matrix> old_matrix)
                 : Matrix(*old_matrix)
-            { }
+            {
+                // constructor.
+            }
 
             // Inspired by http://stackoverflow.com/questions/6969881/operator-overload/6969904#6969904
             class Proxy
@@ -47,7 +48,9 @@ namespace yli::linear_algebra
                 public:
                     explicit Proxy(std::vector<float>& proxy_array)
                         : proxy_array(proxy_array)
-                    { }
+                    {
+                        // constructor.
+                    }
 
                     float& operator[](const std::size_t index)
                     {

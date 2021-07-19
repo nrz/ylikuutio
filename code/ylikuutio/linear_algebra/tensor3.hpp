@@ -42,7 +42,10 @@ namespace yli::linear_algebra
             Tensor3(const yli::linear_algebra::Tensor3& old_tensor3);
 
             explicit Tensor3(std::shared_ptr<yli::linear_algebra::Tensor3> old_matrix)
-                : Tensor3(*old_matrix) { }
+                : Tensor3(*old_matrix)
+            {
+                // constructor.
+            }
 
             // constructor.
             explicit Tensor3(const yli::linear_algebra::Matrix& old_matrix);
@@ -53,14 +56,18 @@ namespace yli::linear_algebra
                 public:
                     explicit Proxy2D(const std::vector<std::vector<float>>& array_of_arrays)
                         : array_of_arrays(array_of_arrays)
-                    { }
+                    {
+                        // constructor.
+                    }
 
                     class Proxy
                     {
                         public:
                             explicit Proxy(std::vector<float>& proxy_array)
                                 : proxy_array(proxy_array)
-                            { }
+                            {
+                                // constructor.
+                            }
 
                             float& operator[](const std::size_t index)
                             {
