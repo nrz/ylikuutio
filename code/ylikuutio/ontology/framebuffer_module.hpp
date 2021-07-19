@@ -31,7 +31,7 @@ namespace yli::ontology
     {
         public:
             // constructor.
-            FramebufferModule(const yli::ontology::FramebufferModuleStruct& framebuffer_module_struct);
+            explicit FramebufferModule(const yli::ontology::FramebufferModuleStruct& framebuffer_module_struct);
 
             FramebufferModule(const FramebufferModule&) = delete;            // Delete copy constructor.
             FramebufferModule &operator=(const FramebufferModule&) = delete; // Delete copy assignment.
