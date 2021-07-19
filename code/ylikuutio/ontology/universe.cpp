@@ -286,7 +286,7 @@ namespace yli::ontology
                 {
                     // If last `std::stringstream` here was more than 1 sec ago,
                     // std::stringstream` and reset number of frames.
-                    if (frame_rate_text_2d != nullptr && this->number_of_frames > 0)
+                    if (this->number_of_frames > 0)
                     {
                         std::stringstream ms_frame_text_stringstream;
                         ms_frame_text_stringstream << std::fixed << std::setprecision(2) <<
