@@ -31,25 +31,27 @@
 
 namespace yli::load
 {
+    bool check_if_we_are_inside_block(const char* const svg_base_pointer, const char* const& svg_data_pointer, const std::size_t data_size);
+
     int32_t extract_value_from_string_with_standard_endings(
             const char* const vertex_base_pointer,
-            char*& vertex_data_pointer,
+            const char*& vertex_data_pointer,
             const std::size_t vertex_data_size,
             const char* const description,
             const bool is_debug_mode);
 
-    bool find_first_glyph_in_svg(const char* svg_base_pointer, char*& svg_data_pointer, std::size_t data_size);
+    bool find_first_glyph_in_svg(const char* const svg_base_pointer, const char*& svg_data_pointer, std::size_t data_size);
 
     bool load_vertex_data(
             const char* const svg_base_pointer,
-            char*& svg_data_pointer,
+            const char*& svg_data_pointer,
             std::size_t data_size,
             std::vector<std::vector<glm::vec2>>& current_glyph_vertices,
             const bool is_debug_mode);
 
     bool load_svg_glyph(
             const char* const svg_base_pointer,
-            char*& svg_data_pointer,
+            const char*& svg_data_pointer,
             std::size_t data_size,
             std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
             std::vector<std::string>& glyph_names,

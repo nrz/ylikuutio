@@ -131,7 +131,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_data_string_is_2
 TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_empty_string)
 {
     char text[] = "";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "";
     const std::size_t array_size = 128;
@@ -147,7 +147,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
 TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_1_char)
 {
     char text[] = "";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "a";
     const std::size_t array_size = 128;
@@ -163,7 +163,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
 TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_2_same_chars)
 {
     char text[] = "";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "aa";
     const std::size_t array_size = 128;
@@ -179,7 +179,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
 TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_2_different_chars)
 {
     char text[] = "";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "ab";
     const std::size_t array_size = 128;
@@ -195,7 +195,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
 TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is_1_char_and_end_string_is_same_char)
 {
     char text[] = "a";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "a";
     const std::size_t array_size = 128;
@@ -211,7 +211,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
 TEST(extract_string_from_memory, iloinen_lokki_laulaa_ja_nukkuu)
 {
     char text[] = "iloinen lokki laulaa ja nukkuu";
-    char* text_pointer = text;
+    const char* text_pointer = text;
 
     const char end_string[] = "ja";
     const std::size_t array_size = 128;

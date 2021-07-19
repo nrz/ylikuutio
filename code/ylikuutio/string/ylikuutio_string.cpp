@@ -97,7 +97,7 @@ namespace yli::string
 
     void extract_string(
             const char* const src_base_pointer,
-            char*& src_data_pointer,
+            const char*& src_data_pointer,
             const std::size_t src_data_size,
             const char* const dest_base_pointer,
             char* dest_data_pointer,
@@ -116,7 +116,7 @@ namespace yli::string
 
     void extract_string_with_several_endings(
             const char* const src_base_pointer,
-            char*& src_data_pointer,
+            const char*& src_data_pointer,
             const std::size_t src_data_size,
             const char* const dest_base_pointer,
             char* dest_data_pointer,
@@ -299,7 +299,7 @@ namespace yli::string
 
     void extract_value_from_string(
             const char* const src_base_pointer,
-            char*& src_data_pointer,
+            const char*& src_data_pointer,
             const std::size_t src_data_size,
             const char* const char_end_string,
             const char* const description,
@@ -329,7 +329,7 @@ namespace yli::string
 
     void extract_value_from_string(
             const char* const src_base_pointer,
-            char*& src_data_pointer,
+            const char*& src_data_pointer,
             const std::size_t src_data_size,
             const char* const char_end_string,
             const char* const description,
@@ -359,7 +359,7 @@ namespace yli::string
 
     void extract_value_from_string(
             const char* const src_base_pointer,
-            char*& src_data_pointer,
+            const char*& src_data_pointer,
             const std::size_t src_data_size,
             const char* const char_end_string,
             const char* const description,
@@ -389,7 +389,7 @@ namespace yli::string
 
     void extract_value_from_string(
             const char* const src_base_pointer,
-            char*& src_data_pointer,
+            const char*& src_data_pointer,
             const std::size_t src_data_size,
             const char* const char_end_string,
             const char* const description,
@@ -419,7 +419,7 @@ namespace yli::string
 
     void extract_value_from_string(
             const char* const src_base_pointer,
-            char*& src_data_pointer,
+            const char*& src_data_pointer,
             const std::size_t src_data_size,
             const char* const char_end_string,
             const char* const description,
@@ -449,7 +449,7 @@ namespace yli::string
 
     void extract_value_from_string(
             const char* const src_base_pointer,
-            char*& src_data_pointer,
+            const char*& src_data_pointer,
             const std::size_t src_data_size,
             const char* const char_end_string,
             const char* const description,
@@ -479,7 +479,7 @@ namespace yli::string
 
     void extract_value_from_string(
             const char* const src_base_pointer,
-            char*& src_data_pointer,
+            const char*& src_data_pointer,
             const std::size_t src_data_size,
             const char* const char_end_string,
             const char* const description,
@@ -509,7 +509,7 @@ namespace yli::string
 
     int8_t extract_int8_t_value_from_string(
             const char* const src_base_pointer,
-            char*& src_data_pointer,
+            const char*& src_data_pointer,
             const std::size_t src_data_size,
             const char* const char_end_string,
             const char* const description)
@@ -587,7 +587,7 @@ namespace yli::string
 
     uint8_t extract_uint8_t_value_from_string(
             const char* const src_base_pointer,
-            char*& src_data_pointer,
+            const char*& src_data_pointer,
             const std::size_t src_data_size,
             const char* const char_end_string,
             const char* const description)
@@ -657,7 +657,7 @@ namespace yli::string
 
     int16_t extract_int16_t_value_from_string(
             const char* const src_base_pointer,
-            char*& src_data_pointer,
+            const char*& src_data_pointer,
             const std::size_t src_data_size,
             const char* const char_end_string,
             const char* const description)
@@ -735,7 +735,7 @@ namespace yli::string
 
     uint16_t extract_uint16_t_value_from_string(
             const char* const src_base_pointer,
-            char*& src_data_pointer,
+            const char*& src_data_pointer,
             const std::size_t src_data_size,
             const char* const char_end_string,
             const char* const description)
@@ -805,7 +805,7 @@ namespace yli::string
 
     int32_t extract_int32_t_value_from_string(
             const char* const src_base_pointer,
-            char*& src_data_pointer,
+            const char*& src_data_pointer,
             const std::size_t src_data_size,
             const char* const char_end_string,
             const char* const description)
@@ -855,7 +855,7 @@ namespace yli::string
 
     uint32_t extract_uint32_t_value_from_string(
             const char* const src_base_pointer,
-            char*& src_data_pointer,
+            const char*& src_data_pointer,
             const std::size_t src_data_size,
             const char* const char_end_string,
             const char* const description)
@@ -905,7 +905,7 @@ namespace yli::string
 
     float extract_float_value_from_string(
             const char* const src_base_pointer,
-            char*& src_data_pointer,
+            const char*& src_data_pointer,
             const std::size_t src_data_size,
             const char* const char_end_string,
             const char* const description)
