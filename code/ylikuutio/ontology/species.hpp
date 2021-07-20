@@ -29,12 +29,6 @@
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_templates.hpp"
 
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
-
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -66,7 +60,6 @@ namespace yli::ontology
                 model_file_format            { species_struct.model_file_format },
                 model_filename               { species_struct.model_filename },
                 color_channel                { species_struct.color_channel },
-                light_position               { species_struct.light_position },
                 latitude                     { species_struct.latitude },
                 longitude                    { species_struct.longitude },
                 mesh_i                       { species_struct.mesh_i },
@@ -164,7 +157,6 @@ namespace yli::ontology
             float divisor;                 // Value by which SRTM values are divided to convert them to kilometers.
 
             std::string color_channel;     // Color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
-            glm::vec3 light_position;      // Light position.
 
             template<class T1, class T2>
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);

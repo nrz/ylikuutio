@@ -241,9 +241,9 @@ namespace yli::triangulation
                 return false;
             }
 
-            if (x_step <= 0 || z_step <= 0)
+            if (x_step == 0 || z_step == 0)
             {
-                // Can not interpolate center vertices if x_step <= 0 or z_step <= 0.
+                // Can not interpolate center vertices if x_step == 0 or z_step == 0.
                 return false;
             }
 

@@ -24,12 +24,6 @@
 #include "material.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
-
 // Include standard headers
 #include <vector>  // std::vector
 
@@ -75,8 +69,6 @@ namespace yli::ontology
 
             // destructor.
             virtual ~Chunk();
-
-            glm::vec3 light_position;            // light position.
 
             template<class T1, class T2>
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);

@@ -60,7 +60,6 @@ namespace yli::ontology
         std::vector<glm::vec3> vertices;                    // for `SymbiontSpecies`.
         std::vector<glm::vec2> uvs;                         // for `SymbiontSpecies`.
         std::vector<glm::vec3> normals;                     // for `SymbiontSpecies`.
-        glm::vec3 light_position { glm::vec3(0.0f, 0.0f, 0.0f) }; // light position.
         yli::ontology::Scene* scene                                            { nullptr }; // Pointer to `Scene` object.
         yli::ontology::Shader* shader                                          { nullptr }; // Pointer to `Shader` object.
         yli::ontology::Material* material                                      { nullptr }; // Pointer to `Material` object.

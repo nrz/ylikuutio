@@ -78,7 +78,6 @@ namespace yli::ontology
                 this->vertices       = species_struct.vertices;
                 this->uvs            = species_struct.uvs;
                 this->normals        = species_struct.normals;
-                this->light_position = species_struct.light_position;
 
                 this->type_string = "yli::ontology::SymbiontSpecies*";
 
@@ -161,8 +160,6 @@ namespace yli::ontology
             yli::ontology::GenericMasterModule master_of_bionts;
 
         private:
-            glm::vec3 light_position;
-
             void bind_to_parent();
 
             // this method renders all `Object`s of this `SymbiontSpecies`.

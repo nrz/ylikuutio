@@ -31,7 +31,7 @@ namespace yli::string
             const char* const base_pointer,
             const char* const data_pointer,
             const std::size_t data_size,
-            const std::vector<std::string> identifier_strings_vector);
+            const std::vector<std::string>& identifier_strings_vector);
 
     bool check_and_report_if_some_string_matches(
             const std::string& data_string,

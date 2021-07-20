@@ -38,12 +38,9 @@ TEST(glyphs_must_be_found_appropriately, kongtext_svg)
 
     std::shared_ptr<std::string> file_content = yli::file::slurp(font_filename);
     const uint64_t file_size = file_content->size();
-    char* const SVG_data = new char[file_size];
-    ASSERT_NE(SVG_data, nullptr);
-    std::strncpy(SVG_data, file_content->c_str(), file_size);
 
-    const char* const SVG_base_pointer = SVG_data;
-    const char* SVG_data_pointer = SVG_data;
+    const char* const SVG_base_pointer { &(*file_content)[0] };
+    const char* SVG_data_pointer       { &(*file_content)[0] };
 
     // SVG files are XML files, so we just need to read until we find the data we need.
     const bool is_first_glyph_found = yli::load::find_first_glyph_in_svg(SVG_base_pointer, SVG_data_pointer, file_size);

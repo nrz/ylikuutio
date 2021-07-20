@@ -38,7 +38,7 @@ namespace yli::string
             const char* const base_pointer,
             const char* const data_pointer,
             const std::size_t data_size,
-            const std::vector<std::string> identifier_strings_vector)
+            const std::vector<std::string>& identifier_strings_vector)
     {
         for (const std::string& identifier_string : identifier_strings_vector)
         {
