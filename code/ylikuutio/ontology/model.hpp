@@ -94,7 +94,6 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_objects;
 
         protected:
-            std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
             glm::vec3 light_position;                // light position.
 
             GLint light_id { 0 };                    // light ID, returned by `glGetUniformLocation(program_id, "light_position_worldspace");`. Dummy value.
