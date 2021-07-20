@@ -39,7 +39,7 @@ namespace yli::command_line
         std::string previous_argument = ""; // dummy value.
 
         // Go through the command line arguments and store the keys and values.
-        for (std::vector<std::string>::const_iterator it = this->arg_vector.begin(); it != this->arg_vector.end(); it++)
+        for (std::vector<std::string>::const_iterator it = this->arg_vector.begin(); it != this->arg_vector.end(); ++it)
         {
             const std::string argument = *it;
 
