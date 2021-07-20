@@ -36,7 +36,7 @@ namespace yli::string
     bool check_and_report_if_some_string_matches(
             const std::string& data_string,
             const std::size_t data_index,
-            const std::vector<std::string> identifier_strings_vector);
+            const std::vector<std::string>& identifier_strings_vector);
 
     // All string extraction functions of `yli::string` advance either
     // `data_index` or `src_data_pointer` to the first character that

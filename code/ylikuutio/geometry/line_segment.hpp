@@ -32,7 +32,7 @@ namespace yli::geometry
         public:
             // constructor.
             // can be used for creating n-dimensional line segments.
-            LineSegment(const std::vector<float> point1, const std::vector<float> point2)
+            LineSegment(const std::vector<float>& point1, const std::vector<float>& point2)
                 : Line(point1, point2)
             {
                 std::cout << "Hello from LineSegment constructor!\n";

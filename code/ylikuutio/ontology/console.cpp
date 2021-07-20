@@ -474,7 +474,7 @@ namespace yli::ontology
                 this->cursor_it = this->current_input.insert(this->cursor_it, keyboard_char);
             }
 
-            this->cursor_it++;
+            ++this->cursor_it;
             this->cursor_index++;
         }
     }
@@ -512,7 +512,7 @@ namespace yli::ontology
 
             if (this->cursor_it != this->current_input.begin())
             {
-                this->cursor_it--;
+                --this->cursor_it;
                 this->cursor_index--;
             }
         }
@@ -526,7 +526,7 @@ namespace yli::ontology
 
             if (this->cursor_it != this->current_input.end())
             {
-                this->cursor_it++;
+                ++this->cursor_it;
                 this->cursor_index++;
             }
         }
