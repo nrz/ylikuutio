@@ -130,7 +130,7 @@ namespace yli::triangulation
             {
                 // *---*
                 // |\ /|
-                // | * |
+                // | x |
                 // |/ \|
                 // *---*
                 is_bilinear_interpolation_in_use = true;
