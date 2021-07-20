@@ -71,48 +71,48 @@ TEST(lines_2d_defined_with_std_vector_float_and_glm_vec2_must_be_identical, x1_0
 {
     const yli::geometry::Line2D line_std_vector_float = yli::geometry::Line2D(std::vector<float>{ 0.0f, 0.0f }, std::vector<float>{ 0.0f, 1.0f });
     const yli::geometry::Line2D line_glm_vec2 = yli::geometry::Line2D(glm::vec2(0.0f, 0.0f), glm::vec2(0.0f, 1.0f));
-    ASSERT_TRUE(line_std_vector_float.is_identical_with(&line_glm_vec2));
-    ASSERT_TRUE(line_glm_vec2.is_identical_with(&line_std_vector_float));
+    ASSERT_TRUE(line_std_vector_float.is_identical_with(line_glm_vec2));
+    ASSERT_TRUE(line_glm_vec2.is_identical_with(line_std_vector_float));
 }
 
 TEST(lines_2d_defined_with_std_vector_float_and_glm_vec2_must_be_identical, x1_0_y1_0_x2_1_y2_0)
 {
     const yli::geometry::Line2D line_std_vector_float = yli::geometry::Line2D(std::vector<float>{ 0.0f, 0.0f }, std::vector<float>{ 1.0f, 0.0f });
     const yli::geometry::Line2D line_glm_vec2 = yli::geometry::Line2D(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 0.0f));
-    ASSERT_TRUE(line_std_vector_float.is_identical_with(&line_glm_vec2));
-    ASSERT_TRUE(line_glm_vec2.is_identical_with(&line_std_vector_float));
+    ASSERT_TRUE(line_std_vector_float.is_identical_with(line_glm_vec2));
+    ASSERT_TRUE(line_glm_vec2.is_identical_with(line_std_vector_float));
 }
 
 TEST(lines_2d_defined_with_std_vector_float_and_glm_vec2_must_be_identical, x1_0_y1_0_x2_1_y2_1)
 {
     const yli::geometry::Line2D line_std_vector_float = yli::geometry::Line2D(std::vector<float>{ 0.0f, 0.0f }, std::vector<float>{ 1.0f, 1.0f });
     const yli::geometry::Line2D line_glm_vec2 = yli::geometry::Line2D(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f));
-    ASSERT_TRUE(line_std_vector_float.is_identical_with(&line_glm_vec2));
-    ASSERT_TRUE(line_glm_vec2.is_identical_with(&line_std_vector_float));
+    ASSERT_TRUE(line_std_vector_float.is_identical_with(line_glm_vec2));
+    ASSERT_TRUE(line_glm_vec2.is_identical_with(line_std_vector_float));
 }
 
 TEST(lines_2d_defined_with_std_vector_float_and_glm_vec2_must_not_be_identical, x1_0_y1_0_x2_0_y2_1_x1_0_y1_1_x2_0_y2_0)
 {
     const yli::geometry::Line2D line1_std_vector_float = yli::geometry::Line2D(std::vector<float>{ 0.0f, 0.0f }, std::vector<float>{ 0.0f, 1.0f });
     const yli::geometry::Line2D line2_std_vector_float = yli::geometry::Line2D(std::vector<float>{ 0.0f, 1.0f }, std::vector<float>{ 0.0f, 0.0f });
-    ASSERT_FALSE(line1_std_vector_float.is_identical_with(&line2_std_vector_float));
-    ASSERT_FALSE(line2_std_vector_float.is_identical_with(&line1_std_vector_float));
+    ASSERT_FALSE(line1_std_vector_float.is_identical_with(line2_std_vector_float));
+    ASSERT_FALSE(line2_std_vector_float.is_identical_with(line1_std_vector_float));
 }
 
 TEST(lines_2d_defined_with_std_vector_float_and_glm_vec2_must_not_be_identical, x1_1_y1_2_x2_3_y2_4_x1_3_y1_4_x2_1_y2_2)
 {
     const yli::geometry::Line2D line1_std_vector_float = yli::geometry::Line2D(std::vector<float>{ 1.0f, 2.0f }, std::vector<float>{ 3.0f, 4.0f });
     const yli::geometry::Line2D line2_std_vector_float = yli::geometry::Line2D(std::vector<float>{ 3.0f, 4.0f }, std::vector<float>{ 1.0f, 2.0f });
-    ASSERT_FALSE(line1_std_vector_float.is_identical_with(&line2_std_vector_float));
-    ASSERT_FALSE(line2_std_vector_float.is_identical_with(&line1_std_vector_float));
+    ASSERT_FALSE(line1_std_vector_float.is_identical_with(line2_std_vector_float));
+    ASSERT_FALSE(line2_std_vector_float.is_identical_with(line1_std_vector_float));
 }
 
 TEST(lines_2d_defined_with_std_vector_float_and_glm_vec2_must_not_be_identical, x1_1_y1_2_x2_3_y2_4_x1_2_y1_1_x2_4_y2_3)
 {
     const yli::geometry::Line2D line1_std_vector_float = yli::geometry::Line2D(std::vector<float>{ 1.0f, 2.0f }, std::vector<float>{ 3.0f, 4.0f });
     const yli::geometry::Line2D line2_std_vector_float = yli::geometry::Line2D(std::vector<float>{ 2.0f, 1.0f }, std::vector<float>{ 4.0f, 3.0f });
-    ASSERT_FALSE(line1_std_vector_float.is_identical_with(&line2_std_vector_float));
-    ASSERT_FALSE(line2_std_vector_float.is_identical_with(&line1_std_vector_float));
+    ASSERT_FALSE(line1_std_vector_float.is_identical_with(line2_std_vector_float));
+    ASSERT_FALSE(line2_std_vector_float.is_identical_with(line1_std_vector_float));
 }
 
 TEST(line_2d_must_be_defined_as_expected, line_2d_x1_340_y1_150_x2_100_y2_50)
@@ -129,10 +129,8 @@ TEST(line_2d_must_be_defined_as_expected, line_2d_x1_340_y1_150_x2_100_y2_50)
     point2.emplace_back(x2); // x = 100.0
     point2.emplace_back(y2); // y = 50.0
 
-    const yli::geometry::Line2D* const line1 = new yli::geometry::Line2D(point1, point2);
-    const yli::geometry::Line2D* const line2 = new yli::geometry::Line2D(std::vector<float>{ x1, y1 }, std::vector<float>{ x2, y2 });
-    ASSERT_TRUE(line1->is_identical_with(line2));
-    ASSERT_EQ(line1->determinant, 2000.0f);
-    delete line1;
-    delete line2;
+    const yli::geometry::Line2D line1(point1, point2);
+    const yli::geometry::Line2D line2(std::vector<float>{ x1, y1 }, std::vector<float>{ x2, y2 });
+    ASSERT_TRUE(line1.is_identical_with(line2));
+    ASSERT_EQ(line1.determinant, 2000.0f);
 }
