@@ -69,7 +69,7 @@ namespace yli::ontology
 
         for (std::vector<yli::ontology::Entity*>::const_iterator it = this->parent_of_generic_lisp_function_overloads.child_pointer_vector.begin();
                 it != this->parent_of_generic_lisp_function_overloads.child_pointer_vector.end();
-                it++)
+                ++it)
         {
             auto [success, return_value] =
                 static_cast<yli::ontology::GenericLispFunctionOverload*>(*it)->execute(parameter_vector);
