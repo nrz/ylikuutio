@@ -25,14 +25,12 @@
 
 namespace yli::ontology
 {
-    class Brain;
     class VectorFont;
 
     struct Text3DStruct: public yli::ontology::MovableStruct
     {
         std::string text_string;
         yli::ontology::VectorFont* parent { nullptr }; // pointer to the `VectorFont` (parent).
-        yli::ontology::Brain* brain       { nullptr }; // pointer to the `Brain` master.
     };
 }
 
