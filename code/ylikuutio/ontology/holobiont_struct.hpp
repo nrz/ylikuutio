@@ -25,13 +25,11 @@
 
 namespace yli::ontology
 {
-    class Brain;
     class Symbiosis;
 
     struct HolobiontStruct: public yli::ontology::MovableStruct
     {
         yli::ontology::Symbiosis* parent { nullptr }; // pointer to the `Symbiosis`.
-        yli::ontology::Brain* brain      { nullptr }; // pointer to the `Brain` master.
 
         std::vector<bool> should_render_bionts_vector;
     };
