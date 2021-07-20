@@ -33,7 +33,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli::ontology
@@ -97,8 +96,6 @@ namespace yli::ontology
             glm::vec3 light_position;                // light position.
 
             GLint light_id { 0 };                    // light ID, returned by `glGetUniformLocation(program_id, "light_position_worldspace");`. Dummy value.
-
-            std::string triangulation_type;
 
             GLint vertex_position_modelspace_id { 0 }; // dummy value.
             GLint vertex_uv_id                  { 0 }; // dummy value.
