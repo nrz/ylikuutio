@@ -763,7 +763,7 @@ namespace yli::ontology
             {
                 if (*--console->cursor_it != ' ')
                 {
-                    console->cursor_it++;
+                    ++console->cursor_it;
                     break;
                 }
 
