@@ -26,7 +26,7 @@ namespace yli::geometry
 {
     // constructor.
     // can be used for creating n-dimensional lines.
-    Line::Line(const std::vector<float> point1, const std::vector<float> point2)
+    Line::Line(const std::vector<float>& point1, const std::vector<float>& point2)
     {
         this->general_form_constant = NAN;
 
@@ -47,7 +47,7 @@ namespace yli::geometry
 
     // constructor.
     // can be used for creating n-dimensional lines.
-    Line::Line(const std::vector<float> general_form_coefficients, const float general_form_constant)
+    Line::Line(const std::vector<float>& general_form_coefficients, const float general_form_constant)
     {
         // TODO: add checks for the validity of general form coefficients and general form constant!
         this->is_valid = true;
