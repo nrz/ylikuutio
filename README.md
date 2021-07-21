@@ -2,7 +2,7 @@
 A hobby project of mine. Work in progress.
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![Travis CI build](https://travis-ci.org/nrz/ylikuutio.svg?branch=master)](https://travis-ci.org/nrz/ylikuutio)
+[![Travis CI build](https://travis-ci.com/nrz/ylikuutio.svg?branch=master)](https://travis-ci.com/nrz/ylikuutio)
 [![Coverity Scan](https://scan.coverity.com/projects/nrz-ylikuutio/badge.svg)](https://scan.coverity.com/projects/nrz-ylikuutio)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0d0d48dc3b6947b2ac90bebd1f3a07f2)](https://www.codacy.com/manual/antti.nuortimo/ylikuutio?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nrz/ylikuutio&amp;utm_campaign=Badge_Grade)
 [![Coverage Status](https://coveralls.io/repos/github/nrz/ylikuutio/badge.svg?branch=master)](https://coveralls.io/github/nrz/ylikuutio?branch=master)
@@ -331,7 +331,7 @@ A: In [Debian GNU/Linux](https://www.debian.org/)
    ([Debian Buster](https://wiki.debian.org/DebianBuster) at the moment),
    using [Vim](https://www.vim.org/). Other tools in use include
    [Valgrind](http://valgrind.org/), [KCachegrind](https://kcachegrind.github.io/html/Home.html),
-   [GDB](https://www.gnu.org/software/gdb/), [Travis CI](https://travis-ci.org/),
+   [GDB](https://www.gnu.org/software/gdb/), [Travis CI](https://travis-ci.com/),
    and [Coverity Scan](https://scan.coverity.com/).
 
 Q: For what kinds of software Ylikuutio can be used?
