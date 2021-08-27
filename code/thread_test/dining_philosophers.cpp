@@ -163,12 +163,12 @@ class Table
             }
         }
 
-        std::vector<Fork> forks;
-        std::vector<Philosopher> philosophers;
-        std::vector<std::thread> threads;
         const uint32_t n_philosophers;
         Messenger& messenger;
         Random& random;
+        std::vector<Fork> forks;
+        std::vector<Philosopher> philosophers;
+        std::vector<std::thread> threads;
 };
 
 int main()
