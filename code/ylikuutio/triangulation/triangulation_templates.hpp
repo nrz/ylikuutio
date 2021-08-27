@@ -52,17 +52,17 @@ namespace yli::triangulation
             return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x - x_step, z - z_step, image_width));
         }
     template<class T1>
-        float southeast_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t z_step)
+        float southeast_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t /* x_step */, const std::size_t z_step)
         {
             return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x, z - z_step, image_width));
         }
     template<class T1>
-        float northwest_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t z_step)
+        float northwest_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t /* z_step */)
         {
             return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x - x_step, z, image_width));
         }
     template<class T1>
-        float northeast_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t z_step)
+        float northeast_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t /* x_step */, const std::size_t /* z_step */)
         {
             return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x, z, image_width));
         }

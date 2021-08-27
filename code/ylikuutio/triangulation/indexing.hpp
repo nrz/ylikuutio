@@ -36,11 +36,11 @@ namespace yli::triangulation
     {
         return current_vertex_i - image_width;
     }
-    constexpr std::size_t northwest(const std::size_t current_vertex_i, const std::size_t image_width)
+    constexpr std::size_t northwest(const std::size_t current_vertex_i, const std::size_t /* image_width */)
     {
         return current_vertex_i - 1;
     }
-    constexpr std::size_t northeast(const std::size_t current_vertex_i, const std::size_t image_width)
+    constexpr std::size_t northeast(const std::size_t current_vertex_i, const std::size_t /* image_width */)
     {
         return current_vertex_i;
     }
