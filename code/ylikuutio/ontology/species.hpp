@@ -152,11 +152,8 @@ namespace yli::ontology
 
             const std::string& get_model_file_format() const;
 
-            bool is_terrain;               // Terrains do not rotate nor translate.
-            float planet_radius;           // Radius of sea level in kilometers. Used only for terrains.
-            float divisor;                 // Value by which SRTM values are divided to convert them to kilometers.
-
-            std::string color_channel;     // Color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
+            // this method renders all `Object`s of this `Species`.
+            void render();
 
             template<class T1, class T2>
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
@@ -164,9 +161,14 @@ namespace yli::ontology
         private:
             yli::ontology::ChildModule child_of_material;
 
-            // this method renders all `Object`s of this `Species`.
-            void render();
+        public:
+            bool is_terrain;               // Terrains do not rotate nor translate.
+            float planet_radius;           // Radius of sea level in kilometers. Used only for terrains.
+            float divisor;                 // Value by which SRTM values are divided to convert them to kilometers.
 
+            std::string color_channel;     // Color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
+
+        private:
             bool is_symbiont_species;
 
             std::string model_file_format; // Type of the model file, eg. `"png"`.
