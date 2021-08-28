@@ -28,7 +28,6 @@
 
 namespace yli::ontology
 {
-    class Entity;
     class Console;
 }
 
