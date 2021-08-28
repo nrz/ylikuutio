@@ -35,12 +35,12 @@ namespace yli::lisp
 
     template<class None = void>
         static bool process_args(
-                yli::ontology::Universe* universe,
-                yli::ontology::Console* console,
-                yli::ontology::Entity*& context,
+                yli::ontology::Universe* /* universe */,
+                yli::ontology::Console* /* console */,
+                yli::ontology::Entity*& /* context */,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
-                std::tuple<>& arg_tuple)
+                std::tuple<>& /* arg_tuple */)
         {
             // This case ends the recursion.
             // No more arguments to bind.
