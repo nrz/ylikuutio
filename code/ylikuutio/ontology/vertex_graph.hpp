@@ -36,12 +36,14 @@ namespace yli::ontology
     class VertexGraph: public yli::graph::Graph
     {
         public:
-            VertexGraph(std::vector<glm::vec3>& in_vertices, uint32_t image_width, uint32_t image_height, const std::string& triangulation_type)
+            VertexGraph(std::vector<glm::vec3>& /* in_vertices */, uint32_t image_width, uint32_t image_height, const std::string& triangulation_type)
                 : yli::graph::Graph()
             {
                 // constructor.
 
                 // This constructor creates a graph from vertex data produced eg. by `bool triangulate_quads`.
+
+                // TODO: implement this constructor!
             }
 
             VertexGraph(const VertexGraph&) = delete;            // Delete copy constructor.

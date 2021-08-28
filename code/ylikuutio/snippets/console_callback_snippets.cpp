@@ -23,18 +23,15 @@
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
-#include <vector>   // std::vector
 
 namespace yli::ontology
 {
-    class Entity;
     class Console;
 }
 
 namespace yli::snippets
 {
-    std::shared_ptr<yli::data::AnyValue> quit(yli::ontology::Console* const console)
+    std::shared_ptr<yli::data::AnyValue> quit(yli::ontology::Console* const /* console */)
     {
         uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
         return std::make_shared<yli::data::AnyValue>(exit_program_magic_number);

@@ -20,8 +20,6 @@
 
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
-#include <string>   // std::string
-#include <vector>   // std::vector
 
 namespace yli::data
 {
@@ -30,13 +28,12 @@ namespace yli::data
 
 namespace yli::ontology
 {
-    class Entity;
     class Console;
 }
 
 namespace yli::snippets
 {
-    std::shared_ptr<yli::data::AnyValue> quit(yli::ontology::Console* const console);
+    std::shared_ptr<yli::data::AnyValue> quit(yli::ontology::Console* const /* console */);
 
     std::shared_ptr<yli::data::AnyValue> help(yli::ontology::Console* const console);
 }

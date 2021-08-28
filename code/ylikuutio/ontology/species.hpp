@@ -53,19 +53,19 @@ namespace yli::ontology
                     yli::ontology::ParentModule* const material_parent_module)
                 : Model(universe, species_struct, species_struct.opengl_in_use),
                 child_of_material(material_parent_module, this),
-                is_terrain                   { species_struct.is_terrain },
-                is_symbiont_species          { species_struct.is_symbiont_species },
                 planet_radius                { species_struct.planet_radius },
                 divisor                      { species_struct.divisor },
                 model_file_format            { species_struct.model_file_format },
                 model_filename               { species_struct.model_filename },
                 color_channel                { species_struct.color_channel },
+                triangulation_type           { species_struct.triangulation_type },
                 latitude                     { species_struct.latitude },
                 longitude                    { species_struct.longitude },
                 mesh_i                       { species_struct.mesh_i },
                 x_step                       { species_struct.x_step },
                 z_step                       { species_struct.z_step },
-                triangulation_type           { species_struct.triangulation_type },
+                is_terrain                   { species_struct.is_terrain },
+                is_symbiont_species          { species_struct.is_symbiont_species },
                 use_real_texture_coordinates { species_struct.use_real_texture_coordinates }
             {
                 // constructor.
@@ -152,11 +152,8 @@ namespace yli::ontology
 
             const std::string& get_model_file_format() const;
 
-            bool is_terrain;               // Terrains do not rotate nor translate.
-            float planet_radius;           // Radius of sea level in kilometers. Used only for terrains.
-            float divisor;                 // Value by which SRTM values are divided to convert them to kilometers.
-
-            std::string color_channel;     // Color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
+            // this method renders all `Object`s of this `Species`.
+            void render();
 
             template<class T1, class T2>
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
@@ -164,13 +161,15 @@ namespace yli::ontology
         private:
             yli::ontology::ChildModule child_of_material;
 
-            // this method renders all `Object`s of this `Species`.
-            void render();
+        public:
+            float planet_radius;           // Radius of sea level in kilometers. Used only for terrains.
+            float divisor;                 // Value by which SRTM values are divided to convert them to kilometers.
 
-            bool is_symbiont_species;
-
+        private:
             std::string model_file_format; // Type of the model file, eg. `"png"`.
             std::string model_filename;    // Filename of the model file.
+            std::string color_channel;     // Color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
+            std::string triangulation_type;
 
             float latitude;                // For SRTM.
             float longitude;               // For SRTM.
@@ -180,11 +179,11 @@ namespace yli::ontology
             uint32_t x_step;
             uint32_t z_step;
 
-            std::string triangulation_type;
-
             uint32_t image_width  { 0 };
             uint32_t image_height { 0 };
 
+            bool is_terrain;               // Terrains do not rotate nor translate.
+            bool is_symbiont_species;
             bool use_real_texture_coordinates;
     };
 }

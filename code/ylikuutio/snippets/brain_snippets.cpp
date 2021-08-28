@@ -53,7 +53,7 @@ namespace yli::snippets
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue> any_value)
+            std::shared_ptr<yli::data::AnyValue> /* any_value */)
     {
         // Do nothing.
         return nullptr;

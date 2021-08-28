@@ -40,12 +40,12 @@ namespace yli::lisp
 
     template<class T1>
         bool convert_string_to_value_and_advance_index(
-                yli::ontology::Universe* universe,
-                yli::ontology::Console* console,
-                yli::ontology::Entity*& context,
-                const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i,
-                T1& value)
+                yli::ontology::Universe* /* universe */,
+                yli::ontology::Console* /* console */,
+                yli::ontology::Entity*& /* context */,
+                const std::vector<std::string>& /* parameter_vector */,
+                std::size_t& /* parameter_i */,
+                T1& /* value */)
         {
             static_assert(sizeof(T1) == -1, "You need to specialize this `yli::data::convert_string_to_value_and_advance_index` for the type!");
             return false;
@@ -53,9 +53,9 @@ namespace yli::lisp
 
     template<>
         bool convert_string_to_value_and_advance_index(
-                yli::ontology::Universe* universe,
-                yli::ontology::Console* console,
-                yli::ontology::Entity*& context,
+                yli::ontology::Universe* /* universe */,
+                yli::ontology::Console* /* console */,
+                yli::ontology::Entity*& /* context */,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
                 bool& value)
@@ -85,9 +85,9 @@ namespace yli::lisp
 
     template<>
         bool convert_string_to_value_and_advance_index(
-                yli::ontology::Universe* universe,
-                yli::ontology::Console* console,
-                yli::ontology::Entity*& context,
+                yli::ontology::Universe* /* universe */,
+                yli::ontology::Console* /* console */,
+                yli::ontology::Entity*& /* context */,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
                 char& value)
@@ -110,9 +110,9 @@ namespace yli::lisp
 
     template<>
         bool convert_string_to_value_and_advance_index(
-                yli::ontology::Universe* universe,
-                yli::ontology::Console* console,
-                yli::ontology::Entity*& context,
+                yli::ontology::Universe* /* universe */,
+                yli::ontology::Console* /* console */,
+                yli::ontology::Entity*& /* context */,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
                 float& value)
@@ -137,9 +137,9 @@ namespace yli::lisp
 
     template<>
         bool convert_string_to_value_and_advance_index(
-                yli::ontology::Universe* universe,
-                yli::ontology::Console* console,
-                yli::ontology::Entity*& context,
+                yli::ontology::Universe* /* universe */,
+                yli::ontology::Console* /* console */,
+                yli::ontology::Entity*& /* context */,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
                 double& value)
@@ -164,9 +164,9 @@ namespace yli::lisp
 
     template<>
         bool convert_string_to_value_and_advance_index(
-                yli::ontology::Universe* universe,
-                yli::ontology::Console* console,
-                yli::ontology::Entity*& context,
+                yli::ontology::Universe* /* universe */,
+                yli::ontology::Console* /* console */,
+                yli::ontology::Entity*& /* context */,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
                 int32_t& value)
@@ -191,9 +191,9 @@ namespace yli::lisp
 
     template<>
         bool convert_string_to_value_and_advance_index(
-                yli::ontology::Universe* universe,
-                yli::ontology::Console* console,
-                yli::ontology::Entity*& context,
+                yli::ontology::Universe* /* universe */,
+                yli::ontology::Console* /* console */,
+                yli::ontology::Entity*& /* context */,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
                 uint32_t& value)
@@ -219,7 +219,7 @@ namespace yli::lisp
     template<>
         bool convert_string_to_value_and_advance_index(
                 yli::ontology::Universe* universe,
-                yli::ontology::Console* console,
+                yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
@@ -246,10 +246,10 @@ namespace yli::lisp
     template<>
         bool convert_string_to_value_and_advance_index(
                 yli::ontology::Universe* universe,
-                yli::ontology::Console* console,
+                yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& context,
-                const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i,
+                const std::vector<std::string>& /* parameter_vector */,
+                std::size_t& /* parameter_i */,
                 yli::ontology::Universe*& value)
         {
             // Note: this specialization returns the `yli::ontology::Universe*` provided as an argument,
@@ -267,11 +267,11 @@ namespace yli::lisp
 
     template<>
         bool convert_string_to_value_and_advance_index(
-                yli::ontology::Universe* universe,
+                yli::ontology::Universe* /* universe */,
                 yli::ontology::Console* console,
                 yli::ontology::Entity*& context,
-                const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i,
+                const std::vector<std::string>& /* parameter_vector */,
+                std::size_t& /* parameter_i */,
                 yli::ontology::Console*& value)
         {
             // Note: this specialization returns the `yli::ontology::Console*` provided as an argument,
@@ -290,7 +290,7 @@ namespace yli::lisp
     template<>
         bool convert_string_to_value_and_advance_index(
                 yli::ontology::Universe* universe,
-                yli::ontology::Console* console,
+                yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
@@ -317,7 +317,7 @@ namespace yli::lisp
     template<>
         bool convert_string_to_value_and_advance_index(
                 yli::ontology::Universe* universe,
-                yli::ontology::Console* console,
+                yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
@@ -344,7 +344,7 @@ namespace yli::lisp
     template<>
         bool convert_string_to_value_and_advance_index(
                 yli::ontology::Universe* universe,
-                yli::ontology::Console* console,
+                yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
@@ -371,7 +371,7 @@ namespace yli::lisp
     template<>
         bool convert_string_to_value_and_advance_index(
                 yli::ontology::Universe* universe,
-                yli::ontology::Console* console,
+                yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
@@ -398,7 +398,7 @@ namespace yli::lisp
     template<>
         bool convert_string_to_value_and_advance_index(
                 yli::ontology::Universe* universe,
-                yli::ontology::Console* console,
+                yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
@@ -425,7 +425,7 @@ namespace yli::lisp
     template<>
         bool convert_string_to_value_and_advance_index(
                 yli::ontology::Universe* universe,
-                yli::ontology::Console* console,
+                yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
@@ -451,9 +451,9 @@ namespace yli::lisp
 
     template<>
         bool convert_string_to_value_and_advance_index(
-                yli::ontology::Universe* universe,
-                yli::ontology::Console* console,
-                yli::ontology::Entity*& context,
+                yli::ontology::Universe* /* universe */,
+                yli::ontology::Console* /* console */,
+                yli::ontology::Entity*& /* context */,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
                 std::shared_ptr<std::string>& value)
@@ -469,9 +469,9 @@ namespace yli::lisp
 
     template<>
         bool convert_string_to_value_and_advance_index(
-                yli::ontology::Universe* universe,
-                yli::ontology::Console* console,
-                yli::ontology::Entity*& context,
+                yli::ontology::Universe* /* universe */,
+                yli::ontology::Console* /* console */,
+                yli::ontology::Entity*& /* context */,
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i,
                 std::string& value)

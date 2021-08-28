@@ -82,7 +82,7 @@ namespace yli::ontology
         universe->bind_entity(this);
     }
 
-    void Entity::bind_to_new_parent(yli::ontology::Entity* new_entity_parent)
+    void Entity::bind_to_new_parent(yli::ontology::Entity* /* new_parent */)
     {
         // Do nothing.
         // `yli::ontology` classes which support binding must `override`

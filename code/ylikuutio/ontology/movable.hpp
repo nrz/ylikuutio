@@ -79,14 +79,14 @@ namespace yli::ontology
                 child(parent_module, this),
                 apprentice_of_brain(generic_master_module, this),
                 rigid_body_module(movable_struct.rigid_body_module_struct, this),
-                input_method { movable_struct.input_method },
                 initial_rotate_vectors { movable_struct.initial_rotate_vectors },
                 initial_rotate_angles { movable_struct.initial_rotate_angles },
                 original_scale_vector { movable_struct.original_scale_vector },
                 cartesian_coordinates { movable_struct.cartesian_coordinates },
                 spherical_coordinates { movable_struct.spherical_coordinates },
                 yaw { movable_struct.yaw },
-                pitch { movable_struct.pitch }
+                pitch { movable_struct.pitch },
+                input_method { movable_struct.input_method }
             {
                 // constructor.
 
@@ -252,6 +252,25 @@ namespace yli::ontology
 
             // Public callbacks end here.
 
+        private:
+            void create_coordinate_and_angle_variables();
+
+            friend class yli::ontology::Brain;
+            friend class yli::ontology::GenericMasterModule;
+
+            template<class T1>
+                friend void yli::hierarchy::bind_apprentice_to_master(T1 apprentice_pointer, std::vector<T1>& apprentice_pointer_vector, std::queue<std::size_t>& free_apprenticeID_queue, std::size_t& number_of_apprenticeren);
+
+        protected:
+            yli::ontology::ChildModule child;
+
+        public:
+            yli::ontology::ApprenticeModule apprentice_of_brain;
+
+        private:
+            yli::ontology::RigidBodyModule rigid_body_module;
+
+        public:
             std::vector<glm::vec3> initial_rotate_vectors;
             std::vector<float> initial_rotate_angles;
 
@@ -298,23 +317,6 @@ namespace yli::ontology
             glm::mat4 model_matrix { glm::mat4(1.0f) };            // model matrix (initialized with dummy value).
             glm::mat4 mvp_matrix { glm::mat4(1.0f) };              // model view projection matrix (initialized with dummy value).
 
-            friend class yli::ontology::Brain;
-            friend class yli::ontology::GenericMasterModule;
-
-            template<class T1>
-                friend void yli::hierarchy::bind_apprentice_to_master(T1 apprentice_pointer, std::vector<T1>& apprentice_pointer_vector, std::queue<std::size_t>& free_apprenticeID_queue, std::size_t& number_of_apprenticeren);
-
-        protected:
-            yli::ontology::ChildModule child;
-
-        public:
-            yli::ontology::ApprenticeModule apprentice_of_brain;
-
-        private:
-            yli::ontology::RigidBodyModule rigid_body_module;
-
-        private:
-            void create_coordinate_and_angle_variables();
 
             yli::input::InputMethod input_method;                  // If `input_method` is `KEYBOARD`, then keypresses control this `Movable`.
                                                                    // If `input_method` is `AI`, then the chosen `Brain` controls this `Movable`.
