@@ -72,7 +72,7 @@ namespace yli::ontology
 
                 if (!this->is_symbiont_species)
                 {
-                    const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
+                    const bool is_headless { this->universe == nullptr ? true : this->universe->get_is_headless() };
 
                     if (!is_headless && this->opengl_in_use)
                     {
