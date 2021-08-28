@@ -57,6 +57,13 @@ namespace yli::ontology
                                                             // `"asc"`/`"ascii_grid"`/`"ASCII_grid"` - ASCII grid.
         std::string color_channel;                          // color channel to use for altitude data, for PNG model files.
         std::string triangulation_type { "bilinear_interpolation" }; // `"bilinear_interpolation"`, `"southwest_northeast_edges"`, `"southeast_northwest_edges"`.
+        float planet_radius { NAN };  // radius of sea level in kilometers. used only for terrains (planets and moons). `6371.0f` for Earth.
+        float divisor       { 1.0f }; // value by which SRTM values are divided to convert them to kilometers.
+        float latitude      { 0.0f }; // in degrees, for SRTM model files.
+        float longitude     { 0.0f }; // in degrees, for SRTM model files.
+        uint32_t mesh_i     { 0 };    // for FBX.
+        uint32_t x_step     { 1 };    // step in x-dimension for input data (set to 1 to load all data points/measurements).
+        uint32_t z_step     { 1 };    // step in z-dimension for input data (set to 1 to load all data points/measurements).
         std::vector<glm::vec3> vertices;                    // for `SymbiontSpecies`.
         std::vector<glm::vec2> uvs;                         // for `SymbiontSpecies`.
         std::vector<glm::vec3> normals;                     // for `SymbiontSpecies`.
@@ -66,13 +73,6 @@ namespace yli::ontology
         yli::ontology::SymbiontMaterial* symbiont_material                     { nullptr }; // Pointer to `SymbiontMaterial` object.
         yli::ontology::ShapeshifterTransformation* shapeshifter_transformation { nullptr }; // Pointer to `ShapeshifterTransformation` object.
         uint32_t vertex_count { std::numeric_limits<uint32_t>::max() };                     // For `SymbiontSpecies`.
-        uint32_t mesh_i     { 0 };    // for FBX.
-        uint32_t x_step     { 1 };    // step in x-dimension for input data (set to 1 to load all data points/measurements).
-        uint32_t z_step     { 1 };    // step in z-dimension for input data (set to 1 to load all data points/measurements).
-        float latitude      { 0.0f }; // in degrees, for SRTM model files.
-        float longitude     { 0.0f }; // in degrees, for SRTM model files.
-        float planet_radius { NAN };  // radius of sea level in kilometers. used only for terrains (planets and moons). `6371.0f` for Earth.
-        float divisor       { 1.0f }; // value by which SRTM values are divided to convert them to kilometers.
         float water_level   { -1.0f * std::numeric_limits<float>::infinity() }; // water level in meters. used only for terrains (planets and moons).
         bool is_terrain                   { false };                          // Terrains (planets and moons) currently neither rotate nor translate.
         bool is_symbiont_species          { false };                          // By default `Species` are not `SymbiontSpecies`.

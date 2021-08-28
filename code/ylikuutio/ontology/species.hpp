@@ -53,12 +53,12 @@ namespace yli::ontology
                     yli::ontology::ParentModule* const material_parent_module)
                 : Model(universe, species_struct, species_struct.opengl_in_use),
                 child_of_material(material_parent_module, this),
-                planet_radius                { species_struct.planet_radius },
-                divisor                      { species_struct.divisor },
-                model_file_format            { species_struct.model_file_format },
                 model_filename               { species_struct.model_filename },
+                model_file_format            { species_struct.model_file_format },
                 color_channel                { species_struct.color_channel },
                 triangulation_type           { species_struct.triangulation_type },
+                planet_radius                { species_struct.planet_radius },
+                divisor                      { species_struct.divisor },
                 latitude                     { species_struct.latitude },
                 longitude                    { species_struct.longitude },
                 mesh_i                       { species_struct.mesh_i },
@@ -161,16 +161,16 @@ namespace yli::ontology
         private:
             yli::ontology::ChildModule child_of_material;
 
+            std::string model_filename;    // Filename of the model file.
+            std::string model_file_format; // Type of the model file, eg. `"png"`.
+            std::string color_channel;     // Color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
+            std::string triangulation_type;
+
         public:
             float planet_radius;           // Radius of sea level in kilometers. Used only for terrains.
             float divisor;                 // Value by which SRTM values are divided to convert them to kilometers.
 
         private:
-            std::string model_file_format; // Type of the model file, eg. `"png"`.
-            std::string model_filename;    // Filename of the model file.
-            std::string color_channel;     // Color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
-            std::string triangulation_type;
-
             float latitude;                // For SRTM.
             float longitude;               // For SRTM.
 
