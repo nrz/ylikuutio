@@ -252,6 +252,9 @@ namespace yli::ontology
 
             // Public callbacks end here.
 
+        private:
+            void create_coordinate_and_angle_variables();
+
             friend class yli::ontology::Brain;
             friend class yli::ontology::GenericMasterModule;
 
@@ -266,8 +269,6 @@ namespace yli::ontology
 
         private:
             yli::ontology::RigidBodyModule rigid_body_module;
-
-            void create_coordinate_and_angle_variables();
 
         public:
             std::vector<glm::vec3> initial_rotate_vectors;
