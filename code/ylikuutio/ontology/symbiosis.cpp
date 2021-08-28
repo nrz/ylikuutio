@@ -198,17 +198,12 @@ namespace yli::ontology
                     this->vertices,
                     this->uvs,
                     this->normals,
-                    this->indices,
-                    this->indexed_vertices,
-                    this->indexed_uvs,
-                    this->indexed_normals,
                     this->ofbx_diffuse_texture_mesh_map,
                     this->ofbx_meshes,
                     this->ofbx_diffuse_texture_vector,
                     this->ofbx_normal_texture_vector,
                     this->ofbx_count_texture_vector,
                     this->ofbx_mesh_count,
-                    this->opengl_in_use,
                     is_debug_mode))
         {
             std::cout << "number of meshes: " << this->ofbx_mesh_count << "\n";
