@@ -53,12 +53,12 @@ namespace yli::ontology
                     yli::ontology::ParentModule* const material_parent_module)
                 : Model(universe, species_struct, species_struct.opengl_in_use),
                 child_of_material(material_parent_module, this),
-                planet_radius                { species_struct.planet_radius },
-                divisor                      { species_struct.divisor },
-                model_file_format            { species_struct.model_file_format },
                 model_filename               { species_struct.model_filename },
+                model_file_format            { species_struct.model_file_format },
                 color_channel                { species_struct.color_channel },
                 triangulation_type           { species_struct.triangulation_type },
+                planet_radius                { species_struct.planet_radius },
+                divisor                      { species_struct.divisor },
                 latitude                     { species_struct.latitude },
                 longitude                    { species_struct.longitude },
                 mesh_i                       { species_struct.mesh_i },
@@ -72,7 +72,7 @@ namespace yli::ontology
 
                 if (!this->is_symbiont_species)
                 {
-                    const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
+                    const bool is_headless { this->universe == nullptr ? true : this->universe->get_is_headless() };
 
                     if (!is_headless && this->opengl_in_use)
                     {
@@ -84,32 +84,29 @@ namespace yli::ontology
                         // Get a handle for our "LightPosition" uniform.
                         glUseProgram(species_struct.shader->get_program_id());
                         this->light_id = glGetUniformLocation(species_struct.shader->get_program_id(), "light_position_worldspace");
-                    }
 
-                    if (!is_headless && this->opengl_in_use)
-                    {
                         // water level.
                         GLint water_level_uniform_location = glGetUniformLocation(species_struct.shader->get_program_id(), "water_level");
                         glUniform1f(water_level_uniform_location, species_struct.scene->get_water_level());
                     }
 
                     yli::load::SpeciesLoaderStruct species_loader_struct;
-                    species_loader_struct.model_filename               = this->model_filename;
-                    species_loader_struct.model_file_format            = this->model_file_format;
-                    species_loader_struct.latitude                     = this->latitude;
-                    species_loader_struct.longitude                    = this->longitude;
-                    species_loader_struct.planet_radius                = this->planet_radius;
-                    species_loader_struct.divisor                      = this->divisor;
-                    species_loader_struct.color_channel                = this->color_channel;
-                    species_loader_struct.mesh_i                       = this->mesh_i;
-                    species_loader_struct.x_step                       = this->x_step;
-                    species_loader_struct.z_step                       = this->z_step;
-                    species_loader_struct.image_width_pointer          = &this->image_width;
-                    species_loader_struct.image_height_pointer         = &this->image_height;
-                    species_loader_struct.triangulation_type           = this->triangulation_type;
-                    species_loader_struct.is_headless                  = is_headless;
-                    species_loader_struct.opengl_in_use                = this->opengl_in_use;
-                    species_loader_struct.use_real_texture_coordinates = this->use_real_texture_coordinates;
+                    species_loader_struct.species_struct.model_filename               = this->model_filename;
+                    species_loader_struct.species_struct.model_file_format            = this->model_file_format;
+                    species_loader_struct.species_struct.color_channel                = this->color_channel;
+                    species_loader_struct.species_struct.triangulation_type           = this->triangulation_type;
+                    species_loader_struct.species_struct.planet_radius                = this->planet_radius;
+                    species_loader_struct.species_struct.divisor                      = this->divisor;
+                    species_loader_struct.species_struct.latitude                     = this->latitude;
+                    species_loader_struct.species_struct.longitude                    = this->longitude;
+                    species_loader_struct.species_struct.mesh_i                       = this->mesh_i;
+                    species_loader_struct.species_struct.x_step                       = this->x_step;
+                    species_loader_struct.species_struct.z_step                       = this->z_step;
+                    species_loader_struct.species_struct.opengl_in_use                = this->opengl_in_use;
+                    species_loader_struct.species_struct.use_real_texture_coordinates = this->use_real_texture_coordinates;
+                    species_loader_struct.image_width_pointer                         = &this->image_width;
+                    species_loader_struct.image_height_pointer                        = &this->image_height;
+                    species_loader_struct.is_headless                                 = is_headless;
 
                     const bool is_debug_mode = true;
 
@@ -161,16 +158,16 @@ namespace yli::ontology
         private:
             yli::ontology::ChildModule child_of_material;
 
+            std::string model_filename;    // Filename of the model file.
+            std::string model_file_format; // Type of the model file, eg. `"png"`.
+            std::string color_channel;     // Color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
+            std::string triangulation_type;
+
         public:
             float planet_radius;           // Radius of sea level in kilometers. Used only for terrains.
             float divisor;                 // Value by which SRTM values are divided to convert them to kilometers.
 
         private:
-            std::string model_file_format; // Type of the model file, eg. `"png"`.
-            std::string model_filename;    // Filename of the model file.
-            std::string color_channel;     // Color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
-            std::string triangulation_type;
-
             float latitude;                // For SRTM.
             float longitude;               // For SRTM.
 

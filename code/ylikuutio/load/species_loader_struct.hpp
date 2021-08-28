@@ -18,49 +18,19 @@
 #ifndef __YLIKUUTIO_LOAD_SPECIES_LOADER_STRUCT_HPP_INCLUDED
 #define __YLIKUUTIO_LOAD_SPECIES_LOADER_STRUCT_HPP_INCLUDED
 
+#include "code/ylikuutio/ontology/species_struct.hpp"
+
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
-#include <cstddef>  // std::size_t
 #include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
 
 namespace yli::load
 {
     struct SpeciesLoaderStruct
     {
-        SpeciesLoaderStruct()
-            : triangulation_type("bilinear_interpolation"),
-            mesh_i(0),
-            x_step(1),
-            z_step(1),
-            image_width_pointer(nullptr),
-            image_height_pointer(nullptr),
-            latitude(NAN),
-            longitude(NAN),
-            planet_radius(NAN),
-            divisor(NAN),
-            is_headless(false),
-            opengl_in_use(true),
-            use_real_texture_coordinates(true)
-        {
-            // constructor.
-        }
-        std::string model_filename;
-        std::string model_file_format;
-        std::string color_channel;      // for PNG.
-        std::string triangulation_type; // for all.
-        std::size_t mesh_i;             // for FBX.
-        uint32_t x_step;
-        uint32_t z_step;
-        uint32_t* image_width_pointer;
-        uint32_t* image_height_pointer;
-        float latitude;                 // in degrees, for SRTM.
-        float longitude;                // in degrees, for SRTM.
-        float planet_radius;            // for SRTM. can be a planet or a moon.
-        float divisor;                  // for SRTM.
-        bool is_headless;
-        bool opengl_in_use;
-        bool use_real_texture_coordinates;
+        yli::ontology::SpeciesStruct species_struct;
+        uint32_t* image_width_pointer  { nullptr };
+        uint32_t* image_height_pointer { nullptr };
+        bool is_headless               { false };
     };
 }
 

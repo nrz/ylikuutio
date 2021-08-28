@@ -33,9 +33,9 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    std::shared_ptr<yli::data::AnyValue> quit(yli::ontology::Console* const /* console */);
+    std::shared_ptr<yli::data::AnyValue> quit(yli::ontology::Console* const);
 
-    std::shared_ptr<yli::data::AnyValue> help(yli::ontology::Console* const console);
+    std::shared_ptr<yli::data::AnyValue> help(yli::ontology::Console* const);
 }
 
 #endif
