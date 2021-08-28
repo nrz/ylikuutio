@@ -67,7 +67,7 @@ namespace yli::snippets
      * Helper functions for callbacks begin here.                        *
     \*********************************************************************/
 
-    bool move_to_direction(yli::ontology::Universe* const universe, const yli::callback::CallbackObject* const callback_object, const glm::vec3& moving_direction)
+    bool move_to_direction(yli::ontology::Universe* const universe, const yli::callback::CallbackObject* const /* callback_object */, const glm::vec3& moving_direction)
     {
         // Movement changes location and orientation variables stored in `yli::ontology::Universe`.
         // This way there is no need to dereference pointer to the current `yli::ontology::Camera`.
@@ -119,7 +119,7 @@ namespace yli::snippets
     std::shared_ptr<yli::data::AnyValue> release_first_turbo(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
+            yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue>)
     {
@@ -136,7 +136,7 @@ namespace yli::snippets
     std::shared_ptr<yli::data::AnyValue> release_second_turbo(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
+            yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue>)
     {
@@ -153,7 +153,7 @@ namespace yli::snippets
     std::shared_ptr<yli::data::AnyValue> enable_toggle_invert_mouse(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
+            yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue>)
     {
@@ -170,7 +170,7 @@ namespace yli::snippets
     std::shared_ptr<yli::data::AnyValue> enable_toggle_flight_mode(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
+            yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue>)
     {
@@ -187,7 +187,7 @@ namespace yli::snippets
     std::shared_ptr<yli::data::AnyValue> enable_toggle_help_mode(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
+            yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue>)
     {
@@ -219,7 +219,7 @@ namespace yli::snippets
     std::shared_ptr<yli::data::AnyValue> first_turbo(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
+            yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue>)
     {
@@ -236,7 +236,7 @@ namespace yli::snippets
     std::shared_ptr<yli::data::AnyValue> second_turbo(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
+            yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue>)
     {
@@ -355,7 +355,7 @@ namespace yli::snippets
     std::shared_ptr<yli::data::AnyValue> toggle_invert_mouse(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
+            yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue>)
     {
@@ -376,7 +376,7 @@ namespace yli::snippets
     std::shared_ptr<yli::data::AnyValue> toggle_flight_mode(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
+            yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue>)
     {
@@ -404,7 +404,7 @@ namespace yli::snippets
     std::shared_ptr<yli::data::AnyValue> toggle_help_mode(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
+            yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
             std::shared_ptr<yli::data::AnyValue>)
     {
