@@ -118,7 +118,7 @@ namespace yli::ontology
             GLint get_openGL_textureID(const std::size_t biontID) const;
 
             GLint get_light_id(const std::size_t biontID) const;
-            const glm::vec3& get_light_position(const std::size_t biontID) const;
+            const glm::vec3& get_light_position(const std::size_t /* biontID */) const;
 
             yli::ontology::ChildModule child_of_shader;
             yli::ontology::ParentModule parent_of_symbiont_materials;
