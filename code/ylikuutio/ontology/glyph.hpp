@@ -105,11 +105,11 @@ namespace yli::ontology
             // this method renders all `Object`s of this `Glyph`.
             void render();
 
+            yli::ontology::ChildModule child_of_vector_font;
+
             std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
             const char* glyph_name_pointer;    // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
             const char* unicode_char_pointer;  // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
-
-            yli::ontology::ChildModule child_of_vector_font;
     };
 }
 
