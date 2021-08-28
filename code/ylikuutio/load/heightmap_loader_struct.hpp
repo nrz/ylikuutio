@@ -27,30 +27,17 @@ namespace yli::load
 {
     struct HeightmapLoaderStruct
     {
-        HeightmapLoaderStruct()
-            : latitude(NAN),
-            longitude(NAN),
-            planet_radius(NAN),
-            divisor(NAN),
-            x_step(1),
-            z_step(1),
-            use_real_texture_coordinates(true),
-            triangulate(true)
-        {
-            // constructor.
-        }
-
         std::string filename;
         std::string file_format;
-        float latitude;
-        float longitude;
-        float planet_radius;
-        float divisor;
-        uint32_t x_step;
-        uint32_t z_step;
+        float latitude      { NAN };
+        float longitude     { NAN };
+        float planet_radius { NAN };
+        float divisor       { NAN };
+        uint32_t x_step     { 1 };
+        uint32_t z_step     { 1 };
         std::string triangulation_type;
-        bool use_real_texture_coordinates;
-        bool triangulate;
+        bool use_real_texture_coordinates { true };
+        bool triangulate                  { true };
     };
 }
 
