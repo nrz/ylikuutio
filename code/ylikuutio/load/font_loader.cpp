@@ -60,7 +60,7 @@ namespace yli::load
                 vertex_base_pointer,
                 vertex_data_pointer,
                 vertex_data_size,
-                (const char* const) " Mmhvz\">",
+                " Mmhvz\">",
                 is_debug_mode ? description : nullptr);
     }
 
@@ -162,7 +162,7 @@ namespace yli::load
                         char_path,
                         ++vertex_data_pointer,
                         sizeof(char_path),
-                        (const char* const) "M (moveto)",
+                        "M (moveto)",
                         is_debug_mode);
 
                 while (std::strncmp(vertex_data_pointer++, " ", std::char_traits<char>::length(" ")) != 0);
@@ -171,7 +171,7 @@ namespace yli::load
                         char_path,
                         vertex_data_pointer,
                         sizeof(char_path),
-                        (const char* const) "space (moveto y coordinate)",
+                        "space (moveto y coordinate)",
                         is_debug_mode);
 
                 vertices_of_current_edge_section.emplace_back(current_vertex);
@@ -184,7 +184,7 @@ namespace yli::load
                         char_path,
                         ++vertex_data_pointer,
                         sizeof(char_path),
-                        (const char* const) "h (horizontal relative lineto)",
+                        "h (horizontal relative lineto)",
                         is_debug_mode);
 
                 current_vertex.x += horizontal_lineto_value;
@@ -197,7 +197,7 @@ namespace yli::load
                         char_path,
                         ++vertex_data_pointer,
                         sizeof(char_path),
-                        (const char* const) "v (vertical relative lineto)",
+                        "v (vertical relative lineto)",
                         is_debug_mode);
 
                 current_vertex.y += vertical_lineto_value;
