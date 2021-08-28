@@ -84,10 +84,7 @@ namespace yli::ontology
                         // Get a handle for our "LightPosition" uniform.
                         glUseProgram(species_struct.shader->get_program_id());
                         this->light_id = glGetUniformLocation(species_struct.shader->get_program_id(), "light_position_worldspace");
-                    }
 
-                    if (!is_headless && this->opengl_in_use)
-                    {
                         // water level.
                         GLint water_level_uniform_location = glGetUniformLocation(species_struct.shader->get_program_id(), "water_level");
                         glUniform1f(water_level_uniform_location, species_struct.scene->get_water_level());
