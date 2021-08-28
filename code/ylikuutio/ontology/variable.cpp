@@ -206,7 +206,7 @@ namespace yli::ontology
         // Usage:
         // to get variable value: get1 <variable-name>
 
-        if (console == nullptr || context == nullptr || variable == nullptr)
+        if (console == nullptr || variable == nullptr)
         {
             return nullptr;
         }
