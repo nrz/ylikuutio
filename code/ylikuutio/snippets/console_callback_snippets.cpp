@@ -34,7 +34,7 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    std::shared_ptr<yli::data::AnyValue> quit(yli::ontology::Console* const console)
+    std::shared_ptr<yli::data::AnyValue> quit(yli::ontology::Console* const /* console */)
     {
         uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
         return std::make_shared<yli::data::AnyValue>(exit_program_magic_number);
