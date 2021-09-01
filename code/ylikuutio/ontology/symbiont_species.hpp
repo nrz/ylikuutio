@@ -18,11 +18,11 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_SYMBIONT_SPECIES_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_SYMBIONT_SPECIES_HPP_INCLUDED
 
+#include "species.hpp"
 #include "generic_master_module.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
-#include "species.hpp"
 #include "symbiont_material.hpp"
 #include "species_struct.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
