@@ -65,13 +65,10 @@ namespace yli::ontology
                 x_step                       { species_struct.x_step },
                 z_step                       { species_struct.z_step },
                 is_terrain                   { species_struct.is_terrain },
-                is_symbiont_species          { species_struct.is_symbiont_species },
                 use_real_texture_coordinates { species_struct.use_real_texture_coordinates }
             {
                 // constructor.
 
-                if (!this->is_symbiont_species)
-                {
                     const bool is_headless { this->universe == nullptr ? true : this->universe->get_is_headless() };
 
                     if (!is_headless && this->opengl_in_use)
@@ -131,7 +128,6 @@ namespace yli::ontology
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Species*";
                     this->can_be_erased = true;
-                }
             }
 
             Species(const Species&) = delete;            // Delete copy constructor.
@@ -180,7 +176,6 @@ namespace yli::ontology
             uint32_t image_height { 0 };
 
             bool is_terrain;               // Terrains do not rotate nor translate.
-            bool is_symbiont_species;
             bool use_real_texture_coordinates;
     };
 }

@@ -43,9 +43,16 @@ namespace yli::ontology
 
         if (this->opengl_in_use)
         {
+            glDeleteBuffers(1, &this->vertexbuffer);
+            glDeleteBuffers(1, &this->uvbuffer);
             glDeleteBuffers(1, &this->normalbuffer);
             glDeleteBuffers(1, &this->elementbuffer);
         }
+    }
+
+    yli::ontology::Entity* SymbiontSpecies::get_parent() const
+    {
+        return this->child_of_symbiont_material.get_parent();
     }
 
     std::size_t SymbiontSpecies::get_number_of_apprentices() const

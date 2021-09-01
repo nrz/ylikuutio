@@ -53,16 +53,15 @@ namespace yli::ontology
             Material(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::MaterialStruct& material_struct,
-                    yli::ontology::ParentModule* const scene_or_symbiosis_parent_module, // Parent is a `Scene`, except for `SymbiontMaterial`s its a `Symbiosis`.
+                    yli::ontology::ParentModule* const scene_parent_module, // Parent is a `Scene`.
                     yli::ontology::MasterModule<yli::ontology::Shader*>* shader_master_module)
                 : Entity(universe, material_struct),
-                child_of_scene_or_symbiosis(scene_or_symbiosis_parent_module, this),
+                child_of_scene(scene_parent_module, this),
                 parent_of_species(this, &this->registry, "species"),
                 parent_of_shapeshifter_transformations(this, &this->registry, "shapeshifter_transformations"),
                 parent_of_vector_fonts(this, &this->registry, "vector_fonts"),
                 parent_of_chunk_masters(this, &this->registry, "chunk_masters"),
                 apprentice_of_shader(static_cast<yli::ontology::GenericMasterModule*>(shader_master_module), this),
-                is_symbiont_material { material_struct.is_symbiont_material },
                 texture_file_format  { material_struct.texture_file_format },
                 texture_filename     { material_struct.texture_filename }
             {
@@ -72,7 +71,6 @@ namespace yli::ontology
 
                 if (this->universe != nullptr &&
                         !this->universe->get_is_headless() &&
-                        !this->is_symbiont_material &&
                         this->get_shader() != nullptr)
                 {
                     // Load the texture.
@@ -131,7 +129,7 @@ namespace yli::ontology
             template<class T1>
                 friend void yli::render::render_apprentices(const std::vector<yli::ontology::ApprenticeModule*>& apprentice_pointer_vector);
 
-            yli::ontology::ChildModule child_of_scene_or_symbiosis;
+            yli::ontology::ChildModule child_of_scene;
             yli::ontology::ParentModule parent_of_species;
             yli::ontology::ParentModule parent_of_shapeshifter_transformations;
             yli::ontology::ParentModule parent_of_vector_fonts;
@@ -152,8 +150,6 @@ namespace yli::ontology
 
             // This method renders all `Species` using this `Material`.
             void render();
-
-            bool is_symbiont_material;
 
             std::string texture_file_format;     // Type of the model file, eg. `"png"`.
             std::string texture_filename;        // Filename of the model file.
