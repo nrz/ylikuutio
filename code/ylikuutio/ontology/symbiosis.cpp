@@ -50,7 +50,6 @@
 namespace yli::ontology
 {
     class Entity;
-    class Holobiont;
 
     void Symbiosis::bind_to_new_shader_parent(yli::ontology::Shader* const new_parent)
     {
