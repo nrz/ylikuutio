@@ -43,7 +43,6 @@ namespace yli::ontology
         std::variant<yli::ontology::Scene*, yli::ontology::Symbiosis*> parent;
         yli::ontology::Shader* shader       { nullptr }; // Pointer to `Shader` master.
         const ofbx::Texture* ofbx_texture   { nullptr }; // For `SymbiontMaterial`s.
-        bool is_symbiont_material           { false };
     };
 }
 

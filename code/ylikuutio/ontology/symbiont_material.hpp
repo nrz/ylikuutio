@@ -18,7 +18,12 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_SYMBIONT_MATERIAL_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_SYMBIONT_MATERIAL_HPP_INCLUDED
 
-#include "material.hpp"
+#include "entity.hpp"
+#include "child_module.hpp"
+#include "parent_module.hpp"
+#include "apprentice_module.hpp"
+#include "master_module.hpp"
+#include "shader.hpp"
 #include "material_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include <ofbx.h>
@@ -35,16 +40,17 @@ namespace yli::ontology
     class Universe;
     class Scene;
     class SymbiontSpecies;
-    class ParentModule;
 
-    class SymbiontMaterial: public yli::ontology::Material
+    class SymbiontMaterial: public yli::ontology::Entity
     {
         public:
             SymbiontMaterial(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::MaterialStruct& material_struct,
-                    yli::ontology::ParentModule* const parent_module)
-                : Material(universe, material_struct, parent_module, nullptr)
+                    yli::ontology::ParentModule* const symbiosis_parent_module) // Parent is a `Symbiosis`.
+                : Entity(universe, material_struct),
+                child_of_symbiosis(symbiosis_parent_module, this),
+                parent_of_symbiont_species(this, &this->registry, "symbiont_species")
             {
                 // constructor.
                 this->ofbx_texture = material_struct.ofbx_texture;
@@ -61,9 +67,21 @@ namespace yli::ontology
             virtual ~SymbiontMaterial();
 
             yli::ontology::Scene* get_scene() const override;
+            yli::ontology::Entity* get_parent() const override;
 
             uint32_t get_texture() const;
             GLint get_openGL_textureID() const;
+
+            yli::ontology::ChildModule child_of_symbiosis;
+            yli::ontology::ParentModule parent_of_symbiont_species;
+
+        protected:
+            uint32_t image_width  { 0 };
+            uint32_t image_height { 0 };
+            uint32_t image_size   { 0 };
+
+            GLuint texture           { 0 }; // Texture of this `SymbiontMaterial`, returned by `load_common_texture` (used for `glGenTextures` etc.). Dummy value.
+            GLuint opengl_texture_id { 0 }; // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`. Dummy value.
 
         private:
             std::size_t get_number_of_children() const override;

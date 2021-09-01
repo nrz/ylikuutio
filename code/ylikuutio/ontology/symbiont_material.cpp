@@ -60,6 +60,11 @@ namespace yli::ontology
         return nullptr;
     }
 
+    yli::ontology::Entity* SymbiontMaterial::get_parent() const
+    {
+        return this->child_of_symbiosis.get_parent();
+    }
+
     void SymbiontMaterial::render()
     {
         if (!this->should_be_rendered || this->universe == nullptr)
@@ -82,19 +87,19 @@ namespace yli::ontology
         // Set our "texture_sampler" sampler to user Texture Unit 0.
         yli::opengl::uniform_1i(this->opengl_texture_id, 0);
 
-        render_master->render_symbiont_species(this->parent_of_species.child_pointer_vector);
+        render_master->render_symbiont_species(this->parent_of_symbiont_species.child_pointer_vector);
 
         this->postrender();
     }
 
     std::size_t SymbiontMaterial::get_number_of_children() const
     {
-        return this->parent_of_species.get_number_of_children();
+        return this->parent_of_symbiont_species.get_number_of_children();
     }
 
     std::size_t SymbiontMaterial::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_species.child_pointer_vector);
+        return yli::ontology::get_number_of_descendants(this->parent_of_symbiont_species.child_pointer_vector);
     }
 
     void SymbiontMaterial::load_texture()

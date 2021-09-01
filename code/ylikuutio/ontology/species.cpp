@@ -91,10 +91,10 @@ namespace yli::ontology
     {
         // destructor.
 
-        if (!this->is_symbiont_species)
-        {
-            std::cout << "`Species` with childID " << std::dec << this->childID << " will be destroyed.\n";
+        std::cout << "`Species` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
+        if (this->opengl_in_use)
+        {
             // Cleanup buffers.
             glDeleteBuffers(1, &this->vertexbuffer);
             glDeleteBuffers(1, &this->uvbuffer);

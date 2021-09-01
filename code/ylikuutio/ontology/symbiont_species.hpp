@@ -18,11 +18,12 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_SYMBIONT_SPECIES_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_SYMBIONT_SPECIES_HPP_INCLUDED
 
+#include "model.hpp"
+#include "child_module.hpp"
 #include "generic_master_module.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
-#include "species.hpp"
 #include "symbiont_material.hpp"
 #include "species_struct.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
@@ -60,7 +61,7 @@ namespace yli::ontology
     class Entity;
     class ParentModule;
 
-    class SymbiontSpecies: public yli::ontology::Species
+    class SymbiontSpecies: public yli::ontology::Model
     {
         public:
             std::size_t get_indices_size() const;
@@ -69,8 +70,9 @@ namespace yli::ontology
             SymbiontSpecies(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::SpeciesStruct& species_struct,
-                    yli::ontology::ParentModule* const parent_module)
-                : Species(universe, species_struct, parent_module),
+                    yli::ontology::ParentModule* const symbiont_material_parent_module)
+                : Model(universe, species_struct, species_struct.opengl_in_use),
+                child_of_symbiont_material(symbiont_material_parent_module, this),
                 master_of_bionts(this, &this->registry, "bionts")
             {
                 // constructor.
@@ -149,6 +151,8 @@ namespace yli::ontology
             // destructor.
             virtual ~SymbiontSpecies();
 
+            yli::ontology::Entity* get_parent() const override;
+
             std::size_t get_number_of_apprentices() const;
 
             template<class T1, class T2>
@@ -157,14 +161,17 @@ namespace yli::ontology
             template<class T1, class T2, class T3>
                 friend void yli::render::render_species_or_glyph(T1 species_or_glyph_pointer);
 
-            yli::ontology::GenericMasterModule master_of_bionts;
-
         private:
             void bind_to_parent();
 
             // this method renders all `Object`s of this `SymbiontSpecies`.
             void render();
 
+        public:
+            yli::ontology::ChildModule child_of_symbiont_material;
+            yli::ontology::GenericMasterModule master_of_bionts;
+
+        private:
             yli::ontology::Shader* shader; // Pointer to `Shader` (not a parent!).
 
             std::string model_file_format; // Type of the model file, eg. `"png"`.

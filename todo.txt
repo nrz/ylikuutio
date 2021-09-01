@@ -294,3 +294,5 @@ Ready:
 [x] Fix compiling on GCC on Travis CI Bionic Beaver environment.
 [x] Fix compiling on Clang.
 [x] Make `Material` a child of the `Scene`.
+[x] Modify `yli::ontology::SymbiontMaterial` so that it inherits `yli::ontology::Entity`, and does not inherit `yli::ontology::Material` any more.
+[x] Modify `yli::ontology::SymbiontSpecies` so that it inherits `yli::ontology::Model`, and does not inherit `yli::ontology::Species` any more.

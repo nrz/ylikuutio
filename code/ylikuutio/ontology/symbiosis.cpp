@@ -237,7 +237,6 @@ namespace yli::ontology
                 yli::ontology::MaterialStruct material_struct;
                 material_struct.shader = shader;
                 material_struct.parent = this;
-                material_struct.is_symbiont_material = true;
                 material_struct.ofbx_texture = ofbx_texture;
                 yli::ontology::SymbiontMaterial* const symbiont_material = new yli::ontology::SymbiontMaterial(
                         this->universe,
@@ -251,7 +250,6 @@ namespace yli::ontology
                 for (const std::size_t& mesh_i : this->ofbx_diffuse_texture_mesh_map.at(ofbx_texture))
                 {
                     yli::ontology::SpeciesStruct species_struct;
-                    species_struct.is_symbiont_species = true;
 
                     if (shader != nullptr)
                     {
@@ -276,7 +274,7 @@ namespace yli::ontology
                     yli::ontology::SymbiontSpecies* symbiont_species = new yli::ontology::SymbiontSpecies(
                             this->universe,
                             species_struct,
-                            &symbiont_material->parent_of_species);
+                            &symbiont_material->parent_of_symbiont_species);
 
                     std::cout << "yli::ontology::SymbiontSpecies*, mesh index " << mesh_i << " successfully created.\n";
 

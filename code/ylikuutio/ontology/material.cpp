@@ -38,16 +38,10 @@ namespace yli::ontology
     void Material::bind_to_new_scene_parent(yli::ontology::Scene* const new_parent)
     {
         // Requirements:
-        // `this->is_symbiont_material` must be `false`.
         // `this->parent` must not be `nullptr`.
         // `new_parent` must not be `nullptr`.
 
-        if (this->is_symbiont_material)
-        {
-            return;
-        }
-
-        yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(this->child_of_scene_or_symbiosis.get_parent());
+        yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(this->child_of_scene.get_parent());
 
         if (scene == nullptr)
         {
@@ -71,7 +65,7 @@ namespace yli::ontology
         scene->parent_of_materials.unbind_child(this->childID);
 
         // Get `childID` from `Scene` and set pointer to this `Material`.
-        this->child_of_scene_or_symbiosis.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_materials);
+        this->child_of_scene.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_materials);
     }
 
     void Material::bind_to_new_parent(yli::ontology::Entity* const new_parent)
@@ -95,14 +89,6 @@ namespace yli::ontology
 
     void Material::bind_to_new_shader(yli::ontology::Shader* const new_shader)
     {
-        // Requirements:
-        // `this->is_symbiont_material` must be `false`.
-
-        if (this->is_symbiont_material)
-        {
-            return;
-        }
-
         // Unbind from the current `Shader` if there is such.
 
         if (new_shader != nullptr)
@@ -119,14 +105,11 @@ namespace yli::ontology
     {
         // destructor.
 
-        if (!this->is_symbiont_material)
-        {
-            std::cout << "`Material` with childID " << std::dec << this->childID << " will be destroyed.\n";
+        std::cout << "`Material` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-            if (this->is_texture_loaded)
-            {
-                glDeleteTextures(1, &this->texture);
-            }
+        if (this->is_texture_loaded)
+        {
+            glDeleteTextures(1, &this->texture);
         }
     }
 
@@ -162,19 +145,12 @@ namespace yli::ontology
 
     yli::ontology::Scene* Material::get_scene() const
     {
-        // `SymbiontMaterial` needs to `override` this function implementation.
-
-        if (!this->is_symbiont_material)
-        {
-            return static_cast<yli::ontology::Scene*>(this->get_parent());
-        }
-
-        return nullptr;
+        return static_cast<yli::ontology::Scene*>(this->get_parent());
     }
 
     yli::ontology::Entity* Material::get_parent() const
     {
-        return this->child_of_scene_or_symbiosis.get_parent();
+        return this->child_of_scene.get_parent();
     }
 
     yli::ontology::Shader* Material::get_shader() const
