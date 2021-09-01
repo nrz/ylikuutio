@@ -16,11 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "symbiont_species.hpp"
-#include "entity.hpp"
 #include "universe.hpp"
-#include "object.hpp"
-#include "symbiont_material.hpp"
-#include "biont.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_master.hpp"

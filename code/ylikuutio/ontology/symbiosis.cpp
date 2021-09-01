@@ -20,7 +20,6 @@
 #include "shader.hpp"
 #include "symbiont_material.hpp"
 #include "symbiont_species.hpp"
-#include "holobiont.hpp"
 #include "material_struct.hpp"
 #include "species_struct.hpp"
 #include "family_templates.hpp"

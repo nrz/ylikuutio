@@ -24,7 +24,6 @@
 #include "universe.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
-#include "symbiont_material.hpp"
 #include "species_struct.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
