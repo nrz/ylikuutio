@@ -36,10 +36,8 @@
 
 namespace yli::ontology
 {
-    class Entity;
     class Universe;
     class Scene;
-    class SymbiontSpecies;
 
     class SymbiontMaterial: public yli::ontology::Entity
     {
