@@ -18,14 +18,14 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_GLYPH_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_GLYPH_HPP_INCLUDED
 
+#include "model.hpp"
 #include "child_module.hpp"
 #include "universe.hpp"
-#include "model.hpp"
 #include "glyph_struct.hpp"
 #include "gl_attrib_locations.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
-#include "code/ylikuutio/triangulation/triangulate_polygons_struct.hpp"
 #include "code/ylikuutio/triangulation/polygon_triangulation.hpp"
+#include "code/ylikuutio/triangulation/triangulate_polygons_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
