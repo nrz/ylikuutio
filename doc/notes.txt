@@ -126,3 +126,6 @@ https://www.gamedev.net/articles/programming/general-and-gameplay-programming/th
 
 About software synthesis:
 https://www.basicsynth.com/
+
+Abou ray tracing:
+https://raytracing.github.io/books/RayTracingInOneWeekend.html
