@@ -49,7 +49,7 @@ for arg in sys.argv:
     elif x == 2:
         parent_class_name = arg    # 2nd argument: name of its compositional parent class (part-of relation).
     elif x == 3:
-        inherited_class_name = arg # 3rd argument (optional): inherited class. If not given, then `Entity is inherited`.
+        inherited_class_name = arg # 3rd argument (optional): inherited class. If not given, then `Entity` is inherited.
     x += 1
 
 copyright_notice = \
