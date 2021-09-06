@@ -30,7 +30,6 @@
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -256,18 +255,17 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
-            template<class T1, class T2>
-                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
-
         private:
             void bind_to_parent();
 
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
+        public:
             // This method renders this `ComputeTask`, that is, computes this task.
             void render();
 
+        private:
             void preiterate() const;
             void postiterate() const;
 
