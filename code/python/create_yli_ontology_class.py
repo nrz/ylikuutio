@@ -21,7 +21,7 @@
 # the given command line parameters.
 #
 # usage:
-# create_yli_ontology_class.py <class name> <parent class name> [optional parameters]
+# create_yli_ontology_class.py <class name> [parent class name] [optional parameters]
 #
 # Class name and parent class name are assumed to be in `yli::ontology` namespace.
 # Class name and parent class name must be valid C++ class names.
@@ -32,15 +32,16 @@ n_command_line_args = len(sys.argv)
 
 usage = \
 "usage:\n"\
-"create_yli_ontology_class.py <class name> <parent class name> [optional parameters]"
+"create_yli_ontology_class.py <class name> [parent class name] [inherited class]"
 
 # print usage if too little arguments are given.
-if n_command_line_args <= 2:
+if n_command_line_args <= 1:
     print(usage)
     sys.exit()
 
 x = 0
 inherited_class_name = "Entity"
+parent_class_name = ""
 
 for arg in sys.argv:
     if x == 1:
@@ -160,14 +161,22 @@ parent_pointer_line_in_header = \
 end_class_definition = \
 "    };"
 
-class_constructor_lines = \
+class_constructor_top = \
 "            " + class_name + "(\n"\
 "                    " + namespace + "::Universe* const universe,\n"\
 "                    " + const_struct_reference_variable_type + " " + struct_name + ",\n"\
-"                    " + parent_module_type_and_name + ") // TODO: other_parameters!\n"\
-"                : " + inherited_class_name + "(universe, " + struct_name + "), // TODO: complete the initializer list!\n"\
-"                " + child_module_variable_name + "(parent_module, this), // TODO: delete this line if `ChildModule` is not needed!\n"\
-"                parent { " + struct_name + ".parent }\n"\
+"                    " + parent_module_type_and_name + ") // TODO: other_parameters!"
+if parent_class_name != "":
+    class_constructor_base_initialization = \
+    "                : " + inherited_class_name + "(universe, " + struct_name + "), // TODO: complete the initializer list!"
+else:
+    class_constructor_base_initialization = \
+    "                : " + inherited_class_name + "(universe, " + struct_name + ") // TODO: complete the initializer list!"
+class_constructor_child_module_line = \
+"                " + child_module_variable_name + "(parent_module, this), // TODO: delete this line if `ChildModule` is not needed!"
+class_constructor_parent_line = \
+"                parent { " + struct_name + ".parent }"
+class_constructor_definition = \
 "            {\n"\
 "                // constructor.\n"\
 "\n"\
@@ -250,7 +259,8 @@ with open(class_filename_hpp, 'w') as f:
     print(class_define_line, file = f)
     print(file = f)
     print(inherited_class_include_line, file = f)
-    print(child_module_include_line, file = f)
+    if parent_class_name != "":
+        print(child_module_include_line, file = f)
     print(struct_include_line, file = f)
     print(file = f)
     print(standard_headers_include_lines, file = f)
@@ -259,26 +269,34 @@ with open(class_filename_hpp, 'w') as f:
     if inherited_class_name != "Entity":
         print(entity_forward_declaration, file = f)
     print(universe_forward_declaration, file = f)
-    print(parent_class_forward_declaration, file = f)
-    print(parent_module_forward_declaration, file = f)
+    if parent_class_name != "":
+        print(parent_class_forward_declaration, file = f)
+        print(parent_module_forward_declaration, file = f)
     print(file = f)
     print(begin_class_definition, file = f)
     print(public_line, file = f)
-    print(class_constructor_lines, file = f)
+    print(class_constructor_top, file = f)
+    print(class_constructor_base_initialization, file = f)
+    if parent_class_name != "":
+        print(class_constructor_child_module_line, file = f)
+        print(class_constructor_parent_line, file = f)
+    print(class_constructor_definition, file = f)
     print(file = f)
     print(delete_copy_constructor_line, file = f)
     print(delete_copy_assignment_line, file = f)
     print(file = f)
     print(destructor_declaration_lines, file = f)
     print(file = f)
-    print(get_parent_const_override_line, file = f)
+    if parent_class_name != "":
+        print(get_parent_const_override_line, file = f)
     print(get_number_of_children_const_override_line, file = f)
     print(get_number_of_descendants_const_override_line, file = f)
-    print(file = f)
-    print(child_module_lines, file = f)
-    print(file = f)
-    print(private_line, file = f)
-    print(parent_pointer_line_in_header, file = f)
+    if parent_class_name != "":
+        print(file = f)
+        print(child_module_lines, file = f)
+        print(file = f)
+        print(private_line, file = f)
+        print(parent_pointer_line_in_header, file = f)
     print(end_class_definition, file = f)
     print(end_namespace_lines, file = f)
     print(file = f)
@@ -292,12 +310,14 @@ with open(class_filename_cpp, 'w') as f:
     print(standard_headers_include_lines, file = f)
     print(file = f)
     print(begin_namespace_lines, file = f)
-    print(entity_forward_declaration, file = f)
-    print(file = f)
+    if parent_class_name != "":
+        print(entity_forward_declaration, file = f)
+        print(file = f)
     print(destructor_definition_lines, file = f)
     print(file = f)
-    print(get_parent_function_lines, file = f)
-    print(file = f)
+    if parent_class_name != "":
+        print(get_parent_function_lines, file = f)
+        print(file = f)
     print(get_number_of_children_lines, file = f)
     print(file = f)
     print(get_number_of_descendants_lines, file = f)
@@ -312,12 +332,14 @@ with open(struct_filename, 'w') as f:
     print(entity_struct_include_line, file = f)
     print(file = f)
     print(begin_namespace_lines, file = f)
-    print(parent_class_forward_declaration, file = f)
-    print(file = f)
+    if parent_class_name != "":
+        print(parent_class_forward_declaration, file = f)
+        print(file = f)
     print(begin_struct_definition, file = f)
     print(struct_constructor_lines, file = f)
     print(file = f)
-    print(parent_pointer_lines, file = f)
+    if parent_class_name != "":
+        print(parent_pointer_lines, file = f)
     print(end_struct_definition, file = f)
     print(end_namespace_lines, file = f)
     print(file = f)
