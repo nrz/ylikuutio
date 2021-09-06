@@ -43,7 +43,7 @@
 
 namespace yli::ontology
 {
-    class Chunk: yli::ontology::Model
+    class Chunk: public yli::ontology::Model
     {
         public:
             Chunk(const yli::ontology::ChunkStruct& chunk_struct)
