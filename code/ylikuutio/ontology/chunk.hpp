@@ -22,7 +22,6 @@
 #include "chunk_struct.hpp"
 #include "chunk_master.hpp"
 #include "material.hpp"
-#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <vector>  // std::vector
@@ -43,7 +42,7 @@
 
 namespace yli::ontology
 {
-    class Chunk: yli::ontology::Model
+    class Chunk: public yli::ontology::Model
     {
         public:
             Chunk(const yli::ontology::ChunkStruct& chunk_struct)
@@ -70,14 +69,13 @@ namespace yli::ontology
             // destructor.
             virtual ~Chunk();
 
-            template<class T1, class T2>
-                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
-
         private:
             void bind_to_parent();
 
+        public:
             void render();
 
+        private:
             yli::ontology::ChunkMaster* parent;  // pointer to the `ChunkMaster`.
 
             bool is_original;                    // If `Chunk` is original, if can be reconstructed using `get_content_callback`.

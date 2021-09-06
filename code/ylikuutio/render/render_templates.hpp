@@ -26,12 +26,15 @@
 
 namespace yli::render
 {
-    template<class T1, class T2>
-        void render_children(const std::vector<T1>& child_pointer_vector)
+    template<typename T>
+        using ConstIterator = typename T::const_iterator;
+
+    template<class C, class T1, class T2> // C = container, T1 = stored type, T2 = type in which to cast the stored type into.
+        void render_children(C& child_container)
         {
-            for (std::size_t child_i = 0; child_i < child_pointer_vector.size(); child_i++)
+            for (ConstIterator<C> it = child_container.begin(); it != child_container.end(); it++)
             {
-                T2 child_pointer = static_cast<T2>(child_pointer_vector[child_i]);
+                T2 child_pointer = static_cast<T2>(*it);
 
                 if (child_pointer != nullptr && child_pointer->should_be_rendered)
                 {

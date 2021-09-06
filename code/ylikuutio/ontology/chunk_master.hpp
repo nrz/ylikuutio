@@ -23,7 +23,6 @@
 #include "material.hpp"
 #include "entity_struct.hpp"
 #include "get_content_callback.hpp"
-#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <vector>   // std::vector
@@ -61,17 +60,16 @@ namespace yli::ontology
             // destructor.
             virtual ~ChunkMaster();
 
-            template<class T1, class T2>
-                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
-
             yli::ontology::ParentModule parent_of_chunks;
 
         private:
             void bind_to_parent();
 
+        public:
             // this method renders all `Chunk`s bound to this `ChunkMaster`.
             void render();
 
+        private:
             // Callback used to get the content based on x, y, z.
             GetContentCallback get_content_callback { nullptr };
 

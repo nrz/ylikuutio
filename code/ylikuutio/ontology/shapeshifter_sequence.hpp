@@ -22,7 +22,6 @@
 #include "child_module.hpp"
 #include "parent_module.hpp"
 #include "shapeshifter_sequence_struct.hpp"
-#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -63,9 +62,6 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
-            template<class T1, class T2>
-                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
-
         private:
             yli::ontology::ChildModule child_of_shapeshifter_transformation;
 
@@ -78,8 +74,10 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
+        public:
             void render();
 
+        private:
             float transformation_speed;                        // Negative speed means inverse initial transition direction.
             std::size_t initial_offset;                        // Index of the `ShapeshifterForm` from which to begin the transition.
 

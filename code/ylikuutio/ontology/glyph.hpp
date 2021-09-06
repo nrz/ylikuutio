@@ -18,14 +18,13 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_GLYPH_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_GLYPH_HPP_INCLUDED
 
+#include "model.hpp"
 #include "child_module.hpp"
 #include "universe.hpp"
-#include "model.hpp"
 #include "glyph_struct.hpp"
 #include "gl_attrib_locations.hpp"
-#include "code/ylikuutio/render/render_templates.hpp"
-#include "code/ylikuutio/triangulation/triangulate_polygons_struct.hpp"
 #include "code/ylikuutio/triangulation/polygon_triangulation.hpp"
+#include "code/ylikuutio/triangulation/triangulate_polygons_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -57,8 +56,6 @@ namespace yli::ontology
             const char* get_unicode_char_pointer() const;
 
             friend class yli::ontology::VectorFont;
-            template<class T1, class T2>
-                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
 
         private:
             Glyph(const yli::ontology::GlyphStruct& glyph_struct, yli::ontology::ParentModule* const vector_font_parent_module)
@@ -102,9 +99,11 @@ namespace yli::ontology
             Glyph(const Glyph&) = delete;            // Delete copy constructor.
             Glyph& operator=(const Glyph&) = delete; // Delete copy assignment.
 
+        public:
             // this method renders all `Object`s of this `Glyph`.
             void render();
 
+        private:
             yli::ontology::ChildModule child_of_vector_font;
 
             std::vector<std::vector<glm::vec2>>* glyph_vertex_data;

@@ -26,7 +26,6 @@
 #include "vector_font_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/load/font_loader.hpp"
-#include "code/ylikuutio/render/render_templates.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include GLM
@@ -161,9 +160,6 @@ namespace yli::ontology
 
             yli::ontology::Material* parent; // Pointer to `Material`.
 
-            template<class T1, class T2>
-                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
-
             yli::ontology::ParentModule parent_of_glyphs;
             yli::ontology::ParentModule parent_of_text_3ds;
 
@@ -173,9 +169,11 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
+        public:
             // This method renders all `Glyph`s of this `VectorFont`.
             void render();
 
+        private:
             std::string font_file_format; // Type of the model file, eg. `"png"`.
             std::string font_filename;    // Filename of the model file.
             float vertex_scaling_factor;

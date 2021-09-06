@@ -21,7 +21,6 @@
 #include "movable.hpp"
 #include "apprentice_module.hpp"
 #include "biont_struct.hpp"
-#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -66,14 +65,12 @@ namespace yli::ontology
             // destructor.
             virtual ~Biont();
 
-            template<class T1, class T2>
-                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
-
             yli::ontology::ApprenticeModule apprentice_of_symbiont_species;
 
-        protected:
             // This method renders this `Biont`.
             void render();
+
+        protected:
             void render_this_biont(const yli::ontology::Shader* const shader);
 
             std::size_t biontID { std::numeric_limits<std::size_t>::max() };

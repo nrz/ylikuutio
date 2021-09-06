@@ -20,7 +20,6 @@
 
 #include "movable.hpp"
 #include "holobiont_struct.hpp"
-#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -95,18 +94,17 @@ namespace yli::ontology
 
             // Public callbacks end here.
 
-            template<class T1, class T2>
-                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
-
             yli::ontology::ParentModule parent_of_bionts;
 
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
+        public:
             // this method renders this `Holobiont`.
             void render();
 
+        private:
             void create_bionts(const std::vector<bool>& should_render_bionts_vector);
     };
 }

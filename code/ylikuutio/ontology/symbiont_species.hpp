@@ -27,7 +27,6 @@
 #include "species_struct.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include "code/ylikuutio/render/render_templates.hpp"
 #include "code/ylikuutio/render/render_species_or_glyph.hpp"
 
 // Include GLM
@@ -154,19 +153,16 @@ namespace yli::ontology
 
             std::size_t get_number_of_apprentices() const;
 
-            template<class T1, class T2>
-                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
-
             template<class T1, class T2, class T3>
                 friend void yli::render::render_species_or_glyph(T1 species_or_glyph_pointer);
 
         private:
             void bind_to_parent();
 
+        public:
             // this method renders all `Object`s of this `SymbiontSpecies`.
             void render();
 
-        public:
             yli::ontology::ChildModule child_of_symbiont_material;
             yli::ontology::GenericMasterModule master_of_bionts;
 

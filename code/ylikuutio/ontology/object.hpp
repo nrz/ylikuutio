@@ -21,7 +21,6 @@
 #include "movable.hpp"
 #include "object_type.hpp"
 #include "object_struct.hpp"
-#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -117,15 +116,15 @@ namespace yli::ontology
 
             // Public callbacks end here.
 
-            template<class T1, class T2>
-                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
-
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
+        public:
             // this method renders this `Object`.
             void render();
+
+        private:
             void render_this_object(yli::ontology::Shader* const shader);
 
             yli::ontology::Glyph* glyph { nullptr }; // pointer to the `Glyph` (not a parent!).
