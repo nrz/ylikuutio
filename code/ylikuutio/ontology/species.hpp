@@ -24,7 +24,7 @@
 #include "scene.hpp"
 #include "shader.hpp"
 #include "species_struct.hpp"
-#include "code/ylikuutio/load/species_loader.hpp"
+#include "code/ylikuutio/load/model_loader.hpp"
 #include "code/ylikuutio/load/species_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_templates.hpp"

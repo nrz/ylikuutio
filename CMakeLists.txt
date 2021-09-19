@@ -665,6 +665,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/image_file_loader.cpp
     code/ylikuutio/load/image_file_loader.hpp
     code/ylikuutio/load/image_loader_struct.hpp
+    code/ylikuutio/load/model_loader.cpp
+    code/ylikuutio/load/model_loader.hpp
     code/ylikuutio/load/obj_loader.cpp
     code/ylikuutio/load/obj_loader.hpp
     code/ylikuutio/load/png_heightmap_loader.cpp
@@ -673,8 +675,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/png_loader.hpp
     code/ylikuutio/load/shader_loader.cpp
     code/ylikuutio/load/shader_loader.hpp
-    code/ylikuutio/load/species_loader.cpp
-    code/ylikuutio/load/species_loader.hpp
     code/ylikuutio/load/species_loader_struct.hpp
     code/ylikuutio/load/srtm_heightmap_loader.cpp
     code/ylikuutio/load/srtm_heightmap_loader.hpp

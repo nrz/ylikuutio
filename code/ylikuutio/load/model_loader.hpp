@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_LOAD_SPECIES_LOADER_HPP_INCLUDED
-#define __YLIKUUTIO_LOAD_SPECIES_LOADER_HPP_INCLUDED
+#ifndef __YLIKUUTIO_LOAD_MODEL_LOADER_HPP_INCLUDED
+#define __YLIKUUTIO_LOAD_MODEL_LOADER_HPP_INCLUDED
 
 #include "species_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.

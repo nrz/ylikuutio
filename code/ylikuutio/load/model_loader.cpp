@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "species_loader.hpp"
+#include "model_loader.hpp"
 #include "species_loader_struct.hpp"
 #include "obj_loader.hpp"
 #include "fbx_model_loader.hpp"
