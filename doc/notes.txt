@@ -129,3 +129,7 @@ https://www.basicsynth.com/
 
 About ray tracing:
 https://raytracing.github.io/books/RayTracingInOneWeekend.html
+
+About iterators:
+https://www.fluentcpp.com/2018/05/08/std-iterator-deprecated/
+https://stackoverflow.com/questions/3582608/how-to-correctly-implement-custom-iterators-and-const-iterators/22801650#22801650
