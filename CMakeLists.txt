@@ -752,7 +752,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/glyph.hpp
     code/ylikuutio/ontology/glyph_object_creation.cpp
     code/ylikuutio/ontology/glyph_object_creation.hpp
-    code/ylikuutio/ontology/glyph_struct.hpp
     code/ylikuutio/ontology/holobiont.cpp
     code/ylikuutio/ontology/holobiont.hpp
     code/ylikuutio/ontology/holobiont_struct.hpp
@@ -1183,7 +1182,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/font_2d.cpp
         code/ylikuutio/ontology/font_2d.hpp
         code/ylikuutio/ontology/font_struct.hpp
-        code/ylikuutio/ontology/glyph_struct.hpp
         code/ylikuutio/ontology/holobiont.cpp
         code/ylikuutio/ontology/holobiont.hpp
         code/ylikuutio/ontology/holobiont_struct.hpp
@@ -1263,7 +1261,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_fbx_loader.cpp
         code/ylikuutio/tests/googletest/test_file_loader.cpp
         code/ylikuutio/tests/googletest/test_font_loader.cpp
-        code/ylikuutio/tests/googletest/test_glyph_struct.cpp
         code/ylikuutio/tests/googletest/test_graph.cpp
         code/ylikuutio/tests/googletest/test_indexing.cpp
         code/ylikuutio/tests/googletest/test_line_2d.cpp
