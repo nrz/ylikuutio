@@ -1271,6 +1271,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
         code/ylikuutio/tests/googletest/test_linear_algebra.cpp
         code/ylikuutio/tests/googletest/test_material_struct.cpp
+        code/ylikuutio/tests/googletest/test_model_struct.cpp
         code/ylikuutio/tests/googletest/test_node_struct.cpp
         code/ylikuutio/tests/googletest/test_obj_loader.cpp
         code/ylikuutio/tests/googletest/test_object_struct.cpp
@@ -1282,7 +1283,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_registry.cpp
         code/ylikuutio/tests/googletest/test_variable.cpp
         code/ylikuutio/tests/googletest/test_shader_struct.cpp
-        code/ylikuutio/tests/googletest/test_species_struct.cpp
         code/ylikuutio/tests/googletest/test_triangulation.cpp
         code/ylikuutio/tests/googletest/test_universe_callbacks.cpp
         code/ylikuutio/tests/googletest/test_variable_struct.cpp
