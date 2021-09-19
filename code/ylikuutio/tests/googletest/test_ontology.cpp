@@ -1518,7 +1518,7 @@ TEST(font_2d_must_be_initialized_appropriately, no_universe_holstein)
     font_struct.font_texture_file_format = "PNG";
     yli::ontology::Font2D* const font_2d = new yli::ontology::Font2D(nullptr, font_struct, nullptr);
 
-    // `Entity` member functions of `Ecosystem`.
+    // `Entity` member functions of `Font2D`.
     ASSERT_EQ(font_2d->get_childID(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(font_2d->get_type(), "yli::ontology::Font2D*");
     ASSERT_FALSE(font_2d->get_can_be_erased());               // Currently `Font2D`s can not be erased.
