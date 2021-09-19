@@ -90,10 +90,6 @@ namespace yli::ontology
                     yli::ontology::set_gl_attrib_locations(glyph_struct.shader, this);
                 }
 
-                // TODO: triangulate the vertex data!
-
-                // TODO: load the vertex data the same way as in `yli::ontology::Species::Species(yli::ontology::ModelStruct model_struct)`!
-
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Glyph*";
             }
