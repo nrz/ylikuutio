@@ -20,7 +20,7 @@
 
 #include "entity.hpp"
 #include "parent_module.hpp"
-#include "species_struct.hpp"
+#include "model_struct.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -43,13 +43,13 @@ namespace yli::ontology
             void bind_to_new_material_parent(yli::ontology::Material* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-            ShapeshifterTransformation(yli::ontology::Universe* const universe, const yli::ontology::SpeciesStruct& species_struct)
-                : Entity(universe, species_struct),
+            ShapeshifterTransformation(yli::ontology::Universe* const universe, const yli::ontology::ModelStruct& model_struct)
+                : Entity(universe, model_struct),
                 parent_of_shapeshifter_forms(this, &this->registry, "shapeshifter_forms"),
                 parent_of_shapeshifter_sequences(this, &this->registry, "shapeshifter_sequences")
             {
                 // constructor.
-                this->parent = species_struct.material;
+                this->parent = model_struct.material;
 
                 // get `childID` from `Material` and set pointer to this `Species`.
                 this->bind_to_parent();

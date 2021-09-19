@@ -21,7 +21,7 @@
 #include "symbiont_material.hpp"
 #include "symbiont_species.hpp"
 #include "material_struct.hpp"
-#include "species_struct.hpp"
+#include "model_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/load/symbiosis_loader.hpp"
 #include "code/ylikuutio/load/symbiosis_loader_struct.hpp"
@@ -248,31 +248,31 @@ namespace yli::ontology
                 // Care only about `ofbx::Texture*`s which are DIFFUSE textures.
                 for (const std::size_t& mesh_i : this->ofbx_diffuse_texture_mesh_map.at(ofbx_texture))
                 {
-                    yli::ontology::SpeciesStruct species_struct;
+                    yli::ontology::ModelStruct model_struct;
 
                     if (shader != nullptr)
                     {
-                        species_struct.scene = static_cast<yli::ontology::Scene*>(shader->get_parent());
+                        model_struct.scene = static_cast<yli::ontology::Scene*>(shader->get_parent());
                     }
                     else
                     {
-                        species_struct.scene = nullptr;
+                        model_struct.scene = nullptr;
                     }
 
-                    species_struct.shader = shader;
-                    species_struct.symbiont_material = symbiont_material;
-                    species_struct.vertex_count = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i).size() : 0;
-                    species_struct.vertices = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i) : std::vector<glm::vec3>();
-                    species_struct.uvs = mesh_i < this->uvs.size() ? this->uvs.at(mesh_i) : std::vector<glm::vec2>();
-                    species_struct.normals = mesh_i < this->normals.size() ? this->normals.at(mesh_i) : std::vector<glm::vec3>();
-                    species_struct.light_position = this->light_position;
-                    species_struct.opengl_in_use = this->opengl_in_use;
+                    model_struct.shader = shader;
+                    model_struct.symbiont_material = symbiont_material;
+                    model_struct.vertex_count = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i).size() : 0;
+                    model_struct.vertices = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i) : std::vector<glm::vec3>();
+                    model_struct.uvs = mesh_i < this->uvs.size() ? this->uvs.at(mesh_i) : std::vector<glm::vec2>();
+                    model_struct.normals = mesh_i < this->normals.size() ? this->normals.at(mesh_i) : std::vector<glm::vec3>();
+                    model_struct.light_position = this->light_position;
+                    model_struct.opengl_in_use = this->opengl_in_use;
 
                     std::cout << "Creating yli::ontology::SymbiontSpecies*, mesh index " << mesh_i << "...\n";
 
                     yli::ontology::SymbiontSpecies* symbiont_species = new yli::ontology::SymbiontSpecies(
                             this->universe,
-                            species_struct,
+                            model_struct,
                             &symbiont_material->parent_of_symbiont_species);
 
                     std::cout << "yli::ontology::SymbiontSpecies*, mesh index " << mesh_i << " successfully created.\n";

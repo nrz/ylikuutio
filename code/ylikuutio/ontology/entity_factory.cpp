@@ -44,7 +44,7 @@
 #include "scene_struct.hpp"
 #include "shader_struct.hpp"
 #include "material_struct.hpp"
-#include "species_struct.hpp"
+#include "model_struct.hpp"
 #include "object_struct.hpp"
 #include "symbiosis_struct.hpp"
 #include "holobiont_struct.hpp"
@@ -201,15 +201,15 @@ namespace yli::ontology
         return material_entity;
     }
 
-    yli::ontology::Entity* EntityFactory::create_species(const yli::ontology::SpeciesStruct& species_struct) const
+    yli::ontology::Entity* EntityFactory::create_species(const yli::ontology::ModelStruct& model_struct) const
     {
         yli::ontology::Entity* species_entity = new yli::ontology::Species(
                 this->universe,
-                species_struct,
-                (species_struct.material == nullptr ? nullptr : &species_struct.material->parent_of_species));
+                model_struct,
+                (model_struct.material == nullptr ? nullptr : &model_struct.material->parent_of_species));
 
-        species_entity->set_global_name(species_struct.global_name);
-        species_entity->set_local_name(species_struct.local_name);
+        species_entity->set_global_name(model_struct.global_name);
+        species_entity->set_local_name(model_struct.local_name);
         return species_entity;
     }
 

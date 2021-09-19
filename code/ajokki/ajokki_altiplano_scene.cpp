@@ -24,7 +24,7 @@
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
-#include "code/ylikuutio/ontology/species_struct.hpp"
+#include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 
@@ -110,20 +110,20 @@ namespace ajokki
         altiplano_grass_material->set_global_name("altiplano_grass_material");
 
         // Create the species, store it in `terrain_species`.
-        yli::ontology::SpeciesStruct altiplano_terrain_species_struct;
-        altiplano_terrain_species_struct.scene = altiplano_scene;
-        altiplano_terrain_species_struct.shader = altiplano_shader;
-        altiplano_terrain_species_struct.material = altiplano_grass_material;
-        altiplano_terrain_species_struct.model_file_format = "SRTM";
-        altiplano_terrain_species_struct.light_position = glm::vec3(0, 100000, 0);
-        altiplano_terrain_species_struct.latitude = -16.50f;  // in degrees.
-        altiplano_terrain_species_struct.longitude = -68.15f; // in degrees.
-        altiplano_terrain_species_struct.is_terrain = true;
-        altiplano_terrain_species_struct.x_step = 1;
-        altiplano_terrain_species_struct.z_step = 1;
+        yli::ontology::ModelStruct altiplano_terrain_model_struct;
+        altiplano_terrain_model_struct.scene = altiplano_scene;
+        altiplano_terrain_model_struct.shader = altiplano_shader;
+        altiplano_terrain_model_struct.material = altiplano_grass_material;
+        altiplano_terrain_model_struct.model_file_format = "SRTM";
+        altiplano_terrain_model_struct.light_position = glm::vec3(0, 100000, 0);
+        altiplano_terrain_model_struct.latitude = -16.50f;  // in degrees.
+        altiplano_terrain_model_struct.longitude = -68.15f; // in degrees.
+        altiplano_terrain_model_struct.is_terrain = true;
+        altiplano_terrain_model_struct.x_step = 1;
+        altiplano_terrain_model_struct.z_step = 1;
 
         std::cout << "Creating yli::ontology::Entity* altiplano_terrain_species_entity ...\n";
-        yli::ontology::Entity* const altiplano_terrain_species_entity = entity_factory->create_species(altiplano_terrain_species_struct);
+        yli::ontology::Entity* const altiplano_terrain_species_entity = entity_factory->create_species(altiplano_terrain_model_struct);
         std::cout << "Creating yli::ontology::Species* altiplano_terrain_species ...\n";
         yli::ontology::Species* const altiplano_terrain_species = dynamic_cast<yli::ontology::Species*>(altiplano_terrain_species_entity);
 

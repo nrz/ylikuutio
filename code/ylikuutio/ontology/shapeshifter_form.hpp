@@ -20,7 +20,7 @@
 
 #include "model.hpp"
 #include "child_module.hpp"
-#include "species_struct.hpp"
+#include "model_struct.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -40,9 +40,9 @@ namespace yli::ontology
         public:
             ShapeshifterForm(
                     yli::ontology::Universe* const universe,
-                    const yli::ontology::SpeciesStruct& species_struct,
+                    const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::ParentModule* const shapeshifter_transformation_parent_module)
-                : Model(universe, species_struct, species_struct.opengl_in_use),
+                : Model(universe, model_struct, model_struct.opengl_in_use),
                 child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, this)
             {
                 // constructor.

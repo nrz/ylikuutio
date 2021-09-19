@@ -25,7 +25,7 @@
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
-#include "code/ylikuutio/ontology/species_struct.hpp"
+#include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/camera_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
@@ -113,18 +113,18 @@ namespace ajokki
 
         joensuu_center_west_grass_material->set_global_name("joensuu_center_west_grass_material");
 
-        yli::ontology::SpeciesStruct joensuu_center_west_terrain_species_struct;
-        joensuu_center_west_terrain_species_struct.scene = joensuu_center_west_scene;
-        joensuu_center_west_terrain_species_struct.shader = joensuu_center_west_shader;
-        joensuu_center_west_terrain_species_struct.material = joensuu_center_west_grass_material;
-        joensuu_center_west_terrain_species_struct.model_file_format = "ASCII_grid";
-        joensuu_center_west_terrain_species_struct.model_filename = "N5424G.asc"; // Joensuu center & western.
-        joensuu_center_west_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
-        joensuu_center_west_terrain_species_struct.is_terrain = true;
-        joensuu_center_west_terrain_species_struct.x_step = 4;
-        joensuu_center_west_terrain_species_struct.z_step = 4;
+        yli::ontology::ModelStruct joensuu_center_west_terrain_model_struct;
+        joensuu_center_west_terrain_model_struct.scene = joensuu_center_west_scene;
+        joensuu_center_west_terrain_model_struct.shader = joensuu_center_west_shader;
+        joensuu_center_west_terrain_model_struct.material = joensuu_center_west_grass_material;
+        joensuu_center_west_terrain_model_struct.model_file_format = "ASCII_grid";
+        joensuu_center_west_terrain_model_struct.model_filename = "N5424G.asc"; // Joensuu center & western.
+        joensuu_center_west_terrain_model_struct.light_position = glm::vec3(0, 100000, 100000);
+        joensuu_center_west_terrain_model_struct.is_terrain = true;
+        joensuu_center_west_terrain_model_struct.x_step = 4;
+        joensuu_center_west_terrain_model_struct.z_step = 4;
         std::cout << "Creating yli::ontology::Entity* joensuu_center_west_terrain_species_entity ...\n";
-        yli::ontology::Entity* const joensuu_center_west_terrain_species_entity = entity_factory->create_species(joensuu_center_west_terrain_species_struct);
+        yli::ontology::Entity* const joensuu_center_west_terrain_species_entity = entity_factory->create_species(joensuu_center_west_terrain_model_struct);
         std::cout << "Creating yli::ontology::Species* joensuu_center_west_terrain_species ...\n";
         yli::ontology::Species* const joensuu_center_west_terrain_species = dynamic_cast<yli::ontology::Species*>(joensuu_center_west_terrain_species_entity);
 
@@ -160,16 +160,16 @@ namespace ajokki
 
         orange_fur_material_joensuu->set_global_name("joensuu_center_west_orange_fur_material");
 
-        yli::ontology::SpeciesStruct horse_species_struct;
-        horse_species_struct.scene = joensuu_center_west_scene;
-        horse_species_struct.shader = joensuu_center_west_shader;
-        horse_species_struct.material = orange_fur_material_joensuu;
-        horse_species_struct.model_file_format = "fbx";
-        horse_species_struct.model_filename = "horse.fbx";
-        horse_species_struct.light_position = glm::vec3(0, 100000, 100000);
+        yli::ontology::ModelStruct horse_model_struct;
+        horse_model_struct.scene = joensuu_center_west_scene;
+        horse_model_struct.shader = joensuu_center_west_shader;
+        horse_model_struct.material = orange_fur_material_joensuu;
+        horse_model_struct.model_file_format = "fbx";
+        horse_model_struct.model_filename = "horse.fbx";
+        horse_model_struct.light_position = glm::vec3(0, 100000, 100000);
 
         std::cout << "Creating yli::ontology::Entity* horse_species_entity ...\n";
-        yli::ontology::Entity* const horse_species_entity = entity_factory->create_species(horse_species_struct);
+        yli::ontology::Entity* const horse_species_entity = entity_factory->create_species(horse_model_struct);
 
         std::cout << "Creating yli::ontology::Species* horse_species ...\n";
         yli::ontology::Species* const horse_species = dynamic_cast<yli::ontology::Species*>(horse_species_entity);

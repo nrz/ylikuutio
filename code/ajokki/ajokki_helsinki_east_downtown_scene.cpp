@@ -36,7 +36,7 @@
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
-#include "code/ylikuutio/ontology/species_struct.hpp"
+#include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/symbiosis_struct.hpp"
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
@@ -484,18 +484,18 @@ namespace ajokki
 
         orange_fur_material->set_global_name("helsinki_east_downtown_orange_fur_material");
 
-        yli::ontology::SpeciesStruct helsinki_east_downtown_terrain_species_struct;
-        helsinki_east_downtown_terrain_species_struct.scene = helsinki_east_downtown_scene;
-        helsinki_east_downtown_terrain_species_struct.shader = helsinki_east_downtown_shader;
-        helsinki_east_downtown_terrain_species_struct.material = helsinki_east_downtown_grass_material;
-        helsinki_east_downtown_terrain_species_struct.model_file_format = "ASCII_grid";
-        helsinki_east_downtown_terrain_species_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
-        helsinki_east_downtown_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
-        helsinki_east_downtown_terrain_species_struct.is_terrain = true;
-        helsinki_east_downtown_terrain_species_struct.x_step = 4;
-        helsinki_east_downtown_terrain_species_struct.z_step = 4;
+        yli::ontology::ModelStruct helsinki_east_downtown_terrain_model_struct;
+        helsinki_east_downtown_terrain_model_struct.scene = helsinki_east_downtown_scene;
+        helsinki_east_downtown_terrain_model_struct.shader = helsinki_east_downtown_shader;
+        helsinki_east_downtown_terrain_model_struct.material = helsinki_east_downtown_grass_material;
+        helsinki_east_downtown_terrain_model_struct.model_file_format = "ASCII_grid";
+        helsinki_east_downtown_terrain_model_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
+        helsinki_east_downtown_terrain_model_struct.light_position = glm::vec3(0, 100000, 100000);
+        helsinki_east_downtown_terrain_model_struct.is_terrain = true;
+        helsinki_east_downtown_terrain_model_struct.x_step = 4;
+        helsinki_east_downtown_terrain_model_struct.z_step = 4;
         std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_terrain_species_entity ...\n";
-        yli::ontology::Entity* const helsinki_east_downtown_terrain_species_entity = entity_factory->create_species(helsinki_east_downtown_terrain_species_struct);
+        yli::ontology::Entity* const helsinki_east_downtown_terrain_species_entity = entity_factory->create_species(helsinki_east_downtown_terrain_model_struct);
         std::cout << "Creating yli::ontology::Species* helsinki_east_downtown_terrain_species ...\n";
         yli::ontology::Species* const helsinki_east_downtown_terrain_species = dynamic_cast<yli::ontology::Species*>(helsinki_east_downtown_terrain_species_entity);
 
@@ -513,16 +513,16 @@ namespace ajokki
         helsinki_east_downtown_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_object(helsinki_east_downtown_struct);
 
-        yli::ontology::SpeciesStruct suzanne_species_struct;
-        suzanne_species_struct.scene = helsinki_east_downtown_scene;
-        suzanne_species_struct.shader = helsinki_east_downtown_shader;
-        suzanne_species_struct.material = orange_fur_material;
-        suzanne_species_struct.model_file_format = "obj";
-        suzanne_species_struct.model_filename = "suzanne.obj";
-        suzanne_species_struct.light_position = glm::vec3(0, 100000, 100000);
+        yli::ontology::ModelStruct suzanne_model_struct;
+        suzanne_model_struct.scene = helsinki_east_downtown_scene;
+        suzanne_model_struct.shader = helsinki_east_downtown_shader;
+        suzanne_model_struct.material = orange_fur_material;
+        suzanne_model_struct.model_file_format = "obj";
+        suzanne_model_struct.model_filename = "suzanne.obj";
+        suzanne_model_struct.light_position = glm::vec3(0, 100000, 100000);
 
         std::cout << "Creating yli::ontology::Entity* suzanne_species_entity ...\n";
-        yli::ontology::Entity* const suzanne_species_entity = entity_factory->create_species(suzanne_species_struct);
+        yli::ontology::Entity* const suzanne_species_entity = entity_factory->create_species(suzanne_model_struct);
         std::cout << "Creating yli::ontology::Species* suzanne_species ...\n";
         yli::ontology::Species* const suzanne_species = dynamic_cast<yli::ontology::Species*>(suzanne_species_entity);
 
@@ -617,18 +617,18 @@ namespace ajokki
 
         suzanne5->set_global_name("suzanne5");
 
-        yli::ontology::SpeciesStruct cat_species_struct;
-        cat_species_struct.scene = helsinki_east_downtown_scene;
-        cat_species_struct.global_name = "cat_species";
-        cat_species_struct.local_name = "cat";
-        cat_species_struct.shader = helsinki_east_downtown_shader;
-        cat_species_struct.material = orange_fur_material;
-        cat_species_struct.model_file_format = "fbx";
-        cat_species_struct.model_filename = "cat.fbx";
-        cat_species_struct.light_position = glm::vec3(0, 100000, 100000);
+        yli::ontology::ModelStruct cat_model_struct;
+        cat_model_struct.scene = helsinki_east_downtown_scene;
+        cat_model_struct.global_name = "cat_species";
+        cat_model_struct.local_name = "cat";
+        cat_model_struct.shader = helsinki_east_downtown_shader;
+        cat_model_struct.material = orange_fur_material;
+        cat_model_struct.model_file_format = "fbx";
+        cat_model_struct.model_filename = "cat.fbx";
+        cat_model_struct.light_position = glm::vec3(0, 100000, 100000);
 
         std::cout << "Creating yli::ontology::Entity* cat_species_entity ...\n";
-        yli::ontology::Entity* const cat_species_entity = entity_factory->create_species(cat_species_struct);
+        yli::ontology::Entity* const cat_species_entity = entity_factory->create_species(cat_model_struct);
 
         std::cout << "Creating yli::ontology::Species* cat_species ...\n";
         yli::ontology::Species* const cat_species = dynamic_cast<yli::ontology::Species*>(cat_species_entity);

@@ -24,7 +24,7 @@
 #include "universe.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
-#include "species_struct.hpp"
+#include "model_struct.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_species_or_glyph.hpp"
@@ -68,17 +68,17 @@ namespace yli::ontology
 
             SymbiontSpecies(
                     yli::ontology::Universe* const universe,
-                    const yli::ontology::SpeciesStruct& species_struct,
+                    const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::ParentModule* const symbiont_material_parent_module)
-                : Model(universe, species_struct, species_struct.opengl_in_use),
+                : Model(universe, model_struct, model_struct.opengl_in_use),
                 child_of_symbiont_material(symbiont_material_parent_module, this),
                 master_of_bionts(this, &this->registry, "bionts")
             {
                 // constructor.
-                this->shader         = species_struct.shader;
-                this->vertices       = species_struct.vertices;
-                this->uvs            = species_struct.uvs;
-                this->normals        = species_struct.normals;
+                this->shader         = model_struct.shader;
+                this->vertices       = model_struct.vertices;
+                this->uvs            = model_struct.uvs;
+                this->normals        = model_struct.normals;
 
                 this->type_string = "yli::ontology::SymbiontSpecies*";
 

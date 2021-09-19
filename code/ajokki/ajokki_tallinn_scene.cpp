@@ -24,7 +24,7 @@
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
-#include "code/ylikuutio/ontology/species_struct.hpp"
+#include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 
@@ -110,20 +110,20 @@ namespace ajokki
         tallinn_grass_material->set_global_name("tallinn_grass_material");
 
         // Create the species, store it in `terrain_species`.
-        yli::ontology::SpeciesStruct tallinn_terrain_species_struct;
-        tallinn_terrain_species_struct.scene = tallinn_scene;
-        tallinn_terrain_species_struct.shader = tallinn_shader;
-        tallinn_terrain_species_struct.material = tallinn_grass_material;
-        tallinn_terrain_species_struct.model_file_format = "SRTM";
-        tallinn_terrain_species_struct.light_position = glm::vec3(0, 100000, 0);
-        tallinn_terrain_species_struct.latitude = 59.437222f;  // in degrees.
-        tallinn_terrain_species_struct.longitude = 24.745278f; // in degrees.
-        tallinn_terrain_species_struct.is_terrain = true;
-        tallinn_terrain_species_struct.x_step = 1;
-        tallinn_terrain_species_struct.z_step = 1;
+        yli::ontology::ModelStruct tallinn_terrain_model_struct;
+        tallinn_terrain_model_struct.scene = tallinn_scene;
+        tallinn_terrain_model_struct.shader = tallinn_shader;
+        tallinn_terrain_model_struct.material = tallinn_grass_material;
+        tallinn_terrain_model_struct.model_file_format = "SRTM";
+        tallinn_terrain_model_struct.light_position = glm::vec3(0, 100000, 0);
+        tallinn_terrain_model_struct.latitude = 59.437222f;  // in degrees.
+        tallinn_terrain_model_struct.longitude = 24.745278f; // in degrees.
+        tallinn_terrain_model_struct.is_terrain = true;
+        tallinn_terrain_model_struct.x_step = 1;
+        tallinn_terrain_model_struct.z_step = 1;
 
         std::cout << "Creating yli::ontology::Entity* tallinn_terrain_species_entity ...\n";
-        yli::ontology::Entity* const tallinn_terrain_species_entity = entity_factory->create_species(tallinn_terrain_species_struct);
+        yli::ontology::Entity* const tallinn_terrain_species_entity = entity_factory->create_species(tallinn_terrain_model_struct);
         std::cout << "Creating yli::ontology::Species* tallinn_terrain_species ...\n";
         yli::ontology::Species* const tallinn_terrain_species = dynamic_cast<yli::ontology::Species*>(tallinn_terrain_species_entity);
 

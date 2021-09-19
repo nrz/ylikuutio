@@ -31,7 +31,7 @@ namespace yli::ontology
     struct SceneStruct;
     struct ShaderStruct;
     struct MaterialStruct;
-    struct SpeciesStruct;
+    struct ModelStruct;
     struct ObjectStruct;
     struct SymbiosisStruct;
     struct HolobiontStruct;
@@ -64,7 +64,7 @@ namespace yli::ontology
             yli::ontology::Entity* create_scene(const yli::ontology::SceneStruct& scene_struct) const;
             yli::ontology::Entity* create_shader(const yli::ontology::ShaderStruct& shader_struct) const;
             yli::ontology::Entity* create_material(const yli::ontology::MaterialStruct& material_struct) const;
-            yli::ontology::Entity* create_species(const yli::ontology::SpeciesStruct& species_struct) const;
+            yli::ontology::Entity* create_species(const yli::ontology::ModelStruct& model_struct) const;
             yli::ontology::Entity* create_object(const yli::ontology::ObjectStruct& object_struct) const;
             yli::ontology::Entity* create_symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const;
             yli::ontology::Entity* create_holobiont(const yli::ontology::HolobiontStruct& object_struct) const;
