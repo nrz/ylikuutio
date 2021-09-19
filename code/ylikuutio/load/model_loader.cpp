@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "model_loader.hpp"
-#include "species_loader_struct.hpp"
+#include "model_loader_struct.hpp"
 #include "obj_loader.hpp"
 #include "fbx_model_loader.hpp"
 #include "ascii_grid_heightmap_loader.hpp"
