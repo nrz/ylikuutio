@@ -143,11 +143,6 @@ namespace yli::ontology
         this->postrender();
     }
 
-    yli::ontology::Scene* Material::get_scene() const
-    {
-        return static_cast<yli::ontology::Scene*>(this->get_parent());
-    }
-
     yli::ontology::Entity* Material::get_parent() const
     {
         return this->child_of_scene.get_parent();
@@ -156,6 +151,11 @@ namespace yli::ontology
     yli::ontology::Shader* Material::get_shader() const
     {
         return static_cast<yli::ontology::Shader*>(this->apprentice_of_shader.get_master());
+    }
+
+    yli::ontology::Scene* Material::get_scene() const
+    {
+        return static_cast<yli::ontology::Scene*>(this->get_parent());
     }
 
     std::size_t Material::get_number_of_children() const

@@ -26,6 +26,8 @@
 
 namespace yli::ontology
 {
+    class Scene;
+
     ShapeshifterSequence::~ShapeshifterSequence()
     {
         // destructor.
@@ -47,6 +49,18 @@ namespace yli::ontology
     yli::ontology::Entity* ShapeshifterSequence::get_parent() const
     {
         return this->child_of_shapeshifter_transformation.get_parent();
+    }
+
+    yli::ontology::Scene* ShapeshifterSequence::get_scene() const
+    {
+        yli::ontology::Entity* parent = this->get_parent();
+
+        if (parent != nullptr)
+        {
+            return parent->get_scene();
+        }
+
+        return nullptr;
     }
 
     std::size_t ShapeshifterSequence::get_number_of_children() const

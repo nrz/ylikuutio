@@ -31,12 +31,14 @@
 namespace yli::ontology
 {
     class Movable;
+    class Scene;
 
     class RigidBodyModule
     {
         public:
             RigidBodyModule(
                     const yli::ontology::RigidBodyModuleStruct& rigid_body_module_struct,
+                    yli::ontology::Scene* const scene,
                     yli::ontology::Movable* const movable)
                 : movable { movable },
                 mass { rigid_body_module_struct.mass }
@@ -67,7 +69,7 @@ namespace yli::ontology
 
                 this->bullet_rigid_body = std::make_unique<btRigidBody>(rigid_body_info);
 
-                this->add_rigid_body_module_to_scene();
+                this->add_rigid_body_module_to_scene(scene);
             }
 
             RigidBodyModule(const RigidBodyModule&) = delete;            // Delete copy constructor.
@@ -76,7 +78,7 @@ namespace yli::ontology
             // destructor.
             ~RigidBodyModule();
 
-            void add_rigid_body_module_to_scene() const;
+            void add_rigid_body_module_to_scene(yli::ontology::Scene* const scene) const;
 
             btRigidBody* get_bullet_rigid_body() const;
 

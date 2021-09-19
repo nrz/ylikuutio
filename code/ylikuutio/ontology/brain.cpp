@@ -17,6 +17,7 @@
 
 #include "brain.hpp"
 #include "generic_master_module.hpp"
+#include "scene.hpp"
 #include "movable.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -52,6 +53,11 @@ namespace yli::ontology
     std::size_t Brain::get_number_of_descendants() const
     {
         return 0; // `Brain` has no children. `Movable`s controlled by `Brain` are not its children.
+    }
+
+    yli::ontology::Scene* Brain::get_scene() const
+    {
+        return static_cast<yli::ontology::Scene*>(this->get_parent());
     }
 
     std::size_t Brain::get_number_of_apprentices() const

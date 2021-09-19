@@ -39,6 +39,8 @@
 
 namespace yli::ontology
 {
+    class Scene;
+
     void Console::bind_to_new_font_2d(yli::ontology::Font2D* const new_font_2d)
     {
         // Unbind from the current `Font2D` if there is such.
@@ -306,6 +308,12 @@ namespace yli::ontology
     yli::ontology::Entity* Console::get_parent() const
     {
         return this->child_of_universe.get_parent();
+    }
+
+    yli::ontology::Scene* Console::get_scene() const
+    {
+        // `Console` does not belong in any `Scene`.
+        return nullptr;
     }
 
     std::size_t Console::get_number_of_children() const

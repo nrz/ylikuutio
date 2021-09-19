@@ -39,6 +39,7 @@ namespace yli::ontology
 {
     class Universe;
     class ParentModule;
+    class Scene;
     class Console;
 
     class GenericLispFunctionOverload: public yli::ontology::Entity
@@ -69,6 +70,7 @@ namespace yli::ontology
             yli::ontology::ChildModule child_of_lisp_function;
 
         private:
+            yli::ontology::Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
     };

@@ -706,6 +706,12 @@ namespace yli::ontology
         return nullptr;
     }
 
+    yli::ontology::Scene* Universe::get_scene() const
+    {
+        // `Universe` does not belong in any `Scene`.
+        return nullptr;
+    }
+
     std::size_t Universe::get_number_of_children() const
     {
         return this->parent_of_ecosystems.get_number_of_children() +

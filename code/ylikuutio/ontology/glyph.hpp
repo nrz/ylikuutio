@@ -21,7 +21,7 @@
 #include "model.hpp"
 #include "child_module.hpp"
 #include "universe.hpp"
-#include "glyph_struct.hpp"
+#include "model_struct.hpp"
 #include "gl_attrib_locations.hpp"
 #include "code/ylikuutio/triangulation/polygon_triangulation.hpp"
 #include "code/ylikuutio/triangulation/triangulate_polygons_struct.hpp"
@@ -33,6 +33,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -40,6 +41,7 @@
 namespace yli::ontology
 {
     class Entity;
+    class Scene;
     class VectorFont;
     class Object;
     class ParentModule;
@@ -58,12 +60,12 @@ namespace yli::ontology
             friend class yli::ontology::VectorFont;
 
         private:
-            Glyph(const yli::ontology::GlyphStruct& glyph_struct, yli::ontology::ParentModule* const vector_font_parent_module)
-                : Model(glyph_struct.universe, glyph_struct, glyph_struct.opengl_in_use),
+            Glyph(const yli::ontology::ModelStruct& model_struct, yli::ontology::ParentModule* const vector_font_parent_module)
+                : Model(model_struct.universe, model_struct, model_struct.opengl_in_use),
                 child_of_vector_font(vector_font_parent_module, this),
-                glyph_vertex_data    { glyph_struct.glyph_vertex_data },
-                glyph_name_pointer   { glyph_struct.glyph_name_pointer },
-                unicode_char_pointer { glyph_struct.unicode_char_pointer }
+                glyph_vertex_data    { model_struct.glyph_vertex_data },
+                glyph_name_pointer   { model_struct.glyph_name_pointer },
+                unicode_char_pointer { model_struct.unicode_char_pointer }
             {
                 // constructor.
 
@@ -82,15 +84,11 @@ namespace yli::ontology
                 }
                 const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
 
-                if (!is_headless && glyph_struct.shader != nullptr)
+                if (!is_headless && model_struct.shader != nullptr)
                 {
                     // Get a handle for our buffers.
-                    yli::ontology::set_gl_attrib_locations(glyph_struct.shader, this);
+                    yli::ontology::set_gl_attrib_locations(model_struct.shader, this);
                 }
-
-                // TODO: triangulate the vertex data!
-
-                // TODO: load the vertex data the same way as in `yli::ontology::Species::Species(yli::ontology::SpeciesStruct species_struct)`!
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Glyph*";
@@ -98,6 +96,10 @@ namespace yli::ontology
 
             Glyph(const Glyph&) = delete;            // Delete copy constructor.
             Glyph& operator=(const Glyph&) = delete; // Delete copy assignment.
+
+            yli::ontology::Scene* get_scene() const override;
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
 
         public:
             // this method renders all `Object`s of this `Glyph`.

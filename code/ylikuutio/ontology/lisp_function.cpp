@@ -27,6 +27,8 @@
 
 namespace yli::ontology
 {
+    class Scene;
+
     LispFunction::~LispFunction()
     {
         // destructor.
@@ -35,6 +37,12 @@ namespace yli::ontology
     yli::ontology::Entity* LispFunction::get_parent() const
     {
         return this->child_of_console.get_parent();
+    }
+
+    yli::ontology::Scene* LispFunction::get_scene() const
+    {
+        // `LispFunction` does not belong in any `Scene`.
+        return nullptr;
     }
 
     std::size_t LispFunction::get_number_of_children() const

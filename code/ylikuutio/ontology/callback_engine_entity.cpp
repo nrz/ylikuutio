@@ -26,6 +26,7 @@
 namespace yli::ontology
 {
     class Entity;
+    class Scene;
 
     // destructor.
     CallbackEngineEntity::~CallbackEngineEntity()
@@ -39,6 +40,12 @@ namespace yli::ontology
         // Every `CallbackEngineEntity` is a child of the `Universe`.
         // The base class needs to be specified due to ambiguity caused by diamond inheritance.
         return static_cast<yli::ontology::Entity*>(this->yli::ontology::Entity::universe);
+    }
+
+    yli::ontology::Scene* CallbackEngineEntity::get_scene() const
+    {
+        // `CallbackEngineEntity` does not belong in any `Scene`.
+        return nullptr;
     }
 
     std::size_t CallbackEngineEntity::get_number_of_children() const

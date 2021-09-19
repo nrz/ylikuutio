@@ -101,7 +101,7 @@ namespace yli::ontology
 
                 // create the default `Camera`.
                 yli::ontology::CameraStruct camera_struct = scene_struct.default_camera_struct;
-                camera_struct.parent = this;
+                camera_struct.scene = this;
                 new yli::ontology::Camera(this->universe, camera_struct, &this->parent_of_default_camera, nullptr); // create the default camera.
 
                 // Bullet variables.
@@ -158,7 +158,7 @@ namespace yli::ontology
             float get_gravity() const;
             void set_gravity(const float gravity);
 
-            void add_rigid_body_module(const yli::ontology::RigidBodyModule& rigid_body_module);
+            void add_rigid_body_module(const yli::ontology::RigidBodyModule& rigid_body_module, yli::ontology::Scene* const scene);
 
             float get_water_level() const;
 
@@ -170,6 +170,8 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_cameras;
             yli::ontology::ParentModule parent_of_brains;
             yli::ontology::ParentModule parent_of_materials;
+
+            yli::ontology::Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;

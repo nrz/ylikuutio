@@ -424,6 +424,7 @@ namespace yli::ontology
             btBroadphaseInterface* get_overlapping_pair_cache() const;
             btSequentialImpulseConstraintSolver* get_solver() const;
 
+            yli::ontology::Scene* get_scene() const override;
             std::size_t get_number_of_ecosystems() const;
             std::size_t get_number_of_scenes() const;
 

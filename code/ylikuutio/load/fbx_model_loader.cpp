@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "fbx_species_loader.hpp"
+#include "fbx_model_loader.hpp"
 #include "code/ylikuutio/file/file_loader.hpp"
 #include <ofbx.h>
 

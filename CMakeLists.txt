@@ -653,8 +653,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/csv_loader.hpp
     code/ylikuutio/load/csv_texture_loader.cpp
     code/ylikuutio/load/csv_texture_loader.hpp
-    code/ylikuutio/load/fbx_species_loader.cpp
-    code/ylikuutio/load/fbx_species_loader.hpp
+    code/ylikuutio/load/fbx_model_loader.cpp
+    code/ylikuutio/load/fbx_model_loader.hpp
     code/ylikuutio/load/fbx_symbiosis_loader.cpp
     code/ylikuutio/load/fbx_symbiosis_loader.hpp
     code/ylikuutio/load/fbx_texture_loader.cpp
@@ -665,6 +665,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/image_file_loader.cpp
     code/ylikuutio/load/image_file_loader.hpp
     code/ylikuutio/load/image_loader_struct.hpp
+    code/ylikuutio/load/model_loader.cpp
+    code/ylikuutio/load/model_loader.hpp
+    code/ylikuutio/load/model_loader_struct.hpp
     code/ylikuutio/load/obj_loader.cpp
     code/ylikuutio/load/obj_loader.hpp
     code/ylikuutio/load/png_heightmap_loader.cpp
@@ -673,9 +676,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/png_loader.hpp
     code/ylikuutio/load/shader_loader.cpp
     code/ylikuutio/load/shader_loader.hpp
-    code/ylikuutio/load/species_loader.cpp
-    code/ylikuutio/load/species_loader.hpp
-    code/ylikuutio/load/species_loader_struct.hpp
     code/ylikuutio/load/srtm_heightmap_loader.cpp
     code/ylikuutio/load/srtm_heightmap_loader.hpp
     code/ylikuutio/load/symbiosis_loader.cpp
@@ -752,7 +752,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/glyph.hpp
     code/ylikuutio/ontology/glyph_object_creation.cpp
     code/ylikuutio/ontology/glyph_object_creation.hpp
-    code/ylikuutio/ontology/glyph_struct.hpp
     code/ylikuutio/ontology/holobiont.cpp
     code/ylikuutio/ontology/holobiont.hpp
     code/ylikuutio/ontology/holobiont_struct.hpp
@@ -812,7 +811,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/shapeshifter_transformation.hpp
     code/ylikuutio/ontology/species.cpp
     code/ylikuutio/ontology/species.hpp
-    code/ylikuutio/ontology/species_struct.hpp
     code/ylikuutio/ontology/symbiont_material.cpp
     code/ylikuutio/ontology/symbiont_material.hpp
     code/ylikuutio/ontology/symbiont_species.cpp
@@ -1152,8 +1150,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/load/ascii_grid_heightmap_loader.cpp
         code/ylikuutio/load/ascii_grid_heightmap_loader.hpp
         code/ylikuutio/load/csv_loader.hpp
-        code/ylikuutio/load/fbx_species_loader.cpp
-        code/ylikuutio/load/fbx_species_loader.hpp
+        code/ylikuutio/load/fbx_model_loader.cpp
+        code/ylikuutio/load/fbx_model_loader.hpp
         code/ylikuutio/load/font_loader.cpp
         code/ylikuutio/load/font_loader.hpp
         code/ylikuutio/load/heightmap_loader_struct.hpp
@@ -1184,13 +1182,13 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/font_2d.cpp
         code/ylikuutio/ontology/font_2d.hpp
         code/ylikuutio/ontology/font_struct.hpp
-        code/ylikuutio/ontology/glyph_struct.hpp
         code/ylikuutio/ontology/holobiont.cpp
         code/ylikuutio/ontology/holobiont.hpp
         code/ylikuutio/ontology/holobiont_struct.hpp
         code/ylikuutio/ontology/material.cpp
         code/ylikuutio/ontology/material.hpp
         code/ylikuutio/ontology/material_struct.hpp
+        code/ylikuutio/ontology/model_struct.hpp
         code/ylikuutio/ontology/object.cpp
         code/ylikuutio/ontology/object.hpp
         code/ylikuutio/ontology/object_struct.hpp
@@ -1216,7 +1214,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/shapeshifter_transformation.hpp
         code/ylikuutio/ontology/species.cpp
         code/ylikuutio/ontology/species.hpp
-        code/ylikuutio/ontology/species_struct.hpp
         code/ylikuutio/ontology/symbiosis.cpp
         code/ylikuutio/ontology/symbiosis.hpp
         code/ylikuutio/ontology/symbiosis_struct.hpp
@@ -1264,7 +1261,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_fbx_loader.cpp
         code/ylikuutio/tests/googletest/test_file_loader.cpp
         code/ylikuutio/tests/googletest/test_font_loader.cpp
-        code/ylikuutio/tests/googletest/test_glyph_struct.cpp
         code/ylikuutio/tests/googletest/test_graph.cpp
         code/ylikuutio/tests/googletest/test_indexing.cpp
         code/ylikuutio/tests/googletest/test_line_2d.cpp
@@ -1272,6 +1268,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
         code/ylikuutio/tests/googletest/test_linear_algebra.cpp
         code/ylikuutio/tests/googletest/test_material_struct.cpp
+        code/ylikuutio/tests/googletest/test_model_struct.cpp
         code/ylikuutio/tests/googletest/test_node_struct.cpp
         code/ylikuutio/tests/googletest/test_obj_loader.cpp
         code/ylikuutio/tests/googletest/test_object_struct.cpp
@@ -1283,7 +1280,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_registry.cpp
         code/ylikuutio/tests/googletest/test_variable.cpp
         code/ylikuutio/tests/googletest/test_shader_struct.cpp
-        code/ylikuutio/tests/googletest/test_species_struct.cpp
         code/ylikuutio/tests/googletest/test_triangulation.cpp
         code/ylikuutio/tests/googletest/test_universe_callbacks.cpp
         code/ylikuutio/tests/googletest/test_variable_struct.cpp

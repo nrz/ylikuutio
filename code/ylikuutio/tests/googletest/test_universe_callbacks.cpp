@@ -31,7 +31,7 @@
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
-#include "code/ylikuutio/ontology/species_struct.hpp"
+#include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/camera_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
@@ -72,7 +72,7 @@ TEST(object_must_be_bound_to_species_appropriately, universe_callback)
 
     const std::string species1_name = "foo";
 
-    yli::ontology::SpeciesStruct species1_struct;
+    yli::ontology::ModelStruct species1_struct;
     species1_struct.scene = scene;
     species1_struct.shader = shader;
     species1_struct.material = material;
@@ -87,7 +87,7 @@ TEST(object_must_be_bound_to_species_appropriately, universe_callback)
 
     const std::string species2_name = "baz";
 
-    yli::ontology::SpeciesStruct species2_struct;
+    yli::ontology::ModelStruct species2_struct;
     species2_struct.scene = scene;
     species2_struct.shader = shader;
     species2_struct.material = material;

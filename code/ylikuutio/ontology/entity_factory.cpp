@@ -44,7 +44,7 @@
 #include "scene_struct.hpp"
 #include "shader_struct.hpp"
 #include "material_struct.hpp"
-#include "species_struct.hpp"
+#include "model_struct.hpp"
 #include "object_struct.hpp"
 #include "symbiosis_struct.hpp"
 #include "holobiont_struct.hpp"
@@ -60,6 +60,7 @@
 #include "code/ylikuutio/data/any_struct.hpp"
 
 // Include standard headers
+#include <iostream>  // std::cout, std::cin, std::cerr
 #include <memory>    // std::make_shared, std::shared_ptr
 #include <string>    // std::string
 #include <variant>   // std::holds_alternative, std::variant
@@ -100,6 +101,12 @@ namespace yli::ontology
                 // Only `local_name` given, OK.
                 variable_entity->set_local_name(variable_struct.local_name);
             }
+            else if (!variable_struct.global_name.empty() && !variable_struct.local_name.empty())
+            {
+                std::cerr << "ERROR: `EntityFactory::create_variable`: both global and local names given for a `Variable`\n";
+                std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
+                std::cerr << "are the same and only 1 of them can be given. No name given to this `Variable`!\n";
+            }
         }
         else
         {
@@ -134,6 +141,12 @@ namespace yli::ontology
             // Only `local_name` given, OK.
             ecosystem_entity->set_local_name(ecosystem_struct.local_name);
         }
+        else if (!ecosystem_struct.global_name.empty() && !ecosystem_struct.local_name.empty())
+        {
+            std::cerr << "ERROR: `EntityFactory::create_ecosystem`: both global and local names given for a `Ecosystem`\n";
+            std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
+            std::cerr << "are the same and only 1 of them can be given. No name given to this `Ecosystem`!\n";
+        }
 
         return ecosystem_entity;
     }
@@ -154,6 +167,12 @@ namespace yli::ontology
         {
             // Only `local_name` given, OK.
             scene_entity->set_local_name(scene_struct.local_name);
+        }
+        else if (!scene_struct.global_name.empty() && !scene_struct.local_name.empty())
+        {
+            std::cerr << "ERROR: `EntityFactory::create_scene`: both global and local names given for a `Scene`\n";
+            std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
+            std::cerr << "are the same and only 1 of them can be given. No name given to this `Scene`!\n";
         }
 
         return scene_entity;
@@ -182,15 +201,15 @@ namespace yli::ontology
         return material_entity;
     }
 
-    yli::ontology::Entity* EntityFactory::create_species(const yli::ontology::SpeciesStruct& species_struct) const
+    yli::ontology::Entity* EntityFactory::create_species(const yli::ontology::ModelStruct& model_struct) const
     {
         yli::ontology::Entity* species_entity = new yli::ontology::Species(
                 this->universe,
-                species_struct,
-                (species_struct.material == nullptr ? nullptr : &species_struct.material->parent_of_species));
+                model_struct,
+                (model_struct.material == nullptr ? nullptr : &model_struct.material->parent_of_species));
 
-        species_entity->set_global_name(species_struct.global_name);
-        species_entity->set_local_name(species_struct.local_name);
+        species_entity->set_global_name(model_struct.global_name);
+        species_entity->set_local_name(model_struct.local_name);
         return species_entity;
     }
 
@@ -288,6 +307,12 @@ namespace yli::ontology
             // Only `local_name` given, OK.
             font2d_entity->set_local_name(font_struct.local_name);
         }
+        else if (!font_struct.global_name.empty() && !font_struct.local_name.empty())
+        {
+            std::cerr << "ERROR: `EntityFactory::create_font2d`: both global and local names given for a `Font2D`\n";
+            std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
+            std::cerr << "are the same and only 1 of them can be given. No name given to this `Font2D`!\n";
+        }
 
         return font2d_entity;
     }
@@ -310,6 +335,12 @@ namespace yli::ontology
             // Only `local_name` given, OK.
             console_entity->set_local_name(console_struct.local_name);
         }
+        else if (!console_struct.global_name.empty() && !console_struct.local_name.empty())
+        {
+            std::cerr << "ERROR: `EntityFactory::create_console`: both global and local names given for a `Console`\n";
+            std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
+            std::cerr << "are the same and only 1 of them can be given. No name given to this `Console`!\n";
+        }
 
         return console_entity;
     }
@@ -331,7 +362,7 @@ namespace yli::ontology
         yli::ontology::Entity* camera_entity = new yli::ontology::Camera(
                 this->universe,
                 camera_struct,
-                (camera_struct.parent == nullptr ? nullptr : &camera_struct.parent->parent_of_cameras),
+                (camera_struct.scene == nullptr ? nullptr : &camera_struct.scene->parent_of_cameras),
                 (camera_struct.brain == nullptr ? nullptr : camera_struct.brain->get_generic_master_module()));
 
         camera_entity->set_global_name(camera_struct.global_name);

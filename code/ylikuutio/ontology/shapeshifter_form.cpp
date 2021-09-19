@@ -24,6 +24,7 @@
 namespace yli::ontology
 {
     class Entity;
+    class Scene;
 
     ShapeshifterForm::~ShapeshifterForm()
     {
@@ -33,6 +34,18 @@ namespace yli::ontology
     yli::ontology::Entity* ShapeshifterForm::get_parent() const
     {
         return this->child_of_shapeshifter_transformation.get_parent();
+    }
+
+    yli::ontology::Scene* ShapeshifterForm::get_scene() const
+    {
+        yli::ontology::Entity* parent = this->get_parent();
+
+        if (parent != nullptr)
+        {
+            return parent->get_scene();
+        }
+
+        return nullptr;
     }
 
     std::size_t ShapeshifterForm::get_number_of_children() const

@@ -38,6 +38,7 @@ namespace yli::ontology
 {
     class Entity;
     class Universe;
+    class Scene;
     class Shader;
     class Species;
     class ShapeshifterSequence;
@@ -115,6 +116,8 @@ namespace yli::ontology
                     std::shared_ptr<std::string> pitch);
 
             // Public callbacks end here.
+
+            yli::ontology::Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;

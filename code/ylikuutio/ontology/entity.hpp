@@ -75,7 +75,13 @@ namespace yli::ontology
             bool get_can_be_erased() const;
 
             yli::ontology::Universe* get_universe() const;
-            virtual yli::ontology::Scene* get_scene() const;
+
+            // Different classes are bound to `Scene` in different ways,
+            // so they need to `override` this to provide the functionality.
+            // Note: not all classes have any relation to a specific `Scene`.
+            // E.g. `Universe` may have many `Scene`s, but is descendant of none.
+            virtual yli::ontology::Scene* get_scene() const = 0;
+
             virtual yli::ontology::EntityFactory* get_entity_factory() const;
 
             virtual yli::ontology::Entity* get_parent() const = 0;

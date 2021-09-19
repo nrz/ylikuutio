@@ -25,6 +25,7 @@
 namespace yli::ontology
 {
     class Entity;
+    class Scene;
 
     GenericLispFunctionOverload::~GenericLispFunctionOverload()
     {
@@ -34,6 +35,18 @@ namespace yli::ontology
     yli::ontology::Entity* GenericLispFunctionOverload::get_parent() const
     {
         return this->child_of_lisp_function.get_parent();
+    }
+
+    yli::ontology::Scene* GenericLispFunctionOverload::get_scene() const
+    {
+        yli::ontology::Entity* const parent = this->get_parent();
+
+        if (parent != nullptr)
+        {
+            return parent->get_scene();
+        }
+
+        return nullptr;
     }
 
     std::size_t GenericLispFunctionOverload::get_number_of_children() const

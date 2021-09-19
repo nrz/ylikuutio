@@ -23,9 +23,9 @@
 #include "universe.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
-#include "species_struct.hpp"
-#include "code/ylikuutio/load/species_loader.hpp"
-#include "code/ylikuutio/load/species_loader_struct.hpp"
+#include "model_struct.hpp"
+#include "code/ylikuutio/load/model_loader.hpp"
+#include "code/ylikuutio/load/model_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_templates.hpp"
 
@@ -37,6 +37,7 @@
 namespace yli::ontology
 {
     class Entity;
+    class Scene;
     class Material;
     class ParentModule;
 
@@ -49,23 +50,23 @@ namespace yli::ontology
 
             Species(
                     yli::ontology::Universe* const universe,
-                    const yli::ontology::SpeciesStruct& species_struct,
+                    const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::ParentModule* const material_parent_module)
-                : Model(universe, species_struct, species_struct.opengl_in_use),
+                : Model(universe, model_struct, model_struct.opengl_in_use),
                 child_of_material(material_parent_module, this),
-                model_filename               { species_struct.model_filename },
-                model_file_format            { species_struct.model_file_format },
-                color_channel                { species_struct.color_channel },
-                triangulation_type           { species_struct.triangulation_type },
-                planet_radius                { species_struct.planet_radius },
-                divisor                      { species_struct.divisor },
-                latitude                     { species_struct.latitude },
-                longitude                    { species_struct.longitude },
-                mesh_i                       { species_struct.mesh_i },
-                x_step                       { species_struct.x_step },
-                z_step                       { species_struct.z_step },
-                is_terrain                   { species_struct.is_terrain },
-                use_real_texture_coordinates { species_struct.use_real_texture_coordinates }
+                model_filename               { model_struct.model_filename },
+                model_file_format            { model_struct.model_file_format },
+                color_channel                { model_struct.color_channel },
+                triangulation_type           { model_struct.triangulation_type },
+                planet_radius                { model_struct.planet_radius },
+                divisor                      { model_struct.divisor },
+                latitude                     { model_struct.latitude },
+                longitude                    { model_struct.longitude },
+                mesh_i                       { model_struct.mesh_i },
+                x_step                       { model_struct.x_step },
+                z_step                       { model_struct.z_step },
+                is_terrain                   { model_struct.is_terrain },
+                use_real_texture_coordinates { model_struct.use_real_texture_coordinates }
             {
                 // constructor.
 
@@ -74,33 +75,33 @@ namespace yli::ontology
                     if (!is_headless && this->opengl_in_use)
                     {
                         // Get a handle for our buffers.
-                        this->vertex_position_modelspace_id = glGetAttribLocation(species_struct.shader->get_program_id(), "vertex_position_modelspace");
-                        this->vertex_uv_id = glGetAttribLocation(species_struct.shader->get_program_id(), "vertexUV");
-                        this->vertex_normal_modelspace_id = glGetAttribLocation(species_struct.shader->get_program_id(), "vertex_normal_modelspace");
+                        this->vertex_position_modelspace_id = glGetAttribLocation(model_struct.shader->get_program_id(), "vertex_position_modelspace");
+                        this->vertex_uv_id = glGetAttribLocation(model_struct.shader->get_program_id(), "vertexUV");
+                        this->vertex_normal_modelspace_id = glGetAttribLocation(model_struct.shader->get_program_id(), "vertex_normal_modelspace");
 
                         // Get a handle for our "LightPosition" uniform.
-                        glUseProgram(species_struct.shader->get_program_id());
-                        this->light_id = glGetUniformLocation(species_struct.shader->get_program_id(), "light_position_worldspace");
+                        glUseProgram(model_struct.shader->get_program_id());
+                        this->light_id = glGetUniformLocation(model_struct.shader->get_program_id(), "light_position_worldspace");
 
                         // water level.
-                        GLint water_level_uniform_location = glGetUniformLocation(species_struct.shader->get_program_id(), "water_level");
-                        glUniform1f(water_level_uniform_location, species_struct.scene->get_water_level());
+                        GLint water_level_uniform_location = glGetUniformLocation(model_struct.shader->get_program_id(), "water_level");
+                        glUniform1f(water_level_uniform_location, model_struct.scene->get_water_level());
                     }
 
                     yli::load::SpeciesLoaderStruct species_loader_struct;
-                    species_loader_struct.species_struct.model_filename               = this->model_filename;
-                    species_loader_struct.species_struct.model_file_format            = this->model_file_format;
-                    species_loader_struct.species_struct.color_channel                = this->color_channel;
-                    species_loader_struct.species_struct.triangulation_type           = this->triangulation_type;
-                    species_loader_struct.species_struct.planet_radius                = this->planet_radius;
-                    species_loader_struct.species_struct.divisor                      = this->divisor;
-                    species_loader_struct.species_struct.latitude                     = this->latitude;
-                    species_loader_struct.species_struct.longitude                    = this->longitude;
-                    species_loader_struct.species_struct.mesh_i                       = this->mesh_i;
-                    species_loader_struct.species_struct.x_step                       = this->x_step;
-                    species_loader_struct.species_struct.z_step                       = this->z_step;
-                    species_loader_struct.species_struct.opengl_in_use                = this->opengl_in_use;
-                    species_loader_struct.species_struct.use_real_texture_coordinates = this->use_real_texture_coordinates;
+                    species_loader_struct.model_struct.model_filename               = this->model_filename;
+                    species_loader_struct.model_struct.model_file_format            = this->model_file_format;
+                    species_loader_struct.model_struct.color_channel                = this->color_channel;
+                    species_loader_struct.model_struct.triangulation_type           = this->triangulation_type;
+                    species_loader_struct.model_struct.planet_radius                = this->planet_radius;
+                    species_loader_struct.model_struct.divisor                      = this->divisor;
+                    species_loader_struct.model_struct.latitude                     = this->latitude;
+                    species_loader_struct.model_struct.longitude                    = this->longitude;
+                    species_loader_struct.model_struct.mesh_i                       = this->mesh_i;
+                    species_loader_struct.model_struct.x_step                       = this->x_step;
+                    species_loader_struct.model_struct.z_step                       = this->z_step;
+                    species_loader_struct.model_struct.opengl_in_use                = this->opengl_in_use;
+                    species_loader_struct.model_struct.use_real_texture_coordinates = this->use_real_texture_coordinates;
                     species_loader_struct.image_width_pointer                         = &this->image_width;
                     species_loader_struct.image_height_pointer                        = &this->image_height;
                     species_loader_struct.is_headless                                 = is_headless;
@@ -150,6 +151,12 @@ namespace yli::ontology
 
             template<class T1, class T2>
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
+
+            yli::ontology::Scene* get_scene() const override;
+
+        private:
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
 
         private:
             yli::ontology::ChildModule child_of_material;

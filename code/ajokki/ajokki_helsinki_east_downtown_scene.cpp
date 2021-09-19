@@ -36,7 +36,7 @@
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
-#include "code/ylikuutio/ontology/species_struct.hpp"
+#include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/symbiosis_struct.hpp"
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
@@ -72,7 +72,6 @@ namespace ajokki
         std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_scene_entity ...\n";
         yli::ontology::SceneStruct scene_struct;
         scene_struct.global_name = "helsinki_east_downtown_scene";
-        scene_struct.local_name = "helsinki";
         scene_struct.water_level = 0.9f;
         yli::ontology::Entity* const helsinki_east_downtown_scene_entity = entity_factory->create_scene(scene_struct);
         std::cout << "Creating yli::ontology::Scene* helsinki_east_downtown_scene ...\n";
@@ -485,18 +484,18 @@ namespace ajokki
 
         orange_fur_material->set_global_name("helsinki_east_downtown_orange_fur_material");
 
-        yli::ontology::SpeciesStruct helsinki_east_downtown_terrain_species_struct;
-        helsinki_east_downtown_terrain_species_struct.scene = helsinki_east_downtown_scene;
-        helsinki_east_downtown_terrain_species_struct.shader = helsinki_east_downtown_shader;
-        helsinki_east_downtown_terrain_species_struct.material = helsinki_east_downtown_grass_material;
-        helsinki_east_downtown_terrain_species_struct.model_file_format = "ASCII_grid";
-        helsinki_east_downtown_terrain_species_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
-        helsinki_east_downtown_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
-        helsinki_east_downtown_terrain_species_struct.is_terrain = true;
-        helsinki_east_downtown_terrain_species_struct.x_step = 4;
-        helsinki_east_downtown_terrain_species_struct.z_step = 4;
+        yli::ontology::ModelStruct helsinki_east_downtown_terrain_model_struct;
+        helsinki_east_downtown_terrain_model_struct.scene = helsinki_east_downtown_scene;
+        helsinki_east_downtown_terrain_model_struct.shader = helsinki_east_downtown_shader;
+        helsinki_east_downtown_terrain_model_struct.material = helsinki_east_downtown_grass_material;
+        helsinki_east_downtown_terrain_model_struct.model_file_format = "ASCII_grid";
+        helsinki_east_downtown_terrain_model_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
+        helsinki_east_downtown_terrain_model_struct.light_position = glm::vec3(0, 100000, 100000);
+        helsinki_east_downtown_terrain_model_struct.is_terrain = true;
+        helsinki_east_downtown_terrain_model_struct.x_step = 4;
+        helsinki_east_downtown_terrain_model_struct.z_step = 4;
         std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_terrain_species_entity ...\n";
-        yli::ontology::Entity* const helsinki_east_downtown_terrain_species_entity = entity_factory->create_species(helsinki_east_downtown_terrain_species_struct);
+        yli::ontology::Entity* const helsinki_east_downtown_terrain_species_entity = entity_factory->create_species(helsinki_east_downtown_terrain_model_struct);
         std::cout << "Creating yli::ontology::Species* helsinki_east_downtown_terrain_species ...\n";
         yli::ontology::Species* const helsinki_east_downtown_terrain_species = dynamic_cast<yli::ontology::Species*>(helsinki_east_downtown_terrain_species_entity);
 
@@ -510,19 +509,20 @@ namespace ajokki
 
         // Create Helsinki eastern downtown terrain.
         yli::ontology::ObjectStruct helsinki_east_downtown_struct(helsinki_east_downtown_terrain_species);
+        helsinki_east_downtown_struct.scene = helsinki_east_downtown_scene;
         helsinki_east_downtown_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_object(helsinki_east_downtown_struct);
 
-        yli::ontology::SpeciesStruct suzanne_species_struct;
-        suzanne_species_struct.scene = helsinki_east_downtown_scene;
-        suzanne_species_struct.shader = helsinki_east_downtown_shader;
-        suzanne_species_struct.material = orange_fur_material;
-        suzanne_species_struct.model_file_format = "obj";
-        suzanne_species_struct.model_filename = "suzanne.obj";
-        suzanne_species_struct.light_position = glm::vec3(0, 100000, 100000);
+        yli::ontology::ModelStruct suzanne_model_struct;
+        suzanne_model_struct.scene = helsinki_east_downtown_scene;
+        suzanne_model_struct.shader = helsinki_east_downtown_shader;
+        suzanne_model_struct.material = orange_fur_material;
+        suzanne_model_struct.model_file_format = "obj";
+        suzanne_model_struct.model_filename = "suzanne.obj";
+        suzanne_model_struct.light_position = glm::vec3(0, 100000, 100000);
 
         std::cout << "Creating yli::ontology::Entity* suzanne_species_entity ...\n";
-        yli::ontology::Entity* const suzanne_species_entity = entity_factory->create_species(suzanne_species_struct);
+        yli::ontology::Entity* const suzanne_species_entity = entity_factory->create_species(suzanne_model_struct);
         std::cout << "Creating yli::ontology::Species* suzanne_species ...\n";
         yli::ontology::Species* const suzanne_species = dynamic_cast<yli::ontology::Species*>(suzanne_species_entity);
 
@@ -536,6 +536,7 @@ namespace ajokki
 
         // Create suzanne1, store it in `suzanne1`.
         yli::ontology::ObjectStruct suzanne_object_struct1(suzanne_species);
+        suzanne_object_struct1.scene = helsinki_east_downtown_scene;
         suzanne_object_struct1.cartesian_coordinates = glm::vec3(82.50f, 119.00f, 95.50f);
         std::cout << "Creating yli::ontology::Entity* suzanne1_entity ...\n";
         yli::ontology::Entity* const suzanne1_entity = entity_factory->create_object(suzanne_object_struct1);
@@ -552,6 +553,7 @@ namespace ajokki
 
         suzanne_species->set_global_name("suzanne_species");
         yli::ontology::ObjectStruct suzanne_object_struct2(suzanne_species);
+        suzanne_object_struct2.scene = helsinki_east_downtown_scene;
         suzanne_object_struct2.cartesian_coordinates = glm::vec3(112.90f, 113.90f, 75.50f);
         std::cout << "Creating yli::ontology::Entity* suzanne2_entity ...\n";
         yli::ontology::Entity* const suzanne2_entity = entity_factory->create_object(suzanne_object_struct2);
@@ -567,6 +569,7 @@ namespace ajokki
         suzanne2->set_global_name("suzanne2");
 
         yli::ontology::ObjectStruct suzanne_object_struct3(suzanne_species);
+        suzanne_object_struct3.scene = helsinki_east_downtown_scene;
         suzanne_object_struct3.cartesian_coordinates = glm::vec3(126.90f, 162.90f, 103.00f);
         std::cout << "Creating yli::ontology::Entity* suzanne3_entity ...\n";
         yli::ontology::Entity* const suzanne3_entity = entity_factory->create_object(suzanne_object_struct3);
@@ -582,6 +585,7 @@ namespace ajokki
         suzanne3->set_global_name("suzanne3");
 
         yli::ontology::ObjectStruct suzanne_object_struct4(suzanne_species);
+        suzanne_object_struct4.scene = helsinki_east_downtown_scene;
         suzanne_object_struct4.cartesian_coordinates = glm::vec3(96.00f, 130.00f, 109.00f);
         std::cout << "Creating yli::ontology::Entity* suzanne4_entity ...\n";
         yli::ontology::Entity* const suzanne4_entity = entity_factory->create_object(suzanne_object_struct4);
@@ -597,6 +601,7 @@ namespace ajokki
         suzanne4->set_global_name("suzanne4");
 
         yli::ontology::ObjectStruct suzanne_object_struct5(suzanne_species);
+        suzanne_object_struct5.scene = helsinki_east_downtown_scene;
         suzanne_object_struct5.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
         suzanne_object_struct5.cartesian_coordinates = glm::vec3(103.00f, 140.00f, 109.00f);
         std::cout << "Creating yli::ontology::Entity* suzanne5_entity ...\n";
@@ -612,18 +617,18 @@ namespace ajokki
 
         suzanne5->set_global_name("suzanne5");
 
-        yli::ontology::SpeciesStruct cat_species_struct;
-        cat_species_struct.scene = helsinki_east_downtown_scene;
-        cat_species_struct.global_name = "cat_species";
-        cat_species_struct.local_name = "cat";
-        cat_species_struct.shader = helsinki_east_downtown_shader;
-        cat_species_struct.material = orange_fur_material;
-        cat_species_struct.model_file_format = "fbx";
-        cat_species_struct.model_filename = "cat.fbx";
-        cat_species_struct.light_position = glm::vec3(0, 100000, 100000);
+        yli::ontology::ModelStruct cat_model_struct;
+        cat_model_struct.scene = helsinki_east_downtown_scene;
+        cat_model_struct.global_name = "cat_species";
+        cat_model_struct.local_name = "cat";
+        cat_model_struct.shader = helsinki_east_downtown_shader;
+        cat_model_struct.material = orange_fur_material;
+        cat_model_struct.model_file_format = "fbx";
+        cat_model_struct.model_filename = "cat.fbx";
+        cat_model_struct.light_position = glm::vec3(0, 100000, 100000);
 
         std::cout << "Creating yli::ontology::Entity* cat_species_entity ...\n";
-        yli::ontology::Entity* const cat_species_entity = entity_factory->create_species(cat_species_struct);
+        yli::ontology::Entity* const cat_species_entity = entity_factory->create_species(cat_model_struct);
 
         std::cout << "Creating yli::ontology::Species* cat_species ...\n";
         yli::ontology::Species* const cat_species = dynamic_cast<yli::ontology::Species*>(cat_species_entity);
@@ -638,6 +643,7 @@ namespace ajokki
         cat_object_struct1.global_name = "cat1";
         cat_object_struct1.local_name = "kissa1";
         cat_object_struct1.brain = rest_brain;
+        cat_object_struct1.scene = helsinki_east_downtown_scene;
         cat_object_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
         cat_object_struct1.initial_rotate_angles = { PI, -0.5f * PI };
         cat_object_struct1.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
@@ -655,6 +661,7 @@ namespace ajokki
         cat_object_struct2.global_name = "cat2";
         cat_object_struct2.local_name = "kissa2";
         cat_object_struct2.brain = rest_brain;
+        cat_object_struct2.scene = helsinki_east_downtown_scene;
         cat_object_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
         cat_object_struct2.initial_rotate_angles = { PI, -0.5f * PI };
         cat_object_struct2.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
@@ -689,6 +696,7 @@ namespace ajokki
         freight_train_symbiosis->set_global_name("freight_train_symbiosis");
 
         yli::ontology::HolobiontStruct freight_train_holobiont_struct1;
+        freight_train_holobiont_struct1.scene = helsinki_east_downtown_scene;
         freight_train_holobiont_struct1.parent = freight_train_symbiosis;
         freight_train_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
         freight_train_holobiont_struct1.initial_rotate_angles = { PI };
@@ -732,6 +740,7 @@ namespace ajokki
         turbo_polizei_png_symbiosis->set_global_name("turbo_polizei_png_symbiosis");
 
         yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct1;
+        turbo_polizei_png_holobiont_struct1.scene = helsinki_east_downtown_scene;
         turbo_polizei_png_holobiont_struct1.parent = turbo_polizei_png_symbiosis;
         turbo_polizei_png_holobiont_struct1.brain = rest_brain;
         turbo_polizei_png_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
@@ -756,6 +765,7 @@ namespace ajokki
         turbo_polizei_png1->set_global_name("turbo_polizei_png1");
 
         yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct2;
+        turbo_polizei_png_holobiont_struct2.scene = helsinki_east_downtown_scene;
         turbo_polizei_png_holobiont_struct2.parent = turbo_polizei_png_symbiosis;
         turbo_polizei_png_holobiont_struct2.brain = rest_brain;
         turbo_polizei_png_holobiont_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
@@ -796,6 +806,7 @@ namespace ajokki
         }
 
         yli::ontology::Text3DStruct text_3d_struct;
+        text_3d_struct.scene = helsinki_east_downtown_scene;
         text_3d_struct.parent = kongtext_font;
         text_3d_struct.text_string = "Hello world &#x26; its habitants!";
         text_3d_struct.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -803,8 +814,8 @@ namespace ajokki
         entity_factory->create_text3d(text_3d_struct);
 
         yli::ontology::CameraStruct cat_camera_struct;
+        cat_camera_struct.scene = helsinki_east_downtown_scene;
         cat_camera_struct.cartesian_coordinates = glm::vec3(800.00f, 400.00f, 950.00f);
-        cat_camera_struct.parent = helsinki_east_downtown_scene;
         cat_camera_struct.yaw = -0.90f;
         cat_camera_struct.pitch = -1.00f;
 
@@ -822,8 +833,8 @@ namespace ajokki
         cat_camera->set_global_name("cat_camera");
 
         yli::ontology::CameraStruct turbo_polizei_camera_struct;
+        turbo_polizei_camera_struct.scene = helsinki_east_downtown_scene;
         turbo_polizei_camera_struct.cartesian_coordinates = glm::vec3(87.00f, 28.00f, 169.00f);
-        turbo_polizei_camera_struct.parent = helsinki_east_downtown_scene;
         turbo_polizei_camera_struct.yaw = -0.45f;
         turbo_polizei_camera_struct.pitch = -0.05f;
 

@@ -49,7 +49,6 @@
 namespace yli::ontology
 {
     class Registry;
-    class ApprenticeModule;
     class Entity;
 
     template<class M>

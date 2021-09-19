@@ -30,6 +30,7 @@
 namespace yli::ontology
 {
     class Entity;
+    class Scene;
 
     void Variable::bind_to_parent()
     {
@@ -64,6 +65,18 @@ namespace yli::ontology
     yli::ontology::Entity* Variable::get_parent() const
     {
         return this->parent;
+    }
+
+    yli::ontology::Scene* Variable::get_scene() const
+    {
+        yli::ontology::Entity* const parent = this->get_parent();
+
+        if (parent != nullptr)
+        {
+            return parent->get_scene();
+        }
+
+        return nullptr;
     }
 
     std::size_t Variable::get_number_of_children() const

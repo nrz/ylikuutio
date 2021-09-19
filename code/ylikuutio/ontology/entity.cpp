@@ -169,15 +169,6 @@ namespace yli::ontology
         return this->universe;
     }
 
-    yli::ontology::Scene* Entity::get_scene() const
-    {
-        // Different classes are bound to `Scene` in different ways,
-        // so they need to `override` this to provide the functionality.
-        // Note: not all classes have any relation to a specific `Scene`.
-        // E.g. `Universe` may have many `Scene`s, but is descendant of none.
-        return nullptr;
-    }
-
     yli::ontology::EntityFactory* Entity::get_entity_factory() const
     {
         if (this->universe == nullptr)

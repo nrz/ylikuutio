@@ -22,7 +22,7 @@
 #include "parent_module.hpp"
 #include "glyph.hpp"
 #include "material.hpp"
-#include "glyph_struct.hpp"
+#include "model_struct.hpp"
 #include "vector_font_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/load/font_loader.hpp"
@@ -46,6 +46,7 @@
 namespace yli::ontology
 {
     class Universe;
+    class Scene;
     class Material;
 
     class VectorFont: public yli::ontology::Entity
@@ -119,18 +120,18 @@ namespace yli::ontology
                             continue;
                         }
 
-                        yli::ontology::GlyphStruct glyph_struct;
-                        glyph_struct.glyph_vertex_data = &this->glyph_vertex_data.at(glyph_i);
-                        glyph_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
-                        glyph_struct.unicode_char_pointer = unicode_char_pointer;
-                        glyph_struct.universe = universe;
-                        glyph_struct.shader = static_cast<yli::ontology::Shader*>(material->get_parent());
-                        glyph_struct.parent = this;
+                        yli::ontology::ModelStruct model_struct;
+                        model_struct.glyph_vertex_data = &this->glyph_vertex_data.at(glyph_i);
+                        model_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
+                        model_struct.unicode_char_pointer = unicode_char_pointer;
+                        model_struct.universe = universe;
+                        model_struct.shader = static_cast<yli::ontology::Shader*>(material->get_parent());
+                        model_struct.vector_font = this;
 
-                        std::string glyph_name_string = glyph_struct.glyph_name_pointer;
-                        std::string unicode_string = glyph_struct.unicode_char_pointer;
+                        std::string glyph_name_string = model_struct.glyph_name_pointer;
+                        std::string unicode_string = model_struct.unicode_char_pointer;
                         std::cout << "Creating Glyph \"" << glyph_name_string << "\", Unicode: \"" << unicode_string << "\"\n";
-                        yli::ontology::Glyph* glyph = new yli::ontology::Glyph(glyph_struct, &this->parent_of_glyphs);
+                        yli::ontology::Glyph* glyph = new yli::ontology::Glyph(model_struct, &this->parent_of_glyphs);
 
                         // So that each `Glyph` can be referred to,
                         // we need a hash map that points from Unicode string to `Glyph`.
@@ -166,6 +167,10 @@ namespace yli::ontology
         private:
             void bind_to_parent();
 
+        public:
+            yli::ontology::Scene* get_scene() const override;
+
+        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 

@@ -31,6 +31,8 @@
 
 namespace yli::ontology
 {
+    class Scene;
+
     void ShapeshifterTransformation::bind_to_parent()
     {
         // requirements:
@@ -145,6 +147,18 @@ namespace yli::ontology
     yli::ontology::Entity* ShapeshifterTransformation::get_parent() const
     {
         return this->parent;
+    }
+
+    yli::ontology::Scene* ShapeshifterTransformation::get_scene() const
+    {
+        yli::ontology::Entity* parent = this->get_parent();
+
+        if (parent != nullptr)
+        {
+            return parent->get_scene();
+        }
+
+        return nullptr;
     }
 
     std::size_t ShapeshifterTransformation::get_number_of_children() const

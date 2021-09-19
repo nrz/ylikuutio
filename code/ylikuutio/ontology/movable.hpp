@@ -78,7 +78,7 @@ namespace yli::ontology
                 : Entity(universe, movable_struct),
                 child(parent_module, this),
                 apprentice_of_brain(generic_master_module, this),
-                rigid_body_module(movable_struct.rigid_body_module_struct, this),
+                rigid_body_module(movable_struct.rigid_body_module_struct, movable_struct.scene, this),
                 initial_rotate_vectors { movable_struct.initial_rotate_vectors },
                 initial_rotate_angles { movable_struct.initial_rotate_angles },
                 original_scale_vector { movable_struct.original_scale_vector },
