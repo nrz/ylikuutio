@@ -45,6 +45,8 @@
 
 namespace yli::ontology
 {
+    class Scene;
+
     Holobiont::~Holobiont()
     {
         // destructor.
@@ -173,6 +175,18 @@ namespace yli::ontology
                 biont->model_matrix[3][2] = z;
             }
         }
+    }
+
+    yli::ontology::Scene* Holobiont::get_scene() const
+    {
+        yli::ontology::Entity* const parent = this->get_parent();
+
+        if (parent != nullptr)
+        {
+            return parent->get_scene();
+        }
+
+        return nullptr;
     }
 
     std::size_t Holobiont::get_number_of_children() const

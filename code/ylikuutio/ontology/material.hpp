@@ -41,6 +41,8 @@
 
 namespace yli::ontology
 {
+    class Scene;
+
     class Material: public yli::ontology::Entity
     {
         public:
@@ -115,7 +117,6 @@ namespace yli::ontology
             // destructor.
             virtual ~Material();
 
-            yli::ontology::Scene* get_scene() const override;
             yli::ontology::Entity* get_parent() const override;
 
             yli::ontology::Shader* get_shader() const;
@@ -143,6 +144,9 @@ namespace yli::ontology
 
             GLuint texture           { 0 }; // Texture of this `Material`, returned by `load_common_texture` (used for `glGenTextures` etc.). Dummy value.
             GLuint opengl_texture_id { 0 }; // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`. Dummy value.
+
+        public:
+            yli::ontology::Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;

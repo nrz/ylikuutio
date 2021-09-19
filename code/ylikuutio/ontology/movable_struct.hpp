@@ -37,6 +37,7 @@
 namespace yli::ontology
 {
     class Brain;
+    class Scene;
 
     struct MovableStruct: public yli::ontology::EntityStruct
     {
@@ -52,6 +53,7 @@ namespace yli::ontology
                 const float yaw,
                 const float pitch)
             : brain { brain },
+            scene { scene },
             cartesian_coordinates { cartesian_coordinates },
             spherical_coordinates { spherical_coordinates },
             yaw { yaw },
@@ -70,6 +72,7 @@ namespace yli::ontology
                 const std::string& local_name)
             : EntityStruct(global_name, local_name),
             brain { brain },
+            scene { scene },
             cartesian_coordinates { cartesian_coordinates },
             spherical_coordinates { spherical_coordinates },
             yaw { yaw },
@@ -80,6 +83,7 @@ namespace yli::ontology
 
         yli::input::InputMethod input_method { yli::input::InputMethod::AI };
         yli::ontology::Brain* brain { nullptr };
+        yli::ontology::Scene* scene { nullptr };
 
         std::vector<glm::vec3> initial_rotate_vectors;
         std::vector<float> initial_rotate_angles;

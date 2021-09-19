@@ -39,6 +39,8 @@
 
 namespace yli::ontology
 {
+    class Scene;
+
     class Font2D: public yli::ontology::Entity
     {
         public:
@@ -182,6 +184,8 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_text_2ds;
 
             yli::ontology::GenericMasterModule master_of_consoles;
+
+            yli::ontology::Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;

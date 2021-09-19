@@ -52,6 +52,7 @@ namespace yli::ontology
 {
     class Entity;
     class Universe;
+    class Scene;
     class Console;
 
     class Variable: public yli::ontology::Entity 
@@ -82,6 +83,8 @@ namespace yli::ontology
             virtual ~Variable();
 
             yli::ontology::Entity* get_parent() const override;
+
+            yli::ontology::Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 

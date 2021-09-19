@@ -47,6 +47,8 @@
 
 namespace yli::ontology
 {
+    class Scene;
+
     Font2D::~Font2D()
     {
         // destructor.
@@ -66,6 +68,12 @@ namespace yli::ontology
     yli::ontology::Entity* Font2D::get_parent() const
     {
         return this->child_of_universe.get_parent();
+    }
+
+    yli::ontology::Scene* Font2D::get_scene() const
+    {
+        // `Font2D` does not belong in any `Scene`.
+        return nullptr;
     }
 
     std::size_t Font2D::get_number_of_children() const

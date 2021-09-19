@@ -84,4 +84,25 @@ namespace yli::ontology
     {
         return this->light_id;
     }
+    yli::ontology::Scene* SymbiontSpecies::get_scene() const
+    {
+        yli::ontology::Entity* const parent = this->get_parent();
+
+        if (parent != nullptr)
+        {
+            return parent->get_scene();
+        }
+
+        return nullptr;
+    }
+
+    std::size_t SymbiontSpecies::get_number_of_children() const
+    {
+        return 0; // `SymbiontSpecies` has no children.
+    }
+
+    std::size_t SymbiontSpecies::get_number_of_descendants() const
+    {
+        return 0; // `SymbiontSpecies` has no children.
+    }
 }

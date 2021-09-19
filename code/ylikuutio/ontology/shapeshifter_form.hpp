@@ -31,6 +31,7 @@ namespace yli::ontology
 {
     class Entity;
     class Universe;
+    class Scene;
     class ShapeshifterTransformation;
     class ParentModule;
 
@@ -58,6 +59,10 @@ namespace yli::ontology
         private:
             yli::ontology::ChildModule child_of_shapeshifter_transformation;
 
+        public:
+            yli::ontology::Scene* get_scene() const override;
+
+        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 

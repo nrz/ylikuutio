@@ -34,7 +34,7 @@ namespace yli::ontology
         // destructor.
     }
 
-    void RigidBodyModule::add_rigid_body_module_to_scene() const
+    void RigidBodyModule::add_rigid_body_module_to_scene(yli::ontology::Scene* const scene) const
     {
         yli::ontology::Movable* const movable = this->movable;
 
@@ -44,8 +44,6 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Scene* const scene = movable->get_scene();
-
         if (scene == nullptr)
         {
             std::cerr << "ERROR: `RigidBodyModule::add_rigid_body_module_to_scene`: `scene` is `nullptr`!\n";
@@ -53,7 +51,7 @@ namespace yli::ontology
         }
 
         // Add the rigid body to the dynamics world.
-        scene->add_rigid_body_module(*this);
+        scene->add_rigid_body_module(*this, scene);
     }
 
     btRigidBody* RigidBodyModule::get_bullet_rigid_body() const

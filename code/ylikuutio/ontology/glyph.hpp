@@ -33,6 +33,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -40,6 +41,7 @@
 namespace yli::ontology
 {
     class Entity;
+    class Scene;
     class VectorFont;
     class Object;
     class ParentModule;
@@ -98,6 +100,10 @@ namespace yli::ontology
 
             Glyph(const Glyph&) = delete;            // Delete copy constructor.
             Glyph& operator=(const Glyph&) = delete; // Delete copy assignment.
+
+            yli::ontology::Scene* get_scene() const override;
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
 
         public:
             // this method renders all `Object`s of this `Glyph`.

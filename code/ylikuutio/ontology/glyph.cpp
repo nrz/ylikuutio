@@ -16,22 +16,22 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "glyph.hpp"
-#include "entity.hpp"
 #include "universe.hpp"
 #include "object.hpp"
-#include "vector_font.hpp"
-#include "glyph_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/render/render_master.hpp"
 #include "code/ylikuutio/render/render_species_or_glyph.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 
 namespace yli::ontology
 {
+    class Scene;
+
     Glyph::~Glyph()
     {
         // destructor.
@@ -49,6 +49,28 @@ namespace yli::ontology
     yli::ontology::Entity* Glyph::get_parent() const
     {
         return this->child_of_vector_font.get_parent();
+    }
+
+    yli::ontology::Scene* Glyph::get_scene() const
+    {
+        yli::ontology::Entity* const parent = this->get_parent();
+
+        if (parent != nullptr)
+        {
+            return parent->get_scene();
+        }
+
+        return nullptr;
+    }
+
+    std::size_t Glyph::get_number_of_children() const
+    {
+        return 0; // `Glyph` has no children.
+    }
+
+    std::size_t Glyph::get_number_of_descendants() const
+    {
+        return 0; // `Glyph` has no children.
     }
 
     void Glyph::render()

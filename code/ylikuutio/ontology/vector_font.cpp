@@ -34,6 +34,7 @@
 
 namespace yli::ontology
 {
+    class Scene;
     class Text3D;
     class Glyph;
 
@@ -167,6 +168,18 @@ namespace yli::ontology
     yli::ontology::Entity* VectorFont::get_parent() const
     {
         return this->parent;
+    }
+
+    yli::ontology::Scene* VectorFont::get_scene() const
+    {
+        yli::ontology::Material* const parent = this->parent;
+
+        if (parent != nullptr)
+        {
+            return parent->get_scene();
+        }
+
+        return nullptr;
     }
 
     std::size_t VectorFont::get_number_of_children() const

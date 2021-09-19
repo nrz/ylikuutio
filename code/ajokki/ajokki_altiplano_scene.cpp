@@ -137,6 +137,7 @@ namespace ajokki
 
         // Create altiplano terrain.
         yli::ontology::ObjectStruct altiplano_struct(altiplano_terrain_species);
+        altiplano_struct.scene = altiplano_scene;
         altiplano_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_object(altiplano_struct);
 

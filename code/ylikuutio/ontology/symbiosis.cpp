@@ -49,6 +49,7 @@
 namespace yli::ontology
 {
     class Entity;
+    class Scene;
 
     void Symbiosis::bind_to_new_shader_parent(yli::ontology::Shader* const new_parent)
     {
@@ -148,6 +149,11 @@ namespace yli::ontology
         return number_of_symbiont_species;
     }
 
+    yli::ontology::Entity* Symbiosis::get_parent() const
+    {
+        return this->child_of_shader.get_parent();
+    }
+
     yli::ontology::Scene* Symbiosis::get_scene() const
     {
         yli::ontology::Entity* const shader_parent = this->get_parent();
@@ -158,11 +164,6 @@ namespace yli::ontology
         }
 
         return nullptr;
-    }
-
-    yli::ontology::Entity* Symbiosis::get_parent() const
-    {
-        return this->child_of_shader.get_parent();
     }
 
     std::size_t Symbiosis::get_number_of_children() const

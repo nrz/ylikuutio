@@ -80,6 +80,7 @@ namespace yli::callback
 
 namespace yli::ontology
 {
+    class Scene;
     class Shader;
 
     class ComputeTask: public yli::ontology::Entity
@@ -258,6 +259,7 @@ namespace yli::ontology
         private:
             void bind_to_parent();
 
+            yli::ontology::Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 

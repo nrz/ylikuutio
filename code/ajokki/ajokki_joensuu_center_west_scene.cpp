@@ -183,6 +183,7 @@ namespace ajokki
         horse_species->set_global_name("horse_species");
 
         yli::ontology::ObjectStruct horse_object_struct1(horse_species);
+        horse_object_struct1.scene = joensuu_center_west_scene;
         horse_object_struct1.initial_rotate_vectors = { glm::vec3(1.0f, 0.0f, 0.0f) };
         horse_object_struct1.initial_rotate_angles = { -0.5f * PI };
         horse_object_struct1.original_scale_vector = glm::vec3(5.0f, 5.0f, 5.0f);
@@ -199,6 +200,7 @@ namespace ajokki
         horse1->set_global_name("horse1");
 
         yli::ontology::CameraStruct horse_camera_struct;
+        horse_camera_struct.scene = joensuu_center_west_scene;
         horse_camera_struct.cartesian_coordinates = glm::vec3(2303.00f, 201.00f, 1822.00f);
         horse_camera_struct.parent = joensuu_center_west_scene;
         horse_camera_struct.yaw = -0.97f;

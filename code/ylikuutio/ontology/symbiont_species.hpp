@@ -58,6 +58,7 @@ namespace yli::ontology
 {
     class Entity;
     class ParentModule;
+    class Scene;
 
     class SymbiontSpecies: public yli::ontology::Model
     {
@@ -163,6 +164,12 @@ namespace yli::ontology
             // this method renders all `Object`s of this `SymbiontSpecies`.
             void render();
 
+        private:
+            yli::ontology::Scene* get_scene() const override;
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
+
+        public:
             yli::ontology::ChildModule child_of_symbiont_material;
             yli::ontology::GenericMasterModule master_of_bionts;
 

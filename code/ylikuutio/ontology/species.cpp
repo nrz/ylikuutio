@@ -31,6 +31,8 @@
 
 namespace yli::ontology
 {
+    class Scene;
+
     void Species::bind_to_new_material_parent(yli::ontology::Material* const new_parent)
     {
         // this method sets pointer to this `Species` to `nullptr`, sets `material_parent` according to the input,
@@ -143,5 +145,27 @@ namespace yli::ontology
     const std::string& Species::get_model_file_format() const
     {
         return this->model_file_format;
+    }
+
+    yli::ontology::Scene* Species::get_scene() const
+    {
+        yli::ontology::Entity* const parent = this->get_parent();
+
+        if (parent != nullptr)
+        {
+            return parent->get_scene();
+        }
+
+        return nullptr;
+    }
+
+    std::size_t Species::get_number_of_children() const
+    {
+        return this->parent_of_objects.get_number_of_children();
+    }
+
+    std::size_t Species::get_number_of_descendants() const
+    {
+        return this->parent_of_objects.get_number_of_descendants();
     }
 }

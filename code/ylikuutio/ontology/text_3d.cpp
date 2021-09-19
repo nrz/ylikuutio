@@ -27,6 +27,8 @@
 
 namespace yli::ontology
 {
+    class Scene;
+
     void Text3D::bind_to_new_vector_font_parent(yli::ontology::VectorFont* const new_parent)
     {
         // This method sets pointer to this `Text3D` to `nullptr`, sets `parent` according to the input,
@@ -88,6 +90,17 @@ namespace yli::ontology
         std::cout << "This `Text3D` (\"" << this->text_string << "\", childID " << std::dec << this->childID << ") will be destroyed.\n";
     }
 
+    yli::ontology::Scene* Text3D::get_scene() const
+    {
+        yli::ontology::Entity* const parent = this->get_parent();
+
+        if (parent != nullptr)
+        {
+            return parent->get_scene();
+        }
+
+        return nullptr;
+    }
     std::size_t Text3D::get_number_of_children() const
     {
         return this->parent_of_objects.get_number_of_children();

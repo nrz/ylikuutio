@@ -37,6 +37,7 @@
 namespace yli::ontology
 {
     class Entity;
+    class Scene;
     class Material;
     class ParentModule;
 
@@ -150,6 +151,12 @@ namespace yli::ontology
 
             template<class T1, class T2>
                 friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
+
+            yli::ontology::Scene* get_scene() const override;
+
+        private:
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
 
         private:
             yli::ontology::ChildModule child_of_material;

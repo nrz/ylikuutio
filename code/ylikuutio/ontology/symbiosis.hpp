@@ -88,7 +88,6 @@ namespace yli::ontology
             // destructor.
             virtual ~Symbiosis();
 
-            yli::ontology::Scene* get_scene() const override;
             yli::ontology::Entity* get_parent() const override;
 
             std::size_t get_number_of_symbiont_materials() const;
@@ -123,6 +122,9 @@ namespace yli::ontology
             yli::ontology::ChildModule child_of_shader;
             yli::ontology::ParentModule parent_of_symbiont_materials;
             yli::ontology::ParentModule parent_of_holobionts;
+
+        public:
+            yli::ontology::Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;

@@ -38,6 +38,7 @@ namespace yli::ontology
     class GenericMasterModule;
     class Entity;
     class Universe;
+    class Scene;
     class Symbiosis;
 
     class Holobiont: public yli::ontology::Movable
@@ -95,6 +96,8 @@ namespace yli::ontology
             // Public callbacks end here.
 
             yli::ontology::ParentModule parent_of_bionts;
+
+            yli::ontology::Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;

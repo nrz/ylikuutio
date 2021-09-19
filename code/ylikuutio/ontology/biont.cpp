@@ -52,6 +52,7 @@ namespace yli::ontology
 {
     class Entity;
     class Universe;
+    class Scene;
 
     Biont::~Biont()
     {
@@ -250,6 +251,18 @@ namespace yli::ontology
                 GL_UNSIGNED_INT,              // type
                 (void*) 0                     // element array buffer offset
                 );
+    }
+
+    yli::ontology::Scene* Biont::get_scene() const
+    {
+        yli::ontology::Entity* const parent = this->get_parent();
+
+        if (parent != nullptr)
+        {
+            return parent->get_scene();
+        }
+
+        return nullptr;
     }
 
     std::size_t Biont::get_number_of_children() const

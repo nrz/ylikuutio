@@ -34,6 +34,8 @@
 
 namespace yli::ontology
 {
+    class Scene;
+
     void Text2D::bind_to_new_font_2d_parent(yli::ontology::Font2D* const new_parent)
     {
         // This method sets pointer to this `Text2D` to `nullptr`, sets `parent` according to the input,
@@ -336,6 +338,18 @@ namespace yli::ontology
     yli::ontology::Entity* Text2D::get_parent() const
     {
         return this->child_of_font_2d.get_parent();
+    }
+
+    yli::ontology::Scene* Text2D::get_scene() const
+    {
+        yli::ontology::Entity* const parent = this->get_parent();
+
+        if (parent != nullptr)
+        {
+            return parent->get_scene();
+        }
+
+        return nullptr;
     }
 
     std::size_t Text2D::get_number_of_children() const

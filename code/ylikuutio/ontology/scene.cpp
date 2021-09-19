@@ -210,6 +210,11 @@ namespace yli::ontology
         return this->child_of_universe.get_parent();
     }
 
+    yli::ontology::Scene* Scene::get_scene() const
+    {
+        return const_cast<yli::ontology::Scene*>(this);
+    }
+
     std::size_t Scene::get_number_of_children() const
     {
         return this->number_of_shaders +
@@ -282,8 +287,14 @@ namespace yli::ontology
         this->gravity = gravity;
     }
 
-    void Scene::add_rigid_body_module(const yli::ontology::RigidBodyModule& rigid_body_module)
+    void Scene::add_rigid_body_module(const yli::ontology::RigidBodyModule& rigid_body_module, yli::ontology::Scene* const scene)
     {
+        if (scene == nullptr)
+        {
+            std::cerr << "ERROR: `Scene::add_rigid_body_module`: `scene` is `nullptr`!\n";
+            return;
+        }
+
         if (this->dynamics_world == nullptr)
         {
             std::cerr << "ERROR: `Scene::add_rigid_body_module`: `this->dynamics_world` is `nullptr`!\n";

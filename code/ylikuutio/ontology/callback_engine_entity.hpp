@@ -29,6 +29,7 @@
 namespace yli::ontology
 {
     class Universe;
+    class Scene;
     class ParentModule;
 
     class CallbackEngineEntity: public yli::callback::CallbackEngine, public yli::ontology::Entity
@@ -58,6 +59,7 @@ namespace yli::ontology
             yli::ontology::ChildModule child_of_universe;
 
         private:
+            yli::ontology::Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
     };

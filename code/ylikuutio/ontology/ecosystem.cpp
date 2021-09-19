@@ -24,6 +24,8 @@
 
 namespace yli::ontology
 {
+    class Scene;
+
     Ecosystem::~Ecosystem()
     {
         // destructor.
@@ -33,6 +35,12 @@ namespace yli::ontology
     yli::ontology::Entity* Ecosystem::get_parent() const
     {
         return this->child_of_universe.get_parent();
+    }
+
+    yli::ontology::Scene* Ecosystem::get_scene() const
+    {
+        // `Ecosystem` does not belong in any `Scene`.
+        return nullptr;
     }
 
     std::size_t Ecosystem::get_number_of_children() const

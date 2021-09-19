@@ -68,6 +68,7 @@
 namespace yli::ontology
 {
     class Universe;
+    class Scene;
     class ParentModule;
     class GenericMasterModule;
 
@@ -108,6 +109,7 @@ namespace yli::ontology
             friend class yli::ontology::Universe;
 
         private:
+            yli::ontology::Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 

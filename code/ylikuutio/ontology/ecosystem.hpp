@@ -76,6 +76,7 @@ namespace yli::ontology
 {
     class ParentModule;
     class Universe;
+    class Scene;
 
     class Ecosystem: public yli::ontology::Entity
     {
@@ -103,6 +104,8 @@ namespace yli::ontology
             yli::ontology::Entity* get_parent() const override;
 
             yli::ontology::ChildModule child_of_universe;
+
+            yli::ontology::Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;

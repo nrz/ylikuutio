@@ -137,6 +137,7 @@ namespace ajokki
 
         // Create tallinn terrain.
         yli::ontology::ObjectStruct tallinn_struct(tallinn_terrain_species);
+        tallinn_struct.scene = tallinn_scene;
         tallinn_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_object(tallinn_struct);
 

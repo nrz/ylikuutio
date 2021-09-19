@@ -55,6 +55,7 @@
 namespace yli::ontology
 {
     class Entity;
+    class Scene;
     class Shader;
 
     void Object::bind_to_new_species_parent(yli::ontology::Species* const new_parent)
@@ -379,6 +380,18 @@ namespace yli::ontology
                 GL_UNSIGNED_INT, // type
                 (void*) 0        // element array buffer offset
                 );
+    }
+
+    yli::ontology::Scene* Object::get_scene() const
+    {
+        yli::ontology::Entity* const parent = this->get_parent();
+
+        if (parent != nullptr)
+        {
+            return parent->get_scene();
+        }
+
+        return nullptr;
     }
 
     std::size_t Object::get_number_of_children() const

@@ -27,7 +27,6 @@
 #endif
 
 // Include standard headers
-#include <cstddef>  // std::size_t
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -36,21 +35,6 @@ namespace yli::ontology
     Model::~Model()
     {
         // destructor.
-    }
-
-    std::size_t Model::get_number_of_children() const
-    {
-        return this->parent_of_objects.get_number_of_children();
-    }
-
-    std::size_t Model::get_number_of_descendants() const
-    {
-        return yli::ontology::get_number_of_descendants(this->parent_of_objects.child_pointer_vector);
-    }
-
-    std::size_t Model::get_number_of_vertices() const
-    {
-        return this->vertices.size();
     }
 
     const std::vector<glm::vec3>& Model::get_vertices() const
