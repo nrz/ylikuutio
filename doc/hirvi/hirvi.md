@@ -5,10 +5,21 @@ in particular an encounter with the police may prove deadly for Hirvi,
 even through moose are well-known pasifists.
 "hirvi" means a moose/elk in Finnish.
 
+Hirvi es una acción-aventura de la primera persona sobre
+las aventuras de unx alce que se llama Hirvi. Las ciudades son lugares
+peligrosos para lxs alces, y particularmente un encuentro con la policía
+se puede resultar mortal para Hirvi, a pesar de que lxs alces
+son pasifistas ilustres. "hirvi" significa unx alce en finés.
+
 In Hirvi there are missions in different cities of Finland,
 at least in Helsinki, Espoo, Vantaa, Oulu, and Turku.
 The scenes in which the missions take place are implemented
 using free 3D city models.
+
+En Hirvi hay misiones en diferentes ciudas de Finland,
+al menos en Helsinki, Espoo, Vantaa, Oulu, y Turku.
+Las escenas en las cuales las misiones se dan se las implementa
+usando modelos 3D libres.
 
 Hirvi targets 64-bit Linux, Windows, and MacOS environments.
 Hirvi will be implemented using Ylikuutio 3D engine.
