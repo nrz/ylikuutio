@@ -72,7 +72,6 @@ namespace ajokki
         std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_scene_entity ...\n";
         yli::ontology::SceneStruct scene_struct;
         scene_struct.global_name = "helsinki_east_downtown_scene";
-        scene_struct.local_name = "helsinki";
         scene_struct.water_level = 0.9f;
         yli::ontology::Entity* const helsinki_east_downtown_scene_entity = entity_factory->create_scene(scene_struct);
         std::cout << "Creating yli::ontology::Scene* helsinki_east_downtown_scene ...\n";
