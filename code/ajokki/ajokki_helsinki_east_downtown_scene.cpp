@@ -817,7 +817,6 @@ namespace ajokki
         yli::ontology::CameraStruct cat_camera_struct;
         cat_camera_struct.scene = helsinki_east_downtown_scene;
         cat_camera_struct.cartesian_coordinates = glm::vec3(800.00f, 400.00f, 950.00f);
-        cat_camera_struct.parent = helsinki_east_downtown_scene;
         cat_camera_struct.yaw = -0.90f;
         cat_camera_struct.pitch = -1.00f;
 
@@ -837,7 +836,6 @@ namespace ajokki
         yli::ontology::CameraStruct turbo_polizei_camera_struct;
         turbo_polizei_camera_struct.scene = helsinki_east_downtown_scene;
         turbo_polizei_camera_struct.cartesian_coordinates = glm::vec3(87.00f, 28.00f, 169.00f);
-        turbo_polizei_camera_struct.parent = helsinki_east_downtown_scene;
         turbo_polizei_camera_struct.yaw = -0.45f;
         turbo_polizei_camera_struct.pitch = -0.05f;
 

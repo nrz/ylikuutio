@@ -202,7 +202,6 @@ namespace ajokki
         yli::ontology::CameraStruct horse_camera_struct;
         horse_camera_struct.scene = joensuu_center_west_scene;
         horse_camera_struct.cartesian_coordinates = glm::vec3(2303.00f, 201.00f, 1822.00f);
-        horse_camera_struct.parent = joensuu_center_west_scene;
         horse_camera_struct.yaw = -0.97f;
         horse_camera_struct.pitch = -0.18f;
 

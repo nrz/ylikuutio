@@ -362,7 +362,7 @@ namespace yli::ontology
         yli::ontology::Entity* camera_entity = new yli::ontology::Camera(
                 this->universe,
                 camera_struct,
-                (camera_struct.parent == nullptr ? nullptr : &camera_struct.parent->parent_of_cameras),
+                (camera_struct.scene == nullptr ? nullptr : &camera_struct.scene->parent_of_cameras),
                 (camera_struct.brain == nullptr ? nullptr : camera_struct.brain->get_generic_master_module()));
 
         camera_entity->set_global_name(camera_struct.global_name);

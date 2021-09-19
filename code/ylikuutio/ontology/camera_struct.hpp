@@ -22,12 +22,8 @@
 
 namespace yli::ontology
 {
-    class Scene;
-
     struct CameraStruct: public yli::ontology::MovableStruct
     {
-        yli::ontology::Scene* parent { nullptr }; // pointer to the `Scene`.
-
         // Static view `Camera`'s coordinates do not change by moving in a `Scene`. However,
         // they can be modified by adjusting the `Entity`-specific variables of the `Camera` directly.
         bool is_static_view { false };
