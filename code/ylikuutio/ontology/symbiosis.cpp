@@ -24,7 +24,7 @@
 #include "model_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/load/symbiosis_loader.hpp"
-#include "code/ylikuutio/load/symbiosis_loader_struct.hpp"
+#include "code/ylikuutio/load/model_loader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_master.hpp"
@@ -185,15 +185,15 @@ namespace yli::ontology
 
     void Symbiosis::create_symbionts()
     {
-        yli::load::SymbiosisLoaderStruct symbiosis_loader_struct;
-        symbiosis_loader_struct.model_filename = this->model_filename;
-        symbiosis_loader_struct.model_file_format = this->model_file_format;
-        symbiosis_loader_struct.triangulation_type = this->triangulation_type;
+        yli::load::ModelLoaderStruct model_loader_struct;
+        model_loader_struct.model_struct.model_filename = this->model_filename;
+        model_loader_struct.model_struct.model_file_format = this->model_file_format;
+        model_loader_struct.model_struct.triangulation_type = this->triangulation_type;
 
         const bool is_debug_mode = true;
 
         if (yli::load::load_symbiosis(
-                    symbiosis_loader_struct,
+                    model_loader_struct,
                     this->vertices,
                     this->uvs,
                     this->normals,

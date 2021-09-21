@@ -680,7 +680,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/srtm_heightmap_loader.hpp
     code/ylikuutio/load/symbiosis_loader.cpp
     code/ylikuutio/load/symbiosis_loader.hpp
-    code/ylikuutio/load/symbiosis_loader_struct.hpp
 
     # map, in alphabetical order
     code/ylikuutio/map/ylikuutio_map.hpp

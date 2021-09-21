@@ -83,7 +83,6 @@ namespace yli::ontology
         uint32_t vertex_count { std::numeric_limits<uint32_t>::max() };
         float water_level { -1.0f * std::numeric_limits<float>::infinity() }; // Water level in meters. used only for terrains (planets and moons).
         bool is_terrain                   { false };                          // Terrains (planets and moons) currently neither rotate nor translate.
-        bool is_symbiont_species          { false };                          // By default `Species` are not `SymbiontSpecies`.
         bool opengl_in_use                { true };                           // If `opengl_in_use` is `false`, then no OpenGL-specific code shall be executed.
         bool use_real_texture_coordinates { true };
     };
