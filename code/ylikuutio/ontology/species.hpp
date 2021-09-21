@@ -88,28 +88,28 @@ namespace yli::ontology
                         glUniform1f(water_level_uniform_location, model_struct.scene->get_water_level());
                     }
 
-                    yli::load::SpeciesLoaderStruct species_loader_struct;
-                    species_loader_struct.model_struct.model_filename               = this->model_filename;
-                    species_loader_struct.model_struct.model_file_format            = this->model_file_format;
-                    species_loader_struct.model_struct.color_channel                = this->color_channel;
-                    species_loader_struct.model_struct.triangulation_type           = this->triangulation_type;
-                    species_loader_struct.model_struct.planet_radius                = this->planet_radius;
-                    species_loader_struct.model_struct.divisor                      = this->divisor;
-                    species_loader_struct.model_struct.latitude                     = this->latitude;
-                    species_loader_struct.model_struct.longitude                    = this->longitude;
-                    species_loader_struct.model_struct.mesh_i                       = this->mesh_i;
-                    species_loader_struct.model_struct.x_step                       = this->x_step;
-                    species_loader_struct.model_struct.z_step                       = this->z_step;
-                    species_loader_struct.model_struct.opengl_in_use                = this->opengl_in_use;
-                    species_loader_struct.model_struct.use_real_texture_coordinates = this->use_real_texture_coordinates;
-                    species_loader_struct.image_width_pointer                         = &this->image_width;
-                    species_loader_struct.image_height_pointer                        = &this->image_height;
-                    species_loader_struct.is_headless                                 = is_headless;
+                    yli::load::ModelLoaderStruct model_loader_struct;
+                    model_loader_struct.model_struct.model_filename               = this->model_filename;
+                    model_loader_struct.model_struct.model_file_format            = this->model_file_format;
+                    model_loader_struct.model_struct.color_channel                = this->color_channel;
+                    model_loader_struct.model_struct.triangulation_type           = this->triangulation_type;
+                    model_loader_struct.model_struct.planet_radius                = this->planet_radius;
+                    model_loader_struct.model_struct.divisor                      = this->divisor;
+                    model_loader_struct.model_struct.latitude                     = this->latitude;
+                    model_loader_struct.model_struct.longitude                    = this->longitude;
+                    model_loader_struct.model_struct.mesh_i                       = this->mesh_i;
+                    model_loader_struct.model_struct.x_step                       = this->x_step;
+                    model_loader_struct.model_struct.z_step                       = this->z_step;
+                    model_loader_struct.model_struct.opengl_in_use                = this->opengl_in_use;
+                    model_loader_struct.model_struct.use_real_texture_coordinates = this->use_real_texture_coordinates;
+                    model_loader_struct.image_width_pointer                         = &this->image_width;
+                    model_loader_struct.image_height_pointer                        = &this->image_height;
+                    model_loader_struct.is_headless                                 = is_headless;
 
                     const bool is_debug_mode = true;
 
                     yli::load::load_species(
-                            species_loader_struct,
+                            model_loader_struct,
                             this->vertices,
                             this->uvs,
                             this->normals,

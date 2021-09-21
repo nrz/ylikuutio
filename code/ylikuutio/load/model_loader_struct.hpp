@@ -25,7 +25,7 @@
 
 namespace yli::load
 {
-    struct SpeciesLoaderStruct
+    struct ModelLoaderStruct
     {
         yli::ontology::ModelStruct model_struct;
         uint32_t* image_width_pointer  { nullptr };
