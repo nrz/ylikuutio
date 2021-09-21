@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "symbiosis_loader.hpp"
-#include "symbiosis_loader_struct.hpp"
+#include "model_loader_struct.hpp"
 #include "fbx_symbiosis_loader.hpp"
 #include <ofbx.h>
 
@@ -36,7 +36,7 @@
 namespace yli::load
 {
     bool load_symbiosis(
-            yli::load::SymbiosisLoaderStruct& symbiosis_loader_struct,
+            yli::load::ModelLoaderStruct& model_loader_struct,
             std::vector<std::vector<glm::vec3>>& out_vertices,
             std::vector<std::vector<glm::vec2>>& out_uvs,
             std::vector<std::vector<glm::vec3>>& out_normals,
@@ -50,10 +50,10 @@ namespace yli::load
     {
         bool model_loading_result = false;
 
-        if (symbiosis_loader_struct.model_file_format == "fbx" || symbiosis_loader_struct.model_file_format == "FBX")
+        if (model_loader_struct.model_struct.model_file_format == "fbx" || model_loader_struct.model_struct.model_file_format == "FBX")
         {
             model_loading_result = yli::load::load_fbx(
-                    symbiosis_loader_struct.model_filename,
+                    model_loader_struct.model_struct.model_filename,
                     out_vertices,
                     out_uvs,
                     out_normals,
@@ -68,7 +68,7 @@ namespace yli::load
         else
         {
             std::cerr << "ERROR: `yli::load::load_symbiosis`: no model was loaded!\n";
-            std::cerr << "Model file format: " << symbiosis_loader_struct.model_file_format << "\n";
+            std::cerr << "Model file format: " << model_loader_struct.model_struct.model_file_format << "\n";
             return false;
         }
 
