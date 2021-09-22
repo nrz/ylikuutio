@@ -18,7 +18,6 @@
 #ifndef __YLIKUUTIO_LOAD_MODEL_LOADER_HPP_INCLUDED
 #define __YLIKUUTIO_LOAD_MODEL_LOADER_HPP_INCLUDED
 
-#include "model_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
@@ -33,6 +32,8 @@
 
 namespace yli::load
 {
+    struct ModelLoaderStruct;
+
     bool load_species(
             const yli::load::ModelLoaderStruct& model_loader_struct,
             std::vector<glm::vec3>& out_vertices,
