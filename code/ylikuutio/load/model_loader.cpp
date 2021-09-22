@@ -23,6 +23,7 @@
 #include "png_heightmap_loader.hpp"
 #include "srtm_heightmap_loader.hpp"
 #include "heightmap_loader_struct.hpp"
+#include "code/ylikuutio/load/model_loader_struct.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
