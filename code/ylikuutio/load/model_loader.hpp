@@ -34,7 +34,7 @@ namespace yli::load
 {
     struct ModelLoaderStruct;
 
-    bool load_species(
+    bool load_model(
             const yli::load::ModelLoaderStruct& model_loader_struct,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_uvs,

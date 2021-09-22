@@ -108,7 +108,7 @@ namespace yli::ontology
 
                     const bool is_debug_mode = true;
 
-                    yli::load::load_species(
+                    yli::load::load_model(
                             model_loader_struct,
                             this->vertices,
                             this->uvs,
