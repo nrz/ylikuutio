@@ -149,7 +149,7 @@ namespace yli::load
         }
         else
         {
-            std::cerr << "ERROR: no model was loaded!\n";
+            std::cerr << "ERROR: `yli::load::load_model`: no model was loaded!\n";
             std::cerr << "Model file format: " << model_loader_struct.model_struct.model_file_format << "\n";
             return false;
         }
