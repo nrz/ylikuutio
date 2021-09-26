@@ -46,7 +46,6 @@
 #include "material_struct.hpp"
 #include "model_struct.hpp"
 #include "object_struct.hpp"
-#include "symbiosis_struct.hpp"
 #include "holobiont_struct.hpp"
 #include "vector_font_struct.hpp"
 #include "text_3d_struct.hpp"
@@ -232,15 +231,15 @@ namespace yli::ontology
         return object_entity;
     }
 
-    yli::ontology::Entity* EntityFactory::create_symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const
+    yli::ontology::Entity* EntityFactory::create_symbiosis(const yli::ontology::ModelStruct& model_struct) const
     {
         yli::ontology::Entity* symbiosis_entity = new yli::ontology::Symbiosis(
                 this->universe,
-                symbiosis_struct,
-                (symbiosis_struct.parent == nullptr ? nullptr : &symbiosis_struct.parent->parent_of_symbioses));
+                model_struct,
+                (model_struct.shader == nullptr ? nullptr : &model_struct.shader->parent_of_symbioses));
 
-        symbiosis_entity->set_global_name(symbiosis_struct.global_name);
-        symbiosis_entity->set_local_name(symbiosis_struct.local_name);
+        symbiosis_entity->set_global_name(model_struct.global_name);
+        symbiosis_entity->set_local_name(model_struct.local_name);
         return symbiosis_entity;
     }
 

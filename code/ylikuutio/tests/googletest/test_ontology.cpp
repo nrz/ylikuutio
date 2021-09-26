@@ -38,7 +38,6 @@
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
-#include "code/ylikuutio/ontology/symbiosis_struct.hpp"
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
 #include "code/ylikuutio/ontology/brain_struct.hpp"
 
@@ -742,9 +741,9 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
     shader_struct.parent = scene;
     yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct;
-    symbiosis_struct.parent = shader;
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct, &shader->parent_of_symbioses);
+    yli::ontology::ModelStruct model_struct;
+    model_struct.shader = shader;
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, model_struct, &shader->parent_of_symbioses);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -770,9 +769,9 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
 
 TEST(symbiosis_must_be_initialized_appropriately, no_universe_no_scene_no_material_no_shader)
 {
-    yli::ontology::SymbiosisStruct symbiosis_struct;
-    symbiosis_struct.parent = nullptr;
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct, nullptr);
+    yli::ontology::ModelStruct model_struct;
+    model_struct.shader = nullptr;
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, model_struct, nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(symbiosis->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -797,11 +796,11 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
     shader_struct.parent = scene;
     yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct;
-    symbiosis_struct.parent = shader;
-    symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
-    symbiosis_struct.model_file_format = "FBX";
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct, &shader->parent_of_symbioses);
+    yli::ontology::ModelStruct model_struct;
+    model_struct.shader = shader;
+    model_struct.model_filename = "turbo_polizei_png_textures.fbx";
+    model_struct.model_file_format = "FBX";
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, model_struct, &shader->parent_of_symbioses);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -827,11 +826,11 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
 
 TEST(symbiosis_must_be_initialized_appropriately, no_universe_no_scene_no_material_no_shader_turbo_polizei)
 {
-    yli::ontology::SymbiosisStruct symbiosis_struct;
-    symbiosis_struct.parent = nullptr;
-    symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
-    symbiosis_struct.model_file_format = "FBX";
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct, nullptr);
+    yli::ontology::ModelStruct model_struct;
+    model_struct.shader = nullptr;
+    model_struct.model_filename = "turbo_polizei_png_textures.fbx";
+    model_struct.model_file_format = "FBX";
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, model_struct, nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(symbiosis->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -856,9 +855,9 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
     shader_struct.parent = scene;
     yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct;
-    symbiosis_struct.parent = shader;
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct, &shader->parent_of_symbioses);
+    yli::ontology::ModelStruct model_struct;
+    model_struct.shader = shader;
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, model_struct, &shader->parent_of_symbioses);
 
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.parent = symbiosis;
@@ -919,11 +918,11 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     shader_struct.parent = scene;
     yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct;
-    symbiosis_struct.parent = shader;
-    symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
-    symbiosis_struct.model_file_format = "FBX";
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct, &shader->parent_of_symbioses);
+    yli::ontology::ModelStruct model_struct;
+    model_struct.shader = shader;
+    model_struct.model_filename = "turbo_polizei_png_textures.fbx";
+    model_struct.model_file_format = "FBX";
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, model_struct, &shader->parent_of_symbioses);
 
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.parent = symbiosis;
@@ -957,11 +956,11 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
 
 TEST(holobiont_must_be_initialized_appropriately, no_universe_no_scene_no_shader_turbo_polizei)
 {
-    yli::ontology::SymbiosisStruct symbiosis_struct;
-    symbiosis_struct.parent = nullptr;
-    symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
-    symbiosis_struct.model_file_format = "FBX";
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, symbiosis_struct, nullptr);
+    yli::ontology::ModelStruct model_struct;
+    model_struct.shader = nullptr;
+    model_struct.model_filename = "turbo_polizei_png_textures.fbx";
+    model_struct.model_file_format = "FBX";
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, model_struct, nullptr);
 
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.parent = symbiosis;

@@ -33,7 +33,6 @@ namespace yli::ontology
     struct MaterialStruct;
     struct ModelStruct;
     struct ObjectStruct;
-    struct SymbiosisStruct;
     struct HolobiontStruct;
     struct VectorFontStruct;
     struct FontStruct;
@@ -66,7 +65,7 @@ namespace yli::ontology
             yli::ontology::Entity* create_material(const yli::ontology::MaterialStruct& material_struct) const;
             yli::ontology::Entity* create_species(const yli::ontology::ModelStruct& model_struct) const;
             yli::ontology::Entity* create_object(const yli::ontology::ObjectStruct& object_struct) const;
-            yli::ontology::Entity* create_symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const;
+            yli::ontology::Entity* create_symbiosis(const yli::ontology::ModelStruct& model_struct) const;
             yli::ontology::Entity* create_holobiont(const yli::ontology::HolobiontStruct& object_struct) const;
             yli::ontology::Entity* create_vector_font(const yli::ontology::VectorFontStruct& vector_font_struct) const;
             yli::ontology::Entity* create_text2d(const yli::ontology::TextStruct& text_struct) const;

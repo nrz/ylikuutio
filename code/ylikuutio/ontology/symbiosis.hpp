@@ -26,7 +26,7 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "parent_module.hpp"
-#include "symbiosis_struct.hpp"
+#include "model_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include <ofbx.h>
 
@@ -61,19 +61,19 @@ namespace yli::ontology
             void bind_to_new_shader_parent(yli::ontology::Shader* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-            Symbiosis(yli::ontology::Universe* universe, const yli::ontology::SymbiosisStruct& symbiosis_struct, yli::ontology::ParentModule* const parent_module)
-                : Entity(universe, symbiosis_struct),
+            Symbiosis(yli::ontology::Universe* universe, const yli::ontology::ModelStruct& model_struct, yli::ontology::ParentModule* const parent_module)
+                : Entity(universe, model_struct),
                 child_of_shader(parent_module, this),
                 parent_of_symbiont_materials(this, &this->registry, "symbiont_materials"),
                 parent_of_holobionts(this, &this->registry, "holobionts")
             {
                 // constructor.
-                this->model_filename     = symbiosis_struct.model_filename;
-                this->model_file_format  = symbiosis_struct.model_file_format;
-                this->triangulation_type = symbiosis_struct.triangulation_type;
-                this->light_position     = symbiosis_struct.light_position;
+                this->model_filename     = model_struct.model_filename;
+                this->model_file_format  = model_struct.model_file_format;
+                this->triangulation_type = model_struct.triangulation_type;
+                this->light_position     = model_struct.light_position;
 
-                this->opengl_in_use      = symbiosis_struct.opengl_in_use;
+                this->opengl_in_use      = model_struct.opengl_in_use;
 
                 this->create_symbionts();
 
