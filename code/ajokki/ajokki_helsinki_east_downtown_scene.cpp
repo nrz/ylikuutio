@@ -490,7 +490,6 @@ namespace ajokki
         helsinki_east_downtown_terrain_model_struct.model_file_format = "ASCII_grid";
         helsinki_east_downtown_terrain_model_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
         helsinki_east_downtown_terrain_model_struct.light_position = glm::vec3(0, 100000, 100000);
-        helsinki_east_downtown_terrain_model_struct.is_terrain = true;
         helsinki_east_downtown_terrain_model_struct.x_step = 4;
         helsinki_east_downtown_terrain_model_struct.z_step = 4;
         std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_terrain_species_entity ...\n";

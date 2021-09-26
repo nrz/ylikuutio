@@ -118,7 +118,6 @@ namespace ajokki
         altiplano_terrain_model_struct.light_position = glm::vec3(0, 100000, 0);
         altiplano_terrain_model_struct.latitude = -16.50f;  // in degrees.
         altiplano_terrain_model_struct.longitude = -68.15f; // in degrees.
-        altiplano_terrain_model_struct.is_terrain = true;
         altiplano_terrain_model_struct.x_step = 1;
         altiplano_terrain_model_struct.z_step = 1;
 

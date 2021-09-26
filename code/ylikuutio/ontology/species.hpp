@@ -65,7 +65,6 @@ namespace yli::ontology
                 mesh_i                       { model_struct.mesh_i },
                 x_step                       { model_struct.x_step },
                 z_step                       { model_struct.z_step },
-                is_terrain                   { model_struct.is_terrain },
                 use_real_texture_coordinates { model_struct.use_real_texture_coordinates }
             {
                 // constructor.
@@ -182,7 +181,6 @@ namespace yli::ontology
             uint32_t image_width  { 0 };
             uint32_t image_height { 0 };
 
-            bool is_terrain;               // Terrains do not rotate nor translate.
             bool use_real_texture_coordinates;
     };
 }
