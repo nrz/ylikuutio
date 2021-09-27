@@ -24,6 +24,7 @@
 
 namespace yli::ontology
 {
+    class Entity;
     class Scene;
 
     Ecosystem::~Ecosystem()
