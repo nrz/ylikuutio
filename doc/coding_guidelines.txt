@@ -99,6 +99,11 @@ Including files
   2.3. `master_module.hpp`
   2.4. The rest `yli::ontology` headers in the canonical order (`yli::data::Datatype`).
 
+Forward declarations
+* Always have a forward declaration for all classes and structs that are needed
+  in the compilation unit and do not have their header files included.
+* Forward declarations follow the same ordering rules as `#include` lines.
+
 Naming
 * Use CamelCase for class names: `class MyClass;`.
 * Parts of class names separated by uppercase characters should reflect
