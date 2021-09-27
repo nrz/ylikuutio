@@ -46,6 +46,9 @@ namespace yli::ontology
             // destructor.
             virtual ~ParentModule();
 
+            // This function exists simply to be able to pass `ParentModule` as non-const parameter.
+            yli::ontology::ParentModule* get() const;
+
             yli::ontology::Entity* get_entity() const;
             std::size_t get_number_of_children() const;
             std::size_t get_number_of_descendants() const;
