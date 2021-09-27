@@ -39,6 +39,7 @@
 
 namespace yli::ontology
 {
+    class Entity;
     class Scene;
 
     void Console::bind_to_new_font_2d(yli::ontology::Font2D* const new_font_2d)
