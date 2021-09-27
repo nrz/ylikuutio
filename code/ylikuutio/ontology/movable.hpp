@@ -59,12 +59,12 @@ namespace yli::input
 
 namespace yli::ontology
 {
+    class ParentModule;
+    class GenericMasterModule;
     class Universe;
     class Brain;
     class Scene;
     class Waypoint;
-    class ParentModule;
-    class GenericMasterModule;
 
     class Movable: public yli::ontology::Entity
     {
