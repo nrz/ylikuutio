@@ -50,6 +50,8 @@
 
 namespace yli::ontology
 {
+    class Entity;
+
     void Scene::bind_shader(yli::ontology::Shader* const shader)
     {
         // get `childID` from `Scene` and set pointer to `shader`.
