@@ -25,7 +25,6 @@
 #endif
 
 #include "camera.hpp"
-#include "entity.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
