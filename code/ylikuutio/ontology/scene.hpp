@@ -43,6 +43,7 @@
 #include <queue>   // std::priority_queue, std::queue
 #include <string>  // std::string
 #include <vector>  // std::vector
+#include <iostream> // std::cout, std::cin, std::cerr
 
 // How `yli::ontology::Scene` class works:
 //
@@ -119,6 +120,12 @@ namespace yli::ontology
                     this->dynamics_world->setGravity(btVector3(0.0f, -this->gravity, 0.0f));
 
                     // Bullet is now initialized for this `Scene`.
+                }
+                else if (this->universe == nullptr)
+                {
+                    // Dynamics world could not be created.
+
+                    std::cerr << "ERROR: `Scene::Scene`: `this->universe` is `nullptr`!\n";
                 }
 
                 // `yli::ontology::Entity` member variables begin here.
