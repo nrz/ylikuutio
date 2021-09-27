@@ -72,7 +72,7 @@ namespace yli::ontology
         this->postrender();
     }
 
-    void Holobiont::create_bionts(const std::vector<bool>& should_render_bionts_vector)
+    void Holobiont::create_bionts(yli::ontology::Scene* const scene, const std::vector<bool>& should_render_bionts_vector)
     {
         // requirements:
         // `this->symbiosis_parent` must not be `nullptr`.
@@ -112,6 +112,7 @@ namespace yli::ontology
 
             yli::ontology::BiontStruct biont_struct;
             biont_struct.biontID                = biontID;
+            biont_struct.scene                  = scene;
             biont_struct.parent                 = this;
             biont_struct.symbiont_species       = symbiont_species;
             biont_struct.initial_rotate_vectors = this->initial_rotate_vectors;

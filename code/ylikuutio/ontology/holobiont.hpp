@@ -58,7 +58,7 @@ namespace yli::ontology
             {
                 // constructor.
 
-                this->create_bionts(holobiont_struct.should_render_bionts_vector);
+                this->create_bionts(holobiont_struct.scene, holobiont_struct.should_render_bionts_vector);
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Holobiont*";
@@ -108,7 +108,7 @@ namespace yli::ontology
             void render();
 
         private:
-            void create_bionts(const std::vector<bool>& should_render_bionts_vector);
+            void create_bionts(yli::ontology::Scene* const scene, const std::vector<bool>& should_render_bionts_vector);
     };
 }
 
