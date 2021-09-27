@@ -17,7 +17,6 @@
 
 #include "font_2d.hpp"
 #include "universe.hpp"
-#include "entity.hpp"
 #include "text_2d.hpp"
 #include "text_struct.hpp"
 #include "family_templates.hpp"
@@ -47,6 +46,7 @@
 
 namespace yli::ontology
 {
+    class Entity;
     class Scene;
 
     Font2D::~Font2D()
