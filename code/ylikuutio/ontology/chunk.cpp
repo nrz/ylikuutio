@@ -59,11 +59,8 @@ namespace yli::ontology
 
     void Chunk::render()
     {
-        if (this->opengl_in_use)
-        {
-            // Render this `Chunk`.
-            // If any vertex of the `Chunk` has changed, the vertex data
-            // of the `Chunk` needs to be reconstructed before rendering.
-        }
+        // Render this `Chunk`.
+        // If any vertex of the `Chunk` has changed, the vertex data
+        // of the `Chunk` needs to be reconstructed before rendering.
     }
 }
