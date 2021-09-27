@@ -34,6 +34,8 @@
 
 namespace yli::ontology
 {
+    class Entity;
+
     void Shader::bind_to_parent()
     {
         // Requirements:
