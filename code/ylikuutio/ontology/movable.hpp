@@ -63,7 +63,6 @@ namespace yli::ontology
     class GenericMasterModule;
     class Universe;
     class Brain;
-    class Scene;
     class Waypoint;
 
     class Movable: public yli::ontology::Entity
