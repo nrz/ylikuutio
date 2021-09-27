@@ -37,8 +37,8 @@ namespace yli::data
 
 namespace yli::ontology
 {
-    class Universe;
     class ParentModule;
+    class Universe;
     class Scene;
     class Console;
 
