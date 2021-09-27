@@ -31,6 +31,7 @@
 namespace yli::ontology
 {
     class Entity;
+    class Scene;
 
     SymbiontSpecies::~SymbiontSpecies()
     {
