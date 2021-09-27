@@ -640,6 +640,7 @@ namespace ajokki
         yli::ontology::ObjectStruct cat_object_struct1(cat_species);
         cat_object_struct1.global_name = "cat1";
         cat_object_struct1.local_name = "kissa1";
+        cat_object_struct1.scene = helsinki_east_downtown_scene;
         cat_object_struct1.brain = rest_brain;
         cat_object_struct1.scene = helsinki_east_downtown_scene;
         cat_object_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
@@ -658,6 +659,7 @@ namespace ajokki
         yli::ontology::ObjectStruct cat_object_struct2(cat_species);
         cat_object_struct2.global_name = "cat2";
         cat_object_struct2.local_name = "kissa2";
+        cat_object_struct2.scene = helsinki_east_downtown_scene;
         cat_object_struct2.brain = rest_brain;
         cat_object_struct2.scene = helsinki_east_downtown_scene;
         cat_object_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };

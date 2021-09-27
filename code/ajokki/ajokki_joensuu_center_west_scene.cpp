@@ -137,6 +137,7 @@ namespace ajokki
 
         // Create Joensuu center west terrain.
         yli::ontology::ObjectStruct joensuu_center_west_struct(joensuu_center_west_terrain_species);
+        joensuu_center_west_struct.scene = joensuu_center_west_scene;
         joensuu_center_west_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_object(joensuu_center_west_struct);
 
