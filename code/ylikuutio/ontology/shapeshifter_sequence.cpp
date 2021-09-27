@@ -26,6 +26,7 @@
 
 namespace yli::ontology
 {
+    class Entity;
     class Scene;
 
     ShapeshifterSequence::~ShapeshifterSequence()
