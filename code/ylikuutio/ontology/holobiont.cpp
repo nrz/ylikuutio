@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "holobiont.hpp"
-#include "entity.hpp"
 #include "universe.hpp"
 #include "symbiosis.hpp"
 #include "symbiont_species.hpp"
@@ -45,6 +44,7 @@
 
 namespace yli::ontology
 {
+    class Entity;
     class Scene;
 
     Holobiont::~Holobiont()
