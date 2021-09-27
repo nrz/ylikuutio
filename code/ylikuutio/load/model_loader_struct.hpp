@@ -30,7 +30,6 @@ namespace yli::load
         yli::ontology::ModelStruct model_struct;
         uint32_t* image_width_pointer  { nullptr };
         uint32_t* image_height_pointer { nullptr };
-        bool is_headless               { false };
     };
 }
 

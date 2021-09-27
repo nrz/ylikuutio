@@ -103,7 +103,6 @@ namespace yli::ontology
                     model_loader_struct.model_struct.use_real_texture_coordinates = this->use_real_texture_coordinates;
                     model_loader_struct.image_width_pointer                         = &this->image_width;
                     model_loader_struct.image_height_pointer                        = &this->image_height;
-                    model_loader_struct.is_headless                                 = is_headless;
 
                     const bool is_debug_mode = true;
 

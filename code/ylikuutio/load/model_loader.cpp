@@ -170,8 +170,7 @@ namespace yli::load
 
         opengl_in_use = model_loader_struct.model_struct.opengl_in_use;
 
-        if (!model_loader_struct.is_headless &&
-                opengl_in_use &&
+        if (opengl_in_use &&
                 vertexbuffer != nullptr &&
                 uvbuffer != nullptr &&
                 normalbuffer != nullptr &&
