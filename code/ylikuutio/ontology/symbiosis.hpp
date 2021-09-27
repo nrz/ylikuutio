@@ -131,8 +131,8 @@ namespace yli::ontology
 
             void create_symbionts();
 
-            std::string model_file_format;  // type of the model file, eg. `"fbx"`.
             std::string model_filename;     // filename of the model file.
+            std::string model_file_format;  // type of the model file, eg. `"fbx"`.
             std::string triangulation_type;
 
             glm::vec3 light_position;       // light position.
