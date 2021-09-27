@@ -123,14 +123,13 @@ namespace yli::ontology
                         model_struct.glyph_vertex_data = &this->glyph_vertex_data.at(glyph_i);
                         model_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
                         model_struct.unicode_char_pointer = unicode_char_pointer;
-                        model_struct.universe = universe;
                         model_struct.shader = static_cast<yli::ontology::Shader*>(material->get_parent());
                         model_struct.vector_font = this;
 
                         std::string glyph_name_string = model_struct.glyph_name_pointer;
                         std::string unicode_string = model_struct.unicode_char_pointer;
                         std::cout << "Creating Glyph \"" << glyph_name_string << "\", Unicode: \"" << unicode_string << "\"\n";
-                        yli::ontology::Glyph* glyph = new yli::ontology::Glyph(model_struct, &this->parent_of_glyphs);
+                        yli::ontology::Glyph* glyph = new yli::ontology::Glyph(universe, model_struct, &this->parent_of_glyphs);
 
                         // So that each `Glyph` can be referred to,
                         // we need a hash map that points from Unicode string to `Glyph`.

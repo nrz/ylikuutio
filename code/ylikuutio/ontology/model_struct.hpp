@@ -35,7 +35,6 @@
 
 namespace yli::ontology
 {
-    class Universe;
     class Scene;
     class Shader;
     class Material;
@@ -70,7 +69,6 @@ namespace yli::ontology
         std::vector<glm::vec3> vertices;
         std::vector<glm::vec2> uvs;
         std::vector<glm::vec3> normals;
-        yli::ontology::Universe* universe                                      { nullptr }; // Pointer to the `Universe`.
         yli::ontology::Scene* scene                                            { nullptr }; // Pointer to `Scene`.
         yli::ontology::Shader* shader                                          { nullptr }; // Pointer to `Shader`.
         yli::ontology::Material* material                                      { nullptr }; // Pointer to `Material`.

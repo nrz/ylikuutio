@@ -60,8 +60,10 @@ namespace yli::ontology
             friend class yli::ontology::VectorFont;
 
         private:
-            Glyph(const yli::ontology::ModelStruct& model_struct, yli::ontology::ParentModule* const vector_font_parent_module)
-                : Model(model_struct.universe, model_struct, model_struct.opengl_in_use),
+            Glyph(yli::ontology::Universe* const universe,
+                    const yli::ontology::ModelStruct& model_struct,
+                    yli::ontology::ParentModule* const vector_font_parent_module)
+                : Model(universe, model_struct, model_struct.opengl_in_use),
                 child_of_vector_font(vector_font_parent_module, this),
                 glyph_vertex_data    { model_struct.glyph_vertex_data },
                 glyph_name_pointer   { model_struct.glyph_name_pointer },
