@@ -44,7 +44,6 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <limits>  // std::numeric_limits
-#include <memory>  // std::make_shared, std::shared_ptr
 
 TEST(universe_must_be_initialized_appropriately, headless)
 {
