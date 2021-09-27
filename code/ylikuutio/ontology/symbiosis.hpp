@@ -65,15 +65,14 @@ namespace yli::ontology
                 : Entity(universe, model_struct),
                 child_of_shader(parent_module, this),
                 parent_of_symbiont_materials(this, &this->registry, "symbiont_materials"),
-                parent_of_holobionts(this, &this->registry, "holobionts")
+                parent_of_holobionts(this, &this->registry, "holobionts"),
+                model_filename     { model_struct.model_filename },
+                model_file_format  { model_struct.model_file_format },
+                triangulation_type { model_struct.triangulation_type },
+                light_position     { model_struct.light_position },
+                opengl_in_use      { model_struct.opengl_in_use }
             {
                 // constructor.
-                this->model_filename     = model_struct.model_filename;
-                this->model_file_format  = model_struct.model_file_format;
-                this->triangulation_type = model_struct.triangulation_type;
-                this->light_position     = model_struct.light_position;
-
-                this->opengl_in_use      = model_struct.opengl_in_use;
 
                 this->create_symbionts();
 
