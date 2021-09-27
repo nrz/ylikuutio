@@ -60,16 +60,15 @@ namespace yli::ontology
             VectorFont(yli::ontology::Universe* const universe, const yli::ontology::VectorFontStruct& vector_font_struct)
                 : Entity(universe, vector_font_struct),
                 parent_of_glyphs(this, &this->registry, "glyphs"),
-                parent_of_text_3ds(this, &this->registry, "text_3ds")
+                parent_of_text_3ds(this, &this->registry, "text_3ds"),
+                font_file_format      { vector_font_struct.font_file_format },
+                font_filename         { vector_font_struct.font_filename },
+                vertex_scaling_factor { vector_font_struct.vertex_scaling_factor },
+                parent                { vector_font_struct.parent }
             {
                 // constructor.
 
                 // TODO: `VectorFont` constructor also creates each `Glyph` and binds them to the `VectorFont`.
-
-                this->font_file_format      = vector_font_struct.font_file_format;
-                this->font_filename         = vector_font_struct.font_filename;
-                this->vertex_scaling_factor = vector_font_struct.vertex_scaling_factor;
-                this->parent                = vector_font_struct.parent;
 
                 // Get `childID` from the `Material` and set pointer to this `VectorFont`.
                 this->bind_to_parent();
