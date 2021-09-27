@@ -27,6 +27,7 @@
 
 namespace yli::ontology
 {
+    class Entity;
     class Scene;
 
     LispFunction::~LispFunction()
