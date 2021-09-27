@@ -35,6 +35,8 @@
 
 namespace yli::ontology
 {
+    class Entity;
+
     void Material::bind_to_new_scene_parent(yli::ontology::Scene* const new_parent)
     {
         // Requirements:
