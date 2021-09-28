@@ -20,7 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "model_module.hpp"
+#include "mesh_module.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
@@ -54,7 +54,7 @@ namespace yli::ontology
                 : Entity(universe, model_struct),
                 child_of_material(material_parent_module, this),
                 parent_of_objects(this, &this->registry, "objects"),
-                model(universe, model_struct)
+                mesh(universe, model_struct)
             {
                 // constructor.
 
@@ -94,7 +94,7 @@ namespace yli::ontology
 
         public:
             yli::ontology::ParentModule parent_of_objects;
-            yli::ontology::ModelModule model;
+            yli::ontology::MeshModule mesh;
     };
 }
 

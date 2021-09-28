@@ -21,7 +21,7 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "generic_master_module.hpp"
-#include "model_module.hpp"
+#include "mesh_module.hpp"
 #include "model_struct.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -67,7 +67,7 @@ namespace yli::ontology
                 : Entity(universe, model_struct),
                 child_of_symbiont_material(symbiont_material_parent_module, this),
                 master_of_bionts(this, &this->registry, "bionts"),
-                model(universe, model_struct)
+                mesh(universe, model_struct)
             {
                 // constructor.
 
@@ -104,7 +104,7 @@ namespace yli::ontology
         public:
             yli::ontology::ChildModule child_of_symbiont_material;
             yli::ontology::GenericMasterModule master_of_bionts;
-            yli::ontology::ModelModule model;
+            yli::ontology::MeshModule mesh;
 
         private:
             yli::ontology::Shader* shader; // Pointer to `Shader` (not a parent!).

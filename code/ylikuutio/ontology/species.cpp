@@ -17,7 +17,7 @@
 
 #include "species.hpp"
 #include "entity.hpp"
-#include "model_module.hpp"
+#include "mesh_module.hpp"
 #include "material.hpp"
 #include "object.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -111,7 +111,7 @@ namespace yli::ontology
 
         this->prerender();
         yli::render::render_model<yli::ontology::ParentModule&, yli::ontology::Entity*, yli::ontology::Object*>(
-                this->model, *(this->get_renderables_container()));
+                this->mesh, *(this->get_renderables_container()));
         this->postrender();
     }
 
@@ -122,27 +122,27 @@ namespace yli::ontology
 
     uint32_t Species::get_x_step() const
     {
-        return this->model.x_step;
+        return this->mesh.x_step;
     }
 
     uint32_t Species::get_z_step() const
     {
-        return this->model.z_step;
+        return this->mesh.z_step;
     }
 
     uint32_t Species::get_image_width() const
     {
-        return this->model.image_width;
+        return this->mesh.image_width;
     }
 
     uint32_t Species::get_image_height() const
     {
-        return this->model.image_height;
+        return this->mesh.image_height;
     }
 
     const std::string& Species::get_model_file_format() const
     {
-        return this->model.model_file_format;
+        return this->mesh.model_file_format;
     }
 
     yli::ontology::Scene* Species::get_scene() const

@@ -53,7 +53,7 @@ namespace yli::ontology
 
     GLint SymbiontSpecies::get_light_id() const
     {
-        return this->model.light_id;
+        return this->mesh.light_id;
     }
 
     void SymbiontSpecies::render()

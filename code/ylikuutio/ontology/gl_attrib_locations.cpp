@@ -17,18 +17,18 @@
 
 #include "gl_attrib_locations.hpp"
 #include "shader.hpp"
-#include "model_module.hpp"
+#include "mesh_module.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 namespace yli::ontology
 {
-    void set_gl_attrib_locations(yli::ontology::Shader* const shader, yli::ontology::ModelModule* const model_module)
+    void set_gl_attrib_locations(yli::ontology::Shader* const shader, yli::ontology::MeshModule* const mesh_module)
     {
-        if (shader != nullptr && model_module != nullptr)
+        if (shader != nullptr && mesh_module != nullptr)
         {
-            model_module->set_vertex_position_modelspace_id(glGetAttribLocation(shader->get_program_id(), "vertex_position_modelspace"));
-            model_module->set_vertex_uv_id(glGetAttribLocation(shader->get_program_id(), "vertexUV"));
-            model_module->set_vertex_normal_modelspace_id(glGetAttribLocation(shader->get_program_id(), "vertex_normal_modelspace"));
+            mesh_module->set_vertex_position_modelspace_id(glGetAttribLocation(shader->get_program_id(), "vertex_position_modelspace"));
+            mesh_module->set_vertex_uv_id(glGetAttribLocation(shader->get_program_id(), "vertexUV"));
+            mesh_module->set_vertex_normal_modelspace_id(glGetAttribLocation(shader->get_program_id(), "vertex_normal_modelspace"));
         }
     }
 }

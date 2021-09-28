@@ -20,7 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "model_module.hpp"
+#include "mesh_module.hpp"
 #include "model_struct.hpp"
 
 // Include standard headers
@@ -44,7 +44,7 @@ namespace yli::ontology
                     yli::ontology::ParentModule* const shapeshifter_transformation_parent_module)
                 : Entity(universe, model_struct),
                 child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, this),
-                model(universe, model_struct)
+                mesh(universe, model_struct)
             {
                 // constructor.
 
@@ -59,7 +59,7 @@ namespace yli::ontology
 
         private:
             yli::ontology::ChildModule child_of_shapeshifter_transformation;
-            yli::ontology::ModelModule model;
+            yli::ontology::MeshModule mesh;
 
         public:
             yli::ontology::Scene* get_scene() const override;

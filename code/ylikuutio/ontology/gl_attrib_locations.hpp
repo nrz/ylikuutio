@@ -21,9 +21,9 @@
 namespace yli::ontology
 {
     class Shader;
-    class ModelModule;
+    class MeshModule;
 
-    void set_gl_attrib_locations(yli::ontology::Shader* const shader, yli::ontology::ModelModule* const model_module);
+    void set_gl_attrib_locations(yli::ontology::Shader* const shader, yli::ontology::MeshModule* const mesh_module);
 }
 
 #endif

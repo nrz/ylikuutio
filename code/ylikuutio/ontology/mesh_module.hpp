@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_MODEL_MODULE_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_MODEL_MODULE_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_MESH_MODULE_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_MESH_MODULE_HPP_INCLUDED
 
 #include "parent_module.hpp"
 #include "universe.hpp"
@@ -42,10 +42,10 @@
 
 namespace yli::ontology
 {
-    class ModelModule
+    class MeshModule
     {
         public:
-            ModelModule(
+            MeshModule(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::ModelStruct& model_struct)
                 : model_filename { model_struct.model_filename },
@@ -123,23 +123,23 @@ namespace yli::ontology
                 {
                     if (this->opengl_in_use && model_struct.scene == nullptr)
                     {
-                        std::cerr << "ERROR: `ModelModule::ModelModule`: `this->scene` is `nullptr`!\n";
+                        std::cerr << "ERROR: `MeshModule::MeshModule`: `this->scene` is `nullptr`!\n";
                     }
 
                     if (this->opengl_in_use && model_struct.shader == nullptr)
                     {
-                        std::cerr << "ERROR: `ModelModule::ModelModule`: `this->shader` is `nullptr`!\n";
+                        std::cerr << "ERROR: `MeshModule::MeshModule`: `this->shader` is `nullptr`!\n";
                     }
 
                     // Do not load model.
                 }
             }
 
-            ModelModule(const ModelModule&) = delete;            // Delete copy constructor.
-            ModelModule& operator=(const ModelModule&) = delete; // Delete copy assignment.
+            MeshModule(const MeshModule&) = delete;            // Delete copy constructor.
+            MeshModule& operator=(const MeshModule&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~ModelModule();
+            virtual ~MeshModule();
 
             std::size_t get_number_of_vertices() const;
             const std::vector<glm::vec3>& get_vertices() const;
@@ -191,9 +191,9 @@ namespace yli::ontology
             uint32_t image_height { 0 };
 
         private:
-            std::vector<glm::vec3> vertices; // Vertices of the `ModelModule`.
-            std::vector<glm::vec2> uvs;      // UVs of the `ModelModule`.
-            std::vector<glm::vec3> normals;  // Normals of the `ModelModule`.
+            std::vector<glm::vec3> vertices; // Vertices of the `MeshModule`.
+            std::vector<glm::vec2> uvs;      // UVs of the `MeshModule`.
+            std::vector<glm::vec3> normals;  // Normals of the `MeshModule`.
 
         public:
             glm::vec3 light_position { NAN, NAN, NAN };

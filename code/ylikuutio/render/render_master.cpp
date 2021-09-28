@@ -228,7 +228,7 @@ namespace yli::render
 
     void RenderMaster::render_symbiont_species(yli::ontology::SymbiontSpecies* const symbiont_species) const
     {
-        yli::render::render_model<yli::ontology::GenericMasterModule&, yli::ontology::Entity*, yli::ontology::Object*>(symbiont_species->model, *(symbiont_species->get_renderables_container()));
+        yli::render::render_model<yli::ontology::GenericMasterModule&, yli::ontology::Entity*, yli::ontology::Object*>(symbiont_species->mesh, *(symbiont_species->get_renderables_container()));
     }
 
     void RenderMaster::render_symbiont_species(std::vector<yli::ontology::Entity*>& symbiont_species_pointer_vector) const
@@ -274,7 +274,7 @@ namespace yli::render
 
     void RenderMaster::render_glyph(yli::ontology::Glyph* const glyph) const
     {
-        yli::render::render_model<yli::ontology::GenericMasterModule&, yli::ontology::Entity*, yli::ontology::Object*>(glyph->model, *(glyph->get_renderables_container()));
+        yli::render::render_model<yli::ontology::GenericMasterModule&, yli::ontology::Entity*, yli::ontology::Object*>(glyph->mesh, *(glyph->get_renderables_container()));
     }
 
     void RenderMaster::render_glyphs(std::vector<yli::ontology::Entity*>& glyph_pointer_vector) const

@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "object.hpp"
-#include "model_module.hpp"
+#include "mesh_module.hpp"
 #include "object_type.hpp"
 #include "glyph.hpp"
 #include "material.hpp"
@@ -313,7 +313,7 @@ namespace yli::ontology
         glUniformMatrix4fv(shader->get_matrix_id(), 1, GL_FALSE, &this->mvp_matrix[0][0]);
         glUniformMatrix4fv(shader->get_model_matrix_id(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
-        yli::ontology::ModelModule* parent_model = nullptr;
+        yli::ontology::MeshModule* parent_model = nullptr;
 
         if (this->object_type == yli::ontology::ObjectType::REGULAR)
         {
@@ -321,7 +321,7 @@ namespace yli::ontology
 
             if (parent_species != nullptr)
             {
-                parent_model = &parent_species->model;
+                parent_model = &parent_species->mesh;
             }
         }
         else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
@@ -334,7 +334,7 @@ namespace yli::ontology
 
             if (parent_glyph != nullptr)
             {
-                parent_model = &parent_glyph->model;
+                parent_model = &parent_glyph->mesh;
             }
         }
 
