@@ -122,7 +122,6 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_symbiont_materials;
             yli::ontology::ParentModule parent_of_holobionts;
 
-        public:
             yli::ontology::Scene* get_scene() const override;
 
         private:
