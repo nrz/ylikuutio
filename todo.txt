@@ -69,7 +69,7 @@ Tasks which are necessary for the second stage:
 [ ] Implement octree segmentation.
 [ ] Implement frustum culling using bounding spheres.
 [ ] Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
-[ ] Implement `yli::ontology::ShapeshifterForm : public Model`.
+[ ] Implement `yli::ontology::ShapeshifterForm`.
 [ ] Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.
 [ ] Implement skeletal animation.
 [ ] Implement creating new named `Variable`s using `Console`.
