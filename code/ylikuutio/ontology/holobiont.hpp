@@ -47,12 +47,12 @@ namespace yli::ontology
             Holobiont(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::HolobiontStruct& holobiont_struct,
-                    yli::ontology::ParentModule* const parent_module,
+                    yli::ontology::ParentModule* const symbiosis_parent_module,
                     yli::ontology::GenericMasterModule* const generic_master_module)
                 : Movable(
                         universe,
                         holobiont_struct,
-                        parent_module,
+                        symbiosis_parent_module,
                         generic_master_module),
                 parent_of_bionts(this, &this->registry, "bionts")
             {

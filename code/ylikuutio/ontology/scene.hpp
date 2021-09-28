@@ -73,6 +73,7 @@ namespace yli::data
 namespace yli::ontology
 {
     class Universe;
+    class Camera;
     class Shader;
     class Symbiosis;
     class RigidBodyModule;

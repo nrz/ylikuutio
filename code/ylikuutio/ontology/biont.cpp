@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "biont.hpp"
+#include "model_module.hpp"
 #include "shader.hpp"
 #include "holobiont.hpp"
 #include "symbiosis.hpp"
@@ -183,14 +184,16 @@ namespace yli::ontology
                 light_position.y,
                 light_position.z);
 
+        const yli::ontology::ModelModule& model = symbiont_species->model;
+
         // 1st attribute buffer : vertices.
-        yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertex_position_modelspace_id());
+        yli::opengl::enable_vertex_attrib_array(model.get_vertex_position_modelspace_id());
 
         // 2nd attribute buffer : UVs.
-        yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertex_uv_id());
+        yli::opengl::enable_vertex_attrib_array(model.get_vertex_uv_id());
 
         // 3rd attribute buffer : normals.
-        yli::opengl::enable_vertex_attrib_array(symbiont_species->get_vertex_normal_modelspace_id());
+        yli::opengl::enable_vertex_attrib_array(model.get_vertex_normal_modelspace_id());
 
         // '`Species`' part ends here.
 
@@ -199,14 +202,14 @@ namespace yli::ontology
         glUniformMatrix4fv(shader->get_matrix_id(), 1, GL_FALSE, &this->mvp_matrix[0][0]);
         glUniformMatrix4fv(shader->get_model_matrix_id(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
-        GLuint vertexbuffer                    = symbiont_species->get_vertexbuffer();
-        uint32_t vertex_position_modelspace_id = symbiont_species->get_vertex_position_modelspace_id();
-        GLuint uvbuffer                        = symbiont_species->get_uvbuffer();
-        uint32_t vertex_uv_id                  = symbiont_species->get_vertex_uv_id();
-        GLuint normalbuffer                    = symbiont_species->get_normalbuffer();
-        uint32_t vertex_normal_modelspace_id   = symbiont_species->get_vertex_normal_modelspace_id();
-        GLuint elementbuffer                   = symbiont_species->get_elementbuffer();
-        uint32_t indices_size                  = symbiont_species->get_indices_size();
+        GLuint vertexbuffer                    = model.get_vertexbuffer();
+        uint32_t vertex_position_modelspace_id = model.get_vertex_position_modelspace_id();
+        GLuint uvbuffer                        = model.get_uvbuffer();
+        uint32_t vertex_uv_id                  = model.get_vertex_uv_id();
+        GLuint normalbuffer                    = model.get_normalbuffer();
+        uint32_t vertex_normal_modelspace_id   = model.get_vertex_normal_modelspace_id();
+        GLuint elementbuffer                   = model.get_elementbuffer();
+        uint32_t indices_size                  = model.get_indices_size();
 
         // 1st attribute buffer : vertices.
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);

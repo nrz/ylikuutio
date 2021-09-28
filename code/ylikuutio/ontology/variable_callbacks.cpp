@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#include "model_module.hpp"
 #include "entity.hpp"
 #include "variable.hpp"
 #include "movable.hpp"
@@ -61,7 +62,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        species->planet_radius = std::get<float>(planet_radius_any_value->data);
+        species->model.planet_radius = std::get<float>(planet_radius_any_value->data);
 
         return nullptr;
     }

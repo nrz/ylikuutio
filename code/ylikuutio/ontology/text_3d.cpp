@@ -27,6 +27,7 @@
 
 namespace yli::ontology
 {
+    class Entity;
     class Scene;
 
     void Text3D::bind_to_new_vector_font_parent(yli::ontology::VectorFont* const new_parent)

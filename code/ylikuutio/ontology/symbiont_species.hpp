@@ -18,16 +18,13 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_SYMBIONT_SPECIES_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_SYMBIONT_SPECIES_HPP_INCLUDED
 
-#include "model.hpp"
+#include "entity.hpp"
 #include "child_module.hpp"
 #include "generic_master_module.hpp"
-#include "universe.hpp"
-#include "scene.hpp"
-#include "shader.hpp"
+#include "model_module.hpp"
 #include "model_struct.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include "code/ylikuutio/render/render_species_or_glyph.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -40,7 +37,6 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
-#include <vector>   // std::vector
 
 // `SymbiontSpecies` is not the ontological parent of `Biont`,
 // as `Holobiont` is the ontological parent of `Biont`.
@@ -56,89 +52,24 @@
 
 namespace yli::ontology
 {
-    class Entity;
     class ParentModule;
+    class Universe;
     class Scene;
+    class Shader;
 
-    class SymbiontSpecies: public yli::ontology::Model
+    class SymbiontSpecies: public yli::ontology::Entity
     {
         public:
-            std::size_t get_indices_size() const;
-            GLint get_light_id() const;
-
             SymbiontSpecies(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::ParentModule* const symbiont_material_parent_module)
-                : Model(universe, model_struct, model_struct.opengl_in_use),
+                : Entity(universe, model_struct),
                 child_of_symbiont_material(symbiont_material_parent_module, this),
-                master_of_bionts(this, &this->registry, "bionts")
+                master_of_bionts(this, &this->registry, "bionts"),
+                model(universe, model_struct)
             {
                 // constructor.
-                this->shader         = model_struct.shader;
-                this->vertices       = model_struct.vertices;
-                this->uvs            = model_struct.uvs;
-                this->normals        = model_struct.normals;
-
-                this->type_string = "yli::ontology::SymbiontSpecies*";
-
-                if (this->shader == nullptr)
-                {
-                    std::cerr << "ERROR: `SymbiontSpecies::SymbiontSpecies`: `this->shader` is `nullptr`!\n";
-                    return;
-                }
-
-                const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
-
-                if (!is_headless)
-                {
-                    // Get a handle for our buffers.
-                    this->vertex_position_modelspace_id = glGetAttribLocation(this->shader->get_program_id(), "vertex_position_modelspace");
-                    this->vertex_uv_id                  = glGetAttribLocation(this->shader->get_program_id(), "vertexUV");
-                    this->vertex_normal_modelspace_id   = glGetAttribLocation(this->shader->get_program_id(), "vertex_normal_modelspace");
-
-                    // Get a handle for our "LightPosition" uniform.
-                    glUseProgram(this->shader->get_program_id());
-                    this->light_id = glGetUniformLocation(this->shader->get_program_id(), "light_position_worldspace");
-
-                    // water level.
-                    GLint water_level_uniform_location = glGetUniformLocation(this->shader->get_program_id(), "water_level");
-
-                    const yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(this->shader->get_parent());
-                    glUniform1f(water_level_uniform_location, scene->get_water_level());
-                }
-
-                // Fill the index buffer.
-                yli::opengl::indexVBO(
-                        this->vertices,
-                        this->uvs,
-                        this->normals,
-                        this->indices,
-                        this->indexed_vertices,
-                        this->indexed_uvs,
-                        this->indexed_normals);
-
-                if (!is_headless)
-                {
-                    // Load it into a VBO.
-                    glGenBuffers(1, &this->vertexbuffer);
-                    glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
-                    glBufferData(GL_ARRAY_BUFFER, this->indexed_vertices.size() * sizeof(glm::vec3), &this->indexed_vertices[0], GL_STATIC_DRAW);
-
-                    glGenBuffers(1, &this->uvbuffer);
-                    glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
-                    glBufferData(GL_ARRAY_BUFFER, this->indexed_uvs.size() * sizeof(glm::vec2), &this->indexed_uvs[0], GL_STATIC_DRAW);
-
-                    glGenBuffers(1, &this->normalbuffer);
-                    glBindBuffer(GL_ARRAY_BUFFER, this->normalbuffer);
-                    glBufferData(GL_ARRAY_BUFFER, this->indexed_normals.size() * sizeof(glm::vec3), &this->indexed_normals[0], GL_STATIC_DRAW);
-
-                    glGenBuffers(1, &this->elementbuffer);
-                    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->elementbuffer);
-                    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(uint32_t), &this->indices[0] , GL_STATIC_DRAW);
-                }
-
-                // TODO: Compute the vertex graph of this `SymbiontSpecies` to enable object vertex modification!
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::SymbiontSpecies*";
@@ -154,8 +85,7 @@ namespace yli::ontology
 
             std::size_t get_number_of_apprentices() const;
 
-            template<class T1, class T2, class T3>
-                friend void yli::render::render_species_or_glyph(T1 species_or_glyph_pointer);
+            GLint get_light_id() const;
 
         private:
             void bind_to_parent();
@@ -163,6 +93,8 @@ namespace yli::ontology
         public:
             // this method renders all `Object`s of this `SymbiontSpecies`.
             void render();
+
+            yli::ontology::GenericMasterModule* get_renderables_container() const;
 
         private:
             yli::ontology::Scene* get_scene() const override;
@@ -172,6 +104,7 @@ namespace yli::ontology
         public:
             yli::ontology::ChildModule child_of_symbiont_material;
             yli::ontology::GenericMasterModule master_of_bionts;
+            yli::ontology::ModelModule model;
 
         private:
             yli::ontology::Shader* shader; // Pointer to `Shader` (not a parent!).

@@ -18,13 +18,12 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_GLYPH_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_GLYPH_HPP_INCLUDED
 
-#include "model.hpp"
+#include "entity.hpp"
 #include "child_module.hpp"
+#include "model_module.hpp"
 #include "universe.hpp"
 #include "model_struct.hpp"
 #include "gl_attrib_locations.hpp"
-#include "code/ylikuutio/triangulation/polygon_triangulation.hpp"
-#include "code/ylikuutio/triangulation/triangulate_polygons_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -40,13 +39,13 @@
 
 namespace yli::ontology
 {
-    class Entity;
     class Scene;
     class VectorFont;
     class Object;
     class ParentModule;
+    class GenericMasterModule;
 
-    class Glyph: public yli::ontology::Model
+    class Glyph: public yli::ontology::Entity
     {
         public:
             // destructor.
@@ -60,36 +59,26 @@ namespace yli::ontology
             friend class yli::ontology::VectorFont;
 
         private:
-            Glyph(yli::ontology::Universe* const universe,
+            Glyph(
+                    yli::ontology::Universe* const universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::ParentModule* const vector_font_parent_module)
-                : Model(universe, model_struct, model_struct.opengl_in_use),
+                : Entity(universe, model_struct),
                 child_of_vector_font(vector_font_parent_module, this),
+                master_of_objects(this, &this->registry, "objects"),
+                model(universe, model_struct),
                 glyph_vertex_data    { model_struct.glyph_vertex_data },
                 glyph_name_pointer   { model_struct.glyph_name_pointer },
                 unicode_char_pointer { model_struct.unicode_char_pointer }
             {
                 // constructor.
 
-                // TODO: implement triangulation of `Glyph` objects!
-                yli::triangulation::TriangulatePolygonsStruct triangulate_polygons_struct;
-                triangulate_polygons_struct.input_vertices = this->glyph_vertex_data;
-                bool triangulating_result = yli::triangulation::triangulate_polygons(
-                        triangulate_polygons_struct,
-                        this->vertices,
-                        this->uvs,
-                        this->normals);
+				const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
 
-                if (!triangulating_result)
-                {
-                    std::cerr << "triangulation failed!\n";
-                }
-                const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
-
-                if (!is_headless && model_struct.shader != nullptr)
+				if (!is_headless && model_struct.shader != nullptr)
                 {
                     // Get a handle for our buffers.
-                    yli::ontology::set_gl_attrib_locations(model_struct.shader, this);
+                    yli::ontology::set_gl_attrib_locations(model_struct.shader, &this->model);
                 }
 
                 // `yli::ontology::Entity` member variables begin here.
@@ -107,12 +96,19 @@ namespace yli::ontology
             // this method renders all `Object`s of this `Glyph`.
             void render();
 
+            yli::ontology::GenericMasterModule* get_renderables_container();
+
         private:
             yli::ontology::ChildModule child_of_vector_font;
+            yli::ontology::GenericMasterModule master_of_objects;
 
-            std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
-            const char* glyph_name_pointer;    // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
-            const char* unicode_char_pointer;  // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
+        public:
+            yli::ontology::ModelModule model;
+
+        private:
+            std::vector<std::vector<glm::vec2>>* glyph_vertex_data { nullptr };
+            const char* glyph_name_pointer                         { nullptr };
+            const char* unicode_char_pointer                       { nullptr };
     };
 }
 

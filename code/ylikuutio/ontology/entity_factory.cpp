@@ -174,6 +174,13 @@ namespace yli::ontology
             std::cerr << "are the same and only 1 of them can be given. No name given to this `Scene`!\n";
         }
 
+        yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(scene_entity);
+
+        // Create the default `Camera`.
+        yli::ontology::CameraStruct camera_struct = scene_struct.default_camera_struct;
+        camera_struct.scene = scene;
+        new yli::ontology::Camera(this->universe, camera_struct, &scene->parent_of_default_camera, nullptr); // Create the default `Camera`.
+
         return scene_entity;
     }
 

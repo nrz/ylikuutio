@@ -47,6 +47,8 @@
 
 namespace yli::ontology
 {
+    class Entity;
+
     Camera::~Camera()
     {
         // destructor.

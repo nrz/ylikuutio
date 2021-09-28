@@ -15,9 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "model.hpp"
-#include "object.hpp"
-#include "family_templates.hpp"
+#include "model_module.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
@@ -27,82 +25,101 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
 namespace yli::ontology
 {
-    Model::~Model()
+    ModelModule::~ModelModule()
     {
         // destructor.
+
+        if (this->opengl_in_use)
+        {
+            glDeleteBuffers(1, &this->vertexbuffer);
+            glDeleteBuffers(1, &this->uvbuffer);
+            glDeleteBuffers(1, &this->normalbuffer);
+            glDeleteBuffers(1, &this->elementbuffer);
+        }
     }
 
-    const std::vector<glm::vec3>& Model::get_vertices() const
+    std::size_t ModelModule::get_number_of_vertices() const
+    {
+        return this->vertices.size();
+    }
+
+    const std::vector<glm::vec3>& ModelModule::get_vertices() const
     {
         return this->vertices;
     }
 
-    const std::vector<glm::vec2>& Model::get_uvs() const
+    const std::vector<glm::vec2>& ModelModule::get_uvs() const
     {
         return this->uvs;
     }
 
-    const std::vector<glm::vec3>& Model::get_normals() const
+    const std::vector<glm::vec3>& ModelModule::get_normals() const
     {
         return this->normals;
     }
 
-    const std::vector<uint32_t>& Model::get_indices() const
+    const std::vector<uint32_t>& ModelModule::get_indices() const
     {
         return this->indices;
     }
 
-    GLint Model::get_vertex_position_modelspace_id() const
+    std::size_t ModelModule::get_indices_size() const
+    {
+        return this->indices.size();
+    }
+
+    GLint ModelModule::get_vertex_position_modelspace_id() const
     {
         return this->vertex_position_modelspace_id;
     }
 
-    GLint Model::get_vertex_uv_id() const
+    GLint ModelModule::get_vertex_uv_id() const
     {
         return this->vertex_uv_id;
     }
 
-    GLint Model::get_vertex_normal_modelspace_id() const
+    GLint ModelModule::get_vertex_normal_modelspace_id() const
     {
         return this->vertex_normal_modelspace_id;
     }
 
-    GLuint Model::get_vertexbuffer() const
+    GLuint ModelModule::get_vertexbuffer() const
     {
         return this->vertexbuffer;
     }
 
-    GLuint Model::get_uvbuffer() const
+    GLuint ModelModule::get_uvbuffer() const
     {
         return this->uvbuffer;
     }
 
-    GLuint Model::get_normalbuffer() const
+    GLuint ModelModule::get_normalbuffer() const
     {
         return this->normalbuffer;
     }
 
-    GLuint Model::get_elementbuffer() const
+    GLuint ModelModule::get_elementbuffer() const
     {
         return this->elementbuffer;
     }
 
-    void Model::set_vertex_position_modelspace_id(const GLint vertex_position_modelspace_id)
+    void ModelModule::set_vertex_position_modelspace_id(const GLint vertex_position_modelspace_id)
     {
         this->vertex_position_modelspace_id = vertex_position_modelspace_id;
     }
 
-    void Model::set_vertex_uv_id(const GLint vertex_uv_id)
+    void ModelModule::set_vertex_uv_id(const GLint vertex_uv_id)
     {
         this->vertex_uv_id = vertex_uv_id;
     }
 
-    void Model::set_vertex_normal_modelspace_id(const GLint vertex_normal_modelspace_id)
+    void ModelModule::set_vertex_normal_modelspace_id(const GLint vertex_normal_modelspace_id)
     {
         this->vertex_normal_modelspace_id = vertex_normal_modelspace_id;
     }

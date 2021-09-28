@@ -49,7 +49,6 @@ namespace yli::ontology
 
     yli::ontology::Scene* SymbiontMaterial::get_scene() const
     {
-        // Return `Scene*` returned by `Symbiosis::get_scene`.
         yli::ontology::Entity* const symbiosis_parent = this->get_parent();
 
         if (symbiosis_parent != nullptr)

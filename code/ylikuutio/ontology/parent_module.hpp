@@ -19,6 +19,7 @@
 #define __YLIKUUTIO_ONTOLOGY_PARENT_MODULE_HPP_INCLUDED
 
 #include "indexable.hpp"
+#include "child_iterator.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -34,6 +35,10 @@ namespace yli::ontology
     class ParentModule: public yli::ontology::Indexable
     {
         public:
+            // Iterator typedefs.
+            typedef ChildIterator       iterator;
+            typedef ChildIterator const_iterator;
+
             void bind_child(yli::ontology::Entity* const child);
             void unbind_child(std::size_t childID);
 
@@ -54,6 +59,27 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const;
 
             yli::ontology::Entity* get(const std::size_t index) const override;
+
+            // Iterator functions.
+            iterator begin()
+            {
+                return iterator(this->child_pointer_vector.begin());
+            }
+
+            iterator end()
+            {
+                return iterator(this->child_pointer_vector.end());
+            }
+
+            const_iterator cbegin()
+            {
+                return const_iterator(this->child_pointer_vector.begin());
+            }
+
+            const_iterator cend()
+            {
+                return const_iterator(this->child_pointer_vector.end());
+            }
 
             std::vector<yli::ontology::Entity*> child_pointer_vector;
 

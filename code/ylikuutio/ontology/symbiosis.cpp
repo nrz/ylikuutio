@@ -115,7 +115,7 @@ namespace yli::ontology
 
     void Symbiosis::render()
     {
-        if (!this->should_be_rendered || !this->opengl_in_use || this->universe == nullptr)
+        if (!this->should_be_rendered || !this->opengl_in_use || this->universe == nullptr || this->universe->get_is_headless())
         {
             return;
         }
@@ -221,6 +221,12 @@ namespace yli::ontology
 
             yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->child_of_shader.get_parent());
 
+            if (shader == nullptr)
+            {
+                std::cerr << "ERROR: `Symbiosis::create_symbionts`: `shader` is `nullptr`!\n";
+                return;
+            }
+
             // Create `SymbiontMaterial`s.
             for (const ofbx::Texture* const ofbx_texture : ofbx_diffuse_texture_pointer_vector)
             {
@@ -250,22 +256,16 @@ namespace yli::ontology
                 for (const std::size_t& mesh_i : this->ofbx_diffuse_texture_mesh_map.at(ofbx_texture))
                 {
                     yli::ontology::ModelStruct model_struct;
-
-                    if (shader != nullptr)
-                    {
-                        model_struct.scene = static_cast<yli::ontology::Scene*>(shader->get_parent());
-                    }
-                    else
-                    {
-                        model_struct.scene = nullptr;
-                    }
-
+                    model_struct.model_filename = this->model_filename;
+                    model_struct.model_file_format = this->model_file_format;
+                    model_struct.scene = static_cast<yli::ontology::Scene*>(shader->get_parent());
                     model_struct.shader = shader;
                     model_struct.symbiont_material = symbiont_material;
                     model_struct.vertex_count = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i).size() : 0;
                     model_struct.vertices = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i) : std::vector<glm::vec3>();
                     model_struct.uvs = mesh_i < this->uvs.size() ? this->uvs.at(mesh_i) : std::vector<glm::vec2>();
                     model_struct.normals = mesh_i < this->normals.size() ? this->normals.at(mesh_i) : std::vector<glm::vec3>();
+                    model_struct.mesh_i = mesh_i;
                     model_struct.light_position = this->light_position;
                     model_struct.opengl_in_use = this->opengl_in_use;
 
@@ -313,48 +313,48 @@ namespace yli::ontology
 
     GLint Symbiosis::get_vertex_position_modelspace_id(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->get_vertex_position_modelspace_id();
+        return this->biontID_symbiont_species_vector[biontID]->model.get_vertex_position_modelspace_id();
     }
 
     GLint Symbiosis::get_vertex_uv_id(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->get_vertex_uv_id();
+        return this->biontID_symbiont_species_vector[biontID]->model.get_vertex_uv_id();
     }
 
     GLint Symbiosis::get_vertex_normal_modelspace_id(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->get_vertex_normal_modelspace_id();
+        return this->biontID_symbiont_species_vector[biontID]->model.get_vertex_normal_modelspace_id();
     }
 
     uint32_t Symbiosis::get_vertexbuffer(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->get_vertexbuffer();
+        return this->biontID_symbiont_species_vector[biontID]->model.get_vertexbuffer();
     }
 
     uint32_t Symbiosis::get_uvbuffer(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->get_uvbuffer();
+        return this->biontID_symbiont_species_vector[biontID]->model.get_uvbuffer();
     }
 
     uint32_t Symbiosis::get_normalbuffer(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->get_normalbuffer();
+        return this->biontID_symbiont_species_vector[biontID]->model.get_normalbuffer();
     }
 
     uint32_t Symbiosis::get_elementbuffer(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->get_elementbuffer();
+        return this->biontID_symbiont_species_vector[biontID]->model.get_elementbuffer();
     }
 
     std::vector<uint32_t> Symbiosis::get_indices(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->get_indices();
+        return this->biontID_symbiont_species_vector[biontID]->model.get_indices();
         // return this->indices.at(biontID);
     }
 
     std::size_t Symbiosis::get_indices_size(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->get_indices_size();
+        return this->biontID_symbiont_species_vector[biontID]->model.get_indices_size();
         // return this->indices.at(biontID).size();
     }
 
@@ -381,17 +381,20 @@ namespace yli::ontology
 
     uint32_t Symbiosis::get_texture(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_material_vector.at(biontID)->get_texture();
+        yli::ontology::SymbiontMaterial* const symbiont_material = this->biontID_symbiont_material_vector.at(biontID);
+        return symbiont_material->get_texture();
     }
 
     GLint Symbiosis::get_openGL_textureID(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_material_vector.at(biontID)->get_openGL_textureID();
+        yli::ontology::SymbiontMaterial* const symbiont_material = this->biontID_symbiont_material_vector.at(biontID);
+        return symbiont_material->get_openGL_textureID();
     }
 
     GLint Symbiosis::get_light_id(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector.at(biontID)->get_light_id();
+        yli::ontology::SymbiontSpecies* const symbiont_species = this->biontID_symbiont_species_vector.at(biontID);
+        return symbiont_species->get_light_id();
     }
 
     const glm::vec3& Symbiosis::get_light_position(const std::size_t /* biontID */) const

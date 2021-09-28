@@ -22,19 +22,20 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <type_traits> // std::decay
 #include <vector>  // std::vector
 
 namespace yli::render
 {
     template<typename T>
-        using ConstIterator = typename T::const_iterator;
+        using SomeIterator = typename std::decay<T>::type::iterator;
 
-    template<class C, class T1, class T2> // C = container, T1 = stored type, T2 = type in which to cast the stored type into.
-        void render_children(C& child_container)
+    template<class ContainerType, class StoredType, class CastType>
+        void render_children(ContainerType& child_container)
         {
-            for (ConstIterator<C> it = child_container.begin(); it != child_container.end(); it++)
+            for (SomeIterator<ContainerType&> it = child_container.begin(); it != child_container.end(); it++)
             {
-                T2 child_pointer = static_cast<T2>(*it);
+                CastType child_pointer = static_cast<CastType>(*it);
 
                 if (child_pointer != nullptr && child_pointer->should_be_rendered)
                 {

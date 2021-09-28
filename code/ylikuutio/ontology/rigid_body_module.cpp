@@ -15,9 +15,9 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "movable.hpp"
 #include "scene.hpp"
 #include "rigid_body_module.hpp"
+#include "scene.hpp"
 
 // Include Bullet
 #include <btBulletDynamicsCommon.h>
@@ -36,13 +36,10 @@ namespace yli::ontology
 
     void RigidBodyModule::add_rigid_body_module_to_scene(yli::ontology::Scene* const scene) const
     {
-        yli::ontology::Movable* const movable = this->movable;
-
-        if (movable == nullptr)
-        {
-            std::cerr << "ERROR: `RigidBodyModule::add_rigid_body_module_to_scene`: `movable` is `nullptr`!\n";
-            return;
-        }
+        // `RigidBodyModule` can not ask the `Scene` using `Entity::get_scene`, because `Movable`
+        // is not initialized before initialization of `RigidBodyModule` composited in it.
+        // Trying to do that would lead to calling pure virtual method and program termination.
+        // Therefore `scene` needs to be passed to `Movable` constructor.
 
         if (scene == nullptr)
         {

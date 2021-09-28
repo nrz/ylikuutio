@@ -17,10 +17,10 @@
 
 #include "species.hpp"
 #include "entity.hpp"
+#include "model_module.hpp"
 #include "material.hpp"
 #include "object.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_species_or_glyph.hpp"
 
 // Include standard headers
@@ -31,6 +31,7 @@
 
 namespace yli::ontology
 {
+    class ParentModule;
     class Scene;
 
     void Species::bind_to_new_material_parent(yli::ontology::Material* const new_parent)
@@ -94,15 +95,6 @@ namespace yli::ontology
         // destructor.
 
         std::cout << "`Species` with childID " << std::dec << this->childID << " will be destroyed.\n";
-
-        if (this->opengl_in_use)
-        {
-            // Cleanup buffers.
-            glDeleteBuffers(1, &this->vertexbuffer);
-            glDeleteBuffers(1, &this->uvbuffer);
-            glDeleteBuffers(1, &this->normalbuffer);
-            glDeleteBuffers(1, &this->elementbuffer);
-        }
     }
 
     yli::ontology::Entity* Species::get_parent() const
@@ -118,33 +110,39 @@ namespace yli::ontology
         }
 
         this->prerender();
-        yli::render::render_species_or_glyph<yli::ontology::Species*, yli::ontology::Entity*, yli::ontology::Object*>(this);
+        yli::render::render_model<yli::ontology::ParentModule&, yli::ontology::Entity*, yli::ontology::Object*>(
+                this->model, *(this->get_renderables_container()));
         this->postrender();
+    }
+
+    yli::ontology::ParentModule* Species::get_renderables_container()
+    {
+        return &this->parent_of_objects;
     }
 
     uint32_t Species::get_x_step() const
     {
-        return this->x_step;
+        return this->model.x_step;
     }
 
     uint32_t Species::get_z_step() const
     {
-        return this->z_step;
+        return this->model.z_step;
     }
 
     uint32_t Species::get_image_width() const
     {
-        return this->image_width;
+        return this->model.image_width;
     }
 
     uint32_t Species::get_image_height() const
     {
-        return this->image_height;
+        return this->model.image_height;
     }
 
     const std::string& Species::get_model_file_format() const
     {
-        return this->model_file_format;
+        return this->model.model_file_format;
     }
 
     yli::ontology::Scene* Species::get_scene() const

@@ -75,7 +75,14 @@ namespace yli::ontology
     void Holobiont::create_bionts(yli::ontology::Scene* const scene, const std::vector<bool>& should_render_bionts_vector)
     {
         // requirements:
+        // `scene` must not be `nullptr`.
         // `this->symbiosis_parent` must not be `nullptr`.
+
+        if (scene == nullptr)
+        {
+            std::cerr << "ERROR: `Holobiont::create_bionts`: `scene` is `nullptr`!\n";
+            return;
+        }
 
         const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->child.get_parent());
 

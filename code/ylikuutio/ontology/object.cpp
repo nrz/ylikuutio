@@ -16,12 +16,12 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "object.hpp"
+#include "model_module.hpp"
 #include "object_type.hpp"
 #include "glyph.hpp"
 #include "material.hpp"
 #include "species.hpp"
 #include "shapeshifter_sequence.hpp"
-#include "model.hpp"
 #include "text_3d.hpp"
 #include "entity_factory.hpp"
 #include "object_struct.hpp"
@@ -313,11 +313,16 @@ namespace yli::ontology
         glUniformMatrix4fv(shader->get_matrix_id(), 1, GL_FALSE, &this->mvp_matrix[0][0]);
         glUniformMatrix4fv(shader->get_model_matrix_id(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
-        yli::ontology::Model* parent_model = nullptr;
+        yli::ontology::ModelModule* parent_model = nullptr;
 
         if (this->object_type == yli::ontology::ObjectType::REGULAR)
         {
-            parent_model = static_cast<yli::ontology::Species*>(this->child.get_parent());
+            yli::ontology::Species* const parent_species = static_cast<yli::ontology::Species*>(this->child.get_parent());
+
+            if (parent_species != nullptr)
+            {
+                parent_model = &parent_species->model;
+            }
         }
         else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
         {
@@ -325,7 +330,12 @@ namespace yli::ontology
         }
         else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
         {
-            parent_model = this->glyph;
+            yli::ontology::Glyph* const parent_glyph = this->glyph;
+
+            if (parent_glyph != nullptr)
+            {
+                parent_model = &parent_glyph->model;
+            }
         }
 
         GLuint vertexbuffer                    = parent_model->get_vertexbuffer();
