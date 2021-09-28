@@ -30,6 +30,8 @@
 
 namespace yli::ontology
 {
+    class Entity;
+
     Brain::~Brain()
     {
         // destructor.

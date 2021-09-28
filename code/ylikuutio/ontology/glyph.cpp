@@ -30,6 +30,8 @@
 
 namespace yli::ontology
 {
+    class GenericMasterModule;
+    class Entity;
     class Scene;
 
     Glyph::~Glyph()
@@ -38,12 +40,6 @@ namespace yli::ontology
         std::string glyph_name_string = this->glyph_name_pointer;
         std::string unicode_string = this->unicode_char_pointer;
         std::cout << "This `Glyph` (\"" << glyph_name_string << "\", Unicode: \"" << std::dec << unicode_string << "\") will be destroyed.\n";
-
-        // Cleanup buffers.
-        glDeleteBuffers(1, &this->vertexbuffer);
-        glDeleteBuffers(1, &this->uvbuffer);
-        glDeleteBuffers(1, &this->normalbuffer);
-        glDeleteBuffers(1, &this->elementbuffer);
     }
 
     yli::ontology::Entity* Glyph::get_parent() const
@@ -75,7 +71,7 @@ namespace yli::ontology
 
     void Glyph::render()
     {
-        if (!this->should_be_rendered || !this->opengl_in_use || this->universe == nullptr)
+        if (!this->should_be_rendered || this->universe == nullptr || this->universe->get_is_headless())
         {
             return;
         }
@@ -90,6 +86,11 @@ namespace yli::ontology
         this->prerender();
         render_master->render_glyph(this);
         this->postrender();
+    }
+
+    yli::ontology::GenericMasterModule* Glyph::get_renderables_container()
+    {
+        return &this->master_of_objects;
     }
 
     const char* Glyph::get_unicode_char_pointer() const

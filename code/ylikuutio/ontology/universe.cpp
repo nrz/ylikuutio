@@ -614,7 +614,7 @@ namespace yli::ontology
         yli::render::RenderStruct render_struct;
         render_struct.scene = this->active_scene;
         render_struct.console = this->active_console;
-        render_struct.font_2d_pointer_vector = &this->parent_of_font_2ds.child_pointer_vector;
+        render_struct.parent_of_font_2ds = &this->parent_of_font_2ds;
         render_struct.window = this->window;
         this->render(render_struct);
     }
@@ -624,7 +624,7 @@ namespace yli::ontology
         yli::render::RenderStruct render_struct;
         render_struct.scene = this->active_scene;
         render_struct.console = this->active_console;
-        render_struct.font_2d_pointer_vector = &this->parent_of_font_2ds.child_pointer_vector;
+        render_struct.parent_of_font_2ds = &this->parent_of_font_2ds;
         render_struct.window = this->window;
         render_struct.should_change_depth_test = false;
         this->render(render_struct);

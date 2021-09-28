@@ -38,7 +38,6 @@
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
-#include "code/ylikuutio/ontology/symbiosis_struct.hpp"
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
 #include "code/ylikuutio/ontology/camera_struct.hpp"
 #include "code/ylikuutio/ontology/text_3d_struct.hpp"
@@ -491,7 +490,6 @@ namespace ajokki
         helsinki_east_downtown_terrain_model_struct.model_file_format = "ASCII_grid";
         helsinki_east_downtown_terrain_model_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
         helsinki_east_downtown_terrain_model_struct.light_position = glm::vec3(0, 100000, 100000);
-        helsinki_east_downtown_terrain_model_struct.is_terrain = true;
         helsinki_east_downtown_terrain_model_struct.x_step = 4;
         helsinki_east_downtown_terrain_model_struct.z_step = 4;
         std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_terrain_species_entity ...\n";
@@ -642,6 +640,7 @@ namespace ajokki
         yli::ontology::ObjectStruct cat_object_struct1(cat_species);
         cat_object_struct1.global_name = "cat1";
         cat_object_struct1.local_name = "kissa1";
+        cat_object_struct1.scene = helsinki_east_downtown_scene;
         cat_object_struct1.brain = rest_brain;
         cat_object_struct1.scene = helsinki_east_downtown_scene;
         cat_object_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
@@ -660,6 +659,7 @@ namespace ajokki
         yli::ontology::ObjectStruct cat_object_struct2(cat_species);
         cat_object_struct2.global_name = "cat2";
         cat_object_struct2.local_name = "kissa2";
+        cat_object_struct2.scene = helsinki_east_downtown_scene;
         cat_object_struct2.brain = rest_brain;
         cat_object_struct2.scene = helsinki_east_downtown_scene;
         cat_object_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
@@ -675,14 +675,14 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::SymbiosisStruct freight_train_symbiosis_struct;
-        freight_train_symbiosis_struct.parent = helsinki_east_downtown_shader;
-        freight_train_symbiosis_struct.model_file_format = "fbx";
-        freight_train_symbiosis_struct.model_filename = "freight_train.fbx";
-        freight_train_symbiosis_struct.light_position = glm::vec3(0, 100000, 100000);
+        yli::ontology::ModelStruct freight_train_model_struct;
+        freight_train_model_struct.shader = helsinki_east_downtown_shader;
+        freight_train_model_struct.model_file_format = "fbx";
+        freight_train_model_struct.model_filename = "freight_train.fbx";
+        freight_train_model_struct.light_position = glm::vec3(0, 100000, 100000);
 
         std::cout << "Creating yli::ontology::Entity* freight_train_symbiosis_entity ...\n";
-        yli::ontology::Entity* const freight_train_symbiosis_entity = entity_factory->create_symbiosis(freight_train_symbiosis_struct);
+        yli::ontology::Entity* const freight_train_symbiosis_entity = entity_factory->create_symbiosis(freight_train_model_struct);
 
         std::cout << "Creating yli::ontology::Symbiosis* freight_train_symbiosis ...\n";
         yli::ontology::Symbiosis* const freight_train_symbiosis = dynamic_cast<yli::ontology::Symbiosis*>(freight_train_symbiosis_entity);
@@ -719,14 +719,14 @@ namespace ajokki
 
         freight_train1->set_global_name("freight_train1");
 
-        yli::ontology::SymbiosisStruct turbo_polizei_png_symbiosis_struct;
-        turbo_polizei_png_symbiosis_struct.parent = helsinki_east_downtown_shader;
-        turbo_polizei_png_symbiosis_struct.model_file_format = "fbx";
-        turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
-        turbo_polizei_png_symbiosis_struct.light_position = glm::vec3(0, 100000, 100000);
+        yli::ontology::ModelStruct turbo_polizei_png_model_struct;
+        turbo_polizei_png_model_struct.shader = helsinki_east_downtown_shader;
+        turbo_polizei_png_model_struct.model_file_format = "fbx";
+        turbo_polizei_png_model_struct.model_filename = "turbo_polizei_png_textures.fbx";
+        turbo_polizei_png_model_struct.light_position = glm::vec3(0, 100000, 100000);
 
         std::cout << "Creating yli::ontology::Entity* turbo_polizei_png_symbiosis_entity ...\n";
-        yli::ontology::Entity* const turbo_polizei_png_symbiosis_entity = entity_factory->create_symbiosis(turbo_polizei_png_symbiosis_struct);
+        yli::ontology::Entity* const turbo_polizei_png_symbiosis_entity = entity_factory->create_symbiosis(turbo_polizei_png_model_struct);
 
         std::cout << "Creating yli::ontology::Symbiosis* turbo_polizei_png_symbiosis ...\n";
         yli::ontology::Symbiosis* const turbo_polizei_png_symbiosis = dynamic_cast<yli::ontology::Symbiosis*>(turbo_polizei_png_symbiosis_entity);

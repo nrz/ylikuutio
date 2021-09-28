@@ -23,6 +23,7 @@
 #include "png_heightmap_loader.hpp"
 #include "srtm_heightmap_loader.hpp"
 #include "heightmap_loader_struct.hpp"
+#include "code/ylikuutio/load/model_loader_struct.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -40,7 +41,7 @@
 
 namespace yli::load
 {
-    bool load_species(
+    bool load_model(
             const yli::load::ModelLoaderStruct& model_loader_struct,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_uvs,
@@ -86,14 +87,14 @@ namespace yli::load
         {
             if (model_loader_struct.image_width_pointer == nullptr)
             {
-                std::cerr << "ERROR: `yli::load::load_species`: !\n";
+                std::cerr << "ERROR: `yli::load::load_model`: !\n";
                 std::cerr << "`model_loader_struct.image_width_pointer` is `nullptr`!\n";
                 return false;
             }
 
             if (model_loader_struct.image_height_pointer == nullptr)
             {
-                std::cerr << "ERROR: `yli::load::load_species`: !\n";
+                std::cerr << "ERROR: `yli::load::load_model`: !\n";
                 std::cerr << "`model_loader_struct.image_height_pointer` is `nullptr`!\n";
                 return false;
             }
@@ -148,7 +149,7 @@ namespace yli::load
         }
         else
         {
-            std::cerr << "ERROR: no model was loaded!\n";
+            std::cerr << "ERROR: `yli::load::load_model`: no model was loaded!\n";
             std::cerr << "Model file format: " << model_loader_struct.model_struct.model_file_format << "\n";
             return false;
         }
@@ -169,8 +170,7 @@ namespace yli::load
 
         opengl_in_use = model_loader_struct.model_struct.opengl_in_use;
 
-        if (!model_loader_struct.is_headless &&
-                opengl_in_use &&
+        if (opengl_in_use &&
                 vertexbuffer != nullptr &&
                 uvbuffer != nullptr &&
                 normalbuffer != nullptr &&

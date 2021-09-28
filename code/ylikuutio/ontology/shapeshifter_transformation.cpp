@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "shapeshifter_transformation.hpp"
-#include "entity.hpp"
 #include "universe.hpp"
 #include "material.hpp"
 #include "shapeshifter_sequence.hpp"
@@ -31,6 +30,7 @@
 
 namespace yli::ontology
 {
+    class Entity;
     class Scene;
 
     void ShapeshifterTransformation::bind_to_parent()

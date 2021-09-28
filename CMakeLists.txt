@@ -695,6 +695,7 @@ add_library(ylikuutio STATIC
 
     # ontology, in alphabetical order
     code/ylikuutio/ontology/activate_callback.hpp
+    code/ylikuutio/ontology/apprentice_iterator.hpp
     code/ylikuutio/ontology/apprentice_module.cpp
     code/ylikuutio/ontology/apprentice_module.hpp
     code/ylikuutio/ontology/biont.cpp
@@ -708,6 +709,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/camera.cpp
     code/ylikuutio/ontology/camera.hpp
     code/ylikuutio/ontology/camera_struct.hpp
+    code/ylikuutio/ontology/child_iterator.hpp
     code/ylikuutio/ontology/child_module.cpp
     code/ylikuutio/ontology/child_module.hpp
     code/ylikuutio/ontology/chunk.cpp
@@ -763,8 +765,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/material.cpp
     code/ylikuutio/ontology/material.hpp
     code/ylikuutio/ontology/material_struct.hpp
-    code/ylikuutio/ontology/model.cpp
-    code/ylikuutio/ontology/model.hpp
+    code/ylikuutio/ontology/model_module.cpp
+    code/ylikuutio/ontology/model_module.hpp
     code/ylikuutio/ontology/model_struct.hpp
     code/ylikuutio/ontology/movable.cpp
     code/ylikuutio/ontology/movable.hpp
@@ -816,7 +818,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/symbiont_species.hpp
     code/ylikuutio/ontology/symbiosis.cpp
     code/ylikuutio/ontology/symbiosis.hpp
-    code/ylikuutio/ontology/symbiosis_struct.hpp
     code/ylikuutio/ontology/terrain_generation_callbacks.cpp
     code/ylikuutio/ontology/terrain_generation_callbacks.hpp
     code/ylikuutio/ontology/text_2d.hpp
@@ -1215,7 +1216,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/species.hpp
         code/ylikuutio/ontology/symbiosis.cpp
         code/ylikuutio/ontology/symbiosis.hpp
-        code/ylikuutio/ontology/symbiosis_struct.hpp
         code/ylikuutio/ontology/text_3d_struct.hpp
         code/ylikuutio/ontology/universe.cpp
         code/ylikuutio/ontology/universe.hpp

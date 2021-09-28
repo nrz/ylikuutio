@@ -35,7 +35,6 @@
 
 namespace yli::ontology
 {
-    class Universe;
     class Scene;
     class Shader;
     class Material;
@@ -70,7 +69,6 @@ namespace yli::ontology
         std::vector<glm::vec3> vertices;
         std::vector<glm::vec2> uvs;
         std::vector<glm::vec3> normals;
-        yli::ontology::Universe* universe                                      { nullptr }; // Pointer to the `Universe`.
         yli::ontology::Scene* scene                                            { nullptr }; // Pointer to `Scene`.
         yli::ontology::Shader* shader                                          { nullptr }; // Pointer to `Shader`.
         yli::ontology::Material* material                                      { nullptr }; // Pointer to `Material`.
@@ -82,7 +80,6 @@ namespace yli::ontology
         const char* unicode_char_pointer       { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.
         uint32_t vertex_count { std::numeric_limits<uint32_t>::max() };
         float water_level { -1.0f * std::numeric_limits<float>::infinity() }; // Water level in meters. used only for terrains (planets and moons).
-        bool is_terrain                   { false };                          // Terrains (planets and moons) currently neither rotate nor translate.
         bool opengl_in_use                { true };                           // If `opengl_in_use` is `false`, then no OpenGL-specific code shall be executed.
         bool use_real_texture_coordinates { true };
     };

@@ -17,6 +17,7 @@
 
 #include "symbiont_species.hpp"
 #include "universe.hpp"
+#include "symbiont_material.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_master.hpp"
@@ -31,19 +32,13 @@
 namespace yli::ontology
 {
     class Entity;
+    class Scene;
 
     SymbiontSpecies::~SymbiontSpecies()
     {
         // destructor.
-        std::cout << "`SymbiontSpecies` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-        if (this->opengl_in_use)
-        {
-            glDeleteBuffers(1, &this->vertexbuffer);
-            glDeleteBuffers(1, &this->uvbuffer);
-            glDeleteBuffers(1, &this->normalbuffer);
-            glDeleteBuffers(1, &this->elementbuffer);
-        }
+        std::cout << "`SymbiontSpecies` with childID " << std::dec << this->childID << " will be destroyed.\n";
     }
 
     yli::ontology::Entity* SymbiontSpecies::get_parent() const
@@ -56,10 +51,16 @@ namespace yli::ontology
         return this->master_of_bionts.get_number_of_apprentices(); // `Biont`s belonging to `SymbiontSpecies` are its apprentices.
     }
 
+    GLint SymbiontSpecies::get_light_id() const
+    {
+        return this->model.light_id;
+    }
+
     void SymbiontSpecies::render()
     {
         if (this->universe == nullptr)
         {
+            std::cerr << "ERROR: `SymbiontSpecies::render`: `this->universe` is `nullptr`!\n";
             return;
         }
 
@@ -67,6 +68,7 @@ namespace yli::ontology
 
         if (render_master == nullptr)
         {
+            std::cerr << "ERROR: `SymbiontSpecies::render`: `render_master` is `nullptr`!\n";
             return;
         }
 
@@ -75,15 +77,11 @@ namespace yli::ontology
         this->postrender();
     }
 
-    std::size_t SymbiontSpecies::get_indices_size() const
+    yli::ontology::GenericMasterModule* SymbiontSpecies::get_renderables_container() const
     {
-        return this->indices.size();
+        return const_cast<yli::ontology::GenericMasterModule*>(&this->master_of_bionts);
     }
 
-    GLint SymbiontSpecies::get_light_id() const
-    {
-        return this->light_id;
-    }
     yli::ontology::Scene* SymbiontSpecies::get_scene() const
     {
         yli::ontology::Entity* const parent = this->get_parent();

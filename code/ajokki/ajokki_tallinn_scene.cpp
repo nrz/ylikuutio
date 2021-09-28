@@ -118,7 +118,6 @@ namespace ajokki
         tallinn_terrain_model_struct.light_position = glm::vec3(0, 100000, 0);
         tallinn_terrain_model_struct.latitude = 59.437222f;  // in degrees.
         tallinn_terrain_model_struct.longitude = 24.745278f; // in degrees.
-        tallinn_terrain_model_struct.is_terrain = true;
         tallinn_terrain_model_struct.x_step = 1;
         tallinn_terrain_model_struct.z_step = 1;
 

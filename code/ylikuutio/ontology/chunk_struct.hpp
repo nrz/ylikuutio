@@ -18,14 +18,14 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_CHUNK_STRUCT_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_CHUNK_STRUCT_HPP_INCLUDED
 
-#include "model_struct.hpp"
+#include "entity_struct.hpp"
 
 namespace yli::ontology
 {
     class Universe;
     class ChunkMaster;
 
-    struct ChunkStruct: public yli::ontology::ModelStruct
+    struct ChunkStruct: public yli::ontology::EntityStruct
     {
         yli::ontology::Universe* universe  { nullptr }; // pointer to the `Universe`.
         yli::ontology::ChunkMaster* parent { nullptr }; // pointer to the `ChunkMaster`.

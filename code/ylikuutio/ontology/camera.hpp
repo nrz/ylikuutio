@@ -78,12 +78,12 @@ namespace yli::ontology
             Camera(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::CameraStruct& camera_struct,
-                    yli::ontology::ParentModule* const parent_module,
+                    yli::ontology::ParentModule* const scene_parent_module,
                     yli::ontology::GenericMasterModule* const generic_master_module)
                 : Movable(
                         universe,
                         camera_struct,
-                        parent_module,
+                        scene_parent_module,
                         generic_master_module)
             {
                 // constructor.

@@ -18,8 +18,9 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_SPECIES_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_SPECIES_HPP_INCLUDED
 
+#include "entity.hpp"
 #include "child_module.hpp"
-#include "model.hpp"
+#include "model_module.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
@@ -27,7 +28,6 @@
 #include "code/ylikuutio/load/model_loader.hpp"
 #include "code/ylikuutio/load/model_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
@@ -36,12 +36,11 @@
 
 namespace yli::ontology
 {
-    class Entity;
+    class ParentModule;
     class Scene;
     class Material;
-    class ParentModule;
 
-    class Species: public yli::ontology::Model
+    class Species: public yli::ontology::Entity
     {
         public:
             // this method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
@@ -52,83 +51,16 @@ namespace yli::ontology
                     yli::ontology::Universe* const universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::ParentModule* const material_parent_module)
-                : Model(universe, model_struct, model_struct.opengl_in_use),
+                : Entity(universe, model_struct),
                 child_of_material(material_parent_module, this),
-                model_filename               { model_struct.model_filename },
-                model_file_format            { model_struct.model_file_format },
-                color_channel                { model_struct.color_channel },
-                triangulation_type           { model_struct.triangulation_type },
-                planet_radius                { model_struct.planet_radius },
-                divisor                      { model_struct.divisor },
-                latitude                     { model_struct.latitude },
-                longitude                    { model_struct.longitude },
-                mesh_i                       { model_struct.mesh_i },
-                x_step                       { model_struct.x_step },
-                z_step                       { model_struct.z_step },
-                is_terrain                   { model_struct.is_terrain },
-                use_real_texture_coordinates { model_struct.use_real_texture_coordinates }
+                parent_of_objects(this, &this->registry, "objects"),
+                model(universe, model_struct)
             {
                 // constructor.
 
-                    const bool is_headless { this->universe == nullptr ? true : this->universe->get_is_headless() };
-
-                    if (!is_headless && this->opengl_in_use)
-                    {
-                        // Get a handle for our buffers.
-                        this->vertex_position_modelspace_id = glGetAttribLocation(model_struct.shader->get_program_id(), "vertex_position_modelspace");
-                        this->vertex_uv_id = glGetAttribLocation(model_struct.shader->get_program_id(), "vertexUV");
-                        this->vertex_normal_modelspace_id = glGetAttribLocation(model_struct.shader->get_program_id(), "vertex_normal_modelspace");
-
-                        // Get a handle for our "LightPosition" uniform.
-                        glUseProgram(model_struct.shader->get_program_id());
-                        this->light_id = glGetUniformLocation(model_struct.shader->get_program_id(), "light_position_worldspace");
-
-                        // water level.
-                        GLint water_level_uniform_location = glGetUniformLocation(model_struct.shader->get_program_id(), "water_level");
-                        glUniform1f(water_level_uniform_location, model_struct.scene->get_water_level());
-                    }
-
-                    yli::load::ModelLoaderStruct model_loader_struct;
-                    model_loader_struct.model_struct.model_filename               = this->model_filename;
-                    model_loader_struct.model_struct.model_file_format            = this->model_file_format;
-                    model_loader_struct.model_struct.color_channel                = this->color_channel;
-                    model_loader_struct.model_struct.triangulation_type           = this->triangulation_type;
-                    model_loader_struct.model_struct.planet_radius                = this->planet_radius;
-                    model_loader_struct.model_struct.divisor                      = this->divisor;
-                    model_loader_struct.model_struct.latitude                     = this->latitude;
-                    model_loader_struct.model_struct.longitude                    = this->longitude;
-                    model_loader_struct.model_struct.mesh_i                       = this->mesh_i;
-                    model_loader_struct.model_struct.x_step                       = this->x_step;
-                    model_loader_struct.model_struct.z_step                       = this->z_step;
-                    model_loader_struct.model_struct.opengl_in_use                = this->opengl_in_use;
-                    model_loader_struct.model_struct.use_real_texture_coordinates = this->use_real_texture_coordinates;
-                    model_loader_struct.image_width_pointer                         = &this->image_width;
-                    model_loader_struct.image_height_pointer                        = &this->image_height;
-                    model_loader_struct.is_headless                                 = is_headless;
-
-                    const bool is_debug_mode = true;
-
-                    yli::load::load_species(
-                            model_loader_struct,
-                            this->vertices,
-                            this->uvs,
-                            this->normals,
-                            this->indices,
-                            this->indexed_vertices,
-                            this->indexed_uvs,
-                            this->indexed_normals,
-                            &this->vertexbuffer,
-                            &this->uvbuffer,
-                            &this->normalbuffer,
-                            &this->elementbuffer,
-                            this->opengl_in_use,
-                            is_debug_mode);
-
-                    // TODO: Compute the graph of this object type to enable object vertex modification!
-
-                    // `yli::ontology::Entity` member variables begin here.
-                    this->type_string = "yli::ontology::Species*";
-                    this->can_be_erased = true;
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "yli::ontology::Species*";
+                this->can_be_erased = true;
             }
 
             Species(const Species&) = delete;            // Delete copy constructor.
@@ -149,8 +81,7 @@ namespace yli::ontology
             // this method renders all `Object`s of this `Species`.
             void render();
 
-            template<class T1, class T2>
-                friend void yli::render::render_children(const std::vector<T1>& child_pointer_vector);
+            yli::ontology::ParentModule* get_renderables_container();
 
             yli::ontology::Scene* get_scene() const override;
 
@@ -161,29 +92,9 @@ namespace yli::ontology
         private:
             yli::ontology::ChildModule child_of_material;
 
-            std::string model_filename;    // Filename of the model file.
-            std::string model_file_format; // Type of the model file, eg. `"png"`.
-            std::string color_channel;     // Color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
-            std::string triangulation_type;
-
         public:
-            float planet_radius;           // Radius of sea level in kilometers. Used only for terrains.
-            float divisor;                 // Value by which SRTM values are divided to convert them to kilometers.
-
-        private:
-            float latitude;                // For SRTM.
-            float longitude;               // For SRTM.
-
-            uint32_t mesh_i;
-
-            uint32_t x_step;
-            uint32_t z_step;
-
-            uint32_t image_width  { 0 };
-            uint32_t image_height { 0 };
-
-            bool is_terrain;               // Terrains do not rotate nor translate.
-            bool use_real_texture_coordinates;
+            yli::ontology::ParentModule parent_of_objects;
+            yli::ontology::ModelModule model;
     };
 }
 

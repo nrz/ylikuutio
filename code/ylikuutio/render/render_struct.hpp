@@ -17,12 +17,9 @@
 
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
-// Include standard headers
-#include <vector> // std::vector
-
 namespace yli::ontology
 {
-    class Entity;
+    class ParentModule;
     class Scene;
     class Font2D;
     class Console;
@@ -34,7 +31,7 @@ namespace yli::render
     {
         yli::ontology::Scene* scene                                 { nullptr };
         yli::ontology::Console* console                             { nullptr };
-        std::vector<yli::ontology::Entity*>* font_2d_pointer_vector { nullptr };
+        yli::ontology::ParentModule* parent_of_font_2ds             { nullptr };
         SDL_Window* window                                          { nullptr };
         bool should_change_depth_test                               { true };
     };

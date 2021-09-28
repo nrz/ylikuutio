@@ -48,7 +48,6 @@ TEST(model_struct_must_be_initialized_appropriately, model_struct)
     ASSERT_EQ(test_model_struct.vertices, std::vector<glm::vec3> { });
     ASSERT_EQ(test_model_struct.uvs, std::vector<glm::vec2> { });
     ASSERT_EQ(test_model_struct.normals, std::vector<glm::vec3> { });
-    ASSERT_EQ(test_model_struct.universe, nullptr);
     ASSERT_EQ(test_model_struct.scene, nullptr);
     ASSERT_EQ(test_model_struct.shader, nullptr);
     ASSERT_EQ(test_model_struct.material, nullptr);
@@ -60,7 +59,6 @@ TEST(model_struct_must_be_initialized_appropriately, model_struct)
     ASSERT_EQ(test_model_struct.unicode_char_pointer, nullptr);
     ASSERT_EQ(test_model_struct.vertex_count, std::numeric_limits<std::uint32_t>::max());
     ASSERT_EQ(test_model_struct.water_level, -1.0f * std::numeric_limits<float>::infinity());
-    ASSERT_FALSE(test_model_struct.is_terrain);
     ASSERT_TRUE(test_model_struct.opengl_in_use);
     ASSERT_TRUE(test_model_struct.use_real_texture_coordinates);
 }

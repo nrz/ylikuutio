@@ -39,6 +39,7 @@
 // the master will survice.
 
 #include "indexable.hpp"
+#include "apprentice_iterator.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -55,6 +56,10 @@ namespace yli::ontology
     class GenericMasterModule: public yli::ontology::Indexable
     {
         public:
+            // Iterator typedefs.
+            typedef ApprenticeIterator       iterator;
+            typedef ApprenticeIterator const_iterator;
+
             void bind_apprentice_module(yli::ontology::ApprenticeModule* const apprentice_module);
             void unbind_apprentice_module(std::size_t apprenticeID);
 
@@ -75,6 +80,27 @@ namespace yli::ontology
             std::size_t get_number_of_apprentices() const;
 
             yli::ontology::Entity* get(const std::size_t index) const override;
+
+            // Iterator functions.
+            iterator begin()
+            {
+                return iterator(this->apprentice_module_pointer_vector.begin());
+            }
+
+            iterator end()
+            {
+                return iterator(this->apprentice_module_pointer_vector.end());
+            }
+
+            const_iterator cbegin()
+            {
+                return const_iterator(this->apprentice_module_pointer_vector.begin());
+            }
+
+            const_iterator cend()
+            {
+                return const_iterator(this->apprentice_module_pointer_vector.end());
+            }
 
             friend class yli::ontology::ApprenticeModule;
 

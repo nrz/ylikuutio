@@ -21,9 +21,9 @@
 namespace yli::ontology
 {
     class Shader;
-    class Glyph;
+    class ModelModule;
 
-    void set_gl_attrib_locations(yli::ontology::Shader* const shader, yli::ontology::Glyph* const glyph);
+    void set_gl_attrib_locations(yli::ontology::Shader* const shader, yli::ontology::ModelModule* const model_module);
 }
 
 #endif

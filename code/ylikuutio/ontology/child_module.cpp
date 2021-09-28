@@ -72,6 +72,11 @@ namespace yli::ontology
         return this->parent_module->get_entity();
     }
 
+    yli::ontology::Entity* ChildModule::get_child() const
+    {
+        return this->entity;
+    }
+
     void ChildModule::unbind_child() const
     {
         if (this->parent_module == nullptr)

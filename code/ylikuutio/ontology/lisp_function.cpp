@@ -27,6 +27,7 @@
 
 namespace yli::ontology
 {
+    class Entity;
     class Scene;
 
     LispFunction::~LispFunction()
@@ -66,7 +67,7 @@ namespace yli::ontology
         // `GenericLispFunctionOverload` is called and its return value
         // is returned.
         //
-        // If the variable binding fails, then next 
+        // If the variable binding fails, then next
         // `GenericLispFunctionOverload` in attempted etc.
         //
         // If variable binding fails for all `GenericLispFunctionOverload`s,

@@ -18,8 +18,9 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_SHAPESHIFTER_FORM_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_SHAPESHIFTER_FORM_HPP_INCLUDED
 
-#include "model.hpp"
+#include "entity.hpp"
 #include "child_module.hpp"
+#include "model_module.hpp"
 #include "model_struct.hpp"
 
 // Include standard headers
@@ -29,21 +30,21 @@
 
 namespace yli::ontology
 {
-    class Entity;
+    class ParentModule;
     class Universe;
     class Scene;
     class ShapeshifterTransformation;
-    class ParentModule;
 
-    class ShapeshifterForm: public yli::ontology::Model
+    class ShapeshifterForm: public yli::ontology::Entity
     {
         public:
             ShapeshifterForm(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::ParentModule* const shapeshifter_transformation_parent_module)
-                : Model(universe, model_struct, model_struct.opengl_in_use),
-                child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, this)
+                : Entity(universe, model_struct),
+                child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, this),
+                model(universe, model_struct)
             {
                 // constructor.
 
@@ -58,6 +59,7 @@ namespace yli::ontology
 
         private:
             yli::ontology::ChildModule child_of_shapeshifter_transformation;
+            yli::ontology::ModelModule model;
 
         public:
             yli::ontology::Scene* get_scene() const override;

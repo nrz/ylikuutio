@@ -18,7 +18,7 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_CHUNK_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_CHUNK_HPP_INCLUDED
 
-#include "model.hpp"
+#include "entity.hpp"
 #include "chunk_struct.hpp"
 #include "chunk_master.hpp"
 #include "material.hpp"
@@ -42,14 +42,11 @@
 
 namespace yli::ontology
 {
-    class Chunk: public yli::ontology::Model
+    class Chunk: public yli::ontology::Entity
     {
         public:
             Chunk(const yli::ontology::ChunkStruct& chunk_struct)
-                : Model(
-                        chunk_struct.universe,
-                        chunk_struct,
-                        chunk_struct.opengl_in_use)
+                : Entity(chunk_struct.universe, chunk_struct)
             {
                 // constructor.
                 this->is_original = true;

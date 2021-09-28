@@ -120,7 +120,6 @@ namespace ajokki
         joensuu_center_west_terrain_model_struct.model_file_format = "ASCII_grid";
         joensuu_center_west_terrain_model_struct.model_filename = "N5424G.asc"; // Joensuu center & western.
         joensuu_center_west_terrain_model_struct.light_position = glm::vec3(0, 100000, 100000);
-        joensuu_center_west_terrain_model_struct.is_terrain = true;
         joensuu_center_west_terrain_model_struct.x_step = 4;
         joensuu_center_west_terrain_model_struct.z_step = 4;
         std::cout << "Creating yli::ontology::Entity* joensuu_center_west_terrain_species_entity ...\n";
@@ -138,6 +137,7 @@ namespace ajokki
 
         // Create Joensuu center west terrain.
         yli::ontology::ObjectStruct joensuu_center_west_struct(joensuu_center_west_terrain_species);
+        joensuu_center_west_struct.scene = joensuu_center_west_scene;
         joensuu_center_west_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_object(joensuu_center_west_struct);
 

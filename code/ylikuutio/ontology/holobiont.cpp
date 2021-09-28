@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "holobiont.hpp"
-#include "entity.hpp"
 #include "universe.hpp"
 #include "symbiosis.hpp"
 #include "symbiont_species.hpp"
@@ -45,6 +44,7 @@
 
 namespace yli::ontology
 {
+    class Entity;
     class Scene;
 
     Holobiont::~Holobiont()
@@ -72,10 +72,17 @@ namespace yli::ontology
         this->postrender();
     }
 
-    void Holobiont::create_bionts(const std::vector<bool>& should_render_bionts_vector)
+    void Holobiont::create_bionts(yli::ontology::Scene* const scene, const std::vector<bool>& should_render_bionts_vector)
     {
         // requirements:
+        // `scene` must not be `nullptr`.
         // `this->symbiosis_parent` must not be `nullptr`.
+
+        if (scene == nullptr)
+        {
+            std::cerr << "ERROR: `Holobiont::create_bionts`: `scene` is `nullptr`!\n";
+            return;
+        }
 
         const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->child.get_parent());
 
@@ -112,6 +119,7 @@ namespace yli::ontology
 
             yli::ontology::BiontStruct biont_struct;
             biont_struct.biontID                = biontID;
+            biont_struct.scene                  = scene;
             biont_struct.parent                 = this;
             biont_struct.symbiont_species       = symbiont_species;
             biont_struct.initial_rotate_vectors = this->initial_rotate_vectors;

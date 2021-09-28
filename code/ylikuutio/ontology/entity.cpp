@@ -93,18 +93,14 @@ namespace yli::ontology
         : registry(),
         parent_of_any_struct_entities(this, &this->registry, "any_struct_entities"),
         universe { universe },
-        is_application { entity_struct.is_application },
         is_variable { entity_struct.is_variable }
     {
         // constructor.
 
         // Get `entityID` from `Universe` and set pointer to this `Entity`.
-        if (!this->is_application)
-        {
-            this->bind_to_universe();
-        }
+        this->bind_to_universe();
 
-        if (!this->is_application && !this->is_variable && this->universe != nullptr && this->universe != this)
+        if (!this->is_variable && this->universe != nullptr && this->universe != this)
         {
             this->should_be_rendered = !this->universe->get_is_headless();
 

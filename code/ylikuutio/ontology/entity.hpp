@@ -172,7 +172,6 @@ namespace yli::ontology
             virtual std::size_t get_number_of_children() const = 0;
             virtual std::size_t get_number_of_descendants() const = 0;
 
-            bool is_application;
             bool is_variable;
     };
 }

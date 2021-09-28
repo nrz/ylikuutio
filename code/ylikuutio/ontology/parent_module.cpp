@@ -92,6 +92,13 @@ namespace yli::ontology
         yli::hierarchy::delete_children<yli::ontology::Entity*>(this->child_pointer_vector, this->number_of_children);
     }
 
+    yli::ontology::ParentModule* ParentModule::get() const
+    {
+        // This function exists simply to be able to pass `ParentModule` as non-const parameter.
+        yli::ontology::ParentModule* parent_module = const_cast<yli::ontology::ParentModule*>(this);
+        return parent_module;
+    }
+
     yli::ontology::Entity* ParentModule::get_entity() const
     {
         return this->entity;
