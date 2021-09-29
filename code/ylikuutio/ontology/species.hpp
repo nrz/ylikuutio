@@ -37,7 +37,6 @@
 
 namespace yli::ontology
 {
-    class ParentModule;
     class Scene;
     class Material;
 
