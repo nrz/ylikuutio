@@ -73,10 +73,10 @@ namespace yli::ontology
             Movable(yli::ontology::Universe* const universe,
                     const yli::ontology::MovableStruct& movable_struct,
                     yli::ontology::ParentModule* const parent_module,
-                    yli::ontology::GenericMasterModule* const generic_master_module)
+                    yli::ontology::GenericMasterModule* const brain_master)
                 : Entity(universe, movable_struct),
                 child(parent_module, this),
-                apprentice_of_brain(generic_master_module, this),
+                apprentice_of_brain(brain_master, this),
                 rigid_body_module(movable_struct.rigid_body_module_struct, movable_struct.scene, this),
                 initial_rotate_vectors { movable_struct.initial_rotate_vectors },
                 initial_rotate_angles { movable_struct.initial_rotate_angles },
