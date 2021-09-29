@@ -26,7 +26,6 @@
 #include "movable_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
