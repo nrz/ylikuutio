@@ -20,6 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
+#include "parent_module.hpp"
 #include "mesh_module.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
