@@ -23,7 +23,6 @@
 #include "generic_master_module.hpp"
 #include "mesh_module.hpp"
 #include "model_struct.hpp"
-#include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM

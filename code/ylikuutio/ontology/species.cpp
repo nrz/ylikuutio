@@ -20,7 +20,6 @@
 #include "mesh_module.hpp"
 #include "material.hpp"
 #include "object.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/render/render_species_or_glyph.hpp"
 
 // Include standard headers

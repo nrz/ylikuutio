@@ -23,12 +23,7 @@
 #include "parent_module.hpp"
 #include "mesh_module.hpp"
 #include "universe.hpp"
-#include "scene.hpp"
-#include "shader.hpp"
 #include "model_struct.hpp"
-#include "code/ylikuutio/load/model_loader.hpp"
-#include "code/ylikuutio/load/model_loader_struct.hpp"
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
