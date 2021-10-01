@@ -20,7 +20,7 @@
 #include "mesh_module.hpp"
 #include "material.hpp"
 #include "object.hpp"
-#include "code/ylikuutio/render/render_species_or_glyph.hpp"
+#include "code/ylikuutio/render/render_model.hpp"
 
 // Include standard headers
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios

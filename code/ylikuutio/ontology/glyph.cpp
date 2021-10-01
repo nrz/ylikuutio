@@ -20,7 +20,7 @@
 #include "object.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/render/render_master.hpp"
-#include "code/ylikuutio/render/render_species_or_glyph.hpp"
+#include "code/ylikuutio/render/render_model.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t

@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_RENDER_RENDER_SPECIES_OR_GLYPH_HPP_INCLUDED
-#define __YLIKUUTIO_RENDER_RENDER_SPECIES_OR_GLYPH_HPP_INCLUDED
+#ifndef __YLIKUUTIO_RENDER_RENDER_MODEL_HPP_INCLUDED
+#define __YLIKUUTIO_RENDER_RENDER_MODEL_HPP_INCLUDED
 
 #include "render_templates.hpp"
 #include "code/ylikuutio/ontology/mesh_module.hpp"

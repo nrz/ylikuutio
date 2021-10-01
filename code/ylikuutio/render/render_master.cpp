@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "render_master.hpp"
-#include "render_species_or_glyph.hpp"
+#include "render_model.hpp"
 #include "render_templates.hpp"
 #include "render_master_struct.hpp"
 #include "render_struct.hpp"
