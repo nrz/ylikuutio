@@ -22,7 +22,6 @@
 #include "child_module.hpp"
 #include "parent_module.hpp"
 #include "mesh_module.hpp"
-#include "universe.hpp"
 #include "model_struct.hpp"
 
 // Include standard headers
@@ -32,6 +31,7 @@
 
 namespace yli::ontology
 {
+    class Universe;
     class Scene;
     class Material;
 
