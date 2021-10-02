@@ -105,8 +105,15 @@ namespace yli::ontology
 
     std::shared_ptr<yli::data::AnyValue> activate_x(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
-        if (entity == nullptr || variable == nullptr)
+        if (entity == nullptr)
         {
+            std::cerr << "ERROR: `yli::ontology::activate_x`: `entity` is `nullptr`!\n";
+            return nullptr;
+        }
+
+        if (variable == nullptr)
+        {
+            std::cerr << "ERROR: `yli::ontology::activate_x`: `variable` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -116,8 +123,15 @@ namespace yli::ontology
         {
             std::shared_ptr<yli::data::AnyValue> x_any_value = variable->variable_value;
 
-            if (x_any_value == nullptr || !std::holds_alternative<float>(x_any_value->data))
+            if (x_any_value == nullptr)
             {
+                std::cerr << "ERROR: `yli::ontology::activate_x`: `x_any_value` is `nullptr`!\n";
+                return nullptr;
+            }
+
+            if (!std::holds_alternative<float>(x_any_value->data))
+            {
+                std::cerr << "ERROR: `yli::ontology::activate_x`: data is of invalid type!\n";
                 return nullptr;
             }
 
@@ -138,13 +152,21 @@ namespace yli::ontology
 
         if (universe == nullptr)
         {
+            std::cerr << "ERROR: `yli::ontology::activate_x`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
         std::shared_ptr<yli::data::AnyValue> x_any_value = variable->variable_value;
 
-        if (x_any_value == nullptr || !std::holds_alternative<float>(x_any_value->data))
+        if (x_any_value == nullptr)
         {
+            std::cerr << "ERROR: `yli::ontology::activate_x`: `x_any_value` is `nullptr`!\n";
+            return nullptr;
+        }
+
+        if (!std::holds_alternative<float>(x_any_value->data))
+        {
+            std::cerr << "ERROR: `yli::ontology::activate_x`: data is of invalid type!\n";
             return nullptr;
         }
 
