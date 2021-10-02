@@ -19,6 +19,7 @@
 #include "mesh_module.hpp"
 #include "object_type.hpp"
 #include "glyph.hpp"
+#include "shader.hpp"
 #include "material.hpp"
 #include "species.hpp"
 #include "shapeshifter_sequence.hpp"
