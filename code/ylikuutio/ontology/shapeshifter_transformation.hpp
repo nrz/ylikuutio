@@ -19,6 +19,7 @@
 #define __YLIKUUTIO_ONTOLOGY_SHAPESHIFTER_TRANSFORMATION_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "child_module.hpp"
 #include "parent_module.hpp"
 #include "model_struct.hpp"
 
@@ -43,16 +44,16 @@ namespace yli::ontology
             void bind_to_new_material_parent(yli::ontology::Material* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-            ShapeshifterTransformation(yli::ontology::Universe* const universe, const yli::ontology::ModelStruct& model_struct)
+            ShapeshifterTransformation(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::ModelStruct& model_struct,
+                    yli::ontology::ParentModule* const material_parent_module)
                 : Entity(universe, model_struct),
+                child_of_material(material_parent_module, this),
                 parent_of_shapeshifter_forms(this, &this->registry, "shapeshifter_forms"),
                 parent_of_shapeshifter_sequences(this, &this->registry, "shapeshifter_sequences")
             {
                 // constructor.
-                this->parent = model_struct.material;
-
-                // get `childID` from `Material` and set pointer to this `Species`.
-                this->bind_to_parent();
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::ShapeshifterTransformation*";
@@ -64,6 +65,7 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
+            yli::ontology::ChildModule child_of_material;
             yli::ontology::ParentModule parent_of_shapeshifter_forms;
             yli::ontology::ParentModule parent_of_shapeshifter_sequences;
 
@@ -78,8 +80,6 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
             void render();
-
-            yli::ontology::Material* parent; // pointer to the `Material`.
     };
 }
 
