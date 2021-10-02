@@ -142,11 +142,8 @@ TEST(scene_must_be_deleted_appropriately, universe_callback)
 
     universe->activate_entity(scene);
 
-    delete scene;
-    /*
     universe->delete_entity(universe, scene);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
-    */
 }
 
 // Public `Entity` activate callbacks.
