@@ -1700,15 +1700,15 @@ TEST(material_must_bind_to_scene_appropriately, scenes_no_shaders)
     material->bind_to_new_parent(scene2);
     ASSERT_EQ(material->get_scene(), scene2);
     ASSERT_EQ(material->get_parent(), scene2);
-    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 1);
-    ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2);
+    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 1); // Default `Camera`.
+    ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2); // Default `Camera`, `material`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);
 
     material->bind_to_new_parent(scene1);
     ASSERT_EQ(material->get_scene(), scene1);
     ASSERT_EQ(material->get_parent(), scene1);
-    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2);
-    ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `material`.
+    ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1); // Default `Camera`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);
 }
 
