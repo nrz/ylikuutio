@@ -21,7 +21,6 @@
 #include "universe.hpp"
 #include "shader.hpp"
 #include "material.hpp"
-#include "brain.hpp"
 #include "font_2d.hpp"
 #include "console.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
