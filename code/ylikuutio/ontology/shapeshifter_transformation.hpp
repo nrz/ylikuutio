@@ -34,6 +34,7 @@ namespace yli::ontology
 {
     class Universe;
     class Scene;
+    class Shader;
     class Material;
 
     class ShapeshifterTransformation: public yli::ontology::Entity
@@ -74,6 +75,8 @@ namespace yli::ontology
 
         public:
             yli::ontology::Scene* get_scene() const override;
+
+            yli::ontology::Shader* get_shader() const;
 
         private:
             std::size_t get_number_of_children() const override;

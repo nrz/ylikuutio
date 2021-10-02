@@ -255,7 +255,7 @@ namespace yli::ontology
             else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
             {
                 this->prerender();
-                this->render_this_object(static_cast<yli::ontology::Shader*>(this->glyph->get_parent()->get_parent()->get_parent()));
+                this->render_this_object(static_cast<yli::ontology::Shader*>(this->get_shader()));
                 this->postrender();
             }
         }
@@ -399,6 +399,39 @@ namespace yli::ontology
         if (parent != nullptr)
         {
             return parent->get_scene();
+        }
+
+        return nullptr;
+    }
+
+    yli::ontology::Shader* Object::get_shader() const
+    {
+        if (this->object_type == yli::ontology::ObjectType::REGULAR)
+        {
+            yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->child.get_parent());
+
+            if (species != nullptr)
+            {
+                return species->get_shader();
+            }
+        }
+        else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
+        {
+            yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = static_cast<yli::ontology::ShapeshifterSequence*>(this->child.get_parent());
+
+            if (shapeshifter_sequence != nullptr)
+            {
+                return shapeshifter_sequence->get_shader();
+            }
+        }
+        else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
+        {
+            yli::ontology::Text3D* const text_3d = static_cast<yli::ontology::Text3D*>(this->child.get_parent());
+
+            if (text_3d != nullptr)
+            {
+                return text_3d->get_shader();
+            }
         }
 
         return nullptr;

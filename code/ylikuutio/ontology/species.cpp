@@ -32,6 +32,7 @@ namespace yli::ontology
 {
     class ParentModule;
     class Scene;
+    class Shader;
 
     void Species::bind_to_new_material_parent(yli::ontology::Material* const new_parent)
     {
@@ -151,6 +152,18 @@ namespace yli::ontology
         if (parent != nullptr)
         {
             return parent->get_scene();
+        }
+
+        return nullptr;
+    }
+
+    yli::ontology::Shader* Species::get_shader() const
+    {
+        yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(this->get_parent());
+
+        if (material != nullptr)
+        {
+            return material->get_shader();
         }
 
         return nullptr;

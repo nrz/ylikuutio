@@ -36,6 +36,7 @@ namespace yli::ontology
 {
     class Entity;
     class Scene;
+    class Shader;
     class Text3D;
     class Glyph;
 
@@ -178,6 +179,18 @@ namespace yli::ontology
         if (parent != nullptr)
         {
             return parent->get_scene();
+        }
+
+        return nullptr;
+    }
+
+    yli::ontology::Shader* VectorFont::get_shader() const
+    {
+        yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(this->get_parent());
+
+        if (material != nullptr)
+        {
+            return material->get_shader();
         }
 
         return nullptr;

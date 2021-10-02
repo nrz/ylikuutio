@@ -33,6 +33,7 @@ namespace yli::ontology
     class Entity;
     class Universe;
     class Scene;
+    class Shader;
     class Object;
     class ParentModule;
     class GenericMasterModule;
@@ -93,6 +94,11 @@ namespace yli::ontology
 
         private:
             yli::ontology::Scene* get_scene() const override;
+
+        public:
+            yli::ontology::Shader* get_shader() const;
+
+        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
