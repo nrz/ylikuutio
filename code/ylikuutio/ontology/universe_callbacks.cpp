@@ -16,9 +16,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "entity.hpp"
+#include "universe.hpp"
 #include "brain.hpp"
 #include "movable.hpp"
-#include "universe.hpp"
 #include "shader.hpp"
 #include "material.hpp"
 #include "font_2d.hpp"
