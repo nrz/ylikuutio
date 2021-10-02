@@ -57,7 +57,6 @@ namespace yli::ontology
 {
     class Entity;
     class Scene;
-    class Shader;
 
     void Object::bind_to_new_species_parent(yli::ontology::Species* const new_parent)
     {
