@@ -85,7 +85,8 @@ TEST(object_must_be_bound_to_species_appropriately, universe_callback)
     yli::ontology::Species* const species1 = new yli::ontology::Species(
             universe,
             species1_struct,
-            &material->parent_of_species);
+            &scene->parent_of_species,
+            &material->master_of_species);
     species1->set_global_name(species1_name);
 
     const std::string object_name = "bar";
@@ -106,7 +107,8 @@ TEST(object_must_be_bound_to_species_appropriately, universe_callback)
     yli::ontology::Species* const species2 = new yli::ontology::Species(
             universe,
             species2_struct,
-            &material->parent_of_species);
+            &scene->parent_of_species,
+            &material->master_of_species);
     species2->set_global_name(species2_name);
 
     ASSERT_EQ(object->get_parent(), species1);

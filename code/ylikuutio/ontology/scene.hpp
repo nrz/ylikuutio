@@ -95,6 +95,7 @@ namespace yli::ontology
                 parent_of_cameras(this, &this->registry, "cameras"),
                 parent_of_brains(this, &this->registry, "brains"),
                 parent_of_materials(this, &this->registry, "materials"),
+                parent_of_species(this, &this->registry, "species"),
                 gravity               { scene_struct.gravity },
                 water_level           { scene_struct.water_level },
                 is_flight_mode_in_use { scene_struct.is_flight_mode_in_use }
@@ -178,6 +179,7 @@ namespace yli::ontology
             yli::ontology::ParentModule parent_of_cameras;
             yli::ontology::ParentModule parent_of_brains;
             yli::ontology::ParentModule parent_of_materials;
+            yli::ontology::ParentModule parent_of_species;
 
             yli::ontology::Scene* get_scene() const override;
 

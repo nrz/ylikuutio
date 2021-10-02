@@ -228,7 +228,7 @@ namespace yli::ontology
                     return;
                 }
 
-                yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(species->get_parent());
+                yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(species->apprentice_of_material.get_master());
 
                 if (material == nullptr)
                 {

@@ -21,6 +21,7 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "parent_module.hpp"
+#include "apprentice_module.hpp"
 #include "mesh_module.hpp"
 #include "model_struct.hpp"
 
@@ -40,16 +41,20 @@ namespace yli::ontology
     {
         public:
             // this method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
-            void bind_to_new_material_parent(yli::ontology::Material* const new_parent);
+            void bind_to_new_scene_parent(yli::ontology::Scene* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
+
+            void bind_to_new_material(yli::ontology::Material* const new_material);
 
             Species(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::ModelStruct& model_struct,
-                    yli::ontology::ParentModule* const material_parent_module)
+                    yli::ontology::ParentModule* const scene_parent_module,
+                    yli::ontology::GenericMasterModule* const material_master)
                 : Entity(universe, model_struct),
-                child_of_material(material_parent_module, this),
+                child_of_scene(scene_parent_module, this),
                 parent_of_objects(this, &this->registry, "objects"),
+                apprentice_of_material(material_master, this),
                 mesh(universe, model_struct)
             {
                 // constructor.
@@ -87,10 +92,11 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            yli::ontology::ChildModule child_of_material;
+            yli::ontology::ChildModule child_of_scene;
 
         public:
             yli::ontology::ParentModule parent_of_objects;
+            yli::ontology::ApprenticeModule apprentice_of_material;
             yli::ontology::MeshModule mesh;
     };
 }

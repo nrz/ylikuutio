@@ -216,9 +216,9 @@ namespace yli::render
         yli::render::render_apprentices<yli::ontology::Material*>(material_apprentice_pointer_vector);
     }
 
-    void RenderMaster::render_species(yli::ontology::ParentModule& parent) const
+    void RenderMaster::render_species(std::vector<yli::ontology::ApprenticeModule*>& species_apprentice_pointer_vector) const
     {
-        yli::render::render_children<yli::ontology::ParentModule&, yli::ontology::Entity*, yli::ontology::Species*>(parent);
+        yli::render::render_apprentices<yli::ontology::Species*>(species_apprentice_pointer_vector);
     }
 
     void RenderMaster::render_symbioses(yli::ontology::ParentModule& parent) const

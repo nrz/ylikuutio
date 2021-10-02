@@ -530,7 +530,7 @@ namespace yli::snippets
             return nullptr;
         }
 
-        yli::ontology::Entity* const old_material_entity = species->get_parent();
+        yli::ontology::Entity* const old_material_entity = species->apprentice_of_material.get_master();
 
         const yli::ontology::Material* const old_material = dynamic_cast<yli::ontology::Material*>(old_material_entity);
 
@@ -587,7 +587,7 @@ namespace yli::snippets
             return nullptr;
         }
 
-        species->bind_to_new_material_parent(new_material);
+        species->bind_to_new_material(new_material);
         return nullptr;
     }
 

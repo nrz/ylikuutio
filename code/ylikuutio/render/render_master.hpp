@@ -68,7 +68,7 @@ namespace yli::render
 
             void render_shaders(std::vector<yli::ontology::Shader*>& shader_pointer_vector) const;
             void render_materials(std::vector<yli::ontology::ApprenticeModule*>& material_apprentices_pointer_vector) const;
-            void render_species(yli::ontology::ParentModule& parent) const;
+            void render_species(std::vector<yli::ontology::ApprenticeModule*>& species_apprentice_pointer_vector) const;
             void render_symbioses(yli::ontology::ParentModule& parent) const;
             void render_symbiont_species(yli::ontology::SymbiontSpecies* const symbiont_species) const;
             void render_symbiont_species(std::vector<yli::ontology::Entity*>& symbiont_species_pointer_vector) const;
