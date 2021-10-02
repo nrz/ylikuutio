@@ -17,11 +17,11 @@
 
 #include "species.hpp"
 #include "entity.hpp"
-#include "model_module.hpp"
+#include "mesh_module.hpp"
+#include "scene.hpp"
 #include "material.hpp"
 #include "object.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-#include "code/ylikuutio/render/render_species_or_glyph.hpp"
+#include "code/ylikuutio/render/render_model.hpp"
 
 // Include standard headers
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
@@ -32,62 +32,78 @@
 namespace yli::ontology
 {
     class ParentModule;
-    class Scene;
+    class Shader;
 
-    void Species::bind_to_new_material_parent(yli::ontology::Material* const new_parent)
+    void Species::bind_to_new_scene_parent(yli::ontology::Scene* const new_parent)
     {
-        // this method sets pointer to this `Species` to `nullptr`, sets `material_parent` according to the input,
-        // and requests a new `childID` from the new `Material`.
+        // this method sets pointer to this `Species` to `nullptr`, sets `scene_parent` according to the input,
+        // and requests a new `childID` from the new `Scene`.
         //
         // requirements:
-        // `this->material_parent` must not be `nullptr`.
+        // `this->scene_parent` must not be `nullptr`.
         // `new_parent` must not be `nullptr`.
 
-        yli::ontology::Entity* const material = this->child_of_material.get_parent();
+        yli::ontology::Entity* const scene = this->child_of_scene.get_parent();
 
-        if (material == nullptr)
+        if (scene == nullptr)
         {
-            std::cerr << "ERROR: `Species::bind_to_new_material_parent`: `material` is `nullptr`!\n";
+            std::cerr << "ERROR: `Species::bind_to_new_scene_parent`: `scene` is `nullptr`!\n";
             return;
         }
 
         if (new_parent == nullptr)
         {
-            std::cerr << "ERROR: `Species::bind_to_new_material_parent`: `new_parent` is `nullptr`!\n";
+            std::cerr << "ERROR: `Species::bind_to_new_scene_parent`: `new_parent` is `nullptr`!\n";
             return;
         }
 
         if (new_parent->has_child(this->local_name))
         {
-            std::cerr << "ERROR: `Species::bind_to_new_material_parent`: local name is already in use!\n";
+            std::cerr << "ERROR: `Species::bind_to_new_scene_parent`: local name is already in use!\n";
             return;
         }
 
-        // unbind from the old parent `Material`.
-        this->child_of_material.unbind_child();
+        // unbind from the old parent `Scene`.
+        this->child_of_scene.unbind_child();
 
-        // get `childID` from `Material` and set pointer to this `Species`.
-        this->child_of_material.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_species);
+        // get `childID` from `Scene` and set pointer to this `Species`.
+        this->child_of_scene.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_species);
     }
 
     void Species::bind_to_new_parent(yli::ontology::Entity* const new_parent)
     {
-        // this method sets pointer to this `Species` to `nullptr`, sets `material_parent` according to the input,
-        // and requests a new `childID` from the new `Material`.
+        // this method sets pointer to this `Species` to `nullptr`, sets `scene_parent` according to the input,
+        // and requests a new `childID` from the new `Scene`.
         //
         // requirements:
-        // `this->material_parent` must not be `nullptr`.
+        // `this->scene_parent` must not be `nullptr`.
         // `new_parent` must not be `nullptr`.
 
-        yli::ontology::Material* const material_parent = dynamic_cast<yli::ontology::Material*>(new_parent);
+        yli::ontology::Scene* const scene_parent = dynamic_cast<yli::ontology::Scene*>(new_parent);
 
-        if (material_parent == nullptr)
+        if (scene_parent == nullptr)
         {
-            std::cerr << "ERROR: `Species::bind_to_new_parent`: `new_parent` is not `yli::ontology::Material*`!\n";
+            std::cerr << "ERROR: `Species::bind_to_new_parent`: `new_parent` is not `yli::ontology::Scene*`!\n";
             return;
         }
 
-        this->bind_to_new_material_parent(material_parent);
+        this->bind_to_new_scene_parent(scene_parent);
+    }
+
+    void Species::bind_to_new_material(yli::ontology::Material* const new_material)
+    {
+        // Unbind from the current `Material` if there is such.
+
+        this->apprentice_of_material.unbind_from_generic_master_module();
+
+        if (new_material != nullptr)
+        {
+            this->apprentice_of_material.bind_to_new_generic_master_module(&new_material->master_of_species);
+        }
+        else
+        {
+            this->apprentice_of_material.bind_to_new_generic_master_module(nullptr);
+        }
     }
 
     Species::~Species()
@@ -99,7 +115,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* Species::get_parent() const
     {
-        return this->child_of_material.get_parent();
+        return this->child_of_scene.get_parent();
     }
 
     void Species::render()
@@ -111,7 +127,7 @@ namespace yli::ontology
 
         this->prerender();
         yli::render::render_model<yli::ontology::ParentModule&, yli::ontology::Entity*, yli::ontology::Object*>(
-                this->model, *(this->get_renderables_container()));
+                this->mesh, *(this->get_renderables_container()));
         this->postrender();
     }
 
@@ -122,36 +138,41 @@ namespace yli::ontology
 
     uint32_t Species::get_x_step() const
     {
-        return this->model.x_step;
+        return this->mesh.x_step;
     }
 
     uint32_t Species::get_z_step() const
     {
-        return this->model.z_step;
+        return this->mesh.z_step;
     }
 
     uint32_t Species::get_image_width() const
     {
-        return this->model.image_width;
+        return this->mesh.image_width;
     }
 
     uint32_t Species::get_image_height() const
     {
-        return this->model.image_height;
+        return this->mesh.image_height;
     }
 
     const std::string& Species::get_model_file_format() const
     {
-        return this->model.model_file_format;
+        return this->mesh.model_file_format;
     }
 
     yli::ontology::Scene* Species::get_scene() const
     {
-        yli::ontology::Entity* const parent = this->get_parent();
+        return static_cast<yli::ontology::Scene*>(this->get_parent());
+    }
 
-        if (parent != nullptr)
+    yli::ontology::Shader* Species::get_shader() const
+    {
+        yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(this->get_parent());
+
+        if (material != nullptr)
         {
-            return parent->get_scene();
+            return material->get_shader();
         }
 
         return nullptr;

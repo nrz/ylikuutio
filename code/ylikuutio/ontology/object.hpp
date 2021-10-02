@@ -119,6 +119,8 @@ namespace yli::ontology
 
             yli::ontology::Scene* get_scene() const override;
 
+            yli::ontology::Shader* get_shader() const;
+
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;

@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "render_master.hpp"
-#include "render_species_or_glyph.hpp"
+#include "render_model.hpp"
 #include "render_templates.hpp"
 #include "render_master_struct.hpp"
 #include "render_struct.hpp"
@@ -216,9 +216,9 @@ namespace yli::render
         yli::render::render_apprentices<yli::ontology::Material*>(material_apprentice_pointer_vector);
     }
 
-    void RenderMaster::render_species(yli::ontology::ParentModule& parent) const
+    void RenderMaster::render_species(std::vector<yli::ontology::ApprenticeModule*>& species_apprentice_pointer_vector) const
     {
-        yli::render::render_children<yli::ontology::ParentModule&, yli::ontology::Entity*, yli::ontology::Species*>(parent);
+        yli::render::render_apprentices<yli::ontology::Species*>(species_apprentice_pointer_vector);
     }
 
     void RenderMaster::render_symbioses(yli::ontology::ParentModule& parent) const
@@ -228,7 +228,7 @@ namespace yli::render
 
     void RenderMaster::render_symbiont_species(yli::ontology::SymbiontSpecies* const symbiont_species) const
     {
-        yli::render::render_model<yli::ontology::GenericMasterModule&, yli::ontology::Entity*, yli::ontology::Object*>(symbiont_species->model, *(symbiont_species->get_renderables_container()));
+        yli::render::render_model<yli::ontology::GenericMasterModule&, yli::ontology::Entity*, yli::ontology::Object*>(symbiont_species->mesh, *(symbiont_species->get_renderables_container()));
     }
 
     void RenderMaster::render_symbiont_species(std::vector<yli::ontology::Entity*>& symbiont_species_pointer_vector) const
@@ -274,7 +274,7 @@ namespace yli::render
 
     void RenderMaster::render_glyph(yli::ontology::Glyph* const glyph) const
     {
-        yli::render::render_model<yli::ontology::GenericMasterModule&, yli::ontology::Entity*, yli::ontology::Object*>(glyph->model, *(glyph->get_renderables_container()));
+        yli::render::render_model<yli::ontology::GenericMasterModule&, yli::ontology::Entity*, yli::ontology::Object*>(glyph->mesh, *(glyph->get_renderables_container()));
     }
 
     void RenderMaster::render_glyphs(std::vector<yli::ontology::Entity*>& glyph_pointer_vector) const

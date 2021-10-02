@@ -20,7 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "model_module.hpp"
+#include "mesh_module.hpp"
 #include "universe.hpp"
 #include "model_struct.hpp"
 #include "gl_attrib_locations.hpp"
@@ -66,7 +66,7 @@ namespace yli::ontology
                 : Entity(universe, model_struct),
                 child_of_vector_font(vector_font_parent_module, this),
                 master_of_objects(this, &this->registry, "objects"),
-                model(universe, model_struct),
+                mesh(universe, model_struct),
                 glyph_vertex_data    { model_struct.glyph_vertex_data },
                 glyph_name_pointer   { model_struct.glyph_name_pointer },
                 unicode_char_pointer { model_struct.unicode_char_pointer }
@@ -78,7 +78,7 @@ namespace yli::ontology
 				if (!is_headless && model_struct.shader != nullptr)
                 {
                     // Get a handle for our buffers.
-                    yli::ontology::set_gl_attrib_locations(model_struct.shader, &this->model);
+                    yli::ontology::set_gl_attrib_locations(model_struct.shader, &this->mesh);
                 }
 
                 // `yli::ontology::Entity` member variables begin here.
@@ -103,7 +103,7 @@ namespace yli::ontology
             yli::ontology::GenericMasterModule master_of_objects;
 
         public:
-            yli::ontology::ModelModule model;
+            yli::ontology::MeshModule mesh;
 
         private:
             std::vector<std::vector<glm::vec2>>* glyph_vertex_data { nullptr };

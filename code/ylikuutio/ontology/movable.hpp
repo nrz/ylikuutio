@@ -26,7 +26,6 @@
 #include "movable_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -73,10 +72,10 @@ namespace yli::ontology
             Movable(yli::ontology::Universe* const universe,
                     const yli::ontology::MovableStruct& movable_struct,
                     yli::ontology::ParentModule* const parent_module,
-                    yli::ontology::GenericMasterModule* const generic_master_module)
+                    yli::ontology::GenericMasterModule* const brain_master)
                 : Entity(universe, movable_struct),
                 child(parent_module, this),
-                apprentice_of_brain(generic_master_module, this),
+                apprentice_of_brain(brain_master, this),
                 rigid_body_module(movable_struct.rigid_body_module_struct, movable_struct.scene, this),
                 initial_rotate_vectors { movable_struct.initial_rotate_vectors },
                 initial_rotate_angles { movable_struct.initial_rotate_angles },
@@ -253,12 +252,6 @@ namespace yli::ontology
 
         private:
             void create_coordinate_and_angle_variables();
-
-            friend class yli::ontology::Brain;
-            friend class yli::ontology::GenericMasterModule;
-
-            template<class T1>
-                friend void yli::hierarchy::bind_apprentice_to_master(T1 apprentice_pointer, std::vector<T1>& apprentice_pointer_vector, std::queue<std::size_t>& free_apprenticeID_queue, std::size_t& number_of_apprenticeren);
 
         protected:
             yli::ontology::ChildModule child;

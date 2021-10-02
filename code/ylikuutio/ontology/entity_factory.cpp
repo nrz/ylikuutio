@@ -212,7 +212,8 @@ namespace yli::ontology
         yli::ontology::Entity* species_entity = new yli::ontology::Species(
                 this->universe,
                 model_struct,
-                (model_struct.material == nullptr ? nullptr : &model_struct.material->parent_of_species));
+                (model_struct.scene == nullptr ? nullptr : &model_struct.scene->parent_of_species),
+                (model_struct.material == nullptr ? nullptr : &model_struct.material->master_of_species));
 
         species_entity->set_global_name(model_struct.global_name);
         species_entity->set_local_name(model_struct.local_name);

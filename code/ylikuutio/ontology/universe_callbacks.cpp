@@ -16,10 +16,12 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "entity.hpp"
-#include "brain.hpp"
-#include "movable.hpp"
 #include "universe.hpp"
 #include "brain.hpp"
+#include "movable.hpp"
+#include "shader.hpp"
+#include "material.hpp"
+#include "species.hpp"
 #include "font_2d.hpp"
 #include "console.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -53,13 +55,27 @@ namespace yli::ontology
             return nullptr;
         }
 
+        yli::ontology::Material* const child_or_apprentice_material = dynamic_cast<yli::ontology::Material*>(child_or_apprentice_entity);
+        yli::ontology::Shader* const parent_or_master_shader = dynamic_cast<yli::ontology::Shader*>(parent_or_master_entity);
+
+        yli::ontology::Species* const child_or_apprentice_species = dynamic_cast<yli::ontology::Species*>(child_or_apprentice_entity);
+        yli::ontology::Material* const parent_or_master_material = dynamic_cast<yli::ontology::Material*>(parent_or_master_entity);
+
         yli::ontology::Movable* const child_or_apprentice_movable = dynamic_cast<yli::ontology::Movable*>(child_or_apprentice_entity);
         yli::ontology::Brain* const parent_or_master_brain = dynamic_cast<yli::ontology::Brain*>(parent_or_master_entity);
 
         yli::ontology::Console* const child_or_apprentice_console = dynamic_cast<yli::ontology::Console*>(child_or_apprentice_entity);
         yli::ontology::Font2D* const parent_or_master_font_2d = dynamic_cast<yli::ontology::Font2D*>(parent_or_master_entity);
 
-        if (child_or_apprentice_movable != nullptr && parent_or_master_brain != nullptr)
+        if (child_or_apprentice_material != nullptr && parent_or_master_shader != nullptr)
+        {
+            child_or_apprentice_material->bind_to_new_shader(parent_or_master_shader);
+        }
+        else if (child_or_apprentice_species != nullptr && parent_or_master_material != nullptr)
+        {
+            child_or_apprentice_species->bind_to_new_material(parent_or_master_material);
+        }
+        else if (child_or_apprentice_movable != nullptr && parent_or_master_brain != nullptr)
         {
             child_or_apprentice_movable->bind_to_new_brain(parent_or_master_brain);
         }

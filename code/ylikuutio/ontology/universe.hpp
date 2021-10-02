@@ -128,7 +128,7 @@
 //     Object : Movable
 //
 // Please note that rendering hierarchy does not include `Text3D` at all, as each `Glyph` points directly to `VectorFont`.
-// So, `render_species_or_glyph` is called only once for each glyph, and that call renders all the children of that `Glyph`,
+// So, `render_model` is called only once for each glyph, and that call renders all the children of that `Glyph`,
 // even if the children (which are of type `Object`) may belong to many different `Text3D` objects.
 // `Text3D` is anyway needed in the ontological hierarchy, so that complete 3D texts can be destroyed and manipulated at once.
 //

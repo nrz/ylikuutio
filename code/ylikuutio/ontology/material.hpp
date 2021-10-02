@@ -22,6 +22,7 @@
 #include "child_module.hpp"
 #include "parent_module.hpp"
 #include "apprentice_module.hpp"
+#include "generic_master_module.hpp"
 #include "master_module.hpp"
 #include "universe.hpp"
 #include "shader.hpp"
@@ -59,11 +60,11 @@ namespace yli::ontology
                     yli::ontology::MasterModule<yli::ontology::Shader*>* shader_master_module)
                 : Entity(universe, material_struct),
                 child_of_scene(scene_parent_module, this),
-                parent_of_species(this, &this->registry, "species"),
                 parent_of_shapeshifter_transformations(this, &this->registry, "shapeshifter_transformations"),
                 parent_of_vector_fonts(this, &this->registry, "vector_fonts"),
                 parent_of_chunk_masters(this, &this->registry, "chunk_masters"),
                 apprentice_of_shader(static_cast<yli::ontology::GenericMasterModule*>(shader_master_module), this),
+                master_of_species(this, &this->registry, "species"),
                 texture_file_format  { material_struct.texture_file_format },
                 texture_filename     { material_struct.texture_filename }
             {
@@ -119,6 +120,10 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
+            yli::ontology::GenericMasterModule* get_generic_master_module() const;
+
+            std::size_t get_number_of_apprentices() const;
+
             yli::ontology::Shader* get_shader() const;
 
             const std::string& get_texture_file_format() const;
@@ -131,11 +136,11 @@ namespace yli::ontology
                 friend void yli::render::render_apprentices(const std::vector<yli::ontology::ApprenticeModule*>& apprentice_pointer_vector);
 
             yli::ontology::ChildModule child_of_scene;
-            yli::ontology::ParentModule parent_of_species;
             yli::ontology::ParentModule parent_of_shapeshifter_transformations;
             yli::ontology::ParentModule parent_of_vector_fonts;
             yli::ontology::ParentModule parent_of_chunk_masters;
             yli::ontology::ApprenticeModule apprentice_of_shader;
+            yli::ontology::GenericMasterModule master_of_species;
 
         protected:
             uint32_t image_width  { 0 };

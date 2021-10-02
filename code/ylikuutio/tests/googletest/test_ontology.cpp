@@ -83,7 +83,10 @@ TEST(ecosystems_must_be_initialized_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct1;
-    yli::ontology::Ecosystem* const ecosystem1 = new yli::ontology::Ecosystem(universe, ecosystem_struct1, &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem1 = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct1,
+            &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_ecosystems(), 1);
@@ -102,7 +105,10 @@ TEST(ecosystems_must_be_initialized_appropriately, headless)
     ASSERT_EQ(ecosystem1->get_number_of_non_variable_children(), 0);
 
     yli::ontology::EcosystemStruct ecosystem_struct2;
-    yli::ontology::Ecosystem* const ecosystem2 = new yli::ontology::Ecosystem(universe, ecosystem_struct2, &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem2 = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct2,
+            &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_ecosystems(), 2);
@@ -121,7 +127,10 @@ TEST(ecosystems_must_be_initialized_appropriately, headless)
     ASSERT_EQ(ecosystem2->get_number_of_non_variable_children(), 0);
 
     yli::ontology::EcosystemStruct ecosystem_struct3;
-    yli::ontology::Ecosystem* const ecosystem3 = new yli::ontology::Ecosystem(universe, ecosystem_struct3, &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem3 = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct3,
+            &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_ecosystems(), 3);
@@ -140,7 +149,10 @@ TEST(ecosystems_must_be_initialized_appropriately, headless)
     ASSERT_EQ(ecosystem3->get_number_of_non_variable_children(), 0);
 
     yli::ontology::EcosystemStruct ecosystem_struct4;
-    yli::ontology::Ecosystem* const ecosystem4 = new yli::ontology::Ecosystem(universe, ecosystem_struct4, &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem4 = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct4,
+            &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_ecosystems(), 4);
@@ -166,7 +178,10 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earli
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct1;
-    yli::ontology::Ecosystem* const ecosystem1 = new yli::ontology::Ecosystem(universe, ecosystem_struct1, &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem1 = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct1,
+            &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_ecosystems(), 1);
@@ -187,7 +202,10 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earli
 
     delete ecosystem1;
     yli::ontology::EcosystemStruct ecosystem_struct2;
-    yli::ontology::Ecosystem* const ecosystem2 = new yli::ontology::Ecosystem(universe, ecosystem_struct2, &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem2 = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct2,
+            &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_ecosystems(), 1);
@@ -207,7 +225,10 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earli
 
     delete ecosystem2;
     yli::ontology::EcosystemStruct ecosystem_struct3;
-    yli::ontology::Ecosystem* const ecosystem3 = new yli::ontology::Ecosystem(universe, ecosystem_struct3, &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem3 = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct3,
+            &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_ecosystems(), 1);
@@ -228,7 +249,10 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earli
 
     delete ecosystem3;
     yli::ontology::EcosystemStruct ecosystem_struct4;
-    yli::ontology::Ecosystem* const ecosystem4 = new yli::ontology::Ecosystem(universe, ecosystem_struct4, &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem4 = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct4,
+            &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_ecosystems(), 1);
@@ -254,7 +278,10 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_some_earl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct1;
-    yli::ontology::Ecosystem* const ecosystem1 = new yli::ontology::Ecosystem(universe, ecosystem_struct1, &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem1 = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct1,
+            &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_ecosystems(), 1);
@@ -274,7 +301,10 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_some_earl
     ASSERT_EQ(ecosystem1->get_number_of_non_variable_children(), 0);
 
     yli::ontology::EcosystemStruct ecosystem_struct2;
-    yli::ontology::Ecosystem* const ecosystem2 = new yli::ontology::Ecosystem(universe, ecosystem_struct2, &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem2 = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct2,
+            &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_ecosystems(), 2);
@@ -295,7 +325,10 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_some_earl
 
     delete ecosystem1;
     yli::ontology::EcosystemStruct ecosystem_struct3;
-    yli::ontology::Ecosystem* const ecosystem3 = new yli::ontology::Ecosystem(universe, ecosystem_struct3, &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem3 = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct3,
+            &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_ecosystems(), 2);
@@ -315,7 +348,10 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_some_earl
     ASSERT_EQ(ecosystem3->get_number_of_non_variable_children(), 0);
 
     yli::ontology::EcosystemStruct ecosystem_struct4;
-    yli::ontology::Ecosystem* const ecosystem4 = new yli::ontology::Ecosystem(universe, ecosystem_struct4, &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem4 = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct4,
+            &universe->parent_of_ecosystems);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_ecosystems(), 3);
@@ -338,7 +374,10 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_some_earl
 TEST(ecosystem_must_be_initialized_appropriately, no_universe)
 {
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(nullptr, ecosystem_struct, nullptr);
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            nullptr,
+            ecosystem_struct,
+            nullptr);
 
     // `Entity` member functions of `Ecosystem`.
     ASSERT_EQ(ecosystem->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -357,7 +396,10 @@ TEST(scene_must_be_initialized_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     // `Universe` member functions.
     ASSERT_EQ(universe->get_number_of_ecosystems(), 0);
@@ -381,7 +423,10 @@ TEST(scene_must_be_initialized_appropriately, headless)
 TEST(scene_must_be_initialized_appropriately, no_universe)
 {
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(nullptr, scene_struct, nullptr);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            nullptr,
+            scene_struct,
+            nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(scene->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -396,7 +441,10 @@ TEST(scene_must_be_initialized_appropriately, no_universe)
 TEST(scene_must_be_initialized_appropriately, no_universe_no_ecosystem)
 {
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(nullptr, scene_struct, nullptr);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            nullptr,
+            scene_struct,
+            nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(scene->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -415,7 +463,10 @@ TEST(shader_must_be_initialized_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -441,7 +492,10 @@ TEST(shader_must_be_initialized_appropriately, headless)
 TEST(shader_must_be_initialized_appropriately, no_universe)
 {
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(nullptr, scene_struct, nullptr);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            nullptr,
+            scene_struct,
+            nullptr);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -484,7 +538,10 @@ TEST(material_must_be_initialized_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -493,7 +550,10 @@ TEST(material_must_be_initialized_appropriately, headless)
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.shader = shader;
-    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene->parent_of_materials, &shader->master_of_materials);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -520,7 +580,10 @@ TEST(material_must_be_initialized_appropriately, headless)
 TEST(material_must_be_initialized_appropriately, no_universe)
 {
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(nullptr, scene_struct, nullptr);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            nullptr,
+            scene_struct,
+            nullptr);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -529,7 +592,10 @@ TEST(material_must_be_initialized_appropriately, no_universe)
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.shader = shader;
-    yli::ontology::Material* const material = new yli::ontology::Material(nullptr, material_struct, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            nullptr,
+            material_struct,
+            &scene->parent_of_materials, &shader->master_of_materials);
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
@@ -557,7 +623,10 @@ TEST(material_must_be_initialized_appropriately, no_universe_no_scene)
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.shader = shader;
-    yli::ontology::Material* const material = new yli::ontology::Material(nullptr, material_struct, nullptr, &shader->master_of_materials);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            nullptr,
+            material_struct,
+            nullptr, &shader->master_of_materials);
 
     // `Entity` member functions of `Shader`.
     ASSERT_EQ(shader->get_scene(), nullptr);
@@ -577,7 +646,10 @@ TEST(material_must_be_initialized_appropriately, no_universe_no_scene_no_shader)
 {
     yli::ontology::MaterialStruct material_struct;
     material_struct.shader = nullptr;
-    yli::ontology::Material* const material = new yli::ontology::Material(nullptr, material_struct, nullptr, nullptr);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            nullptr,
+            material_struct,
+            nullptr, nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(material->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -596,7 +668,10 @@ TEST(species_must_be_initialized_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -605,25 +680,32 @@ TEST(species_must_be_initialized_appropriately, headless)
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.shader = shader;
-    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.scene = scene;
     model_struct.shader = shader;
     model_struct.material = material;
-    yli::ontology::Species* const species = new yli::ontology::Species(universe, model_struct, &material->parent_of_species);
+    yli::ontology::Species* const species = new yli::ontology::Species(
+            universe,
+            model_struct,
+            &scene->parent_of_species,
+            &material->master_of_species);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `material`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `shader`, `material`, `species`.
 
     // `Entity` member functions of `Shader`.
     ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `Material`.
-    ASSERT_EQ(material->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions.
     ASSERT_EQ(species->get_childID(), 0);
@@ -631,7 +713,7 @@ TEST(species_must_be_initialized_appropriately, headless)
     ASSERT_TRUE(species->get_can_be_erased());
     ASSERT_EQ(species->get_universe(), universe);
     ASSERT_EQ(species->get_scene(), scene);
-    ASSERT_EQ(species->get_parent(), material);
+    ASSERT_EQ(species->get_parent(), scene);
     ASSERT_EQ(species->get_number_of_non_variable_children(), 0);
 }
 
@@ -641,7 +723,11 @@ TEST(species_must_be_initialized_appropriately, no_universe_no_scene_no_shader_n
     model_struct.scene = nullptr;
     model_struct.shader = nullptr;
     model_struct.material = nullptr;
-    yli::ontology::Species* const species = new yli::ontology::Species(nullptr, model_struct, nullptr);
+    yli::ontology::Species* const species = new yli::ontology::Species(
+            nullptr,
+            model_struct,
+            nullptr,
+            nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(species->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -660,7 +746,10 @@ TEST(object_must_be_initialized_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -669,16 +758,26 @@ TEST(object_must_be_initialized_appropriately, headless)
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.shader = shader;
-    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.scene = scene;
     model_struct.shader = shader;
     model_struct.material = material;
-    yli::ontology::Species* const species = new yli::ontology::Species(universe, model_struct, &material->parent_of_species);
+    yli::ontology::Species* const species = new yli::ontology::Species(
+            universe,
+            model_struct,
+            &scene->parent_of_species,
+            &material->master_of_species);
 
     yli::ontology::ObjectStruct object_struct(species);
-    yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species->parent_of_objects, nullptr);
+    yli::ontology::Object* const object = new yli::ontology::Object(
+            universe,
+            object_struct,
+            &species->parent_of_objects, nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -686,7 +785,7 @@ TEST(object_must_be_initialized_appropriately, headless)
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `material`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `shader`, `material`, `species`.
 
     // `Entity` member functions of `Shader`.
     ASSERT_EQ(shader->get_scene(), scene);
@@ -694,7 +793,7 @@ TEST(object_must_be_initialized_appropriately, headless)
 
     // `Entity` member functions of `Material`.
     ASSERT_EQ(material->get_scene(), scene);
-    ASSERT_EQ(material->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `Species`.
     ASSERT_EQ(species->get_scene(), scene);
@@ -714,7 +813,10 @@ TEST(object_must_be_initialized_appropriately, headless)
 TEST(object_must_be_initialized_appropriately, no_universe_no_scene_no_shader_no_material_no_species)
 {
     yli::ontology::ObjectStruct object_struct(static_cast<yli::ontology::Species*>(nullptr));
-    yli::ontology::Object* const object = new yli::ontology::Object(nullptr, object_struct, nullptr, nullptr);
+    yli::ontology::Object* const object = new yli::ontology::Object(
+            nullptr,
+            object_struct,
+            nullptr, nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(object->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -734,7 +836,10 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -742,7 +847,10 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
 
     yli::ontology::ModelStruct model_struct;
     model_struct.shader = shader;
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, model_struct, &shader->parent_of_symbioses);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            universe,
+            model_struct,
+            &shader->parent_of_symbioses);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -770,7 +878,10 @@ TEST(symbiosis_must_be_initialized_appropriately, no_universe_no_scene_no_materi
 {
     yli::ontology::ModelStruct model_struct;
     model_struct.shader = nullptr;
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(nullptr, model_struct, nullptr);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            nullptr,
+            model_struct,
+            nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(symbiosis->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -789,7 +900,10 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -799,7 +913,10 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
     model_struct.shader = shader;
     model_struct.model_filename = "turbo_polizei_png_textures.fbx";
     model_struct.model_file_format = "FBX";
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, model_struct, &shader->parent_of_symbioses);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            universe,
+            model_struct,
+            &shader->parent_of_symbioses);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -830,7 +947,10 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -838,12 +958,18 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
 
     yli::ontology::ModelStruct model_struct;
     model_struct.shader = shader;
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, model_struct, &shader->parent_of_symbioses);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            universe,
+            model_struct,
+            &shader->parent_of_symbioses);
 
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.scene = scene;
     holobiont_struct.parent = symbiosis;
-    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(universe, holobiont_struct, &symbiosis->parent_of_holobionts, nullptr);
+    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(
+            universe,
+            holobiont_struct,
+            &symbiosis->parent_of_holobionts, nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -875,7 +1001,10 @@ TEST(holobiont_must_be_initialized_appropriately, no_universe_no_scene_no_shader
 {
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.parent = nullptr;
-    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(nullptr, holobiont_struct, nullptr, nullptr);
+    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(
+            nullptr,
+            holobiont_struct,
+            nullptr, nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(holobiont->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -894,7 +1023,10 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -904,12 +1036,18 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     model_struct.shader = shader;
     model_struct.model_filename = "turbo_polizei_png_textures.fbx";
     model_struct.model_file_format = "FBX";
-    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, model_struct, &shader->parent_of_symbioses);
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            universe,
+            model_struct,
+            &shader->parent_of_symbioses);
 
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.scene = scene;
     holobiont_struct.parent = symbiosis;
-    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(universe, holobiont_struct, &symbiosis->parent_of_holobionts, nullptr);
+    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(
+            universe,
+            holobiont_struct,
+            &symbiosis->parent_of_holobionts, nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -944,7 +1082,10 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -953,13 +1094,19 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.shader = shader;
-    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct shapeshifter_transformation_struct;
     shapeshifter_transformation_struct.scene = scene;
     shapeshifter_transformation_struct.shader = shader;
     shapeshifter_transformation_struct.material = material;
-    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(universe, shapeshifter_transformation_struct);
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
+            universe,
+            shapeshifter_transformation_struct,
+            &material->parent_of_shapeshifter_transformations);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -993,7 +1140,10 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, no_universe_
     shapeshifter_transformation_struct.scene = nullptr;
     shapeshifter_transformation_struct.shader = nullptr;
     shapeshifter_transformation_struct.material = nullptr;
-    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(nullptr, shapeshifter_transformation_struct);
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
+            nullptr,
+            shapeshifter_transformation_struct,
+            nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(shapeshifter_transformation->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -1012,7 +1162,10 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -1021,13 +1174,19 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.shader = shader;
-    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct shapeshifter_transformation_struct;
     shapeshifter_transformation_struct.scene = scene;
     shapeshifter_transformation_struct.shader = shader;
     shapeshifter_transformation_struct.material = material;
-    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(universe, shapeshifter_transformation_struct);
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
+            universe,
+            shapeshifter_transformation_struct,
+            &material->parent_of_shapeshifter_transformations);
 
     yli::ontology::ModelStruct shapeshifter_form_struct;
     shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
@@ -1072,7 +1231,10 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, no_universe_no_scene_n
     shapeshifter_transformation_struct.scene = nullptr;
     shapeshifter_transformation_struct.shader = nullptr;
     shapeshifter_transformation_struct.material = nullptr;
-    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(nullptr, shapeshifter_transformation_struct);
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
+            nullptr,
+            shapeshifter_transformation_struct,
+            nullptr);
 
     yli::ontology::ModelStruct shapeshifter_form_struct;
     shapeshifter_form_struct.scene = nullptr;
@@ -1101,7 +1263,10 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, no_universe_no_scene_n
     shapeshifter_form_struct.shader = nullptr;
     shapeshifter_form_struct.material = nullptr;
     shapeshifter_form_struct.shapeshifter_transformation = nullptr;
-    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(nullptr, shapeshifter_form_struct, nullptr);
+    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(
+            nullptr,
+            shapeshifter_form_struct,
+            nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(shapeshifter_form->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -1120,7 +1285,10 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -1129,17 +1297,26 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.shader = shader;
-    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct shapeshifter_transformation_struct;
     shapeshifter_transformation_struct.scene = scene;
     shapeshifter_transformation_struct.shader = shader;
     shapeshifter_transformation_struct.material = material;
-    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(universe, shapeshifter_transformation_struct);
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
+            universe,
+            shapeshifter_transformation_struct,
+            &material->parent_of_shapeshifter_transformations);
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
-    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(universe, shapeshifter_sequence_struct, &shapeshifter_transformation->parent_of_shapeshifter_sequences);
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(
+            universe,
+            shapeshifter_sequence_struct,
+            &shapeshifter_transformation->parent_of_shapeshifter_sequences);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -1177,11 +1354,17 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, no_universe_no_sce
     shapeshifter_transformation_struct.scene = nullptr;
     shapeshifter_transformation_struct.shader = nullptr;
     shapeshifter_transformation_struct.material = nullptr;
-    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(nullptr, shapeshifter_transformation_struct);
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
+            nullptr,
+            shapeshifter_transformation_struct,
+            nullptr);
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
-    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct, &shapeshifter_transformation->parent_of_shapeshifter_sequences);
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(
+            nullptr,
+            shapeshifter_sequence_struct,
+            &shapeshifter_transformation->parent_of_shapeshifter_sequences);
 
     // `Entity` member functions.
     ASSERT_EQ(shapeshifter_sequence->get_childID(), 0);
@@ -1197,7 +1380,10 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, no_universe_no_sce
 {
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = nullptr;
-    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct, nullptr);
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(
+            nullptr,
+            shapeshifter_sequence_struct,
+            nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(shapeshifter_sequence->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -1216,7 +1402,10 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -1225,7 +1414,10 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.shader = shader;
-    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct shapeshifter_transformation_struct;
     shapeshifter_transformation_struct.scene = scene;
@@ -1233,7 +1425,8 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
     shapeshifter_transformation_struct.material = material;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
             universe,
-            shapeshifter_transformation_struct);
+            shapeshifter_transformation_struct,
+            &material->parent_of_shapeshifter_transformations);
 
     yli::ontology::ModelStruct shapeshifter_form_struct;
     shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
@@ -1244,7 +1437,10 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
-    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(universe, shapeshifter_sequence_struct, &shapeshifter_transformation->parent_of_shapeshifter_sequences);
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(
+            universe,
+            shapeshifter_sequence_struct,
+            &shapeshifter_transformation->parent_of_shapeshifter_sequences);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -1293,7 +1489,8 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, no_univer
     shapeshifter_transformation_struct.material = nullptr;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
             nullptr,
-            shapeshifter_transformation_struct);
+            shapeshifter_transformation_struct,
+            nullptr);
 
     yli::ontology::ModelStruct shapeshifter_form_struct;
     shapeshifter_form_struct.scene = nullptr;
@@ -1307,7 +1504,10 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, no_univer
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
-    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct, &shapeshifter_transformation->parent_of_shapeshifter_sequences);
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(
+            nullptr,
+            shapeshifter_sequence_struct,
+            &shapeshifter_transformation->parent_of_shapeshifter_sequences);
 
     // `Entity` member functions of `ShapeshifterTransformation`.
     ASSERT_EQ(shapeshifter_transformation->get_scene(), nullptr);
@@ -1339,7 +1539,10 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -1348,7 +1551,10 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.shader = shader;
-    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct shapeshifter_transformation_struct;
     shapeshifter_transformation_struct.scene = scene;
@@ -1356,7 +1562,8 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     shapeshifter_transformation_struct.material = material;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
             universe,
-            shapeshifter_transformation_struct);
+            shapeshifter_transformation_struct,
+            &material->parent_of_shapeshifter_transformations);
 
     yli::ontology::ModelStruct shapeshifter_form_struct;
     shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
@@ -1367,10 +1574,16 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
-    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(universe, shapeshifter_sequence_struct, &shapeshifter_transformation->parent_of_shapeshifter_sequences);
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(
+            universe,
+            shapeshifter_sequence_struct,
+            &shapeshifter_transformation->parent_of_shapeshifter_sequences);
 
     yli::ontology::ObjectStruct object_struct(shapeshifter_sequence);
-    yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &shapeshifter_sequence->parent_of_objects, nullptr);
+    yli::ontology::Object* const object = new yli::ontology::Object(
+            universe,
+            object_struct,
+            &shapeshifter_sequence->parent_of_objects, nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -1417,7 +1630,10 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_scene
     shapeshifter_transformation_struct.scene = nullptr;
     shapeshifter_transformation_struct.shader = nullptr;
     shapeshifter_transformation_struct.material = nullptr;
-    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(nullptr, shapeshifter_transformation_struct);
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
+            nullptr,
+            shapeshifter_transformation_struct,
+            nullptr);
 
     yli::ontology::ModelStruct shapeshifter_form_struct;
     shapeshifter_form_struct.scene = nullptr;
@@ -1431,10 +1647,16 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_scene
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
-    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct, &shapeshifter_transformation->parent_of_shapeshifter_sequences);
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(
+            nullptr,
+            shapeshifter_sequence_struct,
+            &shapeshifter_transformation->parent_of_shapeshifter_sequences);
 
     yli::ontology::ObjectStruct object_struct(shapeshifter_sequence);
-    yli::ontology::Object* const object = new yli::ontology::Object(nullptr, object_struct, &shapeshifter_sequence->parent_of_objects, nullptr);
+    yli::ontology::Object* const object = new yli::ontology::Object(
+            nullptr,
+            object_struct,
+            &shapeshifter_sequence->parent_of_objects, nullptr);
 
     // `Entity` member functions of `ShapeshifterTransformation`.
     ASSERT_EQ(shapeshifter_transformation->get_scene(), nullptr);
@@ -1466,14 +1688,23 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_scene
     shapeshifter_form_struct.shader = nullptr;
     shapeshifter_form_struct.material = nullptr;
     shapeshifter_form_struct.shapeshifter_transformation = nullptr;
-    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(nullptr, shapeshifter_form_struct, nullptr);
+    yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(
+            nullptr,
+            shapeshifter_form_struct,
+            nullptr);
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = nullptr;
-    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(nullptr, shapeshifter_sequence_struct, nullptr);
+    yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(
+            nullptr,
+            shapeshifter_sequence_struct,
+            nullptr);
 
     yli::ontology::ObjectStruct object_struct(shapeshifter_sequence);
-    yli::ontology::Object* const object = new yli::ontology::Object(nullptr, object_struct, &shapeshifter_sequence->parent_of_objects, nullptr);
+    yli::ontology::Object* const object = new yli::ontology::Object(
+            nullptr,
+            object_struct,
+            &shapeshifter_sequence->parent_of_objects, nullptr);
 
     // `Entity` member functions.
     ASSERT_EQ(object->get_childID(), 0);
@@ -1493,11 +1724,17 @@ TEST(brain_must_be_initialized_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::BrainStruct brain_struct;
     brain_struct.parent = scene;
-    yli::ontology::Brain* const brain = new yli::ontology::Brain(universe, brain_struct, &scene->parent_of_brains);
+    yli::ontology::Brain* const brain = new yli::ontology::Brain(
+            universe,
+            brain_struct,
+            &scene->parent_of_brains);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -1531,7 +1768,10 @@ TEST(font_2d_must_be_initialized_appropriately, headless)
     font_struct.screen_height = universe->get_window_height();
     font_struct.text_size = universe->get_text_size();
     font_struct.font_size = universe->get_font_size();
-    yli::ontology::Font2D* const font_2d = new yli::ontology::Font2D(universe, font_struct, &universe->parent_of_font_2ds);
+    yli::ontology::Font2D* const font_2d = new yli::ontology::Font2D(
+            universe,
+            font_struct,
+            &universe->parent_of_font_2ds);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -1550,7 +1790,10 @@ TEST(font_2d_must_be_initialized_appropriately, headless)
 TEST(font_2d_must_be_initialized_appropriately, no_universe)
 {
     yli::ontology::FontStruct font_struct;
-    yli::ontology::Font2D* const font_2d = new yli::ontology::Font2D(nullptr, font_struct, nullptr);
+    yli::ontology::Font2D* const font_2d = new yli::ontology::Font2D(
+            nullptr,
+            font_struct,
+            nullptr);
 
     // `Entity` member functions of `Font2D`.
     ASSERT_EQ(font_2d->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -1575,7 +1818,10 @@ TEST(font_2d_must_be_initialized_appropriately, headless_holstein)
     font_struct.screen_height = universe->get_window_height();
     font_struct.text_size = universe->get_text_size();
     font_struct.font_size = universe->get_font_size();
-    yli::ontology::Font2D* const font_2d = new yli::ontology::Font2D(universe, font_struct, &universe->parent_of_font_2ds);
+    yli::ontology::Font2D* const font_2d = new yli::ontology::Font2D(
+            universe,
+            font_struct,
+            &universe->parent_of_font_2ds);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
@@ -1595,7 +1841,10 @@ TEST(font_2d_must_be_initialized_appropriately, no_universe_holstein)
     yli::ontology::FontStruct font_struct;
     font_struct.texture_filename = "Holstein.png";
     font_struct.font_texture_file_format = "PNG";
-    yli::ontology::Font2D* const font_2d = new yli::ontology::Font2D(nullptr, font_struct, nullptr);
+    yli::ontology::Font2D* const font_2d = new yli::ontology::Font2D(
+            nullptr,
+            font_struct,
+            nullptr);
 
     // `Entity` member functions of `Font2D`.
     ASSERT_EQ(font_2d->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -1611,7 +1860,10 @@ TEST(brain_must_be_initialized_appropriately, no_universe_no_ecosystem_no_scene)
 {
     yli::ontology::BrainStruct brain_struct;
     brain_struct.parent = nullptr;
-    yli::ontology::Brain* const brain = new yli::ontology::Brain(nullptr, brain_struct, nullptr);
+    yli::ontology::Brain* const brain = new yli::ontology::Brain(
+            nullptr,
+            brain_struct,
+            nullptr);
 
     // `Brain` member functions.
     ASSERT_EQ(brain->get_number_of_apprentices(), 0);
@@ -1633,7 +1885,10 @@ TEST(scene_must_be_activated_appropriately, scene)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     ASSERT_EQ(universe->get_active_scene(), nullptr);
     universe->set_active_scene(scene);
@@ -1647,7 +1902,10 @@ TEST(shader_must_bind_to_scene_appropriately, scenes)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene1;
@@ -1656,7 +1914,10 @@ TEST(shader_must_bind_to_scene_appropriately, scenes)
     ASSERT_EQ(shader->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2);
 
-    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
     ASSERT_EQ(shader->get_scene(), scene1);
     ASSERT_EQ(shader->get_parent(), scene1);
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1);
@@ -1683,16 +1944,25 @@ TEST(material_must_bind_to_scene_appropriately, scenes_no_shaders)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene1;
-    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &scene1->parent_of_materials, nullptr);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene1->parent_of_materials, nullptr);
     ASSERT_EQ(material->get_scene(), scene1);
     ASSERT_EQ(material->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `material`.
 
-    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
     ASSERT_EQ(material->get_scene(), scene1);
     ASSERT_EQ(material->get_parent(), scene1);
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1);
@@ -1700,15 +1970,15 @@ TEST(material_must_bind_to_scene_appropriately, scenes_no_shaders)
     material->bind_to_new_parent(scene2);
     ASSERT_EQ(material->get_scene(), scene2);
     ASSERT_EQ(material->get_parent(), scene2);
-    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 1);
-    ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2);
+    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 1); // Default `Camera`.
+    ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2); // Default `Camera`, `material`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);
 
     material->bind_to_new_parent(scene1);
     ASSERT_EQ(material->get_scene(), scene1);
     ASSERT_EQ(material->get_parent(), scene1);
-    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2);
-    ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `material`.
+    ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1); // Default `Camera`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);
 }
 
@@ -1719,37 +1989,50 @@ TEST(species_must_bind_to_material_appropriately, materials_of_the_same_scene_no
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct1, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct1,
+            &universe->parent_of_scenes);
 
     yli::ontology::MaterialStruct material_struct1;
     material_struct1.parent = scene;
-    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &scene->parent_of_materials, nullptr);
+    yli::ontology::Material* const material1 = new yli::ontology::Material(
+            universe,
+            material_struct1,
+            &scene->parent_of_materials, nullptr);
     ASSERT_EQ(material1->get_number_of_non_variable_children(), 0);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.scene = scene;
     model_struct.material = material1;
-    yli::ontology::Species* const species = new yli::ontology::Species(universe, model_struct, &material1->parent_of_species);
-    ASSERT_EQ(species->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_non_variable_children(), 1);
+    yli::ontology::Species* const species = new yli::ontology::Species(
+            universe,
+            model_struct,
+            &scene->parent_of_species,
+            &material1->master_of_species);
+    ASSERT_EQ(species->get_parent(), scene);
+    ASSERT_EQ(material1->get_number_of_non_variable_children(), 0);
 
     yli::ontology::MaterialStruct material_struct2;
     material_struct2.parent = scene;
-    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &scene->parent_of_materials, nullptr);
+    yli::ontology::Material* const material2 = new yli::ontology::Material(
+            universe,
+            material_struct2,
+            &scene->parent_of_materials, nullptr);
     ASSERT_EQ(material2->get_number_of_non_variable_children(), 0);
 
     species->bind_to_new_parent(material2);
-    ASSERT_EQ(species->get_parent(), material2);
+    ASSERT_EQ(species->get_parent(), scene);
     ASSERT_EQ(material1->get_number_of_non_variable_children(), 0);
-    ASSERT_EQ(material2->get_number_of_non_variable_children(), 1);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `material1`, `material2`.
+    ASSERT_EQ(material2->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `material1`, `material2`, 'species`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
 
     species->bind_to_new_parent(material1);
-    ASSERT_EQ(species->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(species->get_parent(), scene);
+    ASSERT_EQ(material1->get_number_of_non_variable_children(), 0);
     ASSERT_EQ(material2->get_number_of_non_variable_children(), 0);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `material1`, `material2`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `material1`, `material2`, 'species`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
 }
 
@@ -1760,7 +2043,10 @@ TEST(species_must_bind_to_material_appropriately, materials_of_different_shaders
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct1, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct1,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct1;
     shader_struct1.parent = scene;
@@ -1769,15 +2055,22 @@ TEST(species_must_bind_to_material_appropriately, materials_of_different_shaders
     yli::ontology::MaterialStruct material_struct1;
     material_struct1.parent = scene;
     material_struct1.shader = shader1;
-    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &scene->parent_of_materials, &shader1->master_of_materials);
+    yli::ontology::Material* const material1 = new yli::ontology::Material(
+            universe,
+            material_struct1,
+            &scene->parent_of_materials, &shader1->master_of_materials);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.scene = scene;
     model_struct.shader = shader1;
     model_struct.material = material1;
-    yli::ontology::Species* const species = new yli::ontology::Species(universe, model_struct, &material1->parent_of_species);
-    ASSERT_EQ(species->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_non_variable_children(), 1);
+    yli::ontology::Species* const species = new yli::ontology::Species(
+            universe,
+            model_struct,
+            &scene->parent_of_species,
+            &material1->master_of_species);
+    ASSERT_EQ(species->get_parent(), scene);
+    ASSERT_EQ(material1->get_number_of_non_variable_children(), 0);
 
     yli::ontology::ShaderStruct shader_struct2;
     shader_struct2.parent = scene;
@@ -1786,25 +2079,28 @@ TEST(species_must_bind_to_material_appropriately, materials_of_different_shaders
     yli::ontology::MaterialStruct material_struct2;
     material_struct1.parent = scene;
     material_struct2.shader = shader2;
-    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &scene->parent_of_materials, &shader2->master_of_materials);
+    yli::ontology::Material* const material2 = new yli::ontology::Material(
+            universe,
+            material_struct2,
+            &scene->parent_of_materials, &shader2->master_of_materials);
     ASSERT_EQ(material2->get_number_of_non_variable_children(), 0);
 
     species->bind_to_new_parent(material2);
-    ASSERT_EQ(species->get_parent(), material2);
+    ASSERT_EQ(species->get_parent(), scene);
     ASSERT_EQ(material1->get_number_of_non_variable_children(), 0);
-    ASSERT_EQ(material2->get_number_of_non_variable_children(), 1);
-    ASSERT_EQ(shader1->get_number_of_non_variable_children(), 0);
-    ASSERT_EQ(shader2->get_number_of_non_variable_children(), 0);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 5); // Default `Camera`, `shader1`, `material1`, `shader2`, `material2`.
-    ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
-
-    species->bind_to_new_parent(material1);
-    ASSERT_EQ(species->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_non_variable_children(), 1);
     ASSERT_EQ(material2->get_number_of_non_variable_children(), 0);
     ASSERT_EQ(shader1->get_number_of_non_variable_children(), 0);
     ASSERT_EQ(shader2->get_number_of_non_variable_children(), 0);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 5); // Default `Camera`, `shader1`, `material1`, `shader2`, `material2`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 6); // Default `Camera`, `shader1`, `material1`, `shader2`, `material2`, `species`.
+    ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
+
+    species->bind_to_new_parent(material1);
+    ASSERT_EQ(species->get_parent(), scene);
+    ASSERT_EQ(material1->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(material2->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(shader1->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(shader2->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 6); // Default `Camera`, `shader1`, `material1`, `shader2`, `material2`, `species`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
 }
 
@@ -1815,7 +2111,10 @@ TEST(object_must_bind_to_species_appropriately, species_of_the_same_material)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct1, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct1,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -1824,16 +2123,26 @@ TEST(object_must_bind_to_species_appropriately, species_of_the_same_material)
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.shader = shader;
-    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct model_struct1;
     model_struct1.scene = scene;
     model_struct1.shader = shader;
     model_struct1.material = material;
-    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, model_struct1, &material->parent_of_species);
+    yli::ontology::Species* const species1 = new yli::ontology::Species(
+            universe,
+            model_struct1,
+            &scene->parent_of_species,
+            &material->master_of_species);
 
     yli::ontology::ObjectStruct object_struct(species1);
-    yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species1->parent_of_objects, nullptr);
+    yli::ontology::Object* const object = new yli::ontology::Object(
+            universe,
+            object_struct,
+            &species1->parent_of_objects, nullptr);
     ASSERT_EQ(object->get_parent(), species1);
     ASSERT_EQ(species1->get_number_of_non_variable_children(), 1);
 
@@ -1841,24 +2150,28 @@ TEST(object_must_bind_to_species_appropriately, species_of_the_same_material)
     model_struct2.scene = scene;
     model_struct2.shader = shader;
     model_struct2.material = material;
-    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, model_struct2, &material->parent_of_species);
+    yli::ontology::Species* const species2 = new yli::ontology::Species(
+            universe,
+            model_struct2,
+            &scene->parent_of_species,
+            &material->master_of_species);
 
     object->bind_to_new_parent(species2);
     ASSERT_EQ(object->get_parent(), species2);
     ASSERT_EQ(species1->get_number_of_non_variable_children(), 0);
     ASSERT_EQ(species2->get_number_of_non_variable_children(), 1);
-    ASSERT_EQ(material->get_number_of_non_variable_children(), 2);
+    ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
     ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, material`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 5); // Default `Camera`, `shader`, material`, `species1`, `species2`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
 
     object->bind_to_new_parent(species1);
     ASSERT_EQ(object->get_parent(), species1);
     ASSERT_EQ(species1->get_number_of_non_variable_children(), 1);
     ASSERT_EQ(species2->get_number_of_non_variable_children(), 0);
-    ASSERT_EQ(material->get_number_of_non_variable_children(), 2);
+    ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
     ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, material`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 5); // Default `Camera`, `shader`, material`, `species1`, `species2`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
 }
 
@@ -1869,7 +2182,10 @@ TEST(object_must_bind_to_species_appropriately, species_of_different_materials)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct1, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct1,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -1878,48 +2194,65 @@ TEST(object_must_bind_to_species_appropriately, species_of_different_materials)
     yli::ontology::MaterialStruct material_struct1;
     material_struct1.parent = scene;
     material_struct1.shader = shader;
-    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material1 = new yli::ontology::Material(
+            universe,
+            material_struct1,
+            &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct model_struct1;
     model_struct1.scene = scene;
     model_struct1.shader = shader;
     model_struct1.material = material1;
-    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, model_struct1, &material1->parent_of_species);
+    yli::ontology::Species* const species1 = new yli::ontology::Species(
+            universe,
+            model_struct1,
+            &scene->parent_of_species,
+            &material1->master_of_species);
 
     yli::ontology::ObjectStruct object_struct(species1);
-    yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species1->parent_of_objects, nullptr);
+    yli::ontology::Object* const object = new yli::ontology::Object(
+            universe,
+            object_struct,
+            &species1->parent_of_objects, nullptr);
     ASSERT_EQ(object->get_parent(), species1);
     ASSERT_EQ(species1->get_number_of_non_variable_children(), 1);
 
     yli::ontology::MaterialStruct material_struct2;
     material_struct2.parent = scene;
     material_struct2.shader = shader;
-    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material2 = new yli::ontology::Material(
+            universe,
+            material_struct2,
+            &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct model_struct2;
     model_struct2.scene = scene;
     model_struct2.shader = shader;
     model_struct2.material = material2;
-    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, model_struct2, &material2->parent_of_species);
+    yli::ontology::Species* const species2 = new yli::ontology::Species(
+            universe,
+            model_struct2,
+            &scene->parent_of_species,
+            &material2->master_of_species);
 
     object->bind_to_new_parent(species2);
     ASSERT_EQ(object->get_parent(), species2);
     ASSERT_EQ(species1->get_number_of_non_variable_children(), 0);
     ASSERT_EQ(species2->get_number_of_non_variable_children(), 1);
-    ASSERT_EQ(material1->get_number_of_non_variable_children(), 1);
-    ASSERT_EQ(material2->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(material1->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(material2->get_number_of_non_variable_children(), 0);
     ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `shader`, `material1`, `material2`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 6); // Default `Camera`, `shader`, `material1`, `material2`, `species1`, `species2`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
 
     object->bind_to_new_parent(species1);
     ASSERT_EQ(object->get_parent(), species1);
     ASSERT_EQ(species1->get_number_of_non_variable_children(), 1);
     ASSERT_EQ(species2->get_number_of_non_variable_children(), 0);
-    ASSERT_EQ(material1->get_number_of_non_variable_children(), 1);
-    ASSERT_EQ(material2->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(material1->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(material2->get_number_of_non_variable_children(), 0);
     ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `shader`, `material1`, `material2`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 6); // Default `Camera`, `shader`, `material1`, `material2`, `species1`, `species2`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
 }
 
@@ -1930,7 +2263,10 @@ TEST(shapeshifter_transformation_must_bind_to_material_appropriately, materials_
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct1, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct1,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -1939,20 +2275,29 @@ TEST(shapeshifter_transformation_must_bind_to_material_appropriately, materials_
     yli::ontology::MaterialStruct material_struct1;
     material_struct1.parent = scene;
     material_struct1.shader = shader;
-    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material1 = new yli::ontology::Material(
+            universe,
+            material_struct1,
+            &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct shapeshifter_transformation_struct;
     shapeshifter_transformation_struct.scene = scene;
     shapeshifter_transformation_struct.shader = shader;
     shapeshifter_transformation_struct.material = material1;
-    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(universe, shapeshifter_transformation_struct);
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
+            universe,
+            shapeshifter_transformation_struct,
+            &material1->parent_of_shapeshifter_transformations);
     ASSERT_EQ(shapeshifter_transformation->get_parent(), material1);
     ASSERT_EQ(material1->get_number_of_non_variable_children(), 1);
 
     yli::ontology::MaterialStruct material_struct2;
     material_struct2.parent = scene;
     material_struct2.shader = shader;
-    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material2 = new yli::ontology::Material(
+            universe,
+            material_struct2,
+            &scene->parent_of_materials, &shader->master_of_materials);
     ASSERT_EQ(material2->get_number_of_non_variable_children(), 0);
 
     shapeshifter_transformation->bind_to_new_parent(material2);
@@ -1979,7 +2324,10 @@ TEST(shapeshifter_transformation_must_bind_to_material_appropriately, materials_
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct1, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct1,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct1;
     shader_struct1.parent = scene;
@@ -1988,13 +2336,19 @@ TEST(shapeshifter_transformation_must_bind_to_material_appropriately, materials_
     yli::ontology::MaterialStruct material_struct1;
     material_struct1.parent = scene;
     material_struct1.shader = shader1;
-    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &scene->parent_of_materials, &shader1->master_of_materials);
+    yli::ontology::Material* const material1 = new yli::ontology::Material(
+            universe,
+            material_struct1,
+            &scene->parent_of_materials, &shader1->master_of_materials);
 
     yli::ontology::ModelStruct shapeshifter_transformation_struct;
     shapeshifter_transformation_struct.scene = scene;
     shapeshifter_transformation_struct.shader = shader1;
     shapeshifter_transformation_struct.material = material1;
-    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(universe, shapeshifter_transformation_struct);
+    yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
+            universe,
+            shapeshifter_transformation_struct,
+            &material1->parent_of_shapeshifter_transformations);
     ASSERT_EQ(shapeshifter_transformation->get_parent(), material1);
     ASSERT_EQ(material1->get_number_of_non_variable_children(), 1);
 
@@ -2005,7 +2359,10 @@ TEST(shapeshifter_transformation_must_bind_to_material_appropriately, materials_
     yli::ontology::MaterialStruct material_struct2;
     material_struct2.parent = scene;
     material_struct2.shader = shader2;
-    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &scene->parent_of_materials, &shader2->master_of_materials);
+    yli::ontology::Material* const material2 = new yli::ontology::Material(
+            universe,
+            material_struct2,
+            &scene->parent_of_materials, &shader2->master_of_materials);
     ASSERT_EQ(material2->get_number_of_non_variable_children(), 0);
 
     shapeshifter_transformation->bind_to_new_parent(material2);
@@ -2034,11 +2391,17 @@ TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::BrainStruct brain_struct;
     brain_struct.parent = scene;
-    yli::ontology::Brain* const brain = new yli::ontology::Brain(universe, brain_struct, &scene->parent_of_brains);
+    yli::ontology::Brain* const brain = new yli::ontology::Brain(
+            universe,
+            brain_struct,
+            &scene->parent_of_brains);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -2047,16 +2410,26 @@ TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.shader = shader;
-    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.scene = scene;
     model_struct.shader = shader;
     model_struct.material = material;
-    yli::ontology::Species* const species = new yli::ontology::Species(universe, model_struct, &material->parent_of_species);
+    yli::ontology::Species* const species = new yli::ontology::Species(
+            universe,
+            model_struct,
+            &scene->parent_of_species,
+            &material->master_of_species);
 
     yli::ontology::ObjectStruct object_struct(species);
-    yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species->parent_of_objects, nullptr);
+    yli::ontology::Object* const object = new yli::ontology::Object(
+            universe,
+            object_struct,
+            &species->parent_of_objects, nullptr);
 
     ASSERT_EQ(brain->get_number_of_apprentices(), 0);
     object->bind_to_new_brain(brain);
@@ -2110,7 +2483,10 @@ TEST(ecosystem_must_be_given_a_global_name_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(universe, ecosystem_struct, &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct,
+            &universe->parent_of_ecosystems);
     ASSERT_EQ(ecosystem->get_global_name(), "");
     ASSERT_EQ(ecosystem->get_local_name(), "");
 
@@ -2128,7 +2504,10 @@ TEST(ecosystem_must_be_given_a_local_name_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(universe, ecosystem_struct, &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct,
+            &universe->parent_of_ecosystems);
     ASSERT_EQ(ecosystem->get_global_name(), "");
     ASSERT_EQ(ecosystem->get_local_name(), "");
 
@@ -2146,7 +2525,10 @@ TEST(ecosystem_must_be_given_a_global_name_appropriately_after_setting_a_global_
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(universe, ecosystem_struct, &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct,
+            &universe->parent_of_ecosystems);
     ASSERT_EQ(ecosystem->get_global_name(), "");
     ASSERT_EQ(ecosystem->get_local_name(), "");
 
@@ -2166,7 +2548,10 @@ TEST(ecosystem_must_be_given_a_local_name_appropriately_after_setting_a_local_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(universe, ecosystem_struct, &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct,
+            &universe->parent_of_ecosystems);
     ASSERT_EQ(ecosystem->get_global_name(), "");
     ASSERT_EQ(ecosystem->get_local_name(), "");
 
@@ -2186,7 +2571,10 @@ TEST(ecosystem_must_be_given_a_global_name_appropriately_after_setting_a_local_n
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(universe, ecosystem_struct, &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct,
+            &universe->parent_of_ecosystems);
     ASSERT_EQ(ecosystem->get_global_name(), "");
     ASSERT_EQ(ecosystem->get_local_name(), "");
 
@@ -2206,7 +2594,10 @@ TEST(ecosystem_must_be_given_a_local_name_appropriately_after_setting_a_global_n
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(universe, ecosystem_struct, &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct,
+            &universe->parent_of_ecosystems);
     ASSERT_EQ(ecosystem->get_global_name(), "");
     ASSERT_EQ(ecosystem->get_local_name(), "");
 
@@ -2226,7 +2617,10 @@ TEST(scene_must_be_given_a_global_name_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
     ASSERT_EQ(scene->get_global_name(), "");
     ASSERT_EQ(scene->get_local_name(), "");
 
@@ -2244,7 +2638,10 @@ TEST(scene_must_be_given_a_local_name_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
     ASSERT_EQ(scene->get_global_name(), "");
     ASSERT_EQ(scene->get_local_name(), "");
 
@@ -2262,7 +2659,10 @@ TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_global_name
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
     ASSERT_EQ(scene->get_global_name(), "");
     ASSERT_EQ(scene->get_local_name(), "");
 
@@ -2282,7 +2682,10 @@ TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_local_name, 
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
     ASSERT_EQ(scene->get_global_name(), "");
     ASSERT_EQ(scene->get_local_name(), "");
 
@@ -2302,7 +2705,10 @@ TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_local_name,
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
     ASSERT_EQ(scene->get_global_name(), "");
     ASSERT_EQ(scene->get_local_name(), "");
 
@@ -2322,7 +2728,10 @@ TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_global_name,
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
     ASSERT_EQ(scene->get_global_name(), "");
     ASSERT_EQ(scene->get_local_name(), "");
 
@@ -2342,7 +2751,10 @@ TEST(shader_must_be_given_a_global_name_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -2364,7 +2776,10 @@ TEST(shader_must_be_given_a_local_name_appropriately, headless)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -2386,7 +2801,10 @@ TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_global_nam
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -2411,7 +2829,10 @@ TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_local_name,
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -2436,7 +2857,10 @@ TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_local_name
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -2461,7 +2885,10 @@ TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_global_name
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -2486,14 +2913,20 @@ TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct1, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct1,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene1;
     yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
 
     yli::ontology::SceneStruct scene_struct2;
-    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct2, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct2,
+            &universe->parent_of_scenes);
 
     shader->set_local_name("foo");
     shader->bind_to_new_parent(scene2);
@@ -2518,14 +2951,20 @@ TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct1, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct1,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene1;
     yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
 
     yli::ontology::SceneStruct scene_struct2;
-    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct2, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct2,
+            &universe->parent_of_scenes);
 
     shader->set_global_name("foo");
     shader->set_local_name("bar");
@@ -2555,14 +2994,20 @@ TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct1, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct1,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct1;
     shader_struct1.parent = scene1;
     yli::ontology::Shader* const shader1 = new yli::ontology::Shader(universe, shader_struct1);
 
     yli::ontology::SceneStruct scene_struct2;
-    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct2, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct2,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct2;
     shader_struct2.parent = scene2;
@@ -2586,14 +3031,20 @@ TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct1, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct1,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct1;
     shader_struct1.parent = scene1;
     yli::ontology::Shader* const shader1 = new yli::ontology::Shader(universe, shader_struct1);
 
     yli::ontology::SceneStruct scene_struct2;
-    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct2, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct2,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct2;
     shader_struct2.parent = scene2;
@@ -2623,14 +3074,23 @@ TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct1, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct1,
+            &universe->parent_of_scenes);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene1;
-    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &scene1->parent_of_materials, nullptr);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene1->parent_of_materials, nullptr);
 
     yli::ontology::SceneStruct scene_struct2;
-    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct2, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct2,
+            &universe->parent_of_scenes);
 
     material->set_local_name("foo");
     material->bind_to_new_parent(scene2);
@@ -2655,14 +3115,23 @@ TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct1, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct1,
+            &universe->parent_of_scenes);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene1;
-    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &scene1->parent_of_materials, nullptr);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene1->parent_of_materials, nullptr);
 
     yli::ontology::SceneStruct scene_struct2;
-    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct2, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct2,
+            &universe->parent_of_scenes);
 
     material->set_global_name("foo");
     material->set_local_name("bar");
@@ -2692,18 +3161,30 @@ TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct1, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct1,
+            &universe->parent_of_scenes);
 
     yli::ontology::MaterialStruct material_struct1;
     material_struct1.parent = scene1;
-    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &scene1->parent_of_materials, nullptr);
+    yli::ontology::Material* const material1 = new yli::ontology::Material(
+            universe,
+            material_struct1,
+            &scene1->parent_of_materials, nullptr);
 
     yli::ontology::SceneStruct scene_struct2;
-    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct2, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct2,
+            &universe->parent_of_scenes);
 
     yli::ontology::MaterialStruct material_struct2;
     material_struct2.parent = scene2;
-    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &scene2->parent_of_materials, nullptr);
+    yli::ontology::Material* const material2 = new yli::ontology::Material(
+            universe,
+            material_struct2,
+            &scene2->parent_of_materials, nullptr);
 
     material1->set_local_name("foo");
     material2->set_local_name("foo");
@@ -2723,18 +3204,30 @@ TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(universe, scene_struct1, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct1,
+            &universe->parent_of_scenes);
 
     yli::ontology::MaterialStruct material_struct1;
     material_struct1.parent = scene1;
-    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &scene1->parent_of_materials, nullptr);
+    yli::ontology::Material* const material1 = new yli::ontology::Material(
+            universe,
+            material_struct1,
+            &scene1->parent_of_materials, nullptr);
 
     yli::ontology::SceneStruct scene_struct2;
-    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(universe, scene_struct2, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct2,
+            &universe->parent_of_scenes);
 
     yli::ontology::MaterialStruct material_struct2;
     material_struct2.parent = scene2;
-    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &scene2->parent_of_materials, nullptr);
+    yli::ontology::Material* const material2 = new yli::ontology::Material(
+            universe,
+            material_struct2,
+            &scene2->parent_of_materials, nullptr);
 
     material1->set_global_name("foo");
     material2->set_global_name("bar");
@@ -2760,42 +3253,37 @@ TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headles
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
-
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
-
-    yli::ontology::MaterialStruct material_struct1;
-    material_struct1.parent = scene;
-    material_struct1.shader = shader;
-    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene;
-    model_struct.shader = shader;
-    model_struct.material = material1;
-    yli::ontology::Species* const species = new yli::ontology::Species(universe, model_struct, &material1->parent_of_species);
-
-    yli::ontology::MaterialStruct material_struct2;
-    material_struct2.parent = scene;
-    material_struct2.shader = shader;
-    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &scene->parent_of_materials, &shader->master_of_materials);
+    model_struct.scene = scene1;
+    yli::ontology::Species* const species = new yli::ontology::Species(
+            universe,
+            model_struct,
+            &scene1->parent_of_species,
+            nullptr);
 
     species->set_local_name("foo");
-    species->bind_to_new_parent(material2);
-    ASSERT_FALSE(material1->has_child("foo"));
-    ASSERT_TRUE(material2->has_child("foo"));
-    ASSERT_EQ(species->get_parent(), material2);
-    ASSERT_EQ(material1->get_number_of_non_variable_children(), 0);
-    ASSERT_EQ(material2->get_number_of_non_variable_children(), 1);
+    species->bind_to_new_parent(scene2);
+    ASSERT_FALSE(scene1->has_child("foo"));
+    ASSERT_TRUE(scene2->has_child("foo"));
+    ASSERT_EQ(species->get_parent(), scene2);
+    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 1); // Default `Camera`.
+    ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2); // Default `Camera`, `species`.
 
-    species->bind_to_new_parent(material1);
-    ASSERT_TRUE(material1->has_child("foo"));
-    ASSERT_FALSE(material2->has_child("foo"));
-    ASSERT_EQ(species->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_non_variable_children(), 1);
-    ASSERT_EQ(material2->get_number_of_non_variable_children(), 0);
+    species->bind_to_new_parent(scene1);
+    ASSERT_TRUE(scene1->has_child("foo"));
+    ASSERT_FALSE(scene2->has_child("foo"));
+    ASSERT_EQ(species->get_parent(), scene1);
+    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `species`.
+    ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1); // Default `Camera`.
 }
 
 TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_species_with_global_name_and_local_name)
@@ -2805,47 +3293,42 @@ TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headles
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
-
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
-
-    yli::ontology::MaterialStruct material_struct1;
-    material_struct1.parent = scene;
-    material_struct1.shader = shader;
-    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene;
-    model_struct.shader = shader;
-    model_struct.material = material1;
-    yli::ontology::Species* const species = new yli::ontology::Species(universe, model_struct, &material1->parent_of_species);
-
-    yli::ontology::MaterialStruct material_struct2;
-    material_struct2.parent = scene;
-    material_struct2.shader = shader;
-    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &scene->parent_of_materials, &shader->master_of_materials);
+    model_struct.scene = scene1;
+    yli::ontology::Species* const species = new yli::ontology::Species(
+            universe,
+            model_struct,
+            &scene1->parent_of_species,
+            nullptr);
 
     species->set_global_name("foo");
     species->set_local_name("bar");
-    species->bind_to_new_parent(material2);
-    ASSERT_FALSE(material1->has_child("foo"));
-    ASSERT_FALSE(material2->has_child("foo"));
-    ASSERT_FALSE(material1->has_child("bar"));
-    ASSERT_TRUE(material2->has_child("bar"));
-    ASSERT_EQ(species->get_parent(), material2);
-    ASSERT_EQ(material1->get_number_of_non_variable_children(), 0);
-    ASSERT_EQ(material2->get_number_of_non_variable_children(), 1);
+    species->bind_to_new_parent(scene2);
+    ASSERT_FALSE(scene1->has_child("foo"));
+    ASSERT_FALSE(scene2->has_child("foo"));
+    ASSERT_FALSE(scene1->has_child("bar"));
+    ASSERT_TRUE(scene2->has_child("bar"));
+    ASSERT_EQ(species->get_parent(), scene2);
+    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 1); // Default `Camera`.
+    ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2); // Default `Camera`, `species`.
 
-    species->bind_to_new_parent(material1);
-    ASSERT_FALSE(material1->has_child("foo"));
-    ASSERT_FALSE(material2->has_child("foo"));
-    ASSERT_TRUE(material1->has_child("bar"));
-    ASSERT_FALSE(material2->has_child("bar"));
-    ASSERT_EQ(species->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_non_variable_children(), 1);
-    ASSERT_EQ(material2->get_number_of_non_variable_children(), 0);
+    species->bind_to_new_parent(scene1);
+    ASSERT_FALSE(scene1->has_child("foo"));
+    ASSERT_FALSE(scene2->has_child("foo"));
+    ASSERT_TRUE(scene1->has_child("bar"));
+    ASSERT_FALSE(scene2->has_child("bar"));
+    ASSERT_EQ(species->get_parent(), scene1);
+    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `species`.
+    ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1); // Default `Camera`.
 }
 
 TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_species_with_only_local_name)
@@ -2855,43 +3338,40 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
-
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
-
-    yli::ontology::MaterialStruct material_struct1;
-    material_struct1.parent = scene;
-    material_struct1.shader = shader;
-    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ModelStruct model_struct1;
-    model_struct1.scene = scene;
-    model_struct1.shader = shader;
-    model_struct1.material = material1;
-    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, model_struct1, &material1->parent_of_species);
-
-    yli::ontology::MaterialStruct material_struct2;
-    material_struct2.parent = scene;
-    material_struct2.shader = shader;
-    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &scene->parent_of_materials, &shader->master_of_materials);
+    model_struct1.scene = scene1;
+    yli::ontology::Species* const species1 = new yli::ontology::Species(
+            universe,
+            model_struct1,
+            &scene1->parent_of_species,
+            nullptr);
 
     yli::ontology::ModelStruct model_struct2;
-    model_struct2.scene = scene;
-    model_struct2.shader = shader;
-    model_struct2.material = material2;
-    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, model_struct2, &material2->parent_of_species);
+    model_struct2.scene = scene2;
+    yli::ontology::Species* const species2 = new yli::ontology::Species(
+            universe,
+            model_struct2,
+            &scene2->parent_of_species,
+            nullptr);
 
     species1->set_local_name("foo");
     species2->set_local_name("foo");
-    species1->bind_to_new_parent(material2);
-    ASSERT_EQ(species1->get_scene(), scene);
-    ASSERT_EQ(species1->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_non_variable_children(), 1);
-    ASSERT_EQ(material2->get_number_of_non_variable_children(), 1);
-    ASSERT_TRUE(material1->has_child("foo"));
-    ASSERT_TRUE(material2->has_child("foo"));
+    species1->bind_to_new_parent(scene2);
+    ASSERT_EQ(species1->get_scene(), scene1);
+    ASSERT_EQ(species1->get_parent(), scene1);
+    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `species1`.
+    ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2); // Default `Camera`, `species2`.
+    ASSERT_TRUE(scene1->has_child("foo"));
+    ASSERT_TRUE(scene2->has_child("foo"));
 }
 
 TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_species_with_different_global_names_and_same_local_name)
@@ -2901,49 +3381,46 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
-
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
-
-    yli::ontology::MaterialStruct material_struct1;
-    material_struct1.parent = scene;
-    material_struct1.shader = shader;
-    yli::ontology::Material* const material1 = new yli::ontology::Material(universe, material_struct1, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ModelStruct model_struct1;
-    model_struct1.scene = scene;
-    model_struct1.shader = shader;
-    model_struct1.material = material1;
-    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, model_struct1, &material1->parent_of_species);
-
-    yli::ontology::MaterialStruct material_struct2;
-    material_struct2.parent = scene;
-    material_struct2.shader = shader;
-    yli::ontology::Material* const material2 = new yli::ontology::Material(universe, material_struct2, &scene->parent_of_materials, &shader->master_of_materials);
+    model_struct1.scene = scene1;
+    yli::ontology::Species* const species1 = new yli::ontology::Species(
+            universe,
+            model_struct1,
+            &scene1->parent_of_species,
+            nullptr);
 
     yli::ontology::ModelStruct model_struct2;
-    model_struct2.scene = scene;
-    model_struct2.shader = shader;
-    model_struct2.material = material2;
-    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, model_struct2, &material2->parent_of_species);
+    model_struct2.scene = scene2;
+    yli::ontology::Species* const species2 = new yli::ontology::Species(
+            universe,
+            model_struct2,
+            &scene2->parent_of_species,
+            nullptr);
 
     species1->set_global_name("foo");
     species2->set_global_name("bar");
     species1->set_local_name("baz");
     species2->set_local_name("baz");
-    species1->bind_to_new_parent(material2);
-    ASSERT_EQ(species1->get_scene(), scene);
-    ASSERT_EQ(species1->get_parent(), material1);
-    ASSERT_EQ(material1->get_number_of_non_variable_children(), 1);
-    ASSERT_EQ(material2->get_number_of_non_variable_children(), 1);
-    ASSERT_FALSE(material1->has_child("foo"));
-    ASSERT_FALSE(material2->has_child("foo"));
-    ASSERT_FALSE(material1->has_child("bar"));
-    ASSERT_FALSE(material2->has_child("bar"));
-    ASSERT_TRUE(material1->has_child("baz"));
-    ASSERT_TRUE(material2->has_child("baz"));
+    species1->bind_to_new_parent(scene2);
+    ASSERT_EQ(species1->get_scene(), scene1);
+    ASSERT_EQ(species1->get_parent(), scene1);
+    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `species1`.
+    ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2); // Default `Camera`, `species2`.
+    ASSERT_FALSE(scene1->has_child("foo"));
+    ASSERT_FALSE(scene2->has_child("foo"));
+    ASSERT_FALSE(scene1->has_child("bar"));
+    ASSERT_FALSE(scene2->has_child("bar"));
+    ASSERT_TRUE(scene1->has_child("baz"));
+    ASSERT_TRUE(scene2->has_child("baz"));
 }
 
 TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_object_with_only_local_name)
@@ -2953,7 +3430,10 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -2962,22 +3442,36 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.shader = shader;
-    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct model_struct1;
     model_struct1.scene = scene;
     model_struct1.shader = shader;
     model_struct1.material = material;
-    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, model_struct1, &material->parent_of_species);
+    yli::ontology::Species* const species1 = new yli::ontology::Species(
+            universe,
+            model_struct1,
+            &scene->parent_of_species,
+            &material->master_of_species);
 
     yli::ontology::ObjectStruct object_struct(species1);
-    yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species1->parent_of_objects, nullptr);
+    yli::ontology::Object* const object = new yli::ontology::Object(
+            universe,
+            object_struct,
+            &species1->parent_of_objects, nullptr);
 
     yli::ontology::ModelStruct model_struct2;
     model_struct2.scene = scene;
     model_struct2.shader = shader;
     model_struct2.material = material;
-    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, model_struct2, &material->parent_of_species);
+    yli::ontology::Species* const species2 = new yli::ontology::Species(
+            universe,
+            model_struct2,
+            &scene->parent_of_species,
+            &material->master_of_species);
 
     object->set_local_name("foo");
     object->bind_to_new_parent(species2);
@@ -3002,7 +3496,10 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -3011,22 +3508,36 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.shader = shader;
-    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct model_struct1;
     model_struct1.scene = scene;
     model_struct1.shader = shader;
     model_struct1.material = material;
-    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, model_struct1, &material->parent_of_species);
+    yli::ontology::Species* const species1 = new yli::ontology::Species(
+            universe,
+            model_struct1,
+            &scene->parent_of_species,
+            &material->master_of_species);
 
     yli::ontology::ObjectStruct object_struct(species1);
-    yli::ontology::Object* const object = new yli::ontology::Object(universe, object_struct, &species1->parent_of_objects, nullptr);
+    yli::ontology::Object* const object = new yli::ontology::Object(
+            universe,
+            object_struct,
+            &species1->parent_of_objects, nullptr);
 
     yli::ontology::ModelStruct model_struct2;
     model_struct2.scene = scene;
     model_struct2.shader = shader;
     model_struct2.material = material;
-    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, model_struct2, &material->parent_of_species);
+    yli::ontology::Species* const species2 = new yli::ontology::Species(
+            universe,
+            model_struct2,
+            &scene->parent_of_species,
+            &material->master_of_species);
 
     object->set_global_name("foo");
     object->set_local_name("bar");
@@ -3056,7 +3567,10 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -3065,25 +3579,42 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.shader = shader;
-    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct model_struct1;
     model_struct1.scene = scene;
     model_struct1.shader = shader;
     model_struct1.material = material;
-    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, model_struct1, &material->parent_of_species);
+    yli::ontology::Species* const species1 = new yli::ontology::Species(
+            universe,
+            model_struct1,
+            &scene->parent_of_species,
+            &material->master_of_species);
 
     yli::ontology::ObjectStruct object_struct1(species1);
-    yli::ontology::Object* const object1 = new yli::ontology::Object(universe, object_struct1, &species1->parent_of_objects, nullptr);
+    yli::ontology::Object* const object1 = new yli::ontology::Object(
+            universe,
+            object_struct1,
+            &species1->parent_of_objects, nullptr);
 
     yli::ontology::ModelStruct model_struct2;
     model_struct2.scene = scene;
     model_struct2.shader = shader;
     model_struct2.material = material;
-    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, model_struct2, &material->parent_of_species);
+    yli::ontology::Species* const species2 = new yli::ontology::Species(
+            universe,
+            model_struct2,
+            &scene->parent_of_species,
+            &material->master_of_species);
 
     yli::ontology::ObjectStruct object_struct2(species2);
-    yli::ontology::Object* const object2 = new yli::ontology::Object(universe, object_struct2, &species2->parent_of_objects, nullptr);
+    yli::ontology::Object* const object2 = new yli::ontology::Object(
+            universe,
+            object_struct2,
+            &species2->parent_of_objects, nullptr);
 
     object1->set_local_name("foo");
     object2->set_local_name("foo");
@@ -3103,7 +3634,10 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(universe, scene_struct, &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
@@ -3112,25 +3646,42 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.shader = shader;
-    yli::ontology::Material* const material = new yli::ontology::Material(universe, material_struct, &scene->parent_of_materials, &shader->master_of_materials);
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct model_struct1;
     model_struct1.scene = scene;
     model_struct1.shader = shader;
     model_struct1.material = material;
-    yli::ontology::Species* const species1 = new yli::ontology::Species(universe, model_struct1, &material->parent_of_species);
+    yli::ontology::Species* const species1 = new yli::ontology::Species(
+            universe,
+            model_struct1,
+            &scene->parent_of_species,
+            &material->master_of_species);
 
     yli::ontology::ObjectStruct object_struct1(species1);
-    yli::ontology::Object* const object1 = new yli::ontology::Object(universe, object_struct1, &species1->parent_of_objects, nullptr);
+    yli::ontology::Object* const object1 = new yli::ontology::Object(
+            universe,
+            object_struct1,
+            &species1->parent_of_objects, nullptr);
 
     yli::ontology::ModelStruct model_struct2;
     model_struct2.scene = scene;
     model_struct2.shader = shader;
     model_struct2.material = material;
-    yli::ontology::Species* const species2 = new yli::ontology::Species(universe, model_struct2, &material->parent_of_species);
+    yli::ontology::Species* const species2 = new yli::ontology::Species(
+            universe,
+            model_struct2,
+            &scene->parent_of_species,
+            &material->master_of_species);
 
     yli::ontology::ObjectStruct object_struct2(species2);
-    yli::ontology::Object* const object2 = new yli::ontology::Object(universe, object_struct2, &species2->parent_of_objects, nullptr);
+    yli::ontology::Object* const object2 = new yli::ontology::Object(
+            universe,
+            object_struct2,
+            &species2->parent_of_objects, nullptr);
 
     object1->set_global_name("foo");
     object2->set_global_name("bar");

@@ -33,6 +33,7 @@
 #endif
 
 // Include standard headers
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>  // std::make_shared, std::shared_ptr
 #include <variant> // std::holds_alternative, std::variant
 
@@ -42,8 +43,15 @@ namespace yli::ontology
 
     std::shared_ptr<yli::data::AnyValue> activate_cartesian_coordinates(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
-        if (entity == nullptr || variable == nullptr)
+        if (entity == nullptr)
         {
+            std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: `entity` is `nullptr`!\n";
+            return nullptr;
+        }
+
+        if (variable == nullptr)
+        {
+            std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: `variable` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -53,8 +61,15 @@ namespace yli::ontology
         {
             std::shared_ptr<yli::data::AnyValue> cartesian_coordinates_any_value = variable->variable_value;
 
-            if (cartesian_coordinates_any_value == nullptr || !std::holds_alternative<std::shared_ptr<glm::vec3>>(cartesian_coordinates_any_value->data))
+            if (cartesian_coordinates_any_value == nullptr)
             {
+                std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: `cartesian_coordinates_any_value` is `nullptr`!\n";
+                return nullptr;
+            }
+
+            if (!std::holds_alternative<std::shared_ptr<glm::vec3>>(cartesian_coordinates_any_value->data))
+            {
+                std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: data is of invalid type!\n";
                 return nullptr;
             }
 
@@ -66,13 +81,21 @@ namespace yli::ontology
 
         if (universe == nullptr)
         {
+            std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
         std::shared_ptr<yli::data::AnyValue> cartesian_coordinates_any_value = variable->variable_value;
 
-        if (cartesian_coordinates_any_value == nullptr || !std::holds_alternative<std::shared_ptr<glm::vec3>>(cartesian_coordinates_any_value->data))
+        if (cartesian_coordinates_any_value == nullptr)
         {
+            std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: `cartesian_coordinates_any_value` is `nullptr`!\n";
+            return nullptr;
+        }
+
+        if (!std::holds_alternative<std::shared_ptr<glm::vec3>>(cartesian_coordinates_any_value->data))
+        {
+            std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: data is of invalid type!\n";
             return nullptr;
         }
 
@@ -82,8 +105,15 @@ namespace yli::ontology
 
     std::shared_ptr<yli::data::AnyValue> activate_x(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
-        if (entity == nullptr || variable == nullptr)
+        if (entity == nullptr)
         {
+            std::cerr << "ERROR: `yli::ontology::activate_x`: `entity` is `nullptr`!\n";
+            return nullptr;
+        }
+
+        if (variable == nullptr)
+        {
+            std::cerr << "ERROR: `yli::ontology::activate_x`: `variable` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -93,8 +123,15 @@ namespace yli::ontology
         {
             std::shared_ptr<yli::data::AnyValue> x_any_value = variable->variable_value;
 
-            if (x_any_value == nullptr || !std::holds_alternative<float>(x_any_value->data))
+            if (x_any_value == nullptr)
             {
+                std::cerr << "ERROR: `yli::ontology::activate_x`: `x_any_value` is `nullptr`!\n";
+                return nullptr;
+            }
+
+            if (!std::holds_alternative<float>(x_any_value->data))
+            {
+                std::cerr << "ERROR: `yli::ontology::activate_x`: data is of invalid type!\n";
                 return nullptr;
             }
 
@@ -115,13 +152,21 @@ namespace yli::ontology
 
         if (universe == nullptr)
         {
+            std::cerr << "ERROR: `yli::ontology::activate_x`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
         std::shared_ptr<yli::data::AnyValue> x_any_value = variable->variable_value;
 
-        if (x_any_value == nullptr || !std::holds_alternative<float>(x_any_value->data))
+        if (x_any_value == nullptr)
         {
+            std::cerr << "ERROR: `yli::ontology::activate_x`: `x_any_value` is `nullptr`!\n";
+            return nullptr;
+        }
+
+        if (!std::holds_alternative<float>(x_any_value->data))
+        {
+            std::cerr << "ERROR: `yli::ontology::activate_x`: data is of invalid type!\n";
             return nullptr;
         }
 
@@ -131,8 +176,15 @@ namespace yli::ontology
 
     std::shared_ptr<yli::data::AnyValue> activate_y(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
-        if (entity == nullptr || variable == nullptr)
+        if (entity == nullptr)
         {
+            std::cerr << "ERROR: `yli::ontology::activate_y`: `entity` is `nullptr`!\n";
+            return nullptr;
+        }
+
+        if (variable == nullptr)
+        {
+            std::cerr << "ERROR: `yli::ontology::activate_y`: `variable` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -142,8 +194,15 @@ namespace yli::ontology
         {
             std::shared_ptr<yli::data::AnyValue> y_any_value = variable->variable_value;
 
-            if (y_any_value == nullptr || !std::holds_alternative<float>(y_any_value->data))
+            if (y_any_value == nullptr)
             {
+                std::cerr << "ERROR: `yli::ontology::activate_y`: `y_any_value` is `nullptr`!\n";
+                return nullptr;
+            }
+
+            if (!std::holds_alternative<float>(y_any_value->data))
+            {
+                std::cerr << "ERROR: `yli::ontology::activate_y`: data is of invalid type!\n";
                 return nullptr;
             }
 
@@ -164,13 +223,21 @@ namespace yli::ontology
 
         if (universe == nullptr)
         {
+            std::cerr << "ERROR: `yli::ontology::activate_y`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
         std::shared_ptr<yli::data::AnyValue> y_any_value = variable->variable_value;
 
-        if (y_any_value == nullptr || !std::holds_alternative<float>(y_any_value->data))
+        if (y_any_value == nullptr)
         {
+            std::cerr << "ERROR: `yli::ontology::activate_y`: `y_any_value` is `nullptr`!\n";
+            return nullptr;
+        }
+
+        if (!std::holds_alternative<float>(y_any_value->data))
+        {
+            std::cerr << "ERROR: `yli::ontology::activate_y`: data is of invalid type!\n";
             return nullptr;
         }
 
@@ -180,8 +247,15 @@ namespace yli::ontology
 
     std::shared_ptr<yli::data::AnyValue> activate_z(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
-        if (entity == nullptr || variable == nullptr)
+        if (entity == nullptr)
         {
+            std::cerr << "ERROR: `yli::ontology::activate_z`: `entity` is `nullptr`!\n";
+            return nullptr;
+        }
+
+        if (variable == nullptr)
+        {
+            std::cerr << "ERROR: `yli::ontology::activate_z`: `variable` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -191,8 +265,15 @@ namespace yli::ontology
         {
             std::shared_ptr<yli::data::AnyValue> z_any_value = variable->variable_value;
 
-            if (z_any_value == nullptr || !std::holds_alternative<float>(z_any_value->data))
+            if (z_any_value == nullptr)
             {
+                std::cerr << "ERROR: `yli::ontology::activate_z`: `z_any_value` is `nullptr`!\n";
+                return nullptr;
+            }
+
+            if (!std::holds_alternative<float>(z_any_value->data))
+            {
+                std::cerr << "ERROR: `yli::ontology::activate_z`: data is of invalid type!\n";
                 return nullptr;
             }
 
@@ -213,13 +294,21 @@ namespace yli::ontology
 
         if (universe == nullptr)
         {
+            std::cerr << "ERROR: `yli::ontology::activate_z`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
         std::shared_ptr<yli::data::AnyValue> z_any_value = variable->variable_value;
 
-        if (z_any_value == nullptr || !std::holds_alternative<float>(z_any_value->data))
+        if (z_any_value == nullptr)
         {
+            std::cerr << "ERROR: `yli::ontology::activate_z`: `z_any_value` is `nullptr`!\n";
+            return nullptr;
+        }
+
+        if (!std::holds_alternative<float>(z_any_value->data))
+        {
+            std::cerr << "ERROR: `yli::ontology::activate_z`: data is of invalid type!\n";
             return nullptr;
         }
 

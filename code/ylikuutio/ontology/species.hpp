@@ -20,14 +20,10 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "model_module.hpp"
-#include "universe.hpp"
-#include "scene.hpp"
-#include "shader.hpp"
+#include "parent_module.hpp"
+#include "apprentice_module.hpp"
+#include "mesh_module.hpp"
 #include "model_struct.hpp"
-#include "code/ylikuutio/load/model_loader.hpp"
-#include "code/ylikuutio/load/model_loader_struct.hpp"
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
@@ -36,25 +32,30 @@
 
 namespace yli::ontology
 {
-    class ParentModule;
+    class Universe;
     class Scene;
+    class Shader;
     class Material;
 
     class Species: public yli::ontology::Entity
     {
         public:
             // this method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
-            void bind_to_new_material_parent(yli::ontology::Material* const new_parent);
+            void bind_to_new_scene_parent(yli::ontology::Scene* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
+
+            void bind_to_new_material(yli::ontology::Material* const new_material);
 
             Species(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::ModelStruct& model_struct,
-                    yli::ontology::ParentModule* const material_parent_module)
+                    yli::ontology::ParentModule* const scene_parent_module,
+                    yli::ontology::GenericMasterModule* const material_master)
                 : Entity(universe, model_struct),
-                child_of_material(material_parent_module, this),
+                child_of_scene(scene_parent_module, this),
                 parent_of_objects(this, &this->registry, "objects"),
-                model(universe, model_struct)
+                apprentice_of_material(material_master, this),
+                mesh(universe, model_struct)
             {
                 // constructor.
 
@@ -85,16 +86,18 @@ namespace yli::ontology
 
             yli::ontology::Scene* get_scene() const override;
 
+            yli::ontology::Shader* get_shader() const;
+
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-        private:
-            yli::ontology::ChildModule child_of_material;
+            yli::ontology::ChildModule child_of_scene;
 
         public:
             yli::ontology::ParentModule parent_of_objects;
-            yli::ontology::ModelModule model;
+            yli::ontology::ApprenticeModule apprentice_of_material;
+            yli::ontology::MeshModule mesh;
     };
 }
 

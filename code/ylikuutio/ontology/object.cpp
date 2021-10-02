@@ -16,9 +16,10 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "object.hpp"
-#include "model_module.hpp"
+#include "mesh_module.hpp"
 #include "object_type.hpp"
 #include "glyph.hpp"
+#include "shader.hpp"
 #include "material.hpp"
 #include "species.hpp"
 #include "shapeshifter_sequence.hpp"
@@ -56,7 +57,6 @@ namespace yli::ontology
 {
     class Entity;
     class Scene;
-    class Shader;
 
     void Object::bind_to_new_species_parent(yli::ontology::Species* const new_parent)
     {
@@ -228,7 +228,7 @@ namespace yli::ontology
                     return;
                 }
 
-                yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(species->get_parent());
+                yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(species->apprentice_of_material.get_master());
 
                 if (material == nullptr)
                 {
@@ -255,7 +255,7 @@ namespace yli::ontology
             else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
             {
                 this->prerender();
-                this->render_this_object(static_cast<yli::ontology::Shader*>(this->glyph->get_parent()->get_parent()->get_parent()));
+                this->render_this_object(static_cast<yli::ontology::Shader*>(this->get_shader()));
                 this->postrender();
             }
         }
@@ -313,7 +313,7 @@ namespace yli::ontology
         glUniformMatrix4fv(shader->get_matrix_id(), 1, GL_FALSE, &this->mvp_matrix[0][0]);
         glUniformMatrix4fv(shader->get_model_matrix_id(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
-        yli::ontology::ModelModule* parent_model = nullptr;
+        yli::ontology::MeshModule* parent_model = nullptr;
 
         if (this->object_type == yli::ontology::ObjectType::REGULAR)
         {
@@ -321,7 +321,7 @@ namespace yli::ontology
 
             if (parent_species != nullptr)
             {
-                parent_model = &parent_species->model;
+                parent_model = &parent_species->mesh;
             }
         }
         else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
@@ -334,7 +334,7 @@ namespace yli::ontology
 
             if (parent_glyph != nullptr)
             {
-                parent_model = &parent_glyph->model;
+                parent_model = &parent_glyph->mesh;
             }
         }
 
@@ -399,6 +399,39 @@ namespace yli::ontology
         if (parent != nullptr)
         {
             return parent->get_scene();
+        }
+
+        return nullptr;
+    }
+
+    yli::ontology::Shader* Object::get_shader() const
+    {
+        if (this->object_type == yli::ontology::ObjectType::REGULAR)
+        {
+            yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->child.get_parent());
+
+            if (species != nullptr)
+            {
+                return species->get_shader();
+            }
+        }
+        else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
+        {
+            yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = static_cast<yli::ontology::ShapeshifterSequence*>(this->child.get_parent());
+
+            if (shapeshifter_sequence != nullptr)
+            {
+                return shapeshifter_sequence->get_shader();
+            }
+        }
+        else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
+        {
+            yli::ontology::Text3D* const text_3d = static_cast<yli::ontology::Text3D*>(this->child.get_parent());
+
+            if (text_3d != nullptr)
+            {
+                return text_3d->get_shader();
+            }
         }
 
         return nullptr;

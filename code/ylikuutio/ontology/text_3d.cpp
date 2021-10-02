@@ -29,6 +29,7 @@ namespace yli::ontology
 {
     class Entity;
     class Scene;
+    class Shader;
 
     void Text3D::bind_to_new_vector_font_parent(yli::ontology::VectorFont* const new_parent)
     {
@@ -102,6 +103,19 @@ namespace yli::ontology
 
         return nullptr;
     }
+
+    yli::ontology::Shader* Text3D::get_shader() const
+    {
+        yli::ontology::VectorFont* const vector_font = static_cast<yli::ontology::VectorFont*>(this->get_parent());
+
+        if (vector_font != nullptr)
+        {
+            return vector_font->get_shader();
+        }
+
+        return nullptr;
+    }
+
     std::size_t Text3D::get_number_of_children() const
     {
         return this->parent_of_objects.get_number_of_children();
