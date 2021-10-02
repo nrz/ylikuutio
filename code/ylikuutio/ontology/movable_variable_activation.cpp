@@ -33,6 +33,7 @@
 #endif
 
 // Include standard headers
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>  // std::make_shared, std::shared_ptr
 #include <variant> // std::holds_alternative, std::variant
 
@@ -42,8 +43,15 @@ namespace yli::ontology
 
     std::shared_ptr<yli::data::AnyValue> activate_cartesian_coordinates(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
-        if (entity == nullptr || variable == nullptr)
+        if (entity == nullptr)
         {
+            std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: `entity` is `nullptr`!\n";
+            return nullptr;
+        }
+
+        if (variable == nullptr)
+        {
+            std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: `variable` is `nullptr`!\n";
             return nullptr;
         }
 
@@ -53,8 +61,15 @@ namespace yli::ontology
         {
             std::shared_ptr<yli::data::AnyValue> cartesian_coordinates_any_value = variable->variable_value;
 
-            if (cartesian_coordinates_any_value == nullptr || !std::holds_alternative<std::shared_ptr<glm::vec3>>(cartesian_coordinates_any_value->data))
+            if (cartesian_coordinates_any_value == nullptr)
             {
+                std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: `cartesian_coordinates_any_value` is `nullptr`!\n";
+                return nullptr;
+            }
+
+            if (!std::holds_alternative<std::shared_ptr<glm::vec3>>(cartesian_coordinates_any_value->data))
+            {
+                std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: data is of invalid type!\n";
                 return nullptr;
             }
 
@@ -66,13 +81,21 @@ namespace yli::ontology
 
         if (universe == nullptr)
         {
+            std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: `universe` is `nullptr`!\n";
             return nullptr;
         }
 
         std::shared_ptr<yli::data::AnyValue> cartesian_coordinates_any_value = variable->variable_value;
 
-        if (cartesian_coordinates_any_value == nullptr || !std::holds_alternative<std::shared_ptr<glm::vec3>>(cartesian_coordinates_any_value->data))
+        if (cartesian_coordinates_any_value == nullptr)
         {
+            std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: `cartesian_coordinates_any_value` is `nullptr`!\n";
+            return nullptr;
+        }
+
+        if (!std::holds_alternative<std::shared_ptr<glm::vec3>>(cartesian_coordinates_any_value->data))
+        {
+            std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: data is of invalid type!\n";
             return nullptr;
         }
 
