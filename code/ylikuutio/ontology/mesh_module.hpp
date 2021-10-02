@@ -215,7 +215,7 @@ namespace yli::ontology
             GLuint elementbuffer { 0 }; // Dummy value.
 
             bool use_real_texture_coordinates { true };
-            bool opengl_in_use { true };
+            bool opengl_in_use                { true };
     };
 }
 
