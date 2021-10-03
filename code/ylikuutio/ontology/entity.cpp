@@ -25,7 +25,6 @@
 #include "entity_struct.hpp"
 #include "variable_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <cstddef>       // std::size_t
@@ -41,12 +40,7 @@ namespace yli::ontology
     {
         if (variable != nullptr)
         {
-            // get `childID` from `Entity` and set pointer to `variable`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Variable*>(
-                    variable,
-                    this->variable_pointer_vector,
-                    this->free_variableID_queue,
-                    this->number_of_variables);
+            this->parent_of_variables.bind_child(variable);
 
             // `variable` with a local name needs to be added to `entity_map` as well.
             this->add_entity(variable->get_local_name(), variable);
@@ -55,13 +49,7 @@ namespace yli::ontology
 
     void Entity::unbind_variable(const std::size_t childID, const std::string& local_name)
     {
-        yli::ontology::unbind_child_from_parent(
-                childID,
-                local_name,
-                this->variable_pointer_vector,
-                this->free_variableID_queue,
-                this->number_of_variables,
-                this->registry);
+        this->parent_of_variables.unbind_child(childID);
     }
 
     void Entity::bind_to_universe()
@@ -89,6 +77,7 @@ namespace yli::ontology
 
     Entity::Entity(yli::ontology::Universe* const universe, const yli::ontology::EntityStruct& entity_struct)
         : registry(),
+        parent_of_variables(this, &this->registry, ""), // Do not index `parent_of_variables`, index only the variables.
         parent_of_any_struct_entities(this, &this->registry, "any_struct_entities"),
         universe { universe },
         is_variable { entity_struct.is_variable }
@@ -335,20 +324,20 @@ namespace yli::ontology
 
     std::size_t Entity::get_number_of_all_children() const
     {
-        return this->number_of_variables +
+        return this->parent_of_variables.get_number_of_children() +
             this->get_number_of_non_variable_children();
     }
 
     std::size_t Entity::get_number_of_all_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->variable_pointer_vector) +
+        return yli::ontology::get_number_of_descendants(this->parent_of_variables.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_any_struct_entities.child_pointer_vector) +
             this->get_number_of_descendants();
     }
 
     std::size_t Entity::get_number_of_variables() const
     {
-        return this->number_of_variables;
+        return this->parent_of_variables.get_number_of_children();
     }
 
     std::size_t Entity::get_number_of_non_variable_children() const

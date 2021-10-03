@@ -27,9 +27,7 @@
 #include <cstddef>       // std::size_t
 #include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
-#include <queue>         // std::priority_queue, std::queue
 #include <string>        // std::string
-#include <vector>        // std::vector
 
 namespace yli::data
 {
@@ -145,6 +143,7 @@ namespace yli::ontology
 
             // Named entities are stored here so that they can be recalled, if needed.
             yli::ontology::Registry registry;
+            yli::ontology::ParentModule parent_of_variables;
             yli::ontology::ParentModule parent_of_any_struct_entities;
 
         protected:
@@ -165,10 +164,6 @@ namespace yli::ontology
             PostRenderCallback postrender_callback { nullptr };
 
         private:
-            std::vector<yli::ontology::Variable*> variable_pointer_vector;
-            std::queue<std::size_t> free_variableID_queue;
-            std::size_t number_of_variables { 0 };
-
             virtual std::size_t get_number_of_children() const = 0;
             virtual std::size_t get_number_of_descendants() const = 0;
 
