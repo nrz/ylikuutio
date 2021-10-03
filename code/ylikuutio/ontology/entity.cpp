@@ -29,11 +29,9 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
-#include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <regex>         // std::regex, std::regex_match
 #include <string>        // std::string
-#include <unordered_map> // std::unordered_map
 
 namespace yli::ontology
 {
