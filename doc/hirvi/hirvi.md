@@ -27,15 +27,15 @@ Hirvi is a work in progress.
 
 Planned languages on launch:
 * Deutsch
-* español
 * English (elk)
 * English (moose)
+* español
 * suomi
 * svenska
 
 3D models of Helsinki, Espoo, Vantaa, Oulu, and Turku will be used.
 
-# Hirvi sex / el sexo de Hirvi / Hirven sukupuoli
+## Hirvi sex / el sexo de Hirvi / Hirven sukupuoli
 * Hirvi is ... ? female/male/something else
 * Hirvi es ... ? hembra/macho/algo diferente
 * Hirvi on ... ? naaras/uros/joku muu
@@ -67,27 +67,29 @@ Planned languages on launch:
 * Hirvi - slow dancing music: [https://freesound.org/people/Greek555/sounds/404352/](https://freesound.org/people/Greek555/sounds/404352/)
 * Hirvi - end scene: moose are partying: [https://freesound.org/people/MahanMahan/sounds/447197/](https://freesound.org/people/MahanMahan/sounds/447197/)
 
-## Potential 3D models for Hirvi
+## Potential 3D models
+
+### Potential 3D models for Hirvi
 * The Deer Rigger (as Hirvi) https://www.blendswap.com/blend/15997
 * Deer low poly (as Hirvi) https://www.blendswap.com/blend/19642
 
-## Potential 3D models for police
+### Potential 3D models for police
 * Porsche 997 turbo polizei https://www.blendswap.com/blend/12758
 * Low poly wolf (as a police dog) https://www.blendswap.com/blend/11562
 * Horse (as a police horse) https://www.blendswap.com/blend/13903
 * Dora Railway Gun (as a police railway gun) https://www.blendswap.com/blend/5565
 
-## Potential 3D models for trains, metro, and trams
+### Potential 3D models for trains, metro, and trams
 * Freight train https://www.blendswap.com/blend/5599
 * Train https://www.blendswap.com/blend/4044
 * Industrial train (Dr14 locomotive) https://www.blendswap.com/blend/22147
 * German Train BR646 of the UBB https://www.blendswap.com/blend/17239
 * Train https://www.blendswap.com/blend/7550
 
-## Potential 3D models for other non-human animals
+### Potential 3D models for other non-human animals
 * Unicorn (of Jill Janus) https://www.blendswap.com/blend/11586
 
-## Potential 3D models for humans
+### Potential 3D models for humans
 * Liz https://www.blendswap.com/blend/19440
 * Breanna Older https://www.blendswap.com/blend/12450
 * Ingrid https://www.blendswap.com/blend/8016
@@ -98,7 +100,7 @@ Planned languages on launch:
 * Lowpoly man https://www.blendswap.com/blend/8012
 * Brave https://www.blendswap.com/blend/3374
 
-## Potential 3D models for the environment
+### Potential 3D models for the environment
 * Landscape Assets v2.1 https://www.blendswap.com/blend/13167
 * Rail Basic Assets v1 https://www.blendswap.com/blend/13879
 
@@ -249,3 +251,137 @@ Planned languages on launch:
 * esp: Kyber-Hirvi puede como ejemplo tener las trayectorias y las zonas de peligro de artilleria policial en su pantalla de realidad aumentada.
 * deu: TODO
 * swe: TODO
+
+## Tarina
+
+### Kielen valinta
+* [ ] Deutsch
+* [ ] English (elk)
+* [ ] English (moose)
+* [ ] español
+* [ ] suomi
+* [ ] svenska
+
+### Hirven sukupuolen valinta
+* Mikä on Hirven sukupuoli?
+* [ ] Naaras.
+* [ ] Uros.
+* [ ] Joku muu.
+* [ ] Pidän omana tietonani.
+
+### Mistä Hirvi tykkää?
+* Mistä Hirvi tykkää?
+* [ ] Naaraista.
+* [ ] Uroksista.
+* [ ] Sekä että.
+* [ ] Pidän omana tietonani.
+
+### Tehtävä #0: pako Helsingistä
+* Hirven on paettava Helsingistä. Hirvi on eksynyt ystävänsä Hirvisen kanssa Helsingin keskustaan.
+* Onnistuminen: pako kehä I:n tuolle puolen pyörivien hyperkuutioiden osoittaman linjan taakse.
+* Hirvinen ei selviydy, vaan poliisit ampuvat tämän, ja Hirvi ehtii juuri nähdä tämän kuoleman, ennen kuin itse ehtii turvaan.
+
+### Välianimaatio: Sanomalehti
+* Sanomalehti kertoo poliisin ampumasta hirvestä (Hirvinen).
+
+### Välianimaatio: Hirvet iltanuotiolla
+* Hirvet ovat kokoontuneet iltanuotiolle muistelemaan Hirvistä, ja menneitä eeppisiä seikkailuita.
+* Hirvisen kuoleman aiheuttama suru ja viha saa hirvet organisoitumaan Nisäkkäiden Vapautusrintamaksi.
+* Hirvet päätyvät kannattamaan kansalaisuutta kaikille nisäkkäille, siksi Nisäkkäiden Vapautusrintama.
+
+### Välianimaatio: tehtävän käskynjako #1, #2, ...
+* Hirvet keskustelevat tehtävästä.
+
+### Tehtävä #1, #2, ...
+* Onnistumisehdot tehtävän mukaan.
+
+### Välianimaatio: mission debriefing #1, #2, ...
+* Tehtävän debriefing.
+* Kunkin tehtävän jälkeen seuraavan tehtävän käskynjako, paitsi viimeisen tehtävän jälkeen.
+
+### Loppuanimaatio: Yleinen nisäkäskansalaisuus
+* Etusivun juttu: "Yleinen nisäkäskansalaisuus hyväksytty"
+
+### Loppuanimaatio: Hirvet juhlivat
+* Hirvet juhlivat yleistä nisäkäskansalaisuutta tanssimalla iloisen rytmimusiikin tahtiin eri puolilla Suomea,
+  mm. eduskuntatalon tuntumassa.
+* Lopuksi kamera nousee hirvien tasolta taivaaseen kuvakulma kohti tanssivia hirviä ja ilta vaihtuu yöksi. Lopputekstit tulevat ruutuun.
+
+## Story
+
+### Selection of the language
+* [ ] Deutsch
+* [ ] English (elk)
+* [ ] English (moose)
+* [ ] español
+* [ ] suomi
+* [ ] svenska
+
+### Selection of sex of Hirvi
+* What is the sex of Hirvi?
+* [ ] Female
+* [ ] Male.
+* [ ] Something else.
+* [ ] I'll keep that to myself.
+
+### Mistä Hirvi tykkää?
+* What does Hirvi like?
+* [ ] Females.
+* [ ] Males.
+* [ ] Both.
+* [ ] I'll keep that to myself.
+
+### Prelude: escape from Helsinki
+* Hirvi must escape from Helsinki. Hirvi and his/her friend Hirvinen are lost in the center of Helsinki.
+* Success: escape beyond ring road I, past the line marked by rotating hypercubes.
+* Hirvinen does not survive, but gets shot by the police, and Hirvi gets to see Hirvinen's death right before his/her own escape to safety.
+
+### Cut-scene: Newspaper
+* Newspaper tells about an elk/moose shot by the police.
+
+### Cut-scene: Elks/moose on a campfire
+* Elks/moose have gathered around a campfire to remember Hirvinen, and their epic adventures of the past.
+* Sadness and anger caused by the death of Hirvinen makes elks/moose organize Mammal Liberation Front.
+* Elks/moose decide to support citizenship for all mammals, hence Mammal Liberation Front.
+
+### Cut-scene: mission briefing #1, #2, ...
+* Elks/moose discussion the mission.
+
+### Mission #1, #2, ...
+* Success criteria according to the mission.
+
+### Cut-scene: mission debriefing #1, #2, ...
+* Mission debriefing.
+* After each mission debriefing, there will be next mission's briefing, except after last mission.
+
+### End scene: General Mammal Citizenship Act
+* Newspaper front page: "General Mammal Citizenship Act accepted"
+
+### End scene: elks/moose celebrating
+* Elks/moose celebrate the general mammal citizenship by dancing to jolly rhytmic music around Finland,
+  including next to the parlament.
+* Finally camera rises from elk/moose-level up to the sky while looking at dancing elks/moose, then evening light turns to night. Closing credits roll to screen.
+
+## La historía
+
+### Selección del idioma
+* [ ] Deutsch
+* [ ] English (elk)
+* [ ] English (moose)
+* [ ] español
+* [ ] suomi
+* [ ] svenska
+
+### Seleccion del sexo de Hirvi
+* Qué es el sexo de Hirvi?
+* [ ] Hembra.
+* [ ] Macho.
+* [ ] Algo más.
+* [ ] Prefiero no decirlo.
+
+### Mistä Hirvi tykkää?
+* Qué le gustan a Hirvi?
+* [ ] Las hembras.
+* [ ] Los machos.
+* [ ] Lxs dos.
+* [ ] Prefiero no decirlo.
