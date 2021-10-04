@@ -92,7 +92,6 @@ namespace yli::ontology
 
             std::shared_ptr<yli::data::AnyValue> get();
             void set(std::shared_ptr<yli::data::AnyValue> new_value);
-            void set_shallow(std::shared_ptr<yli::data::AnyValue> new_value);
             void set(const std::string& new_value);
 
             // Public callbacks.
@@ -102,11 +101,6 @@ namespace yli::ontology
                     std::shared_ptr<std::string> new_value);
 
             static std::shared_ptr<yli::data::AnyValue> set_variable_variable(
-                    yli::ontology::Variable* const dest_variable,
-                    yli::ontology::Universe* const /* context */, // A context is needed so that correct `Variable` is bound to the function call.
-                    yli::ontology::Variable* const src_variable);
-
-            static std::shared_ptr<yli::data::AnyValue> set_shallow_variable_variable(
                     yli::ontology::Variable* const dest_variable,
                     yli::ontology::Universe* const /* context */, // A context is needed so that correct `Variable` is bound to the function call.
                     yli::ontology::Variable* const src_variable);
