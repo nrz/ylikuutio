@@ -59,14 +59,13 @@ namespace yli::ontology
     {
         public:
             Variable(yli::ontology::Universe* const universe, const yli::ontology::VariableStruct& variable_struct)
-                : Entity(universe, variable_struct)
+                : Entity(universe, variable_struct),
+                parent            { variable_struct.parent },
+                variable_value    { variable_struct.initial_value },
+                activate_callback { variable_struct.activate_callback },
+                read_callback     { variable_struct.read_callback }
             {
                 // constructor (to be called from `Entity::create_variable`).
-
-                this->parent = variable_struct.parent;
-                this->variable_value = variable_struct.initial_value;
-                this->activate_callback = variable_struct.activate_callback;
-                this->read_callback = variable_struct.read_callback;
 
                 // Get `childID` from `Entity` and set pointer to this `Variable`.
                 this->bind_to_parent();
