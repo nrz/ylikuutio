@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "generic_lisp_function_overload.hpp"
-#include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
