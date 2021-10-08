@@ -44,12 +44,12 @@ namespace yli::callback
     }
 
     CallbackParameter::CallbackParameter(const std::string& name, std::shared_ptr<yli::data::AnyValue> any_value, const bool is_reference, yli::callback::CallbackObject* const parent)
+        : parent     { parent },
+        name         { name },
+        any_value    { any_value },
+        is_reference { is_reference }
     {
         // constructor.
-        this->name = name;
-        this->any_value = any_value;
-        this->is_reference = is_reference;
-        this->parent = parent;
 
         // get `childID` from the `CallbackObject` and set pointer to this `CallbackParameter`.
         this->bind_to_parent();

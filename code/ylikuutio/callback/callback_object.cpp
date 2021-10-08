@@ -130,10 +130,10 @@ namespace yli::callback
     }
 
     CallbackObject::CallbackObject(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback, yli::callback::CallbackEngine* const parent)
+        : callback { callback },
+        parent     { parent }
     {
         // constructor.
-        this->callback = callback;
-        this->parent = parent;
 
         // get `childID` from the `CallbackEngine` and set pointer to this `CallbackObject`.
         this->bind_to_parent();
