@@ -26,8 +26,8 @@
 #include <cstddef>    // std::size_t
 #include <functional> // std::function
 #include <memory>     // std::make_shared, std::shared_ptr
+#include <optional>   // std::optional
 #include <string>     // std::string
-#include <utility>    // std::pair
 #include <vector>     // std::vector
 
 namespace yli::data
@@ -65,7 +65,7 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
-            virtual std::pair<bool, std::shared_ptr<yli::data::AnyValue>> execute(const std::vector<std::string>& parameter_vector) = 0;
+            virtual std::optional<std::shared_ptr<yli::data::AnyValue>> execute(const std::vector<std::string>& parameter_vector) = 0;
 
             yli::ontology::ChildModule child_of_lisp_function;
 

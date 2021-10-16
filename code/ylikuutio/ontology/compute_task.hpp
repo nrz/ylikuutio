@@ -98,8 +98,6 @@ namespace yli::ontology
                 this->right_filler_vector_any_value = compute_task_struct.right_filler_vector_any_value;
                 this->end_condition_callback_engine = compute_task_struct.end_condition_callback_engine;
 
-                this->result_vector = nullptr;
-
                 this->n_max_iterations = compute_task_struct.n_max_iterations;
                 this->compute_taskID = compute_task_struct.compute_taskID;
                 this->texture_width = compute_task_struct.texture_width;
@@ -115,9 +113,6 @@ namespace yli::ontology
                 this->source_texture                = 0; // some dummy value.
                 this->target_texture                = 0; // some dummy value.
                 this->opengl_texture_id             = 0; // some dummy value.
-                this->is_texture_loaded             = false;
-                this->is_framebuffer_initialized    = false;
-                this->is_ready                      = false;
 
                 this->vertex_position_modelspace_id = 0; // some dummy value.
                 this->vertex_uv_id                  = 0; // some dummy value.
@@ -283,7 +278,7 @@ namespace yli::ontology
             // End iterating when `end_condition_callback_engine` returns `true`.
             std::shared_ptr<yli::callback::CallbackEngine> end_condition_callback_engine;
 
-            std::shared_ptr<std::vector<uint8_t>> result_vector;
+            std::shared_ptr<std::vector<uint8_t>> result_vector { nullptr };
 
             // This is the maximum number of iterations.
             // If `end_condition_callback_engine` is `nullptr`, then this is the number of iterations.
@@ -306,9 +301,9 @@ namespace yli::ontology
             GLuint source_texture;
             GLuint target_texture;
             GLint opengl_texture_id;         // Texture ID, returned by `glGetUniformLocation(this->parent->get_program_id(), "texture_sampler")`.
-            bool is_texture_loaded;
-            bool is_framebuffer_initialized;
-            bool is_ready;
+            bool is_texture_loaded          { false };
+            bool is_framebuffer_initialized { false };
+            bool is_ready                   { false };
 
             GLint vertex_position_modelspace_id;
             GLint vertex_uv_id;

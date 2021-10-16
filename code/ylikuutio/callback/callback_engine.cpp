@@ -26,7 +26,6 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <queue>    // std::queue
-#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli::ontology

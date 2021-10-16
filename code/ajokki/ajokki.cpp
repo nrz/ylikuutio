@@ -928,7 +928,6 @@ namespace ajokki
                 yli::ontology::create_lisp_function_overload("create-variable", my_console, std::function(&yli::ontology::Entity::create_variable_with_parent_name_type_value));
                 yli::ontology::create_lisp_function_overload("set", my_console, std::function(&yli::ontology::Variable::set_variable_shared_ptr_string));
                 yli::ontology::create_lisp_function_overload("copy", my_console, std::function(&yli::ontology::Variable::set_variable_variable));
-                yli::ontology::create_lisp_function_overload("copy-shallow", my_console, std::function(&yli::ontology::Variable::set_shallow_variable_variable));
                 yli::ontology::create_lisp_function_overload("print", my_console, std::function(&yli::ontology::Variable::print_value1));
 
                 // Object callbacks.

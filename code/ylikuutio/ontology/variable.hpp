@@ -59,14 +59,13 @@ namespace yli::ontology
     {
         public:
             Variable(yli::ontology::Universe* const universe, const yli::ontology::VariableStruct& variable_struct)
-                : Entity(universe, variable_struct)
+                : Entity(universe, variable_struct),
+                parent            { variable_struct.parent },
+                variable_value    { variable_struct.initial_value },
+                activate_callback { variable_struct.activate_callback },
+                read_callback     { variable_struct.read_callback }
             {
                 // constructor (to be called from `Entity::create_variable`).
-
-                this->parent = variable_struct.parent;
-                this->variable_value = variable_struct.initial_value;
-                this->activate_callback = variable_struct.activate_callback;
-                this->read_callback = variable_struct.read_callback;
 
                 // Get `childID` from `Entity` and set pointer to this `Variable`.
                 this->bind_to_parent();
@@ -92,7 +91,6 @@ namespace yli::ontology
 
             std::shared_ptr<yli::data::AnyValue> get();
             void set(std::shared_ptr<yli::data::AnyValue> new_value);
-            void set_shallow(std::shared_ptr<yli::data::AnyValue> new_value);
             void set(const std::string& new_value);
 
             // Public callbacks.
@@ -102,11 +100,6 @@ namespace yli::ontology
                     std::shared_ptr<std::string> new_value);
 
             static std::shared_ptr<yli::data::AnyValue> set_variable_variable(
-                    yli::ontology::Variable* const dest_variable,
-                    yli::ontology::Universe* const /* context */, // A context is needed so that correct `Variable` is bound to the function call.
-                    yli::ontology::Variable* const src_variable);
-
-            static std::shared_ptr<yli::data::AnyValue> set_shallow_variable_variable(
                     yli::ontology::Variable* const dest_variable,
                     yli::ontology::Universe* const /* context */, // A context is needed so that correct `Variable` is bound to the function call.
                     yli::ontology::Variable* const src_variable);
