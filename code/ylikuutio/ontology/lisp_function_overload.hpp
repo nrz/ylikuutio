@@ -29,9 +29,9 @@
 #include <functional> // std::function, std::invoke
 #include <iostream>   // std::cout, std::cin, std::cerr
 #include <memory>     // std::make_shared, std::shared_ptr
+#include <optional>   // std::optional
 #include <string>     // std::string
 #include <tuple>      // std::apply, std::tuple, std::tuple_cat
-#include <utility>    // std::pair
 #include <vector>     // std::vector
 
 // This is a bit complicated, as the callback may receive different kinds of arguments.
@@ -107,14 +107,14 @@ namespace yli::ontology
                 // destructor.
             }
 
-            std::pair<bool, std::shared_ptr<yli::data::AnyValue>> execute(const std::vector<std::string>& parameter_vector) override
+            std::optional<std::shared_ptr<yli::data::AnyValue>> execute(const std::vector<std::string>& parameter_vector) override
             {
                 yli::ontology::Universe* const universe = this->get_universe();
 
                 if (universe == nullptr)
                 {
                     std::cerr << "ERROR: `LispFunctionOverload::execute`: `universe` is `nullptr`!\n";
-                    return std::pair(false, nullptr);
+                    return std::nullopt;
                 }
 
                 yli::ontology::Entity* const lisp_function_entity = this->child_of_lisp_function.get_parent();
@@ -124,7 +124,7 @@ namespace yli::ontology
                 if (lisp_function == nullptr)
                 {
                     std::cerr << "ERROR: `LispFunctionOverload::execute`: `lisp_function` is `nullptr`!\n";
-                    return std::pair(false, nullptr);
+                    return std::nullopt;
                 }
 
                 yli::ontology::Entity* const console_entity = lisp_function->get_parent();
@@ -132,7 +132,7 @@ namespace yli::ontology
                 if (console_entity == nullptr)
                 {
                     std::cerr << "ERROR: `LispFunctionOverload::execute`: `console_entity` is `nullptr`!\n";
-                    return std::pair(false, nullptr);
+                    return std::nullopt;
                 }
 
                 yli::ontology::Console* const console = dynamic_cast<yli::ontology::Console*>(console_entity);
@@ -140,7 +140,7 @@ namespace yli::ontology
                 if (console == nullptr)
                 {
                     std::cerr << "ERROR: `LispFunctionOverload::execute`: `console` is `nullptr`!\n";
-                    return std::pair(false, nullptr);
+                    return std::nullopt;
                 }
 
                 // OK, all preconditions for a successful argument binding are met.
@@ -151,10 +151,10 @@ namespace yli::ontology
                 {
 
                     // Call the callback function if binding was successful.
-                    return std::pair(true, std::apply(this->callback, arg_tuple));
+                    return std::apply(this->callback, arg_tuple);
                 }
 
-                return std::pair(false, nullptr);
+                return std::nullopt;
             }
 
         private:

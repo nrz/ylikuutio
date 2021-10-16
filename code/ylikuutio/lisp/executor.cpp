@@ -23,6 +23,7 @@
 
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <string> // std::string, std::getline
 #include <vector> // std::vector
 
@@ -52,7 +53,12 @@ namespace yli::lisp
 
                 if (lisp_function != nullptr)
                 {
-                    any_value = lisp_function->execute(parameter_vector);
+                    std::optional<std::shared_ptr<yli::data::AnyValue>> return_value = lisp_function->execute(parameter_vector);
+
+                    if (*return_value)
+                    {
+                        any_value = *return_value;
+                    }
                 }
             }
         }

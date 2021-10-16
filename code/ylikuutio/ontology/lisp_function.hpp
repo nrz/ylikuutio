@@ -26,6 +26,7 @@
 // Include standard headers
 #include <cstddef>    // std::size_t
 #include <memory>     // std::make_shared, std::shared_ptr
+#include <optional>   // std::optional
 #include <string>     // std::string
 #include <vector>     // std::vector
 
@@ -65,7 +66,7 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
-            std::shared_ptr<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector);
+            std::optional<std::shared_ptr<yli::data::AnyValue>> execute(const std::vector<std::string>& parameter_vector);
 
             yli::ontology::ChildModule child_of_console;
             yli::ontology::ParentModule parent_of_generic_lisp_function_overloads;
