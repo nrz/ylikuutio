@@ -27,7 +27,7 @@
 
 namespace yli::file
 {
-    template<class T1>
+    template<typename T1>
         void binary_write(const std::vector<T1>& data, const std::string& file_path)
         {
             std::cout << "Writing binary file " << file_path << "\n";

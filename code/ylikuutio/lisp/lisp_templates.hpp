@@ -38,7 +38,7 @@ namespace yli::lisp
 {
     // Templates for processing Lisp function arguments.
 
-    template<class T1>
+    template<typename T1>
         bool convert_string_to_value_and_advance_index(
                 yli::ontology::Universe* /* universe */,
                 yli::ontology::Console* /* console */,

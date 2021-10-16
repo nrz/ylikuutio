@@ -81,7 +81,7 @@ namespace yli::ontology
     class Universe;
     class ParentModule;
 
-    template<class... Types>
+    template<typename... Types>
         class LispFunctionOverload: public yli::ontology::GenericLispFunctionOverload
     {
         public:

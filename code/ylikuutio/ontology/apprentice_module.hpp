@@ -31,7 +31,7 @@ namespace yli::ontology
     class GenericMasterModule;
     class Entity;
 
-    template<class M>
+    template<typename M>
         class MasterModule;
 
     class ApprenticeModule
@@ -55,10 +55,10 @@ namespace yli::ontology
 
             friend class yli::ontology::GenericMasterModule;
 
-            template<class M>
+            template<typename M>
                 friend class yli::ontology::MasterModule;
 
-            template<class T1>
+            template<typename T1>
                 friend void yli::hierarchy::set_child_pointer(
                         const std::size_t childID,
                         const T1 child_pointer,
@@ -67,10 +67,10 @@ namespace yli::ontology
                         std::size_t& number_of_children);
 
 
-            template<class T1>
+            template<typename T1>
                 friend std::size_t yli::hierarchy::request_childID(std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue);
 
-            template<class T1>
+            template<typename T1>
                 friend void yli::hierarchy::bind_apprentice_to_master(
                         const T1 apprentice_pointer,
                         std::vector<T1>& apprentice_pointer_vector,

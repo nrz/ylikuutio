@@ -30,7 +30,7 @@
 
 namespace yli::interpolation
 {
-    template<class T1>
+    template<typename T1>
         float sample_2d(
                 const T1* source_image,
                 const float image_width,
@@ -70,7 +70,7 @@ namespace yli::interpolation
             return weight_x0 * weight_z0 * data_sw + weight_x1 * weight_z0 * data_se + weight_x0 * weight_z1 * data_nw + weight_x1 * weight_z1 * data_ne;
         }
 
-    template<class T1>
+    template<typename T1>
         std::shared_ptr<std::vector<float>> interpolate_bilinearly(
                 const T1* source_image,
                 const yli::interpolation::BilinearInterpolationStruct& bilinear_interpolation_struct)

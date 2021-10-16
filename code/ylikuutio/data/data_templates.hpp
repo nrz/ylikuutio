@@ -27,7 +27,7 @@
 namespace yli::data
 {
     // Get the datatype of a variable.
-    template<class T1>
+    template<typename T1>
         std::string get_type_string(T1 data)
         {
             return "unknown";

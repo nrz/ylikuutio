@@ -33,7 +33,7 @@ namespace yli::lisp
     class Universe;
     class Console;
 
-    template<class None = void>
+    template<typename None = void>
         static bool process_args(
                 yli::ontology::Universe* /* universe */,
                 yli::ontology::Console* /* console */,
@@ -55,7 +55,7 @@ namespace yli::lisp
             return false;
         }
 
-    template<class T1, class... Types>
+    template<typename T1, typename... Types>
         static bool process_args(
                 yli::ontology::Universe* universe,
                 yli::ontology::Console* console,

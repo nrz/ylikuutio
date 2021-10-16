@@ -24,7 +24,7 @@
 
 namespace yli::linear_algebra
 {
-    template<class T1>
+    template<typename T1>
         std::shared_ptr<std::vector<T1>> insert_elements(
                 const std::vector<T1>& data_vector,
                 const std::vector<T1>& left_filler_vector,

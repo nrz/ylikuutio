@@ -34,7 +34,7 @@ namespace yli::ontology
 {
     class Entity;
 
-    template<class T1>
+    template<typename T1>
         void bind_child_to_parent(
                 const T1 child,
                 std::vector<T1>& child_pointer_vector,
@@ -78,7 +78,7 @@ namespace yli::ontology
             }
         }
 
-    template<class T1>
+    template<typename T1>
         void bind_child_to_parent(
                 const T1 child,
                 std::vector<T1>& child_pointer_vector,
@@ -122,7 +122,7 @@ namespace yli::ontology
             }
         }
 
-    template <class T1>
+    template <typename T1>
         void unbind_child_from_parent(
                 const std::size_t childID,
                 const std::string& name,
@@ -151,7 +151,7 @@ namespace yli::ontology
             yli::hierarchy::set_child_pointer(childID, static_cast<T1>(nullptr), child_pointer_vector, free_childID_queue, number_of_children);
         }
 
-    template <class T1>
+    template <typename T1>
         void unbind_child_from_parent(
                 const std::size_t childID,
                 const std::string& name,
@@ -180,7 +180,7 @@ namespace yli::ontology
             yli::hierarchy::set_child_pointer(childID, static_cast<T1>(nullptr), child_pointer_vector, free_childID_queue, number_of_children);
         }
 
-    template<class T1>
+    template<typename T1>
         std::size_t get_number_of_descendants(const std::vector<T1>& child_pointer_vector)
         {
             std::size_t number_of_descendants = 0;

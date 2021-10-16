@@ -51,7 +51,7 @@ namespace yli::ontology
     class Registry;
     class Entity;
 
-    template<class M>
+    template<typename M>
         class MasterModule: public yli::ontology::GenericMasterModule
     {
         public:

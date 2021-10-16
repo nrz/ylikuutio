@@ -32,7 +32,7 @@
 
 namespace yli::triangulation
 {
-    template<class T1>
+    template<typename T1>
         T1 get_y(
                 const T1* const vertex_data,
                 const std::size_t x,
@@ -46,27 +46,27 @@ namespace yli::triangulation
         }
 
     // for bilinear interpolation.
-    template<class T1>
+    template<typename T1>
         float southwest_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t z_step)
         {
             return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x - x_step, z - z_step, image_width));
         }
-    template<class T1>
+    template<typename T1>
         float southeast_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t /* x_step */, const std::size_t z_step)
         {
             return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x, z - z_step, image_width));
         }
-    template<class T1>
+    template<typename T1>
         float northwest_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t /* z_step */)
         {
             return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x - x_step, z, image_width));
         }
-    template<class T1>
+    template<typename T1>
         float northeast_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t /* x_step */, const std::size_t /* z_step */)
         {
             return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x, z, image_width));
         }
-    template<class T1>
+    template<typename T1>
         float center_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t z_step)
         {
             return static_cast<float>(southwest_y(x, z, input_vertex_pointer, image_width, x_step, z_step) +
@@ -75,7 +75,7 @@ namespace yli::triangulation
                     northeast_y(x, z, input_vertex_pointer, image_width, x_step, z_step)) / 4.0f;
         }
 
-    template<class T1>
+    template<typename T1>
         bool compute_range(
                 const T1* const input_vertex_pointer,
                 const std::size_t image_width,
@@ -121,7 +121,7 @@ namespace yli::triangulation
             return true;
         }
 
-    template<class T1>
+    template<typename T1>
         bool define_vertices(
                 const T1* const input_vertex_pointer,
                 const std::size_t image_width,
@@ -222,7 +222,7 @@ namespace yli::triangulation
             return true;
         }
 
-    template<class T1>
+    template<typename T1>
         bool interpolate_and_define_vertices_using_bilinear_interpolation(
                 const T1* const input_vertex_pointer,
                 const std::size_t image_width,

@@ -32,7 +32,7 @@
 
 namespace yli::map
 {
-    template <class T1>
+    template <typename T1>
         std::vector<std::string> get_keys(const std::unordered_map<std::string, T1>& unordered_map)
         {
             std::vector<std::string> key_vector;
@@ -49,7 +49,7 @@ namespace yli::map
             return key_vector;
         }
 
-    template <class T1>
+    template <typename T1>
         std::vector<std::pair<std::string, T1>> get_keys_and_values(const std::unordered_map<std::string, T1>& unordered_map)
         {
             std::vector<std::pair<std::string, T1>> key_and_value_vector;
@@ -66,7 +66,7 @@ namespace yli::map
             return key_and_value_vector;
         }
 
-    template <class T1>
+    template <typename T1>
         void print_keys_to_console(const std::unordered_map<std::string, T1>& unordered_map, yli::ontology::Console* const console)
         {
             if (console == nullptr)
@@ -115,7 +115,7 @@ namespace yli::map
             }
         }
 
-    template <class T1, class T2>
+    template <typename T1, typename T2>
         void print_keys_of_specific_type_to_console(const std::unordered_map<std::string, T1>& unordered_map, yli::ontology::Console* const console)
         {
             if (console == nullptr)
@@ -143,7 +143,7 @@ namespace yli::map
             }
         }
 
-    template <class T1>
+    template <typename T1>
         void print_keys_and_values(const std::unordered_map<std::string, T1>& unordered_map)
         {
             if (unordered_map.size() == 0)

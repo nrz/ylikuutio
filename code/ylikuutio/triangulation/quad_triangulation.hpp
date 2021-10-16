@@ -54,7 +54,7 @@
 
 namespace yli::triangulation
 {
-    template<class T1>
+    template<typename T1>
         bool triangulate_quads(
                 const T1* input_vertex_pointer,
                 const yli::triangulation::TriangulateQuadsStruct& triangulate_quads_struct,

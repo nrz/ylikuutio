@@ -26,19 +26,19 @@ namespace yli::data
 {
     // Inspired by https://stackoverflow.com/questions/10626856/how-to-split-a-tuple
 
-    template<class T1, class... Types>
+    template<typename T1, typename... Types>
         auto first(std::tuple<T1, Types...>& my_tuple)
         {
             return std::get<0>(my_tuple);
         }
 
-    template<std::size_t... Numbers, class... Types>
+    template<std::size_t... Numbers, typename... Types>
         auto rest_impl(std::index_sequence<Numbers...>, std::tuple<Types...>& my_tuple)
         {
             return std::make_tuple(std::get<Numbers + 1u>(my_tuple)...);
         }
 
-    template<class... Types>
+    template<typename... Types>
         auto rest(std::tuple<Types...>& my_tuple)
         {
             return yli::data::rest_impl(std::make_index_sequence<sizeof...(Types) - 1u>(), my_tuple);

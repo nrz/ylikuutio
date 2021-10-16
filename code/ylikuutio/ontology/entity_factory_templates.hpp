@@ -42,7 +42,7 @@ namespace yli::ontology
     class Universe;
     class ParentModule;
 
-    template<class... Args>
+    template<typename... Args>
         yli::ontology::GenericLispFunctionOverload* create_lisp_function_overload(
                 const std::string& name,
                 yli::ontology::Console* const console,
