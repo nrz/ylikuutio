@@ -23,7 +23,7 @@
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 
 // Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <string> // std::string
 
 namespace yli::data
@@ -35,69 +35,68 @@ namespace yli::ontology
 {
     class Console;
 
-    std::shared_ptr<yli::data::AnyValue> Entity::create_variable_with_parent_name_type_value(
+    std::optional<yli::data::AnyValue> Entity::create_variable_with_parent_name_type_value(
             yli::ontology::Entity* const parent,
-            std::shared_ptr<std::string> variable_name,
-            std::shared_ptr<std::string> variable_type,
-            std::shared_ptr<std::string> variable_value)
+            const std::string& variable_name,
+            const std::string& variable_type,
+            const std::string& variable_value)
     {
-        if (parent == nullptr || variable_name == nullptr || variable_type == nullptr || variable_value == nullptr)
+        if (parent == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::VariableStruct variable_struct;
-        variable_struct.local_name    = *variable_name;
-        variable_struct.initial_value = std::make_shared<yli::data::AnyValue>(*variable_type, *variable_value);
-        parent->create_variable(variable_struct);
-        return nullptr;
+        variable_struct.local_name    = variable_name;
+        parent->create_variable(variable_struct, yli::data::AnyValue(variable_type, variable_value));
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Entity::print_children(
+    std::optional<yli::data::AnyValue> Entity::print_children(
             yli::ontology::Console* const console,
             yli::ontology::Entity* const entity)
     {
         if (console == nullptr || entity == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         // OK, let's print the children of this `Entity`.
         yli::map::print_keys_to_console(entity->registry.get_entity_map(), console);
 
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Entity::print_variables0(
+    std::optional<yli::data::AnyValue> Entity::print_variables0(
             yli::ontology::Universe* const universe,
             yli::ontology::Console* const console)
     {
         if (universe == nullptr || console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         // Print global variable names.
 
         yli::map::print_keys_of_specific_type_to_console<yli::ontology::Entity*, yli::ontology::Variable*>(universe->registry.get_entity_map(), console);
 
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Entity::print_variables1(
+    std::optional<yli::data::AnyValue> Entity::print_variables1(
             yli::ontology::Universe* const universe,
             yli::ontology::Console* const console,
             yli::ontology::Entity* const entity)
     {
         if (universe == nullptr || console == nullptr || entity == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         // Print the variable names of the `Entity`.
 
         yli::map::print_keys_of_specific_type_to_console<yli::ontology::Entity*, yli::ontology::Variable*>(entity->registry.get_entity_map(), console);
 
-        return nullptr;
+        return std::nullopt;
     }
 }

@@ -15,22 +15,42 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_ENTITY_VARIABLE_READ_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_ENTITY_VARIABLE_READ_HPP_INCLUDED
+#ifndef __YLIKUUTIO_DATA_WRAP_HPP_INCLUDED
+#define __YLIKUUTIO_DATA_WRAP_HPP_INCLUDED
 
-// Include standard headers
-#include <optional> // std::optional
+#include <functional> // std::reference_wrapper
 
 namespace yli::data
 {
-    class AnyValue;
-}
+    template<typename T>
+        struct Wrap
+        {
+            using type = T;
+        };
 
-namespace yli::ontology
-{
-    class Entity;
+    template<typename T>
+        struct Wrap<T&>
+        {
+            using type = std::reference_wrapper<T>;
+        };
 
-    std::optional<yli::data::AnyValue> read_should_be_rendered(yli::ontology::Entity* const entity);
+    template<typename T>
+        struct WrapAllButStrings
+        {
+            using type = T;
+        };
+
+    template<typename T>
+        struct WrapAllButStrings<T&>
+        {
+            using type = std::reference_wrapper<T>;
+        };
+
+    template<>
+        struct WrapAllButStrings<const std::string&>
+        {
+            using type = const std::string;
+        };
 }
 
 #endif

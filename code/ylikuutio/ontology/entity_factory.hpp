@@ -22,6 +22,11 @@
 #include <memory>    // std::make_shared, std::shared_ptr
 #include <string>    // std::string
 
+namespace yli::data
+{
+    class AnyValue;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -58,7 +63,7 @@ namespace yli::ontology
 
             yli::ontology::Universe* get_universe() const;
 
-            yli::ontology::Entity* create_variable(const yli::ontology::VariableStruct& variable_struct) const;
+            yli::ontology::Entity* create_variable(const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value) const;
             yli::ontology::Entity* create_ecosystem(const yli::ontology::EcosystemStruct& ecosystem_struct) const;
             yli::ontology::Entity* create_scene(const yli::ontology::SceneStruct& scene_struct) const;
             yli::ontology::Entity* create_shader(const yli::ontology::ShaderStruct& shader_struct) const;

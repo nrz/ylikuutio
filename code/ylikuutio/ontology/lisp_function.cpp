@@ -22,7 +22,6 @@
 
 // Include standard headers
 #include <cstddef>    // std::size_t
-#include <memory>     // std::make_shared, std::shared_ptr
 #include <optional>   // std::optional
 #include <string>     // std::string
 #include <vector>     // std::vector
@@ -58,7 +57,7 @@ namespace yli::ontology
         return yli::ontology::get_number_of_descendants(this->parent_of_generic_lisp_function_overloads.child_pointer_vector);
     }
 
-    std::optional<std::shared_ptr<yli::data::AnyValue>> LispFunction::execute(const std::vector<std::string>& parameter_vector)
+    std::optional<yli::data::AnyValue> LispFunction::execute(const std::vector<std::string>& parameter_vector)
     {
         // The execution of a `LispFunction` proceeds as follows:
         // The execution of `GenericLispFunctionOverload` children of

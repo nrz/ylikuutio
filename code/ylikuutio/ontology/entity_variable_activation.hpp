@@ -19,7 +19,7 @@
 #define __YLIKUUTIO_ONTOLOGY_ENTITY_VARIABLE_ACTIVATION_HPP_INCLUDED
 
 // Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 
 namespace yli::data
 {
@@ -31,7 +31,7 @@ namespace yli::ontology
     class Entity;
     class Variable;
 
-    std::shared_ptr<yli::data::AnyValue> activate_should_be_rendered(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+    std::optional<yli::data::AnyValue> activate_should_be_rendered(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
 }
 
 #endif

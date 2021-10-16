@@ -22,14 +22,13 @@
 #include "code/ylikuutio/ontology/lisp_function.hpp"
 
 // Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
 #include <optional> // std::optional
 #include <string> // std::string, std::getline
 #include <vector> // std::vector
 
 namespace yli::lisp
 {
-    std::shared_ptr<yli::data::AnyValue> execute(
+    std::optional<yli::data::AnyValue> execute(
             const yli::ontology::Console* const console,
             const std::string& command,
             const std::vector<std::string>& parameter_vector)
@@ -37,8 +36,6 @@ namespace yli::lisp
         // Call the corresponding `yli::ontology::LispFunction`, if there is one.
         // `LispFunction` itself takes care of resolving the correct overload
         // and binding the arguments and calling the overload with the arguments.
-
-        std::shared_ptr<yli::data::AnyValue> any_value = nullptr;
 
         yli::ontology::Universe* universe = console->get_universe();
 
@@ -53,16 +50,11 @@ namespace yli::lisp
 
                 if (lisp_function != nullptr)
                 {
-                    std::optional<std::shared_ptr<yli::data::AnyValue>> return_value = lisp_function->execute(parameter_vector);
-
-                    if (*return_value)
-                    {
-                        any_value = *return_value;
-                    }
+                    return lisp_function->execute(parameter_vector);
                 }
             }
         }
 
-        return any_value;
+        return std::nullopt;
     }
 }

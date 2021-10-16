@@ -21,14 +21,16 @@
 #include "generic_lisp_function_overload.hpp"
 #include "console.hpp"
 #include "lisp_function.hpp"
-#include "code/ylikuutio/lisp/arg_processing_templates.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/tuple_templates.hpp"
+#include "code/ylikuutio/data/wrap.hpp"
+#include "code/ylikuutio/lisp/function_arg_extractor.hpp"
 #include "code/ylikuutio/lisp/lisp_templates.hpp"
 
 // Include standard headers
 #include <cstddef>    // std::size_t
 #include <functional> // std::function, std::invoke
 #include <iostream>   // std::cout, std::cin, std::cerr
-#include <memory>     // std::make_shared, std::shared_ptr
 #include <optional>   // std::optional
 #include <string>     // std::string
 #include <tuple>      // std::apply, std::tuple, std::tuple_cat
@@ -70,25 +72,126 @@
 //
 // number-of-provided-parameters = number-of-function-arguments - number-of-Universe-arguments - number-of-Console-arguments
 
-namespace yli::data
-{
-    class AnyValue;
-}
-
 namespace yli::ontology
 {
     class Entity;
     class Universe;
+    class Console;
     class ParentModule;
 
     template<typename... Types>
         class LispFunctionOverload: public yli::ontology::GenericLispFunctionOverload
     {
         public:
+            // typedef typename yli::lisp::FunctionArgExtractor<std::function<std::optional<yli::data::AnyValue>(Types...)>>::ArgTuple ArgTupleType;
+
+        private:
+            template<typename Tag/*, typename None = void*/>
+                std::optional<std::tuple<>> process_args(
+                        std::size_t,
+                        yli::ontology::Universe* /* universe */,
+                        yli::ontology::Console* /* console */,
+                        yli::ontology::Entity*& /* context */,
+                        const std::vector<std::string>& parameter_vector,
+                        std::size_t& parameter_i)
+                {
+                    // This case ends the recursion.
+                    // No more arguments to bind.
+
+                    if (parameter_i == parameter_vector.size())
+                    {
+                        // All parameters were bound. Binding successful.
+                        return std::tuple<>();
+                    }
+
+                    // Not all parameters were bound. Binding failed.
+                    return std::nullopt;
+                }
+
+            template<typename Tag, typename T1, typename... RestTypes>
+                std::optional<std::tuple<typename yli::data::WrapAllButStrings<T1>::type, typename yli::data::WrapAllButStrings<RestTypes>::type...>> process_args(
+                        std::size_t tag,
+                        yli::ontology::Universe* universe,
+                        yli::ontology::Console* console,
+                        yli::ontology::Entity*& context,
+                        const std::vector<std::string>& parameter_vector,
+                        std::size_t& parameter_i)
+                {
+                    std::optional<typename yli::data::WrapAllButStrings<T1>::type> value = yli::lisp::convert_string_to_value_and_advance_index<T1>(
+                        universe, console, context, parameter_vector, parameter_i);
+
+                    if (!value)
+                    {
+                        // Binding failed.
+                        return std::nullopt;
+                    }
+
+                    // OK, binding successful for this argument.
+                    // Proceed to the next argument.
+
+                    std::optional<std::tuple<typename yli::data::WrapAllButStrings<RestTypes>::type...>> arg_tuple = this->process_args<
+                        std::size_t, RestTypes...>(
+                                tag, universe, console, context, parameter_vector, parameter_i);
+
+                    if (arg_tuple)
+                    {
+                        return std::tuple_cat(std::make_tuple(*value), *arg_tuple); // success.
+                    }
+
+                    // Binding failed.
+                    return std::nullopt;
+                }
+
+            std::optional<yli::data::AnyValue> process_args_and_call(const std::vector<std::string>& parameter_vector)
+            {
+                // Start processing the arguments.
+
+                if (this->universe == nullptr)
+                {
+                    return std::nullopt;
+                }
+
+                yli::ontology::LispFunction* const lisp_function = static_cast<yli::ontology::LispFunction*>(this->get_parent());
+
+                if (lisp_function == nullptr)
+                {
+                    return std::nullopt;
+                }
+
+                yli::ontology::Console* const console = static_cast<yli::ontology::Console*>(lisp_function->get_parent());
+
+                if (console == nullptr)
+                {
+                    return std::nullopt;
+                }
+
+                std::size_t parameter_i = 0;                     // Start from the first parameter.
+                yli::ontology::Entity* context = this->universe; // `Universe` is the default context.
+
+                std::size_t tag;
+                std::optional<std::tuple<typename yli::data::Wrap<Types>::type...>> arg_tuple = this->process_args<
+                    std::size_t, Types...>(
+                        tag,
+                        this->universe,
+                        console,
+                        context,
+                        parameter_vector,
+                        parameter_i);
+
+                if (arg_tuple)
+                {
+                    return std::apply(this->callback, *arg_tuple);
+                }
+
+                std::cout << "ERROR: `LispFunctionOverload::process_args_and_call`: binding failed!\n";
+                return std::nullopt;
+            }
+
+        public:
             LispFunctionOverload(
                     yli::ontology::Universe* const universe,
                     yli::ontology::ParentModule* const parent_module,
-                    std::function<std::shared_ptr<yli::data::AnyValue>(Types...)> callback)
+                    std::function<std::optional<yli::data::AnyValue>(Types...)> callback)
                 : GenericLispFunctionOverload(universe, parent_module),
                 callback(callback)
             {
@@ -107,7 +210,7 @@ namespace yli::ontology
                 // destructor.
             }
 
-            std::optional<std::shared_ptr<yli::data::AnyValue>> execute(const std::vector<std::string>& parameter_vector) override
+            std::optional<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector) override
             {
                 yli::ontology::Universe* const universe = this->get_universe();
 
@@ -144,51 +247,14 @@ namespace yli::ontology
                 }
 
                 // OK, all preconditions for a successful argument binding are met.
-                // Now, process the arguments.
-                std::tuple<Types...> arg_tuple;
+                // Now, process the arguments and call.
 
-                if (this->start_process_args(parameter_vector, arg_tuple))
-                {
-
-                    // Call the callback function if binding was successful.
-                    return std::apply(this->callback, arg_tuple);
-                }
-
-                return std::nullopt;
+                return this->process_args_and_call(parameter_vector);
             }
 
         private:
-            bool start_process_args(const std::vector<std::string>& parameter_vector, std::tuple<Types...>& arg_tuple)
-            {
-                // Start processing the arguments.
-
-                if (this->universe == nullptr)
-                {
-                    return false;
-                }
-
-                yli::ontology::LispFunction* const lisp_function = static_cast<yli::ontology::LispFunction*>(this->get_parent());
-
-                if (lisp_function == nullptr)
-                {
-                    return false;
-                }
-
-                yli::ontology::Console* const console = static_cast<yli::ontology::Console*>(lisp_function->get_parent());
-
-                if (console == nullptr)
-                {
-                    return false;
-                }
-
-                std::size_t parameter_i = 0;                     // Start from the first parameter.
-                yli::ontology::Entity* context = this->universe; // `Universe` is the default context.
-
-                return yli::lisp::process_args<Types...>(this->universe, console, context, parameter_vector, parameter_i, arg_tuple);
-            }
-
             // The callback may receive different kinds of arguments.
-            const std::function<std::shared_ptr<yli::data::AnyValue>(Types...)> callback;
+            const std::function<std::optional<yli::data::AnyValue>(Types...)> callback;
     };
 }
 

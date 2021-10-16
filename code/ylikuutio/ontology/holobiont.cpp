@@ -23,6 +23,7 @@
 #include "entity_factory.hpp"
 #include "holobiont_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/render/render_master.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
@@ -37,7 +38,7 @@
 #include <cstddef>  // std::size_t, std::uintptr_t
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -209,45 +210,45 @@ namespace yli::ontology
 
     // Public callbacks.
 
-    std::shared_ptr<yli::data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z(
+    std::optional<yli::data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z(
             yli::ontology::Symbiosis* const parent,
-            std::shared_ptr<std::string> holobiont_name,
-            std::shared_ptr<std::string> x,
-            std::shared_ptr<std::string> y,
-            std::shared_ptr<std::string> z)
+            const std::string& holobiont_name,
+            const std::string& x,
+            const std::string& y,
+            const std::string& z)
     {
-        if (parent == nullptr || holobiont_name == nullptr || x == nullptr || y == nullptr || z == nullptr)
+        if (parent == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         const yli::ontology::EntityFactory* const entity_factory = parent->get_entity_factory();
 
         if (entity_factory == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        yli::data::AnyValue x_any_value("float", *x);
-        yli::data::AnyValue y_any_value("float", *y);
-        yli::data::AnyValue z_any_value("float", *z);
+        yli::data::AnyValue x_any_value("float", x);
+        yli::data::AnyValue y_any_value("float", y);
+        yli::data::AnyValue z_any_value("float", z);
 
         if (!std::holds_alternative<float>(x_any_value.data))
         {
             std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z`: invalid value for `x`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         if (!std::holds_alternative<float>(y_any_value.data))
         {
             std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z`: invalid value for `y`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         if (!std::holds_alternative<float>(z_any_value.data))
         {
             std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z`: invalid value for `z`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         float float_x = std::get<float>(x_any_value.data);
@@ -257,66 +258,66 @@ namespace yli::ontology
         yli::ontology::HolobiontStruct holobiont_struct;
         holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
         holobiont_struct.parent = parent;
-        holobiont_struct.local_name = *holobiont_name;
+        holobiont_struct.local_name = holobiont_name;
         entity_factory->create_holobiont(holobiont_struct);
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch(
+    std::optional<yli::data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch(
             yli::ontology::Symbiosis* const parent,
-            std::shared_ptr<std::string> holobiont_name,
-            std::shared_ptr<std::string> x,
-            std::shared_ptr<std::string> y,
-            std::shared_ptr<std::string> z,
-            std::shared_ptr<std::string> yaw,
-            std::shared_ptr<std::string> pitch)
+            const std::string& holobiont_name,
+            const std::string& x,
+            const std::string& y,
+            const std::string& z,
+            const std::string& yaw,
+            const std::string& pitch)
     {
-        if (parent == nullptr || holobiont_name == nullptr || x == nullptr || y == nullptr || z == nullptr || yaw == nullptr || pitch == nullptr)
+        if (parent == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         const yli::ontology::EntityFactory* const entity_factory = parent->get_entity_factory();
 
         if (entity_factory == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        yli::data::AnyValue x_any_value("float", *x);
-        yli::data::AnyValue y_any_value("float", *y);
-        yli::data::AnyValue z_any_value("float", *z);
-        yli::data::AnyValue yaw_any_value("float", *yaw);
-        yli::data::AnyValue pitch_any_value("float", *pitch);
+        yli::data::AnyValue x_any_value("float", x);
+        yli::data::AnyValue y_any_value("float", y);
+        yli::data::AnyValue z_any_value("float", z);
+        yli::data::AnyValue yaw_any_value("float", yaw);
+        yli::data::AnyValue pitch_any_value("float", pitch);
 
         if (!std::holds_alternative<float>(x_any_value.data))
         {
             std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `x`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         if (!std::holds_alternative<float>(y_any_value.data))
         {
             std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `y`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         if (!std::holds_alternative<float>(z_any_value.data))
         {
             std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `z`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         if (!std::holds_alternative<float>(yaw_any_value.data))
         {
             std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `yaw`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         if (!std::holds_alternative<float>(pitch_any_value.data))
         {
             std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `pitch`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         const float float_x = std::get<float>(x_any_value.data);
@@ -330,9 +331,9 @@ namespace yli::ontology
         holobiont_struct.yaw = float_yaw;
         holobiont_struct.pitch = float_pitch;
         holobiont_struct.parent = parent;
-        holobiont_struct.local_name = *holobiont_name;
+        holobiont_struct.local_name = holobiont_name;
         entity_factory->create_holobiont(holobiont_struct);
-        return nullptr;
+        return std::nullopt;
     }
 
     // Public callbacks end here.

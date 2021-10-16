@@ -29,16 +29,16 @@ namespace yli::snippets
 {
     void set_framebuffer_size(yli::ontology::Universe* universe, const uint32_t framebuffer_width, const uint32_t framebuffer_height)
     {
-        yli::ontology::VariableStruct framebuffer_width_variable_struct(std::make_shared<yli::data::AnyValue>(framebuffer_width));
+        yli::ontology::VariableStruct framebuffer_width_variable_struct;
         framebuffer_width_variable_struct.local_name = "framebuffer_width";
         framebuffer_width_variable_struct.activate_callback = &yli::ontology::Variable::activate_framebuffer_width;
         framebuffer_width_variable_struct.should_call_activate_callback_now = false;
-        universe->create_variable(framebuffer_width_variable_struct);
+        universe->create_variable(framebuffer_width_variable_struct, yli::data::AnyValue(framebuffer_width));
 
-        yli::ontology::VariableStruct framebuffer_height_variable_struct(std::make_shared<yli::data::AnyValue>(framebuffer_height));
+        yli::ontology::VariableStruct framebuffer_height_variable_struct;
         framebuffer_height_variable_struct.local_name = "framebuffer_height";
         framebuffer_height_variable_struct.activate_callback = &yli::ontology::Variable::activate_framebuffer_height;
         framebuffer_height_variable_struct.should_call_activate_callback_now = true;
-        universe->create_variable(framebuffer_height_variable_struct);
+        universe->create_variable(framebuffer_height_variable_struct, yli::data::AnyValue(framebuffer_height));
     }
 }

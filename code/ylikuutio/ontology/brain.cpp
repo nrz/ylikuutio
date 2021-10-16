@@ -26,7 +26,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::make_shared, std::shared_ptr
 
 namespace yli::ontology
 {
@@ -87,7 +86,7 @@ namespace yli::ontology
             if (movable != nullptr)
             {
                 // Do not waste time in calling the callback function for `nullptr` targets.
-                this->callback_engine->execute(std::make_shared<yli::data::AnyValue>(movable));
+                this->callback_engine->execute(yli::data::AnyValue(movable));
             }
         }
     }

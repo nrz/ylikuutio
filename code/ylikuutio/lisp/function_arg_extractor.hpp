@@ -15,22 +15,26 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_ENTITY_VARIABLE_READ_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_ENTITY_VARIABLE_READ_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_LISP_FUNCTION_ARG_EXTRACTOR_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_LISP_FUNCTION_ARG_EXTRACTOR_HPP_INCLUDED
+
+#include "function_arg_extractor.hpp"
+#include "code/ylikuutio/data/wrap.hpp"
 
 // Include standard headers
-#include <optional> // std::optional
+#include <functional> // std::function
+#include <tuple>      // std::tuple
 
-namespace yli::data
+namespace yli::lisp
 {
-    class AnyValue;
-}
+    template<typename F>
+        struct FunctionArgExtractor;
 
-namespace yli::ontology
-{
-    class Entity;
-
-    std::optional<yli::data::AnyValue> read_should_be_rendered(yli::ontology::Entity* const entity);
+    template<typename R, typename... Args>
+        struct FunctionArgExtractor<std::function<R(Args...)>>
+        {
+            using ArgTuple = std::tuple<typename yli::data::Wrap<Args>::type...>;
+        };
 }
 
 #endif

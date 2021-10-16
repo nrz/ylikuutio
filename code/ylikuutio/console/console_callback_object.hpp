@@ -23,7 +23,7 @@
 #include "code/ylikuutio/callback/callback_object.hpp"
 
 // Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 
 namespace yli::callback
 {
@@ -61,7 +61,7 @@ namespace yli::console
             }
 
             // execute this callback.
-            std::shared_ptr<yli::data::AnyValue> execute(std::shared_ptr<yli::data::AnyValue>) override;
+            std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue&) override;
 
             InputParametersToAnyValueCallbackWithConsole console_callback;
             yli::ontology::Console* console_pointer;

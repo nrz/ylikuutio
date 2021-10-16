@@ -19,7 +19,7 @@
 #define __YLIKUUTIO_ONTOLOGY_MOVABLE_VARIABLE_READ_HPP_INCLUDED
 
 // Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 
 namespace yli::data
 {
@@ -30,23 +30,23 @@ namespace yli::ontology
 {
     class Entity;
 
-    std::shared_ptr<yli::data::AnyValue> read_cartesian_coordinates(yli::ontology::Entity* const entity);
-    std::shared_ptr<yli::data::AnyValue> read_x(yli::ontology::Entity* const entity);
-    std::shared_ptr<yli::data::AnyValue> read_y(yli::ontology::Entity* const entity);
-    std::shared_ptr<yli::data::AnyValue> read_z(yli::ontology::Entity* const entity);
+    std::optional<yli::data::AnyValue> read_cartesian_coordinates(yli::ontology::Entity* const entity);
+    std::optional<yli::data::AnyValue> read_x(yli::ontology::Entity* const entity);
+    std::optional<yli::data::AnyValue> read_y(yli::ontology::Entity* const entity);
+    std::optional<yli::data::AnyValue> read_z(yli::ontology::Entity* const entity);
 
-    std::shared_ptr<yli::data::AnyValue> read_spherical_coordinates(yli::ontology::Entity* const entity);
-    std::shared_ptr<yli::data::AnyValue> read_rho(yli::ontology::Entity* const entity);
-    std::shared_ptr<yli::data::AnyValue> read_theta(yli::ontology::Entity* const entity);
-    std::shared_ptr<yli::data::AnyValue> read_phi(yli::ontology::Entity* const entity);
+    std::optional<yli::data::AnyValue> read_spherical_coordinates(yli::ontology::Entity* const entity);
+    std::optional<yli::data::AnyValue> read_rho(yli::ontology::Entity* const entity);
+    std::optional<yli::data::AnyValue> read_theta(yli::ontology::Entity* const entity);
+    std::optional<yli::data::AnyValue> read_phi(yli::ontology::Entity* const entity);
 
-    std::shared_ptr<yli::data::AnyValue> read_up(yli::ontology::Entity* const entity);
-    std::shared_ptr<yli::data::AnyValue> read_right(yli::ontology::Entity* const entity);
+    std::optional<yli::data::AnyValue> read_up(yli::ontology::Entity* const entity);
+    std::optional<yli::data::AnyValue> read_right(yli::ontology::Entity* const entity);
 
-    std::shared_ptr<yli::data::AnyValue> read_yaw(yli::ontology::Entity* const entity);
-    std::shared_ptr<yli::data::AnyValue> read_pitch(yli::ontology::Entity* const entity);
+    std::optional<yli::data::AnyValue> read_yaw(yli::ontology::Entity* const entity);
+    std::optional<yli::data::AnyValue> read_pitch(yli::ontology::Entity* const entity);
 
-    std::shared_ptr<yli::data::AnyValue> read_azimuth(yli::ontology::Entity* const entity);
+    std::optional<yli::data::AnyValue> read_azimuth(yli::ontology::Entity* const entity);
 }
 
 #endif

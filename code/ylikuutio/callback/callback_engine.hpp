@@ -24,7 +24,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <memory>  // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <queue>   // std::queue
 #include <string>  // std::string
 #include <vector>  // std::vector
@@ -78,11 +78,11 @@ namespace yli::callback
             yli::callback::CallbackObject* create_callback_object(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
             // execute all callbacks with a parameter.
-            std::shared_ptr<yli::data::AnyValue> execute(std::shared_ptr<yli::data::AnyValue> any_value);
+            std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue& any_value);
 
             std::size_t get_n_of_return_values() const;
-            std::shared_ptr<yli::data::AnyValue> get_nth_return_value(std::size_t n) const;
-            std::shared_ptr<yli::data::AnyValue> get_previous_return_value() const;
+            std::optional<yli::data::AnyValue> get_nth_return_value(std::size_t n) const;
+            std::optional<yli::data::AnyValue> get_previous_return_value() const;
 
             yli::ontology::Universe* get_universe() const;
 
@@ -99,7 +99,7 @@ namespace yli::callback
             std::queue<std::size_t> free_callback_objectID_queue;
             std::size_t number_of_callback_objects { 0 };
 
-            std::vector<std::shared_ptr<yli::data::AnyValue>> return_values;
+            std::vector<std::optional<yli::data::AnyValue>> return_values;
     };
 }
 

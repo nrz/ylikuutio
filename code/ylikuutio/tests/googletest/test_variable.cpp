@@ -34,6 +34,7 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <limits>   // std::numeric_limits
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <variant>  // std::holds_alternative, std::variant
@@ -61,8 +62,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_true));
-    universe->create_variable(variable_struct);
+    yli::ontology::VariableStruct variable_struct;
+    universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
@@ -75,9 +76,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_true));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -85,9 +86,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
     ASSERT_TRUE(std::get<bool>(variable_value->data));
 }
@@ -99,8 +100,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_false));
-    universe->create_variable(variable_struct);
+    yli::ontology::VariableStruct variable_struct;
+    universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
@@ -113,9 +114,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_false));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -123,9 +124,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
     ASSERT_FALSE(std::get<bool>(variable_value->data));
 }
@@ -137,8 +138,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(char_lowercase_a));
-    universe->create_variable(variable_struct);
+    yli::ontology::VariableStruct variable_struct;
+    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
@@ -151,9 +152,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(char_lowercase_a));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -161,9 +162,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<char>(variable_value->data));
     ASSERT_EQ(std::get<char>(variable_value->data), 'a');
 }
@@ -175,8 +176,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_b = 'b';
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(char_lowercase_b));
-    universe->create_variable(variable_struct);
+    yli::ontology::VariableStruct variable_struct;
+    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_b));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
@@ -189,9 +190,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_b = 'b';
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(char_lowercase_b));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_b));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -199,9 +200,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<char>(variable_value->data));
     ASSERT_EQ(std::get<char>(variable_value->data), 'b');
 }
@@ -213,8 +214,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_space = ' ';
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(char_space));
-    universe->create_variable(variable_struct);
+    yli::ontology::VariableStruct variable_struct;
+    universe->create_variable(variable_struct, yli::data::AnyValue(char_space));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
@@ -227,9 +228,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_space = ' ';
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(char_space));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(char_space));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -237,9 +238,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<char>(variable_value->data));
     ASSERT_EQ(std::get<char>(variable_value->data), ' ');
 }
@@ -251,8 +252,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_newline = '\n';
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(char_newline));
-    universe->create_variable(variable_struct);
+    yli::ontology::VariableStruct variable_struct;
+    universe->create_variable(variable_struct, yli::data::AnyValue(char_newline));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
@@ -265,9 +266,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_newline = '\n';
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(char_newline));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(char_newline));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -275,9 +276,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<char>(variable_value->data));
     ASSERT_EQ(std::get<char>(variable_value->data), '\n');
 }
@@ -289,8 +290,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_zero));
-    universe->create_variable(variable_struct);
+    yli::ontology::VariableStruct variable_struct;
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
@@ -303,9 +304,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -313,9 +314,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
     ASSERT_EQ(std::get<float>(variable_value->data), 0.0f);
 }
@@ -327,9 +328,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_positive_infinity = std::numeric_limits<float>::infinity();
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_positive_infinity));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_positive_infinity));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -337,9 +338,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
     ASSERT_EQ(std::get<float>(variable_value->data), std::numeric_limits<float>::infinity());
 }
@@ -351,9 +352,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_negative_infinity = -1.0f * std::numeric_limits<float>::infinity();
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_negative_infinity));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_negative_infinity));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -361,9 +362,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
     ASSERT_EQ(std::get<float>(variable_value->data), -1.0f * std::numeric_limits<float>::infinity());
 }
@@ -375,9 +376,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_nan = NAN;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_nan));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_nan));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -385,11 +386,12 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
     ASSERT_TRUE(std::isnan(std::get<float>(variable_value->data)));
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_TRUE(std::holds_alternative<float>(variable->get()->data));
+    ASSERT_TRUE(std::isnan(std::get<float>(variable->get()->data)));
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_double_0_no_activate_callback_no_read_callback)
@@ -399,8 +401,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_zero));
-    universe->create_variable(variable_struct);
+    yli::ontology::VariableStruct variable_struct;
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
@@ -413,9 +415,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -423,9 +425,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
     ASSERT_EQ(std::get<double>(variable_value->data), 0.0);
 }
@@ -437,9 +439,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_positive_infinity = std::numeric_limits<double>::infinity();
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_positive_infinity));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_positive_infinity));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -447,9 +449,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
     ASSERT_EQ(std::get<double>(variable_value->data), std::numeric_limits<double>::infinity());
 }
@@ -461,9 +463,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_negative_infinity = -1.0 * std::numeric_limits<double>::infinity();
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_negative_infinity));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_negative_infinity));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -471,9 +473,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
     ASSERT_EQ(std::get<double>(variable_value->data), -1.0 * std::numeric_limits<double>::infinity());
 }
@@ -485,9 +487,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_nan = NAN;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_nan));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_nan));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -495,11 +497,12 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
     ASSERT_TRUE(std::isnan(std::get<double>(variable_value->data)));
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_TRUE(std::holds_alternative<double>(variable->get()->data));
+    ASSERT_TRUE(std::isnan(std::get<double>(variable->get()->data)));
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_int32_t_0_no_activate_callback_no_read_callback)
@@ -509,8 +512,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_zero));
-    universe->create_variable(variable_struct);
+    yli::ontology::VariableStruct variable_struct;
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
@@ -523,9 +526,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -533,9 +536,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
     ASSERT_EQ(std::get<int32_t>(variable_value->data), 0);
 }
@@ -547,8 +550,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_plus_1));
-    universe->create_variable(variable_struct);
+    yli::ontology::VariableStruct variable_struct;
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
@@ -561,9 +564,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -571,9 +574,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
     ASSERT_EQ(std::get<int32_t>(variable_value->data), 1);
 }
@@ -585,8 +588,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_minus_1 = -1;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_minus_1));
-    universe->create_variable(variable_struct);
+    yli::ontology::VariableStruct variable_struct;
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_minus_1));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
@@ -599,9 +602,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_minus_1 = -1;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_minus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_minus_1));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -609,9 +612,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
     ASSERT_EQ(std::get<int32_t>(variable_value->data), -1);
 }
@@ -623,8 +626,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_max = std::numeric_limits<int32_t>::max();
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_max));
-    universe->create_variable(variable_struct);
+    yli::ontology::VariableStruct variable_struct;
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_max));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
@@ -637,9 +640,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_max = std::numeric_limits<int32_t>::max();
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_max));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_max));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -647,9 +650,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
     ASSERT_EQ(std::get<int32_t>(variable_value->data), std::numeric_limits<int32_t>::max());
 }
@@ -661,8 +664,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_min = std::numeric_limits<int32_t>::min();
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_min));
-    universe->create_variable(variable_struct);
+    yli::ontology::VariableStruct variable_struct;
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_min));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
@@ -675,9 +678,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_min = std::numeric_limits<int32_t>::min();
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_min));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_min));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -685,9 +688,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
     ASSERT_EQ(std::get<int32_t>(variable_value->data), std::numeric_limits<int32_t>::min());
 }
@@ -699,8 +702,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_zero));
-    universe->create_variable(variable_struct);
+    yli::ontology::VariableStruct variable_struct;
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
@@ -713,9 +716,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -723,9 +726,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
     ASSERT_EQ(std::get<uint32_t>(variable_value->data), 0);
 }
@@ -737,8 +740,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_plus_1));
-    universe->create_variable(variable_struct);
+    yli::ontology::VariableStruct variable_struct;
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
@@ -751,9 +754,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -761,9 +764,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
     ASSERT_EQ(std::get<uint32_t>(variable_value->data), 1);
 }
@@ -775,8 +778,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_max = std::numeric_limits<uint32_t>::max();
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_max));
-    universe->create_variable(variable_struct);
+    yli::ontology::VariableStruct variable_struct;
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_max));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_EQ(universe->get("foo"), nullptr);
@@ -789,9 +792,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_max = std::numeric_limits<uint32_t>::max();
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_max));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_max));
     ASSERT_TRUE(universe->has_variable("foo"));
     ASSERT_NE(universe->get("foo"), nullptr);
     ASSERT_FALSE(universe->has_variable("bar"));
@@ -799,9 +802,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = universe->get("foo");
     ASSERT_NE(variable, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
     ASSERT_EQ(std::get<uint32_t>(variable_value->data), std::numeric_limits<uint32_t>::max());
 }
@@ -813,20 +816,20 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float x = 1234.25f;
-    yli::ontology::VariableStruct x_variable_struct(std::make_shared<yli::data::AnyValue>(x));
+    yli::ontology::VariableStruct x_variable_struct;
     x_variable_struct.local_name = "x";
     x_variable_struct.activate_callback = &yli::ontology::activate_x;
     x_variable_struct.read_callback = &yli::ontology::read_x;
     x_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("x"), nullptr);
-    universe->create_variable(x_variable_struct);
+    universe->create_variable(x_variable_struct, yli::data::AnyValue(x));
 
     ASSERT_NE(universe->get("x"), nullptr);
     yli::ontology::Variable* x_variable = universe->get("x");
     ASSERT_NE(x_variable, nullptr);
 
-    std::shared_ptr<yli::data::AnyValue> x_value = x_variable->get();
-    ASSERT_NE(x_value, nullptr);
+    std::optional<yli::data::AnyValue> x_value = x_variable->get();
+    ASSERT_NE(x_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(x_value->data));
     ASSERT_EQ(std::get<float>(x_value->data), 1234.25f);
 }
@@ -838,20 +841,20 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float y = 1234.25f;
-    yli::ontology::VariableStruct y_variable_struct(std::make_shared<yli::data::AnyValue>(y));
+    yli::ontology::VariableStruct y_variable_struct;
     y_variable_struct.local_name = "y";
     y_variable_struct.activate_callback = &yli::ontology::activate_y;
     y_variable_struct.read_callback = &yli::ontology::read_y;
     y_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("y"), nullptr);
-    universe->create_variable(y_variable_struct);
+    universe->create_variable(y_variable_struct, yli::data::AnyValue(y));
 
     ASSERT_NE(universe->get("y"), nullptr);
     yli::ontology::Variable* y_variable = universe->get("y");
     ASSERT_NE(y_variable, nullptr);
 
-    std::shared_ptr<yli::data::AnyValue> y_value = y_variable->get();
-    ASSERT_NE(y_value, nullptr);
+    std::optional<yli::data::AnyValue> y_value = y_variable->get();
+    ASSERT_NE(y_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(y_value->data));
     ASSERT_EQ(std::get<float>(y_value->data), 1234.25f);
 }
@@ -863,20 +866,20 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float z = 1234.25f;
-    yli::ontology::VariableStruct z_variable_struct(std::make_shared<yli::data::AnyValue>(z));
+    yli::ontology::VariableStruct z_variable_struct;
     z_variable_struct.local_name = "z";
     z_variable_struct.activate_callback = &yli::ontology::activate_z;
     z_variable_struct.read_callback = &yli::ontology::read_z;
     z_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("z"), nullptr);
-    universe->create_variable(z_variable_struct);
+    universe->create_variable(z_variable_struct, yli::data::AnyValue(z));
 
     ASSERT_NE(universe->get("z"), nullptr);
     yli::ontology::Variable* z_variable = universe->get("z");
     ASSERT_NE(z_variable, nullptr);
 
-    std::shared_ptr<yli::data::AnyValue> z_value = z_variable->get();
-    ASSERT_NE(z_value, nullptr);
+    std::optional<yli::data::AnyValue> z_value = z_variable->get();
+    ASSERT_NE(z_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(z_value->data));
     ASSERT_EQ(std::get<float>(z_value->data), 1234.25f);
 }
@@ -888,20 +891,20 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float red = 0.0f;
-    yli::ontology::VariableStruct red_variable_struct(std::make_shared<yli::data::AnyValue>(red));
+    yli::ontology::VariableStruct red_variable_struct;
     red_variable_struct.local_name = "red";
     red_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     red_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("red"), nullptr);
-    universe->create_variable(red_variable_struct);
+    universe->create_variable(red_variable_struct, yli::data::AnyValue(red));
 
     ASSERT_NE(universe->get("red"), nullptr);
     yli::ontology::Variable* red_variable = universe->get("red");
     ASSERT_NE(red_variable, nullptr);
 
-    ASSERT_EQ(red_variable->variable_value, red_variable->get());
-    std::shared_ptr<yli::data::AnyValue> red_value = red_variable->get();
-    ASSERT_NE(red_value, nullptr);
+    ASSERT_EQ(red_variable->variable_value, *red_variable->get());
+    std::optional<yli::data::AnyValue> red_value = red_variable->get();
+    ASSERT_NE(red_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(red_value->data));
     ASSERT_EQ(std::get<float>(red_value->data), 0.0f);
 }
@@ -913,20 +916,20 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float red = 1.0f;
-    yli::ontology::VariableStruct red_variable_struct(std::make_shared<yli::data::AnyValue>(red));
+    yli::ontology::VariableStruct red_variable_struct;
     red_variable_struct.local_name = "red";
     red_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     red_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("red"), nullptr);
-    universe->create_variable(red_variable_struct);
+    universe->create_variable(red_variable_struct, yli::data::AnyValue(red));
 
     ASSERT_NE(universe->get("red"), nullptr);
     yli::ontology::Variable* red_variable = universe->get("red");
     ASSERT_NE(red_variable, nullptr);
 
-    ASSERT_EQ(red_variable->variable_value, red_variable->get());
-    std::shared_ptr<yli::data::AnyValue> red_value = red_variable->get();
-    ASSERT_NE(red_value, nullptr);
+    ASSERT_EQ(red_variable->variable_value, *red_variable->get());
+    std::optional<yli::data::AnyValue> red_value = red_variable->get();
+    ASSERT_NE(red_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(red_value->data));
     ASSERT_EQ(std::get<float>(red_value->data), 1.0f);
 }
@@ -938,20 +941,20 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float red = 0.875f;
-    yli::ontology::VariableStruct red_variable_struct(std::make_shared<yli::data::AnyValue>(red));
+    yli::ontology::VariableStruct red_variable_struct;
     red_variable_struct.local_name = "red";
     red_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     red_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("red"), nullptr);
-    universe->create_variable(red_variable_struct);
+    universe->create_variable(red_variable_struct, yli::data::AnyValue(red));
 
     ASSERT_NE(universe->get("red"), nullptr);
     yli::ontology::Variable* red_variable = universe->get("red");
     ASSERT_NE(red_variable, nullptr);
 
-    ASSERT_EQ(red_variable->variable_value, red_variable->get());
-    std::shared_ptr<yli::data::AnyValue> red_value = red_variable->get();
-    ASSERT_NE(red_value, nullptr);
+    ASSERT_EQ(red_variable->variable_value, *red_variable->get());
+    std::optional<yli::data::AnyValue> red_value = red_variable->get();
+    ASSERT_NE(red_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(red_value->data));
     ASSERT_EQ(std::get<float>(red_value->data), 0.875f);
 }
@@ -963,20 +966,20 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float green = 0.0f;
-    yli::ontology::VariableStruct green_variable_struct(std::make_shared<yli::data::AnyValue>(green));
+    yli::ontology::VariableStruct green_variable_struct;
     green_variable_struct.local_name = "green";
     green_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     green_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("green"), nullptr);
-    universe->create_variable(green_variable_struct);
+    universe->create_variable(green_variable_struct, yli::data::AnyValue(green));
 
     ASSERT_NE(universe->get("green"), nullptr);
     yli::ontology::Variable* green_variable = universe->get("green");
     ASSERT_NE(green_variable, nullptr);
 
-    ASSERT_EQ(green_variable->variable_value, green_variable->get());
-    std::shared_ptr<yli::data::AnyValue> green_value = green_variable->get();
-    ASSERT_NE(green_value, nullptr);
+    ASSERT_EQ(green_variable->variable_value, *green_variable->get());
+    std::optional<yli::data::AnyValue> green_value = green_variable->get();
+    ASSERT_NE(green_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(green_value->data));
     ASSERT_EQ(std::get<float>(green_value->data), 0.0f);
 }
@@ -988,20 +991,20 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float green = 1.0f;
-    yli::ontology::VariableStruct green_variable_struct(std::make_shared<yli::data::AnyValue>(green));
+    yli::ontology::VariableStruct green_variable_struct;
     green_variable_struct.local_name = "green";
     green_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     green_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("green"), nullptr);
-    universe->create_variable(green_variable_struct);
+    universe->create_variable(green_variable_struct, yli::data::AnyValue(green));
 
     ASSERT_NE(universe->get("green"), nullptr);
     yli::ontology::Variable* green_variable = universe->get("green");
     ASSERT_NE(green_variable, nullptr);
 
-    ASSERT_EQ(green_variable->variable_value, green_variable->get());
-    std::shared_ptr<yli::data::AnyValue> green_value = green_variable->get();
-    ASSERT_NE(green_value, nullptr);
+    ASSERT_EQ(green_variable->variable_value, *green_variable->get());
+    std::optional<yli::data::AnyValue> green_value = green_variable->get();
+    ASSERT_NE(green_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(green_value->data));
     ASSERT_EQ(std::get<float>(green_value->data), 1.0f);
 }
@@ -1013,20 +1016,20 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float green = 0.875f;
-    yli::ontology::VariableStruct green_variable_struct(std::make_shared<yli::data::AnyValue>(green));
+    yli::ontology::VariableStruct green_variable_struct;
     green_variable_struct.local_name = "green";
     green_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     green_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("green"), nullptr);
-    universe->create_variable(green_variable_struct);
+    universe->create_variable(green_variable_struct, yli::data::AnyValue(green));
 
     ASSERT_NE(universe->get("green"), nullptr);
     yli::ontology::Variable* green_variable = universe->get("green");
     ASSERT_NE(green_variable, nullptr);
 
-    ASSERT_EQ(green_variable->variable_value, green_variable->get());
-    std::shared_ptr<yli::data::AnyValue> green_value = green_variable->get();
-    ASSERT_NE(green_value, nullptr);
+    ASSERT_EQ(green_variable->variable_value, *green_variable->get());
+    std::optional<yli::data::AnyValue> green_value = green_variable->get();
+    ASSERT_NE(green_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(green_value->data));
     ASSERT_EQ(std::get<float>(green_value->data), 0.875f);
 }
@@ -1038,20 +1041,20 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float blue = 0.0f;
-    yli::ontology::VariableStruct blue_variable_struct(std::make_shared<yli::data::AnyValue>(blue));
+    yli::ontology::VariableStruct blue_variable_struct;
     blue_variable_struct.local_name = "blue";
     blue_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     blue_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("blue"), nullptr);
-    universe->create_variable(blue_variable_struct);
+    universe->create_variable(blue_variable_struct, yli::data::AnyValue(blue));
 
     ASSERT_NE(universe->get("blue"), nullptr);
     yli::ontology::Variable* blue_variable = universe->get("blue");
     ASSERT_NE(blue_variable, nullptr);
 
-    ASSERT_EQ(blue_variable->variable_value, blue_variable->get());
-    std::shared_ptr<yli::data::AnyValue> blue_value = blue_variable->get();
-    ASSERT_NE(blue_value, nullptr);
+    ASSERT_EQ(blue_variable->variable_value, *blue_variable->get());
+    std::optional<yli::data::AnyValue> blue_value = blue_variable->get();
+    ASSERT_NE(blue_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(blue_value->data));
     ASSERT_EQ(std::get<float>(blue_value->data), 0.0f);
 }
@@ -1063,20 +1066,20 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float blue = 1.0f;
-    yli::ontology::VariableStruct blue_variable_struct(std::make_shared<yli::data::AnyValue>(blue));
+    yli::ontology::VariableStruct blue_variable_struct;
     blue_variable_struct.local_name = "blue";
     blue_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     blue_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("blue"), nullptr);
-    universe->create_variable(blue_variable_struct);
+    universe->create_variable(blue_variable_struct, yli::data::AnyValue(blue));
 
     ASSERT_NE(universe->get("blue"), nullptr);
     yli::ontology::Variable* blue_variable = universe->get("blue");
     ASSERT_NE(blue_variable, nullptr);
 
-    ASSERT_EQ(blue_variable->variable_value, blue_variable->get());
-    std::shared_ptr<yli::data::AnyValue> blue_value = blue_variable->get();
-    ASSERT_NE(blue_value, nullptr);
+    ASSERT_EQ(blue_variable->variable_value, *blue_variable->get());
+    std::optional<yli::data::AnyValue> blue_value = blue_variable->get();
+    ASSERT_NE(blue_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(blue_value->data));
     ASSERT_EQ(std::get<float>(blue_value->data), 1.0f);
 }
@@ -1088,20 +1091,20 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float blue = 0.875f;
-    yli::ontology::VariableStruct blue_variable_struct(std::make_shared<yli::data::AnyValue>(blue));
+    yli::ontology::VariableStruct blue_variable_struct;
     blue_variable_struct.local_name = "blue";
     blue_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     blue_variable_struct.should_call_activate_callback_now = true;
     ASSERT_EQ(universe->get("blue"), nullptr);
-    universe->create_variable(blue_variable_struct);
+    universe->create_variable(blue_variable_struct, yli::data::AnyValue(blue));
 
     ASSERT_NE(universe->get("blue"), nullptr);
     yli::ontology::Variable* blue_variable = universe->get("blue");
     ASSERT_NE(blue_variable, nullptr);
 
-    ASSERT_EQ(blue_variable->variable_value, blue_variable->get());
-    std::shared_ptr<yli::data::AnyValue> blue_value = blue_variable->get();
-    ASSERT_NE(blue_value, nullptr);
+    ASSERT_EQ(blue_variable->variable_value, *blue_variable->get());
+    std::optional<yli::data::AnyValue> blue_value = blue_variable->get();
+    ASSERT_NE(blue_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(blue_value->data));
     ASSERT_EQ(std::get<float>(blue_value->data), 0.875f);
 }
@@ -1116,63 +1119,63 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
     float y = 2345.50f;
     float z = 3456.75f;
 
-    yli::ontology::VariableStruct cartesian_coordinates_variable_struct(std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
+    yli::ontology::VariableStruct cartesian_coordinates_variable_struct;
     cartesian_coordinates_variable_struct.local_name = "cartesian_coordinates";
     cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
     cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
     cartesian_coordinates_variable_struct.should_call_activate_callback_now = false;
-    universe->create_variable(cartesian_coordinates_variable_struct);
+    universe->create_variable(cartesian_coordinates_variable_struct, yli::data::AnyValue(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
 
-    yli::ontology::VariableStruct x_variable_struct(std::make_shared<yli::data::AnyValue>(x));
+    yli::ontology::VariableStruct x_variable_struct;
     x_variable_struct.local_name = "x";
     x_variable_struct.activate_callback = &yli::ontology::activate_x;
     x_variable_struct.read_callback = &yli::ontology::read_x;
     x_variable_struct.should_call_activate_callback_now = true;
-    universe->create_variable(x_variable_struct);
+    universe->create_variable(x_variable_struct, yli::data::AnyValue(x));
 
-    yli::ontology::VariableStruct y_variable_struct(std::make_shared<yli::data::AnyValue>(y));
+    yli::ontology::VariableStruct y_variable_struct;
     y_variable_struct.local_name = "y";
     y_variable_struct.activate_callback = &yli::ontology::activate_y;
     y_variable_struct.read_callback = &yli::ontology::read_y;
     y_variable_struct.should_call_activate_callback_now = true;
-    universe->create_variable(y_variable_struct);
+    universe->create_variable(y_variable_struct, yli::data::AnyValue(y));
 
-    yli::ontology::VariableStruct z_variable_struct(std::make_shared<yli::data::AnyValue>(z));
+    yli::ontology::VariableStruct z_variable_struct;
     z_variable_struct.local_name = "z";
     z_variable_struct.activate_callback = &yli::ontology::activate_z;
     z_variable_struct.read_callback = &yli::ontology::read_z;
     z_variable_struct.should_call_activate_callback_now = true;
-    universe->create_variable(z_variable_struct);
+    universe->create_variable(z_variable_struct, yli::data::AnyValue(z));
 
     ASSERT_NE(universe->get("x"), nullptr);
     yli::ontology::Variable* x_variable = universe->get("x");
     ASSERT_NE(x_variable, nullptr);
-    std::shared_ptr<yli::data::AnyValue> x_value = x_variable->get();
-    ASSERT_NE(x_value, nullptr);
+    std::optional<yli::data::AnyValue> x_value = x_variable->get();
+    ASSERT_NE(x_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(x_value->data));
     ASSERT_EQ(std::get<float>(x_value->data), 1234.25f);
 
     ASSERT_NE(universe->get("y"), nullptr);
     yli::ontology::Variable* y_variable = universe->get("y");
     ASSERT_NE(y_variable, nullptr);
-    std::shared_ptr<yli::data::AnyValue> y_value = y_variable->get();
-    ASSERT_NE(y_value, nullptr);
+    std::optional<yli::data::AnyValue> y_value = y_variable->get();
+    ASSERT_NE(y_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(y_value->data));
     ASSERT_EQ(std::get<float>(y_value->data), 2345.50f);
 
     ASSERT_NE(universe->get("z"), nullptr);
     yli::ontology::Variable* z_variable = universe->get("z");
     ASSERT_NE(z_variable, nullptr);
-    std::shared_ptr<yli::data::AnyValue> z_value = z_variable->get();
-    ASSERT_NE(z_value, nullptr);
+    std::optional<yli::data::AnyValue> z_value = z_variable->get();
+    ASSERT_NE(z_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(z_value->data));
     ASSERT_EQ(std::get<float>(z_value->data), 3456.75f);
 
     ASSERT_NE(universe->get("cartesian_coordinates"), nullptr);
     yli::ontology::Variable* cartesian_coordinates_variable = universe->get("cartesian_coordinates");
     ASSERT_NE(cartesian_coordinates_variable, nullptr);
-    std::shared_ptr<yli::data::AnyValue> cartesian_coordinates_value = cartesian_coordinates_variable->get();
-    ASSERT_NE(cartesian_coordinates_value, nullptr);
+    std::optional<yli::data::AnyValue> cartesian_coordinates_value = cartesian_coordinates_variable->get();
+    ASSERT_NE(cartesian_coordinates_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<std::shared_ptr<glm::vec3>>(cartesian_coordinates_value->data));
     ASSERT_EQ(*(std::get<std::shared_ptr<glm::vec3>>(cartesian_coordinates_value->data)), glm::vec3(1234.25f, 2345.50f, 3456.75f));
 }
@@ -1187,63 +1190,63 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
     float y = 2345.50f;
     float z = 3456.75f;
 
-    yli::ontology::VariableStruct x_variable_struct(std::make_shared<yli::data::AnyValue>(x));
+    yli::ontology::VariableStruct x_variable_struct;
     x_variable_struct.local_name = "x";
     x_variable_struct.activate_callback = &yli::ontology::activate_x;
     x_variable_struct.read_callback = &yli::ontology::read_x;
     x_variable_struct.should_call_activate_callback_now = true;
-    universe->create_variable(x_variable_struct);
+    universe->create_variable(x_variable_struct, yli::data::AnyValue(x));
 
-    yli::ontology::VariableStruct y_variable_struct(std::make_shared<yli::data::AnyValue>(y));
+    yli::ontology::VariableStruct y_variable_struct;
     y_variable_struct.local_name = "y";
     y_variable_struct.activate_callback = &yli::ontology::activate_y;
     y_variable_struct.read_callback = &yli::ontology::read_y;
     y_variable_struct.should_call_activate_callback_now = true;
-    universe->create_variable(y_variable_struct);
+    universe->create_variable(y_variable_struct, yli::data::AnyValue(y));
 
-    yli::ontology::VariableStruct z_variable_struct(std::make_shared<yli::data::AnyValue>(z));
+    yli::ontology::VariableStruct z_variable_struct;
     z_variable_struct.local_name = "z";
     z_variable_struct.activate_callback = &yli::ontology::activate_z;
     z_variable_struct.read_callback = &yli::ontology::read_z;
     z_variable_struct.should_call_activate_callback_now = true;
-    universe->create_variable(z_variable_struct);
+    universe->create_variable(z_variable_struct, yli::data::AnyValue(z));
 
-    yli::ontology::VariableStruct cartesian_coordinates_variable_struct(std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
+    yli::ontology::VariableStruct cartesian_coordinates_variable_struct;
     cartesian_coordinates_variable_struct.local_name = "cartesian_coordinates";
     cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
     cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
     cartesian_coordinates_variable_struct.should_call_activate_callback_now = false;
-    universe->create_variable(cartesian_coordinates_variable_struct);
+    universe->create_variable(cartesian_coordinates_variable_struct, yli::data::AnyValue(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
 
     ASSERT_NE(universe->get("x"), nullptr);
     yli::ontology::Variable* x_variable = universe->get("x");
     ASSERT_NE(x_variable, nullptr);
-    std::shared_ptr<yli::data::AnyValue> x_value = x_variable->get();
-    ASSERT_NE(x_value, nullptr);
+    std::optional<yli::data::AnyValue> x_value = x_variable->get();
+    ASSERT_NE(x_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(x_value->data));
     ASSERT_EQ(std::get<float>(x_value->data), 1234.25f);
 
     ASSERT_NE(universe->get("y"), nullptr);
     yli::ontology::Variable* y_variable = universe->get("y");
     ASSERT_NE(y_variable, nullptr);
-    std::shared_ptr<yli::data::AnyValue> y_value = y_variable->get();
-    ASSERT_NE(y_value, nullptr);
+    std::optional<yli::data::AnyValue> y_value = y_variable->get();
+    ASSERT_NE(y_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(y_value->data));
     ASSERT_EQ(std::get<float>(y_value->data), 2345.50f);
 
     ASSERT_NE(universe->get("z"), nullptr);
     yli::ontology::Variable* z_variable = universe->get("z");
     ASSERT_NE(z_variable, nullptr);
-    std::shared_ptr<yli::data::AnyValue> z_value = z_variable->get();
-    ASSERT_NE(z_value, nullptr);
+    std::optional<yli::data::AnyValue> z_value = z_variable->get();
+    ASSERT_NE(z_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(z_value->data));
     ASSERT_EQ(std::get<float>(z_value->data), 3456.75f);
 
     ASSERT_NE(universe->get("cartesian_coordinates"), nullptr);
     yli::ontology::Variable* cartesian_coordinates_variable = universe->get("cartesian_coordinates");
     ASSERT_NE(cartesian_coordinates_variable, nullptr);
-    std::shared_ptr<yli::data::AnyValue> cartesian_coordinates_value = cartesian_coordinates_variable->get();
-    ASSERT_NE(cartesian_coordinates_value, nullptr);
+    std::optional<yli::data::AnyValue> cartesian_coordinates_value = cartesian_coordinates_variable->get();
+    ASSERT_NE(cartesian_coordinates_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<std::shared_ptr<glm::vec3>>(cartesian_coordinates_value->data));
     ASSERT_EQ(*(std::get<std::shared_ptr<glm::vec3>>(cartesian_coordinates_value->data)), glm::vec3(1234.25f, 2345.50f, 3456.75f));
 }
@@ -1258,33 +1261,33 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_u
     float y = 2345.50f;
     float z = 3456.75f;
 
-    yli::ontology::VariableStruct x_variable_struct(std::make_shared<yli::data::AnyValue>(x));
+    yli::ontology::VariableStruct x_variable_struct;
     x_variable_struct.local_name = "x";
     x_variable_struct.activate_callback = &yli::ontology::activate_x;
     x_variable_struct.read_callback = &yli::ontology::read_x;
     x_variable_struct.should_call_activate_callback_now = true;
-    universe->create_variable(x_variable_struct);
+    universe->create_variable(x_variable_struct, yli::data::AnyValue(x));
 
-    yli::ontology::VariableStruct y_variable_struct(std::make_shared<yli::data::AnyValue>(y));
+    yli::ontology::VariableStruct y_variable_struct;
     y_variable_struct.local_name = "y";
     y_variable_struct.activate_callback = &yli::ontology::activate_y;
     y_variable_struct.read_callback = &yli::ontology::read_y;
     y_variable_struct.should_call_activate_callback_now = true;
-    universe->create_variable(y_variable_struct);
+    universe->create_variable(y_variable_struct, yli::data::AnyValue(y));
 
-    yli::ontology::VariableStruct z_variable_struct(std::make_shared<yli::data::AnyValue>(z));
+    yli::ontology::VariableStruct z_variable_struct;
     z_variable_struct.local_name = "z";
     z_variable_struct.activate_callback = &yli::ontology::activate_z;
     z_variable_struct.read_callback = &yli::ontology::read_z;
     z_variable_struct.should_call_activate_callback_now = true;
-    universe->create_variable(z_variable_struct);
+    universe->create_variable(z_variable_struct, yli::data::AnyValue(z));
 
-    yli::ontology::VariableStruct cartesian_coordinates_variable_struct(std::make_shared<yli::data::AnyValue>(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
+    yli::ontology::VariableStruct cartesian_coordinates_variable_struct;
     cartesian_coordinates_variable_struct.local_name = "cartesian_coordinates";
     cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
     cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
     cartesian_coordinates_variable_struct.should_call_activate_callback_now = false;
-    universe->create_variable(cartesian_coordinates_variable_struct);
+    universe->create_variable(cartesian_coordinates_variable_struct, yli::data::AnyValue(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
 
     yli::ontology::Variable* x_variable = universe->get("x");
     yli::ontology::Variable* y_variable = universe->get("y");
@@ -1292,22 +1295,22 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_u
     yli::ontology::Variable* cartesian_coordinates_variable = universe->get("cartesian_coordinates");
 
     x_variable->set("0.875");
-    std::shared_ptr<yli::data::AnyValue> x_value = x_variable->get();
-    ASSERT_NE(x_value, nullptr);
+    std::optional<yli::data::AnyValue> x_value = x_variable->get();
+    ASSERT_NE(x_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(x_value->data));
     ASSERT_EQ(std::get<float>(x_value->data), 0.875f);
     ASSERT_EQ(*(std::get<std::shared_ptr<glm::vec3>>(cartesian_coordinates_variable->get()->data)), glm::vec3(0.875f, 2345.50f, 3456.75f));
 
     y_variable->set("0.9375");
-    std::shared_ptr<yli::data::AnyValue> y_value = y_variable->get();
-    ASSERT_NE(y_value, nullptr);
+    std::optional<yli::data::AnyValue> y_value = y_variable->get();
+    ASSERT_NE(y_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(y_value->data));
     ASSERT_EQ(std::get<float>(y_value->data), 0.9375f);
     ASSERT_EQ(*(std::get<std::shared_ptr<glm::vec3>>(cartesian_coordinates_variable->get()->data)), glm::vec3(0.875f, 0.9375f, 3456.75f));
 
     z_variable->set("0.96875");
-    std::shared_ptr<yli::data::AnyValue> z_value = z_variable->get();
-    ASSERT_NE(z_value, nullptr);
+    std::optional<yli::data::AnyValue> z_value = z_variable->get();
+    ASSERT_NE(z_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(z_value->data));
     ASSERT_EQ(std::get<float>(z_value->data), 0.96875f);
     ASSERT_EQ(*(std::get<std::shared_ptr<glm::vec3>>(cartesian_coordinates_variable->get()->data)), glm::vec3(0.875f, 0.9375f, 0.96875f));
@@ -1320,15 +1323,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_true));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("true");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
     ASSERT_TRUE(std::get<bool>(variable_value->data));
 }
@@ -1340,15 +1343,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_true));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("false");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
     ASSERT_FALSE(std::get<bool>(variable_value->data));
 }
@@ -1360,15 +1363,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_false));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("true");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
     ASSERT_TRUE(std::get<bool>(variable_value->data));
 }
@@ -1380,15 +1383,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_false));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("false");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
     ASSERT_FALSE(std::get<bool>(variable_value->data));
 }
@@ -1400,15 +1403,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_true));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("foo");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
     ASSERT_TRUE(std::get<bool>(variable_value->data));
 }
@@ -1420,15 +1423,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_false));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("foo");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
     ASSERT_FALSE(std::get<bool>(variable_value->data));
 }
@@ -1440,15 +1443,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(char_lowercase_a));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("a");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<char>(variable_value->data));
     ASSERT_EQ(std::get<char>(variable_value->data), 'a');
 }
@@ -1460,15 +1463,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(char_lowercase_a));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("b");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<char>(variable_value->data));
     ASSERT_EQ(std::get<char>(variable_value->data), 'b');
 }
@@ -1480,15 +1483,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(char_lowercase_a));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("A");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<char>(variable_value->data));
     ASSERT_EQ(std::get<char>(variable_value->data), 'A');
 }
@@ -1500,15 +1503,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(char_lowercase_a));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set(" ");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<char>(variable_value->data));
     ASSERT_EQ(std::get<char>(variable_value->data), ' ');
 }
@@ -1520,15 +1523,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(char_lowercase_a));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("\n");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<char>(variable_value->data));
     ASSERT_EQ(std::get<char>(variable_value->data), '\n');
 }
@@ -1540,15 +1543,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(char_lowercase_a));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("ba");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<char>(variable_value->data));
     ASSERT_EQ(std::get<char>(variable_value->data), 'a');
 }
@@ -1560,15 +1563,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(char_lowercase_a));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("bb");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<char>(variable_value->data));
     ASSERT_EQ(std::get<char>(variable_value->data), 'a');
 }
@@ -1580,15 +1583,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(char_lowercase_a));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("bc");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<char>(variable_value->data));
     ASSERT_EQ(std::get<char>(variable_value->data), 'a');
 }
@@ -1600,15 +1603,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
     ASSERT_EQ(std::get<float>(variable_value->data), 0.0f);
 }
@@ -1620,15 +1623,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("0.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
     ASSERT_EQ(std::get<float>(variable_value->data), 0.0f);
 }
@@ -1640,15 +1643,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("1");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
     ASSERT_EQ(std::get<float>(variable_value->data), 1.0f);
 }
@@ -1660,15 +1663,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("1.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
     ASSERT_EQ(std::get<float>(variable_value->data), 1.0f);
 }
@@ -1680,15 +1683,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("-1");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
     ASSERT_EQ(std::get<float>(variable_value->data), -1.0f);
 }
@@ -1700,15 +1703,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("-1.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
     ASSERT_EQ(std::get<float>(variable_value->data), -1.0f);
 }
@@ -1720,15 +1723,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("foo");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
     ASSERT_EQ(std::get<float>(variable_value->data), 0.0f);
 }
@@ -1740,15 +1743,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
     ASSERT_EQ(std::get<float>(variable_value->data), 0.0f);
 }
@@ -1760,15 +1763,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("0.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
     ASSERT_EQ(std::get<float>(variable_value->data), 0.0f);
 }
@@ -1780,15 +1783,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("1");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
     ASSERT_EQ(std::get<float>(variable_value->data), 1.0f);
 }
@@ -1800,15 +1803,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("1.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
     ASSERT_EQ(std::get<float>(variable_value->data), 1.0f);
 }
@@ -1820,15 +1823,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("-1");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
     ASSERT_EQ(std::get<float>(variable_value->data), -1.0f);
 }
@@ -1840,15 +1843,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("-1.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
     ASSERT_EQ(std::get<float>(variable_value->data), -1.0f);
 }
@@ -1860,15 +1863,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(float_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("foo");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
     ASSERT_EQ(std::get<float>(variable_value->data), 1.0f);
 }
@@ -1880,15 +1883,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
     ASSERT_EQ(std::get<double>(variable_value->data), 0.0);
 }
@@ -1900,15 +1903,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("0.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
     ASSERT_EQ(std::get<double>(variable_value->data), 0.0);
 }
@@ -1920,15 +1923,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("1");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
     ASSERT_EQ(std::get<double>(variable_value->data), 1.0);
 }
@@ -1940,15 +1943,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("1.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
     ASSERT_EQ(std::get<double>(variable_value->data), 1.0);
 }
@@ -1960,15 +1963,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("-1");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
     ASSERT_EQ(std::get<double>(variable_value->data), -1.0);
 }
@@ -1980,15 +1983,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("-1.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
     ASSERT_EQ(std::get<double>(variable_value->data), -1.0);
 }
@@ -2000,15 +2003,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("foo");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
     ASSERT_EQ(std::get<double>(variable_value->data), 0.0);
 }
@@ -2020,15 +2023,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
     ASSERT_EQ(std::get<double>(variable_value->data), 0.0);
 }
@@ -2040,15 +2043,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("0.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
     ASSERT_EQ(std::get<double>(variable_value->data), 0.0);
 }
@@ -2060,15 +2063,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("1");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
     ASSERT_EQ(std::get<double>(variable_value->data), 1.0);
 }
@@ -2080,15 +2083,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("1.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
     ASSERT_EQ(std::get<double>(variable_value->data), 1.0);
 }
@@ -2100,15 +2103,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("-1");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
     ASSERT_EQ(std::get<double>(variable_value->data), -1.0);
 }
@@ -2120,15 +2123,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("-1.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
     ASSERT_EQ(std::get<double>(variable_value->data), -1.0);
 }
@@ -2140,15 +2143,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(double_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("foo");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
     ASSERT_EQ(std::get<double>(variable_value->data), 1.0);
 }
@@ -2160,15 +2163,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
     ASSERT_EQ(std::get<int32_t>(variable_value->data), 0);
 }
@@ -2180,15 +2183,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("1");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
     ASSERT_EQ(std::get<int32_t>(variable_value->data), 1);
 }
@@ -2200,15 +2203,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("-1");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
     ASSERT_EQ(std::get<int32_t>(variable_value->data), -1);
 }
@@ -2220,15 +2223,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("0.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
     ASSERT_EQ(std::get<int32_t>(variable_value->data), 0);
 }
@@ -2240,15 +2243,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("1.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
     ASSERT_EQ(std::get<int32_t>(variable_value->data), 0);
 }
@@ -2260,15 +2263,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("-1.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
     ASSERT_EQ(std::get<int32_t>(variable_value->data), 0);
 }
@@ -2280,15 +2283,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("foo");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
     ASSERT_EQ(std::get<int32_t>(variable_value->data), 0);
 }
@@ -2300,15 +2303,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
     ASSERT_EQ(std::get<int32_t>(variable_value->data), 0);
 }
@@ -2320,15 +2323,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("1");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
     ASSERT_EQ(std::get<int32_t>(variable_value->data), 1);
 }
@@ -2340,15 +2343,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("-1");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
     ASSERT_EQ(std::get<int32_t>(variable_value->data), -1);
 }
@@ -2360,15 +2363,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("0.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
     ASSERT_EQ(std::get<int32_t>(variable_value->data), 1);
 }
@@ -2380,15 +2383,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("1.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
     ASSERT_EQ(std::get<int32_t>(variable_value->data), 1);
 }
@@ -2400,15 +2403,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(int32_t_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("foo");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
     ASSERT_EQ(std::get<int32_t>(variable_value->data), 1);
 }
@@ -2420,15 +2423,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
     ASSERT_EQ(std::get<uint32_t>(variable_value->data), 0);
 }
@@ -2440,15 +2443,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("1");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
     ASSERT_EQ(std::get<uint32_t>(variable_value->data), 1);
 }
@@ -2460,15 +2463,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("-1");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
     ASSERT_EQ(std::get<uint32_t>(variable_value->data), 0);
 }
@@ -2480,15 +2483,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("0.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
     ASSERT_EQ(std::get<uint32_t>(variable_value->data), 0);
 }
@@ -2500,15 +2503,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("1.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
     ASSERT_EQ(std::get<uint32_t>(variable_value->data), 0);
 }
@@ -2520,15 +2523,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("-1.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
     ASSERT_EQ(std::get<uint32_t>(variable_value->data), 0);
 }
@@ -2540,15 +2543,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_zero));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("foo");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
     ASSERT_EQ(std::get<uint32_t>(variable_value->data), 0);
 }
@@ -2560,15 +2563,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
     ASSERT_EQ(std::get<uint32_t>(variable_value->data), 0);
 }
@@ -2580,15 +2583,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("1");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
     ASSERT_EQ(std::get<uint32_t>(variable_value->data), 1);
 }
@@ -2600,15 +2603,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("-1");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
     ASSERT_EQ(std::get<uint32_t>(variable_value->data), 1);
 }
@@ -2620,15 +2623,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("0.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
     ASSERT_EQ(std::get<uint32_t>(variable_value->data), 1);
 }
@@ -2640,15 +2643,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("1.0");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
     ASSERT_EQ(std::get<uint32_t>(variable_value->data), 1);
 }
@@ -2660,15 +2663,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(uint32_t_plus_1));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
 
     yli::ontology::Variable* const variable = universe->get("foo");
     variable->set("foo");
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
     ASSERT_EQ(std::get<uint32_t>(variable_value->data), 1);
 }
@@ -2680,20 +2683,20 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_true));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
     yli::ontology::Variable* const variable = universe->get("foo");
-    std::shared_ptr<yli::data::AnyValue> bool_true_any_value = std::make_shared<yli::data::AnyValue>(true);
+    yli::data::AnyValue bool_true_any_value(true);
     variable->set(bool_true_any_value);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
     ASSERT_TRUE(std::get<bool>(variable_value->data));
 
-    bool_true_any_value->data = false;
+    bool_true_any_value.data = false;
     ASSERT_TRUE(std::get<bool>(variable_value->data)); // Must do a deep copy, that is, changing the source value after copying must not affect the dest value.
 }
 
@@ -2704,20 +2707,20 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_true));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
     yli::ontology::Variable* const variable = universe->get("foo");
-    std::shared_ptr<yli::data::AnyValue> bool_false_any_value = std::make_shared<yli::data::AnyValue>(false);
+    yli::data::AnyValue bool_false_any_value(false);
     variable->set(bool_false_any_value);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
     ASSERT_FALSE(std::get<bool>(variable_value->data));
 
-    bool_false_any_value->data = true;
+    bool_false_any_value.data = true;
     ASSERT_FALSE(std::get<bool>(variable_value->data)); // Must do a deep copy, that is, changing the source value after copying must not affect the dest value.
 }
 
@@ -2728,20 +2731,20 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_false));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
 
     yli::ontology::Variable* const variable = universe->get("foo");
-    std::shared_ptr<yli::data::AnyValue> bool_true_any_value = std::make_shared<yli::data::AnyValue>(true);
+    yli::data::AnyValue bool_true_any_value(true);
     variable->set(bool_true_any_value);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
     ASSERT_TRUE(std::get<bool>(variable_value->data));
 
-    bool_true_any_value->data = false;
+    bool_true_any_value.data = false;
     ASSERT_TRUE(std::get<bool>(variable_value->data)); // Must do a deep copy, that is, changing the source value after copying must not affect the dest value.
 }
 
@@ -2752,20 +2755,20 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_false));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
 
     yli::ontology::Variable* const variable = universe->get("foo");
-    std::shared_ptr<yli::data::AnyValue> bool_false_any_value = std::make_shared<yli::data::AnyValue>(false);
+    yli::data::AnyValue bool_false_any_value(false);
     variable->set(bool_false_any_value);
-    ASSERT_EQ(variable->variable_value, variable->get());
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_NE(variable_value, nullptr);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
     ASSERT_FALSE(std::get<bool>(variable_value->data));
 
-    bool_false_any_value->data = true;
+    bool_false_any_value.data = true;
     ASSERT_FALSE(std::get<bool>(variable_value->data)); // Must do a deep copy, that is, changing the source value after copying must not affect the dest value.
 }
 
@@ -2776,26 +2779,18 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_true));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.global_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
     yli::ontology::Variable* const variable = universe->get("foo");
 
-    ASSERT_NE(variable, nullptr);
-    ASSERT_NE(variable->variable_value, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
+    yli::ontology::Variable::set_variable_const_std_string(variable, "false");
+    ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
+    ASSERT_FALSE(std::get<bool>(variable->variable_value.data));
 
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->variable_value;
-    ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
-    ASSERT_TRUE(std::get<bool>(variable_value->data));
-
-    yli::ontology::Variable::set_variable_shared_ptr_string(variable, std::make_shared<std::string>("false"));
-    ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
-    ASSERT_FALSE(std::get<bool>(variable_value->data));
-
-    yli::ontology::Variable::set_variable_shared_ptr_string(variable, std::make_shared<std::string>("true"));
-    ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
-    ASSERT_TRUE(std::get<bool>(variable_value->data));
+    yli::ontology::Variable::set_variable_const_std_string(variable, "true");
+    ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
+    ASSERT_TRUE(std::get<bool>(variable->variable_value.data));
 }
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_with_global_name_bool_false_set_to_true_no_activate_callback_no_read_callback)
@@ -2805,26 +2800,18 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_false));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.global_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
     yli::ontology::Variable* const variable = universe->get("foo");
 
-    ASSERT_NE(variable, nullptr);
-    ASSERT_NE(variable->variable_value, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
+    yli::ontology::Variable::set_variable_const_std_string(variable, "true");
+    ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
+    ASSERT_TRUE(std::get<bool>(variable->variable_value.data));
 
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->variable_value;
-    ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
-    ASSERT_FALSE(std::get<bool>(variable_value->data));
-
-    yli::ontology::Variable::set_variable_shared_ptr_string(variable, std::make_shared<std::string>("true"));
-    ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
-    ASSERT_TRUE(std::get<bool>(variable_value->data));
-
-    yli::ontology::Variable::set_variable_shared_ptr_string(variable, std::make_shared<std::string>("false"));
-    ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
-    ASSERT_FALSE(std::get<bool>(variable_value->data));
+    yli::ontology::Variable::set_variable_const_std_string(variable, "false");
+    ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
+    ASSERT_FALSE(std::get<bool>(variable->variable_value.data));
 }
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_with_global_name_bool_true_set_to_true_no_activate_callback_no_read_callback)
@@ -2834,26 +2821,18 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_true));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.global_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
     yli::ontology::Variable* const variable = universe->get("foo");
 
-    ASSERT_NE(variable, nullptr);
-    ASSERT_NE(variable->variable_value, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
+    yli::ontology::Variable::set_variable_const_std_string(variable, "true");
+    ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
+    ASSERT_TRUE(std::get<bool>(variable->variable_value.data));
 
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->variable_value;
-    ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
-    ASSERT_TRUE(std::get<bool>(variable_value->data));
-
-    yli::ontology::Variable::set_variable_shared_ptr_string(variable, std::make_shared<std::string>("true"));
-    ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
-    ASSERT_TRUE(std::get<bool>(variable_value->data));
-
-    yli::ontology::Variable::set_variable_shared_ptr_string(variable, std::make_shared<std::string>("false"));
-    ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
-    ASSERT_FALSE(std::get<bool>(variable_value->data));
+    yli::ontology::Variable::set_variable_const_std_string(variable, "false");
+    ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
+    ASSERT_FALSE(std::get<bool>(variable->variable_value.data));
 }
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_with_global_name_bool_false_set_to_false_no_activate_callback_no_read_callback)
@@ -2863,24 +2842,16 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct(std::make_shared<yli::data::AnyValue>(bool_false));
+    yli::ontology::VariableStruct variable_struct;
     variable_struct.global_name = "foo";
-    universe->create_variable(variable_struct);
+    universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
     yli::ontology::Variable* const variable = universe->get("foo");
 
-    ASSERT_NE(variable, nullptr);
-    ASSERT_NE(variable->variable_value, nullptr);
-    ASSERT_EQ(variable->variable_value, variable->get());
+    yli::ontology::Variable::set_variable_const_std_string(variable, "false");
+    ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
+    ASSERT_FALSE(std::get<bool>(variable->variable_value.data));
 
-    std::shared_ptr<yli::data::AnyValue> variable_value = variable->variable_value;
-    ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
-    ASSERT_FALSE(std::get<bool>(variable_value->data));
-
-    yli::ontology::Variable::set_variable_shared_ptr_string(variable, std::make_shared<std::string>("false"));
-    ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
-    ASSERT_FALSE(std::get<bool>(variable_value->data));
-
-    yli::ontology::Variable::set_variable_shared_ptr_string(variable, std::make_shared<std::string>("true"));
-    ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
-    ASSERT_TRUE(std::get<bool>(variable_value->data));
+    yli::ontology::Variable::set_variable_const_std_string(variable, "true");
+    ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
+    ASSERT_TRUE(std::get<bool>(variable->variable_value.data));
 }

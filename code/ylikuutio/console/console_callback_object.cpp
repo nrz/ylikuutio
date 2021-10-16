@@ -17,16 +17,12 @@
 
 #include "console_callback_object.hpp"
 #include "code/ylikuutio/callback/callback_parameter.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::make_shared, std::shared_ptr
-
-namespace yli::data
-{
-    class AnyValue;
-}
+#include <optional> // std::optional
 
 namespace yli::console
 {
@@ -40,12 +36,12 @@ namespace yli::console
         }
     }
 
-    std::shared_ptr<yli::data::AnyValue> ConsoleCallbackObject::execute(std::shared_ptr<yli::data::AnyValue>)
+    std::optional<yli::data::AnyValue> ConsoleCallbackObject::execute(const yli::data::AnyValue&)
     {
         if (this->console_callback != nullptr)
         {
-            return std::shared_ptr<yli::data::AnyValue>(this->console_callback(this->parent, this, this->callback_parameter_pointer_vector, this->console_pointer));
+            return yli::data::AnyValue(this->console_callback(this->parent, this, this->callback_parameter_pointer_vector, this->console_pointer));
         }
-        return nullptr;
+        return std::nullopt;
     }
 }

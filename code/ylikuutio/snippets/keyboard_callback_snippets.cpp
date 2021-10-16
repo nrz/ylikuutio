@@ -36,7 +36,7 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <variant>  // std::holds_alternative, std::variant
@@ -116,253 +116,253 @@ namespace yli::snippets
      *  Callback engines for action mode keyreleases begin here.         *
     \*********************************************************************/
 
-    std::shared_ptr<yli::data::AnyValue> release_first_turbo(
+    std::optional<yli::data::AnyValue> release_first_turbo(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::release_first_turbo`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         universe->is_first_turbo_pressed = false;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> release_second_turbo(
+    std::optional<yli::data::AnyValue> release_second_turbo(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::release_second_turbo`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         universe->is_second_turbo_pressed = false;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> enable_toggle_invert_mouse(
+    std::optional<yli::data::AnyValue> enable_toggle_invert_mouse(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::enable_toggle_invert_mouse`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         universe->can_toggle_invert_mouse = true;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> enable_toggle_flight_mode(
+    std::optional<yli::data::AnyValue> enable_toggle_flight_mode(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::enable_toggle_flight_mode`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         universe->can_toggle_flight_mode = true;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> enable_toggle_help_mode(
+    std::optional<yli::data::AnyValue> enable_toggle_help_mode(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::enable_toggle_help_mode`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         universe->can_toggle_help_mode = true;
-        return nullptr;
+        return std::nullopt;
     }
 
     /*********************************************************************\
      *  Callback engines for action mode keypresses begin here.          *
     \*********************************************************************/
 
-    std::shared_ptr<yli::data::AnyValue> exit_program(
+    std::optional<yli::data::AnyValue> exit_program(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         const uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
-        return std::make_shared<yli::data::AnyValue>(exit_program_magic_number);
+        return yli::data::AnyValue(exit_program_magic_number);
     }
 
-    std::shared_ptr<yli::data::AnyValue> first_turbo(
+    std::optional<yli::data::AnyValue> first_turbo(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::first_turbo`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         universe->is_first_turbo_pressed = true;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> second_turbo(
+    std::optional<yli::data::AnyValue> second_turbo(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::second_turbo`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         universe->is_second_turbo_pressed = true;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> move_forward(
+    std::optional<yli::data::AnyValue> move_forward(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::move_forward`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::snippets::move_to_direction(universe, callback_object, universe->current_camera_direction);
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> move_backward(
+    std::optional<yli::data::AnyValue> move_backward(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::move_backward`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::snippets::move_to_direction(universe, callback_object, -universe->current_camera_direction);
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> strafe_left(
+    std::optional<yli::data::AnyValue> strafe_left(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::strafe_left`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::snippets::move_to_direction(universe, callback_object, -universe->current_camera_right);
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> strafe_right(
+    std::optional<yli::data::AnyValue> strafe_right(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::strafe_right`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::snippets::move_to_direction(universe, callback_object, universe->current_camera_right);
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> ascent(
+    std::optional<yli::data::AnyValue> ascent(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::ascent`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::snippets::move_to_direction(universe, callback_object, universe->current_camera_up);
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> descent(
+    std::optional<yli::data::AnyValue> descent(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::descent`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::snippets::move_to_direction(universe, callback_object, -universe->current_camera_up);
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> toggle_invert_mouse(
+    std::optional<yli::data::AnyValue> toggle_invert_mouse(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::toggle_invert_mouse`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         if (universe->can_toggle_invert_mouse)
@@ -370,20 +370,20 @@ namespace yli::snippets
             universe->is_invert_mouse_in_use = !universe->is_invert_mouse_in_use;
             universe->can_toggle_invert_mouse = false;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> toggle_flight_mode(
+    std::optional<yli::data::AnyValue> toggle_flight_mode(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::toggle_flight_mode`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         if (universe->can_toggle_flight_mode)
@@ -392,26 +392,26 @@ namespace yli::snippets
 
             if (scene == nullptr)
             {
-                return nullptr;
+                return std::nullopt;
             }
 
             scene->set_is_flight_mode_in_use(!scene->get_is_flight_mode_in_use());
             universe->can_toggle_flight_mode = false;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> toggle_help_mode(
+    std::optional<yli::data::AnyValue> toggle_help_mode(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* /* callback_object */,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::toggle_help_mode`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         if (universe->can_toggle_help_mode)
@@ -419,46 +419,46 @@ namespace yli::snippets
             universe->in_help_mode = !universe->in_help_mode;
             universe->can_toggle_help_mode = false;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> delete_entity(
+    std::optional<yli::data::AnyValue> delete_entity(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::delete_entity`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
-        const std::shared_ptr<yli::data::AnyValue> entity_name_string_pointer_any_value = callback_object->get_arg(0);
+        std::optional<yli::data::AnyValue> entity_name_string_pointer_any_value = callback_object->get_arg(0);
 
-        if (entity_name_string_pointer_any_value == nullptr)
+        if (!entity_name_string_pointer_any_value)
         {
-            std::cerr << "ERROR: `yli::snippets::delete_entity`: `entity_string` not found!\n";
-            return nullptr;
+            std::cerr << "ERROR: `yli::snippets::delete_entity`: there is no argument 0.\n";
+            return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::string*>(entity_name_string_pointer_any_value->data) &&
-                !std::holds_alternative<const std::string*>(entity_name_string_pointer_any_value->data))
+        if (!std::holds_alternative<std::string*>((*entity_name_string_pointer_any_value).data) &&
+                !std::holds_alternative<const std::string*>((*entity_name_string_pointer_any_value).data))
         {
             std::cerr << "ERROR: `yli::snippets::delete_entity`: invalid datatype.\n";
             std::cerr << "Datatype should be either yli::data::Datatype::STD_STRING_POINTER or yli::data::Datatype::CONST_STD_STRING_POINTER\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         const std::string* const entity_string_pointer =
-            (std::holds_alternative<std::string*>(entity_name_string_pointer_any_value->data) ?
-             std::get<std::string*>(entity_name_string_pointer_any_value->data) :
-             std::get<const std::string*>(entity_name_string_pointer_any_value->data));
+            (std::holds_alternative<std::string*>((*entity_name_string_pointer_any_value).data) ?
+             std::get<std::string*>((*entity_name_string_pointer_any_value).data) :
+             std::get<const std::string*>((*entity_name_string_pointer_any_value).data));
 
         if (entity_string_pointer == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         const std::string entity_string = *entity_string_pointer;
@@ -467,51 +467,51 @@ namespace yli::snippets
 
         if (entity == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         delete entity;
 
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> switch_to_new_material(
+    std::optional<yli::data::AnyValue> switch_to_new_material(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
-        std::shared_ptr<yli::data::AnyValue> entity_name_string_pointer_any_value = callback_object->get_arg(0);
+        std::optional<yli::data::AnyValue> entity_name_string_pointer_any_value = callback_object->get_arg(0);
 
-        if (entity_name_string_pointer_any_value == nullptr)
+        if (!entity_name_string_pointer_any_value)
         {
-            std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: `entity_string` not found!\n";
-            return nullptr;
+            std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: there is no argument 0.\n";
+            return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::string*>(entity_name_string_pointer_any_value->data) &&
-                !std::holds_alternative<const std::string*>(entity_name_string_pointer_any_value->data))
+        if (!std::holds_alternative<std::string*>((*entity_name_string_pointer_any_value).data) &&
+                !std::holds_alternative<const std::string*>((*entity_name_string_pointer_any_value).data))
         {
             std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: invalid datatype.\n";
             std::cerr << "Datatype should be either yli::data::Datatype::STD_STRING_POINTER or yli::data::Datatype::CONST_STD_STRING_POINTER\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         const std::string* const entity_string_pointer =
-            (std::holds_alternative<std::string*>(entity_name_string_pointer_any_value->data) ?
-             std::get<std::string*>(entity_name_string_pointer_any_value->data) :
-             std::get<const std::string*>(entity_name_string_pointer_any_value->data));
+            (std::holds_alternative<std::string*>((*entity_name_string_pointer_any_value).data) ?
+             std::get<std::string*>((*entity_name_string_pointer_any_value).data) :
+             std::get<const std::string*>((*entity_name_string_pointer_any_value).data));
 
         if (entity_string_pointer == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         const std::string entity_string = *entity_string_pointer;
@@ -520,14 +520,14 @@ namespace yli::snippets
 
         if (entity == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Species* const species = dynamic_cast<yli::ontology::Species*>(entity);
 
         if (species == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Entity* const old_material_entity = species->apprentice_of_material.get_master();
@@ -536,15 +536,15 @@ namespace yli::snippets
 
         if (old_material == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        std::shared_ptr<yli::data::AnyValue> any_value_material_string = callback_object->get_arg(1);
+        std::optional<yli::data::AnyValue> any_value_material_string = callback_object->get_arg(1);
 
-        if (any_value_material_string == nullptr)
+        if (!any_value_material_string)
         {
-            std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: `material_string` not found!\n";
-            return nullptr;
+            std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: there is no argument 1.\n";
+            return std::nullopt;
         }
 
         if (!std::holds_alternative<std::string*>(any_value_material_string->data) &&
@@ -552,7 +552,7 @@ namespace yli::snippets
         {
             std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: invalid datatype.\n";
             std::cerr << "Datatype should be either yli::data::Datatype::STD_STRING_POINTER or yli::data::Datatype::CONST_STD_STRING_POINTER\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         const std::string* const new_material_string_pointer =
@@ -562,7 +562,7 @@ namespace yli::snippets
 
         if (new_material_string_pointer == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         const std::string new_material_string = *new_material_string_pointer;
@@ -571,63 +571,63 @@ namespace yli::snippets
 
         if (new_material_entity == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Material* const new_material = dynamic_cast<yli::ontology::Material*>(new_material_entity);
 
         if (new_material == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (old_material == new_material)
         {
             // New parent is the same as old parent, no changes needed.
-            return nullptr;
+            return std::nullopt;
         }
 
         species->bind_to_new_material(new_material);
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> transform_into_new_species(
+    std::optional<yli::data::AnyValue> transform_into_new_species(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject* callback_object,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
             std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: `universe` is `nullptr`!\n";
-            return nullptr;
+            return std::nullopt;
         }
 
-        std::shared_ptr<yli::data::AnyValue> entity_name_string_pointer_any_value = callback_object->get_arg(0);
+        std::optional<yli::data::AnyValue> entity_name_string_pointer_any_value = callback_object->get_arg(0);
 
-        if (entity_name_string_pointer_any_value == nullptr)
+        if (!entity_name_string_pointer_any_value)
         {
-            std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: `entity_string` not found!\n";
-            return nullptr;
+            std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: there is no argument 0.\n";
+            return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::string*>(entity_name_string_pointer_any_value->data) &&
-                !std::holds_alternative<const std::string*>(entity_name_string_pointer_any_value->data))
+        if (!std::holds_alternative<std::string*>((*entity_name_string_pointer_any_value).data) &&
+                !std::holds_alternative<const std::string*>((*entity_name_string_pointer_any_value).data))
         {
             std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: invalid datatype.\n";
             std::cerr << "Datatype should be either yli::data::Datatype::STD_STRING_POINTER or yli::data::Datatype::CONST_STD_STRING_POINTER\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         const std::string* const entity_string_pointer =
-            (std::holds_alternative<std::string*>(entity_name_string_pointer_any_value->data) ?
-             std::get<std::string*>(entity_name_string_pointer_any_value->data) :
-             std::get<const std::string*>(entity_name_string_pointer_any_value->data));
+            (std::holds_alternative<std::string*>((*entity_name_string_pointer_any_value).data) ?
+             std::get<std::string*>((*entity_name_string_pointer_any_value).data) :
+             std::get<const std::string*>((*entity_name_string_pointer_any_value).data));
 
         if (entity_string_pointer == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         const std::string entity_string = *entity_string_pointer;
@@ -636,14 +636,14 @@ namespace yli::snippets
 
         if (entity == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Object* const object = dynamic_cast<yli::ontology::Object*>(entity);
 
         if (object == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Entity* const old_species_entity = object->get_parent();
@@ -652,15 +652,15 @@ namespace yli::snippets
 
         if (old_species == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        std::shared_ptr<yli::data::AnyValue> any_value_species_string = callback_object->get_arg(1);
+        std::optional<yli::data::AnyValue> any_value_species_string = callback_object->get_arg(1);
 
-        if (any_value_species_string == nullptr)
+        if (!any_value_species_string)
         {
-            std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: `species_string` not found!\n";
-            return nullptr;
+            std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: there is no argument 1.\n";
+            return std::nullopt;
         }
 
         if (!std::holds_alternative<std::string*>(any_value_species_string->data) &&
@@ -668,7 +668,7 @@ namespace yli::snippets
         {
             std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: invalid datatype.\n";
             std::cerr << "Datatype should be either yli::data::Datatype::STD_STRING_POINTER or yli::data::Datatype::CONST_STD_STRING_POINTER\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         const std::string* const new_species_string_pointer =
@@ -678,7 +678,7 @@ namespace yli::snippets
 
         if (new_species_string_pointer == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         const std::string new_species_string = *new_species_string_pointer;
@@ -687,23 +687,23 @@ namespace yli::snippets
 
         if (new_species_entity == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Species* const new_species = dynamic_cast<yli::ontology::Species*>(new_species_entity);
 
         if (new_species == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (old_species == new_species)
         {
             // New parent is the same as old parent, no changes needed.
-            return nullptr;
+            return std::nullopt;
         }
 
         object->bind_to_new_species_parent(new_species);
-        return nullptr;
+        return std::nullopt;
     }
 }

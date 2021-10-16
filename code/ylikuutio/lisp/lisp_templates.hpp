@@ -18,6 +18,7 @@
 #ifndef __YLIKUUTIO_LISP_LISP_TEMPLATES_HPP_INCLUDED
 #define __YLIKUUTIO_LISP_LISP_TEMPLATES_HPP_INCLUDED
 
+#include "code/ylikuutio/data/wrap.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
@@ -39,450 +40,474 @@ namespace yli::lisp
     // Templates for processing Lisp function arguments.
 
     template<typename T1>
-        bool convert_string_to_value_and_advance_index(
+        std::optional<typename yli::data::WrapAllButStrings<T1>::type> convert_string_to_value_and_advance_index(
                 yli::ontology::Universe* /* universe */,
                 yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& /* context */,
                 const std::vector<std::string>& /* parameter_vector */,
-                std::size_t& /* parameter_i */,
-                T1& /* value */)
+                std::size_t& /* parameter_i */)
         {
             static_assert(sizeof(T1) == -1, "You need to specialize this `yli::data::convert_string_to_value_and_advance_index` for the type!");
-            return false;
+            throw;
         }
 
     template<>
-        bool convert_string_to_value_and_advance_index(
+        std::optional<typename yli::data::WrapAllButStrings<bool>::type> convert_string_to_value_and_advance_index<bool>(
                 yli::ontology::Universe* /* universe */,
                 yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& /* context */,
                 const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i,
-                bool& value)
+                std::size_t& parameter_i)
         {
             if (parameter_i >= parameter_vector.size()) // No argument left to consume.
             {
-                return false;
+                return std::nullopt;
             }
 
-            const std::string my_string = parameter_vector.at(parameter_i++);
+            const std::string& my_string = parameter_vector.at(parameter_i++);
 
             if (my_string == "true") // Ylikuutio is case sensitive!
             {
-                value = true;
-                return true;
+                return true; // OK, true.
             }
             else if (my_string == "false") // Ylikuutio is case sensitive!
             {
-                value = false;
-                return true;
+                return false; // OK, false.
             }
             else
             {
-                return false;
+                return std::nullopt;
             }
         }
 
     template<>
-        bool convert_string_to_value_and_advance_index(
+        std::optional<typename yli::data::WrapAllButStrings<const char&>::type> convert_string_to_value_and_advance_index<const char&>(
                 yli::ontology::Universe* /* universe */,
                 yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& /* context */,
                 const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i,
-                char& value)
+                std::size_t& parameter_i)
         {
             if (parameter_i >= parameter_vector.size()) // No argument left to consume.
             {
-                return false;
+                return std::nullopt;
             }
 
-            const std::string my_string = parameter_vector.at(parameter_i++);
+            const std::string& my_string = parameter_vector.at(parameter_i++);
 
             if (my_string.size() == 1)
             {
-                value = my_string[0];
-                return true;
+                return yli::data::WrapAllButStrings<const char&>::type(my_string[0]);
             }
 
-            return false;
+            return std::nullopt;
         }
 
     template<>
-        bool convert_string_to_value_and_advance_index(
+        std::optional<typename yli::data::WrapAllButStrings<float>::type> convert_string_to_value_and_advance_index<float>(
                 yli::ontology::Universe* /* universe */,
                 yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& /* context */,
                 const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i,
-                float& value)
+                std::size_t& parameter_i)
         {
             if (parameter_i >= parameter_vector.size()) // No argument left to consume.
             {
-                return false;
+                return std::nullopt;
             }
 
-            const std::string my_string = parameter_vector.at(parameter_i++);
+            const std::string& my_string = parameter_vector.at(parameter_i++);
 
             if (!yli::string::check_if_float_string(my_string))
             {
-                return false;
+                return std::nullopt;
             }
 
+            float value;
             std::stringstream my_stringstream;
             my_stringstream << my_string;
             my_stringstream >> value;
-            return true;
+            return yli::data::WrapAllButStrings<float>::type(value);
         }
 
     template<>
-        bool convert_string_to_value_and_advance_index(
+        std::optional<typename yli::data::WrapAllButStrings<double>::type> convert_string_to_value_and_advance_index<double>(
                 yli::ontology::Universe* /* universe */,
                 yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& /* context */,
                 const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i,
-                double& value)
+                std::size_t& parameter_i)
         {
             if (parameter_i >= parameter_vector.size()) // No argument left to consume.
             {
-                return false;
+                return std::nullopt;
             }
 
-            const std::string my_string = parameter_vector.at(parameter_i++);
+            const std::string& my_string = parameter_vector.at(parameter_i++);
 
             if (!yli::string::check_if_double_string(my_string))
             {
-                return false;
+                return std::nullopt;
             }
 
+            double value;
             std::stringstream my_stringstream;
             my_stringstream << my_string;
             my_stringstream >> value;
-            return true;
+            return yli::data::WrapAllButStrings<double>::type(value);
         }
 
     template<>
-        bool convert_string_to_value_and_advance_index(
+        std::optional<typename yli::data::WrapAllButStrings<int32_t>::type> convert_string_to_value_and_advance_index<int32_t>(
                 yli::ontology::Universe* /* universe */,
                 yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& /* context */,
                 const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i,
-                int32_t& value)
+                std::size_t& parameter_i)
         {
             if (parameter_i >= parameter_vector.size()) // No argument left to consume.
             {
-                return false;
+                return std::nullopt;
             }
 
-            const std::string my_string = parameter_vector.at(parameter_i++);
+            const std::string& my_string = parameter_vector.at(parameter_i++);
 
             if (!yli::string::check_if_signed_integer_string(my_string))
             {
-                return false;
+                return std::nullopt;
             }
 
+            int32_t value;
             std::stringstream my_stringstream;
             my_stringstream << my_string;
             my_stringstream >> value;
-            return true;
+            return yli::data::WrapAllButStrings<int32_t>::type(value);
         }
 
     template<>
-        bool convert_string_to_value_and_advance_index(
+        std::optional<typename yli::data::WrapAllButStrings<uint32_t>::type> convert_string_to_value_and_advance_index<uint32_t>(
                 yli::ontology::Universe* /* universe */,
                 yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& /* context */,
                 const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i,
-                uint32_t& value)
+                std::size_t& parameter_i)
         {
             if (parameter_i >= parameter_vector.size()) // No argument left to consume.
             {
-                return false;
+                return std::nullopt;
             }
 
-            const std::string my_string = parameter_vector.at(parameter_i++);
+            const std::string& my_string = parameter_vector.at(parameter_i++);
 
             if (!yli::string::check_if_unsigned_integer_string(my_string))
             {
-                return false;
+                return std::nullopt;
             }
 
+            uint32_t value;
             std::stringstream my_stringstream;
             my_stringstream << my_string;
             my_stringstream >> value;
-            return true;
+            return yli::data::WrapAllButStrings<uint32_t>::type(value);
         }
 
     template<>
-        bool convert_string_to_value_and_advance_index(
+        std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Entity&>::type> convert_string_to_value_and_advance_index<yli::ontology::Entity&>(
                 yli::ontology::Universe* universe,
                 yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i,
-                yli::ontology::Entity*& value)
+                std::size_t& parameter_i)
         {
             if (parameter_i >= parameter_vector.size()) // No argument left to consume.
             {
-                return false;
+                return std::nullopt;
             }
 
-            const std::string my_string = parameter_vector.at(parameter_i++);
+            const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            value = universe->get_entity(my_string);
+            yli::ontology::Entity* const value = universe->get_entity(my_string);
 
             if (value == nullptr)
             {
-                return false;
+                return std::nullopt;
             }
 
             context = value;
-            return true;
+            return yli::data::WrapAllButStrings<yli::ontology::Entity&>::type(*value);
         }
 
     template<>
-        bool convert_string_to_value_and_advance_index(
+        std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Entity*>::type> convert_string_to_value_and_advance_index<yli::ontology::Entity*>(
+                yli::ontology::Universe* universe,
+                yli::ontology::Console* /* console */,
+                yli::ontology::Entity*& context,
+                const std::vector<std::string>& parameter_vector,
+                std::size_t& parameter_i)
+        {
+            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
+            {
+                return std::nullopt;
+            }
+
+            const std::string& my_string = parameter_vector.at(parameter_i++);
+
+            yli::ontology::Entity* const value = universe->get_entity(my_string);
+
+            if (value == nullptr)
+            {
+                return std::nullopt;
+            }
+
+            context = value;
+            return yli::data::WrapAllButStrings<yli::ontology::Entity*>::type(value);
+        }
+
+    template<>
+        std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Universe&>::type> convert_string_to_value_and_advance_index<yli::ontology::Universe&>(
                 yli::ontology::Universe* universe,
                 yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& /* parameter_vector */,
-                std::size_t& /* parameter_i */,
-                yli::ontology::Universe*& value)
+                std::size_t& /* parameter_i */)
+        {
+            // Note: this specialization returns the `yli::ontology::Universe*` provided as an argument,
+            // and does not do a lookup.
+
+            context = universe;
+            return yli::data::WrapAllButStrings<yli::ontology::Universe&>::type(*universe);
+        }
+
+    template<>
+        std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Universe*>::type> convert_string_to_value_and_advance_index<yli::ontology::Universe*>(
+                yli::ontology::Universe* universe,
+                yli::ontology::Console* /* console */,
+                yli::ontology::Entity*& context,
+                const std::vector<std::string>& /* parameter_vector */,
+                std::size_t& /* parameter_i */)
         {
             // Note: this specialization returns the `yli::ontology::Universe*` provided as an argument,
             // and does not do a lookup.
 
             if (universe == nullptr)
             {
-                return false;
+                return std::nullopt;
             }
 
-            value = universe;
             context = universe;
-            return true;
+            return yli::data::WrapAllButStrings<yli::ontology::Universe*>::type(universe);
         }
 
     template<>
-        bool convert_string_to_value_and_advance_index(
+        std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Console&>::type> convert_string_to_value_and_advance_index<yli::ontology::Console&>(
                 yli::ontology::Universe* /* universe */,
                 yli::ontology::Console* console,
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& /* parameter_vector */,
-                std::size_t& /* parameter_i */,
-                yli::ontology::Console*& value)
+                std::size_t& /* parameter_i */)
         {
             // Note: this specialization returns the `yli::ontology::Console*` provided as an argument,
             // and does not do a lookup.
 
             if (console == nullptr)
             {
-                return false;
+                return std::nullopt;
             }
 
-            value = console;
             context = console;
-            return true;
+            return yli::data::WrapAllButStrings<yli::ontology::Console&>::type(*console);
         }
 
     template<>
-        bool convert_string_to_value_and_advance_index(
+        std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Console*>::type> convert_string_to_value_and_advance_index<yli::ontology::Console*>(
+                yli::ontology::Universe* /* universe */,
+                yli::ontology::Console* console,
+                yli::ontology::Entity*& context,
+                const std::vector<std::string>& /* parameter_vector */,
+                std::size_t& /* parameter_i */)
+        {
+            // Note: this specialization returns the `yli::ontology::Console*` provided as an argument,
+            // and does not do a lookup.
+
+            if (console == nullptr)
+            {
+                return std::nullopt;
+            }
+
+            context = console;
+            return yli::data::WrapAllButStrings<yli::ontology::Console*>::type(console);
+        }
+
+    template<>
+        std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Variable&>::type> convert_string_to_value_and_advance_index<yli::ontology::Variable&>(
                 yli::ontology::Universe* universe,
                 yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i,
-                yli::ontology::Variable*& value)
+                std::size_t& parameter_i)
         {
             if (parameter_i >= parameter_vector.size()) // No argument left to consume.
             {
-                return false;
+                return std::nullopt;
             }
 
-            const std::string my_string = parameter_vector.at(parameter_i++);
+            const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            value = dynamic_cast<yli::ontology::Variable*>(universe->get_entity(my_string));
+            yli::ontology::Variable* const value = dynamic_cast<yli::ontology::Variable*>(universe->get_entity(my_string));
 
             if (value == nullptr)
             {
-                return false;
+                return std::nullopt;
             }
 
             context = value;
-            return true;
+            return yli::data::WrapAllButStrings<yli::ontology::Variable&>::type(*value);
         }
 
     template<>
-        bool convert_string_to_value_and_advance_index(
+        std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Variable*>::type> convert_string_to_value_and_advance_index<yli::ontology::Variable*>(
                 yli::ontology::Universe* universe,
                 yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i,
-                const yli::ontology::Variable*& value)
+                std::size_t& parameter_i)
         {
             if (parameter_i >= parameter_vector.size()) // No argument left to consume.
             {
-                return false;
+                return std::nullopt;
             }
 
-            const std::string my_string = parameter_vector.at(parameter_i++);
+            const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            value = dynamic_cast<yli::ontology::Variable*>(universe->get_entity(my_string));
+            yli::ontology::Variable* const value = dynamic_cast<yli::ontology::Variable*>(universe->get_entity(my_string));
 
             if (value == nullptr)
             {
-                return false;
-            }
-
-            context = const_cast<yli::ontology::Variable*>(value);
-            return true;
-        }
-
-    template<>
-        bool convert_string_to_value_and_advance_index(
-                yli::ontology::Universe* universe,
-                yli::ontology::Console* /* console */,
-                yli::ontology::Entity*& context,
-                const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i,
-                yli::ontology::Species*& value)
-        {
-            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
-            {
-                return false;
-            }
-
-            const std::string my_string = parameter_vector.at(parameter_i++);
-
-            value = dynamic_cast<yli::ontology::Species*>(universe->get_entity(my_string));
-
-            if (value == nullptr)
-            {
-                return false;
+                return std::nullopt;
             }
 
             context = value;
-            return true;
+            return yli::data::WrapAllButStrings<yli::ontology::Variable*>::type(value);
         }
 
     template<>
-        bool convert_string_to_value_and_advance_index(
+        std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Species&>::type> convert_string_to_value_and_advance_index<yli::ontology::Species&>(
                 yli::ontology::Universe* universe,
                 yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i,
-                const yli::ontology::Species*& value)
+                std::size_t& parameter_i)
         {
             if (parameter_i >= parameter_vector.size()) // No argument left to consume.
             {
-                return false;
+                return std::nullopt;
             }
 
-            const std::string my_string = parameter_vector.at(parameter_i++);
+            const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            value = dynamic_cast<yli::ontology::Species*>(universe->get_entity(my_string));
+            yli::ontology::Species* const value = dynamic_cast<yli::ontology::Species*>(universe->get_entity(my_string));
 
             if (value == nullptr)
             {
-                return false;
-            }
-
-            context = const_cast<yli::ontology::Species*>(value);
-            return true;
-        }
-
-    template<>
-        bool convert_string_to_value_and_advance_index(
-                yli::ontology::Universe* universe,
-                yli::ontology::Console* /* console */,
-                yli::ontology::Entity*& context,
-                const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i,
-                yli::ontology::Symbiosis*& value)
-        {
-            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
-            {
-                return false;
-            }
-
-            const std::string my_string = parameter_vector.at(parameter_i++);
-
-            value = dynamic_cast<yli::ontology::Symbiosis*>(universe->get_entity(my_string));
-
-            if (value == nullptr)
-            {
-                return false;
+                return std::nullopt;
             }
 
             context = value;
-            return true;
+            return yli::data::WrapAllButStrings<yli::ontology::Species&>::type(*value);
         }
 
     template<>
-        bool convert_string_to_value_and_advance_index(
+        std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Species*>::type> convert_string_to_value_and_advance_index<yli::ontology::Species*>(
                 yli::ontology::Universe* universe,
                 yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& context,
                 const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i,
-                const yli::ontology::Symbiosis*& value)
+                std::size_t& parameter_i)
         {
             if (parameter_i >= parameter_vector.size()) // No argument left to consume.
             {
-                return false;
+                return std::nullopt;
             }
 
-            const std::string my_string = parameter_vector.at(parameter_i++);
+            const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            value = dynamic_cast<yli::ontology::Symbiosis*>(universe->get_entity(my_string));
+            yli::ontology::Species* const value = dynamic_cast<yli::ontology::Species*>(universe->get_entity(my_string));
 
             if (value == nullptr)
             {
-                return false;
+                return std::nullopt;
             }
 
-            context = const_cast<yli::ontology::Symbiosis*>(value);
-            return true;
+            context = value;
+            return yli::data::WrapAllButStrings<yli::ontology::Species*>::type(value);
         }
 
     template<>
-        bool convert_string_to_value_and_advance_index(
+        std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Symbiosis&>::type> convert_string_to_value_and_advance_index<yli::ontology::Symbiosis&>(
+                yli::ontology::Universe* universe,
+                yli::ontology::Console* /* console */,
+                yli::ontology::Entity*& context,
+                const std::vector<std::string>& parameter_vector,
+                std::size_t& parameter_i)
+        {
+            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
+            {
+                return std::nullopt;
+            }
+
+            const std::string& my_string = parameter_vector.at(parameter_i++);
+
+            yli::ontology::Symbiosis* const value = dynamic_cast<yli::ontology::Symbiosis*>(universe->get_entity(my_string));
+
+            if (value == nullptr)
+            {
+                return std::nullopt;
+            }
+
+            context = value;
+            return yli::data::WrapAllButStrings<yli::ontology::Symbiosis&>::type(*value);
+        }
+
+    template<>
+        std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Symbiosis*>::type> convert_string_to_value_and_advance_index<yli::ontology::Symbiosis*>(
+                yli::ontology::Universe* universe,
+                yli::ontology::Console* /* console */,
+                yli::ontology::Entity*& context,
+                const std::vector<std::string>& parameter_vector,
+                std::size_t& parameter_i)
+        {
+            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
+            {
+                return std::nullopt;
+            }
+
+            const std::string& my_string = parameter_vector.at(parameter_i++);
+
+            yli::ontology::Symbiosis* const value = dynamic_cast<yli::ontology::Symbiosis*>(universe->get_entity(my_string));
+
+            if (value == nullptr)
+            {
+                return std::nullopt;
+            }
+
+            context = value;
+            return yli::data::WrapAllButStrings<yli::ontology::Symbiosis*>::type(value);
+        }
+
+    template<>
+        std::optional<typename yli::data::WrapAllButStrings<const std::string&>::type> convert_string_to_value_and_advance_index<const std::string&>(
                 yli::ontology::Universe* /* universe */,
                 yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& /* context */,
                 const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i,
-                std::shared_ptr<std::string>& value)
+                std::size_t& parameter_i)
         {
             if (parameter_i >= parameter_vector.size()) // No argument left to consume.
             {
-                return false;
+                return std::nullopt;
             }
 
-            value = std::make_shared<std::string>(parameter_vector.at(parameter_i++));
-            return true;
-        }
-
-    template<>
-        bool convert_string_to_value_and_advance_index(
-                yli::ontology::Universe* /* universe */,
-                yli::ontology::Console* /* console */,
-                yli::ontology::Entity*& /* context */,
-                const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i,
-                std::string& value)
-        {
-            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
-            {
-                return false;
-            }
-
-            value = parameter_vector.at(parameter_i++);
-            return true;
+            return { parameter_vector.at(parameter_i++) };
         }
 }
 

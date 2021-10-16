@@ -19,7 +19,7 @@
 #define __AJOKKI_AJOKKI_CONSOLE_CALLBACKS_HPP_INCLUDED
 
 // Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 
 namespace yli::data
 {
@@ -34,7 +34,7 @@ namespace yli::ontology
 
 namespace ajokki
 {
-    std::shared_ptr<yli::data::AnyValue> version(
+    std::optional<yli::data::AnyValue> version(
             yli::ontology::Universe* const universe,
             yli::ontology::Console* const console);
 }

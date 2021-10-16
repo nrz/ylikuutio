@@ -60,7 +60,6 @@
 
 // Include standard headers
 #include <iostream>  // std::cout, std::cin, std::cerr
-#include <memory>    // std::make_shared, std::shared_ptr
 #include <string>    // std::string
 #include <variant>   // std::holds_alternative, std::variant
 
@@ -82,9 +81,9 @@ namespace yli::ontology
         return this->universe;
     }
 
-    yli::ontology::Entity* EntityFactory::create_variable(const yli::ontology::VariableStruct& variable_struct) const
+    yli::ontology::Entity* EntityFactory::create_variable(const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value) const
     {
-        yli::ontology::Entity* variable_entity = new yli::ontology::Variable(this->universe, variable_struct);
+        yli::ontology::Entity* variable_entity = new yli::ontology::Variable(this->universe, variable_struct, any_value);
 
         if (this->universe == variable_struct.parent)
         {

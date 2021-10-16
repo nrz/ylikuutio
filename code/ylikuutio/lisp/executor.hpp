@@ -19,7 +19,7 @@
 #define __YLIKUUTIO_LISP_EXECUTOR_HPP_INCLUDED
 
 // Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <string> // std::string, std::getline
 #include <vector> // std::vector
 
@@ -35,7 +35,7 @@ namespace yli::ontology
 
 namespace yli::lisp
 {
-    std::shared_ptr<yli::data::AnyValue> execute(
+    std::optional<yli::data::AnyValue> execute(
             const yli::ontology::Console* const console,
             const std::string& command,
             const std::vector<std::string>& parameter_vector);

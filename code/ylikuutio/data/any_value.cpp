@@ -36,6 +36,7 @@
 #include <cstddef>  // std::size_t
 #include <ios>      // std::boolalpha, std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
@@ -69,6 +70,16 @@ namespace yli::ontology
 
 namespace yli::data
 {
+    bool AnyValue::operator==(const yli::data::AnyValue& rhs) const
+    {
+        return this->data == rhs.data;
+    }
+
+    bool AnyValue::operator!=(const yli::data::AnyValue& rhs) const
+    {
+        return !this->operator==(rhs);
+    }
+
     std::string AnyValue::get_datatype() const
     {
         if (std::holds_alternative<bool>(this->data))
@@ -1202,6 +1213,16 @@ namespace yli::data
     {
         // copy constructor.
         this->data = original.data;
+    }
+
+    AnyValue::AnyValue(const std::optional<yli::data::AnyValue> original)
+    {
+        // constructor for optional `AnyValue`.
+
+        if (original)
+        {
+            this->data = (*original).data;
+        }
     }
 
     AnyValue::AnyValue()

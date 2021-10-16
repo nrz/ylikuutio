@@ -18,19 +18,16 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_READ_CALLBACK_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_READ_CALLBACK_HPP_INCLUDED
 
-// Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
+#include "code/ylikuutio/data/any_value.hpp"
 
-namespace yli::data
-{
-    class AnyValue;
-}
+// Include standard headers
+#include <optional> // std::optional
 
 namespace yli::ontology
 {
     class Entity;
 }
 
-typedef std::shared_ptr<yli::data::AnyValue> (*ReadCallback) (yli::ontology::Entity* entity);
+typedef std::optional<yli::data::AnyValue> (*ReadCallback) (yli::ontology::Entity* entity);
 
 #endif

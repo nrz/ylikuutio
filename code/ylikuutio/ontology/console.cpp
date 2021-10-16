@@ -32,7 +32,7 @@
 #include <cstddef>       // std::size_t
 #include <iterator>      // std::back_inserter
 #include <list>          // std::list
-#include <memory>        // std::make_shared, std::shared_ptr
+#include <optional>      // std::optional
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <vector>        // std::vector
@@ -563,7 +563,7 @@ namespace yli::ontology
 
     // Console command callbacks begin here.
 
-    std::shared_ptr<yli::data::AnyValue> Console::clear(
+    std::optional<yli::data::AnyValue> Console::clear(
             yli::ontology::Console* const console)
     {
         if (console != nullptr)
@@ -578,7 +578,7 @@ namespace yli::ontology
         }
 
         const uint32_t clear_console_magic_number = CLEAR_CONSOLE_MAGIC_NUMBER;
-        return std::make_shared<yli::data::AnyValue>(clear_console_magic_number);
+        return yli::data::AnyValue(clear_console_magic_number);
     }
 
     // Public callbacks end here.
