@@ -292,7 +292,7 @@ namespace yli::string
 
     int32_t extract_unicode_value_from_string(const char*& unicode_char_pointer);
 
-    template<class Alloc, template<class, class> class T1>
+    template<typename Alloc, template<typename, typename> typename T1>
         std::string convert_char_container_to_std_string(
                 const T1<char, Alloc>& char_container,
                 const std::size_t first_line_length,
@@ -317,7 +317,7 @@ namespace yli::string
             return my_string;
         }
 
-    template<class Alloc, template<class, class> class T1>
+    template<typename Alloc, template<typename, typename> typename T1>
         std::vector<std::string> convert_char_container_to_std_vector_std_string(
                 const T1<char, Alloc>& char_container,
                 const std::size_t line_length)

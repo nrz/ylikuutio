@@ -16,33 +16,29 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "ajokki_console_callbacks.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 
 // Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <vector>   // std::vector
 
-namespace yli::data
-{
-    class AnyValue;
-}
-
 namespace ajokki
 {
-    std::shared_ptr<yli::data::AnyValue> version(
+    std::optional<yli::data::AnyValue> version(
             yli::ontology::Universe* const universe,
             yli::ontology::Console* const console)
     {
         if (universe == nullptr || console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         std::stringstream version_stringstream;
         version_stringstream << "Ajokki " << universe->version << " / Ylikuutio " << universe->version;
         console->print_text(version_stringstream.str());
-        return nullptr;
+        return std::nullopt;
     }
 }

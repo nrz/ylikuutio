@@ -19,7 +19,7 @@
 #define __YLIKUUTIO_CONSOLE_INPUT_PARAMETERS_TO_ANY_VALUE_CALLBACK_WITH_CONSOLE_HPP_INCLUDED
 
 // Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <vector>   // std::vector
 
 namespace yli::callback
@@ -39,7 +39,7 @@ namespace yli::ontology
     class Console;
 }
 
-typedef std::shared_ptr<yli::data::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
+typedef std::optional<yli::data::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
         yli::callback::CallbackEngine*,
         yli::callback::CallbackObject*,
         std::vector<yli::callback::CallbackParameter*>&,

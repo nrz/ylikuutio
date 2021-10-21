@@ -25,16 +25,12 @@
 #include "generic_lisp_function_overload.hpp"
 #include "entity_factory.hpp"
 #include "lisp_function_struct.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <functional> // std::function
-#include <memory>     // std::make_shared, std::shared_ptr
+#include <optional>   // std::optional
 #include <string>     // std::string
-
-namespace yli::data
-{
-    class AnyValue;
-}
 
 namespace yli::ontology
 {
@@ -42,11 +38,11 @@ namespace yli::ontology
     class Universe;
     class ParentModule;
 
-    template<class... Args>
+    template<typename... Args>
         yli::ontology::GenericLispFunctionOverload* create_lisp_function_overload(
                 const std::string& name,
                 yli::ontology::Console* const console,
-                std::function<std::shared_ptr<yli::data::AnyValue>(Args...)> callback)
+                std::function<std::optional<yli::data::AnyValue>(Args...)> callback)
         {
             if (console == nullptr)
             {

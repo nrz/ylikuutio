@@ -15,27 +15,26 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_FILE_FILE_WRITER_HPP_INCLUDED
-#define __YLIKUUTIO_FILE_FILE_WRITER_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_LISP_FUNCTION_ARG_EXTRACTOR_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_LISP_FUNCTION_ARG_EXTRACTOR_HPP_INCLUDED
+
+#include "function_arg_extractor.hpp"
+#include "code/ylikuutio/data/wrap.hpp"
 
 // Include standard headers
-#include <fstream>  // std::ifstream
-#include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <string>   // std::string
-#include <vector>   // std::vector
+#include <functional> // std::function
+#include <tuple>      // std::tuple
 
-namespace yli::file
+namespace yli::lisp
 {
-    template<typename T1>
-        void binary_write(const std::vector<T1>& data, const std::string& file_path)
-        {
-            std::cout << "Writing binary file " << file_path << "\n";
+    template<typename F>
+        struct FunctionArgExtractor;
 
-            std::ofstream file_stream(file_path, std::ios::out | std::ios::binary);
-            file_stream.write((char*) &data[0], data.size() * sizeof(T1));
-            file_stream.close();
-        }
+    template<typename R, typename... Args>
+        struct FunctionArgExtractor<std::function<R(Args...)>>
+        {
+            using ArgTuple = std::tuple<typename yli::data::Wrap<Args>::type...>;
+        };
 }
 
 #endif

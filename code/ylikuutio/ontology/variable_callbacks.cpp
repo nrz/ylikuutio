@@ -31,7 +31,6 @@
 // Include standard headers
 #include <stdint.h>      // uint32_t etc.
 #include <limits>        // std::numeric_limits
-#include <memory>        // std::make_shared, std::shared_ptr
 #include <variant>       // std::holds_alternative, std::variant
 
 namespace yli::data
@@ -41,54 +40,54 @@ namespace yli::data
 
 namespace yli::ontology
 {
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_planet_radius(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> Variable::activate_planet_radius(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Species* const species = dynamic_cast<yli::ontology::Species*>(entity);
 
         if (species == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        std::shared_ptr<yli::data::AnyValue> planet_radius_any_value = variable->variable_value;
+        const yli::data::AnyValue& planet_radius_any_value = variable->variable_value;
 
-        if (planet_radius_any_value == nullptr || !std::holds_alternative<float>(planet_radius_any_value->data))
+        if (!std::holds_alternative<float>(planet_radius_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        species->mesh.planet_radius = std::get<float>(planet_radius_any_value->data);
+        species->mesh.planet_radius = std::get<float>(planet_radius_any_value.data);
 
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_window_width(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> Variable::activate_window_width(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         // window width.
-        std::shared_ptr<yli::data::AnyValue> window_width_any_value = variable->variable_value;
+        const yli::data::AnyValue& window_width_any_value = variable->variable_value;
 
-        if (window_width_any_value == nullptr || !std::holds_alternative<uint32_t>(window_width_any_value->data))
+        if (!std::holds_alternative<uint32_t>(window_width_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        const uint32_t window_width = std::get<uint32_t>(window_width_any_value->data);
+        const uint32_t window_width = std::get<uint32_t>(window_width_any_value.data);
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
         if (universe == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         universe->set_window_width(window_width);
@@ -101,31 +100,31 @@ namespace yli::ontology
             yli::sdl::set_window_size(universe->get_window(), static_cast<int>(window_width), static_cast<int>(window_height));
         }
 
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_window_height(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> Variable::activate_window_height(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         // window height.
-        std::shared_ptr<yli::data::AnyValue> window_height_any_value = variable->variable_value;
+        const yli::data::AnyValue& window_height_any_value = variable->variable_value;
 
-        if (window_height_any_value == nullptr || !std::holds_alternative<uint32_t>(window_height_any_value->data))
+        if (!std::holds_alternative<uint32_t>(window_height_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        const uint32_t window_height = std::get<uint32_t>(window_height_any_value->data);
+        const uint32_t window_height = std::get<uint32_t>(window_height_any_value.data);
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
         if (universe == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         universe->set_window_height(window_height);
@@ -138,72 +137,72 @@ namespace yli::ontology
             yli::sdl::set_window_size(universe->get_window(), static_cast<int>(window_width), static_cast<int>(window_height));
         }
 
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_framebuffer_width(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> Variable::activate_framebuffer_width(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         // framebuffer width.
-        std::shared_ptr<yli::data::AnyValue> framebuffer_width_any_value = variable->variable_value;
+        const yli::data::AnyValue& framebuffer_width_any_value = variable->variable_value;
 
-        if (framebuffer_width_any_value == nullptr || !std::holds_alternative<uint32_t>(framebuffer_width_any_value->data))
+        if (!std::holds_alternative<uint32_t>(framebuffer_width_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        const uint32_t framebuffer_width = std::get<uint32_t>(framebuffer_width_any_value->data);
+        const uint32_t framebuffer_width = std::get<uint32_t>(framebuffer_width_any_value.data);
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
         if (universe == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         universe->framebuffer_module.set_texture_width(framebuffer_width);
 
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_framebuffer_height(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> Variable::activate_framebuffer_height(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         // framebuffer height.
-        std::shared_ptr<yli::data::AnyValue> framebuffer_height_any_value = variable->variable_value;
+        const yli::data::AnyValue& framebuffer_height_any_value = variable->variable_value;
 
-        if (framebuffer_height_any_value == nullptr || !std::holds_alternative<uint32_t>(framebuffer_height_any_value->data))
+        if (!std::holds_alternative<uint32_t>(framebuffer_height_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        const uint32_t framebuffer_height = std::get<uint32_t>(framebuffer_height_any_value->data);
+        const uint32_t framebuffer_height = std::get<uint32_t>(framebuffer_height_any_value.data);
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
         if (universe == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         universe->framebuffer_module.set_texture_height(framebuffer_height);
 
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_background_color(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> Variable::activate_background_color(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (!entity->has_variable("red") ||
@@ -211,48 +210,48 @@ namespace yli::ontology
                 !entity->has_variable("blue") ||
                 !entity->has_variable("alpha"))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         // red.
-        std::shared_ptr<yli::data::AnyValue> red_any_value = entity->get("red")->variable_value;
+        const yli::data::AnyValue& red_any_value = entity->get("red")->variable_value;
 
-        if (red_any_value == nullptr || !std::holds_alternative<float>(red_any_value->data))
+        if (!std::holds_alternative<float>(red_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        const float red = std::get<float>(red_any_value->data);
+        const float red = std::get<float>(red_any_value.data);
 
         // green.
-        std::shared_ptr<yli::data::AnyValue> green_any_value = entity->get("green")->variable_value;
+        const yli::data::AnyValue& green_any_value = entity->get("green")->variable_value;
 
-        if (green_any_value == nullptr || !std::holds_alternative<float>(green_any_value->data))
+        if (!std::holds_alternative<float>(green_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        const float green = std::get<float>(green_any_value->data);
+        const float green = std::get<float>(green_any_value.data);
 
         // blue.
-        std::shared_ptr<yli::data::AnyValue> blue_any_value = entity->get("blue")->variable_value;
+        const yli::data::AnyValue& blue_any_value = entity->get("blue")->variable_value;
 
-        if (blue_any_value == nullptr || !std::holds_alternative<float>(blue_any_value->data))
+        if (!std::holds_alternative<float>(blue_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        const float blue = std::get<float>(blue_any_value->data);
+        const float blue = std::get<float>(blue_any_value.data);
 
         // alpha.
-        std::shared_ptr<yli::data::AnyValue> alpha_any_value = entity->get("alpha")->variable_value;
+        const yli::data::AnyValue& alpha_any_value = entity->get("alpha")->variable_value;
 
-        if (alpha_any_value == nullptr || !std::holds_alternative<float>(alpha_any_value->data))
+        if (!std::holds_alternative<float>(alpha_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        const float alpha = std::get<float>(alpha_any_value->data);
+        const float alpha = std::get<float>(alpha_any_value.data);
 
         yli::opengl::set_background_color(red, green, blue, alpha);
 
@@ -260,7 +259,7 @@ namespace yli::ontology
 
         if (universe == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         universe->background_red = red;
@@ -268,309 +267,309 @@ namespace yli::ontology
         universe->background_blue = blue;
         universe->background_alpha = alpha;
 
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_wireframe(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> Variable::activate_wireframe(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        std::shared_ptr<yli::data::AnyValue> wireframe_any_value = variable->variable_value;
+        const yli::data::AnyValue& wireframe_any_value = variable->variable_value;
 
-        if (wireframe_any_value == nullptr || !std::holds_alternative<bool>(wireframe_any_value->data))
+        if (!std::holds_alternative<bool>(wireframe_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        yli::opengl::set_wireframe(std::get<bool>(wireframe_any_value->data));
-        return nullptr;
+        yli::opengl::set_wireframe(std::get<bool>(wireframe_any_value.data));
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_speed(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> Variable::activate_speed(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
         if (movable != nullptr)
         {
-            std::shared_ptr<yli::data::AnyValue> speed_any_value = variable->variable_value;
+            const yli::data::AnyValue& speed_any_value = variable->variable_value;
 
-            if (speed_any_value == nullptr || !std::holds_alternative<float>(speed_any_value->data))
+            if (!std::holds_alternative<float>(speed_any_value.data))
             {
-                return nullptr;
+                return std::nullopt;
             }
 
-            movable->speed = std::get<float>(speed_any_value->data);
-            return nullptr;
+            movable->speed = std::get<float>(speed_any_value.data);
+            return std::nullopt;
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
         if (universe == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        std::shared_ptr<yli::data::AnyValue> speed_any_value = variable->variable_value;
+        const yli::data::AnyValue& speed_any_value = variable->variable_value;
 
-        if (speed_any_value == nullptr || !std::holds_alternative<float>(speed_any_value->data))
+        if (!std::holds_alternative<float>(speed_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        universe->speed = std::get<float>(speed_any_value->data);
-        return nullptr;
+        universe->speed = std::get<float>(speed_any_value.data);
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_turbo_factor(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> Variable::activate_turbo_factor(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
         if (universe == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        std::shared_ptr<yli::data::AnyValue> turbo_factor_any_value = variable->variable_value;
+        const yli::data::AnyValue& turbo_factor_any_value = variable->variable_value;
 
-        if (turbo_factor_any_value == nullptr || !std::holds_alternative<float>(turbo_factor_any_value->data))
+        if (!std::holds_alternative<float>(turbo_factor_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        universe->turbo_factor = std::get<float>(turbo_factor_any_value->data);
-        return nullptr;
+        universe->turbo_factor = std::get<float>(turbo_factor_any_value.data);
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_twin_turbo_factor(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> Variable::activate_twin_turbo_factor(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
         if (universe == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        std::shared_ptr<yli::data::AnyValue> twin_turbo_factor_any_value = variable->variable_value;
+        const yli::data::AnyValue& twin_turbo_factor_any_value = variable->variable_value;
 
-        if (twin_turbo_factor_any_value == nullptr || !std::holds_alternative<float>(twin_turbo_factor_any_value->data))
+        if (!std::holds_alternative<float>(twin_turbo_factor_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        universe->twin_turbo_factor = std::get<float>(twin_turbo_factor_any_value->data);
-        return nullptr;
+        universe->twin_turbo_factor = std::get<float>(twin_turbo_factor_any_value.data);
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_mouse_speed(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> Variable::activate_mouse_speed(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
         if (universe == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        std::shared_ptr<yli::data::AnyValue> mouse_speed_any_value = variable->variable_value;
+        const yli::data::AnyValue& mouse_speed_any_value = variable->variable_value;
 
-        if (mouse_speed_any_value == nullptr || !std::holds_alternative<float>(mouse_speed_any_value->data))
+        if (!std::holds_alternative<float>(mouse_speed_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        universe->mouse_speed = std::get<float>(mouse_speed_any_value->data);
-        return nullptr;
+        universe->mouse_speed = std::get<float>(mouse_speed_any_value.data);
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_is_flight_mode_in_use(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> Variable::activate_is_flight_mode_in_use(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(entity);
 
         if (scene == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        std::shared_ptr<yli::data::AnyValue> is_flight_mode_in_use_any_value = variable->variable_value;
+        const yli::data::AnyValue& is_flight_mode_in_use_any_value = variable->variable_value;
 
-        if (is_flight_mode_in_use_any_value == nullptr || !std::holds_alternative<bool>(is_flight_mode_in_use_any_value->data))
+        if (!std::holds_alternative<bool>(is_flight_mode_in_use_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        scene->set_is_flight_mode_in_use(std::get<bool>(is_flight_mode_in_use_any_value->data));
-        return nullptr;
+        scene->set_is_flight_mode_in_use(std::get<bool>(is_flight_mode_in_use_any_value.data));
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_console_top_y(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> Variable::activate_console_top_y(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        std::shared_ptr<yli::data::AnyValue> console_top_y_any_value = variable->variable_value;
+        const yli::data::AnyValue& console_top_y_any_value = variable->variable_value;
 
-        if (console_top_y_any_value == nullptr || !std::holds_alternative<uint32_t>(console_top_y_any_value->data))
+        if (!std::holds_alternative<uint32_t>(console_top_y_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
         if (universe == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Console* const console = universe->get_active_console();
 
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        console->set_console_top_y(std::get<uint32_t>(console_top_y_any_value->data));
-        return nullptr;
+        console->set_console_top_y(std::get<uint32_t>(console_top_y_any_value.data));
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_console_bottom_y(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> Variable::activate_console_bottom_y(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        std::shared_ptr<yli::data::AnyValue> console_bottom_y_any_value = variable->variable_value;
+        const yli::data::AnyValue& console_bottom_y_any_value = variable->variable_value;
 
-        if (console_bottom_y_any_value == nullptr || !std::holds_alternative<uint32_t>(console_bottom_y_any_value->data))
+        if (!std::holds_alternative<uint32_t>(console_bottom_y_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
         if (universe == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Console* const console = universe->get_active_console();
 
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        console->set_console_bottom_y(std::get<uint32_t>(console_bottom_y_any_value->data));
-        return nullptr;
+        console->set_console_bottom_y(std::get<uint32_t>(console_bottom_y_any_value.data));
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_console_left_x(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> Variable::activate_console_left_x(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        std::shared_ptr<yli::data::AnyValue> console_left_x_any_value = variable->variable_value;
+        const yli::data::AnyValue& console_left_x_any_value = variable->variable_value;
 
-        if (console_left_x_any_value == nullptr || !std::holds_alternative<uint32_t>(console_left_x_any_value->data))
+        if (!std::holds_alternative<uint32_t>(console_left_x_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
         if (universe == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Console* const console = universe->get_active_console();
 
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        console->set_console_left_x(std::get<uint32_t>(console_left_x_any_value->data));
-        return nullptr;
+        console->set_console_left_x(std::get<uint32_t>(console_left_x_any_value.data));
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::activate_console_right_x(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> Variable::activate_console_right_x(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        std::shared_ptr<yli::data::AnyValue> console_right_x_any_value = variable->variable_value;
+        const yli::data::AnyValue& console_right_x_any_value = variable->variable_value;
 
-        if (console_right_x_any_value == nullptr || !std::holds_alternative<uint32_t>(console_right_x_any_value->data))
+        if (!std::holds_alternative<uint32_t>(console_right_x_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
         if (universe == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Console* const console = universe->get_active_console();
 
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        console->set_console_right_x(std::get<uint32_t>(console_right_x_any_value->data));
-        return nullptr;
+        console->set_console_right_x(std::get<uint32_t>(console_right_x_any_value.data));
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::read_is_flight_mode_in_use(yli::ontology::Entity* const entity)
+    std::optional<yli::data::AnyValue> Variable::read_is_flight_mode_in_use(yli::ontology::Entity* const entity)
     {
         if (entity == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(entity);
 
         if (scene == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        return std::make_shared<yli::data::AnyValue>(scene->get_is_flight_mode_in_use());
+        return yli::data::AnyValue(scene->get_is_flight_mode_in_use());
     }
 }

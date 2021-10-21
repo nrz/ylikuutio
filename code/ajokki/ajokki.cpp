@@ -447,7 +447,7 @@ namespace ajokki
                 yli::callback::CallbackEngine delete_suzanne_species_callback_engine(my_universe);
                 yli::callback::CallbackObject* const delete_suzanne_species_callback_object = delete_suzanne_species_callback_engine.create_callback_object(
                         &yli::snippets::delete_entity);
-                delete_suzanne_species_callback_object->create_callback_parameter("", std::make_shared<yli::data::AnyValue>(&suzanne_species_string), false);
+                delete_suzanne_species_callback_object->create_callback_parameter("", yli::data::AnyValue(&suzanne_species_string), false);
 
                 // Callback code for G: switch to grass material.
                 const std::string grass_material_string = "helsinki_east_downtown_grass_material";
@@ -456,11 +456,11 @@ namespace ajokki
                         &yli::snippets::switch_to_new_material);
                 switch_to_grass_material_callback_object->create_callback_parameter(
                         "",
-                        std::make_shared<yli::data::AnyValue>(&suzanne_species_string),
+                        yli::data::AnyValue(&suzanne_species_string),
                         false);
                 switch_to_grass_material_callback_object->create_callback_parameter(
                         "",
-                        std::make_shared<yli::data::AnyValue>(&grass_material_string),
+                        yli::data::AnyValue(&grass_material_string),
                         false);
 
                 // Callback code for O: switch to orange fur material.
@@ -470,11 +470,11 @@ namespace ajokki
                         &yli::snippets::switch_to_new_material);
                 switch_to_orange_fur_material_callback_object->create_callback_parameter(
                         "",
-                        std::make_shared<yli::data::AnyValue>(&suzanne_species_string),
+                        yli::data::AnyValue(&suzanne_species_string),
                         false);
                 switch_to_orange_fur_material_callback_object->create_callback_parameter(
                         "",
-                        std::make_shared<yli::data::AnyValue>(&orange_fur_material_string),
+                        yli::data::AnyValue(&orange_fur_material_string),
                         false);
 
                 // Callback code for P: switch to pink_geometric_tiles_material.
@@ -484,11 +484,11 @@ namespace ajokki
                         &yli::snippets::switch_to_new_material);
                 switch_to_pink_geometric_tiles_material_callback_object->create_callback_parameter(
                         "",
-                        std::make_shared<yli::data::AnyValue>(&suzanne_species_string),
+                        yli::data::AnyValue(&suzanne_species_string),
                         false);
                 switch_to_pink_geometric_tiles_material_callback_object->create_callback_parameter(
                         "",
-                        std::make_shared<yli::data::AnyValue>(&pink_geometric_tiles_material_string),
+                        yli::data::AnyValue(&pink_geometric_tiles_material_string),
                         false);
 
                 // Callback code for T: transform `suzanne2` into terrain.
@@ -497,15 +497,15 @@ namespace ajokki
                 yli::callback::CallbackEngine transform_into_terrain_callback_engine(my_universe);
                 yli::callback::CallbackObject* const transform_into_terrain_callback_object = transform_into_terrain_callback_engine.create_callback_object(
                         &yli::snippets::transform_into_new_species);
-                transform_into_terrain_callback_object->create_callback_parameter("", std::make_shared<yli::data::AnyValue>(&suzanne2_string), false);
-                transform_into_terrain_callback_object->create_callback_parameter("", std::make_shared<yli::data::AnyValue>(&helsinki_species_string), false);
+                transform_into_terrain_callback_object->create_callback_parameter("", yli::data::AnyValue(&suzanne2_string), false);
+                transform_into_terrain_callback_object->create_callback_parameter("", yli::data::AnyValue(&helsinki_species_string), false);
 
                 // Callback code for A: transform `suzanne2` back into monkey.
                 yli::callback::CallbackEngine transform_into_monkey_callback_engine(my_universe);
                 yli::callback::CallbackObject* const transform_into_monkey_callback_object = transform_into_monkey_callback_engine.create_callback_object(
                         &yli::snippets::transform_into_new_species);
-                transform_into_monkey_callback_object->create_callback_parameter("", std::make_shared<yli::data::AnyValue>(&suzanne2_string), false);
-                transform_into_monkey_callback_object->create_callback_parameter("", std::make_shared<yli::data::AnyValue>(&suzanne_species_string), false);
+                transform_into_monkey_callback_object->create_callback_parameter("", yli::data::AnyValue(&suzanne2_string), false);
+                transform_into_monkey_callback_object->create_callback_parameter("", yli::data::AnyValue(&suzanne_species_string), false);
 
                 /*********************************************************************
                  *  Callback engines for console keyreleases begin here.             *
@@ -926,7 +926,7 @@ namespace ajokki
                 yli::ontology::create_lisp_function_overload("variables", my_console, std::function(&yli::ontology::Entity::print_variables0));
                 yli::ontology::create_lisp_function_overload("variables", my_console, std::function(&yli::ontology::Entity::print_variables1));
                 yli::ontology::create_lisp_function_overload("create-variable", my_console, std::function(&yli::ontology::Entity::create_variable_with_parent_name_type_value));
-                yli::ontology::create_lisp_function_overload("set", my_console, std::function(&yli::ontology::Variable::set_variable_shared_ptr_string));
+                yli::ontology::create_lisp_function_overload("set", my_console, std::function(&yli::ontology::Variable::set_variable_const_std_string));
                 yli::ontology::create_lisp_function_overload("copy", my_console, std::function(&yli::ontology::Variable::set_variable_variable));
                 yli::ontology::create_lisp_function_overload("print", my_console, std::function(&yli::ontology::Variable::print_value1));
 

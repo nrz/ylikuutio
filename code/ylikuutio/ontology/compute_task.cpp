@@ -28,7 +28,7 @@
 #include <iomanip>       // std::setfill, std::setw
 #include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream>      // std::cout, std::cin, std::cerr
-#include <memory>        // std::make_shared, std::shared_ptr
+#include <optional>      // std::optional
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>      // uint32_t etc.
 #include <utility>       // std::swap etc.
@@ -168,9 +168,9 @@ namespace yli::ontology
         {
             if (this->end_condition_callback_engine != nullptr)
             {
-                const std::shared_ptr<yli::data::AnyValue> end_condition_any_value = this->end_condition_callback_engine->execute(nullptr);
+                std::optional<yli::data::AnyValue> end_condition_any_value = this->end_condition_callback_engine->execute(yli::data::AnyValue());
 
-                if (std::holds_alternative<bool>(end_condition_any_value->data) && std::get<bool>(end_condition_any_value->data))
+                if (end_condition_any_value && std::holds_alternative<bool>(end_condition_any_value->data) && std::get<bool>(end_condition_any_value->data))
                 {
                     break; // End condition was satisfied. Therefore, no more iterations.
                 }

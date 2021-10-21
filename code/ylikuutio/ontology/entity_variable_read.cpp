@@ -20,17 +20,17 @@
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
-#include <memory>  // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 
 namespace yli::ontology
 {
-    std::shared_ptr<yli::data::AnyValue> read_should_be_rendered(yli::ontology::Entity* const entity)
+    std::optional<yli::data::AnyValue> read_should_be_rendered(yli::ontology::Entity* const entity)
     {
         if (entity == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        return std::make_shared<yli::data::AnyValue>(entity->should_be_rendered);
+        return yli::data::AnyValue(entity->should_be_rendered);
     }
 }

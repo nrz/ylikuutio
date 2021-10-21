@@ -24,7 +24,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <string>   // std::string
 
 namespace yli::ontology
@@ -96,11 +96,12 @@ namespace yli::ontology
         return help_string;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::get()
+    std::optional<yli::data::AnyValue> Variable::get()
     {
         if (this->parent == nullptr)
         {
-            return nullptr;
+            std::cerr << "ERROR: `Variable::get`: the parent of a `Variable` must not be `nullptr`!";
+            return std::nullopt;
         }
 
         if (this->read_callback == nullptr)
@@ -111,14 +112,14 @@ namespace yli::ontology
         return this->read_callback(this->parent);
     }
 
-    void Variable::set(std::shared_ptr<yli::data::AnyValue> new_value)
+    void Variable::set(const yli::data::AnyValue& new_value)
     {
-        if (this->variable_value == nullptr || this->parent == nullptr)
+        if (this->parent == nullptr)
         {
             return;
         }
 
-        this->variable_value = std::make_shared<yli::data::AnyValue>(*new_value);
+        this->variable_value = new_value;
 
         if (this->activate_callback != nullptr)
         {
@@ -128,12 +129,12 @@ namespace yli::ontology
 
     void Variable::set(const std::string& new_value)
     {
-        if (this->variable_value == nullptr || this->parent == nullptr)
+        if (this->parent == nullptr)
         {
             return;
         }
 
-        this->variable_value->set_new_value(new_value);
+        this->variable_value.set_new_value(new_value);
 
         if (this->activate_callback != nullptr)
         {
@@ -143,24 +144,24 @@ namespace yli::ontology
 
     // Public callbacks.
 
-    std::shared_ptr<yli::data::AnyValue> Variable::set_variable_shared_ptr_string(
+    std::optional<yli::data::AnyValue> Variable::set_variable_const_std_string(
             yli::ontology::Variable* const variable,
-            std::shared_ptr<std::string> new_value)
+            const std::string& new_value)
     {
         // Usage:
         // to set variable: set2 <variable-name> <variable-value>
 
-        if (variable == nullptr || new_value == nullptr)
+        if (variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         // Set a new value and call activate callback if there is such.
-        variable->set(*new_value);
-        return nullptr;
+        variable->set(new_value);
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::set_variable_variable(
+    std::optional<yli::data::AnyValue> Variable::set_variable_variable(
             yli::ontology::Variable* const dest_variable,
             yli::ontology::Universe* const /* context */, // A context is needed so that correct `Variable is bound to the function call.
             yli::ontology::Variable* const src_variable)
@@ -170,15 +171,22 @@ namespace yli::ontology
 
         if (dest_variable == nullptr || src_variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         // Set a new value and call activate callback if there is such.
-        dest_variable->set(src_variable->get());
-        return nullptr;
+
+        std::optional<yli::data::AnyValue> any_value = src_variable->get();
+
+        if (any_value)
+        {
+            dest_variable->set(*any_value);
+        }
+
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Variable::print_value1(
+    std::optional<yli::data::AnyValue> Variable::print_value1(
             yli::ontology::Console* const console,
             yli::ontology::Universe* const /* context */, // A context is needed so that correct `Variable` is bound to the function call.
             yli::ontology::Variable* const variable)
@@ -188,18 +196,17 @@ namespace yli::ontology
 
         if (console == nullptr || variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        std::shared_ptr<yli::data::AnyValue> variable_value_shared_ptr = variable->get();
+        std::optional<yli::data::AnyValue> variable_value = variable->get();
 
-        if (variable_value_shared_ptr == nullptr)
+        if (variable_value)
         {
-            return nullptr;
+            console->print_text((*variable_value).get_string());
         }
 
-        console->print_text(variable_value_shared_ptr->get_string());
-        return nullptr;
+        return std::nullopt;
     }
 
     // Public callbacks end here.

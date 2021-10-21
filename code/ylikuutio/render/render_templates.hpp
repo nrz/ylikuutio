@@ -30,7 +30,7 @@ namespace yli::render
     template<typename T>
         using SomeIterator = typename std::decay<T>::type::iterator;
 
-    template<class ContainerType, class StoredType, class CastType>
+    template<typename ContainerType, typename StoredType, typename CastType>
         void render_children(ContainerType& child_container)
         {
             for (SomeIterator<ContainerType&> it = child_container.begin(); it != child_container.end(); it++)
@@ -44,7 +44,7 @@ namespace yli::render
             }
         }
 
-    template<class T1>
+    template<typename T1>
         void render_apprentices(const std::vector<yli::ontology::ApprenticeModule*>& apprentice_pointer_vector)
         {
             for (std::size_t apprentice_i = 0; apprentice_i < apprentice_pointer_vector.size(); apprentice_i++)

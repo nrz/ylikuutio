@@ -22,14 +22,6 @@
 #include "activate_callback.hpp"
 #include "read_callback.hpp"
 
-// Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
-
-namespace yli::data
-{
-    class AnyValue;
-}
-
 namespace yli::ontology
 {
     class Entity;
@@ -42,17 +34,9 @@ namespace yli::ontology
             this->is_variable = true;
         }
 
-        explicit VariableStruct(std::shared_ptr<yli::data::AnyValue> initial_value)
-            : initial_value { initial_value }
-        {
-            // constructor.
-            this->is_variable = true;
-        }
-
         VariableStruct(const yli::ontology::VariableStruct& variable_struct)
             : EntityStruct(variable_struct),
             parent { variable_struct.parent },
-            initial_value { variable_struct.initial_value },
             activate_callback { variable_struct.activate_callback },
             read_callback { variable_struct.read_callback },
             should_call_activate_callback_now { variable_struct.should_call_activate_callback_now }
@@ -64,7 +48,6 @@ namespace yli::ontology
         }
 
         yli::ontology::Entity* parent                      { nullptr };
-        std::shared_ptr<yli::data::AnyValue> initial_value { nullptr };
         ActivateCallback activate_callback                 { nullptr };
         ReadCallback read_callback                         { nullptr };
         bool should_call_activate_callback_now             { true };

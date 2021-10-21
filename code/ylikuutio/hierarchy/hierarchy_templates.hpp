@@ -26,7 +26,7 @@
 
 namespace yli::hierarchy
 {
-    template<class T1>
+    template<typename T1>
         void set_child_pointer(
                 const std::size_t childID,
                 const T1 child_pointer,
@@ -77,7 +77,7 @@ namespace yli::hierarchy
             }
         }
 
-    template<class T1>
+    template<typename T1>
         std::size_t request_childID(std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue)
         {
             // This function is called eg. from `bind_child_to_parent`,
@@ -114,7 +114,7 @@ namespace yli::hierarchy
             return childID;
         }
 
-    template<class T1>
+    template<typename T1>
         void bind_child_to_parent(
                 const T1 child_pointer,
                 std::vector<T1>& child_pointer_vector,
@@ -149,7 +149,7 @@ namespace yli::hierarchy
             yli::hierarchy::set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, free_childID_queue, number_of_children);
         }
 
-    template<class T1>
+    template<typename T1>
         void bind_apprentice_to_master(
                 const T1 apprentice_pointer,
                 std::vector<T1>& apprentice_pointer_vector,
@@ -175,7 +175,7 @@ namespace yli::hierarchy
             yli::hierarchy::set_child_pointer(apprentice_pointer->apprenticeID, apprentice_pointer, apprentice_pointer_vector, free_apprenticeID_queue, number_of_apprentices);
         }
 
-    template <class T1>
+    template <typename T1>
         void unbind_child_from_parent(
                 const std::size_t childID,
                 std::vector<T1>& child_pointer_vector,
@@ -195,7 +195,7 @@ namespace yli::hierarchy
             yli::hierarchy::set_child_pointer(childID, static_cast<T1>(nullptr), child_pointer_vector, free_childID_queue, number_of_children);
         }
 
-    template<class T1>
+    template<typename T1>
         void delete_children(std::vector<T1>& child_pointer_vector, std::size_t& number_of_children)
         {
             for (std::size_t child_i = 0; child_i < child_pointer_vector.size(); child_i++)
@@ -206,7 +206,7 @@ namespace yli::hierarchy
             number_of_children = 0; // no children any more.
         }
 
-    template<class T1>
+    template<typename T1>
         T1 get_first_child(const std::vector<T1>& child_pointer_vector, const std::size_t number_of_children)
         {
             if (number_of_children == 0)

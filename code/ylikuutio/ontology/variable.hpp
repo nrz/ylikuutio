@@ -22,10 +22,11 @@
 #include "activate_callback.hpp"
 #include "read_callback.hpp"
 #include "variable_struct.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <string>   // std::string
 
 // `yli::ontology::Variable` provides variable-related functionality.
@@ -43,11 +44,6 @@
 // `read_callback` may, of course, compute the returned value
 // based on some other variables as well etc.
 
-namespace yli::data
-{
-    class AnyValue;
-}
-
 namespace yli::ontology
 {
     class Entity;
@@ -58,10 +54,10 @@ namespace yli::ontology
     class Variable: public yli::ontology::Entity 
     {
         public:
-            Variable(yli::ontology::Universe* const universe, const yli::ontology::VariableStruct& variable_struct)
+            Variable(yli::ontology::Universe* const universe, const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value)
                 : Entity(universe, variable_struct),
                 parent            { variable_struct.parent },
-                variable_value    { variable_struct.initial_value },
+                variable_value    { any_value },
                 activate_callback { variable_struct.activate_callback },
                 read_callback     { variable_struct.read_callback }
             {
@@ -89,48 +85,48 @@ namespace yli::ontology
 
             std::string help() const;
 
-            std::shared_ptr<yli::data::AnyValue> get();
-            void set(std::shared_ptr<yli::data::AnyValue> new_value);
+            std::optional<yli::data::AnyValue> get();
+            void set(const yli::data::AnyValue& new_value);
             void set(const std::string& new_value);
 
             // Public callbacks.
 
-            static std::shared_ptr<yli::data::AnyValue> set_variable_shared_ptr_string(
+            static std::optional<yli::data::AnyValue> set_variable_const_std_string(
                     yli::ontology::Variable* const variable,
-                    std::shared_ptr<std::string> new_value);
+                    const std::string& new_value);
 
-            static std::shared_ptr<yli::data::AnyValue> set_variable_variable(
+            static std::optional<yli::data::AnyValue> set_variable_variable(
                     yli::ontology::Variable* const dest_variable,
                     yli::ontology::Universe* const /* context */, // A context is needed so that correct `Variable` is bound to the function call.
                     yli::ontology::Variable* const src_variable);
 
-            static std::shared_ptr<yli::data::AnyValue> print_value1(
+            static std::optional<yli::data::AnyValue> print_value1(
                     yli::ontology::Console* const console,
                     yli::ontology::Universe* const /* context */, // A context is needed so that correct `Variable` is bound to the function call.
                     yli::ontology::Variable* const variable);
 
-            static std::shared_ptr<yli::data::AnyValue> activate_planet_radius(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::optional<yli::data::AnyValue> activate_planet_radius(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
 
-            static std::shared_ptr<yli::data::AnyValue> activate_window_width(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-            static std::shared_ptr<yli::data::AnyValue> activate_window_height(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-            static std::shared_ptr<yli::data::AnyValue> activate_framebuffer_width(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-            static std::shared_ptr<yli::data::AnyValue> activate_framebuffer_height(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-            static std::shared_ptr<yli::data::AnyValue> activate_background_color(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::optional<yli::data::AnyValue> activate_window_width(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::optional<yli::data::AnyValue> activate_window_height(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::optional<yli::data::AnyValue> activate_framebuffer_width(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::optional<yli::data::AnyValue> activate_framebuffer_height(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::optional<yli::data::AnyValue> activate_background_color(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
 
-            static std::shared_ptr<yli::data::AnyValue> activate_wireframe(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::optional<yli::data::AnyValue> activate_wireframe(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
 
-            static std::shared_ptr<yli::data::AnyValue> activate_speed(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-            static std::shared_ptr<yli::data::AnyValue> activate_turbo_factor(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-            static std::shared_ptr<yli::data::AnyValue> activate_twin_turbo_factor(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-            static std::shared_ptr<yli::data::AnyValue> activate_mouse_speed(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::optional<yli::data::AnyValue> activate_speed(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::optional<yli::data::AnyValue> activate_turbo_factor(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::optional<yli::data::AnyValue> activate_twin_turbo_factor(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::optional<yli::data::AnyValue> activate_mouse_speed(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
 
-            static std::shared_ptr<yli::data::AnyValue> activate_is_flight_mode_in_use(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-            static std::shared_ptr<yli::data::AnyValue> activate_console_top_y(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-            static std::shared_ptr<yli::data::AnyValue> activate_console_bottom_y(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-            static std::shared_ptr<yli::data::AnyValue> activate_console_left_x(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-            static std::shared_ptr<yli::data::AnyValue> activate_console_right_x(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::optional<yli::data::AnyValue> activate_is_flight_mode_in_use(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::optional<yli::data::AnyValue> activate_console_top_y(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::optional<yli::data::AnyValue> activate_console_bottom_y(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::optional<yli::data::AnyValue> activate_console_left_x(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+            static std::optional<yli::data::AnyValue> activate_console_right_x(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
 
-            static std::shared_ptr<yli::data::AnyValue> read_is_flight_mode_in_use(yli::ontology::Entity* const entity);
+            static std::optional<yli::data::AnyValue> read_is_flight_mode_in_use(yli::ontology::Entity* const entity);
 
             // Public callbacks and here.
 
@@ -143,7 +139,7 @@ namespace yli::ontology
 
         public:
             // The variable value (may be a pointer a some datatype).
-            std::shared_ptr<yli::data::AnyValue> variable_value;
+            yli::data::AnyValue variable_value;
 
         private:
             // pointer to `ActivateCallback` used to activate the new value after variable it.

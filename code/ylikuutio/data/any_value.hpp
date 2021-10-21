@@ -27,6 +27,7 @@
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 #include <variant>  // std::holds_alternative, std::variant
@@ -65,6 +66,8 @@ namespace yli::data
     class AnyValue
     {
         public:
+            bool operator==(const yli::data::AnyValue& rhs) const;
+            bool operator!=(const yli::data::AnyValue& rhs) const;
             std::string get_datatype() const;
             std::string get_string() const;
             yli::ontology::Entity* get_entity_pointer() const;
@@ -72,6 +75,9 @@ namespace yli::data
 
             // copy constructor.
             AnyValue(const yli::data::AnyValue& original);
+
+            // constructor for optional `AnyValue`.
+            AnyValue(const std::optional<yli::data::AnyValue> original);
 
             // common constructors.
 

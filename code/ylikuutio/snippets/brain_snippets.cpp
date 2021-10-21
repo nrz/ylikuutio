@@ -25,7 +25,7 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <variant>  // std::holds_alternative, std::variant
 #include <vector>   // std::vector
 
@@ -48,354 +48,354 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    std::shared_ptr<yli::data::AnyValue> rest(
+    std::optional<yli::data::AnyValue> rest(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue> /* any_value */)
+            const yli::data::AnyValue& /* any_value */)
     {
         // Do nothing.
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> go_east(
+    std::optional<yli::data::AnyValue> go_east(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue> any_value)
+            const yli::data::AnyValue& any_value)
     {
-        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
+        if (!std::holds_alternative<yli::ontology::Movable*>(any_value.data))
         {
             std::cerr << "ERROR: `yli::snippets::go_east`: `any_value->type` is not `yli::data::Datatype::MOVABLE_POINTER`.\n";
-            return nullptr;
+            return std::nullopt;
         }
 
-        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value.data);
 
         if (movable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         movable->cartesian_coordinates.x += movable->speed;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> go_west(
+    std::optional<yli::data::AnyValue> go_west(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue> any_value)
+            const yli::data::AnyValue& any_value)
     {
-        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
+        if (!std::holds_alternative<yli::ontology::Movable*>(any_value.data))
         {
             std::cerr << "ERROR: `yli::snippets::go_west`: `any_value->type` is not `yli::data::Datatype::MOVABLE_POINTER`.\n";
-            return nullptr;
+            return std::nullopt;
         }
 
-        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value.data);
 
         if (movable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         movable->cartesian_coordinates.x -= movable->speed;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> go_north(
+    std::optional<yli::data::AnyValue> go_north(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue> any_value)
+            const yli::data::AnyValue& any_value)
     {
-        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
+        if (!std::holds_alternative<yli::ontology::Movable*>(any_value.data))
         {
             std::cerr << "ERROR: `yli::snippets::go_north`: `any_value->type` is not `yli::data::Datatype::MOVABLE_POINTER`.\n";
-            return nullptr;
+            return std::nullopt;
         }
 
-        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value.data);
 
         if (movable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         movable->cartesian_coordinates.z -= movable->speed;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> go_south(
+    std::optional<yli::data::AnyValue> go_south(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue> any_value)
+            const yli::data::AnyValue& any_value)
     {
-        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
+        if (!std::holds_alternative<yli::ontology::Movable*>(any_value.data))
         {
             std::cerr << "ERROR: `yli::snippets::go_south`: `any_value->type` is not `yli::data::Datatype::MOVABLE_POINTER`.\n";
-            return nullptr;
+            return std::nullopt;
         }
 
-        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value.data);
 
         if (movable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         movable->cartesian_coordinates.z += movable->speed;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> orient_to_east(
+    std::optional<yli::data::AnyValue> orient_to_east(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue> any_value)
+            const yli::data::AnyValue& any_value)
     {
-        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
+        if (!std::holds_alternative<yli::ontology::Movable*>(any_value.data))
         {
             std::cerr << "ERROR: `yli::snippets::orient_to_east`: `any_value->type` is not `yli::data::Datatype::MOVABLE_POINTER`.\n";
-            return nullptr;
+            return std::nullopt;
         }
 
-        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value.data);
 
         if (movable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         movable->yaw = 0.0f;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> orient_to_west(
+    std::optional<yli::data::AnyValue> orient_to_west(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue> any_value)
+            const yli::data::AnyValue& any_value)
     {
-        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
+        if (!std::holds_alternative<yli::ontology::Movable*>(any_value.data))
         {
             std::cerr << "ERROR: `yli::snippets::orient_to_west`: `any_value->type` is not `yli::data::Datatype::MOVABLE_POINTER`.\n";
-            return nullptr;
+            return std::nullopt;
         }
 
-        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value.data);
 
         if (movable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         movable->yaw = PI;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> orient_to_north(
+    std::optional<yli::data::AnyValue> orient_to_north(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue> any_value)
+            const yli::data::AnyValue& any_value)
     {
-        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
+        if (!std::holds_alternative<yli::ontology::Movable*>(any_value.data))
         {
             std::cerr << "ERROR: `yli::snippets::orient_to_north`: `any_value->type` is not `yli::data::Datatype::MOVABLE_POINTER`.\n";
-            return nullptr;
+            return std::nullopt;
         }
 
-        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value.data);
 
         if (movable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         movable->yaw = 0.5f * PI;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> orient_to_south(
+    std::optional<yli::data::AnyValue> orient_to_south(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue> any_value)
+            const yli::data::AnyValue& any_value)
     {
-        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
+        if (!std::holds_alternative<yli::ontology::Movable*>(any_value.data))
         {
             std::cerr << "ERROR: `yli::snippets::orient_to_south`: `any_value->type` is not `yli::data::Datatype::MOVABLE_POINTER`.\n";
-            return nullptr;
+            return std::nullopt;
         }
 
-        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value.data);
 
         if (movable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         movable->yaw = -0.5f * PI;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> orient_and_go_east(
+    std::optional<yli::data::AnyValue> orient_and_go_east(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue> any_value)
+            const yli::data::AnyValue& any_value)
     {
-        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
+        if (!std::holds_alternative<yli::ontology::Movable*>(any_value.data))
         {
             std::cerr << "ERROR: `yli::snippets::orient_and_go_east`: `any_value->type` is not `yli::data::Datatype::MOVABLE_POINTER`.\n";
-            return nullptr;
+            return std::nullopt;
         }
 
-        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value.data);
 
         if (movable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         movable->yaw = 0.0f;
         movable->cartesian_coordinates.x += movable->speed;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> orient_and_go_west(
+    std::optional<yli::data::AnyValue> orient_and_go_west(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue> any_value)
+            const yli::data::AnyValue& any_value)
     {
-        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
+        if (!std::holds_alternative<yli::ontology::Movable*>(any_value.data))
         {
             std::cerr << "ERROR: `yli::snippets::orient_and_go_west`: `any_value->type` is not `yli::data::Datatype::MOVABLE_POINTER`.\n";
-            return nullptr;
+            return std::nullopt;
         }
 
-        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value.data);
 
         if (movable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         movable->yaw = PI;
         movable->cartesian_coordinates.x -= movable->speed;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> orient_and_go_north(
+    std::optional<yli::data::AnyValue> orient_and_go_north(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue> any_value)
+            const yli::data::AnyValue& any_value)
     {
-        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
+        if (!std::holds_alternative<yli::ontology::Movable*>(any_value.data))
         {
             std::cerr << "ERROR: `yli::snippets::orient_and_go_north`: `any_value->type` is not `yli::data::Datatype::MOVABLE_POINTER`.\n";
-            return nullptr;
+            return std::nullopt;
         }
 
-        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value.data);
 
         if (movable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         movable->yaw = 0.5f * PI;
         movable->cartesian_coordinates.z -= movable->speed;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> orient_and_go_south(
+    std::optional<yli::data::AnyValue> orient_and_go_south(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue> any_value)
+            const yli::data::AnyValue& any_value)
     {
-        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
+        if (!std::holds_alternative<yli::ontology::Movable*>(any_value.data))
         {
             std::cerr << "ERROR: `yli::snippets::orient_and_go_south`: `any_value->type` is not `yli::data::Datatype::MOVABLE_POINTER`.\n";
-            return nullptr;
+            return std::nullopt;
         }
 
-        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value.data);
 
         if (movable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         movable->yaw = -0.5f * PI;
         movable->cartesian_coordinates.z += movable->speed;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> rotate_clockwise(
+    std::optional<yli::data::AnyValue> rotate_clockwise(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue> any_value)
+            const yli::data::AnyValue& any_value)
     {
-        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
+        if (!std::holds_alternative<yli::ontology::Movable*>(any_value.data))
         {
             std::cerr << "ERROR: `yli::snippets::rotate_clockwise`: `any_value->type` is not `yli::data::Datatype::MOVABLE_POINTER`.\n";
-            return nullptr;
+            return std::nullopt;
         }
 
-        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value.data);
 
         if (movable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         movable->yaw -= 0.1f * PI;
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> rotate_counterclockwise(
+    std::optional<yli::data::AnyValue> rotate_counterclockwise(
             yli::ontology::Universe*,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue> any_value)
+            const yli::data::AnyValue& any_value)
     {
-        if (any_value == nullptr || !std::holds_alternative<yli::ontology::Movable*>(any_value->data))
+        if (!std::holds_alternative<yli::ontology::Movable*>(any_value.data))
         {
             std::cerr << "ERROR: `yli::snippets::rotate_counterclockwise`: `any_value->type` is not `yli::data::Datatype::MOVABLE_POINTER`.\n";
-            return nullptr;
+            return std::nullopt;
         }
 
-        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value->data);
+        yli::ontology::Movable* const movable = std::get<yli::ontology::Movable*>(any_value.data);
 
         if (movable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         movable->yaw += 0.1f * PI;
-        return nullptr;
+        return std::nullopt;
     }
 }

@@ -132,7 +132,7 @@ namespace yli::ontology
             uint32_t get_image_height() const;
             uint32_t get_image_size() const;
 
-            template<class T1>
+            template<typename T1>
                 friend void yli::render::render_apprentices(const std::vector<yli::ontology::ApprenticeModule*>& apprentice_pointer_vector);
 
             yli::ontology::ChildModule child_of_scene;

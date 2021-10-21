@@ -19,7 +19,7 @@
 #define __YLIKUUTIO_SNIPPETS_CONSOLE_CALLBACK_SNIPPETS_HPP_INCLUDED
 
 // Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 
 namespace yli::data
 {
@@ -33,9 +33,9 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    std::shared_ptr<yli::data::AnyValue> quit(yli::ontology::Console* const);
+    std::optional<yli::data::AnyValue> quit(yli::ontology::Console* const);
 
-    std::shared_ptr<yli::data::AnyValue> help(yli::ontology::Console* const);
+    std::optional<yli::data::AnyValue> help(yli::ontology::Console* const);
 }
 
 #endif

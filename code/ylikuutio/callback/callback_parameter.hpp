@@ -25,7 +25,6 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <limits>  // std::numeric_limits
-#include <memory>  // std::make_shared, std::shared_ptr
 #include <queue>   // std::queue
 #include <string>  // std::string
 #include <vector>  // std::vector
@@ -44,24 +43,24 @@ namespace yli::callback
             ~CallbackParameter();
 
             // getter.
-            std::shared_ptr<yli::data::AnyValue> get_any_value() const;
+            const yli::data::AnyValue& get_any_value() const;
 
             friend class yli::callback::CallbackObject;
-            template<class T1>
+            template<typename T1>
                 friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
         private:
             void bind_to_parent();
 
             // constructor.
-            CallbackParameter(const std::string& name, std::shared_ptr<yli::data::AnyValue> any_value, const bool is_reference, yli::callback::CallbackObject* const parent);
+            CallbackParameter(const std::string& name, const yli::data::AnyValue& any_value, const bool is_reference, yli::callback::CallbackObject* const parent);
 
             yli::callback::CallbackObject* parent { nullptr }; // pointer to the callback object.
 
             std::size_t childID { std::numeric_limits<std::size_t>::max() };
 
             std::string name;
-            std::shared_ptr<yli::data::AnyValue> any_value { nullptr }; // this is `private` to make sure that someone does not overwrite it.
+            yli::data::AnyValue any_value;  // this is `private` to make sure that someone does not overwrite it.
             bool is_reference;              // if true, the value is read from the hashmap. if false, then the value is read from the union.
     };
 }

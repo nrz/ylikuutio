@@ -21,26 +21,26 @@
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
-#include <memory>  // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <variant> // std::holds_alternative, std::variant
 
 namespace yli::ontology
 {
-    std::shared_ptr<yli::data::AnyValue> activate_should_be_rendered(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> activate_should_be_rendered(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
     {
         if (entity == nullptr || variable == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        std::shared_ptr<yli::data::AnyValue> should_be_rendered_any_value = variable->variable_value;
+        const yli::data::AnyValue& should_be_rendered_any_value = variable->variable_value;
 
-        if (should_be_rendered_any_value == nullptr || !std::holds_alternative<bool>(should_be_rendered_any_value->data))
+        if (!std::holds_alternative<bool>(should_be_rendered_any_value.data))
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        entity->should_be_rendered = std::get<bool>(should_be_rendered_any_value->data);
-        return nullptr;
+        entity->should_be_rendered = std::get<bool>(should_be_rendered_any_value.data);
+        return std::nullopt;
     }
 }

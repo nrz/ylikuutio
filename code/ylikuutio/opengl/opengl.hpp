@@ -48,7 +48,7 @@ namespace yli::opengl
     std::size_t get_n_color_channels(const GLenum format);
     std::size_t get_size_of_component(const GLenum type);
 
-    template<class T1>
+    template<typename T1>
         std::shared_ptr<std::vector<T1>> copy_data_from_gpu_texture_to_cpu_array(
                 const GLenum format,
                 const GLenum type,

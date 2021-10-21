@@ -24,7 +24,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -42,7 +42,7 @@ namespace yli::callback
         if (!callback_parameter->name.empty())
         {
             // This parameter is a named variable, so store it in `anyvalue_hashmap`.
-            this->set_any_value(callback_parameter->name, std::make_shared<yli::data::AnyValue>(*callback_parameter->any_value));
+            this->set_any_value(callback_parameter->name, yli::data::AnyValue(callback_parameter->any_value));
         }
     }
 
@@ -57,29 +57,29 @@ namespace yli::callback
 
     yli::callback::CallbackParameter* CallbackObject::create_callback_parameter(
             const std::string& name,
-            std::shared_ptr<yli::data::AnyValue> any_value,
+            const yli::data::AnyValue& any_value,
             const bool is_reference)
     {
         return new yli::callback::CallbackParameter(name, any_value, is_reference, this);
     }
 
     // getter function for callbacks and callback objects.
-    std::shared_ptr<yli::data::AnyValue> CallbackObject::get_any_value(const std::string& name) const
+    std::optional<yli::data::AnyValue> CallbackObject::get_any_value(const std::string& name) const
     {
         if (this->anyvalue_hashmap.count(name) != 1)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        return std::make_shared<yli::data::AnyValue>(this->anyvalue_hashmap.at(name));
+        return yli::data::AnyValue(this->anyvalue_hashmap.at(name));
     }
 
-    std::shared_ptr<yli::data::AnyValue> CallbackObject::get_arg(const std::size_t arg_i) const
+    std::optional<yli::data::AnyValue> CallbackObject::get_arg(const std::size_t arg_i) const
     {
         if (arg_i >= this->callback_parameter_pointer_vector.size())
         {
             std::cerr << "error #1 in CallbackObject code.\n";
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::callback::CallbackParameter* callback_parameter = this->callback_parameter_pointer_vector.at(arg_i);
@@ -87,16 +87,16 @@ namespace yli::callback
         if (callback_parameter == nullptr)
         {
             std::cerr << "error #2 in CallbackObject code.\n";
-            return nullptr;
+            return std::nullopt;
         }
 
-        return std::make_shared<yli::data::AnyValue>(*callback_parameter->any_value);
+        return yli::data::AnyValue(callback_parameter->any_value);
     }
 
     // setter function for callbacks and callback objects.
-    void CallbackObject::set_any_value(const std::string& name, std::shared_ptr<yli::data::AnyValue> any_value)
+    void CallbackObject::set_any_value(const std::string& name, const yli::data::AnyValue& any_value)
     {
-        this->anyvalue_hashmap[name] = yli::data::AnyValue(*any_value);
+        this->anyvalue_hashmap[name] = yli::data::AnyValue(any_value);
     }
 
     void CallbackObject::bind_to_parent()
@@ -170,13 +170,13 @@ namespace yli::callback
         }
     }
 
-    std::shared_ptr<yli::data::AnyValue> CallbackObject::execute(std::shared_ptr<yli::data::AnyValue> any_value)
+    std::optional<yli::data::AnyValue> CallbackObject::execute(const yli::data::AnyValue& any_value)
     {
         if (this->parent != nullptr && this->callback != nullptr)
         {
             return this->callback(this->parent->get_universe(), this->parent, this, this->callback_parameter_pointer_vector, any_value);
         }
 
-        return nullptr;
+        return std::nullopt;
     }
 }

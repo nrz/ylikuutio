@@ -26,7 +26,7 @@
 namespace yli::render
 {
     // ContainerType = container type, T1 = stored type, CastType = type in which to cast the stored type into.
-    template<class ContainerType, class StoredType, class CastType>
+    template<typename ContainerType, typename StoredType, typename CastType>
         void render_model(const yli::ontology::MeshModule& mesh, ContainerType& renderables_container)
         {
             // Compute the MVP matrix from keyboard and mouse input.

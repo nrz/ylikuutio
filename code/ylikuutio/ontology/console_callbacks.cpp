@@ -28,7 +28,7 @@
 #include <cstddef>   // std::size_t
 #include <iterator>  // std::back_inserter
 #include <list>      // std::list
-#include <memory>    // std::make_shared, std::shared_ptr
+#include <optional>  // std::optional
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string, std::getline
 #include <vector>    // std::vector
@@ -50,16 +50,16 @@ namespace yli::ontology
 
     // Action mode keypress callbacks begin here.
 
-    std::shared_ptr<yli::data::AnyValue> Console::enter_console(
+    std::optional<yli::data::AnyValue> Console::enter_console(
             yli::ontology::Universe* universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            std::shared_ptr<yli::data::AnyValue>)
+            const yli::data::AnyValue&)
     {
         if (universe == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Console* const console = universe->get_active_console();
@@ -67,23 +67,23 @@ namespace yli::ontology
         if (console == nullptr)
         {
             // We did not enter the console.
-            return nullptr;
+            return std::nullopt;
         }
 
         if (console->enter_console())
         {
             // Signal to caller that we have entered the console.
             uint32_t enter_console_magic_number = ENTER_CONSOLE_MAGIC_NUMBER;
-            return std::make_shared<yli::data::AnyValue>(enter_console_magic_number);
+            return yli::data::AnyValue(enter_console_magic_number);
         }
 
         // We did not enter the console.
-        return nullptr;
+        return std::nullopt;
     }
 
     // Console mode keyrelease callbacks begin here.
 
-    std::shared_ptr<yli::data::AnyValue> Console::release_left_control_in_console(
+    std::optional<yli::data::AnyValue> Console::release_left_control_in_console(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -93,10 +93,10 @@ namespace yli::ontology
         {
             console->is_left_control_pressed = false;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::release_right_control_in_console(
+    std::optional<yli::data::AnyValue> Console::release_right_control_in_console(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -106,10 +106,10 @@ namespace yli::ontology
         {
             console->is_right_control_pressed = false;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::release_left_alt_in_console(
+    std::optional<yli::data::AnyValue> Console::release_left_alt_in_console(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -119,10 +119,10 @@ namespace yli::ontology
         {
             console->is_left_alt_pressed = false;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::release_right_alt_in_console(
+    std::optional<yli::data::AnyValue> Console::release_right_alt_in_console(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -132,10 +132,10 @@ namespace yli::ontology
         {
             console->is_right_alt_pressed = false;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::release_left_shift_in_console(
+    std::optional<yli::data::AnyValue> Console::release_left_shift_in_console(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -145,10 +145,10 @@ namespace yli::ontology
         {
             console->is_left_shift_pressed = false;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::release_right_shift_in_console(
+    std::optional<yli::data::AnyValue> Console::release_right_shift_in_console(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -158,10 +158,10 @@ namespace yli::ontology
         {
             console->is_right_shift_pressed = false;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::enable_move_to_previous_input(
+    std::optional<yli::data::AnyValue> Console::enable_move_to_previous_input(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -171,10 +171,10 @@ namespace yli::ontology
         {
             console->can_move_to_previous_input = true;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::enable_move_to_next_input(
+    std::optional<yli::data::AnyValue> Console::enable_move_to_next_input(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -184,10 +184,10 @@ namespace yli::ontology
         {
             console->can_move_to_next_input = true;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::enable_backspace(
+    std::optional<yli::data::AnyValue> Console::enable_backspace(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -197,10 +197,10 @@ namespace yli::ontology
         {
             console->can_backspace = true;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::enable_tab(
+    std::optional<yli::data::AnyValue> Console::enable_tab(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -210,10 +210,10 @@ namespace yli::ontology
         {
             console->can_tab = true;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::enable_enter_key(
+    std::optional<yli::data::AnyValue> Console::enable_enter_key(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -223,10 +223,10 @@ namespace yli::ontology
         {
             console->can_enter_key = true;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::enable_ctrl_c(
+    std::optional<yli::data::AnyValue> Console::enable_ctrl_c(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -236,10 +236,10 @@ namespace yli::ontology
         {
             console->can_ctrl_c = true;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::enable_ctrl_w(
+    std::optional<yli::data::AnyValue> Console::enable_ctrl_w(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -249,10 +249,10 @@ namespace yli::ontology
         {
             console->can_ctrl_w = true;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::enable_page_up(
+    std::optional<yli::data::AnyValue> Console::enable_page_up(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -262,10 +262,10 @@ namespace yli::ontology
         {
             console->can_page_up = true;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::enable_page_down(
+    std::optional<yli::data::AnyValue> Console::enable_page_down(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -275,10 +275,10 @@ namespace yli::ontology
         {
             console->can_page_down = true;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::enable_home(
+    std::optional<yli::data::AnyValue> Console::enable_home(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -288,10 +288,10 @@ namespace yli::ontology
         {
             console->can_home = true;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::enable_end(
+    std::optional<yli::data::AnyValue> Console::enable_end(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -301,12 +301,12 @@ namespace yli::ontology
         {
             console->can_end = true;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
     // Console mode keypress callbacks begin here.
 
-    std::shared_ptr<yli::data::AnyValue> Console::exit_console(
+    std::optional<yli::data::AnyValue> Console::exit_console(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -315,21 +315,21 @@ namespace yli::ontology
         if (console == nullptr)
         {
             // We did not exit the console.
-            return nullptr;
+            return std::nullopt;
         }
 
         if (console->in_console && console->exit_console())
         {
             // Signal to caller that we have exited the console.
             uint32_t exit_console_magic_number = EXIT_CONSOLE_MAGIC_NUMBER;
-            return std::make_shared<yli::data::AnyValue>(exit_console_magic_number);
+            return yli::data::AnyValue(exit_console_magic_number);
         }
 
         // We did not exit the console.
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::press_left_control_in_console(
+    std::optional<yli::data::AnyValue> Console::press_left_control_in_console(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -337,17 +337,17 @@ namespace yli::ontology
     {
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (console->in_console)
         {
             console->is_left_control_pressed = true;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::press_right_control_in_console(
+    std::optional<yli::data::AnyValue> Console::press_right_control_in_console(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -355,17 +355,17 @@ namespace yli::ontology
     {
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (console->in_console)
         {
             console->is_right_control_pressed = true;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::press_left_alt_in_console(
+    std::optional<yli::data::AnyValue> Console::press_left_alt_in_console(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -373,17 +373,17 @@ namespace yli::ontology
     {
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (console->in_console)
         {
             console->is_left_alt_pressed = true;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::press_right_alt_in_console(
+    std::optional<yli::data::AnyValue> Console::press_right_alt_in_console(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -391,17 +391,17 @@ namespace yli::ontology
     {
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (console->in_console)
         {
             console->is_right_alt_pressed = true;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::press_left_shift_in_console(
+    std::optional<yli::data::AnyValue> Console::press_left_shift_in_console(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -409,17 +409,17 @@ namespace yli::ontology
     {
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (console->in_console)
         {
             console->is_left_shift_pressed = true;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::press_right_shift_in_console(
+    std::optional<yli::data::AnyValue> Console::press_right_shift_in_console(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -427,17 +427,17 @@ namespace yli::ontology
     {
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (console->in_console)
         {
             console->is_right_shift_pressed = true;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::move_to_previous_input(
+    std::optional<yli::data::AnyValue> Console::move_to_previous_input(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -445,7 +445,7 @@ namespace yli::ontology
     {
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (console->in_console && console->can_move_to_previous_input)
@@ -479,10 +479,10 @@ namespace yli::ontology
                 console->can_move_to_previous_input = false;
             }
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::move_to_next_input(
+    std::optional<yli::data::AnyValue> Console::move_to_next_input(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -490,7 +490,7 @@ namespace yli::ontology
     {
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (console->in_console && console->can_move_to_next_input)
@@ -519,10 +519,10 @@ namespace yli::ontology
                 console->can_move_to_next_input = false;
             }
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::backspace(
+    std::optional<yli::data::AnyValue> Console::backspace(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -530,7 +530,7 @@ namespace yli::ontology
     {
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (console->in_console &&
@@ -541,10 +541,10 @@ namespace yli::ontology
             console->cursor_index--;
             console->can_backspace = false;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::tab(
+    std::optional<yli::data::AnyValue> Console::tab(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -552,14 +552,14 @@ namespace yli::ontology
     {
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         yli::ontology::Universe* const universe = console->get_universe();
 
         if (universe == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (console->in_console && console->can_tab)
@@ -633,10 +633,10 @@ namespace yli::ontology
 
             console->can_tab = false;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::enter_key(
+    std::optional<yli::data::AnyValue> Console::enter_key(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -644,7 +644,7 @@ namespace yli::ontology
     {
         if (console == nullptr || !console->in_console || !console->can_enter_key)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         // Copy current input into a `std::string`.
@@ -685,11 +685,14 @@ namespace yli::ontology
 
         console->current_input.clear();
 
-        std::shared_ptr<yli::data::AnyValue> any_value = nullptr;
-
         if (yli::lisp::parse(input_string, command, parameter_vector))
         {
-            any_value = yli::lisp::execute(console, command, parameter_vector);
+            std::optional<yli::data::AnyValue> any_value = yli::lisp::execute(console, command, parameter_vector);
+            console->in_historical_input = false;
+            console->cursor_it = console->current_input.begin();
+            console->cursor_index = 0;
+            console->can_enter_key = false;
+            return any_value;
         }
 
         console->in_historical_input = false;
@@ -697,10 +700,10 @@ namespace yli::ontology
         console->cursor_index = 0;
         console->can_enter_key = false;
 
-        return any_value;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::ctrl_c(
+    std::optional<yli::data::AnyValue> Console::ctrl_c(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -708,7 +711,7 @@ namespace yli::ontology
     {
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (console->in_console &&
@@ -723,10 +726,10 @@ namespace yli::ontology
             console->cursor_index = 0;
             console->can_ctrl_c = false;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::ctrl_w(
+    std::optional<yli::data::AnyValue> Console::ctrl_w(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -734,7 +737,7 @@ namespace yli::ontology
     {
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (console->in_console &&
@@ -773,10 +776,10 @@ namespace yli::ontology
 
             console->can_ctrl_w = false;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::page_up(
+    std::optional<yli::data::AnyValue> Console::page_up(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -784,7 +787,7 @@ namespace yli::ontology
     {
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (console->in_console && console->can_page_up)
@@ -807,10 +810,10 @@ namespace yli::ontology
             console->can_page_up = false;
         }
 
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::page_down(
+    std::optional<yli::data::AnyValue> Console::page_down(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -818,7 +821,7 @@ namespace yli::ontology
     {
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (console->in_console && console->can_page_down)
@@ -835,10 +838,10 @@ namespace yli::ontology
 
             console->can_page_down = false;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::home(
+    std::optional<yli::data::AnyValue> Console::home(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -846,7 +849,7 @@ namespace yli::ontology
     {
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (console->in_console && console->can_home)
@@ -864,10 +867,10 @@ namespace yli::ontology
 
             console->can_home = false;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
-    std::shared_ptr<yli::data::AnyValue> Console::end(
+    std::optional<yli::data::AnyValue> Console::end(
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -875,7 +878,7 @@ namespace yli::ontology
     {
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         if (console->in_console && console->can_end)
@@ -883,7 +886,7 @@ namespace yli::ontology
             console->in_history = false;
             console->can_home = false;
         }
-        return nullptr;
+        return std::nullopt;
     }
 
     // Public callbacks end here.

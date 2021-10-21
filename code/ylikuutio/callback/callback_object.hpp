@@ -26,7 +26,7 @@
 // Include standard headers
 #include <cstddef>       // std::size_t
 #include <limits>        // std::numeric_limits
-#include <memory>        // std::make_shared, std::shared_ptr
+#include <optional>      // std::optional
 #include <queue>         // std::queue
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
@@ -49,22 +49,22 @@ namespace yli::callback
 
             yli::callback::CallbackParameter* create_callback_parameter(
                     const std::string& name,
-                    std::shared_ptr<yli::data::AnyValue> any_value,
+                    const yli::data::AnyValue& any_value,
                     const bool is_reference);
 
             // this method changes the callback without changing the parameters of CallbackObject.
             void set_new_callback(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
             // getter functions for callbacks and callback objects.
-            std::shared_ptr<yli::data::AnyValue> get_any_value(const std::string& name) const;
-            std::shared_ptr<yli::data::AnyValue> get_arg(const std::size_t arg_i) const;
+            std::optional<yli::data::AnyValue> get_any_value(const std::string& name) const;
+            std::optional<yli::data::AnyValue> get_arg(const std::size_t arg_i) const;
 
             // setter function for callbacks and callback objects.
-            void set_any_value(const std::string& name, std::shared_ptr<yli::data::AnyValue> any_value);
+            void set_any_value(const std::string& name, const yli::data::AnyValue& any_value);
 
             friend class yli::callback::CallbackEngine;
             friend class yli::callback::CallbackParameter;
-            template<class T1>
+            template<typename T1>
                 friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
         protected:
@@ -91,7 +91,7 @@ namespace yli::callback
             void bind_child_to_parent(yli::callback::CallbackParameter* child_pointer);
 
             // execute this callback with a parameter.
-            virtual std::shared_ptr<yli::data::AnyValue> execute(std::shared_ptr<yli::data::AnyValue> any_value);
+            virtual std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue& any_value);
 
             std::size_t childID { std::numeric_limits<std::size_t>::max() };
 

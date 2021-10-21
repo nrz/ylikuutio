@@ -49,6 +49,7 @@
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
+#include <optional>      // std::optional
 #include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
@@ -498,7 +499,7 @@ namespace yli::ontology
 
             // Public `Entity` bind callbacks.
 
-            static std::shared_ptr<yli::data::AnyValue> bind(
+            static std::optional<yli::data::AnyValue> bind(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Entity* const child_or_apprentice_entity,
                     yli::ontology::Entity* const parent_or_master_entity);
@@ -507,56 +508,56 @@ namespace yli::ontology
 
             // Public `Entity` delete callbacks.
 
-            static std::shared_ptr<yli::data::AnyValue> delete_entity(
+            static std::optional<yli::data::AnyValue> delete_entity(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Entity* const entity);
 
             // Public `Entity` naming callbacks.
 
-            static std::shared_ptr<yli::data::AnyValue> set_global_name_for_entity(
+            static std::optional<yli::data::AnyValue> set_global_name_for_entity(
                     yli::ontology::Entity* const entity,
-                    std::shared_ptr<std::string> new_value);
+                    const std::string& new_value);
 
-            static std::shared_ptr<yli::data::AnyValue> set_local_name_for_entity(
+            static std::optional<yli::data::AnyValue> set_local_name_for_entity(
                     yli::ontology::Entity* const entity,
-                    std::shared_ptr<std::string> new_value);
+                    const std::string& new_value);
 
             // Public `Entity` activate callbacks.
 
-            static std::shared_ptr<yli::data::AnyValue> activate_entity(yli::ontology::Entity* const entity);
+            static std::optional<yli::data::AnyValue> activate_entity(yli::ontology::Entity* const entity);
 
             // Public YliLisp-related callbacks.
 
-            static std::shared_ptr<yli::data::AnyValue> eval(
+            static std::optional<yli::data::AnyValue> eval(
                     yli::ontology::Console* const console,
                     yli::ontology::Entity* const universe_entity,
                     const std::vector<std::string>& command_parameters);
 
             // Public data printing callbacks.
 
-            static std::shared_ptr<yli::data::AnyValue> info0(
-                    yli::ontology::Universe* const universe,
-                    yli::ontology::Console* const console);
+            static std::optional<yli::data::AnyValue> info0(
+                    yli::ontology::Universe& universe,
+                    yli::ontology::Console& console);
 
-            static std::shared_ptr<yli::data::AnyValue> info1(
+            static std::optional<yli::data::AnyValue> info1(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Console* const console,
                     yli::ontology::Entity* const entity);
 
-            static std::shared_ptr<yli::data::AnyValue> print_entities(
+            static std::optional<yli::data::AnyValue> print_entities(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Console* const console);
 
-            static std::shared_ptr<yli::data::AnyValue> print_parent(
+            static std::optional<yli::data::AnyValue> print_parent(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Console* const console,
                     yli::ontology::Entity* const entity);
 
             // Other public callbacks.
 
-            static std::shared_ptr<yli::data::AnyValue> screenshot(
+            static std::optional<yli::data::AnyValue> screenshot(
                     yli::ontology::Universe* const universe,
-                    std::shared_ptr<std::string> filename);
+                    const std::string& filename);
 
             // Public callbacks end here.
 

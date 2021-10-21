@@ -82,7 +82,7 @@
 #include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
-#include <memory>        // std::make_shared, std::shared_ptr
+#include <optional>      // std::optional
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
@@ -341,9 +341,9 @@ namespace yli::ontology
 
                         if (callback_engine != nullptr)
                         {
-                            const std::shared_ptr<yli::data::AnyValue> any_value = callback_engine->execute(nullptr);
+                            const std::optional<yli::data::AnyValue> any_value = callback_engine->execute(yli::data::AnyValue());
 
-                            if (any_value != nullptr &&
+                            if (any_value &&
                                     std::holds_alternative<uint32_t>(any_value->data) &&
                                     std::get<uint32_t>(any_value->data) == EXIT_PROGRAM_MAGIC_NUMBER)
                             {
@@ -369,9 +369,9 @@ namespace yli::ontology
                             continue;
                         }
 
-                        const std::shared_ptr<yli::data::AnyValue> any_value = callback_engine->execute(nullptr);
+                        const std::optional<yli::data::AnyValue> any_value = callback_engine->execute(yli::data::AnyValue());
 
-                        if (any_value != nullptr &&
+                        if (any_value &&
                                 std::holds_alternative<uint32_t>(any_value->data) &&
                                 std::get<uint32_t>(any_value->data) == EXIT_PROGRAM_MAGIC_NUMBER)
                         {
@@ -488,9 +488,9 @@ namespace yli::ontology
                                 continue;
                             }
 
-                            const std::shared_ptr<yli::data::AnyValue> any_value = callback_engine->execute(nullptr);
+                            const std::optional<yli::data::AnyValue> any_value = callback_engine->execute(yli::data::AnyValue());
 
-                            if (any_value != nullptr &&
+                            if (any_value &&
                                     std::holds_alternative<uint32_t>(any_value->data) &&
                                     std::get<uint32_t>(any_value->data) == EXIT_PROGRAM_MAGIC_NUMBER)
                             {
@@ -1083,12 +1083,12 @@ namespace yli::ontology
     void Universe::create_should_be_rendered_variable()
     {
         // Create `Variable` `should_be_rendered` here because it can't be done in `Entity` constructor.
-        yli::ontology::VariableStruct should_be_rendered_variable_struct(std::make_shared<yli::data::AnyValue>(this->should_be_rendered));
+        yli::ontology::VariableStruct should_be_rendered_variable_struct;
         should_be_rendered_variable_struct.local_name = "should_be_rendered";
         should_be_rendered_variable_struct.activate_callback = &yli::ontology::activate_should_be_rendered;
         should_be_rendered_variable_struct.read_callback = &yli::ontology::read_should_be_rendered;
         should_be_rendered_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `this->create_variable(should_be_rendered_variable_struct);` ...\n";
-        this->create_variable(should_be_rendered_variable_struct);
+        this->create_variable(should_be_rendered_variable_struct, yli::data::AnyValue(this->should_be_rendered));
     }
 }

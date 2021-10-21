@@ -18,13 +18,10 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_ACTIVATE_CALLBACK_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_ACTIVATE_CALLBACK_HPP_INCLUDED
 
-// Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
+#include "code/ylikuutio/data/any_value.hpp"
 
-namespace yli::data
-{
-    class AnyValue;
-}
+// Include standard headers
+#include <optional> // std::optional
 
 namespace yli::ontology
 {
@@ -32,6 +29,6 @@ namespace yli::ontology
     class Variable;
 }
 
-typedef std::shared_ptr<yli::data::AnyValue> (*ActivateCallback) (yli::ontology::Entity* entity, yli::ontology::Variable* variable);
+typedef std::optional<yli::data::AnyValue> (*ActivateCallback) (yli::ontology::Entity* entity, yli::ontology::Variable* variable);
 
 #endif

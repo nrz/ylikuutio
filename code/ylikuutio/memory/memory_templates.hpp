@@ -24,7 +24,7 @@
 
 namespace yli::memory
 {
-    template<class T1, class T2>
+    template<typename T1, typename T2>
         T2 read_nonaligned_32_bit(T1* src_data, std::size_t offset)
         {
             uint8_t* src_data_uint8_t = (uint8_t*) src_data;
@@ -35,7 +35,7 @@ namespace yli::memory
             return value_32_bit;
         }
 
-    template<class T1>
+    template<typename T1>
         void flip_vertically(T1* src_data, std::size_t image_width, std::size_t image_height)
         {
             for (std::size_t y = 0; y < image_height / 2; y++)

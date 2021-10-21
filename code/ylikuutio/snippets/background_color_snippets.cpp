@@ -21,9 +21,6 @@
 #include "code/ylikuutio/ontology/variable_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
-// Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
-
 namespace yli::snippets
 {
     void set_background_colors(yli::ontology::Universe* universe, const float red, const float green, const float blue, const float alpha)
@@ -33,28 +30,28 @@ namespace yli::snippets
             return;
         }
 
-        yli::ontology::VariableStruct red_variable_struct(std::make_shared<yli::data::AnyValue>(red));
+        yli::ontology::VariableStruct red_variable_struct;
         red_variable_struct.local_name = "red";
         red_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
         red_variable_struct.should_call_activate_callback_now = false;
-        universe->create_variable(red_variable_struct);
+        universe->create_variable(red_variable_struct, yli::data::AnyValue(red));
 
-        yli::ontology::VariableStruct green_variable_struct(std::make_shared<yli::data::AnyValue>(green));
+        yli::ontology::VariableStruct green_variable_struct;
         green_variable_struct.local_name = "green";
         green_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
         green_variable_struct.should_call_activate_callback_now = false;
-        universe->create_variable(green_variable_struct);
+        universe->create_variable(green_variable_struct, yli::data::AnyValue(green));
 
-        yli::ontology::VariableStruct blue_variable_struct(std::make_shared<yli::data::AnyValue>(blue));
+        yli::ontology::VariableStruct blue_variable_struct;
         blue_variable_struct.local_name = "blue";
         blue_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
         blue_variable_struct.should_call_activate_callback_now = false;
-        universe->create_variable(blue_variable_struct);
+        universe->create_variable(blue_variable_struct, yli::data::AnyValue(blue));
 
-        yli::ontology::VariableStruct alpha_variable_struct(std::make_shared<yli::data::AnyValue>(alpha));
+        yli::ontology::VariableStruct alpha_variable_struct;
         alpha_variable_struct.local_name = "alpha";
         alpha_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
         alpha_variable_struct.should_call_activate_callback_now = true;
-        universe->create_variable(alpha_variable_struct);
+        universe->create_variable(alpha_variable_struct, yli::data::AnyValue(alpha));
     }
 }

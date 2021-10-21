@@ -26,7 +26,7 @@
 // Include standard headers
 #include <cstddef>       // std::size_t
 #include <limits>        // std::numeric_limits
-#include <memory>        // std::make_shared, std::shared_ptr
+#include <optional>      // std::optional
 #include <string>        // std::string
 
 namespace yli::data
@@ -99,10 +99,10 @@ namespace yli::ontology
             void add_entity(const std::string& name, yli::ontology::Entity* const entity);
             void erase_entity(const std::string& name);
 
-            void create_variable(const yli::ontology::VariableStruct& variable_struct);
+            void create_variable(const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value);
             bool has_variable(const std::string& variable_name) const;
             yli::ontology::Variable* get(const std::string& variable_name) const;
-            bool set(const std::string& variable_name, std::shared_ptr<yli::data::AnyValue> variable_new_any_value);
+            bool set(const std::string& variable_name, const yli::data::AnyValue& variable_new_any_value);
 
             std::string help() const;                                // this function returns general help string.
             std::string help(const std::string& variable_name) const; // this function returns the help string for the `Variable`.
@@ -111,23 +111,23 @@ namespace yli::ontology
 
             // Public `Entity` creation callbacks.
 
-            static std::shared_ptr<yli::data::AnyValue> create_variable_with_parent_name_type_value(
+            static std::optional<yli::data::AnyValue> create_variable_with_parent_name_type_value(
                     yli::ontology::Entity* const parent,
-                    std::shared_ptr<std::string> variable_name,
-                    std::shared_ptr<std::string> variable_type,
-                    std::shared_ptr<std::string> variable_value);
+                    const std::string& variable_name,
+                    const std::string& variable_type,
+                    const std::string& variable_value);
 
             // Public data printing callbacks.
 
-            static std::shared_ptr<yli::data::AnyValue> print_children(
+            static std::optional<yli::data::AnyValue> print_children(
                     yli::ontology::Console* const console,
                     yli::ontology::Entity* const entity);
 
-            static std::shared_ptr<yli::data::AnyValue> print_variables0(
+            static std::optional<yli::data::AnyValue> print_variables0(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Console* const console);
 
-            static std::shared_ptr<yli::data::AnyValue> print_variables1(
+            static std::optional<yli::data::AnyValue> print_variables1(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Console* const console,
                     yli::ontology::Entity* const entity);

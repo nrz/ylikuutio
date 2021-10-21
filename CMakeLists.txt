@@ -576,6 +576,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/data/spherical_coordinates_struct.hpp
     code/ylikuutio/data/tuple_templates.hpp
     code/ylikuutio/data/variant_templates.hpp
+    code/ylikuutio/data/wrap.hpp
 
     # file, in alphabetical order.
     code/ylikuutio/file/file_loader.cpp
@@ -638,9 +639,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/linear_algebra/vector_functions.hpp
 
     # lisp, in alphabetical order.
-    code/ylikuutio/lisp/arg_processing_templates.hpp
     code/ylikuutio/lisp/executor.cpp
     code/ylikuutio/lisp/executor.hpp
+    code/ylikuutio/lisp/function_arg_extractor.hpp
     code/ylikuutio/lisp/lisp_templates.hpp
     code/ylikuutio/lisp/parser.cpp
     code/ylikuutio/lisp/parser.hpp

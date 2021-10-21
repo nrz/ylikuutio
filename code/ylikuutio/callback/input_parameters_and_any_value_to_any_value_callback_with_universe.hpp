@@ -19,7 +19,7 @@
 #define __YLIKUUTIO_CALLBACK_INPUT_PARAMETERS_AND_ANY_VALUE_TO_ANY_VALUE_CALLBACK_WITH_UNIVERSE_HPP_INCLUDED
 
 // Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <vector> // std::vector
 
 namespace yli::callback
@@ -39,11 +39,11 @@ namespace yli::ontology
     class Universe;
 }
 
-typedef std::shared_ptr<yli::data::AnyValue> (*InputParametersAndAnyValueToAnyValueCallbackWithUniverse) (
+typedef std::optional<yli::data::AnyValue> (*InputParametersAndAnyValueToAnyValueCallbackWithUniverse) (
         yli::ontology::Universe*,
         yli::callback::CallbackEngine*,
         yli::callback::CallbackObject*,
         std::vector<yli::callback::CallbackParameter*>&,
-        std::shared_ptr<yli::data::AnyValue>);
+        const yli::data::AnyValue&);
 
 #endif

@@ -24,7 +24,7 @@
 #include <btBulletDynamicsCommon.h>
 
 // Include standard headers
-#include <memory>  // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
+#include <memory>  // std::make_unique, std::unique_ptr
 
 // `RigidBodyModule` class functions as a rigid body for Bullet physics.
 

@@ -28,7 +28,6 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
-#include <memory>        // std::make_shared, std::shared_ptr
 #include <regex>         // std::regex, std::regex_match
 #include <string>        // std::string
 
@@ -91,12 +90,12 @@ namespace yli::ontology
         {
             this->should_be_rendered = !this->universe->get_is_headless();
 
-            yli::ontology::VariableStruct should_be_rendered_variable_struct(std::make_shared<yli::data::AnyValue>(this->should_be_rendered));
+            yli::ontology::VariableStruct should_be_rendered_variable_struct;
             should_be_rendered_variable_struct.local_name = "should_be_rendered";
             should_be_rendered_variable_struct.activate_callback = &yli::ontology::activate_should_be_rendered;
             should_be_rendered_variable_struct.read_callback = &yli::ontology::read_should_be_rendered;
             should_be_rendered_variable_struct.should_call_activate_callback_now = true;
-            this->create_variable(should_be_rendered_variable_struct);
+            this->create_variable(should_be_rendered_variable_struct, yli::data::AnyValue(this->should_be_rendered));
         }
     }
 
@@ -227,7 +226,7 @@ namespace yli::ontology
         this->registry.erase_entity(name);
     }
 
-    void Entity::create_variable(const yli::ontology::VariableStruct& variable_struct)
+    void Entity::create_variable(const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value)
     {
         if (this->universe == nullptr)
         {
@@ -243,7 +242,7 @@ namespace yli::ontology
 
         yli::ontology::VariableStruct new_variable_struct(variable_struct);
         new_variable_struct.parent = this;
-        entity_factory->create_variable(new_variable_struct);
+        entity_factory->create_variable(new_variable_struct, any_value);
     }
 
     bool Entity::has_variable(const std::string& variable_name) const
@@ -256,7 +255,7 @@ namespace yli::ontology
         return dynamic_cast<yli::ontology::Variable*>(this->registry.get_entity(variable_name));
     }
 
-    bool Entity::set(const std::string& variable_name, std::shared_ptr<yli::data::AnyValue> variable_new_any_value)
+    bool Entity::set(const std::string& variable_name, const yli::data::AnyValue& variable_new_any_value)
     {
         yli::ontology::Variable* const variable = this->get(variable_name);
 

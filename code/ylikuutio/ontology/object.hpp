@@ -24,7 +24,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <string>   // std::string
 #include <variant>  // std::holds_alternative, std::variant
 #include <vector>   // std::vector
@@ -99,21 +99,21 @@ namespace yli::ontology
 
             // Public callbacks.
 
-            static std::shared_ptr<yli::data::AnyValue> create_object_with_parent_name_x_y_z(
+            static std::optional<yli::data::AnyValue> create_object_with_parent_name_x_y_z(
                     yli::ontology::Species* const parent,
-                    std::shared_ptr<std::string> object_name,
-                    std::shared_ptr<std::string> x,
-                    std::shared_ptr<std::string> y,
-                    std::shared_ptr<std::string> z);
+                    const std::string& object_name,
+                    const std::string& x,
+                    const std::string& y,
+                    const std::string& z);
 
-            static std::shared_ptr<yli::data::AnyValue> create_object_with_parent_name_x_y_z_yaw_pitch(
+            static std::optional<yli::data::AnyValue> create_object_with_parent_name_x_y_z_yaw_pitch(
                     yli::ontology::Species* const parent,
-                    std::shared_ptr<std::string> object_name,
-                    std::shared_ptr<std::string> x,
-                    std::shared_ptr<std::string> y,
-                    std::shared_ptr<std::string> z,
-                    std::shared_ptr<std::string> yaw,
-                    std::shared_ptr<std::string> pitch);
+                    const std::string& object_name,
+                    const std::string& x,
+                    const std::string& y,
+                    const std::string& z,
+                    const std::string& yaw,
+                    const std::string& pitch);
 
             // Public callbacks end here.
 

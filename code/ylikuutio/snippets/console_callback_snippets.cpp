@@ -21,7 +21,7 @@
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 
 namespace yli::ontology
@@ -31,20 +31,20 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    std::shared_ptr<yli::data::AnyValue> quit(yli::ontology::Console* const /* console */)
+    std::optional<yli::data::AnyValue> quit(yli::ontology::Console* const /* console */)
     {
         uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
-        return std::make_shared<yli::data::AnyValue>(exit_program_magic_number);
+        return yli::data::AnyValue(exit_program_magic_number);
     }
 
-    std::shared_ptr<yli::data::AnyValue> help(yli::ontology::Console* const console)
+    std::optional<yli::data::AnyValue> help(yli::ontology::Console* const console)
     {
         if (console == nullptr)
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         console->print_help();
-        return nullptr;
+        return std::nullopt;
     }
 }

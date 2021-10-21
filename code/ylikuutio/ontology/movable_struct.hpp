@@ -53,7 +53,6 @@ namespace yli::ontology
                 const float yaw,
                 const float pitch)
             : brain { brain },
-            scene { scene },
             cartesian_coordinates { cartesian_coordinates },
             spherical_coordinates { spherical_coordinates },
             yaw { yaw },
@@ -72,7 +71,6 @@ namespace yli::ontology
                 const std::string& local_name)
             : EntityStruct(global_name, local_name),
             brain { brain },
-            scene { scene },
             cartesian_coordinates { cartesian_coordinates },
             spherical_coordinates { spherical_coordinates },
             yaw { yaw },
