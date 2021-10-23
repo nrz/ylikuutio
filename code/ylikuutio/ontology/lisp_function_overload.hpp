@@ -166,10 +166,9 @@ namespace yli::ontology
                 std::size_t parameter_i = 0;                     // Start from the first parameter.
                 yli::ontology::Entity* context = this->universe; // `Universe` is the default context.
 
-                std::size_t tag;
                 std::optional<std::tuple<typename yli::data::Wrap<Types>::type...>> arg_tuple = this->process_args<
                     std::size_t, Types...>(
-                        tag,
+                        std::size_t {},
                         this->universe,
                         console,
                         context,
