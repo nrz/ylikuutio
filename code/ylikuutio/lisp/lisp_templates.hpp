@@ -81,7 +81,7 @@ namespace yli::lisp
         }
 
     template<>
-        std::optional<typename yli::data::WrapAllButStrings<const char&>::type> convert_string_to_value_and_advance_index<const char&>(
+        std::optional<typename yli::data::WrapAllButStrings<char>::type> convert_string_to_value_and_advance_index<char>(
                 yli::ontology::Universe* /* universe */,
                 yli::ontology::Console* /* console */,
                 yli::ontology::Entity*& /* context */,
@@ -97,7 +97,7 @@ namespace yli::lisp
 
             if (my_string.size() == 1)
             {
-                return yli::data::WrapAllButStrings<const char&>::type(my_string[0]);
+                return yli::data::WrapAllButStrings<char>::type(my_string[0]);
             }
 
             return std::nullopt;
