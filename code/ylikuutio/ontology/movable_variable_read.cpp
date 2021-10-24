@@ -38,278 +38,218 @@ namespace yli::ontology
 {
     class Entity;
 
-    std::optional<yli::data::AnyValue> read_cartesian_coordinates(yli::ontology::Entity* const entity)
+    std::optional<yli::data::AnyValue> read_cartesian_coordinates(yli::ontology::Entity& entity)
     {
-        if (entity == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(std::make_shared<glm::vec3>(movable->cartesian_coordinates));
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
-        if (universe == nullptr)
+        if (universe != nullptr)
         {
-            return std::nullopt;
+            return yli::data::AnyValue(std::make_shared<glm::vec3>(universe->current_camera_cartesian_coordinates));
         }
 
-        return yli::data::AnyValue(std::make_shared<glm::vec3>(universe->current_camera_cartesian_coordinates));
+        return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_x(yli::ontology::Entity* const entity)
+    std::optional<yli::data::AnyValue> read_x(yli::ontology::Entity& entity)
     {
-        if (entity == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(movable->cartesian_coordinates.x);
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
-        if (universe == nullptr)
+        if (universe != nullptr)
         {
-            return std::nullopt;
+            return yli::data::AnyValue(universe->current_camera_cartesian_coordinates.x);
         }
 
-        return yli::data::AnyValue(universe->current_camera_cartesian_coordinates.x);
+        return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_y(yli::ontology::Entity* const entity)
+    std::optional<yli::data::AnyValue> read_y(yli::ontology::Entity& entity)
     {
-        if (entity == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(movable->cartesian_coordinates.y);
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
-        if (universe == nullptr)
+        if (universe != nullptr)
         {
-            return std::nullopt;
+            return yli::data::AnyValue(universe->current_camera_cartesian_coordinates.y);
         }
 
-        return yli::data::AnyValue(universe->current_camera_cartesian_coordinates.y);
+        return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_z(yli::ontology::Entity* const entity)
+    std::optional<yli::data::AnyValue> read_z(yli::ontology::Entity& entity)
     {
-        if (entity == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(movable->cartesian_coordinates.z);
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
-        if (universe == nullptr)
+        if (universe != nullptr)
         {
-            return std::nullopt;
+            return yli::data::AnyValue(universe->current_camera_cartesian_coordinates.z);
         }
 
-        return yli::data::AnyValue(universe->current_camera_cartesian_coordinates.z);
+        return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_rho(yli::ontology::Entity* const entity)
+    std::optional<yli::data::AnyValue> read_rho(yli::ontology::Entity& entity)
     {
-        if (entity == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(movable->spherical_coordinates.rho);
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
-        if (universe == nullptr)
+        if (universe != nullptr)
         {
-            return std::nullopt;
+            return yli::data::AnyValue(universe->current_camera_spherical_coordinates.rho);
         }
 
-        return yli::data::AnyValue(universe->current_camera_spherical_coordinates.rho);
+        return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_theta(yli::ontology::Entity* const entity)
+    std::optional<yli::data::AnyValue> read_theta(yli::ontology::Entity& entity)
     {
-        if (entity == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(movable->spherical_coordinates.theta);
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
-        if (universe == nullptr)
+        if (universe != nullptr)
         {
-            return std::nullopt;
+            return yli::data::AnyValue(universe->current_camera_spherical_coordinates.theta);
         }
 
-        return yli::data::AnyValue(universe->current_camera_spherical_coordinates.theta);
+        return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_phi(yli::ontology::Entity* const entity)
+    std::optional<yli::data::AnyValue> read_phi(yli::ontology::Entity& entity)
     {
-        if (entity == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(movable->spherical_coordinates.phi);
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
-        if (universe == nullptr)
+        if (universe != nullptr)
         {
-            return std::nullopt;
+            return yli::data::AnyValue(universe->current_camera_spherical_coordinates.phi);
         }
 
-        return yli::data::AnyValue(universe->current_camera_spherical_coordinates.phi);
+        return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_up(yli::ontology::Entity* const entity)
+    std::optional<yli::data::AnyValue> read_up(yli::ontology::Entity& entity)
     {
-        if (entity == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(std::make_shared<glm::vec3>(movable->up));
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
-        if (universe == nullptr)
+        if (universe != nullptr)
         {
-            return std::nullopt;
+            return yli::data::AnyValue(&universe->current_camera_up);
         }
 
-        return yli::data::AnyValue(&universe->current_camera_up);
+        return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_right(yli::ontology::Entity* const entity)
+    std::optional<yli::data::AnyValue> read_right(yli::ontology::Entity& entity)
     {
-        if (entity == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(std::make_shared<glm::vec3>(movable->right));
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
-        if (universe == nullptr)
+        if (universe != nullptr)
         {
-            return std::nullopt;
+            return yli::data::AnyValue(&universe->current_camera_right);
         }
 
-        return yli::data::AnyValue(&universe->current_camera_right);
+        return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_yaw(yli::ontology::Entity* const entity)
+    std::optional<yli::data::AnyValue> read_yaw(yli::ontology::Entity& entity)
     {
-        if (entity == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(movable->yaw);
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
-        if (universe == nullptr)
+        if (universe != nullptr)
         {
-            return std::nullopt;
+            return yli::data::AnyValue(universe->current_camera_yaw);
         }
 
-        return yli::data::AnyValue(universe->current_camera_yaw);
+        return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_pitch(yli::ontology::Entity* const entity)
+    std::optional<yli::data::AnyValue> read_pitch(yli::ontology::Entity& entity)
     {
-        if (entity == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(movable->pitch);
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
-        if (universe == nullptr)
+        if (universe != nullptr)
         {
-            return std::nullopt;
+            return yli::data::AnyValue(universe->current_camera_pitch);
         }
 
-        return yli::data::AnyValue(universe->current_camera_pitch);
+        return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_azimuth(yli::ontology::Entity* const entity)
+    std::optional<yli::data::AnyValue> read_azimuth(yli::ontology::Entity& entity)
     {
-        if (entity == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
@@ -317,14 +257,14 @@ namespace yli::ontology
             return yli::data::AnyValue(azimuth);
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
-        if (universe == nullptr)
+        if (universe != nullptr)
         {
-            return std::nullopt;
+            const float azimuth = 0.5f * PI - universe->current_camera_yaw;
+            return yli::data::AnyValue(azimuth);
         }
 
-        const float azimuth = 0.5f * PI - universe->current_camera_yaw;
-        return yli::data::AnyValue(azimuth);
+        return std::nullopt;
     }
 }

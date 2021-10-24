@@ -116,14 +116,9 @@ namespace yli::map
         }
 
     template <typename T1, typename T2>
-        void print_keys_of_specific_type_to_console(const std::unordered_map<std::string, T1>& unordered_map, yli::ontology::Console* const console)
+        void print_keys_of_specific_type_to_console(const std::unordered_map<std::string, T1>& unordered_map, yli::ontology::Console& console)
         {
-            if (console == nullptr)
-            {
-                return;
-            }
-
-            const yli::ontology::Universe* const universe = console->get_universe();
+            const yli::ontology::Universe* const universe = console.get_universe();
 
             if (universe == nullptr)
             {
@@ -138,7 +133,7 @@ namespace yli::map
 
                 if (inherited_type != nullptr)
                 {
-                    console->print_text(key);
+                    console.print_text(key);
                 }
             }
         }

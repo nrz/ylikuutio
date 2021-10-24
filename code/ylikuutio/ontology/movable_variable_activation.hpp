@@ -31,20 +31,20 @@ namespace yli::ontology
     class Entity;
     class Variable;
 
-    std::optional<yli::data::AnyValue> activate_cartesian_coordinates(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-    std::optional<yli::data::AnyValue> activate_x(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-    std::optional<yli::data::AnyValue> activate_y(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-    std::optional<yli::data::AnyValue> activate_z(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+    std::optional<yli::data::AnyValue> activate_cartesian_coordinates(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
+    std::optional<yli::data::AnyValue> activate_x(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
+    std::optional<yli::data::AnyValue> activate_y(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
+    std::optional<yli::data::AnyValue> activate_z(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
 
-    std::optional<yli::data::AnyValue> activate_spherical_coordinates(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-    std::optional<yli::data::AnyValue> activate_rho(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-    std::optional<yli::data::AnyValue> activate_theta(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-    std::optional<yli::data::AnyValue> activate_phi(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+    std::optional<yli::data::AnyValue> activate_spherical_coordinates(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
+    std::optional<yli::data::AnyValue> activate_rho(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
+    std::optional<yli::data::AnyValue> activate_theta(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
+    std::optional<yli::data::AnyValue> activate_phi(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
 
-    std::optional<yli::data::AnyValue> activate_yaw(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
-    std::optional<yli::data::AnyValue> activate_pitch(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+    std::optional<yli::data::AnyValue> activate_yaw(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
+    std::optional<yli::data::AnyValue> activate_pitch(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
 
-    std::optional<yli::data::AnyValue> activate_azimuth(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+    std::optional<yli::data::AnyValue> activate_azimuth(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
 }
 
 #endif

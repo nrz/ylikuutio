@@ -100,14 +100,14 @@ namespace yli::ontology
             // Public callbacks.
 
             static std::optional<yli::data::AnyValue> create_object_with_parent_name_x_y_z(
-                    yli::ontology::Species* const parent,
+                    yli::ontology::Species& parent,
                     const std::string& object_name,
                     const std::string& x,
                     const std::string& y,
                     const std::string& z);
 
             static std::optional<yli::data::AnyValue> create_object_with_parent_name_x_y_z_yaw_pitch(
-                    yli::ontology::Species* const parent,
+                    yli::ontology::Species& parent,
                     const std::string& object_name,
                     const std::string& x,
                     const std::string& y,

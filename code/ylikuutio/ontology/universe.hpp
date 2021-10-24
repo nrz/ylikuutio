@@ -500,37 +500,37 @@ namespace yli::ontology
             // Public `Entity` bind callbacks.
 
             static std::optional<yli::data::AnyValue> bind(
-                    yli::ontology::Universe* const universe,
-                    yli::ontology::Entity* const child_or_apprentice_entity,
-                    yli::ontology::Entity* const parent_or_master_entity);
+                    yli::ontology::Universe& universe,
+                    yli::ontology::Entity& child_or_apprentice_entity,
+                    yli::ontology::Entity& parent_or_master_entity);
 
             // Public `Entity` create callbacks.
 
             // Public `Entity` delete callbacks.
 
             static std::optional<yli::data::AnyValue> delete_entity(
-                    yli::ontology::Universe* const universe,
-                    yli::ontology::Entity* const entity);
+                    yli::ontology::Universe& universe,
+                    yli::ontology::Entity& entity);
 
             // Public `Entity` naming callbacks.
 
             static std::optional<yli::data::AnyValue> set_global_name_for_entity(
-                    yli::ontology::Entity* const entity,
+                    yli::ontology::Entity& entity,
                     const std::string& new_value);
 
             static std::optional<yli::data::AnyValue> set_local_name_for_entity(
-                    yli::ontology::Entity* const entity,
+                    yli::ontology::Entity& entity,
                     const std::string& new_value);
 
             // Public `Entity` activate callbacks.
 
-            static std::optional<yli::data::AnyValue> activate_entity(yli::ontology::Entity* const entity);
+            static std::optional<yli::data::AnyValue> activate_entity(yli::ontology::Entity& entity);
 
             // Public YliLisp-related callbacks.
 
             static std::optional<yli::data::AnyValue> eval(
-                    yli::ontology::Console* const console,
-                    yli::ontology::Entity* const universe_entity,
+                    yli::ontology::Console& console,
+                    yli::ontology::Entity& universe_entity,
                     const std::vector<std::string>& command_parameters);
 
             // Public data printing callbacks.
@@ -540,23 +540,23 @@ namespace yli::ontology
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> info1(
-                    yli::ontology::Universe* const universe,
-                    yli::ontology::Console* const console,
-                    yli::ontology::Entity* const entity);
+                    yli::ontology::Universe& universe,
+                    yli::ontology::Console& console,
+                    yli::ontology::Entity& entity);
 
             static std::optional<yli::data::AnyValue> print_entities(
-                    yli::ontology::Universe* const universe,
-                    yli::ontology::Console* const console);
+                    yli::ontology::Universe& universe,
+                    yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> print_parent(
-                    yli::ontology::Universe* const universe,
-                    yli::ontology::Console* const console,
-                    yli::ontology::Entity* const entity);
+                    yli::ontology::Universe&,
+                    yli::ontology::Console& console,
+                    yli::ontology::Entity& entity);
 
             // Other public callbacks.
 
             static std::optional<yli::data::AnyValue> screenshot(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     const std::string& filename);
 
             // Public callbacks end here.

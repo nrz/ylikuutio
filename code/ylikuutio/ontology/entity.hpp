@@ -112,7 +112,7 @@ namespace yli::ontology
             // Public `Entity` creation callbacks.
 
             static std::optional<yli::data::AnyValue> create_variable_with_parent_name_type_value(
-                    yli::ontology::Entity* const parent,
+                    yli::ontology::Entity& parent,
                     const std::string& variable_name,
                     const std::string& variable_type,
                     const std::string& variable_value);
@@ -120,17 +120,17 @@ namespace yli::ontology
             // Public data printing callbacks.
 
             static std::optional<yli::data::AnyValue> print_children(
-                    yli::ontology::Console* const console,
-                    yli::ontology::Entity* const entity);
+                    yli::ontology::Console& console,
+                    yli::ontology::Entity& entity);
 
             static std::optional<yli::data::AnyValue> print_variables0(
-                    yli::ontology::Universe* const universe,
-                    yli::ontology::Console* const console);
+                    yli::ontology::Universe& universe,
+                    yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> print_variables1(
-                    yli::ontology::Universe* const universe,
-                    yli::ontology::Console* const console,
-                    yli::ontology::Entity* const entity);
+                    yli::ontology::Universe&,
+                    yli::ontology::Console& console,
+                    yli::ontology::Entity& entity);
 
             // Public callbacks end here.
 

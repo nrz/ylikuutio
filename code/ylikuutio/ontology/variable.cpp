@@ -109,7 +109,7 @@ namespace yli::ontology
             return this->variable_value;
         }
 
-        return this->read_callback(this->parent);
+        return this->read_callback(*this->parent);
     }
 
     void Variable::set(const yli::data::AnyValue& new_value)
@@ -123,7 +123,7 @@ namespace yli::ontology
 
         if (this->activate_callback != nullptr)
         {
-            this->activate_callback(this->parent, this);
+            this->activate_callback(*this->parent, *this);
         }
     }
 
@@ -138,72 +138,57 @@ namespace yli::ontology
 
         if (this->activate_callback != nullptr)
         {
-            this->activate_callback(this->parent, this);
+            this->activate_callback(*this->parent, *this);
         }
     }
 
     // Public callbacks.
 
     std::optional<yli::data::AnyValue> Variable::set_variable_const_std_string(
-            yli::ontology::Variable* const variable,
+            yli::ontology::Variable& variable,
             const std::string& new_value)
     {
         // Usage:
         // to set variable: set2 <variable-name> <variable-value>
 
-        if (variable == nullptr)
-        {
-            return std::nullopt;
-        }
-
         // Set a new value and call activate callback if there is such.
-        variable->set(new_value);
+        variable.set(new_value);
         return std::nullopt;
     }
 
     std::optional<yli::data::AnyValue> Variable::set_variable_variable(
-            yli::ontology::Variable* const dest_variable,
-            yli::ontology::Universe* const /* context */, // A context is needed so that correct `Variable is bound to the function call.
-            yli::ontology::Variable* const src_variable)
+            yli::ontology::Variable& dest_variable,
+            yli::ontology::Universe&,               // A context is needed so that correct `Variable` is bound to the function call.
+            yli::ontology::Variable& src_variable)
     {
         // Usage:
         // to set variable: set <dest-variable-name> <src-variable-name>
 
-        if (dest_variable == nullptr || src_variable == nullptr)
-        {
-            return std::nullopt;
-        }
-
         // Set a new value and call activate callback if there is such.
 
-        std::optional<yli::data::AnyValue> any_value = src_variable->get();
+        std::optional<yli::data::AnyValue> any_value = src_variable.get();
 
         if (any_value)
         {
-            dest_variable->set(*any_value);
+            dest_variable.set(*any_value);
         }
 
         return std::nullopt;
     }
 
     std::optional<yli::data::AnyValue> Variable::print_value1(
-            yli::ontology::Console* const console,
-            yli::ontology::Universe* const /* context */, // A context is needed so that correct `Variable` is bound to the function call.
-            yli::ontology::Variable* const variable)
+            yli::ontology::Console& console,
+            yli::ontology::Universe&,          // A context is needed so that correct `Variable` is bound to the function call.
+            yli::ontology::Variable& variable)
     {
         // Usage:
         // to get variable value: get1 <variable-name>
 
-        if (console == nullptr || variable == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        std::optional<yli::data::AnyValue> variable_value = variable->get();
+        std::optional<yli::data::AnyValue> variable_value = variable.get();
 
         if (variable_value)
         {
-            console->print_text((*variable_value).get_string());
+            console.print_text((*variable_value).get_string());
         }
 
         return std::nullopt;
@@ -215,7 +200,7 @@ namespace yli::ontology
     {
         if (this->activate_callback != nullptr)
         {
-            this->activate_callback(this->parent, this);
+            this->activate_callback(*this->parent, *this);
         }
     }
 }

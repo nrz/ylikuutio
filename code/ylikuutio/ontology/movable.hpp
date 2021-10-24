@@ -240,12 +240,12 @@ namespace yli::ontology
             static float get_closest_visible_dest_z_towards(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
 
             // Callbacks for looping through objects.
-            static void* get_first_allied_object(yli::ontology::Object* object);       // point `allied_iterator` to the first object, `nullptr` if N/A.
-            static void* get_next_allied_object(yli::ontology::Object* object);        // advance `allied_iterator`, `nullptr` if N/A.
-            static void* get_first_other_allied_object(yli::ontology::Object* object); // point `allied_other_iterator` to the first other object, `nullptr` if N/A.
-            static void* get_next_other_allied_object(yli::ontology::Object* object);  // advance `allied_other_iterator`, `nullptr` if N/A.
-            static void* get_first_opponent_object(yli::ontology::Object* object);     // point `opponent_iterator` to the first opponent, `nullptr` if N/A.
-            static void* get_next_opponent_object(yli::ontology::Object* object);      // advance `opponent_iterator`, `nullptr` if N/A.
+            static void* get_first_allied_object(yli::ontology::Object& object);       // point `allied_iterator` to the first object, `nullptr` if N/A.
+            static void* get_next_allied_object(yli::ontology::Object& object);        // advance `allied_iterator`, `nullptr` if N/A.
+            static void* get_first_other_allied_object(yli::ontology::Object& object); // point `allied_other_iterator` to the first other object, `nullptr` if N/A.
+            static void* get_next_other_allied_object(yli::ontology::Object& object);  // advance `allied_other_iterator`, `nullptr` if N/A.
+            static void* get_first_opponent_object(yli::ontology::Object& object);     // point `opponent_iterator` to the first opponent, `nullptr` if N/A.
+            static void* get_next_opponent_object(yli::ontology::Object& object);      // advance `opponent_iterator`, `nullptr` if N/A.
 
             // Public callbacks end here.
 

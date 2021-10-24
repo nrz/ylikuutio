@@ -424,7 +424,7 @@ namespace yli::ontology
             // Console command callbacks begin here.
 
             static std::optional<yli::data::AnyValue> clear(
-                    yli::ontology::Console* const console);
+                    yli::ontology::Console& console);
 
             // Public callbacks end here.
 

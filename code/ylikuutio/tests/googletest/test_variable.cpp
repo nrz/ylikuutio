@@ -2784,11 +2784,11 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
     yli::ontology::Variable* const variable = universe->get("foo");
 
-    yli::ontology::Variable::set_variable_const_std_string(variable, "false");
+    yli::ontology::Variable::set_variable_const_std_string(*variable, "false");
     ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
     ASSERT_FALSE(std::get<bool>(variable->variable_value.data));
 
-    yli::ontology::Variable::set_variable_const_std_string(variable, "true");
+    yli::ontology::Variable::set_variable_const_std_string(*variable, "true");
     ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
     ASSERT_TRUE(std::get<bool>(variable->variable_value.data));
 }
@@ -2805,11 +2805,11 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
     yli::ontology::Variable* const variable = universe->get("foo");
 
-    yli::ontology::Variable::set_variable_const_std_string(variable, "true");
+    yli::ontology::Variable::set_variable_const_std_string(*variable, "true");
     ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
     ASSERT_TRUE(std::get<bool>(variable->variable_value.data));
 
-    yli::ontology::Variable::set_variable_const_std_string(variable, "false");
+    yli::ontology::Variable::set_variable_const_std_string(*variable, "false");
     ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
     ASSERT_FALSE(std::get<bool>(variable->variable_value.data));
 }
@@ -2826,11 +2826,11 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
     yli::ontology::Variable* const variable = universe->get("foo");
 
-    yli::ontology::Variable::set_variable_const_std_string(variable, "true");
+    yli::ontology::Variable::set_variable_const_std_string(*variable, "true");
     ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
     ASSERT_TRUE(std::get<bool>(variable->variable_value.data));
 
-    yli::ontology::Variable::set_variable_const_std_string(variable, "false");
+    yli::ontology::Variable::set_variable_const_std_string(*variable, "false");
     ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
     ASSERT_FALSE(std::get<bool>(variable->variable_value.data));
 }
@@ -2847,11 +2847,11 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
     yli::ontology::Variable* const variable = universe->get("foo");
 
-    yli::ontology::Variable::set_variable_const_std_string(variable, "false");
+    yli::ontology::Variable::set_variable_const_std_string(*variable, "false");
     ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
     ASSERT_FALSE(std::get<bool>(variable->variable_value.data));
 
-    yli::ontology::Variable::set_variable_const_std_string(variable, "true");
+    yli::ontology::Variable::set_variable_const_std_string(*variable, "true");
     ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
     ASSERT_TRUE(std::get<bool>(variable->variable_value.data));
 }
