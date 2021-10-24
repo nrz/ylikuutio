@@ -271,7 +271,7 @@ namespace yli::lisp
                 const std::vector<std::string>&, // parameter vector.
                 std::size_t&)                    // parameter_i.
         {
-            // Note: this specialization returns the `yli::ontology::Universe*` provided as an argument,
+            // Note: this specialization returns the `yli::ontology::Universe&` provided as an argument,
             // and does not do a lookup.
 
             context = &universe;
@@ -301,7 +301,7 @@ namespace yli::lisp
                 const std::vector<std::string>&, // parameter vector.
                 std::size_t&)                    // parameter_i.
         {
-            // Note: this specialization returns the `yli::ontology::Console*` provided as an argument,
+            // Note: this specialization returns the `yli::ontology::Console&` provided as an argument,
             // and does not do a lookup.
 
             context = &console;
