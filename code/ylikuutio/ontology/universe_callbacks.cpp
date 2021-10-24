@@ -46,26 +46,21 @@ namespace yli::ontology
     // Public `Entity` bind callbacks.
 
     std::optional<yli::data::AnyValue> Universe::bind(
-            yli::ontology::Universe* const universe,
-            yli::ontology::Entity* const child_or_apprentice_entity,
-            yli::ontology::Entity* const parent_or_master_entity)
+            yli::ontology::Universe& universe,
+            yli::ontology::Entity& child_or_apprentice_entity,
+            yli::ontology::Entity& parent_or_master_entity)
     {
-        if (universe == nullptr || child_or_apprentice_entity == nullptr || parent_or_master_entity == nullptr)
-        {
-            return std::nullopt;
-        }
+        yli::ontology::Material* const child_or_apprentice_material = dynamic_cast<yli::ontology::Material*>(&child_or_apprentice_entity);
+        yli::ontology::Shader* const parent_or_master_shader = dynamic_cast<yli::ontology::Shader*>(&parent_or_master_entity);
 
-        yli::ontology::Material* const child_or_apprentice_material = dynamic_cast<yli::ontology::Material*>(child_or_apprentice_entity);
-        yli::ontology::Shader* const parent_or_master_shader = dynamic_cast<yli::ontology::Shader*>(parent_or_master_entity);
+        yli::ontology::Species* const child_or_apprentice_species = dynamic_cast<yli::ontology::Species*>(&child_or_apprentice_entity);
+        yli::ontology::Material* const parent_or_master_material = dynamic_cast<yli::ontology::Material*>(&parent_or_master_entity);
 
-        yli::ontology::Species* const child_or_apprentice_species = dynamic_cast<yli::ontology::Species*>(child_or_apprentice_entity);
-        yli::ontology::Material* const parent_or_master_material = dynamic_cast<yli::ontology::Material*>(parent_or_master_entity);
+        yli::ontology::Movable* const child_or_apprentice_movable = dynamic_cast<yli::ontology::Movable*>(&child_or_apprentice_entity);
+        yli::ontology::Brain* const parent_or_master_brain = dynamic_cast<yli::ontology::Brain*>(&parent_or_master_entity);
 
-        yli::ontology::Movable* const child_or_apprentice_movable = dynamic_cast<yli::ontology::Movable*>(child_or_apprentice_entity);
-        yli::ontology::Brain* const parent_or_master_brain = dynamic_cast<yli::ontology::Brain*>(parent_or_master_entity);
-
-        yli::ontology::Console* const child_or_apprentice_console = dynamic_cast<yli::ontology::Console*>(child_or_apprentice_entity);
-        yli::ontology::Font2D* const parent_or_master_font_2d = dynamic_cast<yli::ontology::Font2D*>(parent_or_master_entity);
+        yli::ontology::Console* const child_or_apprentice_console = dynamic_cast<yli::ontology::Console*>(&child_or_apprentice_entity);
+        yli::ontology::Font2D* const parent_or_master_font_2d = dynamic_cast<yli::ontology::Font2D*>(&parent_or_master_entity);
 
         if (child_or_apprentice_material != nullptr && parent_or_master_shader != nullptr)
         {
@@ -85,7 +80,7 @@ namespace yli::ontology
         }
         else
         {
-            child_or_apprentice_entity->bind_to_new_parent(parent_or_master_entity);
+            child_or_apprentice_entity.bind_to_new_parent(&parent_or_master_entity);
         }
 
         return std::nullopt;
@@ -96,27 +91,22 @@ namespace yli::ontology
     // Public `Entity` delete callbacks.
 
     std::optional<yli::data::AnyValue> Universe::delete_entity(
-            yli::ontology::Universe* const universe,
-            yli::ontology::Entity* const entity)
+            yli::ontology::Universe& universe,
+            yli::ontology::Entity& entity)
     {
-        if (universe == nullptr || entity == nullptr)
+        if (entity.get_can_be_erased())
         {
-            return std::nullopt;
-        }
-
-        if (entity->get_can_be_erased())
-        {
-            yli::ontology::Entity* const parent = entity->get_parent();
+            yli::ontology::Entity* const parent = entity.get_parent();
 
             if (parent != nullptr)
             {
                 // Erase the local name.
-                parent->registry.erase_entity(entity->get_local_name());
+                parent->registry.erase_entity(entity.get_local_name());
             }
 
             // Erase the global name.
-            universe->registry.erase_entity(entity->get_global_name());
-            delete entity;
+            universe.registry.erase_entity(entity.get_global_name());
+            delete &entity;
         }
 
         return std::nullopt;
@@ -125,41 +115,28 @@ namespace yli::ontology
     // Public `Entity` naming callbacks.
 
     std::optional<yli::data::AnyValue> Universe::set_global_name_for_entity(
-            yli::ontology::Entity* const entity,
+            yli::ontology::Entity& entity,
             const std::string& global_name)
     {
-        if (entity == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        entity->set_global_name(global_name);
+        entity.set_global_name(global_name);
 
         return std::nullopt;
     }
 
     std::optional<yli::data::AnyValue> Universe::set_local_name_for_entity(
-            yli::ontology::Entity* const entity,
+            yli::ontology::Entity& entity,
             const std::string& local_name)
     {
-        if (entity == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        entity->set_local_name(local_name);
+        entity.set_local_name(local_name);
 
         return std::nullopt;
     }
 
     // Public `Entity` activate callbacks.
 
-    std::optional<yli::data::AnyValue> Universe::activate_entity(yli::ontology::Entity* const entity)
+    std::optional<yli::data::AnyValue> Universe::activate_entity(yli::ontology::Entity& entity)
     {
-        if (entity != nullptr)
-        {
-            entity->activate();
-        }
+        entity.activate();
 
         return std::nullopt;
     }
@@ -167,16 +144,11 @@ namespace yli::ontology
     // Public YliLisp-related callbacks.
 
     std::optional<yli::data::AnyValue> Universe::eval(
-            yli::ontology::Console* const console,
-            yli::ontology::Entity* const universe_entity,
+            yli::ontology::Console& console,
+            yli::ontology::Entity& universe_entity,
             const std::vector<std::string>& command_parameters)
     {
-        if (universe_entity == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&universe_entity);
 
         if (universe == nullptr)
         {
@@ -198,11 +170,7 @@ namespace yli::ontology
         }
 
         const std::string result = universe->eval_string(expression);
-
-        if (console != nullptr)
-        {
-            console->print_text(result);
-        }
+        console.print_text(result);
 
         return std::nullopt;
     }
@@ -219,70 +187,60 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Universe::info1(
-            yli::ontology::Universe* const universe,
-            yli::ontology::Console* const console,
-            yli::ontology::Entity* const entity)
+            yli::ontology::Universe& universe,
+            yli::ontology::Console& console,
+            yli::ontology::Entity& entity)
     {
-        if (console == nullptr || universe == nullptr || entity == nullptr)
-        {
-            return std::nullopt;
-        }
-
         // OK, let's find out information about this `Entity`.
 
-        console->print_text(entity->get_type());
+        console.print_text(entity.get_type());
 
-        const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) entity);
+        const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) &entity);
         std::stringstream memory_address_stringstream;
         memory_address_stringstream << "0x" << std::hex << memory_address;
 
         const std::string entity_info = "memory address:   " + memory_address_stringstream.str();
-        console->print_text(entity_info);
+        console.print_text(entity_info);
 
-        if (entity->get_parent() == nullptr)
+        if (entity.get_parent() == nullptr)
         {
-            console->print_text("parent's address: nullptr");
+            console.print_text("parent's address: nullptr");
         }
         else
         {
-            std::uintptr_t parents_memory_address = reinterpret_cast<std::uintptr_t>((void*) entity->get_parent());
+            std::uintptr_t parents_memory_address = reinterpret_cast<std::uintptr_t>((void*) entity.get_parent());
             std::stringstream parents_memory_address_stringstream;
             parents_memory_address_stringstream << "0x" << std::hex << parents_memory_address;
 
             std::string parent_info = "parent's address: ";
             parent_info += parents_memory_address_stringstream.str();
-            console->print_text(parent_info);
+            console.print_text(parent_info);
         }
 
-        std::size_t number_of_children = entity->get_number_of_all_children();
+        std::size_t number_of_children = entity.get_number_of_all_children();
         std::stringstream number_of_children_stringstream;
         number_of_children_stringstream << number_of_children;
 
         std::string children_info = "number of children: ";
         children_info += number_of_children_stringstream.str();
-        console->print_text(children_info);
+        console.print_text(children_info);
 
-        std::size_t number_of_descendants = entity->get_number_of_all_descendants();
+        std::size_t number_of_descendants = entity.get_number_of_all_descendants();
         std::stringstream number_of_descendants_stringstream;
         number_of_descendants_stringstream << number_of_descendants;
 
         std::string descendants_info = "number of descendants: ";
         descendants_info += number_of_descendants_stringstream.str();
-        console->print_text(descendants_info);
+        console.print_text(descendants_info);
 
         return std::nullopt;
     }
 
     std::optional<yli::data::AnyValue> Universe::print_entities(
-            yli::ontology::Universe* const universe,
-            yli::ontology::Console* const console)
+            yli::ontology::Universe& universe,
+            yli::ontology::Console& console)
     {
-        if (universe == nullptr || console == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        std::vector<std::pair<std::string, yli::ontology::Entity*>> key_and_value_vector = yli::map::get_keys_and_values(universe->registry.get_entity_map());
+        std::vector<std::pair<std::string, yli::ontology::Entity*>> key_and_value_vector = yli::map::get_keys_and_values(universe.registry.get_entity_map());
 
         for (auto& [key, value] : key_and_value_vector)
         {
@@ -291,37 +249,32 @@ namespace yli::ontology
             memory_address_stringstream << " 0x" << std::hex << memory_address;
 
             const std::string entity_info = key + memory_address_stringstream.str();
-            console->print_text(entity_info);
+            console.print_text(entity_info);
         }
 
         return std::nullopt;
     }
 
     std::optional<yli::data::AnyValue> Universe::print_parent(
-            yli::ontology::Universe* const universe,
-            yli::ontology::Console* const console,
-            yli::ontology::Entity* const entity)
+            yli::ontology::Universe&,
+            yli::ontology::Console& console,
+            yli::ontology::Entity& entity)
     {
-        if (universe == nullptr || console == nullptr || entity == nullptr)
-        {
-            return std::nullopt;
-        }
-
         // OK, let's find out the parent of this `Entity`.
 
-        if (entity->get_parent() == nullptr)
+        if (entity.get_parent() == nullptr)
         {
-            console->print_text("parent's address: nullptr");
+            console.print_text("parent's address: nullptr");
         }
         else
         {
-            std::uintptr_t parents_memory_address = reinterpret_cast<std::uintptr_t>((void*) entity->get_parent());
+            std::uintptr_t parents_memory_address = reinterpret_cast<std::uintptr_t>((void*) entity.get_parent());
             std::stringstream parents_memory_address_stringstream;
             parents_memory_address_stringstream << "0x" << std::hex << parents_memory_address;
 
             std::string parent_info = "parent's address: ";
             parent_info += parents_memory_address_stringstream.str();
-            console->print_text(parent_info);
+            console.print_text(parent_info);
         }
 
         return std::nullopt;
@@ -330,29 +283,29 @@ namespace yli::ontology
     // Other public callbacks.
 
     std::optional<yli::data::AnyValue> Universe::screenshot(
-            yli::ontology::Universe* const universe,
+            yli::ontology::Universe& universe,
             const std::string& filename)
     {
-        if (universe == nullptr || !universe->framebuffer_module.get_in_use())
+        if (!universe.framebuffer_module.get_in_use())
         {
             return std::nullopt;
         }
 
         // https://learnopengl.com/Advanced-OpenGL/Framebuffers
 
-        const std::size_t texture_width = universe->framebuffer_module.get_texture_width();
-        const std::size_t texture_height = universe->framebuffer_module.get_texture_height();
+        const std::size_t texture_width = universe.framebuffer_module.get_texture_width();
+        const std::size_t texture_height = universe.framebuffer_module.get_texture_height();
 
-        if (!universe->framebuffer_module.get_is_initialized())
+        if (!universe.framebuffer_module.get_is_initialized())
         {
-            universe->framebuffer_module.create_framebuffer_object();
+            universe.framebuffer_module.create_framebuffer_object();
         }
 
-        universe->framebuffer_module.bind();
+        universe.framebuffer_module.bind();
 
-        if (!universe->framebuffer_module.get_is_initialized())
+        if (!universe.framebuffer_module.get_is_initialized())
         {
-            universe->framebuffer_module.initialize(universe->background_red, universe->background_green, universe->background_blue, universe->background_alpha);
+            universe.framebuffer_module.initialize(universe.background_red, universe.background_green, universe.background_blue, universe.background_alpha);
         }
 
         // Clear the framebuffer.
@@ -360,14 +313,14 @@ namespace yli::ontology
 
         // Adjust viewport for the framebuffer.
         glViewport(0, 0, texture_width, texture_height);
-        universe->render_without_changing_depth_test(); // Render to framebuffer.
+        universe.render_without_changing_depth_test(); // Render to framebuffer.
 
         // Transfer data from the GPU texture to a CPU array and save into a file.
         const bool should_flip_texture = true;
         yli::opengl::save_data_from_gpu_texture_into_file(
                 GL_RGB, GL_UNSIGNED_BYTE, texture_width, texture_height, filename, should_flip_texture);
 
-        universe->restore_onscreen_rendering();
+        universe.restore_onscreen_rendering();
 
         return std::nullopt;
     }

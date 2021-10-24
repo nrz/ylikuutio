@@ -77,14 +77,14 @@ namespace yli::ontology
             // Public callbacks.
 
             static std::optional<yli::data::AnyValue> create_holobiont_with_parent_name_x_y_z(
-                    yli::ontology::Symbiosis* const parent,
+                    yli::ontology::Symbiosis& parent,
                     const std::string& holobiont_name,
                     const std::string& x,
                     const std::string& y,
                     const std::string& z);
 
             static std::optional<yli::data::AnyValue> create_holobiont_with_parent_name_x_y_z_yaw_pitch(
-                    yli::ontology::Symbiosis* const parent,
+                    yli::ontology::Symbiosis& parent,
                     const std::string& holobiont_name,
                     const std::string& x,
                     const std::string& y,

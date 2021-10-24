@@ -564,18 +564,15 @@ namespace yli::ontology
     // Console command callbacks begin here.
 
     std::optional<yli::data::AnyValue> Console::clear(
-            yli::ontology::Console* const console)
+            yli::ontology::Console& console)
     {
-        if (console != nullptr)
-        {
-            console->in_history = false;
-            console->in_historical_input = false;
-            console->history_line_i = 0;
-            console->historical_input_i = 0;
-            console->command_history.clear();
-            console->console_history.clear();
-            console->current_input.clear();
-        }
+        console.in_history = false;
+        console.in_historical_input = false;
+        console.history_line_i = 0;
+        console.historical_input_i = 0;
+        console.command_history.clear();
+        console.console_history.clear();
+        console.current_input.clear();
 
         const uint32_t clear_console_magic_number = CLEAR_CONSOLE_MAGIC_NUMBER;
         return yli::data::AnyValue(clear_console_magic_number);

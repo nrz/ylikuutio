@@ -46,7 +46,7 @@ namespace yli::ontology
         }
     }
 
-    void Entity::unbind_variable(const std::size_t childID, const std::string& local_name)
+    void Entity::unbind_variable(const std::size_t childID)
     {
         this->parent_of_variables.unbind_child(childID);
     }

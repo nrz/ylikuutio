@@ -687,7 +687,7 @@ namespace yli::ontology
 
         if (yli::lisp::parse(input_string, command, parameter_vector))
         {
-            std::optional<yli::data::AnyValue> any_value = yli::lisp::execute(console, command, parameter_vector);
+            std::optional<yli::data::AnyValue> any_value = yli::lisp::execute(*console, command, parameter_vector);
             console->in_historical_input = false;
             console->cursor_it = console->current_input.begin();
             console->cursor_index = 0;

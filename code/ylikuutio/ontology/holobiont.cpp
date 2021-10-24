@@ -211,18 +211,13 @@ namespace yli::ontology
     // Public callbacks.
 
     std::optional<yli::data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z(
-            yli::ontology::Symbiosis* const parent,
+            yli::ontology::Symbiosis& parent,
             const std::string& holobiont_name,
             const std::string& x,
             const std::string& y,
             const std::string& z)
     {
-        if (parent == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        const yli::ontology::EntityFactory* const entity_factory = parent->get_entity_factory();
+        const yli::ontology::EntityFactory* const entity_factory = parent.get_entity_factory();
 
         if (entity_factory == nullptr)
         {
@@ -257,14 +252,14 @@ namespace yli::ontology
 
         yli::ontology::HolobiontStruct holobiont_struct;
         holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
-        holobiont_struct.parent = parent;
+        holobiont_struct.parent = &parent;
         holobiont_struct.local_name = holobiont_name;
         entity_factory->create_holobiont(holobiont_struct);
         return std::nullopt;
     }
 
     std::optional<yli::data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch(
-            yli::ontology::Symbiosis* const parent,
+            yli::ontology::Symbiosis& parent,
             const std::string& holobiont_name,
             const std::string& x,
             const std::string& y,
@@ -272,12 +267,7 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
-        if (parent == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        const yli::ontology::EntityFactory* const entity_factory = parent->get_entity_factory();
+        const yli::ontology::EntityFactory* const entity_factory = parent.get_entity_factory();
 
         if (entity_factory == nullptr)
         {
@@ -330,7 +320,7 @@ namespace yli::ontology
         holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
         holobiont_struct.yaw = float_yaw;
         holobiont_struct.pitch = float_pitch;
-        holobiont_struct.parent = parent;
+        holobiont_struct.parent = &parent;
         holobiont_struct.local_name = holobiont_name;
         entity_factory->create_holobiont(holobiont_struct);
         return std::nullopt;

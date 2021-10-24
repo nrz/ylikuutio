@@ -450,18 +450,13 @@ namespace yli::ontology
     // Public callbacks.
 
     std::optional<yli::data::AnyValue> Object::create_object_with_parent_name_x_y_z(
-            yli::ontology::Species* const parent,
+            yli::ontology::Species& parent,
             const std::string& object_name,
             const std::string& x,
             const std::string& y,
             const std::string& z)
     {
-        if (parent == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::EntityFactory* const entity_factory = parent->get_entity_factory();
+        yli::ontology::EntityFactory* const entity_factory = parent.get_entity_factory();
 
         if (entity_factory == nullptr)
         {
@@ -494,7 +489,7 @@ namespace yli::ontology
         float float_y = std::get<float>(y_any_value.data);
         float float_z = std::get<float>(z_any_value.data);
 
-        yli::ontology::ObjectStruct object_struct(parent);
+        yli::ontology::ObjectStruct object_struct(&parent);
         object_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
         object_struct.local_name = object_name;
         entity_factory->create_object(object_struct);
@@ -502,7 +497,7 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Object::create_object_with_parent_name_x_y_z_yaw_pitch(
-            yli::ontology::Species* const parent,
+            yli::ontology::Species& parent,
             const std::string& object_name,
             const std::string& x,
             const std::string& y,
@@ -510,12 +505,7 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
-        if (parent == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::EntityFactory* const entity_factory = parent->get_entity_factory();
+        yli::ontology::EntityFactory* const entity_factory = parent.get_entity_factory();
 
         if (entity_factory == nullptr)
         {
@@ -564,7 +554,7 @@ namespace yli::ontology
         float float_yaw = std::get<float>(yaw_any_value.data);
         float float_pitch = std::get<float>(pitch_any_value.data);
 
-        yli::ontology::ObjectStruct object_struct(parent);
+        yli::ontology::ObjectStruct object_struct(&parent);
         object_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
         object_struct.yaw = float_yaw;
         object_struct.pitch = float_pitch;

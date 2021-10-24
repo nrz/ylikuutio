@@ -42,25 +42,13 @@ namespace yli::ontology
 {
     class Entity;
 
-    std::optional<yli::data::AnyValue> activate_cartesian_coordinates(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> activate_cartesian_coordinates(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
     {
-        if (entity == nullptr)
-        {
-            std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: `entity` is `nullptr`!\n";
-            return std::nullopt;
-        }
-
-        if (variable == nullptr)
-        {
-            std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: `variable` is `nullptr`!\n";
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& cartesian_coordinates_any_value = variable->variable_value;
+            const yli::data::AnyValue& cartesian_coordinates_any_value = variable.variable_value;
 
             if (!std::holds_alternative<std::shared_ptr<glm::vec3>>(cartesian_coordinates_any_value.data))
             {
@@ -72,7 +60,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
         if (universe == nullptr)
         {
@@ -80,7 +68,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& cartesian_coordinates_any_value = variable->variable_value;
+        const yli::data::AnyValue& cartesian_coordinates_any_value = variable.variable_value;
 
         if (!std::holds_alternative<std::shared_ptr<glm::vec3>>(cartesian_coordinates_any_value.data))
         {
@@ -92,25 +80,13 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> activate_x(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> activate_x(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
     {
-        if (entity == nullptr)
-        {
-            std::cerr << "ERROR: `yli::ontology::activate_x`: `entity` is `nullptr`!\n";
-            return std::nullopt;
-        }
-
-        if (variable == nullptr)
-        {
-            std::cerr << "ERROR: `yli::ontology::activate_x`: `variable` is `nullptr`!\n";
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& x_any_value = variable->variable_value;
+            const yli::data::AnyValue& x_any_value = variable.variable_value;
 
             if (!std::holds_alternative<float>(x_any_value.data))
             {
@@ -131,7 +107,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
         if (universe == nullptr)
         {
@@ -139,7 +115,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& x_any_value = variable->variable_value;
+        const yli::data::AnyValue& x_any_value = variable.variable_value;
 
         if (!std::holds_alternative<float>(x_any_value.data))
         {
@@ -151,25 +127,13 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> activate_y(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> activate_y(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
     {
-        if (entity == nullptr)
-        {
-            std::cerr << "ERROR: `yli::ontology::activate_y`: `entity` is `nullptr`!\n";
-            return std::nullopt;
-        }
-
-        if (variable == nullptr)
-        {
-            std::cerr << "ERROR: `yli::ontology::activate_y`: `variable` is `nullptr`!\n";
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& y_any_value = variable->variable_value;
+            const yli::data::AnyValue& y_any_value = variable.variable_value;
 
             if (!std::holds_alternative<float>(y_any_value.data))
             {
@@ -190,7 +154,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
         if (universe == nullptr)
         {
@@ -198,7 +162,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& y_any_value = variable->variable_value;
+        const yli::data::AnyValue& y_any_value = variable.variable_value;
 
         if (!std::holds_alternative<float>(y_any_value.data))
         {
@@ -210,25 +174,13 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> activate_z(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> activate_z(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
     {
-        if (entity == nullptr)
-        {
-            std::cerr << "ERROR: `yli::ontology::activate_z`: `entity` is `nullptr`!\n";
-            return std::nullopt;
-        }
-
-        if (variable == nullptr)
-        {
-            std::cerr << "ERROR: `yli::ontology::activate_z`: `variable` is `nullptr`!\n";
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& z_any_value = variable->variable_value;
+            const yli::data::AnyValue& z_any_value = variable.variable_value;
 
             if (!std::holds_alternative<float>(z_any_value.data))
             {
@@ -249,7 +201,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
         if (universe == nullptr)
         {
@@ -257,7 +209,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& z_any_value = variable->variable_value;
+        const yli::data::AnyValue& z_any_value = variable.variable_value;
 
         if (!std::holds_alternative<float>(z_any_value.data))
         {
@@ -269,18 +221,13 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> activate_spherical_coordinates(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> activate_spherical_coordinates(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
     {
-        if (entity == nullptr || variable == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& spherical_coordinates_any_value = variable->variable_value;
+            const yli::data::AnyValue& spherical_coordinates_any_value = variable.variable_value;
 
             if (!std::holds_alternative<yli::data::SphericalCoordinatesStruct*>(spherical_coordinates_any_value.data))
             {
@@ -291,9 +238,9 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
-        const yli::data::AnyValue& spherical_coordinates_any_value = variable->variable_value;
+        const yli::data::AnyValue& spherical_coordinates_any_value = variable.variable_value;
 
         if (!std::holds_alternative<yli::data::SphericalCoordinatesStruct*>(spherical_coordinates_any_value.data))
         {
@@ -304,18 +251,13 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> activate_rho(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> activate_rho(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
     {
-        if (entity == nullptr || variable == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& rho_any_value = variable->variable_value;
+            const yli::data::AnyValue& rho_any_value = variable.variable_value;
 
             if (!std::holds_alternative<float>(rho_any_value.data))
             {
@@ -326,14 +268,14 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
         if (universe == nullptr)
         {
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& rho_any_value = variable->variable_value;
+        const yli::data::AnyValue& rho_any_value = variable.variable_value;
 
         if (!std::holds_alternative<float>(rho_any_value.data))
         {
@@ -344,18 +286,13 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> activate_theta(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> activate_theta(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
     {
-        if (entity == nullptr || variable == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& theta_any_value = variable->variable_value;
+            const yli::data::AnyValue& theta_any_value = variable.variable_value;
 
             if (!std::holds_alternative<float>(theta_any_value.data))
             {
@@ -366,14 +303,14 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
         if (universe == nullptr)
         {
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& theta_any_value = variable->variable_value;
+        const yli::data::AnyValue& theta_any_value = variable.variable_value;
 
         if (!std::holds_alternative<float>(theta_any_value.data))
         {
@@ -384,18 +321,13 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> activate_phi(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> activate_phi(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
     {
-        if (entity == nullptr || variable == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& phi_any_value = variable->variable_value;
+            const yli::data::AnyValue& phi_any_value = variable.variable_value;
 
             if (!std::holds_alternative<float>(phi_any_value.data))
             {
@@ -406,14 +338,14 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
         if (universe == nullptr)
         {
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& phi_any_value = variable->variable_value;
+        const yli::data::AnyValue& phi_any_value = variable.variable_value;
 
         if (!std::holds_alternative<float>(phi_any_value.data))
         {
@@ -425,18 +357,13 @@ namespace yli::ontology
     }
 
 
-    std::optional<yli::data::AnyValue> activate_yaw(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> activate_yaw(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
     {
-        if (entity == nullptr || variable == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& yaw_any_value = variable->variable_value;
+            const yli::data::AnyValue& yaw_any_value = variable.variable_value;
 
             if (!std::holds_alternative<float>(yaw_any_value.data))
             {
@@ -447,14 +374,14 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
         if (universe == nullptr)
         {
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& yaw_any_value = variable->variable_value;
+        const yli::data::AnyValue& yaw_any_value = variable.variable_value;
 
         if (!std::holds_alternative<float>(yaw_any_value.data))
         {
@@ -465,18 +392,13 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> activate_pitch(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> activate_pitch(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
     {
-        if (entity == nullptr || variable == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& pitch_any_value = variable->variable_value;
+            const yli::data::AnyValue& pitch_any_value = variable.variable_value;
 
             if (!std::holds_alternative<float>(pitch_any_value.data))
             {
@@ -487,14 +409,14 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
         if (universe == nullptr)
         {
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& pitch_any_value = variable->variable_value;
+        const yli::data::AnyValue& pitch_any_value = variable.variable_value;
 
         if (!std::holds_alternative<float>(pitch_any_value.data))
         {
@@ -505,18 +427,13 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> activate_azimuth(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> activate_azimuth(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
     {
-        if (entity == nullptr || variable == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& azimuth_any_value = variable->variable_value;
+            const yli::data::AnyValue& azimuth_any_value = variable.variable_value;
 
             if (!std::holds_alternative<float>(azimuth_any_value.data))
             {
@@ -527,14 +444,14 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
         if (universe == nullptr)
         {
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& azimuth_any_value = variable->variable_value;
+        const yli::data::AnyValue& azimuth_any_value = variable.variable_value;
 
         if (!std::holds_alternative<float>(azimuth_any_value.data))
         {

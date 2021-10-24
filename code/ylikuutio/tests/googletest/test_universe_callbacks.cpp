@@ -115,7 +115,7 @@ TEST(object_must_be_bound_to_species_appropriately, universe_callback)
     ASSERT_EQ(species1->get_number_of_non_variable_children(), 1);
     ASSERT_EQ(species2->get_number_of_non_variable_children(), 0);
 
-    universe->bind(universe, object, species2);
+    universe->bind(*universe, *object, *species2);
     ASSERT_EQ(object->get_parent(), species2);
     ASSERT_EQ(species1->get_number_of_non_variable_children(), 0);
     ASSERT_EQ(species2->get_number_of_non_variable_children(), 1);
@@ -142,9 +142,9 @@ TEST(scene_must_be_deleted_appropriately, universe_callback)
             &universe->parent_of_scenes);
     scene->set_global_name(scene_name);
 
-    universe->activate_entity(scene);
+    universe->activate_entity(*scene);
 
-    universe->delete_entity(universe, scene);
+    universe->delete_entity(*universe, *scene);
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 }
 
@@ -169,7 +169,7 @@ TEST(scene_must_be_activated_appropriately, universe_callback)
 
     ASSERT_EQ(universe->get_active_scene(), nullptr);
 
-    universe->activate_entity(scene);
+    universe->activate_entity(*scene);
     ASSERT_EQ(universe->get_active_scene(), scene);
 }
 
@@ -190,7 +190,7 @@ TEST(console_must_be_activated_appropriately, universe_callback_without_font_2d)
 
     ASSERT_EQ(universe->get_active_console(), nullptr);
 
-    universe->activate_entity(console);
+    universe->activate_entity(*console);
     ASSERT_EQ(universe->get_active_console(), console);
 }
 
@@ -216,7 +216,7 @@ TEST(console_must_be_activated_appropriately, universe_callback_with_font_2d)
 
     ASSERT_EQ(universe->get_active_console(), nullptr);
 
-    universe->activate_entity(console);
+    universe->activate_entity(*console);
     ASSERT_EQ(universe->get_active_console(), console);
 }
 
@@ -247,11 +247,11 @@ TEST(scene_and_camera_must_be_activated_appropriately, universe_callback)
     ASSERT_EQ(universe->get_active_scene(), nullptr);
     ASSERT_EQ(scene->get_active_camera(), nullptr);
 
-    universe->activate_entity(scene);
+    universe->activate_entity(*scene);
     ASSERT_EQ(universe->get_active_scene(), scene);
     ASSERT_EQ(scene->get_active_camera(), nullptr);
 
-    universe->activate_entity(camera);
+    universe->activate_entity(*camera);
     ASSERT_EQ(universe->get_active_scene(), scene);
     ASSERT_EQ(scene->get_active_camera(), camera);
 }

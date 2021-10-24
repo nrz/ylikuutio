@@ -296,3 +296,4 @@ Ready:
 [x] Modify `yli::ontology::SymbiontSpecies` so that it inherits `yli::ontology::Model`, and does not inherit `yli::ontology::Species` any more.
 [x] Implement `yli::ontology::ModelModule` class (to be used with composition), that will replace `yli::ontology::Model` class.
 [x] Make `Species` a child of the `Scene`.
+[x] Add support for references in YliLisp.

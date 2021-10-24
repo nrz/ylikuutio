@@ -31,7 +31,7 @@ namespace yli::ontology
     class Entity;
     class Variable;
 
-    std::optional<yli::data::AnyValue> activate_should_be_rendered(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable);
+    std::optional<yli::data::AnyValue> activate_should_be_rendered(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
 }
 
 #endif

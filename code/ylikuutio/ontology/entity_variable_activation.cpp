@@ -26,21 +26,15 @@
 
 namespace yli::ontology
 {
-    std::optional<yli::data::AnyValue> activate_should_be_rendered(yli::ontology::Entity* const entity, yli::ontology::Variable* const variable)
+    std::optional<yli::data::AnyValue> activate_should_be_rendered(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
     {
-        if (entity == nullptr || variable == nullptr)
+        const yli::data::AnyValue& should_be_rendered_any_value = variable.variable_value;
+
+        if (std::holds_alternative<bool>(should_be_rendered_any_value.data))
         {
-            return std::nullopt;
+            entity.should_be_rendered = std::get<bool>(should_be_rendered_any_value.data);
         }
 
-        const yli::data::AnyValue& should_be_rendered_any_value = variable->variable_value;
-
-        if (!std::holds_alternative<bool>(should_be_rendered_any_value.data))
-        {
-            return std::nullopt;
-        }
-
-        entity->should_be_rendered = std::get<bool>(should_be_rendered_any_value.data);
         return std::nullopt;
     }
 }

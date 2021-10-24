@@ -29,7 +29,7 @@
 namespace yli::lisp
 {
     std::optional<yli::data::AnyValue> execute(
-            const yli::ontology::Console* const console,
+            const yli::ontology::Console& console,
             const std::string& command,
             const std::vector<std::string>& parameter_vector)
     {
@@ -37,13 +37,13 @@ namespace yli::lisp
         // `LispFunction` itself takes care of resolving the correct overload
         // and binding the arguments and calling the overload with the arguments.
 
-        yli::ontology::Universe* universe = console->get_universe();
+        yli::ontology::Universe* universe = console.get_universe();
 
         if (universe != nullptr)
         {
             yli::ontology::Entity* const lisp_function_entity = universe->get_entity(command);
 
-            if (lisp_function_entity != nullptr && lisp_function_entity->get_parent() == console)
+            if (lisp_function_entity != nullptr && lisp_function_entity->get_parent() == &console)
             {
                 yli::ontology::LispFunction* const lisp_function =
                     dynamic_cast<yli::ontology::LispFunction*>(lisp_function_entity);
