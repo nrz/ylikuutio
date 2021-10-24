@@ -87,8 +87,8 @@ namespace yli::ontology
             template<typename Tag>
                 std::optional<std::tuple<>> process_args(
                         std::size_t,
-                        yli::ontology::Universe*,
-                        yli::ontology::Console*,
+                        yli::ontology::Universe&,
+                        yli::ontology::Console&,
                         yli::ontology::Entity*&,
                         const std::vector<std::string>& parameter_vector,
                         std::size_t& parameter_i)
@@ -109,8 +109,8 @@ namespace yli::ontology
             template<typename Tag, typename T1, typename... RestTypes>
                 std::optional<std::tuple<typename yli::data::WrapAllButStrings<T1>::type, typename yli::data::WrapAllButStrings<RestTypes>::type...>> process_args(
                         std::size_t tag,
-                        yli::ontology::Universe* universe,
-                        yli::ontology::Console* console,
+                        yli::ontology::Universe& universe,
+                        yli::ontology::Console& console,
                         yli::ontology::Entity*& context,
                         const std::vector<std::string>& parameter_vector,
                         std::size_t& parameter_i)
@@ -169,8 +169,8 @@ namespace yli::ontology
                 std::optional<std::tuple<typename yli::data::Wrap<Types>::type...>> arg_tuple = this->process_args<
                     std::size_t, Types...>(
                         std::size_t {},
-                        this->universe,
-                        console,
+                        *this->universe,
+                        *console,
                         context,
                         parameter_vector,
                         parameter_i);
