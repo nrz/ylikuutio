@@ -59,7 +59,7 @@ namespace yli::ontology
             return;
         }
 
-        this->parent->unbind_variable(this->childID, this->local_name);
+        this->parent->unbind_variable(this->childID);
     }
 
     yli::ontology::Entity* Variable::get_parent() const
