@@ -27,6 +27,7 @@
 
 // Include standard headers
 #include <cmath>      // NAN, std::isnan, std::pow
+#include <cstdint>    // std::uintptr_t
 #include <cstddef>    // std::size_t, std::uintptr_t
 #include <cstring>    // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <ios>        // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
