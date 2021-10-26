@@ -252,7 +252,7 @@ namespace yli::load
         if (is_debug_mode)
         {
             std::stringstream data_pointer_stringstream;
-            data_pointer_stringstream << std::hex << reinterpret_cast<std::uintptr_t>((void*) svg_data_pointer);
+            data_pointer_stringstream << std::hex << reinterpret_cast<std::uintptr_t>(svg_data_pointer);
             std::cout << "<glyph found at 0x" << data_pointer_stringstream.str() << ".\n";
         }
 
@@ -272,7 +272,7 @@ namespace yli::load
                 if (is_debug_mode)
                 {
                     std::stringstream data_pointer_stringstream;
-                    data_pointer_stringstream << std::hex << reinterpret_cast<std::uintptr_t>((void*) svg_data_pointer);
+                    data_pointer_stringstream << std::hex << reinterpret_cast<std::uintptr_t>(svg_data_pointer);
                     std::cout << "glyph-name= found at 0x" << data_pointer_stringstream.str() << ".\n";
                 }
 
@@ -283,7 +283,7 @@ namespace yli::load
                     if (is_debug_mode)
                     {
                         std::stringstream opening_double_quote_pointer_stringstream;
-                        opening_double_quote_pointer_stringstream << std::hex << reinterpret_cast<std::uintptr_t>((void*) opening_double_quote_pointer);
+                        opening_double_quote_pointer_stringstream << std::hex << reinterpret_cast<std::uintptr_t>(opening_double_quote_pointer);
                         std::cout << "Opening \" found at 0x" << opening_double_quote_pointer_stringstream.str() << ".\n";
                     }
 
@@ -296,7 +296,7 @@ namespace yli::load
                         if (is_debug_mode)
                         {
                             std::stringstream closing_double_quote_pointer_stringstream;
-                            closing_double_quote_pointer_stringstream << std::hex << reinterpret_cast<std::uintptr_t>((void*) closing_double_quote_pointer);
+                            closing_double_quote_pointer_stringstream << std::hex << reinterpret_cast<std::uintptr_t>(closing_double_quote_pointer);
                             std::cout << "Closing \" found at 0x" << closing_double_quote_pointer_stringstream.str() << ".\n";
                         }
 
@@ -339,7 +339,7 @@ namespace yli::load
                 if (is_debug_mode)
                 {
                     std::stringstream data_pointer_stringstream;
-                    data_pointer_stringstream << std::hex << reinterpret_cast<std::uintptr_t>((void*) svg_data_pointer);
+                    data_pointer_stringstream << std::hex << reinterpret_cast<std::uintptr_t>(svg_data_pointer);
                     std::cout << "unicode= found at 0x" << data_pointer_stringstream.str() << ".\n";
                 }
 
@@ -350,7 +350,7 @@ namespace yli::load
                     if (is_debug_mode)
                     {
                         std::stringstream opening_double_quote_pointer_stringstream;
-                        opening_double_quote_pointer_stringstream << std::hex << reinterpret_cast<std::uintptr_t>((void*) opening_double_quote_pointer);
+                        opening_double_quote_pointer_stringstream << std::hex << reinterpret_cast<std::uintptr_t>(opening_double_quote_pointer);
                         std::cout << "Opening \" found at 0x" << opening_double_quote_pointer_stringstream.str() << ".\n";
                     }
 
@@ -363,7 +363,7 @@ namespace yli::load
                         if (is_debug_mode)
                         {
                             std::stringstream closing_double_quote_pointer_stringstream;
-                            closing_double_quote_pointer_stringstream << std::hex << reinterpret_cast<std::uintptr_t>((void*) closing_double_quote_pointer);
+                            closing_double_quote_pointer_stringstream << std::hex << reinterpret_cast<std::uintptr_t>(closing_double_quote_pointer);
                             std::cout << "Closing \" found at 0x" << closing_double_quote_pointer_stringstream.str() << ".\n";
                         }
 
@@ -480,7 +480,7 @@ namespace yli::load
         {
             std::stringstream first_glyph_found_stringstream;
             first_glyph_found_stringstream << "First glyph found at file offset 0x" << std::hex << offset;
-            first_glyph_found_stringstream << " (memory address 0x" << reinterpret_cast<std::uintptr_t>((void*) svg_data_pointer) << ").\n";
+            first_glyph_found_stringstream << " (memory address 0x" << reinterpret_cast<std::uintptr_t>(svg_data_pointer) << ").\n";
             std::cout << first_glyph_found_stringstream.str();
         }
 

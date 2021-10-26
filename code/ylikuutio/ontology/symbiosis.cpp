@@ -236,7 +236,7 @@ namespace yli::ontology
                     continue;
                 }
 
-                const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) ofbx_texture);
+                const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>(ofbx_texture);
                 std::stringstream memory_address_stringstream;
                 memory_address_stringstream << "0x" << std::hex << memory_address;
 

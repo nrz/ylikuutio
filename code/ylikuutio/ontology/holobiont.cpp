@@ -94,7 +94,7 @@ namespace yli::ontology
             return;
         }
 
-        const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>((void*) this);
+        const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>(this);
         std::stringstream memory_address_stringstream;
         memory_address_stringstream << "0x" << std::hex << memory_address;
 
