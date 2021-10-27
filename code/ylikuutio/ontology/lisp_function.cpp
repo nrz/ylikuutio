@@ -81,7 +81,12 @@ namespace yli::ontology
                 it != this->parent_of_generic_lisp_function_overloads.child_pointer_vector.end();
                 ++it)
         {
-            return static_cast<yli::ontology::GenericLispFunctionOverload*>(*it)->execute(parameter_vector);
+            std::optional<yli::data::AnyValue> result = static_cast<yli::ontology::GenericLispFunctionOverload*>(*it)->execute(parameter_vector);
+
+            if (result)
+            {
+                return result;
+            }
         }
 
         return std::nullopt;

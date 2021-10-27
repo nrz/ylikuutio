@@ -167,7 +167,7 @@ namespace yli::load
                 {
                     if (is_debug_mode)
                     {
-                        std::cout << "mesh " << mesh_i << ", DIFFUSE texture at " << std::hex << (void*) diffuse_texture << std::dec << "\n";
+                        std::cout << "mesh " << mesh_i << ", DIFFUSE texture at " << std::hex << reinterpret_cast<std::uintptr_t>(diffuse_texture) << std::dec << "\n";
                     }
 
                     // Add new texture to map.
@@ -179,7 +179,7 @@ namespace yli::load
 
                     if (is_debug_mode)
                     {
-                        std::cout << "Adding mesh " << mesh_i << " to DIFFUSE texture at " << std::hex << (void*) diffuse_texture << std::dec << "\n";
+                        std::cout << "Adding mesh " << mesh_i << " to DIFFUSE texture at " << std::hex << reinterpret_cast<std::uintptr_t>(diffuse_texture) << std::dec << "\n";
                     }
 
                     ofbx_diffuse_texture_mesh_map[diffuse_texture].emplace_back(mesh_i);
