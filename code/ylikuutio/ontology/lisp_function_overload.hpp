@@ -180,7 +180,6 @@ namespace yli::ontology
                     return std::apply(this->callback, *arg_tuple);
                 }
 
-                std::cout << "ERROR: `LispFunctionOverload::process_args_and_call`: binding failed!\n";
                 return std::nullopt;
             }
 
