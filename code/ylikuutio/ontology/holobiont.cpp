@@ -218,46 +218,7 @@ namespace yli::ontology
             const std::string& y,
             const std::string& z)
     {
-        const yli::ontology::EntityFactory* const entity_factory = parent.get_entity_factory();
-
-        if (entity_factory == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::data::AnyValue x_any_value("float", x);
-        yli::data::AnyValue y_any_value("float", y);
-        yli::data::AnyValue z_any_value("float", z);
-
-        if (!std::holds_alternative<float>(x_any_value.data))
-        {
-            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z`: invalid value for `x`!\n";
-            return std::nullopt;
-        }
-
-        if (!std::holds_alternative<float>(y_any_value.data))
-        {
-            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z`: invalid value for `y`!\n";
-            return std::nullopt;
-        }
-
-        if (!std::holds_alternative<float>(z_any_value.data))
-        {
-            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z`: invalid value for `z`!\n";
-            return std::nullopt;
-        }
-
-        float float_x = std::get<float>(x_any_value.data);
-        float float_y = std::get<float>(y_any_value.data);
-        float float_z = std::get<float>(z_any_value.data);
-
-        yli::ontology::HolobiontStruct holobiont_struct;
-        holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
-        holobiont_struct.parent = &parent;
-        holobiont_struct.scene = parent.get_scene();
-        holobiont_struct.local_name = holobiont_name;
-        entity_factory->create_holobiont(holobiont_struct);
-        return std::nullopt;
+        return yli::ontology::Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch(parent, holobiont_name, x, y, z, "0.0", "0.0");
     }
 
     std::optional<yli::data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch(
