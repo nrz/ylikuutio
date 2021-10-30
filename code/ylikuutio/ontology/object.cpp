@@ -468,6 +468,12 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
+        if (parent.has_child(object_name))
+        {
+            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: `local_name` " << object_name << " is already in use!\n";
+            return std::nullopt;
+        }
+
         yli::ontology::EntityFactory* const entity_factory = parent.get_entity_factory();
 
         if (entity_factory == nullptr)
