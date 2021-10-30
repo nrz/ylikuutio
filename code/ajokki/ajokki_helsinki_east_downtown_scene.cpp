@@ -764,6 +764,7 @@ namespace ajokki
         }
 
         turbo_polizei_png1->set_global_name("turbo_polizei_png1");
+        turbo_polizei_png1->set_local_name("sinivuokko1");
 
         yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct2;
         turbo_polizei_png_holobiont_struct2.scene = helsinki_east_downtown_scene;
@@ -789,6 +790,7 @@ namespace ajokki
         }
 
         turbo_polizei_png2->set_global_name("turbo_polizei_png2");
+        turbo_polizei_png2->set_local_name("sinivuokko2");
 
         yli::ontology::VectorFontStruct kongtext_vector_font_struct;
         kongtext_vector_font_struct.parent = helsinki_east_downtown_grass_material;
