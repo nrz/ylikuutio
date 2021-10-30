@@ -230,6 +230,12 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
+        if (parent.has_child(holobiont_name))
+        {
+            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: `local_name` " << holobiont_name << " is already in use!\n";
+            return std::nullopt;
+        }
+
         const yli::ontology::EntityFactory* const entity_factory = parent.get_entity_factory();
 
         if (entity_factory == nullptr)
