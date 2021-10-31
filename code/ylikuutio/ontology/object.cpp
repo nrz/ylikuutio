@@ -468,68 +468,7 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
-        if (parent.has_child(object_name))
-        {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: `local_name` " << object_name << " is already in use!\n";
-            return std::nullopt;
-        }
-
-        yli::ontology::EntityFactory* const entity_factory = parent.get_entity_factory();
-
-        if (entity_factory == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::data::AnyValue x_any_value("float", x);
-        yli::data::AnyValue y_any_value("float", y);
-        yli::data::AnyValue z_any_value("float", z);
-        yli::data::AnyValue yaw_any_value("float", yaw);
-        yli::data::AnyValue pitch_any_value("float", pitch);
-
-        if (!std::holds_alternative<float>(x_any_value.data))
-        {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `x`!\n";
-            return std::nullopt;
-        }
-
-        if (!std::holds_alternative<float>(y_any_value.data))
-        {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `y`!\n";
-            return std::nullopt;
-        }
-
-        if (!std::holds_alternative<float>(z_any_value.data))
-        {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `z`!\n";
-            return std::nullopt;
-        }
-
-        if (!std::holds_alternative<float>(yaw_any_value.data))
-        {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `yaw`!\n";
-            return std::nullopt;
-        }
-
-        if (!std::holds_alternative<float>(pitch_any_value.data))
-        {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `pitch`!\n";
-            return std::nullopt;
-        }
-
-        float float_x = std::get<float>(x_any_value.data);
-        float float_y = std::get<float>(y_any_value.data);
-        float float_z = std::get<float>(z_any_value.data);
-        float float_yaw = std::get<float>(yaw_any_value.data);
-        float float_pitch = std::get<float>(pitch_any_value.data);
-
-        yli::ontology::ObjectStruct object_struct(&parent);
-        object_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
-        object_struct.yaw = float_yaw;
-        object_struct.pitch = float_pitch;
-        object_struct.local_name = object_name;
-        entity_factory->create_object(object_struct);
-        return std::nullopt;
+        return yli::ontology::Object::create_object_with_parent_name_x_y_z_roll_yaw_pitch(parent, object_name, x, y, z, "0.0", yaw, pitch);
     }
 
     std::optional<yli::data::AnyValue> Object::create_object_with_parent_name_x_y_z_roll_yaw_pitch(
