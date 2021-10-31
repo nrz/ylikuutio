@@ -9,7 +9,6 @@ Fixes needed:
 Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] Make `Object` a child of the `Scene`.
 [ ] Make `Symbiosis` a child of the `Scene`.
-[ ] Make `Holobiont` a child of the `Scene`.
 [ ] Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) whose instances function as Bullet rigid bodies.
 [ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
 [ ] Implement object selection (with a mouse cursor), using Bullet Physics SDK. https://pybullet.org/
