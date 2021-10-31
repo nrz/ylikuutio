@@ -223,6 +223,7 @@ namespace yli::ontology
             std::unique_ptr<btDiscreteDynamicsWorld> dynamics_world { nullptr };
             btAlignedObjectArray<btCollisionShape*> collision_shapes;
 
+            float roll  { NAN };
             float yaw   { NAN };
             float pitch { NAN };
 

@@ -81,6 +81,7 @@ namespace yli::ontology
                 original_scale_vector { movable_struct.original_scale_vector },
                 cartesian_coordinates { movable_struct.cartesian_coordinates },
                 spherical_coordinates { movable_struct.spherical_coordinates },
+                roll { movable_struct.roll },
                 yaw { movable_struct.yaw },
                 pitch { movable_struct.pitch },
                 input_method { movable_struct.input_method }
@@ -107,6 +108,8 @@ namespace yli::ontology
 
             const glm::vec3& get_cartesian_coordinates() const;
             void set_cartesian_coordinates(const glm::vec3& cartesian_coordinates);
+            float get_roll() const;
+            void set_roll(const float roll);
             float get_yaw() const;
             void set_yaw(const float yaw);
             float get_pitch() const;
@@ -282,6 +285,7 @@ namespace yli::ontology
             glm::vec3 right { glm::vec3(NAN, NAN, NAN) };          // note: can not be set directly using console.
             glm::vec3 up { glm::vec3(NAN, NAN, NAN) };             // note: can not be set directly using console.
 
+            float roll                    { 0.0f };
             float yaw                     { 0.0f };
             float pitch                   { 0.0f };
             float speed                   { 0.0f };                // m/s

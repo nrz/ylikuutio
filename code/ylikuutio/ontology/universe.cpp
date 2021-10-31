@@ -439,8 +439,8 @@ namespace yli::ontology
                 // Right vector.
                 this->current_camera_right = glm::vec3(
                         sin(this->current_camera_yaw),
-                        0,
-                        cos(this->current_camera_yaw));
+                        sin(this->current_camera_roll),
+                        cos(this->current_camera_yaw) * cos(this->current_camera_roll));
 
                 // Up vector.
                 this->current_camera_up = glm::cross(this->current_camera_right, this->current_camera_direction);

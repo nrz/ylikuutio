@@ -41,6 +41,7 @@ namespace yli::ontology
     std::optional<yli::data::AnyValue> activate_theta(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
     std::optional<yli::data::AnyValue> activate_phi(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
 
+    std::optional<yli::data::AnyValue> activate_roll(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
     std::optional<yli::data::AnyValue> activate_yaw(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
     std::optional<yli::data::AnyValue> activate_pitch(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
 

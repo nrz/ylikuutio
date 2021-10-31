@@ -156,7 +156,7 @@ namespace yli::ontology
         }
 
         this->model_matrix = glm::scale(this->model_matrix, this->original_scale_vector);
-        glm::vec3 euler_angles { 0.0f, holobiont->yaw, holobiont->pitch };
+        glm::vec3 euler_angles { holobiont->roll, holobiont->yaw, holobiont->pitch };
         glm::quat my_quaternion = glm::quat(euler_angles);
         glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
         this->model_matrix = rotation_matrix * this->model_matrix;

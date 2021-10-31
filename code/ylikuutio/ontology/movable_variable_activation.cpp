@@ -356,6 +356,40 @@ namespace yli::ontology
         return std::nullopt;
     }
 
+    std::optional<yli::data::AnyValue> activate_roll(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    {
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
+
+        if (movable != nullptr)
+        {
+            const yli::data::AnyValue& roll_any_value = variable.variable_value;
+
+            if (!std::holds_alternative<float>(roll_any_value.data))
+            {
+                return std::nullopt;
+            }
+
+            movable->roll = std::get<float>(roll_any_value.data);
+            return std::nullopt;
+        }
+
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
+
+        if (universe == nullptr)
+        {
+            return std::nullopt;
+        }
+
+        const yli::data::AnyValue& roll_any_value = variable.variable_value;
+
+        if (!std::holds_alternative<float>(roll_any_value.data))
+        {
+            return std::nullopt;
+        }
+
+        universe->current_camera_roll = std::get<float>(roll_any_value.data);
+        return std::nullopt;
+    }
 
     std::optional<yli::data::AnyValue> activate_yaw(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
     {

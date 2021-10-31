@@ -92,6 +92,16 @@ namespace yli::ontology
                     const std::string& yaw,
                     const std::string& pitch);
 
+            static std::optional<yli::data::AnyValue> create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch(
+                    yli::ontology::Symbiosis& parent,
+                    const std::string& holobiont_name,
+                    const std::string& x,
+                    const std::string& y,
+                    const std::string& z,
+                    const std::string& roll,
+                    const std::string& yaw,
+                    const std::string& pitch);
+
             // Public callbacks end here.
 
             yli::ontology::ParentModule parent_of_bionts;

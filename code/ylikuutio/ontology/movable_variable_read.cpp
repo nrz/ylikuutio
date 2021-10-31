@@ -209,6 +209,25 @@ namespace yli::ontology
         return std::nullopt;
     }
 
+    std::optional<yli::data::AnyValue> read_roll(yli::ontology::Entity& entity)
+    {
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
+
+        if (movable != nullptr)
+        {
+            return yli::data::AnyValue(movable->roll);
+        }
+
+        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
+
+        if (universe != nullptr)
+        {
+            return yli::data::AnyValue(universe->current_camera_roll);
+        }
+
+        return std::nullopt;
+    }
+
     std::optional<yli::data::AnyValue> read_yaw(yli::ontology::Entity& entity)
     {
         yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);

@@ -113,6 +113,15 @@ namespace yli::snippets
         std::cout << "Executing `entity->create_variable(z_variable_struct);` ...\n";
         entity->create_variable(z_variable_struct, yli::data::AnyValue(z));
 
+        const float roll = 0.0f;
+        yli::ontology::VariableStruct roll_variable_struct;
+        roll_variable_struct.local_name = "roll";
+        roll_variable_struct.activate_callback = &yli::ontology::activate_roll;
+        roll_variable_struct.read_callback = &yli::ontology::read_roll;
+        roll_variable_struct.should_call_activate_callback_now = true;
+        std::cout << "Executing `entity->create_variable(roll_variable_struct);` ...\n";
+        entity->create_variable(roll_variable_struct, yli::data::AnyValue(roll));
+
         const float yaw = -0.41f;
         yli::ontology::VariableStruct yaw_variable_struct;
         yaw_variable_struct.local_name = "yaw";

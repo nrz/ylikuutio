@@ -7,7 +7,6 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
 Tasks which are necessary for the first stage (Hirvi prototype):
-[ ] Add roll rotation.
 [ ] Make `Object` a child of the `Scene`.
 [ ] Make `Symbiosis` a child of the `Scene`.
 [ ] Make `Holobiont` a child of the `Scene`.
@@ -298,3 +297,4 @@ Ready:
 [x] Implement `yli::ontology::ModelModule` class (to be used with composition), that will replace `yli::ontology::Model` class.
 [x] Make `Species` a child of the `Scene`.
 [x] Add support for references in YliLisp.
+[x] Add roll rotation.
