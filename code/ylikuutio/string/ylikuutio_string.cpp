@@ -1135,19 +1135,19 @@ namespace yli::string
 
     void print_hexdump(const void* const start_address, const void* const end_address) // `begin` is inclusive, `end` is exclusive.
     {
-        void* void_start_address = const_cast<void*>(start_address);
+        const void* void_start_address = const_cast<void*>(start_address);
         const std::size_t line_width_in_bytes = 16;
         std::size_t characters_on_this_line = 0;
         std::string current_line_ascii = "";
         std::string current_line_hex = "";
 
-        for (uint8_t* data_pointer = static_cast<uint8_t*>(void_start_address); data_pointer < end_address; data_pointer++)
+        for (const uint8_t* data_pointer = static_cast<const uint8_t*>(void_start_address); data_pointer < end_address; data_pointer++)
         {
             const uint8_t data_byte = static_cast<uint8_t>(*data_pointer);
             const char data_char = (data_byte >= 0x20 && data_byte <= 0x7f ? static_cast<char>(data_byte) : '.');
             current_line_ascii += data_char;
 
-            uint32_t data_32_bit = static_cast<uint32_t>(data_byte); // to get the hexadecimal representation instead of the actual value.
+            const uint32_t data_32_bit = static_cast<uint32_t>(data_byte); // to get the hexadecimal representation instead of the actual value.
             std::stringstream my_stream;
             my_stream << std::setfill('0') << std::setw(2) << std::hex << data_32_bit << std::dec; // std::hex does not work on char values.
             current_line_hex += my_stream.str();
