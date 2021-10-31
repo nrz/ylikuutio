@@ -38,6 +38,34 @@
 namespace yli::lisp
 {
     // Templates for processing Lisp function arguments.
+    //
+    // The default context is `Universe`.
+    //
+    // 1. If the callback has `yli::ontology::Universe&` or `yli::ontology::Universe*` as an argument,
+    //    then the `Universe*` will be provided. This does not consume any parameters.
+    //    The `Universe` is set as context.
+    //
+    // 2. If the callback has `yli::ontology::Console&` or `yli::ontology::Console*` as an argument,
+    //    then this `Console*` will be provided. This does not consume any parameters.
+    //    In the future other `Console`s will be made reachable as well, with `yli::ontology::SomeConsole*`.
+    //    The `Console` is set as context.
+    //
+    // 3. Otherwise, if the callback has `yli::ontology::Entity&` or `yli::ontology::Entity*` or
+    //    some subtype of `Entity` as an argument, then the string will be looked up and converted into that.
+    //    The `Entity` is set as context.
+    //
+    // 4. If the callback has `yli::ontology::Variable&*` or `yli::ontology::Variable*` as an argument,
+    //    then the `Variable` with that name will be looked up from the current context.
+    //
+    // 5. If the callback has `bool` as an argument, then the string will be converted into that.
+    //
+    // 6. If the callback has `float` as an argument, then the string will be converted into that.
+    //
+    // 7. If the callback has `double` as an argument, then the string will be converted into that.
+    //
+    // 8. If the callback has `int32_t` as an argument, then the string will be converted into that.
+    //
+    // 9. If the callback has `uint32_t` as an argument, then the string will be converted into that.
 
     template<typename T1>
         std::optional<typename yli::data::WrapAllButStrings<T1>::type> convert_string_to_value_and_advance_index(
