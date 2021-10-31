@@ -36,6 +36,8 @@ https://semver.org/spec/v2.0.0.html
 * Support for local names for Entities, in addition to global names.
 * Global names and local names can be set also using
   factory functions provided by `yli::ontology::EntityFactory`.
+* Support for PNG textures using stb.
+* AngelScript in use.
 * Development of YliLisp scripting language started.
 * Improved binding for YliLisp function arguments.
 * YliLisp function argument binding supports overloading.
@@ -46,8 +48,36 @@ https://semver.org/spec/v2.0.0.html
 * `Application` creates and starts the simulation.
 * `Application` is an `Entity`.
 * `Variable`s are Entities.
+* `Variable`s may have subvariables.
 * `Object`s can be created using the console.
 * `Holobiont`s can be created using the console.
+* Drop AngelScript support.
+
+0.0.9 (release date 2021-10-31)
+* Support for MacOS.
+* Yaw according to mathematical convention (clockwise, 0 rad is east).
+* Horizontal angle can be expressed as azimuths (clockwise, 0 rad is north).
+* Roll orientation.
+* Multiple initial rotate vectors and initial rotate angles are accepted.
+* Completion of global names works in console. Alternatives are not shown yet.
+* YliLisp functions now return `std::optional<yli::data::AnyValue>`.
+* Improve handling of YliLisp callbacks' arguments and return values.
+* YliLisp callbacks may have references as arguments.
+* PNG is the preferred image file format.
+* Use libpng instead of stb for loading PNG files.
+* `Application` is an `yli::core::Application`, not an `Entity` any more.
+* Support for building in a Podman container provided by Ronja Koistinen.
+* Refactored rendering code so that `RenderMaster` owns
+  the OpenGL context. `Universe` does not own it any more.
+* Rename `MasterModule` to `GenericMasterModule`, and `MasterModule` is now
+  a class template that supports unbind callbacks.
+* `Scene` is a child of the `Universe`.
+* `Material` is a child of `Scene`.
+* `Species` is a child of `Scene`.
+* 'Symbiont' classes do not inherit similar 'non-symbiont' classes.
+* Refactor `Model` into `ModelModule`, rename into `MeshModule`.
+* Remove shallow-copy functionality of `Variable`. It was buggy anyway.
+* Rename `World` -> `Ecosystem`.
 
 Future versions:
 
