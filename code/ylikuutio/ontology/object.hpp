@@ -115,6 +115,16 @@ namespace yli::ontology
                     const std::string& yaw,
                     const std::string& pitch);
 
+            static std::optional<yli::data::AnyValue> create_object_with_parent_name_x_y_z_roll_yaw_pitch(
+                    yli::ontology::Species& parent,
+                    const std::string& object_name,
+                    const std::string& x,
+                    const std::string& y,
+                    const std::string& z,
+                    const std::string& roll,
+                    const std::string& yaw,
+                    const std::string& pitch);
+
             // Public callbacks end here.
 
             yli::ontology::Scene* get_scene() const override;

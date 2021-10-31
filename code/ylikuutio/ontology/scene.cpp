@@ -173,6 +173,7 @@ namespace yli::ontology
             // OK, there is an old active `Camera`, and it is not a static view `Camera`.
             // Copy the coordinates and angles from the `Universe` to the old active `Camera`.
             old_active_camera->set_cartesian_coordinates(this->universe->current_camera_cartesian_coordinates);
+            old_active_camera->set_roll(this->universe->current_camera_roll);
             old_active_camera->set_yaw(this->universe->current_camera_yaw);
             old_active_camera->set_pitch(this->universe->current_camera_pitch);
         }
@@ -202,6 +203,7 @@ namespace yli::ontology
             // and this is the active `Scene` in the active `Universe`.
             // Copy `Camera`'s coordinates and angles to the `Universe`.
             this->universe->current_camera_cartesian_coordinates = camera->get_cartesian_coordinates();
+            this->universe->current_camera_roll = camera->get_roll();
             this->universe->current_camera_yaw = camera->get_yaw();
             this->universe->current_camera_pitch = camera->get_pitch();
         }

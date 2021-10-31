@@ -578,6 +578,7 @@ namespace yli::ontology
             glm::vec3 current_camera_right; // note: `right` can not be set directly using console.
             glm::vec3 current_camera_up;    // note: `up` can not be set directly using console.
 
+            float current_camera_roll  { NAN };
             float current_camera_yaw   { NAN };
             float current_camera_pitch { NAN };
 

@@ -50,11 +50,13 @@ namespace yli::ontology
                 yli::ontology::Brain* const brain,
                 const glm::vec3& cartesian_coordinates,
                 yli::data::SphericalCoordinatesStruct spherical_coordinates,
+                const float roll,
                 const float yaw,
                 const float pitch)
             : brain { brain },
             cartesian_coordinates { cartesian_coordinates },
             spherical_coordinates { spherical_coordinates },
+            roll { roll },
             yaw { yaw },
             pitch { pitch }
         {
@@ -65,6 +67,7 @@ namespace yli::ontology
                 yli::ontology::Brain* const brain,
                 const glm::vec3& cartesian_coordinates,
                 yli::data::SphericalCoordinatesStruct spherical_coordinates,
+                const float roll,
                 const float yaw,
                 const float pitch,
                 const std::string& global_name,
@@ -73,6 +76,7 @@ namespace yli::ontology
             brain { brain },
             cartesian_coordinates { cartesian_coordinates },
             spherical_coordinates { spherical_coordinates },
+            roll { roll },
             yaw { yaw },
             pitch { pitch }
         {
@@ -90,6 +94,7 @@ namespace yli::ontology
 
         glm::vec3 cartesian_coordinates { glm::vec3(NAN, NAN, NAN) };
         yli::data::SphericalCoordinatesStruct spherical_coordinates { NAN, NAN, NAN };
+        float roll  { 0.0f };
         float yaw   { 0.0f };
         float pitch { 0.0f };
 

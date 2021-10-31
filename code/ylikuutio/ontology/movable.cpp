@@ -78,6 +78,16 @@ namespace yli::ontology
         this->cartesian_coordinates = cartesian_coordinates;
     }
 
+    float Movable::get_roll() const
+    {
+        return this->roll;
+    }
+
+    void Movable::set_roll(const float roll)
+    {
+        this->roll = roll;
+    }
+
     float Movable::get_yaw() const
     {
         return this->yaw;
@@ -191,6 +201,14 @@ namespace yli::ontology
         z_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `this->create_variable(z_variable_struct);` ...\n";
         this->create_variable(z_variable_struct, yli::data::AnyValue(float_z));
+
+        yli::ontology::VariableStruct roll_variable_struct;
+        roll_variable_struct.local_name = "roll";
+        roll_variable_struct.activate_callback = &yli::ontology::activate_roll;
+        roll_variable_struct.read_callback = &yli::ontology::read_roll;
+        roll_variable_struct.should_call_activate_callback_now = true;
+        std::cout << "Executing `this->create_variable(roll_variable_struct);` ...\n";
+        this->create_variable(roll_variable_struct, yli::data::AnyValue(this->roll));
 
         yli::ontology::VariableStruct yaw_variable_struct;
         yaw_variable_struct.local_name = "yaw";

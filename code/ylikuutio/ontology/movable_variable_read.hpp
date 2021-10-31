@@ -43,6 +43,7 @@ namespace yli::ontology
     std::optional<yli::data::AnyValue> read_up(yli::ontology::Entity& entity);
     std::optional<yli::data::AnyValue> read_right(yli::ontology::Entity& entity);
 
+    std::optional<yli::data::AnyValue> read_roll(yli::ontology::Entity& entity);
     std::optional<yli::data::AnyValue> read_yaw(yli::ontology::Entity& entity);
     std::optional<yli::data::AnyValue> read_pitch(yli::ontology::Entity& entity);
 
