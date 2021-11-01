@@ -34,7 +34,6 @@ namespace yli::data
 
 namespace yli::ontology
 {
-    class ParentModule;
     class GenericMasterModule;
     class Entity;
     class Universe;
