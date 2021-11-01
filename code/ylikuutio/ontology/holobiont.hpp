@@ -19,6 +19,7 @@
 #define __YLIKUUTIO_ONTOLOGY_HOLOBIONT_HPP_INCLUDED
 
 #include "movable.hpp"
+#include "parent_module.hpp"
 #include "holobiont_struct.hpp"
 
 // Include standard headers
