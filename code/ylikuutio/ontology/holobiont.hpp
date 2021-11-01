@@ -19,6 +19,7 @@
 #define __YLIKUUTIO_ONTOLOGY_HOLOBIONT_HPP_INCLUDED
 
 #include "movable.hpp"
+#include "child_module.hpp"
 #include "parent_module.hpp"
 #include "holobiont_struct.hpp"
 
@@ -51,8 +52,8 @@ namespace yli::ontology
                 : Movable(
                         universe,
                         holobiont_struct,
-                        symbiosis_parent_module,
                         generic_master_module),
+                child_of_symbiosis(symbiosis_parent_module, this),
                 parent_of_bionts(this, &this->registry, "bionts")
             {
                 // constructor.
@@ -69,6 +70,8 @@ namespace yli::ontology
 
             // destructor.
             virtual ~Holobiont();
+
+            yli::ontology::Entity* get_parent() const override;
 
             void update_x(const float x);
             void update_y(const float y);
@@ -104,6 +107,7 @@ namespace yli::ontology
 
             // Public callbacks end here.
 
+            yli::ontology::ChildModule child_of_symbiosis;
             yli::ontology::ParentModule parent_of_bionts;
 
             yli::ontology::Scene* get_scene() const override;

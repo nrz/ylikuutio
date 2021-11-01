@@ -92,6 +92,11 @@ namespace yli::ontology
         std::cout << "This `Text3D` (\"" << this->text_string << "\", childID " << std::dec << this->childID << ") will be destroyed.\n";
     }
 
+    yli::ontology::Entity* Text3D::get_parent() const
+    {
+        return this->child_of_vector_font.get_parent();
+    }
+
     yli::ontology::Scene* Text3D::get_scene() const
     {
         yli::ontology::Entity* const parent = this->get_parent();

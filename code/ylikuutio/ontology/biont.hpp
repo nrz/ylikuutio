@@ -19,6 +19,7 @@
 #define __YLIKUUTIO_ONTOLOGY_BIONT_HPP_INCLUDED
 
 #include "movable.hpp"
+#include "child_module.hpp"
 #include "apprentice_module.hpp"
 #include "biont_struct.hpp"
 
@@ -42,13 +43,13 @@ namespace yli::ontology
             Biont(
                     yli::ontology::Universe* const universe,
                     yli::ontology::BiontStruct& biont_struct,
-                    yli::ontology::ParentModule* const parent_module,
+                    yli::ontology::ParentModule* const holobiont_parent_module,
                     yli::ontology::GenericMasterModule* const symbiont_species_generic_master_module)
                 : Movable(
                         universe,
                         biont_struct,
-                        parent_module,
                         nullptr),
+                child_of_holobiont(holobiont_parent_module, this),
                 apprentice_of_symbiont_species(symbiont_species_generic_master_module, this)
             {
                 // constructor.
@@ -66,6 +67,9 @@ namespace yli::ontology
             // destructor.
             virtual ~Biont();
 
+            yli::ontology::Entity* get_parent() const override;
+
+            yli::ontology::ChildModule child_of_holobiont;
             yli::ontology::ApprenticeModule apprentice_of_symbiont_species;
 
             // This method renders this `Biont`.

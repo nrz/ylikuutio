@@ -65,6 +65,11 @@ namespace yli::ontology
         std::cout << "Biont with childID " << std::dec << this->childID << " will be destroyed.\n";
     }
 
+    yli::ontology::Entity* Biont::get_parent() const
+    {
+        return this->child_of_holobiont.get_parent();
+    }
+
     void Biont::render()
     {
         // Render this `Biont`.
@@ -73,7 +78,7 @@ namespace yli::ontology
         // `this->holobiont_parent` must not be `nullptr`.
         // `this->holobiont_parent->get_parent()` must not be `nullptr`.
 
-        const yli::ontology::Holobiont* const holobiont = static_cast<yli::ontology::Holobiont*>(this->child.get_parent());
+        const yli::ontology::Holobiont* const holobiont = static_cast<yli::ontology::Holobiont*>(this->child_of_holobiont.get_parent());
 
         if (holobiont == nullptr)
         {
@@ -119,7 +124,7 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::Holobiont* const holobiont = static_cast<yli::ontology::Holobiont*>(this->child.get_parent());
+        const yli::ontology::Holobiont* const holobiont = static_cast<yli::ontology::Holobiont*>(this->child_of_holobiont.get_parent());
 
         if (holobiont == nullptr)
         {

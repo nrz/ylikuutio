@@ -55,6 +55,11 @@ namespace yli::ontology
         std::cout << "`Holobiont` with childID " << std::dec << this->childID << " will be destroyed.\n";
     }
 
+    yli::ontology::Entity* Holobiont::get_parent() const
+    {
+        return this->child_of_symbiosis.get_parent();
+    }
+
     void Holobiont::render()
     {
         if (!this->should_be_rendered || this->universe == nullptr)
@@ -86,7 +91,7 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->child.get_parent());
+        const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->child_of_symbiosis.get_parent());
 
         if (symbiosis == nullptr)
         {

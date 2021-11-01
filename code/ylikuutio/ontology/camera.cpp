@@ -54,6 +54,11 @@ namespace yli::ontology
         // destructor.
     }
 
+    yli::ontology::Entity* Camera::get_parent() const
+    {
+        return this->child_of_scene.get_parent();
+    }
+
     void Camera::activate()
     {
         if (this->universe != nullptr)
@@ -64,7 +69,7 @@ namespace yli::ontology
 
     yli::ontology::Scene* Camera::get_scene() const
     {
-        return static_cast<yli::ontology::Scene*>(this->child.get_parent());
+        return static_cast<yli::ontology::Scene*>(this->child_of_scene.get_parent());
     }
 
     std::size_t Camera::get_number_of_children() const

@@ -19,6 +19,7 @@
 #define __YLIKUUTIO_ONTOLOGY_OBJECT_HPP_INCLUDED
 
 #include "movable.hpp"
+#include "child_module.hpp"
 #include "object_type.hpp"
 #include "object_struct.hpp"
 
@@ -60,13 +61,13 @@ namespace yli::ontology
             Object(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::ObjectStruct& object_struct,
-                    yli::ontology::ParentModule* const parent_module,
+                    yli::ontology::ParentModule* const mesh_parent_module,
                     yli::ontology::GenericMasterModule* const generic_master_module)
                 : Movable(
                         universe,
                         object_struct,
-                        parent_module,
-                        generic_master_module)
+                        generic_master_module),
+                child(mesh_parent_module, this)
             {
                 // constructor.
 
@@ -94,6 +95,8 @@ namespace yli::ontology
 
             // destructor.
             virtual ~Object();
+
+            yli::ontology::Entity* get_parent() const override;
 
             yli::ontology::Glyph* get_glyph() const;
 
@@ -142,6 +145,10 @@ namespace yli::ontology
         private:
             void render_this_object(yli::ontology::Shader* const shader);
 
+        public:
+            yli::ontology::ChildModule child;
+
+        private:
             yli::ontology::Glyph* glyph { nullptr }; // pointer to the `Glyph` (not a parent!).
 
             yli::ontology::ObjectType object_type { yli::ontology::ObjectType::REGULAR };
