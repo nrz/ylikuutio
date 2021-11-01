@@ -19,7 +19,6 @@
 #define __YLIKUUTIO_ONTOLOGY_MOVABLE_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "child_module.hpp"
 #include "generic_master_module.hpp"
 #include "apprentice_module.hpp"
 #include "rigid_body_module.hpp"
@@ -57,7 +56,6 @@ namespace yli::input
 
 namespace yli::ontology
 {
-    class ParentModule;
     class GenericMasterModule;
     class Universe;
     class Brain;
@@ -70,10 +68,8 @@ namespace yli::ontology
 
             Movable(yli::ontology::Universe* const universe,
                     const yli::ontology::MovableStruct& movable_struct,
-                    yli::ontology::ParentModule* const parent_module,
                     yli::ontology::GenericMasterModule* const brain_master)
                 : Entity(universe, movable_struct),
-                child(parent_module, this),
                 apprentice_of_brain(brain_master, this),
                 rigid_body_module(movable_struct.rigid_body_module_struct, movable_struct.scene, this),
                 initial_rotate_vectors { movable_struct.initial_rotate_vectors },
@@ -103,8 +99,6 @@ namespace yli::ontology
 
             // destructor.
             virtual ~Movable();
-
-            yli::ontology::Entity* get_parent() const override;
 
             const glm::vec3& get_cartesian_coordinates() const;
             void set_cartesian_coordinates(const glm::vec3& cartesian_coordinates);
@@ -254,9 +248,6 @@ namespace yli::ontology
 
         private:
             void create_coordinate_and_angle_variables();
-
-        protected:
-            yli::ontology::ChildModule child;
 
         public:
             yli::ontology::ApprenticeModule apprentice_of_brain;

@@ -19,6 +19,7 @@
 #define __YLIKUUTIO_ONTOLOGY_CAMERA_HPP_INCLUDED
 
 #include "movable.hpp"
+#include "child_module.hpp"
 #include "camera_struct.hpp"
 
 // Include GLM
@@ -66,6 +67,7 @@
 
 namespace yli::ontology
 {
+    class Entity;
     class Universe;
     class Scene;
     class ParentModule;
@@ -82,8 +84,8 @@ namespace yli::ontology
                 : Movable(
                         universe,
                         camera_struct,
-                        scene_parent_module,
-                        generic_master_module)
+                        generic_master_module),
+                child_of_scene(scene_parent_module, this)
             {
                 // constructor.
 
@@ -99,6 +101,8 @@ namespace yli::ontology
             // destructor.
             virtual ~Camera();
 
+            yli::ontology::Entity* get_parent() const override;
+
             void activate() override;
 
             const glm::mat4& get_projection_matrix() const;
@@ -106,6 +110,8 @@ namespace yli::ontology
             bool get_is_static_view() const;
 
             friend class yli::ontology::Universe;
+
+            yli::ontology::ChildModule child_of_scene;
 
         private:
             yli::ontology::Scene* get_scene() const override;

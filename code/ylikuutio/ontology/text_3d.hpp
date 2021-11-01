@@ -53,14 +53,13 @@ namespace yli::ontology
             Text3D(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::Text3DStruct& text_3d_struct,
-                    yli::ontology::ParentModule* const parent_module,
+                    yli::ontology::ParentModule* const vector_font_parent_module,
                     yli::ontology::GenericMasterModule* const generic_master_module)
                 : Movable(
                         universe,
                         text_3d_struct,
-                        parent_module,
                         generic_master_module),
-                child_of_vector_font(parent_module, this),
+                child_of_vector_font(vector_font_parent_module, this),
                 parent_of_objects(this, &this->registry, "objects")
             {
                 // constructor.
@@ -85,6 +84,8 @@ namespace yli::ontology
 
             // destructor.
             virtual ~Text3D();
+
+            yli::ontology::Entity* get_parent() const override;
 
             friend class yli::ontology::Object;
             friend void yli::ontology::create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* text_3d);
