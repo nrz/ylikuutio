@@ -520,7 +520,7 @@ namespace yli::lisp
                 return std::nullopt;
             }
 
-            return { parameter_vector.at(parameter_i++) };
+            return parameter_vector.at(parameter_i++);
         }
 }
 
