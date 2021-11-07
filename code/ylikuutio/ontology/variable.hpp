@@ -85,7 +85,7 @@ namespace yli::ontology
 
             std::string help() const;
 
-            std::optional<yli::data::AnyValue> get();
+            std::optional<yli::data::AnyValue> get() const;
             void set(const yli::data::AnyValue& new_value);
             void set(const std::string& new_value);
 

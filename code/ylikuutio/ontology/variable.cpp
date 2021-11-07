@@ -96,7 +96,7 @@ namespace yli::ontology
         return help_string;
     }
 
-    std::optional<yli::data::AnyValue> Variable::get()
+    std::optional<yli::data::AnyValue> Variable::get() const
     {
         if (this->parent == nullptr)
         {
