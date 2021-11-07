@@ -158,8 +158,8 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> Variable::set_variable_variable(
             yli::ontology::Variable& dest_variable,
-            yli::ontology::Universe&,               // A context is needed so that correct `Variable` is bound to the function call.
-            yli::ontology::Variable& src_variable)
+            const yli::ontology::Universe&,              // A context is needed so that correct `Variable` is bound to the function call.
+            const yli::ontology::Variable& src_variable)
     {
         // Usage:
         // to set variable: set <dest-variable-name> <src-variable-name>
@@ -178,8 +178,8 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> Variable::print_value1(
             yli::ontology::Console& console,
-            yli::ontology::Universe&,          // A context is needed so that correct `Variable` is bound to the function call.
-            yli::ontology::Variable& variable)
+            const yli::ontology::Universe&,          // A context is needed so that correct `Variable` is bound to the function call.
+            const yli::ontology::Variable& variable)
     {
         // Usage:
         // to get variable value: get1 <variable-name>

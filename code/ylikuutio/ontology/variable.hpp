@@ -97,13 +97,13 @@ namespace yli::ontology
 
             static std::optional<yli::data::AnyValue> set_variable_variable(
                     yli::ontology::Variable& dest_variable,
-                    yli::ontology::Universe&,               // A context is needed so that correct `Variable` is bound to the function call.
-                    yli::ontology::Variable& src_variable);
+                    const yli::ontology::Universe&,         // A context is needed so that correct `Variable` is bound to the function call.
+                    const yli::ontology::Variable& src_variable);
 
             static std::optional<yli::data::AnyValue> print_value1(
                     yli::ontology::Console& console,
-                    yli::ontology::Universe&,               // A context is needed so that correct `Variable` is bound to the function call.
-                    yli::ontology::Variable& variable);
+                    const yli::ontology::Universe&,         // A context is needed so that correct `Variable` is bound to the function call.
+                    const yli::ontology::Variable& variable);
 
             static std::optional<yli::data::AnyValue> activate_planet_radius(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
 

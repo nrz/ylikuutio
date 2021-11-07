@@ -179,7 +179,7 @@ namespace yli::ontology
     // Public data printing callbacks.
 
     std::optional<yli::data::AnyValue> Universe::info0(
-            yli::ontology::Universe& universe,
+            const yli::ontology::Universe& universe,
             yli::ontology::Console& console)
     {
         // Print names of named entities.
@@ -188,9 +188,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Universe::info1(
-            yli::ontology::Universe& universe,
+            const yli::ontology::Universe& universe,
             yli::ontology::Console& console,
-            yli::ontology::Entity& entity)
+            const yli::ontology::Entity& entity)
     {
         // OK, let's find out information about this `Entity`.
 
@@ -238,7 +238,7 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Universe::print_entities(
-            yli::ontology::Universe& universe,
+            const yli::ontology::Universe& universe,
             yli::ontology::Console& console)
     {
         std::vector<std::pair<std::string, yli::ontology::Entity*>> key_and_value_vector = yli::map::get_keys_and_values(universe.registry.get_entity_map());
@@ -257,9 +257,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Universe::print_parent(
-            yli::ontology::Universe&,
+            const yli::ontology::Universe&,
             yli::ontology::Console& console,
-            yli::ontology::Entity& entity)
+            const yli::ontology::Entity& entity)
     {
         // OK, let's find out the parent of this `Entity`.
 

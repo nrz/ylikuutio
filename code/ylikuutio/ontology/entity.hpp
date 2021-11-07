@@ -121,16 +121,16 @@ namespace yli::ontology
 
             static std::optional<yli::data::AnyValue> print_children(
                     yli::ontology::Console& console,
-                    yli::ontology::Entity& entity);
+                    const yli::ontology::Entity& entity);
 
             static std::optional<yli::data::AnyValue> print_variables0(
-                    yli::ontology::Universe& universe,
+                    const yli::ontology::Universe& universe,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> print_variables1(
-                    yli::ontology::Universe&,
+                    const yli::ontology::Universe&,
                     yli::ontology::Console& console,
-                    yli::ontology::Entity& entity);
+                    const yli::ontology::Entity& entity);
 
             // Public callbacks end here.
 
