@@ -536,22 +536,22 @@ namespace yli::ontology
             // Public data printing callbacks.
 
             static std::optional<yli::data::AnyValue> info0(
-                    yli::ontology::Universe& universe,
+                    const yli::ontology::Universe& universe,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> info1(
-                    yli::ontology::Universe& universe,
+                    const yli::ontology::Universe& universe,
                     yli::ontology::Console& console,
-                    yli::ontology::Entity& entity);
+                    const yli::ontology::Entity& entity);
 
             static std::optional<yli::data::AnyValue> print_entities(
-                    yli::ontology::Universe& universe,
+                    const yli::ontology::Universe& universe,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> print_parent(
-                    yli::ontology::Universe&,
+                    const yli::ontology::Universe&,
                     yli::ontology::Console& console,
-                    yli::ontology::Entity& entity);
+                    const yli::ontology::Entity& entity);
 
             // Other public callbacks.
 

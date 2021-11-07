@@ -48,11 +48,11 @@ namespace yli::ontology
                     yli::ontology::Universe* const universe,
                     const yli::ontology::HolobiontStruct& holobiont_struct,
                     yli::ontology::ParentModule* const symbiosis_parent_module,
-                    yli::ontology::GenericMasterModule* const generic_master_module)
+                    yli::ontology::GenericMasterModule* const brain_master)
                 : Movable(
                         universe,
                         holobiont_struct,
-                        generic_master_module),
+                        brain_master),
                 child_of_symbiosis(symbiosis_parent_module, this),
                 parent_of_bionts(this, &this->registry, "bionts")
             {

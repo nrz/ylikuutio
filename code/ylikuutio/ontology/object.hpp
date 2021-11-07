@@ -62,11 +62,11 @@ namespace yli::ontology
                     yli::ontology::Universe* const universe,
                     const yli::ontology::ObjectStruct& object_struct,
                     yli::ontology::ParentModule* const mesh_parent_module,
-                    yli::ontology::GenericMasterModule* const generic_master_module)
+                    yli::ontology::GenericMasterModule* const brain_master)
                 : Movable(
                         universe,
                         object_struct,
-                        generic_master_module),
+                        brain_master),
                 child(mesh_parent_module, this)
             {
                 // constructor.

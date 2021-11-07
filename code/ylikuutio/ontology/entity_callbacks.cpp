@@ -49,7 +49,7 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> Entity::print_children(
             yli::ontology::Console& console,
-            yli::ontology::Entity& entity)
+            const yli::ontology::Entity& entity)
     {
         // OK, let's print the children of this `Entity`.
         yli::map::print_keys_to_console(entity.registry.get_entity_map(), &console);
@@ -58,7 +58,7 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Entity::print_variables0(
-            yli::ontology::Universe& universe,
+            const yli::ontology::Universe& universe,
             yli::ontology::Console& console)
     {
         // Print global variable names.
@@ -69,9 +69,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Entity::print_variables1(
-            yli::ontology::Universe&,
+            const yli::ontology::Universe&,
             yli::ontology::Console& console,
-            yli::ontology::Entity& entity)
+            const yli::ontology::Entity& entity)
     {
         // Print the variable names of the `Entity`.
 
