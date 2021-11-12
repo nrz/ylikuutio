@@ -57,7 +57,6 @@ namespace yli::ontology
     template<typename... Types>
         class LispFunctionOverload: public yli::ontology::GenericLispFunctionOverload
     {
-        public:
         private:
             template<typename Tag>
                 std::optional<std::tuple<>> process_args(
