@@ -58,6 +58,70 @@ namespace yli::ontology
         class LispFunctionOverload: public yli::ontology::GenericLispFunctionOverload
     {
         public:
+            LispFunctionOverload(
+                    yli::ontology::Universe* const universe,
+                    yli::ontology::ParentModule* const parent_module,
+                    std::function<std::optional<yli::data::AnyValue>(Types...)> callback)
+                : GenericLispFunctionOverload(universe, parent_module),
+                callback(callback)
+            {
+                // constructor.
+
+                // `yli::ontology::Entity` member variables begin here.
+                this->type_string = "yli::ontology::LispFunctionOverload*";
+            }
+
+            LispFunctionOverload(const LispFunctionOverload&) = delete;            // Delete copy constructor.
+            LispFunctionOverload& operator=(const LispFunctionOverload&) = delete; // Delete copy assignment.
+
+            // destructor.
+            virtual ~LispFunctionOverload()
+            {
+                // destructor.
+            }
+
+            std::optional<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector) override
+            {
+                yli::ontology::Universe* const universe = this->get_universe();
+
+                if (universe == nullptr)
+                {
+                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `universe` is `nullptr`!\n";
+                    return std::nullopt;
+                }
+
+                yli::ontology::Entity* const lisp_function_entity = this->child_of_lisp_function.get_parent();
+
+                yli::ontology::LispFunction* const lisp_function = dynamic_cast<yli::ontology::LispFunction*>(lisp_function_entity);
+
+                if (lisp_function == nullptr)
+                {
+                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `lisp_function` is `nullptr`!\n";
+                    return std::nullopt;
+                }
+
+                yli::ontology::Entity* const console_entity = lisp_function->get_parent();
+
+                if (console_entity == nullptr)
+                {
+                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `console_entity` is `nullptr`!\n";
+                    return std::nullopt;
+                }
+
+                yli::ontology::Console* const console = dynamic_cast<yli::ontology::Console*>(console_entity);
+
+                if (console == nullptr)
+                {
+                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `console` is `nullptr`!\n";
+                    return std::nullopt;
+                }
+
+                // OK, all preconditions for a successful argument binding are met.
+                // Now, process the arguments and call.
+
+                return this->process_args_and_call(parameter_vector);
+            }
+
         private:
             template<typename Tag>
                 std::optional<std::tuple<>> process_args(
@@ -158,72 +222,6 @@ namespace yli::ontology
                 return std::nullopt;
             }
 
-        public:
-            LispFunctionOverload(
-                    yli::ontology::Universe* const universe,
-                    yli::ontology::ParentModule* const parent_module,
-                    std::function<std::optional<yli::data::AnyValue>(Types...)> callback)
-                : GenericLispFunctionOverload(universe, parent_module),
-                callback(callback)
-            {
-                // constructor.
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::LispFunctionOverload*";
-            }
-
-            LispFunctionOverload(const LispFunctionOverload&) = delete;            // Delete copy constructor.
-            LispFunctionOverload& operator=(const LispFunctionOverload&) = delete; // Delete copy assignment.
-
-            // destructor.
-            virtual ~LispFunctionOverload()
-            {
-                // destructor.
-            }
-
-            std::optional<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector) override
-            {
-                yli::ontology::Universe* const universe = this->get_universe();
-
-                if (universe == nullptr)
-                {
-                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `universe` is `nullptr`!\n";
-                    return std::nullopt;
-                }
-
-                yli::ontology::Entity* const lisp_function_entity = this->child_of_lisp_function.get_parent();
-
-                yli::ontology::LispFunction* const lisp_function = dynamic_cast<yli::ontology::LispFunction*>(lisp_function_entity);
-
-                if (lisp_function == nullptr)
-                {
-                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `lisp_function` is `nullptr`!\n";
-                    return std::nullopt;
-                }
-
-                yli::ontology::Entity* const console_entity = lisp_function->get_parent();
-
-                if (console_entity == nullptr)
-                {
-                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `console_entity` is `nullptr`!\n";
-                    return std::nullopt;
-                }
-
-                yli::ontology::Console* const console = dynamic_cast<yli::ontology::Console*>(console_entity);
-
-                if (console == nullptr)
-                {
-                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `console` is `nullptr`!\n";
-                    return std::nullopt;
-                }
-
-                // OK, all preconditions for a successful argument binding are met.
-                // Now, process the arguments and call.
-
-                return this->process_args_and_call(parameter_vector);
-            }
-
-        private:
             // The callback may receive different kinds of arguments.
             const std::function<std::optional<yli::data::AnyValue>(Types...)> callback;
     };
