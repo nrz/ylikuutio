@@ -479,6 +479,9 @@ TEST(shader_must_be_initialized_appropriately, headless)
     ASSERT_EQ(scene->get_scene(), scene);
     ASSERT_EQ(scene->get_number_of_non_variable_children(), 2); // Default `Camera`, `shader`.
 
+    // `Shader` member functions.
+    ASSERT_EQ(shader->get_number_of_apprentices(), 0);
+
     // `Entity` member functions.
     ASSERT_EQ(shader->get_childID(), 0);
     ASSERT_EQ(shader->get_type(), "yli::ontology::Shader*");
@@ -505,6 +508,9 @@ TEST(shader_must_be_initialized_appropriately, no_universe)
     ASSERT_EQ(scene->get_scene(), scene);
     ASSERT_EQ(scene->get_number_of_non_variable_children(), 2); // Default `Camera`, `shader`.
 
+    // `Shader` member functions.
+    ASSERT_EQ(shader->get_number_of_apprentices(), 0);
+
     // `Entity` member functions.
     ASSERT_EQ(shader->get_childID(), 0);
     ASSERT_EQ(shader->get_type(), "yli::ontology::Shader*");
@@ -520,6 +526,9 @@ TEST(shader_must_be_initialized_appropriately, no_universe_no_scene)
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = nullptr;
     yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct);
+
+    // `Shader` member functions.
+    ASSERT_EQ(shader->get_number_of_apprentices(), 0);
 
     // `Entity` member functions.
     ASSERT_EQ(shader->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -567,6 +576,9 @@ TEST(material_must_be_initialized_appropriately, headless)
     ASSERT_EQ(shader->get_scene(), scene);
     ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
 
+    // `Shader` member functions.
+    ASSERT_EQ(shader->get_number_of_apprentices(), 1); // `material`.
+
     // `Entity` member functions.
     ASSERT_EQ(material->get_childID(), 0);
     ASSERT_EQ(material->get_type(), "yli::ontology::Material*");
@@ -605,6 +617,9 @@ TEST(material_must_be_initialized_appropriately, no_universe)
     ASSERT_EQ(shader->get_scene(), scene);
     ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
 
+    // `Shader` member functions.
+    ASSERT_EQ(shader->get_number_of_apprentices(), 1); // `material`.
+
     // `Entity` member functions.
     ASSERT_EQ(material->get_childID(), 0);
     ASSERT_EQ(material->get_type(), "yli::ontology::Material*");
@@ -631,6 +646,9 @@ TEST(material_must_be_initialized_appropriately, no_universe_no_scene)
     // `Entity` member functions of `Shader`.
     ASSERT_EQ(shader->get_scene(), nullptr);
     ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+
+    // `Shader` member functions.
+    ASSERT_EQ(shader->get_number_of_apprentices(), 1); // `material`.
 
     // `Entity` member functions.
     ASSERT_EQ(material->get_childID(), std::numeric_limits<std::size_t>::max());

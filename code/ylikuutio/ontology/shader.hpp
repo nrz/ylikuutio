@@ -108,6 +108,8 @@ namespace yli::ontology
                 return const_cast<yli::ontology::MasterModule<yli::ontology::Shader*>*>(&this->master_of_materials);
             }
 
+            std::size_t get_number_of_apprentices() const;
+
             GLuint get_program_id() const;
             GLint get_matrix_id() const;
             GLint get_model_matrix_id() const;

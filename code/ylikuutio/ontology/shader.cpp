@@ -184,6 +184,11 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_symbioses.child_pointer_vector);
     }
 
+    std::size_t Shader::get_number_of_apprentices() const
+    {
+        return this->master_of_materials.get_number_of_apprentices();
+    }
+
     GLuint Shader::get_program_id() const
     {
         return this->program_id;
