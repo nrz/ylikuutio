@@ -579,6 +579,9 @@ TEST(material_must_be_initialized_appropriately, headless)
     // `Shader` member functions.
     ASSERT_EQ(shader->get_number_of_apprentices(), 1); // `material`.
 
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 0);
+
     // `Entity` member functions.
     ASSERT_EQ(material->get_childID(), 0);
     ASSERT_EQ(material->get_type(), "yli::ontology::Material*");
@@ -620,6 +623,9 @@ TEST(material_must_be_initialized_appropriately, no_universe)
     // `Shader` member functions.
     ASSERT_EQ(shader->get_number_of_apprentices(), 1); // `material`.
 
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 0);
+
     // `Entity` member functions.
     ASSERT_EQ(material->get_childID(), 0);
     ASSERT_EQ(material->get_type(), "yli::ontology::Material*");
@@ -650,6 +656,9 @@ TEST(material_must_be_initialized_appropriately, no_universe_no_scene)
     // `Shader` member functions.
     ASSERT_EQ(shader->get_number_of_apprentices(), 1); // `material`.
 
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 0);
+
     // `Entity` member functions.
     ASSERT_EQ(material->get_childID(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(material->get_type(), "yli::ontology::Material*");
@@ -668,6 +677,9 @@ TEST(material_must_be_initialized_appropriately, no_universe_no_scene_no_shader)
             nullptr,
             material_struct,
             nullptr, nullptr);
+
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 0);
 
     // `Entity` member functions.
     ASSERT_EQ(material->get_childID(), std::numeric_limits<std::size_t>::max());
@@ -724,6 +736,9 @@ TEST(species_must_be_initialized_appropriately, headless)
 
     // `Entity` member functions of `Material`.
     ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
+
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 1); // `species`.
 
     // `Entity` member functions.
     ASSERT_EQ(species->get_childID(), 0);
@@ -812,6 +827,9 @@ TEST(object_must_be_initialized_appropriately, headless)
     // `Entity` member functions of `Material`.
     ASSERT_EQ(material->get_scene(), scene);
     ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
+
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 1); // `species`.
 
     // `Entity` member functions of `Species`.
     ASSERT_EQ(species->get_scene(), scene);
@@ -1142,6 +1160,9 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
     ASSERT_EQ(material->get_scene(), scene);
     ASSERT_EQ(material->get_number_of_non_variable_children(), 1);
 
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 0);
+
     // `Entity` member functions.
     ASSERT_EQ(shapeshifter_transformation->get_childID(), 0);
     ASSERT_EQ(shapeshifter_transformation->get_type(), "yli::ontology::ShapeshifterTransformation*");
@@ -1228,6 +1249,9 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
     // `Entity` member functions of `Material`.
     ASSERT_EQ(material->get_scene(), scene);
     ASSERT_EQ(material->get_number_of_non_variable_children(), 1);
+
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 0);
 
     // `Entity` member functions of `ShapeshifterTransformation`.
     ASSERT_EQ(shapeshifter_transformation->get_scene(), scene);
@@ -1630,6 +1654,9 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     // `Entity` member functions of `ShapeshifterSequence`.
     ASSERT_EQ(shapeshifter_sequence->get_scene(), scene);
     ASSERT_EQ(shapeshifter_sequence->get_number_of_non_variable_children(), 1);
+
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 0);
 
     // `Entity` member functions.
     ASSERT_EQ(object->get_childID(), 0);
