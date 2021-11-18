@@ -123,11 +123,11 @@ namespace yli::ontology
 
     std::size_t Text3D::get_number_of_children() const
     {
-        return this->parent_of_objects.get_number_of_children();
+        return 0; // `Text3D` has no children.
     }
 
     std::size_t Text3D::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_objects.child_pointer_vector);
+        return 0; // `Text3D` has no children.
     }
 }

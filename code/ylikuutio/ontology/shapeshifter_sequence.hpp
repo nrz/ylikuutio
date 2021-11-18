@@ -20,7 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "parent_module.hpp"
+#include "generic_master_module.hpp"
 #include "shapeshifter_sequence_struct.hpp"
 
 // Include standard headers
@@ -34,6 +34,7 @@
 
 namespace yli::ontology
 {
+    class ParentModule;
     class Universe;
     class Scene;
     class Shader;
@@ -44,7 +45,7 @@ namespace yli::ontology
             ShapeshifterSequence(yli::ontology::Universe* const universe, const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct, yli::ontology::ParentModule* const shapeshifter_transformation_parent_module)
                 : Entity(universe, shapeshifter_sequence_struct),
                 child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, this),
-                parent_of_objects(this, &this->registry, "objects")
+                master_of_objects(this, &this->registry, "objects")
             {
                 // constructor.
 
@@ -68,7 +69,7 @@ namespace yli::ontology
             yli::ontology::ChildModule child_of_shapeshifter_transformation;
 
         public:
-            yli::ontology::ParentModule parent_of_objects;
+            yli::ontology::GenericMasterModule master_of_objects;
 
         private:
             void bind_to_parent();

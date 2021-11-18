@@ -20,7 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "parent_module.hpp"
+#include "generic_master_module.hpp"
 #include "apprentice_module.hpp"
 #include "mesh_module.hpp"
 #include "model_struct.hpp"
@@ -28,10 +28,10 @@
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
-#include <vector>   // std::vector
 
 namespace yli::ontology
 {
+    class ParentModule;
     class Universe;
     class Scene;
     class Shader;
@@ -53,7 +53,7 @@ namespace yli::ontology
                     yli::ontology::GenericMasterModule* const material_master)
                 : Entity(universe, model_struct),
                 child_of_scene(scene_parent_module, this),
-                parent_of_objects(this, &this->registry, "objects"),
+                master_of_objects(this, &this->registry, "objects"),
                 apprentice_of_material(material_master, this),
                 mesh(universe, model_struct)
             {
@@ -82,8 +82,6 @@ namespace yli::ontology
             // this method renders all `Object`s of this `Species`.
             void render();
 
-            yli::ontology::ParentModule* get_renderables_container();
-
             yli::ontology::Scene* get_scene() const override;
 
             yli::ontology::Shader* get_shader() const;
@@ -95,7 +93,7 @@ namespace yli::ontology
             yli::ontology::ChildModule child_of_scene;
 
         public:
-            yli::ontology::ParentModule parent_of_objects;
+            yli::ontology::GenericMasterModule master_of_objects;
             yli::ontology::ApprenticeModule apprentice_of_material;
             yli::ontology::MeshModule mesh;
     };

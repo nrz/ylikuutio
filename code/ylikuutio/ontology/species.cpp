@@ -31,7 +31,6 @@
 
 namespace yli::ontology
 {
-    class ParentModule;
     class Shader;
 
     void Species::bind_to_new_scene_parent(yli::ontology::Scene* const new_parent)
@@ -126,14 +125,9 @@ namespace yli::ontology
         }
 
         this->prerender();
-        yli::render::render_model<yli::ontology::ParentModule&, yli::ontology::Entity*, yli::ontology::Object*>(
-                this->mesh, *(this->get_renderables_container()));
+        yli::render::render_model<yli::ontology::GenericMasterModule&, yli::ontology::Entity*, yli::ontology::Object*>(
+                this->mesh, this->master_of_objects);
         this->postrender();
-    }
-
-    yli::ontology::ParentModule* Species::get_renderables_container()
-    {
-        return &this->parent_of_objects;
     }
 
     uint32_t Species::get_x_step() const
@@ -180,11 +174,11 @@ namespace yli::ontology
 
     std::size_t Species::get_number_of_children() const
     {
-        return this->parent_of_objects.get_number_of_children();
+        return 0; // `Species` has no children.
     }
 
     std::size_t Species::get_number_of_descendants() const
     {
-        return this->parent_of_objects.get_number_of_descendants();
+        return 0; // `Species` has no children.
     }
 }

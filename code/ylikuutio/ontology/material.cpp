@@ -174,6 +174,11 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_chunk_masters.child_pointer_vector);
     }
 
+    std::size_t Material::get_number_of_apprentices() const
+    {
+        return this->master_of_species.get_number_of_apprentices();
+    }
+
     const std::string& Material::get_texture_file_format() const
     {
         return this->texture_file_format;

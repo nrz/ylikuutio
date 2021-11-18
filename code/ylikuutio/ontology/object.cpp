@@ -58,148 +58,116 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    void Object::bind_to_new_species_parent(yli::ontology::Species* const new_parent)
+    void Object::bind_to_new_scene_parent(yli::ontology::Scene* const new_parent)
     {
-        // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
-        // and requests a new `childID` from the new `Species`.
+        // Requirements:
+        // `this->parent` must not be `nullptr`.
+        // `new_parent` must not be `nullptr`.
 
-        if (this->object_type == yli::ontology::ObjectType::REGULAR)
+        yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(this->child_of_scene.get_parent());
+
+        if (scene == nullptr)
         {
-            // requirements for further actions in this block:
-            // `this->species_parent` must not be `nullptr`.
-            // `new_parent` must not be `nullptr`.
-
-            yli::ontology::Entity* const species = this->child.get_parent();
-
-            if (species == nullptr)
-            {
-                std::cerr << "ERROR: `Object::bind_to_new_species_parent`: `species` is `nullptr`!\n";
-                return;
-            }
-
-            if (new_parent == nullptr)
-            {
-                std::cerr << "ERROR: `Object::bind_to_new_species_parent`: `new_parent` is `nullptr`!\n";
-                return;
-            }
-
-            if (new_parent->has_child(this->local_name))
-            {
-                std::cerr << "ERROR: `Object::bind_to_new_species_parent`: local name is already in use!\n";
-                return;
-            }
-
-            // unbind from the old parent `Species`.
-            this->child.unbind_child();
-
-            // get `childID` from `Species` and set pointer to this `Object`.
-            this->child.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_objects);
+            std::cerr << "ERROR: `Object::bind_to_new_scene_parent`: `scene` is `nullptr`!\n";
+            return;
         }
-    }
 
-    void Object::bind_to_new_shapeshifter_sequence_parent(yli::ontology::ShapeshifterSequence* const new_parent)
-    {
-        // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
-        // and requests a new `childID` from the new `ShapeshifterSequence`.
-
-        if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
+        if (new_parent == nullptr)
         {
-            // requirements for further actions in this block:
-            // `this->shapeshifter_sequence_parent` must not be `nullptr`.
-            // `new_parent` must not be `nullptr`.
-
-            yli::ontology::Entity* const shapeshifter_sequence = this->child.get_parent();
-
-            if (shapeshifter_sequence == nullptr)
-            {
-                std::cerr << "ERROR: `Object::bind_to_new_shapeshifter_sequence_parent`: `shapeshifter_sequence` is `nullptr`!\n";
-                return;
-            }
-
-            if (new_parent == nullptr)
-            {
-                std::cerr << "ERROR: `Object::bind_to_new_shapeshifter_sequence_parent`: `new_parent` is `nullptr`!\n";
-                return;
-            }
-
-            if (new_parent->has_child(this->local_name))
-            {
-                std::cerr << "ERROR: `Object::bind_to_new_shapeshifter_sequence_parent`: local name is already in use!\n";
-                return;
-            }
-
-            // unbind from the old parent `ShapeshifterSequence`.
-            this->child.unbind_child();
-
-            // get `childID` from `ShapeshifterSequence` and set pointer to this `Object`.
-            this->child.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_objects);
+            std::cerr << "ERROR: `Object::bind_to_new_scene_parent`: `new_parent` is `nullptr`!\n";
+            return;
         }
-    }
 
-    void Object::bind_to_new_text_3d_parent(yli::ontology::Text3D* const new_parent)
-    {
-        // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
-        // and requests a new `childID` from the new `Text3D`.
-
-        if (this->object_type == yli::ontology::ObjectType::CHARACTER)
+        if (new_parent->has_child(this->local_name))
         {
-            // requirements for further actions in this block:
-            // `this->text_3d_parent` must not be `nullptr`.
-            // `new_parent` must not be `nullptr`.
-
-            yli::ontology::Entity* const text_3d = this->child.get_parent();
-
-            if (text_3d == nullptr)
-            {
-                std::cerr << "ERROR: `Object::bind_to_new_text_3d_parent`: `text_3d` is `nullptr`!\n";
-                return;
-            }
-
-            if (new_parent == nullptr)
-            {
-                std::cerr << "ERROR: `Object::bind_to_new_text_3d_parent`: `new_parent` is `nullptr`!\n";
-                return;
-            }
-
-            if (new_parent->has_child(this->local_name))
-            {
-                std::cerr << "ERROR: `Object::bind_to_new_text_3d_parent`: local name is already in use!\n";
-                return;
-            }
-
-            // unbind from the old parent `Text3D`.
-            this->child.unbind_child();
-
-            // get `childID` from `Text3D` and set pointer to this `Object`.
-            this->child.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_objects);
+            std::cerr << "ERROR: `Object::bind_to_new_scene_parent`: local name is already in use!\n";
+            return;
         }
+
+        // Unbind from the old parent `Scene`.
+        scene->parent_of_objects.unbind_child(this->childID);
+
+        // Get `childID` from `Scene` and set pointer to this `Object`.
+        this->child_of_scene.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_objects);
     }
 
     void Object::bind_to_new_parent(yli::ontology::Entity* const new_parent)
     {
         // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
-        // and requests a new `childID` from the new `Species` or from the new `Text3D`.
+        // and requests a new `childID` from the new `Scene`.
         //
         // requirements:
         // `new_parent` must not be `nullptr`.
 
-        yli::ontology::Species* const species_parent = dynamic_cast<yli::ontology::Species*>(new_parent);
+        yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(new_parent);
 
-        if (species_parent != nullptr)
+        if (scene != nullptr)
         {
-            this->bind_to_new_species_parent(species_parent);
+            this->bind_to_new_scene_parent(scene);
             return;
         }
 
-        yli::ontology::Text3D* const text_3d_parent = dynamic_cast<yli::ontology::Text3D*>(new_parent);
+        std::cerr << "ERROR: `Object::bind_to_new_parent`: `new_parent` is not `yli::ontology::Scene*`!\n";
+    }
 
-        if (text_3d_parent != nullptr)
+    void Object::bind_to_new_species_master(yli::ontology::Species* const new_species)
+    {
+        // This method sets pointer to this `Object` to `nullptr`, sets `master` according to the input,
+        // and requests a new `apprenticeID` from the new `Species`.
+
+        if (this->object_type == yli::ontology::ObjectType::REGULAR)
         {
-            this->bind_to_new_text_3d_parent(text_3d_parent);
-            return;
-        }
+            // Unbind from the current `Species` if there is such.
 
-        std::cerr << "ERROR: `Object::bind_to_new_parent`: `new_parent` is neither `yli::ontology::Species*` nor `yli::ontology::Text3D*`!\n";
+            if (new_species != nullptr)
+            {
+                this->apprentice_of_mesh.bind_to_new_generic_master_module(&new_species->master_of_objects);
+            }
+            else
+            {
+                this->apprentice_of_mesh.bind_to_new_generic_master_module(nullptr);
+            }
+        }
+    }
+
+    void Object::bind_to_new_shapeshifter_sequence_master(yli::ontology::ShapeshifterSequence* const new_shapeshifter_sequence)
+    {
+        // This method sets pointer to this `Object` to `nullptr`, sets `master` according to the input,
+        // and requests a new `apprenticeID` from the new `ShapeshifterSequence`.
+
+        if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
+        {
+            // Unbind from the current `ShapeshifterSequence` if there is such.
+
+            if (new_shapeshifter_sequence != nullptr)
+            {
+                this->apprentice_of_mesh.bind_to_new_generic_master_module(&new_shapeshifter_sequence->master_of_objects);
+            }
+            else
+            {
+                this->apprentice_of_mesh.bind_to_new_generic_master_module(nullptr);
+            }
+        }
+    }
+
+    void Object::bind_to_new_text_3d_master(yli::ontology::Text3D* const new_text_3d)
+    {
+        // This method sets pointer to this `Object` to `nullptr`, sets `master` according to the input,
+        // and requests a new `apprenticeID` from the new `Text3D`.
+
+        if (this->object_type == yli::ontology::ObjectType::CHARACTER)
+        {
+            // Unbind from the current `Text3D` if there is such.
+
+            if (new_text_3d != nullptr)
+            {
+                this->apprentice_of_mesh.bind_to_new_generic_master_module(&new_text_3d->master_of_objects);
+            }
+            else
+            {
+                this->apprentice_of_mesh.bind_to_new_generic_master_module(nullptr);
+            }
+        }
     }
 
     Object::~Object()
@@ -210,7 +178,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* Object::get_parent() const
     {
-        return this->child.get_parent();
+        return this->child_of_scene.get_parent();
     }
 
     yli::ontology::Glyph* Object::get_glyph() const
@@ -226,7 +194,7 @@ namespace yli::ontology
         {
             if (this->object_type == yli::ontology::ObjectType::REGULAR)
             {
-                yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->child.get_parent());
+                yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->apprentice_of_mesh.get_master());
 
                 if (species == nullptr)
                 {
@@ -284,7 +252,7 @@ namespace yli::ontology
 
         if (this->object_type == yli::ontology::ObjectType::REGULAR)
         {
-            yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->child.get_parent());
+            yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->apprentice_of_mesh.get_master());
 
             if (species == nullptr)
             {
@@ -322,7 +290,7 @@ namespace yli::ontology
 
         if (this->object_type == yli::ontology::ObjectType::REGULAR)
         {
-            yli::ontology::Species* const parent_species = static_cast<yli::ontology::Species*>(this->child.get_parent());
+            yli::ontology::Species* const parent_species = static_cast<yli::ontology::Species*>(this->apprentice_of_mesh.get_master());
 
             if (parent_species != nullptr)
             {
@@ -399,21 +367,14 @@ namespace yli::ontology
 
     yli::ontology::Scene* Object::get_scene() const
     {
-        yli::ontology::Entity* const parent = this->get_parent();
-
-        if (parent != nullptr)
-        {
-            return parent->get_scene();
-        }
-
-        return nullptr;
+        return static_cast<yli::ontology::Scene*>(this->child_of_scene.get_parent());
     }
 
     yli::ontology::Shader* Object::get_shader() const
     {
         if (this->object_type == yli::ontology::ObjectType::REGULAR)
         {
-            yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->child.get_parent());
+            yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->child_of_scene.get_parent());
 
             if (species != nullptr)
             {
@@ -422,7 +383,7 @@ namespace yli::ontology
         }
         else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
         {
-            yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = static_cast<yli::ontology::ShapeshifterSequence*>(this->child.get_parent());
+            yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = static_cast<yli::ontology::ShapeshifterSequence*>(this->apprentice_of_mesh.get_master());
 
             if (shapeshifter_sequence != nullptr)
             {
@@ -431,7 +392,7 @@ namespace yli::ontology
         }
         else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
         {
-            yli::ontology::Text3D* const text_3d = static_cast<yli::ontology::Text3D*>(this->child.get_parent());
+            yli::ontology::Text3D* const text_3d = static_cast<yli::ontology::Text3D*>(this->apprentice_of_mesh.get_master());
 
             if (text_3d != nullptr)
             {
@@ -455,17 +416,19 @@ namespace yli::ontology
     // Public callbacks.
 
     std::optional<yli::data::AnyValue> Object::create_object_with_parent_name_x_y_z(
-            yli::ontology::Species& parent,
+            yli::ontology::Scene& parent,
+            yli::ontology::Species& species,
             const std::string& object_name,
             const std::string& x,
             const std::string& y,
             const std::string& z)
     {
-        return yli::ontology::Object::create_object_with_parent_name_x_y_z_yaw_pitch(parent, object_name, x, y, z, "0.0", "0.0");
+        return yli::ontology::Object::create_object_with_parent_name_x_y_z_yaw_pitch(parent, species, object_name, x, y, z, "0.0", "0.0");
     }
 
     std::optional<yli::data::AnyValue> Object::create_object_with_parent_name_x_y_z_yaw_pitch(
-            yli::ontology::Species& parent,
+            yli::ontology::Scene& parent,
+            yli::ontology::Species& species,
             const std::string& object_name,
             const std::string& x,
             const std::string& y,
@@ -473,11 +436,12 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
-        return yli::ontology::Object::create_object_with_parent_name_x_y_z_roll_yaw_pitch(parent, object_name, x, y, z, "0.0", yaw, pitch);
+        return yli::ontology::Object::create_object_with_parent_name_x_y_z_roll_yaw_pitch(parent, species, object_name, x, y, z, "0.0", yaw, pitch);
     }
 
     std::optional<yli::data::AnyValue> Object::create_object_with_parent_name_x_y_z_roll_yaw_pitch(
-            yli::ontology::Species& parent,
+            yli::ontology::Scene& parent,
+            yli::ontology::Species& species,
             const std::string& object_name,
             const std::string& x,
             const std::string& y,
@@ -544,6 +508,7 @@ namespace yli::ontology
         float float_pitch = std::get<float>(pitch_any_value.data);
 
         yli::ontology::ObjectStruct object_struct(&parent);
+        object_struct.mesh_master = &species;
         object_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
         object_struct.roll = float_roll;
         object_struct.yaw = float_yaw;
