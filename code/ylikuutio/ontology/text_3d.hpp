@@ -20,7 +20,7 @@
 
 #include "movable.hpp"
 #include "child_module.hpp"
-#include "parent_module.hpp"
+#include "generic_master_module.hpp"
 #include "glyph_object_creation.hpp"
 #include "text_3d_struct.hpp"
 
@@ -60,7 +60,7 @@ namespace yli::ontology
                         text_3d_struct,
                         generic_master_module),
                 child_of_vector_font(vector_font_parent_module, this),
-                parent_of_objects(this, &this->registry, "objects")
+                master_of_objects(this, &this->registry, "objects")
             {
                 // constructor.
 
@@ -91,7 +91,7 @@ namespace yli::ontology
             friend void yli::ontology::create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* text_3d);
 
             yli::ontology::ChildModule child_of_vector_font;
-            yli::ontology::ParentModule parent_of_objects;
+            yli::ontology::GenericMasterModule master_of_objects;
 
         private:
             yli::ontology::Scene* get_scene() const override;

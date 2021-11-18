@@ -224,13 +224,17 @@ namespace yli::ontology
         yli::ontology::Entity* object_entity = new yli::ontology::Object(
                 this->universe,
                 object_struct,
-                ((std::holds_alternative<yli::ontology::Species*>(object_struct.parent) && std::get<yli::ontology::Species*>(object_struct.parent) != nullptr) ?
-                 &(std::get<yli::ontology::Species*>(object_struct.parent)->parent_of_objects) :
-                 (std::holds_alternative<yli::ontology::ShapeshifterSequence*>(object_struct.parent) && std::get<yli::ontology::ShapeshifterSequence*>(object_struct.parent) != nullptr) ?
-                 &(std::get<yli::ontology::ShapeshifterSequence*>(object_struct.parent)->parent_of_objects) :
-                 (std::holds_alternative<yli::ontology::Text3D*>(object_struct.parent) && std::get<yli::ontology::Text3D*>(object_struct.parent) != nullptr) ?
-                 &(std::get<yli::ontology::Text3D*>(object_struct.parent)->parent_of_objects) :
+                // scene parent.
+                ((object_struct.parent != nullptr) ?  &object_struct.parent->parent_of_objects : nullptr),
+                // mesh master.
+                ((std::holds_alternative<yli::ontology::Species*>(object_struct.mesh_master) && std::get<yli::ontology::Species*>(object_struct.mesh_master) != nullptr) ?
+                 &(std::get<yli::ontology::Species*>(object_struct.mesh_master)->master_of_objects) :
+                 (std::holds_alternative<yli::ontology::ShapeshifterSequence*>(object_struct.mesh_master) && std::get<yli::ontology::ShapeshifterSequence*>(object_struct.mesh_master) != nullptr) ?
+                 &(std::get<yli::ontology::ShapeshifterSequence*>(object_struct.mesh_master)->master_of_objects) :
+                 (std::holds_alternative<yli::ontology::Text3D*>(object_struct.mesh_master) && std::get<yli::ontology::Text3D*>(object_struct.mesh_master) != nullptr) ?
+                 &(std::get<yli::ontology::Text3D*>(object_struct.mesh_master)->master_of_objects) :
                  nullptr),
+                // brain master.
                 (object_struct.brain == nullptr ? nullptr : object_struct.brain->get_generic_master_module()));
 
         object_entity->set_global_name(object_struct.global_name);

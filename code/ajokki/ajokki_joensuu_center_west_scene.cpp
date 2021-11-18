@@ -136,8 +136,8 @@ namespace ajokki
         joensuu_center_west_terrain_species->set_global_name("joensuu_center_west_terrain_species");
 
         // Create Joensuu center west terrain.
-        yli::ontology::ObjectStruct joensuu_center_west_struct(joensuu_center_west_terrain_species);
-        joensuu_center_west_struct.scene = joensuu_center_west_scene;
+        yli::ontology::ObjectStruct joensuu_center_west_struct(joensuu_center_west_scene);
+        joensuu_center_west_struct.mesh_master = joensuu_center_west_terrain_species;
         joensuu_center_west_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_object(joensuu_center_west_struct);
 
@@ -182,8 +182,8 @@ namespace ajokki
 
         horse_species->set_global_name("horse_species");
 
-        yli::ontology::ObjectStruct horse_object_struct1(horse_species);
-        horse_object_struct1.scene = joensuu_center_west_scene;
+        yli::ontology::ObjectStruct horse_object_struct1(joensuu_center_west_scene);
+        horse_object_struct1.mesh_master = horse_species;
         horse_object_struct1.initial_rotate_vectors = { glm::vec3(1.0f, 0.0f, 0.0f) };
         horse_object_struct1.initial_rotate_angles = { -0.5f * PI };
         horse_object_struct1.original_scale_vector = glm::vec3(5.0f, 5.0f, 5.0f);

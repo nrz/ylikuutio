@@ -21,10 +21,11 @@
 #include "movable_struct.hpp"
 
 // Include standard headers
-#include <variant> // std::holds_alternative, std::variant
+#include <variant> // std::holds_alternative, std::monostate, std::variant
 
 namespace yli::ontology
 {
+    class Scene;
     class Species;
     class ShapeshifterSequence;
     class Glyph;
@@ -32,25 +33,14 @@ namespace yli::ontology
 
     struct ObjectStruct: public yli::ontology::MovableStruct
     {
-        explicit ObjectStruct(yli::ontology::Species* const parent)
+        explicit ObjectStruct(yli::ontology::Scene* const parent)
             : parent { parent }
         {
             // constructor.
         }
 
-        explicit ObjectStruct(yli::ontology::ShapeshifterSequence* const parent)
-            : parent { parent }
-        {
-            // constructor.
-        }
-
-        explicit ObjectStruct(yli::ontology::Text3D* const parent)
-            : parent { parent }
-        {
-            // constructor.
-        }
-
-        std::variant<yli::ontology::Species*, yli::ontology::ShapeshifterSequence*, yli::ontology::Text3D*> parent;
+        yli::ontology::Scene* parent { nullptr };
+        std::variant<std::monostate, yli::ontology::Species*, yli::ontology::ShapeshifterSequence*, yli::ontology::Text3D*> mesh_master {};
         yli::ontology::Glyph* glyph { nullptr }; // pointer to the `Glyph` (not a parent!).
     };
 }

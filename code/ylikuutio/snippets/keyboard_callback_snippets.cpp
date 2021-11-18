@@ -703,7 +703,7 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        object->bind_to_new_species_parent(new_species);
+        object->bind_to_new_species_master(new_species);
         return std::nullopt;
     }
 }

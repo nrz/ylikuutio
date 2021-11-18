@@ -22,6 +22,7 @@
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
@@ -468,6 +469,32 @@ namespace yli::lisp
 
             context = value;
             return yli::data::WrapAllButStrings<yli::ontology::Variable*>::type(value);
+        }
+
+    template<>
+        std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Scene&>::type> convert_string_to_value_and_advance_index<yli::ontology::Scene&>(
+                yli::ontology::Universe& universe,
+                yli::ontology::Console&,
+                yli::ontology::Entity*& context,
+                const std::vector<std::string>& parameter_vector,
+                std::size_t& parameter_i)
+        {
+            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
+            {
+                return std::nullopt;
+            }
+
+            const std::string& my_string = parameter_vector.at(parameter_i++);
+
+            yli::ontology::Scene* const value = dynamic_cast<yli::ontology::Scene*>(universe.get_entity(my_string));
+
+            if (value == nullptr)
+            {
+                return std::nullopt;
+            }
+
+            context = value;
+            return yli::data::WrapAllButStrings<yli::ontology::Scene&>::type(*value);
         }
 
     template<>
