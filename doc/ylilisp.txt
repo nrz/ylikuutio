@@ -79,7 +79,7 @@ References and borrowing:
 * Mutable reference syntax (syntactic sugar): `&mut foo`.
 
 Pointers:
-* `nullptr` is a null pointer.
+* `null` is a null pointer.
 
 Literals:
 * Underscore `_` can be used for readability in numeric literals.
