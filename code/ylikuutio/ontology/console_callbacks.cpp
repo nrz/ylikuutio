@@ -450,7 +450,7 @@ namespace yli::ontology
 
         if (console->in_console && console->can_move_to_previous_input)
         {
-            if (!console->in_historical_input && console->command_history.size() > 0)
+            if (!console->in_historical_input && !console->command_history.empty())
             {
                 // OK, we moved from the new input to the last historical input.
                 console->in_historical_input = true;
@@ -606,7 +606,7 @@ namespace yli::ontology
 
                     // Copy the old parameters except the last.
 
-                    for (std::size_t i = 0; i < parameter_vector.size() - 1; i++)
+                    for (std::size_t i = 0; i + 1 < parameter_vector.size(); i++)
                     {
                         std::copy(parameter_vector[i].begin(), parameter_vector[i].end(), std::back_inserter(console->current_input));
                         console->move_cursor_to_end_of_line();

@@ -119,7 +119,7 @@ namespace yli::command_line
                     // 1 leading dash.
                     // each character is a key, concatenated with a leading dash.
                     // the last one may have a value.
-                    for (std::size_t j = 1; j < argument.size() - 1; j++)
+                    for (std::size_t j = 1; j + 1 < argument.size(); j++)
                     {
                         std::string current_argument_string = "-";
                         const std::string current_char_string = argument.substr(j, 1);
