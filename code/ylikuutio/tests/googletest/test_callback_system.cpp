@@ -265,6 +265,48 @@ std::optional<yli::data::AnyValue> neg(
     return std::nullopt;
 }
 
+std::optional<yli::data::AnyValue> nop(
+        yli::ontology::Universe*,
+        yli::callback::CallbackEngine*,
+        yli::callback::CallbackObject*,
+        std::vector<yli::callback::CallbackParameter*>& input_parameters,
+        const yli::data::AnyValue&)
+{
+    return std::nullopt;
+}
+
+std::optional<yli::data::AnyValue> return_uint32_t_deadbeef(
+        yli::ontology::Universe*,
+        yli::callback::CallbackEngine*,
+        yli::callback::CallbackObject*,
+        std::vector<yli::callback::CallbackParameter*>& input_parameters,
+        const yli::data::AnyValue&)
+{
+    uint32_t deadbeef { 0xdeadbeef };
+    return yli::data::AnyValue(deadbeef);
+}
+
+TEST(callback_engine_must_function_properly, nop)
+{
+    yli::callback::CallbackEngine callback_engine;
+    yli::callback::CallbackObject* callback_object = callback_engine.create_callback_object();
+    callback_object->set_new_callback(&nop);
+
+    std::optional<yli::data::AnyValue> result = callback_engine.execute(yli::data::AnyValue());
+    ASSERT_FALSE(result);
+}
+
+TEST(callback_engine_must_function_properly, return_uint32_t_deadbeef)
+{
+    yli::callback::CallbackEngine callback_engine;
+    yli::callback::CallbackObject* callback_object = callback_engine.create_callback_object();
+    callback_object->set_new_callback(&return_uint32_t_deadbeef);
+
+    std::optional<yli::data::AnyValue> result = callback_engine.execute(yli::data::AnyValue());
+    ASSERT_TRUE(std::holds_alternative<uint32_t>((*result).data));
+    ASSERT_EQ(std::get<uint32_t>((*result).data), 0xdeadbeef);
+}
+
 TEST(callback_engine_must_function_properly, int32_t_zero_negated_equals_zero)
 {
     yli::callback::CallbackEngine callback_engine;
