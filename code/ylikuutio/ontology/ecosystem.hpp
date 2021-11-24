@@ -25,10 +25,9 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 
-// `Ecosystem` is a collection of `Scene`s which share some common resources,
-// like `VectorFont`s. In addition to `Scene`s, each `Ecosystem` may contain
-// `Ecosystem`-bound Entities. Ecosystem-bound Entities are Entities, which simply
-// bind to a `Ecosystem` instead of some ontological descendant of a `Ecosystem`.
+// `Ecosystem`s can be owners of some common resources, like `VectorFont`s.
+// Compared to `Scene`s which are actual game/simulation locations,
+// `Ecosystem`s only function as owners of resources shared between `Scene`s.
 //
 // Most child classes of `Scene` and below classes can be converted
 // into corresponding ecosystem-bound classes:
