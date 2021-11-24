@@ -493,7 +493,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        if (console->in_console && console->can_move_to_next_input)
+        if (console->in_console && console->can_move_to_next_input && !console->command_history.empty())
         {
             if (console->in_historical_input && console->historical_input_i == console->command_history.size() - 1)
             {
