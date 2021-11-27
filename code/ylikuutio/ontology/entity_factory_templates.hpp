@@ -36,7 +36,6 @@ namespace yli::ontology
 {
     class Entity;
     class Universe;
-    class ParentModule;
 
     template<typename... Args>
         yli::ontology::GenericLispFunctionOverload* create_lisp_function_overload(
