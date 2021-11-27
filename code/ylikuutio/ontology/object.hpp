@@ -46,7 +46,7 @@ namespace yli::ontology
     class ShapeshifterSequence;
     class Text3D;
     class Glyph;
-    class ParentModule;
+    class GenericParentModule;
     class GenericMasterModule;
 
     class Object: public yli::ontology::Movable
@@ -63,7 +63,7 @@ namespace yli::ontology
             Object(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::ObjectStruct& object_struct,
-                    yli::ontology::ParentModule* const scene_parent_module,
+                    yli::ontology::GenericParentModule* const scene_parent_module,
                     yli::ontology::GenericMasterModule* const mesh_master,
                     yli::ontology::GenericMasterModule* const brain_master)
                 : Movable(

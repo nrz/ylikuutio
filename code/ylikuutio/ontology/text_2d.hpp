@@ -32,7 +32,7 @@
 
 namespace yli::ontology
 {
-    class ParentModule;
+    class GenericParentModule;
     class Scene;
 
     class Text2D: public yli::ontology::Entity
@@ -45,7 +45,7 @@ namespace yli::ontology
             Text2D(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::TextStruct& text_struct,
-                    yli::ontology::ParentModule* const parent_module)
+                    yli::ontology::GenericParentModule* const parent_module)
                 : Entity(universe, text_struct),
                 child_of_font_2d(parent_module, this)
             {

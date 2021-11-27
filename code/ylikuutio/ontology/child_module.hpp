@@ -21,12 +21,12 @@
 namespace yli::ontology
 {
     class Entity;
-    class ParentModule;
+    class GenericParentModule;
 
     class ChildModule
     {
         public:
-            ChildModule(yli::ontology::ParentModule* const parent_module, yli::ontology::Entity* const entity)
+            ChildModule(yli::ontology::GenericParentModule* const parent_module, yli::ontology::Entity* const entity)
                 : parent_module { parent_module },
                 entity { entity }
             {
@@ -43,12 +43,12 @@ namespace yli::ontology
             yli::ontology::Entity* get_parent() const;
             yli::ontology::Entity* get_child() const;
             void unbind_child() const;
-            void set_parent_module_and_bind_to_new_parent(yli::ontology::ParentModule* const new_parent_module);
+            void set_parent_module_and_bind_to_new_parent(yli::ontology::GenericParentModule* const new_parent_module);
 
         private:
             void bind_to_parent_module();
 
-            yli::ontology::ParentModule* parent_module;
+            yli::ontology::GenericParentModule* parent_module;
             yli::ontology::Entity* entity;
     };
 }

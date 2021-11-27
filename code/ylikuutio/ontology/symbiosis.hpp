@@ -25,7 +25,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "parent_module.hpp"
+#include "generic_parent_module.hpp"
 #include "model_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include <ofbx.h>
@@ -61,7 +61,7 @@ namespace yli::ontology
             void bind_to_new_shader_parent(yli::ontology::Shader* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-            Symbiosis(yli::ontology::Universe* universe, const yli::ontology::ModelStruct& model_struct, yli::ontology::ParentModule* const parent_module)
+            Symbiosis(yli::ontology::Universe* universe, const yli::ontology::ModelStruct& model_struct, yli::ontology::GenericParentModule* const parent_module)
                 : Entity(universe, model_struct),
                 child_of_shader(parent_module, this),
                 parent_of_symbiont_materials(this, &this->registry, "symbiont_materials"),
@@ -119,8 +119,8 @@ namespace yli::ontology
             const glm::vec3& get_light_position(const std::size_t /* biontID */) const;
 
             yli::ontology::ChildModule child_of_shader;
-            yli::ontology::ParentModule parent_of_symbiont_materials;
-            yli::ontology::ParentModule parent_of_holobionts;
+            yli::ontology::GenericParentModule parent_of_symbiont_materials;
+            yli::ontology::GenericParentModule parent_of_holobionts;
 
             yli::ontology::Scene* get_scene() const override;
 

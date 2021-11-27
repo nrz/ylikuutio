@@ -19,7 +19,7 @@
 #define __YLIKUUTIO_ONTOLOGY_VECTOR_FONT_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "parent_module.hpp"
+#include "generic_parent_module.hpp"
 #include "glyph.hpp"
 #include "material.hpp"
 #include "model_struct.hpp"
@@ -178,8 +178,8 @@ namespace yli::ontology
 
             yli::ontology::Material* parent; // Pointer to `Material`.
 
-            yli::ontology::ParentModule parent_of_glyphs;
-            yli::ontology::ParentModule parent_of_text_3ds;
+            yli::ontology::GenericParentModule parent_of_glyphs;
+            yli::ontology::GenericParentModule parent_of_text_3ds;
 
         private:
             void bind_to_parent();

@@ -20,7 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "parent_module.hpp"
+#include "generic_parent_module.hpp"
 #include "model_struct.hpp"
 
 // Include standard headers
@@ -48,7 +48,7 @@ namespace yli::ontology
             ShapeshifterTransformation(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::ModelStruct& model_struct,
-                    yli::ontology::ParentModule* const material_parent_module)
+                    yli::ontology::GenericParentModule* const material_parent_module)
                 : Entity(universe, model_struct),
                 child_of_material(material_parent_module, this),
                 parent_of_shapeshifter_forms(this, &this->registry, "shapeshifter_forms"),
@@ -67,8 +67,8 @@ namespace yli::ontology
             yli::ontology::Entity* get_parent() const override;
 
             yli::ontology::ChildModule child_of_material;
-            yli::ontology::ParentModule parent_of_shapeshifter_forms;
-            yli::ontology::ParentModule parent_of_shapeshifter_sequences;
+            yli::ontology::GenericParentModule parent_of_shapeshifter_forms;
+            yli::ontology::GenericParentModule parent_of_shapeshifter_sequences;
 
         private:
             void bind_to_parent();

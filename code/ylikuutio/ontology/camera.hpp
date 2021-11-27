@@ -70,7 +70,7 @@ namespace yli::ontology
     class Entity;
     class Universe;
     class Scene;
-    class ParentModule;
+    class GenericParentModule;
     class GenericMasterModule;
 
     class Camera: public yli::ontology::Movable
@@ -79,7 +79,7 @@ namespace yli::ontology
             Camera(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::CameraStruct& camera_struct,
-                    yli::ontology::ParentModule* const scene_parent_module,
+                    yli::ontology::GenericParentModule* const scene_parent_module,
                     yli::ontology::GenericMasterModule* const generic_master_module)
                 : Movable(
                         universe,

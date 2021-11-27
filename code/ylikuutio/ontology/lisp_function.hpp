@@ -20,7 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "parent_module.hpp"
+#include "generic_parent_module.hpp"
 #include "lisp_function_struct.hpp"
 
 // Include standard headers
@@ -46,7 +46,7 @@ namespace yli::ontology
             LispFunction(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::LispFunctionStruct& lisp_function_struct,
-                    yli::ontology::ParentModule* const parent_module)
+                    yli::ontology::GenericParentModule* const parent_module)
                 : Entity(universe, lisp_function_struct),
                 child_of_console(parent_module, this),
                 parent_of_generic_lisp_function_overloads(this, &this->registry, "generic_lisp_functions")
@@ -68,7 +68,7 @@ namespace yli::ontology
             std::optional<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector);
 
             yli::ontology::ChildModule child_of_console;
-            yli::ontology::ParentModule parent_of_generic_lisp_function_overloads;
+            yli::ontology::GenericParentModule parent_of_generic_lisp_function_overloads;
 
         private:
             yli::ontology::Scene* get_scene() const override;

@@ -19,7 +19,7 @@
 #define __YLIKUUTIO_ONTOLOGY_UNIVERSE_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "parent_module.hpp"
+#include "generic_parent_module.hpp"
 #include "framebuffer_module.hpp"
 #include "entity_factory.hpp"
 #include "universe_struct.hpp"
@@ -608,12 +608,12 @@ namespace yli::ontology
             float background_blue  { NAN };
             float background_alpha { NAN };
 
-            yli::ontology::ParentModule parent_of_ecosystems;
-            yli::ontology::ParentModule parent_of_scenes;
-            yli::ontology::ParentModule parent_of_font_2ds;
-            yli::ontology::ParentModule parent_of_consoles;
-            yli::ontology::ParentModule parent_of_any_value_entities;
-            yli::ontology::ParentModule parent_of_callback_engine_entities;
+            yli::ontology::GenericParentModule parent_of_ecosystems;
+            yli::ontology::GenericParentModule parent_of_scenes;
+            yli::ontology::GenericParentModule parent_of_font_2ds;
+            yli::ontology::GenericParentModule parent_of_consoles;
+            yli::ontology::GenericParentModule parent_of_any_value_entities;
+            yli::ontology::GenericParentModule parent_of_callback_engine_entities;
 
             yli::ontology::FramebufferModule framebuffer_module;
 

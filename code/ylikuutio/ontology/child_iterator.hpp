@@ -102,7 +102,7 @@ namespace yli::ontology
             }
 
         private:
-            // Note: `ParentModule` stores pointers to Entities directly!
+            // Note: `GenericParentModule` stores pointers to Entities directly!
             // This is different compared to `GenericMasterModule`!
             std::vector<yli::ontology::Entity*>::iterator it;
     };

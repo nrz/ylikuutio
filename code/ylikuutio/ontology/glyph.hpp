@@ -42,7 +42,7 @@ namespace yli::ontology
     class Scene;
     class VectorFont;
     class Object;
-    class ParentModule;
+    class GenericParentModule;
     class GenericMasterModule;
 
     class Glyph: public yli::ontology::Entity
@@ -62,7 +62,7 @@ namespace yli::ontology
             Glyph(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::ModelStruct& model_struct,
-                    yli::ontology::ParentModule* const vector_font_parent_module)
+                    yli::ontology::GenericParentModule* const vector_font_parent_module)
                 : Entity(universe, model_struct),
                 child_of_vector_font(vector_font_parent_module, this),
                 master_of_objects(this, &this->registry, "objects"),

@@ -73,7 +73,7 @@
 
 namespace yli::ontology
 {
-    class ParentModule;
+    class GenericParentModule;
     class Universe;
     class Scene;
 
@@ -83,7 +83,7 @@ namespace yli::ontology
             Ecosystem(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::EcosystemStruct& ecosystem_struct,
-                    yli::ontology::ParentModule* const parent_module)
+                    yli::ontology::GenericParentModule* const parent_module)
                 : Entity(universe, ecosystem_struct),
                 child_of_universe(parent_module, this)
             {

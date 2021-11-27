@@ -22,7 +22,7 @@
 #include "universe.hpp"
 #include "camera.hpp"
 #include "child_module.hpp"
-#include "parent_module.hpp"
+#include "generic_parent_module.hpp"
 #include "shader_priority_queue.hpp"
 #include "scene_struct.hpp"
 #include "camera_struct.hpp"
@@ -88,7 +88,7 @@ namespace yli::ontology
             Scene(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::SceneStruct& scene_struct,
-                    yli::ontology::ParentModule* const parent_module)
+                    yli::ontology::GenericParentModule* const parent_module)
                 : Entity(universe, scene_struct),
                 child_of_universe(parent_module, this),
                 parent_of_default_camera(this, &this->registry, "default_camera"),
@@ -176,12 +176,12 @@ namespace yli::ontology
             void set_is_flight_mode_in_use(const bool is_flight_mode_in_use);
 
             yli::ontology::ChildModule child_of_universe;
-            yli::ontology::ParentModule parent_of_default_camera;
-            yli::ontology::ParentModule parent_of_cameras;
-            yli::ontology::ParentModule parent_of_brains;
-            yli::ontology::ParentModule parent_of_materials;
-            yli::ontology::ParentModule parent_of_species;
-            yli::ontology::ParentModule parent_of_objects;
+            yli::ontology::GenericParentModule parent_of_default_camera;
+            yli::ontology::GenericParentModule parent_of_cameras;
+            yli::ontology::GenericParentModule parent_of_brains;
+            yli::ontology::GenericParentModule parent_of_materials;
+            yli::ontology::GenericParentModule parent_of_species;
+            yli::ontology::GenericParentModule parent_of_objects;
 
             yli::ontology::Scene* get_scene() const override;
 

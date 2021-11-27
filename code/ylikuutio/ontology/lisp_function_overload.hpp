@@ -52,7 +52,7 @@ namespace yli::ontology
     class Entity;
     class Universe;
     class Console;
-    class ParentModule;
+    class GenericParentModule;
 
     template<typename... Types>
         class LispFunctionOverload: public yli::ontology::GenericLispFunctionOverload
@@ -60,7 +60,7 @@ namespace yli::ontology
         public:
             LispFunctionOverload(
                     yli::ontology::Universe* const universe,
-                    yli::ontology::ParentModule* const parent_module,
+                    yli::ontology::GenericParentModule* const parent_module,
                     std::function<std::optional<yli::data::AnyValue>(Types...)> callback)
                 : GenericLispFunctionOverload(universe, parent_module),
                 callback(callback)

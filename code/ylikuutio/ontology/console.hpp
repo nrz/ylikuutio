@@ -20,7 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "parent_module.hpp"
+#include "generic_parent_module.hpp"
 #include "generic_master_module.hpp"
 #include "apprentice_module.hpp"
 #include "console_struct.hpp"
@@ -96,7 +96,7 @@ namespace yli::ontology
 
             Console(yli::ontology::Universe* const universe,
                     const yli::ontology::ConsoleStruct& console_struct,
-                    yli::ontology::ParentModule* const parent_module,
+                    yli::ontology::GenericParentModule* const parent_module,
                     yli::ontology::GenericMasterModule* const generic_master_module)
                 : Entity(universe, console_struct),
                 child_of_universe(parent_module, this),
@@ -429,7 +429,7 @@ namespace yli::ontology
             // Public callbacks end here.
 
             yli::ontology::ChildModule child_of_universe;
-            yli::ontology::ParentModule parent_of_lisp_functions;
+            yli::ontology::GenericParentModule parent_of_lisp_functions;
             yli::ontology::ApprenticeModule apprentice_of_font_2d;
 
             friend class yli::ontology::GenericMasterModule;
