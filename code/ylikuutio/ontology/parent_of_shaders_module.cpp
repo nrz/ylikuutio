@@ -28,46 +28,28 @@
 
 namespace yli::ontology
 {
-    void ParentOfShadersModule::bind_child(yli::ontology::Entity* const shader_child)
+    bool ParentOfShadersModule::bind_child(yli::ontology::Entity* const shader_child)
     {
-        if (this->entity == nullptr || shader_child == nullptr)
+        if (this->GenericParentModule::bind_child(shader_child))
         {
-            return;
+            // `shader` needs to be added to the priority queue as well.
+            this->shader_priority_queue.push(static_cast<yli::ontology::Shader*>(shader_child));
+            return true; // Binding successful.
         }
 
-        this->GenericParentModule::bind_child(shader_child);
-
-        // `shader` needs to be added to the priority queue as well.
-        this->shader_priority_queue.push(static_cast<yli::ontology::Shader*>(shader_child));
+        return false; // Binding failed.
     }
 
-    void ParentOfShadersModule::unbind_child(std::size_t childID)
+    bool ParentOfShadersModule::unbind_child(std::size_t childID)
     {
-        if (this->entity == nullptr)
+        if (this->GenericParentModule::unbind_child(childID))
         {
-            std::cerr << "ERROR: `ParentOfShadersModule::unbind_child`: `this->entity` is `nullptr`!\n";
-            return;
+            // `Shader` needs to be removed from the priority queue as well.
+            this->shader_priority_queue.remove(childID);
+            return true; // Unbinding successful.
         }
 
-        if (childID >= this->child_pointer_vector.size())
-        {
-            std::cerr << "ERROR: `ParentOfShadersModule::unbind_child`: the value of `childID` is too big!\n";
-            return;
-        }
-
-        yli::ontology::Entity* const child = this->child_pointer_vector.at(childID);
-
-        if (child == nullptr)
-        {
-            std::cerr << "ERROR: `ParentOfShadersModule::unbind_child`: `child` is `nullptr`!\n";
-            return;
-        }
-
-        // `shader` needs to be removed from the priority queue as well.
-        this->shader_priority_queue.remove(childID);
-
-
-        this->GenericParentModule::unbind_child(childID);
+        return false; // Unbinding failed.
     }
 
     ParentOfShadersModule::ParentOfShadersModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name)

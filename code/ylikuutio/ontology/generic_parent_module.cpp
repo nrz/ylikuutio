@@ -28,11 +28,11 @@
 
 namespace yli::ontology
 {
-    void GenericParentModule::bind_child(yli::ontology::Entity* const child)
+    bool GenericParentModule::bind_child(yli::ontology::Entity* const child)
     {
         if (this->entity == nullptr || child == nullptr)
         {
-            return;
+            return false; // Binding failed.
         }
 
         yli::ontology::bind_child_to_parent<yli::ontology::Entity*>(
@@ -41,20 +41,22 @@ namespace yli::ontology
                 this->free_childID_queue,
                 this->number_of_children,
                 this->entity->registry);
+
+        return true; // Binding successful.
     }
 
-    void GenericParentModule::unbind_child(std::size_t childID)
+    bool GenericParentModule::unbind_child(std::size_t childID)
     {
         if (this->entity == nullptr)
         {
             std::cerr << "ERROR: `GenericParentModule::unbind_child`: `this->entity` is `nullptr`!\n";
-            return;
+            return false; // Unbinding failed.
         }
 
         if (childID >= this->child_pointer_vector.size())
         {
             std::cerr << "ERROR: `GenericParentModule::unbind_child`: the value of `childID` is too big!\n";
-            return;
+            return false; // Unbinding failed.
         }
 
         yli::ontology::Entity* const child = this->child_pointer_vector.at(childID);
@@ -62,7 +64,7 @@ namespace yli::ontology
         if (child == nullptr)
         {
             std::cerr << "ERROR: `GenericParentModule::unbind_child`: `child` is `nullptr`!\n";
-            return;
+            return false; // Unbinding failed.
         }
 
         const std::string name = child->get_local_name();
@@ -74,6 +76,8 @@ namespace yli::ontology
                 this->free_childID_queue,
                 this->number_of_children,
                 this->entity->registry);
+
+        return true; // Unbinding successful.
     }
 
     GenericParentModule::GenericParentModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name)
