@@ -470,7 +470,7 @@ TEST(shader_must_be_initialized_appropriately, headless)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
@@ -502,7 +502,7 @@ TEST(shader_must_be_initialized_appropriately, no_universe)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct, &scene->parent_of_shaders);
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
@@ -525,7 +525,7 @@ TEST(shader_must_be_initialized_appropriately, no_universe_no_scene)
 {
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = nullptr;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct, nullptr);
 
     // `Shader` member functions.
     ASSERT_EQ(shader->get_number_of_apprentices(), 0);
@@ -554,7 +554,7 @@ TEST(material_must_be_initialized_appropriately, headless)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
@@ -602,7 +602,7 @@ TEST(material_must_be_initialized_appropriately, no_universe)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
@@ -640,7 +640,7 @@ TEST(material_must_be_initialized_appropriately, no_universe_no_scene)
 {
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = nullptr;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct, nullptr);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.shader = shader;
@@ -705,7 +705,7 @@ TEST(species_must_be_initialized_appropriately, headless)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
@@ -786,7 +786,7 @@ TEST(object_must_be_initialized_appropriately, headless)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
@@ -883,7 +883,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.shader = shader;
@@ -947,7 +947,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.shader = shader;
@@ -994,7 +994,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.shader = shader;
@@ -1070,7 +1070,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.shader = shader;
@@ -1129,7 +1129,7 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
@@ -1212,7 +1212,7 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
@@ -1338,7 +1338,7 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
@@ -1455,7 +1455,7 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
@@ -1592,7 +1592,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
@@ -1967,7 +1967,7 @@ TEST(shader_must_bind_to_scene_appropriately, scenes)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene1;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene1->parent_of_shaders);
     ASSERT_EQ(shader->get_scene(), scene1);
     ASSERT_EQ(shader->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2);
@@ -2155,7 +2155,7 @@ TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
@@ -2511,7 +2511,7 @@ TEST(shader_must_be_given_a_global_name_appropriately, headless)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
     ASSERT_EQ(shader->get_global_name(), "");
     ASSERT_EQ(shader->get_local_name(), "");
 
@@ -2536,7 +2536,7 @@ TEST(shader_must_be_given_a_local_name_appropriately, headless)
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
     ASSERT_EQ(shader->get_global_name(), "");
     ASSERT_EQ(shader->get_local_name(), "");
 
@@ -2561,7 +2561,7 @@ TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_global_nam
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
     ASSERT_EQ(shader->get_global_name(), "");
     ASSERT_EQ(shader->get_local_name(), "");
 
@@ -2589,7 +2589,7 @@ TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_local_name,
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
     ASSERT_EQ(shader->get_global_name(), "");
     ASSERT_EQ(shader->get_local_name(), "");
 
@@ -2617,7 +2617,7 @@ TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_local_name
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
     ASSERT_EQ(shader->get_global_name(), "");
     ASSERT_EQ(shader->get_local_name(), "");
 
@@ -2645,7 +2645,7 @@ TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_global_name
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
     ASSERT_EQ(shader->get_global_name(), "");
     ASSERT_EQ(shader->get_local_name(), "");
 
@@ -2673,7 +2673,7 @@ TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene1;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene1->parent_of_shaders);
 
     yli::ontology::SceneStruct scene_struct2;
     yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
@@ -2711,7 +2711,7 @@ TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
 
     yli::ontology::ShaderStruct shader_struct;
     shader_struct.parent = scene1;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct);
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene1->parent_of_shaders);
 
     yli::ontology::SceneStruct scene_struct2;
     yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
@@ -2754,7 +2754,7 @@ TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
 
     yli::ontology::ShaderStruct shader_struct1;
     shader_struct1.parent = scene1;
-    yli::ontology::Shader* const shader1 = new yli::ontology::Shader(universe, shader_struct1);
+    yli::ontology::Shader* const shader1 = new yli::ontology::Shader(universe, shader_struct1, &scene1->parent_of_shaders);
 
     yli::ontology::SceneStruct scene_struct2;
     yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
@@ -2764,7 +2764,7 @@ TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
 
     yli::ontology::ShaderStruct shader_struct2;
     shader_struct2.parent = scene2;
-    yli::ontology::Shader* const shader2 = new yli::ontology::Shader(universe, shader_struct2);
+    yli::ontology::Shader* const shader2 = new yli::ontology::Shader(universe, shader_struct2, &scene2->parent_of_shaders);
 
     shader1->set_local_name("foo");
     shader2->set_local_name("foo");
@@ -2791,7 +2791,7 @@ TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
 
     yli::ontology::ShaderStruct shader_struct1;
     shader_struct1.parent = scene1;
-    yli::ontology::Shader* const shader1 = new yli::ontology::Shader(universe, shader_struct1);
+    yli::ontology::Shader* const shader1 = new yli::ontology::Shader(universe, shader_struct1, &scene1->parent_of_shaders);
 
     yli::ontology::SceneStruct scene_struct2;
     yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
@@ -2801,7 +2801,7 @@ TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
 
     yli::ontology::ShaderStruct shader_struct2;
     shader_struct2.parent = scene2;
-    yli::ontology::Shader* const shader2 = new yli::ontology::Shader(universe, shader_struct2);
+    yli::ontology::Shader* const shader2 = new yli::ontology::Shader(universe, shader_struct2, &scene2->parent_of_shaders);
 
     shader1->set_global_name("foo");
     shader2->set_global_name("bar");

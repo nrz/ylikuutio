@@ -39,8 +39,8 @@ namespace yli::ontology
             typedef ChildIterator       iterator;
             typedef ChildIterator const_iterator;
 
-            void bind_child(yli::ontology::Entity* const child);
-            void unbind_child(std::size_t childID);
+            virtual void bind_child(yli::ontology::Entity* const child);
+            virtual void unbind_child(std::size_t childID);
 
             // constructor.
             GenericParentModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name);
@@ -83,7 +83,7 @@ namespace yli::ontology
 
             std::vector<yli::ontology::Entity*> child_pointer_vector;
 
-        private:
+        protected:
             std::queue<std::size_t> free_childID_queue;
             std::size_t number_of_children;
 

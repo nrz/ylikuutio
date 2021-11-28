@@ -21,6 +21,7 @@
 #include "render_master_struct.hpp"
 #include "render_struct.hpp"
 #include "code/ylikuutio/ontology/generic_parent_module.hpp"
+#include "code/ylikuutio/ontology/parent_of_shaders_module.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/shader.hpp"
@@ -206,9 +207,9 @@ namespace yli::render
         SDL_GL_SwapWindow(render_struct.window);
     }
 
-    void RenderMaster::render_shaders(std::vector<yli::ontology::Shader*>& shader_pointer_vector) const
+    void RenderMaster::render_shaders(yli::ontology::ParentOfShadersModule& parent) const
     {
-        yli::render::render_children<std::vector<yli::ontology::Shader*>, yli::ontology::Shader*, yli::ontology::Shader*>(shader_pointer_vector);
+        yli::render::render_children<yli::ontology::ParentOfShadersModule&, yli::ontology::Entity*, yli::ontology::Shader*>(parent);
     }
 
     void RenderMaster::render_materials(std::vector<yli::ontology::ApprenticeModule*>& material_apprentice_pointer_vector) const

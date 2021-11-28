@@ -33,7 +33,6 @@
 #include "brain.hpp"
 #include "rigid_body_module.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/render/render_master.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
@@ -52,44 +51,10 @@ namespace yli::ontology
 {
     class Entity;
 
-    void Scene::bind_shader(yli::ontology::Shader* const shader)
-    {
-        // get `childID` from `Scene` and set pointer to `shader`.
-        yli::hierarchy::bind_child_to_parent<yli::ontology::Shader*>(
-                shader,
-                this->shader_pointer_vector,
-                this->free_shaderID_queue,
-                this->number_of_shaders);
-
-        // `shader` needs to be added to the priority queue as well.
-        this->shader_priority_queue.push(shader);
-
-        // `shader` with a local name needs to be added to `entity_map` as well.
-        this->add_entity(shader->get_local_name(), shader);
-    }
-
-    void Scene::unbind_shader(const std::size_t childID, const std::string& local_name)
-    {
-        // `shader` needs to be removed from the priority queue as well.
-        this->shader_priority_queue.remove(childID);
-
-        yli::ontology::unbind_child_from_parent(
-                childID,
-                local_name,
-                this->shader_pointer_vector,
-                this->free_shaderID_queue,
-                this->number_of_shaders,
-                this->registry);
-    }
-
     Scene::~Scene()
     {
         // destructor.
         std::cout << "`Scene` with childID " << std::dec << this->childID << " will be destroyed.\n";
-
-        // destroy all `Shader`s of this `Scene`.
-        std::cout << "All `Shader`s of this `Scene` will be destroyed.\n";
-        yli::hierarchy::delete_children<yli::ontology::Shader*>(this->shader_pointer_vector, this->number_of_shaders);
 
         if (this->universe != nullptr && this->universe->get_active_scene() == this)
         {
@@ -146,7 +111,7 @@ namespace yli::ontology
         }
 
         this->prerender();
-        render_master->render_shaders(this->shader_pointer_vector);
+        render_master->render_shaders(this->parent_of_shaders);
         this->postrender();
     }
 
@@ -221,7 +186,7 @@ namespace yli::ontology
 
     std::size_t Scene::get_number_of_children() const
     {
-        return this->number_of_shaders +
+        return this->parent_of_shaders.get_number_of_children() +
             this->parent_of_default_camera.get_number_of_children() +
             this->parent_of_cameras.get_number_of_children() +
             this->parent_of_brains.get_number_of_children() +
@@ -232,7 +197,7 @@ namespace yli::ontology
 
     std::size_t Scene::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->shader_pointer_vector) +
+        return yli::ontology::get_number_of_descendants(this->parent_of_shaders.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_default_camera.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_cameras.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_brains.child_pointer_vector) +
