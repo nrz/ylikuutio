@@ -20,8 +20,6 @@
 #include "parent_of_shaders_module.hpp"
 #include "entity.hpp"
 #include "shader.hpp"
-#include "family_templates.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -37,12 +35,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::bind_child_to_parent<yli::ontology::Entity*>(
-                shader_child,
-                this->child_pointer_vector,
-                this->free_childID_queue,
-                this->number_of_children,
-                this->entity->registry);
+        this->GenericParentModule::bind_child(shader_child);
 
         // `shader` needs to be added to the priority queue as well.
         this->shader_priority_queue.push(static_cast<yli::ontology::Shader*>(shader_child));
@@ -73,15 +66,8 @@ namespace yli::ontology
         // `shader` needs to be removed from the priority queue as well.
         this->shader_priority_queue.remove(childID);
 
-        const std::string name = child->get_local_name();
 
-        yli::ontology::unbind_child_from_parent<yli::ontology::Entity*>(
-                childID,
-                name,
-                this->child_pointer_vector,
-                this->free_childID_queue,
-                this->number_of_children,
-                this->entity->registry);
+        this->GenericParentModule::unbind_child(childID);
     }
 
     ParentOfShadersModule::ParentOfShadersModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name)
