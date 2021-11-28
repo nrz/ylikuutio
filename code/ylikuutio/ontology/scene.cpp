@@ -35,7 +35,6 @@
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/render/render_master.hpp"
-#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include Bullet
 #include <btBulletDynamicsCommon.h>
