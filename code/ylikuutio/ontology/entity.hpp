@@ -19,7 +19,7 @@
 #define __YLIKUUTIO_ONTOLOGY_ENTITY_HPP_INCLUDED
 
 #include "registry.hpp"
-#include "parent_module.hpp"
+#include "generic_parent_module.hpp"
 #include "pre_render_callback.hpp"
 #include "post_render_callback.hpp"
 
@@ -136,15 +136,15 @@ namespace yli::ontology
 
             bool should_be_rendered { false };
 
-            friend class yli::ontology::ParentModule;
+            friend class yli::ontology::GenericParentModule;
             friend class yli::ontology::Universe;
 
             std::size_t childID { std::numeric_limits<std::size_t>::max() };
 
             // Named entities are stored here so that they can be recalled, if needed.
             yli::ontology::Registry registry;
-            yli::ontology::ParentModule parent_of_variables;
-            yli::ontology::ParentModule parent_of_any_struct_entities;
+            yli::ontology::GenericParentModule parent_of_variables;
+            yli::ontology::GenericParentModule parent_of_any_struct_entities;
 
         protected:
             void prerender() const;

@@ -185,7 +185,10 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_shader(const yli::ontology::ShaderStruct& shader_struct) const
     {
-        yli::ontology::Entity* shader_entity = new yli::ontology::Shader(this->universe, shader_struct);
+        yli::ontology::Entity* shader_entity = new yli::ontology::Shader(
+                this->universe,
+                shader_struct,
+                (shader_struct.parent != nullptr ? &shader_struct.parent->parent_of_shaders : nullptr));
         shader_entity->set_global_name(shader_struct.global_name);
         shader_entity->set_local_name(shader_struct.local_name);
         return shader_entity;

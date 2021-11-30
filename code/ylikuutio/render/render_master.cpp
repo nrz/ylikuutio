@@ -20,7 +20,8 @@
 #include "render_templates.hpp"
 #include "render_master_struct.hpp"
 #include "render_struct.hpp"
-#include "code/ylikuutio/ontology/parent_module.hpp"
+#include "code/ylikuutio/ontology/generic_parent_module.hpp"
+#include "code/ylikuutio/ontology/parent_of_shaders_module.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/shader.hpp"
@@ -194,7 +195,7 @@ namespace yli::render
 
         if (render_struct.parent_of_font_2ds != nullptr)
         {
-            yli::render::render_children<yli::ontology::ParentModule&, yli::ontology::Entity*, yli::ontology::Font2D*>(*render_struct.parent_of_font_2ds);
+            yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Entity*, yli::ontology::Font2D*>(*render_struct.parent_of_font_2ds);
         }
 
         if (render_struct.should_change_depth_test)
@@ -206,9 +207,9 @@ namespace yli::render
         SDL_GL_SwapWindow(render_struct.window);
     }
 
-    void RenderMaster::render_shaders(std::vector<yli::ontology::Shader*>& shader_pointer_vector) const
+    void RenderMaster::render_shaders(yli::ontology::ParentOfShadersModule& parent) const
     {
-        yli::render::render_children<std::vector<yli::ontology::Shader*>, yli::ontology::Shader*, yli::ontology::Shader*>(shader_pointer_vector);
+        yli::render::render_children<yli::ontology::ParentOfShadersModule&, yli::ontology::Entity*, yli::ontology::Shader*>(parent);
     }
 
     void RenderMaster::render_materials(std::vector<yli::ontology::ApprenticeModule*>& material_apprentice_pointer_vector) const
@@ -221,9 +222,9 @@ namespace yli::render
         yli::render::render_apprentices<yli::ontology::Species*>(species_apprentice_pointer_vector);
     }
 
-    void RenderMaster::render_symbioses(yli::ontology::ParentModule& parent) const
+    void RenderMaster::render_symbioses(yli::ontology::GenericParentModule& parent) const
     {
-        yli::render::render_children<yli::ontology::ParentModule&, yli::ontology::Entity*, yli::ontology::Symbiosis*>(parent);
+        yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Entity*, yli::ontology::Symbiosis*>(parent);
     }
 
     void RenderMaster::render_symbiont_species(yli::ontology::SymbiontSpecies* const symbiont_species) const
@@ -251,9 +252,9 @@ namespace yli::render
         yli::render::render_children<std::vector<yli::ontology::Entity*>, yli::ontology::Entity*, yli::ontology::ShapeshifterSequence*>(shapeshifter_sequence_pointer_vector);
     }
 
-    void RenderMaster::render_chunk_masters(yli::ontology::ParentModule& parent) const
+    void RenderMaster::render_chunk_masters(yli::ontology::GenericParentModule& parent) const
     {
-        yli::render::render_children<yli::ontology::ParentModule&, yli::ontology::Entity*, yli::ontology::ChunkMaster*>(parent);
+        yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Entity*, yli::ontology::ChunkMaster*>(parent);
     }
 
     void RenderMaster::render_chunks(std::vector<yli::ontology::Entity*>& chunk_pointer_vector) const
@@ -267,9 +268,9 @@ namespace yli::render
         glDisable(GL_BLEND);
     }
 
-    void RenderMaster::render_vector_fonts(yli::ontology::ParentModule& parent) const
+    void RenderMaster::render_vector_fonts(yli::ontology::GenericParentModule& parent) const
     {
-        yli::render::render_children<yli::ontology::ParentModule&, yli::ontology::Entity*, yli::ontology::VectorFont*>(parent);
+        yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Entity*, yli::ontology::VectorFont*>(parent);
     }
 
     void RenderMaster::render_glyph(yli::ontology::Glyph* const glyph) const
@@ -282,8 +283,8 @@ namespace yli::render
         yli::render::render_children<std::vector<yli::ontology::Entity*>, yli::ontology::Entity*, yli::ontology::Glyph*>(glyph_pointer_vector);
     }
 
-    void RenderMaster::render_compute_tasks(yli::ontology::ParentModule& parent) const
+    void RenderMaster::render_compute_tasks(yli::ontology::GenericParentModule& parent) const
     {
-        yli::render::render_children<yli::ontology::ParentModule&, yli::ontology::Entity*, yli::ontology::ComputeTask*>(parent);
+        yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Entity*, yli::ontology::ComputeTask*>(parent);
     }
 }

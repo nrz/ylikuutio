@@ -30,14 +30,14 @@ namespace yli::ontology
 {
     class Universe;
     class Scene;
-    class ParentModule;
+    class GenericParentModule;
 
     class CallbackEngineEntity: public yli::callback::CallbackEngine, public yli::ontology::Entity
     {
         public:
             CallbackEngineEntity(
                     yli::ontology::Universe* const universe,
-                    yli::ontology::ParentModule* const parent_module)
+                    yli::ontology::GenericParentModule* const parent_module)
                 : Entity(universe, yli::ontology::EntityStruct()),
                 child_of_universe(parent_module, this)
             {

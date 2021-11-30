@@ -57,7 +57,7 @@ namespace yli::ontology
 {
     class Universe;
     class Scene;
-    class ParentModule;
+    class GenericParentModule;
 
     class Brain: public yli::ontology::Entity
     {
@@ -65,7 +65,7 @@ namespace yli::ontology
             Brain(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::BrainStruct& brain_struct,
-                    yli::ontology::ParentModule* const parent_module)
+                    yli::ontology::GenericParentModule* const parent_module)
                 : Entity(universe, brain_struct),
                 child_of_scene(parent_module, this),
                 master_of_movables(this, &this->registry, "movables")

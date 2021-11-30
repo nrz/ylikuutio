@@ -18,7 +18,6 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_MESH_MODULE_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_MESH_MODULE_HPP_INCLUDED
 
-#include "parent_module.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
 #include "shader.hpp"

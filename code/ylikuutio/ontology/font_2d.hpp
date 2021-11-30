@@ -20,7 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "parent_module.hpp"
+#include "generic_parent_module.hpp"
 #include "generic_master_module.hpp"
 #include "universe.hpp"
 #include "font_struct.hpp"
@@ -47,7 +47,7 @@ namespace yli::ontology
             Font2D(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::FontStruct& font_struct,
-                    yli::ontology::ParentModule* const parent_module)
+                    yli::ontology::GenericParentModule* const parent_module)
                 : Entity(universe, font_struct),
                 child_of_universe(parent_module, this),
                 parent_of_text_2ds(this, &this->registry, "text_2ds"),
@@ -181,7 +181,7 @@ namespace yli::ontology
                     const std::string& font_texture_file_format) const;
 
             yli::ontology::ChildModule child_of_universe;
-            yli::ontology::ParentModule parent_of_text_2ds;
+            yli::ontology::GenericParentModule parent_of_text_2ds;
 
             yli::ontology::GenericMasterModule master_of_consoles;
 

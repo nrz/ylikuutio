@@ -19,7 +19,7 @@
 
 namespace yli::ontology
 {
-    class ParentModule;
+    class GenericParentModule;
     class Scene;
     class Font2D;
     class Console;
@@ -31,7 +31,7 @@ namespace yli::render
     {
         yli::ontology::Scene* scene                                 { nullptr };
         yli::ontology::Console* console                             { nullptr };
-        yli::ontology::ParentModule* parent_of_font_2ds             { nullptr };
+        yli::ontology::GenericParentModule* parent_of_font_2ds      { nullptr };
         SDL_Window* window                                          { nullptr };
         bool should_change_depth_test                               { true };
     };

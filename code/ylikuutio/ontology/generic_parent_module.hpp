@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_PARENT_MODULE_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_PARENT_MODULE_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_GENERIC_PARENT_MODULE_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_GENERIC_PARENT_MODULE_HPP_INCLUDED
 
 #include "indexable.hpp"
 #include "child_iterator.hpp"
@@ -32,27 +32,27 @@ namespace yli::ontology
     class Registry;
     class Entity;
 
-    class ParentModule: public yli::ontology::Indexable
+    class GenericParentModule: public yli::ontology::Indexable
     {
         public:
             // Iterator typedefs.
             typedef ChildIterator       iterator;
             typedef ChildIterator const_iterator;
 
-            void bind_child(yli::ontology::Entity* const child);
-            void unbind_child(std::size_t childID);
+            virtual bool bind_child(yli::ontology::Entity* const child);
+            virtual bool unbind_child(std::size_t childID);
 
             // constructor.
-            ParentModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name);
+            GenericParentModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name);
 
-            ParentModule(const ParentModule&) = delete;            // Delete copy constructor.
-            ParentModule& operator=(const ParentModule&) = delete; // Delete copy assignment.
+            GenericParentModule(const GenericParentModule&) = delete;            // Delete copy constructor.
+            GenericParentModule& operator=(const GenericParentModule&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~ParentModule();
+            virtual ~GenericParentModule();
 
-            // This function exists simply to be able to pass `ParentModule` as non-const parameter.
-            yli::ontology::ParentModule* get() const;
+            // This function exists simply to be able to pass `GenericParentModule` as non-const parameter.
+            yli::ontology::GenericParentModule* get() const;
 
             yli::ontology::Entity* get_entity() const;
             std::size_t get_number_of_children() const;
@@ -83,11 +83,11 @@ namespace yli::ontology
 
             std::vector<yli::ontology::Entity*> child_pointer_vector;
 
-        private:
+        protected:
             std::queue<std::size_t> free_childID_queue;
             std::size_t number_of_children;
 
-            yli::ontology::Entity* entity; // The `Entity` that owns this `ParentModule`.
+            yli::ontology::Entity* entity; // The `Entity` that owns this `GenericParentModule`.
     };
 }
 

@@ -34,7 +34,7 @@
 
 namespace yli::ontology
 {
-    class ParentModule;
+    class GenericParentModule;
     class Universe;
     class Scene;
     class Shader;
@@ -42,7 +42,7 @@ namespace yli::ontology
     class ShapeshifterSequence: public yli::ontology::Entity
     {
         public:
-            ShapeshifterSequence(yli::ontology::Universe* const universe, const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct, yli::ontology::ParentModule* const shapeshifter_transformation_parent_module)
+            ShapeshifterSequence(yli::ontology::Universe* const universe, const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct, yli::ontology::GenericParentModule* const shapeshifter_transformation_parent_module)
                 : Entity(universe, shapeshifter_sequence_struct),
                 child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, this),
                 master_of_objects(this, &this->registry, "objects")

@@ -31,10 +31,10 @@ namespace yli::ontology
 {
     class Entity;
     class Universe;
-    class Shader;
     class SymbiontSpecies;
     class Glyph;
-    class ParentModule;
+    class GenericParentModule;
+    class ParentOfShadersModule;
     class ApprenticeModule;
 }
 
@@ -66,22 +66,22 @@ namespace yli::render
             // This function renders everything.
             void render(const yli::render::RenderStruct& render_struct) const;
 
-            void render_shaders(std::vector<yli::ontology::Shader*>& shader_pointer_vector) const;
+            void render_shaders(yli::ontology::ParentOfShadersModule& parent) const;
             void render_materials(std::vector<yli::ontology::ApprenticeModule*>& material_apprentices_pointer_vector) const;
             void render_species(std::vector<yli::ontology::ApprenticeModule*>& species_apprentice_pointer_vector) const;
-            void render_symbioses(yli::ontology::ParentModule& parent) const;
+            void render_symbioses(yli::ontology::GenericParentModule& parent) const;
             void render_symbiont_species(yli::ontology::SymbiontSpecies* const symbiont_species) const;
             void render_symbiont_species(std::vector<yli::ontology::Entity*>& symbiont_species_pointer_vector) const;
             void render_holobionts(std::vector<yli::ontology::Entity*>& holobiont_pointer_vector) const;
             void render_bionts(std::vector<yli::ontology::Entity*>& biont_pointer_vector) const;
             void render_shapeshifter_sequences(std::vector<yli::ontology::Entity*>& shapeshifter_sequence_pointer_vector) const;
-            void render_chunk_masters(yli::ontology::ParentModule& parent) const;
+            void render_chunk_masters(yli::ontology::GenericParentModule& parent) const;
             void render_chunks(std::vector<yli::ontology::Entity*>& chunk_pointer_vector) const;
             void render_text_2ds(std::vector<yli::ontology::Entity*>& text_2d_pointer_vector) const;
-            void render_vector_fonts(yli::ontology::ParentModule& parent) const;
+            void render_vector_fonts(yli::ontology::GenericParentModule& parent) const;
             void render_glyph(yli::ontology::Glyph* const glyph) const;
             void render_glyphs(std::vector<yli::ontology::Entity*>& glyph_pointer_vector) const;
-            void render_compute_tasks(yli::ontology::ParentModule& parent) const;
+            void render_compute_tasks(yli::ontology::GenericParentModule& parent) const;
 
         private:
             yli::ontology::Universe* const universe { nullptr };

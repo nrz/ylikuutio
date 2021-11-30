@@ -30,7 +30,7 @@
 
 namespace yli::ontology
 {
-    class ParentModule;
+    class GenericParentModule;
     class Universe;
     class Scene;
     class ShapeshifterTransformation;
@@ -41,7 +41,7 @@ namespace yli::ontology
             ShapeshifterForm(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::ModelStruct& model_struct,
-                    yli::ontology::ParentModule* const shapeshifter_transformation_parent_module)
+                    yli::ontology::GenericParentModule* const shapeshifter_transformation_parent_module)
                 : Entity(universe, model_struct),
                 child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, this),
                 mesh(universe, model_struct)

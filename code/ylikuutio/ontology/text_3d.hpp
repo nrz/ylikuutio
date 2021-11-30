@@ -35,7 +35,7 @@ namespace yli::ontology
     class Scene;
     class Shader;
     class Object;
-    class ParentModule;
+    class GenericParentModule;
     class GenericMasterModule;
     class VectorFont;
 
@@ -53,7 +53,7 @@ namespace yli::ontology
             Text3D(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::Text3DStruct& text_3d_struct,
-                    yli::ontology::ParentModule* const vector_font_parent_module,
+                    yli::ontology::GenericParentModule* const vector_font_parent_module,
                     yli::ontology::GenericMasterModule* const generic_master_module)
                 : Movable(
                         universe,

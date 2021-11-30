@@ -20,7 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "parent_module.hpp"
+#include "generic_parent_module.hpp"
 #include "apprentice_module.hpp"
 #include "master_module.hpp"
 #include "shader.hpp"
@@ -45,7 +45,7 @@ namespace yli::ontology
             SymbiontMaterial(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::MaterialStruct& material_struct,
-                    yli::ontology::ParentModule* const symbiosis_parent_module) // Parent is a `Symbiosis`.
+                    yli::ontology::GenericParentModule* const symbiosis_parent_module) // Parent is a `Symbiosis`.
                 : Entity(universe, material_struct),
                 child_of_symbiosis(symbiosis_parent_module, this),
                 parent_of_symbiont_species(this, &this->registry, "symbiont_species")
@@ -71,7 +71,7 @@ namespace yli::ontology
             GLint get_openGL_textureID() const;
 
             yli::ontology::ChildModule child_of_symbiosis;
-            yli::ontology::ParentModule parent_of_symbiont_species;
+            yli::ontology::GenericParentModule parent_of_symbiont_species;
 
         protected:
             uint32_t image_width  { 0 };

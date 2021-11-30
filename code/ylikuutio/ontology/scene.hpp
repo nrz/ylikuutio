@@ -22,8 +22,8 @@
 #include "universe.hpp"
 #include "camera.hpp"
 #include "child_module.hpp"
-#include "parent_module.hpp"
-#include "shader_priority_queue.hpp"
+#include "generic_parent_module.hpp"
+#include "parent_of_shaders_module.hpp"
 #include "scene_struct.hpp"
 #include "camera_struct.hpp"
 
@@ -40,9 +40,7 @@
 #include <cmath>   // NAN, std::isnan, std::pow
 #include <cstddef> // std::size_t
 #include <memory>  // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
-#include <queue>   // std::priority_queue, std::queue
 #include <string>  // std::string
-#include <vector>  // std::vector
 #include <iostream> // std::cout, std::cin, std::cerr
 
 // How `yli::ontology::Scene` class works:
@@ -74,23 +72,19 @@ namespace yli::ontology
 {
     class Universe;
     class Camera;
-    class Shader;
     class Symbiosis;
     class RigidBodyModule;
 
     class Scene: public yli::ontology::Entity
     {
         public:
-            void bind_shader(yli::ontology::Shader* const shader);
-
-            void unbind_shader(const std::size_t childID, const std::string& local_name);
-
             Scene(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::SceneStruct& scene_struct,
-                    yli::ontology::ParentModule* const parent_module)
+                    yli::ontology::GenericParentModule* const parent_module)
                 : Entity(universe, scene_struct),
                 child_of_universe(parent_module, this),
+                parent_of_shaders(this, &this->registry, "shaders"),
                 parent_of_default_camera(this, &this->registry, "default_camera"),
                 parent_of_cameras(this, &this->registry, "cameras"),
                 parent_of_brains(this, &this->registry, "brains"),
@@ -176,35 +170,19 @@ namespace yli::ontology
             void set_is_flight_mode_in_use(const bool is_flight_mode_in_use);
 
             yli::ontology::ChildModule child_of_universe;
-            yli::ontology::ParentModule parent_of_default_camera;
-            yli::ontology::ParentModule parent_of_cameras;
-            yli::ontology::ParentModule parent_of_brains;
-            yli::ontology::ParentModule parent_of_materials;
-            yli::ontology::ParentModule parent_of_species;
-            yli::ontology::ParentModule parent_of_objects;
+            yli::ontology::ParentOfShadersModule parent_of_shaders;
+            yli::ontology::GenericParentModule parent_of_default_camera;
+            yli::ontology::GenericParentModule parent_of_cameras;
+            yli::ontology::GenericParentModule parent_of_brains;
+            yli::ontology::GenericParentModule parent_of_materials;
+            yli::ontology::GenericParentModule parent_of_species;
+            yli::ontology::GenericParentModule parent_of_objects;
 
             yli::ontology::Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
-
-            // `yli::ontology::ShaderPriorityQueue` is a priority queue for `Shader`s.
-            // `yli::ontology::ShaderPriorityQueue` also has
-            // a function `remove(const std::size_t childID)`.
-            //
-            // A priority queue is needed for `Shader`s in the future so that GPGPU
-            // `Shader`s are rendered first so that their output textures can then be
-            // used as input textures in other `Shader`s.
-            //
-            // Note: the output textures of GPGPU `Shader`s may be used as input textures
-            // in later GPGPU `Shader`s. The rendering order within GPGPU `Shader`s is
-            // according to the `childID` values, the GPGPU `Shader` with the smallest
-            // `childID` first.
-            yli::ontology::ShaderPriorityQueue shader_priority_queue;
-            std::vector<yli::ontology::Shader*> shader_pointer_vector;
-            std::queue<std::size_t> free_shaderID_queue;
-            std::size_t number_of_shaders { 0 };
 
             yli::ontology::Camera* active_camera { nullptr };
 

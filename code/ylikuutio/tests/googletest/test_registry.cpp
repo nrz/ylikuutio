@@ -17,7 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/ontology/registry.hpp"
-#include "code/ylikuutio/ontology/parent_module.hpp"
+#include "code/ylikuutio/ontology/generic_parent_module.hpp"
 #include "code/ylikuutio/ontology/generic_master_module.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
@@ -93,10 +93,10 @@ TEST(uninitialized_registry_must_return_an_empty_entity_map, registry)
     ASSERT_EQ(entity_map.size(), 0);
 }
 
-TEST(parent_module_must_bind_to_registry_appropriately, parent_module_foo)
+TEST(generic_parent_module_must_bind_to_registry_appropriately, generic_parent_module_foo)
 {
     yli::ontology::Registry registry;
-    yli::ontology::ParentModule parent_module(nullptr, &registry, "foo");
+    yli::ontology::GenericParentModule generic_parent_module(nullptr, &registry, "foo");
 
     ASSERT_TRUE(registry.is_name("foo"));
     ASSERT_FALSE(registry.is_name("bar"));
@@ -169,11 +169,11 @@ TEST(generic_master_module_must_bind_to_registry_appropriately, generic_master_m
     ASSERT_EQ(registry.get_completions("fooz"), empty_completions_vector);
 }
 
-TEST(two_parent_modules_must_bind_to_registry_appropriately, parent_modules_foo1_foo2)
+TEST(two_generic_parent_modules_must_bind_to_registry_appropriately, generic_parent_modules_foo1_foo2)
 {
     yli::ontology::Registry registry;
-    yli::ontology::ParentModule parent_module_1(nullptr, &registry, "foo1");
-    yli::ontology::ParentModule parent_module_2(nullptr, &registry, "foo2");
+    yli::ontology::GenericParentModule generic_parent_module_1(nullptr, &registry, "foo1");
+    yli::ontology::GenericParentModule generic_parent_module_2(nullptr, &registry, "foo2");
 
     ASSERT_FALSE(registry.is_name("foo"));
     ASSERT_TRUE(registry.is_name("foo1"));
@@ -225,11 +225,11 @@ TEST(two_parent_modules_must_bind_to_registry_appropriately, parent_modules_foo1
     ASSERT_EQ(registry.get_completions("fooz"), empty_completions_vector);
 }
 
-TEST(two_parent_modules_must_bind_to_registry_appropriately, parent_modules_foo_foo1)
+TEST(two_generic_parent_modules_must_bind_to_registry_appropriately, generic_parent_modules_foo_foo1)
 {
     yli::ontology::Registry registry;
-    yli::ontology::ParentModule parent_module_1(nullptr, &registry, "foo");
-    yli::ontology::ParentModule parent_module_2(nullptr, &registry, "foo1");
+    yli::ontology::GenericParentModule generic_parent_module_1(nullptr, &registry, "foo");
+    yli::ontology::GenericParentModule generic_parent_module_2(nullptr, &registry, "foo1");
 
     ASSERT_TRUE(registry.is_name("foo"));
     ASSERT_TRUE(registry.is_name("foo1"));
@@ -279,11 +279,11 @@ TEST(two_parent_modules_must_bind_to_registry_appropriately, parent_modules_foo_
     ASSERT_EQ(registry.get_completions("fooz"), empty_completions_vector);
 }
 
-TEST(two_parent_modules_must_bind_to_registry_appropriately, parent_modules_ab_ac)
+TEST(two_generic_parent_modules_must_bind_to_registry_appropriately, generic_parent_modules_ab_ac)
 {
     yli::ontology::Registry registry;
-    yli::ontology::ParentModule parent_module_1(nullptr, &registry, "ab");
-    yli::ontology::ParentModule parent_module_2(nullptr, &registry, "ac");
+    yli::ontology::GenericParentModule generic_parent_module_1(nullptr, &registry, "ab");
+    yli::ontology::GenericParentModule generic_parent_module_2(nullptr, &registry, "ac");
 
     ASSERT_FALSE(registry.is_name("foo"));
     ASSERT_FALSE(registry.is_name("a"));
@@ -330,11 +330,11 @@ TEST(two_parent_modules_must_bind_to_registry_appropriately, parent_modules_ab_a
     ASSERT_EQ(registry.get_completions("foo"), empty_completions_vector);
 }
 
-TEST(two_parent_modules_must_bind_to_registry_appropriately, parent_modules_aba_aca)
+TEST(two_generic_parent_modules_must_bind_to_registry_appropriately, generic_parent_modules_aba_aca)
 {
     yli::ontology::Registry registry;
-    yli::ontology::ParentModule parent_module_1(nullptr, &registry, "aba");
-    yli::ontology::ParentModule parent_module_2(nullptr, &registry, "aca");
+    yli::ontology::GenericParentModule generic_parent_module_1(nullptr, &registry, "aba");
+    yli::ontology::GenericParentModule generic_parent_module_2(nullptr, &registry, "aca");
 
     ASSERT_FALSE(registry.is_name("foo"));
     ASSERT_FALSE(registry.is_name("a"));

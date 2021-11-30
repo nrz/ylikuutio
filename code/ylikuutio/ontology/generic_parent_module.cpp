@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "registry.hpp"
-#include "parent_module.hpp"
+#include "generic_parent_module.hpp"
 #include "entity.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -28,11 +28,11 @@
 
 namespace yli::ontology
 {
-    void ParentModule::bind_child(yli::ontology::Entity* const child)
+    bool GenericParentModule::bind_child(yli::ontology::Entity* const child)
     {
         if (this->entity == nullptr || child == nullptr)
         {
-            return;
+            return false; // Binding failed.
         }
 
         yli::ontology::bind_child_to_parent<yli::ontology::Entity*>(
@@ -41,28 +41,30 @@ namespace yli::ontology
                 this->free_childID_queue,
                 this->number_of_children,
                 this->entity->registry);
+
+        return true; // Binding successful.
     }
 
-    void ParentModule::unbind_child(std::size_t childID)
+    bool GenericParentModule::unbind_child(std::size_t childID)
     {
         if (this->entity == nullptr)
         {
-            std::cerr << "ERROR: `ParentModule::unbind_child`: `this->entity` is `nullptr`!\n";
-            return;
+            std::cerr << "ERROR: `GenericParentModule::unbind_child`: `this->entity` is `nullptr`!\n";
+            return false; // Unbinding failed.
         }
 
         if (childID >= this->child_pointer_vector.size())
         {
-            std::cerr << "ERROR: `ParentModule::unbind_child`: the value of `childID` is too big!\n";
-            return;
+            std::cerr << "ERROR: `GenericParentModule::unbind_child`: the value of `childID` is too big!\n";
+            return false; // Unbinding failed.
         }
 
         yli::ontology::Entity* const child = this->child_pointer_vector.at(childID);
 
         if (child == nullptr)
         {
-            std::cerr << "ERROR: `ParentModule::unbind_child`: `child` is `nullptr`!\n";
-            return;
+            std::cerr << "ERROR: `GenericParentModule::unbind_child`: `child` is `nullptr`!\n";
+            return false; // Unbinding failed.
         }
 
         const std::string name = child->get_local_name();
@@ -74,9 +76,11 @@ namespace yli::ontology
                 this->free_childID_queue,
                 this->number_of_children,
                 this->entity->registry);
+
+        return true; // Unbinding successful.
     }
 
-    ParentModule::ParentModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name)
+    GenericParentModule::GenericParentModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name)
         : number_of_children { 0 },
         entity { entity }
     {
@@ -85,36 +89,36 @@ namespace yli::ontology
         registry->add_indexable(this, name);
     }
 
-    ParentModule::~ParentModule()
+    GenericParentModule::~GenericParentModule()
     {
         // destructor.
 
         yli::hierarchy::delete_children<yli::ontology::Entity*>(this->child_pointer_vector, this->number_of_children);
     }
 
-    yli::ontology::ParentModule* ParentModule::get() const
+    yli::ontology::GenericParentModule* GenericParentModule::get() const
     {
-        // This function exists simply to be able to pass `ParentModule` as non-const parameter.
-        yli::ontology::ParentModule* parent_module = const_cast<yli::ontology::ParentModule*>(this);
-        return parent_module;
+        // This function exists simply to be able to pass `GenericParentModule` as non-const parameter.
+        yli::ontology::GenericParentModule* generic_parent_module = const_cast<yli::ontology::GenericParentModule*>(this);
+        return generic_parent_module;
     }
 
-    yli::ontology::Entity* ParentModule::get_entity() const
+    yli::ontology::Entity* GenericParentModule::get_entity() const
     {
         return this->entity;
     }
 
-    std::size_t ParentModule::get_number_of_children() const
+    std::size_t GenericParentModule::get_number_of_children() const
     {
         return this->number_of_children;
     }
 
-    std::size_t ParentModule::get_number_of_descendants() const
+    std::size_t GenericParentModule::get_number_of_descendants() const
     {
         return yli::ontology::get_number_of_descendants(this->child_pointer_vector);
     }
 
-    yli::ontology::Entity* ParentModule::get(const std::size_t index) const
+    yli::ontology::Entity* GenericParentModule::get(const std::size_t index) const
     {
         if (index < this->child_pointer_vector.size())
         {

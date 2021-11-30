@@ -20,7 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "parent_module.hpp"
+#include "generic_parent_module.hpp"
 #include "apprentice_module.hpp"
 #include "generic_master_module.hpp"
 #include "master_module.hpp"
@@ -56,7 +56,7 @@ namespace yli::ontology
             Material(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::MaterialStruct& material_struct,
-                    yli::ontology::ParentModule* const scene_parent_module, // Parent is a `Scene`.
+                    yli::ontology::GenericParentModule* const scene_parent_module, // Parent is a `Scene`.
                     yli::ontology::MasterModule<yli::ontology::Shader*>* shader_master_module)
                 : Entity(universe, material_struct),
                 child_of_scene(scene_parent_module, this),
@@ -136,9 +136,9 @@ namespace yli::ontology
                 friend void yli::render::render_apprentices(const std::vector<yli::ontology::ApprenticeModule*>& apprentice_pointer_vector);
 
             yli::ontology::ChildModule child_of_scene;
-            yli::ontology::ParentModule parent_of_shapeshifter_transformations;
-            yli::ontology::ParentModule parent_of_vector_fonts;
-            yli::ontology::ParentModule parent_of_chunk_masters;
+            yli::ontology::GenericParentModule parent_of_shapeshifter_transformations;
+            yli::ontology::GenericParentModule parent_of_vector_fonts;
+            yli::ontology::GenericParentModule parent_of_chunk_masters;
             yli::ontology::ApprenticeModule apprentice_of_shader;
             yli::ontology::GenericMasterModule master_of_species;
 

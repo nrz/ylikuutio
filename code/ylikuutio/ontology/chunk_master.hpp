@@ -19,7 +19,7 @@
 #define __YLIKUUTIO_ONTOLOGY_CHUNK_MASTER_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "parent_module.hpp"
+#include "generic_parent_module.hpp"
 #include "material.hpp"
 #include "entity_struct.hpp"
 #include "get_content_callback.hpp"
@@ -60,7 +60,7 @@ namespace yli::ontology
             // destructor.
             virtual ~ChunkMaster();
 
-            yli::ontology::ParentModule parent_of_chunks;
+            yli::ontology::GenericParentModule parent_of_chunks;
 
         private:
             void bind_to_parent();

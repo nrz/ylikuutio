@@ -20,7 +20,7 @@
 
 #include "movable.hpp"
 #include "child_module.hpp"
-#include "parent_module.hpp"
+#include "generic_parent_module.hpp"
 #include "holobiont_struct.hpp"
 
 // Include standard headers
@@ -47,7 +47,7 @@ namespace yli::ontology
             Holobiont(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::HolobiontStruct& holobiont_struct,
-                    yli::ontology::ParentModule* const symbiosis_parent_module,
+                    yli::ontology::GenericParentModule* const symbiosis_parent_module,
                     yli::ontology::GenericMasterModule* const brain_master)
                 : Movable(
                         universe,
@@ -108,7 +108,7 @@ namespace yli::ontology
             // Public callbacks end here.
 
             yli::ontology::ChildModule child_of_symbiosis;
-            yli::ontology::ParentModule parent_of_bionts;
+            yli::ontology::GenericParentModule parent_of_bionts;
 
             yli::ontology::Scene* get_scene() const override;
 

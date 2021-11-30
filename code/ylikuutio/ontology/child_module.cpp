@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "child_module.hpp"
-#include "parent_module.hpp"
+#include "generic_parent_module.hpp"
 #include "entity.hpp"
 
 namespace yli::ontology
@@ -92,7 +92,7 @@ namespace yli::ontology
         this->parent_module->unbind_child(entity->get_childID());
     }
 
-    void ChildModule::set_parent_module_and_bind_to_new_parent(yli::ontology::ParentModule* const new_parent_module)
+    void ChildModule::set_parent_module_and_bind_to_new_parent(yli::ontology::GenericParentModule* const new_parent_module)
     {
         if (new_parent_module == nullptr)
         {

@@ -127,7 +127,7 @@ standard_headers_include_lines = \
 "// Include standard headers\n"\
 "#include <cstddef> // std::size_t"
 
-parent_module_type_and_name = "yli::ontology::ParentModule* const parent_module"
+parent_module_type_and_name = "yli::ontology::GenericParentModule* const parent_module"
 
 # namespace
 begin_namespace_lines = \
@@ -144,7 +144,7 @@ universe_forward_declaration = \
 "    class Universe;"
 
 parent_module_forward_declaration = \
-"    class ParentModule; // TODO: delete this line if `ParentModule` is not needed!"
+"    class GenericParentModule; // TODO: delete this line if `GenericParentModule` is not needed!"
 
 begin_class_definition = \
 "    class " + class_name + ": public " + fully_qualified_inherited_class_name + "\n"\

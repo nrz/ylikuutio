@@ -31,7 +31,7 @@
 
 namespace yli::ontology
 {
-    class ParentModule;
+    class GenericParentModule;
     class Universe;
     class Scene;
     class Shader;
@@ -49,7 +49,7 @@ namespace yli::ontology
             Species(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::ModelStruct& model_struct,
-                    yli::ontology::ParentModule* const scene_parent_module,
+                    yli::ontology::GenericParentModule* const scene_parent_module,
                     yli::ontology::GenericMasterModule* const material_master)
                 : Entity(universe, model_struct),
                 child_of_scene(scene_parent_module, this),

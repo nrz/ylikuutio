@@ -155,6 +155,12 @@ namespace yli::callback
     {
         this->callback_parameter_pointer_vector[childID] = child_pointer;
 
+        if (this->callback_parameter_pointer_vector.empty())
+        {
+            std::cerr << "ERROR: `CallbackObject::set_callback_parameter_pointer`: parameter pointer vector is empty!\n";
+            return;
+        }
+
         if (child_pointer == nullptr)
         {
             if (childID == this->callback_parameter_pointer_vector.size() - 1)

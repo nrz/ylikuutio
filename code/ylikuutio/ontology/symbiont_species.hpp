@@ -51,7 +51,7 @@
 
 namespace yli::ontology
 {
-    class ParentModule;
+    class GenericParentModule;
     class Universe;
     class Scene;
     class Shader;
@@ -62,7 +62,7 @@ namespace yli::ontology
             SymbiontSpecies(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::ModelStruct& model_struct,
-                    yli::ontology::ParentModule* const symbiont_material_parent_module)
+                    yli::ontology::GenericParentModule* const symbiont_material_parent_module)
                 : Entity(universe, model_struct),
                 child_of_symbiont_material(symbiont_material_parent_module, this),
                 master_of_bionts(this, &this->registry, "bionts"),

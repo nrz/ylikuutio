@@ -36,7 +36,7 @@ namespace yli::data
 
 namespace yli::ontology
 {
-    class ParentModule;
+    class GenericParentModule;
     class Universe;
     class Scene;
     class Console;
@@ -46,7 +46,7 @@ namespace yli::ontology
         public:
             GenericLispFunctionOverload(
                     yli::ontology::Universe* const universe,
-                    yli::ontology::ParentModule* const parent_module)
+                    yli::ontology::GenericParentModule* const parent_module)
                 : Entity(universe, yli::ontology::EntityStruct()),
                 child_of_lisp_function(parent_module, this)
             {

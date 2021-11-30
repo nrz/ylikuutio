@@ -780,8 +780,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/object.hpp
     code/ylikuutio/ontology/object_struct.hpp
     code/ylikuutio/ontology/object_type.hpp
-    code/ylikuutio/ontology/parent_module.cpp
-    code/ylikuutio/ontology/parent_module.hpp
+    code/ylikuutio/ontology/generic_parent_module.cpp
+    code/ylikuutio/ontology/generic_parent_module.hpp
+    code/ylikuutio/ontology/parent_of_shaders_module.cpp
+    code/ylikuutio/ontology/parent_of_shaders_module.hpp
     code/ylikuutio/ontology/post_render_callback.hpp
     code/ylikuutio/ontology/pre_render_callback.hpp
     code/ylikuutio/ontology/read_callback.hpp
@@ -1194,8 +1196,10 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/object.hpp
         code/ylikuutio/ontology/object_struct.hpp
         code/ylikuutio/ontology/object_type.hpp
-        code/ylikuutio/ontology/parent_module.cpp
-        code/ylikuutio/ontology/parent_module.hpp
+        code/ylikuutio/ontology/generic_parent_module.cpp
+        code/ylikuutio/ontology/generic_parent_module.hpp
+        code/ylikuutio/ontology/parent_of_shaders_module.cpp
+        code/ylikuutio/ontology/parent_of_shaders_module.hpp
         code/ylikuutio/ontology/scene.cpp
         code/ylikuutio/ontology/scene.hpp
         code/ylikuutio/ontology/scene_struct.hpp
