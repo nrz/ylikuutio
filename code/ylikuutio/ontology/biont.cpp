@@ -97,7 +97,7 @@ namespace yli::ontology
         if (this->should_render)
         {
             this->prerender();
-            this->render_this_biont(static_cast<yli::ontology::Shader*>(symbiosis->get_parent()));
+            this->render_this_biont(symbiosis->get_shader());
             this->postrender();
         }
     }

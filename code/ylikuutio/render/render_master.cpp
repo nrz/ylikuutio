@@ -222,9 +222,9 @@ namespace yli::render
         yli::render::render_apprentices<yli::ontology::Species*>(species_apprentice_pointer_vector);
     }
 
-    void RenderMaster::render_symbioses(yli::ontology::GenericParentModule& parent) const
+    void RenderMaster::render_symbioses(std::vector<yli::ontology::ApprenticeModule*>& symbiosis_apprentice_pointer_vector) const
     {
-        yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Entity*, yli::ontology::Symbiosis*>(parent);
+        yli::render::render_apprentices<yli::ontology::Symbiosis*>(symbiosis_apprentice_pointer_vector);
     }
 
     void RenderMaster::render_symbiont_species(yli::ontology::SymbiontSpecies* const symbiont_species) const

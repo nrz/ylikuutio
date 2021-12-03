@@ -886,11 +886,13 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
     yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::ModelStruct model_struct;
+    model_struct.scene = scene;
     model_struct.shader = shader;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             universe,
             model_struct,
-            &shader->parent_of_symbioses);
+            &scene->parent_of_symbioses,
+            &shader->master_of_symbioses);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -898,11 +900,11 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 2); // Default `Camera`, `shader`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `symbiosis`.
 
     // `Entity` member functions of `Shader`.
     ASSERT_EQ(shader->get_scene(), scene);
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions.
     ASSERT_EQ(symbiosis->get_childID(), 0);
@@ -910,7 +912,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
     ASSERT_TRUE(symbiosis->get_can_be_erased());
     ASSERT_EQ(symbiosis->get_universe(), universe);
     ASSERT_EQ(symbiosis->get_scene(), scene);
-    ASSERT_EQ(symbiosis->get_parent(), shader);
+    ASSERT_EQ(symbiosis->get_parent(), scene);
     ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 0);
 }
 
@@ -921,6 +923,7 @@ TEST(symbiosis_must_be_initialized_appropriately, no_universe_no_scene_no_materi
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             nullptr,
             model_struct,
+            nullptr,
             nullptr);
 
     // `Entity` member functions.
@@ -950,13 +953,15 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
     yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::ModelStruct model_struct;
+    model_struct.scene = scene;
     model_struct.shader = shader;
     model_struct.model_filename = "turbo_polizei_png_textures.fbx";
     model_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             universe,
             model_struct,
-            &shader->parent_of_symbioses);
+            &scene->parent_of_symbioses,
+            &shader->master_of_symbioses);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -964,11 +969,11 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 2); // Default `Camera`, `shader`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `symbiosis`.
 
     // `Entity` member functions of `Shader`.
     ASSERT_EQ(shader->get_scene(), scene);
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions.
     ASSERT_EQ(symbiosis->get_childID(), 0);
@@ -976,7 +981,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
     ASSERT_TRUE(symbiosis->get_can_be_erased());
     ASSERT_EQ(symbiosis->get_universe(), universe);
     ASSERT_EQ(symbiosis->get_scene(), scene);
-    ASSERT_EQ(symbiosis->get_parent(), shader);
+    ASSERT_EQ(symbiosis->get_parent(), scene);
     ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 2);    // 2 `SymbiontMaterial`s.
 }
 
@@ -997,11 +1002,13 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
     yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::ModelStruct model_struct;
+    model_struct.scene = scene;
     model_struct.shader = shader;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             universe,
             model_struct,
-            &shader->parent_of_symbioses);
+            &scene->parent_of_symbioses,
+            &shader->master_of_symbioses);
 
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.scene = scene;
@@ -1017,11 +1024,11 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 2); // Default `Camera`, `shader`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `symbiosis`.
 
     // `Entity` member functions of `Shader`.
     ASSERT_EQ(shader->get_scene(), scene);
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `Symbiosis`.
     ASSERT_EQ(symbiosis->get_scene(), scene);
@@ -1073,13 +1080,15 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::ModelStruct model_struct;
+    model_struct.scene = scene;
     model_struct.shader = shader;
     model_struct.model_filename = "turbo_polizei_png_textures.fbx";
     model_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             universe,
             model_struct,
-            &shader->parent_of_symbioses);
+            &scene->parent_of_symbioses,
+            &shader->master_of_symbioses);
 
     yli::ontology::HolobiontStruct holobiont_struct;
     holobiont_struct.scene = scene;
@@ -1095,11 +1104,11 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 2); // Default `Camera`, `shader`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `symbiosis`.
 
     // `Entity` member functions of `Shader`.
     ASSERT_EQ(shader->get_scene(), scene);
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `Symbiosis`.
     ASSERT_EQ(symbiosis->get_scene(), scene);

@@ -157,7 +157,7 @@ namespace yli::ontology
 
         render_master->render_compute_tasks(this->parent_of_compute_tasks);
         render_master->render_materials(this->master_of_materials.get_apprentice_module_pointer_vector_reference());
-        render_master->render_symbioses(this->parent_of_symbioses);
+        render_master->render_symbioses(this->master_of_symbioses.get_apprentice_module_pointer_vector_reference());
 
         this->postrender();
     }
@@ -174,14 +174,12 @@ namespace yli::ontology
 
     std::size_t Shader::get_number_of_children() const
     {
-        return this->parent_of_compute_tasks.get_number_of_children() +
-            this->parent_of_symbioses.get_number_of_children();
+        return this->parent_of_compute_tasks.get_number_of_children();
     }
 
     std::size_t Shader::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_compute_tasks.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_symbioses.child_pointer_vector);
+        return yli::ontology::get_number_of_descendants(this->parent_of_compute_tasks.child_pointer_vector);
     }
 
     std::size_t Shader::get_number_of_apprentices() const

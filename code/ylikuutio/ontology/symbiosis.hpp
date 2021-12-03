@@ -26,6 +26,7 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
+#include "apprentice_module.hpp"
 #include "model_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include <ofbx.h>
@@ -57,15 +58,22 @@ namespace yli::ontology
     class Symbiosis: public yli::ontology::Entity
     {
         public:
-            // this method sets pointer to this `Symbiosis` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
-            void bind_to_new_shader_parent(yli::ontology::Shader* const new_parent);
+            // this method sets pointer to this `Symbiosis` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
+            void bind_to_new_scene_parent(yli::ontology::Scene* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-            Symbiosis(yli::ontology::Universe* universe, const yli::ontology::ModelStruct& model_struct, yli::ontology::GenericParentModule* const parent_module)
+            void bind_to_new_shader(yli::ontology::Shader* const new_shader);
+
+            Symbiosis(
+                    yli::ontology::Universe* universe,
+                    const yli::ontology::ModelStruct& model_struct,
+                    yli::ontology::GenericParentModule* const scene_parent_module,
+                    yli::ontology::GenericMasterModule* const shader_master)
                 : Entity(universe, model_struct),
-                child_of_shader(parent_module, this),
+                child_of_scene(scene_parent_module, this),
                 parent_of_symbiont_materials(this, &this->registry, "symbiont_materials"),
                 parent_of_holobionts(this, &this->registry, "holobionts"),
+                apprentice_of_shader(shader_master, this),
                 model_filename     { model_struct.model_filename },
                 model_file_format  { model_struct.model_file_format },
                 triangulation_type { model_struct.triangulation_type },
@@ -88,6 +96,8 @@ namespace yli::ontology
             virtual ~Symbiosis();
 
             yli::ontology::Entity* get_parent() const override;
+
+            yli::ontology::Shader* get_shader() const;
 
             std::size_t get_number_of_symbiont_materials() const;
             std::size_t get_number_of_symbiont_species() const;
@@ -118,9 +128,10 @@ namespace yli::ontology
             GLint get_light_id(const std::size_t biontID) const;
             const glm::vec3& get_light_position(const std::size_t /* biontID */) const;
 
-            yli::ontology::ChildModule child_of_shader;
+            yli::ontology::ChildModule child_of_scene;
             yli::ontology::GenericParentModule parent_of_symbiont_materials;
             yli::ontology::GenericParentModule parent_of_holobionts;
+            yli::ontology::ApprenticeModule apprentice_of_shader;
 
             yli::ontology::Scene* get_scene() const override;
 
