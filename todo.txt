@@ -11,7 +11,6 @@ Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) whose instances function as Bullet rigid bodies.
 [ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
 [ ] Implement object selection (with a mouse cursor), using Bullet Physics SDK. https://pybullet.org/
-[ ] Add support for AngelScript in `Console` (again, but better support this time).
 [ ] Add support for Tab complete for local names in `Console`.
 [ ] Add support for printing alternatives completions in `Console`.
 [ ] Add support in `Console` for indexing the children of an `Entity` through the `Registry` and `ParentModule`, e.g. `foo_entity.bar_children[0]`.
