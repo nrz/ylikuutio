@@ -24,6 +24,7 @@
 
 #include "entity.hpp"
 #include "generic_parent_module.hpp"
+#include "generic_master_module.hpp"
 #include "master_module.hpp"
 #include "universe.hpp"
 #include "shader_struct.hpp"
@@ -55,8 +56,8 @@ namespace yli::ontology
             Shader(yli::ontology::Universe* const universe, const yli::ontology::ShaderStruct& shader_struct, yli::ontology::ParentOfShadersModule* const scene_parent_module)
                 : Entity(universe, shader_struct),
                 parent_of_compute_tasks(this, &this->registry, "compute_tasks"),
-                parent_of_symbioses(this, &this->registry, "symbioses"),
-                master_of_materials(this, &this->registry, "materials", nullptr)
+                master_of_materials(this, &this->registry, "materials", nullptr),
+                master_of_symbioses(this, &this->registry, "symbioses")
             {
                 // constructor.
 
@@ -119,8 +120,8 @@ namespace yli::ontology
                 friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
             yli::ontology::GenericParentModule parent_of_compute_tasks;
-            yli::ontology::GenericParentModule parent_of_symbioses;
             yli::ontology::MasterModule<yli::ontology::Shader*> master_of_materials;
+            yli::ontology::GenericMasterModule master_of_symbioses;
 
         private:
             void bind_to_parent();

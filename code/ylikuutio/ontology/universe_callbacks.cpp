@@ -22,6 +22,7 @@
 #include "shader.hpp"
 #include "material.hpp"
 #include "species.hpp"
+#include "symbiosis.hpp"
 #include "font_2d.hpp"
 #include "console.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -52,6 +53,7 @@ namespace yli::ontology
             yli::ontology::Entity& parent_or_master_entity)
     {
         yli::ontology::Material* const child_or_apprentice_material = dynamic_cast<yli::ontology::Material*>(&child_or_apprentice_entity);
+        yli::ontology::Symbiosis* const child_or_apprentice_symbiosis = dynamic_cast<yli::ontology::Symbiosis*>(&child_or_apprentice_entity);
         yli::ontology::Shader* const parent_or_master_shader = dynamic_cast<yli::ontology::Shader*>(&parent_or_master_entity);
 
         yli::ontology::Species* const child_or_apprentice_species = dynamic_cast<yli::ontology::Species*>(&child_or_apprentice_entity);
@@ -74,6 +76,10 @@ namespace yli::ontology
         else if (child_or_apprentice_movable != nullptr && parent_or_master_brain != nullptr)
         {
             child_or_apprentice_movable->bind_to_new_brain(parent_or_master_brain);
+        }
+        else if (child_or_apprentice_symbiosis != nullptr && parent_or_master_shader != nullptr)
+        {
+            child_or_apprentice_symbiosis->bind_to_new_shader(parent_or_master_shader);
         }
         else if (child_or_apprentice_console != nullptr && parent_or_master_font_2d != nullptr)
         {

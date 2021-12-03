@@ -124,7 +124,7 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(symbiosis->get_parent());
+        const yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(symbiosis->apprentice_of_shader.get_master());
 
         if (shader == nullptr)
         {

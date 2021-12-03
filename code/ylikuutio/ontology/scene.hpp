@@ -91,6 +91,7 @@ namespace yli::ontology
                 parent_of_materials(this, &this->registry, "materials"),
                 parent_of_species(this, &this->registry, "species"),
                 parent_of_objects(this, &this->registry, "objects"),
+                parent_of_symbioses(this, &this->registry, "symbioses"),
                 gravity               { scene_struct.gravity },
                 water_level           { scene_struct.water_level },
                 is_flight_mode_in_use { scene_struct.is_flight_mode_in_use }
@@ -177,6 +178,7 @@ namespace yli::ontology
             yli::ontology::GenericParentModule parent_of_materials;
             yli::ontology::GenericParentModule parent_of_species;
             yli::ontology::GenericParentModule parent_of_objects;
+            yli::ontology::GenericParentModule parent_of_symbioses;
 
             yli::ontology::Scene* get_scene() const override;
 

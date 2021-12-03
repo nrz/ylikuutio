@@ -250,7 +250,8 @@ namespace yli::ontology
         yli::ontology::Entity* symbiosis_entity = new yli::ontology::Symbiosis(
                 this->universe,
                 model_struct,
-                (model_struct.shader == nullptr ? nullptr : &model_struct.shader->parent_of_symbioses));
+                (model_struct.scene == nullptr ? nullptr : &model_struct.scene->parent_of_symbioses),
+                (model_struct.shader == nullptr ? nullptr : &model_struct.shader->master_of_symbioses));
 
         symbiosis_entity->set_global_name(model_struct.global_name);
         symbiosis_entity->set_local_name(model_struct.local_name);

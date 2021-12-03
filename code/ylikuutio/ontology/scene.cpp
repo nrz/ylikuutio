@@ -191,7 +191,8 @@ namespace yli::ontology
             this->parent_of_brains.get_number_of_children() +
             this->parent_of_materials.get_number_of_children() +
             this->parent_of_species.get_number_of_children() +
-            this->parent_of_objects.get_number_of_children();
+            this->parent_of_objects.get_number_of_children() +
+            this->parent_of_symbioses.get_number_of_children();
     }
 
     std::size_t Scene::get_number_of_descendants() const
@@ -202,7 +203,8 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_brains.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_materials.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_species.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_objects.child_pointer_vector);
+            yli::ontology::get_number_of_descendants(this->parent_of_objects.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_symbioses.child_pointer_vector);
     }
 
     float Scene::get_turbo_factor() const
