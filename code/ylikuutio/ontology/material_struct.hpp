@@ -22,7 +22,7 @@
 
 // Include standard headers
 #include <string>   // std::string
-#include <variant>  // std::holds_alternative, std::variant
+#include <variant>  // std::holds_alternative, std::monostate, std::variant
 
 namespace ofbx
 {
