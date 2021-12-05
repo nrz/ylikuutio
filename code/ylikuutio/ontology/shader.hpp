@@ -53,7 +53,10 @@ namespace yli::ontology
             void bind_to_new_scene_parent(yli::ontology::Scene* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-            Shader(yli::ontology::Universe* const universe, const yli::ontology::ShaderStruct& shader_struct, yli::ontology::ParentOfShadersModule* const scene_parent_module)
+            Shader(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::ShaderStruct& shader_struct,
+                    yli::ontology::ParentOfShadersModule* const scene_parent_module)
                 : Entity(universe, shader_struct),
                 parent_of_compute_tasks(this, &this->registry, "compute_tasks"),
                 master_of_materials(this, &this->registry, "materials", nullptr),
