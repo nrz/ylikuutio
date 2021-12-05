@@ -23,6 +23,7 @@
 #endif
 
 #include "entity.hpp"
+#include "child_module.hpp"
 #include "generic_parent_module.hpp"
 #include "generic_master_module.hpp"
 #include "master_module.hpp"
@@ -53,8 +54,12 @@ namespace yli::ontology
             void bind_to_new_scene_parent(yli::ontology::Scene* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-            Shader(yli::ontology::Universe* const universe, const yli::ontology::ShaderStruct& shader_struct, yli::ontology::ParentOfShadersModule* const scene_parent_module)
+            Shader(
+                    yli::ontology::Universe* const universe,
+                    const yli::ontology::ShaderStruct& shader_struct,
+                    yli::ontology::GenericParentModule* const scene_parent_module)
                 : Entity(universe, shader_struct),
+                child_of_scene(scene_parent_module, this),
                 parent_of_compute_tasks(this, &this->registry, "compute_tasks"),
                 master_of_materials(this, &this->registry, "materials", nullptr),
                 master_of_symbioses(this, &this->registry, "symbioses")
@@ -66,7 +71,6 @@ namespace yli::ontology
 
                 this->char_vertex_shader   = this->vertex_shader.c_str();
                 this->char_fragment_shader = this->fragment_shader.c_str();
-                this->parent               = shader_struct.parent;
 
                 // Each GPGPU `Shader` owns 0 or more output `ComputeTask`s.
                 // Each `Material` rendered after a given GPGPU `Shader`
@@ -75,9 +79,6 @@ namespace yli::ontology
                 this->is_gpgpu_shader      = shader_struct.is_gpgpu_shader;
 
                 this->opengl_in_use        = shader_struct.opengl_in_use;
-
-                // Get `childID` from `Scene` and set pointer to this `Shader`.
-                this->bind_to_parent();
 
                 if (this->universe != nullptr && !this->universe->get_is_headless() && this->opengl_in_use)
                 {
@@ -119,13 +120,12 @@ namespace yli::ontology
             template<typename T1>
                 friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
+            yli::ontology::ChildModule child_of_scene;
             yli::ontology::GenericParentModule parent_of_compute_tasks;
             yli::ontology::MasterModule<yli::ontology::Shader*> master_of_materials;
             yli::ontology::GenericMasterModule master_of_symbioses;
 
         private:
-            void bind_to_parent();
-
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
@@ -134,8 +134,6 @@ namespace yli::ontology
             void render();
 
         private:
-            yli::ontology::Scene* parent;         // Pointer to the `Scene`.
-
             GLuint program_id     { 0 };          // This `Shader`'s `program_id`, returned by `load_shaders`. Dummy value.
             GLint matrix_id       { 0 };          // Dummy value.
             GLint view_matrix_id  { 0 };          // Dummy value.

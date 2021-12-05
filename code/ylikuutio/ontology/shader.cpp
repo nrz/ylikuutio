@@ -36,22 +36,6 @@ namespace yli::ontology
 {
     class Entity;
 
-    void Shader::bind_to_parent()
-    {
-        // Requirements:
-        // `this->parent` must not be `nullptr`.
-        yli::ontology::Scene* const scene = this->parent;
-
-        if (scene == nullptr)
-        {
-            std::cerr << "ERROR: `Shader::bind_to_parent`: `scene` is `nullptr`!\n";
-            return;
-        }
-
-        // Get `childID` from the `Scene` and set pointer to this `Shader`.
-        scene->parent_of_shaders.bind_child(this);
-    }
-
     void Shader::bind_to_new_scene_parent(yli::ontology::Scene* const new_parent)
     {
         // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input,
@@ -61,7 +45,7 @@ namespace yli::ontology
         // `this->parent` must not be `nullptr`.
         // `new_parent` must not be `nullptr`.
 
-        yli::ontology::Scene* const scene = this->parent;
+        yli::ontology::Entity* const scene = this->child_of_scene.get_parent();
 
         if (scene == nullptr)
         {
@@ -82,11 +66,10 @@ namespace yli::ontology
         }
 
         // Unbind from the old parent `Scene`.
-        this->parent->parent_of_shaders.unbind_child(this->childID);
+        this->child_of_scene.unbind_child();
 
         // Get `childID` from `Scene` and set pointer to this `Shader`.
-        this->parent = new_parent;
-        this->parent->parent_of_shaders.bind_child(this);
+        this->child_of_scene.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_shaders);
     }
 
     void Shader::bind_to_new_parent(yli::ontology::Entity* const new_parent)
@@ -114,22 +97,10 @@ namespace yli::ontology
         // destructor.
         std::cout << "`Shader` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-        // Requirements for further actions (except `glDeleteProgram`):
-        // `this->parent` must not be `nullptr`.
-
-        yli::ontology::Scene* const scene = this->parent;
-
-        if (scene == nullptr)
+        if (this->universe != nullptr && !this->universe->get_is_headless() && this->opengl_in_use)
         {
-            std::cerr << "ERROR: `Shader::~Shader`: `scene` is `nullptr`!\n";
+            glDeleteProgram(this->program_id);
         }
-        else
-        {
-            // Set pointer to this `Shader` to `nullptr`.
-            scene->parent_of_shaders.unbind_child(this->childID);
-        }
-
-        glDeleteProgram(this->program_id);
     }
 
     void Shader::render()
@@ -164,12 +135,12 @@ namespace yli::ontology
 
     yli::ontology::Scene* Shader::get_scene() const
     {
-        return this->parent;
+        return static_cast<yli::ontology::Scene*>(this->child_of_scene.get_parent());
     }
 
     yli::ontology::Entity* Shader::get_parent() const
     {
-        return this->parent;
+        return this->child_of_scene.get_parent();
     }
 
     std::size_t Shader::get_number_of_children() const

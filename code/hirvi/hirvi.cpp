@@ -97,7 +97,6 @@
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <utility>       // std::pair
-#include <variant>       // std::holds_alternative, std::variant
 #include <vector>        // std::vector
 
 namespace hirvi
