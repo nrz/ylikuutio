@@ -129,7 +129,10 @@ namespace yli::ontology
             scene->parent_of_shaders.unbind_child(this->childID);
         }
 
-        glDeleteProgram(this->program_id);
+        if (this->universe != nullptr && !this->universe->get_is_headless() && this->opengl_in_use)
+        {
+            glDeleteProgram(this->program_id);
+        }
     }
 
     void Shader::render()
