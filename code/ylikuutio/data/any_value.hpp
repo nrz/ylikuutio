@@ -134,6 +134,7 @@ namespace yli::data
             explicit AnyValue(std::shared_ptr<glm::vec4> const glm_vec4_shared_ptr);
 
             std::variant<
+                std::monostate,
                 bool,
                 char,
                 float,

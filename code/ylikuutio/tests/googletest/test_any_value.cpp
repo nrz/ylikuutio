@@ -55,6 +55,12 @@
 #include <variant>  // std::holds_alternative, std::variant
 #include <vector>   // std::vector
 
+TEST(any_value_must_be_initialized_appropriately, default_constructor)
+{
+    yli::data::AnyValue default_value = yli::data::AnyValue();
+    ASSERT_TRUE(std::holds_alternative<std::monostate>(default_value.data));
+}
+
 TEST(any_value_must_be_initialized_appropriately, bool_true)
 {
     bool bool_true = true;

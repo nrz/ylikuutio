@@ -40,7 +40,7 @@ namespace yli::ontology
     {
         std::string texture_file_format;     // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`.
         std::string texture_filename;        // Filename of the model file.
-        std::variant<yli::ontology::Scene*, yli::ontology::Symbiosis*> parent;
+        std::variant<std::monostate, yli::ontology::Scene*, yli::ontology::Symbiosis*> parent;
         yli::ontology::Shader* shader       { nullptr }; // Pointer to `Shader` master.
         const ofbx::Texture* ofbx_texture   { nullptr }; // For `SymbiontMaterial`s.
     };

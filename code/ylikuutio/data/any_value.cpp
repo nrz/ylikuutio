@@ -1232,6 +1232,7 @@ namespace yli::data
 
     AnyValue::AnyValue(const std::string& type, const std::string& value_string)
         : data(yli::data::get_variant<
+                std::monostate,
                 bool,
                 char,
                 float,
