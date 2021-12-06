@@ -39,7 +39,12 @@ namespace yli::load
             GLuint& textureID,
             const bool is_headless)
     {
-        const std::shared_ptr<std::vector<uint8_t>> image_data = load_image_file(filename, image_loader_struct, image_width, image_height, image_size);
+        const std::shared_ptr<std::vector<uint8_t>> image_data = load_image_file(
+                filename,
+                image_loader_struct,
+                image_width,
+                image_height,
+                image_size);
 
         if (image_data == nullptr)
         {
