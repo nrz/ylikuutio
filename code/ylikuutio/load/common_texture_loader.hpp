@@ -34,6 +34,7 @@ namespace yli::load
             uint32_t& image_width,
             uint32_t& image_height,
             uint32_t& image_size,
+            uint32_t& n_color_channels,
             GLuint& textureID,
             const bool is_headless);
 }

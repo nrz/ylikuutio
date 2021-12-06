@@ -91,6 +91,7 @@ namespace yli::ontology
                             this->image_width,
                             this->image_height,
                             this->image_size,
+                            this->n_color_channels,
                             this->texture,
                             is_headless);
 
@@ -102,10 +103,6 @@ namespace yli::ontology
                     {
                         std::cerr << "ERROR: loading PNG texture failed!\n";
                         is_texture_loading_successful = false;
-                    }
-                    else
-                    {
-                        this->n_color_channels = this->image_size / (this->image_width * this->image_height);
                     }
                 }
                 else

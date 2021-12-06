@@ -36,7 +36,8 @@ namespace yli::load
             const yli::load::ImageLoaderStruct& image_loader_struct,
             uint32_t& image_width,
             uint32_t& image_height,
-            uint32_t& image_size)
+            uint32_t& image_size,
+            uint32_t& n_color_channels)
     {
         std::cout << "Loading image file " << filename << " ...\n";
 
@@ -52,7 +53,7 @@ namespace yli::load
 
         if (suffix == ".png")
         {
-            return yli::load::load_png_file(filename, image_loader_struct, image_width, image_height, image_size);
+            return yli::load::load_png_file(filename, image_loader_struct, image_width, image_height, image_size, n_color_channels);
         }
 
         return nullptr;

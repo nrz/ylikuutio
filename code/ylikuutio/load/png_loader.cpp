@@ -38,7 +38,8 @@ namespace yli::load
             const yli::load::ImageLoaderStruct& image_loader_struct,
             uint32_t& image_width,
             uint32_t& image_height,
-            uint32_t& image_size)
+            uint32_t& image_size,
+            uint32_t& n_color_channels)
     {
         std::cout << "Loading PNG file " << filename << " ...\n";
 
@@ -125,6 +126,7 @@ namespace yli::load
 
         std::shared_ptr<std::vector<uint8_t>> image_data = std::make_shared<std::vector<uint8_t>>();
         image_data->resize(image_height * line_width_in_bytes);
+        n_color_channels = (image_data->size() / image_size);
         uint8_t* image_data_pointer = &(*image_data)[0];
 
         for (uint32_t row_i = 0; row_i < image_height; row_i++)

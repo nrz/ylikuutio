@@ -149,12 +149,15 @@ namespace yli::ontology
                 // Load the source texture, just like in `yli::ontology::Material` constructor.
                 if (this->texture_file_format == "png" || this->texture_file_format == "PNG")
                 {
+                    uint32_t n_color_channels = 0;
+
                     if (!yli::load::load_common_texture(
                                 this->texture_filename,
                                 yli::load::ImageLoaderStruct(),
                                 this->texture_width,
                                 this->texture_height,
                                 this->texture_size,
+                                n_color_channels,
                                 this->source_texture,
                                 is_headless))
                     {

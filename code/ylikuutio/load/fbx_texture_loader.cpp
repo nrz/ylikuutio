@@ -38,6 +38,7 @@ namespace yli::load
             uint32_t& image_width,
             uint32_t& image_height,
             uint32_t& image_size,
+            uint32_t& n_color_channels,
             GLuint& textureID,
             const bool is_headless)
     {
@@ -95,7 +96,7 @@ namespace yli::load
             yli::load::ImageLoaderStruct image_loader_struct;
             image_loader_struct.should_discard_alpha_channel = true;
             image_loader_struct.should_flip_vertically = true;
-            return yli::load::load_common_texture(filename_string, image_loader_struct, image_width, image_height, image_size, textureID, is_headless);
+            return yli::load::load_common_texture(filename_string, image_loader_struct, image_width, image_height, image_size, n_color_channels, textureID, is_headless);
         }
 
         return false;

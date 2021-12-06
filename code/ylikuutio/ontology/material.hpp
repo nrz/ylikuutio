@@ -80,12 +80,15 @@ namespace yli::ontology
                     if (this->texture_file_format == "png" ||
                             this->texture_file_format == "PNG")
                     {
+                        uint32_t n_color_channels = 0;
+
                         if (yli::load::load_common_texture(
                                     this->texture_filename,
                                     yli::load::ImageLoaderStruct(),
                                     this->image_width,
                                     this->image_height,
                                     this->image_size,
+                                    n_color_channels,
                                     this->texture,
                                     is_headless))
                         {

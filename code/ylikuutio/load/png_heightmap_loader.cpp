@@ -73,13 +73,15 @@ namespace yli::load
         }
 
         uint32_t image_size = 0;
+        uint32_t n_color_channels = 0;
 
         std::shared_ptr<std::vector<uint8_t>> image_data = load_image_file(
                 heightmap_loader_struct.filename,
                 yli::load::ImageLoaderStruct(),
                 image_width,
                 image_height,
-                image_size);
+                image_size,
+                n_color_channels);
 
         if (image_data == nullptr)
         {
@@ -104,8 +106,6 @@ namespace yli::load
             std::cerr << "ERROR: `yli::load::load_png_terrain`: image size does not match image dimensions!\n";
             return false;
         }
-
-        const uint32_t n_color_channels = image_data->size() / image_size;
 
         if (n_color_channels == 0)
         {
