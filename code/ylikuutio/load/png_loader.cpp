@@ -47,7 +47,7 @@ namespace yli::load
 
         if (fp == nullptr)
         {
-            std::cerr << filename << "ERROR: `yli::load::load_image_file`: opening file " << filename << " failed!\n";
+            std::cerr << filename << "ERROR: `yli::load::load_png_file`: opening file " << filename << " failed!\n";
             return nullptr;
         }
 
@@ -58,7 +58,7 @@ namespace yli::load
 
         if (png_ptr == nullptr)
         {
-            std::cerr << filename << "ERROR: `yli::load::load_image_file`: creating PNG read struct failed!\n";
+            std::cerr << filename << "ERROR: `yli::load::load_png_file`: creating PNG read struct failed!\n";
             fclose(fp);
             return nullptr;
         }
@@ -67,7 +67,7 @@ namespace yli::load
 
         if (info_ptr == nullptr)
         {
-            std::cerr << filename << "ERROR: `yli::load::load_image_file`: creating PNG info struct failed!\n";
+            std::cerr << filename << "ERROR: `yli::load::load_png_file`: creating PNG info struct failed!\n";
             png_destroy_read_struct(&png_ptr, (png_infopp) nullptr, (png_infopp) nullptr);
             fclose(fp);
             return nullptr;
@@ -85,7 +85,7 @@ namespace yli::load
         {
             png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
             fclose(fp);
-            std::cerr << filename << "ERROR: `yli::load::load_image_file`: reading header of " << filename << " failed!\n";
+            std::cerr << filename << "ERROR: `yli::load::load_png_file`: reading header of " << filename << " failed!\n";
             return nullptr;
         }
 
@@ -93,7 +93,7 @@ namespace yli::load
         {
             png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
             fclose(fp);
-            std::cerr << filename << "ERROR: `yli::load::load_image_file`: file " << filename << " is not a PNG file!\n";
+            std::cerr << filename << "ERROR: `yli::load::load_png_file`: file " << filename << " is not a PNG file!\n";
             return nullptr;
         }
 
@@ -135,7 +135,7 @@ namespace yli::load
 
             if (row_pointer == nullptr)
             {
-                std::cerr << filename << "ERROR: `yli::load::load_image_file`: row pointer is `nullptr`!\n";
+                std::cerr << filename << "ERROR: `yli::load::load_png_file`: row pointer is `nullptr`!\n";
                 png_destroy_read_struct(&png_ptr, &info_ptr, (png_infopp) nullptr);
                 return nullptr;
             }
