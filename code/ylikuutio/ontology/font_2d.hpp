@@ -179,7 +179,6 @@ namespace yli::ontology
 
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::GenericParentModule parent_of_text_2ds;
-
             yli::ontology::GenericMasterModule master_of_consoles;
 
             yli::ontology::Scene* get_scene() const override;
