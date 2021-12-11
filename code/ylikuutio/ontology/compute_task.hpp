@@ -269,7 +269,7 @@ namespace yli::ontology
             void preiterate() const;
             void postiterate() const;
 
-            std::string texture_file_format; // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.
+            std::string texture_file_format; // Type of the texture file. Supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.
             std::string texture_filename;    // Filename of the model file.
             std::string output_filename;     // Filename of the output file.
 
