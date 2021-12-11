@@ -337,8 +337,8 @@ with open(struct_filename, 'w') as f:
         print(file = f)
     print(begin_struct_definition, file = f)
     print(struct_constructor_lines, file = f)
-    print(file = f)
     if parent_class_name != "":
+        print(file = f)
         print(parent_pointer_lines, file = f)
     print(end_struct_definition, file = f)
     print(end_namespace_lines, file = f)
