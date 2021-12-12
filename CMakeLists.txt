@@ -854,6 +854,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/opengl/ylikuutio_glew.hpp
 
     # render, in alphabetical order
+    code/ylikuutio/render/graphics_api_backend.hpp
     code/ylikuutio/render/render_master.cpp
     code/ylikuutio/render/render_master.hpp
     code/ylikuutio/render/render_master_struct.hpp
@@ -1286,6 +1287,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_shader_struct.cpp
         code/ylikuutio/tests/googletest/test_triangulation.cpp
         code/ylikuutio/tests/googletest/test_universe_callbacks.cpp
+        code/ylikuutio/tests/googletest/test_universe_struct.cpp
         code/ylikuutio/tests/googletest/test_variable_struct.cpp
         code/ylikuutio/tests/googletest/test_vector_font_struct.cpp
         code/ylikuutio/tests/googletest/test_ylikuutio_map.cpp)

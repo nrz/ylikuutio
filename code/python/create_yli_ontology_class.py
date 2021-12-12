@@ -32,7 +32,8 @@ n_command_line_args = len(sys.argv)
 
 usage = \
 "usage:\n"\
-"create_yli_ontology_class.py <class name> [parent class name] [inherited class]"
+"create_yli_ontology_class.py <class name> [parent class name] [inherited class]\n"\
+"create_yli_ontology_class.py --no-inherit <class name> [parent class name]"
 
 # print usage if too little arguments are given.
 if n_command_line_args <= 1:
@@ -44,13 +45,29 @@ inherited_class_name = "Entity"
 parent_class_name = ""
 
 for arg in sys.argv:
-    if x == 1:
-        class_name = arg           # 1st argument: name of the new class.
+    if x == 0:
+        x += 1
+    elif x == 1:
+        if arg == "--no-inherit":
+            inherited_class_name = "" # 1st argument: option.
+        else:
+            class_name = arg          # 1st argument: name of the new class.
+            x += 1
     elif x == 2:
         parent_class_name = arg    # 2nd argument: name of its compositional parent class (part-of relation).
+        x += 1
     elif x == 3:
-        inherited_class_name = arg # 3rd argument (optional): inherited class. If not given, then `Entity` is inherited.
-    x += 1
+        if inherited_class_name != "":
+            inherited_class_name = arg # 3rd argument (optional): inherited class. If not given, then `Entity` is inherited.
+            x += 1
+        else:
+            print("ERROR: if you use `--no-inherit`, you can not define a class to be inherited!\n")
+            print(usage)
+            sys.exit()
+    else:
+        print("ERROR: too many arguments!\n")
+        print(usage)
+        sys.exit()
 
 copyright_notice = \
 "// Ylikuutio - A 3D game and simulation engine.\n"\
@@ -73,12 +90,16 @@ copyright_notice = \
 namespace = "yli::ontology"
 fully_qualified_class_name = namespace + "::" + class_name
 fully_qualified_parent_class_name = namespace + "::" + parent_class_name
-fully_qualified_inherited_class_name = namespace + "::" + inherited_class_name
+
+if inherited_class_name != "":
+    fully_qualified_inherited_class_name = namespace + "::" + inherited_class_name
 
 # snake_case lowercase names.
 snake_case_class_name = re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).lower()
 snake_case_parent_class_name = re.sub(r'(?<!^)(?=[A-Z])', '_', parent_class_name).lower()
-snake_case_inherited_class_name = re.sub(r'(?<!^)(?=[A-Z])', '_', inherited_class_name).lower()
+
+if inherited_class_name != "":
+    snake_case_inherited_class_name = re.sub(r'(?<!^)(?=[A-Z])', '_', inherited_class_name).lower()
 
 # include guard generation.
 # include guard macro names follow Ylikuutio coding guidelines.
@@ -88,7 +109,8 @@ class_ifndef_line = "#ifndef " + class_include_guard_macro_name
 class_define_line = "#define " + class_include_guard_macro_name
 struct_ifndef_line = "#ifndef " + struct_include_guard_macro_name
 struct_define_line = "#define " + struct_include_guard_macro_name
-entity_struct_include_line = "#include \"" + snake_case_inherited_class_name + "_struct.hpp\""
+if inherited_class_name != "":
+    entity_struct_include_line = "#include \"" + snake_case_inherited_class_name + "_struct.hpp\""
 endif_line = "#endif"
 
 # class filenames.
@@ -102,8 +124,9 @@ struct_filename = snake_case_class_name + "_struct.hpp"
 
 # inherited class filename.
 # inherited class needs to be #include'd always because it is inherited.
-inherited_class_hpp = snake_case_inherited_class_name + ".hpp"
-inherited_class_include_line = "#include \"" + inherited_class_hpp + "\""
+if inherited_class_name != "":
+    inherited_class_hpp = snake_case_inherited_class_name + ".hpp"
+    inherited_class_include_line = "#include \"" + inherited_class_hpp + "\""
 
 # include line for `yli::ontology::ChildModule`.
 child_module_include_line = "#include \"child_module.hpp\" // TODO: delete this line if `ChildModule` is not needed!"
@@ -117,7 +140,8 @@ const_struct_reference_variable_type = "const " + namespace + "::" + struct_vari
 struct_name = snake_case_class_name + "_struct"
 
 # inherited class' variable type and name.
-fully_qualified_inherited_class_struct_variable_type = fully_qualified_inherited_class_name + "Struct"
+if inherited_class_name != "":
+    fully_qualified_inherited_class_struct_variable_type = fully_qualified_inherited_class_name + "Struct"
 
 # include line for the corresponding struct file.
 struct_include_line = "#include \"" + struct_name + ".hpp\" // TODO: modify or delete this line if there is no `" + namespace + "::" + class_name + "Struct`!"
@@ -146,9 +170,14 @@ universe_forward_declaration = \
 parent_module_forward_declaration = \
 "    class GenericParentModule; // TODO: delete this line if `GenericParentModule` is not needed!"
 
-begin_class_definition = \
-"    class " + class_name + ": public " + fully_qualified_inherited_class_name + "\n"\
-"    {"
+if inherited_class_name != "":
+    begin_class_definition = \
+    "    class " + class_name + ": public " + fully_qualified_inherited_class_name + "\n"\
+    "    {"
+else:
+    begin_class_definition = \
+    "    class " + class_name + "\n"\
+    "    {"
 
 public_line = \
 "        public:"
@@ -166,24 +195,31 @@ class_constructor_top = \
 "                    " + namespace + "::Universe* const universe,\n"\
 "                    " + const_struct_reference_variable_type + " " + struct_name + ",\n"\
 "                    " + parent_module_type_and_name + ") // TODO: other_parameters!"
-if parent_class_name != "":
-    class_constructor_base_initialization = \
-    "                : " + inherited_class_name + "(universe, " + struct_name + "), // TODO: complete the initializer list!"
-else:
-    class_constructor_base_initialization = \
-    "                : " + inherited_class_name + "(universe, " + struct_name + ") // TODO: complete the initializer list!"
+if inherited_class_name != "":
+    if parent_class_name != "":
+        class_constructor_base_initialization = \
+        "                : " + inherited_class_name + "(universe, " + struct_name + "), // TODO: complete the initializer list!"
+    else:
+        class_constructor_base_initialization = \
+        "                : " + inherited_class_name + "(universe, " + struct_name + ") // TODO: complete the initializer list!"
 class_constructor_child_module_line = \
 "                " + child_module_variable_name + "(parent_module, this), // TODO: delete this line if `ChildModule` is not needed!"
 class_constructor_parent_line = \
 "                parent { " + struct_name + ".parent }"
-class_constructor_definition = \
-"            {\n"\
-"                // constructor.\n"\
-"\n"\
-"                // `yli::ontology::Entity` member variables begin here.\n"\
-"                this->type_string = \"" + fully_qualified_class_name + "*\";\n"\
-"                // TODO: add other `yli::ontology::Entity` member variables such as `can_be_erased` if needed!\n"\
-"            }"
+if inherited_class_name != "":
+    class_constructor_definition = \
+    "            {\n"\
+    "                // constructor.\n"\
+    "\n"\
+    "                // `yli::ontology::Entity` member variables begin here.\n"\
+    "                this->type_string = \"" + fully_qualified_class_name + "*\";\n"\
+    "                // TODO: add other `yli::ontology::Entity` member variables such as `can_be_erased` if needed!\n"\
+    "            }"
+else:
+    class_constructor_definition = \
+    "            {\n"\
+    "                // constructor.\n"\
+    "            }"
 
 delete_copy_constructor_line = \
 "            " + class_name + "(const " + class_name + "&) = delete;            // Delete copy constructor."
@@ -233,9 +269,14 @@ get_number_of_descendants_lines = \
 "    }"
 
 # struct file specific lines.
-begin_struct_definition = \
-"    struct " + struct_variable_type + ": public " + fully_qualified_inherited_class_struct_variable_type + "\n"\
-"    {"
+if inherited_class_name != "":
+    begin_struct_definition = \
+    "    struct " + struct_variable_type + ": public " + fully_qualified_inherited_class_struct_variable_type + "\n"\
+    "    {"
+else:
+    begin_struct_definition = \
+    "    struct " + struct_variable_type + "\n"\
+    "    {"
 
 end_struct_definition = \
 "    };"
@@ -258,7 +299,8 @@ with open(class_filename_hpp, 'w') as f:
     print(class_ifndef_line, file = f)
     print(class_define_line, file = f)
     print(file = f)
-    print(inherited_class_include_line, file = f)
+    if inherited_class_name != "":
+        print(inherited_class_include_line, file = f)
     if parent_class_name != "":
         print(child_module_include_line, file = f)
     print(struct_include_line, file = f)
@@ -266,7 +308,7 @@ with open(class_filename_hpp, 'w') as f:
     print(standard_headers_include_lines, file = f)
     print(file = f)
     print(begin_namespace_lines, file = f)
-    if inherited_class_name != "Entity":
+    if inherited_class_name != "" and inherited_class_name != "Entity":
         print(entity_forward_declaration, file = f)
     print(universe_forward_declaration, file = f)
     if parent_class_name != "":
@@ -276,7 +318,8 @@ with open(class_filename_hpp, 'w') as f:
     print(begin_class_definition, file = f)
     print(public_line, file = f)
     print(class_constructor_top, file = f)
-    print(class_constructor_base_initialization, file = f)
+    if inherited_class_name != "":
+        print(class_constructor_base_initialization, file = f)
     if parent_class_name != "":
         print(class_constructor_child_module_line, file = f)
         print(class_constructor_parent_line, file = f)
@@ -329,16 +372,17 @@ with open(struct_filename, 'w') as f:
     print(struct_ifndef_line, file = f)
     print(struct_define_line, file = f)
     print(file = f)
-    print(entity_struct_include_line, file = f)
-    print(file = f)
+    if inherited_class_name != "":
+        print(entity_struct_include_line, file = f)
+        print(file = f)
     print(begin_namespace_lines, file = f)
     if parent_class_name != "":
         print(parent_class_forward_declaration, file = f)
         print(file = f)
     print(begin_struct_definition, file = f)
     print(struct_constructor_lines, file = f)
-    print(file = f)
     if parent_class_name != "":
+        print(file = f)
         print(parent_pointer_lines, file = f)
     print(end_struct_definition, file = f)
     print(end_namespace_lines, file = f)

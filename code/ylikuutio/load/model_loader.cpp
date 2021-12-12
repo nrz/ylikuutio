@@ -26,6 +26,7 @@
 #include "code/ylikuutio/load/model_loader_struct.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -54,7 +55,7 @@ namespace yli::load
             GLuint* uvbuffer,
             GLuint* normalbuffer,
             GLuint* elementbuffer,
-            bool& opengl_in_use,
+            const yli::render::GraphicsApiBackend graphics_api_backend,
             const bool is_debug_mode)
     {
         bool model_loading_result = false;
@@ -168,9 +169,7 @@ namespace yli::load
 
         std::cout << "Indexing completed successfully.\n";
 
-        opengl_in_use = model_loader_struct.model_struct.opengl_in_use;
-
-        if (opengl_in_use &&
+        if (graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL &&
                 vertexbuffer != nullptr &&
                 uvbuffer != nullptr &&
                 normalbuffer != nullptr &&

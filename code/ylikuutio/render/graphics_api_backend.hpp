@@ -15,32 +15,19 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_LOAD_FBX_TEXTURE_LOADER_HPP_INCLUDED
-#define __YLIKUUTIO_LOAD_FBX_TEXTURE_LOADER_HPP_INCLUDED
-
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-
-#include <ofbx.h>
-
-// Include standard headers
-#include <stdint.h> // uint32_t etc.
+#ifndef __YLIKUUTIO_RENDER_GRAPHICS_API_BACKEND_HPP_INCLUDED
+#define __YLIKUUTIO_RENDER_GRAPHICS_API_BACKEND_HPP_INCLUDED
 
 namespace yli::render
 {
-    enum class GraphicsApiBackend;
-}
-
-namespace yli::load
-{
-    // Load texture from memory.
-    bool load_fbx_texture(
-            const ofbx::Texture* const ofbx_texture,
-            uint32_t& image_width,
-            uint32_t& image_height,
-            uint32_t& image_size,
-            uint32_t& n_color_channels,
-            GLuint& textureID,
-            const yli::render::GraphicsApiBackend graphics_api_backend);
+    enum class GraphicsApiBackend
+    {
+        OPENGL,
+        VULKAN,
+        SOFTWARE,
+        HEADLESS
+    };
 }
 
 #endif
+

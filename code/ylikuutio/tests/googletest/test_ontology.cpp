@@ -47,8 +47,7 @@
 
 TEST(universe_must_be_initialized_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     // `Universe` member variables.
@@ -78,8 +77,7 @@ TEST(universe_must_be_initialized_appropriately, headless)
 
 TEST(ecosystems_must_be_initialized_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct1;
@@ -173,8 +171,7 @@ TEST(ecosystems_must_be_initialized_appropriately, headless)
 
 TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earlier_ecosystems, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct1;
@@ -273,8 +270,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earli
 
 TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_some_earlier_ecosystems, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct1;
@@ -391,8 +387,7 @@ TEST(ecosystem_must_be_initialized_appropriately, no_universe)
 
 TEST(scene_must_be_initialized_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -458,8 +453,7 @@ TEST(scene_must_be_initialized_appropriately, no_universe_no_ecosystem)
 
 TEST(shader_must_be_initialized_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -542,8 +536,7 @@ TEST(shader_must_be_initialized_appropriately, no_universe_no_scene)
 
 TEST(material_must_be_initialized_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -693,8 +686,7 @@ TEST(material_must_be_initialized_appropriately, no_universe_no_scene_no_shader)
 
 TEST(species_must_be_initialized_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -774,8 +766,7 @@ TEST(species_must_be_initialized_appropriately, no_universe_no_scene_no_shader_n
 
 TEST(object_must_be_initialized_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -871,8 +862,7 @@ TEST(object_must_be_initialized_appropriately, no_universe_no_scene_no_shader_no
 
 TEST(symbiosis_must_be_initialized_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -938,8 +928,7 @@ TEST(symbiosis_must_be_initialized_appropriately, no_universe_no_scene_no_materi
 
 TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -987,8 +976,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
 
 TEST(holobiont_must_be_initialized_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -1065,8 +1053,7 @@ TEST(holobiont_must_be_initialized_appropriately, no_universe_no_scene_no_shader
 
 TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -1126,8 +1113,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
 
 TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -1209,8 +1195,7 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, no_universe_
 
 TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -1335,8 +1320,7 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, no_universe_no_scene_n
 
 TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -1452,8 +1436,7 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, no_universe_no_sce
 
 TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -1589,8 +1572,7 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, no_univer
 
 TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -1786,8 +1768,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, no_universe_no_scene
 
 TEST(brain_must_be_initialized_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -1826,8 +1807,7 @@ TEST(brain_must_be_initialized_appropriately, headless)
 
 TEST(font_2d_must_be_initialized_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::FontStruct font_struct;
@@ -1874,8 +1854,7 @@ TEST(font_2d_must_be_initialized_appropriately, no_universe)
 
 TEST(font_2d_must_be_initialized_appropriately, headless_holstein)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::FontStruct font_struct;
@@ -1947,8 +1926,7 @@ TEST(brain_must_be_initialized_appropriately, no_universe_no_ecosystem_no_scene)
 
 TEST(scene_must_be_activated_appropriately, scene)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -1964,8 +1942,7 @@ TEST(scene_must_be_activated_appropriately, scene)
 
 TEST(shader_must_bind_to_scene_appropriately, scenes)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -2006,8 +1983,7 @@ TEST(shader_must_bind_to_scene_appropriately, scenes)
 
 TEST(material_must_bind_to_scene_appropriately, scenes_no_shaders)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -2051,8 +2027,7 @@ TEST(material_must_bind_to_scene_appropriately, scenes_no_shaders)
 
 TEST(species_must_bind_to_scene_appropriately, scenes_no_shaders_no_materials)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
@@ -2098,8 +2073,7 @@ TEST(species_must_bind_to_scene_appropriately, scenes_no_shaders_no_materials)
 
 TEST(object_must_bind_to_scene_appropriately, scenes_no_shaders_no_materials_no_species_no_shapeshifters_no_text_3ds)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
@@ -2145,8 +2119,7 @@ TEST(object_must_bind_to_scene_appropriately, scenes_no_shaders_no_materials_no_
 
 TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -2200,8 +2173,7 @@ TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
 
 TEST(universe_must_be_given_a_global_name_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
     ASSERT_EQ(universe->get_global_name(), "");
     ASSERT_EQ(universe->get_local_name(), "");
@@ -2213,8 +2185,7 @@ TEST(universe_must_be_given_a_global_name_appropriately, headless)
 
 TEST(universe_must_not_accept_a_local_name_before_setting_a_global_name, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
     ASSERT_EQ(universe->get_global_name(), "");
     ASSERT_EQ(universe->get_local_name(), "");
@@ -2226,8 +2197,7 @@ TEST(universe_must_not_accept_a_local_name_before_setting_a_global_name, headles
 
 TEST(universe_must_not_accept_a_local_name_after_setting_a_global_name, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
     ASSERT_EQ(universe->get_global_name(), "");
     ASSERT_EQ(universe->get_local_name(), "");
@@ -2240,8 +2210,7 @@ TEST(universe_must_not_accept_a_local_name_after_setting_a_global_name, headless
 
 TEST(ecosystem_must_be_given_a_global_name_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
@@ -2261,8 +2230,7 @@ TEST(ecosystem_must_be_given_a_global_name_appropriately, headless)
 
 TEST(ecosystem_must_be_given_a_local_name_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
@@ -2282,8 +2250,7 @@ TEST(ecosystem_must_be_given_a_local_name_appropriately, headless)
 
 TEST(ecosystem_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
@@ -2305,8 +2272,7 @@ TEST(ecosystem_must_be_given_a_global_name_appropriately_after_setting_a_global_
 
 TEST(ecosystem_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
@@ -2328,8 +2294,7 @@ TEST(ecosystem_must_be_given_a_local_name_appropriately_after_setting_a_local_na
 
 TEST(ecosystem_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
@@ -2351,8 +2316,7 @@ TEST(ecosystem_must_be_given_a_global_name_appropriately_after_setting_a_local_n
 
 TEST(ecosystem_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
@@ -2374,8 +2338,7 @@ TEST(ecosystem_must_be_given_a_local_name_appropriately_after_setting_a_global_n
 
 TEST(scene_must_be_given_a_global_name_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -2395,8 +2358,7 @@ TEST(scene_must_be_given_a_global_name_appropriately, headless)
 
 TEST(scene_must_be_given_a_local_name_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -2416,8 +2378,7 @@ TEST(scene_must_be_given_a_local_name_appropriately, headless)
 
 TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -2439,8 +2400,7 @@ TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_global_name
 
 TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -2462,8 +2422,7 @@ TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_local_name, 
 
 TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -2485,8 +2444,7 @@ TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_local_name,
 
 TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -2508,8 +2466,7 @@ TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_global_name,
 
 TEST(shader_must_be_given_a_global_name_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -2533,8 +2490,7 @@ TEST(shader_must_be_given_a_global_name_appropriately, headless)
 
 TEST(shader_must_be_given_a_local_name_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -2558,8 +2514,7 @@ TEST(shader_must_be_given_a_local_name_appropriately, headless)
 
 TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -2586,8 +2541,7 @@ TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_global_nam
 
 TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -2614,8 +2568,7 @@ TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_local_name,
 
 TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -2642,8 +2595,7 @@ TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_local_name
 
 TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -2670,8 +2622,7 @@ TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_global_name
 
 TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_shader_with_only_local_name)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
@@ -2708,8 +2659,7 @@ TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
 
 TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_shader_with_global_name_and_local_name)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
@@ -2751,8 +2701,7 @@ TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
 
 TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_shaders_with_only_local_name)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
@@ -2788,8 +2737,7 @@ TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
 
 TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_shaders_with_different_global_names_and_same_local_name)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
@@ -2831,8 +2779,7 @@ TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
 
 TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_material_with_only_local_name)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
@@ -2872,8 +2819,7 @@ TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
 
 TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_material_with_global_name_and_local_name)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
@@ -2918,8 +2864,7 @@ TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
 
 TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_materials_with_only_local_name)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
@@ -2961,8 +2906,7 @@ TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
 
 TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_materials_with_different_global_names_and_same_local_name)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
@@ -3010,8 +2954,7 @@ TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
 
 TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_species_with_only_local_name)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -3050,8 +2993,7 @@ TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headles
 
 TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_species_with_global_name_and_local_name)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -3095,8 +3037,7 @@ TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headles
 
 TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_species_with_only_local_name)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -3138,8 +3079,7 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
 
 TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_species_with_different_global_names_and_same_local_name)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -3187,8 +3127,7 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
 
 TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_object_with_only_local_name)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -3227,8 +3166,7 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
 
 TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_object_with_global_name_and_local_name)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -3272,8 +3210,7 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
 
 TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_objects_with_only_local_name)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
@@ -3315,8 +3252,7 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
 
 TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_objects_with_different_global_names_and_same_local_name)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::SceneStruct scene_struct;

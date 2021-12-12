@@ -33,7 +33,8 @@ namespace yli::load
             const yli::load::ImageLoaderStruct& image_loader_struct,
             uint32_t& image_width,
             uint32_t& image_height,
-            uint32_t& image_size);
+            uint32_t& image_size,
+            uint32_t& n_color_channels);
 }
 
 #endif

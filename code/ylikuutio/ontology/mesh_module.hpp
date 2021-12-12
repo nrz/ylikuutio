@@ -58,13 +58,21 @@ namespace yli::ontology
                 mesh_i { model_struct.mesh_i },
                 x_step { model_struct.x_step },
                 z_step { model_struct.z_step },
-                light_position { model_struct.light_position },
-                opengl_in_use { model_struct.opengl_in_use }
+                light_position { model_struct.light_position }
             {
                 // constructor.
-                const bool is_headless { universe == nullptr ? true : universe->get_is_headless() };
 
-                if (!is_headless && this->opengl_in_use && model_struct.scene != nullptr && model_struct.shader != nullptr)
+                // If software rendering is in use, the vertices, UVs, and normals can not be loaded into GPU memory,
+                // but they can still be loaded into CPU memory to be used by the software rendering.
+                const bool should_load_vertices_uvs_and_normals = (universe != nullptr &&
+                        (universe->get_is_opengl_in_use() ||
+                         universe->get_is_vulkan_in_use() ||
+                         universe->get_is_software_rendering_in_use()));
+
+                if (should_load_vertices_uvs_and_normals &&
+                        universe->get_is_opengl_in_use() &&
+                        model_struct.scene != nullptr &&
+                        model_struct.shader != nullptr)
                 {
                     // Get a handle for our buffers.
                     this->vertex_position_modelspace_id = glGetAttribLocation(model_struct.shader->get_program_id(), "vertex_position_modelspace");
@@ -95,7 +103,6 @@ namespace yli::ontology
                     model_loader_struct.model_struct.shader                       = model_struct.shader;
                     model_loader_struct.model_struct.material                     = model_struct.material;
                     model_loader_struct.model_struct.symbiont_material            = model_struct.symbiont_material;
-                    model_loader_struct.model_struct.opengl_in_use                = this->opengl_in_use;
                     model_loader_struct.model_struct.use_real_texture_coordinates = this->use_real_texture_coordinates;
                     model_loader_struct.image_width_pointer                       = &this->image_width;
                     model_loader_struct.image_height_pointer                      = &this->image_height;
@@ -115,17 +122,19 @@ namespace yli::ontology
                             &this->uvbuffer,
                             &this->normalbuffer,
                             &this->elementbuffer,
-                            this->opengl_in_use,
+                            universe->get_graphics_api_backend(),
                             is_debug_mode);
+
+                    this->are_opengl_buffers_initialized = true;
                 }
-                else if (this->opengl_in_use)
+                else if (should_load_vertices_uvs_and_normals && universe->get_is_opengl_in_use())
                 {
-                    if (this->opengl_in_use && model_struct.scene == nullptr)
+                    if (model_struct.scene == nullptr)
                     {
                         std::cerr << "ERROR: `MeshModule::MeshModule`: `this->scene` is `nullptr`!\n";
                     }
 
-                    if (this->opengl_in_use && model_struct.shader == nullptr)
+                    if (model_struct.shader == nullptr)
                     {
                         std::cerr << "ERROR: `MeshModule::MeshModule`: `this->shader` is `nullptr`!\n";
                     }
@@ -214,7 +223,7 @@ namespace yli::ontology
             GLuint elementbuffer { 0 }; // Dummy value.
 
             bool use_real_texture_coordinates { true };
-            bool opengl_in_use                { true };
+            bool are_opengl_buffers_initialized { false };
     };
 }
 

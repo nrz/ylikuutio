@@ -73,9 +73,14 @@ namespace yli::ontology
             {
                 // constructor.
 
-				const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
+                // If software rendering is in use, the vertices and UVs can not be loaded into GPU memory,
+                // but they can still be loaded into CPU memory to be used by the software rendering.
+                const bool should_load_texture = (this->universe != nullptr &&
+                        (this->universe->get_is_opengl_in_use() ||
+                         this->universe->get_is_vulkan_in_use() ||
+                         this->universe->get_is_software_rendering_in_use()));
 
-				if (!is_headless && model_struct.shader != nullptr)
+                if (should_load_texture && model_struct.shader != nullptr)
                 {
                     // Get a handle for our buffers.
                     yli::ontology::set_gl_attrib_locations(model_struct.shader, &this->mesh);

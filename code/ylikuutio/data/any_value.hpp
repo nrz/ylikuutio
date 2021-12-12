@@ -30,7 +30,7 @@
 #include <optional> // std::optional
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
-#include <variant>  // std::holds_alternative, std::variant
+#include <variant>  // std::holds_alternative, std::monostate, std::variant
 #include <vector>   // std::vector
 
 namespace yli::ontology
@@ -134,6 +134,7 @@ namespace yli::data
             explicit AnyValue(std::shared_ptr<glm::vec4> const glm_vec4_shared_ptr);
 
             std::variant<
+                std::monostate,
                 bool,
                 char,
                 float,

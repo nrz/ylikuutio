@@ -132,22 +132,20 @@ namespace yli::ontology
 
     void Symbiosis::render()
     {
-        if (!this->should_be_rendered || !this->opengl_in_use || this->universe == nullptr || this->universe->get_is_headless())
+        if (this->should_be_rendered && this->universe != nullptr)
         {
-            return;
+            yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+
+            if (render_master == nullptr)
+            {
+                std::cerr << "ERROR: `Symbiosis::render`: `render_master` is `nullptr`!\n";
+                return;
+            }
+
+            this->prerender();
+            render_master->render_holobionts(this->parent_of_holobionts.child_pointer_vector);
+            this->postrender();
         }
-
-        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
-
-        if (render_master == nullptr)
-        {
-            std::cerr << "ERROR: `Symbiosis::render`: `render_master` is `nullptr`!\n";
-            return;
-        }
-
-        this->prerender();
-        render_master->render_holobionts(this->parent_of_holobionts.child_pointer_vector);
-        this->postrender();
     }
 
     std::size_t Symbiosis::get_number_of_symbiont_materials() const
@@ -282,7 +280,6 @@ namespace yli::ontology
                     model_struct.normals = mesh_i < this->normals.size() ? this->normals.at(mesh_i) : std::vector<glm::vec3>();
                     model_struct.mesh_i = mesh_i;
                     model_struct.light_position = this->light_position;
-                    model_struct.opengl_in_use = this->opengl_in_use;
 
                     std::cout << "Creating yli::ontology::SymbiontSpecies*, mesh index " << mesh_i << "...\n";
 

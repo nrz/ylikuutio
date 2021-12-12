@@ -35,7 +35,7 @@ namespace yli::ontology
     {
         // destructor.
 
-        if (this->opengl_in_use)
+        if (this->are_opengl_buffers_initialized)
         {
             glDeleteBuffers(1, &this->vertexbuffer);
             glDeleteBuffers(1, &this->uvbuffer);

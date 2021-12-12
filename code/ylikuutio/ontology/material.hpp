@@ -70,24 +70,30 @@ namespace yli::ontology
             {
                 // constructor.
 
-                const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
+                // If software rendering is in use, the texture can not be loaded into GPU memory,
+                // but it can still be loaded into CPU memory to be used by the software rendering.
+                const bool should_load_texture = (this->universe != nullptr &&
+                        (this->universe->get_is_opengl_in_use() ||
+                         this->universe->get_is_vulkan_in_use() ||
+                         this->universe->get_is_software_rendering_in_use()));
 
-                if (this->universe != nullptr &&
-                        !this->universe->get_is_headless() &&
-                        this->get_shader() != nullptr)
+                if (should_load_texture && this->get_shader() != nullptr)
                 {
                     // Load the texture.
                     if (this->texture_file_format == "png" ||
                             this->texture_file_format == "PNG")
                     {
+                        uint32_t n_color_channels = 0;
+
                         if (yli::load::load_common_texture(
                                     this->texture_filename,
                                     yli::load::ImageLoaderStruct(),
                                     this->image_width,
                                     this->image_height,
                                     this->image_size,
+                                    n_color_channels,
                                     this->texture,
-                                    is_headless))
+                                    this->universe->get_graphics_api_backend()))
                         {
                             this->is_texture_loaded = true;
                         }

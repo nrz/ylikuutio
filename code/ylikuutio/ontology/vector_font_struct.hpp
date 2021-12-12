@@ -34,7 +34,6 @@ namespace yli::ontology
         float vertex_scaling_factor     { 0.001f };  // Default value.
         std::string font_file_format;    // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
         std::string font_filename;       // filename of the font file.
-        bool opengl_in_use { true };
     };
 }
 

@@ -31,11 +31,16 @@ TEST(grayscale_8_bit_png_files_must_be_loaded_approriately_as_grayscale, test3x3
     uint32_t image_width;
     uint32_t image_height;
     uint32_t image_size;
+    uint32_t n_color_channels;
 
     yli::load::ImageLoaderStruct image_loader_struct;
-    std::shared_ptr<std::vector<uint8_t>> image_data = yli::load::load_image_file(image_path, image_loader_struct, image_width, image_height, image_size);
+    std::shared_ptr<std::vector<uint8_t>> image_data = yli::load::load_image_file(image_path, image_loader_struct, image_width, image_height, image_size, n_color_channels);
     ASSERT_NE(image_data, nullptr);
     ASSERT_EQ(image_data->size(), 9);
+    ASSERT_EQ(image_width, 3);
+    ASSERT_EQ(image_height, 3);
+    ASSERT_EQ(image_size, 9);
+    ASSERT_EQ(n_color_channels, 1);
     ASSERT_EQ((*image_data)[0], 32);
     ASSERT_EQ((*image_data)[1], 64);
     ASSERT_EQ((*image_data)[2], 128);
@@ -53,12 +58,17 @@ TEST(grayscale_8_bit_png_files_must_be_loaded_approriately_as_rgb, test3x3_png)
     uint32_t image_width;
     uint32_t image_height;
     uint32_t image_size;
+    uint32_t n_color_channels;
 
     yli::load::ImageLoaderStruct image_loader_struct;
     image_loader_struct.should_convert_grayscale_to_rgb = true;
-    std::shared_ptr<std::vector<uint8_t>> image_data = yli::load::load_image_file(image_path, image_loader_struct, image_width, image_height, image_size);
+    std::shared_ptr<std::vector<uint8_t>> image_data = yli::load::load_image_file(image_path, image_loader_struct, image_width, image_height, image_size, n_color_channels);
     ASSERT_NE(image_data, nullptr);
     ASSERT_EQ(image_data->size(), 27);
+    ASSERT_EQ(image_width, 3);
+    ASSERT_EQ(image_height, 3);
+    ASSERT_EQ(image_size, 9);
+    ASSERT_EQ(n_color_channels, 3);
     ASSERT_EQ((*image_data)[0], 32);
     ASSERT_EQ((*image_data)[1], 32);
     ASSERT_EQ((*image_data)[2], 32);

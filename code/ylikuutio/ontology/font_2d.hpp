@@ -30,6 +30,7 @@
 #include "code/ylikuutio/load/common_texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include standard headers
 #include <cstddef>   // std::size_t
@@ -76,11 +77,16 @@ namespace yli::ontology
                 this->image_size                        = 0;
                 this->n_color_channels                  = 0;
 
-                const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
+                // If software rendering is in use, the texture can not be loaded into GPU memory,
+                // but it can still be loaded into CPU memory to be used by the software rendering.
+                const bool should_load_texture = (this->universe != nullptr &&
+                        (this->universe->get_is_opengl_in_use() ||
+                         this->universe->get_is_vulkan_in_use() ||
+                         this->universe->get_is_software_rendering_in_use()));
                 bool is_texture_loading_successful = false;
 
                 // Initialize texture.
-                if (this->font_texture_file_format == "png" || this->font_texture_file_format == "PNG")
+                if (should_load_texture && (this->font_texture_file_format == "png" || this->font_texture_file_format == "PNG"))
                 {
                     yli::load::ImageLoaderStruct image_loader_struct;
                     image_loader_struct.should_convert_grayscale_to_rgb = true;
@@ -91,8 +97,9 @@ namespace yli::ontology
                             this->image_width,
                             this->image_height,
                             this->image_size,
+                            this->n_color_channels,
                             this->texture,
-                            is_headless);
+                            this->universe->get_graphics_api_backend());
 
                     if (!is_texture_loading_successful)
                     {
@@ -103,18 +110,14 @@ namespace yli::ontology
                         std::cerr << "ERROR: loading PNG texture failed!\n";
                         is_texture_loading_successful = false;
                     }
-                    else
-                    {
-                        this->n_color_channels = this->image_size / (this->image_width * this->image_height);
-                    }
                 }
-                else
+                else if (should_load_texture)
                 {
                     std::cerr << "ERROR: invalid font texture file format: " << this->font_texture_file_format << "\n";
                     std::cerr << "supported font texture file formats: png, PNG.\n";
                 }
 
-                if (!is_headless && is_texture_loading_successful)
+                if (should_load_texture && is_texture_loading_successful && this->universe->get_is_opengl_in_use())
                 {
                     // Initialize VBO.
                     glGenBuffers(1, &this->vertexbuffer);
@@ -182,7 +185,6 @@ namespace yli::ontology
 
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::GenericParentModule parent_of_text_2ds;
-
             yli::ontology::GenericMasterModule master_of_consoles;
 
             yli::ontology::Scene* get_scene() const override;

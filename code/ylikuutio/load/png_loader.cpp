@@ -38,7 +38,8 @@ namespace yli::load
             const yli::load::ImageLoaderStruct& image_loader_struct,
             uint32_t& image_width,
             uint32_t& image_height,
-            uint32_t& image_size)
+            uint32_t& image_size,
+            uint32_t& n_color_channels)
     {
         std::cout << "Loading PNG file " << filename << " ...\n";
 
@@ -46,7 +47,7 @@ namespace yli::load
 
         if (fp == nullptr)
         {
-            std::cerr << filename << "ERROR: `yli::load::load_image_file`: opening file " << filename << " failed!\n";
+            std::cerr << filename << "ERROR: `yli::load::load_png_file`: opening file " << filename << " failed!\n";
             return nullptr;
         }
 
@@ -57,7 +58,7 @@ namespace yli::load
 
         if (png_ptr == nullptr)
         {
-            std::cerr << filename << "ERROR: `yli::load::load_image_file`: creating PNG read struct failed!\n";
+            std::cerr << filename << "ERROR: `yli::load::load_png_file`: creating PNG read struct failed!\n";
             fclose(fp);
             return nullptr;
         }
@@ -66,7 +67,7 @@ namespace yli::load
 
         if (info_ptr == nullptr)
         {
-            std::cerr << filename << "ERROR: `yli::load::load_image_file`: creating PNG info struct failed!\n";
+            std::cerr << filename << "ERROR: `yli::load::load_png_file`: creating PNG info struct failed!\n";
             png_destroy_read_struct(&png_ptr, (png_infopp) nullptr, (png_infopp) nullptr);
             fclose(fp);
             return nullptr;
@@ -84,7 +85,7 @@ namespace yli::load
         {
             png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
             fclose(fp);
-            std::cerr << filename << "ERROR: `yli::load::load_image_file`: reading header of " << filename << " failed!\n";
+            std::cerr << filename << "ERROR: `yli::load::load_png_file`: reading header of " << filename << " failed!\n";
             return nullptr;
         }
 
@@ -92,7 +93,7 @@ namespace yli::load
         {
             png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
             fclose(fp);
-            std::cerr << filename << "ERROR: `yli::load::load_image_file`: file " << filename << " is not a PNG file!\n";
+            std::cerr << filename << "ERROR: `yli::load::load_png_file`: file " << filename << " is not a PNG file!\n";
             return nullptr;
         }
 
@@ -125,6 +126,7 @@ namespace yli::load
 
         std::shared_ptr<std::vector<uint8_t>> image_data = std::make_shared<std::vector<uint8_t>>();
         image_data->resize(image_height * line_width_in_bytes);
+        n_color_channels = (image_data->size() / image_size);
         uint8_t* image_data_pointer = &(*image_data)[0];
 
         for (uint32_t row_i = 0; row_i < image_height; row_i++)
@@ -133,7 +135,7 @@ namespace yli::load
 
             if (row_pointer == nullptr)
             {
-                std::cerr << filename << "ERROR: `yli::load::load_image_file`: row pointer is `nullptr`!\n";
+                std::cerr << filename << "ERROR: `yli::load::load_png_file`: row pointer is `nullptr`!\n";
                 png_destroy_read_struct(&png_ptr, &info_ptr, (png_infopp) nullptr);
                 return nullptr;
             }

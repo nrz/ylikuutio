@@ -29,7 +29,6 @@ namespace yli::ontology
     {
         yli::ontology::Universe* universe  { nullptr }; // pointer to the `Universe`.
         yli::ontology::ChunkMaster* parent { nullptr }; // pointer to the `ChunkMaster`.
-        bool opengl_in_use                 { true };    // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
     };
 }
 

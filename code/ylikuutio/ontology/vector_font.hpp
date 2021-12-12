@@ -146,7 +146,6 @@ namespace yli::ontology
                         model_struct.glyph_vertex_data = &this->glyph_vertex_data.at(glyph_i);
                         model_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
                         model_struct.unicode_char_pointer = unicode_char_pointer;
-                        model_struct.opengl_in_use = (this->universe == nullptr ? false : !this->universe->get_is_headless());
 
                         std::string glyph_name_string = model_struct.glyph_name_pointer;
                         std::string unicode_string = model_struct.unicode_char_pointer;
