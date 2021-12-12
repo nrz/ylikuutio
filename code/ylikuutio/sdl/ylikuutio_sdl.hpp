@@ -22,9 +22,14 @@
 
 #define SDL_main main
 
+namespace yli::render
+{
+    enum class GraphicsApiBackend;
+}
+
 namespace yli::sdl
 {
-    bool init_sdl(const bool is_headless);
+    yli::render::GraphicsApiBackend init_sdl(const yli::render::GraphicsApiBackend graphics_api_backend);
     SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const Uint32 flags);
     SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen);
     SDL_Window* create_hidden_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen);

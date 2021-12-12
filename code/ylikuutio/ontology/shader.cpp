@@ -97,7 +97,7 @@ namespace yli::ontology
         // destructor.
         std::cout << "`Shader` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-        if (this->universe != nullptr && !this->universe->get_is_headless() && this->opengl_in_use)
+        if (this->universe != nullptr && this->universe->get_is_opengl_in_use())
         {
             glDeleteProgram(this->program_id);
         }

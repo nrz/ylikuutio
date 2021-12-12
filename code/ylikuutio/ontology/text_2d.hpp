@@ -67,9 +67,14 @@ namespace yli::ontology
                 this->vertex_position_in_screenspace_id = 0;
                 this->vertex_uv_id                      = 0;
 
-                const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
+                // If software rendering is in use, the vertices and UVs can not be loaded into GPU memory,
+                // but they can still be loaded into CPU memory to be used by the software rendering.
+                const bool should_load_vertices_and_uvs = (this->universe != nullptr &&
+                        (this->universe->get_is_opengl_in_use() ||
+                         this->universe->get_is_vulkan_in_use() ||
+                         this->universe->get_is_software_rendering_in_use()));
 
-                if (!is_headless)
+                if (should_load_vertices_and_uvs)
                 {
                     // Initialize VBO.
                     glGenBuffers(1, &this->vertexbuffer);

@@ -30,6 +30,11 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
+namespace yli::render
+{
+    enum class GraphicsApiBackend;
+}
+
 namespace yli::load
 {
     struct ModelLoaderStruct;
@@ -47,7 +52,7 @@ namespace yli::load
             GLuint* uvbuffer,
             GLuint* normalbuffer,
             GLuint* elementbuffer,
-            bool& opengl_in_use,
+            const yli::render::GraphicsApiBackend graphics_api_backend,
             const bool is_debug_mode);
 }
 

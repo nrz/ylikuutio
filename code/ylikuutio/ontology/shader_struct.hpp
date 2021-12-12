@@ -33,7 +33,6 @@ namespace yli::ontology
         std::string fragment_shader;  // filename of fragment shader.
         yli::ontology::Scene* parent { nullptr }; // pointer to the `Scene`.
         bool is_gpgpu_shader         { false };   // TODO: GPGPU `Shader`s are not rendered on screen but their result textures can be used by `Material`s.
-        bool opengl_in_use           { true };    // If `opengl_in_use` is `false, then no OpenGL-specific code shall be executed.
     };
 }
 

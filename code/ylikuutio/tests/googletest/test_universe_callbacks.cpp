@@ -59,8 +59,7 @@ TEST(scene_must_be_deleted_appropriately, universe_callback)
 {
     yli::ontology::Console* const console = nullptr;
 
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     const std::string scene_name = "foo";
@@ -84,8 +83,7 @@ TEST(scene_must_be_activated_appropriately, universe_callback)
 {
     yli::ontology::Console* const console = nullptr;
 
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     const std::string scene_name = "foo";
@@ -105,8 +103,7 @@ TEST(scene_must_be_activated_appropriately, universe_callback)
 
 TEST(console_must_be_activated_appropriately, universe_callback_without_font_2d)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     const std::string console_name = "foo";
@@ -126,8 +123,7 @@ TEST(console_must_be_activated_appropriately, universe_callback_without_font_2d)
 
 TEST(console_must_be_activated_appropriately, universe_callback_with_font_2d)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::Font2D* font_2d = new yli::ontology::Font2D(
@@ -154,8 +150,7 @@ TEST(scene_and_camera_must_be_activated_appropriately, universe_callback)
 {
     yli::ontology::Console* const console = nullptr;
 
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     const std::string scene_name = "foo";

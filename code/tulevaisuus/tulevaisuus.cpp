@@ -45,6 +45,7 @@
 #include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/input/input_master.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
+#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // `yli::ontology` files included in the canonical order.
 #include "code/ylikuutio/ontology/entity.hpp"
@@ -142,7 +143,7 @@ namespace tulevaisuus
 
             yli::ontology::UniverseStruct get_universe_struct() override
             {
-                yli::ontology::UniverseStruct universe_struct;
+                yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::OPENGL);
                 std::stringstream window_title_stringstream;
                 window_title_stringstream << "Tulevaisuus " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
                 universe_struct.application_name = "Tulevaisuus";
@@ -160,7 +161,7 @@ namespace tulevaisuus
 
                 if (this->command_line_master.is_key("headless"))
                 {
-                    universe_struct.is_headless = true;
+                    universe_struct.graphics_api_backend = yli::render::GraphicsApiBackend::HEADLESS;
                 }
 
                 if (this->command_line_master.is_key("window_width") &&

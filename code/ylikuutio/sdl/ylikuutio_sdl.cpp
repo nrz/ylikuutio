@@ -17,22 +17,23 @@
 
 #include "ylikuutio_sdl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 
 namespace yli::sdl
 {
-    bool init_sdl(const bool is_headless)
+    yli::render::GraphicsApiBackend init_sdl(const yli::render::GraphicsApiBackend graphics_api_backend)
     {
-        if (!is_headless)
+        if (graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL)
         {
             // Initialize SDL.
 
             if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
             {
                 std::cerr << "Failed to initialize SDL.\n";
-                return true; // Headless.
+                return yli::render::GraphicsApiBackend::HEADLESS; // Headless.
             }
 
 #if __APPLE__
@@ -43,9 +44,10 @@ namespace yli::sdl
             SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 #endif
 
+            return yli::render::GraphicsApiBackend::OPENGL; // Success.
         }
 
-        return is_headless;
+        return yli::render::GraphicsApiBackend::HEADLESS; // Headless.
     }
 
     SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const Uint32 flags)

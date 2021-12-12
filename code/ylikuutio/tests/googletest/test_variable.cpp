@@ -23,6 +23,7 @@
 #include "code/ylikuutio/ontology/movable_variable_read.hpp"
 #include "code/ylikuutio/ontology/variable_struct.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
+#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -41,24 +42,21 @@
 
 TEST(is_variable_must_return_false_for_nonexisting_variables, headless_universe)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
     ASSERT_FALSE(universe->has_variable("foo"));
 }
 
 TEST(get_must_return_nullptr_for_nonexisting_variables, headless_universe)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
     ASSERT_EQ(universe->get("foo"), nullptr);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_bool_true_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_true = true;
@@ -71,8 +69,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_bool_true_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_true = true;
@@ -95,8 +92,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_bool_false_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_false = false;
@@ -109,8 +105,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_bool_false_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_false = false;
@@ -133,8 +128,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_char_lowercase_a_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
@@ -147,8 +141,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_char_lowercase_a_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
@@ -171,8 +164,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_char_lowercase_b_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_b = 'b';
@@ -185,8 +177,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_char_lowercase_b_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_b = 'b';
@@ -209,8 +200,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_char_space_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_space = ' ';
@@ -223,8 +213,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_char_space_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_space = ' ';
@@ -247,8 +236,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_char_newline_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_newline = '\n';
@@ -261,8 +249,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_char_newline_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_newline = '\n';
@@ -285,8 +272,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_float_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_zero = 0.0f;
@@ -299,8 +285,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_float_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_zero = 0.0f;
@@ -323,8 +308,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_float_positive_infinity_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_positive_infinity = std::numeric_limits<float>::infinity();
@@ -347,8 +331,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_float_negative_infinity_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_negative_infinity = -1.0f * std::numeric_limits<float>::infinity();
@@ -371,8 +354,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_float_nan_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_nan = NAN;
@@ -396,8 +378,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_double_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_zero = 0.0;
@@ -410,8 +391,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_double_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_zero = 0.0;
@@ -434,8 +414,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_double_positive_infinity_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_positive_infinity = std::numeric_limits<double>::infinity();
@@ -458,8 +437,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_double_negative_infinity_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_negative_infinity = -1.0 * std::numeric_limits<double>::infinity();
@@ -482,8 +460,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_double_nan_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_nan = NAN;
@@ -507,8 +484,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_int32_t_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_zero = 0;
@@ -521,8 +497,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_int32_t_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_zero = 0;
@@ -545,8 +520,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_int32_t_plus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_plus_1 = 1;
@@ -559,8 +533,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_int32_t_plus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_plus_1 = 1;
@@ -583,8 +556,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_int32_t_minus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_minus_1 = -1;
@@ -597,8 +569,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_int32_t_minus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_minus_1 = -1;
@@ -621,8 +592,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_int32_t_max_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_max = std::numeric_limits<int32_t>::max();
@@ -635,8 +605,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_int32_t_max_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_max = std::numeric_limits<int32_t>::max();
@@ -659,8 +628,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_int32_t_min_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_min = std::numeric_limits<int32_t>::min();
@@ -673,8 +641,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_int32_t_min_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_min = std::numeric_limits<int32_t>::min();
@@ -697,8 +664,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_uint32_t_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_zero = 0;
@@ -711,8 +677,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_uint32_t_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_zero = 0;
@@ -735,8 +700,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_uint32_t_plus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
@@ -749,8 +713,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_uint32_t_plus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
@@ -773,8 +736,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_uint32_t_max_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_max = std::numeric_limits<uint32_t>::max();
@@ -787,8 +749,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_uint32_t_max_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_max = std::numeric_limits<uint32_t>::max();
@@ -811,8 +772,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_x_float_1234_dot_25_with_activate_callback_and_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float x = 1234.25f;
@@ -836,8 +796,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_y_float_1234_dot_25_with_activate_callback_and_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float y = 1234.25f;
@@ -861,8 +820,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_z_float_1234_dot_25_with_activate_callback_and_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float z = 1234.25f;
@@ -886,8 +844,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_red_float_0_dot_0_with_activate_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float red = 0.0f;
@@ -911,8 +868,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_red_float_1_dot_0_with_activate_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float red = 1.0f;
@@ -936,8 +892,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_red_float_0_dot_875_with_activate_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float red = 0.875f;
@@ -961,8 +916,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_green_float_0_dot_0_with_activate_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float green = 0.0f;
@@ -986,8 +940,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_green_float_1_dot_0_with_activate_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float green = 1.0f;
@@ -1011,8 +964,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_green_float_0_dot_875_with_activate_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float green = 0.875f;
@@ -1036,8 +988,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_blue_float_0_dot_0_with_activate_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float blue = 0.0f;
@@ -1061,8 +1012,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_blue_float_1_dot_0_with_activate_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float blue = 1.0f;
@@ -1086,8 +1036,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_blue_float_0_dot_875_with_activate_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float blue = 0.875f;
@@ -1111,8 +1060,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 
 TEST(variables_must_be_initialized_appropriately, headless_universe_variable_universe_cartesian_coordinates_x_y_z_activate_callbacks_and_read_callbacks)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float x = 1234.25f;
@@ -1182,8 +1130,7 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
 
 TEST(variables_must_be_initialized_appropriately, headless_universe_variable_universe_x_y_z_cartesian_coordinates_activate_callbacks_and_read_callbacks)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float x = 1234.25f;
@@ -1253,8 +1200,7 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_universe_x_y_z_cartesian_coordinates_activate_callbacks_and_read_callbacks)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float x = 1234.25f;
@@ -1318,8 +1264,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_u
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_bool_true_new_value_true_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_true = true;
@@ -1338,8 +1283,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_bool_true_new_value_false_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_true = true;
@@ -1358,8 +1302,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_bool_false_new_value_true_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_false = false;
@@ -1378,8 +1321,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_bool_false_new_value_false_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_false = false;
@@ -1398,8 +1340,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_bool_true_new_value_foo_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_true = true;
@@ -1418,8 +1359,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_bool_false_new_value_foo_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_false = false;
@@ -1438,8 +1378,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_char_lowercase_a_new_value_a_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
@@ -1458,8 +1397,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_char_lowercase_a_new_value_b_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
@@ -1478,8 +1416,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_char_lowercase_a_new_value_A_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
@@ -1498,8 +1435,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_char_lowercase_a_new_value_space_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
@@ -1518,8 +1454,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_char_lowercase_a_new_value_newline_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
@@ -1538,8 +1473,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_char_lowercase_a_new_value_ba_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
@@ -1558,8 +1492,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_char_lowercase_a_new_value_bb_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
@@ -1578,8 +1511,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_char_lowercase_a_new_value_bc_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     char char_lowercase_a = 'a';
@@ -1598,8 +1530,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_float_0_new_value_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_zero = 0.0f;
@@ -1618,8 +1549,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_float_0_new_value_0_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_zero = 0.0f;
@@ -1638,8 +1568,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_float_0_new_value_plus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_zero = 0.0f;
@@ -1658,8 +1587,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_float_0_new_value_plus_1_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_zero = 0.0f;
@@ -1678,8 +1606,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_float_0_new_value_minus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_zero = 0.0f;
@@ -1698,8 +1625,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_float_0_new_value_minus_1_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_zero = 0.0f;
@@ -1718,8 +1644,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_float_0_new_value_foo_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_zero = 0.0f;
@@ -1738,8 +1663,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_float_plus_1_new_value_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_plus_1 = 1.0f;
@@ -1758,8 +1682,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_float_plus_1_new_value_0_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_plus_1 = 1.0f;
@@ -1778,8 +1701,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_float_plus_1_new_value_plus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_plus_1 = 1.0f;
@@ -1798,8 +1720,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_float_plus_1_new_value_plus_1_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_plus_1 = 1.0f;
@@ -1818,8 +1739,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_float_plus_1_new_value_minus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_plus_1 = 1.0f;
@@ -1838,8 +1758,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_float_plus_1_new_value_minus_1_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_plus_1 = 1.0f;
@@ -1858,8 +1777,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_float_plus_1_new_value_foo_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     float float_plus_1 = 1.0f;
@@ -1878,8 +1796,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_double_0_new_value_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_zero = 0.0;
@@ -1898,8 +1815,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_double_0_new_value_0_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_zero = 0.0;
@@ -1918,8 +1834,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_double_0_new_value_plus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_zero = 0.0;
@@ -1938,8 +1853,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_double_0_new_value_plus_1_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_zero = 0.0;
@@ -1958,8 +1872,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_double_0_new_value_minus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_zero = 0.0;
@@ -1978,8 +1891,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_double_0_new_value_minus_1_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_zero = 0.0;
@@ -1998,8 +1910,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_double_0_new_value_foo_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_zero = 0.0;
@@ -2018,8 +1929,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_double_plus_1_new_value_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_plus_1 = 1.0;
@@ -2038,8 +1948,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_double_plus_1_new_value_0_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_plus_1 = 1.0;
@@ -2058,8 +1967,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_double_plus_1_new_value_plus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_plus_1 = 1.0;
@@ -2078,8 +1986,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_double_plus_1_new_value_plus_1_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_plus_1 = 1.0;
@@ -2098,8 +2005,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_double_plus_1_new_value_minus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_plus_1 = 1.0;
@@ -2118,8 +2024,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_double_plus_1_new_value_minus_1_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_plus_1 = 1.0;
@@ -2138,8 +2043,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_double_plus_1_new_value_foo_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     double double_plus_1 = 1.0;
@@ -2158,8 +2062,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_int32_t_0_new_value_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_zero = 0;
@@ -2178,8 +2081,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_int32_t_0_new_value_plus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_zero = 0;
@@ -2198,8 +2100,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_int32_t_0_new_value_minus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_zero = 0;
@@ -2218,8 +2119,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_int32_t_0_new_value_0_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_zero = 0;
@@ -2238,8 +2138,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_int32_t_0_new_value_plus_1_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_zero = 0;
@@ -2258,8 +2157,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_int32_t_0_new_value_minus_1_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_zero = 0;
@@ -2278,8 +2176,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_int32_t_0_new_value_foo_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_zero = 0;
@@ -2298,8 +2195,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_int32_t_plus_1_new_value_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_plus_1 = 1;
@@ -2318,8 +2214,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_int32_t_plus_1_new_value_plus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_plus_1 = 1;
@@ -2338,8 +2233,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_int32_t_plus_1_new_value_minus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_plus_1 = 1;
@@ -2358,8 +2252,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_int32_t_plus_1_new_value_0_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_plus_1 = 1;
@@ -2378,8 +2271,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_int32_t_plus_1_new_value_plus_1_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_plus_1 = 1;
@@ -2398,8 +2290,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_int32_t_plus_1_new_value_foo_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     int32_t int32_t_plus_1 = 1;
@@ -2418,8 +2309,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_uint32_t_0_new_value_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_zero = 0;
@@ -2438,8 +2328,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_uint32_t_0_new_value_plus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_zero = 0;
@@ -2458,8 +2347,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_uint32_t_0_new_value_minus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_zero = 0;
@@ -2478,8 +2366,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_uint32_t_0_new_value_0_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_zero = 0;
@@ -2498,8 +2385,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_uint32_t_0_new_value_plus_1_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_zero = 0;
@@ -2518,8 +2404,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_uint32_t_0_new_value_minus_1_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_zero = 0;
@@ -2538,8 +2423,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_uint32_t_0_new_value_foo_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_zero = 0;
@@ -2558,8 +2442,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_uint32_t_plus_1_new_value_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
@@ -2578,8 +2461,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_uint32_t_plus_1_new_value_plus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
@@ -2598,8 +2480,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_uint32_t_plus_1_new_value_minus_1_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
@@ -2618,8 +2499,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_uint32_t_plus_1_new_value_0_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
@@ -2638,8 +2518,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_uint32_t_plus_1_new_value_plus_1_dot_0_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
@@ -2658,8 +2537,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_uint32_t_plus_1_new_value_foo_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
@@ -2678,8 +2556,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_bool_true_copy_value_true_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_true = true;
@@ -2702,8 +2579,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_bool_true_copy_value_false_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_true = true;
@@ -2726,8 +2602,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_bool_false_copy_value_true_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_false = false;
@@ -2750,8 +2625,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_bool_false_copy_value_false_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_false = false;
@@ -2774,8 +2648,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_with_global_name_bool_true_set_to_false_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_true = true;
@@ -2795,8 +2668,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_with_global_name_bool_false_set_to_true_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_false = false;
@@ -2816,8 +2688,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_with_global_name_bool_true_set_to_true_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_true = true;
@@ -2837,8 +2708,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_with_global_name_bool_false_set_to_false_no_activate_callback_no_read_callback)
 {
-    yli::ontology::UniverseStruct universe_struct;
-    universe_struct.is_headless = true;
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     bool bool_false = false;

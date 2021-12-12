@@ -135,9 +135,14 @@ namespace yli::ontology
                 // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
                 this->bind_to_parent();
 
-                const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
+                // `ComputeTask` is currently designed to be a GPGPU class that uses GLSL shaders for computation.
+                // If support for using YliLisp as a shading language that compiles to SPIR-V or GLSL is implemented,
+                // then `ComputeTask` could and should support software rendering as well.
+                const bool should_load_texture = (this->universe != nullptr &&
+                        (this->universe->get_is_opengl_in_use() ||
+                         this->universe->get_is_vulkan_in_use()));
 
-                if (!is_headless)
+                if (should_load_texture && this->universe->get_is_opengl_in_use())
                 {
                     // Get a handle for our buffers.
                     this->vertex_position_modelspace_id = glGetAttribLocation(this->parent->get_program_id(), "vertex_position_modelspace");
@@ -147,7 +152,7 @@ namespace yli::ontology
                 }
 
                 // Load the source texture, just like in `yli::ontology::Material` constructor.
-                if (this->texture_file_format == "png" || this->texture_file_format == "PNG")
+                if (should_load_texture && (this->texture_file_format == "png" || this->texture_file_format == "PNG"))
                 {
                     uint32_t n_color_channels = 0;
 
@@ -159,7 +164,7 @@ namespace yli::ontology
                                 this->texture_size,
                                 n_color_channels,
                                 this->source_texture,
-                                is_headless))
+                                this->universe->get_graphics_api_backend()))
                     {
                         std::cerr << "ERROR: loading PNG texture failed!\n";
                     }
@@ -168,7 +173,7 @@ namespace yli::ontology
                         this->is_texture_loaded = true;
                     }
                 }
-                else if (this->texture_file_format == "csv" || this->texture_file_format == "CSV")
+                else if (should_load_texture && (this->texture_file_format == "csv" || this->texture_file_format == "CSV"))
                 {
                     if (!yli::load::load_csv_texture(
                                 this->texture_filename,
@@ -195,7 +200,7 @@ namespace yli::ontology
                     std::cerr << "texture file format: " << this->texture_file_format << "\n";
                 }
 
-                if (!is_headless && this->is_texture_loaded)
+                if (this->is_texture_loaded && this->universe->get_is_opengl_in_use())
                 {
                     // Get a handle for our "texture_sampler" uniform.
                     this->opengl_texture_id = glGetUniformLocation(this->parent->get_program_id(), "texture_sampler");

@@ -31,6 +31,7 @@
 #include "code/ylikuutio/render/render_master_struct.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "code/ylikuutio/render/graphics_api_backend.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/time/time.hpp"
 
@@ -308,8 +309,8 @@ namespace yli::ontology
                 parent_of_callback_engine_entities(this, &this->registry, "callback_engine_entities"),
                 framebuffer_module(universe_struct.framebuffer_module_struct),
                 application_name  { universe_struct.application_name },
-                is_headless       { yli::sdl::init_sdl(universe_struct.is_headless) },
-                is_silent         { this->is_headless || universe_struct.is_silent },
+                graphics_api_backend { yli::sdl::init_sdl(universe_struct.graphics_api_backend) },
+                is_silent         { !(this->get_is_opengl_in_use() || this->get_is_vulkan_in_use()) || universe_struct.is_silent },
                 is_physical       { universe_struct.is_physical },
                 is_fullscreen     { universe_struct.is_fullscreen },
                 window_width      { universe_struct.window_width },
@@ -357,7 +358,7 @@ namespace yli::ontology
                     this->audio_master = std::make_unique<yli::audio::AudioMaster>(this);
                 }
 
-                if (this->is_headless)
+                if (this->graphics_api_backend == yli::render::GraphicsApiBackend::HEADLESS)
                 {
                     this->is_exit_requested = true;
                 }
@@ -411,7 +412,12 @@ namespace yli::ontology
 
             yli::input::InputMethod get_input_method() const;
 
+            yli::render::GraphicsApiBackend get_graphics_api_backend() const;
+            bool get_is_opengl_in_use() const;
+            bool get_is_vulkan_in_use() const;
+            bool get_is_software_rendering_in_use() const;
             bool get_is_headless() const;
+            bool get_is_silent() const;
             bool get_is_physical() const;
 
             std::string eval_string(const std::string& my_string) const;
@@ -646,7 +652,7 @@ namespace yli::ontology
 
             const std::string application_name;
 
-            const bool is_headless;
+            const yli::render::GraphicsApiBackend graphics_api_backend;
             const bool is_silent;
             const bool is_physical;
             bool is_fullscreen;

@@ -25,6 +25,11 @@
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
+namespace yli::render
+{
+    enum class GraphicsApiBackend;
+}
+
 namespace yli::load
 {
     // Load a PNG file.
@@ -36,7 +41,7 @@ namespace yli::load
             uint32_t& image_size,
             uint32_t& n_color_channels,
             GLuint& textureID,
-            const bool is_headless);
+            const yli::render::GraphicsApiBackend graphics_api_backend);
 }
 
 #endif

@@ -77,8 +77,7 @@ namespace yli::ontology
                 model_filename     { model_struct.model_filename },
                 model_file_format  { model_struct.model_file_format },
                 triangulation_type { model_struct.triangulation_type },
-                light_position     { model_struct.light_position },
-                opengl_in_use      { model_struct.opengl_in_use }
+                light_position     { model_struct.light_position }
             {
                 // constructor.
 
@@ -164,8 +163,6 @@ namespace yli::ontology
             std::vector<const ofbx::Texture*> ofbx_normal_texture_vector;  // currently not in use.
             std::vector<const ofbx::Texture*> ofbx_count_texture_vector;   // currently not in use.
             std::size_t ofbx_mesh_count { 0 };                             // the value of `ofbx_mesh_count` comes from OpenFBX.
-
-            bool opengl_in_use;
     };
 }
 

@@ -55,6 +55,7 @@
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "code/ylikuutio/render/graphics_api_backend.hpp"
 #include "code/ylikuutio/render/render_master.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 #include "code/ylikuutio/render/render_struct.hpp"
@@ -308,7 +309,7 @@ namespace yli::ontology
                 }
 
                 // Clear the screen.
-                if (!this->is_headless)
+                if (this->graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL)
                 {
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 }
@@ -599,14 +600,20 @@ namespace yli::ontology
 
     void Universe::render(const yli::render::RenderStruct& render_struct)
     {
-        if (this->is_headless || !this->should_be_rendered || this->render_master == nullptr)
+        // Used `RenderMaster` rendering implementation depends of the graphics API.
+        // Software rendering renders to a CPU memory region or to file.
+        // TODO: implement Vulkan rendering!
+        // TODO: implement software rendering!
+        if ((this->get_is_opengl_in_use() ||
+                this->get_is_vulkan_in_use() ||
+                this->get_is_software_rendering_in_use()) ||
+                this->should_be_rendered &&
+                this->render_master != nullptr)
         {
-            return;
+            this->prerender();
+            this->render_master->render(render_struct);
+            this->postrender();
         }
-
-        this->prerender();
-        this->render_master->render(render_struct);
-        this->postrender();
     }
 
     void Universe::render()
@@ -675,9 +682,34 @@ namespace yli::ontology
         return this->input_master->get_input_method();
     }
 
+    yli::render::GraphicsApiBackend Universe::get_graphics_api_backend() const
+    {
+        return this->graphics_api_backend;
+    }
+
+    bool Universe::get_is_opengl_in_use() const
+    {
+        return this->graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL;
+    }
+
+    bool Universe::get_is_vulkan_in_use() const
+    {
+        return this->graphics_api_backend == yli::render::GraphicsApiBackend::VULKAN;
+    }
+
+    bool Universe::get_is_software_rendering_in_use() const
+    {
+        return this->graphics_api_backend == yli::render::GraphicsApiBackend::SOFTWARE;
+    }
+
     bool Universe::get_is_headless() const
     {
-        return this->is_headless;
+        return this->graphics_api_backend == yli::render::GraphicsApiBackend::HEADLESS;
+    }
+
+    bool Universe::get_is_silent() const
+    {
+        return this->is_silent;
     }
 
     bool Universe::get_is_physical() const
@@ -734,7 +766,8 @@ namespace yli::ontology
 
     void Universe::create_window()
     {
-        if (!this->is_headless)
+        // Create the window only when OpenGL or Vulkan is in use.
+        if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use())
         {
             // Create a window.
             this->window = yli::sdl::create_window(
@@ -756,7 +789,8 @@ namespace yli::ontology
 
     void Universe::setup_context()
     {
-        if (!this->is_headless)
+        // Setup graphics context only when OpenGL or Vulkan is in use.
+        if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use())
         {
             this->render_master->setup_context(this->window);
         }
@@ -764,7 +798,8 @@ namespace yli::ontology
 
     void Universe::create_window_and_setup_context()
     {
-        if (!this->is_headless)
+        // Create window and setup graphics context only when OpenGL or Vulkan is in use.
+        if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use())
         {
             this->create_window();
             this->setup_context();

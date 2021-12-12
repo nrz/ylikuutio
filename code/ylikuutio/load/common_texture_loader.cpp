@@ -20,6 +20,7 @@
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/opengl_texture.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -38,7 +39,7 @@ namespace yli::load
             uint32_t& image_size,
             uint32_t& n_color_channels,
             GLuint& textureID,
-            const bool is_headless)
+            const yli::render::GraphicsApiBackend graphics_api_backend)
     {
         const std::shared_ptr<std::vector<uint8_t>> image_data = load_image_file(
                 filename,
@@ -54,13 +55,22 @@ namespace yli::load
             return false;
         }
 
-        if (is_headless)
-        {
-            return true;
-        }
-        else
+        if (graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL)
         {
             return yli::opengl::prepare_opengl_texture(image_data, image_width, image_height, textureID);
         }
+        else if (graphics_api_backend == yli::render::GraphicsApiBackend::VULKAN)
+        {
+            // TODO: implement.
+            return false;
+        }
+        else if (graphics_api_backend == yli::render::GraphicsApiBackend::SOFTWARE)
+        {
+            // TODO: implement.
+            return false;
+        }
+
+        // Headless.
+        return true;
     }
 }

@@ -32,6 +32,7 @@
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/core/entrypoint.hpp"
+#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // `yli::ontology` files included in the canonical order.
 #include "code/ylikuutio/ontology/universe.hpp"
@@ -80,7 +81,7 @@ namespace gpgpu_test
 
             yli::ontology::UniverseStruct get_universe_struct() override
             {
-                yli::ontology::UniverseStruct universe_struct;
+                yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::OPENGL);
                 std::stringstream window_title_stringstream;
                 window_title_stringstream << "GPGPU test " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
                 universe_struct.application_name = "GPGPU test";

@@ -63,7 +63,7 @@ namespace yli::audio
     {
         // destructor.
 
-        if (this->universe != nullptr && !this->universe->get_is_headless())
+        if (this->universe != nullptr && !this->universe->get_is_silent())
         {
             SDL_CloseAudioDevice(this->device);
         }
@@ -78,7 +78,7 @@ namespace yli::audio
         }
 
         // There's no sound with that filename loaded yet, so load it now.
-        if (this->universe != nullptr && !this->universe->get_is_headless())
+        if (this->universe != nullptr && !this->universe->get_is_silent())
         {
             SDL_AudioSpec wav_spec = SDL_AudioSpec();
             uint32_t wav_length;
@@ -121,7 +121,7 @@ namespace yli::audio
 
     void AudioMaster::unload(const std::string& audio_file)
     {
-        if (this->universe != nullptr && !this->universe->get_is_headless())
+        if (this->universe != nullptr && !this->universe->get_is_silent())
         {
             if (this->wav_buffer_pointer_map.count(audio_file) == 1)
             {
@@ -178,7 +178,7 @@ namespace yli::audio
 
     void AudioMaster::update()
     {
-        if (this->universe != nullptr && !this->universe->get_is_headless())
+        if (this->universe != nullptr && !this->universe->get_is_silent())
         {
             // This function checks if a playlist is running.
             // if yes, then if the the previous sound has ended,
@@ -250,7 +250,7 @@ namespace yli::audio
 
     void AudioMaster::play_audio(void* userdata, uint8_t* stream, int length)
     {
-        if (this->universe != nullptr && !this->universe->get_is_headless())
+        if (this->universe != nullptr && !this->universe->get_is_silent())
         {
             // TODO: mix audio with `SDL_MixAudioFormat`!
             // https://wiki.libsdl.org/SDL_MixAudioFormat

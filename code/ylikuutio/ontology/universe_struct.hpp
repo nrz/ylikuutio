@@ -21,6 +21,7 @@
 #include "entity_struct.hpp"
 #include "framebuffer_module_struct.hpp"
 #include "code/ylikuutio/input/input.hpp"
+#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -31,6 +32,12 @@ namespace yli::ontology
 {
     struct UniverseStruct: public yli::ontology::EntityStruct
     {
+        UniverseStruct(const yli::render::GraphicsApiBackend graphics_api_backend)
+            : graphics_api_backend { graphics_api_backend }
+        {
+            // constructor.
+        }
+
         std::string application_name;
         std::string window_title;
         uint32_t window_width   { 1600 };
@@ -44,7 +51,7 @@ namespace yli::ontology
         float mouse_speed       { 0.005f };
         float znear             { 1.0f };    // Visibility: from 1 to 5000 units.
         float zfar              { 5000.0f }; // Visibility: from 1 to 5000 units.
-        bool is_headless        { false };
+        yli::render::GraphicsApiBackend graphics_api_backend;
         bool is_silent          { false };
         bool is_physical        { true };    // Physics simulation in use.
         bool is_fullscreen      { false };   // Windowed mode in use.

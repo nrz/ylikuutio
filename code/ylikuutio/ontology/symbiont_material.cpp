@@ -132,19 +132,34 @@ namespace yli::ontology
             return;
         }
 
-        const bool is_headless = (this->universe == nullptr ? true : this->universe->get_is_headless());
+        // If software rendering is in use, the texture can not be loaded into GPU memory,
+        // but it can still be loaded into CPU memory to be used by the software rendering.
+        const bool should_load_texture = (this->universe != nullptr &&
+                (this->universe->get_is_opengl_in_use() ||
+                 this->universe->get_is_vulkan_in_use() ||
+                 this->universe->get_is_software_rendering_in_use()));
 
         uint32_t n_color_channels = 0;
 
-        if (!yli::load::load_fbx_texture(texture, this->image_width, this->image_height, this->image_size, n_color_channels, this->texture, is_headless))
+        if (should_load_texture)
         {
-            std::cerr << "ERROR: loading FBX texture failed!\n";
-        }
+            if (!yli::load::load_fbx_texture(
+                        texture,
+                        this->image_width,
+                        this->image_height,
+                        this->image_size,
+                        n_color_channels,
+                        this->texture,
+                        this->universe->get_graphics_api_backend()))
+            {
+                std::cerr << "ERROR: loading FBX texture failed!\n";
+            }
 
-        if (!is_headless)
-        {
-            // Get a handle for our "texture_sampler" uniform.
-            this->opengl_texture_id = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
+            if (this->universe->get_is_opengl_in_use())
+            {
+                // Get a handle for our "texture_sampler" uniform.
+                this->opengl_texture_id = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
+            }
         }
     }
 
