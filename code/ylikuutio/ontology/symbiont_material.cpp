@@ -80,11 +80,14 @@ namespace yli::ontology
 
         this->prerender();
 
-        // Bind our texture in Texture Unit 0.
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, this->texture);
-        // Set our "texture_sampler" sampler to user Texture Unit 0.
-        yli::opengl::uniform_1i(this->opengl_texture_id, 0);
+        if (this->universe->get_is_opengl_in_use())
+        {
+            // Bind our texture in Texture Unit 0.
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, this->texture);
+            // Set our "texture_sampler" sampler to user Texture Unit 0.
+            yli::opengl::uniform_1i(this->opengl_texture_id, 0);
+        }
 
         render_master->render_symbiont_species(this->parent_of_symbiont_species.child_pointer_vector);
 
