@@ -113,8 +113,8 @@ namespace yli::ontology
                 }
                 else if (should_load_texture)
                 {
-                    std::cerr << "ERROR: invalid font texture file format: " << this->font_texture_file_format << "\n";
-                    std::cerr << "supported font texture file formats: png, PNG.\n";
+                    std::cerr << "ERROR: `Font2D::Font2D`: invalid font texture file format: " << this->font_texture_file_format << "\n";
+                    std::cerr << "Supported font texture file formats: \"png\", \"PNG\".\n";
                 }
 
                 if (should_load_texture && is_texture_loading_successful && this->universe->get_is_opengl_in_use())
