@@ -60,9 +60,6 @@ namespace yli::ontology
             glDeleteBuffers(1, &this->vertexbuffer);
             glDeleteBuffers(1, &this->uvbuffer);
 
-            // Delete texture.
-            glDeleteTextures(1, &this->texture);
-
             // Delete shader.
             glDeleteProgram(this->program_id);
         }
@@ -101,7 +98,7 @@ namespace yli::ontology
 
     const std::string& Font2D::get_font_texture_file_format() const
     {
-        return this->font_texture_file_format;
+        return this->texture.get_texture_file_format();
     }
 
     uint32_t Font2D::get_program_id() const
@@ -118,7 +115,7 @@ namespace yli::ontology
 
             // Bind texture.
             glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, this->texture);
+            glBindTexture(GL_TEXTURE_2D, this->texture.get_texture());
 
             // Set our "texture_sampler" sampler to user Material Unit 0
             yli::opengl::uniform_1i(this->text_2d_uniform_id, 0);

@@ -108,16 +108,11 @@ namespace yli::ontology
         // destructor.
 
         std::cout << "`Material` with childID " << std::dec << this->childID << " will be destroyed.\n";
-
-        if (this->is_texture_loaded)
-        {
-            glDeleteTextures(1, &this->texture);
-        }
     }
 
     void Material::render()
     {
-        if (!this->is_texture_loaded || !this->should_be_rendered || this->universe == nullptr)
+        if (!this->texture.get_is_texture_loaded() || !this->should_be_rendered || this->universe == nullptr)
         {
             return;
         }
@@ -133,7 +128,7 @@ namespace yli::ontology
 
         // Bind our texture in Texture Unit 0.
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, this->texture);
+        glBindTexture(GL_TEXTURE_2D, this->texture.get_texture());
 
         // Set our "texture_sampler" sampler to use Texture Unit 0.
         yli::opengl::uniform_1i(this->opengl_texture_id, 0);
@@ -181,26 +176,26 @@ namespace yli::ontology
 
     const std::string& Material::get_texture_file_format() const
     {
-        return this->texture_file_format;
+        return this->texture.get_texture_file_format();
     }
 
     const std::string& Material::get_texture_filename() const
     {
-        return this->texture_filename;
+        return this->texture.get_texture_filename();
     }
 
     uint32_t Material::get_image_width() const
     {
-        return this->image_width;
+        return this->texture.get_image_width();
     }
 
     uint32_t Material::get_image_height() const
     {
-        return this->image_height;
+        return this->texture.get_image_height();
     }
 
     uint32_t Material::get_image_size() const
     {
-        return this->image_size;
+        return this->texture.get_image_size();
     }
 }
