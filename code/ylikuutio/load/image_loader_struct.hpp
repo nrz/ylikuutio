@@ -38,7 +38,7 @@ namespace yli::load
             // constructor.
         }
 
-        ImageLoaderStruct(const std::vector<std::pair<yli::load::ImageLoadingFlags, bool>>& values)
+        explicit ImageLoaderStruct(const std::vector<std::pair<yli::load::ImageLoadingFlags, bool>>& values)
         {
             // constructor.
 
