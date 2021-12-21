@@ -22,6 +22,7 @@
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
 #include "generic_master_module.hpp"
+#include "texture_module.hpp"
 #include "universe.hpp"
 #include "font_struct.hpp"
 #include "text_struct.hpp"
@@ -37,6 +38,7 @@
 #include <iostream>  // std::cout, std::cin, std::cerr
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
+#include <utility>   // std::pair
 
 namespace yli::ontology
 {
@@ -52,18 +54,22 @@ namespace yli::ontology
                 : Entity(universe, font_struct),
                 child_of_universe(parent_module, this),
                 parent_of_text_2ds(this, &this->registry, "text_2ds"),
-                master_of_consoles(this, &this->registry, "consoles")
+                master_of_consoles(this, &this->registry, "consoles"),
+                texture(
+                        universe,
+                        &this->registry,
+                        font_struct.texture_filename,
+                        font_struct.font_texture_file_format,
+                        yli::load::ImageLoaderStruct({ std::pair(yli::load::ImageLoadingFlags::SHOULD_CONVERT_GRAYSCALE_TO_RGB, true) }),
+                        "texture")
         {
                 // constructor.
-                this->texture_filename = font_struct.texture_filename;
-                this->font_texture_file_format = font_struct.font_texture_file_format;
                 this->screen_width = font_struct.screen_width;
                 this->screen_height = font_struct.screen_height;
                 this->text_size = font_struct.text_size;
                 this->font_size = font_struct.font_size;
 
                 // Initialize class members with some dummy values.
-                this->texture                           = 0;
                 this->vertexbuffer                      = 0;
                 this->uvbuffer                          = 0;
                 this->program_id                        = 0;
@@ -72,74 +78,37 @@ namespace yli::ontology
                 this->text_2d_uniform_id                = 0;
                 this->screen_width_uniform_id           = 0;
                 this->screen_height_uniform_id          = 0;
-                this->image_width                       = 0;
-                this->image_height                      = 0;
-                this->image_size                        = 0;
-                this->n_color_channels                  = 0;
 
-                // If software rendering is in use, the texture can not be loaded into GPU memory,
-                // but it can still be loaded into CPU memory to be used by the software rendering.
-                const bool should_load_texture = (this->universe != nullptr &&
-                        (this->universe->get_is_opengl_in_use() ||
-                         this->universe->get_is_vulkan_in_use() ||
-                         this->universe->get_is_software_rendering_in_use()));
-                bool is_texture_loading_successful = false;
-
-                // Initialize texture.
-                if (should_load_texture && (this->font_texture_file_format == "png" || this->font_texture_file_format == "PNG"))
+                if (this->texture.get_is_texture_loaded())
                 {
-                    yli::load::ImageLoaderStruct image_loader_struct;
-                    image_loader_struct.should_convert_grayscale_to_rgb = true;
-
-                    is_texture_loading_successful = yli::load::load_common_texture(
-                            this->texture_filename,
-                            image_loader_struct,
-                            this->image_width,
-                            this->image_height,
-                            this->image_size,
-                            this->n_color_channels,
-                            this->texture,
-                            this->universe->get_graphics_api_backend());
-
-                    if (!is_texture_loading_successful)
+                    if (this->universe->get_is_opengl_in_use())
                     {
-                        std::cerr << "ERROR: loading PNG texture failed!\n";
+                        // Initialize VBO.
+                        glGenBuffers(1, &this->vertexbuffer);
+                        glGenBuffers(1, &this->uvbuffer);
+
+                        // Initialize `Shader`.
+                        this->program_id = yli::load::load_shaders("text_vertex_shader.vert", "text_vertex_shader.frag");
+
+                        // Get a handle for our buffers.
+                        this->vertex_position_in_screenspace_id = glGetAttribLocation(this->program_id, "vertex_position_screenspace");
+                        this->vertex_uv_id = glGetAttribLocation(this->program_id, "vertexUV");
+
+                        // Initialize uniforms' IDs.
+                        this->text_2d_uniform_id = glGetUniformLocation(this->program_id, "texture_sampler");
+
+                        // Initialize uniform window width.
+                        this->screen_width_uniform_id = glGetUniformLocation(this->program_id, "screen_width");
+                        yli::opengl::uniform_1i(this->screen_width_uniform_id, this->screen_width);
+
+                        // Initialize uniform window height.
+                        this->screen_height_uniform_id = glGetUniformLocation(this->program_id, "screen_height");
+                        yli::opengl::uniform_1i(this->screen_height_uniform_id, this->screen_height);
                     }
-                    else if (this->image_size != this->image_width * this->image_height)
+                    else if (this->universe->get_is_vulkan_in_use())
                     {
-                        std::cerr << "ERROR: loading PNG texture failed!\n";
-                        is_texture_loading_successful = false;
+                        std::cerr << "ERROR: `Font2D::Font2D`: Vulkan is not supported yet!\n";
                     }
-                }
-                else if (should_load_texture)
-                {
-                    std::cerr << "ERROR: invalid font texture file format: " << this->font_texture_file_format << "\n";
-                    std::cerr << "supported font texture file formats: png, PNG.\n";
-                }
-
-                if (should_load_texture && is_texture_loading_successful && this->universe->get_is_opengl_in_use())
-                {
-                    // Initialize VBO.
-                    glGenBuffers(1, &this->vertexbuffer);
-                    glGenBuffers(1, &this->uvbuffer);
-
-                    // Initialize `Shader`.
-                    this->program_id = yli::load::load_shaders("text_vertex_shader.vert", "text_vertex_shader.frag");
-
-                    // Get a handle for our buffers.
-                    this->vertex_position_in_screenspace_id = glGetAttribLocation(this->program_id, "vertex_position_screenspace");
-                    this->vertex_uv_id = glGetAttribLocation(this->program_id, "vertexUV");
-
-                    // Initialize uniforms' IDs.
-                    this->text_2d_uniform_id = glGetUniformLocation(this->program_id, "texture_sampler");
-
-                    // Initialize uniform window width.
-                    this->screen_width_uniform_id = glGetUniformLocation(this->program_id, "screen_width");
-                    yli::opengl::uniform_1i(this->screen_width_uniform_id, this->screen_width);
-
-                    // Initialize uniform window height.
-                    this->screen_height_uniform_id = glGetUniformLocation(this->program_id, "screen_height");
-                    yli::opengl::uniform_1i(this->screen_height_uniform_id, this->screen_height);
                 }
 
                 // `yli::ontology::Entity` member variables begin here.
@@ -186,18 +155,13 @@ namespace yli::ontology
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::GenericParentModule parent_of_text_2ds;
             yli::ontology::GenericMasterModule master_of_consoles;
+            yli::ontology::TextureModule texture;
 
             yli::ontology::Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
-
-            std::string texture_filename;
-            std::string font_texture_file_format;
-
-            GLuint texture;                          // Texture containing the glyphs, returned by `load_common_texture`,
-                                                     // (used for `glGenTextures` etc.).
 
             GLuint vertexbuffer;                     // Buffer containing the vertices.
             GLuint uvbuffer;                         // Buffer containing the UVs.
@@ -210,12 +174,8 @@ namespace yli::ontology
 
             uint32_t screen_width;
             uint32_t screen_height;
-            uint32_t image_width;
-            uint32_t image_height;
-            uint32_t image_size;
             uint32_t text_size;
             uint32_t font_size;
-            uint32_t n_color_channels;
     };
 }
 

@@ -172,7 +172,7 @@ namespace yli::ontology
         }
         else
         {
-            std::cerr << "Invalid horizontal alignment: " << horizontal_alignment << "\n";
+            std::cerr << "ERROR: `Text2D::render`: invalid horizontal alignment: " << horizontal_alignment << "\n";
             return;
         }
 
@@ -190,7 +190,7 @@ namespace yli::ontology
         }
         else
         {
-            std::cerr << "Invalid vertical alignment: " << this->vertical_alignment << "\n";
+            std::cerr << "ERROR: `Text2D::render`: invalid vertical alignment: " << this->vertical_alignment << "\n";
             return;
         }
 
@@ -280,7 +280,7 @@ namespace yli::ontology
             }
             else
             {
-                std::cerr << "invalid font_texture_file_format " << std::string(font_texture_file_format) << "\n";
+                std::cerr << "ERROR: `Text2D::render`: invalid `font_texture_file_format`: " << font_texture_file_format << "\n";
                 return;
             }
 

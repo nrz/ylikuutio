@@ -24,6 +24,7 @@
 #include "apprentice_module.hpp"
 #include "generic_master_module.hpp"
 #include "master_module.hpp"
+#include "texture_module.hpp"
 #include "universe.hpp"
 #include "shader.hpp"
 #include "material_struct.hpp"
@@ -65,49 +66,18 @@ namespace yli::ontology
                 parent_of_chunk_masters(this, &this->registry, "chunk_masters"),
                 apprentice_of_shader(static_cast<yli::ontology::GenericMasterModule*>(shader_master_module), this),
                 master_of_species(this, &this->registry, "species"),
-                texture_file_format  { material_struct.texture_file_format },
-                texture_filename     { material_struct.texture_filename }
+                texture(
+                        universe,
+                        &this->registry,
+                        material_struct.texture_filename,
+                        material_struct.texture_file_format,
+                        yli::load::ImageLoaderStruct(),
+                        "texture")
             {
                 // constructor.
 
-                // If software rendering is in use, the texture can not be loaded into GPU memory,
-                // but it can still be loaded into CPU memory to be used by the software rendering.
-                const bool should_load_texture = (this->universe != nullptr &&
-                        (this->universe->get_is_opengl_in_use() ||
-                         this->universe->get_is_vulkan_in_use() ||
-                         this->universe->get_is_software_rendering_in_use()));
-
-                if (should_load_texture && this->get_shader() != nullptr)
+                if (this->texture.get_is_texture_loaded() && this->get_shader() != nullptr)
                 {
-                    // Load the texture.
-                    if (this->texture_file_format == "png" ||
-                            this->texture_file_format == "PNG")
-                    {
-                        uint32_t n_color_channels = 0;
-
-                        if (yli::load::load_common_texture(
-                                    this->texture_filename,
-                                    yli::load::ImageLoaderStruct(),
-                                    this->image_width,
-                                    this->image_height,
-                                    this->image_size,
-                                    n_color_channels,
-                                    this->texture,
-                                    this->universe->get_graphics_api_backend()))
-                        {
-                            this->is_texture_loaded = true;
-                        }
-                        else
-                        {
-                            std::cerr << "ERROR: loading " << this->texture_file_format << " texture failed!\n";
-                        }
-                    }
-                    else
-                    {
-                        std::cerr << "no texture was loaded!\n";
-                        std::cerr << "texture file format: " << this->texture_file_format << "\n";
-                    }
-
                     // Get a handle for our "texture_sampler" uniform.
                     yli::ontology::Shader* const shader = this->get_shader();
                     this->opengl_texture_id = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
@@ -147,13 +117,9 @@ namespace yli::ontology
             yli::ontology::GenericParentModule parent_of_chunk_masters;
             yli::ontology::ApprenticeModule apprentice_of_shader;
             yli::ontology::GenericMasterModule master_of_species;
+            yli::ontology::TextureModule texture;
 
         protected:
-            uint32_t image_width  { 0 };
-            uint32_t image_height { 0 };
-            uint32_t image_size   { 0 };
-
-            GLuint texture           { 0 }; // Texture of this `Material`, returned by `load_common_texture` (used for `glGenTextures` etc.). Dummy value.
             GLuint opengl_texture_id { 0 }; // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`. Dummy value.
 
         public:
@@ -165,10 +131,6 @@ namespace yli::ontology
 
             // This method renders all `Species` using this `Material`.
             void render();
-
-            std::string texture_file_format;     // Type of the model file, eg. `"png"`.
-            std::string texture_filename;        // Filename of the model file.
-            bool is_texture_loaded { false };
     };
 }
 

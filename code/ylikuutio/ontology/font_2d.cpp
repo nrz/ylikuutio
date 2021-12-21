@@ -54,15 +54,15 @@ namespace yli::ontology
         // destructor.
         std::cout << "This `Font2D` will be destroyed.\n";
 
-        // Delete buffers.
-        glDeleteBuffers(1, &this->vertexbuffer);
-        glDeleteBuffers(1, &this->uvbuffer);
+        if (this->universe != nullptr && this->universe->get_is_opengl_in_use())
+        {
+            // Delete buffers.
+            glDeleteBuffers(1, &this->vertexbuffer);
+            glDeleteBuffers(1, &this->uvbuffer);
 
-        // Delete texture.
-        glDeleteTextures(1, &this->texture);
-
-        // Delete shader.
-        glDeleteProgram(this->program_id);
+            // Delete shader.
+            glDeleteProgram(this->program_id);
+        }
     }
 
     yli::ontology::Entity* Font2D::get_parent() const
@@ -98,7 +98,7 @@ namespace yli::ontology
 
     const std::string& Font2D::get_font_texture_file_format() const
     {
-        return this->font_texture_file_format;
+        return this->texture.get_texture_file_format();
     }
 
     uint32_t Font2D::get_program_id() const
@@ -108,24 +108,27 @@ namespace yli::ontology
 
     void Font2D::prepare_to_print() const
     {
-        // Bind shader.
-        glUseProgram(this->program_id);
+        if (this->universe != nullptr && this->universe->get_is_opengl_in_use())
+        {
+            // Bind shader.
+            glUseProgram(this->program_id);
 
-        // Bind texture.
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, this->texture);
+            // Bind texture.
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, this->texture.get_texture());
 
-        // Set our "texture_sampler" sampler to user Material Unit 0
-        yli::opengl::uniform_1i(this->text_2d_uniform_id, 0);
+            // Set our "texture_sampler" sampler to user Material Unit 0
+            yli::opengl::uniform_1i(this->text_2d_uniform_id, 0);
 
-        // Set screen width.
-        yli::opengl::uniform_1i(this->screen_width_uniform_id, this->screen_width);
+            // Set screen width.
+            yli::opengl::uniform_1i(this->screen_width_uniform_id, this->screen_width);
 
-        // Set screen height.
-        yli::opengl::uniform_1i(this->screen_height_uniform_id, this->screen_height);
+            // Set screen height.
+            yli::opengl::uniform_1i(this->screen_height_uniform_id, this->screen_height);
 
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        }
     }
 
     void Font2D::render()
@@ -219,7 +222,7 @@ namespace yli::ontology
         }
         else
         {
-            std::cerr << "Invalid horizontal alignment: " << horizontal_alignment << "\n";
+            std::cerr << "ERROR: `Font2D::print_text_2d`: invalid horizontal alignment: " << horizontal_alignment << "\n";
             return;
         }
 
@@ -237,7 +240,7 @@ namespace yli::ontology
         }
         else
         {
-            std::cerr << "Invalid vertical alignment: " << vertical_alignment << "\n";
+            std::cerr << "ERROR: `Font2D::print_text_2d`: invalid vertical alignment: " << vertical_alignment << "\n";
             return;
         }
 
@@ -314,7 +317,7 @@ namespace yli::ontology
             }
             else
             {
-                std::cerr << "invalid font_texture_file_format " << std::string(font_texture_file_format) << "\n";
+                std::cerr << "ERROR: `Font2D::print_text_2d`: invalid font_texture_file_format " << font_texture_file_format << "\n";
                 return;
             }
 
@@ -337,28 +340,31 @@ namespace yli::ontology
             UVs.emplace_back(uv_down_left);
         }
 
-        glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
-        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
-        glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
-        glBufferData(GL_ARRAY_BUFFER, UVs.size() * sizeof(glm::vec2), &UVs[0], GL_STATIC_DRAW);
+        if (this->universe != nullptr && this->universe->get_is_opengl_in_use())
+        {
+            glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
+            glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
+            glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
+            glBufferData(GL_ARRAY_BUFFER, UVs.size() * sizeof(glm::vec2), &UVs[0], GL_STATIC_DRAW);
 
-        // 1st attribute buffer: vertices.
-        yli::opengl::enable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
-        glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
-        glVertexAttribPointer(this->vertex_position_in_screenspace_id, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+            // 1st attribute buffer: vertices.
+            yli::opengl::enable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
+            glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
+            glVertexAttribPointer(this->vertex_position_in_screenspace_id, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
-        // 2nd attribute buffer: UVs.
-        yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
-        glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
-        glVertexAttribPointer(this->vertex_uv_id, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+            // 2nd attribute buffer: UVs.
+            yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
+            glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
+            glVertexAttribPointer(this->vertex_uv_id, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
-        // Draw call.
-        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+            // Draw call.
+            glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
-        yli::opengl::disable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
-        yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
+            yli::opengl::disable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
+            yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
 
-        glDisable(GL_BLEND);
+            glDisable(GL_BLEND);
+        }
     }
 
     void Font2D::print_text_2d(const yli::ontology::TextStruct& text_struct) const

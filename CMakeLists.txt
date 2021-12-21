@@ -821,6 +821,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/symbiont_species.hpp
     code/ylikuutio/ontology/symbiosis.cpp
     code/ylikuutio/ontology/symbiosis.hpp
+    code/ylikuutio/ontology/texture_module.cpp
+    code/ylikuutio/ontology/texture_module.hpp
     code/ylikuutio/ontology/terrain_generation_callbacks.cpp
     code/ylikuutio/ontology/terrain_generation_callbacks.hpp
     code/ylikuutio/ontology/text_2d.hpp
