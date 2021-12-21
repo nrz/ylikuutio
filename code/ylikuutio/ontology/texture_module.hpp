@@ -50,10 +50,11 @@ namespace yli::ontology
                         (universe->get_is_opengl_in_use() ||
                          universe->get_is_vulkan_in_use() ||
                          universe->get_is_software_rendering_in_use()));
-                bool is_texture_loading_successful = false;
 
                 if (should_load_texture)
                 {
+                    bool is_texture_loading_successful = false;
+
                     if (texture_file_format == "png" || texture_file_format == "PNG")
                     {
                         is_texture_loading_successful = yli::load::load_common_texture(
