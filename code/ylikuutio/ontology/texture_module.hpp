@@ -35,8 +35,8 @@ namespace yli::ontology
             TextureModule(
                     yli::ontology::Universe* const universe,
                     yli::ontology::Registry* const registry,
-                    std::string texture_filename,
-                    std::string texture_file_format,
+                    const std::string& texture_filename,
+                    const std::string& texture_file_format,
                     const yli::load::ImageLoaderStruct& image_loader_struct,
                     const std::string& name)
                 : texture_filename { texture_filename },
