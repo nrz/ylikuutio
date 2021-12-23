@@ -70,9 +70,10 @@ namespace yli::data
         // `yli::ontology` datatypes, 'movable' path.
         MOVABLE_POINTER,
         CONST_MOVABLE_POINTER,
-        // `yli::ontology` datatypes, 'simple' path.
+        // `yli::ontology` datatypes, 'ecosystem' path.
         ECOSYSTEM_POINTER,
         CONST_ECOSYSTEM_POINTER,
+        // `yli::ontology` datatypes, 'simple' path.
         SCENE_POINTER,
         CONST_SCENE_POINTER,
         SHADER_POINTER,
