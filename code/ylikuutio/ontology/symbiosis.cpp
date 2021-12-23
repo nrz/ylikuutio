@@ -394,7 +394,7 @@ namespace yli::ontology
     uint32_t Symbiosis::get_texture(const std::size_t biontID) const
     {
         yli::ontology::SymbiontMaterial* const symbiont_material = this->biontID_symbiont_material_vector.at(biontID);
-        return symbiont_material->get_texture();
+        return symbiont_material->texture.get_texture();
     }
 
     GLint Symbiosis::get_openGL_textureID(const std::size_t biontID) const

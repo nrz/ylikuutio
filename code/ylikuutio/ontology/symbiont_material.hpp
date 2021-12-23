@@ -23,15 +23,13 @@
 #include "generic_parent_module.hpp"
 #include "apprentice_module.hpp"
 #include "master_module.hpp"
+#include "texture_module.hpp"
 #include "shader.hpp"
 #include "material_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include <ofbx.h>
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli::ontology
@@ -48,11 +46,25 @@ namespace yli::ontology
                     yli::ontology::GenericParentModule* const symbiosis_parent_module) // Parent is a `Symbiosis`.
                 : Entity(universe, material_struct),
                 child_of_symbiosis(symbiosis_parent_module, this),
-                parent_of_symbiont_species(this, &this->registry, "symbiont_species")
+                parent_of_symbiont_species(this, &this->registry, "symbiont_species"),
+                texture(
+                        universe,
+                        &this->registry,
+                        material_struct.ofbx_texture,
+                        yli::load::ImageLoaderStruct(),
+                        "texture")
             {
                 // constructor.
-                this->ofbx_texture = material_struct.ofbx_texture;
-                this->load_texture();
+
+                if (this->texture.get_is_texture_loaded())
+                {
+                    yli::ontology::Shader* const shader = this->get_shader();
+
+                    if (shader != nullptr)
+                    {
+                        this->opengl_texture_id = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
+                    }
+                }
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::SymbiontMaterial*";
@@ -66,31 +78,23 @@ namespace yli::ontology
 
             yli::ontology::Scene* get_scene() const override;
             yli::ontology::Entity* get_parent() const override;
+            yli::ontology::Shader* get_shader() const;
 
-            uint32_t get_texture() const;
             GLint get_openGL_textureID() const;
 
             yli::ontology::ChildModule child_of_symbiosis;
             yli::ontology::GenericParentModule parent_of_symbiont_species;
+            yli::ontology::TextureModule texture;
 
         protected:
-            uint32_t image_width  { 0 };
-            uint32_t image_height { 0 };
-            uint32_t image_size   { 0 };
-
-            GLuint texture           { 0 }; // Texture of this `SymbiontMaterial`, returned by `load_common_texture` (used for `glGenTextures` etc.). Dummy value.
             GLuint opengl_texture_id { 0 }; // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`. Dummy value.
 
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            void load_texture();
-
             // this method renders all `SymbiontSpecies` using this `SymbiontMaterial`.
             void render();
-
-            const ofbx::Texture* ofbx_texture;
     };
 }
 
