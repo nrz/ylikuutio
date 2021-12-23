@@ -146,7 +146,7 @@ namespace yli::ontology
             uint32_t image_height     { 0 };
             uint32_t image_size       { 0 };
             uint32_t n_color_channels { 0 };
-            GLuint texture;
+            GLuint texture            { 0 };
             bool is_texture_loaded { false };
     };
 }
