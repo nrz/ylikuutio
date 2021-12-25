@@ -33,8 +33,8 @@
 #define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
-#include "entity.hpp"
 #include "universe.hpp"
+#include "entity.hpp"
 #include "scene.hpp"
 #include "font_2d.hpp"
 #include "text_2d.hpp"
