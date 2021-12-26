@@ -75,11 +75,7 @@ namespace yli::ontology
                         std::cerr << "ERROR: `TextureModule::TextureModule`: unsupported texture file format: " << texture_file_format << "\n";
                     }
 
-                    if (is_texture_loading_successful)
-                    {
-                        this->is_texture_loaded = true;
-                    }
-                    else
+                    if (!is_texture_loading_successful)
                     {
                         std::cerr << "ERROR: `TextureModule::TextureModule`: loading " << texture_file_format << " texture failed!\n";
                     }
@@ -112,11 +108,7 @@ namespace yli::ontology
                                 this->texture,
                                 universe->get_graphics_api_backend());
 
-                    if (is_texture_loading_successful)
-                    {
-                        this->is_texture_loaded = true;
-                    }
-                    else
+                    if (!is_texture_loading_successful)
                     {
                         std::cerr << "ERROR: `TextureModule::TextureModule`: loading " << texture_file_format << " texture failed!\n";
                     }
@@ -146,8 +138,7 @@ namespace yli::ontology
             uint32_t image_height             { 0 };
             uint32_t image_size               { 0 };
             uint32_t n_color_channels         { 0 };
-            GLuint texture                    { 0 };
-            bool is_texture_loaded            { false };
+            GLuint texture                    { GL_INVALID_VALUE };
     };
 }
 
