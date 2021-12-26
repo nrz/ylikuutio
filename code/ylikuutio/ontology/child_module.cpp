@@ -107,4 +107,10 @@ namespace yli::ontology
         this->parent_module = new_parent_module;
         this->parent_module->bind_child(this->entity);
     }
+
+    void ChildModule::unbind_and_bind_to_new_parent(yli::ontology::GenericParentModule* const new_parent_module)
+    {
+        this->unbind_child();
+        this->set_parent_module_and_bind_to_new_parent(new_parent_module);
+    }
 }

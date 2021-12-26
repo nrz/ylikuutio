@@ -81,11 +81,7 @@ namespace yli::ontology
             return;
         }
 
-        // unbind from the old parent `Scene`.
-        this->child_of_scene.unbind_child();
-
-        // get `childID` from `Scene` and set pointer to this `Symbiosis`.
-        this->child_of_scene.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_symbioses);
+        this->child_of_scene.unbind_and_bind_to_new_parent(&new_parent->parent_of_symbioses);
     }
 
     void Symbiosis::bind_to_new_parent(yli::ontology::Entity* const new_parent)

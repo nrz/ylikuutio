@@ -65,11 +65,7 @@ namespace yli::ontology
             return;
         }
 
-        // Unbind from the old parent `Scene`.
-        this->child_of_scene.unbind_child();
-
-        // Get `childID` from `Scene` and set pointer to this `Shader`.
-        this->child_of_scene.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_shaders);
+        this->child_of_scene.unbind_and_bind_to_new_parent(&new_parent->parent_of_shaders);
     }
 
     void Shader::bind_to_new_parent(yli::ontology::Entity* const new_parent)

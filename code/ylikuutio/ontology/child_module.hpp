@@ -44,6 +44,7 @@ namespace yli::ontology
             yli::ontology::Entity* get_child() const;
             void unbind_child() const;
             void set_parent_module_and_bind_to_new_parent(yli::ontology::GenericParentModule* const new_parent_module);
+            void unbind_and_bind_to_new_parent(yli::ontology::GenericParentModule* const new_parent_module);
 
         private:
             void bind_to_parent_module();

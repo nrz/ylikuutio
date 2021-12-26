@@ -66,11 +66,7 @@ namespace yli::ontology
             return;
         }
 
-        // Unbind from the old parent `Font2D`.
-        this->child_of_font_2d.unbind_child();
-
-        // Get `childID` from `Font2D` and set pointer to this `Text2D`.
-        this->child_of_font_2d.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_text_2ds);
+        this->child_of_font_2d.unbind_and_bind_to_new_parent(&new_parent->parent_of_text_2ds);
     }
 
     void Text2D::bind_to_new_parent(yli::ontology::Entity* const new_parent)
