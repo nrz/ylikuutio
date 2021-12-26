@@ -64,7 +64,7 @@ namespace yli::ontology
         }
 
         // Unbind from the old parent `Scene`.
-        scene->parent_of_materials.unbind_child(this->childID);
+        this->child_of_scene.unbind_child();
 
         // Get `childID` from `Scene` and set pointer to this `Material`.
         this->child_of_scene.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_materials);
