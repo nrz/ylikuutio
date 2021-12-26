@@ -429,6 +429,7 @@ namespace ajokki
 
         // Create the material, store it in `helsinki_east_downtown_grass_material`.
         yli::ontology::MaterialStruct helsinki_east_downtown_grass_material_struct;
+        helsinki_east_downtown_grass_material_struct.parent = helsinki_east_downtown_scene;
         helsinki_east_downtown_grass_material_struct.shader = helsinki_east_downtown_shader;
         helsinki_east_downtown_grass_material_struct.texture_file_format = "png";
         helsinki_east_downtown_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
@@ -448,6 +449,7 @@ namespace ajokki
 
         // Create the material, store it in `pink_geometric_tiles_material`.
         yli::ontology::MaterialStruct pink_geometric_tiles_material_struct;
+        pink_geometric_tiles_material_struct.parent = helsinki_east_downtown_scene;
         pink_geometric_tiles_material_struct.shader = helsinki_east_downtown_shader;
         pink_geometric_tiles_material_struct.texture_file_format = "png";
         pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.png";
@@ -467,6 +469,7 @@ namespace ajokki
 
         // Create the material, store it in `orange_fur_material`.
         yli::ontology::MaterialStruct orange_fur_material_struct;
+        orange_fur_material_struct.parent = helsinki_east_downtown_scene;
         orange_fur_material_struct.shader = helsinki_east_downtown_shader;
         orange_fur_material_struct.texture_file_format = "png";
         orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
