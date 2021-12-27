@@ -680,6 +680,7 @@ namespace ajokki
         }
 
         yli::ontology::ModelStruct freight_train_model_struct;
+        freight_train_model_struct.scene = helsinki_east_downtown_scene;
         freight_train_model_struct.shader = helsinki_east_downtown_shader;
         freight_train_model_struct.model_file_format = "fbx";
         freight_train_model_struct.model_filename = "freight_train.fbx";
@@ -724,6 +725,7 @@ namespace ajokki
         freight_train1->set_global_name("freight_train1");
 
         yli::ontology::ModelStruct turbo_polizei_png_model_struct;
+        turbo_polizei_png_model_struct.scene = helsinki_east_downtown_scene;
         turbo_polizei_png_model_struct.shader = helsinki_east_downtown_shader;
         turbo_polizei_png_model_struct.model_file_format = "fbx";
         turbo_polizei_png_model_struct.model_filename = "turbo_polizei_png_textures.fbx";
