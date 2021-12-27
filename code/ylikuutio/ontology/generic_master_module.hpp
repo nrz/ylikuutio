@@ -62,6 +62,7 @@ namespace yli::ontology
 
             void bind_apprentice_module(yli::ontology::ApprenticeModule* const apprentice_module);
             void unbind_apprentice_module(std::size_t apprenticeID);
+            void unbind_all_apprentice_modules();
 
             // constructor.
             GenericMasterModule(yli::ontology::Entity* const generic_master, yli::ontology::Registry* const registry, const std::string& name);

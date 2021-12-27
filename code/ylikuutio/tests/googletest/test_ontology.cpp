@@ -3297,3 +3297,74 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     ASSERT_TRUE(scene1->has_child("baz"));
     ASSERT_TRUE(scene2->has_child("baz"));
 }
+
+TEST(material_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_current_scene, headless_universe_species_apprentice)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.parent = scene;
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene->parent_of_materials, nullptr);
+
+    yli::ontology::ModelStruct model_struct;
+    model_struct.scene = scene;
+    model_struct.material = material;
+    yli::ontology::Species* const species = new yli::ontology::Species(
+            universe,
+            model_struct,
+            &scene->parent_of_species,
+            &material->master_of_species);
+
+    ASSERT_EQ(material->get_number_of_apprentices(), 1);
+
+    material->bind_to_new_parent(scene);
+    ASSERT_EQ(material->get_number_of_apprentices(), 1);
+}
+
+TEST(material_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_different_scene, headless_universe_species_apprentice)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.parent = scene1;
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene1->parent_of_materials, nullptr);
+
+    yli::ontology::ModelStruct model_struct;
+    model_struct.scene = scene1;
+    model_struct.material = material;
+    yli::ontology::Species* const species = new yli::ontology::Species(
+            universe,
+            model_struct,
+            &scene1->parent_of_species,
+            &material->master_of_species);
+
+    ASSERT_EQ(material->get_number_of_apprentices(), 1);
+
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    material->bind_to_new_parent(scene2);
+    ASSERT_EQ(material->get_number_of_apprentices(), 0);
+}

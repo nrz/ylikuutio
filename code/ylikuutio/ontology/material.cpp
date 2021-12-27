@@ -69,6 +69,7 @@ namespace yli::ontology
             return;
         }
 
+        this->master_of_species.unbind_all_apprentice_modules();
         this->child_of_scene.unbind_and_bind_to_new_parent(&new_parent->parent_of_materials);
     }
 

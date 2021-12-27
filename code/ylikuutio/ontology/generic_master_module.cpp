@@ -46,6 +46,14 @@ namespace yli::ontology
                 this->number_of_apprentices);
     }
 
+    void GenericMasterModule::unbind_all_apprentice_modules()
+    {
+        for (std::size_t apprenticeID = 0; apprenticeID < this->apprentice_module_pointer_vector.size(); apprenticeID++)
+        {
+            this->unbind_apprentice_module(apprenticeID);
+        }
+    }
+
     GenericMasterModule::GenericMasterModule(yli::ontology::Entity* const generic_master, yli::ontology::Registry* const registry, const std::string& name)
         : generic_master { generic_master },
         number_of_apprentices { 0 }
