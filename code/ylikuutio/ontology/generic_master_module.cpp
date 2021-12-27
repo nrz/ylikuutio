@@ -37,7 +37,7 @@ namespace yli::ontology
                 this->number_of_apprentices);
     }
 
-    void GenericMasterModule::unbind_apprentice_module(std::size_t apprenticeID)
+    void GenericMasterModule::unbind_apprentice_module(const std::size_t apprenticeID)
     {
         yli::hierarchy::unbind_child_from_parent<yli::ontology::ApprenticeModule*>(
                 apprenticeID,
